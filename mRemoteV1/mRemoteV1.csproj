@@ -127,6 +127,7 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\IConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\SqlUpdateAvailableEventArgs.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />

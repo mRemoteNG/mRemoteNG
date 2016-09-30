@@ -36,7 +36,7 @@ namespace mRemoteNG.Config.Connections
 
         private void SqlUpdateTimer_SqlUpdateTimerElapsed()
         {
-            _sqlUpdateChecker.IsDatabaseUpdateAvailableAsync();
+            _sqlUpdateChecker.IsUpdateAvailableAsync();
         }
 
         private void SQLUpdateCheckFinished(bool updateIsAvailable)

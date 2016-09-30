@@ -8,7 +8,7 @@ using mRemoteNG.Config.DatabaseConnectors;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class SqlConnectionsUpdateChecker : IDisposable
+    public class SqlConnectionsUpdateChecker : IDisposable, IConnectionsUpdateChecker
     {
         private readonly SqlDatabaseConnector _sqlConnector;
         private readonly SqlCommand _sqlQuery;
@@ -25,21 +25,7 @@ namespace mRemoteNG.Config.Connections
         }
 
         
-
-
-        public void IsDatabaseUpdateAvailableAsync()
-        {
-            var t = new Thread(IsDatabaseUpdateAvailableDelegate);
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
-        }
-
-        private void IsDatabaseUpdateAvailableDelegate()
-        {
-            IsDatabaseUpdateAvailable();
-        }
-
-        public bool IsDatabaseUpdateAvailable()
+        public bool IsUpdateAvailable()
         {
             ConnectToSqlDb();
             ExecuteQuery();
@@ -47,6 +33,15 @@ namespace mRemoteNG.Config.Connections
             RaiseUpdateCheckFinishedEvent(updateIsAvailable);
             return updateIsAvailable;
         }
+
+        public void IsUpdateAvailableAsync()
+        {
+            var threadStart = new ThreadStart(() => IsUpdateAvailable());
+            var thread = new Thread(threadStart);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
+
         private void ConnectToSqlDb()
         {
             try
