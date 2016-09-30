@@ -12,7 +12,6 @@ namespace mRemoteNG.Config.Connections
     {
         private readonly SqlDatabaseConnector _sqlConnector;
         private readonly SqlCommand _sqlQuery;
-        private SqlDataReader _sqlReader;
         private DateTime _lastUpdateTime;
 
 
@@ -20,18 +19,18 @@ namespace mRemoteNG.Config.Connections
         {
             _sqlConnector = new SqlDatabaseConnector();
             _sqlQuery = new SqlCommand("SELECT * FROM tblUpdate", _sqlConnector.SqlConnection);
-            _sqlReader = default(SqlDataReader);
             _lastUpdateTime = default(DateTime);
         }
 
         public bool IsUpdateAvailable()
         {
+            RaiseUpdateCheckStartedEvent();
             ConnectToSqlDb();
             ExecuteQuery();
             var updateIsAvailable = DatabaseIsMoreUpToDateThanUs();
-            RaiseUpdateCheckFinishedEvent(updateIsAvailable);
             if (updateIsAvailable)
                 RaiseConnectionsUpdateAvailableEvent();
+            RaiseUpdateCheckFinishedEvent(updateIsAvailable);
             return updateIsAvailable;
         }
 
@@ -58,8 +57,7 @@ namespace mRemoteNG.Config.Connections
         {
             try
             {
-                _sqlReader = _sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
-                _sqlReader.Read();
+                
             }
             catch (Exception ex)
             {
@@ -75,11 +73,27 @@ namespace mRemoteNG.Config.Connections
         private DateTime GetLastUpdateTimeFromDbResponse()
         {
             var lastUpdateInDb = default(DateTime);
-            if (_sqlReader.HasRows)
-                lastUpdateInDb = Convert.ToDateTime(_sqlReader["LastUpdate"]);
+            try
+            {
+                var sqlReader = _sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
+                sqlReader.Read();
+                if (sqlReader.HasRows)
+                    lastUpdateInDb = Convert.ToDateTime(sqlReader["LastUpdate"]);
+                sqlReader.Close();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Error executing Sql query to get updates from the DB." + Environment.NewLine + ex.Message, true);
+            }
             return lastUpdateInDb;
         }
-        
+
+
+        public event EventHandler UpdateCheckStarted;
+        private void RaiseUpdateCheckStartedEvent()
+        {
+            UpdateCheckStarted?.Invoke(this, EventArgs.Empty);
+        }
 
         public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
         private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)

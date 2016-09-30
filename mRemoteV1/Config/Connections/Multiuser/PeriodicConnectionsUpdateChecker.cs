@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Timers;
 
 
@@ -17,8 +18,15 @@ namespace mRemoteNG.Config.Connections
             _updateTimer = new Timer(3000);
             _updateChecker = updateChecker;
             _updateTimer.Elapsed += (sender, args) => _updateChecker.IsUpdateAvailableAsync();
+            _updateTimer.Elapsed += (sender, args) => tickdebug();
+            _updateChecker.UpdateCheckStarted += UpdateCheckerOnUpdateCheckStarted;
+            _updateChecker.UpdateCheckFinished += UpdateCheckerOnUpdateCheckFinished;
             _updateChecker.ConnectionsUpdateAvailable += (sender, args) => ConnectionsUpdateAvailable?.Invoke(sender, args);
-            _updateChecker.UpdateCheckFinished += (sender, args) => UpdateCheckFinished?.Invoke(sender, args);
+        }
+
+        private void tickdebug()
+        {
+            Debug.WriteLine("update_tick");
         }
 
         public void Enable() => _updateTimer.Start();
@@ -29,6 +37,19 @@ namespace mRemoteNG.Config.Connections
 
         public void IsUpdateAvailableAsync() => _updateChecker.IsUpdateAvailableAsync();
 
+        private void UpdateCheckerOnUpdateCheckStarted(object sender, EventArgs eventArgs)
+        {
+            _updateTimer.Stop();
+            UpdateCheckStarted?.Invoke(sender, eventArgs);
+        }
+
+        private void UpdateCheckerOnUpdateCheckFinished(object sender, ConnectionsUpdateCheckFinishedEventArgs eventArgs)
+        {
+            _updateTimer.Start();
+            UpdateCheckFinished?.Invoke(sender, eventArgs);
+        }
+
+        public event EventHandler UpdateCheckStarted;
         public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
         public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
 

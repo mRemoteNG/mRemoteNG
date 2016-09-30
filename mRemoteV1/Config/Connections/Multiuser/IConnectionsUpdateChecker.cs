@@ -9,6 +9,7 @@ namespace mRemoteNG.Config.Connections
 
         void IsUpdateAvailableAsync();
 
+        event EventHandler UpdateCheckStarted;
         event UpdateCheckFinishedEventHandler UpdateCheckFinished;
         event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
     }

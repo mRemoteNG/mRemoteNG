@@ -183,7 +183,7 @@ namespace mRemoteNG.App
         public void CreateConnectionsProvider()
         {
             if (!Settings.Default.UseSQLServer) return;
-            Runtime.SqlConnProvider = new PeriodicConnectionsUpdateChecker(new SqlConnectionsUpdateChecker());
+            Runtime.ConnectionsUpdateChecker = new PeriodicConnectionsUpdateChecker(new SqlConnectionsUpdateChecker());
         }
 
         private void CheckForUpdate()

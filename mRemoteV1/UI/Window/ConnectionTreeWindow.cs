@@ -248,8 +248,8 @@ namespace mRemoteNG.UI.Window
         private void ExpandRootConnectionNode()
 	    {
             var rootConnectionNode = GetRootConnectionNode();
-            olvConnections.Expand(rootConnectionNode);
-        }
+            olvConnections.InvokeExpand(rootConnectionNode);
+	    }
 
 	    private RootNodeInfo GetRootConnectionNode()
 	    {
@@ -307,7 +307,7 @@ namespace mRemoteNG.UI.Window
             var containerList = ConnectionTreeModel.GetRecursiveChildList(GetRootConnectionNode()).OfType<ContainerInfo>();
             var previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
             olvConnections.ExpandedObjects = previouslyExpandedNodes;
-            olvConnections.RebuildAll(true);
+            olvConnections.InvokeRebuildAll(true);
         }
 
         public void OpenConnectionsFromLastSession()

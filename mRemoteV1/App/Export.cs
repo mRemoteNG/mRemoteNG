@@ -97,8 +97,7 @@ namespace mRemoteNG.App
 			}
 			finally
 			{
-			    if (Runtime.SqlConnProvider != null)
-			        Runtime.SqlConnProvider.Enable();
+			    Runtime.ConnectionsUpdateChecker?.Enable();
 			}
 		}
 	}
