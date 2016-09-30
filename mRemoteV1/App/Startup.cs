@@ -52,7 +52,6 @@ namespace mRemoteNG.App
             DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, (a)=>"InhDefault"+a);
         }
 
-        
         public void SetDefaultLayout()
         {
             frmMain.Default.pnlDock.Visible = false;
@@ -87,17 +86,14 @@ namespace mRemoteNG.App
             }
         }
 
-
         private void LogStartupData()
         {
-            if (Settings.Default.WriteLogFile)
-            {
-                LogApplicationData();
-                LogCmdLineArgs();
-                LogSystemData();
-                LogCLRData();
-                LogCultureData();
-            }
+            if (!Settings.Default.WriteLogFile) return;
+            LogApplicationData();
+            LogCmdLineArgs();
+            LogSystemData();
+            LogCLRData();
+            LogCultureData();
         }
 
         private void LogSystemData()
@@ -184,13 +180,10 @@ namespace mRemoteNG.App
                 $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}");
         }
 
-
         public void CreateConnectionsProvider()
         {
-            if (Settings.Default.UseSQLServer)
-            {
-                PeriodicConnectionsUpdateChecker _sqlConnectionsProvider = new PeriodicConnectionsUpdateChecker();
-            }
+            if (!Settings.Default.UseSQLServer) return;
+            Runtime.SqlConnProvider = new PeriodicConnectionsUpdateChecker(new SqlConnectionsUpdateChecker());
         }
 
         private void CheckForUpdate()
@@ -246,7 +239,6 @@ namespace mRemoteNG.App
             }
         }
 
-
         private void CheckForAnnouncement()
         {
             if (_appUpdate == null)
@@ -289,7 +281,6 @@ namespace mRemoteNG.App
                 Runtime.MessageCollector.AddExceptionMessage("GetAnnouncementInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
             }
         }
-
 
         private void ParseCommandLineArgs()
         {
