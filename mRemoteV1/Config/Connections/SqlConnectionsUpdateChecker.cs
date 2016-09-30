@@ -10,22 +10,21 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsUpdateChecker : IDisposable
     {
-        private IDatabaseConnector _sqlConnector;
-        private SqlCommand _sqlQuery;
+        private readonly SqlDatabaseConnector _sqlConnector;
+        private readonly SqlCommand _sqlQuery;
         private SqlDataReader _sqlReader;
+        private DateTime _lastUpdateTime;
 
 
         public SqlConnectionsUpdateChecker()
         {
-            _sqlConnector = default(SqlDatabaseConnector);
-            _sqlQuery = default(SqlCommand);
+            _sqlConnector = new SqlDatabaseConnector();
+            _sqlQuery = new SqlCommand("SELECT * FROM tblUpdate", _sqlConnector.SqlConnection);
             _sqlReader = default(SqlDataReader);
+            _lastUpdateTime = default(DateTime);
         }
 
-        ~SqlConnectionsUpdateChecker()
-        {
-            Dispose(false);
-        }
+        
 
 
         public void IsDatabaseUpdateAvailableAsync()
@@ -43,7 +42,6 @@ namespace mRemoteNG.Config.Connections
         public bool IsDatabaseUpdateAvailable()
         {
             ConnectToSqlDb();
-            BuildSqlQueryToGetUpdateStatus();
             ExecuteQuery();
             var updateIsAvailable = DatabaseIsMoreUpToDateThanUs();
             RaiseUpdateCheckFinishedEvent(updateIsAvailable);
@@ -53,7 +51,6 @@ namespace mRemoteNG.Config.Connections
         {
             try
             {
-                _sqlConnector = new SqlDatabaseConnector();
                 _sqlConnector.Connect();
             }
             catch(Exception e)
@@ -61,19 +58,7 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Unable to connect to Sql DB to check for updates." + Environment.NewLine + e.Message, true);
             }
         }
-        private void BuildSqlQueryToGetUpdateStatus()
-        {
-            try
-            {
-                SqlCommandBuilder sqlCmdBuilder = new SqlUpdateQueryBuilder();
-                _sqlQuery = sqlCmdBuilder.BuildCommand();
-                _sqlConnector.AssociateItemToThisConnector(_sqlQuery);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Could not build query to check for updates from the Sql server." + Environment.NewLine + ex.Message, true);
-            }
-        }
+
         private void ExecuteQuery()
         {
             try
@@ -86,9 +71,10 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Error executing Sql query to get updates from the DB." + Environment.NewLine + ex.Message, true);
             }
         }
+
         private bool DatabaseIsMoreUpToDateThanUs()
         {
-            return GetLastUpdateTimeFromDbResponse() > Runtime.LastSqlUpdate;
+            return GetLastUpdateTimeFromDbResponse() > _lastUpdateTime;
         }
 
         private DateTime GetLastUpdateTimeFromDbResponse()
@@ -99,7 +85,19 @@ namespace mRemoteNG.Config.Connections
             return lastUpdateInDb;
         }
         
+        public delegate void SqlUpdateCheckFinishedEventHandler(bool updateAvailable);
 
+        public static event SqlUpdateCheckFinishedEventHandler SqlUpdateCheckFinished;
+        private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
+        {
+            SqlUpdateCheckFinished?.Invoke(updateAvailable);
+        }
+
+
+        ~SqlConnectionsUpdateChecker()
+        {
+            Dispose(false);
+        }
 
         public void Dispose()
         {
@@ -111,15 +109,6 @@ namespace mRemoteNG.Config.Connections
             if (!itIsSafeToDisposeManagedObjects) return;
             _sqlConnector.Disconnect();
             _sqlConnector.Dispose();
-        }
-
-
-        public delegate void SqlUpdateCheckFinishedEventHandler(bool updateAvailable);
-
-        public static event SqlUpdateCheckFinishedEventHandler SqlUpdateCheckFinished;
-        private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
-        {
-            SqlUpdateCheckFinished?.Invoke(updateAvailable);
         }
     }
 }
