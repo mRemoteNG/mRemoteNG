@@ -1,44 +1,44 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.Messages;
-using System;
+﻿using System;
+using System.Timers;
+
 
 namespace mRemoteNG.Config.Connections
 {
-    public class PeriodicConnectionsUpdateChecker : IDisposable
+    public class PeriodicConnectionsUpdateChecker : IConnectionsUpdateChecker
     {
-        private readonly SqlUpdateTimer _updateTimer;
+        private readonly Timer _updateTimer;
         private readonly IConnectionsUpdateChecker _updateChecker;
+
+        public double TimerIntervalInMilliseconds => _updateTimer.Interval;
 
 
         public PeriodicConnectionsUpdateChecker()
         {
-            _updateTimer = new SqlUpdateTimer();
+            _updateTimer = new Timer(3000);
             _updateChecker = new SqlConnectionsUpdateChecker();
             SqlUpdateTimer.SqlUpdateTimerElapsed += SqlUpdateTimer_SqlUpdateTimerElapsed;
-            _updateChecker.ConnectionsUpdateAvailable += OnConnectionsUpdateAvailable;
+            _updateChecker.ConnectionsUpdateAvailable += (sender, args) => ConnectionsUpdateAvailable?.Invoke(sender, args);
+            _updateChecker.UpdateCheckFinished += (sender, args) => UpdateCheckFinished?.Invoke(sender, args);
         }
 
-        public void Enable()
+        public void Enable() => _updateTimer.Start();
+
+        public void Disable() => _updateTimer.Stop();
+
+        private void SqlUpdateTimer_SqlUpdateTimerElapsed() => _updateChecker.IsUpdateAvailableAsync();
+
+        public bool IsUpdateAvailable()
         {
-            _updateTimer.Enable();
+            return _updateChecker.IsUpdateAvailable();
         }
 
-        public void Disable()
-        {
-            _updateTimer.Disable();
-        }
-
-        private void SqlUpdateTimer_SqlUpdateTimerElapsed()
+        public void IsUpdateAvailableAsync()
         {
             _updateChecker.IsUpdateAvailableAsync();
         }
 
-        private void OnConnectionsUpdateAvailable(object sender, ConnectionsUpdateAvailableEventArgs args)
-        {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strSqlUpdateCheckUpdateAvailable, true);
-            Runtime.LoadConnectionsBG();
-        }
-
+        public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
+        public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
 
         ~PeriodicConnectionsUpdateChecker()
         {
@@ -54,15 +54,8 @@ namespace mRemoteNG.Config.Connections
         private void Dispose(bool itIsSafeToAlsoFreeManagedObjects)
         {
             if (!itIsSafeToAlsoFreeManagedObjects) return;
-            DestroySQLUpdateHandlers();
             _updateTimer.Dispose();
             _updateChecker.Dispose();
-        }
-
-        private void DestroySQLUpdateHandlers()
-        {
-            SqlUpdateTimer.SqlUpdateTimerElapsed -= SqlUpdateTimer_SqlUpdateTimerElapsed;
-            _updateChecker.ConnectionsUpdateAvailable -= OnConnectionsUpdateAvailable;
         }
     }
 }
