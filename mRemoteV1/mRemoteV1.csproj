@@ -127,9 +127,9 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
-    <Compile Include="Config\Connections\ConnectionsUpdateCheckFinishedEventArgs.cs" />
-    <Compile Include="Config\Connections\IConnectionsUpdateChecker.cs" />
-    <Compile Include="Config\Connections\ConnectionsUpdateAvailableEventArgs.cs" />
+    <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateCheckFinishedEventArgs.cs" />
+    <Compile Include="Config\Connections\Multiuser\IConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerRemoteDesktop2008Format.cs" />
@@ -152,8 +152,8 @@
     <Compile Include="Config\DataProviders\FileDataProvider.cs" />
     <Compile Include="Config\DataProviders\IDataProvider.cs" />
     <Compile Include="Config\Connections\SqlCommandBuilder.cs" />
-    <Compile Include="Config\Connections\SqlConnectionsUpdateChecker.cs" />
-    <Compile Include="Config\Connections\PeriodicConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Connections\Multiuser\PeriodicConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\SqlUpdateTimer.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializer.cs" />
     <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />

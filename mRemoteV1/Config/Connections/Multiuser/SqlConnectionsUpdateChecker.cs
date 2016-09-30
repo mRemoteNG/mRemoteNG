@@ -24,7 +24,6 @@ namespace mRemoteNG.Config.Connections
             _lastUpdateTime = default(DateTime);
         }
 
-        
         public bool IsUpdateAvailable()
         {
             ConnectToSqlDb();

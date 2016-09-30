@@ -12,11 +12,11 @@ namespace mRemoteNG.Config.Connections
         public double TimerIntervalInMilliseconds => _updateTimer.Interval;
 
 
-        public PeriodicConnectionsUpdateChecker()
+        public PeriodicConnectionsUpdateChecker(IConnectionsUpdateChecker updateChecker)
         {
             _updateTimer = new Timer(3000);
-            _updateChecker = new SqlConnectionsUpdateChecker();
-            SqlUpdateTimer.SqlUpdateTimerElapsed += SqlUpdateTimer_SqlUpdateTimerElapsed;
+            _updateChecker = updateChecker;
+            _updateTimer.Elapsed += (sender, args) => _updateChecker.IsUpdateAvailableAsync();
             _updateChecker.ConnectionsUpdateAvailable += (sender, args) => ConnectionsUpdateAvailable?.Invoke(sender, args);
             _updateChecker.UpdateCheckFinished += (sender, args) => UpdateCheckFinished?.Invoke(sender, args);
         }
@@ -25,17 +25,9 @@ namespace mRemoteNG.Config.Connections
 
         public void Disable() => _updateTimer.Stop();
 
-        private void SqlUpdateTimer_SqlUpdateTimerElapsed() => _updateChecker.IsUpdateAvailableAsync();
+        public bool IsUpdateAvailable() => _updateChecker.IsUpdateAvailable();
 
-        public bool IsUpdateAvailable()
-        {
-            return _updateChecker.IsUpdateAvailable();
-        }
-
-        public void IsUpdateAvailableAsync()
-        {
-            _updateChecker.IsUpdateAvailableAsync();
-        }
+        public void IsUpdateAvailableAsync() => _updateChecker.IsUpdateAvailableAsync();
 
         public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
         public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
