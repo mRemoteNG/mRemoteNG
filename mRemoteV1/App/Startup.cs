@@ -189,7 +189,7 @@ namespace mRemoteNG.App
         {
             if (Settings.Default.UseSQLServer)
             {
-                SqlConnectionsProvider _sqlConnectionsProvider = new SqlConnectionsProvider();
+                PeriodicConnectionsUpdateChecker _sqlConnectionsProvider = new PeriodicConnectionsUpdateChecker();
             }
         }
 

@@ -151,7 +151,7 @@
     <Compile Include="Config\DataProviders\IDataProvider.cs" />
     <Compile Include="Config\Connections\SqlCommandBuilder.cs" />
     <Compile Include="Config\Connections\SqlConnectionsUpdateChecker.cs" />
-    <Compile Include="Config\Connections\SqlConnectionsProvider.cs" />
+    <Compile Include="Config\Connections\PeriodicConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\SqlUpdateTimer.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializer.cs" />
     <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />

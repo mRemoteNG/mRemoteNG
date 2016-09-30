@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
                 if (Settings.Default.UseSQLServer)
                 {
-                    Runtime.SqlConnProvider = new SqlConnectionsProvider();
+                    Runtime.SqlConnProvider = new PeriodicConnectionsUpdateChecker();
                     Runtime.SqlConnProvider.Enable();
                 }
             }

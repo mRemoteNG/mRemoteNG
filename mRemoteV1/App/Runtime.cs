@@ -31,7 +31,7 @@ namespace mRemoteNG.App
         public static MessageCollector MessageCollector { get; set; }
         public static Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
-        public static SqlConnectionsProvider SqlConnProvider { get; set; }
+        public static PeriodicConnectionsUpdateChecker SqlConnProvider { get; set; }
         public static DateTime LastSqlUpdate { get; set; }
         public static string LastSelected { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
