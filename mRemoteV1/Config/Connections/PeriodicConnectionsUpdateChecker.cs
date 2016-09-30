@@ -6,16 +6,16 @@ namespace mRemoteNG.Config.Connections
 {
     public class PeriodicConnectionsUpdateChecker : IDisposable
     {
-        readonly SqlUpdateTimer _updateTimer;
-        readonly SqlConnectionsUpdateChecker _sqlUpdateChecker;
+        private readonly SqlUpdateTimer _updateTimer;
+        private readonly IConnectionsUpdateChecker _updateChecker;
 
 
         public PeriodicConnectionsUpdateChecker()
         {
             _updateTimer = new SqlUpdateTimer();
-            _sqlUpdateChecker = new SqlConnectionsUpdateChecker();
+            _updateChecker = new SqlConnectionsUpdateChecker();
             SqlUpdateTimer.SqlUpdateTimerElapsed += SqlUpdateTimer_SqlUpdateTimerElapsed;
-            SqlConnectionsUpdateChecker.SqlUpdateCheckFinished += SQLUpdateCheckFinished;
+            _updateChecker.ConnectionsUpdateAvailable += OnConnectionsUpdateAvailable;
         }
 
         public void Enable()
@@ -28,20 +28,13 @@ namespace mRemoteNG.Config.Connections
             _updateTimer.Disable();
         }
 
-        private void DestroySQLUpdateHandlers()
-        {
-            SqlUpdateTimer.SqlUpdateTimerElapsed -= SqlUpdateTimer_SqlUpdateTimerElapsed;
-            SqlConnectionsUpdateChecker.SqlUpdateCheckFinished -= SQLUpdateCheckFinished;
-        }
-
         private void SqlUpdateTimer_SqlUpdateTimerElapsed()
         {
-            _sqlUpdateChecker.IsUpdateAvailableAsync();
+            _updateChecker.IsUpdateAvailableAsync();
         }
 
-        private void SQLUpdateCheckFinished(bool updateIsAvailable)
+        private void OnConnectionsUpdateAvailable(object sender, ConnectionsUpdateAvailableEventArgs args)
         {
-            if (!updateIsAvailable) return;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strSqlUpdateCheckUpdateAvailable, true);
             Runtime.LoadConnectionsBG();
         }
@@ -63,7 +56,13 @@ namespace mRemoteNG.Config.Connections
             if (!itIsSafeToAlsoFreeManagedObjects) return;
             DestroySQLUpdateHandlers();
             _updateTimer.Dispose();
-            _sqlUpdateChecker.Dispose();
+            _updateChecker.Dispose();
+        }
+
+        private void DestroySQLUpdateHandlers()
+        {
+            SqlUpdateTimer.SqlUpdateTimerElapsed -= SqlUpdateTimer_SqlUpdateTimerElapsed;
+            _updateChecker.ConnectionsUpdateAvailable -= OnConnectionsUpdateAvailable;
         }
     }
 }

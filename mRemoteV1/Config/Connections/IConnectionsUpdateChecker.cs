@@ -8,5 +8,8 @@ namespace mRemoteNG.Config.Connections
         bool IsUpdateAvailable();
 
         void IsUpdateAvailableAsync();
+
+        event UpdateCheckFinishedEventHandler UpdateCheckFinished;
+        event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
     }
 }

@@ -31,13 +31,14 @@ namespace mRemoteNG.Config.Connections
             ExecuteQuery();
             var updateIsAvailable = DatabaseIsMoreUpToDateThanUs();
             RaiseUpdateCheckFinishedEvent(updateIsAvailable);
+            if (updateIsAvailable)
+                RaiseConnectionsUpdateAvailableEvent();
             return updateIsAvailable;
         }
 
         public void IsUpdateAvailableAsync()
         {
-            var threadStart = new ThreadStart(() => IsUpdateAvailable());
-            var thread = new Thread(threadStart);
+            var thread = new Thread(() => IsUpdateAvailable());
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -80,12 +81,19 @@ namespace mRemoteNG.Config.Connections
             return lastUpdateInDb;
         }
         
-        public delegate void SqlUpdateCheckFinishedEventHandler(bool updateAvailable);
 
-        public static event SqlUpdateCheckFinishedEventHandler SqlUpdateCheckFinished;
+        public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
         private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
         {
-            SqlUpdateCheckFinished?.Invoke(updateAvailable);
+            var args = new ConnectionsUpdateCheckFinishedEventArgs {UpdateAvailable = updateAvailable};
+            UpdateCheckFinished?.Invoke(this, args);
+        }
+
+        public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
+        private void RaiseConnectionsUpdateAvailableEvent()
+        {
+            var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector);
+            ConnectionsUpdateAvailable?.Invoke(this, args);
         }
 
 
