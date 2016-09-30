@@ -33,7 +33,6 @@ namespace mRemoteNG.Config.Connections
 
             var connectionTreeModel = deserializer.Deserialize();
 
-            frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;
 
 		    if (import) return connectionTreeModel;

@@ -182,8 +182,15 @@ namespace mRemoteNG.App
 
         public void CreateConnectionsProvider()
         {
+            frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
+
             if (!Settings.Default.UseSQLServer) return;
-            Runtime.ConnectionsUpdateChecker = new PeriodicConnectionsUpdateChecker(new SqlConnectionsUpdateChecker());
+            var loader = new ConnectionsLoader { UseDatabase = Settings.Default.UseSQLServer };
+            Runtime.ConnectionTreeModel = loader.LoadConnections(false);
+            var periodicUpdateChecker = new PeriodicConnectionsUpdateChecker(new SqlConnectionsUpdateChecker());
+            periodicUpdateChecker.ConnectionsUpdateAvailable += (sender, args) => Runtime.ConnectionTreeModel = loader.LoadConnections(false);
+            Runtime.ConnectionsUpdateChecker = periodicUpdateChecker;
+            periodicUpdateChecker.Enable();
         }
 
         private void CheckForUpdate()
