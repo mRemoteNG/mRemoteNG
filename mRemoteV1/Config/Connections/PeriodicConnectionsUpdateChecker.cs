@@ -18,11 +18,6 @@ namespace mRemoteNG.Config.Connections
             SqlConnectionsUpdateChecker.SqlUpdateCheckFinished += SQLUpdateCheckFinished;
         }
 
-        ~PeriodicConnectionsUpdateChecker()
-        {
-            Dispose(false);
-        }
-
         public void Enable()
         {
             _updateTimer.Enable();
@@ -31,20 +26,6 @@ namespace mRemoteNG.Config.Connections
         public void Disable()
         {
             _updateTimer.Disable();
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool itIsSafeToAlsoFreeManagedObjects)
-        {
-            if (!itIsSafeToAlsoFreeManagedObjects) return;
-            DestroySQLUpdateHandlers();
-            _updateTimer.Dispose();
-            _sqlUpdateChecker.Dispose();
         }
 
         private void DestroySQLUpdateHandlers()
@@ -63,6 +44,26 @@ namespace mRemoteNG.Config.Connections
             if (!updateIsAvailable) return;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strSqlUpdateCheckUpdateAvailable, true);
             Runtime.LoadConnectionsBG();
+        }
+
+
+        ~PeriodicConnectionsUpdateChecker()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool itIsSafeToAlsoFreeManagedObjects)
+        {
+            if (!itIsSafeToAlsoFreeManagedObjects) return;
+            DestroySQLUpdateHandlers();
+            _updateTimer.Dispose();
+            _sqlUpdateChecker.Dispose();
         }
     }
 }
