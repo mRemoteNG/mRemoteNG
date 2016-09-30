@@ -1,6 +1,6 @@
 ---
 title: '[Fireside Chat #1] The Story So Far'
-author: David Sparer
+author: dmsparer
 tags: fireside
 ---
 

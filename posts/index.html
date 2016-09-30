@@ -1,0 +1,54 @@
+---
+title: Posts
+---
+{% for post in paginator.posts %}
+<h2><a href='{{ site.baseurl }}{{ post.url }}'>{{ post.title }}</a></h2>
+{% assign author = site.data.authors[post.author] %}
+{% if author == nil %}
+{% assign author = site.name %}
+{% endif %}
+<strong>{{ author.name }}</strong> | {{ post.date | date: '%B %-d, %Y'}}
+<div>
+	{{ post.content }}
+</div>
+{% unless forloop.last %}
+<hr>
+{% endunless %}
+{% endfor %}
+{% if paginator.total_pages > 1 %}
+<nav class='pull-right' aria-label='Post navigation'>
+	<ul class='pagination'>
+		{% if paginator.previous_page %}
+		<li>
+			<a href='{{ site.baseurl }}{{ paginator.previous_page_path }}' aria-label='Previous'>
+				<span aria-hidden='true'>&laquo;</span>
+			</a>
+		</li>
+		{% else %}
+		<li class='disabled' aria-label='Previous'>
+			<span aria-hidden='true'>&laquo;</span>
+		</li>
+		{% endif %}
+		{% for page in (1..paginator.total_pages) %}
+		{% if page == paginator.page %}
+		<li class='active'><a>{{ page | pnumber }}</a></li>
+		{% elsif page == 1 %}
+		<li><a href='{{ site.baseurl }}{{ site.paginate_path | remove: ":num/" }}'>{{ page | pnumber }}</a></li>
+		{% else %}
+		<li><a href='{{ site.baseurl }}{{ site.paginate_path | replace: ":num", page }}'>{{ page | pnumber }}</a></li>
+		{% endif %}
+		{% endfor %}
+		{% if paginator.next_page %}
+		<li>
+			<a href='{{ site.baseurl }}{{ paginator.next_page_path }}' aria-label='Next'>
+				<span aria-hidden='true'>&raquo;</span>
+			</a>
+		</li>
+		{% else %}
+		<li class='disabled' aria-label='Next'>
+			<span aria-hidden='true'>&raquo;</span>
+		</li>
+		{% endif %}
+	</ul>
+</nav>
+{% endif %}

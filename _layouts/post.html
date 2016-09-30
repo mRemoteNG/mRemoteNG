@@ -4,9 +4,24 @@
 	{% include jumbotron.html %}
 	<div class='container'>
 		<h2>{{ page.title }}</h2>
-		<strong>{{ page.author }}</strong> | {{ page.date | date: '%B %-d, %Y'}}
-		<hr>
+		{% assign author = site.data.authors[page.author] %}
+		{% if author == nil %}
+		{% assign author = site.name %}
+		{% endif %}
+		<strong>{{ author.name }}</strong> | <time>{{ page.date | date: '%B %-d, %Y'}}
 		{{ content }}
+		<div class='btn-group pull-right' role='group'>
+			{% if page.previous %}
+			<a class='btn btn-default' href='{{ site.baseurl }}{{ page.previous.url }}'>Previous</a>
+			{% else %}
+			<span class='btn btn-default disabled'>Previous</span>
+			{% endif %}
+			{% if page.next %}
+			<a class='btn btn-default' href='{{ site.baseurl }}{{ page.next.url }}'>Next</a>
+			{% else %}
+			<span class='btn btn-default disabled'>Next</span>
+			{% endif %}
+		</div>
 	</div>
 	{% include footer.html %}
 </body>

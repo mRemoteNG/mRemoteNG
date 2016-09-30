@@ -1,6 +1,6 @@
 ---
 title: '[Fireside Chat #2] Onward and Upward'
-author: David Sparer
+author: dmsparer
 tags: fireside
 ---
 

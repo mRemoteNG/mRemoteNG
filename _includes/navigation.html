@@ -14,7 +14,7 @@
                 <li role='presentation' {% if page.url == '/' %}class='active'{% endif %}>
                     <a href='{{ site.baseurl }}/'>Home</a>
                 </li>
-                <li role='presentation' {% if page.url == '/posts' or page.path contains '_posts' or page.path contains '_drafts' %}class='active'{% endif %}>
+                <li role='presentation' {% if page.url contains '/posts/' %}class='active'{% endif %}>
                     <a href='{{ site.baseurl }}/posts'>Posts</a>
                 </li>
                 <li role='presentation'>

@@ -1,6 +1,6 @@
 ---
 title: Looking for new leader for mRemoteNG
-author: Riley McArdle
+author: rmcardle
 ---
 
 mRemoteNG has not been in active development for quite some time now. After I lost my job, I had hoped I could make a living maintaining mRemoteNG. However, user contributions and website advertising revenue turned out not to be enough to make that possible and the open source license means there are not many other options for monetization.
