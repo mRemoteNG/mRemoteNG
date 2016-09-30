@@ -4,13 +4,13 @@ using System;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class SqlConnectionsProvider : IDisposable
+    public class PeriodicConnectionsUpdateChecker : IDisposable
     {
         readonly SqlUpdateTimer _updateTimer;
         readonly SqlConnectionsUpdateChecker _sqlUpdateChecker;
 
 
-        public SqlConnectionsProvider()
+        public PeriodicConnectionsUpdateChecker()
         {
             _updateTimer = new SqlUpdateTimer();
             _sqlUpdateChecker = new SqlConnectionsUpdateChecker();
@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.Connections
             SqlConnectionsUpdateChecker.SqlUpdateCheckFinished += SQLUpdateCheckFinished;
         }
 
-        ~SqlConnectionsProvider()
+        ~PeriodicConnectionsUpdateChecker()
         {
             Dispose(false);
         }
