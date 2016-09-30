@@ -97,7 +97,7 @@ namespace mRemoteNG.App
 			}
 			finally
 			{
-			    Runtime.ConnectionsUpdateChecker?.Enable();
+			    Runtime.RemoteConnectionsSyncronizer?.Enable();
 			}
 		}
 	}

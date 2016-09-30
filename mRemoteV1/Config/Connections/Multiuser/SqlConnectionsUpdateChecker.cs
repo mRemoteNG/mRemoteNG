@@ -13,6 +13,7 @@ namespace mRemoteNG.Config.Connections
         private readonly SqlDatabaseConnector _sqlConnector;
         private readonly SqlCommand _sqlQuery;
         private DateTime _lastUpdateTime;
+        private DateTime _lastDatabaseUpdateTime;
 
 
         public SqlConnectionsUpdateChecker()
@@ -20,6 +21,7 @@ namespace mRemoteNG.Config.Connections
             _sqlConnector = new SqlDatabaseConnector();
             _sqlQuery = new SqlCommand("SELECT * FROM tblUpdate", _sqlConnector.SqlConnection);
             _lastUpdateTime = default(DateTime);
+            _lastDatabaseUpdateTime = default(DateTime);
         }
 
         public bool IsUpdateAvailable()
@@ -85,6 +87,7 @@ namespace mRemoteNG.Config.Connections
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Error executing Sql query to get updates from the DB." + Environment.NewLine + ex.Message, true);
             }
+            _lastDatabaseUpdateTime = lastUpdateInDb;
             return lastUpdateInDb;
         }
 
@@ -105,8 +108,10 @@ namespace mRemoteNG.Config.Connections
         public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
         private void RaiseConnectionsUpdateAvailableEvent()
         {
-            var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector);
+            var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector, _lastDatabaseUpdateTime);
             ConnectionsUpdateAvailable?.Invoke(this, args);
+            if(args.Handled)
+                _lastUpdateTime = _lastDatabaseUpdateTime;
         }
 
 

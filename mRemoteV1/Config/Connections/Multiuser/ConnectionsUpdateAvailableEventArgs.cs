@@ -9,10 +9,13 @@ namespace mRemoteNG.Config.Connections
     public class ConnectionsUpdateAvailableEventArgs : EventArgs
     {
         public IDatabaseConnector DatabaseConnector { get; private set; }
+        public DateTime UpdateTime { get; private set; }
+        public bool Handled { get; set; }
 
-        public ConnectionsUpdateAvailableEventArgs(IDatabaseConnector databaseConnector)
+        public ConnectionsUpdateAvailableEventArgs(IDatabaseConnector databaseConnector, DateTime updateTime)
         {
             DatabaseConnector = databaseConnector;
+            UpdateTime = updateTime;
         }
     }
 }

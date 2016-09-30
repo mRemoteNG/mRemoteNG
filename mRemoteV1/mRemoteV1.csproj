@@ -130,6 +130,7 @@
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateCheckFinishedEventArgs.cs" />
     <Compile Include="Config\Connections\Multiuser\IConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
+    <Compile Include="Config\Connections\Multiuser\RemoteConnectionsSyncronizer.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerRemoteDesktop2008Format.cs" />

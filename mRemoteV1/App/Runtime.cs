@@ -31,7 +31,7 @@ namespace mRemoteNG.App
         public static MessageCollector MessageCollector { get; set; }
         public static Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
-        public static PeriodicConnectionsUpdateChecker ConnectionsUpdateChecker { get; set; }
+        public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public static DateTime LastSqlUpdate { get; set; }
         public static string LastSelected { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
@@ -264,7 +264,7 @@ namespace mRemoteNG.App
             try
             {
                 // disable sql update checking while we are loading updates
-                ConnectionsUpdateChecker?.Disable();
+                RemoteConnectionsSyncronizer?.Disable();
 
                 if (!Settings.Default.UseSQLServer)
                 {
@@ -304,7 +304,7 @@ namespace mRemoteNG.App
                 }
 
                 // re-enable sql update checking after updates are loaded
-                ConnectionsUpdateChecker?.Enable();
+                RemoteConnectionsSyncronizer?.Enable();
             }
             catch (Exception ex)
             {
@@ -449,7 +449,7 @@ namespace mRemoteNG.App
                 if (Update && Settings.Default.UseSQLServer == false)
                     return;
 
-                ConnectionsUpdateChecker?.Disable();
+                RemoteConnectionsSyncronizer?.Disable();
 
                 var connectionsSaver = new ConnectionsSaver();
 
@@ -481,7 +481,7 @@ namespace mRemoteNG.App
             }
             finally
             {
-                ConnectionsUpdateChecker?.Enable();
+                RemoteConnectionsSyncronizer?.Enable();
             }
         }
 
@@ -491,7 +491,7 @@ namespace mRemoteNG.App
 
             try
             {
-                ConnectionsUpdateChecker?.Disable();
+                RemoteConnectionsSyncronizer?.Disable();
 
                 using (var saveFileDialog = new SaveFileDialog())
                 {
@@ -535,7 +535,7 @@ namespace mRemoteNG.App
             }
             finally
             {
-                ConnectionsUpdateChecker?.Enable();
+                RemoteConnectionsSyncronizer?.Enable();
             }
         }
         #endregion

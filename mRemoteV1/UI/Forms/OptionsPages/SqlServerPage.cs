@@ -62,16 +62,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private static void ReinitializeSqlUpdater()
         {
-            Runtime.ConnectionsUpdateChecker?.Dispose();
+            Runtime.RemoteConnectionsSyncronizer?.Dispose();
             frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
 
             if (!Settings.Default.UseSQLServer) return;
-            var loader = new ConnectionsLoader {UseDatabase = Settings.Default.UseSQLServer};
-            Runtime.ConnectionTreeModel = loader.LoadConnections(false);
-            var periodicUpdateChecker = new PeriodicConnectionsUpdateChecker(new SqlConnectionsUpdateChecker());
-            periodicUpdateChecker.ConnectionsUpdateAvailable += (sender, args) => Runtime.ConnectionTreeModel = loader.LoadConnections(false);
-            Runtime.ConnectionsUpdateChecker = periodicUpdateChecker;
-            periodicUpdateChecker.Enable();
+            Runtime.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            Runtime.RemoteConnectionsSyncronizer.Enable();
         }
 
         private void chkUseSQLServer_CheckedChanged(object sender, EventArgs e)
