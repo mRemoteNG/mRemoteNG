@@ -14,7 +14,7 @@ namespace mRemoteNG.Config.Connections
         {
             _periodicConnectionsUpdateChecker = new PeriodicConnectionsUpdateChecker(updateChecker);
             _connectionsLoader = new ConnectionsLoader { UseDatabase = mRemoteNG.Settings.Default.UseSQLServer };
-            _connectionsSaver = new ConnectionsSaver();
+            _connectionsSaver = new ConnectionsSaver { SaveFormat = ConnectionsSaver.Format.SQL };
             _periodicConnectionsUpdateChecker.ConnectionsUpdateAvailable += Load;
         }
 
@@ -27,6 +27,11 @@ namespace mRemoteNG.Config.Connections
         {
             Load();
             args.Handled = true;
+        }
+
+        public void Save()
+        {
+            _connectionsSaver.SaveConnections();
         }
 
         public void Enable() => _periodicConnectionsUpdateChecker.Enable();
