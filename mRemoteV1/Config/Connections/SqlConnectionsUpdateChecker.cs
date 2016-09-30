@@ -8,7 +8,7 @@ using mRemoteNG.Config.DatabaseConnectors;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class SqlConnectionsUpdateChecker : IDisposable, IConnectionsUpdateChecker
+    public class SqlConnectionsUpdateChecker : IConnectionsUpdateChecker
     {
         private readonly SqlDatabaseConnector _sqlConnector;
         private readonly SqlCommand _sqlQuery;
