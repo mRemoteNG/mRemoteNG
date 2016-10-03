@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Root.PuttySessions;
@@ -26,6 +27,7 @@ namespace mRemoteNG.Tree
             var dropSource = (ConnectionInfo)e.SourceModels[0];
             DropModel(dropSource, dropTarget, e.DropTargetLocation);
             e.Handled = true;
+            Runtime.SaveConnectionsBG();
         }
 
         public void DropModel(ConnectionInfo dropSource, ConnectionInfo dropTarget, DropTargetLocation dropTargetLocation)
