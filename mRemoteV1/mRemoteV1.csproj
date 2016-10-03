@@ -153,7 +153,6 @@
     <Compile Include="Config\DataProviders\FileDataProvider.cs" />
     <Compile Include="Config\DataProviders\IDataProvider.cs" />
     <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
-    <Compile Include="Config\Connections\Multiuser\PeriodicConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializer.cs" />
     <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
