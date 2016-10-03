@@ -8,14 +8,9 @@ namespace mRemoteNG.App.Update
         #region Public Properties
         private Dictionary<string, string> _items = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
         // ReSharper disable MemberCanBePrivate.Local
-        public Dictionary<string, string> Items
-        {
-            // ReSharper restore MemberCanBePrivate.Local
-            get
-            {
-                return _items;
-            }
-        }
+        // ReSharper disable once MemberCanBePrivate.Global
+        public Dictionary<string, string> Items => _items;
+
         #endregion
 
         #region Public Methods
@@ -25,6 +20,7 @@ namespace mRemoteNG.App.Update
         }
 
         // ReSharper disable MemberCanBePrivate.Local
+        // ReSharper disable once MemberCanBePrivate.Global
         public void FromString(string content)
         {
             // ReSharper restore MemberCanBePrivate.Local
@@ -33,9 +29,9 @@ namespace mRemoteNG.App.Update
             }
             else
             {
-                char[] lineSeparators = new char[] { '\n', '\r' };
-                char[] keyValueSeparators = new char[] { ':', '=' };
-                char[] commentCharacters = new char[] { '#', ';', '\'' };
+                char[] lineSeparators = { '\n', '\r' };
+                char[] keyValueSeparators = { ':', '=' };
+                char[] commentCharacters = { '#', ';', '\'' };
 
                 string[] lines = content.Split(lineSeparators.ToString().ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 foreach (string line in lines)
@@ -45,13 +41,13 @@ namespace mRemoteNG.App.Update
                     {
                         continue;
                     }
-                    if (!(trimmedLine.Substring(0, 1).IndexOfAny(commentCharacters.ToString().ToCharArray()) == -1))
+                    if (trimmedLine.Substring(0, 1).IndexOfAny(commentCharacters.ToString().ToCharArray()) != -1)
                     {
                         continue;
                     }
 
                     string[] parts = trimmedLine.Split(keyValueSeparators.ToString().ToCharArray(), 2);
-                    if (!(parts.Length == 2))
+                    if (parts.Length != 2)
                     {
                         continue;
                     }
@@ -67,31 +63,19 @@ namespace mRemoteNG.App.Update
         public string GetString(string key)
         {
             // ReSharper restore MemberCanBePrivate.Local
-            if (!Items.ContainsKey(key))
-            {
-                return string.Empty;
-            }
-            return this._items[key];
+            return !Items.ContainsKey(key) ? string.Empty : this._items[key];
         }
 
         public Version GetVersion(string key)
         {
-            string value = GetString(key);
-            if (string.IsNullOrEmpty(value))
-            {
-                return null;
-            }
-            return new Version(value);
+            var value = GetString(key);
+            return string.IsNullOrEmpty(value) ? null : new Version(value);
         }
 
         public Uri GetUri(string key)
         {
-            string value = GetString(key);
-            if (string.IsNullOrEmpty(value))
-            {
-                return null;
-            }
-            return new Uri(value);
+            var value = GetString(key);
+            return string.IsNullOrEmpty(value) ? null : new Uri(value);
         }
 
         public string GetThumbprint(string key)

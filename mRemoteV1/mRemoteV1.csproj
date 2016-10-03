@@ -1204,7 +1204,7 @@
     <Reference Include="mscorlib" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>powershell sleep 2
+    <PostBuildEvent>powershell -noprofile -command "sleep 2"
 call "$(DevEnvDir)..\tools\vsvars32.bat"
 set /p buildenv=&lt;buildenv.tmp
 
@@ -1213,6 +1213,7 @@ copy /Y "$(SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" .\
 
 REM Move Help files to correct directory
 move /Y Resources\Help .\
+powershell -noprofile -command "sleep 2"
 rmdir /s /q Resources
 
 REM Set LargeAddressAware on binary
