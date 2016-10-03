@@ -469,7 +469,7 @@ namespace mRemoteNG.UI.Window
 	            case NotifyCollectionChangedAction.Add:
 	                var childList = senderAsContainerInfo?.Children;
 	                ConnectionInfo otherChild = null;
-                    if (childList?.Count > 0)
+                    if (childList?.Count > 1)
                         try { otherChild = childList.First(child => !args.NewItems.Contains(child)); } catch { }
 	                RefreshTreeObject(otherChild ?? senderAsContainerInfo);
 	                break;
