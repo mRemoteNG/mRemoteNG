@@ -65,9 +65,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Runtime.RemoteConnectionsSyncronizer?.Dispose();
             frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
 
-            if (!Settings.Default.UseSQLServer) return;
-            Runtime.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
-            Runtime.RemoteConnectionsSyncronizer.Enable();
+            if (Settings.Default.UseSQLServer)
+            {
+                Runtime.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+                Runtime.RemoteConnectionsSyncronizer.Enable();
+            }
+            else
+            {
+                Runtime.RemoteConnectionsSyncronizer?.Dispose();
+                Runtime.RemoteConnectionsSyncronizer = null;
+            }
         }
 
         private void chkUseSQLServer_CheckedChanged(object sender, EventArgs e)
