@@ -407,7 +407,6 @@ namespace mRemoteNG.UI.Window
             try
             {
                 Windows.ConfigForm.SetPropertyGridObject(SelectedNode);
-                Runtime.LastSelected = (SelectedNode)?.ConstantID;
             }
             catch (Exception ex)
             {

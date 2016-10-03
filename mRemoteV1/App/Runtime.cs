@@ -33,7 +33,6 @@ namespace mRemoteNG.App
         public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public static DateTime LastSqlUpdate { get; set; }
-        public static string LastSelected { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
         public static ConnectionTreeModel ConnectionTreeModel
         {
