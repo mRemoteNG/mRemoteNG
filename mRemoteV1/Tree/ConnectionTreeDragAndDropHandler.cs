@@ -27,7 +27,7 @@ namespace mRemoteNG.Tree
             var dropSource = (ConnectionInfo)e.SourceModels[0];
             DropModel(dropSource, dropTarget, e.DropTargetLocation);
             e.Handled = true;
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
         }
 
         public void DropModel(ConnectionInfo dropSource, ConnectionInfo dropTarget, DropTargetLocation dropTargetLocation)

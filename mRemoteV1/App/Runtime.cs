@@ -240,7 +240,7 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void LoadConnectionsBG()
+        public static void LoadConnectionsAsync()
         {
             _withDialog = false;
             _loadUpdate = true;
@@ -342,7 +342,7 @@ namespace mRemoteNG.App
                 {
                     MessageBox.Show(frmMain.Default,
                         string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)),
-                        "Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
                 }
             }
@@ -421,31 +421,31 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void SaveConnectionsBG()
+        public static void SaveConnectionsAsync()
         {
             _saveUpdate = true;
-            Thread t = new Thread(SaveConnectionsBGd);
+            var t = new Thread(SaveConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
 
         private static bool _saveUpdate;
-        private static object _saveLock = new object();
+        private static readonly object SaveLock = new object();
         private static void SaveConnectionsBGd()
         {
-            Monitor.Enter(_saveLock);
+            Monitor.Enter(SaveLock);
             SaveConnections(_saveUpdate);
-            Monitor.Exit(_saveLock);
+            Monitor.Exit(SaveLock);
         }
 
-        public static void SaveConnections(bool Update = false)
+        public static void SaveConnections(bool update = false)
         {
             //if (!IsConnectionsFileLoaded)
             //    return;
 
             try
             {
-                if (Update && Settings.Default.UseSQLServer == false)
+                if (update && Settings.Default.UseSQLServer == false)
                     return;
 
                 RemoteConnectionsSyncronizer?.Disable();
@@ -456,7 +456,7 @@ namespace mRemoteNG.App
                     connectionsSaver.ConnectionFileName = GetStartupConnectionFileName();
 
                 connectionsSaver.Export = false;
-                connectionsSaver.SaveSecurity = new Security.Save(false);
+                connectionsSaver.SaveSecurity = new Security.Save();
                 connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
@@ -578,11 +578,11 @@ namespace mRemoteNG.App
         #endregion
 
         #region External Apps
-        public static ExternalTool GetExtAppByName(string Name)
+        public static ExternalTool GetExtAppByName(string name)
         {
             foreach (ExternalTool extA in ExternalTools)
             {
-                if (extA.DisplayName == Name)
+                if (extA.DisplayName == name)
                     return extA;
             }
             return null;
@@ -590,21 +590,14 @@ namespace mRemoteNG.App
         #endregion
 
         #region Misc
-        private static void GoToURL(string URL)
+        private static void GoToUrl(string url)
         {
-            ConnectionInfo connectionInfo = new ConnectionInfo();
+            var connectionInfo = new ConnectionInfo();
             connectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
             connectionInfo.Name = "";
-            connectionInfo.Hostname = URL;
-            if (URL.StartsWith("https:"))
-            {
-                connectionInfo.Protocol = ProtocolType.HTTPS;
-            }
-            else
-            {
-                connectionInfo.Protocol = ProtocolType.HTTP;
-            }
+            connectionInfo.Hostname = url;
+            connectionInfo.Protocol = url.StartsWith("https:") ? ProtocolType.HTTPS : ProtocolType.HTTP;
             connectionInfo.SetDefaultPort();
             connectionInfo.IsQuickConnect = true;
             ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
@@ -612,30 +605,30 @@ namespace mRemoteNG.App
 
         public static void GoToWebsite()
         {
-            GoToURL(GeneralAppInfo.UrlHome);
+            GoToUrl(GeneralAppInfo.UrlHome);
         }
 
         public static void GoToDonate()
         {
-            GoToURL(GeneralAppInfo.UrlDonate);
+            GoToUrl(GeneralAppInfo.UrlDonate);
         }
 
         public static void GoToForum()
         {
-            GoToURL(GeneralAppInfo.UrlForum);
+            GoToUrl(GeneralAppInfo.UrlForum);
         }
 
         public static void GoToBugs()
         {
-            GoToURL(GeneralAppInfo.UrlBugs);
+            GoToUrl(GeneralAppInfo.UrlBugs);
         }
 
         // Override the font of all controls in a container with the default font based on the OS version
         public static void FontOverride(Control ctlParent)
         {
-            foreach (Control tempLoopVar_ctlChild in ctlParent.Controls)
+            foreach (Control tempLoopVarCtlChild in ctlParent.Controls)
             {
-                var ctlChild = tempLoopVar_ctlChild;
+                var ctlChild = tempLoopVarCtlChild;
                 ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style, ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
                 if (ctlChild.Controls.Count > 0)
                 {

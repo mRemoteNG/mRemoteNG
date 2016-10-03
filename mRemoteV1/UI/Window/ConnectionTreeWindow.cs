@@ -330,13 +330,13 @@ namespace mRemoteNG.UI.Window
         {
             var newNode = SelectedNode.Clone();
             newNode.Parent.SetChildBelow(newNode, SelectedNode);
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
         }
 
         public void RenameSelectedNode()
         {
             olvConnections.SelectedItem.BeginEdit();
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
         }
 
         public void DeleteSelectedNode()
@@ -344,7 +344,7 @@ namespace mRemoteNG.UI.Window
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
             if (!UserConfirmsDeletion()) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
         }
 
 	    private bool UserConfirmsDeletion()
@@ -394,7 +394,7 @@ namespace mRemoteNG.UI.Window
 				_contextMenu.EnableShortcutKeys();
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
                 Windows.ConfigForm.pGrid_SelectedObjectChanged(SelectedNode);
-                Runtime.SaveConnectionsBG();
+                Runtime.SaveConnectionsAsync();
 			}
 			catch (Exception ex)
 			{
@@ -503,13 +503,13 @@ namespace mRemoteNG.UI.Window
         private void cMenTreeAddConnection_Click(object sender, EventArgs e)
 		{
 			AddConnection();
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
 		}
 
         private void cMenTreeAddFolder_Click(object sender, EventArgs e)
 		{
 			AddFolder();
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
 		}
 
 	    private void SortNodes(ListSortDirection sortDirection)
@@ -519,25 +519,25 @@ namespace mRemoteNG.UI.Window
                 selectedNodeAsContainer.Sort(sortDirection);
             else
                 SelectedNode.Parent.Sort(sortDirection);
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
         }
 
 	    private void SortNodesRecursive(ContainerInfo rootSortTarget, ListSortDirection sortDirection)
 	    {
 	        rootSortTarget.SortRecursive(sortDirection);
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
         }
 
         private void cMenTreeMoveUp_Click(object sender, EventArgs e)
 		{
             SelectedNode.Parent.PromoteChild(SelectedNode);
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
 		}
 
         private void cMenTreeMoveDown_Click(object sender, EventArgs e)
 		{
             SelectedNode.Parent.DemoteChild(SelectedNode);
-            Runtime.SaveConnectionsBG();
+            Runtime.SaveConnectionsAsync();
 		}
         #endregion
 
