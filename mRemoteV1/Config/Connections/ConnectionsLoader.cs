@@ -33,7 +33,10 @@ namespace mRemoteNG.Config.Connections
 
             var connectionTreeModel = deserializer.Deserialize();
 
-			frmMain.Default.ConnectionsFileName = ConnectionFileName;
+            if (connectionTreeModel != null)
+			    frmMain.Default.ConnectionsFileName = ConnectionFileName;
+            else
+                connectionTreeModel = new ConnectionTreeModel();
 
 		    if (import) return connectionTreeModel;
 		    PuttySessionsManager.Instance.AddSessions();
