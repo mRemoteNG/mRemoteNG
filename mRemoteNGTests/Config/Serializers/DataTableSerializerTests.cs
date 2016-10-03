@@ -50,7 +50,7 @@ namespace mRemoteNGTests.Config.Serializers
             var model = CreateConnectionTreeModel();
             _saveFilter.Domain = true;
             var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["Domain"], Is.Not.EqualTo(""));
+            Assert.That(dataTable.Rows[0]["DomainName"], Is.Not.EqualTo(""));
         }
 
         [Test]
@@ -88,7 +88,7 @@ namespace mRemoteNGTests.Config.Serializers
             var model = CreateConnectionTreeModel();
             _saveFilter.Domain = false;
             var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["Domain"], Is.EqualTo(""));
+            Assert.That(dataTable.Rows[0]["DomainName"], Is.EqualTo(""));
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace mRemoteNGTests.Config.Serializers
             var model = CreateConnectionTreeModel();
             _saveFilter.Inheritance = false;
             var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["InheritUsername"], Is.EqualTo(""));
+            Assert.That(dataTable.Rows[0]["InheritUsername"], Is.False);
         }
 
 
