@@ -28,7 +28,6 @@ namespace mRemoteNG.Config.Connections
         {
             RaiseUpdateCheckStartedEvent();
             ConnectToSqlDb();
-            ExecuteQuery();
             var updateIsAvailable = DatabaseIsMoreUpToDateThanUs();
             if (updateIsAvailable)
                 RaiseConnectionsUpdateAvailableEvent();
@@ -52,18 +51,6 @@ namespace mRemoteNG.Config.Connections
             catch(Exception e)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Unable to connect to Sql DB to check for updates." + Environment.NewLine + e.Message, true);
-            }
-        }
-
-        private void ExecuteQuery()
-        {
-            try
-            {
-                
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Error executing Sql query to get updates from the DB." + Environment.NewLine + ex.Message, true);
             }
         }
 
