@@ -203,7 +203,7 @@ namespace mRemoteNG.UI.Window
             _contextMenu.AddConnectionClicked += cMenTreeAddConnection_Click;
             _contextMenu.AddFolderClicked += cMenTreeAddFolder_Click;
             _contextMenu.SortAscendingClicked += (sender, args) => SortNodes(ListSortDirection.Ascending);
-            _contextMenu.SortDescendingClicked += (sender, args) => SortNodes(ListSortDirection.Descending); ;
+            _contextMenu.SortDescendingClicked += (sender, args) => SortNodes(ListSortDirection.Descending);
             _contextMenu.MoveUpClicked += cMenTreeMoveUp_Click;
             _contextMenu.MoveDownClicked += cMenTreeMoveDown_Click;
             _contextMenu.ExternalToolClicked += (sender, args) => StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
