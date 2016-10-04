@@ -1,1 +1,1 @@
-Please see the [Wiki](https://github.com/mRemoteNG/mRemoteNG/wiki/Develoment) for contributing information.
+Please see the [Wiki](https://github.com/mRemoteNG/mRemoteNG/wiki/Development) for contributing information.
