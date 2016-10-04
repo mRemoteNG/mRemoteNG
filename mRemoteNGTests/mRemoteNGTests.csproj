@@ -166,6 +166,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\legacyrijndael_ciphertext.txt" />
     <Content Include="Resources\TestConfCons.xml" />
     <None Include="Resources\test_puttyConnectionManager_database.dat" />
     <None Include="Resources\test_rdcman_badVersionNumber.rdg" />
