@@ -1,53 +1,42 @@
-using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 using mRemoteNG.App;
-using mRemoteNG.Config.Connections;
+using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Container;
-using mRemoteNG.Connection;
-using mRemoteNG.Tree;
+using mRemoteNG.Messages;
+
 
 namespace mRemoteNG.Config.Import
 {
 	// ReSharper disable once InconsistentNaming
-	public class mRemoteNGImporter
+	public class mRemoteNGImporter : IConnectionImporter
 	{
-		public static void Import(string fileName, TreeNode parentTreeNode)
+	    public void Import(object filePath, ContainerInfo destinationContainer)
+	    {
+	        var filePathAsString = filePath as string;
+	        if (filePathAsString == null)
+	        {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Unable to import file. File path is null.");
+                return;
+            }
+
+	        if(File.Exists(filePathAsString))
+                Import(filePathAsString, destinationContainer);
+            else
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"Unable to import file. File does not exist. Path: {filePathAsString}");
+	    }
+
+        public void Import(string fileName, ContainerInfo destinationContainer)
 		{
-			var name = Path.GetFileNameWithoutExtension(fileName);
-			var treeNode = new TreeNode(name);
-			parentTreeNode.Nodes.Add(treeNode);
+            var dataProvider = new FileDataProvider(fileName);
+            var xmlString = dataProvider.Load();
+            var xmlConnectionsDeserializer = new XmlConnectionsDeserializer(xmlString);
+            var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(true);
 
-		    var containerInfo = new ContainerInfo
-		    {
-		        TreeNode = treeNode,
-		        Name = name,
-                IsContainer = true
-            };
-
-            containerInfo.Inheritance = new ConnectionInfoInheritance(containerInfo);
-			
-			// We can only inherit from a container node, not the root node or connection nodes
-		    var parent = parentTreeNode.Tag as ContainerInfo;
-		    if (parent != null)
-				containerInfo.Parent = parent;
-			else
-                containerInfo.Inheritance.DisableInheritance();
-				
-			treeNode.Name = name;
-			treeNode.Tag = containerInfo;
-			treeNode.ImageIndex = (int)TreeImageType.Container;
-			treeNode.SelectedImageIndex = (int)TreeImageType.Container;
-
-		    var connectionsLoad = new ConnectionsLoader
-		    {
-		        ConnectionFileName = fileName,
-		        RootTreeNode = treeNode,
-		        ConnectionList = Runtime.ConnectionList,
-		        ContainerList = Runtime.ContainerList
-		    };
-
-		    connectionsLoad.LoadConnections(true);
-			Runtime.ContainerList.Add(containerInfo);
+            var rootImportContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(fileName) };
+            rootImportContainer.Children.AddRange(connectionTreeModel.RootNodes.First().Children);
+            destinationContainer.AddChild(rootImportContainer);
 		}
 	}
 }

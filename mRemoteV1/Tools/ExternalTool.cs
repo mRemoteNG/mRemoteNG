@@ -69,7 +69,7 @@ namespace mRemoteNG.Tools
 
         private void SetProcessProperties(Process process, ConnectionInfo startConnectionInfo)
         {
-            ArgumentParser argParser = new ArgumentParser(startConnectionInfo);
+            ExternalToolArgumentParser argParser = new ExternalToolArgumentParser(startConnectionInfo);
             process.StartInfo.UseShellExecute = true;
             process.StartInfo.FileName = argParser.ParseArguments(FileName);
             process.StartInfo.Arguments = argParser.ParseArguments(Arguments);
@@ -80,7 +80,7 @@ namespace mRemoteNG.Tools
 			try
 			{
                 ConnectionInfo newConnectionInfo = BuildConnectionInfoForIntegratedApp();
-				Runtime.OpenConnection(newConnectionInfo);
+                ConnectionInitiator.OpenConnection(newConnectionInfo);
 			}
 			catch (Exception ex)
 			{
@@ -97,7 +97,7 @@ namespace mRemoteNG.Tools
 
         private ConnectionInfo GetAppropriateInstanceOfConnectionInfo()
         {
-            var newConnectionInfo = ConnectionInfo == null ? new ConnectionInfo() : ConnectionInfo.Copy();
+            var newConnectionInfo = ConnectionInfo == null ? new ConnectionInfo() : ConnectionInfo.Clone();
             return newConnectionInfo;
         }
 

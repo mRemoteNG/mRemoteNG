@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RDCMan schemaVersion="1">
+    <version>2.2</version>
+    <file>
+        <properties>
+            <name>test_rdcman_v2_2_schema1</name>
+            <expanded>True</expanded>
+            <comment />
+            <logonCredentials inherit="FromParent" />
+            <connectionSettings inherit="FromParent" />
+            <gatewaySettings inherit="FromParent" />
+            <remoteDesktop inherit="FromParent" />
+            <localResources inherit="FromParent" />
+            <securitySettings inherit="FromParent" />
+            <displaySettings inherit="FromParent" />
+        </properties>
+        <group>
+            <properties>
+                <name>Group1</name>
+                <expanded>True</expanded>
+                <comment />
+                <logonCredentials inherit="FromParent" />
+                <connectionSettings inherit="FromParent" />
+                <gatewaySettings inherit="FromParent" />
+                <remoteDesktop inherit="FromParent" />
+                <localResources inherit="FromParent" />
+                <securitySettings inherit="FromParent" />
+                <displaySettings inherit="FromParent" />
+            </properties>
+            <server>
+                <name>server1</name>
+                <displayName>server1_displayname</displayName>
+                <comment>Comment text here</comment>
+                <logonCredentials inherit="None">
+                    <userName>myusername1</userName>
+                    <domain>mydomain</domain>
+                    <password storeAsClearText="False">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/jk3lWsW+ku0n4AOVYyLTAAAAAACAAAAAAAQZgAAAAEAACAAAABhmrmYHd+c7VjWfPvxJ8pgi55yeV2brJDV/i9XzGUz6wAAAAAOgAAAAAIAACAAAAACJMhtb6tmkJn9vSv9J4VMWgt3S7Ikmf63xK/uKQ+YuyAAAACD3mJOT1910KD71zqbi+m/F6A0LK0tu0BhpOhr9v0yH0AAAADrb+Uv2btNYhfTUDGbw5pT5dbp5oXzc3I8QO7X1vgMXiI5TkrSxfHP/2j+Yak++vAjpVtzlxk49hpDLNAZnnhg</password>
+                </logonCredentials>
+                <connectionSettings inherit="None">
+                    <connectToConsole>True</connectToConsole>
+                    <startProgram />
+                    <workingDir />
+                    <port>9933</port>
+                </connectionSettings>
+                <gatewaySettings inherit="None">
+                    <userName>gatewayusername</userName>
+                    <domain>innerdomain</domain>
+                    <password storeAsClearText="False">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/jk3lWsW+ku0n4AOVYyLTAAAAAACAAAAAAAQZgAAAAEAACAAAACgU917evQ54VsDf3nkofPOAPj0icRejg3yfyUwZqV3DgAAAAAOgAAAAAIAACAAAACuPdtJTxd2yvFuTpSOeZz1loraPu2WFqUXiJp4cfjbJTAAAAB8L5YX93h6pQoKJozrk+Y+spHWqP+eqBUXRJ45oLreKslslSWCEO7VWg4rgr0FYsNAAAAAU1i5aSTlBy99EkNEd2inrAJAopCfNig6osiEVdvA6eYnCogG5mhzYEK5d5Wt49S8HbEyuLF/8IxV0PKG53vCZQ==</password>
+                    <enabled>True</enabled>
+                    <hostName>gatewayserverhost.innerdomain.net</hostName>
+                    <logonMethod>4</logonMethod>
+                    <localBypass>False</localBypass>
+                    <credSharing>False</credSharing>
+                </gatewaySettings>
+                <remoteDesktop inherit="None">
+                    <size>1024 x 768</size>
+                    <sameSizeAsClientArea>True</sameSizeAsClientArea>
+                    <fullScreen>False</fullScreen>
+                    <colorDepth>24</colorDepth>
+                </remoteDesktop>
+                <localResources inherit="None">
+                    <audioRedirection>2</audioRedirection>
+                    <audioRedirectionQuality>0</audioRedirectionQuality>
+                    <audioCaptureRedirection>0</audioCaptureRedirection>
+                    <keyboardHook>1</keyboardHook>
+                    <redirectClipboard>True</redirectClipboard>
+                    <redirectDrives>True</redirectDrives>
+                    <redirectPorts>True</redirectPorts>
+                    <redirectPrinters>True</redirectPrinters>
+                    <redirectSmartCards>True</redirectSmartCards>
+                </localResources>
+                <securitySettings inherit="None">
+                    <authentication>1</authentication>
+                </securitySettings>
+                <displaySettings inherit="None">
+                    <thumbnailScale>1</thumbnailScale>
+                </displaySettings>
+            </server>
+            <server>
+                <name>server2</name>
+                <displayName>server2</displayName>
+                <comment />
+                <logonCredentials inherit="FromParent" />
+                <connectionSettings inherit="FromParent" />
+                <gatewaySettings inherit="FromParent" />
+                <remoteDesktop inherit="FromParent" />
+                <localResources inherit="FromParent" />
+                <securitySettings inherit="FromParent" />
+                <displaySettings inherit="FromParent" />
+            </server>
+        </group>
+        <group>
+            <properties>
+                <name>Group2</name>
+                <expanded>True</expanded>
+                <comment />
+                <logonCredentials inherit="FromParent" />
+                <connectionSettings inherit="FromParent" />
+                <gatewaySettings inherit="FromParent" />
+                <remoteDesktop inherit="FromParent" />
+                <localResources inherit="FromParent" />
+                <securitySettings inherit="FromParent" />
+                <displaySettings inherit="FromParent" />
+            </properties>
+            <group>
+                <properties>
+                    <name>Group3</name>
+                    <expanded>True</expanded>
+                    <comment />
+                    <logonCredentials inherit="FromParent" />
+                    <connectionSettings inherit="FromParent" />
+                    <gatewaySettings inherit="FromParent" />
+                    <remoteDesktop inherit="FromParent" />
+                    <localResources inherit="FromParent" />
+                    <securitySettings inherit="FromParent" />
+                    <displaySettings inherit="FromParent" />
+                </properties>
+                <server>
+                    <name>server3</name>
+                    <displayName>server3</displayName>
+                    <comment />
+                    <logonCredentials inherit="FromParent" />
+                    <connectionSettings inherit="FromParent" />
+                    <gatewaySettings inherit="FromParent" />
+                    <remoteDesktop inherit="FromParent" />
+                    <localResources inherit="FromParent" />
+                    <securitySettings inherit="FromParent" />
+                    <displaySettings inherit="FromParent" />
+                </server>
+                <server>
+                    <name>server4</name>
+                    <displayName>server4</displayName>
+                    <comment />
+                    <logonCredentials inherit="FromParent" />
+                    <connectionSettings inherit="FromParent" />
+                    <gatewaySettings inherit="FromParent" />
+                    <remoteDesktop inherit="FromParent" />
+                    <localResources inherit="FromParent" />
+                    <securitySettings inherit="FromParent" />
+                    <displaySettings inherit="FromParent" />
+                </server>
+            </group>
+        </group>
+    </file>
+</RDCMan>

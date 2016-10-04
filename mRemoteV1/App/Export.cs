@@ -1,6 +1,14 @@
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Serializers;
+using mRemoteNG.Connection;
+using mRemoteNG.Container;
+using mRemoteNG.Security;
+using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
 
 
@@ -8,43 +16,37 @@ namespace mRemoteNG.App
 {
 	public static class Export
 	{
-		public static void ExportToFile(TreeNode rootTreeNode, TreeNode selectedTreeNode)
+		public static void ExportToFile(ConnectionInfo selectedNode, ConnectionTreeModel connectionTreeModel)
 		{
 			try
 			{
-			    Security.Save saveSecurity = new Security.Save();
+			    var saveSecurity = new Save();
 					
-				using (ExportForm exportForm = new ExportForm())
+				using (var exportForm = new ExportForm())
 				{
-					if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Container)
+					if (selectedNode?.GetTreeNodeType() == TreeNodeType.Container)
+						exportForm.SelectedFolder = selectedNode as ContainerInfo;
+					else if (selectedNode?.GetTreeNodeType() == TreeNodeType.Connection)
 					{
-						exportForm.SelectedFolder = selectedTreeNode;
-					}
-					else if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Connection)
-					{
-						if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode.Parent) == Tree.TreeNodeType.Container)
-						{
-							exportForm.SelectedFolder = selectedTreeNode.Parent;
-						}
-						exportForm.SelectedConnection = selectedTreeNode;
+						if (selectedNode.Parent.GetTreeNodeType() == TreeNodeType.Container)
+							exportForm.SelectedFolder = selectedNode.Parent;
+						exportForm.SelectedConnection = selectedNode;
 					}
 						
 					if (exportForm.ShowDialog(frmMain.Default) != DialogResult.OK)
-					{
 						return ;
-					}
 
-				    TreeNode exportTreeNode;
+				    ConnectionInfo exportTarget;
 				    switch (exportForm.Scope)
 					{
 						case ExportForm.ExportScope.SelectedFolder:
-							exportTreeNode = exportForm.SelectedFolder;
+							exportTarget = exportForm.SelectedFolder;
 							break;
                         case ExportForm.ExportScope.SelectedConnection:
-							exportTreeNode = exportForm.SelectedConnection;
+							exportTarget = exportForm.SelectedConnection;
 							break;
 						default:
-							exportTreeNode = rootTreeNode;
+							exportTarget = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
 							break;
 					}
 						
@@ -53,7 +55,7 @@ namespace mRemoteNG.App
 					saveSecurity.Domain = exportForm.IncludeDomain;
 					saveSecurity.Inheritance = exportForm.IncludeInheritance;
 						
-					SaveExportFile(exportForm.FileName, exportForm.SaveFormat, exportTreeNode, saveSecurity);
+					SaveExportFile(exportForm.FileName, exportForm.SaveFormat, saveSecurity, exportTarget);
 				}
 					
 			}
@@ -63,37 +65,39 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, TreeNode rootNode, Security.Save saveSecurity)
+		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, Save saveSecurity, ConnectionInfo exportTarget)
 		{
 			try
 			{
-                if (Runtime.SQLConnProvider != null)
-				{
-                    Runtime.SQLConnProvider.Disable();
-				}
-
-			    ConnectionsSaver connectionsSave = new ConnectionsSaver
+			    ISerializer<string> serializer;
+			    switch (saveFormat)
 			    {
-			        Export = true,
-			        ConnectionFileName = fileName,
-			        SaveFormat = saveFormat,
-			        ConnectionList = Runtime.ConnectionList,
-			        ContainerList = Runtime.ContainerList,
-			        RootTreeNode = rootNode,
-			        SaveSecurity = saveSecurity
-			    };
-			    connectionsSave.SaveConnections();
+			        case ConnectionsSaver.Format.mRXML:
+                        serializer = new XmlConnectionsSerializer();
+			            ((XmlConnectionsSerializer) serializer).SaveSecurity = saveSecurity;
+			            break;
+			        case ConnectionsSaver.Format.mRCSV:
+                        serializer = new CsvConnectionsSerializerMremotengFormat();
+                        ((CsvConnectionsSerializerMremotengFormat)serializer).SaveSecurity = saveSecurity;
+                        break;
+			        case ConnectionsSaver.Format.vRDCSV:
+                        serializer = new CsvConnectionsSerializerRemoteDesktop2008Format();
+                        ((CsvConnectionsSerializerRemoteDesktop2008Format)serializer).SaveSecurity = saveSecurity;
+                        break;
+			        default:
+			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);
+			    }
+			    var serializedData = serializer.Serialize(exportTarget);
+			    var fileDataProvider = new FileDataProvider(fileName);
+                fileDataProvider.Save(serializedData);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionStackTrace($"Export.SaveExportFile(\"{fileName}\") failed.", ex);
+			    Runtime.MessageCollector.AddExceptionStackTrace($"Export.SaveExportFile(\"{fileName}\") failed.", ex);
 			}
 			finally
 			{
-                if (Runtime.SQLConnProvider != null)
-				{
-                    Runtime.SQLConnProvider.Enable();
-				}
+			    Runtime.RemoteConnectionsSyncronizer?.Enable();
 			}
 		}
 	}

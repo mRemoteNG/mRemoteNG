@@ -73,6 +73,10 @@
     <Reference Include="NUnitForms">
       <HintPath>nUnitForms\bin\NUnitForms.dll</HintPath>
     </Reference>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -86,6 +90,7 @@
       <HintPath>..\packages\DockPanelSuite.ThemeVS2012Light.2.10.0\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -102,6 +107,17 @@
   <ItemGroup>
     <Compile Include="App\LoggerTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
+    <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
+    <Compile Include="Config\Serializers\PortScanDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionsDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
+    <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
+    <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
+    <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
+    <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
+    <Compile Include="Tree\ConnectionTreeModelTests.cs" />
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
     <Compile Include="Connection\ConnectionInfoTests.cs" />
     <Compile Include="Connection\DefaultConnectionInfoTests.cs" />
@@ -110,9 +126,12 @@
     <Compile Include="IntegrationTests\ConnectionInheritanceIntegrationTests.cs" />
     <Compile Include="ListViewTester.cs" />
     <Compile Include="Config\Connections\SqlConnectionUpdateCheckerTests.cs" />
-    <Compile Include="Config\Connections\SqlUpdateQueryBuilderTest.cs" />
-    <Compile Include="Config\Connections\SqlUpdateTimerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Security\AeadCryptographyProviderTests.cs" />
     <Compile Include="Security\CryptographyProviderFactoryTests.cs" />
     <Compile Include="Security\EncryptedSecureStringTests.cs" />
@@ -138,10 +157,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\legacyrijndael_ciphertext.txt" />
+    <Content Include="Resources\TestConfCons.xml" />
+    <None Include="Resources\test_puttyConnectionManager_database.dat" />
+    <None Include="Resources\test_rdcman_badVersionNumber.rdg" />
+    <None Include="Resources\test_rdcman_noversion.rdg" />
+    <None Include="Resources\test_rdcman_v2_2_badschemaversion.rdg" />
+    <None Include="Resources\test_rdcman_v2_2_schema1.rdg" />
+    <None Include="Resources\test_RDCMan_v2_7_schema3.rdg" />
+    <None Include="Resources\test_remotedesktopconnection.rdp" />
+  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -7,41 +7,29 @@ namespace mRemoteNG.Tree.Root
 {
 	[DefaultProperty("Name")]
     public class RootNodeInfo : ContainerInfo
-    {
-        private string _name;
+	{
+	    private string _name;
 
-
-        public RootNodeInfo(RootNodeType rootType)
+	    public RootNodeInfo(RootNodeType rootType)
 		{
-			_name = Language.strConnections;
+            _name = Language.strConnections;
 			Type = rootType;
 		}
-			
+		
         #region Public Properties
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"), 
-            Browsable(true),
-            LocalizedAttributes.LocalizedDefaultValue("strConnections"),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
-        public override string Name
-		{
-			get { return _name; }
-			set
-			{
-				if (_name == value)
-				{
-					return ;
-				}
-				_name = value;
-				if (TreeNode != null)
-				{
-					TreeNode.Name = value;
-					TreeNode.Text = value;
-				}
-			}
-		}
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
+	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
+	     Browsable(true),
+	     LocalizedAttributes.LocalizedDefaultValue("strConnections"),
+	     LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
+	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
+	    public override string Name
+	    {
+	        get { return _name; }
+            set { _name = value; }
+	    }
+
+	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPasswordProtect"),
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
@@ -52,6 +40,11 @@ namespace mRemoteNG.Tree.Root
 			
 		[Browsable(false)]
         public RootNodeType Type {get; set;}
+
+        public override TreeNodeType GetTreeNodeType()
+        {
+            return TreeNodeType.Root;
+        }
         #endregion
-	}
+    }
 }

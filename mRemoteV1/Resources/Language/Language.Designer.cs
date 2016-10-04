@@ -3478,6 +3478,42 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This node is already in this folder..
+        /// </summary>
+        internal static string strNodeAlreadyInFolder {
+            get {
+                return ResourceManager.GetString("strNodeAlreadyInFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot drag node onto itself..
+        /// </summary>
+        internal static string strNodeCannotDragOnSelf {
+            get {
+                return ResourceManager.GetString("strNodeCannotDragOnSelf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot drag parent node onto child..
+        /// </summary>
+        internal static string strNodeCannotDragParentOnChild {
+            get {
+                return ResourceManager.GetString("strNodeCannotDragParentOnChild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This node is not draggable..
+        /// </summary>
+        internal static string strNodeNotDraggable {
+            get {
+                return ResourceManager.GetString("strNodeNotDraggable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No Ext. App specified..
         /// </summary>
         internal static string strNoExtAppDefined {

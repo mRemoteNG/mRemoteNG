@@ -67,24 +67,7 @@ namespace mRemoteNG.Tools
 		    return strDate;
 		}
 
-        public static string PrepareForDB(string Text)
-		{
-			return ReplaceBooleanStringsWithNumbers(Text);
-		}
-        private static string ReplaceBooleanStringsWithNumbers(string Text)
-        {
-            Text = ReplaceTrueWith1(Text);
-            Text = ReplaceFalseWith0(Text);
-            return Text;
-        }
-        private static string ReplaceTrueWith1(string Text)
-        {
-            return Text.Replace("'True'", "1");
-        }
-        private static string ReplaceFalseWith0(string Text)
-        {
-            return Text.Replace("'False'", "0");
-        }
+
 		public static string PrepareValueForDB(string Text)
 		{
 			return Text.Replace("\'", "\'\'");

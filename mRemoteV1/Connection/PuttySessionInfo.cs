@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Root.PuttySessions;
+using mRemoteNG.Tree;
 
 
 namespace mRemoteNG.Connection
@@ -13,7 +14,7 @@ namespace mRemoteNG.Connection
 	{
         #region Properties
         [Browsable(false)]
-        public PuttySessionsNodeInfo RootPuttySessionsInfo { get; set; }
+        public RootPuttySessionsNodeInfo RootRootPuttySessionsInfo { get; set; }
 
         [ReadOnly(true)]
         public override string PuttySession { get; set; }
@@ -34,7 +35,7 @@ namespace mRemoteNG.Connection
         [ReadOnly(true), Browsable(false)]
         public override string Panel
         {
-            get { return RootPuttySessionsInfo.Panel; }
+            get { return Parent?.Panel; }
             set { }
         }
 
@@ -82,15 +83,18 @@ namespace mRemoteNG.Connection
 				}
 				puttyProcess.SetControlText("Button", "&Cancel", "&Close");
 				puttyProcess.SetControlVisible("Button", "&Open", false);
-				puttyProcess.WaitForExit();
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorCouldNotLaunchPutty + Environment.NewLine + ex.Message);
 			}
 	    }
-	    
-		
+
+        public override TreeNodeType GetTreeNodeType()
+        {
+            return TreeNodeType.PuttySession;
+        }
+
         #region IComponent
         [Browsable(false)]
         public ISite Site

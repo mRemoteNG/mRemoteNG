@@ -305,9 +305,11 @@ namespace mRemoteNG.Connection
 		}
 
 
-		public ConnectionInfoInheritance Copy()
+		public ConnectionInfoInheritance Clone()
 		{
-			return (ConnectionInfoInheritance)MemberwiseClone();
+		    var newInheritance = (ConnectionInfoInheritance) MemberwiseClone();
+		    newInheritance._tempInheritanceStorage = null;
+            return newInheritance;
 		}
 
         public void EnableInheritance()
@@ -330,7 +332,7 @@ namespace mRemoteNG.Connection
 
         private void StashInheritanceData()
         {
-            _tempInheritanceStorage = Copy();
+            _tempInheritanceStorage = Clone();
         }
 
         public void TurnOnInheritanceCompletely()

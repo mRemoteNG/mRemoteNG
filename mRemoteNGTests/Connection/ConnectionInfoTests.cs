@@ -42,7 +42,7 @@ namespace mRemoteNGTests.Connection
         public void CopyCreatesMemberwiseCopy()
         {
             _connectionInfo.Domain = TestDomain;
-            var secondConnection = _connectionInfo.Copy();
+            var secondConnection = _connectionInfo.Clone();
             Assert.That(secondConnection.Domain, Is.EqualTo(_connectionInfo.Domain));
         }
 

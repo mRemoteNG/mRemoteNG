@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using static mRemoteNG.Tools.MiscTools;
@@ -68,7 +69,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Private Fields
-		private Scanner _portScanner;
+		private PortScanner _portScanner;
 		private bool _scanning;
         #endregion
 				
@@ -170,7 +171,7 @@ namespace mRemoteNG.UI.Window
 				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
 				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
 				
-				_portScanner = new Scanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
+				_portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
 						
 				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
 				_portScanner.HostScanned += PortScanner_HostScanned;
@@ -244,7 +245,7 @@ namespace mRemoteNG.UI.Window
 
         private void importSelectedHosts(ProtocolType protocol)
         {
-            List<ScanHost> hosts = new List<ScanHost>();
+            var hosts = new List<ScanHost>();
             foreach (ListViewItem item in lvHosts.SelectedItems)
             {
                 var scanHost = (ScanHost)item.Tag;
@@ -260,7 +261,8 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            Import.ImportFromPortScan(hosts, protocol);
+            var selectedTreeNodeAsContainer = Windows.TreeForm.SelectedNode as ContainerInfo ?? Windows.TreeForm.SelectedNode.Parent;
+            Import.ImportFromPortScan(hosts, protocol, selectedTreeNodeAsContainer);
         }
 
         private void importVNCToolStripMenuItem_Click(object sender, EventArgs e)

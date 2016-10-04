@@ -72,6 +72,10 @@
       <HintPath>References\MagicLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Renci.SshNet, Version=2016.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +85,7 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -122,15 +127,34 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateCheckFinishedEventArgs.cs" />
+    <Compile Include="Config\Connections\Multiuser\IConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
+    <Compile Include="Config\Connections\Multiuser\RemoteConnectionsSyncronizer.cs" />
+    <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
+    <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
+    <Compile Include="Config\Serializers\CsvConnectionsSerializerRemoteDesktop2008Format.cs" />
+    <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
+    <Compile Include="Config\Serializers\DataTableSerializer.cs" />
+    <Compile Include="Config\Serializers\PortScanDeserializer.cs" />
+    <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializer.cs" />
+    <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializer.cs" />
+    <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializer.cs" />
+    <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
+    <Compile Include="Config\Connections\ConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
-    <Compile Include="Config\Connections\SqlCommandBuilder.cs" />
-    <Compile Include="Config\Connections\SqlConnectionsLoader.cs" />
-    <Compile Include="Config\Connections\SqlConnectionsUpdateChecker.cs" />
-    <Compile Include="Config\Connections\SqlConnectionsProvider.cs" />
-    <Compile Include="Config\Connections\SqlUpdateQueryBuilder.cs" />
-    <Compile Include="Config\Connections\SqlUpdateTimer.cs" />
-    <Compile Include="Config\Connections\XmlConnectionsLoader.cs" />
+    <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />
+    <Compile Include="Config\DataProviders\SqlDataProvider.cs" />
+    <Compile Include="Config\Serializers\IDeserializer.cs" />
+    <Compile Include="Config\Import\IConnectionImporter.cs" />
+    <Compile Include="Config\Serializers\ISerializer.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionsSerializer.cs" />
+    <Compile Include="Config\DataProviders\FileDataProvider.cs" />
+    <Compile Include="Config\DataProviders\IDataProvider.cs" />
+    <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionsDeserializer.cs" />
+    <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
@@ -139,25 +163,28 @@
     <Compile Include="Config\Settings\Providers\PortableSettingsProvider.cs" />
     <Compile Include="Config\Settings\SettingsSaver.cs" />
     <Compile Include="Config\ConfirmCloseEnum.cs" />
-    <Compile Include="Config\Import\ActiveDirectory.cs" />
+    <Compile Include="Config\Import\ActiveDirectoryImporter.cs" />
     <Compile Include="Config\Import\mRemoteNGImporter.cs" />
-    <Compile Include="Config\Import\PortScan.cs" />
-    <Compile Include="Config\Import\PuttyConnectionManager.cs" />
-    <Compile Include="Config\Import\RemoteDesktopConnection.cs" />
-    <Compile Include="Config\Import\RemoteDesktopConnectionManager.cs" />
-    <Compile Include="Config\Putty\Config.Putty.RegistryProvider.cs" />
-    <Compile Include="Config\Putty\Config.Putty.XmingProvider.cs" />
-    <Compile Include="Config\Putty\Config.Putty.Sessions.cs" />
-    <Compile Include="Config\Putty\Config.Putty.Provider.cs" />
-    <Compile Include="Config\SqlConnector.cs" />
-    <Compile Include="Config\SqlConnectorImp.cs" />
+    <Compile Include="Config\Import\PortScanImporter.cs" />
+    <Compile Include="Config\Import\PuttyConnectionManagerImporter.cs" />
+    <Compile Include="Config\Import\RemoteDesktopConnectionImporter.cs" />
+    <Compile Include="Config\Import\RemoteDesktopConnectionManagerImporter.cs" />
+    <Compile Include="Config\Putty\PuttySessionsRegistryProvider.cs" />
+    <Compile Include="Config\Putty\PuttySessionsXmingProvider.cs" />
+    <Compile Include="Config\Putty\PuttySessionsManager.cs" />
+    <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
+    <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
+    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnector.cs" />
+    <Compile Include="Connection\AbstractConnectionInfoData.cs" />
+    <Compile Include="Connection\ConnectionInfoComparer.cs" />
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
     <Compile Include="App\ProgramRoot.cs" />
+    <Compile Include="Connection\ConnectionInitiator.cs" />
     <Compile Include="Connection\Converter.cs" />
     <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
     <Compile Include="Connection\IInheritable.cs" />
-    <Compile Include="Connection\IParent.cs" />
+    <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
@@ -169,15 +196,21 @@
     <Compile Include="Security\ICryptographyProvider.cs" />
     <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Security\CryptographyProviderFactory.cs" />
-    <Compile Include="Tools\ArgumentParser.cs" />
+    <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
+    <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
-    <Compile Include="Tools\Sorting\TreeNodeSorter.cs" />
-    <Compile Include="Tree\ConnectionTree.cs" />
+    <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
+    <Compile Include="Tree\ConnectionTreeModel.cs" />
+    <Compile Include="Tree\NodeSearcher.cs" />
     <Compile Include="Tree\NodeType.cs" />
+    <Compile Include="Tree\ObjectListViewExtensions.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
-    <Compile Include="Tree\TreeNodeMover.cs" />
+    <Compile Include="UI\Controls\ConnectionContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -261,7 +294,7 @@
     <Compile Include="Tools\EnvironmentInfo.cs" />
     <Compile Include="Tools\PropertyGridCommandSite.cs" />
     <Compile Include="Connection\PuttySessionInfo.cs" />
-    <Compile Include="Tree\Root\PuttySessionsNodeInfo.cs" />
+    <Compile Include="Tree\Root\RootPuttySessionsNodeInfo.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Themes\ThemeSerializer.cs" />
     <Compile Include="Connection\ConnectionIcon.cs" />
@@ -272,7 +305,6 @@
     <Compile Include="Connection\InterfaceControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Connection\ConnectionList.cs" />
     <Compile Include="Connection\Protocol\ProtocolBase.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPBase.cs" />
@@ -293,7 +325,6 @@
     <Compile Include="Themes\ThemeInfo.cs" />
     <Compile Include="Tools\CommandLineArguments.cs" />
     <Compile Include="Container\ContainerInfo.cs" />
-    <Compile Include="Container\ContainerList.cs" />
     <Compile Include="Credential\CredentialInfo.cs" />
     <Compile Include="Credential\CredentialList.cs" />
     <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
@@ -314,7 +345,6 @@
     <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tree\TreeImageType.cs" />
     <Compile Include="Resources\Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -358,7 +388,6 @@
     <Compile Include="Tools\Tools.PortScan.cs" />
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
-    <Compile Include="Tree\ConnectionTreeNode.cs" />
     <Compile Include="UI\Forms\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -401,6 +430,9 @@
     </Compile>
     <Compile Include="UI\Window\ConnectionWindow.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ConnectionWindow.Designer.cs">
+      <DependentUpon>ConnectionWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Window\ErrorAndInfoWindow.cs">
       <SubType>Form</SubType>

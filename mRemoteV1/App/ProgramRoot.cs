@@ -24,6 +24,8 @@ namespace mRemoteNG.App
 
         private static void StartApplication()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             Startup.Instance.InitializeProgram();
             Application.Run(frmMain.Default);
         }

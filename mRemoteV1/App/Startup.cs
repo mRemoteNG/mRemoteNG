@@ -52,7 +52,6 @@ namespace mRemoteNG.App
             DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, (a)=>"InhDefault"+a);
         }
 
-        
         public void SetDefaultLayout()
         {
             frmMain.Default.pnlDock.Visible = false;
@@ -62,11 +61,11 @@ namespace mRemoteNG.App
             frmMain.Default.pnlDock.DockTopPortion = frmMain.Default.pnlDock.Height * 0.25;
             frmMain.Default.pnlDock.DockBottomPortion = frmMain.Default.pnlDock.Height * 0.25;
 
-            Windows.treePanel.Show(frmMain.Default.pnlDock, DockState.DockLeft);
-            Windows.configPanel.Show(frmMain.Default.pnlDock);
-            Windows.configPanel.DockTo(Windows.treePanel.Pane, DockStyle.Bottom, -1);
+            Windows.TreePanel.Show(frmMain.Default.pnlDock, DockState.DockLeft);
+            Windows.ConfigPanel.Show(frmMain.Default.pnlDock);
+            Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
 
-            Windows.screenshotForm.Hide();
+            Windows.ScreenshotForm.Hide();
 
             frmMain.Default.pnlDock.Visible = true;
         }
@@ -87,17 +86,14 @@ namespace mRemoteNG.App
             }
         }
 
-
         private void LogStartupData()
         {
-            if (Settings.Default.WriteLogFile)
-            {
-                LogApplicationData();
-                LogCmdLineArgs();
-                LogSystemData();
-                LogCLRData();
-                LogCultureData();
-            }
+            if (!Settings.Default.WriteLogFile) return;
+            LogApplicationData();
+            LogCmdLineArgs();
+            LogSystemData();
+            LogCLRData();
+            LogCultureData();
         }
 
         private void LogSystemData()
@@ -184,13 +180,13 @@ namespace mRemoteNG.App
                 $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}");
         }
 
-
         public void CreateConnectionsProvider()
         {
-            if (Settings.Default.UseSQLServer)
-            {
-                SqlConnectionsProvider _sqlConnectionsProvider = new SqlConnectionsProvider();
-            }
+            frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
+
+            if (!Settings.Default.UseSQLServer) return;
+            Runtime.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            Runtime.RemoteConnectionsSyncronizer.Enable();
         }
 
         private void CheckForUpdate()
@@ -246,7 +242,6 @@ namespace mRemoteNG.App
             }
         }
 
-
         private void CheckForAnnouncement()
         {
             if (_appUpdate == null)
@@ -289,7 +284,6 @@ namespace mRemoteNG.App
                 Runtime.MessageCollector.AddExceptionMessage("GetAnnouncementInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
             }
         }
-
 
         private void ParseCommandLineArgs()
         {
