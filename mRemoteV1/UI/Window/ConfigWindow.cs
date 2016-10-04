@@ -726,6 +726,7 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateConnectionInfoNode(PropertyValueChangedEventArgs e)
         {
+            Debug.WriteLine("update config");
             var selectedGridObject = pGrid.SelectedObject as ConnectionInfo;
             if (selectedGridObject == null) return;
             if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
@@ -758,39 +759,36 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)
         {
-            var o = pGrid.SelectedObject as RootNodeInfo;
-            if (o != null)
+            var rootInfo = pGrid.SelectedObject as RootNodeInfo;
+            if (rootInfo == null) return;
+            if (e.ChangedItem.PropertyDescriptor == null) return;
+            switch (e.ChangedItem.PropertyDescriptor.Name)
             {
-                var rootInfo = o;
-                if (e.ChangedItem.PropertyDescriptor != null)
-                    switch (e.ChangedItem.PropertyDescriptor.Name)
+                case "Password":
+                    if (rootInfo.Password)
                     {
-                        case "Password":
-                            if (rootInfo.Password)
-                            {
-                                string passwordName;
-                                if (Settings.Default.UseSQLServer)
-                                    passwordName = Language.strSQLServer.TrimEnd(':');
-                                else
-                                    passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
+                        string passwordName;
+                        if (Settings.Default.UseSQLServer)
+                            passwordName = Language.strSQLServer.TrimEnd(':');
+                        else
+                            passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
 
-                                var password = MiscTools.PasswordDialog(passwordName);
-                                if (password.Length == 0)
-                                    rootInfo.Password = false;
-                                else
-                                    rootInfo.PasswordString = password.ConvertToUnsecureString();
-                            }
-                            break;
-                        case "Name":
-                            break;
+                        var password = MiscTools.PasswordDialog(passwordName);
+                        if (password.Length == 0)
+                            rootInfo.Password = false;
+                        else
+                            rootInfo.PasswordString = password.ConvertToUnsecureString();
                     }
+                    break;
+                case "Name":
+                    break;
             }
         }
 
         private void UpdateInheritanceNode()
         {
             if (!(pGrid.SelectedObject is DefaultConnectionInheritance)) return;
-            DefaultConnectionInheritance.Instance.SaveTo<Settings>(Settings.Default, (a)=>"InhDefault"+a);
+            DefaultConnectionInheritance.Instance.SaveTo(Settings.Default, (a)=>"InhDefault"+a);
         }
 
         private void pGrid_PropertySortChanged(object sender, EventArgs e)
