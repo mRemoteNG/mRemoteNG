@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Security;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
@@ -13,12 +12,12 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
+
 
 namespace mRemoteNG.Config.Serializers
 {
@@ -26,7 +25,6 @@ namespace mRemoteNG.Config.Serializers
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
-        private readonly SecureString _pW = "mR3m".ConvertToSecureString();
         private readonly ConnectionsDecryptor _decryptor = new ConnectionsDecryptor();
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
@@ -173,7 +171,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Description = xmlnode.Attributes["Descr"].Value;
                     connectionInfo.Hostname = xmlnode.Attributes["Hostname"].Value;
                     connectionInfo.Username = xmlnode.Attributes["Username"].Value;
-                    connectionInfo.Password = cryptographyProvider.Decrypt(xmlnode.Attributes["Password"].Value, _pW);
+                    connectionInfo.Password = cryptographyProvider.Decrypt(xmlnode.Attributes["Password"].Value, Runtime.EncryptionKey);
                     connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
                     connectionInfo.DisplayWallpaper = bool.Parse(xmlnode.Attributes["DisplayWallpaper"].Value);
                     connectionInfo.DisplayThemes = bool.Parse(xmlnode.Attributes["DisplayThemes"].Value);
@@ -353,7 +351,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.VNCProxyIP = xmlnode.Attributes["VNCProxyIP"].Value;
                     connectionInfo.VNCProxyPort = Convert.ToInt32(xmlnode.Attributes["VNCProxyPort"].Value);
                     connectionInfo.VNCProxyUsername = xmlnode.Attributes["VNCProxyUsername"].Value;
-                    connectionInfo.VNCProxyPassword = cryptographyProvider.Decrypt(xmlnode.Attributes["VNCProxyPassword"].Value, _pW);
+                    connectionInfo.VNCProxyPassword = cryptographyProvider.Decrypt(xmlnode.Attributes["VNCProxyPassword"].Value, Runtime.EncryptionKey);
                     connectionInfo.VNCColors = (ProtocolVNC.Colors)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Colors), xmlnode.Attributes["VNCColors"].Value);
                     connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.SmartSizeMode), xmlnode.Attributes["VNCSmartSizeMode"].Value);
                     connectionInfo.VNCViewOnly = bool.Parse(xmlnode.Attributes["VNCViewOnly"].Value);
@@ -403,7 +401,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.RDGatewayHostname = xmlnode.Attributes["RDGatewayHostname"].Value;
                     connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Convert.ToString(xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value));
                     connectionInfo.RDGatewayUsername = xmlnode.Attributes["RDGatewayUsername"].Value;
-                    connectionInfo.RDGatewayPassword = cryptographyProvider.Decrypt(Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value), _pW);
+                    connectionInfo.RDGatewayPassword = cryptographyProvider.Decrypt(Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value), Runtime.EncryptionKey);
                     connectionInfo.RDGatewayDomain = xmlnode.Attributes["RDGatewayDomain"].Value;
 
                     // Get inheritance settings

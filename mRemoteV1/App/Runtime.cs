@@ -11,9 +11,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
@@ -34,6 +36,7 @@ namespace mRemoteNG.App
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public static DateTime LastSqlUpdate { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
+        public static SecureString EncryptionKey { get; set; } = "mR3m".ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
         {
             get { return Windows.TreeForm.ConnectionTreeModel; }
