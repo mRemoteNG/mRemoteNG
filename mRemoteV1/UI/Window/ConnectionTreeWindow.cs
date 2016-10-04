@@ -202,8 +202,8 @@ namespace mRemoteNG.UI.Window
             _contextMenu.ExportFileClicked += (sender, args) => Export.ExportToFile(SelectedNode, Runtime.ConnectionTreeModel);
             _contextMenu.AddConnectionClicked += cMenTreeAddConnection_Click;
             _contextMenu.AddFolderClicked += cMenTreeAddFolder_Click;
-            _contextMenu.SortAscendingClicked += (sender, args) => SortNodes(ListSortDirection.Ascending);
-            _contextMenu.SortDescendingClicked += (sender, args) => SortNodes(ListSortDirection.Descending);
+            _contextMenu.SortAscendingClicked += (sender, args) => SortNodesRecursive(SelectedNode, ListSortDirection.Ascending);
+            _contextMenu.SortDescendingClicked += (sender, args) => SortNodesRecursive(SelectedNode, ListSortDirection.Descending);
             _contextMenu.MoveUpClicked += cMenTreeMoveUp_Click;
             _contextMenu.MoveDownClicked += cMenTreeMoveDown_Click;
             _contextMenu.ExternalToolClicked += (sender, args) => StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
@@ -513,19 +513,17 @@ namespace mRemoteNG.UI.Window
             Runtime.SaveConnectionsAsync();
 		}
 
-	    private void SortNodes(ListSortDirection sortDirection)
+	    private void SortNodesRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
 	    {
-            var selectedNodeAsContainer = SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
-                selectedNodeAsContainer.Sort(sortDirection);
-            else
-                SelectedNode.Parent.Sort(sortDirection);
-            Runtime.SaveConnectionsAsync();
-        }
+	        if (sortTarget == null)
+	            sortTarget = GetRootConnectionNode();
 
-	    private void SortNodesRecursive(ContainerInfo rootSortTarget, ListSortDirection sortDirection)
-	    {
-	        rootSortTarget.SortRecursive(sortDirection);
+            var sortTargetAsContainer = sortTarget as ContainerInfo;
+            if (sortTargetAsContainer != null)
+                sortTargetAsContainer.SortRecursive(sortDirection);
+            else
+                SelectedNode.Parent.SortRecursive(sortDirection);
+
             Runtime.SaveConnectionsAsync();
         }
 
