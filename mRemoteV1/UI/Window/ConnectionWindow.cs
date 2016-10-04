@@ -796,6 +796,7 @@ namespace mRemoteNG.UI.Window
                         CloseConnectionTab();
                         break;
                     case MouseButtons.Right:
+                        if (TabController.SelectedTab?.Tag == null) return;
                         ShowHideMenuButtons();
                         NativeMethods.SetForegroundWindow(Handle);
                         cmenTab.Show(TabController, e.Location);
