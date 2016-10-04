@@ -24,9 +24,9 @@ namespace mRemoteNG.App
 					
 				using (var exportForm = new ExportForm())
 				{
-					if (selectedNode.GetTreeNodeType() == TreeNodeType.Container)
+					if (selectedNode?.GetTreeNodeType() == TreeNodeType.Container)
 						exportForm.SelectedFolder = selectedNode as ContainerInfo;
-					else if (selectedNode.GetTreeNodeType() == TreeNodeType.Connection)
+					else if (selectedNode?.GetTreeNodeType() == TreeNodeType.Connection)
 					{
 						if (selectedNode.Parent.GetTreeNodeType() == TreeNodeType.Container)
 							exportForm.SelectedFolder = selectedNode.Parent;
