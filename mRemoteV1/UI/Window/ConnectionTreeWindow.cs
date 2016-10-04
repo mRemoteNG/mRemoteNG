@@ -565,9 +565,11 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-	    private void AddNode(IHasParent newNode)
+	    private void AddNode(ConnectionInfo newNode)
 	    {
             if (SelectedNode == null) return;
+            newNode.CopyFrom(DefaultConnectionInfo.Instance);
+	        DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
             var selectedContainer = SelectedNode as ContainerInfo;
             var parent = selectedContainer ?? SelectedNode?.Parent;
             newNode.SetParent(parent);
