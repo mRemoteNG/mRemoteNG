@@ -629,8 +629,12 @@ namespace mRemoteNG.UI.Forms
         private void mMenFileImportFromFile_Click(object sender, EventArgs e)
         {
             var selectedNode = ConnectionTreeWindow.SelectedNode;
-            var selectedNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
-            Import.ImportFromFile(selectedNodeAsContainer);
+            ContainerInfo importDestination;
+            if (selectedNode == null)
+                importDestination = Runtime.ConnectionTreeModel.RootNodes.First();
+            else
+                importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
+            Import.ImportFromFile(importDestination);
 		}
 
         private void mMenFileImportFromActiveDirectory_Click(object sender, EventArgs e)
