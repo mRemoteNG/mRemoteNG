@@ -496,7 +496,13 @@ namespace mRemoteNG.UI.Window
 
 	    private void RefreshTreeObjects(IList modelObjects)
 	    {
-	        olvConnections.RefreshObjects(modelObjects);
+	        try
+	        {
+                olvConnections.RefreshObjects(modelObjects);
+            }
+	        catch (Exception)
+	        {
+	        }
 	    }
         #endregion
 
