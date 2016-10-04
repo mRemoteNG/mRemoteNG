@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
@@ -30,9 +31,13 @@ namespace mRemoteNG.UI.Window
 				
 		public void btnImport_Click(object sender, EventArgs e)
 		{
-		    var selectedNodeAsContainer = Windows.TreeForm.SelectedNode as ContainerInfo ??
-		                                  Windows.TreeForm.SelectedNode.Parent;
-		    Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, selectedNodeAsContainer);
+		    var selectedNode = Windows.TreeForm.SelectedNode;
+		    ContainerInfo importDestination;
+		    if (selectedNode != null)
+		        importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
+		    else
+		        importDestination = Runtime.ConnectionTreeModel.RootNodes.First();
+		    Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination);
 			DialogResult = DialogResult.OK;
 			Close();
 		}
