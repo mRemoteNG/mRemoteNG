@@ -694,8 +694,8 @@ namespace mRemoteNG.UI.Window
         private void txtSearch_TextChanged(object sender, EventArgs e)
 		{
             if (txtSearch.Text == "") return;
-            _nodeSearcher.SearchByName(txtSearch.Text);
-            JumpToNode(_nodeSearcher.CurrentMatch);
+            _nodeSearcher?.SearchByName(txtSearch.Text);
+            JumpToNode(_nodeSearcher?.CurrentMatch);
         }
 
 	    private void JumpToNode(ConnectionInfo connectionInfo)
