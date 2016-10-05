@@ -6,7 +6,7 @@ permalink: /download2
 ## Beta
 {: class='alert alert-warning' }
 
-Former mRemote users, please follow [these instructions](https://github.com/mRemoteNG/mRemoteNG/wiki/mRemote-Settings-Migration) to migrate your settings from mRemote to mRemoteNG.
+Former mRemote users, please follow [these instructions]({{ site.github.wiki_url }}/mRemote-Settings-Migration) to migrate your settings from mRemote to mRemoteNG.
 
 {% for release in site.github.releases %}
 {% if release.draft == false %}

@@ -103,17 +103,14 @@ GEM
     minitest (5.9.1)
     multipart-post (2.0.0)
     net-dns (0.8.0)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
-    nokogiri (1.6.8-x64-mingw32)
+    nokogiri (1.6.8.1-x64-mingw32)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     octokit (4.3.0)
       sawyer (~> 0.7.0, >= 0.5.3)
     pathutil (0.14.0)
       forwardable-extended (~> 2.6)
-    pkg-config (1.1.7)
     public_suffix (1.5.3)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
@@ -132,6 +129,7 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicode-display_width (1.1.1)
+    wdm (0.1.1)
 
 PLATFORMS
   ruby
@@ -139,6 +137,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  wdm (>= 0.1.0)
 
 BUNDLED WITH
    1.13.1
