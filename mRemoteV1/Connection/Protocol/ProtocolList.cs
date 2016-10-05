@@ -6,37 +6,28 @@ namespace mRemoteNG.Connection.Protocol
 {
 	public class ProtocolList : CollectionBase
 	{
-        #region Public Properties
-        public ProtocolBase this[object Index]
+        public ProtocolBase this[object index]
 		{
 			get
 			{
-				if (Index is ProtocolBase)
-                    return (ProtocolBase)Index;
-				else
-					return ((ProtocolBase) (List[Convert.ToInt32(Index)]));
+			    var @base = index as ProtocolBase;
+			    if (@base != null)
+                    return @base;
+			    return ((ProtocolBase) (List[Convert.ToInt32(index)]));
 			}
 		}
 				
-        public new int Count
-		{
-			get
-			{
-				return List.Count;
-			}
-		}
-        #endregion
+        public new int Count => List.Count;
+
 				
-        #region Public Methods
-		public ProtocolBase Add(ProtocolBase cProt)
+		public void Add(ProtocolBase cProt)
 		{
-			this.List.Add(cProt);
-			return cProt;
+			List.Add(cProt);
 		}
 				
 		public void AddRange(ProtocolBase[] cProt)
 		{
-			foreach (ProtocolBase cP in cProt)
+			foreach (var cP in cProt)
 			{
 				List.Add(cP);
 			}
@@ -46,7 +37,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				this.List.Remove(cProt);
+				List.Remove(cProt);
 			}
 			catch (Exception)
 			{
@@ -55,8 +46,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		public new void Clear()
 		{
-			this.List.Clear();
+			List.Clear();
 		}
-        #endregion
 	}
 }
