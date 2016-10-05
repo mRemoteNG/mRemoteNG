@@ -183,7 +183,7 @@ namespace mRemoteNGTests.Connection.Protocol
             NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Add(_protocol1);
-            Assert.That(collectionChangedAction == NotifyCollectionChangedAction.Add);
+            Assert.That(collectionChangedAction, Is.EqualTo(NotifyCollectionChangedAction.Add));
         }
 
         [Test]
@@ -192,7 +192,7 @@ namespace mRemoteNGTests.Connection.Protocol
             NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.AddRange(new []{_protocol1});
-            Assert.That(collectionChangedAction == NotifyCollectionChangedAction.Add);
+            Assert.That(collectionChangedAction, Is.EqualTo(NotifyCollectionChangedAction.Add));
         }
 
         [Test]
@@ -202,7 +202,7 @@ namespace mRemoteNGTests.Connection.Protocol
             _protocolList.Add(_protocol1);
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Remove(_protocol1);
-            Assert.That(collectionChangedAction == NotifyCollectionChangedAction.Remove);
+            Assert.That(collectionChangedAction, Is.EqualTo(NotifyCollectionChangedAction.Remove));
         }
 
         [Test]
