@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 
 
 namespace mRemoteNG.Connection.Protocol
 {
-	public class ProtocolList : CollectionBase
+	public class ProtocolList : CollectionBase, INotifyCollectionChanged
 	{
         public ProtocolBase this[object index]
 		{
@@ -13,7 +14,7 @@ namespace mRemoteNG.Connection.Protocol
 			    var @base = index as ProtocolBase;
 			    if (@base != null)
                     return @base;
-			    return ((ProtocolBase) (List[Convert.ToInt32(index)]));
+			    return (ProtocolBase) List[Convert.ToInt32(index)];
 			}
 		}
 				
@@ -23,7 +24,8 @@ namespace mRemoteNG.Connection.Protocol
 		public void Add(ProtocolBase cProt)
 		{
 			List.Add(cProt);
-		}
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cProt));
+        }
 				
 		public void AddRange(ProtocolBase[] cProt)
 		{
@@ -31,6 +33,7 @@ namespace mRemoteNG.Connection.Protocol
 			{
 				List.Add(cP);
 			}
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cProt));
 		}
 				
 		public void Remove(ProtocolBase cProt)
@@ -38,7 +41,8 @@ namespace mRemoteNG.Connection.Protocol
 			try
 			{
 				List.Remove(cProt);
-			}
+                RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, cProt));
+            }
 			catch (Exception)
 			{
 			}
@@ -47,6 +51,13 @@ namespace mRemoteNG.Connection.Protocol
 		public new void Clear()
 		{
 			List.Clear();
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 		}
-	}
+
+	    public event NotifyCollectionChangedEventHandler CollectionChanged;
+	    private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
+	    {
+	        CollectionChanged?.Invoke(sender, args);
+	    }
+    }
 }
