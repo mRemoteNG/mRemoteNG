@@ -159,12 +159,22 @@ namespace mRemoteNGTests.Connection.Protocol
         }
 
         [Test]
-        public void ClearRaisesCollectionChangedEventWithCorrectAction()
+        public void ClearRaisesCollectionChangedEvent()
+        {
+            var eventWasCalled = false;
+            _protocolList.Add(_protocol1);
+            _protocolList.CollectionChanged += (sender, args) => eventWasCalled = true;
+            _protocolList.Clear();
+            Assert.That(eventWasCalled);
+        }
+
+        [Test]
+        public void ClearDoesntRaiseCollectionChangedEventWhenNoObjectsRemoved()
         {
             var eventWasCalled = false;
             _protocolList.CollectionChanged += (sender, args) => eventWasCalled = true;
             _protocolList.Clear();
-            Assert.That(eventWasCalled);
+            Assert.That(eventWasCalled == false);
         }
 
         [Test]
@@ -199,9 +209,10 @@ namespace mRemoteNGTests.Connection.Protocol
         public void ClearCollectionChangedEventHasCorrectAction()
         {
             NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            _protocolList.Add(_protocol1);
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Clear();
-            Assert.That(collectionChangedAction == NotifyCollectionChangedAction.Reset);
+            Assert.That(collectionChangedAction, Is.EqualTo(NotifyCollectionChangedAction.Reset));
         }
     }
 }

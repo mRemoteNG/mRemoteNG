@@ -52,6 +52,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		public new void Clear()
 		{
+            if (Count == 0) return;
 			List.Clear();
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 		}
