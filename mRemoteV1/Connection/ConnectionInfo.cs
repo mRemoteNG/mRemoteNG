@@ -30,7 +30,7 @@ namespace mRemoteNG.Connection
         public ConnectionInfoInheritance Inheritance { get; set; }
 
 	    [Browsable(false)]
-        public ProtocolList OpenConnections { get; set; }
+	    public ProtocolList OpenConnections { get; protected set; }
 
 	    [Browsable(false)]
         public bool IsContainer { get; set; }
@@ -83,14 +83,13 @@ namespace mRemoteNG.Connection
             newConnectionInfo.CopyFrom(this);
 			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
             newConnectionInfo.SetParent(Parent);
-			newConnectionInfo.OpenConnections = new ProtocolList();
 		    newConnectionInfo.Inheritance = Inheritance.Clone();
 			return newConnectionInfo;
 		}
 
-	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
+	    public void CopyFrom(AbstractConnectionInfoData sourceConnectionInfo)
 	    {
-	        var properties = typeof(ConnectionInfo).GetProperties();
+	        var properties = typeof(AbstractConnectionInfoData).GetProperties();
 	        foreach (var property in properties)
 	        {
 	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
@@ -319,9 +318,15 @@ namespace mRemoteNG.Connection
         private void SetNonBrowsablePropertiesDefaults()
         {
             Inheritance = new ConnectionInfoInheritance(this);
-            OpenConnections = new ProtocolList();
+            SetNewOpenConnectionList();
             PositionID = 0;
         }
+
+	    protected void SetNewOpenConnectionList()
+	    {
+	        OpenConnections = new ProtocolList();
+	        OpenConnections.CollectionChanged += (sender, args) => RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));
+	    }
         #endregion
-	}
+    }
 }
