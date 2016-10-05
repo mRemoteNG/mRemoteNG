@@ -1,7 +1,7 @@
 name: mRemoteNG
 description: The next generation of mRemote, open source, tabbed, multi-protocol, remote connections manager.
-url: https://mRemoteNG.github.io
-baseurl: /mRemoteNG
+url: https://mremoteng.org
+baseurl: 
 repository: mRemoteNG/mRemoteNG
 exclude: [README.md, Gemfile, Gemfile.lock]
 permalink: pretty
