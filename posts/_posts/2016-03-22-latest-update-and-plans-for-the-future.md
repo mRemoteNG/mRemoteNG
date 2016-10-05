@@ -1,6 +1,6 @@
 ---
 title: Latest update and plans for the future
-author: David Sparer
+author: dmsparer
 ---
 
 Hello all,

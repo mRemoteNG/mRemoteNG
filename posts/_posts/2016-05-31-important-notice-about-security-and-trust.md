@@ -1,6 +1,6 @@
 ---
 title: Important Notice about Security and Trust
-author: Riley McArdle
+author: rmcardle
 ---
 
 Every time you store a password in mRemoteNG, you are placing your trust in it, and by extension me. I deeply appreciate that trust and I hope that I've been worthy of it.
