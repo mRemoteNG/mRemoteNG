@@ -23,7 +23,7 @@ using mRemoteNG.Tree;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : AbstractConnectionInfoData, IHasParent, IInheritable, IDisposable
+    public class ConnectionInfo : AbstractConnectionInfoData, IHasParent, IInheritable
     {        
         #region Public Properties
         [Browsable(false)]
@@ -137,11 +137,6 @@ namespace mRemoteNG.Connection
         {
             Parent?.RemoveChild(this);
         }
-
-        public virtual void Dispose()
-	    {
-	        RemoveParent();
-	    }
 	    #endregion
 
         #region Public Enumerations
