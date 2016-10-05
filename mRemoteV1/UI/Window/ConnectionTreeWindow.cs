@@ -240,7 +240,8 @@ namespace mRemoteNG.UI.Window
         private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             //TODO for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
-            if (propertyChangedEventArgs.PropertyName != "Name") return;
+            var property = propertyChangedEventArgs.PropertyName;
+            if (property != "Name" && property != "OpenConnections") return;
             var senderAsConnectionInfo = sender as ConnectionInfo;
             if (senderAsConnectionInfo != null)
                 RefreshTreeObject(senderAsConnectionInfo);
