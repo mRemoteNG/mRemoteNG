@@ -14,7 +14,9 @@ namespace mRemoteNG.Connection.Protocol
 			    var @base = index as ProtocolBase;
 			    if (@base != null)
                     return @base;
-			    return (ProtocolBase) List[Convert.ToInt32(index)];
+			    if (index is int)
+			        return (ProtocolBase) List[Convert.ToInt32(index)];
+			    return null;
 			}
 		}
 				

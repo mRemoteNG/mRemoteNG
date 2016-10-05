@@ -98,6 +98,14 @@ namespace mRemoteNGTests.Connection.Protocol
         }
 
         [Test]
+        public void IndexerSafelyHandlesUnknownObjects()
+        {
+            var protArray = new[] { _protocol1, _protocol2, _protocol3 };
+            _protocolList.AddRange(protArray);
+            Assert.That(_protocolList["unacceptablevalue"], Is.EqualTo(null));
+        }
+
+        [Test]
         public void RemovingNonexistantObjectFromListDoesNothing()
         {
             Assert.DoesNotThrow(()=> _protocolList.Remove(_protocol1));
