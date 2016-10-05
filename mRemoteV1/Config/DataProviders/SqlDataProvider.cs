@@ -14,11 +14,6 @@ namespace mRemoteNG.Config.DataProviders
             SqlDatabaseConnector = sqlDatabaseConnector;
         }
 
-        ~SqlDataProvider()
-        {
-            SqlDatabaseConnector.Dispose();
-        }
-
         public DataTable Load()
         {
             var dataTable = new DataTable();

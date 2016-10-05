@@ -21,11 +21,6 @@ namespace mRemoteNG.Config.DatabaseConnectors
             Initialize();
         }
 
-        ~SqlDatabaseConnector()
-        {
-            Dispose(false);
-        }
-
         private void Initialize()
         {
             BuildSqlConnectionString();
