@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Container;
 using NUnit.Framework;
 
@@ -52,6 +53,24 @@ namespace mRemoteNGTests.Connection
             var secondConnection = new ConnectionInfo {Domain = TestDomain};
             _connectionInfo.CopyFrom(secondConnection);
             Assert.That(_connectionInfo.Domain, Is.EqualTo(secondConnection.Domain));
+        }
+
+        [Test]
+        public void PropertyChangedEventRaisedWhenOpenConnectionsChanges()
+        {
+            var eventWasCalled = false;
+            _connectionInfo.PropertyChanged += (sender, args) => eventWasCalled = true;
+            _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
+            Assert.That(eventWasCalled);
+        }
+
+        [Test]
+        public void PropertyChangedEventArgsAreCorrectWhenOpenConnectionsChanges()
+        {
+            var nameOfModifiedProperty = "";
+            _connectionInfo.PropertyChanged += (sender, args) => nameOfModifiedProperty = args.PropertyName;
+            _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
+            Assert.That(nameOfModifiedProperty, Is.EqualTo("OpenConnections"));
         }
     }
 }
