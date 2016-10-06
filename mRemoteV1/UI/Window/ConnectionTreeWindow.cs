@@ -222,19 +222,32 @@ namespace mRemoteNG.UI.Window
 
 	    private void PopulateTreeView()
 	    {
+	        UnregisterModelUpdateHandlers();
             olvConnections.SetObjects(ConnectionTreeModel.RootNodes);
-            SetModelUpdateHandlers();
+            RegisterModelUpdateHandlers();
             _nodeSearcher = new NodeSearcher(ConnectionTreeModel);
 	        ExpandPreviouslyOpenedFolders();
             ExpandRootConnectionNode();
 	        OpenConnectionsFromLastSession();
 	    }
 
-        private void SetModelUpdateHandlers()
+        private void RegisterModelUpdateHandlers()
         {
-            _puttySessionsManager.PuttySessionsCollectionChanged += (sender, args) => RefreshTreeObjects(GetRootPuttyNodes().ToList());
+            _puttySessionsManager.PuttySessionsCollectionChanged += OnPuttySessionsCollectionChanged;
             ConnectionTreeModel.CollectionChanged += HandleCollectionChanged;
             ConnectionTreeModel.PropertyChanged += HandleCollectionPropertyChanged;
+        }
+
+	    private void UnregisterModelUpdateHandlers()
+	    {
+            _puttySessionsManager.PuttySessionsCollectionChanged -= OnPuttySessionsCollectionChanged;
+            ConnectionTreeModel.CollectionChanged -= HandleCollectionChanged;
+            ConnectionTreeModel.PropertyChanged -= HandleCollectionPropertyChanged;
+        }
+
+	    private void OnPuttySessionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+	    {
+            RefreshTreeObjects(GetRootPuttyNodes().ToList());
         }
 
         private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
