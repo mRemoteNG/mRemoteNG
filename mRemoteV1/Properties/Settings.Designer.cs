@@ -2307,5 +2307,29 @@ namespace mRemoteNG {
                 this["ConRDPOverallConnectionTimeout"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AES")]
+        public string EncryptionEngine {
+            get {
+                return ((string)(this["EncryptionEngine"]));
+            }
+            set {
+                this["EncryptionEngine"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GCM")]
+        public string EncryptionBlockCipher {
+            get {
+                return ((string)(this["EncryptionBlockCipher"]));
+            }
+            set {
+                this["EncryptionBlockCipher"] = value;
+            }
+        }
     }
 }

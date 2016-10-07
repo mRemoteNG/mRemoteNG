@@ -49,12 +49,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             var possibleEngines = Enum.GetNames(typeof(BlockCipherEngines));
             comboBoxEncryptionEngine.Items.AddRange(possibleEngines);
+            comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Settings.Default.EncryptionEngine);
         }
 
         private void PopulateBlockCipherDropDown()
         {
             var possibleBlockCiphers = Enum.GetNames(typeof(BlockCipherModes));
             comboBoxBlockCipher.Items.AddRange(possibleBlockCiphers);
+            comboBoxBlockCipher.Text = Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipher);
         }
     }
 }

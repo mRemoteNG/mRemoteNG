@@ -575,5 +575,11 @@
     <Setting Name="ConRDPOverallConnectionTimeout" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
+    <Setting Name="EncryptionEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AES</Value>
+    </Setting>
+    <Setting Name="EncryptionBlockCipher" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GCM</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
