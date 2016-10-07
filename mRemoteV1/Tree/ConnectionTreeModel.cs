@@ -60,7 +60,7 @@ namespace mRemoteNG.Tree
             if (connectionInfo is RootNodeInfo)
                 return;
             
-            connectionInfo?.Dispose();
+            connectionInfo?.RemoveParent();
         }
 
         public void CloneNode(ConnectionInfo connectionInfo)

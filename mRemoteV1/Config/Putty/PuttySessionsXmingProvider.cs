@@ -162,7 +162,6 @@ namespace mRemoteNG.Config.Putty
 			}
 			_eventWatcher.EnableRaisingEvents = false;
 			_eventWatcher.Dispose();
-			_eventWatcher = null;
 		}
         #endregion
 		

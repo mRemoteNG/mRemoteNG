@@ -70,10 +70,7 @@ namespace mRemoteNG.Config.Connections
         public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
         public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
 
-        ~RemoteConnectionsSyncronizer()
-        {
-            Dispose(false);
-        }
+
         public void Dispose()
         {
             Dispose(true);

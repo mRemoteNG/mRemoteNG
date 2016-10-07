@@ -101,12 +101,6 @@ namespace mRemoteNG.Config.Connections
                 _lastUpdateTime = _lastDatabaseUpdateTime;
         }
 
-
-        ~SqlConnectionsUpdateChecker()
-        {
-            Dispose(false);
-        }
-
         public void Dispose()
         {
             Dispose(true);

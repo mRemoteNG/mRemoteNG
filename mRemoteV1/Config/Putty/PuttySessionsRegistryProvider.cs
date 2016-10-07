@@ -110,7 +110,6 @@ namespace mRemoteNG.Config.Putty
 			if (_eventWatcher == null) return;
 			_eventWatcher.Stop();
 			_eventWatcher.Dispose();
-			_eventWatcher = null;
 		}
         #endregion
 		

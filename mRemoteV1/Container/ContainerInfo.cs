@@ -173,14 +173,6 @@ namespace mRemoteNG.Container
             SortOn(propertyToCompare, sortDirection);
         }
 
-        public override void Dispose()
-        {
-            var tempChildList = Children.ToArray();
-            foreach (var child in tempChildList)
-                child.Dispose();
-            RemoveParent();
-        }
-
         // Deep clone, recursive
         public override ConnectionInfo Clone()
 		{
