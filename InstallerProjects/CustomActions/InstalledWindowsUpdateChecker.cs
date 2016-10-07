@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace CustomActions
 {
-    public class InstalledWindowsUpdateGatherer
+    public class InstalledWindowsUpdateChecker
     {
         private readonly ManagementScope _managementScope;
 
-        public InstalledWindowsUpdateGatherer()
+        public InstalledWindowsUpdateChecker()
         {
             _managementScope = Connect();
         }
@@ -41,10 +41,7 @@ namespace CustomActions
             return installedUpdates;
         }
 
-        public bool IsUpdateInstalled(string kb)
-        {
-            return IsUpdateInstalled(new[] {kb});
-        }
+        public bool IsUpdateInstalled(string kb) => IsUpdateInstalled(new[] {kb});
 
         public bool IsUpdateInstalled(IEnumerable<string> kbList)
         {
