@@ -277,6 +277,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Block Cipher.
+        /// </summary>
+        internal static string strBlockCipher {
+            get {
+                return ResourceManager.GetString("strBlockCipher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Browse....
         /// </summary>
         internal static string strButtonBrowse {
@@ -1526,6 +1535,15 @@ namespace mRemoteNG {
         internal static string strEncryptCompleteConnectionFile {
             get {
                 return ResourceManager.GetString("strEncryptCompleteConnectionFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption Engine.
+        /// </summary>
+        internal static string strEncryptionEngine {
+            get {
+                return ResourceManager.GetString("strEncryptionEngine", resourceCulture);
             }
         }
         
