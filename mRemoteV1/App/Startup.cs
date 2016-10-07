@@ -156,12 +156,12 @@ namespace mRemoteNG.App
 
         private void LogApplicationData()
         {
-            #if !PORTABLE
+#if !PORTABLE
             Logger.Instance.InfoFormat($"{Application.ProductName} {Application.ProductVersion} starting.");
-            #else
+#else
             Logger.Instance.InfoFormat(
                 $"{Application.ProductName} {Application.ProductVersion} {Language.strLabelPortableEdition} starting.");
-            #endif
+#endif
         }
 
         private void LogCmdLineArgs()
@@ -189,7 +189,7 @@ namespace mRemoteNG.App
             Runtime.RemoteConnectionsSyncronizer.Enable();
         }
 
-        private void CheckForUpdate()
+        public void CheckForUpdate()
         {
             if (_appUpdate == null)
             {
