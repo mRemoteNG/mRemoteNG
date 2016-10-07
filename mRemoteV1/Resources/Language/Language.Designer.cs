@@ -5993,6 +5993,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Security.
+        /// </summary>
+        internal static string strTabSecurity {
+            get {
+                return ResourceManager.GetString("strTabSecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updates.
         /// </summary>
         internal static string strTabUpdates {

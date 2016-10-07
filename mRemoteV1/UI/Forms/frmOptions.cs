@@ -38,15 +38,18 @@ namespace mRemoteNG.UI.Forms
 
         private void CompileListOfOptionsPages()
         {
-            _pages = new Dictionary<string, OptionsPage>();
-            _pages.Add(typeof(StartupExitPage).Name, new StartupExitPage());
-            _pages.Add(typeof(AppearancePage).Name, new AppearancePage());
-            _pages.Add(typeof(TabsPanelsPage).Name, new TabsPanelsPage());
-            _pages.Add(typeof(ConnectionsPage).Name, new ConnectionsPage());
-            _pages.Add(typeof(SqlServerPage).Name, new SqlServerPage());
-            _pages.Add(typeof(UpdatesPage).Name, new UpdatesPage());
-            _pages.Add(typeof(ThemePage).Name, new ThemePage());
-            _pages.Add(typeof(AdvancedPage).Name, new AdvancedPage());
+            _pages = new Dictionary<string, OptionsPage>
+            {
+                {typeof(StartupExitPage).Name, new StartupExitPage()},
+                {typeof(AppearancePage).Name, new AppearancePage()},
+                {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
+                {typeof(ConnectionsPage).Name, new ConnectionsPage()},
+                {typeof(SqlServerPage).Name, new SqlServerPage()},
+                {typeof(UpdatesPage).Name, new UpdatesPage()},
+                {typeof(ThemePage).Name, new ThemePage()},
+                {typeof(SecurityPage).Name, new SecurityPage()},
+                {typeof(AdvancedPage).Name, new AdvancedPage()}
+            };
         }
 
         private void SetImageListForListView()
@@ -62,8 +65,7 @@ namespace mRemoteNG.UI.Forms
             {
                 page.LoadSettings();
                 _pageIconImageList.Images.Add(page.PageName, page.PageIcon);
-                var item = new ListViewItem(page.PageName, page.PageName);
-                item.Tag = page.GetType().Name;
+                var item = new ListViewItem(page.PageName, page.PageName) {Tag = page.GetType().Name};
                 lstOptionPages.Items.Add(item);
             }
         }

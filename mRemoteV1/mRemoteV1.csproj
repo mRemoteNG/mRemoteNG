@@ -258,6 +258,12 @@
     <Compile Include="UI\Forms\OptionsPages\OptionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SecurityPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SecurityPage.Designer.cs">
+      <DependentUpon>SecurityPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\OptionsPages\SqlServerPage.Designer.cs">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
     </Compile>
@@ -499,6 +505,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\OptionsPage.resx">
+      <DependentUpon>OptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\SecurityPage.resx">
+      <DependentUpon>SecurityPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
       <DependentUpon>PasswordForm.cs</DependentUpon>

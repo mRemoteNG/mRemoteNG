@@ -38,5 +38,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 				
 		}
         #endregion
-	}
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // OptionsPage
+            // 
+            this.Name = "OptionsPage";
+            this.Size = new System.Drawing.Size(610, 489);
+            this.ResumeLayout(false);
+
+        }
+    }
 }

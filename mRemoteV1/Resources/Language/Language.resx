@@ -2397,4 +2397,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strNodeNotDraggable" xml:space="preserve">
     <value>This node is not draggable.</value>
   </data>
+  <data name="strTabSecurity" xml:space="preserve">
+    <value>Security</value>
+  </data>
 </root>
