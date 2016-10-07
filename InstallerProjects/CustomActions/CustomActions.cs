@@ -7,16 +7,20 @@ namespace CustomActions
         [CustomAction]
         public static ActionResult IsMinimumRdpVersionInstalled(Session session)
         {
-            var rdpVersionChecker = new InstalledKbChecker("MINIMUM_RDP_KB", "MINIMUM_RDP_VERSION_INSTALLED", session);
-            rdpVersionChecker.Execute();
+            var acceptedRdpKbVariables = new[] { session["RDP80_KB"], session["RDP81_KB"] };
+            var returnVariable = "MINIMUM_RDP_VERSION_INSTALLED";
+            var kbInstalledChecker = new KbInstalledChecker(session);
+            kbInstalledChecker.Execute(acceptedRdpKbVariables, returnVariable);
             return ActionResult.Success;
         }
 
         [CustomAction]
         public static ActionResult IsRdpDtlsUpdateInstalled(Session session)
         {
-            var rdpVersionChecker = new InstalledKbChecker("RDP_DTLS_KB", "RDP_DTLS_UPDATE_INSTALLED", session);
-            rdpVersionChecker.Execute();
+            var kb = session["RDP_DTLS_KB"];
+            var returnVar = "RDP_DTLS_UPDATE_INSTALLED";
+            var kbInstalledChecker = new KbInstalledChecker(session);
+            kbInstalledChecker.Execute(kb, returnVar);
             return ActionResult.Success;
         }
 

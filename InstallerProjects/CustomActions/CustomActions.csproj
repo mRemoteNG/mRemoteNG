@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomActions.cs" />
+    <Compile Include="KbInstalledChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InstalledWindowsUpdateGatherer.cs" />
-    <Compile Include="InstalledKbChecker.cs" />
+    <Compile Include="InstalledWindowsUpdateChecker.cs" />
     <Compile Include="UninstallNsisVersions.cs" />
     <Content Include="CustomAction.config" />
   </ItemGroup>

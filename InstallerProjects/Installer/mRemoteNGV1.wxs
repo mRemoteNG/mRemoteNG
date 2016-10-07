@@ -18,7 +18,8 @@
     </Property>
     <Property Id='RDP_DTLS_KB' Value='$(var.RdpDtlsKb)' />
     <Property Id='RDP_DTLS_UPDATE_INSTALLED' Value='0' Secure='yes' />
-    <Property Id='MINIMUM_RDP_KB' Value='$(var.MinimumRdpKb)' />
+    <Property Id='RDP80_KB' Value='$(var.Rdp80Kb)' />
+    <Property Id='RDP81_KB' Value='$(var.Rdp81Kb)' />
     <Property Id='MINIMUM_RDP_VERSION_INSTALLED' Value='0' Secure='yes' />
     <Property Id='REQUIREDDOTNETFRAMEWORKVERSION' Value='$(var.RequiredDotNetFrameworkVersion)' />
     <Property Id='LEGACYVERSIONINSTALLED' Value='0' />
