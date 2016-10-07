@@ -36,7 +36,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkWriteLogFile = new System.Windows.Forms.CheckBox();
             this.chkAutomaticallyGetSessionInfo = new System.Windows.Forms.CheckBox();
             this.lblMaximumPuttyWaitTime = new System.Windows.Forms.Label();
-            this.chkEncryptCompleteFile = new System.Windows.Forms.CheckBox();
             this.chkAutomaticReconnect = new System.Windows.Forms.CheckBox();
             this.numPuttyWaitTime = new System.Windows.Forms.NumericUpDown();
             this.chkUseCustomPuttyPath = new System.Windows.Forms.CheckBox();
@@ -79,16 +78,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblMaximumPuttyWaitTime.TabIndex = 26;
             this.lblMaximumPuttyWaitTime.Text = "Maximum PuTTY wait time:";
             this.lblMaximumPuttyWaitTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // chkEncryptCompleteFile
-            // 
-            this.chkEncryptCompleteFile.AutoSize = true;
-            this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 23);
-            this.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile";
-            this.chkEncryptCompleteFile.Size = new System.Drawing.Size(180, 17);
-            this.chkEncryptCompleteFile.TabIndex = 18;
-            this.chkEncryptCompleteFile.Text = "Encrypt complete connection file";
-            this.chkEncryptCompleteFile.UseVisualStyleBackColor = true;
             // 
             // chkAutomaticReconnect
             // 
@@ -217,7 +206,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkWriteLogFile);
             this.Controls.Add(this.chkAutomaticallyGetSessionInfo);
             this.Controls.Add(this.lblMaximumPuttyWaitTime);
-            this.Controls.Add(this.chkEncryptCompleteFile);
             this.Controls.Add(this.chkAutomaticReconnect);
             this.Controls.Add(this.numPuttyWaitTime);
             this.Controls.Add(this.chkUseCustomPuttyPath);
@@ -240,7 +228,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		internal System.Windows.Forms.CheckBox chkWriteLogFile;
 		internal System.Windows.Forms.CheckBox chkAutomaticallyGetSessionInfo;
 		internal System.Windows.Forms.Label lblMaximumPuttyWaitTime;
-		internal System.Windows.Forms.CheckBox chkEncryptCompleteFile;
 		internal System.Windows.Forms.CheckBox chkAutomaticReconnect;
 		internal System.Windows.Forms.NumericUpDown numPuttyWaitTime;
 		internal System.Windows.Forms.CheckBox chkUseCustomPuttyPath;
