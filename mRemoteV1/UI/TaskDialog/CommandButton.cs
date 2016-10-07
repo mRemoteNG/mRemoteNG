@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.TaskDialog
 {
-  public partial class CommandButton : Button
+  public sealed partial class CommandButton : Button
   {
     //--------------------------------------------------------------------------------
     #region PRIVATE MEMBERS
@@ -40,10 +40,9 @@ namespace mRemoteNG.UI.TaskDialog
     }
 
     // SmallFont is the font used for secondary lines
-    Font m_smallFont;
-    public Font SmallFont { get { return m_smallFont; } set { m_smallFont = value; } }
+      private Font SmallFont { get; set; }
 
-    // AutoHeight determines whether the button automatically resizes itself to fit the Text
+      // AutoHeight determines whether the button automatically resizes itself to fit the Text
     bool m_autoHeight = true;
     [Browsable(true)]
     [Category("Behavior")]
@@ -59,7 +58,7 @@ namespace mRemoteNG.UI.TaskDialog
     {
       InitializeComponent();
       Font = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      m_smallFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      SmallFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
     }
     
     #endregion
@@ -78,7 +77,7 @@ namespace mRemoteNG.UI.TaskDialog
     //--------------------------------------------------------------------------------
     string GetLargeText()
     {
-      string[] lines = Text.Split(new char[] { '\n' });
+      string[] lines = Text.Split('\n');
       return lines[0];
     }
 
@@ -88,11 +87,11 @@ namespace mRemoteNG.UI.TaskDialog
         return "";
 
       string s = Text;
-      string[] lines = s.Split(new char[] { '\n' });
+      string[] lines = s.Split('\n');
       s = "";
       for (int i = 1; i < lines.Length; i++)
         s += lines[i] + "\n";
-      return s.Trim(new char[] { '\n' });
+      return s.Trim('\n');
     }
 
     SizeF GetLargeTextSizeF()
@@ -111,7 +110,7 @@ namespace mRemoteNG.UI.TaskDialog
       int x = LEFT_MARGIN + ARROW_WIDTH + 8; // <- indent small text slightly more
       SizeF mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F);  // presume RIGHT_MARGIN = LEFT_MARGIN
       Graphics g = Graphics.FromHwnd(Handle);
-      SizeF textSize = g.MeasureString(s, m_smallFont, mzSize);
+      SizeF textSize = g.MeasureString(s, SmallFont, mzSize);
       return textSize;
     }
     #endregion
@@ -145,16 +144,13 @@ namespace mRemoteNG.UI.TaskDialog
         switch (m_State)
         {
           case eButtonState.Normal:
-            e.Graphics.FillRectangle(Brushes.White, newRect);
-            if (Focused)
-              e.Graphics.DrawRectangle(new Pen(Color.SkyBlue, 1), newRect);
-            else
-              e.Graphics.DrawRectangle(new Pen(Color.White, 1), newRect);
-            text_color = Color.DarkBlue;
+            e.Graphics.FillRectangle(SystemBrushes.Control, newRect);
+                e.Graphics.DrawRectangle(Focused ? new Pen(Color.Silver, 1) : new Pen(SystemColors.Control, 1), newRect);
+                text_color = Color.DarkBlue;
             break;
 
           case eButtonState.MouseOver:
-            brush = new LinearGradientBrush(newRect, Color.White, Color.WhiteSmoke, mode);
+            brush = new LinearGradientBrush(newRect, SystemColors.Control, SystemColors.Control, mode);
             e.Graphics.FillRectangle(brush, newRect);
             e.Graphics.DrawRectangle(new Pen(Color.Silver, 1), newRect);
             img = imgArrow2;
@@ -162,7 +158,7 @@ namespace mRemoteNG.UI.TaskDialog
             break;
 
           case eButtonState.Down:
-            brush = new LinearGradientBrush(newRect, Color.WhiteSmoke, Color.White, mode);
+            brush = new LinearGradientBrush(newRect, SystemColors.Control, SystemColors.Control, mode);
             e.Graphics.FillRectangle(brush, newRect);
             e.Graphics.DrawRectangle(new Pen(Color.DarkGray, 1), newRect);
             text_color = Color.DarkBlue;
@@ -171,7 +167,7 @@ namespace mRemoteNG.UI.TaskDialog
       }
       else
       {
-        brush = new LinearGradientBrush(newRect, Color.WhiteSmoke, Color.Gainsboro, mode);
+        brush = new LinearGradientBrush(newRect, SystemColors.Control, SystemColors.Control, mode);
         e.Graphics.FillRectangle(brush, newRect);
         e.Graphics.DrawRectangle(new Pen(Color.DarkGray, 1), newRect);
         text_color = Color.DarkBlue;
@@ -187,7 +183,7 @@ namespace mRemoteNG.UI.TaskDialog
       if (smalltext != "")
       {
         SizeF szS = GetSmallTextSizeF();
-        e.Graphics.DrawString(smalltext, m_smallFont, new SolidBrush(text_color), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height), szS));
+        e.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(text_color), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height), szS));
       }
 
       e.Graphics.DrawImage(img, new Point(LEFT_MARGIN, TOP_MARGIN + (int)(szL.Height / 2) - img.Height / 2));

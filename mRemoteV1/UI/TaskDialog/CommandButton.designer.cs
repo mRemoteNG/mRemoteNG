@@ -1,6 +1,6 @@
 namespace mRemoteNG.UI.TaskDialog
 {
-  partial class CommandButton
+    sealed partial class CommandButton
   {
     /// <summary>
     /// Required designer variable.
