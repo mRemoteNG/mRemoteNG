@@ -879,6 +879,9 @@
     <None Include="Resources\Images_FamFamFam\user_comment.png" />
     <None Include="Resources\Images_FamFamFam\key_delete.png" />
     <None Include="Resources\Images\PuttySessions.png" />
+    <None Include="Resources\mremoteng_confcons_v2_5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\Notes\Help.txt" />
     <None Include="Resources\Notes\ICA.txt" />
     <None Include="Resources\Notes\Misc.txt" />
