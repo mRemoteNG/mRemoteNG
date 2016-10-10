@@ -70,7 +70,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         {
             var ccm = _aeadBlockCipher as CcmBlockCipher;
             if (ccm != null)
-                NonceBitSize = 104;
+                NonceBitSize = 88;
         }
 
         public string Encrypt(string plainText, SecureString encryptionKey)
