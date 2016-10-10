@@ -79,6 +79,7 @@
     <xs:attribute name="RDGatewayUsername" type="xs:string" use="required" />
     <xs:attribute name="RDGatewayPassword" type="xs:string" use="required" />
     <xs:attribute name="RDGatewayDomain" type="xs:string" use="required" />
+    
     <xs:attribute name="InheritCacheBitmaps" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritColors" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritDescription" type="xs:boolean" use="optional" />
