@@ -11,7 +11,6 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -21,6 +20,7 @@ namespace mRemoteNG.Config.Serializers
     {
         private SecureString _password = GeneralAppInfo.EncryptionKey;
         private XmlTextWriter _xmlTextWriter;
+        private ICryptographyProvider _cryptographyProvider;
 
         public bool Export { get; set; }
         public Save SaveSecurity { get; set; }
@@ -28,6 +28,8 @@ namespace mRemoteNG.Config.Serializers
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
+            var factory = new CryptographyProviderFactory();
+            _cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
             var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return Serialize(rootNode);
         }
@@ -95,25 +97,24 @@ namespace mRemoteNG.Config.Serializers
 
         private void SerializeRootNodeInfo(RootNodeInfo rootNodeInfo)
         {
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             _xmlTextWriter.WriteStartElement("Connections"); // Do not localize
             _xmlTextWriter.WriteAttributeString("Name", "", rootNodeInfo.Name);
             _xmlTextWriter.WriteAttributeString("Export", "", Convert.ToString(Export));
 
             if (Export)
             {
-                _xmlTextWriter.WriteAttributeString("Protected", "", cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
+                _xmlTextWriter.WriteAttributeString("Protected", "", _cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
             }
             else
             {
                 if (rootNodeInfo.Password)
                 {
                     _password = rootNodeInfo.PasswordString.ConvertToSecureString();
-                    _xmlTextWriter.WriteAttributeString("Protected", "", cryptographyProvider.Encrypt("ThisIsProtected", _password));
+                    _xmlTextWriter.WriteAttributeString("Protected", "", _cryptographyProvider.Encrypt("ThisIsProtected", _password));
                 }
                 else
                 {
-                    _xmlTextWriter.WriteAttributeString("Protected", "", cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
+                    _xmlTextWriter.WriteAttributeString("Protected", "", _cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
                 }
             }
 
@@ -141,7 +142,6 @@ namespace mRemoteNG.Config.Serializers
         {
             try
             {
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                 _xmlTextWriter.WriteAttributeString("Descr", "", connectionInfo.Description);
                 _xmlTextWriter.WriteAttributeString("Icon", "", connectionInfo.Icon);
                 _xmlTextWriter.WriteAttributeString("Panel", "", connectionInfo.Panel);
@@ -157,7 +157,7 @@ namespace mRemoteNG.Config.Serializers
                     _xmlTextWriter.WriteAttributeString("Domain", "", "");
 
                 if (SaveSecurity.Password)
-                    _xmlTextWriter.WriteAttributeString("Password", "", cryptographyProvider.Encrypt(connectionInfo.Password, _password));
+                    _xmlTextWriter.WriteAttributeString("Password", "", _cryptographyProvider.Encrypt(connectionInfo.Password, _password));
                 else
                     _xmlTextWriter.WriteAttributeString("Password", "", "");
 
@@ -204,7 +204,7 @@ namespace mRemoteNG.Config.Serializers
                 _xmlTextWriter.WriteAttributeString("VNCProxyIP", "", connectionInfo.VNCProxyIP);
                 _xmlTextWriter.WriteAttributeString("VNCProxyPort", "", Convert.ToString(connectionInfo.VNCProxyPort));
                 _xmlTextWriter.WriteAttributeString("VNCProxyUsername", "", connectionInfo.VNCProxyUsername);
-                _xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _password));
+                _xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _password));
                 _xmlTextWriter.WriteAttributeString("VNCColors", "", connectionInfo.VNCColors.ToString());
                 _xmlTextWriter.WriteAttributeString("VNCSmartSizeMode", "", connectionInfo.VNCSmartSizeMode.ToString());
                 _xmlTextWriter.WriteAttributeString("VNCViewOnly", "", Convert.ToString(connectionInfo.VNCViewOnly));
@@ -219,7 +219,7 @@ namespace mRemoteNG.Config.Serializers
                     _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", "");
 
                 if (SaveSecurity.Password)
-                    _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _password));
+                    _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _password));
                 else
                     _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", "");
 
