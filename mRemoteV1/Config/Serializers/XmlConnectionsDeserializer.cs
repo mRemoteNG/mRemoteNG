@@ -28,6 +28,7 @@ namespace mRemoteNG.Config.Serializers
         private readonly ConnectionsDecryptor _decryptor = new ConnectionsDecryptor();
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
+        private const double maxSupportedConfVersion = 2.6;
 
 
         public XmlConnectionsDeserializer(string xml)
@@ -47,12 +48,10 @@ namespace mRemoteNG.Config.Serializers
         private void ValidateConnectionFileVersion()
         {
             if (_xmlDocument.DocumentElement != null && _xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
-                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."),
-                    CultureInfo.InvariantCulture);
+                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."), CultureInfo.InvariantCulture);
             else
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
-
-            const double maxSupportedConfVersion = 2.5;
+            
             if (!(_confVersion > maxSupportedConfVersion)) return;
             CTaskDialog.ShowTaskDialogBox(
                 frmMain.Default,
