@@ -26,14 +26,15 @@ namespace mRemoteNG.Security.SymmetricEncryption
         private readonly SecureRandom _random = new SecureRandom();
 
         //Preconfigured Encryption Parameters
-        private readonly int NonceBitSize = 128;
-        private readonly int MacBitSize = 128;
-        private readonly int KeyBitSize = 256;
+        protected virtual int NonceBitSize { get; set; } = 128;
+        protected virtual int MacBitSize { get; set; } = 128;
+        protected virtual int KeyBitSize { get; set; } = 256;
 
         //Preconfigured Password Key Derivation Parameters
-        private readonly int SaltBitSize = 128;
-        private readonly int Iterations = 10000;
-        private readonly int MinPasswordLength = 12;
+        protected virtual int SaltBitSize { get; set; } = 128;
+        protected virtual int Iterations { get; set; } = 10000;
+        protected virtual int MinPasswordLength { get; set; } = 1;
+
 
         public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
 
@@ -55,14 +56,22 @@ namespace mRemoteNG.Security.SymmetricEncryption
         {
             _aeadBlockCipher = aeadBlockCipher;
             _encoding = Encoding.UTF8;
+            SetNonceForCcm();
         }
 
         public AeadCryptographyProvider(IAeadBlockCipher aeadBlockCipher, Encoding encoding)
         {
             _aeadBlockCipher = aeadBlockCipher;
             _encoding = encoding;
+            SetNonceForCcm();
         }
 
+        private void SetNonceForCcm()
+        {
+            var ccm = _aeadBlockCipher as CcmBlockCipher;
+            if (ccm != null)
+                NonceBitSize = 104;
+        }
 
         public string Encrypt(string plainText, SecureString encryptionKey)
         {
@@ -73,7 +82,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         private string SimpleEncryptWithPassword(string secretMessage, string password, byte[] nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
-                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
+                return ""; //throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             var plainText = _encoding.GetBytes(secretMessage);
             var cipherText = SimpleEncryptWithPassword(plainText, password, nonSecretPayload);
