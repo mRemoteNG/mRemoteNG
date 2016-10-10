@@ -9,13 +9,21 @@
   <xs:element name="Connections">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="Node" type="connectioninfo">
-        </xs:element>
+        <xs:element name="Node" type="mrng:connectioninfo" />
       </xs:sequence>
+      
+      <xs:attribute name="Name" type="xs:string" use="required" />
+      <xs:attribute name="Export" type="xs:boolean" use="required" />
+      <xs:attribute name="Protected" type="xs:string" use="required" />
+      <xs:attribute name="ConfVersion" type="xs:float" use="required" />
     </xs:complexType>
   </xs:element>
 
   <xs:complexType name="connectioninfo">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Node" type="mrng:connectioninfo" />
+    </xs:sequence>
+    
     <xs:attribute name="Name" type="xs:string" use="required" />
     <xs:attribute name="Type" type="xs:string" use="required" />
     <xs:attribute name="Descr" type="xs:string" use="required" />
