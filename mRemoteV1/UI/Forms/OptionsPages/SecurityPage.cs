@@ -31,12 +31,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             chkEncryptCompleteFile.Checked = Settings.Default.EncryptCompleteConnectionsFile;
+            comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Settings.Default.EncryptionEngine);
+            comboBoxBlockCipher.Text = Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipherMode);
         }
 
         public override void SaveSettings()
         {
             Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
-
+            Settings.Default.EncryptionEngine = (BlockCipherEngines) Enum.Parse(typeof(BlockCipherEngines), comboBoxEncryptionEngine.Text);
+            Settings.Default.EncryptionBlockCipherMode = (BlockCipherModes) Enum.Parse(typeof(BlockCipherModes), comboBoxBlockCipher.Text);
             Settings.Default.Save();
         }
 
@@ -47,16 +50,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void PopulateEncryptionEngineDropDown()
         {
-            var possibleEngines = Enum.GetNames(typeof(BlockCipherEngines));
-            comboBoxEncryptionEngine.Items.AddRange(possibleEngines);
-            comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Settings.Default.EncryptionEngine);
+            comboBoxEncryptionEngine.DataSource = Enum.GetValues(typeof(BlockCipherEngines));
         }
 
         private void PopulateBlockCipherDropDown()
         {
-            var possibleCipherModes = Enum.GetNames(typeof(BlockCipherModes));
-            comboBoxBlockCipher.Items.AddRange(possibleCipherModes);
-            comboBoxBlockCipher.Text = Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipherMode);
+            comboBoxBlockCipher.DataSource = Enum.GetValues(typeof(BlockCipherModes));
         }
     }
 }
