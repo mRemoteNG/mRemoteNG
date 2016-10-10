@@ -82,8 +82,6 @@ namespace mRemoteNG.Config.Connections
 					break;
 				default:
 					SaveToXml();
-					if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
-						EncryptCompleteFile();
 					if (!Export)
 						frmMain.Default.ConnectionsFileName = ConnectionFileName;
 					break;
@@ -237,20 +235,6 @@ namespace mRemoteNG.Config.Connections
             sqlQuery.ExecuteNonQuery();
         }
         #endregion
-		
-		private void EncryptCompleteFile()
-		{
-			var streamReader = new StreamReader(ConnectionFileName);
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-
-		    var fileContents = streamReader.ReadToEnd();
-			streamReader.Close();
-
-		    if (string.IsNullOrEmpty(fileContents)) return;
-		    var streamWriter = new StreamWriter(ConnectionFileName);
-		    streamWriter.Write(cryptographyProvider.Encrypt(fileContents, _password));
-		    streamWriter.Close();
-		}
 				
 		private void SaveToXml()
 		{
