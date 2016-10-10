@@ -116,7 +116,6 @@
     <Compile Include="App\Shutdown.cs" />
     <Compile Include="App\Startup.cs" />
     <Compile Include="App\SupportedCultures.cs" />
-    <Compile Include="App\Update\AnnouncementInfo.cs" />
     <Compile Include="App\Update\AppUpdater.cs" />
     <Compile Include="App\Export.cs" />
     <Compile Include="App\Import.cs" />
