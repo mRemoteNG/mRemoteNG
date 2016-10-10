@@ -54,9 +54,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void PopulateBlockCipherDropDown()
         {
-            var possibleBlockCiphers = Enum.GetNames(typeof(BlockCipherModes));
-            comboBoxBlockCipher.Items.AddRange(possibleBlockCiphers);
-            comboBoxBlockCipher.Text = Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipher);
+            var possibleCipherModes = Enum.GetNames(typeof(BlockCipherModes));
+            comboBoxBlockCipher.Items.AddRange(possibleCipherModes);
+            comboBoxBlockCipher.Text = Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipherMode);
         }
     }
 }

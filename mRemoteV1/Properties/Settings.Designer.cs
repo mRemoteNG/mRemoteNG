@@ -2311,9 +2311,9 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("AES")]
-        public string EncryptionEngine {
+        public global::mRemoteNG.Security.BlockCipherEngines EncryptionEngine {
             get {
-                return ((string)(this["EncryptionEngine"]));
+                return ((global::mRemoteNG.Security.BlockCipherEngines)(this["EncryptionEngine"]));
             }
             set {
                 this["EncryptionEngine"] = value;
@@ -2323,9 +2323,9 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("GCM")]
-        public string EncryptionBlockCipherMode {
+        public global::mRemoteNG.Security.BlockCipherModes EncryptionBlockCipherMode {
             get {
-                return ((string)(this["EncryptionBlockCipherMode"]));
+                return ((global::mRemoteNG.Security.BlockCipherModes)(this["EncryptionBlockCipherMode"]));
             }
             set {
                 this["EncryptionBlockCipherMode"] = value;
