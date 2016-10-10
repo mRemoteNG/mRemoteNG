@@ -23,18 +23,25 @@ namespace mRemoteNG.Config.Serializers
         private ICryptographyProvider _cryptographyProvider;
 
         public bool Export { get; set; }
-        public Save SaveSecurity { get; set; }
+        public Save SaveSecurity { get; set; } = new Save();
 
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            var factory = new CryptographyProviderFactory();
-            _cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
             var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return Serialize(rootNode);
         }
 
         public string Serialize(ConnectionInfo serializationTarget)
+        {
+            var factory = new CryptographyProviderFactory();
+            _cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
+            var connectionsData = SerializeConnectionsData(serializationTarget);
+            var connectionsDataWrappedInEncryptionData = WrapConnectionsDataInEncryptionData(connectionsData);
+            return connectionsDataWrappedInEncryptionData;
+        }
+
+        private string WrapConnectionsDataInEncryptionData(string connectionsData)
         {
             var xml = "";
             try
@@ -44,6 +51,48 @@ namespace mRemoteNG.Config.Serializers
                 {
                     SetXmlTextWriterSettings();
                     _xmlTextWriter.WriteStartDocument();
+                    _xmlTextWriter.WriteStartElement("EncryptionInfo");
+                    _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", Enum.GetName(typeof(BlockCipherEngines), mRemoteNG.Settings.Default.EncryptionEngine));
+                    _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", Enum.GetName(typeof(BlockCipherModes), mRemoteNG.Settings.Default.EncryptionBlockCipherMode));
+                    _xmlTextWriter.WriteAttributeString("EncryptionVersion", "", "1.0");
+                    _xmlTextWriter.WriteWhitespace("\n");
+
+                    if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
+                    {
+                        var encryptedData = _cryptographyProvider.Encrypt(connectionsData, GeneralAppInfo.EncryptionKey);
+                        _xmlTextWriter.WriteRaw(encryptedData);
+                    }
+                    else
+                    {
+                        _xmlTextWriter.WriteRaw(connectionsData);
+                    }
+
+                    _xmlTextWriter.WriteWhitespace("\n");
+                    _xmlTextWriter.WriteEndElement();
+                    _xmlTextWriter.WriteEndDocument();
+                    _xmlTextWriter.Flush();
+
+                    var streamReader = new StreamReader(memoryStream, Encoding.UTF8, true);
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    xml = streamReader.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("SaveToXml failed", ex);
+            }
+            return xml;
+        }
+
+        private string SerializeConnectionsData(ConnectionInfo serializationTarget)
+        {
+            var xml = "";
+            try
+            {
+                var memoryStream = new MemoryStream();
+                using (_xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8))
+                {
+                    SetXmlTextWriterSettings();
                     SaveNodesRecursive(serializationTarget);
                     _xmlTextWriter.Flush();
 
