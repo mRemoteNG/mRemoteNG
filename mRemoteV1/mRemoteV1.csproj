@@ -413,12 +413,6 @@
     <Compile Include="UI\Window\ActiveDirectoryImportWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Window\AnnouncementWindow.Designer.cs">
-      <DependentUpon>AnnouncementWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Window\AnnouncementWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\Window\BaseWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -600,10 +594,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ActiveDirectoryImportWindow.resx">
       <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\AnnouncementWindow.resx">
-      <DependentUpon>AnnouncementWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ComponentsCheckWindow.resx">

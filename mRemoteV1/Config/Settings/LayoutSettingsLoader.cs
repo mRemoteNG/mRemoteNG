@@ -1,6 +1,5 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
@@ -86,7 +85,7 @@ namespace mRemoteNG.Config.Settings
             return null;
         }
 
-        public void CreatePanels()
+        private void CreatePanels()
         {
             Windows.ConfigForm = new ConfigWindow(Windows.ConfigPanel);
             Windows.ConfigPanel = Windows.ConfigForm;
@@ -102,9 +101,6 @@ namespace mRemoteNG.Config.Settings
 
             Windows.UpdateForm = new UpdateWindow(Windows.UpdatePanel);
             Windows.UpdatePanel = Windows.UpdateForm;
-
-            Windows.AnnouncementForm = new AnnouncementWindow(Windows.AnnouncementPanel);
-            Windows.AnnouncementPanel = Windows.AnnouncementForm;
         }
     }
 }

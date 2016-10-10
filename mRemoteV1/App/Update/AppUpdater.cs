@@ -15,61 +15,30 @@ namespace mRemoteNG.App.Update
 	{
         private UpdateInfo _currentUpdateInfo;
         private string _changeLog;
-        private AnnouncementInfo _currentAnnouncementInfo;
         private WebProxy _webProxy;
         private Thread _getUpdateInfoThread;
         private Thread _getChangeLogThread;
-        private Thread _getAnnouncementInfoThread;
 
         #region Public Properties
         public UpdateInfo CurrentUpdateInfo => _currentUpdateInfo;
 
 	    public string ChangeLog => _changeLog;
 
-	    public AnnouncementInfo CurrentAnnouncementInfo => _currentAnnouncementInfo;
-
 	    public bool IsGetUpdateInfoRunning
 		{
 			get
 			{
-				if (_getUpdateInfoThread != null)
-				{
-					if (_getUpdateInfoThread.IsAlive)
-					{
-						return true;
-					}
-				}
-				return false;
+			    if (_getUpdateInfoThread == null) return false;
+			    return _getUpdateInfoThread.IsAlive;
 			}
 		}
-		
-        public bool IsGetChangeLogRunning
+
+	    private bool IsGetChangeLogRunning
 		{
 			get
 			{
-				if (_getChangeLogThread != null)
-				{
-					if (_getChangeLogThread.IsAlive)
-					{
-						return true;
-					}
-				}
-				return false;
-			}
-		}
-		
-        public bool IsGetAnnouncementInfoRunning
-		{
-			get
-			{
-				if (_getAnnouncementInfoThread != null)
-				{
-					if (_getAnnouncementInfoThread.IsAlive)
-					{
-						return true;
-					}
-				}
-				return false;
+			    if (_getChangeLogThread == null) return false;
+			    return _getChangeLogThread.IsAlive;
 			}
 		}
 		
@@ -120,16 +89,6 @@ namespace mRemoteNG.App.Update
 			return _currentUpdateInfo.Version > GeneralAppInfo.getVer();
 		}
 			
-		public bool IsAnnouncementAvailable()
-		{
-			if (_currentAnnouncementInfo == null || (!_currentAnnouncementInfo.IsValid || string.IsNullOrEmpty(_currentAnnouncementInfo.Name)))
-			{
-				return false;
-			}
-				
-			return (_currentAnnouncementInfo.Name != Settings.Default.LastAnnouncement);
-		}
-			
 		public void GetUpdateInfoAsync()
 		{
 			if (IsGetUpdateInfoRunning)
@@ -159,19 +118,6 @@ namespace mRemoteNG.App.Update
 			_getChangeLogThread.SetApartmentState(ApartmentState.STA);
 			_getChangeLogThread.IsBackground = true;
 			_getChangeLogThread.Start();
-		}
-			
-		public void GetAnnouncementInfoAsync()
-		{
-			if (IsGetAnnouncementInfoRunning)
-			{
-				_getAnnouncementInfoThread.Abort();
-			}
-				
-			_getAnnouncementInfoThread = new Thread(GetAnnouncementInfo);
-			_getAnnouncementInfoThread.SetApartmentState(ApartmentState.STA);
-			_getAnnouncementInfoThread.IsBackground = true;
-			_getAnnouncementInfoThread.Start();
 		}
 			
 		public void DownloadUpdateAsync()
@@ -286,24 +232,6 @@ namespace mRemoteNG.App.Update
             GetChangeLogCompletedEventEvent?.Invoke(this, e);
         }
 			
-		private void GetAnnouncementInfo()
-		{
-			Uri announcementFileUri = new Uri(Convert.ToString(Settings.Default.AnnouncementAddress));
-			DownloadStringCompletedEventArgs e = DownloadString(announcementFileUri);
-				
-			if (!e.Cancelled && e.Error == null)
-			{
-				_currentAnnouncementInfo = AnnouncementInfo.FromString(e.Result);
-					
-				if (!string.IsNullOrEmpty(_currentAnnouncementInfo.Name))
-				{
-                    Settings.Default.LastAnnouncement = _currentAnnouncementInfo.Name;
-				}
-			}
-
-            GetAnnouncementInfoCompletedEventEvent?.Invoke(this, e);
-        }
-			
 		private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
             DownloadUpdateProgressChangedEventEvent?.Invoke(sender, e);
@@ -317,21 +245,22 @@ namespace mRemoteNG.App.Update
 			{
 				try
 				{
-					Authenticode updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath);
-					updateAuthenticode.RequireThumbprintMatch = true;
-					updateAuthenticode.ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint;
-						
-					if (updateAuthenticode.Verify() != Authenticode.StatusValue.Verified)
-					{
-						if (updateAuthenticode.Status == Authenticode.StatusValue.UnhandledException)
+				    Authenticode updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath)
+				    {
+                        // I'm guessing that this is going to prevent 1.72 from auto updating to 1.74+
+				        RequireThumbprintMatch = true,
+				        ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint
+				    };
+
+				    if (updateAuthenticode.Verify() != Authenticode.StatusValue.Verified)
+				    {
+				        if (updateAuthenticode.Status == Authenticode.StatusValue.UnhandledException)
 						{
 							throw (updateAuthenticode.Exception);
 						}
-						else
-						{
-							throw (new Exception(updateAuthenticode.StatusMessage));
-						}
-					}
+
+				        throw (new Exception(updateAuthenticode.StatusMessage));
+				    }
 				}
 				catch (Exception ex)
 				{

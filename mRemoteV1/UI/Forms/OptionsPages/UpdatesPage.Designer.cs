@@ -67,8 +67,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.lblUpdatesExplanation.Name = "lblUpdatesExplanation";
 			this.lblUpdatesExplanation.Size = new System.Drawing.Size(536, 40);
 			this.lblUpdatesExplanation.TabIndex = 3;
-			this.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates " + 
-				"and product announcements.";
+			this.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates.";
 			//
 			//pnlUpdateCheck
 			//
@@ -96,7 +95,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup";
 			this.chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(213, 17);
 			this.chkCheckForUpdatesOnStartup.TabIndex = 0;
-			this.chkCheckForUpdatesOnStartup.Text = "Check for updates and announcements";
+			this.chkCheckForUpdatesOnStartup.Text = "Check for updates";
 			this.chkCheckForUpdatesOnStartup.UseVisualStyleBackColor = true;
 			//
 			//cboUpdateCheckFrequency

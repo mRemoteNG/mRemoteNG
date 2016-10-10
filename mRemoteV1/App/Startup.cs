@@ -21,14 +21,10 @@ namespace mRemoteNG.App
 {
     public class Startup
     {
-        private static readonly Startup _singletonInstance = new Startup();
         private CompatibilityChecker _compatibilityChecker;
         private AppUpdater _appUpdate;
 
-        public static Startup Instance
-        {
-            get { return _singletonInstance; }
-        }
+        public static Startup Instance { get; } = new Startup();
 
         private Startup()
         {
@@ -242,48 +238,6 @@ namespace mRemoteNG.App
             }
         }
 
-        private void CheckForAnnouncement()
-        {
-            if (_appUpdate == null)
-                _appUpdate = new AppUpdater();
-            else if (_appUpdate.IsGetAnnouncementInfoRunning)
-                return;
-
-            _appUpdate.GetAnnouncementInfoCompletedEvent += GetAnnouncementInfoCompleted;
-            _appUpdate.GetAnnouncementInfoAsync();
-        }
-
-        private void GetAnnouncementInfoCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (frmMain.Default.InvokeRequired)
-            {
-                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetAnnouncementInfoCompleted), new object[] { sender, e });
-                return;
-            }
-
-            try
-            {
-                _appUpdate.GetAnnouncementInfoCompletedEvent -= GetAnnouncementInfoCompleted;
-
-                if (e.Cancelled)
-                {
-                    return;
-                }
-                if (e.Error != null)
-                {
-                    throw (e.Error);
-                }
-
-                if (_appUpdate.IsAnnouncementAvailable())
-                {
-                    Windows.Show(WindowType.Announcement);
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("GetAnnouncementInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
-            }
-        }
 
         private void ParseCommandLineArgs()
         {
