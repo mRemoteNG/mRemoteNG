@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="mremoteng_encryption_v1_0"
+    targetNamespace="http://mremoteng.org"
+    elementFormDefault="qualified"
+    xmlns="http://mremoteng.org"
+    xmlns:mrng="http://mremoteng.org"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="EncryptedData" type="mrng:encryptedFileData"></xs:element>
+  
+  <xs:complexType name="encryptedFileData">
+    <xs:simpleContent>
+      <xs:extension base="xs:string" />
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

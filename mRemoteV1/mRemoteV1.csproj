@@ -679,6 +679,15 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\mremoteng_confcons_v2_6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\mremoteng_encryption_v1_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firefox\AccessibleMarshal.dll" />
@@ -879,9 +888,6 @@
     <None Include="Resources\Images_FamFamFam\user_comment.png" />
     <None Include="Resources\Images_FamFamFam\key_delete.png" />
     <None Include="Resources\Images\PuttySessions.png" />
-    <None Include="Resources\mremoteng_confcons_v2_5.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Resources\Notes\Help.txt" />
     <None Include="Resources\Notes\ICA.txt" />
     <None Include="Resources\Notes\Misc.txt" />
