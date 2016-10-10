@@ -8,14 +8,24 @@
 >
   <xs:include id="encryption" schemaLocation="mremoteng_encryption_v1_0.xsd" />
 
-  <xs:element name="EncryptionInfo" type="encryptionInfo"/>
+  
+  <xs:element name="EncryptionInfo">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="mrng:Connections" />
+        <xs:element ref="mrng:EncryptedData" />
+      </xs:choice>
+      <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
+      <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
 
+  
   <xs:element name="Connections">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="Node" type="mrng:connectioninfo" />
       </xs:sequence>
-
       <xs:attribute name="Name" type="xs:string" use="required" />
       <xs:attribute name="Export" type="xs:boolean" use="required" />
       <xs:attribute name="Protected" type="xs:string" use="required" />
@@ -23,17 +33,7 @@
     </xs:complexType>
   </xs:element>
 
-  
-  <xs:complexType name="encryptionInfo">
-    <xs:choice>
-      <xs:element ref="mrng:Connections" />
-      <xs:element ref="mrng:EncryptedData" />
-    </xs:choice>
-    <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
-    <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
-  </xs:complexType>
 
-  
   <xs:complexType name="connectioninfo">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element name="Node" type="mrng:connectioninfo" />
