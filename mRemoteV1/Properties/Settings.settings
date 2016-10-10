@@ -578,7 +578,7 @@
     <Setting Name="EncryptionEngine" Type="System.String" Scope="User">
       <Value Profile="(Default)">AES</Value>
     </Setting>
-    <Setting Name="EncryptionBlockCipher" Type="System.String" Scope="User">
+    <Setting Name="EncryptionBlockCipherMode" Type="System.String" Scope="User">
       <Value Profile="(Default)">GCM</Value>
     </Setting>
   </Settings>

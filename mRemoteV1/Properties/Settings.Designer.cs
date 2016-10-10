@@ -2323,12 +2323,12 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("GCM")]
-        public string EncryptionBlockCipher {
+        public string EncryptionBlockCipherMode {
             get {
-                return ((string)(this["EncryptionBlockCipher"]));
+                return ((string)(this["EncryptionBlockCipherMode"]));
             }
             set {
-                this["EncryptionBlockCipher"] = value;
+                this["EncryptionBlockCipherMode"] = value;
             }
         }
     }
