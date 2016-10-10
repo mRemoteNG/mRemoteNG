@@ -18,6 +18,7 @@
       <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
       <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
       <xs:attribute name="EncryptionVersion" type="xs:float" use="required" />
+      <xs:attribute name="FullFileEncryption" type="xs:boolean" use="required" />
     </xs:complexType>
   </xs:element>
 

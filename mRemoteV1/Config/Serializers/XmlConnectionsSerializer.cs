@@ -55,6 +55,7 @@ namespace mRemoteNG.Config.Serializers
                     _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", Enum.GetName(typeof(BlockCipherEngines), mRemoteNG.Settings.Default.EncryptionEngine));
                     _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", Enum.GetName(typeof(BlockCipherModes), mRemoteNG.Settings.Default.EncryptionBlockCipherMode));
                     _xmlTextWriter.WriteAttributeString("EncryptionVersion", "", "1.0");
+                    _xmlTextWriter.WriteAttributeString("FullFileEncryption", "", mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile.ToString());
                     _xmlTextWriter.WriteWhitespace("\n");
 
                     if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
