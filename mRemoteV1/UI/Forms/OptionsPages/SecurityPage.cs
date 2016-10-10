@@ -30,6 +30,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
+            base.SaveSettings();
             chkEncryptCompleteFile.Checked = Settings.Default.EncryptCompleteConnectionsFile;
             comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Settings.Default.EncryptionEngine);
             comboBoxBlockCipher.Text = Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipherMode);
@@ -38,9 +39,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
-            Settings.Default.EncryptionEngine = (BlockCipherEngines) Enum.Parse(typeof(BlockCipherEngines), comboBoxEncryptionEngine.Text);
-            Settings.Default.EncryptionBlockCipherMode = (BlockCipherModes) Enum.Parse(typeof(BlockCipherModes), comboBoxBlockCipher.Text);
-            Settings.Default.Save();
+            Settings.Default.EncryptionEngine = (BlockCipherEngines) comboBoxEncryptionEngine.SelectedItem;
+            Settings.Default.EncryptionBlockCipherMode = (BlockCipherModes) comboBoxBlockCipher.SelectedItem;
         }
 
         public override void RevertSettings()
