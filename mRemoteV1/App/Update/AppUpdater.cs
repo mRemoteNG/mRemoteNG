@@ -24,25 +24,11 @@ namespace mRemoteNG.App.Update
 
 	    public string ChangeLog => _changeLog;
 
-	    public bool IsGetUpdateInfoRunning
-		{
-			get
-			{
-			    if (_getUpdateInfoThread == null) return false;
-			    return _getUpdateInfoThread.IsAlive;
-			}
-		}
+	    public bool IsGetUpdateInfoRunning => _getUpdateInfoThread != null && _getUpdateInfoThread.IsAlive;
 
-	    private bool IsGetChangeLogRunning
-		{
-			get
-			{
-			    if (_getChangeLogThread == null) return false;
-			    return _getChangeLogThread.IsAlive;
-			}
-		}
-		
-        public bool IsDownloadUpdateRunning => (_downloadUpdateWebClient != null);
+	    private bool IsGetChangeLogRunning => _getChangeLogThread != null && _getChangeLogThread.IsAlive;
+
+	    public bool IsDownloadUpdateRunning => (_downloadUpdateWebClient != null);
 
 	    #endregion
 		
@@ -161,7 +147,7 @@ namespace mRemoteNG.App.Update
         #region Private Methods
 		private WebClient CreateWebClient()
 		{
-			WebClient webClient = new WebClient();
+			var webClient = new WebClient();
 			webClient.Headers.Add("user-agent", GeneralAppInfo.UserAgent);
 			webClient.Proxy = _webProxy;
 			return webClient;
@@ -247,7 +233,6 @@ namespace mRemoteNG.App.Update
 				{
 				    Authenticode updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath)
 				    {
-                        // I'm guessing that this is going to prevent 1.72 from auto updating to 1.74+
 				        RequireThumbprintMatch = true,
 				        ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint
 				    };

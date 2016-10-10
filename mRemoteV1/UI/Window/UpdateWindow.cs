@@ -42,18 +42,18 @@ namespace mRemoteNG.UI.Window
 			lblLatestVersion.Text = Language.strVersion;
 			lblLatestVersionLabel.Text = $"{Language.strAvailableVersion}:";
 		}
-				
-		public void btnCheckForUpdate_Click(Object sender, EventArgs e)
+
+	    private void btnCheckForUpdate_Click(object sender, EventArgs e)
 		{
 			CheckForUpdate();
 		}
-				
-		public void btnDownload_Click(Object sender, EventArgs e)
+
+        private void btnDownload_Click(object sender, EventArgs e)
 		{
 			DownloadUpdate();
 		}
-				
-		public void pbUpdateImage_Click(Object sender, EventArgs e)
+
+        private void pbUpdateImage_Click(object sender, EventArgs e)
 		{
 			Uri linkUri = pbUpdateImage.Tag as Uri;
 			if (linkUri == null || linkUri.IsFile || linkUri.IsUnc || linkUri.IsLoopback)
