@@ -177,7 +177,6 @@ namespace mRemoteNG.UI.Forms
         private void ApplySpecialSettingsForPortableVersion()
         {
             #if PORTABLE
-            mMenInfoAnnouncements.Visible = false;
             mMenToolsUpdate.Visible = false;
             mMenInfoSep2.Visible = false;
             #endif
@@ -286,10 +285,7 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-#if PORTABLE
-            // ReSharper disable once RedundantJumpStatement
-			return;
-#endif
+#if !PORTABLE
             if (!Settings.Default.CheckForUpdatesAsked)
             {
                 string[] commandButtons = 
@@ -322,6 +318,7 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
             Startup.Instance.CheckForUpdate();
+#endif
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
