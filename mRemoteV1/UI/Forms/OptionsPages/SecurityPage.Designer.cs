@@ -90,7 +90,7 @@
             this.groupAdvancedSecurityOptions.Controls.Add(this.labelEncryptionEngine);
             this.groupAdvancedSecurityOptions.Location = new System.Drawing.Point(3, 96);
             this.groupAdvancedSecurityOptions.Name = "groupAdvancedSecurityOptions";
-            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(437, 189);
+            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(284, 99);
             this.groupAdvancedSecurityOptions.TabIndex = 24;
             this.groupAdvancedSecurityOptions.TabStop = false;
             this.groupAdvancedSecurityOptions.Text = "Advanced Security Options";
