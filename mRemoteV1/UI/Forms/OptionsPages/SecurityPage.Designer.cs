@@ -70,9 +70,9 @@
             this.labelBlockCipher.AutoSize = true;
             this.labelBlockCipher.Location = new System.Drawing.Point(9, 60);
             this.labelBlockCipher.Name = "labelBlockCipher";
-            this.labelBlockCipher.Size = new System.Drawing.Size(67, 13);
+            this.labelBlockCipher.Size = new System.Drawing.Size(97, 13);
             this.labelBlockCipher.TabIndex = 22;
-            this.labelBlockCipher.Text = "Block Cipher";
+            this.labelBlockCipher.Text = "Block Cipher Mode";
             // 
             // comboBoxBlockCipher
             // 

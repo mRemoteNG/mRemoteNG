@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
             chkEncryptCompleteFile.Text = Language.strEncryptCompleteConnectionFile;
-            labelBlockCipher.Text = Language.strBlockCipher;
+            labelBlockCipher.Text = Language.strEncryptionBlockCipherMode;
             labelEncryptionEngine.Text = Language.strEncryptionEngine;
         }
 
