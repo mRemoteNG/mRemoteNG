@@ -24,6 +24,7 @@ namespace mRemoteNG.Config.Serializers
 
         public bool Export { get; set; }
         public Save SaveSecurity { get; set; } = new Save();
+        public bool UseFullEncryption { get; set; }
 
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
@@ -49,13 +50,17 @@ namespace mRemoteNG.Config.Serializers
                 {
                     SetXmlTextWriterSettings();
                     _xmlTextWriter.WriteStartDocument();
+                    SerializeRootNodeInfo(GetRootNodeFromConnectionInfo(serializationTarget));
                     SaveNodesRecursive(serializationTarget);
+                    _xmlTextWriter.WriteEndElement();
                     _xmlTextWriter.WriteEndDocument();
                     _xmlTextWriter.Flush();
 
                     var streamReader = new StreamReader(memoryStream, Encoding.UTF8, true);
                     memoryStream.Seek(0, SeekOrigin.Begin);
                     xml = streamReader.ReadToEnd();
+                    if (UseFullEncryption)
+                        xml = EncyrptFullFile(xml);
                 }
             }
             catch (Exception ex)
@@ -65,10 +70,46 @@ namespace mRemoteNG.Config.Serializers
             return xml;
         }
 
+        private RootNodeInfo GetRootNodeFromConnectionInfo(ConnectionInfo connectionInfo)
+        {
+            while (true)
+            {
+                var connectionInfoAsRootNode = connectionInfo as RootNodeInfo;
+                if (connectionInfoAsRootNode != null) return connectionInfoAsRootNode;
+                connectionInfo = connectionInfo.Parent;
+            }
+        }
+
         private void SetXmlTextWriterSettings()
         {
             _xmlTextWriter.Formatting = Formatting.Indented;
             _xmlTextWriter.Indentation = 4;
+        }
+
+        private string EncyrptFullFile(string xml)
+        {
+            var xmldoc = new XmlDocument();
+            xmldoc.LoadXml(xml);
+            if (xmldoc.DocumentElement == null) return xml;
+            var plainTextContent = xmldoc.DocumentElement.InnerXml;
+            var encryptedContent = _cryptographyProvider.Encrypt(plainTextContent, _password);
+            xmldoc.DocumentElement.InnerXml = encryptedContent;
+            var xmlString = WriteXmlToString(xmldoc);
+            return xmlString;
+        }
+
+        private string WriteXmlToString(XmlDocument xmlDocument)
+        {
+            var xmlString = "";
+            var xmlWriterSettings = new XmlWriterSettings {Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8};
+            using (var stringWriter = new StringWriter())
+            using (var xmlTextWriter = XmlWriter.Create(stringWriter, xmlWriterSettings))
+            {
+                xmlDocument.WriteTo(xmlTextWriter);
+                xmlTextWriter.Flush();
+                xmlString = stringWriter.GetStringBuilder().ToString();
+            }
+            return xmlString;
         }
 
         private void SaveNodesRecursive(ConnectionInfo node)
@@ -79,7 +120,6 @@ namespace mRemoteNG.Config.Serializers
                 var nodeAsContainer = node as ContainerInfo;
                 if (nodeAsRoot != null)
                 {
-                    SerializeRootNodeInfo(nodeAsRoot);
                     foreach (var child in nodeAsRoot.Children)
                         SaveNodesRecursive(child);
                 }
@@ -93,7 +133,9 @@ namespace mRemoteNG.Config.Serializers
                 {
                     SerializeConnectionInfo(node);
                 }
-                _xmlTextWriter.WriteEndElement();
+
+                if (nodeAsRoot == null)
+                    _xmlTextWriter.WriteEndElement();
             }
             catch (Exception ex)
             {
@@ -108,7 +150,7 @@ namespace mRemoteNG.Config.Serializers
             _xmlTextWriter.WriteAttributeString("Export", "", Convert.ToString(Export));
             _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", Enum.GetName(typeof(BlockCipherEngines), mRemoteNG.Settings.Default.EncryptionEngine));
             _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", Enum.GetName(typeof(BlockCipherModes), mRemoteNG.Settings.Default.EncryptionBlockCipherMode));
-            _xmlTextWriter.WriteAttributeString("FullFileEncryption", "", mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile.ToString());
+            _xmlTextWriter.WriteAttributeString("FullFileEncryption", "", UseFullEncryption.ToString());
 
             if (Export)
             {

@@ -243,7 +243,8 @@ namespace mRemoteNG.Config.Connections
 				var xmlConnectionsSerializer = new XmlConnectionsSerializer()
 				{
                     Export = Export,
-                    SaveSecurity = SaveSecurity
+                    SaveSecurity = SaveSecurity,
+                    UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
 						
