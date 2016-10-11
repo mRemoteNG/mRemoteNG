@@ -58,7 +58,7 @@ namespace mRemoteNG.App.Update
         }
 
         // ReSharper disable MemberCanBePrivate.Local
-        public string GetString(string key)
+        private string GetString(string key)
         {
             // ReSharper restore MemberCanBePrivate.Local
             return !Items.ContainsKey(key) ? string.Empty : this._items[key];

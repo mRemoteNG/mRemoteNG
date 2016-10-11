@@ -4,14 +4,14 @@ namespace mRemoteNG.App.Update
 {
     public class UpdateInfo
     {
-        public bool IsValid { get; set; }
-        public Version Version { get; set; }
-        public Uri DownloadAddress { get; set; }
+        public bool IsValid { get; private set; }
+        public Version Version { get; private set; }
+        public Uri DownloadAddress { get; private set; }
         public string UpdateFilePath { get; set; }
-        public Uri ChangeLogAddress { get; set; }
-        public Uri ImageAddress { get; set; }
-        public Uri ImageLinkAddress { get; set; }
-        public string CertificateThumbprint { get; set; }
+        public Uri ChangeLogAddress { get; private set; }
+        public Uri ImageAddress { get; private set; }
+        public Uri ImageLinkAddress { get; private set; }
+        public string CertificateThumbprint { get; private set; }
 
         public static UpdateInfo FromString(string input)
         {

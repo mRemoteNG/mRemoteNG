@@ -301,10 +301,14 @@ namespace mRemoteNG.UI.Forms
                 {
                     Settings.Default.CheckForUpdatesAsked = true;
                 }
-                if (CTaskDialog.CommandButtonResult == 1)
+
+                if (CTaskDialog.CommandButtonResult != 1) return;
+
+                using (var optionsForm = new frmOptions(Language.strTabUpdates))
                 {
-                    Windows.Show(WindowType.Update);
+                    optionsForm.ShowDialog(this);
                 }
+
                 return;
             }
 
