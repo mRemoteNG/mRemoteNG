@@ -36,53 +36,7 @@ namespace mRemoteNG.Config.Serializers
         {
             var factory = new CryptographyProviderFactory();
             _cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
-            var connectionsData = SerializeConnectionsData(serializationTarget);
-            var connectionsDataWrappedInEncryptionData = WrapConnectionsDataInEncryptionData(connectionsData);
-            return connectionsDataWrappedInEncryptionData;
-        }
-
-        private string WrapConnectionsDataInEncryptionData(string connectionsData)
-        {
-            var xml = "";
-            try
-            {
-                var memoryStream = new MemoryStream();
-                using (_xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8))
-                {
-                    SetXmlTextWriterSettings();
-                    _xmlTextWriter.WriteStartDocument();
-                    _xmlTextWriter.WriteStartElement("EncryptionInfo");
-                    _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", Enum.GetName(typeof(BlockCipherEngines), mRemoteNG.Settings.Default.EncryptionEngine));
-                    _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", Enum.GetName(typeof(BlockCipherModes), mRemoteNG.Settings.Default.EncryptionBlockCipherMode));
-                    _xmlTextWriter.WriteAttributeString("EncryptionVersion", "", "1.0");
-                    _xmlTextWriter.WriteAttributeString("FullFileEncryption", "", mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile.ToString());
-                    _xmlTextWriter.WriteWhitespace("\n");
-
-                    if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
-                    {
-                        var encryptedData = _cryptographyProvider.Encrypt(connectionsData, GeneralAppInfo.EncryptionKey);
-                        _xmlTextWriter.WriteRaw(encryptedData);
-                    }
-                    else
-                    {
-                        _xmlTextWriter.WriteRaw(connectionsData);
-                    }
-
-                    _xmlTextWriter.WriteWhitespace("\n");
-                    _xmlTextWriter.WriteEndElement();
-                    _xmlTextWriter.WriteEndDocument();
-                    _xmlTextWriter.Flush();
-
-                    var streamReader = new StreamReader(memoryStream, Encoding.UTF8, true);
-                    memoryStream.Seek(0, SeekOrigin.Begin);
-                    xml = streamReader.ReadToEnd();
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("SaveToXml failed", ex);
-            }
-            return xml;
+            return SerializeConnectionsData(serializationTarget);
         }
 
         private string SerializeConnectionsData(ConnectionInfo serializationTarget)
@@ -94,7 +48,9 @@ namespace mRemoteNG.Config.Serializers
                 using (_xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8))
                 {
                     SetXmlTextWriterSettings();
+                    _xmlTextWriter.WriteStartDocument();
                     SaveNodesRecursive(serializationTarget);
+                    _xmlTextWriter.WriteEndDocument();
                     _xmlTextWriter.Flush();
 
                     var streamReader = new StreamReader(memoryStream, Encoding.UTF8, true);
@@ -150,6 +106,9 @@ namespace mRemoteNG.Config.Serializers
             _xmlTextWriter.WriteStartElement("Connections"); // Do not localize
             _xmlTextWriter.WriteAttributeString("Name", "", rootNodeInfo.Name);
             _xmlTextWriter.WriteAttributeString("Export", "", Convert.ToString(Export));
+            _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", Enum.GetName(typeof(BlockCipherEngines), mRemoteNG.Settings.Default.EncryptionEngine));
+            _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", Enum.GetName(typeof(BlockCipherModes), mRemoteNG.Settings.Default.EncryptionBlockCipherMode));
+            _xmlTextWriter.WriteAttributeString("FullFileEncryption", "", mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile.ToString());
 
             if (Export)
             {
