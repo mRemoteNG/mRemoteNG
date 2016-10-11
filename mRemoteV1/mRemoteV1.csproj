@@ -685,9 +685,6 @@
     <None Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\mremoteng_encryption_v1_0.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firefox\AccessibleMarshal.dll" />
