@@ -12,6 +12,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -25,7 +26,7 @@ namespace mRemoteNG.Config.Serializers
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
-        private readonly ConnectionsDecryptor _decryptor = new ConnectionsDecryptor();
+        private ConnectionsDecryptor _decryptor;
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
         private const double maxSupportedConfVersion = 2.6;
@@ -39,7 +40,7 @@ namespace mRemoteNG.Config.Serializers
 
         private void LoadXmlConnectionData(string connections)
         {
-            connections = _decryptor.DecryptConnections(connections);
+            //connections = _decryptor.DecryptConnections(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
                 _xmlDocument.LoadXml(connections);
@@ -83,10 +84,13 @@ namespace mRemoteNG.Config.Serializers
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = false;
 
-                var rootInfo = InitializeRootNode();
+                var rootXmlElement = _xmlDocument.DocumentElement;
+                CreateDecryptor(rootXmlElement);
+                var rootInfo = InitializeRootNode(rootXmlElement);
                 var connectionTreeModel = new ConnectionTreeModel();
                 connectionTreeModel.AddRootNode(rootInfo);
 
+                
                 if (_confVersion > 1.3)
                 {
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
@@ -105,8 +109,6 @@ namespace mRemoteNG.Config.Serializers
                 }
 
                 AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, rootInfo);
-                //Windows.treeForm.InitialRefresh();
-                //SetSelectedNode(RootTreeNode);
 
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = true;
@@ -118,6 +120,34 @@ namespace mRemoteNG.Config.Serializers
                 Runtime.IsConnectionsFileLoaded = false;
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strLoadFromXmlFailed, ex);
                 throw;
+            }
+        }
+
+        private RootNodeInfo InitializeRootNode(XmlElement connectionsRootElement)
+        {
+            var rootNodeName = connectionsRootElement?.Attributes["Name"].Value.Trim();
+            var rootInfo = new RootNodeInfo(RootNodeType.Connection)
+            {
+                Name = rootNodeName
+            };
+            return rootInfo;
+        }
+
+        private void CreateDecryptor(XmlElement connectionsRootElement)
+        {
+            if (_confVersion >= 2.6)
+            {
+                BlockCipherEngines engine;
+                Enum.TryParse(connectionsRootElement.Attributes["EncryptionEngine"].Value, out engine);
+
+                BlockCipherModes mode;
+                Enum.TryParse(connectionsRootElement.Attributes["BlockCipherMode"].Value, out mode);
+
+                _decryptor = new ConnectionsDecryptor(engine, mode);
+            }
+            else
+            {
+                _decryptor = new ConnectionsDecryptor();
             }
         }
 
@@ -451,17 +481,6 @@ namespace mRemoteNG.Config.Serializers
             if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value))
                 isExportFile = true;
             return isExportFile;
-        }
-
-        private RootNodeInfo InitializeRootNode()
-        {
-            var rootNodeName = _xmlDocument.DocumentElement?.Attributes["Name"].Value.Trim();
-
-            var rootInfo = new RootNodeInfo(RootNodeType.Connection)
-            {
-                Name = rootNodeName
-            };
-            return rootInfo;
         }
     }
 }

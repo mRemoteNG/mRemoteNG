@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -17,10 +16,13 @@ namespace mRemoteNG.Config.Connections
             _cryptographyProvider = new LegacyRijndaelCryptographyProvider();
         }
 
+        public ConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode)
+        {
+            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
+        }
+
         public string DecryptConnections(string xml)
         {
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-
             if (string.IsNullOrEmpty(xml)) return "";
             if (xml.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>")) return xml;
 
@@ -29,7 +31,7 @@ namespace mRemoteNG.Config.Connections
 
             try
             {
-                strDecr = cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
+                strDecr = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
                 notDecr = strDecr == xml;
             }
             catch (Exception)
@@ -41,7 +43,7 @@ namespace mRemoteNG.Config.Connections
             {
                 if (Authenticate(xml, true))
                 {
-                    strDecr = cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
+                    strDecr = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
                     notDecr = false;
                 }
 
