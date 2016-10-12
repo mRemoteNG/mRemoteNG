@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace mRemoteNG.App.Update
 {
@@ -23,36 +24,33 @@ namespace mRemoteNG.App.Update
         // ReSharper disable once MemberCanBePrivate.Global
         public void FromString(string content)
         {
-            // ReSharper restore MemberCanBePrivate.Local
-            if (string.IsNullOrEmpty(content))
-            {
-            }
-            else
-            {
-                char[] lineSeparators = { '\n', '\r' };
-                char[] keyValueSeparators = { ':', '=' };
-                char[] commentCharacters = { '#', ';', '\'' };
+            if (string.IsNullOrEmpty(content)) return;
 
-                string[] lines = content.Split(lineSeparators.ToString().ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                foreach (string line in lines)
+            char[] keyValueSeparators = { ':', '=' };
+            char[] commentCharacters = { '#', ';', '\'' };
+
+            using (var sr = new StringReader(content))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
                 {
-                    string trimmedLine = line.Trim();
+                    var trimmedLine = line.Trim();
                     if (trimmedLine.Length == 0)
                     {
                         continue;
                     }
-                    if (trimmedLine.Substring(0, 1).IndexOfAny(commentCharacters.ToString().ToCharArray()) != -1)
+                    if (trimmedLine.Substring(0, 1).IndexOfAny(commentCharacters) != -1)
                     {
                         continue;
                     }
 
-                    string[] parts = trimmedLine.Split(keyValueSeparators.ToString().ToCharArray(), 2);
+                    var parts = trimmedLine.Split(keyValueSeparators, 2);
                     if (parts.Length != 2)
                     {
                         continue;
                     }
-                    string key = Convert.ToString(parts[0].Trim());
-                    string value = Convert.ToString(parts[1].Trim());
+                    var key = parts[0].Trim();
+                    var value = parts[1].Trim();
 
                     _items.Add(key, value);
                 }
@@ -60,7 +58,7 @@ namespace mRemoteNG.App.Update
         }
 
         // ReSharper disable MemberCanBePrivate.Local
-        public string GetString(string key)
+        private string GetString(string key)
         {
             // ReSharper restore MemberCanBePrivate.Local
             return !Items.ContainsKey(key) ? string.Empty : this._items[key];

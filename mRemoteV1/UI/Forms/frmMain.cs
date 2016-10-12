@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
@@ -176,7 +177,6 @@ namespace mRemoteNG.UI.Forms
         private void ApplySpecialSettingsForPortableVersion()
         {
             #if PORTABLE
-            mMenInfoAnnouncements.Visible = false;
             mMenToolsUpdate.Visible = false;
             mMenInfoSep2.Visible = false;
             #endif
@@ -228,7 +228,6 @@ namespace mRemoteNG.UI.Forms
 			mMenInfoDonate.Text = Language.strMenuDonate;
 			mMenInfoWebsite.Text = Language.strMenuWebsite;
 			mMenInfoAbout.Text = Language.strMenuAbout;
-			mMenInfoAnnouncements.Text = Language.strMenuAnnouncements;
 			
 			lblQuickConnect.Text = Language.strLabelConnect;
 			btnQuickConnect.Text = Language.strMenuConnect;
@@ -285,42 +284,46 @@ namespace mRemoteNG.UI.Forms
 		}
 
         private void frmMain_Shown(object sender, EventArgs e)
-		{
-            #if PORTABLE
-		    // ReSharper disable once RedundantJumpStatement
-			return ;
-            #endif
-//			if (!mRemoteNG.Settings.Default.CheckForUpdatesAsked)
-//			{
-//				string[] commandButtons = new string[] {Language.strAskUpdatesCommandRecommended, Language.strAskUpdatesCommandCustom, Language.strAskUpdatesCommandAskLater};
-//				cTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProdName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProdName, "", "", "", "", string.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question);
-//				if (cTaskDialog.CommandButtonResult == 0 | cTaskDialog.CommandButtonResult == 1)
-//				{
-//					mRemoteNG.Settings.Default.CheckForUpdatesAsked = true;
-//					}
-//					if (cTaskDialog.CommandButtonResult == 1)
-//					{
-//						Windows.ShowUpdatesTab();
-//						}
-//						return ;
-//						}
-						
-//						if (!mRemoteNG.Settings.Default.CheckForUpdatesOnStartup)
-//						{
-//							return ;
-//							}
-							
-//							DateTime nextUpdateCheck = System.Convert.ToDateTime(mRemoteNG.Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(System.Convert.ToDouble(mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays))));
-//							if (mRemoteNG.Settings.Default.UpdatePending || DateTime.UtcNow > nextUpdateCheck)
-//							{
-//								if (!IsHandleCreated)
-//								{
-//									CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
-//									}
-//									Startup.CheckForUpdate();
-//									Startup.CheckForAnnouncement();
-//									}
-		}
+        {
+#if !PORTABLE
+            if (!Settings.Default.CheckForUpdatesAsked)
+            {
+                string[] commandButtons = 
+                {
+                    Language.strAskUpdatesCommandRecommended, Language.strAskUpdatesCommandCustom,
+                    Language.strAskUpdatesCommandAskLater
+                };
+
+                CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProdName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProdName),
+                    "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+
+                if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
+                {
+                    Settings.Default.CheckForUpdatesAsked = true;
+                }
+
+                if (CTaskDialog.CommandButtonResult != 1) return;
+
+                using (var optionsForm = new frmOptions(Language.strTabUpdates))
+                {
+                    optionsForm.ShowDialog(this);
+                }
+
+                return;
+            }
+
+            if (!Settings.Default.CheckForUpdatesOnStartup) return;
+
+            DateTime nextUpdateCheck = Convert.ToDateTime(
+                    Settings.Default.CheckForUpdatesLastCheck.Add(
+                        TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
+
+            if (!Settings.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
+            if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
+
+            Startup.Instance.CheckForUpdate();
+#endif
+        }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
@@ -952,11 +955,6 @@ namespace mRemoteNG.UI.Forms
 			Runtime.GoToDonate();
 		}
 
-        private void mMenInfoAnnouncements_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.Announcement);
-		}
-
         private void mMenInfoAbout_Click(object sender, EventArgs e)
 		{
 			Windows.Show(WindowType.About);
@@ -973,20 +971,19 @@ namespace mRemoteNG.UI.Forms
                 MouseUpEventHandler = ConnectionsMenuItem_MouseUp
             };
 
+		    // ReSharper disable once CoVariantArrayConversion
             ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionTreeModel).ToArray();
             btnConnections.DropDownItems.AddRange(rootMenuItems);
 		}
 										
 		private static void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
 		{
-			if (e.Button == MouseButtons.Left)
-			{
-			    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
-			    if (tag != null)
-				{
-                    ConnectionInitiator.OpenConnection(tag);
-				}
-			}
+		    if (e.Button != MouseButtons.Left) return;
+		    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
+		    if (tag != null)
+		    {
+		        ConnectionInitiator.OpenConnection(tag);
+		    }
 		}
         #endregion
 

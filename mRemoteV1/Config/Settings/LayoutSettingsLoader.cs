@@ -85,7 +85,7 @@ namespace mRemoteNG.Config.Settings
             return null;
         }
 
-        public void CreatePanels()
+        private void CreatePanels()
         {
             Windows.ConfigForm = new ConfigWindow(Windows.ConfigPanel);
             Windows.ConfigPanel = Windows.ConfigForm;
@@ -101,9 +101,6 @@ namespace mRemoteNG.Config.Settings
 
             Windows.UpdateForm = new UpdateWindow(Windows.UpdatePanel);
             Windows.UpdatePanel = Windows.UpdateForm;
-
-            Windows.AnnouncementForm = new AnnouncementWindow(Windows.AnnouncementPanel);
-            Windows.AnnouncementPanel = Windows.AnnouncementForm;
         }
     }
 }

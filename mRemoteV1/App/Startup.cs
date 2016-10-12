@@ -5,7 +5,6 @@ using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Window;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -15,20 +14,17 @@ using System.IO;
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.UI;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
 {
     public class Startup
     {
-        private static readonly Startup _singletonInstance = new Startup();
         private CompatibilityChecker _compatibilityChecker;
         private AppUpdater _appUpdate;
 
-        public static Startup Instance
-        {
-            get { return _singletonInstance; }
-        }
+        public static Startup Instance { get; } = new Startup();
 
         private Startup()
         {
@@ -156,12 +152,12 @@ namespace mRemoteNG.App
 
         private void LogApplicationData()
         {
-            #if !PORTABLE
+#if !PORTABLE
             Logger.Instance.InfoFormat($"{Application.ProductName} {Application.ProductVersion} starting.");
-            #else
+#else
             Logger.Instance.InfoFormat(
                 $"{Application.ProductName} {Application.ProductVersion} {Language.strLabelPortableEdition} starting.");
-            #endif
+#endif
         }
 
         private void LogCmdLineArgs()
@@ -189,7 +185,7 @@ namespace mRemoteNG.App
             Runtime.RemoteConnectionsSyncronizer.Enable();
         }
 
-        private void CheckForUpdate()
+        public void CheckForUpdate()
         {
             if (_appUpdate == null)
             {
@@ -242,48 +238,6 @@ namespace mRemoteNG.App
             }
         }
 
-        private void CheckForAnnouncement()
-        {
-            if (_appUpdate == null)
-                _appUpdate = new AppUpdater();
-            else if (_appUpdate.IsGetAnnouncementInfoRunning)
-                return;
-
-            _appUpdate.GetAnnouncementInfoCompletedEvent += GetAnnouncementInfoCompleted;
-            _appUpdate.GetAnnouncementInfoAsync();
-        }
-
-        private void GetAnnouncementInfoCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (frmMain.Default.InvokeRequired)
-            {
-                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetAnnouncementInfoCompleted), new object[] { sender, e });
-                return;
-            }
-
-            try
-            {
-                _appUpdate.GetAnnouncementInfoCompletedEvent -= GetAnnouncementInfoCompleted;
-
-                if (e.Cancelled)
-                {
-                    return;
-                }
-                if (e.Error != null)
-                {
-                    throw (e.Error);
-                }
-
-                if (_appUpdate.IsAnnouncementAvailable())
-                {
-                    Windows.Show(WindowType.Announcement);
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("GetAnnouncementInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
-            }
-        }
 
         private void ParseCommandLineArgs()
         {

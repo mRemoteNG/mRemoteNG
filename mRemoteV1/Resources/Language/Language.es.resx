@@ -904,9 +904,6 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Agregar Panel de Conexión</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Novedades</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Comprobar Actualizaciones</value>
   </data>

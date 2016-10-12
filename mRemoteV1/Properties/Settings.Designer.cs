@@ -1693,18 +1693,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LastAnnouncement {
-            get {
-                return ((string)(this["LastAnnouncement"]));
-            }
-            set {
-                this["LastAnnouncement"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool CheckForUpdatesAsked {
             get {
@@ -2176,15 +2164,6 @@ namespace mRemoteNG {
             }
             set {
                 this["CompatibilityWarnLenovoAutoScrollUtility"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://update.mremoteng.org/announcement.txt")]
-        public string AnnouncementAddress {
-            get {
-                return ((string)(this["AnnouncementAddress"]));
             }
         }
         

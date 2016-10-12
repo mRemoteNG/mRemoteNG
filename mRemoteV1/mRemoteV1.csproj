@@ -116,7 +116,6 @@
     <Compile Include="App\Shutdown.cs" />
     <Compile Include="App\Startup.cs" />
     <Compile Include="App\SupportedCultures.cs" />
-    <Compile Include="App\Update\AnnouncementInfo.cs" />
     <Compile Include="App\Update\AppUpdater.cs" />
     <Compile Include="App\Export.cs" />
     <Compile Include="App\Import.cs" />
@@ -418,12 +417,6 @@
     <Compile Include="UI\Window\ActiveDirectoryImportWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Window\AnnouncementWindow.Designer.cs">
-      <DependentUpon>AnnouncementWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Window\AnnouncementWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\Window\BaseWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -611,10 +604,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ActiveDirectoryImportWindow.resx">
       <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\AnnouncementWindow.resx">
-      <DependentUpon>AnnouncementWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ComponentsCheckWindow.resx">
@@ -992,7 +981,6 @@
     <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
     <None Include="Resources\Icons_FamFamFam\News_Icon.ico" />
     <None Include="Resources\Images_FamFamFam\News.png" />
-    <None Include="Resources\Announcement\mRemote_Announcement.txt" />
     <None Include="Resources\Update\mRemote_Update.txt" />
     <Content Include="Resources\Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -12,10 +12,18 @@ namespace mRemoteNG.UI.Forms
     {
         private Dictionary<string, OptionsPage> _pages;
         private ImageList _pageIconImageList;
+        private readonly string pageName;
 
         public frmOptions()
         {
             InitializeComponent();
+            pageName = Language.strStartupExit;
+        }
+
+        public frmOptions(string pn)
+        {
+            InitializeComponent();
+            pageName = pn;
         }
 
         private void frmOptions_Load(object sender, EventArgs e)
@@ -72,7 +80,17 @@ namespace mRemoteNG.UI.Forms
 
         private void SetInitiallyActivatedPage()
         {
-            lstOptionPages.Items[0].Selected = true;
+            bool isSet = false;
+            for (int i = 0; i < lstOptionPages.Items.Count; i++)
+            {
+                if (!lstOptionPages.Items[i].Text.Equals(pageName)) continue;
+                lstOptionPages.Items[i].Selected = true;
+                isSet = true;
+                break;
+            }
+
+            if(!isSet)
+                lstOptionPages.Items[0].Selected = true;
         }
 
         private void btnOK_Click(object sender, EventArgs e)

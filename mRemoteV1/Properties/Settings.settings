@@ -419,9 +419,6 @@
     <Setting Name="InhDefaultExtApp" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="LastAnnouncement" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="CheckForUpdatesAsked" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -541,9 +538,6 @@
     </Setting>
     <Setting Name="CompatibilityWarnLenovoAutoScrollUtility" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="AnnouncementAddress" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://update.mremoteng.org/announcement.txt</Value>
     </Setting>
     <Setting Name="UpdateAddress" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://update.mremoteng.org/</Value>

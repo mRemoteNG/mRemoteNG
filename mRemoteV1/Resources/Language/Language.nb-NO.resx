@@ -914,9 +914,6 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Legg til tilkoblingspanel</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Kunngjøringer</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Se etter oppdateringer</value>
   </data>

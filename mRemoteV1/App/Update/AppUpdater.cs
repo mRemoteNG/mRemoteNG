@@ -15,65 +15,20 @@ namespace mRemoteNG.App.Update
 	{
         private UpdateInfo _currentUpdateInfo;
         private string _changeLog;
-        private AnnouncementInfo _currentAnnouncementInfo;
         private WebProxy _webProxy;
         private Thread _getUpdateInfoThread;
         private Thread _getChangeLogThread;
-        private Thread _getAnnouncementInfoThread;
 
         #region Public Properties
         public UpdateInfo CurrentUpdateInfo => _currentUpdateInfo;
 
 	    public string ChangeLog => _changeLog;
 
-	    public AnnouncementInfo CurrentAnnouncementInfo => _currentAnnouncementInfo;
+	    public bool IsGetUpdateInfoRunning => _getUpdateInfoThread != null && _getUpdateInfoThread.IsAlive;
 
-	    public bool IsGetUpdateInfoRunning
-		{
-			get
-			{
-				if (_getUpdateInfoThread != null)
-				{
-					if (_getUpdateInfoThread.IsAlive)
-					{
-						return true;
-					}
-				}
-				return false;
-			}
-		}
-		
-        public bool IsGetChangeLogRunning
-		{
-			get
-			{
-				if (_getChangeLogThread != null)
-				{
-					if (_getChangeLogThread.IsAlive)
-					{
-						return true;
-					}
-				}
-				return false;
-			}
-		}
-		
-        public bool IsGetAnnouncementInfoRunning
-		{
-			get
-			{
-				if (_getAnnouncementInfoThread != null)
-				{
-					if (_getAnnouncementInfoThread.IsAlive)
-					{
-						return true;
-					}
-				}
-				return false;
-			}
-		}
-		
-        public bool IsDownloadUpdateRunning => (_downloadUpdateWebClient != null);
+	    private bool IsGetChangeLogRunning => _getChangeLogThread != null && _getChangeLogThread.IsAlive;
+
+	    public bool IsDownloadUpdateRunning => (_downloadUpdateWebClient != null);
 
 	    #endregion
 		
@@ -120,16 +75,6 @@ namespace mRemoteNG.App.Update
 			return _currentUpdateInfo.Version > GeneralAppInfo.GetApplicationVersion();
 		}
 			
-		public bool IsAnnouncementAvailable()
-		{
-			if (_currentAnnouncementInfo == null || (!_currentAnnouncementInfo.IsValid || string.IsNullOrEmpty(_currentAnnouncementInfo.Name)))
-			{
-				return false;
-			}
-				
-			return (_currentAnnouncementInfo.Name != Settings.Default.LastAnnouncement);
-		}
-			
 		public void GetUpdateInfoAsync()
 		{
 			if (IsGetUpdateInfoRunning)
@@ -159,19 +104,6 @@ namespace mRemoteNG.App.Update
 			_getChangeLogThread.SetApartmentState(ApartmentState.STA);
 			_getChangeLogThread.IsBackground = true;
 			_getChangeLogThread.Start();
-		}
-			
-		public void GetAnnouncementInfoAsync()
-		{
-			if (IsGetAnnouncementInfoRunning)
-			{
-				_getAnnouncementInfoThread.Abort();
-			}
-				
-			_getAnnouncementInfoThread = new Thread(GetAnnouncementInfo);
-			_getAnnouncementInfoThread.SetApartmentState(ApartmentState.STA);
-			_getAnnouncementInfoThread.IsBackground = true;
-			_getAnnouncementInfoThread.Start();
 		}
 			
 		public void DownloadUpdateAsync()
@@ -215,7 +147,7 @@ namespace mRemoteNG.App.Update
         #region Private Methods
 		private WebClient CreateWebClient()
 		{
-			WebClient webClient = new WebClient();
+			var webClient = new WebClient();
 			webClient.Headers.Add("user-agent", GeneralAppInfo.UserAgent);
 			webClient.Proxy = _webProxy;
 			return webClient;
@@ -286,24 +218,6 @@ namespace mRemoteNG.App.Update
             GetChangeLogCompletedEventEvent?.Invoke(this, e);
         }
 			
-		private void GetAnnouncementInfo()
-		{
-			Uri announcementFileUri = new Uri(Convert.ToString(Settings.Default.AnnouncementAddress));
-			DownloadStringCompletedEventArgs e = DownloadString(announcementFileUri);
-				
-			if (!e.Cancelled && e.Error == null)
-			{
-				_currentAnnouncementInfo = AnnouncementInfo.FromString(e.Result);
-					
-				if (!string.IsNullOrEmpty(_currentAnnouncementInfo.Name))
-				{
-                    Settings.Default.LastAnnouncement = _currentAnnouncementInfo.Name;
-				}
-			}
-
-            GetAnnouncementInfoCompletedEventEvent?.Invoke(this, e);
-        }
-			
 		private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
             DownloadUpdateProgressChangedEventEvent?.Invoke(sender, e);
@@ -317,21 +231,21 @@ namespace mRemoteNG.App.Update
 			{
 				try
 				{
-					Authenticode updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath);
-					updateAuthenticode.RequireThumbprintMatch = true;
-					updateAuthenticode.ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint;
-						
-					if (updateAuthenticode.Verify() != Authenticode.StatusValue.Verified)
-					{
-						if (updateAuthenticode.Status == Authenticode.StatusValue.UnhandledException)
+				    Authenticode updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath)
+				    {
+				        RequireThumbprintMatch = true,
+				        ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint
+				    };
+
+				    if (updateAuthenticode.Verify() != Authenticode.StatusValue.Verified)
+				    {
+				        if (updateAuthenticode.Status == Authenticode.StatusValue.UnhandledException)
 						{
 							throw (updateAuthenticode.Exception);
 						}
-						else
-						{
-							throw (new Exception(updateAuthenticode.StatusMessage));
-						}
-					}
+
+				        throw (new Exception(updateAuthenticode.StatusMessage));
+				    }
 				}
 				catch (Exception ex)
 				{
@@ -378,20 +292,7 @@ namespace mRemoteNG.App.Update
             }
         }
 
-        private AsyncCompletedEventHandler GetAnnouncementInfoCompletedEventEvent;
-        public event AsyncCompletedEventHandler GetAnnouncementInfoCompletedEvent
-        {
-            add
-            {
-                GetAnnouncementInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(GetAnnouncementInfoCompletedEventEvent, value);
-            }
-            remove
-            {
-                GetAnnouncementInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(GetAnnouncementInfoCompletedEventEvent, value);
-            }
-        }
-
-        private DownloadProgressChangedEventHandler DownloadUpdateProgressChangedEventEvent;
+       private DownloadProgressChangedEventHandler DownloadUpdateProgressChangedEventEvent;
         public event DownloadProgressChangedEventHandler DownloadUpdateProgressChangedEvent
         {
             add

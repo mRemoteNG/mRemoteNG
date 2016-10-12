@@ -899,9 +899,6 @@ Visualizza il supporto Microsoft http://support.microsoft.com/kb/811833/it per o
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Aggiungi pannello delle connessioni</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Segnalazioni</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Verifica la presenza di aggiornamenti</value>
   </data>

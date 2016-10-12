@@ -1,6 +1,7 @@
 ﻿using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
+using mRemoteNG.UI;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
@@ -31,8 +32,6 @@ namespace mRemoteNG.App
         public static DockContent ErrorsPanel { get; set; } = new DockContent();
         public static ScreenshotManagerWindow ScreenshotForm { get; set; }
         public static DockContent ScreenshotPanel { get; set; } = new DockContent();
-        public static AnnouncementWindow AnnouncementForm { get; set; }
-        public static DockContent AnnouncementPanel { get; set; } = new DockContent();
         public static UpdateWindow UpdateForm { get; set; }
         public static DockContent UpdatePanel { get; set; } = new DockContent();
         public static SSHTransferWindow SshtransferForm { get; set; }
@@ -123,15 +122,6 @@ namespace mRemoteNG.App
                         _componentscheckPanel = _componentscheckForm;
                     }
                     _componentscheckForm.Show(frmMain.Default.pnlDock);
-                }
-                else if (windowType.Equals(WindowType.Announcement))
-                {
-                    if (AnnouncementForm == null || AnnouncementForm.IsDisposed)
-                    {
-                        AnnouncementForm = new AnnouncementWindow(AnnouncementPanel);
-                        AnnouncementPanel = AnnouncementForm;
-                    }
-                    AnnouncementForm.Show(frmMain.Default.pnlDock);
                 }
             }
             catch (Exception ex)

@@ -1,11 +1,10 @@
-namespace mRemoteNG.UI.Window
+namespace mRemoteNG.UI
 {
 	public enum WindowType
 	{
 		Tree = 0,
 		Connection = 1,
 		Config = 2,
-		Sessions = 3,
 		ErrorsAndInfos = 4,
 		ScreenshotManager = 5,
 		Options = 6,
@@ -18,6 +17,5 @@ namespace mRemoteNG.UI.Window
 		PortScan = 14,
 		UltraVNCSC = 16,
 		ComponentsCheck = 17,
-		Announcement = 18
 	}
 }

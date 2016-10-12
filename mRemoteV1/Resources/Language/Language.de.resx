@@ -915,9 +915,6 @@ Starte mit neuer Datei.</value>
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Verbindungs-Panel hinzufügen</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Ankündigungen</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Suche nach Updates</value>
   </data>

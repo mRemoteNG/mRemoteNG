@@ -890,9 +890,6 @@ VncSharp Control Version {0}</value>
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Додати Панель з'єднання</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Повідомлення</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Перевірка наявності оновлень</value>
   </data>
