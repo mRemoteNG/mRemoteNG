@@ -3,67 +3,21 @@ namespace mRemoteNG.Security
 {
 	public class Save
 	{
-		public Save(bool DisableEverything = false)
+		public Save(bool disableEverything = false)
 		{
-			if (DisableEverything == false)
-			{
-				_Username = true;
-				_Password = true;
-				_Domain = true;
-				_Inheritance = true;
-			}
+		    if (disableEverything) return;
+		    Username = true;
+		    Password = true;
+		    Domain = true;
+		    Inheritance = true;
 		}
-			
-		private bool _Username;
-        public bool Username
-		{
-			get
-			{
-				return _Username;
-			}
-			set
-			{
-				_Username = value;
-			}
-		}
-			
-		private bool _Password;
-        public bool Password
-		{
-			get
-			{
-				return _Password;
-			}
-			set
-			{
-				_Password = value;
-			}
-		}
-			
-		private bool _Domain;
-        public bool Domain
-		{
-			get
-			{
-				return _Domain;
-			}
-			set
-			{
-				_Domain = value;
-			}
-		}
-			
-		private bool _Inheritance;
-        public bool Inheritance
-		{
-			get
-			{
-				return _Inheritance;
-			}
-			set
-			{
-				_Inheritance = value;
-			}
-		}
+
+	    public bool Username { get; set; }
+
+	    public bool Password { get; set; }
+
+	    public bool Domain { get; set; }
+
+	    public bool Inheritance { get; set; }
 	}
 }
