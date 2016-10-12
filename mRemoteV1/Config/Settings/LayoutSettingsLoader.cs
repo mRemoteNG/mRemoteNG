@@ -1,6 +1,5 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
@@ -11,14 +10,14 @@ namespace mRemoteNG.Config.Settings
 {
     public class LayoutSettingsLoader
     {
-        private frmMain _MainForm;
+        private readonly frmMain _mainForm;
 
-        public LayoutSettingsLoader(frmMain MainForm)
+        public LayoutSettingsLoader(frmMain mainForm)
         {
-            _MainForm = MainForm;
+            _mainForm = mainForm;
         }
 
-        public void LoadPanelsFromXML()
+        public void LoadPanelsFromXml()
         {
             try
             {
@@ -26,25 +25,25 @@ namespace mRemoteNG.Config.Settings
                 Windows.ConfigPanel = null;
                 Windows.ErrorsPanel = null;
 
-                while (_MainForm.pnlDock.Contents.Count > 0)
+                while (_mainForm.pnlDock.Contents.Count > 0)
                 {
-                    DockContent dc = (DockContent)_MainForm.pnlDock.Contents[0];
+                    var dc = (DockContent)_mainForm.pnlDock.Contents[0];
                     dc.Close();
                 }
 
                 CreatePanels();
 #if !PORTABLE
-                string oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + GeneralAppInfo.ProductName + "\\" + SettingsFileInfo.LayoutFileName;
+                var oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + GeneralAppInfo.ProductName + "\\" + SettingsFileInfo.LayoutFileName;
 #endif
-                string newPath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
+                var newPath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
                 if (File.Exists(newPath))
                 {
-                    _MainForm.pnlDock.LoadFromXml(newPath, GetContentFromPersistString);
+                    _mainForm.pnlDock.LoadFromXml(newPath, GetContentFromPersistString);
 #if !PORTABLE
 				}
 				else if (File.Exists(oldPath))
 				{
-					_MainForm.pnlDock.LoadFromXml(oldPath, GetContentFromPersistString);
+					_mainForm.pnlDock.LoadFromXml(oldPath, GetContentFromPersistString);
 #endif
                 }
                 else
