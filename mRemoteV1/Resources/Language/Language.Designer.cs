@@ -6705,15 +6705,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to visionapp Remote Desktop 2008 CSV.
-        /// </summary>
-        internal static string strVisionAppRemoteDesktopCsv {
-            get {
-                return ResourceManager.GetString("strVisionAppRemoteDesktopCsv", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to VNC.
         /// </summary>
         internal static string strVnc {

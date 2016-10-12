@@ -2325,9 +2325,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strVersion" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="strVisionAppRemoteDesktopCsv" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV</value>
-  </data>
   <data name="strVnc" xml:space="preserve">
     <value>VNC</value>
   </data>

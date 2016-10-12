@@ -80,10 +80,6 @@ namespace mRemoteNG.App
                         serializer = new CsvConnectionsSerializerMremotengFormat();
                         ((CsvConnectionsSerializerMremotengFormat)serializer).SaveFilter = saveFilter;
                         break;
-			        case ConnectionsSaver.Format.vRDCSV:
-                        serializer = new CsvConnectionsSerializerRemoteDesktop2008Format();
-                        ((CsvConnectionsSerializerRemoteDesktop2008Format)serializer).SaveFilter = saveFilter;
-                        break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);
 			    }

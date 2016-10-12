@@ -2,7 +2,6 @@ using System;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -29,17 +28,14 @@ namespace mRemoteNG.Config.Connections
 {
 	public class ConnectionsSaver
 	{
-        #region Public Enums
 		public enum Format
 		{
 			None,
 			mRXML,
 			mRCSV,
 			vRDvRE,
-			vRDCSV,
 			SQL
 		}
-        #endregion
 				
         #region Private Properties
 		private XmlTextWriter _xmlTextWriter;
@@ -76,9 +72,6 @@ namespace mRemoteNG.Config.Connections
                     break;
 				case Format.vRDvRE:
 					SaveToVRE();
-					break;
-				case Format.vRDCSV:
-					SaveToRemoteDesktop2008FormattedCsv();
 					break;
 				default:
 					SaveToXml();
@@ -262,14 +255,6 @@ namespace mRemoteNG.Config.Connections
             var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveFilter = SaveFilter };
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
             var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
-            dataProvider.Save(csvContent);
-        }
-
-        private void SaveToRemoteDesktop2008FormattedCsv()
-        {
-            var csvSerializer = new CsvConnectionsSerializerRemoteDesktop2008Format();
-            var dataProvider = new FileDataProvider(ConnectionFileName);
-            var csvContent = csvSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);
         }
 				
