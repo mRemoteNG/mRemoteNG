@@ -235,10 +235,9 @@ namespace mRemoteNG.Security.SymmetricEncryption
                     var len = _aeadBlockCipher.ProcessBytes(cipherText, 0, cipherText.Length, plainText, 0);
                     _aeadBlockCipher.DoFinal(plainText, len);
                 }
-                catch (InvalidCipherTextException)
+                catch (InvalidCipherTextException e)
                 {
-                    //Return null if it doesn't authenticate
-                    return null;
+                    throw new Exception("Unable to decrypt text", e);
                 }
 
                 return plainText;
