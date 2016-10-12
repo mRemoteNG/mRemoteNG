@@ -834,9 +834,6 @@ Załadowano nowy plik połączeń.</value>
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Dodaj panel połączenia</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Powiadomienia</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Sprawdź aktualizacje</value>
   </data>

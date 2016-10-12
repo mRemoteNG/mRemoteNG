@@ -292,20 +292,7 @@ namespace mRemoteNG.App.Update
             }
         }
 
-        private AsyncCompletedEventHandler GetAnnouncementInfoCompletedEventEvent;
-        public event AsyncCompletedEventHandler GetAnnouncementInfoCompletedEvent
-        {
-            add
-            {
-                GetAnnouncementInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(GetAnnouncementInfoCompletedEventEvent, value);
-            }
-            remove
-            {
-                GetAnnouncementInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(GetAnnouncementInfoCompletedEventEvent, value);
-            }
-        }
-
-        private DownloadProgressChangedEventHandler DownloadUpdateProgressChangedEventEvent;
+       private DownloadProgressChangedEventHandler DownloadUpdateProgressChangedEventEvent;
         public event DownloadProgressChangedEventHandler DownloadUpdateProgressChangedEvent
         {
             add

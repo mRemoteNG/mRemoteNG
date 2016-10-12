@@ -896,9 +896,6 @@ Consultez l'article du support de Microsoft pour plus d'informations http://supp
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Ajouter un panneau de connexion</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Annonces</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Rechercher des mises à jour</value>
   </data>

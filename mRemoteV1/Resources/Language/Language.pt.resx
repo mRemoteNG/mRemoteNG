@@ -885,9 +885,6 @@ Descrição do erro: {1}</value>
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Adicionar o Painel de Ligação</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Anúncios</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Verificar se há atualizações</value>
   </data>

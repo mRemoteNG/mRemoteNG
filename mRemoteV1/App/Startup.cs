@@ -5,7 +5,6 @@ using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Window;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -15,6 +14,7 @@ using System.IO;
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.UI;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App

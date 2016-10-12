@@ -903,9 +903,6 @@ VncSharp 版本 {0}</value>
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>添加连接面板</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>公告</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>检查更新</value>
   </data>

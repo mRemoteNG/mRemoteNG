@@ -914,9 +914,6 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Voeg Connectie Paneel toe</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Aankondigingen</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Controleer voor beschikbare Updates</value>
   </data>

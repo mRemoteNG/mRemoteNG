@@ -815,7 +815,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check for updates and announcements at startup.
+        ///   Looks up a localized string similar to Check for updates at startup.
         /// </summary>
         internal static string strCheckForUpdatesOnStartup {
             get {
@@ -2727,15 +2727,6 @@ namespace mRemoteNG {
         internal static string strMenuAddConnectionPanel {
             get {
                 return ResourceManager.GetString("strMenuAddConnectionPanel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Announcements.
-        /// </summary>
-        internal static string strMenuAnnouncements {
-            get {
-                return ResourceManager.GetString("strMenuAnnouncements", resourceCulture);
             }
         }
         
@@ -6488,7 +6479,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements..
+        ///   Looks up a localized string similar to mRemoteNG can periodically connect to the mRemoteNG website to check for updates..
         /// </summary>
         internal static string strUpdateCheck {
             get {
@@ -6593,15 +6584,6 @@ namespace mRemoteNG {
         internal static string strUpdateFrequencyWeekly {
             get {
                 return ResourceManager.GetString("strUpdateFrequencyWeekly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The announcement information could not be downloaded..
-        /// </summary>
-        internal static string strUpdateGetAnnouncementInfoFailed {
-            get {
-                return ResourceManager.GetString("strUpdateGetAnnouncementInfoFailed", resourceCulture);
             }
         }
         

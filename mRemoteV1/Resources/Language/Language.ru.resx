@@ -920,9 +920,6 @@
   <data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Добавить Панель подключения</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
-    <value>Сообщения</value>
-  </data>
   <data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Проверка наличия обновлений</value>
   </data>
