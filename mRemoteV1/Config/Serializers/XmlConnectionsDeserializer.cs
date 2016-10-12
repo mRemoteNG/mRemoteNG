@@ -55,13 +55,18 @@ namespace mRemoteNG.Config.Serializers
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
             
             if (!(_confVersion > MaxSupportedConfVersion)) return;
+            ShowIncompatibleVersionDialogBox();
+            throw new Exception($"Incompatible connection file format (file format version {_confVersion}).");
+        }
+
+        private void ShowIncompatibleVersionDialogBox()
+        {
             CTaskDialog.ShowTaskDialogBox(
                 frmMain.Default,
                 Application.ProductName,
                 "Incompatible connection file format",
                 $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
-                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine,
-                    ConnectionFileName, _confVersion, MaxSupportedConfVersion),
+                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, _confVersion, MaxSupportedConfVersion),
                 "",
                 "",
                 "",
@@ -70,7 +75,6 @@ namespace mRemoteNG.Config.Serializers
                 ESysIcons.Error,
                 ESysIcons.Error
                 );
-            throw new Exception($"Incompatible connection file format (file format version {_confVersion}).");
         }
 
         public ConnectionTreeModel Deserialize()

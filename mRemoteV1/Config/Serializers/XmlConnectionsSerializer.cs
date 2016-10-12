@@ -100,7 +100,7 @@ namespace mRemoteNG.Config.Serializers
 
         private string WriteXmlToString(XmlDocument xmlDocument)
         {
-            var xmlString = "";
+            string xmlString;
             var xmlWriterSettings = new XmlWriterSettings {Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8};
             using (var stringWriter = new StringWriter())
             using (var xmlTextWriter = XmlWriter.Create(stringWriter, xmlWriterSettings))
@@ -148,8 +148,10 @@ namespace mRemoteNG.Config.Serializers
             _xmlTextWriter.WriteStartElement("Connections"); // Do not localize
             _xmlTextWriter.WriteAttributeString("Name", "", rootNodeInfo.Name);
             _xmlTextWriter.WriteAttributeString("Export", "", Convert.ToString(Export));
-            _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", Enum.GetName(typeof(BlockCipherEngines), mRemoteNG.Settings.Default.EncryptionEngine));
-            _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", Enum.GetName(typeof(BlockCipherModes), mRemoteNG.Settings.Default.EncryptionBlockCipherMode));
+            var cipherEngine = Enum.GetName(typeof(BlockCipherEngines), mRemoteNG.Settings.Default.EncryptionEngine);
+            _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", cipherEngine ?? "");
+            var cipherMode = Enum.GetName(typeof(BlockCipherModes), mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
+            _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", cipherMode ?? "");
             _xmlTextWriter.WriteAttributeString("FullFileEncryption", "", UseFullEncryption.ToString());
 
             if (Export)

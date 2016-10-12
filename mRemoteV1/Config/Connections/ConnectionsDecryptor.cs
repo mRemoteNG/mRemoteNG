@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -32,13 +31,13 @@ namespace mRemoteNG.Config.Connections
             if (string.IsNullOrEmpty(xml)) return "";
             if (xml.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>")) return xml;
 
-            var strDecr = "";
+            var decryptedContent = "";
             bool notDecr;
 
             try
             {
-                strDecr = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
-                notDecr = strDecr == xml;
+                decryptedContent = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
+                notDecr = decryptedContent == xml;
             }
             catch (Exception)
             {
@@ -49,16 +48,16 @@ namespace mRemoteNG.Config.Connections
             {
                 if (Authenticate(xml, true))
                 {
-                    strDecr = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
+                    decryptedContent = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
                     notDecr = false;
                 }
 
                 if (notDecr == false)
-                    return strDecr;
+                    return decryptedContent;
             }
             else
             {
-                return strDecr;
+                return decryptedContent;
             }
 
             return "";
