@@ -153,7 +153,7 @@ namespace mRemoteNG.Config.Connections
                     isVerified = true;
 
                 if (isVerified == false)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProdName));
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProductName));
             }
             catch (Exception ex)
             {

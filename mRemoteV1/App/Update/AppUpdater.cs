@@ -117,7 +117,7 @@ namespace mRemoteNG.App.Update
 				return false;
 			}
 				
-			return _currentUpdateInfo.Version > GeneralAppInfo.getVer();
+			return _currentUpdateInfo.Version > GeneralAppInfo.GetApplicationVersion();
 		}
 			
 		public bool IsAnnouncementAvailable()

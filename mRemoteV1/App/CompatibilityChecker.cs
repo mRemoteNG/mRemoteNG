@@ -20,7 +20,7 @@ namespace mRemoteNG.App
         {
             if (FipsPolicyEnabledForServer2003() || FipsPolicyEnabledForServer2008AndNewer())
             {
-                MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProdName, GeneralAppInfo.ProdName, MessageBoxButtons.OK, MessageBoxIcon.Error));
+                MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName, GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error));
                 Environment.Exit(1);
             }
         }
