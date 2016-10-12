@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -16,7 +15,6 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.Rlogin;
 using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Messages;
 using mRemoteNG.Tree;
 
 
@@ -43,9 +41,6 @@ namespace mRemoteNG.Connection
 
         [Browsable(false)]
         public int PositionID { get; set; }
-
-	    [Browsable(false)]
-        public TreeNode TreeNode { get; set; }
 
         [Browsable(false)]
         public bool IsQuickConnect { get; set; }
@@ -219,7 +214,7 @@ namespace mRemoteNG.Connection
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage(Language.strConnectionSetDefaultPortFailed, ex, MessageClass.ErrorMsg);
+                Runtime.MessageCollector.AddExceptionMessage(Language.strConnectionSetDefaultPortFailed, ex);
                 return 0;
 			}
 		}
@@ -258,7 +253,7 @@ namespace mRemoteNG.Connection
         {
             RDGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod) Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
             RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
+            RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;

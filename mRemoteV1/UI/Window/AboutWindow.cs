@@ -287,9 +287,9 @@ namespace mRemoteNG.UI.Window
 					
 			try
 			{
-				lblCopyright.Text = GeneralAppInfo.copyright;
+				lblCopyright.Text = GeneralAppInfo.Copyright;
 						
-				lblVersion.Text = @"Version " + GeneralAppInfo.version;
+				lblVersion.Text = @"Version " + GeneralAppInfo.ApplicationVersion;
 						
 				if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
 				{

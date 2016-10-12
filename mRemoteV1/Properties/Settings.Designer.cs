@@ -2286,5 +2286,29 @@ namespace mRemoteNG {
                 this["ConRDPOverallConnectionTimeout"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AES")]
+        public global::mRemoteNG.Security.BlockCipherEngines EncryptionEngine {
+            get {
+                return ((global::mRemoteNG.Security.BlockCipherEngines)(this["EncryptionEngine"]));
+            }
+            set {
+                this["EncryptionEngine"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GCM")]
+        public global::mRemoteNG.Security.BlockCipherModes EncryptionBlockCipherMode {
+            get {
+                return ((global::mRemoteNG.Security.BlockCipherModes)(this["EncryptionBlockCipherMode"]));
+            }
+            set {
+                this["EncryptionBlockCipherMode"] = value;
+            }
+        }
     }
 }

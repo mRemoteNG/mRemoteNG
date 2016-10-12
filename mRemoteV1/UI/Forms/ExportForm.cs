@@ -28,26 +28,17 @@ namespace mRemoteNG.UI.Forms
 		{
 			get
 			{
-				ExportFormat exportFormat = cboFileFormat.SelectedItem as ExportFormat;
-				if (exportFormat == null)
-				{
-					return Config.Connections.ConnectionsSaver.Format.mRXML;
-				}
-				else
-				{
-					return exportFormat.Format;
-				}
+			    var exportFormat = cboFileFormat.SelectedItem as ExportFormat;
+			    return exportFormat?.Format ?? ConnectionsSaver.Format.mRXML;
 			}
-			set
+            set
 			{
-				foreach (object item in cboFileFormat.Items)
+				foreach (var item in cboFileFormat.Items)
 				{
-					ExportFormat exportFormat = item as ExportFormat;
-				    if (exportFormat?.Format == value)
-					{
-						cboFileFormat.SelectedItem = item;
-						break;
-					}
+					var exportFormat = item as ExportFormat;
+				    if (exportFormat?.Format != value) continue;
+				    cboFileFormat.SelectedItem = item;
+				    break;
 				}
 			}
 		}
@@ -185,9 +176,8 @@ namespace mRemoteNG.UI.Forms
         private void ExportForm_Load(object sender, EventArgs e)
 		{
 			cboFileFormat.Items.Clear();
-            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.ConnectionsSaver.Format.mRXML));
-            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.ConnectionsSaver.Format.mRCSV));
-            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.ConnectionsSaver.Format.vRDCSV));
+            cboFileFormat.Items.Add(new ExportFormat(ConnectionsSaver.Format.mRXML));
+            cboFileFormat.Items.Add(new ExportFormat(ConnectionsSaver.Format.mRCSV));
 			cboFileFormat.SelectedIndex = 0;
 				
 			ApplyLanguage();
@@ -200,29 +190,31 @@ namespace mRemoteNG.UI.Forms
 
         private void btnBrowse_Click(object sender, EventArgs e)
 		{
-			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+			using (var saveFileDialog = new SaveFileDialog())
 			{
 				saveFileDialog.CheckPathExists = true;
 				saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 				saveFileDialog.OverwritePrompt = true;
-					
-				List<string> fileTypes = new List<string>();
+				
+				var fileTypes = new List<string>();
 				fileTypes.AddRange(new[] {Language.strFiltermRemoteXML, "*.xml"});
 				fileTypes.AddRange(new[] {Language.strFiltermRemoteCSV, "*.csv"});
-				fileTypes.AddRange(new[] {Language.strFiltervRD2008CSV, "*.csv"});
 				fileTypes.AddRange(new[] {Language.strFilterAll, "*.*"});
-					
+				
 				saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
-					
-				if (saveFileDialog.ShowDialog(this) != DialogResult.OK)
-				{
+			    SelectFileTypeBasedOnSaveFormat(saveFileDialog);
+
+                if (saveFileDialog.ShowDialog(this) != DialogResult.OK)
 					return ;
-				}
-					
+				
 				txtFileName.Text = saveFileDialog.FileName;
             }
-				
 		}
+
+        private void SelectFileTypeBasedOnSaveFormat(FileDialog saveFileDialog)
+        {
+            saveFileDialog.FilterIndex = SaveFormat == ConnectionsSaver.Format.mRCSV ? 2 : 1;
+        }
 
         private void btnOK_Click(object sender, EventArgs e)
 		{
@@ -276,12 +268,12 @@ namespace mRemoteNG.UI.Forms
 		{
             #region Public Properties
 
-		    public Config.Connections.ConnectionsSaver.Format Format { get; }
+		    public ConnectionsSaver.Format Format { get; }
 
 		    #endregion
 				
             #region Constructors
-			public ExportFormat(Config.Connections.ConnectionsSaver.Format format)
+			public ExportFormat(ConnectionsSaver.Format format)
 			{
 				Format = format;
 			}
@@ -292,12 +284,10 @@ namespace mRemoteNG.UI.Forms
 			{
 				switch (Format)
 				{
-					case Config.Connections.ConnectionsSaver.Format.mRXML:
+					case ConnectionsSaver.Format.mRXML:
 						return Language.strMremoteNgXml;
-                    case Config.Connections.ConnectionsSaver.Format.mRCSV:
+                    case ConnectionsSaver.Format.mRCSV:
 						return Language.strMremoteNgCsv;
-                    case Config.Connections.ConnectionsSaver.Format.vRDCSV:
-						return Language.strVisionAppRemoteDesktopCsv;
 					default:
 						return Format.ToString();
 				}

@@ -1530,6 +1530,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Block Cipher Mode.
+        /// </summary>
+        internal static string strEncryptionBlockCipherMode {
+            get {
+                return ResourceManager.GetString("strEncryptionBlockCipherMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption Engine.
+        /// </summary>
+        internal static string strEncryptionEngine {
+            get {
+                return ResourceManager.GetString("strEncryptionEngine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End IP.
         /// </summary>
         internal static string strEndIP {
@@ -5984,6 +6002,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Security.
+        /// </summary>
+        internal static string strTabSecurity {
+            get {
+                return ResourceManager.GetString("strTabSecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updates.
         /// </summary>
         internal static string strTabUpdates {
@@ -6656,15 +6683,6 @@ namespace mRemoteNG {
         internal static string strVersion {
             get {
                 return ResourceManager.GetString("strVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to visionapp Remote Desktop 2008 CSV.
-        /// </summary>
-        internal static string strVisionAppRemoteDesktopCsv {
-            get {
-                return ResourceManager.GetString("strVisionAppRemoteDesktopCsv", resourceCulture);
             }
         }
         

@@ -55,6 +55,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(SqlServerPage).Name, new SqlServerPage()},
                 {typeof(UpdatesPage).Name, new UpdatesPage()},
                 {typeof(ThemePage).Name, new ThemePage()},
+                {typeof(SecurityPage).Name, new SecurityPage()},
                 {typeof(AdvancedPage).Name, new AdvancedPage()}
             };
         }

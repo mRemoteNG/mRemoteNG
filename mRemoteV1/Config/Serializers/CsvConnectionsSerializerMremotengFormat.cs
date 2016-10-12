@@ -11,8 +11,9 @@ namespace mRemoteNG.Config.Serializers
     public class CsvConnectionsSerializerMremotengFormat : ISerializer<string>
     {
         private string _csv = "";
+        private ConnectionInfo _serializationTarget;
 
-        public Save SaveSecurity { get; set; }
+        public SaveFilter SaveFilter { get; set; }
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
@@ -23,6 +24,7 @@ namespace mRemoteNG.Config.Serializers
         public string Serialize(ConnectionInfo serializationTarget)
         {
             _csv = "";
+            _serializationTarget = serializationTarget;
             WriteCsvHeader();
             SerializeNodesRecursive(serializationTarget);
             return _csv;
@@ -32,14 +34,14 @@ namespace mRemoteNG.Config.Serializers
         {
             var csvHeader = string.Empty;
             csvHeader += "Name;Folder;Description;Icon;Panel;";
-            if (SaveSecurity.Username)
+            if (SaveFilter.SaveUsername)
                 csvHeader += "Username;";
-            if (SaveSecurity.Password)
+            if (SaveFilter.SavePassword)
                 csvHeader += "Password;";
-            if (SaveSecurity.Domain)
+            if (SaveFilter.SaveDomain)
                 csvHeader += "Domain;";
             csvHeader += "Hostname;Protocol;PuttySession;Port;ConnectToConsole;UseCredSsp;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;";
-            if (SaveSecurity.Inheritance)
+            if (SaveFilter.SaveInheritance)
                 csvHeader += "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;InheritUseConsoleSession;InheritUseCredSsp;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain";
             _csv += csvHeader;
         }
@@ -63,30 +65,22 @@ namespace mRemoteNG.Config.Serializers
 
         private void SerializeConnectionInfo(ConnectionInfo con)
         {
-            var nodePath = con.TreeNode.FullPath;
-
-            var firstSlash = nodePath.IndexOf("\\", StringComparison.Ordinal);
-            nodePath = nodePath.Remove(0, firstSlash + 1);
-            var lastSlash = nodePath.LastIndexOf("\\", StringComparison.Ordinal);
-
-            nodePath = lastSlash > 0 ? nodePath.Remove(lastSlash) : "";
-
             var csvLine = Environment.NewLine;
 
-            csvLine += con.Name + ";" + nodePath + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
+            csvLine += con.Name + ";" + GetNodePath(con) + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
 
-            if (SaveSecurity.Username)
+            if (SaveFilter.SaveUsername)
                 csvLine += con.Username + ";";
 
-            if (SaveSecurity.Password)
+            if (SaveFilter.SavePassword)
                 csvLine += con.Password + ";";
 
-            if (SaveSecurity.Domain)
+            if (SaveFilter.SaveDomain)
                 csvLine += con.Domain + ";";
 
             csvLine += con.Hostname + ";" + con.Protocol + ";" + con.PuttySession + ";" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + Convert.ToString(con.UseCredSsp) + ";" + con.RenderingEngine + ";" + con.ICAEncryptionStrength + ";" + con.RDPAuthenticationLevel + ";" + con.LoadBalanceInfo + ";" + con.Colors + ";" + con.Resolution + ";" + Convert.ToString(con.AutomaticResize) + ";" + Convert.ToString(con.DisplayWallpaper) + ";" + Convert.ToString(con.DisplayThemes) + ";" + Convert.ToString(con.EnableFontSmoothing) + ";" + Convert.ToString(con.EnableDesktopComposition) + ";" + Convert.ToString(con.CacheBitmaps) + ";" + Convert.ToString(con.RedirectDiskDrives) + ";" + Convert.ToString(con.RedirectPorts) + ";" + Convert.ToString(con.RedirectPrinters) + ";" + Convert.ToString(con.RedirectSmartCards) + ";" + con.RedirectSound + ";" + Convert.ToString(con.RedirectKeys) + ";" + con.PreExtApp + ";" + con.PostExtApp + ";" + con.MacAddress + ";" + con.UserField + ";" + con.ExtApp + ";" + con.VNCCompression + ";" + con.VNCEncoding + ";" + con.VNCAuthMode + ";" + con.VNCProxyType + ";" + con.VNCProxyIP + ";" + Convert.ToString(con.VNCProxyPort) + ";" + con.VNCProxyUsername + ";" + con.VNCProxyPassword + ";" + con.VNCColors + ";" + con.VNCSmartSizeMode + ";" + Convert.ToString(con.VNCViewOnly) + ";";
 
-            if (SaveSecurity.Inheritance)
+            if (SaveFilter.SaveInheritance)
             {
                 csvLine += con.Inheritance.CacheBitmaps + ";" + 
                     con.Inheritance.Colors + ";" +
@@ -136,6 +130,19 @@ namespace mRemoteNG.Config.Serializers
             }
 
             _csv += csvLine;
+        }
+
+        private string GetNodePath(ConnectionInfo connectionInfo)
+        {
+            var nodePath = "";
+            var container = connectionInfo.Parent;
+            while (container != _serializationTarget)
+            {
+                container = container.Parent;
+                nodePath += $@"{container.Name}\";
+            }
+            nodePath = nodePath.TrimEnd('\\');
+            return nodePath;
         }
     }
 }

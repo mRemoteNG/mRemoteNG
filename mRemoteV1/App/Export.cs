@@ -20,7 +20,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-			    var saveSecurity = new Save();
+			    var saveSecurity = new SaveFilter();
 					
 				using (var exportForm = new ExportForm())
 				{
@@ -50,10 +50,10 @@ namespace mRemoteNG.App
 							break;
 					}
 						
-					saveSecurity.Username = exportForm.IncludeUsername;
-					saveSecurity.Password = exportForm.IncludePassword;
-					saveSecurity.Domain = exportForm.IncludeDomain;
-					saveSecurity.Inheritance = exportForm.IncludeInheritance;
+					saveSecurity.SaveUsername = exportForm.IncludeUsername;
+					saveSecurity.SavePassword = exportForm.IncludePassword;
+					saveSecurity.SaveDomain = exportForm.IncludeDomain;
+					saveSecurity.SaveInheritance = exportForm.IncludeInheritance;
 						
 					SaveExportFile(exportForm.FileName, exportForm.SaveFormat, saveSecurity, exportTarget);
 				}
@@ -65,7 +65,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, Save saveSecurity, ConnectionInfo exportTarget)
+		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, SaveFilter saveFilter, ConnectionInfo exportTarget)
 		{
 			try
 			{
@@ -74,15 +74,11 @@ namespace mRemoteNG.App
 			    {
 			        case ConnectionsSaver.Format.mRXML:
                         serializer = new XmlConnectionsSerializer();
-			            ((XmlConnectionsSerializer) serializer).SaveSecurity = saveSecurity;
+			            ((XmlConnectionsSerializer) serializer).SaveFilter = saveFilter;
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:
                         serializer = new CsvConnectionsSerializerMremotengFormat();
-                        ((CsvConnectionsSerializerMremotengFormat)serializer).SaveSecurity = saveSecurity;
-                        break;
-			        case ConnectionsSaver.Format.vRDCSV:
-                        serializer = new CsvConnectionsSerializerRemoteDesktop2008Format();
-                        ((CsvConnectionsSerializerRemoteDesktop2008Format)serializer).SaveSecurity = saveSecurity;
+                        ((CsvConnectionsSerializerMremotengFormat)serializer).SaveFilter = saveFilter;
                         break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

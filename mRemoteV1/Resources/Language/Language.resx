@@ -2319,9 +2319,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strVersion" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="strVisionAppRemoteDesktopCsv" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV</value>
-  </data>
   <data name="strVnc" xml:space="preserve">
     <value>VNC</value>
   </data>
@@ -2390,5 +2387,14 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strNodeNotDraggable" xml:space="preserve">
     <value>This node is not draggable.</value>
+  </data>
+  <data name="strEncryptionBlockCipherMode" xml:space="preserve">
+    <value>Block Cipher Mode</value>
+  </data>
+  <data name="strEncryptionEngine" xml:space="preserve">
+    <value>Encryption Engine</value>
+  </data>
+  <data name="strTabSecurity" xml:space="preserve">
+    <value>Security</value>
   </data>
 </root>

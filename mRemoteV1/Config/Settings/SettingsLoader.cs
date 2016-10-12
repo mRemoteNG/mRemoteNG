@@ -16,22 +16,22 @@ namespace mRemoteNG.Config.Settings
 {
     public class SettingsLoader
 	{
-		private frmMain _MainForm;
-        private LayoutSettingsLoader _layoutSettingsLoader;
-        private ExternalAppsLoader _externalAppsLoader;
+		private frmMain _mainForm;
+        private readonly LayoutSettingsLoader _layoutSettingsLoader;
+        private readonly ExternalAppsLoader _externalAppsLoader;
 
         public frmMain MainForm
 		{
-			get { return _MainForm; }
-			set { _MainForm = value; }
+			get { return _mainForm; }
+			set { _mainForm = value; }
 		}
 		
         
-		public SettingsLoader(frmMain MainForm)
+		public SettingsLoader(frmMain mainForm)
 		{
-            _MainForm = MainForm;
-            _layoutSettingsLoader = new LayoutSettingsLoader(_MainForm);
-            _externalAppsLoader = new ExternalAppsLoader(_MainForm);
+            _mainForm = mainForm;
+            _layoutSettingsLoader = new LayoutSettingsLoader(_mainForm);
+            _externalAppsLoader = new ExternalAppsLoader(_mainForm);
         }
         
         #region Public Methods
@@ -51,8 +51,8 @@ namespace mRemoteNG.Config.Settings
                 SetShowSystemTrayIcon();
                 SetAutoSave();
                 SetConDefaultPassword();
-				LoadPanelsFromXML();
-				LoadExternalAppsFromXML();
+				LoadPanelsFromXml();
+				LoadExternalAppsFromXml();
                 SetAlwaysShowPanelTabs();
 						
 				if (mRemoteNG.Settings.Default.ResetToolbars)
@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Settings
         private static void SetConDefaultPassword()
         {
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            mRemoteNG.Settings.Default.ConDefaultPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, GeneralAppInfo.EncryptionKey);
+            mRemoteNG.Settings.Default.ConDefaultPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, Runtime.EncryptionKey);
         }
 
         private static void SetAlwaysShowPanelTabs()
@@ -94,32 +94,32 @@ namespace mRemoteNG.Config.Settings
 
         private void SetApplicationWindowPositionAndSize()
         {
-            _MainForm.WindowState = FormWindowState.Normal;
+            _mainForm.WindowState = FormWindowState.Normal;
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Normal)
             {
                 if (!mRemoteNG.Settings.Default.MainFormLocation.IsEmpty)
-                    _MainForm.Location = mRemoteNG.Settings.Default.MainFormLocation;
+                    _mainForm.Location = mRemoteNG.Settings.Default.MainFormLocation;
                 if (!mRemoteNG.Settings.Default.MainFormSize.IsEmpty)
-                    _MainForm.Size = mRemoteNG.Settings.Default.MainFormSize;
+                    _mainForm.Size = mRemoteNG.Settings.Default.MainFormSize;
             }
             else
             {
                 if (!mRemoteNG.Settings.Default.MainFormRestoreLocation.IsEmpty)
-                    _MainForm.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
+                    _mainForm.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
                 if (!mRemoteNG.Settings.Default.MainFormRestoreSize.IsEmpty)
-                    _MainForm.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
+                    _mainForm.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
             }
 
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Maximized)
             {
-                _MainForm.WindowState = FormWindowState.Maximized;
+                _mainForm.WindowState = FormWindowState.Maximized;
             }
 
             // Make sure the form is visible on the screen
             const int minHorizontal = 300;
             const int minVertical = 150;
-            Rectangle screenBounds = Screen.FromHandle(_MainForm.Handle).Bounds;
-            Rectangle newBounds = _MainForm.Bounds;
+            var screenBounds = Screen.FromHandle(_mainForm.Handle).Bounds;
+            var newBounds = _mainForm.Bounds;
 
             if (newBounds.Right < screenBounds.Left + minHorizontal)
                 newBounds.X = screenBounds.Left + minHorizontal - newBounds.Width;
@@ -130,15 +130,15 @@ namespace mRemoteNG.Config.Settings
             if (newBounds.Top > screenBounds.Bottom - minVertical)
                 newBounds.Y = screenBounds.Bottom - minVertical;
 
-            _MainForm.Location = newBounds.Location;
+            _mainForm.Location = newBounds.Location;
         }
 
         private void SetAutoSave()
         {
             if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes > 0)
             {
-                _MainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
-                _MainForm.tmrAutoSave.Enabled = true;
+                _mainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
+                _mainForm.tmrAutoSave.Enabled = true;
             }
         }
 
@@ -146,8 +146,8 @@ namespace mRemoteNG.Config.Settings
         {
             if (mRemoteNG.Settings.Default.MainFormKiosk)
             {
-                _MainForm.Fullscreen.Value = true;
-                _MainForm.mMenViewFullscreen.Checked = true;
+                _mainForm.Fullscreen.Value = true;
+                _mainForm.mMenViewFullscreen.Checked = true;
             }
         }
 
@@ -239,12 +239,12 @@ namespace mRemoteNG.Config.Settings
 			}
 		}
 		
-		public void LoadPanelsFromXML()
+		public void LoadPanelsFromXml()
 		{
-            _layoutSettingsLoader.LoadPanelsFromXML();
+            _layoutSettingsLoader.LoadPanelsFromXml();
 		}
 		
-		public void LoadExternalAppsFromXML()
+		public void LoadExternalAppsFromXml()
 		{
             _externalAppsLoader.LoadExternalAppsFromXML();
         }
