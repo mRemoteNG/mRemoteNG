@@ -294,7 +294,7 @@ namespace mRemoteNG.UI.Forms
                     Language.strAskUpdatesCommandAskLater
                 };
 
-                CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProdName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProdName),
+                CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
                     "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
                 if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
