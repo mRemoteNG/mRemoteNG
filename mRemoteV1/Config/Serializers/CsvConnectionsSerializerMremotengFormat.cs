@@ -11,6 +11,7 @@ namespace mRemoteNG.Config.Serializers
     public class CsvConnectionsSerializerMremotengFormat : ISerializer<string>
     {
         private string _csv = "";
+        private ConnectionInfo _serializationTarget;
 
         public SaveFilter SaveFilter { get; set; }
 
@@ -23,6 +24,7 @@ namespace mRemoteNG.Config.Serializers
         public string Serialize(ConnectionInfo serializationTarget)
         {
             _csv = "";
+            _serializationTarget = serializationTarget;
             WriteCsvHeader();
             SerializeNodesRecursive(serializationTarget);
             return _csv;
@@ -63,17 +65,9 @@ namespace mRemoteNG.Config.Serializers
 
         private void SerializeConnectionInfo(ConnectionInfo con)
         {
-            var nodePath = con.TreeNode.FullPath;
-
-            var firstSlash = nodePath.IndexOf("\\", StringComparison.Ordinal);
-            nodePath = nodePath.Remove(0, firstSlash + 1);
-            var lastSlash = nodePath.LastIndexOf("\\", StringComparison.Ordinal);
-
-            nodePath = lastSlash > 0 ? nodePath.Remove(lastSlash) : "";
-
             var csvLine = Environment.NewLine;
 
-            csvLine += con.Name + ";" + nodePath + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
+            csvLine += con.Name + ";" + GetNodePath(con) + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
 
             if (SaveFilter.SaveUsername)
                 csvLine += con.Username + ";";
@@ -136,6 +130,19 @@ namespace mRemoteNG.Config.Serializers
             }
 
             _csv += csvLine;
+        }
+
+        private string GetNodePath(ConnectionInfo connectionInfo)
+        {
+            var nodePath = "";
+            var container = connectionInfo.Parent;
+            while (container != _serializationTarget)
+            {
+                container = container.Parent;
+                nodePath += $@"{container.Name}\";
+            }
+            nodePath = nodePath.TrimEnd('\\');
+            return nodePath;
         }
     }
 }
