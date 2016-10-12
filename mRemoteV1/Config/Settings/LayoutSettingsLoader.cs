@@ -34,7 +34,7 @@ namespace mRemoteNG.Config.Settings
 
                 CreatePanels();
 #if !PORTABLE
-                string oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + GeneralAppInfo.ProdName + "\\" + SettingsFileInfo.LayoutFileName;
+                string oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + GeneralAppInfo.ProductName + "\\" + SettingsFileInfo.LayoutFileName;
 #endif
                 string newPath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
                 if (File.Exists(newPath))
