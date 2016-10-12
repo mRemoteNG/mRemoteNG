@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -19,6 +20,11 @@ namespace mRemoteNG.Config.Connections
         public ConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode)
         {
             _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
+        }
+
+        public string Decrypt(string plainText)
+        {
+            return _cryptographyProvider.Decrypt(plainText, Runtime.EncryptionKey);
         }
 
         public string DecryptConnections(string xml)

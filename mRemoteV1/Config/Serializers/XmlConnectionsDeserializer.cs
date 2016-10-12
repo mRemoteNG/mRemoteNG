@@ -40,7 +40,8 @@ namespace mRemoteNG.Config.Serializers
 
         private void LoadXmlConnectionData(string connections)
         {
-            //connections = _decryptor.DecryptConnections(connections);
+            _decryptor = new ConnectionsDecryptor();
+            connections = _decryptor.DecryptConnections(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
                 _xmlDocument.LoadXml(connections);
@@ -99,6 +100,15 @@ namespace mRemoteNG.Config.Serializers
                         mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
                         mRemoteNG.Settings.Default.CustomConsPath = "";
                         return null;
+                    }
+                }
+
+                if (_confVersion >= 2.6)
+                {
+                    if (rootXmlElement?.Attributes["FullFileEncryption"].Value == "True")
+                    {
+                        var decryptedContent = _decryptor.Decrypt(rootXmlElement.InnerText);
+                        rootXmlElement.InnerXml = decryptedContent;
                     }
                 }
 
