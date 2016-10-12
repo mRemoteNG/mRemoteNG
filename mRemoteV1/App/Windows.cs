@@ -1,7 +1,7 @@
-﻿using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Window;
-using System;
+﻿using System;
 using mRemoteNG.UI;
+using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
@@ -35,15 +35,15 @@ namespace mRemoteNG.App
         public static UpdateWindow UpdateForm { get; set; }
         public static DockContent UpdatePanel { get; set; } = new DockContent();
         public static SSHTransferWindow SshtransferForm { get; set; }
-        
-        
+
+
         public static void Show(WindowType windowType)
         {
             try
             {
                 if (windowType.Equals(WindowType.About))
                 {
-                    if (_aboutForm == null || _aboutForm.IsDisposed)
+                    if ((_aboutForm == null) || _aboutForm.IsDisposed)
                     {
                         _aboutForm = new AboutWindow(_aboutPanel);
                         _aboutPanel = _aboutForm;
@@ -52,7 +52,7 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.ActiveDirectoryImport))
                 {
-                    if (_adimportForm == null || _adimportForm.IsDisposed)
+                    if ((_adimportForm == null) || _adimportForm.IsDisposed)
                     {
                         _adimportForm = new ActiveDirectoryImportWindow(_adimportPanel);
                         _adimportPanel = _adimportForm;
@@ -74,7 +74,7 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.Update))
                 {
-                    if (UpdateForm == null || UpdateForm.IsDisposed)
+                    if ((UpdateForm == null) || UpdateForm.IsDisposed)
                     {
                         UpdateForm = new UpdateWindow(UpdatePanel);
                         UpdatePanel = UpdateForm;
@@ -83,7 +83,7 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.Help))
                 {
-                    if (_helpForm == null || _helpForm.IsDisposed)
+                    if ((_helpForm == null) || _helpForm.IsDisposed)
                     {
                         _helpForm = new HelpWindow(_helpPanel);
                         _helpPanel = _helpForm;
@@ -92,7 +92,7 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.ExternalApps))
                 {
-                    if (_externalappsForm == null || _externalappsForm.IsDisposed)
+                    if ((_externalappsForm == null) || _externalappsForm.IsDisposed)
                     {
                         _externalappsForm = new ExternalToolsWindow(_externalappsPanel);
                         _externalappsPanel = _externalappsForm;
@@ -107,7 +107,7 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.UltraVNCSC))
                 {
-                    if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
+                    if ((_ultravncscForm == null) || _ultravncscForm.IsDisposed)
                     {
                         _ultravncscForm = new UltraVNCWindow(_ultravncscPanel);
                         _ultravncscPanel = _ultravncscForm;
@@ -116,7 +116,7 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.ComponentsCheck))
                 {
-                    if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
+                    if ((_componentscheckForm == null) || _componentscheckForm.IsDisposed)
                     {
                         _componentscheckForm = new ComponentsCheckWindow(_componentscheckPanel);
                         _componentscheckPanel = _componentscheckForm;

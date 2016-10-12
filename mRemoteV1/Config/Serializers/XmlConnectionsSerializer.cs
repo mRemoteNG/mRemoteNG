@@ -18,9 +18,9 @@ namespace mRemoteNG.Config.Serializers
 {
     public class XmlConnectionsSerializer : ISerializer<string>
     {
+        private ICryptographyProvider _cryptographyProvider;
         private SecureString _password = Runtime.EncryptionKey;
         private XmlTextWriter _xmlTextWriter;
-        private ICryptographyProvider _cryptographyProvider;
 
         public bool Export { get; set; }
         public SaveFilter SaveFilter { get; set; } = new SaveFilter();
@@ -29,14 +29,15 @@ namespace mRemoteNG.Config.Serializers
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+            var rootNode = (RootNodeInfo) connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return Serialize(rootNode);
         }
 
         public string Serialize(ConnectionInfo serializationTarget)
         {
             var factory = new CryptographyProviderFactory();
-            _cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
+            _cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine,
+                mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
             return SerializeConnectionsData(serializationTarget);
         }
 
@@ -101,13 +102,20 @@ namespace mRemoteNG.Config.Serializers
         private string WriteXmlToString(XmlDocument xmlDocument)
         {
             string xmlString;
-            var xmlWriterSettings = new XmlWriterSettings {Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8};
-            using (var stringWriter = new StringWriter())
-            using (var xmlTextWriter = XmlWriter.Create(stringWriter, xmlWriterSettings))
+            var xmlWriterSettings = new XmlWriterSettings
             {
-                xmlDocument.WriteTo(xmlTextWriter);
-                xmlTextWriter.Flush();
-                xmlString = stringWriter.GetStringBuilder().ToString();
+                Indent = true,
+                IndentChars = "    ",
+                Encoding = Encoding.UTF8
+            };
+            using (var stringWriter = new StringWriter())
+            {
+                using (var xmlTextWriter = XmlWriter.Create(stringWriter, xmlWriterSettings))
+                {
+                    xmlDocument.WriteTo(xmlTextWriter);
+                    xmlTextWriter.Flush();
+                    xmlString = stringWriter.GetStringBuilder().ToString();
+                }
             }
             return xmlString;
         }
@@ -139,7 +147,8 @@ namespace mRemoteNG.Config.Serializers
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveNode failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "SaveNode failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -156,22 +165,26 @@ namespace mRemoteNG.Config.Serializers
 
             if (Export)
             {
-                _xmlTextWriter.WriteAttributeString("Protected", "", _cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
+                _xmlTextWriter.WriteAttributeString("Protected", "",
+                    _cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
             }
             else
             {
                 if (rootNodeInfo.Password)
                 {
                     _password = rootNodeInfo.PasswordString.ConvertToSecureString();
-                    _xmlTextWriter.WriteAttributeString("Protected", "", _cryptographyProvider.Encrypt("ThisIsProtected", _password));
+                    _xmlTextWriter.WriteAttributeString("Protected", "",
+                        _cryptographyProvider.Encrypt("ThisIsProtected", _password));
                 }
                 else
                 {
-                    _xmlTextWriter.WriteAttributeString("Protected", "", _cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
+                    _xmlTextWriter.WriteAttributeString("Protected", "",
+                        _cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
                 }
             }
 
-            _xmlTextWriter.WriteAttributeString("ConfVersion", "", ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture));
+            _xmlTextWriter.WriteAttributeString("ConfVersion", "",
+                ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture));
         }
 
         private void SerializeContainerInfo(ContainerInfo containerInfo)
@@ -210,7 +223,8 @@ namespace mRemoteNG.Config.Serializers
                     _xmlTextWriter.WriteAttributeString("Domain", "", "");
 
                 if (SaveFilter.SavePassword)
-                    _xmlTextWriter.WriteAttributeString("Password", "", _cryptographyProvider.Encrypt(connectionInfo.Password, _password));
+                    _xmlTextWriter.WriteAttributeString("Password", "",
+                        _cryptographyProvider.Encrypt(connectionInfo.Password, _password));
                 else
                     _xmlTextWriter.WriteAttributeString("Password", "", "");
 
@@ -218,24 +232,34 @@ namespace mRemoteNG.Config.Serializers
                 _xmlTextWriter.WriteAttributeString("Protocol", "", connectionInfo.Protocol.ToString());
                 _xmlTextWriter.WriteAttributeString("PuttySession", "", connectionInfo.PuttySession);
                 _xmlTextWriter.WriteAttributeString("Port", "", Convert.ToString(connectionInfo.Port));
-                _xmlTextWriter.WriteAttributeString("ConnectToConsole", "", Convert.ToString(connectionInfo.UseConsoleSession));
+                _xmlTextWriter.WriteAttributeString("ConnectToConsole", "",
+                    Convert.ToString(connectionInfo.UseConsoleSession));
                 _xmlTextWriter.WriteAttributeString("UseCredSsp", "", Convert.ToString(connectionInfo.UseCredSsp));
                 _xmlTextWriter.WriteAttributeString("RenderingEngine", "", connectionInfo.RenderingEngine.ToString());
-                _xmlTextWriter.WriteAttributeString("ICAEncryptionStrength", "", connectionInfo.ICAEncryptionStrength.ToString());
-                _xmlTextWriter.WriteAttributeString("RDPAuthenticationLevel", "", connectionInfo.RDPAuthenticationLevel.ToString());
+                _xmlTextWriter.WriteAttributeString("ICAEncryptionStrength", "",
+                    connectionInfo.ICAEncryptionStrength.ToString());
+                _xmlTextWriter.WriteAttributeString("RDPAuthenticationLevel", "",
+                    connectionInfo.RDPAuthenticationLevel.ToString());
                 _xmlTextWriter.WriteAttributeString("LoadBalanceInfo", "", connectionInfo.LoadBalanceInfo);
                 _xmlTextWriter.WriteAttributeString("Colors", "", connectionInfo.Colors.ToString());
                 _xmlTextWriter.WriteAttributeString("Resolution", "", connectionInfo.Resolution.ToString());
-                _xmlTextWriter.WriteAttributeString("AutomaticResize", "", Convert.ToString(connectionInfo.AutomaticResize));
-                _xmlTextWriter.WriteAttributeString("DisplayWallpaper", "", Convert.ToString(connectionInfo.DisplayWallpaper));
+                _xmlTextWriter.WriteAttributeString("AutomaticResize", "",
+                    Convert.ToString(connectionInfo.AutomaticResize));
+                _xmlTextWriter.WriteAttributeString("DisplayWallpaper", "",
+                    Convert.ToString(connectionInfo.DisplayWallpaper));
                 _xmlTextWriter.WriteAttributeString("DisplayThemes", "", Convert.ToString(connectionInfo.DisplayThemes));
-                _xmlTextWriter.WriteAttributeString("EnableFontSmoothing", "", Convert.ToString(connectionInfo.EnableFontSmoothing));
-                _xmlTextWriter.WriteAttributeString("EnableDesktopComposition", "", Convert.ToString(connectionInfo.EnableDesktopComposition));
+                _xmlTextWriter.WriteAttributeString("EnableFontSmoothing", "",
+                    Convert.ToString(connectionInfo.EnableFontSmoothing));
+                _xmlTextWriter.WriteAttributeString("EnableDesktopComposition", "",
+                    Convert.ToString(connectionInfo.EnableDesktopComposition));
                 _xmlTextWriter.WriteAttributeString("CacheBitmaps", "", Convert.ToString(connectionInfo.CacheBitmaps));
-                _xmlTextWriter.WriteAttributeString("RedirectDiskDrives", "", Convert.ToString(connectionInfo.RedirectDiskDrives));
+                _xmlTextWriter.WriteAttributeString("RedirectDiskDrives", "",
+                    Convert.ToString(connectionInfo.RedirectDiskDrives));
                 _xmlTextWriter.WriteAttributeString("RedirectPorts", "", Convert.ToString(connectionInfo.RedirectPorts));
-                _xmlTextWriter.WriteAttributeString("RedirectPrinters", "", Convert.ToString(connectionInfo.RedirectPrinters));
-                _xmlTextWriter.WriteAttributeString("RedirectSmartCards", "", Convert.ToString(connectionInfo.RedirectSmartCards));
+                _xmlTextWriter.WriteAttributeString("RedirectPrinters", "",
+                    Convert.ToString(connectionInfo.RedirectPrinters));
+                _xmlTextWriter.WriteAttributeString("RedirectSmartCards", "",
+                    Convert.ToString(connectionInfo.RedirectSmartCards));
                 _xmlTextWriter.WriteAttributeString("RedirectSound", "", connectionInfo.RedirectSound.ToString());
                 _xmlTextWriter.WriteAttributeString("RedirectKeys", "", Convert.ToString(connectionInfo.RedirectKeys));
 
@@ -257,14 +281,17 @@ namespace mRemoteNG.Config.Serializers
                 _xmlTextWriter.WriteAttributeString("VNCProxyIP", "", connectionInfo.VNCProxyIP);
                 _xmlTextWriter.WriteAttributeString("VNCProxyPort", "", Convert.ToString(connectionInfo.VNCProxyPort));
                 _xmlTextWriter.WriteAttributeString("VNCProxyUsername", "", connectionInfo.VNCProxyUsername);
-                _xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _password));
+                _xmlTextWriter.WriteAttributeString("VNCProxyPassword", "",
+                    _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _password));
                 _xmlTextWriter.WriteAttributeString("VNCColors", "", connectionInfo.VNCColors.ToString());
                 _xmlTextWriter.WriteAttributeString("VNCSmartSizeMode", "", connectionInfo.VNCSmartSizeMode.ToString());
                 _xmlTextWriter.WriteAttributeString("VNCViewOnly", "", Convert.ToString(connectionInfo.VNCViewOnly));
 
-                _xmlTextWriter.WriteAttributeString("RDGatewayUsageMethod", "", connectionInfo.RDGatewayUsageMethod.ToString());
+                _xmlTextWriter.WriteAttributeString("RDGatewayUsageMethod", "",
+                    connectionInfo.RDGatewayUsageMethod.ToString());
                 _xmlTextWriter.WriteAttributeString("RDGatewayHostname", "", connectionInfo.RDGatewayHostname);
-                _xmlTextWriter.WriteAttributeString("RDGatewayUseConnectionCredentials", "", connectionInfo.RDGatewayUseConnectionCredentials.ToString());
+                _xmlTextWriter.WriteAttributeString("RDGatewayUseConnectionCredentials", "",
+                    connectionInfo.RDGatewayUseConnectionCredentials.ToString());
 
                 if (SaveFilter.SaveUsername)
                     _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", connectionInfo.RDGatewayUsername);
@@ -272,7 +299,8 @@ namespace mRemoteNG.Config.Serializers
                     _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", "");
 
                 if (SaveFilter.SavePassword)
-                    _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _password));
+                    _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "",
+                        _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _password));
                 else
                     _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", "");
 
@@ -283,57 +311,108 @@ namespace mRemoteNG.Config.Serializers
 
                 if (SaveFilter.SaveInheritance)
                 {
-                    _xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", Convert.ToString(connectionInfo.Inheritance.CacheBitmaps));
-                    _xmlTextWriter.WriteAttributeString("InheritColors", "", Convert.ToString(connectionInfo.Inheritance.Colors));
-                    _xmlTextWriter.WriteAttributeString("InheritDescription", "", Convert.ToString(connectionInfo.Inheritance.Description));
-                    _xmlTextWriter.WriteAttributeString("InheritDisplayThemes", "", Convert.ToString(connectionInfo.Inheritance.DisplayThemes));
-                    _xmlTextWriter.WriteAttributeString("InheritDisplayWallpaper", "", Convert.ToString(connectionInfo.Inheritance.DisplayWallpaper));
-                    _xmlTextWriter.WriteAttributeString("InheritEnableFontSmoothing", "", Convert.ToString(connectionInfo.Inheritance.EnableFontSmoothing));
-                    _xmlTextWriter.WriteAttributeString("InheritEnableDesktopComposition", "", Convert.ToString(connectionInfo.Inheritance.EnableDesktopComposition));
-                    _xmlTextWriter.WriteAttributeString("InheritDomain", "", Convert.ToString(connectionInfo.Inheritance.Domain));
-                    _xmlTextWriter.WriteAttributeString("InheritIcon", "", Convert.ToString(connectionInfo.Inheritance.Icon));
-                    _xmlTextWriter.WriteAttributeString("InheritPanel", "", Convert.ToString(connectionInfo.Inheritance.Panel));
-                    _xmlTextWriter.WriteAttributeString("InheritPassword", "", Convert.ToString(connectionInfo.Inheritance.Password));
-                    _xmlTextWriter.WriteAttributeString("InheritPort", "", Convert.ToString(connectionInfo.Inheritance.Port));
-                    _xmlTextWriter.WriteAttributeString("InheritProtocol", "", Convert.ToString(connectionInfo.Inheritance.Protocol));
-                    _xmlTextWriter.WriteAttributeString("InheritPuttySession", "", Convert.ToString(connectionInfo.Inheritance.PuttySession));
-                    _xmlTextWriter.WriteAttributeString("InheritRedirectDiskDrives", "", Convert.ToString(connectionInfo.Inheritance.RedirectDiskDrives));
-                    _xmlTextWriter.WriteAttributeString("InheritRedirectKeys", "", Convert.ToString(connectionInfo.Inheritance.RedirectKeys));
-                    _xmlTextWriter.WriteAttributeString("InheritRedirectPorts", "", Convert.ToString(connectionInfo.Inheritance.RedirectPorts));
-                    _xmlTextWriter.WriteAttributeString("InheritRedirectPrinters", "", Convert.ToString(connectionInfo.Inheritance.RedirectPrinters));
-                    _xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "", Convert.ToString(connectionInfo.Inheritance.RedirectSmartCards));
-                    _xmlTextWriter.WriteAttributeString("InheritRedirectSound", "", Convert.ToString(connectionInfo.Inheritance.RedirectSound));
-                    _xmlTextWriter.WriteAttributeString("InheritResolution", "", Convert.ToString(connectionInfo.Inheritance.Resolution));
-                    _xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "", Convert.ToString(connectionInfo.Inheritance.AutomaticResize));
-                    _xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "", Convert.ToString(connectionInfo.Inheritance.UseConsoleSession));
-                    _xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", Convert.ToString(connectionInfo.Inheritance.UseCredSsp));
-                    _xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", Convert.ToString(connectionInfo.Inheritance.RenderingEngine));
-                    _xmlTextWriter.WriteAttributeString("InheritUsername", "", Convert.ToString(connectionInfo.Inheritance.Username));
-                    _xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", Convert.ToString(connectionInfo.Inheritance.ICAEncryptionStrength));
-                    _xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", Convert.ToString(connectionInfo.Inheritance.RDPAuthenticationLevel));
-                    _xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", Convert.ToString(connectionInfo.Inheritance.LoadBalanceInfo));
-                    _xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", Convert.ToString(connectionInfo.Inheritance.PreExtApp));
-                    _xmlTextWriter.WriteAttributeString("InheritPostExtApp", "", Convert.ToString(connectionInfo.Inheritance.PostExtApp));
-                    _xmlTextWriter.WriteAttributeString("InheritMacAddress", "", Convert.ToString(connectionInfo.Inheritance.MacAddress));
-                    _xmlTextWriter.WriteAttributeString("InheritUserField", "", Convert.ToString(connectionInfo.Inheritance.UserField));
-                    _xmlTextWriter.WriteAttributeString("InheritExtApp", "", Convert.ToString(connectionInfo.Inheritance.ExtApp));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCCompression", "", Convert.ToString(connectionInfo.Inheritance.VNCCompression));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCEncoding", "", Convert.ToString(connectionInfo.Inheritance.VNCEncoding));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCAuthMode", "", Convert.ToString(connectionInfo.Inheritance.VNCAuthMode));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyType", "", Convert.ToString(connectionInfo.Inheritance.VNCProxyType));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyIP", "", Convert.ToString(connectionInfo.Inheritance.VNCProxyIP));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyPort", "", Convert.ToString(connectionInfo.Inheritance.VNCProxyPort));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyUsername", "", Convert.ToString(connectionInfo.Inheritance.VNCProxyUsername));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyPassword", "", Convert.ToString(connectionInfo.Inheritance.VNCProxyPassword));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCColors", "", Convert.ToString(connectionInfo.Inheritance.VNCColors));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "", Convert.ToString(connectionInfo.Inheritance.VNCSmartSizeMode));
-                    _xmlTextWriter.WriteAttributeString("InheritVNCViewOnly", "", Convert.ToString(connectionInfo.Inheritance.VNCViewOnly));
-                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsageMethod", "", Convert.ToString(connectionInfo.Inheritance.RDGatewayUsageMethod));
-                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "", Convert.ToString(connectionInfo.Inheritance.RDGatewayHostname));
-                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", Convert.ToString(connectionInfo.Inheritance.RDGatewayUseConnectionCredentials));
-                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "", Convert.ToString(connectionInfo.Inheritance.RDGatewayUsername));
-                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "", Convert.ToString(connectionInfo.Inheritance.RDGatewayPassword));
-                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", Convert.ToString(connectionInfo.Inheritance.RDGatewayDomain));
+                    _xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "",
+                        Convert.ToString(connectionInfo.Inheritance.CacheBitmaps));
+                    _xmlTextWriter.WriteAttributeString("InheritColors", "",
+                        Convert.ToString(connectionInfo.Inheritance.Colors));
+                    _xmlTextWriter.WriteAttributeString("InheritDescription", "",
+                        Convert.ToString(connectionInfo.Inheritance.Description));
+                    _xmlTextWriter.WriteAttributeString("InheritDisplayThemes", "",
+                        Convert.ToString(connectionInfo.Inheritance.DisplayThemes));
+                    _xmlTextWriter.WriteAttributeString("InheritDisplayWallpaper", "",
+                        Convert.ToString(connectionInfo.Inheritance.DisplayWallpaper));
+                    _xmlTextWriter.WriteAttributeString("InheritEnableFontSmoothing", "",
+                        Convert.ToString(connectionInfo.Inheritance.EnableFontSmoothing));
+                    _xmlTextWriter.WriteAttributeString("InheritEnableDesktopComposition", "",
+                        Convert.ToString(connectionInfo.Inheritance.EnableDesktopComposition));
+                    _xmlTextWriter.WriteAttributeString("InheritDomain", "",
+                        Convert.ToString(connectionInfo.Inheritance.Domain));
+                    _xmlTextWriter.WriteAttributeString("InheritIcon", "",
+                        Convert.ToString(connectionInfo.Inheritance.Icon));
+                    _xmlTextWriter.WriteAttributeString("InheritPanel", "",
+                        Convert.ToString(connectionInfo.Inheritance.Panel));
+                    _xmlTextWriter.WriteAttributeString("InheritPassword", "",
+                        Convert.ToString(connectionInfo.Inheritance.Password));
+                    _xmlTextWriter.WriteAttributeString("InheritPort", "",
+                        Convert.ToString(connectionInfo.Inheritance.Port));
+                    _xmlTextWriter.WriteAttributeString("InheritProtocol", "",
+                        Convert.ToString(connectionInfo.Inheritance.Protocol));
+                    _xmlTextWriter.WriteAttributeString("InheritPuttySession", "",
+                        Convert.ToString(connectionInfo.Inheritance.PuttySession));
+                    _xmlTextWriter.WriteAttributeString("InheritRedirectDiskDrives", "",
+                        Convert.ToString(connectionInfo.Inheritance.RedirectDiskDrives));
+                    _xmlTextWriter.WriteAttributeString("InheritRedirectKeys", "",
+                        Convert.ToString(connectionInfo.Inheritance.RedirectKeys));
+                    _xmlTextWriter.WriteAttributeString("InheritRedirectPorts", "",
+                        Convert.ToString(connectionInfo.Inheritance.RedirectPorts));
+                    _xmlTextWriter.WriteAttributeString("InheritRedirectPrinters", "",
+                        Convert.ToString(connectionInfo.Inheritance.RedirectPrinters));
+                    _xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "",
+                        Convert.ToString(connectionInfo.Inheritance.RedirectSmartCards));
+                    _xmlTextWriter.WriteAttributeString("InheritRedirectSound", "",
+                        Convert.ToString(connectionInfo.Inheritance.RedirectSound));
+                    _xmlTextWriter.WriteAttributeString("InheritResolution", "",
+                        Convert.ToString(connectionInfo.Inheritance.Resolution));
+                    _xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "",
+                        Convert.ToString(connectionInfo.Inheritance.AutomaticResize));
+                    _xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "",
+                        Convert.ToString(connectionInfo.Inheritance.UseConsoleSession));
+                    _xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "",
+                        Convert.ToString(connectionInfo.Inheritance.UseCredSsp));
+                    _xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "",
+                        Convert.ToString(connectionInfo.Inheritance.RenderingEngine));
+                    _xmlTextWriter.WriteAttributeString("InheritUsername", "",
+                        Convert.ToString(connectionInfo.Inheritance.Username));
+                    _xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "",
+                        Convert.ToString(connectionInfo.Inheritance.ICAEncryptionStrength));
+                    _xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "",
+                        Convert.ToString(connectionInfo.Inheritance.RDPAuthenticationLevel));
+                    _xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "",
+                        Convert.ToString(connectionInfo.Inheritance.LoadBalanceInfo));
+                    _xmlTextWriter.WriteAttributeString("InheritPreExtApp", "",
+                        Convert.ToString(connectionInfo.Inheritance.PreExtApp));
+                    _xmlTextWriter.WriteAttributeString("InheritPostExtApp", "",
+                        Convert.ToString(connectionInfo.Inheritance.PostExtApp));
+                    _xmlTextWriter.WriteAttributeString("InheritMacAddress", "",
+                        Convert.ToString(connectionInfo.Inheritance.MacAddress));
+                    _xmlTextWriter.WriteAttributeString("InheritUserField", "",
+                        Convert.ToString(connectionInfo.Inheritance.UserField));
+                    _xmlTextWriter.WriteAttributeString("InheritExtApp", "",
+                        Convert.ToString(connectionInfo.Inheritance.ExtApp));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCCompression", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCCompression));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCEncoding", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCEncoding));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCAuthMode", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCAuthMode));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyType", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCProxyType));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyIP", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCProxyIP));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyPort", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCProxyPort));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyUsername", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCProxyUsername));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCProxyPassword", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCProxyPassword));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCColors", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCColors));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCSmartSizeMode));
+                    _xmlTextWriter.WriteAttributeString("InheritVNCViewOnly", "",
+                        Convert.ToString(connectionInfo.Inheritance.VNCViewOnly));
+                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsageMethod", "",
+                        Convert.ToString(connectionInfo.Inheritance.RDGatewayUsageMethod));
+                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "",
+                        Convert.ToString(connectionInfo.Inheritance.RDGatewayHostname));
+                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "",
+                        Convert.ToString(connectionInfo.Inheritance.RDGatewayUseConnectionCredentials));
+                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "",
+                        Convert.ToString(connectionInfo.Inheritance.RDGatewayUsername));
+                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "",
+                        Convert.ToString(connectionInfo.Inheritance.RDGatewayPassword));
+                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "",
+                        Convert.ToString(connectionInfo.Inheritance.RDGatewayDomain));
                 }
                 else
                 {
@@ -383,7 +462,8 @@ namespace mRemoteNG.Config.Serializers
                     _xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "", Convert.ToString(false));
                     _xmlTextWriter.WriteAttributeString("InheritVNCViewOnly", "", Convert.ToString(false));
                     _xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "", Convert.ToString(false));
-                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", Convert.ToString(false));
+                    _xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "",
+                        Convert.ToString(false));
                     _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "", Convert.ToString(false));
                     _xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "", Convert.ToString(false));
                     _xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", Convert.ToString(false));
@@ -391,7 +471,8 @@ namespace mRemoteNG.Config.Serializers
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveConnectionFields failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "SaveConnectionFields failed" + Environment.NewLine + ex.Message, true);
             }
         }
     }

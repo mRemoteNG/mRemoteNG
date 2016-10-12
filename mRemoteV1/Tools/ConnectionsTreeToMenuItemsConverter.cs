@@ -8,7 +8,6 @@ using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tree;
 
-
 namespace mRemoteNG.Tools
 {
     public class ConnectionsTreeToMenuItemsConverter
@@ -31,7 +30,8 @@ namespace mRemoteNG.Tools
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, MessageClass.ErrorMsg,
+                    true);
             }
             return dropDownList;
         }
@@ -70,7 +70,7 @@ namespace mRemoteNG.Tools
                 menuItem.Image = Resources.Pause;
                 menuItem.Tag = node;
             }
-            
+
             menuItem.MouseUp += MouseUpEventHandler;
             return menuItem;
         }

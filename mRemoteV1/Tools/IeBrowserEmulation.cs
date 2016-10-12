@@ -2,30 +2,40 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
-using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using Microsoft.Win32;
 
 namespace mRemoteNG.Tools
 {
     public class IeBrowserEmulation
     {
+        private IeBrowserEmulation()
+        {
+        }
+
         // found this here:
         // http://www.neowin.net/forum/topic/1077469-vbnet-webbrowser-control-does-not-load-javascript/#comment-596755046
 
         private static void SetBrowserFeatureControlKey(string feature, string appName, uint value)
         {
-
             if (Environment.Is64BitOperatingSystem)
-            {
-                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(string.Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
+                using (
+                    var key =
+                        Registry.CurrentUser.CreateSubKey(
+                            string.Concat(
+                                "Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature),
+                            RegistryKeyPermissionCheck.ReadWriteSubTree))
                 {
                     key?.SetValue(appName, value, RegistryValueKind.DWord);
                 }
-            }
 
 
-            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(string.Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
+            using (
+                var key =
+                    Registry.CurrentUser.CreateSubKey(
+                        string.Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature),
+                        RegistryKeyPermissionCheck.ReadWriteSubTree))
             {
                 key?.SetValue(appName, value, RegistryValueKind.DWord);
             }
@@ -33,17 +43,23 @@ namespace mRemoteNG.Tools
 
         private static void DeleteBrowserFeatureControlKey(string feature, string appName)
         {
-
             if (Environment.Is64BitOperatingSystem)
-            {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(string.Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
+                using (
+                    var key =
+                        Registry.CurrentUser.OpenSubKey(
+                            string.Concat(
+                                "Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature),
+                            RegistryKeyPermissionCheck.ReadWriteSubTree))
                 {
                     key?.DeleteValue(appName);
                 }
-            }
 
 
-            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(string.Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
+            using (
+                var key =
+                    Registry.CurrentUser.CreateSubKey(
+                        string.Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature),
+                        RegistryKeyPermissionCheck.ReadWriteSubTree))
             {
                 key?.DeleteValue(appName);
             }
@@ -57,10 +73,9 @@ namespace mRemoteNG.Tools
             var fileName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
 
             // make the control is not running inside Visual Studio Designer
-            if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0)
-            {
+            if ((string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0) ||
+                (string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0))
                 return;
-            }
 
             SetBrowserFeatureControlKey("FEATURE_BROWSER_EMULATION", fileName, GetBrowserEmulationMode());
             // Webpages containing standards-based !DOCTYPE directives are displayed in IE10 Standards mode.
@@ -97,10 +112,9 @@ namespace mRemoteNG.Tools
             var fileName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
 
             // make the control is not running inside Visual Studio Designer
-            if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0)
-            {
+            if ((string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0) ||
+                (string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0))
                 return;
-            }
 
             DeleteBrowserFeatureControlKey("FEATURE_BROWSER_EMULATION", fileName);
             // Webpages containing standards-based !DOCTYPE directives are displayed in IE10 Standards mode.
@@ -136,7 +150,9 @@ namespace mRemoteNG.Tools
             var browserVersion = 9;
             // default to IE9.
 
-            using (RegistryKey ieKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Internet Explorer", RegistryKeyPermissionCheck.ReadSubTree, RegistryRights.QueryValues))
+            using (
+                var ieKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Internet Explorer",
+                    RegistryKeyPermissionCheck.ReadSubTree, RegistryRights.QueryValues))
             {
                 if (ieKey != null)
                 {
@@ -145,9 +161,7 @@ namespace mRemoteNG.Tools
                     {
                         version = ieKey.GetValue("Version");
                         if (version == null)
-                        {
                             throw new ApplicationException("Microsoft Internet Explorer is required!");
-                        }
                     }
                     int.TryParse(version.ToString().Split('.')[0], out browserVersion);
                 }
@@ -157,10 +171,10 @@ namespace mRemoteNG.Tools
 
             switch (browserVersion)
             {
-                // https://support.microsoft.com/en-us/lifecycle#gp/Microsoft-Internet-Explorer
-                // IE 7 & 8 are basically not supported any more...
+                    // https://support.microsoft.com/en-us/lifecycle#gp/Microsoft-Internet-Explorer
+                    // IE 7 & 8 are basically not supported any more...
 #if OLD_BROWSERS
-                // Webpages containing standards-based !DOCTYPE directives are displayed in IE7 Standards mode. Default value for applications hosting the WebBrowser Control.
+// Webpages containing standards-based !DOCTYPE directives are displayed in IE7 Standards mode. Default value for applications hosting the WebBrowser Control.
 				case 7:
 					mode = 7000;
 					break; 
@@ -202,7 +216,8 @@ namespace mRemoteNG.Tools
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Register() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Register() failed.", ex,
+                    MessageClass.ErrorMsg, true);
             }
         }
 
@@ -216,13 +231,10 @@ namespace mRemoteNG.Tools
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Unregister() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Unregister() failed.", ex,
+                    MessageClass.ErrorMsg, true);
             }
 #endif
-        }
-
-        private IeBrowserEmulation()
-        {
         }
     }
 }

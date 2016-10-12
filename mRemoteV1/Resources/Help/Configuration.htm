@@ -1,163 +1,211 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Configuration</title>
-    <link href="Main.css" rel="stylesheet" type="text/css" />
+    <link href="Main.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
-    <p class="heading1">
-        First start</p>
+<p class="heading1">
+    First start
+</p>
 <p>
-        Once you got mRemote installed and run it for the first time you should see a 
-        screen like on the following screenshot.</p>
+    Once you got mRemote installed and run it for the first time you should see a
+    screen like on the following screenshot.
+</p>
 <p>
-        <img alt="" src="Screenshots/Configuration/01.png" /></p>
+    <img alt="" src="Screenshots/Configuration/01.png"/>
+</p>
 <p>
-        The first thing that catches your attention will probably be the info box 
-        popping up.<br />
-        Don&#39;t freak out just yet, this is not a error message and it&#39;s totally ok to 
-        show up on the first run.<br />
-        It just tells you that the connections file could not be found at the default 
-        location and that mRemote will create a new one for you at this location.<br />
-        If you click anywhere else in the application the panel will hide itself again. 
-        (Tip: You can also hit Escape to hide the Errors and Infos panel)</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/02.png" /></p>
-    <p>
-        Now that we now about the Errors and Infos panel take a deep breath and just 
-        stare at the gorgeous about screen for a few seconds. =)<br />
-        No, seriously, to create your first connection continue reading.</p>
-    <p>
-        <span class="heading1">Creating Connections</span></p>
-    <p>
-        Right click the root item (the blue ball labeled &quot;Connections&quot;) in the 
-        Connections panel and select &quot;Add Connection&quot;.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/03.png" /></p>
-    <p>
-        A new item shows up under the root item. You can give it a name now (or rename 
-        it later). I just named mine &quot;Test&quot;.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/04.png" /></p>
-    <p>
-        Now have a look at the Config panel in the bottom left, just under the 
-        Connections panel.</p>
+    The first thing that catches your attention will probably be the info box
+    popping up.<br/>
+    Don&#39;t freak out just yet, this is not a error message and it&#39;s totally ok to
+    show up on the first run.<br/>
+    It just tells you that the connections file could not be found at the default
+    location and that mRemote will create a new one for you at this location.<br/>
+    If you click anywhere else in the application the panel will hide itself again.
+    (Tip: You can also hit Escape to hide the Errors and Infos panel)
+</p>
 <p>
-        <img alt="" src="Screenshots/Configuration/05.png" /></p>
+    <img alt="" src="Screenshots/Configuration/02.png"/>
+</p>
 <p>
-        As you may notice this is where you configure all the properties of connections 
-        and folders.<br />
-        There are a lot of values that can be set but for our first connection we will 
-        keep things simple.</p>
+    Now that we now about the Errors and Infos panel take a deep breath and just
+    stare at the gorgeous about screen for a few seconds. =)<br/>
+    No, seriously, to create your first connection continue reading.
+</p>
 <p>
-        The most important things right now are that we tell the application which host 
-        we want to connect to and which protocol we want to use.<br />
-        In this example I will use a Windows 2003 server that has RDP (Remote Desktop 
-        Protocol) enabled.<br />
-        As RDP is the default protocol whenever you create a new connection I don&#39;t have 
-        to change anything there.</p>
+    <span class="heading1">Creating Connections</span></p>
 <p>
-        The next thing I&#39;ll do is to fill the Hostname/IP field with the hostname I 
-        want to connect to.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/06.png" /></p>
-    <p>
-        I&#39;ll also fill the Username and Password fields so I will be automatically 
-        logged on to the server.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/07.png" /></p>
-    <p>
-        Ok, that&#39;s it, we are ready for our first connection test.</p>
-    <p>
-        <span class="heading1">Opening and Closing Connections</span></p>
-    <p>
-        There are multiple ways to open a connection in mRemote, but the easiest is to 
-        just double-click the connection in the Connections panel.</p>
-    <p>
-        If I do that now, a new panel named &quot;General&quot; with one tab inside named &quot;Test&quot; 
-        will show up.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/08.png" /></p>
-    <p>
-        Alright, mRemote is now trying to connect to the specified host.</p>
-    <p>
-        If it cannot connect you will see a message popping up like on the following 
-        screenshot.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/17.png" /></p>
-    <p>
-        This for example means the hostname cannot be resolved.</p>
-    <p>
-        Instead, if all goes well you should see the remote desktop.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/09.png" /></p>
-    <p>
-        If you do not want to log off from the remote machine but just close it you can 
-        do this by simply double-clicking the tab labeled &quot;test&quot; or just close the whole 
-        &quot;General&quot; panel by clicking the small &quot;x&quot; in the upper right corner.</p>
-    <p>
-        <span class="heading1">Folders and Inheritance</span></p>
-    <p>
-        Folders in mRemote cannot only be used to categorize connections but also to 
-        apply properties to the underlying connections.</p>
-    <p>
-        <b>Example:</b><br />
-        You have 10 Remote Desktop enabled servers in one domain and 15 in another 
-        domain.<br />
-        Normally you would spend a lot of time creating all those connections and 
-        setting the individual properties like username, password, etc.<br />
-        In mRemote there is an easier way. You just create two folders, one for domain A 
-        and one for domain B and set all properties there.<br />
-        Then create the Connections and let them inherit every property. The only 
-        properties left to fill on Connection basis are the Connection&#39;s name and 
-        hostname. Everything else will be inherited from the parent folder.</p>
-    <p>
-        &quot;Sounds cool, but how to do it?&quot;<br />
-        I&#39;ll show you how to do it!</p>
-    <p>
-        First add a new folder.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/10.png" /></p>
-    <p>
-        Then give it a name and fill all the properties you need (just like you did with 
-        the test Connection).</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/11.png" /></p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/12.png" /></p>
-    <p>
-        When you&#39;re done setting the values you can either just drag the test Connection 
-        inside the folder or create a new one.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/13.png" /></p>
-    <p>
-        Right now nothing has changed and nothing will be inherited.<br />
-        To enable inheritance switch to the inheritance view by clicking the dedicated 
-        button.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/14.png" /></p>
-    <p>
-        The properties that show up now are almost the same as before, but you can only 
-        select yes or no.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/15.png" /></p>
-    <p>
-        When no is selected the property will not be inherited, yes indicates an 
-        inherited property.<br />
-        For this test set &quot;Inherit Everything&quot; to Yes.</p>
-    <p>
-        Now if you switch back to the properties view (the button left of the 
-        inheritance button) you should see that not much is left of all those 
-        properties.</p>
-    <p>
-        <img alt="" src="Screenshots/Configuration/16.png" /></p>
-    <p>
-        Only the Name and Hostname/IP properties are left over, everything else will be 
-        inherited from the parent folder.<br />
-        Of course you can also only let some of the properties be inherited.</p>
-    <p>
-        Just play around with this a bit and you&#39;ll get the hang of it.</p>
+    Right click the root item (the blue ball labeled &quot;Connections&quot;) in the
+    Connections panel and select &quot;Add Connection&quot;.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/03.png"/>
+</p>
+<p>
+    A new item shows up under the root item. You can give it a name now (or rename
+    it later). I just named mine &quot;Test&quot;.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/04.png"/>
+</p>
+<p>
+    Now have a look at the Config panel in the bottom left, just under the
+    Connections panel.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/05.png"/>
+</p>
+<p>
+    As you may notice this is where you configure all the properties of connections
+    and folders.<br/>
+    There are a lot of values that can be set but for our first connection we will
+    keep things simple.
+</p>
+<p>
+    The most important things right now are that we tell the application which host
+    we want to connect to and which protocol we want to use.<br/>
+    In this example I will use a Windows 2003 server that has RDP (Remote Desktop
+    Protocol) enabled.<br/>
+    As RDP is the default protocol whenever you create a new connection I don&#39;t have
+    to change anything there.
+</p>
+<p>
+    The next thing I&#39;ll do is to fill the Hostname/IP field with the hostname I
+    want to connect to.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/06.png"/>
+</p>
+<p>
+    I&#39;ll also fill the Username and Password fields so I will be automatically
+    logged on to the server.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/07.png"/>
+</p>
+<p>
+    Ok, that&#39;s it, we are ready for our first connection test.
+</p>
+<p>
+    <span class="heading1">Opening and Closing Connections</span></p>
+<p>
+    There are multiple ways to open a connection in mRemote, but the easiest is to
+    just double-click the connection in the Connections panel.
+</p>
+<p>
+    If I do that now, a new panel named &quot;General&quot; with one tab inside named &quot;Test&quot;
+    will show up.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/08.png"/>
+</p>
+<p>
+    Alright, mRemote is now trying to connect to the specified host.
+</p>
+<p>
+    If it cannot connect you will see a message popping up like on the following
+    screenshot.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/17.png"/>
+</p>
+<p>
+    This for example means the hostname cannot be resolved.
+</p>
+<p>
+    Instead, if all goes well you should see the remote desktop.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/09.png"/>
+</p>
+<p>
+    If you do not want to log off from the remote machine but just close it you can
+    do this by simply double-clicking the tab labeled &quot;test&quot; or just close the whole
+    &quot;General&quot; panel by clicking the small &quot;x&quot; in the upper right corner.
+</p>
+<p>
+    <span class="heading1">Folders and Inheritance</span></p>
+<p>
+    Folders in mRemote cannot only be used to categorize connections but also to
+    apply properties to the underlying connections.
+</p>
+<p>
+    <b>Example:</b><br/>
+    You have 10 Remote Desktop enabled servers in one domain and 15 in another
+    domain.<br/>
+    Normally you would spend a lot of time creating all those connections and
+    setting the individual properties like username, password, etc.<br/>
+    In mRemote there is an easier way. You just create two folders, one for domain A
+    and one for domain B and set all properties there.<br/>
+    Then create the Connections and let them inherit every property. The only
+    properties left to fill on Connection basis are the Connection&#39;s name and
+    hostname. Everything else will be inherited from the parent folder.
+</p>
+<p>
+    &quot;Sounds cool, but how to do it?&quot;<br/>
+    I&#39;ll show you how to do it!
+</p>
+<p>
+    First add a new folder.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/10.png"/>
+</p>
+<p>
+    Then give it a name and fill all the properties you need (just like you did with
+    the test Connection).
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/11.png"/>
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/12.png"/>
+</p>
+<p>
+    When you&#39;re done setting the values you can either just drag the test Connection
+    inside the folder or create a new one.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/13.png"/>
+</p>
+<p>
+    Right now nothing has changed and nothing will be inherited.<br/>
+    To enable inheritance switch to the inheritance view by clicking the dedicated
+    button.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/14.png"/>
+</p>
+<p>
+    The properties that show up now are almost the same as before, but you can only
+    select yes or no.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/15.png"/>
+</p>
+<p>
+    When no is selected the property will not be inherited, yes indicates an
+    inherited property.<br/>
+    For this test set &quot;Inherit Everything&quot; to Yes.
+</p>
+<p>
+    Now if you switch back to the properties view (the button left of the
+    inheritance button) you should see that not much is left of all those
+    properties.
+</p>
+<p>
+    <img alt="" src="Screenshots/Configuration/16.png"/>
+</p>
+<p>
+    Only the Name and Hostname/IP properties are left over, everything else will be
+    inherited from the parent folder.<br/>
+    Of course you can also only let some of the properties be inherited.
+</p>
+<p>
+    Just play around with this a bit and you&#39;ll get the hang of it.
+</p>
 
 </body>
 </html>

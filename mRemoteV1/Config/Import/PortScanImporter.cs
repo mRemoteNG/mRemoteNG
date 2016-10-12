@@ -5,17 +5,16 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
 
-
 namespace mRemoteNG.Config.Import
 {
-	public class PortScanImporter : IConnectionImporter
-	{
-	    private readonly ProtocolType _targetProtocolType;
+    public class PortScanImporter : IConnectionImporter
+    {
+        private readonly ProtocolType _targetProtocolType;
 
-	    public PortScanImporter(ProtocolType targetProtocolType)
-	    {
-	        _targetProtocolType = targetProtocolType;
-	    }
+        public PortScanImporter(ProtocolType targetProtocolType)
+        {
+            _targetProtocolType = targetProtocolType;
+        }
 
         public void Import(object hosts, ContainerInfo destinationContainer)
         {
@@ -25,8 +24,8 @@ namespace mRemoteNG.Config.Import
         }
 
         public void Import(IEnumerable<ScanHost> hosts, ContainerInfo destinationContainer)
-		{
-			var deserializer = new PortScanDeserializer(hosts, _targetProtocolType);
+        {
+            var deserializer = new PortScanDeserializer(hosts, _targetProtocolType);
             var connectionTreeModel = deserializer.Deserialize();
 
             var importedRootNode = connectionTreeModel.RootNodes.First();
@@ -34,5 +33,5 @@ namespace mRemoteNG.Config.Import
             var childrenToAdd = importedRootNode.Children.ToArray();
             destinationContainer.AddChildRange(childrenToAdd);
         }
-	}
+    }
 }

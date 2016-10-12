@@ -1,15 +1,15 @@
 namespace mRemoteNG.Connection.Protocol.RAW
 {
-	public class ProtocolRAW : Connection.Protocol.PuttyBase
-	{
-		public ProtocolRAW()
-		{
-			this.PuttyProtocol = Putty_Protocol.raw;
-		}
-				
-		public enum Defaults
-		{
-			Port = 23
-		}
-	}
+    public class ProtocolRAW : PuttyBase
+    {
+        public enum Defaults
+        {
+            Port = 23
+        }
+
+        public ProtocolRAW()
+        {
+            PuttyProtocol = Putty_Protocol.raw;
+        }
+    }
 }

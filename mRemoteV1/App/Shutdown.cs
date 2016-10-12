@@ -1,7 +1,8 @@
-﻿using mRemoteNG.Tools;
-using System;
+﻿using System;
 using System.Diagnostics;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Settings;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
@@ -42,7 +43,7 @@ namespace mRemoteNG.App
 
         private static void DisposeNotificationAreaIcon()
         {
-            if (Runtime.NotificationAreaIcon != null && Runtime.NotificationAreaIcon.Disposed == false)
+            if ((Runtime.NotificationAreaIcon != null) && (Runtime.NotificationAreaIcon.Disposed == false))
                 Runtime.NotificationAreaIcon.Dispose();
         }
 
@@ -54,7 +55,7 @@ namespace mRemoteNG.App
 
         private static void SaveSettings()
         {
-            Config.Settings.SettingsSaver.SaveSettings();
+            SettingsSaver.SaveSettings();
         }
 
         private static void UnregisterBrowsers()

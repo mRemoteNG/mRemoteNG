@@ -1,11 +1,10 @@
 using mRemoteNG.Tools;
-using mRemoteNG.Tree.Root;
 using mRemoteNG.Tree;
-
+using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Root.PuttySessions
 {
-	public class RootPuttySessionsNodeInfo : RootNodeInfo
+    public class RootPuttySessionsNodeInfo : RootNodeInfo
     {
         private string _name;
         private string _panel;
@@ -18,37 +17,39 @@ namespace mRemoteNG.Root.PuttySessions
                 string.IsNullOrEmpty(Settings.Default.PuttySavedSessionsPanel)
                     ? Language.strGeneral
                     : Settings.Default.PuttySavedSessionsPanel;
-		}
+        }
 
         #region Public Properties
-        [LocalizedAttributes.LocalizedDefaultValue("strPuttySavedSessionsRootName")]
+
+        [LocalizedAttributes.LocalizedDefaultValueAttribute("strPuttySavedSessionsRootName")]
         public override string Name
-		{
-			get { return _name; }
-			set
-			{
-				_name = value;
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
                 //Settings.Default.PuttySavedSessionsName = value;
-			}
-		}
-				
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNamePanel"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPanel")]
+            }
+        }
+
+        [LocalizedAttributes.LocalizedCategoryAttribute("strCategoryDisplay")]
+        [LocalizedAttributes.LocalizedDisplayNameAttribute("strPropertyNamePanel")]
+        [LocalizedAttributes.LocalizedDescriptionAttribute("strPropertyDescriptionPanel")]
         public override string Panel
-		{
-			get { return _panel; }
-			set
-			{
-				_panel = value;
+        {
+            get { return _panel; }
+            set
+            {
+                _panel = value;
                 Settings.Default.PuttySavedSessionsPanel = value;
-			}
+            }
         }
 
         public override TreeNodeType GetTreeNodeType()
         {
             return TreeNodeType.PuttyRoot;
         }
+
         #endregion
     }
 }

@@ -2,8 +2,8 @@
 using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
-
 
 namespace mRemoteNG.Config.Connections
 {
@@ -18,7 +18,8 @@ namespace mRemoteNG.Config.Connections
 
         public ConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode)
         {
-            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
+            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine,
+                blockCipherMode);
         }
 
         public string Decrypt(string plainText)
@@ -65,7 +66,8 @@ namespace mRemoteNG.Config.Connections
 
         public bool ConnectionsFileIsAuthentic(string protectedString, RootNodeInfo rootInfo)
         {
-            var connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, Runtime.EncryptionKey) == "ThisIsNotProtected";
+            var connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, Runtime.EncryptionKey) ==
+                                                "ThisIsNotProtected";
             return connectionsFileIsNotEncrypted || Authenticate(protectedString, false, rootInfo);
         }
 
@@ -78,7 +80,7 @@ namespace mRemoteNG.Config.Connections
             {
                 while (_cryptographyProvider.Decrypt(value, Runtime.EncryptionKey) == value)
                 {
-                    Runtime.EncryptionKey = Tools.MiscTools.PasswordDialog(passwordName, false);
+                    Runtime.EncryptionKey = MiscTools.PasswordDialog(passwordName, false);
                     if (Runtime.EncryptionKey.Length == 0)
                         return false;
                 }
@@ -87,7 +89,7 @@ namespace mRemoteNG.Config.Connections
             {
                 while (_cryptographyProvider.Decrypt(value, Runtime.EncryptionKey) != "ThisIsProtected")
                 {
-                    Runtime.EncryptionKey = Tools.MiscTools.PasswordDialog(passwordName, false);
+                    Runtime.EncryptionKey = MiscTools.PasswordDialog(passwordName, false);
                     if (Runtime.EncryptionKey.Length == 0)
                         return false;
                 }

@@ -24,11 +24,9 @@ namespace mRemoteNG.Config.Serializers
             var connectionInfo = new ConnectionInfo();
             foreach (var line in _fileContent)
             {
-                var parts = line.Split(new[] { ':' }, 3);
+                var parts = line.Split(new[] {':'}, 3);
                 if (parts.Length < 3)
-                {
                     continue;
-                }
 
                 var key = parts[0];
                 var value = parts[2];
@@ -85,7 +83,9 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.CacheBitmaps = value == "1";
                     break;
                 case "screen mode id":
-                    connectionInfo.Resolution = value == "2" ? ProtocolRDP.RDPResolutions.Fullscreen : ProtocolRDP.RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = value == "2"
+                        ? ProtocolRDP.RDPResolutions.Fullscreen
+                        : ProtocolRDP.RDPResolutions.FitToWindow;
                     break;
                 case "connect to console":
                     connectionInfo.UseConsoleSession = value == "1";

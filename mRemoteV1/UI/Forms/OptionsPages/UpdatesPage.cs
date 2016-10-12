@@ -6,7 +6,6 @@ using mRemoteNG.App.Update;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.TaskDialog;
-using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -99,18 +98,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlProxyAuthentication.Enabled = Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication);
             txtProxyUsername.Text = Convert.ToString(Settings.Default.UpdateProxyAuthUser);
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtProxyPassword.Text = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass), Runtime.EncryptionKey);
+            txtProxyPassword.Text = cryptographyProvider.Decrypt(
+                Convert.ToString(Settings.Default.UpdateProxyAuthPass), Runtime.EncryptionKey);
 
             btnTestProxy.Enabled = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
 
 #if PORTABLE
             foreach (Control Control in Controls)
-            {
                 if (Control != lblUpdatesExplanation)
-                {
                     Control.Visible = false;
-                }
-            }
 #endif
         }
 
@@ -120,17 +116,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
             if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyDaily)
-            {
                 Settings.Default.CheckForUpdatesFrequencyDays = 1;
-            }
             else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyWeekly)
-            {
                 Settings.Default.CheckForUpdatesFrequencyDays = 7;
-            }
             else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyMonthly)
-            {
                 Settings.Default.CheckForUpdatesFrequencyDays = 31;
-            }
 
             Settings.Default.UpdateUseProxy = chkUseProxyForAutomaticUpdates.Checked;
             Settings.Default.UpdateProxyAddress = txtProxyAddress.Text;
@@ -139,7 +129,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
             Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.EncryptionKey);
+            Settings.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text,
+                Runtime.EncryptionKey);
 
             Settings.Default.Save();
         }
@@ -170,9 +161,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 chkUseProxyAuthentication.Enabled = true;
 
                 if (chkUseProxyAuthentication.Checked)
-                {
                     pnlProxyAuthentication.Enabled = true;
-                }
             }
             else
             {
@@ -184,12 +173,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnTestProxy_Click(object sender, EventArgs e)
         {
             if (_appUpdate != null)
-            {
                 if (_appUpdate.IsGetUpdateInfoRunning)
-                {
                     return;
-                }
-            }
 
             _appUpdate = new AppUpdater();
             //_appUpdate.Load += _appUpdate.Update_Load;
@@ -208,16 +193,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void chkUseProxyAuthentication_CheckedChanged(object sender, EventArgs e)
         {
             if (chkUseProxyForAutomaticUpdates.Checked)
-            {
                 if (chkUseProxyAuthentication.Checked)
-                {
                     pnlProxyAuthentication.Enabled = true;
-                }
                 else
-                {
                     pnlProxyAuthentication.Enabled = false;
-                }
-            }
         }
 
         #endregion
@@ -239,13 +218,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 btnTestProxy.Text = Language.strButtonTestProxy;
 
                 if (e.Cancelled)
-                {
                     return;
-                }
                 if (e.Error != null)
-                {
                     throw e.Error;
-                }
 
                 CTaskDialog.ShowCommandBox(this, Convert.ToString(Application.ProductName),
                     Language.strProxyTestSucceeded, "", Language.strButtonOK, false);

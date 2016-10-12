@@ -5,12 +5,15 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
 
-
 namespace mRemoteNG.Tree
 {
     public class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
     {
         public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void AddRootNode(ContainerInfo rootNode)
         {
@@ -18,7 +21,8 @@ namespace mRemoteNG.Tree
             RootNodes.Add(rootNode);
             rootNode.CollectionChanged += RaiseCollectionChangedEvent;
             rootNode.PropertyChanged += RaisePropertyChangedEvent;
-            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, rootNode));
+            RaiseCollectionChangedEvent(this,
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, rootNode));
         }
 
         public void RemoveRootNode(ContainerInfo rootNode)
@@ -27,16 +31,15 @@ namespace mRemoteNG.Tree
             rootNode.CollectionChanged -= RaiseCollectionChangedEvent;
             rootNode.PropertyChanged -= RaisePropertyChangedEvent;
             RootNodes.Remove(rootNode);
-            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, rootNode));
+            RaiseCollectionChangedEvent(this,
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, rootNode));
         }
 
         public IEnumerable<ConnectionInfo> GetRecursiveChildList()
         {
             var list = new List<ConnectionInfo>();
             foreach (var rootNode in RootNodes)
-            {
                 list.AddRange(GetRecursiveChildList(rootNode));
-            }
             return list;
         }
 
@@ -47,7 +50,7 @@ namespace mRemoteNG.Tree
 
         public void RenameNode(ConnectionInfo connectionInfo, string newName)
         {
-            if (newName == null || newName.Length <= 0)
+            if ((newName == null) || (newName.Length <= 0))
                 return;
 
             connectionInfo.Name = newName;
@@ -59,7 +62,7 @@ namespace mRemoteNG.Tree
         {
             if (connectionInfo is RootNodeInfo)
                 return;
-            
+
             connectionInfo?.RemoveParent();
         }
 
@@ -68,13 +71,11 @@ namespace mRemoteNG.Tree
             connectionInfo.Clone();
         }
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
         private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
             CollectionChanged?.Invoke(sender, args);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
         {
             PropertyChanged?.Invoke(sender, args);

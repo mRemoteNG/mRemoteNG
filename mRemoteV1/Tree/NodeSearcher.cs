@@ -2,15 +2,11 @@
 using System.Linq;
 using mRemoteNG.Connection;
 
-
 namespace mRemoteNG.Tree
 {
     internal class NodeSearcher
     {
         private readonly ConnectionTreeModel _connectionTreeModel;
-
-        public List<ConnectionInfo> Matches { get; private set; }
-        public ConnectionInfo CurrentMatch { get; private set; }
 
 
         public NodeSearcher(ConnectionTreeModel connectionTreeModel)
@@ -18,16 +14,17 @@ namespace mRemoteNG.Tree
             _connectionTreeModel = connectionTreeModel;
         }
 
+        public List<ConnectionInfo> Matches { get; private set; }
+        public ConnectionInfo CurrentMatch { get; private set; }
+
         internal IEnumerable<ConnectionInfo> SearchByName(string searchText)
         {
             ResetMatches();
             if (searchText == "") return Matches;
-            var nodes = (List<ConnectionInfo>)_connectionTreeModel.GetRecursiveChildList();
+            var nodes = (List<ConnectionInfo>) _connectionTreeModel.GetRecursiveChildList();
             foreach (var node in nodes)
-            {
                 if (node.Name.ToLowerInvariant().Contains(searchText.ToLowerInvariant()))
                     Matches.Add(node);
-            }
             if (Matches.Count > 0)
                 CurrentMatch = Matches.First();
             return Matches;
@@ -36,7 +33,7 @@ namespace mRemoteNG.Tree
         internal ConnectionInfo NextMatch()
         {
             var currentMatchIndex = Matches.IndexOf(CurrentMatch);
-            if (currentMatchIndex < Matches.Count-1)
+            if (currentMatchIndex < Matches.Count - 1)
                 CurrentMatch = Matches[currentMatchIndex + 1];
             return CurrentMatch;
         }

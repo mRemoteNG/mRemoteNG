@@ -19,7 +19,7 @@ namespace mRemoteNG.Config.Settings
             {
                 var with1 = frmMain.Default;
                 var windowPlacement = new WindowPlacement(frmMain.Default);
-                if (with1.WindowState == FormWindowState.Minimized & windowPlacement.RestoreToMaximized)
+                if ((with1.WindowState == FormWindowState.Minimized) & windowPlacement.RestoreToMaximized)
                 {
                     with1.Opacity = 0;
                     with1.WindowState = FormWindowState.Maximized;
@@ -37,9 +37,7 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.MainFormState = with1.WindowState;
 
                 if (with1.Fullscreen != null)
-                {
                     mRemoteNG.Settings.Default.MainFormKiosk = with1.Fullscreen.Value;
-                }
 
                 mRemoteNG.Settings.Default.FirstStart = false;
                 mRemoteNG.Settings.Default.ResetPanels = false;
@@ -48,22 +46,19 @@ namespace mRemoteNG.Config.Settings
 
                 mRemoteNG.Settings.Default.ExtAppsTBLocation = with1.tsExternalTools.Location;
                 if (with1.tsExternalTools.Parent != null)
-                {
                     mRemoteNG.Settings.Default.ExtAppsTBParentDock = with1.tsExternalTools.Parent.Dock.ToString();
-                }
                 mRemoteNG.Settings.Default.ExtAppsTBVisible = with1.tsExternalTools.Visible;
                 mRemoteNG.Settings.Default.ExtAppsTBShowText = with1.cMenToolbarShowText.Checked;
 
                 mRemoteNG.Settings.Default.QuickyTBLocation = with1.tsQuickConnect.Location;
                 if (with1.tsQuickConnect.Parent != null)
-                {
                     mRemoteNG.Settings.Default.QuickyTBParentDock = with1.tsQuickConnect.Parent.Dock.ToString();
-                }
                 mRemoteNG.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
 
                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                 mRemoteNG.Settings.Default.ConDefaultPassword =
-                    cryptographyProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), EncryptionKey);
+                    cryptographyProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword),
+                        EncryptionKey);
 
                 mRemoteNG.Settings.Default.Save();
 
@@ -81,9 +76,7 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 if (Directory.Exists(SettingsFileInfo.SettingsPath) == false)
-                {
                     Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
-                }
 
                 frmMain.Default.pnlDock.SaveAsXml(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName);
             }
@@ -98,9 +91,7 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 if (Directory.Exists(SettingsFileInfo.SettingsPath) == false)
-                {
                     Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
-                }
 
                 var xmlTextWriter =
                     new XmlTextWriter(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.ExtAppsFilesName,

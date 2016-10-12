@@ -1,10 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
-using System;
-using System.Diagnostics;
-using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace mRemoteNG.App
 {
@@ -20,7 +20,9 @@ namespace mRemoteNG.App
         {
             if (FipsPolicyEnabledForServer2003() || FipsPolicyEnabledForServer2008AndNewer())
             {
-                MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName, GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error));
+                MessageBox.Show(frmMain.Default,
+                    string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName,
+                        GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error));
                 Environment.Exit(1);
             }
         }
@@ -31,7 +33,7 @@ namespace mRemoteNG.App
             var fipsPolicy = regKey?.GetValue("FIPSAlgorithmPolicy");
             if (fipsPolicy == null) return false;
             fipsPolicy = Convert.ToInt32(fipsPolicy);
-            return (int)fipsPolicy != 0;
+            return (int) fipsPolicy != 0;
         }
 
         private bool FipsPolicyEnabledForServer2008AndNewer()
@@ -40,7 +42,7 @@ namespace mRemoteNG.App
             var fipsPolicy = regKey?.GetValue("Enabled");
             if (fipsPolicy == null) return false;
             fipsPolicy = Convert.ToInt32(fipsPolicy);
-            return (int)fipsPolicy != 0;
+            return (int) fipsPolicy != 0;
         }
 
         private void CheckLenovoAutoScrollUtility()
@@ -48,7 +50,7 @@ namespace mRemoteNG.App
             if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
                 return;
 
-            Process[] proccesses = new Process[] { };
+            Process[] proccesses = {};
             try
             {
                 proccesses = Process.GetProcessesByName("virtscrl");
@@ -60,7 +62,10 @@ namespace mRemoteNG.App
 
             if (proccesses.Length > 0)
             {
-                CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected, string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
+                CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected,
+                    string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, Application.ProductName), "",
+                    "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok, ESysIcons.Warning,
+                    ESysIcons.Warning);
                 if (CTaskDialog.VerificationChecked)
                     Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
             }

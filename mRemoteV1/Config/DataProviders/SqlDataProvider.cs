@@ -2,17 +2,16 @@
 using System.Data.SqlClient;
 using mRemoteNG.Config.DatabaseConnectors;
 
-
 namespace mRemoteNG.Config.DataProviders
 {
     public class SqlDataProvider : IDataProvider<DataTable>
     {
-        public SqlDatabaseConnector SqlDatabaseConnector { get; }
-
         public SqlDataProvider(SqlDatabaseConnector sqlDatabaseConnector)
         {
             SqlDatabaseConnector = sqlDatabaseConnector;
         }
+
+        public SqlDatabaseConnector SqlDatabaseConnector { get; }
 
         public DataTable Load()
         {

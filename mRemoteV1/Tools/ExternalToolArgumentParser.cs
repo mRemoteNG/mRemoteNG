@@ -45,7 +45,7 @@ namespace mRemoteNG.Tools
                     var tokenStartPrefix = input.Substring(tokenStart - 1, 1).ToCharArray()[0];
                     var tokenEndPrefix = input.Substring(tokenEnd - 1, 1).ToCharArray()[0];
 
-                    if (tokenStartPrefix == '\\' && tokenEndPrefix == '\\')
+                    if ((tokenStartPrefix == '\\') && (tokenEndPrefix == '\\'))
                     {
                         isEnvironmentVariable = true;
 
@@ -56,7 +56,7 @@ namespace mRemoteNG.Tools
                         // Remove the last backslash from the name
                         variableNameLength--;
                     }
-                    else if (tokenStartPrefix == '^' && tokenEndPrefix == '^')
+                    else if ((tokenStartPrefix == '^') && (tokenEndPrefix == '^'))
                     {
                         // Add the first caret to the token
                         tokenStart--;
@@ -94,9 +94,7 @@ namespace mRemoteNG.Tools
 
                 var replacementValue = token;
                 if (!isEnvironmentVariable)
-                {
                     replacementValue = GetVariableReplacement(variableName, token);
-                }
 
                 var haveReplacement = false;
 
@@ -113,7 +111,9 @@ namespace mRemoteNG.Tools
 
                 if (haveReplacement)
                 {
-                    var trailing = tokenEnd + 2 <= input.Length ? input.Substring(tokenEnd + 1, 1).ToCharArray()[0] : '\0';
+                    var trailing = tokenEnd + 2 <= input.Length
+                        ? input.Substring(tokenEnd + 1, 1).ToCharArray()[0]
+                        : '\0';
 
                     if (escape == EscapeType.All)
                     {
@@ -122,7 +122,7 @@ namespace mRemoteNG.Tools
                             replacementValue = CommandLineArguments.EscapeBackslashesForTrailingQuote(replacementValue);
                     }
 
-                    if (escape == EscapeType.All || escape == EscapeType.ShellMetacharacters)
+                    if ((escape == EscapeType.All) || (escape == EscapeType.ShellMetacharacters))
                         replacementValue = CommandLineArguments.EscapeShellMetacharacters(replacementValue);
 
                     replacements.Add(new Replacement(tokenStart, tokenLength, replacementValue));
@@ -197,19 +197,15 @@ namespace mRemoteNG.Tools
             var result = input;
 
             for (index = result.Length; index >= 0; index--)
-            {
                 foreach (var replacement in replacements)
                 {
                     if (replacement.Start != index)
-                    {
                         continue;
-                    }
 
                     var before = result.Substring(0, replacement.Start);
                     var after = result.Substring(replacement.Start + replacement.Length);
                     result = before + replacement.Value + after;
                 }
-            }
             return result;
         }
 

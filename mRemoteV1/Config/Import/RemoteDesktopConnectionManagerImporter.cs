@@ -4,11 +4,10 @@ using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Container;
 
-
 namespace mRemoteNG.Config.Import
 {
-	public class RemoteDesktopConnectionManagerImporter : IConnectionImporter
-	{
+    public class RemoteDesktopConnectionManagerImporter : IConnectionImporter
+    {
         public void Import(object filePath, ContainerInfo destinationContainer)
         {
             var fileNameAsString = filePath as string;
@@ -19,7 +18,7 @@ namespace mRemoteNG.Config.Import
         }
 
         public void Import(string filePath, ContainerInfo destinationContainer)
-		{
+        {
             var dataProvider = new FileDataProvider(filePath);
             var fileContent = dataProvider.Load();
 
@@ -31,5 +30,5 @@ namespace mRemoteNG.Config.Import
             var childrenToAdd = importedRootNode.Children.ToArray();
             destinationContainer.AddChildRange(childrenToAdd);
         }
-	}
+    }
 }

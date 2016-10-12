@@ -10,19 +10,19 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Messages;
 
-
 namespace mRemoteNG.Tools
 {
     public class ScanHost
     {
         #region Properties
-        public static int SSHPort { get; set; } = (int)ProtocolSSH1.Defaults.Port;
-        public static int TelnetPort { get; set; } = (int)ProtocolTelnet.Defaults.Port;
-        public static int HTTPPort { get; set; } = (int)ProtocolHTTP.Defaults.Port;
-        public static int HTTPSPort { get; set; } = (int)ProtocolHTTPS.Defaults.Port;
-        public static int RloginPort { get; set; } = (int)ProtocolRlogin.Defaults.Port;
-        public static int RDPPort { get; set; } = (int)ProtocolRDP.Defaults.Port;
-        public static int VNCPort { get; set; } = (int)ProtocolVNC.Defaults.Port;
+
+        public static int SSHPort { get; set; } = (int) ProtocolSSH1.Defaults.Port;
+        public static int TelnetPort { get; set; } = (int) ProtocolTelnet.Defaults.Port;
+        public static int HTTPPort { get; set; } = (int) ProtocolHTTP.Defaults.Port;
+        public static int HTTPSPort { get; set; } = (int) ProtocolHTTPS.Defaults.Port;
+        public static int RloginPort { get; set; } = (int) ProtocolRlogin.Defaults.Port;
+        public static int RDPPort { get; set; } = (int) ProtocolRDP.Defaults.Port;
+        public static int VNCPort { get; set; } = (int) ProtocolVNC.Defaults.Port;
         public ArrayList OpenPorts { get; set; }
         public ArrayList ClosedPorts { get; set; }
         public bool RDP { get; set; }
@@ -34,20 +34,21 @@ namespace mRemoteNG.Tools
         public bool HTTPS { get; set; }
         public string HostIp { get; set; }
         public string HostName { get; set; } = "";
+
         public string HostNameWithoutDomain
         {
             get
             {
-                if (string.IsNullOrEmpty(HostName) || HostName == HostIp)
-                {
+                if (string.IsNullOrEmpty(HostName) || (HostName == HostIp))
                     return HostIp;
-                }
                 return HostName.Split('.')[0];
             }
         }
+
         #endregion
 
         #region Methods
+
         public ScanHost(string host)
         {
             HostIp = host;
@@ -59,7 +60,9 @@ namespace mRemoteNG.Tools
         {
             try
             {
-                return "SSH: " + Convert.ToString(SSH) + " Telnet: " + Convert.ToString(Telnet) + " HTTP: " + Convert.ToString(HTTP) + " HTTPS: " + Convert.ToString(HTTPS) + " Rlogin: " + Convert.ToString(Rlogin) + " RDP: " + Convert.ToString(RDP) + " VNC: " + Convert.ToString(VNC);
+                return "SSH: " + Convert.ToString(SSH) + " Telnet: " + Convert.ToString(Telnet) + " HTTP: " +
+                       Convert.ToString(HTTP) + " HTTPS: " + Convert.ToString(HTTPS) + " Rlogin: " +
+                       Convert.ToString(Rlogin) + " RDP: " + Convert.ToString(RDP) + " VNC: " + Convert.ToString(VNC);
             }
             catch (Exception)
             {
@@ -90,17 +93,14 @@ namespace mRemoteNG.Tools
                 var strClosed = "";
 
                 foreach (int p in OpenPorts)
-                {
                     strOpen += p + ", ";
-                }
 
                 foreach (int p in ClosedPorts)
-                {
                     strClosed += p + ", ";
-                }
 
                 listViewItem.SubItems.Add(strOpen.Substring(0, strOpen.Length > 0 ? strOpen.Length - 2 : strOpen.Length));
-                listViewItem.SubItems.Add(strClosed.Substring(0, strClosed.Length > 0 ? strClosed.Length - 2 : strClosed.Length));
+                listViewItem.SubItems.Add(strClosed.Substring(0,
+                    strClosed.Length > 0 ? strClosed.Length - 2 : strClosed.Length));
 
                 return listViewItem;
             }
@@ -126,6 +126,7 @@ namespace mRemoteNG.Tools
             HTTPS = value;
             HTTP = value;
         }
+
         #endregion
     }
 }

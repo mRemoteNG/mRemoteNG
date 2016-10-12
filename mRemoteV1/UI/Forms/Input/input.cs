@@ -2,9 +2,10 @@
  * http://www.csharp-examples.net/inputbox/ 
  * 
  */
+
 using System;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Forms.Input
 {
@@ -56,4 +57,3 @@ namespace mRemoteNG.UI.Forms.Input
         }
     }
 }
-

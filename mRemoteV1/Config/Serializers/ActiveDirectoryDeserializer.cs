@@ -7,7 +7,6 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-
 namespace mRemoteNG.Config.Serializers
 {
     public class ActiveDirectoryDeserializer : IDeserializer
@@ -51,19 +50,20 @@ namespace mRemoteNG.Config.Serializers
                     ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
                     ldapSearcher.Filter = ldapFilter;
                     ldapSearcher.SearchScope = SearchScope.OneLevel;
-                    ldapSearcher.PropertiesToLoad.AddRange(new[] { "securityEquals", "cn" });
+                    ldapSearcher.PropertiesToLoad.AddRange(new[] {"securityEquals", "cn"});
 
                     var ldapResults = ldapSearcher.FindAll();
                     foreach (SearchResult ldapResult in ldapResults)
-                    {
                         using (var directoryEntry = ldapResult.GetDirectoryEntry())
+                        {
                             DeserializeConnection(directoryEntry, parentContainer);
-                    }
+                        }
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.",
+                    ex, logOnly: true);
             }
         }
 

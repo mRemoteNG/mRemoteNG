@@ -1,8 +1,6 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
-
-
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -10,17 +8,17 @@ using System.Runtime.InteropServices;
 
 // Review the values of the assembly attributes
 
-[assembly:AssemblyTitle("mRemoteNG")]
+[assembly: AssemblyTitle("mRemoteNG")]
 [assembly: AssemblyDescription("Multi-protocol remote connections manager")]
 [assembly: AssemblyCompany("")]
-[assembly:AssemblyProduct("mRemoteNG")]
+[assembly: AssemblyProduct("mRemoteNG")]
 [assembly: AssemblyCopyright("Copyright © 2016 mRemoteNG Dev Team; 2010-2013 Riley McArdle; 2007-2009 Felix Deimel")]
-[assembly:AssemblyTrademark("")]
-
-[assembly:ComVisible(false)]
+[assembly: AssemblyTrademark("")]
+[assembly: ComVisible(false)]
 
 //The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly:Guid("A99669B2-FAEB-11DE-995A-826C56D89593")]
+
+[assembly: Guid("A99669B2-FAEB-11DE-995A-826C56D89593")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,6 +32,4 @@ using System.Runtime.InteropServices;
 // <Assembly: AssemblyVersion("1.0.*")>
 
 [assembly: AssemblyVersion("1.75.*")]
-
-[assembly:NeutralResourcesLanguageAttribute("en")]
-
+[assembly: NeutralResourcesLanguage("en")]

@@ -6,12 +6,12 @@ namespace mRemoteNG.Config.DataProviders
 {
     public class FileDataProvider : IDataProvider<string>
     {
-        public string FilePath { get; set; }
-
         public FileDataProvider(string filePath)
         {
             FilePath = filePath;
         }
+
+        public string FilePath { get; set; }
 
         public virtual string Load()
         {

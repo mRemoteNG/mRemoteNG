@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+
 #if !PORTABLE
 using System.Windows.Forms;
 #endif
@@ -15,7 +16,7 @@ namespace mRemoteNG.App.Info
 #else
         public static readonly string SettingsPath = exePath;
 #endif
-        
+
         public static readonly string LayoutFileName = "pnlLayout.xml";
         public static readonly string ExtAppsFilesName = "extApps.xml";
         public const string ThemesFileName = "Themes.xml";

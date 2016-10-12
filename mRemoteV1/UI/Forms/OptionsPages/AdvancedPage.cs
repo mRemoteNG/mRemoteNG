@@ -76,7 +76,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             if (puttyPathChanged)
             {
-                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath ? Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
+                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath
+                    ? Settings.Default.CustomPuttyPath
+                    : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
             }
 
@@ -135,7 +137,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             catch (Exception ex)
             {
                 MessageBox.Show(Language.strErrorCouldNotLaunchPutty, Application.ProductName,
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 Runtime.MessageCollector.AddExceptionMessage(Language.strErrorCouldNotLaunchPutty, ex, logOnly: true);
             }
         }
@@ -158,7 +160,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
-
         }
 
         #endregion
