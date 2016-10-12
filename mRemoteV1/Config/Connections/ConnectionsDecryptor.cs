@@ -26,7 +26,7 @@ namespace mRemoteNG.Config.Connections
             return _cryptographyProvider.Decrypt(plainText, Runtime.EncryptionKey);
         }
 
-        public string DecryptConnections(string xml)
+        public string LegacyFullFileDecrypt(string xml)
         {
             if (string.IsNullOrEmpty(xml)) return "";
             if (xml.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>")) return xml;

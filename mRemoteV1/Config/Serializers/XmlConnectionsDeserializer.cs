@@ -41,7 +41,7 @@ namespace mRemoteNG.Config.Serializers
         private void LoadXmlConnectionData(string connections)
         {
             _decryptor = new ConnectionsDecryptor();
-            connections = _decryptor.DecryptConnections(connections);
+            connections = _decryptor.LegacyFullFileDecrypt(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
                 _xmlDocument.LoadXml(connections);
