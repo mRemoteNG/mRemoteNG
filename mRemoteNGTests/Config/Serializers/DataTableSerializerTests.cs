@@ -11,12 +11,12 @@ namespace mRemoteNGTests.Config.Serializers
     public class DataTableSerializerTests
     {
         private DataTableSerializer _dataTableSerializer;
-        private Save _saveFilter;
+        private SaveFilter _saveFilter;
 
         [SetUp]
         public void Setup()
         {
-            _saveFilter = new Save();
+            _saveFilter = new SaveFilter();
             _dataTableSerializer = new DataTableSerializer(_saveFilter);
         }
 

@@ -12,7 +12,7 @@ namespace mRemoteNG.Config.Serializers
     public class CsvConnectionsSerializerRemoteDesktop2008Format : ISerializer<string>
     {
         private string _csv = "";
-        public Save SaveSecurity { get; set; }
+        public SaveFilter SaveFilter { get; set; }
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {

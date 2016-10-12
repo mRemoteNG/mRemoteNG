@@ -451,7 +451,7 @@ namespace mRemoteNG.App
                     connectionsSaver.ConnectionFileName = GetStartupConnectionFileName();
 
                 connectionsSaver.Export = false;
-                connectionsSaver.SaveSecurity = new Save();
+                connectionsSaver.SaveFilter = new SaveFilter();
                 connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
@@ -506,7 +506,7 @@ namespace mRemoteNG.App
                     connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
                     connectionsSave.ConnectionFileName = saveFileDialog.FileName;
                     connectionsSave.Export = false;
-                    connectionsSave.SaveSecurity = new Save();
+                    connectionsSave.SaveFilter = new SaveFilter();
                     connectionsSave.ConnectionTreeModel = ConnectionTreeModel;
 
                     connectionsSave.SaveConnections();

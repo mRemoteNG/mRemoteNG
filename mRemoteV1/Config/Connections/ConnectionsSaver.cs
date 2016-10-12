@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Connections
 		public TreeNode RootTreeNode {get; set;}
 		public bool Export {get; set;}
 		public Format SaveFormat {get; set;}
-		public Save SaveSecurity {get; set;}
+		public SaveFilter SaveFilter {get; set;}
         public ConnectionTreeModel ConnectionTreeModel { get; set; }
         #endregion
 				
@@ -221,7 +221,7 @@ namespace mRemoteNG.Config.Connections
 	    {
             var sqlQuery = new SqlCommand("DELETE FROM tblCons", sqlDatabaseConnector.SqlConnection);
             sqlQuery.ExecuteNonQuery();
-            var serializer = new DataTableSerializer(SaveSecurity);
+            var serializer = new DataTableSerializer(SaveFilter);
 	        var dataTable = serializer.Serialize(rootTreeNode);
             var dataProvider = new SqlDataProvider(sqlDatabaseConnector);
             dataProvider.Save(dataTable);
@@ -243,7 +243,7 @@ namespace mRemoteNG.Config.Connections
 				var xmlConnectionsSerializer = new XmlConnectionsSerializer()
 				{
                     Export = Export,
-                    SaveSecurity = SaveSecurity,
+                    SaveFilter = SaveFilter,
                     UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
@@ -259,7 +259,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private void SaveToMremotengFormattedCsv()
 		{
-            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveSecurity = SaveSecurity };
+            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveFilter = SaveFilter };
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
             var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);

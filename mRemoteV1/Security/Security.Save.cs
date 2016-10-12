@@ -1,9 +1,9 @@
 
 namespace mRemoteNG.Security
 {
-	public class Save
+	public class SaveFilter
 	{
-		public Save(bool disableEverything = false)
+		public SaveFilter(bool disableEverything = false)
 		{
 		    if (disableEverything) return;
 		    Username = true;
