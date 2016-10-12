@@ -375,7 +375,7 @@
     </Compile>
     <Compile Include="Tree\Root\RootNodeInfo.cs" />
     <Compile Include="Security\Security.Impersonator.cs" />
-    <Compile Include="Security\Security.Save.cs" />
+    <Compile Include="Security\SaveFilter.cs" />
     <Compile Include="Tools\IeBrowserEmulation.cs" />
     <Compile Include="Tools\ProcessController.cs" />
     <Compile Include="Tools\PuttyTypeDetector.cs" />
