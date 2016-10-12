@@ -186,9 +186,9 @@ namespace mRemoteNG.Config.Serializers
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
-            dataRow["Username"] = _saveFilter.Username ? connectionInfo.Username : "";
-            dataRow["DomainName"] = _saveFilter.Domain ? connectionInfo.Domain : "";
-            dataRow["Password"] = _saveFilter.Password ? connectionInfo.Password : "";
+            dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
+            dataRow["DomainName"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
+            dataRow["Password"] = _saveFilter.SavePassword ? connectionInfo.Password : "";
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["Protocol"] = connectionInfo.Protocol;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
@@ -236,7 +236,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
             dataRow["RDGatewayPassword"] = connectionInfo.RDGatewayPassword;
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
-            if (_saveFilter.Inheritance)
+            if (_saveFilter.SaveInheritance)
             {
                 dataRow["InheritCacheBitmaps"] = connectionInfo.Inheritance.CacheBitmaps;
                 dataRow["InheritColors"] = connectionInfo.Inheritance.Colors;

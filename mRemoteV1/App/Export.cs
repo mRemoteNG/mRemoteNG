@@ -50,10 +50,10 @@ namespace mRemoteNG.App
 							break;
 					}
 						
-					saveSecurity.Username = exportForm.IncludeUsername;
-					saveSecurity.Password = exportForm.IncludePassword;
-					saveSecurity.Domain = exportForm.IncludeDomain;
-					saveSecurity.Inheritance = exportForm.IncludeInheritance;
+					saveSecurity.SaveUsername = exportForm.IncludeUsername;
+					saveSecurity.SavePassword = exportForm.IncludePassword;
+					saveSecurity.SaveDomain = exportForm.IncludeDomain;
+					saveSecurity.SaveInheritance = exportForm.IncludeInheritance;
 						
 					SaveExportFile(exportForm.FileName, exportForm.SaveFormat, saveSecurity, exportTarget);
 				}

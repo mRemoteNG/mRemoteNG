@@ -199,17 +199,17 @@ namespace mRemoteNG.Config.Serializers
                 _xmlTextWriter.WriteAttributeString("Icon", "", connectionInfo.Icon);
                 _xmlTextWriter.WriteAttributeString("Panel", "", connectionInfo.Panel);
 
-                if (SaveFilter.Username)
+                if (SaveFilter.SaveUsername)
                     _xmlTextWriter.WriteAttributeString("Username", "", connectionInfo.Username);
                 else
                     _xmlTextWriter.WriteAttributeString("Username", "", "");
 
-                if (SaveFilter.Domain)
+                if (SaveFilter.SaveDomain)
                     _xmlTextWriter.WriteAttributeString("Domain", "", connectionInfo.Domain);
                 else
                     _xmlTextWriter.WriteAttributeString("Domain", "", "");
 
-                if (SaveFilter.Password)
+                if (SaveFilter.SavePassword)
                     _xmlTextWriter.WriteAttributeString("Password", "", _cryptographyProvider.Encrypt(connectionInfo.Password, _password));
                 else
                     _xmlTextWriter.WriteAttributeString("Password", "", "");
@@ -266,22 +266,22 @@ namespace mRemoteNG.Config.Serializers
                 _xmlTextWriter.WriteAttributeString("RDGatewayHostname", "", connectionInfo.RDGatewayHostname);
                 _xmlTextWriter.WriteAttributeString("RDGatewayUseConnectionCredentials", "", connectionInfo.RDGatewayUseConnectionCredentials.ToString());
 
-                if (SaveFilter.Username)
+                if (SaveFilter.SaveUsername)
                     _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", connectionInfo.RDGatewayUsername);
                 else
                     _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", "");
 
-                if (SaveFilter.Password)
+                if (SaveFilter.SavePassword)
                     _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _password));
                 else
                     _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", "");
 
-                if (SaveFilter.Domain)
+                if (SaveFilter.SaveDomain)
                     _xmlTextWriter.WriteAttributeString("RDGatewayDomain", "", connectionInfo.RDGatewayDomain);
                 else
                     _xmlTextWriter.WriteAttributeString("RDGatewayDomain", "", "");
 
-                if (SaveFilter.Inheritance)
+                if (SaveFilter.SaveInheritance)
                 {
                     _xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", Convert.ToString(connectionInfo.Inheritance.CacheBitmaps));
                     _xmlTextWriter.WriteAttributeString("InheritColors", "", Convert.ToString(connectionInfo.Inheritance.Colors));
