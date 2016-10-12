@@ -190,29 +190,31 @@ namespace mRemoteNG.UI.Forms
 
         private void btnBrowse_Click(object sender, EventArgs e)
 		{
-			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+			using (var saveFileDialog = new SaveFileDialog())
 			{
 				saveFileDialog.CheckPathExists = true;
 				saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 				saveFileDialog.OverwritePrompt = true;
-					
-				List<string> fileTypes = new List<string>();
+				
+				var fileTypes = new List<string>();
 				fileTypes.AddRange(new[] {Language.strFiltermRemoteXML, "*.xml"});
 				fileTypes.AddRange(new[] {Language.strFiltermRemoteCSV, "*.csv"});
-				fileTypes.AddRange(new[] {Language.strFiltervRD2008CSV, "*.csv"});
 				fileTypes.AddRange(new[] {Language.strFilterAll, "*.*"});
-					
+				
 				saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
-					
-				if (saveFileDialog.ShowDialog(this) != DialogResult.OK)
-				{
+			    SelectFileTypeBasedOnSaveFormat(saveFileDialog);
+
+                if (saveFileDialog.ShowDialog(this) != DialogResult.OK)
 					return ;
-				}
-					
+				
 				txtFileName.Text = saveFileDialog.FileName;
             }
-				
 		}
+
+        private void SelectFileTypeBasedOnSaveFormat(FileDialog saveFileDialog)
+        {
+            saveFileDialog.FilterIndex = SaveFormat == ConnectionsSaver.Format.mRCSV ? 2 : 1;
+        }
 
         private void btnOK_Click(object sender, EventArgs e)
 		{
