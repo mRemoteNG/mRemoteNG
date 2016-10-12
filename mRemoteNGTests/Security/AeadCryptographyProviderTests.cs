@@ -1,4 +1,6 @@
-﻿using System.Security;
+﻿using System;
+using System.Collections;
+using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
@@ -39,11 +41,12 @@ namespace mRemoteNGTests.Security
             Assert.That(cipherText.IsBase64String, Is.True);
         }
 
-        [Test]
-        public void DecryptedTextIsEqualToOriginalPlainText()
+        [TestCaseSource(nameof(GetAllBlockCipherEngineAndModeCombinations))]
+        public void DecryptedTextIsEqualToOriginalPlainText(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var cipherText = _cryptographyProvider.Encrypt(_plainText, _encryptionKey);
-            var decryptedCipherText = _cryptographyProvider.Decrypt(cipherText, _encryptionKey);
+            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+            var cipherText = cryptoProvider.Encrypt(_plainText, _encryptionKey);
+            var decryptedCipherText = cryptoProvider.Decrypt(cipherText, _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(_plainText));
         }
 
@@ -53,6 +56,21 @@ namespace mRemoteNGTests.Security
             var cipherText1 = _cryptographyProvider.Encrypt(_plainText, _encryptionKey);
             var cipherText2 = _cryptographyProvider.Encrypt(_plainText, _encryptionKey);
             Assert.That(cipherText1, Is.Not.EqualTo(cipherText2));
+        }
+
+        private static IEnumerable GetAllBlockCipherEngineAndModeCombinations()
+        {
+            var combinationList = new ArrayList();
+            var engineChoices = Enum.GetValues(typeof(BlockCipherEngines));
+            var modeChoices = Enum.GetValues(typeof(BlockCipherModes));
+            foreach (var engine in engineChoices)
+            {
+                foreach (var mode in modeChoices)
+                {
+                    combinationList.Add(new[] { engine, mode });
+                }
+            }
+            return combinationList;
         }
     }
 }

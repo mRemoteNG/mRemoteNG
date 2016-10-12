@@ -38,7 +38,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkAutomaticallyGetSessionInfo.Text = Language.strAutomaticallyGetSessionInfo;
             chkWriteLogFile.Text = Language.strWriteLogFile;
             lblUVNCSCPort.Text = Language.strUltraVNCSCListeningPort;
-            chkEncryptCompleteFile.Text = Language.strEncryptCompleteConnectionFile;
         }
 
         public override void LoadSettings()
@@ -47,7 +46,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkWriteLogFile.Checked = Settings.Default.WriteLogFile;
 
-            chkEncryptCompleteFile.Checked = Settings.Default.EncryptCompleteConnectionsFile;
             chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
             chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
             numPuttyWaitTime.Value = Settings.Default.MaxPuttyWaitTime;
@@ -62,7 +60,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             Settings.Default.WriteLogFile = chkWriteLogFile.Checked;
-            Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
             Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
             Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
 

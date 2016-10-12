@@ -14,12 +14,12 @@ namespace mRemoteNG.Config.Serializers
     {
         private DataTable _dataTable;
         private const string TableName = "tblCons";
-        private readonly Save _saveSecurity;
+        private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
 
-        public DataTableSerializer(Save saveSecurity)
+        public DataTableSerializer(SaveFilter saveFilter)
         {
-            _saveSecurity = saveSecurity;
+            _saveFilter = saveFilter;
         }
 
 
@@ -186,9 +186,9 @@ namespace mRemoteNG.Config.Serializers
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
-            dataRow["Username"] = _saveSecurity.Username ? connectionInfo.Username : "";
-            dataRow["DomainName"] = _saveSecurity.Domain ? connectionInfo.Domain : "";
-            dataRow["Password"] = _saveSecurity.Password ? connectionInfo.Password : "";
+            dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
+            dataRow["DomainName"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
+            dataRow["Password"] = _saveFilter.SavePassword ? connectionInfo.Password : "";
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["Protocol"] = connectionInfo.Protocol;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
@@ -236,7 +236,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
             dataRow["RDGatewayPassword"] = connectionInfo.RDGatewayPassword;
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
-            if (_saveSecurity.Inheritance)
+            if (_saveFilter.SaveInheritance)
             {
                 dataRow["InheritCacheBitmaps"] = connectionInfo.Inheritance.CacheBitmaps;
                 dataRow["InheritColors"] = connectionInfo.Inheritance.Colors;

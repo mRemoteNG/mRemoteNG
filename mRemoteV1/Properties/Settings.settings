@@ -575,5 +575,11 @@
     <Setting Name="ConRDPOverallConnectionTimeout" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
+    <Setting Name="EncryptionEngine" Type="mRemoteNG.Security.BlockCipherEngines" Scope="User">
+      <Value Profile="(Default)">AES</Value>
+    </Setting>
+    <Setting Name="EncryptionBlockCipherMode" Type="mRemoteNG.Security.BlockCipherModes" Scope="User">
+      <Value Profile="(Default)">GCM</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

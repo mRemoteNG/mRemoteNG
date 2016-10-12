@@ -43,7 +43,7 @@ namespace mRemoteNG.Config.Connections
 				
         #region Private Properties
 		private XmlTextWriter _xmlTextWriter;
-		private SecureString _password = GeneralAppInfo.EncryptionKey;
+		private SecureString _password = Runtime.EncryptionKey;
 						
 		private int _currentNodeIndex;
 		private string _parentConstantId = Convert.ToString(0);
@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Connections
 		public TreeNode RootTreeNode {get; set;}
 		public bool Export {get; set;}
 		public Format SaveFormat {get; set;}
-		public Save SaveSecurity {get; set;}
+		public SaveFilter SaveFilter {get; set;}
         public ConnectionTreeModel ConnectionTreeModel { get; set; }
         #endregion
 				
@@ -82,8 +82,6 @@ namespace mRemoteNG.Config.Connections
 					break;
 				default:
 					SaveToXml();
-					if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
-						EncryptCompleteFile();
 					if (!Export)
 						frmMain.Default.ConnectionsFileName = ConnectionFileName;
 					break;
@@ -155,7 +153,7 @@ namespace mRemoteNG.Config.Connections
                     isVerified = true;
 
                 if (isVerified == false)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProdName));
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProductName));
             }
             catch (Exception ex)
             {
@@ -223,7 +221,7 @@ namespace mRemoteNG.Config.Connections
 	    {
             var sqlQuery = new SqlCommand("DELETE FROM tblCons", sqlDatabaseConnector.SqlConnection);
             sqlQuery.ExecuteNonQuery();
-            var serializer = new DataTableSerializer(SaveSecurity);
+            var serializer = new DataTableSerializer(SaveFilter);
 	        var dataTable = serializer.Serialize(rootTreeNode);
             var dataProvider = new SqlDataProvider(sqlDatabaseConnector);
             dataProvider.Save(dataTable);
@@ -237,20 +235,6 @@ namespace mRemoteNG.Config.Connections
             sqlQuery.ExecuteNonQuery();
         }
         #endregion
-		
-		private void EncryptCompleteFile()
-		{
-			var streamReader = new StreamReader(ConnectionFileName);
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-
-		    var fileContents = streamReader.ReadToEnd();
-			streamReader.Close();
-
-		    if (string.IsNullOrEmpty(fileContents)) return;
-		    var streamWriter = new StreamWriter(ConnectionFileName);
-		    streamWriter.Write(cryptographyProvider.Encrypt(fileContents, _password));
-		    streamWriter.Close();
-		}
 				
 		private void SaveToXml()
 		{
@@ -259,7 +243,8 @@ namespace mRemoteNG.Config.Connections
 				var xmlConnectionsSerializer = new XmlConnectionsSerializer()
 				{
                     Export = Export,
-                    SaveSecurity = SaveSecurity
+                    SaveFilter = SaveFilter,
+                    UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
 						
@@ -274,7 +259,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private void SaveToMremotengFormattedCsv()
 		{
-            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveSecurity = SaveSecurity };
+            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveFilter = SaveFilter };
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
             var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);

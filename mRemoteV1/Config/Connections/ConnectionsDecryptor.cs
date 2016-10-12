@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -17,20 +16,28 @@ namespace mRemoteNG.Config.Connections
             _cryptographyProvider = new LegacyRijndaelCryptographyProvider();
         }
 
-        public string DecryptConnections(string xml)
+        public ConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode)
         {
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
+        }
 
+        public string Decrypt(string plainText)
+        {
+            return _cryptographyProvider.Decrypt(plainText, Runtime.EncryptionKey);
+        }
+
+        public string LegacyFullFileDecrypt(string xml)
+        {
             if (string.IsNullOrEmpty(xml)) return "";
             if (xml.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>")) return xml;
 
-            var strDecr = "";
+            var decryptedContent = "";
             bool notDecr;
 
             try
             {
-                strDecr = cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
-                notDecr = strDecr == xml;
+                decryptedContent = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
+                notDecr = decryptedContent == xml;
             }
             catch (Exception)
             {
@@ -41,16 +48,16 @@ namespace mRemoteNG.Config.Connections
             {
                 if (Authenticate(xml, true))
                 {
-                    strDecr = cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
+                    decryptedContent = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
                     notDecr = false;
                 }
 
                 if (notDecr == false)
-                    return strDecr;
+                    return decryptedContent;
             }
             else
             {
-                return strDecr;
+                return decryptedContent;
             }
 
             return "";

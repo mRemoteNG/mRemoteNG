@@ -9,7 +9,7 @@ namespace mRemoteNG.App.Info
     public static class SettingsFileInfo
     {
         //public static readonly string exe = Assembly.GetExecutingAssembly().GetName().CodeBase;
-        public static readonly string exePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        public static readonly string exePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
 #if !PORTABLE
         public static readonly string SettingsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\" + Application.ProductName;
 #else

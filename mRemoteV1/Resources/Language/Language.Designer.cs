@@ -1530,6 +1530,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Block Cipher Mode.
+        /// </summary>
+        internal static string strEncryptionBlockCipherMode {
+            get {
+                return ResourceManager.GetString("strEncryptionBlockCipherMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption Engine.
+        /// </summary>
+        internal static string strEncryptionEngine {
+            get {
+                return ResourceManager.GetString("strEncryptionEngine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End IP.
         /// </summary>
         internal static string strEndIP {
@@ -5989,6 +6007,15 @@ namespace mRemoteNG {
         internal static string strTabsAndPanels {
             get {
                 return ResourceManager.GetString("strTabsAndPanels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security.
+        /// </summary>
+        internal static string strTabSecurity {
+            get {
+                return ResourceManager.GetString("strTabSecurity", resourceCulture);
             }
         }
         

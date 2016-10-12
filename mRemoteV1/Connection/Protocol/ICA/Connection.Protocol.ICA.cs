@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using System.Threading;
-using mRemoteNG.App.Info;
 using mRemoteNG.Tools;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -177,7 +176,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 						if (Settings.Default.DefaultPassword != "")
 						{
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _ICAClient.SetProp("ClearPassword", cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, GeneralAppInfo.EncryptionKey));
+                            _ICAClient.SetProp("ClearPassword", cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey));
 						}
 					}
 				}

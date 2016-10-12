@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 
@@ -53,7 +54,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
             _sqlCatalog = mRemoteNG.Settings.Default.SQLDatabaseName;
             _sqlUsername = mRemoteNG.Settings.Default.SQLUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            _sqlPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
+            _sqlPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, Runtime.EncryptionKey);
         }
 
         public void Connect()

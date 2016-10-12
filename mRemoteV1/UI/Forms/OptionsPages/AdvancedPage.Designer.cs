@@ -36,7 +36,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkWriteLogFile = new System.Windows.Forms.CheckBox();
             this.chkAutomaticallyGetSessionInfo = new System.Windows.Forms.CheckBox();
             this.lblMaximumPuttyWaitTime = new System.Windows.Forms.Label();
-            this.chkEncryptCompleteFile = new System.Windows.Forms.CheckBox();
             this.chkAutomaticReconnect = new System.Windows.Forms.CheckBox();
             this.numPuttyWaitTime = new System.Windows.Forms.NumericUpDown();
             this.chkUseCustomPuttyPath = new System.Windows.Forms.CheckBox();
@@ -64,7 +63,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkAutomaticallyGetSessionInfo
             // 
             this.chkAutomaticallyGetSessionInfo.AutoSize = true;
-            this.chkAutomaticallyGetSessionInfo.Location = new System.Drawing.Point(3, 46);
+            this.chkAutomaticallyGetSessionInfo.Location = new System.Drawing.Point(3, 23);
             this.chkAutomaticallyGetSessionInfo.Name = "chkAutomaticallyGetSessionInfo";
             this.chkAutomaticallyGetSessionInfo.Size = new System.Drawing.Size(198, 17);
             this.chkAutomaticallyGetSessionInfo.TabIndex = 19;
@@ -73,27 +72,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblMaximumPuttyWaitTime
             // 
-            this.lblMaximumPuttyWaitTime.Location = new System.Drawing.Point(3, 195);
+            this.lblMaximumPuttyWaitTime.Location = new System.Drawing.Point(3, 172);
             this.lblMaximumPuttyWaitTime.Name = "lblMaximumPuttyWaitTime";
             this.lblMaximumPuttyWaitTime.Size = new System.Drawing.Size(364, 13);
             this.lblMaximumPuttyWaitTime.TabIndex = 26;
             this.lblMaximumPuttyWaitTime.Text = "Maximum PuTTY wait time:";
             this.lblMaximumPuttyWaitTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // chkEncryptCompleteFile
-            // 
-            this.chkEncryptCompleteFile.AutoSize = true;
-            this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 23);
-            this.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile";
-            this.chkEncryptCompleteFile.Size = new System.Drawing.Size(180, 17);
-            this.chkEncryptCompleteFile.TabIndex = 18;
-            this.chkEncryptCompleteFile.Text = "Encrypt complete connection file";
-            this.chkEncryptCompleteFile.UseVisualStyleBackColor = true;
-            // 
             // chkAutomaticReconnect
             // 
             this.chkAutomaticReconnect.AutoSize = true;
-            this.chkAutomaticReconnect.Location = new System.Drawing.Point(3, 69);
+            this.chkAutomaticReconnect.Location = new System.Drawing.Point(3, 46);
             this.chkAutomaticReconnect.Name = "chkAutomaticReconnect";
             this.chkAutomaticReconnect.Size = new System.Drawing.Size(399, 17);
             this.chkAutomaticReconnect.TabIndex = 20;
@@ -103,7 +92,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numPuttyWaitTime
             // 
             this.numPuttyWaitTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numPuttyWaitTime.Location = new System.Drawing.Point(373, 193);
+            this.numPuttyWaitTime.Location = new System.Drawing.Point(373, 170);
             this.numPuttyWaitTime.Maximum = new decimal(new int[] {
             999,
             0,
@@ -121,7 +110,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkUseCustomPuttyPath
             // 
             this.chkUseCustomPuttyPath.AutoSize = true;
-            this.chkUseCustomPuttyPath.Location = new System.Drawing.Point(3, 92);
+            this.chkUseCustomPuttyPath.Location = new System.Drawing.Point(3, 69);
             this.chkUseCustomPuttyPath.Name = "chkUseCustomPuttyPath";
             this.chkUseCustomPuttyPath.Size = new System.Drawing.Size(146, 17);
             this.chkUseCustomPuttyPath.TabIndex = 21;
@@ -131,7 +120,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblConfigurePuttySessions
             // 
-            this.lblConfigurePuttySessions.Location = new System.Drawing.Point(3, 164);
+            this.lblConfigurePuttySessions.Location = new System.Drawing.Point(3, 141);
             this.lblConfigurePuttySessions.Name = "lblConfigurePuttySessions";
             this.lblConfigurePuttySessions.Size = new System.Drawing.Size(364, 13);
             this.lblConfigurePuttySessions.TabIndex = 24;
@@ -141,7 +130,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numUVNCSCPort
             // 
             this.numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numUVNCSCPort.Location = new System.Drawing.Point(373, 305);
+            this.numUVNCSCPort.Location = new System.Drawing.Point(373, 282);
             this.numUVNCSCPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -161,7 +150,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtCustomPuttyPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCustomPuttyPath.Enabled = false;
-            this.txtCustomPuttyPath.Location = new System.Drawing.Point(21, 115);
+            this.txtCustomPuttyPath.Location = new System.Drawing.Point(21, 92);
             this.txtCustomPuttyPath.Name = "txtCustomPuttyPath";
             this.txtCustomPuttyPath.Size = new System.Drawing.Size(346, 20);
             this.txtCustomPuttyPath.TabIndex = 22;
@@ -171,7 +160,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.btnLaunchPutty.Image = global::mRemoteNG.Resources.PuttyConfig;
             this.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLaunchPutty.Location = new System.Drawing.Point(373, 159);
+            this.btnLaunchPutty.Location = new System.Drawing.Point(373, 136);
             this.btnLaunchPutty.Name = "btnLaunchPutty";
             this.btnLaunchPutty.Size = new System.Drawing.Size(110, 23);
             this.btnLaunchPutty.TabIndex = 25;
@@ -182,7 +171,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblUVNCSCPort
             // 
-            this.lblUVNCSCPort.Location = new System.Drawing.Point(3, 307);
+            this.lblUVNCSCPort.Location = new System.Drawing.Point(3, 284);
             this.lblUVNCSCPort.Name = "lblUVNCSCPort";
             this.lblUVNCSCPort.Size = new System.Drawing.Size(364, 13);
             this.lblUVNCSCPort.TabIndex = 32;
@@ -193,7 +182,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblSeconds
             // 
             this.lblSeconds.AutoSize = true;
-            this.lblSeconds.Location = new System.Drawing.Point(428, 195);
+            this.lblSeconds.Location = new System.Drawing.Point(428, 172);
             this.lblSeconds.Name = "lblSeconds";
             this.lblSeconds.Size = new System.Drawing.Size(47, 13);
             this.lblSeconds.TabIndex = 28;
@@ -202,7 +191,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // btnBrowseCustomPuttyPath
             // 
             this.btnBrowseCustomPuttyPath.Enabled = false;
-            this.btnBrowseCustomPuttyPath.Location = new System.Drawing.Point(373, 113);
+            this.btnBrowseCustomPuttyPath.Location = new System.Drawing.Point(373, 90);
             this.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath";
             this.btnBrowseCustomPuttyPath.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseCustomPuttyPath.TabIndex = 23;
@@ -217,7 +206,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkWriteLogFile);
             this.Controls.Add(this.chkAutomaticallyGetSessionInfo);
             this.Controls.Add(this.lblMaximumPuttyWaitTime);
-            this.Controls.Add(this.chkEncryptCompleteFile);
             this.Controls.Add(this.chkAutomaticReconnect);
             this.Controls.Add(this.numPuttyWaitTime);
             this.Controls.Add(this.chkUseCustomPuttyPath);
@@ -240,7 +228,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		internal System.Windows.Forms.CheckBox chkWriteLogFile;
 		internal System.Windows.Forms.CheckBox chkAutomaticallyGetSessionInfo;
 		internal System.Windows.Forms.Label lblMaximumPuttyWaitTime;
-		internal System.Windows.Forms.CheckBox chkEncryptCompleteFile;
 		internal System.Windows.Forms.CheckBox chkAutomaticReconnect;
 		internal System.Windows.Forms.NumericUpDown numPuttyWaitTime;
 		internal System.Windows.Forms.CheckBox chkUseCustomPuttyPath;

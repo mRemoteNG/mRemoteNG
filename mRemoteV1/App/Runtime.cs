@@ -49,7 +49,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                ConnectionWindow connectionForm = new ConnectionWindow(new DockContent());
+                var connectionForm = new ConnectionWindow(new DockContent());
                 BuildConnectionWindowContextMenu(connectionForm);
                 SetConnectionWindowTitle(title, connectionForm);
                 ShowConnectionWindow(connectionForm);
@@ -85,16 +85,16 @@ namespace mRemoteNG.App
 
         private static void BuildConnectionWindowContextMenu(DockContent pnlcForm)
         {
-            ContextMenuStrip cMen = new ContextMenuStrip();
-            ToolStripMenuItem cMenRen = CreateRenameMenuItem(pnlcForm);
-            ToolStripMenuItem cMenScreens = CreateScreensMenuItem(pnlcForm);
+            var cMen = new ContextMenuStrip();
+            var cMenRen = CreateRenameMenuItem(pnlcForm);
+            var cMenScreens = CreateScreensMenuItem(pnlcForm);
             cMen.Items.AddRange(new ToolStripItem[] { cMenRen, cMenScreens });
             pnlcForm.TabPageContextMenuStrip = cMen;
         }
 
         private static ToolStripMenuItem CreateScreensMenuItem(DockContent pnlcForm)
         {
-            ToolStripMenuItem cMenScreens = new ToolStripMenuItem
+            var cMenScreens = new ToolStripMenuItem
             {
                 Text = Language.strSendTo,
                 Image = Resources.Monitor,
@@ -107,7 +107,7 @@ namespace mRemoteNG.App
 
         private static ToolStripMenuItem CreateRenameMenuItem(DockContent pnlcForm)
         {
-            ToolStripMenuItem cMenRen = new ToolStripMenuItem
+            var cMenRen = new ToolStripMenuItem
             {
                 Text = Language.strRename,
                 Image = Resources.Rename,
@@ -117,13 +117,13 @@ namespace mRemoteNG.App
             return cMenRen;
         }
 
-        private static void cMenConnectionPanelRename_Click(Object sender, EventArgs e)
+        private static void cMenConnectionPanelRename_Click(object sender, EventArgs e)
         {
             try
             {
                 var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
 
-                string nTitle = "";
+                var nTitle = "";
                 input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle);
 
                 if (!string.IsNullOrEmpty(nTitle))
@@ -137,16 +137,16 @@ namespace mRemoteNG.App
             }
         }
 
-        private static void cMenConnectionPanelScreens_DropDownOpening(Object sender, EventArgs e)
+        private static void cMenConnectionPanelScreens_DropDownOpening(object sender, EventArgs e)
         {
             try
             {
-                ToolStripMenuItem cMenScreens = (ToolStripMenuItem)sender;
+                var cMenScreens = (ToolStripMenuItem)sender;
                 cMenScreens.DropDownItems.Clear();
 
-                for (int i = 0; i <= Screen.AllScreens.Length - 1; i++)
+                for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
                 {
-                    ToolStripMenuItem cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1));
+                    var cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1));
                     cMenScreen.Tag = new ArrayList();
                     cMenScreen.Image = Resources.Monitor_GoTo;
                     (cMenScreen.Tag as ArrayList).Add(Screen.AllScreens[i]);
@@ -374,16 +374,16 @@ namespace mRemoteNG.App
 
         private static void PruneBackupFiles(string baseName)
         {
-            string fileName = GetFileName(baseName);
-            string directoryName = GetDirectoryName(baseName);
+            var fileName = GetFileName(baseName);
+            var directoryName = GetDirectoryName(baseName);
 
             if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName))
             {
                 return;
             }
 
-            string searchPattern = string.Format(Settings.Default.BackupFileNameFormat, fileName, "*");
-            string[] files = Directory.GetFiles(directoryName, searchPattern);
+            var searchPattern = string.Format(Settings.Default.BackupFileNameFormat, fileName, "*");
+            var files = Directory.GetFiles(directoryName, searchPattern);
 
             if (files.Length <= Settings.Default.BackupFileKeepCount)
             {
@@ -393,7 +393,7 @@ namespace mRemoteNG.App
             Array.Sort(files);
             Array.Resize(ref files, files.Length - Settings.Default.BackupFileKeepCount);
 
-            foreach (string file in files)
+            foreach (var file in files)
             {
                 File.Delete(file);
             }
@@ -401,9 +401,9 @@ namespace mRemoteNG.App
 
         private static string GetDefaultStartupConnectionFileName()
         {
-            string newPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
+            var newPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
 #if !PORTABLE
-			string oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + Application.ProductName + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
+			var oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + Application.ProductName + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
 			if (File.Exists(oldPath))
 			{
 				return oldPath;
@@ -414,14 +414,7 @@ namespace mRemoteNG.App
 
         public static string GetStartupConnectionFileName()
         {
-            if (Settings.Default.LoadConsFromCustomLocation == false)
-            {
-                return GetDefaultStartupConnectionFileName();
-            }
-            else
-            {
-                return Settings.Default.CustomConsPath;
-            }
+            return Settings.Default.LoadConsFromCustomLocation == false ? GetDefaultStartupConnectionFileName() : Settings.Default.CustomConsPath;
         }
 
         public static void SaveConnectionsAsync()
@@ -443,8 +436,7 @@ namespace mRemoteNG.App
 
         public static void SaveConnections(bool update = false)
         {
-            //if (!IsConnectionsFileLoaded)
-            //    return;
+            if (ConnectionTreeModel == null) return;
 
             try
             {
@@ -459,7 +451,7 @@ namespace mRemoteNG.App
                     connectionsSaver.ConnectionFileName = GetStartupConnectionFileName();
 
                 connectionsSaver.Export = false;
-                connectionsSaver.SaveSecurity = new Security.Save();
+                connectionsSaver.SaveFilter = new SaveFilter();
                 connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
@@ -469,7 +461,7 @@ namespace mRemoteNG.App
                     connectionsSaver.SQLDatabaseName = Convert.ToString(Settings.Default.SQLDatabaseName);
                     connectionsSaver.SQLUsername = Convert.ToString(Settings.Default.SQLUser);
                     var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), EncryptionKey);
                 }
 
                 connectionsSaver.SaveConnections();
@@ -514,7 +506,7 @@ namespace mRemoteNG.App
                     connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
                     connectionsSave.ConnectionFileName = saveFileDialog.FileName;
                     connectionsSave.Export = false;
-                    connectionsSave.SaveSecurity = new Security.Save();
+                    connectionsSave.SaveFilter = new SaveFilter();
                     connectionsSave.ConnectionTreeModel = ConnectionTreeModel;
 
                     connectionsSave.SaveConnections();
@@ -547,13 +539,13 @@ namespace mRemoteNG.App
         {
             try
             {
-                Uri uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + connectionString);
+                var uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + connectionString);
                 if (string.IsNullOrEmpty(uri.Host))
                 {
                     return null;
                 }
 
-                ConnectionInfo newConnectionInfo = new ConnectionInfo();
+                var newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
                 newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs ? string.Format(Language.strQuick, uri.Host) : uri.Host;

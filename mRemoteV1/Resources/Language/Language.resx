@@ -2397,4 +2397,13 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strNodeNotDraggable" xml:space="preserve">
     <value>This node is not draggable.</value>
   </data>
+  <data name="strEncryptionBlockCipherMode" xml:space="preserve">
+    <value>Block Cipher Mode</value>
+  </data>
+  <data name="strEncryptionEngine" xml:space="preserve">
+    <value>Encryption Engine</value>
+  </data>
+  <data name="strTabSecurity" xml:space="preserve">
+    <value>Security</value>
+  </data>
 </root>
