@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using System.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -7,9 +9,6 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-using System.Security.Cryptography;
-using System.Text;
-
 
 namespace mRemoteNG.Config.Serializers
 {
@@ -46,9 +45,7 @@ namespace mRemoteNG.Config.Serializers
         {
             var schemaVersion = Convert.ToInt32(rdcManNode?.Attributes?["schemaVersion"].Value);
             if (schemaVersion != 1)
-            {
-                throw (new FileFormatException($"Unsupported schema version ({schemaVersion})."));
-            }
+                throw new FileFormatException($"Unsupported schema version ({schemaVersion}).");
         }
 
         private void VerifyFileVersion(XmlNode rdcManNode)
@@ -58,9 +55,7 @@ namespace mRemoteNG.Config.Serializers
             {
                 var version = new Version(versionNode);
                 if (!(version == new Version(2, 2)))
-                {
                     throw new FileFormatException($"Unsupported file version ({version}).");
-                }
             }
             else
             {
@@ -76,7 +71,6 @@ namespace mRemoteNG.Config.Serializers
             var childNodes = xmlNode.SelectNodes("./group|./server");
             if (childNodes == null) return;
             foreach (XmlNode childNode in childNodes)
-            {
                 switch (childNode.Name)
                 {
                     case "group":
@@ -86,7 +80,6 @@ namespace mRemoteNG.Config.Serializers
                         ImportServer(childNode, newContainer);
                         break;
                 }
-            }
         }
 
         private ContainerInfo ImportContainer(XmlNode containerPropertiesNode, ContainerInfo parentContainer)
@@ -95,7 +88,8 @@ namespace mRemoteNG.Config.Serializers
             var connectionInfo = ConnectionInfoFromXml(containerPropertiesNode);
             newContainer.CopyFrom(connectionInfo);
             newContainer.Name = containerPropertiesNode?.SelectSingleNode("./name")?.InnerText ?? Language.strNewFolder;
-            newContainer.IsExpanded = bool.Parse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText ?? "false");
+            newContainer.IsExpanded =
+                bool.Parse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText ?? "false");
             parentContainer.AddChild(newContainer);
             return newContainer;
         }
@@ -124,7 +118,9 @@ namespace mRemoteNG.Config.Serializers
                 connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText;
 
                 var passwordNode = logonCredentialsNode.SelectSingleNode("./password");
-                connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
+                connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"].Value == "True"
+                    ? passwordNode.InnerText
+                    : DecryptRdcManPassword(passwordNode?.InnerText);
 
                 connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText;
             }
@@ -138,7 +134,8 @@ namespace mRemoteNG.Config.Serializers
             var connectionSettingsNode = xmlNode.SelectSingleNode("./connectionSettings");
             if (connectionSettingsNode?.Attributes?["inherit"].Value == "None")
             {
-                connectionInfo.UseConsoleSession = bool.Parse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText ?? "false");
+                connectionInfo.UseConsoleSession =
+                    bool.Parse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText ?? "false");
                 // ./startProgram
                 // ./workingDir
                 connectionInfo.Port = Convert.ToInt32(connectionSettingsNode.SelectSingleNode("./port")?.InnerText);
@@ -152,12 +149,17 @@ namespace mRemoteNG.Config.Serializers
             var gatewaySettingsNode = xmlNode.SelectSingleNode("./gatewaySettings");
             if (gatewaySettingsNode?.Attributes?["inherit"].Value == "None")
             {
-                connectionInfo.RDGatewayUsageMethod = gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText == "True" ? ProtocolRDP.RDGatewayUsageMethod.Always : ProtocolRDP.RDGatewayUsageMethod.Never;
+                connectionInfo.RDGatewayUsageMethod = gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText ==
+                                                      "True"
+                    ? ProtocolRDP.RDGatewayUsageMethod.Always
+                    : ProtocolRDP.RDGatewayUsageMethod.Never;
                 connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText;
                 connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText;
 
                 var passwordNode = gatewaySettingsNode.SelectSingleNode("./password");
-                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
+                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"].Value == "True"
+                    ? passwordNode.InnerText
+                    : DecryptRdcManPassword(passwordNode?.InnerText);
 
                 connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText;
                 // ./logonMethod
@@ -176,10 +178,13 @@ namespace mRemoteNG.Config.Serializers
             var remoteDesktopNode = xmlNode.SelectSingleNode("./remoteDesktop");
             if (remoteDesktopNode?.Attributes?["inherit"].Value == "None")
             {
-                var resolutionString = Convert.ToString(remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", ""));
+                var resolutionString =
+                    Convert.ToString(remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", ""));
                 try
                 {
-                    connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Enum.Parse(typeof(ProtocolRDP.RDPResolutions), "Res" + resolutionString);
+                    connectionInfo.Resolution =
+                        (ProtocolRDP.RDPResolutions)
+                        Enum.Parse(typeof(ProtocolRDP.RDPResolutions), "Res" + resolutionString);
                 }
                 catch (ArgumentException)
                 {
@@ -187,18 +192,15 @@ namespace mRemoteNG.Config.Serializers
                 }
 
                 if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea")?.InnerText == "True")
-                {
                     connectionInfo.Resolution = ProtocolRDP.RDPResolutions.FitToWindow;
-                }
 
                 if (remoteDesktopNode.SelectSingleNode("./fullScreen")?.InnerText == "True")
-                {
                     connectionInfo.Resolution = ProtocolRDP.RDPResolutions.Fullscreen;
-                }
 
                 var colorDepth = remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText;
                 if (colorDepth != null)
-                    connectionInfo.Colors = (ProtocolRDP.RDPColors)Enum.Parse(typeof(ProtocolRDP.RDPColors), colorDepth);
+                    connectionInfo.Colors =
+                        (ProtocolRDP.RDPColors) Enum.Parse(typeof(ProtocolRDP.RDPColors), colorDepth);
             }
             else
             {
@@ -239,10 +241,14 @@ namespace mRemoteNG.Config.Serializers
                 }
 
                 // ./redirectClipboard
-                connectionInfo.RedirectDiskDrives = bool.Parse(localResourcesNode.SelectSingleNode("./redirectDrives")?.InnerText ?? "false");
-                connectionInfo.RedirectPorts = bool.Parse(localResourcesNode.SelectSingleNode("./redirectPorts")?.InnerText ?? "false");
-                connectionInfo.RedirectPrinters = bool.Parse(localResourcesNode.SelectSingleNode("./redirectPrinters")?.InnerText ?? "false");
-                connectionInfo.RedirectSmartCards = bool.Parse(localResourcesNode.SelectSingleNode("./redirectSmartCards")?.InnerText ?? "false");
+                connectionInfo.RedirectDiskDrives =
+                    bool.Parse(localResourcesNode.SelectSingleNode("./redirectDrives")?.InnerText ?? "false");
+                connectionInfo.RedirectPorts =
+                    bool.Parse(localResourcesNode.SelectSingleNode("./redirectPorts")?.InnerText ?? "false");
+                connectionInfo.RedirectPrinters =
+                    bool.Parse(localResourcesNode.SelectSingleNode("./redirectPrinters")?.InnerText ?? "false");
+                connectionInfo.RedirectSmartCards =
+                    bool.Parse(localResourcesNode.SelectSingleNode("./redirectSmartCards")?.InnerText ?? "false");
             }
             else
             {
@@ -256,7 +262,6 @@ namespace mRemoteNG.Config.Serializers
 
             var securitySettingsNode = xmlNode.SelectSingleNode("./securitySettings");
             if (securitySettingsNode?.Attributes?["inherit"].Value == "None")
-            {
                 switch (securitySettingsNode.SelectSingleNode("./authentication")?.InnerText)
                 {
                     case "0": // No authentication
@@ -269,11 +274,8 @@ namespace mRemoteNG.Config.Serializers
                         connectionInfo.RDPAuthenticationLevel = ProtocolRDP.AuthenticationLevel.WarnOnFailedAuth;
                         break;
                 }
-            }
             else
-            {
                 connectionInfo.Inheritance.RDPAuthenticationLevel = true;
-            }
 
             // ./displaySettings/thumbnailScale
             // ./displaySettings/liveThumbnailUpdates
@@ -289,7 +291,8 @@ namespace mRemoteNG.Config.Serializers
 
             try
             {
-                var plaintextData = ProtectedData.Unprotect(Convert.FromBase64String(ciphertext), new byte[] { }, DataProtectionScope.LocalMachine);
+                var plaintextData = ProtectedData.Unprotect(Convert.FromBase64String(ciphertext), new byte[] {},
+                    DataProtectionScope.LocalMachine);
                 var charArray = Encoding.Unicode.GetChars(plaintextData);
                 return new string(charArray);
             }

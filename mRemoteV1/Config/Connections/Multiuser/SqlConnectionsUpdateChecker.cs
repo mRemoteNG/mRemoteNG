@@ -1,10 +1,10 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.Messages;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
+using mRemoteNG.App;
 using mRemoteNG.Config.DatabaseConnectors;
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -12,8 +12,8 @@ namespace mRemoteNG.Config.Connections
     {
         private readonly SqlDatabaseConnector _sqlConnector;
         private readonly SqlCommand _sqlQuery;
-        private DateTime _lastUpdateTime;
         private DateTime _lastDatabaseUpdateTime;
+        private DateTime _lastUpdateTime;
 
 
         public SqlConnectionsUpdateChecker()
@@ -42,15 +42,28 @@ namespace mRemoteNG.Config.Connections
             thread.Start();
         }
 
+
+        public event EventHandler UpdateCheckStarted;
+
+        public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
+
+        public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
         private void ConnectToSqlDb()
         {
             try
             {
                 _sqlConnector.Connect();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Unable to connect to Sql DB to check for updates." + Environment.NewLine + e.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    "Unable to connect to Sql DB to check for updates." + Environment.NewLine + e.Message, true);
             }
         }
 
@@ -72,38 +85,30 @@ namespace mRemoteNG.Config.Connections
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Error executing Sql query to get updates from the DB." + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    "Error executing Sql query to get updates from the DB." + Environment.NewLine + ex.Message, true);
             }
             _lastDatabaseUpdateTime = lastUpdateInDb;
             return lastUpdateInDb;
         }
 
-
-        public event EventHandler UpdateCheckStarted;
         private void RaiseUpdateCheckStartedEvent()
         {
             UpdateCheckStarted?.Invoke(this, EventArgs.Empty);
         }
 
-        public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
         private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
         {
             var args = new ConnectionsUpdateCheckFinishedEventArgs {UpdateAvailable = updateAvailable};
             UpdateCheckFinished?.Invoke(this, args);
         }
 
-        public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
         private void RaiseConnectionsUpdateAvailableEvent()
         {
             var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector, _lastDatabaseUpdateTime);
             ConnectionsUpdateAvailable?.Invoke(this, args);
-            if(args.Handled)
+            if (args.Handled)
                 _lastUpdateTime = _lastDatabaseUpdateTime;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
         }
 
         private void Dispose(bool itIsSafeToDisposeManagedObjects)

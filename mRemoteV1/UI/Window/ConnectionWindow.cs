@@ -4,39 +4,146 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using mRemoteNG.Connection;
 using mRemoteNG.App;
-using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.Config;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Connection.Protocol;
-using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
+using mRemoteNG.UI.TaskDialog;
+using WeifenLuo.WinFormsUI.Docking;
 using Message = System.Windows.Forms.Message;
 using TabControl = Crownwood.Magic.Controls.TabControl;
 using TabPage = Crownwood.Magic.Controls.TabPage;
-
 
 namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionWindow : BaseWindow
     {
         public TabControl TabController;
-        
+
+        #region Tab Menu
+
+        private void ShowHideMenuButtons()
+        {
+            try
+            {
+                var interfaceControl = (InterfaceControl) TabController.SelectedTab?.Tag;
+                if (interfaceControl == null) return;
+
+                if (interfaceControl.Info.Protocol == ProtocolType.RDP)
+                {
+                    var rdp = (ProtocolRDP) interfaceControl.Protocol;
+                    cmenTabFullscreen.Visible = true;
+                    cmenTabFullscreen.Checked = rdp.Fullscreen;
+                    cmenTabSmartSize.Visible = true;
+                    cmenTabSmartSize.Checked = rdp.SmartSize;
+                }
+                else
+                {
+                    cmenTabFullscreen.Visible = false;
+                    cmenTabSmartSize.Visible = false;
+                }
+
+                if (interfaceControl.Info.Protocol == ProtocolType.VNC)
+                {
+                    var vnc = (ProtocolVNC) interfaceControl.Protocol;
+                    cmenTabSendSpecialKeys.Visible = true;
+                    cmenTabViewOnly.Visible = true;
+                    cmenTabSmartSize.Visible = true;
+                    cmenTabStartChat.Visible = true;
+                    cmenTabRefreshScreen.Visible = true;
+                    cmenTabTransferFile.Visible = false;
+                    cmenTabSmartSize.Checked = vnc.SmartSize;
+                    cmenTabViewOnly.Checked = vnc.ViewOnly;
+                }
+                else
+                {
+                    cmenTabSendSpecialKeys.Visible = false;
+                    cmenTabViewOnly.Visible = false;
+                    cmenTabStartChat.Visible = false;
+                    cmenTabRefreshScreen.Visible = false;
+                    cmenTabTransferFile.Visible = false;
+                }
+
+                if ((interfaceControl.Info.Protocol == ProtocolType.SSH1) |
+                    (interfaceControl.Info.Protocol == ProtocolType.SSH2))
+                    cmenTabTransferFile.Visible = true;
+
+                if (interfaceControl.Protocol is PuttyBase)
+                    cmenTabPuttySettings.Visible = true;
+                else
+                    cmenTabPuttySettings.Visible = false;
+
+                AddExternalApps();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "ShowHideMenuButtons (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+            }
+        }
+
+        #endregion
+
+        #region Protocols
+
+        public void Prot_Event_Closed(object sender)
+        {
+            var protocolBase = sender as ProtocolBase;
+            var tabPage = protocolBase?.InterfaceControl.Parent as TabPage;
+            if (tabPage != null)
+                CloseTab(tabPage);
+        }
+
+        #endregion
+
+        #region Window Overrides
+
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                if (m.Msg == NativeMethods.WM_MOUSEACTIVATE)
+                {
+                    var selectedTab = TabController.SelectedTab;
+                    if (selectedTab == null) return;
+                    {
+                        var tabClientRectangle = selectedTab.RectangleToScreen(selectedTab.ClientRectangle);
+                        if (tabClientRectangle.Contains(MousePosition))
+                        {
+                            var interfaceControl = selectedTab.Tag as InterfaceControl;
+                            if (interfaceControl?.Info?.Protocol == ProtocolType.RDP)
+                            {
+                                interfaceControl.Protocol.Focus();
+                                return; // Do not pass to base class
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Connection.WndProc() failed.", ex, logOnly: true);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        #endregion
 
         #region Public Methods
+
         public ConnectionWindow(DockContent panel, string formText = "")
         {
             if (formText == "")
-            {
                 formText = Language.strNewPanel;
-            }
 
             WindowType = WindowType.Connection;
             DockPnl = panel;
@@ -85,7 +192,8 @@ namespace mRemoteNG.UI.Window
             cmenTabStartChat.Click += (sender, args) => StartChat();
             cmenTabTransferFile.Click += (sender, args) => TransferFile();
             cmenTabRefreshScreen.Click += (sender, args) => RefreshScreen();
-            cmenTabSendSpecialKeysCtrlAltDel.Click += (sender, args) => SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlAltDel);
+            cmenTabSendSpecialKeysCtrlAltDel.Click +=
+                (sender, args) => SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlAltDel);
             cmenTabSendSpecialKeysCtrlEsc.Click += (sender, args) => SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlEsc);
             cmenTabRenameTab.Click += (sender, args) => RenameTab();
             cmenTabDuplicateTab.Click += (sender, args) => DuplicateTab();
@@ -144,7 +252,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "AddConnectionTab (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
 
             return null;
@@ -162,9 +271,11 @@ namespace mRemoteNG.UI.Window
                 frmMain.Default.SelectedConnection = interfaceControl?.Info;
             }
         }
+
         #endregion
 
         #region Form
+
         private void Connection_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
@@ -172,6 +283,7 @@ namespace mRemoteNG.UI.Window
 
         private bool _documentHandlersAdded;
         private bool _floatHandlersAdded;
+
         private void Connection_DockStateChanged(object sender, EventArgs e)
         {
             if (DockState == DockState.Float)
@@ -223,14 +335,17 @@ namespace mRemoteNG.UI.Window
         private void Connection_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!frmMain.Default.IsClosing &&
-                ((Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & TabController.TabPages.Count > 0) ||
-                (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & TabController.TabPages.Count > 1)))
+                (((Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.All) &
+                  (TabController.TabPages.Count > 0)) ||
+                 ((Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Multiple) &
+                  (TabController.TabPages.Count > 1))))
             {
-                var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionPanelMainInstruction, Text), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
+                    string.Format(Language.strConfirmCloseConnectionPanelMainInstruction, Text), "", "", "",
+                    Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question,
+                    ESysIcons.Question);
                 if (CTaskDialog.VerificationChecked)
-                {
                     Settings.Default.ConfirmCloseConnection--;
-                }
                 if (result == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -243,36 +358,39 @@ namespace mRemoteNG.UI.Window
                 foreach (TabPage tabP in TabController.TabPages)
                 {
                     if (tabP.Tag == null) continue;
-                    var interfaceControl = (InterfaceControl)tabP.Tag;
+                    var interfaceControl = (InterfaceControl) tabP.Tag;
                     interfaceControl.Protocol.Close();
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Connection.Connection_FormClosing() failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "UI.Window.Connection.Connection_FormClosing() failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
         public new event EventHandler ResizeBegin;
+
         private void Connection_ResizeBegin(object sender, EventArgs e)
         {
             ResizeBegin?.Invoke(this, e);
         }
 
         public new event EventHandler ResizeEnd;
+
         private void Connection_ResizeEnd(object sender, EventArgs e)
         {
             ResizeEnd?.Invoke(sender, e);
         }
+
         #endregion
 
         #region TabController
+
         private void TabController_ClosePressed(object sender, EventArgs e)
         {
             if (TabController.SelectedTab == null)
-            {
                 return;
-            }
 
             CloseConnectionTab();
         }
@@ -283,22 +401,21 @@ namespace mRemoteNG.UI.Window
             {
                 var selectedTab = TabController.SelectedTab;
                 if (selectedTab == null) return;
-                if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
+                if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.All)
                 {
-                    var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                    var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
+                        string.Format(Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "",
+                        Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question,
+                        ESysIcons.Question);
                     if (CTaskDialog.VerificationChecked)
-                    {
                         Settings.Default.ConfirmCloseConnection--;
-                    }
                     if (result == DialogResult.No)
-                    {
                         return;
-                    }
                 }
 
                 if (selectedTab.Tag != null)
                 {
-                    var interfaceControl = (InterfaceControl)selectedTab.Tag;
+                    var interfaceControl = (InterfaceControl) selectedTab.Tag;
                     interfaceControl.Protocol.Close();
                 }
                 else
@@ -308,7 +425,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "UI.Window.Connection.CloseConnectionTab() failed" + Environment.NewLine + ex.Message, true);
             }
 
             UpdateSelectedConnection();
@@ -318,12 +436,11 @@ namespace mRemoteNG.UI.Window
         {
             _firstClickTicks = 0;
             if (Settings.Default.DoubleClickOnTabClosesIt)
-            {
                 CloseConnectionTab();
-            }
         }
 
         #region Drag and Drop
+
         private void TabController_DragDrop(object sender, DragEventArgs e)
         {
             var dropDataAsOlvDataObject = e.Data as OLVDataObject;
@@ -349,82 +466,19 @@ namespace mRemoteNG.UI.Window
             if (!modelObjects.OfType<ConnectionInfo>().Any()) return;
             e.Effect = DragDropEffects.Move;
         }
+
         #endregion
-        #endregion
 
-        #region Tab Menu
-        private void ShowHideMenuButtons()
-        {
-            try
-            {
-                var interfaceControl = (InterfaceControl)TabController.SelectedTab?.Tag;
-                if (interfaceControl == null) return;
-
-                if (interfaceControl.Info.Protocol == ProtocolType.RDP)
-                {
-                    var rdp = (ProtocolRDP)interfaceControl.Protocol;
-                    cmenTabFullscreen.Visible = true;
-                    cmenTabFullscreen.Checked = rdp.Fullscreen;
-                    cmenTabSmartSize.Visible = true;
-                    cmenTabSmartSize.Checked = rdp.SmartSize;
-                }
-                else
-                {
-                    cmenTabFullscreen.Visible = false;
-                    cmenTabSmartSize.Visible = false;
-                }
-
-                if (interfaceControl.Info.Protocol == ProtocolType.VNC)
-                {
-                    var vnc = (ProtocolVNC)interfaceControl.Protocol;
-                    cmenTabSendSpecialKeys.Visible = true;
-                    cmenTabViewOnly.Visible = true;
-                    cmenTabSmartSize.Visible = true;
-                    cmenTabStartChat.Visible = true;
-                    cmenTabRefreshScreen.Visible = true;
-                    cmenTabTransferFile.Visible = false;
-                    cmenTabSmartSize.Checked = vnc.SmartSize;
-                    cmenTabViewOnly.Checked = vnc.ViewOnly;
-                }
-                else
-                {
-                    cmenTabSendSpecialKeys.Visible = false;
-                    cmenTabViewOnly.Visible = false;
-                    cmenTabStartChat.Visible = false;
-                    cmenTabRefreshScreen.Visible = false;
-                    cmenTabTransferFile.Visible = false;
-                }
-
-                if (interfaceControl.Info.Protocol == ProtocolType.SSH1 | interfaceControl.Info.Protocol == ProtocolType.SSH2)
-                {
-                    cmenTabTransferFile.Visible = true;
-                }
-
-                if (interfaceControl.Protocol is PuttyBase)
-                {
-                    cmenTabPuttySettings.Visible = true;
-                }
-                else
-                {
-                    cmenTabPuttySettings.Visible = false;
-                }
-
-                AddExternalApps();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
-            }
-        }
         #endregion
 
         #region Tab Actions
+
         private void ToggleSmartSize()
         {
             try
             {
                 if (!(TabController.SelectedTab?.Tag is InterfaceControl)) return;
-                var interfaceControl = (InterfaceControl)TabController.SelectedTab?.Tag;
+                var interfaceControl = (InterfaceControl) TabController.SelectedTab?.Tag;
 
                 var protocol = interfaceControl.Protocol as ProtocolRDP;
                 if (protocol != null)
@@ -434,13 +488,14 @@ namespace mRemoteNG.UI.Window
                 }
                 else if (interfaceControl.Protocol is ProtocolVNC)
                 {
-                    var vnc = (ProtocolVNC)interfaceControl.Protocol;
+                    var vnc = (ProtocolVNC) interfaceControl.Protocol;
                     vnc.ToggleSmartSize();
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "ToggleSmartSize (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -451,14 +506,16 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
 
-                if (interfaceControl.Info.Protocol == ProtocolType.SSH1 | interfaceControl.Info.Protocol == ProtocolType.SSH2)
+                if ((interfaceControl.Info.Protocol == ProtocolType.SSH1) |
+                    (interfaceControl.Info.Protocol == ProtocolType.SSH2))
                     SshTransferFile();
                 else if (interfaceControl.Info.Protocol == ProtocolType.VNC)
                     VncTransferFile();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "TransferFile (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "TransferFile (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -479,7 +536,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "SSHTransferFile (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -493,7 +551,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "VNCTransferFile (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -509,7 +568,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "ToggleViewOnly (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -523,7 +583,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "StartChat (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "StartChat (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -537,7 +598,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "RefreshScreen (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "RefreshScreen (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -551,7 +613,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "SendSpecialKeys (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -565,7 +628,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "ToggleFullscreen (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -579,7 +643,9 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "ShowPuttySettingsDialog (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message,
+                    true);
             }
         }
 
@@ -608,13 +674,14 @@ namespace mRemoteNG.UI.Window
                         Image = externalTool.Image ?? Resources.mRemote_Icon.ToBitmap()
                     };
 
-                    nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender).Tag as ExternalTool);
+                    nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem) sender).Tag as ExternalTool);
                     cmenTabExternalApps.DropDownItems.Add(nItem);
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionWindow)", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    "cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionWindow)", ex);
             }
         }
 
@@ -627,7 +694,9 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.ConnectionWindow)" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "cmenTabExternalAppsEntry_Click failed (UI.Window.ConnectionWindow)" + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -640,7 +709,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "CloseTabMenu (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -655,7 +725,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "DuplicateTab (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "DuplicateTab (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -670,7 +741,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Reconnect (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "Reconnect (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -679,12 +751,14 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var newTitle = "";
-                if (input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK && !string.IsNullOrEmpty(newTitle))
+                if ((input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK) &&
+                    !string.IsNullOrEmpty(newTitle))
                     TabController.SelectedTab.Title = newTitle.Replace("&", "&&");
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "RenameTab (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "RenameTab (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -694,20 +768,13 @@ namespace mRemoteNG.UI.Window
             Application.DoEvents();
             Windows.ScreenshotForm.AddScreenshot(MiscTools.TakeScreenshot(this));
         }
-        #endregion
 
-        #region Protocols
-        public void Prot_Event_Closed(object sender)
-        {
-            var protocolBase = sender as ProtocolBase;
-            var tabPage = protocolBase?.InterfaceControl.Parent as TabPage;
-            if (tabPage != null)
-                CloseTab(tabPage);
-        }
         #endregion
 
         #region Tabs
+
         private delegate void CloseTabDelegate(TabPage tabToBeClosed);
+
         private void CloseTab(TabPage tabToBeClosed)
         {
             if (TabController.InvokeRequired)
@@ -724,7 +791,8 @@ namespace mRemoteNG.UI.Window
                 }
                 catch (Exception ex)
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t close tab" + Environment.NewLine + ex.Message, true);
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                        "Couldn\'t close tab" + Environment.NewLine + ex.Message, true);
                 }
             }
             else
@@ -740,17 +808,17 @@ namespace mRemoteNG.UI.Window
                 }
                 catch (Exception ex)
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t close tab" + Environment.NewLine + ex.Message, true);
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                        "Couldn\'t close tab" + Environment.NewLine + ex.Message, true);
                 }
 
                 if (TabController.TabPages.Count == 0)
-                {
                     Close();
-                }
             }
         }
 
         private bool _ignoreChangeSelectedTabClick;
+
         private void TabController_SelectionChanged(object sender, EventArgs e)
         {
             _ignoreChangeSelectedTabClick = true;
@@ -761,6 +829,7 @@ namespace mRemoteNG.UI.Window
 
         private int _firstClickTicks;
         private Rectangle _doubleClickRectangle;
+
         private void TabController_MouseUp(object sender, MouseEventArgs e)
         {
             try
@@ -768,7 +837,7 @@ namespace mRemoteNG.UI.Window
                 if (!(NativeMethods.GetForegroundWindow() == frmMain.Default.Handle) && !_ignoreChangeSelectedTabClick)
                 {
                     var clickedTab = TabController.TabPageFromPoint(e.Location);
-                    if (clickedTab != null && TabController.SelectedTab != clickedTab)
+                    if ((clickedTab != null) && (TabController.SelectedTab != clickedTab))
                     {
                         NativeMethods.SetForegroundWindow(Handle);
                         TabController.SelectedTab = clickedTab;
@@ -781,10 +850,14 @@ namespace mRemoteNG.UI.Window
                     case MouseButtons.Left:
                         var currentTicks = Environment.TickCount;
                         var elapsedTicks = currentTicks - _firstClickTicks;
-                        if (elapsedTicks > SystemInformation.DoubleClickTime || !_doubleClickRectangle.Contains(MousePosition))
+                        if ((elapsedTicks > SystemInformation.DoubleClickTime) ||
+                            !_doubleClickRectangle.Contains(MousePosition))
                         {
                             _firstClickTicks = currentTicks;
-                            _doubleClickRectangle = new Rectangle(MousePosition.X - (SystemInformation.DoubleClickSize.Width / 2), MousePosition.Y - (SystemInformation.DoubleClickSize.Height / 2), SystemInformation.DoubleClickSize.Width, SystemInformation.DoubleClickSize.Height);
+                            _doubleClickRectangle =
+                                new Rectangle(MousePosition.X - SystemInformation.DoubleClickSize.Width/2,
+                                    MousePosition.Y - SystemInformation.DoubleClickSize.Height/2,
+                                    SystemInformation.DoubleClickSize.Width, SystemInformation.DoubleClickSize.Height);
                             FocusInterfaceController();
                         }
                         else
@@ -805,7 +878,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "TabController_MouseUp (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -818,7 +892,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "FocusIC (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "FocusIC (UI.Window.ConnectionWindow) failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -828,48 +903,19 @@ namespace mRemoteNG.UI.Window
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl?.Info.Protocol == ProtocolType.VNC)
-                    ((ProtocolVNC)interfaceControl.Protocol).RefreshScreen();
+                    ((ProtocolVNC) interfaceControl.Protocol).RefreshScreen();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "RefreshIC (UI.Window.Connection) failed" + Environment.NewLine + ex.Message, true);
             }
         }
-        #endregion
 
-        #region Window Overrides
-        protected override void WndProc(ref Message m)
-        {
-            try
-            {
-                if (m.Msg == NativeMethods.WM_MOUSEACTIVATE)
-                {
-                    var selectedTab = TabController.SelectedTab;
-                    if (selectedTab == null) return;
-                    {
-                        var tabClientRectangle = selectedTab.RectangleToScreen(selectedTab.ClientRectangle);
-                        if (tabClientRectangle.Contains(MousePosition))
-                        {
-                            var interfaceControl = selectedTab.Tag as InterfaceControl;
-                            if (interfaceControl?.Info?.Protocol == ProtocolType.RDP)
-                            {
-                                interfaceControl.Protocol.Focus();
-                                return; // Do not pass to base class
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.Connection.WndProc() failed.", ex: ex, logOnly: true);
-            }
-
-            base.WndProc(ref m);
-        }
         #endregion
 
         #region Tab drag and drop
+
         public bool InTabDrag { get; set; }
 
         private void TabController_PageDragStart(object sender, MouseEventArgs e)
@@ -879,12 +925,13 @@ namespace mRemoteNG.UI.Window
 
         private void TabController_PageDragMove(object sender, MouseEventArgs e)
         {
-            InTabDrag = true; // For some reason PageDragStart gets raised again after PageDragEnd so set this here instead
+            InTabDrag = true;
+                // For some reason PageDragStart gets raised again after PageDragEnd so set this here instead
 
             var sourceTab = TabController.SelectedTab;
             var destinationTab = TabController.TabPageFromPoint(e.Location);
 
-            if (!TabController.TabPages.Contains(destinationTab) || sourceTab == destinationTab)
+            if (!TabController.TabPages.Contains(destinationTab) || (sourceTab == destinationTab))
                 return;
 
             var targetIndex = TabController.TabPages.IndexOf(destinationTab);
@@ -903,6 +950,7 @@ namespace mRemoteNG.UI.Window
             var interfaceControl = TabController?.SelectedTab?.Tag as InterfaceControl;
             interfaceControl?.Protocol.Focus();
         }
+
         #endregion
     }
 }

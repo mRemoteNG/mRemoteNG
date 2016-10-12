@@ -1,11 +1,4 @@
-﻿using mRemoteNG.App.Info;
-using mRemoteNG.App.Update;
-using mRemoteNG.Config.Connections;
-using mRemoteNG.Connection;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
-using mRemoteNG.UI.Forms;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -14,17 +7,26 @@ using System.IO;
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
+using mRemoteNG.App.Update;
+using mRemoteNG.Config.Connections;
+using mRemoteNG.Connection;
+using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 using mRemoteNG.UI;
+using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
 {
     public class Startup
     {
-        private CompatibilityChecker _compatibilityChecker;
         private AppUpdater _appUpdate;
+        private readonly CompatibilityChecker _compatibilityChecker;
 
-        public static Startup Instance { get; } = new Startup();
+        static Startup()
+        {
+        }
 
         private Startup()
         {
@@ -32,30 +34,29 @@ namespace mRemoteNG.App
             _appUpdate = new AppUpdater();
         }
 
-        static Startup()
-        {
-        }
+        public static Startup Instance { get; } = new Startup();
 
         public void InitializeProgram()
         {
-            Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
+            Debug.Print("---------------------------" + Environment.NewLine + "[START] - " +
+                        Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
             LogStartupData();
             _compatibilityChecker.CheckCompatibility();
             ParseCommandLineArgs();
             IeBrowserEmulation.Register();
             GetConnectionIcons();
-            DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, (a)=>"ConDefault"+a);
-            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, (a)=>"InhDefault"+a);
+            DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a => "ConDefault" + a);
+            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a => "InhDefault" + a);
         }
 
         public void SetDefaultLayout()
         {
             frmMain.Default.pnlDock.Visible = false;
 
-            frmMain.Default.pnlDock.DockLeftPortion = frmMain.Default.pnlDock.Width * 0.2;
-            frmMain.Default.pnlDock.DockRightPortion = frmMain.Default.pnlDock.Width * 0.2;
-            frmMain.Default.pnlDock.DockTopPortion = frmMain.Default.pnlDock.Height * 0.25;
-            frmMain.Default.pnlDock.DockBottomPortion = frmMain.Default.pnlDock.Height * 0.25;
+            frmMain.Default.pnlDock.DockLeftPortion = frmMain.Default.pnlDock.Width*0.2;
+            frmMain.Default.pnlDock.DockRightPortion = frmMain.Default.pnlDock.Width*0.2;
+            frmMain.Default.pnlDock.DockTopPortion = frmMain.Default.pnlDock.Height*0.25;
+            frmMain.Default.pnlDock.DockBottomPortion = frmMain.Default.pnlDock.Height*0.25;
 
             Windows.TreePanel.Show(frmMain.Default.pnlDock, DockState.DockLeft);
             Windows.ConfigPanel.Show(frmMain.Default.pnlDock);
@@ -68,15 +69,13 @@ namespace mRemoteNG.App
 
         private void GetConnectionIcons()
         {
-            string iPath = GeneralAppInfo.HomePath + "\\Icons\\";
+            var iPath = GeneralAppInfo.HomePath + "\\Icons\\";
             if (Directory.Exists(iPath) == false)
-            {
                 return;
-            }
 
-            foreach (string f in Directory.GetFiles(iPath, "*.ico", SearchOption.AllDirectories))
+            foreach (var f in Directory.GetFiles(iPath, "*.ico", SearchOption.AllDirectories))
             {
-                FileInfo fInfo = new FileInfo(f);
+                var fInfo = new FileInfo(f);
                 Array.Resize(ref ConnectionIcon.Icons, ConnectionIcon.Icons.Length + 1);
                 ConnectionIcon.Icons.SetValue(fInfo.Name.Replace(".ico", ""), ConnectionIcon.Icons.Length - 1);
             }
@@ -94,19 +93,22 @@ namespace mRemoteNG.App
 
         private void LogSystemData()
         {
-            string osData = GetOperatingSystemData();
-            string architecture = GetArchitectureData();
-            Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
+            var osData = GetOperatingSystemData();
+            var architecture = GetArchitectureData();
+            Logger.Instance.InfoFormat(string.Join(" ",
+                Array.FindAll(new[] {osData, architecture}, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
         }
 
         private string GetOperatingSystemData()
         {
-            string osVersion = string.Empty;
-            string servicePack = string.Empty;
+            var osVersion = string.Empty;
+            var servicePack = string.Empty;
 
             try
             {
-                foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True").Get())
+                foreach (
+                    var o in
+                    new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True").Get())
                 {
                     var managementObject = (ManagementObject) o;
                     osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
@@ -117,29 +119,29 @@ namespace mRemoteNG.App
             {
                 Logger.Instance.WarnFormat($"Error retrieving operating system information from WMI. {ex.Message}");
             }
-            string osData = string.Join(" ", new string[] { osVersion, servicePack });
+            var osData = string.Join(" ", osVersion, servicePack);
             return osData;
         }
 
         private string GetOSServicePack(string servicePack, ManagementObject managementObject)
         {
-            int servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
+            var servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
             if (servicePackNumber != 0)
-            {
                 servicePack = $"Service Pack {servicePackNumber}";
-            }
             return servicePack;
         }
 
         private string GetArchitectureData()
         {
-            string architecture = string.Empty;
+            var architecture = string.Empty;
             try
             {
-                foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_Processor WHERE DeviceID=\'CPU0\'").Get())
+                foreach (
+                    var o in new ManagementObjectSearcher("SELECT * FROM Win32_Processor WHERE DeviceID=\'CPU0\'").Get()
+                )
                 {
                     var managementObject = (ManagementObject) o;
-                    int addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
+                    var addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
                     architecture = $"{addressWidth}-bit";
                 }
             }
@@ -188,19 +190,16 @@ namespace mRemoteNG.App
         public void CheckForUpdate()
         {
             if (_appUpdate == null)
-            {
                 _appUpdate = new AppUpdater();
-            }
             else if (_appUpdate.IsGetUpdateInfoRunning)
-            {
                 return;
-            }
 
-            DateTime nextUpdateCheck = Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
-            if (!Settings.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
-            {
+            var nextUpdateCheck =
+                Convert.ToDateTime(
+                    Settings.Default.CheckForUpdatesLastCheck.Add(
+                        TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
+            if (!Settings.Default.UpdatePending && (DateTime.UtcNow < nextUpdateCheck))
                 return;
-            }
 
             _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
             _appUpdate.GetUpdateInfoAsync();
@@ -210,7 +209,7 @@ namespace mRemoteNG.App
         {
             if (frmMain.Default.InvokeRequired)
             {
-                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), new object[] { sender, e });
+                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), sender, e);
                 return;
             }
 
@@ -219,22 +218,17 @@ namespace mRemoteNG.App
                 _appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
 
                 if (e.Cancelled)
-                {
                     return;
-                }
                 if (e.Error != null)
-                {
-                    throw (e.Error);
-                }
+                    throw e.Error;
 
                 if (_appUpdate.IsUpdateAvailable())
-                {
                     Windows.Show(WindowType.Update);
-                }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex,
+                    MessageClass.ErrorMsg, true);
             }
         }
 
@@ -243,47 +237,31 @@ namespace mRemoteNG.App
         {
             try
             {
-                CmdArgumentsInterpreter cmd = new CmdArgumentsInterpreter(Environment.GetCommandLineArgs());
+                var cmd = new CmdArgumentsInterpreter(Environment.GetCommandLineArgs());
 
-                string ConsParam = "";
+                var ConsParam = "";
                 if (cmd["cons"] != null)
-                {
                     ConsParam = "cons";
-                }
                 if (cmd["c"] != null)
-                {
                     ConsParam = "c";
-                }
 
-                string ResetPosParam = "";
+                var ResetPosParam = "";
                 if (cmd["resetpos"] != null)
-                {
                     ResetPosParam = "resetpos";
-                }
                 if (cmd["rp"] != null)
-                {
                     ResetPosParam = "rp";
-                }
 
-                string ResetPanelsParam = "";
+                var ResetPanelsParam = "";
                 if (cmd["resetpanels"] != null)
-                {
                     ResetPanelsParam = "resetpanels";
-                }
                 if (cmd["rpnl"] != null)
-                {
                     ResetPanelsParam = "rpnl";
-                }
 
-                string ResetToolbarsParam = "";
+                var ResetToolbarsParam = "";
                 if (cmd["resettoolbar"] != null)
-                {
                     ResetToolbarsParam = "resettoolbar";
-                }
                 if (cmd["rtbr"] != null)
-                {
                     ResetToolbarsParam = "rtbr";
-                }
 
                 if (cmd["reset"] != null)
                 {
@@ -292,18 +270,13 @@ namespace mRemoteNG.App
                     ResetToolbarsParam = "rtbr";
                 }
 
-                string NoReconnectParam = "";
+                var NoReconnectParam = "";
                 if (cmd["noreconnect"] != null)
-                {
                     NoReconnectParam = "noreconnect";
-                }
                 if (cmd["norc"] != null)
-                {
                     NoReconnectParam = "norc";
-                }
 
                 if (!string.IsNullOrEmpty(ConsParam))
-                {
                     if (File.Exists(cmd[ConsParam]) == false)
                     {
                         if (File.Exists(GeneralAppInfo.HomePath + "\\" + cmd[ConsParam]))
@@ -312,10 +285,11 @@ namespace mRemoteNG.App
                             Settings.Default.CustomConsPath = GeneralAppInfo.HomePath + "\\" + cmd[ConsParam];
                             return;
                         }
-                        else if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
+                        if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
                         {
                             Settings.Default.LoadConsFromCustomLocation = true;
-                            Settings.Default.CustomConsPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];
+                            Settings.Default.CustomConsPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" +
+                                                              cmd[ConsParam];
                             return;
                         }
                     }
@@ -325,7 +299,6 @@ namespace mRemoteNG.App
                         Settings.Default.CustomConsPath = cmd[ConsParam];
                         return;
                     }
-                }
 
                 if (!string.IsNullOrEmpty(ResetPosParam))
                 {
@@ -336,23 +309,18 @@ namespace mRemoteNG.App
                 }
 
                 if (!string.IsNullOrEmpty(ResetPanelsParam))
-                {
                     Settings.Default.ResetPanels = true;
-                }
 
                 if (!string.IsNullOrEmpty(NoReconnectParam))
-                {
                     Settings.Default.NoReconnect = true;
-                }
 
                 if (!string.IsNullOrEmpty(ResetToolbarsParam))
-                {
                     Settings.Default.ResetToolbars = true;
-                }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strCommandLineArgsCouldNotBeParsed + Environment.NewLine + ex.Message);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    Language.strCommandLineArgsCouldNotBeParsed + Environment.NewLine + ex.Message);
             }
         }
     }

@@ -8,7 +8,7 @@ namespace mRemoteNG.App
     {
         public static void SendFormToScreen(Screen Screen)
         {
-            bool wasMax = false;
+            var wasMax = false;
 
             if (frmMain.Default.WindowState == FormWindowState.Maximized)
             {
@@ -19,9 +19,7 @@ namespace mRemoteNG.App
             frmMain.Default.Location = Screen.Bounds.Location;
 
             if (wasMax)
-            {
                 frmMain.Default.WindowState = FormWindowState.Maximized;
-            }
         }
 
         public static void SendPanelToScreen(DockContent Panel, Screen Screen)

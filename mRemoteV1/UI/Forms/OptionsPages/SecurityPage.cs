@@ -45,7 +45,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void RevertSettings()
         {
-
         }
 
         private void PopulateEncryptionEngineDropDown()

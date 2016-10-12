@@ -6,14 +6,13 @@
         {
             get
             {
-                #if DEBUG
+#if DEBUG
 				return "update-debug.txt";
                 #else
-                if ((string)(mRemoteNG.Settings.Default.UpdateChannel.ToLowerInvariant()) == "debug")
+                if (Settings.Default.UpdateChannel.ToLowerInvariant() == "debug")
                     return "update-debug.txt";
-                else
-                    return "update.txt";
-                #endif
+                return "update.txt";
+#endif
             }
         }
     }

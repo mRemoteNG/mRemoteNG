@@ -1,23 +1,23 @@
 ﻿using System;
 
-
 namespace mRemoteNG.Connection
 {
     public class DefaultConnectionInheritance : ConnectionInfoInheritance
     {
-        public static DefaultConnectionInheritance Instance { get; } = new DefaultConnectionInheritance();
+        static DefaultConnectionInheritance()
+        {
+        }
 
         private DefaultConnectionInheritance() : base(null, true)
         {
         }
 
-        static DefaultConnectionInheritance()
-        { }
+        public static DefaultConnectionInheritance Instance { get; } = new DefaultConnectionInheritance();
 
 
-        public void LoadFrom<TSource>(TSource sourceInstance, Func<string,string> propertyNameMutator = null)
+        public void LoadFrom<TSource>(TSource sourceInstance, Func<string, string> propertyNameMutator = null)
         {
-            if (propertyNameMutator == null) propertyNameMutator = (a) => a;
+            if (propertyNameMutator == null) propertyNameMutator = a => a;
             var inheritanceProperties = GetProperties();
             foreach (var property in inheritanceProperties)
             {
@@ -27,9 +27,10 @@ namespace mRemoteNG.Connection
             }
         }
 
-        public void SaveTo<TDestination>(TDestination destinationInstance, Func<string, string> propertyNameMutator = null)
+        public void SaveTo<TDestination>(TDestination destinationInstance,
+            Func<string, string> propertyNameMutator = null)
         {
-            if (propertyNameMutator == null) propertyNameMutator = (a) => a;
+            if (propertyNameMutator == null) propertyNameMutator = a => a;
             var inheritanceProperties = GetProperties();
             foreach (var property in inheritanceProperties)
             {

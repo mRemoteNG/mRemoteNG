@@ -7,10 +7,8 @@ namespace mRemoteNG.Security
     public class EncryptedSecureString
     {
         private static SecureString _machineKey;
-        private SecureString _secureString;
         private readonly ICryptographyProvider _cryptographyProvider;
-
-        private static SecureString MachineKey => _machineKey ?? (_machineKey = GenerateNewMachineKey(32));
+        private SecureString _secureString;
 
         public EncryptedSecureString()
         {
@@ -23,6 +21,8 @@ namespace mRemoteNG.Security
             _secureString = new SecureString();
             _cryptographyProvider = cryptographyProvider;
         }
+
+        private static SecureString MachineKey => _machineKey ?? (_machineKey = GenerateNewMachineKey(32));
 
         public string GetClearTextValue()
         {
@@ -44,10 +44,8 @@ namespace mRemoteNG.Security
 
             var machineKeyString = "";
             for (var x = 0; x < keySize; x++)
-            {
-                machineKeyString += (char)random.Next(33, 126);
-            }
-            
+                machineKeyString += (char) random.Next(33, 126);
+
             return machineKeyString.ConvertToSecureString();
         }
     }

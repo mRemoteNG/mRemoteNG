@@ -1,5 +1,4 @@
-﻿
-namespace mRemoteNG.Security
+﻿namespace mRemoteNG.Security
 {
     public enum BlockCipherModes
     {

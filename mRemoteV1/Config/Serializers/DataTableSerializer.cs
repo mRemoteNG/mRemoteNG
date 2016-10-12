@@ -12,10 +12,10 @@ namespace mRemoteNG.Config.Serializers
 {
     public class DataTableSerializer : ISerializer<DataTable>
     {
-        private DataTable _dataTable;
         private const string TableName = "tblCons";
         private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
+        private DataTable _dataTable;
 
         public DataTableSerializer(SaveFilter saveFilter)
         {
@@ -25,7 +25,7 @@ namespace mRemoteNG.Config.Serializers
 
         public DataTable Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+            var rootNode = (RootNodeInfo) connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return Serialize(rootNode);
         }
 
@@ -158,7 +158,7 @@ namespace mRemoteNG.Config.Serializers
 
         private void SetPrimaryKey()
         {
-            _dataTable.PrimaryKey = new[] { _dataTable.Columns["ConstantID"] };
+            _dataTable.PrimaryKey = new[] {_dataTable.Columns["ConstantID"]};
         }
 
         private void SerializeNodesRecursive(ConnectionInfo connectionInfo)
@@ -181,8 +181,8 @@ namespace mRemoteNG.Config.Serializers
             dataRow["ConstantID"] = connectionInfo.ConstantID;
             dataRow["ParentID"] = connectionInfo.Parent.ConstantID;
             dataRow["PositionID"] = _currentNodeIndex;
-            dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
-            dataRow["Expanded"] = connectionInfo is ContainerInfo ? ((ContainerInfo)connectionInfo).IsExpanded : false;
+            dataRow["LastChange"] = (SqlDateTime) DateTime.Now;
+            dataRow["Expanded"] = connectionInfo is ContainerInfo ? ((ContainerInfo) connectionInfo).IsExpanded : false;
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
@@ -285,7 +285,8 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritVNCViewOnly"] = connectionInfo.Inheritance.VNCViewOnly;
                 dataRow["InheritRDGatewayUsageMethod"] = connectionInfo.Inheritance.RDGatewayUsageMethod;
                 dataRow["InheritRDGatewayHostname"] = connectionInfo.Inheritance.RDGatewayHostname;
-                dataRow["InheritRDGatewayUseConnectionCredentials"] = connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
+                dataRow["InheritRDGatewayUseConnectionCredentials"] =
+                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
                 dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RDGatewayUsername;
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;

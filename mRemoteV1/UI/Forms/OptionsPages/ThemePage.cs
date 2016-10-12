@@ -69,18 +69,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void cboTheme_DropDown(object sender, EventArgs e)
         {
             if (Equals(ThemeManager.ActiveTheme, ThemeManager.DefaultTheme))
-            {
                 return;
-            }
             ThemeManager.ActiveTheme.Name = cboTheme.Text;
         }
 
         private void cboTheme_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (cboTheme.SelectedItem == null)
-            {
                 cboTheme.SelectedItem = ThemeManager.DefaultTheme;
-            }
 
             if (Equals(cboTheme.SelectedItem, ThemeManager.DefaultTheme))
             {
@@ -117,9 +113,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             var theme = (ThemeInfo) cboTheme.SelectedItem;
             if (theme == null)
-            {
                 return;
-            }
 
             _themeList.Remove(theme);
 

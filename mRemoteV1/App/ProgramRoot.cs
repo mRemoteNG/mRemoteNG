@@ -1,8 +1,8 @@
-﻿using mRemoteNG.UI.Forms;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
@@ -11,7 +11,7 @@ namespace mRemoteNG.App
         private static Mutex mutex;
 
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
         public static void Main(string[] args)
@@ -54,21 +54,19 @@ namespace mRemoteNG.App
         {
             var singletonInstanceWindowHandle = GetRunningSingletonInstanceWindowHandle();
             if (singletonInstanceWindowHandle != IntPtr.Zero)
-            {
                 if (NativeMethods.IsIconic(singletonInstanceWindowHandle) != 0)
-                    NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int)NativeMethods.SW_RESTORE);
-            }
+                    NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int) NativeMethods.SW_RESTORE);
         }
 
         private static IntPtr GetRunningSingletonInstanceWindowHandle()
         {
             var windowHandle = IntPtr.Zero;
             var currentProcess = Process.GetCurrentProcess();
-            foreach (Process enumeratedProcess in Process.GetProcessesByName(currentProcess.ProcessName))
-            {
-                if (enumeratedProcess.Id != currentProcess.Id && enumeratedProcess.MainModule.FileName == currentProcess.MainModule.FileName && enumeratedProcess.MainWindowHandle != IntPtr.Zero)
+            foreach (var enumeratedProcess in Process.GetProcessesByName(currentProcess.ProcessName))
+                if ((enumeratedProcess.Id != currentProcess.Id) &&
+                    (enumeratedProcess.MainModule.FileName == currentProcess.MainModule.FileName) &&
+                    (enumeratedProcess.MainWindowHandle != IntPtr.Zero))
                     windowHandle = enumeratedProcess.MainWindowHandle;
-            }
             return windowHandle;
         }
     }

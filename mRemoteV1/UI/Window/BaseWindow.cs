@@ -1,55 +1,50 @@
+using System;
+using System.Windows.Forms;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-
 namespace mRemoteNG.UI.Window
 {
-	public class BaseWindow : DockContent
+    public class BaseWindow : DockContent
     {
-        #region Private Variables
-        private WindowType _WindowType;
-        private DockContent _DockPnl;
+        #region Constructors
+
         #endregion
 
-        #region Constructors
-        public BaseWindow()
-		{
-			//InitializeComponent();
-		}
+        #region Public Methods
+
+        public void SetFormText(string Text)
+        {
+            this.Text = Text;
+            TabText = Text;
+        }
+
+        #endregion
+
+        #region Private Variables
+
         #endregion
 
         #region Public Properties
-        public WindowType WindowType
-		{
-			get { return this._WindowType; }
-			set { this._WindowType = value; }
-		}
-		
-        public DockContent DockPnl
-		{
-			get { return this._DockPnl; }
-			set { this._DockPnl = value; }
-		}
+
+        public WindowType WindowType { get; set; }
+
+        public DockContent DockPnl { get; set; }
+
         #endregion
-				
-        #region Public Methods
-		public void SetFormText(string Text)
-		{
-			this.Text = Text;
-			this.TabText = Text;
-		}
-        #endregion
-				
+
         #region Private Methods
-		private void Base_Load(System.Object sender, System.EventArgs e)
-		{
-			frmMain.Default.ShowHidePanelTabs();
-		}
-				
-		private void Base_FormClosed(System.Object sender, System.Windows.Forms.FormClosedEventArgs e)
-		{
-			frmMain.Default.ShowHidePanelTabs(this);
-		}
+
+        private void Base_Load(object sender, EventArgs e)
+        {
+            frmMain.Default.ShowHidePanelTabs();
+        }
+
+        private void Base_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmMain.Default.ShowHidePanelTabs(this);
+        }
+
         #endregion
-	}
+    }
 }

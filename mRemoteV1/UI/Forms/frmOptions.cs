@@ -1,18 +1,18 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.UI.Forms.OptionsPages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.App;
+using mRemoteNG.UI.Forms.OptionsPages;
 
 namespace mRemoteNG.UI.Forms
 {
     public partial class frmOptions : Form
     {
-        private Dictionary<string, OptionsPage> _pages;
-        private ImageList _pageIconImageList;
         private readonly string pageName;
+        private ImageList _pageIconImageList;
+        private Dictionary<string, OptionsPage> _pages;
 
         public frmOptions()
         {
@@ -39,9 +39,7 @@ namespace mRemoteNG.UI.Forms
         private void ApplyLanguage()
         {
             foreach (var optionPage in _pages.Values)
-            {
                 optionPage.ApplyLanguage();
-            }
         }
 
         private void CompileListOfOptionsPages()
@@ -62,7 +60,7 @@ namespace mRemoteNG.UI.Forms
 
         private void SetImageListForListView()
         {
-            _pageIconImageList = new ImageList { ColorDepth = ColorDepth.Depth32Bit };
+            _pageIconImageList = new ImageList {ColorDepth = ColorDepth.Depth32Bit};
             lstOptionPages.LargeImageList = _pageIconImageList;
             lstOptionPages.SmallImageList = _pageIconImageList;
         }
@@ -80,8 +78,8 @@ namespace mRemoteNG.UI.Forms
 
         private void SetInitiallyActivatedPage()
         {
-            bool isSet = false;
-            for (int i = 0; i < lstOptionPages.Items.Count; i++)
+            var isSet = false;
+            for (var i = 0; i < lstOptionPages.Items.Count; i++)
             {
                 if (!lstOptionPages.Items[i].Text.Equals(pageName)) continue;
                 lstOptionPages.Items[i].Selected = true;
@@ -89,7 +87,7 @@ namespace mRemoteNG.UI.Forms
                 break;
             }
 
-            if(!isSet)
+            if (!isSet)
                 lstOptionPages.Items[0].Selected = true;
         }
 

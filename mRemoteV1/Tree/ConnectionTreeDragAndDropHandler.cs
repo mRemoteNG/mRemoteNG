@@ -8,29 +8,29 @@ using mRemoteNG.Container;
 using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree.Root;
 
-
 namespace mRemoteNG.Tree
 {
     public class ConnectionTreeDragAndDropHandler
     {
-        public Color DropAllowedFeedbackColor = Color.Green;
-        public Color DropDeniedFeedbackColor = Color.Red;
-        private string _infoMessage;
         private Color _currentFeedbackColor;
         private bool _enableFeedback;
+        private string _infoMessage;
+        public Color DropAllowedFeedbackColor = Color.Green;
+        public Color DropDeniedFeedbackColor = Color.Red;
 
 
         public void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
         {
             var dropTarget = e.TargetModel as ConnectionInfo;
             if (dropTarget == null) return;
-            var dropSource = (ConnectionInfo)e.SourceModels[0];
+            var dropSource = (ConnectionInfo) e.SourceModels[0];
             DropModel(dropSource, dropTarget, e.DropTargetLocation);
             e.Handled = true;
             Runtime.SaveConnectionsAsync();
         }
 
-        public void DropModel(ConnectionInfo dropSource, ConnectionInfo dropTarget, DropTargetLocation dropTargetLocation)
+        public void DropModel(ConnectionInfo dropSource, ConnectionInfo dropTarget,
+            DropTargetLocation dropTargetLocation)
         {
             if (dropTargetLocation == DropTargetLocation.Item)
                 DropModelOntoTarget(dropSource, dropTarget);
@@ -78,7 +78,8 @@ namespace mRemoteNG.Tree
             e.Handled = true;
         }
 
-        public DragDropEffects CanModelDrop(ConnectionInfo dropSource, ConnectionInfo dropTarget, DropTargetLocation dropTargetLocation)
+        public DragDropEffects CanModelDrop(ConnectionInfo dropSource, ConnectionInfo dropTarget,
+            DropTargetLocation dropTargetLocation)
         {
             var dragDropEffect = DragDropEffects.None;
             if (!NodeIsDraggable(dropSource))
@@ -88,7 +89,8 @@ namespace mRemoteNG.Tree
             }
             else if (dropTargetLocation == DropTargetLocation.Item)
                 dragDropEffect = HandleCanDropOnItem(dropSource, dropTarget);
-            else if (dropTargetLocation == DropTargetLocation.AboveItem || dropTargetLocation == DropTargetLocation.BelowItem)
+            else if ((dropTargetLocation == DropTargetLocation.AboveItem) ||
+                     (dropTargetLocation == DropTargetLocation.BelowItem))
                 dragDropEffect = HandleCanDropBetweenItems(dropSource, dropTarget);
             return dragDropEffect;
         }
@@ -140,7 +142,7 @@ namespace mRemoteNG.Tree
 
         private bool NodeIsDraggable(ConnectionInfo node)
         {
-            if (node == null || node is RootNodeInfo || node is PuttySessionInfo) return false;
+            if ((node == null) || node is RootNodeInfo || node is PuttySessionInfo) return false;
             return true;
         }
 
@@ -152,13 +154,13 @@ namespace mRemoteNG.Tree
         private bool AncestorDraggingOntoChild(ConnectionInfo source, ConnectionInfo target)
         {
             var sourceAsContainer = source as ContainerInfo;
-            return sourceAsContainer != null && sourceAsContainer.GetRecursiveChildList().Contains(target);
+            return (sourceAsContainer != null) && sourceAsContainer.GetRecursiveChildList().Contains(target);
         }
 
         private bool DraggingOntoCurrentParent(ConnectionInfo source, ConnectionInfo target)
         {
             var targetAsContainer = target as ContainerInfo;
-            return targetAsContainer != null && targetAsContainer.Children.Contains(source);
+            return (targetAsContainer != null) && targetAsContainer.Children.Contains(source);
         }
     }
 }

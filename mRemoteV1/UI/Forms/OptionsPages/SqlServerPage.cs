@@ -66,7 +66,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (Settings.Default.UseSQLServer)
             {
-                Runtime.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+                Runtime.RemoteConnectionsSyncronizer =
+                    new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
                 Runtime.RemoteConnectionsSyncronizer.Enable();
             }
             else

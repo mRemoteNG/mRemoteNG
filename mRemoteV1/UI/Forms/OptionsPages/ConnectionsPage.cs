@@ -66,39 +66,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             // ReSharper disable once StringLiteralTypo
             if (Settings.Default.EmptyCredentials == "noinfo")
-            {
                 radCredentialsNoInfo.Checked = true;
-            }
             else if (Settings.Default.EmptyCredentials == "windows")
-            {
                 radCredentialsWindows.Checked = true;
-            }
             else if (Settings.Default.EmptyCredentials == "custom")
-            {
                 radCredentialsCustom.Checked = true;
-            }
 
             txtCredentialsUsername.Text = Convert.ToString(Settings.Default.DefaultUsername);
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
+            txtCredentialsPassword.Text =
+                cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
             txtCredentialsDomain.Text = Convert.ToString(Settings.Default.DefaultDomain);
 
             if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Never)
-            {
                 radCloseWarnNever.Checked = true;
-            }
             else if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Exit)
-            {
                 radCloseWarnExit.Checked = true;
-            }
             else if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Multiple)
-            {
                 radCloseWarnMultiple.Checked = true;
-            }
             else
-            {
                 radCloseWarnAll.Checked = true;
-            }
         }
 
         public override void SaveSettings()
@@ -123,40 +110,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             if (radCredentialsNoInfo.Checked)
-            {
-                // ReSharper disable once StringLiteralTypo
                 Settings.Default.EmptyCredentials = "noinfo";
-            }
             else if (radCredentialsWindows.Checked)
-            {
                 Settings.Default.EmptyCredentials = "windows";
-            }
             else if (radCredentialsCustom.Checked)
-            {
                 Settings.Default.EmptyCredentials = "custom";
-            }
 
             Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
+            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text,
+                Runtime.EncryptionKey);
             Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
 
             if (radCloseWarnAll.Checked)
-            {
                 Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.All;
-            }
             if (radCloseWarnMultiple.Checked)
-            {
                 Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.Multiple;
-            }
             if (radCloseWarnExit.Checked)
-            {
                 Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.Exit;
-            }
             if (radCloseWarnNever.Checked)
-            {
                 Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.Never;
-            }
 
             Settings.Default.Save();
         }

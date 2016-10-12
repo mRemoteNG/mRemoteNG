@@ -7,11 +7,29 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
 
-
 namespace mRemoteNG.App
 {
     public class Import
     {
+        private static FileType DetermineFileType(string fileName)
+        {
+            // TODO: Use the file contents to determine the file type instead of trusting the extension
+            var fileExtension = Convert.ToString(Path.GetExtension(fileName).ToLowerInvariant());
+            switch (fileExtension)
+            {
+                case ".xml":
+                    return FileType.mRemoteXml;
+                case ".rdp":
+                    return FileType.RemoteDesktopConnection;
+                case ".rdg":
+                    return FileType.RemoteDesktopConnectionManager;
+                case ".dat":
+                    return FileType.PuttyConnectionManager;
+                default:
+                    return FileType.Unknown;
+            }
+        }
+
         private enum FileType
         {
             Unknown = 0,
@@ -23,7 +41,9 @@ namespace mRemoteNG.App
         }
 
         #region Public Methods
-        public static void ImportFromFile(ContainerInfo importDestinationContainer, bool alwaysUseSelectedTreeNode = false)
+
+        public static void ImportFromFile(ContainerInfo importDestinationContainer,
+            bool alwaysUseSelectedTreeNode = false)
         {
             try
             {
@@ -47,7 +67,6 @@ namespace mRemoteNG.App
                         return;
 
                     foreach (var fileName in openFileDialog.FileNames)
-                    {
                         try
                         {
                             IConnectionImporter importer;
@@ -72,11 +91,12 @@ namespace mRemoteNG.App
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
-                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                            Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:1", ex, logOnly: true);
+                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName),
+                                Language.strImportFileFailedMainInstruction,
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                            Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:1", ex,
+                                logOnly: true);
                         }
-                    }
 
                     Runtime.SaveConnectionsAsync();
                 }
@@ -97,11 +117,13 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromActiveDirectory() failed.", ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromActiveDirectory() failed.", ex,
+                    logOnly: true);
             }
         }
 
-        public static void ImportFromPortScan(IEnumerable<ScanHost> hosts, ProtocolType protocol, ContainerInfo importDestinationContainer)
+        public static void ImportFromPortScan(IEnumerable<ScanHost> hosts, ProtocolType protocol,
+            ContainerInfo importDestinationContainer)
         {
             try
             {
@@ -115,25 +137,7 @@ namespace mRemoteNG.App
                     logOnly: true);
             }
         }
-        #endregion
 
-        private static FileType DetermineFileType(string fileName)
-        {
-            // TODO: Use the file contents to determine the file type instead of trusting the extension
-            var fileExtension = Convert.ToString(Path.GetExtension(fileName).ToLowerInvariant());
-            switch (fileExtension)
-            {
-                case ".xml":
-                    return FileType.mRemoteXml;
-                case ".rdp":
-                    return FileType.RemoteDesktopConnection;
-                case ".rdg":
-                    return FileType.RemoteDesktopConnectionManager;
-                case ".dat":
-                    return FileType.PuttyConnectionManager;
-                default:
-                    return FileType.Unknown;
-            }
-        }
+        #endregion
     }
 }

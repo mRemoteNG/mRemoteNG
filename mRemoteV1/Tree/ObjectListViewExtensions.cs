@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using BrightIdeasSoftware;
 
-
 namespace mRemoteNG.Tree
 {
     public static class ObjectListViewExtensions

@@ -26,7 +26,8 @@ namespace mRemoteNG.Config.DataProviders
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace($"Failed to create rolling backup of file {FilePath}", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace($"Failed to create rolling backup of file {FilePath}",
+                    ex);
                 throw;
             }
         }

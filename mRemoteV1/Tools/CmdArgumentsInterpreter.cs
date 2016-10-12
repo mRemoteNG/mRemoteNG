@@ -1,7 +1,8 @@
-﻿using mRemoteNG.App;
-using System;
+﻿using System;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
+using mRemoteNG.App;
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.Tools
 {
@@ -17,16 +18,13 @@ namespace mRemoteNG.Tools
     //
     public class CmdArgumentsInterpreter
     {
-        private StringDictionary Parameters;
-
-        // Retrieve a parameter value if it exists
-        public string this[string Param] => (Parameters[Param]);
+        private readonly StringDictionary Parameters;
 
         public CmdArgumentsInterpreter(string[] Args)
         {
             Parameters = new StringDictionary();
-            Regex Spliter = new Regex("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            Regex Remover = new Regex("^[\'\"]?(.*?)[\'\"]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var Spliter = new Regex("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var Remover = new Regex("^[\'\"]?(.*?)[\'\"]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             string Parameter = null;
 
             // Valid parameters forms:
@@ -35,7 +33,7 @@ namespace mRemoteNG.Tools
 
             try
             {
-                foreach (string Txt in Args)
+                foreach (var Txt in Args)
                 {
                     // Look for new parameters (-,/ or --) and a possible enclosed value (=,:)
                     var Parts = Spliter.Split(Txt, 3);
@@ -58,24 +56,16 @@ namespace mRemoteNG.Tools
                             // Found just a parameter
                             // The last parameter is still waiting. With no value, set it to true.
                             if (Parameter != null)
-                            {
                                 if (!Parameters.ContainsKey(Parameter))
-                                {
                                     Parameters.Add(Parameter, "true");
-                                }
-                            }
                             Parameter = Parts[1];
                             break;
                         case 3:
                             // Parameter with enclosed value
                             // The last parameter is still waiting. With no value, set it to true.
                             if (Parameter != null)
-                            {
                                 if (!Parameters.ContainsKey(Parameter))
-                                {
                                     Parameters.Add(Parameter, "true");
-                                }
-                            }
                             Parameter = Parts[1];
                             // Remove possible enclosing characters (",')
                             if (!Parameters.ContainsKey(Parameter))
@@ -89,17 +79,17 @@ namespace mRemoteNG.Tools
                 }
                 // In case a parameter is still waiting
                 if (Parameter != null)
-                {
                     if (!Parameters.ContainsKey(Parameter))
-                    {
                         Parameters.Add(Parameter, "true");
-                    }
-                }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "Creating new Args failed" + Environment.NewLine + ex.Message, true);
             }
         }
+
+        // Retrieve a parameter value if it exists
+        public string this[string Param] => Parameters[Param];
     }
 }

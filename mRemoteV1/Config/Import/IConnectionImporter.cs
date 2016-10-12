@@ -1,6 +1,5 @@
 ﻿using mRemoteNG.Container;
 
-
 namespace mRemoteNG.Config.Import
 {
     public interface IConnectionImporter

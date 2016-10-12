@@ -32,10 +32,8 @@ namespace mRemoteNG.Config.Serializers
             var rootNodes = configurationNode?.SelectNodes("./root");
             if (rootNodes == null) return connectionTreeModel;
             foreach (XmlNode rootNode in rootNodes)
-            {
                 ImportRootOrContainer(rootNode, root);
-            }
-            
+
             return connectionTreeModel;
         }
 
@@ -48,7 +46,6 @@ namespace mRemoteNG.Config.Serializers
             var childNodes = xmlNode.SelectNodes("./*");
             if (childNodes == null) return;
             foreach (XmlNode childNode in childNodes)
-            {
                 switch (childNode.Name)
                 {
                     case "container":
@@ -58,9 +55,8 @@ namespace mRemoteNG.Config.Serializers
                         ImportConnection(childNode, newContainer);
                         break;
                     default:
-                        throw (new FileFormatException($"Unrecognized child node ({childNode.Name})."));
+                        throw new FileFormatException($"Unrecognized child node ({childNode.Name}).");
                 }
-            }
         }
 
         private void VerifyNodeType(XmlNode xmlNode)
@@ -70,19 +66,15 @@ namespace mRemoteNG.Config.Serializers
             {
                 case "root":
                     if (string.Compare(xmlNodeType, "database", StringComparison.OrdinalIgnoreCase) != 0)
-                    {
-                        throw (new FileFormatException($"Unrecognized root node type ({xmlNodeType})."));
-                    }
+                        throw new FileFormatException($"Unrecognized root node type ({xmlNodeType}).");
                     break;
                 case "container":
                     if (string.Compare(xmlNodeType, "folder", StringComparison.OrdinalIgnoreCase) != 0)
-                    {
-                        throw (new FileFormatException($"Unrecognized root node type ({xmlNodeType})."));
-                    }
+                        throw new FileFormatException($"Unrecognized root node type ({xmlNodeType}).");
                     break;
                 default:
                     // ReSharper disable once LocalizableElement
-                    throw (new ArgumentException("Argument must be either a root or a container node.", nameof(xmlNode)));
+                    throw new ArgumentException("Argument must be either a root or a container node.", nameof(xmlNode));
             }
         }
 
@@ -101,7 +93,7 @@ namespace mRemoteNG.Config.Serializers
         {
             var connectionNodeType = connectionNode.Attributes?["type"].Value;
             if (string.Compare(connectionNodeType, "PuTTY", StringComparison.OrdinalIgnoreCase) != 0)
-                throw (new FileFormatException($"Unrecognized connection node type ({connectionNodeType})."));
+                throw new FileFormatException($"Unrecognized connection node type ({connectionNodeType}).");
 
             var connectionInfo = ConnectionInfoFromXml(connectionNode);
             parentContainer.AddChild(connectionInfo);

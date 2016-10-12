@@ -5,44 +5,43 @@ using mRemoteNG.Config.Serializers;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 
-
 namespace mRemoteNG.Config.Connections
 {
-	public class ConnectionsLoader
-	{		
+    public class ConnectionsLoader
+    {
         public bool UseDatabase { get; set; }
-	    public string ConnectionFileName { get; set; }
-		
+        public string ConnectionFileName { get; set; }
 
-		public ConnectionTreeModel LoadConnections(bool import)
-		{
-		    IDeserializer deserializer;
-			if (UseDatabase)
-			{
-			    var connector = new SqlDatabaseConnector();
-			    var dataProvider = new SqlDataProvider(connector);
-			    var dataTable = dataProvider.Load();
-			    deserializer = new DataTableDeserializer(dataTable);
-			}
-			else
-			{
-			    var dataProvider = new FileDataProvider(ConnectionFileName);
-			    var xmlString = dataProvider.Load();
-			    deserializer = new XmlConnectionsDeserializer(xmlString);
-			}
+
+        public ConnectionTreeModel LoadConnections(bool import)
+        {
+            IDeserializer deserializer;
+            if (UseDatabase)
+            {
+                var connector = new SqlDatabaseConnector();
+                var dataProvider = new SqlDataProvider(connector);
+                var dataTable = dataProvider.Load();
+                deserializer = new DataTableDeserializer(dataTable);
+            }
+            else
+            {
+                var dataProvider = new FileDataProvider(ConnectionFileName);
+                var xmlString = dataProvider.Load();
+                deserializer = new XmlConnectionsDeserializer(xmlString);
+            }
 
             var connectionTreeModel = deserializer.Deserialize();
 
             if (connectionTreeModel != null)
-			    frmMain.Default.ConnectionsFileName = ConnectionFileName;
+                frmMain.Default.ConnectionsFileName = ConnectionFileName;
             else
                 connectionTreeModel = new ConnectionTreeModel();
 
-		    if (import) return connectionTreeModel;
-		    PuttySessionsManager.Instance.AddSessions();
+            if (import) return connectionTreeModel;
+            PuttySessionsManager.Instance.AddSessions();
             connectionTreeModel.RootNodes.AddRange(PuttySessionsManager.Instance.RootPuttySessionsNodes);
 
-		    return connectionTreeModel;
-		}
+            return connectionTreeModel;
+        }
     }
 }

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-
 namespace mRemoteNG.Connection
 {
     public class ConnectionInfoComparer<TProperty> : IComparer<ConnectionInfo> where TProperty : IComparable<TProperty>
     {
         private readonly Func<ConnectionInfo, TProperty> _sortExpression;
-        public ListSortDirection SortDirection { get; set; } = ListSortDirection.Ascending;
 
         public ConnectionInfoComparer(Func<ConnectionInfo, TProperty> sortExpression)
         {
             _sortExpression = sortExpression;
         }
+
+        public ListSortDirection SortDirection { get; set; } = ListSortDirection.Ascending;
 
         public int Compare(ConnectionInfo x, ConnectionInfo y)
         {

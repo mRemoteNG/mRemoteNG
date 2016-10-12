@@ -1,44 +1,40 @@
 using System;
 using System.Drawing;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.App;
-using System.Threading;
 using System.Globalization;
-using mRemoteNG.Themes;
-using mRemoteNG.Connection.Protocol;
+using System.Threading;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
-
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
 {
     public class SettingsLoader
-	{
-		private frmMain _mainForm;
-        private readonly LayoutSettingsLoader _layoutSettingsLoader;
+    {
         private readonly ExternalAppsLoader _externalAppsLoader;
+        private readonly LayoutSettingsLoader _layoutSettingsLoader;
 
-        public frmMain MainForm
-		{
-			get { return _mainForm; }
-			set { _mainForm = value; }
-		}
-		
-        
-		public SettingsLoader(frmMain mainForm)
-		{
-            _mainForm = mainForm;
-            _layoutSettingsLoader = new LayoutSettingsLoader(_mainForm);
-            _externalAppsLoader = new ExternalAppsLoader(_mainForm);
+
+        public SettingsLoader(frmMain mainForm)
+        {
+            MainForm = mainForm;
+            _layoutSettingsLoader = new LayoutSettingsLoader(MainForm);
+            _externalAppsLoader = new ExternalAppsLoader(MainForm);
         }
-        
+
+        public frmMain MainForm { get; set; }
+
         #region Public Methods
+
         public void LoadSettings()
-		{
-			try
-			{
+        {
+            try
+            {
                 EnsureSettingsAreSavedInNewestVersion();
 
                 SetSupportedCulture();
@@ -51,25 +47,26 @@ namespace mRemoteNG.Config.Settings
                 SetShowSystemTrayIcon();
                 SetAutoSave();
                 SetConDefaultPassword();
-				LoadPanelsFromXml();
-				LoadExternalAppsFromXml();
+                LoadPanelsFromXml();
+                LoadExternalAppsFromXml();
                 SetAlwaysShowPanelTabs();
-						
-				if (mRemoteNG.Settings.Default.ResetToolbars)
+
+                if (mRemoteNG.Settings.Default.ResetToolbars)
                     SetToolbarsDefault();
-				else
+                else
                     LoadToolbarsFromSettings();
-			}
-			catch (Exception ex)
-			{
+            }
+            catch (Exception ex)
+            {
                 Logger.Instance.Error("Loading settings failed" + Environment.NewLine + ex.Message);
-			}
-		}
+            }
+        }
 
         private static void SetConDefaultPassword()
         {
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            mRemoteNG.Settings.Default.ConDefaultPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, Runtime.EncryptionKey);
+            mRemoteNG.Settings.Default.ConDefaultPassword =
+                cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, Runtime.EncryptionKey);
         }
 
         private static void SetAlwaysShowPanelTabs()
@@ -85,41 +82,41 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetSupportedCulture()
         {
-            if (mRemoteNG.Settings.Default.OverrideUICulture != "" && SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture))
+            if ((mRemoteNG.Settings.Default.OverrideUICulture != "") &&
+                SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture))
             {
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(mRemoteNG.Settings.Default.OverrideUICulture);
-                Logger.Instance.InfoFormat("Override Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
+                Logger.Instance.InfoFormat("Override Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name,
+                    Thread.CurrentThread.CurrentUICulture.NativeName);
             }
         }
 
         private void SetApplicationWindowPositionAndSize()
         {
-            _mainForm.WindowState = FormWindowState.Normal;
+            MainForm.WindowState = FormWindowState.Normal;
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Normal)
             {
                 if (!mRemoteNG.Settings.Default.MainFormLocation.IsEmpty)
-                    _mainForm.Location = mRemoteNG.Settings.Default.MainFormLocation;
+                    MainForm.Location = mRemoteNG.Settings.Default.MainFormLocation;
                 if (!mRemoteNG.Settings.Default.MainFormSize.IsEmpty)
-                    _mainForm.Size = mRemoteNG.Settings.Default.MainFormSize;
+                    MainForm.Size = mRemoteNG.Settings.Default.MainFormSize;
             }
             else
             {
                 if (!mRemoteNG.Settings.Default.MainFormRestoreLocation.IsEmpty)
-                    _mainForm.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
+                    MainForm.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
                 if (!mRemoteNG.Settings.Default.MainFormRestoreSize.IsEmpty)
-                    _mainForm.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
+                    MainForm.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
             }
 
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Maximized)
-            {
-                _mainForm.WindowState = FormWindowState.Maximized;
-            }
+                MainForm.WindowState = FormWindowState.Maximized;
 
             // Make sure the form is visible on the screen
             const int minHorizontal = 300;
             const int minVertical = 150;
-            var screenBounds = Screen.FromHandle(_mainForm.Handle).Bounds;
-            var newBounds = _mainForm.Bounds;
+            var screenBounds = Screen.FromHandle(MainForm.Handle).Bounds;
+            var newBounds = MainForm.Bounds;
 
             if (newBounds.Right < screenBounds.Left + minHorizontal)
                 newBounds.X = screenBounds.Left + minHorizontal - newBounds.Width;
@@ -130,15 +127,15 @@ namespace mRemoteNG.Config.Settings
             if (newBounds.Top > screenBounds.Bottom - minVertical)
                 newBounds.Y = screenBounds.Bottom - minVertical;
 
-            _mainForm.Location = newBounds.Location;
+            MainForm.Location = newBounds.Location;
         }
 
         private void SetAutoSave()
         {
             if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes > 0)
             {
-                _mainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
-                _mainForm.tmrAutoSave.Enabled = true;
+                MainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes*60000);
+                MainForm.tmrAutoSave.Enabled = true;
             }
         }
 
@@ -146,15 +143,15 @@ namespace mRemoteNG.Config.Settings
         {
             if (mRemoteNG.Settings.Default.MainFormKiosk)
             {
-                _mainForm.Fullscreen.Value = true;
-                _mainForm.mMenViewFullscreen.Checked = true;
+                MainForm.Fullscreen.Value = true;
+                MainForm.mMenViewFullscreen.Checked = true;
             }
         }
 
         private static void SetShowSystemTrayIcon()
         {
             if (mRemoteNG.Settings.Default.ShowSystemTrayIcon)
-                Runtime.NotificationAreaIcon = new Tools.Controls.NotificationAreaIcon();
+                Runtime.NotificationAreaIcon = new Controls.NotificationAreaIcon();
         }
 
         private static void SetPuttyPath()
@@ -170,6 +167,7 @@ namespace mRemoteNG.Config.Settings
             if (mRemoteNG.Settings.Default.DoUpgrade)
                 UpgradeSettingsVersion();
         }
+
         private static void UpgradeSettingsVersion()
         {
             try
@@ -187,67 +185,70 @@ namespace mRemoteNG.Config.Settings
             // needs to be cleared here because we know that we just updated.
             mRemoteNG.Settings.Default.UpdatePending = false;
         }
-		
-		public void SetToolbarsDefault()
-		{
-			ToolStripPanelFromString("top").Join(MainForm.tsQuickConnect, new Point(300, 0));
-			MainForm.tsQuickConnect.Visible = true;
-			ToolStripPanelFromString("bottom").Join(MainForm.tsExternalTools, new Point(3, 0));
-			MainForm.tsExternalTools.Visible = false;
-		}
-		
-		public void LoadToolbarsFromSettings()
-		{
-			if (mRemoteNG.Settings.Default.QuickyTBLocation.X > mRemoteNG.Settings.Default.ExtAppsTBLocation.X)
-			{
-				AddDynamicPanels();
-				AddStaticPanels();
-			}
-			else
-			{
-				AddStaticPanels();
-				AddDynamicPanels();
-			}
-		}
-		
-		private void AddStaticPanels()
-		{
-			ToolStripPanelFromString(Convert.ToString(mRemoteNG.Settings.Default.QuickyTBParentDock)).Join(MainForm.tsQuickConnect, mRemoteNG.Settings.Default.QuickyTBLocation);
-			MainForm.tsQuickConnect.Visible = Convert.ToBoolean(mRemoteNG.Settings.Default.QuickyTBVisible);
-		}
-		
-		private void AddDynamicPanels()
-		{
-			ToolStripPanelFromString(Convert.ToString(mRemoteNG.Settings.Default.ExtAppsTBParentDock)).Join(MainForm.tsExternalTools, mRemoteNG.Settings.Default.ExtAppsTBLocation);
-			MainForm.tsExternalTools.Visible = Convert.ToBoolean(mRemoteNG.Settings.Default.ExtAppsTBVisible);
-		}
-		
-		private ToolStripPanel ToolStripPanelFromString(string Panel)
-		{
-			switch (Panel.ToLower())
-			{
-				case "top":
-					return MainForm.tsContainer.TopToolStripPanel;
-				case "bottom":
-					return MainForm.tsContainer.BottomToolStripPanel;
-				case "left":
-					return MainForm.tsContainer.LeftToolStripPanel;
-				case "right":
-					return MainForm.tsContainer.RightToolStripPanel;
-				default:
-					return MainForm.tsContainer.TopToolStripPanel;
-			}
-		}
-		
-		public void LoadPanelsFromXml()
-		{
+
+        public void SetToolbarsDefault()
+        {
+            ToolStripPanelFromString("top").Join(MainForm.tsQuickConnect, new Point(300, 0));
+            MainForm.tsQuickConnect.Visible = true;
+            ToolStripPanelFromString("bottom").Join(MainForm.tsExternalTools, new Point(3, 0));
+            MainForm.tsExternalTools.Visible = false;
+        }
+
+        public void LoadToolbarsFromSettings()
+        {
+            if (mRemoteNG.Settings.Default.QuickyTBLocation.X > mRemoteNG.Settings.Default.ExtAppsTBLocation.X)
+            {
+                AddDynamicPanels();
+                AddStaticPanels();
+            }
+            else
+            {
+                AddStaticPanels();
+                AddDynamicPanels();
+            }
+        }
+
+        private void AddStaticPanels()
+        {
+            ToolStripPanelFromString(Convert.ToString(mRemoteNG.Settings.Default.QuickyTBParentDock))
+                .Join(MainForm.tsQuickConnect, mRemoteNG.Settings.Default.QuickyTBLocation);
+            MainForm.tsQuickConnect.Visible = Convert.ToBoolean(mRemoteNG.Settings.Default.QuickyTBVisible);
+        }
+
+        private void AddDynamicPanels()
+        {
+            ToolStripPanelFromString(Convert.ToString(mRemoteNG.Settings.Default.ExtAppsTBParentDock))
+                .Join(MainForm.tsExternalTools, mRemoteNG.Settings.Default.ExtAppsTBLocation);
+            MainForm.tsExternalTools.Visible = Convert.ToBoolean(mRemoteNG.Settings.Default.ExtAppsTBVisible);
+        }
+
+        private ToolStripPanel ToolStripPanelFromString(string Panel)
+        {
+            switch (Panel.ToLower())
+            {
+                case "top":
+                    return MainForm.tsContainer.TopToolStripPanel;
+                case "bottom":
+                    return MainForm.tsContainer.BottomToolStripPanel;
+                case "left":
+                    return MainForm.tsContainer.LeftToolStripPanel;
+                case "right":
+                    return MainForm.tsContainer.RightToolStripPanel;
+                default:
+                    return MainForm.tsContainer.TopToolStripPanel;
+            }
+        }
+
+        public void LoadPanelsFromXml()
+        {
             _layoutSettingsLoader.LoadPanelsFromXml();
-		}
-		
-		public void LoadExternalAppsFromXml()
-		{
+        }
+
+        public void LoadExternalAppsFromXml()
+        {
             _externalAppsLoader.LoadExternalAppsFromXML();
         }
+
         #endregion
-	}
+    }
 }

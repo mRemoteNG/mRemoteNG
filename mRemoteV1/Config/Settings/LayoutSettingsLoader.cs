@@ -1,9 +1,9 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.IO;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
-using System;
-using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
@@ -27,7 +27,7 @@ namespace mRemoteNG.Config.Settings
 
                 while (_mainForm.pnlDock.Contents.Count > 0)
                 {
-                    var dc = (DockContent)_mainForm.pnlDock.Contents[0];
+                    var dc = (DockContent) _mainForm.pnlDock.Contents[0];
                     dc.Close();
                 }
 
