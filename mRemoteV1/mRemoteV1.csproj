@@ -50,12 +50,12 @@
       <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Geckofx-Core, Version=45.0.20.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <HintPath>..\packages\Geckofx45.45.0.20\lib\net40\Geckofx-Core.dll</HintPath>
+    <Reference Include="Geckofx-Core, Version=45.0.22.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
+      <HintPath>..\packages\Geckofx45.45.0.22\lib\net40\Geckofx-Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Geckofx-Winforms, Version=45.0.20.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
-      <HintPath>..\packages\Geckofx45.45.0.20\lib\net40\Geckofx-Winforms.dll</HintPath>
+    <Reference Include="Geckofx-Winforms, Version=45.0.22.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
+      <HintPath>..\packages\Geckofx45.45.0.22\lib\net40\Geckofx-Winforms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />
@@ -1217,29 +1217,37 @@ set /p buildenv=&lt;buildenv.tmp
 echo Copy PUTTYNG to correct directory
 copy /Y "$(SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" .\
 
-REM Move Help files to correct directory
+echo Move Help files to correct directory
+IF EXIST Help (
+   del /s /q Help &gt;NUL
+   rmdir /s /q Help &gt;NUL
+)
 move /Y Resources\Help .\
-powershell -noprofile -command "sleep 2"
-rmdir /s /q Resources
 
-REM Set LargeAddressAware on binary
+powershell -noprofile -command "sleep 2"
+rmdir /s /q Resources &gt;NUL
+
+echo Set LargeAddressAware on binary
 editbin /largeaddressaware mRemoteNG.exe
 
-REM Sign binaries
+
 IF EXIST C:\mRemoteNG_code_signing_cert.pfx (
+    echo Signing binaries
     IF %25buildenv: Portable=%25==Release (
         powershell "&amp;""$(SolutionDir)Tools\signfiles.ps1""" '%25cd%25'
     )
 )
 
-REM Remove unnecessary files from Release versions
 IF %25buildenv: Portable=%25==Release (
+    echo Remove unnecessary files from Release versions
     rmdir /s /q app.publish
     del /q *.pdb *.publish *.xml *.backup *.log *vshost* *.tmp
 )
 
-REM Package ZIP if building Release Portable
-IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)Tools\build-relport.cmd")</PostBuildEvent>
+IF %25buildenv: =%25==ReleasePortable (
+  echo Package ZIP Release Portable
+  "$(SolutionDir)Tools\build-relport.cmd"
+)</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -1261,6 +1269,8 @@ IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)Tools\build-relport.cmd")<
     <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>1</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
     <DebugSymbols>false</DebugSymbols>
@@ -1296,11 +1306,11 @@ IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)Tools\build-relport.cmd")<
   <PropertyGroup>
     <PreBuildEvent>echo $(ConfigurationName) &gt; buildenv.tmp</PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Geckofx45.45.0.20\build\Geckofx45.targets" Condition="Exists('..\packages\Geckofx45.45.0.20\build\Geckofx45.targets')" />
+  <Import Project="..\packages\Geckofx45.45.0.22\build\Geckofx45.targets" Condition="Exists('..\packages\Geckofx45.45.0.22\build\Geckofx45.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Geckofx45.45.0.20\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.20\build\Geckofx45.targets'))" />
+    <Error Condition="!Exists('..\packages\Geckofx45.45.0.22\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.22\build\Geckofx45.targets'))" />
   </Target>
 </Project>
