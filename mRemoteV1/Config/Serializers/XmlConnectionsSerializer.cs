@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.Serializers
 {
     public class XmlConnectionsSerializer : ISerializer<string>
     {
-        private SecureString _password = GeneralAppInfo.EncryptionKey;
+        private SecureString _password = Runtime.EncryptionKey;
         private XmlTextWriter _xmlTextWriter;
         private ICryptographyProvider _cryptographyProvider;
 

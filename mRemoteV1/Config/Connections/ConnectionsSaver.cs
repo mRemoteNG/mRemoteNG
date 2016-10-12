@@ -43,7 +43,7 @@ namespace mRemoteNG.Config.Connections
 				
         #region Private Properties
 		private XmlTextWriter _xmlTextWriter;
-		private SecureString _password = GeneralAppInfo.EncryptionKey;
+		private SecureString _password = Runtime.EncryptionKey;
 						
 		private int _currentNodeIndex;
 		private string _parentConstantId = Convert.ToString(0);

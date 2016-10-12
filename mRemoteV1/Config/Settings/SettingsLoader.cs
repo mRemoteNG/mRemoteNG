@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Settings
         private static void SetConDefaultPassword()
         {
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            mRemoteNG.Settings.Default.ConDefaultPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, GeneralAppInfo.EncryptionKey);
+            mRemoteNG.Settings.Default.ConDefaultPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, Runtime.EncryptionKey);
         }
 
         private static void SetAlwaysShowPanelTabs()

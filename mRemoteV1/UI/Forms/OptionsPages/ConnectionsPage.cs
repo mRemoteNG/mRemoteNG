@@ -1,5 +1,5 @@
 using System;
-using mRemoteNG.App.Info;
+using mRemoteNG.App;
 using mRemoteNG.Config;
 using mRemoteNG.Security.SymmetricEncryption;
 
@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             txtCredentialsUsername.Text = Convert.ToString(Settings.Default.DefaultUsername);
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), GeneralAppInfo.EncryptionKey);
+            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
             txtCredentialsDomain.Text = Convert.ToString(Settings.Default.DefaultDomain);
 
             if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Never)
@@ -138,7 +138,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, GeneralAppInfo.EncryptionKey);
+            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
             Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
 
             if (radCloseWarnAll.Checked)
