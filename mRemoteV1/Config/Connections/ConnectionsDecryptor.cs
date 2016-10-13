@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using Org.BouncyCastle.Security;
 
@@ -47,7 +50,7 @@ namespace mRemoteNG.Config.Connections
 
             if (notDecr)
             {
-                if (Authenticate(xml, true))
+                if (Authenticate(xml))
                 {
                     decryptedContent = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
                     notDecr = false;
@@ -74,51 +77,32 @@ namespace mRemoteNG.Config.Connections
             catch (EncryptionException)
             {
             }
-            return connectionsFileIsNotEncrypted || Authenticate(protectedString, false, rootInfo);
+            return connectionsFileIsNotEncrypted || Authenticate(protectedString, rootInfo);
         }
 
-        private bool Authenticate(string value, bool compareToOriginalValue, RootNodeInfo rootInfo = null)
+        private bool Authenticate(string cipherText, RootNodeInfo rootInfo = null)
         {
-            var passwordName = "";
-            //passwordName = Path.GetFileName(ConnectionFileName);
-
-            var stillEncrypted = true;
-            if (compareToOriginalValue)
+            var authenticator = new PasswordAuthenticator(_cryptographyProvider, cipherText)
             {
-                while (stillEncrypted)
-                {
-                    Runtime.EncryptionKey = Tools.MiscTools.PasswordDialog(passwordName, false);
-                    if (Runtime.EncryptionKey.Length == 0)
-                        return false;
+                AuthenticationRequestor = PromptForPassword
+            };
 
-                    try
-                    {
-                        stillEncrypted = _cryptographyProvider.Decrypt(value, Runtime.EncryptionKey) == value;
-                    }
-                    catch(EncryptionException) { }
-                }
-            }
-            else
+            var authenticated = authenticator.Authenticate(Runtime.EncryptionKey);
+
+            if (authenticated && rootInfo != null)
             {
-                while (stillEncrypted)
-                {
-                    Runtime.EncryptionKey = Tools.MiscTools.PasswordDialog(passwordName, false);
-                    if (Runtime.EncryptionKey.Length == 0)
-                        return false;
-
-                    try
-                    {
-                        stillEncrypted = _cryptographyProvider.Decrypt(value, Runtime.EncryptionKey) != "ThisIsProtected";
-                    }
-                    catch (EncryptionException) { }
-                }
-
-                if (rootInfo == null) return true;
                 rootInfo.Password = true;
                 rootInfo.PasswordString = Runtime.EncryptionKey.ConvertToUnsecureString();
             }
 
-            return true;
+            return authenticated;
+        }
+
+        private SecureString PromptForPassword()
+        {
+            var password = MiscTools.PasswordDialog("", false);
+            Runtime.EncryptionKey = password;
+            return password;
         }
     }
 }
