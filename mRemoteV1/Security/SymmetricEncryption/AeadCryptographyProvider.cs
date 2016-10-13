@@ -182,21 +182,15 @@ namespace mRemoteNG.Security.SymmetricEncryption
             if (encryptedMessage == null || encryptedMessage.Length == 0)
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
-            var generator = new Pkcs5S2ParametersGenerator();
-
             //Grab Salt from Payload
             var salt = new byte[SaltBitSize / 8];
             Array.Copy(encryptedMessage, nonSecretPayloadLength, salt, 0, salt.Length);
 
-            generator.Init(
-                PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()),
-                salt,
-                Iterations);
-
             //Generate Key
-            var key = (KeyParameter)generator.GenerateDerivedMacParameters(KeyBitSize);
+            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, Iterations);
+            var key = keyDerivationFunction.DeriveKey(password, salt);
 
-            return SimpleDecrypt(encryptedMessage, key.GetKey(), salt.Length + nonSecretPayloadLength);
+            return SimpleDecrypt(encryptedMessage, key, salt.Length + nonSecretPayloadLength);
         }
 
         private byte[] SimpleDecrypt(byte[] encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)
