@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace mRemoteNG.Security
+namespace mRemoteNG.Security.Authentication
 {
     public interface IAuthenticator
     {
