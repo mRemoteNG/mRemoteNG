@@ -1,8 +1,8 @@
 ﻿using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
-using mRemoteNGTests.Properties;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 
 namespace mRemoteNGTests.Security
@@ -12,7 +12,7 @@ namespace mRemoteNGTests.Security
         private ICryptographyProvider _rijndaelCryptographyProvider;
         private SecureString _encryptionKey;
         private string _plainText;
-        private string _importedCipherText = Resources.legacyrijndael_ciphertext;
+        private const string CipherText = "RmV7zw/a7ZRRzZdcTkrLDgBfyEmeh8OFMgg2OKFJnwg=";
 
 
         [SetUp]
@@ -61,8 +61,15 @@ namespace mRemoteNGTests.Security
         [Test]
         public void DecryptingFromPreviousApplicationExecutionWorks()
         {
-            var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt(_importedCipherText, _encryptionKey);
+            var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt(CipherText, _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(_plainText));
+        }
+
+        [Test]
+        public void DecryptionFailureThrowsException()
+        {
+            ActualValueDelegate<string> decryptMethod = () => _rijndaelCryptographyProvider.Decrypt(CipherText, "wrongKey".ConvertToSecureString());
+            Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
     }
 }

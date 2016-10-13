@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
@@ -14,10 +16,12 @@ namespace mRemoteNGTests.Config.Serializers
         private XmlConnectionsDeserializer _xmlConnectionsDeserializer;
         private ConnectionTreeModel _connectionTreeModel;
 
-        [SetUp]
-        public void Setup()
+        public void Setup(string confCons, string password)
         {
-            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(Resources.TestConfCons);
+            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(confCons)
+            {
+                AuthenticationRequestor = password.ConvertToSecureString
+            };
             _connectionTreeModel = _xmlConnectionsDeserializer.Deserialize();
         }
 
@@ -28,56 +32,63 @@ namespace mRemoteNGTests.Config.Serializers
             _connectionTreeModel = null;
         }
 
-        [Test]
-        public void DeserializingCreatesRootNode()
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void DeserializingCreatesRootNode(Datagram testData)
         {
+            Setup(testData.ConfCons, testData.Password);
             Assert.That(_connectionTreeModel.RootNodes, Is.Not.Empty);
         }
 
-        [Test]
-        public void RootNodeHasThreeChildren()
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void RootNodeHasThreeChildren(Datagram testData)
         {
+            Setup(testData.ConfCons, testData.Password);
             var connectionRoot = _connectionTreeModel.RootNodes[0];
             Assert.That(connectionRoot.Children.Count, Is.EqualTo(3));
         }
 
-        [Test]
-        public void RootContainsFolder1()
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void RootContainsFolder1(Datagram testData)
         {
+            Setup(testData.ConfCons, testData.Password);
             var connectionRoot = _connectionTreeModel.RootNodes[0];
             Assert.That(ContainsNodeNamed("Folder1", connectionRoot.Children), Is.True);
         }
 
-        [Test]
-        public void Folder1ContainsThreeConnections()
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void Folder1ContainsThreeConnections(Datagram testData)
         {
+            Setup(testData.ConfCons, testData.Password);
             var connectionRoot = _connectionTreeModel.RootNodes[0];
             var folder1 = GetFolderNamed("Folder1", connectionRoot.Children);
             var folder1ConnectionCount = folder1?.Children.Count(node => !(node is ContainerInfo));
             Assert.That(folder1ConnectionCount, Is.EqualTo(3));
         }
 
-        [Test]
-        public void Folder2ContainsThreeNodes()
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void Folder2ContainsThreeNodes(Datagram testData)
         {
+            Setup(testData.ConfCons, testData.Password);
             var connectionRoot = _connectionTreeModel.RootNodes[0];
             var folder2 = GetFolderNamed("Folder2", connectionRoot.Children);
             var folder1Count = folder2?.Children.Count();
             Assert.That(folder1Count, Is.EqualTo(3));
         }
 
-        [Test]
-        public void Folder21HasTwoNodes()
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void Folder21HasTwoNodes(Datagram testData)
         {
+            Setup(testData.ConfCons, testData.Password);
             var connectionRoot = _connectionTreeModel.RootNodes[0];
             var folder2 = GetFolderNamed("Folder2", connectionRoot.Children);
             var folder21 = GetFolderNamed("Folder2.1", folder2.Children);
             Assert.That(folder21.Children.Count, Is.EqualTo(2));
         }
 
-        [Test]
-        public void Folder211HasOneConnection()
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void Folder211HasOneConnection(Datagram testData)
         {
+            Setup(testData.ConfCons, testData.Password);
             var connectionRoot = _connectionTreeModel.RootNodes[0];
             var folder2 = GetFolderNamed("Folder2", connectionRoot.Children);
             var folder21 = GetFolderNamed("Folder2.1", folder2.Children);
@@ -95,6 +106,41 @@ namespace mRemoteNGTests.Config.Serializers
         {
             var folder = list.First(node => (node is ContainerInfo && node.Name == name)) as ContainerInfo;
             return folder;
+        }
+    }
+
+    public class XmlConnectionsDeserializerFixtureData
+    {
+        public static IEnumerable FixtureParams
+        {
+            get
+            {
+                yield return new TestCaseData(new Datagram("confCons v2.5", Resources.confCons_v2_5, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.6", Resources.confCons_v2_6, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.6 fullencryption", Resources.confCons_v2_6_fullencryption, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.6 custompassword", Resources.confCons_v2_6_passwordis_Password, "Password"));
+                yield return new TestCaseData(new Datagram("confCons v2.6 custompassword,fullencryption", Resources.confCons_v2_6_passwordis_Password_fullencryption, "Password"));
+            }
+        }
+    }
+
+    public class Datagram
+    {
+        private readonly string _testName;
+
+        public string ConfCons { get; set; }
+        public string Password { get; set; }
+
+        public Datagram(string testName, string confCons, string password)
+        {
+            _testName = testName;
+            ConfCons = confCons;
+            Password = password;
+        }
+
+        public override string ToString()
+        {
+            return _testName;
         }
     }
 }

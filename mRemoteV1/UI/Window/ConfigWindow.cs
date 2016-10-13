@@ -779,6 +779,10 @@ namespace mRemoteNG.UI.Window
                         else
                             rootInfo.PasswordString = password.ConvertToUnsecureString();
                     }
+                    else
+                    {
+                        Runtime.EncryptionKey = Runtime.DefaultEncryptionKey;
+                    }
                     break;
                 case "Name":
                     break;

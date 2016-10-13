@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Security;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
@@ -13,7 +14,6 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
@@ -31,6 +31,7 @@ namespace mRemoteNG.Config.Serializers
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.6;
 
+        public Func<SecureString> AuthenticationRequestor { get; set; }
 
         public XmlConnectionsDeserializer(string xml)
         {
@@ -40,7 +41,7 @@ namespace mRemoteNG.Config.Serializers
 
         private void LoadXmlConnectionData(string connections)
         {
-            _decryptor = new ConnectionsDecryptor();
+            CreateDecryptor();
             connections = _decryptor.LegacyFullFileDecrypt(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
@@ -99,7 +100,7 @@ namespace mRemoteNG.Config.Serializers
                 if (_confVersion > 1.3)
                 {
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
-                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, rootInfo))
+                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, Runtime.EncryptionKey, rootInfo))
                     {
                         mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
                         mRemoteNG.Settings.Default.CustomConsPath = "";
@@ -147,21 +148,21 @@ namespace mRemoteNG.Config.Serializers
             return rootInfo;
         }
 
-        private void CreateDecryptor(XmlElement connectionsRootElement)
+        private void CreateDecryptor(XmlElement connectionsRootElement = null)
         {
             if (_confVersion >= 2.6)
             {
                 BlockCipherEngines engine;
-                Enum.TryParse(connectionsRootElement.Attributes["EncryptionEngine"].Value, out engine);
+                Enum.TryParse(connectionsRootElement?.Attributes["EncryptionEngine"].Value, out engine);
 
                 BlockCipherModes mode;
-                Enum.TryParse(connectionsRootElement.Attributes["BlockCipherMode"].Value, out mode);
+                Enum.TryParse(connectionsRootElement?.Attributes["BlockCipherMode"].Value, out mode);
 
-                _decryptor = new ConnectionsDecryptor(engine, mode);
+                _decryptor = new ConnectionsDecryptor(engine, mode) {AuthenticationRequestor = AuthenticationRequestor};
             }
             else
             {
-                _decryptor = new ConnectionsDecryptor();
+                _decryptor = new ConnectionsDecryptor { AuthenticationRequestor = AuthenticationRequestor };
             }
         }
 
@@ -205,7 +206,7 @@ namespace mRemoteNG.Config.Serializers
         {
             if (xmlnode.Attributes == null) return null;
             var connectionInfo = new ConnectionInfo();
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+
             try
             {
                 if (_confVersion >= 0.2)
@@ -214,7 +215,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Description = xmlnode.Attributes["Descr"].Value;
                     connectionInfo.Hostname = xmlnode.Attributes["Hostname"].Value;
                     connectionInfo.Username = xmlnode.Attributes["Username"].Value;
-                    connectionInfo.Password = cryptographyProvider.Decrypt(xmlnode.Attributes["Password"].Value, Runtime.EncryptionKey);
+                    connectionInfo.Password = _decryptor.Decrypt(xmlnode.Attributes["Password"].Value);
                     connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
                     connectionInfo.DisplayWallpaper = bool.Parse(xmlnode.Attributes["DisplayWallpaper"].Value);
                     connectionInfo.DisplayThemes = bool.Parse(xmlnode.Attributes["DisplayThemes"].Value);
@@ -394,7 +395,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.VNCProxyIP = xmlnode.Attributes["VNCProxyIP"].Value;
                     connectionInfo.VNCProxyPort = Convert.ToInt32(xmlnode.Attributes["VNCProxyPort"].Value);
                     connectionInfo.VNCProxyUsername = xmlnode.Attributes["VNCProxyUsername"].Value;
-                    connectionInfo.VNCProxyPassword = cryptographyProvider.Decrypt(xmlnode.Attributes["VNCProxyPassword"].Value, Runtime.EncryptionKey);
+                    connectionInfo.VNCProxyPassword = _decryptor.Decrypt(xmlnode.Attributes["VNCProxyPassword"].Value);
                     connectionInfo.VNCColors = (ProtocolVNC.Colors)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Colors), xmlnode.Attributes["VNCColors"].Value);
                     connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.SmartSizeMode), xmlnode.Attributes["VNCSmartSizeMode"].Value);
                     connectionInfo.VNCViewOnly = bool.Parse(xmlnode.Attributes["VNCViewOnly"].Value);
@@ -444,7 +445,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.RDGatewayHostname = xmlnode.Attributes["RDGatewayHostname"].Value;
                     connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Convert.ToString(xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value));
                     connectionInfo.RDGatewayUsername = xmlnode.Attributes["RDGatewayUsername"].Value;
-                    connectionInfo.RDGatewayPassword = cryptographyProvider.Decrypt(Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value), Runtime.EncryptionKey);
+                    connectionInfo.RDGatewayPassword = _decryptor.Decrypt(Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value));
                     connectionInfo.RDGatewayDomain = xmlnode.Attributes["RDGatewayDomain"].Value;
 
                     // Get inheritance settings
@@ -491,7 +492,7 @@ namespace mRemoteNG.Config.Serializers
         private bool IsExportFile(XmlElement rootConnectionsNode)
         {
             var isExportFile = false;
-            if (_confVersion < 1.0) return isExportFile;
+            if (_confVersion < 1.0) return false;
             if (Convert.ToBoolean(rootConnectionsNode.Attributes["Export"].Value))
                 isExportFile = true;
             return isExportFile;

@@ -4,6 +4,7 @@ using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 
 namespace mRemoteNGTests.Security
@@ -71,6 +72,14 @@ namespace mRemoteNGTests.Security
                 }
             }
             return combinationList;
+        }
+
+        [Test]
+        public void DecryptionFailureThrowsException()
+        {
+            var cipherText = _cryptographyProvider.Encrypt(_plainText, _encryptionKey);
+            ActualValueDelegate<string> decryptMethod = () => _cryptographyProvider.Decrypt(cipherText, "wrongKey".ConvertToSecureString());
+            Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
     }
 }

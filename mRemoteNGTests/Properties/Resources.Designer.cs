@@ -61,11 +61,56 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RmV7zw/a7ZRRzZdcTkrLDgBfyEmeh8OFMgg2OKFJnwg=.
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; Protected=&quot;95syzRuZ4mRxpNkZQzoyX8SDpQXLyMq3GncO8o4SyTBoYvn3TAWgn05ZEU2DrjkM&quot; ConfVersion=&quot;2.5&quot;&gt;
+        ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; ConnectToConsole=&quot;False&quot; UseCredSsp=&quot;True&quot; RenderingEngine=&quot;IE&quot; ICAEncryptionStrength=&quot;Encr128Bit&quot; RDPAuthenticationLevel=&quot; [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string legacyrijndael_ciphertext {
+        internal static string confCons_v2_5 {
             get {
-                return ResourceManager.GetString("legacyrijndael_ciphertext", resourceCulture);
+                return ResourceManager.GetString("confCons_v2_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;NLfUEqIBqqVWudrTlcyeGJbqCApJ9M2w/+AfkKrY1AMBVJlERgdkuvsb1aiTvqJEddVLs30JTOwOmFEJHRKSJ30O&quot; ConfVersion=&quot;2.6&quot;&gt;
+        ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; ConnectToConsole=&quot;False&quot; Us [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string confCons_v2_6 {
+            get {
+                return ResourceManager.GetString("confCons_v2_6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;4S6n3BwoY5Z41KAwolCQr68OQYwsz5Jn71oaiU7TwyVPhfLYei/ivTAhHOIW4fzXnRwVa4YbZN7EzH1Z9yyNofEX&quot; ConfVersion=&quot;2.6&quot;&gt;
+        ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; ConnectToConsole=&quot;False&quot; Us [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string confCons_v2_6_fullencryption {
+            get {
+                return ResourceManager.GetString("confCons_v2_6_fullencryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;j+pOPbBSME6XB86/zXxI+KOvP4xunGCiSmRCJM3h4L8iY4H6Su/v6Y5GAPG1ZRzoPuZae435aQ8/atLrCDS0&quot; ConfVersion=&quot;2.6&quot;&gt;
+        ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; ConnectToConsole=&quot;False&quot; UseCre [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string confCons_v2_6_passwordis_Password {
+            get {
+                return ResourceManager.GetString("confCons_v2_6_passwordis_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; FullFileEncryption=&quot;True&quot; Protected=&quot;BwdQyDnLr2ofyIkwfAJETiMme2RsUhJEnznQ0sKQ4Lq9CpuaP4YFHxWU/NGjnslOyefgaQeS8KTqafNVHsMe&quot; ConfVersion=&quot;2.6&quot;&gt;A0KwHg+PNf1NITqaOI+IGFJaPojixS5ZwxWy2Zohb428o53ba1NljnwhOWIheI2zomBuHiIzy5oS+g21MyW9IAnF7r3NnhekViSbol3a51TEJO/FW9XSKUZToAjlNZqS5t0xNEaRwSLfhkb83aHTvrap33Smp/Jm9RW09sBJYwA+itE5JXqyHLsCsvMMB9DijomEH9za+x48Xgb68fx/5IaEXbduoVAXbKWNTUJ0wtIIFTj [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string confCons_v2_6_passwordis_Password_fullencryption {
+            get {
+                return ResourceManager.GetString("confCons_v2_6_passwordis_Password_fullencryption", resourceCulture);
             }
         }
         
@@ -201,17 +246,6 @@ namespace mRemoteNGTests.Properties {
         internal static string test_remotedesktopconnection_rdp {
             get {
                 return ResourceManager.GetString("test_remotedesktopconnection_rdp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; Protected=&quot;95syzRuZ4mRxpNkZQzoyX8SDpQXLyMq3GncO8o4SyTBoYvn3TAWgn05ZEU2DrjkM&quot; ConfVersion=&quot;2.5&quot;&gt;
-        ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; ConnectToConsole=&quot;False&quot; UseCredSsp=&quot;True&quot; RenderingEngine=&quot;IE&quot; ICAEncryptionStrength=&quot;Encr128Bit&quot; RDPAuthenticationLevel=&quot; [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string TestConfCons {
-            get {
-                return ResourceManager.GetString("TestConfCons", resourceCulture);
             }
         }
     }

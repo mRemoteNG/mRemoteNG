@@ -237,7 +237,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 }
                 catch (InvalidCipherTextException e)
                 {
-                    throw new Exception("Unable to decrypt text", e);
+                    throw new EncryptionException(Language.strErrorDecryptionFailed, e);
                 }
 
                 return plainText;

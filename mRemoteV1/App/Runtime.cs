@@ -36,7 +36,8 @@ namespace mRemoteNG.App
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public static DateTime LastSqlUpdate { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
-        public static SecureString EncryptionKey { get; set; } = "mR3m".ConvertToSecureString();
+        public static SecureString DefaultEncryptionKey { get; } = "mR3m".ConvertToSecureString();
+        public static SecureString EncryptionKey { get; set; } = DefaultEncryptionKey;
         public static ConnectionTreeModel ConnectionTreeModel
         {
             get { return Windows.TreeForm.ConnectionTreeModel; }
