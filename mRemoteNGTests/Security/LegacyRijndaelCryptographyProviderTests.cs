@@ -60,7 +60,7 @@ namespace mRemoteNGTests.Security
         [Test]
         public void DecryptingFromPreviousApplicationExecutionWorks()
         {
-            var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt(_importedCipherText, _encryptionKey);
+            var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt(CipherText, _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(_plainText));
         }
     }
