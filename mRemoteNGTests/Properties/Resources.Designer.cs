@@ -61,15 +61,6 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RmV7zw/a7ZRRzZdcTkrLDgBfyEmeh8OFMgg2OKFJnwg=.
-        /// </summary>
-        internal static string legacyrijndael_ciphertext {
-            get {
-                return ResourceManager.GetString("legacyrijndael_ciphertext", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
         ///&lt;!-- ****************************************************************--&gt;
         ///&lt;!-- *                                                              *--&gt;

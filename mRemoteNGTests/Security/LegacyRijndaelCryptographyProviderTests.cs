@@ -1,7 +1,6 @@
 ﻿using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
-using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
 
@@ -12,7 +11,7 @@ namespace mRemoteNGTests.Security
         private ICryptographyProvider _rijndaelCryptographyProvider;
         private SecureString _encryptionKey;
         private string _plainText;
-        private string _importedCipherText = Resources.legacyrijndael_ciphertext;
+        private const string CipherText = "RmV7zw/a7ZRRzZdcTkrLDgBfyEmeh8OFMgg2OKFJnwg=";
 
 
         [SetUp]
