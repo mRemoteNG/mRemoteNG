@@ -4,7 +4,6 @@ using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.SymmetricEncryption;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 
 
@@ -13,6 +12,8 @@ namespace mRemoteNG.Config.Connections
     public class ConnectionsDecryptor
     {
         private readonly ICryptographyProvider _cryptographyProvider;
+
+        public Func<SecureString> AuthenticationRequestor { get; set; }
 
         public ConnectionsDecryptor()
         {
@@ -49,7 +50,7 @@ namespace mRemoteNG.Config.Connections
 
             if (notDecr)
             {
-                if (Authenticate(xml))
+                if (Authenticate(xml, Runtime.EncryptionKey))
                 {
                     decryptedContent = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
                     notDecr = false;
@@ -66,42 +67,34 @@ namespace mRemoteNG.Config.Connections
             return "";
         }
 
-        public bool ConnectionsFileIsAuthentic(string protectedString, RootNodeInfo rootInfo)
+        public bool ConnectionsFileIsAuthentic(string protectedString, SecureString password, RootNodeInfo rootInfo)
         {
             var connectionsFileIsNotEncrypted = false;
             try
             {
-                connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, Runtime.EncryptionKey) == "ThisIsNotProtected";
+                connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, password) == "ThisIsNotProtected";
             }
             catch (EncryptionException)
             {
             }
-            return connectionsFileIsNotEncrypted || Authenticate(protectedString, rootInfo);
+            return connectionsFileIsNotEncrypted || Authenticate(protectedString, password, rootInfo);
         }
 
-        private bool Authenticate(string cipherText, RootNodeInfo rootInfo = null)
+        private bool Authenticate(string cipherText, SecureString password, RootNodeInfo rootInfo = null)
         {
             var authenticator = new PasswordAuthenticator(_cryptographyProvider, cipherText)
             {
-                AuthenticationRequestor = PromptForPassword
+                AuthenticationRequestor = AuthenticationRequestor
             };
 
-            var authenticated = authenticator.Authenticate(Runtime.EncryptionKey);
+            var authenticated = authenticator.Authenticate(password);
 
-            if (authenticated && rootInfo != null)
-            {
-                rootInfo.Password = true;
-                rootInfo.PasswordString = Runtime.EncryptionKey.ConvertToUnsecureString();
-            }
-
+            if (!authenticated) return authenticated;
+            Runtime.EncryptionKey = authenticator.LastAuthenticatedPassword;
+            if (rootInfo == null) return authenticated;
+            rootInfo.Password = true;
+            rootInfo.PasswordString = Runtime.EncryptionKey.ConvertToUnsecureString();
             return authenticated;
-        }
-
-        private SecureString PromptForPassword()
-        {
-            var password = MiscTools.PasswordDialog("", false);
-            Runtime.EncryptionKey = password;
-            return password;
         }
     }
 }

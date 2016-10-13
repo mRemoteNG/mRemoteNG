@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Security;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
@@ -13,7 +14,6 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
@@ -31,6 +31,7 @@ namespace mRemoteNG.Config.Serializers
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.6;
 
+        public Func<SecureString> AuthenticationRequestor { get; set; }
 
         public XmlConnectionsDeserializer(string xml)
         {
@@ -40,7 +41,7 @@ namespace mRemoteNG.Config.Serializers
 
         private void LoadXmlConnectionData(string connections)
         {
-            _decryptor = new ConnectionsDecryptor();
+            CreateDecryptor();
             connections = _decryptor.LegacyFullFileDecrypt(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
@@ -99,7 +100,7 @@ namespace mRemoteNG.Config.Serializers
                 if (_confVersion > 1.3)
                 {
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
-                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, rootInfo))
+                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, Runtime.EncryptionKey, rootInfo))
                     {
                         mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
                         mRemoteNG.Settings.Default.CustomConsPath = "";
@@ -147,21 +148,21 @@ namespace mRemoteNG.Config.Serializers
             return rootInfo;
         }
 
-        private void CreateDecryptor(XmlElement connectionsRootElement)
+        private void CreateDecryptor(XmlElement connectionsRootElement = null)
         {
             if (_confVersion >= 2.6)
             {
                 BlockCipherEngines engine;
-                Enum.TryParse(connectionsRootElement.Attributes["EncryptionEngine"].Value, out engine);
+                Enum.TryParse(connectionsRootElement?.Attributes["EncryptionEngine"].Value, out engine);
 
                 BlockCipherModes mode;
-                Enum.TryParse(connectionsRootElement.Attributes["BlockCipherMode"].Value, out mode);
+                Enum.TryParse(connectionsRootElement?.Attributes["BlockCipherMode"].Value, out mode);
 
-                _decryptor = new ConnectionsDecryptor(engine, mode);
+                _decryptor = new ConnectionsDecryptor(engine, mode) {AuthenticationRequestor = AuthenticationRequestor};
             }
             else
             {
-                _decryptor = new ConnectionsDecryptor();
+                _decryptor = new ConnectionsDecryptor { AuthenticationRequestor = AuthenticationRequestor };
             }
         }
 
@@ -491,7 +492,7 @@ namespace mRemoteNG.Config.Serializers
         private bool IsExportFile(XmlElement rootConnectionsNode)
         {
             var isExportFile = false;
-            if (_confVersion < 1.0) return isExportFile;
+            if (_confVersion < 1.0) return false;
             if (Convert.ToBoolean(rootConnectionsNode.Attributes["Export"].Value))
                 isExportFile = true;
             return isExportFile;

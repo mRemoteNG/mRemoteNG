@@ -1,7 +1,10 @@
+using System.Security;
+using mRemoteNG.App;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 
@@ -28,7 +31,10 @@ namespace mRemoteNG.Config.Connections
 			{
 			    var dataProvider = new FileDataProvider(ConnectionFileName);
 			    var xmlString = dataProvider.Load();
-			    deserializer = new XmlConnectionsDeserializer(xmlString);
+			    deserializer = new XmlConnectionsDeserializer(xmlString)
+			    {
+			        AuthenticationRequestor = PromptForPassword
+			    };
 			}
 
             var connectionTreeModel = deserializer.Deserialize();
@@ -44,5 +50,11 @@ namespace mRemoteNG.Config.Connections
 
 		    return connectionTreeModel;
 		}
+
+        private SecureString PromptForPassword()
+        {
+            var password = MiscTools.PasswordDialog("", false);
+            return password;
+        }
     }
 }

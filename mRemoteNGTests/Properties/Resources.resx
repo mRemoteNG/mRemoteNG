@@ -118,8 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TestConfCons" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TestConfCons.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="confCons_v2_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confCons_v2_5.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="confCons_v2_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confCons_v2_6.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="confCons_v2_6_fullencryption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confCons_v2_6_fullencryption.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="confCons_v2_6_passwordis_Password" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confCons_v2_6_passwordis_Password.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="confCons_v2_6_passwordis_Password_fullencryption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confCons_v2_6_passwordis_Password_fullencryption.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="test_puttyConnectionManager_database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test_puttyConnectionManager_database.dat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
