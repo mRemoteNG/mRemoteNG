@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Security;
 using System.Text;
+using mRemoteNG.Security.KeyDerivation;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Generators;
@@ -100,26 +101,19 @@ namespace mRemoteNG.Security.SymmetricEncryption
             if (secretMessage == null || secretMessage.Length == 0)
                 throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
-            var generator = new Pkcs5S2ParametersGenerator();
-
             //Use Random Salt to minimize pre-generated weak password attacks.
-            var salt = new byte[SaltBitSize / 8];
-            _random.NextBytes(salt);
-
-            generator.Init(
-                PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()),
-                salt,
-                Iterations);
+            var salt = GenerateSalt();
 
             //Generate Key
-            var key = (KeyParameter)generator.GenerateDerivedMacParameters(KeyBitSize);
+            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, Iterations);
+            var key = keyDerivationFunction.DeriveKey(password, salt);
 
             //Create Full Non Secret Payload
             var payload = new byte[salt.Length + nonSecretPayload.Length];
             Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
             Array.Copy(salt, 0, payload, nonSecretPayload.Length, salt.Length);
 
-            return SimpleEncrypt(secretMessage, key.GetKey(), payload);
+            return SimpleEncrypt(secretMessage, key, payload);
         }
 
         private byte[] SimpleEncrypt(byte[] secretMessage, byte[] key, byte[] nonSecretPayload = null)
@@ -242,6 +236,13 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
                 return plainText;
             }
+        }
+
+        private byte[] GenerateSalt()
+        {
+            var salt = new byte[SaltBitSize / 8];
+            _random.NextBytes(salt);
+            return salt;
         }
     }
 }
