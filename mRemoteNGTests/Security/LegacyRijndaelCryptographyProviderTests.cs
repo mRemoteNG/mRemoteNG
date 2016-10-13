@@ -2,6 +2,8 @@
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
+using Org.BouncyCastle.Security;
 
 
 namespace mRemoteNGTests.Security
@@ -62,6 +64,13 @@ namespace mRemoteNGTests.Security
         {
             var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt(CipherText, _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(_plainText));
+        }
+
+        [Test]
+        public void DecryptionFailureThrowsException()
+        {
+            ActualValueDelegate<string> decryptMethod = () => _rijndaelCryptographyProvider.Decrypt(CipherText, "wrongKey".ConvertToSecureString());
+            Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
     }
 }

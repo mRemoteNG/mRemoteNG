@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using Org.BouncyCastle.Security;
 
 namespace mRemoteNG.Security.SymmetricEncryption
 {
@@ -100,14 +101,9 @@ namespace mRemoteNG.Security.SymmetricEncryption
             }
 			catch (Exception ex)
 			{
-				// Ignore CryptographicException "Padding is invalid and cannot be removed." when password is incorrect.
-				if (!(ex is CryptographicException))
-				{
-					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorDecryptionFailed, ex.Message));
-				}
+				//Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorDecryptionFailed, ex.Message));
+                throw new EncryptionException(Language.strErrorDecryptionFailed, ex);
 			}
-				
-			return ciphertextBase64;
 		}
 	}
 }
