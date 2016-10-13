@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Security;
-using Org.BouncyCastle.Security;
 
 namespace mRemoteNG.Security.Authentication
 {
@@ -10,6 +9,8 @@ namespace mRemoteNG.Security.Authentication
         private readonly string _cipherText;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
+        public int MaxAttempts { get; set; } = 3;
+        public SecureString LastAuthenticatedPassword { get; private set; }
 
         public PasswordAuthenticator(ICryptographyProvider cryptographyProvider, string cipherText)
         {
@@ -20,18 +21,21 @@ namespace mRemoteNG.Security.Authentication
         public bool Authenticate(SecureString password)
         {
             var authenticated = false;
-            while (!authenticated)
+            var attempts = 0;
+            while (!authenticated && attempts < MaxAttempts)
             {
                 try
                 {
                     _cryptographyProvider.Decrypt(_cipherText, password);
                     authenticated = true;
+                    LastAuthenticatedPassword = password;
                 }
                 catch (EncryptionException)
                 {
                     password = AuthenticationRequestor?.Invoke();
                     if (password == null || password.Length == 0) break;
                 }
+                attempts++;
             }
             return authenticated;
         }
