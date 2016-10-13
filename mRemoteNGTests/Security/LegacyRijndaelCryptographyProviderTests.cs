@@ -3,7 +3,6 @@ using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using Org.BouncyCastle.Security;
 
 
 namespace mRemoteNGTests.Security

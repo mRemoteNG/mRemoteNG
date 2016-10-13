@@ -6,7 +6,6 @@ using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
-using Org.BouncyCastle.Security;
 
 
 namespace mRemoteNG.Config.Connections
