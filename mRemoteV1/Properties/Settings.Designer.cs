@@ -2310,5 +2310,17 @@ namespace mRemoteNG {
                 this["EncryptionBlockCipherMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int EncryptionKeyDerivationIterations {
+            get {
+                return ((int)(this["EncryptionKeyDerivationIterations"]));
+            }
+            set {
+                this["EncryptionKeyDerivationIterations"] = value;
+            }
+        }
     }
 }

@@ -13,7 +13,6 @@ using System.Text;
 using mRemoteNG.Security.KeyDerivation;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
@@ -33,7 +32,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         //Preconfigured Password Key Derivation Parameters
         protected virtual int SaltBitSize { get; set; } = 128;
-        protected virtual int Iterations { get; set; } = 10000;
+        public virtual int KeyDerivationIterations { get; set; } = 1000;
         protected virtual int MinPasswordLength { get; set; } = 1;
 
 
@@ -105,7 +104,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             var salt = GenerateSalt();
 
             //Generate Key
-            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, Iterations);
+            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, KeyDerivationIterations);
             var key = keyDerivationFunction.DeriveKey(password, salt);
 
             //Create Full Non Secret Payload
@@ -187,7 +186,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             Array.Copy(encryptedMessage, nonSecretPayloadLength, salt, 0, salt.Length);
 
             //Generate Key
-            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, Iterations);
+            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, KeyDerivationIterations);
             var key = keyDerivationFunction.DeriveKey(password, salt);
 
             return SimpleDecrypt(encryptedMessage, key, salt.Length + nonSecretPayloadLength);

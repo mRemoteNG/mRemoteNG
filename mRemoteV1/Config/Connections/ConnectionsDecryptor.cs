@@ -14,6 +14,7 @@ namespace mRemoteNG.Config.Connections
         private readonly ICryptographyProvider _cryptographyProvider;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
+        public int KeyDerivationIterations { get; set; } = 1000;
 
         public ConnectionsDecryptor()
         {
@@ -23,6 +24,7 @@ namespace mRemoteNG.Config.Connections
         public ConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode)
         {
             _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
+            ((AeadCryptographyProvider) _cryptographyProvider).KeyDerivationIterations = KeyDerivationIterations;
         }
 
         public string Decrypt(string plainText)

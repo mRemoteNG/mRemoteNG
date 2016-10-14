@@ -124,6 +124,9 @@
   <data name="confCons_v2_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\confCons_v2_6.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="confCons_v2_6_5k_iterations" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confCons_v2_6_5k-iterations.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="confCons_v2_6_fullencryption" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\confCons_v2_6_fullencryption.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
