@@ -117,6 +117,7 @@
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />
+    <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
