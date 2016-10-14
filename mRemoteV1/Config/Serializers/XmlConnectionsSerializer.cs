@@ -210,7 +210,7 @@ namespace mRemoteNG.Config.Serializers
                 else
                     _xmlTextWriter.WriteAttributeString("Domain", "", "");
 
-                if (SaveFilter.SavePassword)
+                if (SaveFilter.SavePassword && !connectionInfo.Inheritance.Password)
                     _xmlTextWriter.WriteAttributeString("Password", "", _cryptographyProvider.Encrypt(connectionInfo.Password, _password));
                 else
                     _xmlTextWriter.WriteAttributeString("Password", "", "");
