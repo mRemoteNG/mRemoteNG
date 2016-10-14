@@ -374,7 +374,7 @@ namespace mRemoteNG.UI.Forms
 		private void tmrAutoSave_Tick(object sender, EventArgs e)
 		{
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Doing AutoSave", true);
-			Runtime.SaveConnections();
+			Runtime.SaveConnectionsAsync();
 		}
         #endregion
 		
@@ -572,7 +572,7 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenFileSave_Click(object sender, EventArgs e)
 		{
-            Runtime.SaveConnections();
+            Runtime.SaveConnectionsAsync();
 		}
 
         private void mMenFileSaveAs_Click(object sender, EventArgs e)
