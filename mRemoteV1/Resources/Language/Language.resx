@@ -2397,4 +2397,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strTabSecurity" xml:space="preserve">
     <value>Security</value>
   </data>
+  <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>Key Derivation Function Iterations</value>
+  </data>
 </root>

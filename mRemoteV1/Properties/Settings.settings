@@ -575,5 +575,8 @@
     <Setting Name="EncryptionBlockCipherMode" Type="mRemoteNG.Security.BlockCipherModes" Scope="User">
       <Value Profile="(Default)">GCM</Value>
     </Setting>
+    <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

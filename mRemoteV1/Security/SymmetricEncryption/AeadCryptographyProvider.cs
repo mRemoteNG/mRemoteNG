@@ -10,9 +10,9 @@ using System;
 using System.IO;
 using System.Security;
 using System.Text;
+using mRemoteNG.Security.KeyDerivation;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
@@ -32,7 +32,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         //Preconfigured Password Key Derivation Parameters
         protected virtual int SaltBitSize { get; set; } = 128;
-        protected virtual int Iterations { get; set; } = 10000;
+        public virtual int KeyDerivationIterations { get; set; } = 1000;
         protected virtual int MinPasswordLength { get; set; } = 1;
 
 
@@ -100,26 +100,19 @@ namespace mRemoteNG.Security.SymmetricEncryption
             if (secretMessage == null || secretMessage.Length == 0)
                 throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
-            var generator = new Pkcs5S2ParametersGenerator();
-
             //Use Random Salt to minimize pre-generated weak password attacks.
-            var salt = new byte[SaltBitSize / 8];
-            _random.NextBytes(salt);
-
-            generator.Init(
-                PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()),
-                salt,
-                Iterations);
+            var salt = GenerateSalt();
 
             //Generate Key
-            var key = (KeyParameter)generator.GenerateDerivedMacParameters(KeyBitSize);
+            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, KeyDerivationIterations);
+            var key = keyDerivationFunction.DeriveKey(password, salt);
 
             //Create Full Non Secret Payload
             var payload = new byte[salt.Length + nonSecretPayload.Length];
             Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
             Array.Copy(salt, 0, payload, nonSecretPayload.Length, salt.Length);
 
-            return SimpleEncrypt(secretMessage, key.GetKey(), payload);
+            return SimpleEncrypt(secretMessage, key, payload);
         }
 
         private byte[] SimpleEncrypt(byte[] secretMessage, byte[] key, byte[] nonSecretPayload = null)
@@ -188,21 +181,15 @@ namespace mRemoteNG.Security.SymmetricEncryption
             if (encryptedMessage == null || encryptedMessage.Length == 0)
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
-            var generator = new Pkcs5S2ParametersGenerator();
-
             //Grab Salt from Payload
             var salt = new byte[SaltBitSize / 8];
             Array.Copy(encryptedMessage, nonSecretPayloadLength, salt, 0, salt.Length);
 
-            generator.Init(
-                PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()),
-                salt,
-                Iterations);
-
             //Generate Key
-            var key = (KeyParameter)generator.GenerateDerivedMacParameters(KeyBitSize);
+            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, KeyDerivationIterations);
+            var key = keyDerivationFunction.DeriveKey(password, salt);
 
-            return SimpleDecrypt(encryptedMessage, key.GetKey(), salt.Length + nonSecretPayloadLength);
+            return SimpleDecrypt(encryptedMessage, key, salt.Length + nonSecretPayloadLength);
         }
 
         private byte[] SimpleDecrypt(byte[] encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)
@@ -242,6 +229,13 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
                 return plainText;
             }
+        }
+
+        private byte[] GenerateSalt()
+        {
+            var salt = new byte[SaltBitSize / 8];
+            _random.NextBytes(salt);
+            return salt;
         }
     }
 }

@@ -1548,6 +1548,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Key Derivation Function Iterations.
+        /// </summary>
+        internal static string strEncryptionKeyDerivationIterations {
+            get {
+                return ResourceManager.GetString("strEncryptionKeyDerivationIterations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End IP.
         /// </summary>
         internal static string strEndIP {

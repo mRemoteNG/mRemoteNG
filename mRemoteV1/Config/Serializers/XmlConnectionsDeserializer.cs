@@ -158,7 +158,14 @@ namespace mRemoteNG.Config.Serializers
                 BlockCipherModes mode;
                 Enum.TryParse(connectionsRootElement?.Attributes["BlockCipherMode"].Value, out mode);
 
-                _decryptor = new ConnectionsDecryptor(engine, mode) {AuthenticationRequestor = AuthenticationRequestor};
+                int keyDerivationIterations;
+                int.TryParse(connectionsRootElement?.Attributes["KdfIterations"].Value, out keyDerivationIterations);
+
+                _decryptor = new ConnectionsDecryptor(engine, mode)
+                {
+                    AuthenticationRequestor = AuthenticationRequestor,
+                    KeyDerivationIterations = keyDerivationIterations
+                };
             }
             else
             {

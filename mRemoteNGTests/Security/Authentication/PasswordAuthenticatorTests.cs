@@ -16,7 +16,7 @@ namespace mRemoteNGTests.Security.Authentication
         [SetUp]
         public void Setup()
         {
-            var cryptoProvider = new AeadCryptographyProvider();
+            var cryptoProvider = new AeadCryptographyProvider {KeyDerivationIterations = 10000};
             const string cipherText = "MPELiwk7+xeNlruIyt5uxTvVB+/RLVoLdUGnwY4CWCqwKe7T2IBwWo4oaKum5hdv7447g5m2nZsYPrfARSlotQB4r1KZQg==";
             _authenticator = new PasswordAuthenticator(cryptoProvider, cipherText);
         }
