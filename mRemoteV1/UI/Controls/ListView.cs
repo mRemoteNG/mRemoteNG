@@ -6,34 +6,34 @@ namespace mRemoteNG.UI.Controls
 {
 	public class ListView : System.Windows.Forms.ListView
     {
-        Brush foreColorBrush;
-        Brush backColorBrush;
-        Pen borderPen;
+        private Brush foreColorBrush;
+        private Brush backColorBrush;
+        private Pen borderPen;
 
         #region Public Properties
         [Category("Appearance"), DefaultValue(typeof(Color), "HighlightText")]
-        public Color HighlightForeColor { get; set; }
+        private Color HighlightForeColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "Highlight")]
-        public Color HighlightBackColor { get; set; }
+		private Color HighlightBackColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "HotTrack")]
-        public Color HighlightBorderColor { get; set; }
+		private Color HighlightBorderColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "ControlText")]
-        public Color InactiveHighlightForeColor { get; set; }
+		private Color InactiveHighlightForeColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "Control")]
-        public Color InactiveHighlightBackColor { get; set; }
+		private Color InactiveHighlightBackColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "ControlDark")]
-        public Color InactiveHighlightBorderColor { get; set; }
+		private Color InactiveHighlightBorderColor { get; set; }
 
         [Category("Appearance"), DefaultValue(true)]
-        public new bool ShowFocusCues { get; set; }
+        private new bool ShowFocusCues { get; set; }
 
         [Category("Appearance")]
-        public Alignment LabelAlignment { get; set; }
+        private Alignment LabelAlignment { get; set; }
         #endregion
 			
         #region Constructors
@@ -120,11 +120,11 @@ namespace mRemoteNG.UI.Controls
 
         private void DrawImageAndText(DrawListViewItemEventArgs e)
         {
-            Rectangle imageBounds = new Rectangle(e.Bounds.X + 2, e.Bounds.Y + 6, 16, 16);
-            Rectangle textBounds = e.Bounds;
+            var imageBounds = new Rectangle(e.Bounds.X + 2, e.Bounds.Y + 6, 16, 16);
+            var textBounds = e.Bounds;
             if (e.Item.ImageList != null)
             {
-                Image image = GetItemImage(e);
+                var image = GetItemImage(e);
                 if (image != null)
                 {
                     DrawImage(e, imageBounds, image);
@@ -180,7 +180,7 @@ namespace mRemoteNG.UI.Controls
         #region Private Methods
 		private StringFormat GetStringFormat()
 		{
-			StringFormat format = StringFormat.GenericDefault;
+			var format = StringFormat.GenericDefault;
 			switch (LabelAlignment.Vertical)
 			{
 				case VerticalAlignment.Top:
@@ -192,6 +192,9 @@ namespace mRemoteNG.UI.Controls
 				case VerticalAlignment.Bottom:
 					format.LineAlignment = StringAlignment.Far;
 					break;
+			    default:
+                    format.LineAlignment = StringAlignment.Center;
+			        break;
 			}
 				
 			switch (LabelAlignment.Horizontal)
@@ -205,7 +208,10 @@ namespace mRemoteNG.UI.Controls
 				case HorizontalAlignment.Right:
 					format.Alignment = StringAlignment.Far;
 					break;
-			}
+                default:
+                    format.Alignment = StringAlignment.Center;
+                    break;
+            }
 
 			if (RightToLeftLayout)
 				format.FormatFlags = format.FormatFlags | StringFormatFlags.DirectionRightToLeft;
@@ -243,13 +249,13 @@ namespace mRemoteNG.UI.Controls
         public VerticalAlignment Vertical
 	    {
 		    get { return _Vertical; }
-		    set { _Vertical = value; }
+            private set { _Vertical = value; }
 	    }
 		
         public HorizontalAlignment Horizontal
 		{
 			get { return _Horizontal; }
-			set { _Horizontal = value; }
+            private set { _Horizontal = value; }
 		}
 
         public override string ToString()

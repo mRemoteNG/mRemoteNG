@@ -34,7 +34,8 @@ namespace mRemoteNG.App
         public static Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
-        public static DateTime LastSqlUpdate { get; set; }
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        private static DateTime LastSqlUpdate { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
         public static SecureString DefaultEncryptionKey { get; } = "mR3m".ConvertToSecureString();
         public static SecureString EncryptionKey { get; set; } = DefaultEncryptionKey;
@@ -168,10 +169,10 @@ namespace mRemoteNG.App
             DockContent panel = null;
             try
             {
-                IEnumerable tagEnumeration = (IEnumerable)((ToolStripMenuItem)sender).Tag;
+                var tagEnumeration = (IEnumerable)((ToolStripMenuItem)sender).Tag;
                 if (tagEnumeration != null)
                 {
-                    foreach (Object obj in tagEnumeration)
+                    foreach (var obj in tagEnumeration)
                     {
                         if (obj is Screen)
                         {
@@ -197,7 +198,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                ConnectionsLoader connectionsLoader = new ConnectionsLoader();
+                var connectionsLoader = new ConnectionsLoader();
 
                 if (filename == GetDefaultStartupConnectionFileName())
                 {
@@ -214,9 +215,9 @@ namespace mRemoteNG.App
                     Directory.CreateDirectory(dirname);
 
                 // Use File.Open with FileMode.CreateNew so that we don't overwrite an existing file
-                using (FileStream fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                using (var fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None))
                 {
-                    using (XmlTextWriter xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
+                    using (var xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
                     {
                         xmlTextWriter.Formatting = Formatting.Indented;
                         xmlTextWriter.Indentation = 4;
