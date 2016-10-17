@@ -1,3 +1,10 @@
 /_site
 .jekyll-metadata
 runlocal.bat
+.vs
+InstallerProjects
+mRemoteNGTests
+mRemoteV1
+packages
+Release
+*.sln.*
