@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using NUnit.Framework;
@@ -328,6 +329,102 @@ namespace mRemoteNGTests.Container
             var newChildIndex = _containerInfo.Children.IndexOf(_con2);
             var lastIndex = _containerInfo.Children.Count - 1;
             Assert.That(newChildIndex, Is.EqualTo(lastIndex));
+        }
+
+        [Test]
+        public void SortAscendingSortsCorrectlyByName()
+        {
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con3);
+            _containerInfo.Sort();
+            var orderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(orderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.Name)));
+        }
+
+        [Test]
+        public void SortDescendingSortsCorrectlyByName()
+        {
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con3);
+            _containerInfo.Sort(ListSortDirection.Descending);
+            var orderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(orderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.Name)));
+        }
+
+        [Test]
+        public void SortOnConstantIdAscendingSortsCorrectly()
+        {
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con3);
+            _containerInfo.SortOn(node=> node.ConstantID);
+            var orderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(orderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.ConstantID)));
+        }
+
+        [Test]
+        public void SortOnConstantIdDescendingSortsCorrectly()
+        {
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con3);
+            _containerInfo.SortOn(node => node.ConstantID, ListSortDirection.Descending);
+            var orderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(orderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.ConstantID)));
+        }
+
+        [Test]
+        public void SortAscendingRecursiveSortsGrandchildrenCorrectlyByName()
+        {
+            var childContainer = new ContainerInfo();
+            childContainer.AddChild(_con2);
+            childContainer.AddChild(_con1);
+            childContainer.AddChild(_con3);
+            _containerInfo.AddChild(childContainer);
+            _containerInfo.SortRecursive();
+            var grandchildOrderAfterSort = childContainer.Children.ToArray();
+            Assert.That(grandchildOrderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.Name)));
+        }
+
+        [Test]
+        public void SortDescendingRecursiveSortsGrandchildrenCorrectlyByName()
+        {
+            var childContainer = new ContainerInfo();
+            childContainer.AddChild(_con2);
+            childContainer.AddChild(_con1);
+            childContainer.AddChild(_con3);
+            _containerInfo.AddChild(childContainer);
+            _containerInfo.SortRecursive(ListSortDirection.Descending);
+            var grandchildOrderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(grandchildOrderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.Name)));
+        }
+
+        [Test]
+        public void SortOnRecursiveConstantIdAscendingSortsGrandchildrenCorrectly()
+        {
+            var childContainer = new ContainerInfo();
+            childContainer.AddChild(_con2);
+            childContainer.AddChild(_con1);
+            childContainer.AddChild(_con3);
+            _containerInfo.AddChild(childContainer);
+            _containerInfo.SortOnRecursive(node => node.ConstantID);
+            var grandchildOrderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(grandchildOrderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.ConstantID)));
+        }
+
+        [Test]
+        public void SortOnRecursiveConstantIdDescendingSortsGrandchildrenCorrectly()
+        {
+            var childContainer = new ContainerInfo();
+            childContainer.AddChild(_con2);
+            childContainer.AddChild(_con1);
+            childContainer.AddChild(_con3);
+            _containerInfo.AddChild(childContainer);
+            _containerInfo.SortOnRecursive(node => node.ConstantID, ListSortDirection.Descending);
+            var grandchildOrderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(grandchildOrderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.ConstantID)));
         }
     }
 }
