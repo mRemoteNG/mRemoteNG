@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Connection;
+﻿using System.Linq;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using NUnit.Framework;
 
@@ -230,6 +231,103 @@ namespace mRemoteNGTests.Container
             _containerInfo.DemoteChild(_con3);
             var targetsNewIndex = _containerInfo.Children.IndexOf(_con3);
             Assert.That(targetsNewIndex, Is.EqualTo(targetsIndexBeforeMove));
+        }
+
+        [Test]
+        public void WhenChildAlreadyPresentAddChildAtDoesNothing()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+            var indexBeforeAttemptedMove = _containerInfo.Children.IndexOf(_con1);
+            _containerInfo.AddChildAt(_con1, 2);
+            var indexAfterAttemptedMove = _containerInfo.Children.IndexOf(_con1);
+            Assert.That(indexAfterAttemptedMove, Is.EqualTo(indexBeforeAttemptedMove));
+        }
+
+        [Test]
+        public void RemoveChildDoesNothingIfChildNotInList()
+        {
+            _containerInfo.AddChild(_con1);
+            var childListBeforeRemoval = _containerInfo.Children;
+            _containerInfo.RemoveChild(_con2);
+            var childListAfterRemoval = _containerInfo.Children;
+            Assert.That(childListAfterRemoval, Is.EquivalentTo(childListBeforeRemoval));
+        }
+
+        [Test]
+        public void ClonedContainerHasNewConstantId()
+        {
+            var clone = _containerInfo.Clone();
+            Assert.That(clone.ConstantID, Is.Not.EqualTo(_containerInfo.ConstantID));
+        }
+
+        [Test]
+        public void ClonedContainerContainsClonedChildren()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+            var clone = _containerInfo.Clone() as ContainerInfo;
+            var clonedChildNames = clone?.Children.Select((node) => node.Name);
+            var originalChildNames = _containerInfo?.Children.Select((node) => node.Name);
+            Assert.That(clonedChildNames, Is.EquivalentTo(originalChildNames));
+        }
+
+        [Test]
+        public void HasChildrenReturnsFalseForNoChildren()
+        {
+            var hasChildren = _containerInfo.HasChildren();
+            Assert.That(hasChildren, Is.False);
+        }
+
+        [Test]
+        public void HasChildrenReturnsTrueWhenChildrenPresent()
+        {
+            _containerInfo.AddChild(_con1);
+            var hasChildren = _containerInfo.HasChildren();
+            Assert.That(hasChildren, Is.True);
+        }
+
+        [Test]
+        public void AddChildAbovePutsNewChildInCorrectLocation()
+        {
+            _containerInfo.AddChild(_con1);
+            var referenceChildIndexBeforeInsertion = _containerInfo.Children.IndexOf(_con1);
+            _containerInfo.AddChildAbove(_con2, _con1);
+            var newChildIndex = _containerInfo.Children.IndexOf(_con2);
+            Assert.That(newChildIndex, Is.EqualTo(referenceChildIndexBeforeInsertion));
+        }
+
+        [Test]
+        public void AddChildAbovePutsNewChildAtEndOfListIfReferenceChildNotInList()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChildAbove(_con2, _con3);
+            var newChildIndex = _containerInfo.Children.IndexOf(_con2);
+            var lastIndex = _containerInfo.Children.Count - 1;
+            Assert.That(newChildIndex, Is.EqualTo(lastIndex));
+        }
+
+        [Test]
+        public void AddChildBelowPutsNewChildInCorrectLocation()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            var referenceChildIndexBeforeInsertion = _containerInfo.Children.IndexOf(_con1);
+            _containerInfo.AddChildBelow(_con3, _con1);
+            var newChildIndex = _containerInfo.Children.IndexOf(_con3);
+            Assert.That(newChildIndex, Is.EqualTo(referenceChildIndexBeforeInsertion + 1));
+        }
+
+        [Test]
+        public void AddChildBelowPutsNewChildAtEndOfListIfReferenceChildNotInList()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChildBelow(_con2, _con3);
+            var newChildIndex = _containerInfo.Children.IndexOf(_con2);
+            var lastIndex = _containerInfo.Children.Count - 1;
+            Assert.That(newChildIndex, Is.EqualTo(lastIndex));
         }
     }
 }
