@@ -87,8 +87,13 @@ namespace mRemoteNG.UI.Controls
         private void BuildBorderPen()
         {
             if (Focused)
+            {
                 borderPen = new Pen(HighlightBorderColor);
-            borderPen = new Pen(InactiveHighlightBorderColor);
+            }
+            else
+            {
+                borderPen = new Pen(InactiveHighlightBorderColor);
+            }
         }
 
         private void BuildBrushes(DrawListViewItemEventArgs e)
