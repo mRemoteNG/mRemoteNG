@@ -139,6 +139,7 @@
     <Compile Include="Security\CryptographyProviderFactoryTests.cs" />
     <Compile Include="Security\EncryptedSecureStringTests.cs" />
     <Compile Include="Security\LegacyRijndaelCryptographyProviderTests.cs" />
+    <Compile Include="Tree\NodeSearcherTests.cs" />
     <Compile Include="UI\Controls\CustomListViewTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
       <SubType>Form</SubType>
