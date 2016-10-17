@@ -1,6 +1,10 @@
-﻿using mRemoteNG.Connection;
+﻿using System.Collections;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Container;
+using mRemoteNGTests.Config.Serializers;
+using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
 
@@ -71,6 +75,23 @@ namespace mRemoteNGTests.Connection
             _connectionInfo.PropertyChanged += (sender, args) => nameOfModifiedProperty = args.PropertyName;
             _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
             Assert.That(nameOfModifiedProperty, Is.EqualTo("OpenConnections"));
+        }
+
+        [TestCase(ProtocolType.HTTP, ExpectedResult = 80)]
+        [TestCase(ProtocolType.HTTPS, ExpectedResult = 443)]
+        [TestCase(ProtocolType.ICA, ExpectedResult = 1494)]
+        [TestCase(ProtocolType.IntApp, ExpectedResult = 0)]
+        [TestCase(ProtocolType.RAW, ExpectedResult = 23)]
+        [TestCase(ProtocolType.RDP, ExpectedResult = 3389)]
+        [TestCase(ProtocolType.Rlogin, ExpectedResult = 513)]
+        [TestCase(ProtocolType.SSH1, ExpectedResult = 22)]
+        [TestCase(ProtocolType.SSH2, ExpectedResult = 22)]
+        [TestCase(ProtocolType.Telnet, ExpectedResult = 23)]
+        [TestCase(ProtocolType.VNC, ExpectedResult = 5900)]
+        public int GetDefaultPortReturnsCorrectPortForProtocol(ProtocolType protocolType)
+        {
+            _connectionInfo.Protocol = protocolType;
+            return _connectionInfo.GetDefaultPort();
         }
     }
 }
