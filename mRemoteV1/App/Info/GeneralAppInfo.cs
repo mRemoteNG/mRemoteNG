@@ -28,7 +28,7 @@ namespace mRemoteNG.App.Info
 			    var details = new List<string>();
 			    details.Add("compatible");
 			    details.Add(OSVersion.Platform == PlatformID.Win32NT ? $"Windows NT {OSVersion.Version.Major}.{OSVersion.Version.Minor}": OSVersion.VersionString);
-			    if (Tools.EnvironmentInfo.IsWow64)
+			    if (Is64BitProcess)
 				{
 					details.Add("WOW64");
 				}
