@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
-using Org.BouncyCastle.Security;
+
 
 namespace mRemoteNG.Security.SymmetricEncryption
 {
