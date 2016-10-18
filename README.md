@@ -1,4 +1,4 @@
-# [mRemoteNG.github.io/mRemoteNG](https://mRemoteNG.github.io/mRemoteNG/)
+# [mRemoteNG.org](https://mRemoteNG.org)
 mRemoteNG Website
 
 # Building
