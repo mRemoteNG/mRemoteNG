@@ -1,4 +1,6 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using System.Collections;
+using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using NUnit.Framework;
 
@@ -41,49 +43,7 @@ namespace mRemoteNGTests.Tools
             _argumentParser = null;
         }
 
-
-        [TestCase("%NAME%", ExpectedResult = StringAfterAllEscaping)]
-        [TestCase("%-NAME%", ExpectedResult = StringAfterMetacharacterEscaping)]
-        [TestCase("%!NAME%", ExpectedResult = StringAfterNoEscaping)]
-
-        [TestCase("%HOSTNAME%", ExpectedResult = StringAfterAllEscaping)]
-        [TestCase("%-HOSTNAME%", ExpectedResult = StringAfterMetacharacterEscaping)]
-        [TestCase("%!HOSTNAME%", ExpectedResult = StringAfterNoEscaping)]
-
-        [TestCase("%PORT%", ExpectedResult = PortAsString)]
-        [TestCase("%-PORT%", ExpectedResult = PortAsString)]
-        [TestCase("%!PORT%", ExpectedResult = PortAsString)]
-
-        [TestCase("%USERNAME%", ExpectedResult = StringAfterAllEscaping)]
-        [TestCase("%-USERNAME%", ExpectedResult = StringAfterMetacharacterEscaping)]
-        [TestCase("%!USERNAME%", ExpectedResult = StringAfterNoEscaping)]
-
-        [TestCase("%PASSWORD%", ExpectedResult = StringAfterAllEscaping)]
-        [TestCase("%-PASSWORD%", ExpectedResult = StringAfterMetacharacterEscaping)]
-        [TestCase("%!PASSWORD%", ExpectedResult = StringAfterNoEscaping)]
-
-        [TestCase("%DOMAIN%", ExpectedResult = StringAfterAllEscaping)]
-        [TestCase("%-DOMAIN%", ExpectedResult = StringAfterMetacharacterEscaping)]
-        [TestCase("%!DOMAIN%", ExpectedResult = StringAfterNoEscaping)]
-
-        [TestCase("%DESCRIPTION%", ExpectedResult = StringAfterAllEscaping)]
-        [TestCase("%-DESCRIPTION%", ExpectedResult = StringAfterMetacharacterEscaping)]
-        [TestCase("%!DESCRIPTION%", ExpectedResult = StringAfterNoEscaping)]
-
-        [TestCase("%MACADDRESS%", ExpectedResult = StringAfterAllEscaping)]
-        [TestCase("%-MACADDRESS%", ExpectedResult = StringAfterMetacharacterEscaping)]
-        [TestCase("%!MACADDRESS%", ExpectedResult = StringAfterNoEscaping)]
-
-        [TestCase("%USERFIELD%", ExpectedResult = StringAfterAllEscaping)]
-        [TestCase("%-USERFIELD%", ExpectedResult = StringAfterMetacharacterEscaping)]
-        [TestCase("%!USERFIELD%", ExpectedResult = StringAfterNoEscaping)]
-
-        [TestCase("%%", ExpectedResult = "%%", TestName = "EmptyVariableTagsNotParsed")]
-        [TestCase("/k echo %!USERNAME%", ExpectedResult = SampleCommandString, TestName = "ParsingWorksWhenVariableIsNotInFirstPosition")]
-        [TestCase("%COMSPEC%", ExpectedResult = @"C:\Windows\system32\cmd.exe", TestName = "EnvironmentVariablesParsed")]
-        [TestCase("%UNSUPPORTEDPARAMETER%", ExpectedResult = "%UNSUPPORTEDPARAMETER%", TestName = "UnsupportedParametersNotParsed")]
-        [TestCase(@"\%COMSPEC\%", ExpectedResult = @"C:\Windows\system32\cmd.exe", TestName = "BackslashEscapedEnvironmentVariablesParsed")]
-        [TestCase(@"^%COMSPEC^%", ExpectedResult = "%COMSPEC%", TestName = "ChevronEscapedEnvironmentVariablesNotParsed")]
+        [TestCaseSource(typeof(ParserTestsDataSource), nameof(ParserTestsDataSource.TestCases))]
         public string ParserTests(string argumentString)
         {
             return _argumentParser.ParseArguments(argumentString);
@@ -96,5 +56,50 @@ namespace mRemoteNGTests.Tools
             var parsedText = parser.ParseArguments("test %USERNAME% test");
             Assert.That(parsedText, Is.EqualTo("test  test"));
         }
+
+
+
+        private class ParserTestsDataSource
+        {
+            public static IEnumerable TestCases
+            {
+                get
+                {
+                    yield return new TestCaseData("%NAME%").Returns(StringAfterAllEscaping);
+                    yield return new TestCaseData("%-NAME%").Returns(StringAfterMetacharacterEscaping);
+                    yield return new TestCaseData("%!NAME%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%HOSTNAME%").Returns(StringAfterAllEscaping);
+                    yield return new TestCaseData("%-HOSTNAME%").Returns(StringAfterMetacharacterEscaping);
+                    yield return new TestCaseData("%!HOSTNAME%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%PORT%").Returns(PortAsString);
+                    yield return new TestCaseData("%-PORT%").Returns(PortAsString);
+                    yield return new TestCaseData("%!PORT%").Returns(PortAsString);
+                    yield return new TestCaseData("%USERNAME%").Returns(StringAfterAllEscaping);
+                    yield return new TestCaseData("%-USERNAME%").Returns(StringAfterMetacharacterEscaping);
+                    yield return new TestCaseData("%!USERNAME%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%PASSWORD%").Returns(StringAfterAllEscaping);
+                    yield return new TestCaseData("%-PASSWORD%").Returns(StringAfterMetacharacterEscaping);
+                    yield return new TestCaseData("%!PASSWORD%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%DOMAIN%").Returns(StringAfterAllEscaping);
+                    yield return new TestCaseData("%-DOMAIN%").Returns(StringAfterMetacharacterEscaping);
+                    yield return new TestCaseData("%!DOMAIN%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%DESCRIPTION%").Returns(StringAfterAllEscaping);
+                    yield return new TestCaseData("%-DESCRIPTION%").Returns(StringAfterMetacharacterEscaping);
+                    yield return new TestCaseData("%!DESCRIPTION%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%MACADDRESS%").Returns(StringAfterAllEscaping);
+                    yield return new TestCaseData("%-MACADDRESS%").Returns(StringAfterMetacharacterEscaping);
+                    yield return new TestCaseData("%!MACADDRESS%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%USERFIELD%").Returns(StringAfterAllEscaping);
+                    yield return new TestCaseData("%-USERFIELD%").Returns(StringAfterMetacharacterEscaping);
+                    yield return new TestCaseData("%!USERFIELD%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%%") {TestName = "EmptyVariableTagsNotParsed" }.Returns("%%");
+                    yield return new TestCaseData("/k echo %!USERNAME%") { TestName = "ParsingWorksWhenVariableIsNotInFirstPosition" }.Returns(SampleCommandString);
+                    yield return new TestCaseData("%COMSPEC%") { TestName = "EnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));
+                    yield return new TestCaseData("%UNSUPPORTEDPARAMETER%") { TestName = "UnsupportedParametersNotParsed" }.Returns("%UNSUPPORTEDPARAMETER%");
+                    yield return new TestCaseData(@"\%COMSPEC\%") { TestName = "BackslashEscapedEnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));
+                    yield return new TestCaseData(@"^%COMSPEC^%") { TestName = "ChevronEscapedEnvironmentVariablesNotParsed" }.Returns("%COMSPEC%");
+                }
+            }
+    }
     }
 }

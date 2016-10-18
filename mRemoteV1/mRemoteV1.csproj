@@ -297,7 +297,6 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Tools\Authenticode.cs" />
     <Compile Include="Tools\EnumWindows.cs" />
-    <Compile Include="Tools\EnvironmentInfo.cs" />
     <Compile Include="Tools\PropertyGridCommandSite.cs" />
     <Compile Include="Connection\PuttySessionInfo.cs" />
     <Compile Include="Tree\Root\RootPuttySessionsNodeInfo.cs" />
@@ -374,7 +373,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Tree\Root\RootNodeInfo.cs" />
-    <Compile Include="Security\Security.Impersonator.cs" />
     <Compile Include="Security\SaveFilter.cs" />
     <Compile Include="Tools\IeBrowserEmulation.cs" />
     <Compile Include="Tools\ProcessController.cs" />

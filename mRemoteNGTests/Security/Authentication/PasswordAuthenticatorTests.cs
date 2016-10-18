@@ -95,5 +95,20 @@ namespace mRemoteNGTests.Security.Authentication
             _authenticator.Authenticate(_wrongPassword);
             Assert.That(authAttempts == _authenticator.MaxAttempts);
         }
+
+        [Test]
+        public void AuthenticatorRespectsMaxAttemptsCustomValue()
+        {
+            const int customMaxAttempts = 5;
+            _authenticator.MaxAttempts = customMaxAttempts;
+            var authAttempts = 0;
+            _authenticator.AuthenticationRequestor = () =>
+            {
+                authAttempts++;
+                return _wrongPassword;
+            };
+            _authenticator.Authenticate(_wrongPassword);
+            Assert.That(authAttempts == customMaxAttempts);
+        }
     }
 }

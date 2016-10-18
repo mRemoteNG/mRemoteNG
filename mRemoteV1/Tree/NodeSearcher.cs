@@ -5,7 +5,7 @@ using mRemoteNG.Connection;
 
 namespace mRemoteNG.Tree
 {
-    internal class NodeSearcher
+    public class NodeSearcher
     {
         private readonly ConnectionTreeModel _connectionTreeModel;
 
@@ -18,7 +18,7 @@ namespace mRemoteNG.Tree
             _connectionTreeModel = connectionTreeModel;
         }
 
-        internal IEnumerable<ConnectionInfo> SearchByName(string searchText)
+        public IEnumerable<ConnectionInfo> SearchByName(string searchText)
         {
             ResetMatches();
             if (searchText == "") return Matches;
@@ -33,20 +33,32 @@ namespace mRemoteNG.Tree
             return Matches;
         }
 
-        internal ConnectionInfo NextMatch()
+        public ConnectionInfo NextMatch()
         {
             var currentMatchIndex = Matches.IndexOf(CurrentMatch);
-            if (currentMatchIndex < Matches.Count-1)
+            if (!CurrentMatchIsTheLastMatchInTheList())
                 CurrentMatch = Matches[currentMatchIndex + 1];
             return CurrentMatch;
         }
 
-        internal ConnectionInfo PreviousMatch()
+        private bool CurrentMatchIsTheLastMatchInTheList()
         {
             var currentMatchIndex = Matches.IndexOf(CurrentMatch);
-            if (currentMatchIndex > 0)
+            return currentMatchIndex >= Matches.Count - 1;
+        }
+
+        public ConnectionInfo PreviousMatch()
+        {
+            var currentMatchIndex = Matches.IndexOf(CurrentMatch);
+            if (!CurrentMatchIsTheFirstMatchInTheList())
                 CurrentMatch = Matches[currentMatchIndex - 1];
             return CurrentMatch;
+        }
+
+        private bool CurrentMatchIsTheFirstMatchInTheList()
+        {
+            var currentMatchIndex = Matches.IndexOf(CurrentMatch);
+            return currentMatchIndex <= 0;
         }
 
         private void ResetMatches()

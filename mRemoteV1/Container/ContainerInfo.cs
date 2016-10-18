@@ -14,7 +14,7 @@ namespace mRemoteNG.Container
     public class ContainerInfo : ConnectionInfo, INotifyCollectionChanged
 	{
         [Browsable(false)]
-        public List<ConnectionInfo> Children { get; set; } = new List<ConnectionInfo>();
+        public List<ConnectionInfo> Children { get; } = new List<ConnectionInfo>();
 
         [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
         public bool IsExpanded { get; set; }
@@ -52,8 +52,8 @@ namespace mRemoteNG.Container
         public void AddChildBelow(ConnectionInfo newChildItem, ConnectionInfo reference)
         {
             var newChildIndex = Children.IndexOf(reference) + 1;
-            if (newChildIndex > Children.Count)
-                newChildIndex = 0;
+            if (newChildIndex > Children.Count || newChildIndex < 1)
+                newChildIndex = Children.Count;
             AddChildAt(newChildItem, newChildIndex);
         }
 

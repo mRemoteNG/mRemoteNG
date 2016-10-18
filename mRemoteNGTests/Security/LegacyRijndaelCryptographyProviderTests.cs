@@ -71,5 +71,19 @@ namespace mRemoteNGTests.Security
             ActualValueDelegate<string> decryptMethod = () => _rijndaelCryptographyProvider.Decrypt(CipherText, "wrongKey".ConvertToSecureString());
             Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
+
+        [Test]
+        public void EncryptingEmptyStringReturnsEmptyString()
+        {
+            var cipherText = _rijndaelCryptographyProvider.Encrypt("", _encryptionKey);
+            Assert.That(cipherText, Is.EqualTo(""));
+        }
+
+        [Test]
+        public void DecryptingEmptyStringReturnsEmptyString()
+        {
+            var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt("", _encryptionKey);
+            Assert.That(decryptedCipherText, Is.EqualTo(""));
+        }
     }
 }
