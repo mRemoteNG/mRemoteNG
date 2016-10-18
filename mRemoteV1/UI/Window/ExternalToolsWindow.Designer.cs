@@ -1,6 +1,4 @@
 
-using mRemoteNG.My;
-
 namespace mRemoteNG.UI.Window
 {
 	public partial class ExternalToolsWindow : BaseWindow
