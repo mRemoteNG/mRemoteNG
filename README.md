@@ -10,4 +10,4 @@ mRemoteNG Website
    bundle install
    bundle exec jekyll serve --drafts --config _config.yaml,_config-dev.yaml
    ```
-4. Open http://localhost:4000/mRemoteNG/
+4. Open http://localhost:4000/
