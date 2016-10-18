@@ -1,8 +1,9 @@
 ﻿using System;
+using mRemoteNG.Connection.Protocol;
 
-namespace mRemoteNG.Connection.Protocol
+namespace mRemoteNG.Connection
 {
-    public class Converter
+    public static class Converter
     {
         public static string ProtocolToString(ProtocolType protocol)
         {

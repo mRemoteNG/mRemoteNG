@@ -1,6 +1,5 @@
 using System;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Security;
@@ -23,6 +22,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace mRemoteNG.Config.Connections
 {
@@ -40,9 +40,6 @@ namespace mRemoteNG.Config.Connections
         #region Private Properties
 		private XmlTextWriter _xmlTextWriter;
 		private SecureString _password = Runtime.EncryptionKey;
-						
-		private int _currentNodeIndex;
-		private string _parentConstantId = Convert.ToString(0);
         #endregion
 				
         #region Public Properties
@@ -206,9 +203,21 @@ namespace mRemoteNG.Config.Connections
             var sqlQuery = new SqlCommand("DELETE FROM tblRoot", sqlDatabaseConnector.SqlConnection);
             sqlQuery.ExecuteNonQuery();
 
-            sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," + ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
-        }
+	        if (rootTreeNode != null)
+	        {
+	            sqlQuery =
+	                new SqlCommand(
+	                    "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
+	                    MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
+	                    ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")",
+	                    sqlDatabaseConnector.SqlConnection);
+	            sqlQuery.ExecuteNonQuery();
+	        }
+	        else
+	        {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+            }
+	    }
 
 	    private void UpdateConnectionsTable(ContainerInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
 	    {
@@ -295,7 +304,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (((ConnectionInfo)node.Tag).GetTreeNodeType() == TreeNodeType.Connection)
 				{
-                    ConnectionInfo curConI = (ConnectionInfo)node.Tag;
+                    var curConI = (ConnectionInfo)node.Tag;
 							
 					if (curConI.Protocol == ProtocolType.RDP)
 					{
@@ -396,7 +405,7 @@ namespace mRemoteNG.Config.Connections
 			_xmlTextWriter.WriteValue("768");
 			_xmlTextWriter.WriteEndElement();
 					
-			Rectangle resolution = ProtocolRDP.GetResolutionRectangle(con.Resolution);
+			var resolution = ProtocolRDP.GetResolutionRectangle(con.Resolution);
 			if (resolution.Width == 0)
 			{
 				resolution.Width = 1024;
