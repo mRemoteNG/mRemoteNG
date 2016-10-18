@@ -5,7 +5,6 @@ using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree.Root;
 
 
@@ -13,8 +12,8 @@ namespace mRemoteNG.Tree
 {
     public class ConnectionTreeDragAndDropHandler
     {
-        public Color DropAllowedFeedbackColor = Color.Green;
-        public Color DropDeniedFeedbackColor = Color.Red;
+        private readonly Color DropAllowedFeedbackColor = Color.Green;
+        private readonly Color DropDeniedFeedbackColor = Color.Red;
         private string _infoMessage;
         private Color _currentFeedbackColor;
         private bool _enableFeedback;
@@ -140,8 +139,7 @@ namespace mRemoteNG.Tree
 
         private bool NodeIsDraggable(ConnectionInfo node)
         {
-            if (node == null || node is RootNodeInfo || node is PuttySessionInfo) return false;
-            return true;
+            return node != null && !(node is RootNodeInfo) && !(node is PuttySessionInfo);
         }
 
         private bool NodeDraggingOntoSelf(ConnectionInfo source, ConnectionInfo target)

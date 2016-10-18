@@ -1,9 +1,6 @@
 using mRemoteNG.Tools;
-using mRemoteNG.Tree.Root;
-using mRemoteNG.Tree;
 
-
-namespace mRemoteNG.Root.PuttySessions
+namespace mRemoteNG.Tree.Root
 {
 	public class RootPuttySessionsNodeInfo : RootNodeInfo
     {

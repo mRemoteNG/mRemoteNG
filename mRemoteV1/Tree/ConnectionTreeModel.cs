@@ -8,7 +8,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Tree
 {
-    public class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
+    public sealed class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
     {
         public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
 
@@ -75,7 +75,8 @@ namespace mRemoteNG.Tree
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
+
+        private void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
         {
             PropertyChanged?.Invoke(sender, args);
         }
