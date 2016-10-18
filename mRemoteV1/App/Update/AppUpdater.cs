@@ -155,10 +155,10 @@ namespace mRemoteNG.App.Update
 			
 		private static DownloadStringCompletedEventArgs NewDownloadStringCompletedEventArgs(string result, Exception exception, bool cancelled, object userToken)
 		{
-			Type type = typeof(DownloadStringCompletedEventArgs);
+			var type = typeof(DownloadStringCompletedEventArgs);
             const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
 			Type[] argumentTypes = {typeof(string), typeof(Exception), typeof(bool), typeof(object)};
-			ConstructorInfo constructor = type.GetConstructor(bindingFlags, null, argumentTypes, null);
+			var constructor = type.GetConstructor(bindingFlags, null, argumentTypes, null);
 			object[] arguments = {result, exception, cancelled, userToken};
 
             return (DownloadStringCompletedEventArgs)constructor.Invoke(arguments);
@@ -166,10 +166,10 @@ namespace mRemoteNG.App.Update
 			
 		private DownloadStringCompletedEventArgs DownloadString(Uri address)
 		{
-			WebClient webClient = CreateWebClient();
-			string result = string.Empty;
+			var webClient = CreateWebClient();
+			var result = string.Empty;
 			Exception exception = null;
-			bool cancelled = false;
+			var cancelled = false;
 				
 			try
 			{
@@ -189,8 +189,8 @@ namespace mRemoteNG.App.Update
 			
 		private void GetUpdateInfo()
 		{
-			Uri updateFileUri = new Uri(new Uri(Convert.ToString(Settings.Default.UpdateAddress)), new Uri(UpdateChannelInfo.FileName, UriKind.Relative));
-			DownloadStringCompletedEventArgs e = DownloadString(updateFileUri);
+			var updateFileUri = new Uri(new Uri(Convert.ToString(Settings.Default.UpdateAddress)), new Uri(UpdateChannelInfo.FileName, UriKind.Relative));
+			var e = DownloadString(updateFileUri);
 				
 			if (!e.Cancelled && e.Error == null)
 			{
@@ -208,7 +208,7 @@ namespace mRemoteNG.App.Update
 			
 		private void GetChangeLog()
 		{
-			DownloadStringCompletedEventArgs e = DownloadString(_currentUpdateInfo.ChangeLogAddress);
+			var e = DownloadString(_currentUpdateInfo.ChangeLogAddress);
 				
 			if (!e.Cancelled && e.Error == null)
 			{
@@ -225,13 +225,13 @@ namespace mRemoteNG.App.Update
 			
 		private void DownloadUpdateCompleted(object sender, AsyncCompletedEventArgs e)
 		{
-			AsyncCompletedEventArgs raiseEventArgs = e;
+			var raiseEventArgs = e;
 				
 			if (!e.Cancelled && e.Error == null)
 			{
 				try
 				{
-				    Authenticode updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath)
+				    var updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath)
 				    {
 				        RequireThumbprintMatch = true,
 				        ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint

@@ -55,10 +55,10 @@ namespace mRemoteNG.UI.Window
 
         private void pbUpdateImage_Click(object sender, EventArgs e)
 		{
-			Uri linkUri = pbUpdateImage.Tag as Uri;
+			var linkUri = pbUpdateImage.Tag as Uri;
 			if (linkUri == null || linkUri.IsFile || linkUri.IsUnc || linkUri.IsLoopback)
 			{
-				return ;
+				return;
 			}
 			Process.Start(linkUri.ToString());
 		}
@@ -79,7 +79,7 @@ namespace mRemoteNG.UI.Window
 			}
 			else if (_appUpdate.IsGetUpdateInfoRunning)
 			{
-				return ;
+				return;
 			}
 					
 			lblStatus.Text = Language.strUpdateCheckingLabel;
@@ -100,9 +100,9 @@ namespace mRemoteNG.UI.Window
 		{
 			if (InvokeRequired)
 			{
-				AsyncCompletedEventHandler myDelegate = new AsyncCompletedEventHandler(GetUpdateInfoCompleted);
-				Invoke(myDelegate, new object[] {sender, e});
-				return ;
+				var myDelegate = new AsyncCompletedEventHandler(GetUpdateInfoCompleted);
+				Invoke(myDelegate, sender, e);
+				return;
 			}
 					
 			try
@@ -116,7 +116,7 @@ namespace mRemoteNG.UI.Window
 						
 				if (e.Cancelled)
 				{
-					return ;
+					return;
 				}
 				if (e.Error != null)
 				{
@@ -129,7 +129,7 @@ namespace mRemoteNG.UI.Window
 					lblStatus.ForeColor = Color.OrangeRed;
 					pnlUpdate.Visible = true;
 							
-					UpdateInfo updateInfo = _appUpdate.CurrentUpdateInfo;
+					var updateInfo = _appUpdate.CurrentUpdateInfo;
 					lblLatestVersion.Text = updateInfo.Version.ToString();
 					lblLatestVersionLabel.Visible = true;
 					lblLatestVersion.Visible = true;
@@ -157,7 +157,7 @@ namespace mRemoteNG.UI.Window
 							
 					if (_appUpdate.CurrentUpdateInfo != null)
 					{
-						UpdateInfo updateInfo = _appUpdate.CurrentUpdateInfo;
+						var updateInfo = _appUpdate.CurrentUpdateInfo;
 						if (updateInfo.IsValid && updateInfo.Version != null)
 						{
 							lblLatestVersion.Text = updateInfo.Version.ToString();
@@ -180,9 +180,9 @@ namespace mRemoteNG.UI.Window
 		{
 			if (InvokeRequired)
 			{
-				AsyncCompletedEventHandler myDelegate = new AsyncCompletedEventHandler(GetChangeLogCompleted);
+				var myDelegate = new AsyncCompletedEventHandler(GetChangeLogCompleted);
 				Invoke(myDelegate, new object[] {sender, e});
-				return ;
+				return;
 			}
 					
 			try
@@ -190,13 +190,9 @@ namespace mRemoteNG.UI.Window
 				_appUpdate.GetChangeLogCompletedEvent -= GetChangeLogCompleted;
 						
 				if (e.Cancelled)
-				{
-					return ;
-				}
+					return;
 				if (e.Error != null)
-				{
 					throw (e.Error);
-				}
 						
 				txtChangeLog.Text = _appUpdate.ChangeLog;
 			}
@@ -244,14 +240,10 @@ namespace mRemoteNG.UI.Window
 				prgbDownload.Visible = false;
 						
 				if (e.Cancelled)
-				{
-					return ;
-				}
+                    return;
 				if (e.Error != null)
-				{
-					throw (e.Error);
-				}
-						
+				    throw (e.Error);
+
 				if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
 				{
 					Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
