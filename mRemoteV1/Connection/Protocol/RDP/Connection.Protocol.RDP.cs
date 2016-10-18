@@ -39,7 +39,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			{
 				return _rdpClient.AdvancedSettings2.SmartSizing;
 			}
-			set
+            private set
 			{
 				_rdpClient.AdvancedSettings2.SmartSizing = value;
 				ReconnectForResize();
@@ -78,7 +78,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					}
 							
 					Debug.Assert(Convert.ToBoolean(_rdpClient.SecuredSettingsEnabled));
-                    IMsRdpClientSecuredSettings msRdpClientSecuredSettings = _rdpClient.SecuredSettings2;
+                    var msRdpClientSecuredSettings = _rdpClient.SecuredSettings2;
 					msRdpClientSecuredSettings.KeyboardHookMode = 1; // Apply key combinations at the remote server.
 				}
 				catch (Exception ex)
@@ -414,9 +414,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					return;
 				}
 						
-				string userName = _connectionInfo.Username;
-				string password = _connectionInfo.Password;
-				string domain = _connectionInfo.Domain;
+				var userName = _connectionInfo.Username;
+				var password = _connectionInfo.Password;
+				var domain = _connectionInfo.Domain;
 						
 				if (string.IsNullOrEmpty(userName))
 				{
@@ -505,7 +505,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				}
 				else
 				{
-					Rectangle resolution = GetResolutionRectangle(_connectionInfo.Resolution);
+					var resolution = GetResolutionRectangle(_connectionInfo.Resolution);
 					_rdpClient.DesktopWidth = resolution.Width;
 					_rdpClient.DesktopHeight = resolution.Height;
 				}
@@ -551,7 +551,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			try
 			{
-				int pFlags = 0;
+				var pFlags = 0;
 				if (_connectionInfo.DisplayThemes == false)
 				{
 					pFlags += Convert.ToInt32(RDPPerformanceFlags.DisableThemes);
@@ -637,7 +637,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			const int UI_ERR_NORMAL_DISCONNECT = 0xB08;
 			if (discReason != UI_ERR_NORMAL_DISCONNECT)
 			{
-				string reason = _rdpClient.GetErrorDescription((uint)discReason, (uint) _rdpClient.ExtendedDisconnectReason);
+				var reason = _rdpClient.GetErrorDescription((uint)discReason, (uint) _rdpClient.ExtendedDisconnectReason);
 				Event_Disconnected(this, discReason + "\r\n" + reason);
 			}
 					
@@ -645,8 +645,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			{
 				ReconnectGroup = new ReconnectGroup();
 				ReconnectGroup.CloseClicked += Event_ReconnectGroupCloseClicked;
-				ReconnectGroup.Left = (int) (((double) Control.Width / 2) - ((double) ReconnectGroup.Width / 2));
-				ReconnectGroup.Top = (int) (((double) Control.Height / 2) - ((double) ReconnectGroup.Height / 2));
+				ReconnectGroup.Left = (int) ((double) Control.Width / 2 - (double) ReconnectGroup.Width / 2);
+				ReconnectGroup.Top = (int) ((double) Control.Height / 2 - (double) ReconnectGroup.Height / 2);
 				ReconnectGroup.Parent = Control;
 				ReconnectGroup.Show();
 				tmrReconnect.Enabled = true;
@@ -872,7 +872,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				    if (_description == null)
                         InitDescription();
 
-				    return ((string)_description?[id]);
+				    return (string)_description?[id];
 				}
 				catch (Exception ex)
 				{
@@ -886,7 +886,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			bool srvReady = PortScanner.IsPortOpen(_connectionInfo.Hostname, Convert.ToString(_connectionInfo.Port));
+			var srvReady = PortScanner.IsPortOpen(_connectionInfo.Hostname, Convert.ToString(_connectionInfo.Port));
 					
 			ReconnectGroup.ServerReady = srvReady;
 					
