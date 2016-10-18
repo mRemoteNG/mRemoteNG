@@ -1,7 +1,5 @@
 
 
-using mRemoteNG.My;
-
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public partial class AdvancedPage : OptionsPage
