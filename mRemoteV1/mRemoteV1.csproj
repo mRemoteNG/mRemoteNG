@@ -294,7 +294,6 @@
     <Compile Include="UI\Forms\OptionsPages\UpdatesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Settings.cs" />
     <Compile Include="Tools\Authenticode.cs" />
     <Compile Include="Tools\EnumWindows.cs" />
     <Compile Include="Tools\PropertyGridCommandSite.cs" />
