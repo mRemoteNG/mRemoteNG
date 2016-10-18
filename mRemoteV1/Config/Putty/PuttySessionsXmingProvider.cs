@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using mRemoteNG.Root.PuttySessions;
+using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.Config.Putty
@@ -168,9 +168,8 @@ namespace mRemoteNG.Config.Putty
         #region Private Methods
 		private static string GetPuttyConfPath()
 		{
-            var puttyPath = "";
-			puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath) : App.Info.GeneralAppInfo.PuttyPath;
-			return Path.Combine(Path.GetDirectoryName(puttyPath), "putty.conf");
+		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath) : App.Info.GeneralAppInfo.PuttyPath;
+		    return Path.Combine(puttyPath, "putty.conf");
 		}
 			
 		private static string GetSessionsFolderPath()
@@ -222,7 +221,7 @@ namespace mRemoteNG.Config.Putty
 			}
 				
 			private string _puttyConfFile;
-			private bool _configurationLoaded = false;
+			private bool _configurationLoaded;
 			private Dictionary<string, string> _configuration = new Dictionary<string, string>();
 				
 			private void LoadConfiguration()
@@ -290,7 +289,7 @@ namespace mRemoteNG.Config.Putty
 			}
 				
 			private string _sessionFile;
-			private bool _sessionInfoLoaded = false;
+			private bool _sessionInfoLoaded;
 			private Dictionary<string, string> _sessionInfo = new Dictionary<string, string>();
 				
 			private void LoadSessionInfo()
@@ -302,7 +301,7 @@ namespace mRemoteNG.Config.Putty
 					{
 						return ;
 					}
-					using (StreamReader streamReader = new StreamReader(_sessionFile))
+					using (var streamReader = new StreamReader(_sessionFile))
 					{
 					    do
 						{

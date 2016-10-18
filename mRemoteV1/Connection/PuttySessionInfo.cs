@@ -4,8 +4,8 @@ using mRemoteNG.Tools;
 using System;
 using System.ComponentModel;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.Connection

@@ -9,7 +9,7 @@ namespace mRemoteNG.Tree
     {
         private readonly ConnectionTreeModel _connectionTreeModel;
 
-        public List<ConnectionInfo> Matches { get; private set; }
+        private List<ConnectionInfo> Matches { get; set; }
         public ConnectionInfo CurrentMatch { get; private set; }
 
 

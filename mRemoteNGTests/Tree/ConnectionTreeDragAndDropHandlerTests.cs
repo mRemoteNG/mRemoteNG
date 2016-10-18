@@ -2,7 +2,6 @@
 using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;

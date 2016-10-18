@@ -12,7 +12,6 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Config.Putty;
-using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;

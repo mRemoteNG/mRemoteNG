@@ -2,7 +2,7 @@ using mRemoteNG.Tools;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using mRemoteNG.Root.PuttySessions;
+using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.Config.Putty

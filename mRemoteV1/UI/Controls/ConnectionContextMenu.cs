@@ -5,14 +5,14 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
-using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
+// ReSharper disable UnusedParameter.Local
 
 
 namespace mRemoteNG.UI.Controls
 {
-    internal class ConnectionContextMenu : ContextMenuStrip
+    internal sealed class ConnectionContextMenu : ContextMenuStrip
     {
         private ToolStripMenuItem _cMenTreeAddConnection;
         private ToolStripMenuItem _cMenTreeAddFolder;
@@ -34,7 +34,6 @@ namespace mRemoteNG.UI.Controls
         private ToolStripSeparator _cMenTreeSep4;
         private ToolStripMenuItem _cMenTreeMoveUp;
         private ToolStripMenuItem _cMenTreeMoveDown;
-        private PictureBox _pictureBox1;
         private ToolStripMenuItem _cMenTreeToolsExternalApps;
         private ToolStripMenuItem _cMenTreeDuplicate;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting;
@@ -125,7 +124,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnect.Name = "_cMenTreeConnect";
             _cMenTreeConnect.Size = new System.Drawing.Size(199, 22);
             _cMenTreeConnect.Text = "Connect";
-            _cMenTreeConnect.Click += (sender, args) => OnConnectClicked(args);
+            _cMenTreeConnect.Click += OnConnectClicked;
             // 
             // cMenTreeConnectWithOptions
             // 
@@ -146,7 +145,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Name = "_cMenTreeConnectWithOptionsConnectToConsoleSession";
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Text = "Connect to console session";
-            _cMenTreeConnectWithOptionsConnectToConsoleSession.Click += (sender, args) => OnConnectToConsoleSessionClicked(args);
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Click += OnConnectToConsoleSessionClicked;
             // 
             // cMenTreeConnectWithOptionsDontConnectToConsoleSession
             // 
@@ -155,7 +154,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = "Don\'t connect to console session";
             _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Visible = false;
-            _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Click += (sender, args) => OnDontConnectToConsoleSessionClicked(args);
+            _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Click += OnDontConnectToConsoleSessionClicked;
             // 
             // cMenTreeConnectWithOptionsConnectInFullscreen
             // 
@@ -163,7 +162,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsConnectInFullscreen.Name = "_cMenTreeConnectWithOptionsConnectInFullscreen";
             _cMenTreeConnectWithOptionsConnectInFullscreen.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsConnectInFullscreen.Text = "Connect in fullscreen";
-            _cMenTreeConnectWithOptionsConnectInFullscreen.Click += (sender, args) => OnConnectInFullscreenClicked(args);
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Click += OnConnectInFullscreenClicked;
             // 
             // cMenTreeConnectWithOptionsNoCredentials
             // 
@@ -171,7 +170,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsNoCredentials.Name = "_cMenTreeConnectWithOptionsNoCredentials";
             _cMenTreeConnectWithOptionsNoCredentials.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsNoCredentials.Text = "Connect without credentials";
-            _cMenTreeConnectWithOptionsNoCredentials.Click += (sender, args) => OnConnectWithNoCredentialsClick(args);
+            _cMenTreeConnectWithOptionsNoCredentials.Click += OnConnectWithNoCredentialsClick;
             // 
             // cMenTreeConnectWithOptionsChoosePanelBeforeConnecting
             // 
@@ -179,7 +178,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Name = "_cMenTreeConnectWithOptionsChoosePanelBeforeConnecting";
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = "Choose panel before connecting";
-            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Click += (sender, args) => OnChoosePanelBeforeConnectingClicked(args);
+            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Click += OnChoosePanelBeforeConnectingClicked;
             // 
             // cMenTreeDisconnect
             // 
@@ -187,7 +186,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDisconnect.Name = "_cMenTreeDisconnect";
             _cMenTreeDisconnect.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDisconnect.Text = "Disconnect";
-            _cMenTreeDisconnect.Click += (sender, args) => OnDisconnectClicked(args);
+            _cMenTreeDisconnect.Click += OnDisconnectClicked;
             // 
             // cMenTreeSep1
             // 
@@ -207,7 +206,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsTransferFile.Name = "_cMenTreeToolsTransferFile";
             _cMenTreeToolsTransferFile.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsTransferFile.Text = "Transfer File (SSH)";
-            _cMenTreeToolsTransferFile.Click += (sender, args) => OnTransferFileClicked(args);
+            _cMenTreeToolsTransferFile.Click += OnTransferFileClicked;
             // 
             // cMenTreeSep2
             // 
@@ -220,7 +219,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDuplicate.Name = "_cMenTreeDuplicate";
             _cMenTreeDuplicate.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDuplicate.Text = "Duplicate";
-            _cMenTreeDuplicate.Click += (sender, args) => OnDuplicateClicked(args);
+            _cMenTreeDuplicate.Click += OnDuplicateClicked;
             // 
             // cMenTreeRename
             // 
@@ -228,7 +227,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeRename.Name = "_cMenTreeRename";
             _cMenTreeRename.Size = new System.Drawing.Size(199, 22);
             _cMenTreeRename.Text = "Rename";
-            _cMenTreeRename.Click += (sender, args) => OnRenameClicked(args);
+            _cMenTreeRename.Click += OnRenameClicked;
             // 
             // cMenTreeDelete
             // 
@@ -236,7 +235,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete.Name = "_cMenTreeDelete";
             _cMenTreeDelete.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDelete.Text = "Delete";
-            _cMenTreeDelete.Click += (sender, args) => OnDeleteClicked(args);
+            _cMenTreeDelete.Click += OnDeleteClicked;
             // 
             // cMenTreeSep3
             // 
@@ -259,28 +258,28 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImportFile.Name = "_cMenTreeImportFile";
             _cMenTreeImportFile.Size = new System.Drawing.Size(226, 22);
             _cMenTreeImportFile.Text = "Import from &File...";
-            _cMenTreeImportFile.Click += (sender, args) => OnImportFileClicked(args);
+            _cMenTreeImportFile.Click += OnImportFileClicked;
             // 
             // cMenTreeImportActiveDirectory
             // 
             _cMenTreeImportActiveDirectory.Name = "_cMenTreeImportActiveDirectory";
             _cMenTreeImportActiveDirectory.Size = new System.Drawing.Size(226, 22);
             _cMenTreeImportActiveDirectory.Text = "Import from &Active Directory...";
-            _cMenTreeImportActiveDirectory.Click += (sender, args) => OnImportActiveDirectoryClicked(args);
+            _cMenTreeImportActiveDirectory.Click += OnImportActiveDirectoryClicked;
             // 
             // cMenTreeImportPortScan
             // 
             _cMenTreeImportPortScan.Name = "_cMenTreeImportPortScan";
             _cMenTreeImportPortScan.Size = new System.Drawing.Size(226, 22);
             _cMenTreeImportPortScan.Text = "Import from &Port Scan...";
-            _cMenTreeImportPortScan.Click += (sender, args) => OnImportPortScanClicked(args);
+            _cMenTreeImportPortScan.Click += OnImportPortScanClicked;
             // 
             // cMenTreeExportFile
             // 
             _cMenTreeExportFile.Name = "_cMenTreeExportFile";
             _cMenTreeExportFile.Size = new System.Drawing.Size(199, 22);
             _cMenTreeExportFile.Text = "&Export to File...";
-            _cMenTreeExportFile.Click += (sender, args) => OnExportFileClicked(args);
+            _cMenTreeExportFile.Click += OnExportFileClicked;
             // 
             // cMenTreeSep4
             // 
@@ -293,7 +292,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeAddConnection.Name = "_cMenTreeAddConnection";
             _cMenTreeAddConnection.Size = new System.Drawing.Size(199, 22);
             _cMenTreeAddConnection.Text = "New Connection";
-            _cMenTreeAddConnection.Click += (sender, args) => OnAddConnectionClicked(args);
+            _cMenTreeAddConnection.Click += OnAddConnectionClicked;
             // 
             // cMenTreeAddFolder
             // 
@@ -301,7 +300,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeAddFolder.Name = "_cMenTreeAddFolder";
             _cMenTreeAddFolder.Size = new System.Drawing.Size(199, 22);
             _cMenTreeAddFolder.Text = "New Folder";
-            _cMenTreeAddFolder.Click += (sender, args) => OnAddFolderClicked(args);
+            _cMenTreeAddFolder.Click += OnAddFolderClicked;
             // 
             // ToolStripSeparator1
             // 
@@ -324,7 +323,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsSortAscending.Name = "_cMenTreeToolsSortAscending";
             _cMenTreeToolsSortAscending.Size = new System.Drawing.Size(161, 22);
             _cMenTreeToolsSortAscending.Text = "Ascending (A-Z)";
-            _cMenTreeToolsSortAscending.Click += (sender, args) => OnSortAscendingClicked(args);
+            _cMenTreeToolsSortAscending.Click += OnSortAscendingClicked;
             // 
             // cMenTreeToolsSortDescending
             // 
@@ -332,7 +331,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsSortDescending.Name = "_cMenTreeToolsSortDescending";
             _cMenTreeToolsSortDescending.Size = new System.Drawing.Size(161, 22);
             _cMenTreeToolsSortDescending.Text = "Descending (Z-A)";
-            _cMenTreeToolsSortDescending.Click += (sender, args) => OnSortDescendingClicked(args);
+            _cMenTreeToolsSortDescending.Click += OnSortDescendingClicked;
             // 
             // cMenTreeMoveUp
             // 
@@ -340,7 +339,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveUp.Name = "_cMenTreeMoveUp";
             _cMenTreeMoveUp.Size = new System.Drawing.Size(199, 22);
             _cMenTreeMoveUp.Text = "Move up";
-            _cMenTreeMoveUp.Click += (sender, args) => OnMoveUpClicked(args);
+            _cMenTreeMoveUp.Click += OnMoveUpClicked;
             // 
             // cMenTreeMoveDown
             // 
@@ -348,7 +347,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Name = "_cMenTreeMoveDown";
             _cMenTreeMoveDown.Size = new System.Drawing.Size(199, 22);
             _cMenTreeMoveDown.Text = "Move down";
-            _cMenTreeMoveDown.Click += (sender, args) => OnMoveDownClicked(args);
+            _cMenTreeMoveDown.Click += OnMoveDownClicked;
         }
 
         private void ApplyLanguage()
@@ -556,42 +555,48 @@ namespace mRemoteNG.UI.Controls
 
         #region Events
         public event EventHandler ConnectClicked;
-        protected virtual void OnConnectClicked(EventArgs e)
+
+        private void OnConnectClicked(object sender, EventArgs e)
         {
             var handler = ConnectClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ConnectToConsoleSessionClicked;
-        protected virtual void OnConnectToConsoleSessionClicked(EventArgs e)
+
+        private void OnConnectToConsoleSessionClicked(object sender, EventArgs e)
         {
             var handler = ConnectToConsoleSessionClicked;
             handler?.Invoke(this, e);
         }
         
         public event EventHandler DontConnectToConsoleSessionClicked;
-        protected virtual void OnDontConnectToConsoleSessionClicked(EventArgs e)
+
+        private void OnDontConnectToConsoleSessionClicked(object sender, EventArgs e)
         {
             var handler = DontConnectToConsoleSessionClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ConnectInFullscreenClicked;
-        protected virtual void OnConnectInFullscreenClicked(EventArgs e)
+
+        private void OnConnectInFullscreenClicked(object sender, EventArgs e)
         {
             var handler = ConnectInFullscreenClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ConnectWithNoCredentialsClick;
-        protected virtual void OnConnectWithNoCredentialsClick(EventArgs e)
+
+        private void OnConnectWithNoCredentialsClick(object sender, EventArgs e)
         {
             var handler = ConnectWithNoCredentialsClick;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ChoosePanelBeforeConnectingClicked;
-        protected virtual void OnChoosePanelBeforeConnectingClicked(EventArgs e)
+
+        private void OnChoosePanelBeforeConnectingClicked(object sender, EventArgs e)
         {
             var handler = ChoosePanelBeforeConnectingClicked;
             handler?.Invoke(this, e);
@@ -599,112 +604,128 @@ namespace mRemoteNG.UI.Controls
 
 
         public event EventHandler DisconnectClicked;
-        protected virtual void OnDisconnectClicked(EventArgs e)
+
+        private void OnDisconnectClicked(object sender, EventArgs e)
         {
             var handler = DisconnectClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler TransferFileClicked;
-        protected virtual void OnTransferFileClicked(EventArgs e)
+
+        private void OnTransferFileClicked(object sender, EventArgs e)
         {
             var handler = TransferFileClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler DuplicateClicked;
-        protected virtual void OnDuplicateClicked(EventArgs e)
+
+        private void OnDuplicateClicked(object sender, EventArgs e)
         {
             var handler = DuplicateClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler RenameClicked;
-        protected virtual void OnRenameClicked(EventArgs e)
+
+        private void OnRenameClicked(object sender, EventArgs e)
         {
             var handler = RenameClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler DeleteClicked;
-        protected virtual void OnDeleteClicked(EventArgs e)
+
+        private void OnDeleteClicked(object sender, EventArgs e)
         {
             var handler = DeleteClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ImportFileClicked;
-        protected virtual void OnImportFileClicked(EventArgs e)
+
+        private void OnImportFileClicked(object sender, EventArgs e)
         {
             var handler = ImportFileClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ImportActiveDirectoryClicked;
-        protected virtual void OnImportActiveDirectoryClicked(EventArgs e)
+
+        private void OnImportActiveDirectoryClicked(object sender, EventArgs e)
         {
             var handler = ImportActiveDirectoryClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ImportPortScanClicked;
-        protected virtual void OnImportPortScanClicked(EventArgs e)
+
+        private void OnImportPortScanClicked(object sender, EventArgs e)
         {
             var handler = ImportPortScanClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ExportFileClicked;
-        protected virtual void OnExportFileClicked(EventArgs e)
+
+        private void OnExportFileClicked(object sender, EventArgs e)
         {
             var handler = ExportFileClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler AddConnectionClicked;
-        protected virtual void OnAddConnectionClicked(EventArgs e)
+
+        private void OnAddConnectionClicked(object sender, EventArgs e)
         {
             var handler = AddConnectionClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler AddFolderClicked;
-        protected virtual void OnAddFolderClicked(EventArgs e)
+
+        private void OnAddFolderClicked(object sender, EventArgs e)
         {
             var handler = AddFolderClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler SortAscendingClicked;
-        protected virtual void OnSortAscendingClicked(EventArgs e)
+
+        private void OnSortAscendingClicked(object sender, EventArgs e)
         {
             var handler = SortAscendingClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler SortDescendingClicked;
-        protected virtual void OnSortDescendingClicked(EventArgs e)
+
+        private void OnSortDescendingClicked(object sender, EventArgs e)
         {
             var handler = SortDescendingClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler MoveUpClicked;
-        protected virtual void OnMoveUpClicked(EventArgs e)
+
+        private void OnMoveUpClicked(object sender, EventArgs e)
         {
             var handler = MoveUpClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler MoveDownClicked;
-        protected virtual void OnMoveDownClicked(EventArgs e)
+
+        private void OnMoveDownClicked(object sender, EventArgs e)
         {
             var handler = MoveDownClicked;
             handler?.Invoke(this, e);
         }
 
         public event EventHandler ExternalToolClicked;
-        protected virtual void OnExternalToolClicked(object sender, EventArgs e)
+
+        private void OnExternalToolClicked(object sender, EventArgs e)
         {
             var handler = ExternalToolClicked;
             handler?.Invoke(sender, e);
