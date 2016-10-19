@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Config.Serializers;
+﻿using System.Xml;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
@@ -28,6 +29,15 @@ namespace mRemoteNGTests.Config.Serializers
             _connectionTreeModel = SetupConnectionTreeModel();
         }
 
+        [Test]
+        public void ChildNestingSerializedCorrectly()
+        {
+            var serializedConnections = _serializer.Serialize(_connectionTreeModel);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(serializedConnections);
+            var nodeCon4 = xmlDoc.DocumentElement?.SelectSingleNode("Node[@Name='folder2']/Node[@Name='folder3']/Node[@Name='con4']");
+            Assert.That(nodeCon4, Is.Not.Null);
+        }
 
         private ConnectionTreeModel SetupConnectionTreeModel()
         {
@@ -53,19 +63,20 @@ namespace mRemoteNGTests.Config.Serializers
             _folder2.AddChild(_folder3);
             _folder3.AddChild(_con3);
             _folder3.AddChild(_con4);
+            connectionTreeModel.AddRootNode(rootNode);
             return connectionTreeModel;
         }
 
         private void BuildTreeNodes()
         {
-            _folder1 = new ContainerInfo();
-            _folder2 = new ContainerInfo();
-            _folder3 = new ContainerInfo();
-            _con0 = new ConnectionInfo();
-            _con1 = new ConnectionInfo();
-            _con2 = new ConnectionInfo();
-            _con3 = new ConnectionInfo();
-            _con4 = new ConnectionInfo();
+            _folder1 = new ContainerInfo { Name = "folder1" };
+            _folder2 = new ContainerInfo { Name = "folder2" };
+            _folder3 = new ContainerInfo { Name = "folder3" };
+            _con0 = new ConnectionInfo { Name = "con0" };
+            _con1 = new ConnectionInfo { Name = "con1" };
+            _con2 = new ConnectionInfo { Name = "con2" };
+            _con3 = new ConnectionInfo { Name = "con3" };
+            _con4 = new ConnectionInfo { Name = "con4" };
         }
     }
 }
