@@ -6,7 +6,9 @@ namespace mRemoteNG.Security
     {
         int BlockSizeInBytes { get; }
 
-        string CipherEngine { get; }
+        BlockCipherEngines CipherEngine { get; }
+
+        BlockCipherModes CipherMode { get; }
 
         string Encrypt(string plainText, SecureString encryptionKey);
 

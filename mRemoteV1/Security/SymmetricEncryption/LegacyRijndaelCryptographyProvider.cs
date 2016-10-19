@@ -13,11 +13,12 @@ namespace mRemoteNG.Security.SymmetricEncryption
 	{
         public int BlockSizeInBytes { get; }
 
-        public string CipherEngine { get; }
+        public BlockCipherEngines CipherEngine { get; }
+
+        public BlockCipherModes CipherMode { get; }
 
 	    public LegacyRijndaelCryptographyProvider()
 	    {
-	        CipherEngine = "Rijndael";
 	        BlockSizeInBytes = 16;
 	    }
 
