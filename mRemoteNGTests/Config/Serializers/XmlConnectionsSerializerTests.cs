@@ -1,7 +1,11 @@
-﻿using System.Xml;
+﻿using System;
+using System.Collections;
+using System.Xml;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
@@ -25,7 +29,8 @@ namespace mRemoteNGTests.Config.Serializers
         [SetUp]
         public void Setup()
         {
-            _serializer = new XmlConnectionsSerializer();
+            var encryptor = new AeadCryptographyProvider();
+            _serializer = new XmlConnectionsSerializer(encryptor);
             _connectionTreeModel = SetupConnectionTreeModel();
         }
 
@@ -37,6 +42,32 @@ namespace mRemoteNGTests.Config.Serializers
             xmlDoc.LoadXml(serializedConnections);
             var nodeCon4 = xmlDoc.DocumentElement?.SelectSingleNode("Node[@Name='folder2']/Node[@Name='folder3']/Node[@Name='con4']");
             Assert.That(nodeCon4, Is.Not.Null);
+        }
+
+        [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
+        public void EncryptionEngineSerialized(BlockCipherEngines engine, BlockCipherModes mode)
+        {
+            var encryptor = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+            _serializer = new XmlConnectionsSerializer(encryptor);
+            var serializedData = _serializer.Serialize(new ConnectionInfo());
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(serializedData);
+            var serializedEncryptionEngine = xmlDoc.DocumentElement?.Attributes["EncryptionEngine"].Value;
+            var expectedEngineAsString = Enum.GetName(typeof(BlockCipherEngines), engine);
+            Assert.That(serializedEncryptionEngine, Is.EqualTo(expectedEngineAsString));
+        }
+
+        [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
+        public void EncryptionModeSerialized(BlockCipherEngines engine, BlockCipherModes mode)
+        {
+            var encryptor = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+            _serializer = new XmlConnectionsSerializer(encryptor);
+            var serializedData = _serializer.Serialize(new ConnectionInfo());
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(serializedData);
+            var serializedEncryptionMode = xmlDoc.DocumentElement?.Attributes["BlockCipherMode"].Value;
+            var expectedModeAsString = Enum.GetName(typeof(BlockCipherModes), mode);
+            Assert.That(serializedEncryptionMode, Is.EqualTo(expectedModeAsString));
         }
 
         private ConnectionTreeModel SetupConnectionTreeModel()
@@ -77,6 +108,24 @@ namespace mRemoteNGTests.Config.Serializers
             _con2 = new ConnectionInfo { Name = "con2" };
             _con3 = new ConnectionInfo { Name = "con3" };
             _con4 = new ConnectionInfo { Name = "con4" };
+        }
+
+
+        private class TestCaseSources
+        {
+            public static IEnumerable AllEngineAndModeCombos
+            {
+                get
+                {
+                    foreach (var engine in Enum.GetValues(typeof(BlockCipherEngines)))
+                    {
+                        foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
+                        {
+                            yield return new TestCaseData(engine, mode);
+                        }
+                    }
+                }
+            }
         }
     }
 }

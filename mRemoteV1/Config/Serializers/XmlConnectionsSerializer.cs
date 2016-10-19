@@ -20,23 +20,25 @@ namespace mRemoteNG.Config.Serializers
     {
         private SecureString _password = Runtime.EncryptionKey;
         private XmlTextWriter _xmlTextWriter;
-        private ICryptographyProvider _cryptographyProvider;
+        private readonly ICryptographyProvider _cryptographyProvider;
 
         public bool Export { get; set; }
         public SaveFilter SaveFilter { get; set; } = new SaveFilter();
         public bool UseFullEncryption { get; set; }
 
+        public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider)
+        {
+            _cryptographyProvider = cryptographyProvider;
+        }
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
             var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
-            return Serialize(rootNode);
+            return SerializeConnectionsData(rootNode);
         }
 
         public string Serialize(ConnectionInfo serializationTarget)
         {
-            var factory = new CryptographyProviderFactory();
-            _cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
             return SerializeConnectionsData(serializationTarget);
         }
 
@@ -76,7 +78,7 @@ namespace mRemoteNG.Config.Serializers
             {
                 var connectionInfoAsRootNode = connectionInfo as RootNodeInfo;
                 if (connectionInfoAsRootNode != null) return connectionInfoAsRootNode;
-                connectionInfo = connectionInfo.Parent;
+                connectionInfo = connectionInfo?.Parent ?? new RootNodeInfo(RootNodeType.Connection);
             }
         }
 
@@ -148,9 +150,9 @@ namespace mRemoteNG.Config.Serializers
             _xmlTextWriter.WriteStartElement("Connections"); // Do not localize
             _xmlTextWriter.WriteAttributeString("Name", "", rootNodeInfo.Name);
             _xmlTextWriter.WriteAttributeString("Export", "", Convert.ToString(Export));
-            var cipherEngine = Enum.GetName(typeof(BlockCipherEngines), mRemoteNG.Settings.Default.EncryptionEngine);
+            var cipherEngine = Enum.GetName(typeof(BlockCipherEngines), _cryptographyProvider.CipherEngine);
             _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", cipherEngine ?? "");
-            var cipherMode = Enum.GetName(typeof(BlockCipherModes), mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
+            var cipherMode = Enum.GetName(typeof(BlockCipherModes), _cryptographyProvider.CipherMode);
             _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", cipherMode ?? "");
             _xmlTextWriter.WriteAttributeString("KdfIterations", "", mRemoteNG.Settings.Default.EncryptionKeyDerivationIterations.ToString());
             _xmlTextWriter.WriteAttributeString("FullFileEncryption", "", UseFullEncryption.ToString());
