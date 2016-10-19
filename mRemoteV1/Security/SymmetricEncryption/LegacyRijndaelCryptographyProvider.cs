@@ -16,6 +16,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         public BlockCipherEngines CipherEngine { get; }
 
         public BlockCipherModes CipherMode { get; }
+	    public int KeyDerivationIterations { get; set; }
 
 	    public LegacyRijndaelCryptographyProvider()
 	    {
