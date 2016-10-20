@@ -1,5 +1,6 @@
 /_site
 .jekyll-metadata
+.saas-cache/
 runlocal.bat
 .vs
 InstallerProjects
