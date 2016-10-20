@@ -34,6 +34,15 @@ Feature requests are great! Take some time to compose a well thoughtout proposal
 - How does the application perform now and how would the new feature change this?
 - If applicable, consider including visual mock-ups to show us what you mean.
 
+# Pull requests
+Good pull requests are a huge help! If you haven't already, please consider reading [GitHub's guide to contributing to open source](https://guides.github.com/activities/contributing-to-open-source/)
+
+Our requests when it comes to pull requests:
+- Be clear about what your PR seeks to do.
+- Keep your PR focused. It should be clear what code changed to achieve your stated goal.
+- Add or update tests when possible. Some of the code base is still very hard to effectively test. If you can, please try to create or update tests that relate to your PR.
+- Please talk with one of the project maintainers before starting work on large pull requests. Otherwise, you run the risk of putting a lot of time into a feature or refactor that gets denied.
+
 
 
 ***========= Everything below this line is template =============***
