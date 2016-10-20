@@ -85,6 +85,16 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(serializedIterations, Is.EqualTo(kdfIterations.ToString()));
         }
 
+        [Test]
+        public void CurrentConfVersionSerialized()
+        {
+            var serializedConnections = _serializer.Serialize(_connectionTreeModel);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(serializedConnections);
+            var serializedConfVersion = xmlDoc.DocumentElement?.Attributes["ConfVersion"].Value;
+            Assert.That(serializedConfVersion, Is.EqualTo("2.6"));
+        }
+
         private ConnectionTreeModel SetupConnectionTreeModel()
         {
             /*
