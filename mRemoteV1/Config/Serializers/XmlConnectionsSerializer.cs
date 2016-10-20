@@ -154,7 +154,7 @@ namespace mRemoteNG.Config.Serializers
             _xmlTextWriter.WriteAttributeString("EncryptionEngine", "", cipherEngine ?? "");
             var cipherMode = Enum.GetName(typeof(BlockCipherModes), _cryptographyProvider.CipherMode);
             _xmlTextWriter.WriteAttributeString("BlockCipherMode", "", cipherMode ?? "");
-            _xmlTextWriter.WriteAttributeString("KdfIterations", "", mRemoteNG.Settings.Default.EncryptionKeyDerivationIterations.ToString());
+            _xmlTextWriter.WriteAttributeString("KdfIterations", "", _cryptographyProvider.KeyDerivationIterations.ToString());
             _xmlTextWriter.WriteAttributeString("FullFileEncryption", "", UseFullEncryption.ToString());
 
             if (Export)

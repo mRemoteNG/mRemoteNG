@@ -70,6 +70,21 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(serializedEncryptionMode, Is.EqualTo(expectedModeAsString));
         }
 
+        [TestCase(1000)]
+        [TestCase(1001)]
+        [TestCase(9999)]
+        [TestCase(10000)]
+        public void KeyDerivationIterationsSerialized(int kdfIterations)
+        {
+            var encryptor = new AeadCryptographyProvider {KeyDerivationIterations = kdfIterations};
+            _serializer = new XmlConnectionsSerializer(encryptor);
+            var serializedData = _serializer.Serialize(new ConnectionInfo());
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(serializedData);
+            var serializedIterations = xmlDoc.DocumentElement?.Attributes["KdfIterations"].Value;
+            Assert.That(serializedIterations, Is.EqualTo(kdfIterations.ToString()));
+        }
+
         private ConnectionTreeModel SetupConnectionTreeModel()
         {
             /*
