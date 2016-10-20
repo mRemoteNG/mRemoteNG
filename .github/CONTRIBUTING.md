@@ -15,6 +15,27 @@ For example, you might:
 - submit a pull request for a bug or feature ticket
 
 
+# Submitting GitHub Issues
+The GitHub Issue tracker is our preferred channel for bug reports and feature requests.
+- For questions or general discussion, please use [Gitter Chat](https://gitter.im/mRemoteNG/PublicChat) or the [forum](http://forum.mremoteng.org).
+
+### Bug reports
+A bug is any behavior that does not consistently produce the expected result.
+
+Guidelines for bug reports:
+1. Do not open bug reports for questions.
+1. Use the GitHub Issue search to make sure your bug hasn't already been reported.
+1. Include as much detailed information as possible. We've included a default template when opening an issue to make this easier.
+
+### Feature requests
+Feature requests are great! Take some time to compose a well thoughtout proposal. It's up to you to convince the project maintainers that your feature is a good idea. To ensure your request receives the consideration that it deserves, include as much detail as possible. For example:
+- What is the purpose of the new feature?
+- What situation led you to want this feature?
+- How does the application perform now and how would the new feature change this?
+- If applicable, consider including visual mock-ups to show us what you mean.
+
+
+
 ***========= Everything below this line is template =============***
 
 
