@@ -1,717 +1,567 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with qrencode 3.4.4 (http://fukuchi.org/works/qrencode/index.html.en) -->
-<svg width="8.26cm" height="8.26cm" viewBox="0 0 39 39" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-	<g id="QRcode">
-		<rect x="0" y="0" width="39" height="39" fill="#ffffff" />
-		<g id="Pattern">
-			<rect x="1" y="1" width="1" height="1" fill="#000000" />
-			<rect x="2" y="1" width="1" height="1" fill="#000000" />
-			<rect x="3" y="1" width="1" height="1" fill="#000000" />
-			<rect x="4" y="1" width="1" height="1" fill="#000000" />
-			<rect x="5" y="1" width="1" height="1" fill="#000000" />
-			<rect x="6" y="1" width="1" height="1" fill="#000000" />
-			<rect x="7" y="1" width="1" height="1" fill="#000000" />
-			<rect x="12" y="1" width="1" height="1" fill="#000000" />
-			<rect x="14" y="1" width="1" height="1" fill="#000000" />
-			<rect x="18" y="1" width="1" height="1" fill="#000000" />
-			<rect x="21" y="1" width="1" height="1" fill="#000000" />
-			<rect x="23" y="1" width="1" height="1" fill="#000000" />
-			<rect x="26" y="1" width="1" height="1" fill="#000000" />
-			<rect x="29" y="1" width="1" height="1" fill="#000000" />
-			<rect x="31" y="1" width="1" height="1" fill="#000000" />
-			<rect x="32" y="1" width="1" height="1" fill="#000000" />
-			<rect x="33" y="1" width="1" height="1" fill="#000000" />
-			<rect x="34" y="1" width="1" height="1" fill="#000000" />
-			<rect x="35" y="1" width="1" height="1" fill="#000000" />
-			<rect x="36" y="1" width="1" height="1" fill="#000000" />
-			<rect x="37" y="1" width="1" height="1" fill="#000000" />
-			<rect x="1" y="2" width="1" height="1" fill="#000000" />
-			<rect x="7" y="2" width="1" height="1" fill="#000000" />
-			<rect x="10" y="2" width="1" height="1" fill="#000000" />
-			<rect x="11" y="2" width="1" height="1" fill="#000000" />
-			<rect x="13" y="2" width="1" height="1" fill="#000000" />
-			<rect x="16" y="2" width="1" height="1" fill="#000000" />
-			<rect x="17" y="2" width="1" height="1" fill="#000000" />
-			<rect x="18" y="2" width="1" height="1" fill="#000000" />
-			<rect x="19" y="2" width="1" height="1" fill="#000000" />
-			<rect x="20" y="2" width="1" height="1" fill="#000000" />
-			<rect x="21" y="2" width="1" height="1" fill="#000000" />
-			<rect x="22" y="2" width="1" height="1" fill="#000000" />
-			<rect x="23" y="2" width="1" height="1" fill="#000000" />
-			<rect x="24" y="2" width="1" height="1" fill="#000000" />
-			<rect x="25" y="2" width="1" height="1" fill="#000000" />
-			<rect x="29" y="2" width="1" height="1" fill="#000000" />
-			<rect x="31" y="2" width="1" height="1" fill="#000000" />
-			<rect x="37" y="2" width="1" height="1" fill="#000000" />
-			<rect x="1" y="3" width="1" height="1" fill="#000000" />
-			<rect x="3" y="3" width="1" height="1" fill="#000000" />
-			<rect x="4" y="3" width="1" height="1" fill="#000000" />
-			<rect x="5" y="3" width="1" height="1" fill="#000000" />
-			<rect x="7" y="3" width="1" height="1" fill="#000000" />
-			<rect x="9" y="3" width="1" height="1" fill="#000000" />
-			<rect x="10" y="3" width="1" height="1" fill="#000000" />
-			<rect x="11" y="3" width="1" height="1" fill="#000000" />
-			<rect x="13" y="3" width="1" height="1" fill="#000000" />
-			<rect x="15" y="3" width="1" height="1" fill="#000000" />
-			<rect x="16" y="3" width="1" height="1" fill="#000000" />
-			<rect x="20" y="3" width="1" height="1" fill="#000000" />
-			<rect x="21" y="3" width="1" height="1" fill="#000000" />
-			<rect x="24" y="3" width="1" height="1" fill="#000000" />
-			<rect x="25" y="3" width="1" height="1" fill="#000000" />
-			<rect x="26" y="3" width="1" height="1" fill="#000000" />
-			<rect x="27" y="3" width="1" height="1" fill="#000000" />
-			<rect x="29" y="3" width="1" height="1" fill="#000000" />
-			<rect x="31" y="3" width="1" height="1" fill="#000000" />
-			<rect x="33" y="3" width="1" height="1" fill="#000000" />
-			<rect x="34" y="3" width="1" height="1" fill="#000000" />
-			<rect x="35" y="3" width="1" height="1" fill="#000000" />
-			<rect x="37" y="3" width="1" height="1" fill="#000000" />
-			<rect x="1" y="4" width="1" height="1" fill="#000000" />
-			<rect x="3" y="4" width="1" height="1" fill="#000000" />
-			<rect x="4" y="4" width="1" height="1" fill="#000000" />
-			<rect x="5" y="4" width="1" height="1" fill="#000000" />
-			<rect x="7" y="4" width="1" height="1" fill="#000000" />
-			<rect x="9" y="4" width="1" height="1" fill="#000000" />
-			<rect x="11" y="4" width="1" height="1" fill="#000000" />
-			<rect x="12" y="4" width="1" height="1" fill="#000000" />
-			<rect x="13" y="4" width="1" height="1" fill="#000000" />
-			<rect x="15" y="4" width="1" height="1" fill="#000000" />
-			<rect x="17" y="4" width="1" height="1" fill="#000000" />
-			<rect x="19" y="4" width="1" height="1" fill="#000000" />
-			<rect x="21" y="4" width="1" height="1" fill="#000000" />
-			<rect x="25" y="4" width="1" height="1" fill="#000000" />
-			<rect x="26" y="4" width="1" height="1" fill="#000000" />
-			<rect x="27" y="4" width="1" height="1" fill="#000000" />
-			<rect x="28" y="4" width="1" height="1" fill="#000000" />
-			<rect x="31" y="4" width="1" height="1" fill="#000000" />
-			<rect x="33" y="4" width="1" height="1" fill="#000000" />
-			<rect x="34" y="4" width="1" height="1" fill="#000000" />
-			<rect x="35" y="4" width="1" height="1" fill="#000000" />
-			<rect x="37" y="4" width="1" height="1" fill="#000000" />
-			<rect x="1" y="5" width="1" height="1" fill="#000000" />
-			<rect x="3" y="5" width="1" height="1" fill="#000000" />
-			<rect x="4" y="5" width="1" height="1" fill="#000000" />
-			<rect x="5" y="5" width="1" height="1" fill="#000000" />
-			<rect x="7" y="5" width="1" height="1" fill="#000000" />
-			<rect x="10" y="5" width="1" height="1" fill="#000000" />
-			<rect x="13" y="5" width="1" height="1" fill="#000000" />
-			<rect x="17" y="5" width="1" height="1" fill="#000000" />
-			<rect x="18" y="5" width="1" height="1" fill="#000000" />
-			<rect x="19" y="5" width="1" height="1" fill="#000000" />
-			<rect x="21" y="5" width="1" height="1" fill="#000000" />
-			<rect x="22" y="5" width="1" height="1" fill="#000000" />
-			<rect x="24" y="5" width="1" height="1" fill="#000000" />
-			<rect x="31" y="5" width="1" height="1" fill="#000000" />
-			<rect x="33" y="5" width="1" height="1" fill="#000000" />
-			<rect x="34" y="5" width="1" height="1" fill="#000000" />
-			<rect x="35" y="5" width="1" height="1" fill="#000000" />
-			<rect x="37" y="5" width="1" height="1" fill="#000000" />
-			<rect x="1" y="6" width="1" height="1" fill="#000000" />
-			<rect x="7" y="6" width="1" height="1" fill="#000000" />
-			<rect x="11" y="6" width="1" height="1" fill="#000000" />
-			<rect x="14" y="6" width="1" height="1" fill="#000000" />
-			<rect x="15" y="6" width="1" height="1" fill="#000000" />
-			<rect x="16" y="6" width="1" height="1" fill="#000000" />
-			<rect x="17" y="6" width="1" height="1" fill="#000000" />
-			<rect x="18" y="6" width="1" height="1" fill="#000000" />
-			<rect x="19" y="6" width="1" height="1" fill="#000000" />
-			<rect x="20" y="6" width="1" height="1" fill="#000000" />
-			<rect x="23" y="6" width="1" height="1" fill="#000000" />
-			<rect x="24" y="6" width="1" height="1" fill="#000000" />
-			<rect x="25" y="6" width="1" height="1" fill="#000000" />
-			<rect x="26" y="6" width="1" height="1" fill="#000000" />
-			<rect x="29" y="6" width="1" height="1" fill="#000000" />
-			<rect x="31" y="6" width="1" height="1" fill="#000000" />
-			<rect x="37" y="6" width="1" height="1" fill="#000000" />
-			<rect x="1" y="7" width="1" height="1" fill="#000000" />
-			<rect x="2" y="7" width="1" height="1" fill="#000000" />
-			<rect x="3" y="7" width="1" height="1" fill="#000000" />
-			<rect x="4" y="7" width="1" height="1" fill="#000000" />
-			<rect x="5" y="7" width="1" height="1" fill="#000000" />
-			<rect x="6" y="7" width="1" height="1" fill="#000000" />
-			<rect x="7" y="7" width="1" height="1" fill="#000000" />
-			<rect x="9" y="7" width="1" height="1" fill="#000000" />
-			<rect x="11" y="7" width="1" height="1" fill="#000000" />
-			<rect x="13" y="7" width="1" height="1" fill="#000000" />
-			<rect x="15" y="7" width="1" height="1" fill="#000000" />
-			<rect x="17" y="7" width="1" height="1" fill="#000000" />
-			<rect x="19" y="7" width="1" height="1" fill="#000000" />
-			<rect x="21" y="7" width="1" height="1" fill="#000000" />
-			<rect x="23" y="7" width="1" height="1" fill="#000000" />
-			<rect x="25" y="7" width="1" height="1" fill="#000000" />
-			<rect x="27" y="7" width="1" height="1" fill="#000000" />
-			<rect x="29" y="7" width="1" height="1" fill="#000000" />
-			<rect x="31" y="7" width="1" height="1" fill="#000000" />
-			<rect x="32" y="7" width="1" height="1" fill="#000000" />
-			<rect x="33" y="7" width="1" height="1" fill="#000000" />
-			<rect x="34" y="7" width="1" height="1" fill="#000000" />
-			<rect x="35" y="7" width="1" height="1" fill="#000000" />
-			<rect x="36" y="7" width="1" height="1" fill="#000000" />
-			<rect x="37" y="7" width="1" height="1" fill="#000000" />
-			<rect x="13" y="8" width="1" height="1" fill="#000000" />
-			<rect x="16" y="8" width="1" height="1" fill="#000000" />
-			<rect x="18" y="8" width="1" height="1" fill="#000000" />
-			<rect x="19" y="8" width="1" height="1" fill="#000000" />
-			<rect x="21" y="8" width="1" height="1" fill="#000000" />
-			<rect x="22" y="8" width="1" height="1" fill="#000000" />
-			<rect x="23" y="8" width="1" height="1" fill="#000000" />
-			<rect x="24" y="8" width="1" height="1" fill="#000000" />
-			<rect x="26" y="8" width="1" height="1" fill="#000000" />
-			<rect x="28" y="8" width="1" height="1" fill="#000000" />
-			<rect x="29" y="8" width="1" height="1" fill="#000000" />
-			<rect x="4" y="9" width="1" height="1" fill="#000000" />
-			<rect x="5" y="9" width="1" height="1" fill="#000000" />
-			<rect x="7" y="9" width="1" height="1" fill="#000000" />
-			<rect x="8" y="9" width="1" height="1" fill="#000000" />
-			<rect x="11" y="9" width="1" height="1" fill="#000000" />
-			<rect x="12" y="9" width="1" height="1" fill="#000000" />
-			<rect x="15" y="9" width="1" height="1" fill="#000000" />
-			<rect x="22" y="9" width="1" height="1" fill="#000000" />
-			<rect x="23" y="9" width="1" height="1" fill="#000000" />
-			<rect x="24" y="9" width="1" height="1" fill="#000000" />
-			<rect x="27" y="9" width="1" height="1" fill="#000000" />
-			<rect x="34" y="9" width="1" height="1" fill="#000000" />
-			<rect x="35" y="9" width="1" height="1" fill="#000000" />
-			<rect x="4" y="10" width="1" height="1" fill="#000000" />
-			<rect x="5" y="10" width="1" height="1" fill="#000000" />
-			<rect x="6" y="10" width="1" height="1" fill="#000000" />
-			<rect x="10" y="10" width="1" height="1" fill="#000000" />
-			<rect x="11" y="10" width="1" height="1" fill="#000000" />
-			<rect x="12" y="10" width="1" height="1" fill="#000000" />
-			<rect x="14" y="10" width="1" height="1" fill="#000000" />
-			<rect x="17" y="10" width="1" height="1" fill="#000000" />
-			<rect x="18" y="10" width="1" height="1" fill="#000000" />
-			<rect x="24" y="10" width="1" height="1" fill="#000000" />
-			<rect x="26" y="10" width="1" height="1" fill="#000000" />
-			<rect x="27" y="10" width="1" height="1" fill="#000000" />
-			<rect x="32" y="10" width="1" height="1" fill="#000000" />
-			<rect x="33" y="10" width="1" height="1" fill="#000000" />
-			<rect x="34" y="10" width="1" height="1" fill="#000000" />
-			<rect x="35" y="10" width="1" height="1" fill="#000000" />
-			<rect x="36" y="10" width="1" height="1" fill="#000000" />
-			<rect x="1" y="11" width="1" height="1" fill="#000000" />
-			<rect x="2" y="11" width="1" height="1" fill="#000000" />
-			<rect x="3" y="11" width="1" height="1" fill="#000000" />
-			<rect x="4" y="11" width="1" height="1" fill="#000000" />
-			<rect x="6" y="11" width="1" height="1" fill="#000000" />
-			<rect x="7" y="11" width="1" height="1" fill="#000000" />
-			<rect x="9" y="11" width="1" height="1" fill="#000000" />
-			<rect x="11" y="11" width="1" height="1" fill="#000000" />
-			<rect x="12" y="11" width="1" height="1" fill="#000000" />
-			<rect x="13" y="11" width="1" height="1" fill="#000000" />
-			<rect x="14" y="11" width="1" height="1" fill="#000000" />
-			<rect x="16" y="11" width="1" height="1" fill="#000000" />
-			<rect x="17" y="11" width="1" height="1" fill="#000000" />
-			<rect x="19" y="11" width="1" height="1" fill="#000000" />
-			<rect x="20" y="11" width="1" height="1" fill="#000000" />
-			<rect x="24" y="11" width="1" height="1" fill="#000000" />
-			<rect x="26" y="11" width="1" height="1" fill="#000000" />
-			<rect x="27" y="11" width="1" height="1" fill="#000000" />
-			<rect x="28" y="11" width="1" height="1" fill="#000000" />
-			<rect x="30" y="11" width="1" height="1" fill="#000000" />
-			<rect x="31" y="11" width="1" height="1" fill="#000000" />
-			<rect x="32" y="11" width="1" height="1" fill="#000000" />
-			<rect x="33" y="11" width="1" height="1" fill="#000000" />
-			<rect x="34" y="11" width="1" height="1" fill="#000000" />
-			<rect x="35" y="11" width="1" height="1" fill="#000000" />
-			<rect x="37" y="11" width="1" height="1" fill="#000000" />
-			<rect x="1" y="12" width="1" height="1" fill="#000000" />
-			<rect x="2" y="12" width="1" height="1" fill="#000000" />
-			<rect x="3" y="12" width="1" height="1" fill="#000000" />
-			<rect x="4" y="12" width="1" height="1" fill="#000000" />
-			<rect x="11" y="12" width="1" height="1" fill="#000000" />
-			<rect x="12" y="12" width="1" height="1" fill="#000000" />
-			<rect x="13" y="12" width="1" height="1" fill="#000000" />
-			<rect x="15" y="12" width="1" height="1" fill="#000000" />
-			<rect x="18" y="12" width="1" height="1" fill="#000000" />
-			<rect x="19" y="12" width="1" height="1" fill="#000000" />
-			<rect x="20" y="12" width="1" height="1" fill="#000000" />
-			<rect x="21" y="12" width="1" height="1" fill="#000000" />
-			<rect x="22" y="12" width="1" height="1" fill="#000000" />
-			<rect x="23" y="12" width="1" height="1" fill="#000000" />
-			<rect x="24" y="12" width="1" height="1" fill="#000000" />
-			<rect x="28" y="12" width="1" height="1" fill="#000000" />
-			<rect x="29" y="12" width="1" height="1" fill="#000000" />
-			<rect x="32" y="12" width="1" height="1" fill="#000000" />
-			<rect x="34" y="12" width="1" height="1" fill="#000000" />
-			<rect x="35" y="12" width="1" height="1" fill="#000000" />
-			<rect x="36" y="12" width="1" height="1" fill="#000000" />
-			<rect x="1" y="13" width="1" height="1" fill="#000000" />
-			<rect x="2" y="13" width="1" height="1" fill="#000000" />
-			<rect x="3" y="13" width="1" height="1" fill="#000000" />
-			<rect x="6" y="13" width="1" height="1" fill="#000000" />
-			<rect x="7" y="13" width="1" height="1" fill="#000000" />
-			<rect x="9" y="13" width="1" height="1" fill="#000000" />
-			<rect x="10" y="13" width="1" height="1" fill="#000000" />
-			<rect x="11" y="13" width="1" height="1" fill="#000000" />
-			<rect x="12" y="13" width="1" height="1" fill="#000000" />
-			<rect x="13" y="13" width="1" height="1" fill="#000000" />
-			<rect x="16" y="13" width="1" height="1" fill="#000000" />
-			<rect x="17" y="13" width="1" height="1" fill="#000000" />
-			<rect x="18" y="13" width="1" height="1" fill="#000000" />
-			<rect x="22" y="13" width="1" height="1" fill="#000000" />
-			<rect x="23" y="13" width="1" height="1" fill="#000000" />
-			<rect x="24" y="13" width="1" height="1" fill="#000000" />
-			<rect x="25" y="13" width="1" height="1" fill="#000000" />
-			<rect x="27" y="13" width="1" height="1" fill="#000000" />
-			<rect x="28" y="13" width="1" height="1" fill="#000000" />
-			<rect x="29" y="13" width="1" height="1" fill="#000000" />
-			<rect x="31" y="13" width="1" height="1" fill="#000000" />
-			<rect x="34" y="13" width="1" height="1" fill="#000000" />
-			<rect x="37" y="13" width="1" height="1" fill="#000000" />
-			<rect x="3" y="14" width="1" height="1" fill="#000000" />
-			<rect x="6" y="14" width="1" height="1" fill="#000000" />
-			<rect x="10" y="14" width="1" height="1" fill="#000000" />
-			<rect x="11" y="14" width="1" height="1" fill="#000000" />
-			<rect x="12" y="14" width="1" height="1" fill="#000000" />
-			<rect x="15" y="14" width="1" height="1" fill="#000000" />
-			<rect x="16" y="14" width="1" height="1" fill="#000000" />
-			<rect x="19" y="14" width="1" height="1" fill="#000000" />
-			<rect x="23" y="14" width="1" height="1" fill="#000000" />
-			<rect x="25" y="14" width="1" height="1" fill="#000000" />
-			<rect x="26" y="14" width="1" height="1" fill="#000000" />
-			<rect x="28" y="14" width="1" height="1" fill="#000000" />
-			<rect x="29" y="14" width="1" height="1" fill="#000000" />
-			<rect x="32" y="14" width="1" height="1" fill="#000000" />
-			<rect x="33" y="14" width="1" height="1" fill="#000000" />
-			<rect x="36" y="14" width="1" height="1" fill="#000000" />
-			<rect x="37" y="14" width="1" height="1" fill="#000000" />
-			<rect x="3" y="15" width="1" height="1" fill="#000000" />
-			<rect x="7" y="15" width="1" height="1" fill="#000000" />
-			<rect x="9" y="15" width="1" height="1" fill="#000000" />
-			<rect x="11" y="15" width="1" height="1" fill="#000000" />
-			<rect x="14" y="15" width="1" height="1" fill="#000000" />
-			<rect x="15" y="15" width="1" height="1" fill="#000000" />
-			<rect x="17" y="15" width="1" height="1" fill="#000000" />
-			<rect x="21" y="15" width="1" height="1" fill="#000000" />
-			<rect x="22" y="15" width="1" height="1" fill="#000000" />
-			<rect x="24" y="15" width="1" height="1" fill="#000000" />
-			<rect x="27" y="15" width="1" height="1" fill="#000000" />
-			<rect x="28" y="15" width="1" height="1" fill="#000000" />
-			<rect x="30" y="15" width="1" height="1" fill="#000000" />
-			<rect x="31" y="15" width="1" height="1" fill="#000000" />
-			<rect x="33" y="15" width="1" height="1" fill="#000000" />
-			<rect x="34" y="15" width="1" height="1" fill="#000000" />
-			<rect x="36" y="15" width="1" height="1" fill="#000000" />
-			<rect x="37" y="15" width="1" height="1" fill="#000000" />
-			<rect x="2" y="16" width="1" height="1" fill="#000000" />
-			<rect x="5" y="16" width="1" height="1" fill="#000000" />
-			<rect x="8" y="16" width="1" height="1" fill="#000000" />
-			<rect x="10" y="16" width="1" height="1" fill="#000000" />
-			<rect x="16" y="16" width="1" height="1" fill="#000000" />
-			<rect x="17" y="16" width="1" height="1" fill="#000000" />
-			<rect x="18" y="16" width="1" height="1" fill="#000000" />
-			<rect x="19" y="16" width="1" height="1" fill="#000000" />
-			<rect x="20" y="16" width="1" height="1" fill="#000000" />
-			<rect x="21" y="16" width="1" height="1" fill="#000000" />
-			<rect x="25" y="16" width="1" height="1" fill="#000000" />
-			<rect x="30" y="16" width="1" height="1" fill="#000000" />
-			<rect x="31" y="16" width="1" height="1" fill="#000000" />
-			<rect x="33" y="16" width="1" height="1" fill="#000000" />
-			<rect x="34" y="16" width="1" height="1" fill="#000000" />
-			<rect x="35" y="16" width="1" height="1" fill="#000000" />
-			<rect x="1" y="17" width="1" height="1" fill="#000000" />
-			<rect x="2" y="17" width="1" height="1" fill="#000000" />
-			<rect x="4" y="17" width="1" height="1" fill="#000000" />
-			<rect x="6" y="17" width="1" height="1" fill="#000000" />
-			<rect x="7" y="17" width="1" height="1" fill="#000000" />
-			<rect x="8" y="17" width="1" height="1" fill="#000000" />
-			<rect x="11" y="17" width="1" height="1" fill="#000000" />
-			<rect x="12" y="17" width="1" height="1" fill="#000000" />
-			<rect x="17" y="17" width="1" height="1" fill="#000000" />
-			<rect x="18" y="17" width="1" height="1" fill="#000000" />
-			<rect x="20" y="17" width="1" height="1" fill="#000000" />
-			<rect x="21" y="17" width="1" height="1" fill="#000000" />
-			<rect x="22" y="17" width="1" height="1" fill="#000000" />
-			<rect x="23" y="17" width="1" height="1" fill="#000000" />
-			<rect x="25" y="17" width="1" height="1" fill="#000000" />
-			<rect x="28" y="17" width="1" height="1" fill="#000000" />
-			<rect x="31" y="17" width="1" height="1" fill="#000000" />
-			<rect x="32" y="17" width="1" height="1" fill="#000000" />
-			<rect x="33" y="17" width="1" height="1" fill="#000000" />
-			<rect x="34" y="17" width="1" height="1" fill="#000000" />
-			<rect x="35" y="17" width="1" height="1" fill="#000000" />
-			<rect x="37" y="17" width="1" height="1" fill="#000000" />
-			<rect x="3" y="18" width="1" height="1" fill="#000000" />
-			<rect x="4" y="18" width="1" height="1" fill="#000000" />
-			<rect x="5" y="18" width="1" height="1" fill="#000000" />
-			<rect x="6" y="18" width="1" height="1" fill="#000000" />
-			<rect x="8" y="18" width="1" height="1" fill="#000000" />
-			<rect x="9" y="18" width="1" height="1" fill="#000000" />
-			<rect x="11" y="18" width="1" height="1" fill="#000000" />
-			<rect x="13" y="18" width="1" height="1" fill="#000000" />
-			<rect x="14" y="18" width="1" height="1" fill="#000000" />
-			<rect x="16" y="18" width="1" height="1" fill="#000000" />
-			<rect x="18" y="18" width="1" height="1" fill="#000000" />
-			<rect x="19" y="18" width="1" height="1" fill="#000000" />
-			<rect x="21" y="18" width="1" height="1" fill="#000000" />
-			<rect x="23" y="18" width="1" height="1" fill="#000000" />
-			<rect x="24" y="18" width="1" height="1" fill="#000000" />
-			<rect x="25" y="18" width="1" height="1" fill="#000000" />
-			<rect x="27" y="18" width="1" height="1" fill="#000000" />
-			<rect x="28" y="18" width="1" height="1" fill="#000000" />
-			<rect x="30" y="18" width="1" height="1" fill="#000000" />
-			<rect x="31" y="18" width="1" height="1" fill="#000000" />
-			<rect x="32" y="18" width="1" height="1" fill="#000000" />
-			<rect x="34" y="18" width="1" height="1" fill="#000000" />
-			<rect x="35" y="18" width="1" height="1" fill="#000000" />
-			<rect x="36" y="18" width="1" height="1" fill="#000000" />
-			<rect x="2" y="19" width="1" height="1" fill="#000000" />
-			<rect x="3" y="19" width="1" height="1" fill="#000000" />
-			<rect x="5" y="19" width="1" height="1" fill="#000000" />
-			<rect x="6" y="19" width="1" height="1" fill="#000000" />
-			<rect x="7" y="19" width="1" height="1" fill="#000000" />
-			<rect x="10" y="19" width="1" height="1" fill="#000000" />
-			<rect x="13" y="19" width="1" height="1" fill="#000000" />
-			<rect x="16" y="19" width="1" height="1" fill="#000000" />
-			<rect x="19" y="19" width="1" height="1" fill="#000000" />
-			<rect x="20" y="19" width="1" height="1" fill="#000000" />
-			<rect x="22" y="19" width="1" height="1" fill="#000000" />
-			<rect x="25" y="19" width="1" height="1" fill="#000000" />
-			<rect x="28" y="19" width="1" height="1" fill="#000000" />
-			<rect x="31" y="19" width="1" height="1" fill="#000000" />
-			<rect x="32" y="19" width="1" height="1" fill="#000000" />
-			<rect x="33" y="19" width="1" height="1" fill="#000000" />
-			<rect x="35" y="19" width="1" height="1" fill="#000000" />
-			<rect x="37" y="19" width="1" height="1" fill="#000000" />
-			<rect x="3" y="20" width="1" height="1" fill="#000000" />
-			<rect x="4" y="20" width="1" height="1" fill="#000000" />
-			<rect x="5" y="20" width="1" height="1" fill="#000000" />
-			<rect x="6" y="20" width="1" height="1" fill="#000000" />
-			<rect x="8" y="20" width="1" height="1" fill="#000000" />
-			<rect x="9" y="20" width="1" height="1" fill="#000000" />
-			<rect x="10" y="20" width="1" height="1" fill="#000000" />
-			<rect x="12" y="20" width="1" height="1" fill="#000000" />
-			<rect x="13" y="20" width="1" height="1" fill="#000000" />
-			<rect x="14" y="20" width="1" height="1" fill="#000000" />
-			<rect x="15" y="20" width="1" height="1" fill="#000000" />
-			<rect x="16" y="20" width="1" height="1" fill="#000000" />
-			<rect x="20" y="20" width="1" height="1" fill="#000000" />
-			<rect x="23" y="20" width="1" height="1" fill="#000000" />
-			<rect x="25" y="20" width="1" height="1" fill="#000000" />
-			<rect x="26" y="20" width="1" height="1" fill="#000000" />
-			<rect x="28" y="20" width="1" height="1" fill="#000000" />
-			<rect x="32" y="20" width="1" height="1" fill="#000000" />
-			<rect x="34" y="20" width="1" height="1" fill="#000000" />
-			<rect x="2" y="21" width="1" height="1" fill="#000000" />
-			<rect x="4" y="21" width="1" height="1" fill="#000000" />
-			<rect x="6" y="21" width="1" height="1" fill="#000000" />
-			<rect x="7" y="21" width="1" height="1" fill="#000000" />
-			<rect x="8" y="21" width="1" height="1" fill="#000000" />
-			<rect x="11" y="21" width="1" height="1" fill="#000000" />
-			<rect x="14" y="21" width="1" height="1" fill="#000000" />
-			<rect x="18" y="21" width="1" height="1" fill="#000000" />
-			<rect x="19" y="21" width="1" height="1" fill="#000000" />
-			<rect x="22" y="21" width="1" height="1" fill="#000000" />
-			<rect x="23" y="21" width="1" height="1" fill="#000000" />
-			<rect x="26" y="21" width="1" height="1" fill="#000000" />
-			<rect x="27" y="21" width="1" height="1" fill="#000000" />
-			<rect x="28" y="21" width="1" height="1" fill="#000000" />
-			<rect x="29" y="21" width="1" height="1" fill="#000000" />
-			<rect x="30" y="21" width="1" height="1" fill="#000000" />
-			<rect x="31" y="21" width="1" height="1" fill="#000000" />
-			<rect x="32" y="21" width="1" height="1" fill="#000000" />
-			<rect x="33" y="21" width="1" height="1" fill="#000000" />
-			<rect x="34" y="21" width="1" height="1" fill="#000000" />
-			<rect x="2" y="22" width="1" height="1" fill="#000000" />
-			<rect x="3" y="22" width="1" height="1" fill="#000000" />
-			<rect x="4" y="22" width="1" height="1" fill="#000000" />
-			<rect x="9" y="22" width="1" height="1" fill="#000000" />
-			<rect x="10" y="22" width="1" height="1" fill="#000000" />
-			<rect x="11" y="22" width="1" height="1" fill="#000000" />
-			<rect x="13" y="22" width="1" height="1" fill="#000000" />
-			<rect x="14" y="22" width="1" height="1" fill="#000000" />
-			<rect x="15" y="22" width="1" height="1" fill="#000000" />
-			<rect x="18" y="22" width="1" height="1" fill="#000000" />
-			<rect x="20" y="22" width="1" height="1" fill="#000000" />
-			<rect x="22" y="22" width="1" height="1" fill="#000000" />
-			<rect x="23" y="22" width="1" height="1" fill="#000000" />
-			<rect x="24" y="22" width="1" height="1" fill="#000000" />
-			<rect x="25" y="22" width="1" height="1" fill="#000000" />
-			<rect x="28" y="22" width="1" height="1" fill="#000000" />
-			<rect x="32" y="22" width="1" height="1" fill="#000000" />
-			<rect x="33" y="22" width="1" height="1" fill="#000000" />
-			<rect x="34" y="22" width="1" height="1" fill="#000000" />
-			<rect x="35" y="22" width="1" height="1" fill="#000000" />
-			<rect x="2" y="23" width="1" height="1" fill="#000000" />
-			<rect x="4" y="23" width="1" height="1" fill="#000000" />
-			<rect x="5" y="23" width="1" height="1" fill="#000000" />
-			<rect x="7" y="23" width="1" height="1" fill="#000000" />
-			<rect x="9" y="23" width="1" height="1" fill="#000000" />
-			<rect x="10" y="23" width="1" height="1" fill="#000000" />
-			<rect x="13" y="23" width="1" height="1" fill="#000000" />
-			<rect x="15" y="23" width="1" height="1" fill="#000000" />
-			<rect x="17" y="23" width="1" height="1" fill="#000000" />
-			<rect x="18" y="23" width="1" height="1" fill="#000000" />
-			<rect x="21" y="23" width="1" height="1" fill="#000000" />
-			<rect x="23" y="23" width="1" height="1" fill="#000000" />
-			<rect x="26" y="23" width="1" height="1" fill="#000000" />
-			<rect x="28" y="23" width="1" height="1" fill="#000000" />
-			<rect x="29" y="23" width="1" height="1" fill="#000000" />
-			<rect x="30" y="23" width="1" height="1" fill="#000000" />
-			<rect x="31" y="23" width="1" height="1" fill="#000000" />
-			<rect x="33" y="23" width="1" height="1" fill="#000000" />
-			<rect x="34" y="23" width="1" height="1" fill="#000000" />
-			<rect x="35" y="23" width="1" height="1" fill="#000000" />
-			<rect x="37" y="23" width="1" height="1" fill="#000000" />
-			<rect x="3" y="24" width="1" height="1" fill="#000000" />
-			<rect x="6" y="24" width="1" height="1" fill="#000000" />
-			<rect x="12" y="24" width="1" height="1" fill="#000000" />
-			<rect x="13" y="24" width="1" height="1" fill="#000000" />
-			<rect x="15" y="24" width="1" height="1" fill="#000000" />
-			<rect x="18" y="24" width="1" height="1" fill="#000000" />
-			<rect x="20" y="24" width="1" height="1" fill="#000000" />
-			<rect x="22" y="24" width="1" height="1" fill="#000000" />
-			<rect x="23" y="24" width="1" height="1" fill="#000000" />
-			<rect x="24" y="24" width="1" height="1" fill="#000000" />
-			<rect x="27" y="24" width="1" height="1" fill="#000000" />
-			<rect x="29" y="24" width="1" height="1" fill="#000000" />
-			<rect x="32" y="24" width="1" height="1" fill="#000000" />
-			<rect x="34" y="24" width="1" height="1" fill="#000000" />
-			<rect x="35" y="24" width="1" height="1" fill="#000000" />
-			<rect x="36" y="24" width="1" height="1" fill="#000000" />
-			<rect x="37" y="24" width="1" height="1" fill="#000000" />
-			<rect x="1" y="25" width="1" height="1" fill="#000000" />
-			<rect x="3" y="25" width="1" height="1" fill="#000000" />
-			<rect x="4" y="25" width="1" height="1" fill="#000000" />
-			<rect x="6" y="25" width="1" height="1" fill="#000000" />
-			<rect x="7" y="25" width="1" height="1" fill="#000000" />
-			<rect x="8" y="25" width="1" height="1" fill="#000000" />
-			<rect x="9" y="25" width="1" height="1" fill="#000000" />
-			<rect x="11" y="25" width="1" height="1" fill="#000000" />
-			<rect x="15" y="25" width="1" height="1" fill="#000000" />
-			<rect x="19" y="25" width="1" height="1" fill="#000000" />
-			<rect x="20" y="25" width="1" height="1" fill="#000000" />
-			<rect x="22" y="25" width="1" height="1" fill="#000000" />
-			<rect x="26" y="25" width="1" height="1" fill="#000000" />
-			<rect x="27" y="25" width="1" height="1" fill="#000000" />
-			<rect x="29" y="25" width="1" height="1" fill="#000000" />
-			<rect x="31" y="25" width="1" height="1" fill="#000000" />
-			<rect x="32" y="25" width="1" height="1" fill="#000000" />
-			<rect x="33" y="25" width="1" height="1" fill="#000000" />
-			<rect x="37" y="25" width="1" height="1" fill="#000000" />
-			<rect x="1" y="26" width="1" height="1" fill="#000000" />
-			<rect x="2" y="26" width="1" height="1" fill="#000000" />
-			<rect x="5" y="26" width="1" height="1" fill="#000000" />
-			<rect x="10" y="26" width="1" height="1" fill="#000000" />
-			<rect x="11" y="26" width="1" height="1" fill="#000000" />
-			<rect x="13" y="26" width="1" height="1" fill="#000000" />
-			<rect x="14" y="26" width="1" height="1" fill="#000000" />
-			<rect x="15" y="26" width="1" height="1" fill="#000000" />
-			<rect x="17" y="26" width="1" height="1" fill="#000000" />
-			<rect x="18" y="26" width="1" height="1" fill="#000000" />
-			<rect x="19" y="26" width="1" height="1" fill="#000000" />
-			<rect x="20" y="26" width="1" height="1" fill="#000000" />
-			<rect x="22" y="26" width="1" height="1" fill="#000000" />
-			<rect x="25" y="26" width="1" height="1" fill="#000000" />
-			<rect x="26" y="26" width="1" height="1" fill="#000000" />
-			<rect x="27" y="26" width="1" height="1" fill="#000000" />
-			<rect x="28" y="26" width="1" height="1" fill="#000000" />
-			<rect x="29" y="26" width="1" height="1" fill="#000000" />
-			<rect x="31" y="26" width="1" height="1" fill="#000000" />
-			<rect x="33" y="26" width="1" height="1" fill="#000000" />
-			<rect x="34" y="26" width="1" height="1" fill="#000000" />
-			<rect x="37" y="26" width="1" height="1" fill="#000000" />
-			<rect x="1" y="27" width="1" height="1" fill="#000000" />
-			<rect x="2" y="27" width="1" height="1" fill="#000000" />
-			<rect x="3" y="27" width="1" height="1" fill="#000000" />
-			<rect x="5" y="27" width="1" height="1" fill="#000000" />
-			<rect x="6" y="27" width="1" height="1" fill="#000000" />
-			<rect x="7" y="27" width="1" height="1" fill="#000000" />
-			<rect x="8" y="27" width="1" height="1" fill="#000000" />
-			<rect x="9" y="27" width="1" height="1" fill="#000000" />
-			<rect x="14" y="27" width="1" height="1" fill="#000000" />
-			<rect x="16" y="27" width="1" height="1" fill="#000000" />
-			<rect x="19" y="27" width="1" height="1" fill="#000000" />
-			<rect x="20" y="27" width="1" height="1" fill="#000000" />
-			<rect x="23" y="27" width="1" height="1" fill="#000000" />
-			<rect x="26" y="27" width="1" height="1" fill="#000000" />
-			<rect x="28" y="27" width="1" height="1" fill="#000000" />
-			<rect x="29" y="27" width="1" height="1" fill="#000000" />
-			<rect x="30" y="27" width="1" height="1" fill="#000000" />
-			<rect x="33" y="27" width="1" height="1" fill="#000000" />
-			<rect x="35" y="27" width="1" height="1" fill="#000000" />
-			<rect x="36" y="27" width="1" height="1" fill="#000000" />
-			<rect x="37" y="27" width="1" height="1" fill="#000000" />
-			<rect x="1" y="28" width="1" height="1" fill="#000000" />
-			<rect x="4" y="28" width="1" height="1" fill="#000000" />
-			<rect x="6" y="28" width="1" height="1" fill="#000000" />
-			<rect x="8" y="28" width="1" height="1" fill="#000000" />
-			<rect x="11" y="28" width="1" height="1" fill="#000000" />
-			<rect x="12" y="28" width="1" height="1" fill="#000000" />
-			<rect x="13" y="28" width="1" height="1" fill="#000000" />
-			<rect x="17" y="28" width="1" height="1" fill="#000000" />
-			<rect x="18" y="28" width="1" height="1" fill="#000000" />
-			<rect x="20" y="28" width="1" height="1" fill="#000000" />
-			<rect x="25" y="28" width="1" height="1" fill="#000000" />
-			<rect x="30" y="28" width="1" height="1" fill="#000000" />
-			<rect x="32" y="28" width="1" height="1" fill="#000000" />
-			<rect x="33" y="28" width="1" height="1" fill="#000000" />
-			<rect x="34" y="28" width="1" height="1" fill="#000000" />
-			<rect x="35" y="28" width="1" height="1" fill="#000000" />
-			<rect x="36" y="28" width="1" height="1" fill="#000000" />
-			<rect x="37" y="28" width="1" height="1" fill="#000000" />
-			<rect x="1" y="29" width="1" height="1" fill="#000000" />
-			<rect x="5" y="29" width="1" height="1" fill="#000000" />
-			<rect x="7" y="29" width="1" height="1" fill="#000000" />
-			<rect x="9" y="29" width="1" height="1" fill="#000000" />
-			<rect x="11" y="29" width="1" height="1" fill="#000000" />
-			<rect x="13" y="29" width="1" height="1" fill="#000000" />
-			<rect x="16" y="29" width="1" height="1" fill="#000000" />
-			<rect x="17" y="29" width="1" height="1" fill="#000000" />
-			<rect x="20" y="29" width="1" height="1" fill="#000000" />
-			<rect x="22" y="29" width="1" height="1" fill="#000000" />
-			<rect x="23" y="29" width="1" height="1" fill="#000000" />
-			<rect x="24" y="29" width="1" height="1" fill="#000000" />
-			<rect x="25" y="29" width="1" height="1" fill="#000000" />
-			<rect x="26" y="29" width="1" height="1" fill="#000000" />
-			<rect x="27" y="29" width="1" height="1" fill="#000000" />
-			<rect x="29" y="29" width="1" height="1" fill="#000000" />
-			<rect x="30" y="29" width="1" height="1" fill="#000000" />
-			<rect x="31" y="29" width="1" height="1" fill="#000000" />
-			<rect x="32" y="29" width="1" height="1" fill="#000000" />
-			<rect x="33" y="29" width="1" height="1" fill="#000000" />
-			<rect x="34" y="29" width="1" height="1" fill="#000000" />
-			<rect x="36" y="29" width="1" height="1" fill="#000000" />
-			<rect x="9" y="30" width="1" height="1" fill="#000000" />
-			<rect x="10" y="30" width="1" height="1" fill="#000000" />
-			<rect x="12" y="30" width="1" height="1" fill="#000000" />
-			<rect x="15" y="30" width="1" height="1" fill="#000000" />
-			<rect x="16" y="30" width="1" height="1" fill="#000000" />
-			<rect x="20" y="30" width="1" height="1" fill="#000000" />
-			<rect x="21" y="30" width="1" height="1" fill="#000000" />
-			<rect x="22" y="30" width="1" height="1" fill="#000000" />
-			<rect x="27" y="30" width="1" height="1" fill="#000000" />
-			<rect x="28" y="30" width="1" height="1" fill="#000000" />
-			<rect x="29" y="30" width="1" height="1" fill="#000000" />
-			<rect x="33" y="30" width="1" height="1" fill="#000000" />
-			<rect x="36" y="30" width="1" height="1" fill="#000000" />
-			<rect x="1" y="31" width="1" height="1" fill="#000000" />
-			<rect x="2" y="31" width="1" height="1" fill="#000000" />
-			<rect x="3" y="31" width="1" height="1" fill="#000000" />
-			<rect x="4" y="31" width="1" height="1" fill="#000000" />
-			<rect x="5" y="31" width="1" height="1" fill="#000000" />
-			<rect x="6" y="31" width="1" height="1" fill="#000000" />
-			<rect x="7" y="31" width="1" height="1" fill="#000000" />
-			<rect x="9" y="31" width="1" height="1" fill="#000000" />
-			<rect x="13" y="31" width="1" height="1" fill="#000000" />
-			<rect x="15" y="31" width="1" height="1" fill="#000000" />
-			<rect x="17" y="31" width="1" height="1" fill="#000000" />
-			<rect x="24" y="31" width="1" height="1" fill="#000000" />
-			<rect x="29" y="31" width="1" height="1" fill="#000000" />
-			<rect x="31" y="31" width="1" height="1" fill="#000000" />
-			<rect x="33" y="31" width="1" height="1" fill="#000000" />
-			<rect x="35" y="31" width="1" height="1" fill="#000000" />
-			<rect x="37" y="31" width="1" height="1" fill="#000000" />
-			<rect x="1" y="32" width="1" height="1" fill="#000000" />
-			<rect x="7" y="32" width="1" height="1" fill="#000000" />
-			<rect x="10" y="32" width="1" height="1" fill="#000000" />
-			<rect x="13" y="32" width="1" height="1" fill="#000000" />
-			<rect x="17" y="32" width="1" height="1" fill="#000000" />
-			<rect x="18" y="32" width="1" height="1" fill="#000000" />
-			<rect x="19" y="32" width="1" height="1" fill="#000000" />
-			<rect x="20" y="32" width="1" height="1" fill="#000000" />
-			<rect x="22" y="32" width="1" height="1" fill="#000000" />
-			<rect x="25" y="32" width="1" height="1" fill="#000000" />
-			<rect x="26" y="32" width="1" height="1" fill="#000000" />
-			<rect x="28" y="32" width="1" height="1" fill="#000000" />
-			<rect x="29" y="32" width="1" height="1" fill="#000000" />
-			<rect x="33" y="32" width="1" height="1" fill="#000000" />
-			<rect x="34" y="32" width="1" height="1" fill="#000000" />
-			<rect x="1" y="33" width="1" height="1" fill="#000000" />
-			<rect x="3" y="33" width="1" height="1" fill="#000000" />
-			<rect x="4" y="33" width="1" height="1" fill="#000000" />
-			<rect x="5" y="33" width="1" height="1" fill="#000000" />
-			<rect x="7" y="33" width="1" height="1" fill="#000000" />
-			<rect x="9" y="33" width="1" height="1" fill="#000000" />
-			<rect x="10" y="33" width="1" height="1" fill="#000000" />
-			<rect x="14" y="33" width="1" height="1" fill="#000000" />
-			<rect x="16" y="33" width="1" height="1" fill="#000000" />
-			<rect x="17" y="33" width="1" height="1" fill="#000000" />
-			<rect x="19" y="33" width="1" height="1" fill="#000000" />
-			<rect x="22" y="33" width="1" height="1" fill="#000000" />
-			<rect x="23" y="33" width="1" height="1" fill="#000000" />
-			<rect x="25" y="33" width="1" height="1" fill="#000000" />
-			<rect x="28" y="33" width="1" height="1" fill="#000000" />
-			<rect x="29" y="33" width="1" height="1" fill="#000000" />
-			<rect x="30" y="33" width="1" height="1" fill="#000000" />
-			<rect x="31" y="33" width="1" height="1" fill="#000000" />
-			<rect x="32" y="33" width="1" height="1" fill="#000000" />
-			<rect x="33" y="33" width="1" height="1" fill="#000000" />
-			<rect x="36" y="33" width="1" height="1" fill="#000000" />
-			<rect x="37" y="33" width="1" height="1" fill="#000000" />
-			<rect x="1" y="34" width="1" height="1" fill="#000000" />
-			<rect x="3" y="34" width="1" height="1" fill="#000000" />
-			<rect x="4" y="34" width="1" height="1" fill="#000000" />
-			<rect x="5" y="34" width="1" height="1" fill="#000000" />
-			<rect x="7" y="34" width="1" height="1" fill="#000000" />
-			<rect x="9" y="34" width="1" height="1" fill="#000000" />
-			<rect x="13" y="34" width="1" height="1" fill="#000000" />
-			<rect x="15" y="34" width="1" height="1" fill="#000000" />
-			<rect x="18" y="34" width="1" height="1" fill="#000000" />
-			<rect x="21" y="34" width="1" height="1" fill="#000000" />
-			<rect x="22" y="34" width="1" height="1" fill="#000000" />
-			<rect x="23" y="34" width="1" height="1" fill="#000000" />
-			<rect x="29" y="34" width="1" height="1" fill="#000000" />
-			<rect x="30" y="34" width="1" height="1" fill="#000000" />
-			<rect x="31" y="34" width="1" height="1" fill="#000000" />
-			<rect x="34" y="34" width="1" height="1" fill="#000000" />
-			<rect x="1" y="35" width="1" height="1" fill="#000000" />
-			<rect x="3" y="35" width="1" height="1" fill="#000000" />
-			<rect x="4" y="35" width="1" height="1" fill="#000000" />
-			<rect x="5" y="35" width="1" height="1" fill="#000000" />
-			<rect x="7" y="35" width="1" height="1" fill="#000000" />
-			<rect x="10" y="35" width="1" height="1" fill="#000000" />
-			<rect x="12" y="35" width="1" height="1" fill="#000000" />
-			<rect x="15" y="35" width="1" height="1" fill="#000000" />
-			<rect x="17" y="35" width="1" height="1" fill="#000000" />
-			<rect x="19" y="35" width="1" height="1" fill="#000000" />
-			<rect x="21" y="35" width="1" height="1" fill="#000000" />
-			<rect x="25" y="35" width="1" height="1" fill="#000000" />
-			<rect x="30" y="35" width="1" height="1" fill="#000000" />
-			<rect x="32" y="35" width="1" height="1" fill="#000000" />
-			<rect x="33" y="35" width="1" height="1" fill="#000000" />
-			<rect x="34" y="35" width="1" height="1" fill="#000000" />
-			<rect x="35" y="35" width="1" height="1" fill="#000000" />
-			<rect x="36" y="35" width="1" height="1" fill="#000000" />
-			<rect x="37" y="35" width="1" height="1" fill="#000000" />
-			<rect x="1" y="36" width="1" height="1" fill="#000000" />
-			<rect x="7" y="36" width="1" height="1" fill="#000000" />
-			<rect x="10" y="36" width="1" height="1" fill="#000000" />
-			<rect x="11" y="36" width="1" height="1" fill="#000000" />
-			<rect x="14" y="36" width="1" height="1" fill="#000000" />
-			<rect x="15" y="36" width="1" height="1" fill="#000000" />
-			<rect x="16" y="36" width="1" height="1" fill="#000000" />
-			<rect x="18" y="36" width="1" height="1" fill="#000000" />
-			<rect x="19" y="36" width="1" height="1" fill="#000000" />
-			<rect x="21" y="36" width="1" height="1" fill="#000000" />
-			<rect x="28" y="36" width="1" height="1" fill="#000000" />
-			<rect x="34" y="36" width="1" height="1" fill="#000000" />
-			<rect x="35" y="36" width="1" height="1" fill="#000000" />
-			<rect x="36" y="36" width="1" height="1" fill="#000000" />
-			<rect x="37" y="36" width="1" height="1" fill="#000000" />
-			<rect x="1" y="37" width="1" height="1" fill="#000000" />
-			<rect x="2" y="37" width="1" height="1" fill="#000000" />
-			<rect x="3" y="37" width="1" height="1" fill="#000000" />
-			<rect x="4" y="37" width="1" height="1" fill="#000000" />
-			<rect x="5" y="37" width="1" height="1" fill="#000000" />
-			<rect x="6" y="37" width="1" height="1" fill="#000000" />
-			<rect x="7" y="37" width="1" height="1" fill="#000000" />
-			<rect x="12" y="37" width="1" height="1" fill="#000000" />
-			<rect x="14" y="37" width="1" height="1" fill="#000000" />
-			<rect x="18" y="37" width="1" height="1" fill="#000000" />
-			<rect x="22" y="37" width="1" height="1" fill="#000000" />
-			<rect x="23" y="37" width="1" height="1" fill="#000000" />
-			<rect x="25" y="37" width="1" height="1" fill="#000000" />
-			<rect x="26" y="37" width="1" height="1" fill="#000000" />
-			<rect x="28" y="37" width="1" height="1" fill="#000000" />
-			<rect x="29" y="37" width="1" height="1" fill="#000000" />
-			<rect x="31" y="37" width="1" height="1" fill="#000000" />
-			<rect x="32" y="37" width="1" height="1" fill="#000000" />
-			<rect x="33" y="37" width="1" height="1" fill="#000000" />
-			<rect x="34" y="37" width="1" height="1" fill="#000000" />
-			<rect x="35" y="37" width="1" height="1" fill="#000000" />
-			<rect x="37" y="37" width="1" height="1" fill="#000000" />
-		</g>
-	</g>
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="8.26cm"
+   height="8.26cm"
+   viewBox="0 0 39 39"
+   preserveAspectRatio="none"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="16fUnHUM3k7W9Fvpc6dug7TAdfeGEcLbSg.svg">
+  <metadata
+     id="metadata1428">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1426" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview1424"
+     showgrid="false"
+     inkscape:zoom="6.4507935"
+     inkscape:cx="209.59823"
+     inkscape:cy="153.05729"
+     inkscape:window-x="-8"
+     inkscape:window-y="360"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Pattern" />
+  <g
+     id="QRcode">
+    <rect
+       x="0"
+       y="0"
+       width="39"
+       height="39"
+       fill="#ffffff"
+       id="rect5" />
+    <g
+       id="Pattern">
+      <path
+         d="M 7.5039062 7.5039062 L 7.5039062 15.009766 L 7.5039062 22.513672 L 7.5039062 30.017578 L 7.5039062 37.523438 L 7.5039062 45.027344 L 7.5039062 52.53125 L 7.5039062 60.037109 L 15.009766 60.037109 L 22.513672 60.037109 L 30.017578 60.037109 L 37.523438 60.037109 L 45.027344 60.037109 L 52.53125 60.037109 L 60.037109 60.037109 L 60.037109 52.53125 L 60.037109 45.027344 L 60.037109 37.523438 L 60.037109 30.017578 L 60.037109 22.513672 L 60.037109 15.009766 L 60.037109 7.5039062 L 52.53125 7.5039062 L 45.027344 7.5039062 L 37.523438 7.5039062 L 30.017578 7.5039062 L 22.513672 7.5039062 L 15.009766 7.5039062 L 7.5039062 7.5039062 z M 15.009766 15.009766 L 22.513672 15.009766 L 30.017578 15.009766 L 37.523438 15.009766 L 45.027344 15.009766 L 52.53125 15.009766 L 52.53125 22.513672 L 52.53125 30.017578 L 52.53125 37.523438 L 52.53125 45.027344 L 52.53125 52.53125 L 45.027344 52.53125 L 37.523438 52.53125 L 30.017578 52.53125 L 22.513672 52.53125 L 15.009766 52.53125 L 15.009766 45.027344 L 15.009766 37.523438 L 15.009766 30.017578 L 15.009766 22.513672 L 15.009766 15.009766 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect8" />
+      <rect
+         x="12"
+         y="1"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect22" />
+      <rect
+         x="14"
+         y="1"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect24" />
+      <path
+         d="M 135.08203 7.5039062 L 135.08203 15.009766 L 127.57812 15.009766 L 120.07227 15.009766 L 120.07227 22.513672 L 112.56836 22.513672 L 112.56836 30.017578 L 112.56836 37.523438 L 120.07227 37.523438 L 120.07227 30.017578 L 127.57812 30.017578 L 127.57812 22.513672 L 135.08203 22.513672 L 142.58594 22.513672 L 150.0918 22.513672 L 150.0918 30.017578 L 157.5957 30.017578 L 157.5957 37.523438 L 157.5957 45.027344 L 165.09961 45.027344 L 172.60547 45.027344 L 172.60547 37.523438 L 165.09961 37.523438 L 165.09961 30.017578 L 165.09961 22.513672 L 172.60547 22.513672 L 180.10938 22.513672 L 180.10938 30.017578 L 187.61328 30.017578 L 187.61328 37.523438 L 195.11719 37.523438 L 202.62305 37.523438 L 210.12695 37.523438 L 217.63086 37.523438 L 217.63086 30.017578 L 210.12695 30.017578 L 210.12695 22.513672 L 202.62305 22.513672 L 195.11719 22.513672 L 195.11719 15.009766 L 187.61328 15.009766 L 180.10938 15.009766 L 180.10938 7.5039062 L 172.60547 7.5039062 L 172.60547 15.009766 L 165.09961 15.009766 L 165.09961 7.5039062 L 157.5957 7.5039062 L 157.5957 15.009766 L 150.0918 15.009766 L 142.58594 15.009766 L 142.58594 7.5039062 L 135.08203 7.5039062 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect26" />
+      <rect
+         x="26"
+         y="1"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect32" />
+      <path
+         d="M 217.63086 7.5039062 L 217.63086 15.009766 L 217.63086 22.513672 L 217.63086 30.017578 L 225.13672 30.017578 L 225.13672 22.513672 L 225.13672 15.009766 L 225.13672 7.5039062 L 217.63086 7.5039062 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect34" />
+      <path
+         d="M 232.64062 7.5039062 L 232.64062 15.009766 L 232.64062 22.513672 L 232.64062 30.017578 L 232.64062 37.523438 L 232.64062 45.027344 L 232.64062 52.53125 L 232.64062 60.037109 L 240.14453 60.037109 L 247.65039 60.037109 L 255.1543 60.037109 L 262.6582 60.037109 L 270.16406 60.037109 L 277.66797 60.037109 L 285.17188 60.037109 L 285.17188 52.53125 L 285.17188 45.027344 L 285.17188 37.523438 L 285.17188 30.017578 L 285.17188 22.513672 L 285.17188 15.009766 L 285.17188 7.5039062 L 277.66797 7.5039062 L 270.16406 7.5039062 L 262.6582 7.5039062 L 255.1543 7.5039062 L 247.65039 7.5039062 L 240.14453 7.5039062 L 232.64062 7.5039062 z M 240.14453 15.009766 L 247.65039 15.009766 L 255.1543 15.009766 L 262.6582 15.009766 L 270.16406 15.009766 L 277.66797 15.009766 L 277.66797 22.513672 L 277.66797 30.017578 L 277.66797 37.523438 L 277.66797 45.027344 L 277.66797 52.53125 L 270.16406 52.53125 L 262.6582 52.53125 L 255.1543 52.53125 L 247.65039 52.53125 L 240.14453 52.53125 L 240.14453 45.027344 L 240.14453 37.523438 L 240.14453 30.017578 L 240.14453 22.513672 L 240.14453 15.009766 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect36" />
+      <path
+         d="M 75.044922 15.009766 L 75.044922 22.513672 L 67.541016 22.513672 L 67.541016 30.017578 L 67.541016 37.523438 L 75.044922 37.523438 L 75.044922 30.017578 L 82.550781 30.017578 L 82.550781 37.523438 L 90.054688 37.523438 L 97.558594 37.523438 L 97.558594 45.027344 L 105.06445 45.027344 L 105.06445 37.523438 L 105.06445 30.017578 L 105.06445 22.513672 L 105.06445 15.009766 L 97.558594 15.009766 L 97.558594 22.513672 L 97.558594 30.017578 L 90.054688 30.017578 L 90.054688 22.513672 L 90.054688 15.009766 L 82.550781 15.009766 L 75.044922 15.009766 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect54" />
+      <path
+         d="M 22.513672 22.513672 L 22.513672 30.017578 L 22.513672 37.523438 L 22.513672 45.027344 L 30.017578 45.027344 L 37.523438 45.027344 L 45.027344 45.027344 L 45.027344 37.523438 L 45.027344 30.017578 L 45.027344 22.513672 L 37.523438 22.513672 L 30.017578 22.513672 L 22.513672 22.513672 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect88" />
+      <path
+         d="M 247.65039 22.513672 L 247.65039 30.017578 L 247.65039 37.523438 L 247.65039 45.027344 L 255.1543 45.027344 L 262.6582 45.027344 L 270.16406 45.027344 L 270.16406 37.523438 L 270.16406 30.017578 L 270.16406 22.513672 L 262.6582 22.513672 L 255.1543 22.513672 L 247.65039 22.513672 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect124" />
+      <path
+         d="M 127.57812 30.017578 L 127.57812 37.523438 L 127.57812 45.027344 L 120.07227 45.027344 L 112.56836 45.027344 L 105.06445 45.027344 L 105.06445 52.53125 L 112.56836 52.53125 L 112.56836 60.037109 L 120.07227 60.037109 L 120.07227 52.53125 L 127.57812 52.53125 L 127.57812 60.037109 L 135.08203 60.037109 L 135.08203 52.53125 L 142.58594 52.53125 L 142.58594 60.037109 L 135.08203 60.037109 L 135.08203 67.541016 L 142.58594 67.541016 L 150.0918 67.541016 L 150.0918 60.037109 L 150.0918 52.53125 L 157.5957 52.53125 L 157.5957 45.027344 L 150.0918 45.027344 L 150.0918 37.523438 L 150.0918 30.017578 L 142.58594 30.017578 L 142.58594 37.523438 L 135.08203 37.523438 L 135.08203 30.017578 L 127.57812 30.017578 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect152" />
+      <rect
+         x="10"
+         y="5"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect186" />
+      <path
+         d="M 180.10938 37.523438 L 180.10938 45.027344 L 172.60547 45.027344 L 172.60547 52.53125 L 172.60547 60.037109 L 165.09961 60.037109 L 165.09961 52.53125 L 157.5957 52.53125 L 157.5957 60.037109 L 157.5957 67.541016 L 165.09961 67.541016 L 165.09961 75.044922 L 172.60547 75.044922 L 180.10938 75.044922 L 180.10938 82.550781 L 180.10938 90.054688 L 172.60547 90.054688 L 165.09961 90.054688 L 157.5957 90.054688 L 157.5957 82.550781 L 150.0918 82.550781 L 142.58594 82.550781 L 142.58594 90.054688 L 135.08203 90.054688 L 135.08203 97.558594 L 127.57812 97.558594 L 120.07227 97.558594 L 120.07227 105.06445 L 112.56836 105.06445 L 112.56836 112.56836 L 105.06445 112.56836 L 105.06445 120.07227 L 112.56836 120.07227 L 120.07227 120.07227 L 120.07227 112.56836 L 127.57812 112.56836 L 127.57812 105.06445 L 135.08203 105.06445 L 142.58594 105.06445 L 142.58594 97.558594 L 150.0918 97.558594 L 157.5957 97.558594 L 165.09961 97.558594 L 165.09961 105.06445 L 172.60547 105.06445 L 172.60547 112.56836 L 180.10938 112.56836 L 180.10938 105.06445 L 187.61328 105.06445 L 187.61328 112.56836 L 195.11719 112.56836 L 202.62305 112.56836 L 202.62305 105.06445 L 195.11719 105.06445 L 195.11719 97.558594 L 187.61328 97.558594 L 187.61328 90.054688 L 187.61328 82.550781 L 187.61328 75.044922 L 187.61328 67.541016 L 187.61328 60.037109 L 180.10938 60.037109 L 180.10938 52.53125 L 187.61328 52.53125 L 187.61328 60.037109 L 195.11719 60.037109 L 195.11719 52.53125 L 202.62305 52.53125 L 202.62305 45.027344 L 195.11719 45.027344 L 187.61328 45.027344 L 187.61328 37.523438 L 180.10938 37.523438 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect200" />
+      <path
+         d="M 82.550781 45.027344 L 82.550781 52.53125 L 82.550781 60.037109 L 90.054688 60.037109 L 90.054688 52.53125 L 90.054688 45.027344 L 82.550781 45.027344 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect216" />
+      <path
+         d="M 217.63086 45.027344 L 217.63086 52.53125 L 217.63086 60.037109 L 210.12695 60.037109 L 210.12695 67.541016 L 217.63086 67.541016 L 225.13672 67.541016 L 225.13672 60.037109 L 225.13672 52.53125 L 225.13672 45.027344 L 217.63086 45.027344 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect240" />
+      <rect
+         x="9"
+         y="7"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect260" />
+      <path
+         d="M 97.558594 52.53125 L 97.558594 60.037109 L 97.558594 67.541016 L 105.06445 67.541016 L 105.06445 60.037109 L 105.06445 52.53125 L 97.558594 52.53125 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect264" />
+      <rect
+         x="27"
+         y="7"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect278" />
+      <rect
+         x="16"
+         y="8"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect298" />
+      <rect
+         x="26"
+         y="8"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect312" />
+      <path
+         d="M 30.017578 67.541016 L 30.017578 75.044922 L 30.017578 82.550781 L 22.513672 82.550781 L 15.009766 82.550781 L 7.5039062 82.550781 L 7.5039062 90.054688 L 7.5039062 97.558594 L 7.5039062 105.06445 L 15.009766 105.06445 L 22.513672 105.06445 L 22.513672 112.56836 L 22.513672 120.07227 L 30.017578 120.07227 L 30.017578 112.56836 L 30.017578 105.06445 L 30.017578 97.558594 L 37.523438 97.558594 L 37.523438 90.054688 L 37.523438 82.550781 L 45.027344 82.550781 L 45.027344 90.054688 L 52.53125 90.054688 L 60.037109 90.054688 L 60.037109 82.550781 L 52.53125 82.550781 L 52.53125 75.044922 L 45.027344 75.044922 L 45.027344 67.541016 L 37.523438 67.541016 L 30.017578 67.541016 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect318" />
+      <path
+         d="M 52.53125 67.541016 L 52.53125 75.044922 L 60.037109 75.044922 L 67.541016 75.044922 L 67.541016 67.541016 L 60.037109 67.541016 L 52.53125 67.541016 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect322" />
+      <path
+         d="M 82.550781 67.541016 L 82.550781 75.044922 L 75.044922 75.044922 L 75.044922 82.550781 L 82.550781 82.550781 L 82.550781 90.054688 L 82.550781 97.558594 L 75.044922 97.558594 L 67.541016 97.558594 L 67.541016 105.06445 L 75.044922 105.06445 L 75.044922 112.56836 L 82.550781 112.56836 L 82.550781 120.07227 L 90.054688 120.07227 L 90.054688 112.56836 L 97.558594 112.56836 L 97.558594 105.06445 L 105.06445 105.06445 L 105.06445 97.558594 L 105.06445 90.054688 L 112.56836 90.054688 L 112.56836 82.550781 L 112.56836 75.044922 L 105.06445 75.044922 L 105.06445 82.550781 L 97.558594 82.550781 L 97.558594 75.044922 L 97.558594 67.541016 L 90.054688 67.541016 L 82.550781 67.541016 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect326" />
+      <rect
+         x="15"
+         y="9"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect330" />
+      <path
+         d="M 202.62305 67.541016 L 202.62305 75.044922 L 195.11719 75.044922 L 195.11719 82.550781 L 195.11719 90.054688 L 202.62305 90.054688 L 210.12695 90.054688 L 210.12695 97.558594 L 202.62305 97.558594 L 202.62305 105.06445 L 210.12695 105.06445 L 210.12695 112.56836 L 202.62305 112.56836 L 202.62305 120.07227 L 210.12695 120.07227 L 217.63086 120.07227 L 217.63086 112.56836 L 225.13672 112.56836 L 225.13672 105.06445 L 225.13672 97.558594 L 225.13672 90.054688 L 217.63086 90.054688 L 217.63086 82.550781 L 210.12695 82.550781 L 210.12695 75.044922 L 210.12695 67.541016 L 202.62305 67.541016 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect338" />
+      <path
+         d="M 255.1543 67.541016 L 255.1543 75.044922 L 247.65039 75.044922 L 240.14453 75.044922 L 240.14453 82.550781 L 232.64062 82.550781 L 225.13672 82.550781 L 225.13672 90.054688 L 232.64062 90.054688 L 240.14453 90.054688 L 240.14453 97.558594 L 247.65039 97.558594 L 247.65039 90.054688 L 255.1543 90.054688 L 255.1543 97.558594 L 255.1543 105.06445 L 262.6582 105.06445 L 262.6582 97.558594 L 270.16406 97.558594 L 277.66797 97.558594 L 277.66797 90.054688 L 270.16406 90.054688 L 270.16406 82.550781 L 277.66797 82.550781 L 277.66797 75.044922 L 270.16406 75.044922 L 270.16406 67.541016 L 262.6582 67.541016 L 255.1543 67.541016 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect340" />
+      <path
+         d="M 127.57812 75.044922 L 127.57812 82.550781 L 120.07227 82.550781 L 120.07227 90.054688 L 127.57812 90.054688 L 135.08203 90.054688 L 135.08203 82.550781 L 142.58594 82.550781 L 142.58594 75.044922 L 135.08203 75.044922 L 127.57812 75.044922 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect358" />
+      <rect
+         x="9"
+         y="11"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect390" />
+      <rect
+         x="37"
+         y="11"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect428" />
+      <rect
+         x="15"
+         y="12"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect444" />
+      <path
+         d="M 45.027344 97.558594 L 45.027344 105.06445 L 45.027344 112.56836 L 52.53125 112.56836 L 52.53125 105.06445 L 60.037109 105.06445 L 60.037109 97.558594 L 52.53125 97.558594 L 45.027344 97.558594 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect478" />
+      <rect
+         x="31"
+         y="13"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect512" />
+      <path
+         d="M 277.66797 97.558594 L 277.66797 105.06445 L 270.16406 105.06445 L 270.16406 112.56836 L 270.16406 120.07227 L 277.66797 120.07227 L 285.17188 120.07227 L 285.17188 112.56836 L 285.17188 105.06445 L 285.17188 97.558594 L 277.66797 97.558594 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect516" />
+      <rect
+         x="19"
+         y="14"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect532" />
+      <path
+         d="M 240.14453 105.06445 L 240.14453 112.56836 L 247.65039 112.56836 L 247.65039 120.07227 L 247.65039 127.57812 L 240.14453 127.57812 L 240.14453 120.07227 L 240.14453 112.56836 L 232.64062 112.56836 L 225.13672 112.56836 L 225.13672 120.07227 L 225.13672 127.57812 L 232.64062 127.57812 L 232.64062 135.08203 L 225.13672 135.08203 L 225.13672 142.58594 L 232.64062 142.58594 L 232.64062 150.0918 L 240.14453 150.0918 L 240.14453 157.5957 L 232.64062 157.5957 L 225.13672 157.5957 L 217.63086 157.5957 L 217.63086 150.0918 L 217.63086 142.58594 L 217.63086 135.08203 L 217.63086 127.57812 L 210.12695 127.57812 L 210.12695 135.08203 L 202.62305 135.08203 L 202.62305 142.58594 L 210.12695 142.58594 L 210.12695 150.0918 L 210.12695 157.5957 L 202.62305 157.5957 L 202.62305 150.0918 L 195.11719 150.0918 L 195.11719 142.58594 L 195.11719 135.08203 L 195.11719 127.57812 L 195.11719 120.07227 L 187.61328 120.07227 L 187.61328 127.57812 L 187.61328 135.08203 L 180.10938 135.08203 L 180.10938 127.57812 L 172.60547 127.57812 L 165.09961 127.57812 L 165.09961 120.07227 L 172.60547 120.07227 L 172.60547 112.56836 L 165.09961 112.56836 L 157.5957 112.56836 L 157.5957 120.07227 L 150.0918 120.07227 L 142.58594 120.07227 L 135.08203 120.07227 L 135.08203 112.56836 L 127.57812 112.56836 L 127.57812 120.07227 L 120.07227 120.07227 L 120.07227 127.57812 L 127.57812 127.57812 L 127.57812 135.08203 L 135.08203 135.08203 L 135.08203 142.58594 L 142.58594 142.58594 L 142.58594 150.0918 L 150.0918 150.0918 L 150.0918 157.5957 L 157.5957 157.5957 L 157.5957 150.0918 L 157.5957 142.58594 L 150.0918 142.58594 L 150.0918 135.08203 L 142.58594 135.08203 L 142.58594 127.57812 L 150.0918 127.57812 L 150.0918 135.08203 L 157.5957 135.08203 L 157.5957 142.58594 L 165.09961 142.58594 L 165.09961 135.08203 L 172.60547 135.08203 L 172.60547 142.58594 L 180.10938 142.58594 L 187.61328 142.58594 L 187.61328 150.0918 L 187.61328 157.5957 L 195.11719 157.5957 L 195.11719 165.09961 L 202.62305 165.09961 L 210.12695 165.09961 L 210.12695 172.60547 L 210.12695 180.10938 L 217.63086 180.10938 L 217.63086 187.61328 L 217.63086 195.11719 L 210.12695 195.11719 L 210.12695 187.61328 L 210.12695 180.10938 L 202.62305 180.10938 L 202.62305 187.61328 L 195.11719 187.61328 L 195.11719 195.11719 L 187.61328 195.11719 L 187.61328 202.62305 L 195.11719 202.62305 L 195.11719 210.12695 L 202.62305 210.12695 L 202.62305 202.62305 L 210.12695 202.62305 L 210.12695 210.12695 L 217.63086 210.12695 L 225.13672 210.12695 L 225.13672 217.63086 L 217.63086 217.63086 L 217.63086 225.13672 L 210.12695 225.13672 L 210.12695 217.63086 L 202.62305 217.63086 L 195.11719 217.63086 L 195.11719 210.12695 L 187.61328 210.12695 L 187.61328 217.63086 L 180.10938 217.63086 L 172.60547 217.63086 L 165.09961 217.63086 L 165.09961 225.13672 L 157.5957 225.13672 L 157.5957 217.63086 L 157.5957 210.12695 L 157.5957 202.62305 L 157.5957 195.11719 L 157.5957 187.61328 L 157.5957 180.10938 L 150.0918 180.10938 L 150.0918 187.61328 L 142.58594 187.61328 L 142.58594 195.11719 L 135.08203 195.11719 L 127.57812 195.11719 L 127.57812 202.62305 L 135.08203 202.62305 L 142.58594 202.62305 L 142.58594 210.12695 L 150.0918 210.12695 L 150.0918 217.63086 L 150.0918 225.13672 L 150.0918 232.64062 L 157.5957 232.64062 L 165.09961 232.64062 L 172.60547 232.64062 L 172.60547 225.13672 L 180.10938 225.13672 L 187.61328 225.13672 L 195.11719 225.13672 L 202.62305 225.13672 L 202.62305 232.64062 L 210.12695 232.64062 L 217.63086 232.64062 L 217.63086 240.14453 L 210.12695 240.14453 L 210.12695 247.65039 L 210.12695 255.1543 L 217.63086 255.1543 L 217.63086 262.6582 L 225.13672 262.6582 L 225.13672 270.16406 L 232.64062 270.16406 L 232.64062 262.6582 L 240.14453 262.6582 L 240.14453 255.1543 L 247.65039 255.1543 L 255.1543 255.1543 L 255.1543 247.65039 L 262.6582 247.65039 L 262.6582 240.14453 L 255.1543 240.14453 L 255.1543 232.64062 L 255.1543 225.13672 L 262.6582 225.13672 L 262.6582 217.63086 L 270.16406 217.63086 L 270.16406 225.13672 L 270.16406 232.64062 L 277.66797 232.64062 L 277.66797 225.13672 L 277.66797 217.63086 L 285.17188 217.63086 L 285.17188 210.12695 L 285.17188 202.62305 L 285.17188 195.11719 L 285.17188 187.61328 L 285.17188 180.10938 L 285.17188 172.60547 L 277.66797 172.60547 L 277.66797 180.10938 L 270.16406 180.10938 L 270.16406 172.60547 L 270.16406 165.09961 L 262.6582 165.09961 L 262.6582 157.5957 L 262.6582 150.0918 L 255.1543 150.0918 L 255.1543 157.5957 L 247.65039 157.5957 L 247.65039 150.0918 L 255.1543 150.0918 L 255.1543 142.58594 L 247.65039 142.58594 L 247.65039 135.08203 L 255.1543 135.08203 L 255.1543 142.58594 L 262.6582 142.58594 L 262.6582 150.0918 L 270.16406 150.0918 L 270.16406 142.58594 L 277.66797 142.58594 L 277.66797 135.08203 L 270.16406 135.08203 L 270.16406 127.57812 L 270.16406 120.07227 L 262.6582 120.07227 L 262.6582 112.56836 L 255.1543 112.56836 L 255.1543 105.06445 L 247.65039 105.06445 L 240.14453 105.06445 z M 195.11719 165.09961 L 187.61328 165.09961 L 180.10938 165.09961 L 180.10938 157.5957 L 180.10938 150.0918 L 172.60547 150.0918 L 172.60547 157.5957 L 165.09961 157.5957 L 165.09961 165.09961 L 165.09961 172.60547 L 172.60547 172.60547 L 172.60547 180.10938 L 165.09961 180.10938 L 165.09961 187.61328 L 165.09961 195.11719 L 165.09961 202.62305 L 172.60547 202.62305 L 172.60547 195.11719 L 172.60547 187.61328 L 180.10938 187.61328 L 187.61328 187.61328 L 187.61328 180.10938 L 180.10938 180.10938 L 180.10938 172.60547 L 187.61328 172.60547 L 195.11719 172.60547 L 195.11719 165.09961 z M 217.63086 165.09961 L 225.13672 165.09961 L 232.64062 165.09961 L 240.14453 165.09961 L 240.14453 172.60547 L 247.65039 172.60547 L 247.65039 180.10938 L 255.1543 180.10938 L 255.1543 187.61328 L 262.6582 187.61328 L 270.16406 187.61328 L 277.66797 187.61328 L 277.66797 195.11719 L 277.66797 202.62305 L 270.16406 202.62305 L 262.6582 202.62305 L 262.6582 210.12695 L 255.1543 210.12695 L 255.1543 202.62305 L 262.6582 202.62305 L 262.6582 195.11719 L 255.1543 195.11719 L 255.1543 187.61328 L 247.65039 187.61328 L 247.65039 180.10938 L 240.14453 180.10938 L 240.14453 187.61328 L 232.64062 187.61328 L 232.64062 195.11719 L 232.64062 202.62305 L 240.14453 202.62305 L 240.14453 195.11719 L 247.65039 195.11719 L 247.65039 202.62305 L 247.65039 210.12695 L 240.14453 210.12695 L 240.14453 217.63086 L 232.64062 217.63086 L 232.64062 210.12695 L 232.64062 202.62305 L 225.13672 202.62305 L 225.13672 195.11719 L 225.13672 187.61328 L 225.13672 180.10938 L 232.64062 180.10938 L 240.14453 180.10938 L 240.14453 172.60547 L 232.64062 172.60547 L 225.13672 172.60547 L 217.63086 172.60547 L 217.63086 165.09961 z M 225.13672 225.13672 L 232.64062 225.13672 L 240.14453 225.13672 L 247.65039 225.13672 L 247.65039 232.64062 L 247.65039 240.14453 L 247.65039 247.65039 L 240.14453 247.65039 L 232.64062 247.65039 L 225.13672 247.65039 L 225.13672 240.14453 L 225.13672 232.64062 L 225.13672 225.13672 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect544" />
+      <rect
+         x="7"
+         y="15"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect554" />
+      <rect
+         x="9"
+         y="15"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect556" />
+      <rect
+         x="24"
+         y="15"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect570" />
+      <path
+         d="M 15.009766 120.07227 L 15.009766 127.57812 L 7.5039062 127.57812 L 7.5039062 135.08203 L 15.009766 135.08203 L 22.513672 135.08203 L 22.513672 127.57812 L 22.513672 120.07227 L 15.009766 120.07227 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect588" />
+      <rect
+         x="5"
+         y="16"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect590" />
+      <path
+         d="M 60.037109 120.07227 L 60.037109 127.57812 L 52.53125 127.57812 L 45.027344 127.57812 L 45.027344 135.08203 L 37.523438 135.08203 L 37.523438 127.57812 L 30.017578 127.57812 L 30.017578 135.08203 L 22.513672 135.08203 L 22.513672 142.58594 L 15.009766 142.58594 L 15.009766 150.0918 L 22.513672 150.0918 L 22.513672 157.5957 L 30.017578 157.5957 L 30.017578 165.09961 L 22.513672 165.09961 L 22.513672 157.5957 L 15.009766 157.5957 L 15.009766 165.09961 L 15.009766 172.60547 L 15.009766 180.10938 L 22.513672 180.10938 L 22.513672 172.60547 L 30.017578 172.60547 L 30.017578 180.10938 L 37.523438 180.10938 L 45.027344 180.10938 L 45.027344 172.60547 L 37.523438 172.60547 L 37.523438 165.09961 L 37.523438 157.5957 L 45.027344 157.5957 L 45.027344 165.09961 L 52.53125 165.09961 L 60.037109 165.09961 L 67.541016 165.09961 L 67.541016 157.5957 L 75.044922 157.5957 L 82.550781 157.5957 L 82.550781 150.0918 L 82.550781 142.58594 L 75.044922 142.58594 L 75.044922 150.0918 L 67.541016 150.0918 L 60.037109 150.0918 L 60.037109 157.5957 L 52.53125 157.5957 L 52.53125 150.0918 L 60.037109 150.0918 L 60.037109 142.58594 L 52.53125 142.58594 L 52.53125 135.08203 L 60.037109 135.08203 L 60.037109 142.58594 L 67.541016 142.58594 L 75.044922 142.58594 L 75.044922 135.08203 L 67.541016 135.08203 L 67.541016 127.57812 L 67.541016 120.07227 L 60.037109 120.07227 z M 30.017578 142.58594 L 37.523438 142.58594 L 37.523438 150.0918 L 30.017578 150.0918 L 30.017578 142.58594 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect592" />
+      <rect
+         x="10"
+         y="16"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect594" />
+      <path
+         d="M 82.550781 127.57812 L 82.550781 135.08203 L 82.550781 142.58594 L 90.054688 142.58594 L 90.054688 135.08203 L 97.558594 135.08203 L 97.558594 127.57812 L 90.054688 127.57812 L 82.550781 127.57812 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect632" />
+      <rect
+         x="37"
+         y="17"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect662" />
+      <path
+         d="M 97.558594 135.08203 L 97.558594 142.58594 L 97.558594 150.0918 L 90.054688 150.0918 L 90.054688 157.5957 L 97.558594 157.5957 L 105.06445 157.5957 L 105.06445 165.09961 L 97.558594 165.09961 L 97.558594 172.60547 L 97.558594 180.10938 L 90.054688 180.10938 L 90.054688 187.61328 L 97.558594 187.61328 L 105.06445 187.61328 L 105.06445 180.10938 L 105.06445 172.60547 L 112.56836 172.60547 L 112.56836 180.10938 L 112.56836 187.61328 L 112.56836 195.11719 L 105.06445 195.11719 L 97.558594 195.11719 L 97.558594 202.62305 L 105.06445 202.62305 L 105.06445 210.12695 L 112.56836 210.12695 L 112.56836 202.62305 L 120.07227 202.62305 L 120.07227 195.11719 L 120.07227 187.61328 L 120.07227 180.10938 L 120.07227 172.60547 L 120.07227 165.09961 L 112.56836 165.09961 L 112.56836 157.5957 L 120.07227 157.5957 L 127.57812 157.5957 L 127.57812 150.0918 L 127.57812 142.58594 L 127.57812 135.08203 L 120.07227 135.08203 L 120.07227 142.58594 L 120.07227 150.0918 L 112.56836 150.0918 L 105.06445 150.0918 L 105.06445 142.58594 L 112.56836 142.58594 L 112.56836 135.08203 L 105.06445 135.08203 L 97.558594 135.08203 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect678" />
+      <rect
+         x="22"
+         y="19"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect732" />
+      <rect
+         x="37"
+         y="19"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect746" />
+      <path
+         d="M 82.550781 157.5957 L 82.550781 165.09961 L 75.044922 165.09961 L 67.541016 165.09961 L 67.541016 172.60547 L 67.541016 180.10938 L 75.044922 180.10938 L 82.550781 180.10938 L 82.550781 172.60547 L 90.054688 172.60547 L 90.054688 165.09961 L 90.054688 157.5957 L 82.550781 157.5957 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect796" />
+      <path
+         d="M 135.08203 157.5957 L 135.08203 165.09961 L 135.08203 172.60547 L 127.57812 172.60547 L 127.57812 180.10938 L 135.08203 180.10938 L 135.08203 187.61328 L 142.58594 187.61328 L 142.58594 180.10938 L 142.58594 172.60547 L 142.58594 165.09961 L 150.0918 165.09961 L 150.0918 157.5957 L 142.58594 157.5957 L 135.08203 157.5957 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect800" />
+      <rect
+         x="20"
+         y="22"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect846" />
+      <rect
+         x="7"
+         y="23"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect872" />
+      <rect
+         x="21"
+         y="23"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect886" />
+      <rect
+         x="26"
+         y="23"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect890" />
+      <path
+         d="M 22.513672 180.10938 L 22.513672 187.61328 L 22.513672 195.11719 L 30.017578 195.11719 L 37.523438 195.11719 L 37.523438 187.61328 L 30.017578 187.61328 L 30.017578 180.10938 L 22.513672 180.10938 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect908" />
+      <path
+         d="M 45.027344 180.10938 L 45.027344 187.61328 L 45.027344 195.11719 L 52.53125 195.11719 L 60.037109 195.11719 L 67.541016 195.11719 L 75.044922 195.11719 L 75.044922 187.61328 L 67.541016 187.61328 L 60.037109 187.61328 L 52.53125 187.61328 L 52.53125 180.10938 L 45.027344 180.10938 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect910" />
+      <path
+         d="M 7.5039062 187.61328 L 7.5039062 195.11719 L 7.5039062 202.62305 L 7.5039062 210.12695 L 7.5039062 217.63086 L 7.5039062 225.13672 L 15.009766 225.13672 L 15.009766 217.63086 L 15.009766 210.12695 L 22.513672 210.12695 L 30.017578 210.12695 L 30.017578 202.62305 L 22.513672 202.62305 L 22.513672 195.11719 L 15.009766 195.11719 L 15.009766 187.61328 L 7.5039062 187.61328 z "
+         id="rect942"
+         transform="scale(0.13325261,0.13325261)" />
+      <path
+         d="M 82.550781 187.61328 L 82.550781 195.11719 L 75.044922 195.11719 L 75.044922 202.62305 L 82.550781 202.62305 L 90.054688 202.62305 L 90.054688 195.11719 L 90.054688 187.61328 L 82.550781 187.61328 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect956" />
+      <path
+         d="M 37.523438 195.11719 L 37.523438 202.62305 L 37.523438 210.12695 L 45.027344 210.12695 L 45.027344 217.63086 L 52.53125 217.63086 L 52.53125 210.12695 L 60.037109 210.12695 L 60.037109 217.63086 L 67.541016 217.63086 L 67.541016 210.12695 L 75.044922 210.12695 L 75.044922 202.62305 L 67.541016 202.62305 L 60.037109 202.62305 L 52.53125 202.62305 L 45.027344 202.62305 L 45.027344 195.11719 L 37.523438 195.11719 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect984" />
+      <rect
+         x="16"
+         y="27"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1042" />
+      <rect
+         x="23"
+         y="27"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1048" />
+      <rect
+         x="4"
+         y="28"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1068" />
+      <path
+         d="M 82.550781 210.12695 L 82.550781 217.63086 L 82.550781 225.13672 L 90.054688 225.13672 L 90.054688 217.63086 L 97.558594 217.63086 L 97.558594 225.13672 L 105.06445 225.13672 L 105.06445 217.63086 L 105.06445 210.12695 L 97.558594 210.12695 L 90.054688 210.12695 L 82.550781 210.12695 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1074" />
+      <path
+         d="M 127.57812 210.12695 L 127.57812 217.63086 L 120.07227 217.63086 L 120.07227 225.13672 L 112.56836 225.13672 L 112.56836 232.64062 L 112.56836 240.14453 L 120.07227 240.14453 L 120.07227 232.64062 L 127.57812 232.64062 L 127.57812 225.13672 L 135.08203 225.13672 L 135.08203 217.63086 L 142.58594 217.63086 L 142.58594 210.12695 L 135.08203 210.12695 L 127.57812 210.12695 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1080" />
+      <rect
+         x="5"
+         y="29"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1104" />
+      <rect
+         x="7"
+         y="29"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1106" />
+      <path
+         d="M 67.541016 217.63086 L 67.541016 225.13672 L 67.541016 232.64062 L 67.541016 240.14453 L 75.044922 240.14453 L 75.044922 232.64062 L 82.550781 232.64062 L 82.550781 225.13672 L 75.044922 225.13672 L 75.044922 217.63086 L 67.541016 217.63086 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1108" />
+      <rect
+         x="12"
+         y="30"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1150" />
+      <path
+         d="M 7.5039062 232.64062 L 7.5039062 240.14453 L 7.5039062 247.65039 L 7.5039062 255.1543 L 7.5039062 262.6582 L 7.5039062 270.16406 L 7.5039062 277.66797 L 7.5039062 285.17188 L 15.009766 285.17188 L 22.513672 285.17188 L 30.017578 285.17188 L 37.523438 285.17188 L 45.027344 285.17188 L 52.53125 285.17188 L 60.037109 285.17188 L 60.037109 277.66797 L 60.037109 270.16406 L 60.037109 262.6582 L 60.037109 255.1543 L 60.037109 247.65039 L 60.037109 240.14453 L 60.037109 232.64062 L 52.53125 232.64062 L 45.027344 232.64062 L 37.523438 232.64062 L 30.017578 232.64062 L 22.513672 232.64062 L 15.009766 232.64062 L 7.5039062 232.64062 z M 15.009766 240.14453 L 22.513672 240.14453 L 30.017578 240.14453 L 37.523438 240.14453 L 45.027344 240.14453 L 52.53125 240.14453 L 52.53125 247.65039 L 52.53125 255.1543 L 52.53125 262.6582 L 52.53125 270.16406 L 52.53125 277.66797 L 45.027344 277.66797 L 37.523438 277.66797 L 30.017578 277.66797 L 22.513672 277.66797 L 15.009766 277.66797 L 15.009766 270.16406 L 15.009766 262.6582 L 15.009766 255.1543 L 15.009766 247.65039 L 15.009766 240.14453 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1172" />
+      <path
+         d="M 97.558594 232.64062 L 97.558594 240.14453 L 97.558594 247.65039 L 105.06445 247.65039 L 105.06445 240.14453 L 105.06445 232.64062 L 97.558594 232.64062 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1188" />
+      <path
+         d="M 127.57812 232.64062 L 127.57812 240.14453 L 127.57812 247.65039 L 120.07227 247.65039 L 120.07227 255.1543 L 127.57812 255.1543 L 135.08203 255.1543 L 135.08203 247.65039 L 142.58594 247.65039 L 142.58594 255.1543 L 150.0918 255.1543 L 150.0918 247.65039 L 157.5957 247.65039 L 157.5957 240.14453 L 150.0918 240.14453 L 142.58594 240.14453 L 135.08203 240.14453 L 135.08203 232.64062 L 127.57812 232.64062 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1192" />
+      <rect
+         x="24"
+         y="31"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1194" />
+      <rect
+         x="31"
+         y="31"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1198" />
+      <rect
+         x="35"
+         y="31"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1202" />
+      <rect
+         x="37"
+         y="31"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1204" />
+      <path
+         d="M 75.044922 240.14453 L 75.044922 247.65039 L 67.541016 247.65039 L 67.541016 255.1543 L 67.541016 262.6582 L 75.044922 262.6582 L 75.044922 255.1543 L 82.550781 255.1543 L 82.550781 247.65039 L 82.550781 240.14453 L 75.044922 240.14453 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1210" />
+      <path
+         d="M 165.09961 240.14453 L 165.09961 247.65039 L 165.09961 255.1543 L 157.5957 255.1543 L 157.5957 262.6582 L 157.5957 270.16406 L 157.5957 277.66797 L 165.09961 277.66797 L 165.09961 270.16406 L 165.09961 262.6582 L 172.60547 262.6582 L 180.10938 262.6582 L 180.10938 255.1543 L 180.10938 247.65039 L 172.60547 247.65039 L 172.60547 240.14453 L 165.09961 240.14453 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1222" />
+      <path
+         d="M 187.61328 240.14453 L 187.61328 247.65039 L 187.61328 255.1543 L 195.11719 255.1543 L 195.11719 247.65039 L 202.62305 247.65039 L 202.62305 240.14453 L 195.11719 240.14453 L 187.61328 240.14453 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1224" />
+      <path
+         d="M 22.513672 247.65039 L 22.513672 255.1543 L 22.513672 262.6582 L 22.513672 270.16406 L 30.017578 270.16406 L 37.523438 270.16406 L 45.027344 270.16406 L 45.027344 262.6582 L 45.027344 255.1543 L 45.027344 247.65039 L 37.523438 247.65039 L 30.017578 247.65039 L 22.513672 247.65039 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1238" />
+      <rect
+         x="14"
+         y="33"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1250" />
+      <path
+         d="M 270.16406 247.65039 L 270.16406 255.1543 L 277.66797 255.1543 L 285.17188 255.1543 L 285.17188 247.65039 L 277.66797 247.65039 L 270.16406 247.65039 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1276" />
+      <rect
+         x="13"
+         y="34"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1292" />
+      <path
+         d="M 112.56836 255.1543 L 112.56836 262.6582 L 112.56836 270.16406 L 105.06445 270.16406 L 105.06445 277.66797 L 105.06445 285.17188 L 112.56836 285.17188 L 112.56836 277.66797 L 120.07227 277.66797 L 127.57812 277.66797 L 127.57812 270.16406 L 120.07227 270.16406 L 120.07227 262.6582 L 120.07227 255.1543 L 112.56836 255.1543 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1294" />
+      <rect
+         x="18"
+         y="34"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1296" />
+      <path
+         d="M 255.1543 255.1543 L 255.1543 262.6582 L 247.65039 262.6582 L 240.14453 262.6582 L 240.14453 270.16406 L 247.65039 270.16406 L 255.1543 270.16406 L 255.1543 277.66797 L 247.65039 277.66797 L 240.14453 277.66797 L 232.64062 277.66797 L 232.64062 285.17188 L 240.14453 285.17188 L 247.65039 285.17188 L 255.1543 285.17188 L 262.6582 285.17188 L 270.16406 285.17188 L 270.16406 277.66797 L 277.66797 277.66797 L 277.66797 285.17188 L 285.17188 285.17188 L 285.17188 277.66797 L 285.17188 270.16406 L 285.17188 262.6582 L 277.66797 262.6582 L 270.16406 262.6582 L 262.6582 262.6582 L 262.6582 255.1543 L 255.1543 255.1543 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1310" />
+      <path
+         d="M 75.044922 262.6582 L 75.044922 270.16406 L 75.044922 277.66797 L 82.550781 277.66797 L 90.054688 277.66797 L 90.054688 270.16406 L 82.550781 270.16406 L 82.550781 262.6582 L 75.044922 262.6582 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1322" />
+      <rect
+         x="12"
+         y="35"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1324" />
+      <rect
+         x="17"
+         y="35"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1328" />
+      <path
+         d="M 142.58594 262.6582 L 142.58594 270.16406 L 135.08203 270.16406 L 135.08203 277.66797 L 135.08203 285.17188 L 142.58594 285.17188 L 142.58594 277.66797 L 150.0918 277.66797 L 150.0918 270.16406 L 150.0918 262.6582 L 142.58594 262.6582 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1330" />
+      <rect
+         x="25"
+         y="35"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1334" />
+      <path
+         d="M 210.12695 270.16406 L 210.12695 277.66797 L 210.12695 285.17188 L 217.63086 285.17188 L 225.13672 285.17188 L 225.13672 277.66797 L 217.63086 277.66797 L 217.63086 270.16406 L 210.12695 270.16406 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1370" />
+      <rect
+         x="12"
+         y="37"
+         width="1"
+         height="1"
+         fill="#000000"
+         id="rect1394" />
+      <path
+         d="M 165.09961 277.66797 L 165.09961 285.17188 L 172.60547 285.17188 L 180.10938 285.17188 L 180.10938 277.66797 L 172.60547 277.66797 L 165.09961 277.66797 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1400" />
+      <path
+         d="M 187.61328 277.66797 L 187.61328 285.17188 L 195.11719 285.17188 L 202.62305 285.17188 L 202.62305 277.66797 L 195.11719 277.66797 L 187.61328 277.66797 z "
+         transform="scale(0.13325261,0.13325261)"
+         id="rect1404" />
+    </g>
+  </g>
 </svg>
