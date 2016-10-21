@@ -10,6 +10,9 @@ I'm waaay overdue for a community post, and there's plenty of updates to share.
 
 #### What has happened:
 * I'm happy to announce that in early May, Sean Kaim (owner of the mRemote3G fork) joined the development team! Sean has a background in C/Java/C# development. Sean did great work with mRemote3G, and continues to do so with us. Welcome Sean to the team! (Note: The bug fixes that Sean implemented in mRemote3G have been ported over to mRemoteNG. Active work on mRemote3G has been discontinued.)
+
+<!--more-->
+
 * New releases
   * A few weeks ago, we released version 1.74 Release Candidate 2, the first new version of mRemoteNG in over two years. It was a large milestone in reviving the project, and a bit of a scary one at that. Thank you to everyone who has tried the new version and provided feedback to us!
   * We just released 1.74 RC3 today! (I was writing this post as we were prepping the build for release). RC3 fixes a few issues from RC2, such as:

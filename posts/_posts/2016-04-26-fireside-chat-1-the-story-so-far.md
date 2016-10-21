@@ -8,6 +8,8 @@ Hello mRemoteNG users!
 
 I'm a bit overdue for one of these update posts. As mentioned in the last post, I am hoping to provide information to the community about once a month about what we are working on and what we are planning for the future. I'll be calling these the "fireside chats".
 
+<!--more-->
+
 The last update was focused largely on long term features and improvements. However, this is not going to be the main focus for the first few releases. Let me start by going through the events since the last update.
 
 #### What has happened:

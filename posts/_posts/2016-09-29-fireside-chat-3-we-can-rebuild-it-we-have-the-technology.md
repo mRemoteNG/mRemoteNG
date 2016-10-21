@@ -10,6 +10,8 @@ Here is another extrememly overdue update from the dev team.
 
 We've been hard at work getting v1.75 ready for alpha/beta testing. I think we are getting close(r). This update was slated to be security-focused with many important improvements. While that's still mostly the case, it has been diluted a bit. When we took a look at the areas of the program that we wanted to change over the next few versions, it became clear that the architecture of the application was going to be a significant burden. Much of the code was tightly woven with how things get displayed and how that display should react when data changes.
 
+<!--more-->
+
 #### What has happened:
 * Large re-write of anything that touched the TreeView displayed. If it dared to talk about TreeNodes, it was rewriten. Unfortunately, this took up most of the last month.
   * Everything is now based on our business objects (ConnectionInfo objects and their related decendants). Previously, ConnectionInfo objects were first wrapped in TreeNode objects (which handled display concerns and how the tree was built and ordered).

@@ -7,6 +7,7 @@ exclude: [README.md, Gemfile, Gemfile.lock]
 permalink: pretty
 paginate: 5
 paginate_path: /posts/:num/
+excerpt_separator: <!--more-->
 
 defaults:
   -
