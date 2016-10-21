@@ -82,6 +82,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
       <HintPath>..\packages\DockPanelSuite.2.10.0\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
       <Private>True</Private>
@@ -110,6 +111,7 @@
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
     <Compile Include="Config\Serializers\PortScanDeserializerTests.cs" />
     <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionNodeSerializerTests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
