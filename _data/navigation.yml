@@ -1,0 +1,18 @@
+# masthead navigation links
+masthead:
+  - title: "Home"
+    url: //
+  - title: "Posts"
+    url: /posts/
+  - title: "Documentation"
+    url: /https://github.com/mRemoteNG/mRemoteNG/wiki/
+  - title: "Download"
+    url: /download/
+  - title: "Contribute"
+    url: /contribute/
+  - title: "Bugs & Feature Requests"
+    url: /https://github.com/mRemoteNG/mRemoteNG/issues/
+  - title: "Source Code"
+    url: /https://github.com/mRemoteNG/mRemoteNG/
+    
+    
