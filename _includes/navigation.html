@@ -12,27 +12,11 @@
             </div>
             <div class='collapse navbar-collapse' id='navbar-collapse'>
                 <ul class='nav navbar-nav'>
-                    <li role='presentation' {% if page.url == '/' %}class='active'{% endif %}>
-                        <a href='{{ site.baseurl }}/'>Home</a>
-                    </li>
-                    <li role='presentation' {% if page.url contains '/posts/' %}class='active'{% endif %}>
-                        <a href='{{ site.baseurl }}/posts'>Posts</a>
-                    </li>
-                    <li role='presentation'>
-                        <a href='{{ site.github.wiki_url }}'>Documentation</a>
-                    </li>
-                    <li role='presentation' {% if page.url == '/download' %}class='active'{% endif %}>
-                        <a href='{{ site.baseurl }}/download'>Download</a>
-                    </li>
-                    <li role='presentation' {% if page.url == '/contribute' %}class='active'{% endif %}>
-                        <a href='{{ site.baseurl }}/contribute'>Contribute</a>
-                    </li>
-                    <li role='presentation'>
-                        <a href='{{ site.github.issues_url }}'>Bugs &amp; Feature Requests</a>
-                    </li>
-                    <li role='presentation'>
-                        <a href='{{ site.github.repository_url }}'>Source Code</a>
-                    </li>
+                    {% for link in site.data.navigation.masthead %}
+                        <li role='presentation' {% if page.url == '{{ link.url }}' %}class='active'{% endif %}>
+                            <a href='{{ link.url }}'>{{ link.title }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
