@@ -1,0 +1,25 @@
+# masthead navigation links
+masthead:
+  - title: "Home"
+    url: "https://mremoteng.org"
+    target: 
+  - title: "Posts"
+    url: "https://mremoteng.org/posts"
+    target:
+  - title: "Documentation"
+    url: "https://github.com/mRemoteNG/mRemoteNG/wiki"
+    target: target="_blank"
+  - title: "Download"
+    url: "https://mremoteng.org/download"
+    target:
+  - title: "Contribute"
+    url: "https://mremoteng.org/contribute"
+    target:
+  - title: "Bugs & Feature Requests"
+    url: "https://github.com/mRemoteNG/mRemoteNG/issues"
+    target: target="_blank"
+  - title: "Source Code"
+    url: "https://github.com/mRemoteNG/mRemoteNG"
+    target: target="_blank"
+    
+    
