@@ -18,7 +18,7 @@
                             {% assign class = "class='active'" %}
                         {% endif %}
                         <li role='presentation' {{class}}>
-                            <a href='{{ link.url }}' {{ link.target}}>{{ link.title }}</a>
+                            <a href={{ link.url }} {{ link.target}}>{{ link.title }}</a>
                         </li>
                     {% endfor %}
                 </ul>
