@@ -13,8 +13,12 @@
             <div class='collapse navbar-collapse' id='navbar-collapse'>
                 <ul class='nav navbar-nav'>
                     {% for link in site.data.navigation.masthead %}
-                        <li role='presentation' {% if page.url == '{{ link.url }}' %}class='active'{% endif %}>
-                            <a href='{{ link.url }}'>{{ link.title }}</a>
+                        {% assign class = nil %}
+                        {% if page.url contains link.url %}
+                            {% assign class = "class='active'" %}
+                        {% endif %}
+                        <li role='presentation' {{class}}>
+                            <a href='{{ link.url }}' {{ link.target}}>{{ link.title }}</a>
                         </li>
                     {% endfor %}
                 </ul>
