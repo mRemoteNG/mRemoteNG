@@ -32,7 +32,10 @@ namespace mRemoteNG.Config.Serializers
 
             CompileRecursive(serializationTarget, rootElement);
             var xmlDeclaration = new XDeclaration("1.0", "utf-8", "");
-            return new XDocument(xmlDeclaration, rootElement);
+            var xmlDocument = new XDocument(xmlDeclaration, rootElement);
+            if (fullFileEncryption)
+                xmlDocument = new XmlConnectionsDocumentEncryptor(_cryptographyProvider).EncryptDocument(xmlDocument, rootNodeInfo.PasswordString.ConvertToSecureString());
+            return xmlDocument;
         }
 
         private void CompileRecursive(ConnectionInfo serializationTarget, XContainer parentElement)

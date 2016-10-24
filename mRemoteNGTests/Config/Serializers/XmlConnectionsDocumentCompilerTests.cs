@@ -55,6 +55,14 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(con4, Is.Not.Null);
         }
 
+        [Test]
+        public void XmlContentEncryptedWhenFullFileEncryptionTurnedOn()
+        {
+            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, true, false);
+            var rootElementValue = xdoc.Root?.Value;
+            Assert.That(rootElementValue, Is.Not.EqualTo(string.Empty));
+        }
+
 
         private ConnectionTreeModel SetupConnectionTreeModel()
         {
