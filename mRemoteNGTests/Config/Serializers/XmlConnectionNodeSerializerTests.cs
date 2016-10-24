@@ -55,6 +55,17 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(targetAttribute?.Value, Is.EqualTo(string.Empty));
         }
 
+        [TestCaseSource(typeof(TestCaseDataSource), nameof(TestCaseDataSource.InheritanceFilterTests))]
+        public void InheritanceNotSerialiedWhenFiltered(string attributeName, ConnectionInfo connectionInfo)
+        {
+            var saveFilter = new SaveFilter(true);
+            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
+            var returnVal = _connectionNodeSerializer.SerializeConnectionInfo(connectionInfo);
+            var targetAttribute = returnVal.Attribute(XName.Get(attributeName));
+            Assert.That(targetAttribute?.Value, Is.EqualTo(false.ToString()));
+        }
+
         private class TestCaseDataSource
         {
             private static readonly ConnectionInfo ConnectionInfo = new ConnectionInfo
@@ -77,7 +88,12 @@ namespace mRemoteNGTests.Config.Serializers
                 UserField = "userfield data here",
                 VNCProxyIP = "192.168.1.1",
                 VNCProxyUsername = "vncproxyuser",
-                VNCProxyPassword = "vncproxypass"
+                VNCProxyPassword = "vncproxypass",
+            };
+
+            private static readonly ConnectionInfo ConnectionInfoWithInheritance = new ConnectionInfo
+            {
+                Inheritance = {EverythingInherited = true}
             };
 
             private static readonly ContainerInfo ContainerInfo = new ContainerInfo();
@@ -94,6 +110,21 @@ namespace mRemoteNGTests.Config.Serializers
                     yield return new TestCaseData("RDGatewayPassword", ConnectionInfo);
                     yield return new TestCaseData("VNCProxyUsername", ConnectionInfo);
                     yield return new TestCaseData("VNCProxyPassword", ConnectionInfo);
+                }
+            }
+
+            public static IEnumerable InheritanceFilterTests
+            {
+                get
+                {
+                    yield return new TestCaseData("InheritUsername", ConnectionInfoWithInheritance);
+                    yield return new TestCaseData("InheritDomain", ConnectionInfoWithInheritance);
+                    yield return new TestCaseData("InheritPassword", ConnectionInfoWithInheritance);
+                    yield return new TestCaseData("InheritRDGatewayUsername", ConnectionInfoWithInheritance);
+                    yield return new TestCaseData("InheritRDGatewayDomain", ConnectionInfoWithInheritance);
+                    yield return new TestCaseData("InheritRDGatewayPassword", ConnectionInfoWithInheritance);
+                    yield return new TestCaseData("InheritVNCProxyUsername", ConnectionInfoWithInheritance);
+                    yield return new TestCaseData("InheritVNCProxyPassword", ConnectionInfoWithInheritance);
                 }
             }
 
