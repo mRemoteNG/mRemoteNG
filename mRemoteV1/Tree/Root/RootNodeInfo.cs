@@ -41,23 +41,19 @@ namespace mRemoteNG.Tree.Root
 	    [Browsable(false)]
 	    public string PasswordString
 	    {
-	        get { return _customPassword; }
+	        get
+	        {
+	            return Password ? _customPassword : DefaultPassword;
+	        }
 	        set
 	        {
-	            if (!string.IsNullOrEmpty(value))
-	            {
-	                _customPassword = value;
-	                Password = true;
-	            }
-	            else
-	            {
-	                Password = false;
-	            }
+	            _customPassword = value;
+	            Password = !string.IsNullOrEmpty(value) && _customPassword != DefaultPassword;
 	        }
 	    }
 
         [Browsable(false)]
-        public SecureString DefaultPassword { get; } = "mR3m".ConvertToSecureString();
+        public string DefaultPassword { get; } = "mR3m";
 			
 		[Browsable(false)]
         public RootNodeType Type {get; set;}
