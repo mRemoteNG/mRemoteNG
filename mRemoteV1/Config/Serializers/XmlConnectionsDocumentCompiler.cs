@@ -13,6 +13,7 @@ namespace mRemoteNG.Config.Serializers
     public class XmlConnectionsDocumentCompiler
     {
         private readonly ICryptographyProvider _cryptographyProvider;
+        private SecureString _encryptionKey;
 
         public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider)
         {
@@ -28,13 +29,14 @@ namespace mRemoteNG.Config.Serializers
         public XDocument CompileDocument(ConnectionInfo serializationTarget, bool fullFileEncryption, bool export)
         {
             var rootNodeInfo = GetRootNodeFromConnectionInfo(serializationTarget);
+            _encryptionKey = rootNodeInfo.PasswordString.ConvertToSecureString();
             var rootElement = CompileRootNode(rootNodeInfo, fullFileEncryption, export);
 
             CompileRecursive(serializationTarget, rootElement);
-            var xmlDeclaration = new XDeclaration("1.0", "utf-8", "");
+            var xmlDeclaration = new XDeclaration("1.0", "utf-8", null);
             var xmlDocument = new XDocument(xmlDeclaration, rootElement);
             if (fullFileEncryption)
-                xmlDocument = new XmlConnectionsDocumentEncryptor(_cryptographyProvider).EncryptDocument(xmlDocument, rootNodeInfo.PasswordString.ConvertToSecureString());
+                xmlDocument = new XmlConnectionsDocumentEncryptor(_cryptographyProvider).EncryptDocument(xmlDocument, _encryptionKey);
             return xmlDocument;
         }
 
@@ -75,7 +77,7 @@ namespace mRemoteNG.Config.Serializers
 
         private XElement CompileConnectionInfoNode(ConnectionInfo connectionInfo)
         {
-            var connectionSerializer = new XmlConnectionNodeSerializer(_cryptographyProvider, new SecureString());
+            var connectionSerializer = new XmlConnectionNodeSerializer(_cryptographyProvider, _encryptionKey);
             return connectionSerializer.SerializeConnectionInfo(connectionInfo);
         }
     }
