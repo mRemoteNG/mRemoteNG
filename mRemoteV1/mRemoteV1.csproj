@@ -150,6 +150,7 @@
     <Compile Include="Config\Serializers\ISerializer.cs" />
     <Compile Include="Config\Serializers\XmlConnectionNodeSerializer.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentCompiler.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionsDocumentEncryptor.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsSerializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProvider.cs" />
     <Compile Include="Config\DataProviders\IDataProvider.cs" />
