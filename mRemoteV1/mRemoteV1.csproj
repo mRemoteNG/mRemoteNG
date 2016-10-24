@@ -155,6 +155,7 @@
     <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializer.cs" />
     <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />
+    <Compile Include="Config\Serializers\XmlRootNodeSerializer.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
