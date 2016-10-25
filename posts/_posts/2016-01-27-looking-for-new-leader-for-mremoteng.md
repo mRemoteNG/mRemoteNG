@@ -7,6 +7,8 @@ mRemoteNG has not been in active development for quite some time now. After I lo
 
 It's time that I either hand the reigns over to someone else or declare the project dead. I feel bad for not doing so sooner.
 
+<!--more-->
+
 If I let someone else take over, the question is, how do I find such a person, and how do I make sure they are the right person? It's a lot of work for very little reward. In addition to writing code, you need to triage bug reports in JIRA, reply to emails, reply to forum posts, keep the forum spam free, and countless other things. For mRemoteNG to thrive, you will need help and finding and coordinating those helpers is a lot of work in itself.
 
 The big question though is, is it worth it? The architecture of mRemoteNG is old and fragile. I made many bug fixes, improvements, and refactored a lot but there's still a ton that needs to be improved. Nearly every seemingly simple bug report or feature request ends up being a huge can of worms due to deep architectural issues or third party dependencies.

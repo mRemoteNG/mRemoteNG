@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
 <rss version='2.0' xmlns:sparkle='http://www.andymatuschak.org/xml-namespaces/sparkle' xmlns:dc='http://purl.org/dc/elements/1.1/'>
-    <channel>
-        <title>mRemoteNG Changelog</title>
-        <description>Most recent changes with links to updates.</description>
-        <language>en</language>
-        <link>{{ site.url }}{{ page.url }}</link>
-        {% for release in site.github.releases limit: 5 %}{% if release.draft == false and release.prerelease == page.prerelease %}<item>
-            <title>{{ release.name | xml_escape }}</title>
-            <description>
-                <![CDATA[
-                {{ release.body | markdownify }}
-                ]]>
-            </description>
-            <pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
-            {% for asset in release.assets %}{% if asset.content_type == 'application/x-msdownload' and asset.state == 'uploaded' %}<enclosure url='{{ asset.browser_download_url }}' sparkle:version='{{ release.tag_name | xml_escape }}' length='{{ asset.size }}' type='application/x-msdownload' />            
-        {% break %}{% endif %}{% endfor %}</item>{% endif %}{% endfor %}
-    </channel>
+	<channel>
+		<title>mRemoteNG Changelog</title>
+		<description>Most recent changes with links to updates.</description>
+		<language>en</language>
+		<link>{{ site.url }}{{ site.baseurl}}{{ page.url }}</link>
+		{% for release in site.github.releases limit: 5 %}{% if release.draft == false and release.prerelease == page.prerelease %}<item>
+			<title>{{ release.name | xml_escape }}</title>
+			<description>
+				<![CDATA[
+				{{ release.body | markdownify }}
+				]]>
+			</description>
+			<pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
+			{% for asset in release.assets %}{% if asset.content_type == 'application/x-msdownload' and asset.state == 'uploaded' %}<enclosure url='{{ asset.browser_download_url }}' sparkle:version='{{ release.tag_name | xml_escape }}' length='{{ asset.size }}' type='application/x-msdownload' />            
+		{% break %}{% endif %}{% endfor %}</item>{% endif %}{% endfor %}
+	</channel>
 </rss>

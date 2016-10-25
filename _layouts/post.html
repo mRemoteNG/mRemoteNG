@@ -2,24 +2,30 @@
 <body>
 	{% include navigation.html %}
 	{% include jumbotron.html %}
-	<div class='container'>
-		<h2>{{ page.title }}</h2>
+	<div class='container clearfix'>
 		{% assign author = site.data.authors[page.author] %}
-		{% if author == nil %}
-		{% assign author = site.name %}
-		{% endif %}
-		<strong>{{ author.name }}</strong> | <time>{{ page.date | date: '%B %-d, %Y'}}
-		{{ content }}
-		<div class='btn-group pull-right' role='group'>
+		<div class='media'>
+			<img class='media-left media-object img-fluid' src='{{ author.avatar }}'>
+			<div class='media-body'>
+			<h3 class='media-heading'>{{ page.title }}</h3>
+				<div>
+					<strong>{{ author.name }}</strong> | <time>{{ page.date | date: '%B %-d, %Y'}}</time>
+				</div>
+				<div class='text-justify'>
+					{{ content }}
+				</div>
+			</div>
+		</div>
+		<div class='btn-group float-xs-right' role='group'>
 			{% if page.previous %}
-			<a class='btn btn-default' href='{{ site.baseurl }}{{ page.previous.url }}'>Previous</a>
+			<a class='btn btn-secondary' href='{{ site.baseurl }}{{ page.previous.url }}'>Previous</a>
 			{% else %}
-			<span class='btn btn-default disabled'>Previous</span>
+			<span class='btn btn-secondary disabled'>Previous</span>
 			{% endif %}
 			{% if page.next %}
-			<a class='btn btn-default' href='{{ site.baseurl }}{{ page.next.url }}'>Next</a>
+			<a class='btn btn-secondary' href='{{ site.baseurl }}{{ page.next.url }}'>Next</a>
 			{% else %}
-			<span class='btn btn-default disabled'>Next</span>
+			<span class='btn btn-secondary disabled'>Next</span>
 			{% endif %}
 		</div>
 	</div>

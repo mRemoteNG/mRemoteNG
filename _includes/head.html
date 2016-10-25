@@ -1,58 +1,59 @@
 <!doctype html>
 <html lang='en' prefix='og: http://ogp.me/ns#'>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta name='description' content='{{ site.description }}'>
-    <meta name='url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
-    <meta property='og:url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
-    <meta property='og:type' content='website'>
-    <meta property='og:title' content='{% if page.title and page.url != '/' %}{{ page.title }} | {% endif %}{{ site.name }}'>
-    <meta property='og:description' content='{{ site.description }}'>
-    <meta property='og:site_name' content='{{ site.name }}'>
-    <meta property='og:image' content='{{ site.url }}{{ site.baseurl }}/favicon/256.png'>
-    <meta property='og:locale' content='en_US'>
-    <meta name='twitter:card' content='summary'>
-    <meta name='twitter:site' content='@mRemoteNG'>
-    <meta name='theme-color' content='#3E3F3A'>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+	<meta name='description' content='{{ site.description }}'>
+	<meta name='url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
+	<meta property='og:url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
+	<meta property='og:type' content='website'>
+	<meta property='og:title' content='{% if page.title and page.url != '/' %}{{ page.title }} | {% endif %}{{ site.name }}'>
+	<meta property='og:description' content='{{ site.description }}'>
+	<meta property='og:site_name' content='{{ site.name }}'>
+	<meta property='og:image' content='{{ site.url }}{{ site.baseurl }}/favicon/256.png'>
+	<meta property='og:locale' content='en_US'>
+	<meta name='twitter:card' content='summary'>
+	<meta name='twitter:site' content='@mRemoteNG'>
+	<meta name='theme-color' content='#3E3F3A'>
 
-    <link rel='canonical' href='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
-    <link rel='stylesheet' href='https://bootswatch.com/sandstone/bootstrap.min.css'>
-    {% for file in site.static_files %}{% if file.path contains '/favicon/' %}{% assign name = file.path | remove: '/favicon/' | remove: file.extname %}
-    <link rel='icon' href='{{ site.baseurl }}{{ file.path }}' sizes='{{ name }}x{{ name }}' type='image/png'>{% endif %}{% endfor %}
-    {% feed_meta %}
+	<link rel='canonical' href='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
 
-    <title>{% if page.title and page.url != '/' %}{{ page.title }} | {% endif %}{{ site.name }}</title>
-    <base href='{{ site.url }}{{ site.baseurl }}'>
-    <style>
-        @font-face {
-            font-family: 'Handel Gothic';
-            src: local('Handel Gothic Regular'), local('HandelGothic-Regular'), url('{{ site.baseurl }}/fonts/hinted-subset-HandelGothic-Regular.woff2') format('woff2'), url('{{site.baseurl }}/fonts/hinted-subset-HandelGothic-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-        .jumbotron {
-            margin-top: -50px;
-            padding-bottom: 25px;
-        }
-        .jumbotron > div.container > h1, .navbar-brand {
-            font-family: 'Handel Gothic';
-        }
-        .navbar-brand:first-letter {
-            color: #4f8aff;
-        }
-        footer {
-            background-color: #3e3f3a;
-            color: #98978b;
-            margin-top: 100px;
-            padding-bottom: 50px;
-            padding-top: 50px;
-        }
-        .tooltip {
-            text-transform: none;
-        }
-    </style>
+	<link rel='stylesheet' href='{{ site.url }}{{ site.baseurl }}/css/bootstrap.css'>
+	<link rel='stylesheet' href='{{ site.url }}{{ site.baseurl }}/css/font-awesome.min.css'>
+	{% for file in site.static_files %}{% if file.path contains '/favicon/' %}{% assign name = file.path | remove: '/favicon/' | remove: file.extname %}
+	<link rel='icon' href='{{ site.url }}{{ site.baseurl }}{{ file.path }}' sizes='{{ name }}x{{ name }}' type='image/png'>{% endif %}{% endfor %}
+	{% feed_meta %}
 
-    {% include javascript.html %}
+	<title>{% if page.title and page.url != '/' %}{{ page.title }} | {% endif %}{{ site.name }}</title>
+	<base href='{{ site.url }}{{ site.baseurl }}'>
+	<style>
+		@font-face {
+			font-family: 'Handel Gothic';
+			src: local('Handel Gothic Regular'), local('HandelGothic-Regular'), url('{{ site.baseurl }}/fonts/hinted-subset-HandelGothic-Regular.woff2') format('woff2'), url('{{site.baseurl }}/fonts/hinted-subset-HandelGothic-Regular.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+		.jumbotron {
+			margin-top: -40px;
+			padding-bottom: 25px;
+		}
+		.jumbotron > h1, .navbar-brand {
+			font-family: 'Handel Gothic';
+		}
+		.jumbotron > h1:first-letter, .navbar-brand:first-letter {
+			color: #4f8aff;
+		}
+		.media-object {
+			height: 64px;
+		}
+		.footer {
+			bottom: 0;
+			margin-top: 100px;
+			padding-bottom: 50px;
+			padding-top: 50px;
+		}
+	</style>
+
+	{% include javascript.html %}
 </head>
