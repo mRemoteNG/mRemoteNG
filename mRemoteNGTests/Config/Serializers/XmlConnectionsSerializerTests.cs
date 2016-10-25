@@ -34,6 +34,17 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(nodeCon4, Is.Not.Null);
         }
 
+        [Test]
+        public void SingleConnectionSerializedCorrectly()
+        {
+            var connectionInfo = new ConnectionInfo {Name = "myConnection"};
+            var serializedConnections = _serializer.Serialize(connectionInfo);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(serializedConnections);
+            var connectionNode = xmlDoc.DocumentElement?.SelectSingleNode($"Node[@Name='{connectionInfo.Name}']");
+            Assert.That(connectionNode, Is.Not.Null);
+        }
+
         private ConnectionTreeModel SetupConnectionTreeModel()
         {
             /*
