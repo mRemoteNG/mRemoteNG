@@ -81,5 +81,37 @@ namespace mRemoteNGTests.Security
             ActualValueDelegate<string> decryptMethod = () => _cryptographyProvider.Decrypt(cipherText, "wrongKey".ConvertToSecureString());
             Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
+
+        [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
+        public void GetCipherEngine(BlockCipherEngines engine, BlockCipherModes mode)
+        {
+            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo(engine));
+        }
+
+        [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
+        public void GetCipherMode(BlockCipherEngines engine, BlockCipherModes mode)
+        {
+            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+            Assert.That(cryptoProvider.CipherMode, Is.EqualTo(mode));
+        }
+
+
+        private class TestCaseSources
+        {
+            public static IEnumerable AllEngineAndModeCombos
+            {
+                get
+                {
+                    foreach (var engine in Enum.GetValues(typeof(BlockCipherEngines)))
+                    {
+                        foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
+                        {
+                            yield return new TestCaseData(engine, mode);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

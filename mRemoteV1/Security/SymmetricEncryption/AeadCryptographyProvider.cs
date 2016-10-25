@@ -38,7 +38,23 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
 
-        public string CipherEngine => _aeadBlockCipher.AlgorithmName;
+        public BlockCipherEngines CipherEngine
+        {
+            get
+            {
+                var cipherEngine = _aeadBlockCipher.AlgorithmName.Split('/')[0];
+                return (BlockCipherEngines)Enum.Parse(typeof(BlockCipherEngines), cipherEngine);
+            }
+        }
+
+        public BlockCipherModes CipherMode
+        {
+            get
+            {
+                var cipherMode = _aeadBlockCipher.AlgorithmName.Split('/')[1];
+                return (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes), cipherMode);
+            }
+        }
 
         public AeadCryptographyProvider()
         {

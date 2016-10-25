@@ -4,7 +4,6 @@ using System.Security;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -26,10 +25,11 @@ namespace mRemoteNG.Config.Serializers
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
-        private ConnectionsDecryptor _decryptor;
+        private XmlConnectionsDecryptor _decryptor;
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.6;
+        private RootNodeInfo _rootNodeInfo;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
@@ -41,7 +41,7 @@ namespace mRemoteNG.Config.Serializers
 
         private void LoadXmlConnectionData(string connections)
         {
-            CreateDecryptor();
+            CreateDecryptor(new RootNodeInfo(RootNodeType.Connection));
             connections = _decryptor.LegacyFullFileDecrypt(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
@@ -91,16 +91,16 @@ namespace mRemoteNG.Config.Serializers
                     Runtime.IsConnectionsFileLoaded = false;
 
                 var rootXmlElement = _xmlDocument.DocumentElement;
-                CreateDecryptor(rootXmlElement);
-                var rootInfo = InitializeRootNode(rootXmlElement);
+                _rootNodeInfo = InitializeRootNode(rootXmlElement);
+                CreateDecryptor(_rootNodeInfo, rootXmlElement);
                 var connectionTreeModel = new ConnectionTreeModel();
-                connectionTreeModel.AddRootNode(rootInfo);
+                connectionTreeModel.AddRootNode(_rootNodeInfo);
 
                 
                 if (_confVersion > 1.3)
                 {
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
-                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, Runtime.EncryptionKey, rootInfo))
+                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
                     {
                         mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
                         mRemoteNG.Settings.Default.CustomConsPath = "";
@@ -123,7 +123,7 @@ namespace mRemoteNG.Config.Serializers
                     return null;
                 }
 
-                AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, rootInfo);
+                AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, _rootNodeInfo);
 
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = true;
@@ -148,7 +148,7 @@ namespace mRemoteNG.Config.Serializers
             return rootInfo;
         }
 
-        private void CreateDecryptor(XmlElement connectionsRootElement = null)
+        private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement connectionsRootElement = null)
         {
             if (_confVersion >= 2.6)
             {
@@ -161,7 +161,7 @@ namespace mRemoteNG.Config.Serializers
                 int keyDerivationIterations;
                 int.TryParse(connectionsRootElement?.Attributes["KdfIterations"].Value, out keyDerivationIterations);
 
-                _decryptor = new ConnectionsDecryptor(engine, mode)
+                _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
                 {
                     AuthenticationRequestor = AuthenticationRequestor,
                     KeyDerivationIterations = keyDerivationIterations
@@ -169,7 +169,7 @@ namespace mRemoteNG.Config.Serializers
             }
             else
             {
-                _decryptor = new ConnectionsDecryptor { AuthenticationRequestor = AuthenticationRequestor };
+                _decryptor = new XmlConnectionsDecryptor(_rootNodeInfo) { AuthenticationRequestor = AuthenticationRequestor };
             }
         }
 

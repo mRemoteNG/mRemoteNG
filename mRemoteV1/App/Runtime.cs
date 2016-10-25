@@ -5,6 +5,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Window;
 using System;
 using System.Collections;
@@ -37,8 +38,7 @@ namespace mRemoteNG.App
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static DateTime LastSqlUpdate { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
-        public static SecureString DefaultEncryptionKey { get; } = "mR3m".ConvertToSecureString();
-        public static SecureString EncryptionKey { get; set; } = DefaultEncryptionKey;
+        public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
         {
             get { return Windows.TreeForm.ConnectionTreeModel; }

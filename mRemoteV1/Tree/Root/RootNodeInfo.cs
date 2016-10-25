@@ -1,6 +1,8 @@
 using mRemoteNG.Tools;
 using System.ComponentModel;
+using System.Security;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 
 
 namespace mRemoteNG.Tree.Root
@@ -9,6 +11,7 @@ namespace mRemoteNG.Tree.Root
     public class RootNodeInfo : ContainerInfo
 	{
 	    private string _name;
+	    private string _customPassword = "";
 
 	    public RootNodeInfo(RootNodeType rootType)
 		{
@@ -32,11 +35,25 @@ namespace mRemoteNG.Tree.Root
 	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPasswordProtect"),
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public new bool Password { get; set; }
-			
-		[Browsable(false)]
-        public string PasswordString {get; set;}
+
+	    [Browsable(false)]
+	    public string PasswordString
+	    {
+	        get
+	        {
+	            return Password ? _customPassword : DefaultPassword;
+	        }
+	        set
+	        {
+	            _customPassword = value;
+	            Password = !string.IsNullOrEmpty(value) && _customPassword != DefaultPassword;
+	        }
+	    }
+
+        [Browsable(false)]
+        public string DefaultPassword { get; } = "mR3m";
 			
 		[Browsable(false)]
         public RootNodeType Type {get; set;}

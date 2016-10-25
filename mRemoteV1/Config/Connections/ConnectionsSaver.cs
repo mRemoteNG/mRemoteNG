@@ -242,7 +242,10 @@ namespace mRemoteNG.Config.Connections
 		{
 			try
 			{
-				var xmlConnectionsSerializer = new XmlConnectionsSerializer()
+                var factory = new CryptographyProviderFactory();
+                var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
+                cryptographyProvider.KeyDerivationIterations = mRemoteNG.Settings.Default.EncryptionKeyDerivationIterations;
+                var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider)
 				{
                     Export = Export,
                     SaveFilter = SaveFilter,
