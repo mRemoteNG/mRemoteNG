@@ -4,7 +4,6 @@ using System.Security;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;

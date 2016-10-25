@@ -54,7 +54,7 @@ namespace mRemoteNG.Config.Serializers
 
         private string WriteXmlToString(XNode xmlDocument)
         {
-            var xmlString = "";
+            string xmlString;
             var xmlWriterSettings = new XmlWriterSettings { Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8 };
             using (var memoryStream = new MemoryStream())
             using (var xmlTextWriter = XmlWriter.Create(memoryStream, xmlWriterSettings))
