@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Container;
-using mRemoteNGTests.Config.Serializers;
-using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
 
