@@ -4,7 +4,7 @@ permalink: /contribute
 ---
 <style>
 	#submitBtn {
-		transition: opacity 0.3s ease;
+		transition: opacity 0.35s ease;
 	}
 </style>
 <script>
@@ -25,7 +25,7 @@ If you find mRemoteNG useful and would like to contribute, it would be greatly a
 		<form action='https://www.paypal.com/cgi-bin/webscr' method='post'>
 			<input type='hidden' name='cmd' value='_donations'>
 			<input type='hidden' name='charset' value='utf-8'>
-			<input type='hidden' name='business' value='bennett.blodinger@gmail.com'>
+			<input type='hidden' name='business' value='QANUEL2A38KFQ'>
 			<input type='hidden' name='return' value='{{ site.url }}{{ site.baseurl }}'>
 			<input type='hidden' name='cancel_return' value='{{ site.url }}{{ site.baseurl }}'>
 			<input type='hidden' name='currency_code' value='USD'>
@@ -37,7 +37,7 @@ If you find mRemoteNG useful and would like to contribute, it would be greatly a
 			<div class='form-group'>
 				<div class='input-group'>
 					<div class='input-group-addon'>$</div>
-					<input type='text' class='form-control' id='amount' name='amount' placeholder='Amount'>
+					<input type='text' class='form-control' id='amount' name='amount' placeholder='Amount' autocomplete='off'>
 					<div class='input-group-addon'>USD</div>
 				</div>
 			</div>
