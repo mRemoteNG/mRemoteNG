@@ -20,6 +20,7 @@
 	<link rel='canonical' href='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
 
 	<link rel='stylesheet' href='{{ site.url }}{{ site.baseurl }}/css/bootstrap.css'>
+	<link rel='stylesheet' href='{{ site.url }}{{ site.baseurl }}/css/font-awesome.min.css'>
 	{% for file in site.static_files %}{% if file.path contains '/favicon/' %}{% assign name = file.path | remove: '/favicon/' | remove: file.extname %}
 	<link rel='icon' href='{{ site.url }}{{ site.baseurl }}{{ file.path }}' sizes='{{ name }}x{{ name }}' type='image/png'>{% endif %}{% endfor %}
 	{% feed_meta %}
@@ -38,6 +39,9 @@
 		}
 		.jumbotron > h1:first-letter, .navbar-brand:first-letter {
 			color: #4f8aff;
+		}
+		.media-object {
+			height: 64px;
 		}
 		.footer {
 			bottom: 0;

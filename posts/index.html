@@ -1,21 +1,16 @@
 ---
 title: Posts
 ---
-<style>
-	.media-object {
-		height: 64px;
-	}
-</style>
 {% for post in paginator.posts %}
 {% assign author = site.data.authors[post.author] %}
 <div class='media'>
 	<img class='media-left media-object img-fluid' src='{{ author.avatar }}'>
 	<div class='media-body'>
 		<h3 class='media-heading'>{{ post.title }}</h3>
-		<div class='text-justify'>
+		<div>
 			<strong>{{ author.name }}</strong> | <time>{{ post.date | date: '%B %-d, %Y'}}</time>
 		</div>
-		<div>
+		<div class='text-justify'>
 			{{ post.excerpt }}
 			<a href='{{ site.baseurl }}{{ post.url }}'>Read more…</a>
 		</div>
