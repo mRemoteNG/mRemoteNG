@@ -2,10 +2,26 @@
 title: Download
 permalink: /download
 ---
+<style>
+	.clickable-row, .card-header {
+		cursor: pointer;
+	}
+	.chevron {
+		transition: transform 0.35s ease;
+	}
+</style>
 <script>
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip({
 			'container': 'body'
+		});
+		$('.clickable-row').click(function(e) {
+			if ($(this).data('href')) {
+				window.location = $(this).data('href');
+			}
+		});
+		$('#accordion-01').on('show.bs.collapse hide.bs.collapse', function(e) {
+			$(".chevron").toggleClass('fa-rotate-90');
 		});
 	});
 </script>
@@ -19,7 +35,7 @@ permalink: /download
 {% endfor %}
 <div class='card-deck text-xs-center'>
 	<div class='card card-block card-outline-success'>
-		<h2 class='card-title'>Stable <small>{{ stableRelease.tag_name }}</small></h2>
+		<h2 class='card-title'>Stable <small>{% if stableRelease.name == nil %}{{ stableRelease.tag_name }}{% else %}{{ stableRelease.name }}{% endif %}</small></h2>
 		<h4>{{ stableRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
 		<div>
 			{% for asset in stableRelease.assets %}
@@ -30,10 +46,10 @@ permalink: /download
 			{% endif %}
 			{% endfor %}
 		</div>
-		<a href='{{ stableRelease.html_url }}'>Changelog</a>
+		{% unless stableRelease.html_url == nil %}<a href='{{ stableRelease.html_url }}'>Changelog</a>{% endunless %}
 	</div>
 	<div class='card card-block card-outline-warning'>
-		<h2 class='card-title'>Prerelease <small>{{ preRelease.tag_name }}</small></h2>
+		<h2 class='card-title'>Prerelease <small>{% if preRelease.name == nil %}{{ preRelease.tag_name }}{% else %}{{ preRelease.name }}{% endif %}</small></h2>
 		<h4>{{ preRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
 		<div>
 			{% for asset in preRelease.assets %}
@@ -44,10 +60,39 @@ permalink: /download
 			{% endif %}
 			{% endfor %}
 		</div>
-		<a href='{{ preRelease.html_url }}'>Changelog</a>
+		{% unless preRelease.html_url == nil%}<a href='{{ preRelease.html_url }}'>Changelog</a>{% endunless %}
 	</div>
 </div>
-<p>You can view all releases (including pre-releases) by going <a href='{{ site.github.releases_url }}'>here</a></p>
+{% comment %}<div id='accordion' role='tablist'>
+	<div class='card'>
+		<div class='card-header collapsed' role='tab' id='head-01' data-toggle='collapse' data-parent='#accordion' data-target='#accordion-01' aria-expanded='false' aria-controls='accorion-01'>
+			<h5><i class='chevron fa fa-fw fa-chevron-right'></i>Previous Releases</h5>
+		</div>
+		<div id='accordion-01' class='collapse' role='tabpanel' aria-labelledby='head-01'>
+			<div class='card-block'>
+				<table class='table table-hover table-sm'>
+					<thead>
+						<tr>
+							<th>Version</th>
+							<th>Released</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for release in site.github.releases %}
+						{% if release.draft == false and release.prerelease == false and foorloop.first == false %}
+						{% endif %}
+						<tr class='clickable-row' data-href='{{ release.html_url }}'>
+							<td>{{ release.name }}</td>
+							<td>{{ release.published_at | date: '%a, %b %d, %Y' }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>{% endcomment %}
+				<p>You can view all releases (including pre-releases) by going <a href='{{ site.github.releases_url }}'>here</a></p>
+{% comment %}			</div>
+		</div>
+	</div>
+</div>{% endcomment %}
 <p>View installation requirements at the <a href='{{ site.github.wiki_url }}/Prerequisites'>Wiki</a></p>
 <h2>Languages <small><a href='{{ site.github.wiki_url }}/How to Help Translating mRemoteNG'>Help us translate!</a></small></h2>
 <ul class='list-inline'>
