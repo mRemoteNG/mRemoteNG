@@ -140,7 +140,7 @@
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
-    <Compile Include="Config\Connections\ConnectionsDecryptor.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />

@@ -6,22 +6,21 @@ using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree.Root;
 
-
-namespace mRemoteNG.Config.Connections
+namespace mRemoteNG.Config.Serializers
 {
-    public class ConnectionsDecryptor
+    public class XmlConnectionsDecryptor
     {
         private readonly ICryptographyProvider _cryptographyProvider;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
         public int KeyDerivationIterations { get; set; } = 1000;
 
-        public ConnectionsDecryptor()
+        public XmlConnectionsDecryptor()
         {
             _cryptographyProvider = new LegacyRijndaelCryptographyProvider();
         }
 
-        public ConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode)
+        public XmlConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode)
         {
             _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
             ((AeadCryptographyProvider) _cryptographyProvider).KeyDerivationIterations = KeyDerivationIterations;

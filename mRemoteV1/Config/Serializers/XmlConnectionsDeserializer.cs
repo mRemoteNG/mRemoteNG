@@ -26,7 +26,7 @@ namespace mRemoteNG.Config.Serializers
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
-        private ConnectionsDecryptor _decryptor;
+        private XmlConnectionsDecryptor _decryptor;
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.6;
@@ -161,7 +161,7 @@ namespace mRemoteNG.Config.Serializers
                 int keyDerivationIterations;
                 int.TryParse(connectionsRootElement?.Attributes["KdfIterations"].Value, out keyDerivationIterations);
 
-                _decryptor = new ConnectionsDecryptor(engine, mode)
+                _decryptor = new XmlConnectionsDecryptor(engine, mode)
                 {
                     AuthenticationRequestor = AuthenticationRequestor,
                     KeyDerivationIterations = keyDerivationIterations
@@ -169,7 +169,7 @@ namespace mRemoteNG.Config.Serializers
             }
             else
             {
-                _decryptor = new ConnectionsDecryptor { AuthenticationRequestor = AuthenticationRequestor };
+                _decryptor = new XmlConnectionsDecryptor { AuthenticationRequestor = AuthenticationRequestor };
             }
         }
 
