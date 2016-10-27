@@ -10,7 +10,7 @@ It allows you to view all of your remote connections in a simple yet powerful ta
 mRemoteNG supports the following protocols:
 
 * RDP (Remote Desktop/Terminal Server)
-* VNC (Virutal Network Computing)
+* VNC (Virtual Network Computing)
 * ICA (Citrix Independent Computing Architecture)
 * SSH (Secure Shell)
 * Telnet (TELecommunication NETwork)
