@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 using mRemoteNG.Credential;
 using NUnit.Framework;
 
@@ -38,6 +39,14 @@ namespace mRemoteNGTests.Credential
         public void HasDomain()
         {
             Assert.That(_credentialRecord.Domain, Is.Not.Null);
+        }
+
+        [Test]
+        public void CreateWithExistingGuid()
+        {
+            var customGuid = new Guid();
+            _credentialRecord = new CredentialRecord(customGuid);
+            Assert.That(_credentialRecord.UniqueId, Is.EqualTo(customGuid));
         }
     }
 }
