@@ -16,9 +16,15 @@ namespace mRemoteNGTests.Credential
         }
 
         [Test]
-        public void IsAList()
+        public void ImplementsIList()
         {
             Assert.That(_credentialRepository, Is.AssignableTo<IList<ICredential>>());
+        }
+
+        [Test]
+        public void ImplementsICredentialRepository()
+        {
+            Assert.That(_credentialRepository, Is.AssignableTo<ICredentialRepository>());
         }
     }
 }

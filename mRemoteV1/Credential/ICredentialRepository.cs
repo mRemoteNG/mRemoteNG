@@ -3,7 +3,7 @@
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialRepository : List<ICredential>, ICredentialRepository
+    public interface ICredentialRepository : IList<ICredential>
     {
     }
 }
