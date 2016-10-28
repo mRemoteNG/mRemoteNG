@@ -1,10 +1,13 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 
 
 namespace mRemoteNG.Credential
 {
     public class CredentialRecord : ICredential
     {
+        public Guid UniqueId { get; } = Guid.NewGuid();
+
         public string Username { get; set; } = "";
 
         public SecureString Password { get; set; } = new SecureString();
