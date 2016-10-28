@@ -105,6 +105,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Credential\Providers\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
