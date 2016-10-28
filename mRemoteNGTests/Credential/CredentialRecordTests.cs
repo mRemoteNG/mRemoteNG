@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security;
 using mRemoteNG.Credential;
+using mRemoteNG.Security;
 using NUnit.Framework;
 
 
@@ -13,7 +14,12 @@ namespace mRemoteNGTests.Credential
         [SetUp]
         public void Setup()
         {
-            _credentialRecord = new CredentialRecord();
+            _credentialRecord = new CredentialRecord
+            {
+                Username = "userHere",
+                Domain = "domainHere",
+                Password = "somepass".ConvertToSecureString()
+            };
         }
 
         [Test]
@@ -47,6 +53,34 @@ namespace mRemoteNGTests.Credential
             var customGuid = new Guid();
             _credentialRecord = new CredentialRecord(customGuid);
             Assert.That(_credentialRecord.UniqueId, Is.EqualTo(customGuid));
+        }
+
+        [Test]
+        public void CopyConstructorGeneratesNewGuid()
+        {
+            var cred2 = new CredentialRecord(_credentialRecord);
+            Assert.That(cred2.UniqueId, Is.Not.EqualTo(_credentialRecord.UniqueId));
+        }
+
+        [Test]
+        public void CopyConstructorCopiesUsername()
+        {
+            var cred2 = new CredentialRecord(_credentialRecord);
+            Assert.That(cred2.Username, Is.EqualTo(_credentialRecord.Username));
+        }
+
+        [Test]
+        public void CopyConstructorCopiesPassword()
+        {
+            var cred2 = new CredentialRecord(_credentialRecord);
+            Assert.That(cred2.Password, Is.EqualTo(_credentialRecord.Password));
+        }
+
+        [Test]
+        public void CopyConstructorCopiesDomain()
+        {
+            var cred2 = new CredentialRecord(_credentialRecord);
+            Assert.That(cred2.Domain, Is.EqualTo(_credentialRecord.Domain));
         }
     }
 }
