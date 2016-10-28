@@ -105,6 +105,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Credential\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
@@ -334,8 +335,6 @@
     <Compile Include="Themes\ThemeInfo.cs" />
     <Compile Include="Tools\CommandLineArguments.cs" />
     <Compile Include="Container\ContainerInfo.cs" />
-    <Compile Include="Credential\CredentialInfo.cs" />
-    <Compile Include="Credential\CredentialList.cs" />
     <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
     </Compile>
