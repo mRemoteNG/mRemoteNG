@@ -193,6 +193,7 @@
     <Compile Include="Credential\CredentialRecord.cs" />
     <Compile Include="Credential\CredentialRepository.cs" />
     <Compile Include="Credential\ICredential.cs" />
+    <Compile Include="Credential\ICredentialProvider.cs" />
     <Compile Include="Credential\ICredentialRepository.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticator.cs" />
