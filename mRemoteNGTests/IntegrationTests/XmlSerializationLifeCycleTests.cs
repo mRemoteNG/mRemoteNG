@@ -47,6 +47,18 @@ namespace mRemoteNGTests.IntegrationTests
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
         }
 
+        [Test]
+        public void SerializeAndDeserializePropertiesWithInternationalCharacters()
+        {
+            var originalConnectionInfo = new ConnectionInfo {Name = "con1", Password = "£°úg¶┬ä" };
+            var serializedContent = _serializer.Serialize(originalConnectionInfo);
+            _deserializer = new XmlConnectionsDeserializer(serializedContent);
+            var deserializedModel = _deserializer.Deserialize();
+            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
+            Assert.That(deserializedConnectionInfo.Password, Is.EqualTo(originalConnectionInfo.Password));
+        }
+
+
 
         private ConnectionTreeModel SetupConnectionTreeModel()
         {
