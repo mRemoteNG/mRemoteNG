@@ -5,26 +5,26 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Credential
 {
-    public class CredentialRepositoryTests
+    public class CredentialListBaseTests
     {
-        private CredentialRepository _credentialRepository;
+        private CredentialListBase _credentialList;
 
         [SetUp]
         public void Setup()
         {
-            _credentialRepository = new CredentialRepository();
+            _credentialList = new CredentialListBase();
         }
 
         [Test]
         public void ImplementsIList()
         {
-            Assert.That(_credentialRepository, Is.AssignableTo<IList<ICredential>>());
+            Assert.That(_credentialList, Is.AssignableTo<IList<ICredential>>());
         }
 
         [Test]
         public void ImplementsICredentialRepository()
         {
-            Assert.That(_credentialRepository, Is.AssignableTo<ICredentialRepository>());
+            Assert.That(_credentialList, Is.AssignableTo<ICredentialList>());
         }
     }
 }
