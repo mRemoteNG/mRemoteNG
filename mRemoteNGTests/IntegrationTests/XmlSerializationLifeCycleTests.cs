@@ -22,6 +22,13 @@ namespace mRemoteNGTests.IntegrationTests
             _serializer = new XmlConnectionsSerializer(cryptoProvider);
         }
 
+        [TearDown]
+        public void Teardown()
+        {
+            _serializer = null;
+            _deserializer = null;
+        }
+
         [Test]
         public void SerializeThenDeserialize()
         {
@@ -58,6 +65,21 @@ namespace mRemoteNGTests.IntegrationTests
             Assert.That(deserializedConnectionInfo.Password, Is.EqualTo(originalConnectionInfo.Password));
         }
 
+
+        [Test]
+        public void SerializeAndDeserializeWithCustomKdfIterationsValue()
+        {
+            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            cryptoProvider.KeyDerivationIterations = 5000;
+            _serializer = new XmlConnectionsSerializer(cryptoProvider);
+            var originalModel = SetupConnectionTreeModel();
+            var serializedContent = _serializer.Serialize(originalModel);
+            _deserializer = new XmlConnectionsDeserializer(serializedContent);
+            var deserializedModel = _deserializer.Deserialize();
+            var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
+            var nodeNamesFromOriginalModel = originalModel.GetRecursiveChildList().Select(node => node.Name);
+            Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
+        }
 
 
         private ConnectionTreeModel SetupConnectionTreeModel()
