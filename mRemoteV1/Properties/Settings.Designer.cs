@@ -2169,7 +2169,7 @@ namespace mRemoteNG {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://update.mremoteng.org/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://mremoteng.org/")]
         public string UpdateAddress {
             get {
                 return ((string)(this["UpdateAddress"]));
