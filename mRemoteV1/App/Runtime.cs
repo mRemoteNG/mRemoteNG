@@ -421,30 +421,25 @@ namespace mRemoteNG.App
 
         public static void SaveConnectionsAsync()
         {
-            _saveUpdate = true;
             var t = new Thread(SaveConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
 
-        private static bool _saveUpdate;
         private static readonly object SaveLock = new object();
         private static void SaveConnectionsBGd()
         {
             Monitor.Enter(SaveLock);
-            SaveConnections(_saveUpdate);
+            SaveConnections();
             Monitor.Exit(SaveLock);
         }
 
-        public static void SaveConnections(bool update = false)
+        public static void SaveConnections()
         {
             if (ConnectionTreeModel == null) return;
 
             try
             {
-                if (update && Settings.Default.UseSQLServer == false)
-                    return;
-
                 RemoteConnectionsSyncronizer?.Disable();
 
                 var connectionsSaver = new ConnectionsSaver();
