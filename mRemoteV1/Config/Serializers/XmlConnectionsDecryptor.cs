@@ -13,7 +13,13 @@ namespace mRemoteNG.Config.Serializers
         private readonly RootNodeInfo _rootNodeInfo;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
-        public int KeyDerivationIterations { get; set; } = 1000;
+
+        public int KeyDerivationIterations
+        {
+            get { return _cryptographyProvider.KeyDerivationIterations; }
+            set { _cryptographyProvider.KeyDerivationIterations = value; }
+        }
+
 
         public XmlConnectionsDecryptor(RootNodeInfo rootNodeInfo)
         {
@@ -24,7 +30,6 @@ namespace mRemoteNG.Config.Serializers
         public XmlConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode, RootNodeInfo rootNodeInfo)
         {
             _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
-            ((AeadCryptographyProvider) _cryptographyProvider).KeyDerivationIterations = KeyDerivationIterations;
             _rootNodeInfo = rootNodeInfo;
         }
 
