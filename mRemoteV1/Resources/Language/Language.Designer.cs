@@ -4190,6 +4190,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose the Sound Quality provided by the protocol: Dynamic, Medium, High.
+        /// </summary>
+        internal static string strPropertyDescriptionSoundQuality {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionSoundQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connect to the console session of the remote host..
         /// </summary>
         internal static string strPropertyDescriptionUseConsoleSession {
@@ -4663,6 +4672,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameSmartSizeMode {
             get {
                 return ResourceManager.GetString("strPropertyNameSmartSizeMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sound Quality.
+        /// </summary>
+        internal static string strPropertyNameSoundQuality {
+            get {
+                return ResourceManager.GetString("strPropertyNameSoundQuality", resourceCulture);
             }
         }
         
@@ -5521,6 +5539,33 @@ namespace mRemoteNG {
         internal static string strRDPSoundLeaveAtRemoteComputer {
             get {
                 return ResourceManager.GetString("strRDPSoundLeaveAtRemoteComputer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dynamic.
+        /// </summary>
+        internal static string strRDPSoundQualityDynamic {
+            get {
+                return ResourceManager.GetString("strRDPSoundQualityDynamic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High.
+        /// </summary>
+        internal static string strRDPSoundQualityHigh {
+            get {
+                return ResourceManager.GetString("strRDPSoundQualityHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        internal static string strRDPSoundQualityMedium {
+            get {
+                return ResourceManager.GetString("strRDPSoundQualityMedium", resourceCulture);
             }
         }
         

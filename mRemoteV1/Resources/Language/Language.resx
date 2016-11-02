@@ -2400,4 +2400,19 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
     <value>Key Derivation Function Iterations</value>
   </data>
+  <data name="strRDPSoundQualityDynamic" xml:space="preserve">
+    <value>Dynamic</value>
+  </data>
+  <data name="strRDPSoundQualityHigh" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="strRDPSoundQualityMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
+    <value>Choose the Sound Quality provided by the protocol: Dynamic, Medium, High</value>
+  </data>
+  <data name="strPropertyNameSoundQuality" xml:space="preserve">
+    <value>Sound Quality</value>
+  </data>
 </root>

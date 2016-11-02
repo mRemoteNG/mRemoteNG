@@ -259,10 +259,7 @@ namespace mRemoteNG.Config.Serializers
                 {
                     if (_confVersion < 0.7)
                     {
-                        if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value))
-                            connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
-                        else
-                            connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["RDPPort"].Value);
+                        connectionInfo.Port = Convert.ToInt32(Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) ? xmlnode.Attributes["VNCPort"].Value : xmlnode.Attributes["RDPPort"].Value);
                     }
 
                     connectionInfo.UseConsoleSession = bool.Parse(xmlnode.Attributes["ConnectToConsole"].Value);
@@ -487,6 +484,12 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.AutomaticResize = bool.Parse(xmlnode.Attributes["AutomaticResize"].Value);
                     connectionInfo.Inheritance.LoadBalanceInfo = bool.Parse(xmlnode.Attributes["InheritLoadBalanceInfo"].Value);
                     connectionInfo.Inheritance.AutomaticResize = bool.Parse(xmlnode.Attributes["InheritAutomaticResize"].Value);
+                }
+
+                if (_confVersion >= 2.6)
+                {
+                    connectionInfo.SoundQuality = (ProtocolRDP.RDPSoundQuality)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPSoundQuality), Convert.ToString(xmlnode.Attributes["SoundQuality"].Value));
+                    connectionInfo.Inheritance.SoundQuality = bool.Parse(xmlnode.Attributes["InheritSoundQuality"].Value);
                 }
             }
             catch (Exception ex)

@@ -578,5 +578,11 @@
     <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
+    <Setting Name="ConDefaultSoundQuality" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Dynamic</Value>
+    </Setting>
+    <Setting Name="InhDefaultSoundQuality" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

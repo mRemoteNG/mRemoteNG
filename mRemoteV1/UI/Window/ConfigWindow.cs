@@ -668,7 +668,7 @@ namespace mRemoteNG.UI.Window
 				if (toolStrip == null)
 				{
 					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strCouldNotFindToolStripInFilteredPropertyGrid, true);
-					return ;
+					return;
 				}
 						
 				if (!_originalPropertyGridToolStripItemCountValid)
@@ -864,6 +864,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("MacAddress");
                     strHide.Add("UserField");
                     strHide.Add("Description");
+                    strHide.Add("SoundQuality");
                 }
                 else if (pGrid.SelectedObject is ConnectionInfo)
 				{
@@ -904,6 +905,10 @@ namespace mRemoteNG.UI.Window
 							{
 								strHide.Add("AutomaticResize");
 							}
+					        if (conI.RedirectSound != ProtocolRDP.RDPSounds.BringToThisComputer)
+					        {
+                                strHide.Add("SoundQuality");
+                            }
 							break;
 						case ProtocolType.VNC:
 							strHide.Add("CacheBitmaps");
@@ -946,7 +951,8 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("VNCProxyPort");
 								strHide.Add("VNCProxyUsername");
 							}
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.SSH1:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -987,7 +993,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.SSH2:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -1028,7 +1035,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.Telnet:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -1071,7 +1079,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.Rlogin:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -1114,7 +1123,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.RAW:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -1157,7 +1167,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.HTTP:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -1198,7 +1209,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.HTTPS:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -1238,7 +1250,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.ICA:
 							strHide.Add("DisplayThemes");
 							strHide.Add("DisplayWallpaper");
@@ -1276,7 +1289,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 						case ProtocolType.IntApp:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -1317,7 +1331,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							break;
+                            strHide.Add("SoundQuality");
+                            break;
 					}
 							
 					if (!(conI is DefaultConnectionInfo))
@@ -1428,6 +1443,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RDGatewayUseConnectionCredentials");
                         if (conI.Inheritance.RDGatewayHostname)
                             strHide.Add("RDGatewayHostname");
+                        if(conI.Inheritance.SoundQuality)
+                            strHide.Add("SoundQuality");
                     }
 					else
 					{
@@ -1499,14 +1516,12 @@ namespace mRemoteNG.UI.Window
 		
 		private void btnShowDefaultInheritance_Click(object sender, EventArgs e)
 		{
-			if (pGrid.SelectedObject is RootNodeInfo || pGrid.SelectedObject is ConnectionInfo)
-			{
-                PropertiesVisible = false;
-                InheritanceVisible = false;
-                DefaultPropertiesVisible = false;
-                DefaultInheritanceVisible = true;
-                SetPropertyGridObject(DefaultConnectionInheritance.Instance);
-			}
+		    if (!(pGrid.SelectedObject is RootNodeInfo) && !(pGrid.SelectedObject is ConnectionInfo)) return;
+		    PropertiesVisible = false;
+		    InheritanceVisible = false;
+		    DefaultPropertiesVisible = false;
+		    DefaultInheritanceVisible = true;
+		    SetPropertyGridObject(DefaultConnectionInheritance.Instance);
 		}
 		
 		private void btnHostStatus_Click(object sender, EventArgs e)
@@ -1550,25 +1565,21 @@ namespace mRemoteNG.UI.Window
 				var connectionInfo = (ConnectionInfo)pGrid.SelectedObject;
 				if (connectionInfo == null)
 				{
-					return ;
+					return;
 				}
 						
 				var selectedMenuItem = (ToolStripMenuItem)sender;
-				if (selectedMenuItem == null)
-				{
-					return ;
-				}
-						
-				var iconName = selectedMenuItem.Text;
+
+			    var iconName = selectedMenuItem?.Text;
 				if (string.IsNullOrEmpty(iconName))
 				{
-					return ;
+					return;
 				}
 						
 				var connectionIcon = ConnectionIcon.FromString(iconName);
 				if (connectionIcon == null)
 				{
-					return ;
+					return;
 				}
 						
 				btnIcon.Image = connectionIcon.ToBitmap();
@@ -1634,8 +1645,8 @@ namespace mRemoteNG.UI.Window
                 btnHostStatus.Tag = "checkfinished";
 			}
 		}
-		
-		public void SetHostStatus(object connectionInfo)
+
+	    private void SetHostStatus(object connectionInfo)
 		{
 			try
 			{

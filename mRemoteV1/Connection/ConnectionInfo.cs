@@ -39,10 +39,11 @@ namespace mRemoteNG.Connection
 	    [Browsable(false)]
 	    public ContainerInfo Parent { get; internal set; }
 
-        [Browsable(false)]
-        public int PositionID { get; set; }
+        //[Browsable(false)]
+        //private int PositionID { get; set; }
 
         [Browsable(false)]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public bool IsQuickConnect { get; set; }
 
 	    [Browsable(false)]
@@ -97,7 +98,7 @@ namespace mRemoteNG.Connection
 	        return TreeNodeType.Connection;
 	    }
 
-		public void SetDefaults()
+        private void SetDefaults()
 		{
 			if (Port == 0)
 			{
@@ -115,7 +116,7 @@ namespace mRemoteNG.Connection
 			Port = GetDefaultPort();
 		}
 
-        public virtual IEnumerable<PropertyInfo> GetProperties(string[] excludedPropertyNames)
+        protected virtual IEnumerable<PropertyInfo> GetProperties(string[] excludedPropertyNames)
         {
             var properties = typeof(ConnectionInfo).GetProperties();
             var filteredProperties = properties.Where((prop) => !excludedPropertyNames.Contains(prop.Name));
@@ -156,12 +157,12 @@ namespace mRemoteNG.Connection
 
 	    private bool ShouldThisPropertyBeInherited(string propertyName)
         {
-            return (ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName));
+            return ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName);
         }
 
         private bool ParentIsValidInheritanceTarget()
         {
-            return (Parent != null);
+            return Parent != null;
         }
 
         private bool IsInheritanceTurnedOnForThisProperty(string propertyName)
@@ -279,6 +280,7 @@ namespace mRemoteNG.Connection
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
             RedirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), Settings.Default.ConDefaultRedirectSound);
+            SoundQuality = (ProtocolRDP.RDPSoundQuality)Enum.Parse(typeof(ProtocolRDP.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()
@@ -309,10 +311,10 @@ namespace mRemoteNG.Connection
         {
             Inheritance = new ConnectionInfoInheritance(this);
             SetNewOpenConnectionList();
-            PositionID = 0;
+            //PositionID = 0;
         }
 
-	    protected void SetNewOpenConnectionList()
+        private void SetNewOpenConnectionList()
 	    {
 	        OpenConnections = new ProtocolList();
 	        OpenConnections.CollectionChanged += (sender, args) => RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));

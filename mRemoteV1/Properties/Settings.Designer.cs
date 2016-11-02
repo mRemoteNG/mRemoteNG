@@ -2322,5 +2322,29 @@ namespace mRemoteNG {
                 this["EncryptionKeyDerivationIterations"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dynamic")]
+        public string ConDefaultSoundQuality {
+            get {
+                return ((string)(this["ConDefaultSoundQuality"]));
+            }
+            set {
+                this["ConDefaultSoundQuality"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultSoundQuality {
+            get {
+                return ((bool)(this["InhDefaultSoundQuality"]));
+            }
+            set {
+                this["InhDefaultSoundQuality"] = value;
+            }
+        }
     }
 }
