@@ -1,0 +1,4 @@
+Version: 1.73.5071.36610
+dURL: http://downloads.mremoteng.org/mRemoteNG-Installer-1.73-Beta1.exe
+clURL: http://update.mremoteng.org/changes-1.73.txt
+CertificateThumbprint: 1cbd910dbd6e77f26506e7f600736972f700673f
