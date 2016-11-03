@@ -4,14 +4,31 @@
     {
         public static string FileName
         {
+#if PORTABLE
             get
             {
+                /*                                   */
+                /* return PORTABLE update files here */
+                /*                                   */
+#if DEBUG
+                return "update-portable-debug.txt";
+#else
+                return Settings.Default.UpdateChannel.ToLowerInvariant() == "debug" ? "update-portable-debug.txt" : "portable-update.txt";
+#endif 
+            }
+#else //NOT portable
+            get
+            {
+                /*                                    */
+                /* return INSTALLER update files here */
+                /*                                    */
 #if DEBUG
 				return "update-debug.txt";
 #else
                 return Settings.Default.UpdateChannel.ToLowerInvariant() == "debug" ? "update-debug.txt" : "update.txt";
-#endif
             }
+#endif
+#endif //endif for PORTABLE
         }
     }
 }

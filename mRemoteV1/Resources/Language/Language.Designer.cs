@@ -6678,6 +6678,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download Completed!.
+        /// </summary>
+        internal static string strUpdatePortableDownloadComplete {
+            get {
+                return ResourceManager.GetString("strUpdatePortableDownloadComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use a different username and password.
         /// </summary>
         internal static string strUseDifferentUsernameAndPassword {

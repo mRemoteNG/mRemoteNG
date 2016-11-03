@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Threading;
 using mRemoteNG.Tools;
 using System.Reflection;
+using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 
@@ -117,13 +118,29 @@ namespace mRemoteNG.App.Update
 			{
 				throw (new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync()."));
 			}
-				
-			_currentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "exe"));
-			DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress, _currentUpdateInfo.UpdateFilePath);
+#if !PORTABLE
+            _currentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "exe"));
+#else
+		    OpenFileDialog ofd = new OpenFileDialog
+		    {
+		        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer),
+		        Filter = @"All files (*.*)|*.*",
+		        RestoreDirectory = true
+		    };
+		    if (ofd.ShowDialog() == DialogResult.OK)
+		    {
+                _currentUpdateInfo.UpdateFilePath = ofd.FileName;
+            }
+		    else
+		    {
+		        return;
+		    }
+#endif
+            DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress, _currentUpdateInfo.UpdateFilePath);
 		}
-        #endregion
+#endregion
 		
-        #region Private Properties
+#region Private Properties
 		private WebClient _downloadUpdateWebClient;
         private WebClient DownloadUpdateWebClient
 		{
@@ -142,9 +159,9 @@ namespace mRemoteNG.App.Update
 				return _downloadUpdateWebClient;
 			}
 		}
-        #endregion
+#endregion
 		
-        #region Private Methods
+#region Private Methods
 		private WebClient CreateWebClient()
 		{
 			var webClient = new WebClient();
@@ -263,9 +280,9 @@ namespace mRemoteNG.App.Update
             _downloadUpdateWebClient.Dispose();
 			_downloadUpdateWebClient = null;
 		}
-        #endregion
+#endregion
 		
-        #region Events
+#region Events
         private AsyncCompletedEventHandler GetUpdateInfoCompletedEventEvent;
         public event AsyncCompletedEventHandler GetUpdateInfoCompletedEvent
         {
@@ -317,6 +334,6 @@ namespace mRemoteNG.App.Update
                 DownloadUpdateCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(DownloadUpdateCompletedEventEvent, value);
             }
         }
-        #endregion
+#endregion
 	}
 }
