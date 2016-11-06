@@ -40,8 +40,12 @@ namespace mRemoteNG.UI.Window
 			Text = Language.strMenuCheckForUpdates;
 			TabText = Language.strMenuCheckForUpdates;
 			btnCheckForUpdate.Text = Language.strCheckForUpdate;
-			btnDownload.Text = Language.strDownloadAndInstall;
-			lblChangeLogLabel.Text = Language.strLabelChangeLog;
+#if !PORTABLE
+            btnDownload.Text = Language.strDownloadAndInstall;
+#else
+		    btnDownload.Text = Language.strDownloadPortable;
+#endif
+            lblChangeLogLabel.Text = Language.strLabelChangeLog;
 			lblInstalledVersion.Text = Language.strVersion;
 			lblInstalledVersionLabel.Text = $"{Language.strCurrentVersion}:";
 			lblLatestVersion.Text = Language.strVersion;
@@ -125,7 +129,7 @@ namespace mRemoteNG.UI.Window
 				}
 				if (e.Error != null)
 				{
-					throw (e.Error);
+					throw e.Error;
 				}
 						
 				if (_appUpdate.IsUpdateAvailable())
@@ -197,10 +201,10 @@ namespace mRemoteNG.UI.Window
 				if (e.Cancelled)
 					return;
 				if (e.Error != null)
-					throw (e.Error);
-						
-				txtChangeLog.Text = _appUpdate.ChangeLog;
-			}
+					throw e.Error;
+
+				txtChangeLog.Text = _appUpdate.ChangeLog.Replace("\n", Environment.NewLine);
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage(Language.strUpdateGetChangeLogFailed, ex);
@@ -247,7 +251,7 @@ namespace mRemoteNG.UI.Window
 				if (e.Cancelled)
                     return;
 				if (e.Error != null)
-				    throw (e.Error);
+				    throw e.Error;
 #if !PORTABLE
                 if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
 				{

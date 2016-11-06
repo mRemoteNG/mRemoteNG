@@ -78,6 +78,13 @@ namespace mRemoteNG.App.Update
         {
             return GetString(key).Replace(" ", "").ToUpperInvariant();
         }
+
+        public string GetFileName()
+        {
+            var value = GetString("dURL");
+            var sv = value.Split('/');
+            return sv[sv.Length-1];
+        }
         #endregion
     }
 }

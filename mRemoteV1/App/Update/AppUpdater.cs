@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Threading;
 using mRemoteNG.Tools;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -29,7 +31,7 @@ namespace mRemoteNG.App.Update
 
 	    private bool IsGetChangeLogRunning => _getChangeLogThread != null && _getChangeLogThread.IsAlive;
 
-	    public bool IsDownloadUpdateRunning => (_downloadUpdateWebClient != null);
+	    public bool IsDownloadUpdateRunning => _downloadUpdateWebClient != null;
 
 	    #endregion
 		
@@ -93,7 +95,7 @@ namespace mRemoteNG.App.Update
 		{
 			if (_currentUpdateInfo == null || !_currentUpdateInfo.IsValid)
 			{
-				throw (new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync()."));
+				throw new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync().");
 			}
 				
 			if (IsGetChangeLogRunning)
@@ -111,25 +113,25 @@ namespace mRemoteNG.App.Update
 		{
 			if (_downloadUpdateWebClient != null)
 			{
-				throw (new InvalidOperationException("A previous call to DownloadUpdateAsync() is still in progress."));
+				throw new InvalidOperationException("A previous call to DownloadUpdateAsync() is still in progress.");
 			}
 				
 			if (_currentUpdateInfo == null || !_currentUpdateInfo.IsValid)
 			{
-				throw (new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync()."));
+				throw new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().");
 			}
 #if !PORTABLE
             _currentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "exe"));
 #else
-		    OpenFileDialog ofd = new OpenFileDialog
+		    var sfd = new SaveFileDialog
 		    {
-		        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer),
-		        Filter = @"All files (*.*)|*.*",
+		        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+                FileName = _currentUpdateInfo.FileName,
 		        RestoreDirectory = true
 		    };
-		    if (ofd.ShowDialog() == DialogResult.OK)
+		    if (sfd.ShowDialog() == DialogResult.OK)
 		    {
-                _currentUpdateInfo.UpdateFilePath = ofd.FileName;
+                _currentUpdateInfo.UpdateFilePath = sfd.FileName;
             }
 		    else
 		    {
@@ -248,7 +250,8 @@ namespace mRemoteNG.App.Update
 			{
 				try
 				{
-				    var updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath)
+#if !PORTABLE
+                    var updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath)
 				    {
 				        RequireThumbprintMatch = true,
 				        ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint
@@ -263,7 +266,19 @@ namespace mRemoteNG.App.Update
 
 				        throw (new Exception(updateAuthenticode.StatusMessage));
 				    }
-				}
+#else
+                    using (var md5 = MD5.Create())
+                    {
+                        using (var stream = File.OpenRead(_currentUpdateInfo.UpdateFilePath))
+                        {
+                            var hash = md5.ComputeHash(stream);
+                            var hashString = BitConverter.ToString(hash).Replace("-", "");
+                            if (!hashString.Equals(_currentUpdateInfo.CertificateThumbprint))
+                                throw new Exception("MD5 Hashes didn't match!");
+                        }
+                    }
+#endif
+                }
 				catch (Exception ex)
 				{
 					raiseEventArgs = new AsyncCompletedEventArgs(ex, false, null);
