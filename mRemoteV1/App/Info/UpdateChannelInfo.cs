@@ -13,7 +13,7 @@
 #if DEBUG
                 return "update-portable-debug.txt";
 #else
-                return Settings.Default.UpdateChannel.ToLowerInvariant() == "debug" ? "update-portable-debug.txt" : "portable-update.txt";
+                return Settings.Default.UpdateChannel.ToLowerInvariant() == "debug" ? "update-portable-debug.txt" : "update-portable.txt";
 #endif 
             }
 #else //NOT portable
