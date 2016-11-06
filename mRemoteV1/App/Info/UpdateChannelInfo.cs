@@ -26,8 +26,8 @@
 				return "update-debug.txt";
 #else
                 return Settings.Default.UpdateChannel.ToLowerInvariant() == "debug" ? "update-debug.txt" : "update.txt";
-            }
 #endif
+            }
 #endif //endif for PORTABLE
         }
     }
