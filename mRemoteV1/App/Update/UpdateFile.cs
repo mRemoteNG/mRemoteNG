@@ -7,11 +7,9 @@ namespace mRemoteNG.App.Update
     public class UpdateFile
     {
         #region Public Properties
-        private Dictionary<string, string> _items = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
         // ReSharper disable MemberCanBePrivate.Local
         // ReSharper disable once MemberCanBePrivate.Global
-        public Dictionary<string, string> Items => _items;
-
+        public Dictionary<string, string> Items { get; } = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
         #endregion
 
         #region Public Methods
@@ -52,7 +50,7 @@ namespace mRemoteNG.App.Update
                     var key = parts[0].Trim();
                     var value = parts[1].Trim();
 
-                    _items.Add(key, value);
+                    Items.Add(key, value);
                 }
             }
         }
@@ -61,7 +59,7 @@ namespace mRemoteNG.App.Update
         private string GetString(string key)
         {
             // ReSharper restore MemberCanBePrivate.Local
-            return !Items.ContainsKey(key) ? string.Empty : this._items[key];
+            return !Items.ContainsKey(key) ? string.Empty : this.Items[key];
         }
 
         public Version GetVersion(string key)

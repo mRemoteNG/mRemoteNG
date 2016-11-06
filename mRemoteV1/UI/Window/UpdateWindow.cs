@@ -1,11 +1,13 @@
 using System;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
 using System.ComponentModel;
-using WeifenLuo.WinFormsUI.Docking;
+using System.Diagnostics;
+using System.Drawing;
+using System.Net;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
+using WeifenLuo.WinFormsUI.Docking;
+
 #if !PORTABLE
 using System.IO;
 #endif
@@ -184,7 +186,7 @@ namespace mRemoteNG.UI.Window
 			if (InvokeRequired)
 			{
 				var myDelegate = new AsyncCompletedEventHandler(GetChangeLogCompleted);
-				Invoke(myDelegate, new object[] {sender, e});
+				Invoke(myDelegate, sender, e);
 				return;
 			}
 					
@@ -230,7 +232,7 @@ namespace mRemoteNG.UI.Window
 #endregion
 		
 #region Events
-		private void DownloadUpdateProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
+		private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
 			prgbDownload.Value = e.ProgressPercentage;
 		}
@@ -258,7 +260,6 @@ namespace mRemoteNG.UI.Window
 #else
 			    MessageBox.Show(Language.strUpdatePortableDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif
-                
 			}
 			catch (Exception ex)
 			{
