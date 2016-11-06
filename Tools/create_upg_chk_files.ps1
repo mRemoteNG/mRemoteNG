@@ -9,4 +9,4 @@ Write-Host dURL:
 Write-Host clURL:
 
 $hash = Get-FileHash -Algorithm MD5 $file | % { $_.Hash }
-Write-Host MD5: $hash
+Write-Host CertificateThumbprint: $hash
