@@ -1449,6 +1449,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        internal static string strDownloadPortable {
+            get {
+                return ResourceManager.GetString("strDownloadPortable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplicate.
         /// </summary>
         internal static string strDuplicate {
@@ -6674,6 +6683,15 @@ namespace mRemoteNG {
         internal static string strUpdateGetChangeLogFailed {
             get {
                 return ResourceManager.GetString("strUpdateGetChangeLogFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Completed!.
+        /// </summary>
+        internal static string strUpdatePortableDownloadComplete {
+            get {
+                return ResourceManager.GetString("strUpdatePortableDownloadComplete", resourceCulture);
             }
         }
         

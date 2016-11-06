@@ -1,19 +1,23 @@
 using System;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
 using System.ComponentModel;
-using WeifenLuo.WinFormsUI.Docking;
-using System.IO;
+using System.Diagnostics;
+using System.Drawing;
+using System.Net;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
+using WeifenLuo.WinFormsUI.Docking;
+
+#if !PORTABLE
+using System.IO;
+#endif
 
 
 namespace mRemoteNG.UI.Window
 {
 	public partial class UpdateWindow : BaseWindow
 	{
-        #region Public Methods
+#region Public Methods
 		public UpdateWindow(DockContent panel)
 		{
 			WindowType = WindowType.Update;
@@ -21,10 +25,11 @@ namespace mRemoteNG.UI.Window
 			InitializeComponent();
 			Runtime.FontOverride(this);
 		}
-        #endregion
+#endregion
 		
-        #region Form Stuff
-		public void Update_Load(object sender, EventArgs e)
+#region Form Stuff
+
+	    private void Update_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 			CheckForUpdate();
@@ -35,8 +40,12 @@ namespace mRemoteNG.UI.Window
 			Text = Language.strMenuCheckForUpdates;
 			TabText = Language.strMenuCheckForUpdates;
 			btnCheckForUpdate.Text = Language.strCheckForUpdate;
-			btnDownload.Text = Language.strDownloadAndInstall;
-			lblChangeLogLabel.Text = Language.strLabelChangeLog;
+#if !PORTABLE
+            btnDownload.Text = Language.strDownloadAndInstall;
+#else
+		    btnDownload.Text = Language.strDownloadPortable;
+#endif
+            lblChangeLogLabel.Text = Language.strLabelChangeLog;
 			lblInstalledVersion.Text = Language.strVersion;
 			lblInstalledVersionLabel.Text = $"{Language.strCurrentVersion}:";
 			lblLatestVersion.Text = Language.strVersion;
@@ -62,14 +71,14 @@ namespace mRemoteNG.UI.Window
 			}
 			Process.Start(linkUri.ToString());
 		}
-        #endregion
+#endregion
 		
-        #region Private Fields
+#region Private Fields
 		private AppUpdater _appUpdate;
 		private bool _isUpdateDownloadHandlerDeclared;
-        #endregion
+#endregion
 		
-        #region Private Methods
+#region Private Methods
 		private void CheckForUpdate()
 		{
 			if (_appUpdate == null)
@@ -120,7 +129,7 @@ namespace mRemoteNG.UI.Window
 				}
 				if (e.Error != null)
 				{
-					throw (e.Error);
+					throw e.Error;
 				}
 						
 				if (_appUpdate.IsUpdateAvailable())
@@ -181,7 +190,7 @@ namespace mRemoteNG.UI.Window
 			if (InvokeRequired)
 			{
 				var myDelegate = new AsyncCompletedEventHandler(GetChangeLogCompleted);
-				Invoke(myDelegate, new object[] {sender, e});
+				Invoke(myDelegate, sender, e);
 				return;
 			}
 					
@@ -192,10 +201,10 @@ namespace mRemoteNG.UI.Window
 				if (e.Cancelled)
 					return;
 				if (e.Error != null)
-					throw (e.Error);
-						
-				txtChangeLog.Text = _appUpdate.ChangeLog;
-			}
+					throw e.Error;
+
+				txtChangeLog.Text = _appUpdate.ChangeLog.Replace("\n", Environment.NewLine);
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage(Language.strUpdateGetChangeLogFailed, ex);
@@ -224,10 +233,10 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddExceptionMessage(Language.strUpdateDownloadFailed, ex);
 			}
 		}
-        #endregion
+#endregion
 		
-        #region Events
-		private void DownloadUpdateProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
+#region Events
+		private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
 			prgbDownload.Value = e.ProgressPercentage;
 		}
@@ -242,22 +251,25 @@ namespace mRemoteNG.UI.Window
 				if (e.Cancelled)
                     return;
 				if (e.Error != null)
-				    throw (e.Error);
-
-				if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+				    throw e.Error;
+#if !PORTABLE
+                if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
 				{
 					Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
 				}
-				else
+                else
 				{
 					File.Delete(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
 				}
+#else
+			    MessageBox.Show(Language.strUpdatePortableDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OK, MessageBoxIcon.Information);
+#endif
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage(Language.strUpdateDownloadCompleteFailed, ex);
 			}
 		}
-        #endregion
+#endregion
 	}
 }

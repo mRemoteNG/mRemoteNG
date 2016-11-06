@@ -42,7 +42,6 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private ConnectionInfo _selectedConnection;
         private SystemMenu _systemMenu;
-        private MiscTools.Fullscreen _fullscreen;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
 
 
@@ -51,7 +50,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
-            _fullscreen = new MiscTools.Fullscreen(this);
+            Fullscreen = new MiscTools.Fullscreen(this);
             pnlDock.Theme = new VS2012LightTheme();
 		}
 
@@ -120,11 +119,8 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 
-        public MiscTools.Fullscreen Fullscreen
-        {
-            get { return _fullscreen; }
-            set { _fullscreen = value; }
-        }
+        public MiscTools.Fullscreen Fullscreen { get; set; }
+
         #endregion
 		
         #region Startup & Shutdown
@@ -164,8 +160,6 @@ namespace mRemoteNG.UI.Forms
                 Windows.Show(WindowType.ComponentsCheck);
 			}
 
-            ApplySpecialSettingsForPortableVersion();
-
             Startup.Instance.CreateConnectionsProvider();
 			AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
@@ -174,14 +168,6 @@ namespace mRemoteNG.UI.Forms
             ConnectionTreeWindow = Windows.TreeForm;
         }
 
-        private void ApplySpecialSettingsForPortableVersion()
-        {
-            #if PORTABLE
-            mMenToolsUpdate.Visible = false;
-            mMenInfoSep2.Visible = false;
-            #endif
-        }
-		
 		private void ApplyLanguage()
 		{
 			mMenFile.Text = Language.strMenuFile;
@@ -285,7 +271,6 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-#if !PORTABLE
             if (!Settings.Default.CheckForUpdatesAsked)
             {
                 string[] commandButtons = 
@@ -314,7 +299,7 @@ namespace mRemoteNG.UI.Forms
 
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
-            DateTime nextUpdateCheck = Convert.ToDateTime(
+            var nextUpdateCheck = Convert.ToDateTime(
                     Settings.Default.CheckForUpdatesLastCheck.Add(
                         TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
 
@@ -322,7 +307,6 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
             Startup.Instance.CheckForUpdate();
-#endif
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -458,7 +442,7 @@ namespace mRemoteNG.UI.Forms
 
         #region Menu
         #region File
-        private void mMenFile_DropDownOpening(Object sender, EventArgs e)
+        private void mMenFile_DropDownOpening(object sender, EventArgs e)
         {
             var selectedNodeType = ConnectionTreeWindow.SelectedNode?.GetTreeNodeType();
             if (selectedNodeType == TreeNodeType.Root)

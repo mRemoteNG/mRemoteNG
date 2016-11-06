@@ -2415,4 +2415,10 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyNameSoundQuality" xml:space="preserve">
     <value>Sound Quality</value>
   </data>
+  <data name="strUpdatePortableDownloadComplete" xml:space="preserve">
+    <value>Download Completed!</value>
+  </data>
+  <data name="strDownloadPortable" xml:space="preserve">
+    <value>Download</value>
+  </data>
 </root>
