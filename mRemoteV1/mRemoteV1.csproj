@@ -194,7 +194,7 @@
     <Compile Include="Credential\CredentialCatalog.cs" />
     <Compile Include="Credential\CredentialRecord.cs" />
     <Compile Include="Credential\CredentialListBase.cs" />
-    <Compile Include="Credential\ICredential.cs" />
+    <Compile Include="Credential\ICredentialRecord.cs" />
     <Compile Include="Credential\ICredentialCatalog.cs" />
     <Compile Include="Credential\ICredentialProvider.cs" />
     <Compile Include="Credential\ICredentialList.cs" />

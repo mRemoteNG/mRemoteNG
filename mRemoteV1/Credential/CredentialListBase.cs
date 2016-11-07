@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialListBase : List<ICredential>, ICredentialList
+    public class CredentialListBase : List<ICredentialRecord>, ICredentialList
     {
-        public ICredential GetCredential(Guid uniqueId)
+        public ICredentialRecord GetCredential(Guid uniqueId)
         {
             return this.FirstOrDefault(cred => cred.UniqueId == uniqueId);
         }

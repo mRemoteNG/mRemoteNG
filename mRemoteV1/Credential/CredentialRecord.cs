@@ -4,7 +4,7 @@ using System.Security;
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialRecord : ICredential
+    public class CredentialRecord : ICredentialRecord
     {
         public Guid UniqueId { get; } = Guid.NewGuid();
 
@@ -19,7 +19,7 @@ namespace mRemoteNG.Credential
         {
         }
 
-        public CredentialRecord(ICredential otherCredential)
+        public CredentialRecord(ICredentialRecord otherCredential)
         {
             Username = otherCredential.Username;
             Password = otherCredential.Password;

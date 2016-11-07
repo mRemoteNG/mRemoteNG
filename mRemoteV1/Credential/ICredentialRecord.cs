@@ -4,7 +4,7 @@ using System.Security;
 
 namespace mRemoteNG.Credential
 {
-    public interface ICredential
+    public interface ICredentialRecord
     {
         Guid UniqueId { get; }
 

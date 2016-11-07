@@ -20,7 +20,7 @@ namespace mRemoteNGTests.Credential
         [Test]
         public void ImplementsIList()
         {
-            Assert.That(_credentialList, Is.AssignableTo<IList<ICredential>>());
+            Assert.That(_credentialList, Is.AssignableTo<IList<ICredentialRecord>>());
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace mRemoteNGTests.Credential
         public void GetCredentialByUuid()
         {
             var targetUuid = Guid.NewGuid();
-            var credential = Substitute.For<ICredential>();
+            var credential = Substitute.For<ICredentialRecord>();
             credential.UniqueId.Returns(targetUuid);
             _credentialList.Add(credential);
             Assert.That(_credentialList.GetCredential(targetUuid), Is.EqualTo(credential));

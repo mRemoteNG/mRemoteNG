@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace mRemoteNG.Credential
 {
-    public interface ICredentialList : IList<ICredential>
+    public interface ICredentialList : IList<ICredentialRecord>
     {
-        ICredential GetCredential(Guid uniqueId);
+        ICredentialRecord GetCredential(Guid uniqueId);
 
         bool Contains(Guid uniqueId);
     }
