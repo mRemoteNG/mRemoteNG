@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -24,18 +25,19 @@ using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace mRemoteNG.UI.Forms
 {
     public partial class frmMain
     {
-        private static readonly frmMain _defaultInstance = new frmMain();
-        public static frmMain Default => _defaultInstance;
+        public static frmMain Default { get; } = new frmMain();
+
         private static clipboardchangeEventHandler clipboardchangeEvent;
         private bool _inSizeMove;
         private bool _inMouseActivate;
         private IntPtr fpChainedWindowHandle;
-        private int[] SysMenSubItems = new int[51];
+        private readonly int[] SysMenSubItems = new int[51];
 	    private bool _isClosing;
         private bool _usingSqlServer;
         private string _connectionsFileName;
@@ -70,7 +72,7 @@ namespace mRemoteNG.UI.Forms
 			{
 				if (_usingSqlServer == value)
 				{
-					return ;
+					return;
 				}
 				_usingSqlServer = value;
 				UpdateWindowTitle();
@@ -84,7 +86,7 @@ namespace mRemoteNG.UI.Forms
 			{
 				if (_connectionsFileName == value)
 				{
-					return ;
+					return;
 				}
 				_connectionsFileName = value;
 				UpdateWindowTitle();
@@ -98,7 +100,7 @@ namespace mRemoteNG.UI.Forms
 			{
 				if (_showFullPathInTitle == value)
 				{
-					return ;
+					return;
 				}
 				_showFullPathInTitle = value;
 				UpdateWindowTitle();
@@ -112,7 +114,7 @@ namespace mRemoteNG.UI.Forms
 			{
 				if (_selectedConnection == value)
 				{
-					return ;
+					return;
 				}
 				_selectedConnection = value;
 				UpdateWindowTitle();
@@ -146,11 +148,6 @@ namespace mRemoteNG.UI.Forms
 			}
 
             Runtime.LoadConnections();
-            if (!Runtime.IsConnectionsFileLoaded)
-			{
-				//Application.Exit();
-				//return ;
-			}
 
             Windows.TreePanel.Focus();
 
@@ -254,7 +251,7 @@ namespace mRemoteNG.UI.Forms
 			tsQuickConnect.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
 		}
 		
-		private static void ApplyMenuColors(ToolStripItemCollection itemCollection)
+		private static void ApplyMenuColors(IEnumerable itemCollection)
 		{
 		    foreach (ToolStripItem item in itemCollection)
 			{
@@ -331,7 +328,7 @@ namespace mRemoteNG.UI.Forms
 					if (result == DialogResult.No)
 					{
 						e.Cancel = true;
-						return ;
+						return;
 					}
 				}
 			}
@@ -388,14 +385,7 @@ namespace mRemoteNG.UI.Forms
 					}
 					else
 					{
-						if (button.Image != null)
-						{
-							button.DisplayStyle = ToolStripItemDisplayStyle.Image;
-						}
-						else
-						{
-							button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-						}
+						button.DisplayStyle = button.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
 					}
 											
 					button.Tag = tool;
@@ -445,73 +435,71 @@ namespace mRemoteNG.UI.Forms
         private void mMenFile_DropDownOpening(object sender, EventArgs e)
         {
             var selectedNodeType = ConnectionTreeWindow.SelectedNode?.GetTreeNodeType();
-            if (selectedNodeType == TreeNodeType.Root)
-			{
-				mMenFileNewConnection.Enabled = true;
-				mMenFileNewFolder.Enabled = true;
-				mMenFileDelete.Enabled = false;
-				mMenFileRename.Enabled = true;
-				mMenFileDuplicate.Enabled = false;
-                mMenReconnectAll.Enabled = true;
-				mMenFileDelete.Text = Language.strMenuDelete;
-				mMenFileRename.Text = Language.strMenuRenameFolder;
-				mMenFileDuplicate.Text = Language.strMenuDuplicate;
-                mMenReconnectAll.Text = Language.strMenuReconnectAll;
+            switch (selectedNodeType)
+            {
+                case TreeNodeType.Root:
+                    mMenFileNewConnection.Enabled = true;
+                    mMenFileNewFolder.Enabled = true;
+                    mMenFileDelete.Enabled = false;
+                    mMenFileRename.Enabled = true;
+                    mMenFileDuplicate.Enabled = false;
+                    mMenReconnectAll.Enabled = true;
+                    mMenFileDelete.Text = Language.strMenuDelete;
+                    mMenFileRename.Text = Language.strMenuRenameFolder;
+                    mMenFileDuplicate.Text = Language.strMenuDuplicate;
+                    mMenReconnectAll.Text = Language.strMenuReconnectAll;
+                    break;
+                case TreeNodeType.Container:
+                    mMenFileNewConnection.Enabled = true;
+                    mMenFileNewFolder.Enabled = true;
+                    mMenFileDelete.Enabled = true;
+                    mMenFileRename.Enabled = true;
+                    mMenFileDuplicate.Enabled = true;
+                    mMenReconnectAll.Enabled = true;
+                    mMenFileDelete.Text = Language.strMenuDeleteFolder;
+                    mMenFileRename.Text = Language.strMenuRenameFolder;
+                    mMenFileDuplicate.Text = Language.strMenuDuplicateFolder;
+                    mMenReconnectAll.Text = Language.strMenuReconnectAll;
+                    break;
+                case TreeNodeType.Connection:
+                    mMenFileNewConnection.Enabled = true;
+                    mMenFileNewFolder.Enabled = true;
+                    mMenFileDelete.Enabled = true;
+                    mMenFileRename.Enabled = true;
+                    mMenFileDuplicate.Enabled = true;
+                    mMenReconnectAll.Enabled = true;
+                    mMenFileDelete.Text = Language.strMenuDeleteConnection;
+                    mMenFileRename.Text = Language.strMenuRenameConnection;
+                    mMenFileDuplicate.Text = Language.strMenuDuplicateConnection;
+                    mMenReconnectAll.Text = Language.strMenuReconnectAll;
+                    break;
+                case TreeNodeType.PuttyRoot:
+                case TreeNodeType.PuttySession:
+                    mMenFileNewConnection.Enabled = false;
+                    mMenFileNewFolder.Enabled = false;
+                    mMenFileDelete.Enabled = false;
+                    mMenFileRename.Enabled = false;
+                    mMenFileDuplicate.Enabled = false;
+                    mMenReconnectAll.Enabled = true;
+                    mMenFileDelete.Text = Language.strMenuDelete;
+                    mMenFileRename.Text = Language.strMenuRename;
+                    mMenFileDuplicate.Text = Language.strMenuDuplicate;
+                    mMenReconnectAll.Text = Language.strMenuReconnectAll;
+                    break;
+                default:
+                    mMenFileNewConnection.Enabled = true;
+                    mMenFileNewFolder.Enabled = true;
+                    mMenFileDelete.Enabled = false;
+                    mMenFileRename.Enabled = false;
+                    mMenFileDuplicate.Enabled = false;
+                    mMenReconnectAll.Enabled = true;
+                    mMenFileDelete.Text = Language.strMenuDelete;
+                    mMenFileRename.Text = Language.strMenuRename;
+                    mMenFileDuplicate.Text = Language.strMenuDuplicate;
+                    mMenReconnectAll.Text = Language.strMenuReconnectAll;
+                    break;
             }
-            else if (selectedNodeType == TreeNodeType.Container)
-			{
-				mMenFileNewConnection.Enabled = true;
-				mMenFileNewFolder.Enabled = true;
-				mMenFileDelete.Enabled = true;
-				mMenFileRename.Enabled = true;
-				mMenFileDuplicate.Enabled = true;
-                mMenReconnectAll.Enabled = true;
-                mMenFileDelete.Text = Language.strMenuDeleteFolder;
-				mMenFileRename.Text = Language.strMenuRenameFolder;
-				mMenFileDuplicate.Text = Language.strMenuDuplicateFolder;
-                mMenReconnectAll.Text = Language.strMenuReconnectAll;
-
-            }
-            else if (selectedNodeType == TreeNodeType.Connection)
-			{
-				mMenFileNewConnection.Enabled = true;
-				mMenFileNewFolder.Enabled = true;
-				mMenFileDelete.Enabled = true;
-				mMenFileRename.Enabled = true;
-				mMenFileDuplicate.Enabled = true;
-                mMenReconnectAll.Enabled = true;
-                mMenFileDelete.Text = Language.strMenuDeleteConnection;
-				mMenFileRename.Text = Language.strMenuRenameConnection;
-				mMenFileDuplicate.Text = Language.strMenuDuplicateConnection;
-                mMenReconnectAll.Text = Language.strMenuReconnectAll;
-            }
-            else if (selectedNodeType == TreeNodeType.PuttyRoot || selectedNodeType == TreeNodeType.PuttySession)
-			{
-				mMenFileNewConnection.Enabled = false;
-				mMenFileNewFolder.Enabled = false;
-				mMenFileDelete.Enabled = false;
-				mMenFileRename.Enabled = false;
-				mMenFileDuplicate.Enabled = false;
-                mMenReconnectAll.Enabled = true;
-                mMenFileDelete.Text = Language.strMenuDelete;
-				mMenFileRename.Text = Language.strMenuRename;
-				mMenFileDuplicate.Text = Language.strMenuDuplicate;
-                mMenReconnectAll.Text = Language.strMenuReconnectAll;
-            }
-			else
-			{
-				mMenFileNewConnection.Enabled = true;
-				mMenFileNewFolder.Enabled = true;
-				mMenFileDelete.Enabled = false;
-				mMenFileRename.Enabled = false;
-				mMenFileDuplicate.Enabled = false;
-                mMenReconnectAll.Enabled = true;
-                mMenFileDelete.Text = Language.strMenuDelete;
-				mMenFileRename.Text = Language.strMenuRename;
-				mMenFileDuplicate.Text = Language.strMenuDuplicate;
-                mMenReconnectAll.Text = Language.strMenuReconnectAll;
-            }
-		}
+        }
 
         private void mMenFileNewConnection_Click(object sender, EventArgs e)
 		{
@@ -530,7 +518,7 @@ namespace mRemoteNG.UI.Forms
 			var saveFileDialog = Tools.Controls.ConnectionsSaveAsDialog();
 			if (saveFileDialog.ShowDialog() != DialogResult.OK)
 			{
-				return ;
+				return;
 			}
 
             Runtime.NewConnections(saveFileDialog.FileName);
@@ -547,7 +535,7 @@ namespace mRemoteNG.UI.Forms
 						Runtime.SaveConnections();
 						break;
                     case DialogResult.Cancel:
-						return ;
+						return;
 				}
 			}
 
@@ -660,9 +648,9 @@ namespace mRemoteNG.UI.Forms
 
             for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
 			{
-                var tItem = new ToolStripMenuItem(Convert.ToString(Runtime.WindowList[i].Text), Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click);
-                tItem.Tag = Runtime.WindowList[i];
-                mMenViewConnectionPanels.DropDownItems.Add(tItem);
+			    var tItem = new ToolStripMenuItem(Convert.ToString(Runtime.WindowList[i].Text),
+			        Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click) {Tag = Runtime.WindowList[i]};
+			    mMenViewConnectionPanels.DropDownItems.Add(tItem);
 			}
 									
 			mMenViewConnectionPanels.Enabled = mMenViewConnectionPanels.DropDownItems.Count > 0;
@@ -878,7 +866,7 @@ namespace mRemoteNG.UI.Forms
 				if (connectionInfo == null)
 				{
 					cmbQuickConnect.Focus();
-					return ;
+					return;
 				}
 				cmbQuickConnect.Add(connectionInfo);
                 ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
@@ -905,10 +893,7 @@ namespace mRemoteNG.UI.Forms
 			btnQuickConnect.Text = protocol;
 			foreach (ToolStripMenuItem menuItem in mnuQuickConnectProtocol.Items)
 			{
-				if (menuItem.Text == protocol)
-					menuItem.Checked = true;
-				else
-					menuItem.Checked = false;
+			    menuItem.Checked = menuItem.Text.Equals(protocol);
 			}
 		}
         #endregion
@@ -981,14 +966,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (WindowState == FormWindowState.Minimized)
 			{
-				if (Settings.Default.MinimizeToTray)
-				{
-					if (Runtime.NotificationAreaIcon == null)
-					{
-                        Runtime.NotificationAreaIcon = new Tools.Controls.NotificationAreaIcon();
-					}
-					Hide();
-				}
+			    if (!Settings.Default.MinimizeToTray) return;
+			    if (Runtime.NotificationAreaIcon == null)
+			    {
+			        Runtime.NotificationAreaIcon = new Tools.Controls.NotificationAreaIcon();
+			    }
+			    Hide();
 			}
 			else
 			{
@@ -1008,82 +991,77 @@ namespace mRemoteNG.UI.Forms
             // Listen for and handle operating system messages
 			try
 			{
-				if (m.Msg == NativeMethods.WM_MOUSEACTIVATE)
+			    // ReSharper disable once SwitchStatementMissingSomeCases
+				switch (m.Msg)
 				{
-					_inMouseActivate = true;
-				}
-                else if (m.Msg == NativeMethods.WM_ACTIVATEAPP) // occurs when mRemoteNG becomes the active app
-				{
-					_inMouseActivate = false;
-				}
-                else if (m.Msg == NativeMethods.WM_ACTIVATE)
-				{
-                    // Ingore this message if it wasn't triggered by a click
-                    if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_CLICKACTIVE)
-                    {
-                        var control = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition));
-                        if (control != null)
-                        {
-                            // Let TreeViews and ComboBoxes get focus but don't simulate a mouse event
-                            if (control is TreeView || control is ComboBox)
-                            { }
-                            else
-                            {
-                                if (control.CanSelect || control is MenuStrip || control is ToolStrip || control is Crownwood.Magic.Controls.TabControl || control is Crownwood.Magic.Controls.InertButton)
-                                {
-                                    // Simulate a mouse event since one wasn't generated by Windows
-                                    var clientMousePosition = control.PointToClient(MousePosition);
-                                    var temp_wLow = clientMousePosition.X;
-                                    var temp_wHigh = clientMousePosition.Y;
-                                    NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, NativeMethods.MK_LBUTTON, NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
-                                    clientMousePosition.X = temp_wLow;
-                                    clientMousePosition.Y = temp_wHigh;
-                                    control.Focus();
-                                }
-                            }
-                        }
+				    case NativeMethods.WM_MOUSEACTIVATE:
+				        _inMouseActivate = true;
+				        break;
+				    case NativeMethods.WM_ACTIVATEAPP:
+				        _inMouseActivate = false;
+				        break;
+				    case NativeMethods.WM_ACTIVATE:
+				        // Ingore this message if it wasn't triggered by a click
+				        if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_CLICKACTIVE)
+				        {
+				            var control = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition));
+				            if (control != null)
+				            {
+				                // Let TreeViews and ComboBoxes get focus but don't simulate a mouse event
+				                if (control is TreeView || control is ComboBox)
+				                { }
+				                else
+				                {
+				                    if (control.CanSelect || control is MenuStrip || control is ToolStrip || control is Crownwood.Magic.Controls.TabControl || control is Crownwood.Magic.Controls.InertButton)
+				                    {
+				                        // Simulate a mouse event since one wasn't generated by Windows
+				                        var clientMousePosition = control.PointToClient(MousePosition);
+				                        var temp_wLow = clientMousePosition.X;
+				                        var temp_wHigh = clientMousePosition.Y;
+				                        NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, NativeMethods.MK_LBUTTON, NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
+				                        clientMousePosition.X = temp_wLow;
+				                        clientMousePosition.Y = temp_wHigh;
+				                        control.Focus();
+				                    }
+				                }
+				            }
 
-                        // This handles activations from clicks that did not start a size/move operation
-                        ActivateConnection();
-                    }
-				}
-                else if (m.Msg == NativeMethods.WM_WINDOWPOSCHANGED)
-				{
-					// Ignore this message if the window wasn't activated
-                    var windowPos = (NativeMethods.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
-                    if ((windowPos.flags & NativeMethods.SWP_NOACTIVATE) != 0)
-                    {
-                    }
-                    else
-                    {
-                        // This handles all other activations
-                        if (!_inMouseActivate && !_inSizeMove)
-                        {
-                            ActivateConnection();
-                        }
-                    }
-				}
-                else if (m.Msg == NativeMethods.WM_SYSCOMMAND)
-				{
-					for (var i = 0; i <= SysMenSubItems.Length - 1; i++)
-					{
-						if (SysMenSubItems[i] == m.WParam.ToInt32())
-						{
-							Screens.SendFormToScreen(Screen.AllScreens[i]);
-							break;
-						}
-					}
-				}
-                else if (m.Msg == NativeMethods.WM_DRAWCLIPBOARD)
-				{
-					NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
-				    clipboardchangeEvent?.Invoke();
-				}
-                else if (m.Msg == NativeMethods.WM_CHANGECBCHAIN)
-				{
-					//Send to the next window
-                    NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
-					fpChainedWindowHandle = m.LParam;
+				            // This handles activations from clicks that did not start a size/move operation
+				            ActivateConnection();
+				        }
+				        break;
+				    case NativeMethods.WM_WINDOWPOSCHANGED:
+				        // Ignore this message if the window wasn't activated
+				        var windowPos = (NativeMethods.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
+				        if ((windowPos.flags & NativeMethods.SWP_NOACTIVATE) != 0)
+				        {
+				        }
+				        else
+				        {
+				            // This handles all other activations
+				            if (!_inMouseActivate && !_inSizeMove)
+				            {
+				                ActivateConnection();
+				            }
+				        }
+				        break;
+				    case NativeMethods.WM_SYSCOMMAND:
+				        for (var i = 0; i <= SysMenSubItems.Length - 1; i++)
+				        {
+				            if (SysMenSubItems[i] != m.WParam.ToInt32()) continue;
+				            Screens.SendFormToScreen(Screen.AllScreens[i]);
+				            break;
+				        }
+				        break;
+				    case NativeMethods.WM_DRAWCLIPBOARD:
+				        NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
+				        clipboardchangeEvent?.Invoke();
+				        break;
+				    case NativeMethods.WM_CHANGECBCHAIN:
+				        //Send to the next window
+				        NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
+				        fpChainedWindowHandle = m.LParam;
+				        break;
 				}
 			}
 			catch (Exception ex)
@@ -1108,10 +1086,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			ActivateConnection();
             var connectionWindow = pnlDock.ActiveDocument as ConnectionWindow;
-			if (connectionWindow != null)
-			{
-				connectionWindow.UpdateSelectedConnection();
-			}
+		    connectionWindow?.UpdateSelectedConnection();
 		}
 		
 		private void UpdateWindowTitle()
@@ -1119,7 +1094,7 @@ namespace mRemoteNG.UI.Forms
 			if (InvokeRequired)
 			{
 				Invoke(new MethodInvoker(UpdateWindowTitle));
-				return ;
+				return;
 			}
 									
 			var titleBuilder = new StringBuilder(Application.ProductName);
@@ -1136,20 +1111,15 @@ namespace mRemoteNG.UI.Forms
 				{
 					if (!string.IsNullOrEmpty(ConnectionsFileName))
 					{
-						titleBuilder.Append(separator);
-						if (Settings.Default.ShowCompleteConsPathInTitle)
-						{
-							titleBuilder.Append(ConnectionsFileName);
-						}
-						else
-						{
-							titleBuilder.Append(Path.GetFileName(ConnectionsFileName));
-						}
+					    titleBuilder.Append(separator);
+					    titleBuilder.Append(Settings.Default.ShowCompleteConsPathInTitle
+					        ? ConnectionsFileName
+					        : Path.GetFileName(ConnectionsFileName));
 					}
 				}
 			}
 									
-			if (!(string.IsNullOrEmpty(SelectedConnection?.Name)))
+			if (!string.IsNullOrEmpty(SelectedConnection?.Name))
 			{
 				titleBuilder.Append(separator);
 				titleBuilder.Append(SelectedConnection.Name);
@@ -1180,12 +1150,10 @@ namespace mRemoteNG.UI.Forms
 
 			    newDocumentStyle = nonConnectionPanelCount == 0 ? DocumentStyle.DockingSdi : DocumentStyle.DockingWindow;
 			}
-									
-			if (pnlDock.DocumentStyle != newDocumentStyle)
-			{
-				pnlDock.DocumentStyle = newDocumentStyle;
-				pnlDock.Size = new Size(1, 1);
-			}
+
+		    if (pnlDock.DocumentStyle == newDocumentStyle) return;
+		    pnlDock.DocumentStyle = newDocumentStyle;
+		    pnlDock.Size = new Size(1, 1);
 		}
 
 #if false
@@ -1193,7 +1161,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (!(pnlDock.ActiveDocument is ConnectionWindow))
 			{
-				return ;
+				return;
 			}
 
             var connectionWindow = (ConnectionWindow)pnlDock.ActiveDocument;
