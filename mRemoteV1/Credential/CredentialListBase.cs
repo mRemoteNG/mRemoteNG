@@ -7,6 +7,13 @@ namespace mRemoteNG.Credential
 {
     public class CredentialListBase : List<ICredentialRecord>, ICredentialList
     {
+        public ICredentialProvider CredentialProvider { get; }
+
+        public CredentialListBase(ICredentialProvider credentialProvider)
+        {
+            CredentialProvider = credentialProvider;
+        }
+
         public ICredentialRecord GetCredential(Guid uniqueId)
         {
             return this.FirstOrDefault(cred => cred.UniqueId == uniqueId);

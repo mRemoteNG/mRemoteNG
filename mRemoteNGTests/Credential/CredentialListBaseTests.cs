@@ -10,11 +10,13 @@ namespace mRemoteNGTests.Credential
     public class CredentialListBaseTests
     {
         private CredentialListBase _credentialList;
+        private ICredentialProvider _mockCredentialProvider;
 
         [SetUp]
         public void Setup()
         {
-            _credentialList = new CredentialListBase();
+            _mockCredentialProvider = Substitute.For<ICredentialProvider>();
+            _credentialList = new CredentialListBase(_mockCredentialProvider);
         }
 
         [Test]
@@ -57,6 +59,12 @@ namespace mRemoteNGTests.Credential
         public void ContainsUsingUuidReturnsFalseOnFailure()
         {
             Assert.That(_credentialList.Contains(Guid.NewGuid()), Is.False);
+        }
+
+        [Test]
+        public void ContainsReferenceToItsAssociatedCredentialProvider()
+        {
+            Assert.That(_credentialList.CredentialProvider, Is.EqualTo(_mockCredentialProvider));
         }
     }
 }
