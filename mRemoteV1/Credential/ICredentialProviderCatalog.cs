@@ -2,7 +2,7 @@
 
 namespace mRemoteNG.Credential
 {
-    public interface ICredentialCatalog
+    public interface ICredentialProviderCatalog
     {
         void AddProvider(ICredentialProvider credentialProvider);
 
