@@ -6,7 +6,6 @@ using mRemoteNG.App.Update;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.TaskDialog;
-using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -35,11 +34,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-#if !PORTABLE
 			lblUpdatesExplanation.Text = Language.strUpdateCheck;
-            #else
-            lblUpdatesExplanation.Text = Language.strUpdateCheckPortableEdition;
-#endif
 
             chkCheckForUpdatesOnStartup.Text = Language.strCheckForUpdatesOnStartup;
             btnUpdateCheckNow.Text = Language.strCheckNow;
@@ -70,24 +65,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 chkCheckForUpdatesOnStartup.Checked = false;
                 cboUpdateCheckFrequency.SelectedIndex = nDaily;
             } // Daily
-            else if (Settings.Default.CheckForUpdatesFrequencyDays == 1)
+            else switch (Settings.Default.CheckForUpdatesFrequencyDays)
             {
-                cboUpdateCheckFrequency.SelectedIndex = nDaily;
-            } // Weekly
-            else if (Settings.Default.CheckForUpdatesFrequencyDays == 7)
-            {
-                cboUpdateCheckFrequency.SelectedIndex = nWeekly;
-            } // Monthly
-            else if (Settings.Default.CheckForUpdatesFrequencyDays == 31)
-            {
-                cboUpdateCheckFrequency.SelectedIndex = nMonthly;
-            }
-            else
-            {
-                var nCustom =
-                    cboUpdateCheckFrequency.Items.Add(string.Format(Language.strUpdateFrequencyCustom,
-                        Settings.Default.CheckForUpdatesFrequencyDays));
-                cboUpdateCheckFrequency.SelectedIndex = nCustom;
+                case 1:
+                    cboUpdateCheckFrequency.SelectedIndex = nDaily;
+                    break;
+                case 7:
+                    cboUpdateCheckFrequency.SelectedIndex = nWeekly;
+                    break;
+                case 31:
+                    cboUpdateCheckFrequency.SelectedIndex = nMonthly;
+                    break;
+                default:
+                    var nCustom =
+                        cboUpdateCheckFrequency.Items.Add(string.Format(Language.strUpdateFrequencyCustom,
+                            Settings.Default.CheckForUpdatesFrequencyDays));
+                    cboUpdateCheckFrequency.SelectedIndex = nCustom;
+                    break;
             }
 
             chkUseProxyForAutomaticUpdates.Checked = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
@@ -102,16 +96,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtProxyPassword.Text = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass), Runtime.EncryptionKey);
 
             btnTestProxy.Enabled = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
-
-#if PORTABLE
-            foreach (Control Control in Controls)
-            {
-                if (Control != lblUpdatesExplanation)
-                {
-                    Control.Visible = false;
-                }
-            }
-#endif
         }
 
         public override void SaveSettings()
@@ -209,14 +193,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             if (chkUseProxyForAutomaticUpdates.Checked)
             {
-                if (chkUseProxyAuthentication.Checked)
-                {
-                    pnlProxyAuthentication.Enabled = true;
-                }
-                else
-                {
-                    pnlProxyAuthentication.Enabled = false;
-                }
+                pnlProxyAuthentication.Enabled = chkUseProxyAuthentication.Checked;
             }
         }
 
