@@ -92,8 +92,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                var importer = new ActiveDirectoryImporter();
-                importer.Import(ldapPath, importDestinationContainer);
+                ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer);
                 Runtime.SaveConnectionsAsync();
             }
             catch (Exception ex)

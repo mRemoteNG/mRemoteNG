@@ -16,7 +16,7 @@ namespace mRemoteNG.Config.Import
             Import(ldapPathAsString, destinationContainer);
         }
 
-        public void Import(string ldapPath, ContainerInfo destinationContainer)
+        public static void Import(string ldapPath, ContainerInfo destinationContainer)
 		{
 			try
 			{
