@@ -23,7 +23,7 @@ namespace mRemoteNGTests.Credential
         }
 
         [Test]
-        public void UuidIsUnique()
+        public void IdIsUnique()
         {
             var credRecord2 = new CredentialRecord();
             Assert.That(_credentialRecord.Id, Is.Not.EqualTo(credRecord2.Id));
