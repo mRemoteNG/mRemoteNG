@@ -10,7 +10,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.App
 {
-    public class Import
+    public static class Import
     {
         private enum FileType
         {
@@ -23,7 +23,7 @@ namespace mRemoteNG.App
         }
 
         #region Public Methods
-        public static void ImportFromFile(ContainerInfo importDestinationContainer, bool alwaysUseSelectedTreeNode = false)
+        public static void ImportFromFile(ContainerInfo importDestinationContainer)
         {
             try
             {
@@ -51,6 +51,7 @@ namespace mRemoteNG.App
                         try
                         {
                             IConnectionImporter importer;
+                            // ReSharper disable once SwitchStatementMissingSomeCases
                             switch (DetermineFileType(fileName))
                             {
                                 case FileType.mRemoteXml:
@@ -91,8 +92,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                var importer = new ActiveDirectoryImporter();
-                importer.Import(ldapPath, importDestinationContainer);
+                ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer);
                 Runtime.SaveConnectionsAsync();
             }
             catch (Exception ex)
@@ -120,8 +120,9 @@ namespace mRemoteNG.App
         private static FileType DetermineFileType(string fileName)
         {
             // TODO: Use the file contents to determine the file type instead of trusting the extension
-            var fileExtension = Convert.ToString(Path.GetExtension(fileName).ToLowerInvariant());
-            switch (fileExtension)
+            var extension = Path.GetExtension(fileName);
+            if (extension == null) return FileType.Unknown;
+            switch (extension.ToLowerInvariant())
             {
                 case ".xml":
                     return FileType.mRemoteXml;

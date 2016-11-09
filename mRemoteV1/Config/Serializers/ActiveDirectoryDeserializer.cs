@@ -2,6 +2,7 @@
 using System.DirectoryServices;
 using System.Text.RegularExpressions;
 using mRemoteNG.App;
+using mRemoteNG.Config.Import;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
@@ -45,19 +46,27 @@ namespace mRemoteNG.Config.Serializers
         {
             try
             {
-                const string ldapFilter = "(objectClass=computer)";
+                const string ldapFilter = "(|(objectClass=computer)(objectClass=organizationalUnit))";
                 using (var ldapSearcher = new DirectorySearcher())
                 {
                     ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
                     ldapSearcher.Filter = ldapFilter;
                     ldapSearcher.SearchScope = SearchScope.OneLevel;
-                    ldapSearcher.PropertiesToLoad.AddRange(new[] { "securityEquals", "cn" });
+                    ldapSearcher.PropertiesToLoad.AddRange(new[] { "securityEquals", "cn", "objectClass" });
 
                     var ldapResults = ldapSearcher.FindAll();
                     foreach (SearchResult ldapResult in ldapResults)
                     {
                         using (var directoryEntry = ldapResult.GetDirectoryEntry())
+                        {
+                            if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
+                            {
+                                ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer);
+                                continue;
+                            }
+
                             DeserializeConnection(directoryEntry, parentContainer);
+                        }
                     }
                 }
             }
