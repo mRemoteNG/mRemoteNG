@@ -133,6 +133,7 @@
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
     <Compile Include="Config\Connections\Multiuser\RemoteConnectionsSyncronizer.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialProviderSerializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
     <Compile Include="Config\Serializers\DataTableSerializer.cs" />
