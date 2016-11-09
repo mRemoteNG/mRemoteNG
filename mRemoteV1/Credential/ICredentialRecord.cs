@@ -6,7 +6,7 @@ namespace mRemoteNG.Credential
 {
     public interface ICredentialRecord
     {
-        Guid UniqueId { get; }
+        Guid Id { get; }
 
         string Username { get; set; }
 

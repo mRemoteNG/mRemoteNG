@@ -36,7 +36,7 @@ namespace mRemoteNGTests.Credential
         {
             var targetUuid = Guid.NewGuid();
             var credential = Substitute.For<ICredentialRecord>();
-            credential.UniqueId.Returns(targetUuid);
+            credential.Id.Returns(targetUuid);
             _credentialList.Add(credential);
             Assert.That(_credentialList.GetCredential(targetUuid), Is.EqualTo(credential));
         }
@@ -52,7 +52,7 @@ namespace mRemoteNGTests.Credential
         {
             var credential = Substitute.For<CredentialRecord>(Guid.NewGuid());
             _credentialList.Add(credential);
-            Assert.That(_credentialList.Contains(credential.UniqueId), Is.True);
+            Assert.That(_credentialList.Contains(credential.Id), Is.True);
         }
 
         [Test]

@@ -26,7 +26,7 @@ namespace mRemoteNGTests.Credential
         public void UuidIsUnique()
         {
             var credRecord2 = new CredentialRecord();
-            Assert.That(_credentialRecord.UniqueId, Is.Not.EqualTo(credRecord2.UniqueId));
+            Assert.That(_credentialRecord.Id, Is.Not.EqualTo(credRecord2.Id));
         }
 
         [Test]
@@ -52,14 +52,14 @@ namespace mRemoteNGTests.Credential
         {
             var customGuid = new Guid();
             _credentialRecord = new CredentialRecord(customGuid);
-            Assert.That(_credentialRecord.UniqueId, Is.EqualTo(customGuid));
+            Assert.That(_credentialRecord.Id, Is.EqualTo(customGuid));
         }
 
         [Test]
         public void CopyConstructorGeneratesNewGuid()
         {
             var cred2 = new CredentialRecord(_credentialRecord);
-            Assert.That(cred2.UniqueId, Is.Not.EqualTo(_credentialRecord.UniqueId));
+            Assert.That(cred2.Id, Is.Not.EqualTo(_credentialRecord.Id));
         }
 
         [Test]

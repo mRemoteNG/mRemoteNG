@@ -16,12 +16,12 @@ namespace mRemoteNG.Credential
 
         public ICredentialRecord GetCredential(Guid uniqueId)
         {
-            return this.FirstOrDefault(cred => cred.UniqueId == uniqueId);
+            return this.FirstOrDefault(cred => cred.Id == uniqueId);
         }
 
         public bool Contains(Guid uniqueId)
         {
-            return Count != 0 && Exists(cred => cred.UniqueId == uniqueId);
+            return Count != 0 && Exists(cred => cred.Id == uniqueId);
         }
     }
 }

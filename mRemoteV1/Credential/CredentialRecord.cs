@@ -6,7 +6,7 @@ namespace mRemoteNG.Credential
 {
     public class CredentialRecord : ICredentialRecord
     {
-        public Guid UniqueId { get; } = Guid.NewGuid();
+        public Guid Id { get; } = Guid.NewGuid();
 
         public string Username { get; set; } = "";
 
@@ -28,7 +28,7 @@ namespace mRemoteNG.Credential
 
         public CredentialRecord(Guid customGuid)
         {
-            UniqueId = customGuid;
+            Id = customGuid;
         }
     }
 }
