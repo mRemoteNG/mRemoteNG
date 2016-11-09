@@ -4,14 +4,14 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Credential
 {
-    public class CredentialCatalogTests
+    public class CredentialProviderCatalogTests
     {
-        private CredentialCatalog _credentialCatalog;
+        private CredentialProviderCatalog _credentialCatalog;
 
         [SetUp]
         public void Setup()
         {
-            _credentialCatalog = new CredentialCatalog();
+            _credentialCatalog = new CredentialProviderCatalog();
         }
 
         [Test]
