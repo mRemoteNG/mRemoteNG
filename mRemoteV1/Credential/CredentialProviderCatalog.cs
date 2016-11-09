@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 
 namespace mRemoteNG.Credential
@@ -18,6 +19,16 @@ namespace mRemoteNG.Credential
         public void RemoveProvider(ICredentialProvider credentialProvider)
         {
             _credentialProviders.Remove(credentialProvider);
+        }
+
+        public IEnumerator<ICredentialProvider> GetEnumerator()
+        {
+            return _credentialProviders.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
