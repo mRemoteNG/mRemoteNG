@@ -1,18 +1,23 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 
 namespace mRemoteNG.Credential
 {
     public class CredentialProviderCatalog : ICredentialProviderCatalog
     {
+        private readonly List<ICredentialProvider> _credentialProviders = new List<ICredentialProvider>();
+
+        public IEnumerable<ICredentialProvider> CredentialProviders => _credentialProviders;
+
+
         public void AddProvider(ICredentialProvider credentialProvider)
         {
-            throw new NotImplementedException();
+            _credentialProviders.Add(credentialProvider);
         }
 
         public void RemoveProvider(ICredentialProvider credentialProvider)
         {
-            throw new NotImplementedException();
+            _credentialProviders.Remove(credentialProvider);
         }
     }
 }

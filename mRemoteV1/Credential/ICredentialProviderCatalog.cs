@@ -4,6 +4,8 @@ namespace mRemoteNG.Credential
 {
     public interface ICredentialProviderCatalog
     {
+        IEnumerable<ICredentialProvider> CredentialProviders { get; }
+
         void AddProvider(ICredentialProvider credentialProvider);
 
         void RemoveProvider(ICredentialProvider credentialProvider);
