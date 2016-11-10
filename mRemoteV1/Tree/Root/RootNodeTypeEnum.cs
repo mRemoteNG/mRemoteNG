@@ -3,7 +3,6 @@
     public enum RootNodeType
     {
         Connection,
-        Credential,
         PuttySessions
     }
 }

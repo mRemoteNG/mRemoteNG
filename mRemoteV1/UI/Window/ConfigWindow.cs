@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
@@ -274,11 +275,12 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Methods
-		// Main form handle command key events
-		// Adapted from http://kiwigis.blogspot.com/2009/05/adding-tab-key-support-to-propertygrid.html
+		
 		protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
 		{
-			if ((keyData & Keys.KeyCode) == Keys.Tab)
+            // Main form handle command key events
+            // Adapted from http://kiwigis.blogspot.com/2009/05/adding-tab-key-support-to-propertygrid.html
+            if ((keyData & Keys.KeyCode) == Keys.Tab)
 			{
 				var selectedItem = _pGrid.SelectedGridItem;
 				var gridRoot = selectedItem;
@@ -313,29 +315,20 @@ namespace mRemoteNG.UI.Window
 		private void FindChildGridItems(GridItem item, ref List<GridItem> gridItems)
 		{
 			gridItems.Add(item);
-					
-			if (!item.Expandable || item.Expanded)
-			{
-				foreach (GridItem child in item.GridItems)
-				{
-					FindChildGridItems(child, ref gridItems);
-				}
-			}
+
+		    if (item.Expandable && !item.Expanded) return;
+		    foreach (GridItem child in item.GridItems)
+		    {
+		        FindChildGridItems(child, ref gridItems);
+		    }
 		}
 		
-		private bool ContainsGridItemProperty(List<GridItem> gridItems)
+		private bool ContainsGridItemProperty(IEnumerable<GridItem> gridItems)
 		{
-			foreach (var item in gridItems)
-			{
-				if (item.GridItemType == GridItemType.Property)
-				{
-					return true;
-				}
-			}
-			return false;
+		    return gridItems.Any(item => item.GridItemType == GridItemType.Property);
 		}
-		
-		private GridItem FindPreviousGridItemProperty(List<GridItem> gridItems, GridItem startItem)
+
+        private GridItem FindPreviousGridItemProperty(IList<GridItem> gridItems, GridItem startItem)
 		{
 			if (gridItems.Count == 0 || startItem == null)
 				return null;
@@ -354,12 +347,10 @@ namespace mRemoteNG.UI.Window
 			var previousIndexValid = false;
 			for (var index = startIndex; index >= 0; index--)
 			{
-				if (gridItems[index].GridItemType == GridItemType.Property)
-				{
-					previousIndex = index;
-					previousIndexValid = true;
-					break;
-				}
+			    if (gridItems[index].GridItemType != GridItemType.Property) continue;
+			    previousIndex = index;
+			    previousIndexValid = true;
+			    break;
 			}
 			
 			if (previousIndexValid)
@@ -367,12 +358,10 @@ namespace mRemoteNG.UI.Window
 			
 			for (var index = gridItems.Count - 1; index >= startIndex + 1; index--)
 			{
-				if (gridItems[index].GridItemType == GridItemType.Property)
-				{
-					previousIndex = index;
-					previousIndexValid = true;
-					break;
-				}
+			    if (gridItems[index].GridItemType != GridItemType.Property) continue;
+			    previousIndex = index;
+			    previousIndexValid = true;
+			    break;
 			}
 			
 			if (!previousIndexValid)
@@ -380,7 +369,7 @@ namespace mRemoteNG.UI.Window
 			return gridItems[previousIndex];
 		}
 		
-		private GridItem FindNextGridItemProperty(List<GridItem> gridItems, GridItem startItem)
+		private GridItem FindNextGridItemProperty(IList<GridItem> gridItems, GridItem startItem)
 		{
 			if (gridItems.Count == 0 || startItem == null)
 				return null;
@@ -457,8 +446,6 @@ namespace mRemoteNG.UI.Window
 					                _btnIcon.Enabled = false;
 					                _btnHostStatus.Enabled = false;
 					                break;
-					            case RootNodeType.Credential:
-					                throw (new NotImplementedException());
 					            case RootNodeType.PuttySessions:
 					                PropertiesVisible = true;
 					                DefaultPropertiesVisible = false;
