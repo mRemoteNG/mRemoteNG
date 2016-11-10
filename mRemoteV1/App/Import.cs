@@ -88,11 +88,11 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer)
+        public static void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer, bool importSubOU)
         {
             try
             {
-                ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer);
+                ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOU);
                 Runtime.SaveConnectionsAsync();
             }
             catch (Exception ex)

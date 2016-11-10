@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Window
             this.btnChangeDomain = new System.Windows.Forms.Button();
             this.ActiveDirectoryTree = new ADTree.ADtree();
             this.btnClose = new System.Windows.Forms.Button();
+            this.chkSubOU = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnImport
@@ -65,6 +66,7 @@ namespace mRemoteNG.UI.Window
             this.ActiveDirectoryTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ActiveDirectoryTree.Domain = "tant-a01";
             this.ActiveDirectoryTree.Location = new System.Drawing.Point(12, 52);
+            this.ActiveDirectoryTree.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ActiveDirectoryTree.Name = "ActiveDirectoryTree";
             this.ActiveDirectoryTree.SelectedNode = null;
             this.ActiveDirectoryTree.Size = new System.Drawing.Size(506, 280);
@@ -82,10 +84,21 @@ namespace mRemoteNG.UI.Window
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // chkSubOU
+            // 
+            this.chkSubOU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSubOU.Location = new System.Drawing.Point(248, 342);
+            this.chkSubOU.Name = "chkSubOU";
+            this.chkSubOU.Size = new System.Drawing.Size(108, 17);
+            this.chkSubOU.TabIndex = 6;
+            this.chkSubOU.Text = "Import Sub OUs";
+            this.chkSubOU.UseVisualStyleBackColor = true;
+            // 
             // ActiveDirectoryImportWindow
             // 
             this.AcceptButton = this.btnImport;
             this.ClientSize = new System.Drawing.Size(530, 373);
+            this.Controls.Add(this.chkSubOU);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.ActiveDirectoryTree);
             this.Controls.Add(this.lblDomain);
@@ -110,5 +123,6 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.CheckBox chkSubOU;
     }
 }

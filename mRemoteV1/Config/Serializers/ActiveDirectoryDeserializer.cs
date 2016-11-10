@@ -14,10 +14,12 @@ namespace mRemoteNG.Config.Serializers
     public class ActiveDirectoryDeserializer : IDeserializer
     {
         private readonly string _ldapPath;
+        private readonly bool _importSubOU;
 
-        public ActiveDirectoryDeserializer(string ldapPath)
+        public ActiveDirectoryDeserializer(string ldapPath, bool importSubOU)
         {
             _ldapPath = ldapPath;
+            _importSubOU = importSubOU;
         }
 
         public ConnectionTreeModel Deserialize()
@@ -61,6 +63,9 @@ namespace mRemoteNG.Config.Serializers
                         {
                             if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
                             {
+                                // check/continue here so we don't create empty connection objects
+                                if(!_importSubOU) continue;
+
                                 ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer);
                                 continue;
                             }

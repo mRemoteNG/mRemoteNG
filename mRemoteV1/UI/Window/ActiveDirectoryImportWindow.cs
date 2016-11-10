@@ -38,7 +38,8 @@ namespace mRemoteNG.UI.Window
 		        importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
 		    else
 		        importDestination = Runtime.ConnectionTreeModel.RootNodes.First();
-		    Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination);
+
+		    Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
 		}
 
 	    private static void txtDomain_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
