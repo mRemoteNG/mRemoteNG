@@ -42,7 +42,16 @@ namespace mRemoteNG.UI.Window
         private ToolStripSeparator _toolStripSeparator1;
         private FilteredPropertyGrid _pGrid;
 
-        private AbstractConnectionInfoData _selectedNode;
+        private AbstractConnectionInfoData _selectedTreeNode;
+        public AbstractConnectionInfoData SelectedTreeNode
+        {
+            get { return _selectedTreeNode; }
+            set
+            {
+                _selectedTreeNode = value;
+                SetPropertyGridObject(_selectedTreeNode);
+            }
+        }
 
         private void InitializeComponent()
 		{
@@ -426,15 +435,17 @@ namespace mRemoteNG.UI.Window
                 _btnHostStatus.Enabled = false;
 
                 _btnIcon.Image = null;
-						
-				if (propertyGridObject is ConnectionInfo) //CONNECTION INFO
+
+			    var gridObjectAsConnectionInfo = propertyGridObject as ConnectionInfo;
+			    if (gridObjectAsConnectionInfo != null) //CONNECTION INFO
 				{
-                    if (propertyGridObject is ContainerInfo) //CONTAINER
-					{
-					    if (propertyGridObject is RootNodeInfo) // ROOT
+                    var gridObjectAsContainerInfo = propertyGridObject as ContainerInfo;
+				    if (gridObjectAsContainerInfo != null) //CONTAINER
+                    {
+                        var gridObjectAsRootNodeInfo = propertyGridObject as RootNodeInfo;
+                        if (gridObjectAsRootNodeInfo != null) // ROOT
 					    {
-					        var rootInfo = (RootNodeInfo) propertyGridObject;
-					        switch (rootInfo.Type)
+                            switch (gridObjectAsRootNodeInfo.Type)
 					        {
 					            case RootNodeType.Connection:
 					                PropertiesVisible = true;
@@ -457,14 +468,15 @@ namespace mRemoteNG.UI.Window
 					                _btnHostStatus.Enabled = false;
 					                break;
 					        }
+					        
 					        _pGrid.SelectedObject = propertyGridObject;
 					    }
 					    else
-					    {
+                        {
 					        _pGrid.SelectedObject = propertyGridObject;
 
 					        _btnShowProperties.Enabled = true;
-					        _btnShowInheritance.Enabled = ((ContainerInfo) propertyGridObject).Parent != null;
+					        _btnShowInheritance.Enabled = gridObjectAsContainerInfo.Parent != null;
 					        _btnShowDefaultProperties.Enabled = false;
 					        _btnShowDefaultInheritance.Enabled = false;
 					        _btnIcon.Enabled = true;
@@ -472,15 +484,15 @@ namespace mRemoteNG.UI.Window
 
 					        PropertiesVisible = true;
 					    }
-					}
+                    }
                     else //NO CONTAINER
-                    {
+				    {
                         if (PropertiesVisible) //Properties selected
                         {
                             _pGrid.SelectedObject = propertyGridObject;
 
                             _btnShowProperties.Enabled = true;
-                            _btnShowInheritance.Enabled = ((ConnectionInfo)propertyGridObject).Parent != null;
+                            _btnShowInheritance.Enabled = gridObjectAsConnectionInfo.Parent != null;
                             _btnShowDefaultProperties.Enabled = false;
                             _btnShowDefaultInheritance.Enabled = false;
                             _btnIcon.Enabled = true;
@@ -513,7 +525,7 @@ namespace mRemoteNG.UI.Window
                         }
                         else if (InheritanceVisible) //Inheritance selected
                         {
-                            _pGrid.SelectedObject = ((ConnectionInfo)propertyGridObject).Inheritance;
+                            _pGrid.SelectedObject = gridObjectAsConnectionInfo.Inheritance;
 
                             _btnShowProperties.Enabled = true;
                             _btnShowInheritance.Enabled = true;
@@ -537,7 +549,7 @@ namespace mRemoteNG.UI.Window
                         }
                     }
 
-                    var conIcon = ConnectionIcon.FromString(Convert.ToString(((ConnectionInfo)propertyGridObject).Icon));
+                    var conIcon = ConnectionIcon.FromString(Convert.ToString(gridObjectAsConnectionInfo.Icon));
 					if (conIcon != null)
 					{
                         _btnIcon.Image = conIcon.ToBitmap();
@@ -584,12 +596,6 @@ namespace mRemoteNG.UI.Window
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridObjectFailed + Environment.NewLine + ex.Message, true);
 			}
-		}
-		
-		public void pGrid_SelectedObjectChanged(AbstractConnectionInfoData selectedObject)
-		{
-		    _selectedNode = selectedObject;
-            ShowHideGridItems();
 		}
         #endregion
 		
@@ -1448,7 +1454,7 @@ namespace mRemoteNG.UI.Window
                     InheritanceVisible = false;
                     DefaultPropertiesVisible = false;
                     DefaultInheritanceVisible = false;
-                    SetPropertyGridObject((RootNodeInfo)_selectedNode);
+                    SetPropertyGridObject((RootNodeInfo)_selectedTreeNode);
 				}
 				else
 				{
@@ -1466,7 +1472,7 @@ namespace mRemoteNG.UI.Window
 			    InheritanceVisible = false;
 			    DefaultPropertiesVisible = false;
 			    DefaultInheritanceVisible = false;
-			    SetPropertyGridObject((RootNodeInfo)_selectedNode);
+			    SetPropertyGridObject((RootNodeInfo)_selectedTreeNode);
 			}
 		}
 		
