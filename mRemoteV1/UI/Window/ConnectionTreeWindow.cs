@@ -407,7 +407,7 @@ namespace mRemoteNG.UI.Window
 			{
 				_contextMenu.EnableShortcutKeys();
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-                Windows.ConfigForm.pGrid_SelectedObjectChanged(SelectedNode);
+			    Windows.ConfigForm.SelectedTreeNode = SelectedNode;
                 Runtime.SaveConnectionsAsync();
 			}
 			catch (Exception ex)
@@ -420,7 +420,7 @@ namespace mRemoteNG.UI.Window
 		{
             try
             {
-                Windows.ConfigForm.SetPropertyGridObject(SelectedNode);
+                Windows.ConfigForm.SelectedTreeNode = SelectedNode;
             }
             catch (Exception ex)
             {
