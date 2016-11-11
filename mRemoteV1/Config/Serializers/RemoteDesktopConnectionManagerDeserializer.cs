@@ -293,7 +293,7 @@ namespace mRemoteNG.Config.Serializers
                 var charArray = Encoding.Unicode.GetChars(plaintextData);
                 return new string(charArray);
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
                 //Runtime.MessageCollector.AddExceptionMessage("RemoteDesktopConnectionManager.DecryptPassword() failed.", ex, logOnly: true);
                 return null;
