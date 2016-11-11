@@ -4,7 +4,7 @@ namespace mRemoteNG.Config
 	{
 		Unspecified = 0,
 		Never = 1,
-		@Exit = 2,
+		Exit = 2,
 		Multiple = 3,
 		All = 4
 	}

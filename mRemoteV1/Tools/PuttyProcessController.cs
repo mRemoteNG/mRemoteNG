@@ -6,15 +6,7 @@ namespace mRemoteNG.Tools
 	{
 		public bool Start(CommandLineArguments arguments = null)
 		{
-			string filename = "";
-			if (mRemoteNG.Settings.Default.UseCustomPuttyPath)
-			{
-				filename = mRemoteNG.Settings.Default.CustomPuttyPath;
-			}
-			else
-			{
-				filename = App.Info.GeneralAppInfo.PuttyPath;
-			}
+			var filename = Settings.Default.UseCustomPuttyPath ? Settings.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
 			return Start(filename, arguments);
 		}
 	}

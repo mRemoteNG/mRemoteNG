@@ -788,9 +788,10 @@ namespace mRemoteNG.UI.Window
 			try
 			{
                 var strHide = new List<string>();
-                if (_pGrid.SelectedObject is RootNodeInfo)
+			    var o = _pGrid.SelectedObject as RootNodeInfo;
+			    if (o != null)
                 {
-                    var rootInfo = (RootNodeInfo)_pGrid.SelectedObject;
+                    var rootInfo = o;
                     if (rootInfo.Type == RootNodeType.PuttySessions)
                     {
                         strHide.Add("Password");
@@ -1446,7 +1447,8 @@ namespace mRemoteNG.UI.Window
 		
 		private void btnShowProperties_Click(object sender, EventArgs e)
 		{
-			if (_pGrid.SelectedObject is ConnectionInfoInheritance)
+		    var o = _pGrid.SelectedObject as ConnectionInfoInheritance;
+		    if (o != null)
 			{
 				if (_pGrid.SelectedObject is DefaultConnectionInheritance)
 				{
@@ -1462,7 +1464,7 @@ namespace mRemoteNG.UI.Window
                     InheritanceVisible = false;
                     DefaultPropertiesVisible = false;
                     DefaultInheritanceVisible = false;
-                    SetPropertyGridObject(((ConnectionInfoInheritance)_pGrid.SelectedObject).Parent);
+                    SetPropertyGridObject(o.Parent);
 				}
 			}
 			else if (_pGrid.SelectedObject is ConnectionInfo)
@@ -1634,9 +1636,10 @@ namespace mRemoteNG.UI.Window
 			{
                 _btnHostStatus.Image = Resources.HostStatus_Check;
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
-				if (connectionInfo is ConnectionInfo)
+			    var info = connectionInfo as ConnectionInfo;
+			    if (info != null)
 				{
-                    if (((ConnectionInfo)connectionInfo).IsContainer)
+                    if (info.IsContainer)
 					{
 						return;
 					}

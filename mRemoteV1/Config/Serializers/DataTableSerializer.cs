@@ -183,7 +183,8 @@ namespace mRemoteNG.Config.Serializers
             dataRow["ParentID"] = connectionInfo.Parent.ConstantID;
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
-            dataRow["Expanded"] = connectionInfo is ContainerInfo ? ((ContainerInfo)connectionInfo).IsExpanded : false;
+            var info = connectionInfo as ContainerInfo;
+            dataRow["Expanded"] = info != null && info.IsExpanded;
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;

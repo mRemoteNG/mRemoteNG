@@ -149,11 +149,13 @@ namespace mRemoteNG.App
 
                 for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
                 {
-                    var cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1));
-                    cMenScreen.Tag = new ArrayList();
-                    cMenScreen.Image = Resources.Monitor_GoTo;
-                    (cMenScreen.Tag as ArrayList).Add(Screen.AllScreens[i]);
-                    (cMenScreen.Tag as ArrayList).Add(cMenScreens.Tag);
+                    var cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1))
+                    {
+                        Tag = new ArrayList(),
+                        Image = Resources.Monitor_GoTo
+                    };
+                    ((ArrayList) cMenScreen.Tag).Add(Screen.AllScreens[i]);
+                    ((ArrayList) cMenScreen.Tag).Add(cMenScreens.Tag);
                     cMenScreen.Click += cMenConnectionPanelScreen_Click;
                     cMenScreens.DropDownItems.Add(cMenScreen);
                 }
@@ -175,9 +177,10 @@ namespace mRemoteNG.App
                 {
                     foreach (var obj in tagEnumeration)
                     {
-                        if (obj is Screen)
+                        var screen1 = obj as Screen;
+                        if (screen1 != null)
                         {
-                            screen = (Screen)obj;
+                            screen = screen1;
                         }
                         else if (obj is DockContent)
                         {

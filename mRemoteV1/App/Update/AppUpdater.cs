@@ -5,9 +5,6 @@ using System.ComponentModel;
 using System.Threading;
 using mRemoteNG.Tools;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 
