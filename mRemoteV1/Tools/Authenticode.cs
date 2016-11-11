@@ -59,18 +59,18 @@ namespace mRemoteNG.Tools
 					}
 				}
 
-			    var trustFileInfo = new Win32.WINTRUST_FILE_INFO {pcwszFilePath = FilePath};
+			    var trustFileInfo = new NativeMethods.WINTRUST_FILE_INFO {pcwszFilePath = FilePath};
 			    trustFileInfoPointer = Marshal.AllocCoTaskMem(Marshal.SizeOf(trustFileInfo));
 				Marshal.StructureToPtr(trustFileInfo, trustFileInfoPointer, false);
 
-			    var trustData = new Win32.WINTRUST_DATA
+			    var trustData = new NativeMethods.WINTRUST_DATA
 			    {
 			        dwUIChoice = (uint) Display,
-			        fdwRevocationChecks = Win32.WTD_REVOKE_WHOLECHAIN,
-			        dwUnionChoice = Win32.WTD_CHOICE_FILE,
+			        fdwRevocationChecks = NativeMethods.WTD_REVOKE_WHOLECHAIN,
+			        dwUnionChoice = NativeMethods.WTD_CHOICE_FILE,
 			        pFile = trustFileInfoPointer,
-			        dwStateAction = Win32.WTD_STATEACTION_IGNORE,
-			        dwProvFlags = Win32.WTD_DISABLE_MD2_MD4,
+			        dwStateAction = NativeMethods.WTD_STATEACTION_IGNORE,
+			        dwProvFlags = NativeMethods.WTD_DISABLE_MD2_MD4,
 			        dwUIContext = (uint) DisplayContext
 			    };
 			    trustDataPointer = Marshal.AllocCoTaskMem(Marshal.SizeOf(trustData));
@@ -78,13 +78,13 @@ namespace mRemoteNG.Tools
 
 			    var windowHandle = DisplayParentForm?.Handle ?? IntPtr.Zero;
 					
-				_trustProviderErrorCode = Win32.WinVerifyTrust(windowHandle, Win32.WINTRUST_ACTION_GENERIC_VERIFY_V2, trustDataPointer);
+				_trustProviderErrorCode = NativeMethods.WinVerifyTrust(windowHandle, NativeMethods.WINTRUST_ACTION_GENERIC_VERIFY_V2, trustDataPointer);
 				switch (_trustProviderErrorCode)
 				{
-					case Win32.TRUST_E_NOSIGNATURE:
+					case NativeMethods.TRUST_E_NOSIGNATURE:
 						Status = StatusValue.NoSignature;
 						break;
-					case Win32.TRUST_E_SUBJECT_NOT_TRUSTED:
+					case NativeMethods.TRUST_E_SUBJECT_NOT_TRUSTED:
 						break;
 							
 				}
@@ -101,7 +101,7 @@ namespace mRemoteNG.Tools
 			{
 				var hResultProperty = ex.GetType().GetProperty("HResult", BindingFlags.NonPublic | BindingFlags.Instance);
 				var hResult = Convert.ToInt32(hResultProperty.GetValue(ex, null));
-				if (hResult == Win32.CRYPT_E_NO_MATCH)
+				if (hResult == NativeMethods.CRYPT_E_NO_MATCH)
 				{
 					Status = StatusValue.NoSignature;
 					return Status;
@@ -139,16 +139,17 @@ namespace mRemoteNG.Tools
 
 	    private DisplayContextValue DisplayContext {get; set;}
 	    private Form DisplayParentForm {get; set;}
-		public Exception Exception {get; private set;}
+	    private Exception Exception {get; set;}
 	    private string FilePath {get; set;}
-		public bool RequireThumbprintMatch { private get; set;}
+	    private bool RequireThumbprintMatch { get; set;}
 
-	    public StatusValue Status { get; private set; }
+	    private StatusValue Status { get; set; }
 
 	    public string StatusMessage
 		{
 			get
 			{
+			    // ReSharper disable once SwitchStatementMissingSomeCases
 				switch (Status)
 				{
 					case StatusValue.Verified:
@@ -177,7 +178,7 @@ namespace mRemoteNG.Tools
 						return $"The trust provider returned an error. {ex.Message}";
 					case StatusValue.UnhandledException:
 						return $"An unhandled exception occurred. {Exception.Message}";
-					default:
+				    default:
 						return "The status is unknown.";
 				}
 			}
@@ -185,7 +186,7 @@ namespace mRemoteNG.Tools
 			
 		private string _thumbprint;
 
-	    public string ThumbprintToMatch { private get; set;}
+	    private string ThumbprintToMatch { get; set;}
 			
 		private int _trustProviderErrorCode;
 
@@ -196,16 +197,16 @@ namespace mRemoteNG.Tools
 	    private enum DisplayValue : uint
 		{
 			Unknown = 0,
-			All = Win32.WTD_UI_ALL,
-			None = Win32.WTD_UI_NONE,
-			NoBad = Win32.WTD_UI_NOBAD,
-			NoGood = Win32.WTD_UI_NOGOOD
+			All = NativeMethods.WTD_UI_ALL,
+			None = NativeMethods.WTD_UI_NONE,
+			NoBad = NativeMethods.WTD_UI_NOBAD,
+			NoGood = NativeMethods.WTD_UI_NOGOOD
 		}
 
 	    private enum DisplayContextValue : uint
 		{
-			Execute = Win32.WTD_UICONTEXT_EXECUTE,
-			Install = Win32.WTD_UICONTEXT_INSTALL
+			Execute = NativeMethods.WTD_UICONTEXT_EXECUTE,
+			Install = NativeMethods.WTD_UICONTEXT_INSTALL
 		}
 			
 		public enum StatusValue
@@ -224,7 +225,7 @@ namespace mRemoteNG.Tools
 			
         #region Protected Classes
 
-	    private static class Win32
+	    private static class NativeMethods
 		{
 			// ReSharper disable InconsistentNaming
 			[DllImport("wintrust.dll", CharSet = CharSet.Auto, SetLastError = false)]

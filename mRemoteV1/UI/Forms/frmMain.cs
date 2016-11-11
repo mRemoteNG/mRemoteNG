@@ -1018,7 +1018,7 @@ namespace mRemoteNG.UI.Forms
 				                        var clientMousePosition = control.PointToClient(MousePosition);
 				                        var temp_wLow = clientMousePosition.X;
 				                        var temp_wHigh = clientMousePosition.Y;
-				                        NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, NativeMethods.MK_LBUTTON, NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
+				                        NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, (IntPtr)NativeMethods.MK_LBUTTON, (IntPtr)NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
 				                        clientMousePosition.X = temp_wLow;
 				                        clientMousePosition.Y = temp_wHigh;
 				                        control.Focus();
@@ -1054,12 +1054,12 @@ namespace mRemoteNG.UI.Forms
 				        }
 				        break;
 				    case NativeMethods.WM_DRAWCLIPBOARD:
-				        NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
+				        NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
 				        clipboardchangeEvent?.Invoke();
 				        break;
 				    case NativeMethods.WM_CHANGECBCHAIN:
 				        //Send to the next window
-				        NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
+				        NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
 				        fpChainedWindowHandle = m.LParam;
 				        break;
 				}
