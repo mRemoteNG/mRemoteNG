@@ -678,7 +678,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 		
         #region Public Events & Handlers
-		public delegate void LeaveFullscreenEventHandler(ProtocolRDP sender, EventArgs e);
+		public delegate void LeaveFullscreenEventHandler(object sender, EventArgs e);
 		private LeaveFullscreenEventHandler LeaveFullscreenEvent;
 				
 		public event LeaveFullscreenEventHandler LeaveFullscreen

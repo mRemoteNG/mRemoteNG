@@ -8,7 +8,7 @@ namespace mRemoteNG.Tools
 {
 	public class PropertyGridCommandSite : IMenuCommandService, ISite
 	{
-		protected object TheObject;
+	    private readonly object TheObject;
 		public PropertyGridCommandSite(object @object)
 		{
 			TheObject = @object;
@@ -18,29 +18,29 @@ namespace mRemoteNG.Tools
 		{
 			get
 			{
-				DesignerVerbCollection objectVerbs = new DesignerVerbCollection();
+				var objectVerbs = new DesignerVerbCollection();
 				// ReSharper disable VBPossibleMistakenCallToGetType.2
-				MethodInfo[] methods = TheObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
+				var methods = TheObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
 				// ReSharper restore VBPossibleMistakenCallToGetType.2
-				foreach (MethodInfo method in methods)
+				foreach (var method in methods)
 				{
-					object[] commandAttributes = method.GetCustomAttributes(typeof(CommandAttribute), true);
-					if (commandAttributes == null || commandAttributes.Length == 0)
+					var commandAttributes = method.GetCustomAttributes(typeof(CommandAttribute), true);
+					if (commandAttributes.Length == 0)
 					{
 						continue;
 					}
 						
-					CommandAttribute commandAttribute = (CommandAttribute) (commandAttributes[0]);
+					var commandAttribute = (CommandAttribute) (commandAttributes[0]);
 					if (!commandAttribute.Command)
 					{
 						continue;
 					}
 						
-					string displayName = method.Name;
-					object[] displayNameAttributes = method.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-					if (!(displayNameAttributes == null || displayNameAttributes.Length == 0))
+					var displayName = method.Name;
+					var displayNameAttributes = method.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+					if (displayNameAttributes.Length != 0)
 					{
-						DisplayNameAttribute displayNameAttribute = (DisplayNameAttribute) (displayNameAttributes[0]);
+						var displayNameAttribute = (DisplayNameAttribute) (displayNameAttributes[0]);
 						if (!string.IsNullOrEmpty(displayNameAttribute.DisplayName))
 						{
 							displayName = displayNameAttribute.DisplayName;
@@ -55,126 +55,107 @@ namespace mRemoteNG.Tools
 			
 		private void VerbEventHandler(object sender, EventArgs e)
 		{
-			DesignerVerb verb = sender as DesignerVerb;
+			var verb = sender as DesignerVerb;
 			if (verb == null)
 			{
-				return ;
+				return;
 			}
 			// ReSharper disable VBPossibleMistakenCallToGetType.2
-			MethodInfo[] methods = TheObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
+			var methods = TheObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
 			// ReSharper restore VBPossibleMistakenCallToGetType.2
-			foreach (MethodInfo method in methods)
+			foreach (var method in methods)
 			{
-				object[] commandAttributes = method.GetCustomAttributes(typeof(CommandAttribute), true);
-				if (commandAttributes == null || commandAttributes.Length == 0)
+				var commandAttributes = method.GetCustomAttributes(typeof(CommandAttribute), true);
+				if (commandAttributes.Length == 0)
 				{
 					continue;
 				}
 					
-				CommandAttribute commandAttribute = (CommandAttribute) (commandAttributes[0]);
+				var commandAttribute = (CommandAttribute) (commandAttributes[0]);
 				if (!commandAttribute.Command)
 				{
 					continue;
 				}
 					
-				string displayName = method.Name;
-				object[] displayNameAttributes = method.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-				if (!(displayNameAttributes == null || displayNameAttributes.Length == 0))
+				var displayName = method.Name;
+				var displayNameAttributes = method.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+				if (displayNameAttributes.Length != 0)
 				{
-					DisplayNameAttribute displayNameAttribute = (DisplayNameAttribute) (displayNameAttributes[0]);
+					var displayNameAttribute = (DisplayNameAttribute) (displayNameAttributes[0]);
 					if (!string.IsNullOrEmpty(displayNameAttribute.DisplayName))
 					{
 						displayName = displayNameAttribute.DisplayName;
 					}
 				}
-					
-				if (verb.Text == displayName)
-				{
-					method.Invoke(TheObject, null);
-					return ;
-				}
+
+			    if (verb.Text != displayName) continue;
+			    method.Invoke(TheObject, null);
+			    return;
 			}
 		}
 			
 		public object GetService(Type serviceType)
 		{
-			if (serviceType == typeof(IMenuCommandService))
-			{
-				return this;
-			}
-			else
-			{
-				return null;
-			}
+		    return serviceType == typeof(IMenuCommandService) ? this : null;
 		}
 			
-        public System.ComponentModel.IComponent Component
+        public IComponent Component
 		{
-			get { throw (new NotImplementedException()); }
+			get { throw (new NotSupportedException()); }
 		}
 			
-        public System.ComponentModel.IContainer Container
+        public IContainer Container => null;
+
+	    public bool DesignMode => true;
+
+	    public string Name
 		{
-			get { return null; }
-		}
-			
-        public bool DesignMode
-		{
-			get { return true; }
-		}
-			
-        public string Name
-		{
-			get { throw (new NotImplementedException()); }
-			set { throw (new NotImplementedException()); }
+			get { throw (new NotSupportedException()); }
+			set { throw (new NotSupportedException()); }
 		}
 			
 		public void AddCommand(MenuCommand command)
 		{
-			throw (new NotImplementedException());
+			throw (new NotSupportedException());
 		}
 			
 		public void AddVerb(DesignerVerb verb)
 		{
-			throw (new NotImplementedException());
+			throw (new NotSupportedException());
 		}
 			
 		public MenuCommand FindCommand(CommandID commandId)
 		{
-			throw (new NotImplementedException());
+			throw (new NotSupportedException());
 		}
 			
 		public bool GlobalInvoke(CommandID commandId)
 		{
-			throw (new NotImplementedException());
+			throw (new NotSupportedException());
 		}
 			
 		public void RemoveCommand(MenuCommand command)
 		{
-			throw (new NotImplementedException());
+			throw (new NotSupportedException());
 		}
 			
 		public void RemoveVerb(DesignerVerb verb)
 		{
-			throw (new NotImplementedException());
+			throw (new NotSupportedException());
 		}
 			
 		public void ShowContextMenu(CommandID menuId, int x, int y)
 		{
-			throw (new NotImplementedException());
+			throw (new NotSupportedException());
 		}
 			
 	}
 		
 	public class CommandAttribute : Attribute
 	{
-		private bool _Command = false;
-        public bool Command
-		{
-			get { return _Command; }
-			set { _Command = value; }
-		}
-		public CommandAttribute(bool isCommand = true)
+	    public bool Command { get; set; }
+
+	    public CommandAttribute(bool isCommand = true)
 		{
 			Command = isCommand;
 		}

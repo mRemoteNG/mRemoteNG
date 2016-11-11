@@ -231,7 +231,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-                NativeMethods.PostMessage(PuttyHandle, NativeMethods.WM_SYSCOMMAND, IDM_RECONF, 0);
+                NativeMethods.PostMessage(PuttyHandle, NativeMethods.WM_SYSCOMMAND, (IntPtr)IDM_RECONF, (IntPtr)0);
                 NativeMethods.SetForegroundWindow(PuttyHandle);
 			}
 			catch (Exception ex)
