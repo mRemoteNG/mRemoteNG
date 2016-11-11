@@ -53,7 +53,7 @@ namespace mRemoteNG.App
             {
                 proccesses = Process.GetProcessesByName("virtscrl");
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
             }
