@@ -3,11 +3,16 @@ using System.IO;
 using System.Net;
 using System.ComponentModel;
 using System.Threading;
-using mRemoteNG.Tools;
 using System.Reflection;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 
+#if PORTABLE
+using System.Security.Cryptography;
+using System.Windows.Forms;
+#else
+using mRemoteNG.Tools;
+#endif
 
 namespace mRemoteNG.App.Update
 {
@@ -19,7 +24,7 @@ namespace mRemoteNG.App.Update
         private Thread _getUpdateInfoThread;
         private Thread _getChangeLogThread;
 
-        #region Public Properties
+#region Public Properties
         public UpdateInfo CurrentUpdateInfo => _currentUpdateInfo;
 
 	    public string ChangeLog => _changeLog;
@@ -30,9 +35,9 @@ namespace mRemoteNG.App.Update
 
 	    public bool IsDownloadUpdateRunning => _downloadUpdateWebClient != null;
 
-	    #endregion
+#endregion
 		
-        #region Public Methods
+#region Public Methods
 		public AppUpdater()
 		{
 			SetProxySettings();
