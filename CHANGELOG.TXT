@@ -2,20 +2,33 @@
 
   General Changes:
   ----------------
+  Lots of code clean up and refactoring
   Limit log file size to 1 main log + 5 backups * 10MB.
   Minor UI Tweak: Default Menubar and QuickConnect Bar to same line
-  MR-366 - Show PuTTY type and version on components check screen
-  MR-938 - Adjust RDP Resolution list (ensure most common resolutions were available)
-  MR-586 - Reduce HTTP/HTTPS document title length that is appended to the connection tab title
-  MR-975 - Replaced TreeView with TreeListView for displaying connection tree. This was a large change which separated the GUI from the domain model.
+  MR-364: Removed "Announcement" functionality 
+  MR-366: Show PuTTY type and version on components check screen
+  MR-586: Reduce HTTP/HTTPS document title length that is appended to the connection tab title
+  MR-938: Adjust RDP Resolution list (ensure most common resolutions were available)
+  MR-975: Replaced TreeView with TreeListView for displaying connection tree. This was a large change which separated the GUI from the domain model.
+  #144: Removed export option for "VisionApp Remote Desktop 2008"
+  
   
   Features/Enhancements:
   ----------------------
+  MR-220: Don't close the AD importer after import
   MR-971: Added Right Click method to Port Scan to import discovered hosts
+  MR-1000, #211 - Sub OU AD Import
+  #172: Implement "audioqualitymode" for RDP sessions
+  #160: Allow portable version to perform an update check (and download the latest .zip)
+  #157: Implement new cryptography providers (See Tools -> Options -> Security)
+  #167: fix/implement the update check (was disabled in 1.74 as part of the C# conversion)
+  
   
   Fixes:
   ------
   MR-967: File transfer doesn't work when specifying full path and file name (as prompted)
+  MR-979: switched to notifications panel incorrectly (when configured NOT to do so)
+  
   
 1.75 Alpha 3 (2016-08-12):  
 
