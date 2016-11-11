@@ -79,7 +79,7 @@ namespace mRemoteNG.App
 
         #region Structures
         [StructLayout(LayoutKind.Sequential)]
-        public struct WINDOWPOS
+        internal struct WINDOWPOS
         {
             public IntPtr hwnd;
             public IntPtr hwndInsertAfter;
@@ -90,7 +90,7 @@ namespace mRemoteNG.App
             public int flags;
         }
 
-        public struct WINDOWPLACEMENT
+        internal struct WINDOWPLACEMENT
         {
             public uint length;
             public uint flags;
@@ -100,13 +100,13 @@ namespace mRemoteNG.App
             public RECT rcNormalPosition;
         }
 
-        public struct POINT
+        internal struct POINT
         {
             public long x;
             public long y;
         }
 
-        public struct RECT
+        internal struct RECT
         {
             public long left;
             public long top;
