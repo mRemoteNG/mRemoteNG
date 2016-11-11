@@ -52,11 +52,11 @@ namespace mRemoteNG.Config.Serializers
             return xml;
         }
 
-        private string WriteXmlToString(XNode xmlDocument)
+        private static string WriteXmlToString(XNode xmlDocument)
         {
             string xmlString;
             var xmlWriterSettings = new XmlWriterSettings { Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8 };
-            using (var memoryStream = new MemoryStream())
+            var memoryStream = new MemoryStream();
             using (var xmlTextWriter = XmlWriter.Create(memoryStream, xmlWriterSettings))
             {
                 xmlDocument.WriteTo(xmlTextWriter);

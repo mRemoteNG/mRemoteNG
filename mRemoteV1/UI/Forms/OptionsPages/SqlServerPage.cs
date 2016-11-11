@@ -1,6 +1,7 @@
 using System;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages

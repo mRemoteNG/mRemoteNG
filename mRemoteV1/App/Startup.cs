@@ -14,6 +14,7 @@ using System.IO;
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.UI;
 using WeifenLuo.WinFormsUI.Docking;
 

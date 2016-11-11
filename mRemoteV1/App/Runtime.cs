@@ -16,6 +16,7 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
@@ -215,23 +216,19 @@ namespace mRemoteNG.App
                     Directory.CreateDirectory(dirname);
 
                 // Use File.Open with FileMode.CreateNew so that we don't overwrite an existing file
-                using (var fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                var fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                using (var xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
                 {
-                    using (var xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
-                    {
-                        xmlTextWriter.Formatting = Formatting.Indented;
-                        xmlTextWriter.Indentation = 4;
-                        xmlTextWriter.WriteStartDocument();
-                        xmlTextWriter.WriteStartElement("Connections"); // Do not localize
-                        xmlTextWriter.WriteAttributeString("Name", Language.strConnections);
-                        xmlTextWriter.WriteAttributeString("Export", "", "False");
-                        xmlTextWriter.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY");
-                        xmlTextWriter.WriteAttributeString("ConfVersion", "", "2.5");
-                        xmlTextWriter.WriteEndElement();
-                        xmlTextWriter.WriteEndDocument();
-                        xmlTextWriter.Close();
-                    }
-
+                    xmlTextWriter.Formatting = Formatting.Indented;
+                    xmlTextWriter.Indentation = 4;
+                    xmlTextWriter.WriteStartDocument();
+                    xmlTextWriter.WriteStartElement("Connections"); // Do not localize
+                    xmlTextWriter.WriteAttributeString("Name", Language.strConnections);
+                    xmlTextWriter.WriteAttributeString("Export", "", "False");
+                    xmlTextWriter.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY");
+                    xmlTextWriter.WriteAttributeString("ConfVersion", "", "2.5");
+                    xmlTextWriter.WriteEndElement();
+                    xmlTextWriter.WriteEndDocument();
                 }
 
                 // Load config

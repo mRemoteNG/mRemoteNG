@@ -1,7 +1,6 @@
 ﻿using System;
 
-
-namespace mRemoteNG.Config.Connections
+namespace mRemoteNG.Config.Connections.Multiuser
 {
     public delegate void UpdateCheckFinishedEventHandler(object sender, ConnectionsUpdateCheckFinishedEventArgs args);
 
