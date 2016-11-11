@@ -139,11 +139,11 @@ namespace mRemoteNG.Tools
 
 	    private DisplayContextValue DisplayContext {get; set;}
 	    private Form DisplayParentForm {get; set;}
-	    private Exception Exception {get; set;}
+	    internal Exception Exception {get; set;}
 	    private string FilePath {get; set;}
-	    private bool RequireThumbprintMatch { get; set;}
+	    internal bool RequireThumbprintMatch { get; set;}
 
-	    private StatusValue Status { get; set; }
+	    internal StatusValue Status { get; set; }
 
 	    public string StatusMessage
 		{
@@ -186,7 +186,7 @@ namespace mRemoteNG.Tools
 			
 		private string _thumbprint;
 
-	    private string ThumbprintToMatch { get; set;}
+	    internal string ThumbprintToMatch { get; set;}
 			
 		private int _trustProviderErrorCode;
 
