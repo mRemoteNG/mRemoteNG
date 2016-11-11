@@ -23,7 +23,7 @@ If you find mRemoteNG useful and would like to contribute, it would be greatly a
 	<div class='card card-block'>
 		<h2 class='card-title'>PayPal</h2>
 		<form action='https://www.paypal.com/cgi-bin/webscr' method='post'>
-			<input type='hidden' name='cmd' value='_donations'>
+			<input type='hidden' name='cmd' value='_xclick'>
 			<input type='hidden' name='charset' value='utf-8'>
 			<input type='hidden' name='business' value='QANUEL2A38KFQ'>
 			<input type='hidden' name='return' value='{{ site.url }}{{ site.baseurl }}'>
