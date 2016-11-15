@@ -83,7 +83,7 @@ namespace mRemoteNG.Connection
 			return newConnectionInfo;
 		}
 
-	    public void CopyFrom(AbstractConnectionInfoData sourceConnectionInfo)
+	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
 	    {
 	        var properties = typeof(AbstractConnectionInfoData).GetProperties();
 	        foreach (var property in properties)
@@ -91,7 +91,10 @@ namespace mRemoteNG.Connection
 	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
                 property.SetValue(this, remotePropertyValue, null);
 	        }
-	    }
+            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone();
+            clonedInheritance.Parent = this;
+            Inheritance = clonedInheritance;
+        }
 
 	    public virtual TreeNodeType GetTreeNodeType()
 	    {

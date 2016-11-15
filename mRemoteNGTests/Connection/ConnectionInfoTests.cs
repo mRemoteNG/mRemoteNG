@@ -57,6 +57,15 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
+        public void CopyingAConnectionInfoAlsoCopiesItsInheritance()
+        {
+            _connectionInfo.Inheritance.Username = true;
+            var secondConnection = new ConnectionInfo {Inheritance = {Username = false}};
+            secondConnection.CopyFrom(_connectionInfo);
+            Assert.That(secondConnection.Inheritance.Username, Is.True);
+        }
+
+        [Test]
         public void PropertyChangedEventRaisedWhenOpenConnectionsChanges()
         {
             var eventWasCalled = false;
