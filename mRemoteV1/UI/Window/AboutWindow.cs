@@ -105,7 +105,7 @@ namespace mRemoteNG.UI.Window
             this.lblCredits.AutoSize = true;
             this.lblCredits.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblCredits.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblCredits.Location = new System.Drawing.Point(16, 131);
+            this.lblCredits.Location = new System.Drawing.Point(8, 131);
             this.lblCredits.Name = "lblCredits";
             this.lblCredits.Size = new System.Drawing.Size(55, 25);
             this.lblCredits.TabIndex = 11;
@@ -151,7 +151,7 @@ namespace mRemoteNG.UI.Window
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblTitle.Location = new System.Drawing.Point(16, 16);
+            this.lblTitle.Location = new System.Drawing.Point(8, 20);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(126, 31);
             this.lblTitle.TabIndex = 0;
@@ -163,7 +163,7 @@ namespace mRemoteNG.UI.Window
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblVersion.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblVersion.Location = new System.Drawing.Point(16, 56);
+            this.lblVersion.Location = new System.Drawing.Point(8, 51);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(55, 25);
             this.lblVersion.TabIndex = 1;
@@ -187,7 +187,7 @@ namespace mRemoteNG.UI.Window
             this.lblLicense.AutoSize = true;
             this.lblLicense.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblLicense.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblLicense.Location = new System.Drawing.Point(16, 96);
+            this.lblLicense.Location = new System.Drawing.Point(8, 101);
             this.lblLicense.Name = "lblLicense";
             this.lblLicense.Size = new System.Drawing.Size(54, 25);
             this.lblLicense.TabIndex = 5;
@@ -199,7 +199,7 @@ namespace mRemoteNG.UI.Window
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblCopyright.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblCopyright.Location = new System.Drawing.Point(16, 76);
+            this.lblCopyright.Location = new System.Drawing.Point(8, 76);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(71, 25);
             this.lblCopyright.TabIndex = 2;
