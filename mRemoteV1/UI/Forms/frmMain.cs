@@ -38,7 +38,6 @@ namespace mRemoteNG.UI.Forms
         private bool _inMouseActivate;
         private IntPtr fpChainedWindowHandle;
         private readonly int[] SysMenSubItems = new int[51];
-	    private bool _isClosing;
         private bool _usingSqlServer;
         private string _connectionsFileName;
         private bool _showFullPathInTitle;
@@ -63,9 +62,9 @@ namespace mRemoteNG.UI.Forms
         #region Properties
         public FormWindowState PreviousWindowState { get; set; }
 
-	    public bool IsClosing => _isClosing;
+	    public bool IsClosing { get; private set; }
 
-	    public bool AreWeUsingSqlServerForSavingConnections
+        public bool AreWeUsingSqlServerForSavingConnections
 		{
 			get { return _usingSqlServer; }
 			set
@@ -335,7 +334,7 @@ namespace mRemoteNG.UI.Forms
 
             Shutdown.Cleanup();
 									
-			_isClosing = true;
+			IsClosing = true;
 
             if (Runtime.WindowList != null)
 			{
@@ -529,6 +528,7 @@ namespace mRemoteNG.UI.Forms
             if (Runtime.IsConnectionsFileLoaded)
 			{
                 var msgBoxResult = MessageBox.Show(Language.strSaveConnectionsFileBeforeOpeningAnother, Language.strSave, MessageBoxButtons.YesNoCancel);
+			    // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (msgBoxResult)
 				{
                     case DialogResult.Yes:
@@ -830,16 +830,14 @@ namespace mRemoteNG.UI.Forms
 				mnuQuickConnectProtocol.Items.Clear();
 				foreach (var fieldInfo in typeof(ProtocolType).GetFields())
 				{
-					if (!(fieldInfo.Name == "value__" || fieldInfo.Name == "IntApp"))
-					{
-						var menuItem = new ToolStripMenuItem(fieldInfo.Name);
-						if (fieldInfo.Name == Settings.Default.QuickConnectProtocol)
-						{
-							menuItem.Checked = true;
-							btnQuickConnect.Text = Settings.Default.QuickConnectProtocol;
-						}
-						mnuQuickConnectProtocol.Items.Add(menuItem);
-					}
+				    if (fieldInfo.Name == "value__" || fieldInfo.Name == "IntApp") continue;
+				    var menuItem = new ToolStripMenuItem(fieldInfo.Name);
+				    if (fieldInfo.Name == Settings.Default.QuickConnectProtocol)
+				    {
+				        menuItem.Checked = true;
+				        btnQuickConnect.Text = Settings.Default.QuickConnectProtocol;
+				    }
+				    mnuQuickConnectProtocol.Items.Add(menuItem);
 				}
 			}
 			catch (Exception ex)
