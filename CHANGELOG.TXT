@@ -1,4 +1,4 @@
-1.75 SOMETHING (2016-XX-XX):
+1.75 Beta 1 (2016-11-15):
 
 General Changes:
 ----------------
