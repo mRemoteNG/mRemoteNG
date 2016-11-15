@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
 using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -39,7 +38,7 @@ namespace mRemoteNG.Tools
 		
 		public static SecureString PasswordDialog(string passwordName = null, bool verify = true)
 		{
-			PasswordForm passwordForm = new PasswordForm(passwordName, verify);
+			var passwordForm = new PasswordForm(passwordName, verify);
 				
 			return passwordForm.ShowDialog() == DialogResult.OK ? passwordForm.Password.ConvertToSecureString() : "".ConvertToSecureString();
 		}
@@ -86,13 +85,11 @@ namespace mRemoteNG.Tools
         }
         private static string GetExceptionMessageRecursive(Exception ex, string separator)
 		{
-			string message = ex.Message;
-			if (ex.InnerException != null)
-			{
-				string innerMessage = GetExceptionMessageRecursive(ex.InnerException, separator);
-				message = Join(separator, message, innerMessage);
-			}
-			return message;
+			var message = ex.Message;
+		    if (ex.InnerException == null) return message;
+		    var innerMessage = GetExceptionMessageRecursive(ex.InnerException, separator);
+		    message = Join(separator, message, innerMessage);
+		    return message;
 		}
 		
 
@@ -100,14 +97,14 @@ namespace mRemoteNG.Tools
 		{
 			try
 			{
-				int LeftStart = sender.TabController.SelectedTab.PointToScreen(new Point(sender.TabController.SelectedTab.Left)).X; //Me.Left + Splitter.SplitterDistance + 11
-				int TopStart = sender.TabController.SelectedTab.PointToScreen(new Point(sender.TabController.SelectedTab.Top)).Y; //Me.Top + Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 - 3
-				int LeftWidth = sender.TabController.SelectedTab.Width; //Me.Width - (Splitter.SplitterDistance + 16)
-				int TopHeight = sender.TabController.SelectedTab.Height; //Me.Height - (Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 + 2)
+				var LeftStart = sender.TabController.SelectedTab.PointToScreen(new Point(sender.TabController.SelectedTab.Left)).X; //Me.Left + Splitter.SplitterDistance + 11
+				var TopStart = sender.TabController.SelectedTab.PointToScreen(new Point(sender.TabController.SelectedTab.Top)).Y; //Me.Top + Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 - 3
+				var LeftWidth = sender.TabController.SelectedTab.Width; //Me.Width - (Splitter.SplitterDistance + 16)
+				var TopHeight = sender.TabController.SelectedTab.Height; //Me.Height - (Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 + 2)
 					
-				Size currentFormSize = new Size(LeftWidth, TopHeight);
-				Bitmap ScreenToBitmap = new Bitmap(LeftWidth, TopHeight);
-                Graphics gGraphics = Graphics.FromImage(ScreenToBitmap);
+				var currentFormSize = new Size(LeftWidth, TopHeight);
+				var ScreenToBitmap = new Bitmap(LeftWidth, TopHeight);
+                var gGraphics = Graphics.FromImage(ScreenToBitmap);
 					
 				gGraphics.CopyFromScreen(new Point(LeftStart, TopStart), new Point(0, 0), currentFormSize);
 					
@@ -138,8 +135,8 @@ namespace mRemoteNG.Tools
 			public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destType)
 			{
 			    if (value == null) return null;
-			    FieldInfo fi = _enumType.GetField(Enum.GetName(_enumType, value: value));
-			    DescriptionAttribute dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
+			    var fi = _enumType.GetField(Enum.GetName(_enumType, value: value));
+			    var dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
 					
 			    return dna != null ? dna.Description : value.ToString();
 			}
@@ -151,9 +148,9 @@ namespace mRemoteNG.Tools
 				
 			public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 			{
-			    foreach (FieldInfo fi in _enumType.GetFields())
+			    foreach (var fi in _enumType.GetFields())
 				{
-					DescriptionAttribute dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
+					var dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
 						
 					if ((dna != null) && ((string) value == dna.Description))
 					{
@@ -180,32 +177,23 @@ namespace mRemoteNG.Tools
 				
 			public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
 			{
-				if (destinationType == typeof(string))
-				{
-					return true;
-				}
-					
-				return base.CanConvertTo(context, destinationType);
+			    return destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
 			}
 				
 			public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 			{
-				if (value is string)
-				{
-					if (string.Equals(value.ToString(), Language.strYes, StringComparison.CurrentCultureIgnoreCase))
-					{
-						return true;
-					}
+			    if (!(value is string)) return base.ConvertFrom(context, culture, value);
+			    if (string.Equals(value.ToString(), Language.strYes, StringComparison.CurrentCultureIgnoreCase))
+			    {
+			        return true;
+			    }
 						
-					if (string.Equals(value.ToString(), Language.strNo, StringComparison.CurrentCultureIgnoreCase))
-					{
-						return false;
-					}
+			    if (string.Equals(value.ToString(), Language.strNo, StringComparison.CurrentCultureIgnoreCase))
+			    {
+			        return false;
+			    }
 						
-					throw (new Exception("Values must be \"Yes\" or \"No\""));
-				}
-					
-				return base.ConvertFrom(context, culture, value);
+			    throw (new Exception("Values must be \"Yes\" or \"No\""));
 			}
 				
 			public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
@@ -227,7 +215,7 @@ namespace mRemoteNG.Tools
 			{
 				bool[] bools = {true, false};
 					
-				StandardValuesCollection svc = new StandardValuesCollection(bools);
+				var svc = new StandardValuesCollection(bools);
 					
 				return svc;
 			}
@@ -240,7 +228,7 @@ namespace mRemoteNG.Tools
 				_handledForm = handledForm;
 			}
 				
-			private Form _handledForm;
+			private readonly Form _handledForm;
 			private FormWindowState _savedWindowState;
 			private FormBorderStyle _savedBorderStyle;
 			private Rectangle _savedBounds;
