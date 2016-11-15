@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.TaskDialog
         if(components != null)
             components.Dispose();
         if(_mainInstructionFont != null)
-            _mainInstructionFont?.Dispose();
+            _mainInstructionFont.Dispose();
       }
       base.Dispose(disposing);
     }
