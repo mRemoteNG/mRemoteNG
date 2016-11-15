@@ -10,64 +10,54 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         #region PRIVATE members
         //--------------------------------------------------------------------------------
-        ESysIcons _mainIcon = ESysIcons.Question;
-        ESysIcons _footerIcon = ESysIcons.Warning;
 
-        string _mainInstruction = "Main Instruction Text";
-        int _mainInstructionHeight;
-        readonly Font _mainInstructionFont = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        private string _mainInstruction = "Main Instruction Text";
+        private int _mainInstructionHeight;
+        private readonly Font _mainInstructionFont = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
-        readonly List<RadioButton> _radioButtonCtrls = new List<RadioButton>();
-        string _radioButtons = "";
-        int _initialRadioButtonIndex;
+        private readonly List<RadioButton> _radioButtonCtrls = new List<RadioButton>();
 
-        string _commandButtons = "";
-        int _commandButtonClicked = -1;
+        private Control _focusControl;
 
-        int _defaultButtonIndex;
-        Control _focusControl;
-
-        ETaskDialogButtons _buttons = ETaskDialogButtons.YesNoCancel;
-
-        bool _expanded;
-        bool _isVista = false;
+        private bool _isVista = false;
         #endregion
 
         //--------------------------------------------------------------------------------
         #region PROPERTIES
         //--------------------------------------------------------------------------------
-        public ESysIcons MainIcon { get { return _mainIcon; } set { _mainIcon = value; } }
-        public ESysIcons FooterIcon { get { return _footerIcon; } set { _footerIcon = value; } }
+        public ESysIcons MainIcon { get; set; } = ESysIcons.Question;
+        public ESysIcons FooterIcon { get; set; } = ESysIcons.Warning;
 
         public string Title { get { return Text; } set { Text = value; } }
         public string MainInstruction { get { return _mainInstruction; } set { _mainInstruction = value; Invalidate(); } }
         public string Content { get { return lbContent.Text; } set { lbContent.Text = value; } }
         public string ExpandedInfo { get { return lbExpandedInfo.Text; } set { lbExpandedInfo.Text = value; } }
         public string Footer { get { return lbFooter.Text; } set { lbFooter.Text = value; } }
-        public int DefaultButtonIndex { get { return _defaultButtonIndex; } set { _defaultButtonIndex = value; } }
+        public int DefaultButtonIndex { get; set; }
 
-        public string RadioButtons { get { return _radioButtons; } set { _radioButtons = value; } }
-        public int InitialRadioButtonIndex { get { return _initialRadioButtonIndex; } set { _initialRadioButtonIndex = value; } }
+        public string RadioButtons { get; set; } = "";
+
         public int RadioButtonIndex
         {
             get
             {
-                foreach (RadioButton rb in _radioButtonCtrls)
+                foreach (var rb in _radioButtonCtrls)
                     if (rb.Checked)
                         return (int)rb.Tag;
                 return -1;
             }
         }
 
-        public string CommandButtons { get { return _commandButtons; } set { _commandButtons = value; } }
-        public int CommandButtonClickedIndex => _commandButtonClicked;
+        public string CommandButtons { get; set; } = "";
+        public int CommandButtonClickedIndex { get; private set; } = -1;
 
-        public ETaskDialogButtons Buttons { get { return _buttons; } set { _buttons = value; } }
+        public ETaskDialogButtons Buttons { get; set; } = ETaskDialogButtons.YesNoCancel;
 
         public string VerificationText { get { return cbVerify.Text; } set { cbVerify.Text = value; } }
         public bool VerificationCheckBoxChecked { get { return cbVerify.Checked; } set { cbVerify.Checked = value; } }
 
-        public bool Expanded { get { return _expanded; } set { _expanded = value; } }
+        private bool Expanded { get; set; }
+
         #endregion
 
         //--------------------------------------------------------------------------------
@@ -93,18 +83,20 @@ namespace mRemoteNG.UI.TaskDialog
         #region BuildForm
         // This is the main routine that should be called before .ShowDialog()
         //--------------------------------------------------------------------------------
-        bool _formBuilt;
+        private bool _formBuilt;
         public void BuildForm()
         {
-            int form_height = 0;
+            var form_height = 0;
 
             // Setup Main Instruction
-            switch (_mainIcon)
+            switch (MainIcon)
             {
                 case ESysIcons.Information: imgMain.Image = SystemIcons.Information.ToBitmap(); break;
                 case ESysIcons.Question: imgMain.Image = SystemIcons.Question.ToBitmap(); break;
                 case ESysIcons.Warning: imgMain.Image = SystemIcons.Warning.ToBitmap(); break;
                 case ESysIcons.Error: imgMain.Image = SystemIcons.Error.ToBitmap(); break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             //AdjustLabelHeight(lbMainInstruction);
@@ -124,7 +116,7 @@ namespace mRemoteNG.UI.TaskDialog
                 form_height += pnlContent.Height;
             }
 
-            bool show_verify_checkbox = (cbVerify.Text != "");
+            var show_verify_checkbox = (cbVerify.Text != "");
             cbVerify.Visible = show_verify_checkbox;
 
             // Setup Expanded Info and Buttons panels
@@ -139,29 +131,29 @@ namespace mRemoteNG.UI.TaskDialog
             {
                 AdjustLabelHeight(lbExpandedInfo);
                 pnlExpandedInfo.Height = lbExpandedInfo.Height + 4;
-                pnlExpandedInfo.Visible = _expanded;
-                lbShowHideDetails.Text = (_expanded ? "        Hide details" : "        Show details");
-                lbShowHideDetails.ImageIndex = (_expanded ? 0 : 3);
+                pnlExpandedInfo.Visible = Expanded;
+                lbShowHideDetails.Text = (Expanded ? "        Hide details" : "        Show details");
+                lbShowHideDetails.ImageIndex = (Expanded ? 0 : 3);
                 if (!show_verify_checkbox)
                     pnlButtons.Height = 40;
-                if (_expanded)
+                if (Expanded)
                     form_height += pnlExpandedInfo.Height;
             }
 
             // Setup RadioButtons
-            pnlRadioButtons.Visible = (_radioButtons != "");
-            if (_radioButtons != "")
+            pnlRadioButtons.Visible = (RadioButtons != "");
+            if (RadioButtons != "")
             {
-                string[] arr = _radioButtons.Split(new char[] { '|' });
-                int pnl_height = 12;
-                for (int i = 0; i < arr.Length; i++)
+                var arr = RadioButtons.Split(new char[] { '|' });
+                var pnl_height = 12;
+                for (var i = 0; i < arr.Length; i++)
                 {
-                    RadioButton rb = new RadioButton();
+                    var rb = new RadioButton();
                     rb.Parent = pnlRadioButtons;
                     rb.Location = new Point(60, 4 + (i * rb.Height));
                     rb.Text = arr[i];
                     rb.Tag = i;
-                    rb.Checked = (_defaultButtonIndex == i);
+                    rb.Checked = (DefaultButtonIndex == i);
                     rb.Width = Width - rb.Left - 15;
                     pnl_height += rb.Height;
                     _radioButtonCtrls.Add(rb);
@@ -171,15 +163,15 @@ namespace mRemoteNG.UI.TaskDialog
             }
 
             // Setup CommandButtons
-            pnlCommandButtons.Visible = (_commandButtons != "");
-            if (_commandButtons != "")
+            pnlCommandButtons.Visible = (CommandButtons != "");
+            if (CommandButtons != "")
             {
-                string[] arr = _commandButtons.Split(new char[] { '|' });
-                int t = 8;
-                int pnl_height = 16;
-                for (int i = 0; i < arr.Length; i++)
+                var arr = CommandButtons.Split(new char[] { '|' });
+                var t = 8;
+                var pnl_height = 16;
+                for (var i = 0; i < arr.Length; i++)
                 {
-                    CommandButton btn = new CommandButton();
+                    var btn = new CommandButton();
                     btn.Parent = pnlCommandButtons;
                     btn.Location = new Point(50, t);
                     if (_isVista)  // <- tweak font if vista
@@ -190,7 +182,7 @@ namespace mRemoteNG.UI.TaskDialog
                     pnl_height += btn.Height;
                     btn.Tag = i;
                     btn.Click += new EventHandler(CommandButton_Click);
-                    if (i == _defaultButtonIndex)
+                    if (i == DefaultButtonIndex)
                         _focusControl = btn;
                 }
                 pnlCommandButtons.Height = pnl_height;
@@ -198,7 +190,7 @@ namespace mRemoteNG.UI.TaskDialog
             }
 
             // Setup Buttons
-            switch (_buttons)
+            switch (Buttons)
             {
                 case ETaskDialogButtons.YesNo:
                     bt1.Visible = false;
@@ -255,6 +247,8 @@ namespace mRemoteNG.UI.TaskDialog
                     bt2.Visible = false;
                     bt3.Visible = false;
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             ControlBox = (Buttons == ETaskDialogButtons.Cancel ||
@@ -262,7 +256,7 @@ namespace mRemoteNG.UI.TaskDialog
                                Buttons == ETaskDialogButtons.OkCancel ||
                                Buttons == ETaskDialogButtons.YesNoCancel);
 
-            if (!show_verify_checkbox && ExpandedInfo == "" && _buttons == ETaskDialogButtons.None)
+            if (!show_verify_checkbox && ExpandedInfo == "" && Buttons == ETaskDialogButtons.None)
                 pnlButtons.Visible = false;
             else
                 form_height += pnlButtons.Height;
@@ -272,7 +266,7 @@ namespace mRemoteNG.UI.TaskDialog
             {
                 AdjustLabelHeight(lbFooter);
                 pnlFooter.Height = Math.Max(28, lbFooter.Height + 16);
-                switch (_footerIcon)
+                switch (FooterIcon)
                 {
                     case ESysIcons.Information:
                         // SystemIcons.Information.ToBitmap().GetThumbnailImage(16, 16, null, IntPtr.Zero);
@@ -290,6 +284,8 @@ namespace mRemoteNG.UI.TaskDialog
                         // SystemIcons.Error.ToBitmap().GetThumbnailImage(16, 16, null, IntPtr.Zero);
                         imgFooter.Image = ResizeBitmap(SystemIcons.Error.ToBitmap(), 16, 16);
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
                 form_height += pnlFooter.Height;
             }
@@ -300,18 +296,18 @@ namespace mRemoteNG.UI.TaskDialog
         }
 
         //--------------------------------------------------------------------------------
-        Image ResizeBitmap(Image SrcImg, int NewWidth, int NewHeight)
+        private static Image ResizeBitmap(Image SrcImg, int NewWidth, int NewHeight)
         {
-            float percent_width = (NewWidth / (float)SrcImg.Width);
-            float percent_height = (NewHeight / (float)SrcImg.Height);
+            var percent_width = (NewWidth / (float)SrcImg.Width);
+            var percent_height = (NewHeight / (float)SrcImg.Height);
 
-            float resize_percent = (percent_height < percent_width ? percent_height : percent_width);
+            var resize_percent = (percent_height < percent_width ? percent_height : percent_width);
 
-            int w = (int)(SrcImg.Width * resize_percent);
-            int h = (int)(SrcImg.Height * resize_percent);
-            Bitmap b = new Bitmap(w, h);
+            var w = (int)(SrcImg.Width * resize_percent);
+            var h = (int)(SrcImg.Height * resize_percent);
+            var b = new Bitmap(w, h);
 
-            using (Graphics g = Graphics.FromImage(b))
+            using (var g = Graphics.FromImage(b))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 g.DrawImage(SrcImg, 0, 0, w, h);
@@ -321,13 +317,13 @@ namespace mRemoteNG.UI.TaskDialog
 
         //--------------------------------------------------------------------------------
         // utility function for setting a Label's height
-        void AdjustLabelHeight(Label lb)
+        private static void AdjustLabelHeight(Control lb)
         {
-            string text = lb.Text;
-            Font textFont = lb.Font;
-            SizeF layoutSize = new SizeF(lb.ClientSize.Width, 5000.0F);
-            Graphics g = Graphics.FromHwnd(lb.Handle);
-            SizeF stringSize = g.MeasureString(text, textFont, layoutSize);
+            var text = lb.Text;
+            var textFont = lb.Font;
+            var layoutSize = new SizeF(lb.ClientSize.Width, 5000.0F);
+            var g = Graphics.FromHwnd(lb.Handle);
+            var stringSize = g.MeasureString(text, textFont, layoutSize);
             lb.Height = (int)stringSize.Height + 4;
             g.Dispose();
         }
@@ -336,9 +332,9 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         #region EVENTS
         //--------------------------------------------------------------------------------
-        void CommandButton_Click(object sender, EventArgs e)
+        private void CommandButton_Click(object sender, EventArgs e)
         {
-            _commandButtonClicked = (int)((CommandButton)sender).Tag;
+            CommandButtonClickedIndex = (int)((CommandButton)sender).Tag;
             DialogResult = DialogResult.OK;
         }
 
@@ -354,55 +350,55 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         private void lbDetails_MouseEnter(object sender, EventArgs e)
         {
-            lbShowHideDetails.ImageIndex = (_expanded ? 1 : 4);
+            lbShowHideDetails.ImageIndex = (Expanded ? 1 : 4);
         }
 
         //--------------------------------------------------------------------------------
         private void lbDetails_MouseLeave(object sender, EventArgs e)
         {
-            lbShowHideDetails.ImageIndex = (_expanded ? 0 : 3);
+            lbShowHideDetails.ImageIndex = (Expanded ? 0 : 3);
         }
 
         //--------------------------------------------------------------------------------
         private void lbDetails_MouseUp(object sender, MouseEventArgs e)
         {
-            lbShowHideDetails.ImageIndex = (_expanded ? 1 : 4);
+            lbShowHideDetails.ImageIndex = (Expanded ? 1 : 4);
         }
 
         //--------------------------------------------------------------------------------
         private void lbDetails_MouseDown(object sender, MouseEventArgs e)
         {
-            lbShowHideDetails.ImageIndex = (_expanded ? 2 : 5);
+            lbShowHideDetails.ImageIndex = (Expanded ? 2 : 5);
         }
 
         //--------------------------------------------------------------------------------
         private void lbDetails_Click(object sender, EventArgs e)
         {
-            _expanded = !_expanded;
-            pnlExpandedInfo.Visible = _expanded;
-            lbShowHideDetails.Text = (_expanded ? "        Hide details" : "        Show details");
-            if (_expanded)
+            Expanded = !Expanded;
+            pnlExpandedInfo.Visible = Expanded;
+            lbShowHideDetails.Text = (Expanded ? "        Hide details" : "        Show details");
+            if (Expanded)
                 Height += pnlExpandedInfo.Height;
             else
                 Height -= pnlExpandedInfo.Height;
         }
 
         //--------------------------------------------------------------------------------
-        const int MAIN_INSTRUCTION_LEFT_MARGIN = 46;
-        const int MAIN_INSTRUCTION_RIGHT_MARGIN = 8;
+        private const int MAIN_INSTRUCTION_LEFT_MARGIN = 46;
+        private const int MAIN_INSTRUCTION_RIGHT_MARGIN = 8;
 
-        SizeF GetMainInstructionTextSizeF()
+        private SizeF GetMainInstructionTextSizeF()
         {
-            SizeF mzSize = new SizeF(pnlMainInstruction.Width - MAIN_INSTRUCTION_LEFT_MARGIN - MAIN_INSTRUCTION_RIGHT_MARGIN, 5000.0F);
-            Graphics g = Graphics.FromHwnd(Handle);
-            SizeF textSize = g.MeasureString(_mainInstruction, _mainInstructionFont, mzSize);
+            var mzSize = new SizeF(pnlMainInstruction.Width - MAIN_INSTRUCTION_LEFT_MARGIN - MAIN_INSTRUCTION_RIGHT_MARGIN, 5000.0F);
+            var g = Graphics.FromHwnd(Handle);
+            var textSize = g.MeasureString(_mainInstruction, _mainInstructionFont, mzSize);
             _mainInstructionHeight = (int)textSize.Height;
             return textSize;
         }
 
         private void pnlMainInstruction_Paint(object sender, PaintEventArgs e)
         {
-            SizeF szL = GetMainInstructionTextSizeF();
+            var szL = GetMainInstructionTextSizeF();
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             e.Graphics.DrawString(_mainInstruction, _mainInstructionFont, new SolidBrush(Color.DarkBlue), new RectangleF(new PointF(MAIN_INSTRUCTION_LEFT_MARGIN, 10), szL));
         }
@@ -412,12 +408,14 @@ namespace mRemoteNG.UI.TaskDialog
         {
             if (CTaskDialog.PlaySystemSounds)
             {
-                switch (_mainIcon)
+                switch (MainIcon)
                 {
                     case ESysIcons.Error: System.Media.SystemSounds.Hand.Play(); break;
                     case ESysIcons.Information: System.Media.SystemSounds.Asterisk.Play(); break;
                     case ESysIcons.Question: System.Media.SystemSounds.Asterisk.Play(); break;
                     case ESysIcons.Warning: System.Media.SystemSounds.Exclamation.Play(); break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
             _focusControl?.Focus();
