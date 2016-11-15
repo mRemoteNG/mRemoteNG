@@ -216,14 +216,6 @@ namespace mRemoteNG.UI.Forms
 			btnConnections.Text = Language.strMenuConnections;
 			
 			cMenToolbarShowText.Text = Language.strMenuShowText;
-			
-			ToolStripButton1.Text = Language.strConnect;
-			ToolStripButton2.Text = Language.strScreenshot;
-			ToolStripButton3.Text = Language.strRefresh;
-			
-			ToolStripSplitButton1.Text = Language.strSpecialKeys;
-			ToolStripMenuItem1.Text = Language.strKeysCtrlAltDel;
-			ToolStripMenuItem2.Text = Language.strKeysCtrlEsc;
 		}
 
         private void ApplyThemes()
