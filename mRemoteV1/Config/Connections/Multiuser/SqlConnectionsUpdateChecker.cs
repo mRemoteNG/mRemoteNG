@@ -112,6 +112,7 @@ namespace mRemoteNG.Config.Connections
             if (!itIsSafeToDisposeManagedObjects) return;
             _sqlConnector.Disconnect();
             _sqlConnector.Dispose();
+            _sqlQuery.Dispose();
         }
     }
 }
