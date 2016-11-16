@@ -546,6 +546,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // mMenToolsOptions
             // 
+            this.mMenToolsOptions.Image = global::mRemoteNG.Resources.Options;
             this.mMenToolsOptions.Name = "mMenToolsOptions";
             this.mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
             this.mMenToolsOptions.Text = "Options";
