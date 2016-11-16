@@ -25,6 +25,8 @@ permalink: /download
 		});
 	});
 </script>
+{% assign msi = 'application/x-msdownload|application/x-msi' | split: '|' %}
+{% assign zip = 'application/x-zip-compressed|application/zip' | split: '|' %}
 {% for release in site.github.releases %}
 {% if release.draft == false and release.prerelease == false and stableRelease == nil %}
 {% assign stableRelease = release %}
@@ -40,8 +42,9 @@ permalink: /download
 		<div>
 			{% for asset in stableRelease.assets %}
 			{% if asset.state == 'uploaded' %}
+
 			<a href='{{ asset.browser_download_url }}' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
-				{% if asset.content_type == 'application/x-msdownload' %}MSI{% elsif asset.content_type == 'application/x-zip-compressed' %}ZIP{% endif %}
+				{% if msi contains asset.content_type %}MSI{% elsif zip contains asset.content_type %}ZIP{% endif %}
 			</a>
 			{% endif %}
 			{% endfor %}
@@ -55,7 +58,7 @@ permalink: /download
 			{% for asset in preRelease.assets %}
 			{% if asset.state == 'uploaded' %}
 			<a href='{{ asset.browser_download_url }}' class='btn btn-warning' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
-				{% if asset.content_type == 'application/x-msdownload' %}MSI{% elsif asset.content_type == 'application/x-zip-compressed' %}ZIP{% endif %}
+				{% if msi contains asset.content_type %}MSI{% elsif zip contains asset.content_type %}ZIP{% endif %}
 			</a>
 			{% endif %}
 			{% endfor %}
