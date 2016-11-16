@@ -401,6 +401,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // mMenViewScreenshotManager
             // 
+		    this.mMenViewScreenshotManager.Image = global::mRemoteNG.Resources.Screenshot;
             this.mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
             this.mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
             this.mMenViewScreenshotManager.Text = "Screenshot Manager";
@@ -572,6 +573,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // mMenInfoHelp
             // 
+		    this.mMenInfoHelp.Image = global::mRemoteNG.Resources.Help;
             this.mMenInfoHelp.Name = "mMenInfoHelp";
             this.mMenInfoHelp.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.mMenInfoHelp.Size = new System.Drawing.Size(190, 22);
@@ -585,6 +587,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // mMenInfoWebsite
             // 
+		    this.mMenInfoWebsite.Image = global::mRemoteNG.Resources.Website;
             this.mMenInfoWebsite.Name = "mMenInfoWebsite";
             this.mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
             this.mMenInfoWebsite.Text = "Website";
