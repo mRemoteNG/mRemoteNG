@@ -689,7 +689,7 @@ namespace mRemoteNG.UI.Forms
             this.cmbQuickConnect,
             this.btnQuickConnect,
             this.btnConnections});
-            this.tsQuickConnect.Location = new System.Drawing.Point(195, 0);
+            this.tsQuickConnect.Location = new System.Drawing.Point(msMain.Location.X + msMain.Width + 1, 0);
             this.tsQuickConnect.MaximumSize = new System.Drawing.Size(0, 25);
             this.tsQuickConnect.Name = "tsQuickConnect";
             this.tsQuickConnect.Size = new System.Drawing.Size(387, 25);
@@ -737,7 +737,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.tsExternalTools.ContextMenuStrip = this.cMenExtAppsToolbar;
             this.tsExternalTools.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsExternalTools.Location = new System.Drawing.Point(597, 0);
+            this.tsExternalTools.Location = new System.Drawing.Point(tsQuickConnect.Location.X + tsQuickConnect.Width + 1, 0);
             this.tsExternalTools.MaximumSize = new System.Drawing.Size(0, 25);
             this.tsExternalTools.Name = "tsExternalTools";
             this.tsExternalTools.Size = new System.Drawing.Size(111, 25);
