@@ -120,7 +120,7 @@ namespace mRemoteNG.UI.Forms
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
             this.pnlDock.Name = "pnlDock";
-            this.pnlDock.Size = new System.Drawing.Size(966, 473);
+            this.pnlDock.Size = new System.Drawing.Size(966, 498);
             this.pnlDock.TabIndex = 13;
             this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
             // 
@@ -136,7 +136,7 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.msMain.Size = new System.Drawing.Size(176, 24);
+            this.msMain.Size = new System.Drawing.Size(177, 24);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 16;
             this.msMain.Text = "Main Toolbar";
@@ -353,7 +353,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenViewAddConnectionPanel.Image = global::mRemoteNG.Resources.Panel_Add;
             this.mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel";
-            this.mMenViewAddConnectionPanel.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewAddConnectionPanel.Size = new System.Drawing.Size(228, 22);
             this.mMenViewAddConnectionPanel.Text = "Add Connection Panel";
             this.mMenViewAddConnectionPanel.Click += new System.EventHandler(this.mMenViewAddConnectionPanel_Click);
             // 
@@ -361,13 +361,13 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenViewConnectionPanels.Image = global::mRemoteNG.Resources.Panels;
             this.mMenViewConnectionPanels.Name = "mMenViewConnectionPanels";
-            this.mMenViewConnectionPanels.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewConnectionPanels.Size = new System.Drawing.Size(228, 22);
             this.mMenViewConnectionPanels.Text = "Connection Panels";
             // 
             // mMenViewSep1
             // 
             this.mMenViewSep1.Name = "mMenViewSep1";
-            this.mMenViewSep1.Size = new System.Drawing.Size(224, 6);
+            this.mMenViewSep1.Size = new System.Drawing.Size(225, 6);
             // 
             // mMenViewConnections
             // 
@@ -375,7 +375,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewConnections.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mMenViewConnections.Image = global::mRemoteNG.Resources.Root;
             this.mMenViewConnections.Name = "mMenViewConnections";
-            this.mMenViewConnections.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewConnections.Size = new System.Drawing.Size(228, 22);
             this.mMenViewConnections.Text = "Connections";
             this.mMenViewConnections.Click += new System.EventHandler(this.mMenViewConnections_Click);
             // 
@@ -385,7 +385,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewConfig.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mMenViewConfig.Image = global::mRemoteNG.Resources.cog;
             this.mMenViewConfig.Name = "mMenViewConfig";
-            this.mMenViewConfig.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewConfig.Size = new System.Drawing.Size(228, 22);
             this.mMenViewConfig.Text = "Config";
             this.mMenViewConfig.Click += new System.EventHandler(this.mMenViewConfig_Click);
             // 
@@ -395,21 +395,21 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewErrorsAndInfos.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mMenViewErrorsAndInfos.Image = global::mRemoteNG.Resources.ErrorsAndInfos;
             this.mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos";
-            this.mMenViewErrorsAndInfos.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewErrorsAndInfos.Size = new System.Drawing.Size(228, 22);
             this.mMenViewErrorsAndInfos.Text = "Errors and Infos";
             this.mMenViewErrorsAndInfos.Click += new System.EventHandler(this.mMenViewErrorsAndInfos_Click);
             // 
             // mMenViewScreenshotManager
             // 
             this.mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
-            this.mMenViewScreenshotManager.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
             this.mMenViewScreenshotManager.Text = "Screenshot Manager";
             this.mMenViewScreenshotManager.Click += new System.EventHandler(this.mMenViewScreenshotManager_Click);
             // 
             // ToolStripSeparator1
             // 
             this.ToolStripSeparator1.Name = "ToolStripSeparator1";
-            this.ToolStripSeparator1.Size = new System.Drawing.Size(224, 6);
+            this.ToolStripSeparator1.Size = new System.Drawing.Size(225, 6);
             // 
             // mMenViewJumpTo
             // 
@@ -418,7 +418,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewJumpToErrorsInfos});
             this.mMenViewJumpTo.Image = global::mRemoteNG.Resources.JumpTo;
             this.mMenViewJumpTo.Name = "mMenViewJumpTo";
-            this.mMenViewJumpTo.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
             this.mMenViewJumpTo.Text = "Jump To";
             // 
             // mMenViewJumpToConnectionsConfig
@@ -445,20 +445,20 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenViewResetLayout.Image = global::mRemoteNG.Resources.application_side_tree;
             this.mMenViewResetLayout.Name = "mMenViewResetLayout";
-            this.mMenViewResetLayout.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewResetLayout.Size = new System.Drawing.Size(228, 22);
             this.mMenViewResetLayout.Text = "Reset Layout";
             this.mMenViewResetLayout.Click += new System.EventHandler(this.mMenViewResetLayout_Click);
             // 
             // mMenViewSep2
             // 
             this.mMenViewSep2.Name = "mMenViewSep2";
-            this.mMenViewSep2.Size = new System.Drawing.Size(224, 6);
+            this.mMenViewSep2.Size = new System.Drawing.Size(225, 6);
             // 
             // mMenViewQuickConnectToolbar
             // 
             this.mMenViewQuickConnectToolbar.Image = global::mRemoteNG.Resources.Play_Quick;
             this.mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar";
-            this.mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(228, 22);
             this.mMenViewQuickConnectToolbar.Text = "Quick Connect Toolbar";
             this.mMenViewQuickConnectToolbar.Click += new System.EventHandler(this.mMenViewQuickConnectToolbar_Click);
             // 
@@ -466,21 +466,21 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenViewExtAppsToolbar.Image = global::mRemoteNG.Resources.ExtApp;
             this.mMenViewExtAppsToolbar.Name = "mMenViewExtAppsToolbar";
-            this.mMenViewExtAppsToolbar.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewExtAppsToolbar.Size = new System.Drawing.Size(228, 22);
             this.mMenViewExtAppsToolbar.Text = "External Applications Toolbar";
             this.mMenViewExtAppsToolbar.Click += new System.EventHandler(this.mMenViewExtAppsToolbar_Click);
             // 
             // mMenViewSep3
             // 
             this.mMenViewSep3.Name = "mMenViewSep3";
-            this.mMenViewSep3.Size = new System.Drawing.Size(224, 6);
+            this.mMenViewSep3.Size = new System.Drawing.Size(225, 6);
             // 
             // mMenViewFullscreen
             // 
             this.mMenViewFullscreen.Image = global::mRemoteNG.Resources.arrow_out;
             this.mMenViewFullscreen.Name = "mMenViewFullscreen";
             this.mMenViewFullscreen.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.mMenViewFullscreen.Size = new System.Drawing.Size(227, 22);
+            this.mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);
             this.mMenViewFullscreen.Text = "Full Screen";
             this.mMenViewFullscreen.Click += new System.EventHandler(this.mMenViewFullscreen_Click);
             // 
@@ -495,7 +495,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenToolsComponentsCheck,
             this.mMenToolsOptions});
             this.mMenTools.Name = "mMenTools";
-            this.mMenTools.Size = new System.Drawing.Size(47, 20);
+            this.mMenTools.Size = new System.Drawing.Size(48, 20);
             this.mMenTools.Text = "&Tools";
             // 
             // mMenToolsSSHTransfer
@@ -667,7 +667,7 @@ namespace mRemoteNG.UI.Forms
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(966, 473);
+            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(966, 498);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
             this.tsContainer.Name = "tsContainer";
@@ -677,9 +677,9 @@ namespace mRemoteNG.UI.Forms
             // 
             // tsContainer.TopToolStripPanel
             // 
+            this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsQuickConnect);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsExternalTools);
-            this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             // 
             // tsQuickConnect
             // 
@@ -689,7 +689,7 @@ namespace mRemoteNG.UI.Forms
             this.cmbQuickConnect,
             this.btnQuickConnect,
             this.btnConnections});
-            this.tsQuickConnect.Location = new System.Drawing.Point(179, 0);
+            this.tsQuickConnect.Location = new System.Drawing.Point(msMain.Location.X + msMain.Width + 1, 0);
             this.tsQuickConnect.MaximumSize = new System.Drawing.Size(0, 25);
             this.tsQuickConnect.Name = "tsQuickConnect";
             this.tsQuickConnect.Size = new System.Drawing.Size(387, 25);
@@ -737,7 +737,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.tsExternalTools.ContextMenuStrip = this.cMenExtAppsToolbar;
             this.tsExternalTools.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsExternalTools.Location = new System.Drawing.Point(3, 25);
+            this.tsExternalTools.Location = new System.Drawing.Point(tsQuickConnect.Location.X + tsQuickConnect.Width + 1, 0);
             this.tsExternalTools.MaximumSize = new System.Drawing.Size(0, 25);
             this.tsExternalTools.Name = "tsExternalTools";
             this.tsExternalTools.Size = new System.Drawing.Size(111, 25);
@@ -748,14 +748,14 @@ namespace mRemoteNG.UI.Forms
             this.cMenExtAppsToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMenToolbarShowText});
             this.cMenExtAppsToolbar.Name = "cMenToolbar";
-            this.cMenExtAppsToolbar.Size = new System.Drawing.Size(128, 26);
+            this.cMenExtAppsToolbar.Size = new System.Drawing.Size(129, 26);
             // 
             // cMenToolbarShowText
             // 
             this.cMenToolbarShowText.Checked = true;
             this.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cMenToolbarShowText.Name = "cMenToolbarShowText";
-            this.cMenToolbarShowText.Size = new System.Drawing.Size(127, 22);
+            this.cMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
             this.cMenToolbarShowText.Text = "Show Text";
             this.cMenToolbarShowText.Click += new System.EventHandler(this.cMenToolbarShowText_Click);
             // 
