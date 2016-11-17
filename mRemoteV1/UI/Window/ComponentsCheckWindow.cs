@@ -5,6 +5,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using mRemoteNG.App;
 using System.Threading;
+using AxMSTSCLib;
 using Gecko;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -438,11 +439,11 @@ namespace mRemoteNG.UI.Window
 			pnlCheck4.Visible = true;
 			pnlCheck5.Visible = true;
 					
-			AxMSTSCLib.AxMsRdpClient5NotSafeForScripting rdpClient = null;
+			AxMsRdpClient8NotSafeForScripting rdpClient = null;
 					
 			try
 			{
-				rdpClient = new AxMSTSCLib.AxMsRdpClient5NotSafeForScripting();
+				rdpClient = new AxMsRdpClient8NotSafeForScripting();
 				rdpClient.CreateControl();
 						
 				while (!rdpClient.Created)
