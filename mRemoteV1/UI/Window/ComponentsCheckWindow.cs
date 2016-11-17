@@ -6,6 +6,7 @@ using System.IO;
 using mRemoteNG.App;
 using System.Threading;
 using AxMSTSCLib;
+using AxWFICALib;
 using Gecko;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -551,9 +552,10 @@ namespace mRemoteNG.UI.Window
         private void CheckIca()
         {
             pnlCheck4.Visible = true;
-            using (var ica = new AxWFICALib.AxICAClient { Parent = this })
+            
+            try
             {
-                try
+                using (var ica = new AxICAClient {Parent = this})
                 {
                     ica.CreateControl();
 
@@ -568,17 +570,16 @@ namespace mRemoteNG.UI.Window
                     lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckSucceeded;
                     txtCheck4.Text = string.Format(Language.strCcICAOK, ica.Version);
                 }
-                catch (Exception ex)
-                {
-                    pbCheck4.Image = Resources.Bad_Symbol;
-                    lblCheck4.ForeColor = Color.Firebrick;
-                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckFailed;
-                    txtCheck4.Text = Language.strCcICAFailed;
+            }
+            catch (Exception ex)
+            {
+                pbCheck4.Image = Resources.Bad_Symbol;
+                lblCheck4.ForeColor = Color.Firebrick;
+                lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckFailed;
+                txtCheck4.Text = Language.strCcICAFailed;
 
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
-                        "ICA " + Language.strCcNotInstalledProperly, true);
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
-                }
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ICA " + Language.strCcNotInstalledProperly, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
             }
         }
 
