@@ -429,15 +429,18 @@ namespace mRemoteNG.UI.Window
         }
         #endregion
 
-        #region Private Methods
         private void CheckComponents()
         {
-            pnlCheck1.Visible = true;
-            pnlCheck2.Visible = true;
-            pnlCheck3.Visible = true;
-            pnlCheck4.Visible = true;
-            pnlCheck5.Visible = true;
+            CheckRdp();
+            CheckVnc();
+            CheckPutty();
+            CheckIca();
+            CheckGeckoBrowser();
+        }
 
+        private void CheckRdp()
+        {
+            pnlCheck1.Visible = true;
             using (var rdpClient = new AxMsRdpClient8NotSafeForScripting())
             {
                 try
@@ -473,14 +476,18 @@ namespace mRemoteNG.UI.Window
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
                 }
             }
+        }
 
-            using (var VNC = new VncSharp.RemoteDesktop())
+        private void CheckVnc()
+        {
+            pnlCheck2.Visible = true;
+            using (var vnc = new VncSharp.RemoteDesktop())
             {
                 try
                 {
-                    VNC.CreateControl();
+                    vnc.CreateControl();
 
-                    while (!VNC.Created)
+                    while (!vnc.Created)
                     {
                         Thread.Sleep(10);
                         System.Windows.Forms.Application.DoEvents();
@@ -489,7 +496,7 @@ namespace mRemoteNG.UI.Window
                     pbCheck2.Image = Resources.Good_Symbol;
                     lblCheck2.ForeColor = Color.DarkOliveGreen;
                     lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckSucceeded;
-                    txtCheck2.Text = string.Format(Language.strCcVNCOK, VNC.ProductVersion);
+                    txtCheck2.Text = string.Format(Language.strCcVNCOK, vnc.ProductVersion);
                 }
                 catch (Exception)
                 {
@@ -502,8 +509,11 @@ namespace mRemoteNG.UI.Window
                         "VNC " + Language.strCcNotInstalledProperly, true);
                 }
             }
+        }
 
-
+        private void CheckPutty()
+        {
+            pnlCheck3.Visible = true;
             string pPath;
             if (Settings.Default.UseCustomPuttyPath == false)
             {
@@ -536,15 +546,18 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " + pPath + " does not exist.",
                     true);
             }
+        }
 
-
-            using (var ICA = new AxWFICALib.AxICAClient {Parent = this})
+        private void CheckIca()
+        {
+            pnlCheck4.Visible = true;
+            using (var ica = new AxWFICALib.AxICAClient { Parent = this })
             {
                 try
                 {
-                    ICA.CreateControl();
+                    ica.CreateControl();
 
-                    while (!ICA.Created)
+                    while (!ica.Created)
                     {
                         Thread.Sleep(10);
                         System.Windows.Forms.Application.DoEvents();
@@ -552,14 +565,14 @@ namespace mRemoteNG.UI.Window
 
                     pbCheck4.Image = Resources.Good_Symbol;
                     lblCheck4.ForeColor = Color.DarkOliveGreen;
-                    lblCheck4.Text = "ICA (Citrix ICA) " + Language.strCcCheckSucceeded;
-                    txtCheck4.Text = string.Format(Language.strCcICAOK, ICA.Version);
+                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckSucceeded;
+                    txtCheck4.Text = string.Format(Language.strCcICAOK, ica.Version);
                 }
                 catch (Exception ex)
                 {
                     pbCheck4.Image = Resources.Bad_Symbol;
                     lblCheck4.ForeColor = Color.Firebrick;
-                    lblCheck4.Text = "ICA (Citrix ICA) " + Language.strCcCheckFailed;
+                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckFailed;
                     txtCheck4.Text = Language.strCcICAFailed;
 
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
@@ -567,30 +580,34 @@ namespace mRemoteNG.UI.Window
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
                 }
             }
+        }
 
-            var GeckoBad = false;
-            var GeckoFxPath = Path.Combine(GeneralAppInfo.HomePath, "Firefox");
+        private void CheckGeckoBrowser()
+        {
+            pnlCheck5.Visible = true;
+            var geckoBad = false;
+            var geckoFxPath = Path.Combine(GeneralAppInfo.HomePath, "Firefox");
 
             if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, "Geckofx-Core.dll")))
             {
-                if (Directory.Exists(GeckoFxPath))
+                if (Directory.Exists(geckoFxPath))
                 {
-                    if (!File.Exists(Path.Combine(GeckoFxPath, "xul.dll")))
+                    if (!File.Exists(Path.Combine(geckoFxPath, "xul.dll")))
                     {
-                        GeckoBad = true;
+                        geckoBad = true;
                     }
                 }
                 else
                 {
-                    GeckoBad = true;
+                    geckoBad = true;
                 }
             }
 
-            if (GeckoBad == false)
+            if (geckoBad == false)
             {
                 pbCheck5.Image = Resources.Good_Symbol;
                 lblCheck5.ForeColor = Color.DarkOliveGreen;
-                lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckSucceeded;
+                lblCheck5.Text = @"Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckSucceeded;
                 if (!Xpcom.IsInitialized)
                     Xpcom.Initialize("Firefox");
                 txtCheck5.Text = Language.strCcGeckoOK + " Version: " + Xpcom.XulRunnerVersion;
@@ -599,16 +616,14 @@ namespace mRemoteNG.UI.Window
             {
                 pbCheck5.Image = Resources.Bad_Symbol;
                 lblCheck5.ForeColor = Color.Firebrick;
-                lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckFailed;
+                lblCheck5.Text = @"Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckFailed;
                 txtCheck5.Text = Language.strCcGeckoFailed;
 
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
                     "Gecko " + Language.strCcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                    "GeckoFx was not found in " + GeckoFxPath, true);
+                    "GeckoFx was not found in " + geckoFxPath, true);
             }
         }
-
-        #endregion
     }
 }
