@@ -442,9 +442,10 @@ namespace mRemoteNG.UI.Window
         private void CheckRdp()
         {
             pnlCheck1.Visible = true;
-            using (var rdpClient = new AxMsRdpClient8NotSafeForScripting())
+            
+            try
             {
-                try
+                using (var rdpClient = new AxMsRdpClient8NotSafeForScripting())
                 {
                     rdpClient.CreateControl();
 
@@ -465,26 +466,27 @@ namespace mRemoteNG.UI.Window
                     lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckSucceeded;
                     txtCheck1.Text = string.Format(Language.strCcRDPOK, rdpClient.Version);
                 }
-                catch (Exception ex)
-                {
-                    pbCheck1.Image = Resources.Bad_Symbol;
-                    lblCheck1.ForeColor = Color.Firebrick;
-                    lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckFailed;
-                    txtCheck1.Text = Language.strCcRDPFailed;
+            }
+            catch (Exception ex)
+            {
+                pbCheck1.Image = Resources.Bad_Symbol;
+                lblCheck1.ForeColor = Color.Firebrick;
+                lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckFailed;
+                txtCheck1.Text = Language.strCcRDPFailed;
 
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
-                        "RDP " + Language.strCcNotInstalledProperly, true);
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
-                }
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                    "RDP " + Language.strCcNotInstalledProperly, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
             }
         }
 
         private void CheckVnc()
         {
             pnlCheck2.Visible = true;
-            using (var vnc = new VncSharp.RemoteDesktop())
+            
+            try
             {
-                try
+                using (var vnc = new VncSharp.RemoteDesktop())
                 {
                     vnc.CreateControl();
 
@@ -499,16 +501,16 @@ namespace mRemoteNG.UI.Window
                     lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckSucceeded;
                     txtCheck2.Text = string.Format(Language.strCcVNCOK, vnc.ProductVersion);
                 }
-                catch (Exception)
-                {
-                    pbCheck2.Image = Resources.Bad_Symbol;
-                    lblCheck2.ForeColor = Color.Firebrick;
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckFailed;
-                    txtCheck2.Text = Language.strCcVNCFailed;
+            }
+            catch (Exception)
+            {
+                pbCheck2.Image = Resources.Bad_Symbol;
+                lblCheck2.ForeColor = Color.Firebrick;
+                lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckFailed;
+                txtCheck2.Text = Language.strCcVNCFailed;
 
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
-                        "VNC " + Language.strCcNotInstalledProperly, true);
-                }
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                    "VNC " + Language.strCcNotInstalledProperly, true);
             }
         }
 
