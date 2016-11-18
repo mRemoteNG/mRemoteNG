@@ -10,6 +10,7 @@ using AxWFICALib;
 using Gecko;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.UI.Window
 {
@@ -405,7 +406,6 @@ namespace mRemoteNG.UI.Window
         private void ComponentsCheck_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
-
             chkAlwaysShow.Checked = Convert.ToBoolean(Settings.Default.StartupComponentsCheck);
             CheckComponents();
         }
@@ -474,9 +474,9 @@ namespace mRemoteNG.UI.Window
                 lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckFailed;
                 txtCheck1.Text = Language.strCcRDPFailed;
 
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                     "RDP " + Language.strCcNotInstalledProperly, true);
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
             }
         }
 
@@ -509,7 +509,7 @@ namespace mRemoteNG.UI.Window
                 lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckFailed;
                 txtCheck2.Text = Language.strCcVNCFailed;
 
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                     "VNC " + Language.strCcNotInstalledProperly, true);
             }
         }
@@ -544,9 +544,9 @@ namespace mRemoteNG.UI.Window
                 lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.strCcCheckFailed;
                 txtCheck3.Text = Language.strCcPuttyFailed;
 
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                     "PuTTY " + Language.strCcNotInstalledProperly, true);
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " + pPath + " does not exist.",
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "File " + pPath + " does not exist.",
                     true);
             }
         }
@@ -580,8 +580,8 @@ namespace mRemoteNG.UI.Window
                 lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckFailed;
                 txtCheck4.Text = Language.strCcICAFailed;
 
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ICA " + Language.strCcNotInstalledProperly, true);
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "ICA " + Language.strCcNotInstalledProperly, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
             }
         }
 
@@ -622,9 +622,9 @@ namespace mRemoteNG.UI.Window
                 lblCheck5.Text = @"Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckFailed;
                 txtCheck5.Text = Language.strCcGeckoFailed;
 
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                     "Gecko " + Language.strCcNotInstalledProperly, true);
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
                     "GeckoFx was not found in " + geckoFxPath, true);
             }
         }
