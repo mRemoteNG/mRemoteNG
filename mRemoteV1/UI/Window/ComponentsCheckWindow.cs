@@ -428,15 +428,30 @@ namespace mRemoteNG.UI.Window
             Settings.Default.StartupComponentsCheck = chkAlwaysShow.Checked;
             Settings.Default.Save();
         }
+
+        public new void Show(DockPanel panel)
+        {
+            try
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to show the components window", true);
+                base.Show(panel);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("Failed to properly show the ComponentsWindow", ex, MessageClass.ErrorMsg, true);
+            }
+        }
         #endregion
 
         private void CheckComponents()
         {
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Beginning component check", true);
             CheckRdp();
             CheckVnc();
             CheckPutty();
             CheckIca();
             CheckGeckoBrowser();
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Finished component check", true);
         }
 
         private void CheckRdp()
@@ -465,6 +480,7 @@ namespace mRemoteNG.UI.Window
                     lblCheck1.ForeColor = Color.DarkOliveGreen;
                     lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckSucceeded;
                     txtCheck1.Text = string.Format(Language.strCcRDPOK, rdpClient.Version);
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "RDP installed", true);
                 }
             }
             catch (Exception ex)
@@ -500,6 +516,7 @@ namespace mRemoteNG.UI.Window
                     lblCheck2.ForeColor = Color.DarkOliveGreen;
                     lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckSucceeded;
                     txtCheck2.Text = string.Format(Language.strCcVNCOK, vnc.ProductVersion);
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "VNC installed", true);
                 }
             }
             catch (Exception)
@@ -536,6 +553,7 @@ namespace mRemoteNG.UI.Window
                 lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.strCcCheckSucceeded;
                 txtCheck3.Text =
                     $"{Language.strCcPuttyOK}{Environment.NewLine}Version: {versionInfo.ProductName} Release: {versionInfo.FileVersion}";
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "PuTTY installed", true);
             }
             else
             {
@@ -559,18 +577,19 @@ namespace mRemoteNG.UI.Window
             {
                 using (var ica = new AxICAClient {Parent = this})
                 {
-                    ica.CreateControl();
+                    //ica.CreateControl();
 
-                    while (!ica.Created)
-                    {
-                        Thread.Sleep(10);
-                        System.Windows.Forms.Application.DoEvents();
-                    }
+                    //while (!ica.Created)
+                    //{
+                    //    Thread.Sleep(10);
+                    //    System.Windows.Forms.Application.DoEvents();
+                    //}
 
                     pbCheck4.Image = Resources.Good_Symbol;
                     lblCheck4.ForeColor = Color.DarkOliveGreen;
                     lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckSucceeded;
                     txtCheck4.Text = string.Format(Language.strCcICAOK, ica.Version);
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "ICA installed", true);
                 }
             }
             catch (Exception ex)
@@ -614,6 +633,7 @@ namespace mRemoteNG.UI.Window
                 if (!Xpcom.IsInitialized)
                     Xpcom.Initialize("Firefox");
                 txtCheck5.Text = Language.strCcGeckoOK + " Version: " + Xpcom.XulRunnerVersion;
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Gecko Browser installed", true);
             }
             else
             {
