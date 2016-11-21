@@ -91,7 +91,7 @@ namespace mRemoteNG.Config.Serializers
                     Runtime.IsConnectionsFileLoaded = false;
 
                 var rootXmlElement = _xmlDocument.DocumentElement;
-                _rootNodeInfo = InitializeRootNode(rootXmlElement);
+                InitializeRootNode(rootXmlElement);
                 CreateDecryptor(_rootNodeInfo, rootXmlElement);
                 var connectionTreeModel = new ConnectionTreeModel();
                 connectionTreeModel.AddRootNode(_rootNodeInfo);
@@ -138,14 +138,10 @@ namespace mRemoteNG.Config.Serializers
             }
         }
 
-        private RootNodeInfo InitializeRootNode(XmlElement connectionsRootElement)
+        private void InitializeRootNode(XmlElement connectionsRootElement)
         {
             var rootNodeName = connectionsRootElement?.Attributes["Name"].Value.Trim();
-            var rootInfo = new RootNodeInfo(RootNodeType.Connection)
-            {
-                Name = rootNodeName
-            };
-            return rootInfo;
+            _rootNodeInfo.Name = rootNodeName;
         }
 
         private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement connectionsRootElement = null)
