@@ -33,8 +33,9 @@ namespace mRemoteNG.Config.Serializers
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(string xml)
+        public XmlConnectionsDeserializer(string xml, Func<SecureString> authenticationRequestor = null)
         {
+            AuthenticationRequestor = authenticationRequestor;
             LoadXmlConnectionData(xml);
             ValidateConnectionFileVersion();
         }

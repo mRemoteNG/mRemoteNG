@@ -18,10 +18,7 @@ namespace mRemoteNGTests.Config.Serializers
 
         public void Setup(string confCons, string password)
         {
-            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(confCons)
-            {
-                AuthenticationRequestor = password.ConvertToSecureString
-            };
+            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(confCons, password.ConvertToSecureString);
             _connectionTreeModel = _xmlConnectionsDeserializer.Deserialize();
         }
 
