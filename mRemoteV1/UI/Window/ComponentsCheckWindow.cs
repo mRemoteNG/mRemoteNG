@@ -575,15 +575,9 @@ namespace mRemoteNG.UI.Window
             
             try
             {
-                using (var ica = new AxICAClient {Parent = this})
+                using (var ica = new AxICAClient())
                 {
-                    //ica.CreateControl();
-
-                    //while (!ica.Created)
-                    //{
-                    //    Thread.Sleep(10);
-                    //    System.Windows.Forms.Application.DoEvents();
-                    //}
+                    ica.Parent = this;
 
                     pbCheck4.Image = Resources.Good_Symbol;
                     lblCheck4.ForeColor = Color.DarkOliveGreen;
