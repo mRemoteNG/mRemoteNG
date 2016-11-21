@@ -81,6 +81,15 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to cpfCUuZuIpTYihGooKKG5eRIZVB8P4bANitHVY57yrzyr9wf6lHlgUKx3Y3/YDYXDeS9uawycgbGSVOCnKmah3zEJ31V3BMlA809AdgQoYV9GFXLhgz8auO0mdcfYo2FP7UYS/I2bAfoNOaLvvgmqamm7Lu5FtvSvqdCf3PmpJAW042BijgkDhqritfDAyBvqUbNtE7yvrJohiSv5Ur7qFMXMIUCK0Fc4o3PXM++exN9XfTrtPAwQpjchxoEEmXBOQVnPB4QIn6eg6Wr/4XgtWYFIbtCCzyA5/L91CsDdKBZZktNSRrJTyMmPYGLn1k3Ted77rsoVUovrhxqfXgErPxDLBFAOA9wAjk7NscTRQJGxbgEU5H514g4U6h9wWlLaFyswQQCIskAbmoBrFJz72X9ooS4IVh1q9gLvCKuqb1VM6tNC0RCcLS5EHpxG6kIVpmnNtSa/0EvwaiSLMskC74TpYJ6nBUpfZT783jTikAFNDVI4eA43mJLEIBvrxBR [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string confCons_v2_5_passwordis_Password_fullencryption {
+            get {
+                return ResourceManager.GetString("confCons_v2_5_passwordis_Password_fullencryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;8LmIO3+MWBY0zTmfjfOEdCGxhTAwnlohb1veTGNZFt6lAYvY2UOzWyjVzkx6V93smpbP0ZOuexN15u7rvwJEjawC&quot; ConfVersion=&quot;2.6&quot;&gt;
         ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; Connec [rest of string was truncated]&quot;;.
