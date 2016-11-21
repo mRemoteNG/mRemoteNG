@@ -29,7 +29,7 @@ namespace mRemoteNG.Config.Serializers
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.6;
-        private RootNodeInfo _rootNodeInfo;
+        private RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
