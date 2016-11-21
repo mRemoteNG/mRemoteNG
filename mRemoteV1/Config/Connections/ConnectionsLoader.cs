@@ -30,10 +30,7 @@ namespace mRemoteNG.Config.Connections
 			{
 			    var dataProvider = new FileDataProvider(ConnectionFileName);
 			    var xmlString = dataProvider.Load();
-			    deserializer = new XmlConnectionsDeserializer(xmlString)
-			    {
-			        AuthenticationRequestor = PromptForPassword
-			    };
+			    deserializer = new XmlConnectionsDeserializer(xmlString, PromptForPassword);
 			}
 
             var connectionTreeModel = deserializer.Deserialize();
