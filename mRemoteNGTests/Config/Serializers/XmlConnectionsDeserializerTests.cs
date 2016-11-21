@@ -126,6 +126,7 @@ namespace mRemoteNGTests.Config.Serializers
             get
             {
                 yield return new TestCaseData(new Datagram("confCons v2.5", Resources.confCons_v2_5, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.5 fullencryption", Resources.confCons_v2_5_fullencryption, "mR3m"));
                 yield return new TestCaseData(new Datagram("confCons v2.6", Resources.confCons_v2_6, "mR3m"));
                 yield return new TestCaseData(new Datagram("confCons v2.6 5k Iterations", Resources.confCons_v2_6_5k_iterations, "mR3m"));
                 yield return new TestCaseData(new Datagram("confCons v2.6 fullencryption", Resources.confCons_v2_6_fullencryption, "mR3m"));

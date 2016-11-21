@@ -72,8 +72,17 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to qqv8WEdruAEzSfdnPZMQ8w5cLhsl55V/Vu6h81Ucv7s7OT3vwnocgLmfId8rxpfVBnZwdn1Pdvea0XgwnQKJV5qdrVZEiy694Vv84B3wXjxU1wT72rWu1C5TNLhNEZp9JqjjAxOttIbOFL5X0dM+zI4YrCmTZI2Qt04TaC47MTr2niO7XvQSvjDeZRPnzeHsEiJvxHvBSm9yJ64Iupect0zKIpFPiDuOoHDhFQegUCZ26IdZCX2IHb3pH866rYV+yiAGhqt7pokBHUKURVtN6eKpbYzlDyGPbLRJf/eD13KnlaVC6sbf7YiCP3JwJrkN5mLdnrZbmZGQJG3Sn9rrGeShItYG/vvayFAQ5jxz1Wddixik/1frJOtUCaKW1svh8X9EvJo/RaBwgbTLIWth/WTgT4E+9DAVocdgMDGXrpsulnLTkX8doxeWHmBq2vAOhlYFNlhw2ZL3Yp/fbuVK9OMt7PbGkf3x3nThSf0R61Ip4NRjCzWempepEHoLMeiv [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string confCons_v2_5_fullencryption {
+            get {
+                return ResourceManager.GetString("confCons_v2_5_fullencryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;Bqmajt4G5RDLsV5nn3s7QHZkkeWXQqgSDA4RSA8fWYx1bxRaorsmZ0ub4Z6mOBbefuXBbaWnsVRn0+NOJ3zTjkUJ&quot; ConfVersion=&quot;2.6&quot;&gt;
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;8LmIO3+MWBY0zTmfjfOEdCGxhTAwnlohb1veTGNZFt6lAYvY2UOzWyjVzkx6V93smpbP0ZOuexN15u7rvwJEjawC&quot; ConfVersion=&quot;2.6&quot;&gt;
         ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; Connec [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string confCons_v2_6 {
@@ -84,7 +93,7 @@ namespace mRemoteNGTests.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;5000&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;ZrxA5XJSUirgITMc2UxVRY4mLPxzNsyaqpgJXNdjcUdTlA/p4ZQP4bKqp44ZMrZlNU9jZgsvodGEVqS5/26St+Sk&quot; ConfVersion=&quot;2.6&quot;&gt;
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;5000&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;Z1IOT8h7neJ5V7es5Iv63A2WsDG6QWl10F/Rb9ljKxvCseEITty1BfMNgiaVPfm7w61uabQKqu2waDCXUpLo1OZW&quot; ConfVersion=&quot;2.6&quot;&gt;
         ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; Connec [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string confCons_v2_6_5k_iterations {
@@ -95,7 +104,7 @@ namespace mRemoteNGTests.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;True&quot; Protected=&quot;tfNq70KLL8id4QnOeC9OrjMlACoArKa7pFJKcG1vrrRxMkvHpJPiEx/JlbPBJ3x4HXXx806ipsFiMkU1+OT7eE3Z&quot; ConfVersion=&quot;2.6&quot;&gt;NAxOa6dYlXPZCtpxWfiFrINjIC0dicQU7YdmKRnOn6POI07mMWU/Yy5uhPeXfVfzWgbPlKGyOMk5pgTw0pYIpTZpmqRKzZN+MzFw7NTW9QgD3Uhq528OItO2/MdpGQZ8AYM+qrDHHCXG9bGkczDwe5BZ8cDnGfbFrYTINGBZ9wxjLfyA9oYxzfrzoHDACbM8gD8wvmO26ML/lShwQS+/9B [rest of string was truncated]&quot;;.
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;True&quot; Protected=&quot;qrOUhRlBLCnjjmfU1r8uwhgIBwZ+D1+trBgPmcQyEnW0xf2adLeOfUhZHnto2NOsMneXDibsS8PH0B1moOyvua22&quot; ConfVersion=&quot;2.6&quot;&gt;pCvan5X5+bSJy8oZq3QhrYs9zAS4v2tu9/4eYk4GAeB2EDep9Ed1zkshaLP165sWHE9oJ6bHnWSrSr/XXiDGdosvxl+O3hSSi02On9/TspuHhPDuuDb7UY2+mLh/LVoJqAjz2NmK7f3QkID2aanHkHzE/MDFiez8gLU8SdW9RxlSXT+L8MEjIXnq34yDVsfV89tGoP01T84ShTCZpRAQMq [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string confCons_v2_6_fullencryption {
             get {
@@ -105,7 +114,7 @@ namespace mRemoteNGTests.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;et1WJ5jh501ty5nzV139lFcoK4Cjm2HwYiFDgEtTTW6iIMTiJ7ilw0gkDOOahwig8neVelBnGaP1AAmRY4B6&quot; ConfVersion=&quot;2.6&quot;&gt;
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;False&quot; Protected=&quot;e/T6ajrPtNNlHreSeD4QBqToTuiqtNACKiPJv7vU+l6TWCu9JNsmL+Y8lJ4aTl5YVcstXpQjxsZ9i8+YV4Gs&quot; ConfVersion=&quot;2.6&quot;&gt;
         ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; ConnectToC [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string confCons_v2_6_passwordis_Password {
@@ -116,7 +125,7 @@ namespace mRemoteNGTests.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;True&quot; Protected=&quot;RD3KGFlcH+4MxnYNje/ruXy6kN6pXgOwg8u6jlyU4u1RFWd8gm8DAGyAdycTDCr37dCNsi6F4Huj41haRQg4&quot; ConfVersion=&quot;2.6&quot;&gt;/au8q00e4YHoMGSnNWL/zRCzSQd1EaDgZ6VHuJ92iffxh5Spuhy86nsoiMr99UMaUF8UjlrYsboZC2B5sLO6t1lqKuB9okjY/jaLHTlGB7mmaHlDHXo7WEChz51xO+caUGfXCXPHgHOFsz/yCJIv3E9LwVOsAIH2qTfMp19OsytF3+Lb4T8v3nMAKb1iw63WcjFsp/835TMcZWWjI+SwPNKMze [rest of string was truncated]&quot;;.
+        ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; EncryptionEngine=&quot;AES&quot; BlockCipherMode=&quot;GCM&quot; KdfIterations=&quot;1000&quot; FullFileEncryption=&quot;True&quot; Protected=&quot;d7pvbk1N6aswOmTgjCKkkavQKM2xTpknkdnMgzi+bOPgwr9WirGy82kaQldQ06af7MrZgJwvc9hKAcGxBfYt&quot; ConfVersion=&quot;2.6&quot;&gt;P9haenvGQ9HxnJSUUY+3SdALKoWQau0gF3Vxk6eCERKJ9G2gi87zhBcMCH+PwSsh/5ohPfOansFvUcDvPeE10slCTVqQmQFeU+daQY4OMk+2Q0UR/rEDRlbjGlM8YKVv2xjLRPRs6AbNJsKLv4zo8T/x3ySlZnuiMiGTGt4Wstfle/QfwNbBeV88N5IPbbKy2FWQf5yOlPtrjgPrcl0cRtRI3c [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string confCons_v2_6_passwordis_Password_fullencryption {
             get {
