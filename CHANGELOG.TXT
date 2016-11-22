@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#254: Component check window position issues and uncaught exception
 #260: Crash when attempting to load fully encrypted confCons v2.5
 #261: Double clicking folder in treeview doesnt expand it in 1.75 beta1
 

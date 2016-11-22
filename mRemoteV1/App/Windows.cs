@@ -1,6 +1,7 @@
 ﻿using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
+using mRemoteNG.Messages;
 using mRemoteNG.UI;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -116,6 +117,7 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.ComponentsCheck))
                 {
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Showing ComponentsCheck window", true);
                     if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
                     {
                         _componentscheckForm = new ComponentsCheckWindow(_componentscheckPanel);
