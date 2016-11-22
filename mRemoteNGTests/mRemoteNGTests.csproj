@@ -201,6 +201,12 @@
   <ItemGroup>
     <None Include="Resources\confCons_v2_6_5k-iterations.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_5_fullencryption.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_5_passwordis_Password_fullencryption.xml" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

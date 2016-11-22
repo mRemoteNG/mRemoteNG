@@ -1,3 +1,11 @@
+1.75 Beta 2 (2016-xx-xx):
+
+Fixes:
+------
+#260: Crash when attempting to load fully encrypted confCons v2.5
+#261: Double clicking folder in treeview doesnt expand it in 1.75 beta1
+
+
 1.75 Beta 1 (2016-11-15):
 
 General Changes:

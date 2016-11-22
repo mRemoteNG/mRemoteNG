@@ -452,8 +452,13 @@ namespace mRemoteNG.UI.Window
         private void tvConnections_NodeMouseDoubleClick(object sender, CellClickEventArgs e)
         {
             if (e.ClickCount < 2) return;
+            var clickedNodeAsContainer = e.Model as ContainerInfo;
+            if (clickedNodeAsContainer != null)
+            {
+                olvConnections.ToggleExpansion(clickedNodeAsContainer);
+            }
+
             var clickedNode = e.Model as ConnectionInfo;
-            
             if (clickedNode?.GetTreeNodeType() == TreeNodeType.Connection |
                 clickedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
 			{
