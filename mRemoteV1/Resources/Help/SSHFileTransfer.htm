@@ -1,13 +1,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>SSH File Transfer</title>
-    <link href="Main.css" rel="stylesheet" type="text/css" />
+  <title>SSH File Transfer</title>
+  <link href="Main.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
-    <p>
-        Sorry, not yet...</p>
+  <p class="heading1">
+    Introduction to SSH File Transfer
+  </p>
+  <p>
+    SSH File Transfer functionality allows you to securely transfer files to a remote host over an encrypted tunnel using either SFTP or SCP.
+  </p>
 
+  <p class="heading1">
+    Use Cases
+  </p>
+  <p>
+    The primary use case is to upload individual files, such as configuration files, to a remote host.
+  </p>
+
+  <p class="heading1">Prerequisites</p>
+  <ul>
+    <li>SSH File Transfer requires an SSH service to listen on an available network port (default 22) on a remote host.</li>
+    <li>A username and password must be supplied to connect with the remote host.</li>
+    <li>The remote host must have a writeable folder on its filesystem to place the transferred files.</li>
+  </ul>
+
+  <p class="heading1">Configuration Options</p>
+  <ul>
+    <li><b>Host</b> - The remote host you connect to. Can be DNS name or IP address.</li>
+    <li><b>Port</b> - Remote network port listening for SSH/SFTP/SCP traffic.</li>
+    <li><b>User</b> - Username for account to log on to remote host.</li>
+    <li><b>Password</b> - Password for account to log on to remote host.</li>
+    <li><b>Protocol</b> - Choice of SCP or SFTP protocol used for communication.</li>
+    <li><b>Local File</b> - Path of file to transfer from local host.</li>
+    <li><b>Remote File</b> - Path where file will be transferred on remote host.<br />
+      Example: /home/John/Documents</li>
+  </ul>
+
+  <p class="heading1">Using SSH File Transfer</p>
+  <p>
+    To begin, select <b>Tools</b> and then <b>SSH File Transfer</b>. The tool will fill the window and allow you to input the configuration options. Each piece of information is needed for a successful transfer.
+  </p>
+
+  <p>
+    To populate the <b>Local File</b> option, select the <b>Browse</b> button and navigate to the desired file on the local filesystem. To populate the <b>Remote File</b> option, manually type desired filesystem path, including the desired file name.
+  </p>
+
+  <p>
+    Once all options are populated, select <b>Transfer</b> and the progress bar at the bottom of the window will show the progress.
+  </p>
+
+  <p class="heading1">Troubleshooting SSH File Transfer</p>
+  <p>
+    To troubleshoot issues with SSH File Transfer, consult the log under %AppData%\mRemoteNG\mRemoteNG.log. This log provides verbose information about successful and failed connections.
+    <br />
+    <br />
+    <span class="heading2">
+      Common Issues
+    </span>
+    <br />
+    <br />
+    <b>ERROR- Please fill all fields</b><br />
+    This issue was likely encountered because you did not provide all information needed to establish the connection.
+    <br />
+    <br />
+    <b>System.Net.Sockets.SocketException (0x80004005): No connection could be made because the target machine actively refused it</b><br />
+    This issue was likely encountered because the local host could not contact the remote host specified on the remote port specified.<br />
+    The issue may be caused by improperly configured firewall rules or a SSH service not listening properly on the remote host.
+    <br />
+    <br />
+    <b>[14] ERROR- SSH background transfer failed!</b><br />
+    This issue was likely encountered due to a permissions issue. Ensure you have appropriate access to write to the specified Remote File.
+  </p>
 </body>
 </html>
