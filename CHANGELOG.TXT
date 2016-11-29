@@ -1,5 +1,10 @@
 1.75 Beta 2 (2016-xx-xx):
 
+Features/Enhancements:
+----------------------
+#273: Added Turkish translation provided by forum user "rizaemet"
+
+
 Fixes:
 ------
 #254: Component check window position issues and uncaught exception
