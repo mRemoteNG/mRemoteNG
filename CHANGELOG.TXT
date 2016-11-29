@@ -3,6 +3,7 @@
 Features/Enhancements:
 ----------------------
 #273: Added Turkish translation provided by forum user "rizaemet"
+#217: Create user manual documentation for the SSH File Transfer feature
 
 
 Fixes:
