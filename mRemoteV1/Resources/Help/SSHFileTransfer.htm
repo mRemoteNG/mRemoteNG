@@ -37,39 +37,42 @@
     <li><b>Local File</b> - Path of file to transfer from local host.</li>
     <li><b>Remote File</b> - Path where file will be transferred on remote host.<br />
       Example: /home/John/Documents</li>
-    </ul>
+  </ul>
 
-    <p class="heading1">Using SSH File Transfer</p>
-    <p>
-      To begin, select <b>Tools</b> and then <b>SSH File Transfer</b>. The tool will fill the window and allow you to input the configuration options. Each piece of information is needed for a successful transfer. </p>
+  <p class="heading1">Using SSH File Transfer</p>
+  <p>
+    To begin, select <b>Tools</b> and then <b>SSH File Transfer</b>. The tool will fill the window and allow you to input the configuration options. Each piece of information is needed for a successful transfer.
+  </p>
 
-      <p>
-        To populate the <b>Local File</b> option, select the <b>Browse</b> button and navigate to the desired file on the local filesystem. To populate the <b>Remote File</b> option, manually type desired filesystem path, including the desired file name.
-      </p>
+  <p>
+    To populate the <b>Local File</b> option, select the <b>Browse</b> button and navigate to the desired file on the local filesystem. To populate the <b>Remote File</b> option, manually type desired filesystem path, including the desired file name.
+  </p>
 
-      <p>
-        Once all options are populated, select <b>Transfer</b> and the progress bar at the bottom of the window will show the progress.
-        <p>
+  <p>
+    Once all options are populated, select <b>Transfer</b> and the progress bar at the bottom of the window will show the progress.
+  </p>
 
-          <p class="heading1">Troubleshooting SSH File Transfer</p>
-          <p>
-            To troubleshoot issues with SSH File Transfer, consult the log under %AppData%\mRemoteNG\mRemoteNG.log.
-
-            <div class="heading2">
-              Common Issues
-            </div>
-            <br />
-            <b>ERROR- Please fill all fields</b><br />
-            This issue was likely encountered because you did not provide all information needed to establish the connection.
-            <br />
-            <br />
-            <b>System.Net.Sockets.SocketException (0x80004005): No connection could be made because the target machine actively refused it</b><br />
-            This issue was likely encountered because the local host could not contact the remote host specified on the remote port specified.<br />
-            The issue may be caused by improperly configured firewall rules or a SSH service not listening properly on the remote host.
-            <br />
-            <br />
-            <b>[14] ERROR- SSH background transfer failed!</b><br />
-            This issue was likely encountered due to a permissions issue. Ensure you have appropriate access to write to the specified Remote File.
-            <p>
-            </body>
-            </html>
+  <p class="heading1">Troubleshooting SSH File Transfer</p>
+  <p>
+    To troubleshoot issues with SSH File Transfer, consult the log under %AppData%\mRemoteNG\mRemoteNG.log. This log provides verbose information about successful and failed connections.
+    <br />
+    <br />
+    <span class="heading2">
+      Common Issues
+    </span>
+    <br />
+    <br />
+    <b>ERROR- Please fill all fields</b><br />
+    This issue was likely encountered because you did not provide all information needed to establish the connection.
+    <br />
+    <br />
+    <b>System.Net.Sockets.SocketException (0x80004005): No connection could be made because the target machine actively refused it</b><br />
+    This issue was likely encountered because the local host could not contact the remote host specified on the remote port specified.<br />
+    The issue may be caused by improperly configured firewall rules or a SSH service not listening properly on the remote host.
+    <br />
+    <br />
+    <b>[14] ERROR- SSH background transfer failed!</b><br />
+    This issue was likely encountered due to a permissions issue. Ensure you have appropriate access to write to the specified Remote File.
+  </p>
+</body>
+</html>
