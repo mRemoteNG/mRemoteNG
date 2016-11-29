@@ -27,6 +27,7 @@
     <PropertyRef Id="NETFRAMEWORK40FULL" />
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
     <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
+    <CustomActionRef Id='SaveCmdlineINSTALLDIR' />
 
 
     <InstallUISequence>
@@ -70,6 +71,7 @@
         <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
         <ComponentRef Id="C.MainExe" Primary="yes" />
         <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
+        <ComponentRef Id="C.RegistryEntries" Primary="yes" />
       </Feature>
 
       <Feature Id="F.PuttyNG" Title="PuTTYNG" Absent="allow" AllowAdvertise="no" Level="1">

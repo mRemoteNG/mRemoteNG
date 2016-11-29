@@ -27,12 +27,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CustomActions\CheckForInstalledWindowsUpdates.wxs" />
+    <Compile Include="CustomActions\SaveInstallLocation.wxs" />
     <Compile Include="CustomActions\UninstallLegacyVersions.wxs" />
     <Compile Include="Fragments\FilesFragment.wxs" />
     <Compile Include="Fragments\DirectoriesFragment.wxs" />
     <Compile Include="Fragments\MainExeFragment.wxs" />
     <Compile Include="Fragments\MiscTextFilesFragment.wxs" />
     <Compile Include="Fragments\PuTTYNGFragment.wxs" />
+    <Compile Include="Fragments\RegistryEntriesFragment.wxs" />
     <Compile Include="Fragments\ShortcutFragment.wxs" />
     <Compile Include="mRemoteNGV1.wxs" />
   </ItemGroup>
