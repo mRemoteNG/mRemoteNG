@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <!-- http://robmensching.com/blog/posts/2010/5/2/the-wix-toolsets-remember-property-pattern/ -->
+    <!-- This pattern allows a cmdline value to take precedence over values set from searchers (registry/file/etc) -->
+    
+    <!-- Save the INSTALLDIR value from the cmdline, if it was provided -->
+    <CustomAction Id="SaveCmdlineINSTALLDIR" Property="CMDLINE_INSTALLDIR" Value="[INSTALLDIR]" Execute="firstSequence" />
+
+    <!-- Set the INSTALLDIR value to the cmdline value, if one was provided -->
+    <CustomAction Id="SetFromCmdlineINSTALLDIR" Property="INSTALLDIR" Value="[CMDLINE_INSTALLDIR]" Execute="firstSequence" />
+
+
+    <InstallUISequence>
+      <Custom Action="SaveCmdlineINSTALLDIR" Before="AppSearch" />
+      <Custom Action="SetFromCmdlineINSTALLDIR" After="AppSearch">
+        CMDLINE_INSTALLDIR
+      </Custom>
+    </InstallUISequence>
+
+    <InstallExecuteSequence>
+      <Custom Action="SaveCmdlineINSTALLDIR" Before="AppSearch" />
+      <Custom Action="SetFromCmdlineINSTALLDIR" After="AppSearch">
+        CMDLINE_INSTALLDIR
+      </Custom>
+    </InstallExecuteSequence>
+    
+	</Fragment>
+</Wix>

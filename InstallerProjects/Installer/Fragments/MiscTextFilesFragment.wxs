@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
-    <ComponentGroup Id="CG.ProjectInfoFiles" Directory="APPLICATIONROOTDIRECTORY">
+    <ComponentGroup Id="CG.ProjectInfoFiles" Directory="INSTALLDIR">
       <Component Id="C.Changelog" Guid="*">
         <File Id="ChangelogFile" Name="Changelog.txt" Source="$(var.SolutionDir)CHANGELOG.TXT" KeyPath="yes" />
       </Component>

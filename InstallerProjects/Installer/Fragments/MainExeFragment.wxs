@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
 	<Fragment>
-    <Component Id="C.MainExe" Directory="APPLICATIONROOTDIRECTORY" Guid="*">
+    <Component Id="C.MainExe" Directory="INSTALLDIR" Guid="*">
       <File Id="MainExeFile" Source="$(var.SolutionDir)mRemoteV1\bin\$(var.Configuration)\mRemoteNG.exe" />
     </Component>
 	</Fragment>

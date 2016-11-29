@@ -5,17 +5,17 @@
     
     <DirectoryRef Id="DesktopFolder">
       <Component Id="C.DesktopShortcut" Guid="F78E5A16-A2F7-4BD9-9250-CBF3016CCCDA">
-        <Shortcut Id="DesktopShortcut" Name="$(var.ProductName)" Target="[APPLICATIONROOTDIRECTORY][MAINEXE]" WorkingDirectory="APPLICATIONROOTDIRECTORY" Icon="mRemoteNG.ico" />
+        <Shortcut Id="DesktopShortcut" Name="$(var.ProductName)" Target="[INSTALLDIR][MAINEXE]" WorkingDirectory="INSTALLDIR" Icon="mRemoteNG.ico" />
         <RegistryValue Root="HKCU" Key="Software\$(var.ProductName)" Name="DesktopShortcut" Type="integer" Value="1" KeyPath="yes" />
       </Component>
     </DirectoryRef>
     
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="C.ApplicationStartMenuShortcut" Guid="193B9E14-F40E-44F1-8514-BED253BCBF75">
-        <Shortcut Id="ApplicationStartMenuShortcut" Name="$(var.ProductName)" Target="[APPLICATIONROOTDIRECTORY][MAINEXE]" WorkingDirectory="APPLICATIONROOTDIRECTORY" Icon="mRemoteNG.ico" />
-        <Shortcut Id="CreditsShortcut" Name="Credits" Target="[APPLICATIONROOTDIRECTORY]Credits.txt" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
-        <Shortcut Id="LicenseShortcut" Name="License" Target="[APPLICATIONROOTDIRECTORY]License.txt" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
-        <Shortcut Id="ReadmeShortcut" Name="Readme" Target="[APPLICATIONROOTDIRECTORY]Readme.txt" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="$(var.ProductName)" Target="[INSTALLDIR][MAINEXE]" WorkingDirectory="INSTALLDIR" Icon="mRemoteNG.ico" />
+        <Shortcut Id="CreditsShortcut" Name="Credits" Target="[INSTALLDIR]Credits.txt" WorkingDirectory="INSTALLDIR" />
+        <Shortcut Id="LicenseShortcut" Name="License" Target="[INSTALLDIR]License.txt" WorkingDirectory="INSTALLDIR" />
+        <Shortcut Id="ReadmeShortcut" Name="Readme" Target="[INSTALLDIR]Readme.txt" WorkingDirectory="INSTALLDIR" />
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.ProductName)" Name="ApplicationStartMenuShortcut" Type="integer" Value="1" KeyPath="yes"/>
       </Component>

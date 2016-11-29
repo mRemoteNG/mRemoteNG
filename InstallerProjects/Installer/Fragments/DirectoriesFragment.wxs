@@ -4,7 +4,7 @@
 	<Fragment>
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="$(var.PlatformProgramFilesFolder)">
-        <Directory Id="APPLICATIONROOTDIRECTORY" Name="$(var.ProductName)">
+        <Directory Id="INSTALLDIR" Name="$(var.ProductName)">
         </Directory>
       </Directory>
 
