@@ -12,8 +12,9 @@
     <Binary Id="CustomActions.CA.dll" SourceFile="$(var.SolutionDir)InstallerProjects\CustomActions\bin\$(var.Configuration)\CustomActions.CA.dll" />
     <Property Id="ARPPRODUCTICON" Value="mRemoteNG.ico" />
     <Property Id="ARPHELPLINK" Value="http://www.mremoteng.org" />
+    <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLDIR]" After="CostFinalize" />
     <Property Id="MAINEXE" Value="$(var.ExeProcessName)" />
-    <Property Id="APPLICATIONROOTDIRECTORY">
+    <Property Id="INSTALLDIR">
       <RegistrySearch Id='mRemoteNGRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
     </Property>
     <Property Id='RDP_DTLS_KB' Value='$(var.RdpDtlsKb)' />
@@ -65,7 +66,7 @@
     
 
     <Feature Id="F.Complete" Title="!(loc.Feature_Complete)" Display="expand" AllowAdvertise="no" Level="1">
-      <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="APPLICATIONROOTDIRECTORY" Level="1">
+      <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="INSTALLDIR" Level="1">
         <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
         <ComponentRef Id="C.MainExe" Primary="yes" />
         <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
