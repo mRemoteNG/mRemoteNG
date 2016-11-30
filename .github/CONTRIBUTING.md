@@ -45,10 +45,10 @@ Our requests when it comes to pull requests:
 - Keep your PR focused. It should be clear what code changed to achieve your stated goal.
 - Add or update tests when possible. Some of the code base is still very hard to effectively test. If you can, please try to create or update tests that relate to your PR.
 - Please talk with one of the project maintainers before starting work on large pull requests. Otherwise, you run the risk of putting a lot of time into a feature or refactor that gets denied.
-- If you have access to Static Code Analysis tools (like ReSharper), please don't analyize/fix everything in one giant PR. As great as these tools are, they can some times inadvertantly cause an unintended problem.
+- If you have access to Static Code Analysis tools (like ReSharper), please don't analyze/fix everything in one giant PR. As great as these tools are, they can sometimes cause unintended problems.
 
 # Code Style
-- Please make use of simple types and var where possilbe
+- Please make use of simple types and var where possible
 - Prefer "using" over .Dispose()
 - Avoid nesting "using"
 
