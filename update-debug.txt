@@ -2,4 +2,4 @@ Version: 1.75.6164.27544
 dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta1/mRemoteNG-Installer-1.75.6164.27544.msi
 clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta1/CHANGELOG.TXT
 CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
-Checksum: 1cbd910dbd6e77f26506e7f600736972f700673f
+Checksum: DC1108D8D2BA79274F02DCC8E50F1DE3
