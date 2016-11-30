@@ -6,28 +6,25 @@ using System.Threading;
 using System.Reflection;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
-
-#if PORTABLE
 using System.Security.Cryptography;
-using System.Windows.Forms;
-#else
+#if !PORTABLE
 using mRemoteNG.Tools;
+#else 
+using System.Windows.Forms;
 #endif
 
 namespace mRemoteNG.App.Update
 {
 	public class AppUpdater
 	{
-        private UpdateInfo _currentUpdateInfo;
-        private string _changeLog;
-        private WebProxy _webProxy;
+	    private WebProxy _webProxy;
         private Thread _getUpdateInfoThread;
         private Thread _getChangeLogThread;
 
 #region Public Properties
-        public UpdateInfo CurrentUpdateInfo => _currentUpdateInfo;
+        public UpdateInfo CurrentUpdateInfo { get; private set; }
 
-	    public string ChangeLog => _changeLog;
+	    public string ChangeLog { get; private set; }
 
 	    public bool IsGetUpdateInfoRunning => _getUpdateInfoThread != null && _getUpdateInfoThread.IsAlive;
 
@@ -72,12 +69,12 @@ namespace mRemoteNG.App.Update
 			
 		public bool IsUpdateAvailable()
 		{
-			if (_currentUpdateInfo == null || !_currentUpdateInfo.IsValid)
+			if (CurrentUpdateInfo == null || !CurrentUpdateInfo.IsValid)
 			{
 				return false;
 			}
 				
-			return _currentUpdateInfo.Version > GeneralAppInfo.GetApplicationVersion();
+			return CurrentUpdateInfo.Version > GeneralAppInfo.GetApplicationVersion();
 		}
 			
 		public void GetUpdateInfoAsync()
@@ -95,7 +92,7 @@ namespace mRemoteNG.App.Update
 			
 		public void GetChangeLogAsync()
 		{
-			if (_currentUpdateInfo == null || !_currentUpdateInfo.IsValid)
+			if (CurrentUpdateInfo == null || !CurrentUpdateInfo.IsValid)
 			{
 				throw new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync().");
 			}
@@ -118,29 +115,29 @@ namespace mRemoteNG.App.Update
 				throw new InvalidOperationException("A previous call to DownloadUpdateAsync() is still in progress.");
 			}
 				
-			if (_currentUpdateInfo == null || !_currentUpdateInfo.IsValid)
+			if (CurrentUpdateInfo == null || !CurrentUpdateInfo.IsValid)
 			{
 				throw new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().");
 			}
 #if !PORTABLE
-            _currentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "exe"));
+            CurrentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "exe"));
 #else
 		    var sfd = new SaveFileDialog
 		    {
 		        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
-                FileName = _currentUpdateInfo.FileName,
+                FileName = CurrentUpdateInfo.FileName,
 		        RestoreDirectory = true
 		    };
 		    if (sfd.ShowDialog() == DialogResult.OK)
 		    {
-                _currentUpdateInfo.UpdateFilePath = sfd.FileName;
+                CurrentUpdateInfo.UpdateFilePath = sfd.FileName;
             }
 		    else
 		    {
 		        return;
 		    }
 #endif
-            DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress, _currentUpdateInfo.UpdateFilePath);
+            DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress, CurrentUpdateInfo.UpdateFilePath);
 		}
 #endregion
 		
@@ -215,7 +212,7 @@ namespace mRemoteNG.App.Update
 				
 			if (!e.Cancelled && e.Error == null)
 			{
-				_currentUpdateInfo = UpdateInfo.FromString(e.Result);
+				CurrentUpdateInfo = UpdateInfo.FromString(e.Result);
 
                 Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
 				if (!Settings.Default.UpdatePending)
@@ -229,11 +226,11 @@ namespace mRemoteNG.App.Update
 			
 		private void GetChangeLog()
 		{
-			var e = DownloadString(_currentUpdateInfo.ChangeLogAddress);
+			var e = DownloadString(CurrentUpdateInfo.ChangeLogAddress);
 				
 			if (!e.Cancelled && e.Error == null)
 			{
-				_changeLog = e.Result;
+				ChangeLog = e.Result;
 			}
 
             GetChangeLogCompletedEventEvent?.Invoke(this, e);
@@ -253,10 +250,10 @@ namespace mRemoteNG.App.Update
 				try
 				{
 #if !PORTABLE
-                    var updateAuthenticode = new Authenticode(_currentUpdateInfo.UpdateFilePath)
+                    var updateAuthenticode = new Authenticode(CurrentUpdateInfo.UpdateFilePath)
 				    {
 				        RequireThumbprintMatch = true,
-				        ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint
+				        ThumbprintToMatch = CurrentUpdateInfo.CertificateThumbprint
 				    };
 
 				    if (updateAuthenticode.Verify() != Authenticode.StatusValue.Verified)
@@ -268,18 +265,18 @@ namespace mRemoteNG.App.Update
 
 				        throw (new Exception(updateAuthenticode.StatusMessage));
 				    }
-#else
+#endif
+
                     using (var md5 = MD5.Create())
                     {
-                        using (var stream = File.OpenRead(_currentUpdateInfo.UpdateFilePath))
+                        using (var stream = File.OpenRead(CurrentUpdateInfo.UpdateFilePath))
                         {
                             var hash = md5.ComputeHash(stream);
-                            var hashString = BitConverter.ToString(hash).Replace("-", "");
-                            if (!hashString.Equals(_currentUpdateInfo.CertificateThumbprint))
+                            var hashString = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
+                            if (!hashString.Equals(CurrentUpdateInfo.Checksum))
                                 throw new Exception("MD5 Hashes didn't match!");
                         }
                     }
-#endif
                 }
 				catch (Exception ex)
 				{
@@ -289,7 +286,7 @@ namespace mRemoteNG.App.Update
 				
 			if (raiseEventArgs.Cancelled || raiseEventArgs.Error != null)
 			{
-				File.Delete(_currentUpdateInfo.UpdateFilePath);
+				File.Delete(CurrentUpdateInfo.UpdateFilePath);
 			}
 
             DownloadUpdateCompletedEventEvent?.Invoke(this, raiseEventArgs);
