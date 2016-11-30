@@ -45,8 +45,16 @@ Our requests when it comes to pull requests:
 - Keep your PR focused. It should be clear what code changed to achieve your stated goal.
 - Add or update tests when possible. Some of the code base is still very hard to effectively test. If you can, please try to create or update tests that relate to your PR.
 - Please talk with one of the project maintainers before starting work on large pull requests. Otherwise, you run the risk of putting a lot of time into a feature or refactor that gets denied.
+- If you have access to Static Code Analysis tools (like ReSharper), please don't analyize/fix everything in one giant PR. As great as these tools are, they can some times inadvertantly cause an unintended problem.
+
+# Code Style
+- Please make use of simple types and var where possilbe
+- Prefer "using" over .Dispose()
+- Avoid nesting "using"
 
 # Your first contributions
-Want to help but don't know where to start? Check out the issues that we've labeled with [`Help Wanted`](https://github.com/mRemoteNG/mRemoteNG/issues?q=is%3Aissue+is%3Aopen+label%3A%22Help+Wanted%22). These will vary in difficulty, but should be possible for new contributors.
+Want to help but don't know where to start? Check out the issues that we've labeled with [`Help Wanted`](https://github.com/mRemoteNG/mRemoteNG/issues?q=is%3Aissue+is%3Aopen+label%3A%22Help+Wanted%22) or [`ready`](https://github.com/mRemoteNG/mRemoteNG/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22ready%22). These will vary in difficulty, but should be possible for new contributors.
+
+Want to help but don't know C#? Check out the issues that we've labeled with [`Documentation`](https://github.com/mRemoteNG/mRemoteNG/labels/Documentation).
 
 Sorry, we currently do not have any tags for truly beginner-friendly issues :(
