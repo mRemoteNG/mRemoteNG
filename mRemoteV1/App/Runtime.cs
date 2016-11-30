@@ -437,6 +437,7 @@ namespace mRemoteNG.App
         public static void SaveConnections()
         {
             if (ConnectionTreeModel == null) return;
+            if (!IsConnectionsFileLoaded) return;
 
             try
             {
