@@ -11,8 +11,11 @@ namespace mRemoteNG.App.Update
         public Uri ChangeLogAddress { get; private set; }
         public Uri ImageAddress { get; private set; }
         public Uri ImageLinkAddress { get; private set; }
+#if !PORTABLE
         public string CertificateThumbprint { get; private set; }
+#endif
         public string FileName { get; private set; }
+        public string Checksum { get; private set; }
 
         public static UpdateInfo FromString(string input)
         {
@@ -24,13 +27,16 @@ namespace mRemoteNG.App.Update
             else
             {
                 var updateFile = new UpdateFile(input);
-                newInfo.Version = updateFile.GetVersion("Version");
+                newInfo.Version = updateFile.GetVersion();
                 newInfo.DownloadAddress = updateFile.GetUri("dURL");
                 newInfo.ChangeLogAddress = updateFile.GetUri("clURL");
                 newInfo.ImageAddress = updateFile.GetUri("imgURL");
                 newInfo.ImageLinkAddress = updateFile.GetUri("imgURLLink");
-                newInfo.CertificateThumbprint = updateFile.GetThumbprint("CertificateThumbprint");
+#if !PORTABLE
+                newInfo.CertificateThumbprint = updateFile.GetThumbprint();
+#endif
                 newInfo.FileName = updateFile.GetFileName();
+                newInfo.Checksum = updateFile.GetChecksum();
                 newInfo.IsValid = true;
             }
             return newInfo;
