@@ -9,10 +9,10 @@ Open source software is best when shared with others. This also applies to the w
 There are many ways that you can help improve mRemoteNG, even if you don't know how to program.
 
 For example, you might:
-- add documentation or "how-to" articles on the Wiki
+- add documentation or "how-to" articles on the [Wiki](https://github.com/mRemoteNG/mRemoteNG/wiki)
 - answer support questions on the [forum](http://forum.mremoteng.org)
-- add or improve a translation
-- submit a pull request for a bug or feature ticket
+- [add or improve a translation](https://github.com/mRemoteNG/mRemoteNG/wiki/How to Help Translating mRemoteNG)
+- submit a [pull request](https://github.com/mRemoteNG/mRemoteNG/pulls) for a [bug or feature ticket](https://github.com/mRemoteNG/mRemoteNG/issues)
 
 
 # Submitting GitHub Issues
