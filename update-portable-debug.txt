@@ -1,4 +1,4 @@
 Version: 1.75.6164.27563
 dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta1/mRemoteNG-Portable-1.75.6164.27563.zip
 clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta1/CHANGELOG.TXT
-Checksum: 9B14E7569E9219A953C71737063DAC48
+Checksum: 87628CE52B77A8911C6BE8919495D264
