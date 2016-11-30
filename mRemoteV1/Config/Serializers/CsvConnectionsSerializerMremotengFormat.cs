@@ -53,8 +53,9 @@ namespace mRemoteNG.Config.Serializers
             {
                 foreach (var child in nodeAsContainer.Children)
                 {
-                    if (child is ContainerInfo)
-                        SerializeNodesRecursive((ContainerInfo) child);
+                    var info = child as ContainerInfo;
+                    if (info != null)
+                        SerializeNodesRecursive(info);
                     else
                         SerializeConnectionInfo(child);
                 }

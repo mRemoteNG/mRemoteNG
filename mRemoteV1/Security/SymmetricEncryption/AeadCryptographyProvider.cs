@@ -38,7 +38,23 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
 
-        public string CipherEngine => _aeadBlockCipher.AlgorithmName;
+        public BlockCipherEngines CipherEngine
+        {
+            get
+            {
+                var cipherEngine = _aeadBlockCipher.AlgorithmName.Split('/')[0];
+                return (BlockCipherEngines)Enum.Parse(typeof(BlockCipherEngines), cipherEngine);
+            }
+        }
+
+        public BlockCipherModes CipherMode
+        {
+            get
+            {
+                var cipherMode = _aeadBlockCipher.AlgorithmName.Split('/')[1];
+                return (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes), cipherMode);
+            }
+        }
 
         public AeadCryptographyProvider()
         {
@@ -140,19 +156,17 @@ namespace mRemoteNG.Security.SymmetricEncryption
             _aeadBlockCipher.DoFinal(cipherText, len);
 
             //Assemble Message
-            using (var combinedStream = new MemoryStream())
+            var combinedStream = new MemoryStream();
+            using (var binaryWriter = new BinaryWriter(combinedStream))
             {
-                using (var binaryWriter = new BinaryWriter(combinedStream))
-                {
-                    //Prepend Authenticated Payload
-                    binaryWriter.Write(nonSecretPayload);
-                    //Prepend Nonce
-                    binaryWriter.Write(nonce);
-                    //Write Cipher Text
-                    binaryWriter.Write(cipherText);
-                }
-                return combinedStream.ToArray();
+                //Prepend Authenticated Payload
+                binaryWriter.Write(nonSecretPayload);
+                //Prepend Nonce
+                binaryWriter.Write(nonce);
+                //Write Cipher Text
+                binaryWriter.Write(cipherText);
             }
+            return combinedStream.ToArray();
         }
 
 
@@ -201,7 +215,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             if (encryptedMessage == null || encryptedMessage.Length == 0)
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
-            using (var cipherStream = new MemoryStream(encryptedMessage))
+            var cipherStream = new MemoryStream(encryptedMessage);
             using (var cipherReader = new BinaryReader(cipherStream))
             {
                 //Grab Payload

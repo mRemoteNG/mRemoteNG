@@ -22,14 +22,15 @@ namespace mRemoteNG.UI.Window
 				
         #region Private Methods
         #region Event Handlers
-		public void ADImport_Load(object sender, EventArgs e)
+
+	    private void ADImport_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 			txtDomain.Text = ActiveDirectoryTree.Domain;
 			EnableDisableImportButton();
 		}
-				
-		public void btnImport_Click(object sender, EventArgs e)
+
+	    private void btnImport_Click(object sender, EventArgs e)
 		{
 		    var selectedNode = Windows.TreeForm.SelectedNode;
 		    ContainerInfo importDestination;
@@ -37,32 +38,29 @@ namespace mRemoteNG.UI.Window
 		        importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
 		    else
 		        importDestination = Runtime.ConnectionTreeModel.RootNodes.First();
-		    Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination);
-			DialogResult = DialogResult.OK;
-			Close();
+
+		    Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
 		}
-				
-		public static void txtDomain_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+
+	    private static void txtDomain_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
 				e.IsInputKey = true;
 		}
-				
-		public void txtDomain_KeyDown(object sender, KeyEventArgs e)
+
+	    private void txtDomain_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Enter)
-			{
-				ChangeDomain();
-				e.SuppressKeyPress = true;
-			}
+		    if (e.KeyCode != Keys.Enter) return;
+		    ChangeDomain();
+		    e.SuppressKeyPress = true;
 		}
-				
-		public void btnChangeDomain_Click(object sender, EventArgs e)
+
+	    private void btnChangeDomain_Click(object sender, EventArgs e)
 		{
 			ChangeDomain();
 		}
-				
-		public void ActiveDirectoryTree_ADPathChanged(object sender)
+
+	    private void ActiveDirectoryTree_ADPathChanged(object sender)
 		{
 			EnableDisableImportButton();
 		}
@@ -86,5 +84,10 @@ namespace mRemoteNG.UI.Window
 			btnImport.Enabled = !string.IsNullOrEmpty(ActiveDirectoryTree.ADPath);
 		}
         #endregion
-	}
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
 }

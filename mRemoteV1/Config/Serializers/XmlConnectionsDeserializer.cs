@@ -4,7 +4,6 @@ using System.Security;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -26,22 +25,24 @@ namespace mRemoteNG.Config.Serializers
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
-        private ConnectionsDecryptor _decryptor;
+        private XmlConnectionsDecryptor _decryptor;
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.6;
+        private RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(string xml)
+        public XmlConnectionsDeserializer(string xml, Func<SecureString> authenticationRequestor = null)
         {
+            AuthenticationRequestor = authenticationRequestor;
             LoadXmlConnectionData(xml);
             ValidateConnectionFileVersion();
         }
 
         private void LoadXmlConnectionData(string connections)
         {
-            CreateDecryptor();
+            CreateDecryptor(new RootNodeInfo(RootNodeType.Connection));
             connections = _decryptor.LegacyFullFileDecrypt(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
@@ -91,16 +92,16 @@ namespace mRemoteNG.Config.Serializers
                     Runtime.IsConnectionsFileLoaded = false;
 
                 var rootXmlElement = _xmlDocument.DocumentElement;
-                CreateDecryptor(rootXmlElement);
-                var rootInfo = InitializeRootNode(rootXmlElement);
+                InitializeRootNode(rootXmlElement);
+                CreateDecryptor(_rootNodeInfo, rootXmlElement);
                 var connectionTreeModel = new ConnectionTreeModel();
-                connectionTreeModel.AddRootNode(rootInfo);
+                connectionTreeModel.AddRootNode(_rootNodeInfo);
 
                 
                 if (_confVersion > 1.3)
                 {
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
-                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, Runtime.EncryptionKey, rootInfo))
+                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
                     {
                         mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
                         mRemoteNG.Settings.Default.CustomConsPath = "";
@@ -123,7 +124,7 @@ namespace mRemoteNG.Config.Serializers
                     return null;
                 }
 
-                AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, rootInfo);
+                AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, _rootNodeInfo);
 
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = true;
@@ -138,17 +139,13 @@ namespace mRemoteNG.Config.Serializers
             }
         }
 
-        private RootNodeInfo InitializeRootNode(XmlElement connectionsRootElement)
+        private void InitializeRootNode(XmlElement connectionsRootElement)
         {
             var rootNodeName = connectionsRootElement?.Attributes["Name"].Value.Trim();
-            var rootInfo = new RootNodeInfo(RootNodeType.Connection)
-            {
-                Name = rootNodeName
-            };
-            return rootInfo;
+            _rootNodeInfo.Name = rootNodeName;
         }
 
-        private void CreateDecryptor(XmlElement connectionsRootElement = null)
+        private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement connectionsRootElement = null)
         {
             if (_confVersion >= 2.6)
             {
@@ -161,7 +158,7 @@ namespace mRemoteNG.Config.Serializers
                 int keyDerivationIterations;
                 int.TryParse(connectionsRootElement?.Attributes["KdfIterations"].Value, out keyDerivationIterations);
 
-                _decryptor = new ConnectionsDecryptor(engine, mode)
+                _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
                 {
                     AuthenticationRequestor = AuthenticationRequestor,
                     KeyDerivationIterations = keyDerivationIterations
@@ -169,7 +166,7 @@ namespace mRemoteNG.Config.Serializers
             }
             else
             {
-                _decryptor = new ConnectionsDecryptor { AuthenticationRequestor = AuthenticationRequestor };
+                _decryptor = new XmlConnectionsDecryptor(_rootNodeInfo) { AuthenticationRequestor = AuthenticationRequestor };
             }
         }
 
@@ -259,10 +256,7 @@ namespace mRemoteNG.Config.Serializers
                 {
                     if (_confVersion < 0.7)
                     {
-                        if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value))
-                            connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
-                        else
-                            connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["RDPPort"].Value);
+                        connectionInfo.Port = Convert.ToInt32(Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) ? xmlnode.Attributes["VNCPort"].Value : xmlnode.Attributes["RDPPort"].Value);
                     }
 
                     connectionInfo.UseConsoleSession = bool.Parse(xmlnode.Attributes["ConnectToConsole"].Value);
@@ -487,6 +481,12 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.AutomaticResize = bool.Parse(xmlnode.Attributes["AutomaticResize"].Value);
                     connectionInfo.Inheritance.LoadBalanceInfo = bool.Parse(xmlnode.Attributes["InheritLoadBalanceInfo"].Value);
                     connectionInfo.Inheritance.AutomaticResize = bool.Parse(xmlnode.Attributes["InheritAutomaticResize"].Value);
+                }
+
+                if (_confVersion >= 2.6)
+                {
+                    connectionInfo.SoundQuality = (ProtocolRDP.RDPSoundQuality)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPSoundQuality), Convert.ToString(xmlnode.Attributes["SoundQuality"].Value));
+                    connectionInfo.Inheritance.SoundQuality = bool.Parse(xmlnode.Attributes["InheritSoundQuality"].Value);
                 }
             }
             catch (Exception ex)

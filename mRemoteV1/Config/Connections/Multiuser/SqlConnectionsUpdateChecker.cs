@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
+using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DatabaseConnectors;
 
 namespace mRemoteNG.Config.Connections
@@ -111,6 +112,7 @@ namespace mRemoteNG.Config.Connections
             if (!itIsSafeToDisposeManagedObjects) return;
             _sqlConnector.Disconnect();
             _sqlConnector.Dispose();
+            _sqlQuery.Dispose();
         }
     }
 }

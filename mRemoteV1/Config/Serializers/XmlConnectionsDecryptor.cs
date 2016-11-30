@@ -1,35 +1,41 @@
 ﻿using System;
 using System.Security;
-using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree.Root;
 
-
-namespace mRemoteNG.Config.Connections
+namespace mRemoteNG.Config.Serializers
 {
-    public class ConnectionsDecryptor
+    public class XmlConnectionsDecryptor
     {
         private readonly ICryptographyProvider _cryptographyProvider;
+        private readonly RootNodeInfo _rootNodeInfo;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
-        public int KeyDerivationIterations { get; set; } = 1000;
 
-        public ConnectionsDecryptor()
+        public int KeyDerivationIterations
         {
-            _cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            get { return _cryptographyProvider.KeyDerivationIterations; }
+            set { _cryptographyProvider.KeyDerivationIterations = value; }
         }
 
-        public ConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode)
+
+        public XmlConnectionsDecryptor(RootNodeInfo rootNodeInfo)
+        {
+            _cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            _rootNodeInfo = rootNodeInfo;
+        }
+
+        public XmlConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode, RootNodeInfo rootNodeInfo)
         {
             _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
-            ((AeadCryptographyProvider) _cryptographyProvider).KeyDerivationIterations = KeyDerivationIterations;
+            _rootNodeInfo = rootNodeInfo;
         }
 
         public string Decrypt(string plainText)
         {
-            return plainText == "" ? "" : _cryptographyProvider.Decrypt(plainText, Runtime.EncryptionKey);
+            return plainText == "" ? "" : _cryptographyProvider.Decrypt(plainText, _rootNodeInfo.PasswordString.ConvertToSecureString());
         }
 
         public string LegacyFullFileDecrypt(string xml)
@@ -42,7 +48,7 @@ namespace mRemoteNG.Config.Connections
 
             try
             {
-                decryptedContent = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
+                decryptedContent = _cryptographyProvider.Decrypt(xml, _rootNodeInfo.PasswordString.ConvertToSecureString());
                 notDecr = decryptedContent == xml;
             }
             catch (Exception)
@@ -52,9 +58,9 @@ namespace mRemoteNG.Config.Connections
 
             if (notDecr)
             {
-                if (Authenticate(xml, Runtime.EncryptionKey))
+                if (Authenticate(xml, _rootNodeInfo.PasswordString.ConvertToSecureString()))
                 {
-                    decryptedContent = _cryptographyProvider.Decrypt(xml, Runtime.EncryptionKey);
+                    decryptedContent = _cryptographyProvider.Decrypt(xml, _rootNodeInfo.PasswordString.ConvertToSecureString());
                     notDecr = false;
                 }
 
@@ -69,20 +75,20 @@ namespace mRemoteNG.Config.Connections
             return "";
         }
 
-        public bool ConnectionsFileIsAuthentic(string protectedString, SecureString password, RootNodeInfo rootInfo)
+        public bool ConnectionsFileIsAuthentic(string protectedString, SecureString password)
         {
             var connectionsFileIsNotEncrypted = false;
             try
             {
-                connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, password) == "ThisIsNotProtected";
+                connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()) == "ThisIsNotProtected";
             }
             catch (EncryptionException)
             {
             }
-            return connectionsFileIsNotEncrypted || Authenticate(protectedString, password, rootInfo);
+            return connectionsFileIsNotEncrypted || Authenticate(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString());
         }
 
-        private bool Authenticate(string cipherText, SecureString password, RootNodeInfo rootInfo = null)
+        private bool Authenticate(string cipherText, SecureString password)
         {
             var authenticator = new PasswordAuthenticator(_cryptographyProvider, cipherText)
             {
@@ -92,10 +98,7 @@ namespace mRemoteNG.Config.Connections
             var authenticated = authenticator.Authenticate(password);
 
             if (!authenticated) return authenticated;
-            Runtime.EncryptionKey = authenticator.LastAuthenticatedPassword;
-            if (rootInfo == null) return authenticated;
-            rootInfo.Password = true;
-            rootInfo.PasswordString = Runtime.EncryptionKey.ConvertToUnsecureString();
+            _rootNodeInfo.PasswordString = authenticator.LastAuthenticatedPassword.ConvertToUnsecureString();
             return authenticated;
         }
     }

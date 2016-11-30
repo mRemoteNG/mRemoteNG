@@ -6,17 +6,13 @@ namespace mRemoteNG.Tools
 {
 	public class EnumWindows
 	{
-        public EnumWindows()
-        {
-        }
-
-		public List<IntPtr> EnumWindows_Renamed()
+	    public List<IntPtr> EnumWindows_Renamed()
 		{
-			List<IntPtr> handleList = new List<IntPtr>();
+			var handleList = new List<IntPtr>();
 				
 			HandleLists.Add(handleList);
-			int handleIndex = HandleLists.IndexOf(handleList);
-			Win32.EnumWindows(EnumCallback, handleIndex);
+			var handleIndex = (IntPtr)HandleLists.IndexOf(handleList);
+			NativeMethods.EnumWindows(EnumCallback, handleIndex);
 			HandleLists.Remove(handleList);
 				
 			return handleList;
@@ -24,11 +20,11 @@ namespace mRemoteNG.Tools
 			
 		public List<IntPtr> EnumChildWindows(IntPtr hWndParent)
 		{
-			List<IntPtr> handleList = new List<IntPtr>();
+			var handleList = new List<IntPtr>();
 				
 			HandleLists.Add(handleList);
-			int handleIndex = HandleLists.IndexOf(handleList);
-			Win32.EnumChildWindows(hWndParent, EnumCallback, handleIndex);
+            var handleIndex = (IntPtr)HandleLists.IndexOf(handleList);
+			NativeMethods.EnumChildWindows(hWndParent, EnumCallback, handleIndex);
 			HandleLists.Remove(handleList);
 				
 			return handleList;
@@ -43,14 +39,14 @@ namespace mRemoteNG.Tools
 		}
 			
 		// ReSharper disable ClassNeverInstantiated.Local
-		private class Win32
+		private class NativeMethods
 		{
 			// ReSharper restore ClassNeverInstantiated.Local
 			public delegate bool EnumWindowsProc(int hwnd, int lParam);
 			[DllImport("user32", ExactSpelling=true, CharSet=CharSet.Ansi, SetLastError=true)]
-			public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, int lParam);
+			public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
 			[DllImport("user32", ExactSpelling=true, CharSet=CharSet.Ansi, SetLastError=true)]
-			public static extern bool EnumChildWindows(IntPtr hWndParent, EnumWindowsProc lpEnumFunc, int lParam);
+			public static extern bool EnumChildWindows(IntPtr hWndParent, EnumWindowsProc lpEnumFunc, IntPtr lParam);
 		}
 	}
 }

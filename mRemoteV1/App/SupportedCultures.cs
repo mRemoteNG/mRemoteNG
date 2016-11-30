@@ -6,7 +6,8 @@ using System.Globalization;
 
 namespace mRemoteNG.App
 {
-	public class SupportedCultures : Dictionary<string, string>
+    [Serializable]
+    public class SupportedCultures : Dictionary<string, string>
 	{
         private static SupportedCultures _Instance;
 
@@ -15,7 +16,7 @@ namespace mRemoteNG.App
 
 	    private SupportedCultures()
         {
-            foreach (string CultureName in Settings.Default.SupportedUICultures.Split(','))
+            foreach (var CultureName in Settings.Default.SupportedUICultures.Split(','))
             {
                 try
                 {
@@ -41,13 +42,13 @@ namespace mRemoteNG.App
 			
 		public static string get_CultureName(string CultureNativeName)
 		{
-			string[] Names = new string[SingletonInstance.Count + 1];
-			string[] NativeNames = new string[SingletonInstance.Count + 1];
+			var Names = new string[SingletonInstance.Count + 1];
+			var NativeNames = new string[SingletonInstance.Count + 1];
 
             SingletonInstance.Keys.CopyTo(Names, 0);
             SingletonInstance.Values.CopyTo(NativeNames, 0);
 				
-			for (int Index = 0; Index <= SingletonInstance.Count; Index++)
+			for (var Index = 0; Index <= SingletonInstance.Count; Index++)
 			{
 				if (NativeNames[Index] == CultureNativeName)
 				{
@@ -67,8 +68,8 @@ namespace mRemoteNG.App
 		{
 			get
 			{
-				List<string> ValueList = new List<string>();
-				foreach (string Value in SingletonInstance.Values)
+				var ValueList = new List<string>();
+				foreach (var Value in SingletonInstance.Values)
 				{
 					ValueList.Add(Value);
 				}

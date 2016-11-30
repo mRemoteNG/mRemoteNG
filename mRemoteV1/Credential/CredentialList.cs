@@ -11,9 +11,10 @@ namespace mRemoteNG.Credential
 		{
 			get
 			{
-				if (Index is CredentialInfo)
+			    var info = Index as CredentialInfo;
+			    if (info != null)
 				{
-                    return (CredentialInfo)Index;
+                    return info;
 				}
 				else
 				{
@@ -22,14 +23,9 @@ namespace mRemoteNG.Credential
 			}
 		}
 			
-        public new int Count
-		{
-			get
-			{
-				return List.Count;
-			}
-		}
-        #endregion
+        public new int Count => List.Count;
+
+	    #endregion
 			
         #region Public Methods
 		public CredentialInfo Add(CredentialInfo credentialInfo)

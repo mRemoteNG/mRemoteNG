@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
-    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+    <DirectoryRef Id="INSTALLDIR">
       <Component Id="C.PuttyNGFile" Guid="*">
         <File Id="PuttyNGFile" Name="PuTTYNG.exe" Source="$(var.HarvestPath)\PuTTYNG.exe" KeyPath="yes" />
       </Component>

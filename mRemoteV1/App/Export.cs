@@ -73,7 +73,10 @@ namespace mRemoteNG.App
 			    switch (saveFormat)
 			    {
 			        case ConnectionsSaver.Format.mRXML:
-                        serializer = new XmlConnectionsSerializer();
+                        var factory = new CryptographyProviderFactory();
+                        var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
+                        cryptographyProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
+                        serializer = new XmlConnectionsSerializer(cryptographyProvider);
 			            ((XmlConnectionsSerializer) serializer).SaveFilter = saveFilter;
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:

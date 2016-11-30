@@ -16,11 +16,11 @@ namespace mRemoteNG.Config.Import
             Import(ldapPathAsString, destinationContainer);
         }
 
-        public void Import(string ldapPath, ContainerInfo destinationContainer)
+	    public static void Import(string ldapPath, ContainerInfo destinationContainer, bool importSubOU = false)
 		{
 			try
 			{
-				var deserializer = new ActiveDirectoryDeserializer(ldapPath);
+				var deserializer = new ActiveDirectoryDeserializer(ldapPath, importSubOU);
 			    var connectionTreeModel = deserializer.Deserialize();
                 var importedRootNode = connectionTreeModel.RootNodes.First();
                 if (importedRootNode == null) return;

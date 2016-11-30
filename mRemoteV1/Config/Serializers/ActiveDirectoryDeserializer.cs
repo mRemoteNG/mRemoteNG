@@ -2,6 +2,7 @@
 using System.DirectoryServices;
 using System.Text.RegularExpressions;
 using mRemoteNG.App;
+using mRemoteNG.Config.Import;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
@@ -13,10 +14,12 @@ namespace mRemoteNG.Config.Serializers
     public class ActiveDirectoryDeserializer : IDeserializer
     {
         private readonly string _ldapPath;
+        private readonly bool _importSubOU;
 
-        public ActiveDirectoryDeserializer(string ldapPath)
+        public ActiveDirectoryDeserializer(string ldapPath, bool importSubOU)
         {
             _ldapPath = ldapPath;
+            _importSubOU = importSubOU;
         }
 
         public ConnectionTreeModel Deserialize()
@@ -45,19 +48,30 @@ namespace mRemoteNG.Config.Serializers
         {
             try
             {
-                const string ldapFilter = "(objectClass=computer)";
+                const string ldapFilter = "(|(objectClass=computer)(objectClass=organizationalUnit))";
                 using (var ldapSearcher = new DirectorySearcher())
                 {
                     ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
                     ldapSearcher.Filter = ldapFilter;
                     ldapSearcher.SearchScope = SearchScope.OneLevel;
-                    ldapSearcher.PropertiesToLoad.AddRange(new[] { "securityEquals", "cn" });
+                    ldapSearcher.PropertiesToLoad.AddRange(new[] { "securityEquals", "cn", "objectClass" });
 
                     var ldapResults = ldapSearcher.FindAll();
                     foreach (SearchResult ldapResult in ldapResults)
                     {
                         using (var directoryEntry = ldapResult.GetDirectoryEntry())
+                        {
+                            if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
+                            {
+                                // check/continue here so we don't create empty connection objects
+                                if(!_importSubOU) continue;
+
+                                ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer);
+                                continue;
+                            }
+
                             DeserializeConnection(directoryEntry, parentContainer);
+                        }
                     }
                 }
             }

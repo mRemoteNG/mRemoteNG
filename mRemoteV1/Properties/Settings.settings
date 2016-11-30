@@ -465,7 +465,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SupportedUICultures" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,nb-NO,nl,pt,pt-BR,pl,ru,uk,zh-CN,zh-TW</Value>
+      <Value Profile="(Default)">de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-CN,zh-TW</Value>
     </Setting>
     <Setting Name="ConDefaultRDGatewayHostname" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -540,7 +540,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UpdateAddress" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://update.mremoteng.org/</Value>
+      <Value Profile="(Default)">https://mremoteng.org/</Value>
     </Setting>
     <Setting Name="ConDefaultLoadBalanceInfo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -577,6 +577,12 @@
     </Setting>
     <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="ConDefaultSoundQuality" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Dynamic</Value>
+    </Setting>
+    <Setting Name="InhDefaultSoundQuality" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

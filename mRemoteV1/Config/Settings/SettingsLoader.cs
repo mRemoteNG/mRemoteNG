@@ -16,22 +16,17 @@ namespace mRemoteNG.Config.Settings
 {
     public class SettingsLoader
 	{
-		private frmMain _mainForm;
-        private readonly LayoutSettingsLoader _layoutSettingsLoader;
+	    private readonly LayoutSettingsLoader _layoutSettingsLoader;
         private readonly ExternalAppsLoader _externalAppsLoader;
 
-        public frmMain MainForm
+	    private frmMain MainForm { get; set; }
+
+
+	    public SettingsLoader(frmMain mainForm)
 		{
-			get { return _mainForm; }
-			set { _mainForm = value; }
-		}
-		
-        
-		public SettingsLoader(frmMain mainForm)
-		{
-            _mainForm = mainForm;
-            _layoutSettingsLoader = new LayoutSettingsLoader(_mainForm);
-            _externalAppsLoader = new ExternalAppsLoader(_mainForm);
+            MainForm = mainForm;
+            _layoutSettingsLoader = new LayoutSettingsLoader(MainForm);
+            _externalAppsLoader = new ExternalAppsLoader(MainForm);
         }
         
         #region Public Methods
@@ -85,41 +80,40 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetSupportedCulture()
         {
-            if (mRemoteNG.Settings.Default.OverrideUICulture != "" && SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture))
-            {
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(mRemoteNG.Settings.Default.OverrideUICulture);
-                Logger.Instance.InfoFormat("Override Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
-            }
+            if (mRemoteNG.Settings.Default.OverrideUICulture == "" ||
+                !SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture)) return;
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(mRemoteNG.Settings.Default.OverrideUICulture);
+            Logger.Instance.InfoFormat("Override Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
         }
 
         private void SetApplicationWindowPositionAndSize()
         {
-            _mainForm.WindowState = FormWindowState.Normal;
+            MainForm.WindowState = FormWindowState.Normal;
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Normal)
             {
                 if (!mRemoteNG.Settings.Default.MainFormLocation.IsEmpty)
-                    _mainForm.Location = mRemoteNG.Settings.Default.MainFormLocation;
+                    MainForm.Location = mRemoteNG.Settings.Default.MainFormLocation;
                 if (!mRemoteNG.Settings.Default.MainFormSize.IsEmpty)
-                    _mainForm.Size = mRemoteNG.Settings.Default.MainFormSize;
+                    MainForm.Size = mRemoteNG.Settings.Default.MainFormSize;
             }
             else
             {
                 if (!mRemoteNG.Settings.Default.MainFormRestoreLocation.IsEmpty)
-                    _mainForm.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
+                    MainForm.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
                 if (!mRemoteNG.Settings.Default.MainFormRestoreSize.IsEmpty)
-                    _mainForm.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
+                    MainForm.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
             }
 
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Maximized)
             {
-                _mainForm.WindowState = FormWindowState.Maximized;
+                MainForm.WindowState = FormWindowState.Maximized;
             }
 
             // Make sure the form is visible on the screen
             const int minHorizontal = 300;
             const int minVertical = 150;
-            var screenBounds = Screen.FromHandle(_mainForm.Handle).Bounds;
-            var newBounds = _mainForm.Bounds;
+            var screenBounds = Screen.FromHandle(MainForm.Handle).Bounds;
+            var newBounds = MainForm.Bounds;
 
             if (newBounds.Right < screenBounds.Left + minHorizontal)
                 newBounds.X = screenBounds.Left + minHorizontal - newBounds.Width;
@@ -130,25 +124,21 @@ namespace mRemoteNG.Config.Settings
             if (newBounds.Top > screenBounds.Bottom - minVertical)
                 newBounds.Y = screenBounds.Bottom - minVertical;
 
-            _mainForm.Location = newBounds.Location;
+            MainForm.Location = newBounds.Location;
         }
 
         private void SetAutoSave()
         {
-            if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes > 0)
-            {
-                _mainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
-                _mainForm.tmrAutoSave.Enabled = true;
-            }
+            if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes <= 0) return;
+            MainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
+            MainForm.tmrAutoSave.Enabled = true;
         }
 
         private void SetKioskMode()
         {
-            if (mRemoteNG.Settings.Default.MainFormKiosk)
-            {
-                _mainForm.Fullscreen.Value = true;
-                _mainForm.mMenViewFullscreen.Checked = true;
-            }
+            if (!mRemoteNG.Settings.Default.MainFormKiosk) return;
+            MainForm.Fullscreen.Value = true;
+            MainForm.mMenViewFullscreen.Checked = true;
         }
 
         private static void SetShowSystemTrayIcon()
@@ -159,10 +149,7 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetPuttyPath()
         {
-            if (mRemoteNG.Settings.Default.UseCustomPuttyPath)
-                PuttyBase.PuttyPath = Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath);
-            else
-                PuttyBase.PuttyPath = GeneralAppInfo.PuttyPath;
+            PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath) : GeneralAppInfo.PuttyPath;
         }
 
         private static void EnsureSettingsAreSavedInNewestVersion()
@@ -187,16 +174,16 @@ namespace mRemoteNG.Config.Settings
             // needs to be cleared here because we know that we just updated.
             mRemoteNG.Settings.Default.UpdatePending = false;
         }
-		
-		public void SetToolbarsDefault()
+
+	    private void SetToolbarsDefault()
 		{
 			ToolStripPanelFromString("top").Join(MainForm.tsQuickConnect, new Point(300, 0));
 			MainForm.tsQuickConnect.Visible = true;
 			ToolStripPanelFromString("bottom").Join(MainForm.tsExternalTools, new Point(3, 0));
 			MainForm.tsExternalTools.Visible = false;
 		}
-		
-		public void LoadToolbarsFromSettings()
+
+	    private void LoadToolbarsFromSettings()
 		{
 			if (mRemoteNG.Settings.Default.QuickyTBLocation.X > mRemoteNG.Settings.Default.ExtAppsTBLocation.X)
 			{
@@ -238,13 +225,13 @@ namespace mRemoteNG.Config.Settings
 					return MainForm.tsContainer.TopToolStripPanel;
 			}
 		}
-		
-		public void LoadPanelsFromXml()
+
+	    private void LoadPanelsFromXml()
 		{
             _layoutSettingsLoader.LoadPanelsFromXml();
 		}
-		
-		public void LoadExternalAppsFromXml()
+
+	    private void LoadExternalAppsFromXml()
 		{
             _externalAppsLoader.LoadExternalAppsFromXML();
         }

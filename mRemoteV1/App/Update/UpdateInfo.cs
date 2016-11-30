@@ -12,6 +12,7 @@ namespace mRemoteNG.App.Update
         public Uri ImageAddress { get; private set; }
         public Uri ImageLinkAddress { get; private set; }
         public string CertificateThumbprint { get; private set; }
+        public string FileName { get; private set; }
 
         public static UpdateInfo FromString(string input)
         {
@@ -29,6 +30,7 @@ namespace mRemoteNG.App.Update
                 newInfo.ImageAddress = updateFile.GetUri("imgURL");
                 newInfo.ImageLinkAddress = updateFile.GetUri("imgURLLink");
                 newInfo.CertificateThumbprint = updateFile.GetThumbprint("CertificateThumbprint");
+                newInfo.FileName = updateFile.GetFileName();
                 newInfo.IsValid = true;
             }
             return newInfo;

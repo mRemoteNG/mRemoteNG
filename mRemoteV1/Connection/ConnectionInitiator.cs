@@ -14,17 +14,12 @@ namespace mRemoteNG.Connection
 {
     public static class ConnectionInitiator
     {
-        public static void OpenConnection(ContainerInfo containerInfo)
-        {
-            OpenConnection(containerInfo, ConnectionInfo.Force.None);
-        }
-
-        public static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force)
+        public static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
             OpenConnection(containerInfo, force, null);
         }
 
-        public static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
+        private static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
         {
             var children = containerInfo.Children;
             if (children.Count == 0) return;
@@ -62,7 +57,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        public static void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+        private static void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
         {
             try
             {
@@ -115,52 +110,40 @@ namespace mRemoteNG.Connection
 
         private static void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
         {
-            if (connectionInfo.PreExtApp != "")
-            {
-                var extA = Runtime.GetExtAppByName(connectionInfo.PreExtApp);
-                extA?.Start(connectionInfo);
-            }
+            if (connectionInfo.PreExtApp == "") return;
+            var extA = Runtime.GetExtAppByName(connectionInfo.PreExtApp);
+            extA?.Start(connectionInfo);
         }
 
         public static bool SwitchToOpenConnection(ConnectionInfo nCi)
         {
             var IC = FindConnectionContainer(nCi);
-            if (IC != null)
-            {
-                var connectionWindow = (ConnectionWindow)IC.FindForm();
-                connectionWindow?.Focus();
-                var findForm = (ConnectionWindow)IC.FindForm();
-                findForm?.Show(frmMain.Default.pnlDock);
-                var tabPage = (TabPage)IC.Parent;
-                tabPage.Selected = true;
-                return true;
-            }
-            return false;
+            if (IC == null) return false;
+            var connectionWindow = (ConnectionWindow)IC.FindForm();
+            connectionWindow?.Focus();
+            var findForm = (ConnectionWindow)IC.FindForm();
+            findForm?.Show(frmMain.Default.pnlDock);
+            var tabPage = (TabPage)IC.Parent;
+            tabPage.Selected = true;
+            return true;
         }
 
         private static InterfaceControl FindConnectionContainer(ConnectionInfo connectionInfo)
         {
-            if (connectionInfo.OpenConnections.Count > 0)
+            if (connectionInfo.OpenConnections.Count <= 0) return null;
+            for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
             {
-                for (int i = 0; i <= Runtime.WindowList.Count - 1; i++)
+                var window = Runtime.WindowList[i] as ConnectionWindow;
+                var connectionWindow = window;
+                if (connectionWindow?.TabController == null) continue;
+                foreach (TabPage t in connectionWindow.TabController.TabPages)
                 {
-                    if (Runtime.WindowList[i] is ConnectionWindow)
+                    var ic = t.Controls[0] as InterfaceControl;
+                    if (ic == null) continue;
+                    var IC = ic;
+                    if (IC.Info == connectionInfo)
                     {
-                        var connectionWindow = (ConnectionWindow)Runtime.WindowList[i];
-                        if (connectionWindow.TabController != null)
-                        {
-                            foreach (TabPage t in connectionWindow.TabController.TabPages)
-                            {
-                                if (t.Controls[0] != null && t.Controls[0] is InterfaceControl)
-                                {
-                                    var IC = (InterfaceControl)t.Controls[0];
-                                    if (IC.Info == connectionInfo)
-                                    {
-                                        return IC;
-                                    }
-                                }
-                            }
-                        }
+                        return IC;
                     }
                 }
             }
@@ -169,10 +152,10 @@ namespace mRemoteNG.Connection
 
         private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force Force)
         {
-            string connectionPanel = "";
+            var connectionPanel = "";
             if (connectionInfo.Panel == "" || (Force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | Settings.Default.AlwaysShowPanelSelectionDlg)
             {
-                frmChoosePanel frmPnl = new frmChoosePanel();
+                var frmPnl = new frmChoosePanel();
                 if (frmPnl.ShowDialog() == DialogResult.OK)
                 {
                     connectionPanel = frmPnl.Panel;

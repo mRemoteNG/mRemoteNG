@@ -185,12 +185,10 @@ namespace mRemoteNG.UI.Controls
 				
 			public ConnectRequestedEventArgs(string connectionString)
 			{
-				_connectionString = connectionString;
+				ConnectionString = connectionString;
 			}
-				
-			private string _connectionString;
-				
-            public string ConnectionString => _connectionString;
+
+		    public string ConnectionString { get; }
 		}
 			
 		public delegate void ConnectRequestedEventHandler(object sender, ConnectRequestedEventArgs e);
@@ -219,12 +217,10 @@ namespace mRemoteNG.UI.Controls
 				
 			public ProtocolChangedEventArgs(ProtocolType protocol)
 			{
-				_protocol = protocol;
+				Protocol = protocol;
 			}
-				
-			private ProtocolType _protocol;
-				
-            public ProtocolType Protocol => _protocol;
+
+		    public ProtocolType Protocol { get; }
 		}
 			
 		public delegate void ProtocolChangedEventHandler(object sender, ProtocolChangedEventArgs e);

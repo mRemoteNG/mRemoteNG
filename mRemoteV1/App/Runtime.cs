@@ -5,6 +5,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Window;
 using System;
 using System.Collections;
@@ -15,6 +16,7 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
@@ -37,8 +39,7 @@ namespace mRemoteNG.App
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static DateTime LastSqlUpdate { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
-        public static SecureString DefaultEncryptionKey { get; } = "mR3m".ConvertToSecureString();
-        public static SecureString EncryptionKey { get; set; } = DefaultEncryptionKey;
+        public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
         {
             get { return Windows.TreeForm.ConnectionTreeModel; }
@@ -148,11 +149,13 @@ namespace mRemoteNG.App
 
                 for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
                 {
-                    var cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1));
-                    cMenScreen.Tag = new ArrayList();
-                    cMenScreen.Image = Resources.Monitor_GoTo;
-                    (cMenScreen.Tag as ArrayList).Add(Screen.AllScreens[i]);
-                    (cMenScreen.Tag as ArrayList).Add(cMenScreens.Tag);
+                    var cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1))
+                    {
+                        Tag = new ArrayList(),
+                        Image = Resources.Monitor_GoTo
+                    };
+                    ((ArrayList) cMenScreen.Tag).Add(Screen.AllScreens[i]);
+                    ((ArrayList) cMenScreen.Tag).Add(cMenScreens.Tag);
                     cMenScreen.Click += cMenConnectionPanelScreen_Click;
                     cMenScreens.DropDownItems.Add(cMenScreen);
                 }
@@ -174,9 +177,10 @@ namespace mRemoteNG.App
                 {
                     foreach (var obj in tagEnumeration)
                     {
-                        if (obj is Screen)
+                        var screen1 = obj as Screen;
+                        if (screen1 != null)
                         {
-                            screen = (Screen)obj;
+                            screen = screen1;
                         }
                         else if (obj is DockContent)
                         {
@@ -215,23 +219,19 @@ namespace mRemoteNG.App
                     Directory.CreateDirectory(dirname);
 
                 // Use File.Open with FileMode.CreateNew so that we don't overwrite an existing file
-                using (var fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                var fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                using (var xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
                 {
-                    using (var xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
-                    {
-                        xmlTextWriter.Formatting = Formatting.Indented;
-                        xmlTextWriter.Indentation = 4;
-                        xmlTextWriter.WriteStartDocument();
-                        xmlTextWriter.WriteStartElement("Connections"); // Do not localize
-                        xmlTextWriter.WriteAttributeString("Name", Language.strConnections);
-                        xmlTextWriter.WriteAttributeString("Export", "", "False");
-                        xmlTextWriter.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY");
-                        xmlTextWriter.WriteAttributeString("ConfVersion", "", "2.5");
-                        xmlTextWriter.WriteEndElement();
-                        xmlTextWriter.WriteEndDocument();
-                        xmlTextWriter.Close();
-                    }
-
+                    xmlTextWriter.Formatting = Formatting.Indented;
+                    xmlTextWriter.Indentation = 4;
+                    xmlTextWriter.WriteStartDocument();
+                    xmlTextWriter.WriteStartElement("Connections"); // Do not localize
+                    xmlTextWriter.WriteAttributeString("Name", Language.strConnections);
+                    xmlTextWriter.WriteAttributeString("Export", "", "False");
+                    xmlTextWriter.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY");
+                    xmlTextWriter.WriteAttributeString("ConfVersion", "", "2.5");
+                    xmlTextWriter.WriteEndElement();
+                    xmlTextWriter.WriteEndDocument();
                 }
 
                 // Load config
@@ -421,30 +421,26 @@ namespace mRemoteNG.App
 
         public static void SaveConnectionsAsync()
         {
-            _saveUpdate = true;
             var t = new Thread(SaveConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
 
-        private static bool _saveUpdate;
         private static readonly object SaveLock = new object();
         private static void SaveConnectionsBGd()
         {
             Monitor.Enter(SaveLock);
-            SaveConnections(_saveUpdate);
+            SaveConnections();
             Monitor.Exit(SaveLock);
         }
 
-        public static void SaveConnections(bool update = false)
+        public static void SaveConnections()
         {
             if (ConnectionTreeModel == null) return;
+            if (!IsConnectionsFileLoaded) return;
 
             try
             {
-                if (update && Settings.Default.UseSQLServer == false)
-                    return;
-
                 RemoteConnectionsSyncronizer?.Disable();
 
                 var connectionsSaver = new ConnectionsSaver();

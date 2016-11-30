@@ -1,4 +1,7 @@
-﻿using mRemoteNG.Security;
+﻿using System;
+using System.Collections;
+using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
 
 
@@ -21,92 +24,42 @@ namespace mRemoteNGTests.Security
             _cryptographyProviderFactory = null;
         }
 
-        [Test]
-        public void CanCreateAesGcm()
+        [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
+        public void CanCreateAeadProvidersWithCorrectEngine(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var engine = BlockCipherEngines.AES;
-            var mode = BlockCipherModes.GCM;
             var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
+            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo(engine));
         }
 
-        [Test]
-        public void CanCreateAesCcm()
+        [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
+        public void CanCreateAeadProvidersWithCorrectMode(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var engine = BlockCipherEngines.AES;
-            var mode = BlockCipherModes.CCM;
             var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
-        }
-
-        [Test]
-        public void CanCreateAesEax()
-        {
-            var engine = BlockCipherEngines.AES;
-            var mode = BlockCipherModes.EAX;
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
-        }
-
-        [Test]
-        public void CanCreateSerpentGcm()
-        {
-            var engine = BlockCipherEngines.Serpent;
-            var mode = BlockCipherModes.GCM;
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
-        }
-
-        [Test]
-        public void CanCreateSerpentCcm()
-        {
-            var engine = BlockCipherEngines.Serpent;
-            var mode = BlockCipherModes.CCM;
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
-        }
-
-        [Test]
-        public void CanCreateSerpentEax()
-        {
-            var engine = BlockCipherEngines.Serpent;
-            var mode = BlockCipherModes.EAX;
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
-        }
-
-        [Test]
-        public void CanCreateTwofishCcm()
-        {
-            var engine = BlockCipherEngines.Twofish;
-            var mode = BlockCipherModes.CCM;
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
-        }
-
-        [Test]
-        public void CanCreateTwofishEax()
-        {
-            var engine = BlockCipherEngines.Twofish;
-            var mode = BlockCipherModes.EAX;
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
-        }
-
-        [Test]
-        public void CanCreateTwofishGcm()
-        {
-            var engine = BlockCipherEngines.Twofish;
-            var mode = BlockCipherModes.GCM;
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
+            Assert.That(cryptoProvider.CipherMode, Is.EqualTo(mode));
         }
 
         [Test]
         public void CanCreateLegacyRijndael()
         {
             var cryptoProvider = _cryptographyProviderFactory.CreateLegacyRijndaelCryptographyProvider();
-            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo("Rijndael"));
+            Assert.That(cryptoProvider, Is.TypeOf<LegacyRijndaelCryptographyProvider>());
+        }
+
+        private class TestCaseSources
+        {
+            public static IEnumerable AllEngineAndModeCombos
+            {
+                get
+                {
+                    foreach (var engine in Enum.GetValues(typeof(BlockCipherEngines)))
+                    {
+                        foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
+                        {
+                            yield return new TestCaseData(engine, mode);
+                        }
+                    }
+                }
+            }
         }
     }
 }

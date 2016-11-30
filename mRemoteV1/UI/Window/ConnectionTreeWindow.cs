@@ -92,7 +92,7 @@ namespace mRemoteNG.UI.Window
 	        dropSink.CanDropBetween = true;
 	    }
 
-	    private object ConnectionImageGetter(object rowObject)
+	    private static object ConnectionImageGetter(object rowObject)
 	    {
             if (rowObject is RootPuttySessionsNodeInfo) return "PuttySessions";
             if (rowObject is RootNodeInfo) return "Root";
@@ -194,7 +194,7 @@ namespace mRemoteNG.UI.Window
             _contextMenu.ImportFileClicked += (sender, args) =>
             {
                 var selectedNodeAsContainer = SelectedNode as ContainerInfo ?? SelectedNode.Parent;
-                Import.ImportFromFile(selectedNodeAsContainer, true);
+                Import.ImportFromFile(selectedNodeAsContainer);
             };
             _contextMenu.ImportActiveDirectoryClicked += (sender, args) => Windows.Show(WindowType.ActiveDirectoryImport);
             _contextMenu.ImportPortScanClicked += (sender, args) => Windows.Show(WindowType.PortScan);
@@ -316,7 +316,7 @@ namespace mRemoteNG.UI.Window
         }
         #endregion
 
-        public void ExpandPreviouslyOpenedFolders()
+	    private void ExpandPreviouslyOpenedFolders()
         {
             var containerList = ConnectionTreeModel.GetRecursiveChildList(GetRootConnectionNode()).OfType<ContainerInfo>();
             var previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
@@ -324,7 +324,7 @@ namespace mRemoteNG.UI.Window
             olvConnections.InvokeRebuildAll(true);
         }
 
-        public void OpenConnectionsFromLastSession()
+	    private void OpenConnectionsFromLastSession()
         {
             if (!Settings.Default.OpenConsFromLastSession || Settings.Default.NoReconnect) return;
             var connectionInfoList = GetRootConnectionNode().GetRecursiveChildList().Where(node => !(node is ContainerInfo));
@@ -389,7 +389,7 @@ namespace mRemoteNG.UI.Window
             return PromptUser(messagePrompt);
         }
 
-        private bool PromptUser(string promptMessage)
+        private static bool PromptUser(string promptMessage)
         {
             var msgBoxResponse = MessageBox.Show(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return (msgBoxResponse == DialogResult.Yes);
@@ -407,7 +407,7 @@ namespace mRemoteNG.UI.Window
 			{
 				_contextMenu.EnableShortcutKeys();
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-                Windows.ConfigForm.pGrid_SelectedObjectChanged(SelectedNode);
+			    Windows.ConfigForm.SelectedTreeNode = SelectedNode;
                 Runtime.SaveConnectionsAsync();
 			}
 			catch (Exception ex)
@@ -420,7 +420,7 @@ namespace mRemoteNG.UI.Window
 		{
             try
             {
-                Windows.ConfigForm.SetPropertyGridObject(SelectedNode);
+                Windows.ConfigForm.SelectedTreeNode = SelectedNode;
             }
             catch (Exception ex)
             {
@@ -452,8 +452,13 @@ namespace mRemoteNG.UI.Window
         private void tvConnections_NodeMouseDoubleClick(object sender, CellClickEventArgs e)
         {
             if (e.ClickCount < 2) return;
+            var clickedNodeAsContainer = e.Model as ContainerInfo;
+            if (clickedNodeAsContainer != null)
+            {
+                olvConnections.ToggleExpansion(clickedNodeAsContainer);
+            }
+
             var clickedNode = e.Model as ConnectionInfo;
-            
             if (clickedNode?.GetTreeNodeType() == TreeNodeType.Connection |
                 clickedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
 			{
@@ -477,13 +482,14 @@ namespace mRemoteNG.UI.Window
 	    private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
 	    {
 	        var senderAsContainerInfo = sender as ContainerInfo;
+	        // ReSharper disable once SwitchStatementMissingSomeCases
 	        switch (args?.Action)
 	        {
 	            case NotifyCollectionChangedAction.Add:
 	                var childList = senderAsContainerInfo?.Children;
 	                ConnectionInfo otherChild = null;
                     if (childList?.Count > 1)
-                        try { otherChild = childList.First(child => !args.NewItems.Contains(child)); } catch { }
+                        otherChild = childList.First(child => !args.NewItems.Contains(child)); 
 	                RefreshTreeObject(otherChild ?? senderAsContainerInfo);
 	                break;
 	            case NotifyCollectionChangedAction.Remove:
@@ -509,13 +515,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void RefreshTreeObjects(IList modelObjects)
 	    {
-	        try
-	        {
-                olvConnections.RefreshObjects(modelObjects);
-            }
-	        catch (Exception)
-	        {
-	        }
+            olvConnections.RefreshObjects(modelObjects);
 	    }
         #endregion
 
@@ -725,12 +725,15 @@ namespace mRemoteNG.UI.Window
 
 	    private void ExpandParentsRecursive(ConnectionInfo connectionInfo)
 	    {
-            if (connectionInfo?.Parent == null) return;
-	        olvConnections.Expand(connectionInfo.Parent);
-            ExpandParentsRecursive(connectionInfo.Parent);
-        }
+	        while (true)
+	        {
+	            if (connectionInfo?.Parent == null) return;
+	            olvConnections.Expand(connectionInfo.Parent);
+	            connectionInfo = connectionInfo.Parent;
+	        }
+	    }
 
-        private void tvConnections_KeyPress(object sender, KeyPressEventArgs e)
+	    private void tvConnections_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			try
 			{

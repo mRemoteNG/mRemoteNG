@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Container;
-using mRemoteNGTests.Config.Serializers;
-using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
 
@@ -57,6 +54,15 @@ namespace mRemoteNGTests.Connection
             var secondConnection = new ConnectionInfo {Domain = TestDomain};
             _connectionInfo.CopyFrom(secondConnection);
             Assert.That(_connectionInfo.Domain, Is.EqualTo(secondConnection.Domain));
+        }
+
+        [Test]
+        public void CopyingAConnectionInfoAlsoCopiesItsInheritance()
+        {
+            _connectionInfo.Inheritance.Username = true;
+            var secondConnection = new ConnectionInfo {Inheritance = {Username = false}};
+            secondConnection.CopyFrom(_connectionInfo);
+            Assert.That(secondConnection.Inheritance.Username, Is.True);
         }
 
         [Test]

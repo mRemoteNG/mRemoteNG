@@ -1,7 +1,6 @@
 ﻿using log4net;
 using log4net.Appender;
 using log4net.Config;
-using log4net.Repository;
 #if !PORTABLE
 using System;
 #endif
@@ -29,12 +28,12 @@ namespace mRemoteNG.App
         private void Initialize()
         {
             XmlConfigurator.Configure();
-            string logFile = BuildLogFilePath();
+            var logFile = BuildLogFilePath();
 
-            ILoggerRepository repository = LogManager.GetRepository();
-            IAppender[] appenders = repository.GetAppenders();
+            var repository = LogManager.GetRepository();
+            var appenders = repository.GetAppenders();
 
-            foreach (IAppender appender in appenders)
+            foreach (var appender in appenders)
             {
                 var fileAppender = (RollingFileAppender)appender;
                 if (fileAppender == null || fileAppender.Name != "LogFileAppender") continue;
@@ -47,12 +46,12 @@ namespace mRemoteNG.App
         private static string BuildLogFilePath()
         {
 #if !PORTABLE
-			string logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
+			var logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
 #else
-            string logFilePath = Application.StartupPath;
+            var logFilePath = Application.StartupPath;
 #endif
-            string logFileName = Path.ChangeExtension(Application.ProductName, ".log");
-            string logFile = Path.Combine(logFilePath, logFileName);
+            var logFileName = Path.ChangeExtension(Application.ProductName, ".log");
+            var logFile = Path.Combine(logFilePath, logFileName);
             return logFile;
         }
     }

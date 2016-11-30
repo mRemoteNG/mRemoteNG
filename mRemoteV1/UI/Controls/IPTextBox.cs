@@ -83,7 +83,9 @@ namespace mRemoteNG.UI.Controls
 		{
 			if( disposing )
 			{
-			    components?.Dispose();
+			    // ReSharper disable once UseNullPropagation
+                if(components != null)
+			        components.Dispose();
 			}
 		    base.Dispose( disposing );
 		}
