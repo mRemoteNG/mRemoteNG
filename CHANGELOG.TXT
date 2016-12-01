@@ -1,4 +1,4 @@
-1.75 Beta 2 (2016-xx-xx):
+1.75 Beta 2 (2016-12-01):
 
 Features/Enhancements:
 ----------------------
