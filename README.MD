@@ -9,6 +9,8 @@
 [![Issues In Progress](https://badge.waffle.io/mRemoteNG/mRemoteNG.png?label=In%20Progress&title=In%20Progress)](https://waffle.io/mRemoteNG/mRemoteNG)
 [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.74/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.74)
 
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge)](https://bestpractices.coreinfrastructure.org/projects/529)
+
 
 mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
 
