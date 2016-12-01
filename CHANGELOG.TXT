@@ -1,3 +1,10 @@
+1.75 Beta 3 (2016-12-01):
+
+Fixes:
+------
+#289: Install fails during update process (only affects v1.75 beta 1 - v1.75 beta 2)
+
+
 1.75 Beta 2 (2016-12-01):
 
 Features/Enhancements:
