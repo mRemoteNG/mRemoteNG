@@ -1,5 +1,6 @@
 ﻿#Requires -Version 4.0
 
+$releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
 $tag = Read-Host -Prompt 'Tag name'
 
 Write-Host
@@ -8,7 +9,7 @@ Write-Host
 
 Write-Host PORTABLE
 Write-Host --------
-$file = gci ..\Release\*.zip | sort LastWriteTime | select -last 1 | % { $_.FullName }
+$file = Get-ChildItem -Path "$releaseFolder\*.zip" | sort LastWriteTime | select -last 1 | % { $_.FullName }
 $filename = $file.Split("\") | select -last 1
 
 $version = $file.tostring().Split("-")[2].trim(".zip")
@@ -27,7 +28,7 @@ Write-Host
 
 Write-Host MSI
 Write-Host ---
-$file = gci ..\Release\*.msi | sort LastWriteTime | select -last 1 | % { $_.FullName }
+$file = Get-ChildItem -Path "$releaseFolder\*.msi" | sort LastWriteTime | select -last 1 | % { $_.FullName }
 $filename = $file.Split("\") | select -last 1
 
 $version = $file.tostring().Split("-")[2].trim(".msi")
