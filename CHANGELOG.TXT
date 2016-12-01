@@ -4,6 +4,10 @@ Fixes:
 ------
 #289: Install fails during update process (only affects v1.75 beta 1 - v1.75 beta 2)
 
+Known Issue:
+------------
+Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versions.
+
 
 1.75 Beta 2 (2016-12-01):
 
