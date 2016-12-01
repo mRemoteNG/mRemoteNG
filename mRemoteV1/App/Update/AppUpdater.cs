@@ -120,7 +120,7 @@ namespace mRemoteNG.App.Update
 				throw new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().");
 			}
 #if !PORTABLE
-            CurrentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "exe"));
+            CurrentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "msi"));
 #else
 		    var sfd = new SaveFileDialog
 		    {
