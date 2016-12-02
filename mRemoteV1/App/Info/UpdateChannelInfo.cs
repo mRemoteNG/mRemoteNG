@@ -10,11 +10,17 @@
                 /*                                   */
                 /* return PORTABLE update files here */
                 /*                                   */
-#if DEBUG
-                return "update-portable-debug.txt";
-#else
-                return Settings.Default.UpdateChannel.ToLowerInvariant() == "debug" ? "update-portable-debug.txt" : "update-portable.txt";
-#endif 
+                switch (Settings.Default.UpdateChannel)
+                {
+                    case "Final":
+                        return "update-portable.txt";
+                    case "Beta":
+                        return "beta-update-portable.txt";
+                    case "Pre-Release":
+                        return "prere-update-portable.txt";
+                    default:
+                        return "update-portable.txt";
+                }
             }
 #else //NOT portable
             get
@@ -22,11 +28,17 @@
                 /*                                    */
                 /* return INSTALLER update files here */
                 /*                                    */
-#if DEBUG
-				return "update-debug.txt";
-#else
-                return Settings.Default.UpdateChannel.ToLowerInvariant() == "debug" ? "update-debug.txt" : "update.txt";
-#endif
+                switch (Settings.Default.UpdateChannel)
+                {
+                    case "Final":
+                        return "update.txt";
+                    case "Beta":
+                        return "beta-update.txt";
+                    case "Pre-Release":
+                        return "prere-update.txt";
+                    default:
+                        return "update.txt";
+                }
             }
 #endif //endif for PORTABLE
         }

@@ -2099,12 +2099,15 @@ namespace mRemoteNG {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("release")]
         public string UpdateChannel {
             get {
                 return ((string)(this["UpdateChannel"]));
+            }
+            set {
+                this["UpdateChannel"] = value;
             }
         }
         

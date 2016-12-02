@@ -84,6 +84,25 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
             }
 
+            var fin = cboReleaseChannel.Items.Add("Final");
+            var beta = cboReleaseChannel.Items.Add("Beta");
+            var prere = cboReleaseChannel.Items.Add("Pre-Release");
+            switch (Settings.Default.UpdateChannel)
+            {
+                case "Final":
+                    cboReleaseChannel.SelectedIndex = fin;
+                    break;
+                case "Beta":
+                    cboReleaseChannel.SelectedIndex = beta;
+                    break;
+                case "Pre-Release":
+                    cboReleaseChannel.SelectedIndex = prere;
+                    break;
+                default:
+                    cboReleaseChannel.SelectedIndex = fin;
+                    break;
+            }
+
             chkUseProxyForAutomaticUpdates.Checked = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
             pnlProxyBasic.Enabled = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
             txtProxyAddress.Text = Convert.ToString(Settings.Default.UpdateProxyAddress);
@@ -115,6 +134,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 Settings.Default.CheckForUpdatesFrequencyDays = 31;
             }
+
+            Settings.Default.UpdateChannel = cboReleaseChannel.Text;
 
             Settings.Default.UpdateUseProxy = chkUseProxyForAutomaticUpdates.Checked;
             Settings.Default.UpdateProxyAddress = txtProxyAddress.Text;
