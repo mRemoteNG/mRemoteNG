@@ -27,26 +27,26 @@ namespace mRemoteNG.Config.Settings
             var xDom = new XmlDocument();
             if (File.Exists(newPath))
             {
-                // TODO: Log message here
+                Logger.Instance.Info($"Loading External Apps from: {newPath}");
                 xDom.Load(newPath);
             }
 #if !PORTABLE
 			else if (File.Exists(oldPath))
 			{
-                // TODO: Log message here
+                Logger.Instance.Info($"Loading External Apps from: {oldPath}");
                 xDom.Load(oldPath);
 
 			}
 #endif
             else
             {
-                // TODO: Log message here
+                Logger.Instance.Warn("Loading External Apps failed: Could not FIND file!");
                 return;
             }
 
             if (xDom.DocumentElement == null)
             {
-                // TODO: Log message here
+                Logger.Instance.Warn("Loading External Apps failed: Could not LOAD file!");
                 return;
             }
 
@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Settings
                     extA.TryIntegrate = bool.Parse(xEl.Attributes["TryToIntegrate"].Value);
                 }
 
-                // TODO: Log message here
+                Logger.Instance.Info($"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}");
                 Runtime.ExternalTools.Add(extA);
             }
 
