@@ -2,6 +2,10 @@
 {
     public static class UpdateChannelInfo
     {
+        internal const string STABLE = "Stable";
+        internal const string BETA = "Beta";
+        internal const string DEV = "Development";
+
         public static string FileName
         {
 #if PORTABLE
@@ -12,12 +16,12 @@
                 /*                                   */
                 switch (Settings.Default.UpdateChannel)
                 {
-                    case "Final":
+                    case STABLE:
                         return "update-portable.txt";
-                    case "Beta":
+                    case BETA:
                         return "beta-update-portable.txt";
-                    case "Pre-Release":
-                        return "prere-update-portable.txt";
+                    case DEV:
+                        return "dev-update-portable.txt";
                     default:
                         return "update-portable.txt";
                 }
@@ -30,12 +34,12 @@
                 /*                                    */
                 switch (Settings.Default.UpdateChannel)
                 {
-                    case "Final":
+                    case STABLE:
                         return "update.txt";
-                    case "Beta":
+                    case BETA:
                         return "beta-update.txt";
-                    case "Pre-Release":
-                        return "prere-update.txt";
+                    case DEV:
+                        return "dev-update.txt";
                     default:
                         return "update.txt";
                 }

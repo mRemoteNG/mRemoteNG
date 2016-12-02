@@ -85,14 +85,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.Control;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(226, 78);
+            this.textBox1.Location = new System.Drawing.Point(226, 68);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(366, 34);
+            this.textBox1.Size = new System.Drawing.Size(366, 44);
             this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "Beta channel includes Release Candidates.\r\nPre-Release Channel includes Alphas an" +
-    "d Beta Channel releases.";
+            this.textBox1.Text = "Stable channel includes final releases only.\r\nBeta channel includes Betas & Relea" +
+    "se Candidates.\r\nDevelopment Channel includes Alphas, Betas & Release Candidates." +
+    "";
             // 
             // lblReleaseChannel
             // 

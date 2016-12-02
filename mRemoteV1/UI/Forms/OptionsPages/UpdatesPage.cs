@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
 using mRemoteNG.App.Update;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
@@ -84,22 +85,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
             }
 
-            var fin = cboReleaseChannel.Items.Add("Final");
-            var beta = cboReleaseChannel.Items.Add("Beta");
-            var prere = cboReleaseChannel.Items.Add("Pre-Release");
+            var stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
+            var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.BETA);
+            var dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.DEV);
             switch (Settings.Default.UpdateChannel)
             {
-                case "Final":
-                    cboReleaseChannel.SelectedIndex = fin;
+                case UpdateChannelInfo.STABLE:
+                    cboReleaseChannel.SelectedIndex = stable;
                     break;
-                case "Beta":
+                case UpdateChannelInfo.BETA:
                     cboReleaseChannel.SelectedIndex = beta;
                     break;
-                case "Pre-Release":
-                    cboReleaseChannel.SelectedIndex = prere;
+                case UpdateChannelInfo.DEV:
+                    cboReleaseChannel.SelectedIndex = dev;
                     break;
                 default:
-                    cboReleaseChannel.SelectedIndex = fin;
+                    cboReleaseChannel.SelectedIndex = stable;
                     break;
             }
 
