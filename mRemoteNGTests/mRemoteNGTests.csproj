@@ -157,6 +157,7 @@
     <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
     <Compile Include="UI\Forms\PasswordFormTests.cs" />
     <Compile Include="UI\WindowListTests.cs" />
+    <Compile Include="UI\Window\ConnectionTreeWindowTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
