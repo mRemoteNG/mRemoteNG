@@ -22,14 +22,12 @@ namespace mRemoteNG.App
 {
     public class Startup
     {
-        private CompatibilityChecker _compatibilityChecker;
         private AppUpdater _appUpdate;
 
         public static Startup Instance { get; } = new Startup();
 
         private Startup()
         {
-            _compatibilityChecker = new CompatibilityChecker();
             _appUpdate = new AppUpdater();
         }
 
@@ -41,12 +39,12 @@ namespace mRemoteNG.App
         {
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
             LogStartupData();
-            _compatibilityChecker.CheckCompatibility();
+            CompatibilityChecker.CheckCompatibility();
             ParseCommandLineArgs();
             IeBrowserEmulation.Register();
             GetConnectionIcons();
-            DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, (a)=>"ConDefault"+a);
-            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, (a)=>"InhDefault"+a);
+            DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a=>"ConDefault"+a);
+            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a=>"InhDefault"+a);
         }
 
         public void SetDefaultLayout()
@@ -67,23 +65,23 @@ namespace mRemoteNG.App
             frmMain.Default.pnlDock.Visible = true;
         }
 
-        private void GetConnectionIcons()
+        private static void GetConnectionIcons()
         {
-            string iPath = GeneralAppInfo.HomePath + "\\Icons\\";
+            var iPath = GeneralAppInfo.HomePath + "\\Icons\\";
             if (Directory.Exists(iPath) == false)
             {
                 return;
             }
 
-            foreach (string f in Directory.GetFiles(iPath, "*.ico", SearchOption.AllDirectories))
+            foreach (var f in Directory.GetFiles(iPath, "*.ico", SearchOption.AllDirectories))
             {
-                FileInfo fInfo = new FileInfo(f);
+                var fInfo = new FileInfo(f);
                 Array.Resize(ref ConnectionIcon.Icons, ConnectionIcon.Icons.Length + 1);
                 ConnectionIcon.Icons.SetValue(fInfo.Name.Replace(".ico", ""), ConnectionIcon.Icons.Length - 1);
             }
         }
 
-        private void LogStartupData()
+        private static void LogStartupData()
         {
             if (!Settings.Default.WriteLogFile) return;
             LogApplicationData();
@@ -93,17 +91,17 @@ namespace mRemoteNG.App
             LogCultureData();
         }
 
-        private void LogSystemData()
+        private static void LogSystemData()
         {
-            string osData = GetOperatingSystemData();
-            string architecture = GetArchitectureData();
+            var osData = GetOperatingSystemData();
+            var architecture = GetArchitectureData();
             Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
         }
 
-        private string GetOperatingSystemData()
+        private static string GetOperatingSystemData()
         {
-            string osVersion = string.Empty;
-            string servicePack = string.Empty;
+            var osVersion = string.Empty;
+            var servicePack = string.Empty;
 
             try
             {
@@ -118,13 +116,13 @@ namespace mRemoteNG.App
             {
                 Logger.Instance.WarnFormat($"Error retrieving operating system information from WMI. {ex.Message}");
             }
-            string osData = string.Join(" ", new string[] { osVersion, servicePack });
+            var osData = string.Join(" ", new string[] { osVersion, servicePack });
             return osData;
         }
 
-        private string GetOSServicePack(string servicePack, ManagementObject managementObject)
+        private static string GetOSServicePack(string servicePack, ManagementObject managementObject)
         {
-            int servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
+            var servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
             if (servicePackNumber != 0)
             {
                 servicePack = $"Service Pack {servicePackNumber}";
@@ -132,15 +130,15 @@ namespace mRemoteNG.App
             return servicePack;
         }
 
-        private string GetArchitectureData()
+        private static string GetArchitectureData()
         {
-            string architecture = string.Empty;
+            var architecture = string.Empty;
             try
             {
                 foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_Processor WHERE DeviceID=\'CPU0\'").Get())
                 {
                     var managementObject = (ManagementObject) o;
-                    int addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
+                    var addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
                     architecture = $"{addressWidth}-bit";
                 }
             }
@@ -151,7 +149,7 @@ namespace mRemoteNG.App
             return architecture;
         }
 
-        private void LogApplicationData()
+        private static void LogApplicationData()
         {
 #if !PORTABLE
             Logger.Instance.InfoFormat($"{Application.ProductName} {Application.ProductVersion} starting.");
@@ -161,17 +159,17 @@ namespace mRemoteNG.App
 #endif
         }
 
-        private void LogCmdLineArgs()
+        private static void LogCmdLineArgs()
         {
             Logger.Instance.InfoFormat($"Command Line: {Environment.GetCommandLineArgs()}");
         }
 
-        private void LogCLRData()
+        private static void LogCLRData()
         {
             Logger.Instance.InfoFormat($"Microsoft .NET CLR {Environment.Version}");
         }
 
-        private void LogCultureData()
+        private static void LogCultureData()
         {
             Logger.Instance.InfoFormat(
                 $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}");
@@ -197,7 +195,7 @@ namespace mRemoteNG.App
                 return;
             }
 
-            DateTime nextUpdateCheck = Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
+            var nextUpdateCheck = Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
             if (!Settings.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
             {
                 return;
@@ -240,13 +238,13 @@ namespace mRemoteNG.App
         }
 
 
-        private void ParseCommandLineArgs()
+        private static void ParseCommandLineArgs()
         {
             try
             {
-                CmdArgumentsInterpreter cmd = new CmdArgumentsInterpreter(Environment.GetCommandLineArgs());
+                var cmd = new CmdArgumentsInterpreter(Environment.GetCommandLineArgs());
 
-                string ConsParam = "";
+                var ConsParam = "";
                 if (cmd["cons"] != null)
                 {
                     ConsParam = "cons";
@@ -256,7 +254,7 @@ namespace mRemoteNG.App
                     ConsParam = "c";
                 }
 
-                string ResetPosParam = "";
+                var ResetPosParam = "";
                 if (cmd["resetpos"] != null)
                 {
                     ResetPosParam = "resetpos";
@@ -266,7 +264,7 @@ namespace mRemoteNG.App
                     ResetPosParam = "rp";
                 }
 
-                string ResetPanelsParam = "";
+                var ResetPanelsParam = "";
                 if (cmd["resetpanels"] != null)
                 {
                     ResetPanelsParam = "resetpanels";
@@ -276,7 +274,7 @@ namespace mRemoteNG.App
                     ResetPanelsParam = "rpnl";
                 }
 
-                string ResetToolbarsParam = "";
+                var ResetToolbarsParam = "";
                 if (cmd["resettoolbar"] != null)
                 {
                     ResetToolbarsParam = "resettoolbar";
@@ -293,7 +291,7 @@ namespace mRemoteNG.App
                     ResetToolbarsParam = "rtbr";
                 }
 
-                string NoReconnectParam = "";
+                var NoReconnectParam = "";
                 if (cmd["noreconnect"] != null)
                 {
                     NoReconnectParam = "noreconnect";
