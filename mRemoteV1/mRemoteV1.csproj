@@ -220,6 +220,12 @@
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\ConnectionTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionTree.Designer.cs">
+      <DependentUpon>ConnectionTree.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>

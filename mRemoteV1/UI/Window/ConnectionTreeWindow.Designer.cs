@@ -17,11 +17,11 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddFolder;
 		public System.Windows.Forms.TreeView tvConnections;
-	    public BrightIdeasSoftware.TreeListView olvConnections;
+	    public mRemoteNG.UI.Controls.ConnectionTree olvConnections;
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            this.olvConnections = new BrightIdeasSoftware.TreeListView();
+            this.olvConnections = new mRemoteNG.UI.Controls.ConnectionTree();
             this.olvNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imgListTree = new System.Windows.Forms.ImageList(this.components);
             this.pnlConnections = new System.Windows.Forms.Panel();

@@ -4,7 +4,6 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
@@ -28,7 +27,7 @@ namespace mRemoteNG.UI.Window
 	    private readonly ConnectionContextMenu _contextMenu = new ConnectionContextMenu();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
 
-	    public ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
+	    public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
 	    public ConnectionTreeModel ConnectionTreeModel
 	    {
@@ -214,9 +213,9 @@ namespace mRemoteNG.UI.Window
 	        mMenViewCollapseAllFolders.Click += (sender, args) =>
 	        {
 	            olvConnections.CollapseAll();
-                olvConnections.Expand(GetRootConnectionNode());
+                olvConnections.Expand(olvConnections.GetRootConnectionNode());
 	        };
-	        mMenSortAscending.Click += (sender, args) => SortNodesRecursive(GetRootConnectionNode(), ListSortDirection.Ascending);
+	        mMenSortAscending.Click += (sender, args) => SortNodesRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
 	    }
 
 	    private void PopulateTreeView()
@@ -246,7 +245,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void OnPuttySessionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
 	    {
-            RefreshTreeObjects(GetRootPuttyNodes().ToList());
+            RefreshTreeObjects(olvConnections.GetRootPuttyNodes().ToList());
         }
 
         private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -261,18 +260,8 @@ namespace mRemoteNG.UI.Window
 
         private void ExpandRootConnectionNode()
 	    {
-            var rootConnectionNode = GetRootConnectionNode();
+            var rootConnectionNode = olvConnections.GetRootConnectionNode();
             olvConnections.InvokeExpand(rootConnectionNode);
-	    }
-
-	    private RootNodeInfo GetRootConnectionNode()
-	    {
-            return (RootNodeInfo)olvConnections.Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
-        }
-
-	    private IEnumerable<RootPuttySessionsNodeInfo> GetRootPuttyNodes()
-	    {
-	        return olvConnections.Objects.OfType<RootPuttySessionsNodeInfo>();
 	    }
 
         #region Form Stuff
@@ -318,7 +307,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void ExpandPreviouslyOpenedFolders()
         {
-            var containerList = ConnectionTreeModel.GetRecursiveChildList(GetRootConnectionNode()).OfType<ContainerInfo>();
+            var containerList = ConnectionTreeModel.GetRecursiveChildList(olvConnections.GetRootConnectionNode()).OfType<ContainerInfo>();
             var previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
             olvConnections.ExpandedObjects = previouslyExpandedNodes;
             olvConnections.InvokeRebuildAll(true);
@@ -327,7 +316,7 @@ namespace mRemoteNG.UI.Window
 	    private void OpenConnectionsFromLastSession()
         {
             if (!Settings.Default.OpenConsFromLastSession || Settings.Default.NoReconnect) return;
-            var connectionInfoList = GetRootConnectionNode().GetRecursiveChildList().Where(node => !(node is ContainerInfo));
+            var connectionInfoList = olvConnections.GetRootConnectionNode().GetRecursiveChildList().Where(node => !(node is ContainerInfo));
             var previouslyOpenedConnections = connectionInfoList.Where(item => item.PleaseConnect);
             foreach (var connectionInfo in previouslyOpenedConnections)
             {
@@ -337,21 +326,12 @@ namespace mRemoteNG.UI.Window
 
         public void EnsureRootNodeVisible()
 	    {
-            olvConnections.EnsureModelVisible(GetRootConnectionNode());
+            olvConnections.EnsureModelVisible(olvConnections.GetRootConnectionNode());
 	    }
 
-        public void DuplicateSelectedNode()
-        {
-            var newNode = SelectedNode.Clone();
-            newNode.Parent.SetChildBelow(newNode, SelectedNode);
-            Runtime.SaveConnectionsAsync();
-        }
+	    public void DuplicateSelectedNode() => olvConnections.DuplicateSelectedNode();
 
-        public void RenameSelectedNode()
-        {
-            olvConnections.SelectedItem.BeginEdit();
-            Runtime.SaveConnectionsAsync();
-        }
+        public void RenameSelectedNode() => olvConnections.RenameSelectedNode();
 
         public void DeleteSelectedNode()
         {
@@ -535,7 +515,7 @@ namespace mRemoteNG.UI.Window
 	    private void SortNodesRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
 	    {
 	        if (sortTarget == null)
-	            sortTarget = GetRootConnectionNode();
+	            sortTarget = olvConnections.GetRootConnectionNode();
 
             var sortTargetAsContainer = sortTarget as ContainerInfo;
             if (sortTargetAsContainer != null)
