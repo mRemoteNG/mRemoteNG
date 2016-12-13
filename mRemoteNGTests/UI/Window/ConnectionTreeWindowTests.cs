@@ -23,7 +23,7 @@ namespace mRemoteNGTests.UI.Window
         }
 
         [Test, Apartment(ApartmentState.STA)]
-        public void CanDeleteLastFolderInTheTree()
+        public void CanShowWindow()
         {
             _connectionTreeWindow.Show();
             Assert.That(_connectionTreeWindow.Visible);
