@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -184,7 +183,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnPuttySessionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            RefreshTreeObjects(GetRootPuttyNodes().ToList());
+            RefreshObjects(GetRootPuttyNodes().ToList());
         }
 
         private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -241,12 +240,12 @@ namespace mRemoteNG.UI.Controls
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     if (senderAsContainerInfo?.Children.Count > 0)
-                        RefreshTreeObjects(args.OldItems);
+                        RefreshObjects(args.OldItems);
                     else
                         RefreshObject(senderAsContainerInfo);
                     break;
                 case NotifyCollectionChangedAction.Move:
-                    RefreshTreeObjects(args.OldItems);
+                    RefreshObjects(args.OldItems);
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     RefreshObject(senderAsContainerInfo);
@@ -256,11 +255,6 @@ namespace mRemoteNG.UI.Controls
                 case null:
                     break;
             }
-        }
-
-        private void RefreshTreeObjects(IList modelObjects)
-        {
-            RefreshObjects(modelObjects);
         }
 
         public void AddConnection()
