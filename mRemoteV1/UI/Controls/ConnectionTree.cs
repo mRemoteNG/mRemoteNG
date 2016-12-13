@@ -23,7 +23,7 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
         private OLVColumn _olvNameColumn;
-        private ImageList imgListTree;
+        private ImageList _imgListTree;
 
 
         public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
@@ -74,29 +74,29 @@ namespace mRemoteNG.UI.Controls
 
         private void CreateImageList()
         {
-            imgListTree = new ImageList(this.components)
+            _imgListTree = new ImageList(components)
             {
                 ColorDepth = ColorDepth.Depth32Bit,
                 ImageSize = new System.Drawing.Size(16, 16),
                 TransparentColor = System.Drawing.Color.Transparent
             };
-            SmallImageList = imgListTree;
+            SmallImageList = _imgListTree;
         }
 
         private void FillImageList()
         {
             try
             {
-                imgListTree.Images.Add(Resources.Root);
-                imgListTree.Images.SetKeyName(0, "Root");
-                imgListTree.Images.Add(Resources.Folder);
-                imgListTree.Images.SetKeyName(1, "Folder");
-                imgListTree.Images.Add(Resources.Play);
-                imgListTree.Images.SetKeyName(2, "Play");
-                imgListTree.Images.Add(Resources.Pause);
-                imgListTree.Images.SetKeyName(3, "Pause");
-                imgListTree.Images.Add(Resources.PuttySessions);
-                imgListTree.Images.SetKeyName(4, "PuttySessions");
+                _imgListTree.Images.Add(Resources.Root);
+                _imgListTree.Images.SetKeyName(0, "Root");
+                _imgListTree.Images.Add(Resources.Folder);
+                _imgListTree.Images.SetKeyName(1, "Folder");
+                _imgListTree.Images.Add(Resources.Play);
+                _imgListTree.Images.SetKeyName(2, "Play");
+                _imgListTree.Images.Add(Resources.Pause);
+                _imgListTree.Images.SetKeyName(3, "Pause");
+                _imgListTree.Images.Add(Resources.PuttySessions);
+                _imgListTree.Images.SetKeyName(4, "PuttySessions");
             }
             catch (Exception ex)
             {
