@@ -35,6 +35,9 @@ namespace mRemoteNG.UI.Window
             txtDomain.Text = CurrentDomain;
             ActiveDirectoryTree.Domain = CurrentDomain;
             EnableDisableImportButton();
+            
+            // Domain doesn't refresh on load, so it defaults to DOMAIN without this...
+            ChangeDomain();
         }
 
         private void btnImport_Click(object sender, EventArgs e)
