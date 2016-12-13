@@ -40,6 +40,8 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
+        public Func<ConnectionInfo, bool> DeletionConfirmer { get; set; } = connectionInfo => true;
+
 
         public ConnectionTree()
         {
@@ -218,43 +220,9 @@ namespace mRemoteNG.UI.Controls
         public void DeleteSelectedNode()
         {
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
-            if (!UserConfirmsDeletion()) return;
+            if (!DeletionConfirmer(SelectedNode)) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsAsync();
-        }
-
-        private bool UserConfirmsDeletion()
-        {
-            var selectedNodeAsContainer = SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
-                return selectedNodeAsContainer.HasChildren()
-                    ? UserConfirmsNonEmptyFolderDeletion()
-                    : UserConfirmsEmptyFolderDeletion();
-            return UserConfirmsConnectionDeletion();
-        }
-
-        private bool UserConfirmsEmptyFolderDeletion()
-        {
-            var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Name);
-            return PromptUser(messagePrompt);
-        }
-
-        private bool UserConfirmsNonEmptyFolderDeletion()
-        {
-            var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Name);
-            return PromptUser(messagePrompt);
-        }
-
-        private bool UserConfirmsConnectionDeletion()
-        {
-            var messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Name);
-            return PromptUser(messagePrompt);
-        }
-
-        private static bool PromptUser(string promptMessage)
-        {
-            var msgBoxResponse = MessageBox.Show(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            return (msgBoxResponse == DialogResult.Yes);
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
