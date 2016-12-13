@@ -26,7 +26,7 @@ namespace mRemoteNG.UI.Controls
         private ImageList _imgListTree;
 
 
-        public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
+        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
         public NodeSearcher NodeSearcher { get; private set; }
 
@@ -239,7 +239,10 @@ namespace mRemoteNG.UI.Controls
                     RefreshTreeObject(otherChild ?? senderAsContainerInfo);
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    RefreshTreeObjects(args.OldItems);
+                    if (senderAsContainerInfo?.Children.Count > 0)
+                        RefreshTreeObjects(args.OldItems);
+                    else
+                        RefreshTreeObject(senderAsContainerInfo);
                     break;
                 case NotifyCollectionChangedAction.Move:
                     RefreshTreeObjects(args.OldItems);
