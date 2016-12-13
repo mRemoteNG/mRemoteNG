@@ -359,11 +359,6 @@ namespace mRemoteNG.UI.Controls
             this.InvokeExpand(rootConnectionNode);
         }
 
-        public void EnsureRootNodeVisible()
-        {
-            EnsureModelVisible(GetRootConnectionNode());
-        }
-
         private void tvConnections_AfterSelect(object sender, EventArgs e)
         {
             try
