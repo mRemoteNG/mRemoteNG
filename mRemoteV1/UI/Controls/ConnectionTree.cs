@@ -193,7 +193,7 @@ namespace mRemoteNG.UI.Controls
             if (property != "Name" && property != "OpenConnections") return;
             var senderAsConnectionInfo = sender as ConnectionInfo;
             if (senderAsConnectionInfo != null)
-                RefreshTreeObject(senderAsConnectionInfo);
+                RefreshObject(senderAsConnectionInfo);
         }
 
         private void ExpandPreviouslyOpenedFolders()
@@ -236,30 +236,25 @@ namespace mRemoteNG.UI.Controls
                     ConnectionInfo otherChild = null;
                     if (childList?.Count > 1)
                         otherChild = childList.First(child => !args.NewItems.Contains(child));
-                    RefreshTreeObject(otherChild ?? senderAsContainerInfo);
+                    RefreshObject(otherChild ?? senderAsContainerInfo);
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     if (senderAsContainerInfo?.Children.Count > 0)
                         RefreshTreeObjects(args.OldItems);
                     else
-                        RefreshTreeObject(senderAsContainerInfo);
+                        RefreshObject(senderAsContainerInfo);
                     break;
                 case NotifyCollectionChangedAction.Move:
                     RefreshTreeObjects(args.OldItems);
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    RefreshTreeObject(senderAsContainerInfo);
+                    RefreshObject(senderAsContainerInfo);
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     break;
                 case null:
                     break;
             }
-        }
-
-        private void RefreshTreeObject(ConnectionInfo modelObject)
-        {
-            RefreshObject(modelObject);
         }
 
         private void RefreshTreeObjects(IList modelObjects)
