@@ -129,9 +129,10 @@ namespace mRemoteNG.UI.Controls
 
         private void SetupDropSink()
         {
-            DropSink = new SimpleDropSink();
-            var dropSink = (SimpleDropSink)DropSink;
-            dropSink.CanDropBetween = true;
+            DropSink = new SimpleDropSink
+            {
+                CanDropBetween = true
+            };
         }
 
         private void SetEventHandlers()
