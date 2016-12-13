@@ -14,7 +14,7 @@ namespace mRemoteNG.App.Update
 #if !PORTABLE
         public string CertificateThumbprint { get; private set; }
 #endif
-        public string FileName { get; private set; }
+        private string FileName { get; set; }
         public string Checksum { get; private set; }
 
         public static UpdateInfo FromString(string input)

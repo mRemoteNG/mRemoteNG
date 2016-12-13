@@ -11,11 +11,11 @@ namespace mRemoteNG.App.Info
 {
 	public static class GeneralAppInfo
 	{
-		public static readonly string UrlHome = "http://www.mremoteng.org/";
-		public static readonly string UrlDonate = "http://donate.mremoteng.org/";
-		public static readonly string UrlForum = "http://forum.mremoteng.org/";
-		public static readonly string UrlBugs = "http://bugs.mremoteng.org/";
-	    public static readonly string ApplicationVersion = Application.ProductVersion;
+	    public const string UrlHome = "http://www.mremoteng.org/";
+	    public const string UrlDonate = "http://donate.mremoteng.org/";
+	    public const string UrlForum = "http://forum.mremoteng.org/";
+	    public const string UrlBugs = "http://bugs.mremoteng.org/";
+	    public static string ApplicationVersion = Application.ProductVersion;
         public static readonly string ProductName = Application.ProductName;
         public static readonly string Copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false)).Copyright;
         public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);

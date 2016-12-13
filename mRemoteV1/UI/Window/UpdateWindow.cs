@@ -163,17 +163,13 @@ namespace mRemoteNG.UI.Window
 				{
 					lblStatus.Text = Language.strNoUpdateAvailable;
 					lblStatus.ForeColor = Color.ForestGreen;
-							
-					if (_appUpdate.CurrentUpdateInfo != null)
-					{
-						var updateInfo = _appUpdate.CurrentUpdateInfo;
-						if (updateInfo.IsValid && updateInfo.Version != null)
-						{
-							lblLatestVersion.Text = updateInfo.Version.ToString();
-							lblLatestVersionLabel.Visible = true;
-							lblLatestVersion.Visible = true;
-						}
-					}
+
+				    if (_appUpdate.CurrentUpdateInfo == null) return;
+				    var updateInfo = _appUpdate.CurrentUpdateInfo;
+				    if (!updateInfo.IsValid || updateInfo.Version == null) return;
+				    lblLatestVersion.Text = updateInfo.Version.ToString();
+				    lblLatestVersionLabel.Visible = true;
+				    lblLatestVersion.Visible = true;
 				}
 			}
 			catch (Exception ex)
