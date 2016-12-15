@@ -5,11 +5,7 @@ node('windows') {
 	def vsExtensionsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
 	
 	stage 'Checkout Branch'
-	checkout([
-		$class: 'GitSCM',
-		branches: scm.branches,
-		userRemoteConfigs: scm.userRemoteConfigs
-	])
+	checkout scm
 
 	stage 'Restore NuGet Packages'
 	def nugetPath = "C:\\nuget.exe"
