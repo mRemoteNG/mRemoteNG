@@ -223,7 +223,7 @@ namespace mRemoteNG.App
                 }
                 if (e.Error != null)
                 {
-                    throw (e.Error);
+                    throw e.Error;
                 }
 
                 if (_appUpdate.IsUpdateAvailable())

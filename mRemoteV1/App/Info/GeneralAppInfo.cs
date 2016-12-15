@@ -19,15 +19,19 @@ namespace mRemoteNG.App.Info
         public static readonly string ProductName = Application.ProductName;
         public static readonly string Copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false)).Copyright;
         public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
-		public static string ReportingFilePath = "";
+		//public static string ReportingFilePath = "";
 		public static readonly string PuttyPath = HomePath + "\\PuTTYNG.exe";
         public static string UserAgent
 		{
 			get
 			{
-			    var details = new List<string>();
-			    details.Add("compatible");
-			    details.Add(OSVersion.Platform == PlatformID.Win32NT ? $"Windows NT {OSVersion.Version.Major}.{OSVersion.Version.Minor}": OSVersion.VersionString);
+			    var details = new List<string>
+			    {
+			        "compatible",
+			        OSVersion.Platform == PlatformID.Win32NT
+			            ? $"Windows NT {OSVersion.Version.Major}.{OSVersion.Version.Minor}"
+			            : OSVersion.VersionString
+			    };
 			    if (Is64BitProcess)
 				{
 					details.Add("WOW64");

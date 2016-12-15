@@ -1,12 +1,35 @@
-﻿namespace mRemoteNG.App.Info
+﻿using System;
+
+namespace mRemoteNG.App.Info
 {
-    public static class UpdateChannelInfo
+    public class UpdateChannelInfo
     {
         internal const string STABLE = "Stable";
         internal const string BETA = "Beta";
         internal const string DEV = "Development";
 
-        public static string FileName
+        /* no #if here since they are used for unit tests as well */
+        public const string STABLE_PORTABLE = "update-portable.txt";
+        public const string BETA_PORTABLE = "beta-update-portable.txt";
+        public const string DEV_PORTABLE = "dev-update-portable.txt";
+
+        public const string STABLE_MSI = "update.txt";
+        public const string BETA_MSI = "beta-update.txt";
+        public const string DEV_MSI = "dev-update.txt";
+
+        private readonly string channel;
+
+        public UpdateChannelInfo()
+        {
+            channel = IsValidChannel(Settings.Default.UpdateChannel) ? Settings.Default.UpdateChannel : STABLE;
+        }
+
+        public UpdateChannelInfo(string s)
+        {
+            channel = IsValidChannel(s) ? s : STABLE;
+        }
+
+        private string FileName
         {
 #if PORTABLE
             get
@@ -14,16 +37,16 @@
                 /*                                   */
                 /* return PORTABLE update files here */
                 /*                                   */
-                switch (Settings.Default.UpdateChannel)
+                switch (channel)
                 {
                     case STABLE:
-                        return "update-portable.txt";
+                        return STABLE_PORTABLE;
                     case BETA:
-                        return "beta-update-portable.txt";
+                        return BETA_PORTABLE;
                     case DEV:
-                        return "dev-update-portable.txt";
+                        return DEV_PORTABLE;
                     default:
-                        return "update-portable.txt";
+                        return STABLE_PORTABLE;
                 }
             }
 #else //NOT portable
@@ -32,19 +55,29 @@
                 /*                                    */
                 /* return INSTALLER update files here */
                 /*                                    */
-                switch (Settings.Default.UpdateChannel)
+                switch (channel)
                 {
                     case STABLE:
-                        return "update.txt";
+                        return STABLE_MSI;
                     case BETA:
-                        return "beta-update.txt";
+                        return BETA_MSI;
                     case DEV:
-                        return "dev-update.txt";
+                        return DEV_MSI;
                     default:
-                        return "update.txt";
+                        return STABLE_MSI;
                 }
             }
 #endif //endif for PORTABLE
+        }
+
+        public Uri GetUpdateTxtUri()
+        {
+            return new Uri(new Uri(Settings.Default.UpdateAddress), new Uri(FileName, UriKind.Relative));
+        }
+
+        private static bool IsValidChannel(string s)
+        {
+            return s.Equals(STABLE) || s.Equals(BETA) || s.Equals(DEV);
         }
     }
 }
