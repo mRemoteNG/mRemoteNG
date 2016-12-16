@@ -25,7 +25,7 @@ namespace mRemoteNGTests.App
             Assert.That(e.Cancelled, Is.False);
             Assert.That(e.Error, Is.Null);
             var CurrentUpdateInfo = UpdateInfo.FromString(e.Result);
-            Assert.That(CurrentUpdateInfo.IsValid, Is.False);
+            Assert.That(CurrentUpdateInfo.IsValid, Is.True);
             Version v;
             Version.TryParse(GeneralAppInfo.ApplicationVersion, out v);
             var IsNewer = CurrentUpdateInfo.Version > v;
