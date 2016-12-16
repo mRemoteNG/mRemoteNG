@@ -30,16 +30,45 @@ namespace mRemoteNG.App.Update
                 newInfo.Version = updateFile.GetVersion();
                 newInfo.DownloadAddress = updateFile.GetUri("dURL");
                 newInfo.ChangeLogAddress = updateFile.GetUri("clURL");
+#if false
                 newInfo.ImageAddress = updateFile.GetUri("imgURL");
                 newInfo.ImageLinkAddress = updateFile.GetUri("imgURLLink");
+#endif
 #if !PORTABLE
                 newInfo.CertificateThumbprint = updateFile.GetThumbprint();
 #endif
                 newInfo.FileName = updateFile.GetFileName();
                 newInfo.Checksum = updateFile.GetChecksum();
-                newInfo.IsValid = true;
+                newInfo.IsValid = newInfo.CheckIfValid();
             }
             return newInfo;
+        }
+
+        private bool CheckIfValid()
+        {
+            if (string.IsNullOrEmpty(Version.ToString()))
+                return false;
+            if(string.IsNullOrEmpty(DownloadAddress.AbsoluteUri))
+                return false;
+            if (string.IsNullOrEmpty(ChangeLogAddress.AbsoluteUri))
+                return false;
+#if false            
+            if (string.IsNullOrEmpty(ImageAddress.AbsoluteUri))
+                return false;
+            if (string.IsNullOrEmpty(ImageLinkAddress.AbsoluteUri))
+                return false;
+#endif
+#if !PORTABLE
+            if (string.IsNullOrEmpty(CertificateThumbprint))
+                return false;
+#endif
+            if (string.IsNullOrEmpty(FileName))
+                return false;
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if (string.IsNullOrEmpty(Checksum))
+                return false;
+
+            return true;
         }
     }
 }

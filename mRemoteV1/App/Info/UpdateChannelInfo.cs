@@ -2,11 +2,11 @@
 
 namespace mRemoteNG.App.Info
 {
-    public class UpdateChannelInfo
+    public static class UpdateChannelInfo
     {
-        internal const string STABLE = "Stable";
-        internal const string BETA = "Beta";
-        internal const string DEV = "Development";
+        public const string STABLE = "Stable";
+        public const string BETA = "Beta";
+        public const string DEV = "Development";
 
         /* no #if here since they are used for unit tests as well */
         public const string STABLE_PORTABLE = "update-portable.txt";
@@ -17,23 +17,22 @@ namespace mRemoteNG.App.Info
         public const string BETA_MSI = "beta-update.txt";
         public const string DEV_MSI = "dev-update.txt";
 
-        private readonly string channel;
 
-        public UpdateChannelInfo()
+        public static Uri GetUpdateChannelInfo()
         {
-            channel = IsValidChannel(Settings.Default.UpdateChannel) ? Settings.Default.UpdateChannel : STABLE;
+            var channel = IsValidChannel(Settings.Default.UpdateChannel) ? Settings.Default.UpdateChannel : STABLE;
+            return GetUpdateTxtUri(channel);
         }
 
-        public UpdateChannelInfo(string s)
+        public static Uri GetUpdateChannelInfo(string s)
         {
-            channel = IsValidChannel(s) ? s : STABLE;
+            var channel = IsValidChannel(s) ? s : STABLE;
+            return GetUpdateTxtUri(channel);
         }
 
-        private string FileName
+        private static string GetChannelFileName(string channel)
         {
 #if PORTABLE
-            get
-            {
                 /*                                   */
                 /* return PORTABLE update files here */
                 /*                                   */
@@ -48,10 +47,7 @@ namespace mRemoteNG.App.Info
                     default:
                         return STABLE_PORTABLE;
                 }
-            }
 #else //NOT portable
-            get
-            {
                 /*                                    */
                 /* return INSTALLER update files here */
                 /*                                    */
@@ -66,13 +62,12 @@ namespace mRemoteNG.App.Info
                     default:
                         return STABLE_MSI;
                 }
-            }
 #endif //endif for PORTABLE
         }
 
-        public Uri GetUpdateTxtUri()
+        private static Uri GetUpdateTxtUri(string channel)
         {
-            return new Uri(new Uri(Settings.Default.UpdateAddress), new Uri(FileName, UriKind.Relative));
+            return new Uri(new Uri(Settings.Default.UpdateAddress), new Uri(GetChannelFileName(channel), UriKind.Relative));
         }
 
         private static bool IsValidChannel(string s)

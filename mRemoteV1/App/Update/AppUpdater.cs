@@ -22,8 +22,6 @@ namespace mRemoteNG.App.Update
         private Thread _getUpdateInfoThread;
         private Thread _getChangeLogThread;
 
-        private UpdateChannelInfo updChannel;
-
         #region Public Properties
 
         public UpdateInfo CurrentUpdateInfo { get; private set; }
@@ -194,7 +192,7 @@ namespace mRemoteNG.App.Update
             return (DownloadStringCompletedEventArgs) constructor.Invoke(arguments);
         }
 
-        private DownloadStringCompletedEventArgs DownloadString(Uri address)
+        public DownloadStringCompletedEventArgs DownloadString(Uri address)
         {
             var webClient = CreateWebClient();
             var result = string.Empty;
@@ -217,10 +215,9 @@ namespace mRemoteNG.App.Update
             return NewDownloadStringCompletedEventArgs(result, exception, cancelled, null);
         }
 
-        public void GetUpdateInfo()
+        private void GetUpdateInfo()
         {
-            updChannel = new UpdateChannelInfo();
-            var e = DownloadString(updChannel.GetUpdateTxtUri());
+            var e = DownloadString(UpdateChannelInfo.GetUpdateChannelInfo());
 
             if (!e.Cancelled && e.Error == null)
             {
