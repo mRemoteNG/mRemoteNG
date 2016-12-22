@@ -1,11 +1,4 @@
-﻿using mRemoteNG.App.Info;
-using mRemoteNG.App.Update;
-using mRemoteNG.Config.Connections;
-using mRemoteNG.Connection;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
-using mRemoteNG.UI.Forms;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -14,9 +7,15 @@ using System.IO;
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
+using mRemoteNG.App.Update;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Connection;
+using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 using mRemoteNG.UI;
-using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
@@ -45,24 +44,6 @@ namespace mRemoteNG.App
             GetConnectionIcons();
             DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a=>"ConDefault"+a);
             DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a=>"InhDefault"+a);
-        }
-
-        public void SetDefaultLayout()
-        {
-            frmMain.Default.pnlDock.Visible = false;
-
-            frmMain.Default.pnlDock.DockLeftPortion = frmMain.Default.pnlDock.Width * 0.2;
-            frmMain.Default.pnlDock.DockRightPortion = frmMain.Default.pnlDock.Width * 0.2;
-            frmMain.Default.pnlDock.DockTopPortion = frmMain.Default.pnlDock.Height * 0.25;
-            frmMain.Default.pnlDock.DockBottomPortion = frmMain.Default.pnlDock.Height * 0.25;
-
-            Windows.TreePanel.Show(frmMain.Default.pnlDock, DockState.DockLeft);
-            Windows.ConfigPanel.Show(frmMain.Default.pnlDock);
-            Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
-
-            Windows.ScreenshotForm.Hide();
-
-            frmMain.Default.pnlDock.Visible = true;
         }
 
         private static void GetConnectionIcons()
@@ -116,7 +97,7 @@ namespace mRemoteNG.App
             {
                 Logger.Instance.WarnFormat($"Error retrieving operating system information from WMI. {ex.Message}");
             }
-            var osData = string.Join(" ", new string[] { osVersion, servicePack });
+            var osData = string.Join(" ", osVersion, servicePack);
             return osData;
         }
 
@@ -209,7 +190,7 @@ namespace mRemoteNG.App
         {
             if (frmMain.Default.InvokeRequired)
             {
-                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), new object[] { sender, e });
+                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), sender, e);
                 return;
             }
 
@@ -223,7 +204,7 @@ namespace mRemoteNG.App
                 }
                 if (e.Error != null)
                 {
-                    throw (e.Error);
+                    throw e.Error;
                 }
 
                 if (_appUpdate.IsUpdateAvailable())
@@ -311,7 +292,7 @@ namespace mRemoteNG.App
                             Settings.Default.CustomConsPath = GeneralAppInfo.HomePath + "\\" + cmd[ConsParam];
                             return;
                         }
-                        else if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
+                        if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
                         {
                             Settings.Default.LoadConsFromCustomLocation = true;
                             Settings.Default.CustomConsPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];

@@ -164,7 +164,7 @@ namespace mRemoteNG.UI.Forms
             ConnectionTreeWindow = Windows.TreeForm;
         }
 
-		private void ApplyLanguage()
+        private void ApplyLanguage()
 		{
 			mMenFile.Text = Language.strMenuFile;
 			mMenFileNew.Text = Language.strMenuNewConnectionFile;
@@ -426,6 +426,7 @@ namespace mRemoteNG.UI.Forms
         private void mMenFile_DropDownOpening(object sender, EventArgs e)
         {
             var selectedNodeType = ConnectionTreeWindow.SelectedNode?.GetTreeNodeType();
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (selectedNodeType)
             {
                 case TreeNodeType.Root:
@@ -733,7 +734,7 @@ namespace mRemoteNG.UI.Forms
                 MessageBoxIcon.Question);
             if (msgBoxResult == DialogResult.Yes)
 			{
-				Startup.Instance.SetDefaultLayout();
+				Default.SetDefaultLayout();
 			}
 		}
 
@@ -1201,6 +1202,24 @@ namespace mRemoteNG.UI.Forms
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0, SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1, SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
 		}
+
+        public void SetDefaultLayout()
+        {
+            Default.pnlDock.Visible = false;
+
+            Default.pnlDock.DockLeftPortion = Default.pnlDock.Width * 0.2;
+            Default.pnlDock.DockRightPortion = Default.pnlDock.Width * 0.2;
+            Default.pnlDock.DockTopPortion = Default.pnlDock.Height * 0.25;
+            Default.pnlDock.DockBottomPortion = Default.pnlDock.Height * 0.25;
+
+            Windows.TreePanel.Show(Default.pnlDock, DockState.DockLeft);
+            Windows.ConfigPanel.Show(Default.pnlDock);
+            Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
+
+            Windows.ScreenshotForm.Hide();
+
+            Default.pnlDock.Visible = true;
+        }
         #endregion
 
         #region Events
