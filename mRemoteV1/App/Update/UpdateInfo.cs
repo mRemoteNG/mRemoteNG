@@ -1,4 +1,5 @@
 ﻿using System;
+// ReSharper disable UnusedAutoPropertyAccessor.Local
 
 namespace mRemoteNG.App.Update
 {
@@ -14,7 +15,8 @@ namespace mRemoteNG.App.Update
 #if !PORTABLE
         public string CertificateThumbprint { get; private set; }
 #endif
-        private string FileName { get; set; }
+        // ReSharper disable once MemberCanBePrivate.Global
+        public string FileName { get; set; }
         public string Checksum { get; private set; }
 
         public static UpdateInfo FromString(string input)
@@ -44,7 +46,7 @@ namespace mRemoteNG.App.Update
             return newInfo;
         }
 
-        private bool CheckIfValid()
+        public bool CheckIfValid()
         {
             if (string.IsNullOrEmpty(Version.ToString()))
                 return false;
