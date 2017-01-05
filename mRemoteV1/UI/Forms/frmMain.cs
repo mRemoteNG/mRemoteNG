@@ -384,7 +384,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorAddExternalToolsToToolBarFailed, ex.Message), true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddExternalToolsToToolBarFailed, ex);
 			}
 		}
 								
@@ -1069,6 +1069,9 @@ namespace mRemoteNG.UI.Forms
 		    if (w?.TabController.SelectedTab == null) return;
 		    var tab = w.TabController.SelectedTab;
 		    var ifc = (InterfaceControl)tab.Tag;
+
+		    if (ifc == null) return;
+
 		    ifc.Protocol.Focus();
 		    ((ConnectionWindow) ifc.FindForm())?.RefreshInterfaceController();
 		}

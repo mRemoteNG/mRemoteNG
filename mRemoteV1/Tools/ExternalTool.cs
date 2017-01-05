@@ -57,7 +57,7 @@ namespace mRemoteNG.Tools
 
         private void StartExternalProcess()
         {
-            Process process = new Process();
+            var process = new Process();
             SetProcessProperties(process, ConnectionInfo);
             process.Start();
 
@@ -69,7 +69,7 @@ namespace mRemoteNG.Tools
 
         private void SetProcessProperties(Process process, ConnectionInfo startConnectionInfo)
         {
-            ExternalToolArgumentParser argParser = new ExternalToolArgumentParser(startConnectionInfo);
+            var argParser = new ExternalToolArgumentParser(startConnectionInfo);
             process.StartInfo.UseShellExecute = true;
             process.StartInfo.FileName = argParser.ParseArguments(FileName);
             process.StartInfo.Arguments = argParser.ParseArguments(Arguments);
@@ -79,18 +79,18 @@ namespace mRemoteNG.Tools
 		{
 			try
 			{
-                ConnectionInfo newConnectionInfo = BuildConnectionInfoForIntegratedApp();
+                var newConnectionInfo = BuildConnectionInfoForIntegratedApp();
                 ConnectionInitiator.OpenConnection(newConnectionInfo);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "ExternalApp.StartIntegrated() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("ExternalApp.StartIntegrated() failed.", ex, logOnly: true);
 			}
 		}
 
         private ConnectionInfo BuildConnectionInfoForIntegratedApp()
         {
-            ConnectionInfo newConnectionInfo = GetAppropriateInstanceOfConnectionInfo();
+            var newConnectionInfo = GetAppropriateInstanceOfConnectionInfo();
             SetConnectionInfoFields(newConnectionInfo);
             return newConnectionInfo;
         }
