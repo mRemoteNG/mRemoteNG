@@ -23,12 +23,12 @@ namespace mRemoteNG.Connection.Protocol
 
         #region Public Properties
         #region Control
-        public string Name { get; set; }
+        private string Name { get; }
 
 	    protected UI.Window.ConnectionWindow ConnectionWindow
 		{
 			get { return _connectionWindow; }
-			set
+	        private set
 			{
 				_connectionWindow = value;
 				_connectionWindow.ResizeBegin += ResizeBegin;
@@ -61,7 +61,7 @@ namespace mRemoteNG.Connection.Protocol
             Name = name;
         }
 
-        public ProtocolBase()
+        protected ProtocolBase()
         {
         }
 
@@ -78,7 +78,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t focus Control (Connection.Protocol.Base)" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("Couldn't focus Control (Connection.Protocol.Base)", ex);
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t SetProps (Connection.Protocol.Base)" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("Couldn't SetProps (Connection.Protocol.Base)", ex);
 				return false;
 			}
 		}
@@ -132,7 +132,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		public virtual void Close()
 		{
-			Thread t = new Thread(CloseBG);
+			var t = new Thread(CloseBG);
 			t.SetApartmentState(ApartmentState.STA);
 			t.IsBackground = true;
 			t.Start();
@@ -153,31 +153,31 @@ namespace mRemoteNG.Connection.Protocol
 					}
 					catch (Exception ex)
 					{
-						Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not dispose control, probably form is already closed (Connection.Protocol.Base)" + Environment.NewLine + ex.Message, true);
+						Runtime.MessageCollector.AddExceptionStackTrace("Couldn't dispose control, probably form is already closed (Connection.Protocol.Base)", ex);
 					}
 				}
-						
-				if (_interfaceControl != null)
-				{
-					try
-					{
-					    if (_interfaceControl.Parent == null) return;
-					    if (_interfaceControl.Parent.Tag != null)
-					    {
-					        SetTagToNothing();
-					    }
+
+			    if (_interfaceControl == null) return;
+
+			    try
+			    {
+			        if (_interfaceControl.Parent == null) return;
+
+			        if (_interfaceControl.Parent.Tag != null)
+			        {
+			            SetTagToNothing();
+			        }
 									
-					    DisposeInterface();
-					}
-					catch (Exception ex)
-					{
-                        Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Could not set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)" + Environment.NewLine + ex.Message, true);
-					}
-				}
+			        DisposeInterface();
+			    }
+			    catch (Exception ex)
+			    {
+                    Runtime.MessageCollector.AddExceptionStackTrace("Couldn't set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)", ex);
+			    }
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t Close InterfaceControl BG (Connection.Protocol.Base)" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("Couldn't Close InterfaceControl BG (Connection.Protocol.Base)", ex);
 			}
 		}
 				
@@ -186,7 +186,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			if (_interfaceControl.InvokeRequired)
 			{
-				DisposeInterfaceCB s = new DisposeInterfaceCB(DisposeInterface);
+				var s = new DisposeInterfaceCB(DisposeInterface);
 				_interfaceControl.Invoke(s);
 			}
 			else
@@ -200,7 +200,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			if (_interfaceControl.Parent.InvokeRequired)
 			{
-				SetTagToNothingCB s = new SetTagToNothingCB(SetTagToNothing);
+				var s = new SetTagToNothingCB(SetTagToNothing);
 				_interfaceControl.Parent.Invoke(s);
 			}
 			else
@@ -214,7 +214,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			if (Control.InvokeRequired)
 			{
-				DisposeControlCB s = new DisposeControlCB(DisposeControl);
+				var s = new DisposeControlCB(DisposeControl);
 				Control.Invoke(s);
 			}
 			else
