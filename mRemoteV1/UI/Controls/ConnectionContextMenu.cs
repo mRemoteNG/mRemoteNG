@@ -384,7 +384,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Text = Language.strMoveDown;
         }
 
-        internal void ShowHideTreeContextMenuItems(ConnectionInfo connectionInfo)
+        internal void ShowHideMenuItems(ConnectionInfo connectionInfo)
         {
             if (connectionInfo == null)
                 return;
@@ -395,91 +395,116 @@ namespace mRemoteNG.UI.Controls
                 EnableMenuItemsRecursive(Items);
                 if (connectionInfo is RootPuttySessionsNodeInfo)
                 {
-                    _cMenTreeAddConnection.Enabled = false;
-                    _cMenTreeAddFolder.Enabled = false;
-                    _cMenTreeConnect.Enabled = false;
-                    _cMenTreeConnectWithOptions.Enabled = false;
-                    _cMenTreeDisconnect.Enabled = false;
-                    _cMenTreeToolsTransferFile.Enabled = false;
-                    _cMenTreeConnectWithOptions.Enabled = false;
-                    _cMenTreeToolsSort.Enabled = false;
-                    _cMenTreeToolsExternalApps.Enabled = false;
-                    _cMenTreeDuplicate.Enabled = false;
-                    _cMenTreeRename.Enabled = true;
-                    _cMenTreeDelete.Enabled = false;
-                    _cMenTreeMoveUp.Enabled = false;
-                    _cMenTreeMoveDown.Enabled = false;
+                    ShowHideMenuItemsForRootPuttyNode();
                 }
                 else if (connectionInfo is RootNodeInfo)
                 {
-                    _cMenTreeConnect.Enabled = false;
-                    _cMenTreeConnectWithOptions.Enabled = false;
-                    _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-                    _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-                    _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
-                    _cMenTreeDisconnect.Enabled = false;
-                    _cMenTreeToolsTransferFile.Enabled = false;
-                    _cMenTreeToolsExternalApps.Enabled = false;
-                    _cMenTreeDuplicate.Enabled = false;
-                    _cMenTreeDelete.Enabled = false;
-                    _cMenTreeMoveUp.Enabled = false;
-                    _cMenTreeMoveDown.Enabled = false;
+                    ShowHideMenuItemsForRootConnectionNode();
                 }
                 else if (connectionInfo is ContainerInfo)
                 {
-                    _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-                    _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-                    _cMenTreeDisconnect.Enabled = false;
-
-                    var openConnections = ((ContainerInfo)connectionInfo).Children.Sum(child => child.OpenConnections.Count);
-                    if (openConnections > 0)
-                        _cMenTreeDisconnect.Enabled = true;
-
-                    _cMenTreeToolsTransferFile.Enabled = false;
-                    _cMenTreeToolsExternalApps.Enabled = false;
+                    ShowHideMenuItemsForContainer(connectionInfo);
                 }
                 else if (connectionInfo is PuttySessionInfo)
                 {
-                    _cMenTreeAddConnection.Enabled = false;
-                    _cMenTreeAddFolder.Enabled = false;
-
-                    if (connectionInfo.OpenConnections.Count == 0)
-                        _cMenTreeDisconnect.Enabled = false;
-
-                    if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-                        _cMenTreeToolsTransferFile.Enabled = false;
-
-                    _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-                    _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-                    _cMenTreeToolsSort.Enabled = false;
-                    _cMenTreeDuplicate.Enabled = false;
-                    _cMenTreeRename.Enabled = false;
-                    _cMenTreeDelete.Enabled = false;
-                    _cMenTreeMoveUp.Enabled = false;
-                    _cMenTreeMoveDown.Enabled = false;
+                    ShowHideMenuItemsForPuttyNode(connectionInfo);
                 }
                 else
                 {
-                    if (connectionInfo.OpenConnections.Count == 0)
-                        _cMenTreeDisconnect.Enabled = false;
-
-                    if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-                        _cMenTreeToolsTransferFile.Enabled = false;
-
-                    if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
-                    {
-                        _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-                        _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-                    }
-
-                    if (connectionInfo.Protocol == ProtocolType.IntApp)
-                        _cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
+                    ShowHideMenuItemsForConnectionNode(connectionInfo);
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("ShowHideTreeContextMenuItems (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("ShowHideMenuItems (UI.Controls.ConnectionContextMenu) failed", ex);
             }
+        }
+
+        internal void ShowHideMenuItemsForRootPuttyNode()
+        {
+            _cMenTreeAddConnection.Enabled = false;
+            _cMenTreeAddFolder.Enabled = false;
+            _cMenTreeConnect.Enabled = false;
+            _cMenTreeConnectWithOptions.Enabled = false;
+            _cMenTreeDisconnect.Enabled = false;
+            _cMenTreeToolsTransferFile.Enabled = false;
+            _cMenTreeConnectWithOptions.Enabled = false;
+            _cMenTreeToolsSort.Enabled = false;
+            _cMenTreeToolsExternalApps.Enabled = false;
+            _cMenTreeDuplicate.Enabled = false;
+            _cMenTreeRename.Enabled = true;
+            _cMenTreeDelete.Enabled = false;
+            _cMenTreeMoveUp.Enabled = false;
+            _cMenTreeMoveDown.Enabled = false;
+        }
+
+        internal void ShowHideMenuItemsForRootConnectionNode()
+        {
+            _cMenTreeConnect.Enabled = false;
+            _cMenTreeConnectWithOptions.Enabled = false;
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
+            _cMenTreeDisconnect.Enabled = false;
+            _cMenTreeToolsTransferFile.Enabled = false;
+            _cMenTreeToolsExternalApps.Enabled = false;
+            _cMenTreeDuplicate.Enabled = false;
+            _cMenTreeDelete.Enabled = false;
+            _cMenTreeMoveUp.Enabled = false;
+            _cMenTreeMoveDown.Enabled = false;
+        }
+
+        internal void ShowHideMenuItemsForContainer(ConnectionInfo connectionInfo)
+        {
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+            _cMenTreeDisconnect.Enabled = false;
+
+            var openConnections = ((ContainerInfo)connectionInfo).Children.Sum(child => child.OpenConnections.Count);
+            if (openConnections > 0)
+                _cMenTreeDisconnect.Enabled = true;
+
+            _cMenTreeToolsTransferFile.Enabled = false;
+            _cMenTreeToolsExternalApps.Enabled = false;
+        }
+
+        internal void ShowHideMenuItemsForPuttyNode(ConnectionInfo connectionInfo)
+        {
+            _cMenTreeAddConnection.Enabled = false;
+            _cMenTreeAddFolder.Enabled = false;
+
+            if (connectionInfo.OpenConnections.Count == 0)
+                _cMenTreeDisconnect.Enabled = false;
+
+            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+                _cMenTreeToolsTransferFile.Enabled = false;
+
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+            _cMenTreeToolsSort.Enabled = false;
+            _cMenTreeDuplicate.Enabled = false;
+            _cMenTreeRename.Enabled = false;
+            _cMenTreeDelete.Enabled = false;
+            _cMenTreeMoveUp.Enabled = false;
+            _cMenTreeMoveDown.Enabled = false;
+        }
+
+        internal void ShowHideMenuItemsForConnectionNode(ConnectionInfo connectionInfo)
+        {
+            if (connectionInfo.OpenConnections.Count == 0)
+                _cMenTreeDisconnect.Enabled = false;
+
+            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+                _cMenTreeToolsTransferFile.Enabled = false;
+
+            if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
+            {
+                _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+                _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+            }
+
+            if (connectionInfo.Protocol == ProtocolType.IntApp)
+                _cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
         }
 
         internal void DisableShortcutKeys()

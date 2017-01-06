@@ -104,7 +104,7 @@ namespace mRemoteNG.UI.Window
         #region Tree Context Menu
         private void SetContextMenuEventHandlers()
         {
-            _contextMenu.Opening += (sender, args) => _contextMenu.ShowHideTreeContextMenuItems(SelectedNode);
+            _contextMenu.Opening += (sender, args) => _contextMenu.ShowHideMenuItems(SelectedNode);
             _contextMenu.ConnectClicked += (sender, args) =>
             {
                 var selectedNodeAsContainer = SelectedNode as ContainerInfo;
