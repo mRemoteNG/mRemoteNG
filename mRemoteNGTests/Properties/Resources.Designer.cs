@@ -61,6 +61,32 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version: 1.75.6164.27544
+        ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Installer-1.75.6179.28160.msi
+        ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
+        ///CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
+        ///Checksum: A1E50ACAC4CB8023527E1E7A0E682459
+        ///.
+        /// </summary>
+        internal static string beta_update {
+            get {
+                return ResourceManager.GetString("beta_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version: 1.75.6170.27478
+        ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Portable-1.75.6179.28241.zip
+        ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
+        ///Checksum: 1C35EA199F58001BC4EBB164D8B3D11C.
+        /// </summary>
+        internal static string beta_update_portable {
+            get {
+                return ResourceManager.GetString("beta_update_portable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; Protected=&quot;95syzRuZ4mRxpNkZQzoyX8SDpQXLyMq3GncO8o4SyTBoYvn3TAWgn05ZEU2DrjkM&quot; ConfVersion=&quot;2.5&quot;&gt;
         ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; ConnectToConsole=&quot;False&quot; UseCredSsp=&quot;True&quot; RenderingEngine=&quot;IE&quot; ICAEncryptionStrength=&quot;Encr128Bit&quot; RDPAuthenticationLevel=&quot; [rest of string was truncated]&quot;;.
@@ -139,6 +165,32 @@ namespace mRemoteNGTests.Properties {
         internal static string confCons_v2_6_passwordis_Password_fullencryption {
             get {
                 return ResourceManager.GetString("confCons_v2_6_passwordis_Password_fullencryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version: 1.75.6164.27544
+        ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Installer-1.75.6179.28160.msi
+        ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
+        ///CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
+        ///Checksum: A1E50ACAC4CB8023527E1E7A0E682459
+        ///.
+        /// </summary>
+        internal static string dev_update {
+            get {
+                return ResourceManager.GetString("dev_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version: 1.75.6170.27478
+        ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Portable-1.75.6179.28241.zip
+        ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
+        ///Checksum: 1C35EA199F58001BC4EBB164D8B3D11C.
+        /// </summary>
+        internal static string dev_update_portable {
+            get {
+                return ResourceManager.GetString("dev_update_portable", resourceCulture);
             }
         }
         
@@ -274,6 +326,31 @@ namespace mRemoteNGTests.Properties {
         internal static string test_remotedesktopconnection_rdp {
             get {
                 return ResourceManager.GetString("test_remotedesktopconnection_rdp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version: 1.72.5065.32737
+        ///dURL: http://downloads.mremoteng.org/mRemoteNG-Installer-1.72.exe
+        ///clURL: http://update.mremoteng.org/changes-1.72.txt
+        ///CertificateThumbprint: 1cbd910dbd6e77f26506e7f600736972f700673f
+        ///.
+        /// </summary>
+        internal static string update {
+            get {
+                return ResourceManager.GetString("update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version: 1.75.6170.27478
+        ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Portable-1.75.6179.28241.zip
+        ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
+        ///Checksum: 1C35EA199F58001BC4EBB164D8B3D11C.
+        /// </summary>
+        internal static string update_portable {
+            get {
+                return ResourceManager.GetString("update_portable", resourceCulture);
             }
         }
     }

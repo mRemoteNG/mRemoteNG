@@ -24,12 +24,6 @@ namespace mRemoteNG.App.Info
             return GetUpdateTxtUri(channel);
         }
 
-        public static Uri GetUpdateChannelInfo(string s)
-        {
-            var channel = IsValidChannel(s) ? s : STABLE;
-            return GetUpdateTxtUri(channel);
-        }
-
         private static string GetChannelFileName(string channel)
         {
 #if PORTABLE

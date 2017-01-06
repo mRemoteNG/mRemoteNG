@@ -208,6 +208,14 @@
   <ItemGroup>
     <None Include="Resources\confCons_v2_5_passwordis_Password_fullencryption.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\beta-update-portable.txt" />
+    <Content Include="Resources\beta-update.txt" />
+    <Content Include="Resources\dev-update-portable.txt" />
+    <Content Include="Resources\dev-update.txt" />
+    <Content Include="Resources\update-portable.txt" />
+    <Content Include="Resources\update.txt" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
