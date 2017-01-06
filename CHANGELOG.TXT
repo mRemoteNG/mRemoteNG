@@ -1,12 +1,38 @@
-1.75 Beta 3 (2016-12-01):
-
-Fixes:
-------
-#289: Install fails during update process (only affects v1.75 beta 1 - v1.75 beta 2)
+1.75 Beta 4 (2017-01-XX):
 
 Known Issue:
 ------------
 Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versions.
+
+
+Features/Enhancements:
+----------------------
+Added Release Channels to the update check functionality allowing users to select one of 3 release channels for updates: Stable, Beta, Dev
+
+
+Fixes:
+------
+#311: Import from Active Directory does not use machine's domain by default
+#211, #267: Recursive AD Import wasn't fully functional 
+
+
+General Changes:
+----------------
+#325: Code clean up and additional logging for External Tools based connections
+#298: Code clean up and additional logging around application startup
+#291, #236: External Tools code clean up and additional logging
+
+
+
+1.75 Beta 3 (2016-12-01):
+
+Known Issue:
+------------
+Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versions.
+
+Fixes:
+------
+#289: Install fails during update process (only affects v1.75 beta 1 - v1.75 beta 2)
 
 
 1.75 Beta 2 (2016-12-01):
