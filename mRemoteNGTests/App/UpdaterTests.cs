@@ -9,7 +9,6 @@ namespace mRemoteNGTests.App
     [TestFixture]
     public class UpdaterTests
     {
-#if !PORTABLE
         [Test]
         public void UpdateStableChannel()
         {
@@ -46,7 +45,6 @@ namespace mRemoteNGTests.App
             Assert.That(IsNewer, Is.True);
         }
 
-#else
         [Test]
         public void UpdateStablePortableChannel()
         {
@@ -82,6 +80,5 @@ namespace mRemoteNGTests.App
             var IsNewer = CurrentUpdateInfo.Version > v;
             Assert.That(IsNewer, Is.True);
         }
-#endif
     }
 }
