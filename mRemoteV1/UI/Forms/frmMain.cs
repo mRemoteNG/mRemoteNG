@@ -835,7 +835,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage("PopulateQuickConnectProtocolMenu() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("PopulateQuickConnectProtocolMenu() failed.", ex);
 			}
 		}
 
@@ -864,7 +864,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, MessageClass.ErrorMsg, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("btnQuickConnect_ButtonClick() failed.", ex);
 			}
 		}
 
@@ -1057,7 +1057,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage("frmMain WndProc failed", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("frmMain WndProc failed", ex);
             }
 									
 			base.WndProc(ref m);
