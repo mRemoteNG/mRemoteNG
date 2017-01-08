@@ -1,18 +1,20 @@
-<nav class='navbar navbar-full navbar-dark bg-inverse'>
+<nav class='navbar navbar-toggleable-md navbar-inverse bg-inverse'>
 	<div class='container'>
-		<button class='navbar-toggler hidden-lg-up' data-toggle='collapse' data-target='#navbar-collapse' aria-controls='navbar-collapse' aria-expanded='false' aria-label='Toggle navigation'></button>
-		<div class='collapse navbar-toggleable-md' id='navbar-collapse'>
-			<a class='navbar-brand' href='{{ site.baseurl }}/'>mRemoteNG</a>
-			<div class='nav navbar-nav'>
-				<a class='nav-item nav-link {% if page.url == "/" %}active{% endif %}' href='{{ site.baseurl }}/'>Home</a>
-				<a class='nav-item nav-link {% if page.url contains "/posts/" %}active{% endif %}' href='{{ site.baseurl }}/posts'>Posts</a>
-				<a class='nav-item nav-link' href='https://reddit.com/r/mRemoteNG/'>Reddit</a>
-				<a class='nav-item nav-link' href='{{ site.github.wiki_url }}'>Documentation</a>
-				<a class='nav-item nav-link {% if page.url == "/download" %}active{% endif %}' href='{{ site.baseurl }}/download'>Download</a>
-				<a class='nav-item nav-link {% if page.url == "/contribute" %}active{% endif %}' href='{{ site.baseurl }}/contribute'>Contribute</a>
-				<a class='nav-item nav-link' href='{{ site.github.issues_url }}'>Bugs &amp; Feature Requests</a>
-				<a class='nav-item nav-link' href='{{ site.github.repository_url }}'>Source Code</a>
-			</div>
+	<button class='navbar-toggler float-right' type='button' data-toggle='collapse' data-target='#navbar-collapse' aria-controls='navbar-collapse' aria-expanded='false' aria-label='Toggle navigation'>
+		<span class='navbar-toggler-icon'></span>
+	</button>
+	<a class='navbar-brand hidden-md-down' href='{{ site.baseurl }}/'>mRemoteNG</a>
+	<div class='collapse navbar-collapse' id='navbar-collapse'>
+		<div class='navbar-nav'>
+			<a class='nav-item nav-link {% if page.url == "/" %}active{% endif %}' href='{{ site.baseurl }}/'>Home</a>
+			<a class='nav-item nav-link {% if page.url contains "/posts/" %}active{% endif %}' href='{{ site.baseurl }}/posts'>Posts</a>
+			<a class='nav-item nav-link' href='https://reddit.com/r/mRemoteNG/'>Reddit</a>
+			<a class='nav-item nav-link' href='{{ site.github.wiki_url }}'>Documentation</a>
+			<a class='nav-item nav-link {% if page.url == "/download" %}active{% endif %}' href='{{ site.baseurl }}/download'>Download</a>
+			<a class='nav-item nav-link {% if page.url == "/contribute" %}active{% endif %}' href='{{ site.baseurl }}/contribute'>Contribute</a>
+			<a class='nav-item nav-link' href='{{ site.github.issues_url }}'>Bugs &amp; Feature Requests</a>
+			<a class='nav-item nav-link' href='{{ site.github.repository_url }}'>Source Code</a>
 		</div>
+	</div>
 	</div>
 </nav>

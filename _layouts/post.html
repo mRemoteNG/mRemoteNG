@@ -5,9 +5,9 @@
 	<div class='container clearfix'>
 		{% assign author = site.data.authors[page.author] %}
 		<div class='media'>
-			<img class='media-left media-object img-fluid' src='{{ author.avatar }}'>
+			<img class='d-flex mr-3 media-object' src='{{ author.avatar }}'>
 			<div class='media-body'>
-			<h3 class='media-heading'>{{ page.title }}</h3>
+			<h3 class='mt-0'>{{ page.title }}</h3>
 				<div>
 					<strong>{{ author.name }}</strong> | <time>{{ page.date | date: '%B %-d, %Y'}}</time>
 				</div>
@@ -16,7 +16,7 @@
 				</div>
 			</div>
 		</div>
-		<div class='btn-group float-xs-right' role='group'>
+		<div class='btn-group float-right' role='group'>
 			{% if page.previous %}
 			<a class='btn btn-secondary' href='{{ site.baseurl }}{{ page.previous.url }}'>Previous</a>
 			{% else %}
