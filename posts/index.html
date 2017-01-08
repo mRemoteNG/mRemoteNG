@@ -4,9 +4,9 @@ title: Posts
 {% for post in paginator.posts %}
 {% assign author = site.data.authors[post.author] %}
 <div class='media'>
-	<img class='media-left media-object img-fluid' src='{{ author.avatar }}'>
+	<img class='d-flex mr-3 media-object' src='{{ author.avatar }}'>
 	<div class='media-body'>
-		<h3 class='media-heading'>{{ post.title }}</h3>
+		<h3 class='mt-0'>{{ post.title }}</h3>
 		<div>
 			<strong>{{ author.name }}</strong> | <time>{{ post.date | date: '%B %-d, %Y'}}</time>
 		</div>
@@ -21,7 +21,7 @@ title: Posts
 {% endunless %}
 {% endfor %}
 {% if paginator.total_pages > 1 %}
-<nav class='float-xs-right' aria-label='Post navigation'>
+<nav class='float-right' aria-label='Post navigation'>
 	<ul class='pagination'>
 		{% if paginator.previous_page %}
 		<li class='page-item'>

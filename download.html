@@ -35,7 +35,7 @@ permalink: /download
 {% assign preRelease = release %}
 {% endif %}
 {% endfor %}
-<div class='card-deck text-xs-center'>
+<div class='card-deck text-center'>
 	<div class='card card-block card-outline-success'>
 		<h2 class='card-title'>Stable <small>{% if stableRelease.name == nil %}{{ stableRelease.tag_name }}{% else %}{{ stableRelease.name }}{% endif %}</small></h2>
 		<h4>{{ stableRelease.published_at | date: '%a, %b %d, %Y' }}</h4>

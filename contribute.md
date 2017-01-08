@@ -19,7 +19,7 @@ permalink: /contribute
 </script>
 ## Donate
 If you find mRemoteNG useful and would like to contribute, it would be greatly appreciated.  When you contribute, you make it possible for the team to cover the costs of producing mRemoteNG.
-<div class='card-deck text-xs-center'>
+<div class='card-deck text-center'>
 	<div class='card card-block'>
 		<h2 class='card-title'>PayPal</h2>
 		<form action='https://www.paypal.com/cgi-bin/webscr' method='post'>
