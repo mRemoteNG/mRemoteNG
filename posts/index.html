@@ -21,8 +21,8 @@ title: Posts
 {% endunless %}
 {% endfor %}
 {% if paginator.total_pages > 1 %}
-<nav class='float-right' aria-label='Post navigation'>
-	<ul class='pagination'>
+<nav aria-label='Post navigation'>
+	<ul class='pagination justify-content-end'>
 		{% if paginator.previous_page %}
 		<li class='page-item'>
 			<a class='page-link' href='{{ site.baseurl }}{{ paginator.previous_page_path }}' aria-label='Previous'>
