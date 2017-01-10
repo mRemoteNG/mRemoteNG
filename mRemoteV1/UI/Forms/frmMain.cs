@@ -939,6 +939,7 @@ namespace mRemoteNG.UI.Forms
 		private static void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
 		{
 		    if (e.Button != MouseButtons.Left) return;
+		    if (((ToolStripMenuItem) sender).Tag is ContainerInfo) return;
 		    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
 		    if (tag != null)
 		    {
