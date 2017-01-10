@@ -12,6 +12,7 @@ Added Release Channels to the update check functionality allowing users to selec
 
 Fixes:
 ------
+#334: Quick Connect displays warning when clicking on a folder
 #311: Import from Active Directory does not use machine's domain by default
 #211, #267: Recursive AD Import wasn't fully functional 
 
