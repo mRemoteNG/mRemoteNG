@@ -9,7 +9,7 @@ namespace mRemoteNG.UI.Controls
 {
 	public class QuickConnectComboBox : ToolStripComboBox
 	{
-		private ComboBox _comboBox;
+		private readonly ComboBox _comboBox;
 		private bool _ignoreEnter;
 			
 		public QuickConnectComboBox()
@@ -53,7 +53,7 @@ namespace mRemoteNG.UI.Controls
 					// Items can't be removed from the ComboBox while it is dropped down without possibly causing
 					// an exception so we must close it, delete the item, and then drop it down again. When we
 					// close it programmatically, the SelectedItem may revert to Nothing, so we must save it first.
-					object item = _comboBox.SelectedItem;
+					var item = _comboBox.SelectedItem;
 					_comboBox.DroppedDown = false;
 					_comboBox.Items.Remove(item);
 					_comboBox.SelectedIndex = -1;
@@ -66,29 +66,29 @@ namespace mRemoteNG.UI.Controls
 			}
 		}
 			
-		private void ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
+		private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!(_comboBox.SelectedItem is HistoryItem))
 			{
-				return ;
+				return;
 			}
-			HistoryItem historyItem = (HistoryItem) _comboBox.SelectedItem;
+			var historyItem = (HistoryItem) _comboBox.SelectedItem;
 			OnProtocolChanged(new ProtocolChangedEventArgs(historyItem.ConnectionInfo.Protocol));
 		}
 			
 		private static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
 		{
-			ComboBox comboBox = sender as ComboBox;
+			var comboBox = sender as ComboBox;
 			if (comboBox == null)
 			{
-				return ;
+				return;
 			}
-			object drawItem = comboBox.Items[e.Index];
+			var drawItem = comboBox.Items[e.Index];
 				
 			string drawString;
 			if (drawItem is HistoryItem)
 			{
-				HistoryItem historyItem = (HistoryItem) drawItem;
+				var historyItem = (HistoryItem) drawItem;
 				drawString = historyItem.ToString(true);
 			}
 			else
@@ -116,11 +116,8 @@ namespace mRemoteNG.UI.Controls
 				{
 					return false;
 				}
-				if (ConnectionInfo.Protocol != other.ConnectionInfo.Protocol)
-				{
-					return false;
-				}
-				return true;
+
+				return ConnectionInfo.Protocol == other.ConnectionInfo.Protocol;
 			}
 				
 			public override string ToString()
@@ -130,31 +127,25 @@ namespace mRemoteNG.UI.Controls
 				
 			public string ToString(bool includeProtocol)
 			{
-				string port = string.Empty;
+				var port = string.Empty;
 				if (ConnectionInfo.Port != ConnectionInfo.GetDefaultPort())
 				{
 					port = $":{ConnectionInfo.Port}";
 				}
-				if (includeProtocol)
-				{
-					return $"{ConnectionInfo.Hostname}{port} ({ConnectionInfo.Protocol})";
-				}
-				else
-				{
-					return $"{ConnectionInfo.Hostname}{port}";
-				}
+
+				return includeProtocol ? $"{ConnectionInfo.Hostname}{port} ({ConnectionInfo.Protocol})" : $"{ConnectionInfo.Hostname}{port}";
 			}
 		}
 			
 		private bool Exists(HistoryItem searchItem)
 		{
-			foreach (object item in _comboBox.Items)
+			foreach (var item in _comboBox.Items)
 			{
 				if (!(item is HistoryItem))
 				{
 					continue;
 				}
-				HistoryItem historyItem = (HistoryItem) item;
+				var historyItem = (HistoryItem) item;
 				if (historyItem.Equals(searchItem))
 				{
 					return true;
@@ -167,7 +158,7 @@ namespace mRemoteNG.UI.Controls
 		{
 			try
 			{
-			    HistoryItem historyItem = new HistoryItem {ConnectionInfo = connectionInfo};
+			    var historyItem = new HistoryItem {ConnectionInfo = connectionInfo};
 			    if (!Exists(historyItem))
 				{
 					_comboBox.Items.Insert(0, historyItem);
@@ -175,7 +166,7 @@ namespace mRemoteNG.UI.Controls
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strQuickConnectAddFailed, ex, Messages.MessageClass.ErrorMsg, true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strQuickConnectAddFailed, ex);
 			}
 		}
 			
@@ -209,7 +200,8 @@ namespace mRemoteNG.UI.Controls
 
 	    private void OnConnectRequested(ConnectRequestedEventArgs e)
 	    {
-	        ConnectRequestedEvent?.Invoke(this, new ConnectRequestedEventArgs(e.ConnectionString));
+            // TODO: Any reason to not jsut pass "e"?
+            ConnectRequestedEvent?.Invoke(this, new ConnectRequestedEventArgs(e.ConnectionString));
 	    }
 			
 		public class ProtocolChangedEventArgs : EventArgs
@@ -241,6 +233,7 @@ namespace mRemoteNG.UI.Controls
 
 	    private void OnProtocolChanged(ProtocolChangedEventArgs e)
 	    {
+            // TODO: Any reason to not jsut pass "e"?
 	        ProtocolChangedEvent?.Invoke(this, new ProtocolChangedEventArgs(e.Protocol));
 	    }
         #endregion
