@@ -84,7 +84,7 @@ namespace mRemoteNG.Tools
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("ExternalApp.StartIntegrated() failed.", ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("ExternalApp.StartIntegrated() failed.", ex);
 			}
 		}
 

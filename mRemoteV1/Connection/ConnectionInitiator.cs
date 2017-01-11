@@ -244,7 +244,15 @@ namespace mRemoteNG.Connection
             {
                 var Prot = (ProtocolBase)sender;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent, true);
-                Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
+                string connDetail;
+                if (Prot.InterfaceControl.Info.Hostname == "" && Prot.InterfaceControl.Info.Protocol == ProtocolType.IntApp)
+                    connDetail = Prot.InterfaceControl.Info.ExtApp;
+                else if (Prot.InterfaceControl.Info.Hostname != "")
+                    connDetail = Prot.InterfaceControl.Info.Hostname;
+                else
+                    connDetail = "UNKNOWN";
+
+                Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, Prot.InterfaceControl.Info.Protocol, Environment.UserName));
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 
                 if (Prot.InterfaceControl.Info.PostExtApp == "") return;
