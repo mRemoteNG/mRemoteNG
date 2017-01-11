@@ -81,7 +81,7 @@ namespace mRemoteNG.Themes
 		{
 			if (e.PropertyName == "Name")
 			{
-				return ;
+				return;
 			}
 		    ThemeChangedEvent?.Invoke();
 		}

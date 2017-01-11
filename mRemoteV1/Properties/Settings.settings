@@ -521,7 +521,7 @@
     <Setting Name="IdentifyQuickConnectTabs" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="UpdateChannel" Type="System.String" Scope="Application">
+    <Setting Name="UpdateChannel" Type="System.String" Scope="User">
       <Value Profile="(Default)">release</Value>
     </Setting>
     <Setting Name="ThemeName" Type="System.String" Scope="User">

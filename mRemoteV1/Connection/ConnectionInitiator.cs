@@ -41,7 +41,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
             }
         }
 
@@ -53,7 +53,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
             }
         }
 
@@ -104,7 +104,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
             }
         }
 
@@ -185,11 +185,15 @@ namespace mRemoteNG.Connection
         {
             Control connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(connectionInfo);
 
-            if (connectionInfo.Protocol == ProtocolType.IntApp)
-            {
-                if (Runtime.GetExtAppByName(connectionInfo.ExtApp).Icon != null)
-                    ((TabPage)connectionContainer).Icon = Runtime.GetExtAppByName(connectionInfo.ExtApp).Icon;
-            }
+            if (connectionInfo.Protocol != ProtocolType.IntApp) return connectionContainer;
+
+            var extT = Runtime.GetExtAppByName(connectionInfo.ExtApp);
+
+            if(extT == null) return connectionContainer;
+
+            if (extT.Icon != null)
+                ((TabPage)connectionContainer).Icon = extT.Icon;
+
             return connectionContainer;
         }
 
@@ -230,7 +234,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strProtocolEventDisconnectFailed, ex.Message), true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strProtocolEventDisconnectFailed, ex);
             }
         }
 
@@ -249,7 +253,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnenctionCloseEventFailed + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnenctionCloseEventFailed, ex);
             }
         }
 
@@ -273,7 +277,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionEventConnectionFailed + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionEventConnectionFailed, ex);
             }
         }
     }

@@ -137,7 +137,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			{
                 if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) == (int)ConnectionInfo.Force.NoCredentials)
 				{
-					return ;
+					return;
 				}
 						
 				string _user = _Info.Username;

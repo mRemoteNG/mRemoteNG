@@ -20,13 +20,12 @@ namespace mRemoteNG.Connection.Protocol
         #region Public Methods
 		public override bool Initialize()
 		{
-			if (InterfaceControl.Info != null)
-			{
-				_externalTool = Runtime.GetExtAppByName(Convert.ToString(InterfaceControl.Info.ExtApp));
-				_externalTool.ConnectionInfo = InterfaceControl.Info;
-			}
-					
-			return base.Initialize();
+		    if (InterfaceControl.Info == null) return base.Initialize();
+
+		    _externalTool = Runtime.GetExtAppByName(Convert.ToString(InterfaceControl.Info.ExtApp));
+		    _externalTool.ConnectionInfo = InterfaceControl.Info;
+
+		    return base.Initialize();
 		}
 				
 		public override bool Connect()
@@ -40,20 +39,25 @@ namespace mRemoteNG.Connection.Protocol
 					return false;
 				}
 
-                ExternalToolArgumentParser argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo);
-				_process = new Process();
-						
-				_process.StartInfo.UseShellExecute = true;
-                _process.StartInfo.FileName = argParser.ParseArguments(_externalTool.FileName);
-                _process.StartInfo.Arguments = argParser.ParseArguments(_externalTool.Arguments);
-						
-				_process.EnableRaisingEvents = true;
-				_process.Exited += ProcessExited;
+                var argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo);
+			    _process = new Process
+			    {
+			        StartInfo =
+			        {
+			            UseShellExecute = true,
+			            FileName = argParser.ParseArguments(_externalTool.FileName),
+			            Arguments = argParser.ParseArguments(_externalTool.Arguments)
+			        },
+			        EnableRaisingEvents = true
+			    };
+
+
+			    _process.Exited += ProcessExited;
 						
 				_process.Start();
 				_process.WaitForInputIdle(Convert.ToInt32(Settings.Default.MaxPuttyWaitTime * 1000));
 						
-				int startTicks = Environment.TickCount;
+				var startTicks = Environment.TickCount;
 				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (Settings.Default.MaxPuttyWaitTime * 1000))
 				{
 					_process.Refresh();
@@ -69,9 +73,9 @@ namespace mRemoteNG.Connection.Protocol
 						
 				NativeMethods.SetParent(_handle, InterfaceControl.Handle);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strIntAppStuff, true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppHandle, _handle.ToString()), true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppHandle, _handle), true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppTitle, _process.MainWindowTitle), true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppParentHandle, InterfaceControl.Parent.Handle.ToString()), true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppParentHandle, InterfaceControl.Parent.Handle), true);
 						
 				Resize(this, new EventArgs());
 				base.Connect();
@@ -96,7 +100,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: Language.strIntAppFocusFailed, ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppFocusFailed, ex, logOnly: true);
 			}
 		}
 				
@@ -112,7 +116,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: Language.strIntAppResizeFailed, ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppResizeFailed, ex, logOnly: true);
 			}
 		}
 				
@@ -127,7 +131,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: Language.strIntAppKillFailed, ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppKillFailed, ex, logOnly: true);
 			}
 					
 			try
@@ -139,7 +143,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: Language.strIntAppDisposeFailed, ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppDisposeFailed, ex, logOnly: true);
 			}
 					
 			base.Close();

@@ -89,7 +89,7 @@ namespace mRemoteNG.Config.Connections
             if (!VerifyDatabaseVersion(sqlConnector))
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
-				return ;
+				return;
 			}
 
 		    var rootTreeNode = Runtime.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();

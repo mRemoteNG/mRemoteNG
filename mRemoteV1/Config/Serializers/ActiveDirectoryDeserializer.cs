@@ -66,7 +66,7 @@ namespace mRemoteNG.Config.Serializers
                                 // check/continue here so we don't create empty connection objects
                                 if(!_importSubOU) continue;
 
-                                ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer);
+                                ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer, _importSubOU);
                                 continue;
                             }
 

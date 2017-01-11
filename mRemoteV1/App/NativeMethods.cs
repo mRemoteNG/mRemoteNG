@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+#pragma warning disable 169
 
 namespace mRemoteNG.App
 {
@@ -325,6 +326,11 @@ namespace mRemoteNG.App
         /// Sent when a window belonging to a different application than the active window is about to be activated. The message is sent to the application whose window is being activated and to the application whose window is being deactivated.
         /// </summary>
         public const int WM_ACTIVATEAPP = 0x1C;
+
+        /// <summary>
+        /// Sent to a window if the mouse causes the cursor to move within a window and mouse input is not captured. 
+        /// </summary>
+        public const int WM_SETCURSOR = 0x20;
 
         /// <summary>
         /// Sent when the cursor is in an inactive window and the user presses a mouse button. The parent window receives this message only if the child window passes it to the DefWindowProc function.

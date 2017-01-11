@@ -164,7 +164,7 @@ namespace mRemoteNG.UI.Forms
             ConnectionTreeWindow = Windows.TreeForm;
         }
 
-		private void ApplyLanguage()
+        private void ApplyLanguage()
 		{
 			mMenFile.Text = Language.strMenuFile;
 			mMenFileNew.Text = Language.strMenuNewConnectionFile;
@@ -384,7 +384,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorAddExternalToolsToToolBarFailed, ex.Message), true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddExternalToolsToToolBarFailed, ex);
 			}
 		}
 								
@@ -426,6 +426,7 @@ namespace mRemoteNG.UI.Forms
         private void mMenFile_DropDownOpening(object sender, EventArgs e)
         {
             var selectedNodeType = ConnectionTreeWindow.SelectedNode?.GetTreeNodeType();
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (selectedNodeType)
             {
                 case TreeNodeType.Root:
@@ -733,7 +734,7 @@ namespace mRemoteNG.UI.Forms
                 MessageBoxIcon.Question);
             if (msgBoxResult == DialogResult.Yes)
 			{
-				Startup.Instance.SetDefaultLayout();
+				Default.SetDefaultLayout();
 			}
 		}
 
@@ -834,7 +835,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage("PopulateQuickConnectProtocolMenu() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("PopulateQuickConnectProtocolMenu() failed.", ex);
 			}
 		}
 
@@ -863,7 +864,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, MessageClass.ErrorMsg, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("btnQuickConnect_ButtonClick() failed.", ex);
 			}
 		}
 
@@ -938,6 +939,7 @@ namespace mRemoteNG.UI.Forms
 		private static void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
 		{
 		    if (e.Button != MouseButtons.Left) return;
+		    if (((ToolStripMenuItem) sender).Tag is ContainerInfo) return;
 		    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
 		    if (tag != null)
 		    {
@@ -1056,7 +1058,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage("frmMain WndProc failed", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("frmMain WndProc failed", ex);
             }
 									
 			base.WndProc(ref m);
@@ -1068,6 +1070,9 @@ namespace mRemoteNG.UI.Forms
 		    if (w?.TabController.SelectedTab == null) return;
 		    var tab = w.TabController.SelectedTab;
 		    var ifc = (InterfaceControl)tab.Tag;
+
+		    if (ifc == null) return;
+
 		    ifc.Protocol.Focus();
 		    ((ConnectionWindow) ifc.FindForm())?.RefreshInterfaceController();
 		}
@@ -1201,6 +1206,24 @@ namespace mRemoteNG.UI.Forms
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0, SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1, SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
 		}
+
+        public void SetDefaultLayout()
+        {
+            Default.pnlDock.Visible = false;
+
+            Default.pnlDock.DockLeftPortion = Default.pnlDock.Width * 0.2;
+            Default.pnlDock.DockRightPortion = Default.pnlDock.Width * 0.2;
+            Default.pnlDock.DockTopPortion = Default.pnlDock.Height * 0.25;
+            Default.pnlDock.DockBottomPortion = Default.pnlDock.Height * 0.25;
+
+            Windows.TreePanel.Show(Default.pnlDock, DockState.DockLeft);
+            Windows.ConfigPanel.Show(Default.pnlDock);
+            Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
+
+            Windows.ScreenshotForm.Hide();
+
+            Default.pnlDock.Visible = true;
+        }
         #endregion
 
         #region Events

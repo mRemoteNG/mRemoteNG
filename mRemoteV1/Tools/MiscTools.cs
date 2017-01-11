@@ -244,7 +244,7 @@ namespace mRemoteNG.Tools
 				{
 					if (_value == value)
 					{
-						return ;
+						return;
 					}
 					if (!_value)
 					{

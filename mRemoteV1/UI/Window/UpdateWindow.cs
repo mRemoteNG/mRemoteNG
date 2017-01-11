@@ -6,6 +6,7 @@ using System.Net;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
+using mRemoteNG.Messages;
 using WeifenLuo.WinFormsUI.Docking;
 
 #if !PORTABLE
@@ -163,17 +164,13 @@ namespace mRemoteNG.UI.Window
 				{
 					lblStatus.Text = Language.strNoUpdateAvailable;
 					lblStatus.ForeColor = Color.ForestGreen;
-							
-					if (_appUpdate.CurrentUpdateInfo != null)
-					{
-						var updateInfo = _appUpdate.CurrentUpdateInfo;
-						if (updateInfo.IsValid && updateInfo.Version != null)
-						{
-							lblLatestVersion.Text = updateInfo.Version.ToString();
-							lblLatestVersionLabel.Visible = true;
-							lblLatestVersion.Visible = true;
-						}
-					}
+
+				    if (_appUpdate.CurrentUpdateInfo == null) return;
+				    var updateInfo = _appUpdate.CurrentUpdateInfo;
+				    if (!updateInfo.IsValid || updateInfo.Version == null) return;
+				    lblLatestVersion.Text = updateInfo.Version.ToString();
+				    lblLatestVersionLabel.Visible = true;
+				    lblLatestVersion.Visible = true;
 				}
 			}
 			catch (Exception ex)
@@ -181,7 +178,7 @@ namespace mRemoteNG.UI.Window
 				lblStatus.Text = Language.strUpdateCheckFailedLabel;
 				lblStatus.ForeColor = Color.OrangeRed;
 						
-				Runtime.MessageCollector.AddExceptionMessage(Language.strUpdateCheckCompleteFailed, ex);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateCheckCompleteFailed, ex);
 			}
 		}
 				
@@ -207,7 +204,7 @@ namespace mRemoteNG.UI.Window
             }
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strUpdateGetChangeLogFailed, ex);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateGetChangeLogFailed, ex);
 			}
 		}
 				
@@ -230,7 +227,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strUpdateDownloadFailed, ex);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateDownloadFailed, ex);
 			}
 		}
 #endregion
@@ -267,8 +264,9 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strUpdateDownloadCompleteFailed, ex);
-			}
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateDownloadCompleteFailed, ex);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message);
+            }
 		}
 #endregion
 	}
