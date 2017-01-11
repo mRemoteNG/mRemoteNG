@@ -205,7 +205,7 @@ namespace mRemoteNG.UI.Forms
 			    SelectFileTypeBasedOnSaveFormat(saveFileDialog);
 
                 if (saveFileDialog.ShowDialog(this) != DialogResult.OK)
-					return ;
+					return;
 				
 				txtFileName.Text = saveFileDialog.FileName;
             }
