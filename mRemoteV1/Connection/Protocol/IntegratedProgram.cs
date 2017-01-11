@@ -22,7 +22,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 		    if (InterfaceControl.Info == null) return base.Initialize();
 
-		    _externalTool = Runtime.GetExtAppByName(Convert.ToString(InterfaceControl.Info.ExtApp));
+		    _externalTool = Runtime.GetExtAppByName(InterfaceControl.Info.ExtApp);
 		    _externalTool.ConnectionInfo = InterfaceControl.Info;
 
 		    return base.Initialize();
@@ -55,10 +55,10 @@ namespace mRemoteNG.Connection.Protocol
 			    _process.Exited += ProcessExited;
 						
 				_process.Start();
-				_process.WaitForInputIdle(Convert.ToInt32(Settings.Default.MaxPuttyWaitTime * 1000));
+				_process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
 						
 				var startTicks = Environment.TickCount;
-				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (Settings.Default.MaxPuttyWaitTime * 1000))
+				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
 				{
 					_process.Refresh();
 					if (_process.MainWindowTitle != "Default IME")
@@ -92,15 +92,12 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if (ConnectionWindow.InTabDrag)
-				{
-					return ;
-				}
+				if (ConnectionWindow.InTabDrag) return;
 				NativeMethods.SetForegroundWindow(_handle);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppFocusFailed, ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppFocusFailed, ex);
 			}
 		}
 				
@@ -108,15 +105,12 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if (InterfaceControl.Size == Size.Empty)
-				{
-					return ;
-				}
-                NativeMethods.MoveWindow(_handle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+				if (InterfaceControl.Size == Size.Empty) return;
+                NativeMethods.MoveWindow(_handle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2, InterfaceControl.Height + SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height * 2, true);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppResizeFailed, ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppResizeFailed, ex);
 			}
 		}
 				
@@ -131,7 +125,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppKillFailed, ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppKillFailed, ex);
 			}
 					
 			try
@@ -143,7 +137,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppDisposeFailed, ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppDisposeFailed, ex);
 			}
 					
 			base.Close();
