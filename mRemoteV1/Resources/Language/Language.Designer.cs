@@ -4019,7 +4019,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting.
+        ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0).
         /// </summary>
         internal static string strPropertyDescriptionMinutesToIdleTimeout {
             get {

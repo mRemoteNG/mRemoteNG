@@ -86,8 +86,8 @@ namespace mRemoteNG.Connection
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RDPAuthenticationLevel {get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
-        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyName"),
-        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescription"),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRDPMinutesToIdleTimeout"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDPMinutesToIdleTimeout"),
         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RDPMinutesToIdleTimeout { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 

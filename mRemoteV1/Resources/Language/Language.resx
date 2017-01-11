@@ -2422,7 +2422,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Download</value>
   </data>
   <data name="strPropertyDescriptionMinutesToIdleTimeout" xml:space="preserve">
-    <value>The number of minutes for the RDP session to sit idle before automatically disconnecting</value>
+    <value>The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0)</value>
   </data>
   <data name="strPropertyNameMinutesToIdleTimeout" xml:space="preserve">
     <value>Minutes to Idle</value>
