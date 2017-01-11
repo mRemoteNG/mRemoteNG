@@ -6,7 +6,6 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -15,9 +14,9 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class ConnectionTreeWindow
 	{
-	    private readonly ConnectionContextMenu _contextMenu = new ConnectionContextMenu();
+	    private readonly ConnectionContextMenu _contextMenu;
 
-	    public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
+        public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
 	    public ConnectionTree ConnectionTree
 	    {
@@ -30,9 +29,9 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.Tree;
 			DockPnl = panel;
 			InitializeComponent();
+            _contextMenu = new ConnectionContextMenu(olvConnections);
             olvConnections.ContextMenuStrip = _contextMenu;
             SetMenuEventHandlers();
-            SetContextMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		}
 
@@ -102,79 +101,6 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Tree Context Menu
-        private void SetContextMenuEventHandlers()
-        {
-            _contextMenu.Opening += (sender, args) => _contextMenu.ShowHideMenuItems(SelectedNode);
-            _contextMenu.ConnectClicked += (sender, args) =>
-            {
-                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
-                if (selectedNodeAsContainer != null)
-                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DoNotJump);
-                else
-                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DoNotJump);
-            };
-            _contextMenu.ConnectToConsoleSessionClicked += (sender, args) =>
-            {
-                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
-                if (selectedNodeAsContainer != null)
-                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
-                else
-                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
-            };
-            _contextMenu.DontConnectToConsoleSessionClicked += (sender, args) =>
-            {
-                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
-                if (selectedNodeAsContainer != null)
-                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
-                else
-                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
-            };
-            _contextMenu.ConnectInFullscreenClicked += (sender, args) =>
-            {
-                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
-                if (selectedNodeAsContainer != null)
-                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
-                else
-                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
-            };
-            _contextMenu.ConnectWithNoCredentialsClick += (sender, args) =>
-            {
-                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
-                if (selectedNodeAsContainer != null)
-                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.NoCredentials);
-                else
-                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.NoCredentials);
-            };
-            _contextMenu.ChoosePanelBeforeConnectingClicked += (sender, args) =>
-            {
-                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
-                if (selectedNodeAsContainer != null)
-                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
-                else
-                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
-            };
-            _contextMenu.DisconnectClicked += (sender, args) => olvConnections.DisconnectConnection(SelectedNode);
-            _contextMenu.TransferFileClicked += (sender, args) => olvConnections.SshTransferFile();
-            _contextMenu.DuplicateClicked += (sender, args) => olvConnections.DuplicateSelectedNode();
-            _contextMenu.RenameClicked += (sender, args) => olvConnections.RenameSelectedNode();
-            _contextMenu.DeleteClicked += (sender, args) => olvConnections.DeleteSelectedNode();
-            _contextMenu.ImportFileClicked += (sender, args) =>
-            {
-                var selectedNodeAsContainer = SelectedNode as ContainerInfo ?? SelectedNode.Parent;
-                Import.ImportFromFile(selectedNodeAsContainer);
-            };
-            _contextMenu.ImportActiveDirectoryClicked += (sender, args) => Windows.Show(WindowType.ActiveDirectoryImport);
-            _contextMenu.ImportPortScanClicked += (sender, args) => Windows.Show(WindowType.PortScan);
-            _contextMenu.ExportFileClicked += (sender, args) => Export.ExportToFile(SelectedNode, Runtime.ConnectionTreeModel);
-            _contextMenu.AddConnectionClicked += cMenTreeAddConnection_Click;
-            _contextMenu.AddFolderClicked += cMenTreeAddFolder_Click;
-            _contextMenu.SortAscendingClicked += (sender, args) => SortNodesRecursive(SelectedNode, ListSortDirection.Ascending);
-            _contextMenu.SortDescendingClicked += (sender, args) => SortNodesRecursive(SelectedNode, ListSortDirection.Descending);
-            _contextMenu.MoveUpClicked += cMenTreeMoveUp_Click;
-            _contextMenu.MoveDownClicked += cMenTreeMoveDown_Click;
-            _contextMenu.ExternalToolClicked += (sender, args) => olvConnections.StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
-        }
-
         private void cMenTreeAddConnection_Click(object sender, EventArgs e)
 		{
 			olvConnections.AddConnection();
@@ -200,18 +126,6 @@ namespace mRemoteNG.UI.Window
 
             Runtime.SaveConnectionsAsync();
         }
-
-        private void cMenTreeMoveUp_Click(object sender, EventArgs e)
-		{
-            SelectedNode.Parent.PromoteChild(SelectedNode);
-            Runtime.SaveConnectionsAsync();
-		}
-
-        private void cMenTreeMoveDown_Click(object sender, EventArgs e)
-		{
-            SelectedNode.Parent.DemoteChild(SelectedNode);
-            Runtime.SaveConnectionsAsync();
-		}
 
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
         {

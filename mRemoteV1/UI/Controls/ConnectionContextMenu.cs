@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -12,7 +13,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.UI.Controls
 {
-    internal sealed class ConnectionContextMenu : ContextMenuStrip
+    public sealed class ConnectionContextMenu : ContextMenuStrip
     {
         private ToolStripMenuItem _cMenTreeAddConnection;
         private ToolStripMenuItem _cMenTreeAddFolder;
@@ -44,14 +45,20 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeImportFile;
         private ToolStripMenuItem _cMenTreeImportActiveDirectory;
         private ToolStripMenuItem _cMenTreeImportPortScan;
+        private readonly ConnectionTree _connectionTree;
 
 
-        public ConnectionContextMenu()
+        public ConnectionContextMenu(ConnectionTree connectionTree)
         {
+            _connectionTree = connectionTree;
             InitializeComponent();
             ApplyLanguage();
             EnableShortcutKeys();
-            Opening += (sender, args) => AddExternalApps();
+            Opening += (sender, args) =>
+            {
+                AddExternalApps();
+                ShowHideMenuItems();
+            };
         }
 
         private void InitializeComponent()
@@ -384,34 +391,34 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Text = Language.strMoveDown;
         }
 
-        internal void ShowHideMenuItems(ConnectionInfo connectionInfo)
+        internal void ShowHideMenuItems()
         {
-            if (connectionInfo == null)
+            if (_connectionTree.SelectedNode == null)
                 return;
 
             try
             {
                 Enabled = true;
                 EnableMenuItemsRecursive(Items);
-                if (connectionInfo is RootPuttySessionsNodeInfo)
+                if (_connectionTree.SelectedNode is RootPuttySessionsNodeInfo)
                 {
                     ShowHideMenuItemsForRootPuttyNode();
                 }
-                else if (connectionInfo is RootNodeInfo)
+                else if (_connectionTree.SelectedNode is RootNodeInfo)
                 {
                     ShowHideMenuItemsForRootConnectionNode();
                 }
-                else if (connectionInfo is ContainerInfo)
+                else if (_connectionTree.SelectedNode is ContainerInfo)
                 {
-                    ShowHideMenuItemsForContainer(connectionInfo);
+                    ShowHideMenuItemsForContainer(_connectionTree.SelectedNode);
                 }
-                else if (connectionInfo is PuttySessionInfo)
+                else if (_connectionTree.SelectedNode is PuttySessionInfo)
                 {
-                    ShowHideMenuItemsForPuttyNode(connectionInfo);
+                    ShowHideMenuItemsForPuttyNode(_connectionTree.SelectedNode);
                 }
                 else
                 {
-                    ShowHideMenuItemsForConnectionNode(connectionInfo);
+                    ShowHideMenuItemsForConnectionNode(_connectionTree.SelectedNode);
                 }
             }
             catch (Exception ex)
@@ -578,183 +585,159 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsExternalApps.DropDownItems.Clear();
         }
 
-        #region Events
-        public event EventHandler ConnectClicked;
-
+        #region Click handlers
         private void OnConnectClicked(object sender, EventArgs e)
         {
-            var handler = ConnectClicked;
-            handler?.Invoke(this, e);
+            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
+            if (selectedNodeAsContainer != null)
+                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DoNotJump);
+            else
+                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DoNotJump);
         }
-
-        public event EventHandler ConnectToConsoleSessionClicked;
 
         private void OnConnectToConsoleSessionClicked(object sender, EventArgs e)
         {
-            var handler = ConnectToConsoleSessionClicked;
-            handler?.Invoke(this, e);
+            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
+            if (selectedNodeAsContainer != null)
+                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            else
+                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
         }
-        
-        public event EventHandler DontConnectToConsoleSessionClicked;
 
         private void OnDontConnectToConsoleSessionClicked(object sender, EventArgs e)
         {
-            var handler = DontConnectToConsoleSessionClicked;
-            handler?.Invoke(this, e);
+            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
+            if (selectedNodeAsContainer != null)
+                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            else
+                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
         }
-
-        public event EventHandler ConnectInFullscreenClicked;
 
         private void OnConnectInFullscreenClicked(object sender, EventArgs e)
         {
-            var handler = ConnectInFullscreenClicked;
-            handler?.Invoke(this, e);
+            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
+            if (selectedNodeAsContainer != null)
+                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+            else
+                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
         }
-
-        public event EventHandler ConnectWithNoCredentialsClick;
 
         private void OnConnectWithNoCredentialsClick(object sender, EventArgs e)
         {
-            var handler = ConnectWithNoCredentialsClick;
-            handler?.Invoke(this, e);
+            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
+            if (selectedNodeAsContainer != null)
+                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.NoCredentials);
+            else
+                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.NoCredentials);
         }
-
-        public event EventHandler ChoosePanelBeforeConnectingClicked;
 
         private void OnChoosePanelBeforeConnectingClicked(object sender, EventArgs e)
         {
-            var handler = ChoosePanelBeforeConnectingClicked;
-            handler?.Invoke(this, e);
+            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
+            if (selectedNodeAsContainer != null)
+                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+            else
+                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
         }
-
-
-        public event EventHandler DisconnectClicked;
 
         private void OnDisconnectClicked(object sender, EventArgs e)
         {
-            var handler = DisconnectClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.DisconnectConnection(_connectionTree.SelectedNode);
         }
-
-        public event EventHandler TransferFileClicked;
 
         private void OnTransferFileClicked(object sender, EventArgs e)
         {
-            var handler = TransferFileClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.SshTransferFile();
         }
-
-        public event EventHandler DuplicateClicked;
 
         private void OnDuplicateClicked(object sender, EventArgs e)
         {
-            var handler = DuplicateClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.DuplicateSelectedNode();
         }
-
-        public event EventHandler RenameClicked;
 
         private void OnRenameClicked(object sender, EventArgs e)
         {
-            var handler = RenameClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.RenameSelectedNode();
         }
-
-        public event EventHandler DeleteClicked;
 
         private void OnDeleteClicked(object sender, EventArgs e)
         {
-            var handler = DeleteClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.DeleteSelectedNode();
         }
-
-        public event EventHandler ImportFileClicked;
 
         private void OnImportFileClicked(object sender, EventArgs e)
         {
-            var handler = ImportFileClicked;
-            handler?.Invoke(this, e);
+            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo ?? _connectionTree.SelectedNode.Parent;
+            Import.ImportFromFile(selectedNodeAsContainer);
         }
-
-        public event EventHandler ImportActiveDirectoryClicked;
 
         private void OnImportActiveDirectoryClicked(object sender, EventArgs e)
         {
-            var handler = ImportActiveDirectoryClicked;
-            handler?.Invoke(this, e);
+            Windows.Show(WindowType.ActiveDirectoryImport);
         }
-
-        public event EventHandler ImportPortScanClicked;
 
         private void OnImportPortScanClicked(object sender, EventArgs e)
         {
-            var handler = ImportPortScanClicked;
-            handler?.Invoke(this, e);
+            Windows.Show(WindowType.PortScan);
         }
-
-        public event EventHandler ExportFileClicked;
 
         private void OnExportFileClicked(object sender, EventArgs e)
         {
-            var handler = ExportFileClicked;
-            handler?.Invoke(this, e);
+            Export.ExportToFile(_connectionTree.SelectedNode, Runtime.ConnectionTreeModel);
         }
-
-        public event EventHandler AddConnectionClicked;
 
         private void OnAddConnectionClicked(object sender, EventArgs e)
         {
-            var handler = AddConnectionClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.AddConnection();
+            Runtime.SaveConnectionsAsync();
         }
-
-        public event EventHandler AddFolderClicked;
 
         private void OnAddFolderClicked(object sender, EventArgs e)
         {
-            var handler = AddFolderClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.AddFolder();
+            Runtime.SaveConnectionsAsync();
         }
-
-        public event EventHandler SortAscendingClicked;
 
         private void OnSortAscendingClicked(object sender, EventArgs e)
         {
-            var handler = SortAscendingClicked;
-            handler?.Invoke(this, e);
+            SortNodesRecursive(_connectionTree.SelectedNode, ListSortDirection.Ascending);
         }
-
-        public event EventHandler SortDescendingClicked;
 
         private void OnSortDescendingClicked(object sender, EventArgs e)
         {
-            var handler = SortDescendingClicked;
-            handler?.Invoke(this, e);
+            SortNodesRecursive(_connectionTree.SelectedNode, ListSortDirection.Descending);
         }
-
-        public event EventHandler MoveUpClicked;
 
         private void OnMoveUpClicked(object sender, EventArgs e)
         {
-            var handler = MoveUpClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.SelectedNode.Parent.PromoteChild(_connectionTree.SelectedNode);
+            Runtime.SaveConnectionsAsync();
         }
-
-        public event EventHandler MoveDownClicked;
 
         private void OnMoveDownClicked(object sender, EventArgs e)
         {
-            var handler = MoveDownClicked;
-            handler?.Invoke(this, e);
+            _connectionTree.SelectedNode.Parent.DemoteChild(_connectionTree.SelectedNode);
+            Runtime.SaveConnectionsAsync();
         }
-
-        public event EventHandler ExternalToolClicked;
 
         private void OnExternalToolClicked(object sender, EventArgs e)
         {
-            var handler = ExternalToolClicked;
-            handler?.Invoke(sender, e);
+            _connectionTree.StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
         }
         #endregion
+
+        private void SortNodesRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
+        {
+            if (sortTarget == null)
+                sortTarget = _connectionTree.GetRootConnectionNode();
+
+            var sortTargetAsContainer = sortTarget as ContainerInfo;
+            if (sortTargetAsContainer != null)
+                sortTargetAsContainer.SortRecursive(sortDirection);
+            else
+                _connectionTree.SelectedNode.Parent.SortRecursive(sortDirection);
+
+            Runtime.SaveConnectionsAsync();
+        }
     }
 }
