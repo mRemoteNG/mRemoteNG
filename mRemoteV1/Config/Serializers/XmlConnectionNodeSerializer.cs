@@ -67,6 +67,7 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("RenderingEngine", connectionInfo.RenderingEngine));
             element.Add(new XAttribute("ICAEncryptionStrength", connectionInfo.ICAEncryptionStrength));
             element.Add(new XAttribute("RDPAuthenticationLevel", connectionInfo.RDPAuthenticationLevel));
+            element.Add(new XAttribute("RDPMinutesToIdleTimeout", connectionInfo.RDPMinutesToIdleTimeout));
             element.Add(new XAttribute("LoadBalanceInfo", connectionInfo.LoadBalanceInfo));
             element.Add(new XAttribute("Colors", connectionInfo.Colors));
             element.Add(new XAttribute("Resolution", connectionInfo.Resolution));
@@ -159,6 +160,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritUsername", connectionInfo.Inheritance.Username.ToString()));
                 element.Add(new XAttribute("InheritICAEncryptionStrength", connectionInfo.Inheritance.ICAEncryptionStrength.ToString()));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel", connectionInfo.Inheritance.RDPAuthenticationLevel.ToString()));
+                element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", connectionInfo.Inheritance.RDPMinutesToIdleTimeout.ToString()));
                 element.Add(new XAttribute("InheritLoadBalanceInfo", connectionInfo.Inheritance.LoadBalanceInfo.ToString()));
                 element.Add(new XAttribute("InheritPreExtApp", connectionInfo.Inheritance.PreExtApp.ToString()));
                 element.Add(new XAttribute("InheritPostExtApp", connectionInfo.Inheritance.PostExtApp.ToString()));
@@ -214,6 +216,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritUsername", false.ToString()));
                 element.Add(new XAttribute("InheritICAEncryptionStrength", false.ToString()));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel", false.ToString()));
+                element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", false.ToString()));
                 element.Add(new XAttribute("InheritLoadBalanceInfo", false.ToString()));
                 element.Add(new XAttribute("InheritPreExtApp", false.ToString()));
                 element.Add(new XAttribute("InheritPostExtApp", false.ToString()));

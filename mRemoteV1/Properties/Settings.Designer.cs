@@ -2350,5 +2350,29 @@ namespace mRemoteNG {
                 this["InhDefaultSoundQuality"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ConDefaultRDPMinutesToIdleTimeout {
+            get {
+                return ((int)(this["ConDefaultRDPMinutesToIdleTimeout"]));
+            }
+            set {
+                this["ConDefaultRDPMinutesToIdleTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRDPMinutesToIdleTimeout {
+            get {
+                return ((bool)(this["InhDefaultRDPMinutesToIdleTimeout"]));
+            }
+            set {
+                this["InhDefaultRDPMinutesToIdleTimeout"] = value;
+            }
+        }
     }
 }

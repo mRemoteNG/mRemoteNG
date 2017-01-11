@@ -4019,6 +4019,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting.
+        /// </summary>
+        internal static string strPropertyDescriptionMinutesToIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This is the name that will be displayed in the connections tree..
         /// </summary>
         internal static string strPropertyDescriptionName {
@@ -4492,6 +4501,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameMACAddress {
             get {
                 return ResourceManager.GetString("strPropertyNameMACAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minutes to Idle.
+        /// </summary>
+        internal static string strPropertyNameMinutesToIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyNameMinutesToIdleTimeout", resourceCulture);
             }
         }
         

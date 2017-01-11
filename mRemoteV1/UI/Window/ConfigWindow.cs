@@ -812,6 +812,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("RDGatewayUseConnectionCredentials");
                     strHide.Add("RDGatewayUsername");
                     strHide.Add("RDPAuthenticationLevel");
+                    strHide.Add("RDPMinutesToIdleTimeout");
                     strHide.Add("LoadBalanceInfo");
                     strHide.Add("RedirectDiskDrives");
                     strHide.Add("RedirectKeys");
@@ -910,7 +911,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -953,7 +955,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -995,7 +998,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -1038,7 +1042,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -1082,7 +1087,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -1126,7 +1132,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -1170,7 +1177,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -1212,7 +1220,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -1250,7 +1259,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -1291,7 +1301,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RDGatewayUseConnectionCredentials");
 							strHide.Add("RDGatewayUsername");
 							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
+                            strHide.Add("RDPMinutesToIdleTimeout");
+                            strHide.Add("LoadBalanceInfo");
 							strHide.Add("RedirectDiskDrives");
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
@@ -1372,6 +1383,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("ICAEncryptionStrength");
                         if (conI.Inheritance.RDPAuthenticationLevel)
                             strHide.Add("RDPAuthenticationLevel");
+                        if (conI.Inheritance.RDPMinutesToIdleTimeout)
+                            strHide.Add("RDPMinutesToIdleTimeout");
                         if (conI.Inheritance.LoadBalanceInfo)
                             strHide.Add("LoadBalanceInfo");
                         if (conI.Inheritance.Username)
