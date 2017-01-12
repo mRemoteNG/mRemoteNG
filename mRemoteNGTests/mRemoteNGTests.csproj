@@ -151,6 +151,7 @@
     <Compile Include="Security\LegacyRijndaelCryptographyProviderTests.cs" />
     <Compile Include="Tree\ConnectionTreeTests.cs" />
     <Compile Include="Tree\NodeSearcherTests.cs" />
+    <Compile Include="Tree\OpenConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
       <SubType>Form</SubType>

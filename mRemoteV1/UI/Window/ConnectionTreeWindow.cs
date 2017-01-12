@@ -103,7 +103,7 @@ namespace mRemoteNG.UI.Window
             olvConnections.DoubleClickHandler.ClickHandlers = new ITreeNodeClickHandler[]
             {
                 new ExpandNodeClickHandler(olvConnections),
-                new OpenConnectionClickHandler()
+                new OpenConnectionClickHandler(_connectionInitiator)
             };
         }
 
@@ -112,7 +112,7 @@ namespace mRemoteNG.UI.Window
             
             var singleClickHandlers = new List<ITreeNodeClickHandler>();
             if (Settings.Default.SingleClickOnConnectionOpensIt)
-                singleClickHandlers.Add(new OpenConnectionClickHandler());
+                singleClickHandlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
             if (Settings.Default.SingleClickSwitchesToOpenConnection)
                 singleClickHandlers.Add(new SwitchToConnectionClickHandler());
             olvConnections.SingleClickHandler.ClickHandlers = singleClickHandlers;
