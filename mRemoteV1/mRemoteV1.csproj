@@ -244,6 +244,7 @@
       <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\ObjectWrapper.cs" />
+    <Compile Include="UI\Controls\IConnectionTree.cs" />
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
