@@ -61,14 +61,7 @@ namespace mRemoteNG.UI.Controls
 
         private void CreateNameColumn()
         {
-            _olvNameColumn = new OLVColumn
-            {
-                AspectName = "Name",
-                FillsFreeSpace = true,
-                IsButton = true,
-                AspectGetter = item => ((ConnectionInfo)item).Name,
-                ImageGetter = ConnectionImageGetter
-            };
+            _olvNameColumn = new NameColumn();
             Columns.Add(_olvNameColumn);
             AllColumns.Add(_olvNameColumn);
         }
@@ -114,16 +107,6 @@ namespace mRemoteNG.UI.Controls
             };
             ChildrenGetter = item => ((ContainerInfo)item).Children;
             //ContextMenuStrip = _contextMenu;
-        }
-
-        private static object ConnectionImageGetter(object rowObject)
-        {
-            if (rowObject is RootPuttySessionsNodeInfo) return "PuttySessions";
-            if (rowObject is RootNodeInfo) return "Root";
-            if (rowObject is ContainerInfo) return "Folder";
-            var connection = rowObject as ConnectionInfo;
-            if (connection == null) return "";
-            return connection.OpenConnections.Count > 0 ? "Play" : "Pause";
         }
 
         private void SetupDropSink()

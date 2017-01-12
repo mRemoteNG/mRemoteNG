@@ -237,6 +237,9 @@
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\Controls\NameColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
