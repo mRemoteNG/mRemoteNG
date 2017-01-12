@@ -643,12 +643,58 @@ namespace mRemoteNG.UI.Controls
 
         private void OnDisconnectClicked(object sender, EventArgs e)
         {
-            _connectionTree.DisconnectConnection(_connectionTree.SelectedNode);
+            DisconnectConnection(_connectionTree.SelectedNode);
+        }
+
+        public void DisconnectConnection(ConnectionInfo connectionInfo)
+        {
+            try
+            {
+                if (connectionInfo == null) return;
+                var nodeAsContainer = connectionInfo as ContainerInfo;
+                if (nodeAsContainer != null)
+                {
+                    foreach (var child in nodeAsContainer.Children)
+                    {
+                        for (var i = 0; i <= child.OpenConnections.Count - 1; i++)
+                        {
+                            child.OpenConnections[i].Disconnect();
+                        }
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i <= connectionInfo.OpenConnections.Count - 1; i++)
+                    {
+                        connectionInfo.OpenConnections[i].Disconnect();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("DisconnectConnection (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
         }
 
         private void OnTransferFileClicked(object sender, EventArgs e)
         {
-            _connectionTree.SshTransferFile();
+            SshTransferFile();
+        }
+
+        public void SshTransferFile()
+        {
+            try
+            {
+                Windows.Show(WindowType.SSHTransfer);
+                Windows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
+                Windows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
+                Windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;
+                Windows.SshtransferForm.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("SSHTransferFile (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
         }
 
         private void OnDuplicateClicked(object sender, EventArgs e)

@@ -226,52 +226,6 @@ namespace mRemoteNG.UI.Controls
             EnsureModelVisible(newNode);
         }
 
-        public void DisconnectConnection(ConnectionInfo connectionInfo)
-        {
-            try
-            {
-                if (connectionInfo == null) return;
-                var nodeAsContainer = connectionInfo as ContainerInfo;
-                if (nodeAsContainer != null)
-                {
-                    foreach (var child in nodeAsContainer.Children)
-                    {
-                        for (var i = 0; i <= child.OpenConnections.Count - 1; i++)
-                        {
-                            child.OpenConnections[i].Disconnect();
-                        }
-                    }
-                }
-                else
-                {
-                    for (var i = 0; i <= connectionInfo.OpenConnections.Count - 1; i++)
-                    {
-                        connectionInfo.OpenConnections[i].Disconnect();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("DisconnectConnection (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
-        }
-
-        public void SshTransferFile()
-        {
-            try
-            {
-                Windows.Show(WindowType.SSHTransfer);
-                Windows.SshtransferForm.Hostname = SelectedNode.Hostname;
-                Windows.SshtransferForm.Username = SelectedNode.Username;
-                Windows.SshtransferForm.Password = SelectedNode.Password;
-                Windows.SshtransferForm.Port = Convert.ToString(SelectedNode.Port);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTransferFile (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
-        }
-
         private void tvConnections_AfterSelect(object sender, EventArgs e)
         {
             try
