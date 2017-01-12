@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Window
             if (Settings.Default.SingleClickOnConnectionOpensIt)
                 singleClickHandlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
             if (Settings.Default.SingleClickSwitchesToOpenConnection)
-                singleClickHandlers.Add(new SwitchToConnectionClickHandler());
+                singleClickHandlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
             olvConnections.SingleClickHandler.ClickHandlers = singleClickHandlers;
         }
         #endregion

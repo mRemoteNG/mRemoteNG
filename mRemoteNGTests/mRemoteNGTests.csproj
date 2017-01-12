@@ -153,6 +153,7 @@
     <Compile Include="Tree\NodeSearcherTests.cs" />
     <Compile Include="Tree\OpenConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\RootNodeInfoTests.cs" />
+    <Compile Include="Tree\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
