@@ -14,7 +14,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class ConnectionTree : TreeListView
+    public partial class ConnectionTree : TreeListView, IConnectionTree
     {
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
@@ -31,7 +31,6 @@ namespace mRemoteNG.UI.Controls
         public TreeNodeDoubleClickHandler DoubleClickHandler { get; set; } = new TreeNodeDoubleClickHandler();
 
         public TreeNodeSingleClickHandler SingleClickHandler { get; set; } = new TreeNodeSingleClickHandler();
-
 
         public ConnectionTreeModel ConnectionTreeModel
         {
@@ -157,6 +156,16 @@ namespace mRemoteNG.UI.Controls
         public RootNodeInfo GetRootConnectionNode()
         {
             return (RootNodeInfo)Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
+        }
+
+        void IConnectionTree.InvokeExpand(object model)
+        {
+            this.InvokeExpand(model);
+        }
+
+        void IConnectionTree.InvokeRebuildAll(bool preserveState)
+        {
+            this.InvokeRebuildAll(preserveState);
         }
 
         public IEnumerable<RootPuttySessionsNodeInfo> GetRootPuttyNodes()
