@@ -3,6 +3,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -33,6 +34,7 @@ namespace mRemoteNG.UI.Window
             olvConnections.ContextMenuStrip = _contextMenu;
             SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
+		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
 		}
 
         #region Form Stuff
@@ -90,6 +92,28 @@ namespace mRemoteNG.UI.Window
                 new RootNodeExpander(),
                 new PreviousSessionOpener()
             };
+	        SetConnectionTreeDoubleClickHandlers();
+	        SetConnectionTreeSingleClickHandlers();
+	    }
+
+	    private void SetConnectionTreeDoubleClickHandlers()
+	    {
+            olvConnections.DoubleClickHandler.ClickHandlers = new ITreeNodeClickHandler[]
+            {
+                new ExpandNodeClickHandler(olvConnections),
+                new OpenConnectionClickHandler()
+            };
+        }
+
+        private void SetConnectionTreeSingleClickHandlers()
+        {
+            
+            var singleClickHandlers = new List<ITreeNodeClickHandler>();
+            if (Settings.Default.SingleClickOnConnectionOpensIt)
+                singleClickHandlers.Add(new OpenConnectionClickHandler());
+            if (Settings.Default.SingleClickSwitchesToOpenConnection)
+                singleClickHandlers.Add(new SwitchToConnectionClickHandler());
+            olvConnections.SingleClickHandler.ClickHandlers = singleClickHandlers;
         }
         #endregion
 

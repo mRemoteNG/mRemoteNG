@@ -28,6 +28,11 @@ namespace mRemoteNG.UI.Controls
 
         public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = new IConnectionTreeDelegate[0];
 
+        public TreeNodeDoubleClickHandler DoubleClickHandler { get; set; } = new TreeNodeDoubleClickHandler();
+
+        public TreeNodeSingleClickHandler SingleClickHandler { get; set; } = new TreeNodeSingleClickHandler();
+
+
         public ConnectionTreeModel ConnectionTreeModel
         {
             get { return _connectionTreeModel; }
@@ -149,6 +154,66 @@ namespace mRemoteNG.UI.Controls
         #endregion
 
         #region ConnectionTree Behavior
+        public RootNodeInfo GetRootConnectionNode()
+        {
+            return (RootNodeInfo)Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
+        }
+
+        public IEnumerable<RootPuttySessionsNodeInfo> GetRootPuttyNodes()
+        {
+            return Objects.OfType<RootPuttySessionsNodeInfo>();
+        }
+
+        public void AddConnection()
+        {
+            try
+            {
+                AddNode(new ConnectionInfo());
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("UI.Window.Tree.AddConnection() failed.", ex);
+            }
+        }
+
+        public void AddFolder()
+        {
+            try
+            {
+                AddNode(new ContainerInfo());
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddFolderFailed, ex);
+            }
+        }
+
+        private void AddNode(ConnectionInfo newNode)
+        {
+            if (SelectedNode == null) return;
+            DefaultConnectionInfo.Instance.SaveTo(newNode);
+            DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
+            var selectedContainer = SelectedNode as ContainerInfo;
+            var parent = selectedContainer ?? SelectedNode?.Parent;
+            newNode.SetParent(parent);
+            Expand(parent);
+            SelectObject(newNode);
+            EnsureModelVisible(newNode);
+        }
+
+        public void DuplicateSelectedNode()
+        {
+            var newNode = SelectedNode.Clone();
+            newNode.Parent.SetChildBelow(newNode, SelectedNode);
+            Runtime.SaveConnectionsAsync();
+        }
+
+        public void RenameSelectedNode()
+        {
+            SelectedItem.BeginEdit();
+            Runtime.SaveConnectionsAsync();
+        }
+
         public void DeleteSelectedNode()
         {
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
@@ -189,43 +254,6 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        public void AddConnection()
-        {
-            try
-            {
-                AddNode(new ConnectionInfo());
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("UI.Window.Tree.AddConnection() failed.", ex);
-            }
-        }
-
-        public void AddFolder()
-        {
-            try
-            {
-                AddNode(new ContainerInfo());
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddFolderFailed, ex);
-            }
-        }
-
-        private void AddNode(ConnectionInfo newNode)
-        {
-            if (SelectedNode == null) return;
-            DefaultConnectionInfo.Instance.SaveTo(newNode);
-            DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
-            var selectedContainer = SelectedNode as ContainerInfo;
-            var parent = selectedContainer ?? SelectedNode?.Parent;
-            newNode.SetParent(parent);
-            Expand(parent);
-            SelectObject(newNode);
-            EnsureModelVisible(newNode);
-        }
-
         private void tvConnections_AfterSelect(object sender, EventArgs e)
         {
             try
@@ -240,40 +268,16 @@ namespace mRemoteNG.UI.Controls
 
         private void tvConnections_NodeMouseSingleClick(object sender, CellClickEventArgs e)
         {
-            try
-            {
-                if (e.ClickCount > 1) return;
-                var clickedNode = e.Model as ConnectionInfo;
-
-                if (clickedNode == null) return;
-                if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
-                if (Settings.Default.SingleClickOnConnectionOpensIt)
-                    ConnectionInitiator.OpenConnection(SelectedNode);
-
-                if (Settings.Default.SingleClickSwitchesToOpenConnection)
-                    ConnectionInitiator.SwitchToOpenConnection(SelectedNode);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_NodeMouseClick (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
+            if (e.ClickCount > 1) return;
+            var clickedNode = e.Model as ConnectionInfo;
+            SingleClickHandler.Execute(clickedNode);
         }
 
         private void tvConnections_NodeMouseDoubleClick(object sender, CellClickEventArgs e)
         {
             if (e.ClickCount < 2) return;
-            var clickedNodeAsContainer = e.Model as ContainerInfo;
-            if (clickedNodeAsContainer != null)
-            {
-                ToggleExpansion(clickedNodeAsContainer);
-            }
-
             var clickedNode = e.Model as ConnectionInfo;
-            if (clickedNode?.GetTreeNodeType() == TreeNodeType.Connection |
-                clickedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
-            {
-                ConnectionInitiator.OpenConnection(SelectedNode);
-            }
+            DoubleClickHandler.Execute(clickedNode);
         }
 
         private void tvConnections_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
@@ -287,29 +291,6 @@ namespace mRemoteNG.UI.Controls
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed", ex);
             }
-        }
-
-        public RootNodeInfo GetRootConnectionNode()
-        {
-            return (RootNodeInfo)Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
-        }
-
-        public IEnumerable<RootPuttySessionsNodeInfo> GetRootPuttyNodes()
-        {
-            return Objects.OfType<RootPuttySessionsNodeInfo>();
-        }
-
-        public void DuplicateSelectedNode()
-        {
-            var newNode = SelectedNode.Clone();
-            newNode.Parent.SetChildBelow(newNode, SelectedNode);
-            Runtime.SaveConnectionsAsync();
-        }
-
-        public void RenameSelectedNode()
-        {
-            SelectedItem.BeginEdit();
-            Runtime.SaveConnectionsAsync();
         }
         #endregion
     }
