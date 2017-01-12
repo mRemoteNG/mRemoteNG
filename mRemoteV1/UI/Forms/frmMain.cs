@@ -587,7 +587,7 @@ namespace mRemoteNG.UI.Forms
                 foreach (var i in ICList)
                 {
                     i.Protocol.Close();
-                    ConnectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
+                    _connectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
                 }
 
                 // throw it on the garbage collector
@@ -862,7 +862,7 @@ namespace mRemoteNG.UI.Forms
 					return;
 				}
 				cmbQuickConnect.Add(connectionInfo);
-                ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
 			}
 			catch (Exception ex)
 			{

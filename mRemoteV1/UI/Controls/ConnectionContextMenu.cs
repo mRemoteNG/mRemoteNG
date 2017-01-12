@@ -47,11 +47,13 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeImportActiveDirectory;
         private ToolStripMenuItem _cMenTreeImportPortScan;
         private readonly ConnectionTree _connectionTree;
+        private readonly IConnectionInitiator _connectionInitiator;
 
 
         public ConnectionContextMenu(ConnectionTree connectionTree)
         {
             _connectionTree = connectionTree;
+            _connectionInitiator = new ConnectionInitiator();
             InitializeComponent();
             ApplyLanguage();
             EnableShortcutKeys();
@@ -591,54 +593,54 @@ namespace mRemoteNG.UI.Controls
         {
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
-                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DoNotJump);
             else
-                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnConnectToConsoleSessionClicked(object sender, EventArgs e)
         {
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
-                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
             else
-                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnDontConnectToConsoleSessionClicked(object sender, EventArgs e)
         {
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
-                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
             else
-                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnConnectInFullscreenClicked(object sender, EventArgs e)
         {
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
-                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
             else
-                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnConnectWithNoCredentialsClick(object sender, EventArgs e)
         {
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
-                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.NoCredentials);
+                _connectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.NoCredentials);
             else
-                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.NoCredentials);
+                _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.NoCredentials);
         }
 
         private void OnChoosePanelBeforeConnectingClicked(object sender, EventArgs e)
         {
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
-                ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
             else
-                ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnDisconnectClicked(object sender, EventArgs e)
