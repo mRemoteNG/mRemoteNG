@@ -22,8 +22,6 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
         private OLVColumn _olvNameColumn;
-        private ImageList _imgListTree;
-
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -51,23 +49,19 @@ namespace mRemoteNG.UI.Controls
         #region ConnectionTree Setup
         private void SetupConnectionTreeView()
         {
-            CreateNameColumn();
-            CreateImageList();
+            var imageList = new StatusImageList();
+            SmallImageList = imageList.GetImageList();
+            CreateNameColumn(imageList.ImageGetter);
             LinkModelToView();
             SetupDropSink();
             SetEventHandlers();
         }
 
-        private void CreateNameColumn()
+        private void CreateNameColumn(ImageGetterDelegate imageGetterDelegate)
         {
-            _olvNameColumn = new NameColumn();
+            _olvNameColumn = new NameColumn(imageGetterDelegate);
             Columns.Add(_olvNameColumn);
             AllColumns.Add(_olvNameColumn);
-        }
-
-        private void CreateImageList()
-        {
-            SmallImageList = StatusImageList.GetImageList();
         }
 
         private void LinkModelToView()

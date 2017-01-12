@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Container;
+using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.UI.Controls
 {
     public class StatusImageList
     {
-        public static ImageList GetImageList()
+        public ImageList GetImageList()
         {
             var imageList = new ImageList
             {
@@ -19,7 +22,17 @@ namespace mRemoteNG.UI.Controls
             return imageList;
         }
 
-        private static void FillImageList(ImageList imageList)
+        public object ImageGetter(object rowObject)
+        {
+            if (rowObject is RootPuttySessionsNodeInfo) return "PuttySessions";
+            if (rowObject is RootNodeInfo) return "Root";
+            if (rowObject is ContainerInfo) return "Folder";
+            var connection = rowObject as ConnectionInfo;
+            if (connection == null) return "";
+            return connection.OpenConnections.Count > 0 ? "Play" : "Pause";
+        }
+
+        private void FillImageList(ImageList imageList)
         {
             try
             {
