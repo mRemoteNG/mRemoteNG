@@ -17,7 +17,10 @@ namespace mRemoteNGTests.Tree
         public void Setup()
         {
             _connectionTreeModel = CreateConnectionTreeModel();
-            _connectionTree = new ConnectionTree();
+            _connectionTree = new ConnectionTree
+            {
+                PostSetupActions = new IConnectionTreeDelegate[] {new RootNodeExpander()}
+            };
         }
 
         [TearDown]
