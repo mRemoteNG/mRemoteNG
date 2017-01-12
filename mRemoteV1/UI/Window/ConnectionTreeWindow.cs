@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Window
 	        };
 
 	        if (Settings.Default.OpenConsFromLastSession && !Settings.Default.NoReconnect)
-                actions.Add(new PreviousSessionOpener());
+                actions.Add(new PreviousSessionOpener(_connectionInitiator));
 
 	        olvConnections.PostSetupActions = actions;
 	    }
