@@ -140,25 +140,6 @@ namespace mRemoteNG.UI.Controls
                 RefreshObject(senderAsConnectionInfo);
         }
 
-        private void ExpandPreviouslyOpenedFolders()
-        {
-            var containerList = ConnectionTreeModel.GetRecursiveChildList(GetRootConnectionNode()).OfType<ContainerInfo>();
-            var previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
-            ExpandedObjects = previouslyExpandedNodes;
-            this.InvokeRebuildAll(true);
-        }
-
-        private void OpenConnectionsFromLastSession()
-        {
-            if (!Settings.Default.OpenConsFromLastSession || Settings.Default.NoReconnect) return;
-            var connectionInfoList = GetRootConnectionNode().GetRecursiveChildList().Where(node => !(node is ContainerInfo));
-            var previouslyOpenedConnections = connectionInfoList.Where(item => item.PleaseConnect);
-            foreach (var connectionInfo in previouslyOpenedConnections)
-            {
-                ConnectionInitiator.OpenConnection(connectionInfo);
-            }
-        }
-
         private void ExecutePostSetupActions()
         {
             foreach (var action in PostSetupActions)
@@ -303,12 +284,6 @@ namespace mRemoteNG.UI.Controls
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)", ex);
             }
-        }
-
-        private void ExpandRootConnectionNode()
-        {
-            var rootConnectionNode = GetRootConnectionNode();
-            this.InvokeExpand(rootConnectionNode);
         }
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)
