@@ -27,7 +27,8 @@ namespace mRemoteNG.UI.Window
     public partial class ConnectionWindow : BaseWindow
     {
         public TabControl TabController;
-        
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+
 
         #region Public Methods
         public ConnectionWindow(DockContent panel, string formText = "")
@@ -335,7 +336,7 @@ namespace mRemoteNG.UI.Window
                 if (modelAsContainer != null)
                     ConnectionInitiator.OpenConnection(modelAsContainer);
                 else if (modelAsConnection != null)
-                    ConnectionInitiator.OpenConnection(modelAsConnection);
+                    _connectionInitiator.OpenConnection(modelAsConnection);
             }
         }
 

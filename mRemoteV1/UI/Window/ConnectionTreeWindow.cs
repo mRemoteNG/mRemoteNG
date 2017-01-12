@@ -16,6 +16,8 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionTreeWindow
 	{
 	    private readonly ConnectionContextMenu _contextMenu;
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+
 
         public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
@@ -276,7 +278,7 @@ namespace mRemoteNG.UI.Window
 				if (e.KeyCode == Keys.Enter)
 				{
 					e.Handled = true;
-                    ConnectionInitiator.OpenConnection(SelectedNode);
+                    _connectionInitiator.OpenConnection(SelectedNode);
 				}
 				else if (e.Control && e.KeyCode == Keys.F)
 				{

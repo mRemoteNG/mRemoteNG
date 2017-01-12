@@ -44,6 +44,8 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private SystemMenu _systemMenu;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+
 
 
 
@@ -936,14 +938,14 @@ namespace mRemoteNG.UI.Forms
             btnConnections.DropDownItems.AddRange(rootMenuItems);
 		}
 										
-		private static void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
+		private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
 		{
 		    if (e.Button != MouseButtons.Left) return;
 		    if (((ToolStripMenuItem) sender).Tag is ContainerInfo) return;
 		    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
 		    if (tag != null)
 		    {
-		        ConnectionInitiator.OpenConnection(tag);
+		        _connectionInitiator.OpenConnection(tag);
 		    }
 		}
         #endregion

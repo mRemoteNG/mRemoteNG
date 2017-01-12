@@ -187,6 +187,7 @@
     <Compile Include="Connection\Converter.cs" />
     <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
+    <Compile Include="Connection\IConnectionInitiator.cs" />
     <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />

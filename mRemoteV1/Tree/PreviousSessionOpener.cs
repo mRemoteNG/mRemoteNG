@@ -8,6 +8,9 @@ namespace mRemoteNG.Tree
 {
     public class PreviousSessionOpener : IConnectionTreeDelegate
     {
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+
+
         public void Execute(ConnectionTree connectionTree)
         {
             if (!Settings.Default.OpenConsFromLastSession || Settings.Default.NoReconnect) return;
@@ -15,7 +18,7 @@ namespace mRemoteNG.Tree
             var previouslyOpenedConnections = connectionInfoList.Where(item => item.PleaseConnect);
             foreach (var connectionInfo in previouslyOpenedConnections)
             {
-                ConnectionInitiator.OpenConnection(connectionInfo);
+                _connectionInitiator.OpenConnection(connectionInfo);
             }
         }
     }

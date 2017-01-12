@@ -12,7 +12,7 @@ using TabPage = Crownwood.Magic.Controls.TabPage;
 
 namespace mRemoteNG.Connection
 {
-    public static class ConnectionInitiator
+    public class ConnectionInitiator : IConnectionInitiator
     {
         public static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
@@ -33,7 +33,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        public static void OpenConnection(ConnectionInfo connectionInfo)
+        public void OpenConnection(ConnectionInfo connectionInfo)
         {
             try
             {
