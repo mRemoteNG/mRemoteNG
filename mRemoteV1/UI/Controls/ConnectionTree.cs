@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
@@ -21,11 +20,12 @@ namespace mRemoteNG.UI.Controls
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-        private OLVColumn _olvNameColumn;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
         public NodeSearcher NodeSearcher { get; private set; }
+
+        public Func<ConnectionInfo, bool> DeletionConfirmer { get; set; } = connectionInfo => true;
 
         public ConnectionTreeModel ConnectionTreeModel
         {
@@ -36,8 +36,6 @@ namespace mRemoteNG.UI.Controls
                 PopulateTreeView();
             }
         }
-
-        public Func<ConnectionInfo, bool> DeletionConfirmer { get; set; } = connectionInfo => true;
 
 
         public ConnectionTree()
@@ -51,17 +49,15 @@ namespace mRemoteNG.UI.Controls
         {
             var imageList = new StatusImageList();
             SmallImageList = imageList.GetImageList();
-            CreateNameColumn(imageList.ImageGetter);
+            AddColumns(imageList.ImageGetter);
             LinkModelToView();
             SetupDropSink();
             SetEventHandlers();
         }
 
-        private void CreateNameColumn(ImageGetterDelegate imageGetterDelegate)
+        private void AddColumns(ImageGetterDelegate imageGetterDelegate)
         {
-            _olvNameColumn = new NameColumn(imageGetterDelegate);
-            Columns.Add(_olvNameColumn);
-            AllColumns.Add(_olvNameColumn);
+            Columns.Add(new NameColumn(imageGetterDelegate));
         }
 
         private void LinkModelToView()
@@ -72,7 +68,6 @@ namespace mRemoteNG.UI.Controls
                 return itemAsContainer?.Children.Count > 0;
             };
             ChildrenGetter = item => ((ContainerInfo)item).Children;
-            //ContextMenuStrip = _contextMenu;
         }
 
         private void SetupDropSink()
@@ -165,7 +160,7 @@ namespace mRemoteNG.UI.Controls
         }
         #endregion
 
-        #region ConnectionTree
+        #region ConnectionTree Behavior
         public void DeleteSelectedNode()
         {
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;

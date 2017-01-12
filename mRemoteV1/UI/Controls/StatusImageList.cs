@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
@@ -15,8 +16,8 @@ namespace mRemoteNG.UI.Controls
             var imageList = new ImageList
             {
                 ColorDepth = ColorDepth.Depth32Bit,
-                ImageSize = new System.Drawing.Size(16, 16),
-                TransparentColor = System.Drawing.Color.Transparent
+                ImageSize = new Size(16, 16),
+                TransparentColor = Color.Transparent
             };
             FillImageList(imageList);
             return imageList;
