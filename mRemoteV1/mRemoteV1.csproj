@@ -219,7 +219,6 @@
     <Compile Include="Tree\ITreeNodeClickHandler.cs" />
     <Compile Include="Tree\NodeSearcher.cs" />
     <Compile Include="Tree\NodeType.cs" />
-    <Compile Include="Tree\ObjectListViewExtensions.cs" />
     <Compile Include="Tree\OpenConnectionClickHandler.cs" />
     <Compile Include="Tree\PreviouslyOpenedFolderExpander.cs" />
     <Compile Include="Tree\PreviousSessionOpener.cs" />

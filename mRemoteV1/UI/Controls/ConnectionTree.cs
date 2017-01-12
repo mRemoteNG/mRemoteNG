@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
@@ -158,14 +159,14 @@ namespace mRemoteNG.UI.Controls
             return (RootNodeInfo)Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
         }
 
-        void IConnectionTree.InvokeExpand(object model)
+        public void InvokeExpand(object model)
         {
-            this.InvokeExpand(model);
+            Invoke((MethodInvoker)(() => Expand(model)));
         }
 
-        void IConnectionTree.InvokeRebuildAll(bool preserveState)
+        public void InvokeRebuildAll(bool preserveState)
         {
-            this.InvokeRebuildAll(preserveState);
+            Invoke((MethodInvoker)(() => RebuildAll(preserveState)));
         }
 
         public IEnumerable<RootPuttySessionsNodeInfo> GetRootPuttyNodes()
