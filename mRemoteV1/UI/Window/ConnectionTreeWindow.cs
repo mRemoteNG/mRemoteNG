@@ -84,6 +84,12 @@ namespace mRemoteNG.UI.Window
             olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
             olvConnections.KeyDown += tvConnections_KeyDown;
             olvConnections.KeyPress += tvConnections_KeyPress;
+            olvConnections.PostSetupActions = new IConnectionTreeDelegate[]
+            {
+                new PreviouslyOpenedFolderExpander(), 
+                new RootNodeExpander(),
+                new PreviousSessionOpener()
+            };
         }
         #endregion
 

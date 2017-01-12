@@ -217,6 +217,9 @@
     <Compile Include="Tree\NodeSearcher.cs" />
     <Compile Include="Tree\NodeType.cs" />
     <Compile Include="Tree\ObjectListViewExtensions.cs" />
+    <Compile Include="Tree\PreviouslyOpenedFolderExpander.cs" />
+    <Compile Include="Tree\PreviousSessionOpener.cs" />
+    <Compile Include="Tree\RootNodeExpander.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
@@ -237,6 +240,7 @@
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\Controls\IConnectionTreeDelegate.cs" />
     <Compile Include="UI\Controls\NameColumn.cs">
       <SubType>Component</SubType>
     </Compile>

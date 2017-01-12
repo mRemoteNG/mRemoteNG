@@ -27,6 +27,8 @@ namespace mRemoteNG.UI.Controls
 
         public Func<ConnectionInfo, bool> DeletionConfirmer { get; set; } = connectionInfo => true;
 
+        public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = new IConnectionTreeDelegate[0];
+
         public ConnectionTreeModel ConnectionTreeModel
         {
             get { return _connectionTreeModel; }
@@ -106,9 +108,7 @@ namespace mRemoteNG.UI.Controls
             SetObjects(ConnectionTreeModel.RootNodes);
             RegisterModelUpdateHandlers();
             NodeSearcher = new NodeSearcher(ConnectionTreeModel);
-            ExpandPreviouslyOpenedFolders();
-            ExpandRootConnectionNode();
-            OpenConnectionsFromLastSession();
+            ExecutePostSetupActions();
         }
 
         private void RegisterModelUpdateHandlers()
@@ -156,6 +156,14 @@ namespace mRemoteNG.UI.Controls
             foreach (var connectionInfo in previouslyOpenedConnections)
             {
                 ConnectionInitiator.OpenConnection(connectionInfo);
+            }
+        }
+
+        private void ExecutePostSetupActions()
+        {
+            foreach (var action in PostSetupActions)
+            {
+                action.Execute(this);
             }
         }
         #endregion
