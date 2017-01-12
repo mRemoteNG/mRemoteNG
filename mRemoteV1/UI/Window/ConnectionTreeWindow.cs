@@ -88,14 +88,23 @@ namespace mRemoteNG.UI.Window
             olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
             olvConnections.KeyDown += tvConnections_KeyDown;
             olvConnections.KeyPress += tvConnections_KeyPress;
-            olvConnections.PostSetupActions = new IConnectionTreeDelegate[]
-            {
-                new PreviouslyOpenedFolderExpander(), 
-                new RootNodeExpander(),
-                new PreviousSessionOpener()
-            };
-	        SetConnectionTreeDoubleClickHandlers();
+            SetTreePostSetupActions();
+            SetConnectionTreeDoubleClickHandlers();
 	        SetConnectionTreeSingleClickHandlers();
+	    }
+
+	    private void SetTreePostSetupActions()
+	    {
+	        var actions = new List<IConnectionTreeDelegate>
+	        {
+	            new PreviouslyOpenedFolderExpander(),
+	            new RootNodeExpander()
+	        };
+
+	        if (Settings.Default.OpenConsFromLastSession && !Settings.Default.NoReconnect)
+                actions.Add(new PreviousSessionOpener());
+
+	        olvConnections.PostSetupActions = actions;
 	    }
 
 	    private void SetConnectionTreeDoubleClickHandlers()
