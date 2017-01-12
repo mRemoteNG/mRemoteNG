@@ -16,5 +16,7 @@ namespace mRemoteNG.UI.Controls
         void InvokeExpand(object model);
 
         void InvokeRebuildAll(bool preserveState);
+
+        void ToggleExpansion(object model);
     }
 }

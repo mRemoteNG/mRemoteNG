@@ -8,9 +8,9 @@ namespace mRemoteNG.Tree
 {
     public class ExpandNodeClickHandler : ITreeNodeClickHandler
     {
-        private readonly ConnectionTree _connectionTree;
+        private readonly IConnectionTree _connectionTree;
 
-        public ExpandNodeClickHandler(ConnectionTree connectionTree)
+        public ExpandNodeClickHandler(IConnectionTree connectionTree)
         {
             if (connectionTree == null)
                 throw new ArgumentNullException(nameof(connectionTree));
