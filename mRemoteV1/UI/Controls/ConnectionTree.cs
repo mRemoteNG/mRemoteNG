@@ -8,7 +8,6 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -270,19 +269,6 @@ namespace mRemoteNG.UI.Controls
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("SSHTransferFile (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
-        }
-
-        public void StartExternalApp(ExternalTool externalTool)
-        {
-            try
-            {
-                if (SelectedNode.GetTreeNodeType() == TreeNodeType.Connection | SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession)
-                    externalTool.Start(SelectedNode);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)", ex);
             }
         }
 

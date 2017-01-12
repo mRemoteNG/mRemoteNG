@@ -7,6 +7,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 // ReSharper disable UnusedParameter.Local
 
@@ -722,7 +723,20 @@ namespace mRemoteNG.UI.Controls
 
         private void OnExternalToolClicked(object sender, EventArgs e)
         {
-            _connectionTree.StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+            StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+        }
+
+        private void StartExternalApp(ExternalTool externalTool)
+        {
+            try
+            {
+                if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection | _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession)
+                    externalTool.Start(_connectionTree.SelectedNode);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)", ex);
+            }
         }
         #endregion
 
