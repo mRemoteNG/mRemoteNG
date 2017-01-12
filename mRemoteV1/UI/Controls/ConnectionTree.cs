@@ -53,7 +53,6 @@ namespace mRemoteNG.UI.Controls
         {
             CreateNameColumn();
             CreateImageList();
-            FillImageList();
             LinkModelToView();
             SetupDropSink();
             SetEventHandlers();
@@ -68,34 +67,7 @@ namespace mRemoteNG.UI.Controls
 
         private void CreateImageList()
         {
-            _imgListTree = new ImageList(components)
-            {
-                ColorDepth = ColorDepth.Depth32Bit,
-                ImageSize = new System.Drawing.Size(16, 16),
-                TransparentColor = System.Drawing.Color.Transparent
-            };
-            SmallImageList = _imgListTree;
-        }
-
-        private void FillImageList()
-        {
-            try
-            {
-                _imgListTree.Images.Add(Resources.Root);
-                _imgListTree.Images.SetKeyName(0, "Root");
-                _imgListTree.Images.Add(Resources.Folder);
-                _imgListTree.Images.SetKeyName(1, "Folder");
-                _imgListTree.Images.Add(Resources.Play);
-                _imgListTree.Images.SetKeyName(2, "Play");
-                _imgListTree.Images.Add(Resources.Pause);
-                _imgListTree.Images.SetKeyName(3, "Pause");
-                _imgListTree.Images.Add(Resources.PuttySessions);
-                _imgListTree.Images.SetKeyName(4, "PuttySessions");
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("FillImageList (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
+            SmallImageList = StatusImageList.GetImageList();
         }
 
         private void LinkModelToView()
