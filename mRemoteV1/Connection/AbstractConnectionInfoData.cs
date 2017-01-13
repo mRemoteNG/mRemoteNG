@@ -227,8 +227,8 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameMinutesToIdleTimeout"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionMinutesToIdleTimeout")]
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDPMinutesToIdleTimeout"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPMinutesToIdleTimeout")]
         public virtual int RDPMinutesToIdleTimeout
         {
             get { return GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout); }
