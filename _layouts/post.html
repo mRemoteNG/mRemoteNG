@@ -6,15 +6,17 @@
 		{% assign author = site.data.authors[page.author] %}
 		<div class='media'>
 			<img class='d-flex mr-3 media-object' src='{{ author.avatar }}'>
-			<div class='media-body'>
-			<h3 class='mt-0'>{{ page.title }}</h3>
-				<div>
-					<strong>{{ author.name }}</strong> | <time>{{ page.date | date: '%B %-d, %Y'}}</time>
-				</div>
-				<div class='text-justify'>
-					{{ content }}
-				</div>
-			</div>
+			<article class='media-body'>
+				<header>
+					<h3 class='mt-0'>{{ page.title }}</h3>
+					<div>
+						<strong>{{ author.name }}</strong> | <time datetime='{{ date: "%Y-%m-%d" }}' pubdate>{{ page.date | date: '%B %-d, %Y'}}</time>
+					</div>
+					<div class='text-justify'>
+						{{ content }}
+					</div>
+				</header>
+			</article>
 		</div>
 		<div class='btn-group float-right' role='group'>
 			{% if page.previous %}
