@@ -230,10 +230,10 @@
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\ConnectionTree.cs">
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\ConnectionTree.Designer.cs">
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.Designer.cs">
       <DependentUpon>ConnectionTree.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
@@ -243,12 +243,12 @@
       <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\ObjectWrapper.cs" />
-    <Compile Include="UI\Controls\IConnectionTree.cs" />
+    <Compile Include="UI\Controls\ConnectionTree\IConnectionTree.cs" />
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Controls\IConnectionTreeDelegate.cs" />
-    <Compile Include="UI\Controls\NameColumn.cs">
+    <Compile Include="UI\Controls\ConnectionTree\IConnectionTreeDelegate.cs" />
+    <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
