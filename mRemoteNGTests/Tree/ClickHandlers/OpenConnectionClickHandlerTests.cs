@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using mRemoteNG.Connection;
 using mRemoteNG.Tree;
 using NSubstitute;
 using NUnit.Framework;
@@ -24,6 +25,13 @@ namespace mRemoteNGTests.Tree
             var connectionInfo = new ConnectionInfo();
             _clickHandler.Execute(connectionInfo);
             _connectionInitiator.Received().OpenConnection(connectionInfo);
+        }
+
+        [Test]
+        public void ExceptionThrownWhenConstructorGivenNullArg()
+        {
+            // ReSharper disable once ObjectCreationAsStatement
+            Assert.Throws<ArgumentNullException>(() => new OpenConnectionClickHandler(null));
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
 using NSubstitute;
 using NUnit.Framework;
@@ -34,6 +34,13 @@ namespace mRemoteNGTests.Tree
         {
             _clickHandler.Execute(new ConnectionInfo());
             _connectionTree.DidNotReceiveWithAnyArgs().ToggleExpansion(new ConnectionInfo());
+        }
+
+        [Test]
+        public void ExceptionThrownOnConstructorNullArg()
+        {
+            // ReSharper disable once ObjectCreationAsStatement
+            Assert.Throws<ArgumentNullException>(() => new ExpandNodeClickHandler(null));
         }
     }
 }

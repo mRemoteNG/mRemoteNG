@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using mRemoteNG.Connection;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
@@ -28,6 +29,13 @@ namespace mRemoteNGTests.Tree
         {
             _previousSessionOpener.Execute(_connectionTree);
             _connectionInitiator.ReceivedWithAnyArgs(2).OpenConnection(new ConnectionInfo());
+        }
+
+        [Test]
+        public void ExceptionThrownWhenConstructorGivenNullArg()
+        {
+            // ReSharper disable once ObjectCreationAsStatement
+            Assert.Throws<ArgumentNullException>(() => new PreviousSessionOpener(null));
         }
 
         private RootNodeInfo BuildTree()

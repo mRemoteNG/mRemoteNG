@@ -150,12 +150,12 @@
     <Compile Include="Security\EncryptedSecureStringTests.cs" />
     <Compile Include="Security\LegacyRijndaelCryptographyProviderTests.cs" />
     <Compile Include="Tree\ConnectionTreeTests.cs" />
-    <Compile Include="Tree\ExpandNodeClickHandlerTests.cs" />
+    <Compile Include="Tree\ClickHandlers\ExpandNodeClickHandlerTests.cs" />
     <Compile Include="Tree\NodeSearcherTests.cs" />
-    <Compile Include="Tree\OpenConnectionClickHandlerTests.cs" />
+    <Compile Include="Tree\ClickHandlers\OpenConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\PreviousSessionOpenerTests.cs" />
     <Compile Include="Tree\RootNodeInfoTests.cs" />
-    <Compile Include="Tree\SwitchToConnectionClickHandlerTests.cs" />
+    <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>

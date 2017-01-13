@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.Tree
@@ -9,6 +10,8 @@ namespace mRemoteNG.Tree
 
         public OpenConnectionClickHandler(IConnectionInitiator connectionInitiator)
         {
+            if (connectionInitiator == null)
+                throw new ArgumentNullException(nameof(connectionInitiator));
             _connectionInitiator = connectionInitiator;
         }
 
