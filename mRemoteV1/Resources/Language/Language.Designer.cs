@@ -4019,15 +4019,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0).
-        /// </summary>
-        internal static string strPropertyDescriptionMinutesToIdleTimeout {
-            get {
-                return ResourceManager.GetString("strPropertyDescriptionMinutesToIdleTimeout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This is the name that will be displayed in the connections tree..
         /// </summary>
         internal static string strPropertyDescriptionName {
@@ -4123,6 +4114,15 @@ namespace mRemoteNG {
         internal static string strPropertyDescriptionRDGatewayUsername {
             get {
                 return ResourceManager.GetString("strPropertyDescriptionRDGatewayUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0).
+        /// </summary>
+        internal static string strPropertyDescriptionRDPMinutesToIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRDPMinutesToIdleTimeout", resourceCulture);
             }
         }
         
@@ -4505,15 +4505,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minutes to Idle.
-        /// </summary>
-        internal static string strPropertyNameMinutesToIdleTimeout {
-            get {
-                return ResourceManager.GetString("strPropertyNameMinutesToIdleTimeout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string strPropertyNameName {
@@ -4618,6 +4609,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameRDGatewayUsername {
             get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minutes to Idle.
+        /// </summary>
+        internal static string strPropertyNameRDPMinutesToIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
             }
         }
         
