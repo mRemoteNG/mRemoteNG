@@ -215,18 +215,18 @@
     <Compile Include="Tree\ConnectionDeletionConfirmer.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
     <Compile Include="Tree\ConnectionTreeModel.cs" />
-    <Compile Include="Tree\ExpandNodeClickHandler.cs" />
-    <Compile Include="Tree\ITreeNodeClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\ExpandNodeClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\ITreeNodeClickHandler.cs" />
     <Compile Include="Tree\NodeSearcher.cs" />
     <Compile Include="Tree\NodeType.cs" />
-    <Compile Include="Tree\OpenConnectionClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\OpenConnectionClickHandler.cs" />
     <Compile Include="Tree\PreviouslyOpenedFolderExpander.cs" />
     <Compile Include="Tree\PreviousSessionOpener.cs" />
     <Compile Include="Tree\RootNodeExpander.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
-    <Compile Include="Tree\SwitchToConnectionClickHandler.cs" />
-    <Compile Include="Tree\TreeNodeDoubleClickHandler.cs" />
-    <Compile Include="Tree\TreeNodeSingleClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\TreeNodeDoubleClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\TreeNodeSingleClickHandler.cs" />
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
