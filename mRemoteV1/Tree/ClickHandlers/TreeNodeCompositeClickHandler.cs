@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using mRemoteNG.Connection;
 
 
@@ -10,7 +11,8 @@ namespace mRemoteNG.Tree
 
         public void Execute(ConnectionInfo clickedNode)
         {
-            if (clickedNode == null) return;
+            if (clickedNode == null)
+                throw new ArgumentNullException(nameof(clickedNode));
             foreach (var handler in ClickHandlers)
             {
                 handler.Execute(clickedNode);

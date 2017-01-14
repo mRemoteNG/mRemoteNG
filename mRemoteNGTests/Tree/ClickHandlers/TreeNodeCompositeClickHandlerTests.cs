@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using mRemoteNG.Connection;
 using mRemoteNG.Tree;
 using NSubstitute;
 using NUnit.Framework;
@@ -27,6 +28,12 @@ namespace mRemoteNGTests.Tree
             _clickHandler.Execute(_connectionInfo);
             handler1.Received().Execute(_connectionInfo);
             handler2.Received().Execute(_connectionInfo);
+        }
+
+        [Test]
+        public void ThrowWhenExecuteGivenNullArg()
+        {
+            Assert.Throws<ArgumentNullException>(() => _clickHandler.Execute(null));
         }
     }
 }
