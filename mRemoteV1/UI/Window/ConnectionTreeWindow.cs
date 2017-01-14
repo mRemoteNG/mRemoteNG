@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Window
         #region ConnectionTree
 	    private void SetConnectionTreeEventHandlers()
 	    {
-	        olvConnections.DeletionConfirmer = ConnectionDeletionConfirmer.UserConfirmsDeletion;
+	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(olvConnections);
             olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
             olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
             olvConnections.KeyDown += tvConnections_KeyDown;

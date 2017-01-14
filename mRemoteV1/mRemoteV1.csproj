@@ -212,11 +212,13 @@
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
-    <Compile Include="Tree\ConnectionDeletionConfirmer.cs" />
+    <Compile Include="Tree\AlwaysConfirmYes.cs" />
+    <Compile Include="Tree\SelectedConnectionDeletionConfirmer.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
     <Compile Include="Tree\ConnectionTreeModel.cs" />
     <Compile Include="Tree\ClickHandlers\ExpandNodeClickHandler.cs" />
     <Compile Include="Tree\ClickHandlers\ITreeNodeClickHandler.cs" />
+    <Compile Include="Tree\IConfirm.cs" />
     <Compile Include="Tree\NodeSearcher.cs" />
     <Compile Include="Tree\NodeType.cs" />
     <Compile Include="Tree\ClickHandlers\OpenConnectionClickHandler.cs" />

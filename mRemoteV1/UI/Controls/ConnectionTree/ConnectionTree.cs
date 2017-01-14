@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Controls
 
         public NodeSearcher NodeSearcher { get; private set; }
 
-        public Func<ConnectionInfo, bool> DeletionConfirmer { get; set; } = connectionInfo => true;
+        public IConfirm NodeDeletionConfirmer { get; set; } = new AlwaysConfirmYes();
 
         public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = new IConnectionTreeDelegate[0];
 
@@ -227,7 +227,7 @@ namespace mRemoteNG.UI.Controls
         public void DeleteSelectedNode()
         {
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
-            if (!DeletionConfirmer(SelectedNode)) return;
+            if (!NodeDeletionConfirmer.Confirm()) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsAsync();
         }
