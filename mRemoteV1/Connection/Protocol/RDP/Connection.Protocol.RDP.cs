@@ -129,9 +129,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetCredentials();
                 SetResolution();
                 _rdpClient.FullScreenTitle = _connectionInfo.Name;
-						
-				//not user changeable
-				_rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
+                
+                // Set the timeout to the default (zero) if it is out of bounds.
+                if (_connectionInfo.RDPMinutesToIdleTimeout < 0 || _connectionInfo.RDPMinutesToIdleTimeout > 240)
+                {
+                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
+                }
+                else
+                {
+                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = _connectionInfo.RDPMinutesToIdleTimeout;
+                }
+
+                //not user changeable
+                _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
 				_rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
 				_rdpClient.AdvancedSettings3.MaxReconnectAttempts = Settings.Default.RdpReconnectionCount;
 				_rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
@@ -176,8 +186,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			_loginComplete = false;
 			SetEventHandlers();
-					
-			try
+
+            try
 			{
 				_rdpClient.Connect();
 				base.Connect();
@@ -616,7 +626,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				_rdpClient.OnFatalError += RDPEvent_OnFatalError;
 				_rdpClient.OnDisconnected += RDPEvent_OnDisconnected;
 				_rdpClient.OnLeaveFullScreenMode += RDPEvent_OnLeaveFullscreenMode;
-			}
+                _rdpClient.OnIdleTimeoutNotification += RDPEvent_OnIdleTimeoutNotification;
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpSetEventHandlersFailed, ex);
@@ -625,7 +636,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 		
         #region Private Events & Handlers
-		private void RDPEvent_OnFatalError(int errorCode)
+        private void RDPEvent_OnIdleTimeoutNotification()
+        {
+            Close(); //Simply close the RDP Session if the idle timeout has been triggered.
+        }
+
+
+        private void RDPEvent_OnFatalError(int errorCode)
 		{
 			Event_ErrorOccured(this, Convert.ToString(errorCode));
 		}

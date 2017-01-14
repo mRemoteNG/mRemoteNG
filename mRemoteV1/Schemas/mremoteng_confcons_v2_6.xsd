@@ -46,6 +46,7 @@
     <xs:attribute name="RenderingEngine" type="xs:string" use="required" />
     <xs:attribute name="ICAEncryptionStrength" type="xs:string" use="required" />
     <xs:attribute name="RDPAuthenticationLevel" type="xs:string" use="required" />
+    <xs:attribute name="RDPMinutesToIdleTimeout" type="xs:int" use="required" />
     <xs:attribute name="LoadBalanceInfo" type="xs:string" use="required" />
     <xs:attribute name="Colors" type="xs:string" use="required" />
     <xs:attribute name="Resolution" type="xs:string" use="required" />
@@ -114,6 +115,7 @@
     <xs:attribute name="InheritUsername" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritICAEncryptionStrength" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRDPAuthenticationLevel" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDPMinutesToIdleTimeout" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritLoadBalanceInfo" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPreExtApp" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPostExtApp" type="xs:boolean" use="optional" />

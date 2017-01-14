@@ -30,6 +30,7 @@ namespace mRemoteNG.Connection
         private ProtocolICA.EncryptionStrength _icaEncryption;
         private bool _useConsoleSession;
         private ProtocolRDP.AuthenticationLevel _rdpAuthenticationLevel;
+        private int _rdpMinutesToIdleTimeout;
         private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
@@ -223,6 +224,15 @@ namespace mRemoteNG.Connection
         {
             get { return GetPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel); }
             set { SetField(ref _rdpAuthenticationLevel, value, "RDPAuthenticationLevel"); }
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDPMinutesToIdleTimeout"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPMinutesToIdleTimeout")]
+        public virtual int RDPMinutesToIdleTimeout
+        {
+            get { return GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout); }
+            set { SetField(ref _rdpMinutesToIdleTimeout, value, "RDPMinutesToIdleTimeout"); }
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),

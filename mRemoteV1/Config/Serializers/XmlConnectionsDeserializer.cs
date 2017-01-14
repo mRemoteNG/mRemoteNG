@@ -487,6 +487,8 @@ namespace mRemoteNG.Config.Serializers
                 {
                     connectionInfo.SoundQuality = (ProtocolRDP.RDPSoundQuality)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPSoundQuality), Convert.ToString(xmlnode.Attributes["SoundQuality"].Value));
                     connectionInfo.Inheritance.SoundQuality = bool.Parse(xmlnode.Attributes["InheritSoundQuality"].Value);
+                    connectionInfo.RDPMinutesToIdleTimeout = Convert.ToInt32(xmlnode.Attributes["RDPMinutesToIdleTimeout"]?.Value ?? "0");
+                    connectionInfo.Inheritance.RDPMinutesToIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPMinutesToIdleTimeout"]?.Value ?? "False");
                 }
             }
             catch (Exception ex)

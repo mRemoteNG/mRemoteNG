@@ -65,6 +65,7 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("RenderingEngine", typeof(string));
             _dataTable.Columns.Add("ICAEncryptionStrength", typeof(string));
             _dataTable.Columns.Add("RDPAuthenticationLevel", typeof(string));
+            _dataTable.Columns.Add("RDPMinutesToIdleTimeout", typeof(int));
             _dataTable.Columns.Add("Colors", typeof(string));
             _dataTable.Columns.Add("Resolution", typeof(string));
             _dataTable.Columns.Add("DisplayWallpaper", typeof(bool));
@@ -128,6 +129,7 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("InheritRenderingEngine", typeof(bool));
             _dataTable.Columns.Add("InheritICAEncryptionStrength", typeof(bool));
             _dataTable.Columns.Add("InheritRDPAuthenticationLevel", typeof(bool));
+            _dataTable.Columns.Add("InheritRDPMinutesToIdleTimeout", typeof(bool));
             _dataTable.Columns.Add("InheritUsername", typeof(bool));
             _dataTable.Columns.Add("InheritPreExtApp", typeof(bool));
             _dataTable.Columns.Add("InheritPostExtApp", typeof(bool));
@@ -200,6 +202,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RenderingEngine"] = connectionInfo.RenderingEngine;
             dataRow["ICAEncryptionStrength"] = connectionInfo.ICAEncryptionStrength;
             dataRow["RDPAuthenticationLevel"] = connectionInfo.RDPAuthenticationLevel;
+            //dataRow["RDPMinutesToIdleTimeout"] = connectionInfo.RDPMinutesToIdleTimeout;
             dataRow["LoadBalanceInfo"] = connectionInfo.LoadBalanceInfo;
             dataRow["Colors"] = connectionInfo.Colors;
             dataRow["Resolution"] = connectionInfo.Resolution;
@@ -270,6 +273,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
                 dataRow["InheritICAEncryptionStrength"] = connectionInfo.Inheritance.ICAEncryptionStrength;
                 dataRow["InheritRDPAuthenticationLevel"] = connectionInfo.Inheritance.RDPAuthenticationLevel;
+                //dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RDPMinutesToIdleTimeout;
                 dataRow["InheritLoadBalanceInfo"] = connectionInfo.Inheritance.LoadBalanceInfo;
                 dataRow["InheritPreExtApp"] = connectionInfo.Inheritance.PreExtApp;
                 dataRow["InheritPostExtApp"] = connectionInfo.Inheritance.PostExtApp;
@@ -325,6 +329,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritUsername"] = false;
                 dataRow["InheritICAEncryptionStrength"] = false;
                 dataRow["InheritRDPAuthenticationLevel"] = false;
+                //dataRow["InheritRDPMinutesToIdleTimeout"] = false;
                 dataRow["InheritLoadBalanceInfo"] = false;
                 dataRow["InheritPreExtApp"] = false;
                 dataRow["InheritPostExtApp"] = false;

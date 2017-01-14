@@ -4118,6 +4118,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0).
+        /// </summary>
+        internal static string strPropertyDescriptionRDPMinutesToIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRDPMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
         /// </summary>
         internal static string strPropertyDescriptionRedirectDrives {
@@ -4600,6 +4609,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameRDGatewayUsername {
             get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minutes to Idle.
+        /// </summary>
+        internal static string strPropertyNameRDPMinutesToIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
             }
         }
         
