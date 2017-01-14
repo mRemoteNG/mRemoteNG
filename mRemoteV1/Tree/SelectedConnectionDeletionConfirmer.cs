@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.UI.Controls;
@@ -9,10 +10,12 @@ namespace mRemoteNG.Tree
     public class SelectedConnectionDeletionConfirmer : IConfirm
     {
         private readonly IConnectionTree _connectionTree;
+        private readonly Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> _confirmationFunc;
 
-        public SelectedConnectionDeletionConfirmer(IConnectionTree connectionTree)
+        public SelectedConnectionDeletionConfirmer(IConnectionTree connectionTree, Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> confirmationFunc)
         {
             _connectionTree = connectionTree;
+            _confirmationFunc = confirmationFunc;
         }
 
         public bool Confirm()
@@ -26,28 +29,28 @@ namespace mRemoteNG.Tree
             return UserConfirmsConnectionDeletion(deletionTarget);
         }
 
-        private static bool UserConfirmsEmptyFolderDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsEmptyFolderDeletion(AbstractConnectionInfoData deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, deletionTarget.Name);
             return PromptUser(messagePrompt);
         }
 
-        private static bool UserConfirmsNonEmptyFolderDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsNonEmptyFolderDeletion(AbstractConnectionInfoData deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, deletionTarget.Name);
             return PromptUser(messagePrompt);
         }
 
-        private static bool UserConfirmsConnectionDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsConnectionDeletion(AbstractConnectionInfoData deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, deletionTarget.Name);
             return PromptUser(messagePrompt);
         }
 
-        private static bool PromptUser(string promptMessage)
+        private bool PromptUser(string promptMessage)
         {
-            var msgBoxResponse = MessageBox.Show(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            return (msgBoxResponse == DialogResult.Yes);
+            var msgBoxResponse = _confirmationFunc.Invoke(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return msgBoxResponse == DialogResult.Yes;
         }
     }
 }

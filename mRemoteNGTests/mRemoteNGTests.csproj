@@ -157,6 +157,7 @@
     <Compile Include="Tree\PreviousSessionOpenerTests.cs" />
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
+    <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
