@@ -154,6 +154,7 @@
     <Compile Include="Tree\ClickHandlers\ExpandNodeClickHandlerTests.cs" />
     <Compile Include="Tree\NodeSearcherTests.cs" />
     <Compile Include="Tree\ClickHandlers\OpenConnectionClickHandlerTests.cs" />
+    <Compile Include="Tree\PreviouslyOpenedFolderExpanderTests.cs" />
     <Compile Include="Tree\PreviousSessionOpenerTests.cs" />
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
