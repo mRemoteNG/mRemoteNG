@@ -4,7 +4,7 @@ using mRemoteNG.Connection;
 
 namespace mRemoteNG.Tree
 {
-    public class TreeNodeDoubleClickHandler : ITreeNodeClickHandler
+    public class TreeNodeCompositeClickHandler : ITreeNodeClickHandler
     {
         public IEnumerable<ITreeNodeClickHandler> ClickHandlers { get; set; } = new ITreeNodeClickHandler[0];
 

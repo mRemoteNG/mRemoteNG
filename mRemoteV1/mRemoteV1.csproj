@@ -225,8 +225,7 @@
     <Compile Include="Tree\RootNodeExpander.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
-    <Compile Include="Tree\ClickHandlers\TreeNodeDoubleClickHandler.cs" />
-    <Compile Include="Tree\ClickHandlers\TreeNodeSingleClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandler.cs" />
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
