@@ -2427,4 +2427,10 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Minutes to Idle</value>
   </data>
+  <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Select whether to receive an alert after the RDP session disconnects due to inactivity</value>
+  </data>
+  <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Alert on Idle Disconnect</value>
+  </data>
 </root>

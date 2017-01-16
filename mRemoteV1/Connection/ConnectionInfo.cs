@@ -249,6 +249,7 @@ namespace mRemoteNG.Connection
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
             RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
+            RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
             RenderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;

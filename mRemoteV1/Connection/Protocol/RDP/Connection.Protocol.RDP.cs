@@ -30,6 +30,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private ConnectionInfo _connectionInfo;
         private bool _loginComplete;
         private bool _redirectKeys;
+        private bool _alertOnIdleDisconnect;
         #endregion
 
         #region Properties
@@ -129,11 +130,17 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetCredentials();
                 SetResolution();
                 _rdpClient.FullScreenTitle = _connectionInfo.Name;
+
+                _alertOnIdleDisconnect = _connectionInfo.RDPAlertIdleTimeout;
                 
                 // Set the timeout to the default (zero) if it is out of bounds.
-                if (_connectionInfo.RDPMinutesToIdleTimeout < 0 || _connectionInfo.RDPMinutesToIdleTimeout > 240)
+                if (_connectionInfo.RDPMinutesToIdleTimeout < 0)
                 {
                     _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
+                } // Set the timeout to the max (240) if it is out of bounds.
+                else if (_connectionInfo.RDPMinutesToIdleTimeout > 240)
+                {
+                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = 240;
                 }
                 else
                 {
@@ -639,6 +646,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private void RDPEvent_OnIdleTimeoutNotification()
         {
             Close(); //Simply close the RDP Session if the idle timeout has been triggered.
+
+            if (_alertOnIdleDisconnect)
+            {
+                string message = "The " + _connectionInfo.Name + " session was disconnected due to inactivity";
+                const string caption = "Session Disconnected";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
 
