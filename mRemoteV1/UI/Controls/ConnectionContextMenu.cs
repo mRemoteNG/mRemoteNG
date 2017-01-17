@@ -62,6 +62,7 @@ namespace mRemoteNG.UI.Controls
                 AddExternalApps();
                 ShowHideMenuItems();
             };
+            Closing += (sender, args) => EnableMenuItemsRecursive(Items);
         }
 
         private void InitializeComponent()
