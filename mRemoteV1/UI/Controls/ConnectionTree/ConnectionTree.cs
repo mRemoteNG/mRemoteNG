@@ -234,34 +234,7 @@ namespace mRemoteNG.UI.Controls
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            var senderAsContainerInfo = sender as ContainerInfo;
-            // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (args?.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    var childList = senderAsContainerInfo?.Children;
-                    ConnectionInfo otherChild = null;
-                    if (childList?.Count > 1)
-                        otherChild = childList.First(child => !args.NewItems.Contains(child));
-                    RefreshObject(otherChild ?? senderAsContainerInfo);
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    if (senderAsContainerInfo?.Children.Count > 0)
-                        RefreshObjects(args.OldItems);
-                    else
-                        RefreshObject(senderAsContainerInfo);
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    RefreshObjects(args.OldItems);
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    RefreshObject(senderAsContainerInfo);
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    break;
-                case null:
-                    break;
-            }
+            RefreshObject(sender);
         }
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)
