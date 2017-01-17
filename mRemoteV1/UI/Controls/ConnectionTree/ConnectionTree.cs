@@ -207,7 +207,7 @@ namespace mRemoteNG.UI.Controls
             var parent = selectedContainer ?? SelectedNode?.Parent;
             newNode.SetParent(parent);
             Expand(parent);
-            SelectObject(newNode);
+            SelectObject(newNode, true);
             EnsureModelVisible(newNode);
         }
 
