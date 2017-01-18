@@ -12,7 +12,7 @@ namespace mRemoteNG.Connection
 
         #region Public Properties
         #region General
-        [LocalizedAttributes.LocalizedCategory("strCategoryGeneral", 1),
+        [LocalizedAttributes.LocalizedCategory("strCategoryGeneral"),
             LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameAll"),
             LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionAll"), 
             TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
@@ -83,9 +83,14 @@ namespace mRemoteNG.Connection
 		[LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameAuthenticationLevel"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionAuthenticationLevel"), 
-		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RDPAuthenticationLevel {get; set;}
-				
-		[LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
+		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RDPAuthenticationLevel {get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRDPMinutesToIdleTimeout"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDPMinutesToIdleTimeout"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RDPMinutesToIdleTimeout { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameLoadBalanceInfo"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionLoadBalanceInfo"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool LoadBalanceInfo {get; set;}
@@ -182,9 +187,10 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameEnableDesktopComposition"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionEnableEnableDesktopComposition"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool EnableDesktopComposition {get; set;}
+
         #endregion
         #region Redirect
-		[LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7), 
+        [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectKeys"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectKeys"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RedirectKeys {get; set;}
@@ -213,9 +219,15 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectSounds"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectSounds"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RedirectSound {get; set;}
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameSoundQuality"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionSoundQuality"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool SoundQuality { get; set; }
         #endregion
         #region Misc
-		[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8), 
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameExternalToolBefore"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionExternalToolBefore"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool PreExtApp {get; set;}
@@ -376,7 +388,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        protected void SetAllValues(ConnectionInfoInheritance otherInheritanceObject)
+	    private void SetAllValues(ConnectionInfoInheritance otherInheritanceObject)
         {
             var properties = GetProperties();
             foreach (var property in properties)

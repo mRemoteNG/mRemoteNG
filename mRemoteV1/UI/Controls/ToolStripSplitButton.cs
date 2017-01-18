@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Controls
 		{
 			if (e.CloseReason != ToolStripDropDownCloseReason.AppClicked)
 			{
-				return ;
+				return;
 			}
 				
 			Rectangle dropDownButtonBoundsClient = DropDownButtonBounds; // Relative to the ToolStripSplitButton

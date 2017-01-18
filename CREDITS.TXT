@@ -3,16 +3,21 @@ Contributors
 
 Current mRemoteNG dev team:
 David Sparer (github.com/sparerd)
-Hayato Iriumi (github.com/hiriumi)
 Sean Kaim (github.com/kmscode)
 
-Felix Deimel - mRemote original developer
-Riley McArdle - mRemoteNG original developer
+Thanks for the awesome new website!
+Bennett Blodinger (github.com/benwa)
+
+Tony Lambert
 
 
 Past Contributors
 =================
 
+Felix Deimel - mRemote original developer
+Riley McArdle - mRemoteNG original developer
+
+Hayato Iriumi (github.com/hiriumi)
 Jason Barbier
 Wiktor Beryt
 Lionel Caignec
@@ -35,6 +40,7 @@ Emanuel Silva
 Robert Siwiec
 Hayato Iriumi
 Sebastien Thieury (github.com/SebThieu)
+Riza Emet
 
 
 Included Source Code
@@ -70,8 +76,8 @@ Copyright © 2004 Marc Merritt
 Copyright © 2008 Felix Deimel
 http://www.codeproject.com/KB/selection/ADPickerCtrl.aspx
 
-DockPanel Suite 2.10.0.beta2
-Copyright © 2015 @roken and @lextm (formerly Weifen Luo)
+DockPanel Suite 2.10.0
+Copyright © 2016 @roken and @lextm (formerly Weifen Luo)
 MIT License
 https://github.com/dockpanelsuite/dockpanelsuite
 

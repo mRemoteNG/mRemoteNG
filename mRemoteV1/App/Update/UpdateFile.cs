@@ -7,11 +7,9 @@ namespace mRemoteNG.App.Update
     public class UpdateFile
     {
         #region Public Properties
-        private Dictionary<string, string> _items = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
         // ReSharper disable MemberCanBePrivate.Local
         // ReSharper disable once MemberCanBePrivate.Global
-        public Dictionary<string, string> Items => _items;
-
+        public Dictionary<string, string> Items { get; } = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
         #endregion
 
         #region Public Methods
@@ -36,23 +34,16 @@ namespace mRemoteNG.App.Update
                 {
                     var trimmedLine = line.Trim();
                     if (trimmedLine.Length == 0)
-                    {
                         continue;
-                    }
+
                     if (trimmedLine.Substring(0, 1).IndexOfAny(commentCharacters) != -1)
-                    {
                         continue;
-                    }
 
                     var parts = trimmedLine.Split(keyValueSeparators, 2);
                     if (parts.Length != 2)
-                    {
                         continue;
-                    }
-                    var key = parts[0].Trim();
-                    var value = parts[1].Trim();
 
-                    _items.Add(key, value);
+                    Items.Add(parts[0].Trim(), parts[1].Trim());
                 }
             }
         }
@@ -61,10 +52,10 @@ namespace mRemoteNG.App.Update
         private string GetString(string key)
         {
             // ReSharper restore MemberCanBePrivate.Local
-            return !Items.ContainsKey(key) ? string.Empty : this._items[key];
+            return !Items.ContainsKey(key) ? string.Empty : Items[key];
         }
 
-        public Version GetVersion(string key)
+        public Version GetVersion(string key = "Version")
         {
             var value = GetString(key);
             return string.IsNullOrEmpty(value) ? null : new Version(value);
@@ -76,7 +67,19 @@ namespace mRemoteNG.App.Update
             return string.IsNullOrEmpty(value) ? null : new Uri(value);
         }
 
-        public string GetThumbprint(string key)
+        public string GetThumbprint(string key = "CertificateThumbprint")
+        {
+            return GetString(key).Replace(" ", "").ToUpperInvariant();
+        }
+
+        public string GetFileName()
+        {
+            var value = GetString("dURL");
+            var sv = value.Split('/');
+            return sv[sv.Length-1];
+        }
+
+        public string GetChecksum(string key = "Checksum")
         {
             return GetString(key).Replace(" ", "").ToUpperInvariant();
         }

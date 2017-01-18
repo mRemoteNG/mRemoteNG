@@ -30,6 +30,7 @@ namespace mRemoteNG.Connection
         private ProtocolICA.EncryptionStrength _icaEncryption;
         private bool _useConsoleSession;
         private ProtocolRDP.AuthenticationLevel _rdpAuthenticationLevel;
+        private int _rdpMinutesToIdleTimeout;
         private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
@@ -56,6 +57,7 @@ namespace mRemoteNG.Connection
         private bool _redirectPorts;
         private bool _redirectSmartCards;
         private ProtocolRDP.RDPSounds _redirectSound;
+        private ProtocolRDP.RDPSoundQuality _soundQuality;
 
         private string _preExtApp;
         private string _postExtApp;
@@ -77,7 +79,7 @@ namespace mRemoteNG.Connection
 
         #region Properties
         #region Display
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
         public virtual string Name
@@ -86,7 +88,7 @@ namespace mRemoteNG.Connection
             set { SetField(ref _name, value, "Name"); }
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDescription"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDescription")]
         public virtual string Description
@@ -95,7 +97,7 @@ namespace mRemoteNG.Connection
             set { SetField(ref _description, value, "Description"); }
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
             TypeConverter(typeof(ConnectionIcon)),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameIcon"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionIcon")]
@@ -105,7 +107,7 @@ namespace mRemoteNG.Connection
             set { SetField(ref _icon, value, "Icon"); }
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNamePanel"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPanel")]
         public virtual string Panel
@@ -222,6 +224,15 @@ namespace mRemoteNG.Connection
         {
             get { return GetPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel); }
             set { SetField(ref _rdpAuthenticationLevel, value, "RDPAuthenticationLevel"); }
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDPMinutesToIdleTimeout"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPMinutesToIdleTimeout")]
+        public virtual int RDPMinutesToIdleTimeout
+        {
+            get { return GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout); }
+            set { SetField(ref _rdpMinutesToIdleTimeout, value, "RDPMinutesToIdleTimeout"); }
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
@@ -454,6 +465,16 @@ namespace mRemoteNG.Connection
         {
             get { return GetPropertyValue("RedirectSound", _redirectSound); }
             set { SetField(ref _redirectSound, value, "RedirectSound"); }
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameSoundQuality"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSoundQuality"),
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+        public ProtocolRDP.RDPSoundQuality SoundQuality
+        {
+            get { return GetPropertyValue("SoundQuality", _soundQuality); }
+            set { SetField(ref _soundQuality, value, "SoundQuality"); }
         }
         #endregion
 

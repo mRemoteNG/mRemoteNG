@@ -16,6 +16,7 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
@@ -41,8 +42,8 @@ namespace mRemoteNG.App
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
         {
-            get { return Windows.TreeForm.ConnectionTreeModel; }
-            set { Windows.TreeForm.ConnectionTreeModel = value; }
+            get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
+            set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         }
         #endregion
 
@@ -148,11 +149,13 @@ namespace mRemoteNG.App
 
                 for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
                 {
-                    var cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1));
-                    cMenScreen.Tag = new ArrayList();
-                    cMenScreen.Image = Resources.Monitor_GoTo;
-                    (cMenScreen.Tag as ArrayList).Add(Screen.AllScreens[i]);
-                    (cMenScreen.Tag as ArrayList).Add(cMenScreens.Tag);
+                    var cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1))
+                    {
+                        Tag = new ArrayList(),
+                        Image = Resources.Monitor_GoTo
+                    };
+                    ((ArrayList) cMenScreen.Tag).Add(Screen.AllScreens[i]);
+                    ((ArrayList) cMenScreen.Tag).Add(cMenScreens.Tag);
                     cMenScreen.Click += cMenConnectionPanelScreen_Click;
                     cMenScreens.DropDownItems.Add(cMenScreen);
                 }
@@ -174,9 +177,10 @@ namespace mRemoteNG.App
                 {
                     foreach (var obj in tagEnumeration)
                     {
-                        if (obj is Screen)
+                        var screen1 = obj as Screen;
+                        if (screen1 != null)
                         {
-                            screen = (Screen)obj;
+                            screen = screen1;
                         }
                         else if (obj is DockContent)
                         {
@@ -215,29 +219,25 @@ namespace mRemoteNG.App
                     Directory.CreateDirectory(dirname);
 
                 // Use File.Open with FileMode.CreateNew so that we don't overwrite an existing file
-                using (var fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                var fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                using (var xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
                 {
-                    using (var xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
-                    {
-                        xmlTextWriter.Formatting = Formatting.Indented;
-                        xmlTextWriter.Indentation = 4;
-                        xmlTextWriter.WriteStartDocument();
-                        xmlTextWriter.WriteStartElement("Connections"); // Do not localize
-                        xmlTextWriter.WriteAttributeString("Name", Language.strConnections);
-                        xmlTextWriter.WriteAttributeString("Export", "", "False");
-                        xmlTextWriter.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY");
-                        xmlTextWriter.WriteAttributeString("ConfVersion", "", "2.5");
-                        xmlTextWriter.WriteEndElement();
-                        xmlTextWriter.WriteEndDocument();
-                        xmlTextWriter.Close();
-                    }
-
+                    xmlTextWriter.Formatting = Formatting.Indented;
+                    xmlTextWriter.Indentation = 4;
+                    xmlTextWriter.WriteStartDocument();
+                    xmlTextWriter.WriteStartElement("Connections"); // Do not localize
+                    xmlTextWriter.WriteAttributeString("Name", Language.strConnections);
+                    xmlTextWriter.WriteAttributeString("Export", "", "False");
+                    xmlTextWriter.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY");
+                    xmlTextWriter.WriteAttributeString("ConfVersion", "", "2.5");
+                    xmlTextWriter.WriteEndElement();
+                    xmlTextWriter.WriteEndDocument();
                 }
 
                 // Load config
                 connectionsLoader.ConnectionFileName = filename;
                 ConnectionTreeModel = connectionsLoader.LoadConnections(false);
-                Windows.TreeForm.ConnectionTreeModel = ConnectionTreeModel;
+                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
             }
             catch (Exception ex)
             {
@@ -288,7 +288,7 @@ namespace mRemoteNG.App
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
                 ConnectionTreeModel = connectionsLoader.LoadConnections(false);
-                Windows.TreeForm.ConnectionTreeModel = ConnectionTreeModel;
+                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
                 {
@@ -421,30 +421,26 @@ namespace mRemoteNG.App
 
         public static void SaveConnectionsAsync()
         {
-            _saveUpdate = true;
             var t = new Thread(SaveConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
 
-        private static bool _saveUpdate;
         private static readonly object SaveLock = new object();
         private static void SaveConnectionsBGd()
         {
             Monitor.Enter(SaveLock);
-            SaveConnections(_saveUpdate);
+            SaveConnections();
             Monitor.Exit(SaveLock);
         }
 
-        public static void SaveConnections(bool update = false)
+        public static void SaveConnections()
         {
             if (ConnectionTreeModel == null) return;
+            if (!IsConnectionsFileLoaded) return;
 
             try
             {
-                if (update && Settings.Default.UseSQLServer == false)
-                    return;
-
                 RemoteConnectionsSyncronizer?.Disable();
 
                 var connectionsSaver = new ConnectionsSaver();
@@ -597,7 +593,8 @@ namespace mRemoteNG.App
             connectionInfo.Protocol = url.StartsWith("https:") ? ProtocolType.HTTPS : ProtocolType.HTTP;
             connectionInfo.SetDefaultPort();
             connectionInfo.IsQuickConnect = true;
-            ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+            var connectionInitiator = new ConnectionInitiator();
+            connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
         }
 
         public static void GoToWebsite()

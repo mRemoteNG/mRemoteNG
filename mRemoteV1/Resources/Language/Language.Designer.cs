@@ -1449,6 +1449,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        internal static string strDownloadPortable {
+            get {
+                return ResourceManager.GetString("strDownloadPortable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplicate.
         /// </summary>
         internal static string strDuplicate {
@@ -4109,6 +4118,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0).
+        /// </summary>
+        internal static string strPropertyDescriptionRDPMinutesToIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRDPMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
         /// </summary>
         internal static string strPropertyDescriptionRedirectDrives {
@@ -4186,6 +4204,15 @@ namespace mRemoteNG {
         internal static string strPropertyDescriptionSmartSizeMode {
             get {
                 return ResourceManager.GetString("strPropertyDescriptionSmartSizeMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the Sound Quality provided by the protocol: Dynamic, Medium, High.
+        /// </summary>
+        internal static string strPropertyDescriptionSoundQuality {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionSoundQuality", resourceCulture);
             }
         }
         
@@ -4586,6 +4613,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minutes to Idle.
+        /// </summary>
+        internal static string strPropertyNameRDPMinutesToIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk Drives.
         /// </summary>
         internal static string strPropertyNameRedirectDrives {
@@ -4663,6 +4699,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameSmartSizeMode {
             get {
                 return ResourceManager.GetString("strPropertyNameSmartSizeMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sound Quality.
+        /// </summary>
+        internal static string strPropertyNameSoundQuality {
+            get {
+                return ResourceManager.GetString("strPropertyNameSoundQuality", resourceCulture);
             }
         }
         
@@ -5521,6 +5566,33 @@ namespace mRemoteNG {
         internal static string strRDPSoundLeaveAtRemoteComputer {
             get {
                 return ResourceManager.GetString("strRDPSoundLeaveAtRemoteComputer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dynamic.
+        /// </summary>
+        internal static string strRDPSoundQualityDynamic {
+            get {
+                return ResourceManager.GetString("strRDPSoundQualityDynamic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High.
+        /// </summary>
+        internal static string strRDPSoundQualityHigh {
+            get {
+                return ResourceManager.GetString("strRDPSoundQualityHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        internal static string strRDPSoundQualityMedium {
+            get {
+                return ResourceManager.GetString("strRDPSoundQualityMedium", resourceCulture);
             }
         }
         
@@ -6629,6 +6701,15 @@ namespace mRemoteNG {
         internal static string strUpdateGetChangeLogFailed {
             get {
                 return ResourceManager.GetString("strUpdateGetChangeLogFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Completed!.
+        /// </summary>
+        internal static string strUpdatePortableDownloadComplete {
+            get {
+                return ResourceManager.GetString("strUpdatePortableDownloadComplete", resourceCulture);
             }
         }
         

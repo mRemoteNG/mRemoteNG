@@ -84,6 +84,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), (string)dataRow["RenderingEngine"]);
             connectionInfo.ICAEncryptionStrength = (ProtocolICA.EncryptionStrength)Enum.Parse(typeof(ProtocolICA.EncryptionStrength), (string)dataRow["ICAEncryptionStrength"]);
             connectionInfo.RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel)Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), (string)dataRow["RDPAuthenticationLevel"]);
+            connectionInfo.RDPMinutesToIdleTimeout = (int)dataRow["RDPMinutesToIdleTimeout"];
             connectionInfo.LoadBalanceInfo = (string)dataRow["LoadBalanceInfo"];
             connectionInfo.Colors = (ProtocolRDP.RDPColors)Enum.Parse(typeof(ProtocolRDP.RDPColors) ,(string)dataRow["Colors"]);
             connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Enum.Parse(typeof(ProtocolRDP.RDPResolutions), (string)dataRow["Resolution"]);
@@ -98,6 +99,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.RedirectPrinters = (bool)dataRow["RedirectPrinters"];
             connectionInfo.RedirectSmartCards = (bool)dataRow["RedirectSmartCards"];
             connectionInfo.RedirectSound = (ProtocolRDP.RDPSounds)Enum.Parse(typeof(ProtocolRDP.RDPSounds), (string)dataRow["RedirectSound"]);
+            connectionInfo.SoundQuality = (ProtocolRDP.RDPSoundQuality)Enum.Parse(typeof(ProtocolRDP.RDPSoundQuality), (string)dataRow["SoundQuality"]);
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
             connectionInfo.PleaseConnect = (bool)dataRow["Connected"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
@@ -143,6 +145,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.RedirectPrinters = (bool)dataRow["InheritRedirectPrinters"];
             connectionInfo.Inheritance.RedirectSmartCards = (bool)dataRow["InheritRedirectSmartCards"];
             connectionInfo.Inheritance.RedirectSound = (bool)dataRow["InheritRedirectSound"];
+            connectionInfo.Inheritance.SoundQuality = (bool)dataRow["InheritSoundQuality"];
             connectionInfo.Inheritance.Resolution = (bool)dataRow["InheritResolution"];
             connectionInfo.Inheritance.AutomaticResize = (bool)dataRow["InheritAutomaticResize"];
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];
@@ -151,6 +154,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
             connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];
             connectionInfo.Inheritance.RDPAuthenticationLevel = (bool)dataRow["InheritRDPAuthenticationLevel"];
+            connectionInfo.Inheritance.RDPMinutesToIdleTimeout = (bool)dataRow["RDPMinutesToIdleTimeout"];
             connectionInfo.Inheritance.LoadBalanceInfo = (bool)dataRow["InheritLoadBalanceInfo"];
             connectionInfo.Inheritance.PreExtApp = (bool)dataRow["InheritPreExtApp"];
             connectionInfo.Inheritance.PostExtApp = (bool)dataRow["InheritPostExtApp"];

@@ -216,6 +216,7 @@ namespace mRemoteNGTests.Config.Serializers
                     yield return new TestCaseData("InheritRedirectPrinters", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritRedirectSmartCards", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritRedirectSound", false.ToString(), ConnectionInfo);
+                    yield return new TestCaseData("InheritSoundQuality", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritResolution", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritAutomaticResize", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritUseConsoleSession", false.ToString(), ConnectionInfo);

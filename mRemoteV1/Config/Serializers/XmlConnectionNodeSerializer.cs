@@ -67,6 +67,7 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("RenderingEngine", connectionInfo.RenderingEngine));
             element.Add(new XAttribute("ICAEncryptionStrength", connectionInfo.ICAEncryptionStrength));
             element.Add(new XAttribute("RDPAuthenticationLevel", connectionInfo.RDPAuthenticationLevel));
+            element.Add(new XAttribute("RDPMinutesToIdleTimeout", connectionInfo.RDPMinutesToIdleTimeout));
             element.Add(new XAttribute("LoadBalanceInfo", connectionInfo.LoadBalanceInfo));
             element.Add(new XAttribute("Colors", connectionInfo.Colors));
             element.Add(new XAttribute("Resolution", connectionInfo.Resolution));
@@ -81,6 +82,7 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("RedirectPrinters", connectionInfo.RedirectPrinters.ToString()));
             element.Add(new XAttribute("RedirectSmartCards", connectionInfo.RedirectSmartCards.ToString()));
             element.Add(new XAttribute("RedirectSound", connectionInfo.RedirectSound.ToString()));
+            element.Add(new XAttribute("SoundQuality", connectionInfo.SoundQuality.ToString()));
             element.Add(new XAttribute("RedirectKeys", connectionInfo.RedirectKeys.ToString()));
             element.Add(new XAttribute("Connected", (connectionInfo.OpenConnections.Count > 0).ToString()));
             element.Add(new XAttribute("PreExtApp", connectionInfo.PreExtApp));
@@ -149,6 +151,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritRedirectPrinters", connectionInfo.Inheritance.RedirectPrinters.ToString()));
                 element.Add(new XAttribute("InheritRedirectSmartCards", connectionInfo.Inheritance.RedirectSmartCards.ToString()));
                 element.Add(new XAttribute("InheritRedirectSound", connectionInfo.Inheritance.RedirectSound.ToString()));
+                element.Add(new XAttribute("InheritSoundQuality", connectionInfo.Inheritance.SoundQuality.ToString()));
                 element.Add(new XAttribute("InheritResolution", connectionInfo.Inheritance.Resolution.ToString()));
                 element.Add(new XAttribute("InheritAutomaticResize", connectionInfo.Inheritance.AutomaticResize.ToString()));
                 element.Add(new XAttribute("InheritUseConsoleSession", connectionInfo.Inheritance.UseConsoleSession.ToString()));
@@ -157,6 +160,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritUsername", connectionInfo.Inheritance.Username.ToString()));
                 element.Add(new XAttribute("InheritICAEncryptionStrength", connectionInfo.Inheritance.ICAEncryptionStrength.ToString()));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel", connectionInfo.Inheritance.RDPAuthenticationLevel.ToString()));
+                element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", connectionInfo.Inheritance.RDPMinutesToIdleTimeout.ToString()));
                 element.Add(new XAttribute("InheritLoadBalanceInfo", connectionInfo.Inheritance.LoadBalanceInfo.ToString()));
                 element.Add(new XAttribute("InheritPreExtApp", connectionInfo.Inheritance.PreExtApp.ToString()));
                 element.Add(new XAttribute("InheritPostExtApp", connectionInfo.Inheritance.PostExtApp.ToString()));
@@ -203,6 +207,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritRedirectPrinters", false.ToString()));
                 element.Add(new XAttribute("InheritRedirectSmartCards", false.ToString()));
                 element.Add(new XAttribute("InheritRedirectSound", false.ToString()));
+                element.Add(new XAttribute("InheritSoundQuality", false.ToString()));
                 element.Add(new XAttribute("InheritResolution", false.ToString()));
                 element.Add(new XAttribute("InheritAutomaticResize", false.ToString()));
                 element.Add(new XAttribute("InheritUseConsoleSession", false.ToString()));
@@ -211,6 +216,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritUsername", false.ToString()));
                 element.Add(new XAttribute("InheritICAEncryptionStrength", false.ToString()));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel", false.ToString()));
+                element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", false.ToString()));
                 element.Add(new XAttribute("InheritLoadBalanceInfo", false.ToString()));
                 element.Add(new XAttribute("InheritPreExtApp", false.ToString()));
                 element.Add(new XAttribute("InheritPostExtApp", false.ToString()));

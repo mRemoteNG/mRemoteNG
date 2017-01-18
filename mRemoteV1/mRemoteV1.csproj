@@ -44,6 +44,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -188,6 +189,7 @@
     <Compile Include="Connection\Converter.cs" />
     <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
+    <Compile Include="Connection\IConnectionInitiator.cs" />
     <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
@@ -220,14 +222,30 @@
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
+    <Compile Include="Tree\AlwaysConfirmYes.cs" />
+    <Compile Include="Tree\SelectedConnectionDeletionConfirmer.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
     <Compile Include="Tree\ConnectionTreeModel.cs" />
+    <Compile Include="Tree\ClickHandlers\ExpandNodeClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\ITreeNodeClickHandler.cs" />
+    <Compile Include="Tree\IConfirm.cs" />
     <Compile Include="Tree\NodeSearcher.cs" />
     <Compile Include="Tree\NodeType.cs" />
-    <Compile Include="Tree\ObjectListViewExtensions.cs" />
+    <Compile Include="Tree\ClickHandlers\OpenConnectionClickHandler.cs" />
+    <Compile Include="Tree\PreviouslyOpenedFolderExpander.cs" />
+    <Compile Include="Tree\PreviousSessionOpener.cs" />
+    <Compile Include="Tree\RootNodeExpander.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
+    <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandler.cs" />
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.Designer.cs">
+      <DependentUpon>ConnectionTree.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
       <SubType>Component</SubType>
@@ -236,12 +254,18 @@
       <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\ObjectWrapper.cs" />
+    <Compile Include="UI\Controls\ConnectionTree\IConnectionTree.cs" />
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionTree\IConnectionTreeDelegate.cs" />
+    <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\StatusImageList.cs" />
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -496,6 +520,7 @@
     <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -767,6 +792,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ScreenshotManager.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Quick Connect\01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Quick Connect\02.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Quick Connect\03.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Screenshots\Configuration\01.png">

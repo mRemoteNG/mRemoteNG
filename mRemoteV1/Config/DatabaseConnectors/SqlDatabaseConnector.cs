@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using mRemoteNG.App;
-using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.Config.DatabaseConnectors

@@ -34,7 +34,7 @@ namespace mRemoteNG.App
 					}
 						
 					if (exportForm.ShowDialog(frmMain.Default) != DialogResult.OK)
-						return ;
+						return;
 
 				    ConnectionInfo exportTarget;
 				    switch (exportForm.Scope)

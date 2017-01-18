@@ -39,10 +39,11 @@ namespace mRemoteNG.Connection
 	    [Browsable(false)]
 	    public ContainerInfo Parent { get; internal set; }
 
-        [Browsable(false)]
-        public int PositionID { get; set; }
+        //[Browsable(false)]
+        //private int PositionID { get; set; }
 
         [Browsable(false)]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public bool IsQuickConnect { get; set; }
 
 	    [Browsable(false)]
@@ -82,7 +83,7 @@ namespace mRemoteNG.Connection
 			return newConnectionInfo;
 		}
 
-	    public void CopyFrom(AbstractConnectionInfoData sourceConnectionInfo)
+	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
 	    {
 	        var properties = typeof(AbstractConnectionInfoData).GetProperties();
 	        foreach (var property in properties)
@@ -90,14 +91,17 @@ namespace mRemoteNG.Connection
 	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
                 property.SetValue(this, remotePropertyValue, null);
 	        }
-	    }
+            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone();
+            clonedInheritance.Parent = this;
+            Inheritance = clonedInheritance;
+        }
 
 	    public virtual TreeNodeType GetTreeNodeType()
 	    {
 	        return TreeNodeType.Connection;
 	    }
 
-		public void SetDefaults()
+        private void SetDefaults()
 		{
 			if (Port == 0)
 			{
@@ -115,7 +119,7 @@ namespace mRemoteNG.Connection
 			Port = GetDefaultPort();
 		}
 
-        public virtual IEnumerable<PropertyInfo> GetProperties(string[] excludedPropertyNames)
+        protected virtual IEnumerable<PropertyInfo> GetProperties(string[] excludedPropertyNames)
         {
             var properties = typeof(ConnectionInfo).GetProperties();
             var filteredProperties = properties.Where((prop) => !excludedPropertyNames.Contains(prop.Name));
@@ -156,12 +160,12 @@ namespace mRemoteNG.Connection
 
 	    private bool ShouldThisPropertyBeInherited(string propertyName)
         {
-            return (ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName));
+            return ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName);
         }
 
         private bool ParentIsValidInheritanceTarget()
         {
-            return (Parent != null);
+            return Parent != null;
         }
 
         private bool IsInheritanceTurnedOnForThisProperty(string propertyName)
@@ -244,6 +248,7 @@ namespace mRemoteNG.Connection
             ICAEncryptionStrength = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
             RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
+            RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
             RenderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
@@ -279,6 +284,7 @@ namespace mRemoteNG.Connection
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
             RedirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), Settings.Default.ConDefaultRedirectSound);
+            SoundQuality = (ProtocolRDP.RDPSoundQuality)Enum.Parse(typeof(ProtocolRDP.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()
@@ -309,10 +315,10 @@ namespace mRemoteNG.Connection
         {
             Inheritance = new ConnectionInfoInheritance(this);
             SetNewOpenConnectionList();
-            PositionID = 0;
+            //PositionID = 0;
         }
 
-	    protected void SetNewOpenConnectionList()
+        private void SetNewOpenConnectionList()
 	    {
 	        OpenConnections = new ProtocolList();
 	        OpenConnections.CollectionChanged += (sender, args) => RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));

@@ -84,19 +84,17 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
                     var ciphertext = Convert.FromBase64String(ciphertextBase64);
 
-                    using (var memoryStream = new MemoryStream(ciphertext))
-                    {
-                        var iv = new byte[BlockSizeInBytes];
-                        memoryStream.Read(iv, 0, iv.Length);
-                        rijndaelManaged.IV = iv;
+                    var memoryStream = new MemoryStream(ciphertext);
+                    var iv = new byte[BlockSizeInBytes];
+                    memoryStream.Read(iv, 0, iv.Length);
+                    rijndaelManaged.IV = iv;
 
-                        using (var cryptoStream = new CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor(), CryptoStreamMode.Read))
-                        using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true))
-                        {
-                            plaintext = streamReader.ReadToEnd();
-                            rijndaelManaged.Clear();
-                        }
-                    } // memoryStream
+                    var cryptoStream = new CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor(), CryptoStreamMode.Read);
+                    using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true))
+                    {
+                        plaintext = streamReader.ReadToEnd();
+                        rijndaelManaged.Clear();
+                    }
                 } // rijndaelManaged
 
                 return plaintext;

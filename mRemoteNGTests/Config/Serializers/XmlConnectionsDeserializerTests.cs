@@ -18,10 +18,7 @@ namespace mRemoteNGTests.Config.Serializers
 
         public void Setup(string confCons, string password)
         {
-            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(confCons)
-            {
-                AuthenticationRequestor = password.ConvertToSecureString
-            };
+            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(confCons, password.ConvertToSecureString);
             _connectionTreeModel = _xmlConnectionsDeserializer.Deserialize();
         }
 
@@ -97,6 +94,16 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(connectionCount, Is.EqualTo(1));
         }
 
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void Folder22InheritsUsername(Datagram testData)
+        {
+            Setup(testData.ConfCons, testData.Password);
+            var connectionRoot = _connectionTreeModel.RootNodes[0];
+            var folder2 = GetFolderNamed("Folder2", connectionRoot.Children);
+            var folder22 = GetFolderNamed("Folder2.2", folder2.Children);
+            Assert.That(folder22.Inheritance.Username, Is.True);
+        }
+
         private bool ContainsNodeNamed(string name, IEnumerable<ConnectionInfo> list)
         {
             return list.Any(node => node.Name == name);
@@ -116,6 +123,8 @@ namespace mRemoteNGTests.Config.Serializers
             get
             {
                 yield return new TestCaseData(new Datagram("confCons v2.5", Resources.confCons_v2_5, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.5 fullencryption", Resources.confCons_v2_5_fullencryption, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.5 custompassword,fullencryption", Resources.confCons_v2_5_passwordis_Password_fullencryption, "Password"));
                 yield return new TestCaseData(new Datagram("confCons v2.6", Resources.confCons_v2_6, "mR3m"));
                 yield return new TestCaseData(new Datagram("confCons v2.6 5k Iterations", Resources.confCons_v2_6_5k_iterations, "mR3m"));
                 yield return new TestCaseData(new Datagram("confCons v2.6 fullencryption", Resources.confCons_v2_6_fullencryption, "mR3m"));

@@ -1,85 +1,86 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+#pragma warning disable 169
 
 namespace mRemoteNG.App
 {
     public static class NativeMethods
     {
         #region Functions
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool AppendMenu(IntPtr hMenu, int uFlags, IntPtr uIDNewItem, string lpNewItem);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr CreatePopupMenu();
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetForegroundWindow();
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool InsertMenu(IntPtr hMenu, int uPosition, int uFlags, IntPtr uIDNewItem, string lpNewItem);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int IsIconic(IntPtr hWnd);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern bool PostMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern int SendMessage(IntPtr hWnd, int msg, int wparam, int lparam);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetMenuItemBitmaps(IntPtr hMenu, int uPosition, int uFlags, IntPtr hBitmapUnchecked, IntPtr hBitmapChecked);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, long dwNewLong);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
 			
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr WindowFromPoint(Point point);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern void GetClassName(IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern int GetClassName(IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern int GetDlgCtrlID(int hwndCtl);
-
-        [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
-        public static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern int GetDlgCtrlID(IntPtr hwndCtl);
 
         [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
-        public static extern bool SetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+        internal static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
+        internal static extern bool SetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
         #endregion
 
         #region Structures
         [StructLayout(LayoutKind.Sequential)]
-        public struct WINDOWPOS
+        internal struct WINDOWPOS
         {
             public IntPtr hwnd;
             public IntPtr hwndInsertAfter;
@@ -90,7 +91,7 @@ namespace mRemoteNG.App
             public int flags;
         }
 
-        public struct WINDOWPLACEMENT
+        internal struct WINDOWPLACEMENT
         {
             public uint length;
             public uint flags;
@@ -100,13 +101,13 @@ namespace mRemoteNG.App
             public RECT rcNormalPosition;
         }
 
-        public struct POINT
+        internal struct POINT
         {
             public long x;
             public long y;
         }
 
-        public struct RECT
+        internal struct RECT
         {
             public long left;
             public long top;
@@ -325,6 +326,11 @@ namespace mRemoteNG.App
         /// Sent when a window belonging to a different application than the active window is about to be activated. The message is sent to the application whose window is being activated and to the application whose window is being deactivated.
         /// </summary>
         public const int WM_ACTIVATEAPP = 0x1C;
+
+        /// <summary>
+        /// Sent to a window if the mouse causes the cursor to move within a window and mouse input is not captured. 
+        /// </summary>
+        public const int WM_SETCURSOR = 0x20;
 
         /// <summary>
         /// Sent when the cursor is in an inactive window and the user presses a mouse button. The parent window receives this message only if the child window passes it to the DefWindowProc function.

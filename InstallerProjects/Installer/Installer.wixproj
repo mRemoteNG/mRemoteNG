@@ -27,12 +27,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CustomActions\CheckForInstalledWindowsUpdates.wxs" />
+    <Compile Include="CustomActions\SaveInstallLocation.wxs" />
     <Compile Include="CustomActions\UninstallLegacyVersions.wxs" />
     <Compile Include="Fragments\FilesFragment.wxs" />
     <Compile Include="Fragments\DirectoriesFragment.wxs" />
     <Compile Include="Fragments\MainExeFragment.wxs" />
     <Compile Include="Fragments\MiscTextFilesFragment.wxs" />
     <Compile Include="Fragments\PuTTYNGFragment.wxs" />
+    <Compile Include="Fragments\RegistryEntriesFragment.wxs" />
     <Compile Include="Fragments\ShortcutFragment.wxs" />
     <Compile Include="mRemoteNGV1.wxs" />
   </ItemGroup>
@@ -113,18 +115,6 @@
     <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Release Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>REM Clean the TargetDir
-rmdir /S /Q "$(TargetDir)"
-
-echo $(ConfigurationName) &gt; buildenv.tmp
-
-REM Harvest bin directory of the mRemoteV1 project
-call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -dr APPLICATIONROOTDIRECTORY -var var.HarvestPath -srd -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v
-
-REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
-call "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
     <PostBuildEvent>set /p buildenv=&lt;buildenv.tmp
 
 REM Sign MSI
@@ -139,5 +129,17 @@ powershell -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\rename_installer_w
 
 REM Copy MSI to Release folder
 IF %25buildenv: Portable=%25==Release (powershell -ExecutionPolicy Bypass -File  "$(SolutionDir)Tools\copy_release_installer.ps1" $(TargetDir) $(SolutionDir)Release)</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>REM Clean the TargetDir
+rmdir /S /Q "$(TargetDir)"
+
+echo $(ConfigurationName) &gt; buildenv.tmp
+
+REM Harvest bin directory of the mRemoteV1 project
+call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -dr INSTALLDIR -var var.HarvestPath -srd -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v
+
+REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
+call "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>
   </PropertyGroup>
 </Project>

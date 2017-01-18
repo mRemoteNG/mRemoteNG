@@ -7,26 +7,14 @@ namespace mRemoteNG.UI.Forms
     public partial class PasswordForm
 	{
         private string _passwordName;
-        private bool _Verify = true;
 
-        #region Public Properties
-        public bool Verify
-		{
-			get { return _Verify; }
-			set { _Verify = value; }
-		}
-			
-        public string Password
-		{
-			get
-			{
-				if (Verify)
-					return txtVerify.Text;
-				else
-					return txtPassword.Text;
-			}
-		}
-        #endregion
+	    #region Public Properties
+
+	    private bool Verify { get; set; }
+
+	    public string Password => Verify ? txtVerify.Text : txtPassword.Text;
+
+	    #endregion
 		
         #region Constructors
 		public PasswordForm(string passwordName = null, bool verify = true)
@@ -45,13 +33,11 @@ namespace mRemoteNG.UI.Forms
 	    private void frmPassword_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
-				
-			if (!Verify)
-			{
-				Height = Height - (txtVerify.Top - txtPassword.Top);
-				lblVerify.Visible = false;
-				txtVerify.Visible = false;
-			}
+
+		    if (Verify) return;
+		    Height = Height - (txtVerify.Top - txtPassword.Top);
+		    lblVerify.Visible = false;
+		    txtVerify.Visible = false;
 		}
 
 	    private void btnCancel_Click(object sender, EventArgs e)
@@ -82,14 +68,7 @@ namespace mRemoteNG.UI.Forms
         #region Private Methods
 		private void ApplyLanguage()
 		{
-			if (string.IsNullOrEmpty(_passwordName))
-			{
-				Text = Language.strTitlePassword;
-			}
-			else
-			{
-				Text = string.Format(Language.strTitlePasswordWithName, _passwordName);
-			}
+			Text = string.IsNullOrEmpty(_passwordName) ? Language.strTitlePassword : string.Format(Language.strTitlePasswordWithName, _passwordName);
 				
 			lblPassword.Text = Language.strLabelPassword;
 			lblVerify.Text = Language.strLabelVerify;

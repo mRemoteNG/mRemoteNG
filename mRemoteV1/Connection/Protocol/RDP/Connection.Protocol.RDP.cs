@@ -129,12 +129,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetCredentials();
                 SetResolution();
                 _rdpClient.FullScreenTitle = _connectionInfo.Name;
-						
-				//not user changeable
-				_rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
+                
+                // Set the timeout to the default (zero) if it is out of bounds.
+                if (_connectionInfo.RDPMinutesToIdleTimeout < 0 || _connectionInfo.RDPMinutesToIdleTimeout > 240)
+                {
+                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
+                }
+                else
+                {
+                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = _connectionInfo.RDPMinutesToIdleTimeout;
+                }
+
+                //not user changeable
+                _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
 				_rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
 				_rdpClient.AdvancedSettings3.MaxReconnectAttempts = Settings.Default.RdpReconnectionCount;
-				_rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10.000 = 10 seconds)
+				_rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
 				_rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
 				_rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
 						
@@ -144,6 +154,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				if (_rdpVersion >= Versions.RDC61)
 				{
 					_rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp;
+				    _rdpClient.AdvancedSettings8.AudioQualityMode = (uint)_connectionInfo.SoundQuality;
 				}
 
                 SetUseConsoleSession();
@@ -175,8 +186,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			_loginComplete = false;
 			SetEventHandlers();
-					
-			try
+
+            try
 			{
 				_rdpClient.Connect();
 				base.Connect();
@@ -325,12 +336,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strRdpGatewayNotSupported, true);
 					return;
 				}
-				else
-				{
-					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strRdpGatewayIsSupported, true);
-				}
-						
-				if (_connectionInfo.RDGatewayUsageMethod != RDGatewayUsageMethod.Never)
+			    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strRdpGatewayIsSupported, true);
+
+			    if (_connectionInfo.RDGatewayUsageMethod != RDGatewayUsageMethod.Never)
 				{
 					_rdpClient.TransportSettings.GatewayUsageMethod = (uint)_connectionInfo.RDGatewayUsageMethod;
 					_rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostname;
@@ -618,7 +626,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				_rdpClient.OnFatalError += RDPEvent_OnFatalError;
 				_rdpClient.OnDisconnected += RDPEvent_OnDisconnected;
 				_rdpClient.OnLeaveFullScreenMode += RDPEvent_OnLeaveFullscreenMode;
-			}
+                _rdpClient.OnIdleTimeoutNotification += RDPEvent_OnIdleTimeoutNotification;
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpSetEventHandlersFailed, ex);
@@ -627,7 +636,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 		
         #region Private Events & Handlers
-		private void RDPEvent_OnFatalError(int errorCode)
+        private void RDPEvent_OnIdleTimeoutNotification()
+        {
+            Close(); //Simply close the RDP Session if the idle timeout has been triggered.
+        }
+
+
+        private void RDPEvent_OnFatalError(int errorCode)
 		{
 			Event_ErrorOccured(this, Convert.ToString(errorCode));
 		}
@@ -680,7 +695,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 		
         #region Public Events & Handlers
-		public delegate void LeaveFullscreenEventHandler(ProtocolRDP sender, EventArgs e);
+		public delegate void LeaveFullscreenEventHandler(object sender, EventArgs e);
 		private LeaveFullscreenEventHandler LeaveFullscreenEvent;
 				
 		public event LeaveFullscreenEventHandler LeaveFullscreen
@@ -728,8 +743,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
             [LocalizedAttributes.LocalizedDescription("strRDPSoundDoNotPlay")]
             DoNotPlay = 2
 		}
-				
-		private enum RDPPerformanceFlags
+
+	    public enum RDPSoundQuality
+	    {
+            [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityDynamic")]
+            Dynamic = 0,
+            [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityMedium")]
+            Medium = 1,
+            [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityHigh")]
+            High = 2
+        }
+
+
+        private enum RDPPerformanceFlags
 		{
 			[Description("strRDPDisableWallpaper")]DisableWallpaper = 0x1,
 //			[Description("strRDPDisableFullWindowdrag")]DisableFullWindowDrag = 0x2,

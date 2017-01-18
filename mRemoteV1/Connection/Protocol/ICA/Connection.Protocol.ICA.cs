@@ -22,16 +22,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		/// </summary>
         public static ProtocolICA Default
 		{
-			get
-			{
-				if (defaultInstance == null)
-				{
-					defaultInstance = new ProtocolICA();
-					//defaultInstance.FormClosed += new FormClosedEventHandler(defaultInstance_FormClosed);
-				}
-						
-				return defaultInstance;
-			}
+			get { return defaultInstance ?? (defaultInstance = new ProtocolICA()); }
 			set
 			{
 				defaultInstance = value;
@@ -146,7 +137,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			{
                 if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) == (int)ConnectionInfo.Force.NoCredentials)
 				{
-					return ;
+					return;
 				}
 						
 				string _user = _Info.Username;

@@ -75,7 +75,7 @@ namespace mRemoteNG.Connection
 				var puttyProcess = new PuttyProcessController();
 				if (!puttyProcess.Start())
 				{
-					return ;
+					return;
 				}
 				if (puttyProcess.SelectListBoxItem(PuttySession))
 				{

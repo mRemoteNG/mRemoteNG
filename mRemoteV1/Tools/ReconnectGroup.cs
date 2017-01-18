@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 
 namespace mRemoteNG.Tools
@@ -28,7 +29,7 @@ namespace mRemoteNG.Tools
 		{
 			if (pbServerStatus.InvokeRequired)
 			{
-			    SetStatusImageCB d = new SetStatusImageCB(SetStatusImage);
+			    var d = new SetStatusImageCB(SetStatusImage);
 			    ParentForm?.Invoke(d, new object[] {Img});
 			}
 			else
@@ -36,8 +37,8 @@ namespace mRemoteNG.Tools
 				pbServerStatus.Image = Img;
 			}
 		}
-		
-		public void chkReconnectWhenReady_CheckedChanged(System.Object sender, System.EventArgs e)
+
+	    private void chkReconnectWhenReady_CheckedChanged(object sender, EventArgs e)
 		{
 			_ReconnectWhenReady = chkReconnectWhenReady.Checked;
 		}
@@ -61,7 +62,7 @@ namespace mRemoteNG.Tools
 		{
 			if (chkReconnectWhenReady.InvokeRequired)
 			{
-			    SetCheckboxCB d = new SetCheckboxCB(SetCheckbox);
+			    var d = new SetCheckboxCB(SetCheckbox);
 			    ParentForm?.Invoke(d, new object[] {Val});
 			}
 			else
@@ -77,22 +78,21 @@ namespace mRemoteNG.Tools
 		{
 			add
 			{
-				CloseClickedEvent = (CloseClickedEventHandler) System.Delegate.Combine(CloseClickedEvent, value);
+				CloseClickedEvent = (CloseClickedEventHandler) Delegate.Combine(CloseClickedEvent, value);
 			}
 			remove
 			{
-				CloseClickedEvent = (CloseClickedEventHandler) System.Delegate.Remove(CloseClickedEvent, value);
+				CloseClickedEvent = (CloseClickedEventHandler) Delegate.Remove(CloseClickedEvent, value);
 			}
 		}
-		
-		
-		public void btnClose_Click(System.Object sender, System.EventArgs e)
+
+
+	    private void btnClose_Click(object sender, EventArgs e)
 		{
-			if (CloseClickedEvent != null)
-				CloseClickedEvent();
+		    CloseClickedEvent?.Invoke();
 		}
-		
-		public void tmrAnimation_Tick(System.Object sender, System.EventArgs e)
+
+	    private void tmrAnimation_Tick(object sender, EventArgs e)
 		{
 			switch (lblAnimation.Text)
 			{
@@ -114,18 +114,18 @@ namespace mRemoteNG.Tools
 		private delegate void DisposeReconnectGroupCB();
 		public void DisposeReconnectGroup()
 		{
-			if (this.InvokeRequired)
+			if (InvokeRequired)
 			{
-			    DisposeReconnectGroupCB d = new DisposeReconnectGroupCB(DisposeReconnectGroup);
+			    var d = new DisposeReconnectGroupCB(DisposeReconnectGroup);
 			    ParentForm?.Invoke(d);
 			}
 			else
 			{
-				this.Dispose();
+				Dispose();
 			}
 		}
 		
-		public void ReconnectGroup_Load(object sender, System.EventArgs e)
+		public void ReconnectGroup_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 		}

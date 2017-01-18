@@ -2,8 +2,7 @@
 using System.Timers;
 using mRemoteNG.App;
 
-
-namespace mRemoteNG.Config.Connections
+namespace mRemoteNG.Config.Connections.Multiuser
 {
     public class RemoteConnectionsSyncronizer : IConnectionsUpdateChecker
     {

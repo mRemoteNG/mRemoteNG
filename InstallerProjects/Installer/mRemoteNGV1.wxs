@@ -12,8 +12,9 @@
     <Binary Id="CustomActions.CA.dll" SourceFile="$(var.SolutionDir)InstallerProjects\CustomActions\bin\$(var.Configuration)\CustomActions.CA.dll" />
     <Property Id="ARPPRODUCTICON" Value="mRemoteNG.ico" />
     <Property Id="ARPHELPLINK" Value="http://www.mremoteng.org" />
+    <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLDIR]" After="CostFinalize" />
     <Property Id="MAINEXE" Value="$(var.ExeProcessName)" />
-    <Property Id="APPLICATIONROOTDIRECTORY">
+    <Property Id="INSTALLDIR">
       <RegistrySearch Id='mRemoteNGRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
     </Property>
     <Property Id='RDP_DTLS_KB' Value='$(var.RdpDtlsKb)' />
@@ -26,6 +27,7 @@
     <PropertyRef Id="NETFRAMEWORK40FULL" />
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
     <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
+    <CustomActionRef Id='SaveCmdlineINSTALLDIR' />
 
 
     <InstallUISequence>
@@ -35,6 +37,14 @@
       <Custom Action="CheckIfLegacyVersionInstalled" After="LaunchConditions" />
       <Custom Action="UninstallLegacyVersion" After="CheckIfLegacyVersionInstalled">(NOT Installed) AND (LEGACYVERSIONINSTALLED = 1)</Custom>
     </InstallUISequence>
+
+    <InstallExecuteSequence>
+      <Custom Action="CheckIfRdpDtlsUpdateInstalled" After="AppSearch">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
+      <Custom Action="CheckIfMinimumRdpInstalled" After="CheckIfRdpDtlsUpdateInstalled">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
+      <LaunchConditions After="SetWIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
+      <Custom Action="CheckIfLegacyVersionInstalled" After="LaunchConditions" />
+      <Custom Action="UninstallLegacyVersion" After="CheckIfLegacyVersionInstalled">(NOT Installed) AND (LEGACYVERSIONINSTALLED = 1)</Custom>
+    </InstallExecuteSequence>
     
     
     <!-- Need to be admin to install -->
@@ -65,10 +75,11 @@
     
 
     <Feature Id="F.Complete" Title="!(loc.Feature_Complete)" Display="expand" AllowAdvertise="no" Level="1">
-      <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="APPLICATIONROOTDIRECTORY" Level="1">
+      <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="INSTALLDIR" Level="1">
         <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
         <ComponentRef Id="C.MainExe" Primary="yes" />
         <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
+        <ComponentRef Id="C.RegistryEntries" Primary="yes" />
       </Feature>
 
       <Feature Id="F.PuttyNG" Title="PuTTYNG" Absent="allow" AllowAdvertise="no" Level="1">

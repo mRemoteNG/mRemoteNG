@@ -5,30 +5,26 @@ using mRemoteNG.UI.Window;
 using mRemoteNG.App;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using Timer = System.Windows.Forms.Timer;
 
 namespace mRemoteNG.Messages
 {
     public class MessageCollector
     {
         private Timer _ECTimer;
-        private ErrorAndInfoWindow _MCForm;
 
-        public ErrorAndInfoWindow MCForm
-		{
-			get { return _MCForm; }
-			set { _MCForm = value; }
-		}
+        private ErrorAndInfoWindow MCForm { get; set; }
 
         public MessageCollector(ErrorAndInfoWindow MessageCollectorForm)
         {
-            _MCForm = MessageCollectorForm;
+            MCForm = MessageCollectorForm;
             CreateTimer();
         }
 
         #region Public Methods
         public void AddMessage(MessageClass MsgClass, string MsgText, bool OnlyLog = false)
         {
-            Message nMsg = new Message(MsgClass, MsgText, DateTime.Now);
+            var nMsg = new Message(MsgClass, MsgText, DateTime.Now);
 
             if (nMsg.MsgClass == MessageClass.ReportMsg)
             {
@@ -78,25 +74,25 @@ namespace mRemoteNG.Messages
             else
                 ShowMessageBox(nMsg);
 
-            ListViewItem lvItem = BuildListViewItem(nMsg);
+            var lvItem = BuildListViewItem(nMsg);
             AddToList(lvItem);
         }
 
-        private void AddInfoMessage(Message nMsg)
+        private static void AddInfoMessage(Message nMsg)
         {
             Debug.Print("Info: " + nMsg.MsgText);
             if (Settings.Default.WriteLogFile)
                 Logger.Instance.Info(nMsg.MsgText);
         }
 
-        private void AddWarningMessage(Message nMsg)
+        private static void AddWarningMessage(Message nMsg)
         {
             Debug.Print("Warning: " + nMsg.MsgText);
             if (Settings.Default.WriteLogFile)
                 Logger.Instance.Warn(nMsg.MsgText);
         }
 
-        private void AddErrorMessage(Message nMsg)
+        private static void AddErrorMessage(Message nMsg)
         {
             Debug.Print("Error: " + nMsg.MsgText);
             Logger.Instance.Error(nMsg.MsgText);
@@ -111,7 +107,7 @@ namespace mRemoteNG.Messages
 
         private static ListViewItem BuildListViewItem(Message nMsg)
         {
-            ListViewItem lvItem = new ListViewItem
+            var lvItem = new ListViewItem
             {
                 ImageIndex = Convert.ToInt32(nMsg.MsgClass),
                 Text = nMsg.MsgText.Replace(Environment.NewLine, "  "),
@@ -120,7 +116,7 @@ namespace mRemoteNG.Messages
             return lvItem;
         }
 
-        public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = false)
+        public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
         {
             AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex), logOnly);
         }
@@ -150,12 +146,12 @@ namespace mRemoteNG.Messages
 
         private void SwitchToMessage()
         {
-            _MCForm.PreviousActiveForm = (DockContent)frmMain.Default.pnlDock.ActiveContent;
+            MCForm.PreviousActiveForm = (DockContent)frmMain.Default.pnlDock.ActiveContent;
             ShowMCForm();
-            _MCForm.lvErrorCollector.Focus();
-            _MCForm.lvErrorCollector.SelectedItems.Clear();
-            _MCForm.lvErrorCollector.Items[0].Selected = true;
-            _MCForm.lvErrorCollector.FocusedItem = _MCForm.lvErrorCollector.Items[0];
+            MCForm.lvErrorCollector.Focus();
+            MCForm.lvErrorCollector.SelectedItems.Clear();
+            MCForm.lvErrorCollector.Items[0].Selected = true;
+            MCForm.lvErrorCollector.FocusedItem = MCForm.lvErrorCollector.Items[0];
         }
 
         private static void ShowMessageBox(Message Msg)
@@ -181,26 +177,26 @@ namespace mRemoteNG.Messages
 		{
 			if (frmMain.Default.pnlDock.InvokeRequired)
 			{
-				ShowMCFormCB d = new ShowMCFormCB(ShowMCForm);
+				var d = new ShowMCFormCB(ShowMCForm);
 				frmMain.Default.pnlDock.Invoke(d);
 			}
 			else
 			{
-                _MCForm.Show(frmMain.Default.pnlDock);
+                MCForm.Show(frmMain.Default.pnlDock);
 			}
 		}
 
-        delegate void AddToListCB(ListViewItem lvItem);
+        private delegate void AddToListCB(ListViewItem lvItem);
         private void AddToList(ListViewItem lvItem)
         {
-            if (_MCForm.lvErrorCollector.InvokeRequired)
+            if (MCForm.lvErrorCollector.InvokeRequired)
             {
-                AddToListCB d = new AddToListCB(AddToList);
-                _MCForm.lvErrorCollector.Invoke(d, new object[] { lvItem });
+                var d = new AddToListCB(AddToList);
+                MCForm.lvErrorCollector.Invoke(d, new object[] { lvItem });
             }
             else
             {
-                _MCForm.lvErrorCollector.Items.Insert(0, lvItem);
+                MCForm.lvErrorCollector.Items.Insert(0, lvItem);
             }
         }
         #endregion
