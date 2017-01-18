@@ -160,6 +160,7 @@
     <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializer.cs" />
     <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />
+    <Compile Include="Config\Serializers\XmlCredentialDeserializer.cs" />
     <Compile Include="Config\Serializers\XmlCredentialRecordSerializer.cs" />
     <Compile Include="Config\Serializers\XmlRootNodeSerializer.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
