@@ -8,6 +8,8 @@ namespace mRemoteNG.Credential
     {
         Guid Id { get; }
 
+        string Name { get; set; }
+
         string Username { get; set; }
 
         SecureString Password { get; set; }
