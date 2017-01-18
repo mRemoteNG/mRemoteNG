@@ -27,7 +27,8 @@ namespace mRemoteNG.UI.Window
     public partial class ConnectionWindow : BaseWindow
     {
         public TabControl TabController;
-        
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+
 
         #region Public Methods
         public ConnectionWindow(DockContent panel, string formText = "")
@@ -333,9 +334,9 @@ namespace mRemoteNG.UI.Window
                 var modelAsContainer = model as ContainerInfo;
                 var modelAsConnection = model as ConnectionInfo;
                 if (modelAsContainer != null)
-                    ConnectionInitiator.OpenConnection(modelAsContainer);
+                    _connectionInitiator.OpenConnection(modelAsContainer);
                 else if (modelAsConnection != null)
-                    ConnectionInitiator.OpenConnection(modelAsConnection);
+                    _connectionInitiator.OpenConnection(modelAsConnection);
             }
         }
 
@@ -649,7 +650,7 @@ namespace mRemoteNG.UI.Window
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
-                ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
                 _ignoreChangeSelectedTabClick = false;
             }
             catch (Exception ex)
@@ -665,7 +666,7 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
                 interfaceControl.Protocol.Close();
-                ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {

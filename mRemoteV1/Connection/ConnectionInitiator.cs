@@ -12,14 +12,52 @@ using TabPage = Crownwood.Magic.Controls.TabPage;
 
 namespace mRemoteNG.Connection
 {
-    public static class ConnectionInitiator
+    public class ConnectionInitiator : IConnectionInitiator
     {
-        public static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
+        public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
             OpenConnection(containerInfo, force, null);
         }
 
-        private static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
+        public void OpenConnection(ConnectionInfo connectionInfo)
+        {
+            try
+            {
+                OpenConnection(connectionInfo, ConnectionInfo.Force.None);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
+            }
+        }
+
+        public void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
+        {
+            try
+            {
+                OpenConnection(connectionInfo, force, null);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
+            }
+        }
+
+        public bool SwitchToOpenConnection(ConnectionInfo connectionInfo)
+        {
+            var interfaceControl = FindConnectionContainer(connectionInfo);
+            if (interfaceControl == null) return false;
+            var connectionWindow = (ConnectionWindow)interfaceControl.FindForm();
+            connectionWindow?.Focus();
+            var findForm = (ConnectionWindow)interfaceControl.FindForm();
+            findForm?.Show(frmMain.Default.pnlDock);
+            var tabPage = (TabPage)interfaceControl.Parent;
+            tabPage.Selected = true;
+            return true;
+        }
+
+        #region Private
+        private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
         {
             var children = containerInfo.Children;
             if (children.Count == 0) return;
@@ -33,31 +71,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        public static void OpenConnection(ConnectionInfo connectionInfo)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, ConnectionInfo.Force.None);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
-            }
-        }
-
-        public static void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, force, null);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
-            }
-        }
-
-        private static void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
         {
             try
             {
@@ -113,19 +127,6 @@ namespace mRemoteNG.Connection
             if (connectionInfo.PreExtApp == "") return;
             var extA = Runtime.GetExtAppByName(connectionInfo.PreExtApp);
             extA?.Start(connectionInfo);
-        }
-
-        public static bool SwitchToOpenConnection(ConnectionInfo nCi)
-        {
-            var IC = FindConnectionContainer(nCi);
-            if (IC == null) return false;
-            var connectionWindow = (ConnectionWindow)IC.FindForm();
-            connectionWindow?.Focus();
-            var findForm = (ConnectionWindow)IC.FindForm();
-            findForm?.Show(frmMain.Default.pnlDock);
-            var tabPage = (TabPage)IC.Parent;
-            tabPage.Selected = true;
-            return true;
         }
 
         private static InterfaceControl FindConnectionContainer(ConnectionInfo connectionInfo)
@@ -214,10 +215,9 @@ namespace mRemoteNG.Connection
         {
             newProtocol.InterfaceControl = new InterfaceControl(connectionContainer, newProtocol, connectionInfo);
         }
+        #endregion
 
-
-
-
+        #region Event handlers
         private static void Prot_Event_Disconnected(object sender, string disconnectedMessage)
         {
             try
@@ -288,5 +288,6 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionEventConnectionFailed, ex);
             }
         }
+        #endregion
     }
 }

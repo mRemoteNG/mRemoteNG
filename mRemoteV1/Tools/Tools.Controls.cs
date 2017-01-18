@@ -15,8 +15,10 @@ namespace mRemoteNG.Tools
 			private NotifyIcon _nI;
 			private ContextMenuStrip _cMen;
 			private ToolStripMenuItem _cMenCons;
+            private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
 
-		    public bool Disposed { get; set; }
+
+            public bool Disposed { get; set; }
 
 		    public NotificationAreaIcon()
 			{
@@ -124,7 +126,7 @@ namespace mRemoteNG.Tools
 			    {
 			        ShowForm();
 			    }
-			    ConnectionInitiator.OpenConnection((ConnectionInfo)((Control)sender).Tag);
+			    _connectionInitiator.OpenConnection((ConnectionInfo)((Control)sender).Tag);
 			}
 			
 			private void cMenExit_Click(Object sender, EventArgs e)

@@ -44,6 +44,8 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private SystemMenu _systemMenu;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+
 
 
 
@@ -495,13 +497,13 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenFileNewConnection_Click(object sender, EventArgs e)
 		{
-            ConnectionTreeWindow.AddConnection();
+            ConnectionTreeWindow.ConnectionTree.AddConnection();
             Runtime.SaveConnectionsAsync();
 		}
 
         private void mMenFileNewFolder_Click(object sender, EventArgs e)
 		{
-            ConnectionTreeWindow.AddFolder();
+            ConnectionTreeWindow.ConnectionTree.AddFolder();
             Runtime.SaveConnectionsAsync();
 		}
 
@@ -547,19 +549,19 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenFileDelete_Click(object sender, EventArgs e)
 		{
-            ConnectionTreeWindow.DeleteSelectedNode();
+            ConnectionTreeWindow.ConnectionTree.DeleteSelectedNode();
             Runtime.SaveConnectionsAsync();
 		}
 
         private void mMenFileRename_Click(object sender, EventArgs e)
 		{
-            ConnectionTreeWindow.RenameSelectedNode();
+            ConnectionTreeWindow.ConnectionTree.RenameSelectedNode();
             Runtime.SaveConnectionsAsync();
 		}
 
         private void mMenFileDuplicate_Click(object sender, EventArgs e)
 		{
-            ConnectionTreeWindow.DuplicateSelectedNode();
+            ConnectionTreeWindow.ConnectionTree.DuplicateSelectedNode();
             Runtime.SaveConnectionsAsync();
 		}
 
@@ -585,7 +587,7 @@ namespace mRemoteNG.UI.Forms
                 foreach (var i in ICList)
                 {
                     i.Protocol.Close();
-                    ConnectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
+                    _connectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
                 }
 
                 // throw it on the garbage collector
@@ -860,7 +862,7 @@ namespace mRemoteNG.UI.Forms
 					return;
 				}
 				cmbQuickConnect.Add(connectionInfo);
-                ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
 			}
 			catch (Exception ex)
 			{
@@ -936,14 +938,14 @@ namespace mRemoteNG.UI.Forms
             btnConnections.DropDownItems.AddRange(rootMenuItems);
 		}
 										
-		private static void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
+		private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
 		{
 		    if (e.Button != MouseButtons.Left) return;
 		    if (((ToolStripMenuItem) sender).Tag is ContainerInfo) return;
 		    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
 		    if (tag != null)
 		    {
-		        ConnectionInitiator.OpenConnection(tag);
+		        _connectionInitiator.OpenConnection(tag);
 		    }
 		}
         #endregion
