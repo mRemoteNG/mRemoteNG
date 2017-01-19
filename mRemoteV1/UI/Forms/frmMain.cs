@@ -17,6 +17,7 @@ using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
@@ -1242,5 +1243,13 @@ namespace mRemoteNG.UI.Forms
             }
         }
         #endregion
-	}					
+
+        private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cred1 = new CredentialRecord {Username = "davids", Domain = "mydomain"};
+            var cred2 = new CredentialRecord {Username = "admin", Domain = "db"};
+            var credentialManager = new CredentialManagerForm(new[] {cred1, cred2});
+            credentialManager.Show();
+        }
+    }					
 }

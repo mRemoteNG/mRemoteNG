@@ -271,6 +271,18 @@
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Forms\CredentialEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialEditorForm.Designer.cs">
+      <DependentUpon>CredentialEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerForm.Designer.cs">
+      <DependentUpon>CredentialManagerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\frmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -525,6 +537,12 @@
     <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialEditorForm.resx">
+      <DependentUpon>CredentialEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerForm.resx">
+      <DependentUpon>CredentialManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
@@ -915,8 +933,11 @@
     </Content>
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
     <None Include="Resources\Icons_FamFamFam\shield.ico" />
+    <None Include="Resources\Icons_FamFamFam\key.ico" />
     <Content Include="Resources\Images_FamFamFam\Config.png" />
     <Content Include="Resources\Images_FamFamFam\database.png" />
+    <None Include="Resources\Images_FamFamFam\key.png" />
+    <None Include="Resources\Images_FamFamFam\key_add.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
     <Content Include="Resources\Images\green_arrow1.png" />
