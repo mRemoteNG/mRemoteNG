@@ -21,7 +21,7 @@ namespace mRemoteNG.Config.Serializers
             var credentials = from element in xdoc.Descendants("Credential")
                 select new CredentialRecord(Guid.Parse(element.Attribute("Id")?.Value))
                 {
-                    Name = element.Attribute("Name")?.Value,
+                    Title = element.Attribute("Title")?.Value,
                     Username = element.Attribute("Username")?.Value,
                     Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString(),
                     Domain = element.Attribute("Domain")?.Value

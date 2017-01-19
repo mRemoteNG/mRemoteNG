@@ -8,7 +8,7 @@ namespace mRemoteNG.Credential
     {
         public Guid Id { get; } = Guid.NewGuid();
 
-        public string Name { get; set; } = "New Credential";
+        public string Title { get; set; } = "New Credential";
 
         public string Username { get; set; } = "";
 

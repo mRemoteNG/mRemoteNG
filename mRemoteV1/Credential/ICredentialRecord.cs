@@ -8,7 +8,7 @@ namespace mRemoteNG.Credential
     {
         Guid Id { get; }
 
-        string Name { get; set; }
+        string Title { get; set; }
 
         string Username { get; set; }
 

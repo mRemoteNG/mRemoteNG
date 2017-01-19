@@ -19,7 +19,7 @@ namespace mRemoteNGTests.Config.Serializers
         {
             _cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
             _serializer = new XmlCredentialRecordSerializer(_cryptoProvider);
-            _cred1 = new CredentialRecord { Name = "testcred", Username = "davids", Domain = "mydomain", Password = "mypass".ConvertToSecureString() };
+            _cred1 = new CredentialRecord { Title = "testcred", Username = "davids", Domain = "mydomain", Password = "mypass".ConvertToSecureString() };
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace mRemoteNGTests.Config.Serializers
         [Test]
         public void AllCredentialsSerialized()
         {
-            var cred2 = new CredentialRecord { Name = "testcred2", Username = "admin", Domain = "otherdomain", Password = "somepass".ConvertToSecureString() };
+            var cred2 = new CredentialRecord { Title = "testcred2", Username = "admin", Domain = "otherdomain", Password = "somepass".ConvertToSecureString() };
             var serialized = _serializer.Serialize(new[] { _cred1, cred2 }, "mypass".ConvertToSecureString());
             var serializedCount = XDocument.Parse(serialized).Descendants("Credential").Count();
             Assert.That(serializedCount, Is.EqualTo(2));

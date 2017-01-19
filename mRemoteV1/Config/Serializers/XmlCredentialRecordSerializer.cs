@@ -33,7 +33,7 @@ namespace mRemoteNG.Config.Serializers
                     from r in credentialRecords
                     select new XElement("Credential",
                         new XAttribute("Id", r.Id),
-                        new XAttribute("Name", r.Name),
+                        new XAttribute("Title", r.Title),
                         new XAttribute("Username", r.Username),
                         new XAttribute("Password", _cryptographyProvider.Encrypt(r.Password.ConvertToUnsecureString(), encryptionKey))
                     )
