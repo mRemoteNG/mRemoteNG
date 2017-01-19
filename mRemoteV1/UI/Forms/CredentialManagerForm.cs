@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -19,6 +18,7 @@ namespace mRemoteNG.UI.Forms
             ApplyThemes();
             objectListView1.AddObjects(credentialRecords.ToList());
             objectListView1.CellClick += HandleCellDoubleClick;
+            objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
         }
 
         #region Form stuff
@@ -58,6 +58,11 @@ namespace mRemoteNG.UI.Forms
             if (selectedCredential == null) return;
             objectListView1.RemoveObject(selectedCredential);
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Remove, selectedCredential);
+        }
+
+        private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
+        {
+            buttonRemove.Enabled = objectListView1.SelectedObjects.Count != 0;
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;

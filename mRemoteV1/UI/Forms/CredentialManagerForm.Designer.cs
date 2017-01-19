@@ -91,6 +91,7 @@
             // 
             // buttonRemove
             // 
+            this.buttonRemove.Enabled = false;
             this.buttonRemove.Image = global::mRemoteNG.Resources.key_delete;
             this.buttonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonRemove.Location = new System.Drawing.Point(102, 343);
