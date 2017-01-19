@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -46,6 +47,7 @@ namespace mRemoteNG.UI.Forms
         private SystemMenu _systemMenu;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private List<ICredentialRecord> _credentialRecords = new List<ICredentialRecord>();
 
 
 
@@ -1246,10 +1248,21 @@ namespace mRemoteNG.UI.Forms
 
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var cred1 = new CredentialRecord {Username = "davids", Domain = "mydomain"};
-            var cred2 = new CredentialRecord {Username = "admin", Domain = "db"};
-            var credentialManager = new CredentialManagerForm(new[] {cred1, cred2});
+            var credentialManager = new CredentialManagerForm(_credentialRecords);
+            credentialManager.CollectionChanged += CredentialManagerOnCollectionChanged;
             credentialManager.Show();
+        }
+
+        private void CredentialManagerOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
+            if (args.Action == NotifyCollectionChangedAction.Add)
+                _credentialRecords.AddRange(args.NewItems.OfType<ICredentialRecord>());
+            else if (args.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var record in args.OldItems.OfType<ICredentialRecord>())
+                    _credentialRecords.Remove(record);
+            }
         }
     }					
 }

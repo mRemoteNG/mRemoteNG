@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -8,7 +10,7 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class CredentialManagerForm : Form
+    public partial class CredentialManagerForm : Form, INotifyCollectionChanged
     {
         public CredentialManagerForm(IEnumerable<ICredentialRecord> credentialRecords)
         {
@@ -19,6 +21,7 @@ namespace mRemoteNG.UI.Forms
             objectListView1.CellClick += HandleCellDoubleClick;
         }
 
+        #region Form stuff
         private void ApplyLanguage()
         {
             Text = "Credential Manager";
@@ -31,6 +34,7 @@ namespace mRemoteNG.UI.Forms
         {
             
         }
+        #endregion
 
         private void HandleCellDoubleClick(object sender, CellClickEventArgs cellClickEventArgs)
         {
@@ -45,8 +49,22 @@ namespace mRemoteNG.UI.Forms
         {
             var newCredential = new CredentialRecord();
             objectListView1.AddObject(newCredential);
-            var credentialEditorForm = new CredentialEditorForm(newCredential);
-            credentialEditorForm.Show(this);
+            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, newCredential);
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            var selectedCredential = objectListView1.SelectedObject as ICredentialRecord;
+            if (selectedCredential == null) return;
+            objectListView1.RemoveObject(selectedCredential);
+            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Remove, selectedCredential);
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        private void RaiseCollectionChangedEvent(NotifyCollectionChangedAction action, ICredentialRecord changedItem)
+        {
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, new[] {changedItem}));
         }
     }
 }
