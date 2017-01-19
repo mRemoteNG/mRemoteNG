@@ -55,6 +55,7 @@
             this.objectListView1.Size = new System.Drawing.Size(425, 325);
             this.objectListView1.TabIndex = 0;
             this.objectListView1.UseCompatibleStateImageBehavior = false;
+            this.objectListView1.UseNotifyPropertyChanged = true;
             this.objectListView1.View = System.Windows.Forms.View.Details;
             // 
             // olvColumnTitle
@@ -86,6 +87,7 @@
             this.buttonAdd.TabIndex = 1;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonRemove
             // 

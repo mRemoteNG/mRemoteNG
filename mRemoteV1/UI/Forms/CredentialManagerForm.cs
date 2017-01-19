@@ -40,5 +40,13 @@ namespace mRemoteNG.UI.Forms
             var credentialEditorForm = new CredentialEditorForm(clickedCredential);
             credentialEditorForm.Show(this);
         }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            var newCredential = new CredentialRecord();
+            objectListView1.AddObject(newCredential);
+            var credentialEditorForm = new CredentialEditorForm(newCredential);
+            credentialEditorForm.Show(this);
+        }
     }
 }
