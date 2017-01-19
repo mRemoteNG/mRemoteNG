@@ -13,6 +13,8 @@ namespace mRemoteNG.Config.Serializers
     {
         private readonly ICryptographyProvider _cryptographyProvider;
 
+        public string SchemaVersion { get; } = "1.0";
+
         public XmlCredentialRecordSerializer(ICryptographyProvider cryptographyProvider)
         {
             if (cryptographyProvider == null)
@@ -24,6 +26,10 @@ namespace mRemoteNG.Config.Serializers
         {
             var xdoc = new XDocument(
                 new XElement("Credentials",
+                    new XAttribute("EncryptionEngine", _cryptographyProvider.CipherEngine),
+                    new XAttribute("BlockCipherMode", _cryptographyProvider.CipherMode),
+                    new XAttribute("KdfIterations", _cryptographyProvider.KeyDerivationIterations),
+                    new XAttribute("SchemaVersion", SchemaVersion),
                     from r in credentialRecords
                     select new XElement("Credential",
                         new XAttribute("Id", r.Id),
