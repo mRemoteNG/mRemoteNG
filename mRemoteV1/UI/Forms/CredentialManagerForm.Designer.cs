@@ -81,7 +81,7 @@
             // 
             this.buttonAdd.Image = global::mRemoteNG.Resources.key_add;
             this.buttonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdd.Location = new System.Drawing.Point(12, 343);
+            this.buttonAdd.Location = new System.Drawing.Point(263, 348);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(84, 32);
             this.buttonAdd.TabIndex = 1;
@@ -94,7 +94,7 @@
             this.buttonRemove.Enabled = false;
             this.buttonRemove.Image = global::mRemoteNG.Resources.key_delete;
             this.buttonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonRemove.Location = new System.Drawing.Point(102, 343);
+            this.buttonRemove.Location = new System.Drawing.Point(353, 348);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(84, 32);
             this.buttonRemove.TabIndex = 2;
