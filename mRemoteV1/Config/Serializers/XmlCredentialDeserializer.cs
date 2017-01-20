@@ -15,18 +15,27 @@ namespace mRemoteNG.Config.Serializers
 
         public IEnumerable<ICredentialRecord> Deserialize(string xml, SecureString decryptionKey)
         {
-            var xdoc = XDocument.Parse(xml);
-            ValidateSchemaVersion(xdoc);
-            var cryptographyProvider = BuildCryptoProvider(xdoc.Root);
-            var credentials = from element in xdoc.Descendants("Credential")
-                select new CredentialRecord(Guid.Parse(element.Attribute("Id")?.Value))
-                {
-                    Title = element.Attribute("Title")?.Value ?? "",
-                    Username = element.Attribute("Username")?.Value ?? "",
-                    Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString(),
-                    Domain = element.Attribute("Domain")?.Value ?? ""
-                };
-            return credentials;
+            try
+            {
+                var xdoc = XDocument.Parse(xml);
+                ValidateSchemaVersion(xdoc);
+                var cryptographyProvider = BuildCryptoProvider(xdoc.Root);
+                var credentials = from element in xdoc.Descendants("Credential")
+                    select new CredentialRecord(Guid.Parse(element.Attribute("Id")?.Value))
+                    {
+                        Title = element.Attribute("Title")?.Value ?? "",
+                        Username = element.Attribute("Username")?.Value ?? "",
+                        Password =
+                            cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey)
+                                .ConvertToSecureString(),
+                        Domain = element.Attribute("Domain")?.Value ?? ""
+                    };
+                return credentials;
+            }
+            catch
+            {
+                return new ICredentialRecord[0];
+            }
         }
 
         private void ValidateSchemaVersion(XDocument xdoc)
