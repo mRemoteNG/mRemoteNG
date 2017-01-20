@@ -133,6 +133,8 @@
     <Compile Include="Config\Connections\Multiuser\IConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
     <Compile Include="Config\Connections\Multiuser\RemoteConnectionsSyncronizer.cs" />
+    <Compile Include="Config\CredentialRecordLoader.cs" />
+    <Compile Include="Config\CredentialRecordSaver.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialProviderSerializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
