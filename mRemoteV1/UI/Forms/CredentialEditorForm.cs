@@ -31,10 +31,17 @@ namespace mRemoteNG.UI.Forms
 
         private void SaveFormToCredential()
         {
-            _credentialRecord.Title = textBoxTitle.Text;
-            _credentialRecord.Username = textBoxUsername.Text;
-            _credentialRecord.Domain = textBoxDomain.Text;
-            _credentialRecord.Password = textBoxPassword.Text.ConvertToSecureString();
+            if (_credentialRecord.Title != textBoxTitle.Text)
+                _credentialRecord.Title = textBoxTitle.Text;
+
+            if(_credentialRecord.Username != textBoxUsername.Text)
+                _credentialRecord.Username = textBoxUsername.Text;
+
+            if(_credentialRecord.Domain != textBoxDomain.Text)
+                _credentialRecord.Domain = textBoxDomain.Text;
+
+            if(_credentialRecord.Password.ConvertToUnsecureString() != textBoxPassword.Text)
+                _credentialRecord.Password = textBoxPassword.Text.ConvertToSecureString();
         }
 
         private void buttonAccept_Click(object sender, EventArgs e)

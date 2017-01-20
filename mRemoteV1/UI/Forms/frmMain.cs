@@ -8,18 +8,20 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
+using mRemoteNG.Security;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -47,7 +49,8 @@ namespace mRemoteNG.UI.Forms
         private SystemMenu _systemMenu;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private List<ICredentialRecord> _credentialRecords = new List<ICredentialRecord>();
+        private ObservablePropertyCollection<CredentialRecord> _credentialRecords = new ObservablePropertyCollection<CredentialRecord>();
+        private string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
 
 
 
@@ -150,6 +153,8 @@ namespace mRemoteNG.UI.Forms
 			{
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
 			}
+
+            LoadCredentials();
 
             Runtime.LoadConnections();
 
@@ -1246,23 +1251,34 @@ namespace mRemoteNG.UI.Forms
         }
         #endregion
 
+
+        private void LoadCredentials()
+        {
+            var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
+            _credentialRecords = new ObservablePropertyCollection<CredentialRecord>(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<CredentialRecord>());
+            _credentialRecords.CollectionChanged += (o, args) => SaveCredentialList();
+            _credentialRecords.PropertyChanged += (o, args) => SaveCredentialList();
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
+        }
+
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var credentialManager = new CredentialManagerForm(_credentialRecords);
-            credentialManager.CollectionChanged += CredentialManagerOnCollectionChanged;
             credentialManager.Show();
         }
 
-        private void CredentialManagerOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        private void SaveCredentialList()
         {
-            // ReSharper disable once ConvertIfStatementToSwitchStatement
-            if (args.Action == NotifyCollectionChangedAction.Add)
-                _credentialRecords.AddRange(args.NewItems.OfType<ICredentialRecord>());
-            else if (args.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (var record in args.OldItems.OfType<ICredentialRecord>())
-                    _credentialRecords.Remove(record);
-            }
+            var engineFromSettings = Settings.Default.EncryptionEngine;
+            var modeFromSettings = Settings.Default.EncryptionBlockCipherMode;
+            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engineFromSettings, modeFromSettings);
+            cryptoProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
+
+            var serializer = new XmlCredentialRecordSerializer(cryptoProvider);
+            var dataProvider = new FileDataProviderWithRollingBackup(_credentialFilePath);
+            var credentialSaver = new CredentialRecordSaver(dataProvider, serializer);
+            credentialSaver.Save(_credentialRecords, "tempEncryptionKey".ConvertToSecureString());
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Saved credentials to file: {_credentialFilePath}", true);
         }
-    }					
+    }
 }

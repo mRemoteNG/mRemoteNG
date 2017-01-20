@@ -1,27 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
+using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class CredentialManagerForm : Form, INotifyCollectionChanged
+    public partial class CredentialManagerForm : Form
     {
-        public CredentialManagerForm(IEnumerable<ICredentialRecord> credentialRecords)
+        private readonly ObservablePropertyCollection<CredentialRecord> _credentialRecords;
+
+        public CredentialManagerForm(ObservablePropertyCollection<CredentialRecord> credentialRecords)
         {
+            if (credentialRecords == null)
+                throw new ArgumentNullException(nameof(credentialRecords));
+
+            _credentialRecords = credentialRecords;
             InitializeComponent();
             ApplyLanguage();
             ApplyThemes();
-            objectListView1.AddObjects(credentialRecords.ToList());
+            objectListView1.SetObjects(_credentialRecords.ToList());
             objectListView1.CellClick += HandleCellDoubleClick;
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
+            _credentialRecords.CollectionChanged += CredentialRecordsOnCollectionChanged;
+        }
+
+        private void CredentialRecordsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            objectListView1.SetObjects(_credentialRecords);
         }
 
         #region Form stuff
+
         private void ApplyLanguage()
         {
             Text = "Credential Manager";
@@ -32,8 +45,8 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyThemes()
         {
-            
         }
+
         #endregion
 
         private void HandleCellDoubleClick(object sender, CellClickEventArgs cellClickEventArgs)
@@ -48,28 +61,19 @@ namespace mRemoteNG.UI.Forms
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var newCredential = new CredentialRecord();
-            objectListView1.AddObject(newCredential);
-            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, newCredential);
+            _credentialRecords.Add(newCredential);
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            var selectedCredential = objectListView1.SelectedObject as ICredentialRecord;
+            var selectedCredential = objectListView1.SelectedObject as CredentialRecord;
             if (selectedCredential == null) return;
-            objectListView1.RemoveObject(selectedCredential);
-            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Remove, selectedCredential);
+            _credentialRecords.Remove(selectedCredential);
         }
 
         private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
         {
             buttonRemove.Enabled = objectListView1.SelectedObjects.Count != 0;
-        }
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        private void RaiseCollectionChangedEvent(NotifyCollectionChangedAction action, ICredentialRecord changedItem)
-        {
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, new[] {changedItem}));
         }
     }
 }
