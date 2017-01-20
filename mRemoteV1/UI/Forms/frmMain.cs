@@ -49,7 +49,7 @@ namespace mRemoteNG.UI.Forms
         private SystemMenu _systemMenu;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private ObservablePropertyCollection<CredentialRecord> _credentialRecords = new ObservablePropertyCollection<CredentialRecord>();
+        private List<ICredentialRecord> _credentialRecords = new List<ICredentialRecord>();
         private string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
 
 
@@ -1255,15 +1255,14 @@ namespace mRemoteNG.UI.Forms
         private void LoadCredentials()
         {
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
-            _credentialRecords = new ObservablePropertyCollection<CredentialRecord>(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<CredentialRecord>());
-            _credentialRecords.CollectionChanged += (o, args) => SaveCredentialList();
-            _credentialRecords.PropertyChanged += (o, args) => SaveCredentialList();
+            _credentialRecords = new List<ICredentialRecord>(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()));
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
         }
 
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var credentialManager = new CredentialManagerForm(_credentialRecords);
+            credentialManager.CredentialsChanged += (o, args) => SaveCredentialList();
             credentialManager.Show();
         }
 

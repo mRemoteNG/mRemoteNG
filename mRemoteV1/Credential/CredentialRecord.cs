@@ -1,58 +1,16 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Security;
 
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialRecord : ICredentialRecord, INotifyPropertyChanged
+    public class CredentialRecord : ICredentialRecord
     {
-        private string _title = "New Credential";
-        private string _username = "";
-        private SecureString _password = new SecureString();
-        private string _domain = "";
-
         public Guid Id { get; } = Guid.NewGuid();
-
-        public string Title
-        {
-            get { return _title; }
-            set
-            {
-                _title = value;
-                RaisePropertyChangedEvent(nameof(Title));
-            }
-        }
-
-        public string Username
-        {
-            get { return _username; }
-            set
-            {
-                _username = value;
-                RaisePropertyChangedEvent(nameof(Username));
-            }
-        }
-
-        public SecureString Password
-        {
-            get { return _password; }
-            set
-            {
-                _password = value;
-                RaisePropertyChangedEvent(nameof(Password));
-            }
-        }
-
-        public string Domain
-        {
-            get { return _domain; }
-            set
-            {
-                _domain = value;
-                RaisePropertyChangedEvent(nameof(Domain));
-            }
-        }
+        public string Title { get; set; } = "New Credential";
+        public string Username { get; set; } = "";
+        public SecureString Password { get; set; } = new SecureString();
+        public string Domain { get; set; } = "";
 
 
         public CredentialRecord()
@@ -69,13 +27,6 @@ namespace mRemoteNG.Credential
         public CredentialRecord(Guid customGuid)
         {
             Id = customGuid;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void RaisePropertyChangedEvent(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

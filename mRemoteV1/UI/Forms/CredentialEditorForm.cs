@@ -31,17 +31,11 @@ namespace mRemoteNG.UI.Forms
 
         private void SaveFormToCredential()
         {
-            if (_credentialRecord.Title != textBoxTitle.Text)
-                _credentialRecord.Title = textBoxTitle.Text;
-
-            if(_credentialRecord.Username != textBoxUsername.Text)
-                _credentialRecord.Username = textBoxUsername.Text;
-
-            if(_credentialRecord.Domain != textBoxDomain.Text)
-                _credentialRecord.Domain = textBoxDomain.Text;
-
-            if(_credentialRecord.Password.ConvertToUnsecureString() != textBoxPassword.Text)
-                _credentialRecord.Password = textBoxPassword.Text.ConvertToSecureString();
+            _credentialRecord.Title = textBoxTitle.Text;
+            _credentialRecord.Username = textBoxUsername.Text;
+            _credentialRecord.Domain = textBoxDomain.Text;
+            _credentialRecord.Password = textBoxPassword.Text.ConvertToSecureString();
+            RaiseChangesAcceptedEvent(_credentialRecord);
         }
 
         private void buttonAccept_Click(object sender, EventArgs e)
@@ -53,6 +47,13 @@ namespace mRemoteNG.UI.Forms
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public event EventHandler ChangesAccepted;
+
+        private void RaiseChangesAcceptedEvent(object sender)
+        {
+            ChangesAccepted?.Invoke(sender, EventArgs.Empty);
         }
     }
 }

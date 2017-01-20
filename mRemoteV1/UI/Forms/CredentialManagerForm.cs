@@ -1,36 +1,32 @@
 ﻿using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
-using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.UI.Forms
 {
     public partial class CredentialManagerForm : Form
     {
-        private readonly ObservablePropertyCollection<CredentialRecord> _credentialRecords;
+        private readonly ObservableCollection<ICredentialRecord> _credentialRecords;
 
-        public CredentialManagerForm(ObservablePropertyCollection<CredentialRecord> credentialRecords)
+        public CredentialManagerForm(IList<ICredentialRecord> credentialRecords)
         {
             if (credentialRecords == null)
                 throw new ArgumentNullException(nameof(credentialRecords));
 
-            _credentialRecords = credentialRecords;
+            _credentialRecords = new ObservableCollection<ICredentialRecord>(credentialRecords);
             InitializeComponent();
             ApplyLanguage();
             ApplyThemes();
             objectListView1.SetObjects(_credentialRecords.ToList());
+            _credentialRecords.CollectionChanged += (sender, args) => objectListView1.SetObjects(_credentialRecords);
+            CredentialsChanged += (sender, args) => objectListView1.RefreshObjects(_credentialRecords);
             objectListView1.CellClick += HandleCellDoubleClick;
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
-            _credentialRecords.CollectionChanged += CredentialRecordsOnCollectionChanged;
-        }
-
-        private void CredentialRecordsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-        {
-            objectListView1.SetObjects(_credentialRecords);
         }
 
         #region Form stuff
@@ -55,6 +51,7 @@ namespace mRemoteNG.UI.Forms
             var clickedCredential = cellClickEventArgs.Model as ICredentialRecord;
             if (clickedCredential == null) return;
             var credentialEditorForm = new CredentialEditorForm(clickedCredential);
+            credentialEditorForm.ChangesAccepted += (o, args) => RaiseCredentialsChangedEvent(o);
             credentialEditorForm.Show(this);
         }
 
@@ -62,6 +59,7 @@ namespace mRemoteNG.UI.Forms
         {
             var newCredential = new CredentialRecord();
             _credentialRecords.Add(newCredential);
+            RaiseCredentialsChangedEvent(this);
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
@@ -69,11 +67,19 @@ namespace mRemoteNG.UI.Forms
             var selectedCredential = objectListView1.SelectedObject as CredentialRecord;
             if (selectedCredential == null) return;
             _credentialRecords.Remove(selectedCredential);
+            RaiseCredentialsChangedEvent(this);
         }
 
         private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
         {
             buttonRemove.Enabled = objectListView1.SelectedObjects.Count != 0;
+        }
+
+        public event EventHandler CredentialsChanged;
+
+        private void RaiseCredentialsChangedEvent(object sender)
+        {
+            CredentialsChanged?.Invoke(sender, EventArgs.Empty);
         }
     }
 }
