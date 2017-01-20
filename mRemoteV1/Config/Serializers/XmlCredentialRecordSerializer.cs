@@ -35,6 +35,7 @@ namespace mRemoteNG.Config.Serializers
                         new XAttribute("Id", r.Id),
                         new XAttribute("Title", r.Title),
                         new XAttribute("Username", r.Username),
+                        new XAttribute("Domain", r.Domain),
                         new XAttribute("Password", _cryptographyProvider.Encrypt(r.Password.ConvertToUnsecureString(), encryptionKey))
                     )
                 )
