@@ -21,7 +21,7 @@ namespace mRemoteNG.UI.Forms
             ApplyLanguage();
             ApplyThemes();
             objectListView1.SetObjects(_credentialRecords);
-            CredentialsChanged += (sender, args) => objectListView1.SetObjects(_credentialRecords);
+            CredentialsChanged += (sender, args) => objectListView1.SetObjects(_credentialRecords, true);
             objectListView1.CellClick += HandleCellDoubleClick;
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
         }
