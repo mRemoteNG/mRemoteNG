@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Forms
             objectListView1.CellClick += HandleCellDoubleClick;
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
             objectListView1.KeyDown += ObjectListView1OnEnterPressed;
-            objectListView1.KeyDown += ObjectListView1OnKeyDown;
+            objectListView1.KeyDown += OnAPressed;
         }
 
         
@@ -101,10 +101,11 @@ namespace mRemoteNG.UI.Forms
             keyEventArgs.Handled = true;
         }
 
-        private void ObjectListView1OnKeyDown(object sender, KeyEventArgs keyEventArgs)
+        private void OnAPressed(object sender, KeyEventArgs keyEventArgs)
         {
             if (keyEventArgs.KeyCode != Keys.A) return;
             AddCredential();
+            keyEventArgs.Handled = true;
         }
 
         private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
