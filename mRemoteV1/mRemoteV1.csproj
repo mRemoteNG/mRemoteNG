@@ -274,6 +274,7 @@
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\FormExtensions.cs" />
     <Compile Include="UI\Forms\CredentialEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>

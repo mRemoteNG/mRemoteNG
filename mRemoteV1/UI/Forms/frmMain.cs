@@ -1263,6 +1263,7 @@ namespace mRemoteNG.UI.Forms
         {
             var credentialManager = new CredentialManagerForm(_credentialRecords);
             credentialManager.CredentialsChanged += (o, args) => SaveCredentialList();
+            credentialManager.CenterOnTarget(this);
             credentialManager.Show();
         }
 

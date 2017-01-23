@@ -52,6 +52,7 @@ namespace mRemoteNG.UI.Forms
             if (clickedCredential == null) return;
             var credentialEditorForm = new CredentialEditorForm(clickedCredential);
             credentialEditorForm.ChangesAccepted += (o, args) => RaiseCredentialsChangedEvent(o);
+            credentialEditorForm.CenterOnTarget(this);
             credentialEditorForm.Show(this);
         }
 

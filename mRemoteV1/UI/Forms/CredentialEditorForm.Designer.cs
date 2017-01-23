@@ -163,6 +163,7 @@
             this.Controls.Add(this.textBoxTitle);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CredentialEditorForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Credential Editor";
             this.ResumeLayout(false);
             this.PerformLayout();
