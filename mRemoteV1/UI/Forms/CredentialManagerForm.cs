@@ -26,6 +26,7 @@ namespace mRemoteNG.UI.Forms
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
             objectListView1.KeyDown += ObjectListView1OnEnterPressed;
             objectListView1.KeyDown += OnAPressed;
+            objectListView1.KeyDown += OnDeletePressed;
         }
 
         
@@ -105,6 +106,13 @@ namespace mRemoteNG.UI.Forms
         {
             if (keyEventArgs.KeyCode != Keys.A) return;
             AddCredential();
+            keyEventArgs.Handled = true;
+        }
+
+        private void OnDeletePressed(object sender, KeyEventArgs keyEventArgs)
+        {
+            if (keyEventArgs.KeyCode != Keys.Delete) return;
+            RemoveSelectedCredential();
             keyEventArgs.Handled = true;
         }
 
