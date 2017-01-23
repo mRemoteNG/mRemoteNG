@@ -5,6 +5,8 @@ using System.IO;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+// ReSharper disable ArrangeRedundantParentheses
+// ReSharper disable RedundantCast
 
 namespace mRemoteNG.UI.Window
 {
@@ -22,6 +24,7 @@ namespace mRemoteNG.UI.Window
 		internal Label lblEdition;
         internal Label lblCredits;
         internal TextBox txtCredits;
+        private TextBox verText;
         internal Panel pnlTop;
 				
 		private void InitializeComponent()
@@ -38,6 +41,7 @@ namespace mRemoteNG.UI.Window
             this.lblChangeLog = new System.Windows.Forms.Label();
             this.lblLicense = new System.Windows.Forms.Label();
             this.lblCopyright = new System.Windows.Forms.Label();
+            this.verText = new System.Windows.Forms.TextBox();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlBottom.SuspendLayout();
@@ -86,6 +90,7 @@ namespace mRemoteNG.UI.Window
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBottom.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlBottom.Controls.Add(this.verText);
             this.pnlBottom.Controls.Add(this.lblCredits);
             this.pnlBottom.Controls.Add(this.txtCredits);
             this.pnlBottom.Controls.Add(this.txtChangeLog);
@@ -206,6 +211,18 @@ namespace mRemoteNG.UI.Window
             this.lblCopyright.Text = "Copyright";
             this.lblCopyright.UseCompatibleTextRendering = true;
             // 
+            // verText
+            // 
+            this.verText.BackColor = System.Drawing.SystemColors.Control;
+            this.verText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.verText.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.verText.Location = new System.Drawing.Point(69, 51);
+            this.verText.Name = "verText";
+            this.verText.Size = new System.Drawing.Size(147, 20);
+            this.verText.TabIndex = 12;
+            this.verText.TabStop = false;
+            this.verText.Text = "w.x.y.z";
+            // 
             // AboutWindow
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -282,34 +299,37 @@ namespace mRemoteNG.UI.Window
 #endregion
 				
 #region Form Stuff
-		private void About_Load(object sender, EventArgs e)
-		{
-			ApplyLanguage();
-			ApplyEditions();
-					
-			try
-			{
-				lblCopyright.Text = GeneralAppInfo.Copyright;
-						
-				lblVersion.Text = @"Version " + GeneralAppInfo.ApplicationVersion;
-						
-				if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
-				{
-				    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
-				       txtChangeLog.Text = sR.ReadToEnd();
-				}
 
-                if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
-                {
-                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT", Encoding.Default, true))
-                        txtCredits.Text = sR.ReadToEnd();
-                }
-            }
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
+	    private void About_Load(object sender, EventArgs e)
+	    {
+	        ApplyLanguage();
+	        ApplyEditions();
+
+	        try
+	        {
+	            lblCopyright.Text = GeneralAppInfo.Copyright;
+
+	            lblVersion.Text = @"Version ";
+	            verText.Text = GeneralAppInfo.ApplicationVersion;
+
+	            if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
+	            {
+	                using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
+	                    txtChangeLog.Text = sR.ReadToEnd();
+	            }
+
+	            if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
+	            {
+	                using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT", Encoding.Default, true))
+	                    txtCredits.Text = sR.ReadToEnd();
+	            }
+	        }
+	        catch (Exception ex)
+	        {
+	            Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+	                "Loading About failed" + Environment.NewLine + ex.Message, true);
+	        }
+	    }
 
 #if false
         private void llblFAMFAMFAM_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
