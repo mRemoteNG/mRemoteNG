@@ -24,7 +24,11 @@ namespace mRemoteNG.UI.Forms
             CredentialsChanged += (sender, args) => objectListView1.SetObjects(_credentialRecords, true);
             objectListView1.CellClick += HandleCellDoubleClick;
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
+            objectListView1.KeyDown += ObjectListView1OnEnterPressed;
+            objectListView1.KeyDown += ObjectListView1OnKeyDown;
         }
+
+        
 
         #region Form stuff
 
@@ -42,25 +46,23 @@ namespace mRemoteNG.UI.Forms
 
         #endregion
 
-        private void HandleCellDoubleClick(object sender, CellClickEventArgs cellClickEventArgs)
+        private void EditCredential(ICredentialRecord credentialRecord)
         {
-            if (cellClickEventArgs.ClickCount < 2) return;
-            var clickedCredential = cellClickEventArgs.Model as ICredentialRecord;
-            if (clickedCredential == null) return;
-            var credentialEditorForm = new CredentialEditorForm(clickedCredential);
+            if (credentialRecord == null) return;
+            var credentialEditorForm = new CredentialEditorForm(credentialRecord);
             credentialEditorForm.ChangesAccepted += (o, args) => RaiseCredentialsChangedEvent(o);
             credentialEditorForm.CenterOnTarget(this);
             credentialEditorForm.Show(this);
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void AddCredential()
         {
             var newCredential = new CredentialRecord();
             _credentialRecords.Add(newCredential);
             RaiseCredentialsChangedEvent(this);
         }
 
-        private void buttonRemove_Click(object sender, EventArgs e)
+        private void RemoveSelectedCredential()
         {
             var selectedCredential = objectListView1.SelectedObject as CredentialRecord;
             if (selectedCredential == null) return;
@@ -68,21 +70,53 @@ namespace mRemoteNG.UI.Forms
             RaiseCredentialsChangedEvent(this);
         }
 
-        private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
+        private void HandleCellDoubleClick(object sender, CellClickEventArgs cellClickEventArgs)
         {
-            buttonRemove.Enabled = objectListView1.SelectedObjects.Count != 0;
+            if (cellClickEventArgs.ClickCount < 2) return;
+            var clickedCredential = cellClickEventArgs.Model as ICredentialRecord;
+            EditCredential(clickedCredential);
         }
 
-        public event EventHandler CredentialsChanged;
-
-        private void RaiseCredentialsChangedEvent(object sender)
+        private void buttonAdd_Click(object sender, EventArgs e)
         {
-            CredentialsChanged?.Invoke(sender, EventArgs.Empty);
+            AddCredential();
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            RemoveSelectedCredential();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void ObjectListView1OnEnterPressed(object sender, KeyEventArgs keyEventArgs)
+        {
+            if (keyEventArgs.KeyCode != Keys.Enter) return;
+            var selectedCredential = objectListView1.SelectedObject as ICredentialRecord;
+            if (selectedCredential == null) return;
+            EditCredential(selectedCredential);
+            keyEventArgs.Handled = true;
+        }
+
+        private void ObjectListView1OnKeyDown(object sender, KeyEventArgs keyEventArgs)
+        {
+            if (keyEventArgs.KeyCode != Keys.A) return;
+            AddCredential();
+        }
+
+        private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
+        {
+            buttonRemove.Enabled = objectListView1.SelectedObjects.Count != 0;
+        }
+
+
+        public event EventHandler CredentialsChanged;
+        private void RaiseCredentialsChangedEvent(object sender)
+        {
+            CredentialsChanged?.Invoke(sender, EventArgs.Empty);
         }
     }
 }
