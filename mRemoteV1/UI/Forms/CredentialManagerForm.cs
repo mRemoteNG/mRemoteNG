@@ -100,6 +100,7 @@ namespace mRemoteNG.UI.Forms
             if (selectedCredential == null) return;
             EditCredential(selectedCredential);
             keyEventArgs.Handled = true;
+            keyEventArgs.SuppressKeyPress = true;
         }
 
         private void OnAPressed(object sender, KeyEventArgs keyEventArgs)
@@ -107,6 +108,7 @@ namespace mRemoteNG.UI.Forms
             if (keyEventArgs.KeyCode != Keys.A) return;
             AddCredential();
             keyEventArgs.Handled = true;
+            keyEventArgs.SuppressKeyPress = true;
         }
 
         private void OnDeletePressed(object sender, KeyEventArgs keyEventArgs)
@@ -114,6 +116,7 @@ namespace mRemoteNG.UI.Forms
             if (keyEventArgs.KeyCode != Keys.Delete) return;
             RemoveSelectedCredential();
             keyEventArgs.Handled = true;
+            keyEventArgs.SuppressKeyPress = true;
         }
 
         private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
