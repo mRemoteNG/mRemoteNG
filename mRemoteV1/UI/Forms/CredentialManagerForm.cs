@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
@@ -11,20 +9,19 @@ namespace mRemoteNG.UI.Forms
 {
     public partial class CredentialManagerForm : Form
     {
-        private readonly ObservableCollection<ICredentialRecord> _credentialRecords;
+        private readonly IList<ICredentialRecord> _credentialRecords;
 
         public CredentialManagerForm(IList<ICredentialRecord> credentialRecords)
         {
             if (credentialRecords == null)
                 throw new ArgumentNullException(nameof(credentialRecords));
 
-            _credentialRecords = new ObservableCollection<ICredentialRecord>(credentialRecords);
+            _credentialRecords = credentialRecords;
             InitializeComponent();
             ApplyLanguage();
             ApplyThemes();
-            objectListView1.SetObjects(_credentialRecords.ToList());
-            _credentialRecords.CollectionChanged += (sender, args) => objectListView1.SetObjects(_credentialRecords);
-            CredentialsChanged += (sender, args) => objectListView1.RefreshObjects(_credentialRecords);
+            objectListView1.SetObjects(_credentialRecords);
+            CredentialsChanged += (sender, args) => objectListView1.SetObjects(_credentialRecords);
             objectListView1.CellClick += HandleCellDoubleClick;
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
         }
