@@ -54,6 +54,7 @@
             this.objectListView1.HideSelection = false;
             this.objectListView1.Location = new System.Drawing.Point(12, 12);
             this.objectListView1.Name = "objectListView1";
+            this.objectListView1.ShowGroups = false;
             this.objectListView1.Size = new System.Drawing.Size(425, 325);
             this.objectListView1.TabIndex = 0;
             this.objectListView1.UseCompatibleStateImageBehavior = false;
