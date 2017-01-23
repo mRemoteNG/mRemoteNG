@@ -35,6 +35,7 @@
             this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +82,7 @@
             // 
             this.buttonAdd.Image = global::mRemoteNG.Resources.key_add;
             this.buttonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdd.Location = new System.Drawing.Point(263, 348);
+            this.buttonAdd.Location = new System.Drawing.Point(12, 343);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(84, 32);
             this.buttonAdd.TabIndex = 1;
@@ -94,7 +95,7 @@
             this.buttonRemove.Enabled = false;
             this.buttonRemove.Image = global::mRemoteNG.Resources.key_delete;
             this.buttonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonRemove.Location = new System.Drawing.Point(353, 348);
+            this.buttonRemove.Location = new System.Drawing.Point(102, 343);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(84, 32);
             this.buttonRemove.TabIndex = 2;
@@ -102,15 +103,29 @@
             this.buttonRemove.UseVisualStyleBackColor = true;
             this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
+            // buttonClose
+            // 
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Location = new System.Drawing.Point(361, 343);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 32);
+            this.buttonClose.TabIndex = 3;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
             // CredentialManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonClose;
             this.ClientSize = new System.Drawing.Size(448, 392);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.objectListView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "CredentialManagerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Credential Manager";
@@ -127,5 +142,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumnDomain;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.Button buttonClose;
     }
 }

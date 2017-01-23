@@ -79,5 +79,10 @@ namespace mRemoteNG.UI.Forms
         {
             CredentialsChanged?.Invoke(sender, EventArgs.Empty);
         }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
