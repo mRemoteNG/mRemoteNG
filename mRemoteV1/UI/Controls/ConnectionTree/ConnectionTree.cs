@@ -253,6 +253,7 @@ namespace mRemoteNG.UI.Controls
         {
             if (e.ClickCount > 1) return;
             var clickedNode = e.Model as ConnectionInfo;
+            if (clickedNode == null) return;
             SingleClickHandler.Execute(clickedNode);
         }
 
@@ -260,6 +261,7 @@ namespace mRemoteNG.UI.Controls
         {
             if (e.ClickCount < 2) return;
             var clickedNode = e.Model as ConnectionInfo;
+            if (clickedNode == null) return;
             DoubleClickHandler.Execute(clickedNode);
         }
 
