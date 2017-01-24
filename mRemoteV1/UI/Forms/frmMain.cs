@@ -509,7 +509,7 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenFileNew_Click(object sender, EventArgs e)
 		{
-			var saveFileDialog = Tools.Controls.ConnectionsSaveAsDialog();
+			var saveFileDialog = ConnectionsSaveAsDialog();
 			if (saveFileDialog.ShowDialog() != DialogResult.OK)
 			{
 				return;
@@ -626,6 +626,18 @@ namespace mRemoteNG.UI.Forms
 		{
             Shutdown.Quit();
 		}
+
+        public static SaveFileDialog ConnectionsSaveAsDialog()
+        {
+            return new SaveFileDialog
+            {
+                CheckPathExists = true,
+                InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
+                FileName = ConnectionsFileInfo.DefaultConnectionsFile,
+                OverwritePrompt = true,
+                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
+            };
+        }
         #endregion
 
         #region View
@@ -963,7 +975,7 @@ namespace mRemoteNG.UI.Forms
 			    if (!Settings.Default.MinimizeToTray) return;
 			    if (Runtime.NotificationAreaIcon == null)
 			    {
-			        Runtime.NotificationAreaIcon = new Tools.Controls.NotificationAreaIcon();
+			        Runtime.NotificationAreaIcon = new NotificationAreaIcon();
 			    }
 			    Hide();
 			}

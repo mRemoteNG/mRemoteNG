@@ -210,6 +210,7 @@
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
     <Compile Include="Tree\AlwaysConfirmYes.cs" />
@@ -411,8 +412,6 @@
     </Compile>
     <Compile Include="Tools\ReconnectGroup.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Tools\Tools.Controls.cs">
     </Compile>
     <Compile Include="Tools\ExternalTool.cs" />
     <Compile Include="Tools\Tools.LocalizedAttributes.cs" />

@@ -8,17 +8,15 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Tools
 {
-	public class Controls
-	{
 		public class NotificationAreaIcon
 		{
-			private NotifyIcon _nI;
-			private ContextMenuStrip _cMen;
-			private ToolStripMenuItem _cMenCons;
+			private readonly NotifyIcon _nI;
+			private readonly ContextMenuStrip _cMen;
+			private readonly ToolStripMenuItem _cMenCons;
             private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
 
 
-            public bool Disposed { get; set; }
+            public bool Disposed { get; private set; }
 
 		    public NotificationAreaIcon()
 			{
@@ -46,8 +44,8 @@ namespace mRemoteNG.Tools
 
 				    _nI = new NotifyIcon
 				    {
-				        Text = "mRemote",
-				        BalloonTipText = "mRemote",
+				        Text = @"mRemoteNG",
+				        BalloonTipText = @"mRemoteNG",
 				        Icon = Resources.mRemote_Icon,
 				        ContextMenuStrip = _cMen,
 				        Visible = true
@@ -86,11 +84,12 @@ namespace mRemoteNG.Tools
                     MouseUpEventHandler = ConMenItem_MouseUp
                 };
 
+			    // ReSharper disable once CoVariantArrayConversion
                 ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionTreeModel).ToArray();
                 _cMenCons.DropDownItems.AddRange(rootMenuItems);
             }
 			
-			private void nI_MouseDoubleClick(object sender, MouseEventArgs e)
+			private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
 			{
 				if (frmMain.Default.Visible)
 				{
@@ -102,7 +101,7 @@ namespace mRemoteNG.Tools
 				}
 			}
 			
-			private void ShowForm()
+			private static void ShowForm()
 			{
 				frmMain.Default.Show();
 				frmMain.Default.WindowState = frmMain.Default.PreviousWindowState;
@@ -112,13 +111,13 @@ namespace mRemoteNG.Tools
 			    Runtime.NotificationAreaIcon = null;
 			}
 			
-			private void HideForm()
+			private static void HideForm()
 			{
 				frmMain.Default.Hide();
 				frmMain.Default.PreviousWindowState = frmMain.Default.WindowState;
 			}
 			
-			private void ConMenItem_MouseUp(Object sender, MouseEventArgs e)
+			private void ConMenItem_MouseUp(object sender, MouseEventArgs e)
 			{
 			    if (e.Button != MouseButtons.Left) return;
 			    if (!(((Control) sender).Tag is ConnectionInfo)) return;
@@ -129,35 +128,9 @@ namespace mRemoteNG.Tools
 			    _connectionInitiator.OpenConnection((ConnectionInfo)((Control)sender).Tag);
 			}
 			
-			private void cMenExit_Click(Object sender, EventArgs e)
+			private static void cMenExit_Click(object sender, EventArgs e)
 			{
 				Shutdown.Quit();
 			}
 		}
-		
-		public static SaveFileDialog ConnectionsSaveAsDialog()
-		{
-			var saveFileDialog = new SaveFileDialog();
-			saveFileDialog.CheckPathExists = true;
-			saveFileDialog.InitialDirectory = App.Info.ConnectionsFileInfo.DefaultConnectionsPath;
-			saveFileDialog.FileName = App.Info.ConnectionsFileInfo.DefaultConnectionsFile;
-			saveFileDialog.OverwritePrompt = true;
-				
-			saveFileDialog.Filter = Language.strFiltermRemoteXML + "|*.xml|" + Language.strFilterAll + "|*.*";
-				
-			return saveFileDialog;
-		}
-		
-		public static OpenFileDialog ConnectionsLoadDialog()
-		{
-		    var lDlg = new OpenFileDialog
-		    {
-		        CheckFileExists = true,
-		        InitialDirectory = App.Info.ConnectionsFileInfo.DefaultConnectionsPath,
-		        Filter = Language.strFiltermRemoteXML + "|*.xml|" + Language.strFilterAll + "|*.*"
-		    };
-
-		    return lDlg;
-		}
-	}
 }
