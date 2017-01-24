@@ -133,6 +133,7 @@
     <Compile Include="Credential\CredentialRecordTests.cs" />
     <Compile Include="Credential\CredentialListBaseTests.cs" />
     <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
+    <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
@@ -166,6 +167,13 @@
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
+    <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBoxTestForm.designer.cs">
+      <DependentUpon>SecureTextBoxTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBoxTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +198,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\SecureTextBoxTestForm.resx">
+      <DependentUpon>SecureTextBoxTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>

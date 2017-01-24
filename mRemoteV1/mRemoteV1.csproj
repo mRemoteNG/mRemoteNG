@@ -269,6 +269,12 @@
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\SecureTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBox.Designer.cs">
+      <DependentUpon>SecureTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\StatusImageList.cs" />
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
