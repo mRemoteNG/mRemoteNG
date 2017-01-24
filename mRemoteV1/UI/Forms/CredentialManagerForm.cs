@@ -35,10 +35,13 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyLanguage()
         {
-            Text = "Credential Manager";
-            olvColumnTitle.Text = "Title";
+            Text = Language.strCredentialManager;
+            olvColumnTitle.Text = Language.strTitle;
             olvColumnUsername.Text = Language.strPropertyNameUsername;
             olvColumnDomain.Text = Language.strPropertyNameDomain;
+            buttonAdd.Text = Language.strAdd;
+            buttonRemove.Text = Language.strRemove;
+            buttonClose.Text = Language.strButtonClose;
         }
 
         private void ApplyThemes()

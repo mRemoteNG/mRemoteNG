@@ -97,6 +97,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string strAdd {
+            get {
+                return ResourceManager.GetString("strAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Connection.
         /// </summary>
         internal static string strAddConnection {
@@ -1382,6 +1391,15 @@ namespace mRemoteNG {
         internal static string strCouldNotFindToolStripInFilteredPropertyGrid {
             get {
                 return ResourceManager.GetString("strCouldNotFindToolStripInFilteredPropertyGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credential Manager.
+        /// </summary>
+        internal static string strCredentialManager {
+            get {
+                return ResourceManager.GetString("strCredentialManager", resourceCulture);
             }
         }
         
@@ -5642,6 +5660,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string strRemove {
+            get {
+                return ResourceManager.GetString("strRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove All.
         /// </summary>
         internal static string strRemoveAll {
@@ -6448,6 +6475,15 @@ namespace mRemoteNG {
         internal static string strThemeNameWindowBackgroundColor {
             get {
                 return ResourceManager.GetString("strThemeNameWindowBackgroundColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        internal static string strTitle {
+            get {
+                return ResourceManager.GetString("strTitle", resourceCulture);
             }
         }
         

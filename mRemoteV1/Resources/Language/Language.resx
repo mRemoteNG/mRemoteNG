@@ -2427,4 +2427,16 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Minutes to Idle</value>
   </data>
+  <data name="strAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="strCredentialManager" xml:space="preserve">
+    <value>Credential Manager</value>
+  </data>
+  <data name="strRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="strTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
 </root>
