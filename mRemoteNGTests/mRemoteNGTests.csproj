@@ -137,7 +137,6 @@
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
-    <Compile Include="Tools\ObservablePropertyCollectionTests.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
