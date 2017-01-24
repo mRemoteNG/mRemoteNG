@@ -70,6 +70,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        internal static string strAccept {
+            get {
+                return ResourceManager.GetString("strAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         internal static string strActive {
@@ -1395,6 +1404,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credential Editor.
+        /// </summary>
+        internal static string strCredentialEditor {
+            get {
+                return ResourceManager.GetString("strCredentialEditor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credential Manager.
         /// </summary>
         internal static string strCredentialManager {
@@ -2187,6 +2205,15 @@ namespace mRemoteNG {
         internal static string strIcaSetResolutionFailed {
             get {
                 return ResourceManager.GetString("strIcaSetResolutionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        internal static string strID {
+            get {
+                return ResourceManager.GetString("strID", resourceCulture);
             }
         }
         

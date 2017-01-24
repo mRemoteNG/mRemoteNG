@@ -16,8 +16,21 @@ namespace mRemoteNG.UI.Forms
                 throw new ArgumentNullException(nameof(credentialRecord));
 
             InitializeComponent();
+            ApplyLanguage();
             _credentialRecord = credentialRecord;
             FillInForm();
+        }
+
+        private void ApplyLanguage()
+        {
+            Text = Language.strCredentialEditor;
+            labelId.Text = Language.strID;
+            labelTitle.Text = Language.strTitle;
+            labelUsername.Text = Language.strPropertyNameUsername;
+            labelDomain.Text = Language.strPropertyNameDomain;
+            labelPassword.Text = Language.strPropertyNamePassword;
+            buttonAccept.Text = Language.strAccept;
+            buttonCancel.Text = Language.strButtonCancel;
         }
 
         private void FillInForm()
