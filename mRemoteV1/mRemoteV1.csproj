@@ -276,6 +276,7 @@
       <DependentUpon>SecureTextBox.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\StatusImageList.cs" />
+    <Compile Include="UI\Controls\TextBoxExtensions.cs" />
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
