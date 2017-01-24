@@ -220,6 +220,7 @@
     <Compile Include="Security\ICryptographyProvider.cs" />
     <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Security\CryptographyProviderFactory.cs" />
+    <Compile Include="Security\XmlCryptoProviderBuilder.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
