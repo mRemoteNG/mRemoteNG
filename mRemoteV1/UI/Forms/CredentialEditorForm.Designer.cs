@@ -36,11 +36,11 @@
             this.labelDomain = new System.Windows.Forms.Label();
             this.textBoxDomain = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.buttonAccept = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelId = new System.Windows.Forms.Label();
             this.textBoxId = new System.Windows.Forms.TextBox();
+            this.textBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             this.SuspendLayout();
             // 
             // textBoxTitle
@@ -100,13 +100,6 @@
             this.labelPassword.TabIndex = 7;
             this.labelPassword.Text = "Password";
             // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Location = new System.Drawing.Point(99, 116);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(232, 20);
-            this.textBoxPassword.TabIndex = 6;
-            // 
             // buttonAccept
             // 
             this.buttonAccept.Location = new System.Drawing.Point(175, 158);
@@ -144,6 +137,14 @@
             this.textBoxId.ReadOnly = true;
             this.textBoxId.Size = new System.Drawing.Size(232, 20);
             this.textBoxId.TabIndex = 10;
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Location = new System.Drawing.Point(99, 116);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '•';
+            this.textBoxPassword.Size = new System.Drawing.Size(232, 20);
+            this.textBoxPassword.TabIndex = 6;
             // 
             // CredentialEditorForm
             // 
@@ -184,7 +185,7 @@
         private System.Windows.Forms.Label labelDomain;
         private System.Windows.Forms.TextBox textBoxDomain;
         private System.Windows.Forms.Label labelPassword;
-        private System.Windows.Forms.TextBox textBoxPassword;
+        private mRemoteNG.UI.Controls.SecureTextBox textBoxPassword;
         private System.Windows.Forms.Button buttonAccept;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelId;
