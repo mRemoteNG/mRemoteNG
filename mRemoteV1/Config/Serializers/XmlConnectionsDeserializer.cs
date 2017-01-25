@@ -485,6 +485,7 @@ namespace mRemoteNG.Config.Serializers
 
                 if (_confVersion >= 2.6)
                 {
+                    connectionInfo.ConstantID = xmlnode.Attributes["Id"]?.Value ?? connectionInfo.ConstantID;
                     connectionInfo.SoundQuality = (ProtocolRDP.RDPSoundQuality)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPSoundQuality), Convert.ToString(xmlnode.Attributes["SoundQuality"].Value));
                     connectionInfo.Inheritance.SoundQuality = bool.Parse(xmlnode.Attributes["InheritSoundQuality"].Value);
                     connectionInfo.RDPMinutesToIdleTimeout = Convert.ToInt32(xmlnode.Attributes["RDPMinutesToIdleTimeout"]?.Value ?? "0");
