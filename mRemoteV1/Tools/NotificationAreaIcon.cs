@@ -35,10 +35,9 @@ namespace mRemoteNG.Tools
 
 				    _cMen = new ContextMenuStrip
 				    {
-				        Font =
-				            new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-				                System.Drawing.GraphicsUnit.Point, Convert.ToByte(0)),
-				        RenderMode = ToolStripRenderMode.Professional
+				        Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+				                                        System.Drawing.GraphicsUnit.Point, Convert.ToByte(0)),
+				                                        RenderMode = ToolStripRenderMode.Professional
 				    };
 				    _cMen.Items.AddRange(new ToolStripItem[] {_cMenCons, cMenSep1, cMenExit});
 
@@ -56,7 +55,7 @@ namespace mRemoteNG.Tools
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" + Environment.NewLine + ex.Message, true);
+					Runtime.MessageCollector.AddExceptionStackTrace("Creating new SysTrayIcon failed", ex);
 				}
 			}
 			
@@ -71,7 +70,7 @@ namespace mRemoteNG.Tools
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" + Environment.NewLine + ex.Message, true);
+					Runtime.MessageCollector.AddExceptionStackTrace("Disposing SysTrayIcon failed", ex);
 				}
 			}
 			
@@ -92,13 +91,9 @@ namespace mRemoteNG.Tools
 			private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
 			{
 				if (frmMain.Default.Visible)
-				{
 					HideForm();
-				}
 				else
-				{
 					ShowForm();
-				}
 			}
 			
 			private static void ShowForm()
@@ -120,12 +115,10 @@ namespace mRemoteNG.Tools
 			private void ConMenItem_MouseUp(object sender, MouseEventArgs e)
 			{
 			    if (e.Button != MouseButtons.Left) return;
-			    if (!(((Control) sender).Tag is ConnectionInfo)) return;
+			    if (!(((ToolStripMenuItem)sender).Tag is ConnectionInfo)) return;
 			    if (frmMain.Default.Visible == false)
-			    {
 			        ShowForm();
-			    }
-			    _connectionInitiator.OpenConnection((ConnectionInfo)((Control)sender).Tag);
+			    _connectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
 			}
 			
 			private static void cMenExit_Click(object sender, EventArgs e)
