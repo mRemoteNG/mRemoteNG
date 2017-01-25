@@ -138,7 +138,7 @@ namespace mRemoteNG.Config.Settings
         private void SetKioskMode()
         {
             if (!mRemoteNG.Settings.Default.MainFormKiosk) return;
-            MainForm.Fullscreen.Value = true;
+            MainForm._fullscreen.Value = true;
             MainForm.mMenViewFullscreen.Checked = true;
         }
 
