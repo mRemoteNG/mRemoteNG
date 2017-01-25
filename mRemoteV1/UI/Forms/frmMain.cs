@@ -1233,7 +1233,9 @@ namespace mRemoteNG.UI.Forms
             Windows.TreePanel.Show(Default.pnlDock, DockState.DockLeft);
             Windows.ConfigPanel.Show(Default.pnlDock);
             Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
+            Windows.ErrorsPanel.Show(Default.pnlDock, DockState.Document);
 
+            Windows.ErrorsForm.Hide();
             Windows.ScreenshotForm.Hide();
 
             Default.pnlDock.Visible = true;
