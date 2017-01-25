@@ -168,7 +168,7 @@ namespace mRemoteNG.Config.Putty
         #region Private Methods
 		private static string GetPuttyConfPath()
 		{
-		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath) : App.Info.GeneralAppInfo.PuttyPath;
+		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
 		    return Path.Combine(puttyPath, "putty.conf");
 		}
 			
