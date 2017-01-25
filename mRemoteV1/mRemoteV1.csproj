@@ -199,6 +199,7 @@
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
+    <Compile Include="Credential\CredentialDomainUserComparer.cs" />
     <Compile Include="Credential\CredentialProviderCatalog.cs" />
     <Compile Include="Credential\CredentialRecord.cs" />
     <Compile Include="Credential\CredentialListBase.cs" />

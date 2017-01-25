@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
@@ -26,7 +27,7 @@ namespace mRemoteNG.Config
                                     Password = cryptoProvider.Decrypt(e.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString()
                                 };
 
-            return credentialList;
+            return credentialList.Distinct(new CredentialDomainUserComparer());
         }
 
         private static bool EntryHasSomeCredentialData(XElement e)

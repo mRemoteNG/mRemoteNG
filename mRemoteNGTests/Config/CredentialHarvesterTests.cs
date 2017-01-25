@@ -74,6 +74,18 @@ namespace mRemoteNGTests.Config
             Assert.That(credentials.Count(), Is.EqualTo(2));
         }
 
+        [Test]
+        public void OnlyReturnsUniqueCredentials()
+        {
+            var container = new ContainerInfo();
+            var con1 = new ConnectionInfo { Username = "something" };
+            var con2 = new ConnectionInfo { Username = "something" };
+            container.AddChildRange(new[] { con1, con2 });
+            var xdoc = CreateTestData(container);
+            var credentials = _credentialHarvester.Harvest(xdoc, _key);
+            Assert.That(credentials.Count(), Is.EqualTo(1));
+        }
+
         private XDocument CreateTestData(ConnectionInfo connectionInfo)
         {
             var rootNode = new RootNodeInfo(RootNodeType.Connection) {PasswordString = _key.ConvertToUnsecureString()};
