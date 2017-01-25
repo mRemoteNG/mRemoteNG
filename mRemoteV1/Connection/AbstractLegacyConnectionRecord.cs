@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -10,7 +11,8 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection
 {
-    public abstract class AbstractConnectionInfoData : INotifyPropertyChanged
+    [Obsolete("Valid for mRemoteNG v1.75 (confCons v2.6) or earlier")]
+    public abstract class AbstractLegacyConnectionRecord : INotifyPropertyChanged
     {
         #region Fields
         private string _name;

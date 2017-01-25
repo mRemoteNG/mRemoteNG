@@ -11,7 +11,7 @@ namespace mRemoteNGTests.Connection
 {
     public class AbstractConnectionInfoDataTests
     {
-        private class TestAbstractConnectionInfoData : AbstractConnectionInfoData {}
+        private class TestAbstractConnectionInfoData : AbstractLegacyConnectionRecord {}
         private TestAbstractConnectionInfoData _testAbstractConnectionInfoData;
 
         [SetUp]

@@ -186,7 +186,7 @@
     <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
     <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
     <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnector.cs" />
-    <Compile Include="Connection\AbstractConnectionInfoData.cs" />
+    <Compile Include="Connection\AbstractLegacyConnectionRecord.cs" />
     <Compile Include="Connection\ConnectionInfoComparer.cs" />
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
     <Compile Include="App\ProgramRoot.cs" />

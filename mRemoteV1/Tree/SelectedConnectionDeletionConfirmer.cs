@@ -29,19 +29,19 @@ namespace mRemoteNG.Tree
             return UserConfirmsConnectionDeletion(deletionTarget);
         }
 
-        private bool UserConfirmsEmptyFolderDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsEmptyFolderDeletion(AbstractLegacyConnectionRecord deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, deletionTarget.Name);
             return PromptUser(messagePrompt);
         }
 
-        private bool UserConfirmsNonEmptyFolderDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsNonEmptyFolderDeletion(AbstractLegacyConnectionRecord deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, deletionTarget.Name);
             return PromptUser(messagePrompt);
         }
 
-        private bool UserConfirmsConnectionDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsConnectionDeletion(AbstractLegacyConnectionRecord deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, deletionTarget.Name);
             return PromptUser(messagePrompt);

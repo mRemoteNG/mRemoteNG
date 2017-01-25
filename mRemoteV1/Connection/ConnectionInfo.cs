@@ -21,7 +21,7 @@ using mRemoteNG.Tree;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : AbstractConnectionInfoData, IHasParent, IInheritable
+    public class ConnectionInfo : AbstractLegacyConnectionRecord, IHasParent, IInheritable
     {        
         #region Public Properties
         [Browsable(false)]

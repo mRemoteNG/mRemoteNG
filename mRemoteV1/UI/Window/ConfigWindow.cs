@@ -42,8 +42,8 @@ namespace mRemoteNG.UI.Window
         private ToolStripSeparator _toolStripSeparator1;
         private FilteredPropertyGrid _pGrid;
 
-        private AbstractConnectionInfoData _selectedTreeNode;
-        public AbstractConnectionInfoData SelectedTreeNode
+        private AbstractLegacyConnectionRecord _selectedTreeNode;
+        public AbstractLegacyConnectionRecord SelectedTreeNode
         {
             get { return _selectedTreeNode; }
             set
