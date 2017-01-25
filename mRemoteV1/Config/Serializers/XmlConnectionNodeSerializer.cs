@@ -44,6 +44,7 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("Descr", connectionInfo.Description));
             element.Add(new XAttribute("Icon", connectionInfo.Icon));
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
+            element.Add(new XAttribute("Id", connectionInfo.ConstantID));
 
             element.Add(_saveFilter.SaveUsername
                 ? new XAttribute("Username", connectionInfo.Username)
