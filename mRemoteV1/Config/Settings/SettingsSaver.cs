@@ -36,9 +36,9 @@ namespace mRemoteNG.Config.Settings
 
                 mRemoteNG.Settings.Default.MainFormState = with1.WindowState;
 
-                if (with1.Fullscreen != null)
+                if (with1._fullscreen != null)
                 {
-                    mRemoteNG.Settings.Default.MainFormKiosk = with1.Fullscreen.Value;
+                    mRemoteNG.Settings.Default.MainFormKiosk = with1._fullscreen.Value;
                 }
 
                 mRemoteNG.Settings.Default.FirstStart = false;
