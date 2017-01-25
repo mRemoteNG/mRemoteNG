@@ -85,7 +85,8 @@ namespace mRemoteNG.Connection
 
 	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
 	    {
-	        var properties = typeof(AbstractConnectionInfoData).GetProperties();
+	        var properties = GetType().BaseType?.GetProperties();
+	        if (properties == null) return;
 	        foreach (var property in properties)
 	        {
 	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
