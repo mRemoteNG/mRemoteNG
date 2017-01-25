@@ -176,7 +176,7 @@ namespace mRemoteNG.Config.Serializers
             var remoteDesktopNode = xmlNode.SelectSingleNode("./remoteDesktop");
             if (remoteDesktopNode?.Attributes?["inherit"].Value == "None")
             {
-                var resolutionString = Convert.ToString(remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", ""));
+                var resolutionString = remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", "");
                 try
                 {
                     connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Enum.Parse(typeof(ProtocolRDP.RDPResolutions), "Res" + resolutionString);
