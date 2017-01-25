@@ -9,6 +9,7 @@ using mRemoteNG.Themes;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 
 
@@ -144,7 +145,7 @@ namespace mRemoteNG.Config.Settings
         private static void SetShowSystemTrayIcon()
         {
             if (mRemoteNG.Settings.Default.ShowSystemTrayIcon)
-                Runtime.NotificationAreaIcon = new Tools.Controls.NotificationAreaIcon();
+                Runtime.NotificationAreaIcon = new NotificationAreaIcon();
         }
 
         private static void SetPuttyPath()

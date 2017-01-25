@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -79,7 +80,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 if (Runtime.NotificationAreaIcon == null)
                 {
-                    Runtime.NotificationAreaIcon = new Tools.Controls.NotificationAreaIcon();
+                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
                 }
             }
             else

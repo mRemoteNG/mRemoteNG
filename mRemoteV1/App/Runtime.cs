@@ -33,7 +33,7 @@ namespace mRemoteNG.App
         #region Public Properties
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; set; }
-        public static Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
+        public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
@@ -274,7 +274,7 @@ namespace mRemoteNG.App
                 {
                     if (withDialog)
                     {
-                        var loadDialog = Controls.ConnectionsLoadDialog();
+                        var loadDialog = ConnectionsLoadDialog();
                         if (loadDialog.ShowDialog() != DialogResult.OK) return;
                         connectionsLoader.ConnectionFileName = loadDialog.FileName;
                     }
@@ -351,6 +351,16 @@ namespace mRemoteNG.App
                     Application.Exit();
                 }
             }
+        }
+
+        private static OpenFileDialog ConnectionsLoadDialog()
+        {
+            return new OpenFileDialog
+            {
+                CheckFileExists = true,
+                InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
+                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
+            };
         }
 
         private static void CreateBackupFile(string fileName)
