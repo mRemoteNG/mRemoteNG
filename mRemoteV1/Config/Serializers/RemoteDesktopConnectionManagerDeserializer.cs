@@ -47,7 +47,7 @@ namespace mRemoteNG.Config.Serializers
             var schemaVersion = Convert.ToInt32(rdcManNode?.Attributes?["schemaVersion"].Value);
             if (schemaVersion != 1)
             {
-                throw (new FileFormatException($"Unsupported schema version ({schemaVersion})."));
+                throw new FileFormatException($"Unsupported schema version ({schemaVersion}).");
             }
         }
 
