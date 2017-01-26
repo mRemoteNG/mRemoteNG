@@ -849,6 +849,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("UserField");
                     strHide.Add("Description");
                     strHide.Add("SoundQuality");
+                    strHide.Add("CredentialRecord");
                 }
                 else if (_pGrid.SelectedObject is ConnectionInfo)
 				{
@@ -1441,6 +1442,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RDGatewayHostname");
                         if(conI.Inheritance.SoundQuality)
                             strHide.Add("SoundQuality");
+                        if(conI.Inheritance.CredentialRecord)
+                            strHide.Add("CredentialRecord");
                     }
 					else
 					{
