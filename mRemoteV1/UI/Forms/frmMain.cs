@@ -59,7 +59,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
-            Fullscreen = new MiscTools.Fullscreen(this);
+            _fullscreen = new Fullscreen(this);
             pnlDock.Theme = new VS2012LightTheme();
 		}
 
@@ -128,10 +128,68 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 
-        public MiscTools.Fullscreen Fullscreen { get; set; }
+        internal Fullscreen _fullscreen { get; set; }
+
+        internal class Fullscreen
+        {
+            public Fullscreen(Form handledForm)
+            {
+                _handledForm = handledForm;
+            }
+
+            private readonly Form _handledForm;
+            private FormWindowState _savedWindowState;
+            private FormBorderStyle _savedBorderStyle;
+            private Rectangle _savedBounds;
+
+            private bool _value;
+            public bool Value
+            {
+                get
+                {
+                    return _value;
+                }
+                set
+                {
+                    if (_value == value)
+                    {
+                        return;
+                    }
+                    if (!_value)
+                    {
+                        EnterFullscreen();
+                    }
+                    else
+                    {
+                        ExitFullscreen();
+                    }
+                    _value = value;
+                }
+            }
+
+            private void EnterFullscreen()
+            {
+                _savedBorderStyle = _handledForm.FormBorderStyle;
+                _savedWindowState = _handledForm.WindowState;
+                _savedBounds = _handledForm.Bounds;
+
+                _handledForm.FormBorderStyle = FormBorderStyle.None;
+                if (_handledForm.WindowState == FormWindowState.Maximized)
+                {
+                    _handledForm.WindowState = FormWindowState.Normal;
+                }
+                _handledForm.WindowState = FormWindowState.Maximized;
+            }
+            private void ExitFullscreen()
+            {
+                _handledForm.FormBorderStyle = _savedBorderStyle;
+                _handledForm.WindowState = _savedWindowState;
+                _handledForm.Bounds = _savedBounds;
+            }
+        }
 
         #endregion
-		
+
         #region Startup & Shutdown
         private void frmMain_Load(object sender, EventArgs e)
 		{
@@ -398,7 +456,7 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 								
-		private void tsExtAppEntry_Click(object sender, EventArgs e)
+		private static void tsExtAppEntry_Click(object sender, EventArgs e)
 		{
             var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
@@ -517,7 +575,7 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenFileNew_Click(object sender, EventArgs e)
 		{
-			var saveFileDialog = Tools.Controls.ConnectionsSaveAsDialog();
+			var saveFileDialog = ConnectionsSaveAsDialog();
 			if (saveFileDialog.ShowDialog() != DialogResult.OK)
 			{
 				return;
@@ -634,6 +692,18 @@ namespace mRemoteNG.UI.Forms
 		{
             Shutdown.Quit();
 		}
+
+        public static SaveFileDialog ConnectionsSaveAsDialog()
+        {
+            return new SaveFileDialog
+            {
+                CheckPathExists = true,
+                InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
+                FileName = ConnectionsFileInfo.DefaultConnectionsFile,
+                OverwritePrompt = true,
+                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
+            };
+        }
         #endregion
 
         #region View
@@ -783,8 +853,8 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenViewFullscreen_Click(object sender, EventArgs e)
 		{
-			Fullscreen.Value = !Fullscreen.Value;
-			mMenViewFullscreen.Checked = Fullscreen.Value;
+			_fullscreen.Value = !_fullscreen.Value;
+			mMenViewFullscreen.Checked = _fullscreen.Value;
 		}
         #endregion
 
@@ -971,7 +1041,7 @@ namespace mRemoteNG.UI.Forms
 			    if (!Settings.Default.MinimizeToTray) return;
 			    if (Runtime.NotificationAreaIcon == null)
 			    {
-			        Runtime.NotificationAreaIcon = new Tools.Controls.NotificationAreaIcon();
+			        Runtime.NotificationAreaIcon = new NotificationAreaIcon();
 			    }
 			    Hide();
 			}
@@ -1229,7 +1299,9 @@ namespace mRemoteNG.UI.Forms
             Windows.TreePanel.Show(Default.pnlDock, DockState.DockLeft);
             Windows.ConfigPanel.Show(Default.pnlDock);
             Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
+            Windows.ErrorsPanel.Show(Default.pnlDock, DockState.Document);
 
+            Windows.ErrorsForm.Hide();
             Windows.ScreenshotForm.Hide();
 
             Default.pnlDock.Visible = true;

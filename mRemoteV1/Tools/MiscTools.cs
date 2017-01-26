@@ -14,7 +14,7 @@ using static System.String;
 
 namespace mRemoteNG.Tools
 {
-    public class MiscTools
+    public static class MiscTools
 	{
 		public static Icon GetIconFromFile(string FileName)
 		{
@@ -112,7 +112,7 @@ namespace mRemoteNG.Tools
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Taking Screenshot failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("Taking Screenshot failed", ex);
 			}
 				
 			return null;
@@ -120,7 +120,7 @@ namespace mRemoteNG.Tools
 		
 		public class EnumTypeConverter : EnumConverter
 		{
-			private Type _enumType;
+			private readonly Type _enumType;
 				
 			public EnumTypeConverter(Type type) : base(type)
 			{
@@ -135,8 +135,8 @@ namespace mRemoteNG.Tools
 			public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destType)
 			{
 			    if (value == null) return null;
-			    var fi = _enumType.GetField(Enum.GetName(_enumType, value: value));
-			    var dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
+			    var fi = _enumType.GetField(Enum.GetName(_enumType, value));
+			    var dna = (DescriptionAttribute) Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 					
 			    return dna != null ? dna.Description : value.ToString();
 			}
@@ -150,9 +150,9 @@ namespace mRemoteNG.Tools
 			{
 			    foreach (var fi in _enumType.GetFields())
 				{
-					var dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
+					var dna = (DescriptionAttribute) Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 						
-					if ((dna != null) && ((string) value == dna.Description))
+					if (dna != null && (string) value == dna.Description)
 					{
 						return Enum.Parse(_enumType, fi.Name);
 					}
@@ -167,12 +167,7 @@ namespace mRemoteNG.Tools
 				
 			public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
 			{
-				if (sourceType == typeof(string))
-				{
-					return true;
-				}
-					
-				return base.CanConvertFrom(context, sourceType);
+			    return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 			}
 				
 			public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
@@ -193,7 +188,7 @@ namespace mRemoteNG.Tools
 			        return false;
 			    }
 						
-			    throw (new Exception("Values must be \"Yes\" or \"No\""));
+			    throw new Exception("Values must be \"Yes\" or \"No\"");
 			}
 				
 			public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
@@ -218,64 +213,6 @@ namespace mRemoteNG.Tools
 				var svc = new StandardValuesCollection(bools);
 					
 				return svc;
-			}
-		}
-		
-		public class Fullscreen
-		{
-			public Fullscreen(Form handledForm)
-			{
-				_handledForm = handledForm;
-			}
-				
-			private readonly Form _handledForm;
-			private FormWindowState _savedWindowState;
-			private FormBorderStyle _savedBorderStyle;
-			private Rectangle _savedBounds;
-				
-			private bool _value;
-            public bool Value
-			{
-				get
-				{
-					return _value;
-				}
-				set
-				{
-					if (_value == value)
-					{
-						return;
-					}
-					if (!_value)
-					{
-						EnterFullscreen();
-					}
-					else
-					{
-						ExitFullscreen();
-					}
-					_value = value;
-				}
-			}
-				
-			private void EnterFullscreen()
-			{
-				_savedBorderStyle = _handledForm.FormBorderStyle;
-				_savedWindowState = _handledForm.WindowState;
-				_savedBounds = _handledForm.Bounds;
-					
-				_handledForm.FormBorderStyle = FormBorderStyle.None;
-				if (_handledForm.WindowState == FormWindowState.Maximized)
-				{
-					_handledForm.WindowState = FormWindowState.Normal;
-				}
-				_handledForm.WindowState = FormWindowState.Maximized;
-			}
-			private void ExitFullscreen()
-			{
-				_handledForm.FormBorderStyle = _savedBorderStyle;
-				_handledForm.WindowState = _savedWindowState;
-				_handledForm.Bounds = _savedBounds;
 			}
 		}
 	}

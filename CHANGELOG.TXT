@@ -8,18 +8,22 @@ Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versi
 Features/Enhancements:
 ----------------------
 Added Release Channels to the update check functionality allowing users to select one of 3 release channels for updates: Stable, Beta, Dev
+#360: Help -> About, Version # is now selectable/copyable 
 
 
 Fixes:
 ------
+#362: Invalid cast exception when using the Notification Area Icon minimize/restore
 #334: Quick Connect displays warning when clicking on a folder
 #325: When using a connection with an external app, results in opening the same external app continuously
 #311: Import from Active Directory does not use machine's domain by default
+#258: Rename Tab dialog - populate original name in dialog (1.72 functionality)
 #211, #267: Recursive AD Import wasn't fully functional 
 
 
 General Changes:
 ----------------
+The usual general code clean up and refactoring
 #325: Code clean up and additional logging for External Tools based connections
 #298: Code clean up and additional logging around application startup
 #291, #236: External Tools code clean up and additional logging
@@ -31,6 +35,7 @@ General Changes:
 Known Issue:
 ------------
 Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versions.
+
 
 Fixes:
 ------
