@@ -26,15 +26,14 @@ namespace mRemoteNG.Connection
                 {
                     var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
                     var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
-
-                    var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
-                    var converter = descriptor.Converter;
-                    if (converter != null && converter.CanConvertFrom(valueFromSource.GetType()))
-                        property.SetValue(Instance, converter.ConvertFrom(valueFromSource), null);
-                    else
-                        property.SetValue(Instance, valueFromSource, null);
+                    var typeConverter = TypeDescriptor.GetConverter(property.PropertyType);
+                    if (typeConverter.CanConvertFrom(valueFromSource.GetType()))
+                        property.SetValue(Instance, typeConverter.ConvertFrom(valueFromSource), null);
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector?.AddExceptionStackTrace($"Error loading default connectioninfo property {property.Name}", ex);
+                }
             }
         }
 
@@ -48,7 +47,9 @@ namespace mRemoteNG.Connection
                 {
                     var propertyFromDestination = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
                     var localValue = property.GetValue(Instance, null);
-                    var convertedValue = Convert.ChangeType(localValue, propertyFromDestination.PropertyType);
+                    var typeConverter = TypeDescriptor.GetConverter(property.PropertyType);
+                    if (!typeConverter.CanConvertTo(propertyFromDestination.PropertyType)) continue;
+                    var convertedValue = typeConverter.ConvertTo(localValue, propertyFromDestination.PropertyType);
                     propertyFromDestination.SetValue(destinationInstance, convertedValue, null);
                 }
                 catch (Exception ex)

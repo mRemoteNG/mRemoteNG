@@ -110,15 +110,6 @@
     <Setting Name="ConDefaultDescription" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ConDefaultUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="ConDefaultPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="ConDefaultDomain" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="ConDefaultProtocol" Type="System.String" Scope="User">
       <Value Profile="(Default)">RDP</Value>
     </Setting>
@@ -592,6 +583,9 @@
     </Setting>
     <Setting Name="InhDefaultCredentialRecord" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultCredentialRecord" Type="System.Guid" Scope="User">
+      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -213,7 +213,7 @@ namespace mRemoteNG.UI.Forms
 			}
 
             LoadCredentials();
-
+            LoadDefaultConnectionCredentials();
             Runtime.LoadConnections();
 
             Windows.TreePanel.Focus();
@@ -1354,6 +1354,13 @@ namespace mRemoteNG.UI.Forms
             var credentialSaver = new CredentialRecordSaver(dataProvider, serializer);
             credentialSaver.Save(_credentialManager.GetCredentialRecords(), "tempEncryptionKey".ConvertToSecureString());
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Saved credentials to file: {_credentialFilePath}", true);
+        }
+
+        private void LoadDefaultConnectionCredentials()
+        {
+            var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
+            var matchedCredentials = Runtime.CredentialManager.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
+            DefaultConnectionInfo.Instance.CredentialRecord = matchedCredentials.Any() ? matchedCredentials.First() : null;
         }
     }
 }

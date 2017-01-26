@@ -4,7 +4,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App.Info;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using static mRemoteNG.App.Runtime;
@@ -60,11 +59,6 @@ namespace mRemoteNG.Config.Settings
                     mRemoteNG.Settings.Default.QuickyTBParentDock = with1.tsQuickConnect.Parent.Dock.ToString();
                 }
                 mRemoteNG.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
-
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                mRemoteNG.Settings.Default.ConDefaultPassword =
-                    cryptographyProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), EncryptionKey);
-
                 mRemoteNG.Settings.Default.Save();
 
                 SavePanelsToXML();

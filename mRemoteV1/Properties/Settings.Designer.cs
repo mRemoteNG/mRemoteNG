@@ -457,42 +457,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultUsername {
-            get {
-                return ((string)(this["ConDefaultUsername"]));
-            }
-            set {
-                this["ConDefaultUsername"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultPassword {
-            get {
-                return ((string)(this["ConDefaultPassword"]));
-            }
-            set {
-                this["ConDefaultPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultDomain {
-            get {
-                return ((string)(this["ConDefaultDomain"]));
-            }
-            set {
-                this["ConDefaultDomain"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("RDP")]
         public string ConDefaultProtocol {
             get {
@@ -2384,6 +2348,18 @@ namespace mRemoteNG {
             }
             set {
                 this["InhDefaultCredentialRecord"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public global::System.Guid ConDefaultCredentialRecord {
+            get {
+                return ((global::System.Guid)(this["ConDefaultCredentialRecord"]));
+            }
+            set {
+                this["ConDefaultCredentialRecord"] = value;
             }
         }
     }

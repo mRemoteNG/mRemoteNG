@@ -46,7 +46,6 @@ namespace mRemoteNG.Config.Settings
                 SetPuttyPath();
                 SetShowSystemTrayIcon();
                 SetAutoSave();
-                SetConDefaultPassword();
 				LoadPanelsFromXml();
 				LoadExternalAppsFromXml();
                 SetAlwaysShowPanelTabs();
@@ -61,12 +60,6 @@ namespace mRemoteNG.Config.Settings
                 Logger.Instance.Error("Loading settings failed" + Environment.NewLine + ex.Message);
 			}
 		}
-
-        private static void SetConDefaultPassword()
-        {
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            mRemoteNG.Settings.Default.ConDefaultPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, Runtime.EncryptionKey);
-        }
 
         private static void SetAlwaysShowPanelTabs()
         {
