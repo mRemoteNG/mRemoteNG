@@ -23,15 +23,15 @@ namespace mRemoteNGTests.Tree
         [Test]
         public void ClickingYesReturnsTrue()
         {
-            _deletionConfirmer = new SelectedConnectionDeletionConfirmer(_connectionTree, MockClickYes);
-            Assert.That(_deletionConfirmer.Confirm(), Is.True);
+            _deletionConfirmer = new SelectedConnectionDeletionConfirmer(MockClickYes);
+            Assert.That(_deletionConfirmer.Confirm(_connectionTree.SelectedNode), Is.True);
         }
 
         [Test]
         public void ClickingNoReturnsFalse()
         {
-            _deletionConfirmer = new SelectedConnectionDeletionConfirmer(_connectionTree, MockClickNo);
-            Assert.That(_deletionConfirmer.Confirm(), Is.False);
+            _deletionConfirmer = new SelectedConnectionDeletionConfirmer(MockClickNo);
+            Assert.That(_deletionConfirmer.Confirm(_connectionTree.SelectedNode), Is.False);
         }
 
         private DialogResult MockClickYes(string promptMessage, string title, MessageBoxButtons buttons, MessageBoxIcon icon)

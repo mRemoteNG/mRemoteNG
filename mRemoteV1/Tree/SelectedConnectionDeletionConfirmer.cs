@@ -2,25 +2,21 @@
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.UI.Controls;
 
 
 namespace mRemoteNG.Tree
 {
-    public class SelectedConnectionDeletionConfirmer : IConfirm
+    public class SelectedConnectionDeletionConfirmer : IConfirm<ConnectionInfo>
     {
-        private readonly IConnectionTree _connectionTree;
         private readonly Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> _confirmationFunc;
 
-        public SelectedConnectionDeletionConfirmer(IConnectionTree connectionTree, Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> confirmationFunc)
+        public SelectedConnectionDeletionConfirmer(Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> confirmationFunc)
         {
-            _connectionTree = connectionTree;
             _confirmationFunc = confirmationFunc;
         }
 
-        public bool Confirm()
+        public bool Confirm(ConnectionInfo deletionTarget)
         {
-            var deletionTarget = _connectionTree.SelectedNode;
             var deletionTargetAsContainer = deletionTarget as ContainerInfo;
             if (deletionTargetAsContainer != null)
                 return deletionTargetAsContainer.HasChildren()
