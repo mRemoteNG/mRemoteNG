@@ -266,7 +266,6 @@
     <Compile Include="UI\Controls\CredentialRecordListBox.Designer.cs">
       <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\CredentialRecordTypeEditorAdapter.cs" />
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
