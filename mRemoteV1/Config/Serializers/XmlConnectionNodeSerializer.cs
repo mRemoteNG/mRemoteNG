@@ -47,15 +47,15 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("Id", connectionInfo.ConstantID));
 
             element.Add(_saveFilter.SaveUsername
-                ? new XAttribute("Username", connectionInfo.Username)
+                ? new XAttribute("Username", connectionInfo.Username ?? "")
                 : new XAttribute("Username", ""));
 
             element.Add(_saveFilter.SaveDomain
-                ? new XAttribute("Domain", connectionInfo.Domain)
+                ? new XAttribute("Domain", connectionInfo.Domain ?? "")
                 : new XAttribute("Domain", ""));
 
             if (_saveFilter.SavePassword && !connectionInfo.Inheritance.Password)
-                element.Add(new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey)));
+                element.Add(new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) ?? ""));
             else
                 element.Add(new XAttribute("Password", ""));
 
