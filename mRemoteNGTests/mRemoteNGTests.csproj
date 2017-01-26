@@ -129,6 +129,7 @@
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
+    <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />
     <Compile Include="Credential\CredentialDomainUserComparerTests.cs" />
     <Compile Include="Credential\CredentialProviderCatalogTests.cs" />
     <Compile Include="Credential\CredentialRecordCatalogTests.cs" />
