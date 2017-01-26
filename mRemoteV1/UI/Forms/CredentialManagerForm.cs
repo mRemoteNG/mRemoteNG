@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
+using mRemoteNG.Tree;
 
 
 namespace mRemoteNG.UI.Forms
@@ -11,6 +12,7 @@ namespace mRemoteNG.UI.Forms
         private readonly CredentialManager _credentialManager;
 
         public ICredentialRecord SelectedRecord => objectListView1.SelectedObject as ICredentialRecord;
+        public IConfirm<ICredentialRecord> DeletionConfirmer { get; set; } = new AlwaysConfirmYes();
 
         public CredentialManagerForm(CredentialManager credentialManager)
         {
@@ -74,6 +76,7 @@ namespace mRemoteNG.UI.Forms
         {
             var selectedCredential = objectListView1.SelectedObject as CredentialRecord;
             if (selectedCredential == null) return;
+            if (!DeletionConfirmer.Confirm(selectedCredential)) return;
             _credentialManager.Remove(selectedCredential);
             RaiseCredentialsChangedEvent(this);
         }

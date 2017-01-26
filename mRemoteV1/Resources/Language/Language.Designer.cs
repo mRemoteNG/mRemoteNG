@@ -1095,6 +1095,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the credential record, {0}?.
+        /// </summary>
+        internal static string strConfirmDeleteCredentialRecord {
+            get {
+                return ResourceManager.GetString("strConfirmDeleteCredentialRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the external tool, &quot;{0}&quot;?.
         /// </summary>
         internal static string strConfirmDeleteExternalTool {

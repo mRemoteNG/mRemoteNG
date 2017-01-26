@@ -2451,4 +2451,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyDescriptionCredential" xml:space="preserve">
     <value>Select which credential to use for this connection.</value>
   </data>
+  <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>Are you sure you want to delete the credential record, {0}?</value>
+  </data>
 </root>

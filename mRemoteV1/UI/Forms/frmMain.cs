@@ -1334,7 +1334,10 @@ namespace mRemoteNG.UI.Forms
 
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var credentialManagerForm = new CredentialManagerForm(_credentialManager);
+            var credentialManagerForm = new CredentialManagerForm(_credentialManager)
+            {
+                DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
+            };
             credentialManagerForm.CenterOnTarget(this);
             credentialManagerForm.Show();
         }

@@ -200,6 +200,7 @@
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
+    <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
     <Compile Include="Credential\CredentialManager.cs" />
     <Compile Include="Credential\CredentialProviderCatalog.cs" />
