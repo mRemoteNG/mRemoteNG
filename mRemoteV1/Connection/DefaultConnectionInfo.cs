@@ -21,15 +21,19 @@ namespace mRemoteNG.Connection
             var connectionProperties = GetProperties(_excludedProperties);
             foreach (var property in connectionProperties)
             {
-                var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
-                var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
-                
-                var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
-                var converter = descriptor.Converter;
-                if (converter != null && converter.CanConvertFrom(valueFromSource.GetType()))
-                    property.SetValue(Instance, converter.ConvertFrom(valueFromSource), null);
-                else
-                    property.SetValue(Instance, valueFromSource, null);
+                try
+                {
+                    var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
+                    var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
+
+                    var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
+                    var converter = descriptor.Converter;
+                    if (converter != null && converter.CanConvertFrom(valueFromSource.GetType()))
+                        property.SetValue(Instance, converter.ConvertFrom(valueFromSource), null);
+                    else
+                        property.SetValue(Instance, valueFromSource, null);
+                }
+                catch { }
             }
         }
 

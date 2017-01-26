@@ -3938,6 +3938,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select which credential to use for this connection..
+        /// </summary>
+        internal static string strPropertyDescriptionCredential {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Put your notes or a description for the host here..
         /// </summary>
         internal static string strPropertyDescriptionDescription {

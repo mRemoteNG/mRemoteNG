@@ -590,5 +590,8 @@
     <Setting Name="InhDefaultRDPMinutesToIdleTimeout" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="InhDefaultCredentialRecord" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

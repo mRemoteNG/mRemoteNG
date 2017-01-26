@@ -17,6 +17,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
@@ -45,6 +46,7 @@ namespace mRemoteNG.App
             get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
             set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         }
+        public static CredentialManager CredentialManager { get; } = new CredentialManager();
         #endregion
 
         #region Panels

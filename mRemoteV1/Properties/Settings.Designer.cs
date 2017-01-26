@@ -2374,5 +2374,17 @@ namespace mRemoteNG {
                 this["InhDefaultRDPMinutesToIdleTimeout"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultCredentialRecord {
+            get {
+                return ((bool)(this["InhDefaultCredentialRecord"]));
+            }
+            set {
+                this["InhDefaultCredentialRecord"] = value;
+            }
+        }
     }
 }

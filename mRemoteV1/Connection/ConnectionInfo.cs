@@ -21,7 +21,7 @@ using mRemoteNG.Tree;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : AbstractLegacyConnectionRecord, IHasParent, IInheritable
+    public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
     {        
         #region Public Properties
         [Browsable(false)]
@@ -235,9 +235,6 @@ namespace mRemoteNG.Connection
         private void SetConnectionDefaults()
         {
             Hostname = string.Empty;
-            Username = Settings.Default.ConDefaultUsername;
-            Password = Settings.Default.ConDefaultPassword;
-            Domain = Settings.Default.ConDefaultDomain;
         }
 
         private void SetProtocolDefaults()

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
@@ -9,19 +8,21 @@ namespace mRemoteNG.UI.Forms
 {
     public partial class CredentialManagerForm : Form
     {
-        private readonly IList<ICredentialRecord> _credentialRecords;
+        private readonly CredentialManager _credentialManager;
 
-        public CredentialManagerForm(IList<ICredentialRecord> credentialRecords)
+        public ICredentialRecord SelectedRecord => objectListView1.SelectedObject as ICredentialRecord;
+
+        public CredentialManagerForm(CredentialManager credentialManager)
         {
-            if (credentialRecords == null)
-                throw new ArgumentNullException(nameof(credentialRecords));
+            if (credentialManager == null)
+                throw new ArgumentNullException(nameof(credentialManager));
 
-            _credentialRecords = credentialRecords;
+            _credentialManager = credentialManager;
             InitializeComponent();
             ApplyLanguage();
             ApplyThemes();
-            objectListView1.SetObjects(_credentialRecords);
-            CredentialsChanged += (sender, args) => objectListView1.SetObjects(_credentialRecords, true);
+            objectListView1.SetObjects(_credentialManager.GetCredentialRecords());
+            CredentialsChanged += (sender, args) => objectListView1.SetObjects(_credentialManager.GetCredentialRecords(), true);
             objectListView1.CellClick += HandleCellDoubleClick;
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
             objectListView1.KeyDown += ObjectListView1OnEnterPressed;
@@ -29,10 +30,15 @@ namespace mRemoteNG.UI.Forms
             objectListView1.KeyDown += OnDeletePressed;
         }
 
+        public CredentialManagerForm(CredentialManager credentialManager, ICredentialRecord selectedRecord) : this(credentialManager)
+        {
+            if (selectedRecord != null)
+                objectListView1.SelectObject(selectedRecord);
+        }
+
         
 
         #region Form stuff
-
         private void ApplyLanguage()
         {
             Text = Language.strCredentialManager;
@@ -47,7 +53,6 @@ namespace mRemoteNG.UI.Forms
         private void ApplyThemes()
         {
         }
-
         #endregion
 
         private void EditCredential(ICredentialRecord credentialRecord)
@@ -61,8 +66,7 @@ namespace mRemoteNG.UI.Forms
 
         private void AddCredential()
         {
-            var newCredential = new CredentialRecord();
-            _credentialRecords.Add(newCredential);
+            _credentialManager.Add(new CredentialRecord());
             RaiseCredentialsChangedEvent(this);
         }
 
@@ -70,7 +74,7 @@ namespace mRemoteNG.UI.Forms
         {
             var selectedCredential = objectListView1.SelectedObject as CredentialRecord;
             if (selectedCredential == null) return;
-            _credentialRecords.Remove(selectedCredential);
+            _credentialManager.Remove(selectedCredential);
             RaiseCredentialsChangedEvent(this);
         }
 

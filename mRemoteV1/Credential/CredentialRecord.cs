@@ -28,5 +28,10 @@ namespace mRemoteNG.Credential
         {
             Id = customGuid;
         }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

@@ -49,8 +49,8 @@ namespace mRemoteNG.UI.Forms
         private SystemMenu _systemMenu;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private List<ICredentialRecord> _credentialRecords = new List<ICredentialRecord>();
         private string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
+        private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
 
 
 
@@ -1255,13 +1255,13 @@ namespace mRemoteNG.UI.Forms
         private void LoadCredentials()
         {
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
-            _credentialRecords = new List<ICredentialRecord>(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()));
+            _credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()));
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
         }
 
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var credentialManager = new CredentialManagerForm(_credentialRecords);
+            var credentialManager = new CredentialManagerForm(_credentialManager);
             credentialManager.CredentialsChanged += (o, args) => SaveCredentialList();
             credentialManager.CenterOnTarget(this);
             credentialManager.Show();
@@ -1277,7 +1277,7 @@ namespace mRemoteNG.UI.Forms
             var serializer = new XmlCredentialRecordSerializer(cryptoProvider);
             var dataProvider = new FileDataProviderWithRollingBackup(_credentialFilePath);
             var credentialSaver = new CredentialRecordSaver(dataProvider, serializer);
-            credentialSaver.Save(_credentialRecords, "tempEncryptionKey".ConvertToSecureString());
+            credentialSaver.Save(_credentialManager.GetCredentialRecords(), "tempEncryptionKey".ConvertToSecureString());
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Saved credentials to file: {_credentialFilePath}", true);
         }
     }

@@ -2448,4 +2448,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strTitle" xml:space="preserve">
     <value>Title</value>
   </data>
+  <data name="strPropertyDescriptionCredential" xml:space="preserve">
+    <value>Select which credential to use for this connection.</value>
+  </data>
 </root>
