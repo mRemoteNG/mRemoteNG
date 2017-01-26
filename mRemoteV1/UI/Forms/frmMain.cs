@@ -1328,15 +1328,15 @@ namespace mRemoteNG.UI.Forms
         {
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
             _credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()));
+            _credentialManager.CredentialsChanged += (o, args) => SaveCredentialList();
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
         }
 
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var credentialManager = new CredentialManagerForm(_credentialManager);
-            credentialManager.CredentialsChanged += (o, args) => SaveCredentialList();
-            credentialManager.CenterOnTarget(this);
-            credentialManager.Show();
+            var credentialManagerForm = new CredentialManagerForm(_credentialManager);
+            credentialManagerForm.CenterOnTarget(this);
+            credentialManagerForm.Show();
         }
 
         private void SaveCredentialList()
