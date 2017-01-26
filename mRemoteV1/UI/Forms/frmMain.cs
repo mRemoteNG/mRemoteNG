@@ -1327,7 +1327,7 @@ namespace mRemoteNG.UI.Forms
         private void LoadCredentials()
         {
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
-            _credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()));
+            _credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<INotifyingCredentialRecord>());
             _credentialManager.CredentialsChanged += (o, args) => SaveCredentialList();
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
         }

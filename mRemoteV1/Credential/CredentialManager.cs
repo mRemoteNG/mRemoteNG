@@ -1,40 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 
 namespace mRemoteNG.Credential
 {
     public class CredentialManager
     {
-        private readonly IList<ICredentialRecord> _credentialRecords;
+        private readonly IList<INotifyingCredentialRecord> _credentialRecords;
 
         public CredentialManager()
         {
-            _credentialRecords = new List<ICredentialRecord>();
+            _credentialRecords = new List<INotifyingCredentialRecord>();
         }
 
-        public void Add(ICredentialRecord credentialRecord)
+        public void Add(INotifyingCredentialRecord credentialRecord)
         {
             _credentialRecords.Add(credentialRecord);
+            credentialRecord.PropertyChanged += CredentialOnPropertyChanged;
             RaiseCredentialsChangedEvent(this);
         }
 
-        public void AddRange(IEnumerable<ICredentialRecord> credentialRecords)
+        public void AddRange(IEnumerable<INotifyingCredentialRecord> credentialRecords)
         {
             foreach (var credential in credentialRecords)
+            {
                 _credentialRecords.Add(credential);
+                credential.PropertyChanged += CredentialOnPropertyChanged;
+            }
             RaiseCredentialsChangedEvent(this);
         }
 
-        public void Remove(ICredentialRecord credentialRecord)
+        public void Remove(INotifyingCredentialRecord credentialRecord)
         {
             _credentialRecords.Remove(credentialRecord);
+            credentialRecord.PropertyChanged -= CredentialOnPropertyChanged;
             RaiseCredentialsChangedEvent(this);
         }
 
-        public IEnumerable<ICredentialRecord> GetCredentialRecords()
+        public IEnumerable<INotifyingCredentialRecord> GetCredentialRecords()
         {
             return _credentialRecords;
+        }
+
+        private void CredentialOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            RaiseCredentialsChangedEvent(this);
         }
 
         public event EventHandler CredentialsChanged;
