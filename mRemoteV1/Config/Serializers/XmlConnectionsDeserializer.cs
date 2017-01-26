@@ -32,8 +32,8 @@ namespace mRemoteNG.Config.Serializers
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.7;
-        private RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
-        private IEnumerable<ICredentialRecord> _credentialRecords;
+        private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
+        private readonly IEnumerable<ICredentialRecord> _credentialRecords;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
@@ -234,9 +234,11 @@ namespace mRemoteNG.Config.Serializers
 
                     if (_confVersion <= 2.6) // 0.2 - 2.6
                     {
+#pragma warning disable 618
                         connectionInfo.Username = xmlnode.Attributes["Username"].Value;
                         connectionInfo.Password = _decryptor.Decrypt(xmlnode.Attributes["Password"].Value);
                         connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
+#pragma warning restore 618
                     }
                 }
 
