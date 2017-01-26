@@ -141,12 +141,15 @@ namespace mRemoteNG.Connection
         }
 
         [Obsolete("Use the CredentialRecord property")]
+        [Browsable(false)]
         public virtual string Username { get; set; }
 
         [Obsolete("Use the CredentialRecord property")]
+        [Browsable(false)]
         public virtual string Domain { get; set; }
 
         [Obsolete("Use the CredentialRecord property")]
+        [Browsable(false)]
         public virtual string Password { get; set; }
         #endregion
 

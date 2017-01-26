@@ -49,18 +49,21 @@ namespace mRemoteNG.Connection
         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUsername"),
         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUsername"),
         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(false)]
         public bool Username { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNamePassword"),
         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionPassword"),
         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(false)]
         public bool Password { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameDomain"),
         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionDomain"),
         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(false)]
         public bool Domain { get; set; }
         #endregion
         #region Protocol
