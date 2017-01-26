@@ -238,7 +238,7 @@ namespace mRemoteNG.App
 
                 // Load config
                 connectionsLoader.ConnectionFileName = filename;
-                ConnectionTreeModel = connectionsLoader.LoadConnections(false);
+                ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialManager.GetCredentialRecords(), false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
             }
             catch (Exception ex)
@@ -289,7 +289,7 @@ namespace mRemoteNG.App
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                ConnectionTreeModel = connectionsLoader.LoadConnections(false);
+                ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialManager.GetCredentialRecords(), false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)

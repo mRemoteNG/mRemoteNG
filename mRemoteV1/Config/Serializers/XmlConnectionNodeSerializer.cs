@@ -46,18 +46,7 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
             element.Add(new XAttribute("Id", connectionInfo.ConstantID));
 
-            element.Add(_saveFilter.SaveUsername
-                ? new XAttribute("Username", connectionInfo.Username ?? "")
-                : new XAttribute("Username", ""));
-
-            element.Add(_saveFilter.SaveDomain
-                ? new XAttribute("Domain", connectionInfo.Domain ?? "")
-                : new XAttribute("Domain", ""));
-
-            if (_saveFilter.SavePassword && !connectionInfo.Inheritance.Password)
-                element.Add(new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) ?? ""));
-            else
-                element.Add(new XAttribute("Password", ""));
+            element.Add(new XAttribute("CredentialId", connectionInfo.CredentialRecord?.Id.ToString() ?? ""));
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
@@ -131,7 +120,8 @@ namespace mRemoteNG.Config.Serializers
         private void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
         {
             if (_saveFilter.SaveInheritance)
-            { 
+            {
+                element.Add(new XAttribute("InheritCredentialRecord", connectionInfo.Inheritance.CredentialRecord));
                 element.Add(new XAttribute("InheritCacheBitmaps", connectionInfo.Inheritance.CacheBitmaps.ToString()));
                 element.Add(new XAttribute("InheritColors", connectionInfo.Inheritance.Colors.ToString()));
                 element.Add(new XAttribute("InheritDescription", connectionInfo.Inheritance.Description.ToString()));
@@ -139,10 +129,10 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritDisplayWallpaper", connectionInfo.Inheritance.DisplayWallpaper.ToString()));
                 element.Add(new XAttribute("InheritEnableFontSmoothing", connectionInfo.Inheritance.EnableFontSmoothing.ToString()));
                 element.Add(new XAttribute("InheritEnableDesktopComposition", connectionInfo.Inheritance.EnableDesktopComposition.ToString()));
-                element.Add(new XAttribute("InheritDomain", connectionInfo.Inheritance.Domain.ToString()));
+                //element.Add(new XAttribute("InheritDomain", connectionInfo.Inheritance.Domain.ToString()));
                 element.Add(new XAttribute("InheritIcon", connectionInfo.Inheritance.Icon.ToString()));
                 element.Add(new XAttribute("InheritPanel", connectionInfo.Inheritance.Panel.ToString()));
-                element.Add(new XAttribute("InheritPassword", connectionInfo.Inheritance.Password.ToString()));
+                //element.Add(new XAttribute("InheritPassword", connectionInfo.Inheritance.Password.ToString()));
                 element.Add(new XAttribute("InheritPort", connectionInfo.Inheritance.Port.ToString()));
                 element.Add(new XAttribute("InheritProtocol", connectionInfo.Inheritance.Protocol.ToString()));
                 element.Add(new XAttribute("InheritPuttySession", connectionInfo.Inheritance.PuttySession.ToString()));
@@ -158,7 +148,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritUseConsoleSession", connectionInfo.Inheritance.UseConsoleSession.ToString()));
                 element.Add(new XAttribute("InheritUseCredSsp", connectionInfo.Inheritance.UseCredSsp.ToString()));
                 element.Add(new XAttribute("InheritRenderingEngine", connectionInfo.Inheritance.RenderingEngine.ToString()));
-                element.Add(new XAttribute("InheritUsername", connectionInfo.Inheritance.Username.ToString()));
+                //element.Add(new XAttribute("InheritUsername", connectionInfo.Inheritance.Username.ToString()));
                 element.Add(new XAttribute("InheritICAEncryptionStrength", connectionInfo.Inheritance.ICAEncryptionStrength.ToString()));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel", connectionInfo.Inheritance.RDPAuthenticationLevel.ToString()));
                 element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", connectionInfo.Inheritance.RDPMinutesToIdleTimeout.ToString()));
@@ -188,6 +178,7 @@ namespace mRemoteNG.Config.Serializers
             }
             else
             {
+                element.Add(new XAttribute("InheritCredentialRecord", false.ToString()));
                 element.Add(new XAttribute("InheritCacheBitmaps", false.ToString()));
                 element.Add(new XAttribute("InheritColors", false.ToString()));
                 element.Add(new XAttribute("InheritDescription", false.ToString()));
@@ -195,10 +186,10 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritDisplayWallpaper", false.ToString()));
                 element.Add(new XAttribute("InheritEnableFontSmoothing", false.ToString()));
                 element.Add(new XAttribute("InheritEnableDesktopComposition", false.ToString()));
-                element.Add(new XAttribute("InheritDomain", false.ToString()));
+                //element.Add(new XAttribute("InheritDomain", false.ToString()));
                 element.Add(new XAttribute("InheritIcon", false.ToString()));
                 element.Add(new XAttribute("InheritPanel", false.ToString()));
-                element.Add(new XAttribute("InheritPassword", false.ToString()));
+                //element.Add(new XAttribute("InheritPassword", false.ToString()));
                 element.Add(new XAttribute("InheritPort", false.ToString()));
                 element.Add(new XAttribute("InheritProtocol", false.ToString()));
                 element.Add(new XAttribute("InheritPuttySession", false.ToString()));
@@ -214,7 +205,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritUseConsoleSession", false.ToString()));
                 element.Add(new XAttribute("InheritUseCredSsp", false.ToString()));
                 element.Add(new XAttribute("InheritRenderingEngine", false.ToString()));
-                element.Add(new XAttribute("InheritUsername", false.ToString()));
+                //element.Add(new XAttribute("InheritUsername", false.ToString()));
                 element.Add(new XAttribute("InheritICAEncryptionStrength", false.ToString()));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel", false.ToString()));
                 element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", false.ToString()));

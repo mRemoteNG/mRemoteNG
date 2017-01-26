@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
 using mRemoteNG.Connection.Protocol;
@@ -139,8 +140,13 @@ namespace mRemoteNG.Connection
             set { SetField(ref _credentialRecord, value, nameof(CredentialRecord)); }
         }
 
+        [Obsolete("Use the CredentialRecord property")]
         public virtual string Username { get; set; }
+
+        [Obsolete("Use the CredentialRecord property")]
         public virtual string Domain { get; set; }
+
+        [Obsolete("Use the CredentialRecord property")]
         public virtual string Password { get; set; }
         #endregion
 
