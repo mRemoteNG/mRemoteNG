@@ -132,20 +132,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.FullScreenTitle = _connectionInfo.Name;
 
                 _alertOnIdleDisconnect = _connectionInfo.RDPAlertIdleTimeout;
-                
-                // Set the timeout to the default (zero) if it is out of bounds.
-                if (_connectionInfo.RDPMinutesToIdleTimeout < 0)
-                {
-                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
-                } // Set the timeout to the max (240) if it is out of bounds.
-                else if (_connectionInfo.RDPMinutesToIdleTimeout > 240)
-                {
-                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = 240;
-                }
-                else
-                {
-                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = _connectionInfo.RDPMinutesToIdleTimeout;
-                }
+                _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = _connectionInfo.RDPMinutesToIdleTimeout;
 
                 //not user changeable
                 _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;

@@ -233,7 +233,14 @@ namespace mRemoteNG.Connection
         public virtual int RDPMinutesToIdleTimeout
         {
             get { return GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout); }
-            set { SetField(ref _rdpMinutesToIdleTimeout, value, "RDPMinutesToIdleTimeout"); }
+            set {
+                if(value < 0) {
+                    value = 0;
+                } else if(value > 240) {
+                    value = 240;
+                }
+                SetField(ref _rdpMinutesToIdleTimeout, value, "RDPMinutesToIdleTimeout");
+            }
         }
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDPAlertIdleTimeout"),
