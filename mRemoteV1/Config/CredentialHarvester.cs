@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Xml.Linq;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 
@@ -10,6 +11,11 @@ namespace mRemoteNG.Config
 {
     public class CredentialHarvester
     {
+        private readonly IEqualityComparer<ICredentialRecord> _credentialComparer = new CredentialDomainUserComparer();
+
+        // maps a connectioninfo (by its id) to the credential object that was harvested
+        public Dictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } = new Dictionary<Guid, ICredentialRecord>();
+
         public IEnumerable<ICredentialRecord> Harvest(XDocument xDocument, SecureString decryptionKey)
         {
             if (xDocument == null)
@@ -17,16 +23,39 @@ namespace mRemoteNG.Config
 
             var cryptoProvider = CryptographyProviderFactory.BuildFromXml(xDocument.Root);
 
-            var credentialList = from e in xDocument.Descendants("Node")
-                                 where EntryHasSomeCredentialData(e)
-                                 select new CredentialRecord
-                                {
-                                    Username = e.Attribute("Username")?.Value,
-                                    Domain =  e.Attribute("Domain")?.Value,
-                                    Password = cryptoProvider.Decrypt(e.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString()
-                                };
+            foreach (var element in xDocument.Descendants("Node"))
+            {
+                if (!EntryHasSomeCredentialData(element)) continue;
+                var newCredential = BuildCredential(element, cryptoProvider, decryptionKey);
 
-            return credentialList.Distinct(new CredentialDomainUserComparer());
+                Guid connectionId;
+                Guid.TryParse(element.Attribute("Id")?.Value, out connectionId);
+                if (connectionId == Guid.Empty)
+                {
+                    //error
+                }
+
+                if (ConnectionToCredentialMap.Values.Contains(newCredential, _credentialComparer))
+                {
+                    var existingCredential = ConnectionToCredentialMap.Values.First(record => _credentialComparer.Equals(newCredential, record));
+                    ConnectionToCredentialMap.Add(connectionId, existingCredential);
+                }
+                else
+                    ConnectionToCredentialMap.Add(connectionId, newCredential);
+            }
+
+            return ConnectionToCredentialMap.Values.Distinct(_credentialComparer);
+        }
+
+        private ICredentialRecord BuildCredential(XElement element, ICryptographyProvider cryptographyProvider, SecureString decryptionKey)
+        {
+            var credential = new CredentialRecord
+            {
+                Username = element.Attribute("Username")?.Value,
+                Domain = element.Attribute("Domain")?.Value,
+                Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString()
+            };
+            return credential;
         }
 
         private static bool EntryHasSomeCredentialData(XElement e)
