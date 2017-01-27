@@ -141,9 +141,9 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 				
-				var _user = _Info.CredentialRecord?.Username;
-                var _pass = _Info.CredentialRecord?.Password;
-                var _dom = _Info.CredentialRecord?.Domain;
+				var _user = _Info.CredentialRecord?.Username ?? "";
+                var _pass = _Info.CredentialRecord?.Password ?? "".ConvertToSecureString();
+                var _dom = _Info.CredentialRecord?.Domain ?? "";
 						
 				if (string.IsNullOrEmpty(_user))
 				{

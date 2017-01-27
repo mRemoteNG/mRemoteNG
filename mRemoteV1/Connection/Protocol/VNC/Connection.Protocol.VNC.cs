@@ -162,7 +162,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				_VNC.ConnectComplete += VNCEvent_Connected;
 				_VNC.ConnectionLost += VNCEvent_Disconnected;
 				frmMain.clipboardchange += VNCEvent_ClipboardChanged;
-                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(Info.CredentialRecord.Password.ConvertToUnsecureString()))
+                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(Info.CredentialRecord?.Password.ConvertToUnsecureString()))
 				{
 					_VNC.GetPassword = VNCEvent_Authenticate;
 				}
@@ -194,7 +194,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		private string VNCEvent_Authenticate()
 		{
-			return Info.CredentialRecord.Password.ConvertToUnsecureString();
+			return Info.CredentialRecord?.Password.ConvertToUnsecureString() ?? "";
 		}
         #endregion
 				
