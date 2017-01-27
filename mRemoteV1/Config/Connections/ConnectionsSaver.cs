@@ -187,7 +187,7 @@ namespace mRemoteNG.Config.Connections
             {
                 if (rootTreeNode.Password)
                 {
-                    _password = Convert.ToString(rootTreeNode.PasswordString).ConvertToSecureString();
+                    _password = rootTreeNode.PasswordString.ConvertToSecureString();
                     strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
                 }
                 else

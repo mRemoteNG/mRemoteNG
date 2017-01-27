@@ -63,7 +63,7 @@ namespace mRemoteNG.Config.Settings
 
                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                 mRemoteNG.Settings.Default.ConDefaultPassword =
-                    cryptographyProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), EncryptionKey);
+                    cryptographyProvider.Encrypt(mRemoteNG.Settings.Default.ConDefaultPassword, EncryptionKey);
 
                 mRemoteNG.Settings.Default.Save();
 
