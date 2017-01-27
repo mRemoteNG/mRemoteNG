@@ -12,8 +12,10 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config
 {
+#pragma warning disable 618
     public class CredentialHarvesterTests
     {
+
         private CredentialHarvester _credentialHarvester;
         private ICryptographyProvider _cryptographyProvider;
         private SecureString _key;
@@ -96,4 +98,5 @@ namespace mRemoteNGTests.Config
             return XDocument.Parse(serializedData);
         }
     }
+#pragma warning restore 618
 }
