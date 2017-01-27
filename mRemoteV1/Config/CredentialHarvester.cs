@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Xml.Linq;
-using mRemoteNG.Config.Serializers;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 
@@ -51,6 +50,7 @@ namespace mRemoteNG.Config
         {
             var credential = new CredentialRecord
             {
+                Title = $"{element.Attribute("Username")?.Value}\\{element.Attribute("Domain")?.Value}",
                 Username = element.Attribute("Username")?.Value,
                 Domain = element.Attribute("Domain")?.Value,
                 Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString()
