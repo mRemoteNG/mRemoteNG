@@ -85,6 +85,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.ICAEncryptionStrength = (ProtocolICA.EncryptionStrength)Enum.Parse(typeof(ProtocolICA.EncryptionStrength), (string)dataRow["ICAEncryptionStrength"]);
             connectionInfo.RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel)Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), (string)dataRow["RDPAuthenticationLevel"]);
             connectionInfo.RDPMinutesToIdleTimeout = (int)dataRow["RDPMinutesToIdleTimeout"];
+            connectionInfo.RDPAlertIdleTimeout = (bool)dataRow["RDPAlertIdleTimeout"];
             connectionInfo.LoadBalanceInfo = (string)dataRow["LoadBalanceInfo"];
             connectionInfo.Colors = (ProtocolRDP.RDPColors)Enum.Parse(typeof(ProtocolRDP.RDPColors) ,(string)dataRow["Colors"]);
             connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Enum.Parse(typeof(ProtocolRDP.RDPResolutions), (string)dataRow["Resolution"]);
@@ -154,6 +155,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
             connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];
             connectionInfo.Inheritance.RDPAuthenticationLevel = (bool)dataRow["InheritRDPAuthenticationLevel"];
+            connectionInfo.Inheritance.RDPAlertIdleTimeout = (bool)dataRow["RDPAlertIdleTimeout"];
             connectionInfo.Inheritance.RDPMinutesToIdleTimeout = (bool)dataRow["RDPMinutesToIdleTimeout"];
             connectionInfo.Inheritance.LoadBalanceInfo = (bool)dataRow["InheritLoadBalanceInfo"];
             connectionInfo.Inheritance.PreExtApp = (bool)dataRow["InheritPreExtApp"];

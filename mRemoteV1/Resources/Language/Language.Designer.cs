@@ -4118,6 +4118,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select whether to receive an alert after the RDP session disconnects due to inactivity.
+        /// </summary>
+        internal static string strPropertyDescriptionRDPAlertIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRDPAlertIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0).
         /// </summary>
         internal static string strPropertyDescriptionRDPMinutesToIdleTimeout {
@@ -4609,6 +4618,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameRDGatewayUsername {
             get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alert on Idle Disconnect.
+        /// </summary>
+        internal static string strPropertyNameRDPAlertIdleTimeout {
+            get {
+                return ResourceManager.GetString("strPropertyNameRDPAlertIdleTimeout", resourceCulture);
             }
         }
         
