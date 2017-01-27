@@ -168,6 +168,7 @@
     <Compile Include="Config\Serializers\XmlCredentialDeserializer.cs" />
     <Compile Include="Config\Serializers\XmlCredentialRecordSerializer.cs" />
     <Compile Include="Config\Serializers\XmlRootNodeSerializer.cs" />
+    <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIds.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
