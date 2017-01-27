@@ -2454,4 +2454,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
     <value>Are you sure you want to delete the credential record, {0}?</value>
   </data>
+  <data name="strFindMatchingCredentialFailed" xml:space="preserve">
+    <value>Could not find a credential record with ID matching "{0}" for the connection record named "{1}".</value>
+  </data>
 </root>

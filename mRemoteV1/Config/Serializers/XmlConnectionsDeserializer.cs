@@ -511,11 +511,13 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Inheritance.CredentialRecord = bool.Parse(xmlnode.Attributes["InheritCredentialRecord"]?.Value ?? "False");
 
                     var requestedCredentialId = xmlnode.Attributes["CredentialId"]?.Value;
-                    if (requestedCredentialId != null && _credentialRecords.Any())
+                    if (!string.IsNullOrEmpty(requestedCredentialId) && _credentialRecords.Any())
                     {
                         var matchingCredential = _credentialRecords.Where(record => record.Id.ToString() == requestedCredentialId).ToArray();
                         if (matchingCredential.Any())
                             connectionInfo.CredentialRecord = matchingCredential.First();
+                        else
+                            Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, string.Format(Language.strFindMatchingCredentialFailed, requestedCredentialId, connectionInfo.Name));
                     }
                 }
             }
