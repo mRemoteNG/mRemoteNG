@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config;
@@ -22,6 +23,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Authentication;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -212,9 +214,14 @@ namespace mRemoteNG.UI.Forms
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
 			}
 
+            var upgradeMap = UpgradeUserFilesForCredentialManager();
+
             LoadCredentials();
             LoadDefaultConnectionCredentials();
             Runtime.LoadConnections();
+
+            if (upgradeMap != null)
+                ApplyCredentialMapping(upgradeMap);
 
             Windows.TreePanel.Focus();
 
@@ -1324,11 +1331,40 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
 
+        private Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager()
+        {
+            var fileProvider = new FileDataProvider(Runtime.GetStartupConnectionFileName());
+            var xdoc = XDocument.Parse(fileProvider.Load());
+
+            if (double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value) >= 2.7) return null;
+            EnsureConnectionXmlElementsHaveIds(xdoc);
+            fileProvider.Save($"{xdoc.Declaration}\n {xdoc}");
+
+            var cryptoProvider = CryptographyProviderFactory.BuildFromXml(xdoc.Root);
+            var encryptedValue = xdoc.Root?.Attribute("Protected")?.Value;
+            var auth = new PasswordAuthenticator(cryptoProvider, encryptedValue)
+            {
+                AuthenticationRequestor = () => MiscTools.PasswordDialog("", false)
+            };
+            if(!auth.Authenticate(Runtime.EncryptionKey))
+                Close();
+
+            var credentialHarvester = new CredentialHarvester();
+            SaveCredentialList(credentialHarvester.Harvest(xdoc, auth.LastAuthenticatedPassword));
+            return credentialHarvester.ConnectionToCredentialMap;
+        }
+
+        private void EnsureConnectionXmlElementsHaveIds(XDocument xdoc)
+        {
+            var adapter = new ConfConsEnsureConnectionsHaveIds();
+            adapter.EnsureElementsHaveIds(xdoc);
+        }
+
         private void LoadCredentials()
         {
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
             _credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<INotifyingCredentialRecord>());
-            _credentialManager.CredentialsChanged += (o, args) => SaveCredentialList();
+            _credentialManager.CredentialsChanged += (o, args) => SaveCredentialList(_credentialManager.GetCredentialRecords());
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
         }
 
@@ -1342,7 +1378,7 @@ namespace mRemoteNG.UI.Forms
             credentialManagerForm.Show();
         }
 
-        private void SaveCredentialList()
+        private void SaveCredentialList(IEnumerable<ICredentialRecord> records)
         {
             var engineFromSettings = Settings.Default.EncryptionEngine;
             var modeFromSettings = Settings.Default.EncryptionBlockCipherMode;
@@ -1352,7 +1388,7 @@ namespace mRemoteNG.UI.Forms
             var serializer = new XmlCredentialRecordSerializer(cryptoProvider);
             var dataProvider = new FileDataProviderWithRollingBackup(_credentialFilePath);
             var credentialSaver = new CredentialRecordSaver(dataProvider, serializer);
-            credentialSaver.Save(_credentialManager.GetCredentialRecords(), "tempEncryptionKey".ConvertToSecureString());
+            credentialSaver.Save(records, "tempEncryptionKey".ConvertToSecureString());
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Saved credentials to file: {_credentialFilePath}", true);
         }
 
@@ -1361,6 +1397,17 @@ namespace mRemoteNG.UI.Forms
             var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
             var matchedCredentials = Runtime.CredentialManager.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
             DefaultConnectionInfo.Instance.CredentialRecord = matchedCredentials.Any() ? matchedCredentials.First() : null;
+        }
+
+        private void ApplyCredentialMapping(IDictionary<Guid, ICredentialRecord> map)
+        {
+            foreach (var connectionInfo in Runtime.ConnectionTreeModel.GetRecursiveChildList())
+            {
+                Guid id;
+                Guid.TryParse(connectionInfo.ConstantID, out id);
+                if (map.ContainsKey(id))
+                    connectionInfo.CredentialRecord = map[id];
+            }
         }
     }
 }
