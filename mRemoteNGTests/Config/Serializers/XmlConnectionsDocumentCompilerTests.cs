@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System.Linq;
+using System.Xml.XPath;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -27,9 +28,10 @@ namespace mRemoteNGTests.Config.Serializers
         [SetUp]
         public void Setup()
         {
-            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider);
             _connectionTreeModel = SetupConnectionTreeModel();
+            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(_cryptographyProvider, _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
+            _documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, connectionNodeSerializer);
         }
 
         [Test]

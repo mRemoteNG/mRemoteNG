@@ -7,26 +7,26 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class XmlConnectionNodeSerializer
+    public class XmlConnectionNodeSerializer27 : IConnectionSerializer<XElement>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
         private readonly SaveFilter _saveFilter = new SaveFilter();
 
-        public XmlConnectionNodeSerializer(ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
+        public XmlConnectionNodeSerializer27(ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
         {
             _cryptographyProvider = cryptographyProvider;
             _encryptionKey = encryptionKey;
         }
 
-        public XmlConnectionNodeSerializer(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
+        public XmlConnectionNodeSerializer27(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {
             _cryptographyProvider = cryptographyProvider;
             _encryptionKey = encryptionKey;
             _saveFilter = saveFilter;
         }
 
-        public XElement SerializeConnectionInfo(ConnectionInfo connectionInfo)
+        public XElement Serialize(ConnectionInfo connectionInfo)
         {
             var element = new XElement(XName.Get("Node", ""));
             SetElementAttributes(element, connectionInfo);

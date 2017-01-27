@@ -1,7 +1,9 @@
-﻿using System.Xml;
+﻿using System.Linq;
+using System.Xml;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -19,9 +21,10 @@ namespace mRemoteNGTests.Config.Serializers
         [SetUp]
         public void Setup()
         {
-            var encryptor = new AeadCryptographyProvider();
-            _serializer = new XmlConnectionsSerializer(encryptor);
             _connectionTreeModel = SetupConnectionTreeModel();
+            var encryptor = new AeadCryptographyProvider();
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(encryptor, _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
+            _serializer = new XmlConnectionsSerializer(encryptor, connectionNodeSerializer);
         }
 
         [Test]

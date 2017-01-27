@@ -9,29 +9,29 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers
 {
-    public class XmlConnectionNodeSerializerTests
+    public class XmlConnectionNodeSerializer27Tests
     {
-        private XmlConnectionNodeSerializer _connectionNodeSerializer;
+        private XmlConnectionNodeSerializer27 _connectionNodeSerializer;
 
         [SetUp]
         public void Setup()
         {
             var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(
                 BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _connectionNodeSerializer = new XmlConnectionNodeSerializer(cryptoProvider, "myPassword1".ConvertToSecureString());
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, "myPassword1".ConvertToSecureString());
         }
 
         [Test]
         public void ReturnsXElement()
         {
-            var returnVal = _connectionNodeSerializer.SerializeConnectionInfo(new ConnectionInfo());
+            var returnVal = _connectionNodeSerializer.Serialize(new ConnectionInfo());
             Assert.That(returnVal, Is.TypeOf<XElement>());
         }
 
         [TestCaseSource(typeof(TestCaseDataSource), nameof(TestCaseDataSource.AttributesAndExpectedValues))]
         public void XmlElementContainsSerializedAttribute(string attributeName, string expectedValue, ConnectionInfo connectionInfo)
         {
-            var returnVal = _connectionNodeSerializer.SerializeConnectionInfo(connectionInfo);
+            var returnVal = _connectionNodeSerializer.Serialize(connectionInfo);
             var targetAttribute = returnVal.Attribute(XName.Get(attributeName));
             Assert.That(targetAttribute?.Value, Is.EqualTo(expectedValue));
         }
@@ -39,7 +39,7 @@ namespace mRemoteNGTests.Config.Serializers
         [TestCaseSource(typeof(TestCaseDataSource), nameof(TestCaseDataSource.PasswordAttributes))]
         public void PasswordFieldsAreSerialized(string attributeName, ConnectionInfo connectionInfo)
         {
-            var returnVal = _connectionNodeSerializer.SerializeConnectionInfo(connectionInfo);
+            var returnVal = _connectionNodeSerializer.Serialize(connectionInfo);
             var targetAttribute = returnVal.Attribute(XName.Get(attributeName));
             Assert.That(targetAttribute?.Value, Is.Not.Empty);
         }
@@ -49,8 +49,8 @@ namespace mRemoteNGTests.Config.Serializers
         {
             var saveFilter = new SaveFilter(true);
             var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _connectionNodeSerializer = new XmlConnectionNodeSerializer(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
-            var returnVal = _connectionNodeSerializer.SerializeConnectionInfo(connectionInfo);
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
+            var returnVal = _connectionNodeSerializer.Serialize(connectionInfo);
             var targetAttribute = returnVal.Attribute(XName.Get(attributeName));
             Assert.That(targetAttribute?.Value, Is.EqualTo(string.Empty));
         }
@@ -60,8 +60,8 @@ namespace mRemoteNGTests.Config.Serializers
         {
             var saveFilter = new SaveFilter(true);
             var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _connectionNodeSerializer = new XmlConnectionNodeSerializer(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
-            var returnVal = _connectionNodeSerializer.SerializeConnectionInfo(connectionInfo);
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
+            var returnVal = _connectionNodeSerializer.Serialize(connectionInfo);
             var targetAttribute = returnVal.Attribute(XName.Get(attributeName));
             Assert.That(targetAttribute?.Value, Is.EqualTo(false.ToString()));
         }
@@ -102,9 +102,6 @@ namespace mRemoteNGTests.Config.Serializers
             {
                 get
                 {
-                    yield return new TestCaseData("Username", ConnectionInfo);
-                    yield return new TestCaseData("Domain", ConnectionInfo);
-                    yield return new TestCaseData("Password", ConnectionInfo);
                     yield return new TestCaseData("RDGatewayUsername", ConnectionInfo);
                     yield return new TestCaseData("RDGatewayDomain", ConnectionInfo);
                     yield return new TestCaseData("RDGatewayPassword", ConnectionInfo);
@@ -117,9 +114,6 @@ namespace mRemoteNGTests.Config.Serializers
             {
                 get
                 {
-                    yield return new TestCaseData("InheritUsername", ConnectionInfoWithInheritance);
-                    yield return new TestCaseData("InheritDomain", ConnectionInfoWithInheritance);
-                    yield return new TestCaseData("InheritPassword", ConnectionInfoWithInheritance);
                     yield return new TestCaseData("InheritRDGatewayUsername", ConnectionInfoWithInheritance);
                     yield return new TestCaseData("InheritRDGatewayDomain", ConnectionInfoWithInheritance);
                     yield return new TestCaseData("InheritRDGatewayPassword", ConnectionInfoWithInheritance);
@@ -132,7 +126,6 @@ namespace mRemoteNGTests.Config.Serializers
             {
                 get
                 {
-                    yield return new TestCaseData("Password", ConnectionInfo);
                     yield return new TestCaseData("VNCProxyPassword", ConnectionInfo);
                     yield return new TestCaseData("RDGatewayPassword", ConnectionInfo);
                 }
@@ -149,8 +142,6 @@ namespace mRemoteNGTests.Config.Serializers
                     yield return new TestCaseData("Descr", ConnectionInfo.Description, ConnectionInfo);
                     yield return new TestCaseData("Icon", ConnectionInfo.Icon, ConnectionInfo);
                     yield return new TestCaseData("Panel", "General", ConnectionInfo);
-                    yield return new TestCaseData("Username", ConnectionInfo.Username, ConnectionInfo);
-                    yield return new TestCaseData("Domain", ConnectionInfo.Domain, ConnectionInfo);
                     yield return new TestCaseData("Hostname", ConnectionInfo.Hostname, ConnectionInfo);
                     yield return new TestCaseData("Protocol", "RDP", ConnectionInfo);
                     yield return new TestCaseData("PuttySession", ConnectionInfo.PuttySession, ConnectionInfo);
@@ -203,10 +194,8 @@ namespace mRemoteNGTests.Config.Serializers
                     yield return new TestCaseData("InheritDisplayWallpaper", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritEnableFontSmoothing", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritEnableDesktopComposition", false.ToString(), ConnectionInfo);
-                    yield return new TestCaseData("InheritDomain", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritIcon", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritPanel", false.ToString(), ConnectionInfo);
-                    yield return new TestCaseData("InheritPassword", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritPort", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritProtocol", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritPuttySession", false.ToString(), ConnectionInfo);
@@ -222,7 +211,6 @@ namespace mRemoteNGTests.Config.Serializers
                     yield return new TestCaseData("InheritUseConsoleSession", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritUseCredSsp", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritRenderingEngine", false.ToString(), ConnectionInfo);
-                    yield return new TestCaseData("InheritUsername", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritICAEncryptionStrength", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritRDPAuthenticationLevel", false.ToString(), ConnectionInfo);
                     yield return new TestCaseData("InheritLoadBalanceInfo", false.ToString(), ConnectionInfo);

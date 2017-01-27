@@ -116,7 +116,7 @@
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
     <Compile Include="Config\Serializers\PortScanDeserializerTests.cs" />
     <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionNodeSerializerTests.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer27Tests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />

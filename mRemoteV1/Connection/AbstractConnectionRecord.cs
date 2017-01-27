@@ -17,32 +17,32 @@ namespace mRemoteNG.Connection
     public abstract class AbstractConnectionRecord : INotifyPropertyChanged
     {
         #region Fields
-        private string _name;
-        private string _description;
-        private string _icon;
-        private string _panel;
+        private string _name = "";
+        private string _description = "";
+        private string _icon = "";
+        private string _panel = "";
 
-        private string _hostname;
+        private string _hostname = "";
         private ICredentialRecord _credentialRecord;
 
         private ProtocolType _protocol;
-        private string _extApp;
+        private string _extApp = "";
         private int _port;
-        private string _puttySession;
+        private string _puttySession = "";
         private ProtocolICA.EncryptionStrength _icaEncryption;
         private bool _useConsoleSession;
         private ProtocolRDP.AuthenticationLevel _rdpAuthenticationLevel;
         private int _rdpMinutesToIdleTimeout;
-        private string _loadBalanceInfo;
+        private string _loadBalanceInfo = "";
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
 
         private ProtocolRDP.RDGatewayUsageMethod _rdGatewayUsageMethod;
-        private string _rdGatewayHostname;
+        private string _rdGatewayHostname = "";
         private ProtocolRDP.RDGatewayUseConnectionCredentials _rdGatewayUseConnectionCredentials;
-        private string _rdGatewayUsername;
-        private string _rdGatewayPassword;
-        private string _rdGatewayDomain;
+        private string _rdGatewayUsername = "";
+        private string _rdGatewayPassword = "";
+        private string _rdGatewayDomain = "";
 
         private ProtocolRDP.RDPResolutions _resolution;
         private bool _automaticResize;
@@ -61,19 +61,19 @@ namespace mRemoteNG.Connection
         private ProtocolRDP.RDPSounds _redirectSound;
         private ProtocolRDP.RDPSoundQuality _soundQuality;
 
-        private string _preExtApp;
-        private string _postExtApp;
-        private string _macAddress;
-        private string _userField;
+        private string _preExtApp = "";
+        private string _postExtApp = "";
+        private string _macAddress = "";
+        private string _userField = "";
 
         private ProtocolVNC.Compression _vncCompression;
         private ProtocolVNC.Encoding _vncEncoding;
         private ProtocolVNC.AuthMode _vncAuthMode;
         private ProtocolVNC.ProxyType _vncProxyType;
-        private string _vncProxyIp;
+        private string _vncProxyIp = "";
         private int _vncProxyPort;
-        private string _vncProxyUsername;
-        private string _vncProxyPassword;
+        private string _vncProxyUsername = "";
+        private string _vncProxyPassword = "";
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
@@ -142,15 +142,15 @@ namespace mRemoteNG.Connection
 
         [Obsolete("Use the CredentialRecord property")]
         [Browsable(false)]
-        public virtual string Username { get; set; }
+        public virtual string Username { get; set; } = "";
 
         [Obsolete("Use the CredentialRecord property")]
         [Browsable(false)]
-        public virtual string Domain { get; set; }
+        public virtual string Domain { get; set; } = "";
 
         [Obsolete("Use the CredentialRecord property")]
         [Browsable(false)]
-        public virtual string Password { get; set; }
+        public virtual string Password { get; set; } = "";
         #endregion
 
         #region Protocol

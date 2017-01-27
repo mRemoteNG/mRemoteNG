@@ -137,6 +137,12 @@ namespace mRemoteNG.Connection
         {
             Parent?.RemoveChild(this);
         }
+
+	    public ConnectionInfo GetRootParent()
+	    {
+	        return Parent != null ? Parent.GetRootParent() : this;
+	    }
+
 	    #endregion
 
         #region Public Enumerations

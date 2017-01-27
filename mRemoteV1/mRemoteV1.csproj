@@ -141,11 +141,13 @@
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
     <Compile Include="Config\Serializers\DataTableSerializer.cs" />
+    <Compile Include="Config\Serializers\IConnectionSerializer.cs" />
     <Compile Include="Config\Serializers\PortScanDeserializer.cs" />
     <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer26.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
@@ -154,7 +156,7 @@
     <Compile Include="Config\Serializers\IDeserializer.cs" />
     <Compile Include="Config\Import\IConnectionImporter.cs" />
     <Compile Include="Config\Serializers\ISerializer.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer27.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentCompiler.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentEncryptor.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsSerializer.cs" />

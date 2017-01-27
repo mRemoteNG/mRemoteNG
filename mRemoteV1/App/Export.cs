@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
@@ -74,9 +75,11 @@ namespace mRemoteNG.App
 			    {
 			        case ConnectionsSaver.Format.mRXML:
                         var factory = new CryptographyProviderFactory();
-                        var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
+                        var cryptographyProvider = factory.CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
                         cryptographyProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
-                        serializer = new XmlConnectionsSerializer(cryptographyProvider);
+			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
+                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString());
+                        serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
 			            ((XmlConnectionsSerializer) serializer).SaveFilter = saveFilter;
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:

@@ -90,8 +90,9 @@ namespace mRemoteNGTests.Config
         {
             var rootNode = new RootNodeInfo(RootNodeType.Connection) {PasswordString = _key.ConvertToUnsecureString()};
             rootNode.AddChild(connectionInfo);
-            var serialier = new XmlConnectionsSerializer(_cryptographyProvider);
-            var serializedData = serialier.Serialize(rootNode);
+            var nodeSerializer = new XmlConnectionNodeSerializer26(_cryptographyProvider, _key);
+            var serializer = new XmlConnectionsSerializer(_cryptographyProvider, nodeSerializer);
+            var serializedData = serializer.Serialize(rootNode);
             return XDocument.Parse(serializedData);
         }
     }
