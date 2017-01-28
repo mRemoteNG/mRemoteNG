@@ -45,7 +45,7 @@ namespace mRemoteNGTests.Security.PasswordCreation
         [Test]
         public void CountToRequireMustBeAPositiveValue()
         {
-            Assert.Throws<ArgumentException>(() => new PasswordIncludesLowerCaseConstraint(-1));
+            Assert.Throws<ArgumentException>(() => new PasswordIncludesUpperCaseConstraint(-1));
         }
     }
 }
