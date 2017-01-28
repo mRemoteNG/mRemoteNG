@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 
 
@@ -68,9 +69,9 @@ namespace mRemoteNG.Connection.Protocol
 						var username = "";
 						var password = "";
 								
-						if (!string.IsNullOrEmpty(InterfaceControl.Info.Username))
+						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Username))
 						{
-							username = InterfaceControl.Info.Username;
+							username = InterfaceControl.Info.CredentialRecord?.Username;
 						}
 						else
 						{
@@ -84,9 +85,9 @@ namespace mRemoteNG.Connection.Protocol
 							}
 						}
 								
-						if (!string.IsNullOrEmpty(InterfaceControl.Info.Password))
+						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString()))
 						{
-							password = InterfaceControl.Info.Password;
+							password = InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString();
 						}
 						else
 						{

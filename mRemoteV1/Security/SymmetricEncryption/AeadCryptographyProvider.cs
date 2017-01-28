@@ -179,7 +179,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         private string SimpleDecryptWithPassword(string encryptedMessage, SecureString decryptionKey, int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
+                return ""; //throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);

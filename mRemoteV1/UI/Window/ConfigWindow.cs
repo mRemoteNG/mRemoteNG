@@ -42,8 +42,8 @@ namespace mRemoteNG.UI.Window
         private ToolStripSeparator _toolStripSeparator1;
         private FilteredPropertyGrid _pGrid;
 
-        private AbstractConnectionInfoData _selectedTreeNode;
-        public AbstractConnectionInfoData SelectedTreeNode
+        private AbstractConnectionRecord _selectedTreeNode;
+        public AbstractConnectionRecord SelectedTreeNode
         {
             get { return _selectedTreeNode; }
             set
@@ -850,6 +850,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("UserField");
                     strHide.Add("Description");
                     strHide.Add("SoundQuality");
+                    strHide.Add("CredentialRecord");
                 }
                 else if (_pGrid.SelectedObject is ConnectionInfo)
 				{
@@ -1458,6 +1459,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RDGatewayHostname");
                         if(conI.Inheritance.SoundQuality)
                             strHide.Add("SoundQuality");
+                        if(conI.Inheritance.CredentialRecord)
+                            strHide.Add("CredentialRecord");
                     }
 					else
 					{

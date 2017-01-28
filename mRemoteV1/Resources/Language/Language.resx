@@ -2427,6 +2427,36 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Minutes to Idle</value>
   </data>
+  <data name="strAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="strAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="strCredentialEditor" xml:space="preserve">
+    <value>Credential Editor</value>
+  </data>
+  <data name="strCredentialManager" xml:space="preserve">
+    <value>Credential Manager</value>
+  </data>
+  <data name="strID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="strRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="strTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="strPropertyDescriptionCredential" xml:space="preserve">
+    <value>Select which credential to use for this connection.</value>
+  </data>
+  <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>Are you sure you want to delete the credential record, {0}?</value>
+  </data>
+  <data name="strFindMatchingCredentialFailed" xml:space="preserve">
+    <value>Could not find a credential record with ID matching "{0}" for the connection record named "{1}".</value>
+  </data>
   <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Select whether to receive an alert after the RDP session disconnects due to inactivity</value>
   </data>

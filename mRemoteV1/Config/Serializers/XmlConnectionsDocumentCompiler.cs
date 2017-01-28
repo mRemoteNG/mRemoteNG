@@ -14,10 +14,12 @@ namespace mRemoteNG.Config.Serializers
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private SecureString _encryptionKey;
+        private readonly IConnectionSerializer<XElement> _connectionNodeSerializer;
 
-        public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider)
+        public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider, IConnectionSerializer<XElement> connectionNodeSerializer)
         {
             _cryptographyProvider = cryptographyProvider;
+            _connectionNodeSerializer = connectionNodeSerializer;
         }
 
         public XDocument CompileDocument(ConnectionTreeModel connectionTreeModel, bool fullFileEncryption, bool export)
@@ -77,8 +79,7 @@ namespace mRemoteNG.Config.Serializers
 
         private XElement CompileConnectionInfoNode(ConnectionInfo connectionInfo)
         {
-            var connectionSerializer = new XmlConnectionNodeSerializer(_cryptographyProvider, _encryptionKey);
-            return connectionSerializer.SerializeConnectionInfo(connectionInfo);
+            return _connectionNodeSerializer.Serialize(connectionInfo);
         }
     }
 }
