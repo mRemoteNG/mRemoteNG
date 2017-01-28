@@ -3821,6 +3821,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least {0} of the following characters: {1}.
+        /// </summary>
+        internal static string strPasswordConstainsSpecialCharactersConstraintHint {
+            get {
+                return ResourceManager.GetString("strPasswordConstainsSpecialCharactersConstraintHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password must contain at least {0} lower case character(s).
         /// </summary>
         internal static string strPasswordContainsLowerCaseConstraintHint {

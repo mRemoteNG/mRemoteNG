@@ -140,6 +140,7 @@
     <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesSpecialCharactersConstraintTests.cs" />
     <Compile Include="Security\PasswordCreation\PasswordIncludesUpperCaseConstraintTests.cs" />
     <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraintTests.cs" />
     <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraintTests.cs" />

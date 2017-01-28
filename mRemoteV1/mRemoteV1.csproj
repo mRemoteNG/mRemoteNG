@@ -226,6 +226,7 @@
     <Compile Include="Security\PasswordCreation\IPasswordConstraint.cs" />
     <Compile Include="Security\KeyDerivation\IKeyDerivationFunction.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGenerator.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesSpecialCharactersConstraint.cs" />
     <Compile Include="Security\PasswordCreation\PasswordIncludesUpperCaseConstraint.cs" />
     <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraint.cs" />
     <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraint.cs" />
