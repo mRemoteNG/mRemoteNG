@@ -3821,6 +3821,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least {0} number(s).
+        /// </summary>
+        internal static string strPasswordContainsNumbersConstraint {
+            get {
+                return ResourceManager.GetString("strPasswordContainsNumbersConstraint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password length must be between {0} and {1}.
         /// </summary>
         internal static string strPasswordLengthConstraintHint {

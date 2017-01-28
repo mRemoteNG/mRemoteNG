@@ -226,6 +226,7 @@
     <Compile Include="Security\PasswordCreation\IPasswordConstraint.cs" />
     <Compile Include="Security\KeyDerivation\IKeyDerivationFunction.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGenerator.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraint.cs" />
     <Compile Include="Security\PasswordCreation\PasswordLengthConstraint.cs" />
     <Compile Include="Security\SymmetricEncryption\AeadCryptographyProvider.cs" />
     <Compile Include="Security\SymmetricEncryption\LegacyRijndaelCryptographyProvider.cs" />

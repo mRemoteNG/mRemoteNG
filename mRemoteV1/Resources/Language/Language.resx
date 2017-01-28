@@ -2463,6 +2463,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
     <value>Alert on Idle Disconnect</value>
   </data>
+  <data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>Password must contain at least {0} number(s)</value>
+  </data>
   <data name="strPasswordLengthConstraintHint" xml:space="preserve">
     <value>Password length must be between {0} and {1}</value>
   </data>
