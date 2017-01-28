@@ -2469,6 +2469,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
     <value>Password must contain at least {0} number(s)</value>
   </data>
+  <data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>Password must contain at least {0} upper case character(s)</value>
+  </data>
   <data name="strPasswordLengthConstraintHint" xml:space="preserve">
     <value>Password length must be between {0} and {1}</value>
   </data>
