@@ -102,6 +102,11 @@ namespace mRemoteNG.Connection
         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDPMinutesToIdleTimeout"),
         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RDPMinutesToIdleTimeout { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRDPAlertIdleTimeout"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDPAlertIdleTimeout"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))] public bool RDPAlertIdleTimeout { get; set; }
+
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameLoadBalanceInfo"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionLoadBalanceInfo"), 

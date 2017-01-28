@@ -406,7 +406,7 @@ namespace mRemoteNG.UI.Window
         private void ComponentsCheck_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
-            chkAlwaysShow.Checked = Convert.ToBoolean(Settings.Default.StartupComponentsCheck);
+            chkAlwaysShow.Checked = Settings.Default.StartupComponentsCheck;
             CheckComponents();
         }
 
@@ -470,7 +470,7 @@ namespace mRemoteNG.UI.Window
                         System.Windows.Forms.Application.DoEvents();
                     }
 
-                    if (!(new Version(Convert.ToString(rdpClient.Version)) >= ProtocolRDP.Versions.RDC80))
+                    if (!(new Version(rdpClient.Version) >= ProtocolRDP.Versions.RDC80))
                     {
                         throw new Exception(
                             $"Found RDC Client version {rdpClient.Version} but version {ProtocolRDP.Versions.RDC80} or higher is required.");
@@ -541,7 +541,7 @@ namespace mRemoteNG.UI.Window
             }
             else
             {
-                pPath = Convert.ToString(Settings.Default.CustomPuttyPath);
+                pPath = Settings.Default.CustomPuttyPath;
             }
 
             if (File.Exists(pPath))

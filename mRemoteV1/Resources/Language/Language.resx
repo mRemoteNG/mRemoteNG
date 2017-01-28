@@ -2457,4 +2457,10 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strFindMatchingCredentialFailed" xml:space="preserve">
     <value>Could not find a credential record with ID matching "{0}" for the connection record named "{1}".</value>
   </data>
+  <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Select whether to receive an alert after the RDP session disconnects due to inactivity</value>
+  </data>
+  <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Alert on Idle Disconnect</value>
+  </data>
 </root>

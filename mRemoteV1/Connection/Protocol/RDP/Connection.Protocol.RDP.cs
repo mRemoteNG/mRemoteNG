@@ -32,6 +32,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private ConnectionInfo _connectionInfo;
         private bool _loginComplete;
         private bool _redirectKeys;
+        private bool _alertOnIdleDisconnect;
         #endregion
 
         #region Properties
@@ -131,16 +132,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetCredentials();
                 SetResolution();
                 _rdpClient.FullScreenTitle = _connectionInfo.Name;
-                
-                // Set the timeout to the default (zero) if it is out of bounds.
-                if (_connectionInfo.RDPMinutesToIdleTimeout < 0 || _connectionInfo.RDPMinutesToIdleTimeout > 240)
-                {
-                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
-                }
-                else
-                {
-                    _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = _connectionInfo.RDPMinutesToIdleTimeout;
-                }
+
+                _alertOnIdleDisconnect = _connectionInfo.RDPAlertIdleTimeout;
+                _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = _connectionInfo.RDPMinutesToIdleTimeout;
 
                 //not user changeable
                 _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
@@ -439,7 +433,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_rdpClient.UserName = Convert.ToString(Settings.Default.DefaultUsername);
+						_rdpClient.UserName = Settings.Default.DefaultUsername;
 					}
 				}
 				else
@@ -454,7 +448,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						if (Settings.Default.DefaultPassword != "")
 						{
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
+                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
 						}
 					}
 				}
@@ -471,7 +465,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_rdpClient.Domain = Convert.ToString(Settings.Default.DefaultDomain);
+						_rdpClient.Domain = Settings.Default.DefaultDomain;
 					}
 				}
 				else
@@ -644,6 +638,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private void RDPEvent_OnIdleTimeoutNotification()
         {
             Close(); //Simply close the RDP Session if the idle timeout has been triggered.
+
+            if (_alertOnIdleDisconnect)
+            {
+                string message = "The " + _connectionInfo.Name + " session was disconnected due to inactivity";
+                const string caption = "Session Disconnected";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
 

@@ -728,7 +728,7 @@ namespace mRemoteNG.UI.Forms
 
             for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
 			{
-			    var tItem = new ToolStripMenuItem(Convert.ToString(Runtime.WindowList[i].Text),
+			    var tItem = new ToolStripMenuItem(Runtime.WindowList[i].Text,
 			        Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click) {Tag = Runtime.WindowList[i]};
 			    mMenViewConnectionPanels.DropDownItems.Add(tItem);
 			}

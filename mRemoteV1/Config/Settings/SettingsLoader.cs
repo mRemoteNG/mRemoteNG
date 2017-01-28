@@ -124,7 +124,7 @@ namespace mRemoteNG.Config.Settings
         private void SetAutoSave()
         {
             if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes <= 0) return;
-            MainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
+            MainForm.tmrAutoSave.Interval = mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000;
             MainForm.tmrAutoSave.Enabled = true;
         }
 
@@ -143,7 +143,7 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetPuttyPath()
         {
-            PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath) : GeneralAppInfo.PuttyPath;
+            PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
         }
 
         private static void EnsureSettingsAreSavedInNewestVersion()
@@ -193,14 +193,14 @@ namespace mRemoteNG.Config.Settings
 		
 		private void AddStaticPanels()
 		{
-			ToolStripPanelFromString(Convert.ToString(mRemoteNG.Settings.Default.QuickyTBParentDock)).Join(MainForm.tsQuickConnect, mRemoteNG.Settings.Default.QuickyTBLocation);
-			MainForm.tsQuickConnect.Visible = Convert.ToBoolean(mRemoteNG.Settings.Default.QuickyTBVisible);
+			ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock).Join(MainForm.tsQuickConnect, mRemoteNG.Settings.Default.QuickyTBLocation);
+			MainForm.tsQuickConnect.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
 		}
 		
 		private void AddDynamicPanels()
 		{
-			ToolStripPanelFromString(Convert.ToString(mRemoteNG.Settings.Default.ExtAppsTBParentDock)).Join(MainForm.tsExternalTools, mRemoteNG.Settings.Default.ExtAppsTBLocation);
-			MainForm.tsExternalTools.Visible = Convert.ToBoolean(mRemoteNG.Settings.Default.ExtAppsTBVisible);
+			ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock).Join(MainForm.tsExternalTools, mRemoteNG.Settings.Default.ExtAppsTBLocation);
+			MainForm.tsExternalTools.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
 		}
 		
 		private ToolStripPanel ToolStripPanelFromString(string Panel)

@@ -73,7 +73,7 @@ namespace mRemoteNG.Config.Settings
                 Runtime.ExternalTools.Add(extA);
             }
 
-            _MainForm.SwitchToolBarText(Convert.ToBoolean(mRemoteNG.Settings.Default.ExtAppsTBShowText));
+            _MainForm.SwitchToolBarText(mRemoteNG.Settings.Default.ExtAppsTBShowText);
 
             frmMain.Default.AddExternalToolsToToolBar();
         }

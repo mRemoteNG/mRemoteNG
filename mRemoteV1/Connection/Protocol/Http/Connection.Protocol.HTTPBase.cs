@@ -53,7 +53,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 					
 			try
 			{
-			    TabPage objTabPage = InterfaceControl.Parent as TabPage;
+			    var objTabPage = InterfaceControl.Parent as TabPage;
 			    if (objTabPage != null) tabTitle = objTabPage.Title;
 			}
 			catch (Exception)
@@ -67,7 +67,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 						
 				if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 				{
-				    GeckoWebBrowser GeckoBrowser = (GeckoWebBrowser) wBrowser;
+				    var GeckoBrowser = (GeckoWebBrowser) wBrowser;
                     if (GeckoBrowser != null)
                     {
                         GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
@@ -76,7 +76,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else
 				{
-                    WebBrowser objWebBrowser = (WebBrowser)wBrowser;
+                    var objWebBrowser = (WebBrowser)wBrowser;
                     //SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
 					objWebBrowser.ScrollBarsEnabled = true;
 
@@ -102,7 +102,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 		{
 			try
 			{
-				string strHost = Convert.ToString(InterfaceControl.Info.Hostname);
+				var strHost = InterfaceControl.Info.Hostname;
                 /* 
                  * Commenting out since this codes doesn't actually do anything at this time...
                  * Possibly related to MR-221 and/or MR-533 ????
@@ -169,11 +169,8 @@ namespace mRemoteNG.Connection.Protocol.Http
         #region Events
 		private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
 		{
-			WebBrowser objWebBrowser = wBrowser as WebBrowser;
-			if (objWebBrowser == null)
-			{
-				return;
-			}
+			var objWebBrowser = wBrowser as WebBrowser;
+			if (objWebBrowser == null) return;
 					
 			// This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
 			objWebBrowser.AllowWebBrowserDrop = false;
@@ -205,42 +202,40 @@ namespace mRemoteNG.Connection.Protocol.Http
 			{
 			    var tabP = InterfaceControl.Parent as TabPage;
 
-			    if (tabP != null)
-				{
-					string shortTitle;
+			    if (tabP == null) return;
+			    string shortTitle;
 							
-					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
-					{
-						if (((GeckoWebBrowser) wBrowser).DocumentTitle.Length >= 15)
-						{
-							shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
-						}
-						else
-						{
-							shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
-						}
-					}
-					else
-					{
-						if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
-						{
-							shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
-						}
-						else
-						{
-							shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
-						}
-					}
+			    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+			    {
+			        if (((GeckoWebBrowser) wBrowser).DocumentTitle.Length >= 15)
+			        {
+			            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
+			        }
+			        else
+			        {
+			            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
+			        }
+			    }
+			    else
+			    {
+			        if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
+			        {
+			            shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
+			        }
+			        else
+			        {
+			            shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
+			        }
+			    }
 							
-					if (!string.IsNullOrEmpty(tabTitle))
-					{
-						tabP.Title = tabTitle + @" - " + shortTitle;
-					}
-					else
-					{
-						tabP.Title = shortTitle;
-					}
-				}
+			    if (!string.IsNullOrEmpty(tabTitle))
+			    {
+			        tabP.Title = tabTitle + @" - " + shortTitle;
+			    }
+			    else
+			    {
+			        tabP.Title = shortTitle;
+			    }
 			}
 			catch (Exception ex)
 			{
@@ -255,41 +250,39 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 var tabP = InterfaceControl.Parent as TabPage;
 
-                if (tabP != null)
+                if (tabP == null) return;
+                string shortTitle;
+
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                 {
-                    string shortTitle;
-
-                    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                    if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
                     {
-                        if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                        {
-                            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                        }
-                        else
-                        {
-                            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
-                        }
+                        shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
-                        {
-                            shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                        }
-                        else
-                        {
-                            shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
-                        }
+                        shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
                     }
-
-                    if (!string.IsNullOrEmpty(tabTitle))
+                }
+                else
+                {
+                    if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
                     {
-                        tabP.Title = tabTitle + @" - " + shortTitle;
+                        shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        tabP.Title = shortTitle;
+                        shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
                     }
+                }
+
+                if (!string.IsNullOrEmpty(tabTitle))
+                {
+                    tabP.Title = tabTitle + @" - " + shortTitle;
+                }
+                else
+                {
+                    tabP.Title = shortTitle;
                 }
             }
             catch (Exception ex)

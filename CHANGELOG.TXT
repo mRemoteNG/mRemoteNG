@@ -1,4 +1,4 @@
-1.75 Beta 4 (2017-01-XX):
+1.75 RC1 (2017-01-XX):
 
 Known Issue:
 ------------
@@ -8,11 +8,13 @@ Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versi
 Features/Enhancements:
 ----------------------
 Added Release Channels to the update check functionality allowing users to select one of 3 release channels for updates: Stable, Beta, Dev
-#360: Help -> About, Version # is now selectable/copyable 
+#360: Help -> About, Version # is now selectable/copyable
+#221: RDP: Optional disconnect after X number of minutes of inactivity
 
 
 Fixes:
 ------
+#369: Reset Layout Option Does Not Reset Notification Pane
 #362: Invalid cast exception when using the Notification Area Icon minimize/restore
 #334: Quick Connect displays warning when clicking on a folder
 #325: When using a connection with an external app, results in opening the same external app continuously

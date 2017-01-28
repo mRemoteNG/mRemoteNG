@@ -175,22 +175,20 @@ namespace mRemoteNG.App
             try
             {
                 var tagEnumeration = (IEnumerable)((ToolStripMenuItem)sender).Tag;
-                if (tagEnumeration != null)
+                if (tagEnumeration == null) return;
+                foreach (var obj in tagEnumeration)
                 {
-                    foreach (var obj in tagEnumeration)
+                    var screen1 = obj as Screen;
+                    if (screen1 != null)
                     {
-                        var screen1 = obj as Screen;
-                        if (screen1 != null)
-                        {
-                            screen = screen1;
-                        }
-                        else if (obj is DockContent)
-                        {
-                            panel = (DockContent)obj;
-                        }
+                        screen = screen1;
                     }
-                    Screens.SendPanelToScreen(panel, screen);
+                    else if (obj is DockContent)
+                    {
+                        panel = (DockContent)obj;
+                    }
                 }
+                Screens.SendPanelToScreen(panel, screen);
             }
             catch (Exception ex)
             {
@@ -285,7 +283,7 @@ namespace mRemoteNG.App
                         connectionsLoader.ConnectionFileName = GetStartupConnectionFileName();
                     }
 
-                    CreateBackupFile(Convert.ToString(connectionsLoader.ConnectionFileName));
+                    CreateBackupFile(connectionsLoader.ConnectionFileName);
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
@@ -336,7 +334,7 @@ namespace mRemoteNG.App
                 if (ex is FileNotFoundException && !withDialog)
                 {
                     MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
-                    NewConnections(Convert.ToString(connectionsLoader.ConnectionFileName));
+                    NewConnections(connectionsLoader.ConnectionFileName);
                     return;
                 }
 
@@ -391,18 +389,12 @@ namespace mRemoteNG.App
             var fileName = GetFileName(baseName);
             var directoryName = GetDirectoryName(baseName);
 
-            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName))
-            {
-                return;
-            }
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName)) return;
 
             var searchPattern = string.Format(Settings.Default.BackupFileNameFormat, fileName, "*");
             var files = Directory.GetFiles(directoryName, searchPattern);
 
-            if (files.Length <= Settings.Default.BackupFileKeepCount)
-            {
-                return;
-            }
+            if (files.Length <= Settings.Default.BackupFileKeepCount) return;
 
             Array.Sort(files);
             Array.Resize(ref files, files.Length - Settings.Default.BackupFileKeepCount);
@@ -418,10 +410,8 @@ namespace mRemoteNG.App
             var newPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
 #if !PORTABLE
 			var oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + Application.ProductName + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
-			if (File.Exists(oldPath))
-			{
-				return oldPath;
-			}
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+			if (File.Exists(oldPath)) return oldPath;
 #endif
             return newPath;
         }
@@ -467,11 +457,11 @@ namespace mRemoteNG.App
                 if (Settings.Default.UseSQLServer)
                 {
                     connectionsSaver.SaveFormat = ConnectionsSaver.Format.SQL;
-                    connectionsSaver.SQLHost = Convert.ToString(Settings.Default.SQLHost);
-                    connectionsSaver.SQLDatabaseName = Convert.ToString(Settings.Default.SQLDatabaseName);
-                    connectionsSaver.SQLUsername = Convert.ToString(Settings.Default.SQLUser);
+                    connectionsSaver.SQLHost = Settings.Default.SQLHost;
+                    connectionsSaver.SQLDatabaseName = Settings.Default.SQLDatabaseName;
+                    connectionsSaver.SQLUsername = Settings.Default.SQLUser;
                     var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), EncryptionKey);
+                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Settings.Default.SQLPass, EncryptionKey);
                 }
 
                 connectionsSaver.SaveConnections();
@@ -510,8 +500,7 @@ namespace mRemoteNG.App
 
                     saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 
-                    if (saveFileDialog.ShowDialog(frmMain.Default) != DialogResult.OK)
-                        return;
+                    if (saveFileDialog.ShowDialog(frmMain.Default) != DialogResult.OK) return;
 
                     connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
                     connectionsSave.ConnectionFileName = saveFileDialog.FileName;
@@ -550,10 +539,7 @@ namespace mRemoteNG.App
             try
             {
                 var uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + connectionString);
-                if (string.IsNullOrEmpty(uri.Host))
-                {
-                    return null;
-                }
+                if (string.IsNullOrEmpty(uri.Host)) return null;
 
                 var newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
