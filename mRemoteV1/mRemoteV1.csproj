@@ -112,6 +112,8 @@
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
+    <Compile Include="App\Initialization\ConnectionIconLoader.cs" />
+    <Compile Include="App\Initialization\StartupDataLogger.cs" />
     <Compile Include="App\Logger.cs" />
     <Compile Include="App\NativeMethods.cs" />
     <Compile Include="App\Runtime.cs" />
