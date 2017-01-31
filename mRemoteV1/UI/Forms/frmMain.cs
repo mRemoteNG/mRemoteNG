@@ -209,27 +209,13 @@ namespace mRemoteNG.UI.Forms
             Runtime.MessageCollector = new MessageCollector(Windows.ErrorsForm);
             Runtime.WindowList = new WindowList();
 
-            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
-			{
-                Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
-			}
-
-            var upgradeMap = UpgradeUserFilesForCredentialManager();
-
-            LoadCredentials();
-            LoadDefaultConnectionCredentials();
-            Runtime.LoadConnections();
-
-            if (upgradeMap != null)
-                ApplyCredentialMapping(upgradeMap);
+            LoadCredsAndCons(_credentialManager);
 
             Windows.TreePanel.Focus();
 
             PuttySessionsManager.Instance.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
-			{
                 Windows.Show(WindowType.ComponentsCheck);
-			}
 
             Startup.Instance.CreateConnectionsProvider();
 			AddSysMenuItems();
@@ -1331,14 +1317,30 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
 
+        private void LoadCredsAndCons(CredentialManager credentialManager)
+        {
+            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
+                Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
+
+            var upgradeMap = UpgradeUserFilesForCredentialManager();
+
+            LoadCredentials(credentialManager);
+            credentialManager.CredentialsChanged += (o, args) => SaveCredentialList(credentialManager.GetCredentialRecords());
+            LoadDefaultConnectionCredentials();
+            Runtime.LoadConnections();
+
+            if (upgradeMap != null)
+                ApplyCredentialMapping(upgradeMap);
+        }
+
         private Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager()
         {
-            var fileProvider = new FileDataProvider(Runtime.GetStartupConnectionFileName());
-            var xdoc = XDocument.Parse(fileProvider.Load());
+            var connectionFileProvider = new FileDataProvider(Runtime.GetStartupConnectionFileName());
+            var xdoc = XDocument.Parse(connectionFileProvider.Load());
 
             if (double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value) >= 2.7) return null;
             EnsureConnectionXmlElementsHaveIds(xdoc);
-            fileProvider.Save($"{xdoc.Declaration}\n {xdoc}");
+            connectionFileProvider.Save($"{xdoc.Declaration}\n {xdoc}");
 
             var cryptoProvider = CryptographyProviderFactory.BuildFromXml(xdoc.Root);
             var encryptedValue = xdoc.Root?.Attribute("Protected")?.Value;
@@ -1360,11 +1362,10 @@ namespace mRemoteNG.UI.Forms
             adapter.EnsureElementsHaveIds(xdoc);
         }
 
-        private void LoadCredentials()
+        private void LoadCredentials(CredentialManager credentialManager)
         {
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
-            _credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<INotifyingCredentialRecord>());
-            _credentialManager.CredentialsChanged += (o, args) => SaveCredentialList(_credentialManager.GetCredentialRecords());
+            credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<INotifyingCredentialRecord>());
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
         }
 
