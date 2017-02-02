@@ -22,6 +22,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
+using mRemoteNG.Messages.MessagePrinters;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Themes;
@@ -194,7 +195,9 @@ namespace mRemoteNG.UI.Forms
 
         #region Startup & Shutdown
         private void frmMain_Load(object sender, EventArgs e)
-		{
+        {
+            SetupMessageCollector();
+
             // Create gui config load and save objects
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
@@ -206,8 +209,10 @@ namespace mRemoteNG.UI.Forms
 
 			fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
-            Runtime.MessageCollector = new MessageCollector(Windows.ErrorsForm);
             Runtime.WindowList = new WindowList();
+
+            if (Settings.Default.ShowNoMessageBoxes)
+                Runtime.MessagePrinters.Add(new ErrorAndInfoWindowMessagePrinter(Windows.ErrorsForm));
 
             if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
 			{
@@ -420,7 +425,7 @@ namespace mRemoteNG.UI.Forms
         #region Timer
 		private void tmrAutoSave_Tick(object sender, EventArgs e)
 		{
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Doing AutoSave", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Doing AutoSave");
 			Runtime.SaveConnectionsAsync();
 		}
         #endregion
@@ -1365,7 +1370,7 @@ namespace mRemoteNG.UI.Forms
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
             _credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<INotifyingCredentialRecord>());
             _credentialManager.CredentialsChanged += (o, args) => SaveCredentialList(_credentialManager.GetCredentialRecords());
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Loaded credentials from file: {_credentialFilePath}");
         }
 
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1389,7 +1394,7 @@ namespace mRemoteNG.UI.Forms
             var dataProvider = new FileDataProviderWithRollingBackup(_credentialFilePath);
             var credentialSaver = new CredentialRecordSaver(dataProvider, serializer);
             credentialSaver.Save(records, "tempEncryptionKey".ConvertToSecureString());
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Saved credentials to file: {_credentialFilePath}", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Saved credentials to file: {_credentialFilePath}");
         }
 
         private void LoadDefaultConnectionCredentials()
@@ -1408,6 +1413,34 @@ namespace mRemoteNG.UI.Forms
                 if (map.ContainsKey(id))
                     connectionInfo.CredentialRecord = map[id];
             }
+        }
+
+        private void SetupMessageCollector()
+        {
+            var messageCollector = new MessageCollector2();
+            var messagePrinters = new List<IMessagePrinter>
+            {
+                new DebugMessagePrinter(),
+                new TextLogMessagePrinter(Logger.Instance)
+                {
+                    PrintInfoMessages = Settings.Default.WriteLogFile,
+                    PrintDebugMessages = Settings.Default.WriteLogFile,
+                    PrintWarningMessages = Settings.Default.WriteLogFile
+                }
+            };
+
+            if (!Settings.Default.ShowNoMessageBoxes)
+                messagePrinters.Add(new PopupMessagePrinter());
+
+            messageCollector.CollectionChanged += (o, args) =>
+            {
+                var messages = args.NewItems.Cast<IMessage>().ToArray();
+                foreach (var printer in messagePrinters)
+                    printer.Print(messages);
+            };
+
+            Runtime.MessageCollector = messageCollector;
+            Runtime.MessagePrinters = messagePrinters;
         }
     }
 }

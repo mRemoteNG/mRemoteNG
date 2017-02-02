@@ -24,7 +24,7 @@ namespace mRemoteNG.Messages
         #region Public Methods
         public void AddMessage(MessageClass msgClass, string msgText, bool onlyLog = false)
         {
-            var nMsg = new Message(msgClass, msgText, DateTime.Now);
+            var nMsg = new Message(msgClass, msgText, DateTime.Now, onlyLog);
 
             if (nMsg.Class == MessageClass.DebugMsg)
             {

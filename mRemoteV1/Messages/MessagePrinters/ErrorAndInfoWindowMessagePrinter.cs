@@ -12,6 +12,11 @@ namespace mRemoteNG.Messages.MessagePrinters
         private readonly ErrorAndInfoWindow _messageWindow;
         private Timer _ecTimer;
 
+        public bool PrintDebugMessages { get; set; } = true;
+        public bool PrintInfoMessages { get; set; } = true;
+        public bool PrintWarningMessages { get; set; } = true;
+        public bool PrintErrorMessages { get; set; } = true;
+
         public ErrorAndInfoWindowMessagePrinter(ErrorAndInfoWindow messageWindow)
         {
             if (messageWindow == null)
@@ -23,8 +28,10 @@ namespace mRemoteNG.Messages.MessagePrinters
 
         public void Print(IMessage message)
         {
-            _ecTimer.Enabled = true;
+            if (!WeShouldPrint(message.Class))
+                return;
 
+            _ecTimer.Enabled = true;
             var lvItem = BuildListViewItem(message);
             AddToList(lvItem);
         }
@@ -35,13 +42,33 @@ namespace mRemoteNG.Messages.MessagePrinters
                 Print(message);
         }
 
+        private bool WeShouldPrint(MessageClass msgClass)
+        {
+            switch (msgClass)
+            {
+                case MessageClass.InformationMsg:
+                    if (PrintInfoMessages) return true;
+                    break;
+                case MessageClass.WarningMsg:
+                    if (PrintWarningMessages) return true;
+                    break;
+                case MessageClass.ErrorMsg:
+                    if (PrintErrorMessages) return true;
+                    break;
+                case MessageClass.DebugMsg:
+                    if (PrintDebugMessages) return true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(msgClass), msgClass, null);
+            }
+            return false;
+        }
+
         private static ListViewItem BuildListViewItem(IMessage nMsg)
         {
             var lvItem = new ListViewItem
             {
-                ImageIndex = Convert.ToInt32(nMsg.Class),
-                Text = nMsg.Text.Replace(Environment.NewLine, "  "),
-                Tag = nMsg
+                ImageIndex = Convert.ToInt32(nMsg.Class), Text = nMsg.Text.Replace(Environment.NewLine, "  "), Tag = nMsg
             };
             return lvItem;
         }
@@ -50,8 +77,7 @@ namespace mRemoteNG.Messages.MessagePrinters
         {
             _ecTimer = new Timer
             {
-                Enabled = false,
-                Interval = 300
+                Enabled = false, Interval = 300
             };
             _ecTimer.Tick += SwitchTimerTick;
         }
@@ -64,7 +90,7 @@ namespace mRemoteNG.Messages.MessagePrinters
 
         private void SwitchToMessage()
         {
-            _messageWindow.PreviousActiveForm = (DockContent)frmMain.Default.pnlDock.ActiveContent;
+            _messageWindow.PreviousActiveForm = (DockContent) frmMain.Default.pnlDock.ActiveContent;
             ShowMcForm();
             _messageWindow.lvErrorCollector.Focus();
             _messageWindow.lvErrorCollector.SelectedItems.Clear();
@@ -75,7 +101,7 @@ namespace mRemoteNG.Messages.MessagePrinters
         private void ShowMcForm()
         {
             if (frmMain.Default.pnlDock.InvokeRequired)
-                frmMain.Default.pnlDock.Invoke((MethodInvoker)ShowMcForm);
+                frmMain.Default.pnlDock.Invoke((MethodInvoker) ShowMcForm);
             else
                 _messageWindow.Show(frmMain.Default.pnlDock);
         }
@@ -83,7 +109,7 @@ namespace mRemoteNG.Messages.MessagePrinters
         private void AddToList(ListViewItem lvItem)
         {
             if (_messageWindow.lvErrorCollector.InvokeRequired)
-                _messageWindow.lvErrorCollector.Invoke((MethodInvoker)(() => AddToList(lvItem)));
+                _messageWindow.lvErrorCollector.Invoke((MethodInvoker) (() => AddToList(lvItem)));
             else
                 _messageWindow.lvErrorCollector.Items.Insert(0, lvItem);
         }

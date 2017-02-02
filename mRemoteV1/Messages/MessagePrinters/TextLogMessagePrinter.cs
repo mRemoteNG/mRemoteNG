@@ -23,23 +23,22 @@ namespace mRemoteNG.Messages.MessagePrinters
 
         public void Print(IMessage message)
         {
+            if (!WeShouldPrint(message.Class))
+                return;
+
             switch (message.Class)
             {
                 case MessageClass.InformationMsg:
-                    if (PrintInfoMessages)
-                        _logger.Info(message.Text);
+                    _logger.Info(message.Text);
                     break;
                 case MessageClass.DebugMsg:
-                    if (PrintDebugMessages)
-                        _logger.Debug(message.Text);
+                    _logger.Debug(message.Text);
                     break;
                 case MessageClass.WarningMsg:
-                    if (PrintWarningMessages)
-                        _logger.Warn(message.Text);
+                    _logger.Warn(message.Text);
                     break;
                 case MessageClass.ErrorMsg:
-                    if (PrintErrorMessages)
-                        _logger.Error(message.Text);
+                    _logger.Error(message.Text);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -50,6 +49,28 @@ namespace mRemoteNG.Messages.MessagePrinters
         {
             foreach (var message in messages)
                 Print(message);
+        }
+
+        private bool WeShouldPrint(MessageClass msgClass)
+        {
+            switch (msgClass)
+            {
+                case MessageClass.InformationMsg:
+                    if (PrintInfoMessages) return true;
+                    break;
+                case MessageClass.WarningMsg:
+                    if (PrintWarningMessages) return true;
+                    break;
+                case MessageClass.ErrorMsg:
+                    if (PrintErrorMessages) return true;
+                    break;
+                case MessageClass.DebugMsg:
+                    if (PrintDebugMessages) return true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(msgClass), msgClass, null);
+            }
+            return false;
         }
     }
 }

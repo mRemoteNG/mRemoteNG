@@ -9,5 +9,7 @@ namespace mRemoteNG.Messages
         string Text { get; set; }
 
         DateTime Date { get; set; }
+
+        bool OnlyLog { get; set; }
     }
 }

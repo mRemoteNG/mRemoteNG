@@ -18,9 +18,9 @@ namespace mRemoteNG.Messages
             ((INotifyCollectionChanged) _messageList).CollectionChanged += RaiseCollectionChangedEvent;
         }
 
-        public void AddMessage(MessageClass messageClass, string messageText)
+        public void AddMessage(MessageClass messageClass, string messageText, bool quiet = true)
         {
-            var message = new Message(messageClass, messageText, DateTime.Now);
+            var message = new Message(messageClass, messageText, DateTime.Now, quiet);
             AddMessage(message);
         }
 
@@ -28,6 +28,16 @@ namespace mRemoteNG.Messages
         {
             if (_messageList.Contains(message)) return;
             _messageList.Add(message);
+        }
+
+        public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
+        {
+            AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex));
+        }
+
+        public void AddExceptionStackTrace(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg)
+        {
+            AddMessage(msgClass, message + Environment.NewLine + ex.StackTrace);
         }
 
         public void ClearMessages()

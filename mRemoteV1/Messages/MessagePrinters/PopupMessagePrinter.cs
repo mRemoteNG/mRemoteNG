@@ -6,8 +6,16 @@ namespace mRemoteNG.Messages.MessagePrinters
 {
     public class PopupMessagePrinter : IMessagePrinter
     {
+        public bool PrintDebugMessages { get; set; } = true;
+        public bool PrintInfoMessages { get; set; } = true;
+        public bool PrintWarningMessages { get; set; } = true;
+        public bool PrintErrorMessages { get; set; } = true;
+
         public void Print(IMessage message)
         {
+            if (!WeShouldPrint(message.Class))
+                return;
+
             switch (message.Class)
             {
                 case MessageClass.DebugMsg:
@@ -25,6 +33,28 @@ namespace mRemoteNG.Messages.MessagePrinters
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private bool WeShouldPrint(MessageClass msgClass)
+        {
+            switch (msgClass)
+            {
+                case MessageClass.InformationMsg:
+                    if (PrintInfoMessages) return true;
+                    break;
+                case MessageClass.WarningMsg:
+                    if (PrintWarningMessages) return true;
+                    break;
+                case MessageClass.ErrorMsg:
+                    if (PrintErrorMessages) return true;
+                    break;
+                case MessageClass.DebugMsg:
+                    if (PrintDebugMessages) return true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(msgClass), msgClass, null);
+            }
+            return false;
         }
 
         public void Print(IEnumerable<IMessage> messages)
