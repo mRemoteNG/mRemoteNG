@@ -217,6 +217,7 @@
     <Compile Include="Credential\ICredentialList.cs" />
     <Compile Include="Credential\INotifyingCredentialRecord.cs" />
     <Compile Include="Messages\IMessage.cs" />
+    <Compile Include="Messages\MessagePrinters\IMessagePrinter.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticator.cs" />
     <Compile Include="Security\BlockCipherEngines.cs" />
