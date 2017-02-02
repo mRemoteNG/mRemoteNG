@@ -5,11 +5,11 @@ namespace mRemoteNG.Messages
 {
 	public class Message : IMessage
 	{
-	    public MessageClass MsgClass { get; set; }
+	    public MessageClass Class { get; set; }
 
-	    public string MsgText { get; set; }
+	    public string Text { get; set; }
 
-	    public DateTime MsgDate { get; set; }
+	    public DateTime Date { get; set; }
 
 
 	    public Message()
@@ -19,9 +19,9 @@ namespace mRemoteNG.Messages
 
         public Message(MessageClass messageClass, string messageText, DateTime messageDate)
         {
-            MsgClass = messageClass;
-            MsgText = messageText;
-            MsgDate = messageDate;
+            Class = messageClass;
+            Text = messageText;
+            Date = messageDate;
         }
 	}
 }

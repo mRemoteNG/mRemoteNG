@@ -4,10 +4,10 @@ namespace mRemoteNG.Messages
 {
     public interface IMessage
     {
-        MessageClass MsgClass { get; set; }
+        MessageClass Class { get; set; }
 
-        string MsgText { get; set; }
+        string Text { get; set; }
 
-        DateTime MsgDate { get; set; }
+        DateTime Date { get; set; }
     }
 }

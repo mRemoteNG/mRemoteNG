@@ -348,7 +348,7 @@ namespace mRemoteNG.UI.Window
 						
 				ListViewItem sItem = this.lvErrorCollector.SelectedItems[0];
                 Messages.Message eMsg = (Messages.Message)sItem.Tag;
-				switch (eMsg.MsgClass)
+				switch (eMsg.Class)
 				{
 					case Messages.MessageClass.InformationMsg:
 						this.pbError.Image = Resources.Information;
@@ -367,8 +367,8 @@ namespace mRemoteNG.UI.Window
 						break;
 				}
 						
-				this.lblMsgDate.Text = eMsg.MsgDate.ToString();
-				this.txtMsgText.Text = eMsg.MsgText;
+				this.lblMsgDate.Text = eMsg.Date.ToString();
+				this.txtMsgText.Text = eMsg.Text;
 			}
 			catch (Exception ex)
 			{
@@ -434,9 +434,9 @@ namespace mRemoteNG.UI.Window
 						continue;
 					}
 							
-					stringBuilder.AppendLine(message.MsgClass.ToString());
-					stringBuilder.AppendLine(message.MsgDate.ToString());
-					stringBuilder.AppendLine(message.MsgText);
+					stringBuilder.AppendLine(message.Class.ToString());
+					stringBuilder.AppendLine(message.Date.ToString());
+					stringBuilder.AppendLine(message.Text);
 					stringBuilder.AppendLine("----------");
 				}
 						

@@ -26,7 +26,7 @@ namespace mRemoteNG.Messages
         {
             var nMsg = new Message(msgClass, msgText, DateTime.Now);
 
-            if (nMsg.MsgClass == MessageClass.ReportMsg)
+            if (nMsg.Class == MessageClass.ReportMsg)
             {
                 AddReportMessage(nMsg);
                 return;
@@ -34,7 +34,7 @@ namespace mRemoteNG.Messages
 
             var enableTimer = true; // used to control if we SWITCH to the notifiation panel. Message will still be added regardless.
 
-            if (nMsg.MsgClass == MessageClass.InformationMsg)
+            if (nMsg.Class == MessageClass.InformationMsg)
             {
                 AddInfoMessage(nMsg);
 
@@ -42,7 +42,7 @@ namespace mRemoteNG.Messages
                     enableTimer = false;
             }
 
-            if (nMsg.MsgClass == MessageClass.WarningMsg)
+            if (nMsg.Class == MessageClass.WarningMsg)
             {
                 AddWarningMessage(nMsg);
 
@@ -50,7 +50,7 @@ namespace mRemoteNG.Messages
                     enableTimer = false;
             }
 
-            if (nMsg.MsgClass == MessageClass.ErrorMsg)
+            if (nMsg.Class == MessageClass.ErrorMsg)
             {
                 AddErrorMessage(nMsg);
 
@@ -80,37 +80,37 @@ namespace mRemoteNG.Messages
 
         private static void AddInfoMessage(IMessage nMsg)
         {
-            Debug.Print("Info: " + nMsg.MsgText);
+            Debug.Print("Info: " + nMsg.Text);
             if (Settings.Default.WriteLogFile)
-                Logger.Instance.Info(nMsg.MsgText);
+                Logger.Instance.Info(nMsg.Text);
         }
 
         private static void AddWarningMessage(IMessage nMsg)
         {
-            Debug.Print("Warning: " + nMsg.MsgText);
+            Debug.Print("Warning: " + nMsg.Text);
             if (Settings.Default.WriteLogFile)
-                Logger.Instance.Warn(nMsg.MsgText);
+                Logger.Instance.Warn(nMsg.Text);
         }
 
         private static void AddErrorMessage(IMessage nMsg)
         {
-            Debug.Print("Error: " + nMsg.MsgText);
-            Logger.Instance.Error(nMsg.MsgText);
+            Debug.Print("Error: " + nMsg.Text);
+            Logger.Instance.Error(nMsg.Text);
         }
 
         private static void AddReportMessage(IMessage nMsg)
         {
-            Debug.Print("Report: " + nMsg.MsgText);
+            Debug.Print("Report: " + nMsg.Text);
             if (Settings.Default.WriteLogFile)
-                Logger.Instance.Info(nMsg.MsgText);
+                Logger.Instance.Info(nMsg.Text);
         }
 
         private static ListViewItem BuildListViewItem(IMessage nMsg)
         {
             var lvItem = new ListViewItem
             {
-                ImageIndex = Convert.ToInt32(nMsg.MsgClass),
-                Text = nMsg.MsgText.Replace(Environment.NewLine, "  "),
+                ImageIndex = Convert.ToInt32(nMsg.Class),
+                Text = nMsg.Text.Replace(Environment.NewLine, "  "),
                 Tag = nMsg
             };
             return lvItem;
@@ -156,16 +156,16 @@ namespace mRemoteNG.Messages
 
         private static void ShowMessageBox(IMessage msg)
         {
-            switch (msg.MsgClass)
+            switch (msg.Class)
             {
                 case MessageClass.InformationMsg:
-                    MessageBox.Show(msg.MsgText, string.Format(Language.strTitleInformation, msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(msg.Text, string.Format(Language.strTitleInformation, msg.Date), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case MessageClass.WarningMsg:
-                    MessageBox.Show(msg.MsgText, string.Format(Language.strTitleWarning, msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(msg.Text, string.Format(Language.strTitleWarning, msg.Date), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 case MessageClass.ErrorMsg:
-                    MessageBox.Show(msg.MsgText, string.Format(Language.strTitleError, msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(msg.Text, string.Format(Language.strTitleError, msg.Date), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }
