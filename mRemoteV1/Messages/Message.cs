@@ -3,7 +3,7 @@ using System;
 
 namespace mRemoteNG.Messages
 {
-	public class Message
+	public class Message : IMessage
 	{
 	    public MessageClass MsgClass { get; set; }
 

@@ -78,34 +78,34 @@ namespace mRemoteNG.Messages
             AddToList(lvItem);
         }
 
-        private static void AddInfoMessage(Message nMsg)
+        private static void AddInfoMessage(IMessage nMsg)
         {
             Debug.Print("Info: " + nMsg.MsgText);
             if (Settings.Default.WriteLogFile)
                 Logger.Instance.Info(nMsg.MsgText);
         }
 
-        private static void AddWarningMessage(Message nMsg)
+        private static void AddWarningMessage(IMessage nMsg)
         {
             Debug.Print("Warning: " + nMsg.MsgText);
             if (Settings.Default.WriteLogFile)
                 Logger.Instance.Warn(nMsg.MsgText);
         }
 
-        private static void AddErrorMessage(Message nMsg)
+        private static void AddErrorMessage(IMessage nMsg)
         {
             Debug.Print("Error: " + nMsg.MsgText);
             Logger.Instance.Error(nMsg.MsgText);
         }
 
-        private static void AddReportMessage(Message nMsg)
+        private static void AddReportMessage(IMessage nMsg)
         {
             Debug.Print("Report: " + nMsg.MsgText);
             if (Settings.Default.WriteLogFile)
                 Logger.Instance.Info(nMsg.MsgText);
         }
 
-        private static ListViewItem BuildListViewItem(Message nMsg)
+        private static ListViewItem BuildListViewItem(IMessage nMsg)
         {
             var lvItem = new ListViewItem
             {
@@ -154,7 +154,7 @@ namespace mRemoteNG.Messages
             McForm.lvErrorCollector.FocusedItem = McForm.lvErrorCollector.Items[0];
         }
 
-        private static void ShowMessageBox(Message msg)
+        private static void ShowMessageBox(IMessage msg)
         {
             switch (msg.MsgClass)
             {
