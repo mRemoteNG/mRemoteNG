@@ -222,6 +222,7 @@
     <Compile Include="Messages\MessagePrinters\IMessagePrinter.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Messages\MessageCollector2.cs" />
+    <Compile Include="Messages\MessagePrinters\PopupMessagePrinter.cs" />
     <Compile Include="Messages\MessagePrinters\TextLogMessagePrinter.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticator.cs" />
     <Compile Include="Security\BlockCipherEngines.cs" />
