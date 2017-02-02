@@ -8,7 +8,7 @@ namespace mRemoteNG.Messages.MessagePrinters
     {
         private readonly ILog _logger;
 
-        public bool PrintReportMessages { get; set; } = true;
+        public bool PrintDebugMessages { get; set; } = true;
         public bool PrintInfoMessages { get; set; } = true;
         public bool PrintWarningMessages { get; set; } = true;
         public bool PrintErrorMessages { get; set; } = true;
@@ -29,9 +29,9 @@ namespace mRemoteNG.Messages.MessagePrinters
                     if (PrintInfoMessages)
                         _logger.Info(message.Text);
                     break;
-                case MessageClass.ReportMsg:
-                    if (PrintReportMessages)
-                        _logger.Info(message.Text);
+                case MessageClass.DebugMsg:
+                    if (PrintDebugMessages)
+                        _logger.Debug(message.Text);
                     break;
                 case MessageClass.WarningMsg:
                     if (PrintWarningMessages)

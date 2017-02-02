@@ -10,7 +10,7 @@ namespace mRemoteNG.Messages.MessagePrinters
         {
             switch (message.Class)
             {
-                case MessageClass.ReportMsg:
+                case MessageClass.DebugMsg:
                     MessageBox.Show(message.Text, string.Format(Language.strTitleInformation, message.Date), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case MessageClass.InformationMsg:

@@ -5,6 +5,6 @@
         InformationMsg = 0,
         WarningMsg = 1,
         ErrorMsg = 2,
-        ReportMsg = 3
+        DebugMsg = 3
     }
 }

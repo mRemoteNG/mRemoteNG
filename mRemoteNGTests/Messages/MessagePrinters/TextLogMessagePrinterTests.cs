@@ -39,12 +39,12 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         }
 
         [Test]
-        public void ReportMessagesPassedToLog4Net()
+        public void DebugMessagesPassedToLog4Net()
         {
             var message = Substitute.For<IMessage>();
-            message.Class.Returns(MessageClass.ReportMsg);
+            message.Class.Returns(MessageClass.DebugMsg);
             _messagePrinter.Print(message);
-            _log4NetLogger.ReceivedWithAnyArgs(1).Info("");
+            _log4NetLogger.ReceivedWithAnyArgs(1).Debug("");
         }
 
         [Test]
@@ -76,13 +76,13 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         }
 
         [Test]
-        public void ReportMessagesNotPassedToLog4NetIfTurnedOff()
+        public void DebugMessagesNotPassedToLog4NetIfTurnedOff()
         {
             var message = Substitute.For<IMessage>();
-            message.Class.Returns(MessageClass.ReportMsg);
-            _messagePrinter.PrintReportMessages = false;
+            message.Class.Returns(MessageClass.DebugMsg);
+            _messagePrinter.PrintDebugMessages = false;
             _messagePrinter.Print(message);
-            _log4NetLogger.DidNotReceiveWithAnyArgs().Info("");
+            _log4NetLogger.DidNotReceiveWithAnyArgs().Debug("");
         }
 
         [Test]

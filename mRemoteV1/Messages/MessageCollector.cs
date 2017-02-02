@@ -26,9 +26,9 @@ namespace mRemoteNG.Messages
         {
             var nMsg = new Message(msgClass, msgText, DateTime.Now);
 
-            if (nMsg.Class == MessageClass.ReportMsg)
+            if (nMsg.Class == MessageClass.DebugMsg)
             {
-                AddReportMessage(nMsg);
+                AddDebugMessage(nMsg);
                 return;
             }
 
@@ -98,11 +98,11 @@ namespace mRemoteNG.Messages
             Logger.Instance.Error(nMsg.Text);
         }
 
-        private static void AddReportMessage(IMessage nMsg)
+        private static void AddDebugMessage(IMessage nMsg)
         {
-            Debug.Print("Report: " + nMsg.Text);
+            Debug.Print("Debug: " + nMsg.Text);
             if (Settings.Default.WriteLogFile)
-                Logger.Instance.Info(nMsg.Text);
+                Logger.Instance.Debug(nMsg.Text);
         }
 
         private static ListViewItem BuildListViewItem(IMessage nMsg)
