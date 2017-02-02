@@ -138,6 +138,7 @@
     <Compile Include="Credential\CredentialListBaseTests.cs" />
     <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
     <Compile Include="Messages\MessageCollectorTests.cs" />
+    <Compile Include="Messages\MessagePrinters\TextLogMessagePrinterTests.cs" />
     <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
