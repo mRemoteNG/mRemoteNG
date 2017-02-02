@@ -3821,6 +3821,51 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least {0} of the following characters: {1}.
+        /// </summary>
+        internal static string strPasswordConstainsSpecialCharactersConstraintHint {
+            get {
+                return ResourceManager.GetString("strPasswordConstainsSpecialCharactersConstraintHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least {0} lower case character(s).
+        /// </summary>
+        internal static string strPasswordContainsLowerCaseConstraintHint {
+            get {
+                return ResourceManager.GetString("strPasswordContainsLowerCaseConstraintHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least {0} number(s).
+        /// </summary>
+        internal static string strPasswordContainsNumbersConstraint {
+            get {
+                return ResourceManager.GetString("strPasswordContainsNumbersConstraint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least {0} upper case character(s).
+        /// </summary>
+        internal static string strPasswordContainsUpperCaseConstraintHint {
+            get {
+                return ResourceManager.GetString("strPasswordContainsUpperCaseConstraintHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password length must be between {0} and {1}.
+        /// </summary>
+        internal static string strPasswordLengthConstraintHint {
+            get {
+                return ResourceManager.GetString("strPasswordLengthConstraintHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password protect.
         /// </summary>
         internal static string strPasswordProtect {

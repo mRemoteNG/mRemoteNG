@@ -223,8 +223,14 @@
     <Compile Include="Security\EncryptedSecureString.cs" />
     <Compile Include="Security\Authentication\IAuthenticator.cs" />
     <Compile Include="Security\EncryptionException.cs" />
+    <Compile Include="Security\PasswordCreation\IPasswordConstraint.cs" />
     <Compile Include="Security\KeyDerivation\IKeyDerivationFunction.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGenerator.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesSpecialCharactersConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesUpperCaseConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordLengthConstraint.cs" />
     <Compile Include="Security\SymmetricEncryption\AeadCryptographyProvider.cs" />
     <Compile Include="Security\SymmetricEncryption\LegacyRijndaelCryptographyProvider.cs" />
     <Compile Include="Security\ICryptographyProvider.cs" />

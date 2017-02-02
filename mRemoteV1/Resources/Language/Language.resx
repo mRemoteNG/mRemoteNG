@@ -2463,4 +2463,19 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
     <value>Alert on Idle Disconnect</value>
   </data>
+  <data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+    <value>Password must contain at least {0} of the following characters: {1}</value>
+  </data>
+  <data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+    <value>Password must contain at least {0} lower case character(s)</value>
+  </data>
+  <data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>Password must contain at least {0} number(s)</value>
+  </data>
+  <data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>Password must contain at least {0} upper case character(s)</value>
+  </data>
+  <data name="strPasswordLengthConstraintHint" xml:space="preserve">
+    <value>Password length must be between {0} and {1}</value>
+  </data>
 </root>
