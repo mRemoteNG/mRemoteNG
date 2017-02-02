@@ -526,6 +526,9 @@
     <Compile Include="UI\Forms\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Window\ErrorAndInfoWindow.Designer.cs">
+      <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window\ExternalToolsWindow.Designer.cs">
       <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
     </Compile>
