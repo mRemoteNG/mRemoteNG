@@ -7,12 +7,12 @@ namespace mRemoteNGTests.Messages
 {
     public class MessageCollectorTests
     {
-        private MessageCollector2 _messageCollector;
+        private MessageCollector _messageCollector;
 
         [SetUp]
         public void Setup()
         {
-            _messageCollector = new MessageCollector2();
+            _messageCollector = new MessageCollector();
         }
 
         [Test]

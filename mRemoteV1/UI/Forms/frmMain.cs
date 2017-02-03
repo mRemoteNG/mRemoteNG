@@ -200,7 +200,7 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            var settingsLoader = new SettingsLoader(this, new MessageCollector2());
+            var settingsLoader = new SettingsLoader(this, new MessageCollector());
             settingsLoader.LoadSettings();
 
             var uiLoader = new LayoutSettingsLoader(this, messageCollector);

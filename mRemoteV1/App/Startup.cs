@@ -35,7 +35,7 @@ namespace mRemoteNG.App
         {
         }
 
-        public void InitializeProgram(MessageCollector2 messageCollector)
+        public void InitializeProgram(MessageCollector messageCollector)
         {
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
             var startupLogger = new StartupDataLogger(messageCollector);

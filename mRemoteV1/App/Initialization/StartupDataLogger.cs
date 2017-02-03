@@ -8,9 +8,9 @@ namespace mRemoteNG.App.Initialization
 {
     public class StartupDataLogger
     {
-        private readonly MessageCollector2 _messageCollector;
+        private readonly MessageCollector _messageCollector;
 
-        public StartupDataLogger(MessageCollector2 messageCollector)
+        public StartupDataLogger(MessageCollector messageCollector)
         {
             if (messageCollector == null)
                 throw new ArgumentNullException(nameof(messageCollector));

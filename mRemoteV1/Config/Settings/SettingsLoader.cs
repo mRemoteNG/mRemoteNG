@@ -18,12 +18,12 @@ namespace mRemoteNG.Config.Settings
     public class SettingsLoader
 	{
         private readonly ExternalAppsLoader _externalAppsLoader;
-        private readonly MessageCollector2 _messageCollector;
+        private readonly MessageCollector _messageCollector;
 
 	    private frmMain MainForm { get; }
 
 
-	    public SettingsLoader(frmMain mainForm, MessageCollector2 messageCollector)
+	    public SettingsLoader(frmMain mainForm, MessageCollector messageCollector)
 		{
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));

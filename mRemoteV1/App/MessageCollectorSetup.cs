@@ -7,7 +7,7 @@ namespace mRemoteNG.App
 {
     public class MessageCollectorSetup
     {
-        public static void SetupMessageCollector(MessageCollector2 messageCollector, IList<IMessageWriter> messageWriterList)
+        public static void SetupMessageCollector(MessageCollector messageCollector, IList<IMessageWriter> messageWriterList)
         {
             messageCollector.CollectionChanged += (o, args) =>
             {

@@ -6,13 +6,13 @@ using System.Collections.Specialized;
 
 namespace mRemoteNG.Messages
 {
-    public class MessageCollector2 : INotifyCollectionChanged
+    public class MessageCollector : INotifyCollectionChanged
     {
         private readonly IList<IMessage> _messageList;
 
         public IEnumerable<IMessage> Messages => _messageList;
 
-        public MessageCollector2()
+        public MessageCollector()
         {
             _messageList = new ObservableCollection<IMessage>();
             ((INotifyCollectionChanged) _messageList).CollectionChanged += RaiseCollectionChangedEvent;

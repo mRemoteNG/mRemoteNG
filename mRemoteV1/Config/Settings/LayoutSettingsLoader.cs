@@ -12,9 +12,9 @@ namespace mRemoteNG.Config.Settings
     public class LayoutSettingsLoader
     {
         private readonly frmMain _mainForm;
-        private readonly MessageCollector2 _messageCollector;
+        private readonly MessageCollector _messageCollector;
 
-        public LayoutSettingsLoader(frmMain mainForm, MessageCollector2 messageCollector)
+        public LayoutSettingsLoader(frmMain mainForm, MessageCollector messageCollector)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
