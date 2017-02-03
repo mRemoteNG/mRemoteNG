@@ -1414,15 +1414,15 @@ namespace mRemoteNG.UI.Forms
         private void SetupMessageCollector()
         {
             Runtime.MessageCollector = new MessageCollector2();
-            Runtime.MessagePrinters.Add(BuildDebugConsoleMessageWriter());
-            Runtime.MessagePrinters.Add(BuildTextLogMessageWriter());
-            Runtime.MessagePrinters.Add(BuildNotificationPanelMessageWriter());
-            Runtime.MessagePrinters.Add(BuildPopupMessageWriter());
+            Runtime.MessageWriters.Add(BuildDebugConsoleMessageWriter());
+            Runtime.MessageWriters.Add(BuildTextLogMessageWriter());
+            Runtime.MessageWriters.Add(BuildNotificationPanelMessageWriter());
+            Runtime.MessageWriters.Add(BuildPopupMessageWriter());
 
             Runtime.MessageCollector.CollectionChanged += (o, args) =>
             {
                 var messages = args.NewItems.Cast<IMessage>().ToArray();
-                foreach (var printer in Runtime.MessagePrinters)
+                foreach (var printer in Runtime.MessageWriters)
                     printer.Print(messages);
             };
         }
