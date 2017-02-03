@@ -4,8 +4,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Management;
-using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -40,7 +38,7 @@ namespace mRemoteNG.App
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
             var startupLogger = new StartupDataLogger(messageCollector);
             startupLogger.LogStartupData();
-            CompatibilityChecker.CheckCompatibility();
+            CompatibilityChecker.CheckCompatibility(messageCollector);
             ParseCommandLineArgs();
             IeBrowserEmulation.Register();
             GetConnectionIcons();

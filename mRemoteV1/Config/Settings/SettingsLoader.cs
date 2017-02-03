@@ -31,7 +31,7 @@ namespace mRemoteNG.Config.Settings
                 throw new ArgumentNullException(nameof(messageCollector));
 
             MainForm = mainForm;
-            _externalAppsLoader = new ExternalAppsLoader(MainForm);
+            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector);
 	        _messageCollector = messageCollector;
 		}
         
