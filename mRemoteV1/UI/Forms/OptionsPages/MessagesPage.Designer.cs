@@ -32,27 +32,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessagesPage));
             this.lblSwitchToErrorsAndInfos = new System.Windows.Forms.Label();
-            this.chkMCInformation = new System.Windows.Forms.CheckBox();
-            this.chkMCErrors = new System.Windows.Forms.CheckBox();
-            this.chkMCWarnings = new System.Windows.Forms.CheckBox();
+            this.chkSwitchToMCInformation = new System.Windows.Forms.CheckBox();
+            this.chkSwitchToMCErrors = new System.Windows.Forms.CheckBox();
+            this.chkSwitchToMCWarnings = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkMCDebug = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkShowErrorInMC = new System.Windows.Forms.CheckBox();
             this.chkShowWarningInMC = new System.Windows.Forms.CheckBox();
             this.chkShowInfoInMC = new System.Windows.Forms.CheckBox();
             this.chkShowDebugInMC = new System.Windows.Forms.CheckBox();
             this.groupBoxLogging = new System.Windows.Forms.GroupBox();
-            this.labelLogFilePath = new System.Windows.Forms.Label();
-            this.textBoxLogPath = new System.Windows.Forms.TextBox();
-            this.saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
-            this.labelLogTheseMsgTypes = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.buttonOpenLogFile = new System.Windows.Forms.Button();
             this.buttonSelectLogPath = new System.Windows.Forms.Button();
-            this.buttonOpenLog = new System.Windows.Forms.Button();
+            this.labelLogTheseMsgTypes = new System.Windows.Forms.Label();
+            this.chkLogErrorMsgs = new System.Windows.Forms.CheckBox();
+            this.labelLogFilePath = new System.Windows.Forms.Label();
+            this.chkLogWarningMsgs = new System.Windows.Forms.CheckBox();
+            this.textBoxLogPath = new System.Windows.Forms.TextBox();
+            this.chkLogInfoMsgs = new System.Windows.Forms.CheckBox();
+            this.chkLogDebugMsgs = new System.Windows.Forms.CheckBox();
+            this.saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBoxLogging.SuspendLayout();
             this.SuspendLayout();
@@ -66,49 +65,45 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblSwitchToErrorsAndInfos.TabIndex = 24;
             this.lblSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:";
             // 
-            // chkMCInformation
+            // chkSwitchToMCInformation
             // 
-            this.chkMCInformation.AutoSize = true;
-            this.chkMCInformation.Enabled = false;
-            this.chkMCInformation.Location = new System.Drawing.Point(195, 68);
-            this.chkMCInformation.Name = "chkMCInformation";
-            this.chkMCInformation.Size = new System.Drawing.Size(78, 17);
-            this.chkMCInformation.TabIndex = 25;
-            this.chkMCInformation.Text = "Information";
-            this.chkMCInformation.UseVisualStyleBackColor = true;
+            this.chkSwitchToMCInformation.AutoSize = true;
+            this.chkSwitchToMCInformation.Location = new System.Drawing.Point(195, 68);
+            this.chkSwitchToMCInformation.Name = "chkSwitchToMCInformation";
+            this.chkSwitchToMCInformation.Size = new System.Drawing.Size(78, 17);
+            this.chkSwitchToMCInformation.TabIndex = 25;
+            this.chkSwitchToMCInformation.Text = "Information";
+            this.chkSwitchToMCInformation.UseVisualStyleBackColor = true;
             // 
-            // chkMCErrors
+            // chkSwitchToMCErrors
             // 
-            this.chkMCErrors.AutoSize = true;
-            this.chkMCErrors.Enabled = false;
-            this.chkMCErrors.Location = new System.Drawing.Point(195, 114);
-            this.chkMCErrors.Name = "chkMCErrors";
-            this.chkMCErrors.Size = new System.Drawing.Size(48, 17);
-            this.chkMCErrors.TabIndex = 27;
-            this.chkMCErrors.Text = "Error";
-            this.chkMCErrors.UseVisualStyleBackColor = true;
+            this.chkSwitchToMCErrors.AutoSize = true;
+            this.chkSwitchToMCErrors.Location = new System.Drawing.Point(195, 114);
+            this.chkSwitchToMCErrors.Name = "chkSwitchToMCErrors";
+            this.chkSwitchToMCErrors.Size = new System.Drawing.Size(48, 17);
+            this.chkSwitchToMCErrors.TabIndex = 27;
+            this.chkSwitchToMCErrors.Text = "Error";
+            this.chkSwitchToMCErrors.UseVisualStyleBackColor = true;
             // 
-            // chkMCWarnings
+            // chkSwitchToMCWarnings
             // 
-            this.chkMCWarnings.AutoSize = true;
-            this.chkMCWarnings.Enabled = false;
-            this.chkMCWarnings.Location = new System.Drawing.Point(195, 91);
-            this.chkMCWarnings.Name = "chkMCWarnings";
-            this.chkMCWarnings.Size = new System.Drawing.Size(66, 17);
-            this.chkMCWarnings.TabIndex = 26;
-            this.chkMCWarnings.Text = "Warning";
-            this.chkMCWarnings.UseVisualStyleBackColor = true;
+            this.chkSwitchToMCWarnings.AutoSize = true;
+            this.chkSwitchToMCWarnings.Location = new System.Drawing.Point(195, 91);
+            this.chkSwitchToMCWarnings.Name = "chkSwitchToMCWarnings";
+            this.chkSwitchToMCWarnings.Size = new System.Drawing.Size(66, 17);
+            this.chkSwitchToMCWarnings.TabIndex = 26;
+            this.chkSwitchToMCWarnings.Text = "Warning";
+            this.chkSwitchToMCWarnings.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.chkMCDebug);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lblSwitchToErrorsAndInfos);
-            this.groupBox1.Controls.Add(this.chkMCErrors);
+            this.groupBox1.Controls.Add(this.chkSwitchToMCErrors);
             this.groupBox1.Controls.Add(this.chkShowErrorInMC);
-            this.groupBox1.Controls.Add(this.chkMCInformation);
+            this.groupBox1.Controls.Add(this.chkSwitchToMCInformation);
             this.groupBox1.Controls.Add(this.chkShowWarningInMC);
-            this.groupBox1.Controls.Add(this.chkMCWarnings);
+            this.groupBox1.Controls.Add(this.chkSwitchToMCWarnings);
             this.groupBox1.Controls.Add(this.chkShowInfoInMC);
             this.groupBox1.Controls.Add(this.chkShowDebugInMC);
             this.groupBox1.Location = new System.Drawing.Point(6, 3);
@@ -117,17 +112,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Notifications Panel";
-            // 
-            // chkMCDebug
-            // 
-            this.chkMCDebug.AutoSize = true;
-            this.chkMCDebug.Enabled = false;
-            this.chkMCDebug.Location = new System.Drawing.Point(195, 45);
-            this.chkMCDebug.Name = "chkMCDebug";
-            this.chkMCDebug.Size = new System.Drawing.Size(58, 17);
-            this.chkMCDebug.TabIndex = 33;
-            this.chkMCDebug.Text = "Debug";
-            this.chkMCDebug.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -180,15 +164,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // groupBoxLogging
             // 
-            this.groupBoxLogging.Controls.Add(this.buttonOpenLog);
+            this.groupBoxLogging.Controls.Add(this.buttonOpenLogFile);
             this.groupBoxLogging.Controls.Add(this.buttonSelectLogPath);
             this.groupBoxLogging.Controls.Add(this.labelLogTheseMsgTypes);
-            this.groupBoxLogging.Controls.Add(this.checkBox1);
+            this.groupBoxLogging.Controls.Add(this.chkLogErrorMsgs);
             this.groupBoxLogging.Controls.Add(this.labelLogFilePath);
-            this.groupBoxLogging.Controls.Add(this.checkBox2);
+            this.groupBoxLogging.Controls.Add(this.chkLogWarningMsgs);
             this.groupBoxLogging.Controls.Add(this.textBoxLogPath);
-            this.groupBoxLogging.Controls.Add(this.checkBox3);
-            this.groupBoxLogging.Controls.Add(this.checkBox4);
+            this.groupBoxLogging.Controls.Add(this.chkLogInfoMsgs);
+            this.groupBoxLogging.Controls.Add(this.chkLogDebugMsgs);
             this.groupBoxLogging.Location = new System.Drawing.Point(6, 150);
             this.groupBoxLogging.Name = "groupBoxLogging";
             this.groupBoxLogging.Size = new System.Drawing.Size(601, 140);
@@ -196,73 +180,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxLogging.TabStop = false;
             this.groupBoxLogging.Text = "Logging";
             // 
-            // labelLogFilePath
+            // buttonOpenLogFile
             // 
-            this.labelLogFilePath.AutoSize = true;
-            this.labelLogFilePath.Location = new System.Drawing.Point(193, 26);
-            this.labelLogFilePath.Name = "labelLogFilePath";
-            this.labelLogFilePath.Size = new System.Drawing.Size(68, 13);
-            this.labelLogFilePath.TabIndex = 30;
-            this.labelLogFilePath.Text = "Log file path:";
-            // 
-            // textBoxLogPath
-            // 
-            this.textBoxLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxLogPath.Enabled = false;
-            this.textBoxLogPath.Location = new System.Drawing.Point(196, 43);
-            this.textBoxLogPath.Name = "textBoxLogPath";
-            this.textBoxLogPath.ReadOnly = true;
-            this.textBoxLogPath.Size = new System.Drawing.Size(399, 20);
-            this.textBoxLogPath.TabIndex = 0;
-            // 
-            // labelLogTheseMsgTypes
-            // 
-            this.labelLogTheseMsgTypes.AutoSize = true;
-            this.labelLogTheseMsgTypes.Location = new System.Drawing.Point(6, 26);
-            this.labelLogTheseMsgTypes.Name = "labelLogTheseMsgTypes";
-            this.labelLogTheseMsgTypes.Size = new System.Drawing.Size(130, 13);
-            this.labelLogTheseMsgTypes.TabIndex = 34;
-            this.labelLogTheseMsgTypes.Text = "Log these message types:";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(20, 114);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(48, 17);
-            this.checkBox1.TabIndex = 38;
-            this.checkBox1.Text = "Error";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(20, 91);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(66, 17);
-            this.checkBox2.TabIndex = 37;
-            this.checkBox2.Text = "Warning";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(20, 68);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(78, 17);
-            this.checkBox3.TabIndex = 36;
-            this.checkBox3.Text = "Information";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(20, 45);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(58, 17);
-            this.checkBox4.TabIndex = 35;
-            this.checkBox4.Text = "Debug";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.buttonOpenLogFile.Location = new System.Drawing.Point(379, 69);
+            this.buttonOpenLogFile.Name = "buttonOpenLogFile";
+            this.buttonOpenLogFile.Size = new System.Drawing.Size(105, 23);
+            this.buttonOpenLogFile.TabIndex = 30;
+            this.buttonOpenLogFile.Text = "Open File";
+            this.buttonOpenLogFile.UseVisualStyleBackColor = true;
             // 
             // buttonSelectLogPath
             // 
@@ -273,14 +198,72 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.buttonSelectLogPath.Text = "Choose Path";
             this.buttonSelectLogPath.UseVisualStyleBackColor = true;
             // 
-            // buttonOpenLog
+            // labelLogTheseMsgTypes
             // 
-            this.buttonOpenLog.Location = new System.Drawing.Point(379, 69);
-            this.buttonOpenLog.Name = "buttonOpenLog";
-            this.buttonOpenLog.Size = new System.Drawing.Size(105, 23);
-            this.buttonOpenLog.TabIndex = 30;
-            this.buttonOpenLog.Text = "Open File";
-            this.buttonOpenLog.UseVisualStyleBackColor = true;
+            this.labelLogTheseMsgTypes.AutoSize = true;
+            this.labelLogTheseMsgTypes.Location = new System.Drawing.Point(6, 26);
+            this.labelLogTheseMsgTypes.Name = "labelLogTheseMsgTypes";
+            this.labelLogTheseMsgTypes.Size = new System.Drawing.Size(130, 13);
+            this.labelLogTheseMsgTypes.TabIndex = 34;
+            this.labelLogTheseMsgTypes.Text = "Log these message types:";
+            // 
+            // chkLogErrorMsgs
+            // 
+            this.chkLogErrorMsgs.AutoSize = true;
+            this.chkLogErrorMsgs.Location = new System.Drawing.Point(20, 114);
+            this.chkLogErrorMsgs.Name = "chkLogErrorMsgs";
+            this.chkLogErrorMsgs.Size = new System.Drawing.Size(48, 17);
+            this.chkLogErrorMsgs.TabIndex = 38;
+            this.chkLogErrorMsgs.Text = "Error";
+            this.chkLogErrorMsgs.UseVisualStyleBackColor = true;
+            // 
+            // labelLogFilePath
+            // 
+            this.labelLogFilePath.AutoSize = true;
+            this.labelLogFilePath.Location = new System.Drawing.Point(193, 26);
+            this.labelLogFilePath.Name = "labelLogFilePath";
+            this.labelLogFilePath.Size = new System.Drawing.Size(68, 13);
+            this.labelLogFilePath.TabIndex = 30;
+            this.labelLogFilePath.Text = "Log file path:";
+            // 
+            // chkLogWarningMsgs
+            // 
+            this.chkLogWarningMsgs.AutoSize = true;
+            this.chkLogWarningMsgs.Location = new System.Drawing.Point(20, 91);
+            this.chkLogWarningMsgs.Name = "chkLogWarningMsgs";
+            this.chkLogWarningMsgs.Size = new System.Drawing.Size(66, 17);
+            this.chkLogWarningMsgs.TabIndex = 37;
+            this.chkLogWarningMsgs.Text = "Warning";
+            this.chkLogWarningMsgs.UseVisualStyleBackColor = true;
+            // 
+            // textBoxLogPath
+            // 
+            this.textBoxLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxLogPath.Location = new System.Drawing.Point(196, 43);
+            this.textBoxLogPath.Name = "textBoxLogPath";
+            this.textBoxLogPath.ReadOnly = true;
+            this.textBoxLogPath.Size = new System.Drawing.Size(399, 20);
+            this.textBoxLogPath.TabIndex = 0;
+            // 
+            // chkLogInfoMsgs
+            // 
+            this.chkLogInfoMsgs.AutoSize = true;
+            this.chkLogInfoMsgs.Location = new System.Drawing.Point(20, 68);
+            this.chkLogInfoMsgs.Name = "chkLogInfoMsgs";
+            this.chkLogInfoMsgs.Size = new System.Drawing.Size(78, 17);
+            this.chkLogInfoMsgs.TabIndex = 36;
+            this.chkLogInfoMsgs.Text = "Information";
+            this.chkLogInfoMsgs.UseVisualStyleBackColor = true;
+            // 
+            // chkLogDebugMsgs
+            // 
+            this.chkLogDebugMsgs.AutoSize = true;
+            this.chkLogDebugMsgs.Location = new System.Drawing.Point(20, 45);
+            this.chkLogDebugMsgs.Name = "chkLogDebugMsgs";
+            this.chkLogDebugMsgs.Size = new System.Drawing.Size(58, 17);
+            this.chkLogDebugMsgs.TabIndex = 35;
+            this.chkLogDebugMsgs.Text = "Debug";
+            this.chkLogDebugMsgs.UseVisualStyleBackColor = true;
             // 
             // MessagesPage
             // 
@@ -300,11 +283,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		}
 
         internal System.Windows.Forms.Label lblSwitchToErrorsAndInfos;
-        internal System.Windows.Forms.CheckBox chkMCInformation;
-        internal System.Windows.Forms.CheckBox chkMCErrors;
-        internal System.Windows.Forms.CheckBox chkMCWarnings;
+        internal System.Windows.Forms.CheckBox chkSwitchToMCInformation;
+        internal System.Windows.Forms.CheckBox chkSwitchToMCErrors;
+        internal System.Windows.Forms.CheckBox chkSwitchToMCWarnings;
         private System.Windows.Forms.GroupBox groupBox1;
-        internal System.Windows.Forms.CheckBox chkMCDebug;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkShowErrorInMC;
         private System.Windows.Forms.CheckBox chkShowWarningInMC;
@@ -316,10 +298,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.TextBox textBoxLogPath;
         private System.Windows.Forms.Button buttonSelectLogPath;
         private System.Windows.Forms.Label labelLogTheseMsgTypes;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.Button buttonOpenLog;
+        private System.Windows.Forms.CheckBox chkLogErrorMsgs;
+        private System.Windows.Forms.CheckBox chkLogWarningMsgs;
+        private System.Windows.Forms.CheckBox chkLogInfoMsgs;
+        private System.Windows.Forms.CheckBox chkLogDebugMsgs;
+        private System.Windows.Forms.Button buttonOpenLogFile;
     }
 }
