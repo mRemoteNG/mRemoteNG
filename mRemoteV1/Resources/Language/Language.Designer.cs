@@ -878,6 +878,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose Path.
+        /// </summary>
+        internal static string strChoosePath {
+            get {
+                return ResourceManager.GetString("strChoosePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Closed Ports.
         /// </summary>
         internal static string strClosedPorts {
@@ -1445,6 +1454,15 @@ namespace mRemoteNG {
         internal static string strCurrentVersion {
             get {
                 return ResourceManager.GetString("strCurrentVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
+        internal static string strDebug {
+            get {
+                return ResourceManager.GetString("strDebug", resourceCulture);
             }
         }
         
@@ -2776,11 +2794,38 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log file path.
+        /// </summary>
+        internal static string strLogFilePath {
+            get {
+                return ResourceManager.GetString("strLogFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logging.
+        /// </summary>
+        internal static string strLogging {
+            get {
+                return ResourceManager.GetString("strLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logoff.
         /// </summary>
         internal static string strLogOff {
             get {
                 return ResourceManager.GetString("strLogOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log these message types.
+        /// </summary>
+        internal static string strLogTheseMessageTypes {
+            get {
+                return ResourceManager.GetString("strLogTheseMessageTypes", resourceCulture);
             }
         }
         
@@ -3677,6 +3722,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open File.
+        /// </summary>
+        internal static string strOpenFile {
+            get {
+                return ResourceManager.GetString("strOpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open new tab to the right of the currently selected tab.
         /// </summary>
         internal static string strOpenNewTabRight {
@@ -3907,6 +3961,15 @@ namespace mRemoteNG {
         internal static string strPleaseFillAllFields {
             get {
                 return ResourceManager.GetString("strPleaseFillAllFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Popups.
+        /// </summary>
+        internal static string strPopups {
+            get {
+                return ResourceManager.GetString("strPopups", resourceCulture);
             }
         }
         
@@ -5993,6 +6056,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show these message types.
+        /// </summary>
+        internal static string strShowTheseMessageTypes {
+            get {
+                return ResourceManager.GetString("strShowTheseMessageTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Single click on connection opens it.
         /// </summary>
         internal static string strSingleClickOnConnectionOpensIt {
@@ -6872,6 +6944,15 @@ namespace mRemoteNG {
         internal static string strUpdatePortableDownloadComplete {
             get {
                 return ResourceManager.GetString("strUpdatePortableDownloadComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Default.
+        /// </summary>
+        internal static string strUseDefault {
+            get {
+                return ResourceManager.GetString("strUseDefault", resourceCulture);
             }
         }
         

@@ -23,10 +23,36 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             // notifications panel
-            lblSwitchToErrorsAndInfos.Text = Language.strSwitchToErrorsAndInfos;
+            groupBoxNotifications.Text = Language.strMenuNotifications;
+            labelNotificationsShowTypes.Text = Language.strShowTheseMessageTypes;
+            chkShowDebugInMC.Text = Language.strDebug;
+            chkShowInfoInMC.Text = Language.strInformations;
+            chkShowWarningInMC.Text = Language.strWarnings;
+            chkShowErrorInMC.Text = Language.strErrors;
+            labelSwitchToErrorsAndInfos.Text = Language.strSwitchToErrorsAndInfos;
             chkSwitchToMCInformation.Text = Language.strInformations;
             chkSwitchToMCWarnings.Text = Language.strWarnings;
             chkSwitchToMCErrors.Text = Language.strErrors;
+
+            // logging
+            groupBoxLogging.Text = Language.strLogging;
+            chkLogDebugMsgs.Text = Language.strDebug;
+            chkLogInfoMsgs.Text = Language.strInformations;
+            chkLogWarningMsgs.Text = Language.strWarnings;
+            chkLogErrorMsgs.Text = Language.strErrors;
+            labelLogFilePath.Text = Language.strLogFilePath;
+            labelLogTheseMsgTypes.Text = Language.strLogTheseMessageTypes;
+            buttonOpenLogFile.Text = Language.strOpenFile;
+            buttonSelectLogPath.Text = Language.strChoosePath;
+            buttonRestoreDefaultLogPath.Text = Language.strUseDefault;
+
+            // popups
+            groupBoxPopups.Text = Language.strPopups;
+            labelPopupShowTypes.Text = Language.strShowTheseMessageTypes;
+            chkPopupDebug.Text = Language.strDebug;
+            chkPopupInfo.Text = Language.strInformations;
+            chkPopupWarning.Text = Language.strWarnings;
+            chkPopupError.Text = Language.strErrors;
         }
 
         public override void LoadSettings()
@@ -69,7 +95,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void LoadPopupSettings()
         {
-            
+            chkPopupDebug.Checked = Settings.Default.PopupMessageWriterWriteDebugMsgs;
+            chkPopupInfo.Checked = Settings.Default.PopupMessageWriterWriteInfoMsgs;
+            chkPopupWarning.Checked = Settings.Default.PopupMessageWriterWriteWarningMsgs;
+            chkPopupError.Checked = Settings.Default.PopupMessageWriterWriteErrorMsgs;
         }
 
         private void SaveNotificationPanelSettings()
@@ -95,7 +124,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void SavePopupSettings()
         {
-
+            Settings.Default.PopupMessageWriterWriteDebugMsgs = chkPopupDebug.Checked;
+            Settings.Default.PopupMessageWriterWriteInfoMsgs = chkPopupInfo.Checked;
+            Settings.Default.PopupMessageWriterWriteWarningMsgs = chkPopupWarning.Checked;
+            Settings.Default.PopupMessageWriterWriteErrorMsgs = chkPopupError.Checked;
         }
 
         private void buttonSelectLogPath_Click(object sender, System.EventArgs e)

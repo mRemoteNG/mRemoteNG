@@ -2478,4 +2478,31 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strChooseLogPath" xml:space="preserve">
     <value>Choose a path for the mRemoteNG log file</value>
   </data>
+  <data name="strDebug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
+    <value>Show these message types</value>
+  </data>
+  <data name="strLogFilePath" xml:space="preserve">
+    <value>Log file path</value>
+  </data>
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
+    <value>Log these message types</value>
+  </data>
+  <data name="strChoosePath" xml:space="preserve">
+    <value>Choose Path</value>
+  </data>
+  <data name="strOpenFile" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="strUseDefault" xml:space="preserve">
+    <value>Use Default</value>
+  </data>
+  <data name="strLogging" xml:space="preserve">
+    <value>Logging</value>
+  </data>
+  <data name="strPopups" xml:space="preserve">
+    <value>Popups</value>
+  </data>
 </root>
