@@ -4,6 +4,7 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
 using System.IO;
+using mRemoteNG.Messages;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
@@ -11,10 +12,17 @@ namespace mRemoteNG.Config.Settings
     public class LayoutSettingsLoader
     {
         private readonly frmMain _mainForm;
+        private readonly MessageCollector2 _messageCollector;
 
-        public LayoutSettingsLoader(frmMain mainForm)
+        public LayoutSettingsLoader(frmMain mainForm, MessageCollector2 messageCollector)
         {
+            if (mainForm == null)
+                throw new ArgumentNullException(nameof(mainForm));
+            if (messageCollector == null)
+                throw new ArgumentNullException(nameof(messageCollector));
+
             _mainForm = mainForm;
+            _messageCollector = messageCollector;
         }
 
         public void LoadPanelsFromXml()
@@ -27,7 +35,6 @@ namespace mRemoteNG.Config.Settings
                     dc.Close();
                 }
 
-                CreatePanels();
 #if !PORTABLE
                 var oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + GeneralAppInfo.ProductName + "\\" + SettingsFileInfo.LayoutFileName;
 #endif
@@ -49,7 +56,7 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error("LoadPanelsFromXML failed" + Environment.NewLine + ex.Message);
+                _messageCollector.AddExceptionMessage("LoadPanelsFromXML failed", ex);
             }
         }
 
@@ -75,19 +82,10 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error("GetContentFromPersistString failed" + Environment.NewLine + ex.Message);
+                _messageCollector.AddExceptionMessage("GetContentFromPersistString failed", ex);
             }
 
             return null;
-        }
-
-        private void CreatePanels()
-        {
-            Windows.ConfigForm = new ConfigWindow();
-            Windows.TreeForm = new ConnectionTreeWindow();
-            Windows.ErrorsForm = new ErrorAndInfoWindow();
-            Windows.ScreenshotForm = new ScreenshotManagerWindow();
-            Windows.UpdateForm = new UpdateWindow();
         }
     }
 }

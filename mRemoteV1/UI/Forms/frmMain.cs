@@ -22,7 +22,6 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
-using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Themes;
@@ -195,14 +194,17 @@ namespace mRemoteNG.UI.Forms
         #region Startup & Shutdown
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // Create gui config load and save objects
-            var settingsLoader = new SettingsLoader(this);
-			settingsLoader.LoadSettings();
-
-            MessageCollectorSetup.SetupMessageCollector(Runtime.MessageCollector, Runtime.MessageWriters);
+            var messageCollector = Runtime.MessageCollector;
+            MessageCollectorSetup.SetupMessageCollector(messageCollector, Runtime.MessageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(Runtime.MessageWriters);
 
-            Startup.Instance.InitializeProgram(Runtime.MessageCollector);
+            Startup.Instance.InitializeProgram(messageCollector);
+
+            var settingsLoader = new SettingsLoader(this, new MessageCollector2());
+            settingsLoader.LoadSettings();
+
+            var uiLoader = new LayoutSettingsLoader(this, messageCollector);
+            uiLoader.LoadPanelsFromXml();
 
             ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
