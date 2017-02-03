@@ -7137,15 +7137,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Write log file (mRemoteNG.log).
-        /// </summary>
-        internal static string strWriteLogFile {
-            get {
-                return ResourceManager.GetString("strWriteLogFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to XULrunner path:.
         /// </summary>
         internal static string strXULrunnerPath {

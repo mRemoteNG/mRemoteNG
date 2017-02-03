@@ -2358,9 +2358,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strWeifenLuoAttributionURL" xml:space="preserve">
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
   </data>
-  <data name="strWriteLogFile" xml:space="preserve">
-    <value>Write log file (mRemoteNG.log)</value>
-  </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner path:</value>
   </data>
