@@ -142,7 +142,7 @@ namespace mRemoteNG.App
 
         private static void LogCmdLineArgs()
         {
-            Logger.Instance.InfoFormat($"Command Line: {Environment.GetCommandLineArgs()}");
+            Logger.Instance.InfoFormat($"Command Line: {string.Join(" ", Environment.GetCommandLineArgs())}");
         }
 
         private static void LogCLRData()
