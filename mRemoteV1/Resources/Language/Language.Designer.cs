@@ -860,6 +860,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose a path for the mRemoteNG log file.
+        /// </summary>
+        internal static string strChooseLogPath {
+            get {
+                return ResourceManager.GetString("strChooseLogPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose panel before connecting.
         /// </summary>
         internal static string strChoosePanelBeforeConnecting {

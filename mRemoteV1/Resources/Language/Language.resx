@@ -2475,4 +2475,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPasswordLengthConstraintHint" xml:space="preserve">
     <value>Password length must be between {0} and {1}</value>
   </data>
+  <data name="strChooseLogPath" xml:space="preserve">
+    <value>Choose a path for the mRemoteNG log file</value>
+  </data>
 </root>

@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             var currentFile = textBoxLogPath.Text;
             var currentDirectory = Path.GetDirectoryName(currentFile);
-            saveFileDialogLogging.Title = "Choose a location to save the mRemoteNG log file";
+            saveFileDialogLogging.Title = Language.strChooseLogPath;
             saveFileDialogLogging.Filter = @"Log file|*.log";
             saveFileDialogLogging.InitialDirectory = currentDirectory;
             saveFileDialogLogging.FileName = currentFile;
