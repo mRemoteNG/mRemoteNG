@@ -22,7 +22,6 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 Windows.TreePanel = null;
-                Windows.ConfigPanel = null;
                 Windows.ErrorsPanel = null;
 
                 while (_mainForm.pnlDock.Contents.Count > 0)
@@ -66,7 +65,7 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 if (persistString == typeof(ConfigWindow).ToString())
-                    return Windows.ConfigPanel;
+                    return Windows.ConfigForm;
 
                 if (persistString == typeof(ConnectionTreeWindow).ToString())
                     return Windows.TreePanel;
@@ -87,8 +86,7 @@ namespace mRemoteNG.Config.Settings
 
         private void CreatePanels()
         {
-            Windows.ConfigForm = new ConfigWindow(Windows.ConfigPanel);
-            Windows.ConfigPanel = Windows.ConfigForm;
+            Windows.ConfigForm = new ConfigWindow();
 
             Windows.TreeForm = new ConnectionTreeWindow(Windows.TreePanel);
             Windows.TreePanel = Windows.TreeForm;

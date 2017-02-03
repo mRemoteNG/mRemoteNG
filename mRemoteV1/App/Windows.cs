@@ -27,8 +27,7 @@ namespace mRemoteNG.App
 
         public static ConnectionTreeWindow TreeForm { get; set; }
         public static DockContent TreePanel { get; set; } = new DockContent();
-        public static ConfigWindow ConfigForm { get; set; }
-        public static DockContent ConfigPanel { get; set; } = new DockContent();
+        public static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
         public static ErrorAndInfoWindow ErrorsForm { get; set; }
         public static DockContent ErrorsPanel { get; set; } = new DockContent();
         public static ScreenshotManagerWindow ScreenshotForm { get; set; }

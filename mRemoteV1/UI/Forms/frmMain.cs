@@ -764,12 +764,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewConfig.Checked == false)
 			{
-                Windows.ConfigPanel.Show(pnlDock);
+                Windows.ConfigForm.Show(pnlDock);
                 mMenViewConfig.Checked = true;
 			}
 			else
 			{
-                Windows.ConfigPanel.Hide();
+                Windows.ConfigForm.Hide();
                 mMenViewConfig.Checked = false;
 			}
 		}
@@ -1308,8 +1308,8 @@ namespace mRemoteNG.UI.Forms
             Default.pnlDock.DockBottomPortion = Default.pnlDock.Height * 0.25;
 
             Windows.TreePanel.Show(Default.pnlDock, DockState.DockLeft);
-            Windows.ConfigPanel.Show(Default.pnlDock);
-            Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
+            Windows.ConfigForm.Show(Default.pnlDock);
+            Windows.ConfigForm.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
             Windows.ErrorsPanel.Show(Default.pnlDock, DockState.Document);
 
             Windows.ErrorsForm.Hide();
