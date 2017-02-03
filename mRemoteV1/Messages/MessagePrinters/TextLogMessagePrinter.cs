@@ -23,7 +23,7 @@ namespace mRemoteNG.Messages.MessagePrinters
 
         public void Print(IMessage message)
         {
-            if (!WeShouldPrint(message.Class))
+            if (!WeShouldPrint(message))
                 return;
 
             switch (message.Class)
@@ -51,9 +51,9 @@ namespace mRemoteNG.Messages.MessagePrinters
                 Print(message);
         }
 
-        private bool WeShouldPrint(MessageClass msgClass)
+        private bool WeShouldPrint(IMessage message)
         {
-            switch (msgClass)
+            switch (message.Class)
             {
                 case MessageClass.InformationMsg:
                     if (PrintInfoMessages) return true;
@@ -68,7 +68,7 @@ namespace mRemoteNG.Messages.MessagePrinters
                     if (PrintDebugMessages) return true;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(msgClass), msgClass, null);
+                    throw new ArgumentOutOfRangeException(nameof(message.Class), message.Class, null);
             }
             return false;
         }
