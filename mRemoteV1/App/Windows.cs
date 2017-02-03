@@ -25,8 +25,7 @@ namespace mRemoteNG.App
         private static ComponentsCheckWindow _componentscheckForm;
         private static DockContent _componentscheckPanel = new DockContent();
 
-        public static ConnectionTreeWindow TreeForm { get; set; }
-        public static DockContent TreePanel { get; set; } = new DockContent();
+        public static ConnectionTreeWindow TreeForm { get; set; } = new ConnectionTreeWindow();
         public static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
         public static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
         public static ScreenshotManagerWindow ScreenshotForm { get; set; }

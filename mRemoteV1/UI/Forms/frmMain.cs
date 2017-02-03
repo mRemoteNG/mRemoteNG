@@ -227,7 +227,7 @@ namespace mRemoteNG.UI.Forms
             if (upgradeMap != null)
                 ApplyCredentialMapping(upgradeMap);
 
-            Windows.TreePanel.Focus();
+            Windows.TreeForm.Focus();
 
             PuttySessionsManager.Instance.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
@@ -750,12 +750,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewConnections.Checked == false)
 			{
-                Windows.TreePanel.Show(pnlDock);
+                Windows.TreeForm.Show(pnlDock);
                 mMenViewConnections.Checked = true;
 			}
 			else
 			{
-                Windows.TreePanel.Hide();
+                Windows.TreeForm.Hide();
                 mMenViewConnections.Checked = false;
 			}
 		}
@@ -804,7 +804,7 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
 		{
-            if (pnlDock.ActiveContent == Windows.TreePanel)
+            if (pnlDock.ActiveContent == Windows.TreeForm)
 			{
                 Windows.ConfigForm.Activate();
 			}
@@ -1307,9 +1307,9 @@ namespace mRemoteNG.UI.Forms
             Default.pnlDock.DockTopPortion = Default.pnlDock.Height * 0.25;
             Default.pnlDock.DockBottomPortion = Default.pnlDock.Height * 0.25;
 
-            Windows.TreePanel.Show(Default.pnlDock, DockState.DockLeft);
+            Windows.TreeForm.Show(Default.pnlDock, DockState.DockLeft);
             Windows.ConfigForm.Show(Default.pnlDock);
-            Windows.ConfigForm.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
+            Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
             Windows.ErrorsForm.Show(Default.pnlDock, DockState.Document);
 
             Windows.ErrorsForm.Hide();
