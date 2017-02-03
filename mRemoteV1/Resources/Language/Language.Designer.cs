@@ -6876,15 +6876,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use only Notifications panel (no messagebox popups).
-        /// </summary>
-        internal static string strUseOnlyErrorsAndInfosPanel {
-            get {
-                return ResourceManager.GetString("strUseOnlyErrorsAndInfosPanel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to User.
         /// </summary>
         internal static string strUser {

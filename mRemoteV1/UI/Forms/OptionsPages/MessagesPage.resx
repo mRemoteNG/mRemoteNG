@@ -117,29 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="saveFileDialogLogging.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.PageIcon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAnZ2d/52dnf+dnZ3/nZ2d/52dnf+dnZ3/nZ2d/52dnf+dnZ3/nZ2d/52d
-        nf+dnZ3/nZ2d/52dnf+dnZ3/nZ2d/52dnf+6vb3/5uzs/+bt7f/n7e3/6O7u/+nv7//p7+//6u/v/+rw
-        8P/r8PD/6/Hx/+zx8f/s8fH/vb+//52dnf8AAAAAnZ2d6tvi4v/Nz8//y8vL/8zMzP/Ozs7/z8/P/9DQ
-        0P/S0tL/09PT/9XV1f/X2Nj/5+zs/52dnfcAAAAAAAAAAJ2dnerZ4eH/y8zM/8fHx//IyMj/ysrK/8vL
-        y//Nzc3/zs7O/9DQ0P/R0dH/09TU/+Xr6/+dnZ33AAAAAAAAAACdnZ3q19/f/8fJyf/CwsL/xMTE/8XF
-        xf/IyMj/ycnJ/8rKyv/MzMz/zc3N/9DR0f/j6ur/nZ2d9wAAAAAAAAAAnZ2d6tbf3//DxcX/wMDA/8DA
-        wP/CwsL/w8PD/8TExP/FxcX/yMjI/8nJyf/Nzc3/4Ojo/52dnfcAAAAAAAAAAJ2dndbHzc3/2+Tk/9vk
-        5P/b5eX/3OXl/9zl5f/d5ub/3ebm/97n5//f6Oj/4Ojo/83T0/+dnZ3jAAAAAAAAAACdnZ1DnZ2dyJ2d
-        nf+dnZ3/nZ2d/52dnf+dnZ3/nZ2d/52dnf+dnZ3/nZ2d/52dnf+dnZ3dnZ2dTgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAA//+cQf//nEH//5xB//+cQQAAnEEAAJxBgAGcQYABnEGAAZxBgAGcQYABnEGAAZxB//+cQf//
-        nEH//5xB//+cQQ==
+        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAD///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8BuIdYHbiHWK+4h1gt////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AbiHWA24h1jxuIdY97iHWDP///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BuIdY2eLOuv+4h1j5uIdYMf//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BuIdYVbiHWPH59vH/4s25/7iH
+        WP+4h1jduIdY07iHWJG4h1gP////Af///wG4h1gVuIdYgbiHWCH///8BuIdYh8+ujv/r3tH//fz6//38
+        +v/9+/j/9Ovj//Hn3f/YvqP/uIdY97iHWHP///8BuIdYCbiHWLO4h1i3uIdYJbiHWOn48ez//fv4//jw
+        5//37+b/9+7k//jw6P/48er//fv5//Lp4P+4h1jZ////Af///wG4h1ih4s66vbiHWLm4h1jz+vfy//rz
+        7P/48en/+PDn//fv5v/37uT/9uzi//fv5//07OX/uIdY3////wG4h1g9uIdYq/bw6b3izbm9uIdY+/r2
+        8f/69O7/+fLq//jx6f/48Oj/9+/m//fu5P/48en/8+ri/7iHWNu4h1hlzqyMverczr39/Pq9/fz6vbqL
+        Xfv69vL/+vXv//r07v/68+3/+fPr//ny6//48en/+vXv//Pq4v+4h1jbuIdYrfjx7L39+/m9+PDnvffv
+        5r3FnHXx5NG+//r28v/69vH/+vbx//r18f/69fH/+vXw//bw6f/cxK3/uIdYrbiHWLP69/K9+vPsvfjx
+        6b348Oe95tPAy8Sbc++7jF77u4xf+7uMXvu4h1j5uIdY77iHWO+4h1jluIdYh7iHWCm4h1iz+vbxvfr0
+        7r358uq9+PHpvfjw6L337+a99+7kvfjx6b3z6uK9uIdYo////wH///8B////Af///wH///8BuIdYs/r2
+        8r369e+9+vTuvfrz7b358+u9+fLrvfjx6b369e+98+rivbiHWKP///8B////Af///wH///8B////AbiH
+        WJHk0b69+vbyvfr28b369vG9+vXxvfr18b369fC99vDpvdzErb24h1iB////Af///wH///8B////Af//
+        /wG4h1gpuIdYj7iHWLG4h1ixuIdYsbiHWLG4h1ixuIdYsbiHWKm4h1hjuIdYH////wH///8B////Af//
+        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        //8AAP//AAD//w==
 </value>
   </data>
 </root>

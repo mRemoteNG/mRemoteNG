@@ -28,7 +28,8 @@ namespace mRemoteNG.App
         private void Initialize()
         {
             XmlConfigurator.Configure();
-            var logFile = BuildLogFilePath();
+            if (string.IsNullOrEmpty(Settings.Default.LogFilePath))
+                Settings.Default.LogFilePath = BuildLogFilePath();
 
             var repository = LogManager.GetRepository();
             var appenders = repository.GetAppenders();
@@ -37,7 +38,7 @@ namespace mRemoteNG.App
             {
                 var fileAppender = (RollingFileAppender)appender;
                 if (fileAppender == null || fileAppender.Name != "LogFileAppender") continue;
-                fileAppender.File = logFile;
+                fileAppender.File = Settings.Default.LogFilePath;
                 fileAppender.ActivateOptions();
             }
             _log = LogManager.GetLogger("Logger");
