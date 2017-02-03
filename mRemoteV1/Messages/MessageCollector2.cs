@@ -18,9 +18,9 @@ namespace mRemoteNG.Messages
             ((INotifyCollectionChanged) _messageList).CollectionChanged += RaiseCollectionChangedEvent;
         }
 
-        public void AddMessage(MessageClass messageClass, string messageText, bool quiet = true)
+        public void AddMessage(MessageClass messageClass, string messageText, bool onlyLog = false)
         {
-            var message = new Message(messageClass, messageText, DateTime.Now, quiet);
+            var message = new Message(messageClass, messageText, DateTime.Now, onlyLog);
             AddMessage(message);
         }
 
