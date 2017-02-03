@@ -12,15 +12,15 @@ namespace mRemoteNG.Messages
 
 
 	    public Message()
-            : this(MessageClass.InformationMsg, "", DateTime.Now, false)
+            : this(MessageClass.InformationMsg, "", false)
         {
         }
 
-        public Message(MessageClass messageClass, string messageText, DateTime messageDate, bool onlyLog)
+        public Message(MessageClass messageClass, string messageText, bool onlyLog = false)
         {
             Class = messageClass;
             Text = messageText;
-            Date = messageDate;
+            Date = DateTime.Now;
             OnlyLog = onlyLog;
         }
 	}

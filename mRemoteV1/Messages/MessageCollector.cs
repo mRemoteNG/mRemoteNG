@@ -20,7 +20,7 @@ namespace mRemoteNG.Messages
 
         public void AddMessage(MessageClass messageClass, string messageText, bool onlyLog = false)
         {
-            var message = new Message(messageClass, messageText, DateTime.Now, onlyLog);
+            var message = new Message(messageClass, messageText, onlyLog);
             AddMessage(message);
         }
 
