@@ -58,6 +58,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void LoadLoggingSettings()
         {
             textBoxLogPath.Text = Settings.Default.LogFilePath;
+            chkLogDebugMsgs.Checked = Settings.Default.TextLogMessageWriterWriteDebugMsgs;
+            chkLogInfoMsgs.Checked = Settings.Default.TextLogMessageWriterWriteInfoMsgs;
+            chkLogWarningMsgs.Checked = Settings.Default.TextLogMessageWriterWriteWarningMsgs;
+            chkLogErrorMsgs.Checked = Settings.Default.TextLogMessageWriterWriteErrorMsgs;
         }
 
         private void LoadPopupSettings()
@@ -80,6 +84,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void SaveLoggingSettings()
         {
             Settings.Default.LogFilePath = textBoxLogPath.Text;
+            Settings.Default.TextLogMessageWriterWriteDebugMsgs = chkLogDebugMsgs.Checked;
+            Settings.Default.TextLogMessageWriterWriteInfoMsgs = chkLogInfoMsgs.Checked;
+            Settings.Default.TextLogMessageWriterWriteWarningMsgs = chkLogWarningMsgs.Checked;
+            Settings.Default.TextLogMessageWriterWriteErrorMsgs = chkLogErrorMsgs.Checked;
         }
 
         private void SavePopupSettings()
