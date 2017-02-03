@@ -71,7 +71,7 @@ namespace mRemoteNG.Config.Settings
                     return Windows.ErrorsForm;
 
                 if (persistString == typeof(ScreenshotManagerWindow).ToString())
-                    return Windows.ScreenshotPanel;
+                    return Windows.ScreenshotForm;
             }
             catch (Exception ex)
             {
@@ -87,8 +87,8 @@ namespace mRemoteNG.Config.Settings
             Windows.TreeForm = new ConnectionTreeWindow();
             Windows.ErrorsForm = new ErrorAndInfoWindow();
 
-            Windows.ScreenshotForm = new ScreenshotManagerWindow(Windows.ScreenshotPanel);
-            Windows.ScreenshotPanel = Windows.ScreenshotForm;
+            Windows.ScreenshotForm = new ScreenshotManagerWindow(Windows.ScreenshotForm);
+            Windows.ScreenshotForm = Windows.ScreenshotForm;
 
             Windows.UpdateForm = new UpdateWindow(Windows.UpdatePanel);
             Windows.UpdatePanel = Windows.UpdateForm;

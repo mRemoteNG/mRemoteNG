@@ -792,12 +792,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewScreenshotManager.Checked == false)
 			{
-                Windows.ScreenshotPanel.Show(pnlDock);
+                Windows.ScreenshotForm.Show(pnlDock);
                 mMenViewScreenshotManager.Checked = true;
 			}
 			else
 			{
-                Windows.ScreenshotPanel.Hide();
+                Windows.ScreenshotForm.Hide();
                 mMenViewScreenshotManager.Checked = false;
 			}
 		}
