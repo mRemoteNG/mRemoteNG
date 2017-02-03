@@ -1,25 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using log4net;
+using System.Windows.Forms;
 
-namespace mRemoteNG.Messages.MessagePrinters
+namespace mRemoteNG.Messages.MessageWriters
 {
-    public class TextLogMessagePrinter : IMessagePrinter
+    public class PopupMessageWriter : IMessageWriter
     {
-        private readonly ILog _logger;
-
         public bool PrintDebugMessages { get; set; } = true;
         public bool PrintInfoMessages { get; set; } = true;
         public bool PrintWarningMessages { get; set; } = true;
         public bool PrintErrorMessages { get; set; } = true;
-
-        public TextLogMessagePrinter(ILog logger)
-        {
-            if (logger == null)
-                throw new ArgumentNullException(nameof(logger));
-
-            _logger = logger;
-        }
 
         public void Print(IMessage message)
         {
@@ -28,31 +18,28 @@ namespace mRemoteNG.Messages.MessagePrinters
 
             switch (message.Class)
             {
-                case MessageClass.InformationMsg:
-                    _logger.Info(message.Text);
-                    break;
                 case MessageClass.DebugMsg:
-                    _logger.Debug(message.Text);
+                    MessageBox.Show(message.Text, string.Format(Language.strTitleInformation, message.Date), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case MessageClass.InformationMsg:
+                    MessageBox.Show(message.Text, string.Format(Language.strTitleInformation, message.Date), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case MessageClass.WarningMsg:
-                    _logger.Warn(message.Text);
+                    MessageBox.Show(message.Text, string.Format(Language.strTitleWarning, message.Date), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 case MessageClass.ErrorMsg:
-                    _logger.Error(message.Text);
+                    MessageBox.Show(message.Text, string.Format(Language.strTitleError, message.Date), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        public void Print(IEnumerable<IMessage> messages)
-        {
-            foreach (var message in messages)
-                Print(message);
-        }
-
         private bool WeShouldPrint(IMessage message)
         {
+            if (message.OnlyLog)
+                return false;
+
             switch (message.Class)
             {
                 case MessageClass.InformationMsg:
@@ -71,6 +58,12 @@ namespace mRemoteNG.Messages.MessagePrinters
                     throw new ArgumentOutOfRangeException(nameof(message.Class), message.Class, null);
             }
             return false;
+        }
+
+        public void Print(IEnumerable<IMessage> messages)
+        {
+            foreach (var message in messages)
+                Print(message);
         }
     }
 }

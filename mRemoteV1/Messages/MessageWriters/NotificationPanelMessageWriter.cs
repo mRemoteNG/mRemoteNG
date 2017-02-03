@@ -5,9 +5,9 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace mRemoteNG.Messages.MessagePrinters
+namespace mRemoteNG.Messages.MessageWriters
 {
-    public class ErrorAndInfoWindowMessagePrinter : IMessagePrinter
+    public class NotificationPanelMessageWriter : IMessageWriter
     {
         private readonly ErrorAndInfoWindow _messageWindow;
         private Timer _ecTimer;
@@ -17,7 +17,7 @@ namespace mRemoteNG.Messages.MessagePrinters
         public bool PrintWarningMessages { get; set; } = true;
         public bool PrintErrorMessages { get; set; } = true;
 
-        public ErrorAndInfoWindowMessagePrinter(ErrorAndInfoWindow messageWindow)
+        public NotificationPanelMessageWriter(ErrorAndInfoWindow messageWindow)
         {
             if (messageWindow == null)
                 throw new ArgumentNullException(nameof(messageWindow));

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace mRemoteNG.Messages.MessagePrinters
+namespace mRemoteNG.Messages.MessageWriters
 {
-    public class DebugMessagePrinter : IMessagePrinter
+    public class DebugConsoleMessageWriter : IMessageWriter
     {
         public bool PrintDebugMessages { get; set; } = true;
         public bool PrintInfoMessages { get; set; } = true;

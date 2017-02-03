@@ -18,7 +18,7 @@ using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Credential;
-using mRemoteNG.Messages.MessagePrinters;
+using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
@@ -35,7 +35,7 @@ namespace mRemoteNG.App
         #region Public Properties
         public static WindowList WindowList { get; set; }
         public static MessageCollector2 MessageCollector { get; set; }
-        public static IList<IMessagePrinter> MessagePrinters { get; } = new List<IMessagePrinter>();
+        public static IList<IMessageWriter> MessagePrinters { get; } = new List<IMessageWriter>();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }

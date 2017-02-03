@@ -1,21 +1,21 @@
 ﻿using log4net;
 using mRemoteNG.Messages;
-using mRemoteNG.Messages.MessagePrinters;
+using mRemoteNG.Messages.MessageWriters;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Messages.MessagePrinters
+namespace mRemoteNGTests.Messages.MessageWriters
 {
-    public class TextLogMessagePrinterTests
+    public class TextLogMessageWriterTests
     {
-        private TextLogMessagePrinter _messagePrinter;
+        private TextLogMessageWriter _messageWriter;
         private ILog _log4NetLogger;
 
         [SetUp]
         public void Setup()
         {
             _log4NetLogger = Substitute.For<ILog>();
-            _messagePrinter = new TextLogMessagePrinter(_log4NetLogger);
+            _messageWriter = new TextLogMessageWriter(_log4NetLogger);
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace mRemoteNGTests.Messages.MessagePrinters
             var message2 = Substitute.For<IMessage>();
             message1.Class.Returns(MessageClass.InformationMsg);
             message2.Class.Returns(MessageClass.InformationMsg);
-            _messagePrinter.Print(new[] {message1, message2});
+            _messageWriter.Print(new[] {message1, message2});
             _log4NetLogger.ReceivedWithAnyArgs(2).Info("");
         }
 
@@ -34,7 +34,7 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.InformationMsg);
-            _messagePrinter.Print(message);
+            _messageWriter.Print(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Info("");
         }
 
@@ -43,7 +43,7 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.DebugMsg);
-            _messagePrinter.Print(message);
+            _messageWriter.Print(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Debug("");
         }
 
@@ -52,7 +52,7 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.WarningMsg);
-            _messagePrinter.Print(message);
+            _messageWriter.Print(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Warn("");
         }
 
@@ -61,7 +61,7 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.ErrorMsg);
-            _messagePrinter.Print(message);
+            _messageWriter.Print(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Error("");
         }
 
@@ -70,8 +70,8 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.InformationMsg);
-            _messagePrinter.PrintInfoMessages = false;
-            _messagePrinter.Print(message);
+            _messageWriter.PrintInfoMessages = false;
+            _messageWriter.Print(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Info("");
         }
 
@@ -80,8 +80,8 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.DebugMsg);
-            _messagePrinter.PrintDebugMessages = false;
-            _messagePrinter.Print(message);
+            _messageWriter.PrintDebugMessages = false;
+            _messageWriter.Print(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Debug("");
         }
 
@@ -90,8 +90,8 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.WarningMsg);
-            _messagePrinter.PrintWarningMessages = false;
-            _messagePrinter.Print(message);
+            _messageWriter.PrintWarningMessages = false;
+            _messageWriter.Print(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Warn("");
         }
 
@@ -100,8 +100,8 @@ namespace mRemoteNGTests.Messages.MessagePrinters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.ErrorMsg);
-            _messagePrinter.PrintErrorMessages = false;
-            _messagePrinter.Print(message);
+            _messageWriter.PrintErrorMessages = false;
+            _messageWriter.Print(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Error("");
         }
     }

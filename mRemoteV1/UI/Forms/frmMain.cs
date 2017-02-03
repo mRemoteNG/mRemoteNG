@@ -22,7 +22,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
-using mRemoteNG.Messages.MessagePrinters;
+using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Themes;
@@ -1414,9 +1414,9 @@ namespace mRemoteNG.UI.Forms
         private void SetupMessageCollector()
         {
             Runtime.MessageCollector = new MessageCollector2();
-            Runtime.MessagePrinters.Add(BuildDebugLineMessageWriter());
+            Runtime.MessagePrinters.Add(BuildDebugConsoleMessageWriter());
             Runtime.MessagePrinters.Add(BuildTextLogMessageWriter());
-            Runtime.MessagePrinters.Add(BuildNotificationMessageWriter());
+            Runtime.MessagePrinters.Add(BuildNotificationPanelMessageWriter());
             Runtime.MessagePrinters.Add(BuildPopupMessageWriter());
 
             Runtime.MessageCollector.CollectionChanged += (o, args) =>
@@ -1427,9 +1427,9 @@ namespace mRemoteNG.UI.Forms
             };
         }
 
-        private DebugMessagePrinter BuildDebugLineMessageWriter()
+        private DebugConsoleMessageWriter BuildDebugConsoleMessageWriter()
         {
-            return new DebugMessagePrinter
+            return new DebugConsoleMessageWriter
             {
                 PrintDebugMessages = Settings.Default.DebugMessageWriterWriteDebugMsgs,
                 PrintInfoMessages = Settings.Default.DebugMessageWriterWriteInfoMsgs,
@@ -1438,9 +1438,9 @@ namespace mRemoteNG.UI.Forms
             };
         }
 
-        private TextLogMessagePrinter BuildTextLogMessageWriter()
+        private TextLogMessageWriter BuildTextLogMessageWriter()
         {
-            return new TextLogMessagePrinter(Logger.Instance)
+            return new TextLogMessageWriter(Logger.Instance)
             {
                 PrintDebugMessages = Settings.Default.TextLogMessageWriterWriteDebugMsgs,
                 PrintInfoMessages = Settings.Default.TextLogMessageWriterWriteInfoMsgs,
@@ -1449,9 +1449,9 @@ namespace mRemoteNG.UI.Forms
             };
         }
 
-        private ErrorAndInfoWindowMessagePrinter BuildNotificationMessageWriter()
+        private NotificationPanelMessageWriter BuildNotificationPanelMessageWriter()
         {
-            return new ErrorAndInfoWindowMessagePrinter(Windows.ErrorsForm)
+            return new NotificationPanelMessageWriter(Windows.ErrorsForm)
             {
                 PrintDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
                 PrintInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
@@ -1460,9 +1460,9 @@ namespace mRemoteNG.UI.Forms
             };
         }
 
-        private PopupMessagePrinter BuildPopupMessageWriter()
+        private PopupMessageWriter BuildPopupMessageWriter()
         {
-            return new PopupMessagePrinter
+            return new PopupMessageWriter
             {
                 PrintDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
                 PrintInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,

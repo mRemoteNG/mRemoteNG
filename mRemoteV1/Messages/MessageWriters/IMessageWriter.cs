@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace mRemoteNG.Messages.MessagePrinters
+namespace mRemoteNG.Messages.MessageWriters
 {
-    public interface IMessagePrinter
+    public interface IMessageWriter
     {
         bool PrintDebugMessages { get; set; }
         bool PrintInfoMessages { get; set; }
