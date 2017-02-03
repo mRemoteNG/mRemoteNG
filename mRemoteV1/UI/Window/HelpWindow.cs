@@ -213,10 +213,10 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Public Methods
-		public HelpWindow(DockContent Panel)
+		public HelpWindow()
 		{
 			WindowType = WindowType.Help;
-			DockPnl = Panel;
+			DockPnl = new DockContent();
 			InitializeComponent();
 					
 			FillImageList();

@@ -394,10 +394,10 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Methods
-        public ComponentsCheckWindow(DockContent Panel)
+        public ComponentsCheckWindow()
         {
             WindowType = WindowType.ComponentsCheck;
-            DockPnl = Panel;
+            DockPnl = new DockContent();
             InitializeComponent();
         }
         #endregion
