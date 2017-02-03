@@ -19,21 +19,12 @@ namespace mRemoteNG.App
 
         public static void BuildMessageWritersFromSettings(IList<IMessageWriter> messageWriterList)
         {
-            messageWriterList.Add(BuildDebugConsoleMessageWriter());
+#if DEBUG
+            messageWriterList.Add(new DebugConsoleMessageWriter());
+#endif
             messageWriterList.Add(BuildTextLogMessageWriter());
             messageWriterList.Add(BuildNotificationPanelMessageWriter());
             messageWriterList.Add(BuildPopupMessageWriter());
-        }
-
-        private static DebugConsoleMessageWriter BuildDebugConsoleMessageWriter()
-        {
-            return new DebugConsoleMessageWriter
-            {
-                PrintDebugMessages = Settings.Default.DebugMessageWriterWriteDebugMsgs,
-                PrintInfoMessages = Settings.Default.DebugMessageWriterWriteInfoMsgs,
-                PrintWarningMessages = Settings.Default.DebugMessageWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.DebugMessageWriterWriteErrorMsgs
-            };
         }
 
         private static TextLogMessageWriter BuildTextLogMessageWriter()

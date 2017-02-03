@@ -2389,54 +2389,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DebugMessageWriterWriteDebugMsgs {
-            get {
-                return ((bool)(this["DebugMessageWriterWriteDebugMsgs"]));
-            }
-            set {
-                this["DebugMessageWriterWriteDebugMsgs"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DebugMessageWriterWriteInfoMsgs {
-            get {
-                return ((bool)(this["DebugMessageWriterWriteInfoMsgs"]));
-            }
-            set {
-                this["DebugMessageWriterWriteInfoMsgs"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DebugMessageWriterWriteWarningMsgs {
-            get {
-                return ((bool)(this["DebugMessageWriterWriteWarningMsgs"]));
-            }
-            set {
-                this["DebugMessageWriterWriteWarningMsgs"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DebugMessageWriterWriteErrorMsgs {
-            get {
-                return ((bool)(this["DebugMessageWriterWriteErrorMsgs"]));
-            }
-            set {
-                this["DebugMessageWriterWriteErrorMsgs"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool TextLogMessageWriterWriteDebugMsgs {
             get {
