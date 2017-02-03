@@ -3,7 +3,7 @@
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	
-    public partial class MessagesPage : OptionsPage
+    public partial class NotificationsPage : OptionsPage
 	{
 			
 		//UserControl overrides dispose to clean up the component list.
@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessagesPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationsPage));
             this.labelSwitchToErrorsAndInfos = new System.Windows.Forms.Label();
             this.chkSwitchToMCInformation = new System.Windows.Forms.CheckBox();
             this.chkSwitchToMCErrors = new System.Windows.Forms.CheckBox();

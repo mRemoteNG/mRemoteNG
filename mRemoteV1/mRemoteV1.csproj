@@ -346,11 +346,11 @@
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\OptionsPages\MessagesPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\NotificationsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\OptionsPages\MessagesPage.Designer.cs">
-      <DependentUpon>MessagesPage.cs</DependentUpon>
+    <Compile Include="UI\Forms\OptionsPages\NotificationsPage.Designer.cs">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.Designer.cs">
       <DependentUpon>ConnectionsPage.cs</DependentUpon>
@@ -605,8 +605,8 @@
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\MessagesPage.resx">
-      <DependentUpon>MessagesPage.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\NotificationsPage.resx">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\OptionsPage.resx">
       <DependentUpon>OptionsPage.cs</DependentUpon>

@@ -51,7 +51,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(StartupExitPage).Name, new StartupExitPage()},
                 {typeof(AppearancePage).Name, new AppearancePage()},
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
-                {typeof(MessagesPage).Name, new MessagesPage()},
+                {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},
                 {typeof(SqlServerPage).Name, new SqlServerPage()},
                 {typeof(UpdatesPage).Name, new UpdatesPage()},
