@@ -52,6 +52,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLogInfoMsgs = new System.Windows.Forms.CheckBox();
             this.chkLogDebugMsgs = new System.Windows.Forms.CheckBox();
             this.saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
+            this.buttonRestoreDefaultLogPath = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBoxLogging.SuspendLayout();
             this.SuspendLayout();
@@ -164,6 +165,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // groupBoxLogging
             // 
+            this.groupBoxLogging.Controls.Add(this.buttonRestoreDefaultLogPath);
             this.groupBoxLogging.Controls.Add(this.buttonOpenLogFile);
             this.groupBoxLogging.Controls.Add(this.buttonSelectLogPath);
             this.groupBoxLogging.Controls.Add(this.labelLogTheseMsgTypes);
@@ -182,7 +184,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonOpenLogFile
             // 
-            this.buttonOpenLogFile.Location = new System.Drawing.Point(379, 69);
+            this.buttonOpenLogFile.Location = new System.Drawing.Point(274, 68);
             this.buttonOpenLogFile.Name = "buttonOpenLogFile";
             this.buttonOpenLogFile.Size = new System.Drawing.Size(105, 23);
             this.buttonOpenLogFile.TabIndex = 30;
@@ -191,7 +193,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonSelectLogPath
             // 
-            this.buttonSelectLogPath.Location = new System.Drawing.Point(490, 68);
+            this.buttonSelectLogPath.Location = new System.Drawing.Point(385, 68);
             this.buttonSelectLogPath.Name = "buttonSelectLogPath";
             this.buttonSelectLogPath.Size = new System.Drawing.Size(105, 23);
             this.buttonSelectLogPath.TabIndex = 30;
@@ -266,6 +268,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLogDebugMsgs.Text = "Debug";
             this.chkLogDebugMsgs.UseVisualStyleBackColor = true;
             // 
+            // buttonRestoreDefaultLogPath
+            // 
+            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(496, 69);
+            this.buttonRestoreDefaultLogPath.Name = "buttonRestoreDefaultLogPath";
+            this.buttonRestoreDefaultLogPath.Size = new System.Drawing.Size(99, 23);
+            this.buttonRestoreDefaultLogPath.TabIndex = 39;
+            this.buttonRestoreDefaultLogPath.Text = "Use Default";
+            this.buttonRestoreDefaultLogPath.UseVisualStyleBackColor = true;
+            this.buttonRestoreDefaultLogPath.Click += new System.EventHandler(this.buttonRestoreDefaultLogPath_Click);
+            // 
             // MessagesPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -304,5 +316,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.CheckBox chkLogInfoMsgs;
         private System.Windows.Forms.CheckBox chkLogDebugMsgs;
         private System.Windows.Forms.Button buttonOpenLogFile;
+        private System.Windows.Forms.Button buttonRestoreDefaultLogPath;
     }
 }

@@ -109,5 +109,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (dialogResult != DialogResult.OK) return;
             textBoxLogPath.Text = saveFileDialogLogging.FileName;
         }
+
+        private void buttonRestoreDefaultLogPath_Click(object sender, System.EventArgs e)
+        {
+            textBoxLogPath.Text = Logger.DefaultLogPath;
+        }
     }
 }
