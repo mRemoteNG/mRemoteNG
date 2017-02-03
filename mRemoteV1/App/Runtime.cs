@@ -35,7 +35,7 @@ namespace mRemoteNG.App
         #region Public Properties
         public static WindowList WindowList { get; set; }
         public static MessageCollector2 MessageCollector { get; set; }
-        public static IList<IMessagePrinter> MessagePrinters { get; set; }
+        public static IList<IMessagePrinter> MessagePrinters { get; } = new List<IMessagePrinter>();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }

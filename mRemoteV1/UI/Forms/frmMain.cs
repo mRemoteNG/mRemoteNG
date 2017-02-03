@@ -14,7 +14,6 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.MessagePrinters;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Settings;
@@ -55,7 +54,6 @@ namespace mRemoteNG.UI.Forms
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
-        private IDataProvider<string> MessagePrinterSettingsDataProvider = new FileDataProvider(Path.Combine(SettingsFileInfo.SettingsPath, "messagePrinters.config"));
 
 
 
@@ -402,7 +400,6 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
-            Shutdown.SaveMessagePrinterSettings(MessagePrinterSettingsDataProvider);
             Shutdown.Cleanup();
 									
 			IsClosing = true;
@@ -1416,38 +1413,62 @@ namespace mRemoteNG.UI.Forms
 
         private void SetupMessageCollector()
         {
-            var messageCollector = new MessageCollector2();
-            var messagePrinters = new List<IMessagePrinter>
-            {
-                new DebugMessagePrinter(),
-                new TextLogMessagePrinter(Logger.Instance)
-                {
-                    PrintInfoMessages = Settings.Default.WriteLogFile,
-                    PrintDebugMessages = Settings.Default.WriteLogFile,
-                    PrintWarningMessages = Settings.Default.WriteLogFile
-                },
-                new ErrorAndInfoWindowMessagePrinter(Windows.ErrorsForm),
-                new PopupMessagePrinter()
-            };
+            Runtime.MessageCollector = new MessageCollector2();
+            Runtime.MessagePrinters.Add(BuildDebugLineMessageWriter());
+            Runtime.MessagePrinters.Add(BuildTextLogMessageWriter());
+            Runtime.MessagePrinters.Add(BuildNotificationMessageWriter());
+            Runtime.MessagePrinters.Add(BuildPopupMessageWriter());
 
-            ApplyMessagePrinterSettings(messagePrinters);
-
-            messageCollector.CollectionChanged += (o, args) =>
+            Runtime.MessageCollector.CollectionChanged += (o, args) =>
             {
                 var messages = args.NewItems.Cast<IMessage>().ToArray();
-                foreach (var printer in messagePrinters)
+                foreach (var printer in Runtime.MessagePrinters)
                     printer.Print(messages);
             };
-
-            Runtime.MessageCollector = messageCollector;
-            Runtime.MessagePrinters = messagePrinters;
         }
 
-        private void ApplyMessagePrinterSettings(IEnumerable<IMessagePrinter> messagePrinters)
+        private DebugMessagePrinter BuildDebugLineMessageWriter()
         {
-            var deserializer = new MessagePrinterDeserializer();
-            var settings = MessagePrinterSettingsDataProvider.Load();
-            deserializer.ApplySettings(settings, messagePrinters);
+            return new DebugMessagePrinter
+            {
+                PrintDebugMessages = Settings.Default.DebugMessageWriterWriteDebugMsgs,
+                PrintInfoMessages = Settings.Default.DebugMessageWriterWriteInfoMsgs,
+                PrintWarningMessages = Settings.Default.DebugMessageWriterWriteWarningMsgs,
+                PrintErrorMessages = Settings.Default.DebugMessageWriterWriteErrorMsgs
+            };
+        }
+
+        private TextLogMessagePrinter BuildTextLogMessageWriter()
+        {
+            return new TextLogMessagePrinter(Logger.Instance)
+            {
+                PrintDebugMessages = Settings.Default.TextLogMessageWriterWriteDebugMsgs,
+                PrintInfoMessages = Settings.Default.TextLogMessageWriterWriteInfoMsgs,
+                PrintWarningMessages = Settings.Default.TextLogMessageWriterWriteWarningMsgs,
+                PrintErrorMessages = Settings.Default.TextLogMessageWriterWriteErrorMsgs
+            };
+        }
+
+        private ErrorAndInfoWindowMessagePrinter BuildNotificationMessageWriter()
+        {
+            return new ErrorAndInfoWindowMessagePrinter(Windows.ErrorsForm)
+            {
+                PrintDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
+                PrintInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
+                PrintWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
+                PrintErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs
+            };
+        }
+
+        private PopupMessagePrinter BuildPopupMessageWriter()
+        {
+            return new PopupMessagePrinter
+            {
+                PrintDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
+                PrintInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
+                PrintWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
+                PrintErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
+            };
         }
     }
 }

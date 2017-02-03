@@ -136,8 +136,6 @@
     <Compile Include="Config\CredentialHarvester.cs" />
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
-    <Compile Include="Config\MessagePrinters\MessagePrinterDeserializer.cs" />
-    <Compile Include="Config\MessagePrinters\MessagePrinterSerializer.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialProviderSerializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
