@@ -199,7 +199,7 @@ namespace mRemoteNG.UI.Forms
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
 
-            SetupMessageCollector();
+            MessageCollectorSetup.Setup(Runtime.MessageWriters, Runtime.MessageCollector);
 
             ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
@@ -1409,66 +1409,6 @@ namespace mRemoteNG.UI.Forms
                 if (map.ContainsKey(id))
                     connectionInfo.CredentialRecord = map[id];
             }
-        }
-
-        private void SetupMessageCollector()
-        {
-            Runtime.MessageCollector = new MessageCollector2();
-            Runtime.MessageWriters.Add(BuildDebugConsoleMessageWriter());
-            Runtime.MessageWriters.Add(BuildTextLogMessageWriter());
-            Runtime.MessageWriters.Add(BuildNotificationPanelMessageWriter());
-            Runtime.MessageWriters.Add(BuildPopupMessageWriter());
-
-            Runtime.MessageCollector.CollectionChanged += (o, args) =>
-            {
-                var messages = args.NewItems.Cast<IMessage>().ToArray();
-                foreach (var printer in Runtime.MessageWriters)
-                    printer.Print(messages);
-            };
-        }
-
-        private DebugConsoleMessageWriter BuildDebugConsoleMessageWriter()
-        {
-            return new DebugConsoleMessageWriter
-            {
-                PrintDebugMessages = Settings.Default.DebugMessageWriterWriteDebugMsgs,
-                PrintInfoMessages = Settings.Default.DebugMessageWriterWriteInfoMsgs,
-                PrintWarningMessages = Settings.Default.DebugMessageWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.DebugMessageWriterWriteErrorMsgs
-            };
-        }
-
-        private TextLogMessageWriter BuildTextLogMessageWriter()
-        {
-            return new TextLogMessageWriter(Logger.Instance)
-            {
-                PrintDebugMessages = Settings.Default.TextLogMessageWriterWriteDebugMsgs,
-                PrintInfoMessages = Settings.Default.TextLogMessageWriterWriteInfoMsgs,
-                PrintWarningMessages = Settings.Default.TextLogMessageWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.TextLogMessageWriterWriteErrorMsgs
-            };
-        }
-
-        private NotificationPanelMessageWriter BuildNotificationPanelMessageWriter()
-        {
-            return new NotificationPanelMessageWriter(Windows.ErrorsForm)
-            {
-                PrintDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
-                PrintInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
-                PrintWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs
-            };
-        }
-
-        private PopupMessageWriter BuildPopupMessageWriter()
-        {
-            return new PopupMessageWriter
-            {
-                PrintDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
-                PrintInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
-                PrintWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
-            };
         }
     }
 }

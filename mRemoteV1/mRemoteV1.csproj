@@ -113,6 +113,7 @@
     <Compile Include="App\CompatibilityChecker.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
     <Compile Include="App\Logger.cs" />
+    <Compile Include="App\MessageCollectorSetup.cs" />
     <Compile Include="App\NativeMethods.cs" />
     <Compile Include="App\Runtime.cs" />
     <Compile Include="App\Screens.cs" />
