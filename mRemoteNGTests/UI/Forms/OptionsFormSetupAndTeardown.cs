@@ -1,9 +1,5 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.Messages;
-using mRemoteNG.UI.Window;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using mRemoteNG.UI.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNGTests.UI.Forms
 {
@@ -14,7 +10,6 @@ namespace mRemoteNGTests.UI.Forms
         [OneTimeSetUp]
         public void OnetimeSetup()
         {
-            Runtime.MessageCollector = new MessageCollector(new ErrorAndInfoWindow(new DockContent()));
         }
 
         [SetUp]
