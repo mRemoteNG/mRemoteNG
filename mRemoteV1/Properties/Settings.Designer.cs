@@ -98,18 +98,6 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ShowNoMessageBoxes {
-            get {
-                return ((bool)(this["ShowNoMessageBoxes"]));
-            }
-            set {
-                this["ShowNoMessageBoxes"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SwitchToMCOnInformation {
             get {
                 return ((bool)(this["SwitchToMCOnInformation"]));

@@ -61,18 +61,18 @@ namespace mRemoteNG.Messages
             if (onlyLog)
                 return;
 
-            if (Settings.Default.ShowNoMessageBoxes)
-            {
-                /* These if statements need to be split so we can:
-                 * control that no messages boxes will be dispalyed
-                 * add items to the notifications panel
-                 * NOT switch to the notification panel if configured that way
-                 */
-                if(enableTimer)
-                    _ecTimer.Enabled = true;
-            }
-            else
-                ShowMessageBox(nMsg);
+            //if (Settings.Default.ShowNoMessageBoxes)
+            //{
+            //    /* These if statements need to be split so we can:
+            //     * control that no messages boxes will be dispalyed
+            //     * add items to the notifications panel
+            //     * NOT switch to the notification panel if configured that way
+            //     */
+            //    if(enableTimer)
+            //        _ecTimer.Enabled = true;
+            //}
+            //else
+            //    ShowMessageBox(nMsg);
 
             var lvItem = BuildListViewItem(nMsg);
             AddToList(lvItem);
