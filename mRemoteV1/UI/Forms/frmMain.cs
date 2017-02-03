@@ -778,12 +778,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewErrorsAndInfos.Checked == false)
 			{
-                Windows.ErrorsPanel.Show(pnlDock);
+                Windows.ErrorsForm.Show(pnlDock);
                 mMenViewErrorsAndInfos.Checked = true;
 			}
 			else
 			{
-                Windows.ErrorsPanel.Hide();
+                Windows.ErrorsForm.Hide();
                 mMenViewErrorsAndInfos.Checked = false;
 			}
 		}
@@ -1310,7 +1310,7 @@ namespace mRemoteNG.UI.Forms
             Windows.TreePanel.Show(Default.pnlDock, DockState.DockLeft);
             Windows.ConfigForm.Show(Default.pnlDock);
             Windows.ConfigForm.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
-            Windows.ErrorsPanel.Show(Default.pnlDock, DockState.Document);
+            Windows.ErrorsForm.Show(Default.pnlDock, DockState.Document);
 
             Windows.ErrorsForm.Hide();
             Windows.ScreenshotForm.Hide();

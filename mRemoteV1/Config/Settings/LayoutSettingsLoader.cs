@@ -22,7 +22,6 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 Windows.TreePanel = null;
-                Windows.ErrorsPanel = null;
 
                 while (_mainForm.pnlDock.Contents.Count > 0)
                 {
@@ -71,7 +70,7 @@ namespace mRemoteNG.Config.Settings
                     return Windows.TreePanel;
 
                 if (persistString == typeof(ErrorAndInfoWindow).ToString())
-                    return Windows.ErrorsPanel;
+                    return Windows.ErrorsForm;
 
                 if (persistString == typeof(ScreenshotManagerWindow).ToString())
                     return Windows.ScreenshotPanel;
@@ -91,8 +90,7 @@ namespace mRemoteNG.Config.Settings
             Windows.TreeForm = new ConnectionTreeWindow(Windows.TreePanel);
             Windows.TreePanel = Windows.TreeForm;
 
-            Windows.ErrorsForm = new ErrorAndInfoWindow(Windows.ErrorsPanel);
-            Windows.ErrorsPanel = Windows.ErrorsForm;
+            Windows.ErrorsForm = new ErrorAndInfoWindow();
 
             Windows.ScreenshotForm = new ScreenshotManagerWindow(Windows.ScreenshotPanel);
             Windows.ScreenshotPanel = Windows.ScreenshotForm;

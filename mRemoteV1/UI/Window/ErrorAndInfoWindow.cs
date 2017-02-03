@@ -16,6 +16,10 @@ namespace mRemoteNG.UI.Window
 
         public DockContent PreviousActiveForm { get; set; }
 
+	    public ErrorAndInfoWindow() : this(new DockContent())
+	    {
+	    }
+
         public ErrorAndInfoWindow(DockContent panel)
         {
             WindowType = WindowType.ErrorsAndInfos;
