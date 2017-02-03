@@ -246,8 +246,9 @@
     <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Security\CryptographyProviderFactory.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilder.cs" />
+    <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
-    <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
+    <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
@@ -430,7 +431,7 @@
     <Compile Include="Connection\Protocol\Telnet\Connection.Protocol.Telnet.cs" />
     <Compile Include="Connection\Protocol\VNC\Connection.Protocol.VNC.cs" />
     <Compile Include="Themes\ThemeInfo.cs" />
-    <Compile Include="Tools\CommandLineArguments.cs" />
+    <Compile Include="Tools\Cmdline\CommandLineArguments.cs" />
     <Compile Include="Container\ContainerInfo.cs" />
     <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>

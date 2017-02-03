@@ -237,7 +237,7 @@ namespace mRemoteNG.UI.Forms
                 Windows.Show(WindowType.ComponentsCheck);
 			}
 
-            Startup.Instance.CreateConnectionsProvider();
+            Startup.Instance.CreateConnectionsProvider(messageCollector);
 			AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
