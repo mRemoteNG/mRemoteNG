@@ -16,6 +16,9 @@ namespace mRemoteNG.Messages.MessageWriters
         public bool PrintInfoMessages { get; set; } = true;
         public bool PrintWarningMessages { get; set; } = true;
         public bool PrintErrorMessages { get; set; } = true;
+        public bool FocusOnInfoMessages { get; set; } = true;
+        public bool FocusOnWarningMessages { get; set; } = true;
+        public bool FocusOnErrorMessages { get; set; } = true;
 
         public NotificationPanelMessageWriter(ErrorAndInfoWindow messageWindow)
         {
@@ -31,7 +34,9 @@ namespace mRemoteNG.Messages.MessageWriters
             if (!WeShouldPrint(message))
                 return;
 
-            _ecTimer.Enabled = true;
+            if (WeShouldFocusNotificationPanel(message))
+                BeginSwitchToPanel();
+
             var lvItem = BuildListViewItem(message);
             AddToList(lvItem);
         }
@@ -67,6 +72,23 @@ namespace mRemoteNG.Messages.MessageWriters
             return false;
         }
 
+        private bool WeShouldFocusNotificationPanel(IMessage message)
+        {
+            switch (message.Class)
+            {
+                case MessageClass.InformationMsg:
+                    if (FocusOnInfoMessages) return true;
+                    break;
+                case MessageClass.WarningMsg:
+                    if (FocusOnWarningMessages) return true;
+                    break;
+                case MessageClass.ErrorMsg:
+                    if (FocusOnErrorMessages) return true;
+                    break;
+            }
+            return false;
+        }
+
         private static ListViewItem BuildListViewItem(IMessage nMsg)
         {
             var lvItem = new ListViewItem
@@ -83,6 +105,11 @@ namespace mRemoteNG.Messages.MessageWriters
                 Enabled = false, Interval = 300
             };
             _ecTimer.Tick += SwitchTimerTick;
+        }
+
+        private void BeginSwitchToPanel()
+        {
+            _ecTimer.Enabled = true;
         }
 
         private void SwitchTimerTick(object sender, EventArgs e)

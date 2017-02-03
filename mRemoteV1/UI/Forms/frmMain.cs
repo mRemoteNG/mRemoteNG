@@ -199,7 +199,8 @@ namespace mRemoteNG.UI.Forms
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
 
-            MessageCollectorSetup.Setup(Runtime.MessageWriters, Runtime.MessageCollector);
+            MessageCollectorSetup.SetupMessageCollector(Runtime.MessageCollector, Runtime.MessageWriters);
+            MessageCollectorSetup.BuildMessageWritersFromSettings(Runtime.MessageWriters);
 
             ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();

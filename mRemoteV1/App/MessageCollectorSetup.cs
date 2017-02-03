@@ -7,19 +7,22 @@ namespace mRemoteNG.App
 {
     public class MessageCollectorSetup
     {
-        public static void Setup(IList<IMessageWriter> messageWriterList, MessageCollector2 messageCollector)
+        public static void SetupMessageCollector(MessageCollector2 messageCollector, IList<IMessageWriter> messageWriterList)
+        {
+            messageCollector.CollectionChanged += (o, args) =>
+            {
+                var messages = args.NewItems.Cast<IMessage>().ToArray();
+                foreach (var printer in messageWriterList)
+                    printer.Print(messages);
+            };
+        }
+
+        public static void BuildMessageWritersFromSettings(IList<IMessageWriter> messageWriterList)
         {
             messageWriterList.Add(BuildDebugConsoleMessageWriter());
             messageWriterList.Add(BuildTextLogMessageWriter());
             messageWriterList.Add(BuildNotificationPanelMessageWriter());
             messageWriterList.Add(BuildPopupMessageWriter());
-
-            messageCollector.CollectionChanged += (o, args) =>
-            {
-                var messages = args.NewItems.Cast<IMessage>().ToArray();
-                foreach (var printer in Runtime.MessageWriters)
-                    printer.Print(messages);
-            };
         }
 
         private static DebugConsoleMessageWriter BuildDebugConsoleMessageWriter()
@@ -51,7 +54,10 @@ namespace mRemoteNG.App
                 PrintDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
                 PrintInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
                 PrintWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs
+                PrintErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs,
+                FocusOnInfoMessages = Settings.Default.SwitchToMCOnInformation,
+                FocusOnWarningMessages = Settings.Default.SwitchToMCOnWarning,
+                FocusOnErrorMessages = Settings.Default.SwitchToMCOnError
             };
         }
 
