@@ -14,6 +14,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.MessagePrinters;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Settings;
@@ -54,7 +55,7 @@ namespace mRemoteNG.UI.Forms
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
-
+        private IDataProvider<string> MessagePrinterSettingsDataProvider = new FileDataProvider(Path.Combine(SettingsFileInfo.SettingsPath, "messagePrinters.config"));
 
 
 
@@ -196,13 +197,13 @@ namespace mRemoteNG.UI.Forms
         #region Startup & Shutdown
         private void frmMain_Load(object sender, EventArgs e)
         {
-            SetupMessageCollector();
-
             // Create gui config load and save objects
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
-			
-			ApplyLanguage();
+
+            SetupMessageCollector();
+
+            ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
@@ -210,9 +211,6 @@ namespace mRemoteNG.UI.Forms
 			fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
             Runtime.WindowList = new WindowList();
-
-            if (Settings.Default.ShowNoMessageBoxes)
-                Runtime.MessagePrinters.Add(new ErrorAndInfoWindowMessagePrinter(Windows.ErrorsForm));
 
             if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
 			{
@@ -404,6 +402,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
+            Shutdown.SaveMessagePrinterSettings(MessagePrinterSettingsDataProvider);
             Shutdown.Cleanup();
 									
 			IsClosing = true;
@@ -1426,11 +1425,12 @@ namespace mRemoteNG.UI.Forms
                     PrintInfoMessages = Settings.Default.WriteLogFile,
                     PrintDebugMessages = Settings.Default.WriteLogFile,
                     PrintWarningMessages = Settings.Default.WriteLogFile
-                }
+                },
+                new ErrorAndInfoWindowMessagePrinter(Windows.ErrorsForm),
+                new PopupMessagePrinter()
             };
 
-            if (!Settings.Default.ShowNoMessageBoxes)
-                messagePrinters.Add(new PopupMessagePrinter());
+            ApplyMessagePrinterSettings(messagePrinters);
 
             messageCollector.CollectionChanged += (o, args) =>
             {
@@ -1441,6 +1441,13 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.MessageCollector = messageCollector;
             Runtime.MessagePrinters = messagePrinters;
+        }
+
+        private void ApplyMessagePrinterSettings(IEnumerable<IMessagePrinter> messagePrinters)
+        {
+            var deserializer = new MessagePrinterDeserializer();
+            var settings = MessagePrinterSettingsDataProvider.Load();
+            deserializer.ApplySettings(settings, messagePrinters);
         }
     }
 }

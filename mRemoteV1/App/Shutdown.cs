@@ -1,6 +1,10 @@
 ﻿using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
+using System.IO;
+using mRemoteNG.App.Info;
+using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.MessagePrinters;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.UI.Forms;
 
@@ -50,6 +54,13 @@ namespace mRemoteNG.App
         {
             if (Settings.Default.SaveConsOnExit)
                 Runtime.SaveConnections();
+        }
+
+        public static void SaveMessagePrinterSettings(IDataProvider<string> dataProvider)
+        {
+            var messagePrinterSerializer = new MessagePrinterSerializer();
+            var settings = messagePrinterSerializer.Serialize(Runtime.MessagePrinters);
+            dataProvider.Save(settings);
         }
 
         private static void SaveSettings()
