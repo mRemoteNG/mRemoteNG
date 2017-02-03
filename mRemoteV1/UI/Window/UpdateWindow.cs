@@ -18,7 +18,14 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class UpdateWindow : BaseWindow
 	{
-#region Public Methods
+        private AppUpdater _appUpdate;
+        private bool _isUpdateDownloadHandlerDeclared;
+
+        #region Public Methods
+        public UpdateWindow() : this(new DockContent())
+	    {
+	    }
+
 		public UpdateWindow(DockContent panel)
 		{
 			WindowType = WindowType.Update;
@@ -26,9 +33,9 @@ namespace mRemoteNG.UI.Window
 			InitializeComponent();
 			Runtime.FontOverride(this);
 		}
-#endregion
+        #endregion
 		
-#region Form Stuff
+        #region Form Stuff
 
 	    private void Update_Load(object sender, EventArgs e)
 		{
@@ -72,14 +79,9 @@ namespace mRemoteNG.UI.Window
 			}
 			Process.Start(linkUri.ToString());
 		}
-#endregion
+        #endregion
 		
-#region Private Fields
-		private AppUpdater _appUpdate;
-		private bool _isUpdateDownloadHandlerDeclared;
-#endregion
-		
-#region Private Methods
+        #region Private Methods
 		private void CheckForUpdate()
 		{
 			if (_appUpdate == null)
@@ -230,9 +232,9 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateDownloadFailed, ex);
 			}
 		}
-#endregion
+        #endregion
 		
-#region Events
+        #region Events
 		private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
 			prgbDownload.Value = e.ProgressPercentage;
@@ -268,6 +270,6 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message);
             }
 		}
-#endregion
+        #endregion
 	}
 }

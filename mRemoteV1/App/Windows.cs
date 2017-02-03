@@ -29,8 +29,7 @@ namespace mRemoteNG.App
         public static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
         public static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
         public static ScreenshotManagerWindow ScreenshotForm { get; set; } = new ScreenshotManagerWindow();
-        public static UpdateWindow UpdateForm { get; set; }
-        public static DockContent UpdatePanel { get; set; } = new DockContent();
+        public static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
         public static SSHTransferWindow SshtransferForm { get; set; }
         
         
@@ -73,8 +72,7 @@ namespace mRemoteNG.App
                 {
                     if (UpdateForm == null || UpdateForm.IsDisposed)
                     {
-                        UpdateForm = new UpdateWindow(UpdatePanel);
-                        UpdatePanel = UpdateForm;
+                        UpdateForm = new UpdateWindow();
                     }
                     UpdateForm.Show(frmMain.Default.pnlDock);
                 }

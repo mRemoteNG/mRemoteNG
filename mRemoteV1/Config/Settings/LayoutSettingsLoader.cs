@@ -86,12 +86,8 @@ namespace mRemoteNG.Config.Settings
             Windows.ConfigForm = new ConfigWindow();
             Windows.TreeForm = new ConnectionTreeWindow();
             Windows.ErrorsForm = new ErrorAndInfoWindow();
-
-            Windows.ScreenshotForm = new ScreenshotManagerWindow(Windows.ScreenshotForm);
-            Windows.ScreenshotForm = Windows.ScreenshotForm;
-
-            Windows.UpdateForm = new UpdateWindow(Windows.UpdatePanel);
-            Windows.UpdatePanel = Windows.UpdateForm;
+            Windows.ScreenshotForm = new ScreenshotManagerWindow();
+            Windows.UpdateForm = new UpdateWindow();
         }
     }
 }
