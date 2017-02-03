@@ -190,6 +190,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.buttonOpenLogFile.TabIndex = 30;
             this.buttonOpenLogFile.Text = "Open File";
             this.buttonOpenLogFile.UseVisualStyleBackColor = true;
+            this.buttonOpenLogFile.Click += new System.EventHandler(this.buttonOpenLogFile_Click);
             // 
             // buttonSelectLogPath
             // 

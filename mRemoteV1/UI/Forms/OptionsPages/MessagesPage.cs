@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -113,6 +114,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void buttonRestoreDefaultLogPath_Click(object sender, System.EventArgs e)
         {
             textBoxLogPath.Text = Logger.DefaultLogPath;
+        }
+
+        private void buttonOpenLogFile_Click(object sender, System.EventArgs e)
+        {
+            if (Path.GetExtension(textBoxLogPath.Text) == ".log")
+                Process.Start(textBoxLogPath.Text);
         }
     }
 }
