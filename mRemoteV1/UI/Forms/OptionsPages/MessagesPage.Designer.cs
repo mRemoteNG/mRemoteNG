@@ -197,6 +197,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.buttonSelectLogPath.TabIndex = 30;
             this.buttonSelectLogPath.Text = "Choose Path";
             this.buttonSelectLogPath.UseVisualStyleBackColor = true;
+            this.buttonSelectLogPath.Click += new System.EventHandler(this.buttonSelectLogPath_Click);
             // 
             // labelLogTheseMsgTypes
             // 

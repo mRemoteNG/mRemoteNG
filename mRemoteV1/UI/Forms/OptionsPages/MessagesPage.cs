@@ -1,3 +1,5 @@
+using System.IO;
+using System.Windows.Forms;
 using mRemoteNG.App;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -93,6 +95,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void SavePopupSettings()
         {
 
+        }
+
+        private void buttonSelectLogPath_Click(object sender, System.EventArgs e)
+        {
+            var currentFile = textBoxLogPath.Text;
+            var currentDirectory = Path.GetDirectoryName(currentFile);
+            saveFileDialogLogging.Title = "Choose a location to save the mRemoteNG log file";
+            saveFileDialogLogging.Filter = @"Log file|*.log";
+            saveFileDialogLogging.InitialDirectory = currentDirectory;
+            saveFileDialogLogging.FileName = currentFile;
+            var dialogResult = saveFileDialogLogging.ShowDialog();
+            if (dialogResult != DialogResult.OK) return;
+            textBoxLogPath.Text = saveFileDialogLogging.FileName;
         }
     }
 }
