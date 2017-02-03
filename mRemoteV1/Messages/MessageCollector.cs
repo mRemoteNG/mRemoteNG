@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 
 namespace mRemoteNG.Messages
@@ -14,8 +15,7 @@ namespace mRemoteNG.Messages
 
         public MessageCollector()
         {
-            _messageList = new ObservableCollection<IMessage>();
-            ((INotifyCollectionChanged) _messageList).CollectionChanged += RaiseCollectionChangedEvent;
+            _messageList = new List<IMessage>();
         }
 
         public void AddMessage(MessageClass messageClass, string messageText, bool onlyLog = false)
@@ -26,8 +26,20 @@ namespace mRemoteNG.Messages
 
         public void AddMessage(IMessage message)
         {
-            if (_messageList.Contains(message)) return;
-            _messageList.Add(message);
+            AddMessages(new [] {message});
+        }
+
+        public void AddMessages(IEnumerable<IMessage> messages)
+        {
+            var newMessages = new List<IMessage>();
+            foreach (var message in messages)
+            {
+                if (_messageList.Contains(message)) continue;
+                _messageList.Add(message);
+                newMessages.Add(message);
+            }
+            if (newMessages.Any())
+                RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, newMessages);
         }
 
         public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
@@ -47,9 +59,9 @@ namespace mRemoteNG.Messages
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
+        private void RaiseCollectionChangedEvent(NotifyCollectionChangedAction action, IList items)
         {
-            CollectionChanged?.Invoke(this, args);
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, items));
         }
     }
 }

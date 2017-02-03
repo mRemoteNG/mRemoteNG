@@ -56,5 +56,37 @@ namespace mRemoteNGTests.Messages
             _messageCollector.AddMessage(message);
             Assert.That(wasCalled, Is.True);
         }
+
+        [Test]
+        public void BatchAddAddsAllItems()
+        {
+            var msg1 = Substitute.For<IMessage>();
+            var msg2 = Substitute.For<IMessage>();
+            var msgCollection = new[] {msg1, msg2};
+            _messageCollector.AddMessages(msgCollection);
+            Assert.That(_messageCollector.Messages, Is.EquivalentTo(msgCollection));
+        }
+
+        [Test]
+        public void OneNotificationRaisedForBatchAdd()
+        {
+            var notificationCount = 0;
+            _messageCollector.CollectionChanged += (sender, args) => notificationCount++;
+            var msg1 = Substitute.For<IMessage>();
+            var msg2 = Substitute.For<IMessage>();
+            _messageCollector.AddMessages(new[] { msg1, msg2 });
+            Assert.That(notificationCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void EventNotRaisedIfMsgIsntUnique()
+        {
+            var notificationCount = 0;
+            var msg1 = Substitute.For<IMessage>();
+            _messageCollector.AddMessage(msg1);
+            _messageCollector.CollectionChanged += (sender, args) => notificationCount++;
+            _messageCollector.AddMessage(msg1);
+            Assert.That(notificationCount, Is.EqualTo(0));
+        }
     }
 }
