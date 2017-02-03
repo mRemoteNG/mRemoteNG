@@ -8,6 +8,7 @@ using System.Management;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
+using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
@@ -34,10 +35,11 @@ namespace mRemoteNG.App
         {
         }
 
-        public void InitializeProgram()
+        public void InitializeProgram(MessageCollector2 messageCollector)
         {
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
-            LogStartupData();
+            var startupLogger = new StartupDataLogger(messageCollector);
+            startupLogger.LogStartupData();
             CompatibilityChecker.CheckCompatibility();
             ParseCommandLineArgs();
             IeBrowserEmulation.Register();
@@ -62,99 +64,6 @@ namespace mRemoteNG.App
             }
         }
 
-        private static void LogStartupData()
-        {
-            if (!Settings.Default.WriteLogFile) return;
-            LogApplicationData();
-            LogCmdLineArgs();
-            LogSystemData();
-            LogCLRData();
-            LogCultureData();
-        }
-
-        private static void LogSystemData()
-        {
-            var osData = GetOperatingSystemData();
-            var architecture = GetArchitectureData();
-            Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
-        }
-
-        private static string GetOperatingSystemData()
-        {
-            var osVersion = string.Empty;
-            var servicePack = string.Empty;
-
-            try
-            {
-                foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True").Get())
-                {
-                    var managementObject = (ManagementObject) o;
-                    osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
-                    servicePack = GetOSServicePack(servicePack, managementObject);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Instance.WarnFormat($"Error retrieving operating system information from WMI. {ex.Message}");
-            }
-            var osData = string.Join(" ", osVersion, servicePack);
-            return osData;
-        }
-
-        private static string GetOSServicePack(string servicePack, ManagementObject managementObject)
-        {
-            var servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
-            if (servicePackNumber != 0)
-            {
-                servicePack = $"Service Pack {servicePackNumber}";
-            }
-            return servicePack;
-        }
-
-        private static string GetArchitectureData()
-        {
-            var architecture = string.Empty;
-            try
-            {
-                foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_Processor WHERE DeviceID=\'CPU0\'").Get())
-                {
-                    var managementObject = (ManagementObject) o;
-                    var addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
-                    architecture = $"{addressWidth}-bit";
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Instance.WarnFormat($"Error retrieving operating system address width from WMI. {ex.Message}");
-            }
-            return architecture;
-        }
-
-        private static void LogApplicationData()
-        {
-#if !PORTABLE
-            Logger.Instance.InfoFormat($"{Application.ProductName} {Application.ProductVersion} starting.");
-#else
-            Logger.Instance.InfoFormat(
-                $"{Application.ProductName} {Application.ProductVersion} {Language.strLabelPortableEdition} starting.");
-#endif
-        }
-
-        private static void LogCmdLineArgs()
-        {
-            Logger.Instance.InfoFormat($"Command Line: {string.Join(" ", Environment.GetCommandLineArgs())}");
-        }
-
-        private static void LogCLRData()
-        {
-            Logger.Instance.InfoFormat($"Microsoft .NET CLR {Environment.Version}");
-        }
-
-        private static void LogCultureData()
-        {
-            Logger.Instance.InfoFormat(
-                $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}");
-        }
 
         public void CreateConnectionsProvider()
         {

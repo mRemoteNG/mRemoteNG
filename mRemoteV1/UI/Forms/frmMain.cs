@@ -202,6 +202,8 @@ namespace mRemoteNG.UI.Forms
             MessageCollectorSetup.SetupMessageCollector(Runtime.MessageCollector, Runtime.MessageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(Runtime.MessageWriters);
 
+            Startup.Instance.InitializeProgram(Runtime.MessageCollector);
+
             ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
