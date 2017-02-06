@@ -5,10 +5,10 @@ namespace mRemoteNG.Messages
 {
     public class MessageTypeFilterDecorator : IMessageWriter
     {
-        private readonly IMessageTypeFilter _filter;
+        private readonly IMessageTypeFilteringOptions _filter;
         private readonly IMessageWriter _decoratedWriter;
 
-        public MessageTypeFilterDecorator(IMessageTypeFilter filter, IMessageWriter decoratedWriter)
+        public MessageTypeFilterDecorator(IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
         {
             if (filter == null)
                 throw new ArgumentNullException(nameof(filter));

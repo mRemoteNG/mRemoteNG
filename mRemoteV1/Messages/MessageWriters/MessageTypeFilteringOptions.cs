@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.Messages.MessageWriters
 {
-    public class MessageTypeFilteringOptions : IMessageTypeFilter
+    public class MessageTypeFilteringOptions : IMessageTypeFilteringOptions
     {
         public bool AllowDebugMessages { get; set; }
         public bool AllowInfoMessages { get; set; }
