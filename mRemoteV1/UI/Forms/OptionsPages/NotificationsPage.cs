@@ -69,8 +69,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             SaveLoggingSettings();
             SavePopupSettings();
             Settings.Default.Save();
-            Runtime.MessageWriters.Clear();
-            MessageCollectorSetup.BuildMessageWritersFromSettings(Runtime.MessageWriters);
         }
 
         private void LoadNotificationPanelSettings()

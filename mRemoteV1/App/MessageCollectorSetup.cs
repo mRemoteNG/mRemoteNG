@@ -36,13 +36,7 @@ namespace mRemoteNG.App
         private static IMessageWriter BuildTextLogMessageWriter()
         {
             return new MessageTypeFilterDecorator(
-                new MessageTypeFilteringOptions
-                {
-                    AllowDebugMessages = Settings.Default.TextLogMessageWriterWriteDebugMsgs,
-                    AllowInfoMessages = Settings.Default.TextLogMessageWriterWriteInfoMsgs,
-                    AllowWarningMessages = Settings.Default.TextLogMessageWriterWriteWarningMsgs,
-                    AllowErrorMessages = Settings.Default.TextLogMessageWriterWriteErrorMsgs
-                },
+                new LogMessageTypeFilteringOptions(),
                 new TextLogMessageWriter(Logger.Instance)
             );
         }
@@ -52,21 +46,10 @@ namespace mRemoteNG.App
             
             return new OnlyLogMessageFilter(
                 new MessageTypeFilterDecorator(
-                    new MessageTypeFilteringOptions
-                    {
-                        AllowDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
-                        AllowInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
-                        AllowWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
-                        AllowErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs
-                    },
+                    new NotificationPanelMessageFilteringOptions(),
                     new MessageFocusDecorator(
                         Windows.ErrorsForm,
-                        new MessageTypeFilteringOptions
-                        {
-                            AllowInfoMessages = Settings.Default.SwitchToMCOnInformation,
-                            AllowWarningMessages = Settings.Default.SwitchToMCOnWarning,
-                            AllowErrorMessages = Settings.Default.SwitchToMCOnError
-                        },
+                        new NotificationPanelSwitchOnMessageFilteringOptions(),
                         new NotificationPanelMessageWriter(Windows.ErrorsForm)
                     )
                 )
@@ -77,13 +60,7 @@ namespace mRemoteNG.App
         {
             return new OnlyLogMessageFilter(
                 new MessageTypeFilterDecorator(
-                    new MessageTypeFilteringOptions
-                    {
-                        AllowDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
-                        AllowInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
-                        AllowWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
-                        AllowErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
-                    },
+                    new PopupMessageFilteringOptions(),
                     new PopupMessageWriter()
                 )
             );

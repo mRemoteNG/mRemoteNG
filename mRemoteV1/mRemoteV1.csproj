@@ -218,6 +218,7 @@
     <Compile Include="Credential\ICredentialProvider.cs" />
     <Compile Include="Credential\ICredentialList.cs" />
     <Compile Include="Credential\INotifyingCredentialRecord.cs" />
+    <Compile Include="Messages\LogMessageTypeFilteringOptions.cs" />
     <Compile Include="Messages\MessageTypeFilterDecorator.cs" />
     <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />
     <Compile Include="Messages\IMessage.cs" />
@@ -231,6 +232,9 @@
     <Compile Include="Messages\MessageWriters\OnlyLogMessageFilter.cs" />
     <Compile Include="Messages\MessageWriters\PopupMessageWriter.cs" />
     <Compile Include="Messages\MessageWriters\TextLogMessageWriter.cs" />
+    <Compile Include="Messages\NotificationPanelMessageFilteringOptions.cs" />
+    <Compile Include="Messages\NotificationPanelSwitchOnMessageFilteringOptions.cs" />
+    <Compile Include="Messages\PopupMessageFilteringOptions.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticator.cs" />
     <Compile Include="Security\BlockCipherEngines.cs" />
     <Compile Include="Security\BlockCipherModes.cs" />
