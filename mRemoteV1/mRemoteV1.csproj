@@ -228,6 +228,7 @@
     <Compile Include="Messages\MessageWriters\IMessageWriter.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Messages\MessageCollector.cs" />
+    <Compile Include="Messages\MessageWriters\OnlyLogMessageFilter.cs" />
     <Compile Include="Messages\MessageWriters\PopupMessageWriter.cs" />
     <Compile Include="Messages\MessageWriters\TextLogMessageWriter.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticator.cs" />

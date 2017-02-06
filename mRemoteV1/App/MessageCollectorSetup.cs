@@ -50,38 +50,42 @@ namespace mRemoteNG.App
         private static IMessageWriter BuildNotificationPanelMessageWriter()
         {
             
-            return new MessageTypeFilterDecorator(
-                new MessageTypeFilteringOptions
-                {
-                    AllowDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
-                    AllowInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
-                    AllowWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
-                    AllowErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs
-                },
-                new MessageFocusDecorator(
-                    Windows.ErrorsForm,
+            return new OnlyLogMessageFilter(
+                new MessageTypeFilterDecorator(
                     new MessageTypeFilteringOptions
                     {
-                        AllowInfoMessages = Settings.Default.SwitchToMCOnInformation,
-                        AllowWarningMessages = Settings.Default.SwitchToMCOnWarning,
-                        AllowErrorMessages = Settings.Default.SwitchToMCOnError
+                        AllowDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
+                        AllowInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
+                        AllowWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
+                        AllowErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs
                     },
-                    new NotificationPanelMessageWriter(Windows.ErrorsForm)
+                    new MessageFocusDecorator(
+                        Windows.ErrorsForm,
+                        new MessageTypeFilteringOptions
+                        {
+                            AllowInfoMessages = Settings.Default.SwitchToMCOnInformation,
+                            AllowWarningMessages = Settings.Default.SwitchToMCOnWarning,
+                            AllowErrorMessages = Settings.Default.SwitchToMCOnError
+                        },
+                        new NotificationPanelMessageWriter(Windows.ErrorsForm)
+                    )
                 )
             );
         }
 
         private static IMessageWriter BuildPopupMessageWriter()
         {
-            return new MessageTypeFilterDecorator(
-                new MessageTypeFilteringOptions
-                {
-                    AllowDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
-                    AllowInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
-                    AllowWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
-                    AllowErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
-                },
-                new PopupMessageWriter()
+            return new OnlyLogMessageFilter(
+                new MessageTypeFilterDecorator(
+                    new MessageTypeFilteringOptions
+                    {
+                        AllowDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
+                        AllowInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
+                        AllowWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
+                        AllowErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
+                    },
+                    new PopupMessageWriter()
+                )
             );
         }
     }
