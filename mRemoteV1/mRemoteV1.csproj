@@ -220,6 +220,7 @@
     <Compile Include="Credential\INotifyingCredentialRecord.cs" />
     <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />
     <Compile Include="Messages\IMessage.cs" />
+    <Compile Include="Messages\MessageWriters\IMessageTypeFilter.cs" />
     <Compile Include="Messages\MessageWriters\NotificationPanelMessageWriter.cs" />
     <Compile Include="Messages\MessageWriters\IMessageWriter.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
