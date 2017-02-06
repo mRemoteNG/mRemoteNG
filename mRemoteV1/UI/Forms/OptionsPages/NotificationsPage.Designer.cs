@@ -54,11 +54,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLogDebugMsgs = new System.Windows.Forms.CheckBox();
             this.saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxPopups = new System.Windows.Forms.GroupBox();
-            this.labelPopupShowTypes = new System.Windows.Forms.Label();
             this.chkPopupError = new System.Windows.Forms.CheckBox();
+            this.labelPopupShowTypes = new System.Windows.Forms.Label();
             this.chkPopupWarning = new System.Windows.Forms.CheckBox();
-            this.chkPopupInfo = new System.Windows.Forms.CheckBox();
             this.chkPopupDebug = new System.Windows.Forms.CheckBox();
+            this.chkPopupInfo = new System.Windows.Forms.CheckBox();
             this.groupBoxNotifications.SuspendLayout();
             this.groupBoxLogging.SuspendLayout();
             this.groupBoxPopups.SuspendLayout();
@@ -300,15 +300,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxPopups.TabStop = false;
             this.groupBoxPopups.Text = "Pop-ups";
             // 
-            // labelPopupShowTypes
-            // 
-            this.labelPopupShowTypes.AutoSize = true;
-            this.labelPopupShowTypes.Location = new System.Drawing.Point(8, 25);
-            this.labelPopupShowTypes.Name = "labelPopupShowTypes";
-            this.labelPopupShowTypes.Size = new System.Drawing.Size(139, 13);
-            this.labelPopupShowTypes.TabIndex = 33;
-            this.labelPopupShowTypes.Text = "Show these message types:";
-            // 
             // chkPopupError
             // 
             this.chkPopupError.AutoSize = true;
@@ -318,6 +309,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkPopupError.TabIndex = 43;
             this.chkPopupError.Text = "Error";
             this.chkPopupError.UseVisualStyleBackColor = true;
+            // 
+            // labelPopupShowTypes
+            // 
+            this.labelPopupShowTypes.AutoSize = true;
+            this.labelPopupShowTypes.Location = new System.Drawing.Point(8, 25);
+            this.labelPopupShowTypes.Name = "labelPopupShowTypes";
+            this.labelPopupShowTypes.Size = new System.Drawing.Size(139, 13);
+            this.labelPopupShowTypes.TabIndex = 33;
+            this.labelPopupShowTypes.Text = "Show these message types:";
             // 
             // chkPopupWarning
             // 
@@ -329,16 +329,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkPopupWarning.Text = "Warning";
             this.chkPopupWarning.UseVisualStyleBackColor = true;
             // 
-            // chkPopupInfo
-            // 
-            this.chkPopupInfo.AutoSize = true;
-            this.chkPopupInfo.Location = new System.Drawing.Point(22, 64);
-            this.chkPopupInfo.Name = "chkPopupInfo";
-            this.chkPopupInfo.Size = new System.Drawing.Size(78, 17);
-            this.chkPopupInfo.TabIndex = 41;
-            this.chkPopupInfo.Text = "Information";
-            this.chkPopupInfo.UseVisualStyleBackColor = true;
-            // 
             // chkPopupDebug
             // 
             this.chkPopupDebug.AutoSize = true;
@@ -349,14 +339,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkPopupDebug.Text = "Debug";
             this.chkPopupDebug.UseVisualStyleBackColor = true;
             // 
-            // MessagesPage
+            // chkPopupInfo
+            // 
+            this.chkPopupInfo.AutoSize = true;
+            this.chkPopupInfo.Location = new System.Drawing.Point(22, 64);
+            this.chkPopupInfo.Name = "chkPopupInfo";
+            this.chkPopupInfo.Size = new System.Drawing.Size(78, 17);
+            this.chkPopupInfo.TabIndex = 41;
+            this.chkPopupInfo.Text = "Information";
+            this.chkPopupInfo.UseVisualStyleBackColor = true;
+            // 
+            // NotificationsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBoxPopups);
             this.Controls.Add(this.groupBoxLogging);
             this.Controls.Add(this.groupBoxNotifications);
-            this.Name = "MessagesPage";
+            this.Name = "NotificationsPage";
             this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.groupBoxNotifications.ResumeLayout(false);
