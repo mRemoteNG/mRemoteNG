@@ -45,7 +45,7 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private ConnectionInfo _selectedConnection;
         private SystemMenu _systemMenu;
-        internal Fullscreen _fullscreen { get; set; }
+        internal FullscreenHandler _fullscreen { get; set; }
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
-            _fullscreen = new Fullscreen(this);
+            _fullscreen = new FullscreenHandler(this);
             pnlDock.Theme = new VS2012LightTheme();
 		}
 
@@ -125,65 +125,6 @@ namespace mRemoteNG.UI.Forms
 				UpdateWindowTitle();
 			}
 		}
-
-        internal class Fullscreen
-        {
-            public Fullscreen(Form handledForm)
-            {
-                _handledForm = handledForm;
-            }
-
-            private readonly Form _handledForm;
-            private FormWindowState _savedWindowState;
-            private FormBorderStyle _savedBorderStyle;
-            private Rectangle _savedBounds;
-
-            private bool _value;
-            public bool Value
-            {
-                get
-                {
-                    return _value;
-                }
-                set
-                {
-                    if (_value == value)
-                    {
-                        return;
-                    }
-                    if (!_value)
-                    {
-                        EnterFullscreen();
-                    }
-                    else
-                    {
-                        ExitFullscreen();
-                    }
-                    _value = value;
-                }
-            }
-
-            private void EnterFullscreen()
-            {
-                _savedBorderStyle = _handledForm.FormBorderStyle;
-                _savedWindowState = _handledForm.WindowState;
-                _savedBounds = _handledForm.Bounds;
-
-                _handledForm.FormBorderStyle = FormBorderStyle.None;
-                if (_handledForm.WindowState == FormWindowState.Maximized)
-                {
-                    _handledForm.WindowState = FormWindowState.Normal;
-                }
-                _handledForm.WindowState = FormWindowState.Maximized;
-            }
-            private void ExitFullscreen()
-            {
-                _handledForm.FormBorderStyle = _savedBorderStyle;
-                _handledForm.WindowState = _savedWindowState;
-                _handledForm.Bounds = _savedBounds;
-            }
-        }
-
         #endregion
 
         #region Startup & Shutdown
