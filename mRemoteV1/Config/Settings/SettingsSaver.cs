@@ -16,8 +16,8 @@ namespace mRemoteNG.Config.Settings
         {
             try
             {
-                var with1 = frmMain.Default;
-                var windowPlacement = new WindowPlacement(frmMain.Default);
+                var with1 = FrmMain.Default;
+                var windowPlacement = new WindowPlacement(FrmMain.Default);
                 if (with1.WindowState == FormWindowState.Minimized & windowPlacement.RestoreToMaximized)
                 {
                     with1.Opacity = 0;
@@ -79,7 +79,7 @@ namespace mRemoteNG.Config.Settings
                     Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
                 }
 
-                frmMain.Default.pnlDock.SaveAsXml(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName);
+                FrmMain.Default.pnlDock.SaveAsXml(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName);
             }
             catch (Exception ex)
             {

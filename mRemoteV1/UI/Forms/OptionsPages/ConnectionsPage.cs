@@ -112,12 +112,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.AutoSaveEveryMinutes = (int) numAutoSave.Value;
             if (Settings.Default.AutoSaveEveryMinutes > 0)
             {
-                frmMain.Default.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes*60000;
-                frmMain.Default.tmrAutoSave.Enabled = true;
+                FrmMain.Default.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes*60000;
+                FrmMain.Default.tmrAutoSave.Enabled = true;
             }
             else
             {
-                frmMain.Default.tmrAutoSave.Enabled = false;
+                FrmMain.Default.tmrAutoSave.Enabled = false;
             }
 
             if (radCredentialsNoInfo.Checked)

@@ -205,7 +205,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			{
 				if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
 				{
-                    _ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(frmMain.Default).Bounds.Width, Screen.FromControl(frmMain.Default).Bounds.Height, 0);
+                    _ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(FrmMain.Default).Bounds.Width, Screen.FromControl(FrmMain.Default).Bounds.Height, 0);
 					_ICAClient.FullScreenWindow();
 							
 					return;
@@ -221,7 +221,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				}
 				else if (InterfaceControl.Info.Resolution == ProtocolRDP.RDPResolutions.Fullscreen)
 				{
-					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(frmMain.Default).Bounds.Width, Screen.FromControl(frmMain.Default).Bounds.Height, 0);
+					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(FrmMain.Default).Bounds.Width, Screen.FromControl(FrmMain.Default).Bounds.Height, 0);
 					_ICAClient.FullScreenWindow();
 				}
 				else

@@ -24,7 +24,7 @@ namespace mRemoteNG.App
             var errorText = string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName,
                 GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
-            MessageBox.Show(frmMain.Default, errorText);
+            MessageBox.Show(FrmMain.Default, errorText);
             Environment.Exit(1);
         }
 

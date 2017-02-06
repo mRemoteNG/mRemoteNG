@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.SaveSettings();
 
             Settings.Default.AlwaysShowPanelTabs = chkAlwaysShowPanelTabs.Checked;
-            frmMain.Default.ShowHidePanelTabs();
+            FrmMain.Default.ShowHidePanelTabs();
 
             Settings.Default.OpenTabsRightOfSelected = chkOpenNewTabRightOfSelected.Checked;
             Settings.Default.ShowLogonInfoOnTabs = chkShowLogonInfoOnTabs.Checked;

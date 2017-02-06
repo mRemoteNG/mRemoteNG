@@ -76,7 +76,7 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         private void SwitchToMessage()
         {
-            _messageWindow.PreviousActiveForm = (DockContent)frmMain.Default.pnlDock.ActiveContent;
+            _messageWindow.PreviousActiveForm = (DockContent)FrmMain.Default.pnlDock.ActiveContent;
             ShowMcForm();
             _messageWindow.lvErrorCollector.Focus();
             _messageWindow.lvErrorCollector.SelectedItems.Clear();
@@ -86,10 +86,10 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         private void ShowMcForm()
         {
-            if (frmMain.Default.pnlDock.InvokeRequired)
-                frmMain.Default.pnlDock.Invoke((MethodInvoker)ShowMcForm);
+            if (FrmMain.Default.pnlDock.InvokeRequired)
+                FrmMain.Default.pnlDock.Invoke((MethodInvoker)ShowMcForm);
             else
-                _messageWindow.Show(frmMain.Default.pnlDock);
+                _messageWindow.Show(FrmMain.Default.pnlDock);
         }
     }
 }

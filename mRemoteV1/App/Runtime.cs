@@ -72,7 +72,7 @@ namespace mRemoteNG.App
 
         private static void ShowConnectionWindow(ConnectionWindow connectionForm)
         {
-            connectionForm.Show(frmMain.Default.pnlDock, DockState.Document);
+            connectionForm.Show(FrmMain.Default.pnlDock, DockState.Document);
         }
 
         private static void PrepareTabControllerSupport(bool noTabber, ConnectionWindow connectionForm)
@@ -347,7 +347,7 @@ namespace mRemoteNG.App
                 }
                 else
                 {
-                    MessageBox.Show(frmMain.Default,
+                    MessageBox.Show(FrmMain.Default,
                         string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)),
                         @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
@@ -502,7 +502,7 @@ namespace mRemoteNG.App
 
                     saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 
-                    if (saveFileDialog.ShowDialog(frmMain.Default) != DialogResult.OK) return;
+                    if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
 
                     connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
                     connectionsSave.ConnectionFileName = saveFileDialog.FileName;

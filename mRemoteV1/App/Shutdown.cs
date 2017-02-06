@@ -15,7 +15,7 @@ namespace mRemoteNG.App
         public static void Quit(string updateFilePath = null)
         {
             _updateFilePath = updateFilePath;
-            frmMain.Default.Close();
+            FrmMain.Default.Close();
             ProgramRoot.CloseSingletonInstanceMutex();
         }
 

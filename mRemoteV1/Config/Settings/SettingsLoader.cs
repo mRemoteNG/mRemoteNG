@@ -20,10 +20,10 @@ namespace mRemoteNG.Config.Settings
         private readonly ExternalAppsLoader _externalAppsLoader;
         private readonly MessageCollector _messageCollector;
 
-	    private frmMain MainForm { get; }
+	    private FrmMain MainForm { get; }
 
 
-	    public SettingsLoader(frmMain mainForm, MessageCollector messageCollector)
+	    public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector)
 		{
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Settings
         private static void SetAlwaysShowPanelTabs()
         {
             if (mRemoteNG.Settings.Default.AlwaysShowPanelTabs)
-                frmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
+                FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
         private static void SetTheme()

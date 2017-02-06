@@ -11,10 +11,10 @@ namespace mRemoteNG.Config.Settings
 {
     public class ExternalAppsLoader
     {
-        private readonly frmMain _mainForm;
+        private readonly FrmMain _mainForm;
         private readonly MessageCollector _messageCollector;
 
-        public ExternalAppsLoader(frmMain mainForm, MessageCollector messageCollector)
+        public ExternalAppsLoader(FrmMain mainForm, MessageCollector messageCollector)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -83,7 +83,7 @@ namespace mRemoteNG.Config.Settings
 
             _mainForm.SwitchToolBarText(mRemoteNG.Settings.Default.ExtAppsTBShowText);
 
-            frmMain.Default.AddExternalToolsToToolBar();
+            FrmMain.Default.AddExternalToolsToToolBar();
         }
     }
 }

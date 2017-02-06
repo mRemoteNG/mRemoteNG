@@ -31,9 +31,9 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class frmMain
+    public partial class FrmMain
     {
-        public static frmMain Default { get; } = new frmMain();
+        public static FrmMain Default { get; } = new FrmMain();
 
         private static clipboardchangeEventHandler clipboardchangeEvent;
         private bool _inSizeMove;
@@ -52,7 +52,7 @@ namespace mRemoteNG.UI.Forms
 
 
 
-        private frmMain()
+        private FrmMain()
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
@@ -60,7 +60,7 @@ namespace mRemoteNG.UI.Forms
             pnlDock.Theme = new VS2012LightTheme();
 		}
 
-        static frmMain()
+        static FrmMain()
         {
         }
 

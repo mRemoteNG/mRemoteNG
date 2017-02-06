@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Window
 					return;
 				}
 				
-				if (MessageBox.Show(frmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+				if (MessageBox.Show(FrmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
 				{
 					return;
 				}
@@ -265,7 +265,7 @@ namespace mRemoteNG.UI.Window
 						
 				ToolsListView.EndUpdate();
 						
-				frmMain.Default.AddExternalToolsToToolBar();
+				FrmMain.Default.AddExternalToolsToToolBar();
 			}
 			catch (Exception ex)
 			{

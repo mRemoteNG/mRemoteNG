@@ -73,10 +73,10 @@ namespace mRemoteNG.Config.Connections
 				default:
 					SaveToXml();
 					if (!Export)
-						frmMain.Default.ConnectionsFileName = ConnectionFileName;
+						FrmMain.Default.ConnectionsFileName = ConnectionFileName;
 					break;
 			}
-			frmMain.Default.AreWeUsingSqlServerForSavingConnections = SaveFormat == Format.SQL;
+			FrmMain.Default.AreWeUsingSqlServerForSavingConnections = SaveFormat == Format.SQL;
 		}
         #endregion
 				

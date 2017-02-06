@@ -34,7 +34,7 @@ namespace mRemoteNG.App
 						exportForm.SelectedConnection = selectedNode;
 					}
 						
-					if (exportForm.ShowDialog(frmMain.Default) != DialogResult.OK)
+					if (exportForm.ShowDialog(FrmMain.Default) != DialogResult.OK)
 						return;
 
 				    ConnectionInfo exportTarget;

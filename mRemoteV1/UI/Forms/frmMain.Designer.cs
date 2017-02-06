@@ -2,7 +2,7 @@ using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class frmMain : System.Windows.Forms.Form
+    public partial class FrmMain : System.Windows.Forms.Form
 	{
 		
 		//Form overrides dispose to clean up the component list.
@@ -786,7 +786,7 @@ namespace mRemoteNG.UI.Forms
             this.Controls.Add(this.tsContainer);
             this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
             this.MainMenuStrip = this.msMain;
-            this.Name = "frmMain";
+            this.Name = "FrmMain";
             this.Opacity = 0D;
             this.Text = "mRemoteNG";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
