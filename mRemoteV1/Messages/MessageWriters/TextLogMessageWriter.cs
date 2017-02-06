@@ -20,7 +20,7 @@ namespace mRemoteNG.Messages.MessageWriters
             _logger = logger;
         }
 
-        public void Print(IMessage message)
+        public void Write(IMessage message)
         {
             if (!WeShouldPrint(message))
                 return;

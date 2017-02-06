@@ -10,7 +10,7 @@ namespace mRemoteNG.Messages.MessageWriters
         public bool PrintWarningMessages { get; set; } = true;
         public bool PrintErrorMessages { get; set; } = true;
 
-        public void Print(IMessage message)
+        public void Write(IMessage message)
         {
             if (!WeShouldPrint(message))
                 return;

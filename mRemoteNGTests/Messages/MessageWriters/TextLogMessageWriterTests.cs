@@ -25,8 +25,8 @@ namespace mRemoteNGTests.Messages.MessageWriters
             var message2 = Substitute.For<IMessage>();
             message1.Class.Returns(MessageClass.InformationMsg);
             message2.Class.Returns(MessageClass.InformationMsg);
-            _messageWriter.Print(message1);
-            _messageWriter.Print(message2);
+            _messageWriter.Write(message1);
+            _messageWriter.Write(message2);
             _log4NetLogger.ReceivedWithAnyArgs(2).Info("");
         }
 
@@ -35,7 +35,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.InformationMsg);
-            _messageWriter.Print(message);
+            _messageWriter.Write(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Info("");
         }
 
@@ -44,7 +44,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.DebugMsg);
-            _messageWriter.Print(message);
+            _messageWriter.Write(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Debug("");
         }
 
@@ -53,7 +53,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.WarningMsg);
-            _messageWriter.Print(message);
+            _messageWriter.Write(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Warn("");
         }
 
@@ -62,7 +62,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.ErrorMsg);
-            _messageWriter.Print(message);
+            _messageWriter.Write(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Error("");
         }
 
@@ -72,7 +72,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.InformationMsg);
             _messageWriter.PrintInfoMessages = false;
-            _messageWriter.Print(message);
+            _messageWriter.Write(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Info("");
         }
 
@@ -82,7 +82,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.DebugMsg);
             _messageWriter.PrintDebugMessages = false;
-            _messageWriter.Print(message);
+            _messageWriter.Write(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Debug("");
         }
 
@@ -92,7 +92,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.WarningMsg);
             _messageWriter.PrintWarningMessages = false;
-            _messageWriter.Print(message);
+            _messageWriter.Write(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Warn("");
         }
 
@@ -102,7 +102,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.ErrorMsg);
             _messageWriter.PrintErrorMessages = false;
-            _messageWriter.Print(message);
+            _messageWriter.Write(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Error("");
         }
     }

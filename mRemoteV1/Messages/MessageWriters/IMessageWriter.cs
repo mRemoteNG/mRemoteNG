@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace mRemoteNG.Messages.MessageWriters
+﻿namespace mRemoteNG.Messages.MessageWriters
 {
     public interface IMessageWriter
     {
@@ -9,6 +7,6 @@ namespace mRemoteNG.Messages.MessageWriters
         bool PrintWarningMessages { get; set; }
         bool PrintErrorMessages { get; set; }
 
-        void Print(IMessage message);
+        void Write(IMessage message);
     }
 }

@@ -9,7 +9,7 @@ namespace mRemoteNG.Messages.MessageWriters
         public bool PrintWarningMessages { get; set; } = true;
         public bool PrintErrorMessages { get; set; } = true;
 
-        public void Print(IMessage message)
+        public void Write(IMessage message)
         {
             var textToPrint = $"{message.Class}: {message.Text}";
             Debug.Print(textToPrint);

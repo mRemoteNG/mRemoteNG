@@ -28,7 +28,7 @@ namespace mRemoteNG.Messages.MessageWriters
             CreateTimer();
         }
 
-        public void Print(IMessage message)
+        public void Write(IMessage message)
         {
             if (!WeShouldPrint(message))
                 return;
