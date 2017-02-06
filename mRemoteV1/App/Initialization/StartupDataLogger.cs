@@ -2,26 +2,24 @@
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
-using log4net;
-
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.App.Initialization
 {
     public class StartupDataLogger
     {
-        private readonly ILog _logger;
+        private readonly MessageCollector _messageCollector;
 
-        public StartupDataLogger(ILog logger)
+        public StartupDataLogger(MessageCollector messageCollector)
         {
-            if (logger == null)
-                throw new ArgumentNullException(nameof(logger));
+            if (messageCollector == null)
+                throw new ArgumentNullException(nameof(messageCollector));
 
-            _logger = logger;
+            _messageCollector = messageCollector;
         }
 
-        public void Execute()
+        public void LogStartupData()
         {
-            if (!Settings.Default.WriteLogFile) return;
             LogApplicationData();
             LogCmdLineArgs();
             LogSystemData();
@@ -33,7 +31,9 @@ namespace mRemoteNG.App.Initialization
         {
             var osData = GetOperatingSystemData();
             var architecture = GetArchitectureData();
-            _logger.InfoFormat(string.Join(" ", Array.FindAll(new[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
+            var nonEmptyData = Array.FindAll(new[] {osData, architecture}, s => !string.IsNullOrEmpty(s));
+            var data = string.Join(" ", nonEmptyData);
+            _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }
 
         private string GetOperatingSystemData()
@@ -52,7 +52,7 @@ namespace mRemoteNG.App.Initialization
             }
             catch (Exception ex)
             {
-                _logger.WarnFormat($"Error retrieving operating system information from WMI. {ex.Message}");
+                _messageCollector.AddExceptionMessage("Error retrieving operating system information from WMI.", ex);
             }
             var osData = string.Join(" ", osVersion, servicePack);
             return osData;
@@ -82,33 +82,37 @@ namespace mRemoteNG.App.Initialization
             }
             catch (Exception ex)
             {
-                _logger.WarnFormat($"Error retrieving operating system address width from WMI. {ex.Message}");
+                _messageCollector.AddExceptionMessage("Error retrieving operating system address width from WMI.", ex);
             }
             return architecture;
         }
 
         private void LogApplicationData()
         {
+            var data = $"{Application.ProductName} {Application.ProductVersion}";
 #if !PORTABLE
-            _logger.InfoFormat($"{Application.ProductName} {Application.ProductVersion} starting.");
-#else
-            _logger.InfoFormat($"{Application.ProductName} {Application.ProductVersion} {Language.strLabelPortableEdition} starting.");
+            data += $" {Language.strLabelPortableEdition}";
 #endif
+            data += " starting.";
+            _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }
 
         private void LogCmdLineArgs()
         {
-            _logger.InfoFormat($"Command Line: {Environment.GetCommandLineArgs()}");
+            var data = $"Command Line: {string.Join(" ", Environment.GetCommandLineArgs())}";
+            _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }
 
         private void LogClrData()
         {
-            _logger.InfoFormat($"Microsoft .NET CLR {Environment.Version}");
+            var data = $"Microsoft .NET CLR {Environment.Version}";
+            _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }
 
         private void LogCultureData()
         {
-            _logger.InfoFormat($"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}");
+            var data = $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}";
+            _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }
     }
 }

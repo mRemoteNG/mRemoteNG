@@ -275,6 +275,11 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Constructors
+
+        public ConfigWindow() : this(new DockContent())
+        {
+        }
+
         public ConfigWindow(DockContent panel)
         {
             WindowType = WindowType.Config;

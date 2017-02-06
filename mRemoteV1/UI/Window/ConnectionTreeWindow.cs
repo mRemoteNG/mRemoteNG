@@ -27,6 +27,10 @@ namespace mRemoteNG.UI.Window
             set { olvConnections = value; }
 	    }
 
+	    public ConnectionTreeWindow() : this(new DockContent())
+	    {
+	    }
+
 		public ConnectionTreeWindow(DockContent panel)
 		{
 			WindowType = WindowType.Tree;

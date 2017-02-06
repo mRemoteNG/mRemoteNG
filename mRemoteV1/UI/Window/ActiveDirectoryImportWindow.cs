@@ -14,12 +14,12 @@ namespace mRemoteNG.UI.Window
 
         #region Constructors
 
-        public ActiveDirectoryImportWindow(DockContent panel)
+        public ActiveDirectoryImportWindow()
         {
             InitializeComponent();
             Runtime.FontOverride(this);
             WindowType = WindowType.ActiveDirectoryImport;
-            DockPnl = panel;
+            DockPnl = new DockContent();
             CurrentDomain = Environment.UserDomainName;
         }
 

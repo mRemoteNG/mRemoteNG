@@ -108,7 +108,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="App\LoggerTests.cs" />
     <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\CredentialHarvesterTests.cs" />
@@ -137,9 +136,17 @@
     <Compile Include="Credential\CredentialRecordTests.cs" />
     <Compile Include="Credential\CredentialListBaseTests.cs" />
     <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
+    <Compile Include="Messages\MessageCollectorTests.cs" />
+    <Compile Include="Messages\MessageWriters\MessageTypeFilterDecoratorTests.cs" />
+    <Compile Include="Messages\MessageWriters\OnlyLogMessageFilterTests.cs" />
     <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesSpecialCharactersConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesUpperCaseConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
