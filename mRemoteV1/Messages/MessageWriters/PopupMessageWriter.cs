@@ -5,10 +5,10 @@ namespace mRemoteNG.Messages.MessageWriters
 {
     public class PopupMessageWriter : IMessageWriter
     {
-        public bool PrintDebugMessages { get; set; } = true;
-        public bool PrintInfoMessages { get; set; } = true;
-        public bool PrintWarningMessages { get; set; } = true;
-        public bool PrintErrorMessages { get; set; } = true;
+        public bool AllowDebugMessages { get; set; } = true;
+        public bool AllowInfoMessages { get; set; } = true;
+        public bool AllowWarningMessages { get; set; } = true;
+        public bool AllowErrorMessages { get; set; } = true;
 
         public void Write(IMessage message)
         {
@@ -42,16 +42,16 @@ namespace mRemoteNG.Messages.MessageWriters
             switch (message.Class)
             {
                 case MessageClass.InformationMsg:
-                    if (PrintInfoMessages) return true;
+                    if (AllowInfoMessages) return true;
                     break;
                 case MessageClass.WarningMsg:
-                    if (PrintWarningMessages) return true;
+                    if (AllowWarningMessages) return true;
                     break;
                 case MessageClass.ErrorMsg:
-                    if (PrintErrorMessages) return true;
+                    if (AllowErrorMessages) return true;
                     break;
                 case MessageClass.DebugMsg:
-                    if (PrintDebugMessages) return true;
+                    if (AllowDebugMessages) return true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(message.Class), message.Class, null);

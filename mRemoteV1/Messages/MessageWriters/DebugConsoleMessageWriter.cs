@@ -4,10 +4,10 @@ namespace mRemoteNG.Messages.MessageWriters
 {
     public class DebugConsoleMessageWriter : IMessageWriter
     {
-        public bool PrintDebugMessages { get; set; } = true;
-        public bool PrintInfoMessages { get; set; } = true;
-        public bool PrintWarningMessages { get; set; } = true;
-        public bool PrintErrorMessages { get; set; } = true;
+        public bool AllowDebugMessages { get; set; } = true;
+        public bool AllowInfoMessages { get; set; } = true;
+        public bool AllowWarningMessages { get; set; } = true;
+        public bool AllowErrorMessages { get; set; } = true;
 
         public void Write(IMessage message)
         {

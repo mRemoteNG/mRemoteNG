@@ -2,10 +2,10 @@
 {
     public interface IMessageWriter
     {
-        bool PrintDebugMessages { get; set; }
-        bool PrintInfoMessages { get; set; }
-        bool PrintWarningMessages { get; set; }
-        bool PrintErrorMessages { get; set; }
+        bool AllowDebugMessages { get; set; }
+        bool AllowInfoMessages { get; set; }
+        bool AllowWarningMessages { get; set; }
+        bool AllowErrorMessages { get; set; }
 
         void Write(IMessage message);
     }

@@ -71,7 +71,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.InformationMsg);
-            _messageWriter.PrintInfoMessages = false;
+            _messageWriter.AllowInfoMessages = false;
             _messageWriter.Write(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Info("");
         }
@@ -81,7 +81,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.DebugMsg);
-            _messageWriter.PrintDebugMessages = false;
+            _messageWriter.AllowDebugMessages = false;
             _messageWriter.Write(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Debug("");
         }
@@ -91,7 +91,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.WarningMsg);
-            _messageWriter.PrintWarningMessages = false;
+            _messageWriter.AllowWarningMessages = false;
             _messageWriter.Write(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Warn("");
         }
@@ -101,7 +101,7 @@ namespace mRemoteNGTests.Messages.MessageWriters
         {
             var message = Substitute.For<IMessage>();
             message.Class.Returns(MessageClass.ErrorMsg);
-            _messageWriter.PrintErrorMessages = false;
+            _messageWriter.AllowErrorMessages = false;
             _messageWriter.Write(message);
             _log4NetLogger.DidNotReceiveWithAnyArgs().Error("");
         }

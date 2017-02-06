@@ -32,10 +32,10 @@ namespace mRemoteNG.App
         {
             return new TextLogMessageWriter(Logger.Instance)
             {
-                PrintDebugMessages = Settings.Default.TextLogMessageWriterWriteDebugMsgs,
-                PrintInfoMessages = Settings.Default.TextLogMessageWriterWriteInfoMsgs,
-                PrintWarningMessages = Settings.Default.TextLogMessageWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.TextLogMessageWriterWriteErrorMsgs
+                AllowDebugMessages = Settings.Default.TextLogMessageWriterWriteDebugMsgs,
+                AllowInfoMessages = Settings.Default.TextLogMessageWriterWriteInfoMsgs,
+                AllowWarningMessages = Settings.Default.TextLogMessageWriterWriteWarningMsgs,
+                AllowErrorMessages = Settings.Default.TextLogMessageWriterWriteErrorMsgs
             };
         }
 
@@ -43,10 +43,10 @@ namespace mRemoteNG.App
         {
             return new NotificationPanelMessageWriter(Windows.ErrorsForm)
             {
-                PrintDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
-                PrintInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
-                PrintWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs,
+                AllowDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
+                AllowInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
+                AllowWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
+                AllowErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs,
                 FocusOnInfoMessages = Settings.Default.SwitchToMCOnInformation,
                 FocusOnWarningMessages = Settings.Default.SwitchToMCOnWarning,
                 FocusOnErrorMessages = Settings.Default.SwitchToMCOnError
@@ -57,10 +57,10 @@ namespace mRemoteNG.App
         {
             return new PopupMessageWriter
             {
-                PrintDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
-                PrintInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
-                PrintWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
-                PrintErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
+                AllowDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
+                AllowInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
+                AllowWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
+                AllowErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
             };
         }
     }
