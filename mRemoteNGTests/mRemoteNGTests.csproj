@@ -140,7 +140,6 @@
     <Compile Include="Messages\MessageCollectorTests.cs" />
     <Compile Include="Messages\MessageWriters\MessageTypeFilterDecoratorTests.cs" />
     <Compile Include="Messages\MessageWriters\OnlyLogMessageFilterTests.cs" />
-    <Compile Include="Messages\MessageWriters\TextLogMessageWriterTests.cs" />
     <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
