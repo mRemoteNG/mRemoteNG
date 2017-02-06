@@ -138,6 +138,7 @@
     <Compile Include="Credential\CredentialListBaseTests.cs" />
     <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
     <Compile Include="Messages\MessageCollectorTests.cs" />
+    <Compile Include="Messages\MessageWriters\MessageTypeFilterDecoratorTests.cs" />
     <Compile Include="Messages\MessageWriters\OnlyLogMessageFilterTests.cs" />
     <Compile Include="Messages\MessageWriters\TextLogMessageWriterTests.cs" />
     <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
