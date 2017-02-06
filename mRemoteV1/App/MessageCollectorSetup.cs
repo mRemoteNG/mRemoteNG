@@ -13,7 +13,8 @@ namespace mRemoteNG.App
             {
                 var messages = args.NewItems.Cast<IMessage>().ToArray();
                 foreach (var printer in messageWriterList)
-                    printer.Print(messages);
+                    foreach (var message in messages)
+                        printer.Print(message);
             };
         }
 

@@ -25,7 +25,8 @@ namespace mRemoteNGTests.Messages.MessageWriters
             var message2 = Substitute.For<IMessage>();
             message1.Class.Returns(MessageClass.InformationMsg);
             message2.Class.Returns(MessageClass.InformationMsg);
-            _messageWriter.Print(new[] {message1, message2});
+            _messageWriter.Print(message1);
+            _messageWriter.Print(message2);
             _log4NetLogger.ReceivedWithAnyArgs(2).Info("");
         }
 

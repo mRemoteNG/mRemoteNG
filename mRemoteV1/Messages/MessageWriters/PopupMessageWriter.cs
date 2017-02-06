@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace mRemoteNG.Messages.MessageWriters
@@ -58,12 +57,6 @@ namespace mRemoteNG.Messages.MessageWriters
                     throw new ArgumentOutOfRangeException(nameof(message.Class), message.Class, null);
             }
             return false;
-        }
-
-        public void Print(IEnumerable<IMessage> messages)
-        {
-            foreach (var message in messages)
-                Print(message);
         }
     }
 }

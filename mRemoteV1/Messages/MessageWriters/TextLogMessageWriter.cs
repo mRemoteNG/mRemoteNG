@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using log4net;
 
 namespace mRemoteNG.Messages.MessageWriters
@@ -43,12 +42,6 @@ namespace mRemoteNG.Messages.MessageWriters
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        public void Print(IEnumerable<IMessage> messages)
-        {
-            foreach (var message in messages)
-                Print(message);
         }
 
         private bool WeShouldPrint(IMessage message)

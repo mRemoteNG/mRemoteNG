@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
@@ -39,12 +38,6 @@ namespace mRemoteNG.Messages.MessageWriters
 
             var lvItem = BuildListViewItem(message);
             AddToList(lvItem);
-        }
-
-        public void Print(IEnumerable<IMessage> messages)
-        {
-            foreach (var message in messages)
-                Print(message);
         }
 
         private bool WeShouldPrint(IMessage message)

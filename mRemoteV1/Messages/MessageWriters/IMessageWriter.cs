@@ -10,7 +10,5 @@ namespace mRemoteNG.Messages.MessageWriters
         bool PrintErrorMessages { get; set; }
 
         void Print(IMessage message);
-
-        void Print(IEnumerable<IMessage> messages);
     }
 }
