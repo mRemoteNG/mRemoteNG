@@ -160,6 +160,7 @@ namespace mRemoteNG.Config.Settings
         {
             try
             {
+                mRemoteNG.Settings.Default.Save();
                 mRemoteNG.Settings.Default.Upgrade();
             }
             catch (Exception ex)
