@@ -2502,4 +2502,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPopups" xml:space="preserve">
     <value>Popups</value>
   </data>
+  <data name="strLogToAppDir" xml:space="preserve">
+    <value>Log to application directory</value>
+  </data>
 </root>

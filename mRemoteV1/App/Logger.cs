@@ -28,7 +28,7 @@ namespace mRemoteNG.App
             if (string.IsNullOrEmpty(Settings.Default.LogFilePath))
                 Settings.Default.LogFilePath = BuildLogFilePath();
 
-            SetLogPath(Settings.Default.LogFilePath);
+            SetLogPath(Settings.Default.LogToApplicationDirectory ? DefaultLogPath : Settings.Default.LogFilePath);
         }
 
         public void SetLogPath(string path)

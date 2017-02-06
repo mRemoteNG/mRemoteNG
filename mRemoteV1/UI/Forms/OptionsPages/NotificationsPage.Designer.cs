@@ -42,6 +42,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowInfoInMC = new System.Windows.Forms.CheckBox();
             this.chkShowDebugInMC = new System.Windows.Forms.CheckBox();
             this.groupBoxLogging = new System.Windows.Forms.GroupBox();
+            this.chkLogToCurrentDir = new System.Windows.Forms.CheckBox();
             this.buttonRestoreDefaultLogPath = new System.Windows.Forms.Button();
             this.buttonOpenLogFile = new System.Windows.Forms.Button();
             this.buttonSelectLogPath = new System.Windows.Forms.Button();
@@ -172,6 +173,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // groupBoxLogging
             // 
+            this.groupBoxLogging.Controls.Add(this.chkLogToCurrentDir);
             this.groupBoxLogging.Controls.Add(this.buttonRestoreDefaultLogPath);
             this.groupBoxLogging.Controls.Add(this.buttonOpenLogFile);
             this.groupBoxLogging.Controls.Add(this.buttonSelectLogPath);
@@ -189,9 +191,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxLogging.TabStop = false;
             this.groupBoxLogging.Text = "Logging";
             // 
+            // chkLogToCurrentDir
+            // 
+            this.chkLogToCurrentDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkLogToCurrentDir.AutoSize = true;
+            this.chkLogToCurrentDir.Location = new System.Drawing.Point(441, 20);
+            this.chkLogToCurrentDir.Name = "chkLogToCurrentDir";
+            this.chkLogToCurrentDir.Size = new System.Drawing.Size(153, 17);
+            this.chkLogToCurrentDir.TabIndex = 40;
+            this.chkLogToCurrentDir.Text = "Log to application directory";
+            this.chkLogToCurrentDir.UseVisualStyleBackColor = true;
+            this.chkLogToCurrentDir.CheckedChanged += new System.EventHandler(this.chkLogToCurrentDir_CheckedChanged);
+            // 
             // buttonRestoreDefaultLogPath
             // 
-            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(496, 69);
+            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(495, 69);
             this.buttonRestoreDefaultLogPath.Name = "buttonRestoreDefaultLogPath";
             this.buttonRestoreDefaultLogPath.Size = new System.Drawing.Size(99, 23);
             this.buttonRestoreDefaultLogPath.TabIndex = 39;
@@ -201,7 +215,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonOpenLogFile
             // 
-            this.buttonOpenLogFile.Location = new System.Drawing.Point(274, 68);
+            this.buttonOpenLogFile.Location = new System.Drawing.Point(273, 68);
             this.buttonOpenLogFile.Name = "buttonOpenLogFile";
             this.buttonOpenLogFile.Size = new System.Drawing.Size(105, 23);
             this.buttonOpenLogFile.TabIndex = 30;
@@ -211,7 +225,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonSelectLogPath
             // 
-            this.buttonSelectLogPath.Location = new System.Drawing.Point(385, 68);
+            this.buttonSelectLogPath.Location = new System.Drawing.Point(384, 68);
             this.buttonSelectLogPath.Name = "buttonSelectLogPath";
             this.buttonSelectLogPath.Size = new System.Drawing.Size(105, 23);
             this.buttonSelectLogPath.TabIndex = 30;
@@ -241,7 +255,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelLogFilePath
             // 
             this.labelLogFilePath.AutoSize = true;
-            this.labelLogFilePath.Location = new System.Drawing.Point(193, 26);
+            this.labelLogFilePath.Location = new System.Drawing.Point(192, 26);
             this.labelLogFilePath.Name = "labelLogFilePath";
             this.labelLogFilePath.Size = new System.Drawing.Size(68, 13);
             this.labelLogFilePath.TabIndex = 30;
@@ -260,7 +274,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // textBoxLogPath
             // 
             this.textBoxLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxLogPath.Location = new System.Drawing.Point(196, 43);
+            this.textBoxLogPath.Location = new System.Drawing.Point(195, 43);
             this.textBoxLogPath.Name = "textBoxLogPath";
             this.textBoxLogPath.ReadOnly = true;
             this.textBoxLogPath.Size = new System.Drawing.Size(399, 20);
@@ -397,5 +411,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.CheckBox chkPopupWarning;
         private System.Windows.Forms.CheckBox chkPopupDebug;
         private System.Windows.Forms.CheckBox chkPopupInfo;
+        private System.Windows.Forms.CheckBox chkLogToCurrentDir;
     }
 }

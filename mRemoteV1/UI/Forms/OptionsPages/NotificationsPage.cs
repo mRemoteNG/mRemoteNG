@@ -40,6 +40,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkLogInfoMsgs.Text = Language.strInformations;
             chkLogWarningMsgs.Text = Language.strWarnings;
             chkLogErrorMsgs.Text = Language.strErrors;
+            chkLogToCurrentDir.Text = Language.strLogToAppDir;
             labelLogFilePath.Text = Language.strLogFilePath;
             labelLogTheseMsgTypes.Text = Language.strLogTheseMessageTypes;
             buttonOpenLogFile.Text = Language.strOpenFile;
@@ -84,6 +85,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void LoadLoggingSettings()
         {
+            chkLogToCurrentDir.Checked = Settings.Default.LogToApplicationDirectory;
             textBoxLogPath.Text = Settings.Default.LogFilePath;
             chkLogDebugMsgs.Checked = Settings.Default.TextLogMessageWriterWriteDebugMsgs;
             chkLogInfoMsgs.Checked = Settings.Default.TextLogMessageWriterWriteInfoMsgs;
@@ -113,6 +115,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void SaveLoggingSettings()
         {
+            Settings.Default.LogToApplicationDirectory = chkLogToCurrentDir.Checked;
             Settings.Default.LogFilePath = textBoxLogPath.Text;
             Logger.Instance.SetLogPath(Settings.Default.LogFilePath);
             Settings.Default.TextLogMessageWriterWriteDebugMsgs = chkLogDebugMsgs.Checked;
@@ -151,6 +154,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             if (Path.GetExtension(textBoxLogPath.Text) == ".log")
                 Process.Start(textBoxLogPath.Text);
+        }
+
+        private void chkLogToCurrentDir_CheckedChanged(object sender, System.EventArgs e)
+        {
+            buttonSelectLogPath.Enabled = !chkLogToCurrentDir.Checked;
+            buttonRestoreDefaultLogPath.Enabled = !chkLogToCurrentDir.Checked;
+            textBoxLogPath.Text = Logger.DefaultLogPath;
         }
     }
 }

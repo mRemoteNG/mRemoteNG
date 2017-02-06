@@ -2830,6 +2830,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log to application directory.
+        /// </summary>
+        internal static string strLogToAppDir {
+            get {
+                return ResourceManager.GetString("strLogToAppDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Writing to report file failed!.
         /// </summary>
         internal static string strLogWriteToFileFailed {

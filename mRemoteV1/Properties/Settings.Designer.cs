@@ -2518,5 +2518,17 @@ namespace mRemoteNG {
                 this["PopupMessageWriterWriteErrorMsgs"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LogToApplicationDirectory {
+            get {
+                return ((bool)(this["LogToApplicationDirectory"]));
+            }
+            set {
+                this["LogToApplicationDirectory"] = value;
+            }
+        }
     }
 }
