@@ -111,24 +111,46 @@
     <Compile Include="App\LoggerTests.cs" />
     <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
+    <Compile Include="Config\CredentialHarvesterTests.cs" />
+    <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIdsTests.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializerTests.cs" />
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
     <Compile Include="Config\Serializers\PortScanDeserializerTests.cs" />
     <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionNodeSerializerTests.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer27Tests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentCompilerTests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentEncryptorTests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsSerializerTests.cs" />
+    <Compile Include="Config\Serializers\XmlCredentialDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\XmlCredentialSerializerTests.cs" />
     <Compile Include="Config\Serializers\XmlRootNodeSerializerTests.cs" />
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
+    <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />
+    <Compile Include="Credential\CredentialDomainUserComparerTests.cs" />
+    <Compile Include="Credential\CredentialProviderCatalogTests.cs" />
+    <Compile Include="Credential\CredentialRecordCatalogTests.cs" />
+    <Compile Include="Credential\CredentialRecordTests.cs" />
+    <Compile Include="Credential\CredentialListBaseTests.cs" />
     <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
+    <Compile Include="Messages\MessageCollectorTests.cs" />
+    <Compile Include="Messages\MessageWriters\MessageTypeFilterDecoratorTests.cs" />
+    <Compile Include="Messages\MessageWriters\OnlyLogMessageFilterTests.cs" />
+    <Compile Include="Messages\MessageWriters\TextLogMessageWriterTests.cs" />
+    <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesSpecialCharactersConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesUpperCaseConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
+    <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
@@ -159,12 +181,26 @@
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
+    <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBoxTestForm.designer.cs">
+      <DependentUpon>SecureTextBoxTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBoxTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Controls\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTestForm.designer.cs">
+      <DependentUpon>TextBoxExtensionsTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTests.cs" />
     <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
     <Compile Include="UI\Forms\PasswordFormTests.cs" />
     <Compile Include="UI\WindowListTests.cs" />
@@ -184,8 +220,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\SecureTextBoxTestForm.resx">
+      <DependentUpon>SecureTextBoxTestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\TextBoxExtensionsTestForm.resx">
+      <DependentUpon>TextBoxExtensionsTestForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

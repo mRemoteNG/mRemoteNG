@@ -1,19 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
-
-namespace mRemoteNG.Tools
+namespace mRemoteNG.Tools.Cmdline
 {
 	// Adapted from http://qntm.org/cmd
 	public class CommandLineArguments
 	{
-        #region Protected Fields
 		protected List<Argument> Arguments = new List<Argument>();
-        #endregion
 			
-        #region Public Properties
 		public bool EscapeForShell {get; set;}
-        #endregion
 			
         #region Public Methods
 		public void Add(string argument, bool forceQuotes = false)
@@ -23,7 +19,7 @@ namespace mRemoteNG.Tools
 			
 		public void Add(params string[] argumentArray)
 		{
-			foreach (string argument in argumentArray)
+			foreach (var argument in argumentArray)
 			{
 				Add(argument);
 			}
@@ -36,27 +32,17 @@ namespace mRemoteNG.Tools
 			
 		public override string ToString()
 		{
-			List<string> processedArguments = new List<string>();
-				
-			foreach (Argument argument in Arguments)
-			{
-				processedArguments.Add(ProcessArgument(argument, EscapeForShell));
-			}
-				
-			return string.Join(" ", processedArguments.ToArray());
+		    var argList = Arguments.Select(argument => ProcessArgument(argument, EscapeForShell));
+            return string.Join(" ", argList.ToArray());
 		}
 			
 		public static string PrefixFileName(string argument)
 		{
 			if (string.IsNullOrEmpty(argument))
-			{
 				return argument;
-			}
 				
 			if (argument.StartsWith("-"))
-			{
 				argument = ".\\" + argument;
-			}
 				
 			return argument;
 		}
@@ -98,19 +84,15 @@ namespace mRemoteNG.Tools
 			
 		public static string EscapeShellMetacharacters(string argument)
 		{
-			if (string.IsNullOrEmpty(argument))
-			{
-				return argument;
-			}
-				
-			return Regex.Replace(argument, "([()%!^\"<>&|])", "^$1");
+		    return string.IsNullOrEmpty(argument) ? argument : Regex.Replace(argument, "([()%!^\"<>&|])", "^$1");
 		}
-        #endregion
+
+	    #endregion
 			
         #region Protected Methods
 		protected static string ProcessArgument(Argument argument, bool escapeForShell = false)
 		{
-			string text = argument.Text;
+			var text = argument.Text;
 				
 			if (argument.IsFileName)
 			{
@@ -132,9 +114,9 @@ namespace mRemoteNG.Tools
 		{
 			public Argument(string text, bool isFileName = false, bool forceQuotes = false)
 			{
-				this.Text = text;
-				this.IsFileName = isFileName;
-				this.ForceQuotes = forceQuotes;
+				Text = text;
+				IsFileName = isFileName;
+				ForceQuotes = forceQuotes;
 			}
 				
 			public string Text {get; set;}

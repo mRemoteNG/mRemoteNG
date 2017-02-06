@@ -4,6 +4,7 @@ using System.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
@@ -18,7 +19,7 @@ namespace mRemoteNGTests.Config.Serializers
 
         public void Setup(string confCons, string password)
         {
-            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(confCons, password.ConvertToSecureString);
+            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(confCons, new ICredentialRecord[0], password.ConvertToSecureString);
             _connectionTreeModel = _xmlConnectionsDeserializer.Deserialize();
         }
 

@@ -252,7 +252,7 @@ namespace mRemoteNG.Connection
                 else
                     connDetail = "UNKNOWN";
 
-                Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, Prot.InterfaceControl.Info.Protocol, Environment.UserName));
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, Prot.InterfaceControl.Info.Protocol, Environment.UserName));
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 
                 if (Prot.InterfaceControl.Info.PostExtApp == "") return;
@@ -269,7 +269,7 @@ namespace mRemoteNG.Connection
         {
             var prot = (ProtocolBase)sender;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
-            Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol, Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol, Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
         }
 
         private static void Prot_Event_ErrorOccured(object sender, string errorMessage)

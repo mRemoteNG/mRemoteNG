@@ -15,12 +15,12 @@ namespace mRemoteNG.UI.Window
 	public partial class PortScanWindow
 	{
         #region Constructors
-		public PortScanWindow(DockContent panel)
+		public PortScanWindow()
 		{
 			InitializeComponent();
 					
 			WindowType = WindowType.PortScan;
-			DockPnl = panel;
+			DockPnl = new DockContent();
 		}
         #endregion
 				

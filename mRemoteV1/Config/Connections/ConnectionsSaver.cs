@@ -187,7 +187,7 @@ namespace mRemoteNG.Config.Connections
             {
                 if (rootTreeNode.Password)
                 {
-                    _password = Convert.ToString(rootTreeNode.PasswordString).ConvertToSecureString();
+                    _password = rootTreeNode.PasswordString.ConvertToSecureString();
                     strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
                 }
                 else
@@ -245,7 +245,8 @@ namespace mRemoteNG.Config.Connections
                 var factory = new CryptographyProviderFactory();
                 var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
                 cryptographyProvider.KeyDerivationIterations = mRemoteNG.Settings.Default.EncryptionKeyDerivationIterations;
-                var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider)
+			    var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
+                var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
 				{
                     Export = Export,
                     SaveFilter = SaveFilter,
