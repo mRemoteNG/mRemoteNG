@@ -58,12 +58,16 @@ namespace mRemoteNG.App
                     AllowWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
                     AllowErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs
                 },
-                new NotificationPanelMessageWriter(Windows.ErrorsForm)
-                {
-                    FocusOnInfoMessages = Settings.Default.SwitchToMCOnInformation,
-                    FocusOnWarningMessages = Settings.Default.SwitchToMCOnWarning,
-                    FocusOnErrorMessages = Settings.Default.SwitchToMCOnError
-                }
+                new MessageFocusDecorator(
+                    Windows.ErrorsForm,
+                    new MessageTypeFilteringOptions
+                    {
+                        AllowInfoMessages = Settings.Default.SwitchToMCOnInformation,
+                        AllowWarningMessages = Settings.Default.SwitchToMCOnWarning,
+                        AllowErrorMessages = Settings.Default.SwitchToMCOnError
+                    },
+                    new NotificationPanelMessageWriter(Windows.ErrorsForm)
+                )
             );
         }
 

@@ -222,6 +222,7 @@
     <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />
     <Compile Include="Messages\IMessage.cs" />
     <Compile Include="Messages\MessageWriters\IMessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\MessageWriters\MessageFocusDecorator.cs" />
     <Compile Include="Messages\MessageWriters\MessageTypeFilteringOptions.cs" />
     <Compile Include="Messages\MessageWriters\NotificationPanelMessageWriter.cs" />
     <Compile Include="Messages\MessageWriters\IMessageWriter.cs" />
