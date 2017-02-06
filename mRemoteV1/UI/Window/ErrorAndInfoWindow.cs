@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
+using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 
 
@@ -48,6 +49,7 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
 		private void FillImageList()
 		{
+		    imgListMC.Images.Add(Resources.brick);
 			imgListMC.Images.Add(Resources.InformationSmall);
 			imgListMC.Images.Add(Resources.WarningSmall);
 			imgListMC.Images.Add(Resources.ErrorSmall);
@@ -69,7 +71,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutVertical (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "LayoutVertical (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -89,7 +91,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -112,7 +114,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -128,7 +130,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -151,7 +153,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -169,17 +171,22 @@ namespace mRemoteNG.UI.Window
                 var eMsg = (Messages.Message)sItem.Tag;
 				switch (eMsg.Class)
 				{
-					case Messages.MessageClass.InformationMsg:
+                    case MessageClass.DebugMsg:
+				        pbError.Image = Resources.brick;
+                        pnlErrorMsg.BackColor = Color.LightSteelBlue;
+                        txtMsgText.BackColor = Color.LightSteelBlue;
+                        break;
+					case MessageClass.InformationMsg:
 						pbError.Image = Resources.Information;
 						pnlErrorMsg.BackColor = Color.LightSteelBlue;
 						txtMsgText.BackColor = Color.LightSteelBlue;
 						break;
-					case Messages.MessageClass.WarningMsg:
+					case MessageClass.WarningMsg:
 						pbError.Image = Resources.Warning;
 						pnlErrorMsg.BackColor = Color.Gold;
 						txtMsgText.BackColor = Color.Gold;
 						break;
-					case Messages.MessageClass.ErrorMsg:
+					case MessageClass.ErrorMsg:
 						pbError.Image = Resources._Error;
 						pnlErrorMsg.BackColor = Color.IndianRed;
 						txtMsgText.BackColor = Color.IndianRed;
@@ -191,7 +198,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -262,7 +269,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." + Environment.NewLine + ex.Message, true);
 			}
 			finally
 			{
@@ -293,7 +300,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.DeleteMessages() failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.DeleteMessages() failed" + Environment.NewLine + ex.Message, true);
 			}
 			finally
 			{
