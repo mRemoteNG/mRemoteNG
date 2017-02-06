@@ -2,6 +2,7 @@
 using System.Linq;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
+using mRemoteNG.Messages.WriterDecorators;
 
 namespace mRemoteNG.App
 {

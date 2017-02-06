@@ -1,7 +1,6 @@
 ﻿using System;
-using mRemoteNG.Messages.MessageWriters;
 
-namespace mRemoteNG.Messages
+namespace mRemoteNG.Messages.MessageWriters
 {
     public class MessageTypeFilterDecorator : IMessageWriter
     {

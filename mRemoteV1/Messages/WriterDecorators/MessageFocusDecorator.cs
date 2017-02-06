@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace mRemoteNG.Messages.MessageWriters
+namespace mRemoteNG.Messages.WriterDecorators
 {
     public class MessageFocusDecorator : IMessageWriter
     {
