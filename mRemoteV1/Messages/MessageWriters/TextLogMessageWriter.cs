@@ -1,13 +1,13 @@
 ﻿using System;
-using log4net;
+using mRemoteNG.App;
 
 namespace mRemoteNG.Messages.MessageWriters
 {
     public class TextLogMessageWriter : IMessageWriter
     {
-        private readonly ILog _logger;
+        private readonly Logger _logger;
 
-        public TextLogMessageWriter(ILog logger)
+        public TextLogMessageWriter(Logger logger)
         {
             if (logger == null)
                 throw new ArgumentNullException(nameof(logger));
@@ -20,16 +20,16 @@ namespace mRemoteNG.Messages.MessageWriters
             switch (message.Class)
             {
                 case MessageClass.InformationMsg:
-                    _logger.Info(message.Text);
+                    _logger.Log.Info(message.Text);
                     break;
                 case MessageClass.DebugMsg:
-                    _logger.Debug(message.Text);
+                    _logger.Log.Debug(message.Text);
                     break;
                 case MessageClass.WarningMsg:
-                    _logger.Warn(message.Text);
+                    _logger.Log.Warn(message.Text);
                     break;
                 case MessageClass.ErrorMsg:
-                    _logger.Error(message.Text);
+                    _logger.Log.Error(message.Text);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

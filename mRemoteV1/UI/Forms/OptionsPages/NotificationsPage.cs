@@ -114,6 +114,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void SaveLoggingSettings()
         {
             Settings.Default.LogFilePath = textBoxLogPath.Text;
+            Logger.Instance.SetLogPath(Settings.Default.LogFilePath);
             Settings.Default.TextLogMessageWriterWriteDebugMsgs = chkLogDebugMsgs.Checked;
             Settings.Default.TextLogMessageWriterWriteInfoMsgs = chkLogInfoMsgs.Checked;
             Settings.Default.TextLogMessageWriterWriteWarningMsgs = chkLogWarningMsgs.Checked;
