@@ -12,6 +12,7 @@ using System.Linq;
 using System.Xml.Linq;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
