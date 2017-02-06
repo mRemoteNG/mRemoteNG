@@ -9,22 +9,17 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
-using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
-using mRemoteNG.Security;
-using mRemoteNG.Security.Authentication;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -216,7 +211,7 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
-            LoadCredsAndCons(_credentialManager);
+            new CredsAndConsSetup(_credentialManager, _credentialFilePath).LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
 
@@ -859,6 +854,16 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
         #region Tools
+        private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var credentialManagerForm = new CredentialManagerForm(_credentialManager)
+            {
+                DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
+            };
+            credentialManagerForm.CenterOnTarget(this);
+            credentialManagerForm.Show();
+        }
+
         private void mMenToolsUpdate_Click(object sender, EventArgs e)
 		{
 			Windows.Show(WindowType.Update);
@@ -1322,100 +1327,5 @@ namespace mRemoteNG.UI.Forms
             }
         }
         #endregion
-
-
-        private void LoadCredsAndCons(CredentialManager credentialManager)
-        {
-            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
-                Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
-
-            var upgradeMap = UpgradeUserFilesForCredentialManager();
-
-            LoadCredentials(credentialManager);
-            credentialManager.CredentialsChanged += (o, args) => SaveCredentialList(credentialManager.GetCredentialRecords());
-            LoadDefaultConnectionCredentials();
-            Runtime.LoadConnections();
-
-            if (upgradeMap != null)
-                ApplyCredentialMapping(upgradeMap);
-        }
-
-        private Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager()
-        {
-            var connectionFileProvider = new FileDataProvider(Runtime.GetStartupConnectionFileName());
-            var xdoc = XDocument.Parse(connectionFileProvider.Load());
-
-            if (double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value) >= 2.7) return null;
-            EnsureConnectionXmlElementsHaveIds(xdoc);
-            connectionFileProvider.Save($"{xdoc.Declaration}\n {xdoc}");
-
-            var cryptoProvider = CryptographyProviderFactory.BuildFromXml(xdoc.Root);
-            var encryptedValue = xdoc.Root?.Attribute("Protected")?.Value;
-            var auth = new PasswordAuthenticator(cryptoProvider, encryptedValue)
-            {
-                AuthenticationRequestor = () => MiscTools.PasswordDialog("", false)
-            };
-            if(!auth.Authenticate(Runtime.EncryptionKey))
-                Close();
-
-            var credentialHarvester = new CredentialHarvester();
-            SaveCredentialList(credentialHarvester.Harvest(xdoc, auth.LastAuthenticatedPassword));
-            return credentialHarvester.ConnectionToCredentialMap;
-        }
-
-        private void EnsureConnectionXmlElementsHaveIds(XDocument xdoc)
-        {
-            var adapter = new ConfConsEnsureConnectionsHaveIds();
-            adapter.EnsureElementsHaveIds(xdoc);
-        }
-
-        private void LoadCredentials(CredentialManager credentialManager)
-        {
-            var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
-            credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<INotifyingCredentialRecord>());
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
-        }
-
-        private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var credentialManagerForm = new CredentialManagerForm(_credentialManager)
-            {
-                DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
-            };
-            credentialManagerForm.CenterOnTarget(this);
-            credentialManagerForm.Show();
-        }
-
-        private void SaveCredentialList(IEnumerable<ICredentialRecord> records)
-        {
-            var engineFromSettings = Settings.Default.EncryptionEngine;
-            var modeFromSettings = Settings.Default.EncryptionBlockCipherMode;
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engineFromSettings, modeFromSettings);
-            cryptoProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
-
-            var serializer = new XmlCredentialRecordSerializer(cryptoProvider);
-            var dataProvider = new FileDataProviderWithRollingBackup(_credentialFilePath);
-            var credentialSaver = new CredentialRecordSaver(dataProvider, serializer);
-            credentialSaver.Save(records, "tempEncryptionKey".ConvertToSecureString());
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Saved credentials to file: {_credentialFilePath}");
-        }
-
-        private void LoadDefaultConnectionCredentials()
-        {
-            var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
-            var matchedCredentials = Runtime.CredentialManager.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
-            DefaultConnectionInfo.Instance.CredentialRecord = matchedCredentials.Any() ? matchedCredentials.First() : null;
-        }
-
-        private void ApplyCredentialMapping(IDictionary<Guid, ICredentialRecord> map)
-        {
-            foreach (var connectionInfo in Runtime.ConnectionTreeModel.GetRecursiveChildList())
-            {
-                Guid id;
-                Guid.TryParse(connectionInfo.ConstantID, out id);
-                if (map.ContainsKey(id))
-                    connectionInfo.CredentialRecord = map[id];
-            }
-        }
     }
 }
