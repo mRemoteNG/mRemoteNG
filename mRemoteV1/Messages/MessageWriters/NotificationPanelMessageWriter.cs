@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.Messages.MessageWriters
@@ -18,17 +19,8 @@ namespace mRemoteNG.Messages.MessageWriters
 
         public void Write(IMessage message)
         {
-            var lvItem = BuildListViewItem(message);
+            var lvItem = new NotificationMessageListViewItem(message);
             AddToList(lvItem);
-        }
-
-        private static ListViewItem BuildListViewItem(IMessage nMsg)
-        {
-            var lvItem = new ListViewItem
-            {
-                ImageIndex = Convert.ToInt32(nMsg.Class), Text = nMsg.Text.Replace(Environment.NewLine, "  "), Tag = nMsg
-            };
-            return lvItem;
         }
 
         private void AddToList(ListViewItem lvItem)
