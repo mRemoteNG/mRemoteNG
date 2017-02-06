@@ -7,11 +7,6 @@ namespace mRemoteNG.Messages.MessageWriters
     {
         private readonly ILog _logger;
 
-        public bool AllowDebugMessages { get; set; } = true;
-        public bool AllowInfoMessages { get; set; } = true;
-        public bool AllowWarningMessages { get; set; } = true;
-        public bool AllowErrorMessages { get; set; } = true;
-
         public TextLogMessageWriter(ILog logger)
         {
             if (logger == null)
@@ -22,9 +17,6 @@ namespace mRemoteNG.Messages.MessageWriters
 
         public void Write(IMessage message)
         {
-            if (!WeShouldPrint(message))
-                return;
-
             switch (message.Class)
             {
                 case MessageClass.InformationMsg:
@@ -42,28 +34,6 @@ namespace mRemoteNG.Messages.MessageWriters
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private bool WeShouldPrint(IMessage message)
-        {
-            switch (message.Class)
-            {
-                case MessageClass.InformationMsg:
-                    if (AllowInfoMessages) return true;
-                    break;
-                case MessageClass.WarningMsg:
-                    if (AllowWarningMessages) return true;
-                    break;
-                case MessageClass.ErrorMsg:
-                    if (AllowErrorMessages) return true;
-                    break;
-                case MessageClass.DebugMsg:
-                    if (AllowDebugMessages) return true;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(message.Class), message.Class, null);
-            }
-            return false;
         }
     }
 }

@@ -21,47 +21,64 @@ namespace mRemoteNG.App
         public static void BuildMessageWritersFromSettings(IList<IMessageWriter> messageWriterList)
         {
 #if DEBUG
-            messageWriterList.Add(new DebugConsoleMessageWriter());
+            messageWriterList.Add(BuildDebugConsoleWriter());
 #endif
             messageWriterList.Add(BuildTextLogMessageWriter());
             messageWriterList.Add(BuildNotificationPanelMessageWriter());
             messageWriterList.Add(BuildPopupMessageWriter());
         }
 
-        private static TextLogMessageWriter BuildTextLogMessageWriter()
+        private static IMessageWriter BuildDebugConsoleWriter()
         {
-            return new TextLogMessageWriter(Logger.Instance)
-            {
-                AllowDebugMessages = Settings.Default.TextLogMessageWriterWriteDebugMsgs,
-                AllowInfoMessages = Settings.Default.TextLogMessageWriterWriteInfoMsgs,
-                AllowWarningMessages = Settings.Default.TextLogMessageWriterWriteWarningMsgs,
-                AllowErrorMessages = Settings.Default.TextLogMessageWriterWriteErrorMsgs
-            };
+            return new DebugConsoleMessageWriter();
         }
 
-        private static NotificationPanelMessageWriter BuildNotificationPanelMessageWriter()
+        private static IMessageWriter BuildTextLogMessageWriter()
         {
-            return new NotificationPanelMessageWriter(Windows.ErrorsForm)
-            {
-                AllowDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
-                AllowInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
-                AllowWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
-                AllowErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs,
-                FocusOnInfoMessages = Settings.Default.SwitchToMCOnInformation,
-                FocusOnWarningMessages = Settings.Default.SwitchToMCOnWarning,
-                FocusOnErrorMessages = Settings.Default.SwitchToMCOnError
-            };
+            return new MessageTypeFilterDecorator(
+                new MessageTypeFilteringOptions
+                {
+                    AllowDebugMessages = Settings.Default.TextLogMessageWriterWriteDebugMsgs,
+                    AllowInfoMessages = Settings.Default.TextLogMessageWriterWriteInfoMsgs,
+                    AllowWarningMessages = Settings.Default.TextLogMessageWriterWriteWarningMsgs,
+                    AllowErrorMessages = Settings.Default.TextLogMessageWriterWriteErrorMsgs
+                },
+                new TextLogMessageWriter(Logger.Instance)
+            );
         }
 
-        private static PopupMessageWriter BuildPopupMessageWriter()
+        private static IMessageWriter BuildNotificationPanelMessageWriter()
         {
-            return new PopupMessageWriter
-            {
-                AllowDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
-                AllowInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
-                AllowWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
-                AllowErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
-            };
+            
+            return new MessageTypeFilterDecorator(
+                new MessageTypeFilteringOptions
+                {
+                    AllowDebugMessages = Settings.Default.NotificationPanelWriterWriteDebugMsgs,
+                    AllowInfoMessages = Settings.Default.NotificationPanelWriterWriteInfoMsgs,
+                    AllowWarningMessages = Settings.Default.NotificationPanelWriterWriteWarningMsgs,
+                    AllowErrorMessages = Settings.Default.NotificationPanelWriterWriteErrorMsgs
+                },
+                new NotificationPanelMessageWriter(Windows.ErrorsForm)
+                {
+                    FocusOnInfoMessages = Settings.Default.SwitchToMCOnInformation,
+                    FocusOnWarningMessages = Settings.Default.SwitchToMCOnWarning,
+                    FocusOnErrorMessages = Settings.Default.SwitchToMCOnError
+                }
+            );
+        }
+
+        private static IMessageWriter BuildPopupMessageWriter()
+        {
+            return new MessageTypeFilterDecorator(
+                new MessageTypeFilteringOptions
+                {
+                    AllowDebugMessages = Settings.Default.PopupMessageWriterWriteDebugMsgs,
+                    AllowInfoMessages = Settings.Default.PopupMessageWriterWriteInfoMsgs,
+                    AllowWarningMessages = Settings.Default.PopupMessageWriterWriteWarningMsgs,
+                    AllowErrorMessages = Settings.Default.PopupMessageWriterWriteErrorMsgs
+                },
+                new PopupMessageWriter()
+            );
         }
     }
 }

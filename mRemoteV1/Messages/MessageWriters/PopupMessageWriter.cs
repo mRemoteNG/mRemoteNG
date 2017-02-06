@@ -5,16 +5,8 @@ namespace mRemoteNG.Messages.MessageWriters
 {
     public class PopupMessageWriter : IMessageWriter
     {
-        public bool AllowDebugMessages { get; set; } = true;
-        public bool AllowInfoMessages { get; set; } = true;
-        public bool AllowWarningMessages { get; set; } = true;
-        public bool AllowErrorMessages { get; set; } = true;
-
         public void Write(IMessage message)
         {
-            if (!WeShouldPrint(message))
-                return;
-
             switch (message.Class)
             {
                 case MessageClass.DebugMsg:
@@ -32,31 +24,6 @@ namespace mRemoteNG.Messages.MessageWriters
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private bool WeShouldPrint(IMessage message)
-        {
-            if (message.OnlyLog)
-                return false;
-
-            switch (message.Class)
-            {
-                case MessageClass.InformationMsg:
-                    if (AllowInfoMessages) return true;
-                    break;
-                case MessageClass.WarningMsg:
-                    if (AllowWarningMessages) return true;
-                    break;
-                case MessageClass.ErrorMsg:
-                    if (AllowErrorMessages) return true;
-                    break;
-                case MessageClass.DebugMsg:
-                    if (AllowDebugMessages) return true;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(message.Class), message.Class, null);
-            }
-            return false;
         }
     }
 }

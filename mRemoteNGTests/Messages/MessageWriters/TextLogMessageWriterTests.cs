@@ -65,45 +65,5 @@ namespace mRemoteNGTests.Messages.MessageWriters
             _messageWriter.Write(message);
             _log4NetLogger.ReceivedWithAnyArgs(1).Error("");
         }
-
-        [Test]
-        public void InfoMessagesNotPassedToLog4NetIfTurnedOff()
-        {
-            var message = Substitute.For<IMessage>();
-            message.Class.Returns(MessageClass.InformationMsg);
-            _messageWriter.AllowInfoMessages = false;
-            _messageWriter.Write(message);
-            _log4NetLogger.DidNotReceiveWithAnyArgs().Info("");
-        }
-
-        [Test]
-        public void DebugMessagesNotPassedToLog4NetIfTurnedOff()
-        {
-            var message = Substitute.For<IMessage>();
-            message.Class.Returns(MessageClass.DebugMsg);
-            _messageWriter.AllowDebugMessages = false;
-            _messageWriter.Write(message);
-            _log4NetLogger.DidNotReceiveWithAnyArgs().Debug("");
-        }
-
-        [Test]
-        public void WarningMessagesNotPassedToLog4NetIfTurnedOff()
-        {
-            var message = Substitute.For<IMessage>();
-            message.Class.Returns(MessageClass.WarningMsg);
-            _messageWriter.AllowWarningMessages = false;
-            _messageWriter.Write(message);
-            _log4NetLogger.DidNotReceiveWithAnyArgs().Warn("");
-        }
-
-        [Test]
-        public void ErrorMessagesNotPassedToLog4NetIfTurnedOff()
-        {
-            var message = Substitute.For<IMessage>();
-            message.Class.Returns(MessageClass.ErrorMsg);
-            _messageWriter.AllowErrorMessages = false;
-            _messageWriter.Write(message);
-            _log4NetLogger.DidNotReceiveWithAnyArgs().Error("");
-        }
     }
 }
