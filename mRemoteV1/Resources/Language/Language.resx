@@ -2301,9 +2301,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Use a different username and password</value>
   </data>
-  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
-    <value>Use only Notifications panel (no messagebox popups)</value>
-  </data>
   <data name="strUser" xml:space="preserve">
     <value>User</value>
   </data>
@@ -2360,9 +2357,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strWeifenLuoAttributionURL" xml:space="preserve">
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
-  <data name="strWriteLogFile" xml:space="preserve">
-    <value>Write log file (mRemoteNG.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner path:</value>
@@ -2477,5 +2471,38 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strPasswordLengthConstraintHint" xml:space="preserve">
     <value>Password length must be between {0} and {1}</value>
+  </data>
+  <data name="strChooseLogPath" xml:space="preserve">
+    <value>Choose a path for the mRemoteNG log file</value>
+  </data>
+  <data name="strDebug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
+    <value>Show these message types</value>
+  </data>
+  <data name="strLogFilePath" xml:space="preserve">
+    <value>Log file path</value>
+  </data>
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
+    <value>Log these message types</value>
+  </data>
+  <data name="strChoosePath" xml:space="preserve">
+    <value>Choose Path</value>
+  </data>
+  <data name="strOpenFile" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="strUseDefault" xml:space="preserve">
+    <value>Use Default</value>
+  </data>
+  <data name="strLogging" xml:space="preserve">
+    <value>Logging</value>
+  </data>
+  <data name="strPopups" xml:space="preserve">
+    <value>Popups</value>
+  </data>
+  <data name="strLogToAppDir" xml:space="preserve">
+    <value>Log to application directory</value>
   </data>
 </root>

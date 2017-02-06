@@ -11,12 +11,12 @@ namespace mRemoteNG.UI.Window
 	public partial class ExternalToolsWindow
 	{
         #region Constructors
-		public ExternalToolsWindow(DockContent panel)
+		public ExternalToolsWindow()
 		{
 			InitializeComponent();
 					
 			WindowType = WindowType.ExternalApps;
-			DockPnl = panel;
+			DockPnl = new DockContent();
 		}
         #endregion
 				

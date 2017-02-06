@@ -1,9 +1,10 @@
-﻿using mRemoteNG.App;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
+using mRemoteNG.App;
 
-namespace mRemoteNG.Tools
+namespace mRemoteNG.Tools.Cmdline
 {
     //
     //* Arguments class: application arguments interpreter
@@ -17,17 +18,17 @@ namespace mRemoteNG.Tools
     //
     public class CmdArgumentsInterpreter
     {
-        private StringDictionary Parameters;
+        private readonly StringDictionary _parameters;
 
         // Retrieve a parameter value if it exists
-        public string this[string Param] => (Parameters[Param]);
+        public string this[string param] => (_parameters[param]);
 
-        public CmdArgumentsInterpreter(string[] Args)
+        public CmdArgumentsInterpreter(IEnumerable<string> args)
         {
-            Parameters = new StringDictionary();
-            Regex Spliter = new Regex("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            Regex Remover = new Regex("^[\'\"]?(.*?)[\'\"]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            string Parameter = null;
+            _parameters = new StringDictionary();
+            var spliter = new Regex("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var remover = new Regex("^[\'\"]?(.*?)[\'\"]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            string parameter = null;
 
             // Valid parameters forms:
             // {-,/,--}param{ ,=,:}((",')value(",'))
@@ -35,70 +36,66 @@ namespace mRemoteNG.Tools
 
             try
             {
-                foreach (string Txt in Args)
+                foreach (var txt in args)
                 {
                     // Look for new parameters (-,/ or --) and a possible enclosed value (=,:)
-                    var Parts = Spliter.Split(Txt, 3);
+                    var Parts = spliter.Split(txt, 3);
                     switch (Parts.Length)
                     {
                         case 1:
                             // Found a value (for the last parameter found (space separator))
-                            if (Parameter != null)
+                            if (parameter != null)
                             {
-                                if (!Parameters.ContainsKey(Parameter))
+                                if (!_parameters.ContainsKey(parameter))
                                 {
-                                    Parts[0] = Remover.Replace(Parts[0], "$1");
-                                    Parameters.Add(Parameter, Parts[0]);
+                                    Parts[0] = remover.Replace(Parts[0], "$1");
+                                    _parameters.Add(parameter, Parts[0]);
                                 }
-                                Parameter = null;
+                                parameter = null;
                             }
                             // else Error: no parameter waiting for a value (skipped)
                             break;
                         case 2:
                             // Found just a parameter
                             // The last parameter is still waiting. With no value, set it to true.
-                            if (Parameter != null)
+                            if (parameter != null)
                             {
-                                if (!Parameters.ContainsKey(Parameter))
+                                if (!_parameters.ContainsKey(parameter))
                                 {
-                                    Parameters.Add(Parameter, "true");
+                                    _parameters.Add(parameter, "true");
                                 }
                             }
-                            Parameter = Parts[1];
+                            parameter = Parts[1];
                             break;
                         case 3:
                             // Parameter with enclosed value
                             // The last parameter is still waiting. With no value, set it to true.
-                            if (Parameter != null)
+                            if (parameter != null)
                             {
-                                if (!Parameters.ContainsKey(Parameter))
+                                if (!_parameters.ContainsKey(parameter))
                                 {
-                                    Parameters.Add(Parameter, "true");
+                                    _parameters.Add(parameter, "true");
                                 }
                             }
-                            Parameter = Parts[1];
+                            parameter = Parts[1];
                             // Remove possible enclosing characters (",')
-                            if (!Parameters.ContainsKey(Parameter))
+                            if (!_parameters.ContainsKey(parameter))
                             {
-                                Parts[2] = Remover.Replace(Parts[2], "$1");
-                                Parameters.Add(Parameter, Parts[2]);
+                                Parts[2] = remover.Replace(Parts[2], "$1");
+                                _parameters.Add(parameter, Parts[2]);
                             }
-                            Parameter = null;
+                            parameter = null;
                             break;
                     }
                 }
                 // In case a parameter is still waiting
-                if (Parameter != null)
-                {
-                    if (!Parameters.ContainsKey(Parameter))
-                    {
-                        Parameters.Add(Parameter, "true");
-                    }
-                }
+                if (parameter == null) return;
+                if (!_parameters.ContainsKey(parameter))
+                    _parameters.Add(parameter, "true");
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionMessage("Creating new Args failed", ex);
             }
         }
     }

@@ -1,3 +1,11 @@
+1.76 XXXX (2017-XX-XX):
+
+Features/Enhancements:
+----------------------
+Added more logging/notifications options
+
+
+
 1.75 RC1 (2017-01-XX):
 
 Known Issue:

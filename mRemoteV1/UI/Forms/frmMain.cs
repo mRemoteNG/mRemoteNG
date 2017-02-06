@@ -56,7 +56,6 @@ namespace mRemoteNG.UI.Forms
 
 
 
-
         private frmMain()
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
@@ -194,19 +193,26 @@ namespace mRemoteNG.UI.Forms
 
         #region Startup & Shutdown
         private void frmMain_Load(object sender, EventArgs e)
-		{
-            // Create gui config load and save objects
-            var settingsLoader = new SettingsLoader(this);
-			settingsLoader.LoadSettings();
-			
-			ApplyLanguage();
+        {
+            var messageCollector = Runtime.MessageCollector;
+            MessageCollectorSetup.SetupMessageCollector(messageCollector, Runtime.MessageWriters);
+            MessageCollectorSetup.BuildMessageWritersFromSettings(Runtime.MessageWriters);
+
+            Startup.Instance.InitializeProgram(messageCollector);
+
+            var settingsLoader = new SettingsLoader(this, new MessageCollector());
+            settingsLoader.LoadSettings();
+
+            var uiLoader = new LayoutSettingsLoader(this, messageCollector);
+            uiLoader.LoadPanelsFromXml();
+
+            ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
 
 			fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
-            Runtime.MessageCollector = new MessageCollector(Windows.ErrorsForm);
             Runtime.WindowList = new WindowList();
 
             if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
@@ -223,7 +229,7 @@ namespace mRemoteNG.UI.Forms
             if (upgradeMap != null)
                 ApplyCredentialMapping(upgradeMap);
 
-            Windows.TreePanel.Focus();
+            Windows.TreeForm.Focus();
 
             PuttySessionsManager.Instance.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
@@ -231,7 +237,7 @@ namespace mRemoteNG.UI.Forms
                 Windows.Show(WindowType.ComponentsCheck);
 			}
 
-            Startup.Instance.CreateConnectionsProvider();
+            Startup.Instance.CreateConnectionsProvider(messageCollector);
 			AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
@@ -420,7 +426,7 @@ namespace mRemoteNG.UI.Forms
         #region Timer
 		private void tmrAutoSave_Tick(object sender, EventArgs e)
 		{
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Doing AutoSave", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Doing AutoSave");
 			Runtime.SaveConnectionsAsync();
 		}
         #endregion
@@ -746,12 +752,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewConnections.Checked == false)
 			{
-                Windows.TreePanel.Show(pnlDock);
+                Windows.TreeForm.Show(pnlDock);
                 mMenViewConnections.Checked = true;
 			}
 			else
 			{
-                Windows.TreePanel.Hide();
+                Windows.TreeForm.Hide();
                 mMenViewConnections.Checked = false;
 			}
 		}
@@ -760,12 +766,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewConfig.Checked == false)
 			{
-                Windows.ConfigPanel.Show(pnlDock);
+                Windows.ConfigForm.Show(pnlDock);
                 mMenViewConfig.Checked = true;
 			}
 			else
 			{
-                Windows.ConfigPanel.Hide();
+                Windows.ConfigForm.Hide();
                 mMenViewConfig.Checked = false;
 			}
 		}
@@ -774,12 +780,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewErrorsAndInfos.Checked == false)
 			{
-                Windows.ErrorsPanel.Show(pnlDock);
+                Windows.ErrorsForm.Show(pnlDock);
                 mMenViewErrorsAndInfos.Checked = true;
 			}
 			else
 			{
-                Windows.ErrorsPanel.Hide();
+                Windows.ErrorsForm.Hide();
                 mMenViewErrorsAndInfos.Checked = false;
 			}
 		}
@@ -788,19 +794,19 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewScreenshotManager.Checked == false)
 			{
-                Windows.ScreenshotPanel.Show(pnlDock);
+                Windows.ScreenshotForm.Show(pnlDock);
                 mMenViewScreenshotManager.Checked = true;
 			}
 			else
 			{
-                Windows.ScreenshotPanel.Hide();
+                Windows.ScreenshotForm.Hide();
                 mMenViewScreenshotManager.Checked = false;
 			}
 		}
 
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
 		{
-            if (pnlDock.ActiveContent == Windows.TreePanel)
+            if (pnlDock.ActiveContent == Windows.TreeForm)
 			{
                 Windows.ConfigForm.Activate();
 			}
@@ -1303,10 +1309,10 @@ namespace mRemoteNG.UI.Forms
             Default.pnlDock.DockTopPortion = Default.pnlDock.Height * 0.25;
             Default.pnlDock.DockBottomPortion = Default.pnlDock.Height * 0.25;
 
-            Windows.TreePanel.Show(Default.pnlDock, DockState.DockLeft);
-            Windows.ConfigPanel.Show(Default.pnlDock);
-            Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
-            Windows.ErrorsPanel.Show(Default.pnlDock, DockState.Document);
+            Windows.TreeForm.Show(Default.pnlDock, DockState.DockLeft);
+            Windows.ConfigForm.Show(Default.pnlDock);
+            Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
+            Windows.ErrorsForm.Show(Default.pnlDock, DockState.Document);
 
             Windows.ErrorsForm.Hide();
             Windows.ScreenshotForm.Hide();
@@ -1365,7 +1371,7 @@ namespace mRemoteNG.UI.Forms
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
             _credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<INotifyingCredentialRecord>());
             _credentialManager.CredentialsChanged += (o, args) => SaveCredentialList(_credentialManager.GetCredentialRecords());
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Loaded credentials from file: {_credentialFilePath}");
         }
 
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1389,7 +1395,7 @@ namespace mRemoteNG.UI.Forms
             var dataProvider = new FileDataProviderWithRollingBackup(_credentialFilePath);
             var credentialSaver = new CredentialRecordSaver(dataProvider, serializer);
             credentialSaver.Save(records, "tempEncryptionKey".ConvertToSecureString());
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Saved credentials to file: {_credentialFilePath}", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Saved credentials to file: {_credentialFilePath}");
         }
 
         private void LoadDefaultConnectionCredentials()

@@ -12,18 +12,18 @@ namespace mRemoteNG.UI.Forms
     {
         private Dictionary<string, OptionsPage> _pages;
         private ImageList _pageIconImageList;
-        private readonly string pageName;
+        private readonly string _pageName;
 
         public frmOptions()
         {
             InitializeComponent();
-            pageName = Language.strStartupExit;
+            _pageName = Language.strStartupExit;
         }
 
         public frmOptions(string pn)
         {
             InitializeComponent();
-            pageName = pn;
+            _pageName = pn;
         }
 
         private void frmOptions_Load(object sender, EventArgs e)
@@ -51,6 +51,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(StartupExitPage).Name, new StartupExitPage()},
                 {typeof(AppearancePage).Name, new AppearancePage()},
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
+                {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},
                 {typeof(SqlServerPage).Name, new SqlServerPage()},
                 {typeof(UpdatesPage).Name, new UpdatesPage()},
@@ -83,7 +84,7 @@ namespace mRemoteNG.UI.Forms
             bool isSet = false;
             for (int i = 0; i < lstOptionPages.Items.Count; i++)
             {
-                if (!lstOptionPages.Items[i].Text.Equals(pageName)) continue;
+                if (!lstOptionPages.Items[i].Text.Equals(_pageName)) continue;
                 lstOptionPages.Items[i].Selected = true;
                 isSet = true;
                 break;

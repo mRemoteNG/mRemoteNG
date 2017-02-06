@@ -548,10 +548,10 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Methods
-        public SSHTransferWindow(DockContent Panel)
+        public SSHTransferWindow()
         {
             WindowType = WindowType.SSHTransfer;
-            DockPnl = Panel;
+            DockPnl = new DockContent();
             InitializeComponent();
 
             oDlg = new OpenFileDialog

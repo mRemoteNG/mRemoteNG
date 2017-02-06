@@ -2,9 +2,9 @@
 {
     public enum MessageClass
     {
-        InformationMsg = 0,
-        WarningMsg = 1,
-        ErrorMsg = 2,
-        ReportMsg = 3
+        DebugMsg = 0,
+        InformationMsg = 1,
+        WarningMsg = 2,
+        ErrorMsg = 3,
     }
 }

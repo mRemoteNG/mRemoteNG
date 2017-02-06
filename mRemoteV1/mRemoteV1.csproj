@@ -112,7 +112,9 @@
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
+    <Compile Include="App\Initialization\StartupDataLogger.cs" />
     <Compile Include="App\Logger.cs" />
+    <Compile Include="App\MessageCollectorSetup.cs" />
     <Compile Include="App\NativeMethods.cs" />
     <Compile Include="App\Runtime.cs" />
     <Compile Include="App\Screens.cs" />
@@ -216,7 +218,23 @@
     <Compile Include="Credential\ICredentialProvider.cs" />
     <Compile Include="Credential\ICredentialList.cs" />
     <Compile Include="Credential\INotifyingCredentialRecord.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\LogMessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\WriterDecorators\MessageTypeFilterDecorator.cs" />
+    <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />
+    <Compile Include="Messages\IMessage.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\IMessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\WriterDecorators\MessageFocusDecorator.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\MessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\MessageWriters\NotificationPanelMessageWriter.cs" />
+    <Compile Include="Messages\MessageWriters\IMessageWriter.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Messages\MessageCollector.cs" />
+    <Compile Include="Messages\WriterDecorators\OnlyLogMessageFilterDecorator.cs" />
+    <Compile Include="Messages\MessageWriters\PopupMessageWriter.cs" />
+    <Compile Include="Messages\MessageWriters\TextLogMessageWriter.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\NotificationPanelMessageFilteringOptions.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\NotificationPanelSwitchOnMessageFilteringOptions.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\PopupMessageFilteringOptions.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticator.cs" />
     <Compile Include="Security\BlockCipherEngines.cs" />
     <Compile Include="Security\BlockCipherModes.cs" />
@@ -237,8 +255,9 @@
     <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Security\CryptographyProviderFactory.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilder.cs" />
+    <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
-    <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
+    <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
@@ -291,6 +310,7 @@
     <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -336,6 +356,12 @@
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\NotificationsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\NotificationsPage.Designer.cs">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.Designer.cs">
       <DependentUpon>ConnectionsPage.cs</DependentUpon>
@@ -415,7 +441,7 @@
     <Compile Include="Connection\Protocol\Telnet\Connection.Protocol.Telnet.cs" />
     <Compile Include="Connection\Protocol\VNC\Connection.Protocol.VNC.cs" />
     <Compile Include="Themes\ThemeInfo.cs" />
-    <Compile Include="Tools\CommandLineArguments.cs" />
+    <Compile Include="Tools\Cmdline\CommandLineArguments.cs" />
     <Compile Include="Container\ContainerInfo.cs" />
     <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
@@ -440,7 +466,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.resx</DependentUpon>
     </Compile>
-    <Compile Include="Messages\MessageCollector.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Application.Designer.cs">
@@ -521,6 +546,9 @@
     <Compile Include="UI\Forms\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Window\ErrorAndInfoWindow.Designer.cs">
+      <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window\ExternalToolsWindow.Designer.cs">
       <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
     </Compile>
@@ -587,6 +615,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\NotificationsPage.resx">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\OptionsPage.resx">
       <DependentUpon>OptionsPage.cs</DependentUpon>
@@ -967,10 +998,19 @@
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
     <None Include="Resources\Icons_FamFamFam\shield.ico" />
     <None Include="Resources\Icons_FamFamFam\key.ico" />
+    <None Include="Resources\Images_FamFamFam\bricks.png" />
+    <None Include="Resources\Images_FamFamFam\brick.png" />
+    <None Include="Resources\Images_FamFamFam\bricks_greyscale.png" />
+    <None Include="Resources\Images_FamFamFam\brick_large.png" />
+    <None Include="Resources\Images_FamFamFam\brick1.png" />
+    <None Include="Resources\Images_FamFamFam\bricks1.png" />
     <Content Include="Resources\Images_FamFamFam\Config.png" />
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <None Include="Resources\Images_FamFamFam\key.png" />
     <None Include="Resources\Images_FamFamFam\key_add.png" />
+    <None Include="Resources\Images_FamFamFam\eye.png" />
+    <None Include="Resources\Images_FamFamFam\lightbulb.png" />
+    <None Include="Resources\Images_FamFamFam\lightning.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
     <Content Include="Resources\Images\green_arrow1.png" />

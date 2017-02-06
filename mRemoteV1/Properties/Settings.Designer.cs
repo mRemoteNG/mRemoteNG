@@ -98,18 +98,6 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ShowNoMessageBoxes {
-            get {
-                return ((bool)(this["ShowNoMessageBoxes"]));
-            }
-            set {
-                this["ShowNoMessageBoxes"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SwitchToMCOnInformation {
             get {
                 return ((bool)(this["SwitchToMCOnInformation"]));
@@ -313,18 +301,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool WriteLogFile {
-            get {
-                return ((bool)(this["WriteLogFile"]));
-            }
-            set {
-                this["WriteLogFile"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UseCustomPuttyPath {
             get {
@@ -452,42 +428,6 @@ namespace mRemoteNG {
             }
             set {
                 this["ConDefaultDescription"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultUsername {
-            get {
-                return ((string)(this["ConDefaultUsername"]));
-            }
-            set {
-                this["ConDefaultUsername"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultPassword {
-            get {
-                return ((string)(this["ConDefaultPassword"]));
-            }
-            set {
-                this["ConDefaultPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultDomain {
-            get {
-                return ((string)(this["ConDefaultDomain"]));
-            }
-            set {
-                this["ConDefaultDomain"] = value;
             }
         }
         
@@ -2398,7 +2338,7 @@ namespace mRemoteNG {
                 this["InhDefaultRDPAlertIdleTimeout"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -2420,6 +2360,174 @@ namespace mRemoteNG {
             }
             set {
                 this["ConDefaultCredentialRecord"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LogFilePath {
+            get {
+                return ((string)(this["LogFilePath"]));
+            }
+            set {
+                this["LogFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TextLogMessageWriterWriteDebugMsgs {
+            get {
+                return ((bool)(this["TextLogMessageWriterWriteDebugMsgs"]));
+            }
+            set {
+                this["TextLogMessageWriterWriteDebugMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TextLogMessageWriterWriteInfoMsgs {
+            get {
+                return ((bool)(this["TextLogMessageWriterWriteInfoMsgs"]));
+            }
+            set {
+                this["TextLogMessageWriterWriteInfoMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TextLogMessageWriterWriteWarningMsgs {
+            get {
+                return ((bool)(this["TextLogMessageWriterWriteWarningMsgs"]));
+            }
+            set {
+                this["TextLogMessageWriterWriteWarningMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TextLogMessageWriterWriteErrorMsgs {
+            get {
+                return ((bool)(this["TextLogMessageWriterWriteErrorMsgs"]));
+            }
+            set {
+                this["TextLogMessageWriterWriteErrorMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NotificationPanelWriterWriteDebugMsgs {
+            get {
+                return ((bool)(this["NotificationPanelWriterWriteDebugMsgs"]));
+            }
+            set {
+                this["NotificationPanelWriterWriteDebugMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NotificationPanelWriterWriteInfoMsgs {
+            get {
+                return ((bool)(this["NotificationPanelWriterWriteInfoMsgs"]));
+            }
+            set {
+                this["NotificationPanelWriterWriteInfoMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NotificationPanelWriterWriteWarningMsgs {
+            get {
+                return ((bool)(this["NotificationPanelWriterWriteWarningMsgs"]));
+            }
+            set {
+                this["NotificationPanelWriterWriteWarningMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NotificationPanelWriterWriteErrorMsgs {
+            get {
+                return ((bool)(this["NotificationPanelWriterWriteErrorMsgs"]));
+            }
+            set {
+                this["NotificationPanelWriterWriteErrorMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PopupMessageWriterWriteDebugMsgs {
+            get {
+                return ((bool)(this["PopupMessageWriterWriteDebugMsgs"]));
+            }
+            set {
+                this["PopupMessageWriterWriteDebugMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PopupMessageWriterWriteInfoMsgs {
+            get {
+                return ((bool)(this["PopupMessageWriterWriteInfoMsgs"]));
+            }
+            set {
+                this["PopupMessageWriterWriteInfoMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PopupMessageWriterWriteWarningMsgs {
+            get {
+                return ((bool)(this["PopupMessageWriterWriteWarningMsgs"]));
+            }
+            set {
+                this["PopupMessageWriterWriteWarningMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PopupMessageWriterWriteErrorMsgs {
+            get {
+                return ((bool)(this["PopupMessageWriterWriteErrorMsgs"]));
+            }
+            set {
+                this["PopupMessageWriterWriteErrorMsgs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LogToApplicationDirectory {
+            get {
+                return ((bool)(this["LogToApplicationDirectory"]));
+            }
+            set {
+                this["LogToApplicationDirectory"] = value;
             }
         }
     }
