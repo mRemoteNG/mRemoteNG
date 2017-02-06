@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
@@ -52,22 +51,6 @@ namespace mRemoteNG.App
         {
             var interpreter = new StartupArgumentsInterpreter(messageCollector);
             interpreter.ParseArguments(Environment.GetCommandLineArgs());
-        }
-
-        private static void GetConnectionIcons()
-        {
-            var iPath = GeneralAppInfo.HomePath + "\\Icons\\";
-            if (Directory.Exists(iPath) == false)
-            {
-                return;
-            }
-
-            foreach (var f in Directory.GetFiles(iPath, "*.ico", SearchOption.AllDirectories))
-            {
-                var fInfo = new FileInfo(f);
-                Array.Resize(ref ConnectionIcon.Icons, ConnectionIcon.Icons.Length + 1);
-                ConnectionIcon.Icons.SetValue(fInfo.Name.Replace(".ico", ""), ConnectionIcon.Icons.Length - 1);
-            }
         }
 
         public void CreateConnectionsProvider(MessageCollector messageCollector)
