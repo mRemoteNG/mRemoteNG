@@ -506,10 +506,14 @@
     <Compile Include="UI\Forms\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Menu\HelpMenu.cs" />
     <Compile Include="UI\Menu\MainFileMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Menu\ScreenSelectionSystemMenu.cs" />
+    <Compile Include="UI\Menu\ToolsMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Menu\ViewMenu.cs">
       <SubType>Component</SubType>
     </Compile>

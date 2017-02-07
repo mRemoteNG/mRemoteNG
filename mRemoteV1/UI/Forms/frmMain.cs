@@ -170,18 +170,12 @@ namespace mRemoteNG.UI.Forms
 
             msMain.Items.Add(new MainFileMenu(ConnectionTreeWindow, _connectionInitiator));
             msMain.Items.Add(new ViewMenu(tsExternalTools, tsQuickConnect, _fullscreen, this));
+            msMain.Items.Add(new ToolsMenu(this, _credentialManager));
         }
 
         private void ApplyLanguage()
 		{
-			mMenTools.Text = Language.strMenuTools;
-			mMenToolsSSHTransfer.Text = Language.strMenuSSHFileTransfer;
-			mMenToolsExternalApps.Text = Language.strMenuExternalTools;
-			mMenToolsPortScan.Text = Language.strMenuPortScan;
-			mMenToolsComponentsCheck.Text = Language.strComponentsCheck;
 			mMenToolsUpdate.Text = Language.strMenuCheckForUpdates;
-			mMenToolsOptions.Text = Language.strMenuOptions;
-			
 			mMenInfo.Text = Language.strMenuHelp;
 			mMenInfoHelp.Text = Language.strMenuHelpContents;
 			mMenInfoForum.Text = Language.strMenuSupportForum;
@@ -401,53 +395,6 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
         #region Menu
-        #region Tools
-        private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var credentialManagerForm = new CredentialManagerForm(_credentialManager)
-            {
-                DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
-            };
-            credentialManagerForm.CenterOnTarget(this);
-            credentialManagerForm.Show();
-        }
-
-        private void mMenToolsUpdate_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.Update);
-		}
-
-        private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.SSHTransfer);
-		}
-
-        private void mMenToolsUVNCSC_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.UltraVNCSC);
-		}
-
-        private void mMenToolsExternalApps_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.ExternalApps);
-		}
-
-        private void mMenToolsPortScan_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.PortScan);
-		}
-
-        private void mMenToolsComponentsCheck_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.ComponentsCheck);
-		}
-
-        private void mMenToolsOptions_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.Options);
-		}
-        #endregion
-								
         #region Quick Connect
 		private void PopulateQuickConnectProtocolMenu()
 		{
@@ -523,6 +470,10 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
         #region Info
+        private void mMenToolsUpdate_Click(object sender, EventArgs e)
+        {
+            Windows.Show(WindowType.Update);
+        }
         private void mMenInfoHelp_Click(object sender, EventArgs e)
 		{
 			Windows.Show(WindowType.Help);

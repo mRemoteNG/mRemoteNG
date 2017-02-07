@@ -34,14 +34,6 @@ namespace mRemoteNG.UI.Forms
             this.mMenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenTools = new System.Windows.Forms.ToolStripMenuItem();
-            this.credentialManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenToolsSSHTransfer = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenToolsUVNCSC = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenToolsExternalApps = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenToolsPortScan = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenToolsSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenToolsComponentsCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenToolsOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfoHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfoSep1 = new System.Windows.Forms.ToolStripSeparator();
@@ -50,8 +42,8 @@ namespace mRemoteNG.UI.Forms
             this.mMenInfoForum = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfoBugReport = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenToolsUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfoSep2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mMenToolsUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfoAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.lblQuickConnect = new System.Windows.Forms.ToolStripLabel();
@@ -59,11 +51,11 @@ namespace mRemoteNG.UI.Forms
             this.tsContainer = new System.Windows.Forms.ToolStripContainer();
             this.tsExternalTools = new System.Windows.Forms.ToolStrip();
             this.cMenExtAppsToolbar = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMenToolbarShowText = new System.Windows.Forms.ToolStripMenuItem();
             this.tsQuickConnect = new System.Windows.Forms.ToolStrip();
             this.btnQuickConnect = new mRemoteNG.UI.Controls.ToolStripSplitButton();
             this.mnuQuickConnectProtocol = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnConnections = new System.Windows.Forms.ToolStripDropDownButton();
+            this.cMenToolbarShowText = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuConnections = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.msMain.SuspendLayout();
@@ -92,7 +84,6 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenTools,
             this.mMenInfo});
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
@@ -101,84 +92,15 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 16;
             this.msMain.Text = "Main Toolbar";
-            
             // 
-            // mMenTools
+            // cMenToolbarShowText
             // 
-            this.mMenTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.credentialManagerToolStripMenuItem,
-            this.mMenToolsSSHTransfer,
-            this.mMenToolsUVNCSC,
-            this.mMenToolsExternalApps,
-            this.mMenToolsPortScan,
-            this.mMenToolsSep1,
-            this.mMenToolsComponentsCheck,
-            this.mMenToolsOptions});
-            this.mMenTools.Name = "mMenTools";
-            this.mMenTools.Size = new System.Drawing.Size(48, 20);
-            this.mMenTools.Text = "&Tools";
-            // 
-            // credentialManagerToolStripMenuItem
-            // 
-            this.credentialManagerToolStripMenuItem.Image = global::mRemoteNG.Resources.key;
-            this.credentialManagerToolStripMenuItem.Name = "credentialManagerToolStripMenuItem";
-            this.credentialManagerToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.credentialManagerToolStripMenuItem.Text = "Credential Manager";
-            this.credentialManagerToolStripMenuItem.Click += new System.EventHandler(this.credentialManagerToolStripMenuItem_Click);
-            // 
-            // mMenToolsSSHTransfer
-            // 
-            this.mMenToolsSSHTransfer.Image = global::mRemoteNG.Resources.SSHTransfer;
-            this.mMenToolsSSHTransfer.Name = "mMenToolsSSHTransfer";
-            this.mMenToolsSSHTransfer.Size = new System.Drawing.Size(184, 22);
-            this.mMenToolsSSHTransfer.Text = "SSH File Transfer";
-            this.mMenToolsSSHTransfer.Click += new System.EventHandler(this.mMenToolsSSHTransfer_Click);
-            // 
-            // mMenToolsUVNCSC
-            // 
-            this.mMenToolsUVNCSC.Image = global::mRemoteNG.Resources.UVNC_SC;
-            this.mMenToolsUVNCSC.Name = "mMenToolsUVNCSC";
-            this.mMenToolsUVNCSC.Size = new System.Drawing.Size(184, 22);
-            this.mMenToolsUVNCSC.Text = "UltraVNC SingleClick";
-            this.mMenToolsUVNCSC.Visible = false;
-            this.mMenToolsUVNCSC.Click += new System.EventHandler(this.mMenToolsUVNCSC_Click);
-            // 
-            // mMenToolsExternalApps
-            // 
-            this.mMenToolsExternalApps.Image = global::mRemoteNG.Resources.ExtApp;
-            this.mMenToolsExternalApps.Name = "mMenToolsExternalApps";
-            this.mMenToolsExternalApps.Size = new System.Drawing.Size(184, 22);
-            this.mMenToolsExternalApps.Text = "External Applications";
-            this.mMenToolsExternalApps.Click += new System.EventHandler(this.mMenToolsExternalApps_Click);
-            // 
-            // mMenToolsPortScan
-            // 
-            this.mMenToolsPortScan.Image = global::mRemoteNG.Resources.PortScan;
-            this.mMenToolsPortScan.Name = "mMenToolsPortScan";
-            this.mMenToolsPortScan.Size = new System.Drawing.Size(184, 22);
-            this.mMenToolsPortScan.Text = "Port Scan";
-            this.mMenToolsPortScan.Click += new System.EventHandler(this.mMenToolsPortScan_Click);
-            // 
-            // mMenToolsSep1
-            // 
-            this.mMenToolsSep1.Name = "mMenToolsSep1";
-            this.mMenToolsSep1.Size = new System.Drawing.Size(181, 6);
-            // 
-            // mMenToolsComponentsCheck
-            // 
-            this.mMenToolsComponentsCheck.Image = global::mRemoteNG.Resources.cog_error;
-            this.mMenToolsComponentsCheck.Name = "mMenToolsComponentsCheck";
-            this.mMenToolsComponentsCheck.Size = new System.Drawing.Size(184, 22);
-            this.mMenToolsComponentsCheck.Text = "Components Check";
-            this.mMenToolsComponentsCheck.Click += new System.EventHandler(this.mMenToolsComponentsCheck_Click);
-            // 
-            // mMenToolsOptions
-            // 
-            this.mMenToolsOptions.Image = global::mRemoteNG.Resources.Options;
-            this.mMenToolsOptions.Name = "mMenToolsOptions";
-            this.mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
-            this.mMenToolsOptions.Text = "Options";
-            this.mMenToolsOptions.Click += new System.EventHandler(this.mMenToolsOptions_Click);
+            this.cMenToolbarShowText.Checked = true;
+            this.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cMenToolbarShowText.Name = "cMenToolbarShowText";
+            this.cMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
+            this.cMenToolbarShowText.Text = "Show Text";
+            this.cMenToolbarShowText.Click += new System.EventHandler(this.cMenToolbarShowText_Click);
             // 
             // mMenInfo
             // 
@@ -324,19 +246,10 @@ namespace mRemoteNG.UI.Forms
             // 
             // cMenExtAppsToolbar
             // 
-            this.cMenExtAppsToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMenToolbarShowText});
+            //this.cMenExtAppsToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            //this.cMenToolbarShowText});
             this.cMenExtAppsToolbar.Name = "cMenToolbar";
             this.cMenExtAppsToolbar.Size = new System.Drawing.Size(129, 26);
-            // 
-            // cMenToolbarShowText
-            // 
-            this.cMenToolbarShowText.Checked = true;
-            this.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cMenToolbarShowText.Name = "cMenToolbarShowText";
-            this.cMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
-            this.cMenToolbarShowText.Text = "Show Text";
-            this.cMenToolbarShowText.Click += new System.EventHandler(this.cMenToolbarShowText_Click);
             // 
             // tsQuickConnect
             // 
@@ -432,36 +345,28 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenTools;
 		internal System.Windows.Forms.ToolStripLabel lblQuickConnect;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfo;
-		internal System.Windows.Forms.ToolStripSeparator mMenToolsSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsOptions;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoHelp;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoWebsite;
+        internal System.Windows.Forms.ToolStripMenuItem cMenToolbarShowText;
+        internal System.Windows.Forms.ToolStripMenuItem mMenInfoWebsite;
 		internal System.Windows.Forms.ToolStripSeparator mMenInfoSep1;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoAbout;
         internal QuickConnectComboBox cmbQuickConnect;
-        internal System.Windows.Forms.ToolStripMenuItem mMenToolsSSHTransfer;
 		internal System.Windows.Forms.ToolStripContainer tsContainer;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsExternalApps;
 		internal System.Windows.Forms.Timer tmrAutoSave;
 		internal System.Windows.Forms.ToolStrip tsExternalTools;
 		internal System.Windows.Forms.ContextMenuStrip cMenExtAppsToolbar;
-		internal System.Windows.Forms.ToolStripMenuItem cMenToolbarShowText;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsPortScan;
 		internal System.Windows.Forms.ToolStrip tsQuickConnect;
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoDonate;
-		internal ToolStripSplitButton btnQuickConnect;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsUVNCSC;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsComponentsCheck;
+        internal System.Windows.Forms.ToolStripMenuItem mMenToolsUpdate;
+        internal ToolStripSplitButton btnQuickConnect;
 		internal System.Windows.Forms.ToolStripSeparator mMenInfoSep2;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoBugReport;
 		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoForum;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsUpdate;
 		internal System.Windows.Forms.ContextMenuStrip mnuQuickConnectProtocol;
 		internal System.Windows.Forms.ToolStripDropDownButton btnConnections;
 		internal System.Windows.Forms.ContextMenuStrip mnuConnections;
         private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.ToolStripMenuItem credentialManagerToolStripMenuItem;
     }
 }
