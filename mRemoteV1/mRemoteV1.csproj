@@ -297,6 +297,9 @@
     <Compile Include="UI\Controls\CredentialRecordListBox.Designer.cs">
       <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\ExternalToolsToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>

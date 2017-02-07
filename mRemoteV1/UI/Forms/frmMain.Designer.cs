@@ -35,15 +35,11 @@ namespace mRemoteNG.UI.Forms
             this.mMenInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsContainer = new System.Windows.Forms.ToolStripContainer();
-            this.tsExternalTools = new System.Windows.Forms.ToolStrip();
-            this.cMenExtAppsToolbar = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMenToolbarShowText = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.msMain.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();
             this.tsContainer.SuspendLayout();
-            this.cMenExtAppsToolbar.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDock
@@ -71,15 +67,6 @@ namespace mRemoteNG.UI.Forms
             this.msMain.TabIndex = 16;
             this.msMain.Text = "Main Toolbar";
             // 
-            // cMenToolbarShowText
-            // 
-            this.cMenToolbarShowText.Checked = true;
-            this.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cMenToolbarShowText.Name = "cMenToolbarShowText";
-            this.cMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
-            this.cMenToolbarShowText.Text = "Show Text";
-            this.cMenToolbarShowText.Click += new System.EventHandler(this.cMenToolbarShowText_Click);
-            // 
             // mMenSep3
             // 
             this.mMenSep3.Name = "mMenSep3";
@@ -102,24 +89,6 @@ namespace mRemoteNG.UI.Forms
             // tsContainer.TopToolStripPanel
             // 
             this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
-            this.tsContainer.TopToolStripPanel.Controls.Add(this.tsExternalTools);
-            // 
-            // tsExternalTools
-            // 
-            this.tsExternalTools.ContextMenuStrip = this.cMenExtAppsToolbar;
-            this.tsExternalTools.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsExternalTools.Location = new System.Drawing.Point(39, 49);
-            this.tsExternalTools.MaximumSize = new System.Drawing.Size(0, 25);
-            this.tsExternalTools.Name = "tsExternalTools";
-            this.tsExternalTools.Size = new System.Drawing.Size(111, 25);
-            this.tsExternalTools.TabIndex = 17;
-            // 
-            // cMenExtAppsToolbar
-            // 
-            //this.cMenExtAppsToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            //this.cMenToolbarShowText});
-            this.cMenExtAppsToolbar.Name = "cMenToolbar";
-            this.cMenExtAppsToolbar.Size = new System.Drawing.Size(129, 26);
             // 
             // tmrAutoSave
             // 
@@ -150,7 +119,6 @@ namespace mRemoteNG.UI.Forms
             this.tsContainer.TopToolStripPanel.PerformLayout();
             this.tsContainer.ResumeLayout(false);
             this.tsContainer.PerformLayout();
-            this.cMenExtAppsToolbar.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -160,11 +128,8 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenView;
 		internal System.Windows.Forms.ToolStripMenuItem mMenTools;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfo;
-        internal System.Windows.Forms.ToolStripMenuItem cMenToolbarShowText;
 		internal System.Windows.Forms.ToolStripContainer tsContainer;
 		internal System.Windows.Forms.Timer tmrAutoSave;
-		internal System.Windows.Forms.ToolStrip tsExternalTools;
-		internal System.Windows.Forms.ContextMenuStrip cMenExtAppsToolbar;
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
         private System.ComponentModel.IContainer components;
     }

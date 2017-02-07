@@ -18,7 +18,6 @@ using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
-using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.TaskDialog;
@@ -43,7 +42,8 @@ namespace mRemoteNG.UI.Forms
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
         internal FullscreenHandler _fullscreen { get; set; }
-        private QuickConnectToolStrip _quickConnectToolStrip;
+        private readonly QuickConnectToolStrip _quickConnectToolStrip;
+        private readonly ExternalToolsToolStrip _externalToolsToolStrip;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
@@ -57,7 +57,9 @@ namespace mRemoteNG.UI.Forms
             _fullscreen = new FullscreenHandler(this);
             pnlDock.Theme = new VS2012LightTheme();
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
-		}
+            _quickConnectToolStrip = new QuickConnectToolStrip(_connectionInitiator);
+            _externalToolsToolStrip = new ExternalToolsToolStrip();
+        }
 
         static FrmMain()
         {
@@ -134,16 +136,12 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            _quickConnectToolStrip = new QuickConnectToolStrip(_connectionInitiator);
-            tsContainer.TopToolStripPanel.Controls.Add(_quickConnectToolStrip);
-
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip);
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip);
             settingsLoader.LoadSettings();
 
             var uiLoader = new LayoutSettingsLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
-            ApplyLanguage();
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
 
@@ -163,22 +161,19 @@ namespace mRemoteNG.UI.Forms
 
             _screenSystemMenu.BuildScreenList();
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
-            
+
+            tsContainer.TopToolStripPanel.Controls.Add(_quickConnectToolStrip);
+            tsContainer.TopToolStripPanel.Controls.Add(_externalToolsToolStrip);
             msMain.Items.AddRange(new ToolStripItem[]
             {
                 new MainFileMenu(Windows.TreeForm, _connectionInitiator),
-                new ViewMenu(tsExternalTools, _quickConnectToolStrip, _fullscreen, this),
+                new ViewMenu(_externalToolsToolStrip, _quickConnectToolStrip, _fullscreen, this),
                 new ToolsMenu(this, _credentialManager),
                 new HelpMenu()
             });
 
             Opacity = 1;
         }
-
-        private void ApplyLanguage()
-		{
-			cMenToolbarShowText.Text = Language.strMenuShowText;
-		}
 
         private void ApplyThemes()
 		{
@@ -198,8 +193,6 @@ namespace mRemoteNG.UI.Forms
 			msMain.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
 			msMain.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
 			ApplyMenuColors(msMain.Items);
-			tsExternalTools.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsExternalTools.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
 		}
 		
 		private static void ApplyMenuColors(IEnumerable itemCollection)
@@ -284,7 +277,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
-            Shutdown.Cleanup(_quickConnectToolStrip);
+            Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip);
 									
 			IsClosing = true;
 
@@ -310,77 +303,6 @@ namespace mRemoteNG.UI.Forms
 		}
         #endregion
 		
-        #region Ext Apps Toolbar
-		private void cMenToolbarShowText_Click(object sender, EventArgs e)
-		{
-			SwitchToolBarText(!cMenToolbarShowText.Checked);
-		}
-								
-		public void AddExternalToolsToToolBar()
-		{
-			try
-			{
-				for (var index = tsExternalTools.Items.Count - 1; index >= 0; index--)
-				{
-					tsExternalTools.Items[index].Dispose();
-				}
-				tsExternalTools.Items.Clear();
-
-			    foreach (ExternalTool tool in Runtime.ExternalTools)
-				{
-					var button = (ToolStripButton)tsExternalTools.Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
-											
-					if (cMenToolbarShowText.Checked)
-					{
-						button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-					}
-					else
-					{
-						button.DisplayStyle = button.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
-					}
-											
-					button.Tag = tool;
-				}
-			}
-			catch (Exception ex)
-			{
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddExternalToolsToToolBarFailed, ex);
-			}
-		}
-								
-		private static void tsExtAppEntry_Click(object sender, EventArgs e)
-		{
-            var extA = (ExternalTool)((ToolStripButton)sender).Tag;
-
-		    var selectedTreeNode = Windows.TreeForm.SelectedNode;
-            if (selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection | selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
-			{
-                extA.Start(selectedTreeNode);
-			}
-			else
-			{
-				extA.Start();
-			}
-		}
-								
-		public void SwitchToolBarText(bool show)
-		{
-			foreach (ToolStripButton tItem in tsExternalTools.Items)
-			{
-				if (show)
-				{
-					tItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-				}
-				else
-				{
-					tItem.DisplayStyle = tItem.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
-				}
-			}
-									
-			cMenToolbarShowText.Checked = show;
-		}
-        #endregion
-
         #region Window Overrides and DockPanel Stuff
         private void frmMain_ResizeBegin(object sender, EventArgs e)
 		{

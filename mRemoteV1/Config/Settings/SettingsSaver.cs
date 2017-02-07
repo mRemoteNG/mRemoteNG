@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App.Info;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 using static mRemoteNG.App.Runtime;
 
@@ -12,32 +13,32 @@ namespace mRemoteNG.Config.Settings
 {
     public static class SettingsSaver
     {
-        public static void SaveSettings(Control quickConnectToolStrip)
+        public static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
         {
             try
             {
-                var with1 = FrmMain.Default;
+                var frmMain = FrmMain.Default;
                 var windowPlacement = new WindowPlacement(FrmMain.Default);
-                if (with1.WindowState == FormWindowState.Minimized & windowPlacement.RestoreToMaximized)
+                if (frmMain.WindowState == FormWindowState.Minimized & windowPlacement.RestoreToMaximized)
                 {
-                    with1.Opacity = 0;
-                    with1.WindowState = FormWindowState.Maximized;
+                    frmMain.Opacity = 0;
+                    frmMain.WindowState = FormWindowState.Maximized;
                 }
 
-                mRemoteNG.Settings.Default.MainFormLocation = with1.Location;
-                mRemoteNG.Settings.Default.MainFormSize = with1.Size;
+                mRemoteNG.Settings.Default.MainFormLocation = frmMain.Location;
+                mRemoteNG.Settings.Default.MainFormSize = frmMain.Size;
 
-                if (with1.WindowState != FormWindowState.Normal)
+                if (frmMain.WindowState != FormWindowState.Normal)
                 {
-                    mRemoteNG.Settings.Default.MainFormRestoreLocation = with1.RestoreBounds.Location;
-                    mRemoteNG.Settings.Default.MainFormRestoreSize = with1.RestoreBounds.Size;
+                    mRemoteNG.Settings.Default.MainFormRestoreLocation = frmMain.RestoreBounds.Location;
+                    mRemoteNG.Settings.Default.MainFormRestoreSize = frmMain.RestoreBounds.Size;
                 }
 
-                mRemoteNG.Settings.Default.MainFormState = with1.WindowState;
+                mRemoteNG.Settings.Default.MainFormState = frmMain.WindowState;
 
-                if (with1._fullscreen != null)
+                if (frmMain._fullscreen != null)
                 {
-                    mRemoteNG.Settings.Default.MainFormKiosk = with1._fullscreen.Value;
+                    mRemoteNG.Settings.Default.MainFormKiosk = frmMain._fullscreen.Value;
                 }
 
                 mRemoteNG.Settings.Default.FirstStart = false;
@@ -45,13 +46,13 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.ResetToolbars = false;
                 mRemoteNG.Settings.Default.NoReconnect = false;
 
-                mRemoteNG.Settings.Default.ExtAppsTBLocation = with1.tsExternalTools.Location;
-                if (with1.tsExternalTools.Parent != null)
+                mRemoteNG.Settings.Default.ExtAppsTBLocation = externalToolsToolStrip.Location;
+                if (externalToolsToolStrip.Parent != null)
                 {
-                    mRemoteNG.Settings.Default.ExtAppsTBParentDock = with1.tsExternalTools.Parent.Dock.ToString();
+                    mRemoteNG.Settings.Default.ExtAppsTBParentDock = externalToolsToolStrip.Parent.Dock.ToString();
                 }
-                mRemoteNG.Settings.Default.ExtAppsTBVisible = with1.tsExternalTools.Visible;
-                mRemoteNG.Settings.Default.ExtAppsTBShowText = with1.cMenToolbarShowText.Checked;
+                mRemoteNG.Settings.Default.ExtAppsTBVisible = externalToolsToolStrip.Visible;
+                mRemoteNG.Settings.Default.ExtAppsTBShowText = externalToolsToolStrip.CMenToolbarShowText.Checked;
 
                 mRemoteNG.Settings.Default.QuickyTBLocation = quickConnectToolStrip.Location;
                 if (quickConnectToolStrip.Parent != null)

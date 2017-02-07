@@ -21,11 +21,12 @@ namespace mRemoteNG.Config.Settings
         private readonly ExternalAppsLoader _externalAppsLoader;
         private readonly MessageCollector _messageCollector;
         private readonly QuickConnectToolStrip _quickConnectToolStrip;
+        private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 
         private FrmMain MainForm { get; }
 
 
-	    public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector, QuickConnectToolStrip quickConnectToolStrip)
+	    public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector, QuickConnectToolStrip quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
 		{
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -33,12 +34,15 @@ namespace mRemoteNG.Config.Settings
                 throw new ArgumentNullException(nameof(messageCollector));
             if (quickConnectToolStrip == null)
                 throw new ArgumentNullException(nameof(quickConnectToolStrip));
+            if (externalToolsToolStrip == null)
+                throw new ArgumentNullException(nameof(externalToolsToolStrip));
 
             MainForm = mainForm;
-            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector);
 	        _messageCollector = messageCollector;
 	        _quickConnectToolStrip = quickConnectToolStrip;
-		}
+	        _externalToolsToolStrip = externalToolsToolStrip;
+            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip);
+        }
         
         #region Public Methods
         public void LoadSettings()
@@ -183,8 +187,8 @@ namespace mRemoteNG.Config.Settings
 		{
 			ToolStripPanelFromString("top").Join(_quickConnectToolStrip, new Point(300, 0));
             _quickConnectToolStrip.Visible = true;
-			ToolStripPanelFromString("bottom").Join(MainForm.tsExternalTools, new Point(3, 0));
-			MainForm.tsExternalTools.Visible = false;
+			ToolStripPanelFromString("bottom").Join(_externalToolsToolStrip, new Point(3, 0));
+            _externalToolsToolStrip.Visible = false;
 		}
 
 	    private void LoadToolbarsFromSettings()
@@ -209,8 +213,8 @@ namespace mRemoteNG.Config.Settings
 		
 		private void AddDynamicPanels()
 		{
-			ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock).Join(MainForm.tsExternalTools, mRemoteNG.Settings.Default.ExtAppsTBLocation);
-			MainForm.tsExternalTools.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
+			ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock).Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
+            _externalToolsToolStrip.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
 		}
 		
 		private ToolStripPanel ToolStripPanelFromString(string panel)

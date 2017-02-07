@@ -10,6 +10,7 @@ using mRemoteNG.UI.Window;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Security;
@@ -41,7 +42,7 @@ namespace mRemoteNG.App
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static DateTime LastSqlUpdate { get; set; }
-        public static ArrayList ExternalTools { get; set; } = new ArrayList();
+        public static ObservableCollection<ExternalTool> ExternalTools { get; set; } = new ObservableCollection<ExternalTool>();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
         {
