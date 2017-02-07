@@ -46,7 +46,6 @@ namespace mRemoteNG.UI.Forms
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
         internal FullscreenHandler _fullscreen { get; set; }
-        private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
@@ -166,11 +165,9 @@ namespace mRemoteNG.UI.Forms
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
             Opacity = 1;
 
-            ConnectionTreeWindow = Windows.TreeForm;
-
             msMain.Items.AddRange(new ToolStripItem[]
             {
-                new MainFileMenu(ConnectionTreeWindow, _connectionInitiator),
+                new MainFileMenu(Windows.TreeForm, _connectionInitiator),
                 new ViewMenu(tsExternalTools, tsQuickConnect, _fullscreen, this),
                 new ToolsMenu(this, _credentialManager),
                 new HelpMenu()
