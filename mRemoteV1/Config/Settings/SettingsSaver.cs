@@ -12,7 +12,7 @@ namespace mRemoteNG.Config.Settings
 {
     public static class SettingsSaver
     {
-        public static void SaveSettings()
+        public static void SaveSettings(Control quickConnectToolStrip)
         {
             try
             {
@@ -53,12 +53,12 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.ExtAppsTBVisible = with1.tsExternalTools.Visible;
                 mRemoteNG.Settings.Default.ExtAppsTBShowText = with1.cMenToolbarShowText.Checked;
 
-                mRemoteNG.Settings.Default.QuickyTBLocation = with1.tsQuickConnect.Location;
-                if (with1.tsQuickConnect.Parent != null)
+                mRemoteNG.Settings.Default.QuickyTBLocation = quickConnectToolStrip.Location;
+                if (quickConnectToolStrip.Parent != null)
                 {
-                    mRemoteNG.Settings.Default.QuickyTBParentDock = with1.tsQuickConnect.Parent.Dock.ToString();
+                    mRemoteNG.Settings.Default.QuickyTBParentDock = quickConnectToolStrip.Parent.Dock.ToString();
                 }
-                mRemoteNG.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
+                mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
                 mRemoteNG.Settings.Default.Save();
 
                 SavePanelsToXML();

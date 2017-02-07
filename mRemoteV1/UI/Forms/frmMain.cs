@@ -7,7 +7,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -15,8 +14,6 @@ using mRemoteNG.Config;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
@@ -46,6 +43,7 @@ namespace mRemoteNG.UI.Forms
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
         internal FullscreenHandler _fullscreen { get; set; }
+        private QuickConnectToolStrip _quickConnectToolStrip;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
@@ -136,14 +134,16 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            var settingsLoader = new SettingsLoader(this, new MessageCollector());
+            _quickConnectToolStrip = new QuickConnectToolStrip(_connectionInitiator);
+            tsContainer.TopToolStripPanel.Controls.Add(_quickConnectToolStrip);
+
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip);
             settingsLoader.LoadSettings();
 
             var uiLoader = new LayoutSettingsLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
             ApplyLanguage();
-			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
 
@@ -163,22 +163,20 @@ namespace mRemoteNG.UI.Forms
 
             _screenSystemMenu.BuildScreenList();
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
-            Opacity = 1;
-
+            
             msMain.Items.AddRange(new ToolStripItem[]
             {
                 new MainFileMenu(Windows.TreeForm, _connectionInitiator),
-                new ViewMenu(tsExternalTools, tsQuickConnect, _fullscreen, this),
+                new ViewMenu(tsExternalTools, _quickConnectToolStrip, _fullscreen, this),
                 new ToolsMenu(this, _credentialManager),
                 new HelpMenu()
             });
+
+            Opacity = 1;
         }
 
         private void ApplyLanguage()
 		{
-			lblQuickConnect.Text = Language.strLabelConnect;
-			btnQuickConnect.Text = Language.strMenuConnect;
-			btnConnections.Text = Language.strMenuConnections;
 			cMenToolbarShowText.Text = Language.strMenuShowText;
 		}
 
@@ -202,8 +200,6 @@ namespace mRemoteNG.UI.Forms
 			ApplyMenuColors(msMain.Items);
 			tsExternalTools.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
 			tsExternalTools.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsQuickConnect.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsQuickConnect.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
 		}
 		
 		private static void ApplyMenuColors(IEnumerable itemCollection)
@@ -288,7 +284,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
-            Shutdown.Cleanup();
+            Shutdown.Cleanup(_quickConnectToolStrip);
 									
 			IsClosing = true;
 
@@ -382,109 +378,6 @@ namespace mRemoteNG.UI.Forms
 			}
 									
 			cMenToolbarShowText.Checked = show;
-		}
-        #endregion
-
-        #region Menu
-        #region Quick Connect
-		private void PopulateQuickConnectProtocolMenu()
-		{
-			try
-			{
-				mnuQuickConnectProtocol.Items.Clear();
-				foreach (var fieldInfo in typeof(ProtocolType).GetFields())
-				{
-				    if (fieldInfo.Name == "value__" || fieldInfo.Name == "IntApp") continue;
-				    var menuItem = new ToolStripMenuItem(fieldInfo.Name);
-				    if (fieldInfo.Name == Settings.Default.QuickConnectProtocol)
-				    {
-				        menuItem.Checked = true;
-				        btnQuickConnect.Text = Settings.Default.QuickConnectProtocol;
-				    }
-				    mnuQuickConnectProtocol.Items.Add(menuItem);
-				}
-			}
-			catch (Exception ex)
-			{
-                Runtime.MessageCollector.AddExceptionStackTrace("PopulateQuickConnectProtocolMenu() failed.", ex);
-			}
-		}
-
-        private void lblQuickConnect_Click(object sender, EventArgs e)
-		{
-			cmbQuickConnect.Focus();
-		}
-
-        private void cmbQuickConnect_ConnectRequested(object sender, QuickConnectComboBox.ConnectRequestedEventArgs e)
-		{
-			btnQuickConnect_ButtonClick(sender, e);
-		}
-
-        private void btnQuickConnect_ButtonClick(object sender, EventArgs e)
-		{
-			try
-			{
-				var connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Converter.StringToProtocol(Settings.Default.QuickConnectProtocol));
-				if (connectionInfo == null)
-				{
-					cmbQuickConnect.Focus();
-					return;
-				}
-				cmbQuickConnect.Add(connectionInfo);
-                _connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionStackTrace("btnQuickConnect_ButtonClick() failed.", ex);
-			}
-		}
-
-        private void cmbQuickConnect_ProtocolChanged(object sender, QuickConnectComboBox.ProtocolChangedEventArgs e)
-		{
-			SetQuickConnectProtocol(Converter.ProtocolToString(e.Protocol));
-		}
-
-        private void btnQuickConnect_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-		{
-			SetQuickConnectProtocol(e.ClickedItem.Text);
-		}
-		
-		private void SetQuickConnectProtocol(string protocol)
-		{
-            Settings.Default.QuickConnectProtocol = protocol;
-			btnQuickConnect.Text = protocol;
-			foreach (ToolStripMenuItem menuItem in mnuQuickConnectProtocol.Items)
-			{
-			    menuItem.Checked = menuItem.Text.Equals(protocol);
-			}
-		}
-        #endregion
-
-        #endregion
-
-        #region Connections DropDown
-        private void btnConnections_DropDownOpening(object sender, EventArgs e)
-		{
-            btnConnections.DropDownItems.Clear();
-            var menuItemsConverter = new ConnectionsTreeToMenuItemsConverter
-            {
-                MouseUpEventHandler = ConnectionsMenuItem_MouseUp
-            };
-
-		    // ReSharper disable once CoVariantArrayConversion
-            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionTreeModel).ToArray();
-            btnConnections.DropDownItems.AddRange(rootMenuItems);
-		}
-										
-		private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
-		{
-		    if (e.Button != MouseButtons.Left) return;
-		    if (((ToolStripMenuItem) sender).Tag is ContainerInfo) return;
-		    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
-		    if (tag != null)
-		    {
-		        _connectionInitiator.OpenConnection(tag);
-		    }
 		}
         #endregion
 

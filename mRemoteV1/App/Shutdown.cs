@@ -1,6 +1,7 @@
 ﻿using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
+using System.Windows.Forms;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.UI.Forms;
 
@@ -19,14 +20,14 @@ namespace mRemoteNG.App
             ProgramRoot.CloseSingletonInstanceMutex();
         }
 
-        public static void Cleanup()
+        public static void Cleanup(Control quickConnectToolStrip)
         {
             try
             {
                 StopPuttySessionWatcher();
                 DisposeNotificationAreaIcon();
                 SaveConnections();
-                SaveSettings();
+                SaveSettings(quickConnectToolStrip);
                 UnregisterBrowsers();
             }
             catch (Exception ex)
@@ -52,9 +53,9 @@ namespace mRemoteNG.App
                 Runtime.SaveConnections();
         }
 
-        private static void SaveSettings()
+        private static void SaveSettings(Control quickConnectToolStrip)
         {
-            Config.Settings.SettingsSaver.SaveSettings();
+            Config.Settings.SettingsSaver.SaveSettings(quickConnectToolStrip);
         }
 
         private static void UnregisterBrowsers()

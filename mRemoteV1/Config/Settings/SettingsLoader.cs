@@ -10,6 +10,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 
 
@@ -19,20 +20,24 @@ namespace mRemoteNG.Config.Settings
 	{
         private readonly ExternalAppsLoader _externalAppsLoader;
         private readonly MessageCollector _messageCollector;
+        private readonly QuickConnectToolStrip _quickConnectToolStrip;
 
-	    private FrmMain MainForm { get; }
+        private FrmMain MainForm { get; }
 
 
-	    public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector)
+	    public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector, QuickConnectToolStrip quickConnectToolStrip)
 		{
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
             if (messageCollector == null)
                 throw new ArgumentNullException(nameof(messageCollector));
+            if (quickConnectToolStrip == null)
+                throw new ArgumentNullException(nameof(quickConnectToolStrip));
 
             MainForm = mainForm;
             _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector);
 	        _messageCollector = messageCollector;
+	        _quickConnectToolStrip = quickConnectToolStrip;
 		}
         
         #region Public Methods
@@ -176,8 +181,8 @@ namespace mRemoteNG.Config.Settings
 
 	    private void SetToolbarsDefault()
 		{
-			ToolStripPanelFromString("top").Join(MainForm.tsQuickConnect, new Point(300, 0));
-			MainForm.tsQuickConnect.Visible = true;
+			ToolStripPanelFromString("top").Join(_quickConnectToolStrip, new Point(300, 0));
+            _quickConnectToolStrip.Visible = true;
 			ToolStripPanelFromString("bottom").Join(MainForm.tsExternalTools, new Point(3, 0));
 			MainForm.tsExternalTools.Visible = false;
 		}
@@ -198,8 +203,8 @@ namespace mRemoteNG.Config.Settings
 		
 		private void AddStaticPanels()
 		{
-			ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock).Join(MainForm.tsQuickConnect, mRemoteNG.Settings.Default.QuickyTBLocation);
-			MainForm.tsQuickConnect.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
+			ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock).Join(_quickConnectToolStrip, mRemoteNG.Settings.Default.QuickyTBLocation);
+            _quickConnectToolStrip.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
 		}
 		
 		private void AddDynamicPanels()

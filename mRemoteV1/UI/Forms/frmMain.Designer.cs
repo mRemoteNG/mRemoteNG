@@ -1,5 +1,3 @@
-using mRemoteNG.UI.Controls;
-
 namespace mRemoteNG.UI.Forms
 {
     public partial class FrmMain : System.Windows.Forms.Form
@@ -36,24 +34,16 @@ namespace mRemoteNG.UI.Forms
             this.mMenTools = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
-            this.lblQuickConnect = new System.Windows.Forms.ToolStripLabel();
-            this.cmbQuickConnect = new mRemoteNG.UI.Controls.QuickConnectComboBox();
             this.tsContainer = new System.Windows.Forms.ToolStripContainer();
             this.tsExternalTools = new System.Windows.Forms.ToolStrip();
             this.cMenExtAppsToolbar = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsQuickConnect = new System.Windows.Forms.ToolStrip();
-            this.btnQuickConnect = new mRemoteNG.UI.Controls.ToolStripSplitButton();
-            this.mnuQuickConnectProtocol = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnConnections = new System.Windows.Forms.ToolStripDropDownButton();
             this.cMenToolbarShowText = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuConnections = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.msMain.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();
             this.tsContainer.SuspendLayout();
             this.cMenExtAppsToolbar.SuspendLayout();
-            this.tsQuickConnect.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDock
@@ -95,23 +85,6 @@ namespace mRemoteNG.UI.Forms
             this.mMenSep3.Name = "mMenSep3";
             this.mMenSep3.Size = new System.Drawing.Size(211, 6);
             // 
-            // lblQuickConnect
-            // 
-            this.lblQuickConnect.Name = "lblQuickConnect";
-            this.lblQuickConnect.Size = new System.Drawing.Size(55, 22);
-            this.lblQuickConnect.Text = "&Connect:";
-            this.lblQuickConnect.Click += new System.EventHandler(this.lblQuickConnect_Click);
-            // 
-            // cmbQuickConnect
-            // 
-            this.cmbQuickConnect.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbQuickConnect.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbQuickConnect.Margin = new System.Windows.Forms.Padding(1, 0, 3, 0);
-            this.cmbQuickConnect.Name = "cmbQuickConnect";
-            this.cmbQuickConnect.Size = new System.Drawing.Size(200, 25);
-            this.cmbQuickConnect.ConnectRequested += new mRemoteNG.UI.Controls.QuickConnectComboBox.ConnectRequestedEventHandler(this.cmbQuickConnect_ConnectRequested);
-            this.cmbQuickConnect.ProtocolChanged += new mRemoteNG.UI.Controls.QuickConnectComboBox.ProtocolChangedEventHandler(this.cmbQuickConnect_ProtocolChanged);
-            // 
             // tsContainer
             // 
             // 
@@ -129,7 +102,6 @@ namespace mRemoteNG.UI.Forms
             // tsContainer.TopToolStripPanel
             // 
             this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
-            this.tsContainer.TopToolStripPanel.Controls.Add(this.tsQuickConnect);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsExternalTools);
             // 
             // tsExternalTools
@@ -148,58 +120,6 @@ namespace mRemoteNG.UI.Forms
             //this.cMenToolbarShowText});
             this.cMenExtAppsToolbar.Name = "cMenToolbar";
             this.cMenExtAppsToolbar.Size = new System.Drawing.Size(129, 26);
-            // 
-            // tsQuickConnect
-            // 
-            this.tsQuickConnect.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsQuickConnect.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblQuickConnect,
-            this.cmbQuickConnect,
-            this.btnQuickConnect,
-            this.btnConnections});
-            this.tsQuickConnect.Location = new System.Drawing.Point(3, 24);
-            this.tsQuickConnect.MaximumSize = new System.Drawing.Size(0, 25);
-            this.tsQuickConnect.Name = "tsQuickConnect";
-            this.tsQuickConnect.Size = new System.Drawing.Size(387, 25);
-            this.tsQuickConnect.TabIndex = 18;
-            // 
-            // btnQuickConnect
-            // 
-            this.btnQuickConnect.DropDown = this.mnuQuickConnectProtocol;
-            this.btnQuickConnect.Image = global::mRemoteNG.Resources.Play_Quick;
-            this.btnQuickConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnQuickConnect.Margin = new System.Windows.Forms.Padding(0, 1, 3, 2);
-            this.btnQuickConnect.Name = "btnQuickConnect";
-            this.btnQuickConnect.Size = new System.Drawing.Size(84, 22);
-            this.btnQuickConnect.Text = "Connect";
-            this.btnQuickConnect.ButtonClick += new System.EventHandler(this.btnQuickConnect_ButtonClick);
-            this.btnQuickConnect.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.btnQuickConnect_DropDownItemClicked);
-            // 
-            // mnuQuickConnectProtocol
-            // 
-            this.mnuQuickConnectProtocol.Name = "mnuQuickConnectProtocol";
-            this.mnuQuickConnectProtocol.OwnerItem = this.btnQuickConnect;
-            this.mnuQuickConnectProtocol.ShowCheckMargin = true;
-            this.mnuQuickConnectProtocol.ShowImageMargin = false;
-            this.mnuQuickConnectProtocol.Size = new System.Drawing.Size(61, 4);
-            // 
-            // btnConnections
-            // 
-            this.btnConnections.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnConnections.DropDown = this.mnuConnections;
-            this.btnConnections.Image = global::mRemoteNG.Resources.Root;
-            this.btnConnections.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConnections.Name = "btnConnections";
-            this.btnConnections.Size = new System.Drawing.Size(29, 22);
-            this.btnConnections.Text = "Connections";
-            this.btnConnections.DropDownOpening += new System.EventHandler(this.btnConnections_DropDownOpening);
-            // 
-            // mnuConnections
-            // 
-            this.mnuConnections.Name = "mnuConnections";
-            this.mnuConnections.OwnerItem = this.btnConnections;
-            this.mnuConnections.Size = new System.Drawing.Size(61, 4);
             // 
             // tmrAutoSave
             // 
@@ -231,8 +151,6 @@ namespace mRemoteNG.UI.Forms
             this.tsContainer.ResumeLayout(false);
             this.tsContainer.PerformLayout();
             this.cMenExtAppsToolbar.ResumeLayout(false);
-            this.tsQuickConnect.ResumeLayout(false);
-            this.tsQuickConnect.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -241,20 +159,13 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenFile;
 		internal System.Windows.Forms.ToolStripMenuItem mMenView;
 		internal System.Windows.Forms.ToolStripMenuItem mMenTools;
-		internal System.Windows.Forms.ToolStripLabel lblQuickConnect;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfo;
         internal System.Windows.Forms.ToolStripMenuItem cMenToolbarShowText;
-        internal QuickConnectComboBox cmbQuickConnect;
 		internal System.Windows.Forms.ToolStripContainer tsContainer;
 		internal System.Windows.Forms.Timer tmrAutoSave;
 		internal System.Windows.Forms.ToolStrip tsExternalTools;
 		internal System.Windows.Forms.ContextMenuStrip cMenExtAppsToolbar;
-		internal System.Windows.Forms.ToolStrip tsQuickConnect;
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
-        internal ToolStripSplitButton btnQuickConnect;
-		internal System.Windows.Forms.ContextMenuStrip mnuQuickConnectProtocol;
-		internal System.Windows.Forms.ToolStripDropDownButton btnConnections;
-		internal System.Windows.Forms.ContextMenuStrip mnuConnections;
         private System.ComponentModel.IContainer components;
     }
 }

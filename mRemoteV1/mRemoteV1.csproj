@@ -316,6 +316,9 @@
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\QuickConnectToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\SecureTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -506,7 +509,9 @@
     <Compile Include="UI\Forms\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Menu\HelpMenu.cs" />
+    <Compile Include="UI\Menu\HelpMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Menu\MainFileMenu.cs">
       <SubType>Component</SubType>
     </Compile>
