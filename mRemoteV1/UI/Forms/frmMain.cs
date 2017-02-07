@@ -24,8 +24,10 @@ using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
+using Microsoft.Win32;
 using WeifenLuo.WinFormsUI.Docking;
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -39,12 +41,11 @@ namespace mRemoteNG.UI.Forms
         private bool _inSizeMove;
         private bool _inMouseActivate;
         private IntPtr _fpChainedWindowHandle;
-        private readonly int[] _sysMenSubItems = new int[51];
         private bool _usingSqlServer;
         private string _connectionsFileName;
         private bool _showFullPathInTitle;
+        private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
-        private SystemMenu _systemMenu;
         internal FullscreenHandler _fullscreen { get; set; }
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
@@ -59,7 +60,8 @@ namespace mRemoteNG.UI.Forms
 			InitializeComponent();
             _fullscreen = new FullscreenHandler(this);
             pnlDock.Theme = new VS2012LightTheme();
-		}
+            _screenSystemMenu = new ScreenSelectionSystemMenu(this);
+        }
 
         static FrmMain()
         {
@@ -160,8 +162,9 @@ namespace mRemoteNG.UI.Forms
                 Windows.Show(WindowType.ComponentsCheck);
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
-			AddSysMenuItems();
-			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
+
+            _screenSystemMenu.BuildScreenList();
+			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
             Opacity = 1;
 
             ConnectionTreeWindow = Windows.TreeForm;
@@ -1063,12 +1066,9 @@ namespace mRemoteNG.UI.Forms
 				        }
 				        break;
 				    case NativeMethods.WM_SYSCOMMAND:
-				        for (var i = 0; i <= _sysMenSubItems.Length - 1; i++)
-				        {
-				            if (_sysMenSubItems[i] != m.WParam.ToInt32()) continue;
-				            Screens.SendFormToScreen(Screen.AllScreens[i]);
-				            break;
-				        }
+				        var screen = _screenSystemMenu.GetScreenById(m.WParam.ToInt32());
+                        if (screen != null)
+                            Screens.SendFormToScreen(screen);
 				        break;
 				    case NativeMethods.WM_DRAWCLIPBOARD:
 				        NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
@@ -1206,32 +1206,6 @@ namespace mRemoteNG.UI.Forms
         #endregion
 		
         #region Screen Stuff
-		private void DisplayChanged(object sender, EventArgs e)
-		{
-			ResetSysMenuItems();
-			AddSysMenuItems();
-		}
-		
-		private void ResetSysMenuItems()
-		{
-			_systemMenu.Reset();
-		}
-								
-		private void AddSysMenuItems()
-		{
-            _systemMenu = new SystemMenu(Handle);
-            var popMen = _systemMenu.CreatePopupMenuItem();
-									
-			for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
-			{
-				_sysMenSubItems[i] = 200 + i;
-                _systemMenu.AppendMenuItem(popMen, SystemMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]), Language.strScreen + " " + Convert.ToString(i + 1));
-			}
-
-            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0, SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
-            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1, SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
-		}
-
         public void SetDefaultLayout()
         {
             Default.pnlDock.Visible = false;
