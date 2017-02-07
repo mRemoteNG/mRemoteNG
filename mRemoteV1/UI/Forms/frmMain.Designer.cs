@@ -32,45 +32,7 @@ namespace mRemoteNG.UI.Forms
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.mMenFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileNewConnection = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileNewFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenFileNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileLoad = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileSep2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenFileDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileRename = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileDuplicate = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileSep4 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenReconnectAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileSep3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenFileImport = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileImportFromFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileImportFromActiveDirectory = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileImportFromPortScan = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenFileSep5 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewAddConnectionPanel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewConnectionPanels = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenViewConnections = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewErrorsAndInfos = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewScreenshotManager = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenViewJumpTo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewJumpToConnectionsConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewJumpToErrorsInfos = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewResetLayout = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewSep2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenViewQuickConnectToolbar = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewExtAppsToolbar = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenViewSep3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenViewFullscreen = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenTools = new System.Windows.Forms.ToolStripMenuItem();
             this.credentialManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenToolsSSHTransfer = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,8 +92,6 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenFile,
-            this.mMenView,
             this.mMenTools,
             this.mMenInfo});
             this.msMain.Location = new System.Drawing.Point(3, 0);
@@ -141,350 +101,7 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 16;
             this.msMain.Text = "Main Toolbar";
-            // 
-            // mMenFile
-            // 
-            this.mMenFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenFileNewConnection,
-            this.mMenFileNewFolder,
-            this.mMenFileSep1,
-            this.mMenFileNew,
-            this.mMenFileLoad,
-            this.mMenFileSave,
-            this.mMenFileSaveAs,
-            this.mMenFileSep2,
-            this.mMenFileDelete,
-            this.mMenFileRename,
-            this.mMenFileDuplicate,
-            this.mMenFileSep4,
-            this.mMenReconnectAll,
-            this.mMenFileSep3,
-            this.mMenFileImport,
-            this.mMenFileExport,
-            this.mMenFileSep5,
-            this.mMenFileExit});
-            this.mMenFile.Name = "mMenFile";
-            this.mMenFile.Size = new System.Drawing.Size(37, 20);
-            this.mMenFile.Text = "&File";
-            this.mMenFile.DropDownOpening += new System.EventHandler(this.mMenFile_DropDownOpening);
-            // 
-            // mMenFileNewConnection
-            // 
-            this.mMenFileNewConnection.Image = global::mRemoteNG.Resources.Connection_Add;
-            this.mMenFileNewConnection.Name = "mMenFileNewConnection";
-            this.mMenFileNewConnection.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.mMenFileNewConnection.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileNewConnection.Text = "New Connection";
-            this.mMenFileNewConnection.Click += new System.EventHandler(this.mMenFileNewConnection_Click);
-            // 
-            // mMenFileNewFolder
-            // 
-            this.mMenFileNewFolder.Image = global::mRemoteNG.Resources.Folder_Add;
-            this.mMenFileNewFolder.Name = "mMenFileNewFolder";
-            this.mMenFileNewFolder.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.N)));
-            this.mMenFileNewFolder.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileNewFolder.Text = "New Folder";
-            this.mMenFileNewFolder.Click += new System.EventHandler(this.mMenFileNewFolder_Click);
-            // 
-            // mMenFileSep1
-            // 
-            this.mMenFileSep1.Name = "mMenFileSep1";
-            this.mMenFileSep1.Size = new System.Drawing.Size(278, 6);
-            // 
-            // mMenFileNew
-            // 
-            this.mMenFileNew.Image = global::mRemoteNG.Resources.Connections_New;
-            this.mMenFileNew.Name = "mMenFileNew";
-            this.mMenFileNew.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileNew.Text = "New Connection File";
-            this.mMenFileNew.Click += new System.EventHandler(this.mMenFileNew_Click);
-            // 
-            // mMenFileLoad
-            // 
-            this.mMenFileLoad.Image = global::mRemoteNG.Resources.Connections_Load;
-            this.mMenFileLoad.Name = "mMenFileLoad";
-            this.mMenFileLoad.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mMenFileLoad.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileLoad.Text = "Open Connection File...";
-            this.mMenFileLoad.Click += new System.EventHandler(this.mMenFileLoad_Click);
-            // 
-            // mMenFileSave
-            // 
-            this.mMenFileSave.Image = global::mRemoteNG.Resources.Connections_Save;
-            this.mMenFileSave.Name = "mMenFileSave";
-            this.mMenFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mMenFileSave.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileSave.Text = "Save Connection File";
-            this.mMenFileSave.Click += new System.EventHandler(this.mMenFileSave_Click);
-            // 
-            // mMenFileSaveAs
-            // 
-            this.mMenFileSaveAs.Image = global::mRemoteNG.Resources.Connections_SaveAs;
-            this.mMenFileSaveAs.Name = "mMenFileSaveAs";
-            this.mMenFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.mMenFileSaveAs.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileSaveAs.Text = "Save Connection File As...";
-            this.mMenFileSaveAs.Click += new System.EventHandler(this.mMenFileSaveAs_Click);
-            // 
-            // mMenFileSep2
-            // 
-            this.mMenFileSep2.Name = "mMenFileSep2";
-            this.mMenFileSep2.Size = new System.Drawing.Size(278, 6);
-            // 
-            // mMenFileDelete
-            // 
-            this.mMenFileDelete.Image = global::mRemoteNG.Resources.Delete;
-            this.mMenFileDelete.Name = "mMenFileDelete";
-            this.mMenFileDelete.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileDelete.Text = "Delete...";
-            this.mMenFileDelete.Click += new System.EventHandler(this.mMenFileDelete_Click);
-            // 
-            // mMenFileRename
-            // 
-            this.mMenFileRename.Image = global::mRemoteNG.Resources.Rename;
-            this.mMenFileRename.Name = "mMenFileRename";
-            this.mMenFileRename.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileRename.Text = "Rename";
-            this.mMenFileRename.Click += new System.EventHandler(this.mMenFileRename_Click);
-            // 
-            // mMenFileDuplicate
-            // 
-            this.mMenFileDuplicate.Image = global::mRemoteNG.Resources.page_copy;
-            this.mMenFileDuplicate.Name = "mMenFileDuplicate";
-            this.mMenFileDuplicate.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileDuplicate.Text = "Duplicate";
-            this.mMenFileDuplicate.Click += new System.EventHandler(this.mMenFileDuplicate_Click);
-            // 
-            // mMenFileSep4
-            // 
-            this.mMenFileSep4.Name = "mMenFileSep4";
-            this.mMenFileSep4.Size = new System.Drawing.Size(278, 6);
-            // 
-            // mMenReconnectAll
-            // 
-            this.mMenReconnectAll.Image = global::mRemoteNG.Resources.Refresh;
-            this.mMenReconnectAll.Name = "mMenReconnectAll";
-            this.mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
-            this.mMenReconnectAll.Text = "Reconnect All Connections";
-            this.mMenReconnectAll.Click += new System.EventHandler(this.mMenReconnectAll_Click);
-            // 
-            // mMenFileSep3
-            // 
-            this.mMenFileSep3.Name = "mMenFileSep3";
-            this.mMenFileSep3.Size = new System.Drawing.Size(278, 6);
-            // 
-            // mMenFileImport
-            // 
-            this.mMenFileImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenFileImportFromFile,
-            this.mMenFileImportFromActiveDirectory,
-            this.mMenFileImportFromPortScan});
-            this.mMenFileImport.Name = "mMenFileImport";
-            this.mMenFileImport.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileImport.Text = "&Import";
-            // 
-            // mMenFileImportFromFile
-            // 
-            this.mMenFileImportFromFile.Name = "mMenFileImportFromFile";
-            this.mMenFileImportFromFile.Size = new System.Drawing.Size(235, 22);
-            this.mMenFileImportFromFile.Text = "Import from &File...";
-            this.mMenFileImportFromFile.Click += new System.EventHandler(this.mMenFileImportFromFile_Click);
-            // 
-            // mMenFileImportFromActiveDirectory
-            // 
-            this.mMenFileImportFromActiveDirectory.Name = "mMenFileImportFromActiveDirectory";
-            this.mMenFileImportFromActiveDirectory.Size = new System.Drawing.Size(235, 22);
-            this.mMenFileImportFromActiveDirectory.Text = "Import from &Active Directory...";
-            this.mMenFileImportFromActiveDirectory.Click += new System.EventHandler(this.mMenFileImportFromActiveDirectory_Click);
-            // 
-            // mMenFileImportFromPortScan
-            // 
-            this.mMenFileImportFromPortScan.Name = "mMenFileImportFromPortScan";
-            this.mMenFileImportFromPortScan.Size = new System.Drawing.Size(235, 22);
-            this.mMenFileImportFromPortScan.Text = "Import from &Port Scan...";
-            this.mMenFileImportFromPortScan.Click += new System.EventHandler(this.mMenFileImportFromPortScan_Click);
-            // 
-            // mMenFileExport
-            // 
-            this.mMenFileExport.Name = "mMenFileExport";
-            this.mMenFileExport.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileExport.Text = "&Export to File...";
-            this.mMenFileExport.Click += new System.EventHandler(this.mMenFileExport_Click);
-            // 
-            // mMenFileSep5
-            // 
-            this.mMenFileSep5.Name = "mMenFileSep5";
-            this.mMenFileSep5.Size = new System.Drawing.Size(278, 6);
-            // 
-            // mMenFileExit
-            // 
-            this.mMenFileExit.Image = global::mRemoteNG.Resources.Quit;
-            this.mMenFileExit.Name = "mMenFileExit";
-            this.mMenFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.mMenFileExit.Size = new System.Drawing.Size(281, 22);
-            this.mMenFileExit.Text = "Exit";
-            this.mMenFileExit.Click += new System.EventHandler(this.mMenFileExit_Click);
-            // 
-            // mMenView
-            // 
-            this.mMenView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenViewAddConnectionPanel,
-            this.mMenViewConnectionPanels,
-            this.mMenViewSep1,
-            this.mMenViewConnections,
-            this.mMenViewConfig,
-            this.mMenViewErrorsAndInfos,
-            this.mMenViewScreenshotManager,
-            this.ToolStripSeparator1,
-            this.mMenViewJumpTo,
-            this.mMenViewResetLayout,
-            this.mMenViewSep2,
-            this.mMenViewQuickConnectToolbar,
-            this.mMenViewExtAppsToolbar,
-            this.mMenViewSep3,
-            this.mMenViewFullscreen});
-            this.mMenView.Name = "mMenView";
-            this.mMenView.Size = new System.Drawing.Size(44, 20);
-            this.mMenView.Text = "&View";
-            this.mMenView.DropDownOpening += new System.EventHandler(this.mMenView_DropDownOpening);
-            // 
-            // mMenViewAddConnectionPanel
-            // 
-            this.mMenViewAddConnectionPanel.Image = global::mRemoteNG.Resources.Panel_Add;
-            this.mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel";
-            this.mMenViewAddConnectionPanel.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewAddConnectionPanel.Text = "Add Connection Panel";
-            this.mMenViewAddConnectionPanel.Click += new System.EventHandler(this.mMenViewAddConnectionPanel_Click);
-            // 
-            // mMenViewConnectionPanels
-            // 
-            this.mMenViewConnectionPanels.Image = global::mRemoteNG.Resources.Panels;
-            this.mMenViewConnectionPanels.Name = "mMenViewConnectionPanels";
-            this.mMenViewConnectionPanels.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewConnectionPanels.Text = "Connection Panels";
-            // 
-            // mMenViewSep1
-            // 
-            this.mMenViewSep1.Name = "mMenViewSep1";
-            this.mMenViewSep1.Size = new System.Drawing.Size(225, 6);
-            // 
-            // mMenViewConnections
-            // 
-            this.mMenViewConnections.Checked = true;
-            this.mMenViewConnections.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mMenViewConnections.Image = global::mRemoteNG.Resources.Root;
-            this.mMenViewConnections.Name = "mMenViewConnections";
-            this.mMenViewConnections.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewConnections.Text = "Connections";
-            this.mMenViewConnections.Click += new System.EventHandler(this.mMenViewConnections_Click);
-            // 
-            // mMenViewConfig
-            // 
-            this.mMenViewConfig.Checked = true;
-            this.mMenViewConfig.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mMenViewConfig.Image = global::mRemoteNG.Resources.cog;
-            this.mMenViewConfig.Name = "mMenViewConfig";
-            this.mMenViewConfig.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewConfig.Text = "Config";
-            this.mMenViewConfig.Click += new System.EventHandler(this.mMenViewConfig_Click);
-            // 
-            // mMenViewErrorsAndInfos
-            // 
-            this.mMenViewErrorsAndInfos.Checked = true;
-            this.mMenViewErrorsAndInfos.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mMenViewErrorsAndInfos.Image = global::mRemoteNG.Resources.ErrorsAndInfos;
-            this.mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos";
-            this.mMenViewErrorsAndInfos.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewErrorsAndInfos.Text = "Errors and Infos";
-            this.mMenViewErrorsAndInfos.Click += new System.EventHandler(this.mMenViewErrorsAndInfos_Click);
-            // 
-            // mMenViewScreenshotManager
-            // 
-            this.mMenViewScreenshotManager.Image = global::mRemoteNG.Resources.Screenshot;
-            this.mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
-            this.mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewScreenshotManager.Text = "Screenshot Manager";
-            this.mMenViewScreenshotManager.Click += new System.EventHandler(this.mMenViewScreenshotManager_Click);
-            // 
-            // ToolStripSeparator1
-            // 
-            this.ToolStripSeparator1.Name = "ToolStripSeparator1";
-            this.ToolStripSeparator1.Size = new System.Drawing.Size(225, 6);
-            // 
-            // mMenViewJumpTo
-            // 
-            this.mMenViewJumpTo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenViewJumpToConnectionsConfig,
-            this.mMenViewJumpToErrorsInfos});
-            this.mMenViewJumpTo.Image = global::mRemoteNG.Resources.JumpTo;
-            this.mMenViewJumpTo.Name = "mMenViewJumpTo";
-            this.mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewJumpTo.Text = "Jump To";
-            // 
-            // mMenViewJumpToConnectionsConfig
-            // 
-            this.mMenViewJumpToConnectionsConfig.Image = global::mRemoteNG.Resources.Root;
-            this.mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
-            this.mMenViewJumpToConnectionsConfig.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.C)));
-            this.mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(258, 22);
-            this.mMenViewJumpToConnectionsConfig.Text = "Connections && Config";
-            this.mMenViewJumpToConnectionsConfig.Click += new System.EventHandler(this.mMenViewJumpToConnectionsConfig_Click);
-            // 
-            // mMenViewJumpToErrorsInfos
-            // 
-            this.mMenViewJumpToErrorsInfos.Image = global::mRemoteNG.Resources.InformationSmall;
-            this.mMenViewJumpToErrorsInfos.Name = "mMenViewJumpToErrorsInfos";
-            this.mMenViewJumpToErrorsInfos.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.E)));
-            this.mMenViewJumpToErrorsInfos.Size = new System.Drawing.Size(258, 22);
-            this.mMenViewJumpToErrorsInfos.Text = "Errors && Infos";
-            this.mMenViewJumpToErrorsInfos.Click += new System.EventHandler(this.mMenViewJumpToErrorsInfos_Click);
-            // 
-            // mMenViewResetLayout
-            // 
-            this.mMenViewResetLayout.Image = global::mRemoteNG.Resources.application_side_tree;
-            this.mMenViewResetLayout.Name = "mMenViewResetLayout";
-            this.mMenViewResetLayout.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewResetLayout.Text = "Reset Layout";
-            this.mMenViewResetLayout.Click += new System.EventHandler(this.mMenViewResetLayout_Click);
-            // 
-            // mMenViewSep2
-            // 
-            this.mMenViewSep2.Name = "mMenViewSep2";
-            this.mMenViewSep2.Size = new System.Drawing.Size(225, 6);
-            // 
-            // mMenViewQuickConnectToolbar
-            // 
-            this.mMenViewQuickConnectToolbar.Image = global::mRemoteNG.Resources.Play_Quick;
-            this.mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar";
-            this.mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewQuickConnectToolbar.Text = "Quick Connect Toolbar";
-            this.mMenViewQuickConnectToolbar.Click += new System.EventHandler(this.mMenViewQuickConnectToolbar_Click);
-            // 
-            // mMenViewExtAppsToolbar
-            // 
-            this.mMenViewExtAppsToolbar.Image = global::mRemoteNG.Resources.ExtApp;
-            this.mMenViewExtAppsToolbar.Name = "mMenViewExtAppsToolbar";
-            this.mMenViewExtAppsToolbar.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewExtAppsToolbar.Text = "External Applications Toolbar";
-            this.mMenViewExtAppsToolbar.Click += new System.EventHandler(this.mMenViewExtAppsToolbar_Click);
-            // 
-            // mMenViewSep3
-            // 
-            this.mMenViewSep3.Name = "mMenViewSep3";
-            this.mMenViewSep3.Size = new System.Drawing.Size(225, 6);
-            // 
-            // mMenViewFullscreen
-            // 
-            this.mMenViewFullscreen.Image = global::mRemoteNG.Resources.arrow_out;
-            this.mMenViewFullscreen.Name = "mMenViewFullscreen";
-            this.mMenViewFullscreen.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);
-            this.mMenViewFullscreen.Text = "Full Screen";
-            this.mMenViewFullscreen.Click += new System.EventHandler(this.mMenViewFullscreen_Click);
+            
             // 
             // mMenTools
             // 
@@ -815,47 +432,25 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenTools;
 		internal System.Windows.Forms.ToolStripLabel lblQuickConnect;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfo;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileNew;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileLoad;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileSave;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileSaveAs;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileExit;
 		internal System.Windows.Forms.ToolStripSeparator mMenToolsSep1;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsOptions;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoHelp;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoWebsite;
 		internal System.Windows.Forms.ToolStripSeparator mMenInfoSep1;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoAbout;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewConnectionPanels;
-		internal System.Windows.Forms.ToolStripSeparator mMenViewSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewConnections;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewConfig;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewErrorsAndInfos;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewScreenshotManager;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewAddConnectionPanel;
-		internal QuickConnectComboBox cmbQuickConnect;
-		internal System.Windows.Forms.ToolStripSeparator mMenViewSep2;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewFullscreen;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsSSHTransfer;
+        internal QuickConnectComboBox cmbQuickConnect;
+        internal System.Windows.Forms.ToolStripMenuItem mMenToolsSSHTransfer;
 		internal System.Windows.Forms.ToolStripContainer tsContainer;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsExternalApps;
 		internal System.Windows.Forms.Timer tmrAutoSave;
 		internal System.Windows.Forms.ToolStrip tsExternalTools;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewExtAppsToolbar;
 		internal System.Windows.Forms.ContextMenuStrip cMenExtAppsToolbar;
 		internal System.Windows.Forms.ToolStripMenuItem cMenToolbarShowText;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsPortScan;
 		internal System.Windows.Forms.ToolStrip tsQuickConnect;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewQuickConnectToolbar;
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoDonate;
-		internal System.Windows.Forms.ToolStripSeparator mMenViewSep3;
 		internal ToolStripSplitButton btnQuickConnect;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpTo;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToConnectionsConfig;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToErrorsInfos;
-		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsUVNCSC;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsComponentsCheck;
 		internal System.Windows.Forms.ToolStripSeparator mMenInfoSep2;
@@ -863,25 +458,9 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoForum;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsUpdate;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewResetLayout;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileDuplicate;
-        internal System.Windows.Forms.ToolStripMenuItem mMenReconnectAll;
-        internal System.Windows.Forms.ToolStripSeparator mMenFileSep2;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileNewConnection;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileNewFolder;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep3;
-        internal System.Windows.Forms.ToolStripSeparator mMenFileSep4;
-        internal System.Windows.Forms.ToolStripMenuItem mMenFileDelete;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileRename;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep5;
 		internal System.Windows.Forms.ContextMenuStrip mnuQuickConnectProtocol;
 		internal System.Windows.Forms.ToolStripDropDownButton btnConnections;
 		internal System.Windows.Forms.ContextMenuStrip mnuConnections;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileExport;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileImportFromFile;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileImportFromActiveDirectory;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileImportFromPortScan;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileImport;
         private System.ComponentModel.IContainer components;
         private System.Windows.Forms.ToolStripMenuItem credentialManagerToolStripMenuItem;
     }

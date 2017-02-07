@@ -136,7 +136,6 @@ namespace mRemoteNG.Config.Settings
         {
             if (!mRemoteNG.Settings.Default.MainFormKiosk) return;
             MainForm._fullscreen.Value = true;
-            MainForm.mMenViewFullscreen.Checked = true;
         }
 
         private static void SetShowSystemTrayIcon()
