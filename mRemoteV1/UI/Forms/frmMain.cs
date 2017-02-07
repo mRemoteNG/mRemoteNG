@@ -168,26 +168,20 @@ namespace mRemoteNG.UI.Forms
 
             ConnectionTreeWindow = Windows.TreeForm;
 
-            msMain.Items.Add(new MainFileMenu(ConnectionTreeWindow, _connectionInitiator));
-            msMain.Items.Add(new ViewMenu(tsExternalTools, tsQuickConnect, _fullscreen, this));
-            msMain.Items.Add(new ToolsMenu(this, _credentialManager));
+            msMain.Items.AddRange(new ToolStripItem[]
+            {
+                new MainFileMenu(ConnectionTreeWindow, _connectionInitiator),
+                new ViewMenu(tsExternalTools, tsQuickConnect, _fullscreen, this),
+                new ToolsMenu(this, _credentialManager),
+                new HelpMenu()
+            });
         }
 
         private void ApplyLanguage()
 		{
-			mMenToolsUpdate.Text = Language.strMenuCheckForUpdates;
-			mMenInfo.Text = Language.strMenuHelp;
-			mMenInfoHelp.Text = Language.strMenuHelpContents;
-			mMenInfoForum.Text = Language.strMenuSupportForum;
-			mMenInfoBugReport.Text = Language.strMenuReportBug;
-			mMenInfoDonate.Text = Language.strMenuDonate;
-			mMenInfoWebsite.Text = Language.strMenuWebsite;
-			mMenInfoAbout.Text = Language.strMenuAbout;
-			
 			lblQuickConnect.Text = Language.strLabelConnect;
 			btnQuickConnect.Text = Language.strMenuConnect;
 			btnConnections.Text = Language.strMenuConnections;
-			
 			cMenToolbarShowText.Text = Language.strMenuShowText;
 		}
 
@@ -469,41 +463,6 @@ namespace mRemoteNG.UI.Forms
 		}
         #endregion
 
-        #region Info
-        private void mMenToolsUpdate_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.Update);
-        }
-        private void mMenInfoHelp_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.Help);
-		}
-
-        private void mMenInfoForum_Click(object sender, EventArgs e)
-		{
-			Runtime.GoToForum();
-		}
-
-        private void mMenInfoBugReport_Click(object sender, EventArgs e)
-		{
-			Runtime.GoToBugs();
-		}
-
-        private void mMenInfoWebsite_Click(object sender, EventArgs e)
-		{
-			Runtime.GoToWebsite();
-		}
-
-        private void mMenInfoDonate_Click(object sender, EventArgs e)
-		{
-			Runtime.GoToDonate();
-		}
-
-        private void mMenInfoAbout_Click(object sender, EventArgs e)
-		{
-			Windows.Show(WindowType.About);
-		}
-        #endregion
         #endregion
 
         #region Connections DropDown

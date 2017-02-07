@@ -35,16 +35,6 @@ namespace mRemoteNG.UI.Forms
             this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenTools = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenInfoHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenInfoSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenInfoWebsite = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenInfoDonate = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenInfoForum = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenInfoBugReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenInfoSep2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mMenToolsUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenInfoAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.lblQuickConnect = new System.Windows.Forms.ToolStripLabel();
             this.cmbQuickConnect = new mRemoteNG.UI.Controls.QuickConnectComboBox();
@@ -83,8 +73,6 @@ namespace mRemoteNG.UI.Forms
             // 
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
-            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenInfo});
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
@@ -101,96 +89,6 @@ namespace mRemoteNG.UI.Forms
             this.cMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
             this.cMenToolbarShowText.Text = "Show Text";
             this.cMenToolbarShowText.Click += new System.EventHandler(this.cMenToolbarShowText_Click);
-            // 
-            // mMenInfo
-            // 
-            this.mMenInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenInfoHelp,
-            this.mMenInfoSep1,
-            this.mMenInfoWebsite,
-            this.mMenInfoDonate,
-            this.mMenInfoForum,
-            this.mMenInfoBugReport,
-            this.ToolStripSeparator2,
-            this.mMenToolsUpdate,
-            this.mMenInfoSep2,
-            this.mMenInfoAbout});
-            this.mMenInfo.Name = "mMenInfo";
-            this.mMenInfo.Size = new System.Drawing.Size(44, 20);
-            this.mMenInfo.Text = "&Help";
-            this.mMenInfo.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            // 
-            // mMenInfoHelp
-            // 
-            this.mMenInfoHelp.Image = global::mRemoteNG.Resources.Help;
-            this.mMenInfoHelp.Name = "mMenInfoHelp";
-            this.mMenInfoHelp.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.mMenInfoHelp.Size = new System.Drawing.Size(190, 22);
-            this.mMenInfoHelp.Text = "mRemoteNG Help";
-            this.mMenInfoHelp.Click += new System.EventHandler(this.mMenInfoHelp_Click);
-            // 
-            // mMenInfoSep1
-            // 
-            this.mMenInfoSep1.Name = "mMenInfoSep1";
-            this.mMenInfoSep1.Size = new System.Drawing.Size(187, 6);
-            // 
-            // mMenInfoWebsite
-            // 
-            this.mMenInfoWebsite.Image = global::mRemoteNG.Resources.Website;
-            this.mMenInfoWebsite.Name = "mMenInfoWebsite";
-            this.mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
-            this.mMenInfoWebsite.Text = "Website";
-            this.mMenInfoWebsite.Click += new System.EventHandler(this.mMenInfoWebsite_Click);
-            // 
-            // mMenInfoDonate
-            // 
-            this.mMenInfoDonate.Image = global::mRemoteNG.Resources.Donate;
-            this.mMenInfoDonate.Name = "mMenInfoDonate";
-            this.mMenInfoDonate.Size = new System.Drawing.Size(190, 22);
-            this.mMenInfoDonate.Text = "Donate";
-            this.mMenInfoDonate.Click += new System.EventHandler(this.mMenInfoDonate_Click);
-            // 
-            // mMenInfoForum
-            // 
-            this.mMenInfoForum.Image = global::mRemoteNG.Resources.user_comment;
-            this.mMenInfoForum.Name = "mMenInfoForum";
-            this.mMenInfoForum.Size = new System.Drawing.Size(190, 22);
-            this.mMenInfoForum.Text = "Support Forum";
-            this.mMenInfoForum.Click += new System.EventHandler(this.mMenInfoForum_Click);
-            // 
-            // mMenInfoBugReport
-            // 
-            this.mMenInfoBugReport.Image = global::mRemoteNG.Resources.Bug;
-            this.mMenInfoBugReport.Name = "mMenInfoBugReport";
-            this.mMenInfoBugReport.Size = new System.Drawing.Size(190, 22);
-            this.mMenInfoBugReport.Text = "Report a Bug";
-            this.mMenInfoBugReport.Click += new System.EventHandler(this.mMenInfoBugReport_Click);
-            // 
-            // ToolStripSeparator2
-            // 
-            this.ToolStripSeparator2.Name = "ToolStripSeparator2";
-            this.ToolStripSeparator2.Size = new System.Drawing.Size(187, 6);
-            // 
-            // mMenToolsUpdate
-            // 
-            this.mMenToolsUpdate.Image = global::mRemoteNG.Resources.Update;
-            this.mMenToolsUpdate.Name = "mMenToolsUpdate";
-            this.mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
-            this.mMenToolsUpdate.Text = "Check for Updates";
-            this.mMenToolsUpdate.Click += new System.EventHandler(this.mMenToolsUpdate_Click);
-            // 
-            // mMenInfoSep2
-            // 
-            this.mMenInfoSep2.Name = "mMenInfoSep2";
-            this.mMenInfoSep2.Size = new System.Drawing.Size(187, 6);
-            // 
-            // mMenInfoAbout
-            // 
-            this.mMenInfoAbout.Image = global::mRemoteNG.Resources.mRemote;
-            this.mMenInfoAbout.Name = "mMenInfoAbout";
-            this.mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
-            this.mMenInfoAbout.Text = "About mRemoteNG";
-            this.mMenInfoAbout.Click += new System.EventHandler(this.mMenInfoAbout_Click);
             // 
             // mMenSep3
             // 
@@ -345,11 +243,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenTools;
 		internal System.Windows.Forms.ToolStripLabel lblQuickConnect;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfo;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoHelp;
         internal System.Windows.Forms.ToolStripMenuItem cMenToolbarShowText;
-        internal System.Windows.Forms.ToolStripMenuItem mMenInfoWebsite;
-		internal System.Windows.Forms.ToolStripSeparator mMenInfoSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoAbout;
         internal QuickConnectComboBox cmbQuickConnect;
 		internal System.Windows.Forms.ToolStripContainer tsContainer;
 		internal System.Windows.Forms.Timer tmrAutoSave;
@@ -357,13 +251,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ContextMenuStrip cMenExtAppsToolbar;
 		internal System.Windows.Forms.ToolStrip tsQuickConnect;
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoDonate;
-        internal System.Windows.Forms.ToolStripMenuItem mMenToolsUpdate;
         internal ToolStripSplitButton btnQuickConnect;
-		internal System.Windows.Forms.ToolStripSeparator mMenInfoSep2;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoBugReport;
-		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoForum;
 		internal System.Windows.Forms.ContextMenuStrip mnuQuickConnectProtocol;
 		internal System.Windows.Forms.ToolStripDropDownButton btnConnections;
 		internal System.Windows.Forms.ContextMenuStrip mnuConnections;
