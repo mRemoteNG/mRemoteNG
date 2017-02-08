@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
@@ -15,17 +14,20 @@ using mRemoteNG.Tools.Cmdline;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 
+
 namespace mRemoteNG.App
 {
     public class Startup
     {
         private AppUpdater _appUpdate;
+        private readonly ConnectionIconLoader _connectionIconLoader;
 
         public static Startup Instance { get; } = new Startup();
 
         private Startup()
         {
             _appUpdate = new AppUpdater();
+            _connectionIconLoader = new ConnectionIconLoader(GeneralAppInfo.HomePath + "\\Icons\\");
         }
 
         static Startup()
@@ -40,7 +42,7 @@ namespace mRemoteNG.App
             CompatibilityChecker.CheckCompatibility(messageCollector);
             ParseCommandLineArgs(messageCollector);
             IeBrowserEmulation.Register();
-            GetConnectionIcons();
+            _connectionIconLoader.GetConnectionIcons();
             DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a=>"ConDefault"+a);
             DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a=>"InhDefault"+a);
         }
@@ -51,26 +53,10 @@ namespace mRemoteNG.App
             interpreter.ParseArguments(Environment.GetCommandLineArgs());
         }
 
-        private static void GetConnectionIcons()
-        {
-            var iPath = GeneralAppInfo.HomePath + "\\Icons\\";
-            if (Directory.Exists(iPath) == false)
-            {
-                return;
-            }
-
-            foreach (var f in Directory.GetFiles(iPath, "*.ico", SearchOption.AllDirectories))
-            {
-                var fInfo = new FileInfo(f);
-                Array.Resize(ref ConnectionIcon.Icons, ConnectionIcon.Icons.Length + 1);
-                ConnectionIcon.Icons.SetValue(fInfo.Name.Replace(".ico", ""), ConnectionIcon.Icons.Length - 1);
-            }
-        }
-
         public void CreateConnectionsProvider(MessageCollector messageCollector)
         {
             messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
-            frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
+            FrmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
 
             if (!Settings.Default.UseSQLServer) return;
             messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
@@ -101,9 +87,9 @@ namespace mRemoteNG.App
 
         private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            if (frmMain.Default.InvokeRequired)
+            if (FrmMain.Default.InvokeRequired)
             {
-                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), sender, e);
+                FrmMain.Default.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), sender, e);
                 return;
             }
 

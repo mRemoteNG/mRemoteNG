@@ -195,7 +195,7 @@ namespace mRemoteNG.UI.Window
 				nBtn.Location = new Point(nPB.Width - nBtn.Width, -1);
 				nBtn.Show();
 						
-				Show(frmMain.Default.pnlDock);
+				Show(FrmMain.Default.pnlDock);
 			}
 			catch (Exception ex)
 			{

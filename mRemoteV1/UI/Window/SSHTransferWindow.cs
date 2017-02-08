@@ -471,7 +471,7 @@ namespace mRemoteNG.UI.Window
             {
                 if (txtPassword.Text == "")
                 {
-                    if (MessageBox.Show(frmMain.Default, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    if (MessageBox.Show(FrmMain.Default, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     {
                         return false;
                     }

@@ -4,7 +4,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Messages.WriterDecorators;
 
-namespace mRemoteNG.App
+namespace mRemoteNG.App.Initialization
 {
     public class MessageCollectorSetup
     {

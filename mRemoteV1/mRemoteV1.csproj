@@ -112,9 +112,11 @@
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
+    <Compile Include="App\Initialization\ConnectionIconLoader.cs" />
+    <Compile Include="App\Initialization\CredsAndConsSetup.cs" />
     <Compile Include="App\Initialization\StartupDataLogger.cs" />
     <Compile Include="App\Logger.cs" />
-    <Compile Include="App\MessageCollectorSetup.cs" />
+    <Compile Include="App\Initialization\MessageCollectorSetup.cs" />
     <Compile Include="App\NativeMethods.cs" />
     <Compile Include="App\Runtime.cs" />
     <Compile Include="App\Screens.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
@@ -295,6 +298,9 @@
     <Compile Include="UI\Controls\CredentialRecordListBox.Designer.cs">
       <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\ExternalToolsToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -312,6 +318,9 @@
     </Compile>
     <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\QuickConnectToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\SecureTextBox.cs">
@@ -344,6 +353,7 @@
     <Compile Include="UI\Forms\frmOptions.Designer.cs">
       <DependentUpon>frmOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\FullscreenHandler.cs" />
     <Compile Include="UI\Forms\Input\input.cs" />
     <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
       <DependentUpon>AdvancedPage.cs</DependentUpon>
@@ -449,10 +459,10 @@
     <Compile Include="UI\Forms\frmChoosePanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmMain.cs">
+    <Compile Include="UI\Forms\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\PasswordForm.Designer.cs">
@@ -501,6 +511,19 @@
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
     <Compile Include="UI\Forms\TextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\HelpMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\MainFileMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\ScreenSelectionSystemMenu.cs" />
+    <Compile Include="UI\Menu\ToolsMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\ViewMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\TaskDialog\CommandButton.cs">
@@ -609,8 +632,8 @@
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">

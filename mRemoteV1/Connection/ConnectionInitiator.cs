@@ -50,7 +50,7 @@ namespace mRemoteNG.Connection
             var connectionWindow = (ConnectionWindow)interfaceControl.FindForm();
             connectionWindow?.Focus();
             var findForm = (ConnectionWindow)interfaceControl.FindForm();
-            findForm?.Show(frmMain.Default.pnlDock);
+            findForm?.Show(FrmMain.Default.pnlDock);
             var tabPage = (TabPage)interfaceControl.Parent;
             tabPage.Selected = true;
             return true;
@@ -114,7 +114,7 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfo.OpenConnections.Add(newProtocol);
-                frmMain.Default.SelectedConnection = connectionInfo;
+                FrmMain.Default.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
             {
@@ -176,7 +176,7 @@ namespace mRemoteNG.Connection
             if (connectionForm == null)
                 connectionForm = Runtime.AddPanel(connectionPanel);
             else
-                ((ConnectionWindow)connectionForm).Show(frmMain.Default.pnlDock);
+                ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
 
             connectionForm.Focus();
             return connectionForm;

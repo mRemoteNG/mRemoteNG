@@ -11,10 +11,10 @@ namespace mRemoteNG.Config.Settings
 {
     public class LayoutSettingsLoader
     {
-        private readonly frmMain _mainForm;
+        private readonly FrmMain _mainForm;
         private readonly MessageCollector _messageCollector;
 
-        public LayoutSettingsLoader(frmMain mainForm, MessageCollector messageCollector)
+        public LayoutSettingsLoader(FrmMain mainForm, MessageCollector messageCollector)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -51,7 +51,7 @@ namespace mRemoteNG.Config.Settings
                 }
                 else
                 {
-                    frmMain.Default.SetDefaultLayout();
+                    _mainForm.SetDefaultLayout();
                 }
             }
             catch (Exception ex)

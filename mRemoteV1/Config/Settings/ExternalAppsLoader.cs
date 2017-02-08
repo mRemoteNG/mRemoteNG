@@ -6,23 +6,28 @@ using System.IO;
 using System.Xml;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.Config.Settings
 {
     public class ExternalAppsLoader
     {
-        private readonly frmMain _mainForm;
+        private readonly FrmMain _mainForm;
         private readonly MessageCollector _messageCollector;
+        private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 
-        public ExternalAppsLoader(frmMain mainForm, MessageCollector messageCollector)
+        public ExternalAppsLoader(FrmMain mainForm, MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
             if (messageCollector == null)
                 throw new ArgumentNullException(nameof(messageCollector));
+            if (externalToolsToolStrip == null)
+                throw new ArgumentNullException(nameof(externalToolsToolStrip));
 
             _mainForm = mainForm;
             _messageCollector = messageCollector;
+            _externalToolsToolStrip = externalToolsToolStrip;
         }
 
 
@@ -81,9 +86,8 @@ namespace mRemoteNG.Config.Settings
                 Runtime.ExternalTools.Add(extA);
             }
 
-            _mainForm.SwitchToolBarText(mRemoteNG.Settings.Default.ExtAppsTBShowText);
-
-            frmMain.Default.AddExternalToolsToToolBar();
+            _externalToolsToolStrip.SwitchToolBarText(mRemoteNG.Settings.Default.ExtAppsTBShowText);
+            _externalToolsToolStrip.AddExternalToolsToToolBar();
         }
     }
 }

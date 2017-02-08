@@ -486,8 +486,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
 				{
 					_rdpClient.FullScreen = true;
-                    _rdpClient.DesktopWidth = Screen.FromControl(frmMain.Default).Bounds.Width;
-                    _rdpClient.DesktopHeight = Screen.FromControl(frmMain.Default).Bounds.Height;
+                    _rdpClient.DesktopWidth = Screen.FromControl(FrmMain.Default).Bounds.Width;
+                    _rdpClient.DesktopHeight = Screen.FromControl(FrmMain.Default).Bounds.Height;
 							
 					return;
 				}
@@ -507,8 +507,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				else if (InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen)
 				{
 					_rdpClient.FullScreen = true;
-                    _rdpClient.DesktopWidth = Screen.FromControl(frmMain.Default).Bounds.Width;
-                    _rdpClient.DesktopHeight = Screen.FromControl(frmMain.Default).Bounds.Height;
+                    _rdpClient.DesktopWidth = Screen.FromControl(FrmMain.Default).Bounds.Width;
+                    _rdpClient.DesktopHeight = Screen.FromControl(FrmMain.Default).Bounds.Height;
 				}
 				else
 				{

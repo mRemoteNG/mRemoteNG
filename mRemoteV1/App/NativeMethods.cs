@@ -294,7 +294,10 @@ namespace mRemoteNG.App
         public const int WA_ACTIVE = 0x1;
 
         /// <summary>
-        /// 
+        /// Sent to both the window being activated and the window being deactivated.
+        /// If the windows use the same input queue, the message is sent synchronously, first to the window procedure of the 
+        /// top-level window being deactivated, then to the window procedure of the top-level window being activated. If the 
+        /// windows use different input queues, the message is sent asynchronously, so the window is activated immediately.
         /// </summary>
         public const int WA_CLICKACTIVE = 0x2;
         #endregion

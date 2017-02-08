@@ -114,6 +114,5 @@ namespace mRemoteNG.App.Initialization
             var data = $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}";
             _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }
-
     }
 }

@@ -10,6 +10,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 
 
@@ -19,21 +20,29 @@ namespace mRemoteNG.Config.Settings
 	{
         private readonly ExternalAppsLoader _externalAppsLoader;
         private readonly MessageCollector _messageCollector;
+        private readonly QuickConnectToolStrip _quickConnectToolStrip;
+        private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 
-	    private frmMain MainForm { get; }
+        private FrmMain MainForm { get; }
 
 
-	    public SettingsLoader(frmMain mainForm, MessageCollector messageCollector)
+	    public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector, QuickConnectToolStrip quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
 		{
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
             if (messageCollector == null)
                 throw new ArgumentNullException(nameof(messageCollector));
+            if (quickConnectToolStrip == null)
+                throw new ArgumentNullException(nameof(quickConnectToolStrip));
+            if (externalToolsToolStrip == null)
+                throw new ArgumentNullException(nameof(externalToolsToolStrip));
 
             MainForm = mainForm;
-            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector);
 	        _messageCollector = messageCollector;
-		}
+	        _quickConnectToolStrip = quickConnectToolStrip;
+	        _externalToolsToolStrip = externalToolsToolStrip;
+            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip);
+        }
         
         #region Public Methods
         public void LoadSettings()
@@ -68,7 +77,7 @@ namespace mRemoteNG.Config.Settings
         private static void SetAlwaysShowPanelTabs()
         {
             if (mRemoteNG.Settings.Default.AlwaysShowPanelTabs)
-                frmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
+                FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
         private static void SetTheme()
@@ -136,7 +145,6 @@ namespace mRemoteNG.Config.Settings
         {
             if (!mRemoteNG.Settings.Default.MainFormKiosk) return;
             MainForm._fullscreen.Value = true;
-            MainForm.mMenViewFullscreen.Checked = true;
         }
 
         private static void SetShowSystemTrayIcon()
@@ -177,36 +185,38 @@ namespace mRemoteNG.Config.Settings
 
 	    private void SetToolbarsDefault()
 		{
-			ToolStripPanelFromString("top").Join(MainForm.tsQuickConnect, new Point(300, 0));
-			MainForm.tsQuickConnect.Visible = true;
-			ToolStripPanelFromString("bottom").Join(MainForm.tsExternalTools, new Point(3, 0));
-			MainForm.tsExternalTools.Visible = false;
+			ToolStripPanelFromString("top").Join(_quickConnectToolStrip, new Point(300, 0));
+            _quickConnectToolStrip.Visible = true;
+			ToolStripPanelFromString("bottom").Join(_externalToolsToolStrip, new Point(3, 0));
+            _externalToolsToolStrip.Visible = false;
 		}
 
 	    private void LoadToolbarsFromSettings()
 		{
 			if (mRemoteNG.Settings.Default.QuickyTBLocation.X > mRemoteNG.Settings.Default.ExtAppsTBLocation.X)
 			{
-				AddDynamicPanels();
-				AddStaticPanels();
+				AddExternalAppsPanel();
+				AddQuickConnectPanel();
 			}
 			else
 			{
-				AddStaticPanels();
-				AddDynamicPanels();
+				AddQuickConnectPanel();
+				AddExternalAppsPanel();
 			}
 		}
 		
-		private void AddStaticPanels()
+		private void AddQuickConnectPanel()
 		{
-			ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock).Join(MainForm.tsQuickConnect, mRemoteNG.Settings.Default.QuickyTBLocation);
-			MainForm.tsQuickConnect.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
+            var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock);
+            toolStripPanel.Join(_quickConnectToolStrip, mRemoteNG.Settings.Default.QuickyTBLocation);
+            _quickConnectToolStrip.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
 		}
 		
-		private void AddDynamicPanels()
+		private void AddExternalAppsPanel()
 		{
-			ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock).Join(MainForm.tsExternalTools, mRemoteNG.Settings.Default.ExtAppsTBLocation);
-			MainForm.tsExternalTools.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
+		    var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock);
+            toolStripPanel.Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
+            _externalToolsToolStrip.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
 		}
 		
 		private ToolStripPanel ToolStripPanelFromString(string panel)

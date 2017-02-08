@@ -10,6 +10,7 @@ using mRemoteNG.UI.Window;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Security;
@@ -41,7 +42,7 @@ namespace mRemoteNG.App
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static DateTime LastSqlUpdate { get; set; }
-        public static ArrayList ExternalTools { get; set; } = new ArrayList();
+        public static ObservableCollection<ExternalTool> ExternalTools { get; set; } = new ObservableCollection<ExternalTool>();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
         {
@@ -72,7 +73,7 @@ namespace mRemoteNG.App
 
         private static void ShowConnectionWindow(ConnectionWindow connectionForm)
         {
-            connectionForm.Show(frmMain.Default.pnlDock, DockState.Document);
+            connectionForm.Show(FrmMain.Default.pnlDock, DockState.Document);
         }
 
         private static void PrepareTabControllerSupport(bool noTabber, ConnectionWindow connectionForm)
@@ -347,7 +348,7 @@ namespace mRemoteNG.App
                 }
                 else
                 {
-                    MessageBox.Show(frmMain.Default,
+                    MessageBox.Show(FrmMain.Default,
                         string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)),
                         @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
@@ -502,7 +503,7 @@ namespace mRemoteNG.App
 
                     saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 
-                    if (saveFileDialog.ShowDialog(frmMain.Default) != DialogResult.OK) return;
+                    if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
 
                     connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
                     connectionsSave.ConnectionFileName = saveFileDialog.FileName;

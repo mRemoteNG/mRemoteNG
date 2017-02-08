@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Serializers
         private void ShowIncompatibleVersionDialogBox()
         {
             CTaskDialog.ShowTaskDialogBox(
-                frmMain.Default,
+                FrmMain.Default,
                 Application.ProductName,
                 "Incompatible connection file format",
                 $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",

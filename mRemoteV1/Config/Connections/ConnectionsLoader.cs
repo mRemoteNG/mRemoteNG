@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Connections
             var connectionTreeModel = deserializer.Deserialize();
 
             if (connectionTreeModel != null)
-			    frmMain.Default.ConnectionsFileName = ConnectionFileName;
+			    FrmMain.Default.ConnectionsFileName = ConnectionFileName;
             else
                 connectionTreeModel = new ConnectionTreeModel();
 
