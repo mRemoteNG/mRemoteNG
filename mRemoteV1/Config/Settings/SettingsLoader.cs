@@ -195,25 +195,27 @@ namespace mRemoteNG.Config.Settings
 		{
 			if (mRemoteNG.Settings.Default.QuickyTBLocation.X > mRemoteNG.Settings.Default.ExtAppsTBLocation.X)
 			{
-				AddDynamicPanels();
-				AddStaticPanels();
+				AddExternalAppsPanel();
+				AddQuickConnectPanel();
 			}
 			else
 			{
-				AddStaticPanels();
-				AddDynamicPanels();
+				AddQuickConnectPanel();
+				AddExternalAppsPanel();
 			}
 		}
 		
-		private void AddStaticPanels()
+		private void AddQuickConnectPanel()
 		{
-			ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock).Join(_quickConnectToolStrip, mRemoteNG.Settings.Default.QuickyTBLocation);
+            var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock);
+            toolStripPanel.Join(_quickConnectToolStrip, mRemoteNG.Settings.Default.QuickyTBLocation);
             _quickConnectToolStrip.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
 		}
 		
-		private void AddDynamicPanels()
+		private void AddExternalAppsPanel()
 		{
-			ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock).Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
+		    var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock);
+            toolStripPanel.Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
             _externalToolsToolStrip.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
 		}
 		
