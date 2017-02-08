@@ -136,6 +136,14 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
+            msMain.Items.AddRange(new ToolStripItem[]
+            {
+                new MainFileMenu(Windows.TreeForm, _connectionInitiator),
+                new ViewMenu(_externalToolsToolStrip, _quickConnectToolStrip, _fullscreen, this),
+                new ToolsMenu(this, _credentialManager),
+                new HelpMenu()
+            });
+
             var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip);
             settingsLoader.LoadSettings();
 
@@ -161,16 +169,6 @@ namespace mRemoteNG.UI.Forms
 
             _screenSystemMenu.BuildScreenList();
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
-
-            tsContainer.TopToolStripPanel.Controls.Add(_quickConnectToolStrip);
-            tsContainer.TopToolStripPanel.Controls.Add(_externalToolsToolStrip);
-            msMain.Items.AddRange(new ToolStripItem[]
-            {
-                new MainFileMenu(Windows.TreeForm, _connectionInitiator),
-                new ViewMenu(_externalToolsToolStrip, _quickConnectToolStrip, _fullscreen, this),
-                new ToolsMenu(this, _credentialManager),
-                new HelpMenu()
-            });
 
             Opacity = 1;
         }
