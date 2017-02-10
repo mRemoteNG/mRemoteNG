@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential.Repositories;
@@ -9,12 +8,9 @@ using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialRepositorySelectionPage : UserControl, ICredentialManagerPage
+    public partial class CredentialRepositorySelectionPage : UserControl
     {
         private readonly Control _previousPage;
-
-        public string PageName { get; } = "add repo";
-        public Image PageIcon { get; }
 
         public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, Control previousPage)
         {

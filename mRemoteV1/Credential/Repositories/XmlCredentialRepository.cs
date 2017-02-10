@@ -11,9 +11,9 @@ namespace mRemoteNG.Credential.Repositories
         private readonly IDataProvider<string> _dataProvider;
         private readonly XmlCredentialDeserializer _deserializer;
 
-        public ICredentialRepositoryConfig Config { get; } = new CredentialRepositoryConfig();
+        public ICredentialRepositoryConfig Config { get; }
 
-        public XmlCredentialRepository(IDataProvider<string> dataProvider, XmlCredentialDeserializer deserializer)
+        public XmlCredentialRepository(ICredentialRepositoryConfig config, IDataProvider<string> dataProvider, XmlCredentialDeserializer deserializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));
@@ -23,8 +23,6 @@ namespace mRemoteNG.Credential.Repositories
             _dataProvider = dataProvider;
             _deserializer = deserializer;
         }
-
-        
 
         public IEnumerable<ICredentialRecord> LoadCredentials(SecureString decryptionKey)
         {

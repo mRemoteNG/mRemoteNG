@@ -81,6 +81,11 @@
             this.textBoxFilePath.Size = new System.Drawing.Size(319, 20);
             this.textBoxFilePath.TabIndex = 3;
             // 
+            // selectFilePathDialog
+            // 
+            this.selectFilePathDialog.DefaultExt = "xml";
+            this.selectFilePathDialog.Filter = "XML|*.xml";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
