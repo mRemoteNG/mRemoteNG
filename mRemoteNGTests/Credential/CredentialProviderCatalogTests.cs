@@ -7,12 +7,12 @@ namespace mRemoteNGTests.Credential
 {
     public class CredentialProviderCatalogTests
     {
-        private CredentialProviderCatalog _credentialCatalog;
+        private CredentialRepositoryList _credentialCatalog;
 
         [SetUp]
         public void Setup()
         {
-            _credentialCatalog = new CredentialProviderCatalog();
+            _credentialCatalog = new CredentialRepositoryList();
         }
 
         [Test]

@@ -50,7 +50,7 @@ namespace mRemoteNG.App
             set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         }
         public static CredentialManager CredentialManager { get; } = new CredentialManager();
-        public static ICredentialProviderCatalog CredentialProviderCatalog { get; } = new CredentialProviderCatalog();
+        public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
         #endregion
 
         #region Panels

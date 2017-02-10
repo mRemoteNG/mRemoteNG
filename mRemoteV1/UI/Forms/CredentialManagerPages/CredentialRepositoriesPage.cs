@@ -10,12 +10,12 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
     public partial class CredentialRepositoriesPage : UserControl, ICredentialManagerPage
     {
-        private readonly ICredentialProviderCatalog _providerCatalog;
+        private readonly ICredentialRepositoryList _providerCatalog;
 
         public string PageName { get; } = "Sources";
         public Image PageIcon { get; } = Resources.folder_key;
 
-        public CredentialRepositoriesPage(ICredentialProviderCatalog providerCatalog)
+        public CredentialRepositoriesPage(ICredentialRepositoryList providerCatalog)
         {
             if (providerCatalog == null)
                 throw new ArgumentNullException(nameof(providerCatalog));

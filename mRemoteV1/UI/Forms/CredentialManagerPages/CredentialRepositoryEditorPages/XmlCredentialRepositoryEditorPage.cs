@@ -11,10 +11,10 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
     public partial class XmlCredentialRepositoryEditorPage : UserControl
     {
         private readonly ICredentialRepositoryConfig _repositoryConfig;
-        private readonly ICredentialProviderCatalog _repositoryList;
+        private readonly ICredentialRepositoryList _repositoryList;
         private readonly Control _previousPage;
 
-        public XmlCredentialRepositoryEditorPage(ICredentialRepositoryConfig repositoryConfig, ICredentialProviderCatalog repositoryList, Control previousPage)
+        public XmlCredentialRepositoryEditorPage(ICredentialRepositoryConfig repositoryConfig, ICredentialRepositoryList repositoryList, Control previousPage)
         {
             if (repositoryConfig == null)
                 throw new ArgumentNullException(nameof(repositoryConfig));

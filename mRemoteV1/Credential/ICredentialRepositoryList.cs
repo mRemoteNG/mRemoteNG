@@ -2,7 +2,7 @@
 
 namespace mRemoteNG.Credential
 {
-    public interface ICredentialProviderCatalog : IEnumerable<ICredentialRepository>
+    public interface ICredentialRepositoryList : IEnumerable<ICredentialRepository>
     {
         IEnumerable<ICredentialRepository> CredentialProviders { get; }
 

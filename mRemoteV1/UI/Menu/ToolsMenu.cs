@@ -21,10 +21,10 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsComponentsCheck;
         private ToolStripMenuItem _credentialManagerToolStripMenuItem;
         private readonly CredentialManager _credentialManager;
-        private readonly ICredentialProviderCatalog _credentialProviderCatalog;
+        private readonly ICredentialRepositoryList _credentialProviderCatalog;
         private readonly Form _form;
 
-        public ToolsMenu(Form form, CredentialManager credentialManager, ICredentialProviderCatalog credentialProviderCatalog)
+        public ToolsMenu(Form form, CredentialManager credentialManager, ICredentialRepositoryList credentialProviderCatalog)
         {
             _form = form;
             _credentialManager = credentialManager;

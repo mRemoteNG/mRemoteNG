@@ -209,14 +209,14 @@
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
     <Compile Include="Credential\CredentialManager.cs" />
-    <Compile Include="Credential\CredentialProviderCatalog.cs" />
+    <Compile Include="Credential\CredentialRepositoryList.cs" />
     <Compile Include="Credential\CredentialRecord.cs" />
     <Compile Include="Credential\CredentialListBase.cs" />
     <Compile Include="Credential\CredentialRecordCatalog.cs" />
     <Compile Include="Credential\CredentialRecordTypeConverter.cs" />
     <Compile Include="Credential\CredentialRepositoryConfig.cs" />
     <Compile Include="Credential\ICredentialRecord.cs" />
-    <Compile Include="Credential\ICredentialProviderCatalog.cs" />
+    <Compile Include="Credential\ICredentialRepositoryList.cs" />
     <Compile Include="Credential\ICredentialRepository.cs" />
     <Compile Include="Credential\ICredentialList.cs" />
     <Compile Include="Credential\IFactory.cs" />

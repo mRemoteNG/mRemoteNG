@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialProviderCatalog : ICredentialProviderCatalog
+    public class CredentialRepositoryList : ICredentialRepositoryList
     {
         private readonly List<ICredentialRepository> _credentialProviders = new List<ICredentialRepository>();
 

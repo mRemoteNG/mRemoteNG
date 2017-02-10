@@ -7,7 +7,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 {
     public class CredentialRepositoryPageEditorFactory
     {
-        public static Control BuildXmlCredentialRepositoryEditorPage<T>(T config, ICredentialProviderCatalog repositoryList, Control previousPage) where T : ICredentialRepositoryConfig
+        public static Control BuildXmlCredentialRepositoryEditorPage<T>(T config, ICredentialRepositoryList repositoryList, Control previousPage) where T : ICredentialRepositoryConfig
         {
             return new XmlCredentialRepositoryEditorPage(config, repositoryList, previousPage);
         }

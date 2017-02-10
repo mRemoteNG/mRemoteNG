@@ -12,9 +12,9 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
     public partial class CredentialRepositorySelectionPage : UserControl
     {
         private readonly Control _previousPage;
-        private readonly ICredentialProviderCatalog _repositoryList;
+        private readonly ICredentialRepositoryList _repositoryList;
 
-        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, ICredentialProviderCatalog repositoryList, Control previousPage)
+        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, ICredentialRepositoryList repositoryList, Control previousPage)
         {
             if (selectionTargets == null)
                 throw new ArgumentNullException(nameof(selectionTargets));
