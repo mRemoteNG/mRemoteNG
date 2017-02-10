@@ -5,14 +5,14 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialSourcesPage : UserControl, ICredentialManagerPage
+    public partial class CredentialRepositoriesPage : UserControl, ICredentialManagerPage
     {
         private readonly ICredentialProviderCatalog _providerCatalog;
 
         public string PageName { get; } = "Sources";
         public Image PageIcon { get; } = Resources.folder_key;
 
-        public CredentialSourcesPage(ICredentialProviderCatalog providerCatalog)
+        public CredentialRepositoriesPage(ICredentialProviderCatalog providerCatalog)
         {
             if (providerCatalog == null)
                 throw new ArgumentNullException(nameof(providerCatalog));

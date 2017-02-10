@@ -372,11 +372,11 @@
     </Compile>
     <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectors\KeePassRepositorySelector.cs" />
     <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectors\XmlCredentialRepositorySelector.cs" />
-    <Compile Include="UI\Forms\CredentialManagerPages\CredentialSourcesPage.cs">
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\CredentialManagerPages\CredentialSourcesPage.Designer.cs">
-      <DependentUpon>CredentialSourcesPage.cs</DependentUpon>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.Designer.cs">
+      <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\CredentialManagerPages\ICredentialManagerPage.cs" />
     <Compile Include="UI\Forms\frmOptions.cs">
@@ -665,8 +665,8 @@
     <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.resx">
       <DependentUpon>CredentialRepositorySelectionPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialSourcesPage.resx">
-      <DependentUpon>CredentialSourcesPage.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.resx">
+      <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
