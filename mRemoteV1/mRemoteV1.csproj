@@ -320,6 +320,12 @@
     <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\NewPasswordWithVerification.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\NewPasswordWithVerification.Designer.cs">
+      <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
@@ -649,6 +655,9 @@
     <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
+      <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialEditorForm.resx">
       <DependentUpon>CredentialEditorForm.cs</DependentUpon>
