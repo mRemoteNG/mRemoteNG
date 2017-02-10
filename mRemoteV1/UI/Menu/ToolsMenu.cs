@@ -129,12 +129,7 @@ namespace mRemoteNG.UI.Menu
                 {
                     DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
                 },
-                new CredentialRepositoriesPage(new CredentialProviderCatalog()),
-                new CredentialRepositorySelectionPage(new ISelectionTarget<ICredentialRepositoryConfig>[]
-                {
-                    new XmlCredentialRepositorySelector(),
-                    new KeePassRepositorySelector()
-                })
+                new CredentialRepositoriesPage(new CredentialProviderCatalog())
             };
             var credentialManagerForm = new CredentialManagerForm(pages);
             credentialManagerForm.CenterOnTarget(_form);

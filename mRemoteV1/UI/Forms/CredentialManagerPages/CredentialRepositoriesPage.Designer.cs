@@ -48,6 +48,7 @@
             this.buttonAdd.TabIndex = 5;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonRemove
             // 
@@ -112,14 +113,14 @@
             this.olvColumnSource.Groupable = false;
             this.olvColumnSource.Text = "Source";
             // 
-            // CredentialSourcesPage
+            // CredentialRepositoriesPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.objectListView1);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonRemove);
-            this.Name = "CredentialSourcesPage";
+            this.Name = "CredentialRepositoriesPage";
             this.Size = new System.Drawing.Size(417, 304);
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
             this.ResumeLayout(false);
