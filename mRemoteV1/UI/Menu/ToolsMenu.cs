@@ -2,8 +2,10 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.CredentialManagerPages;
+using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelectors;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -126,7 +128,12 @@ namespace mRemoteNG.UI.Menu
                 {
                     DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
                 },
-                new CredentialSourcesPage(new CredentialProviderCatalog())
+                new CredentialSourcesPage(new CredentialProviderCatalog()),
+                new CredentialRepositorySelectionPage(new ISelectionTarget<ICredentialProvider>[]
+                {
+                    new XmlCredentialRepositorySelector(),
+                    new KeePassRepositorySelector()
+                })
             };
             var credentialManagerForm = new CredentialManagerForm(pages);
             credentialManagerForm.CenterOnTarget(_form);
