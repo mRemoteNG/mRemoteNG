@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -7,6 +6,6 @@ namespace mRemoteNG.UI.Controls
     {
         string Text { get; set; }
         Image Image { get; }
-        IFactory<T> Factory { get; }
+        T Config { get; }
     }
 }

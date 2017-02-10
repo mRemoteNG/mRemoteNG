@@ -222,6 +222,7 @@
     <Compile Include="Credential\IFactory.cs" />
     <Compile Include="Credential\INotifyingCredentialRecord.cs" />
     <Compile Include="Credential\Repositories\ICredentialRepositoryConfig.cs" />
+    <Compile Include="Credential\Repositories\XmlCredentialRepository.cs" />
     <Compile Include="Messages\MessageFilteringOptions\LogMessageTypeFilteringOptions.cs" />
     <Compile Include="Messages\WriterDecorators\MessageTypeFilterDecorator.cs" />
     <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />
@@ -355,6 +356,13 @@
     </Compile>
     <Compile Include="UI\Forms\CredentialManagerPages\CredentialListPage.Designer.cs">
       <DependentUpon>CredentialListPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\CredentialRepositoryPageEditorFactory.cs" />
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.Designer.cs">
+      <DependentUpon>XmlCredentialRepositoryEditorPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.cs">
       <SubType>UserControl</SubType>
@@ -650,6 +658,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialListPage.resx">
       <DependentUpon>CredentialListPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.resx">
+      <DependentUpon>XmlCredentialRepositoryEditorPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.resx">
       <DependentUpon>CredentialRepositorySelectionPage.cs</DependentUpon>

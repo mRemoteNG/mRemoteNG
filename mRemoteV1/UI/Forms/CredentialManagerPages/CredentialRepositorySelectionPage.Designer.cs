@@ -46,6 +46,7 @@
             this.buttonContinue.TabIndex = 4;
             this.buttonContinue.Text = "Continue";
             this.buttonContinue.UseVisualStyleBackColor = true;
+            this.buttonContinue.Click += new System.EventHandler(this.buttonContinue_Click);
             // 
             // objectListView
             // 

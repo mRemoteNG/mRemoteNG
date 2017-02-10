@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Security;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
-using mRemoteNG.Credential;
 
-
-namespace mRemoteNG.Config
+namespace mRemoteNG.Credential.Repositories
 {
-    public class CredentialRecordLoader
+    public class XmlCredentialRepository : ICredentialRepository
     {
         private readonly IDataProvider<string> _dataProvider;
         private readonly XmlCredentialDeserializer _deserializer;
 
-        public CredentialRecordLoader(IDataProvider<string> dataProvider, XmlCredentialDeserializer deserializer)
+        public ICredentialRepositoryConfig Config { get; } = new CredentialRepositoryConfig();
+
+        public XmlCredentialRepository(IDataProvider<string> dataProvider, XmlCredentialDeserializer deserializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));
@@ -24,10 +24,12 @@ namespace mRemoteNG.Config
             _deserializer = deserializer;
         }
 
-        public IEnumerable<ICredentialRecord> Load(SecureString key)
+        
+
+        public IEnumerable<ICredentialRecord> LoadCredentials(SecureString decryptionKey)
         {
             var serializedCredentials = _dataProvider.Load();
-            return _deserializer.Deserialize(serializedCredentials, key);
+            return _deserializer.Deserialize(serializedCredentials, decryptionKey);
         }
     }
 }
