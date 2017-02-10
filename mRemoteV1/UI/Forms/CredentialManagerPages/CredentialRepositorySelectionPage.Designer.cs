@@ -41,7 +41,7 @@
             // 
             this.buttonContinue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonContinue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonContinue.Location = new System.Drawing.Point(344, 312);
+            this.buttonContinue.Location = new System.Drawing.Point(333, 312);
             this.buttonContinue.Name = "buttonContinue";
             this.buttonContinue.Size = new System.Drawing.Size(75, 23);
             this.buttonContinue.TabIndex = 4;
@@ -100,7 +100,7 @@
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonBack.Location = new System.Drawing.Point(263, 312);
+            this.buttonBack.Location = new System.Drawing.Point(252, 312);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 6;

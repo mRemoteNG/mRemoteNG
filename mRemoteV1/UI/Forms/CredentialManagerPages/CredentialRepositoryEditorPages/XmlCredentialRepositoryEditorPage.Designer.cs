@@ -102,7 +102,7 @@
             // buttonConfirm
             // 
             this.buttonConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonConfirm.Location = new System.Drawing.Point(276, 248);
+            this.buttonConfirm.Location = new System.Drawing.Point(266, 248);
             this.buttonConfirm.Name = "buttonConfirm";
             this.buttonConfirm.Size = new System.Drawing.Size(75, 23);
             this.buttonConfirm.TabIndex = 9;
@@ -131,7 +131,7 @@
             // buttonBack
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Location = new System.Drawing.Point(195, 248);
+            this.buttonBack.Location = new System.Drawing.Point(185, 248);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 12;
