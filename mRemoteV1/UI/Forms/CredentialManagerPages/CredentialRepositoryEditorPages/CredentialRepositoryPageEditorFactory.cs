@@ -1,13 +1,15 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
+using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
 {
     public class CredentialRepositoryPageEditorFactory
     {
-        public static Control BuildXmlCredentialRepositoryEditorPage<T>(T config, Control previousPage) where T : ICredentialRepositoryConfig
+        public static Control BuildXmlCredentialRepositoryEditorPage<T>(T config, ICredentialProviderCatalog repositoryList, Control previousPage) where T : ICredentialRepositoryConfig
         {
-            return new XmlCredentialRepositoryEditorPage(config, previousPage);
+            return new XmlCredentialRepositoryEditorPage(config, repositoryList, previousPage);
         }
     }
 }

@@ -38,6 +38,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
                     new XmlCredentialRepositorySelector(),
                     new KeePassRepositorySelector()
                 },
+                _providerCatalog,
                 this
             ) {Dock = DockStyle.Fill};
             var parent = Parent;

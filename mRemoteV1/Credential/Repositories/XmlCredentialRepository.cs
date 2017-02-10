@@ -19,7 +19,10 @@ namespace mRemoteNG.Credential.Repositories
                 throw new ArgumentNullException(nameof(dataProvider));
             if (deserializer == null)
                 throw new ArgumentNullException(nameof(deserializer));
+            if (config == null)
+                throw new ArgumentNullException(nameof(config));
 
+            Config = config;
             _dataProvider = dataProvider;
             _deserializer = deserializer;
         }

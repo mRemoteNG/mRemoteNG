@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
@@ -9,18 +11,23 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
     public partial class XmlCredentialRepositoryEditorPage : UserControl
     {
         private readonly ICredentialRepositoryConfig _repositoryConfig;
+        private readonly ICredentialProviderCatalog _repositoryList;
         private readonly Control _previousPage;
 
-        public XmlCredentialRepositoryEditorPage(ICredentialRepositoryConfig repositoryConfig, Control previousPage)
+        public XmlCredentialRepositoryEditorPage(ICredentialRepositoryConfig repositoryConfig, ICredentialProviderCatalog repositoryList, Control previousPage)
         {
             if (repositoryConfig == null)
                 throw new ArgumentNullException(nameof(repositoryConfig));
+            if (repositoryList == null)
+                throw new ArgumentNullException(nameof(repositoryList));
 
             _repositoryConfig = repositoryConfig;
+            _repositoryList = repositoryList;
             _previousPage = previousPage;
             InitializeComponent();
             PopulateFields();
             textBoxFilePath.TextChanged += SaveValuesToConfig;
+            newPasswordBoxes.Verified += SaveValuesToConfig;
         }
 
         private void PopulateFields()
@@ -32,7 +39,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
         private void SaveValuesToConfig(object sender, EventArgs eventArgs)
         {
             _repositoryConfig.Source = textBoxFilePath.Text;
-            _repositoryConfig.Key = txtboxPassword.SecureString;
+            _repositoryConfig.Key = newPasswordBoxes.SecureString;
         }
 
         private void buttonBrowseFiles_Click(object sender, EventArgs e)
@@ -49,6 +56,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             var dataProvider = new FileDataProvider(_repositoryConfig.Source);
             var deserializer = new XmlCredentialDeserializer();
             var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, deserializer);
+            if (!_repositoryList.Contains(repository))
+                _repositoryList.AddProvider(repository);
         }
 
         private void buttonBack_Click(object sender, EventArgs e)

@@ -28,19 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelPageTitle = new System.Windows.Forms.Label();
             this.buttonBrowseFiles = new System.Windows.Forms.Button();
             this.labelFilePath = new System.Windows.Forms.Label();
             this.textBoxFilePath = new System.Windows.Forms.TextBox();
             this.selectFilePathDialog = new System.Windows.Forms.SaveFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelVerifyPassword = new System.Windows.Forms.Label();
             this.buttonConfirm = new System.Windows.Forms.Button();
             this.txtboxId = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
-            this.txtboxPasswordVerify = new mRemoteNG.UI.Controls.SecureTextBox();
-            this.txtboxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.newPasswordBoxes = new mRemoteNG.UI.Controls.NewPasswordWithVerification();
             this.SuspendLayout();
             // 
             // labelPageTitle
@@ -86,24 +85,6 @@
             this.selectFilePathDialog.DefaultExt = "xml";
             this.selectFilePathDialog.Filter = "XML|*.xml";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 154);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Set encryption password";
-            // 
-            // labelVerifyPassword
-            // 
-            this.labelVerifyPassword.AutoSize = true;
-            this.labelVerifyPassword.Location = new System.Drawing.Point(29, 193);
-            this.labelVerifyPassword.Name = "labelVerifyPassword";
-            this.labelVerifyPassword.Size = new System.Drawing.Size(81, 13);
-            this.labelVerifyPassword.TabIndex = 8;
-            this.labelVerifyPassword.Text = "Verify password";
-            // 
             // buttonConfirm
             // 
             this.buttonConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -144,23 +125,19 @@
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
-            // txtboxPasswordVerify
+            // toolTip
             // 
-            this.txtboxPasswordVerify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Error;
+            // 
+            // newPasswordBoxes
+            // 
+            this.newPasswordBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtboxPasswordVerify.Location = new System.Drawing.Point(32, 209);
-            this.txtboxPasswordVerify.Name = "txtboxPasswordVerify";
-            this.txtboxPasswordVerify.Size = new System.Drawing.Size(263, 20);
-            this.txtboxPasswordVerify.TabIndex = 7;
-            // 
-            // txtboxPassword
-            // 
-            this.txtboxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtboxPassword.Location = new System.Drawing.Point(32, 170);
-            this.txtboxPassword.Name = "txtboxPassword";
-            this.txtboxPassword.Size = new System.Drawing.Size(263, 20);
-            this.txtboxPassword.TabIndex = 6;
+            this.newPasswordBoxes.Location = new System.Drawing.Point(32, 154);
+            this.newPasswordBoxes.MinimumSize = new System.Drawing.Size(0, 100);
+            this.newPasswordBoxes.Name = "newPasswordBoxes";
+            this.newPasswordBoxes.Size = new System.Drawing.Size(319, 100);
+            this.newPasswordBoxes.TabIndex = 13;
             // 
             // XmlCredentialRepositoryEditorPage
             // 
@@ -170,14 +147,11 @@
             this.Controls.Add(this.labelId);
             this.Controls.Add(this.txtboxId);
             this.Controls.Add(this.buttonConfirm);
-            this.Controls.Add(this.labelVerifyPassword);
-            this.Controls.Add(this.txtboxPasswordVerify);
-            this.Controls.Add(this.txtboxPassword);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxFilePath);
             this.Controls.Add(this.labelFilePath);
             this.Controls.Add(this.buttonBrowseFiles);
             this.Controls.Add(this.labelPageTitle);
+            this.Controls.Add(this.newPasswordBoxes);
             this.MinimumSize = new System.Drawing.Size(300, 260);
             this.Name = "XmlCredentialRepositoryEditorPage";
             this.Size = new System.Drawing.Size(354, 274);
@@ -193,13 +167,11 @@
         private System.Windows.Forms.Label labelFilePath;
         private System.Windows.Forms.TextBox textBoxFilePath;
         private System.Windows.Forms.SaveFileDialog selectFilePathDialog;
-        private System.Windows.Forms.Label label1;
-        private Controls.SecureTextBox txtboxPassword;
-        private Controls.SecureTextBox txtboxPasswordVerify;
-        private System.Windows.Forms.Label labelVerifyPassword;
         private System.Windows.Forms.Button buttonConfirm;
         private System.Windows.Forms.TextBox txtboxId;
         private System.Windows.Forms.Label labelId;
         private System.Windows.Forms.Button buttonBack;
+        private Controls.NewPasswordWithVerification newPasswordBoxes;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

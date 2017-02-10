@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages;
@@ -11,15 +12,19 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
     public partial class CredentialRepositorySelectionPage : UserControl
     {
         private readonly Control _previousPage;
+        private readonly ICredentialProviderCatalog _repositoryList;
 
-        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, Control previousPage)
+        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, ICredentialProviderCatalog repositoryList, Control previousPage)
         {
             if (selectionTargets == null)
                 throw new ArgumentNullException(nameof(selectionTargets));
             if (previousPage == null)
                 throw new ArgumentNullException(nameof(previousPage));
+            if (repositoryList == null)
+                throw new ArgumentNullException(nameof(repositoryList));
 
             _previousPage = previousPage;
+            _repositoryList = repositoryList;
             InitializeComponent();
             SetupListView(selectionTargets);
         }
@@ -43,7 +48,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void NextPage(ISelectionTarget<ICredentialRepositoryConfig> selection)
         {
-            var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(selection.Config, this);
+            var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(selection.Config, _repositoryList, this);
             editorPage.Dock = DockStyle.Fill;
             var parent = Parent;
             parent.Controls.Clear();
