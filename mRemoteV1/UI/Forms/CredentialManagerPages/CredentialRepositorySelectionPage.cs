@@ -10,11 +10,19 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
     public partial class CredentialRepositorySelectionPage : UserControl, ICredentialManagerPage
     {
+        private Control _previousPage;
+
         public string PageName { get; } = "add repo";
         public Image PageIcon { get; }
 
-        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets)
+        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, Control previousPage)
         {
+            if (selectionTargets == null)
+                throw new ArgumentNullException(nameof(selectionTargets));
+            if (previousPage == null)
+                throw new ArgumentNullException(nameof(previousPage));
+
+            _previousPage = previousPage;
             InitializeComponent();
             SetupListView(selectionTargets);
         }
@@ -44,6 +52,13 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             var parent = Parent;
             parent.Controls.Clear();
             parent.Controls.Add(editorPage);
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            var parent = Parent;
+            parent.Controls.Clear();
+            parent.Controls.Add(_previousPage);
         }
     }
 }

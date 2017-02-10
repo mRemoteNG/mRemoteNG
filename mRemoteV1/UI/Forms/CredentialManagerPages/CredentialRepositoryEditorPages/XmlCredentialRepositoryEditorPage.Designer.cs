@@ -34,19 +34,19 @@
             this.textBoxFilePath = new System.Windows.Forms.TextBox();
             this.selectFilePathDialog = new System.Windows.Forms.SaveFileDialog();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtboxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
-            this.txtboxPasswordVerify = new mRemoteNG.UI.Controls.SecureTextBox();
             this.labelVerifyPassword = new System.Windows.Forms.Label();
             this.buttonConfirm = new System.Windows.Forms.Button();
             this.txtboxId = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
+            this.txtboxPasswordVerify = new mRemoteNG.UI.Controls.SecureTextBox();
+            this.txtboxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             this.SuspendLayout();
             // 
             // labelPageTitle
             // 
             this.labelPageTitle.AutoSize = true;
-            this.labelPageTitle.Location = new System.Drawing.Point(4, 4);
+            this.labelPageTitle.Location = new System.Drawing.Point(29, 6);
             this.labelPageTitle.Name = "labelPageTitle";
             this.labelPageTitle.Size = new System.Drawing.Size(132, 13);
             this.labelPageTitle.TabIndex = 0;
@@ -55,7 +55,7 @@
             // buttonBrowseFiles
             // 
             this.buttonBrowseFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowseFiles.Location = new System.Drawing.Point(222, 121);
+            this.buttonBrowseFiles.Location = new System.Drawing.Point(276, 128);
             this.buttonBrowseFiles.Name = "buttonBrowseFiles";
             this.buttonBrowseFiles.Size = new System.Drawing.Size(75, 23);
             this.buttonBrowseFiles.TabIndex = 1;
@@ -66,7 +66,7 @@
             // labelFilePath
             // 
             this.labelFilePath.AutoSize = true;
-            this.labelFilePath.Location = new System.Drawing.Point(4, 84);
+            this.labelFilePath.Location = new System.Drawing.Point(29, 86);
             this.labelFilePath.Name = "labelFilePath";
             this.labelFilePath.Size = new System.Drawing.Size(48, 13);
             this.labelFilePath.TabIndex = 2;
@@ -76,42 +76,24 @@
             // 
             this.textBoxFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFilePath.Location = new System.Drawing.Point(7, 100);
+            this.textBoxFilePath.Location = new System.Drawing.Point(32, 102);
             this.textBoxFilePath.Name = "textBoxFilePath";
-            this.textBoxFilePath.Size = new System.Drawing.Size(290, 20);
+            this.textBoxFilePath.Size = new System.Drawing.Size(319, 20);
             this.textBoxFilePath.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 147);
+            this.label1.Location = new System.Drawing.Point(29, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(123, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Set encryption password";
             // 
-            // txtboxPassword
-            // 
-            this.txtboxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtboxPassword.Location = new System.Drawing.Point(7, 163);
-            this.txtboxPassword.Name = "txtboxPassword";
-            this.txtboxPassword.Size = new System.Drawing.Size(290, 20);
-            this.txtboxPassword.TabIndex = 6;
-            // 
-            // txtboxPasswordVerify
-            // 
-            this.txtboxPasswordVerify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtboxPasswordVerify.Location = new System.Drawing.Point(7, 202);
-            this.txtboxPasswordVerify.Name = "txtboxPasswordVerify";
-            this.txtboxPasswordVerify.Size = new System.Drawing.Size(290, 20);
-            this.txtboxPasswordVerify.TabIndex = 7;
-            // 
             // labelVerifyPassword
             // 
             this.labelVerifyPassword.AutoSize = true;
-            this.labelVerifyPassword.Location = new System.Drawing.Point(4, 186);
+            this.labelVerifyPassword.Location = new System.Drawing.Point(29, 193);
             this.labelVerifyPassword.Name = "labelVerifyPassword";
             this.labelVerifyPassword.Size = new System.Drawing.Size(81, 13);
             this.labelVerifyPassword.TabIndex = 8;
@@ -120,7 +102,7 @@
             // buttonConfirm
             // 
             this.buttonConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonConfirm.Location = new System.Drawing.Point(141, 234);
+            this.buttonConfirm.Location = new System.Drawing.Point(276, 248);
             this.buttonConfirm.Name = "buttonConfirm";
             this.buttonConfirm.Size = new System.Drawing.Size(75, 23);
             this.buttonConfirm.TabIndex = 9;
@@ -130,17 +112,17 @@
             // 
             // txtboxId
             // 
-            this.txtboxId.Location = new System.Drawing.Point(7, 49);
+            this.txtboxId.Location = new System.Drawing.Point(32, 51);
             this.txtboxId.Name = "txtboxId";
             this.txtboxId.ReadOnly = true;
-            this.txtboxId.Size = new System.Drawing.Size(212, 20);
+            this.txtboxId.Size = new System.Drawing.Size(238, 20);
             this.txtboxId.TabIndex = 10;
             this.txtboxId.TabStop = false;
             // 
             // labelId
             // 
             this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(4, 33);
+            this.labelId.Location = new System.Drawing.Point(29, 35);
             this.labelId.Name = "labelId";
             this.labelId.Size = new System.Drawing.Size(18, 13);
             this.labelId.TabIndex = 11;
@@ -149,13 +131,31 @@
             // buttonBack
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Location = new System.Drawing.Point(222, 234);
+            this.buttonBack.Location = new System.Drawing.Point(195, 248);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 12;
             this.buttonBack.Text = "Back";
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
+            // txtboxPasswordVerify
+            // 
+            this.txtboxPasswordVerify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtboxPasswordVerify.Location = new System.Drawing.Point(32, 209);
+            this.txtboxPasswordVerify.Name = "txtboxPasswordVerify";
+            this.txtboxPasswordVerify.Size = new System.Drawing.Size(263, 20);
+            this.txtboxPasswordVerify.TabIndex = 7;
+            // 
+            // txtboxPassword
+            // 
+            this.txtboxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtboxPassword.Location = new System.Drawing.Point(32, 170);
+            this.txtboxPassword.Name = "txtboxPassword";
+            this.txtboxPassword.Size = new System.Drawing.Size(263, 20);
+            this.txtboxPassword.TabIndex = 6;
             // 
             // XmlCredentialRepositoryEditorPage
             // 
@@ -175,7 +175,7 @@
             this.Controls.Add(this.labelPageTitle);
             this.MinimumSize = new System.Drawing.Size(300, 260);
             this.Name = "XmlCredentialRepositoryEditorPage";
-            this.Size = new System.Drawing.Size(300, 260);
+            this.Size = new System.Drawing.Size(354, 274);
             this.ResumeLayout(false);
             this.PerformLayout();
 

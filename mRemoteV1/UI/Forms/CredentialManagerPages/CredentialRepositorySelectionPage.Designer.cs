@@ -33,6 +33,7 @@
             this.objectListView = new BrightIdeasSoftware.ObjectListView();
             this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
+            this.buttonBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,9 +41,9 @@
             // 
             this.buttonContinue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonContinue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonContinue.Location = new System.Drawing.Point(320, 303);
+            this.buttonContinue.Location = new System.Drawing.Point(344, 312);
             this.buttonContinue.Name = "buttonContinue";
-            this.buttonContinue.Size = new System.Drawing.Size(99, 32);
+            this.buttonContinue.Size = new System.Drawing.Size(75, 23);
             this.buttonContinue.TabIndex = 4;
             this.buttonContinue.Text = "Continue";
             this.buttonContinue.UseVisualStyleBackColor = true;
@@ -95,10 +96,23 @@
             this.imageListLarge.ImageSize = new System.Drawing.Size(32, 32);
             this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // buttonBack
+            // 
+            this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonBack.Location = new System.Drawing.Point(263, 312);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(75, 23);
+            this.buttonBack.TabIndex = 6;
+            this.buttonBack.Text = "Back";
+            this.buttonBack.UseVisualStyleBackColor = true;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
             // CredentialRepositorySelectionPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.objectListView);
             this.Controls.Add(this.buttonContinue);
             this.Name = "CredentialRepositorySelectionPage";
@@ -114,5 +128,6 @@
         private BrightIdeasSoftware.ObjectListView objectListView;
         private BrightIdeasSoftware.OLVColumn olvColumnName;
         private System.Windows.Forms.ImageList imageListLarge;
+        private System.Windows.Forms.Button buttonBack;
     }
 }

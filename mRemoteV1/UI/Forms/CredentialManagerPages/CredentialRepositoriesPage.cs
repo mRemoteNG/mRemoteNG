@@ -32,11 +32,14 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var repoSelector = new CredentialRepositorySelectionPage(new ISelectionTarget<ICredentialRepositoryConfig>[]
-            {
-                new XmlCredentialRepositorySelector(),
-                new KeePassRepositorySelector()
-            }) {Dock = DockStyle.Fill};
+            var repoSelector = new CredentialRepositorySelectionPage(
+                new ISelectionTarget<ICredentialRepositoryConfig>[]
+                {
+                    new XmlCredentialRepositorySelector(),
+                    new KeePassRepositorySelector()
+                },
+                this
+            ) {Dock = DockStyle.Fill};
             var parent = Parent;
             parent.Controls.Clear();
             parent.Controls.Add(repoSelector);
