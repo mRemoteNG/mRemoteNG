@@ -106,7 +106,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Credential\Providers\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
@@ -215,12 +214,14 @@
     <Compile Include="Credential\CredentialListBase.cs" />
     <Compile Include="Credential\CredentialRecordCatalog.cs" />
     <Compile Include="Credential\CredentialRecordTypeConverter.cs" />
+    <Compile Include="Credential\CredentialRepositoryConfig.cs" />
     <Compile Include="Credential\ICredentialRecord.cs" />
     <Compile Include="Credential\ICredentialProviderCatalog.cs" />
-    <Compile Include="Credential\ICredentialProvider.cs" />
+    <Compile Include="Credential\ICredentialRepository.cs" />
     <Compile Include="Credential\ICredentialList.cs" />
     <Compile Include="Credential\IFactory.cs" />
     <Compile Include="Credential\INotifyingCredentialRecord.cs" />
+    <Compile Include="Credential\Repositories\ICredentialRepositoryConfig.cs" />
     <Compile Include="Messages\MessageFilteringOptions\LogMessageTypeFilteringOptions.cs" />
     <Compile Include="Messages\WriterDecorators\MessageTypeFilterDecorator.cs" />
     <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />

@@ -19,7 +19,7 @@ namespace mRemoteNGTests.Credential
         public void CanAddCredentialList()
         {
             var credential = Substitute.For<ICredentialRecord>();
-            var credList = new CredentialListBase(Substitute.For<ICredentialProvider>()) {credential};
+            var credList = new CredentialListBase(Substitute.For<ICredentialRepository>()) {credential};
             _credentialRecordCatalog.AddCredentialList(credList);
             Assert.That(_credentialRecordCatalog.CredentialRecords, Does.Contain(credential));
         }
@@ -28,9 +28,9 @@ namespace mRemoteNGTests.Credential
         public void CanRemoveCredentialList()
         {
             var credential1 = Substitute.For<ICredentialRecord>();
-            var credList1 = new CredentialListBase(Substitute.For<ICredentialProvider>()) { credential1 };
+            var credList1 = new CredentialListBase(Substitute.For<ICredentialRepository>()) { credential1 };
             var credential2 = Substitute.For<ICredentialRecord>();
-            var credList2 = new CredentialListBase(Substitute.For<ICredentialProvider>()) { credential2 };
+            var credList2 = new CredentialListBase(Substitute.For<ICredentialRepository>()) { credential2 };
             _credentialRecordCatalog.AddCredentialList(credList1);
             _credentialRecordCatalog.AddCredentialList(credList2);
             _credentialRecordCatalog.RemoveCredentialList(credList1);
@@ -40,7 +40,7 @@ namespace mRemoteNGTests.Credential
         [Test]
         public void RemovingACredentialListThatIsntAddedDoesNothing()
         {
-            var credList1 = new CredentialListBase(Substitute.For<ICredentialProvider>());
+            var credList1 = new CredentialListBase(Substitute.For<ICredentialRepository>());
             _credentialRecordCatalog.RemoveCredentialList(credList1);
             Assert.That(_credentialRecordCatalog.CredentialRecords, Is.Empty);
         }

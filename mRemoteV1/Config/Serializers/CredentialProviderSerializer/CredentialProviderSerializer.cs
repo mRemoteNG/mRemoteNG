@@ -8,7 +8,7 @@ namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
 {
     public class CredentialProviderSerializer
     {
-        public string Serialize(IEnumerable<ICredentialProvider> credentialProviderCatalog)
+        public string Serialize(IEnumerable<ICredentialRepository> credentialProviderCatalog)
         {
             var xmlDocument = new XDocument(new XDeclaration("1.0", "utf-8", ""));
             var rootElement = new XElement(XName.Get("CredentialProviders"));
@@ -22,11 +22,11 @@ namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
             return string.Concat(declaration, Environment.NewLine, documentBody);
         }
 
-        private XElement SerializeCredentialProvider(ICredentialProvider provider)
+        private XElement SerializeCredentialProvider(ICredentialRepository provider)
         {
             var element = new XElement(XName.Get("Provider"));
-            element.Add(new XAttribute(XName.Get("Id"), provider.Id));
-            element.Add(new XAttribute(XName.Get("Name"), provider.Name));
+            element.Add(new XAttribute(XName.Get("Id"), provider.Config.Id));
+            element.Add(new XAttribute(XName.Get("Name"), provider.Config.Name));
             return element;
         }
     }

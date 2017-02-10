@@ -17,11 +17,11 @@ namespace mRemoteNGTests.Config.Serializers
             _credentialProviderSerializer = new CredentialProviderSerializer();
         }
 
-        private ICredentialProvider InitializeMockProvider()
+        private ICredentialRepository InitializeMockProvider()
         {
-            var provider = Substitute.For<ICredentialProvider>();
-            provider.Name.Returns("ProviderName");
-            provider.Id.Returns(Guid.NewGuid());
+            var provider = Substitute.For<ICredentialRepository>();
+            provider.Config.Name.Returns("ProviderName");
+            provider.Config.Id.Returns(Guid.NewGuid());
             return provider;
         }
 

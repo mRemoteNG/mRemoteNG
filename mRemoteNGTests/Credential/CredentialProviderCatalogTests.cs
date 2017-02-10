@@ -24,7 +24,7 @@ namespace mRemoteNGTests.Credential
         [Test]
         public void ProviderIsInListAfterBeingAdded()
         {
-            var provider = Substitute.For<ICredentialProvider>();
+            var provider = Substitute.For<ICredentialRepository>();
             _credentialCatalog.AddProvider(provider);
             Assert.That(_credentialCatalog.CredentialProviders, Does.Contain(provider));
         }
@@ -32,8 +32,8 @@ namespace mRemoteNGTests.Credential
         [Test]
         public void ProviderNotInListAfterBeingRemoved()
         {
-            var provider1 = Substitute.For<ICredentialProvider>();
-            var provider2 = Substitute.For<ICredentialProvider>();
+            var provider1 = Substitute.For<ICredentialRepository>();
+            var provider2 = Substitute.For<ICredentialRepository>();
             _credentialCatalog.AddProvider(provider1);
             _credentialCatalog.AddProvider(provider2);
             _credentialCatalog.RemoveProvider(provider1);
@@ -43,7 +43,7 @@ namespace mRemoteNGTests.Credential
         [Test]
         public void RemoveProviderThatIsntInTheList()
         {
-            _credentialCatalog.RemoveProvider(Substitute.For<ICredentialProvider>());
+            _credentialCatalog.RemoveProvider(Substitute.For<ICredentialRepository>());
             Assert.That(_credentialCatalog.CredentialProviders, Is.Empty);
         }
     }

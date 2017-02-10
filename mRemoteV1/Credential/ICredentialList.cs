@@ -6,7 +6,7 @@ namespace mRemoteNG.Credential
 {
     public interface ICredentialList : IList<ICredentialRecord>
     {
-        ICredentialProvider CredentialProvider { get; }
+        ICredentialRepository CredentialProvider { get; }
 
         ICredentialRecord GetCredential(Guid uniqueId);
 

@@ -6,22 +6,22 @@ namespace mRemoteNG.Credential
 {
     public class CredentialProviderCatalog : ICredentialProviderCatalog
     {
-        private readonly List<ICredentialProvider> _credentialProviders = new List<ICredentialProvider>();
+        private readonly List<ICredentialRepository> _credentialProviders = new List<ICredentialRepository>();
 
-        public IEnumerable<ICredentialProvider> CredentialProviders => _credentialProviders;
+        public IEnumerable<ICredentialRepository> CredentialProviders => _credentialProviders;
 
 
-        public void AddProvider(ICredentialProvider credentialProvider)
+        public void AddProvider(ICredentialRepository credentialProvider)
         {
             _credentialProviders.Add(credentialProvider);
         }
 
-        public void RemoveProvider(ICredentialProvider credentialProvider)
+        public void RemoveProvider(ICredentialRepository credentialProvider)
         {
             _credentialProviders.Remove(credentialProvider);
         }
 
-        public IEnumerator<ICredentialProvider> GetEnumerator()
+        public IEnumerator<ICredentialRepository> GetEnumerator()
         {
             return _credentialProviders.GetEnumerator();
         }

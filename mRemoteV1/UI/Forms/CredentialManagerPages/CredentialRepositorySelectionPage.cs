@@ -11,13 +11,13 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         public string PageName { get; } = "add repo";
         public Image PageIcon { get; }
 
-        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialProvider>> selectionTargets)
+        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepository>> selectionTargets)
         {
             InitializeComponent();
             SetupListView(selectionTargets);
         }
 
-        private void SetupListView(IEnumerable<ISelectionTarget<ICredentialProvider>> selectionTargets)
+        private void SetupListView(IEnumerable<ISelectionTarget<ICredentialRepository>> selectionTargets)
         {
             olvColumnName.ImageGetter = ImageGetter;
             objectListView.SetObjects(selectionTargets);
@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private object ImageGetter(object rowObject)
         {
-            var selection = rowObject as ISelectionTarget<ICredentialProvider>;
+            var selection = rowObject as ISelectionTarget<ICredentialRepository>;
             if (selection == null) return "";
             var imgHash = selection.Image.GetHashCode().ToString();
             if (!objectListView.LargeImageList.Images.ContainsKey(imgHash))

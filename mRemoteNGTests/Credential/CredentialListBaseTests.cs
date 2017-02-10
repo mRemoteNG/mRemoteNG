@@ -10,12 +10,12 @@ namespace mRemoteNGTests.Credential
     public class CredentialListBaseTests
     {
         private CredentialListBase _credentialList;
-        private ICredentialProvider _mockCredentialProvider;
+        private ICredentialRepository _mockCredentialProvider;
 
         [SetUp]
         public void Setup()
         {
-            _mockCredentialProvider = Substitute.For<ICredentialProvider>();
+            _mockCredentialProvider = Substitute.For<ICredentialRepository>();
             _credentialList = new CredentialListBase(_mockCredentialProvider);
         }
 

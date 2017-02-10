@@ -7,9 +7,9 @@ namespace mRemoteNG.Credential
 {
     public class CredentialListBase : List<ICredentialRecord>, ICredentialList
     {
-        public ICredentialProvider CredentialProvider { get; }
+        public ICredentialRepository CredentialProvider { get; }
 
-        public CredentialListBase(ICredentialProvider credentialProvider)
+        public CredentialListBase(ICredentialRepository credentialProvider)
         {
             CredentialProvider = credentialProvider;
         }
