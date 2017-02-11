@@ -15,6 +15,12 @@ namespace mRemoteNG.UI.Controls
         {
         }
 
+        public PageSequence(Control pageContainer, params Control[] pages) : this(pageContainer, new List<Control>())
+        {
+            foreach (var page in pages)
+                Pages.Add(page);
+        }
+
         public PageSequence(Control pageContainer, IList<Control> pages)
         {
             if (pageContainer == null)
