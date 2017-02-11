@@ -1,4 +1,6 @@
-﻿using mRemoteNG.Credential;
+﻿using System;
+using System.Linq;
+using mRemoteNG.Credential;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -16,13 +18,13 @@ namespace mRemoteNGTests.Credential
         }
 
         [Test]
-        public void ProviderListIsInitiallyEmpty()
+        public void RepositoryListIsInitiallyEmpty()
         {
             Assert.That(_credentialCatalog.CredentialProviders, Is.Empty);
         }
 
         [Test]
-        public void ProviderIsInListAfterBeingAdded()
+        public void RepositoryIsInListAfterBeingAdded()
         {
             var provider = Substitute.For<ICredentialRepository>();
             _credentialCatalog.AddProvider(provider);
@@ -30,10 +32,25 @@ namespace mRemoteNGTests.Credential
         }
 
         [Test]
-        public void ProviderNotInListAfterBeingRemoved()
+        public void WillNotAddDuplicateRepositories()
         {
             var provider1 = Substitute.For<ICredentialRepository>();
             var provider2 = Substitute.For<ICredentialRepository>();
+            var id = Guid.NewGuid();
+            provider1.Config.Id.Returns(id);
+            provider2.Config.Id.Returns(id);
+            _credentialCatalog.AddProvider(provider1);
+            _credentialCatalog.AddProvider(provider2);
+            Assert.That(_credentialCatalog.CredentialProviders.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void RepositoryNotInListAfterBeingRemoved()
+        {
+            var provider1 = Substitute.For<ICredentialRepository>();
+            provider1.Config.Id.Returns(Guid.NewGuid());
+            var provider2 = Substitute.For<ICredentialRepository>();
+            provider2.Config.Id.Returns(Guid.NewGuid());
             _credentialCatalog.AddProvider(provider1);
             _credentialCatalog.AddProvider(provider2);
             _credentialCatalog.RemoveProvider(provider1);
@@ -41,7 +58,7 @@ namespace mRemoteNGTests.Credential
         }
 
         [Test]
-        public void RemoveProviderThatIsntInTheList()
+        public void TryingToRemoveRepositoryThatIsntInTheListDoesNothing()
         {
             _credentialCatalog.RemoveProvider(Substitute.For<ICredentialRepository>());
             Assert.That(_credentialCatalog.CredentialProviders, Is.Empty);
