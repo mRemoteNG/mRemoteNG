@@ -9,6 +9,6 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelector
     {
         public string Text { get; set; } = "XML";
         public Image Image { get; } = Resources.xml;
-        public ICredentialRepositoryConfig Config { get; } = new CredentialRepositoryConfig("XML");
+        public ICredentialRepositoryConfig Config { get; } = new CredentialRepositoryConfig {TypeName = "Xml"};
     }
 }

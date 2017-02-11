@@ -13,6 +13,7 @@ using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Serializers.CredentialProviderSerializer;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -137,7 +138,7 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            var repoFilePath = "";
+            var repoFilePath = @"C:\Users\David\Documents\Repositories\mRemoteNG\mRemoteV1\bin\Debug Portable\credentialRepositories.xml";
             var credRepoListLoader = new CredentialRepositoryListLoader(new FileDataProvider(repoFilePath), new CredentialRepositoryListDeserializer());
             foreach (var repository in credRepoListLoader.Load())
                 Runtime.CredentialProviderCatalog.AddProvider(repository);

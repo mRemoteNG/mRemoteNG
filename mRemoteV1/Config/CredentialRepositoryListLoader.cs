@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Serializers.CredentialProviderSerializer;
 using mRemoteNG.Credential;
 
 namespace mRemoteNG.Config

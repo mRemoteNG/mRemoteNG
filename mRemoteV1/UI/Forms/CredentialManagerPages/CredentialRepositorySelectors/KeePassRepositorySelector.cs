@@ -9,6 +9,6 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelector
     {
         public string Text { get; set; } = "KeePass";
         public Image Image { get; } = Resources.keepass_32x32;
-        public ICredentialRepositoryConfig Config { get; } = new CredentialRepositoryConfig("KeePass");
+        public ICredentialRepositoryConfig Config { get; } = new CredentialRepositoryConfig {TypeName = "KeePass"};
     }
 }

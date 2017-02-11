@@ -9,15 +9,21 @@ namespace mRemoteNG.Credential.Repositories
     {
         public static ICredentialRepository Build(XElement repositoryXElement)
         {
-            if (repositoryXElement.Name.LocalName == "")
+            var typeName = repositoryXElement.Attribute("TypeName")?.Value;
+            if (typeName == "Xml")
                 return BuildXmlRepository(repositoryXElement);
             throw new Exception("Could not build repository for the specified type");
         }
 
         private static ICredentialRepository BuildXmlRepository(XElement repositoryXElement)
         {
-            var config = new CredentialRepositoryConfig(repositoryXElement.Name.LocalName)
+            var stringId = repositoryXElement.Attribute("Id")?.Value;
+            Guid id;
+            Guid.TryParse(stringId, out id);
+            if (id.Equals(Guid.Empty)) id = Guid.NewGuid();
+            var config = new CredentialRepositoryConfig(id)
             {
+                TypeName = repositoryXElement.Attribute("TypeName")?.Value,
                 Source = repositoryXElement.Attribute("Source")?.Value
             };
             var dataProvider = new FileDataProvider("");
