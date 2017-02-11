@@ -32,6 +32,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
         {
             txtboxId.Text = _repositoryConfig.Id.ToString();
             textBoxFilePath.Text = _repositoryConfig.Source;
+            newPasswordBoxes.SetPassword(_repositoryConfig.Key);
         }
 
         private void SaveValuesToConfig(object sender, EventArgs eventArgs)

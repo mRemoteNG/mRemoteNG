@@ -50,6 +50,13 @@ namespace mRemoteNG.UI.Controls
             secureTextBox2.TextChanged += OnSecureTextBoxTextChanged;
         }
 
+        public void SetPassword(SecureString password)
+        {
+            var text = password.ConvertToUnsecureString();
+            secureTextBox1.Text = text;
+            secureTextBox2.Text = text;
+        }
+
         private bool Verify()
         {
             return secureTextBox1.SecureString.Length == secureTextBox2.SecureString.Length &&
