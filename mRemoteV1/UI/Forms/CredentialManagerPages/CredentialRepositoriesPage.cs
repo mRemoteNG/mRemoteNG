@@ -41,6 +41,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             var selectedRepository = objectListView1.SelectedObject as ICredentialRepository;
             buttonRemove.Enabled = selectedRepository != null;
+            buttonEdit.Enabled = selectedRepository != null;
         }
 
         private void UpdateList()
@@ -71,10 +72,10 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             var selectedRepository = objectListView1.SelectedObject as ICredentialRepository;
             if (selectedRepository == null) return;
-            var nextPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(selectedRepository.Config, _providerCatalog);
+            var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(selectedRepository.Config, _providerCatalog);
             var pageSequence = new PageSequence(Parent,
                 this,
-                nextPage,
+                editorPage,
                 this
             );
             RaiseNextPageEvent();

@@ -110,6 +110,7 @@
             // buttonEdit
             // 
             this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEdit.Enabled = false;
             this.buttonEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonEdit.Location = new System.Drawing.Point(210, 269);
             this.buttonEdit.Name = "buttonEdit";
