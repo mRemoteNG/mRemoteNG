@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace mRemoteNG.Credential
 {
-    public interface ICredentialRepositoryList : IEnumerable<ICredentialRepository>
+    public interface ICredentialRepositoryList : IEnumerable<ICredentialRepository>, INotifyCollectionChanged
     {
         IEnumerable<ICredentialRepository> CredentialProviders { get; }
 

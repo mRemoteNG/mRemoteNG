@@ -27,6 +27,14 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void SetupObjectListView()
         {
+            olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Name;
+            olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Source;
+            objectListView1.SetObjects(_providerCatalog.CredentialProviders);
+            _providerCatalog.CollectionChanged += (sender, args) => UpdateList();
+        }
+
+        private void UpdateList()
+        {
             objectListView1.SetObjects(_providerCatalog.CredentialProviders);
         }
 

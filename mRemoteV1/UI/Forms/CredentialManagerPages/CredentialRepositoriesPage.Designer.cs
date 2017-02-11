@@ -31,7 +31,6 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnProvider = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
@@ -65,7 +64,6 @@
             // 
             // objectListView1
             // 
-            this.objectListView1.AllColumns.Add(this.olvColumnName);
             this.objectListView1.AllColumns.Add(this.olvColumnProvider);
             this.objectListView1.AllColumns.Add(this.olvColumnSource);
             this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -73,7 +71,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView1.CellEditUseWholeCell = false;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumnName,
             this.olvColumnProvider,
             this.olvColumnSource});
             this.objectListView1.CopySelectionOnControlC = false;
@@ -91,15 +88,9 @@
             this.objectListView1.UseNotifyPropertyChanged = true;
             this.objectListView1.View = System.Windows.Forms.View.Details;
             // 
-            // olvColumnName
-            // 
-            this.olvColumnName.AspectName = "Name";
-            this.olvColumnName.FillsFreeSpace = true;
-            this.olvColumnName.Groupable = false;
-            this.olvColumnName.Text = "Name";
-            // 
             // olvColumnProvider
             // 
+            this.olvColumnProvider.AspectName = "";
             this.olvColumnProvider.FillsFreeSpace = true;
             this.olvColumnProvider.Groupable = false;
             this.olvColumnProvider.Hideable = false;
@@ -109,6 +100,7 @@
             // 
             // olvColumnSource
             // 
+            this.olvColumnSource.AspectName = "";
             this.olvColumnSource.FillsFreeSpace = true;
             this.olvColumnSource.Groupable = false;
             this.olvColumnSource.Text = "Source";
@@ -132,7 +124,6 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonRemove;
         private BrightIdeasSoftware.ObjectListView objectListView1;
-        private BrightIdeasSoftware.OLVColumn olvColumnName;
         private BrightIdeasSoftware.OLVColumn olvColumnProvider;
         private BrightIdeasSoftware.OLVColumn olvColumnSource;
     }

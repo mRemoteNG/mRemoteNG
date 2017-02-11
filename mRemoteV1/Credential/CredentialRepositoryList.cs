@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 
 namespace mRemoteNG.Credential
@@ -14,11 +15,13 @@ namespace mRemoteNG.Credential
         public void AddProvider(ICredentialRepository credentialProvider)
         {
             _credentialProviders.Add(credentialProvider);
+            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { credentialProvider });
         }
 
         public void RemoveProvider(ICredentialRepository credentialProvider)
         {
             _credentialProviders.Remove(credentialProvider);
+            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Remove, new[] {credentialProvider});
         }
 
         public IEnumerator<ICredentialRepository> GetEnumerator()
@@ -29,6 +32,13 @@ namespace mRemoteNG.Credential
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        private void RaiseCollectionChangedEvent(NotifyCollectionChangedAction action, IList items)
+        {
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, items));
         }
     }
 }
