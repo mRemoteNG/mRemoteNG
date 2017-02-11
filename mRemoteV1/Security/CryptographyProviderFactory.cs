@@ -9,6 +9,11 @@ namespace mRemoteNG.Security
 {
     public class CryptographyProviderFactory
     {
+        public static ICryptographyProvider BuildCryptographyProviderFromSettings()
+        {
+            return new CryptographyProviderFactory().CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
+        }
+
         public ICryptographyProvider CreateAeadCryptographyProvider(BlockCipherEngines engine, BlockCipherModes mode)
         {
             var cipherEngine = ChooseBlockCipherEngine(engine);

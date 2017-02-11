@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Credential.Repositories
 {
@@ -26,8 +26,9 @@ namespace mRemoteNG.Credential.Repositories
                 TypeName = repositoryXElement.Attribute("TypeName")?.Value,
                 Source = repositoryXElement.Attribute("Source")?.Value
             };
-            var dataProvider = new FileDataProvider("");
-            return new XmlCredentialRepository(config, dataProvider, new XmlCredentialDeserializer());
+            var dataProvider = new FileDataProvider(config.Source);
+            var cryptoProvider = CryptographyProviderFactory.BuildCryptographyProviderFromSettings();
+            return new XmlCredentialRepository(config, dataProvider, cryptoProvider);
         }
     }
 }

@@ -4,6 +4,7 @@ using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Security;
 using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
@@ -57,8 +58,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             if (!_repositoryList.Contains(_repositoryConfig.Id))
             {
                 var dataProvider = new FileDataProvider(_repositoryConfig.Source);
-                var deserializer = new XmlCredentialDeserializer();
-                var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, deserializer);
+                var cryptoProvider = CryptographyProviderFactory.BuildCryptographyProviderFromSettings();
+                var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, cryptoProvider);
                 _repositoryList.AddProvider(repository);
             }
             RaiseNextPageEvent();
