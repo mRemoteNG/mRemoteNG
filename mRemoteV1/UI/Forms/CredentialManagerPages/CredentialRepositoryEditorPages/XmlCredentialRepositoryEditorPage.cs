@@ -45,6 +45,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 
         private void buttonBrowseFiles_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(_repositoryConfig.Source))
+                selectFilePathDialog.FileName = _repositoryConfig.Source;
             var dialogResult = selectFilePathDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
@@ -54,12 +56,18 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
+            if (!AllRequiredFieldsFilledOut()) return;
             var dataProvider = new FileDataProvider(_repositoryConfig.Source);
             var deserializer = new XmlCredentialDeserializer();
             var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, deserializer);
             if (!_repositoryList.Contains(repository))
                 _repositoryList.AddProvider(repository);
             _pageSequence.Next();
+        }
+
+        private bool AllRequiredFieldsFilledOut()
+        {
+            return newPasswordBoxes.PasswordsMatch && !string.IsNullOrEmpty(selectFilePathDialog.FileName);
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
