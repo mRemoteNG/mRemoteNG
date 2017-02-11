@@ -11,7 +11,9 @@ namespace mRemoteNG.Security
     {
         public static ICryptographyProvider BuildCryptographyProviderFromSettings()
         {
-            return new CryptographyProviderFactory().CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
+            var provider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
+            provider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
+            return provider;
         }
 
         public ICryptographyProvider CreateAeadCryptographyProvider(BlockCipherEngines engine, BlockCipherModes mode)

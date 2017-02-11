@@ -38,6 +38,16 @@ namespace mRemoteNG.Credential
             return _credentialProviders.Any(repo => repo.Config.Id == repositoryId);
         }
 
+        public IEnumerable<ICredentialRecord> GetCredentialRecords()
+        {
+            var list = new List<ICredentialRecord>();
+            foreach (var repository in CredentialProviders)
+            {
+                list.AddRange(repository.CredentialRecords);
+            }
+            return list;
+        }
+
         public IEnumerator<ICredentialRepository> GetEnumerator()
         {
             return _credentialProviders.GetEnumerator();

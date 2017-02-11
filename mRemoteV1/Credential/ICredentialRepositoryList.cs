@@ -13,5 +13,7 @@ namespace mRemoteNG.Credential
         void RemoveProvider(ICredentialRepository credentialProvider);
 
         bool Contains(Guid repositoryId);
+
+        IEnumerable<ICredentialRecord> GetCredentialRecords();
     }
 }

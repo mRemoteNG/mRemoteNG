@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.CredentialProviderSerializer;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
-using mRemoteNG.Messages;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Tools;
@@ -17,15 +19,16 @@ namespace mRemoteNG.App.Initialization
 {
     public class CredsAndConsSetup
     {
-        private readonly CredentialManager _credentialManager;
+        private readonly string _credentialRepoListPath = Path.Combine(SettingsFileInfo.SettingsPath, "credentialRepositories.xml");
+        private readonly ICredentialRepositoryList _credentialRepositoryList;
         private readonly string _credentialFilePath;
 
-        public CredsAndConsSetup(CredentialManager credentialManager, string credentialFilePath)
+        public CredsAndConsSetup(ICredentialRepositoryList credentialRepositoryList, string credentialFilePath)
         {
-            if (credentialManager == null)
-                throw new ArgumentNullException(nameof(credentialManager));
+            if (credentialRepositoryList == null)
+                throw new ArgumentNullException(nameof(credentialRepositoryList));
 
-            _credentialManager = credentialManager;
+            _credentialRepositoryList = credentialRepositoryList;
             _credentialFilePath = credentialFilePath;
         }
 
@@ -36,8 +39,7 @@ namespace mRemoteNG.App.Initialization
 
             var upgradeMap = UpgradeUserFilesForCredentialManager();
 
-            LoadCredentials(_credentialManager);
-            _credentialManager.CredentialsChanged += (o, args) => SaveCredentialList(_credentialManager.GetCredentialRecords());
+            LoadCredentials();
             LoadDefaultConnectionCredentials();
             Runtime.LoadConnections();
 
@@ -64,7 +66,18 @@ namespace mRemoteNG.App.Initialization
                 throw new Exception("Could not authenticate");
 
             var credentialHarvester = new CredentialHarvester();
-            SaveCredentialList(credentialHarvester.Harvest(xdoc, auth.LastAuthenticatedPassword));
+            var harvestedCredentials = credentialHarvester.Harvest(xdoc, auth.LastAuthenticatedPassword);
+
+            var newCredentialRepository = new XmlCredentialRepository(
+                new CredentialRepositoryConfig(),
+                new FileDataProvider(_credentialFilePath),
+                CryptographyProviderFactory.BuildCryptographyProviderFromSettings()
+            );
+
+            foreach (var credential in harvestedCredentials)
+                newCredentialRepository.CredentialRecords.Add(credential);
+
+            _credentialRepositoryList.AddProvider(newCredentialRepository);
             return credentialHarvester.ConnectionToCredentialMap;
         }
 
@@ -74,31 +87,20 @@ namespace mRemoteNG.App.Initialization
             adapter.EnsureElementsHaveIds(xdoc);
         }
 
-        private void LoadCredentials(CredentialManager credentialManager)
+        private void LoadCredentials()
         {
-            var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
-            credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()));
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
-        }
-
-        private void SaveCredentialList(IEnumerable<ICredentialRecord> records)
-        {
-            var engineFromSettings = Settings.Default.EncryptionEngine;
-            var modeFromSettings = Settings.Default.EncryptionBlockCipherMode;
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engineFromSettings, modeFromSettings);
-            cryptoProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
-
-            var serializer = new XmlCredentialRecordSerializer(cryptoProvider);
-            var dataProvider = new FileDataProviderWithRollingBackup(_credentialFilePath);
-            var credentialSaver = new CredentialRecordSaver(dataProvider, serializer);
-            credentialSaver.Save(records, "tempEncryptionKey".ConvertToSecureString());
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Saved credentials to file: {_credentialFilePath}");
+            var credRepoListDataProvider = new FileDataProvider(_credentialRepoListPath);
+            var credRepoListLoader = new CredentialRepositoryListLoader(credRepoListDataProvider, new CredentialRepositoryListDeserializer());
+            var credRepoListSaver = new CredentialRepositoryListSaver(credRepoListDataProvider);
+            foreach (var repository in credRepoListLoader.Load())
+                Runtime.CredentialProviderCatalog.AddProvider(repository);
+            Runtime.CredentialProviderCatalog.CollectionChanged += (o, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
         }
 
         private void LoadDefaultConnectionCredentials()
         {
             var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
-            var matchedCredentials = Runtime.CredentialManager.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
+            var matchedCredentials = _credentialRepositoryList.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
             DefaultConnectionInfo.Instance.CredentialRecord = matchedCredentials.Any() ? matchedCredentials.First() : null;
         }
 

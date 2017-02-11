@@ -48,9 +48,6 @@ namespace mRemoteNG.UI.Forms
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
-        private readonly string _credentialRepoListPath = Path.Combine(SettingsFileInfo.SettingsPath, "credentialRepositories.xml");
-        private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
-
 
 
         private FrmMain()
@@ -139,13 +136,6 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            var credRepoListDataProvider = new FileDataProvider(_credentialRepoListPath);
-            var credRepoListLoader = new CredentialRepositoryListLoader(credRepoListDataProvider, new CredentialRepositoryListDeserializer());
-            var credRepoListSaver = new CredentialRepositoryListSaver(credRepoListDataProvider);
-            foreach (var repository in credRepoListLoader.Load())
-                Runtime.CredentialProviderCatalog.AddProvider(repository);
-            Runtime.CredentialProviderCatalog.CollectionChanged += (o, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
-
             msMain.Items.AddRange(new ToolStripItem[]
             {
                 new MainFileMenu(Windows.TreeForm, _connectionInitiator),
@@ -167,7 +157,7 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
-            new CredsAndConsSetup(_credentialManager, _credentialFilePath).LoadCredsAndCons();
+            new CredsAndConsSetup(Runtime.CredentialProviderCatalog, _credentialFilePath).LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
 

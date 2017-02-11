@@ -35,7 +35,7 @@ namespace mRemoteNG.Credential
         {
             if (value is Guid)
             {
-                var matchedCredentials = Runtime.CredentialManager.GetCredentialRecords().Where(record => record.Id.Equals(value)).ToArray();
+                var matchedCredentials = Runtime.CredentialProviderCatalog.GetCredentialRecords().Where(record => record.Id.Equals(value)).ToArray();
                 return matchedCredentials.Any() ? matchedCredentials.First() : null;
             }
             return base.ConvertFrom(context, culture, value);

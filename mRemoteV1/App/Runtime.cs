@@ -49,7 +49,6 @@ namespace mRemoteNG.App
             get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
             set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         }
-        public static CredentialManager CredentialManager { get; } = new CredentialManager();
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
         #endregion
 
@@ -240,7 +239,7 @@ namespace mRemoteNG.App
 
                 // Load config
                 connectionsLoader.ConnectionFileName = filename;
-                ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialManager.GetCredentialRecords(), false);
+                ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialProviderCatalog.GetCredentialRecords(), false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
             }
             catch (Exception ex)
@@ -291,7 +290,7 @@ namespace mRemoteNG.App
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialManager.GetCredentialRecords(), false);
+                ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialProviderCatalog.GetCredentialRecords(), false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
