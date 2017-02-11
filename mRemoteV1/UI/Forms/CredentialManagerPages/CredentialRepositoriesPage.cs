@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
@@ -31,6 +32,13 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Source;
             objectListView1.SetObjects(_providerCatalog.CredentialProviders);
             _providerCatalog.CollectionChanged += (sender, args) => UpdateList();
+            objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
+        }
+
+        private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
+        {
+            var selectedRepository = objectListView1.SelectedObject as ICredentialRepository;
+            buttonRemove.Enabled = selectedRepository != null;
         }
 
         private void UpdateList()
@@ -52,6 +60,14 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             var parent = Parent;
             parent.Controls.Clear();
             parent.Controls.Add(repoSelector);
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            var selectedRepository = objectListView1.SelectedObject as ICredentialRepository;
+            if (selectedRepository == null) return;
+            if (_providerCatalog.Contains(selectedRepository))
+                _providerCatalog.RemoveProvider(selectedRepository);
         }
     }
 }
