@@ -139,6 +139,8 @@
     <Compile Include="Config\CredentialHarvester.cs" />
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
+    <Compile Include="Config\CredentialRepositoryListDeserializer.cs" />
+    <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialProviderSerializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
@@ -217,6 +219,7 @@
     <Compile Include="Credential\ICredentialRepositoryList.cs" />
     <Compile Include="Credential\ICredentialRepository.cs" />
     <Compile Include="Credential\INotifyingCredentialRecord.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepositoryFactory.cs" />
     <Compile Include="Credential\Repositories\ICredentialRepositoryConfig.cs" />
     <Compile Include="Credential\Repositories\XmlCredentialRepository.cs" />
     <Compile Include="Messages\MessageFilteringOptions\LogMessageTypeFilteringOptions.cs" />

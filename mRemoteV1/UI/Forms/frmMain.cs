@@ -11,6 +11,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
@@ -135,6 +136,11 @@ namespace mRemoteNG.UI.Forms
             MessageCollectorSetup.BuildMessageWritersFromSettings(Runtime.MessageWriters);
 
             Startup.Instance.InitializeProgram(messageCollector);
+
+            var repoFilePath = "";
+            var credRepoListLoader = new CredentialRepositoryListLoader(new FileDataProvider(repoFilePath), new CredentialRepositoryListDeserializer());
+            foreach (var repository in credRepoListLoader.Load())
+                Runtime.CredentialProviderCatalog.AddProvider(repository);
 
             msMain.Items.AddRange(new ToolStripItem[]
             {
