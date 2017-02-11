@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Security;
 using System.Windows.Forms;
@@ -8,8 +9,39 @@ namespace mRemoteNG.UI.Controls
 {
     public partial class NewPasswordWithVerification : UserControl
     {
+        private bool _useSystemPasswordChar;
+        private char _passwordChar;
+
+
+        [Browsable(false)]
         public SecureString SecureString { get; private set; }
+
+        [Browsable(false)]
         public bool PasswordsMatch { get; private set; }
+
+        [Browsable(true)]
+        public char PasswordChar
+        {
+            get { return _passwordChar; }
+            set
+            {
+                _passwordChar = value;
+                secureTextBox1.PasswordChar = _passwordChar;
+                secureTextBox2.PasswordChar = _passwordChar;
+            }
+        }
+
+        [Browsable(true)]
+        public bool UseSystemPasswordChar
+        {
+            get { return _useSystemPasswordChar; }
+            set
+            {
+                _useSystemPasswordChar = value;
+                secureTextBox1.UseSystemPasswordChar = _useSystemPasswordChar;
+                secureTextBox2.UseSystemPasswordChar = _useSystemPasswordChar;
+            }
+        }
 
         public NewPasswordWithVerification()
         {

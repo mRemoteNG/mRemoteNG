@@ -136,8 +136,10 @@
             this.newPasswordBoxes.Location = new System.Drawing.Point(32, 154);
             this.newPasswordBoxes.MinimumSize = new System.Drawing.Size(0, 100);
             this.newPasswordBoxes.Name = "newPasswordBoxes";
+            this.newPasswordBoxes.PasswordChar = '\0';
             this.newPasswordBoxes.Size = new System.Drawing.Size(319, 100);
             this.newPasswordBoxes.TabIndex = 13;
+            this.newPasswordBoxes.UseSystemPasswordChar = true;
             // 
             // XmlCredentialRepositoryEditorPage
             // 
