@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 
 
@@ -18,11 +19,16 @@ namespace mRemoteNG.Credential
         {
             if (Contains(credentialProvider.Config.Id)) return;
             _credentialProviders.Add(credentialProvider);
+            credentialProvider.PropertyChanged += CredentialProviderOnPropertyChanged;
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { credentialProvider });
         }
 
+        
+
         public void RemoveProvider(ICredentialRepository credentialProvider)
         {
+            if (!Contains(credentialProvider.Config.Id)) return;
+            credentialProvider.PropertyChanged -= CredentialProviderOnPropertyChanged;
             _credentialProviders.Remove(credentialProvider);
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Remove, new[] {credentialProvider});
         }
@@ -42,8 +48,12 @@ namespace mRemoteNG.Credential
             return GetEnumerator();
         }
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        private void CredentialProviderOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { sender });
+        }
 
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
         private void RaiseCollectionChangedEvent(NotifyCollectionChangedAction action, IList items)
         {
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, items));

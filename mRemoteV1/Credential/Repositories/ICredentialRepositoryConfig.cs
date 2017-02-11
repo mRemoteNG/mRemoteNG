@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Security;
 
 namespace mRemoteNG.Credential.Repositories
 {
-    public interface ICredentialRepositoryConfig
+    public interface ICredentialRepositoryConfig : INotifyPropertyChanged
     {
         Guid Id { get; }
         string TypeName { get; }

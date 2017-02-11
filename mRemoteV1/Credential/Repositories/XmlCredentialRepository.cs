@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
@@ -23,6 +24,7 @@ namespace mRemoteNG.Credential.Repositories
                 throw new ArgumentNullException(nameof(config));
 
             Config = config;
+            Config.PropertyChanged += (sender, args) => RaisePropertyChangedEvent(args);
             _dataProvider = dataProvider;
             _deserializer = deserializer;
         }
@@ -31,6 +33,12 @@ namespace mRemoteNG.Credential.Repositories
         {
             var serializedCredentials = _dataProvider.Load();
             return _deserializer.Deserialize(serializedCredentials, decryptionKey);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void RaisePropertyChangedEvent(PropertyChangedEventArgs args)
+        {
+            PropertyChanged?.Invoke(this, args);
         }
     }
 }
