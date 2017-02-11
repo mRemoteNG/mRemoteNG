@@ -48,6 +48,7 @@ namespace mRemoteNG.UI.Forms
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
+        private readonly string _credentialRepoListPath = Path.Combine(SettingsFileInfo.SettingsPath, "credentialRepositories.xml");
         private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
 
 
@@ -138,8 +139,7 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            var repoFilePath = @"C:\Users\David\Documents\Repositories\mRemoteNG\mRemoteV1\bin\Debug Portable\credentialRepositories.xml";
-            var credRepoListLoader = new CredentialRepositoryListLoader(new FileDataProvider(repoFilePath), new CredentialRepositoryListDeserializer());
+            var credRepoListLoader = new CredentialRepositoryListLoader(new FileDataProvider(_credentialRepoListPath), new CredentialRepositoryListDeserializer());
             foreach (var repository in credRepoListLoader.Load())
                 Runtime.CredentialProviderCatalog.AddProvider(repository);
 
