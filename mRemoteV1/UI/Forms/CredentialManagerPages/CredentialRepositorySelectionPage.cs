@@ -50,13 +50,18 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             var listItem = objectListView.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
             var clickedNode = listItem.RowObject as ISelectionTarget<ICredentialRepositoryConfig>;
             if (clickedNode == null) return;
-            BuildEditorPage(clickedNode);
+            NextPage(clickedNode);
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
             var selection = objectListView.SelectedObject as ISelectionTarget<ICredentialRepositoryConfig>;
             if (selection == null) return;
+            NextPage(selection);
+        }
+
+        private void NextPage(ISelectionTarget<ICredentialRepositoryConfig> selection)
+        {
             var editorPage = BuildEditorPage(selection);
             RaisePageReplacementEvent(editorPage, RelativePagePosition.NextPage);
             RaiseNextPageEvent();
