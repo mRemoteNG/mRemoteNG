@@ -9,14 +9,21 @@ namespace mRemoteNG.UI.Controls
         private readonly Control _pageContainer;
         private int _currentPageIndex;
 
-        public IList<Control> Pages { get; set; } = new List<Control>();
+        public IList<Control> Pages { get; set; }
 
-        public PageSequence(Control pageContainer)
+        public PageSequence(Control pageContainer) : this(pageContainer, new List<Control>())
+        {
+        }
+
+        public PageSequence(Control pageContainer, IList<Control> pages)
         {
             if (pageContainer == null)
                 throw new ArgumentNullException(nameof(pageContainer));
+            if (pages == null)
+                throw new ArgumentNullException(nameof(pages));
 
             _pageContainer = pageContainer;
+            Pages = pages;
         }
 
         public void Next()
