@@ -219,7 +219,6 @@
     <Compile Include="Credential\ICredentialRecord.cs" />
     <Compile Include="Credential\ICredentialRepositoryList.cs" />
     <Compile Include="Credential\ICredentialRepository.cs" />
-    <Compile Include="Credential\INotifyingCredentialRecord.cs" />
     <Compile Include="Credential\Repositories\CredentialRepositoryFactory.cs" />
     <Compile Include="Credential\Repositories\ICredentialRepositoryConfig.cs" />
     <Compile Include="Credential\Repositories\XmlCredentialRepository.cs" />

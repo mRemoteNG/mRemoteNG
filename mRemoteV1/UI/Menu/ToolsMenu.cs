@@ -2,11 +2,8 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
-using mRemoteNG.Credential.Repositories;
-using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.CredentialManagerPages;
-using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelectors;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -20,14 +17,12 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsUvncsc;
         private ToolStripMenuItem _mMenToolsComponentsCheck;
         private ToolStripMenuItem _credentialManagerToolStripMenuItem;
-        private readonly CredentialManager _credentialManager;
         private readonly ICredentialRepositoryList _credentialProviderCatalog;
         private readonly Form _form;
 
-        public ToolsMenu(Form form, CredentialManager credentialManager, ICredentialRepositoryList credentialProviderCatalog)
+        public ToolsMenu(Form form, ICredentialRepositoryList credentialProviderCatalog)
         {
             _form = form;
-            _credentialManager = credentialManager;
             _credentialProviderCatalog = credentialProviderCatalog;
             Initialize();
         }
@@ -127,7 +122,7 @@ namespace mRemoteNG.UI.Menu
         {
             var pages = new UserControl[]
             {
-                new CredentialListPage(_credentialManager)
+                new CredentialListPage(_credentialProviderCatalog)
                 {
                     DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
                 },

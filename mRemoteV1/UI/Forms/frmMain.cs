@@ -150,7 +150,7 @@ namespace mRemoteNG.UI.Forms
             {
                 new MainFileMenu(Windows.TreeForm, _connectionInitiator),
                 new ViewMenu(_externalToolsToolStrip, _quickConnectToolStrip, _fullscreen, this),
-                new ToolsMenu(this, _credentialManager, Runtime.CredentialProviderCatalog),
+                new ToolsMenu(this, Runtime.CredentialProviderCatalog),
                 new HelpMenu()
             });
 

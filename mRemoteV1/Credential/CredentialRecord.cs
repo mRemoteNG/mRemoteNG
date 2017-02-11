@@ -5,7 +5,7 @@ using System.Security;
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialRecord : INotifyingCredentialRecord
+    public class CredentialRecord : ICredentialRecord
     {
         private string _title = "New Credential";
         private string _username = "";

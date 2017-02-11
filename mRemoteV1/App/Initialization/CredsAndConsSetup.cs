@@ -77,7 +77,7 @@ namespace mRemoteNG.App.Initialization
         private void LoadCredentials(CredentialManager credentialManager)
         {
             var credentialLoader = new CredentialRecordLoader(new FileDataProvider(_credentialFilePath), new XmlCredentialDeserializer());
-            credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()).Cast<INotifyingCredentialRecord>());
+            credentialManager.AddRange(credentialLoader.Load("tempEncryptionKey".ConvertToSecureString()));
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Loaded credentials from file: {_credentialFilePath}", true);
         }
 

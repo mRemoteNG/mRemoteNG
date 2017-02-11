@@ -7,21 +7,21 @@ namespace mRemoteNG.Credential
 {
     public class CredentialManager
     {
-        private readonly IList<INotifyingCredentialRecord> _credentialRecords;
+        private readonly IList<ICredentialRecord> _credentialRecords;
 
         public CredentialManager()
         {
-            _credentialRecords = new List<INotifyingCredentialRecord>();
+            _credentialRecords = new List<ICredentialRecord>();
         }
 
-        public void Add(INotifyingCredentialRecord credentialRecord)
+        public void Add(ICredentialRecord credentialRecord)
         {
             _credentialRecords.Add(credentialRecord);
             credentialRecord.PropertyChanged += CredentialOnPropertyChanged;
             RaiseCredentialsChangedEvent(this);
         }
 
-        public void AddRange(IEnumerable<INotifyingCredentialRecord> credentialRecords)
+        public void AddRange(IEnumerable<ICredentialRecord> credentialRecords)
         {
             foreach (var credential in credentialRecords)
             {
@@ -31,14 +31,14 @@ namespace mRemoteNG.Credential
             RaiseCredentialsChangedEvent(this);
         }
 
-        public void Remove(INotifyingCredentialRecord credentialRecord)
+        public void Remove(ICredentialRecord credentialRecord)
         {
             _credentialRecords.Remove(credentialRecord);
             credentialRecord.PropertyChanged -= CredentialOnPropertyChanged;
             RaiseCredentialsChangedEvent(this);
         }
 
-        public IEnumerable<INotifyingCredentialRecord> GetCredentialRecords()
+        public IEnumerable<ICredentialRecord> GetCredentialRecords()
         {
             return _credentialRecords;
         }

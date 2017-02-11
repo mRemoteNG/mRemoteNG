@@ -34,22 +34,28 @@
             this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
+            this.olvColumnSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnCredentialId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
             // objectListView1
             // 
+            this.objectListView1.AllColumns.Add(this.olvColumnCredentialId);
             this.objectListView1.AllColumns.Add(this.olvColumnTitle);
             this.objectListView1.AllColumns.Add(this.olvColumnUsername);
             this.objectListView1.AllColumns.Add(this.olvColumnDomain);
+            this.objectListView1.AllColumns.Add(this.olvColumnSource);
             this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView1.CellEditUseWholeCell = false;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumnCredentialId,
             this.olvColumnTitle,
             this.olvColumnUsername,
-            this.olvColumnDomain});
+            this.olvColumnDomain,
+            this.olvColumnSource});
             this.objectListView1.CopySelectionOnControlC = false;
             this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
             this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -111,6 +117,17 @@
             this.buttonRemove.UseVisualStyleBackColor = true;
             this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
+            // olvColumnSource
+            // 
+            this.olvColumnSource.Text = "Source";
+            // 
+            // olvColumnCredentialId
+            // 
+            this.olvColumnCredentialId.AspectName = "Id";
+            this.olvColumnCredentialId.IsEditable = false;
+            this.olvColumnCredentialId.IsVisible = false;
+            this.olvColumnCredentialId.Text = "Credential ID";
+            // 
             // CredentialListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -133,5 +150,7 @@
         private BrightIdeasSoftware.OLVColumn olvColumnDomain;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonRemove;
+        private BrightIdeasSoftware.OLVColumn olvColumnCredentialId;
+        private BrightIdeasSoftware.OLVColumn olvColumnSource;
     }
 }
