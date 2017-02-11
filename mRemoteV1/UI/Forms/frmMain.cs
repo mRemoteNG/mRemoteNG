@@ -139,9 +139,12 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            var credRepoListLoader = new CredentialRepositoryListLoader(new FileDataProvider(_credentialRepoListPath), new CredentialRepositoryListDeserializer());
+            var credRepoListDataProvider = new FileDataProvider(_credentialRepoListPath);
+            var credRepoListLoader = new CredentialRepositoryListLoader(credRepoListDataProvider, new CredentialRepositoryListDeserializer());
+            var credRepoListSaver = new CredentialRepositoryListSaver(credRepoListDataProvider);
             foreach (var repository in credRepoListLoader.Load())
                 Runtime.CredentialProviderCatalog.AddProvider(repository);
+            Runtime.CredentialProviderCatalog.CollectionChanged += (o, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
 
             msMain.Items.AddRange(new ToolStripItem[]
             {
