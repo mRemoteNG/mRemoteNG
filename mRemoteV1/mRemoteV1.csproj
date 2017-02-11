@@ -316,6 +316,7 @@
     <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\PageSequence\ISequenceChangingNotifier.cs" />
     <Compile Include="UI\Controls\NewPasswordWithVerification.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -323,7 +324,11 @@
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
-    <Compile Include="UI\Controls\PageSequence.cs" />
+    <Compile Include="UI\Controls\PageSequence\PageSequence.cs" />
+    <Compile Include="UI\Controls\PageSequence\SequencedControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\PageSequence\SequencedPageReplcementRequestArgs.cs" />
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

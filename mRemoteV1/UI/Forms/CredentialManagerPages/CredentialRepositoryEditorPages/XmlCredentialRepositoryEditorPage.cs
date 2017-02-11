@@ -5,17 +5,16 @@ using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
-using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
 {
-    public partial class XmlCredentialRepositoryEditorPage : UserControl
+    public partial class XmlCredentialRepositoryEditorPage : SequencedControl
     {
         private readonly ICredentialRepositoryConfig _repositoryConfig;
         private readonly ICredentialRepositoryList _repositoryList;
-        private readonly PageSequence _pageSequence;
 
-        public XmlCredentialRepositoryEditorPage(ICredentialRepositoryConfig repositoryConfig, ICredentialRepositoryList repositoryList, PageSequence pageSequence)
+        public XmlCredentialRepositoryEditorPage(ICredentialRepositoryConfig repositoryConfig, ICredentialRepositoryList repositoryList)
         {
             if (repositoryConfig == null)
                 throw new ArgumentNullException(nameof(repositoryConfig));
@@ -24,7 +23,6 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 
             _repositoryConfig = repositoryConfig;
             _repositoryList = repositoryList;
-            _pageSequence = pageSequence;
             InitializeComponent();
             PopulateFields();
             textBoxFilePath.TextChanged += SaveValuesToConfig;
@@ -62,7 +60,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, deserializer);
             if (!_repositoryList.Contains(repository))
                 _repositoryList.AddProvider(repository);
-            _pageSequence.Next();
+            RaiseNextPageEvent();
         }
 
         private bool AllRequiredFieldsFilledOut()
@@ -72,7 +70,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            _pageSequence.Previous();
+            RaisePreviousPageEvent();
         }
     }
 }
