@@ -24,8 +24,6 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             _repositoryList = repositoryList;
             InitializeComponent();
             PopulateFields();
-            textBoxFilePath.TextChanged += SaveValuesToConfig;
-            newPasswordBoxes.Verified += SaveValuesToConfig;
         }
 
         private void PopulateFields()
@@ -35,7 +33,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             newPasswordBoxes.SetPassword(_repositoryConfig.Key);
         }
 
-        private void SaveValuesToConfig(object sender, EventArgs eventArgs)
+        private void SaveValuesToConfig()
         {
             _repositoryConfig.Source = textBoxFilePath.Text;
             _repositoryConfig.Key = newPasswordBoxes.SecureString;
@@ -55,11 +53,14 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             if (!AllRequiredFieldsFilledOut()) return;
-            var dataProvider = new FileDataProvider(_repositoryConfig.Source);
-            var deserializer = new XmlCredentialDeserializer();
-            var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, deserializer);
-            if (!_repositoryList.Contains(repository.Config.Id))
+            SaveValuesToConfig();
+            if (!_repositoryList.Contains(_repositoryConfig.Id))
+            {
+                var dataProvider = new FileDataProvider(_repositoryConfig.Source);
+                var deserializer = new XmlCredentialDeserializer();
+                var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, deserializer);
                 _repositoryList.AddProvider(repository);
+            }
             RaiseNextPageEvent();
         }
 
