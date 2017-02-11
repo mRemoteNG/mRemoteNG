@@ -77,6 +77,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
                 nextPage,
                 this
             );
+            RaiseNextPageEvent();
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
