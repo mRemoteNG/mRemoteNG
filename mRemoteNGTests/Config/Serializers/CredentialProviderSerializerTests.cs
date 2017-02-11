@@ -9,18 +9,18 @@ namespace mRemoteNGTests.Config.Serializers
 {
     public class CredentialProviderSerializerTests
     {
-        private CredentialProviderSerializer _credentialProviderSerializer;
+        private CredentialRepositoryListSerializer _credentialProviderSerializer;
 
         [SetUp]
         public void Setup()
         {
-            _credentialProviderSerializer = new CredentialProviderSerializer();
+            _credentialProviderSerializer = new CredentialRepositoryListSerializer();
         }
 
         private ICredentialRepository InitializeMockProvider()
         {
             var provider = Substitute.For<ICredentialRepository>();
-            provider.Config.Name.Returns("ProviderName");
+            provider.Config.TypeName.Returns("ProviderName");
             provider.Config.Id.Returns(Guid.NewGuid());
             return provider;
         }

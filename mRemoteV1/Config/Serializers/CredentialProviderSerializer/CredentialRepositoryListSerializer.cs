@@ -6,12 +6,12 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
 {
-    public class CredentialProviderSerializer
+    public class CredentialRepositoryListSerializer
     {
         public string Serialize(IEnumerable<ICredentialRepository> credentialProviderCatalog)
         {
             var xmlDocument = new XDocument(new XDeclaration("1.0", "utf-8", ""));
-            var rootElement = new XElement(XName.Get("CredentialProviders"));
+            var rootElement = new XElement(XName.Get("CredentialRepositories"));
             xmlDocument.Add(rootElement);
             foreach (var provider in credentialProviderCatalog)
             {
@@ -24,10 +24,11 @@ namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
 
         private XElement SerializeCredentialProvider(ICredentialRepository provider)
         {
-            var element = new XElement(XName.Get("Provider"));
-            element.Add(new XAttribute(XName.Get("Id"), provider.Config.Id));
-            element.Add(new XAttribute(XName.Get("Name"), provider.Config.Name));
-            return element;
+            return new XElement("CredentialRepository",
+                new XAttribute(XName.Get("Id"), provider.Config.Id),
+                new XAttribute(XName.Get("TypeName"), provider.Config.TypeName),
+                new XAttribute(XName.Get("Source"), provider.Config.Source)
+            );
         }
     }
 }

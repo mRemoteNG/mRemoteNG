@@ -7,13 +7,13 @@ namespace mRemoteNG.Credential
     public class CredentialRepositoryConfig : ICredentialRepositoryConfig
     {
         public Guid Id { get; } = Guid.NewGuid();
-        public string Name { get; }
+        public string TypeName { get; }
         public string Source { get; set; } = "";
         public SecureString Key { get; set; } = new SecureString();
 
-        public CredentialRepositoryConfig(string name)
+        public CredentialRepositoryConfig(string typeName)
         {
-            Name = name;
+            TypeName = typeName;
         }
     }
 }

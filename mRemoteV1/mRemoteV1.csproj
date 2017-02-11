@@ -139,10 +139,10 @@
     <Compile Include="Config\CredentialHarvester.cs" />
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
-    <Compile Include="Config\CredentialRepositoryListDeserializer.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
-    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialProviderSerializer.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
     <Compile Include="Config\Serializers\DataTableSerializer.cs" />
@@ -868,6 +868,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\mremoteng_confcons_v2_6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\mremoteng_credrepo_list_v1_0.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\mremoteng_creds_v1_0.xsd">
