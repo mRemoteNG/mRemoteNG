@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.UI.Controls;
@@ -35,6 +36,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             objectListView1.SetObjects(_providerCatalog.CredentialProviders);
             _providerCatalog.CollectionChanged += (sender, args) => UpdateList();
             objectListView1.SelectionChanged += ObjectListView1OnSelectionChanged;
+            objectListView1.MouseDoubleClick += ObjectListView1OnMouseDoubleClick;
         }
 
         private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
@@ -42,6 +44,16 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             var selectedRepository = objectListView1.SelectedObject as ICredentialRepository;
             buttonRemove.Enabled = selectedRepository != null;
             buttonEdit.Enabled = selectedRepository != null;
+        }
+
+        private void ObjectListView1OnMouseDoubleClick(object sender, MouseEventArgs mouseEventArgs)
+        {
+            if (mouseEventArgs.Clicks < 2) return;
+            OLVColumn column;
+            var listItem = objectListView1.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
+            var clickedNode = listItem.RowObject as ICredentialRepository;
+            if (clickedNode == null) return;
+            EditRepository(clickedNode);
         }
 
         private void UpdateList()
@@ -72,7 +84,12 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             var selectedRepository = objectListView1.SelectedObject as ICredentialRepository;
             if (selectedRepository == null) return;
-            var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(selectedRepository.Config, _providerCatalog);
+            EditRepository(selectedRepository);
+        }
+
+        private void EditRepository(ICredentialRepository repository)
+        {
+            var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(repository.Config, _providerCatalog);
             var pageSequence = new PageSequence(Parent,
                 this,
                 editorPage,
