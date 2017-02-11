@@ -16,6 +16,7 @@ namespace mRemoteNG.Credential
 
         public void AddProvider(ICredentialRepository credentialProvider)
         {
+            if (Contains(credentialProvider.Config.Id)) return;
             _credentialProviders.Add(credentialProvider);
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { credentialProvider });
         }
