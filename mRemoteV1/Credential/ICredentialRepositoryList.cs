@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace mRemoteNG.Credential
@@ -10,5 +11,7 @@ namespace mRemoteNG.Credential
         void AddProvider(ICredentialRepository credentialProvider);
 
         void RemoveProvider(ICredentialRepository credentialProvider);
+
+        bool Contains(Guid repositoryId);
     }
 }

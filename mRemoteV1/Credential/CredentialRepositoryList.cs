@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 
 
 namespace mRemoteNG.Credential
@@ -22,6 +24,11 @@ namespace mRemoteNG.Credential
         {
             _credentialProviders.Remove(credentialProvider);
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Remove, new[] {credentialProvider});
+        }
+
+        public bool Contains(Guid repositoryId)
+        {
+            return _credentialProviders.Any(repo => repo.Config.Id == repositoryId);
         }
 
         public IEnumerator<ICredentialRepository> GetEnumerator()

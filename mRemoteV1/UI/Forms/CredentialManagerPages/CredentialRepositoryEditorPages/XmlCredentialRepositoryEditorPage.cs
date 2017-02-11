@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             var dataProvider = new FileDataProvider(_repositoryConfig.Source);
             var deserializer = new XmlCredentialDeserializer();
             var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, deserializer);
-            if (!_repositoryList.Contains(repository))
+            if (!_repositoryList.Contains(repository.Config.Id))
                 _repositoryList.AddProvider(repository);
             RaiseNextPageEvent();
         }
