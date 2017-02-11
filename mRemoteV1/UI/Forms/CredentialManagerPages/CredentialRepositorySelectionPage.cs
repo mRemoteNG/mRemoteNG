@@ -11,19 +11,19 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
     public partial class CredentialRepositorySelectionPage : UserControl
     {
-        private readonly Control _previousPage;
+        private readonly PageSequence _pageSequence;
         private readonly ICredentialRepositoryList _repositoryList;
 
-        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, ICredentialRepositoryList repositoryList, Control previousPage)
+        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, ICredentialRepositoryList repositoryList, PageSequence pageSequence)
         {
             if (selectionTargets == null)
                 throw new ArgumentNullException(nameof(selectionTargets));
-            if (previousPage == null)
-                throw new ArgumentNullException(nameof(previousPage));
+            if (pageSequence == null)
+                throw new ArgumentNullException(nameof(pageSequence));
             if (repositoryList == null)
                 throw new ArgumentNullException(nameof(repositoryList));
 
-            _previousPage = previousPage;
+            _pageSequence = pageSequence;
             _repositoryList = repositoryList;
             InitializeComponent();
             SetupListView(selectionTargets);
@@ -46,13 +46,11 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             return imgHash;
         }
 
-        private void NextPage(ISelectionTarget<ICredentialRepositoryConfig> selection)
+        private void BuildNextPage(ISelectionTarget<ICredentialRepositoryConfig> selection)
         {
-            var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(selection.Config, _repositoryList, this);
+            var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(selection.Config, _repositoryList, _pageSequence);
             editorPage.Dock = DockStyle.Fill;
-            var parent = Parent;
-            parent.Controls.Clear();
-            parent.Controls.Add(editorPage);
+            _pageSequence.ReplaceNextPage(editorPage);
         }
 
         private void ObjectListViewOnMouseDoubleClick(object sender, MouseEventArgs mouseEventArgs)
@@ -62,21 +60,20 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             var listItem = objectListView.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
             var clickedNode = listItem.RowObject as ISelectionTarget<ICredentialRepositoryConfig>;
             if (clickedNode == null) return;
-            NextPage(clickedNode);
+            BuildNextPage(clickedNode);
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
             var selection = objectListView.SelectedObject as ISelectionTarget<ICredentialRepositoryConfig>;
             if (selection == null) return;
-            NextPage(selection);
+            BuildNextPage(selection);
+            _pageSequence.Next();
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            var parent = Parent;
-            parent.Controls.Clear();
-            parent.Controls.Add(_previousPage);
+            _pageSequence.Previous();
         }
     }
 }

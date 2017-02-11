@@ -327,6 +327,7 @@
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
+    <Compile Include="UI\Controls\PageSequence.cs" />
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

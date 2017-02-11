@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -48,18 +49,24 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var repoSelector = new CredentialRepositorySelectionPage(
-                new ISelectionTarget<ICredentialRepositoryConfig>[]
-                {
-                    new XmlCredentialRepositorySelector(),
-                    new KeePassRepositorySelector()
-                },
-                _providerCatalog,
+            var addRepoSequence = new PageSequence(Parent);
+            var pages = new List<Control>
+            {
+                this,
+                new CredentialRepositorySelectionPage(
+                    new ISelectionTarget<ICredentialRepositoryConfig>[]
+                    {
+                        new XmlCredentialRepositorySelector(),
+                        new KeePassRepositorySelector()
+                    },
+                    _providerCatalog,
+                    addRepoSequence
+                    ) {Dock = DockStyle.Fill},
+                new Control(),
                 this
-            ) {Dock = DockStyle.Fill};
-            var parent = Parent;
-            parent.Controls.Clear();
-            parent.Controls.Add(repoSelector);
+            };
+            addRepoSequence.Pages = pages;
+            addRepoSequence.Next();
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
