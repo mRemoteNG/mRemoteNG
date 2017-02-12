@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.labelPageTitle = new System.Windows.Forms.Label();
             this.buttonBrowseFiles = new System.Windows.Forms.Button();
             this.labelFilePath = new System.Windows.Forms.Label();
@@ -38,7 +37,6 @@
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.newPasswordBoxes = new mRemoteNG.UI.Controls.NewPasswordWithVerification();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -127,10 +125,6 @@
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
-            // toolTip
-            // 
-            this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Error;
-            // 
             // newPasswordBoxes
             // 
             this.newPasswordBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -196,7 +190,6 @@
         private System.Windows.Forms.Label labelId;
         private System.Windows.Forms.Button buttonBack;
         private Controls.NewPasswordWithVerification newPasswordBoxes;
-        private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox textBoxTitle;
         private System.Windows.Forms.Label labelTitle;
     }

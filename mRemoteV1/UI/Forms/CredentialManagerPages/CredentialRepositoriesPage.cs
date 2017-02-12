@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
                     new ISelectionTarget<ICredentialRepositoryConfig>[]
                     {
                         new XmlCredentialRepositorySelector(),
-                        new KeePassRepositorySelector()
+                        //new KeePassRepositorySelector()
                     },
                     _providerCatalog
                     )
