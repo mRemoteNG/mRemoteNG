@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    partial class CredentialRepositorySelectionPage
+    partial class CredentialRepositoryTypeSelectionPage
     {
         /// <summary> 
         /// Required designer variable.

@@ -10,11 +10,11 @@ using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialRepositorySelectionPage : SequencedControl
+    public partial class CredentialRepositoryTypeSelectionPage : SequencedControl
     {
         private readonly ICredentialRepositoryList _repositoryList;
 
-        public CredentialRepositorySelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, ICredentialRepositoryList repositoryList)
+        public CredentialRepositoryTypeSelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, ICredentialRepositoryList repositoryList)
         {
             if (selectionTargets == null)
                 throw new ArgumentNullException(nameof(selectionTargets));

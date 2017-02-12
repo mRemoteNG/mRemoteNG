@@ -40,7 +40,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             var addRepoSequence = new PageSequence(Parent,
                 this,
-                new CredentialRepositorySelectionPage(
+                new CredentialRepositoryTypeSelectionPage(
                     new ISelectionTarget<ICredentialRepositoryConfig>[]
                     {
                         new XmlCredentialRepositorySelector(),
