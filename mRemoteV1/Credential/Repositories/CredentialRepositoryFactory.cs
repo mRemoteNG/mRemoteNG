@@ -24,6 +24,7 @@ namespace mRemoteNG.Credential.Repositories
             var config = new CredentialRepositoryConfig(id)
             {
                 TypeName = repositoryXElement.Attribute("TypeName")?.Value,
+                Title = repositoryXElement.Attribute("Title")?.Value,
                 Source = repositoryXElement.Attribute("Source")?.Value
             };
             var dataProvider = new FileDataProvider(config.Source);

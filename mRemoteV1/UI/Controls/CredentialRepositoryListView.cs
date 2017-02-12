@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
-using mRemoteNG.Tree;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -19,6 +18,7 @@ namespace mRemoteNG.UI.Controls
                 _credentialRepositoryList.CollectionChanged -= UpdateList;
                 _credentialRepositoryList = value;
                 objectListView1.SetObjects(CredentialRepositoryList.CredentialProviders);
+                objectListView1.AutoResizeColumns();
                 _credentialRepositoryList.CollectionChanged += UpdateList;
             }
         }
@@ -34,8 +34,10 @@ namespace mRemoteNG.UI.Controls
 
         private void SetupObjectListView()
         {
-            olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.TypeName;
-            olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Source;
+            olvColumnTitle.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Title;
+            olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.TypeName;
+            olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Source;
+            olvColumnId.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Id;
             objectListView1.SetObjects(CredentialRepositoryList.CredentialProviders);
             objectListView1.SelectionChanged += (sender, args) => RaiseSelectionChangedEvent();
             objectListView1.MouseDoubleClick += ObjectListView1OnMouseDoubleClick;

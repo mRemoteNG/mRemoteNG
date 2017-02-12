@@ -20,6 +20,7 @@
   <xs:complexType name="CredentialRepository">
     <xs:attribute name="Id" type="xs:string" use="required" />
     <xs:attribute name="TypeName" type="xs:string" use="required" />
+    <xs:attribute name="Title" type="xs:string" use="optional" />
     <xs:attribute name="Source" type="xs:string" use="required" />
   </xs:complexType>
 </xs:schema>

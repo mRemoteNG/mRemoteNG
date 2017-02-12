@@ -40,7 +40,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void FillInForm()
         {
-            textBoxRepositoryName.Text = _credentialRepository.Config.TypeName;
+            textBoxRepositoryName.Text = _credentialRepository.Config.Title;
             textBoxId.Text = _credentialRecord.Id.ToString();
             textBoxTitle.Text = _credentialRecord.Title;
             textBoxUsername.Text = _credentialRecord.Username;

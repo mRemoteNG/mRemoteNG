@@ -7,11 +7,22 @@ namespace mRemoteNG.Credential
 {
     public class CredentialRepositoryConfig : ICredentialRepositoryConfig
     {
+        private string _title = "New Credential Repository";
         private string _source = "";
         private SecureString _key = new SecureString();
         private string _typeName = "";
 
         public Guid Id { get; }
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                RaisePropertyChangedEvent(nameof(Title));
+            }
+        }
 
         public string TypeName
         {

@@ -31,17 +31,23 @@
             this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumnProvider = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
             // objectListView1
             // 
+            this.objectListView1.AllColumns.Add(this.olvColumnTitle);
             this.objectListView1.AllColumns.Add(this.olvColumnProvider);
             this.objectListView1.AllColumns.Add(this.olvColumnSource);
+            this.objectListView1.AllColumns.Add(this.olvColumnId);
             this.objectListView1.CellEditUseWholeCell = false;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumnTitle,
             this.olvColumnProvider,
-            this.olvColumnSource});
+            this.olvColumnSource,
+            this.olvColumnId});
             this.objectListView1.CopySelectionOnControlC = false;
             this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
             this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -61,7 +67,6 @@
             // olvColumnProvider
             // 
             this.olvColumnProvider.AspectName = "";
-            this.olvColumnProvider.FillsFreeSpace = true;
             this.olvColumnProvider.Groupable = false;
             this.olvColumnProvider.Hideable = false;
             this.olvColumnProvider.IsEditable = false;
@@ -71,9 +76,17 @@
             // olvColumnSource
             // 
             this.olvColumnSource.AspectName = "";
-            this.olvColumnSource.FillsFreeSpace = true;
             this.olvColumnSource.Groupable = false;
             this.olvColumnSource.Text = "Source";
+            // 
+            // olvColumnTitle
+            // 
+            this.olvColumnTitle.Groupable = false;
+            this.olvColumnTitle.Text = "Title";
+            // 
+            // olvColumnId
+            // 
+            this.olvColumnId.Text = "ID";
             // 
             // CredentialRepositoryListView
             // 
@@ -92,5 +105,7 @@
         private BrightIdeasSoftware.ObjectListView objectListView1;
         private BrightIdeasSoftware.OLVColumn olvColumnProvider;
         private BrightIdeasSoftware.OLVColumn olvColumnSource;
+        private BrightIdeasSoftware.OLVColumn olvColumnTitle;
+        private BrightIdeasSoftware.OLVColumn olvColumnId;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Security;
@@ -29,13 +28,15 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 
         private void PopulateFields()
         {
-            txtboxId.Text = _repositoryConfig.Id.ToString();
+            textBoxId.Text = _repositoryConfig.Id.ToString();
+            textBoxTitle.Text = _repositoryConfig.Title;
             textBoxFilePath.Text = _repositoryConfig.Source;
             newPasswordBoxes.SetPassword(_repositoryConfig.Key);
         }
 
         private void SaveValuesToConfig()
         {
+            _repositoryConfig.Title = textBoxTitle.Text;
             _repositoryConfig.Source = textBoxFilePath.Text;
             _repositoryConfig.Key = newPasswordBoxes.SecureString;
         }

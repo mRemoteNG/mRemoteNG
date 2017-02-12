@@ -27,6 +27,7 @@ namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
             return new XElement("CredentialRepository",
                 new XAttribute(XName.Get("Id"), provider.Config.Id),
                 new XAttribute(XName.Get("TypeName"), provider.Config.TypeName),
+                new XAttribute(XName.Get("Title"), provider.Config.Title),
                 new XAttribute(XName.Get("Source"), provider.Config.Source)
             );
         }
