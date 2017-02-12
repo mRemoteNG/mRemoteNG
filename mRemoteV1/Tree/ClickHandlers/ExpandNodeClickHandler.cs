@@ -6,7 +6,7 @@ using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.Tree
 {
-    public class ExpandNodeClickHandler : ITreeNodeClickHandler
+    public class ExpandNodeClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {
         private readonly IConnectionTree _connectionTree;
 
