@@ -361,12 +361,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\FormExtensions.cs" />
-    <Compile Include="UI\Forms\CredentialEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\CredentialEditorForm.Designer.cs">
-      <DependentUpon>CredentialEditorForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Forms\CredentialManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -692,9 +686,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\CredentialEditorForm.resx">
-      <DependentUpon>CredentialEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialManagerForm.resx">
       <DependentUpon>CredentialManagerForm.cs</DependentUpon>
