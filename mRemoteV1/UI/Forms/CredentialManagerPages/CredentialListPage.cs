@@ -5,10 +5,11 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Tree;
+using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialListPage : UserControl, ICredentialManagerPage
+    public partial class CredentialListPage : SequencedControl, ICredentialManagerPage
     {
         private readonly ICredentialRepositoryList _credentialRepositoryList;
 
@@ -30,8 +31,36 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             objectListView1.KeyDown += ObjectListView1OnEnterPressed;
             objectListView1.KeyDown += OnAPressed;
             objectListView1.KeyDown += OnDeletePressed;
+            olvColumnCredentialId.AspectGetter = CredentialIdAspectGetter;
+            olvColumnTitle.AspectGetter = CredentialTitleAspectGetter;
+            olvColumnUsername.AspectGetter = CredentialUsernameAspectGetter;
+            olvColumnDomain.AspectGetter = CredentialDomainAspectGetter;
             olvColumnSource.AspectGetter = CredentialSourceAspectGetter;
             SetObjectList();
+        }
+
+        private object CredentialIdAspectGetter(object rowObject)
+        {
+            var keyValuePair = CastRowObject(rowObject);
+            return keyValuePair.Key.Id;
+        }
+
+        private object CredentialTitleAspectGetter(object rowObject)
+        {
+            var keyValuePair = CastRowObject(rowObject);
+            return keyValuePair.Key.Title;
+        }
+
+        private object CredentialUsernameAspectGetter(object rowObject)
+        {
+            var keyValuePair = CastRowObject(rowObject);
+            return keyValuePair.Key.Username;
+        }
+
+        private object CredentialDomainAspectGetter(object rowObject)
+        {
+            var keyValuePair = CastRowObject(rowObject);
+            return keyValuePair.Key.Domain;
         }
 
         private object CredentialSourceAspectGetter(object rowObject)
@@ -62,21 +91,6 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             buttonRemove.Text = Language.strRemove;
         }
 
-        private void EditCredential(ICredentialRecord credentialRecord)
-        {
-            if (credentialRecord == null) return;
-            var credentialEditorForm = new CredentialEditorForm(credentialRecord);
-            credentialEditorForm.ChangesAccepted += (o, args) => RaiseCredentialsChangedEvent(o);
-            //credentialEditorForm.CenterOnTarget(this);
-            credentialEditorForm.Show(this);
-        }
-
-        private void AddCredential()
-        {
-            //_credentialManager.Add(new CredentialRecord());
-            //RaiseCredentialsChangedEvent(this);
-        }
-
         private void RemoveSelectedCredential()
         {
             if (objectListView1.SelectedObject == null) return;
@@ -93,9 +107,37 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             EditCredential(clickedCredential.Key);
         }
 
+        private void AddCredential()
+        {
+            var sequence = new PageSequence(Parent,
+                this,
+                
+                new CredentialEditorPage(new CredentialRecord()),
+                this
+            );
+            RaiseNextPageEvent();
+        }
+
+        private void EditCredential(ICredentialRecord credentialRecord)
+        {
+            if (credentialRecord == null) return;
+            var sequence = new PageSequence(Parent,
+                this,
+                new CredentialEditorPage(credentialRecord),
+                this
+            );
+            RaiseNextPageEvent();
+        }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             AddCredential();
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            var selectedCredential = CastRowObject(objectListView1.SelectedObject);
+            EditCredential(selectedCredential.Key);
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
