@@ -59,6 +59,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void buttonAccept_Click_1(object sender, EventArgs e)
         {
             SaveFormToCredential();
+            if (!_credentialRepository.CredentialRecords.Contains(_credentialRecord))
+                _credentialRepository.CredentialRecords.Add(_credentialRecord);
             RaiseNextPageEvent();
         }
 

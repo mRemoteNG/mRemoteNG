@@ -299,6 +299,12 @@
     <Compile Include="UI\Controls\CredentialRecordListBox.Designer.cs">
       <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListView.Designer.cs">
+      <DependentUpon>CredentialRecordListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\CredentialRepositoryListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -675,6 +681,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
+    <EmbeddedResource Include="UI\Controls\CredentialRecordListView.resx">
+      <DependentUpon>CredentialRecordListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRepositoryListView.resx">
       <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
     </EmbeddedResource>

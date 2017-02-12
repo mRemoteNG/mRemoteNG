@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 
         private bool AllRequiredFieldsFilledOut()
         {
-            return newPasswordBoxes.PasswordsMatch && !string.IsNullOrEmpty(_repositoryConfig.Source);
+            return newPasswordBoxes.PasswordsMatch && !string.IsNullOrEmpty(textBoxFilePath.Text);
         }
 
         private void buttonBack_Click(object sender, EventArgs e)

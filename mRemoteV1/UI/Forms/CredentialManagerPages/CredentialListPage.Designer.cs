@@ -28,79 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumnCredentialId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
+            this.credentialRecordListView = new mRemoteNG.UI.Controls.CredentialRecordListView();
             this.SuspendLayout();
-            // 
-            // objectListView1
-            // 
-            this.objectListView1.AllColumns.Add(this.olvColumnCredentialId);
-            this.objectListView1.AllColumns.Add(this.olvColumnTitle);
-            this.objectListView1.AllColumns.Add(this.olvColumnUsername);
-            this.objectListView1.AllColumns.Add(this.olvColumnDomain);
-            this.objectListView1.AllColumns.Add(this.olvColumnSource);
-            this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.objectListView1.CellEditUseWholeCell = false;
-            this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumnCredentialId,
-            this.olvColumnTitle,
-            this.olvColumnUsername,
-            this.olvColumnDomain,
-            this.olvColumnSource});
-            this.objectListView1.CopySelectionOnControlC = false;
-            this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
-            this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.objectListView1.FullRowSelect = true;
-            this.objectListView1.HideSelection = false;
-            this.objectListView1.Location = new System.Drawing.Point(0, 0);
-            this.objectListView1.Name = "objectListView1";
-            this.objectListView1.SelectAllOnControlA = false;
-            this.objectListView1.ShowGroups = false;
-            this.objectListView1.Size = new System.Drawing.Size(383, 235);
-            this.objectListView1.TabIndex = 1;
-            this.objectListView1.UseCompatibleStateImageBehavior = false;
-            this.objectListView1.UseNotifyPropertyChanged = true;
-            this.objectListView1.View = System.Windows.Forms.View.Details;
-            // 
-            // olvColumnCredentialId
-            // 
-            this.olvColumnCredentialId.AspectName = "";
-            this.olvColumnCredentialId.IsEditable = false;
-            this.olvColumnCredentialId.IsVisible = false;
-            this.olvColumnCredentialId.Text = "Credential ID";
-            // 
-            // olvColumnTitle
-            // 
-            this.olvColumnTitle.AspectName = "";
-            this.olvColumnTitle.FillsFreeSpace = true;
-            this.olvColumnTitle.Groupable = false;
-            this.olvColumnTitle.Text = "Title";
-            // 
-            // olvColumnUsername
-            // 
-            this.olvColumnUsername.AspectName = "";
-            this.olvColumnUsername.FillsFreeSpace = true;
-            this.olvColumnUsername.Text = "Username";
-            // 
-            // olvColumnDomain
-            // 
-            this.olvColumnDomain.AspectName = "";
-            this.olvColumnDomain.FillsFreeSpace = true;
-            this.olvColumnDomain.Text = "Domain";
-            // 
-            // olvColumnSource
-            // 
-            this.olvColumnSource.Text = "Source";
             // 
             // buttonAdd
             // 
@@ -141,31 +73,34 @@
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
+            // credentialRecordListView
+            // 
+            this.credentialRecordListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.credentialRecordListView.Location = new System.Drawing.Point(0, 0);
+            this.credentialRecordListView.Name = "credentialRecordListView";
+            this.credentialRecordListView.Size = new System.Drawing.Size(383, 235);
+            this.credentialRecordListView.TabIndex = 6;
+            // 
             // CredentialListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.credentialRecordListView);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonRemove);
-            this.Controls.Add(this.objectListView1);
             this.Name = "CredentialListPage";
             this.Size = new System.Drawing.Size(383, 276);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private BrightIdeasSoftware.ObjectListView objectListView1;
-        private BrightIdeasSoftware.OLVColumn olvColumnTitle;
-        private BrightIdeasSoftware.OLVColumn olvColumnUsername;
-        private BrightIdeasSoftware.OLVColumn olvColumnDomain;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonRemove;
-        private BrightIdeasSoftware.OLVColumn olvColumnCredentialId;
-        private BrightIdeasSoftware.OLVColumn olvColumnSource;
         private System.Windows.Forms.Button buttonEdit;
+        private Controls.CredentialRecordListView credentialRecordListView;
     }
 }

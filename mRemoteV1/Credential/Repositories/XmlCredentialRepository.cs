@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using mRemoteNG.Config.DataProviders;
@@ -27,7 +29,8 @@ namespace mRemoteNG.Credential.Repositories
                 throw new ArgumentNullException(nameof(config));
 
             Config = config;
-            CredentialRecords = new List<ICredentialRecord>();
+            CredentialRecords = new ObservableCollection<ICredentialRecord>();
+            ((ObservableCollection<ICredentialRecord>) CredentialRecords).CollectionChanged += RaiseCollectionChangedEvent;
             Config.PropertyChanged += (sender, args) => RaisePropertyChangedEvent(args);
             _dataProvider = dataProvider;
             _deserializer = new XmlCredentialDeserializer();
@@ -52,9 +55,15 @@ namespace mRemoteNG.Credential.Repositories
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
         protected virtual void RaisePropertyChangedEvent(PropertyChangedEventArgs args)
         {
             PropertyChanged?.Invoke(this, args);
+        }
+
+        protected virtual void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            CollectionChanged?.Invoke(this, args);
         }
     }
 }

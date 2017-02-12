@@ -20,6 +20,7 @@ namespace mRemoteNG.Credential
             if (Contains(credentialProvider.Config.Id)) return;
             _credentialProviders.Add(credentialProvider);
             credentialProvider.PropertyChanged += CredentialProviderOnPropertyChanged;
+            credentialProvider.CollectionChanged += CredentialProviderOnCollectionChanged;
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { credentialProvider });
         }
 
@@ -27,6 +28,7 @@ namespace mRemoteNG.Credential
         {
             if (!Contains(credentialProvider.Config.Id)) return;
             credentialProvider.PropertyChanged -= CredentialProviderOnPropertyChanged;
+            credentialProvider.CollectionChanged -= CredentialProviderOnCollectionChanged;
             _credentialProviders.Remove(credentialProvider);
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Remove, new[] {credentialProvider});
         }
@@ -58,13 +60,28 @@ namespace mRemoteNG.Credential
 
         private void CredentialProviderOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
+            var repo = sender as ICredentialRepository;
+            if (repo == null) return;
+            repo.SaveCredentials();
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { sender });
+        }
+
+        private void CredentialProviderOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            var repo = sender as ICredentialRepository;
+            if (repo == null) return;
+            repo.SaveCredentials();
+            RaiseCollectionChangedEvent(sender, args);
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         private void RaiseCollectionChangedEvent(NotifyCollectionChangedAction action, IList items)
         {
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, items));
+        }
+        private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            CollectionChanged?.Invoke(sender, e);
         }
     }
 }

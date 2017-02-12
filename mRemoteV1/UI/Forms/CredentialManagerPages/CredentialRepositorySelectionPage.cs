@@ -21,7 +21,6 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void Continue(ICredentialRepository credentialRepository)
         {
             var newCred = new CredentialRecord();
-            credentialRepository.CredentialRecords.Add(newCred);
             var newCredPage = new CredentialEditorPage(newCred, credentialRepository);
             RaisePageReplacementEvent(newCredPage, RelativePagePosition.NextPage);
             RaiseNextPageEvent();
