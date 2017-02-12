@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.UI.Forms.CredentialManagerPages;
 
@@ -19,12 +20,13 @@ namespace mRemoteNG.UI.Forms
             InitializeComponent();
             ApplyLanguage();
             SetupListView();
+            olvPageList.SelectedIndex = 0;
         }
 
         private void SetupListView()
         {
             olvColumnPage.ImageGetter = ImageGetter;
-            olvPageList.CellClick += (sender, args) => ShowPage(args.Model as Control);
+            olvPageList.SelectionChanged += (sender, args) => ShowPage(olvPageList.SelectedObject as Control);
             olvPageList.SetObjects(_pageControls);
         }
 
