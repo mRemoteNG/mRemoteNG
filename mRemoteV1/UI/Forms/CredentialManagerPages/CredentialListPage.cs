@@ -104,26 +104,26 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             if (cellClickEventArgs.ClickCount < 2) return;
             var clickedCredential = CastRowObject(cellClickEventArgs.Model);
-            EditCredential(clickedCredential.Key);
+            EditCredential(clickedCredential);
         }
 
         private void AddCredential()
         {
             var sequence = new PageSequence(Parent,
                 this,
-                
-                new CredentialEditorPage(new CredentialRecord()),
+                new CredentialRepositorySelectionPage(_credentialRepositoryList),
+                new SequencedControl(),
                 this
             );
             RaiseNextPageEvent();
         }
 
-        private void EditCredential(ICredentialRecord credentialRecord)
+        private void EditCredential(KeyValuePair<ICredentialRecord, ICredentialRepository> credentialAndRepository)
         {
-            if (credentialRecord == null) return;
+            if (credentialAndRepository.Key == null || credentialAndRepository.Value == null) return;
             var sequence = new PageSequence(Parent,
                 this,
-                new CredentialEditorPage(credentialRecord),
+                new CredentialEditorPage(credentialAndRepository.Key, credentialAndRepository.Value),
                 this
             );
             RaiseNextPageEvent();
@@ -137,7 +137,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             var selectedCredential = CastRowObject(objectListView1.SelectedObject);
-            EditCredential(selectedCredential.Key);
+            EditCredential(selectedCredential);
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
@@ -155,9 +155,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void ObjectListView1OnEnterPressed(object sender, KeyEventArgs keyEventArgs)
         {
             if (keyEventArgs.KeyCode != Keys.Enter) return;
-            var selectedCredential = objectListView1.SelectedObject as ICredentialRecord;
-            if (selectedCredential == null) return;
-            EditCredential(selectedCredential);
+            var selectedCredentialAndRepoPair = CastRowObject(objectListView1.SelectedObject);
+            EditCredential(selectedCredentialAndRepoPair);
             keyEventArgs.Handled = true;
             keyEventArgs.SuppressKeyPress = true;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.UI.Controls.PageSequence;
@@ -8,16 +9,21 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
     public partial class CredentialEditorPage : SequencedControl
     {
         private readonly ICredentialRecord _credentialRecord;
+        private readonly ICredentialRepository _credentialRepository;
 
-        public CredentialEditorPage(ICredentialRecord credentialRecord)
+        public CredentialEditorPage(ICredentialRecord credentialRecord, ICredentialRepository credentialRepository)
         {
             if (credentialRecord == null)
                 throw new ArgumentNullException(nameof(credentialRecord));
+            if (credentialRepository == null)
+                throw new ArgumentNullException(nameof(credentialRepository));
 
             InitializeComponent();
             ApplyLanguage();
             _credentialRecord = credentialRecord;
+            _credentialRepository = credentialRepository;
             FillInForm();
+            Dock = DockStyle.Fill;
         }
 
         private void ApplyLanguage()
@@ -34,6 +40,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void FillInForm()
         {
+            textBoxRepositoryName.Text = _credentialRepository.Config.TypeName;
             textBoxId.Text = _credentialRecord.Id.ToString();
             textBoxTitle.Text = _credentialRecord.Title;
             textBoxUsername.Text = _credentialRecord.Username;
