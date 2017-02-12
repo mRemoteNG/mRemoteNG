@@ -23,8 +23,6 @@ namespace mRemoteNG.Credential
             RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { credentialProvider });
         }
 
-        
-
         public void RemoveProvider(ICredentialRepository credentialProvider)
         {
             if (!Contains(credentialProvider.Config.Id)) return;

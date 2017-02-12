@@ -299,6 +299,12 @@
     <Compile Include="UI\Controls\CredentialRecordListBox.Designer.cs">
       <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\CredentialRepositoryListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRepositoryListView.Designer.cs">
+      <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\ExternalToolsToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -663,6 +669,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
+    <EmbeddedResource Include="UI\Controls\CredentialRepositoryListView.resx">
+      <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
     </EmbeddedResource>
