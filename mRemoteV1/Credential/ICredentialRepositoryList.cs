@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.Credential
 {
-    public interface ICredentialRepositoryList : IEnumerable<ICredentialRepository>, INotifyCollectionChanged
+    public interface ICredentialRepositoryList : IEnumerable<ICredentialRepository>
     {
         IEnumerable<ICredentialRepository> CredentialProviders { get; }
 
@@ -15,5 +15,8 @@ namespace mRemoteNG.Credential
         bool Contains(Guid repositoryId);
 
         IEnumerable<ICredentialRecord> GetCredentialRecords();
+
+        event EventHandler<CollectionUpdatedEventArgs<ICredentialRepository>> RepositoriesUpdated;
+        event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>> CredentialsUpdated;
     }
 }

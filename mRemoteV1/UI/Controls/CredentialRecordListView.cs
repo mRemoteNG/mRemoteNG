@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
+using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Controls
@@ -16,13 +16,18 @@ namespace mRemoteNG.UI.Controls
             get { return _credentialRepositoryList; }
             set
             {
-                _credentialRepositoryList.CollectionChanged -= CredentialRepositoryListOnCollectionChanged;
+                _credentialRepositoryList.RepositoriesUpdated -= CredentialRepositoryListOnRepositoriesUpdated;
+                _credentialRepositoryList.CredentialsUpdated -= CredentialRepositoryListOnCredentialsUpdated;
                 _credentialRepositoryList = value;
-                _credentialRepositoryList.CollectionChanged += CredentialRepositoryListOnCollectionChanged;
+                _credentialRepositoryList.RepositoriesUpdated += CredentialRepositoryListOnRepositoriesUpdated;
+                _credentialRepositoryList.CredentialsUpdated += CredentialRepositoryListOnCredentialsUpdated;
                 SetObjectList();
                 objectListView1.AutoResizeColumns();
             }
         }
+
+        
+
 
         public KeyValuePair<ICredentialRecord, ICredentialRepository> SelectedObject => CastRowObject(objectListView1.SelectedObject);
 
@@ -102,7 +107,12 @@ namespace mRemoteNG.UI.Controls
             return keyValuePair;
         }
 
-        private void CredentialRepositoryListOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void CredentialRepositoryListOnRepositoriesUpdated(object sender, CollectionUpdatedEventArgs<ICredentialRepository> arg)
+        {
+            SetObjectList();
+        }
+
+        private void CredentialRepositoryListOnCredentialsUpdated(object sender, CollectionUpdatedEventArgs<ICredentialRecord> collectionUpdatedEventArgs)
         {
             SetObjectList();
         }

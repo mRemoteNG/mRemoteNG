@@ -263,7 +263,7 @@
     <Compile Include="Security\CryptographyProviderFactory.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilder.cs" />
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
-    <Compile Include="Tools\CollectionUpdatedEventArgs.cs" />
+    <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />

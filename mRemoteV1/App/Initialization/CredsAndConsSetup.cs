@@ -97,7 +97,8 @@ namespace mRemoteNG.App.Initialization
                 Runtime.CredentialProviderCatalog.AddProvider(repository);
                 repository.LoadCredentials();
             }
-            Runtime.CredentialProviderCatalog.CollectionChanged += (o, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
+            Runtime.CredentialProviderCatalog.RepositoriesUpdated += (sender, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
+            Runtime.CredentialProviderCatalog.CredentialsUpdated += (sender, args) => (sender as ICredentialRepository)?.SaveCredentials();
         }
 
         private void LoadDefaultConnectionCredentials()

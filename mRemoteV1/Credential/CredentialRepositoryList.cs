@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
+using mRemoteNG.Tools.CustomCollections;
 
 
 namespace mRemoteNG.Credential
@@ -19,18 +18,18 @@ namespace mRemoteNG.Credential
         {
             if (Contains(credentialProvider.Config.Id)) return;
             _credentialProviders.Add(credentialProvider);
-            credentialProvider.PropertyChanged += CredentialProviderOnPropertyChanged;
-            credentialProvider.CollectionChanged += CredentialProviderOnCollectionChanged;
-            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { credentialProvider });
+            credentialProvider.CredentialsUpdated += RaiseCredentialsUpdatedEvent;
+            credentialProvider.RepositoryConfigUpdated += OnRepoConfigChanged;
+            RaiseRepositoriesUpdatedEvent(ActionType.Added, new[] { credentialProvider });
         }
 
         public void RemoveProvider(ICredentialRepository credentialProvider)
         {
             if (!Contains(credentialProvider.Config.Id)) return;
-            credentialProvider.PropertyChanged -= CredentialProviderOnPropertyChanged;
-            credentialProvider.CollectionChanged -= CredentialProviderOnCollectionChanged;
+            credentialProvider.CredentialsUpdated -= RaiseCredentialsUpdatedEvent;
+            credentialProvider.RepositoryConfigUpdated -= OnRepoConfigChanged;
             _credentialProviders.Remove(credentialProvider);
-            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Remove, new[] {credentialProvider});
+            RaiseRepositoriesUpdatedEvent(ActionType.Removed, new[] { credentialProvider });
         }
 
         public bool Contains(Guid repositoryId)
@@ -58,30 +57,24 @@ namespace mRemoteNG.Credential
             return GetEnumerator();
         }
 
-        private void CredentialProviderOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        public event EventHandler<CollectionUpdatedEventArgs<ICredentialRepository>> RepositoriesUpdated;
+        public event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>> CredentialsUpdated;
+
+        private void RaiseRepositoriesUpdatedEvent(ActionType action, IEnumerable<ICredentialRepository> changedItems)
+        {
+            RepositoriesUpdated?.Invoke(this, new CollectionUpdatedEventArgs<ICredentialRepository>(action, changedItems));
+        }
+
+        private void RaiseCredentialsUpdatedEvent(object sender, CollectionUpdatedEventArgs<ICredentialRecord> args)
+        {
+            CredentialsUpdated?.Invoke(sender, args);
+        }
+
+        private void OnRepoConfigChanged(object sender, EventArgs args)
         {
             var repo = sender as ICredentialRepository;
             if (repo == null) return;
-            repo.SaveCredentials();
-            RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, new[] { sender });
-        }
-
-        private void CredentialProviderOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
-        {
-            var repo = sender as ICredentialRepository;
-            if (repo == null) return;
-            repo.SaveCredentials();
-            RaiseCollectionChangedEvent(sender, args);
-        }
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-        private void RaiseCollectionChangedEvent(NotifyCollectionChangedAction action, IList items)
-        {
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, items));
-        }
-        private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            CollectionChanged?.Invoke(sender, e);
+            RaiseRepositoriesUpdatedEvent(ActionType.Updated, new[] { repo });
         }
     }
 }

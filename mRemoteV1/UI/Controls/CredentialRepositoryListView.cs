@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
+using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -15,11 +15,11 @@ namespace mRemoteNG.UI.Controls
             get { return _credentialRepositoryList; }
             set
             {
-                _credentialRepositoryList.CollectionChanged -= UpdateList;
+                _credentialRepositoryList.RepositoriesUpdated -= UpdateList;
                 _credentialRepositoryList = value;
                 objectListView1.SetObjects(CredentialRepositoryList.CredentialProviders);
                 objectListView1.AutoResizeColumns();
-                _credentialRepositoryList.CollectionChanged += UpdateList;
+                _credentialRepositoryList.RepositoriesUpdated += UpdateList;
             }
         }
 
@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Controls
             objectListView1.MouseDoubleClick += ObjectListView1OnMouseDoubleClick;
         }
 
-        private void UpdateList(object sender, NotifyCollectionChangedEventArgs args)
+        private void UpdateList(object sender, CollectionUpdatedEventArgs<ICredentialRepository> args)
         {
             objectListView1.SetObjects(CredentialRepositoryList.CredentialProviders);
         }

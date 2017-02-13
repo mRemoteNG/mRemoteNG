@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
+using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.Credential.Repositories
 {
@@ -29,9 +28,9 @@ namespace mRemoteNG.Credential.Repositories
                 throw new ArgumentNullException(nameof(config));
 
             Config = config;
-            CredentialRecords = new ObservableCollection<ICredentialRecord>();
-            ((ObservableCollection<ICredentialRecord>) CredentialRecords).CollectionChanged += RaiseCollectionChangedEvent;
-            Config.PropertyChanged += (sender, args) => RaisePropertyChangedEvent(args);
+            CredentialRecords = new FullyObservableCollection<ICredentialRecord>();
+            ((FullyObservableCollection<ICredentialRecord>) CredentialRecords).CollectionUpdated += RaiseCredentialsUpdatedEvent;
+            Config.PropertyChanged += (sender, args) => RaiseRepositoryConfigUpdatedEvent(args);
             _dataProvider = dataProvider;
             _deserializer = new XmlCredentialDeserializer();
             _serializer = new XmlCredentialRecordSerializer(cryptographyProvider);
@@ -54,16 +53,17 @@ namespace mRemoteNG.Credential.Repositories
             _dataProvider.Save(data);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-        protected virtual void RaisePropertyChangedEvent(PropertyChangedEventArgs args)
+        public event EventHandler RepositoryConfigUpdated;
+        public event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>> CredentialsUpdated;
+
+        protected virtual void RaiseRepositoryConfigUpdatedEvent(PropertyChangedEventArgs args)
         {
-            PropertyChanged?.Invoke(this, args);
+            RepositoryConfigUpdated?.Invoke(this, args);
         }
 
-        protected virtual void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
+        protected virtual void RaiseCredentialsUpdatedEvent(object sender, CollectionUpdatedEventArgs<ICredentialRecord> args)
         {
-            CollectionChanged?.Invoke(this, args);
+            CredentialsUpdated?.Invoke(this, args);
         }
     }
 }
