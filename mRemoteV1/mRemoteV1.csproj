@@ -212,6 +212,8 @@
     <Compile Include="Credential\CredentialChangedEventArgs.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
+    <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
+    <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
     <Compile Include="Credential\CredentialRepositoryChangedArgs.cs" />
     <Compile Include="Credential\CredentialRepositoryList.cs" />
     <Compile Include="Credential\CredentialRecord.cs" />
@@ -261,10 +263,12 @@
     <Compile Include="Security\CryptographyProviderFactory.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilder.cs" />
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
+    <Compile Include="Tools\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\ScanHost.cs" />

@@ -2,7 +2,7 @@
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialRepositoryChangedArgs
+    public class CredentialRepositoryChangedArgs : EventArgs
     {
         public ICredentialRepository Repository { get; }
 

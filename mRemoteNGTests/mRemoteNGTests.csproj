@@ -148,6 +148,7 @@
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
+    <Compile Include="Tools\FullyObservableCollectionTests.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
