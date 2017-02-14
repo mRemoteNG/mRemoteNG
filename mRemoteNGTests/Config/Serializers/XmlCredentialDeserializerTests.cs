@@ -10,7 +10,7 @@ namespace mRemoteNGTests.Config.Serializers
 {
     public class XmlCredentialDeserializerTests
     {
-        private XmlCredentialDeserializer _deserializer;
+        private XmlCredentialRecordDeserializer _deserializer;
         private ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _key = "myencrptionpass".ConvertToSecureString();
 
@@ -18,7 +18,7 @@ namespace mRemoteNGTests.Config.Serializers
         public void Setup()
         {
             _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _deserializer = new XmlCredentialDeserializer();
+            _deserializer = new XmlCredentialRecordDeserializer();
         }
 
         [Test]

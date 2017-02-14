@@ -10,7 +10,7 @@ using mRemoteNG.Security.Authentication;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class XmlCredentialDeserializer
+    public class XmlCredentialRecordDeserializer
     {
         public string SchemaVersion { get; } = "1.0";
         public IAuthenticator Authenticator { get; set; }

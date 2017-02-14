@@ -11,9 +11,9 @@ namespace mRemoteNG.Config
     public class CredentialRecordLoader
     {
         private readonly IDataProvider<string> _dataProvider;
-        private readonly XmlCredentialDeserializer _deserializer;
+        private readonly XmlCredentialRecordDeserializer _deserializer;
 
-        public CredentialRecordLoader(IDataProvider<string> dataProvider, XmlCredentialDeserializer deserializer)
+        public CredentialRecordLoader(IDataProvider<string> dataProvider, XmlCredentialRecordDeserializer deserializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));

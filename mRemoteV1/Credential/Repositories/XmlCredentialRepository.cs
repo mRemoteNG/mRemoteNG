@@ -14,7 +14,7 @@ namespace mRemoteNG.Credential.Repositories
     public class XmlCredentialRepository : ICredentialRepository
     {
         private readonly IDataProvider<string> _dataProvider;
-        private readonly XmlCredentialDeserializer _deserializer;
+        private readonly XmlCredentialRecordDeserializer _deserializer;
         private readonly XmlCredentialRecordSerializer _serializer;
 
         public ICredentialRepositoryConfig Config { get; }
@@ -34,7 +34,7 @@ namespace mRemoteNG.Credential.Repositories
             ((FullyObservableCollection<ICredentialRecord>) CredentialRecords).CollectionUpdated += RaiseCredentialsUpdatedEvent;
             Config.PropertyChanged += (sender, args) => RaiseRepositoryConfigUpdatedEvent(args);
             _dataProvider = dataProvider;
-            _deserializer = new XmlCredentialDeserializer();
+            _deserializer = new XmlCredentialRecordDeserializer();
             _serializer = new XmlCredentialRecordSerializer(cryptographyProvider);
         }
 
