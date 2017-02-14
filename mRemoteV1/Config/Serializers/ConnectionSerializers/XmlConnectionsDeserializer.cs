@@ -24,7 +24,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class XmlConnectionsDeserializer : IDeserializer
+    public class XmlConnectionsDeserializer : IDeserializer<ConnectionTreeModel>
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;

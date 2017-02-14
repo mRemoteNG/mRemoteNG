@@ -9,7 +9,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class PortScanDeserializer : IDeserializer
+    public class PortScanDeserializer : IDeserializer<ConnectionTreeModel>
     {
         private readonly IEnumerable<ScanHost> _scannedHosts;
         private readonly ProtocolType _targetProtocolType;

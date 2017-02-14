@@ -14,7 +14,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class DataTableDeserializer : IDeserializer
+    public class DataTableDeserializer : IDeserializer<ConnectionTreeModel>
     {
         private readonly DataTable _dataTable;
 

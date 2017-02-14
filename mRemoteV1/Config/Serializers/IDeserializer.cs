@@ -1,9 +1,7 @@
-﻿using mRemoteNG.Tree;
-
-namespace mRemoteNG.Config.Serializers
+﻿namespace mRemoteNG.Config.Serializers
 {
-    public interface IDeserializer
+    public interface IDeserializer<out TOut>
     {
-        ConnectionTreeModel Deserialize();
+        TOut Deserialize();
     }
 }

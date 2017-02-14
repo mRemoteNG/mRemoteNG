@@ -13,7 +13,7 @@ using System.Text;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class RemoteDesktopConnectionManagerDeserializer : IDeserializer
+    public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<ConnectionTreeModel>
     {
         private readonly string _rdcmConnectionsXml;
 

@@ -12,16 +12,16 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class XmlConnectionsSerializer : ISerializer<string>
+    public class XmlConnectionsSerializer : ISerializer<ConnectionTreeModel,string>, ISerializer<ConnectionInfo, string>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
-        private readonly IConnectionSerializer<XElement> _connectionNodeSerializer;
+        private readonly ISerializer<ConnectionInfo, XElement> _connectionNodeSerializer;
 
         public bool Export { get; set; }
         public SaveFilter SaveFilter { get; set; } = new SaveFilter();
         public bool UseFullEncryption { get; set; }
 
-        public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider, IConnectionSerializer<XElement> connectionNodeSerializer)
+        public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider, ISerializer<ConnectionInfo, XElement> connectionNodeSerializer)
         {
             _cryptographyProvider = cryptographyProvider;
             _connectionNodeSerializer = connectionNodeSerializer;

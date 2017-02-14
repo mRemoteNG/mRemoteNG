@@ -14,9 +14,9 @@ namespace mRemoteNG.Config.Serializers
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private SecureString _encryptionKey;
-        private readonly IConnectionSerializer<XElement> _connectionNodeSerializer;
+        private readonly ISerializer<ConnectionInfo, XElement> _connectionNodeSerializer;
 
-        public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider, IConnectionSerializer<XElement> connectionNodeSerializer)
+        public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider, ISerializer<ConnectionInfo, XElement> connectionNodeSerializer)
         {
             _cryptographyProvider = cryptographyProvider;
             _connectionNodeSerializer = connectionNodeSerializer;

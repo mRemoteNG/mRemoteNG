@@ -9,7 +9,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class PuttyConnectionManagerDeserializer : IDeserializer
+    public class PuttyConnectionManagerDeserializer : IDeserializer<ConnectionTreeModel>
     {
         private readonly string _puttycmConnectionsXml;
 

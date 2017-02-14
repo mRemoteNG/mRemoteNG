@@ -10,7 +10,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class DataTableSerializer : ISerializer<DataTable>
+    public class DataTableSerializer : ISerializer<ConnectionInfo,DataTable>
     {
         private DataTable _dataTable;
         private const string TableName = "tblCons";

@@ -70,7 +70,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-			    ISerializer<string> serializer;
+			    ISerializer<ConnectionInfo, string> serializer;
 			    switch (saveFormat)
 			    {
 			        case ConnectionsSaver.Format.mRXML:

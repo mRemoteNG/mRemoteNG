@@ -7,7 +7,7 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class XmlConnectionNodeSerializer27 : IConnectionSerializer<XElement>
+    public class XmlConnectionNodeSerializer27 : ISerializer<ConnectionInfo,XElement>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;

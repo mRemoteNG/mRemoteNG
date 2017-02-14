@@ -20,7 +20,7 @@ namespace mRemoteNG.Config.Connections
 
 		public ConnectionTreeModel LoadConnections(IEnumerable<ICredentialRecord> credentialRecords, bool import)
 		{
-		    IDeserializer deserializer;
+            IDeserializer<ConnectionTreeModel> deserializer;
 			if (UseDatabase)
 			{
 			    var connector = new SqlDatabaseConnector();
