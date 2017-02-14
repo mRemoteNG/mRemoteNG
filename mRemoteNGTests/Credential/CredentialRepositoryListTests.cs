@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Credential
 {
-    public class CredentialProviderCatalogTests
+    public class CredentialRepositoryListTests
     {
         private CredentialRepositoryList _credentialCatalog;
 
