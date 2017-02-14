@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
             InitializeComponent();
             Dock = DockStyle.Fill;
-            credentialRepositoryListView.RepositoryFilter = repository => repository.Config.Loaded;
+            credentialRepositoryListView.RepositoryFilter = repository => repository.IsLoaded;
             credentialRepositoryListView.CredentialRepositoryList = credentialRepositoryList;
             credentialRepositoryListView.DoubleClickHandler = DoubleClickHandler;
         }

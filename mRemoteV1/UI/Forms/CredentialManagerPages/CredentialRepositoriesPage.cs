@@ -87,13 +87,13 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void UpdateLoadToggleButton(ICredentialRepository selectedRepository)
         {
             if (selectedRepository == null) return;
-            buttonToggleLoad.Text = selectedRepository.Config.Loaded ? "Unload" : "Load";
+            buttonToggleLoad.Text = selectedRepository.IsLoaded ? "Unload" : "Load";
         }
 
         private void buttonToggleLoad_Click(object sender, EventArgs e)
         {
             var selectedRepository = credentialRepositoryListView.SelectedRepository;
-            if (selectedRepository.Config.Loaded)
+            if (selectedRepository.IsLoaded)
                 selectedRepository.UnloadCredentials();
             else
                 selectedRepository.LoadCredentials();

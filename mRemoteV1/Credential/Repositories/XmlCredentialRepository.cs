@@ -20,6 +20,7 @@ namespace mRemoteNG.Credential.Repositories
         public ICredentialRepositoryConfig Config { get; }
         public IList<ICredentialRecord> CredentialRecords { get; }
         public IPasswordRequestor PasswordRequestor { get; set; } = new PasswordForm("", false);
+        public bool IsLoaded { get; private set; } = true;
 
         public XmlCredentialRepository(ICredentialRepositoryConfig config, IDataProvider<string> dataProvider, ICryptographyProvider cryptographyProvider)
         {
@@ -39,7 +40,9 @@ namespace mRemoteNG.Credential.Repositories
 
         public void LoadCredentials()
         {
-            var credentials = LoadFromSource();
+            var fileContents = _dataProvider.Load();
+            if (fileContents == "") return;
+            var credentials = Deserialize(fileContents);
             foreach (var newCredential in credentials)
             {
                 if (CredentialRecords.Any(cred => cred.Id.Equals(newCredential.Id))) continue;
@@ -47,7 +50,7 @@ namespace mRemoteNG.Credential.Repositories
             }
         }
 
-        private IEnumerable<ICredentialRecord> LoadFromSource()
+        private IEnumerable<ICredentialRecord> Deserialize(string xml)
         {
             var key = Config.Key;
             var requestAuth = true;
@@ -55,10 +58,9 @@ namespace mRemoteNG.Credential.Repositories
             { 
                 try
                 {
-                    var serializedCredentials = _dataProvider.Load();
-                    var credentials = _deserializer.Deserialize(serializedCredentials, key).ToArray();
+                    var credentials = _deserializer.Deserialize(xml, key).ToArray();
                     Config.Key = key;
-                    Config.Loaded = true;
+                    IsLoaded = true;
                     return credentials;
                 }
                 catch (Exception)
@@ -73,13 +75,13 @@ namespace mRemoteNG.Credential.Repositories
 
         public void UnloadCredentials()
         {
-            Config.Loaded = false;
+            IsLoaded = false;
             CredentialRecords.Clear();
         }
 
         public void SaveCredentials()
         {
-            if (!Config.Loaded) return;
+            if (!IsLoaded) return;
             var data = _serializer.Serialize(CredentialRecords, Config.Key);
             _dataProvider.Save(data);
         }

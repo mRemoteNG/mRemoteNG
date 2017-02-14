@@ -10,6 +10,7 @@ namespace mRemoteNG.Credential
     {
         ICredentialRepositoryConfig Config { get; }
         IList<ICredentialRecord> CredentialRecords { get; }
+        bool IsLoaded { get; }
         void LoadCredentials();
         void SaveCredentials();
         void UnloadCredentials();

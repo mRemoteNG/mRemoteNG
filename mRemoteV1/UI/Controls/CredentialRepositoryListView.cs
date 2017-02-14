@@ -41,7 +41,7 @@ namespace mRemoteNG.UI.Controls
             olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.TypeName;
             olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Source;
             olvColumnId.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Id;
-            olvColumnIsLoaded.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Loaded;
+            olvColumnIsLoaded.AspectGetter = rowObject => ((ICredentialRepository) rowObject).IsLoaded;
             SetListObjects(CredentialRepositoryList.CredentialProviders);
             objectListView1.SelectionChanged += (sender, args) => RaiseSelectionChangedEvent();
             objectListView1.MouseDoubleClick += ObjectListView1OnMouseDoubleClick;
