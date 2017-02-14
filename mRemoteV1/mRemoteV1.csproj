@@ -213,6 +213,7 @@
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
     <Compile Include="Security\Authentication\IPasswordRequestor.cs" />
+    <Compile Include="Security\RandomGenerator.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
     <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
     <Compile Include="Credential\CredentialRepositoryChangedArgs.cs" />
