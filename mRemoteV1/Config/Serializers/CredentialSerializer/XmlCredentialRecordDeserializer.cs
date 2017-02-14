@@ -20,7 +20,7 @@ namespace mRemoteNG.Config.Serializers
             var xdoc = XDocument.Parse(xml);
             var rootElement = xdoc.Root;
             ValidateSchemaVersion(rootElement);
-            var cryptographyProvider = BuildCryptoProvider(rootElement);
+            var cryptographyProvider = CryptographyProviderFactory.BuildFromXml(rootElement);
             Authenticate(rootElement, cryptographyProvider, decryptionKey);
 
             var credentials = from element in xdoc.Descendants("Credential")
@@ -47,26 +47,6 @@ namespace mRemoteNG.Config.Serializers
         {
             var authString = rootElement.Attribute("Auth")?.Value;
             cryptographyProvider.Decrypt(authString, key);
-        }
-
-        private ICryptographyProvider BuildCryptoProvider(XElement rootElement)
-        {
-            if (rootElement == null)
-                throw new ArgumentNullException(nameof(rootElement));
-
-            BlockCipherEngines engine;
-            Enum.TryParse(rootElement.Attribute("EncryptionEngine")?.Value, true, out engine);
-
-            BlockCipherModes mode;
-            Enum.TryParse(rootElement.Attribute("BlockCipherMode")?.Value, true, out mode);
-
-            int kdfIterations;
-            int.TryParse(rootElement.Attribute("KdfIterations")?.Value, out kdfIterations);
-
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
-            cryptoProvider.KeyDerivationIterations = kdfIterations;
-            
-            return cryptoProvider;
         }
     }
 }
