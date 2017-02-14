@@ -9,6 +9,7 @@ namespace mRemoteNG.UI.Forms
     public partial class PasswordForm : IPasswordRequestor
 	{
         private readonly string _passwordName;
+        private SecureString _password = new SecureString();
 
 	    private bool Verify { get; }
 
@@ -22,9 +23,9 @@ namespace mRemoteNG.UI.Forms
         public SecureString RequestPassword()
         {
             var dialog = ShowDialog();
-            return dialog == DialogResult.OK ?
-                (Verify ? txtVerify.Text : txtPassword.Text).ConvertToSecureString() :
-                new SecureString();
+            return dialog == DialogResult.OK
+                ? _password 
+                : new SecureString();
         }
 
         #region Event Handlers
@@ -38,7 +39,16 @@ namespace mRemoteNG.UI.Forms
 		    txtVerify.Visible = false;
 		}
 
-	    private void btnCancel_Click(object sender, EventArgs e)
+        private void PasswordForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _password = txtPassword.Text.ConvertToSecureString();
+            txtPassword.Text = "";
+            txtVerify.Text = "";
+            if (Verify) return;
+            Height = Height + (txtVerify.Top - txtPassword.Top);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
             Close();
@@ -93,5 +103,5 @@ namespace mRemoteNG.UI.Forms
 			lblStatus.Visible = false;
 		}
         #endregion
-	}
+    }
 }
