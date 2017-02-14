@@ -41,16 +41,16 @@
             // 
             this.objectListView1.AllColumns.Add(this.olvColumnTitle);
             this.objectListView1.AllColumns.Add(this.olvColumnProvider);
-            this.objectListView1.AllColumns.Add(this.olvColumnSource);
-            this.objectListView1.AllColumns.Add(this.olvColumnId);
             this.objectListView1.AllColumns.Add(this.olvColumnIsLoaded);
+            this.objectListView1.AllColumns.Add(this.olvColumnId);
+            this.objectListView1.AllColumns.Add(this.olvColumnSource);
             this.objectListView1.CellEditUseWholeCell = false;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnTitle,
             this.olvColumnProvider,
-            this.olvColumnSource,
+            this.olvColumnIsLoaded,
             this.olvColumnId,
-            this.olvColumnIsLoaded});
+            this.olvColumnSource});
             this.objectListView1.CopySelectionOnControlC = false;
             this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
             this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -84,6 +84,7 @@
             // olvColumnSource
             // 
             this.olvColumnSource.AspectName = "";
+            this.olvColumnSource.DisplayIndex = 2;
             this.olvColumnSource.Groupable = false;
             this.olvColumnSource.Text = "Source";
             // 
@@ -93,6 +94,7 @@
             // 
             // olvColumnIsLoaded
             // 
+            this.olvColumnIsLoaded.DisplayIndex = 4;
             this.olvColumnIsLoaded.IsEditable = false;
             this.olvColumnIsLoaded.Text = "Loaded";
             // 

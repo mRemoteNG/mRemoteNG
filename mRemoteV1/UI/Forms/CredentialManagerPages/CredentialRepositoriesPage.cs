@@ -34,6 +34,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             var selectedRepository = credentialRepositoryListView.SelectedRepository;
             buttonRemove.Enabled = selectedRepository != null;
             buttonEdit.Enabled = selectedRepository != null;
+            buttonToggleLoad.Enabled = selectedRepository != null;
+            UpdateLoadToggleButton(selectedRepository);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -80,6 +82,21 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             if (selectedRepository == null) return;
             if (_providerCatalog.Contains(selectedRepository.Config.Id))
                 _providerCatalog.RemoveProvider(selectedRepository);
+        }
+
+        private void UpdateLoadToggleButton(ICredentialRepository selectedRepository)
+        {
+            if (selectedRepository == null) return;
+            buttonToggleLoad.Text = selectedRepository.Config.Loaded ? "Unload" : "Load";
+        }
+
+        private void buttonToggleLoad_Click(object sender, EventArgs e)
+        {
+            var selectedRepository = credentialRepositoryListView.SelectedRepository;
+            if (selectedRepository.Config.Loaded)
+                selectedRepository.UnloadCredentials();
+            else
+                selectedRepository.LoadCredentials();
         }
     }
 }

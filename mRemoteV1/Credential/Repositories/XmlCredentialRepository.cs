@@ -71,6 +71,12 @@ namespace mRemoteNG.Credential.Repositories
             return new ICredentialRecord[0];
         }
 
+        public void UnloadCredentials()
+        {
+            Config.Loaded = false;
+            CredentialRecords.Clear();
+        }
+
         public void SaveCredentials()
         {
             if (!Config.Loaded) return;
