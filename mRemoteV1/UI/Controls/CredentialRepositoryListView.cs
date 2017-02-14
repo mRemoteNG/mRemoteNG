@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
@@ -15,14 +17,15 @@ namespace mRemoteNG.UI.Controls
             get { return _credentialRepositoryList; }
             set
             {
-                _credentialRepositoryList.RepositoriesUpdated -= UpdateList;
+                _credentialRepositoryList.RepositoriesUpdated -= OnRepositoriesUpdated;
                 _credentialRepositoryList = value;
-                objectListView1.SetObjects(CredentialRepositoryList.CredentialProviders);
+                SetListObjects(CredentialRepositoryList.CredentialProviders);
                 objectListView1.AutoResizeColumns();
-                _credentialRepositoryList.RepositoriesUpdated += UpdateList;
+                _credentialRepositoryList.RepositoriesUpdated += OnRepositoriesUpdated;
             }
         }
 
+        public Func<ICredentialRepository, bool> RepositoryFilter { get; set; }
         public ICredentialRepository SelectedRepository => GetSelectedRepository();
         public Func<ICredentialRepository,bool> DoubleClickHandler { get; set; }
 
@@ -38,14 +41,23 @@ namespace mRemoteNG.UI.Controls
             olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.TypeName;
             olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Source;
             olvColumnId.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Id;
-            objectListView1.SetObjects(CredentialRepositoryList.CredentialProviders);
+            olvColumnIsLoaded.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Loaded;
+            SetListObjects(CredentialRepositoryList.CredentialProviders);
             objectListView1.SelectionChanged += (sender, args) => RaiseSelectionChangedEvent();
             objectListView1.MouseDoubleClick += ObjectListView1OnMouseDoubleClick;
         }
 
-        private void UpdateList(object sender, CollectionUpdatedEventArgs<ICredentialRepository> args)
+        private void OnRepositoriesUpdated(object sender, CollectionUpdatedEventArgs<ICredentialRepository> args)
         {
-            objectListView1.SetObjects(CredentialRepositoryList.CredentialProviders);
+            SetListObjects(CredentialRepositoryList.CredentialProviders);
+        }
+
+        private void SetListObjects(IEnumerable<ICredentialRepository> repositories)
+        {
+            var filteredRepositories = RepositoryFilter == null ?
+                repositories :
+                repositories.Where(RepositoryFilter);
+            objectListView1.SetObjects(filteredRepositories);
         }
 
         private void ObjectListView1OnMouseDoubleClick(object sender, MouseEventArgs mouseEventArgs)

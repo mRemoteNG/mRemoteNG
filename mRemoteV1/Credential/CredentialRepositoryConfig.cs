@@ -11,6 +11,7 @@ namespace mRemoteNG.Credential
         private string _source = "";
         private SecureString _key = new SecureString();
         private string _typeName = "";
+        private bool _loaded;
 
         public Guid Id { get; }
 
@@ -51,6 +52,16 @@ namespace mRemoteNG.Credential
             {
                 _key = value; 
                 RaisePropertyChangedEvent(nameof(Key));
+            }
+        }
+
+        public bool Loaded
+        {
+            get { return _loaded; }
+            set
+            {
+                _loaded = value;
+                RaisePropertyChangedEvent(nameof(Loaded));
             }
         }
 

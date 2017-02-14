@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnProvider = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnIsLoaded = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,12 +43,14 @@
             this.objectListView1.AllColumns.Add(this.olvColumnProvider);
             this.objectListView1.AllColumns.Add(this.olvColumnSource);
             this.objectListView1.AllColumns.Add(this.olvColumnId);
+            this.objectListView1.AllColumns.Add(this.olvColumnIsLoaded);
             this.objectListView1.CellEditUseWholeCell = false;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnTitle,
             this.olvColumnProvider,
             this.olvColumnSource,
-            this.olvColumnId});
+            this.olvColumnId,
+            this.olvColumnIsLoaded});
             this.objectListView1.CopySelectionOnControlC = false;
             this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
             this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -64,6 +67,11 @@
             this.objectListView1.UseNotifyPropertyChanged = true;
             this.objectListView1.View = System.Windows.Forms.View.Details;
             // 
+            // olvColumnTitle
+            // 
+            this.olvColumnTitle.Groupable = false;
+            this.olvColumnTitle.Text = "Title";
+            // 
             // olvColumnProvider
             // 
             this.olvColumnProvider.AspectName = "";
@@ -79,14 +87,14 @@
             this.olvColumnSource.Groupable = false;
             this.olvColumnSource.Text = "Source";
             // 
-            // olvColumnTitle
-            // 
-            this.olvColumnTitle.Groupable = false;
-            this.olvColumnTitle.Text = "Title";
-            // 
             // olvColumnId
             // 
             this.olvColumnId.Text = "ID";
+            // 
+            // olvColumnIsLoaded
+            // 
+            this.olvColumnIsLoaded.IsEditable = false;
+            this.olvColumnIsLoaded.Text = "Loaded";
             // 
             // CredentialRepositoryListView
             // 
@@ -107,5 +115,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumnSource;
         private BrightIdeasSoftware.OLVColumn olvColumnTitle;
         private BrightIdeasSoftware.OLVColumn olvColumnId;
+        private BrightIdeasSoftware.OLVColumn olvColumnIsLoaded;
     }
 }

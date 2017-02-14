@@ -11,5 +11,6 @@ namespace mRemoteNG.Credential.Repositories
         string TypeName { get; }
         string Source { get; set; }
         SecureString Key { get; set; }
+        bool Loaded { get; set; }
     }
 }
