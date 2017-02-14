@@ -7,6 +7,7 @@ using mRemoteNG.Config.Serializers;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Tools.CustomCollections;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Credential.Repositories
 {
@@ -18,7 +19,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public ICredentialRepositoryConfig Config { get; }
         public IList<ICredentialRecord> CredentialRecords { get; }
-        public IAuthenticator Authenticator { get; set; }
+        public IPasswordRequestor PasswordRequestor { get; set; } = new PasswordForm("", false);
 
         public XmlCredentialRepository(ICredentialRepositoryConfig config, IDataProvider<string> dataProvider, ICryptographyProvider cryptographyProvider)
         {
@@ -38,17 +39,41 @@ namespace mRemoteNG.Credential.Repositories
 
         public void LoadCredentials()
         {
-            var serializedCredentials = _dataProvider.Load();
-            var newCredentials = _deserializer.Deserialize(serializedCredentials, Config.Key);
-            foreach (var newCredential in newCredentials)
+            var credentials = LoadFromSource();
+            foreach (var newCredential in credentials)
             {
                 if (CredentialRecords.Any(cred => cred.Id.Equals(newCredential.Id))) continue;
                 CredentialRecords.Add(newCredential);
             }
         }
 
+        private IEnumerable<ICredentialRecord> LoadFromSource()
+        {
+            var key = Config.Key;
+            var requestAuth = true;
+            while(requestAuth)
+            { 
+                try
+                {
+                    var serializedCredentials = _dataProvider.Load();
+                    var credentials = _deserializer.Deserialize(serializedCredentials, key).ToArray();
+                    Config.Key = key;
+                    Config.Loaded = true;
+                    return credentials;
+                }
+                catch (Exception)
+                {
+                    key = PasswordRequestor.RequestPassword();
+                    if (key.Length == 0)
+                        requestAuth = false;
+                }
+            }
+            return new ICredentialRecord[0];
+        }
+
         public void SaveCredentials()
         {
+            if (!Config.Loaded) return;
             var data = _serializer.Serialize(CredentialRecords, Config.Key);
             _dataProvider.Save(data);
         }
