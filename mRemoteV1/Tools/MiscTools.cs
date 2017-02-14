@@ -4,10 +4,8 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Security;
-using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
-using mRemoteNG.Security;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using static System.String;
@@ -39,8 +37,7 @@ namespace mRemoteNG.Tools
 		public static SecureString PasswordDialog(string passwordName = null, bool verify = true)
 		{
 			var passwordForm = new PasswordForm(passwordName, verify);
-				
-			return passwordForm.ShowDialog() == DialogResult.OK ? passwordForm.Password.ConvertToSecureString() : "".ConvertToSecureString();
+		    return passwordForm.RequestPassword();
 		}
 		
 

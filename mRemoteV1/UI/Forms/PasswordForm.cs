@@ -1,36 +1,34 @@
 using System;
+using System.Security;
 using System.Windows.Forms;
-using mRemoteNG.UI.Controls;
+using mRemoteNG.Security;
+using mRemoteNG.Security.Authentication;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class PasswordForm
+    public partial class PasswordForm : IPasswordRequestor
 	{
-        private string _passwordName;
+        private readonly string _passwordName;
 
-	    #region Public Properties
+	    private bool Verify { get; }
 
-	    private bool Verify { get; set; }
-
-	    public string Password => Verify ? txtVerify.Text : txtPassword.Text;
-
-	    #endregion
-		
-        #region Constructors
 		public PasswordForm(string passwordName = null, bool verify = true)
 		{
-			// This call is required by the designer.
 			InitializeComponent();
-				
-			// Add any initialization after the InitializeComponent() call.
 			_passwordName = passwordName;
 			Verify = verify;
 		}
-        #endregion
-		
-        #region Event Handlers
 
-	    private void frmPassword_Load(object sender, EventArgs e)
+        public SecureString RequestPassword()
+        {
+            var dialog = ShowDialog();
+            return dialog == DialogResult.OK ?
+                (Verify ? txtVerify.Text : txtPassword.Text).ConvertToSecureString() :
+                new SecureString();
+        }
+
+        #region Event Handlers
+        private void frmPassword_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 
@@ -48,15 +46,10 @@ namespace mRemoteNG.UI.Forms
 
 	    private void btnOK_Click(object sender, EventArgs e)
 		{
-			if (Verify)
-			{
-				if (VerifyPassword())
-					DialogResult = DialogResult.OK;
-			}
-			else
-			{
+			if (Verify && VerifyPassword())
 				DialogResult = DialogResult.OK;
-			}
+			else
+				DialogResult = DialogResult.OK;
 		}
 
 	    private void txtPassword_TextChanged(object sender, EventArgs e)
@@ -72,7 +65,6 @@ namespace mRemoteNG.UI.Forms
 				
 			lblPassword.Text = Language.strLabelPassword;
 			lblVerify.Text = Language.strLabelVerify;
-				
 			btnCancel.Text = Language.strButtonCancel;
 			btnOK.Text = Language.strButtonOK;
 		}
@@ -82,20 +74,12 @@ namespace mRemoteNG.UI.Forms
 			if (txtPassword.Text.Length >= 3)
 			{
 				if (txtPassword.Text == txtVerify.Text)
-				{
 					return true;
-				}
-				else
-				{
-					ShowStatus(Language.strPasswordStatusMustMatch);
-					return false;
-				}
+			    ShowStatus(Language.strPasswordStatusMustMatch);
+			    return false;
 			}
-			else
-			{
-				ShowStatus(Language.strPasswordStatusTooShort);
-				return false;
-			}
+		    ShowStatus(Language.strPasswordStatusTooShort);
+		    return false;
 		}
 			
 		private void ShowStatus(string status)
