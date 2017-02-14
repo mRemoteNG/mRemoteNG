@@ -26,14 +26,12 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        
-
-
         public KeyValuePair<ICredentialRecord, ICredentialRepository> SelectedObject => CastRowObject(objectListView1.SelectedObject);
 
         public CredentialRecordListView()
         {
             InitializeComponent();
+            Disposed += OnDisposed;
             olvColumnCredentialId.AspectGetter = CredentialIdAspectGetter;
             olvColumnTitle.AspectGetter = CredentialTitleAspectGetter;
             olvColumnUsername.AspectGetter = CredentialUsernameAspectGetter;
@@ -43,6 +41,12 @@ namespace mRemoteNG.UI.Controls
             objectListView1.SelectionChanged += (sender, args) => RaiseSelectionChangedEvent();
             objectListView1.CellClick += RaiseCellClickEvent;
             ApplyLanguage();
+        }
+
+        private void OnDisposed(object sender, EventArgs eventArgs)
+        {
+            _credentialRepositoryList.RepositoriesUpdated -= CredentialRepositoryListOnRepositoriesUpdated;
+            _credentialRepositoryList.CredentialsUpdated -= CredentialRepositoryListOnCredentialsUpdated;
         }
 
         private void SetObjectList()
