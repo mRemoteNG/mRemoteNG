@@ -99,8 +99,8 @@ namespace mRemoteNG.UI.Controls
                     container.IsExpanded = true;
             };
             SelectionChanged += tvConnections_AfterSelect;
-            CellClick += tvConnections_NodeMouseSingleClick;
-            CellClick += tvConnections_NodeMouseDoubleClick;
+            MouseDoubleClick += OnMouse_DoubleClick;
+            MouseClick += OnMouse_SingleClick;
             CellToolTipShowing += tvConnections_CellToolTipShowing;
             ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
@@ -249,20 +249,24 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        private void tvConnections_NodeMouseSingleClick(object sender, CellClickEventArgs e)
+        private void OnMouse_DoubleClick(object sender, MouseEventArgs mouseEventArgs)
         {
-            if (e.ClickCount > 1) return;
-            var clickedNode = e.Model as ConnectionInfo;
-            if (clickedNode == null) return;
-            SingleClickHandler.Execute(clickedNode);
-        }
-
-        private void tvConnections_NodeMouseDoubleClick(object sender, CellClickEventArgs e)
-        {
-            if (e.ClickCount < 2) return;
-            var clickedNode = e.Model as ConnectionInfo;
+            if (mouseEventArgs.Clicks < 2) return;
+            OLVColumn column;
+            var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
+            var clickedNode = listItem.RowObject as ConnectionInfo;
             if (clickedNode == null) return;
             DoubleClickHandler.Execute(clickedNode);
+        }
+
+        private void OnMouse_SingleClick(object sender, MouseEventArgs mouseEventArgs)
+        {
+            if (mouseEventArgs.Clicks > 1) return;
+            OLVColumn column;
+            var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
+            var clickedNode = listItem.RowObject as ConnectionInfo;
+            if (clickedNode == null) return;
+            SingleClickHandler.Execute(clickedNode);
         }
 
         private void tvConnections_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
