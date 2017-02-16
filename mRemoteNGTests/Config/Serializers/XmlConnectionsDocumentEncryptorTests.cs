@@ -22,7 +22,7 @@ namespace mRemoteNGTests.Config.Serializers
             var connectionTreeModel = SetupConnectionTreeModel();
             var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
             var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
-            _originalDocument = new XmlConnectionsDocumentCompiler(cryptoProvider, connectionNodeSerializer).CompileDocument(connectionTreeModel, false, false);
+            _originalDocument = new XmlConnectionsDocumentCompiler(cryptoProvider, connectionNodeSerializer).CompileDocument(connectionTreeModel, false);
             _documentEncryptor = new XmlConnectionsDocumentEncryptor(cryptoProvider);
         }
 

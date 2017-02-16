@@ -22,17 +22,17 @@ namespace mRemoteNG.Config.Serializers
             _connectionNodeSerializer = connectionNodeSerializer;
         }
 
-        public XDocument CompileDocument(ConnectionTreeModel connectionTreeModel, bool fullFileEncryption, bool export)
+        public XDocument CompileDocument(ConnectionTreeModel connectionTreeModel, bool fullFileEncryption)
         {
             var rootNodeInfo = GetRootNodeFromConnectionTreeModel(connectionTreeModel);
-            return CompileDocument(rootNodeInfo, fullFileEncryption, export);
+            return CompileDocument(rootNodeInfo, fullFileEncryption);
         }
 
-        public XDocument CompileDocument(ConnectionInfo serializationTarget, bool fullFileEncryption, bool export)
+        public XDocument CompileDocument(ConnectionInfo serializationTarget, bool fullFileEncryption)
         {
             var rootNodeInfo = GetRootNodeFromConnectionInfo(serializationTarget);
             _encryptionKey = rootNodeInfo.PasswordString.ConvertToSecureString();
-            var rootElement = CompileRootNode(rootNodeInfo, fullFileEncryption, export);
+            var rootElement = CompileRootNode(rootNodeInfo, fullFileEncryption);
 
             CompileRecursive(serializationTarget, rootElement);
             var xmlDeclaration = new XDeclaration("1.0", "utf-8", null);
@@ -71,10 +71,10 @@ namespace mRemoteNG.Config.Serializers
             }
         }
 
-        private XElement CompileRootNode(RootNodeInfo rootNodeInfo, bool fullFileEncryption, bool export)
+        private XElement CompileRootNode(RootNodeInfo rootNodeInfo, bool fullFileEncryption)
         {
             var rootNodeSerializer = new XmlRootNodeSerializer();
-            return rootNodeSerializer.SerializeRootNodeInfo(rootNodeInfo, _cryptographyProvider, fullFileEncryption, export);
+            return rootNodeSerializer.SerializeRootNodeInfo(rootNodeInfo, _cryptographyProvider, fullFileEncryption);
         }
 
         private XElement CompileConnectionInfoNode(ConnectionInfo connectionInfo)

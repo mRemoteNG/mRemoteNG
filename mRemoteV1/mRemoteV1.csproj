@@ -806,6 +806,9 @@
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Schemas\mremoteng_confcons_v2_8.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\mremoteng_confcons_v2_7.xsd">
       <SubType>Designer</SubType>
     </None>

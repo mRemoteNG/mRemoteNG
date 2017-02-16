@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
@@ -81,7 +80,6 @@ namespace mRemoteNG.App
                         var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString());
                         serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
                         {
-                            Export = true,
                             SaveFilter = saveFilter
                         };
 			            break;

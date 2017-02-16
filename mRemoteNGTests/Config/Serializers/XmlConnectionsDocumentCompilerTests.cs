@@ -37,14 +37,14 @@ namespace mRemoteNGTests.Config.Serializers
         [Test]
         public void XDocumentHasXmlDeclaration()
         {
-            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false, false);
+            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false);
             Assert.That(xdoc.Declaration, Is.Not.Null);
         }
 
         [Test]
         public void DocumentHasRootConnectionElement()
         {
-            var xdoc =_documentCompiler.CompileDocument(_connectionTreeModel, false, false);
+            var xdoc =_documentCompiler.CompileDocument(_connectionTreeModel, false);
             var rootElementName = xdoc.Root?.Name.LocalName;
             Assert.That(rootElementName, Is.EqualTo("Connections"));
         }
@@ -52,7 +52,7 @@ namespace mRemoteNGTests.Config.Serializers
         [Test]
         public void ConnectionNodesSerializedRecursively()
         {
-            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false, false);
+            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false);
             var con4 = xdoc.Root?.XPathSelectElement("Node[@Name='folder2']/Node[@Name='folder3']/Node[@Name='con4']");
             Assert.That(con4, Is.Not.Null);
         }
@@ -60,7 +60,7 @@ namespace mRemoteNGTests.Config.Serializers
         [Test]
         public void XmlContentEncryptedWhenFullFileEncryptionTurnedOn()
         {
-            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, true, false);
+            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, true);
             var rootElementValue = xdoc.Root?.Value;
             Assert.That(rootElementValue, Is.Not.EqualTo(string.Empty));
         }
