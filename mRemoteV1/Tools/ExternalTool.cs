@@ -11,6 +11,7 @@ namespace mRemoteNG.Tools
 {
 	public class ExternalTool
 	{
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         #region Public Properties
 		public string DisplayName { get; set; }
 		public string FileName { get; set; }
@@ -80,11 +81,11 @@ namespace mRemoteNG.Tools
 			try
 			{
                 var newConnectionInfo = BuildConnectionInfoForIntegratedApp();
-                ConnectionInitiator.OpenConnection(newConnectionInfo);
+                _connectionInitiator.OpenConnection(newConnectionInfo);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("ExternalApp.StartIntegrated() failed.", ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("ExternalApp.StartIntegrated() failed.", ex);
 			}
 		}
 

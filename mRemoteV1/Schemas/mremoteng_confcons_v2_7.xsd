@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="mremoteng_confcons_v2_7"
+    targetNamespace="http://mremoteng.org"
+    elementFormDefault="qualified"
+    xmlns="http://mremoteng.org"
+    xmlns:mrng="http://mremoteng.org"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  
+  <xs:element name="Connections">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Node" type="mrng:connectioninfo" />
+      </xs:sequence>
+      <xs:attribute name="Name" type="xs:string" use="required" />
+      <xs:attribute name="Export" type="xs:boolean" use="required" />
+      <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
+      <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
+      <xs:attribute name="KdfIterations" type="xs:int" use="optional" />
+      <xs:attribute name="FullFileEncryption" type="xs:boolean" use="required" />
+      <xs:attribute name="Protected" type="xs:string" use="required" />
+      <xs:attribute name="ConfVersion" type="xs:float" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:complexType name="connectioninfo">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Node" type="mrng:connectioninfo" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="Type" type="xs:string" use="required" />
+    <xs:attribute name="Descr" type="xs:string" use="required" />
+    <xs:attribute name="Icon" type="xs:string" use="required" />
+    <xs:attribute name="Panel" type="xs:string" use="required" />
+    <xs:attribute name="CredentialId" type="xs:string" use="required" />
+    <xs:attribute name="Hostname" type="xs:string" use="required" />
+    <xs:attribute name="Protocol" type="xs:string" use="required" />
+    <xs:attribute name="PuttySession" type="xs:string" use="required" />
+    <xs:attribute name="Port" type="xs:int" use="required" />
+    <xs:attribute name="ConnectToConsole" type="xs:boolean" use="required" />
+    <xs:attribute name="UseCredSsp" type="xs:boolean" use="required" />
+    <xs:attribute name="RenderingEngine" type="xs:string" use="required" />
+    <xs:attribute name="ICAEncryptionStrength" type="xs:string" use="required" />
+    <xs:attribute name="RDPAuthenticationLevel" type="xs:string" use="required" />
+    <xs:attribute name="RDPMinutesToIdleTimeout" type="xs:int" use="required" />
+    <xs:attribute name="LoadBalanceInfo" type="xs:string" use="required" />
+    <xs:attribute name="Colors" type="xs:string" use="required" />
+    <xs:attribute name="Resolution" type="xs:string" use="required" />
+    <xs:attribute name="AutomaticResize" type="xs:boolean" use="required" />
+    <xs:attribute name="DisplayWallpaper" type="xs:boolean" use="required" />
+    <xs:attribute name="DisplayThemes" type="xs:boolean" use="required" />
+    <xs:attribute name="EnableFontSmoothing" type="xs:boolean" use="required" />
+    <xs:attribute name="EnableDesktopComposition" type="xs:boolean" use="required" />
+    <xs:attribute name="CacheBitmaps" type="xs:boolean" use="required" />
+    <xs:attribute name="RedirectDiskDrives" type="xs:boolean" use="required" />
+    <xs:attribute name="RedirectPorts" type="xs:boolean" use="required" />
+    <xs:attribute name="RedirectPrinters" type="xs:boolean" use="required" />
+    <xs:attribute name="RedirectSmartCards" type="xs:boolean" use="required" />
+    <xs:attribute name="RedirectSound" type="xs:string" use="required" />
+    <xs:attribute name="SoundQuality" type="xs:string" use="required" />
+    <xs:attribute name="RedirectKeys" type="xs:boolean" use="required" />
+    <xs:attribute name="Connected" type="xs:boolean" use="required" />
+    <xs:attribute name="PreExtApp" type="xs:string" use="required" />
+    <xs:attribute name="PostExtApp" type="xs:string" use="required" />
+    <xs:attribute name="MacAddress" type="xs:string" use="required" />
+    <xs:attribute name="UserField" type="xs:string" use="required" />
+    <xs:attribute name="ExtApp" type="xs:string" use="required" />
+    <xs:attribute name="VNCCompression" type="xs:string" use="required" />
+    <xs:attribute name="VNCEncoding" type="xs:string" use="required" />
+    <xs:attribute name="VNCAuthMode" type="xs:string" use="required" />
+    <xs:attribute name="VNCProxyType" type="xs:string" use="required" />
+    <xs:attribute name="VNCProxyIP" type="xs:string" use="required" />
+    <xs:attribute name="VNCProxyPort" type="xs:int" use="required" />
+    <xs:attribute name="VNCProxyUsername" type="xs:string" use="required" />
+    <xs:attribute name="VNCProxyPassword" type="xs:string" use="required" />
+    <xs:attribute name="VNCColors" type="xs:string" use="required" />
+    <xs:attribute name="VNCSmartSizeMode" type="xs:string" use="required" />
+    <xs:attribute name="VNCViewOnly" type="xs:boolean" use="required" />
+    <xs:attribute name="RDGatewayUsageMethod" type="xs:string" use="required" />
+    <xs:attribute name="RDGatewayHostname" type="xs:string" use="required" />
+    <xs:attribute name="RDGatewayUseConnectionCredentials" type="xs:string" use="required" />
+    <xs:attribute name="RDGatewayUsername" type="xs:string" use="required" />
+    <xs:attribute name="RDGatewayPassword" type="xs:string" use="required" />
+    <xs:attribute name="RDGatewayDomain" type="xs:string" use="required" />
+    <xs:attribute name="InheritCredentialRecord" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritCacheBitmaps" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritColors" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritDescription" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritDisplayThemes" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritDisplayWallpaper" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritEnableFontSmoothing" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritEnableDesktopComposition" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritDomain" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritIcon" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritPanel" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritPassword" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritPort" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritProtocol" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritPuttySession" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRedirectDiskDrives" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRedirectKeys" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRedirectPorts" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRedirectPrinters" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRedirectSmartCards" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRedirectSound" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritSoundQuality" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritResolution" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritAutomaticResize" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUseConsoleSession" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUseCredSsp" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRenderingEngine" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUsername" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritICAEncryptionStrength" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDPAuthenticationLevel" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDPMinutesToIdleTimeout" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritLoadBalanceInfo" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritPreExtApp" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritPostExtApp" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritMacAddress" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritExtApp" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCCompression" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCEncoding" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCAuthMode" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCProxyType" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCProxyIP" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCProxyPort" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCProxyUsername" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCProxyPassword" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCColors" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCSmartSizeMode" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCViewOnly" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDGatewayUsageMethod" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDGatewayHostname" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDGatewayUseConnectionCredentials" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDGatewayUsername" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDGatewayPassword" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDGatewayDomain" type="xs:boolean" use="optional" />
+  </xs:complexType>
+</xs:schema>

@@ -11,25 +11,28 @@ namespace mRemoteNG.App
 {
     public class Logger
     {
-        private static readonly Logger _loggerInstance = new Logger();
-        private ILog _log;
+        public static readonly Logger Instance = new Logger();
 
-        public static ILog Instance => _loggerInstance._log;
+        public ILog Log { get; private set; }
+
+        public static string DefaultLogPath => BuildLogFilePath();
 
         private Logger()
         {
             Initialize();
         }
 
-        static Logger()
-        {
-        }
-
         private void Initialize()
         {
             XmlConfigurator.Configure();
-            var logFile = BuildLogFilePath();
+            if (string.IsNullOrEmpty(Settings.Default.LogFilePath))
+                Settings.Default.LogFilePath = BuildLogFilePath();
 
+            SetLogPath(Settings.Default.LogToApplicationDirectory ? DefaultLogPath : Settings.Default.LogFilePath);
+        }
+
+        public void SetLogPath(string path)
+        {
             var repository = LogManager.GetRepository();
             var appenders = repository.GetAppenders();
 
@@ -37,10 +40,10 @@ namespace mRemoteNG.App
             {
                 var fileAppender = (RollingFileAppender)appender;
                 if (fileAppender == null || fileAppender.Name != "LogFileAppender") continue;
-                fileAppender.File = logFile;
+                fileAppender.File = path;
                 fileAppender.ActivateOptions();
             }
-            _log = LogManager.GetLogger("Logger");
+            Log = LogManager.GetLogger("Logger");
         }
 
         private static string BuildLogFilePath()

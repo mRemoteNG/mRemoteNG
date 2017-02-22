@@ -6,7 +6,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools.Cmdline;
 
 
 namespace mRemoteNG.Connection.Protocol
@@ -68,9 +70,9 @@ namespace mRemoteNG.Connection.Protocol
 						var username = "";
 						var password = "";
 								
-						if (!string.IsNullOrEmpty(InterfaceControl.Info.Username))
+						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Username))
 						{
-							username = InterfaceControl.Info.Username;
+							username = InterfaceControl.Info.CredentialRecord?.Username;
 						}
 						else
 						{
@@ -80,20 +82,20 @@ namespace mRemoteNG.Connection.Protocol
 							}
 							else if (Settings.Default.EmptyCredentials == "custom")
 							{
-								username = Convert.ToString(Settings.Default.DefaultUsername);
+								username = Settings.Default.DefaultUsername;
 							}
 						}
 								
-						if (!string.IsNullOrEmpty(InterfaceControl.Info.Password))
+						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString()))
 						{
-							password = InterfaceControl.Info.Password;
+							password = InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString();
 						}
 						else
 						{
 							if (Settings.Default.EmptyCredentials == "custom")
 							{
                                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                                password = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
+                                password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
 							}
 						}
 								
@@ -127,10 +129,10 @@ namespace mRemoteNG.Connection.Protocol
 				PuttyProcess.Exited += ProcessExited;
 						
 				PuttyProcess.Start();
-				PuttyProcess.WaitForInputIdle(Convert.ToInt32(Settings.Default.MaxPuttyWaitTime * 1000));
+				PuttyProcess.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
 						
 				var startTicks = Environment.TickCount;
-				while (PuttyHandle.ToInt32() == 0 & Environment.TickCount < startTicks + (Settings.Default.MaxPuttyWaitTime * 1000))
+				while (PuttyHandle.ToInt32() == 0 & Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
 				{
 					if (_isPuttyNg)
 					{
@@ -193,7 +195,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return;
 				}
-                NativeMethods.MoveWindow(PuttyHandle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+                NativeMethods.MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2, InterfaceControl.Height + SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height * 2, true);
 			}
 			catch (Exception ex)
 			{

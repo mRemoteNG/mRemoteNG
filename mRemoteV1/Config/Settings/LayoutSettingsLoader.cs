@@ -4,34 +4,37 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
 using System.IO;
+using mRemoteNG.Messages;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
 {
     public class LayoutSettingsLoader
     {
-        private readonly frmMain _mainForm;
+        private readonly FrmMain _mainForm;
+        private readonly MessageCollector _messageCollector;
 
-        public LayoutSettingsLoader(frmMain mainForm)
+        public LayoutSettingsLoader(FrmMain mainForm, MessageCollector messageCollector)
         {
+            if (mainForm == null)
+                throw new ArgumentNullException(nameof(mainForm));
+            if (messageCollector == null)
+                throw new ArgumentNullException(nameof(messageCollector));
+
             _mainForm = mainForm;
+            _messageCollector = messageCollector;
         }
 
         public void LoadPanelsFromXml()
         {
             try
             {
-                Windows.TreePanel = null;
-                Windows.ConfigPanel = null;
-                Windows.ErrorsPanel = null;
-
                 while (_mainForm.pnlDock.Contents.Count > 0)
                 {
                     var dc = (DockContent)_mainForm.pnlDock.Contents[0];
                     dc.Close();
                 }
 
-                CreatePanels();
 #if !PORTABLE
                 var oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + GeneralAppInfo.ProductName + "\\" + SettingsFileInfo.LayoutFileName;
 #endif
@@ -48,12 +51,12 @@ namespace mRemoteNG.Config.Settings
                 }
                 else
                 {
-                    frmMain.Default.SetDefaultLayout();
+                    _mainForm.SetDefaultLayout();
                 }
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error("LoadPanelsFromXML failed" + Environment.NewLine + ex.Message);
+                _messageCollector.AddExceptionMessage("LoadPanelsFromXML failed", ex);
             }
         }
 
@@ -66,41 +69,23 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 if (persistString == typeof(ConfigWindow).ToString())
-                    return Windows.ConfigPanel;
+                    return Windows.ConfigForm;
 
                 if (persistString == typeof(ConnectionTreeWindow).ToString())
-                    return Windows.TreePanel;
+                    return Windows.TreeForm;
 
                 if (persistString == typeof(ErrorAndInfoWindow).ToString())
-                    return Windows.ErrorsPanel;
+                    return Windows.ErrorsForm;
 
                 if (persistString == typeof(ScreenshotManagerWindow).ToString())
-                    return Windows.ScreenshotPanel;
+                    return Windows.ScreenshotForm;
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error("GetContentFromPersistString failed" + Environment.NewLine + ex.Message);
+                _messageCollector.AddExceptionMessage("GetContentFromPersistString failed", ex);
             }
 
             return null;
-        }
-
-        private void CreatePanels()
-        {
-            Windows.ConfigForm = new ConfigWindow(Windows.ConfigPanel);
-            Windows.ConfigPanel = Windows.ConfigForm;
-
-            Windows.TreeForm = new ConnectionTreeWindow(Windows.TreePanel);
-            Windows.TreePanel = Windows.TreeForm;
-
-            Windows.ErrorsForm = new ErrorAndInfoWindow(Windows.ErrorsPanel);
-            Windows.ErrorsPanel = Windows.ErrorsForm;
-
-            Windows.ScreenshotForm = new ScreenshotManagerWindow(Windows.ScreenshotPanel);
-            Windows.ScreenshotPanel = Windows.ScreenshotForm;
-
-            Windows.UpdateForm = new UpdateWindow(Windows.UpdatePanel);
-            Windows.UpdatePanel = Windows.UpdateForm;
         }
     }
 }

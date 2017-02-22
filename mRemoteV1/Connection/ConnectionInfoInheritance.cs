@@ -39,23 +39,35 @@ namespace mRemoteNG.Connection
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool Panel {get; set;}
         #endregion
         #region Connection
-		[LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3), 
-		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUsername"), 
-		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUsername"), 
-		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool Username {get; set;}
-				
-		[LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3), 
-		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNamePassword"), 
-		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionPassword"), 
-		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool Password {get; set;}
-				
-		[LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3), 
-		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameDomain"), 
-		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionDomain"), 
-		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool Domain {get; set;}
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 3),
+        LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strCategoryCredentials)),
+        LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionCredential)),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool CredentialRecord { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUsername"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUsername"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(false)]
+        public bool Username { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNamePassword"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionPassword"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(false)]
+        public bool Password { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameDomain"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionDomain"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(false)]
+        public bool Domain { get; set; }
         #endregion
         #region Protocol
-		[LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameProtocol"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionProtocol"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool Protocol {get; set;}

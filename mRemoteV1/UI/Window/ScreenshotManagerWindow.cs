@@ -158,10 +158,15 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Public Methods
-		public ScreenshotManagerWindow(DockContent Panel)
+
+	    public ScreenshotManagerWindow() : this(new DockContent())
+	    {
+	    }
+
+		public ScreenshotManagerWindow(DockContent panel)
 		{
 			WindowType = WindowType.ScreenshotManager;
-			DockPnl = Panel;
+			DockPnl = panel;
 			InitializeComponent();
 		}
 				
@@ -190,7 +195,7 @@ namespace mRemoteNG.UI.Window
 				nBtn.Location = new Point(nPB.Width - nBtn.Width, -1);
 				nBtn.Show();
 						
-				Show(frmMain.Default.pnlDock);
+				Show(FrmMain.Default.pnlDock);
 			}
 			catch (Exception ex)
 			{

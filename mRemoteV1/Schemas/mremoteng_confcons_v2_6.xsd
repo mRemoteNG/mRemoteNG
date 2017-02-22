@@ -34,6 +34,7 @@
     <xs:attribute name="Descr" type="xs:string" use="required" />
     <xs:attribute name="Icon" type="xs:string" use="required" />
     <xs:attribute name="Panel" type="xs:string" use="required" />
+    <xs:attribute name="Id" type="xs:string" use="required" />
     <xs:attribute name="Username" type="xs:string" use="required" />
     <xs:attribute name="Domain" type="xs:string" use="required" />
     <xs:attribute name="Password" type="xs:string" use="required" />

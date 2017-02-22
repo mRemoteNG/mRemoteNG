@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Messages;
 
 
 namespace mRemoteNG.Connection.Protocol
@@ -22,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 		    if (InterfaceControl.Info == null) return base.Initialize();
 
-		    _externalTool = Runtime.GetExtAppByName(Convert.ToString(InterfaceControl.Info.ExtApp));
+		    _externalTool = Runtime.GetExtAppByName(InterfaceControl.Info.ExtApp);
 		    _externalTool.ConnectionInfo = InterfaceControl.Info;
 
 		    return base.Initialize();
@@ -32,11 +33,18 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if (_externalTool.TryIntegrate == false)
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Attempting to start: {_externalTool.DisplayName}", true);
+
+                if (_externalTool.TryIntegrate == false)
 				{
 					_externalTool.Start(InterfaceControl.Info);
-					Close();
-					return false;
+                    /* Don't call close here... There's nothing for the override to do in this case since 
+                     * _process is not created in this scenario. When returning false, ProtocolBase.Close()
+                     * will be called - which is just going to call IntegratedProgram.Close() again anyway...
+                     * Close();
+                     */
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Assuming no other errors/exceptions occurred immediately before this message regarding {_externalTool.DisplayName}, the next \"closed by user\" message can be ignored", true);
+                    return false;
 				}
 
                 var argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo);
@@ -55,10 +63,10 @@ namespace mRemoteNG.Connection.Protocol
 			    _process.Exited += ProcessExited;
 						
 				_process.Start();
-				_process.WaitForInputIdle(Convert.ToInt32(Settings.Default.MaxPuttyWaitTime * 1000));
+				_process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
 						
 				var startTicks = Environment.TickCount;
-				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (Settings.Default.MaxPuttyWaitTime * 1000))
+				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
 				{
 					_process.Refresh();
 					if (_process.MainWindowTitle != "Default IME")
@@ -72,10 +80,10 @@ namespace mRemoteNG.Connection.Protocol
 				}
 						
 				NativeMethods.SetParent(_handle, InterfaceControl.Handle);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strIntAppStuff, true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppHandle, _handle), true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppTitle, _process.MainWindowTitle), true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppParentHandle, InterfaceControl.Parent.Handle), true);
+				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strIntAppStuff, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strIntAppHandle, _handle), true);
+				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strIntAppTitle, _process.MainWindowTitle), true);
+				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strIntAppParentHandle, InterfaceControl.Parent.Handle), true);
 						
 				Resize(this, new EventArgs());
 				base.Connect();
@@ -92,15 +100,12 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if (ConnectionWindow.InTabDrag)
-				{
-					return ;
-				}
+				if (ConnectionWindow.InTabDrag) return;
 				NativeMethods.SetForegroundWindow(_handle);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppFocusFailed, ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppFocusFailed, ex);
 			}
 		}
 				
@@ -108,45 +113,49 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if (InterfaceControl.Size == Size.Empty)
-				{
-					return ;
-				}
-                NativeMethods.MoveWindow(_handle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+				if (InterfaceControl.Size == Size.Empty) return;
+                NativeMethods.MoveWindow(_handle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2, InterfaceControl.Height + SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height * 2, true);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppResizeFailed, ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppResizeFailed, ex);
 			}
 		}
 				
 		public override void Close()
 		{
-			try
-			{
-				if (!_process.HasExited)
-				{
-					_process.Kill();
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppKillFailed, ex, logOnly: true);
-			}
-					
-			try
-			{
-				if (!_process.HasExited)
-				{
-					_process.Dispose();
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppDisposeFailed, ex, logOnly: true);
-			}
-					
-			base.Close();
+            /* only attempt this if we have a valid process object
+             * Non-integated tools will still call base.Close() and don't have a valid process object.
+             * See Connect() above... This just muddies up the log.
+             */
+            if (_process != null)
+		    {
+		        try
+		        {
+		            if (!_process.HasExited)
+		            {
+		                _process.Kill();
+		            }
+		        }
+		        catch (Exception ex)
+		        {
+		            Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppKillFailed, ex);
+		        }
+
+		        try
+		        {
+		            if (!_process.HasExited)
+		            {
+		                _process.Dispose();
+		            }
+		        }
+		        catch (Exception ex)
+		        {
+		            Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppDisposeFailed, ex);
+		        }
+		    }
+
+		    base.Close();
 		}
         #endregion
         

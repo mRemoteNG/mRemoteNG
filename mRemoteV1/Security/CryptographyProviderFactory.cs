@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using mRemoteNG.Security.SymmetricEncryption;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
@@ -18,6 +19,12 @@ namespace mRemoteNG.Security
         public ICryptographyProvider CreateLegacyRijndaelCryptographyProvider()
         {
             return new LegacyRijndaelCryptographyProvider();
+        }
+
+        public static ICryptographyProvider BuildFromXml(XElement element)
+        {
+            var builder = new XmlCryptoProviderBuilder(element);
+            return builder.Build();
         }
 
         private IBlockCipher ChooseBlockCipherEngine(BlockCipherEngines engine)

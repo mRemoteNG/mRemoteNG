@@ -52,11 +52,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            chkSingleClickOnConnectionOpensIt.Checked =
-                Convert.ToBoolean(Settings.Default.SingleClickOnConnectionOpensIt);
-            chkSingleClickOnOpenedConnectionSwitchesToIt.Checked =
-                Convert.ToBoolean(Settings.Default.SingleClickSwitchesToOpenConnection);
-            chkHostnameLikeDisplayName.Checked = Convert.ToBoolean(Settings.Default.SetHostnameLikeDisplayName);
+            chkSingleClickOnConnectionOpensIt.Checked = Settings.Default.SingleClickOnConnectionOpensIt;
+            chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
+            chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
 
@@ -65,39 +63,39 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             numAutoSave.Value = Convert.ToDecimal(Settings.Default.AutoSaveEveryMinutes);
 
             // ReSharper disable once StringLiteralTypo
-            if (Settings.Default.EmptyCredentials == "noinfo")
+            // ReSharper disable once SwitchStatementMissingSomeCases
+            switch (Settings.Default.EmptyCredentials)
             {
-                radCredentialsNoInfo.Checked = true;
-            }
-            else if (Settings.Default.EmptyCredentials == "windows")
-            {
-                radCredentialsWindows.Checked = true;
-            }
-            else if (Settings.Default.EmptyCredentials == "custom")
-            {
-                radCredentialsCustom.Checked = true;
+                case "noinfo":
+                    radCredentialsNoInfo.Checked = true;
+                    break;
+                case "windows":
+                    radCredentialsWindows.Checked = true;
+                    break;
+                case "custom":
+                    radCredentialsCustom.Checked = true;
+                    break;
             }
 
-            txtCredentialsUsername.Text = Convert.ToString(Settings.Default.DefaultUsername);
+            txtCredentialsUsername.Text = Settings.Default.DefaultUsername;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
-            txtCredentialsDomain.Text = Convert.ToString(Settings.Default.DefaultDomain);
+            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+            txtCredentialsDomain.Text = Settings.Default.DefaultDomain;
 
-            if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Never)
+            switch (Settings.Default.ConfirmCloseConnection)
             {
-                radCloseWarnNever.Checked = true;
-            }
-            else if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Exit)
-            {
-                radCloseWarnExit.Checked = true;
-            }
-            else if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Multiple)
-            {
-                radCloseWarnMultiple.Checked = true;
-            }
-            else
-            {
-                radCloseWarnAll.Checked = true;
+                case (int) ConfirmCloseEnum.Never:
+                    radCloseWarnNever.Checked = true;
+                    break;
+                case (int) ConfirmCloseEnum.Exit:
+                    radCloseWarnExit.Checked = true;
+                    break;
+                case (int) ConfirmCloseEnum.Multiple:
+                    radCloseWarnMultiple.Checked = true;
+                    break;
+                default:
+                    radCloseWarnAll.Checked = true;
+                    break;
             }
         }
 
@@ -114,12 +112,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.AutoSaveEveryMinutes = (int) numAutoSave.Value;
             if (Settings.Default.AutoSaveEveryMinutes > 0)
             {
-                frmMain.Default.tmrAutoSave.Interval = Convert.ToInt32(Settings.Default.AutoSaveEveryMinutes*60000);
-                frmMain.Default.tmrAutoSave.Enabled = true;
+                FrmMain.Default.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes*60000;
+                FrmMain.Default.tmrAutoSave.Enabled = true;
             }
             else
             {
-                frmMain.Default.tmrAutoSave.Enabled = false;
+                FrmMain.Default.tmrAutoSave.Enabled = false;
             }
 
             if (radCredentialsNoInfo.Checked)

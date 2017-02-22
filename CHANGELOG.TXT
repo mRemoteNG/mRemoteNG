@@ -1,24 +1,41 @@
-1.75 Beta 4 (2017-01-XX):
+1.76 XXXX (2017-XX-XX):
+
+Features/Enhancements:
+----------------------
+Added more logging/notifications options
+
+
+
+1.75 (2017-02-13):
 
 Known Issue:
 ------------
-Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versions.
+File hash check will fail when updating from 1.75 Beta 1 to newer versions.
+  Exception will be: "MD5 Hashes didn't match!" for 1.75 Beta 1 - 1.75 RC1
 
 
 Features/Enhancements:
 ----------------------
+#344 - Use SHA512 File Hashes to validate downloads (in the update mechanism & posted to the Downloads page)
 Added Release Channels to the update check functionality allowing users to select one of 3 release channels for updates: Stable, Beta, Dev
+#360: Help -> About, Version # is now selectable/copyable
+#221: RDP: Optional disconnect after X number of minutes of inactivity
 
 
 Fixes:
 ------
+#369: Reset Layout Option Does Not Reset Notification Pane
+#362: Invalid cast exception when using the Notification Area Icon minimize/restore
 #334: Quick Connect displays warning when clicking on a folder
+#325: When using a connection with an external app, results in opening the same external app continuously
 #311: Import from Active Directory does not use machine's domain by default
+#258: Rename Tab dialog - populate original name in dialog (1.72 functionality)
 #211, #267: Recursive AD Import wasn't fully functional 
 
 
 General Changes:
 ----------------
+The usual general code clean up and refactoring
 #325: Code clean up and additional logging for External Tools based connections
 #298: Code clean up and additional logging around application startup
 #291, #236: External Tools code clean up and additional logging
@@ -30,6 +47,7 @@ General Changes:
 Known Issue:
 ------------
 Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versions.
+
 
 Fixes:
 ------
@@ -48,7 +66,7 @@ Fixes:
 ------
 #254: Component check window position issues and uncaught exception
 #260: Crash when attempting to load fully encrypted confCons v2.5
-#261: Double clicking folder in treeview doesnt expand it in 1.75 beta1
+#261: Double clicking folder in treeview doesn't expand it in 1.75 beta1
 #271: Install package is not using the last installation path
 #278: Silent installs not detecting prerequisites
 
@@ -92,7 +110,7 @@ Fixes:
 MR-965, MR-871, MR-629: Error 264 on RDP Connect attempt - Added timeout value to Tools -> Options -> Connections
 MR-946: Remove old/insecure SharpSSH and related components. Replace with SSH.NET for File Transfer Functionality
 MR-896: Added prerequisite installer check for KB2574819. Prevents "Class not registered" errors when opening RDP connections.
-PR-130: Fix Scan button width to fit russian translation
+PR-130: Fix Scan button width to fit Russian translation
 
 
 
@@ -100,7 +118,7 @@ PR-130: Fix Scan button width to fit russian translation
 
 General Changes:
 ----------------
-Updated GeckoFx pacakge
+Updated GeckoFx package
 Updated DockPanelSuite library to 2.10 Final
 Japanese translation updated
 MR-942: Refactored code relating to loading the connections file 
@@ -175,7 +193,7 @@ Port Scan is now Asynchronous (and is significantly faster)
 Fixes:
 ------
 MR-874: Added work-around to installer to ignore installation prerequisites
-MR-884: Slow startup in some scnearios checking authenticode certificate
+MR-884: Slow startup in some scenarios checking authenticode certificate
 MR-872: Crash in External Tools when arguments aren't quoted
 MR-854: crashes when right clicking on connection tab
 MR-852: Option "Allow only a single instance of the application" non-functional
@@ -316,7 +334,7 @@ Fixed issue MR-398 - Full Screen mode doesn't correctly make use of available sp
 Fixed issue MR-402 - scrollbar touch moves putty window
 Fixed issue MR-406 - Items disappear from External Tools toolbar when accessing External Tools panel
 Fixed issue MR-410 - Unhandled exception when clicking New button under Theme
-Fixed issue MR-413 - Can't use aplication
+Fixed issue MR-413 - Can't use application
 Fixed new connections having a globe icon.
 Fixed the category names in the themes tab of the options dialog on Windows XP not showing correctly.
 Fixed PuTTY saved sessions with spaces or special characters not being listed.

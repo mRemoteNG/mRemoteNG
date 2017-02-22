@@ -33,8 +33,8 @@ namespace mRemoteNG.App
 						exportForm.SelectedConnection = selectedNode;
 					}
 						
-					if (exportForm.ShowDialog(frmMain.Default) != DialogResult.OK)
-						return ;
+					if (exportForm.ShowDialog(FrmMain.Default) != DialogResult.OK)
+						return;
 
 				    ConnectionInfo exportTarget;
 				    switch (exportForm.Scope)
@@ -74,14 +74,20 @@ namespace mRemoteNG.App
 			    {
 			        case ConnectionsSaver.Format.mRXML:
                         var factory = new CryptographyProviderFactory();
-                        var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
+                        var cryptographyProvider = factory.CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
                         cryptographyProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
-                        serializer = new XmlConnectionsSerializer(cryptographyProvider);
-			            ((XmlConnectionsSerializer) serializer).SaveFilter = saveFilter;
+			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
+                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString());
+                        serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
+                        {
+                            SaveFilter = saveFilter
+                        };
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:
-                        serializer = new CsvConnectionsSerializerMremotengFormat();
-                        ((CsvConnectionsSerializerMremotengFormat)serializer).SaveFilter = saveFilter;
+                        serializer = new CsvConnectionsSerializerMremotengFormat
+                        {
+                            SaveFilter = saveFilter
+                        };
                         break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

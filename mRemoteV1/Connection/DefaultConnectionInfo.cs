@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using mRemoteNG.App;
 
 
 namespace mRemoteNG.Connection
@@ -21,15 +22,18 @@ namespace mRemoteNG.Connection
             var connectionProperties = GetProperties(_excludedProperties);
             foreach (var property in connectionProperties)
             {
-                var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
-                var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
-                
-                var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
-                var converter = descriptor.Converter;
-                if (converter != null && converter.CanConvertFrom(valueFromSource.GetType()))
-                    property.SetValue(Instance, converter.ConvertFrom(valueFromSource), null);
-                else
-                    property.SetValue(Instance, valueFromSource, null);
+                try
+                {
+                    var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
+                    var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
+                    var typeConverter = TypeDescriptor.GetConverter(property.PropertyType);
+                    if (typeConverter.CanConvertFrom(valueFromSource.GetType()))
+                        property.SetValue(Instance, typeConverter.ConvertFrom(valueFromSource), null);
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector?.AddExceptionStackTrace($"Error loading default connectioninfo property {property.Name}", ex);
+                }
             }
         }
 
@@ -39,15 +43,19 @@ namespace mRemoteNG.Connection
             var inheritanceProperties = GetProperties(_excludedProperties);
             foreach (var property in inheritanceProperties)
             {
-                var propertyFromDestination = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
-                var localValue = property.GetValue(Instance, null);
-
-                var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
-                var converter = descriptor.Converter;
-                if (converter != null && converter.CanConvertFrom(localValue.GetType()))
-                    propertyFromDestination.SetValue(destinationInstance, converter.ConvertFrom(localValue), null);
-                else
-                    propertyFromDestination.SetValue(destinationInstance, localValue, null);
+                try
+                {
+                    var propertyFromDestination = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
+                    var localValue = property.GetValue(Instance, null);
+                    var typeConverter = TypeDescriptor.GetConverter(property.PropertyType);
+                    if (!typeConverter.CanConvertTo(propertyFromDestination.PropertyType)) continue;
+                    var convertedValue = typeConverter.ConvertTo(localValue, propertyFromDestination.PropertyType);
+                    propertyFromDestination.SetValue(destinationInstance, convertedValue, null);
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector?.AddExceptionStackTrace($"Error saving default connectioninfo property {property.Name}", ex);
+                }
             }
         }
     }

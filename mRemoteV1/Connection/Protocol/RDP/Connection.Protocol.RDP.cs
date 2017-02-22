@@ -6,8 +6,10 @@ using System.Collections;
 using System.Windows.Forms;
 using System.Threading;
 using System.ComponentModel;
+using System.Security;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using MSTSCLib;
 using mRemoteNG.Tools;
@@ -345,9 +347,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
-							_rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username;
-							_rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password;
-							_rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.Domain;
+						    if (_connectionInfo.CredentialRecord != null)
+						    {
+                                _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.CredentialRecord.Username;
+                                _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.CredentialRecord.Password.ConvertToUnsecureString();
+                                _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.CredentialRecord.Domain;
+                            }
 						}
 						else if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
 						{
@@ -415,10 +420,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				{
 					return;
 				}
-						
-				var userName = _connectionInfo.Username;
-				var password = _connectionInfo.Password;
-				var domain = _connectionInfo.Domain;
+
+                var userName = _connectionInfo.CredentialRecord?.Username ?? "";
+				var password = _connectionInfo.CredentialRecord?.Password ?? new SecureString();
+				var domain = _connectionInfo.CredentialRecord?.Domain ?? "";
 						
 				if (string.IsNullOrEmpty(userName))
 				{
@@ -428,7 +433,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_rdpClient.UserName = Convert.ToString(Settings.Default.DefaultUsername);
+						_rdpClient.UserName = Settings.Default.DefaultUsername;
 					}
 				}
 				else
@@ -436,20 +441,20 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					_rdpClient.UserName = userName;
 				}
 						
-				if (string.IsNullOrEmpty(password))
+				if (string.IsNullOrEmpty(password.ConvertToUnsecureString()))
 				{
 					if (Settings.Default.EmptyCredentials == "custom")
 					{
 						if (Settings.Default.DefaultPassword != "")
 						{
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
+                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
 						}
 					}
 				}
 				else
 				{
-					_rdpClient.AdvancedSettings2.ClearTextPassword = password;
+					_rdpClient.AdvancedSettings2.ClearTextPassword = password.ConvertToUnsecureString();
 				}
 						
 				if (string.IsNullOrEmpty(domain))
@@ -460,7 +465,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_rdpClient.Domain = Convert.ToString(Settings.Default.DefaultDomain);
+						_rdpClient.Domain = Settings.Default.DefaultDomain;
 					}
 				}
 				else
@@ -481,8 +486,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
 				{
 					_rdpClient.FullScreen = true;
-                    _rdpClient.DesktopWidth = Screen.FromControl(frmMain.Default).Bounds.Width;
-                    _rdpClient.DesktopHeight = Screen.FromControl(frmMain.Default).Bounds.Height;
+                    _rdpClient.DesktopWidth = Screen.FromControl(FrmMain.Default).Bounds.Width;
+                    _rdpClient.DesktopHeight = Screen.FromControl(FrmMain.Default).Bounds.Height;
 							
 					return;
 				}
@@ -502,8 +507,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				else if (InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen)
 				{
 					_rdpClient.FullScreen = true;
-                    _rdpClient.DesktopWidth = Screen.FromControl(frmMain.Default).Bounds.Width;
-                    _rdpClient.DesktopHeight = Screen.FromControl(frmMain.Default).Bounds.Height;
+                    _rdpClient.DesktopWidth = Screen.FromControl(FrmMain.Default).Bounds.Width;
+                    _rdpClient.DesktopHeight = Screen.FromControl(FrmMain.Default).Bounds.Height;
 				}
 				else
 				{

@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Text;
 using mRemoteNG.App;
+using mRemoteNG.Tools.Cmdline;
 
 namespace mRemoteNG.Tools
 {
@@ -83,7 +84,7 @@ namespace mRemoteNG.Tools
 		public void WaitForExit()
 		{
 			if (Process == null || Process.HasExited)
-				return ;
+				return;
 			Process.WaitForExit();
 		}
 #endregion

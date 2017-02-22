@@ -130,7 +130,7 @@ namespace mRemoteNG.Config.Putty
 				
 			if (_eventWatcher != null)
 			{
-				return ;
+				return;
 			}
 				
 			try
@@ -158,7 +158,7 @@ namespace mRemoteNG.Config.Putty
 				
 			if (_eventWatcher == null)
 			{
-				return ;
+				return;
 			}
 			_eventWatcher.EnableRaisingEvents = false;
 			_eventWatcher.Dispose();
@@ -168,7 +168,7 @@ namespace mRemoteNG.Config.Putty
         #region Private Methods
 		private static string GetPuttyConfPath()
 		{
-		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath) : App.Info.GeneralAppInfo.PuttyPath;
+		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
 		    return Path.Combine(puttyPath, "putty.conf");
 		}
 			
@@ -231,7 +231,7 @@ namespace mRemoteNG.Config.Putty
 				{
 					if (!File.Exists(_puttyConfFile))
 					{
-						return ;
+						return;
 					}
 					using (var streamReader = new StreamReader(_puttyConfFile))
 					{
@@ -299,7 +299,7 @@ namespace mRemoteNG.Config.Putty
 				{
 					if (!File.Exists(_sessionFile))
 					{
-						return ;
+						return;
 					}
 					using (var streamReader = new StreamReader(_sessionFile))
 					{

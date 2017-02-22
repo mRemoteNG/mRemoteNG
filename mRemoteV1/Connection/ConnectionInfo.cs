@@ -21,7 +21,7 @@ using mRemoteNG.Tree;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : AbstractConnectionInfoData, IHasParent, IInheritable
+    public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
     {        
         #region Public Properties
         [Browsable(false)]
@@ -85,7 +85,8 @@ namespace mRemoteNG.Connection
 
 	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
 	    {
-	        var properties = typeof(AbstractConnectionInfoData).GetProperties();
+	        var properties = GetType().BaseType?.GetProperties();
+	        if (properties == null) return;
 	        foreach (var property in properties)
 	        {
 	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
@@ -136,6 +137,12 @@ namespace mRemoteNG.Connection
         {
             Parent?.RemoveChild(this);
         }
+
+	    public ConnectionInfo GetRootParent()
+	    {
+	        return Parent != null ? Parent.GetRootParent() : this;
+	    }
+
 	    #endregion
 
         #region Public Enumerations
@@ -234,9 +241,6 @@ namespace mRemoteNG.Connection
         private void SetConnectionDefaults()
         {
             Hostname = string.Empty;
-            Username = Settings.Default.ConDefaultUsername;
-            Password = Settings.Default.ConDefaultPassword;
-            Domain = Settings.Default.ConDefaultDomain;
         }
 
         private void SetProtocolDefaults()

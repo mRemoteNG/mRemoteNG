@@ -74,10 +74,10 @@ namespace mRemoteNG.UI.Window
         #endregion
 		
         #region Public Methods
-		public UltraVNCWindow(DockContent Panel)
+		public UltraVNCWindow()
 		{
 			this.WindowType = WindowType.UltraVNCSC;
-			this.DockPnl = Panel;
+			this.DockPnl = new DockContent();
 			this.InitializeComponent();
 		}
         #endregion

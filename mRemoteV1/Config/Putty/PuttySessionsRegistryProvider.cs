@@ -93,7 +93,7 @@ namespace mRemoteNG.Config.Putty
 			try
 			{
                 var currentUserSid = WindowsIdentity.GetCurrent().User?.Value;
-                var key = Convert.ToString(string.Join("\\", currentUserSid, PuttySessionsKey).Replace("\\", "\\\\"));
+                var key = string.Join("\\", currentUserSid, PuttySessionsKey).Replace("\\", "\\\\");
                 var query = new WqlEventQuery($"SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{key}\'");
 				_eventWatcher = new ManagementEventWatcher(query);
 				_eventWatcher.EventArrived += OnManagementEventArrived;

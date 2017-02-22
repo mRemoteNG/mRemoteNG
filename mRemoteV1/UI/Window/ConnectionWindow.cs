@@ -27,7 +27,8 @@ namespace mRemoteNG.UI.Window
     public partial class ConnectionWindow : BaseWindow
     {
         public TabControl TabController;
-        
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+
 
         #region Public Methods
         public ConnectionWindow(DockContent panel, string formText = "")
@@ -153,12 +154,12 @@ namespace mRemoteNG.UI.Window
         {
             if (TabController.SelectedTab == null)
             {
-                frmMain.Default.SelectedConnection = null;
+                FrmMain.Default.SelectedConnection = null;
             }
             else
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                frmMain.Default.SelectedConnection = interfaceControl?.Info;
+                FrmMain.Default.SelectedConnection = interfaceControl?.Info;
             }
         }
         #endregion
@@ -177,8 +178,8 @@ namespace mRemoteNG.UI.Window
             {
                 if (_documentHandlersAdded)
                 {
-                    frmMain.Default.ResizeBegin -= Connection_ResizeBegin;
-                    frmMain.Default.ResizeEnd -= Connection_ResizeEnd;
+                    FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
+                    FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
                     _documentHandlersAdded = false;
                 }
                 DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
@@ -193,8 +194,8 @@ namespace mRemoteNG.UI.Window
                     DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
                     _floatHandlersAdded = false;
                 }
-                frmMain.Default.ResizeBegin += Connection_ResizeBegin;
-                frmMain.Default.ResizeEnd += Connection_ResizeEnd;
+                FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
+                FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
                 _documentHandlersAdded = true;
             }
         }
@@ -221,7 +222,7 @@ namespace mRemoteNG.UI.Window
 
         private void Connection_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!frmMain.Default.IsClosing &&
+            if (!FrmMain.Default.IsClosing &&
                 (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & TabController.TabPages.Count > 0 ||
                 Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & TabController.TabPages.Count > 1))
             {
@@ -333,9 +334,9 @@ namespace mRemoteNG.UI.Window
                 var modelAsContainer = model as ContainerInfo;
                 var modelAsConnection = model as ConnectionInfo;
                 if (modelAsContainer != null)
-                    ConnectionInitiator.OpenConnection(modelAsContainer);
+                    _connectionInitiator.OpenConnection(modelAsContainer);
                 else if (modelAsConnection != null)
-                    ConnectionInitiator.OpenConnection(modelAsConnection);
+                    _connectionInitiator.OpenConnection(modelAsConnection);
             }
         }
 
@@ -649,7 +650,7 @@ namespace mRemoteNG.UI.Window
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
-                ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
                 _ignoreChangeSelectedTabClick = false;
             }
             catch (Exception ex)
@@ -665,7 +666,7 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
                 interfaceControl.Protocol.Close();
-                ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {
@@ -677,7 +678,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var newTitle = "";
+                var newTitle = TabController.SelectedTab.Title;
                 if (input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK && !string.IsNullOrEmpty(newTitle))
                     TabController.SelectedTab.Title = newTitle.Replace("&", "&&");
             }
@@ -764,7 +765,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                if (!(NativeMethods.GetForegroundWindow() == frmMain.Default.Handle) && !_ignoreChangeSelectedTabClick)
+                if (!(NativeMethods.GetForegroundWindow() == FrmMain.Default.Handle) && !_ignoreChangeSelectedTabClick)
                 {
                     var clickedTab = TabController.TabPageFromPoint(e.Location);
                     if (clickedTab != null && TabController.SelectedTab != clickedTab)
