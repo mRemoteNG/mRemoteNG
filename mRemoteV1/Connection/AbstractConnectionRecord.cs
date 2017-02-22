@@ -60,6 +60,7 @@ namespace mRemoteNG.Connection
         private bool _redirectPorts;
         private bool _redirectSmartCards;
         private ProtocolRDP.RDPSounds _redirectSound;
+        private ProtocolRDP.RDPMicrophones _redirectMicrophones;
         private ProtocolRDP.RDPSoundQuality _soundQuality;
 
         private string _preExtApp = "";
@@ -479,6 +480,16 @@ namespace mRemoteNG.Connection
         {
             get { return GetPropertyValue("RedirectSound", _redirectSound); }
             set { SetField(ref _redirectSound, value, "RedirectSound"); }
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
+           LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectMicrophones"),
+           LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectMicrophones"),
+           TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+        public ProtocolRDP.RDPMicrophones RedirectMicrophones
+        {
+            get { return GetPropertyValue("RedirectMicrophones", _redirectMicrophones); }
+            set { SetField(ref _redirectMicrophones, value, "RedirectMicrophones"); }
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),

@@ -72,6 +72,7 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("RedirectPrinters", connectionInfo.RedirectPrinters.ToString()));
             element.Add(new XAttribute("RedirectSmartCards", connectionInfo.RedirectSmartCards.ToString()));
             element.Add(new XAttribute("RedirectSound", connectionInfo.RedirectSound.ToString()));
+            element.Add(new XAttribute("RedirectMicrophones", connectionInfo.RedirectMicrophones.ToString()));
             element.Add(new XAttribute("SoundQuality", connectionInfo.SoundQuality.ToString()));
             element.Add(new XAttribute("RedirectKeys", connectionInfo.RedirectKeys.ToString()));
             element.Add(new XAttribute("Connected", (connectionInfo.OpenConnections.Count > 0).ToString()));
@@ -140,6 +141,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritRedirectPrinters", connectionInfo.Inheritance.RedirectPrinters.ToString()));
                 element.Add(new XAttribute("InheritRedirectSmartCards", connectionInfo.Inheritance.RedirectSmartCards.ToString()));
                 element.Add(new XAttribute("InheritRedirectSound", connectionInfo.Inheritance.RedirectSound.ToString()));
+                element.Add(new XAttribute("InheritRedirectMicrophones", connectionInfo.Inheritance.RedirectMicrophones.ToString()));
                 element.Add(new XAttribute("InheritSoundQuality", connectionInfo.Inheritance.SoundQuality.ToString()));
                 element.Add(new XAttribute("InheritResolution", connectionInfo.Inheritance.Resolution.ToString()));
                 element.Add(new XAttribute("InheritAutomaticResize", connectionInfo.Inheritance.AutomaticResize.ToString()));
@@ -194,6 +196,7 @@ namespace mRemoteNG.Config.Serializers
                 element.Add(new XAttribute("InheritRedirectPrinters", false.ToString()));
                 element.Add(new XAttribute("InheritRedirectSmartCards", false.ToString()));
                 element.Add(new XAttribute("InheritRedirectSound", false.ToString()));
+                element.Add(new XAttribute("InheritRedirectMicrophones", false.ToString()));
                 element.Add(new XAttribute("InheritSoundQuality", false.ToString()));
                 element.Add(new XAttribute("InheritResolution", false.ToString()));
                 element.Add(new XAttribute("InheritAutomaticResize", false.ToString()));

@@ -2530,5 +2530,29 @@ namespace mRemoteNG {
                 this["LogToApplicationDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LeaveAtLocalComputer")]
+        public string ConDefaultRedirectMicrophones {
+            get {
+                return ((string)(this["ConDefaultRedirectMicrophones"]));
+            }
+            set {
+                this["ConDefaultRedirectMicrophones"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRedirectMicrophones {
+            get {
+                return ((bool)(this["InhDefaultRedirectMicrophones"]));
+            }
+            set {
+                this["InhDefaultRedirectMicrophones"] = value;
+            }
+        }
     }
 }

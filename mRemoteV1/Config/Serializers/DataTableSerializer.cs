@@ -79,6 +79,7 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("RedirectPrinters", typeof(bool));
             _dataTable.Columns.Add("RedirectSmartCards", typeof(bool));
             _dataTable.Columns.Add("RedirectSound", typeof(string));
+            _dataTable.Columns.Add("RedirectMicrophones", typeof(string));
             _dataTable.Columns.Add("RedirectKeys", typeof(bool));
             _dataTable.Columns.Add("Connected", typeof(bool));
             _dataTable.Columns.Add("PreExtApp", typeof(string));
@@ -123,6 +124,7 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("InheritRedirectPrinters", typeof(bool));
             _dataTable.Columns.Add("InheritRedirectSmartCards", typeof(bool));
             _dataTable.Columns.Add("InheritRedirectSound", typeof(bool));
+            _dataTable.Columns.Add("InheritRedirectMicrophones", typeof(bool));
             _dataTable.Columns.Add("InheritSoundQuality", typeof(bool));
             _dataTable.Columns.Add("InheritResolution", typeof(bool));
             _dataTable.Columns.Add("InheritUseConsoleSession", typeof(bool));
@@ -220,6 +222,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RedirectPrinters"] = connectionInfo.RedirectPrinters;
             dataRow["RedirectSmartCards"] = connectionInfo.RedirectSmartCards;
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
+            dataRow["RedirectMicrophones"] = connectionInfo.RedirectMicrophones;
             //dataRow["SoundQuality"] = connectionInfo.SoundQuality;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
             dataRow["Connected"] = connectionInfo.OpenConnections.Count > 0;
@@ -267,6 +270,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritRedirectPrinters"] = connectionInfo.Inheritance.RedirectPrinters;
                 dataRow["InheritRedirectSmartCards"] = connectionInfo.Inheritance.RedirectSmartCards;
                 dataRow["InheritRedirectSound"] = connectionInfo.Inheritance.RedirectSound;
+                dataRow["InheritRedirectMicrophones"] = connectionInfo.Inheritance.RedirectMicrophones;
                 //dataRow["InheritSoundQuality"] = connectionInfo.Inheritance.SoundQuality;
                 dataRow["InheritResolution"] = connectionInfo.Inheritance.Resolution;
                 dataRow["InheritAutomaticResize"] = connectionInfo.Inheritance.AutomaticResize;
@@ -324,6 +328,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritRedirectPrinters"] = false;
                 dataRow["InheritRedirectSmartCards"] = false;
                 dataRow["InheritRedirectSound"] = false;
+                dataRow["InheritRedirectMicrophones"] = false;
                 //dataRow["InheritSoundQuality"] = false;
                 dataRow["InheritResolution"] = false;
                 dataRow["InheritAutomaticResize"] = false;

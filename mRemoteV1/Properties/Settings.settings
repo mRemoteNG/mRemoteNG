@@ -629,5 +629,11 @@
     <Setting Name="LogToApplicationDirectory" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="ConDefaultRedirectMicrophones" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LeaveAtLocalComputer</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectMicrophones" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
