@@ -96,7 +96,7 @@ namespace mRemoteNGTests.Config.Serializers
         {
             var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider);
             var attributeValue = element.Attribute(XName.Get("ConfVersion"))?.Value;
-            Assert.That(attributeValue, Is.EqualTo("2.7"));
+            Assert.That(attributeValue, Is.EqualTo("2.8"));
         }
 
         private class TestCaseSources
