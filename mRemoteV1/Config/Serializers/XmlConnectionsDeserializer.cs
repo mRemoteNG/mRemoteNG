@@ -31,7 +31,7 @@ namespace mRemoteNG.Config.Serializers
         private XmlConnectionsDecryptor _decryptor;
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
-        private const double MaxSupportedConfVersion = 2.8;
+        private const double MaxSupportedConfVersion = 2.7;
         private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
         private readonly IEnumerable<ICredentialRecord> _credentialRecords;
 
@@ -515,9 +515,6 @@ namespace mRemoteNG.Config.Serializers
                         else
                             Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, string.Format(Language.strFindMatchingCredentialFailed, requestedCredentialId, connectionInfo.Name));
                     }
-                }
-                if (_confVersion >= 2.8)
-                {
                     connectionInfo.RedirectMicrophones = (ProtocolRDP.RDPMicrophones)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPMicrophones), Convert.ToString(xmlnode.Attributes["RedirectMicrophones"].Value));
                     connectionInfo.Inheritance.RedirectMicrophones = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
                 }
