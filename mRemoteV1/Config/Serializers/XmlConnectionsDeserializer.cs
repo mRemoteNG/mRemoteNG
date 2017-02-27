@@ -515,10 +515,11 @@ namespace mRemoteNG.Config.Serializers
                         else
                             Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, string.Format(Language.strFindMatchingCredentialFailed, requestedCredentialId, connectionInfo.Name));
                     }
-
+                }
+                if (_confVersion >= 2.8)
+                {
                     connectionInfo.RedirectMicrophones = (ProtocolRDP.RDPMicrophones)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPMicrophones), Convert.ToString(xmlnode.Attributes["RedirectMicrophones"].Value));
                     connectionInfo.Inheritance.RedirectMicrophones = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
-
                 }
             }
             catch (Exception ex)
