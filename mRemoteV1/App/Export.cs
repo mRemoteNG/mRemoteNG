@@ -34,7 +34,7 @@ namespace mRemoteNG.App
 					}
 						
 					if (exportForm.ShowDialog(frmMain.Default) != DialogResult.OK)
-						return ;
+						return;
 
 				    ConnectionInfo exportTarget;
 				    switch (exportForm.Scope)
@@ -76,12 +76,17 @@ namespace mRemoteNG.App
                         var factory = new CryptographyProviderFactory();
                         var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
                         cryptographyProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
-                        serializer = new XmlConnectionsSerializer(cryptographyProvider);
-			            ((XmlConnectionsSerializer) serializer).SaveFilter = saveFilter;
+                        serializer = new XmlConnectionsSerializer(cryptographyProvider)
+                        {
+                            Export = true,
+                            SaveFilter = saveFilter
+                        };
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:
-                        serializer = new CsvConnectionsSerializerMremotengFormat();
-                        ((CsvConnectionsSerializerMremotengFormat)serializer).SaveFilter = saveFilter;
+                        serializer = new CsvConnectionsSerializerMremotengFormat
+                        {
+                            SaveFilter = saveFilter
+                        };
                         break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

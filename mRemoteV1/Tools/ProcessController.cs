@@ -83,7 +83,7 @@ namespace mRemoteNG.Tools
 		public void WaitForExit()
 		{
 			if (Process == null || Process.HasExited)
-				return ;
+				return;
 			Process.WaitForExit();
 		}
 #endregion

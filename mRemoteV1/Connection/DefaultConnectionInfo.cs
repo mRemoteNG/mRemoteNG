@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using mRemoteNG.App;
 
 
 namespace mRemoteNG.Connection
@@ -39,15 +40,17 @@ namespace mRemoteNG.Connection
             var inheritanceProperties = GetProperties(_excludedProperties);
             foreach (var property in inheritanceProperties)
             {
-                var propertyFromDestination = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
-                var localValue = property.GetValue(Instance, null);
-
-                var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
-                var converter = descriptor.Converter;
-                if (converter != null && converter.CanConvertFrom(localValue.GetType()))
-                    propertyFromDestination.SetValue(destinationInstance, converter.ConvertFrom(localValue), null);
-                else
-                    propertyFromDestination.SetValue(destinationInstance, localValue, null);
+                try
+                {
+                    var propertyFromDestination = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
+                    var localValue = property.GetValue(Instance, null);
+                    var convertedValue = Convert.ChangeType(localValue, propertyFromDestination.PropertyType);
+                    propertyFromDestination.SetValue(destinationInstance, convertedValue, null);
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector?.AddExceptionStackTrace($"Error saving default connectioninfo property {property.Name}", ex);
+                }
             }
         }
     }

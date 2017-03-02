@@ -116,7 +116,7 @@ namespace mRemoteNG.Messages
             return lvItem;
         }
 
-        public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = false)
+        public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
         {
             AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex), logOnly);
         }
@@ -186,7 +186,7 @@ namespace mRemoteNG.Messages
 			}
 		}
 
-        delegate void AddToListCB(ListViewItem lvItem);
+        private delegate void AddToListCB(ListViewItem lvItem);
         private void AddToList(ListViewItem lvItem)
         {
             if (MCForm.lvErrorCollector.InvokeRequired)

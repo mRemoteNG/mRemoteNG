@@ -117,7 +117,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_name == value)
 				{
-					return ;
+					return;
 				}
 				_name = value;
 				NotifyPropertyChanged("Name");
@@ -135,7 +135,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_windowBackgroundColor == value)
 				{
-					return ;
+					return;
 				}
 				_windowBackgroundColor = value;
 				NotifyPropertyChanged("WindowBackgroundColor");
@@ -152,7 +152,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_menuBackgroundColor == value)
 				{
-					return ;
+					return;
 				}
 				_menuBackgroundColor = value;
 				NotifyPropertyChanged("MenuBackgroundColor");
@@ -169,7 +169,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_menuTextColor == value)
 				{
-					return ;
+					return;
 				}
 				_menuTextColor = value;
 				NotifyPropertyChanged("MenuTextColor");
@@ -187,7 +187,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_toolbarBackgroundColor == value || value.A < 255)
 				{
-					return ;
+					return;
 				}
 				_toolbarBackgroundColor = value;
 				NotifyPropertyChanged("ToolbarBackgroundColor");
@@ -204,7 +204,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_toolbarTextColor == value)
 				{
-					return ;
+					return;
 				}
 				_toolbarTextColor = value;
 				NotifyPropertyChanged("ToolbarTextColor");
@@ -223,7 +223,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_connectionsPanelBackgroundColor == value || value.A < 255)
 				{
-					return ;
+					return;
 				}
 				_connectionsPanelBackgroundColor = value;
 				NotifyPropertyChanged("ConnectionsPanelBackgroundColor");
@@ -240,7 +240,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_connectionsPanelTextColor == value)
 				{
-					return ;
+					return;
 				}
 				_connectionsPanelTextColor = value;
 				NotifyPropertyChanged("ConnectionsPanelTextColor");
@@ -260,7 +260,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_connectionsPanelTreeLineColor == value)
 				{
-					return ;
+					return;
 				}
 				_connectionsPanelTreeLineColor = value;
 				NotifyPropertyChanged("ConnectionsPanelTreeLineColor");
@@ -280,7 +280,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_searchBoxBackgroundColor == value || value.A < 255)
 				{
-					return ;
+					return;
 				}
 				_searchBoxBackgroundColor = value;
 				NotifyPropertyChanged("SearchBoxBackgroundColor");
@@ -300,7 +300,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_searchBoxTextPromptColor == value)
 				{
-					return ;
+					return;
 				}
 				_searchBoxTextPromptColor = value;
 				NotifyPropertyChanged("SearchBoxTextPromptColor");
@@ -320,7 +320,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_searchBoxTextColor == value)
 				{
-					return ;
+					return;
 				}
 				_searchBoxTextColor = value;
 				NotifyPropertyChanged("SearchBoxTextColor");
@@ -342,7 +342,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_configPanelBackgroundColor == value || value.A < 255)
 				{
-					return ;
+					return;
 				}
 				_configPanelBackgroundColor = value;
 				NotifyPropertyChanged("ConfigPanelBackgroundColor");
@@ -362,7 +362,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_configPanelTextColor == value)
 				{
-					return ;
+					return;
 				}
 				_configPanelTextColor = value;
 				NotifyPropertyChanged("ConfigPanelTextColor");
@@ -382,7 +382,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_configPanelCategoryTextColor == value)
 				{
-					return ;
+					return;
 				}
 				_configPanelCategoryTextColor = value;
 				NotifyPropertyChanged("ConfigPanelCategoryTextColor");
@@ -402,7 +402,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_configPanelHelpBackgroundColor == value || value.A < 255)
 				{
-					return ;
+					return;
 				}
 				_configPanelHelpBackgroundColor = value;
 				NotifyPropertyChanged("ConfigPanelHelpBackgroundColor");
@@ -422,7 +422,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_configPanelHelpTextColor == value)
 				{
-					return ;
+					return;
 				}
 				_configPanelHelpTextColor = value;
 				NotifyPropertyChanged("ConfigPanelHelpTextColor");
@@ -442,7 +442,7 @@ namespace mRemoteNG.Themes
 			{
 				if (_configPanelGridLineColor == value)
 				{
-					return ;
+					return;
 				}
 				_configPanelGridLineColor = value;
 				NotifyPropertyChanged("ConfigPanelGridLineColor");

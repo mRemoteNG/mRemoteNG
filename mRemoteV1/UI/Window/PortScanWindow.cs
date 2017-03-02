@@ -211,7 +211,7 @@ namespace mRemoteNG.UI.Window
 			if (InvokeRequired)
 			{
 				Invoke(new PortScannerHostScannedDelegate(PortScanner_HostScanned), new object[] {host, scannedCount, totalCount});
-				return ;
+				return;
 			}
 					
 			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Host scanned " + host.HostIp, true);
@@ -233,7 +233,7 @@ namespace mRemoteNG.UI.Window
 			if (InvokeRequired)
 			{
 				Invoke(new PortScannerScanComplete(PortScanner_ScanComplete), new object[] {hosts});
-				return ;
+				return;
 			}
 					
 			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strPortScanComplete);

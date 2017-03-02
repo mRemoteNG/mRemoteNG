@@ -22,7 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -31,7 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -40,7 +40,7 @@
     <OutputPath>bin\x86\Debug Portable\</OutputPath>
     <DefineConstants>TRACE;DEBUG;PORTABLE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -49,7 +49,7 @@
     <DefineConstants>TRACE;PORTABLE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -101,12 +101,15 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="App\LoggerTests.cs" />
+    <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
     <Compile Include="Config\Serializers\PortScanDeserializerTests.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
+    <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
@@ -146,8 +150,15 @@
     <Compile Include="Security\CryptographyProviderFactoryTests.cs" />
     <Compile Include="Security\EncryptedSecureStringTests.cs" />
     <Compile Include="Security\LegacyRijndaelCryptographyProviderTests.cs" />
+    <Compile Include="Tree\ConnectionTreeTests.cs" />
+    <Compile Include="Tree\ClickHandlers\ExpandNodeClickHandlerTests.cs" />
     <Compile Include="Tree\NodeSearcherTests.cs" />
+    <Compile Include="Tree\ClickHandlers\OpenConnectionClickHandlerTests.cs" />
+    <Compile Include="Tree\PreviouslyOpenedFolderExpanderTests.cs" />
+    <Compile Include="Tree\PreviousSessionOpenerTests.cs" />
     <Compile Include="Tree\RootNodeInfoTests.cs" />
+    <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
+    <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +168,7 @@
     <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
     <Compile Include="UI\Forms\PasswordFormTests.cs" />
     <Compile Include="UI\WindowListTests.cs" />
+    <Compile Include="UI\Window\ConnectionTreeWindowTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -206,6 +218,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\confCons_v2_5_passwordis_Password_fullencryption.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\beta-update-portable.txt" />
+    <Content Include="Resources\beta-update.txt" />
+    <Content Include="Resources\dev-update-portable.txt" />
+    <Content Include="Resources\dev-update.txt" />
+    <Content Include="Resources\update-portable.txt" />
+    <Content Include="Resources\update.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -33,7 +33,7 @@ namespace mRemoteNG.App
         #region Public Properties
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; set; }
-        public static Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
+        public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
@@ -42,8 +42,8 @@ namespace mRemoteNG.App
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
         {
-            get { return Windows.TreeForm.ConnectionTreeModel; }
-            set { Windows.TreeForm.ConnectionTreeModel = value; }
+            get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
+            set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         }
         #endregion
 
@@ -237,7 +237,7 @@ namespace mRemoteNG.App
                 // Load config
                 connectionsLoader.ConnectionFileName = filename;
                 ConnectionTreeModel = connectionsLoader.LoadConnections(false);
-                Windows.TreeForm.ConnectionTreeModel = ConnectionTreeModel;
+                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
             }
             catch (Exception ex)
             {
@@ -274,7 +274,7 @@ namespace mRemoteNG.App
                 {
                     if (withDialog)
                     {
-                        var loadDialog = Controls.ConnectionsLoadDialog();
+                        var loadDialog = ConnectionsLoadDialog();
                         if (loadDialog.ShowDialog() != DialogResult.OK) return;
                         connectionsLoader.ConnectionFileName = loadDialog.FileName;
                     }
@@ -288,7 +288,7 @@ namespace mRemoteNG.App
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
                 ConnectionTreeModel = connectionsLoader.LoadConnections(false);
-                Windows.TreeForm.ConnectionTreeModel = ConnectionTreeModel;
+                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
                 {
@@ -351,6 +351,16 @@ namespace mRemoteNG.App
                     Application.Exit();
                 }
             }
+        }
+
+        private static OpenFileDialog ConnectionsLoadDialog()
+        {
+            return new OpenFileDialog
+            {
+                CheckFileExists = true,
+                InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
+                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
+            };
         }
 
         private static void CreateBackupFile(string fileName)
@@ -593,7 +603,8 @@ namespace mRemoteNG.App
             connectionInfo.Protocol = url.StartsWith("https:") ? ProtocolType.HTTPS : ProtocolType.HTTP;
             connectionInfo.SetDefaultPort();
             connectionInfo.IsQuickConnect = true;
-            ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+            var connectionInitiator = new ConnectionInitiator();
+            connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
         }
 
         public static void GoToWebsite()
