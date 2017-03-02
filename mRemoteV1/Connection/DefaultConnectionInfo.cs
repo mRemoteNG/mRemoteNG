@@ -25,6 +25,7 @@ namespace mRemoteNG.Connection
                 try
                 {
                     var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
+                    if (propertyFromSource == null) continue;
                     var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
                     var typeConverter = TypeDescriptor.GetConverter(property.PropertyType);
                     if (typeConverter.CanConvertFrom(valueFromSource.GetType()))
