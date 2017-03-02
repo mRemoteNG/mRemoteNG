@@ -30,6 +30,8 @@ namespace mRemoteNG.Connection
         private ProtocolICA.EncryptionStrength _icaEncryption;
         private bool _useConsoleSession;
         private ProtocolRDP.AuthenticationLevel _rdpAuthenticationLevel;
+        private int _rdpMinutesToIdleTimeout;
+        private bool _rdpAlertIdleTimeout;
         private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
@@ -223,6 +225,30 @@ namespace mRemoteNG.Connection
         {
             get { return GetPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel); }
             set { SetField(ref _rdpAuthenticationLevel, value, "RDPAuthenticationLevel"); }
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDPMinutesToIdleTimeout"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPMinutesToIdleTimeout")]
+        public virtual int RDPMinutesToIdleTimeout
+        {
+            get { return GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout); }
+            set {
+                if(value < 0) {
+                    value = 0;
+                } else if(value > 240) {
+                    value = 240;
+                }
+                SetField(ref _rdpMinutesToIdleTimeout, value, "RDPMinutesToIdleTimeout");
+            }
+        }
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDPAlertIdleTimeout"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPAlertIdleTimeout")]
+        public bool RDPAlertIdleTimeout
+        {
+            get { return GetPropertyValue("RDPAlertIdleTimeout", _rdpAlertIdleTimeout); }
+            set { SetField(ref _rdpAlertIdleTimeout, value, "RDPAlertIdleTimeout"); }
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),

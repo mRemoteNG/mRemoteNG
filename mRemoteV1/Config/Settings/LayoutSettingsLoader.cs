@@ -48,7 +48,7 @@ namespace mRemoteNG.Config.Settings
                 }
                 else
                 {
-                    Startup.Instance.SetDefaultLayout();
+                    frmMain.Default.SetDefaultLayout();
                 }
             }
             catch (Exception ex)

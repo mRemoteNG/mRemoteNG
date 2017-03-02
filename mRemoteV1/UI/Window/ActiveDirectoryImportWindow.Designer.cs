@@ -64,9 +64,9 @@ namespace mRemoteNG.UI.Window
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ActiveDirectoryTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ActiveDirectoryTree.Domain = "tant-a01";
+            this.ActiveDirectoryTree.Domain = "DOMAIN";
             this.ActiveDirectoryTree.Location = new System.Drawing.Point(12, 52);
-            this.ActiveDirectoryTree.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ActiveDirectoryTree.Margin = new System.Windows.Forms.Padding(4);
             this.ActiveDirectoryTree.Name = "ActiveDirectoryTree";
             this.ActiveDirectoryTree.SelectedNode = null;
             this.ActiveDirectoryTree.Size = new System.Drawing.Size(506, 280);

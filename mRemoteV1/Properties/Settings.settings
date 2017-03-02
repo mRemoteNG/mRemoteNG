@@ -521,7 +521,7 @@
     <Setting Name="IdentifyQuickConnectTabs" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="UpdateChannel" Type="System.String" Scope="Application">
+    <Setting Name="UpdateChannel" Type="System.String" Scope="User">
       <Value Profile="(Default)">release</Value>
     </Setting>
     <Setting Name="ThemeName" Type="System.String" Scope="User">
@@ -582,6 +582,18 @@
       <Value Profile="(Default)">Dynamic</Value>
     </Setting>
     <Setting Name="InhDefaultSoundQuality" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDPMinutesToIdleTimeout" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDPMinutesToIdleTimeout" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDPAlertIdleTimeout" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDPAlertIdleTimeout" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

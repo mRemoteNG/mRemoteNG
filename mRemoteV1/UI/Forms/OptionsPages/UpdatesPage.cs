@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
 using mRemoteNG.App.Update;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
@@ -84,6 +85,25 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
             }
 
+            var stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
+            var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.BETA);
+            var dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.DEV);
+            switch (Settings.Default.UpdateChannel)
+            {
+                case UpdateChannelInfo.STABLE:
+                    cboReleaseChannel.SelectedIndex = stable;
+                    break;
+                case UpdateChannelInfo.BETA:
+                    cboReleaseChannel.SelectedIndex = beta;
+                    break;
+                case UpdateChannelInfo.DEV:
+                    cboReleaseChannel.SelectedIndex = dev;
+                    break;
+                default:
+                    cboReleaseChannel.SelectedIndex = stable;
+                    break;
+            }
+
             chkUseProxyForAutomaticUpdates.Checked = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
             pnlProxyBasic.Enabled = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
             txtProxyAddress.Text = Convert.ToString(Settings.Default.UpdateProxyAddress);
@@ -115,6 +135,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 Settings.Default.CheckForUpdatesFrequencyDays = 31;
             }
+
+            Settings.Default.UpdateChannel = cboReleaseChannel.Text;
 
             Settings.Default.UpdateUseProxy = chkUseProxyForAutomaticUpdates.Checked;
             Settings.Default.UpdateProxyAddress = txtProxyAddress.Text;

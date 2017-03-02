@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="beta_update" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beta-update.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="beta_update_portable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beta-update-portable.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="confCons_v2_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\confCons_v2_5.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -142,6 +148,12 @@
   <data name="confCons_v2_6_passwordis_Password_fullencryption" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\confCons_v2_6_passwordis_Password_fullencryption.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="dev_update" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dev-update.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="dev_update_portable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dev-update-portable.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="test_puttyConnectionManager_database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test_puttyConnectionManager_database.dat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
@@ -162,5 +174,11 @@
   </data>
   <data name="test_remotedesktopconnection_rdp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test_remotedesktopconnection.rdp;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="update" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\update.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="update_portable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\update-portable.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

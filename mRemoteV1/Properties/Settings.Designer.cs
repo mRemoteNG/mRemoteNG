@@ -2099,12 +2099,15 @@ namespace mRemoteNG {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("release")]
         public string UpdateChannel {
             get {
                 return ((string)(this["UpdateChannel"]));
+            }
+            set {
+                this["UpdateChannel"] = value;
             }
         }
         
@@ -2345,6 +2348,54 @@ namespace mRemoteNG {
             }
             set {
                 this["InhDefaultSoundQuality"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ConDefaultRDPMinutesToIdleTimeout {
+            get {
+                return ((int)(this["ConDefaultRDPMinutesToIdleTimeout"]));
+            }
+            set {
+                this["ConDefaultRDPMinutesToIdleTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRDPMinutesToIdleTimeout {
+            get {
+                return ((bool)(this["InhDefaultRDPMinutesToIdleTimeout"]));
+            }
+            set {
+                this["InhDefaultRDPMinutesToIdleTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultRDPAlertIdleTimeout {
+            get {
+                return ((bool)(this["ConDefaultRDPAlertIdleTimeout"]));
+            }
+            set {
+                this["ConDefaultRDPAlertIdleTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRDPAlertIdleTimeout {
+            get {
+                return ((bool)(this["InhDefaultRDPAlertIdleTimeout"]));
+            }
+            set {
+                this["InhDefaultRDPAlertIdleTimeout"] = value;
             }
         }
     }

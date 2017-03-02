@@ -172,7 +172,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			WebBrowser objWebBrowser = wBrowser as WebBrowser;
 			if (objWebBrowser == null)
 			{
-				return ;
+				return;
 			}
 					
 			// This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.

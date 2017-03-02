@@ -7,7 +7,6 @@ namespace mRemoteNG.UI.Window
         #region  Windows Form Designer generated code
 		internal System.Windows.Forms.TextBox txtSearch;
 		internal System.Windows.Forms.Panel pnlConnections;
-		internal System.Windows.Forms.ImageList imgListTree;
 		internal System.Windows.Forms.MenuStrip msMain;
 		internal System.Windows.Forms.ToolStripMenuItem mMenView;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandAllFolders;
@@ -17,13 +16,10 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddFolder;
 		public System.Windows.Forms.TreeView tvConnections;
-	    public BrightIdeasSoftware.TreeListView olvConnections;
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            this.olvConnections = new BrightIdeasSoftware.TreeListView();
-            this.olvNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.imgListTree = new System.Windows.Forms.ImageList(this.components);
+            this.olvConnections = new mRemoteNG.UI.Controls.ConnectionTree();
             this.pnlConnections = new System.Windows.Forms.Panel();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -42,20 +38,16 @@ namespace mRemoteNG.UI.Window
             // 
             // olvConnections
             // 
-            this.olvConnections.AllColumns.Add(this.olvNameColumn);
             this.olvConnections.AllowDrop = true;
             this.olvConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvConnections.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.olvConnections.CellEditUseWholeCell = false;
-            this.olvConnections.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvNameColumn});
             this.olvConnections.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvConnections.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.olvConnections.HideSelection = false;
             this.olvConnections.IsSimpleDragSource = true;
-            this.olvConnections.IsSimpleDropSink = true;
             this.olvConnections.LabelEdit = true;
             this.olvConnections.Location = new System.Drawing.Point(0, 0);
             this.olvConnections.MultiSelect = false;
@@ -64,25 +56,12 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.SelectedForeColor = System.Drawing.SystemColors.HighlightText;
             this.olvConnections.ShowGroups = false;
             this.olvConnections.Size = new System.Drawing.Size(192, 410);
-            this.olvConnections.SmallImageList = this.imgListTree;
             this.olvConnections.TabIndex = 20;
             this.olvConnections.UnfocusedSelectedBackColor = System.Drawing.SystemColors.Highlight;
             this.olvConnections.UnfocusedSelectedForeColor = System.Drawing.SystemColors.HighlightText;
             this.olvConnections.UseCompatibleStateImageBehavior = false;
             this.olvConnections.View = System.Windows.Forms.View.Details;
             this.olvConnections.VirtualMode = true;
-            // 
-            // olvNameColumn
-            // 
-            this.olvNameColumn.AspectName = "Name";
-            this.olvNameColumn.FillsFreeSpace = true;
-            this.olvNameColumn.IsButton = true;
-            // 
-            // imgListTree
-            // 
-            this.imgListTree.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imgListTree.ImageSize = new System.Drawing.Size(16, 16);
-            this.imgListTree.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // pnlConnections
             // 
@@ -214,6 +193,6 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         private System.ComponentModel.IContainer components;
-        private BrightIdeasSoftware.OLVColumn olvNameColumn;
+        private Controls.ConnectionTree olvConnections;
     }
 }
