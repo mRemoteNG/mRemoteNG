@@ -3,7 +3,7 @@ title: Posts
 ---
 {% for post in paginator.posts %}
 {% assign author = site.data.authors[post.author] %}
-<div class='media'>
+<div class='media' style='word-break: break-word'>
 	<img class='d-flex mr-3 media-object' src='{{ author.avatar }}'>
 	<div class='media-body'>
 		<h3 class='mt-0'>{{ post.title }}</h3>
