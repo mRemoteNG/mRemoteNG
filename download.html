@@ -25,7 +25,7 @@ permalink: /download
 		});
 	});
 </script>
-{% assign msi = 'application/x-msdownload|application/x-msi|binary/octet-stream' | split: '|' %}
+{% assign msi = 'application/x-msdownload|application/x-msi|binary/octet-stream|application/octet-stream' | split: '|' %}
 {% assign zip = 'application/x-zip-compressed|application/zip' | split: '|' %}
 {% for release in site.github.releases %}
 {% if release.draft == false and release.prerelease == false and stableRelease == nil %}
