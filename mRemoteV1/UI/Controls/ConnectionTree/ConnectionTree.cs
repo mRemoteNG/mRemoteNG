@@ -264,7 +264,7 @@ namespace mRemoteNG.UI.Controls
             if (mouseEventArgs.Clicks > 1) return;
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem.RowObject as ConnectionInfo;
+            var clickedNode = listItem?.RowObject as ConnectionInfo;
             if (clickedNode == null) return;
             SingleClickHandler.Execute(clickedNode);
         }
