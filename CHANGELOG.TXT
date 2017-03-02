@@ -6,7 +6,7 @@ Added more logging/notifications options
 
 
 
-1.75 (2017-02-13):
+1.75 (2017-03-01):
 
 Known Issue:
 ------------
