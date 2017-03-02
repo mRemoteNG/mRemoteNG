@@ -18,7 +18,7 @@ Write-Host Version: $version
 Write-Host dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/$tag/$filename
 Write-Host clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/$tag/CHANGELOG.TXT
 
-$hash = Get-FileHash -Algorithm MD5 $file | % { $_.Hash }
+$hash = Get-FileHash -Algorithm SHA512 $file | % { $_.Hash }
 Write-Host Checksum: $hash
 	
 
@@ -38,5 +38,5 @@ Write-Host dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/$tag/$
 Write-Host clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/$tag/CHANGELOG.TXT
 
 Write-Host CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
-$hash = Get-FileHash -Algorithm MD5 $file | % { $_.Hash }
+$hash = Get-FileHash -Algorithm SHA512 $file | % { $_.Hash }
 Write-Host Checksum: $hash

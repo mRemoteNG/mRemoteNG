@@ -31,7 +31,7 @@ namespace mRemoteNG.Config.Serializers
         private XmlConnectionsDecryptor _decryptor;
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
-        private const double MaxSupportedConfVersion = 2.7;
+        private const double MaxSupportedConfVersion = 2.8;
         private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
         private readonly IEnumerable<ICredentialRecord> _credentialRecords;
 
@@ -121,12 +121,6 @@ namespace mRemoteNG.Config.Serializers
                         var decryptedContent = _decryptor.Decrypt(rootXmlElement.InnerText);
                         rootXmlElement.InnerXml = decryptedContent;
                     }
-                }
-
-                if (import && !IsExportFile(rootXmlElement))
-                {
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strCannotImportNormalSessionFile);
-                    return null;
                 }
 
                 AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, _rootNodeInfo);
@@ -528,15 +522,6 @@ namespace mRemoteNG.Config.Serializers
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message));
             }
             return connectionInfo;
-        }
-
-        private bool IsExportFile(XmlElement rootConnectionsNode)
-        {
-            var isExportFile = false;
-            if (_confVersion < 1.0) return false;
-            if (Convert.ToBoolean(rootConnectionsNode.Attributes["Export"].Value))
-                isExportFile = true;
-            return isExportFile;
         }
     }
 }

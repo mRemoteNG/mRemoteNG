@@ -17,7 +17,6 @@ namespace mRemoteNG.Config.Serializers
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly ISerializer<ConnectionInfo, XElement> _connectionNodeSerializer;
 
-        public bool Export { get; set; }
         public SaveFilter SaveFilter { get; set; } = new SaveFilter();
         public bool UseFullEncryption { get; set; }
 
@@ -44,7 +43,7 @@ namespace mRemoteNG.Config.Serializers
             try
             {
                 var documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, _connectionNodeSerializer);
-                var xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption, Export);
+                var xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption);
                 xml = WriteXmlToString(xmlDocument);
             }
             catch (Exception ex)

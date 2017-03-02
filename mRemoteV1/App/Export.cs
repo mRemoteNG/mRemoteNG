@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
@@ -79,12 +78,16 @@ namespace mRemoteNG.App
                         cryptographyProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
 			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
                         var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString());
-                        serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
-			            ((XmlConnectionsSerializer) serializer).SaveFilter = saveFilter;
+                        serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
+                        {
+                            SaveFilter = saveFilter
+                        };
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:
-                        serializer = new CsvConnectionsSerializerMremotengFormat();
-                        ((CsvConnectionsSerializerMremotengFormat)serializer).SaveFilter = saveFilter;
+                        serializer = new CsvConnectionsSerializerMremotengFormat
+                        {
+                            SaveFilter = saveFilter
+                        };
                         break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

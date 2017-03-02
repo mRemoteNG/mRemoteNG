@@ -50,7 +50,6 @@ namespace mRemoteNG.Config.Connections
 		
 		public string ConnectionFileName {get; set;}
 		public TreeNode RootTreeNode {get; set;}
-		public bool Export {get; set;}
 		public Format SaveFormat {get; set;}
 		public SaveFilter SaveFilter {get; set;}
         public ConnectionTreeModel ConnectionTreeModel { get; set; }
@@ -72,8 +71,7 @@ namespace mRemoteNG.Config.Connections
 					break;
 				default:
 					SaveToXml();
-					if (!Export)
-						FrmMain.Default.ConnectionsFileName = ConnectionFileName;
+					FrmMain.Default.ConnectionsFileName = ConnectionFileName;
 					break;
 			}
 			FrmMain.Default.AreWeUsingSqlServerForSavingConnections = SaveFormat == Format.SQL;
@@ -248,7 +246,6 @@ namespace mRemoteNG.Config.Connections
 			    var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
                 var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
 				{
-                    Export = Export,
                     SaveFilter = SaveFilter,
                     UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
 				};
