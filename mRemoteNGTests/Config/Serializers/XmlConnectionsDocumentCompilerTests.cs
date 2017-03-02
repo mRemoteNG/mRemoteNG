@@ -28,7 +28,8 @@ namespace mRemoteNGTests.Config.Serializers
         public void Setup()
         {
             _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider);
+            var saveFilter = new SaveFilter();
+            _documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, saveFilter);
             _connectionTreeModel = SetupConnectionTreeModel();
         }
 

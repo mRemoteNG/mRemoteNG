@@ -20,7 +20,8 @@ namespace mRemoteNGTests.Config.Serializers
         {
             var connectionTreeModel = SetupConnectionTreeModel();
             var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _originalDocument = new XmlConnectionsDocumentCompiler(cryptoProvider).CompileDocument(connectionTreeModel, false, false);
+            var saveFilter = new SaveFilter();
+            _originalDocument = new XmlConnectionsDocumentCompiler(cryptoProvider, saveFilter).CompileDocument(connectionTreeModel, false, false);
             _documentEncryptor = new XmlConnectionsDocumentEncryptor(cryptoProvider);
         }
 

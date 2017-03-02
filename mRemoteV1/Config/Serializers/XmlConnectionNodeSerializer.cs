@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -13,14 +14,15 @@ namespace mRemoteNG.Config.Serializers
         private readonly SecureString _encryptionKey;
         private readonly SaveFilter _saveFilter = new SaveFilter();
 
-        public XmlConnectionNodeSerializer(ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
-        {
-            _cryptographyProvider = cryptographyProvider;
-            _encryptionKey = encryptionKey;
-        }
-
         public XmlConnectionNodeSerializer(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {
+            if (cryptographyProvider == null)
+                throw new ArgumentNullException(nameof(cryptographyProvider));
+            if (encryptionKey == null)
+                throw new ArgumentNullException(nameof(encryptionKey));
+            if (saveFilter == null)
+                throw new ArgumentNullException(nameof(saveFilter));
+
             _cryptographyProvider = cryptographyProvider;
             _encryptionKey = encryptionKey;
             _saveFilter = saveFilter;

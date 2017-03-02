@@ -41,7 +41,7 @@ namespace mRemoteNG.Config.Serializers
             var xml = "";
             try
             {
-                var documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider);
+                var documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, SaveFilter);
                 var xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption, Export);
                 xml = WriteXmlToString(xmlDocument);
             }
