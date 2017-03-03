@@ -61,7 +61,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage("App.Export.ExportToFile() failed.", ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Export.ExportToFile() failed.", ex);
 			}
 		}
 			
