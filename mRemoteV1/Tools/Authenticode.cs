@@ -1,3 +1,4 @@
+#if !PORTABLE
 using System;
 using System.Windows.Forms;
 using System.IO;
@@ -292,3 +293,4 @@ namespace mRemoteNG.Tools
         #endregion
 	}
 }
+#endif
