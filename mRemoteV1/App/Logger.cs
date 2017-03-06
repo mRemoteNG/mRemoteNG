@@ -54,6 +54,7 @@ namespace mRemoteNG.App
             var logFilePath = Application.StartupPath;
 #endif
             var logFileName = Path.ChangeExtension(Application.ProductName, ".log");
+            if (logFileName == null) return "mRemoteNG.log";
             var logFile = Path.Combine(logFilePath, logFileName);
             return logFile;
         }
