@@ -1,5 +1,9 @@
 1.75 hotfix 1 (2017-03-06):
 
+General Changes:
+----------------
+#437: Modify version numbering scheme
+
 Fixes:
 ------
 #422: Uncaught exception when clicking in connection tree whitespace
