@@ -77,11 +77,11 @@ namespace mRemoteNG.App
                         var cryptographyProvider = factory.CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
                         cryptographyProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
 			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
-                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString());
-                        serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
-                        {
-                            SaveFilter = saveFilter
-                        };
+                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                            cryptographyProvider, 
+                            rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString(),
+                            saveFilter);
+			            serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:
                         serializer = new CsvConnectionsSerializerMremotengFormat

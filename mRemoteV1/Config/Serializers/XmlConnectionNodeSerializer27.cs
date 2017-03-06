@@ -13,11 +13,6 @@ namespace mRemoteNG.Config.Serializers
         private readonly SecureString _encryptionKey;
         private readonly SaveFilter _saveFilter = new SaveFilter();
 
-        public XmlConnectionNodeSerializer27(ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
-        {
-            _cryptographyProvider = cryptographyProvider;
-            _encryptionKey = encryptionKey;
-        }
 
         public XmlConnectionNodeSerializer27(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {

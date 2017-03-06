@@ -12,13 +12,14 @@ namespace mRemoteNGTests.Config.Serializers
     public class XmlConnectionNodeSerializer27Tests
     {
         private XmlConnectionNodeSerializer27 _connectionNodeSerializer;
+        private ICryptographyProvider _cryptographyProvider;
 
         [SetUp]
         public void Setup()
         {
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(
+            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(
                 BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, "myPassword1".ConvertToSecureString());
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer27(_cryptographyProvider, "myPassword1".ConvertToSecureString(), new SaveFilter());
         }
 
         [Test]

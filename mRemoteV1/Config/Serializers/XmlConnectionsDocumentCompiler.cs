@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Connection;
@@ -18,6 +19,11 @@ namespace mRemoteNG.Config.Serializers
 
         public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider, IConnectionSerializer<XElement> connectionNodeSerializer)
         {
+            if (cryptographyProvider == null)
+                throw new ArgumentNullException(nameof(cryptographyProvider));
+            if (connectionNodeSerializer == null)
+                throw new ArgumentNullException(nameof(connectionNodeSerializer));
+
             _cryptographyProvider = cryptographyProvider;
             _connectionNodeSerializer = connectionNodeSerializer;
         }

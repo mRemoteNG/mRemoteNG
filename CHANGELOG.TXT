@@ -6,6 +6,20 @@ Added more logging/notifications options
 
 
 
+1.75 hotfix 1 (2017-03-06):
+
+General Changes:
+----------------
+#437: Modify version numbering scheme
+
+Fixes:
+------
+#422: Uncaught exception when clicking in connection tree whitespace
+#312: Resolved KeePass auto-type issue
+#427: Export does not respect filtering user/password/domain
+
+
+
 1.75 (2017-03-01):
 
 Known Issue:
