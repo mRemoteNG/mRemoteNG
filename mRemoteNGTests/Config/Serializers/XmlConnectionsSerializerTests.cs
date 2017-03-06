@@ -1,7 +1,9 @@
 ﻿using System.Xml;
+using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -43,6 +45,27 @@ namespace mRemoteNGTests.Config.Serializers
             xmlDoc.LoadXml(serializedConnections);
             var connectionNode = xmlDoc.DocumentElement?.SelectSingleNode($"Node[@Name='{connectionInfo.Name}']");
             Assert.That(connectionNode, Is.Not.Null);
+        }
+
+        [TestCase("Username", "")]
+        [TestCase("Domain", "")]
+        [TestCase("Password", "")]
+        [TestCase("InheritAutomaticResize", "False")]
+        public void SerializerRespectsSaveFilterSettings(string attributeName, string expectedValue)
+        {
+            _serializer.SaveFilter = new SaveFilter(true);
+            var connectionInfo = new ConnectionInfo
+            {
+                Name = "myConnection",
+                Username = "somefilteredstuff",
+                Domain = "somefilteredstuff",
+                Password = "somefilteredstuff",
+                Inheritance = {AutomaticResize = true}
+            };
+            var serializedConnections = _serializer.Serialize(connectionInfo);
+            var xdoc = XDocument.Parse(serializedConnections);
+            var attributeValue = xdoc.Root?.Element("Node")?.Attribute(attributeName)?.Value;
+            Assert.That(attributeValue, Is.EqualTo(expectedValue));
         }
 
         private ConnectionTreeModel SetupConnectionTreeModel()

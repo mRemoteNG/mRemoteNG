@@ -12,13 +12,14 @@ namespace mRemoteNGTests.Config.Serializers
     public class XmlConnectionNodeSerializerTests
     {
         private XmlConnectionNodeSerializer _connectionNodeSerializer;
+        private ICryptographyProvider _cryptographyProvider;
 
         [SetUp]
         public void Setup()
         {
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(
+            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(
                 BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _connectionNodeSerializer = new XmlConnectionNodeSerializer(cryptoProvider, "myPassword1".ConvertToSecureString());
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer(_cryptographyProvider, "myPassword1".ConvertToSecureString(), new SaveFilter());
         }
 
         [Test]
@@ -48,8 +49,7 @@ namespace mRemoteNGTests.Config.Serializers
         public void AttributesNotSerializedWhenFiltered(string attributeName, ConnectionInfo connectionInfo)
         {
             var saveFilter = new SaveFilter(true);
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _connectionNodeSerializer = new XmlConnectionNodeSerializer(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer(_cryptographyProvider, "myPassword1".ConvertToSecureString(), saveFilter);
             var returnVal = _connectionNodeSerializer.SerializeConnectionInfo(connectionInfo);
             var targetAttribute = returnVal.Attribute(XName.Get(attributeName));
             Assert.That(targetAttribute?.Value, Is.EqualTo(string.Empty));
@@ -59,8 +59,7 @@ namespace mRemoteNGTests.Config.Serializers
         public void InheritanceNotSerialiedWhenFiltered(string attributeName, ConnectionInfo connectionInfo)
         {
             var saveFilter = new SaveFilter(true);
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _connectionNodeSerializer = new XmlConnectionNodeSerializer(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer(_cryptographyProvider, "myPassword1".ConvertToSecureString(), saveFilter);
             var returnVal = _connectionNodeSerializer.SerializeConnectionInfo(connectionInfo);
             var targetAttribute = returnVal.Attribute(XName.Get(attributeName));
             Assert.That(targetAttribute?.Value, Is.EqualTo(false.ToString()));

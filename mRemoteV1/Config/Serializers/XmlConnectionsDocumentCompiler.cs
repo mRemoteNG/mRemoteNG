@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Connection;
@@ -14,10 +15,17 @@ namespace mRemoteNG.Config.Serializers
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private SecureString _encryptionKey;
+        private readonly SaveFilter _saveFilter;
 
-        public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider)
+        public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider, SaveFilter saveFilter)
         {
+            if (cryptographyProvider == null)
+                throw new ArgumentNullException(nameof(cryptographyProvider));
+            if (saveFilter == null)
+                throw new ArgumentNullException(nameof(saveFilter));
+
             _cryptographyProvider = cryptographyProvider;
+            _saveFilter = saveFilter;
         }
 
         public XDocument CompileDocument(ConnectionTreeModel connectionTreeModel, bool fullFileEncryption, bool export)
@@ -77,7 +85,7 @@ namespace mRemoteNG.Config.Serializers
 
         private XElement CompileConnectionInfoNode(ConnectionInfo connectionInfo)
         {
-            var connectionSerializer = new XmlConnectionNodeSerializer(_cryptographyProvider, _encryptionKey);
+            var connectionSerializer = new XmlConnectionNodeSerializer(_cryptographyProvider, _encryptionKey, _saveFilter);
             return connectionSerializer.SerializeConnectionInfo(connectionInfo);
         }
     }
