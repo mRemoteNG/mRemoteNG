@@ -264,7 +264,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private void SaveToMremotengFormattedCsv()
 		{
-            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveFilter = SaveFilter };
+            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat(SaveFilter);
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
             var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);
