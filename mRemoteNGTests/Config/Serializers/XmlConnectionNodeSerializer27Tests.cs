@@ -3,7 +3,9 @@ using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using NSubstitute;
 using NUnit.Framework;
 
 
@@ -76,6 +78,7 @@ namespace mRemoteNGTests.Config.Serializers
                 Username = "myuser",
                 Domain = "superdomain",
                 Password = "pass",
+                CredentialRecord = Substitute.For<ICredentialRecord>(),
                 Hostname = "somehost",
                 ExtApp = "myextapp",
                 PreExtApp = "preext1",
@@ -108,6 +111,7 @@ namespace mRemoteNGTests.Config.Serializers
                     yield return new TestCaseData("RDGatewayPassword", ConnectionInfo);
                     yield return new TestCaseData("VNCProxyUsername", ConnectionInfo);
                     yield return new TestCaseData("VNCProxyPassword", ConnectionInfo);
+                    yield return new TestCaseData("CredentialId", ConnectionInfo);
                 }
             }
 
