@@ -1,5 +1,5 @@
-Version: 1.72.5065.32737
-dURL: http://downloads.mremoteng.org/mRemoteNG-Installer-1.72.exe
-clURL: http://update.mremoteng.org/changes-1.72.txt
-CertificateThumbprint: 1cbd910dbd6e77f26506e7f600736972f700673f
-Checksum: A1E50ACAC4CB8023527E1E7A0E682459
+Version: 1.75.7000.19194
+dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Hotfix1/mRemoteNG-Installer-1.75.7000.19194.msi
+clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Hotfix1/CHANGELOG.TXT
+CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
+Checksum: 1A3B7BC82963D3EC0D4E29D382233785B81D535C120051F42165E4E6A855E4BBD501A454340CDCC65B233BEE9F68C138224402C9D643B05C6268FB389CB3ED78
