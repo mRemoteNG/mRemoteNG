@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 14.0.25420.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteV1", "mRemoteV1\mRemoteV1.csproj", "{4934A491-40BC-4E5B-9166-EA1169A220F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteNGTests", "mRemoteNGTests\mRemoteNGTests.csproj", "{1453B37F-8621-499E-B0B2-6091F76DC0BB}"
