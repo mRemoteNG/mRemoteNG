@@ -14,16 +14,17 @@ namespace mRemoteNG.Config.Serializers
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
-        private readonly SaveFilter _saveFilter = new SaveFilter();
-
-        public XmlConnectionNodeSerializer26(ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
-        {
-            _cryptographyProvider = cryptographyProvider;
-            _encryptionKey = encryptionKey;
-        }
+        private readonly SaveFilter _saveFilter;
 
         public XmlConnectionNodeSerializer26(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {
+            if (cryptographyProvider == null)
+                throw new ArgumentNullException(nameof(cryptographyProvider));
+            if (encryptionKey == null)
+                throw new ArgumentNullException(nameof(encryptionKey));
+            if (saveFilter == null)
+                throw new ArgumentNullException(nameof(saveFilter));
+
             _cryptographyProvider = cryptographyProvider;
             _encryptionKey = encryptionKey;
             _saveFilter = saveFilter;

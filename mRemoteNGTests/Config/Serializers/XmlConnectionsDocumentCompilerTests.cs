@@ -30,7 +30,10 @@ namespace mRemoteNGTests.Config.Serializers
         {
             _connectionTreeModel = SetupConnectionTreeModel();
             _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(_cryptographyProvider, _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                _cryptographyProvider, 
+                _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                new SaveFilter());
             _documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, connectionNodeSerializer);
         }
 

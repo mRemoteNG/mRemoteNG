@@ -20,7 +20,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-			    var saveSecurity = new SaveFilter();
+			    var saveFilter = new SaveFilter();
 					
 				using (var exportForm = new ExportForm())
 				{
@@ -50,18 +50,19 @@ namespace mRemoteNG.App
 							break;
 					}
 						
-					saveSecurity.SaveUsername = exportForm.IncludeUsername;
-					saveSecurity.SavePassword = exportForm.IncludePassword;
-					saveSecurity.SaveDomain = exportForm.IncludeDomain;
-					saveSecurity.SaveInheritance = exportForm.IncludeInheritance;
+					saveFilter.SaveUsername = exportForm.IncludeUsername;
+					saveFilter.SavePassword = exportForm.IncludePassword;
+					saveFilter.SaveDomain = exportForm.IncludeDomain;
+					saveFilter.SaveInheritance = exportForm.IncludeInheritance;
+				    saveFilter.SaveCredentialId = exportForm.IncludeAssignedCredential;
 						
-					SaveExportFile(exportForm.FileName, exportForm.SaveFormat, saveSecurity, exportTarget);
+					SaveExportFile(exportForm.FileName, exportForm.SaveFormat, saveFilter, exportTarget);
 				}
 					
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage("App.Export.ExportToFile() failed.", ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Export.ExportToFile() failed.", ex);
 			}
 		}
 			
@@ -77,17 +78,14 @@ namespace mRemoteNG.App
                         var cryptographyProvider = factory.CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
                         cryptographyProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
 			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
-                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString());
-                        serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
-                        {
-                            SaveFilter = saveFilter
-                        };
+                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                            cryptographyProvider, 
+                            rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString(),
+                            saveFilter);
+			            serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:
-                        serializer = new CsvConnectionsSerializerMremotengFormat
-                        {
-                            SaveFilter = saveFilter
-                        };
+			            serializer = new CsvConnectionsSerializerMremotengFormat(saveFilter);
                         break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

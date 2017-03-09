@@ -9,7 +9,8 @@ namespace mRemoteNG.Security
 		    SaveUsername = true;
 		    SavePassword = true;
 		    SaveDomain = true;
-		    SaveInheritance = true;
+		    SaveCredentialId = true;
+            SaveInheritance = true;
 		}
 
 	    public bool SaveUsername { get; set; }
@@ -17,6 +18,8 @@ namespace mRemoteNG.Security
 	    public bool SavePassword { get; set; }
 
 	    public bool SaveDomain { get; set; }
+
+        public bool SaveCredentialId { get; set; }
 
 	    public bool SaveInheritance { get; set; }
 	}

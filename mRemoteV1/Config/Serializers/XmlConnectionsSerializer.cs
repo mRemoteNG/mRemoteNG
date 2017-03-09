@@ -17,7 +17,6 @@ namespace mRemoteNG.Config.Serializers
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly IConnectionSerializer<XElement> _connectionNodeSerializer;
 
-        public SaveFilter SaveFilter { get; set; } = new SaveFilter();
         public bool UseFullEncryption { get; set; }
 
         public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider, IConnectionSerializer<XElement> connectionNodeSerializer)

@@ -259,6 +259,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigned Credential.
+        /// </summary>
+        internal static string strAssignedCredential {
+            get {
+                return ResourceManager.GetString("strAssignedCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatically get session information.
         /// </summary>
         internal static string strAutomaticallyGetSessionInfo {
