@@ -2516,6 +2516,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strRDPMicrophonesSendToRemoteComputer" xml:space="preserve">
     <value>Send to remote computer</value>
+  </data>
   <data name="strAssignedCredential" xml:space="preserve">
     <value>Assigned Credential</value>
   </data>
