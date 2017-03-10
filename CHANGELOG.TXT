@@ -2,8 +2,14 @@
 
 Fixes:
 ------
-#408: Update SQL scripts
 #448: Resolved issue with SQL saving
+
+
+1.75.7001 (2017-03-10):
+
+Fixes:
+------
+#408: Update SQL scripts
 
 
 1.75 hotfix 1 (2017-03-06):
