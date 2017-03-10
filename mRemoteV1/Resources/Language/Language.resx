@@ -2506,10 +2506,10 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Log to application directory</value>
   </data>
   <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
-    <value>Select how local microphones should be redirected</value>
+    <value>Select how local audio input should be redirected</value>
   </data>
   <data name="strPropertyNameRedirectMicrophones" xml:space="preserve">
-    <value>Microphones</value>
+    <value>Audio Input</value>
   </data>
   <data name="strRDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
     <value>Leave at local computer</value>

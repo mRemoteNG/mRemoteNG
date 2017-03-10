@@ -4361,7 +4361,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select how local microphones should be redirected.
+        ///   Looks up a localized string similar to Select how local audio input should be redirected.
         /// </summary>
         internal static string strPropertyDescriptionRedirectMicrophones {
             get {
@@ -4874,7 +4874,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Microphones.
+        ///   Looks up a localized string similar to Audio Input.
         /// </summary>
         internal static string strPropertyNameRedirectMicrophones {
             get {
