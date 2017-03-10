@@ -3,6 +3,8 @@
 Features/Enhancements:
 ----------------------
 Added more logging/notifications options
+#429: Added Czech translation
+
 
 
 

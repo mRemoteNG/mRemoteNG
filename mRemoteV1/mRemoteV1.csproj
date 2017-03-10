@@ -611,6 +611,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx" />
     <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
