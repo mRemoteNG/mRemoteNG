@@ -2505,4 +2505,19 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="strLogToAppDir" xml:space="preserve">
     <value>Logovat do adresáře kde je aplikace umístěna.</value>
   </data>
+  <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
++    <value>Zvolte jak bude přesměrováno vstupní zvukové zařízení</value>
++ </data>
++ <data name="strPropertyNameRedirectMicrophones" xml:space="preserve">
++    <value>Vstupní zvuková zařízení</value>
++ </data>
++ <data name="strRDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
++    <value>Ponechat vstup na místním počítači</value>
++ </data>
++ <data name="strRDPMicrophonesSendToRemoteComputer" xml:space="preserve">
++    <value>Vstup zaslat na vzdálený počítač</value>
++ </data>
+  <data name="strAssignedCredential" xml:space="preserve">
+     <value>Přiřazené přihlašovací informace</value>
+  </data>
 </root>
