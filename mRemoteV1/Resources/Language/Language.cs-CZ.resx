@@ -1,0 +1,2523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strAbout" xml:space="preserve">
+    <value>O Aplikaci</value>
+  </data>
+  <data name="strActive" xml:space="preserve">
+    <value>Aktuální</value>
+  </data>
+  <data name="strActiveDirectory" xml:space="preserve">
+    <value>Aktuální složka</value>
+  </data>
+  <data name="strActivity" xml:space="preserve">
+    <value>Aktivita</value>
+  </data>
+  <data name="strAddConnection" xml:space="preserve">
+    <value>Nové připojení</value>
+  </data>
+  <data name="strAddFolder" xml:space="preserve">
+    <value>Nová složka</value>
+  </data>
+  <data name="strAddNodeFromXmlFailed" xml:space="preserve">
+    <value>Operace přidání uzlu (AddNodeFromXML) selhala!</value>
+  </data>
+  <data name="strAddNodesFromSqlFailed" xml:space="preserve">
+    <value>Operace přidání uzlu (AddNodesFromSQL) selhala!</value>
+  </data>
+  <data name="strAllowOnlySingleInstance" xml:space="preserve">
+    <value>Umožnit spuštění jen jedné instance aplikace (bude potřeba restartovat mRemoteNG)</value>
+  </data>
+  <data name="strAlways" xml:space="preserve">
+    <value>Vždy</value>
+  </data>
+  <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
+    <value>Vždy připojit, i když autentizace selže</value>
+  </data>
+  <data name="strAlwaysShowPanelSelection" xml:space="preserve">
+    <value>Při navázání spojení vždy nabídnout výběr panelu </value>
+  </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Vždy zobrazovat záložky (taby) panelů</value>
+  </data>
+  <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
+    <value>Vždy zobrazit notifikační ikonu</value>
+  </data>
+  <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
+    <value>Zeptat se na nastavení později</value>
+  </data>
+  <data name="strAskUpdatesCommandCustom" xml:space="preserve">
+    <value>Upravit nastavení teď</value>
+  </data>
+  <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
+    <value>Použít doporučená nastavení</value>
+  </data>
+  <data name="strAskUpdatesContent" xml:space="preserve">
+    <value>{0} může automaticky hledat aktualizace, které mohou obsahovat nové funkce a opravy chyb. Doporučuje se, abyste dovolili {0} hledat aktualizace každý týden.</value>
+  </data>
+  <data name="strAskUpdatesMainInstruction" xml:space="preserve">
+    <value>Natavení automatických aktualizací</value>
+  </data>
+  <data name="strAspect" xml:space="preserve">
+    <value>Poměr stran</value>
+  </data>
+  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
+    <value>Automaticky získat informace o sezení</value>
+  </data>
+  <data name="strAutoSaveEvery" xml:space="preserve">
+    <value>Automaticky ukládat každých:</value>
+  </data>
+  <data name="strAutoSaveMins" xml:space="preserve">
+    <value>Minut(y) (0 = vypnuto)</value>
+  </data>
+  <data name="strAvailableVersion" xml:space="preserve">
+    <value>Poslední verze</value>
+  </data>
+  <data name="strButtonBrowse" xml:space="preserve">
+    <value>&amp;Procházet...</value>
+  </data>
+  <data name="strButtonCancel" xml:space="preserve">
+    <value>&amp;Storno</value>
+  </data>
+  <data name="strButtonChange" xml:space="preserve">
+    <value>Změnit</value>
+  </data>
+  <data name="strButtonClose" xml:space="preserve">
+    <value>&amp;Zavřít</value>
+  </data>
+  <data name="strButtonDefaultInheritance" xml:space="preserve">
+    <value>Výchozí převezetí z nadřízené</value>
+  </data>
+  <data name="strButtonDefaultProperties" xml:space="preserve">
+    <value>Výchozí vlastnosti</value>
+  </data>
+  <data name="strButtonDisconnect" xml:space="preserve">
+    <value>Odpojit</value>
+  </data>
+  <data name="strButtonIcon" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="strButtonImport" xml:space="preserve">
+    <value>&amp;Importovat</value>
+  </data>
+  <data name="strButtonInheritance" xml:space="preserve">
+    <value>Z nadřazené</value>
+  </data>
+  <data name="strButtonLaunch" xml:space="preserve">
+    <value>&amp;Spustit</value>
+  </data>
+  <data name="strButtonLaunchPutty" xml:space="preserve">
+    <value>Spustit PuTTY</value>
+  </data>
+  <data name="strButtonNew" xml:space="preserve">
+    <value>&amp;Nový</value>
+  </data>
+  <data name="strButtonOK" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
+  <data name="strButtonProperties" xml:space="preserve">
+    <value>Vlastnosti</value>
+  </data>
+  <data name="strButtonScan" xml:space="preserve">
+    <value>&amp;Scanovat</value>
+  </data>
+  <data name="strButtonStop" xml:space="preserve">
+    <value>&amp;Stop</value>
+  </data>
+  <data name="strButtonTestProxy" xml:space="preserve">
+    <value>Test Proxy</value>
+  </data>
+  <data name="strCannotImportNormalSessionFile" xml:space="preserve">
+    <value>Hlavní  soubor s nastavenými spojeními nelze importovat. You cannot import a normal connection file.
+Prosím použijte Soubor - Otevřít seznam spojení... pro načtení souboru s nastavením spojení!</value>
+  </data>
+  <data name="strCannotStartPortScan" xml:space="preserve">
+    <value>Nelze scanovat porty, IP adresa má nesprávný tvar!</value>
+  </data>
+  <data name="strCategoryAppearance" xml:space="preserve">
+    <value>Vzhled</value>
+  </data>
+  <data name="strCategoryConnection" xml:space="preserve">
+    <value>Spojení</value>
+  </data>
+  <data name="strCategoryCredentials" xml:space="preserve">
+    <value>Autentizace</value>
+  </data>
+  <data name="strCategoryDisplay" xml:space="preserve">
+    <value>Zobrazení</value>
+  </data>
+  <data name="strCategoryGateway" xml:space="preserve">
+    <value>Brána</value>
+  </data>
+  <data name="strCategoryGeneral" xml:space="preserve">
+    <value>Všeobecné</value>
+  </data>
+  <data name="strCategoryMiscellaneous" xml:space="preserve">
+    <value>Různé</value>
+  </data>
+  <data name="strCategoryProtocol" xml:space="preserve">
+    <value>Protokol</value>
+  </data>
+  <data name="strCategoryRedirect" xml:space="preserve">
+    <value>Přesměrování</value>
+  </data>
+  <data name="strCcAlwaysShowScreen" xml:space="preserve">
+    <value>Vždy zobrazit tento dialog při startu</value>
+  </data>
+  <data name="strCcCheckAgain" xml:space="preserve">
+    <value>Obnovit</value>
+  </data>
+  <data name="strCcCheckFailed" xml:space="preserve">
+    <value>Kontrola selhala!</value>
+  </data>
+  <data name="strCcCheckSucceeded" xml:space="preserve">
+    <value>Kontrola úspěšná!</value>
+  </data>
+  <data name="strCcEOLFailed" xml:space="preserve">
+    <value>Funckionalita pro (RDP) sezení vyžaduje, abyste měli ve  Vašem systému zaregistrovánu knihovnu eolwtscom.dll .
+mRemoteNG je sice s touto komponentou dodáváno, avšak pokud jej nenainstalujete s pomocí Instalátoru, není knihovna automaticky zaregistrována.
+Pro provedení registrace ručně spusťe následující příkaz v konzoli příkazového řádku (Start->Spustit->cmd) v administrátorském režimu(!) : regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (kde  C:\Program Files\mRemoteNG\ is je cesta ke složce Vaší kopie mRemoteNG ).
+Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu RDP v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
+  </data>
+  <data name="strCcEOLOK" xml:space="preserve">
+    <value>Knihovna EOLWTSCOM byla nalezena a zdá se, že je správně zaregistrována.</value>
+  </data>
+  <data name="strCcGeckoFailed" xml:space="preserve">
+    <value>Pro využití Gecko Rendering Engine musíte mít nainstalovaný XULrunner 1.8.1.x a nastavenou cestu k jeho instalační složce v Možnostech Nastavení.
+XULrunner 1.8.1.3 lze stáhnout zde: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
+Až jej stáhnete, rozbalte balíček do libovolné složky. Pak zvolte v mRemoteNG menu Nástroje -> Možnosti -> Pokročilé a zadejte cestu do políčka "Cesta ke složce XULrunner".
+Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu Gecko rendering Engine v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
+  </data>
+  <data name="strCcGeckoOK" xml:space="preserve">
+    <value>GeckoFx byla nalezena a zdá se, že je správně nainstalována.</value>
+  </data>
+  <data name="strCcICAFailed" xml:space="preserve">
+    <value>Funkcionalita ICA vyžaduje, aby byl nainstalován XenDesktop Online Plugin a knihovna wfica.ocx byla zaregistrována. Klienta můžete stáhnout zde: http://www.citrix.com/download/
+Pokud máte XenDesktop Online Plugin nainstalován a kontrola stále selhává, pokuste se zaregistrovat wfica.ocx ručně.
+K tomu otevřete dialog "Spustit" (Start->Spustit) a zadejte následující text: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (kde  c:\Program Files\Citrix\ICA Client\ je cesta ke složce s Vaší instalací XenDesktop Online Plugin).
+Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu ICA v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
+  </data>
+  <data name="strCcICAOK" xml:space="preserve">
+    <value>Všechny komponenty ICA byly nalezeny a zdají se být řádně zaregistrovány.
+Citrix ICA Client Control verze {0}</value>
+  </data>
+  <data name="strCcNotInstalledProperly" xml:space="preserve">
+    <value>není správně instalováno</value>
+  </data>
+  <data name="strCcPuttyFailed" xml:space="preserve">
+    <value>Protokoly SSH, Telnet, Rlogin and RAW potřebují ke své práci program PuTTY. PuTTY je součástí každého balíčku s mRemoteNG a je k nalezení ve složce, kde je mRemoteNG nainstalován.
+Prosím ujistěte se, že budťo máte soubor Putty.exe ve složce vašeho mRemoteNG (výchozí je: c:\Program Files\mRemoteNG\) nebo že jste zadali správnou cestu ke složce obsahující program PuTTY v Nástrojích (menu Nástroje -> Možnosti -> Pokročilé -> Vlastní cesta k PuTTY)</value>
+  </data>
+  <data name="strCcPuttyOK" xml:space="preserve">
+    <value>Program PuTTY byl nalezen a měl by být připraven k použití.</value>
+  </data>
+  <data name="strCcRDPFailed" xml:space="preserve">
+    <value>Aby RDP fungovalo, musíte mí nainstlaovanou poslední verzi Remote Desktop Connection (Terminal Services) Client 8.0. Můžete jej stáhnout zde : http://support.microsoft.com/kb/925876
+Pokud tato kontrola stále selhává nebo nejste schopni používat RDP v mRemoteNG, prosím prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
+  </data>
+  <data name="strCcRDPOK" xml:space="preserve">
+    <value>Všechny komponenty RDP byly nalezeny a zdají se být řádně zaregistrovány.
+Remote Desktop Connection Control verze {0}</value>
+  </data>
+  <data name="strCcVNCFailed" xml:space="preserve">
+    <value>Funkcionalita VNC vyžaduje knihovnu VncSharp.dll ve složce s vaší instalací mRemoteNG.
+Prosím ujistěte se, že máte v aplikační složce vaší instalace mRemoteNG soubor VncSharp.dll (zpravidla složka C:\Program Files\mRemoteNG\).
+Pokud tato kontrola stále selhává nebo nejste schopni používat VNC v mRemoteNG, prosím prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
+  </data>
+  <data name="strCcVNCOK" xml:space="preserve">
+    <value>Všechny VNC součásti byly nalezeny a zdají se být řádně zaregistrovány.
+VncSharp Control verze {0}</value>
+  </data>
+  <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
+    <value>Automaticky obnovit připojení v případě přerušení spojení se serverem(pouze RDP &amp;&amp; ICA)</value>
+  </data>
+  <data name="strCheckboxDomain" xml:space="preserve">
+    <value>Doména</value>
+  </data>
+  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+    <value>Tuto zprávu příště nezobrazovat.</value>
+  </data>
+  <data name="strCheckboxInheritance" xml:space="preserve">
+    <value>Dle nadřazené</value>
+  </data>
+  <data name="strCheckboxPassword" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="strCheckboxProxyAuthentication" xml:space="preserve">
+    <value>Tento proxy server vyžaduje autentizaci</value>
+  </data>
+  <data name="strCheckboxPuttyPath" xml:space="preserve">
+    <value>Vlastní cesta k PuTTY:</value>
+  </data>
+  <data name="strCheckboxReconnectWhenReady" xml:space="preserve">
+    <value>Obnovit spojení jakmile je připraveno</value>
+  </data>
+  <data name="strCheckboxUpdateUseProxy" xml:space="preserve">
+    <value>Pro spojení použít proxy server</value>
+  </data>
+  <data name="strCheckboxUsername" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="strCheckboxWaitForExit" xml:space="preserve">
+    <value>Čekat na logout</value>
+  </data>
+  <data name="strCheckForUpdate" xml:space="preserve">
+    <value>Opakovat kontrolu</value>
+  </data>
+  <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
+    <value>Zkontroluj aktualizace při spuštění</value>
+  </data>
+  <data name="strCheckNow" xml:space="preserve">
+    <value>Zkontrolovat nyní</value>
+  </data>
+  <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
+    <value>Zkontroluj komponenty při spuštění</value>
+  </data>
+  <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
+    <value>Před připojením vybrat panel</value>
+  </data>
+  <data name="strClosedPorts" xml:space="preserve">
+    <value>Zavřené porty</value>
+  </data>
+  <data name="strCollapseAllFolders" xml:space="preserve">
+    <value>Sbalit vše</value>
+  </data>
+  <data name="strColumnArguments" xml:space="preserve">
+    <value>Přepínače (parametry)</value>
+  </data>
+  <data name="strColumnDisplayName" xml:space="preserve">
+    <value>Zobrazené jméno</value>
+  </data>
+  <data name="strColumnFilename" xml:space="preserve">
+    <value>Jméno souboru</value>
+  </data>
+  <data name="strColumnHostnameIP" xml:space="preserve">
+    <value>Host/IP</value>
+  </data>
+  <data name="strColumnMessage" xml:space="preserve">
+    <value>Zpráva</value>
+  </data>
+  <data name="strColumnUsername" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="strColumnWaitForExit" xml:space="preserve">
+    <value>Čekat na logout</value>
+  </data>
+  <data name="strCommandExitProgram" xml:space="preserve">
+    <value>E&amp;xit {0}</value>
+  </data>
+  <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+    <value>Nemohl jsem zpracovat přepínače z příkazového řádku!</value>
+  </data>
+  <data name="strCommandOpenConnectionFile" xml:space="preserve">
+    <value>&amp;Otevřít seznam spojení</value>
+  </data>
+  <data name="strCommandTryAgain" xml:space="preserve">
+    <value>&amp;Zkusit znovu</value>
+  </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} detekoval v systému běžící aplikaci Lenovo Auto Scroll Utility. Tato aplikace je známá jako zdroj problémů s {0}. Doporučujeme ji uzavřít nebo odinstalovat.</value>
+  </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>Detekován porblém s kompatibilitou</value>
+  </data>
+  <data name="strComponentsCheck" xml:space="preserve">
+    <value>Kontrola komponent</value>
+  </data>
+  <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+    <value>Operace btnIcon_Click selhala!</value>
+  </data>
+  <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
+    <value>Operace ShowHideGridItems selhala!</value>
+  </data>
+  <data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
+    <value>Operace IconMenu_Click selhala!</value>
+  </data>
+  <data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
+    <value>Operace vlastností (Property Grid object) selhala!</value>
+  </data>
+  <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+    <value>Operace SetHostStatus selhala!</value>
+  </data>
+  <data name="strConfigPropertyGridValueFailed" xml:space="preserve">
+    <value>Operace pGrid_PopertyValueChanged selhala!</value>
+  </data>
+  <data name="strConfigUiLoadFailed" xml:space="preserve">
+    <value>Operace Config UI load selhala!</value>
+  </data>
+  <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
+    <value>Přejete si uzavřít spojení:
+"{0}"?</value>
+  </data>
+  <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
+    <value>Opravdu chcete zavřít panel "{0}"? Všechna spojení v něm obsažená budou také uzavřena.</value>
+  </data>
+  <data name="strConfirmDeleteExternalTool" xml:space="preserve">
+    <value>Jste si jisti, že si přejete smazat externí nástroj "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
+    <value>Jste si jisti, že si přejete smazat {0} vybraných externích nástorojů?</value>
+  </data>
+  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+    <value>Jste si jisti, že si přejete smazat spojení  "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+    <value>Jste si jisti, že si přejete smazat prázdnou složku "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+    <value>Jste si jisti, že si přejete smazat složku "{0}"? Všechny složky a spojení v ní obsažené budou smazány také!!!!</value>
+  </data>
+  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+    <value>Přejte si zavřít všechna otevřená spojení?</value>
+  </data>
+  <data name="strConfirmResetLayout" xml:space="preserve">
+    <value>Jste si jisti, že si přejete obnovit výchozí rozložení panelů?</value>
+  </data>
+  <data name="strConnect" xml:space="preserve">
+    <value>Připojit</value>
+  </data>
+  <data name="strConnectInFullscreen" xml:space="preserve">
+    <value>Připojit na celou obrazovku</value>
+  </data>
+  <data name="strConnecting" xml:space="preserve">
+    <value>Připojuji...</value>
+  </data>
+  <data name="strConnectionEventConnected" xml:space="preserve">
+    <value>Protokol událostí připojen</value>
+  </data>
+  <data name="strConnectionEventConnectedDetail" xml:space="preserve">
+    <value>Připojení k "{0}" přes "{1}" bylo provedeno uživatelem "{2}" (Popis: "{3}"; Login: "{4}")</value>
+  </data>
+  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+    <value>Připojení selhalo!</value>
+  </data>
+  <data name="strConnectionEventErrorOccured" xml:space="preserve">
+    <value>Chyba protokolu (či horizontu?) událostí</value>
+  </data>
+  <data name="strConnectionOpenFailed" xml:space="preserve">
+    <value>Otevření spojení selhalo!</value>
+  </data>
+  <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+    <value>Nemohu navázat spojení: Nebyla specifikována adresa či jméno hostitele!</value>
+  </data>
+  <data name="strConnectionRdpErrorDetail" xml:space="preserve">
+    <value>Chyba RDP!
+Kód chyby: {0}
+Popis: {1}</value>
+  </data>
+  <data name="strConnections" xml:space="preserve">
+    <value>Spojení</value>
+  </data>
+  <data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+    <value> nastavit výchozí port!</value>
+  </data>
+  <data name="strConnectionsFileBackupFailed" xml:space="preserve">
+    <value>Nepovedlo se vytvořit zálohu souboru seznamu spojení!</value>
+  </data>
+  <data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+    <value>Nepovedlo se naimportovat soubor se seznamem spojení!</value>
+  </data>
+  <data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+    <value>Nepovedlo se načíst soubor seznamu spojení "{0}"!</value>
+  </data>
+  <data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+    <value>Nepovedlo se načíst soubor seznamu spojení "{0}"!
+Otevírám nový prázdný soubor seznamu spojení.</value>
+  </data>
+  <data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
+    <value>Nepovedlo se uložit soubor seznamu spojení!</value>
+  </data>
+  <data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
+    <value>Nepovedlo se uložit soubor seznamu spojení "{0}"!</value>
+  </data>
+  <data name="strConnectNoCredentials" xml:space="preserve">
+    <value>Připojit bez loginu</value>
+  </data>
+  <data name="strConnectToConsoleSession" xml:space="preserve">
+    <value>Připojit k otevřenému sezení konzole</value>
+  </data>
+  <data name="strConnectWithOptions" xml:space="preserve">
+    <value>Připojit (s možnostmi)</value>
+  </data>
+  <data name="strConnenctionClosedByUser" xml:space="preserve">
+    <value>Připojení k {0} přes {1} uzavřeno uživatelem {2}.</value>
+  </data>
+  <data name="strConnenctionClosedByUserDetail" xml:space="preserve">
+    <value>Připojení k {0} přes {1} uzavřeno uživatelem {2}.  (Popis: "{3}"; Uživatel: "{4}")</value>
+  </data>
+  <data name="strConnenctionCloseEvent" xml:space="preserve">
+    <value>Událost uzavření spojení</value>
+  </data>
+  <data name="strConnenctionCloseEventFailed" xml:space="preserve">
+    <value>Události uzavření spojení selhala!</value>
+  </data>
+  <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
+    <value>Nepovedlo se vytvořit nový soubor seznamu připojení!</value>
+  </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Nepovedlo se najít ovládací prvek ToolStrip control v objektu FilteredPropertyGrid.</value>
+  </data>
+  <data name="strCurrentVersion" xml:space="preserve">
+    <value>Instalovaná verze</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Výchozí vzhled</value>
+  </data>
+  <data name="strDetect" xml:space="preserve">
+    <value>Detekovat</value>
+  </data>
+  <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
+    <value>Nepovedlo se připojit do sezení konzole</value>
+  </data>
+  <data name="strDontConnectWhenAuthFails" xml:space="preserve">
+    <value>Nepřipojovat pokud autentizace selže</value>
+  </data>
+  <data name="strDoubleClickTabClosesIt" xml:space="preserve">
+    <value>Zavřít tab dvojklikem na něj</value>
+  </data>
+  <data name="strDownloadAndInstall" xml:space="preserve">
+    <value>Stáhnout a nainstalovat</value>
+  </data>
+  <data name="strDuplicate" xml:space="preserve">
+    <value>Duplikovat</value>
+  </data>
+  <data name="strEmptyPasswordContinue" xml:space="preserve">
+    <value>Přejete si pokračovat bez hesla?</value>
+  </data>
+  <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
+    <value>Pro prázdná políčka Login, Heslo nebo Doména použít:</value>
+  </data>
+  <data name="strEnc128Bit" xml:space="preserve">
+    <value>128-bit</value>
+  </data>
+  <data name="strEnc128BitLogonOnly" xml:space="preserve">
+    <value>128-bit (jen pro logon)</value>
+  </data>
+  <data name="strEnc40Bit" xml:space="preserve">
+    <value>40-bit</value>
+  </data>
+  <data name="strEnc56Bit" xml:space="preserve">
+    <value>56-bit</value>
+  </data>
+  <data name="strEncBasic" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
+    <value>Zakódovat celý soubor seznamu připojení</value>
+  </data>
+  <data name="strEndIP" xml:space="preserve">
+    <value>Koncová IP</value>
+  </data>
+  <data name="strEndPort" xml:space="preserve">
+    <value>Skončit portem</value>
+  </data>
+  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+    <value>Metoda AddExternalToolsToToolBar (frmMain) selhala. {0}</value>
+  </data>
+  <data name="strErrorAddFolderFailed" xml:space="preserve">
+    <value>Metoda AddFolder (UI.Window.ConnectionTreeWindow) selhala. {0}</value>
+  </data>
+  <data name="strErrorBadDatabaseVersion" xml:space="preserve">
+    <value>Tato verze databáze {0} není kompatibilní s touto verzí {1}.</value>
+  </data>
+  <data name="strErrorCloneNodeFailed" xml:space="preserve">
+    <value>Metoda CloneNode (Tree.Node) selhala. {0}</value>
+  </data>
+  <data name="strErrorCode" xml:space="preserve">
+    <value>Kód chyby {0}.</value>
+  </data>
+  <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
+    <value>Seznam připojení nemohl být uložen.</value>
+  </data>
+  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
+    <value>Spuštění PuTTY se nezdařilo.</value>
+  </data>
+  <data name="strErrorDecryptionFailed" xml:space="preserve">
+    <value>Dešifrování se nezdařilo. {0}</value>
+  </data>
+  <data name="strErrorEncryptionFailed" xml:space="preserve">
+    <value>Začifrování se nezdařilo. {0}</value>
+  </data>
+  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
+    <value>V nastavení politik zabezepčení systému Windows je aktivována možnost "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing" (Systémová kryptografie: Pro šifrování, hashe a podpisy využívat algoritmy odpovídají FIPS") Toto nastavení není kompatibilní s {0}.
+
+Pro další informace  navštivte článek podpory fy. Microsoft na http://support.microsoft.com/kb/811833
+
+{0} se nyní ukončí.</value>
+  </data>
+  <data name="strErrors" xml:space="preserve">
+    <value>Chyby</value>
+  </data>
+  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>Výchozí soubor seznamu spojení se nepodařilo načíst.{0}{0}{2}{0}{3}{0}{0}Aby se zabránilo ztrátě dat, {1} se nyní ukončí.</value>
+  </data>
+  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+    <value>Metoda VerifyDatabaseVersion (Config.Connections.Save) selhala. {0}</value>
+  </data>
+  <data name="strExpandAllFolders" xml:space="preserve">
+    <value>Rozbalit vše</value>
+  </data>
+  <data name="strExperimental" xml:space="preserve">
+    <value>Experimentální</value>
+  </data>
+  <data name="strExport" xml:space="preserve">
+    <value>Exportovat</value>
+  </data>
+  <data name="strExportEverything" xml:space="preserve">
+    <value>Exportovat vše</value>
+  </data>
+  <data name="strExportFile" xml:space="preserve">
+    <value>Exportovat soubor</value>
+  </data>
+  <data name="strExportItems" xml:space="preserve">
+    <value>Exportovat položky</value>
+  </data>
+  <data name="strExportmRemoteXML" xml:space="preserve">
+    <value>Exportovat mRemote/mRemoteNG XML</value>
+  </data>
+  <data name="strExportProperties" xml:space="preserve">
+    <value>Exportovat vlastnosti</value>
+  </data>
+  <data name="strExportSelectedConnection" xml:space="preserve">
+    <value>Exportuj vybrané spojení</value>
+  </data>
+  <data name="strExportSelectedFolder" xml:space="preserve">
+    <value>Export vybranou složku</value>
+  </data>
+  <data name="strExportToFileMenuItem" xml:space="preserve">
+    <value>&amp;Exportovat do souboru...</value>
+  </data>
+  <data name="strExtApp" xml:space="preserve">
+    <value>Ext. App</value>
+  </data>
+  <data name="strExternalToolDefaultName" xml:space="preserve">
+    <value>Nový Externí Nástroj</value>
+  </data>
+  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
+    <value>Obsahuje ikony od [FAMFAMFAM]</value>
+  </data>
+  <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
+    <value>http://www.famfamfam.com/</value>
+  </data>
+  <data name="strFileFormatLabel" xml:space="preserve">
+    <value>&amp;Formát souboru:</value>
+  </data>
+  <data name="strFilterAll" xml:space="preserve">
+    <value>Všechny soubory (*.*)</value>
+  </data>
+  <data name="strFilterAllImportable" xml:space="preserve">
+    <value>Všechny importovatelné soubory</value>
+  </data>
+  <data name="strFilterApplication" xml:space="preserve">
+    <value>Soubory aplikací (*.exe)</value>
+  </data>
+  <data name="strFiltermRemoteCSV" xml:space="preserve">
+    <value>Soubory mRemote CSV (*.csv)</value>
+  </data>
+  <data name="strFiltermRemoteXML" xml:space="preserve">
+    <value>Soubory mRemote XML (*.xml)</value>
+  </data>
+  <data name="strFilterPuttyConnectionManager" xml:space="preserve">
+    <value>Soubory PuTTY Connection Manager</value>
+  </data>
+  <data name="strFilterRdgFiles" xml:space="preserve">
+    <value>Soubory Remote Desktop Connection Manager (*.rdg)</value>
+  </data>
+  <data name="strFilterRDP" xml:space="preserve">
+    <value>Soubory RDP (*.rdp)</value>
+  </data>
+  <data name="strFiltervRD2008CSV" xml:space="preserve">
+    <value>Soubory visionapp Remote Desktop 2008 CSV (*.csv)</value>
+  </data>
+  <data name="strFormatInherit" xml:space="preserve">
+    <value>Převzít {0}</value>
+  </data>
+  <data name="strFormatInheritDescription" xml:space="preserve">
+    <value>Popis převzaté vlastnosti: {0}</value>
+  </data>
+  <data name="strFree" xml:space="preserve">
+    <value>Uvolnit</value>
+  </data>
+  <data name="strFullscreen" xml:space="preserve">
+    <value>Celá obrazovka</value>
+  </data>
+  <data name="strGeneral" xml:space="preserve">
+    <value>Všeobecné</value>
+  </data>
+  <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
+    <value>Získání informací o spojení z SQL selhalo (Get Connection Info From SQL)</value>
+  </data>
+  <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
+    <value>Došlo k chybě při čtení tohoto nastavení připojení "{0}" z "{1}". {2}</value>
+  </data>
+  <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
+    <value>Automaticky obnovit spojení</value>
+  </data>
+  <data name="strGroupboxConnection" xml:space="preserve">
+    <value>Spojení</value>
+  </data>
+  <data name="strGroupboxExternalToolProperties" xml:space="preserve">
+    <value>Vlastnosti externích nástrojů</value>
+  </data>
+  <data name="strGroupboxFiles" xml:space="preserve">
+    <value>Soubory</value>
+  </data>
+  <data name="strHost" xml:space="preserve">
+    <value>Hostitel</value>
+  </data>
+  <data name="strHttp" xml:space="preserve">
+    <value>HTTP</value>
+  </data>
+  <data name="strHttpConnectFailed" xml:space="preserve">
+    <value>Spojení HTTP selhalo!</value>
+  </data>
+  <data name="strHttpConnectionFailed" xml:space="preserve">
+    <value>Nezdařilo se vytvoření noebého spojení HTTP!</value>
+  </data>
+  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+    <value>Změna nadpisu dokumentu HTTP selhala!</value>
+  </data>
+  <data name="strHttpGecko" xml:space="preserve">
+    <value>Gecko (Firefox)</value>
+  </data>
+  <data name="strHttpInternetExplorer" xml:space="preserve">
+    <value>Internet Explorer</value>
+  </data>
+  <data name="strHttps" xml:space="preserve">
+    <value>HTTPS</value>
+  </data>
+  <data name="strHttpSetPropsFailed" xml:space="preserve">
+    <value>Nastavení vlast. HTTP selhalo!</value>
+  </data>
+  <data name="strICA" xml:space="preserve">
+    <value>ICA</value>
+  </data>
+  <data name="strIcaConnectionFailed" xml:space="preserve">
+    <value>Nepovedo se vytvořit nové spojení ICA!</value>
+  </data>
+  <data name="strIcaControlFailed" xml:space="preserve">
+    <value>Načtení pluginu ICA Plugin selhalo!</value>
+  </data>
+  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
+    <value>Metoda ICA SetCredentials selhala!</value>
+  </data>
+  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
+    <value>Metoda ICA Set Event Handlers selhala!</value>
+  </data>
+  <data name="strIcaSetPropsFailed" xml:space="preserve">
+    <value>Metoda ICA (nastavení vlastností) Set Props selhala!</value>
+  </data>
+  <data name="strIcaSetResolutionFailed" xml:space="preserve">
+    <value>Metoda ICA Set Resolution (nastavení rozlišení) selhala!</value>
+  </data>
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Označ záložky rychlého připojení prefixem "Quick:"</value>
+  </data>
+  <data name="strImportAD" xml:space="preserve">
+    <value>Import z Active Directory</value>
+  </data>
+  <data name="strImportExport" xml:space="preserve">
+    <value>Import/Export</value>
+  </data>
+  <data name="strImportFileFailedContent" xml:space="preserve">
+    <value>Při importování souboru "{0}" došlo k chybě.</value>
+  </data>
+  <data name="strImportFileFailedMainInstruction" xml:space="preserve">
+    <value>Import selhal</value>
+  </data>
+  <data name="strImportFromFileMenuItem" xml:space="preserve">
+    <value>Import ze &amp;souboru...</value>
+  </data>
+  <data name="strImportLocationCommandButtons" xml:space="preserve">
+    <value>V rámci kořenu{0}{1}|V rámci vybrané složky{0}{2}</value>
+  </data>
+  <data name="strImportLocationContent" xml:space="preserve">
+    <value>Kam mají být umístěny importované položky?</value>
+  </data>
+  <data name="strImportLocationMainInstruction" xml:space="preserve">
+    <value>Umístění importu</value>
+  </data>
+  <data name="strImportMenuItem" xml:space="preserve">
+    <value>&amp;Import</value>
+  </data>
+  <data name="strImportmRemoteXML" xml:space="preserve">
+    <value>Importovat mRemote/mRemoteNG XML</value>
+  </data>
+  <data name="strImportPortScan" xml:space="preserve">
+    <value>Importovat ze scanu portů</value>
+  </data>
+  <data name="strImportRDPFiles" xml:space="preserve">
+    <value>Importovat z .RDP soburu/ů</value>
+  </data>
+  <data name="strInactive" xml:space="preserve">
+    <value>Neaktivní</value>
+  </data>
+  <data name="strInformations" xml:space="preserve">
+    <value>Informace</value>
+  </data>
+  <data name="strInheritNewConnection" xml:space="preserve">
+    <value>mRemoteNG je aktuální</value>
+  </data>
+  <data name="strIntAppConnectionFailed" xml:space="preserve">
+    <value>Spojení selhalo!</value>
+  </data>
+  <data name="strIntAppDisposeFailed" xml:space="preserve">
+    <value>Zrušení procesu Int App process selhalo!</value>
+  </data>
+  <data name="strIntAppFocusFailed" xml:space="preserve">
+    <value>Metoda Int App Focus selhala!</value>
+  </data>
+  <data name="strIntAppHandle" xml:space="preserve">
+    <value>Int App Handle: {0}</value>
+  </data>
+  <data name="strIntAppKillFailed" xml:space="preserve">
+    <value>Ukončení Int App Process selhalo!</value>
+  </data>
+  <data name="strIntAppParentHandle" xml:space="preserve">
+    <value>Handler Panelu : {0}</value>
+  </data>
+  <data name="strIntAppResizeFailed" xml:space="preserve">
+    <value>Metoda Int App Resize selhala!</value>
+  </data>
+  <data name="strIntAppStuff" xml:space="preserve">
+    <value>--- IntApp výstup ---</value>
+  </data>
+  <data name="strIntAppTitle" xml:space="preserve">
+    <value>Int App Název: {0}</value>
+  </data>
+  <data name="strKeysCtrlAltDel" xml:space="preserve">
+    <value>CTRL-ALT-DEL</value>
+  </data>
+  <data name="strKeysCtrlEsc" xml:space="preserve">
+    <value>CTRL-ESC</value>
+  </data>
+  <data name="strLabelAddress" xml:space="preserve">
+    <value>Adresa:</value>
+  </data>
+  <data name="strLabelArguments" xml:space="preserve">
+    <value>Parametry:</value>
+  </data>
+  <data name="strLabelChangeLog" xml:space="preserve">
+    <value>Change Log:</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>Když se ukončují spojení:</value>
+  </data>
+  <data name="strLabelConnect" xml:space="preserve">
+    <value>&amp;Připojit:</value>
+  </data>
+  <data name="strLabelDisplayName" xml:space="preserve">
+    <value>Zobrazený název:</value>
+  </data>
+  <data name="strLabelDomain" xml:space="preserve">
+    <value>Doména:</value>
+  </data>
+  <data name="strLabelFilename" xml:space="preserve">
+    <value>Název souboru:</value>
+  </data>
+  <data name="strLabelHostname" xml:space="preserve">
+    <value>Hostitel:</value>
+  </data>
+  <data name="strLabelOptions" xml:space="preserve">
+    <value>Možnosti:</value>
+  </data>
+  <data name="strLabelPassword" xml:space="preserve">
+    <value>Heso:</value>
+  </data>
+  <data name="strLabelPort" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="strLabelPortableEdition" xml:space="preserve">
+    <value>Přenosná verze</value>
+  </data>
+  <data name="strLabelProtocol" xml:space="preserve">
+    <value>Protokol:</value>
+  </data>
+  <data name="strLabelPuttySessionsConfig" xml:space="preserve">
+    <value>Pro konfiguraci sezení PuTTY stiskněte toto tlačítko:</value>
+  </data>
+  <data name="strLabelPuttyTimeout" xml:space="preserve">
+    <value>Maximální doba čekání na PuTTY a integrované externí nástroje:</value>
+  </data>
+  <data name="strLabelReleasedUnderGPL" xml:space="preserve">
+    <value>Vydáno pod GNU General Public License (GPL)</value>
+  </data>
+  <data name="strLabelSeconds" xml:space="preserve">
+    <value>sekund</value>
+  </data>
+  <data name="strLabelSelectPanel" xml:space="preserve">
+    <value>Z níže uvedeného seznamu vyberte panel nebo stiskněte "Nový" pro přidání nového. Pro pokračování stiskněte "OK".</value>
+  </data>
+  <data name="strLabelServerStatus" xml:space="preserve">
+    <value>Stav Serveru:</value>
+  </data>
+  <data name="strLabelSQLDatabaseName" xml:space="preserve">
+    <value>Databáze:</value>
+  </data>
+  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+    <value>Databáze:</value>
+  </data>
+  <data name="strLabelUsername" xml:space="preserve">
+    <value>Login:</value>
+  </data>
+  <data name="strLabelVerify" xml:space="preserve">
+    <value>Verifikuj:</value>
+  </data>
+  <data name="strLanguage" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+  <data name="strLanguageDefault" xml:space="preserve">
+    <value>(Automaticky)</value>
+  </data>
+  <data name="strLanguageRestartRequired" xml:space="preserve">
+    <value>Aby se projevila změna jazyka, musí být {0} restartován.</value>
+  </data>
+  <data name="strLoadFromSqlFailed" xml:space="preserve">
+    <value>Načtení z SQL selhalo</value>
+  </data>
+  <data name="strLoadFromSqlFailedContent" xml:space="preserve">
+    <value>Informace o spojení nemohly být načteny z SQL serveru.</value>
+  </data>
+  <data name="strLoadFromXmlFailed" xml:space="preserve">
+    <value>Načtení z XML selhalo!</value>
+  </data>
+  <data name="strLocalFile" xml:space="preserve">
+    <value>Lokální soubor</value>
+  </data>
+  <data name="strLocalFileDoesNotExist" xml:space="preserve">
+    <value>Lokální soubor neexistuje!</value>
+  </data>
+  <data name="strLogOff" xml:space="preserve">
+    <value>Logoff</value>
+  </data>
+  <data name="strLogWriteToFileFailed" xml:space="preserve">
+    <value>Zápis do souboru reportu selhalo!</value>
+  </data>
+  <data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
+    <value>Nebylo možné uložit report do požadovaného umístění.</value>
+  </data>
+  <data name="strMagicLibraryAttribution" xml:space="preserve">
+    <value>Využívá "Magic library" od [Crownwood Software]</value>
+  </data>
+  <data name="strMagicLibraryAttributionURL" xml:space="preserve">
+    <value>http://www.dotnetmagic.com/</value>
+  </data>
+  <data name="strMenuAbout" xml:space="preserve">
+    <value>O aplikaci</value>
+  </data>
+  <data name="strMenuAddConnectionPanel" xml:space="preserve">
+    <value>Nový panel spojení</value>
+  </data>
+  <data name="strMenuCheckForUpdates" xml:space="preserve">
+    <value>Vyhledat aktualizace</value>
+  </data>
+  <data name="strMenuConfig" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="strMenuConnect" xml:space="preserve">
+    <value>Připojit</value>
+  </data>
+  <data name="strMenuConnectionPanels" xml:space="preserve">
+    <value>Panely</value>
+  </data>
+  <data name="strMenuConnections" xml:space="preserve">
+    <value>Spojení</value>
+  </data>
+  <data name="strMenuConnectionsAndConfig" xml:space="preserve">
+    <value>Nastavení spojení</value>
+  </data>
+  <data name="strMenuCopy" xml:space="preserve">
+    <value>Kopírovat</value>
+  </data>
+  <data name="strMenuCtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="strMenuCtrlEsc" xml:space="preserve">
+    <value>Ctrl-Esc</value>
+  </data>
+  <data name="strMenuDelete" xml:space="preserve">
+    <value>Smazat...</value>
+  </data>
+  <data name="strMenuDeleteConnection" xml:space="preserve">
+    <value>Smazat spojení...</value>
+  </data>
+  <data name="strMenuDeleteExternalTool" xml:space="preserve">
+    <value>Smazat vnější nástroj...</value>
+  </data>
+  <data name="strMenuDeleteFolder" xml:space="preserve">
+    <value>Smazat složku...</value>
+  </data>
+  <data name="strMenuDisconnect" xml:space="preserve">
+    <value>Odpojit</value>
+  </data>
+  <data name="strMenuDonate" xml:space="preserve">
+    <value>Přispějte</value>
+  </data>
+  <data name="strMenuDuplicate" xml:space="preserve">
+    <value>Klonovat</value>
+  </data>
+  <data name="strMenuDuplicateConnection" xml:space="preserve">
+    <value>Klonovat připojení</value>
+  </data>
+  <data name="strMenuDuplicateFolder" xml:space="preserve">
+    <value>Klonovat složku</value>
+  </data>
+  <data name="strMenuDuplicateTab" xml:space="preserve">
+    <value>Klonovat záložku tabu</value>
+  </data>
+  <data name="strMenuExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="strMenuExternalTools" xml:space="preserve">
+    <value>Externí nástroje</value>
+  </data>
+  <data name="strMenuExternalToolsToolbar" xml:space="preserve">
+    <value>Nástrojová lišta externích nástrojů</value>
+  </data>
+  <data name="strMenuFile" xml:space="preserve">
+    <value>&amp;Soubor</value>
+  </data>
+  <data name="strMenuFullScreen" xml:space="preserve">
+    <value>Celá obrazovka</value>
+  </data>
+  <data name="strMenuFullScreenRDP" xml:space="preserve">
+    <value>Celá obrazovka (RDP)</value>
+  </data>
+  <data name="strMenuHelp" xml:space="preserve">
+    <value>&amp;Nápověda</value>
+  </data>
+  <data name="strMenuHelpContents" xml:space="preserve">
+    <value>Nápověda mRemoteNG</value>
+  </data>
+  <data name="strMenuJumpTo" xml:space="preserve">
+    <value>Jít na</value>
+  </data>
+  <data name="strMenuLaunchExternalTool" xml:space="preserve">
+    <value>Spustit externí nástroj</value>
+  </data>
+  <data name="strMenuNewConnectionFile" xml:space="preserve">
+    <value>Nový soubor seznamu spojení</value>
+  </data>
+  <data name="strMenuNewExternalTool" xml:space="preserve">
+    <value>Nový externí nástroj</value>
+  </data>
+  <data name="strMenuNotifications" xml:space="preserve">
+    <value>Varovné zprávy</value>
+  </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Kopírovat vše</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Smazat vše</value>
+  </data>
+  <data name="strMenuOpenConnectionFile" xml:space="preserve">
+    <value>Otevřít soubor seznamu spojení...</value>
+  </data>
+  <data name="strMenuOptions" xml:space="preserve">
+    <value>Možnosti</value>
+  </data>
+  <data name="strMenuPaste" xml:space="preserve">
+    <value>Vložit</value>
+  </data>
+  <data name="strMenuPortScan" xml:space="preserve">
+    <value>Scan portů</value>
+  </data>
+  <data name="strMenuQuickConnectToolbar" xml:space="preserve">
+    <value>Nástrojová lišta rychlého připojení</value>
+  </data>
+  <data name="strMenuReconnect" xml:space="preserve">
+    <value>Obnovit připojení</value>
+  </data>
+  <data name="strMenuRefreshScreen" xml:space="preserve">
+    <value>Obnovit obraz (VNC)</value>
+  </data>
+  <data name="strMenuRename" xml:space="preserve">
+    <value>Přejmenovat</value>
+  </data>
+  <data name="strMenuRenameConnection" xml:space="preserve">
+    <value>Přejmenovat spojení</value>
+  </data>
+  <data name="strMenuRenameFolder" xml:space="preserve">
+    <value>Přejmenovat složku</value>
+  </data>
+  <data name="strMenuRenameTab" xml:space="preserve">
+    <value>Přejmonovat záložku tabu</value>
+  </data>
+  <data name="strMenuReportBug" xml:space="preserve">
+    <value>Nahlásit chybu</value>
+  </data>
+  <data name="strMenuResetLayout" xml:space="preserve">
+    <value>Výchozí vzhled</value>
+  </data>
+  <data name="strMenuSaveConnectionFile" xml:space="preserve">
+    <value>Uložit seznam spojení</value>
+  </data>
+  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+    <value>Uložit seznam spojení jako...</value>
+  </data>
+  <data name="strMenuScreenshot" xml:space="preserve">
+    <value>Snímek obrazovky</value>
+  </data>
+  <data name="strMenuScreenshotManager" xml:space="preserve">
+    <value>Správa snímků obrazovek</value>
+  </data>
+  <data name="strMenuSendSpecialKeys" xml:space="preserve">
+    <value>Poslat speciální stisk kláves (VNC)</value>
+  </data>
+  <data name="strMenuSessionRetrieve" xml:space="preserve">
+    <value>Získat</value>
+  </data>
+  <data name="strMenuSessions" xml:space="preserve">
+    <value>Sezení</value>
+  </data>
+  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+    <value>Sezení a snímky obrazovek</value>
+  </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>&amp;Zobraz texty nápovedy</value>
+  </data>
+  <data name="strMenuShowText" xml:space="preserve">
+    <value>Zobraz text</value>
+  </data>
+  <data name="strMenuSmartSize" xml:space="preserve">
+    <value>Automatická velikost (RDP/VNC)</value>
+  </data>
+  <data name="strMenuSSHFileTransfer" xml:space="preserve">
+    <value>SSH přenos souborů</value>
+  </data>
+  <data name="strMenuStartChat" xml:space="preserve">
+    <value>Spustit (VNC) chat</value>
+  </data>
+  <data name="strMenuSupportForum" xml:space="preserve">
+    <value>Diskuzní fórum podpory</value>
+  </data>
+  <data name="strMenuTools" xml:space="preserve">
+    <value>&amp;Nástroje</value>
+  </data>
+  <data name="strMenuTransferFile" xml:space="preserve">
+    <value>Přenos souboru (SSH)</value>
+  </data>
+  <data name="strMenuView" xml:space="preserve">
+    <value>&amp;Zobrazení</value>
+  </data>
+  <data name="strMenuViewOnly" xml:space="preserve">
+    <value>Pouze prohlížet (VNC)</value>
+  </data>
+  <data name="strMenuWebsite" xml:space="preserve">
+    <value>Webová stránka</value>
+  </data>
+  <data name="strMinimizeToSysTray" xml:space="preserve">
+    <value>Minimizovat do oznamovací oblasti</value>
+  </data>
+  <data name="strMoveDown" xml:space="preserve">
+    <value>Přesunout dolů</value>
+  </data>
+  <data name="strMoveUp" xml:space="preserve">
+    <value>Přesunout nahoru</value>
+  </data>
+  <data name="strMremoteNgCsv" xml:space="preserve">
+    <value>mRemoteNG CSV</value>
+  </data>
+  <data name="strMremoteNgXml" xml:space="preserve">
+    <value>mRemoteNG XML</value>
+  </data>
+  <data name="strMyCurrentWindowsCreds" xml:space="preserve">
+    <value>Aktivní přihl. údaje (z Windows logon)</value>
+  </data>
+  <data name="strNever" xml:space="preserve">
+    <value>Nikdy</value>
+  </data>
+  <data name="strNewConnection" xml:space="preserve">
+    <value>Nové spojení</value>
+  </data>
+  <data name="strNewFolder" xml:space="preserve">
+    <value>Nová složka</value>
+  </data>
+  <data name="strNewPanel" xml:space="preserve">
+    <value>Nový panel</value>
+  </data>
+  <data name="strNewRoot" xml:space="preserve">
+    <value>Nový kořen</value>
+  </data>
+  <data name="strNewTitle" xml:space="preserve">
+    <value>Nový popisek</value>
+  </data>
+  <data name="strNo" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="strNoCompression" xml:space="preserve">
+    <value>Bez komprimace</value>
+  </data>
+  <data name="strNoExtAppDefined" xml:space="preserve">
+    <value>Nebyla specifikována ext. aplikace.</value>
+  </data>
+  <data name="strNoInformation" xml:space="preserve">
+    <value>(žádné)</value>
+  </data>
+  <data name="strNone" xml:space="preserve">
+    <value>(žádné)</value>
+  </data>
+  <data name="strNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="strNoSmartSize" xml:space="preserve">
+    <value>Ne automatickou velikost</value>
+  </data>
+  <data name="strNoUpdateAvailable" xml:space="preserve">
+    <value>Nejsou k dispozici žádné aktualizace</value>
+  </data>
+  <data name="strOldConffile" xml:space="preserve">
+    <value>Pokoušíte se načíst soubor seznamu spojení, který byl vytvořen pomocí velmi ranné verze mRemote, což by mohlo vést k běhové chybě. 
+Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojení!</value>
+  </data>
+  <data name="strOpenNewTabRight" xml:space="preserve">
+    <value>Otevřít novou záložku tabu vpravo od právě vybraného</value>
+  </data>
+  <data name="strOpenPorts" xml:space="preserve">
+    <value>Otevřené porty</value>
+  </data>
+  <data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
+    <value>&amp;Smazat</value>
+  </data>
+  <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
+    <value>&amp;Nové</value>
+  </data>
+  <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
+    <value>&amp;Resetovat na výchozí</value>
+  </data>
+  <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
+    <value>Resetovat &amp;všechny na výchozí</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
+    <value>Taby</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
+    <value>Další tab</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
+    <value>Předchozí tab</value>
+  </data>
+  <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
+    <value>Uprav zkratku</value>
+  </data>
+  <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
+    <value>Klévesové zkratky</value>
+  </data>
+  <data name="strOptionsProxyTesting" xml:space="preserve">
+    <value>Ověřuji...</value>
+  </data>
+  <data name="strOptionsTabKeyboard" xml:space="preserve">
+    <value>Klávesnice</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Vzhled</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>&amp;Odstranit</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>&amp;Nový</value>
+  </data>
+  <data name="strPanelName" xml:space="preserve">
+    <value>Název panelu</value>
+  </data>
+  <data name="strPasswordProtect" xml:space="preserve">
+    <value>Chránit heslem</value>
+  </data>
+  <data name="strPasswordStatusMustMatch" xml:space="preserve">
+    <value>Obě hesla musejí být stejná.</value>
+  </data>
+  <data name="strPasswordStatusTooShort" xml:space="preserve">
+    <value>helso musí být dlouhé alespoň 3 znaky.</value>
+  </data>
+  <data name="strPleaseFillAllFields" xml:space="preserve">
+    <value>Prosím vyplňte všechna vstupní pole</value>
+  </data>
+  <data name="strPortScanComplete" xml:space="preserve">
+    <value>Scanování portů dokončeno.</value>
+  </data>
+  <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
+    <value>Nezdařilo se otevřít panel PortScan!</value>
+  </data>
+  <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
+    <value>(Tyto vlastnosti se uloží pouze tehdy, pokud vyberete formát výstupního souboru typu "mRemote" nebo "mRemoteNG XML"!)</value>
+  </data>
+  <data name="strPropertyDescriptionAddress" xml:space="preserve">
+    <value>zadejte název hostitele nebo jeho IP adresu ke které se chcete připojit.</value>
+  </data>
+  <data name="strPropertyDescriptionAll" xml:space="preserve">
+    <value>Změnit všude převzetí z nadřazené.</value>
+  </data>
+  <data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
+    <value>Vyberte jakou úroveň autentizace má toto spojení použít.</value>
+  </data>
+  <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
+    <value>Vyberte jak se chcete autentizovat VNC serveru.</value>
+  </data>
+  <data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
+    <value>Vyberte zda si přejete autoamticky změnit velikost virtuální obrazovky v rámci spojení když se změní velikost okna nebo je zapnut režim celé obrazovky. Toto vyžaduje RDC ve verzi 8.0 nebo vyšší.</value>
+  </data>
+  <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
+    <value>Vyberte zda chcete využívat mezipamět bitmapových dat či nikoliv.</value>
+  </data>
+  <data name="strPropertyDescriptionColors" xml:space="preserve">
+    <value>Vyberte barevnou hloubku.</value>
+  </data>
+  <data name="strPropertyDescriptionCompression" xml:space="preserve">
+    <value>Vyberete úroveň komprese.</value>
+  </data>
+  <data name="strPropertyDescriptionDescription" xml:space="preserve">
+    <value>Sem zadejte své poznámky nebo popis hostitele.</value>
+  </data>
+  <data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
+    <value>Zvolte "ano" pokud má být použit vzhled (téma) nastavený na vzdáleném hostiteli.</value>
+  </data>
+  <data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
+    <value>Zvolte "ano" pokud se má zobrazovat pozadí plochy dle nastavení na vzdáleném hosititeli.</value>
+  </data>
+  <data name="strPropertyDescriptionDomain" xml:space="preserve">
+    <value>Zadejte doménu pod kterou spadají uživatelské přihlašovací údaje (NETBIOSNAME před '\') .</value>
+  </data>
+  <data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
+    <value>Vyberte zda použít pokročilé prvky rozhraní (Aero etc.) nebo ne.</value>
+  </data>
+  <data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
+    <value>Vyberte zda použít vyhlazování písem.</value>
+  </data>
+  <data name="strPropertyDescriptionEncoding" xml:space="preserve">
+    <value>Vyberte způsob kódování přenosu.</value>
+  </data>
+  <data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
+    <value>Vyberte požadovanou sílu šifrování vzdáleného hostitele.</value>
+  </data>
+  <data name="strPropertyDescriptionExternalTool" xml:space="preserve">
+    <value>Vyberte externí nástroj, který má být spuštěn.</value>
+  </data>
+  <data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
+    <value>Vyberte externí nástroj, který má být spuštěn po odpojení od vzdáleného hostitele.</value>
+  </data>
+  <data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
+    <value>Vyberte externí nástroj, který má být spuštěn před spojením se vzdáleným hostitelem.</value>
+  </data>
+  <data name="strPropertyDescriptionIcon" xml:space="preserve">
+    <value>Vyberte ikonu zobrazovanou pro toto spojení.</value>
+  </data>
+  <data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+    <value>Specifikuje pomocné informace pro rozkladače zátěže (load balancery - NLB) pro výběr nejlepšího serveru.</value>
+  </data>
+  <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
+    <value>Pokud se využívá v externím nástroji, zadejte sem MAC adresu vzdáleného hostitele.</value>
+  </data>
+  <data name="strPropertyDescriptionName" xml:space="preserve">
+    <value>Toto jméno bude zobrazeno ve stromě seznamu spojení a jejich složek.</value>
+  </data>
+  <data name="strPropertyDescriptionPanel" xml:space="preserve">
+    <value>Zadaný název určí panel, ve kterém se má spojení otevřít.</value>
+  </data>
+  <data name="strPropertyDescriptionPassword" xml:space="preserve">
+    <value>Sem zadejte Vaše heslo.</value>
+  </data>
+  <data name="strPropertyDescriptionPort" xml:space="preserve">
+    <value>Zadejte port typu protokolu, na kterém poslouchá server/hostitel, ke kterému se připojujete.</value>
+  </data>
+  <data name="strPropertyDescriptionProtocol" xml:space="preserve">
+    <value>Vyberte jakým způsobem (typem spojení) se má mRemoteNG spojit s tímto hostitelem.</value>
+  </data>
+  <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
+    <value>Vyberte uložené sezení PuTTY, které se použije pro toto spojení.</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
+    <value>Specifikuje doménové jměno, které uživatel předává při spojení s bránou vzdálené plochy (RD Gateway server).</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
+    <value>Specifikuje název hostitele serveru brány vzdálené plochy (Remote Desktop Gateway server), přes kterého má být toto spojení zprostředkováno.</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+    <value>Specifikuje kdy má být použít server brány vzdálené plochy (Remote Desktop Gateway = RD Gateway).</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
+    <value>Specifikuje, zda pro přihlášení k serveru brány vzdálené plochy použít stejné jméno a heslo jako je hlavní login pro toto spojení.</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
+    <value>Specifikuje uživatelské jméno (login) odlišné od hlavního, které se použije pouze pro spojení se serverem brány vzdálené plochy (RD Gateway server).</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
+    <value>Specifikuje, zda mají být lokální disky na tomto počítači připojeny ke vzdálenému hostiteli.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
+    <value>Vyberte, zda mají být složené stisky kláves (např. Alt-Tab) přesměrovány na vzdáleného hostitele, když je okno mRemote aktivní (má focus).</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
+    <value>Specifikuje, zda mají být lokální hardwarové porty (COM, LPT - paralelní) z tohoto počítače připojeny ke vzdálenému hostiteli.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
+    <value>Specifikuje, zda mají být tiskárny lokálně připojené (nainstalované na tomto počítači) připojeny ke vzdálenému hostiteli.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
+    <value>Specifikuje, zda mají být čipové karty disponibilní na tomto počítači zprostředkovány také vzdálenému hostiteli.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
+    <value>Vyberte, jak mají být přesměrovány zvuky ze vzdáleného hostitele.</value>
+  </data>
+  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
+    <value>Vyberte který vykreslovací engine má zobrazovat webové stránky HTML.</value>
+  </data>
+  <data name="strPropertyDescriptionResolution" xml:space="preserve">
+    <value>Vyberte rozlišení nebo režim, ve kterém se toto spojení otevře.</value>
+  </data>
+  <data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
+    <value>Vyberte zda má být použita automatická změna velikosti (rozlišení).</value>
+  </data>
+  <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
+    <value>Připojit se ke konzoli (příkazovému řádku) vzdáleného hostitele (pokud podporuje více variant).</value>
+  </data>
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>V případě jeho dostupnosti, použít při autentizaci poskytovatele podpory bezpečných přihlašovacích údajů (Credential Security Support Provider - CredSSP).</value>
+  </data>
+  <data name="strPropertyDescriptionUser1" xml:space="preserve">
+    <value>Sem můžete zadat jakékoliv informace uznáte za vhodné.</value>
+  </data>
+  <data name="strPropertyDescriptionUsername" xml:space="preserve">
+    <value>Sem vložte své uživatelské (přihlašovací) jméno = login.</value>
+  </data>
+  <data name="strPropertyDescriptionViewOnly" xml:space="preserve">
+    <value>Pokud si přejete připojit se k hostiteli v režimu pouze prohlížení (bez ovládání), vyberte "ano".</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
+    <value>Vložte adresu proxy serveru, přes který má spojení probíhat.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
+    <value>Zadejte heslo k proxy serveru, který má spojení zprostředkovat.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
+    <value>Zadejte port, na kterém proxy server naslouchá.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
+    <value>Pokud používáte proxy pro zprostřekování (tunelování) VNC psojení, zadejte jakým typem proxy tak činíte.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
+    <value>Vložte vaše uživatelské jméno pro autentizaci vůči proxy serveru.</value>
+  </data>
+  <data name="strPropertyNameAddress" xml:space="preserve">
+    <value>Hostname/DN/IP</value>
+  </data>
+  <data name="strPropertyNameAll" xml:space="preserve">
+    <value>Vše</value>
+  </data>
+  <data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
+    <value>Po autentizaci</value>
+  </data>
+  <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
+    <value>Režim autentizace</value>
+  </data>
+  <data name="strPropertyNameAutomaticResize" xml:space="preserve">
+    <value>Automatické rozlišení</value>
+  </data>
+  <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
+    <value>Mezipaměť bitmap</value>
+  </data>
+  <data name="strPropertyNameColors" xml:space="preserve">
+    <value>Bar. hloubka</value>
+  </data>
+  <data name="strPropertyNameCompression" xml:space="preserve">
+    <value>Komprese</value>
+  </data>
+  <data name="strPropertyNameDescription" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="strPropertyNameDisplayThemes" xml:space="preserve">
+    <value>Použít téma vzhledu</value>
+  </data>
+  <data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
+    <value>Pozadí plochy</value>
+  </data>
+  <data name="strPropertyNameDomain" xml:space="preserve">
+    <value>Doména</value>
+  </data>
+  <data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
+    <value>Pokroč. plocha (Aero)</value>
+  </data>
+  <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
+    <value>Vyhlazování písem</value>
+  </data>
+  <data name="strPropertyNameEncoding" xml:space="preserve">
+    <value>Kódování</value>
+  </data>
+    <data name="strPropertyNameEncryptionStrength" xml:space="preserve">
+    <value>Síla šifrování</value>
+  </data>
+  <data name="strPropertyNameExternalTool" xml:space="preserve">
+    <value>Externí nástroj</value>
+  </data>
+  <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
+    <value>Externí nástroj po odp.</value>
+  </data>
+  <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
+    <value>Externí nástroj před spoj.</value>
+  </data>
+  <data name="strPropertyNameIcon" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
+    <value>Load Balance Info</value>
+  </data>
+  <data name="strPropertyNameMACAddress" xml:space="preserve">
+    <value>Adresa MAC</value>
+  </data>
+  <data name="strPropertyNameName" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="strPropertyNamePanel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="strPropertyNamePassword" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="strPropertyNamePort" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="strPropertyNameProtocol" xml:space="preserve">
+    <value>Protokol</value>
+  </data>
+  <data name="strPropertyNamePuttySession" xml:space="preserve">
+    <value>Konfigurace PuTTY</value>
+  </data>
+  <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
+    <value>Doména (RD brána)</value>
+  </data>
+  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
+    <value>Host/DN/IP (RD brána)</value>
+  </data>
+  <data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
+    <value>Heslo (RD brána)</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
+    <value>Použít RD bránu</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+    <value>Přihl. údaje brány</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
+    <value>Login brány</value>
+  </data>
+  <data name="strPropertyNameRedirectDrives" xml:space="preserve">
+    <value>Připojit lok. disky</value>
+  </data>
+  <data name="strPropertyNameRedirectKeys" xml:space="preserve">
+    <value>Posílat kláv. zkr.</value>
+  </data>
+  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
+    <value>Připoj COM/LPT</value>
+  </data>
+  <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
+    <value>Připoj tiskárny</value>
+  </data>
+  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+    <value>Poskytuj karty</value>
+  </data>
+  <data name="strPropertyNameRedirectSounds" xml:space="preserve">
+    <value>Zvuky</value>
+  </data>
+  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
+    <value>Vykreslovací engine</value>
+  </data>
+  <data name="strPropertyNameResolution" xml:space="preserve">
+    <value>Rozlišení</value>
+  </data>
+  <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
+    <value>Režim resize</value>
+  </data>
+  <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
+    <value>Připoj k příkazové konzoli</value>
+  </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Použít CredSSP</value>
+  </data>
+  <data name="strPropertyNameUser1" xml:space="preserve">
+    <value>Poznámka</value>
+  </data>
+  <data name="strPropertyNameUsername" xml:space="preserve">
+    <value>Login jméno</value>
+  </data>
+  <data name="strPropertyNameViewOnly" xml:space="preserve">
+    <value>Jen sledovat</value>
+  </data>
+  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
+    <value>Adresa proxy</value>
+  </data>
+  <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
+    <value>Heslo proxy</value>
+  </data>
+  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
+    <value>Port proxy</value>
+  </data>
+  <data name="strPropertyNameVNCProxyType" xml:space="preserve">
+    <value>Typ proxy</value>
+  </data>
+  <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
+    <value>Login k proxy</value>
+  </data>
+  <data name="strProtocolEventDisconnected" xml:space="preserve">
+    <value>Událost prokolu Odpojeno.
+Zpráva:
+{0}</value>
+  </data>
+  <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
+    <value>Událost protokolu "Odpojeno" selhala.
+{0}</value>
+  </data>
+  <data name="strProtocolToImport" xml:space="preserve">
+    <value>Protocol k importu</value>
+  </data>
+  <data name="strProxyTestFailed" xml:space="preserve">
+    <value>Test proxy selhal!</value>
+  </data>
+  <data name="strProxyTestSucceeded" xml:space="preserve">
+    <value>Test proxy uspěl!</value>
+  </data>
+  <data name="strPuttyConnectionFailed" xml:space="preserve">
+    <value>Spojení selhalo!</value>
+  </data>
+  <data name="strPuttyDisposeFailed" xml:space="preserve">
+    <value>Odstranění procesu PuTTY selhalo!</value>
+  </data>
+  <data name="strPuttyFocusFailed" xml:space="preserve">
+    <value>Nemohu aktivovat okno (focus)!</value>
+  </data>
+  <data name="strPuttyGetSessionsFailed" xml:space="preserve">
+    <value>Získání seznamu konfigurací sezení/spojení PuTTY selhalo!</value>
+  </data>
+  <data name="strPuttyHandle" xml:space="preserve">
+    <value>PuTTY Handle: {0}</value>
+  </data>
+  <data name="strPuttyKillFailed" xml:space="preserve">
+    <value>Ukončení procesu PuTTY selhalo!</value>
+  </data>
+  <data name="strPuttyParentHandle" xml:space="preserve">
+    <value>Panel Handle: {0}</value>
+  </data>
+  <data name="strPuttyResizeFailed" xml:space="preserve">
+    <value>Změna rozlišení okna PuTTY selhala!</value>
+  </data>
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+    <value>Uložená sezení/spojení PuTTY </value>
+  </data>
+  <data name="strPuttySessionSettings" xml:space="preserve">
+    <value>Nastavení PuTTY sezení/spojení</value>
+  </data>
+  <data name="strPuttySettings" xml:space="preserve">
+    <value>Nastavení PuTTY</value>
+  </data>
+  <data name="strPuttyShowSettingsDialogFailed" xml:space="preserve">
+    <value>Příkaz na zobrazení dialogového okna PuTTY Nastavení selhal!</value>
+  </data>
+  <data name="strPuttyStartFailed" xml:space="preserve">
+    <value>Spuštění PuTTY selhalo!</value>
+  </data>
+  <data name="strPuttyStuff" xml:space="preserve">
+    <value>--- PuTTY výstup ---</value>
+  </data>
+  <data name="strPuttyTitle" xml:space="preserve">
+    <value>PuTTY název okna: {0}</value>
+  </data>
+  <data name="strQuick" xml:space="preserve">
+    <value>Quick: {0}</value>
+  </data>
+  <data name="strQuickConnect" xml:space="preserve">
+    <value>Rychlé spojení</value>
+  </data>
+  <data name="strQuickConnectAddFailed" xml:space="preserve">
+    <value>Přidání rychlého spojení selhalo!</value>
+  </data>
+  <data name="strQuickConnectFailed" xml:space="preserve">
+    <value>Vytvoření rychlého spojení selhalo</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;Varuj mě, když zavírám spojení</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>Varuj mě jen, když u&amp;končuji mRemoteNG</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>Varuj mě jen, když zavírám více&amp;násobná spojení</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>Neva&amp;ruj mě, když zavírám spojení</value>
+  </data>
+  <data name="strRAW" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="strRDP" xml:space="preserve">
+    <value>RDP</value>
+  </data>
+  <data name="strRDP16777216Colors" xml:space="preserve">
+    <value>16777216 barev (24-bit)</value>
+  </data>
+  <data name="strRDP256Colors" xml:space="preserve">
+    <value>256 barev (8-bit)</value>
+  </data>
+  <data name="strRDP32768Colors" xml:space="preserve">
+    <value>32768 barev (15-bit)</value>
+  </data>
+  <data name="strRDP4294967296Colors" xml:space="preserve">
+    <value>16777216 barev (32-bit)</value>
+  </data>
+  <data name="strRDP65536Colors" xml:space="preserve">
+    <value>65536 barev (16-bit)</value>
+  </data>
+  <data name="strRdpAddResolutionFailed" xml:space="preserve">
+    <value>Metoda RDP Add Resolution selhala!</value>
+  </data>
+  <data name="strRdpAddResolutionsFailed" xml:space="preserve">
+    <value>Metoda RDP Add Resolutions selhala!</value>
+  </data>
+  <data name="strRdpAddSessionFailed" xml:space="preserve">
+    <value>Metoda Add Session selhala</value>
+  </data>
+  <data name="strRdpCloseConnectionFailed" xml:space="preserve">
+    <value>Metoda Close RDP Connection selhala!</value>
+  </data>
+  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
+    <value>Navázání spojení selhalo!</value>
+  </data>
+  <data name="strRdpControlCreationFailed" xml:space="preserve">
+    <value>Nebylo možné aktivovat ovládací prvek okna RDP, prosím zkontrolujte požadavky mRemoteNG na prerekvizity.</value>
+  </data>
+  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+    <value>Vypnout blikání kurzoru</value>
+  </data>
+  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+    <value>Vypnout stín kurzoru</value>
+  </data>
+  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+    <value>Vypnout přetahování celého okna (Full Window)</value>
+  </data>
+  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+    <value>Vypnout animace menu</value>
+  </data>
+  <data name="strRDPDisableThemes" xml:space="preserve">
+    <value>Vypnout nastavení vzhledu</value>
+  </data>
+  <data name="strRDPDisableWallpaper" xml:space="preserve">
+    <value>Vypnout pozadí plochy</value>
+  </data>
+  <data name="strRdpDisconnected" xml:space="preserve">
+    <value>RDP odpojeno!</value>
+  </data>
+  <data name="strRdpDisconnectFailed" xml:space="preserve">
+    <value>Pokud o odpojední RDP selhal, zkouším uzavřít!</value>
+  </data>
+  <data name="strRdpErrorCode1" xml:space="preserve">
+    <value>Interní chyba kód 1.</value>
+  </data>
+  <data name="strRdpErrorCode2" xml:space="preserve">
+    <value>Interní chyba kód 2.</value>
+  </data>
+  <data name="strRdpErrorCode3" xml:space="preserve">
+    <value>Interní chyba kód 3. Toto není validní stav.</value>
+  </data>
+  <data name="strRdpErrorCode4" xml:space="preserve">
+    <value>Interní chyba kód 4.</value>
+  </data>
+  <data name="strRdpErrorConnection" xml:space="preserve">
+    <value>Během připojování klienta došlo k nepominutelné chybě.</value>
+  </data>
+  <data name="strRdpErrorGetFailure" xml:space="preserve">
+    <value>Metoda GetError selhala (FatalErrors)</value>
+  </data>
+  <data name="strRdpErrorGetUnknown" xml:space="preserve">
+    <value>Došlo k neznámé nepominutelné chybě RDP.  Kód chyby {0}.</value>
+  </data>
+  <data name="strRdpErrorOutOfMemory" xml:space="preserve">
+    <value>Došlo k chybě "nedostatek paměti".</value>
+  </data>
+  <data name="strRdpErrorUnknown" xml:space="preserve">
+    <value>Došlo k neznámé chybě.</value>
+  </data>
+  <data name="strRdpErrorWindowCreation" xml:space="preserve">
+    <value>Došlo k chybě při vytváření okna.</value>
+  </data>
+  <data name="strRdpErrorWinsock" xml:space="preserve">
+    <value>Chyba inicializace Winsock.</value>
+  </data>
+  <data name="strRdpFileCouldNotBeImported" xml:space="preserve">
+    <value>Nezdařil se import souboru rdb!</value>
+  </data>
+  <data name="strRDPFitToPanel" xml:space="preserve">
+    <value>Přizpůsobit panelu</value>
+  </data>
+  <data name="strRdpFocusFailed" xml:space="preserve">
+    <value>Aktivace RDP okna (focus) selhala!</value>
+  </data>
+  <data name="strRdpGatewayIsSupported" xml:space="preserve">
+    <value>Brána RD (RD Gateway) je podporována.</value>
+  </data>
+  <data name="strRdpGatewayNotSupported" xml:space="preserve">
+    <value>Brána RD (RD Gateway) NENÍ podporována!</value>
+  </data>
+  <data name="strRdpGetSessionsFailed" xml:space="preserve">
+    <value>Metoda GetSessions selhala!</value>
+  </data>
+  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
+    <value>Otevření spojení RDP selhalo!</value>
+  </data>
+  <data name="strRdpReconnectCount" xml:space="preserve">
+    <value>Počet pokusů o znovunavázání spojení RDP:</value>
+  </data>
+  <data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+    <value>Metoda RDP SetAuthenticationLevel selhala!</value>
+  </data>
+  <data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+    <value>Metoda RDP SetUseConsoleSession selhala!</value>
+  </data>
+  <data name="strRdpSetConsoleSwitch" xml:space="preserve">
+    <value>Nastavuji přepínací parametr konzole Setting RDC {0}.</value>
+  </data>
+  <data name="strRdpSetCredentialsFailed" xml:space="preserve">
+    <value>Metoda RDP SetCredentials selhala!</value>
+  </data>
+  <data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+    <value>Metoda RDP SetEventHandlers selhala!</value>
+  </data>
+  <data name="strRdpSetGatewayFailed" xml:space="preserve">
+    <value>Metoda RDP SetRDGateway selhala!</value>
+  </data>
+  <data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+    <value>Metoda RDP SetPerformanceFlags selhala!</value>
+  </data>
+  <data name="strRdpSetPortFailed" xml:space="preserve">
+    <value>Metoda RDP SetPort selhala!</value>
+  </data>
+  <data name="strRdpSetPropsFailed" xml:space="preserve">
+    <value>Metoda RDP SetProps selhala!</value>
+  </data>
+  <data name="strRdpSetRedirectionFailed" xml:space="preserve">
+    <value>Metoda Rdp Set Redirection selhala!</value>
+  </data>
+  <data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
+    <value>Nastavení přesměrování klávesových zkratek (Rdp Set Redirect Keys) selhalo!</value>
+  </data>
+  <data name="strRdpSetResolutionFailed" xml:space="preserve">
+    <value>Metoda RDP SetResolution selhala!</value>
+  </data>
+  <data name="strRDPSmartSize" xml:space="preserve">
+    <value>Autom. velikost</value>
+  </data>
+  <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
+    <value>Přehrávat v místním počítači</value>
+  </data>
+  <data name="strRDPSoundDoNotPlay" xml:space="preserve">
+    <value>Vůbec nepřehrávat</value>
+  </data>
+  <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+    <value>Přehrávat na vzdáleném počítači</value>
+  </data>
+  <data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+    <value>Metoda RDP ToggleFullscreen selhala!</value>
+  </data>
+  <data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+    <value>Metoda RDP ToggleSmartSize selhala!</value>
+  </data>
+  <data name="strReconnectAtStartup" xml:space="preserve">
+    <value>Znovu se připojit k předchozím otevřeným relacím při startu aplikace</value>
+  </data>
+  <data name="strRefresh" xml:space="preserve">
+    <value>Obnovit</value>
+  </data>
+  <data name="strRemoteFile" xml:space="preserve">
+    <value>Vzdálený soubor</value>
+  </data>
+  <data name="strRemoveAll" xml:space="preserve">
+    <value>Odstranit vše</value>
+  </data>
+  <data name="strRename" xml:space="preserve">
+    <value>Přejmenovat</value>
+  </data>
+  <data name="strRlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
+  <data name="strSave" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="strSaveAll" xml:space="preserve">
+    <value>Uložit vše</value>
+  </data>
+  <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
+    <value>Přejete si uložit stávající soubor seznamu připojení před načtením jiného?</value>
+  </data>
+  <data name="strSaveConsOnExit" xml:space="preserve">
+    <value>Ukládat spojení při ukončení aplikace</value>
+  </data>
+  <data name="strSaveImageFilter" xml:space="preserve">
+    <value>Soubor Graphics Interchange Format (.gif)|*.gif|Soubor Joint Photographic Experts Group (.jpeg)|*.jpeg|Soubor Joint Photographic Experts Group (.jpg)|*.jpg|Soubor Portable Network Graphics (.png)|*.png</value>
+  </data>
+  <data name="strScreen" xml:space="preserve">
+    <value>Obrazovka</value>
+  </data>
+  <data name="strScreenshot" xml:space="preserve">
+    <value>Snímek obrazovky</value>
+  </data>
+  <data name="strScreenshots" xml:space="preserve">
+    <value>Snímky obrazovek</value>
+  </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Hledat</value>
+  </data>
+  <data name="strSendTo" xml:space="preserve">
+    <value>Odeslat..</value>
+  </data>
+  <data name="strSessionGetFailed" xml:space="preserve">
+    <value>Metoda Get Sessions Background selhala</value>
+  </data>
+  <data name="strSessionKillFailed" xml:space="preserve">
+    <value>Odstranění (Session Background) selhalo</value>
+  </data>
+  <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
+    <value>Při konfiguraci spojení vyplnit DN hostitele podle zadaného názvu spojení</value>
+  </data>
+   <data name="strSettingMainFormTextFailed" xml:space="preserve">
+    <value>Nastavení textu hlavního formuláře selhalo</value>
+  </data>
+  <data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+    <value>Nebylo možné uložti nastavení nebo zrušit ikonu v oznamovací oblasti!</value>
+  </data>
+  <data name="strShowDescriptionTooltips" xml:space="preserve">
+    <value>Zobrazovat "popis" jako tooltip v seznamu spojení</value>
+  </data>
+  <data name="strShowFullConsFilePath" xml:space="preserve">
+    <value>V názvu okna zobrazovat úplnou cestu k souboru seznamu spojení</value>
+  </data>
+  <data name="strShowLogonInfoOnTabs" xml:space="preserve">
+    <value>Zobrazovat v názvu záložek (tabech) informace o loginu</value>
+  </data>
+  <data name="strShowProtocolOnTabs" xml:space="preserve">
+    <value>Zobrazovat v názvu záložek (tabech) protokol (typ spojení)</value>
+  </data>
+  <data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
+    <value>Otevírat spojením jedním klikem v seznamu</value>
+  </data>
+  <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
+    <value>Kliknutím na již otevřené spojení v seznamu přepne na jeho tab záložku</value>
+  </data>
+  <data name="strSmartSizeModeAspect" xml:space="preserve">
+    <value>Konst. poměr stran</value>
+  </data>
+  <data name="strSmartSizeModeFree" xml:space="preserve">
+    <value>Volné</value>
+  </data>
+  <data name="strSmartSizeModeNone" xml:space="preserve">
+    <value>Nepoužívat auto resize</value>
+  </data>
+  <data name="strSocks5" xml:space="preserve">
+    <value>Socks 5</value>
+  </data>
+  <data name="strSort" xml:space="preserve">
+    <value>Řazení</value>
+  </data>
+  <data name="strSortAsc" xml:space="preserve">
+    <value>Vzestupně (A-Z)</value>
+  </data>
+  <data name="strSortDesc" xml:space="preserve">
+    <value>Sestupně (Z-A)</value>
+  </data>
+  <data name="strSpecialKeys" xml:space="preserve">
+    <value>Klávesové zkratky</value>
+  </data>
+  <data name="strSQLInfo" xml:space="preserve">
+    <value>Prosím navštivte nápovědu - Začínáme - Konfigurace SQL pro získání dalších informací!</value>
+  </data>
+  <data name="strSQLServer" xml:space="preserve">
+    <value>SQL Server</value>
+  </data>
+  <data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
+    <value>Vyhledávání aktualizací SQL ukončeno a aktualizace jsou k dispozici. Budu aktualizovat seznam spojení.</value>
+  </data>
+  <data name="strSsh1" xml:space="preserve">
+    <value>SSH ver 1</value>
+  </data>
+  <data name="strSsh2" xml:space="preserve">
+    <value>SSH ver 2</value>
+  </data>
+  <data name="strSSHStartTransferBG" xml:space="preserve">
+    <value>Selhal přenos na pozadí přes SSH!</value>
+  </data>
+  <data name="strSSHTranferSuccessful" xml:space="preserve">
+    <value>Přenos úspěšně dokončen!</value>
+  </data>
+  <data name="strSSHTransferEndFailed" xml:space="preserve">
+    <value>Selhala metoda SSH Transfer End (UI.Window.SSHTransfer)!</value>
+  </data>
+  <data name="strSSHTransferFailed" xml:space="preserve">
+    <value>Selhal přenos přes SSH.</value>
+  </data>
+  <data name="strStartIP" xml:space="preserve">
+    <value>Počáteční IP</value>
+  </data>
+  <data name="strStartPort" xml:space="preserve">
+    <value>Počáteční Port</value>
+  </data>
+  <data name="strStartupExit" xml:space="preserve">
+    <value>Startup/Exit</value>
+  </data>
+  <data name="strStatus" xml:space="preserve">
+    <value>Stav</value>
+  </data>
+  <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
+    <value>Přepnout do notifikačního panelu při:</value>
+  </data>
+  <data name="strTabAdvanced" xml:space="preserve">
+    <value>Pokročilé</value>
+  </data>
+  <data name="strTabAppearance" xml:space="preserve">
+    <value>Vzhled</value>
+  </data>
+  <data name="strTabsAndPanels" xml:space="preserve">
+    <value>Taby &amp;&amp; Panely</value>
+  </data>
+  <data name="strTabUpdates" xml:space="preserve">
+    <value>Aktualizace</value>
+  </data>
+  <data name="strTelnet" xml:space="preserve">
+    <value>Telnet</value>
+  </data>
+  <data name="strTheFollowing" xml:space="preserve">
+    <value>Následující:</value>
+  </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>Konfigurační panel</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>Panel spojení</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>Všeobecné</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí konfiguračního panelu.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Barva textu nadpisů kategorií v konfiguračním panelu.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>Barva ohraničení tabulky v konfiguračním panelu</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí nápovědy v konfiguračním panelu.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Barva textu nápovědy v konfiguračním panelu.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>Barva textu v konfiguračním panelu.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí v panelu seznamu spojení.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>Barva textu v panelu seznamu spojení.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Barva čar stromu seznamu v panelu spojení.</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí v nabídkách (menu).</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>Barva textu v nabídkách (menu).</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí v políčku pro vyhledávání.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>Barva textu v políčku pro vyhledávání.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Barva vyskakujícího textu v políčku pro vyhledávání.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí nástrojových lišt (toolbar).</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>barva textu nástrojových lišt (toolbar).</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí hlavního okna aplikace.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí konfiguračního panelu</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Barva textu konfiguračního panelu</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>Barva ohraničení tabulek konfiguračního panelu</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí nápovědy konfiguračního panelu</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Barva textu nápovědy konfiguračního panelu</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>Barva textu konfiguračního panelu</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí panelu seznamu připojení</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>Barva textu panelu seznamu připojení</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Barva čar stromu seznamu připojení</value>
+  </data>
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí nabídek</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>Barva textu nabídek</value>
+  </data>
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí pole vyhledávání</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+    <value>Barva textu pole vyhledávání</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Barva textu nabídky v poli vyhledávání</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí nástrojové lišty</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>Barva textu nástrojové lišty</value>
+  </data>
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+    <value>Barva pozadí okna</value>
+  </data>
+  <data name="strTitleError" xml:space="preserve">
+    <value>Chyba ({0})</value>
+  </data>
+  <data name="strTitleInformation" xml:space="preserve">
+    <value>Informace ({0})</value>
+  </data>
+  <data name="strTitlePassword" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="strTitlePasswordWithName" xml:space="preserve">
+    <value>Heslo pro {0}</value>
+  </data>
+  <data name="strTitleSelectPanel" xml:space="preserve">
+    <value>Vybrat panel</value>
+  </data>
+  <data name="strTitleWarning" xml:space="preserve">
+    <value>Varování ({0})</value>
+  </data>
+  <data name="strTransfer" xml:space="preserve">
+    <value>Přenést</value>
+  </data>
+  <data name="strTransferFailed" xml:space="preserve">
+    <value>Přenos selhal!</value>
+  </data>
+  <data name="strTryIntegrate" xml:space="preserve">
+    <value>Zkouším integrovat</value>
+  </data>
+  <data name="strType" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="strUltraVncRepeater" xml:space="preserve">
+    <value>Ultra VNC Repeater</value>
+  </data>
+  <data name="strUltraVNCSCListeningPort" xml:space="preserve">
+    <value>UltraVNC SingleClick port:</value>
+  </data>
+  <data name="strUncheckProperties" xml:space="preserve">
+    <value>Nezaškrtávejte ty vlastnosti, které nechcete uložit!</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Vzhled be názvu</value>
+  </data>
+  <data name="strUpdateAvailable" xml:space="preserve">
+    <value>mRemoteNG vyžaduje aktualizaci</value>
+  </data>
+  <data name="strUpdateCheck" xml:space="preserve">
+    <value>mRemoteNG se může pravidelně připojovat k webu mRemoteNG aby zkontroloval aktualizace.</value>
+  </data>
+  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+    <value>Informace o aktualizacích nemohly být staženy.</value>
+  </data>
+  <data name="strUpdateCheckFailedLabel" xml:space="preserve">
+    <value>Vyhledání aktualizací selhalo!</value>
+  </data>
+  <data name="strUpdateCheckingLabel" xml:space="preserve">
+    <value>Vyhledávám aktualizace...</value>
+  </data>
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+    <value>mRemoteNG Portable Edition nyní nepodporuje automatické aktualizace.</value>
+  </data>
+  <data name="strUpdateDownloadComplete" xml:space="preserve">
+    <value>Stahování ukončeno!
+mRemoteNG se nyní ukončí a zahájí instalaci.</value>
+  </data>
+  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+    <value>Aktualizaci se nepodařilo stáhnout.</value>
+  </data>
+  <data name="strUpdateDownloadFailed" xml:space="preserve">
+    <value>Stahování aktualizací se nepodařilo zahájit.</value>
+  </data>
+  <data name="strUpdateFrequencyCustom" xml:space="preserve">
+    <value>Každý(ch) {0} dnů</value>
+  </data>
+  <data name="strUpdateFrequencyDaily" xml:space="preserve">
+    <value>Denně</value>
+  </data>
+  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
+    <value>Měsíčně</value>
+  </data>
+  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
+    <value>Týdně</value>
+  </data>
+  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+    <value>Seznam informací o změnách se nepodařilo stáhnout.</value>
+  </data>
+  <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+    <value>Použít jiné uživatelské jméno (login) a heslo</value>
+  </data>
+  <data name="strUser" xml:space="preserve">
+    <value>Uživatel</value>
+  </data>
+  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
+    <value>Použít stejné uživatelské jméno (login) a heslo</value>
+  </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Použít čipovou kartu</value>
+  </data>
+  <data name="strUseSQLServer" xml:space="preserve">
+    <value>Použít SQL Server ke stažení &amp;&amp; uloženho seznamu spojení</value>
+  </data>
+  <data name="strVersion" xml:space="preserve">
+    <value>Verze</value>
+  </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
+  </data>
+  <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
+    <value>Odpojení VNC selhalo!</value>
+  </data>
+  <data name="strVncConnectionOpenFailed" xml:space="preserve">
+    <value>Navázání spojení VNC selhalo!</value>
+  </data>
+  <data name="strVncRefreshFailed" xml:space="preserve">
+    <value>Obnovení obrazovky VNC selhalo!</value>
+  </data>
+  <data name="strVncSendSpecialKeysFailed" xml:space="preserve">
+    <value>VNC zaslat klávesovou zkratku selhalo!</value>
+  </data>
+  <data name="strVncSetEventHandlersFailed" xml:space="preserve">
+    <value>Selhala metoda VNC Set Event Handlers!</value>
+  </data>
+  <data name="strVncSetPropsFailed" xml:space="preserve">
+    <value>Nastavení VNC Set Props selhalo!</value>
+  </data>
+  <data name="strVncStartChatFailed" xml:space="preserve">
+    <value>Volání VNC Start Chat selhalo!</value>
+  </data>
+  <data name="strVncToggleSmartSizeFailed" xml:space="preserve">
+    <value>Přepnutí VNC automatické velikosti (SmartSize) selhalo!</value>
+  </data>
+  <data name="strVncToggleViewOnlyFailed" xml:space="preserve">
+    <value>Přepnutí VNC do režimu ViewOnly selhalo!</value>
+  </data>
+  <data name="strWarnIfAuthFails" xml:space="preserve">
+    <value>Varuj mě pokud autentizace selže</value>
+  </data>
+  <data name="strWarnings" xml:space="preserve">
+    <value>Varování</value>
+  </data>
+  <data name="strWeifenLuoAttribution" xml:space="preserve">
+    <value>Využívá DockPanel Suite od [Weifen Luo]</value>
+  </data>
+  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
+    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
+  </data>
+  <data name="strXULrunnerPath" xml:space="preserve">
+    <value>Složka umístění XULrunner:</value>
+  </data>
+  <data name="strYes" xml:space="preserve">
+    <value>Ano</value>
+  </data>
+  <data name="strMenuReconnectAll" xml:space="preserve">
+    <value>Obnovit všechna otevřená spojení</value>
+  </data>
+  <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
+    <value>Čas čekání (timeout) na RDP spojení</value>
+  </data>
+  <data name="strNodeAlreadyInFolder" xml:space="preserve">
+    <value>Tento uzel již v této složce existuje.</value>
+  </data>
+  <data name="strNodeCannotDragOnSelf" xml:space="preserve">
+    <value>Nelze přetáhnout uzel na sebe sama.</value>
+  </data>
+  <data name="strNodeCannotDragParentOnChild" xml:space="preserve">
+    <value>Nelze přetáhnout nadřazený uzel na jeho potomka.</value>
+  </data>
+  <data name="strNodeNotDraggable" xml:space="preserve">
+    <value>Tento uzel nelze přetahovat myší.</value>
+  </data>
+  <data name="strEncryptionBlockCipherMode" xml:space="preserve">
+    <value>Režim blokové šifry</value>
+  </data>
+  <data name="strEncryptionEngine" xml:space="preserve">
+    <value>Šifrovací metody</value>
+  </data>
+  <data name="strTabSecurity" xml:space="preserve">
+    <value>Bezpečnost</value>
+  </data>
+  <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>Počet iterací funkce derivující klíč</value>
+  </data>
+  <data name="strRDPSoundQualityDynamic" xml:space="preserve">
+    <value>Variabilní</value>
+  </data>
+  <data name="strRDPSoundQualityHigh" xml:space="preserve">
+    <value>Vysoká</value>
+  </data>
+  <data name="strRDPSoundQualityMedium" xml:space="preserve">
+    <value>Střední</value>
+  </data>
+  <data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
+    <value>Vyberte si jednu z kvalit zvuku poskytovanou protokolem: Variabilní, Střední, Vvysoká</value>
+  </data>
+  <data name="strPropertyNameSoundQuality" xml:space="preserve">
+    <value>Kvalita zvuku</value>
+  </data>
+  <data name="strUpdatePortableDownloadComplete" xml:space="preserve">
+    <value>Stahování přenosné verze dokončeno!</value>
+  </data>
+  <data name="strDownloadPortable" xml:space="preserve">
+    <value>Stáhnout</value>
+  </data>
+  <data name="strPropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>Počet minut neaktivity v sezení RDP než bude automaticky odpojeno (0 = bez omezení)</value>
+  </data>
+  <data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>Minut neaktivity do odp.</value>
+  </data>
+  <data name="strAccept" xml:space="preserve">
+    <value>Akceptovat</value>
+  </data>
+  <data name="strAdd" xml:space="preserve">
+    <value>Přidat</value>
+  </data>
+  <data name="strCredentialEditor" xml:space="preserve">
+    <value>Editor přihlašovacích údajů</value>
+  </data>
+  <data name="strCredentialManager" xml:space="preserve">
+    <value>Správce přihlašovacích údajů</value>
+  </data>
+  <data name="strID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="strRemove" xml:space="preserve">
+    <value>Odstranit</value>
+  </data>
+  <data name="strTitle" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="strPropertyDescriptionCredential" xml:space="preserve">
+    <value>Vyberte jaké přihlašovací údaje použít pro toto spojení.</value>
+  </data>
+  <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>Jste si jisti že chcete odstranit záznam přihlašovacích údajů {0}?</value>
+  </data>
+  <data name="strFindMatchingCredentialFailed" xml:space="preserve">
+    <value>Přihlašovací údaje s ID "{0}" nebyly nalezeny pro pozužití ve spojení jménem "{1}".</value>
+  </data>
+  <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Zapsat zprávu logu když se RDP sezení odpojí kvůli neaktivitě.</value>
+  </data>
+  <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Upozornit při odpojení z neaktivity</value>
+  </data>
+  <data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+    <value>Heslo musí obsahovat alespoň {0} z těchto písmen: {1}</value>
+  </data>
+  <data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+    <value>Heslo musí obsahovat alespoň {0} malých písmen.</value>
+  </data>
+  <data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>Heslo musí obsahovat alespoň {0} číslic.</value>
+  </data>
+  <data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>Heslo musí obsahovat alespoň {0} velkých písmen.</value>
+  </data>
+  <data name="strPasswordLengthConstraintHint" xml:space="preserve">
+    <value>Delká hesla musí být alespoň {0} a nejvýše {1} znaků.</value>
+  </data>
+  <data name="strChooseLogPath" xml:space="preserve">
+    <value>Vyberte cestu k souboru logu aplikace mRemoteNG.</value>
+  </data>
+  <data name="strDebug" xml:space="preserve">
+    <value>Debugging</value>
+  </data>
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
+    <value>Zobrazovat tyto zprávy</value>
+  </data>
+  <data name="strLogFilePath" xml:space="preserve">
+    <value>Cesta k souboru logu</value>
+  </data>
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
+    <value>Logovat tyto typy zpráv</value>
+  </data>
+  <data name="strChoosePath" xml:space="preserve">
+    <value>Vybrat cestu</value>
+  </data>
+  <data name="strOpenFile" xml:space="preserve">
+    <value>Otevřít soubor</value>
+  </data>
+  <data name="strUseDefault" xml:space="preserve">
+    <value>Použít výchozí</value>
+  </data>
+  <data name="strLogging" xml:space="preserve">
+    <value>Logování</value>
+  </data>
+  <data name="strPopups" xml:space="preserve">
+    <value>Zprávy logu</value>
+  </data>
+  <data name="strLogToAppDir" xml:space="preserve">
+    <value>Logovat do adresáře kde je aplikace umístěna.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
++    <value>Zvolte jak bude přesměrováno vstupní zvukové zařízení</value>
++ </data>
++ <data name="strPropertyNameRedirectMicrophones" xml:space="preserve">
++    <value>Vstupní zvuková zařízení</value>
++ </data>
++ <data name="strRDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
++    <value>Ponechat vstup na místním počítači</value>
++ </data>
++ <data name="strRDPMicrophonesSendToRemoteComputer" xml:space="preserve">
++    <value>Vstup zaslat na vzdálený počítač</value>
++ </data>
+  <data name="strAssignedCredential" xml:space="preserve">
+     <value>Přiřazené přihlašovací informace</value>
+  </data>
+</root>
