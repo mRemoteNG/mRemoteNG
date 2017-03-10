@@ -238,9 +238,9 @@ namespace mRemoteNG.Connection
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RedirectSound {get; set;}
 
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7),
-        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectMicrophones"),
-        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectMicrophones"),
-        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RedirectMicrophones { get; set; }
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectAudioInput"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectAudioInput"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RedirectAudioInput { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7),
         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameSoundQuality"),

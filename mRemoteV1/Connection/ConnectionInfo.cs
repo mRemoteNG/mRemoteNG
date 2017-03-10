@@ -289,7 +289,7 @@ namespace mRemoteNG.Connection
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
             RedirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), Settings.Default.ConDefaultRedirectSound);
-            RedirectMicrophones = (ProtocolRDP.RDPMicrophones)Enum.Parse(typeof(ProtocolRDP.RDPMicrophones), Settings.Default.ConDefaultRedirectMicrophones);
+            RedirectAudioInput = (ProtocolRDP.RDPAudioInput)Enum.Parse(typeof(ProtocolRDP.RDPAudioInput), Settings.Default.ConDefaultRedirectAudioInput);
             SoundQuality = (ProtocolRDP.RDPSoundQuality)Enum.Parse(typeof(ProtocolRDP.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 

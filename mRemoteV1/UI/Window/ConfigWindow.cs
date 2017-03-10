@@ -812,7 +812,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("RedirectPrinters");
                     strHide.Add("RedirectSmartCards");
                     strHide.Add("RedirectSound");
-                    strHide.Add("RedirectMicrophones");
+                    strHide.Add("RedirectAudioInput");
                     strHide.Add("RenderingEngine");
                     strHide.Add("Resolution");
                     strHide.Add("AutomaticResize");
@@ -888,7 +888,7 @@ namespace mRemoteNG.UI.Window
 							{
 								strHide.Add("AutomaticResize");
 							}
-					        if (conI.RedirectSound != ProtocolRDP.RDPSounds.BringToThisComputer && conI.RedirectMicrophones != ProtocolRDP.RDPMicrophones.SendToRemoteComputer)
+					        if (conI.RedirectSound != ProtocolRDP.RDPSounds.BringToThisComputer && conI.RedirectAudioInput != ProtocolRDP.RDPAudioInput.SendToRemoteComputer)
 					        {
                                 strHide.Add("SoundQuality");
                             }
@@ -919,7 +919,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
@@ -965,7 +965,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
@@ -1010,7 +1010,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
@@ -1056,7 +1056,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
@@ -1103,7 +1103,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
@@ -1150,7 +1150,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
@@ -1197,7 +1197,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
@@ -1242,7 +1242,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound;Resolution");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1283,7 +1283,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("RenderingEngine");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
@@ -1327,7 +1327,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-                            strHide.Add("RedirectMicrophones");
+                            strHide.Add("RedirectAudioInput");
                             strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
@@ -1388,8 +1388,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectSmartCards");
                         if (conI.Inheritance.RedirectSound)
                             strHide.Add("RedirectSound");
-                        if (conI.Inheritance.RedirectMicrophones)
-                            strHide.Add("RedirectMicrophones");
+                        if (conI.Inheritance.RedirectAudioInput)
+                            strHide.Add("RedirectAudioInput");
                         if (conI.Inheritance.Resolution)
                             strHide.Add("Resolution");
                         if (conI.Inheritance.AutomaticResize)

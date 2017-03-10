@@ -521,8 +521,8 @@ namespace mRemoteNG.Config.Serializers
                 }
                 if (_confVersion >= 2.8)
                 {
-                    connectionInfo.RedirectMicrophones = (ProtocolRDP.RDPMicrophones)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPMicrophones), Convert.ToString(xmlnode.Attributes["RedirectMicrophones"].Value));
-                    connectionInfo.Inheritance.RedirectMicrophones = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
+                    connectionInfo.RedirectAudioInput = (ProtocolRDP.RDPAudioInput)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPAudioInput), Convert.ToString(xmlnode.Attributes["RedirectAudioInput"].Value));
+                    connectionInfo.Inheritance.RedirectAudioInput = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
                 }
             }
             catch (Exception ex)

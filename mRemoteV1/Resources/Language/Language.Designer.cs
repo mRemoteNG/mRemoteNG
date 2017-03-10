@@ -4343,6 +4343,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select how local audio input should be redirected.
+        /// </summary>
+        internal static string strPropertyDescriptionRedirectAudioInput {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRedirectAudioInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
         /// </summary>
         internal static string strPropertyDescriptionRedirectDrives {
@@ -4357,15 +4366,6 @@ namespace mRemoteNG {
         internal static string strPropertyDescriptionRedirectKeys {
             get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectKeys", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select how local audio input should be redirected.
-        /// </summary>
-        internal static string strPropertyDescriptionRedirectMicrophones {
-            get {
-                return ResourceManager.GetString("strPropertyDescriptionRedirectMicrophones", resourceCulture);
             }
         }
         
@@ -4856,6 +4856,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio Input.
+        /// </summary>
+        internal static string strPropertyNameRedirectAudioInput {
+            get {
+                return ResourceManager.GetString("strPropertyNameRedirectAudioInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk Drives.
         /// </summary>
         internal static string strPropertyNameRedirectDrives {
@@ -4870,15 +4879,6 @@ namespace mRemoteNG {
         internal static string strPropertyNameRedirectKeys {
             get {
                 return ResourceManager.GetString("strPropertyNameRedirectKeys", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Audio Input.
-        /// </summary>
-        internal static string strPropertyNameRedirectMicrophones {
-            get {
-                return ResourceManager.GetString("strPropertyNameRedirectMicrophones", resourceCulture);
             }
         }
         
@@ -5390,6 +5390,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leave at local computer.
+        /// </summary>
+        internal static string strRDPAudioInputLeaveAtLocalComputer {
+            get {
+                return ResourceManager.GetString("strRDPAudioInputLeaveAtLocalComputer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send to remote computer.
+        /// </summary>
+        internal static string strRDPAudioInputSendToRemoteComputer {
+            get {
+                return ResourceManager.GetString("strRDPAudioInputSendToRemoteComputer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close RDP Connection failed!.
         /// </summary>
         internal static string strRdpCloseConnectionFailed {
@@ -5638,24 +5656,6 @@ namespace mRemoteNG {
         internal static string strRdpGetSessionsFailed {
             get {
                 return ResourceManager.GetString("strRdpGetSessionsFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leave at local computer.
-        /// </summary>
-        internal static string strRDPMicrophonesLeaveAtLocalComputer {
-            get {
-                return ResourceManager.GetString("strRDPMicrophonesLeaveAtLocalComputer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Send to remote computer.
-        /// </summary>
-        internal static string strRDPMicrophonesSendToRemoteComputer {
-            get {
-                return ResourceManager.GetString("strRDPMicrophonesSendToRemoteComputer", resourceCulture);
             }
         }
         

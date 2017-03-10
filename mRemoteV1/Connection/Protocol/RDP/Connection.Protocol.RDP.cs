@@ -547,7 +547,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				_rdpClient.AdvancedSettings2.RedirectPrinters = _connectionInfo.RedirectPrinters;
 				_rdpClient.AdvancedSettings2.RedirectSmartCards = _connectionInfo.RedirectSmartCards;
 				_rdpClient.SecuredSettings2.AudioRedirectionMode = (int)_connectionInfo.RedirectSound;
-                _rdpClient.AdvancedSettings8.AudioCaptureRedirectionMode = ((int)_connectionInfo.RedirectMicrophones) != 0;
+                _rdpClient.AdvancedSettings8.AudioCaptureRedirectionMode = ((int)_connectionInfo.RedirectAudioInput) != 0;
 			}
 			catch (Exception ex)
 			{
@@ -723,7 +723,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			Colors = RDPColors.Colors16Bit,
 			Sounds = RDPSounds.DoNotPlay,
-            Microphones = RDPMicrophones.LeaveAtLocalComputer,
+            AudioInput = RDPAudioInput.LeaveAtLocalComputer,
 			Resolution = RDPResolutions.FitToWindow,
 			Port = 3389
 		}
@@ -752,11 +752,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
             DoNotPlay = 2
 		}
 
-        public enum RDPMicrophones
+        public enum RDPAudioInput
         {
-            [LocalizedAttributes.LocalizedDescription("strRDPMicrophonesLeaveAtLocalComputer")]
+            [LocalizedAttributes.LocalizedDescription("strRDPAudioInputLeaveAtLocalComputer")]
             LeaveAtLocalComputer = 0,
-            [LocalizedAttributes.LocalizedDescription("strRDPMicrophonesSendToRemoteComputer")]
+            [LocalizedAttributes.LocalizedDescription("strRDPAudioInputSendToRemoteComputer")]
             SendToRemoteComputer = 1
         }
 
