@@ -63,6 +63,7 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("ConnectToConsole", typeof(bool));
             _dataTable.Columns.Add("UseCredSsp", typeof(bool));
             _dataTable.Columns.Add("RenderingEngine", typeof(string));
+            _dataTable.Columns.Add("HttpsTrustInsecureCerts", typeof(bool));
             _dataTable.Columns.Add("ICAEncryptionStrength", typeof(string));
             _dataTable.Columns.Add("RDPAuthenticationLevel", typeof(string));
             _dataTable.Columns.Add("RDPMinutesToIdleTimeout", typeof(int));
@@ -128,6 +129,7 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("InheritUseConsoleSession", typeof(bool));
             _dataTable.Columns.Add("InheritUseCredSsp", typeof(bool));
             _dataTable.Columns.Add("InheritRenderingEngine", typeof(bool));
+            _dataTable.Columns.Add("InheritHttpsTrustInsecureCerts", typeof(bool));
             _dataTable.Columns.Add("InheritICAEncryptionStrength", typeof(bool));
             _dataTable.Columns.Add("InheritRDPAuthenticationLevel", typeof(bool));
             _dataTable.Columns.Add("InheritRDPMinutesToIdleTimeout", typeof(bool));
