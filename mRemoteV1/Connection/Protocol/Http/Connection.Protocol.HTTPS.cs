@@ -6,8 +6,8 @@ namespace mRemoteNG.Connection.Protocol.Http
 		public ProtocolHTTPS(RenderingEngine RenderingEngine) : base(RenderingEngine)
 		{
 		}
-				
-		public override void NewExtended()
+
+	    protected override void NewExtended()
 		{
 			base.NewExtended();
 			httpOrS = "https";

@@ -202,6 +202,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["ConnectToConsole"] = connectionInfo.UseConsoleSession;
             dataRow["UseCredSsp"] = connectionInfo.UseCredSsp;
             dataRow["RenderingEngine"] = connectionInfo.RenderingEngine;
+            dataRow["HttpsTrustInsecureCerts"] = connectionInfo.HttpsTrustInsecureCerts;
             dataRow["ICAEncryptionStrength"] = connectionInfo.ICAEncryptionStrength;
             dataRow["RDPAuthenticationLevel"] = connectionInfo.RDPAuthenticationLevel;
             //dataRow["RDPMinutesToIdleTimeout"] = connectionInfo.RDPMinutesToIdleTimeout;
@@ -273,6 +274,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritUseConsoleSession"] = connectionInfo.Inheritance.UseConsoleSession;
                 dataRow["InheritUseCredSsp"] = connectionInfo.Inheritance.UseCredSsp;
                 dataRow["InheritRenderingEngine"] = connectionInfo.Inheritance.RenderingEngine;
+                dataRow["InheritHttpsTrustInsecureCerts"] = connectionInfo.Inheritance.HttpsTrustInsecureCerts;
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
                 dataRow["InheritICAEncryptionStrength"] = connectionInfo.Inheritance.ICAEncryptionStrength;
                 dataRow["InheritRDPAuthenticationLevel"] = connectionInfo.Inheritance.RDPAuthenticationLevel;

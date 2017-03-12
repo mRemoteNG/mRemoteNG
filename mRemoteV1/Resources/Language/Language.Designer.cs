@@ -4199,6 +4199,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trust Invalid HTTPS Certificates (Gecko Only).
+        /// </summary>
+        internal static string strPropertyDescriptionHttpsTrustInsecureCerts {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionHttpsTrustInsecureCerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose a icon that will be displayed when connected to the host..
         /// </summary>
         internal static string strPropertyDescriptionIcon {
@@ -4690,6 +4699,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameExternalToolBefore {
             get {
                 return ResourceManager.GetString("strPropertyNameExternalToolBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trust Invalid HTTPS Certificates (Gecko Only).
+        /// </summary>
+        internal static string strPropertyNameHttpsTrustInsecureCerts {
+            get {
+                return ResourceManager.GetString("strPropertyNameHttpsTrustInsecureCerts", resourceCulture);
             }
         }
         

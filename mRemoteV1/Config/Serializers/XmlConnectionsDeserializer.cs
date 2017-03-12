@@ -516,6 +516,12 @@ namespace mRemoteNG.Config.Serializers
                             Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, string.Format(Language.strFindMatchingCredentialFailed, requestedCredentialId, connectionInfo.Name));
                     }
                 }
+
+                if (_confVersion >= 2.8)
+                {
+                    connectionInfo.HttpsTrustInsecureCerts = bool.Parse(xmlnode.Attributes["HttpsTrustInsecureCerts"]?.Value ?? "False");
+                    connectionInfo.Inheritance.HttpsTrustInsecureCerts = bool.Parse(xmlnode.Attributes["HttpsTrustInsecureCerts"].Value);
+                }
             }
             catch (Exception ex)
             {

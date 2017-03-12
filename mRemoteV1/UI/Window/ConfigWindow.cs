@@ -15,6 +15,7 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Themes;
@@ -204,7 +205,8 @@ namespace mRemoteNG.UI.Window
 		}
 		
         #region Public Properties
-        public bool PropertiesVisible
+
+	    private bool PropertiesVisible
 		{
 			get
 			{
@@ -219,8 +221,8 @@ namespace mRemoteNG.UI.Window
 			    _btnShowDefaultProperties.Checked = false;
 			}
 		}
-		
-        public bool InheritanceVisible
+
+	    private bool InheritanceVisible
 		{
 			get
 			{
@@ -235,8 +237,8 @@ namespace mRemoteNG.UI.Window
 			    _btnShowDefaultProperties.Checked = false;
 			}
 		}
-		
-        public bool DefaultPropertiesVisible
+
+	    private bool DefaultPropertiesVisible
 		{
 			get
 			{
@@ -251,8 +253,8 @@ namespace mRemoteNG.UI.Window
 			    _btnShowInheritance.Checked = false;
 			}
 		}
-		
-        public bool DefaultInheritanceVisible
+
+	    private bool DefaultInheritanceVisible
 		{
 			get { return _btnShowDefaultInheritance.Checked; }
 			set
@@ -813,6 +815,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("RedirectSmartCards");
                     strHide.Add("RedirectSound");
                     strHide.Add("RenderingEngine");
+                    strHide.Add("HttpsTrustInsecureCerts");
                     strHide.Add("Resolution");
                     strHide.Add("AutomaticResize");
                     strHide.Add("UseConsoleSession");
@@ -854,7 +857,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RenderingEngine");
-							strHide.Add("VNCAuthMode");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
 							strHide.Add("VNCEncoding");
@@ -919,7 +923,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -964,7 +969,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1008,7 +1014,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1053,7 +1060,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1099,7 +1107,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1145,7 +1154,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1249,6 +1259,10 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+
+                            if(conI.RenderingEngine == HTTPBase.RenderingEngine.IE)
+                                strHide.Add("HttpsTrustInsecureCerts");
+
                             break;
 						case ProtocolType.ICA:
 							strHide.Add("DisplayThemes");
@@ -1275,7 +1289,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
-							strHide.Add("AutomaticResize");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
 							strHide.Add("VNCAuthMode");
@@ -1318,7 +1333,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
+                            strHide.Add("HttpsTrustInsecureCerts");
+                            strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1387,6 +1403,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("UseCredSsp");
                         if (conI.Inheritance.RenderingEngine)
                             strHide.Add("RenderingEngine");
+                        if (conI.Inheritance.HttpsTrustInsecureCerts)
+                            strHide.Add("HttpsTrustInsecureCerts");
                         if (conI.Inheritance.ICAEncryptionStrength)
                             strHide.Add("ICAEncryptionStrength");
                         if (conI.Inheritance.RDPAuthenticationLevel)

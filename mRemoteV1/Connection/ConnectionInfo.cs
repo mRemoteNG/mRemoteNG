@@ -196,6 +196,7 @@ namespace mRemoteNG.Connection
 		{
 			try
 			{
+			    // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (protocol)
                 {
                     case ProtocolType.RDP:
@@ -256,6 +257,7 @@ namespace mRemoteNG.Connection
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
             RenderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
+            HttpsTrustInsecureCerts = false;
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
         }
 

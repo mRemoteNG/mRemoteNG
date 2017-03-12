@@ -2508,4 +2508,10 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strAssignedCredential" xml:space="preserve">
     <value>Assigned Credential</value>
   </data>
+  <data name="strPropertyDescriptionHttpsTrustInsecureCerts" xml:space="preserve">
+    <value>Trust Invalid HTTPS Certificates (Gecko Only)</value>
+  </data>
+  <data name="strPropertyNameHttpsTrustInsecureCerts" xml:space="preserve">
+    <value>Trust Invalid HTTPS Certificates (Gecko Only)</value>
+  </data>
 </root>
