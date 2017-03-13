@@ -65,6 +65,10 @@ namespace mRemoteNG.Connection.Protocol.Http
                     {
                         GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
                     }
+                    else
+                    {
+                        throw new Exception("Failed to initialize Gecko Rendering Engine.");
+                    }
                 }
                 else
 				{
