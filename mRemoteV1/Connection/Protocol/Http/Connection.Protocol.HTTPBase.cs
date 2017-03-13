@@ -64,6 +64,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                     if (GeckoBrowser != null)
                     {
                         GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
+                        GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
                     }
                     else
                     {
