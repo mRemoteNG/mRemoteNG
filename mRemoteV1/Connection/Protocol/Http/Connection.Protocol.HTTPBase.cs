@@ -5,8 +5,6 @@ using mRemoteNG.Tools;
 using mRemoteNG.App;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
-//using SHDocVw;
-
 namespace mRemoteNG.Connection.Protocol.Http
 {
 	public class HTTPBase : ProtocolBase
@@ -66,13 +64,11 @@ namespace mRemoteNG.Connection.Protocol.Http
                     if (GeckoBrowser != null)
                     {
                         GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
-                        //GeckoBrowser.Tab.LastTabRemoved += wBrowser_LastTabRemoved;
                     }
                 }
                 else
 				{
                     var objWebBrowser = (WebBrowser)wBrowser;
-                    //SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
 					objWebBrowser.ScrollBarsEnabled = true;
 
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
@@ -80,8 +76,6 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     objWebBrowser.Navigated += wBrowser_Navigated;
 					objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
-				    //objWebBrowser.NewWindow3 += wBrowser_NewWindow3;
-				    //objAxWebBrowser.NewWindow3 += wBrowser_NewWindow3;
 				}
 				
 				return true;
