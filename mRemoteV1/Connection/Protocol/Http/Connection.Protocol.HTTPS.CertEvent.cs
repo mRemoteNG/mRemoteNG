@@ -14,7 +14,7 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             if (!e.Message.Contains("Certificate"))
             {
-                e.Handled = true;
+                e.Handled = false;
                 return;
             }
 
@@ -26,7 +26,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             };
 
             CTaskDialog.ShowTaskDialogBox(null, GeneralAppInfo.ProductName, $"Allow Insecure Certificate?",
-                string.Format($"Allow Insecure Certificate?", GeneralAppInfo.ProductName),
+                string.Format($"Allow Insecure Certificate for URL: {0}?", e.Uri.AbsoluteUri),
                 "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question,
                 ESysIcons.Question);
 
