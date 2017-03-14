@@ -26,16 +26,14 @@ namespace mRemoteNG.Connection.Protocol.Http
 
             string[] commandButtons =
             {
-                $"Allow Once",      // 0
-                $"Allow Always",    // 1
-                $"Don't Allow"      // 2
+                Language.strHttpsInsecureAllowOnce,     // 0
+                Language.strHttpsInsecureAllowAlways,   // 1
+                Language.strHttpsInsecureDontAllow      // 2
             };
 
-            CTaskDialog.ShowTaskDialogBox(null, GeneralAppInfo.ProductName, $"Allow Insecure Certificate?",
-                string.Format("Allow Insecure Certificate for URL: {0}?", e.Uri.AbsoluteUri),
-                "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question,
-                ESysIcons.Question);
-
+            CTaskDialog.ShowTaskDialogBox(null, GeneralAppInfo.ProductName, Language.strHttpsInsecurePromptTitle,
+                string.Format(Language.strHttpsInsecurePrompt, e.Uri.AbsoluteUri), "", "", "", "",
+                string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
            
             var allow = false;
             var temporary = true;
@@ -55,15 +53,21 @@ namespace mRemoteNG.Connection.Protocol.Http
                     temporary = true; // just to be safe
                     break;
             }
+           
+            if (!allow)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"User did not allow navigation to {e.Uri.AbsoluteUri} with an insecure certificate: {e.Message}");
+                return;
+            }
 
             /* "temporary == false" (aka always) might not work: 
-             * https://bitbucket.org/geckofx/geckofx-45.0/issues/152/remembervalidityoverride-doesnt-save-in
-             * However, my testing was successful in Gecko 45.0.22
-             */
-            if (allow)
-                CertOverrideService.GetService().RememberValidityOverride(e.Uri, e.Certificate, CertOverride.Mismatch | CertOverride.Time | CertOverride.Untrusted, temporary);
+            * https://bitbucket.org/geckofx/geckofx-45.0/issues/152/remembervalidityoverride-doesnt-save-in
+            * However, my testing was successful in Gecko 45.0.22
+            */
+            CertOverrideService.GetService().RememberValidityOverride(e.Uri, e.Certificate,
+                CertOverride.Mismatch | CertOverride.Time | CertOverride.Untrusted, temporary);
+
             e.Handled = true;
-            // navigate even if we don't trust the cert. This will allow Gecko the return errors to the user.
             ((GeckoWebBrowser)sender).Navigate(e.Uri.AbsoluteUri);
         }
     }
