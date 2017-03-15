@@ -2508,4 +2508,19 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strAssignedCredential" xml:space="preserve">
     <value>Assigned Credential</value>
   </data>
+  <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
+    <value>Allow Always</value>
+  </data>
+  <data name="strHttpsInsecureAllowOnce" xml:space="preserve">
+    <value>Allow Once</value>
+  </data>
+  <data name="strHttpsInsecureDontAllow" xml:space="preserve">
+    <value>Don't Allow</value>
+  </data>
+  <data name="strHttpsInsecurePrompt" xml:space="preserve">
+    <value>Allow Insecure Certificate for URL: {0}?</value>
+  </data>
+  <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
+    <value>Allow Insecure Certificate?</value>
+  </data>
 </root>
