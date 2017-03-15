@@ -36,6 +36,7 @@ namespace mRemoteNG.Connection
         private bool _rdpAlertIdleTimeout;
         private string _loadBalanceInfo = "";
         private HTTPBase.RenderingEngine _renderingEngine;
+        private bool _trustInsecureCerts;
         private bool _useCredSsp;
 
         private ProtocolRDP.RDGatewayUsageMethod _rdGatewayUsageMethod;
@@ -266,6 +267,16 @@ namespace mRemoteNG.Connection
         {
             get { return GetPropertyValue("RenderingEngine", _renderingEngine); }
             set { SetField(ref _renderingEngine, value, "RenderingEngine"); }
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameHttpsTrustInsecureCerts"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionHttpsTrustInsecureCerts"),
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool HttpsTrustInsecureCerts
+        {
+            get { return GetPropertyValue("HttpsTrustInsecureCerts", _trustInsecureCerts); }
+            set { SetField(ref _trustInsecureCerts, value, "HttpsTrustInsecureCerts"); }
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
@@ -665,7 +676,8 @@ namespace mRemoteNG.Connection
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(args.PropertyName));
         }
 
-        protected bool SetField<T>(ref T field, T value, string propertyName = null)
+        // ReSharper disable once UnusedMethodReturnValue.Local
+        private bool SetField<T>(ref T field, T value, string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
             field = value;

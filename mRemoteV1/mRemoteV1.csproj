@@ -152,6 +152,7 @@
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
     <Compile Include="Config\Serializers\XmlConnectionNodeSerializer26.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer28.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />

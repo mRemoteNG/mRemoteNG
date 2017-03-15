@@ -6,8 +6,8 @@ namespace mRemoteNG.Connection.Protocol.Http
 		public ProtocolHTTP(RenderingEngine RenderingEngine) : base(RenderingEngine)
 		{
 		}
-				
-		public override void NewExtended()
+
+	    protected override void NewExtended()
 		{
 			base.NewExtended();
 					

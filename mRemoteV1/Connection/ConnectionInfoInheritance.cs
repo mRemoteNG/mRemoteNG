@@ -116,8 +116,14 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRenderingEngine"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRenderingEngine"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RenderingEngine {get; set;}
-				
-		[LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameHttpsTrustInsecureCerts"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionHttpsTrustInsecureCerts"),
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool HttpsTrustInsecureCerts { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUseConsoleSession"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseConsoleSession"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool UseConsoleSession {get; set;}

@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using Gecko;
+using Gecko.Events;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
 using TabPage = Crownwood.Magic.Controls.TabPage;
@@ -13,13 +14,14 @@ namespace mRemoteNG.Connection.Protocol.Http
 	{
         #region Private Properties
 		private Control wBrowser;
-		public string httpOrS;
-		public int defaultPort;
+	    protected string httpOrS;
+	    protected int defaultPort;
 		private string tabTitle;
         #endregion
 				
         #region Public Methods
-		public HTTPBase(RenderingEngine RenderingEngine)
+
+	    protected HTTPBase(RenderingEngine RenderingEngine)
 		{
 			try
 			{
@@ -43,7 +45,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			}
 		}
 
-	    public virtual void NewExtended()
+	    protected virtual void NewExtended()
 		{
 		}
 				
@@ -68,12 +70,13 @@ namespace mRemoteNG.Connection.Protocol.Http
 				if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 				{
 				    var GeckoBrowser = (GeckoWebBrowser) wBrowser;
-                    if (GeckoBrowser != null)
-                    {
-                        GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
-                        //GeckoBrowser.Tab.LastTabRemoved += wBrowser_LastTabRemoved;
-                    }
-                }
+				    if (GeckoBrowser == null) return false;
+				    GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
+				    //GeckoBrowser.Tab.LastTabRemoved += wBrowser_LastTabRemoved;
+
+                    if(InterfaceControl.Info.HttpsTrustInsecureCerts)
+				        CertOverrideService.GetService().ValidityOverride += GeckoBrowser_ValidityOverride;
+				}
                 else
 				{
                     var objWebBrowser = (WebBrowser)wBrowser;
@@ -97,8 +100,8 @@ namespace mRemoteNG.Connection.Protocol.Http
 				return false;
 			}
 		}
-				
-		public override bool Connect()
+
+	    public override bool Connect()
 		{
 			try
 			{
@@ -177,6 +180,15 @@ namespace mRemoteNG.Connection.Protocol.Http
 					
 			objWebBrowser.Navigated -= wBrowser_Navigated;
 		}
+
+        //Refernce: https://bitbucket.org/geckofx/geckofx-33.0/issues/90/invalid-security-certificate-error-on
+        private void GeckoBrowser_ValidityOverride(object sender, CertOverrideEventArgs e)
+        {
+            if(InterfaceControl.Info.HttpsTrustInsecureCerts == false) return;
+            e.OverrideResult = CertOverride.Mismatch | CertOverride.Time | CertOverride.Untrusted;
+            e.Temporary = true;
+            e.Handled = true;
+        }
 
 #if false
         private void wBrowser_NewWindow3(ref object ppDisp, ref bool Cancel, uint dwFlags, string bstrUrlContext, string bstrUrl)

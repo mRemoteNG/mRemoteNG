@@ -2530,5 +2530,17 @@ namespace mRemoteNG {
                 this["LogToApplicationDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultHttpsTrustInsecureCerts {
+            get {
+                return ((bool)(this["InhDefaultHttpsTrustInsecureCerts"]));
+            }
+            set {
+                this["InhDefaultHttpsTrustInsecureCerts"] = value;
+            }
+        }
     }
 }
