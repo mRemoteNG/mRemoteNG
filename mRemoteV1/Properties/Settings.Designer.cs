@@ -1811,16 +1811,6 @@ namespace mRemoteNG {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-CN,zh-" +
-            "TW")]
-        public string SupportedUICultures {
-            get {
-                return ((string)(this["SupportedUICultures"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -2528,6 +2518,16 @@ namespace mRemoteNG {
             }
             set {
                 this["LogToApplicationDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("cs-CZ,de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-" +
+            "CN,zh-TW")]
+        public string SupportedUICultures {
+            get {
+                return ((string)(this["SupportedUICultures"]));
             }
         }
     }
