@@ -43,10 +43,16 @@ namespace mRemoteNG.Config.Serializers
             var nodeList = new List<ConnectionInfo>();
             foreach (DataRow row in _dataTable.Rows)
             {
-                if ((string)row["Type"] == "Connection")
+                // ReSharper disable once SwitchStatementMissingSomeCases
+                switch ((string)row["Type"])
+                {
+                    case "Connection":
                     nodeList.Add(DeserializeConnectionInfo(row));
-                else if ((string)row["Type"] == "Container")
+                        break;
+                    case "Container":
                     nodeList.Add(DeserializeContainerInfo(row));
+                        break;
+                }
             }
             return nodeList;
         }
@@ -69,8 +75,10 @@ namespace mRemoteNG.Config.Serializers
         {
             connectionInfo.Name = (string)dataRow["Name"];
             connectionInfo.ConstantID = (string)dataRow["ConstantID"];
-            //connectionInfo.Parent.ConstantID = (string)dataRow["ParentID"];
-            //connectionInfo is ContainerInfo ? ((ContainerInfo)connectionInfo).IsExpanded.ToString() : "" = dataRow["Expanded"];
+            connectionInfo.Parent.ConstantID = (string)dataRow["ParentID"];
+            // ReSharper disable once CanBeReplacedWithTryCastAndCheckForNull
+            if(connectionInfo is ContainerInfo)
+                ((ContainerInfo)connectionInfo).IsExpanded = (bool)dataRow["Expanded"];
             connectionInfo.Description = (string)dataRow["Description"];
             connectionInfo.Icon = (string)dataRow["Icon"];
             connectionInfo.Panel = (string)dataRow["Panel"];
