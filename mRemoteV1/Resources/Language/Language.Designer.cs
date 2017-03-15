@@ -2200,6 +2200,51 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow Always.
+        /// </summary>
+        internal static string strHttpsInsecureAllowAlways {
+            get {
+                return ResourceManager.GetString("strHttpsInsecureAllowAlways", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow Once.
+        /// </summary>
+        internal static string strHttpsInsecureAllowOnce {
+            get {
+                return ResourceManager.GetString("strHttpsInsecureAllowOnce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t Allow.
+        /// </summary>
+        internal static string strHttpsInsecureDontAllow {
+            get {
+                return ResourceManager.GetString("strHttpsInsecureDontAllow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow Insecure Certificate for URL: {0}?.
+        /// </summary>
+        internal static string strHttpsInsecurePrompt {
+            get {
+                return ResourceManager.GetString("strHttpsInsecurePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow Insecure Certificate?.
+        /// </summary>
+        internal static string strHttpsInsecurePromptTitle {
+            get {
+                return ResourceManager.GetString("strHttpsInsecurePromptTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ICA.
         /// </summary>
         internal static string strICA {
