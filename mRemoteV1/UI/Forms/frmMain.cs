@@ -556,5 +556,15 @@ namespace mRemoteNG.UI.Forms
             }
         }
         #endregion
+
+        private void ViewMenu_Opening(object sender, EventArgs e)
+        {
+            viewMenu1.mMenView_DropDownOpening(sender, e);
+        }
+
+        private void mainFileMenu1_DropDownOpening(object sender, EventArgs e)
+        {
+            mainFileMenu1.mMenFile_DropDownOpening(sender, e);
+        }
     }
 }

@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Menu
             Name = "mMenView";
             Size = new System.Drawing.Size(44, 20);
             Text = Language.strMenuView;
-            DropDownOpening += mMenView_DropDownOpening;
+            //DropDownOpening += mMenView_DropDownOpening;
             // 
             // mMenViewAddConnectionPanel
             // 
@@ -238,7 +238,7 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region View
-        private void mMenView_DropDownOpening(object sender, EventArgs e)
+        internal void mMenView_DropDownOpening(object sender, EventArgs e)
         {
             _mMenViewConnections.Checked = !Windows.TreeForm.IsHidden;
             _mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;

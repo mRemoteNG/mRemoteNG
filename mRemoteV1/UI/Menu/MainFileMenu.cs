@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Menu
             Name = "mMenFile";
             Size = new System.Drawing.Size(37, 20);
             Text = Language.strMenuFile;
-            DropDownOpening += mMenFile_DropDownOpening;
+            //DropDownOpening += mMenFile_DropDownOpening;
             // 
             // mMenFileNewConnection
             // 
@@ -256,7 +256,7 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region File
-        private void mMenFile_DropDownOpening(object sender, EventArgs e)
+        internal void mMenFile_DropDownOpening(object sender, EventArgs e)
         {
             var selectedNodeType = TreeWindow.SelectedNode?.GetTreeNodeType();
             // ReSharper disable once SwitchStatementMissingSomeCases
