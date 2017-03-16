@@ -25,19 +25,15 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewJumpToErrorsInfos;
         private ToolStripMenuItem _mMenViewResetLayout;
         private ToolStripSeparator _toolStripSeparator1;
-        private readonly ToolStrip _tsExternalTools;
-        private readonly ToolStrip _tsQuickConnect;
-        private readonly FullscreenHandler _fullscreenHandler;
-        private readonly FrmMain _mainForm;
+
+        public ToolStrip TsExternalTools { get; set; }
+        public ToolStrip TsQuickConnect { get; set; }
+        public FullscreenHandler FullscreenHandler { get; set; }
+        public FrmMain MainForm { get; set; }
 
 
-        public ViewMenu(ToolStrip tsExternalTools, ToolStrip tsQuickConnect, FullscreenHandler fullscreenHandler, FrmMain mainForm)
+        public ViewMenu()
         {
-            _tsExternalTools = tsExternalTools;
-            _tsQuickConnect = tsQuickConnect;
-            _fullscreenHandler = fullscreenHandler;
-            _mainForm = mainForm;
-
             Initialize();
             ApplyLanguage();
         }
@@ -84,7 +80,7 @@ namespace mRemoteNG.UI.Menu
             Name = "mMenView";
             Size = new System.Drawing.Size(44, 20);
             Text = Language.strMenuView;
-            DropDownOpening += mMenView_DropDownOpening;
+            //DropDownOpening += mMenView_DropDownOpening;
             // 
             // mMenViewAddConnectionPanel
             // 
@@ -242,15 +238,15 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region View
-        private void mMenView_DropDownOpening(object sender, EventArgs e)
+        internal void mMenView_DropDownOpening(object sender, EventArgs e)
         {
             _mMenViewConnections.Checked = !Windows.TreeForm.IsHidden;
             _mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;
             _mMenViewErrorsAndInfos.Checked = !Windows.ErrorsForm.IsHidden;
             _mMenViewScreenshotManager.Checked = !Windows.ScreenshotForm.IsHidden;
 
-            _mMenViewExtAppsToolbar.Checked = _tsExternalTools.Visible;
-            _mMenViewQuickConnectToolbar.Checked = _tsQuickConnect.Visible;
+            _mMenViewExtAppsToolbar.Checked = TsExternalTools.Visible;
+            _mMenViewQuickConnectToolbar.Checked = TsQuickConnect.Visible;
 
             _mMenViewConnectionPanels.DropDownItems.Clear();
 
@@ -267,7 +263,7 @@ namespace mRemoteNG.UI.Menu
 
         private void ConnectionPanelMenuItem_Click(object sender, EventArgs e)
         {
-            ((BaseWindow)((ToolStripMenuItem)sender).Tag).Show(_mainForm.pnlDock);
+            ((BaseWindow)((ToolStripMenuItem)sender).Tag).Show(MainForm.pnlDock);
             ((BaseWindow)((ToolStripMenuItem)sender).Tag).Focus();
         }
 
@@ -275,7 +271,7 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewConnections.Checked == false)
             {
-                Windows.TreeForm.Show(_mainForm.pnlDock);
+                Windows.TreeForm.Show(MainForm.pnlDock);
                 _mMenViewConnections.Checked = true;
             }
             else
@@ -289,7 +285,7 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewConfig.Checked == false)
             {
-                Windows.ConfigForm.Show(_mainForm.pnlDock);
+                Windows.ConfigForm.Show(MainForm.pnlDock);
                 _mMenViewConfig.Checked = true;
             }
             else
@@ -303,7 +299,7 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewErrorsAndInfos.Checked == false)
             {
-                Windows.ErrorsForm.Show(_mainForm.pnlDock);
+                Windows.ErrorsForm.Show(MainForm.pnlDock);
                 _mMenViewErrorsAndInfos.Checked = true;
             }
             else
@@ -317,7 +313,7 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewScreenshotManager.Checked == false)
             {
-                Windows.ScreenshotForm.Show(_mainForm.pnlDock);
+                Windows.ScreenshotForm.Show(MainForm.pnlDock);
                 _mMenViewScreenshotManager.Checked = true;
             }
             else
@@ -329,7 +325,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
         {
-            if (_mainForm.pnlDock.ActiveContent == Windows.TreeForm)
+            if (MainForm.pnlDock.ActiveContent == Windows.TreeForm)
             {
                 Windows.ConfigForm.Activate();
             }
@@ -350,7 +346,7 @@ namespace mRemoteNG.UI.Menu
                 MessageBoxIcon.Question);
             if (msgBoxResult == DialogResult.Yes)
             {
-                _mainForm.SetDefaultLayout();
+                MainForm.SetDefaultLayout();
             }
         }
 
@@ -363,12 +359,12 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewExtAppsToolbar.Checked == false)
             {
-                _tsExternalTools.Visible = true;
+                TsExternalTools.Visible = true;
                 _mMenViewExtAppsToolbar.Checked = true;
             }
             else
             {
-                _tsExternalTools.Visible = false;
+                TsExternalTools.Visible = false;
                 _mMenViewExtAppsToolbar.Checked = false;
             }
         }
@@ -377,20 +373,20 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewQuickConnectToolbar.Checked == false)
             {
-                _tsQuickConnect.Visible = true;
+                TsQuickConnect.Visible = true;
                 _mMenViewQuickConnectToolbar.Checked = true;
             }
             else
             {
-                _tsQuickConnect.Visible = false;
+                TsQuickConnect.Visible = false;
                 _mMenViewQuickConnectToolbar.Checked = false;
             }
         }
 
         private void mMenViewFullscreen_Click(object sender, EventArgs e)
         {
-            _fullscreenHandler.Value = !_fullscreenHandler.Value;
-            _mMenViewFullscreen.Checked = _fullscreenHandler.Value;
+            FullscreenHandler.Value = !FullscreenHandler.Value;
+            _mMenViewFullscreen.Checked = FullscreenHandler.Value;
         }
         #endregion
     }
