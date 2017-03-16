@@ -1,3 +1,5 @@
+using mRemoteNG.UI.Controls;
+
 namespace mRemoteNG.UI.Forms
 {
     public partial class FrmMain : System.Windows.Forms.Form
@@ -29,17 +31,19 @@ namespace mRemoteNG.UI.Forms
             this.components = new System.ComponentModel.Container();
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
+            this.mainFileMenu1 = new mRemoteNG.UI.Menu.MainFileMenu();
+            this.viewMenu1 = new mRemoteNG.UI.Menu.ViewMenu();
+            this.toolsMenu1 = new mRemoteNG.UI.Menu.ToolsMenu();
+            this.helpMenu1 = new mRemoteNG.UI.Menu.HelpMenu();
             this.mMenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenTools = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsContainer = new System.Windows.Forms.ToolStripContainer();
+            this._quickConnectToolStrip = new mRemoteNG.UI.Controls.QuickConnectToolStrip();
+            this._externalToolsToolStrip = new mRemoteNG.UI.Controls.ExternalToolsToolStrip();
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
-            this.mainFileMenu1 = new mRemoteNG.UI.Menu.MainFileMenu();
-            this.viewMenu1 = new mRemoteNG.UI.Menu.ViewMenu();
-            this.toolsMenu1 = new mRemoteNG.UI.Menu.ToolsMenu();
-            this.helpMenu1 = new mRemoteNG.UI.Menu.HelpMenu();
             this.msMain.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();
@@ -54,8 +58,9 @@ namespace mRemoteNG.UI.Forms
             this.pnlDock.DockRightPortion = 230D;
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
+            this.pnlDock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlDock.Name = "pnlDock";
-            this.pnlDock.Size = new System.Drawing.Size(966, 499);
+            this.pnlDock.Size = new System.Drawing.Size(1288, 619);
             this.pnlDock.TabIndex = 13;
             this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
             // 
@@ -71,10 +76,43 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.msMain.Size = new System.Drawing.Size(269, 24);
+            this.msMain.Size = new System.Drawing.Size(176, 24);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 16;
             this.msMain.Text = "Main Toolbar";
+            // 
+            // mainFileMenu1
+            // 
+            this.mainFileMenu1.ConnectionInitiator = null;
+            this.mainFileMenu1.Name = "mMenFile";
+            this.mainFileMenu1.Size = new System.Drawing.Size(37, 20);
+            this.mainFileMenu1.Text = "&File";
+            this.mainFileMenu1.TreeWindow = null;
+            // 
+            // viewMenu1
+            // 
+            this.viewMenu1.FullscreenHandler = null;
+            this.viewMenu1.MainForm = null;
+            this.viewMenu1.Name = "mMenView";
+            this.viewMenu1.Size = new System.Drawing.Size(44, 20);
+            this.viewMenu1.Text = "&View";
+            this.viewMenu1.TsExternalTools = null;
+            this.viewMenu1.TsQuickConnect = null;
+            // 
+            // toolsMenu1
+            // 
+            this.toolsMenu1.CredentialManager = null;
+            this.toolsMenu1.MainForm = null;
+            this.toolsMenu1.Name = "mMenTools";
+            this.toolsMenu1.Size = new System.Drawing.Size(47, 20);
+            this.toolsMenu1.Text = "&Tools";
+            // 
+            // helpMenu1
+            // 
+            this.helpMenu1.Name = "mMenInfo";
+            this.helpMenu1.Size = new System.Drawing.Size(44, 20);
+            this.helpMenu1.Text = "&Help";
+            this.helpMenu1.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
             // mMenFile
             // 
@@ -107,64 +145,58 @@ namespace mRemoteNG.UI.Forms
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(966, 499);
+            this.tsContainer.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1288, 619);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
+            this.tsContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tsContainer.Name = "tsContainer";
-            this.tsContainer.Size = new System.Drawing.Size(966, 523);
+            this.tsContainer.Size = new System.Drawing.Size(1288, 644);
             this.tsContainer.TabIndex = 17;
             this.tsContainer.Text = "ToolStripContainer1";
             // 
             // tsContainer.TopToolStripPanel
             // 
             this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
+            this.tsContainer.TopToolStripPanel.Controls.Add(this._quickConnectToolStrip);
+            this.tsContainer.TopToolStripPanel.Controls.Add(this._externalToolsToolStrip);
+            // 
+            // _quickConnectToolStrip
+            // 
+            this._quickConnectToolStrip.BackColor = System.Drawing.SystemColors.Control;
+            this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._quickConnectToolStrip.Location = new System.Drawing.Point(179, 0);
+            this._quickConnectToolStrip.MaximumSize = new System.Drawing.Size(0, 25);
+            this._quickConnectToolStrip.Name = "_quickConnectToolStrip";
+            this._quickConnectToolStrip.Size = new System.Drawing.Size(364, 25);
+            this._quickConnectToolStrip.TabIndex = 18;
+            // 
+            // _externalToolsToolStrip
+            // 
+            this._externalToolsToolStrip.BackColor = System.Drawing.SystemColors.Control;
+            this._externalToolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this._externalToolsToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._externalToolsToolStrip.Location = new System.Drawing.Point(543, 0);
+            this._externalToolsToolStrip.MaximumSize = new System.Drawing.Size(0, 25);
+            this._externalToolsToolStrip.Name = "_externalToolsToolStrip";
+            this._externalToolsToolStrip.Size = new System.Drawing.Size(43, 25);
+            this._externalToolsToolStrip.TabIndex = 17;
             // 
             // tmrAutoSave
             // 
             this.tmrAutoSave.Interval = 10000;
             this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
             // 
-            // mainFileMenu1
-            // 
-            this.mainFileMenu1.ConnectionInitiator = null;
-            this.mainFileMenu1.Name = "mMenFile";
-            this.mainFileMenu1.Size = new System.Drawing.Size(37, 20);
-            this.mainFileMenu1.Text = "&File";
-            this.mainFileMenu1.TreeWindow = null;
-            // 
-            // viewMenu1
-            // 
-            this.viewMenu1.FullscreenHandler = null;
-            this.viewMenu1.MainForm = null;
-            this.viewMenu1.Name = "mMenView";
-            this.viewMenu1.Size = new System.Drawing.Size(44, 20);
-            this.viewMenu1.Text = "&View";
-            this.viewMenu1.TsExternalTools = null;
-            this.viewMenu1.TsQuickConnect = null;
-            // 
-            // toolsMenu1
-            // 
-            this.toolsMenu1.MainForm = null;
-            this.toolsMenu1.CredentialManager = null;
-            this.toolsMenu1.Name = "mMenTools";
-            this.toolsMenu1.Size = new System.Drawing.Size(48, 20);
-            this.toolsMenu1.Text = "&Tools";
-            // 
-            // helpMenu1
-            // 
-            this.helpMenu1.Name = "mMenInfo";
-            this.helpMenu1.Size = new System.Drawing.Size(44, 20);
-            this.helpMenu1.Text = "&Help";
-            this.helpMenu1.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(966, 523);
+            this.ClientSize = new System.Drawing.Size(1288, 644);
             this.Controls.Add(this.tsContainer);
             this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
             this.MainMenuStrip = this.msMain;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmMain";
             this.Opacity = 0D;
             this.Text = "mRemoteNG";
@@ -198,5 +230,7 @@ namespace mRemoteNG.UI.Forms
         private Menu.ViewMenu viewMenu1;
         private Menu.ToolsMenu toolsMenu1;
         private Menu.HelpMenu helpMenu1;
+        internal mRemoteNG.UI.Controls.QuickConnectToolStrip _quickConnectToolStrip;
+        internal mRemoteNG.UI.Controls.ExternalToolsToolStrip _externalToolsToolStrip;
     }
 }

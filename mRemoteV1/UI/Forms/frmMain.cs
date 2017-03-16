@@ -18,13 +18,11 @@ using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
-using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
 using Microsoft.Win32;
 using WeifenLuo.WinFormsUI.Docking;
-using View = System.Web.UI.WebControls.View;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -44,9 +42,8 @@ namespace mRemoteNG.UI.Forms
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
         internal FullscreenHandler _fullscreen { get; set; }
-        private readonly QuickConnectToolStrip _quickConnectToolStrip;
-        private readonly ExternalToolsToolStrip _externalToolsToolStrip;
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        
+        internal readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
 
@@ -59,8 +56,7 @@ namespace mRemoteNG.UI.Forms
             _fullscreen = new FullscreenHandler(this);
             pnlDock.Theme = new VS2012LightTheme();
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
-            _quickConnectToolStrip = new QuickConnectToolStrip(_connectionInitiator);
-            _externalToolsToolStrip = new ExternalToolsToolStrip();
+            
         }
 
         static FrmMain()
