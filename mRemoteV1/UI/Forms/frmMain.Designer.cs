@@ -36,6 +36,10 @@ namespace mRemoteNG.UI.Forms
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsContainer = new System.Windows.Forms.ToolStripContainer();
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
+            this.mainFileMenu1 = new mRemoteNG.UI.Menu.MainFileMenu();
+            this.viewMenu1 = new mRemoteNG.UI.Menu.ViewMenu();
+            this.toolsMenu1 = new mRemoteNG.UI.Menu.ToolsMenu();
+            this.helpMenu1 = new mRemoteNG.UI.Menu.HelpMenu();
             this.msMain.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();
@@ -51,7 +55,7 @@ namespace mRemoteNG.UI.Forms
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
             this.pnlDock.Name = "pnlDock";
-            this.pnlDock.Size = new System.Drawing.Size(966, 449);
+            this.pnlDock.Size = new System.Drawing.Size(966, 499);
             this.pnlDock.TabIndex = 13;
             this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
             // 
@@ -59,6 +63,11 @@ namespace mRemoteNG.UI.Forms
             // 
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
+            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainFileMenu1,
+            this.viewMenu1,
+            this.toolsMenu1,
+            this.helpMenu1});
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
@@ -66,6 +75,26 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 16;
             this.msMain.Text = "Main Toolbar";
+            // 
+            // mMenFile
+            // 
+            this.mMenFile.Name = "mMenFile";
+            this.mMenFile.Size = new System.Drawing.Size(32, 19);
+            // 
+            // mMenView
+            // 
+            this.mMenView.Name = "mMenView";
+            this.mMenView.Size = new System.Drawing.Size(32, 19);
+            // 
+            // mMenTools
+            // 
+            this.mMenTools.Name = "mMenTools";
+            this.mMenTools.Size = new System.Drawing.Size(32, 19);
+            // 
+            // mMenInfo
+            // 
+            this.mMenInfo.Name = "mMenInfo";
+            this.mMenInfo.Size = new System.Drawing.Size(32, 19);
             // 
             // mMenSep3
             // 
@@ -78,7 +107,7 @@ namespace mRemoteNG.UI.Forms
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(966, 449);
+            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(966, 499);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
             this.tsContainer.Name = "tsContainer";
@@ -95,7 +124,40 @@ namespace mRemoteNG.UI.Forms
             this.tmrAutoSave.Interval = 10000;
             this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
             // 
-            // frmMain
+            // mainFileMenu1
+            // 
+            this.mainFileMenu1.ConnectionInitiator = null;
+            this.mainFileMenu1.Name = "mMenFile";
+            this.mainFileMenu1.Size = new System.Drawing.Size(37, 20);
+            this.mainFileMenu1.Text = "&File";
+            this.mainFileMenu1.TreeWindow = null;
+            // 
+            // viewMenu1
+            // 
+            this.viewMenu1.FullscreenHandler = null;
+            this.viewMenu1.MainForm = null;
+            this.viewMenu1.Name = "mMenView";
+            this.viewMenu1.Size = new System.Drawing.Size(44, 20);
+            this.viewMenu1.Text = "&View";
+            this.viewMenu1.TsExternalTools = null;
+            this.viewMenu1.TsQuickConnect = null;
+            // 
+            // toolsMenu1
+            // 
+            this.toolsMenu1.MainForm = null;
+            this.toolsMenu1.CredentialManager = null;
+            this.toolsMenu1.Name = "mMenTools";
+            this.toolsMenu1.Size = new System.Drawing.Size(48, 20);
+            this.toolsMenu1.Text = "&Tools";
+            // 
+            // helpMenu1
+            // 
+            this.helpMenu1.Name = "mMenInfo";
+            this.helpMenu1.Size = new System.Drawing.Size(44, 20);
+            this.helpMenu1.Text = "&Help";
+            this.helpMenu1.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            // 
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -132,5 +194,9 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.Timer tmrAutoSave;
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
         private System.ComponentModel.IContainer components;
+        private Menu.MainFileMenu mainFileMenu1;
+        private Menu.ViewMenu viewMenu1;
+        private Menu.ToolsMenu toolsMenu1;
+        private Menu.HelpMenu helpMenu1;
     }
 }

@@ -16,13 +16,12 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsUvncsc;
         private ToolStripMenuItem _mMenToolsComponentsCheck;
         private ToolStripMenuItem _credentialManagerToolStripMenuItem;
-        private readonly CredentialManager _credentialManager;
-        private readonly Form _form;
 
-        public ToolsMenu(Form form, CredentialManager credentialManager)
+        public CredentialManager CredentialManager { get; set; }
+        public Form MainForm { get; set; }
+
+        public ToolsMenu()
         {
-            _form = form;
-            _credentialManager = credentialManager;
             Initialize();
         }
 
@@ -119,11 +118,11 @@ namespace mRemoteNG.UI.Menu
         #region Tools
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var credentialManagerForm = new CredentialManagerForm(_credentialManager)
+            var credentialManagerForm = new CredentialManagerForm(CredentialManager)
             {
                 DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
             };
-            credentialManagerForm.CenterOnTarget(_form);
+            credentialManagerForm.CenterOnTarget(MainForm);
             credentialManagerForm.Show();
         }
 

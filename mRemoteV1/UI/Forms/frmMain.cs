@@ -24,6 +24,8 @@ using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
 using Microsoft.Win32;
 using WeifenLuo.WinFormsUI.Docking;
+using View = System.Web.UI.WebControls.View;
+
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace mRemoteNG.UI.Forms
@@ -136,13 +138,7 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            msMain.Items.AddRange(new ToolStripItem[]
-            {
-                new MainFileMenu(Windows.TreeForm, _connectionInitiator),
-                new ViewMenu(_externalToolsToolStrip, _quickConnectToolStrip, _fullscreen, this),
-                new ToolsMenu(this, _credentialManager),
-                new HelpMenu()
-            });
+            SetMenuDependencies();
 
             var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip);
             settingsLoader.LoadSettings();
@@ -171,6 +167,20 @@ namespace mRemoteNG.UI.Forms
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
 
             Opacity = 1;
+        }
+
+        private void SetMenuDependencies()
+        {
+            mainFileMenu1.TreeWindow = Windows.TreeForm;
+            mainFileMenu1.ConnectionInitiator = _connectionInitiator;
+
+            viewMenu1.TsExternalTools = _externalToolsToolStrip;
+            viewMenu1.TsQuickConnect = _quickConnectToolStrip;
+            viewMenu1.FullscreenHandler = _fullscreen;
+            viewMenu1.MainForm = this;
+
+            toolsMenu1.MainForm = this;
+            toolsMenu1.CredentialManager = _credentialManager;
         }
 
         private void ApplyThemes()
