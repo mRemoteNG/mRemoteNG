@@ -1402,7 +1402,7 @@ editbin /largeaddressaware mRemoteNG.exe
 IF EXIST C:\mRemoteNG_code_signing_cert.pfx (
     echo Signing binaries
     IF %25buildenv: Portable=%25==Release (
-        powershell "&amp;""$(SolutionDir)Tools\signfiles.ps1""" '%25cd%25'
+        powershell -File "$(SolutionDir)Tools\signfiles.ps1"  -PathToSignableFiles %25cd%25 -Exclude 'PuTTYNG.exe'
     )
 )
 
