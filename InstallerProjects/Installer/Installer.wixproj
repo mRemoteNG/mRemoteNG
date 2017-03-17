@@ -132,14 +132,14 @@ call "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Reso
 REM Sign MSI
 IF EXIST C:\mRemoteNG_code_signing_cert.pfx (
     IF %25buildenv: Portable=%25==Release (
-        powershell -File "$(SolutionDir)Tools\signfiles.ps1" -PathToSignableFiles %27%25cd%25%27
+        powershell -File "$(SolutionDir)Tools\signfiles.ps1" -PathToSignableFiles %25cd%25
     )
 )
 
 REM Rename MSI to include version number
-powershell -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\rename_installer_with_version.ps1" %27$(SolutionDir)%27
+powershell -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\rename_installer_with_version.ps1" -SolutionDir $(SolutionDir)
 
 REM Copy MSI to Release folder
-IF %25buildenv: Portable=%25==Release (powershell -ExecutionPolicy Bypass -File  "$(SolutionDir)Tools\copy_release_installer.ps1" %27$(TargetDir)%27 %27$(SolutionDir)Release)%27</PostBuildEvent>
+IF %25buildenv: Portable=%25==Release (powershell -ExecutionPolicy Bypass -File  "$(SolutionDir)Tools\copy_release_installer.ps1" -SourcePath $(TargetDir) -DestinationDir $(SolutionDir)Release)</PostBuildEvent>
   </PropertyGroup>
 </Project>
