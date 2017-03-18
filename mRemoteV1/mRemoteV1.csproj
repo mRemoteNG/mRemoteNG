@@ -1256,6 +1256,10 @@ set solutionDir=$(SolutionDir)\
 set targetDir=%25cd%25
 set psScriptsDir=$(SolutionDir)Tools
 
+echo Testing params:
+echo $(CertPath)
+echo $(CertPassword)
+
 :: Call the post build powershell script
 powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremotev1.ps1" -SolutionDir "%25solutionDir%25" -TargetDir "%25targetDir%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25"</PostBuildEvent>
   </PropertyGroup>
