@@ -44,7 +44,8 @@ if ($CertificatePassword -eq "") {
 try {
     $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($CertificatePath, (ConvertTo-SecureString -String $CertificatePassword -AsPlainText -Force)) -ErrorAction Stop
 } catch {
-    Write-Output "Certificate password was not correct - we won't sign files."
+    Write-Output "Error loading certificate file - we won't sign files."
+    Write-Output $Error[0]
     return
 }
 
