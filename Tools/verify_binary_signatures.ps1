@@ -20,7 +20,7 @@ if ($ConfigurationName -match "Release") {
     foreach ($file in $signableFiles) {
         $signature = Get-AuthenticodeSignature -FilePath $file.FullName
         if ($signature.Status -ne "Valid") {
-            Write-Error "File $($file.FullName) does not have a valid signature."
+            Write-Warning "File $($file.FullName) does not have a valid signature."
             $badSignatureFound = $true
         }
     }
