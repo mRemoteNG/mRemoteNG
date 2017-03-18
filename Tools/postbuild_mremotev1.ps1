@@ -25,7 +25,7 @@ param (
 Write-Output "+=================================================================+"
 Write-Output "|                  Beginning mRemoteV1 Post Build                 |"
 Write-Output "+=================================================================+"
-Write-Output ([pscustomobject]$PSBoundParameters) | Format-Table -AutoSize -Wrap
+Write-Output ([pscustomobject]$PSBoundParameters) | ?{$_.Key -notmatch "Certificate"} | Format-Table -AutoSize -Wrap
 
 
 & "$PSScriptRoot\copy_puttyng.ps1" -SolutionDir $SolutionDir -TargetDir $TargetDir
