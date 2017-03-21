@@ -60,4 +60,9 @@ foreach ($file in $signableFiles) {
 }
 
 
+# Release certificate
+if ($cert -ne $null) {
+    $cert.Dispose()
+}
+
 Write-Output ""
