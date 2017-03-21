@@ -16,6 +16,6 @@ $path_outputExe = Join-Path -Path $TargetDir -ChildPath $TargetFileName
 
 # Set LargeAddressAware
 Write-Output "Setting LargeAddressAware on binary"
-& $path_editBin "/NOLOGO /largeaddressaware $path_outputExe"
+& $path_editBin "/largeaddressaware" "$path_outputExe"
 
 Write-Output ""
