@@ -33,6 +33,7 @@ Format-Table -AutoSize -Wrap -InputObject @{
     "TargetDir" = $TargetDir
     "TargetFileName" = $TargetFileName
     "ConfigurationName" = $ConfigurationName
+    "ExcludeFromSigning" = $ExcludeFromSigning
 }
 
 

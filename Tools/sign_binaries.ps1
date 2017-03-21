@@ -59,8 +59,9 @@ Write-Output "Getting files from path: $TargetDir"
 $signableFiles = Get-ChildItem -Path $TargetDir -Recurse | ?{$_.Extension -match "dll|exe|msi"} | ?{$Exclude -notcontains $_.Name}
 
 $excluded_files = Get-ChildItem -Path $TargetDir -Recurse | ?{$_.Extension -match "dll|exe|msi"} | ?{$Exclude -contains $_.Name}
-Write-Output "The following files were excluded from signing due to being on the exclusion list:"
-$excluded_files | %{Write-Output $_.FullName}
+$excluded_files | ForEach-Object `
+    -Begin { Write-Output "The following files were excluded from signing due to being on the exclusion list:" } `
+    -Process { Write-Output "-- $($_.FullName)" }
 
 Write-Output "Signable files count: $($signableFiles.Count)"
 
