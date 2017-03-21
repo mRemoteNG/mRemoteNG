@@ -11,6 +11,10 @@ param (
     [Parameter(Mandatory=$true)]
     $ConfigurationName,
 
+    [string[]]
+    # File names to exclude from signing
+    $Exclude,
+
     [string]
     # The code signing certificate to use when signing the files.
     $CertificatePath,
