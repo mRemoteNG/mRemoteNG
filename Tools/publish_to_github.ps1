@@ -54,11 +54,18 @@ param (
     [string]
     [Parameter(Mandatory=$true)]
     # The OAuth2 token to use for authentication.
-    $AuthToken
+    $AuthToken,
+
+    [switch]
+    # Enable this switch to treat $Description as a Base64 encoded string. It will be decoded before being used elsewhere in the script.
+    $DescriptionIsBase64Encoded
 )
 
 
 $githubUrl = 'https://api.github.com'
+if ($DescriptionIsBase64Encoded) {
+    $Description = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Description)))
+}
 
 
 function Publish-Release {
