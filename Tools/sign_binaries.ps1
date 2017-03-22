@@ -46,6 +46,7 @@ if ($CertificatePassword -eq "") {
 }
 
 try {
+    Write-Output "Trying to open cert: $($CertificatePath)"
     Write-Output "Trying to unlock cert with pass: $($CertificatePassword)"
     $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($CertificatePath, $CertificatePassword) -ErrorAction Stop
 } catch {
