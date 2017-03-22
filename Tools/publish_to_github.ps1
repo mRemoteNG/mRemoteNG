@@ -155,9 +155,9 @@ function Upload-ReleaseAsset {
     )
 
     $UploadUri = $UploadUri -replace "(\{[\w,\?]*\})$"
-    $fileName = Split-Path -Path $FilePath -Leaf
+    $file = Get-Item -Path $FilePath
 
-    $req_uploadZipAsset = Invoke-WebRequest -Uri "$($UploadUri)?name=$fileName" -Method Post -Headers @{"Authorization"="token $AuthToken"} -ContentType $ContentType -InFile $FilePath -ErrorAction Stop
+    $req_uploadZipAsset = Invoke-WebRequest -Uri "$($UploadUri)?name=$($file.Name)" -Method Post -Headers @{"Authorization"="token $AuthToken"} -ContentType $ContentType -InFile $file.FullName -ErrorAction Stop
 }
 
 
