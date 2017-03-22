@@ -31,6 +31,7 @@ param (
 
     [string]
     [Parameter(Mandatory=$true)]
+    [ValidateSet("true","false")]
     # true/false
     $IsDraft,
 
@@ -42,7 +43,6 @@ param (
 
     [string]
     [Parameter(Mandatory=$true)]
-    [ValidateSet("true","false")]
     # Path to the zip file to upload with the release
     $ZipFilePath,
 
