@@ -29,18 +29,20 @@ param (
     #
     $Description,
 
-    [bool]
+    [string]
     [Parameter(Mandatory=$true)]
-    #
+    # true/false
     $IsDraft,
 
-    [bool]
+    [string]
     [Parameter(Mandatory=$true)]
-    #
+    [ValidateSet("true","false")]
+    # true/false
     $IsPrerelease,
 
     [string]
     [Parameter(Mandatory=$true)]
+    [ValidateSet("true","false")]
     # Path to the zip file to upload with the release
     $ZipFilePath,
 
