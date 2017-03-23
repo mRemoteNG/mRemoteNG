@@ -1247,44 +1247,19 @@
     <Reference Include="mscorlib" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>powershell -noprofile -command "sleep 2"
-call "$(DevEnvDir)..\tools\vsvars32.bat"
-set /p buildenv=&lt;buildenv.tmp
-
-echo Copy PUTTYNG to correct directory
-copy /Y "$(SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" .\
-
-echo Move Help files to correct directory
-IF EXIST Help (
-   del /s /q Help &gt;NUL
-   rmdir /s /q Help &gt;NUL
-)
-move /Y Resources\Help .\
+    <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
+:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
 
 powershell -noprofile -command "sleep 2"
-rmdir /s /q Resources &gt;NUL
+set /p buildenv=&lt;buildenv.tmp
+set solutionDir=$(SolutionDir)\
+set targetDir=%25cd%25
+set psScriptsDir=$(SolutionDir)Tools
+set certPath=$(CertPath)
+set certPassword=$(CertPassword)
 
-echo Set LargeAddressAware on binary
-editbin /largeaddressaware mRemoteNG.exe
-
-
-IF EXIST C:\mRemoteNG_code_signing_cert.pfx (
-    echo Signing binaries
-    IF %25buildenv: Portable=%25==Release (
-        powershell "&amp;""$(SolutionDir)Tools\signfiles.ps1""" '%25cd%25'
-    )
-)
-
-IF %25buildenv: Portable=%25==Release (
-    echo Remove unnecessary files from Release versions
-    rmdir /s /q app.publish
-    del /q *.pdb *.publish *.xml *.backup *.log *vshost* *.tmp
-)
-
-IF %25buildenv: =%25==ReleasePortable (
-  echo Package ZIP Release Portable
-  "$(SolutionDir)Tools\build-relport.cmd"
-)</PostBuildEvent>
+:: Call the post build powershell script
+powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremotev1.ps1" -SolutionDir "%25solutionDir%25" -TargetDir "%25targetDir%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "%25certPath%25" -CertificatePassword "%25certPassword%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
