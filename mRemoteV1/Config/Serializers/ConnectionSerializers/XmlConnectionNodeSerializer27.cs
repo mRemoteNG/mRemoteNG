@@ -11,13 +11,8 @@ namespace mRemoteNG.Config.Serializers
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
-        private readonly SaveFilter _saveFilter = new SaveFilter();
+        private readonly SaveFilter _saveFilter;
 
-        public XmlConnectionNodeSerializer27(ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
-        {
-            _cryptographyProvider = cryptographyProvider;
-            _encryptionKey = encryptionKey;
-        }
 
         public XmlConnectionNodeSerializer27(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {
@@ -46,7 +41,9 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
             element.Add(new XAttribute("Id", connectionInfo.ConstantID));
 
-            element.Add(new XAttribute("CredentialId", connectionInfo.CredentialRecord?.Id.ToString() ?? ""));
+            element.Add(_saveFilter.SaveCredentialId
+                ? new XAttribute("CredentialId", connectionInfo.CredentialRecord?.Id.ToString() ?? "")
+                : new XAttribute("CredentialId", ""));
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));

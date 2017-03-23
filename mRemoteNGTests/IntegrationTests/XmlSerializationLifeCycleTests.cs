@@ -22,7 +22,10 @@ namespace mRemoteNGTests.IntegrationTests
         {
             _originalModel = SetupConnectionTreeModel();
             var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            var nodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
+            var nodeSerializer = new XmlConnectionNodeSerializer27(
+                cryptoProvider, 
+                _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                new SaveFilter());
             _serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
         }
 
@@ -73,7 +76,10 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
             cryptoProvider.KeyDerivationIterations = 5000;
-            var nodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
+            var nodeSerializer = new XmlConnectionNodeSerializer27(
+                cryptoProvider, 
+                _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                new SaveFilter());
             _serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
             var serializedContent = _serializer.Serialize(_originalModel);
             _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);

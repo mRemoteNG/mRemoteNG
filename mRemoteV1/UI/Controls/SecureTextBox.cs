@@ -7,7 +7,7 @@ namespace mRemoteNG.UI.Controls
 {
     public partial class SecureTextBox : TextBox
     {
-        public SecureString SecureString { get; private set; } = new SecureString();
+        public SecureString SecString { get; private set; } = new SecureString();
 
         public SecureTextBox()
         {
@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Controls
 
         private void SecureTextBox_TextChanged(object sender, System.EventArgs e)
         {
-            SecureString = Text.ConvertToSecureString();
+            SecString = Text.ConvertToSecureString();
         }
     }
 }

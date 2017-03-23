@@ -17,13 +17,12 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsUvncsc;
         private ToolStripMenuItem _mMenToolsComponentsCheck;
         private ToolStripMenuItem _credentialManagerToolStripMenuItem;
-        private readonly ICredentialRepositoryList _credentialProviderCatalog;
-        private readonly Form _form;
 
-        public ToolsMenu(Form form, ICredentialRepositoryList credentialProviderCatalog)
+        public Form MainForm { get; set; }
+        public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
+
+        public ToolsMenu()
         {
-            _form = form;
-            _credentialProviderCatalog = credentialProviderCatalog;
             Initialize();
         }
 
@@ -122,14 +121,15 @@ namespace mRemoteNG.UI.Menu
         {
             var pages = new UserControl[]
             {
-                new CredentialListPage(_credentialProviderCatalog)
+                new CredentialListPage(CredentialProviderCatalog)
                 {
                     DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
                 },
-                new CredentialRepositoriesPage(_credentialProviderCatalog)
+                new CredentialRepositoriesPage(CredentialProviderCatalog)
             };
+
             var credentialManagerForm = new CredentialManagerForm(pages);
-            credentialManagerForm.CenterOnTarget(_form);
+            credentialManagerForm.CenterOnTarget(MainForm);
             credentialManagerForm.Show();
         }
 

@@ -35,18 +35,11 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenFileImport;
         private ToolStripMenuItem _mMenReconnectAll;
 
-        private readonly ConnectionTreeWindow _connectionTreeWindow;
-        private readonly IConnectionInitiator _connectionInitiator;
+        public ConnectionTreeWindow TreeWindow { get; set; }
+        public IConnectionInitiator ConnectionInitiator { get; set; }
 
-        public MainFileMenu(ConnectionTreeWindow connectionTreeWindow, IConnectionInitiator connectionInitiator)
+        public MainFileMenu()
         {
-            if (connectionTreeWindow == null)
-                throw new ArgumentNullException(nameof(connectionTreeWindow));
-            if (connectionInitiator == null)
-                throw new ArgumentNullException(nameof(connectionInitiator));
-
-            _connectionTreeWindow = connectionTreeWindow;
-            _connectionInitiator = connectionInitiator;
             Initialize();
         }
 
@@ -100,7 +93,7 @@ namespace mRemoteNG.UI.Menu
             Name = "mMenFile";
             Size = new System.Drawing.Size(37, 20);
             Text = Language.strMenuFile;
-            DropDownOpening += mMenFile_DropDownOpening;
+            //DropDownOpening += mMenFile_DropDownOpening;
             // 
             // mMenFileNewConnection
             // 
@@ -263,9 +256,9 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region File
-        private void mMenFile_DropDownOpening(object sender, EventArgs e)
+        internal void mMenFile_DropDownOpening(object sender, EventArgs e)
         {
-            var selectedNodeType = _connectionTreeWindow.SelectedNode?.GetTreeNodeType();
+            var selectedNodeType = TreeWindow.SelectedNode?.GetTreeNodeType();
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (selectedNodeType)
             {
@@ -335,13 +328,13 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileNewConnection_Click(object sender, EventArgs e)
         {
-            _connectionTreeWindow.ConnectionTree.AddConnection();
+            TreeWindow.ConnectionTree.AddConnection();
             Runtime.SaveConnectionsAsync();
         }
 
         private void mMenFileNewFolder_Click(object sender, EventArgs e)
         {
-            _connectionTreeWindow.ConnectionTree.AddFolder();
+            TreeWindow.ConnectionTree.AddFolder();
             Runtime.SaveConnectionsAsync();
         }
 
@@ -387,19 +380,19 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileDelete_Click(object sender, EventArgs e)
         {
-            _connectionTreeWindow.ConnectionTree.DeleteSelectedNode();
+            TreeWindow.ConnectionTree.DeleteSelectedNode();
             Runtime.SaveConnectionsAsync();
         }
 
         private void mMenFileRename_Click(object sender, EventArgs e)
         {
-            _connectionTreeWindow.ConnectionTree.RenameSelectedNode();
+            TreeWindow.ConnectionTree.RenameSelectedNode();
             Runtime.SaveConnectionsAsync();
         }
 
         private void mMenFileDuplicate_Click(object sender, EventArgs e)
         {
-            _connectionTreeWindow.ConnectionTree.DuplicateSelectedNode();
+            TreeWindow.ConnectionTree.DuplicateSelectedNode();
             Runtime.SaveConnectionsAsync();
         }
 
@@ -425,7 +418,7 @@ namespace mRemoteNG.UI.Menu
                 foreach (var i in icList)
                 {
                     i.Protocol.Close();
-                    _connectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
+                    ConnectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
                 }
 
                 // throw it on the garbage collector
@@ -436,7 +429,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileImportFromFile_Click(object sender, EventArgs e)
         {
-            var selectedNode = _connectionTreeWindow.SelectedNode;
+            var selectedNode = TreeWindow.SelectedNode;
             ContainerInfo importDestination;
             if (selectedNode == null)
                 importDestination = Runtime.ConnectionTreeModel.RootNodes.First();

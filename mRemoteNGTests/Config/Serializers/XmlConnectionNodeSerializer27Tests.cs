@@ -3,7 +3,9 @@ using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using NSubstitute;
 using NUnit.Framework;
 
 
@@ -12,13 +14,14 @@ namespace mRemoteNGTests.Config.Serializers
     public class XmlConnectionNodeSerializer27Tests
     {
         private XmlConnectionNodeSerializer27 _connectionNodeSerializer;
+        private ICryptographyProvider _cryptographyProvider;
 
         [SetUp]
         public void Setup()
         {
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(
+            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(
                 BlockCipherEngines.AES, BlockCipherModes.GCM);
-            _connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, "myPassword1".ConvertToSecureString());
+            _connectionNodeSerializer = new XmlConnectionNodeSerializer27(_cryptographyProvider, "myPassword1".ConvertToSecureString(), new SaveFilter());
         }
 
         [Test]
@@ -75,6 +78,7 @@ namespace mRemoteNGTests.Config.Serializers
                 Username = "myuser",
                 Domain = "superdomain",
                 Password = "pass",
+                CredentialRecord = Substitute.For<ICredentialRecord>(),
                 Hostname = "somehost",
                 ExtApp = "myextapp",
                 PreExtApp = "preext1",
@@ -107,6 +111,7 @@ namespace mRemoteNGTests.Config.Serializers
                     yield return new TestCaseData("RDGatewayPassword", ConnectionInfo);
                     yield return new TestCaseData("VNCProxyUsername", ConnectionInfo);
                     yield return new TestCaseData("VNCProxyPassword", ConnectionInfo);
+                    yield return new TestCaseData("CredentialId", ConnectionInfo);
                 }
             }
 

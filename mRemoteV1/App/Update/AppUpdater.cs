@@ -272,7 +272,7 @@ namespace mRemoteNG.App.Update
                             throw updateAuthenticode.Exception;
                         }
 
-                        throw new Exception(updateAuthenticode.StatusMessage);
+                        throw new Exception(updateAuthenticode.GetStatusMessage());
                     }
 #endif
 

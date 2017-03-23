@@ -12,7 +12,7 @@ namespace mRemoteNG.Messages
 
 
 	    public Message()
-            : this(MessageClass.InformationMsg, "", false)
+            : this(MessageClass.InformationMsg, "")
         {
         }
 

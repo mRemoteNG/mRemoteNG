@@ -5,21 +5,20 @@ using mRemoteNG.Tools;
 using mRemoteNG.App;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
-//using SHDocVw;
-
 namespace mRemoteNG.Connection.Protocol.Http
 {
 	public class HTTPBase : ProtocolBase
 	{
         #region Private Properties
 		private Control wBrowser;
-		public string httpOrS;
-		public int defaultPort;
+	    protected string httpOrS;
+	    protected int defaultPort;
 		private string tabTitle;
         #endregion
 				
         #region Public Methods
-		public HTTPBase(RenderingEngine RenderingEngine)
+
+	    protected HTTPBase(RenderingEngine RenderingEngine)
 		{
 			try
 			{
@@ -34,17 +33,11 @@ namespace mRemoteNG.Connection.Protocol.Http
 				{
                     Control = new WebBrowser();
 				}
-				
-				NewExtended();
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectionFailed, ex);
 			}
-		}
-
-	    public virtual void NewExtended()
-		{
 		}
 				
 		public override bool Initialize()
@@ -71,13 +64,16 @@ namespace mRemoteNG.Connection.Protocol.Http
                     if (GeckoBrowser != null)
                     {
                         GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
-                        //GeckoBrowser.Tab.LastTabRemoved += wBrowser_LastTabRemoved;
+                        GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
+                    }
+                    else
+                    {
+                        throw new Exception("Failed to initialize Gecko Rendering Engine.");
                     }
                 }
                 else
 				{
                     var objWebBrowser = (WebBrowser)wBrowser;
-                    //SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
 					objWebBrowser.ScrollBarsEnabled = true;
 
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
@@ -85,8 +81,6 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     objWebBrowser.Navigated += wBrowser_Navigated;
 					objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
-				    //objWebBrowser.NewWindow3 += wBrowser_NewWindow3;
-				    //objAxWebBrowser.NewWindow3 += wBrowser_NewWindow3;
 				}
 				
 				return true;
@@ -178,24 +172,6 @@ namespace mRemoteNG.Connection.Protocol.Http
 			objWebBrowser.Navigated -= wBrowser_Navigated;
 		}
 
-#if false
-        private void wBrowser_NewWindow3(ref object ppDisp, ref bool Cancel, uint dwFlags, string bstrUrlContext, string bstrUrl)
-		{
-			if ((dwFlags & (long)NWMF.NWMF_OVERRIDEKEY) > 0)
-			{
-				Cancel = false;
-			}
-			else
-			{
-				Cancel = true;
-			}
-		}
-              
-		private void wBrowser_LastTabRemoved(object sender)
-		{
-            Close();
-		}
-#endif
         private void wBrowser_DocumentTitleChanged(object sender, EventArgs e)
 		{
 			try
@@ -301,27 +277,6 @@ namespace mRemoteNG.Connection.Protocol.Http
             Gecko = 2
 		}
 
-#if false
-        private enum NWMF
-		{
-			// ReSharper disable InconsistentNaming
-			NWMF_UNLOADING = 0x1,
-			NWMF_USERINITED = 0x2,
-			NWMF_FIRST = 0x4,
-			NWMF_OVERRIDEKEY = 0x8,
-			NWMF_SHOWHELP = 0x10,
-			NWMF_HTMLDIALOG = 0x20,
-			NWMF_FROMDIALOGCHILD = 0x40,
-			NWMF_USERREQUESTED = 0x80,
-			NWMF_USERALLOWED = 0x100,
-			NWMF_FORCEWINDOW = 0x10000,
-			NWMF_FORCETAB = 0x20000,
-			NWMF_SUGGESTWINDOW = 0x40000,
-			NWMF_SUGGESTTAB = 0x80000,
-			NWMF_INACTIVETAB = 0x100000
-			// ReSharper restore InconsistentNaming
-		}
-#endif
 #endregion
 	}
 }

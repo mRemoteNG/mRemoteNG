@@ -18,6 +18,7 @@ namespace mRemoteNG.UI.Forms
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.grpProperties = new System.Windows.Forms.GroupBox();
+            this.chkAssignedCredential = new System.Windows.Forms.CheckBox();
             this.grpFile = new System.Windows.Forms.GroupBox();
             this.lblFileFormat = new System.Windows.Forms.Label();
             this.lblFileName = new System.Windows.Forms.Label();
@@ -131,6 +132,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // grpProperties
             // 
+            this.grpProperties.Controls.Add(this.chkAssignedCredential);
             this.grpProperties.Controls.Add(this.lblUncheckProperties);
             this.grpProperties.Controls.Add(this.chkInheritance);
             this.grpProperties.Controls.Add(this.chkUsername);
@@ -142,6 +144,18 @@ namespace mRemoteNG.UI.Forms
             this.grpProperties.TabIndex = 1;
             this.grpProperties.TabStop = false;
             this.grpProperties.Text = "Export Properties";
+            // 
+            // chkAssignedCredential
+            // 
+            this.chkAssignedCredential.AutoSize = true;
+            this.chkAssignedCredential.Checked = true;
+            this.chkAssignedCredential.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAssignedCredential.Location = new System.Drawing.Point(143, 32);
+            this.chkAssignedCredential.Name = "chkAssignedCredential";
+            this.chkAssignedCredential.Size = new System.Drawing.Size(119, 17);
+            this.chkAssignedCredential.TabIndex = 5;
+            this.chkAssignedCredential.Text = "Assigned Credential";
+            this.chkAssignedCredential.UseVisualStyleBackColor = true;
             // 
             // grpFile
             // 
@@ -183,6 +197,7 @@ namespace mRemoteNG.UI.Forms
             this.cboFileFormat.Name = "cboFileFormat";
             this.cboFileFormat.Size = new System.Drawing.Size(294, 21);
             this.cboFileFormat.TabIndex = 4;
+            this.cboFileFormat.SelectedIndexChanged += new System.EventHandler(this.cboFileformat_SelectedIndexChanged);
             // 
             // grpItems
             // 
@@ -299,5 +314,7 @@ namespace mRemoteNG.UI.Forms
 		private System.Windows.Forms.RadioButton rdoExportSelectedFolder;
 		private System.Windows.Forms.RadioButton rdoExportEverything;
         #endregion
-	}
+
+        private CheckBox chkAssignedCredential;
+    }
 }

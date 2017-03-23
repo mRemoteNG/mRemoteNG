@@ -1,4 +1,5 @@
 ﻿using System;
+using mRemoteNG.UI;
 using NUnit.Framework;
 using mRemoteNG.UI.Window;
 

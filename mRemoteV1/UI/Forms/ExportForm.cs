@@ -47,20 +47,13 @@ namespace mRemoteNG.UI.Forms
 		{
 			get
 			{
-				if (rdoExportSelectedFolder.Checked)
-				{
+			    if (rdoExportSelectedFolder.Checked)
 					return ExportScope.SelectedFolder;
-				}
-				else if (rdoExportSelectedConnection.Checked)
-				{
-					return ExportScope.SelectedConnection;
-				}
-				else
-				{
-					return ExportScope.Everything;
-				}
+			    if (rdoExportSelectedConnection.Checked)
+			        return ExportScope.SelectedConnection;
+			    return ExportScope.Everything;
 			}
-			set
+            set
 			{
 				switch (value)
 				{
@@ -142,7 +135,13 @@ namespace mRemoteNG.UI.Forms
 				chkDomain.Checked = value;
 			}
 		}
-			
+
+        public bool IncludeAssignedCredential
+        {
+            get { return chkAssignedCredential.Checked; }
+            set { chkAssignedCredential.Checked = value; }
+        }
+
         public bool IncludeInheritance
 		{
 			get
@@ -160,19 +159,15 @@ namespace mRemoteNG.UI.Forms
 		public ExportForm()
 		{
 			InitializeComponent();
-				
 			Runtime.FontOverride(this);
-				
 			SelectedFolder = null;
 			SelectedConnection = null;
-				
 			btnOK.Enabled = false;
 		}
         #endregion
 			
         #region Private Methods
         #region Event Handlers
-
         private void ExportForm_Load(object sender, EventArgs e)
 		{
 			cboFileFormat.Items.Clear();
@@ -225,6 +220,24 @@ namespace mRemoteNG.UI.Forms
 		{
 			DialogResult = DialogResult.Cancel;
 		}
+
+        private void cboFileformat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SaveFormat == ConnectionsSaver.Format.mRXML)
+            {
+                chkUsername.Enabled = false;
+                chkPassword.Enabled = false;
+                chkDomain.Enabled = false;
+                chkAssignedCredential.Enabled = true;
+            }
+            else
+            {
+                chkUsername.Enabled = true;
+                chkPassword.Enabled = true;
+                chkDomain.Enabled = true;
+                chkAssignedCredential.Enabled = false;
+            }
+        }
         #endregion
 			
 		private void ApplyLanguage()
@@ -245,6 +258,7 @@ namespace mRemoteNG.UI.Forms
 			chkUsername.Text = Language.strCheckboxUsername;
 			chkPassword.Text = Language.strCheckboxPassword;
 			chkDomain.Text = Language.strCheckboxDomain;
+		    chkAssignedCredential.Text = Language.strAssignedCredential;
 			chkInheritance.Text = Language.strCheckboxInheritance;
 			lblUncheckProperties.Text = Language.strUncheckProperties;
 				

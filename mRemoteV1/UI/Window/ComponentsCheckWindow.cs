@@ -438,7 +438,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Failed to properly show the ComponentsWindow", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("Failed to properly show the ComponentsWindow", ex);
             }
         }
         #endregion

@@ -243,10 +243,12 @@ namespace mRemoteNG.Config.Connections
                 var factory = new CryptographyProviderFactory();
                 var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
                 cryptographyProvider.KeyDerivationIterations = mRemoteNG.Settings.Default.EncryptionKeyDerivationIterations;
-			    var connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptographyProvider, ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString());
+			    var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                    cryptographyProvider, 
+                    ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                    SaveFilter);
                 var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
 				{
-                    SaveFilter = SaveFilter,
                     UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
@@ -262,7 +264,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private void SaveToMremotengFormattedCsv()
 		{
-            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveFilter = SaveFilter };
+            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat(SaveFilter);
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
             var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);

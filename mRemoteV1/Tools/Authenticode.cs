@@ -1,3 +1,4 @@
+#if !PORTABLE
 using System;
 using System.Windows.Forms;
 using System.IO;
@@ -79,6 +80,7 @@ namespace mRemoteNG.Tools
 			    var windowHandle = DisplayParentForm?.Handle ?? IntPtr.Zero;
 					
 				_trustProviderErrorCode = NativeMethods.WinVerifyTrust(windowHandle, NativeMethods.WINTRUST_ACTION_GENERIC_VERIFY_V2, trustDataPointer);
+			    // ReSharper disable once SwitchStatementMissingSomeCases
 				switch (_trustProviderErrorCode)
 				{
 					case NativeMethods.TRUST_E_NOSIGNATURE:
@@ -139,54 +141,51 @@ namespace mRemoteNG.Tools
 
 	    private DisplayContextValue DisplayContext {get; set;}
 	    private Form DisplayParentForm {get; set;}
-	    internal Exception Exception {get; set;}
+	    internal Exception Exception {get; private set;}
 	    private string FilePath {get; set;}
-	    internal bool RequireThumbprintMatch { get; set;}
+        internal bool RequireThumbprintMatch { get; set;}
 
-	    internal StatusValue Status { get; set; }
+	    internal StatusValue Status { get; private set; }
 
-	    public string StatusMessage
-		{
-			get
-			{
-			    // ReSharper disable once SwitchStatementMissingSomeCases
-				switch (Status)
-				{
-					case StatusValue.Verified:
-						return "The file was verified successfully.";
-					case StatusValue.FileNotExist:
-						return "The specified file does not exist.";
-					case StatusValue.FileEmpty:
-						return "The specified file is empty.";
-					case StatusValue.NoSignature:
-						return "The specified file is not digitally signed.";
-					case StatusValue.NoThumbprintToMatch:
-						return "A thumbprint match is required but no thumbprint to match against was specified.";
-					case StatusValue.ThumbprintNotMatch:
-                        /* (char)0x2260 == the "not equal to" symbol (which I cannot print in here without changing the encoding of the file)
-                         * Fancy...
-                         * 
-                         * "<>" is  fiarly cryptic for non-programers
-                         * So is "!="
-                         * "=/=" gets the job done, no?
-                         * What about plain old English (or localized value): X is not equal to Y?
-                         * :P
-                         */
-                        return $"The thumbprint does not match. {_thumbprint} {(char)0x2260} {ThumbprintToMatch}.";
-					case StatusValue.TrustProviderError:
-						var ex = new Win32Exception(_trustProviderErrorCode);
-						return $"The trust provider returned an error. {ex.Message}";
-					case StatusValue.UnhandledException:
-						return $"An unhandled exception occurred. {Exception.Message}";
-				    default:
-						return "The status is unknown.";
-				}
-			}
-		}
+	    public string GetStatusMessage()
+	    {
+	        // ReSharper disable once SwitchStatementMissingSomeCases
+	        switch (Status)
+	        {
+	            case StatusValue.Verified:
+	                return "The file was verified successfully.";
+	            case StatusValue.FileNotExist:
+	                return "The specified file does not exist.";
+	            case StatusValue.FileEmpty:
+	                return "The specified file is empty.";
+	            case StatusValue.NoSignature:
+	                return "The specified file is not digitally signed.";
+	            case StatusValue.NoThumbprintToMatch:
+	                return "A thumbprint match is required but no thumbprint to match against was specified.";
+	            case StatusValue.ThumbprintNotMatch:
+	                /* (char)0x2260 == the "not equal to" symbol (which I cannot print in here without changing the encoding of the file)
+                     * Fancy...
+                     * 
+                     * "<>" is  fiarly cryptic for non-programers
+                     * So is "!="
+                     * "=/=" gets the job done, no?
+                     * What about plain old English (or localized value): X is not equal to Y?
+                     * :P
+                     */
+	                return $"The thumbprint does not match. {_thumbprint} {(char) 0x2260} {ThumbprintToMatch}.";
+	            case StatusValue.TrustProviderError:
+	                var ex = new Win32Exception(_trustProviderErrorCode);
+	                return $"The trust provider returned an error. {ex.Message}";
+	            case StatusValue.UnhandledException:
+	                return $"An unhandled exception occurred. {Exception.Message}";
+	            default:
+	                return "The status is unknown.";
+	        }
+	    }
 			
 		private string _thumbprint;
 
-	    internal string ThumbprintToMatch { get; set;}
+        internal string ThumbprintToMatch { get; set;}
 			
 		private int _trustProviderErrorCode;
 
@@ -294,3 +293,4 @@ namespace mRemoteNG.Tools
         #endregion
 	}
 }
+#endif

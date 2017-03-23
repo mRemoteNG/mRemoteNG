@@ -29,7 +29,7 @@ namespace mRemoteNGTests.UI.Controls
             var textBox = new SecureTextBoxTester(_testForm.secureTextBox1.Name);
             const string textToSend = "abc123";
             textBox.Properties.Text = textToSend;
-            Assert.That(textBox.Properties.SecureString.ConvertToUnsecureString(), Is.EqualTo(textToSend));
+            Assert.That(textBox.Properties.SecString.ConvertToUnsecureString(), Is.EqualTo(textToSend));
         }
     }
 }

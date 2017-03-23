@@ -59,9 +59,9 @@ namespace mRemoteNG.UI.Controls
 
         private bool Verify()
         {
-            return secureTextBox1.SecureString.Length == secureTextBox2.SecureString.Length &&
-                   secureTextBox1.SecureString.ConvertToUnsecureString() ==
-                   secureTextBox2.SecureString.ConvertToUnsecureString();
+            return secureTextBox1.SecString.Length == secureTextBox2.SecString.Length &&
+                   secureTextBox1.SecString.ConvertToUnsecureString() ==
+                   secureTextBox2.SecString.ConvertToUnsecureString();
         }
 
         private void TogglePasswordMatchIndicator(bool passwordsMatch)
@@ -85,7 +85,7 @@ namespace mRemoteNG.UI.Controls
             if (Verify() && !PasswordsMatch)
             {
                 PasswordsMatch = true;
-                SecureString = secureTextBox1.SecureString;
+                SecureString = secureTextBox1.SecString;
                 RaiseVerifiedEvent();
             }
             else

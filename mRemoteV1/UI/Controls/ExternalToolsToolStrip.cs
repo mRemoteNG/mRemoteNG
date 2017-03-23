@@ -116,13 +116,14 @@ namespace mRemoteNG.UI.Controls
         }
         #endregion
 
-
+        // CodeAyalysis doesn't like null propagation
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "components")]
         protected override void Dispose(bool disposing)
         {
             try
             {
-                if (disposing)
-                    components?.Dispose();
+                if (!disposing) return;
+                components?.Dispose();
             }
             finally
             {

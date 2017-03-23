@@ -8,6 +8,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -20,15 +21,10 @@ namespace mRemoteNG.UI.Controls
         private ContextMenuStrip _mnuQuickConnectProtocol;
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
-        private readonly IConnectionInitiator _connectionInitiator;
 
 
-        public QuickConnectToolStrip(IConnectionInitiator connectionInitiator)
+        public QuickConnectToolStrip()
         {
-            if (connectionInitiator == null)
-                throw new ArgumentNullException(nameof(connectionInitiator));
-
-            _connectionInitiator = connectionInitiator;
             Initialize();
             ApplyThemes();
             PopulateQuickConnectProtocolMenu();
@@ -169,7 +165,7 @@ namespace mRemoteNG.UI.Controls
                     return;
                 }
                 _cmbQuickConnect.Add(connectionInfo);
-                _connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                FrmMain.Default._connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {
@@ -219,17 +215,19 @@ namespace mRemoteNG.UI.Controls
             var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
             if (tag != null)
             {
-                _connectionInitiator.OpenConnection(tag);
+                FrmMain.Default._connectionInitiator.OpenConnection(tag);
             }
         }
         #endregion
 
+        // CodeAyalysis doesn't like null propagation
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "components")]
         protected override void Dispose(bool disposing)
         {
             try
             {
-                if (disposing)
-                    components?.Dispose();
+                if (!disposing) return;
+                components?.Dispose();
             }
             finally
             {

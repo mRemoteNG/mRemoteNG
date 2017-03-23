@@ -48,6 +48,7 @@ namespace mRemoteNG.UI.Controls
         {
             InitializeComponent();
             SetupConnectionTreeView();
+            UseOverlays = false;
         }
 
         #region ConnectionTree Setup
