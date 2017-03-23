@@ -44,11 +44,11 @@ node('windows') {
     }
 	
 	stage ('Run Unit Tests (Normal - MSI)') {
-    	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && VSTest.Console.exe /TestAdapterPath:${nunitTestAdapterPath} \"${jobDir}\\mRemoteNGTests\\bin\\Release\\mRemoteNGTests.dll\""
+    	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && VSTest.Console.exe /logger:trx /TestAdapterPath:${nunitTestAdapterPath} \"${jobDir}\\mRemoteNGTests\\bin\\Release\\mRemoteNGTests.dll\""
 	}
 
 	stage ('Run Unit Tests (Portable)') {
-    	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && VSTest.Console.exe /TestAdapterPath:${nunitTestAdapterPath} \"${jobDir}\\mRemoteNGTests\\bin\\Release Portable\\mRemoteNGTests.dll\""
+    	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && VSTest.Console.exe /logger:trx /TestAdapterPath:${nunitTestAdapterPath} \"${jobDir}\\mRemoteNGTests\\bin\\Release Portable\\mRemoteNGTests.dll\""
 	}
 	
     stage ('Publish to GitHub') {
