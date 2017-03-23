@@ -31,14 +31,13 @@ node('windows') {
 
     withCredentials([file(credentialsId: '9b674d57-6792-48e3-984a-4d1bab2abb64', variable: 'CODE_SIGNING_CERT')]) {
         stage ('Build mRemoteNG (Normal - MSI)') {
-            bat "echo ${env.CODE_SIGNING_CERT} > C:\\myfile.txt"
     	    bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo /p:Configuration=\"Release Installer\" /p:Platform=x86 /p:CertPath=\"${env.CODE_SIGNING_CERT}\" /p:CertPassword=${env.MRNG_CERT_PASSWORD} \"${jobDir}\\mRemoteV1.sln\""
-            archiveArtifacts artifacts: "Release\\*.msi", caseSensitive: false, onlyIfSuccessful: true
+            archiveArtifacts artifacts: "Release\\*.msi", caseSensitive: false, onlyIfSuccessful: true, fingerprint: true
     	}
     
     	stage ('Build mRemoteNG (Portable)') {
 	        bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo /p:Configuration=\"Release Portable\" /p:Platform=x86 /p:CertPath=\"${env.CODE_SIGNING_CERT}\" /p:CertPassword=${env.MRNG_CERT_PASSWORD} \"${jobDir}\\mRemoteV1.sln\""
-    	    archiveArtifacts artifacts: "Release\\*.zip", caseSensitive: false, onlyIfSuccessful: true
+    	    archiveArtifacts artifacts: "Release\\*.zip", caseSensitive: false, onlyIfSuccessful: true, fingerprint: true
         }
     }
 	
