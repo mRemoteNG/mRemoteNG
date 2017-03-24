@@ -164,5 +164,5 @@ function Upload-ReleaseAsset {
 
 $release = Publish-Release -Owner $Owner -Repository $Repository -ReleaseTitle $ReleaseTitle -TagName $TagName -TargetCommitish $TargetCommitish -Description $Description -IsDraft ([bool]::Parse($IsDraft)) -IsPrerelease ([bool]::Parse($IsPrerelease)) -AuthToken $AuthToken
 $zipUpload = Upload-ReleaseAsset -UploadUri $release.upload_url -FilePath $ZipFilePath -ContentType "application/zip" -AuthToken $AuthToken
-$msiUpload = Upload-ReleaseAsset -UploadUri $release.upload_url -FilePath $MsiFilePath -ContentType "binary/octetstream" -AuthToken $AuthToken
+$msiUpload = Upload-ReleaseAsset -UploadUri $release.upload_url -FilePath $MsiFilePath -ContentType "application/octet-stream" -AuthToken $AuthToken
 Write-Output $release
