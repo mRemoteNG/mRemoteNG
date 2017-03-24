@@ -13,7 +13,7 @@ node('windows') {
 	stage ('Checkout Branch') {
     	checkout([
     	    $class: 'GitSCM',
-    	    branches: [[name: '*/pipeline_tests']],
+    	    branches: [[name: '*/${env.TargetBranch}']],
             doGenerateSubmoduleConfigurations: false, 
             extensions: [],
             submoduleCfg: [], 
@@ -57,7 +57,7 @@ node('windows') {
             def msiPath = "${jobDir}\\Release\\*.zip"
             // because batch files suck at handling newline characters, we have to convert to base64 in groovy and back to text in powershell
             def base64Description = env.ReleaseDescription.bytes.encodeBase64().toString()
-            bat "powershell -ExecutionPolicy Bypass -File \"${jobDir}\\Tools\\publish_to_github.ps1\" -Owner \"mRemoteNG\" -Repository \"mRemoteNG\" -ReleaseTitle \"${env.ReleaseTitle}\" -TagName \"${env.TagName}\" -TargetCommitish \"${env.TargetCommit}\" -Description \"${base64Description}\" -IsDraft ${env.IsDraft} -IsPrerelease ${env.IsPreRelease} -ZipFilePath \"${zipPath}\" -MsiFilePath \"${msiPath}\" -AuthToken \"${env.GH_AUTH_TOKEN}\" -DescriptionIsBase64Encoded"
+            bat "powershell -ExecutionPolicy Bypass -File \"${jobDir}\\Tools\\publish_to_github.ps1\" -Owner \"mRemoteNG\" -Repository \"mRemoteNG\" -ReleaseTitle \"${env.ReleaseTitle}\" -TagName \"${env.TagName}\" -TargetCommitish \"${env.TargetBranch}\" -Description \"${base64Description}\" -IsDraft ${env.IsDraft} -IsPrerelease ${env.IsPreRelease} -ZipFilePath \"${zipPath}\" -MsiFilePath \"${msiPath}\" -AuthToken \"${env.GH_AUTH_TOKEN}\" -DescriptionIsBase64Encoded"
         }
     }
 }
