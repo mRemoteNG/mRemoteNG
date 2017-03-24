@@ -147,11 +147,16 @@ function Get-GitHubRelease {
         [string]
         [Parameter(Mandatory=$true)]
         #
-        $ReleaseId
+        $ReleaseId,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        # The OAuth2 token to use for authentication.
+        $AuthToken
     )
 
-    $req_getRelease = Invoke-WebRequest -Uri "$githubUrl/repos/$Owner/$Repository/releases/$ReleaseId" -Method Get -ErrorAction Stop
-    $response_getRelease = ConvertFrom-Json -InputObject $req_publishRelease.Content
+    $req_getRelease = Invoke-WebRequest -Uri "$githubUrl/repos/$Owner/$Repository/releases/$ReleaseId" -Method Get -Headers @{"Authorization"="token $AuthToken"} -ErrorAction Stop
+    $response_getRelease = ConvertFrom-Json -InputObject $req_getRelease.Content
 
     Write-Output $response_getRelease
 }
@@ -190,4 +195,4 @@ function Upload-ReleaseAsset {
 $release = Publish-Release -Owner $Owner -Repository $Repository -ReleaseTitle $ReleaseTitle -TagName $TagName -TargetCommitish $TargetCommitish -Description $Description -IsDraft ([bool]::Parse($IsDraft)) -IsPrerelease ([bool]::Parse($IsPrerelease)) -AuthToken $AuthToken
 $zipUpload = Upload-ReleaseAsset -UploadUri $release.upload_url -FilePath $ZipFilePath -ContentType "application/zip" -AuthToken $AuthToken
 $msiUpload = Upload-ReleaseAsset -UploadUri $release.upload_url -FilePath $MsiFilePath -ContentType "application/octet-stream" -AuthToken $AuthToken
-Write-Output (Get-GitHubRelease -Owner $Owner -Repository $Repository -ReleaseId $release.id)
+Write-Output (Get-GitHubRelease -Owner $Owner -Repository $Repository -ReleaseId $release.id -AuthToken $AuthToken)
