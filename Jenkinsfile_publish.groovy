@@ -53,8 +53,8 @@ node('windows') {
 	
     stage ('Publish to GitHub') {
         withCredentials([string(credentialsId: '5443a369-dbe8-42d3-b4e8-04d0b4e9039a', variable: 'GH_AUTH_TOKEN')]) {
-            def zipPath = "${jobDir}\\Release\\*.msi"
-            def msiPath = "${jobDir}\\Release\\*.zip"
+            def zipPath = "${jobDir}\\Release\\*.zip"
+            def msiPath = "${jobDir}\\Release\\*.msi"
             // because batch files suck at handling newline characters, we have to convert to base64 in groovy and back to text in powershell
             def base64Description = env.ReleaseDescription.bytes.encodeBase64().toString()
             bat "powershell -ExecutionPolicy Bypass -File \"${jobDir}\\Tools\\publish_to_github.ps1\" -Owner \"mRemoteNG\" -Repository \"mRemoteNG\" -ReleaseTitle \"${env.ReleaseTitle}\" -TagName \"${env.TagName}\" -TargetCommitish \"${env.TargetBranch}\" -Description \"${base64Description}\" -IsDraft ${env.IsDraft} -IsPrerelease ${env.IsPreRelease} -ZipFilePath \"${zipPath}\" -MsiFilePath \"${msiPath}\" -AuthToken \"${env.GH_AUTH_TOKEN}\" -DescriptionIsBase64Encoded"
