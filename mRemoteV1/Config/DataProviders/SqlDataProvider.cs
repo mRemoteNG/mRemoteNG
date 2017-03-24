@@ -33,9 +33,13 @@ namespace mRemoteNG.Config.DataProviders
         {
             if (!SqlDatabaseConnector.IsConnected)
                 OpenConnection();
-            var sqlBulkCopy = new SqlBulkCopy(SqlDatabaseConnector.SqlConnection) {DestinationTableName = "dbo.tblCons"};
-            sqlBulkCopy.WriteToServer(dataTable);
-            sqlBulkCopy.Close();
+            using (var sqlBulkCopy = new SqlBulkCopy(SqlDatabaseConnector.SqlConnection))
+            {
+                foreach (DataColumn col in dataTable.Columns)
+                    sqlBulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                sqlBulkCopy.DestinationTableName = "dbo.tblCons";
+                sqlBulkCopy.WriteToServer(dataTable);
+            }
         }
 
         public void OpenConnection()
