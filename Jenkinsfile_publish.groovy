@@ -13,7 +13,7 @@ node('windows') {
 	stage ('Checkout Branch') {
     	checkout([
     	    $class: 'GitSCM',
-    	    branches: [[name: '*/${env.TargetBranch}']],
+    	    branches: [[name: '*/${TargetBranch}']],
             doGenerateSubmoduleConfigurations: false, 
             extensions: [],
             submoduleCfg: [], 
