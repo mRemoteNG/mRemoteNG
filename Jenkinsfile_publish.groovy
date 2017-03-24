@@ -52,7 +52,7 @@ node('windows') {
 	}
 
     stage ('Generate UpdateCheck Files') {
-        bat "powershell -ExecutionPolicy Bypass -File \"${jobDir}\\Tools\\publish_to_github.ps1\" -TagName \"${env.TagName}\" -UpdateChannel \"${env.UpdateChannel}\""
+        bat "powershell -ExecutionPolicy Bypass -File \"${jobDir}\\Tools\\create_upg_chk_files.ps1\" -TagName \"${env.TagName}\" -UpdateChannel \"${env.UpdateChannel}\""
         archiveArtifacts artifacts: "Release\\*.txt", caseSensitive: false, onlyIfSuccessful: true
     }
 	
