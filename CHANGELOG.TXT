@@ -1,3 +1,10 @@
+1.75.7003 (2017-03-24):
+
+Fixes:
+------
+#464: Resolved issue when importing a connections file while using SQL server feature
+
+
 1.75.7002 (2017-03-10):
 
 Fixes:
