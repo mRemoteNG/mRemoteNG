@@ -83,8 +83,9 @@ namespace mRemoteNG.Config.Connections
 		{
             var sqlConnector = new SqlDatabaseConnector();
             sqlConnector.Connect();
+            var databaseVersionVerifier = new SqlDatabaseVersionVerifier(sqlConnector);
 
-            if (!VerifyDatabaseVersion(sqlConnector))
+            if (!databaseVersionVerifier.VerifyDatabaseVersion())
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
 				return;
@@ -99,83 +100,6 @@ namespace mRemoteNG.Config.Connections
             sqlConnector.Disconnect();
             sqlConnector.Dispose();
 		}
-
-        private bool VerifyDatabaseVersion(SqlDatabaseConnector sqlDatabaseConnector)
-        {
-            var isVerified = false;
-            try
-            {
-                var databaseVersion = GetDatabaseVersion(sqlDatabaseConnector);
-                SqlCommand sqlCommand;
-
-                if (databaseVersion.Equals(new Version()))
-                {
-                    return true;
-                }
-
-                if (databaseVersion.CompareTo(new Version(2, 2)) == 0) // 2.2
-                {
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.3.");
-                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlDatabaseConnector.SqlConnection);
-                    sqlCommand.ExecuteNonQuery();
-                    databaseVersion = new Version(2, 3);
-                }
-
-                if (databaseVersion.CompareTo(new Version(2, 3)) == 0) // 2.3
-                {
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.4.");
-                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;", sqlDatabaseConnector.SqlConnection);
-                    sqlCommand.ExecuteNonQuery();
-                    databaseVersion = new Version(2, 4);
-                }
-
-                if (databaseVersion.CompareTo(new Version(2, 4)) == 0) // 2.4
-                {
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.5.");
-                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlDatabaseConnector.SqlConnection);
-                    sqlCommand.ExecuteNonQuery();
-                    databaseVersion = new Version(2, 5);
-                }
-
-                if (databaseVersion.CompareTo(new Version(2, 5)) == 0) // 2.5
-                    isVerified = true;
-
-                if (isVerified == false)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProductName));
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorVerifyDatabaseVersionFailed, ex.Message));
-            }
-            return isVerified;
-        }
-
-	    private Version GetDatabaseVersion(SqlDatabaseConnector sqlDatabaseConnector)
-	    {
-	        Version databaseVersion;
-            SqlDataReader sqlDataReader = null;
-	        try
-	        {
-	            var sqlCommand = new SqlCommand("SELECT * FROM tblRoot", sqlDatabaseConnector.SqlConnection);
-	            sqlDataReader = sqlCommand.ExecuteReader();
-	            if (!sqlDataReader.HasRows)
-                    return new Version(); // assume new empty database
-                else
-	            sqlDataReader.Read();
-	            databaseVersion = new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture));
-	        }
-	        catch (Exception ex)
-	        {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"Retrieving database version failed. {ex}");
-                throw;
-	        }
-	        finally
-	        {
-                if (sqlDataReader != null && !sqlDataReader.IsClosed)
-                    sqlDataReader.Close();
-	        }
-	        return databaseVersion;
-	    }
 
         private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
 	    {

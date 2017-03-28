@@ -1,16 +1,21 @@
-﻿$sourcePath = $args[0]
-$destinationDir = $args[1]
+﻿param (
+    [string]
+    $SourcePath,
 
-Write-Host $sourcePath
-Write-Host $destinationDir
+    [string]
+    $DestinationDir
+)
 
-if (!(Test-Path -Path $destinationDir))
+Write-Host $SourcePath
+Write-Host $DestinationDir
+
+if (!(Test-Path -Path $DestinationDir))
 {
-    New-Item -Path $destinationDir -ItemType "directory"
+    New-Item -Path $DestinationDir -ItemType "directory"
 }
 
-$sourceFiles = Get-ChildItem -Path $sourcePath -Recurse | ?{$_.Extension -match "exe|msi"}
+$sourceFiles = Get-ChildItem -Path $SourcePath -Recurse | ?{$_.Extension -match "exe|msi"}
 foreach ($item in $sourceFiles)
 {
-    Copy-Item -Path $item.FullName -Destination $destinationDir -Force
+    Copy-Item -Path $item.FullName -Destination $DestinationDir -Force
 }

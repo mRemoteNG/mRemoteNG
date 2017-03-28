@@ -6,6 +6,25 @@ Added more logging/notifications options
 #429: Added Czech translation
 
 
+1.75.7003 (2017-03-24):
+
+Fixes:
+------
+#464: Resolved issue when importing a connections file while using SQL server feature
+
+
+1.75.7002 (2017-03-10):
+
+Fixes:
+------
+#448: Resolved issue with SQL saving
+
+
+1.75.7001 (2017-03-10):
+
+Fixes:
+------
+#408: Update SQL scripts
 
 
 1.75 hotfix 1 (2017-03-06):

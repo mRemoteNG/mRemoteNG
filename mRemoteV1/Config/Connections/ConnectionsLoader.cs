@@ -25,7 +25,9 @@ namespace mRemoteNG.Config.Connections
 			{
 			    var connector = new SqlDatabaseConnector();
 			    var dataProvider = new SqlDataProvider(connector);
-			    var dataTable = dataProvider.Load();
+                var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
+			    databaseVersionVerifier.VerifyDatabaseVersion();
+                var dataTable = dataProvider.Load();
 			    deserializer = new DataTableDeserializer(dataTable);
 			}
 			else

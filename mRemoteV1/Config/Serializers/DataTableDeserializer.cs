@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -33,6 +34,7 @@ namespace mRemoteNG.Config.Serializers
         {
             var connectionList = CreateNodesFromTable();
             var connectionTreeModel = CreateNodeHierarchy(connectionList);
+            Runtime.IsConnectionsFileLoaded = true;
             return connectionTreeModel;
         }
 
@@ -155,8 +157,8 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
             connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];
             connectionInfo.Inheritance.RDPAuthenticationLevel = (bool)dataRow["InheritRDPAuthenticationLevel"];
-            connectionInfo.Inheritance.RDPAlertIdleTimeout = (bool)dataRow["RDPAlertIdleTimeout"];
-            connectionInfo.Inheritance.RDPMinutesToIdleTimeout = (bool)dataRow["RDPMinutesToIdleTimeout"];
+            connectionInfo.Inheritance.RDPAlertIdleTimeout = (bool)dataRow["InheritRDPAlertIdleTimeout"];
+            connectionInfo.Inheritance.RDPMinutesToIdleTimeout = (bool)dataRow["InheritRDPMinutesToIdleTimeout"];
             connectionInfo.Inheritance.LoadBalanceInfo = (bool)dataRow["InheritLoadBalanceInfo"];
             connectionInfo.Inheritance.PreExtApp = (bool)dataRow["InheritPreExtApp"];
             connectionInfo.Inheritance.PostExtApp = (bool)dataRow["InheritPostExtApp"];
