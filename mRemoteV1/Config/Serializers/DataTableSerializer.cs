@@ -41,6 +41,7 @@ namespace mRemoteNG.Config.Serializers
 
         private void CreateSchema()
         {
+            // Note: these columns must be defined in the same order that they exist in the DB
             _dataTable.Columns.Add("ID", typeof(int));
             _dataTable.Columns[0].AutoIncrement = true;
             _dataTable.Columns.Add("ConstantID", typeof(string));
@@ -65,8 +66,6 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("RenderingEngine", typeof(string));
             _dataTable.Columns.Add("ICAEncryptionStrength", typeof(string));
             _dataTable.Columns.Add("RDPAuthenticationLevel", typeof(string));
-            _dataTable.Columns.Add("RDPMinutesToIdleTimeout", typeof(int));
-            _dataTable.Columns.Add("RDPAlertIdleTimeout", typeof(bool));
             _dataTable.Columns.Add("Colors", typeof(string));
             _dataTable.Columns.Add("Resolution", typeof(string));
             _dataTable.Columns.Add("DisplayWallpaper", typeof(bool));
@@ -123,15 +122,12 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("InheritRedirectPrinters", typeof(bool));
             _dataTable.Columns.Add("InheritRedirectSmartCards", typeof(bool));
             _dataTable.Columns.Add("InheritRedirectSound", typeof(bool));
-            _dataTable.Columns.Add("InheritSoundQuality", typeof(bool));
             _dataTable.Columns.Add("InheritResolution", typeof(bool));
             _dataTable.Columns.Add("InheritUseConsoleSession", typeof(bool));
             _dataTable.Columns.Add("InheritUseCredSsp", typeof(bool));
             _dataTable.Columns.Add("InheritRenderingEngine", typeof(bool));
             _dataTable.Columns.Add("InheritICAEncryptionStrength", typeof(bool));
             _dataTable.Columns.Add("InheritRDPAuthenticationLevel", typeof(bool));
-            _dataTable.Columns.Add("InheritRDPMinutesToIdleTimeout", typeof(bool));
-            _dataTable.Columns.Add("InheritRDPAlertIdleTimeout", typeof(bool));
             _dataTable.Columns.Add("InheritUsername", typeof(bool));
             _dataTable.Columns.Add("InheritPreExtApp", typeof(bool));
             _dataTable.Columns.Add("InheritPostExtApp", typeof(bool));
@@ -159,6 +155,12 @@ namespace mRemoteNG.Config.Serializers
             _dataTable.Columns.Add("AutomaticResize", typeof(bool));
             _dataTable.Columns.Add("InheritLoadBalanceInfo", typeof(bool));
             _dataTable.Columns.Add("InheritAutomaticResize", typeof(bool));
+            _dataTable.Columns.Add("RDPMinutesToIdleTimeout", typeof(int));
+            _dataTable.Columns.Add("RDPAlertIdleTimeout", typeof(bool));
+            _dataTable.Columns.Add("SoundQuality", typeof(string));
+            _dataTable.Columns.Add("InheritRDPMinutesToIdleTimeout", typeof(bool));
+            _dataTable.Columns.Add("InheritRDPAlertIdleTimeout", typeof(bool));
+            _dataTable.Columns.Add("InheritSoundQuality", typeof(bool));
         }
 
         private void SetPrimaryKey()
@@ -204,8 +206,8 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RenderingEngine"] = connectionInfo.RenderingEngine;
             dataRow["ICAEncryptionStrength"] = connectionInfo.ICAEncryptionStrength;
             dataRow["RDPAuthenticationLevel"] = connectionInfo.RDPAuthenticationLevel;
-            //dataRow["RDPMinutesToIdleTimeout"] = connectionInfo.RDPMinutesToIdleTimeout;
-            //dataRow["RDPAlertIdleTimeout"] = connectionInfo.RDPAlertIdleTimeout;
+            dataRow["RDPMinutesToIdleTimeout"] = connectionInfo.RDPMinutesToIdleTimeout;
+            dataRow["RDPAlertIdleTimeout"] = connectionInfo.RDPAlertIdleTimeout;
             dataRow["LoadBalanceInfo"] = connectionInfo.LoadBalanceInfo;
             dataRow["Colors"] = connectionInfo.Colors;
             dataRow["Resolution"] = connectionInfo.Resolution;
@@ -220,7 +222,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RedirectPrinters"] = connectionInfo.RedirectPrinters;
             dataRow["RedirectSmartCards"] = connectionInfo.RedirectSmartCards;
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
-            //dataRow["SoundQuality"] = connectionInfo.SoundQuality;
+            dataRow["SoundQuality"] = connectionInfo.SoundQuality;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
             dataRow["Connected"] = connectionInfo.OpenConnections.Count > 0;
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
@@ -267,7 +269,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritRedirectPrinters"] = connectionInfo.Inheritance.RedirectPrinters;
                 dataRow["InheritRedirectSmartCards"] = connectionInfo.Inheritance.RedirectSmartCards;
                 dataRow["InheritRedirectSound"] = connectionInfo.Inheritance.RedirectSound;
-                //dataRow["InheritSoundQuality"] = connectionInfo.Inheritance.SoundQuality;
+                dataRow["InheritSoundQuality"] = connectionInfo.Inheritance.SoundQuality;
                 dataRow["InheritResolution"] = connectionInfo.Inheritance.Resolution;
                 dataRow["InheritAutomaticResize"] = connectionInfo.Inheritance.AutomaticResize;
                 dataRow["InheritUseConsoleSession"] = connectionInfo.Inheritance.UseConsoleSession;
@@ -276,8 +278,8 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
                 dataRow["InheritICAEncryptionStrength"] = connectionInfo.Inheritance.ICAEncryptionStrength;
                 dataRow["InheritRDPAuthenticationLevel"] = connectionInfo.Inheritance.RDPAuthenticationLevel;
-                //dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RDPMinutesToIdleTimeout;
-                //dataRow["InheritRDPAlertIdleTimeout"] = connectionInfo.Inheritance.RDPAlertIdleTimeout;
+                dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RDPMinutesToIdleTimeout;
+                dataRow["InheritRDPAlertIdleTimeout"] = connectionInfo.Inheritance.RDPAlertIdleTimeout;
                 dataRow["InheritLoadBalanceInfo"] = connectionInfo.Inheritance.LoadBalanceInfo;
                 dataRow["InheritPreExtApp"] = connectionInfo.Inheritance.PreExtApp;
                 dataRow["InheritPostExtApp"] = connectionInfo.Inheritance.PostExtApp;
@@ -324,7 +326,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritRedirectPrinters"] = false;
                 dataRow["InheritRedirectSmartCards"] = false;
                 dataRow["InheritRedirectSound"] = false;
-                //dataRow["InheritSoundQuality"] = false;
+                dataRow["InheritSoundQuality"] = false;
                 dataRow["InheritResolution"] = false;
                 dataRow["InheritAutomaticResize"] = false;
                 dataRow["InheritUseConsoleSession"] = false;
@@ -333,8 +335,8 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritUsername"] = false;
                 dataRow["InheritICAEncryptionStrength"] = false;
                 dataRow["InheritRDPAuthenticationLevel"] = false;
-                //dataRow["InheritRDPMinutesToIdleTimeout"] = false;
-                //dataRow["InheritRDPAlertIdleTimeout"] = false;
+                dataRow["InheritRDPMinutesToIdleTimeout"] = false;
+                dataRow["InheritRDPAlertIdleTimeout"] = false;
                 dataRow["InheritLoadBalanceInfo"] = false;
                 dataRow["InheritPreExtApp"] = false;
                 dataRow["InheritPostExtApp"] = false;
