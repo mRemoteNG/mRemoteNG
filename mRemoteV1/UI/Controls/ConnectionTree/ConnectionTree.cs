@@ -210,6 +210,7 @@ namespace mRemoteNG.UI.Controls
             Expand(parent);
             SelectObject(newNode, true);
             EnsureModelVisible(newNode);
+            this.SelectedItem.BeginEdit();
         }
 
         public void DuplicateSelectedNode()
