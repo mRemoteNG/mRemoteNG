@@ -73,6 +73,16 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _lock {
+            get {
+                object obj = ResourceManager.GetObject("_lock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ActiveDirectory {
             get {
                 object obj = ResourceManager.GetObject("ActiveDirectory", resourceCulture);
@@ -116,6 +126,16 @@ namespace mRemoteNG {
         internal static System.Drawing.Bitmap Arrow_Down {
             get {
                 object obj = ResourceManager.GetObject("Arrow_Down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_left {
+            get {
+                object obj = ResourceManager.GetObject("arrow_left", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1257,6 +1277,16 @@ namespace mRemoteNG {
             get {
                 object obj = ResourceManager.GetObject("Tab_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tick {
+            get {
+                object obj = ResourceManager.GetObject("tick", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

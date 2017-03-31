@@ -17,6 +17,7 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsUvncsc;
         private ToolStripMenuItem _mMenToolsComponentsCheck;
         private ToolStripMenuItem _credentialManagerToolStripMenuItem;
+        private ToolStripMenuItem _testItem;
 
         public Form MainForm { get; set; }
         public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
@@ -36,6 +37,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsSep1 = new ToolStripSeparator();
             _mMenToolsComponentsCheck = new ToolStripMenuItem();
             _mMenToolsOptions = new ToolStripMenuItem();
+            _testItem = new ToolStripMenuItem();
 
             // 
             // mMenTools
@@ -48,7 +50,8 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsPortScan,
             _mMenToolsSep1,
             _mMenToolsComponentsCheck,
-            _mMenToolsOptions});
+            _mMenToolsOptions,
+            _testItem});
             Name = "mMenTools";
             Size = new System.Drawing.Size(48, 20);
             Text = Language.strMenuTools;
@@ -114,6 +117,14 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
             _mMenToolsOptions.Text = Language.strMenuOptions;
             _mMenToolsOptions.Click += mMenToolsOptions_Click;
+            // 
+            // testItem
+            // 
+            _testItem.Image = Resources.Options;
+            _testItem.Name = "testItem";
+            _testItem.Size = new System.Drawing.Size(184, 22);
+            _testItem.Text = "testItem";
+            _testItem.Click += (sender, args) => new CompositeCredentialRepoUnlockerForm(CredentialProviderCatalog.CredentialProviders).Show();
         }
 
         #region Tools

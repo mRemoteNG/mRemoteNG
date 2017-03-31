@@ -95,7 +95,7 @@ namespace mRemoteNG.App.Initialization
             foreach (var repository in credRepoListLoader.Load())
             {
                 Runtime.CredentialProviderCatalog.AddProvider(repository);
-                repository.LoadCredentials();
+                //repository.LoadCredentials();
             }
             Runtime.CredentialProviderCatalog.RepositoriesUpdated += (sender, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
             Runtime.CredentialProviderCatalog.CredentialsUpdated += (sender, args) => (sender as ICredentialRepository)?.SaveCredentials();
