@@ -15,7 +15,9 @@ namespace mRemoteNG.UI.Forms
 
         public CompositeCredentialRepoUnlockerForm(IEnumerable<ICredentialRepository> credentialRepositories)
         {
-            _credentialRepositories = credentialRepositories.ToList() ?? throw new ArgumentNullException(nameof(credentialRepositories));
+            if (credentialRepositories == null)
+                throw new ArgumentNullException(nameof(credentialRepositories));
+            _credentialRepositories = credentialRepositories.ToList();
             InitializeComponent();
             SetupListView();
         }
