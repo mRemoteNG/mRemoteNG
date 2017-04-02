@@ -12,7 +12,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
     {
         public string SchemaVersion { get; } = "1.0";
 
-        public IEnumerable<ICredentialRecord> Deserialize(string xml, SecureString decryptionKey)
+        public IEnumerable<ICredentialRecord> Deserialize(string xml)
         {
             var xdoc = XDocument.Parse(xml);
             var rootElement = xdoc.Root;

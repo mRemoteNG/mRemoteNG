@@ -59,7 +59,7 @@ namespace mRemoteNG.Credential.Repositories
             { 
                 try
                 {
-                    var credentials = _deserializer.Deserialize(xml, key).ToArray();
+                    var credentials = _deserializer.Deserialize(xml).ToArray();
                     Config.Key = key;
                     IsLoaded = true;
                     return credentials;

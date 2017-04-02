@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Security;
 using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Security;
 using NUnit.Framework;
@@ -15,7 +14,6 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         private const string Username = "myusername";
         private const string Domain = "mydomain";
         private const string PlaintextPassword = "mypassword";
-        private readonly SecureString _key = "myencrptionpass".ConvertToSecureString();
 
 
         [SetUp]
@@ -28,7 +26,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void HasCorrectId()
         {
             var xml = GenerateXml();
-            var creds = _deserializer.Deserialize(xml, _key);
+            var creds = _deserializer.Deserialize(xml);
             Assert.That(creds.First().Id, Is.EqualTo(_id));
         }
 
@@ -36,7 +34,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void HasCorrectTitle()
         {
             var xml = GenerateXml();
-            var creds = _deserializer.Deserialize(xml, _key);
+            var creds = _deserializer.Deserialize(xml);
             Assert.That(creds.First().Title, Is.EqualTo(Title));
         }
 
@@ -44,7 +42,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void HasCorrectUsername()
         {
             var xml = GenerateXml();
-            var creds = _deserializer.Deserialize(xml, _key);
+            var creds = _deserializer.Deserialize(xml);
             Assert.That(creds.First().Username, Is.EqualTo(Username));
         }
 
@@ -52,7 +50,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void HasCorrectDomain()
         {
             var xml = GenerateXml();
-            var creds = _deserializer.Deserialize(xml, _key);
+            var creds = _deserializer.Deserialize(xml);
             Assert.That(creds.First().Domain, Is.EqualTo(Domain));
         }
 
@@ -60,7 +58,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void HasCorrectPassword()
         {
             var xml = GenerateXml();
-            var creds = _deserializer.Deserialize(xml, _key);
+            var creds = _deserializer.Deserialize(xml);
             Assert.That(creds.First().Password.ConvertToUnsecureString(), Is.EqualTo(PlaintextPassword));
         }
 
@@ -68,7 +66,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void DeserializesAllCredentials()
         {
             var xml = GenerateXml();
-            var creds = _deserializer.Deserialize(xml, _key);
+            var creds = _deserializer.Deserialize(xml);
             Assert.That(creds.Count(), Is.EqualTo(2));
         }
 
@@ -76,7 +74,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void CanDecryptNonStandardEncryptions()
         {
             var xml = GenerateXml(BlockCipherEngines.Serpent, BlockCipherModes.EAX, 3000);
-            var creds = _deserializer.Deserialize(xml, _key);
+            var creds = _deserializer.Deserialize(xml);
             Assert.That(creds.First().Password.ConvertToUnsecureString(), Is.EqualTo(PlaintextPassword));
         }
 
