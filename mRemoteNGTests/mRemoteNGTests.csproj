@@ -123,8 +123,8 @@
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentCompilerTests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentEncryptorTests.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsSerializerTests.cs" />
-    <Compile Include="Config\Serializers\XmlCredentialDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlConnectionsSerializerTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialDeserializerTests.cs" />
     <Compile Include="Config\Serializers\XmlCredentialSerializerTests.cs" />
     <Compile Include="Config\Serializers\XmlRootNodeSerializerTests.cs" />
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
