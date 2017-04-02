@@ -5,8 +5,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;
 using NUnit.Framework;
 
-
-namespace mRemoteNGTests.Config.Serializers
+namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
     public class PortScanDeserializerTests
     {

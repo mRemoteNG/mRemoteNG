@@ -7,8 +7,7 @@ using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
-
-namespace mRemoteNGTests.Config.Serializers
+namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
 {
     public class XmlRootNodeSerializerTests
     {

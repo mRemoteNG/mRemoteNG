@@ -10,7 +10,7 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
+namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
 {
     public class XmlConnectionsSerializerTests
     {

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -6,9 +7,8 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
-using System.IO;
 
-namespace mRemoteNGTests.Config.Serializers
+namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
     public class RemoteDesktopConnectionManagerDeserializerTests
     {

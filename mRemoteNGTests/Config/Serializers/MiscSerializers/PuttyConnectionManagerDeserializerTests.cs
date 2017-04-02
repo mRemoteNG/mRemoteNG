@@ -6,8 +6,7 @@ using mRemoteNG.Container;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
-
-namespace mRemoteNGTests.Config.Serializers
+namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
     public class PuttyConnectionManagerDeserializerTests
     {

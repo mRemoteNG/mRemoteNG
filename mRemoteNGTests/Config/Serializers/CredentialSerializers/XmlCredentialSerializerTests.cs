@@ -5,8 +5,7 @@ using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using NUnit.Framework;
 
-
-namespace mRemoteNGTests.Config.Serializers
+namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
 {
     public class XmlCredentialSerializerTests
     {
