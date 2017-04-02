@@ -23,7 +23,7 @@ namespace mRemoteNG.Credential.Repositories
         public IPasswordRequestor PasswordRequestor { get; set; } = new PasswordForm("", false);
         public bool IsLoaded { get; private set; } = true;
 
-        public XmlCredentialRepository(ICredentialRepositoryConfig config, IDataProvider<string> dataProvider, ICryptographyProvider cryptographyProvider)
+        public XmlCredentialRepository(ICredentialRepositoryConfig config, IDataProvider<string> dataProvider)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));
@@ -36,7 +36,7 @@ namespace mRemoteNG.Credential.Repositories
             Config.PropertyChanged += (sender, args) => RaiseRepositoryConfigUpdatedEvent(args);
             _dataProvider = dataProvider;
             _deserializer = new XmlCredentialRecordDeserializer();
-            _serializer = new XmlCredentialRecordSerializer(cryptographyProvider);
+            _serializer = new XmlCredentialRecordSerializer();
         }
 
         public void LoadCredentials()
@@ -83,7 +83,7 @@ namespace mRemoteNG.Credential.Repositories
         public void SaveCredentials()
         {
             if (!IsLoaded) return;
-            var data = _serializer.Serialize(CredentialRecords, Config.Key);
+            var data = _serializer.Serialize(CredentialRecords);
             _dataProvider.Save(data);
         }
 

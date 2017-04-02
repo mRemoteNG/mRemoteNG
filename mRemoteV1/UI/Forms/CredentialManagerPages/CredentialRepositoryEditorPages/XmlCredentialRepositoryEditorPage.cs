@@ -59,8 +59,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             if (!_repositoryList.Contains(_repositoryConfig.Id))
             {
                 var dataProvider = new FileDataProvider(_repositoryConfig.Source);
-                var cryptoProvider = CryptographyProviderFactory.BuildCryptographyProviderFromSettings();
-                var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider, cryptoProvider);
+                var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider);
                 _repositoryList.AddProvider(repository);
             }
             RaiseNextPageEvent();

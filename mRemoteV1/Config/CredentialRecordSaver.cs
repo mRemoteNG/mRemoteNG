@@ -25,9 +25,9 @@ namespace mRemoteNG.Config
             _serializer = serializer;
         }
 
-        public void Save(IEnumerable<ICredentialRecord> credentialRecords, SecureString encryptionKey)
+        public void Save(IEnumerable<ICredentialRecord> credentialRecords)
         {
-            var serializedCredentials = _serializer.Serialize(credentialRecords, encryptionKey);
+            var serializedCredentials = _serializer.Serialize(credentialRecords);
             _dataProvider.Save(serializedCredentials);
         }
     }

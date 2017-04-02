@@ -28,8 +28,7 @@ namespace mRemoteNG.Credential.Repositories
                 Source = repositoryXElement.Attribute("Source")?.Value
             };
             var dataProvider = new FileDataProvider(config.Source);
-            var cryptoProvider = CryptographyProviderFactory.BuildCryptographyProviderFromSettings();
-            return new XmlCredentialRepository(config, dataProvider, cryptoProvider);
+            return new XmlCredentialRepository(config, dataProvider);
         }
     }
 }

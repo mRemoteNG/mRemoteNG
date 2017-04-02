@@ -70,8 +70,7 @@ namespace mRemoteNG.App.Initialization
 
             var newCredentialRepository = new XmlCredentialRepository(
                 new CredentialRepositoryConfig(),
-                new FileDataProvider(_credentialFilePath),
-                CryptographyProviderFactory.BuildCryptographyProviderFromSettings()
+                new FileDataProvider(_credentialFilePath)
             );
 
             foreach (var credential in harvestedCredentials)
