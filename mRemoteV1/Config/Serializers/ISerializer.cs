@@ -2,6 +2,6 @@
 {
     public interface ISerializer<in TIn, out TOut>
     {
-        TOut Serialize(TIn connectionTreeModel);
+        TOut Serialize(TIn model);
     }
 }

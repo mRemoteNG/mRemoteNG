@@ -142,6 +142,7 @@
     <Compile Include="Config\CredentialRepositoryListSaver.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordEncryptorDecorator.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormat.cs" />
