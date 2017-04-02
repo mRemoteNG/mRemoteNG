@@ -125,7 +125,7 @@
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentCompilerTests.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentEncryptorTests.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsSerializerTests.cs" />
-    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialRecordDeserializerTests.cs" />
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialSerializerTests.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializerTests.cs" />
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
