@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Tools.CustomCollections;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Credential;
 
 
