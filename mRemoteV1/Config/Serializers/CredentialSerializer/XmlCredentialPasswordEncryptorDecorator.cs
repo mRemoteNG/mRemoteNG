@@ -41,7 +41,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
         private string EncryptPasswordAttributes(string xml, SecureString encryptionKey)
         {
             var xdoc = XDocument.Parse(xml);
-            xdoc.Root?.SetAttributeValue("Auth", _cryptographyProvider.Encrypt(Guid.NewGuid().ToString(), encryptionKey));
+            SetEncryptionAttributes(xdoc, encryptionKey);
             foreach (var element in xdoc.Descendants())
             {
                 var passwordAttribute = element.Attribute("Password");
@@ -50,6 +50,14 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                 passwordAttribute.Value = encryptedPassword;
             }
             return xdoc.Declaration + Environment.NewLine + xdoc;
+        }
+
+        private void SetEncryptionAttributes(XDocument xdoc, SecureString encryptionKey)
+        {
+            xdoc.Root?.SetAttributeValue("EncryptionEngine", _cryptographyProvider.CipherEngine);
+            xdoc.Root?.SetAttributeValue("BlockCipherMode", _cryptographyProvider.CipherMode);
+            xdoc.Root?.SetAttributeValue("KdfIterations", _cryptographyProvider.KeyDerivationIterations);
+            xdoc.Root?.SetAttributeValue("Auth", _cryptographyProvider.Encrypt(RandomGenerator.RandomString(20), encryptionKey));
         }
     }
 }

@@ -15,17 +15,16 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
     public class XmlCredentialPasswordEncryptorDecoratorTests
     {
         private XmlCredentialPasswordEncryptorDecorator _sut;
-        private ISerializer<IEnumerable<ICredentialRecord>, string> _baseSerializer;
-        private ICryptographyProvider _cryptoProvider;
+        private const BlockCipherEngines CipherEngine = BlockCipherEngines.Twofish;
+        private const BlockCipherModes CipherMode = BlockCipherModes.EAX;
+        private const int KdfIterations = 2000;
 
         [SetUp]
         public void Setup()
         {
-            _baseSerializer = Substitute.For<ISerializer<IEnumerable<ICredentialRecord>, string>>();
-            _baseSerializer.Serialize(null).ReturnsForAnyArgs(GenerateXml());
-            _cryptoProvider = Substitute.For<ICryptographyProvider>();
-            _cryptoProvider.Encrypt(null, null).ReturnsForAnyArgs("encrypted");
-            _sut = new XmlCredentialPasswordEncryptorDecorator(_baseSerializer, _cryptoProvider, new SecureString());
+            var baseSerializer = SetupBaseSerializer();
+            var cryptoProvider = SetupCryptoProvider();
+            _sut = new XmlCredentialPasswordEncryptorDecorator(baseSerializer, cryptoProvider, new SecureString());
         }
 
 
@@ -45,27 +44,42 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
             Assert.That(firstElementPassword, Is.EqualTo("encrypted"));
         }
 
-        [Test]
-        public void SetsAuthField()
+        [TestCase("EncryptionEngine", CipherEngine)]
+        [TestCase("BlockCipherMode", CipherMode)]
+        [TestCase("KdfIterations", KdfIterations)]
+        [TestCase("Auth", "encrypted")]
+        public void SetsRootNodeEncryptionAttributes(string attributeName, object expectedValue)
         {
             var credList = Substitute.For<IEnumerable<ICredentialRecord>>();
             var output = _sut.Serialize(credList);
             var outputAsXdoc = XDocument.Parse(output);
-            var authField = outputAsXdoc.Root?.Attribute("Auth")?.Value;
-            Assert.That(authField, Is.EqualTo("encrypted"));
+            var authField = outputAsXdoc.Root?.Attribute(attributeName)?.Value;
+            Assert.That(authField, Is.EqualTo(expectedValue.ToString()));
         }
 
-        private string GenerateXml()
+        private ISerializer<IEnumerable<ICredentialRecord>, string> SetupBaseSerializer()
         {
+            var baseSerializer = Substitute.For<ISerializer<IEnumerable<ICredentialRecord>, string>>();
             var randomString = Guid.NewGuid().ToString();
-            return 
+            baseSerializer.Serialize(null).ReturnsForAnyArgs(
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                "<Root Auth=\"\">" +
+                "<Root>" +
                     $"<Element1 Password=\"{randomString}\" />" +
                     $"<Element1 Password=\"{randomString}\">" +
                         $"<Element1 Password=\"{randomString}\" />" +
                     "</Element1>" +
-                "</Root>";
+                "</Root>");
+            return baseSerializer;
+        }
+
+        private ICryptographyProvider SetupCryptoProvider()
+        {
+            var cryptoProvider = Substitute.For<ICryptographyProvider>();
+            cryptoProvider.CipherEngine.Returns(CipherEngine);
+            cryptoProvider.CipherMode.Returns(CipherMode);
+            cryptoProvider.KeyDerivationIterations.Returns(KdfIterations);
+            cryptoProvider.Encrypt(null, null).ReturnsForAnyArgs("encrypted");
+            return cryptoProvider;
         }
     }
 }
