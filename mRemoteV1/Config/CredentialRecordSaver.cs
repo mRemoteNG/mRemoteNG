@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Credential;
 
 
@@ -12,9 +10,9 @@ namespace mRemoteNG.Config
     public class CredentialRecordSaver
     {
         private readonly IDataProvider<string> _dataProvider;
-        private readonly XmlCredentialRecordSerializer _serializer;
+        private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _serializer;
 
-        public CredentialRecordSaver(IDataProvider<string> dataProvider, XmlCredentialRecordSerializer serializer)
+        public CredentialRecordSaver(IDataProvider<string> dataProvider, ISerializer<IEnumerable<ICredentialRecord>, string> serializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));

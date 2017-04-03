@@ -4,6 +4,7 @@ using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
@@ -19,7 +20,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
         public void Setup()
         {
             var connectionTreeModel = SetupConnectionTreeModel();
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
             var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                 cryptoProvider, 
                 connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),

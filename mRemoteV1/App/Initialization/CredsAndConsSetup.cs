@@ -8,11 +8,13 @@ using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.CredentialProviderSerializer;
+using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.App.Initialization
@@ -22,6 +24,7 @@ namespace mRemoteNG.App.Initialization
         private readonly string _credentialRepoListPath = Path.Combine(SettingsFileInfo.SettingsPath, "credentialRepositories.xml");
         private readonly ICredentialRepositoryList _credentialRepositoryList;
         private readonly string _credentialFilePath;
+        private readonly CredentialRepositoryFactory _credentialRepositoryFactory;
 
         public CredsAndConsSetup(ICredentialRepositoryList credentialRepositoryList, string credentialFilePath)
         {
@@ -30,6 +33,8 @@ namespace mRemoteNG.App.Initialization
 
             _credentialRepositoryList = credentialRepositoryList;
             _credentialFilePath = credentialFilePath;
+            
+            //_credentialRepositoryFactory = new CredentialRepositoryFactory();
         }
 
         public void LoadCredsAndCons()
@@ -52,11 +57,11 @@ namespace mRemoteNG.App.Initialization
             var connectionFileProvider = new FileDataProvider(Runtime.GetStartupConnectionFileName());
             var xdoc = XDocument.Parse(connectionFileProvider.Load());
 
-            if (double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value) >= 2.7) return null;
+            if (double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value ?? "0") >= 2.7) return null;
             EnsureConnectionXmlElementsHaveIds(xdoc);
             connectionFileProvider.Save($"{xdoc.Declaration}\n {xdoc}");
 
-            var cryptoProvider = CryptographyProviderFactory.BuildFromXml(xdoc.Root);
+            var cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
             var encryptedValue = xdoc.Root?.Attribute("Protected")?.Value;
             var auth = new PasswordAuthenticator(cryptoProvider, encryptedValue)
             {

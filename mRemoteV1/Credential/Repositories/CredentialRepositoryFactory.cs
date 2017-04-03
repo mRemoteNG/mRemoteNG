@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Xml.Linq;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Security;
 
 namespace mRemoteNG.Credential.Repositories
 {
     public class CredentialRepositoryFactory
     {
-        public static ICredentialRepository Build(XElement repositoryXElement)
+        public ICredentialRepository Build(XElement repositoryXElement)
         {
             var typeName = repositoryXElement.Attribute("TypeName")?.Value;
             if (typeName == "Xml")
@@ -15,7 +14,7 @@ namespace mRemoteNG.Credential.Repositories
             throw new Exception("Could not build repository for the specified type");
         }
 
-        private static ICredentialRepository BuildXmlRepository(XElement repositoryXElement)
+        private ICredentialRepository BuildXmlRepository(XElement repositoryXElement)
         {
             var stringId = repositoryXElement.Attribute("Id")?.Value;
             Guid id;

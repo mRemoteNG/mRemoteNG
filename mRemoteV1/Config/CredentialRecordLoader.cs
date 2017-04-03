@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers.CredentialSerializer;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Credential;
 
 
@@ -11,9 +11,9 @@ namespace mRemoteNG.Config
     public class CredentialRecordLoader
     {
         private readonly IDataProvider<string> _dataProvider;
-        private readonly XmlCredentialRecordDeserializer _deserializer;
+        private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
 
-        public CredentialRecordLoader(IDataProvider<string> dataProvider, XmlCredentialRecordDeserializer deserializer)
+        public CredentialRecordLoader(IDataProvider<string> dataProvider, IDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));

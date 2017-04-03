@@ -5,6 +5,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -18,8 +19,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
         [SetUp]
         public void Setup()
         {
-            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(
-                BlockCipherEngines.AES, BlockCipherModes.GCM);
+            _cryptographyProvider =
+                new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
             _connectionNodeSerializer = new XmlConnectionNodeSerializer27(_cryptographyProvider, "myPassword1".ConvertToSecureString(), new SaveFilter());
         }
 
@@ -50,7 +51,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
         public void AttributesNotSerializedWhenFiltered(string attributeName, ConnectionInfo connectionInfo)
         {
             var saveFilter = new SaveFilter(true);
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
             _connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
             var returnVal = _connectionNodeSerializer.Serialize(connectionInfo);
             var targetAttribute = returnVal.Attribute(XName.Get(attributeName));
@@ -61,7 +62,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
         public void InheritanceNotSerialiedWhenFiltered(string attributeName, ConnectionInfo connectionInfo)
         {
             var saveFilter = new SaveFilter(true);
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
             _connectionNodeSerializer = new XmlConnectionNodeSerializer27(cryptoProvider, "myPassword1".ConvertToSecureString(), saveFilter);
             var returnVal = _connectionNodeSerializer.Serialize(connectionInfo);
             var targetAttribute = returnVal.Attribute(XName.Get(attributeName));

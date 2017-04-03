@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
 
@@ -13,7 +14,7 @@ namespace mRemoteNGTests.Security
         public void BuildsCorrectEncryptionEngine()
         {
             var element = BuildValidElement();
-            var builder = new XmlCryptoProviderBuilder(element);
+            var builder = new CryptoProviderFactoryFromXml(element);
             var cryptoProvider = builder.Build();
             Assert.That(cryptoProvider.CipherEngine, Is.EqualTo(BlockCipherEngines.Serpent));
         }
@@ -22,7 +23,7 @@ namespace mRemoteNGTests.Security
         public void BuildsCorrectCipherMode()
         {
             var element = BuildValidElement();
-            var builder = new XmlCryptoProviderBuilder(element);
+            var builder = new CryptoProviderFactoryFromXml(element);
             var cryptoProvider = builder.Build();
             Assert.That(cryptoProvider.CipherMode, Is.EqualTo(BlockCipherModes.EAX));
         }
@@ -31,7 +32,7 @@ namespace mRemoteNGTests.Security
         public void BuildsCorrectKdfIterations()
         {
             var element = BuildValidElement();
-            var builder = new XmlCryptoProviderBuilder(element);
+            var builder = new CryptoProviderFactoryFromXml(element);
             var cryptoProvider = builder.Build();
             Assert.That(cryptoProvider.KeyDerivationIterations, Is.EqualTo(1234));
         }
@@ -42,7 +43,7 @@ namespace mRemoteNGTests.Security
             Assert.Throws<ArgumentNullException>(() =>
             {
                 // ReSharper disable once ObjectCreationAsStatement
-                new XmlCryptoProviderBuilder(null);
+                new CryptoProviderFactoryFromXml(null);
             });
         }
 
@@ -50,7 +51,7 @@ namespace mRemoteNGTests.Security
         public void ReturnsOldProviderTypeIfXmlIsntValid()
         {
             var badElement = new XElement("BadElement");
-            var builder = new XmlCryptoProviderBuilder(badElement);
+            var builder = new CryptoProviderFactoryFromXml(badElement);
             var cryptoProvider = builder.Build();
             Assert.That(cryptoProvider, Is.TypeOf<LegacyRijndaelCryptographyProvider>());
         }

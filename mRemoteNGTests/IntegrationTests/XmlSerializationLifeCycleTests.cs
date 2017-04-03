@@ -4,6 +4,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
@@ -16,12 +17,13 @@ namespace mRemoteNGTests.IntegrationTests
         private XmlConnectionsSerializer _serializer;
         private XmlConnectionsDeserializer _deserializer;
         private ConnectionTreeModel _originalModel;
+        private readonly ICryptoProviderFactory _cryptoFactory = new CryptoProviderFactory(BlockCipherEngines.AES , BlockCipherModes.GCM);
 
         [SetUp]
         public void Setup()
         {
             _originalModel = SetupConnectionTreeModel();
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var cryptoProvider = _cryptoFactory.Build();
             var nodeSerializer = new XmlConnectionNodeSerializer27(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
@@ -74,7 +76,7 @@ namespace mRemoteNGTests.IntegrationTests
         [Test]
         public void SerializeAndDeserializeWithCustomKdfIterationsValue()
         {
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var cryptoProvider = _cryptoFactory.Build();
             cryptoProvider.KeyDerivationIterations = 5000;
             var nodeSerializer = new XmlConnectionNodeSerializer27(
                 cryptoProvider, 

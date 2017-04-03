@@ -4,6 +4,7 @@ using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 
 namespace mRemoteNG.Config.Serializers.CredentialSerializer
 {
@@ -32,7 +33,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
         private string DecryptPasswords(string xml)
         {
             var xdoc = XDocument.Parse(xml);
-            var cryptoProvider = CryptographyProviderFactory.BuildFromXml(xdoc.Root);
+            var cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
             foreach (var credentialElement in xdoc.Descendants())
             {
                 var passwordAttribute = credentialElement.Attribute("Password");

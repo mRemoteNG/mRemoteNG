@@ -1,37 +1,24 @@
 ﻿using System;
-using System.Xml.Linq;
 using mRemoteNG.Security.SymmetricEncryption;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 
-namespace mRemoteNG.Security
+namespace mRemoteNG.Security.Factories
 {
-    public class CryptographyProviderFactory
+    public class CryptoProviderFactory : ICryptoProviderFactory
     {
-        public static ICryptographyProvider BuildCryptographyProviderFromSettings()
-        {
-            var provider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
-            provider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
-            return provider;
-        }
+        private readonly IAeadBlockCipher _aeadBlockCipher;
 
-        public ICryptographyProvider CreateAeadCryptographyProvider(BlockCipherEngines engine, BlockCipherModes mode)
+        public CryptoProviderFactory(BlockCipherEngines engine, BlockCipherModes mode)
         {
             var cipherEngine = ChooseBlockCipherEngine(engine);
-            var cipher = ChooseBlockCipherMode(mode, cipherEngine);
-            return new AeadCryptographyProvider(cipher);
+            _aeadBlockCipher = ChooseBlockCipherMode(mode, cipherEngine);
         }
 
-        public ICryptographyProvider CreateLegacyRijndaelCryptographyProvider()
+        public ICryptographyProvider Build()
         {
-            return new LegacyRijndaelCryptographyProvider();
-        }
-
-        public static ICryptographyProvider BuildFromXml(XElement element)
-        {
-            var builder = new XmlCryptoProviderBuilder(element);
-            return builder.Build();
+            return new AeadCryptographyProvider(_aeadBlockCipher);
         }
 
         private IBlockCipher ChooseBlockCipherEngine(BlockCipherEngines engine)

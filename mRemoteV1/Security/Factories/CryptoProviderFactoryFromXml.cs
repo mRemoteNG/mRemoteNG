@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Xml.Linq;
+using mRemoteNG.Security.SymmetricEncryption;
 
-
-namespace mRemoteNG.Security
+namespace mRemoteNG.Security.Factories
 {
-    public class XmlCryptoProviderBuilder
+    public class CryptoProviderFactoryFromXml : ICryptoProviderFactory
     {
         private readonly XElement _element;
 
-        public XmlCryptoProviderBuilder(XElement element)
+        public CryptoProviderFactoryFromXml(XElement element)
         {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
@@ -23,14 +23,14 @@ namespace mRemoteNG.Security
             {
                 var engine = (BlockCipherEngines)Enum.Parse(typeof(BlockCipherEngines), _element?.Attribute("EncryptionEngine")?.Value ?? "");
                 var mode = (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes), _element?.Attribute("BlockCipherMode")?.Value ?? "");
-                cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+                cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
 
                 var keyDerivationIterations = int.Parse(_element?.Attribute("KdfIterations")?.Value ?? "");
                 cryptoProvider.KeyDerivationIterations = keyDerivationIterations;
             }
             catch (Exception)
             {
-                return new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
+                return new LegacyRijndaelCryptographyProvider();
             }
 
             return cryptoProvider;

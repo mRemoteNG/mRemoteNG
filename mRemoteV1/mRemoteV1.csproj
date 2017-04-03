@@ -215,6 +215,9 @@
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
     <Compile Include="Security\Authentication\IPasswordRequestor.cs" />
+    <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
+    <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
+    <Compile Include="Security\ICryptoProviderFactory.cs" />
     <Compile Include="Security\RandomGenerator.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
     <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
@@ -264,8 +267,8 @@
     <Compile Include="Security\SymmetricEncryption\LegacyRijndaelCryptographyProvider.cs" />
     <Compile Include="Security\ICryptographyProvider.cs" />
     <Compile Include="Security\SecureStringExtensions.cs" />
-    <Compile Include="Security\CryptographyProviderFactory.cs" />
-    <Compile Include="Security\XmlCryptoProviderBuilder.cs" />
+    <Compile Include="Security\Factories\CryptoProviderFactory.cs" />
+    <Compile Include="Security\Factories\CryptoProviderFactoryFromXml.cs" />
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />

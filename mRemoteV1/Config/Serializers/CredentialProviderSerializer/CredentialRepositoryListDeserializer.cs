@@ -12,7 +12,7 @@ namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
         {
             var xdoc = XDocument.Parse(xml);
             var repoEntries = xdoc.Descendants("CredentialRepository");
-            return repoEntries.Select(CredentialRepositoryFactory.Build);
+            return repoEntries.Select(new CredentialRepositoryFactory().Build);
         }
     }
 }
