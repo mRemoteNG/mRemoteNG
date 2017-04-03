@@ -7,6 +7,7 @@ using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.IntegrationTests
@@ -24,18 +25,11 @@ namespace mRemoteNGTests.IntegrationTests
         [SetUp]
         public void Setup()
         {
-            var key = "123someKey".ConvertToSecureString();
+            var keyProvider = Substitute.For<IKeyProvider>();
+            keyProvider.GetKey().Returns("123someKey".ConvertToSecureString());
             var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.CCM).Build();
-            _serializer = new XmlCredentialPasswordEncryptorDecorator(
-                new XmlCredentialRecordSerializer(),
-                cryptoProvider,
-                key
-            );
-
-            _deserializer = new XmlCredentialPasswordDecryptorDecorator(
-                key,
-                new XmlCredentialRecordDeserializer()
-            );
+            _serializer = new XmlCredentialPasswordEncryptorDecorator(keyProvider, cryptoProvider, new XmlCredentialRecordSerializer());
+            _deserializer = new XmlCredentialPasswordDecryptorDecorator(keyProvider, new XmlCredentialRecordDeserializer());
         }
 
         [Test]

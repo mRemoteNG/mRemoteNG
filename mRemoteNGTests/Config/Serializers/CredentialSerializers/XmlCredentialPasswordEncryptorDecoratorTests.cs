@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.CredentialSerializer;
@@ -22,9 +21,10 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         [SetUp]
         public void Setup()
         {
-            var baseSerializer = SetupBaseSerializer();
+            var keyProvider = Substitute.For<IKeyProvider>();
             var cryptoProvider = SetupCryptoProvider();
-            _sut = new XmlCredentialPasswordEncryptorDecorator(baseSerializer, cryptoProvider, new SecureString());
+            var baseSerializer = SetupBaseSerializer();
+            _sut = new XmlCredentialPasswordEncryptorDecorator(keyProvider, cryptoProvider, baseSerializer);
         }
 
 

@@ -3,6 +3,7 @@ using System.Security;
 using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
@@ -10,6 +11,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
     public class XmlCredentialPasswordDecryptorDecoratorTests
     {
         private XmlCredentialPasswordDecryptorDecorator _sut;
+        private IKeyProvider _keyProvider;
         private readonly SecureString _decryptionKey = "myKey1".ConvertToSecureString();
         private string _unencryptedPassword = "myPassword1";
 
@@ -17,12 +19,14 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void Setup()
         {
             var baseDeserializer = new XmlCredentialRecordDeserializer();
-            _sut = new XmlCredentialPasswordDecryptorDecorator(_decryptionKey, baseDeserializer);
+            _keyProvider = Substitute.For<IKeyProvider>();
+            _sut = new XmlCredentialPasswordDecryptorDecorator(_keyProvider, baseDeserializer);
         }
 
         [Test]
         public void OutputedCredentialHasDecryptedPassword()
         {
+            _keyProvider.GetKey().Returns(_decryptionKey);
             var xml = GenerateXml();
             var output = _sut.Deserialize(xml);
             Assert.That(output.First().Password.ConvertToUnsecureString(), Is.EqualTo(_unencryptedPassword));

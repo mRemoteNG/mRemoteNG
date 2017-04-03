@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
@@ -11,16 +10,16 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
     public class XmlCredentialPasswordDecryptorDecorator : IDeserializer<string, IEnumerable<ICredentialRecord>>
     {
         private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _baseDeserializer;
-        private readonly SecureString _decryptionKey;
+        private readonly IKeyProvider _keyProvider;
 
-        public XmlCredentialPasswordDecryptorDecorator(SecureString decryptionKey, IDeserializer<string, IEnumerable<ICredentialRecord>> baseDeserializer)
+        public XmlCredentialPasswordDecryptorDecorator(IKeyProvider keyProvider, IDeserializer<string, IEnumerable<ICredentialRecord>> baseDeserializer)
         {
-            if (decryptionKey == null)
-                throw new ArgumentNullException(nameof(decryptionKey));
+            if (keyProvider == null)
+                throw new ArgumentNullException(nameof(keyProvider));
             if (baseDeserializer == null)
                 throw new ArgumentNullException(nameof(baseDeserializer));
 
-            _decryptionKey = decryptionKey;
+            _keyProvider = keyProvider;
             _baseDeserializer = baseDeserializer;
         }
 
@@ -38,7 +37,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             {
                 var passwordAttribute = credentialElement.Attribute("Password");
                 if (passwordAttribute == null) continue;
-                var decryptedPassword = cryptoProvider.Decrypt(passwordAttribute.Value, _decryptionKey);
+                var decryptedPassword = cryptoProvider.Decrypt(passwordAttribute.Value, _keyProvider.GetKey());
                 passwordAttribute.SetValue(decryptedPassword);
             }
             return xdoc.ToString();

@@ -11,20 +11,20 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
     {
         private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _baseSerializer;
         private readonly ICryptographyProvider _cryptographyProvider;
-        private readonly SecureString _encryptionKey;
+        private readonly IKeyProvider _keyProvider;
 
-        public XmlCredentialPasswordEncryptorDecorator(ISerializer<IEnumerable<ICredentialRecord>, string> baseSerializer, ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
+        public XmlCredentialPasswordEncryptorDecorator(IKeyProvider keyProvider, ICryptographyProvider cryptographyProvider, ISerializer<IEnumerable<ICredentialRecord>, string> baseSerializer)
         {
             if (baseSerializer == null)
                 throw new ArgumentNullException(nameof(baseSerializer));
             if (cryptographyProvider == null)
                 throw new ArgumentNullException(nameof(cryptographyProvider));
-            if (encryptionKey == null)
-                throw new ArgumentNullException(nameof(encryptionKey));
+            if (keyProvider == null)
+                throw new ArgumentNullException(nameof(keyProvider));
 
             _baseSerializer = baseSerializer;
             _cryptographyProvider = cryptographyProvider;
-            _encryptionKey = encryptionKey;
+            _keyProvider = keyProvider;
         }
 
 
@@ -34,7 +34,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                 throw new ArgumentNullException(nameof(credentialRecords));
 
             var baseReturn = _baseSerializer.Serialize(credentialRecords);
-            var encryptedReturn = EncryptPasswordAttributes(baseReturn, _encryptionKey);
+            var encryptedReturn = EncryptPasswordAttributes(baseReturn, _keyProvider.GetKey());
             return encryptedReturn;
         }
 
