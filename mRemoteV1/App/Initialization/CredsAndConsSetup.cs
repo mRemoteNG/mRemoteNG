@@ -39,7 +39,7 @@ namespace mRemoteNG.App.Initialization
 
             var upgradeMap = UpgradeUserFilesForCredentialManager();
 
-            LoadCredentials();
+            LoadCredentialRepositoryList();
             LoadDefaultConnectionCredentials();
             Runtime.LoadConnections();
 
@@ -86,7 +86,7 @@ namespace mRemoteNG.App.Initialization
             adapter.EnsureElementsHaveIds(xdoc);
         }
 
-        private void LoadCredentials()
+        private void LoadCredentialRepositoryList()
         {
             var credRepoListDataProvider = new FileDataProvider(_credentialRepoListPath);
             var credRepoListLoader = new CredentialRepositoryListLoader(credRepoListDataProvider, new CredentialRepositoryListDeserializer());
