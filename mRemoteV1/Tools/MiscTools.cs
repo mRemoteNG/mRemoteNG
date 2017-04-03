@@ -37,7 +37,7 @@ namespace mRemoteNG.Tools
 		public static SecureString PasswordDialog(string passwordName = null, bool verify = true)
 		{
 			var passwordForm = new PasswordForm(passwordName, verify);
-		    return passwordForm.RequestPassword();
+		    return passwordForm.GetKey();
 		}
 		
 

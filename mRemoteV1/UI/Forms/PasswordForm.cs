@@ -2,11 +2,10 @@ using System;
 using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.Security;
-using mRemoteNG.Security.Authentication;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class PasswordForm : IPasswordRequestor
+    public partial class PasswordForm : IKeyProvider
 	{
         private readonly string _passwordName;
         private SecureString _password = new SecureString();
@@ -20,11 +19,11 @@ namespace mRemoteNG.UI.Forms
 			Verify = verify;
 		}
 
-        public SecureString RequestPassword()
+        public SecureString GetKey()
         {
             var dialog = ShowDialog();
             return dialog == DialogResult.OK
-                ? _password 
+                ? _password
                 : new SecureString();
         }
 
@@ -103,5 +102,5 @@ namespace mRemoteNG.UI.Forms
 			lblStatus.Visible = false;
 		}
         #endregion
-    }
+	}
 }
