@@ -27,8 +27,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         public void OnetimeSetup()
         {
             var fileContents = Resources.test_puttyConnectionManager_database;
-            _deserializer = new PuttyConnectionManagerDeserializer(fileContents);
-            var connectionTreeModel = _deserializer.Deserialize();
+            _deserializer = new PuttyConnectionManagerDeserializer();
+            var connectionTreeModel = _deserializer.Deserialize(fileContents);
             var rootNode = connectionTreeModel.RootNodes.First();
             _rootImportedFolder = rootNode.Children.Cast<ContainerInfo>().First();
         }

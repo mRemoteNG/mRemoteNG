@@ -20,24 +20,25 @@ namespace mRemoteNG.Config.Connections
 
 		public ConnectionTreeModel LoadConnections(IEnumerable<ICredentialRecord> credentialRecords, bool import)
 		{
-            IDeserializer<ConnectionTreeModel> deserializer;
-			if (UseDatabase)
+		    ConnectionTreeModel connectionTreeModel;
+
+            if (UseDatabase)
 			{
 			    var connector = new SqlDatabaseConnector();
 			    var dataProvider = new SqlDataProvider(connector);
                 var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
 			    databaseVersionVerifier.VerifyDatabaseVersion();
                 var dataTable = dataProvider.Load();
-			    deserializer = new DataTableDeserializer(dataTable);
-			}
+			    var deserializer = new DataTableDeserializer();
+                connectionTreeModel = deserializer.Deserialize(dataTable);
+            }
 			else
 			{
 			    var dataProvider = new FileDataProvider(ConnectionFileName);
 			    var xmlString = dataProvider.Load();
-			    deserializer = new XmlConnectionsDeserializer(xmlString, credentialRecords, PromptForPassword);
-			}
-
-            var connectionTreeModel = deserializer.Deserialize();
+			    var deserializer = new XmlConnectionsDeserializer(credentialRecords, PromptForPassword);
+                connectionTreeModel = deserializer.Deserialize(xmlString);
+            }
 
             if (connectionTreeModel != null)
 			    FrmMain.Default.ConnectionsFileName = ConnectionFileName;

@@ -9,24 +9,22 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class PortScanDeserializer : IDeserializer<ConnectionTreeModel>
+    public class PortScanDeserializer : IDeserializer<IEnumerable<ScanHost>, ConnectionTreeModel>
     {
-        private readonly IEnumerable<ScanHost> _scannedHosts;
         private readonly ProtocolType _targetProtocolType;
 
-        public PortScanDeserializer(IEnumerable<ScanHost> scannedHosts, ProtocolType targetProtocolType)
+        public PortScanDeserializer(ProtocolType targetProtocolType)
         {
-            _scannedHosts = scannedHosts;
             _targetProtocolType = targetProtocolType;
         }
 
-        public ConnectionTreeModel Deserialize()
+        public ConnectionTreeModel Deserialize(IEnumerable<ScanHost> scannedHosts)
         {
             var connectionTreeModel = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
 
-            foreach (var host in _scannedHosts)
+            foreach (var host in scannedHosts)
                 ImportScannedHost(host, root);
 
             return connectionTreeModel;

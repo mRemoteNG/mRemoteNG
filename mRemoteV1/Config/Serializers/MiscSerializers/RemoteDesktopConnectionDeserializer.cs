@@ -6,23 +6,17 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class RemoteDesktopConnectionDeserializer : IDeserializer<ConnectionTreeModel>
+    public class RemoteDesktopConnectionDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
         // .rdp file schema: https://technet.microsoft.com/en-us/library/ff393699(v=ws.10).aspx
-        private readonly string[] _fileContent;
 
-        public RemoteDesktopConnectionDeserializer(string[] fileContent)
-        {
-            _fileContent = fileContent;
-        }
-
-        public ConnectionTreeModel Deserialize()
+        public ConnectionTreeModel Deserialize(string rdcFileContent)
         {
             var connectionTreeModel = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
             var connectionInfo = new ConnectionInfo();
-            foreach (var line in _fileContent)
+            foreach (var line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
             {
                 var parts = line.Split(new[] { ':' }, 3);
                 if (parts.Length < 3)

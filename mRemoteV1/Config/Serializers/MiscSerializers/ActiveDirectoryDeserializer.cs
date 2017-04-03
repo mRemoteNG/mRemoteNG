@@ -11,7 +11,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class ActiveDirectoryDeserializer : IDeserializer<ConnectionTreeModel>
+    public class ActiveDirectoryDeserializer
     {
         private readonly string _ldapPath;
         private readonly bool _importSubOU;

@@ -13,22 +13,15 @@ using System.Text;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<ConnectionTreeModel>
+    public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
-        private readonly string _rdcmConnectionsXml;
-
-        public RemoteDesktopConnectionManagerDeserializer(string xml)
-        {
-            _rdcmConnectionsXml = xml;
-        }
-
-        public ConnectionTreeModel Deserialize()
+        public ConnectionTreeModel Deserialize(string rdcmConnectionsXml)
         {
             var connectionTreeModel = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection);
 
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(_rdcmConnectionsXml);
+            xmlDocument.LoadXml(rdcmConnectionsXml);
 
 
             var rdcManNode = xmlDocument.SelectSingleNode("/RDCMan");

@@ -40,8 +40,8 @@ namespace mRemoteNGTests.IntegrationTests
         public void SerializeThenDeserialize()
         {
             var serializedContent = _serializer.Serialize(_originalModel);
-            _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);
-            var deserializedModel = _deserializer.Deserialize();
+            _deserializer = new XmlConnectionsDeserializer();
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
             var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
@@ -52,8 +52,8 @@ namespace mRemoteNGTests.IntegrationTests
         {
             _serializer.UseFullEncryption = true;
             var serializedContent = _serializer.Serialize(_originalModel);
-            _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);
-            var deserializedModel = _deserializer.Deserialize();
+            _deserializer = new XmlConnectionsDeserializer();
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
             var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
@@ -64,8 +64,8 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var originalConnectionInfo = new ConnectionInfo {Name = "con1", Description = "£°úg¶┬ä" };
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
-            _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);
-            var deserializedModel = _deserializer.Deserialize();
+            _deserializer = new XmlConnectionsDeserializer(new ICredentialRecord[0]);
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
             var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(deserializedConnectionInfo.Description, Is.EqualTo(originalConnectionInfo.Description));
         }
@@ -82,8 +82,8 @@ namespace mRemoteNGTests.IntegrationTests
                 new SaveFilter());
             _serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
             var serializedContent = _serializer.Serialize(_originalModel);
-            _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);
-            var deserializedModel = _deserializer.Deserialize();
+            _deserializer = new XmlConnectionsDeserializer();
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
             var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));

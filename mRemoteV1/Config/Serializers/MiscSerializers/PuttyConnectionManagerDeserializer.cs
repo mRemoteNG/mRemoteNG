@@ -9,23 +9,16 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class PuttyConnectionManagerDeserializer : IDeserializer<ConnectionTreeModel>
+    public class PuttyConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
-        private readonly string _puttycmConnectionsXml;
-
-        public PuttyConnectionManagerDeserializer(string xml)
-        {
-            _puttycmConnectionsXml = xml;
-        }
-
-        public ConnectionTreeModel Deserialize()
+        public ConnectionTreeModel Deserialize(string puttycmConnectionsXml)
         {
             var connectionTreeModel = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
 
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(_puttycmConnectionsXml);
+            xmlDocument.LoadXml(puttycmConnectionsXml);
 
             var configurationNode = xmlDocument.SelectSingleNode("/configuration");
 

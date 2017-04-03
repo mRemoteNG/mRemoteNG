@@ -25,9 +25,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
                 HostName = "server1.domain.com",
                 SSH = true
             };
-            _deserializer = new PortScanDeserializer(new [] {host}, ProtocolType.SSH2);
-            _deserializer.Deserialize();
-            var connectionTreeModel = _deserializer.Deserialize();
+            _deserializer = new PortScanDeserializer(ProtocolType.SSH2);
+            var connectionTreeModel = _deserializer.Deserialize(new[] { host });
             var root = connectionTreeModel.RootNodes.First();
             _importedConnectionInfo = root.Children.First();
         }

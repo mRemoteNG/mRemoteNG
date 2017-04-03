@@ -24,12 +24,11 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class XmlConnectionsDeserializer : IDeserializer<ConnectionTreeModel>
+    public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
         private XmlConnectionsDecryptor _decryptor;
-        //TODO find way to inject data source info
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.8;
         private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
@@ -37,62 +36,23 @@ namespace mRemoteNG.Config.Serializers
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(string xml, IEnumerable<ICredentialRecord> credentialRecords, Func<SecureString> authenticationRequestor = null)
+        public XmlConnectionsDeserializer(IEnumerable<ICredentialRecord> credentialRecords = null, Func<SecureString> authenticationRequestor = null)
         {
             _credentialRecords = credentialRecords;
             AuthenticationRequestor = authenticationRequestor;
-            LoadXmlConnectionData(xml);
-            ValidateConnectionFileVersion();
         }
 
-        private void LoadXmlConnectionData(string connections)
+        public ConnectionTreeModel Deserialize(string xml)
         {
-            CreateDecryptor(new RootNodeInfo(RootNodeType.Connection));
-            connections = _decryptor.LegacyFullFileDecrypt(connections);
-            _xmlDocument = new XmlDocument();
-            if (connections != "")
-                _xmlDocument.LoadXml(connections);
+            return Deserialize(xml, false);
         }
 
-        private void ValidateConnectionFileVersion()
-        {
-            if (_xmlDocument.DocumentElement != null && _xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
-                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."), CultureInfo.InvariantCulture);
-            else
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
-            
-            if (!(_confVersion > MaxSupportedConfVersion)) return;
-            ShowIncompatibleVersionDialogBox();
-            throw new Exception($"Incompatible connection file format (file format version {_confVersion}).");
-        }
-
-        private void ShowIncompatibleVersionDialogBox()
-        {
-            CTaskDialog.ShowTaskDialogBox(
-                FrmMain.Default,
-                Application.ProductName,
-                "Incompatible connection file format",
-                $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
-                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, _confVersion, MaxSupportedConfVersion),
-                "",
-                "",
-                "",
-                "",
-                ETaskDialogButtons.Ok,
-                ESysIcons.Error,
-                ESysIcons.Error
-                );
-        }
-
-        public ConnectionTreeModel Deserialize()
-        {
-            return Deserialize(false);
-        }
-
-        public ConnectionTreeModel Deserialize(bool import)
+        public ConnectionTreeModel Deserialize(string xml, bool import)
         {
             try
             {
+                LoadXmlConnectionData(xml);
+                ValidateConnectionFileVersion();
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = false;
 
@@ -136,6 +96,45 @@ namespace mRemoteNG.Config.Serializers
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strLoadFromXmlFailed, ex);
                 throw;
             }
+        }
+
+        private void LoadXmlConnectionData(string connections)
+        {
+            CreateDecryptor(new RootNodeInfo(RootNodeType.Connection));
+            connections = _decryptor.LegacyFullFileDecrypt(connections);
+            _xmlDocument = new XmlDocument();
+            if (connections != "")
+                _xmlDocument.LoadXml(connections);
+        }
+
+        private void ValidateConnectionFileVersion()
+        {
+            if (_xmlDocument.DocumentElement != null && _xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
+                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."), CultureInfo.InvariantCulture);
+            else
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
+
+            if (!(_confVersion > MaxSupportedConfVersion)) return;
+            ShowIncompatibleVersionDialogBox();
+            throw new Exception($"Incompatible connection file format (file format version {_confVersion}).");
+        }
+
+        private void ShowIncompatibleVersionDialogBox()
+        {
+            CTaskDialog.ShowTaskDialogBox(
+                FrmMain.Default,
+                Application.ProductName,
+                "Incompatible connection file format",
+                $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
+                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, _confVersion, MaxSupportedConfVersion),
+                "",
+                "",
+                "",
+                "",
+                ETaskDialogButtons.Ok,
+                ESysIcons.Error,
+                ESysIcons.Error
+            );
         }
 
         private void InitializeRootNode(XmlElement connectionsRootElement)

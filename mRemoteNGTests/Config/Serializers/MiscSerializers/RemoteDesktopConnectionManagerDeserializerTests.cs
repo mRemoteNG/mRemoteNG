@@ -43,14 +43,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         public void OnetimeSetup()
         {
             _connectionFileContents = Resources.test_rdcman_v2_2_schema1;
-            _deserializer = new RemoteDesktopConnectionManagerDeserializer(_connectionFileContents);
-            _connectionTreeModel = _deserializer.Deserialize();
-        }
-
-        [OneTimeTearDown]
-        public void OnetimeTeardown()
-        {
-            _deserializer = null;
+            _deserializer = new RemoteDesktopConnectionManagerDeserializer();
+            _connectionTreeModel = _deserializer.Deserialize(_connectionFileContents);
         }
 
         [Test]
@@ -312,24 +306,21 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         public void ExceptionThrownOnBadSchemaVersion()
         {
             var badFileContents = Resources.test_rdcman_v2_2_badschemaversion;
-            var deserializer = new RemoteDesktopConnectionManagerDeserializer(badFileContents);
-            Assert.That(() => deserializer.Deserialize(), Throws.TypeOf<FileFormatException>());
+            Assert.That(() => _deserializer.Deserialize(badFileContents), Throws.TypeOf<FileFormatException>());
         }
 
         [Test]
         public void ExceptionThrownOnUnsupportedVersion()
         {
             var badFileContents = Resources.test_rdcman_badVersionNumber;
-            var deserializer = new RemoteDesktopConnectionManagerDeserializer(badFileContents);
-            Assert.That(() => deserializer.Deserialize(), Throws.TypeOf<FileFormatException>());
+            Assert.That(() => _deserializer.Deserialize(badFileContents), Throws.TypeOf<FileFormatException>());
         }
 
         [Test]
         public void ExceptionThrownOnNoVersion()
         {
             var badFileContents = Resources.test_rdcman_noversion;
-            var deserializer = new RemoteDesktopConnectionManagerDeserializer(badFileContents);
-            Assert.That(() => deserializer.Deserialize(), Throws.TypeOf<FileFormatException>());
+            Assert.That(() => _deserializer.Deserialize(badFileContents), Throws.TypeOf<FileFormatException>());
         }
     }
 }

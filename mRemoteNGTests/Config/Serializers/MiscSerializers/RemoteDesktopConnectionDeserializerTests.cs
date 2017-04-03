@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -12,7 +11,6 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
     public class RemoteDesktopConnectionDeserializerTests
     {
         // .rdp file schema: https://technet.microsoft.com/en-us/library/ff393699(v=ws.10).aspx
-        private string[] _connectionFileContents;
         private RemoteDesktopConnectionDeserializer _deserializer;
         private ConnectionTreeModel _connectionTreeModel;
         private const string ExpectedHostname = "testhostname.domain.com";
@@ -37,15 +35,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [OneTimeSetUp]
         public void OnetimeSetup()
         {
-            _connectionFileContents = Resources.test_remotedesktopconnection_rdp.Split(Environment.NewLine.ToCharArray());
-            _deserializer = new RemoteDesktopConnectionDeserializer(_connectionFileContents);
-            _connectionTreeModel = _deserializer.Deserialize();
-        }
-
-        [OneTimeTearDown]
-        public void OnetimeTeardown()
-        {
-            _deserializer = null;
+            var connectionFileContents = Resources.test_remotedesktopconnection_rdp;
+            _deserializer = new RemoteDesktopConnectionDeserializer();
+            _connectionTreeModel = _deserializer.Deserialize(connectionFileContents);
         }
 
         [Test]
