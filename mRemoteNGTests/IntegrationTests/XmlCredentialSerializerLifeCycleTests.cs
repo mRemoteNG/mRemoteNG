@@ -13,7 +13,7 @@ namespace mRemoteNGTests.IntegrationTests
     public class XmlCredentialSerializerLifeCycleTests
     {
         private ISerializer<IEnumerable<ICredentialRecord>, string> _serializer;
-        private XmlCredentialRecordDeserializer _deserializer;
+        private IDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
         private readonly Guid _id = Guid.NewGuid();
         private const string Title = "mycredential1";
         private const string Username = "user1";
@@ -23,8 +23,18 @@ namespace mRemoteNGTests.IntegrationTests
         [SetUp]
         public void Setup()
         {
-            _serializer = new XmlCredentialRecordSerializer();
-            _deserializer = new XmlCredentialRecordDeserializer();
+            var key = "123someKey".ConvertToSecureString();
+            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.CCM);
+            _serializer = new XmlCredentialPasswordEncryptorDecorator(
+                new XmlCredentialRecordSerializer(),
+                cryptoProvider,
+                key
+            );
+
+            _deserializer = new XmlCredentialPasswordDecryptorDecorator(
+                key,
+                new XmlCredentialRecordDeserializer()
+            );
         }
 
         [Test]
