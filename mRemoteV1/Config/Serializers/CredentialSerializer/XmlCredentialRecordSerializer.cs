@@ -7,7 +7,7 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.CredentialSerializer
 {
-    public class XmlCredentialRecordSerializer
+    public class XmlCredentialRecordSerializer : ISerializer<IEnumerable<ICredentialRecord>, string>
     {
         public string SchemaVersion { get; } = "1.0";
 
