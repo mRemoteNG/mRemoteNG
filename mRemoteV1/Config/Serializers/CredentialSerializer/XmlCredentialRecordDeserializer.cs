@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.CredentialSerializer
 {
-    public class XmlCredentialRecordDeserializer
+    public class XmlCredentialRecordDeserializer : IDeserializer<string, IEnumerable<ICredentialRecord>>
     {
         public string SchemaVersion { get; } = "1.0";
 
