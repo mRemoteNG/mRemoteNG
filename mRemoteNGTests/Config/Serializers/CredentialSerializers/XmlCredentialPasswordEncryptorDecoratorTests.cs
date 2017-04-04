@@ -21,10 +21,9 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         [SetUp]
         public void Setup()
         {
-            var keyProvider = Substitute.For<IKeyProvider>();
             var cryptoProvider = SetupCryptoProvider();
             var baseSerializer = SetupBaseSerializer();
-            _sut = new XmlCredentialPasswordEncryptorDecorator(keyProvider, cryptoProvider, baseSerializer);
+            _sut = new XmlCredentialPasswordEncryptorDecorator(cryptoProvider, baseSerializer);
         }
 
 
@@ -32,6 +31,14 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void CantPassNullCredentialList()
         {
             Assert.Throws<ArgumentNullException>(() => _sut.Serialize(null));
+        }
+
+        [Test]
+        public void CanSetEncryptionKey()
+        {
+            const string newKey = "blah";
+            _sut.Key = newKey.ConvertToSecureString();
+            Assert.That(_sut.Key.ConvertToUnsecureString(), Is.EqualTo(newKey));
         }
 
         [Test]

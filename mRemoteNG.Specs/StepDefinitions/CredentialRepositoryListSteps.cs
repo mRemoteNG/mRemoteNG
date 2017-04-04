@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Credential;
-using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Specs.Utilities;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
@@ -11,6 +10,7 @@ namespace mRemoteNG.Specs.StepDefinitions
     public class CredentialRepositoryListSteps
     {
         private CredentialRepositoryList _credentialRepositoryList;
+        private readonly XmlCredentialRepoBuilder _credentialRepoUtilities = new XmlCredentialRepoBuilder();
 
         [Given(@"I have a credential repository list")]
         public void GivenIHaveACredentialRepositoryList()
@@ -22,13 +22,13 @@ namespace mRemoteNG.Specs.StepDefinitions
         public void GivenItHasRepositoriesSetUp(int numberOfCredentialRepos)
         {
             for (var i = 0; i < numberOfCredentialRepos; i++)
-                _credentialRepositoryList.AddProvider(new XmlCredentialRepository(new CredentialRepositoryConfig(), new FileDataProvider(string.Empty)));
+                _credentialRepositoryList.AddProvider(_credentialRepoUtilities.BuildXmlCredentialRepo());
         }
 
         [When(@"I press add and complete the creation wizard")]
         public void WhenIPressAddAndCompleteTheCreationWizard()
         {
-            var credentialRepo = new XmlCredentialRepository(new CredentialRepositoryConfig(), new FileDataProvider(string.Empty));
+            var credentialRepo = _credentialRepoUtilities.BuildXmlCredentialRepo();
             _credentialRepositoryList.AddProvider(credentialRepo);
         }
 

@@ -140,6 +140,7 @@
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
     <Compile Include="Config\CredentialRepositoryListSaver.cs" />
+    <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
@@ -214,9 +215,12 @@
     <Compile Include="Credential\CredentialChangedEventArgs.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
+    <Compile Include="Credential\StaticDeserializerKeyProviderDecorator.cs" />
+    <Compile Include="Credential\StaticSerializerKeyProviderDecorator.cs" />
     <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
     <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
     <Compile Include="Security\ICryptoProviderFactory.cs" />
+    <Compile Include="Security\IHasKey.cs" />
     <Compile Include="Security\IKeyProvider.cs" />
     <Compile Include="Security\RandomGenerator.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />

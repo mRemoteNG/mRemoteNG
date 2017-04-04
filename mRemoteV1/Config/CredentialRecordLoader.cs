@@ -24,7 +24,7 @@ namespace mRemoteNG.Config
             _deserializer = deserializer;
         }
 
-        public IEnumerable<ICredentialRecord> Load(SecureString key)
+        public IEnumerable<ICredentialRecord> Load()
         {
             var serializedCredentials = _dataProvider.Load();
             return _deserializer.Deserialize(serializedCredentials);

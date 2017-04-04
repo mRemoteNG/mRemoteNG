@@ -4,6 +4,12 @@
 	In order to keep credentials separate
 
 @credentials
+Scenario: Load credential repository
+	Given I have a credential repository
+	And the credential repository is unloaded
+	When I click load
+	Then the credential repository is loaded
+
 Scenario: Add credential record
 	Given I have a credential repository
 	And The credential repository is loaded

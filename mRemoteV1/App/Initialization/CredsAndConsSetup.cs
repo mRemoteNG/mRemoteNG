@@ -12,7 +12,6 @@ using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
-using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
@@ -23,8 +22,9 @@ namespace mRemoteNG.App.Initialization
     {
         private readonly string _credentialRepoListPath = Path.Combine(SettingsFileInfo.SettingsPath, "credentialRepositories.xml");
         private readonly ICredentialRepositoryList _credentialRepositoryList;
+        private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _credRepoSerializer;
+        private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _credRepoDeserializer;
         private readonly string _credentialFilePath;
-        private readonly CredentialRepositoryFactory _credentialRepositoryFactory;
 
         public CredsAndConsSetup(ICredentialRepositoryList credentialRepositoryList, string credentialFilePath)
         {
@@ -33,8 +33,12 @@ namespace mRemoteNG.App.Initialization
 
             _credentialRepositoryList = credentialRepositoryList;
             _credentialFilePath = credentialFilePath;
-            
-            //_credentialRepositoryFactory = new CredentialRepositoryFactory();
+
+            var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
+            _credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
+                cryptoFromSettings.Build(),
+                new XmlCredentialRecordSerializer());
+            _credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
         }
 
         public void LoadCredsAndCons()
@@ -73,9 +77,11 @@ namespace mRemoteNG.App.Initialization
             var credentialHarvester = new CredentialHarvester();
             var harvestedCredentials = credentialHarvester.Harvest(xdoc, auth.LastAuthenticatedPassword);
 
+            var credRepoDataProvider = new FileDataProvider(_credentialFilePath);
             var newCredentialRepository = new XmlCredentialRepository(
                 new CredentialRepositoryConfig(),
-                new FileDataProvider(_credentialFilePath)
+                new CredentialRecordSaver(credRepoDataProvider, _credRepoSerializer),
+                new CredentialRecordLoader(credRepoDataProvider, _credRepoDeserializer)
             );
 
             foreach (var credential in harvestedCredentials)
@@ -94,12 +100,13 @@ namespace mRemoteNG.App.Initialization
         private void LoadCredentialRepositoryList()
         {
             var credRepoListDataProvider = new FileDataProvider(_credentialRepoListPath);
-            var credRepoListLoader = new CredentialRepositoryListLoader(credRepoListDataProvider, new CredentialRepositoryListDeserializer());
+            var credRepoListLoader = new CredentialRepositoryListLoader(
+                credRepoListDataProvider, 
+                new CredentialRepositoryListDeserializer(_credRepoSerializer, _credRepoDeserializer));
             var credRepoListSaver = new CredentialRepositoryListSaver(credRepoListDataProvider);
             foreach (var repository in credRepoListLoader.Load())
             {
                 Runtime.CredentialProviderCatalog.AddProvider(repository);
-                //repository.LoadCredentials();
             }
             Runtime.CredentialProviderCatalog.RepositoriesUpdated += (sender, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
             Runtime.CredentialProviderCatalog.CredentialsUpdated += (sender, args) => (sender as ICredentialRepository)?.SaveCredentials();

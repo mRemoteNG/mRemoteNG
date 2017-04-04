@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
@@ -7,19 +8,26 @@ using mRemoteNG.Security.Factories;
 
 namespace mRemoteNG.Config.Serializers.CredentialSerializer
 {
-    public class XmlCredentialPasswordDecryptorDecorator : IDeserializer<string, IEnumerable<ICredentialRecord>>
+    public class XmlCredentialPasswordDecryptorDecorator : IDeserializer<string, IEnumerable<ICredentialRecord>>, IHasKey
     {
         private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _baseDeserializer;
-        private readonly IKeyProvider _keyProvider;
+        private SecureString _decryptionKey = new SecureString();
 
-        public XmlCredentialPasswordDecryptorDecorator(IKeyProvider keyProvider, IDeserializer<string, IEnumerable<ICredentialRecord>> baseDeserializer)
+        public SecureString Key
         {
-            if (keyProvider == null)
-                throw new ArgumentNullException(nameof(keyProvider));
+            get { return _decryptionKey; }
+            set
+            {
+                if (value == null) return;
+                _decryptionKey = value;
+            }
+        }
+
+        public XmlCredentialPasswordDecryptorDecorator(IDeserializer<string, IEnumerable<ICredentialRecord>> baseDeserializer)
+        {
             if (baseDeserializer == null)
                 throw new ArgumentNullException(nameof(baseDeserializer));
 
-            _keyProvider = keyProvider;
             _baseDeserializer = baseDeserializer;
         }
 
@@ -37,7 +45,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             {
                 var passwordAttribute = credentialElement.Attribute("Password");
                 if (passwordAttribute == null) continue;
-                var decryptedPassword = cryptoProvider.Decrypt(passwordAttribute.Value, _keyProvider.GetKey());
+                var decryptedPassword = cryptoProvider.Decrypt(passwordAttribute.Value, _decryptionKey);
                 passwordAttribute.SetValue(decryptedPassword);
             }
             return xdoc.ToString();

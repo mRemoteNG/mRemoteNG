@@ -26,10 +26,10 @@ namespace mRemoteNGTests.IntegrationTests
         public void Setup()
         {
             var keyProvider = Substitute.For<IKeyProvider>();
-            keyProvider.GetKey().Returns("123someKey".ConvertToSecureString());
+            keyProvider.GetKey().Returns(_password);
             var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.CCM).Build();
-            _serializer = new XmlCredentialPasswordEncryptorDecorator(keyProvider, cryptoProvider, new XmlCredentialRecordSerializer());
-            _deserializer = new XmlCredentialPasswordDecryptorDecorator(keyProvider, new XmlCredentialRecordDeserializer());
+            _serializer = new XmlCredentialPasswordEncryptorDecorator(cryptoProvider, new XmlCredentialRecordSerializer()) { Key = _password };
+            _deserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer()) { Key = _password };
         }
 
         [Test]

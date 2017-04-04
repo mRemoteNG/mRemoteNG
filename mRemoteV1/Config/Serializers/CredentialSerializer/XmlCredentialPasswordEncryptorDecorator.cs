@@ -7,24 +7,31 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.CredentialSerializer
 {
-    public class XmlCredentialPasswordEncryptorDecorator : ISerializer<IEnumerable<ICredentialRecord>, string>
+    public class XmlCredentialPasswordEncryptorDecorator : ISerializer<IEnumerable<ICredentialRecord>, string>, IHasKey
     {
         private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _baseSerializer;
         private readonly ICryptographyProvider _cryptographyProvider;
-        private readonly IKeyProvider _keyProvider;
+        private SecureString _encryptionKey = new SecureString();
 
-        public XmlCredentialPasswordEncryptorDecorator(IKeyProvider keyProvider, ICryptographyProvider cryptographyProvider, ISerializer<IEnumerable<ICredentialRecord>, string> baseSerializer)
+        public SecureString Key
+        {
+            get { return _encryptionKey; }
+            set
+            {
+                if (value == null) return;
+                _encryptionKey = value;
+            }
+        }
+
+        public XmlCredentialPasswordEncryptorDecorator(ICryptographyProvider cryptographyProvider, ISerializer<IEnumerable<ICredentialRecord>, string> baseSerializer)
         {
             if (baseSerializer == null)
                 throw new ArgumentNullException(nameof(baseSerializer));
             if (cryptographyProvider == null)
                 throw new ArgumentNullException(nameof(cryptographyProvider));
-            if (keyProvider == null)
-                throw new ArgumentNullException(nameof(keyProvider));
 
             _baseSerializer = baseSerializer;
             _cryptographyProvider = cryptographyProvider;
-            _keyProvider = keyProvider;
         }
 
 
@@ -34,7 +41,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                 throw new ArgumentNullException(nameof(credentialRecords));
 
             var baseReturn = _baseSerializer.Serialize(credentialRecords);
-            var encryptedReturn = EncryptPasswordAttributes(baseReturn, _keyProvider.GetKey());
+            var encryptedReturn = EncryptPasswordAttributes(baseReturn, _encryptionKey);
             return encryptedReturn;
         }
 

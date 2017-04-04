@@ -1,11 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
+using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Serializers;
 
 namespace mRemoteNG.Credential.Repositories
 {
     public class CredentialRepositoryFactory
     {
+        private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _serializer;
+        private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
+
+        public CredentialRepositoryFactory(ISerializer<IEnumerable<ICredentialRecord>, string> serializer, IDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
+        {
+            if (serializer == null)
+                throw new ArgumentNullException(nameof(serializer));
+            if (deserializer == null)
+                throw new ArgumentNullException(nameof(deserializer));
+
+            _serializer = serializer;
+            _deserializer = deserializer;
+        }
+
         public ICredentialRepository Build(XElement repositoryXElement)
         {
             var typeName = repositoryXElement.Attribute("TypeName")?.Value;
@@ -27,7 +44,9 @@ namespace mRemoteNG.Credential.Repositories
                 Source = repositoryXElement.Attribute("Source")?.Value
             };
             var dataProvider = new FileDataProvider(config.Source);
-            return new XmlCredentialRepository(config, dataProvider);
+            var saver = new CredentialRecordSaver(dataProvider, _serializer);
+            var loader = new CredentialRecordLoader(dataProvider, _deserializer);
+            return new XmlCredentialRepository(config, saver, loader);
         }
     }
 }

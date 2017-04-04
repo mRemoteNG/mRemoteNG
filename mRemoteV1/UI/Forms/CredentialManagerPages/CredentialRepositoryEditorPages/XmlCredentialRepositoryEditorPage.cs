@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
-using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
@@ -58,9 +60,19 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             SaveValuesToConfig();
             if (!_repositoryList.Contains(_repositoryConfig.Id))
             {
-                var dataProvider = new FileDataProvider(_repositoryConfig.Source);
-                var repository = new XmlCredentialRepository(_repositoryConfig, dataProvider);
-                _repositoryList.AddProvider(repository);
+                var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
+                var credRepoDataProvider = new FileDataProvider(_repositoryConfig.Source);
+                var credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
+                    cryptoFromSettings.Build(),
+                    new XmlCredentialRecordSerializer());
+                var credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
+
+                var newCredentialRepository = new XmlCredentialRepository(
+                    _repositoryConfig,
+                    new CredentialRecordSaver(credRepoDataProvider, credRepoSerializer),
+                    new CredentialRecordLoader(credRepoDataProvider, credRepoDeserializer)
+                );
+                _repositoryList.AddProvider(newCredentialRepository);
             }
             RaiseNextPageEvent();
         }
