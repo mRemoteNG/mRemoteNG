@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using mRemoteNG.Config;
 using mRemoteNG.Tools.CustomCollections;
 
@@ -33,15 +34,16 @@ namespace mRemoteNG.Credential.Repositories
             _credentialRecordLoader = credentialRecordLoader;
         }
 
-        public void LoadCredentials()
+        public void LoadCredentials(SecureString key)
         {
-            var credentials = _credentialRecordLoader.Load(Config.Key);
+            var credentials = _credentialRecordLoader.Load(key);
             foreach (var newCredential in credentials)
             {
                 if (ThisIsADuplicateCredentialRecord(newCredential)) continue;
                 CredentialRecords.Add(newCredential);
             }
             IsLoaded = true;
+            Config.Key = key;
         }
 
         private bool ThisIsADuplicateCredentialRecord(ICredentialRecord newCredential)

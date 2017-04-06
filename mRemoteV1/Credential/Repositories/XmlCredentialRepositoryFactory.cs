@@ -7,12 +7,12 @@ using mRemoteNG.Config.Serializers;
 
 namespace mRemoteNG.Credential.Repositories
 {
-    public class CredentialRepositoryFactory
+    public class XmlCredentialRepositoryFactory
     {
         private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _serializer;
         private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
 
-        public CredentialRepositoryFactory(ISerializer<IEnumerable<ICredentialRecord>, string> serializer, ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
+        public XmlCredentialRepositoryFactory(ISerializer<IEnumerable<ICredentialRecord>, string> serializer, ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
         {
             if (serializer == null)
                 throw new ArgumentNullException(nameof(serializer));
@@ -23,15 +23,12 @@ namespace mRemoteNG.Credential.Repositories
             _deserializer = deserializer;
         }
 
-        public ICredentialRepository Build(XElement repositoryXElement)
+        public ICredentialRepository Build(ICredentialRepositoryConfig config)
         {
-            var typeName = repositoryXElement.Attribute("TypeName")?.Value;
-            if (typeName == "Xml")
-                return BuildXmlRepository(repositoryXElement);
-            throw new Exception("Could not build repository for the specified type");
+            return BuildXmlRepo(config);
         }
 
-        private ICredentialRepository BuildXmlRepository(XElement repositoryXElement)
+        public ICredentialRepository Build(XElement repositoryXElement)
         {
             var stringId = repositoryXElement.Attribute("Id")?.Value;
             Guid id;
@@ -43,6 +40,11 @@ namespace mRemoteNG.Credential.Repositories
                 Title = repositoryXElement.Attribute("Title")?.Value,
                 Source = repositoryXElement.Attribute("Source")?.Value
             };
+            return BuildXmlRepo(config);
+        }
+
+        private ICredentialRepository BuildXmlRepo(ICredentialRepositoryConfig config)
+        {
             var dataProvider = new FileDataProvider(config.Source);
             var saver = new CredentialRecordSaver(dataProvider, _serializer);
             var loader = new CredentialRecordLoader(dataProvider, _deserializer);

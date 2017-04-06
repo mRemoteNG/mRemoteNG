@@ -77,11 +77,9 @@ namespace mRemoteNG.App.Initialization
             var credentialHarvester = new CredentialHarvester();
             var harvestedCredentials = credentialHarvester.Harvest(xdoc, auth.LastAuthenticatedPassword);
 
-            var credRepoDataProvider = new FileDataProvider(_credentialFilePath);
-            var newCredentialRepository = new XmlCredentialRepository(
-                new CredentialRepositoryConfig(),
-                new CredentialRecordSaver(credRepoDataProvider, _credRepoSerializer),
-                new CredentialRecordLoader(credRepoDataProvider, _credRepoDeserializer)
+            var xmlRepoFactory = new XmlCredentialRepositoryFactory(_credRepoSerializer, _credRepoDeserializer);
+            var newCredentialRepository = xmlRepoFactory.Build(
+                new CredentialRepositoryConfig { Source = _credentialFilePath }
             );
 
             foreach (var credential in harvestedCredentials)

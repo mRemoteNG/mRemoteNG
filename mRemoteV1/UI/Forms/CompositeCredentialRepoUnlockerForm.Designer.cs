@@ -34,7 +34,6 @@
             this.olvColumnStatusIcon = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.labelUnlocking = new System.Windows.Forms.Label();
             this.labelPassword = new System.Windows.Forms.Label();
-            this.secureTextBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             this.buttonUnlock = new System.Windows.Forms.Button();
             this.buttonSkip = new System.Windows.Forms.Button();
             this.labelRepoTitle = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
+            this.secureTextBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +61,7 @@
             this.objectListViewRepos.EmptyListMsg = "No Credential Repositories Found";
             this.objectListViewRepos.HasCollapsibleGroups = false;
             this.objectListViewRepos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.objectListViewRepos.HideSelection = false;
             this.objectListViewRepos.Location = new System.Drawing.Point(0, 0);
             this.objectListViewRepos.MultiSelect = false;
             this.objectListViewRepos.Name = "objectListViewRepos";
@@ -71,7 +72,7 @@
             this.objectListViewRepos.UseCompatibleStateImageBehavior = false;
             this.objectListViewRepos.UseOverlays = false;
             this.objectListViewRepos.View = System.Windows.Forms.View.Details;
-            this.objectListViewRepos.SelectedIndexChanged += new System.EventHandler(this.objectListViewRepos_SelectedIndexChanged);
+            this.objectListViewRepos.SelectionChanged += new System.EventHandler(this.objectListViewRepos_SelectionChanged);
             // 
             // olvColumnName
             // 
@@ -110,15 +111,6 @@
             this.labelPassword.Size = new System.Drawing.Size(53, 13);
             this.labelPassword.TabIndex = 2;
             this.labelPassword.Text = "Password";
-            // 
-            // secureTextBoxPassword
-            // 
-            this.secureTextBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.secureTextBoxPassword.Location = new System.Drawing.Point(193, 190);
-            this.secureTextBoxPassword.Name = "secureTextBoxPassword";
-            this.secureTextBoxPassword.Size = new System.Drawing.Size(278, 20);
-            this.secureTextBoxPassword.TabIndex = 3;
             // 
             // buttonUnlock
             // 
@@ -220,6 +212,15 @@
             this.labelId.Size = new System.Drawing.Size(18, 13);
             this.labelId.TabIndex = 12;
             this.labelId.Text = "ID";
+            // 
+            // secureTextBoxPassword
+            // 
+            this.secureTextBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.secureTextBoxPassword.Location = new System.Drawing.Point(193, 190);
+            this.secureTextBoxPassword.Name = "secureTextBoxPassword";
+            this.secureTextBoxPassword.Size = new System.Drawing.Size(278, 20);
+            this.secureTextBoxPassword.TabIndex = 3;
             // 
             // CompositeCredentialRepoUnlockerForm
             // 

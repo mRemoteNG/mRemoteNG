@@ -124,7 +124,8 @@ namespace mRemoteNG.UI.Menu
             _testItem.Name = "testItem";
             _testItem.Size = new System.Drawing.Size(184, 22);
             _testItem.Text = "testItem";
-            _testItem.Click += (sender, args) => new CompositeCredentialRepoUnlockerForm(CredentialProviderCatalog.CredentialProviders).Show();
+            var unlockerBuilder = new CredentialRepoUnlockerBuilder();
+            _testItem.Click += (sender, args) => new CompositeCredentialRepoUnlockerForm(unlockerBuilder.Build(CredentialProviderCatalog.CredentialProviders)).Show();
         }
 
         #region Tools

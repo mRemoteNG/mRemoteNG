@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Credential;
+﻿using System.Security;
+using mRemoteNG.Credential;
 using mRemoteNG.Specs.Utilities;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
@@ -32,7 +33,7 @@ namespace mRemoteNG.Specs.StepDefinitions
         [Given(@"The credential repository is loaded")]
         public void GivenTheCredentialRepositoryIsLoaded()
         {
-            _credentialRepository.LoadCredentials();
+            _credentialRepository.LoadCredentials(new SecureString());
             Assert.That(_credentialRepository.IsLoaded);
         }
 
@@ -45,7 +46,7 @@ namespace mRemoteNG.Specs.StepDefinitions
         [When(@"I click load")]
         public void WhenIClickLoad()
         {
-            _credentialRepository.LoadCredentials();
+            _credentialRepository.LoadCredentials(new SecureString());
         }
 
         [Then(@"the credential repository is loaded")]

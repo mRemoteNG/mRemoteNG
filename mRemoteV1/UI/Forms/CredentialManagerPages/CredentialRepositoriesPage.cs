@@ -95,8 +95,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             var selectedRepository = credentialRepositoryListView.SelectedRepository;
             if (selectedRepository.IsLoaded)
                 selectedRepository.UnloadCredentials();
-            else
-                selectedRepository.LoadCredentials();
+            //else
+                //selectedRepository.LoadCredentials();
         }
     }
 }

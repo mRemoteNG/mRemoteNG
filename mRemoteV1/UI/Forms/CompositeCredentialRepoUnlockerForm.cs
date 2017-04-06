@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,15 +8,13 @@ namespace mRemoteNG.UI.Forms
 {
     public partial class CompositeCredentialRepoUnlockerForm : Form
     {
-        private readonly List<ICredentialRepository> _credentialRepositories;
+        private readonly CompositeRepositoryUnlocker _repositoryUnlocker;
 
-        private ICredentialRepository CurrentCredentialRepositoryUnlocking => (ICredentialRepository)objectListViewRepos.SelectedObject;
-
-        public CompositeCredentialRepoUnlockerForm(IEnumerable<ICredentialRepository> credentialRepositories)
+        public CompositeCredentialRepoUnlockerForm(CompositeRepositoryUnlocker repositoryUnlocker)
         {
-            if (credentialRepositories == null)
-                throw new ArgumentNullException(nameof(credentialRepositories));
-            _credentialRepositories = credentialRepositories.ToList();
+            if (repositoryUnlocker == null)
+                throw new ArgumentNullException(nameof(repositoryUnlocker));
+            _repositoryUnlocker = repositoryUnlocker;
             InitializeComponent();
             SetupListView();
         }
@@ -26,12 +23,7 @@ namespace mRemoteNG.UI.Forms
         {
             olvColumnName.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Title;
             olvColumnStatusIcon.AspectGetter = rowObject => string.Empty;
-            olvColumnStatusIcon.ImageGetter = rowObject =>
-            {
-                if (rowObject.Equals(CurrentCredentialRepositoryUnlocking))
-                    return "unlocking";
-                return ((ICredentialRepository) rowObject).IsLoaded ? "unlocked" : "locked";
-            };
+            olvColumnStatusIcon.ImageGetter = rowObject => ((ICredentialRepository) rowObject).IsLoaded ? "unlocked" : "locked";
             objectListViewRepos.SmallImageList = SetupImageList();
         }
 
@@ -61,23 +53,26 @@ namespace mRemoteNG.UI.Forms
 
         private void PopulateListView()
         {
-            objectListViewRepos.SetObjects(_credentialRepositories);
+            objectListViewRepos.SetObjects(_repositoryUnlocker.Repositories);
         }
 
         private void buttonUnlock_Click(object sender, EventArgs e)
         {
-            
+            _repositoryUnlocker.Unlock(secureTextBoxPassword.SecString);
+            secureTextBoxPassword.Clear();
         }
 
         private void buttonSkip_Click(object sender, EventArgs e)
         {
-            objectListViewRepos.SelectedIndex++;
+            _repositoryUnlocker.SelectNextLockedRepository();
+            objectListViewRepos.SelectedObject = _repositoryUnlocker.SelectedRepository;
         }
 
-        private void objectListViewRepos_SelectedIndexChanged(object sender, EventArgs e)
+        private void objectListViewRepos_SelectionChanged(object sender, EventArgs e)
         {
-            objectListViewRepos.RefreshObjects(_credentialRepositories);
+            objectListViewRepos.RefreshObjects(_repositoryUnlocker.Repositories.ToList());
             var selectedRepo = objectListViewRepos.SelectedObject as ICredentialRepository;
+            _repositoryUnlocker.SelectedRepository = selectedRepo;
             textBoxId.Text = selectedRepo?.Config.Id.ToString() ?? "";
             textBoxTitle.Text = selectedRepo?.Config.Title ?? "";
             textBoxType.Text = selectedRepo?.Config.TypeName ?? "";
