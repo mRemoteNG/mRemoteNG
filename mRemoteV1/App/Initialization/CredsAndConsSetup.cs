@@ -23,7 +23,7 @@ namespace mRemoteNG.App.Initialization
         private readonly string _credentialRepoListPath = Path.Combine(SettingsFileInfo.SettingsPath, "credentialRepositories.xml");
         private readonly ICredentialRepositoryList _credentialRepositoryList;
         private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _credRepoSerializer;
-        private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _credRepoDeserializer;
+        private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _credRepoDeserializer;
         private readonly string _credentialFilePath;
 
         public CredsAndConsSetup(ICredentialRepositoryList credentialRepositoryList, string credentialFilePath)

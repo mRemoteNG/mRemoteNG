@@ -145,6 +145,7 @@
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordEncryptorDecorator.cs" />
+    <Compile Include="Config\Serializers\ISecureDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormat.cs" />
@@ -215,7 +216,6 @@
     <Compile Include="Credential\CredentialChangedEventArgs.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
-    <Compile Include="Credential\StaticDeserializerKeyProviderDecorator.cs" />
     <Compile Include="Credential\StaticSerializerKeyProviderDecorator.cs" />
     <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
     <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />

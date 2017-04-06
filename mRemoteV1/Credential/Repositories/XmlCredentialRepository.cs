@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using mRemoteNG.Config;
-using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers.CredentialSerializer;
-using mRemoteNG.Security;
 using mRemoteNG.Tools.CustomCollections;
-using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Credential.Repositories
 {
@@ -39,7 +35,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public void LoadCredentials()
         {
-            var credentials = _credentialRecordLoader.Load();
+            var credentials = _credentialRecordLoader.Load(Config.Key);
             foreach (var newCredential in credentials)
             {
                 if (ThisIsADuplicateCredentialRecord(newCredential)) continue;

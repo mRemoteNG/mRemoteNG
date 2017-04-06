@@ -17,14 +17,14 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void Setup()
         {
             var baseDeserializer = new XmlCredentialRecordDeserializer();
-            _sut = new XmlCredentialPasswordDecryptorDecorator(baseDeserializer) {Key = _decryptionKey};
+            _sut = new XmlCredentialPasswordDecryptorDecorator(baseDeserializer);
         }
 
         [Test]
         public void OutputedCredentialHasDecryptedPassword()
         {
             var xml = GenerateXml();
-            var output = _sut.Deserialize(xml);
+            var output = _sut.Deserialize(xml, _decryptionKey);
             Assert.That(output.First().Password.ConvertToUnsecureString(), Is.EqualTo(_unencryptedPassword));
         }
 

@@ -15,21 +15,21 @@ namespace mRemoteNGTests.IntegrationTests
     public class XmlCredentialSerializerLifeCycleTests
     {
         private ISerializer<IEnumerable<ICredentialRecord>, string> _serializer;
-        private IDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
+        private ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
         private readonly Guid _id = Guid.NewGuid();
         private const string Title = "mycredential1";
         private const string Username = "user1";
         private const string Domain = "domain1";
-        private readonly SecureString _password = "myPassword1!".ConvertToSecureString();
+        private readonly SecureString _key = "myPassword1!".ConvertToSecureString();
 
         [SetUp]
         public void Setup()
         {
             var keyProvider = Substitute.For<IKeyProvider>();
-            keyProvider.GetKey().Returns(_password);
+            keyProvider.GetKey().Returns(_key);
             var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.CCM).Build();
-            _serializer = new XmlCredentialPasswordEncryptorDecorator(cryptoProvider, new XmlCredentialRecordSerializer()) { Key = _password };
-            _deserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer()) { Key = _password };
+            _serializer = new XmlCredentialPasswordEncryptorDecorator(cryptoProvider, new XmlCredentialRecordSerializer()) { Key = _key };
+            _deserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var credentials = new[] { new CredentialRecord(), new CredentialRecord() };
             var serializedCredentials = _serializer.Serialize(credentials);
-            var deserializedCredentials = _deserializer.Deserialize(serializedCredentials);
+            var deserializedCredentials = _deserializer.Deserialize(serializedCredentials, _key);
             Assert.That(deserializedCredentials.Count(), Is.EqualTo(2));
         }
 
@@ -73,17 +73,17 @@ namespace mRemoteNGTests.IntegrationTests
         public void PasswordConsistentAfterSerialization()
         {
             var sut = SerializeThenDeserializeCredential();
-            Assert.That(sut.Password.ConvertToUnsecureString(), Is.EqualTo(_password.ConvertToUnsecureString()));
+            Assert.That(sut.Password.ConvertToUnsecureString(), Is.EqualTo(_key.ConvertToUnsecureString()));
         }
 
         private ICredentialRecord SerializeThenDeserializeCredential()
         {
             var credentials = new[]
             {
-                new CredentialRecord(_id) {Title = Title, Username = Username, Domain = Domain, Password = _password}
+                new CredentialRecord(_id) {Title = Title, Username = Username, Domain = Domain, Password = _key}
             };
             var serializedCredentials = _serializer.Serialize(credentials);
-            var deserializedCredentials = _deserializer.Deserialize(serializedCredentials);
+            var deserializedCredentials = _deserializer.Deserialize(serializedCredentials, _key);
             return deserializedCredentials.First();
         }
     }

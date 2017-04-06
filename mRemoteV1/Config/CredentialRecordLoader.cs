@@ -11,9 +11,9 @@ namespace mRemoteNG.Config
     public class CredentialRecordLoader
     {
         private readonly IDataProvider<string> _dataProvider;
-        private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
+        private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
 
-        public CredentialRecordLoader(IDataProvider<string> dataProvider, IDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
+        public CredentialRecordLoader(IDataProvider<string> dataProvider, ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));
@@ -24,10 +24,10 @@ namespace mRemoteNG.Config
             _deserializer = deserializer;
         }
 
-        public IEnumerable<ICredentialRecord> Load()
+        public IEnumerable<ICredentialRecord> Load(SecureString key)
         {
             var serializedCredentials = _dataProvider.Load();
-            return _deserializer.Deserialize(serializedCredentials);
+            return _deserializer.Deserialize(serializedCredentials, key);
         }
     }
 }

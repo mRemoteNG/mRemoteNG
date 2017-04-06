@@ -34,7 +34,7 @@ namespace mRemoteNG.Specs.Utilities
                     new StaticSerializerKeyProviderDecorator<IEnumerable<ICredentialRecord>, string>(encryptor, encryptor) { Key = EncryptionKey }
                 ), new CredentialRecordLoader(
                     dataProvider,
-                    new StaticDeserializerKeyProviderDecorator<string, IEnumerable<ICredentialRecord>>(decryptor, decryptor) { Key = EncryptionKey }
+                    decryptor
                 )
             );
         }

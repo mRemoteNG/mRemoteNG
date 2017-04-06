@@ -10,9 +10,9 @@ namespace mRemoteNG.Credential.Repositories
     public class CredentialRepositoryFactory
     {
         private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _serializer;
-        private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
+        private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
 
-        public CredentialRepositoryFactory(ISerializer<IEnumerable<ICredentialRecord>, string> serializer, IDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
+        public CredentialRepositoryFactory(ISerializer<IEnumerable<ICredentialRecord>, string> serializer, ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
         {
             if (serializer == null)
                 throw new ArgumentNullException(nameof(serializer));
