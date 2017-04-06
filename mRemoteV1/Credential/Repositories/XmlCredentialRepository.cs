@@ -18,7 +18,6 @@ namespace mRemoteNG.Credential.Repositories
 
         public ICredentialRepositoryConfig Config { get; }
         public IList<ICredentialRecord> CredentialRecords { get; }
-        public IKeyProvider PasswordRequestor { get; set; } = new PasswordForm("", false);
         public bool IsLoaded { get; private set; }
 
         public XmlCredentialRepository(ICredentialRepositoryConfig config, CredentialRecordSaver credentialRecordSaver, CredentialRecordLoader credentialRecordLoader)
