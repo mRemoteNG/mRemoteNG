@@ -20,19 +20,20 @@ namespace mRemoteNGTests.Config.Serializers
             _dataTableSerializer = new DataTableSerializer(_saveFilter);
         }
 
-        [TearDown]
-        public void Teardown()
-        {
-            _saveFilter = null;
-            _dataTableSerializer = null;
-        }
-
         [Test]
         public void AllItemsSerialized()
         {
             var model = CreateConnectionTreeModel();
             var dataTable = _dataTableSerializer.Serialize(model);
             Assert.That(dataTable.Rows.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void ReturnsEmptyDataTableWhenGivenEmptyConnectionTreeModel()
+        {
+            var model = new ConnectionTreeModel();
+            var dataTable = _dataTableSerializer.Serialize(model);
+            Assert.That(dataTable.Rows.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -107,6 +108,13 @@ namespace mRemoteNGTests.Config.Serializers
             _saveFilter.SaveInheritance = false;
             var dataTable = _dataTableSerializer.Serialize(model);
             Assert.That(dataTable.Rows[0]["InheritUsername"], Is.False);
+        }
+
+        [Test]
+        public void CanSerializeEmptyConnectionInfo()
+        {
+            var dataTable = _dataTableSerializer.Serialize(new ConnectionInfo());
+            Assert.That(dataTable.Rows.Count, Is.EqualTo(1));
         }
 
 

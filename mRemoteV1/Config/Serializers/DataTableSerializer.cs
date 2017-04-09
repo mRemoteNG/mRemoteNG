@@ -25,18 +25,33 @@ namespace mRemoteNG.Config.Serializers
 
         public DataTable Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
-            return Serialize(rootNode);
+            try
+            {
+                _dataTable = BuildTable();
+                _currentNodeIndex = 0;
+                var rootNode = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+                return Serialize(rootNode);
+            }
+            catch
+            {
+                return _dataTable;
+            }
         }
 
         public DataTable Serialize(ConnectionInfo serializationTarget)
         {
-            _dataTable = new DataTable(TableName);
-            CreateSchema();
-            SetPrimaryKey();
+            _dataTable = BuildTable();
             _currentNodeIndex = 0;
             SerializeNodesRecursive(serializationTarget);
             return _dataTable;
+        }
+
+        private DataTable BuildTable()
+        {
+            var dataTable = new DataTable(TableName);
+            CreateSchema();
+            SetPrimaryKey();
+            return dataTable;
         }
 
         private void CreateSchema()
@@ -186,7 +201,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["Name"] = connectionInfo.Name;
             dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
             dataRow["ConstantID"] = connectionInfo.ConstantID;
-            dataRow["ParentID"] = connectionInfo.Parent.ConstantID;
+            dataRow["ParentID"] = connectionInfo.Parent?.ConstantID;
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
             var info = connectionInfo as ContainerInfo;
