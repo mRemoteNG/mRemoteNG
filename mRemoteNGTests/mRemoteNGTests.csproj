@@ -111,6 +111,7 @@
     <Compile Include="App\LoggerTests.cs" />
     <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
+    <Compile Include="Config\Serializers\DataTableDeserializerTests.cs" />
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
     <Compile Include="Config\Serializers\PortScanDeserializerTests.cs" />
     <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializerTests.cs" />

@@ -201,7 +201,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["Name"] = connectionInfo.Name;
             dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
             dataRow["ConstantID"] = connectionInfo.ConstantID;
-            dataRow["ParentID"] = connectionInfo.Parent?.ConstantID;
+            dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
             var info = connectionInfo as ContainerInfo;
