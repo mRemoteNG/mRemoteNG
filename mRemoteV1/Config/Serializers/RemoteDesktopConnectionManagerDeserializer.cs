@@ -42,7 +42,7 @@ namespace mRemoteNG.Config.Serializers
             return connectionTreeModel;
         }
 
-        private void VerifySchemaVersion(XmlNode rdcManNode)
+        private static void VerifySchemaVersion(XmlNode rdcManNode)
         {
             var schemaVersion = Convert.ToInt32(rdcManNode?.Attributes?["schemaVersion"].Value);
             if (schemaVersion != 1)
@@ -51,7 +51,7 @@ namespace mRemoteNG.Config.Serializers
             }
         }
 
-        private void VerifyFileVersion(XmlNode rdcManNode)
+        private static void VerifyFileVersion(XmlNode rdcManNode)
         {
             var versionNode = rdcManNode.SelectSingleNode("./version")?.InnerText;
             if (versionNode != null)
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Serializers
             }
         }
 
-        private void ImportFileOrGroup(XmlNode xmlNode, ContainerInfo parentContainer)
+        private static void ImportFileOrGroup(XmlNode xmlNode, ContainerInfo parentContainer)
         {
             var propertiesNode = xmlNode.SelectSingleNode("./properties");
             var newContainer = ImportContainer(propertiesNode, parentContainer);
@@ -77,6 +77,7 @@ namespace mRemoteNG.Config.Serializers
             if (childNodes == null) return;
             foreach (XmlNode childNode in childNodes)
             {
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (childNode.Name)
                 {
                     case "group":
@@ -89,7 +90,7 @@ namespace mRemoteNG.Config.Serializers
             }
         }
 
-        private ContainerInfo ImportContainer(XmlNode containerPropertiesNode, ContainerInfo parentContainer)
+        private static ContainerInfo ImportContainer(XmlNode containerPropertiesNode, ContainerInfo parentContainer)
         {
             var newContainer = new ContainerInfo();
             var connectionInfo = ConnectionInfoFromXml(containerPropertiesNode);
@@ -100,13 +101,13 @@ namespace mRemoteNG.Config.Serializers
             return newContainer;
         }
 
-        private void ImportServer(XmlNode serverNode, ContainerInfo parentContainer)
+        private static void ImportServer(XmlNode serverNode, ContainerInfo parentContainer)
         {
             var newConnectionInfo = ConnectionInfoFromXml(serverNode);
             parentContainer.AddChild(newConnectionInfo);
         }
 
-        private ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
+        private static ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
         {
             var connectionInfo = new ConnectionInfo {Protocol = ProtocolType.RDP};
 
@@ -209,6 +210,7 @@ namespace mRemoteNG.Config.Serializers
             var localResourcesNode = xmlNode.SelectSingleNode("./localResources");
             if (localResourcesNode?.Attributes?["inherit"].Value == "None")
             {
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (localResourcesNode.SelectSingleNode("./audioRedirection")?.InnerText)
                 {
                     case "0": // Bring to this computer
@@ -225,6 +227,7 @@ namespace mRemoteNG.Config.Serializers
                 // ./audioRedirectionQuality
                 // ./audioCaptureRedirection
 
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (localResourcesNode.SelectSingleNode("./keyboardHook")?.InnerText)
                 {
                     case "0": // On the local computer
@@ -257,6 +260,7 @@ namespace mRemoteNG.Config.Serializers
             var securitySettingsNode = xmlNode.SelectSingleNode("./securitySettings");
             if (securitySettingsNode?.Attributes?["inherit"].Value == "None")
             {
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (securitySettingsNode.SelectSingleNode("./authentication")?.InnerText)
                 {
                     case "0": // No authentication
@@ -282,7 +286,7 @@ namespace mRemoteNG.Config.Serializers
             return connectionInfo;
         }
 
-        private string DecryptRdcManPassword(string ciphertext)
+        private static string DecryptRdcManPassword(string ciphertext)
         {
             if (string.IsNullOrEmpty(ciphertext))
                 return null;

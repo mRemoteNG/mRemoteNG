@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.Import
                 Import(fileNameAsString, destinationContainer);
         }
 
-        public void Import(string filePath, ContainerInfo destinationContainer)
+	    private static void Import(string filePath, ContainerInfo destinationContainer)
 		{
             var dataProvider = new FileDataProvider(filePath);
             var fileContent = dataProvider.Load();
