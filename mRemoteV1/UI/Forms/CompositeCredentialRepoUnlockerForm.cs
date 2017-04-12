@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -19,11 +20,40 @@ namespace mRemoteNG.UI.Forms
             SetupListView();
         }
 
+        private void buttonUnlock_Click(object sender, EventArgs e)
+        {
+            _repositoryUnlocker.Unlock(secureTextBoxPassword.SecString);
+            secureTextBoxPassword.Clear();
+        }
+
+        private void buttonSkip_Click(object sender, EventArgs e)
+        {
+            _repositoryUnlocker.SelectNextLockedRepository();
+            objectListViewRepos.SelectedObject = _repositoryUnlocker.SelectedRepository;
+        }
+
+        private void objectListViewRepos_SelectionChanged(object sender, EventArgs e)
+        {
+            objectListViewRepos.RefreshObjects(_repositoryUnlocker.Repositories.ToList());
+            var selectedRepo = objectListViewRepos.SelectedObject as ICredentialRepository;
+            _repositoryUnlocker.SelectedRepository = selectedRepo;
+            ShowRepoDetails(selectedRepo);
+        }
+
+        private void ShowRepoDetails(ICredentialRepository repo)
+        {
+            textBoxId.Text = repo?.Config.Id.ToString() ?? "";
+            textBoxTitle.Text = repo?.Config.Title ?? "";
+            textBoxType.Text = repo?.Config.TypeName ?? "";
+            textBoxSource.Text = repo?.Config.Source ?? "";
+        }
+
+        #region Setup
         private void SetupListView()
         {
-            olvColumnName.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Title;
+            olvColumnName.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Title;
             olvColumnStatusIcon.AspectGetter = rowObject => string.Empty;
-            olvColumnStatusIcon.ImageGetter = rowObject => ((ICredentialRepository) rowObject).IsLoaded ? "unlocked" : "locked";
+            olvColumnStatusIcon.ImageGetter = rowObject => ((ICredentialRepository)rowObject).IsLoaded ? "unlocked" : "locked";
             objectListViewRepos.SmallImageList = SetupImageList();
         }
 
@@ -55,28 +85,6 @@ namespace mRemoteNG.UI.Forms
         {
             objectListViewRepos.SetObjects(_repositoryUnlocker.Repositories);
         }
-
-        private void buttonUnlock_Click(object sender, EventArgs e)
-        {
-            _repositoryUnlocker.Unlock(secureTextBoxPassword.SecString);
-            secureTextBoxPassword.Clear();
-        }
-
-        private void buttonSkip_Click(object sender, EventArgs e)
-        {
-            _repositoryUnlocker.SelectNextLockedRepository();
-            objectListViewRepos.SelectedObject = _repositoryUnlocker.SelectedRepository;
-        }
-
-        private void objectListViewRepos_SelectionChanged(object sender, EventArgs e)
-        {
-            objectListViewRepos.RefreshObjects(_repositoryUnlocker.Repositories.ToList());
-            var selectedRepo = objectListViewRepos.SelectedObject as ICredentialRepository;
-            _repositoryUnlocker.SelectedRepository = selectedRepo;
-            textBoxId.Text = selectedRepo?.Config.Id.ToString() ?? "";
-            textBoxTitle.Text = selectedRepo?.Config.Title ?? "";
-            textBoxType.Text = selectedRepo?.Config.TypeName ?? "";
-            textBoxSource.Text = selectedRepo?.Config.Source ?? "";
-        }
+        #endregion
     }
 }
