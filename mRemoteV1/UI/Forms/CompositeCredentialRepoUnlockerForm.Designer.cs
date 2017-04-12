@@ -68,7 +68,7 @@
             this.objectListViewRepos.SelectAllOnControlA = false;
             this.objectListViewRepos.ShowGroups = false;
             this.objectListViewRepos.Size = new System.Drawing.Size(175, 272);
-            this.objectListViewRepos.TabIndex = 0;
+            this.objectListViewRepos.TabIndex = 3;
             this.objectListViewRepos.UseCompatibleStateImageBehavior = false;
             this.objectListViewRepos.UseOverlays = false;
             this.objectListViewRepos.View = System.Windows.Forms.View.Details;
@@ -118,7 +118,7 @@
             this.buttonUnlock.Location = new System.Drawing.Point(316, 237);
             this.buttonUnlock.Name = "buttonUnlock";
             this.buttonUnlock.Size = new System.Drawing.Size(75, 23);
-            this.buttonUnlock.TabIndex = 4;
+            this.buttonUnlock.TabIndex = 1;
             this.buttonUnlock.Text = "Unlock";
             this.buttonUnlock.UseVisualStyleBackColor = true;
             this.buttonUnlock.Click += new System.EventHandler(this.buttonUnlock_Click);
@@ -130,7 +130,7 @@
             this.buttonSkip.Location = new System.Drawing.Point(397, 237);
             this.buttonSkip.Name = "buttonSkip";
             this.buttonSkip.Size = new System.Drawing.Size(75, 23);
-            this.buttonSkip.TabIndex = 5;
+            this.buttonSkip.TabIndex = 2;
             this.buttonSkip.Text = "Skip";
             this.buttonSkip.UseVisualStyleBackColor = true;
             this.buttonSkip.Click += new System.EventHandler(this.buttonSkip_Click);
@@ -153,6 +153,7 @@
             this.textBoxType.ReadOnly = true;
             this.textBoxType.Size = new System.Drawing.Size(236, 20);
             this.textBoxType.TabIndex = 9;
+            this.textBoxType.TabStop = false;
             // 
             // textBoxTitle
             // 
@@ -163,6 +164,7 @@
             this.textBoxTitle.ReadOnly = true;
             this.textBoxTitle.Size = new System.Drawing.Size(236, 20);
             this.textBoxTitle.TabIndex = 8;
+            this.textBoxTitle.TabStop = false;
             // 
             // labelRepoSource
             // 
@@ -184,6 +186,7 @@
             this.textBoxSource.ReadOnly = true;
             this.textBoxSource.Size = new System.Drawing.Size(236, 46);
             this.textBoxSource.TabIndex = 11;
+            this.textBoxSource.TabStop = false;
             // 
             // label1
             // 
@@ -203,6 +206,7 @@
             this.textBoxId.ReadOnly = true;
             this.textBoxId.Size = new System.Drawing.Size(235, 20);
             this.textBoxId.TabIndex = 13;
+            this.textBoxId.TabStop = false;
             // 
             // labelId
             // 
@@ -220,7 +224,7 @@
             this.secureTextBoxPassword.Location = new System.Drawing.Point(193, 190);
             this.secureTextBoxPassword.Name = "secureTextBoxPassword";
             this.secureTextBoxPassword.Size = new System.Drawing.Size(278, 20);
-            this.secureTextBoxPassword.TabIndex = 3;
+            this.secureTextBoxPassword.TabIndex = 0;
             this.secureTextBoxPassword.UseSystemPasswordChar = true;
             // 
             // CompositeCredentialRepoUnlockerForm
