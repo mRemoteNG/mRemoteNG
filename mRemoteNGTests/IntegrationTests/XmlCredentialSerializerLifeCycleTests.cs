@@ -14,7 +14,7 @@ namespace mRemoteNGTests.IntegrationTests
 {
     public class XmlCredentialSerializerLifeCycleTests
     {
-        private ISerializer<IEnumerable<ICredentialRecord>, string> _serializer;
+        private ISecureSerializer<IEnumerable<ICredentialRecord>, string> _serializer;
         private ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
         private readonly Guid _id = Guid.NewGuid();
         private const string Title = "mycredential1";
@@ -28,7 +28,7 @@ namespace mRemoteNGTests.IntegrationTests
             var keyProvider = Substitute.For<IKeyProvider>();
             keyProvider.GetKey().Returns(_key);
             var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.CCM).Build();
-            _serializer = new XmlCredentialPasswordEncryptorDecorator(cryptoProvider, new XmlCredentialRecordSerializer()) { Key = _key };
+            _serializer = new XmlCredentialPasswordEncryptorDecorator(cryptoProvider, new XmlCredentialRecordSerializer());
             _deserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
         }
 
@@ -36,7 +36,7 @@ namespace mRemoteNGTests.IntegrationTests
         public void WeCanSerializeAndDeserializeXmlCredentials()
         {
             var credentials = new[] { new CredentialRecord(), new CredentialRecord() };
-            var serializedCredentials = _serializer.Serialize(credentials);
+            var serializedCredentials = _serializer.Serialize(credentials, _key);
             var deserializedCredentials = _deserializer.Deserialize(serializedCredentials, _key);
             Assert.That(deserializedCredentials.Count(), Is.EqualTo(2));
         }
@@ -82,7 +82,7 @@ namespace mRemoteNGTests.IntegrationTests
             {
                 new CredentialRecord(_id) {Title = Title, Username = Username, Domain = Domain, Password = _key}
             };
-            var serializedCredentials = _serializer.Serialize(credentials);
+            var serializedCredentials = _serializer.Serialize(credentials, _key);
             var deserializedCredentials = _deserializer.Deserialize(serializedCredentials, _key);
             return deserializedCredentials.First();
         }

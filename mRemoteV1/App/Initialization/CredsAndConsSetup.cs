@@ -22,7 +22,7 @@ namespace mRemoteNG.App.Initialization
     {
         private readonly string _credentialRepoListPath = Path.Combine(SettingsFileInfo.SettingsPath, "credentialRepositories.xml");
         private readonly ICredentialRepositoryList _credentialRepositoryList;
-        private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _credRepoSerializer;
+        private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _credRepoSerializer;
         private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _credRepoDeserializer;
         private readonly string _credentialFilePath;
 
@@ -79,7 +79,7 @@ namespace mRemoteNG.App.Initialization
 
             var xmlRepoFactory = new XmlCredentialRepositoryFactory(_credRepoSerializer, _credRepoDeserializer);
             var newCredentialRepository = xmlRepoFactory.Build(
-                new CredentialRepositoryConfig { Source = _credentialFilePath }
+                new CredentialRepositoryConfig { Source = _credentialFilePath, Title = "Converted Credentials", TypeName = "Xml"}
             );
 
             foreach (var credential in harvestedCredentials)
@@ -107,7 +107,11 @@ namespace mRemoteNG.App.Initialization
                 Runtime.CredentialProviderCatalog.AddProvider(repository);
             }
             Runtime.CredentialProviderCatalog.RepositoriesUpdated += (sender, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
-            Runtime.CredentialProviderCatalog.CredentialsUpdated += (sender, args) => (sender as ICredentialRepository)?.SaveCredentials();
+            Runtime.CredentialProviderCatalog.CredentialsUpdated += (sender, args) =>
+            {
+                var repo = (sender as ICredentialRepository);
+                repo?.SaveCredentials(repo.Config.Key);
+            };
         }
 
         private void LoadDefaultConnectionCredentials()

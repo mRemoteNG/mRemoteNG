@@ -73,6 +73,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
                     new CredentialRecordLoader(credRepoDataProvider, credRepoDeserializer)
                 );
                 _repositoryList.AddProvider(newCredentialRepository);
+                newCredentialRepository.SaveCredentials(_repositoryConfig.Key);
             }
             RaiseNextPageEvent();
         }

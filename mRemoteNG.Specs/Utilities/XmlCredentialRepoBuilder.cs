@@ -31,7 +31,7 @@ namespace mRemoteNG.Specs.Utilities
                 new CredentialRepositoryConfig(),
                 new CredentialRecordSaver(
                     dataProvider,
-                    new StaticSerializerKeyProviderDecorator<IEnumerable<ICredentialRecord>, string>(encryptor, encryptor) { Key = EncryptionKey }
+                    encryptor
                 ), new CredentialRecordLoader(
                     dataProvider,
                     decryptor

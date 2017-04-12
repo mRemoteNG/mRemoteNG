@@ -13,7 +13,7 @@ namespace mRemoteNG.Credential
         IList<ICredentialRecord> CredentialRecords { get; }
         bool IsLoaded { get; }
         void LoadCredentials(SecureString key);
-        void SaveCredentials();
+        void SaveCredentials(SecureString key);
         void UnloadCredentials();
         event EventHandler RepositoryConfigUpdated;
         event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>> CredentialsUpdated;

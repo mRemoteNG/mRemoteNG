@@ -7,21 +7,10 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.CredentialSerializer
 {
-    public class XmlCredentialPasswordEncryptorDecorator : ISerializer<IEnumerable<ICredentialRecord>, string>, IHasKey
+    public class XmlCredentialPasswordEncryptorDecorator : ISecureSerializer<IEnumerable<ICredentialRecord>, string>
     {
         private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _baseSerializer;
         private readonly ICryptographyProvider _cryptographyProvider;
-        private SecureString _encryptionKey = new SecureString();
-
-        public SecureString Key
-        {
-            get { return _encryptionKey; }
-            set
-            {
-                if (value == null) return;
-                _encryptionKey = value;
-            }
-        }
 
         public XmlCredentialPasswordEncryptorDecorator(ICryptographyProvider cryptographyProvider, ISerializer<IEnumerable<ICredentialRecord>, string> baseSerializer)
         {
@@ -35,13 +24,13 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
         }
 
 
-        public string Serialize(IEnumerable<ICredentialRecord> credentialRecords)
+        public string Serialize(IEnumerable<ICredentialRecord> credentialRecords, SecureString key)
         {
             if (credentialRecords == null)
                 throw new ArgumentNullException(nameof(credentialRecords));
 
             var baseReturn = _baseSerializer.Serialize(credentialRecords);
-            var encryptedReturn = EncryptPasswordAttributes(baseReturn, _encryptionKey);
+            var encryptedReturn = EncryptPasswordAttributes(baseReturn, key);
             return encryptedReturn;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.CredentialSerializer;
@@ -17,6 +18,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         private const BlockCipherEngines CipherEngine = BlockCipherEngines.Twofish;
         private const BlockCipherModes CipherMode = BlockCipherModes.EAX;
         private const int KdfIterations = 2000;
+        private SecureString _key = "myKey1".ConvertToSecureString();
 
         [SetUp]
         public void Setup()
@@ -30,22 +32,14 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         [Test]
         public void CantPassNullCredentialList()
         {
-            Assert.Throws<ArgumentNullException>(() => _sut.Serialize(null));
-        }
-
-        [Test]
-        public void CanSetEncryptionKey()
-        {
-            const string newKey = "blah";
-            _sut.Key = newKey.ConvertToSecureString();
-            Assert.That(_sut.Key.ConvertToUnsecureString(), Is.EqualTo(newKey));
+            Assert.Throws<ArgumentNullException>(() => _sut.Serialize(null, new SecureString()));
         }
 
         [Test]
         public void EncryptsPasswordAttributesInXml()
         {
             var credList = Substitute.For<IEnumerable<ICredentialRecord>>();
-            var output = _sut.Serialize(credList);
+            var output = _sut.Serialize(credList, _key);
             var outputAsXdoc = XDocument.Parse(output);
             var firstElementPassword = outputAsXdoc.Root?.Descendants().First().FirstAttribute.Value;
             Assert.That(firstElementPassword, Is.EqualTo("encrypted"));
@@ -58,7 +52,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         public void SetsRootNodeEncryptionAttributes(string attributeName, object expectedValue)
         {
             var credList = Substitute.For<IEnumerable<ICredentialRecord>>();
-            var output = _sut.Serialize(credList);
+            var output = _sut.Serialize(credList, _key);
             var outputAsXdoc = XDocument.Parse(output);
             var authField = outputAsXdoc.Root?.Attribute(attributeName)?.Value;
             Assert.That(authField, Is.EqualTo(expectedValue.ToString()));

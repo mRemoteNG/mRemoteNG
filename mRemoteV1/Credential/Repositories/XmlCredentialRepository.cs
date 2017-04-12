@@ -57,10 +57,10 @@ namespace mRemoteNG.Credential.Repositories
             CredentialRecords.Clear();
         }
 
-        public void SaveCredentials()
+        public void SaveCredentials(SecureString key)
         {
-            if (!IsLoaded) return;
-            _credentialRecordSaver.Save(CredentialRecords);
+            //if (!IsLoaded) return;
+            _credentialRecordSaver.Save(CredentialRecords, key);
         }
 
         public event EventHandler RepositoryConfigUpdated;

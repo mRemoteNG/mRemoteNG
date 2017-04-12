@@ -146,6 +146,7 @@
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordEncryptorDecorator.cs" />
     <Compile Include="Config\Serializers\ISecureDeserializer.cs" />
+    <Compile Include="Config\Serializers\ISecureSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormat.cs" />
