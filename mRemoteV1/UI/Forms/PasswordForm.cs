@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using mRemoteNG.UI.Controls;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Forms
 {
@@ -12,7 +12,10 @@ namespace mRemoteNG.UI.Forms
 
 	    private bool Verify { get; set; }
 
-	    public string Password => Verify ? txtVerify.Text : txtPassword.Text;
+	    public string Password
+	    {
+	        get { return Verify ? txtVerify.Text : txtPassword.Text; }
+	    }
 
 	    #endregion
 		

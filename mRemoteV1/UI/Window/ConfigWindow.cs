@@ -1597,37 +1597,36 @@ namespace mRemoteNG.UI.Window
         #endregion
 		
         #region Host Status (Ping)
-		private string _hostName;
 		private Thread _pThread;
 		
-		private void CheckHostAlive()
+		private void CheckHostAlive(object hostName)
 		{
-			var pingSender = new Ping();
+		    if (string.IsNullOrEmpty(hostName as string))
+		    {
+		        ShowStatusImage(Resources.HostStatus_Off);
+                return;
+		    }
+
+		    var pingSender = new Ping();
 
 		    try
 			{
-			    var pReply = pingSender.Send(_hostName);
+			    var pReply = pingSender.Send((string)hostName);
 			    if (pReply?.Status == IPStatus.Success)
 				{
 					if ((string)_btnHostStatus.Tag == "checking")
-					{
 						ShowStatusImage(Resources.HostStatus_On);
-					}
 				}
 				else
 				{
 					if ((string)_btnHostStatus.Tag == "checking")
-					{
 						ShowStatusImage(Resources.HostStatus_Off);
-					}
 				}
 			}
 			catch (Exception)
 			{
 				if ((string)_btnHostStatus.Tag == "checking")
-				{
 					ShowStatusImage(Resources.HostStatus_Off);
-				}
 			}
 		}
 
@@ -1654,15 +1653,13 @@ namespace mRemoteNG.UI.Window
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
 			    var info = connectionInfo as ConnectionInfo;
                 if (info == null) return;
-
                 if (info.IsContainer) return;
 
                 _btnHostStatus.Tag = "checking";
-                _hostName = ((ConnectionInfo)connectionInfo).Hostname;
 				_pThread = new Thread(CheckHostAlive);
 				_pThread.SetApartmentState(ApartmentState.STA);
 				_pThread.IsBackground = true;
-				_pThread.Start();
+				_pThread.Start(((ConnectionInfo)connectionInfo).Hostname);
 			}
 			catch (Exception ex)
 			{

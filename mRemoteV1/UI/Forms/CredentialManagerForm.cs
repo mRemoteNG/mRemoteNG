@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Tree;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.UI.Forms
@@ -11,7 +12,11 @@ namespace mRemoteNG.UI.Forms
     {
         private readonly CredentialManager _credentialManager;
 
-        public ICredentialRecord SelectedRecord => objectListView1.SelectedObject as ICredentialRecord;
+        public ICredentialRecord SelectedRecord
+        {
+            get { return objectListView1.SelectedObject as ICredentialRecord; }
+        }
+
         public IConfirm<ICredentialRecord> DeletionConfirmer { get; set; } = new AlwaysConfirmYes();
 
         public CredentialManagerForm(CredentialManager credentialManager)

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools.Cmdline;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -30,7 +30,10 @@ namespace mRemoteNG.Connection.Protocol
 
 	    public static string PuttyPath { get; set; }
 
-	    public bool Focused => NativeMethods.GetForegroundWindow() == PuttyHandle;
+	    public bool Focused
+	    {
+	        get { return NativeMethods.GetForegroundWindow() == PuttyHandle; }
+	    }
 
 	    #endregion
 
@@ -76,14 +79,16 @@ namespace mRemoteNG.Connection.Protocol
 						}
 						else
 						{
-							if (Settings.Default.EmptyCredentials == "windows")
-							{
-								username = Environment.UserName;
-							}
-							else if (Settings.Default.EmptyCredentials == "custom")
-							{
-								username = Settings.Default.DefaultUsername;
-							}
+						    // ReSharper disable once SwitchStatementMissingSomeCases
+						    switch (Settings.Default.EmptyCredentials)
+						    {
+						        case "windows":
+						            username = Environment.UserName;
+						            break;
+						        case "custom":
+						            username = Settings.Default.DefaultUsername;
+						            break;
+						    }
 						}
 								
 						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString()))

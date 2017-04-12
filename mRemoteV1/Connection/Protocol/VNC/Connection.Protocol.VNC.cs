@@ -4,6 +4,7 @@ using System.ComponentModel;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.Connection.Protocol.VNC
@@ -12,17 +13,18 @@ namespace mRemoteNG.Connection.Protocol.VNC
 	{
         #region Properties
         public bool SmartSize
-		{
-			get { return _VNC.Scaled; }
-			set { _VNC.Scaled = value; }
-		}
-				
-        public bool ViewOnly
-		{
-			get { return _VNC.ViewOnly; }
-			set { _VNC.ViewOnly = value; }
-		}
-        #endregion
+        {
+            get { return _VNC.Scaled; }
+            set { _VNC.Scaled = value; }
+        }
+
+	    public bool ViewOnly
+	    {
+	        get { return _VNC.ViewOnly; }
+	        set { _VNC.ViewOnly = value; }
+	    }
+
+	    #endregion
 				
         #region Private Declarations
 		private VncSharp.RemoteDesktop _VNC;
@@ -89,6 +91,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 		{
 			try
 			{
+			    // ReSharper disable once SwitchStatementMissingSomeCases
 				switch (Keys)
 				{
 					case SpecialKeys.CtrlAltDel:
@@ -133,12 +136,12 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		public void StartChat()
 		{
-		    throw (new NotImplementedException());
+		    throw new NotImplementedException();
 		}
 				
 		public void StartFileTransfer()
 		{
-            throw (new NotImplementedException());
+            throw new NotImplementedException();
         }
 				
 		public void RefreshScreen()

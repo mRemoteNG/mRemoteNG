@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Credential
 {
@@ -8,7 +8,10 @@ namespace mRemoteNG.Credential
     {
         private readonly List<ICredentialProvider> _credentialProviders = new List<ICredentialProvider>();
 
-        public IEnumerable<ICredentialProvider> CredentialProviders => _credentialProviders;
+        public IEnumerable<ICredentialProvider> CredentialProviders
+        {
+            get { return _credentialProviders; }
+        }
 
 
         public void AddProvider(ICredentialProvider credentialProvider)
