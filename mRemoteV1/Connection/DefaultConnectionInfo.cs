@@ -18,13 +18,14 @@ namespace mRemoteNG.Connection
 
         public void LoadFrom<TSource>(TSource sourceInstance, Func<string, string> propertyNameMutator = null)
         {
-            if (propertyNameMutator == null) propertyNameMutator = (a) => a;
+            if (propertyNameMutator == null) propertyNameMutator = a => a;
             var connectionProperties = GetProperties(_excludedProperties);
             foreach (var property in connectionProperties)
             {
                 try
                 {
                     var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
+                    if (propertyFromSource == null) continue;
                     var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
                     var typeConverter = TypeDescriptor.GetConverter(property.PropertyType);
                     if (typeConverter.CanConvertFrom(valueFromSource.GetType()))
@@ -48,7 +49,8 @@ namespace mRemoteNG.Connection
                     var propertyFromDestination = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
                     var localValue = property.GetValue(Instance, null);
                     var typeConverter = TypeDescriptor.GetConverter(property.PropertyType);
-                    if (!typeConverter.CanConvertTo(propertyFromDestination.PropertyType)) continue;
+                    if (propertyFromDestination != null && !typeConverter.CanConvertTo(propertyFromDestination.PropertyType)) continue;
+                    if (propertyFromDestination == null) continue;
                     var convertedValue = typeConverter.ConvertTo(localValue, propertyFromDestination.PropertyType);
                     propertyFromDestination.SetValue(destinationInstance, convertedValue, null);
                 }
