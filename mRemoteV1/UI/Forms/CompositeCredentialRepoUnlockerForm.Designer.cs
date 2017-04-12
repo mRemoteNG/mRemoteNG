@@ -221,6 +221,7 @@
             this.secureTextBoxPassword.Name = "secureTextBoxPassword";
             this.secureTextBoxPassword.Size = new System.Drawing.Size(278, 20);
             this.secureTextBoxPassword.TabIndex = 3;
+            this.secureTextBoxPassword.UseSystemPasswordChar = true;
             // 
             // CompositeCredentialRepoUnlockerForm
             // 
