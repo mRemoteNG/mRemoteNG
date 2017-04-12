@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
-using mRemoteNG.Credential.Repositories;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -15,6 +14,7 @@ namespace mRemoteNG.UI.Forms
         {
             if (repositoryUnlocker == null)
                 throw new ArgumentNullException(nameof(repositoryUnlocker));
+
             _repositoryUnlocker = repositoryUnlocker;
             InitializeComponent();
             SetupListView();

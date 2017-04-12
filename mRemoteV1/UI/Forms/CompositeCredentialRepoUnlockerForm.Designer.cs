@@ -248,6 +248,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 310);
             this.Name = "CompositeCredentialRepoUnlockerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Unlock Credential Repository";
             this.Shown += new System.EventHandler(this.CompositeCredentialRepoUnlockerForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).EndInit();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -11,9 +12,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
-using mRemoteNG.Config.Serializers.CredentialProviderSerializer;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -149,7 +148,8 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
-            new CredsAndConsSetup(Runtime.CredentialProviderCatalog, _credentialFilePath).LoadCredsAndCons();
+            var credsAndConsSetup = new CredsAndConsSetup(Runtime.CredentialProviderCatalog, _credentialFilePath);
+            credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
 
@@ -216,32 +216,39 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-            if (!Settings.Default.CheckForUpdatesAsked)
+            PromptForUpdatesPreference();
+            CheckForUpdates();
+            UnlockRepositories(Runtime.CredentialProviderCatalog, this);
+        }
+
+        private void PromptForUpdatesPreference()
+        {
+            if (Settings.Default.CheckForUpdatesAsked) return;
+            string[] commandButtons =
             {
-                string[] commandButtons = 
-                {
-                    Language.strAskUpdatesCommandRecommended, Language.strAskUpdatesCommandCustom,
-                    Language.strAskUpdatesCommandAskLater
-                };
+                Language.strAskUpdatesCommandRecommended,
+                Language.strAskUpdatesCommandCustom,
+                Language.strAskUpdatesCommandAskLater
+            };
 
-                CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
-                    "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+            CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
+                "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
-                if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
-                {
-                    Settings.Default.CheckForUpdatesAsked = true;
-                }
-
-                if (CTaskDialog.CommandButtonResult != 1) return;
-
-                using (var optionsForm = new frmOptions(Language.strTabUpdates))
-                {
-                    optionsForm.ShowDialog(this);
-                }
-
-                return;
+            if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
+            {
+                Settings.Default.CheckForUpdatesAsked = true;
             }
 
+            if (CTaskDialog.CommandButtonResult != 1) return;
+
+            using (var optionsForm = new frmOptions(Language.strTabUpdates))
+            {
+                optionsForm.ShowDialog(this);
+            }
+        }
+
+        private void CheckForUpdates()
+        {
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
             var nextUpdateCheck = Convert.ToDateTime(
@@ -252,6 +259,13 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
             Startup.Instance.CheckForUpdate();
+        }
+
+        private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
+        {
+            var credentialUnlocker = new CompositeRepositoryUnlocker(repositories);
+            var credentialUnlockerForm = new CompositeCredentialRepoUnlockerForm(credentialUnlocker);
+            credentialUnlockerForm.ShowDialog(parentForm);
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
