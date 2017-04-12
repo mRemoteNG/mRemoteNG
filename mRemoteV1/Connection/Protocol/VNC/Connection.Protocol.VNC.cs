@@ -4,6 +4,7 @@ using System.ComponentModel;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.Connection.Protocol.VNC
@@ -12,17 +13,18 @@ namespace mRemoteNG.Connection.Protocol.VNC
 	{
         #region Properties
         public bool SmartSize
-		{
-			get => _VNC.Scaled;
-            set => _VNC.Scaled = value;
+        {
+            get { return _VNC.Scaled; }
+            set { _VNC.Scaled = value; }
         }
-				
-        public bool ViewOnly
-		{
-			get => _VNC.ViewOnly;
-            set => _VNC.ViewOnly = value;
-        }
-        #endregion
+
+	    public bool ViewOnly
+	    {
+	        get { return _VNC.ViewOnly; }
+	        set { _VNC.ViewOnly = value; }
+	    }
+
+	    #endregion
 				
         #region Private Declarations
 		private VncSharp.RemoteDesktop _VNC;

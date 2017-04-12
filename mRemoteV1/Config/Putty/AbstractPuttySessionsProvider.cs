@@ -3,16 +3,19 @@ using System.Collections.Specialized;
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree.Root;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.Putty
 {
     public abstract class AbstractPuttySessionsProvider
 	{
         public virtual RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo();
-        protected virtual List<PuttySessionInfo> Sessions => RootInfo.Children.OfType<PuttySessionInfo>().ToList();
+        protected virtual List<PuttySessionInfo> Sessions
+        {
+            get { return RootInfo.Children.OfType<PuttySessionInfo>().ToList(); }
+        }
 
-        #region Public Methods
+	    #region Public Methods
         public abstract string[] GetSessionNames(bool raw = false);
 		public abstract PuttySessionInfo GetSession(string sessionName);
 		

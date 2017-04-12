@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using mRemoteNG.App;
 using mRemoteNG.Security.SymmetricEncryption;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.DatabaseConnectors
 {
@@ -14,7 +15,10 @@ namespace mRemoteNG.Config.DatabaseConnectors
         private string _sqlUsername;
         private string _sqlPassword;
 
-        public bool IsConnected => (SqlConnection.State == ConnectionState.Open);
+        public bool IsConnected
+        {
+            get { return (SqlConnection.State == ConnectionState.Open); }
+        }
 
         public SqlDatabaseConnector()
         {

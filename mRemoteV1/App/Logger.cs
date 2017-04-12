@@ -6,6 +6,7 @@ using System;
 #endif
 using System.IO;
 using System.Windows.Forms;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
@@ -15,7 +16,10 @@ namespace mRemoteNG.App
 
         public ILog Log { get; private set; }
 
-        public static string DefaultLogPath => BuildLogFilePath();
+        public static string DefaultLogPath
+        {
+            get { return BuildLogFilePath(); }
+        }
 
         private Logger()
         {

@@ -1,6 +1,7 @@
 ﻿using System.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using Org.BouncyCastle.Security;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Security
 {
@@ -10,7 +11,10 @@ namespace mRemoteNG.Security
         private SecureString _secureString;
         private readonly ICryptographyProvider _cryptographyProvider;
 
-        private static SecureString MachineKey => _machineKey ?? (_machineKey = GenerateNewMachineKey(32));
+        private static SecureString MachineKey
+        {
+            get { return _machineKey ?? (_machineKey = GenerateNewMachineKey(32)); }
+        }
 
         public EncryptedSecureString()
         {

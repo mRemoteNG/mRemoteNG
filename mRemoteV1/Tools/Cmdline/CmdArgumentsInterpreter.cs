@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 using mRemoteNG.App;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Tools.Cmdline
 {
@@ -21,7 +22,10 @@ namespace mRemoteNG.Tools.Cmdline
         private readonly StringDictionary _parameters;
 
         // Retrieve a parameter value if it exists
-        public string this[string param] => (_parameters[param]);
+        public string this[string param]
+        {
+            get { return (_parameters[param]); }
+        }
 
         public CmdArgumentsInterpreter(IEnumerable<string> args)
         {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Messages
 {
@@ -11,7 +11,10 @@ namespace mRemoteNG.Messages
     {
         private readonly IList<IMessage> _messageList;
 
-        public IEnumerable<IMessage> Messages => _messageList;
+        public IEnumerable<IMessage> Messages
+        {
+            get { return _messageList; }
+        }
 
         public MessageCollector()
         {
