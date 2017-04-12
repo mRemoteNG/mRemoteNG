@@ -27,6 +27,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         private string DecryptPasswords(string xml, SecureString key)
         {
+            if (string.IsNullOrEmpty(xml)) return xml;
             var xdoc = XDocument.Parse(xml);
             var cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
             foreach (var credentialElement in xdoc.Descendants())

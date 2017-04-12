@@ -13,6 +13,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         public IEnumerable<ICredentialRecord> Deserialize(string xml)
         {
+            if (string.IsNullOrEmpty(xml)) return new ICredentialRecord[0];
             var xdoc = XDocument.Parse(xml);
             var rootElement = xdoc.Root;
             ValidateSchemaVersion(rootElement);
