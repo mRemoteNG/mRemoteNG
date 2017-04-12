@@ -186,7 +186,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		private void VNCEvent_Disconnected(object sender, EventArgs e)
 		{
-			Event_Disconnected(sender, e.ToString());
+		    FrmMain.ClipboardChanged -= VNCEvent_ClipboardChanged;
+            Event_Disconnected(sender, e.ToString());
 			Close();
 		}
 				
