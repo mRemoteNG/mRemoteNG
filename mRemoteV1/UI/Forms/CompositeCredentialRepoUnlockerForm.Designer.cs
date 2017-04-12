@@ -35,7 +35,7 @@
             this.labelUnlocking = new System.Windows.Forms.Label();
             this.labelPassword = new System.Windows.Forms.Label();
             this.buttonUnlock = new System.Windows.Forms.Button();
-            this.buttonSkip = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.labelRepoTitle = new System.Windows.Forms.Label();
             this.textBoxType = new System.Windows.Forms.TextBox();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
@@ -115,7 +115,7 @@
             // buttonUnlock
             // 
             this.buttonUnlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonUnlock.Location = new System.Drawing.Point(316, 237);
+            this.buttonUnlock.Location = new System.Drawing.Point(386, 237);
             this.buttonUnlock.Name = "buttonUnlock";
             this.buttonUnlock.Size = new System.Drawing.Size(75, 23);
             this.buttonUnlock.TabIndex = 1;
@@ -123,17 +123,17 @@
             this.buttonUnlock.UseVisualStyleBackColor = true;
             this.buttonUnlock.Click += new System.EventHandler(this.buttonUnlock_Click);
             // 
-            // buttonSkip
+            // buttonClose
             // 
-            this.buttonSkip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSkip.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonSkip.Location = new System.Drawing.Point(397, 237);
-            this.buttonSkip.Name = "buttonSkip";
-            this.buttonSkip.Size = new System.Drawing.Size(75, 23);
-            this.buttonSkip.TabIndex = 2;
-            this.buttonSkip.Text = "Skip";
-            this.buttonSkip.UseVisualStyleBackColor = true;
-            this.buttonSkip.Click += new System.EventHandler(this.buttonSkip_Click);
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Location = new System.Drawing.Point(467, 237);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 2;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // labelRepoTitle
             // 
@@ -151,7 +151,7 @@
             this.textBoxType.Location = new System.Drawing.Point(237, 90);
             this.textBoxType.Name = "textBoxType";
             this.textBoxType.ReadOnly = true;
-            this.textBoxType.Size = new System.Drawing.Size(236, 20);
+            this.textBoxType.Size = new System.Drawing.Size(306, 20);
             this.textBoxType.TabIndex = 9;
             this.textBoxType.TabStop = false;
             // 
@@ -162,7 +162,7 @@
             this.textBoxTitle.Location = new System.Drawing.Point(237, 64);
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.ReadOnly = true;
-            this.textBoxTitle.Size = new System.Drawing.Size(236, 20);
+            this.textBoxTitle.Size = new System.Drawing.Size(306, 20);
             this.textBoxTitle.TabIndex = 8;
             this.textBoxTitle.TabStop = false;
             // 
@@ -184,7 +184,7 @@
             this.textBoxSource.Multiline = true;
             this.textBoxSource.Name = "textBoxSource";
             this.textBoxSource.ReadOnly = true;
-            this.textBoxSource.Size = new System.Drawing.Size(236, 46);
+            this.textBoxSource.Size = new System.Drawing.Size(306, 46);
             this.textBoxSource.TabIndex = 11;
             this.textBoxSource.TabStop = false;
             // 
@@ -204,7 +204,7 @@
             this.textBoxId.Location = new System.Drawing.Point(237, 38);
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.ReadOnly = true;
-            this.textBoxId.Size = new System.Drawing.Size(235, 20);
+            this.textBoxId.Size = new System.Drawing.Size(305, 20);
             this.textBoxId.TabIndex = 13;
             this.textBoxId.TabStop = false;
             // 
@@ -223,7 +223,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.secureTextBoxPassword.Location = new System.Drawing.Point(193, 190);
             this.secureTextBoxPassword.Name = "secureTextBoxPassword";
-            this.secureTextBoxPassword.Size = new System.Drawing.Size(278, 20);
+            this.secureTextBoxPassword.Size = new System.Drawing.Size(348, 20);
             this.secureTextBoxPassword.TabIndex = 0;
             this.secureTextBoxPassword.UseSystemPasswordChar = true;
             // 
@@ -232,8 +232,8 @@
             this.AcceptButton = this.buttonUnlock;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonSkip;
-            this.ClientSize = new System.Drawing.Size(484, 272);
+            this.CancelButton = this.buttonClose;
+            this.ClientSize = new System.Drawing.Size(554, 272);
             this.Controls.Add(this.textBoxId);
             this.Controls.Add(this.labelId);
             this.Controls.Add(this.textBoxSource);
@@ -242,7 +242,7 @@
             this.Controls.Add(this.textBoxType);
             this.Controls.Add(this.buttonUnlock);
             this.Controls.Add(this.textBoxTitle);
-            this.Controls.Add(this.buttonSkip);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.labelRepoSource);
             this.Controls.Add(this.objectListViewRepos);
@@ -269,7 +269,7 @@
         private System.Windows.Forms.Label labelPassword;
         private Controls.SecureTextBox secureTextBoxPassword;
         private System.Windows.Forms.Button buttonUnlock;
-        private System.Windows.Forms.Button buttonSkip;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label labelRepoTitle;
         private System.Windows.Forms.TextBox textBoxType;
         private System.Windows.Forms.TextBox textBoxTitle;
