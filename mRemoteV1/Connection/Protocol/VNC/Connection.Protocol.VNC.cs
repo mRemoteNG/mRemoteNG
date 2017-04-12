@@ -13,15 +13,15 @@ namespace mRemoteNG.Connection.Protocol.VNC
         #region Properties
         public bool SmartSize
 		{
-			get { return _VNC.Scaled; }
-			set { _VNC.Scaled = value; }
-		}
+			get => _VNC.Scaled;
+            set => _VNC.Scaled = value;
+        }
 				
         public bool ViewOnly
 		{
-			get { return _VNC.ViewOnly; }
-			set { _VNC.ViewOnly = value; }
-		}
+			get => _VNC.ViewOnly;
+            set => _VNC.ViewOnly = value;
+        }
         #endregion
 				
         #region Private Declarations
@@ -89,6 +89,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 		{
 			try
 			{
+			    // ReSharper disable once SwitchStatementMissingSomeCases
 				switch (Keys)
 				{
 					case SpecialKeys.CtrlAltDel:
@@ -133,12 +134,12 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		public void StartChat()
 		{
-		    throw (new NotImplementedException());
+		    throw new NotImplementedException();
 		}
 				
 		public void StartFileTransfer()
 		{
-            throw (new NotImplementedException());
+            throw new NotImplementedException();
         }
 				
 		public void RefreshScreen()
