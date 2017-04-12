@@ -80,5 +80,15 @@ namespace mRemoteNG.UI.Controls
         {
             SelectionChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _credentialRepositoryList.RepositoriesUpdated -= OnRepositoriesUpdated;
+                components?.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
