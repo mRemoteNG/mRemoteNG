@@ -31,7 +31,7 @@ namespace mRemoteNG.UI.Menu
             BuildScreenList();
         }
 
-        public void ResetScreenList()
+        private void ResetScreenList()
         {
             _systemMenu.Reset();
         }
