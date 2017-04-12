@@ -25,6 +25,7 @@ namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
 
         public IEnumerable<ICredentialRepository> Deserialize(string xml)
         {
+            if (string.IsNullOrEmpty(xml)) return new ICredentialRepository[0];
             var xdoc = XDocument.Parse(xml);
             var repoEntries = xdoc.Descendants("CredentialRepository");
             return repoEntries.Select(new XmlCredentialRepositoryFactory(_serializer, _deserializer).Build);
