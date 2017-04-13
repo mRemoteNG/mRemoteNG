@@ -74,16 +74,27 @@ namespace mRemoteNG.App.Initialization
             if (!auth.Authenticate(Runtime.EncryptionKey))
                 throw new Exception("Could not authenticate");
 
+            var newCredRepoKey = auth.LastAuthenticatedPassword;
+
             var credentialHarvester = new CredentialHarvester();
-            var harvestedCredentials = credentialHarvester.Harvest(xdoc, auth.LastAuthenticatedPassword);
+            var harvestedCredentials = credentialHarvester.Harvest(xdoc, newCredRepoKey);
 
             var xmlRepoFactory = new XmlCredentialRepositoryFactory(_credRepoSerializer, _credRepoDeserializer);
             var newCredentialRepository = xmlRepoFactory.Build(
-                new CredentialRepositoryConfig { Source = _credentialFilePath, Title = "Converted Credentials", TypeName = "Xml"}
+                new CredentialRepositoryConfig
+                {
+                    Source = _credentialFilePath,
+                    Title = "Converted Credentials",
+                    TypeName = "Xml",
+                    Key = newCredRepoKey
+                }
             );
+
+            newCredentialRepository.LoadCredentials(newCredRepoKey);
 
             foreach (var credential in harvestedCredentials)
                 newCredentialRepository.CredentialRecords.Add(credential);
+            newCredentialRepository.SaveCredentials(newCredRepoKey);
 
             _credentialRepositoryList.AddProvider(newCredentialRepository);
             return credentialHarvester.ConnectionToCredentialMap;
