@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security;
 
 namespace mRemoteNG.Credential
@@ -17,7 +18,7 @@ namespace mRemoteNG.Credential
                 throw new ArgumentNullException(nameof(repositories));
 
             _repositories.AddRange(repositories);
-            SelectedRepository = _repositories[0];
+            SelectNextLockedRepository();
         }
 
         public void Unlock(SecureString key)
@@ -32,18 +33,42 @@ namespace mRemoteNG.Credential
 
         private ICredentialRepository GetNextLockedRepo()
         {
-            var initialIndex = _repositories.IndexOf(SelectedRepository);
-            var currentIndex = initialIndex + 1;
-            if (currentIndex >= _repositories.Count) return SelectedRepository;
-            while (_repositories[currentIndex].IsLoaded)
-            {
-                if (currentIndex == initialIndex)
-                    return null;
-                currentIndex += 1;
-                if (currentIndex >= _repositories.Count)
-                    currentIndex = 0;
-            }
-            return _repositories[currentIndex];
+            var newOrder = OrderListForNextLockedRepo();
+            return newOrder.Any() ? newOrder.First() : null;
+        }
+
+        private IList<ICredentialRepository> OrderListForNextLockedRepo()
+        {
+            if (_repositories.Count == 0)
+                return new List<ICredentialRepository>();
+            var reorderedList = new List<ICredentialRepository>();
+            var itemsAfterCurrent = BuildListOfItemsAfterCurrent();
+            var itemsBeforeAndIncludingCurrent = BuildListOfItemsBeforeAndIncludingCurrent();
+            reorderedList.AddRange(itemsAfterCurrent.Where(repository => !repository.IsLoaded));
+            reorderedList.AddRange(itemsBeforeAndIncludingCurrent.Where(repository => !repository.IsLoaded));
+            return reorderedList;
+        }
+
+        private IList<ICredentialRepository> BuildListOfItemsAfterCurrent()
+        {
+            var lastListIndex = _repositories.Count - 1;
+            var newListStartIndex = GetNewListStartIndex();
+
+            if (newListStartIndex > lastListIndex) newListStartIndex--;
+            var countToEndOfList = _repositories.Count - newListStartIndex;
+            return _repositories.GetRange(newListStartIndex, countToEndOfList);
+        }
+
+        private IList<ICredentialRepository> BuildListOfItemsBeforeAndIncludingCurrent()
+        {
+            var newListStartIndex = GetNewListStartIndex();
+            return _repositories.GetRange(0, newListStartIndex);
+        }
+
+        private int GetNewListStartIndex()
+        {
+            var currentItemIndex = _repositories.IndexOf(SelectedRepository);
+            return currentItemIndex + 1;
         }
     }
 }

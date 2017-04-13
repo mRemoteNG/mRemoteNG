@@ -74,6 +74,24 @@ namespace mRemoteNGTests.Credential
             Assert.That(_repositoryUnlocker.SelectedRepository, Is.EqualTo(_repos[0]));
         }
 
+        [Test]
+        public void NothingIsSelectedIfNoReposExist()
+        {
+            var repositoryUnlocker = new CompositeRepositoryUnlocker(new ICredentialRepository[0]);
+            repositoryUnlocker.SelectNextLockedRepository();
+            Assert.That(repositoryUnlocker.SelectedRepository, Is.Null);
+        }
+
+        [Test]
+        public void FirstLockedRepoSelectedIfNoRepoCurrentlySelected()
+        {
+            var repo = BuildRepos(1);
+            repo[0].IsLoaded.Returns(false);
+            var repositoryUnlocker = new CompositeRepositoryUnlocker(repo);
+            repositoryUnlocker.SelectNextLockedRepository();
+            Assert.That(repositoryUnlocker.SelectedRepository, Is.EqualTo(repo[0]));
+        }
+
         private IList<ICredentialRepository> BuildRepos(int count)
         {
             var list = new List<ICredentialRepository>();
