@@ -30,6 +30,7 @@ namespace mRemoteNG.UI.Forms
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
+                ShowPasswordError(true);
             }
             finally
             {
@@ -54,6 +55,7 @@ namespace mRemoteNG.UI.Forms
             var selectedRepo = objectListViewRepos.SelectedObject as ICredentialRepository;
             _repositoryUnlocker.SelectedRepository = selectedRepo;
             ShowRepoDetails(selectedRepo);
+            ShowPasswordError(false);
         }
 
         private void ShowRepoDetails(ICredentialRepository repo)
@@ -62,6 +64,13 @@ namespace mRemoteNG.UI.Forms
             textBoxTitle.Text = repo?.Config.Title ?? "";
             textBoxType.Text = repo?.Config.TypeName ?? "";
             textBoxSource.Text = repo?.Config.Source ?? "";
+        }
+
+        private void ShowPasswordError(bool shouldErrorBeActive)
+        {
+            labelPasswordError.Visible = shouldErrorBeActive;
+            imgPasswordError.Visible = shouldErrorBeActive;
+            secureTextBoxPassword.BackColor = shouldErrorBeActive ? Color.MistyRose : SystemColors.Window;
         }
 
         #region Setup

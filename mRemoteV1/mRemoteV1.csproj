@@ -1155,6 +1155,7 @@
     <None Include="Resources\Images_FamFamFam\lightbulb.png" />
     <None Include="Resources\Images_FamFamFam\lightning.png" />
     <None Include="Resources\Images_FamFamFam\folder_key.png" />
+    <None Include="Resources\Images_FamFamFam\exclamation.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <None Include="Resources\Images_FamFamFam\lock.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />

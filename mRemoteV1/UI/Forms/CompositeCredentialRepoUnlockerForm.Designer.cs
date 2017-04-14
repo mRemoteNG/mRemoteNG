@@ -44,8 +44,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
+            this.labelPasswordError = new System.Windows.Forms.Label();
+            this.imgPasswordError = new System.Windows.Forms.PictureBox();
             this.secureTextBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgPasswordError)).BeginInit();
             this.SuspendLayout();
             // 
             // objectListViewRepos
@@ -217,6 +220,30 @@
             this.labelId.TabIndex = 12;
             this.labelId.Text = "ID";
             // 
+            // labelPasswordError
+            // 
+            this.labelPasswordError.AutoSize = true;
+            this.labelPasswordError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPasswordError.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelPasswordError.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.labelPasswordError.Location = new System.Drawing.Point(191, 213);
+            this.labelPasswordError.Name = "labelPasswordError";
+            this.labelPasswordError.Size = new System.Drawing.Size(115, 13);
+            this.labelPasswordError.TabIndex = 14;
+            this.labelPasswordError.Text = "Incorrect password";
+            this.labelPasswordError.Visible = false;
+            // 
+            // imgPasswordError
+            // 
+            this.imgPasswordError.Image = global::mRemoteNG.Resources.exclamation;
+            this.imgPasswordError.Location = new System.Drawing.Point(176, 192);
+            this.imgPasswordError.Name = "imgPasswordError";
+            this.imgPasswordError.Size = new System.Drawing.Size(16, 16);
+            this.imgPasswordError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.imgPasswordError.TabIndex = 15;
+            this.imgPasswordError.TabStop = false;
+            this.imgPasswordError.Visible = false;
+            // 
             // secureTextBoxPassword
             // 
             this.secureTextBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -234,6 +261,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
             this.ClientSize = new System.Drawing.Size(554, 272);
+            this.Controls.Add(this.imgPasswordError);
+            this.Controls.Add(this.labelPasswordError);
             this.Controls.Add(this.textBoxId);
             this.Controls.Add(this.labelId);
             this.Controls.Add(this.textBoxSource);
@@ -257,6 +286,7 @@
             this.Text = "Unlock Credential Repository";
             this.Shown += new System.EventHandler(this.CompositeCredentialRepoUnlockerForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgPasswordError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,5 +310,7 @@
         private System.Windows.Forms.TextBox textBoxId;
         private System.Windows.Forms.Label labelId;
         private BrightIdeasSoftware.OLVColumn olvColumnStatusIcon;
+        private System.Windows.Forms.Label labelPasswordError;
+        private System.Windows.Forms.PictureBox imgPasswordError;
     }
 }
