@@ -1,3 +1,11 @@
+1.76 XXXX (2017-XX-XX):
+
+Features/Enhancements:
+----------------------
+Added more logging/notifications options
+#429: Added Czech translation
+
+
 1.75.7003 (2017-03-24):
 
 Fixes:
@@ -32,6 +40,7 @@ Fixes:
 #427: Export does not respect filtering user/password/domain
 
 
+
 1.75 (2017-03-01):
 
 Known Issue:
@@ -43,17 +52,6 @@ File hash check will fail when updating from 1.75 Beta 1 to newer versions.
 Features/Enhancements:
 ----------------------
 #344 - Use SHA512 File Hashes to validate downloads (in the update mechanism & posted to the Downloads page)
-
-
-1.75 RC1 (2017-01-27):
-
-Known Issue:
-------------
-Portable build MD5 check will fail when updating from 1.75 Beta 1 to newer versions.
-
-
-Features/Enhancements:
-----------------------
 Added Release Channels to the update check functionality allowing users to select one of 3 release channels for updates: Stable, Beta, Dev
 #360: Help -> About, Version # is now selectable/copyable
 #221: RDP: Optional disconnect after X number of minutes of inactivity

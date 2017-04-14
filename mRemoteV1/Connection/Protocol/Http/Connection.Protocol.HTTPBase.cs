@@ -5,21 +5,20 @@ using mRemoteNG.Tools;
 using mRemoteNG.App;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
-//using SHDocVw;
-
 namespace mRemoteNG.Connection.Protocol.Http
 {
 	public class HTTPBase : ProtocolBase
 	{
         #region Private Properties
 		private Control wBrowser;
-		public string httpOrS;
-		public int defaultPort;
+	    protected string httpOrS;
+	    protected int defaultPort;
 		private string tabTitle;
         #endregion
 				
         #region Public Methods
-		public HTTPBase(RenderingEngine RenderingEngine)
+
+	    protected HTTPBase(RenderingEngine RenderingEngine)
 		{
 			try
 			{
@@ -34,17 +33,11 @@ namespace mRemoteNG.Connection.Protocol.Http
 				{
                     Control = new WebBrowser();
 				}
-				
-				NewExtended();
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectionFailed, ex);
 			}
-		}
-
-	    public virtual void NewExtended()
-		{
 		}
 				
 		public override bool Initialize()
@@ -53,7 +46,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 					
 			try
 			{
-			    TabPage objTabPage = InterfaceControl.Parent as TabPage;
+			    var objTabPage = InterfaceControl.Parent as TabPage;
 			    if (objTabPage != null) tabTitle = objTabPage.Title;
 			}
 			catch (Exception)
@@ -67,17 +60,20 @@ namespace mRemoteNG.Connection.Protocol.Http
 						
 				if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 				{
-				    GeckoWebBrowser GeckoBrowser = (GeckoWebBrowser) wBrowser;
+				    var GeckoBrowser = (GeckoWebBrowser) wBrowser;
                     if (GeckoBrowser != null)
                     {
                         GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
-                        //GeckoBrowser.Tab.LastTabRemoved += wBrowser_LastTabRemoved;
+                        GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
+                    }
+                    else
+                    {
+                        throw new Exception("Failed to initialize Gecko Rendering Engine.");
                     }
                 }
                 else
 				{
-                    WebBrowser objWebBrowser = (WebBrowser)wBrowser;
-                    //SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
+                    var objWebBrowser = (WebBrowser)wBrowser;
 					objWebBrowser.ScrollBarsEnabled = true;
 
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
@@ -85,8 +81,6 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     objWebBrowser.Navigated += wBrowser_Navigated;
 					objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
-				    //objWebBrowser.NewWindow3 += wBrowser_NewWindow3;
-				    //objAxWebBrowser.NewWindow3 += wBrowser_NewWindow3;
 				}
 				
 				return true;
@@ -102,7 +96,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 		{
 			try
 			{
-				string strHost = Convert.ToString(InterfaceControl.Info.Hostname);
+				var strHost = InterfaceControl.Info.Hostname;
                 /* 
                  * Commenting out since this codes doesn't actually do anything at this time...
                  * Possibly related to MR-221 and/or MR-533 ????
@@ -169,11 +163,8 @@ namespace mRemoteNG.Connection.Protocol.Http
         #region Events
 		private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
 		{
-			WebBrowser objWebBrowser = wBrowser as WebBrowser;
-			if (objWebBrowser == null)
-			{
-				return;
-			}
+			var objWebBrowser = wBrowser as WebBrowser;
+			if (objWebBrowser == null) return;
 					
 			// This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
 			objWebBrowser.AllowWebBrowserDrop = false;
@@ -181,66 +172,46 @@ namespace mRemoteNG.Connection.Protocol.Http
 			objWebBrowser.Navigated -= wBrowser_Navigated;
 		}
 
-#if false
-        private void wBrowser_NewWindow3(ref object ppDisp, ref bool Cancel, uint dwFlags, string bstrUrlContext, string bstrUrl)
-		{
-			if ((dwFlags & (long)NWMF.NWMF_OVERRIDEKEY) > 0)
-			{
-				Cancel = false;
-			}
-			else
-			{
-				Cancel = true;
-			}
-		}
-              
-		private void wBrowser_LastTabRemoved(object sender)
-		{
-            Close();
-		}
-#endif
         private void wBrowser_DocumentTitleChanged(object sender, EventArgs e)
 		{
 			try
 			{
 			    var tabP = InterfaceControl.Parent as TabPage;
 
-			    if (tabP != null)
-				{
-					string shortTitle;
+			    if (tabP == null) return;
+			    string shortTitle;
 							
-					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
-					{
-						if (((GeckoWebBrowser) wBrowser).DocumentTitle.Length >= 15)
-						{
-							shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
-						}
-						else
-						{
-							shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
-						}
-					}
-					else
-					{
-						if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
-						{
-							shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
-						}
-						else
-						{
-							shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
-						}
-					}
+			    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+			    {
+			        if (((GeckoWebBrowser) wBrowser).DocumentTitle.Length >= 15)
+			        {
+			            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
+			        }
+			        else
+			        {
+			            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
+			        }
+			    }
+			    else
+			    {
+			        if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
+			        {
+			            shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
+			        }
+			        else
+			        {
+			            shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
+			        }
+			    }
 							
-					if (!string.IsNullOrEmpty(tabTitle))
-					{
-						tabP.Title = tabTitle + @" - " + shortTitle;
-					}
-					else
-					{
-						tabP.Title = shortTitle;
-					}
-				}
+			    if (!string.IsNullOrEmpty(tabTitle))
+			    {
+			        tabP.Title = tabTitle + @" - " + shortTitle;
+			    }
+			    else
+			    {
+			        tabP.Title = shortTitle;
+			    }
 			}
 			catch (Exception ex)
 			{
@@ -255,41 +226,39 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 var tabP = InterfaceControl.Parent as TabPage;
 
-                if (tabP != null)
+                if (tabP == null) return;
+                string shortTitle;
+
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                 {
-                    string shortTitle;
-
-                    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                    if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
                     {
-                        if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                        {
-                            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                        }
-                        else
-                        {
-                            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
-                        }
+                        shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
-                        {
-                            shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                        }
-                        else
-                        {
-                            shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
-                        }
+                        shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
                     }
-
-                    if (!string.IsNullOrEmpty(tabTitle))
+                }
+                else
+                {
+                    if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
                     {
-                        tabP.Title = tabTitle + @" - " + shortTitle;
+                        shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        tabP.Title = shortTitle;
+                        shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
                     }
+                }
+
+                if (!string.IsNullOrEmpty(tabTitle))
+                {
+                    tabP.Title = tabTitle + @" - " + shortTitle;
+                }
+                else
+                {
+                    tabP.Title = shortTitle;
                 }
             }
             catch (Exception ex)
@@ -308,27 +277,6 @@ namespace mRemoteNG.Connection.Protocol.Http
             Gecko = 2
 		}
 
-#if false
-        private enum NWMF
-		{
-			// ReSharper disable InconsistentNaming
-			NWMF_UNLOADING = 0x1,
-			NWMF_USERINITED = 0x2,
-			NWMF_FIRST = 0x4,
-			NWMF_OVERRIDEKEY = 0x8,
-			NWMF_SHOWHELP = 0x10,
-			NWMF_HTMLDIALOG = 0x20,
-			NWMF_FROMDIALOGCHILD = 0x40,
-			NWMF_USERREQUESTED = 0x80,
-			NWMF_USERALLOWED = 0x100,
-			NWMF_FORCEWINDOW = 0x10000,
-			NWMF_FORCETAB = 0x20000,
-			NWMF_SUGGESTWINDOW = 0x40000,
-			NWMF_SUGGESTTAB = 0x80000,
-			NWMF_INACTIVETAB = 0x100000
-			// ReSharper restore InconsistentNaming
-		}
-#endif
 #endregion
 	}
 }

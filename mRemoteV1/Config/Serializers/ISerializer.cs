@@ -1,12 +1,9 @@
-﻿using mRemoteNG.Connection;
-using mRemoteNG.Tree;
+﻿using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public interface ISerializer<TFormat>
+    public interface ISerializer<out TFormat> : IConnectionSerializer<TFormat>
     {
         TFormat Serialize(ConnectionTreeModel connectionTreeModel);
-
-        TFormat Serialize(ConnectionInfo serializationTarget);
     }
 }

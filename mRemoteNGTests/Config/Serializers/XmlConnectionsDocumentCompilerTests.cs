@@ -1,4 +1,5 @@
-﻿using System.Xml.XPath;
+﻿using System.Linq;
+using System.Xml.XPath;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -27,23 +28,26 @@ namespace mRemoteNGTests.Config.Serializers
         [SetUp]
         public void Setup()
         {
-            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
-            var saveFilter = new SaveFilter();
-            _documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, saveFilter);
             _connectionTreeModel = SetupConnectionTreeModel();
+            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                _cryptographyProvider, 
+                _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                new SaveFilter());
+            _documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, connectionNodeSerializer);
         }
 
         [Test]
         public void XDocumentHasXmlDeclaration()
         {
-            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false, false);
+            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false);
             Assert.That(xdoc.Declaration, Is.Not.Null);
         }
 
         [Test]
         public void DocumentHasRootConnectionElement()
         {
-            var xdoc =_documentCompiler.CompileDocument(_connectionTreeModel, false, false);
+            var xdoc =_documentCompiler.CompileDocument(_connectionTreeModel, false);
             var rootElementName = xdoc.Root?.Name.LocalName;
             Assert.That(rootElementName, Is.EqualTo("Connections"));
         }
@@ -51,7 +55,7 @@ namespace mRemoteNGTests.Config.Serializers
         [Test]
         public void ConnectionNodesSerializedRecursively()
         {
-            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false, false);
+            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false);
             var con4 = xdoc.Root?.XPathSelectElement("Node[@Name='folder2']/Node[@Name='folder3']/Node[@Name='con4']");
             Assert.That(con4, Is.Not.Null);
         }
@@ -59,7 +63,7 @@ namespace mRemoteNGTests.Config.Serializers
         [Test]
         public void XmlContentEncryptedWhenFullFileEncryptionTurnedOn()
         {
-            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, true, false);
+            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, true);
             var rootElementValue = xdoc.Root?.Value;
             Assert.That(rootElementValue, Is.Not.EqualTo(string.Empty));
         }

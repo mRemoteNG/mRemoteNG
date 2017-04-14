@@ -6,6 +6,7 @@ using mRemoteNG.App;
 using System.Threading;
 using mRemoteNG.Tools;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 
@@ -139,10 +140,10 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				{
 					return;
 				}
-						
-				string _user = _Info.Username;
-				string _pass = _Info.Password;
-				string _dom = _Info.Domain;
+				
+				var _user = _Info.CredentialRecord?.Username ?? "";
+                var _pass = _Info.CredentialRecord?.Password ?? "".ConvertToSecureString();
+                var _dom = _Info.CredentialRecord?.Domain ?? "";
 						
 				if (string.IsNullOrEmpty(_user))
 				{
@@ -160,7 +161,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					_ICAClient.Username = _user;
 				}
 						
-				if (string.IsNullOrEmpty(_pass))
+				if (string.IsNullOrEmpty(_pass.ConvertToUnsecureString()))
 				{
 					if (Settings.Default.EmptyCredentials == "custom")
 					{
@@ -173,7 +174,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				}
 				else
 				{
-					_ICAClient.SetProp("ClearPassword", _pass);
+					_ICAClient.SetProp("ClearPassword", _pass.ConvertToUnsecureString());
 				}
 						
 				if (string.IsNullOrEmpty(_dom))
@@ -204,7 +205,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			{
 				if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
 				{
-                    _ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(frmMain.Default).Bounds.Width, Screen.FromControl(frmMain.Default).Bounds.Height, 0);
+                    _ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(FrmMain.Default).Bounds.Width, Screen.FromControl(FrmMain.Default).Bounds.Height, 0);
 					_ICAClient.FullScreenWindow();
 							
 					return;
@@ -220,7 +221,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				}
 				else if (InterfaceControl.Info.Resolution == ProtocolRDP.RDPResolutions.Fullscreen)
 				{
-					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(frmMain.Default).Bounds.Width, Screen.FromControl(frmMain.Default).Bounds.Height, 0);
+					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(FrmMain.Default).Bounds.Width, Screen.FromControl(FrmMain.Default).Bounds.Height, 0);
 					_ICAClient.FullScreenWindow();
 				}
 				else

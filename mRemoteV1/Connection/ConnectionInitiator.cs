@@ -50,7 +50,7 @@ namespace mRemoteNG.Connection
             var connectionWindow = (ConnectionWindow)interfaceControl.FindForm();
             connectionWindow?.Focus();
             var findForm = (ConnectionWindow)interfaceControl.FindForm();
-            findForm?.Show(frmMain.Default.pnlDock);
+            findForm?.Show(FrmMain.Default.pnlDock);
             var tabPage = (TabPage)interfaceControl.Parent;
             tabPage.Selected = true;
             return true;
@@ -114,7 +114,7 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfo.OpenConnections.Add(newProtocol);
-                frmMain.Default.SelectedConnection = connectionInfo;
+                FrmMain.Default.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
             {
@@ -176,7 +176,7 @@ namespace mRemoteNG.Connection
             if (connectionForm == null)
                 connectionForm = Runtime.AddPanel(connectionPanel);
             else
-                ((ConnectionWindow)connectionForm).Show(frmMain.Default.pnlDock);
+                ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
 
             connectionForm.Focus();
             return connectionForm;
@@ -222,6 +222,12 @@ namespace mRemoteNG.Connection
         {
             try
             {
+                if (sender is VncSharp.RemoteDesktop)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, @"VncSharp Disconnected."), true);
+                    return;
+                }
+
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, disconnectedMessage), true);
 
                 var Prot = (ProtocolBase)sender;
@@ -252,7 +258,7 @@ namespace mRemoteNG.Connection
                 else
                     connDetail = "UNKNOWN";
 
-                Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, Prot.InterfaceControl.Info.Protocol, Environment.UserName));
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, Prot.InterfaceControl.Info.Protocol, Environment.UserName));
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 
                 if (Prot.InterfaceControl.Info.PostExtApp == "") return;
@@ -269,7 +275,7 @@ namespace mRemoteNG.Connection
         {
             var prot = (ProtocolBase)sender;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
-            Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol, Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol, Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
         }
 
         private static void Prot_Event_ErrorOccured(object sender, string errorMessage)

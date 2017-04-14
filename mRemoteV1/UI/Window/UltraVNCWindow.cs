@@ -44,9 +44,9 @@ namespace mRemoteNG.UI.Window
 			//
 			//pnlContainer
 			//
-			this.pnlContainer.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
+			this.pnlContainer.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom 
+			                           | System.Windows.Forms.AnchorStyles.Left 
+			                           | System.Windows.Forms.AnchorStyles.Right;
 			this.pnlContainer.Location = new System.Drawing.Point(0, 27);
 			this.pnlContainer.Name = "pnlContainer";
 			this.pnlContainer.Size = new System.Drawing.Size(446, 335);
@@ -74,10 +74,10 @@ namespace mRemoteNG.UI.Window
         #endregion
 		
         #region Public Methods
-		public UltraVNCWindow(DockContent Panel)
+		public UltraVNCWindow()
 		{
 			this.WindowType = WindowType.UltraVNCSC;
-			this.DockPnl = Panel;
+			this.DockPnl = new DockContent();
 			this.InitializeComponent();
 		}
         #endregion
@@ -118,12 +118,13 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" + Environment.NewLine + ex.Message, false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" + Environment.NewLine + ex.Message);
 				Close();
 			}
 		}
-				
-		private void SetupLicense()
+
+#if false
+        private void SetupLicense()
 		{
 			try
 			{
@@ -136,7 +137,8 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetupLicense failed (UI.Window.UltraVNCSC)" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+#endif
+               
 		//Private Sub vnc_ConnectionAccepted(ByVal sender As Object, ByVal e As AxViewerX._ISmartCodeVNCViewerEvents_ConnectionAcceptedEvent) Handles vnc.ConnectionAccepted
 		//    mC.AddMessage(Messages.MessageClass.InformationMsg, e.bstrServerAddress & " is now connected to your UltraVNC SingleClick panel!")
 		//End Sub
@@ -145,12 +147,12 @@ namespace mRemoteNG.UI.Window
 		//    StartListening()
 		//End Sub
 				
-		private void btnDisconnect_Click(System.Object sender, System.EventArgs e)
+		private void btnDisconnect_Click(object sender, EventArgs e)
 		{
 			//vnc.Dispose()
 			Dispose();
 			Windows.Show(WindowType.UltraVNCSC);
 		}
-        #endregion
+#endregion
 	}
 }

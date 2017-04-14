@@ -28,7 +28,7 @@ namespace mRemoteNG.UI.Window
 			TreeNode TreeNode4 = new TreeNode("Configuration");
 			TreeNode TreeNode5 = new TreeNode("SQL Configuration");
 			TreeNode TreeNode6 = new TreeNode("Command-Line Switches");
-			TreeNode TreeNode7 = new TreeNode("Getting Started", new TreeNode[] {TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6});
+			TreeNode TreeNode7 = new TreeNode("Getting Started", new[] {TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6});
 			TreeNode TreeNode8 = new TreeNode("Main Menu");
 			TreeNode TreeNode9 = new TreeNode("Connections");
 			TreeNode TreeNode10 = new TreeNode("Config");
@@ -43,9 +43,9 @@ namespace mRemoteNG.UI.Window
 			TreeNode TreeNode20 = new TreeNode("Import From Active Directory");
 			TreeNode TreeNode21 = new TreeNode("External Applications");
 			TreeNode TreeNode22 = new TreeNode("Port Scan");
-			TreeNode TreeNode23 = new TreeNode("User Interface", new TreeNode[] {TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20, TreeNode21, TreeNode22});
+			TreeNode TreeNode23 = new TreeNode("User Interface", new[] {TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20, TreeNode21, TreeNode22});
 			TreeNode TreeNode24 = new TreeNode("Quick Reference");
-			TreeNode TreeNode25 = new TreeNode("Help", new TreeNode[] {TreeNode1, TreeNode7, TreeNode23, TreeNode24});
+			TreeNode TreeNode25 = new TreeNode("Help", new[] {TreeNode1, TreeNode7, TreeNode23, TreeNode24});
 			wbHelp = new WebBrowser();
 			wbHelp.DocumentTitleChanged += new EventHandler(wbHelp_DocumentTitleChanged);
 			tvIndex = new TreeView();
@@ -61,8 +61,8 @@ namespace mRemoteNG.UI.Window
 			//
 			//wbHelp
 			//
-			wbHelp.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) 
-			                 | AnchorStyles.Left) 
+			wbHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom 
+			                | AnchorStyles.Left 
 			                | AnchorStyles.Right;
 			wbHelp.Location = new System.Drawing.Point(1, 36);
 			wbHelp.MinimumSize = new System.Drawing.Size(20, 20);
@@ -73,8 +73,8 @@ namespace mRemoteNG.UI.Window
 			//
 			//tvIndex
 			//
-			tvIndex.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) 
-			                  | AnchorStyles.Left) 
+			tvIndex.Anchor = AnchorStyles.Top | AnchorStyles.Bottom 
+			                 | AnchorStyles.Left 
 			                 | AnchorStyles.Right;
 			tvIndex.BorderStyle = BorderStyle.None;
 			tvIndex.HideSelection = false;
@@ -150,7 +150,7 @@ namespace mRemoteNG.UI.Window
 			TreeNode25.Name = "Node0";
 			TreeNode25.Text = "Help";
             TreeNode25.Tag = "Index";
-			tvIndex.Nodes.AddRange(new TreeNode[] {TreeNode25});
+			tvIndex.Nodes.AddRange(new[] {TreeNode25});
 			tvIndex.ShowRootLines = false;
 			tvIndex.Size = new System.Drawing.Size(207, 321);
 			tvIndex.TabIndex = 0;
@@ -163,8 +163,8 @@ namespace mRemoteNG.UI.Window
 			//
 			//pnlSplitter
 			//
-			pnlSplitter.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) 
-			                      | AnchorStyles.Left) 
+			pnlSplitter.Anchor = AnchorStyles.Top | AnchorStyles.Bottom 
+			                     | AnchorStyles.Left 
 			                     | AnchorStyles.Right;
 			pnlSplitter.FixedPanel = FixedPanel.Panel1;
 			pnlSplitter.Location = new System.Drawing.Point(0, 0);
@@ -184,7 +184,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//lblDocName
 			//
-			lblDocName.Anchor = (AnchorStyles.Top | AnchorStyles.Left) 
+			lblDocName.Anchor = AnchorStyles.Top | AnchorStyles.Left 
 			                    | AnchorStyles.Right;
 			lblDocName.BackColor = System.Drawing.Color.DimGray;
 			lblDocName.Font = new System.Drawing.Font("Segoe UI", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
@@ -213,10 +213,10 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Public Methods
-		public HelpWindow(DockContent Panel)
+		public HelpWindow()
 		{
 			WindowType = WindowType.Help;
-			DockPnl = Panel;
+			DockPnl = new DockContent();
 			InitializeComponent();
 					
 			FillImageList();
@@ -243,9 +243,9 @@ namespace mRemoteNG.UI.Window
 			tvIndex.SelectedNode = e.Node;
 		}
 				
-		private void tvIndex_AfterSelect(Object sender, TreeViewEventArgs e)
+		private void tvIndex_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			if (((string)e.Node.Tag) != "" && e.Node.Tag != null)
+			if ((string)e.Node.Tag != "" && e.Node.Tag != null)
 			{
 				wbHelp.Navigate(GeneralAppInfo.HomePath + "\\Help\\" + Convert.ToString(e.Node.Tag) +".htm");
 			}

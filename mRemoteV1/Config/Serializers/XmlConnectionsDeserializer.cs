@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Security;
 using System.Windows.Forms;
 using System.Xml;
@@ -11,6 +13,7 @@ using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
@@ -28,13 +31,15 @@ namespace mRemoteNG.Config.Serializers
         private XmlConnectionsDecryptor _decryptor;
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
-        private const double MaxSupportedConfVersion = 2.6;
-        private RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
+        private const double MaxSupportedConfVersion = 2.8;
+        private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
+        private readonly IEnumerable<ICredentialRecord> _credentialRecords;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(string xml, Func<SecureString> authenticationRequestor = null)
+        public XmlConnectionsDeserializer(string xml, IEnumerable<ICredentialRecord> credentialRecords, Func<SecureString> authenticationRequestor = null)
         {
+            _credentialRecords = credentialRecords;
             AuthenticationRequestor = authenticationRequestor;
             LoadXmlConnectionData(xml);
             ValidateConnectionFileVersion();
@@ -64,7 +69,7 @@ namespace mRemoteNG.Config.Serializers
         private void ShowIncompatibleVersionDialogBox()
         {
             CTaskDialog.ShowTaskDialogBox(
-                frmMain.Default,
+                FrmMain.Default,
                 Application.ProductName,
                 "Incompatible connection file format",
                 $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
@@ -116,12 +121,6 @@ namespace mRemoteNG.Config.Serializers
                         var decryptedContent = _decryptor.Decrypt(rootXmlElement.InnerText);
                         rootXmlElement.InnerXml = decryptedContent;
                     }
-                }
-
-                if (import && !IsExportFile(rootXmlElement))
-                {
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strCannotImportNormalSessionFile);
-                    return null;
                 }
 
                 AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, _rootNodeInfo);
@@ -218,9 +217,6 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Name = xmlnode.Attributes["Name"].Value;
                     connectionInfo.Description = xmlnode.Attributes["Descr"].Value;
                     connectionInfo.Hostname = xmlnode.Attributes["Hostname"].Value;
-                    connectionInfo.Username = xmlnode.Attributes["Username"].Value;
-                    connectionInfo.Password = _decryptor.Decrypt(xmlnode.Attributes["Password"].Value);
-                    connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
                     connectionInfo.DisplayWallpaper = bool.Parse(xmlnode.Attributes["DisplayWallpaper"].Value);
                     connectionInfo.DisplayThemes = bool.Parse(xmlnode.Attributes["DisplayThemes"].Value);
                     connectionInfo.CacheBitmaps = bool.Parse(xmlnode.Attributes["CacheBitmaps"].Value);
@@ -228,6 +224,15 @@ namespace mRemoteNG.Config.Serializers
                     if (_confVersion < 1.1) //1.0 - 0.1
                     {
                         connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) ? ProtocolRDP.RDPResolutions.Fullscreen : ProtocolRDP.RDPResolutions.FitToWindow;
+                    }
+
+                    if (_confVersion <= 2.6) // 0.2 - 2.6
+                    {
+#pragma warning disable 618
+                        connectionInfo.Username = xmlnode.Attributes["Username"].Value;
+                        connectionInfo.Password = _decryptor.Decrypt(xmlnode.Attributes["Password"].Value);
+                        connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
+#pragma warning restore 618
                     }
                 }
 
@@ -343,10 +348,8 @@ namespace mRemoteNG.Config.Serializers
                         Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value),
                         DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value),
                         DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value),
-                        Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value),
                         Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value),
                         Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value),
-                        Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value),
                         Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value),
                         Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value),
                         PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value),
@@ -358,8 +361,13 @@ namespace mRemoteNG.Config.Serializers
                         RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value),
                         Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value),
                         UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value),
-                        Username = bool.Parse(xmlnode.Attributes["InheritUsername"].Value)
                     };
+                    if (_confVersion <= 2.6) // 1.3 - 2.6
+                    {
+                        connectionInfo.Inheritance.Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value);
+                        connectionInfo.Inheritance.Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value);
+                        connectionInfo.Inheritance.Username = bool.Parse(xmlnode.Attributes["InheritUsername"].Value);
+                    }
                     connectionInfo.Icon = xmlnode.Attributes["Icon"].Value;
                     connectionInfo.Panel = xmlnode.Attributes["Panel"].Value;
                 }
@@ -493,21 +501,27 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["RDPAlertIdleTimeout"]?.Value ?? "False");
                     connectionInfo.Inheritance.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
                 }
+
+                if (_confVersion >= 2.7)
+                {
+                    connectionInfo.Inheritance.CredentialRecord = bool.Parse(xmlnode.Attributes["InheritCredentialRecord"]?.Value ?? "False");
+
+                    var requestedCredentialId = xmlnode.Attributes["CredentialId"]?.Value;
+                    if (!string.IsNullOrEmpty(requestedCredentialId) && _credentialRecords.Any())
+                    {
+                        var matchingCredential = _credentialRecords.Where(record => record.Id.ToString() == requestedCredentialId).ToArray();
+                        if (matchingCredential.Any())
+                            connectionInfo.CredentialRecord = matchingCredential.First();
+                        else
+                            Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, string.Format(Language.strFindMatchingCredentialFailed, requestedCredentialId, connectionInfo.Name));
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message));
             }
             return connectionInfo;
-        }
-
-        private bool IsExportFile(XmlElement rootConnectionsNode)
-        {
-            var isExportFile = false;
-            if (_confVersion < 1.0) return false;
-            if (Convert.ToBoolean(rootConnectionsNode.Attributes["Export"].Value))
-                isExportFile = true;
-            return isExportFile;
         }
     }
 }

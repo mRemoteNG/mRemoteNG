@@ -11,7 +11,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Controls
 {
@@ -21,11 +21,14 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
 
-        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
+        public ConnectionInfo SelectedNode
+        {
+            get { return (ConnectionInfo) SelectedObject; }
+        }
 
         public NodeSearcher NodeSearcher { get; private set; }
 
-        public IConfirm NodeDeletionConfirmer { get; set; } = new AlwaysConfirmYes();
+        public IConfirm<ConnectionInfo> NodeDeletionConfirmer { get; set; } = new AlwaysConfirmYes();
 
         public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = new IConnectionTreeDelegate[0];
 
@@ -228,7 +231,7 @@ namespace mRemoteNG.UI.Controls
         public void DeleteSelectedNode()
         {
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
-            if (!NodeDeletionConfirmer.Confirm()) return;
+            if (!NodeDeletionConfirmer.Confirm(SelectedNode)) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsAsync();
         }

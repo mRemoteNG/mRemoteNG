@@ -15,14 +15,14 @@ namespace mRemoteNG.Config.Serializers
     public class XmlConnectionsSerializer : ISerializer<string>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
+        private readonly IConnectionSerializer<XElement> _connectionNodeSerializer;
 
-        public bool Export { get; set; }
-        public SaveFilter SaveFilter { get; set; } = new SaveFilter();
         public bool UseFullEncryption { get; set; }
 
-        public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider)
+        public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider, IConnectionSerializer<XElement> connectionNodeSerializer)
         {
             _cryptographyProvider = cryptographyProvider;
+            _connectionNodeSerializer = connectionNodeSerializer;
         }
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
@@ -41,8 +41,8 @@ namespace mRemoteNG.Config.Serializers
             var xml = "";
             try
             {
-                var documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, SaveFilter);
-                var xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption, Export);
+                var documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, _connectionNodeSerializer);
+                var xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption);
                 xml = WriteXmlToString(xmlDocument);
             }
             catch (Exception ex)

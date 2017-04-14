@@ -2,25 +2,21 @@
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.UI.Controls;
 
 
 namespace mRemoteNG.Tree
 {
-    public class SelectedConnectionDeletionConfirmer : IConfirm
+    public class SelectedConnectionDeletionConfirmer : IConfirm<ConnectionInfo>
     {
-        private readonly IConnectionTree _connectionTree;
         private readonly Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> _confirmationFunc;
 
-        public SelectedConnectionDeletionConfirmer(IConnectionTree connectionTree, Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> confirmationFunc)
+        public SelectedConnectionDeletionConfirmer(Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> confirmationFunc)
         {
-            _connectionTree = connectionTree;
             _confirmationFunc = confirmationFunc;
         }
 
-        public bool Confirm()
+        public bool Confirm(ConnectionInfo deletionTarget)
         {
-            var deletionTarget = _connectionTree.SelectedNode;
             var deletionTargetAsContainer = deletionTarget as ContainerInfo;
             if (deletionTargetAsContainer != null)
                 return deletionTargetAsContainer.HasChildren()
@@ -29,19 +25,19 @@ namespace mRemoteNG.Tree
             return UserConfirmsConnectionDeletion(deletionTarget);
         }
 
-        private bool UserConfirmsEmptyFolderDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsEmptyFolderDeletion(AbstractConnectionRecord deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, deletionTarget.Name);
             return PromptUser(messagePrompt);
         }
 
-        private bool UserConfirmsNonEmptyFolderDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsNonEmptyFolderDeletion(AbstractConnectionRecord deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, deletionTarget.Name);
             return PromptUser(messagePrompt);
         }
 
-        private bool UserConfirmsConnectionDeletion(AbstractConnectionInfoData deletionTarget)
+        private bool UserConfirmsConnectionDeletion(AbstractConnectionRecord deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, deletionTarget.Name);
             return PromptUser(messagePrompt);

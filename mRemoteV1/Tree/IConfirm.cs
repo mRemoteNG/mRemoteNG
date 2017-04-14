@@ -1,7 +1,7 @@
 ﻿namespace mRemoteNG.Tree
 {
-    public interface IConfirm
+    public interface IConfirm<in TConfirmationTarget>
     {
-        bool Confirm();
+        bool Confirm(TConfirmationTarget confirmationTarget);
     }
 }

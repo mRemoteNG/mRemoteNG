@@ -1,20 +1,33 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
-using System;
 using System.IO;
 using System.Xml;
+using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.Config.Settings
 {
     public class ExternalAppsLoader
     {
-        private readonly frmMain _MainForm;
+        private readonly FrmMain _mainForm;
+        private readonly MessageCollector _messageCollector;
+        private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 
-        public ExternalAppsLoader(frmMain MainForm)
+        public ExternalAppsLoader(FrmMain mainForm, MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip)
         {
-            _MainForm = MainForm;
+            if (mainForm == null)
+                throw new ArgumentNullException(nameof(mainForm));
+            if (messageCollector == null)
+                throw new ArgumentNullException(nameof(messageCollector));
+            if (externalToolsToolStrip == null)
+                throw new ArgumentNullException(nameof(externalToolsToolStrip));
+
+            _mainForm = mainForm;
+            _messageCollector = messageCollector;
+            _externalToolsToolStrip = externalToolsToolStrip;
         }
 
 
@@ -27,26 +40,26 @@ namespace mRemoteNG.Config.Settings
             var xDom = new XmlDocument();
             if (File.Exists(newPath))
             {
-                Logger.Instance.Info($"Loading External Apps from: {newPath}");
+                _messageCollector.AddMessage(MessageClass.InformationMsg, $"Loading External Apps from: {newPath}", true);
                 xDom.Load(newPath);
             }
 #if !PORTABLE
 			else if (File.Exists(oldPath))
 			{
-                Logger.Instance.Info($"Loading External Apps from: {oldPath}");
+                _messageCollector.AddMessage(MessageClass.InformationMsg, $"Loading External Apps from: {oldPath}", true);
                 xDom.Load(oldPath);
 
 			}
 #endif
             else
             {
-                Logger.Instance.Warn("Loading External Apps failed: Could not FIND file!");
+                _messageCollector.AddMessage(MessageClass.WarningMsg, "Loading External Apps failed: Could not FIND file!");
                 return;
             }
 
             if (xDom.DocumentElement == null)
             {
-                Logger.Instance.Warn("Loading External Apps failed: Could not LOAD file!");
+                _messageCollector.AddMessage(MessageClass.WarningMsg, "Loading External Apps failed: Could not LOAD file!");
                 return;
             }
 
@@ -69,13 +82,12 @@ namespace mRemoteNG.Config.Settings
                     extA.TryIntegrate = bool.Parse(xEl.Attributes["TryToIntegrate"].Value);
                 }
 
-                Logger.Instance.Info($"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}");
+                _messageCollector.AddMessage(MessageClass.InformationMsg, $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}", true);
                 Runtime.ExternalTools.Add(extA);
             }
 
-            _MainForm.SwitchToolBarText(Convert.ToBoolean(mRemoteNG.Settings.Default.ExtAppsTBShowText));
-
-            frmMain.Default.AddExternalToolsToToolBar();
+            _externalToolsToolStrip.SwitchToolBarText(mRemoteNG.Settings.Default.ExtAppsTBShowText);
+            _externalToolsToolStrip.AddExternalToolsToToolBar();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using mRemoteNG.Connection;
+using mRemoteNG.Tools.Cmdline;
 
 namespace mRemoteNG.Tools
 {

@@ -1,8 +1,11 @@
 ﻿using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
+using System.Windows.Forms;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
@@ -10,23 +13,26 @@ namespace mRemoteNG.App
     {
         private static string _updateFilePath;
 
-        private static bool UpdatePending => !string.IsNullOrEmpty(_updateFilePath);
+        private static bool UpdatePending
+        {
+            get { return !string.IsNullOrEmpty(_updateFilePath); }
+        }
 
         public static void Quit(string updateFilePath = null)
         {
             _updateFilePath = updateFilePath;
-            frmMain.Default.Close();
+            FrmMain.Default.Close();
             ProgramRoot.CloseSingletonInstanceMutex();
         }
 
-        public static void Cleanup()
+        public static void Cleanup(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
         {
             try
             {
                 StopPuttySessionWatcher();
                 DisposeNotificationAreaIcon();
                 SaveConnections();
-                SaveSettings();
+                SaveSettings(quickConnectToolStrip, externalToolsToolStrip);
                 UnregisterBrowsers();
             }
             catch (Exception ex)
@@ -52,9 +58,9 @@ namespace mRemoteNG.App
                 Runtime.SaveConnections();
         }
 
-        private static void SaveSettings()
+        private static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
         {
-            Config.Settings.SettingsSaver.SaveSettings();
+            Config.Settings.SettingsSaver.SaveSettings(quickConnectToolStrip, externalToolsToolStrip);
         }
 
         private static void UnregisterBrowsers()

@@ -11,7 +11,9 @@ namespace mRemoteNGTests.Connection
 {
     public class AbstractConnectionInfoDataTests
     {
-        private class TestAbstractConnectionInfoData : AbstractConnectionInfoData {}
+#pragma warning disable 618
+        private class TestAbstractConnectionInfoData : AbstractLegacyConnectionRecord {}
+#pragma warning restore 618
         private TestAbstractConnectionInfoData _testAbstractConnectionInfoData;
 
         [SetUp]

@@ -1,6 +1,9 @@
 using System;
 using System.Drawing;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
+using System.Text;
+
 #pragma warning disable 169
 
 namespace mRemoteNG.App
@@ -42,11 +45,17 @@ namespace mRemoteNG.App
         internal static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
+        internal static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, StringBuilder lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, string lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        internal static extern IntPtr SendMessage([In] IntPtr hWnd, [In] uint msg, [Out] StringBuilder wParam, [In] IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
 			
@@ -76,6 +85,10 @@ namespace mRemoteNG.App
 
         [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
         internal static extern bool SetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        [DllImport("kernel32", SetLastError = true)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+        internal static extern bool CloseHandle(IntPtr handle);
         #endregion
 
         #region Structures
@@ -286,7 +299,10 @@ namespace mRemoteNG.App
         public const int WA_ACTIVE = 0x1;
 
         /// <summary>
-        /// 
+        /// Sent to both the window being activated and the window being deactivated.
+        /// If the windows use the same input queue, the message is sent synchronously, first to the window procedure of the 
+        /// top-level window being deactivated, then to the window procedure of the top-level window being activated. If the 
+        /// windows use different input queues, the message is sent asynchronously, so the window is activated immediately.
         /// </summary>
         public const int WA_CLICKACTIVE = 0x2;
         #endregion
@@ -453,6 +469,12 @@ namespace mRemoteNG.App
         #region Virtual Key Codes
         public const int VK_CONTROL = 0x11;
         public const int VK_C = 0x67;
+        #endregion
+
+        #region EM
+        public const uint ECM_FIRST = 0x1500;
+        public const uint EM_SETCUEBANNER = ECM_FIRST + 1;
+        public const uint EM_GETCUEBANNER = ECM_FIRST + 2;
         #endregion
 
         #region LB

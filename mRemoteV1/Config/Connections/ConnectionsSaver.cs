@@ -50,7 +50,6 @@ namespace mRemoteNG.Config.Connections
 		
 		public string ConnectionFileName {get; set;}
 		public TreeNode RootTreeNode {get; set;}
-		public bool Export {get; set;}
 		public Format SaveFormat {get; set;}
 		public SaveFilter SaveFilter {get; set;}
         public ConnectionTreeModel ConnectionTreeModel { get; set; }
@@ -72,11 +71,10 @@ namespace mRemoteNG.Config.Connections
 					break;
 				default:
 					SaveToXml();
-					if (!Export)
-						frmMain.Default.ConnectionsFileName = ConnectionFileName;
+					FrmMain.Default.ConnectionsFileName = ConnectionFileName;
 					break;
 			}
-			frmMain.Default.AreWeUsingSqlServerForSavingConnections = SaveFormat == Format.SQL;
+			FrmMain.Default.AreWeUsingSqlServerForSavingConnections = SaveFormat == Format.SQL;
 		}
         #endregion
 				
@@ -111,7 +109,7 @@ namespace mRemoteNG.Config.Connections
             {
                 if (rootTreeNode.Password)
                 {
-                    _password = Convert.ToString(rootTreeNode.PasswordString).ConvertToSecureString();
+                    _password = rootTreeNode.PasswordString.ConvertToSecureString();
                     strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
                 }
                 else
@@ -169,10 +167,12 @@ namespace mRemoteNG.Config.Connections
                 var factory = new CryptographyProviderFactory();
                 var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
                 cryptographyProvider.KeyDerivationIterations = mRemoteNG.Settings.Default.EncryptionKeyDerivationIterations;
-                var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider)
+			    var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                    cryptographyProvider, 
+                    ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                    SaveFilter);
+                var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
 				{
-                    Export = Export,
-                    SaveFilter = SaveFilter,
                     UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
@@ -188,7 +188,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private void SaveToMremotengFormattedCsv()
 		{
-            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveFilter = SaveFilter };
+            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat(SaveFilter);
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
             var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);

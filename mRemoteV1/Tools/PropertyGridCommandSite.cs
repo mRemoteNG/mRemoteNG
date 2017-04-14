@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Reflection;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Tools
 {
@@ -30,7 +30,7 @@ namespace mRemoteNG.Tools
 						continue;
 					}
 						
-					var commandAttribute = (CommandAttribute) (commandAttributes[0]);
+					var commandAttribute = (CommandAttribute) commandAttributes[0];
 					if (!commandAttribute.Command)
 					{
 						continue;
@@ -40,7 +40,7 @@ namespace mRemoteNG.Tools
 					var displayNameAttributes = method.GetCustomAttributes(typeof(DisplayNameAttribute), true);
 					if (displayNameAttributes.Length != 0)
 					{
-						var displayNameAttribute = (DisplayNameAttribute) (displayNameAttributes[0]);
+						var displayNameAttribute = (DisplayNameAttribute) displayNameAttributes[0];
 						if (!string.IsNullOrEmpty(displayNameAttribute.DisplayName))
 						{
 							displayName = displayNameAttribute.DisplayName;
@@ -71,7 +71,7 @@ namespace mRemoteNG.Tools
 					continue;
 				}
 					
-				var commandAttribute = (CommandAttribute) (commandAttributes[0]);
+				var commandAttribute = (CommandAttribute) commandAttributes[0];
 				if (!commandAttribute.Command)
 				{
 					continue;
@@ -81,7 +81,7 @@ namespace mRemoteNG.Tools
 				var displayNameAttributes = method.GetCustomAttributes(typeof(DisplayNameAttribute), true);
 				if (displayNameAttributes.Length != 0)
 				{
-					var displayNameAttribute = (DisplayNameAttribute) (displayNameAttributes[0]);
+					var displayNameAttribute = (DisplayNameAttribute) displayNameAttributes[0];
 					if (!string.IsNullOrEmpty(displayNameAttribute.DisplayName))
 					{
 						displayName = displayNameAttribute.DisplayName;
@@ -101,52 +101,58 @@ namespace mRemoteNG.Tools
 			
         public IComponent Component
 		{
-			get { throw (new NotSupportedException()); }
+			get { throw new NotSupportedException(); }
 		}
 			
-        public IContainer Container => null;
+        public IContainer Container
+        {
+            get { return null; }
+        }
 
-	    public bool DesignMode => true;
+	    public bool DesignMode
+	    {
+	        get { return true; }
+	    }
 
 	    public string Name
 		{
-			get { throw (new NotSupportedException()); }
-			set { throw (new NotSupportedException()); }
+			get { throw new NotSupportedException(); }
+			set { throw new NotSupportedException(); }
 		}
 			
 		public void AddCommand(MenuCommand command)
 		{
-			throw (new NotSupportedException());
+			throw new NotSupportedException();
 		}
 			
 		public void AddVerb(DesignerVerb verb)
 		{
-			throw (new NotSupportedException());
+			throw new NotSupportedException();
 		}
 			
 		public MenuCommand FindCommand(CommandID commandId)
 		{
-			throw (new NotSupportedException());
+			throw new NotSupportedException();
 		}
 			
 		public bool GlobalInvoke(CommandID commandId)
 		{
-			throw (new NotSupportedException());
+			throw new NotSupportedException();
 		}
 			
 		public void RemoveCommand(MenuCommand command)
 		{
-			throw (new NotSupportedException());
+			throw new NotSupportedException();
 		}
 			
 		public void RemoveVerb(DesignerVerb verb)
 		{
-			throw (new NotSupportedException());
+			throw new NotSupportedException();
 		}
 			
 		public void ShowContextMenu(CommandID menuId, int x, int y)
 		{
-			throw (new NotSupportedException());
+			throw new NotSupportedException();
 		}
 			
 	}

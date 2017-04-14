@@ -36,15 +36,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnBrowseCustomPuttyPath.Text = Language.strButtonBrowse;
             chkUseCustomPuttyPath.Text = Language.strCheckboxPuttyPath;
             chkAutomaticallyGetSessionInfo.Text = Language.strAutomaticallyGetSessionInfo;
-            chkWriteLogFile.Text = Language.strWriteLogFile;
             lblUVNCSCPort.Text = Language.strUltraVNCSCListeningPort;
         }
 
         public override void LoadSettings()
         {
             base.SaveSettings();
-
-            chkWriteLogFile.Checked = Settings.Default.WriteLogFile;
 
             chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
             chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
@@ -59,7 +56,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void SaveSettings()
         {
-            Settings.Default.WriteLogFile = chkWriteLogFile.Checked;
             Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
             Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
 
@@ -136,7 +132,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 MessageBox.Show(Language.strErrorCouldNotLaunchPutty, Application.ProductName,
                                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                Runtime.MessageCollector.AddExceptionMessage(Language.strErrorCouldNotLaunchPutty, ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage(Language.strErrorCouldNotLaunchPutty, ex);
             }
         }
 

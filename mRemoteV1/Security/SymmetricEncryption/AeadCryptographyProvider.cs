@@ -16,6 +16,7 @@ using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Security.SymmetricEncryption
 {
@@ -36,7 +37,10 @@ namespace mRemoteNG.Security.SymmetricEncryption
         protected virtual int MinPasswordLength { get; set; } = 1;
 
 
-        public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
+        public int BlockSizeInBytes
+        {
+            get { return _aeadBlockCipher.GetBlockSize(); }
+        }
 
         public BlockCipherEngines CipherEngine
         {
@@ -179,7 +183,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         private string SimpleDecryptWithPassword(string encryptedMessage, SecureString decryptionKey, int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
+                return ""; //throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);

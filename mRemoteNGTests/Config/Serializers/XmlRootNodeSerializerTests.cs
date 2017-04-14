@@ -39,15 +39,6 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(attributeValue, Is.EqualTo("Connections"));
         }
 
-        [TestCase(true)]
-        [TestCase(false)]
-        public void ExportValueSerialized(bool export)
-        {
-            var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, export:export);
-            var attributeValue = element.Attribute(XName.Get("Export"))?.Value;
-            Assert.That(attributeValue, Is.EqualTo(export.ToString()));
-        }
-
         [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
         public void EncryptionEngineSerialized(BlockCipherEngines engine, BlockCipherModes mode)
         {
@@ -100,23 +91,13 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(attributeValuePlainText, Is.EqualTo(expectedPlainText));
         }
 
-        [TestCase("", "ThisIsNotProtected")]
-        [TestCase("customPassword1", "ThisIsNotProtected")]
-        public void EncryptWithDefaultPasswordWhenExporting(string customPassword, string expectedPlainText)
-        {
-            _rootNodeInfo.PasswordString = customPassword;
-            var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, export:true);
-            var attributeValue = element.Attribute(XName.Get("Protected"))?.Value;
-            var attributeValuePlainText = _cryptographyProvider.Decrypt(attributeValue, _rootNodeInfo.DefaultPassword.ConvertToSecureString());
-            Assert.That(attributeValuePlainText, Is.EqualTo(expectedPlainText));
-        }
-
         [Test]
         public void ConfVersionSerialized()
         {
             var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider);
-            var attributeValue = element.Attribute(XName.Get("ConfVersion"))?.Value;
-            Assert.That(attributeValue, Is.EqualTo("2.6"));
+            var attributeValue = element.Attribute(XName.Get("ConfVersion"))?.Value ?? "";
+            var versionAsNumber = double.Parse(attributeValue);
+            Assert.That(versionAsNumber, Is.GreaterThan(0));
         }
 
         private class TestCaseSources

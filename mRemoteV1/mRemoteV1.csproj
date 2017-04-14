@@ -27,6 +27,9 @@
     <SignManifests>false</SignManifests>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -42,9 +45,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -59,14 +59,14 @@
       <HintPath>..\packages\Geckofx45.45.0.22\lib\net40\Geckofx-Winforms.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="ADTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\ADTree.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MagicLibrary, Version=1.7.4.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
       <SpecificVersion>False</SpecificVersion>
@@ -106,12 +106,17 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Credential\Providers\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
+    <Compile Include="App\Initialization\ConnectionIconLoader.cs" />
+    <Compile Include="App\Initialization\CredsAndConsSetup.cs" />
+    <Compile Include="App\Initialization\StartupDataLogger.cs" />
     <Compile Include="App\Logger.cs" />
+    <Compile Include="App\Initialization\MessageCollectorSetup.cs" />
     <Compile Include="App\NativeMethods.cs" />
     <Compile Include="App\Runtime.cs" />
     <Compile Include="App\Screens.cs" />
@@ -132,15 +137,21 @@
     <Compile Include="Config\Connections\Multiuser\IConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
     <Compile Include="Config\Connections\Multiuser\RemoteConnectionsSyncronizer.cs" />
+    <Compile Include="Config\CredentialHarvester.cs" />
+    <Compile Include="Config\CredentialRecordLoader.cs" />
+    <Compile Include="Config\CredentialRecordSaver.cs" />
     <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialProviderSerializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
     <Compile Include="Config\Serializers\DataTableSerializer.cs" />
+    <Compile Include="Config\Serializers\IConnectionSerializer.cs" />
     <Compile Include="Config\Serializers\PortScanDeserializer.cs" />
     <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer26.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
@@ -149,7 +160,7 @@
     <Compile Include="Config\Serializers\IDeserializer.cs" />
     <Compile Include="Config\Import\IConnectionImporter.cs" />
     <Compile Include="Config\Serializers\ISerializer.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer27.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentCompiler.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDocumentEncryptor.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsSerializer.cs" />
@@ -158,7 +169,10 @@
     <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializer.cs" />
     <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />
+    <Compile Include="Config\Serializers\XmlCredentialDeserializer.cs" />
+    <Compile Include="Config\Serializers\XmlCredentialRecordSerializer.cs" />
     <Compile Include="Config\Serializers\XmlRootNodeSerializer.cs" />
+    <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIds.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
@@ -179,7 +193,8 @@
     <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
     <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
     <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnector.cs" />
-    <Compile Include="Connection\AbstractConnectionInfoData.cs" />
+    <Compile Include="Connection\AbstractConnectionRecord.cs" />
+    <Compile Include="Connection\AbstractLegacyConnectionRecord.cs" />
     <Compile Include="Connection\ConnectionInfoComparer.cs" />
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
     <Compile Include="App\ProgramRoot.cs" />
@@ -190,26 +205,65 @@
     <Compile Include="Connection\IConnectionInitiator.cs" />
     <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\IHasParent.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
+    <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
+    <Compile Include="Credential\CredentialDomainUserComparer.cs" />
+    <Compile Include="Credential\CredentialManager.cs" />
+    <Compile Include="Credential\CredentialProviderCatalog.cs" />
+    <Compile Include="Credential\CredentialRecord.cs" />
+    <Compile Include="Credential\CredentialListBase.cs" />
+    <Compile Include="Credential\CredentialRecordCatalog.cs" />
+    <Compile Include="Credential\CredentialRecordTypeConverter.cs" />
+    <Compile Include="Credential\ICredentialRecord.cs" />
+    <Compile Include="Credential\ICredentialProviderCatalog.cs" />
+    <Compile Include="Credential\ICredentialProvider.cs" />
+    <Compile Include="Credential\ICredentialList.cs" />
+    <Compile Include="Credential\INotifyingCredentialRecord.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\LogMessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\WriterDecorators\MessageTypeFilterDecorator.cs" />
+    <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />
+    <Compile Include="Messages\IMessage.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\IMessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\WriterDecorators\MessageFocusDecorator.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\MessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\MessageWriters\NotificationPanelMessageWriter.cs" />
+    <Compile Include="Messages\MessageWriters\IMessageWriter.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Messages\MessageCollector.cs" />
+    <Compile Include="Messages\WriterDecorators\OnlyLogMessageFilterDecorator.cs" />
+    <Compile Include="Messages\MessageWriters\PopupMessageWriter.cs" />
+    <Compile Include="Messages\MessageWriters\TextLogMessageWriter.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\NotificationPanelMessageFilteringOptions.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\NotificationPanelSwitchOnMessageFilteringOptions.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\PopupMessageFilteringOptions.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticator.cs" />
     <Compile Include="Security\BlockCipherEngines.cs" />
     <Compile Include="Security\BlockCipherModes.cs" />
     <Compile Include="Security\EncryptedSecureString.cs" />
     <Compile Include="Security\Authentication\IAuthenticator.cs" />
     <Compile Include="Security\EncryptionException.cs" />
+    <Compile Include="Security\PasswordCreation\IPasswordConstraint.cs" />
     <Compile Include="Security\KeyDerivation\IKeyDerivationFunction.cs" />
     <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGenerator.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesSpecialCharactersConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesUpperCaseConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordLengthConstraint.cs" />
     <Compile Include="Security\SymmetricEncryption\AeadCryptographyProvider.cs" />
     <Compile Include="Security\SymmetricEncryption\LegacyRijndaelCryptographyProvider.cs" />
     <Compile Include="Security\ICryptographyProvider.cs" />
     <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Security\CryptographyProviderFactory.cs" />
+    <Compile Include="Security\XmlCryptoProviderBuilder.cs" />
+    <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
-    <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
+    <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
@@ -239,6 +293,16 @@
     <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.Designer.cs">
       <DependentUpon>ConnectionTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListAdaptor.cs" />
+    <Compile Include="UI\Controls\CredentialRecordListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListBox.Designer.cs">
+      <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\ExternalToolsToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -254,12 +318,36 @@
     <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\QuickConnectToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBox.Designer.cs">
+      <DependentUpon>SecureTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\StatusImageList.cs" />
+    <Compile Include="UI\Controls\TextBoxExtensions.cs" />
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\FormExtensions.cs" />
+    <Compile Include="UI\Forms\CredentialEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialEditorForm.Designer.cs">
+      <DependentUpon>CredentialEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerForm.Designer.cs">
+      <DependentUpon>CredentialManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\frmOptions.cs">
       <SubType>Form</SubType>
@@ -267,6 +355,7 @@
     <Compile Include="UI\Forms\frmOptions.Designer.cs">
       <DependentUpon>frmOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\FullscreenHandler.cs" />
     <Compile Include="UI\Forms\Input\input.cs" />
     <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
       <DependentUpon>AdvancedPage.cs</DependentUpon>
@@ -279,6 +368,12 @@
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\NotificationsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\NotificationsPage.Designer.cs">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.Designer.cs">
       <DependentUpon>ConnectionsPage.cs</DependentUpon>
@@ -358,20 +453,18 @@
     <Compile Include="Connection\Protocol\Telnet\Connection.Protocol.Telnet.cs" />
     <Compile Include="Connection\Protocol\VNC\Connection.Protocol.VNC.cs" />
     <Compile Include="Themes\ThemeInfo.cs" />
-    <Compile Include="Tools\CommandLineArguments.cs" />
+    <Compile Include="Tools\Cmdline\CommandLineArguments.cs" />
     <Compile Include="Container\ContainerInfo.cs" />
-    <Compile Include="Credential\CredentialInfo.cs" />
-    <Compile Include="Credential\CredentialList.cs" />
     <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\frmChoosePanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmMain.cs">
+    <Compile Include="UI\Forms\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\PasswordForm.Designer.cs">
@@ -385,13 +478,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.resx</DependentUpon>
     </Compile>
-    <Compile Include="Messages\MessageCollector.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Application.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -421,6 +509,19 @@
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
     <Compile Include="UI\Forms\TextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\HelpMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\MainFileMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\ScreenSelectionSystemMenu.cs" />
+    <Compile Include="UI\Menu\ToolsMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\ViewMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\TaskDialog\CommandButton.cs">
@@ -466,6 +567,9 @@
     <Compile Include="UI\Forms\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Window\ErrorAndInfoWindow.Designer.cs">
+      <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window\ExternalToolsWindow.Designer.cs">
       <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
     </Compile>
@@ -509,6 +613,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx" />
     <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -516,16 +621,25 @@
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialEditorForm.resx">
+      <DependentUpon>CredentialEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerForm.resx">
+      <DependentUpon>CredentialManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\NotificationsPage.resx">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\OptionsPage.resx">
       <DependentUpon>OptionsPage.cs</DependentUpon>
@@ -692,14 +806,19 @@
     <None Include="app.config" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
-    <None Include="Properties\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Schemas\mremoteng_confcons_v2_8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\mremoteng_confcons_v2_7.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\mremoteng_confcons_v2_6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\mremoteng_creds_v1_0.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -899,8 +1018,20 @@
     </Content>
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
     <None Include="Resources\Icons_FamFamFam\shield.ico" />
+    <None Include="Resources\Icons_FamFamFam\key.ico" />
+    <None Include="Resources\Images_FamFamFam\bricks.png" />
+    <None Include="Resources\Images_FamFamFam\brick.png" />
+    <None Include="Resources\Images_FamFamFam\bricks_greyscale.png" />
+    <None Include="Resources\Images_FamFamFam\brick_large.png" />
+    <None Include="Resources\Images_FamFamFam\brick1.png" />
+    <None Include="Resources\Images_FamFamFam\bricks1.png" />
     <Content Include="Resources\Images_FamFamFam\Config.png" />
     <Content Include="Resources\Images_FamFamFam\database.png" />
+    <None Include="Resources\Images_FamFamFam\key.png" />
+    <None Include="Resources\Images_FamFamFam\key_add.png" />
+    <None Include="Resources\Images_FamFamFam\eye.png" />
+    <None Include="Resources\Images_FamFamFam\lightbulb.png" />
+    <None Include="Resources\Images_FamFamFam\lightning.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
     <Content Include="Resources\Images\green_arrow1.png" />
@@ -1273,6 +1404,7 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DebugSymbols>false</DebugSymbols>
@@ -1284,6 +1416,7 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <WarningLevel>1</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
     <DebugSymbols>false</DebugSymbols>
@@ -1294,7 +1427,8 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
     <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Portable|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -1307,6 +1441,7 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

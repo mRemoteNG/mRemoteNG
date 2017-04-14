@@ -10,17 +10,17 @@ namespace mRemoteNG.App
         {
             bool wasMax = false;
 
-            if (frmMain.Default.WindowState == FormWindowState.Maximized)
+            if (FrmMain.Default.WindowState == FormWindowState.Maximized)
             {
                 wasMax = true;
-                frmMain.Default.WindowState = FormWindowState.Normal;
+                FrmMain.Default.WindowState = FormWindowState.Normal;
             }
 
-            frmMain.Default.Location = Screen.Bounds.Location;
+            FrmMain.Default.Location = Screen.Bounds.Location;
 
             if (wasMax)
             {
-                frmMain.Default.WindowState = FormWindowState.Maximized;
+                FrmMain.Default.WindowState = FormWindowState.Maximized;
             }
         }
 

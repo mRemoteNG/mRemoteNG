@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="mremoteng_creds_v1_0"
+    targetNamespace="http://mremoteng.org"
+    elementFormDefault="qualified"
+    xmlns="http://mremoteng.org"
+    xmlns:mrng="http://mremoteng.org"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    version="1.0"
+>
+
+  <xs:element name="Credentials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Node" type="mrng:credential" />
+      </xs:sequence>
+      <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
+      <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
+      <xs:attribute name="KdfIterations" type="xs:int" use="optional" />
+      <xs:attribute name="FullFileEncryption" type="xs:boolean" use="required" />
+      <xs:attribute name="SchemaVersion" type="xs:float" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="credential">
+    <xs:attribute name="Id" type="xs:string" use="required" />
+    <xs:attribute name="Title" type="xs:string" use="required" />
+    <xs:attribute name="Username" type="xs:string" use="required" />
+    <xs:attribute name="Domain" type="xs:string" use="required" />
+    <xs:attribute name="Password" type="xs:string" use="required" />
+  </xs:complexType>
+</xs:schema>

@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Windows.Forms;
+using mRemoteNG.UI.Window;
 
-
-
-namespace mRemoteNG.UI.Window
+namespace mRemoteNG.UI
 {
 	public class WindowList : CollectionBase
 	{
@@ -13,13 +11,13 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				this.CleanUp();
+				CleanUp();
 				if (Index is BaseWindow)
                     return IndexByObject(Index);
-				else if (Index is Int32)
-                    return IndexByNumber(Convert.ToInt32(Index));
-						
-				return null;
+			    if (Index is int)
+			        return IndexByNumber(Convert.ToInt32(Index));
+
+                return null;
 			}
 		}
 	
@@ -27,7 +25,7 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				this.CleanUp();
+				CleanUp();
 				return List.Count;
 			}
 		}
@@ -36,27 +34,27 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		public void Add(BaseWindow uiWindow)
 		{
-			this.List.Add(uiWindow);
+			List.Add(uiWindow);
 			//AddHandler uiWindow.FormClosing, AddressOf uiFormClosing
 		}
 				
 		public void AddRange(BaseWindow[] uiWindow)
 		{
-			foreach (Form uW in uiWindow)
+			foreach (var uW in uiWindow)
 			{
-				this.List.Add(uW);
+				List.Add(uW);
 			}
 		}
 				
 		public void Remove(BaseWindow uiWindow)
 		{
-			this.List.Remove(uiWindow);
+			List.Remove(uiWindow);
 		}
 				
 		public BaseWindow FromString(string uiWindow)
 		{
-			this.CleanUp();
-			for (int i = 0; i < this.List.Count; i++)
+			CleanUp();
+			for (var i = 0; i < List.Count; i++)
 			{
 				if (this[i].Text == uiWindow.Replace("&", "&&"))
 				{
@@ -71,19 +69,18 @@ namespace mRemoteNG.UI.Window
 
 		private void CleanUp()
 		{
-			for (int i = 0; i <= this.List.Count - 1; i++)
+			for (var i = 0; i <= List.Count - 1; i++)
 			{
-				if (i > this.List.Count - 1)
+				if (i > List.Count - 1)
 				{
 					CleanUp();
 					return;
 				}
-				if ((this.List[i] as BaseWindow).IsDisposed)
-				{
-					this.List.RemoveAt(i);
-					CleanUp();
-					return;
-				}
+			    var baseWindow = List[i] as BaseWindow;
+			    if (baseWindow != null && !baseWindow.IsDisposed) continue;
+			    List.RemoveAt(i);
+			    CleanUp();
+			    return;
 			}
 		}
 
@@ -91,7 +88,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                int objectIndex = this.List.IndexOf(Index);
+                var objectIndex = List.IndexOf(Index);
                 return IndexByNumber(objectIndex);
             }
             catch (ArgumentOutOfRangeException e)
@@ -104,17 +101,19 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                return this.List[Index] as BaseWindow;
+                return List[Index] as BaseWindow;
             }
             catch (ArgumentOutOfRangeException e)
             {
                 throw new ArgumentOutOfRangeException(e.ParamName, e.ActualValue, "Index was out of bounds");
             }
         }
-
+        
+        /*
 		private void uiFormClosing(object sender, FormClosingEventArgs e)
 		{
-			this.List.Remove(sender);
+			List.Remove(sender);
 		}
+        */
 	}
 }

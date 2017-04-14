@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
@@ -16,14 +17,19 @@ namespace mRemoteNGTests.Config.Serializers
     {
         private XmlConnectionsSerializer _serializer;
         private ConnectionTreeModel _connectionTreeModel;
+        private ICryptographyProvider _cryptographyProvider;
         
 
         [SetUp]
         public void Setup()
         {
-            var encryptor = new AeadCryptographyProvider();
-            _serializer = new XmlConnectionsSerializer(encryptor);
             _connectionTreeModel = SetupConnectionTreeModel();
+            _cryptographyProvider = new AeadCryptographyProvider();
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                _cryptographyProvider, 
+                _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                new SaveFilter());
+            _serializer = new XmlConnectionsSerializer(_cryptographyProvider, connectionNodeSerializer);
         }
 
         [Test]
@@ -47,22 +53,21 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(connectionNode, Is.Not.Null);
         }
 
-        [TestCase("Username", "")]
-        [TestCase("Domain", "")]
-        [TestCase("Password", "")]
+        [TestCase("CredentialId", "")]
         [TestCase("InheritAutomaticResize", "False")]
         public void SerializerRespectsSaveFilterSettings(string attributeName, string expectedValue)
         {
-            _serializer.SaveFilter = new SaveFilter(true);
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                _cryptographyProvider,
+                _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                new SaveFilter(true));
+            var serializer = new XmlConnectionsSerializer(_cryptographyProvider, connectionNodeSerializer);
             var connectionInfo = new ConnectionInfo
             {
                 Name = "myConnection",
-                Username = "somefilteredstuff",
-                Domain = "somefilteredstuff",
-                Password = "somefilteredstuff",
                 Inheritance = {AutomaticResize = true}
             };
-            var serializedConnections = _serializer.Serialize(connectionInfo);
+            var serializedConnections = serializer.Serialize(connectionInfo);
             var xdoc = XDocument.Parse(serializedConnections);
             var attributeValue = xdoc.Root?.Element("Node")?.Attribute(attributeName)?.Value;
             Assert.That(attributeValue, Is.EqualTo(expectedValue));

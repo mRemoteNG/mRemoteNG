@@ -30,7 +30,7 @@ namespace mRemoteNG.Security.Authentication
                     authenticated = true;
                     LastAuthenticatedPassword = password;
                 }
-                catch (EncryptionException)
+                catch
                 {
                     password = AuthenticationRequestor?.Invoke();
                     if (password == null || password.Length == 0) break;

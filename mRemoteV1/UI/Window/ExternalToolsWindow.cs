@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Forms;
 
@@ -11,17 +12,17 @@ namespace mRemoteNG.UI.Window
 	public partial class ExternalToolsWindow
 	{
         #region Constructors
-		public ExternalToolsWindow(DockContent panel)
+		public ExternalToolsWindow()
 		{
 			InitializeComponent();
 					
 			WindowType = WindowType.ExternalApps;
-			DockPnl = panel;
+			DockPnl = new DockContent();
 		}
         #endregion
 				
         #region Private Fields
-		private Tools.ExternalTool _selectedTool;
+		private ExternalTool _selectedTool;
         #endregion
 				
         #region Private Methods
@@ -41,14 +42,14 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				var externalTool = new Tools.ExternalTool(Language.strExternalToolDefaultName);
+				var externalTool = new ExternalTool(Language.strExternalToolDefaultName);
 				Runtime.ExternalTools.Add(externalTool);
 				UpdateToolsListView(externalTool);
 				DisplayNameTextBox.Focus();
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.NewTool_Click() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.NewTool_Click() failed.", ex);
 			}
 		}
 
@@ -70,26 +71,22 @@ namespace mRemoteNG.UI.Window
 					return;
 				}
 				
-				if (MessageBox.Show(frmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+				if (MessageBox.Show(FrmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
 				{
 					return;
 				}
 						
 				foreach (ListViewItem listViewItem in ToolsListView.SelectedItems)
 				{
-					var externalTool = listViewItem.Tag as Tools.ExternalTool;
-					if (externalTool == null)
-					{
-						continue;
-					}
-							
-					Runtime.ExternalTools.Remove(listViewItem.Tag);
+					var externalTool = listViewItem.Tag as ExternalTool;
+					if (externalTool == null) continue;							
+					Runtime.ExternalTools.Remove(externalTool);
 					listViewItem.Remove();
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.DeleteTool_Click() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.DeleteTool_Click() failed.", ex);
 			}
 		}
 
@@ -105,7 +102,7 @@ namespace mRemoteNG.UI.Window
 				if (ToolsListView.SelectedItems.Count == 1)
 				{
 					PropertiesGroupBox.Enabled = true;
-					_selectedTool = ToolsListView.SelectedItems[0].Tag as Tools.ExternalTool;
+					_selectedTool = ToolsListView.SelectedItems[0].Tag as ExternalTool;
 					if (_selectedTool == null)
 					{
 						return;
@@ -124,7 +121,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.ToolsListView_SelectedIndexChanged() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.ToolsListView_SelectedIndexChanged() failed.", ex);
 			}
 		}
 
@@ -155,7 +152,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.", ex);
 			}
 		}
 
@@ -175,7 +172,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.BrowseButton_Click() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.", ex);
 			}
 		}
 
@@ -222,16 +219,16 @@ namespace mRemoteNG.UI.Window
 			LaunchToolMenuItem.Text = Language.strMenuLaunchExternalTool;
 		}
 				
-		private void UpdateToolsListView(Tools.ExternalTool selectTool = null)
+		private void UpdateToolsListView(ExternalTool selectTool = null)
 		{
 			try
 			{
-				var selectedTools = new List<Tools.ExternalTool>();
+				var selectedTools = new List<ExternalTool>();
 				if (selectTool == null)
 				{
 					foreach (ListViewItem listViewItem in ToolsListView.SelectedItems)
 					{
-						var externalTool = listViewItem.Tag as Tools.ExternalTool;
+						var externalTool = listViewItem.Tag as ExternalTool;
 						if (externalTool != null)
 						{
 							selectedTools.Add(externalTool);
@@ -246,7 +243,7 @@ namespace mRemoteNG.UI.Window
 				ToolsListView.BeginUpdate();
 				ToolsListView.Items.Clear();
 						
-				foreach (Tools.ExternalTool externalTool in Runtime.ExternalTools)
+				foreach (var externalTool in Runtime.ExternalTools)
 				{
 				    var listViewItem = new ListViewItem {Text = externalTool.DisplayName};
 				    listViewItem.SubItems.Add(externalTool.FileName);
@@ -264,12 +261,10 @@ namespace mRemoteNG.UI.Window
 				}
 						
 				ToolsListView.EndUpdate();
-						
-				frmMain.Default.AddExternalToolsToToolBar();
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.PopulateToolsListView()", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PopulateToolsListView()", ex);
 			}
 		}
 				
@@ -279,14 +274,14 @@ namespace mRemoteNG.UI.Window
 			{
 				foreach (ListViewItem listViewItem in ToolsListView.SelectedItems)
 				{
-					var externalTool = listViewItem.Tag as Tools.ExternalTool;
+					var externalTool = listViewItem.Tag as ExternalTool;
 
 				    externalTool?.Start();
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.LaunchTool() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.LaunchTool() failed.", ex);
 			}
 		}
         #endregion

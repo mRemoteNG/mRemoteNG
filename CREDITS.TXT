@@ -44,6 +44,7 @@ Robert Siwiec
 Hayato Iriumi
 Sebastien Thieury (github.com/SebThieu)
 Riza Emet
+Lukas Plachy
 
 
 Included Source Code
@@ -118,3 +119,8 @@ VncSharp 1.1
 Copyright © 2004-2009 David Humphrey
 GNU General Public License (GPL) Version 2
 https://github.com/humphd/VncSharp
+
+ObjectListView 2.9
+Copyright © 2006-2015 Phillip Piper
+GNU General Public License (GPL) Version 3
+https://sourceforge.net/projects/objectlistview/

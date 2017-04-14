@@ -147,7 +147,7 @@ namespace mRemoteNG.Config.Putty
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("XmingPortablePuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, true);
+				Runtime.MessageCollector.AddExceptionMessage("XmingPortablePuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg);
 			}
 		}
 			
@@ -168,7 +168,7 @@ namespace mRemoteNG.Config.Putty
         #region Private Methods
 		private static string GetPuttyConfPath()
 		{
-		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath) : App.Info.GeneralAppInfo.PuttyPath;
+		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
 		    return Path.Combine(puttyPath, "putty.conf");
 		}
 			
@@ -267,7 +267,7 @@ namespace mRemoteNG.Config.Putty
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddExceptionMessage("PuttyConfFileReader.LoadConfiguration() failed.", ex, MessageClass.ErrorMsg, true);
+					Runtime.MessageCollector.AddExceptionMessage("PuttyConfFileReader.LoadConfiguration() failed.", ex);
 				}
 			}
 				
@@ -322,7 +322,7 @@ namespace mRemoteNG.Config.Putty
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddExceptionMessage("SessionFileReader.LoadSessionInfo() failed.", ex, MessageClass.ErrorMsg, true);
+					Runtime.MessageCollector.AddExceptionMessage("SessionFileReader.LoadSessionInfo() failed.", ex);
 				}
 			}
 				

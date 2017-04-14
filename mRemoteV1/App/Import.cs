@@ -75,7 +75,7 @@ namespace mRemoteNG.App
                         {
                             MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
                                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                            Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:1", ex, logOnly: true);
+                            Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:1", ex);
                         }
                     }
 
@@ -84,7 +84,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:2", ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:2", ex);
             }
         }
 
@@ -97,7 +97,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromActiveDirectory() failed.", ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromActiveDirectory() failed.", ex);
             }
         }
 
@@ -111,8 +111,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromPortScan() failed.", ex,
-                    logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromPortScan() failed.", ex);
             }
         }
         #endregion

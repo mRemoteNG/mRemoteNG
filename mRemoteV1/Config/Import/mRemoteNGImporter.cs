@@ -31,7 +31,7 @@ namespace mRemoteNG.Config.Import
 		{
             var dataProvider = new FileDataProvider(fileName);
             var xmlString = dataProvider.Load();
-            var xmlConnectionsDeserializer = new XmlConnectionsDeserializer(xmlString);
+            var xmlConnectionsDeserializer = new XmlConnectionsDeserializer(xmlString, null);
             var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(true);
 
             var rootImportContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(fileName) };
