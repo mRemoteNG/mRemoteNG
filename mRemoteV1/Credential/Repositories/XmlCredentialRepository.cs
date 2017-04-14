@@ -59,7 +59,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public void SaveCredentials(SecureString key)
         {
-            //if (!IsLoaded) return;
+            if (!IsLoaded) return;
             _credentialRecordSaver.Save(CredentialRecords, key);
         }
 
