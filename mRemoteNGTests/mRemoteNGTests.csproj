@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
+    <Compile Include="Config\Serializers\DataTableDeserializerTests.cs" />
     <Compile Include="Config\CredentialHarvesterTests.cs" />
     <Compile Include="Config\CredentialRecordLoaderTests.cs" />
     <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIdsTests.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
     <Compile Include="Security\RandomGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
+    <Compile Include="TestHelpers\ConnectionTreeModelBuilder.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />

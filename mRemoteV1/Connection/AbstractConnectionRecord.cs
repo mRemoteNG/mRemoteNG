@@ -10,6 +10,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Credential;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.Connection
@@ -118,6 +119,7 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("Panel", _panel); }
             set { SetField(ref _panel, value, "Panel"); }
         }
+
         #endregion
 
         #region Connection
@@ -277,6 +279,7 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("UseCredSsp", _useCredSsp); }
             set { SetField(ref _useCredSsp, value, "UseCredSsp"); }
         }
+
         #endregion
 
         #region RD Gateway
@@ -336,6 +339,7 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim(); }
             set { SetField(ref _rdGatewayDomain, value?.Trim(), "RDGatewayDomain"); }
         }
+
         #endregion
 
         #region Appearance
@@ -418,6 +422,7 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("EnableDesktopComposition", _enableDesktopComposition); }
             set { SetField(ref _enableDesktopComposition, value, "EnableDesktopComposition"); }
         }
+
         #endregion
 
         #region Redirect
@@ -490,6 +495,7 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("SoundQuality", _soundQuality); }
             set { SetField(ref _soundQuality, value, "SoundQuality"); }
         }
+
         #endregion
 
         #region Misc
@@ -533,6 +539,7 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("UserField", _userField); }
             set { SetField(ref _userField, value, "UserField"); }
         }
+
         #endregion
 
         #region VNC
@@ -651,26 +658,30 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("VNCViewOnly", _vncViewOnly); }
             set { SetField(ref _vncViewOnly, value, "VNCViewOnly"); }
         }
+
         #endregion
         #endregion
 
         protected virtual TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {
-            return (TPropertyType)GetType().GetProperty(propertyName).GetValue(this, null);
+            var propertyInfo = GetType().GetProperty(propertyName);
+            if (propertyInfo != null)
+                return (TPropertyType) propertyInfo.GetValue(this, null);
+
+            return default(TPropertyType);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
+        protected void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
         {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(args.PropertyName));
         }
 
-        protected bool SetField<T>(ref T field, T value, string propertyName = null)
+        private void SetField<T>(ref T field, T value, string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             RaisePropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
-            return true;
         }
     }
 }

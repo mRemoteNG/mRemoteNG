@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
@@ -12,7 +13,10 @@ namespace mRemoteNG.App
     {
         private static string _updateFilePath;
 
-        private static bool UpdatePending => !string.IsNullOrEmpty(_updateFilePath);
+        private static bool UpdatePending
+        {
+            get { return !string.IsNullOrEmpty(_updateFilePath); }
+        }
 
         public static void Quit(string updateFilePath = null)
         {

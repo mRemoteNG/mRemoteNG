@@ -179,7 +179,7 @@ namespace mRemoteNG.Connection
         {
             var inheritType = Inheritance.GetType();
             var inheritPropertyInfo = inheritType.GetProperty(propertyName);
-            var inheritPropertyValue = Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
+            var inheritPropertyValue = inheritPropertyInfo != null && Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
             return inheritPropertyValue;
         }
 
@@ -187,6 +187,8 @@ namespace mRemoteNG.Connection
         {
             var connectionInfoType = Parent.GetType();
             var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
+            if (parentPropertyInfo == null)
+                return default(TPropertyType); // shouldn't get here...
             var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
 
             return parentPropertyValue;
@@ -196,6 +198,7 @@ namespace mRemoteNG.Connection
 		{
 			try
 			{
+			    // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (protocol)
                 {
                     case ProtocolType.RDP:

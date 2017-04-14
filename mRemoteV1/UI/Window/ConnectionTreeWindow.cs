@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Window
 {
@@ -19,7 +19,10 @@ namespace mRemoteNG.UI.Window
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
 
 
-        public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
+        public ConnectionInfo SelectedNode
+        {
+            get { return olvConnections.SelectedNode; }
+        }
 
 	    public ConnectionTree ConnectionTree
 	    {

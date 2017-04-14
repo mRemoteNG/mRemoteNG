@@ -6,6 +6,7 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Tools
 {
@@ -20,9 +21,15 @@ namespace mRemoteNG.Tools
 		public bool TryIntegrate { get; set; }
         public ConnectionInfo ConnectionInfo { get; set; }
 		
-        public Icon Icon => File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Resources.mRemote_Icon;
+        public Icon Icon
+        {
+            get { return File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Resources.mRemote_Icon; }
+        }
 
-	    public Image Image => Icon?.ToBitmap() ?? Resources.mRemote_Icon.ToBitmap();
+	    public Image Image
+	    {
+	        get { return Icon?.ToBitmap() ?? Resources.mRemote_Icon.ToBitmap(); }
+	    }
 
 	    #endregion
 		

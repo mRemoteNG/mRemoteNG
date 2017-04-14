@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using mRemoteNG.Tree.Root;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.Putty
 {
@@ -12,7 +12,11 @@ namespace mRemoteNG.Config.Putty
         public static PuttySessionsManager Instance { get; } = new PuttySessionsManager();
 
         private readonly List<AbstractPuttySessionsProvider> _providers = new List<AbstractPuttySessionsProvider>();
-        public IEnumerable<AbstractPuttySessionsProvider> Providers => _providers;
+        public IEnumerable<AbstractPuttySessionsProvider> Providers
+        {
+            get { return _providers; }
+        }
+
 	    public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
 
 	    private PuttySessionsManager()
@@ -122,7 +126,10 @@ namespace mRemoteNG.Config.Putty
         #region Public Classes
         public class SessionList : StringConverter
         {
-            public static string[] Names => Instance.GetSessionNames();
+            public static string[] Names
+            {
+                get { return Instance.GetSessionNames(); }
+            }
 
             public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
 	        {

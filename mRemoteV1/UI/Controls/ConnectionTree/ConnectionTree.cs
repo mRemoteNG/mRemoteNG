@@ -11,7 +11,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Controls
 {
@@ -21,7 +21,10 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
 
-        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
+        public ConnectionInfo SelectedNode
+        {
+            get { return (ConnectionInfo) SelectedObject; }
+        }
 
         public NodeSearcher NodeSearcher { get; private set; }
 

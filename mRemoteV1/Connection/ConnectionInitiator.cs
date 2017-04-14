@@ -222,6 +222,12 @@ namespace mRemoteNG.Connection
         {
             try
             {
+                if (sender is VncSharp.RemoteDesktop)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, @"VncSharp Disconnected."), true);
+                    return;
+                }
+
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, disconnectedMessage), true);
 
                 var Prot = (ProtocolBase)sender;

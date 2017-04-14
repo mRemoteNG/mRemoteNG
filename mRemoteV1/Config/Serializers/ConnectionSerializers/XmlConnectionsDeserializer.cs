@@ -178,22 +178,24 @@ namespace mRemoteNG.Config.Serializers
                     var treeNodeTypeString = xmlNode.Attributes?["Type"].Value ?? "connection";
                     var nodeType = (TreeNodeType)Enum.Parse(typeof(TreeNodeType), treeNodeTypeString, true);
 
-                    if (nodeType == TreeNodeType.Connection)
+                    // ReSharper disable once SwitchStatementMissingSomeCases
+                    switch (nodeType)
                     {
-                        var connectionInfo = GetConnectionInfoFromXml(xmlNode);
-                        parentContainer.AddChild(connectionInfo);
-                    }
-                    else if (nodeType == TreeNodeType.Container)
-                    {
-                        var containerInfo = new ContainerInfo();
+                        case TreeNodeType.Connection:
+                            var connectionInfo = GetConnectionInfoFromXml(xmlNode);
+                            parentContainer.AddChild(connectionInfo);
+                            break;
+                        case TreeNodeType.Container:
+                            var containerInfo = new ContainerInfo();
                             
-                        if (_confVersion >= 0.9)
-                            containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
-                        if (_confVersion >= 0.8)
-                            containerInfo.IsExpanded = xmlNode.Attributes?["Expanded"].Value == "True";
+                            if (_confVersion >= 0.9)
+                                containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
+                            if (_confVersion >= 0.8)
+                                containerInfo.IsExpanded = xmlNode.Attributes?["Expanded"].Value == "True";
 
-                        parentContainer.AddChild(containerInfo);
-                        AddNodesFromXmlRecursive(xmlNode, containerInfo);
+                            parentContainer.AddChild(containerInfo);
+                            AddNodesFromXmlRecursive(xmlNode, containerInfo);
+                            break;
                     }
                 }
             }
@@ -330,7 +332,9 @@ namespace mRemoteNG.Config.Serializers
                         case 3:
                             connectionInfo.Colors = ProtocolRDP.RDPColors.Colors32Bit;
                             break;
+                        // ReSharper disable once RedundantCaseLabel
                         case 4:
+                        default:
                             connectionInfo.Colors = ProtocolRDP.RDPColors.Colors15Bit;
                             break;
                     }

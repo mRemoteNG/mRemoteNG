@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -84,6 +85,10 @@ namespace mRemoteNG.App
 
         [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
         internal static extern bool SetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        [DllImport("kernel32", SetLastError = true)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+        internal static extern bool CloseHandle(IntPtr handle);
         #endregion
 
         #region Structures
