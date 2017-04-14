@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Credential;
+using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 
 namespace mRemoteNG.Config.Serializers.CredentialSerializer
@@ -30,6 +31,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             if (string.IsNullOrEmpty(xml)) return xml;
             var xdoc = XDocument.Parse(xml);
             var cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
+            DecryptAuthHeader(xdoc.Root, cryptoProvider, key);
             foreach (var credentialElement in xdoc.Descendants())
             {
                 var passwordAttribute = credentialElement.Attribute("Password");
@@ -38,6 +40,14 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                 passwordAttribute.SetValue(decryptedPassword);
             }
             return xdoc.ToString();
+        }
+
+        private void DecryptAuthHeader(XElement rootElement, ICryptographyProvider cryptographyProvider, SecureString key)
+        {
+            var authAttribute = rootElement.Attribute("Auth");
+            if (authAttribute == null)
+                throw new EncryptionException("Could not find Auth header in the XML repository root element.");
+            cryptographyProvider.Decrypt(authAttribute.Value, key);
         }
     }
 }
