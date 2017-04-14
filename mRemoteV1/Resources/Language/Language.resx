@@ -2541,4 +2541,10 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="Unlock" xml:space="preserve">
     <value>Unlock</value>
   </data>
+  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
+    <value>Prompt to unlock credential repositories on startup</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
 </root>

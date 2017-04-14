@@ -53,6 +53,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
                 {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},
+                {typeof(CredentialsPage).Name, new CredentialsPage()},
                 {typeof(SqlServerPage).Name, new SqlServerPage()},
                 {typeof(UpdatesPage).Name, new UpdatesPage()},
                 {typeof(ThemePage).Name, new ThemePage()},

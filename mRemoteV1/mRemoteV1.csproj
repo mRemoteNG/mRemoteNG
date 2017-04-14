@@ -457,6 +457,12 @@
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\Forms\OptionsPages\CredentialsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\CredentialsPage.Designer.cs">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\OptionsPages\NotificationsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -753,6 +759,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\CredentialsPage.resx">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\NotificationsPage.resx">
       <DependentUpon>NotificationsPage.cs</DependentUpon>

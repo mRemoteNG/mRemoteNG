@@ -61,11 +61,29 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credentials.
+        /// </summary>
+        internal static string Credentials {
+            get {
+                return ResourceManager.GetString("Credentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect password.
         /// </summary>
         internal static string IncorrectPassword {
             get {
                 return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prompt to unlock credential repositories on startup.
+        /// </summary>
+        internal static string PromptUnlockCredReposOnStartup {
+            get {
+                return ResourceManager.GetString("PromptUnlockCredReposOnStartup", resourceCulture);
             }
         }
         
