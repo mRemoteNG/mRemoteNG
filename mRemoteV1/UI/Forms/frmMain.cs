@@ -265,6 +265,7 @@ namespace mRemoteNG.UI.Forms
 
         private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
         {
+            if (!Settings.Default.PromptUnlockCredReposOnStartup) return;
             var credentialUnlockerForm = _credRepoUnlockerFormFactory.Build(repositories);
             credentialUnlockerForm.ShowDialog(parentForm);
         }
