@@ -148,11 +148,14 @@ namespace mRemoteNG.Config.Serializers
         {
             if (_confVersion >= 2.6)
             {
-                Enum.TryParse(connectionsRootElement?.Attributes["EncryptionEngine"].Value, out BlockCipherEngines engine);
+                BlockCipherEngines engine;
+                Enum.TryParse(connectionsRootElement?.Attributes["EncryptionEngine"].Value, out engine);
 
-                Enum.TryParse(connectionsRootElement?.Attributes["BlockCipherMode"].Value, out BlockCipherModes mode);
+                BlockCipherModes mode;
+                Enum.TryParse(connectionsRootElement?.Attributes["BlockCipherMode"].Value, out mode);
 
-                int.TryParse(connectionsRootElement?.Attributes["KdfIterations"].Value, out int keyDerivationIterations);
+                int keyDerivationIterations;
+                int.TryParse(connectionsRootElement?.Attributes["KdfIterations"].Value, out keyDerivationIterations);
 
                 _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
                 {
