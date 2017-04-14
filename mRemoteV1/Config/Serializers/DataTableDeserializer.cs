@@ -195,7 +195,7 @@ namespace mRemoteNG.Config.Serializers
                 var id = (string) row["ConstantID"];
                 var connectionInfo = connectionList.First(node => node.ConstantID == id);
                 var parentId = (string) row["ParentID"];
-                if (parentId == "0")
+                if (parentId == "0" || connectionList.All(node => node.ConstantID != parentId))
                     rootNode.AddChild(connectionInfo);
                 else
                     (connectionList.First(node => node.ConstantID == parentId) as ContainerInfo)?.AddChild(connectionInfo);

@@ -4,6 +4,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers
@@ -20,19 +21,20 @@ namespace mRemoteNGTests.Config.Serializers
             _dataTableSerializer = new DataTableSerializer(_saveFilter);
         }
 
-        [TearDown]
-        public void Teardown()
-        {
-            _saveFilter = null;
-            _dataTableSerializer = null;
-        }
-
         [Test]
         public void AllItemsSerialized()
         {
             var model = CreateConnectionTreeModel();
             var dataTable = _dataTableSerializer.Serialize(model);
             Assert.That(dataTable.Rows.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void ReturnsEmptyDataTableWhenGivenEmptyConnectionTreeModel()
+        {
+            var model = new ConnectionTreeModel();
+            var dataTable = _dataTableSerializer.Serialize(model);
+            Assert.That(dataTable.Rows.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -109,20 +111,18 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(dataTable.Rows[0]["InheritUsername"], Is.False);
         }
 
+        [Test]
+        public void CanSerializeEmptyConnectionInfo()
+        {
+            var dataTable = _dataTableSerializer.Serialize(new ConnectionInfo());
+            Assert.That(dataTable.Rows.Count, Is.EqualTo(1));
+        }
+
 
         private ConnectionTreeModel CreateConnectionTreeModel()
         {
-            var model = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
-            var folder1 = new ContainerInfo {Name = "folder1", Username = "user1", Domain = "domain1", Password = "password1"};
-            var con1 = new ConnectionInfo {Name = "Con1", Username = "user1", Domain = "domain1", Password = "password1" };
-            var con2 = new ConnectionInfo {Name = "Con2", Username = "user2", Domain = "domain2", Password = "password2" };
-
-            root.AddChild(folder1);
-            root.AddChild(con2);
-            folder1.AddChild(con1);
-            model.AddRootNode(root);
-            return model;
+            var builder = new ConnectionTreeModelBuilder();
+            return builder.Build();
         }
     }
 }
