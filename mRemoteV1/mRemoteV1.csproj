@@ -599,6 +599,7 @@
     <Compile Include="UI\Forms\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Forms\UnlockerFormFactory.cs" />
     <Compile Include="UI\Menu\HelpMenu.cs">
       <SubType>Component</SubType>
     </Compile>

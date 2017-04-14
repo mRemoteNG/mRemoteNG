@@ -13,16 +13,20 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
     public partial class CredentialRepositoriesPage : SequencedControl, ICredentialManagerPage
     {
         private readonly ICredentialRepositoryList _providerCatalog;
+        private readonly UnlockerFormFactory _unlockerFactory;
 
         public string PageName { get; } = "Sources";
         public Image PageIcon { get; } = Resources.folder_key;
 
-        public CredentialRepositoriesPage(ICredentialRepositoryList providerCatalog)
+        public CredentialRepositoriesPage(ICredentialRepositoryList providerCatalog, UnlockerFormFactory unlockerFactory)
         {
             if (providerCatalog == null)
                 throw new ArgumentNullException(nameof(providerCatalog));
+            if (unlockerFactory == null)
+                throw new ArgumentNullException(nameof(unlockerFactory));
 
             _providerCatalog = providerCatalog;
+            _unlockerFactory = unlockerFactory;
             InitializeComponent();
             credentialRepositoryListView.CredentialRepositoryList = providerCatalog;
             credentialRepositoryListView.SelectionChanged += ObjectListView1OnSelectionChanged;
@@ -95,8 +99,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             var selectedRepository = credentialRepositoryListView.SelectedRepository;
             if (selectedRepository.IsLoaded)
                 selectedRepository.UnloadCredentials();
-            //else
-                //selectedRepository.LoadCredentials();
+            else
+                _unlockerFactory.Build(new[] {selectedRepository}).ShowDialog(this);
         }
     }
 }

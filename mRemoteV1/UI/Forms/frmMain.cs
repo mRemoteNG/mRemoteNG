@@ -42,6 +42,7 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
+        private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
         internal FullscreenHandler _fullscreen { get; set; }
         
         internal readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
@@ -177,6 +178,7 @@ namespace mRemoteNG.UI.Forms
 
             toolsMenu1.MainForm = this;
             toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
+            toolsMenu1.UnlockerFormFactory = _credRepoUnlockerFormFactory;
         }
 
         private void ApplyThemes()
@@ -263,8 +265,7 @@ namespace mRemoteNG.UI.Forms
 
         private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
         {
-            var credentialUnlocker = new CompositeRepositoryUnlocker(repositories);
-            var credentialUnlockerForm = new CompositeCredentialRepoUnlockerForm(credentialUnlocker);
+            var credentialUnlockerForm = _credRepoUnlockerFormFactory.Build(repositories);
             credentialUnlockerForm.ShowDialog(parentForm);
         }
 

@@ -21,6 +21,7 @@ namespace mRemoteNG.UI.Menu
 
         public Form MainForm { get; set; }
         public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
+        public UnlockerFormFactory UnlockerFormFactory { get; set; }
 
         public ToolsMenu()
         {
@@ -137,7 +138,7 @@ namespace mRemoteNG.UI.Menu
                 {
                     DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
                 },
-                new CredentialRepositoriesPage(CredentialProviderCatalog)
+                new CredentialRepositoriesPage(CredentialProviderCatalog, UnlockerFormFactory)
             };
 
             var credentialManagerForm = new CredentialManagerForm(pages);
