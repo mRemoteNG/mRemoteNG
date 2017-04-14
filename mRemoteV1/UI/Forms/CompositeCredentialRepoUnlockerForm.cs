@@ -18,6 +18,7 @@ namespace mRemoteNG.UI.Forms
             _repositoryUnlocker = repositoryUnlocker;
             InitializeComponent();
             SetupListView();
+            ApplyLanguage();
         }
 
         private void buttonUnlock_Click(object sender, EventArgs e)
@@ -118,6 +119,21 @@ namespace mRemoteNG.UI.Forms
         private void PopulateListView()
         {
             objectListViewRepos.SetObjects(_repositoryUnlocker.Repositories);
+        }
+
+        private void ApplyLanguage()
+        {
+            Text = Language.UnlockCredentialRepository;
+            labelUnlocking.Text = Language.Unlocking;
+            labelId.Text = Language.strID;
+            labelRepoTitle.Text = Language.strTitle;
+            labelRepoType.Text = Language.strType;
+            labelRepoSource.Text = Language.Source;
+            labelPassword.Text = Language.strTitlePassword;
+            labelPasswordError.Text = Language.IncorrectPassword;
+            labelUnlocked.Text = Language.RepositoryIsUnlocked;
+            buttonUnlock.Text = Language.Unlock;
+            buttonClose.Text = Language.strButtonClose;
         }
         #endregion
     }

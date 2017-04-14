@@ -39,9 +39,9 @@
             this.labelRepoTitle = new System.Windows.Forms.Label();
             this.textBoxType = new System.Windows.Forms.TextBox();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
-            this.labelRepoSource = new System.Windows.Forms.Label();
+            this.labelRepoType = new System.Windows.Forms.Label();
             this.textBoxSource = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelRepoSource = new System.Windows.Forms.Label();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
             this.labelPasswordError = new System.Windows.Forms.Label();
@@ -104,9 +104,9 @@
             this.labelUnlocking.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnlocking.Location = new System.Drawing.Point(181, 9);
             this.labelUnlocking.Name = "labelUnlocking";
-            this.labelUnlocking.Size = new System.Drawing.Size(81, 16);
+            this.labelUnlocking.Size = new System.Drawing.Size(77, 16);
             this.labelUnlocking.TabIndex = 1;
-            this.labelUnlocking.Text = "Unlocking:";
+            this.labelUnlocking.Text = "Unlocking";
             // 
             // labelPassword
             // 
@@ -172,14 +172,14 @@
             this.textBoxTitle.TabIndex = 8;
             this.textBoxTitle.TabStop = false;
             // 
-            // labelRepoSource
+            // labelRepoType
             // 
-            this.labelRepoSource.AutoSize = true;
-            this.labelRepoSource.Location = new System.Drawing.Point(190, 90);
-            this.labelRepoSource.Name = "labelRepoSource";
-            this.labelRepoSource.Size = new System.Drawing.Size(31, 13);
-            this.labelRepoSource.TabIndex = 7;
-            this.labelRepoSource.Text = "Type";
+            this.labelRepoType.AutoSize = true;
+            this.labelRepoType.Location = new System.Drawing.Point(190, 90);
+            this.labelRepoType.Name = "labelRepoType";
+            this.labelRepoType.Size = new System.Drawing.Size(31, 13);
+            this.labelRepoType.TabIndex = 7;
+            this.labelRepoType.Text = "Type";
             // 
             // textBoxSource
             // 
@@ -194,14 +194,14 @@
             this.textBoxSource.TabIndex = 11;
             this.textBoxSource.TabStop = false;
             // 
-            // label1
+            // labelRepoSource
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(190, 116);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Source";
+            this.labelRepoSource.AutoSize = true;
+            this.labelRepoSource.Location = new System.Drawing.Point(190, 116);
+            this.labelRepoSource.Name = "labelRepoSource";
+            this.labelRepoSource.Size = new System.Drawing.Size(41, 13);
+            this.labelRepoSource.TabIndex = 10;
+            this.labelRepoSource.Text = "Source";
             // 
             // textBoxId
             // 
@@ -296,14 +296,14 @@
             this.Controls.Add(this.textBoxId);
             this.Controls.Add(this.labelId);
             this.Controls.Add(this.textBoxSource);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelRepoSource);
             this.Controls.Add(this.secureTextBoxPassword);
             this.Controls.Add(this.textBoxType);
             this.Controls.Add(this.buttonUnlock);
             this.Controls.Add(this.textBoxTitle);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.labelPassword);
-            this.Controls.Add(this.labelRepoSource);
+            this.Controls.Add(this.labelRepoType);
             this.Controls.Add(this.objectListViewRepos);
             this.Controls.Add(this.labelUnlocking);
             this.Controls.Add(this.labelRepoTitle);
@@ -334,10 +334,10 @@
         private System.Windows.Forms.Label labelRepoTitle;
         private System.Windows.Forms.TextBox textBoxType;
         private System.Windows.Forms.TextBox textBoxTitle;
-        private System.Windows.Forms.Label labelRepoSource;
+        private System.Windows.Forms.Label labelRepoType;
         private BrightIdeasSoftware.OLVColumn olvColumnName;
         private System.Windows.Forms.TextBox textBoxSource;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelRepoSource;
         private System.Windows.Forms.TextBox textBoxId;
         private System.Windows.Forms.Label labelId;
         private BrightIdeasSoftware.OLVColumn olvColumnStatusIcon;

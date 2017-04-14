@@ -61,6 +61,33 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incorrect password.
+        /// </summary>
+        internal static string IncorrectPassword {
+            get {
+                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected repository is unlocked.
+        /// </summary>
+        internal static string RepositoryIsUnlocked {
+            get {
+                return ResourceManager.GetString("RepositoryIsUnlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source.
+        /// </summary>
+        internal static string Source {
+            get {
+                return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         internal static string strAbout {
@@ -7214,6 +7241,33 @@ namespace mRemoteNG {
         internal static string strYes {
             get {
                 return ResourceManager.GetString("strYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock.
+        /// </summary>
+        internal static string Unlock {
+            get {
+                return ResourceManager.GetString("Unlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock Credential Repository.
+        /// </summary>
+        internal static string UnlockCredentialRepository {
+            get {
+                return ResourceManager.GetString("UnlockCredentialRepository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlocking.
+        /// </summary>
+        internal static string Unlocking {
+            get {
+                return ResourceManager.GetString("Unlocking", resourceCulture);
             }
         }
     }
