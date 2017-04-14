@@ -46,9 +46,12 @@
             this.labelId = new System.Windows.Forms.Label();
             this.labelPasswordError = new System.Windows.Forms.Label();
             this.imgPasswordError = new System.Windows.Forms.PictureBox();
+            this.imgUnlocked = new System.Windows.Forms.PictureBox();
+            this.labelUnlocked = new System.Windows.Forms.Label();
             this.secureTextBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPasswordError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgUnlocked)).BeginInit();
             this.SuspendLayout();
             // 
             // objectListViewRepos
@@ -222,6 +225,7 @@
             // 
             // labelPasswordError
             // 
+            this.labelPasswordError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPasswordError.AutoSize = true;
             this.labelPasswordError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPasswordError.ForeColor = System.Drawing.Color.DarkRed;
@@ -235,6 +239,7 @@
             // 
             // imgPasswordError
             // 
+            this.imgPasswordError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.imgPasswordError.Image = global::mRemoteNG.Resources.exclamation;
             this.imgPasswordError.Location = new System.Drawing.Point(176, 192);
             this.imgPasswordError.Name = "imgPasswordError";
@@ -243,6 +248,29 @@
             this.imgPasswordError.TabIndex = 15;
             this.imgPasswordError.TabStop = false;
             this.imgPasswordError.Visible = false;
+            // 
+            // imgUnlocked
+            // 
+            this.imgUnlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.imgUnlocked.Image = global::mRemoteNG.Resources.tick;
+            this.imgUnlocked.Location = new System.Drawing.Point(188, 241);
+            this.imgUnlocked.Name = "imgUnlocked";
+            this.imgUnlocked.Size = new System.Drawing.Size(16, 16);
+            this.imgUnlocked.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.imgUnlocked.TabIndex = 16;
+            this.imgUnlocked.TabStop = false;
+            this.imgUnlocked.Visible = false;
+            // 
+            // labelUnlocked
+            // 
+            this.labelUnlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelUnlocked.AutoSize = true;
+            this.labelUnlocked.Location = new System.Drawing.Point(204, 242);
+            this.labelUnlocked.Name = "labelUnlocked";
+            this.labelUnlocked.Size = new System.Drawing.Size(174, 13);
+            this.labelUnlocked.TabIndex = 17;
+            this.labelUnlocked.Text = "The selected repository is unlocked";
+            this.labelUnlocked.Visible = false;
             // 
             // secureTextBoxPassword
             // 
@@ -261,6 +289,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
             this.ClientSize = new System.Drawing.Size(554, 272);
+            this.Controls.Add(this.labelUnlocked);
+            this.Controls.Add(this.imgUnlocked);
             this.Controls.Add(this.imgPasswordError);
             this.Controls.Add(this.labelPasswordError);
             this.Controls.Add(this.textBoxId);
@@ -287,6 +317,7 @@
             this.Shown += new System.EventHandler(this.CompositeCredentialRepoUnlockerForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPasswordError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgUnlocked)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,5 +343,7 @@
         private BrightIdeasSoftware.OLVColumn olvColumnStatusIcon;
         private System.Windows.Forms.Label labelPasswordError;
         private System.Windows.Forms.PictureBox imgPasswordError;
+        private System.Windows.Forms.PictureBox imgUnlocked;
+        private System.Windows.Forms.Label labelUnlocked;
     }
 }

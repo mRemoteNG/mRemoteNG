@@ -56,6 +56,7 @@ namespace mRemoteNG.UI.Forms
             _repositoryUnlocker.SelectedRepository = selectedRepo;
             ShowRepoDetails(selectedRepo);
             ShowPasswordError(false);
+            UnlockRequired(!selectedRepo?.IsLoaded ?? false);
         }
 
         private void ShowRepoDetails(ICredentialRepository repo)
@@ -64,6 +65,14 @@ namespace mRemoteNG.UI.Forms
             textBoxTitle.Text = repo?.Config.Title ?? "";
             textBoxType.Text = repo?.Config.TypeName ?? "";
             textBoxSource.Text = repo?.Config.Source ?? "";
+        }
+
+        private void UnlockRequired(bool isUnlockRequired)
+        {
+            buttonUnlock.Enabled = isUnlockRequired;
+            secureTextBoxPassword.Enabled = isUnlockRequired;
+            imgUnlocked.Visible = objectListViewRepos.SelectedObject != null && !isUnlockRequired;
+            labelUnlocked.Visible = objectListViewRepos.SelectedObject != null && !isUnlockRequired;
         }
 
         private void ShowPasswordError(bool shouldErrorBeActive)
