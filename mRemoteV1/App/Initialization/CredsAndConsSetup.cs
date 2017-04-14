@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.CredentialProviderSerializer;
 using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -20,18 +18,16 @@ namespace mRemoteNG.App.Initialization
 {
     public class CredsAndConsSetup
     {
-        private readonly string _credentialRepoListPath = Path.Combine(SettingsFileInfo.SettingsPath, "credentialRepositories.xml");
-        private readonly ICredentialRepositoryList _credentialRepositoryList;
         private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _credRepoSerializer;
         private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _credRepoDeserializer;
+        private readonly CredentialsService _credentialsService;
         private readonly string _credentialFilePath;
 
-        public CredsAndConsSetup(ICredentialRepositoryList credentialRepositoryList, string credentialFilePath)
+        public CredsAndConsSetup(CredentialsService credentialsService, string credentialFilePath)
         {
-            if (credentialRepositoryList == null)
-                throw new ArgumentNullException(nameof(credentialRepositoryList));
+            if (credentialsService == null)
+                throw new ArgumentNullException(nameof(credentialsService));
 
-            _credentialRepositoryList = credentialRepositoryList;
             _credentialFilePath = credentialFilePath;
 
             var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
@@ -39,6 +35,8 @@ namespace mRemoteNG.App.Initialization
                 cryptoFromSettings.Build(),
                 new XmlCredentialRecordSerializer());
             _credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
+
+            _credentialsService = credentialsService;
         }
 
         public void LoadCredsAndCons()
@@ -96,7 +94,7 @@ namespace mRemoteNG.App.Initialization
                 newCredentialRepository.CredentialRecords.Add(credential);
             newCredentialRepository.SaveCredentials(newCredRepoKey);
 
-            _credentialRepositoryList.AddProvider(newCredentialRepository);
+            _credentialsService.AddRepository(newCredentialRepository);
             return credentialHarvester.ConnectionToCredentialMap;
         }
 
@@ -108,27 +106,13 @@ namespace mRemoteNG.App.Initialization
 
         private void LoadCredentialRepositoryList()
         {
-            var credRepoListDataProvider = new FileDataProvider(_credentialRepoListPath);
-            var credRepoListLoader = new CredentialRepositoryListLoader(
-                credRepoListDataProvider, 
-                new CredentialRepositoryListDeserializer(_credRepoSerializer, _credRepoDeserializer));
-            var credRepoListSaver = new CredentialRepositoryListSaver(credRepoListDataProvider);
-            foreach (var repository in credRepoListLoader.Load())
-            {
-                Runtime.CredentialProviderCatalog.AddProvider(repository);
-            }
-            Runtime.CredentialProviderCatalog.RepositoriesUpdated += (sender, args) => credRepoListSaver.Save(Runtime.CredentialProviderCatalog.CredentialProviders);
-            Runtime.CredentialProviderCatalog.CredentialsUpdated += (sender, args) =>
-            {
-                var repo = (sender as ICredentialRepository);
-                repo?.SaveCredentials(repo.Config.Key);
-            };
+            _credentialsService.LoadRepositoryList();
         }
 
         private void LoadDefaultConnectionCredentials()
         {
             var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
-            var matchedCredentials = _credentialRepositoryList.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
+            var matchedCredentials = _credentialsService.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
             DefaultConnectionInfo.Instance.CredentialRecord = matchedCredentials.Any() ? matchedCredentials.First() : null;
         }
 

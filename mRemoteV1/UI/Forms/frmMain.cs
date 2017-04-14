@@ -55,7 +55,6 @@ namespace mRemoteNG.UI.Forms
             _fullscreen = new FullscreenHandler(this);
             pnlDock.Theme = new VS2012LightTheme();
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
-            
         }
 
         static FrmMain()
@@ -148,7 +147,8 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
-            var credsAndConsSetup = new CredsAndConsSetup(Runtime.CredentialProviderCatalog, _credentialFilePath);
+            var credentialsService = new CredentialServiceFactory().Build();
+            var credsAndConsSetup = new CredsAndConsSetup(credentialsService, _credentialFilePath);
             credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();

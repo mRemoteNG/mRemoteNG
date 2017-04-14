@@ -106,6 +106,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Credential\Records\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +220,8 @@
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
     <Compile Include="Credential\CredentialRepoUnlockerBuilder.cs" />
+    <Compile Include="Credential\CredentialServiceFactory.cs" />
+    <Compile Include="Credential\CredentialsService.cs" />
     <Compile Include="Credential\StaticSerializerKeyProviderDecorator.cs" />
     <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
     <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
