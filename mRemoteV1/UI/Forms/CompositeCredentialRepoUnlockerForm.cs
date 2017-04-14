@@ -22,15 +22,30 @@ namespace mRemoteNG.UI.Forms
 
         private void buttonUnlock_Click(object sender, EventArgs e)
         {
-            _repositoryUnlocker.Unlock(secureTextBoxPassword.SecString);
-            secureTextBoxPassword.Clear();
-            _repositoryUnlocker.SelectNextLockedRepository();
-            objectListViewRepos.SelectedObject = _repositoryUnlocker.SelectedRepository;
+            try
+            {
+                _repositoryUnlocker.Unlock(secureTextBoxPassword.SecString);
+                SelectNextLockedRepo();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+            finally
+            {
+                secureTextBoxPassword.Clear();
+            }
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void SelectNextLockedRepo()
+        {
+            _repositoryUnlocker.SelectNextLockedRepository();
+            objectListViewRepos.SelectedObject = _repositoryUnlocker.SelectedRepository;
         }
 
         private void objectListViewRepos_SelectionChanged(object sender, EventArgs e)
