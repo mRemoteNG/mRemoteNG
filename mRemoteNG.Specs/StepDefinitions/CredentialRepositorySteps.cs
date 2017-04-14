@@ -1,5 +1,6 @@
 ﻿using System.Security;
 using mRemoteNG.Credential;
+using mRemoteNG.Security;
 using mRemoteNG.Specs.Utilities;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
@@ -10,15 +11,12 @@ namespace mRemoteNG.Specs.StepDefinitions
     public class CredentialRepositorySteps
     {
         private ICredentialRepository _credentialRepository;
+        private readonly SecureString _key = "somePassword".ConvertToSecureString();
 
         [Given(@"I have a credential repository")]
         public void GivenIHaveACredentialRepository()
         {
-            var utilityFactory = new XmlCredentialRepoBuilder();
-            var credentialXml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                    "<Credentials EncryptionEngine=\"AES\" BlockCipherMode=\"GCM\" KdfIterations=\"1000\" SchemaVersion=\"1.0\">" +
-                    "</Credentials>";
-            utilityFactory.XmlFileContent = credentialXml;
+            var utilityFactory = new XmlCredentialRepoBuilder {EncryptionKey = _key};
             _credentialRepository = utilityFactory.BuildXmlCredentialRepo();
         }
 
@@ -33,7 +31,7 @@ namespace mRemoteNG.Specs.StepDefinitions
         [Given(@"The credential repository is loaded")]
         public void GivenTheCredentialRepositoryIsLoaded()
         {
-            _credentialRepository.LoadCredentials(new SecureString());
+            _credentialRepository.LoadCredentials(_key);
             Assert.That(_credentialRepository.IsLoaded);
         }
 
@@ -46,7 +44,7 @@ namespace mRemoteNG.Specs.StepDefinitions
         [When(@"I click load")]
         public void WhenIClickLoad()
         {
-            _credentialRepository.LoadCredentials(new SecureString());
+            _credentialRepository.LoadCredentials(_key);
         }
 
         [Then(@"the credential repository is loaded")]

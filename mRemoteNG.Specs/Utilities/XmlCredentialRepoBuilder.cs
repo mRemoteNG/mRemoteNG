@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Security;
+﻿using System.Security;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.CredentialSerializer;
@@ -14,11 +13,12 @@ namespace mRemoteNG.Specs.Utilities
     {
         public SecureString EncryptionKey { get; set; } = "someKey1".ConvertToSecureString();
         public ICryptographyProvider CryptographyProvider { get; set; } = new AeadCryptographyProvider();
-        public string XmlFileContent { get; set; } = "";
 
         public ICredentialRepository BuildXmlCredentialRepo()
         {
-            var dataProvider = new InMemoryStringDataProvider(XmlFileContent);
+            var xmlFileBuilder = new CredRepoXmlFileBuilder();
+            var xmlFileContent = xmlFileBuilder.Build(CryptographyProvider.Encrypt("someheaderdata", EncryptionKey));
+            var dataProvider = new InMemoryStringDataProvider(xmlFileContent);
             var encryptor = new XmlCredentialPasswordEncryptorDecorator(
                 CryptographyProvider,
                 new XmlCredentialRecordSerializer()

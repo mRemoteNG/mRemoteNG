@@ -23,19 +23,27 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         [Test]
         public void OutputedCredentialHasDecryptedPassword()
         {
-            var xml = GenerateXml();
+            var xml = GenerateCredentialXml();
             var output = _sut.Deserialize(xml, _decryptionKey);
             Assert.That(output.First().Password.ConvertToUnsecureString(), Is.EqualTo(_unencryptedPassword));
         }
 
+        [Test]
+        public void DecryptionThrowsExceptionWhenAuthHeaderNotFound()
+        {
+            var xml = GenerateCredentialXml(false);
+            Assert.Throws<EncryptionException>(() => _sut.Deserialize(xml, _decryptionKey));
+        }
 
-        private string GenerateXml()
+
+        private string GenerateCredentialXml(bool includeAuthHeader = true)
         {
             var cryptoProvider = new AeadCryptographyProvider();
+            var authHeader = includeAuthHeader ? $"Auth=\"{cryptoProvider.Encrypt("someheader", _decryptionKey)}\"" : "";
             var encryptedPassword = cryptoProvider.Encrypt(_unencryptedPassword, _decryptionKey);
             return
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                $"<Credentials EncryptionEngine=\"{cryptoProvider.CipherEngine}\" BlockCipherMode=\"{cryptoProvider.CipherMode}\" KdfIterations=\"{cryptoProvider.KeyDerivationIterations}\" SchemaVersion=\"1.0\">" +
+                $"<Credentials EncryptionEngine=\"{cryptoProvider.CipherEngine}\" BlockCipherMode=\"{cryptoProvider.CipherMode}\" KdfIterations=\"{cryptoProvider.KeyDerivationIterations}\" {authHeader} SchemaVersion=\"1.0\">" +
                     $"<Credential Id=\"ce6b0397-d476-4ffe-884b-dbe9347a88a8\" Title=\"New Credential\" Username=\"asdfasdf\" Domain=\"\" Password=\"{encryptedPassword}\" />" +
                 "</Credentials>";
         }
