@@ -316,6 +316,12 @@
     <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.Designer.cs">
       <DependentUpon>ConnectionTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\CredentialRecordComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordComboBox.Designer.cs">
+      <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\CredentialRecordListAdaptor.cs" />
     <Compile Include="UI\Controls\CredentialRecordListBox.cs">
       <SubType>Component</SubType>
