@@ -2,7 +2,6 @@
 
 Fixes:
 ------
-#408: Update SQL Script with new tables to support new database scheme
 #410: Update PuTTYNG to 0.68
 #434: Fix complier warnings CA1049 & CA2111
 #502: Problems with ParentID for Duplicated Containers/Connections with SQL Connection Storage
