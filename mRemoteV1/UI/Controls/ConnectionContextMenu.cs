@@ -717,7 +717,11 @@ namespace mRemoteNG.UI.Controls
 
         private void OnImportFileClicked(object sender, EventArgs e)
         {
-            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo ?? _connectionTree.SelectedNode.Parent;
+            ContainerInfo selectedNodeAsContainer;
+            if(_connectionTree.SelectedNode == null)
+                selectedNodeAsContainer = Runtime.ConnectionTreeModel.RootNodes.First();
+            else
+                selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo ?? _connectionTree.SelectedNode.Parent;
             Import.ImportFromFile(selectedNodeAsContainer);
         }
 
