@@ -14,6 +14,7 @@ Fixes:
 #434: Fix complier warnings CA1049 & CA2111
 #502: Problems with ParentID for Duplicated Containers/Connections with SQL Connection Storage
 #514: Expanded property not saved/loaded properly from SQL
+#518: Exception when Importing File
 
 
 General Changes:
