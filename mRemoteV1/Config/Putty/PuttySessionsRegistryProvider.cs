@@ -31,7 +31,7 @@ namespace mRemoteNG.Config.Putty
 				
 			if (raw && !sessionNames.Contains("Default%20Settings"))
 				sessionNames.Insert(0, "Default%20Settings");
-			else if (!sessionNames.Contains("Default Settings"))
+			else if (!raw && !sessionNames.Contains("Default Settings"))
 				sessionNames.Insert(0, "Default Settings");
 				
 			return sessionNames.ToArray();
