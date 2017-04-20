@@ -4,6 +4,7 @@ Fixes:
 ------
 #410: Update PuTTYNG to 0.68
 #434: Fix complier warnings CA1049 & CA2111
+#442: Fixed issue loading PuTTY sessions that have spaces in the name
 #502: Problems with ParentID for Duplicated Containers/Connections with SQL Connection Storage
 #514: Expanded property not saved/loaded properly from SQL
 #518: Exception when Importing File
