@@ -4,12 +4,6 @@ param (
     $FileName
 )
 
-# Returns the first full path to the $FileName that our search can find
-
-$rootSearchPaths = @(
-    [System.IO.Directory]::EnumerateFileSystemEntries("C:\Program Files", $FileName, [System.IO.SearchOption]::AllDirectories),
-    [System.IO.Directory]::EnumerateFileSystemEntries("C:\Program Files (x86)", $FileName, [System.IO.SearchOption]::AllDirectories)
-)
 
 
 function EditBinCertificateIsValid() {
@@ -29,11 +23,19 @@ function EditBinCertificateIsValid() {
     }
 }
 
+$rootSearchPaths = @(
+    [System.IO.Directory]::EnumerateFileSystemEntries("C:\Program Files", "*Visual Studio*", [System.IO.SearchOption]::TopDirectoryOnly),
+    [System.IO.Directory]::EnumerateFileSystemEntries("C:\Program Files (x86)", "*Visual Studio*", [System.IO.SearchOption]::TopDirectoryOnly)
+)
 
+# Returns the first full path to the $FileName that our search can find
 foreach ($searchPath in $rootSearchPaths) {
-    foreach ($entry in $searchPath) {
-        if (EditBinCertificateIsValid -Path $entry) {
-            return $entry
+    foreach ($visualStudioFolder in $searchPath) {
+        $matchingExes = [System.IO.Directory]::EnumerateFileSystemEntries($visualStudioFolder, $FileName, [System.IO.SearchOption]::AllDirectories)
+        foreach ($matchingExe in $matchingExes) {
+            if (EditBinCertificateIsValid -Path $matchingExe) {
+                return $matchingExe
+            }
         }
     }
 }
