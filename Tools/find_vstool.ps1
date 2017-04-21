@@ -13,9 +13,13 @@ function EditBinCertificateIsValid() {
     )
 
     # Verify file certificate
-    $microsoft_cert_thumbprint = "3BDA323E552DB1FDE5F4FBEE75D6D5B2B187EEDC"
+    $valid_microsoft_cert_thumbprints = @(
+        "3BDA323E552DB1FDE5F4FBEE75D6D5B2B187EEDC",
+        "98ED99A67886D020C564923B7DF25E9AC019DF26",
+        "108E2BA23632620C427C570B6D9DB51AC31387FE"
+    )
     $file_signature = Get-AuthenticodeSignature -FilePath $Path
-    if (($file_signature.Status -ne "Valid") -or ($file_signature.SignerCertificate.Thumbprint -ne $microsoft_cert_thumbprint)) {
+    if (($file_signature.Status -ne "Valid") -or ($valid_microsoft_cert_thumbprints -notcontains $file_signature.SignerCertificate.Thumbprint)) {
         Write-Warning "Could not validate the signature of $Path"
         return $false
     } else {
