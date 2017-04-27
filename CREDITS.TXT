@@ -99,8 +99,8 @@ Copyright © 2002-2003 Crownwood Consulting, Ltd.
 Freely redistributable with attribution
 http://www.dotnetmagic.com/magic_download.html
 
-PuTTY 0.67
-Copyright © 1997-2016 Simon Tatham
+PuTTY 0.68
+Copyright © 1997-2017 Simon Tatham
 MIT License
 http://www.chiark.greenend.org.uk/~sgtatham/putty/
 
