@@ -10,12 +10,20 @@ General Changes:
 Improved compatability between environments when building mRemoteNG from source
 
 
-1.75.7005 (2017-04-XX)
+1.75.7006 (2017-xx-xx):
+
+Fixes:
+------
+#530: Fixed issue where using External Tool on existing connection causes creation of 'New Connection' entry
+
+
+1.75.7005 (2017-04-27):
 
 Fixes:
 ------
 #410: Update PuTTYNG to 0.68
 #434: Fix complier warnings CA1049 & CA2111
+#442: Fixed issue loading PuTTY sessions that have spaces in the name
 #502: Problems with ParentID for Duplicated Containers/Connections with SQL Connection Storage
 #514: Expanded property not saved/loaded properly from SQL
 #518: Exception when Importing File

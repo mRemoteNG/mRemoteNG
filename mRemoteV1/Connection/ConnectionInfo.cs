@@ -78,7 +78,6 @@ namespace mRemoteNG.Connection
 		    var newConnectionInfo = new ConnectionInfo();
             newConnectionInfo.CopyFrom(this);
 			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
-            newConnectionInfo.SetParent(Parent);
 		    newConnectionInfo.Inheritance = Inheritance.Clone();
 			return newConnectionInfo;
 		}
@@ -192,6 +191,8 @@ namespace mRemoteNG.Connection
             var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
 
             return parentPropertyValue;
+
+            
         }
 
 		private static int GetDefaultPort(ProtocolType protocol)

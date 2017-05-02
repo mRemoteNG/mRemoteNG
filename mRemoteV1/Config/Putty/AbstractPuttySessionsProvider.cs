@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Web;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree.Root;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -45,7 +46,8 @@ namespace mRemoteNG.Config.Putty
         private IEnumerable<PuttySessionInfo> GetSessionToRemove(IEnumerable<string> sessionNamesFromProvider)
         {
             var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
-            var sessionNamesToRemove = currentlyKnownSessionNames.Except(sessionNamesFromProvider);
+            var normalizedSessionNames = sessionNamesFromProvider.Select(HttpUtility.UrlDecode);
+            var sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames);
             return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name));
         }
 
