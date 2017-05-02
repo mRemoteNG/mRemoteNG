@@ -60,22 +60,27 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
             SaveValuesToConfig();
             if (!_repositoryList.Contains(_repositoryConfig.Id))
             {
-                var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
-                var credRepoDataProvider = new FileDataProvider(_repositoryConfig.Source);
-                var credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
-                    cryptoFromSettings.Build(),
-                    new XmlCredentialRecordSerializer());
-                var credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
-
-                var newCredentialRepository = new XmlCredentialRepository(
-                    _repositoryConfig,
-                    new CredentialRecordSaver(credRepoDataProvider, credRepoSerializer),
-                    new CredentialRecordLoader(credRepoDataProvider, credRepoDeserializer)
-                );
+                var newCredentialRepository = BuildXmlRepoFromSettings(_repositoryConfig);
                 _repositoryList.AddProvider(newCredentialRepository);
                 newCredentialRepository.SaveCredentials(_repositoryConfig.Key);
             }
             RaiseNextPageEvent();
+        }
+
+        private ICredentialRepository BuildXmlRepoFromSettings(ICredentialRepositoryConfig config)
+        {
+            var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
+            var credRepoDataProvider = new FileDataProvider(config.Source);
+            var credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
+                cryptoFromSettings.Build(),
+                new XmlCredentialRecordSerializer());
+            var credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
+
+            return new XmlCredentialRepository(
+                config,
+                new CredentialRecordSaver(credRepoDataProvider, credRepoSerializer),
+                new CredentialRecordLoader(credRepoDataProvider, credRepoDeserializer)
+            );
         }
 
         private bool AllRequiredFieldsFilledOut()
