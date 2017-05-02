@@ -88,6 +88,7 @@ namespace mRemoteNG.Connection
 	        if (properties == null) return;
 	        foreach (var property in properties)
 	        {
+	            if (property.Name == nameof(Parent)) continue;
 	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
                 property.SetValue(this, remotePropertyValue, null);
 	        }
