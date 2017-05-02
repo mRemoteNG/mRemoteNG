@@ -33,6 +33,7 @@ namespace mRemoteNG.UI.Window
             this.lblEdition = new System.Windows.Forms.Label();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.verText = new System.Windows.Forms.TextBox();
             this.lblCredits = new System.Windows.Forms.Label();
             this.txtCredits = new System.Windows.Forms.TextBox();
             this.txtChangeLog = new System.Windows.Forms.TextBox();
@@ -41,7 +42,6 @@ namespace mRemoteNG.UI.Window
             this.lblChangeLog = new System.Windows.Forms.Label();
             this.lblLicense = new System.Windows.Forms.Label();
             this.lblCopyright = new System.Windows.Forms.Label();
-            this.verText = new System.Windows.Forms.TextBox();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlBottom.SuspendLayout();
@@ -105,6 +105,18 @@ namespace mRemoteNG.UI.Window
             this.pnlBottom.Size = new System.Drawing.Size(1121, 559);
             this.pnlBottom.TabIndex = 1;
             // 
+            // verText
+            // 
+            this.verText.BackColor = System.Drawing.SystemColors.Control;
+            this.verText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.verText.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.verText.Location = new System.Drawing.Point(69, 51);
+            this.verText.Name = "verText";
+            this.verText.Size = new System.Drawing.Size(147, 20);
+            this.verText.TabIndex = 12;
+            this.verText.TabStop = false;
+            this.verText.Text = "w.x.y.z";
+            // 
             // lblCredits
             // 
             this.lblCredits.AutoSize = true;
@@ -119,6 +131,8 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCredits
             // 
+            this.txtCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtCredits.BackColor = System.Drawing.SystemColors.Control;
             this.txtCredits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCredits.Cursor = System.Windows.Forms.Cursors.Default;
@@ -136,6 +150,9 @@ namespace mRemoteNG.UI.Window
             // 
             // txtChangeLog
             // 
+            this.txtChangeLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtChangeLog.BackColor = System.Drawing.SystemColors.Control;
             this.txtChangeLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Default;
@@ -210,18 +227,6 @@ namespace mRemoteNG.UI.Window
             this.lblCopyright.TabIndex = 2;
             this.lblCopyright.Text = "Copyright";
             this.lblCopyright.UseCompatibleTextRendering = true;
-            // 
-            // verText
-            // 
-            this.verText.BackColor = System.Drawing.SystemColors.Control;
-            this.verText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.verText.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.verText.Location = new System.Drawing.Point(69, 51);
-            this.verText.Name = "verText";
-            this.verText.Size = new System.Drawing.Size(147, 20);
-            this.verText.TabIndex = 12;
-            this.verText.TabStop = false;
-            this.verText.Text = "w.x.y.z";
             // 
             // AboutWindow
             // 

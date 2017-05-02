@@ -100,8 +100,8 @@ Copyright © 2002-2003 Crownwood Consulting, Ltd.
 Freely redistributable with attribution
 http://www.dotnetmagic.com/magic_download.html
 
-PuTTY 0.67
-Copyright © 1997-2016 Simon Tatham
+PuTTY 0.68
+Copyright © 1997-2017 Simon Tatham
 MIT License
 http://www.chiark.greenend.org.uk/~sgtatham/putty/
 
@@ -115,12 +115,12 @@ Copyright © 2016
 MIT License
 https://github.com/sshnet/SSH.NET
 
-VncSharp 1.1
+VncSharp 1.2
 Copyright © 2004-2009 David Humphrey
 GNU General Public License (GPL) Version 2
 https://github.com/humphd/VncSharp
 
-ObjectListView 2.9
-Copyright © 2006-2015 Phillip Piper
+ObjectListView 2.9.1
+Copyright © 2006-2016 Phillip Piper
 GNU General Public License (GPL) Version 3
 https://sourceforge.net/projects/objectlistview/

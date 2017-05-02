@@ -218,6 +218,7 @@ namespace mRemoteNG.UI.Controls
         public void DuplicateSelectedNode()
         {
             var newNode = SelectedNode.Clone();
+            SelectedNode.Parent.AddChildBelow(newNode, SelectedNode);
             newNode.Parent.SetChildBelow(newNode, SelectedNode);
             Runtime.SaveConnectionsAsync();
         }

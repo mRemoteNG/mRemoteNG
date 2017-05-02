@@ -63,11 +63,6 @@ namespace mRemoteNG.Tree
             connectionInfo?.RemoveParent();
         }
 
-        public void CloneNode(ConnectionInfo connectionInfo)
-        {
-            connectionInfo.Clone();
-        }
-
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
         {

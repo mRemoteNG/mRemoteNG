@@ -49,6 +49,14 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
+        public void CloneDoesNotSetParentOfNewConnectionInfo()
+        {
+            _connectionInfo.SetParent(new ContainerInfo());
+            var clonedConnection = _connectionInfo.Clone();
+            Assert.That(clonedConnection.Parent, Is.Null);
+        }
+
+        [Test]
         public void CopyFromCopiesProperties()
         {
             var secondConnection = new ConnectionInfo {Domain = TestDomain};

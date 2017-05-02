@@ -30,10 +30,16 @@ namespace mRemoteNG.Config.Serializers
             var nodeList = new List<ConnectionInfo>();
             foreach (DataRow row in table.Rows)
             {
-                if ((string)row["Type"] == "Connection")
+                // ReSharper disable once SwitchStatementMissingSomeCases
+                switch ((string)row["Type"])
+                {
+                    case "Connection":
                     nodeList.Add(DeserializeConnectionInfo(row));
-                else if ((string)row["Type"] == "Container")
+                        break;
+                    case "Container":
                     nodeList.Add(DeserializeContainerInfo(row));
+                        break;
+                }
             }
             return nodeList;
         }
@@ -56,8 +62,15 @@ namespace mRemoteNG.Config.Serializers
         {
             connectionInfo.Name = (string)dataRow["Name"];
             connectionInfo.ConstantID = (string)dataRow["ConstantID"];
+
+            // This throws a NPE - Parent is a connectionInfo object which will be null at this point.
+            // The Parent object is linked properly later in CreateNodeHierarchy()
             //connectionInfo.Parent.ConstantID = (string)dataRow["ParentID"];
-            //connectionInfo is ContainerInfo ? ((ContainerInfo)connectionInfo).IsExpanded.ToString() : "" = dataRow["Expanded"];
+
+            var info = connectionInfo as ContainerInfo;
+            if(info != null)
+                info.IsExpanded = (bool)dataRow["Expanded"];
+
             connectionInfo.Description = (string)dataRow["Description"];
             connectionInfo.Icon = (string)dataRow["Icon"];
             connectionInfo.Panel = (string)dataRow["Panel"];
