@@ -264,6 +264,14 @@ namespace mRemoteNGTests.Container
         }
 
         [Test]
+        public void ClonedContainerDoesNotHaveParentSet()
+        {
+            _containerInfo.SetParent(new ContainerInfo());
+            var clone = _containerInfo.Clone();
+            Assert.That(clone.Parent, Is.Null);
+        }
+
+        [Test]
         public void ClonedContainerContainsClonedChildren()
         {
             _containerInfo.AddChild(_con1);
