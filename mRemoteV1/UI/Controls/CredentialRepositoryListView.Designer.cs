@@ -18,9 +18,9 @@
             this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnProvider = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnIsLoaded = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -29,15 +29,15 @@
             this.objectListView1.AllColumns.Add(this.olvColumnTitle);
             this.objectListView1.AllColumns.Add(this.olvColumnProvider);
             this.objectListView1.AllColumns.Add(this.olvColumnIsLoaded);
-            this.objectListView1.AllColumns.Add(this.olvColumnId);
             this.objectListView1.AllColumns.Add(this.olvColumnSource);
+            this.objectListView1.AllColumns.Add(this.olvColumnId);
             this.objectListView1.CellEditUseWholeCell = false;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnTitle,
             this.olvColumnProvider,
             this.olvColumnIsLoaded,
-            this.olvColumnId,
-            this.olvColumnSource});
+            this.olvColumnSource,
+            this.olvColumnId});
             this.objectListView1.CopySelectionOnControlC = false;
             this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
             this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -68,22 +68,21 @@
             this.olvColumnProvider.Searchable = false;
             this.olvColumnProvider.Text = "Provider";
             // 
-            // olvColumnSource
+            // olvColumnIsLoaded
             // 
-            this.olvColumnSource.AspectName = "";
-            this.olvColumnSource.DisplayIndex = 2;
-            this.olvColumnSource.Groupable = false;
-            this.olvColumnSource.Text = "Source";
+            this.olvColumnIsLoaded.IsEditable = false;
+            this.olvColumnIsLoaded.Text = "Loaded";
             // 
             // olvColumnId
             // 
             this.olvColumnId.Text = "ID";
             // 
-            // olvColumnIsLoaded
+            // olvColumnSource
             // 
-            this.olvColumnIsLoaded.DisplayIndex = 4;
-            this.olvColumnIsLoaded.IsEditable = false;
-            this.olvColumnIsLoaded.Text = "Loaded";
+            this.olvColumnSource.AspectName = "";
+            this.olvColumnSource.ButtonSizing = BrightIdeasSoftware.OLVColumn.ButtonSizingMode.FixedBounds;
+            this.olvColumnSource.Groupable = false;
+            this.olvColumnSource.Text = "Source";
             // 
             // CredentialRepositoryListView
             // 
