@@ -5,6 +5,10 @@ Features/Enhancements:
 Added more logging/notifications options
 #429: Added Czech translation
 
+General Changes:
+----------------
+Improved compatability between environments when building mRemoteNG from source
+
 
 1.75.7005 (2017-04-XX)
 

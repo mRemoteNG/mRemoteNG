@@ -11,12 +11,22 @@ param (
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 
 # Find editbin.exe
-$path_editBin = & "$PSScriptRoot\find_vstool.ps1" -FileName "editbin.exe"
+$path_dumpBin = & "$PSScriptRoot\find_vstool.ps1" -FileName "dumpbin.exe"
 
 $path_outputExe = Join-Path -Path $TargetDir -ChildPath $TargetFileName
 
-# Set LargeAddressAware
-Write-Output "Setting LargeAddressAware on binary file:`n`"$path_outputExe`" `nwith:`n`"$path_editBin`""
-& $path_editBin "/largeaddressaware" "$path_outputExe"
+# Dump exe header
+$output = & "$path_dumpBin" /NOLOGO /HEADERS $path_outputExe | Select-String large
+
+if ($output -eq $null)
+{
+    Write-Warning "Could not validate LargeAddressAware"
+}
+else
+{
+    Write-Output $output.ToString().TrimStart(" ")
+}
+
+
 
 Write-Output ""
