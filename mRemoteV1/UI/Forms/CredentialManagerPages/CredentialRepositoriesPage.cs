@@ -29,11 +29,11 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             _unlockerFactory = unlockerFactory;
             InitializeComponent();
             credentialRepositoryListView.CredentialRepositoryList = providerCatalog;
-            credentialRepositoryListView.SelectionChanged += ObjectListView1OnSelectionChanged;
+            credentialRepositoryListView.SelectionChanged += (sender, args) => UpdateUi();
             credentialRepositoryListView.DoubleClickHandler = EditRepository;
         }
 
-        private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
+        private void UpdateUi()
         {
             var selectedRepository = credentialRepositoryListView.SelectedRepository;
             buttonRemove.Enabled = selectedRepository != null;
@@ -70,6 +70,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private bool EditRepository(ICredentialRepository repository)
         {
+            if (!repository.IsLoaded) return false;
             var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(repository.Config, _providerCatalog);
             var pageSequence = new PageSequence(Parent,
                 this,
@@ -101,6 +102,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
                 selectedRepository.UnloadCredentials();
             else
                 _unlockerFactory.Build(new[] {selectedRepository}).ShowDialog(this);
+            credentialRepositoryListView.RefreshObjects();
+            UpdateUi();
         }
     }
 }

@@ -35,6 +35,12 @@ namespace mRemoteNG.UI.Controls
             SetupObjectListView();
         }
 
+        public void RefreshObjects()
+        {
+            var repos = CredentialRepositoryList.CredentialProviders.ToList();
+            objectListView1.RefreshObjects(repos);
+        }
+
         private void SetupObjectListView()
         {
             olvColumnTitle.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Title;
