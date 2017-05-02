@@ -1,4 +1,11 @@
-1.75.7005 (2017-04-27)
+1.75.7006 (2017-xx-xx):
+
+Fixes:
+------
+#530: Fixed issue where using External Tool on existing connection causes creation of 'New Connection' entry
+
+
+1.75.7005 (2017-04-27):
 
 Fixes:
 ------
