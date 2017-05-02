@@ -179,7 +179,6 @@ namespace mRemoteNG.Container
             var newContainer = new ContainerInfo();
             newContainer.CopyFrom(this);
             newContainer.ConstantID = MiscTools.CreateConstantID();
-            newContainer.SetParent(Parent);
             newContainer.OpenConnections = new ProtocolList();
             newContainer.Inheritance = Inheritance.Clone();
             foreach (var child in Children.ToArray())
