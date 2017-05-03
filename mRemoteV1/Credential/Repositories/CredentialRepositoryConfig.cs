@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Security;
-using mRemoteNG.Credential.Repositories;
 
-namespace mRemoteNG.Credential
+namespace mRemoteNG.Credential.Repositories
 {
     public class CredentialRepositoryConfig : ICredentialRepositoryConfig
     {

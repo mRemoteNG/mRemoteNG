@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace mRemoteNG.Credential
+namespace mRemoteNG.Credential.Repositories
 {
     public class CredentialRepoUnlockerBuilder
     {

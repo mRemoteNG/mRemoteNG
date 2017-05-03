@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Tools.CustomCollections;
 
-
-namespace mRemoteNG.Credential
+namespace mRemoteNG.Credential.Repositories
 {
     public class CredentialRepositoryList : ICredentialRepositoryList
     {

@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms.CredentialManagerPages
+﻿using mRemoteNG.Credential.Repositories;
+
+namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
     partial class CredentialRepositoriesPage
     {
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            mRemoteNG.Credential.CredentialRepositoryList credentialRepositoryList1 = new mRemoteNG.Credential.CredentialRepositoryList();
+            CredentialRepositoryList credentialRepositoryList1 = new CredentialRepositoryList();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();

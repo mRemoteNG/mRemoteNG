@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 
 namespace mRemoteNG.UI.Forms
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Controls.PageSequence;
 

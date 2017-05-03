@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using NSubstitute;
 using NUnit.Framework;
 

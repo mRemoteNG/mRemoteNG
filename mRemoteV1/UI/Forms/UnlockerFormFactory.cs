@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 
 namespace mRemoteNG.UI.Forms
 {

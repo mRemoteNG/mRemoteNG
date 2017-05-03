@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mRemoteNG.Credential
+namespace mRemoteNG.Credential.Repositories
 {
     public class CredentialRepositoryChangedArgs : EventArgs
     {

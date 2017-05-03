@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Specs.Utilities;
 using NUnit.Framework;
 using TechTalk.SpecFlow;

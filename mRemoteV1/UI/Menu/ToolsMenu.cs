@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.CredentialManagerPages;
 

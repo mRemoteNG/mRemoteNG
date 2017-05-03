@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.UI.Controls
