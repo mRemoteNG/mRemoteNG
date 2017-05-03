@@ -222,7 +222,6 @@
     <Compile Include="Credential\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
     <Compile Include="Credential\CredentialsService.cs" />
-    <Compile Include="Credential\StaticSerializerKeyProviderDecorator.cs" />
     <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
     <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
     <Compile Include="Security\ICryptoProviderFactory.cs" />
