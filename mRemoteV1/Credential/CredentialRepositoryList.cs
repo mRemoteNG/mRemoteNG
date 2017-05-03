@@ -47,6 +47,11 @@ namespace mRemoteNG.Credential
             return list;
         }
 
+        public ICredentialRecord GetCredentialRecord(Guid id)
+        {
+            return CredentialProviders.SelectMany(repo => repo.CredentialRecords).FirstOrDefault(record => record.Id.Equals(id));
+        }
+
         public IEnumerator<ICredentialRepository> GetEnumerator()
         {
             return _credentialProviders.GetEnumerator();
