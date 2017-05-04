@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.UI.Controls;
 
