@@ -79,6 +79,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -139,6 +140,7 @@
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
     <Compile Include="Credential\CompositeRepositoryUnlockerTests.cs" />
+    <Compile Include="Credential\CredentialChangedEventArgsTests.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />
     <Compile Include="Credential\CredentialDomainUserComparerTests.cs" />
     <Compile Include="Credential\CredentialRecordTypeConverterTests.cs" />
