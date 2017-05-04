@@ -137,6 +137,7 @@
     <Compile Include="Credential\CompositeRepositoryUnlockerTests.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />
     <Compile Include="Credential\CredentialDomainUserComparerTests.cs" />
+    <Compile Include="Credential\CredentialRecordTypeConverterTests.cs" />
     <Compile Include="Credential\CredentialRepositoryListTests.cs" />
     <Compile Include="Credential\CredentialRecordTests.cs" />
     <Compile Include="IntegrationTests\XmlCredentialSerializerLifeCycleTests.cs" />
