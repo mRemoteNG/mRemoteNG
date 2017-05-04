@@ -231,7 +231,6 @@
     <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
     <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
     <Compile Include="Security\ICryptoProviderFactory.cs" />
-    <Compile Include="Security\IHasKey.cs" />
     <Compile Include="Security\IKeyProvider.cs" />
     <Compile Include="Security\RandomGenerator.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
