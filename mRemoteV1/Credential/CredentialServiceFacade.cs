@@ -5,7 +5,7 @@ using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialsService
+    public class CredentialServiceFacade
     {
         private readonly ICredentialRepositoryList _repositoryList;
         private readonly CredentialRepositoryListLoader _loader;
@@ -13,7 +13,7 @@ namespace mRemoteNG.Credential
 
         public IEnumerable<ICredentialRepository> CredentialRepositories => _repositoryList;
 
-        public CredentialsService(ICredentialRepositoryList repositoryList, CredentialRepositoryListLoader loader, CredentialRepositoryListSaver saver)
+        public CredentialServiceFacade(ICredentialRepositoryList repositoryList, CredentialRepositoryListLoader loader, CredentialRepositoryListSaver saver)
         {
             if (repositoryList == null)
                 throw new ArgumentNullException(nameof(repositoryList));

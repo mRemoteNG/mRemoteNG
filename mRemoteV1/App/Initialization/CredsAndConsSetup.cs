@@ -20,10 +20,10 @@ namespace mRemoteNG.App.Initialization
     {
         private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _credRepoSerializer;
         private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _credRepoDeserializer;
-        private readonly CredentialsService _credentialsService;
+        private readonly CredentialServiceFacade _credentialsService;
         private readonly string _credentialFilePath;
 
-        public CredsAndConsSetup(CredentialsService credentialsService, string credentialFilePath)
+        public CredsAndConsSetup(CredentialServiceFacade credentialsService, string credentialFilePath)
         {
             if (credentialsService == null)
                 throw new ArgumentNullException(nameof(credentialsService));

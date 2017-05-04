@@ -221,7 +221,7 @@
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
     <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
-    <Compile Include="Credential\CredentialsService.cs" />
+    <Compile Include="Credential\CredentialServiceFacade.cs" />
     <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
     <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
     <Compile Include="Security\ICryptoProviderFactory.cs" />
