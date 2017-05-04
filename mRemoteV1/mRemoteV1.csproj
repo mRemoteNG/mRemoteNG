@@ -159,6 +159,12 @@
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionNodeSerializer26.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionRetriever.cs" />
+    <Compile Include="Config\Serializers\Versioning\IVersionUpgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion22To23Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
@@ -289,7 +295,7 @@
     <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
-    <Compile Include="Config\Serializers\SqlDatabaseVersionVerifier.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionVerifier.cs" />
     <Compile Include="Tree\AlwaysConfirmYes.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmer.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />

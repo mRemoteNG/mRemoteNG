@@ -131,6 +131,10 @@
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialRecordDeserializerTests.cs" />
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialSerializerTests.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializerTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion22To23UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion23To24UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion24To25UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion25To26UpgraderTests.cs" />
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />

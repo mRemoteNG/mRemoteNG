@@ -4,6 +4,7 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Credential;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
