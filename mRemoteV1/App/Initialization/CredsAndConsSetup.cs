@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
@@ -82,6 +83,17 @@ namespace mRemoteNG.App.Initialization
             var credentialHarvester = new CredentialHarvester();
             var harvestedCredentials = credentialHarvester.Harvest(xdoc, newCredRepoKey);
 
+            var newCredentialRepository = BuildXmlCredentialRepo(newCredRepoKey);
+            
+            AddHarvestedCredentialsToRepo(harvestedCredentials, newCredentialRepository);
+            newCredentialRepository.SaveCredentials(newCredRepoKey);
+
+            _credentialsService.AddRepository(newCredentialRepository);
+            return credentialHarvester.ConnectionToCredentialMap;
+        }
+
+        private ICredentialRepository BuildXmlCredentialRepo(SecureString newCredRepoKey)
+        {
             var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
             var credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
                 cryptoFromSettings.Build(),
@@ -89,7 +101,7 @@ namespace mRemoteNG.App.Initialization
             var credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
 
             var xmlRepoFactory = new XmlCredentialRepositoryFactory(credRepoSerializer, credRepoDeserializer);
-            var newCredentialRepository = xmlRepoFactory.Build(
+            var newRepo = xmlRepoFactory.Build(
                 new CredentialRepositoryConfig
                 {
                     Source = _credentialFilePath,
@@ -98,15 +110,14 @@ namespace mRemoteNG.App.Initialization
                     Key = newCredRepoKey
                 }
             );
+            newRepo.LoadCredentials(newCredRepoKey);
+            return newRepo;
+        }
 
-            newCredentialRepository.LoadCredentials(newCredRepoKey);
-
+        private void AddHarvestedCredentialsToRepo(IEnumerable<ICredentialRecord> harvestedCredentials, ICredentialRepository repo)
+        {
             foreach (var credential in harvestedCredentials)
-                newCredentialRepository.CredentialRecords.Add(credential);
-            newCredentialRepository.SaveCredentials(newCredRepoKey);
-
-            _credentialsService.AddRepository(newCredentialRepository);
-            return credentialHarvester.ConnectionToCredentialMap;
+                repo.CredentialRecords.Add(credential);
         }
 
         private void EnsureConnectionXmlElementsHaveIds(XDocument xdoc)
