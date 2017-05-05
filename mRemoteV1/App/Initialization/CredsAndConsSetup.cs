@@ -18,8 +18,6 @@ namespace mRemoteNG.App.Initialization
 {
     public class CredsAndConsSetup
     {
-        private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _credRepoSerializer;
-        private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _credRepoDeserializer;
         private readonly CredentialServiceFacade _credentialsService;
         private readonly string _credentialFilePath;
 
@@ -28,15 +26,8 @@ namespace mRemoteNG.App.Initialization
             if (credentialsService == null)
                 throw new ArgumentNullException(nameof(credentialsService));
 
-            _credentialFilePath = credentialFilePath;
-
-            var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
-            _credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
-                cryptoFromSettings.Build(),
-                new XmlCredentialRecordSerializer());
-            _credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
-
             _credentialsService = credentialsService;
+            _credentialFilePath = credentialFilePath;
         }
 
         public void LoadCredsAndCons()
@@ -54,6 +45,20 @@ namespace mRemoteNG.App.Initialization
                 ApplyCredentialMapping(upgradeMap);
         }
 
+        private void LoadCredentialRepositoryList()
+        {
+            _credentialsService.LoadRepositoryList();
+        }
+
+        private void LoadDefaultConnectionCredentials()
+        {
+            var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
+            var matchedCredentials = _credentialsService.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
+            DefaultConnectionInfo.Instance.CredentialRecord = matchedCredentials.Any() ? matchedCredentials.First() : null;
+        }
+
+
+#region version 26 to 27
         private Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager()
         {
             var connectionFileProvider = new FileDataProvider(Runtime.GetStartupConnectionFileName());
@@ -77,7 +82,13 @@ namespace mRemoteNG.App.Initialization
             var credentialHarvester = new CredentialHarvester();
             var harvestedCredentials = credentialHarvester.Harvest(xdoc, newCredRepoKey);
 
-            var xmlRepoFactory = new XmlCredentialRepositoryFactory(_credRepoSerializer, _credRepoDeserializer);
+            var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
+            var credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
+                cryptoFromSettings.Build(),
+                new XmlCredentialRecordSerializer());
+            var credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
+
+            var xmlRepoFactory = new XmlCredentialRepositoryFactory(credRepoSerializer, credRepoDeserializer);
             var newCredentialRepository = xmlRepoFactory.Build(
                 new CredentialRepositoryConfig
                 {
@@ -104,18 +115,6 @@ namespace mRemoteNG.App.Initialization
             adapter.EnsureElementsHaveIds(xdoc);
         }
 
-        private void LoadCredentialRepositoryList()
-        {
-            _credentialsService.LoadRepositoryList();
-        }
-
-        private void LoadDefaultConnectionCredentials()
-        {
-            var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
-            var matchedCredentials = _credentialsService.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
-            DefaultConnectionInfo.Instance.CredentialRecord = matchedCredentials.Any() ? matchedCredentials.First() : null;
-        }
-
         private void ApplyCredentialMapping(IDictionary<Guid, ICredentialRecord> map)
         {
             foreach (var connectionInfo in Runtime.ConnectionTreeModel.GetRecursiveChildList())
@@ -126,5 +125,6 @@ namespace mRemoteNG.App.Initialization
                     connectionInfo.CredentialRecord = map[id];
             }
         }
+#endregion
     }
 }
