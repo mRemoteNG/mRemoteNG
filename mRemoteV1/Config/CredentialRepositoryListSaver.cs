@@ -6,7 +6,7 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.Config
 {
-    public class CredentialRepositoryListSaver
+    public class CredentialRepositoryListSaver : ISaver<IEnumerable<ICredentialRepository>>
     {
         private readonly IDataProvider<string> _dataProvider;
 

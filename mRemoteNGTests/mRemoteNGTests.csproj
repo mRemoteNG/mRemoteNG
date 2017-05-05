@@ -146,6 +146,7 @@
     <Compile Include="Credential\CredentialRecordTypeConverterTests.cs" />
     <Compile Include="Credential\CredentialRepositoryListTests.cs" />
     <Compile Include="Credential\CredentialRecordTests.cs" />
+    <Compile Include="Credential\CredentialServiceFacadeTests.cs" />
     <Compile Include="IntegrationTests\XmlCredentialSerializerLifeCycleTests.cs" />
     <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
     <Compile Include="Messages\MessageCollectorTests.cs" />

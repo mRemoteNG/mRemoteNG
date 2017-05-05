@@ -8,12 +8,12 @@ namespace mRemoteNG.Credential
     public class CredentialServiceFacade
     {
         private readonly ICredentialRepositoryList _repositoryList;
-        private readonly CredentialRepositoryListLoader _loader;
-        private readonly CredentialRepositoryListSaver _saver;
+        private readonly ILoader<IEnumerable<ICredentialRepository>> _loader;
+        private readonly ISaver<IEnumerable<ICredentialRepository>> _saver;
 
         public IEnumerable<ICredentialRepository> CredentialRepositories => _repositoryList;
 
-        public CredentialServiceFacade(ICredentialRepositoryList repositoryList, CredentialRepositoryListLoader loader, CredentialRepositoryListSaver saver)
+        public CredentialServiceFacade(ICredentialRepositoryList repositoryList, ILoader<IEnumerable<ICredentialRepository>> loader, ISaver<IEnumerable<ICredentialRepository>> saver)
         {
             if (repositoryList == null)
                 throw new ArgumentNullException(nameof(repositoryList));
@@ -54,6 +54,11 @@ namespace mRemoteNG.Credential
         public IEnumerable<ICredentialRecord> GetCredentialRecords()
         {
             return _repositoryList.GetCredentialRecords();
+        }
+
+        public ICredentialRecord GetCredentialRecord(Guid id)
+        {
+            return _repositoryList.GetCredentialRecord(id);
         }
 
         #region Setup
