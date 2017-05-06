@@ -13,7 +13,7 @@
 				]]>
 			</description>
 			<pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
-			{% assign msi = 'application/x-msdownload|application/x-msi' | split: '|' %}
+			{% assign msi = 'application/x-msdownload|application/x-msi|binary/octet-stream|application/octet-stream' | split: '|' %}
 			{% for asset in release.assets %}{% if msi contains asset.content_type and asset.state == 'uploaded' %}<enclosure url='{{ asset.browser_download_url }}' sparkle:version='{{ release.tag_name | xml_escape }}' length='{{ asset.size }}' type='{{ asset.content_type }}' />
 		{% break %}{% endif %}{% endfor %}</item>{% endif %}{% endfor %}
 	</channel>
