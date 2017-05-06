@@ -8,7 +8,7 @@ title: Posts
 	<div class='media-body'>
 		<h3 class='mt-0'>{{ post.title }}</h3>
 		<div>
-			<strong>{{ author.name }}</strong> | <time>{{ post.date | date: '%B %-d, %Y'}}</time>
+			<strong>{{ author.name }}</strong> | <time datetime='{{ post.date | date: "%Y-%m-%d" }}' pubdate>{{ post.date | date: '%B %-d, %Y'}}</time>
 		</div>
 		<div class='text-justify'>
 			{{ post.excerpt }}

@@ -10,7 +10,7 @@
 				<header>
 					<h3 class='mt-0'>{{ page.title }}</h3>
 					<div>
-						<strong>{{ author.name }}</strong> | <time datetime='{{ date: "%Y-%m-%d" }}' pubdate>{{ page.date | date: '%B %-d, %Y'}}</time>
+						<strong>{{ author.name }}</strong> | <time datetime='{{ page.date | date: "%Y-%m-%d" }}' pubdate>{{ page.date | date: '%B %-d, %Y'}}</time>
 					</div>
 					<div class='text-justify'>
 						{{ content }}
