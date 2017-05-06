@@ -9,8 +9,7 @@
 
 	{% seo %}
 
-	<link rel='stylesheet' href='{{ site.url }}{{ site.baseurl }}/css/bootstrap.css'>
-	<link rel='stylesheet' href='{{ site.url }}{{ site.baseurl }}/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha256-rr9hHBQ43H7HSOmmNkxzQGazS/Khx+L8ZRHteEY1tQ4=" crossorigin="anonymous" />
 	{% for file in site.static_files %}{% if file.path contains '/favicon/' %}{% assign name = file.path | remove: '/favicon/' | remove: file.extname %}
 	<link rel='icon' href='{{ site.url }}{{ site.baseurl }}{{ file.path }}' sizes='{{ name }}x{{ name }}' type='image/png'>{% endif %}{% endfor %}
 	{% feed_meta %}
