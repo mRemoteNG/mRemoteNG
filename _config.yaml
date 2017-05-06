@@ -8,8 +8,16 @@ permalink: pretty
 paginate: 5
 paginate_path: /posts/:num/
 excerpt_separator: <!--more-->
+logo: /favicon/256.png
+twitter:
+  username: mRemoteNG
 
 defaults:
+  -
+    scope:
+      path: ''
+    values:
+      image: /favicon/256.png
   -
     scope:
       path: ''
@@ -24,7 +32,10 @@ defaults:
       layout: post
 
 gems:
+  - jekyll-avatar
   - jekyll-feed
-  - jekyll-metions
+  - jekyll-github-metadata
+  - jekyll-mentions
+  - jekyll-seo-tag
   - jekyll-sitemap
   - jemoji

@@ -6,18 +6,8 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 	<meta name='description' content='{{ site.description }}'>
 	<meta name='url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
-	<meta property='og:url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
-	<meta property='og:type' content='website'>
-	<meta property='og:title' content='{% if page.title and page.url != '/' %}{{ page.title }} | {% endif %}{{ site.name }}'>
-	<meta property='og:description' content='{{ site.description }}'>
-	<meta property='og:site_name' content='{{ site.name }}'>
-	<meta property='og:image' content='{{ site.url }}{{ site.baseurl }}/favicon/256.png'>
-	<meta property='og:locale' content='en_US'>
-	<meta name='twitter:card' content='summary'>
-	<meta name='twitter:site' content='@mRemoteNG'>
-	<meta name='theme-color' content='#373A3C'>
 
-	<link rel='canonical' href='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
+	{% seo %}
 
 	<link rel='stylesheet' href='{{ site.url }}{{ site.baseurl }}/css/bootstrap.css'>
 	<link rel='stylesheet' href='{{ site.url }}{{ site.baseurl }}/css/font-awesome.min.css'>
@@ -25,7 +15,6 @@
 	<link rel='icon' href='{{ site.url }}{{ site.baseurl }}{{ file.path }}' sizes='{{ name }}x{{ name }}' type='image/png'>{% endif %}{% endfor %}
 	{% feed_meta %}
 
-	<title>{% if page.title and page.url != '/' %}{{ page.title }} | {% endif %}{{ site.name }}</title>
 	<base href='{{ site.url }}{{ site.baseurl }}'>
 	<style>
 		@font-face {
