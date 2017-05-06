@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
+using mRemoteNG.Messages.WriterDecorators;
 using NSubstitute;
 using NUnit.Framework;
 

@@ -11,10 +11,7 @@ namespace mRemoteNG.Messages
     {
         private readonly IList<IMessage> _messageList;
 
-        public IEnumerable<IMessage> Messages
-        {
-            get { return _messageList; }
-        }
+        public IEnumerable<IMessage> Messages => _messageList;
 
         public MessageCollector()
         {

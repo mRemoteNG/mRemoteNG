@@ -1,6 +1,7 @@
 ﻿using System;
+using mRemoteNG.Messages.MessageWriters;
 
-namespace mRemoteNG.Messages.MessageWriters
+namespace mRemoteNG.Messages.WriterDecorators
 {
     public class OnlyLogMessageFilter : IMessageWriter
     {

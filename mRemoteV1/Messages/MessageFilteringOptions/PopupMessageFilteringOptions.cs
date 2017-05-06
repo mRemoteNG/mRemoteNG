@@ -1,6 +1,4 @@
-﻿using mRemoteNG.Messages.MessageWriters;
-
-namespace mRemoteNG.Messages
+﻿namespace mRemoteNG.Messages
 {
     public class PopupMessageFilteringOptions : IMessageTypeFilteringOptions
     {

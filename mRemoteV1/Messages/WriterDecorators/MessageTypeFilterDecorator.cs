@@ -1,6 +1,7 @@
 ﻿using System;
+using mRemoteNG.Messages.MessageWriters;
 
-namespace mRemoteNG.Messages.MessageWriters
+namespace mRemoteNG.Messages.WriterDecorators
 {
     public class MessageTypeFilterDecorator : IMessageWriter
     {
@@ -26,6 +27,7 @@ namespace mRemoteNG.Messages.MessageWriters
 
         private bool WeShouldWrite(IMessage message)
         {
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (message.Class)
             {
                 case MessageClass.InformationMsg:
