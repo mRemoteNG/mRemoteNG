@@ -1190,10 +1190,6 @@
     <None Include="Resources\Images_FamFamFam\user_comment.png" />
     <None Include="Resources\Images_FamFamFam\key_delete.png" />
     <None Include="Resources\Images\PuttySessions.png" />
-    <None Include="Resources\Notes\Help.txt" />
-    <None Include="Resources\Notes\ICA.txt" />
-    <None Include="Resources\Notes\Misc.txt" />
-    <None Include="Resources\Notes\PropertyList.csv" />
     <None Include="Resources\Images\PuttyConfig.png" />
     <None Include="Resources\Images\Play_Quick.png" />
     <None Include="Resources\Icons\Play_Quick_Icon.ico" />
@@ -1220,8 +1216,6 @@
     <None Include="Resources\Images\Duplicate.png" />
     <None Include="Resources\Images\PortScan.png" />
     <None Include="Resources\Icons\PortScan_Icon.ico" />
-    <None Include="Resources\Notes\MultiLang.txt" />
-    <None Include="Resources\Notes\MultiUserCons.txt" />
     <None Include="Resources\Images_FamFamFam\Copy.png" />
     <None Include="Resources\Images_FamFamFam\Delete.png" />
     <None Include="Resources\Icons_FamFamFam\Config_Icon.ico" />
@@ -1287,7 +1281,6 @@
     <None Include="Resources\Images_FamFamFam\Chat.png" />
     <None Include="Resources\Icons_FamFamFam\Panels_Icon.ico" />
     <None Include="Resources\Images_FamFamFam\JumpTo.png" />
-    <None Include="Resources\Notes\PropertyList.txt" />
     <None Include="Resources\Images_FamFamFam\Monitor_GoTo.png" />
     <None Include="Resources\Images_FamFamFam\Monitor.png" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
