@@ -4,7 +4,7 @@ url: https://mremoteng.org
 baseurl: 
 repository: mRemoteNG/mRemoteNG
 exclude: [README.md, Gemfile, Gemfile.lock]
-permalink: pretty
+permalink: /posts/:categories/:year/:month/:day/:title/
 paginate: 5
 paginate_path: /posts/:num/
 excerpt_separator: <!--more-->
