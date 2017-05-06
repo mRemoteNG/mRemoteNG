@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Forms.CredentialManagerPages;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -17,8 +18,9 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsComponentsCheck;
         private ToolStripMenuItem _credentialManagerToolStripMenuItem;
 
-        public CredentialManager CredentialManager { get; set; }
         public Form MainForm { get; set; }
+        public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
+        public UnlockerFormFactory UnlockerFormFactory { get; set; }
 
         public ToolsMenu()
         {
@@ -118,10 +120,16 @@ namespace mRemoteNG.UI.Menu
         #region Tools
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var credentialManagerForm = new CredentialManagerForm(CredentialManager)
+            var pages = new UserControl[]
             {
-                DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
+                new CredentialListPage(CredentialProviderCatalog)
+                {
+                    DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
+                },
+                new CredentialRepositoriesPage(CredentialProviderCatalog, UnlockerFormFactory)
             };
+
+            var credentialManagerForm = new CredentialManagerForm(pages);
             credentialManagerForm.CenterOnTarget(MainForm);
             credentialManagerForm.Show();
         }

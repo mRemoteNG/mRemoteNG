@@ -7,6 +7,7 @@ using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
@@ -25,7 +26,7 @@ namespace mRemoteNGTests.Config
         public void Setup()
         {
             _credentialHarvester = new CredentialHarvester();
-            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            _cryptographyProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
             _key = "testKey123".ConvertToSecureString();
         }
 

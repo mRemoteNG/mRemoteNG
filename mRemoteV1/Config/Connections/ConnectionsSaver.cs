@@ -11,12 +11,14 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -164,9 +166,7 @@ namespace mRemoteNG.Config.Connections
 		{
 			try
 			{
-                var factory = new CryptographyProviderFactory();
-                var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
-                cryptographyProvider.KeyDerivationIterations = mRemoteNG.Settings.Default.EncryptionKeyDerivationIterations;
+                var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
 			    var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                     cryptographyProvider, 
                     ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),

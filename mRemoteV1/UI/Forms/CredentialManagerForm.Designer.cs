@@ -29,92 +29,80 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialManagerForm));
-            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonRemove = new System.Windows.Forms.Button();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.olvPageList = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumnPage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.pnlBottom = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.olvPageList)).BeginInit();
+            this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
-            // objectListView1
+            // panelMain
             // 
-            this.objectListView1.AllColumns.Add(this.olvColumnTitle);
-            this.objectListView1.AllColumns.Add(this.olvColumnUsername);
-            this.objectListView1.AllColumns.Add(this.olvColumnDomain);
-            this.objectListView1.CellEditUseWholeCell = false;
-            this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumnTitle,
-            this.olvColumnUsername,
-            this.olvColumnDomain});
-            this.objectListView1.CopySelectionOnControlC = false;
-            this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
-            this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.objectListView1.FullRowSelect = true;
-            this.objectListView1.HideSelection = false;
-            this.objectListView1.Location = new System.Drawing.Point(12, 12);
-            this.objectListView1.Name = "objectListView1";
-            this.objectListView1.SelectAllOnControlA = false;
-            this.objectListView1.ShowGroups = false;
-            this.objectListView1.Size = new System.Drawing.Size(425, 325);
-            this.objectListView1.TabIndex = 0;
-            this.objectListView1.UseCompatibleStateImageBehavior = false;
-            this.objectListView1.UseNotifyPropertyChanged = true;
-            this.objectListView1.View = System.Windows.Forms.View.Details;
+            this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelMain.Location = new System.Drawing.Point(152, 0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(555, 375);
+            this.panelMain.TabIndex = 4;
             // 
-            // olvColumnTitle
+            // olvPageList
             // 
-            this.olvColumnTitle.AspectName = "Title";
-            this.olvColumnTitle.FillsFreeSpace = true;
-            this.olvColumnTitle.Groupable = false;
-            this.olvColumnTitle.Text = "Title";
+            this.olvPageList.AllColumns.Add(this.olvColumnPage);
+            this.olvPageList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.olvPageList.CellEditUseWholeCell = false;
+            this.olvPageList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumnPage});
+            this.olvPageList.Cursor = System.Windows.Forms.Cursors.Default;
+            this.olvPageList.FullRowSelect = true;
+            this.olvPageList.HasCollapsibleGroups = false;
+            this.olvPageList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.olvPageList.HideSelection = false;
+            this.olvPageList.IsSearchOnSortColumn = false;
+            this.olvPageList.Location = new System.Drawing.Point(0, 0);
+            this.olvPageList.MultiSelect = false;
+            this.olvPageList.Name = "olvPageList";
+            this.olvPageList.RowHeight = 30;
+            this.olvPageList.SelectAllOnControlA = false;
+            this.olvPageList.ShowFilterMenuOnRightClick = false;
+            this.olvPageList.ShowGroups = false;
+            this.olvPageList.ShowHeaderInAllViews = false;
+            this.olvPageList.Size = new System.Drawing.Size(154, 424);
+            this.olvPageList.TabIndex = 5;
+            this.olvPageList.UseCompatibleStateImageBehavior = false;
+            this.olvPageList.View = System.Windows.Forms.View.Details;
             // 
-            // olvColumnUsername
+            // olvColumnPage
             // 
-            this.olvColumnUsername.AspectName = "Username";
-            this.olvColumnUsername.FillsFreeSpace = true;
-            this.olvColumnUsername.Text = "Username";
+            this.olvColumnPage.AspectName = "PageName";
+            this.olvColumnPage.CellVerticalAlignment = System.Drawing.StringAlignment.Center;
+            this.olvColumnPage.FillsFreeSpace = true;
+            this.olvColumnPage.Groupable = false;
+            this.olvColumnPage.Hideable = false;
+            this.olvColumnPage.IsEditable = false;
+            this.olvColumnPage.Searchable = false;
+            this.olvColumnPage.Sortable = false;
             // 
-            // olvColumnDomain
+            // pnlBottom
             // 
-            this.olvColumnDomain.AspectName = "Domain";
-            this.olvColumnDomain.FillsFreeSpace = true;
-            this.olvColumnDomain.Text = "Domain";
-            // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Image = global::mRemoteNG.Resources.key_add;
-            this.buttonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdd.Location = new System.Drawing.Point(12, 343);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(99, 32);
-            this.buttonAdd.TabIndex = 1;
-            this.buttonAdd.Text = "Add";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
-            // 
-            // buttonRemove
-            // 
-            this.buttonRemove.Enabled = false;
-            this.buttonRemove.Image = global::mRemoteNG.Resources.key_delete;
-            this.buttonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonRemove.Location = new System.Drawing.Point(117, 343);
-            this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(99, 32);
-            this.buttonRemove.TabIndex = 2;
-            this.buttonRemove.Text = "Remove";
-            this.buttonRemove.UseVisualStyleBackColor = true;
-            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
+            this.pnlBottom.Controls.Add(this.buttonClose);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(0, 374);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(707, 50);
+            this.pnlBottom.TabIndex = 6;
             // 
             // buttonClose
             // 
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(361, 343);
+            this.buttonClose.Location = new System.Drawing.Point(620, 15);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(75, 32);
-            this.buttonClose.TabIndex = 3;
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 1;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
@@ -123,30 +111,26 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(448, 392);
-            this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.buttonRemove);
-            this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.objectListView1);
+            this.ClientSize = new System.Drawing.Size(707, 424);
+            this.Controls.Add(this.olvPageList);
+            this.Controls.Add(this.panelMain);
+            this.Controls.Add(this.pnlBottom);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "CredentialManagerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Credential Manager";
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.olvPageList)).EndInit();
+            this.pnlBottom.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private BrightIdeasSoftware.ObjectListView objectListView1;
-        private BrightIdeasSoftware.OLVColumn olvColumnTitle;
-        private BrightIdeasSoftware.OLVColumn olvColumnUsername;
-        private BrightIdeasSoftware.OLVColumn olvColumnDomain;
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.Panel panelMain;
+        private BrightIdeasSoftware.ObjectListView olvPageList;
+        private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Button buttonClose;
+        private BrightIdeasSoftware.OLVColumn olvColumnPage;
     }
 }

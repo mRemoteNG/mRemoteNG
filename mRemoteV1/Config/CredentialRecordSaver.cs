@@ -11,9 +11,9 @@ namespace mRemoteNG.Config
     public class CredentialRecordSaver
     {
         private readonly IDataProvider<string> _dataProvider;
-        private readonly XmlCredentialRecordSerializer _serializer;
+        private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _serializer;
 
-        public CredentialRecordSaver(IDataProvider<string> dataProvider, XmlCredentialRecordSerializer serializer)
+        public CredentialRecordSaver(IDataProvider<string> dataProvider, ISecureSerializer<IEnumerable<ICredentialRecord>, string> serializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));
@@ -24,9 +24,9 @@ namespace mRemoteNG.Config
             _serializer = serializer;
         }
 
-        public void Save(IEnumerable<ICredentialRecord> credentialRecords, SecureString encryptionKey)
+        public void Save(IEnumerable<ICredentialRecord> credentialRecords, SecureString key)
         {
-            var serializedCredentials = _serializer.Serialize(credentialRecords, encryptionKey);
+            var serializedCredentials = _serializer.Serialize(credentialRecords, key);
             _dataProvider.Save(serializedCredentials);
         }
     }

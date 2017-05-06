@@ -32,9 +32,9 @@ namespace mRemoteNG.UI.Controls
 
         public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = new IConnectionTreeDelegate[0];
 
-        public ITreeNodeClickHandler DoubleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
+        public ITreeNodeClickHandler<ConnectionInfo> DoubleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
-        public ITreeNodeClickHandler SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
+        public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
         public ConnectionTreeModel ConnectionTreeModel
         {

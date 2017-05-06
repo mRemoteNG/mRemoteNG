@@ -2523,4 +2523,28 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
     <value>Allow Insecure Certificate?</value>
   </data>
+  <data name="RepositoryIsUnlocked" xml:space="preserve">
+    <value>The selected repository is unlocked</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Incorrect password</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="Unlocking" xml:space="preserve">
+    <value>Unlocking</value>
+  </data>
+  <data name="UnlockCredentialRepository" xml:space="preserve">
+    <value>Unlock Credential Repository</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
+    <value>Prompt to unlock credential repositories on startup</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
 </root>

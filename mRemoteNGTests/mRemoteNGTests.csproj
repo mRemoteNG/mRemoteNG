@@ -62,8 +62,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\mRemoteV1\References\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="NSubstitute, Version=2.0.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\NSubstitute.2.0.2\lib\net45\NSubstitute.dll</HintPath>
+    <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.2.0.3\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
@@ -79,6 +79,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -112,31 +113,41 @@
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializerTests.cs" />
     <Compile Include="Config\CredentialHarvesterTests.cs" />
+    <Compile Include="Config\CredentialRecordLoaderTests.cs" />
     <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIdsTests.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializerTests.cs" />
-    <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormatTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialPasswordDecryptorDecoratorTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialPasswordEncryptorDecoratorTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormatTests.cs" />
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
-    <Compile Include="Config\Serializers\PortScanDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer27Tests.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsDocumentCompilerTests.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsDocumentEncryptorTests.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsSerializerTests.cs" />
-    <Compile Include="Config\Serializers\XmlCredentialDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\XmlCredentialSerializerTests.cs" />
-    <Compile Include="Config\Serializers\XmlRootNodeSerializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionNodeSerializer27Tests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentCompilerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentEncryptorTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsSerializerTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialRecordDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialSerializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializerTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion22To23UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion23To24UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion24To25UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion25To26UpgraderTests.cs" />
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
+    <Compile Include="Credential\CompositeRepositoryUnlockerTests.cs" />
+    <Compile Include="Credential\CredentialChangedEventArgsTests.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />
     <Compile Include="Credential\CredentialDomainUserComparerTests.cs" />
-    <Compile Include="Credential\CredentialProviderCatalogTests.cs" />
-    <Compile Include="Credential\CredentialRecordCatalogTests.cs" />
+    <Compile Include="Credential\CredentialRecordTypeConverterTests.cs" />
+    <Compile Include="Credential\CredentialRepositoryListTests.cs" />
     <Compile Include="Credential\CredentialRecordTests.cs" />
-    <Compile Include="Credential\CredentialListBaseTests.cs" />
+    <Compile Include="Credential\CredentialServiceFacadeTests.cs" />
+    <Compile Include="IntegrationTests\XmlCredentialSerializerLifeCycleTests.cs" />
     <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
     <Compile Include="Messages\MessageCollectorTests.cs" />
     <Compile Include="Messages\MessageWriters\MessageTypeFilterDecoratorTests.cs" />
@@ -149,10 +160,12 @@
     <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraintTests.cs" />
     <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraintTests.cs" />
     <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
+    <Compile Include="Security\RandomGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="TestHelpers\ConnectionTreeModelBuilder.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
+    <Compile Include="Tools\FullyObservableCollectionTests.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
@@ -182,6 +195,7 @@
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
+    <Compile Include="UI\Controls\PageSequenceTests.cs" />
     <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
       <SubType>Form</SubType>
     </Compile>

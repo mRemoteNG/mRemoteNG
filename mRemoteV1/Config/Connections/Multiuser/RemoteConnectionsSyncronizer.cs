@@ -37,7 +37,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         public void Load()
         {
-            Runtime.ConnectionTreeModel = _connectionsLoader.LoadConnections(Runtime.CredentialManager.GetCredentialRecords(), false);
+            Runtime.ConnectionTreeModel = _connectionsLoader.LoadConnections(Runtime.CredentialProviderCatalog.GetCredentialRecords(), false);
         }
 
         private void Load(object sender, ConnectionsUpdateAvailableEventArgs args)

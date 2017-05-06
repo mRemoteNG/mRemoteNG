@@ -15,33 +15,20 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class DataTableDeserializer : IDeserializer
+    public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
     {
-        private readonly DataTable _dataTable;
-
-        public DataTableDeserializer(DataTable dataTable)
+        public ConnectionTreeModel Deserialize(DataTable table)
         {
-            _dataTable = dataTable;
-        }
-
-        public DataTableDeserializer(IDataReader sqlDataReader)
-        {
-            _dataTable = new DataTable();
-            _dataTable.Load(sqlDataReader);
-        }
-
-        public ConnectionTreeModel Deserialize()
-        {
-            var connectionList = CreateNodesFromTable();
-            var connectionTreeModel = CreateNodeHierarchy(connectionList);
+            var connectionList = CreateNodesFromTable(table);
+            var connectionTreeModel = CreateNodeHierarchy(connectionList, table);
             Runtime.IsConnectionsFileLoaded = true;
             return connectionTreeModel;
         }
 
-        private List<ConnectionInfo> CreateNodesFromTable()
+        private List<ConnectionInfo> CreateNodesFromTable(DataTable table)
         {
             var nodeList = new List<ConnectionInfo>();
-            foreach (DataRow row in _dataTable.Rows)
+            foreach (DataRow row in table.Rows)
             {
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch ((string)row["Type"])
@@ -197,13 +184,13 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.RDGatewayDomain = (bool)dataRow["InheritRDGatewayDomain"];
         }
 
-        private ConnectionTreeModel CreateNodeHierarchy(List<ConnectionInfo> connectionList)
+        private ConnectionTreeModel CreateNodeHierarchy(List<ConnectionInfo> connectionList, DataTable dataTable)
         {
             var connectionTreeModel = new ConnectionTreeModel();
             var rootNode = new RootNodeInfo(RootNodeType.Connection) {ConstantID = "0"};
             connectionTreeModel.AddRootNode(rootNode);
 
-            foreach (DataRow row in _dataTable.Rows)
+            foreach (DataRow row in dataTable.Rows)
             {
                 var id = (string) row["ConstantID"];
                 var connectionInfo = connectionList.First(node => node.ConstantID == id);

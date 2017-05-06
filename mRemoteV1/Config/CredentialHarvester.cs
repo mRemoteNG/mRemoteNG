@@ -5,6 +5,7 @@ using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 
 namespace mRemoteNG.Config
 {
@@ -19,8 +20,8 @@ namespace mRemoteNG.Config
         {
             if (xDocument == null)
                 throw new ArgumentNullException(nameof(xDocument));
-
-            var cryptoProvider = CryptographyProviderFactory.BuildFromXml(xDocument.Root);
+            
+            var cryptoProvider = new CryptoProviderFactoryFromXml(xDocument.Root).Build();
 
             foreach (var element in xDocument.Descendants("Node"))
             {

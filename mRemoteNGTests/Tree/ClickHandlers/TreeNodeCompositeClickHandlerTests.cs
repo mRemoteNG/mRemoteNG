@@ -22,8 +22,8 @@ namespace mRemoteNGTests.Tree
         [Test]
         public void ExecutesAllItsHandlers()
         {
-            var handler1 = Substitute.For<ITreeNodeClickHandler>();
-            var handler2 = Substitute.For<ITreeNodeClickHandler>();
+            var handler1 = Substitute.For<ITreeNodeClickHandler<ConnectionInfo>>();
+            var handler2 = Substitute.For<ITreeNodeClickHandler<ConnectionInfo>>();
             _clickHandler.ClickHandlers = new[] {handler1, handler2};
             _clickHandler.Execute(_connectionInfo);
             handler1.Received().Execute(_connectionInfo);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -41,12 +42,11 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
+        private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
         internal FullscreenHandler _fullscreen { get; set; }
         
         internal readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
-        private readonly CredentialManager _credentialManager = Runtime.CredentialManager;
-
 
 
         private FrmMain()
@@ -56,7 +56,6 @@ namespace mRemoteNG.UI.Forms
             _fullscreen = new FullscreenHandler(this);
             pnlDock.Theme = new VS2012LightTheme();
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
-            
         }
 
         static FrmMain()
@@ -149,7 +148,9 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
-            new CredsAndConsSetup(_credentialManager, _credentialFilePath).LoadCredsAndCons();
+            var credentialsService = new CredentialServiceFactory().Build();
+            var credsAndConsSetup = new CredsAndConsSetup(credentialsService, _credentialFilePath);
+            credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
 
@@ -176,7 +177,8 @@ namespace mRemoteNG.UI.Forms
             viewMenu1.MainForm = this;
 
             toolsMenu1.MainForm = this;
-            toolsMenu1.CredentialManager = _credentialManager;
+            toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
+            toolsMenu1.UnlockerFormFactory = _credRepoUnlockerFormFactory;
         }
 
         private void ApplyThemes()
@@ -216,32 +218,39 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-            if (!Settings.Default.CheckForUpdatesAsked)
+            PromptForUpdatesPreference();
+            CheckForUpdates();
+            UnlockRepositories(Runtime.CredentialProviderCatalog, this);
+        }
+
+        private void PromptForUpdatesPreference()
+        {
+            if (Settings.Default.CheckForUpdatesAsked) return;
+            string[] commandButtons =
             {
-                string[] commandButtons = 
-                {
-                    Language.strAskUpdatesCommandRecommended, Language.strAskUpdatesCommandCustom,
-                    Language.strAskUpdatesCommandAskLater
-                };
+                Language.strAskUpdatesCommandRecommended,
+                Language.strAskUpdatesCommandCustom,
+                Language.strAskUpdatesCommandAskLater
+            };
 
-                CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
-                    "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+            CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
+                "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
-                if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
-                {
-                    Settings.Default.CheckForUpdatesAsked = true;
-                }
-
-                if (CTaskDialog.CommandButtonResult != 1) return;
-
-                using (var optionsForm = new frmOptions(Language.strTabUpdates))
-                {
-                    optionsForm.ShowDialog(this);
-                }
-
-                return;
+            if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
+            {
+                Settings.Default.CheckForUpdatesAsked = true;
             }
 
+            if (CTaskDialog.CommandButtonResult != 1) return;
+
+            using (var optionsForm = new frmOptions(Language.strTabUpdates))
+            {
+                optionsForm.ShowDialog(this);
+            }
+        }
+
+        private void CheckForUpdates()
+        {
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
             var nextUpdateCheck = Convert.ToDateTime(
@@ -252,6 +261,13 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
             Startup.Instance.CheckForUpdate();
+        }
+
+        private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
+        {
+            if (!Settings.Default.PromptUnlockCredReposOnStartup) return;
+            var credentialUnlockerForm = _credRepoUnlockerFormFactory.Build(repositories);
+            credentialUnlockerForm.ShowDialog(parentForm);
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

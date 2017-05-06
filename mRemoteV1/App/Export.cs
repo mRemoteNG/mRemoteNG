@@ -7,6 +7,7 @@ using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
@@ -70,13 +71,11 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-			    ISerializer<string> serializer;
+			    ISerializer<ConnectionInfo, string> serializer;
 			    switch (saveFormat)
 			    {
 			        case ConnectionsSaver.Format.mRXML:
-                        var factory = new CryptographyProviderFactory();
-                        var cryptographyProvider = factory.CreateAeadCryptographyProvider(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode);
-                        cryptographyProvider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
+                        var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
 			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
                         var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                             cryptographyProvider, 

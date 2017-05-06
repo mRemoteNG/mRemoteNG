@@ -38,8 +38,8 @@ namespace mRemoteNG.UI.Forms
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.pbLock = new System.Windows.Forms.PictureBox();
-            this.txtVerify = new TextBox();
-            this.txtPassword = new TextBox();
+            this.txtVerify = new mRemoteNG.UI.Forms.TextBox();
+            this.txtPassword = new mRemoteNG.UI.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +48,7 @@ namespace mRemoteNG.UI.Forms
             this.lblPassword.AutoSize = true;
             this.lblPassword.Location = new System.Drawing.Point(82, 12);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(64, 15);
+            this.lblPassword.Size = new System.Drawing.Size(56, 13);
             this.lblPassword.TabIndex = 1;
             this.lblPassword.Text = "Password:";
             // 
@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Forms
             this.lblVerify.AutoSize = true;
             this.lblVerify.Location = new System.Drawing.Point(82, 51);
             this.lblVerify.Name = "lblVerify";
-            this.lblVerify.Size = new System.Drawing.Size(39, 15);
+            this.lblVerify.Size = new System.Drawing.Size(36, 13);
             this.lblVerify.TabIndex = 3;
             this.lblVerify.Text = "Verify:";
             // 
@@ -155,6 +155,7 @@ namespace mRemoteNG.UI.Forms
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Password";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PasswordForm_FormClosed);
             this.Load += new System.EventHandler(this.frmPassword_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbLock)).EndInit();
             this.ResumeLayout(false);

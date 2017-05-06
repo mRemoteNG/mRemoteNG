@@ -38,6 +38,7 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         private bool WeShouldFocusNotificationPanel(IMessage message)
         {
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (message.Class)
             {
                 case MessageClass.InformationMsg:

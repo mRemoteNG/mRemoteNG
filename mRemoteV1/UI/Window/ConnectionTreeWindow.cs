@@ -118,7 +118,7 @@ namespace mRemoteNG.UI.Window
 	    {
 	        var doubleClickHandler = new TreeNodeCompositeClickHandler
 	        {
-	            ClickHandlers = new ITreeNodeClickHandler[]
+	            ClickHandlers = new ITreeNodeClickHandler<ConnectionInfo>[]
 	            {
 	                new ExpandNodeClickHandler(olvConnections),
 	                new OpenConnectionClickHandler(_connectionInitiator)
@@ -129,7 +129,7 @@ namespace mRemoteNG.UI.Window
 
         private void SetConnectionTreeSingleClickHandlers()
         {
-            var handlers = new List<ITreeNodeClickHandler>();
+            var handlers = new List<ITreeNodeClickHandler<ConnectionInfo>>();
             if (Settings.Default.SingleClickOnConnectionOpensIt)
                 handlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
             if (Settings.Default.SingleClickSwitchesToOpenConnection)

@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // toolsMenu1
             // 
-            this.toolsMenu1.CredentialManager = null;
+            this.toolsMenu1.CredentialProviderCatalog = null;
             this.toolsMenu1.MainForm = null;
             this.toolsMenu1.Name = "mMenTools";
             this.toolsMenu1.Size = new System.Drawing.Size(47, 20);

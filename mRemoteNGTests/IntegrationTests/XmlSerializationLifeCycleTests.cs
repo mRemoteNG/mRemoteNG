@@ -4,6 +4,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
@@ -16,12 +17,13 @@ namespace mRemoteNGTests.IntegrationTests
         private XmlConnectionsSerializer _serializer;
         private XmlConnectionsDeserializer _deserializer;
         private ConnectionTreeModel _originalModel;
+        private readonly ICryptoProviderFactory _cryptoFactory = new CryptoProviderFactory(BlockCipherEngines.AES , BlockCipherModes.GCM);
 
         [SetUp]
         public void Setup()
         {
             _originalModel = SetupConnectionTreeModel();
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var cryptoProvider = _cryptoFactory.Build();
             var nodeSerializer = new XmlConnectionNodeSerializer27(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
@@ -40,8 +42,8 @@ namespace mRemoteNGTests.IntegrationTests
         public void SerializeThenDeserialize()
         {
             var serializedContent = _serializer.Serialize(_originalModel);
-            _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);
-            var deserializedModel = _deserializer.Deserialize();
+            _deserializer = new XmlConnectionsDeserializer();
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
             var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
@@ -52,8 +54,8 @@ namespace mRemoteNGTests.IntegrationTests
         {
             _serializer.UseFullEncryption = true;
             var serializedContent = _serializer.Serialize(_originalModel);
-            _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);
-            var deserializedModel = _deserializer.Deserialize();
+            _deserializer = new XmlConnectionsDeserializer();
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
             var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
@@ -64,8 +66,8 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var originalConnectionInfo = new ConnectionInfo {Name = "con1", Description = "£°úg¶┬ä" };
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
-            _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);
-            var deserializedModel = _deserializer.Deserialize();
+            _deserializer = new XmlConnectionsDeserializer(new ICredentialRecord[0]);
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
             var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(deserializedConnectionInfo.Description, Is.EqualTo(originalConnectionInfo.Description));
         }
@@ -74,7 +76,7 @@ namespace mRemoteNGTests.IntegrationTests
         [Test]
         public void SerializeAndDeserializeWithCustomKdfIterationsValue()
         {
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(BlockCipherEngines.AES, BlockCipherModes.GCM);
+            var cryptoProvider = _cryptoFactory.Build();
             cryptoProvider.KeyDerivationIterations = 5000;
             var nodeSerializer = new XmlConnectionNodeSerializer27(
                 cryptoProvider, 
@@ -82,8 +84,8 @@ namespace mRemoteNGTests.IntegrationTests
                 new SaveFilter());
             _serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
             var serializedContent = _serializer.Serialize(_originalModel);
-            _deserializer = new XmlConnectionsDeserializer(serializedContent, new ICredentialRecord[0]);
-            var deserializedModel = _deserializer.Deserialize();
+            _deserializer = new XmlConnectionsDeserializer();
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
             var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));

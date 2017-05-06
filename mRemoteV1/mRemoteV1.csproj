@@ -106,7 +106,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Credential\Providers\" />
+    <Folder Include="Credential\Records\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
@@ -140,18 +140,33 @@
     <Compile Include="Config\CredentialHarvester.cs" />
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
-    <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
-    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialProviderSerializer.cs" />
-    <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
+    <Compile Include="Config\CredentialRepositoryListSaver.cs" />
+    <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
+    <Compile Include="Config\ILoader.cs" />
+    <Compile Include="Config\ISaver.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
+    <Compile Include="Config\CredentialRepositoryListLoader.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordEncryptorDecorator.cs" />
+    <Compile Include="Config\Serializers\ISecureDeserializer.cs" />
+    <Compile Include="Config\Serializers\ISecureSerializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\ActiveDirectoryDeserializer.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
     <Compile Include="Config\Serializers\DataTableSerializer.cs" />
-    <Compile Include="Config\Serializers\IConnectionSerializer.cs" />
-    <Compile Include="Config\Serializers\PortScanDeserializer.cs" />
-    <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializer.cs" />
-    <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializer.cs" />
-    <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer26.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionNodeSerializer26.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionRetriever.cs" />
+    <Compile Include="Config\Serializers\Versioning\IVersionUpgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion22To23Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
@@ -160,18 +175,18 @@
     <Compile Include="Config\Serializers\IDeserializer.cs" />
     <Compile Include="Config\Import\IConnectionImporter.cs" />
     <Compile Include="Config\Serializers\ISerializer.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionNodeSerializer27.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsDocumentCompiler.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsDocumentEncryptor.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionNodeSerializer27.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentCompiler.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentEncryptor.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsSerializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProvider.cs" />
     <Compile Include="Config\DataProviders\IDataProvider.cs" />
     <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
-    <Compile Include="Config\Serializers\XmlConnectionsDeserializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDeserializer.cs" />
     <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />
-    <Compile Include="Config\Serializers\XmlCredentialDeserializer.cs" />
-    <Compile Include="Config\Serializers\XmlCredentialRecordSerializer.cs" />
-    <Compile Include="Config\Serializers\XmlRootNodeSerializer.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialRecordDeserializer.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialRecordSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializer.cs" />
     <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIds.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
@@ -208,19 +223,31 @@
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
+    <Compile Include="Credential\Repositories\CompositeRepositoryUnlocker.cs" />
+    <Compile Include="Credential\CredentialChangedEventArgs.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
-    <Compile Include="Credential\CredentialManager.cs" />
-    <Compile Include="Credential\CredentialProviderCatalog.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
+    <Compile Include="Credential\CredentialServiceFactory.cs" />
+    <Compile Include="Credential\CredentialServiceFacade.cs" />
+    <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
+    <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
+    <Compile Include="Security\ICryptoProviderFactory.cs" />
+    <Compile Include="Security\IKeyProvider.cs" />
+    <Compile Include="Security\RandomGenerator.cs" />
+    <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
+    <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepositoryChangedArgs.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepositoryList.cs" />
     <Compile Include="Credential\CredentialRecord.cs" />
-    <Compile Include="Credential\CredentialListBase.cs" />
-    <Compile Include="Credential\CredentialRecordCatalog.cs" />
     <Compile Include="Credential\CredentialRecordTypeConverter.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepositoryConfig.cs" />
     <Compile Include="Credential\ICredentialRecord.cs" />
-    <Compile Include="Credential\ICredentialProviderCatalog.cs" />
-    <Compile Include="Credential\ICredentialProvider.cs" />
-    <Compile Include="Credential\ICredentialList.cs" />
-    <Compile Include="Credential\INotifyingCredentialRecord.cs" />
+    <Compile Include="Credential\ICredentialRepositoryList.cs" />
+    <Compile Include="Credential\ICredentialRepository.cs" />
+    <Compile Include="Credential\Repositories\XmlCredentialRepositoryFactory.cs" />
+    <Compile Include="Credential\Repositories\ICredentialRepositoryConfig.cs" />
+    <Compile Include="Credential\Repositories\XmlCredentialRepository.cs" />
     <Compile Include="Messages\MessageFilteringOptions\LogMessageTypeFilteringOptions.cs" />
     <Compile Include="Messages\WriterDecorators\MessageTypeFilterDecorator.cs" />
     <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />
@@ -256,18 +283,20 @@
     <Compile Include="Security\SymmetricEncryption\LegacyRijndaelCryptographyProvider.cs" />
     <Compile Include="Security\ICryptographyProvider.cs" />
     <Compile Include="Security\SecureStringExtensions.cs" />
-    <Compile Include="Security\CryptographyProviderFactory.cs" />
-    <Compile Include="Security\XmlCryptoProviderBuilder.cs" />
+    <Compile Include="Security\Factories\CryptoProviderFactory.cs" />
+    <Compile Include="Security\Factories\CryptoProviderFactoryFromXml.cs" />
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
+    <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
-    <Compile Include="Config\Serializers\SqlDatabaseVersionVerifier.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionVerifier.cs" />
     <Compile Include="Tree\AlwaysConfirmYes.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmer.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
@@ -293,12 +322,30 @@
     <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.Designer.cs">
       <DependentUpon>ConnectionTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\CredentialRecordComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordComboBox.Designer.cs">
+      <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\CredentialRecordListAdaptor.cs" />
     <Compile Include="UI\Controls\CredentialRecordListBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\CredentialRecordListBox.Designer.cs">
       <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListView.Designer.cs">
+      <DependentUpon>CredentialRecordListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRepositoryListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRepositoryListView.Designer.cs">
+      <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\ExternalToolsToolStrip.cs">
       <SubType>Component</SubType>
@@ -311,6 +358,7 @@
     </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\ObjectWrapper.cs" />
     <Compile Include="UI\Controls\ConnectionTree\IConnectionTree.cs" />
+    <Compile Include="UI\Controls\ISelectionTarget.cs" />
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -318,7 +366,19 @@
     <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\PageSequence\ISequenceChangingNotifier.cs" />
+    <Compile Include="UI\Controls\NewPasswordWithVerification.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\NewPasswordWithVerification.Designer.cs">
+      <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
+    <Compile Include="UI\Controls\PageSequence\PageSequence.cs" />
+    <Compile Include="UI\Controls\PageSequence\SequencedControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\PageSequence\SequencedPageReplcementRequestArgs.cs" />
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -337,17 +397,57 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\FormExtensions.cs" />
-    <Compile Include="UI\Forms\CredentialEditorForm.cs">
+    <Compile Include="UI\Forms\CompositeCredentialRepoUnlockerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\CredentialEditorForm.Designer.cs">
-      <DependentUpon>CredentialEditorForm.cs</DependentUpon>
+    <Compile Include="UI\Forms\CompositeCredentialRepoUnlockerForm.Designer.cs">
+      <DependentUpon>CompositeCredentialRepoUnlockerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\CredentialManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\CredentialManagerForm.Designer.cs">
       <DependentUpon>CredentialManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialListPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialListPage.Designer.cs">
+      <DependentUpon>CredentialListPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\CredentialRepositoryPageEditorFactory.cs" />
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.Designer.cs">
+      <DependentUpon>XmlCredentialRepositoryEditorPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.Designer.cs">
+      <DependentUpon>CredentialRepositorySelectionPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryTypeSelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryTypeSelectionPage.Designer.cs">
+      <DependentUpon>CredentialRepositoryTypeSelectionPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectors\KeePassRepositorySelector.cs" />
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectors\XmlCredentialRepositorySelector.cs" />
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.Designer.cs">
+      <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\ICredentialManagerPage.cs" />
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialEditorPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialEditorPage.Designer.cs">
+      <DependentUpon>CredentialEditorPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\frmOptions.cs">
       <SubType>Form</SubType>
@@ -368,6 +468,12 @@
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\CredentialsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\CredentialsPage.Designer.cs">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\NotificationsPage.cs">
       <SubType>UserControl</SubType>
@@ -511,6 +617,7 @@
     <Compile Include="UI\Forms\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Forms\UnlockerFormFactory.cs" />
     <Compile Include="UI\Menu\HelpMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -618,14 +725,41 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
+    <EmbeddedResource Include="UI\Controls\CredentialRecordListView.resx">
+      <DependentUpon>CredentialRecordListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRepositoryListView.resx">
+      <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\CredentialEditorForm.resx">
-      <DependentUpon>CredentialEditorForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
+      <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CompositeCredentialRepoUnlockerForm.resx">
+      <DependentUpon>CompositeCredentialRepoUnlockerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialManagerForm.resx">
       <DependentUpon>CredentialManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialListPage.resx">
+      <DependentUpon>CredentialListPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.resx">
+      <DependentUpon>XmlCredentialRepositoryEditorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.resx">
+      <DependentUpon>CredentialRepositorySelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositoryTypeSelectionPage.resx">
+      <DependentUpon>CredentialRepositoryTypeSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.resx">
+      <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialEditorPage.resx">
+      <DependentUpon>CredentialEditorPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
@@ -637,6 +771,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\CredentialsPage.resx">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\NotificationsPage.resx">
       <DependentUpon>NotificationsPage.cs</DependentUpon>
@@ -816,6 +953,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\mremoteng_confcons_v2_6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\mremoteng_credrepo_list_v1_0.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\mremoteng_creds_v1_0.xsd">
@@ -1017,6 +1157,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\tick.png" />
     <None Include="Resources\Icons_FamFamFam\shield.ico" />
     <None Include="Resources\Icons_FamFamFam\key.ico" />
     <None Include="Resources\Images_FamFamFam\bricks.png" />
@@ -1025,6 +1166,9 @@
     <None Include="Resources\Images_FamFamFam\brick_large.png" />
     <None Include="Resources\Images_FamFamFam\brick1.png" />
     <None Include="Resources\Images_FamFamFam\bricks1.png" />
+    <None Include="Resources\Images\xml.png" />
+    <None Include="Resources\Images\keepass_32x32.png" />
+    <None Include="Resources\Images_FamFamFam\arrow_left.png" />
     <Content Include="Resources\Images_FamFamFam\Config.png" />
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <None Include="Resources\Images_FamFamFam\key.png" />
@@ -1032,7 +1176,10 @@
     <None Include="Resources\Images_FamFamFam\eye.png" />
     <None Include="Resources\Images_FamFamFam\lightbulb.png" />
     <None Include="Resources\Images_FamFamFam\lightning.png" />
+    <None Include="Resources\Images_FamFamFam\folder_key.png" />
+    <None Include="Resources\Images_FamFamFam\exclamation.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
+    <None Include="Resources\Images_FamFamFam\lock.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
     <Content Include="Resources\Images\green_arrow1.png" />
     <Content Include="Resources\Images\green_arrow2.png" />
