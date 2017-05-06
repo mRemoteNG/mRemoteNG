@@ -1,3 +1,0 @@
-Version: 1.35
-dURL: http://downloads.sourceforge.net/mremote/mRemote_1.35_Setup.exe
-clURL: http://update.mRemote.org/mRemote_1.35_ChangeLog.txt
