@@ -13,6 +13,7 @@ namespace mRemoteNG.Messages.WriterDecorators
         private readonly IMessageWriter _decoratedWriter;
         private readonly ErrorAndInfoWindow _messageWindow;
         private Timer _ecTimer;
+        private readonly FrmMain _frmMain = FrmMain.Default;
 
         public MessageFocusDecorator(ErrorAndInfoWindow messageWindow, IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
         {
@@ -77,7 +78,7 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         private void SwitchToMessage()
         {
-            _messageWindow.PreviousActiveForm = (DockContent)FrmMain.Default.pnlDock.ActiveContent;
+            _messageWindow.PreviousActiveForm = (DockContent)_frmMain.pnlDock.ActiveContent;
             ShowMcForm();
             _messageWindow.lvErrorCollector.Focus();
             _messageWindow.lvErrorCollector.SelectedItems.Clear();
@@ -87,10 +88,10 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         private void ShowMcForm()
         {
-            if (FrmMain.Default.pnlDock.InvokeRequired)
-                FrmMain.Default.pnlDock.Invoke((MethodInvoker)ShowMcForm);
+            if (_frmMain.pnlDock.InvokeRequired)
+                _frmMain.pnlDock.Invoke((MethodInvoker)ShowMcForm);
             else
-                _messageWindow.Show(FrmMain.Default.pnlDock);
+                _messageWindow.Show(_frmMain.pnlDock);
         }
     }
 }
