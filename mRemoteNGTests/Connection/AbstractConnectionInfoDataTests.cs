@@ -142,7 +142,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.ICAEncryptionStrength = ProtocolICA.EncryptionStrength.Encr128BitLogonOnly;
+            _testAbstractConnectionInfoData.ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr128BitLogonOnly;
             Assert.That(wasCalled, Is.True);
         }
 

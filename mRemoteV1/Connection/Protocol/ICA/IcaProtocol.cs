@@ -1,6 +1,5 @@
 using System;
 using AxWFICALib;
-using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using System.Threading;
@@ -15,14 +14,14 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Connection.Protocol.ICA
 {
-	public class ProtocolICA : ProtocolBase
+	public class IcaProtocol : ProtocolBase
 	{
 		private AxICAClient _icaClient;
 		private ConnectionInfo _info;
         private readonly FrmMain _frmMain = FrmMain.Default;
 		
         #region Public Methods
-		public ProtocolICA()
+		public IcaProtocol()
 		{
 			try
 			{

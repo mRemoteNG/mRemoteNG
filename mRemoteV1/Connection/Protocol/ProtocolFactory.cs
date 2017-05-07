@@ -46,8 +46,8 @@ namespace mRemoteNG.Connection.Protocol
 					newProtocol = new ProtocolHTTPS(connectionInfo.RenderingEngine);
 					break;
 				case ProtocolType.ICA:
-					newProtocol = new ProtocolICA();
-					((ProtocolICA) newProtocol).tmrReconnect.Elapsed += ((ProtocolICA) newProtocol).tmrReconnect_Elapsed;
+					newProtocol = new IcaProtocol();
+					((IcaProtocol) newProtocol).tmrReconnect.Elapsed += ((IcaProtocol) newProtocol).tmrReconnect_Elapsed;
 					break;
 				case ProtocolType.IntApp:
 					newProtocol = new IntegratedProgram();

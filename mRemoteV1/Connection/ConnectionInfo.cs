@@ -222,7 +222,7 @@ namespace mRemoteNG.Connection
                     case ProtocolType.HTTPS:
                         return (int)ProtocolHTTPS.Defaults.Port;
                     case ProtocolType.ICA:
-                        return (int)ProtocolICA.Defaults.Port;
+                        return (int)IcaProtocol.Defaults.Port;
                     case ProtocolType.IntApp:
                         return (int)IntegratedProgram.Defaults.Port;
                 }
@@ -254,7 +254,7 @@ namespace mRemoteNG.Connection
             ExtApp = Settings.Default.ConDefaultExtApp;
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
-            ICAEncryptionStrength = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
+            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength) Enum.Parse(typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
             RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;

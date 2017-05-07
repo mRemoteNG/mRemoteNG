@@ -553,7 +553,7 @@
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPBase.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.cs" />
-    <Compile Include="Connection\Protocol\ICA\Connection.Protocol.ICA.cs" />
+    <Compile Include="Connection\Protocol\ICA\IcaProtocol.cs" />
     <Compile Include="Connection\Protocol\IntegratedProgram.cs" />
     <Compile Include="Connection\Protocol\ProtocolList.cs" />
     <Compile Include="Connection\Protocol\ProtocolType.cs" />
