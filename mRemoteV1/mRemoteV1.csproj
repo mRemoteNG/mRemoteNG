@@ -137,6 +137,7 @@
     <Compile Include="Config\Connections\Multiuser\IConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
     <Compile Include="Config\Connections\Multiuser\RemoteConnectionsSyncronizer.cs" />
+    <Compile Include="Config\Connections\SqlConnectionsLoader.cs" />
     <Compile Include="Config\CredentialHarvester.cs" />
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
