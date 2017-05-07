@@ -30,10 +30,8 @@ namespace mRemoteNG.Config.Connections
             }
 			else
 			{
-			    var dataProvider = new FileDataProvider(ConnectionFileName);
-			    var xmlString = dataProvider.Load();
-			    var deserializer = new XmlConnectionsDeserializer(credentialRecords, PromptForPassword);
-                connectionTreeModel = deserializer.Deserialize(xmlString);
+                var xmlLoader = new XmlConnectionsLoader(ConnectionFileName, credentialRecords);
+			    connectionTreeModel = xmlLoader.Load();
             }
 
             if (connectionTreeModel != null)
@@ -47,11 +45,5 @@ namespace mRemoteNG.Config.Connections
 
 		    return connectionTreeModel;
 		}
-
-        private SecureString PromptForPassword()
-        {
-            var password = MiscTools.PasswordDialog("", false);
-            return password;
-        }
     }
 }
