@@ -13,6 +13,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -149,7 +150,8 @@ namespace mRemoteNG.UI.Forms
             Runtime.WindowList = new WindowList();
 
             var credentialsService = new CredentialServiceFactory().Build();
-            var credsAndConsSetup = new CredsAndConsSetup(credentialsService, _credentialFilePath);
+            var credManagerUpgrader = new XmlCredentialManagerUpgrader(credentialsService, _credentialFilePath);
+            var credsAndConsSetup = new CredsAndConsSetup(credentialsService, credManagerUpgrader);
             credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();

@@ -167,6 +167,7 @@
     <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\XmlCredentialManagerUpgrader.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
