@@ -4,6 +4,8 @@ Features/Enhancements:
 ----------------------
 Added more logging/notifications options
 #429: Added Czech translation
+#504: Added Korean translation
+#208: Added credential repository feature
 
 General Changes:
 ----------------

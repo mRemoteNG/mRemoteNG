@@ -45,6 +45,7 @@ Hayato Iriumi
 Sebastien Thieury (github.com/SebThieu)
 Riza Emet
 Lukas Plachy
+Gyuha Shin
 
 
 Included Source Code
