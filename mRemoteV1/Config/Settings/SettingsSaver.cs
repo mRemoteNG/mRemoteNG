@@ -1,6 +1,8 @@
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
@@ -58,13 +60,29 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
                 mRemoteNG.Settings.Default.Save();
 
-                new DockPanelLayoutSaver().Save();
-                new ExternalAppsSaver().Save(Runtime.ExternalTools);
+                SaveDockPanelLayout();
+                SaveExternalApps();
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("Saving settings failed", ex);
             }
+        }
+
+        private static void SaveDockPanelLayout()
+        {
+            var panelLayoutXmlFilePath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
+            var panelLayoutSaver = new DockPanelLayoutSaver(
+                new DockPanelLayoutSerializer(),
+                new FileDataProvider(panelLayoutXmlFilePath)
+            );
+            panelLayoutSaver.Save();
+        }
+
+        private static void SaveExternalApps()
+        {
+            var externalAppsSaver = new ExternalAppsSaver();
+            externalAppsSaver.Save(Runtime.ExternalTools);
         }
     }
 }

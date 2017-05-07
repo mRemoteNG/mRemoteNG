@@ -191,6 +191,7 @@
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialRecordSerializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializer.cs" />
     <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIds.cs" />
+    <Compile Include="Config\Settings\DockPanelLayoutSerializer.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\ExternalAppsSaver.cs" />
     <Compile Include="Config\Settings\DockPanelLayoutLoader.cs" />
