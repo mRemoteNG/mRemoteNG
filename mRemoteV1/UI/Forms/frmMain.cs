@@ -539,22 +539,22 @@ namespace mRemoteNG.UI.Forms
         #region Screen Stuff
         public void SetDefaultLayout()
         {
-            Default.pnlDock.Visible = false;
+            pnlDock.Visible = false;
 
-            Default.pnlDock.DockLeftPortion = Default.pnlDock.Width * 0.2;
-            Default.pnlDock.DockRightPortion = Default.pnlDock.Width * 0.2;
-            Default.pnlDock.DockTopPortion = Default.pnlDock.Height * 0.25;
-            Default.pnlDock.DockBottomPortion = Default.pnlDock.Height * 0.25;
+            pnlDock.DockLeftPortion = pnlDock.Width * 0.2;
+            pnlDock.DockRightPortion = pnlDock.Width * 0.2;
+            pnlDock.DockTopPortion = pnlDock.Height * 0.25;
+            pnlDock.DockBottomPortion = pnlDock.Height * 0.25;
 
-            Windows.TreeForm.Show(Default.pnlDock, DockState.DockLeft);
-            Windows.ConfigForm.Show(Default.pnlDock);
+            Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
+            Windows.ConfigForm.Show(pnlDock);
             Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
-            Windows.ErrorsForm.Show(Default.pnlDock, DockState.Document);
+            Windows.ErrorsForm.Show(pnlDock, DockState.Document);
 
             Windows.ErrorsForm.Hide();
             Windows.ScreenshotForm.Hide();
 
-            Default.pnlDock.Visible = true;
+            pnlDock.Visible = true;
         }
         #endregion
 
