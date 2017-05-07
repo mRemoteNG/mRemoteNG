@@ -29,74 +29,61 @@ namespace mRemoteNG.App
         {
             try
             {
+                var dockPanel = FrmMain.Default.pnlDock;
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (windowType)
                 {
                     case WindowType.About:
                         if (_aboutForm == null || _aboutForm.IsDisposed)
                             _aboutForm = new AboutWindow();
-                        _aboutForm.Show(FrmMain.Default.pnlDock);
+                        _aboutForm.Show(dockPanel);
                         break;
                     case WindowType.ActiveDirectoryImport:
                         if (_adimportForm == null || _adimportForm.IsDisposed)
                             _adimportForm = new ActiveDirectoryImportWindow();
-                        _adimportForm.Show(FrmMain.Default.pnlDock);
+                        _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
                         using (var optionsForm = new frmOptions())
                         {
-                            optionsForm.ShowDialog(FrmMain.Default.pnlDock);
+                            optionsForm.ShowDialog(dockPanel);
                         }
                         break;
                     case WindowType.SSHTransfer:
                         if (SshtransferForm == null || SshtransferForm.IsDisposed)
                             SshtransferForm = new SSHTransferWindow();
-                        SshtransferForm.Show(FrmMain.Default.pnlDock);
+                        SshtransferForm.Show(dockPanel);
                         break;
                     case WindowType.Update:
                         if (UpdateForm == null || UpdateForm.IsDisposed)
                             UpdateForm = new UpdateWindow();
-                        UpdateForm.Show(FrmMain.Default.pnlDock);
+                        UpdateForm.Show(dockPanel);
                         break;
                     case WindowType.Help:
                         if (_helpForm == null || _helpForm.IsDisposed)
                             _helpForm = new HelpWindow();
-                        _helpForm.Show(FrmMain.Default.pnlDock);
+                        _helpForm.Show(dockPanel);
                         break;
                     case WindowType.ExternalApps:
                         if (_externalappsForm == null || _externalappsForm.IsDisposed)
                             _externalappsForm = new ExternalToolsWindow();
-                        _externalappsForm.Show(FrmMain.Default.pnlDock);
+                        _externalappsForm.Show(dockPanel);
                         break;
                     case WindowType.PortScan:
                         _portscanForm = new PortScanWindow();
-                        _portscanForm.Show(FrmMain.Default.pnlDock);
+                        _portscanForm.Show(dockPanel);
                         break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
                             _ultravncscForm = new UltraVNCWindow();
-                        _ultravncscForm.Show(FrmMain.Default.pnlDock);
+                        _ultravncscForm.Show(dockPanel);
                         break;
                     case WindowType.ComponentsCheck:
                         Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Showing ComponentsCheck window", true);
                         if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
                             _componentscheckForm = new ComponentsCheckWindow();
-                        _componentscheckForm.Show(FrmMain.Default.pnlDock);
+                        _componentscheckForm.Show(dockPanel);
                         break;
-                    /*
-                    case WindowType.Tree:
-                        break;
-                    case WindowType.Connection:
-                        break;
-                    case WindowType.Config:
-                        break;
-                    case WindowType.ErrorsAndInfos:
-                        break;
-                    case WindowType.ScreenshotManager:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(windowType), windowType, null);
-                    */
                 }
             }
             catch (Exception ex)
