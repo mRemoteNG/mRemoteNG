@@ -28,6 +28,7 @@ namespace mRemoteNG.UI.Window
     {
         public TabControl TabController;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly FrmMain _frmMain = FrmMain.Default;
 
 
         #region Public Methods
@@ -154,12 +155,12 @@ namespace mRemoteNG.UI.Window
         {
             if (TabController.SelectedTab == null)
             {
-                FrmMain.Default.SelectedConnection = null;
+                _frmMain.SelectedConnection = null;
             }
             else
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                FrmMain.Default.SelectedConnection = interfaceControl?.Info;
+                _frmMain.SelectedConnection = interfaceControl?.Info;
             }
         }
         #endregion
@@ -178,8 +179,8 @@ namespace mRemoteNG.UI.Window
             {
                 if (_documentHandlersAdded)
                 {
-                    FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
-                    FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
+                    _frmMain.ResizeBegin -= Connection_ResizeBegin;
+                    _frmMain.ResizeEnd -= Connection_ResizeEnd;
                     _documentHandlersAdded = false;
                 }
                 DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
@@ -194,8 +195,8 @@ namespace mRemoteNG.UI.Window
                     DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
                     _floatHandlersAdded = false;
                 }
-                FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
-                FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
+                _frmMain.ResizeBegin += Connection_ResizeBegin;
+                _frmMain.ResizeEnd += Connection_ResizeEnd;
                 _documentHandlersAdded = true;
             }
         }
@@ -222,7 +223,7 @@ namespace mRemoteNG.UI.Window
 
         private void Connection_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!FrmMain.Default.IsClosing &&
+            if (!_frmMain.IsClosing &&
                 (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & TabController.TabPages.Count > 0 ||
                 Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & TabController.TabPages.Count > 1))
             {
@@ -765,7 +766,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                if (!(NativeMethods.GetForegroundWindow() == FrmMain.Default.Handle) && !_ignoreChangeSelectedTabClick)
+                if (!(NativeMethods.GetForegroundWindow() == _frmMain.Handle) && !_ignoreChangeSelectedTabClick)
                 {
                     var clickedTab = TabController.TabPageFromPoint(e.Location);
                     if (clickedTab != null && TabController.SelectedTab != clickedTab)
