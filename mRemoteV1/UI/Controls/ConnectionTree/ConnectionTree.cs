@@ -216,7 +216,7 @@ namespace mRemoteNG.UI.Controls
             Expand(parent);
             SelectObject(newNode, true);
             EnsureModelVisible(newNode);
-            this.SelectedItem.BeginEdit();
+            SelectedItem.BeginEdit();
         }
 
         public void DuplicateSelectedNode()
@@ -238,6 +238,20 @@ namespace mRemoteNG.UI.Controls
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
             if (!NodeDeletionConfirmer.Confirm(SelectedNode)) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
+            Runtime.SaveConnectionsAsync();
+        }
+
+        public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
+        {
+            if (sortTarget == null)
+                sortTarget = GetRootConnectionNode();
+
+            var sortTargetAsContainer = sortTarget as ContainerInfo;
+            if (sortTargetAsContainer != null)
+                sortTargetAsContainer.SortRecursive(sortDirection);
+            else
+                SelectedNode.Parent.SortRecursive(sortDirection);
+
             Runtime.SaveConnectionsAsync();
         }
 

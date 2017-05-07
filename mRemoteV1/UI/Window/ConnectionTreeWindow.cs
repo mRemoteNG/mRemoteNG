@@ -148,7 +148,7 @@ namespace mRemoteNG.UI.Window
                 olvConnections.CollapseAll();
                 olvConnections.Expand(olvConnections.GetRootConnectionNode());
             };
-            mMenSortAscending.Click += (sender, args) => SortNodesRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
+            mMenSortAscending.Click += (sender, args) => olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
         }
         #endregion
 
@@ -164,20 +164,6 @@ namespace mRemoteNG.UI.Window
             olvConnections.AddFolder();
             Runtime.SaveConnectionsAsync();
 		}
-
-	    private void SortNodesRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
-	    {
-	        if (sortTarget == null)
-	            sortTarget = olvConnections.GetRootConnectionNode();
-
-            var sortTargetAsContainer = sortTarget as ContainerInfo;
-            if (sortTargetAsContainer != null)
-                sortTargetAsContainer.SortRecursive(sortDirection);
-            else
-                SelectedNode.Parent.SortRecursive(sortDirection);
-
-            Runtime.SaveConnectionsAsync();
-        }
 
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
         {

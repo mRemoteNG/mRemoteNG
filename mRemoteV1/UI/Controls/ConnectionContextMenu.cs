@@ -754,12 +754,12 @@ namespace mRemoteNG.UI.Controls
 
         private void OnSortAscendingClicked(object sender, EventArgs e)
         {
-            SortNodesRecursive(_connectionTree.SelectedNode, ListSortDirection.Ascending);
+            _connectionTree.SortRecursive(_connectionTree.SelectedNode, ListSortDirection.Ascending);
         }
 
         private void OnSortDescendingClicked(object sender, EventArgs e)
         {
-            SortNodesRecursive(_connectionTree.SelectedNode, ListSortDirection.Descending);
+            _connectionTree.SortRecursive(_connectionTree.SelectedNode, ListSortDirection.Descending);
         }
 
         private void OnMoveUpClicked(object sender, EventArgs e)
@@ -792,19 +792,5 @@ namespace mRemoteNG.UI.Controls
             }
         }
         #endregion
-
-        private void SortNodesRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
-        {
-            if (sortTarget == null)
-                sortTarget = _connectionTree.GetRootConnectionNode();
-
-            var sortTargetAsContainer = sortTarget as ContainerInfo;
-            if (sortTargetAsContainer != null)
-                sortTargetAsContainer.SortRecursive(sortDirection);
-            else
-                _connectionTree.SelectedNode.Parent.SortRecursive(sortDirection);
-
-            Runtime.SaveConnectionsAsync();
-        }
     }
 }
