@@ -869,7 +869,7 @@ namespace mRemoteNG.UI.Window
                             {
                                 strHide.Add("RDPAlertIdleTimeout");
                             }
-							if (conI.RDGatewayUsageMethod == ProtocolRDP.RDGatewayUsageMethod.Never)
+							if (conI.RDGatewayUsageMethod == RdpProtocol.RDGatewayUsageMethod.Never)
 							{
 								strHide.Add("RDGatewayDomain");
 								strHide.Add("RDGatewayHostname");
@@ -877,17 +877,17 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("RDGatewayUseConnectionCredentials");
 								strHide.Add("RDGatewayUsername");
 							}
-                            else if (conI.RDGatewayUseConnectionCredentials == ProtocolRDP.RDGatewayUseConnectionCredentials.Yes)
+                            else if (conI.RDGatewayUseConnectionCredentials == RdpProtocol.RDGatewayUseConnectionCredentials.Yes)
 							{
 								strHide.Add("RDGatewayDomain");
 								strHide.Add("RDGatewayPassword");
 								strHide.Add("RDGatewayUsername");
 							}
-							if (!(conI.Resolution == ProtocolRDP.RDPResolutions.FitToWindow || conI.Resolution == ProtocolRDP.RDPResolutions.Fullscreen))
+							if (!(conI.Resolution == RdpProtocol.RDPResolutions.FitToWindow || conI.Resolution == RdpProtocol.RDPResolutions.Fullscreen))
 							{
 								strHide.Add("AutomaticResize");
 							}
-					        if (conI.RedirectSound != ProtocolRDP.RDPSounds.BringToThisComputer)
+					        if (conI.RedirectSound != RdpProtocol.RDPSounds.BringToThisComputer)
 					        {
                                 strHide.Add("SoundQuality");
                             }

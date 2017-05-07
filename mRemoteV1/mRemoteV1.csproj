@@ -559,7 +559,7 @@
     <Compile Include="Connection\Protocol\ProtocolType.cs" />
     <Compile Include="Connection\Protocol\PuttyBase.cs" />
     <Compile Include="Connection\Protocol\RAW\RawProtocol.cs" />
-    <Compile Include="Connection\Protocol\RDP\Connection.Protocol.RDP.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol.cs" />
     <Compile Include="Connection\Protocol\Rlogin\Connection.Protocol.Rlogin.cs" />
     <Compile Include="Connection\Protocol\Serial\Connection.Protocol.Serial.cs" />
     <Compile Include="Connection\Protocol\SSH\Connection.Protocol.SSH1.cs" />

@@ -21,7 +21,7 @@ namespace mRemoteNG.Tools
         public static int HTTPPort { get; set; } = (int)ProtocolHTTP.Defaults.Port;
         public static int HTTPSPort { get; set; } = (int)ProtocolHTTPS.Defaults.Port;
         public static int RloginPort { get; set; } = (int)ProtocolRlogin.Defaults.Port;
-        public static int RDPPort { get; set; } = (int)ProtocolRDP.Defaults.Port;
+        public static int RDPPort { get; set; } = (int)RdpProtocol.Defaults.Port;
         public static int VNCPort { get; set; } = (int)ProtocolVNC.Defaults.Port;
         public ArrayList OpenPorts { get; set; }
         public ArrayList ClosedPorts { get; set; }

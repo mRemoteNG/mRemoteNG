@@ -23,20 +23,20 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedPassword = "passwordHere!";
         private const bool ExpectedUseConsoleSession = true;
         private const int ExpectedPort = 9933;
-        private const ProtocolRDP.RDGatewayUsageMethod ExpectedGatewayUsageMethod = ProtocolRDP.RDGatewayUsageMethod.Always;
+        private const RdpProtocol.RDGatewayUsageMethod ExpectedGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Always;
         private const string ExpectedGatewayHostname = "gatewayserverhost.innerdomain.net";
         private const string ExpectedGatewayUsername = "gatewayusername";
         private const string ExpectedGatewayDomain = "innerdomain";
         private const string ExpectedGatewayPassword = "gatewayPassword123";
-        private const ProtocolRDP.RDPResolutions ExpectedRdpResolution = ProtocolRDP.RDPResolutions.FitToWindow;
-        private const ProtocolRDP.RDPColors ExpectedRdpColorDepth = ProtocolRDP.RDPColors.Colors24Bit;
-        private const ProtocolRDP.RDPSounds ExpectedAudioRedirection = ProtocolRDP.RDPSounds.DoNotPlay;
+        private const RdpProtocol.RDPResolutions ExpectedRdpResolution = RdpProtocol.RDPResolutions.FitToWindow;
+        private const RdpProtocol.RDPColors ExpectedRdpColorDepth = RdpProtocol.RDPColors.Colors24Bit;
+        private const RdpProtocol.RDPSounds ExpectedAudioRedirection = RdpProtocol.RDPSounds.DoNotPlay;
         private const bool ExpectedKeyRedirection = true;
         private const bool ExpectedSmartcardRedirection = true;
         private const bool ExpectedDriveRedirection = true;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
-        private const ProtocolRDP.AuthenticationLevel ExpectedAuthLevel = ProtocolRDP.AuthenticationLevel.AuthRequired;
+        private const RdpProtocol.AuthenticationLevel ExpectedAuthLevel = RdpProtocol.AuthenticationLevel.AuthRequired;
 
 
         [OneTimeSetUp]

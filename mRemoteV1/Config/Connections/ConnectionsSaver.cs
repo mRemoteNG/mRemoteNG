@@ -319,7 +319,7 @@ namespace mRemoteNG.Config.Connections
 					
 			//Smart Size
 			_xmlTextWriter.WriteStartElement("AutoSize");
-			_xmlTextWriter.WriteValue(con.Resolution == ProtocolRDP.RDPResolutions.SmartSize);
+			_xmlTextWriter.WriteValue(con.Resolution == RdpProtocol.RDPResolutions.SmartSize);
 			_xmlTextWriter.WriteEndElement();
 					
 			//SeparateResolutionX
@@ -332,7 +332,7 @@ namespace mRemoteNG.Config.Connections
 			_xmlTextWriter.WriteValue("768");
 			_xmlTextWriter.WriteEndElement();
 					
-			var resolution = ProtocolRDP.GetResolutionRectangle(con.Resolution);
+			var resolution = RdpProtocol.GetResolutionRectangle(con.Resolution);
 			if (resolution.Width == 0)
 			{
 				resolution.Width = 1024;

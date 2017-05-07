@@ -59,19 +59,19 @@ namespace mRemoteNG.Config.Serializers
                     switch (value)
                     {
                         case "8":
-                            connectionInfo.Colors = ProtocolRDP.RDPColors.Colors256;
+                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors256;
                             break;
                         case "15":
-                            connectionInfo.Colors = ProtocolRDP.RDPColors.Colors15Bit;
+                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors15Bit;
                             break;
                         case "16":
-                            connectionInfo.Colors = ProtocolRDP.RDPColors.Colors16Bit;
+                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors16Bit;
                             break;
                         case "24":
-                            connectionInfo.Colors = ProtocolRDP.RDPColors.Colors24Bit;
+                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors24Bit;
                             break;
                         case "32":
-                            connectionInfo.Colors = ProtocolRDP.RDPColors.Colors32Bit;
+                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors32Bit;
                             break;
                     }
                     break;
@@ -79,7 +79,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.CacheBitmaps = value == "1";
                     break;
                 case "screen mode id":
-                    connectionInfo.Resolution = value == "2" ? ProtocolRDP.RDPResolutions.Fullscreen : ProtocolRDP.RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = value == "2" ? RdpProtocol.RDPResolutions.Fullscreen : RdpProtocol.RDPResolutions.FitToWindow;
                     break;
                 case "connect to console":
                     connectionInfo.UseConsoleSession = value == "1";
@@ -112,13 +112,13 @@ namespace mRemoteNG.Config.Serializers
                     switch (value)
                     {
                         case "0":
-                            connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.BringToThisComputer;
+                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.BringToThisComputer;
                             break;
                         case "1":
-                            connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.LeaveAtRemoteComputer;
+                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer;
                             break;
                         case "2":
-                            connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.DoNotPlay;
+                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
                             break;
                     }
                     break;

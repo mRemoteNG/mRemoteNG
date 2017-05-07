@@ -18,8 +18,8 @@ namespace mRemoteNG.Connection.Protocol
 			switch (connectionInfo.Protocol)
 			{
 				case ProtocolType.RDP:
-					newProtocol = new ProtocolRDP();
-					((ProtocolRDP) newProtocol).tmrReconnect.Elapsed += ((ProtocolRDP) newProtocol).tmrReconnect_Elapsed;
+					newProtocol = new RdpProtocol();
+					((RdpProtocol) newProtocol).tmrReconnect.Elapsed += ((RdpProtocol) newProtocol).tmrReconnect_Elapsed;
 					break;
 				case ProtocolType.VNC:
 					newProtocol = new ProtocolVNC();

@@ -17,9 +17,8 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public class ProtocolRDP : ProtocolBase
+    public class RdpProtocol : ProtocolBase
 	{
-        #region Private Declarations
         /* RDP v8 requires Windows 7 with:
          * https://support.microsoft.com/en-us/kb/2592687 
          * OR
@@ -33,7 +32,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private bool _loginComplete;
         private bool _redirectKeys;
         private bool _alertOnIdleDisconnect;
-        #endregion
+        private readonly FrmMain _frmMain = FrmMain.Default;
 
         #region Properties
         public bool SmartSize
@@ -93,7 +92,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 
         #region Constructors
-        public ProtocolRDP()
+        public RdpProtocol()
         {
             Control = new AxMsRdpClient8NotSafeForScripting();
         }
@@ -486,8 +485,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
 				{
 					_rdpClient.FullScreen = true;
-                    _rdpClient.DesktopWidth = Screen.FromControl(FrmMain.Default).Bounds.Width;
-                    _rdpClient.DesktopHeight = Screen.FromControl(FrmMain.Default).Bounds.Height;
+                    _rdpClient.DesktopWidth = Screen.FromControl(_frmMain).Bounds.Width;
+                    _rdpClient.DesktopHeight = Screen.FromControl(_frmMain).Bounds.Height;
 							
 					return;
 				}
@@ -507,8 +506,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				else if (InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen)
 				{
 					_rdpClient.FullScreen = true;
-                    _rdpClient.DesktopWidth = Screen.FromControl(FrmMain.Default).Bounds.Width;
-                    _rdpClient.DesktopHeight = Screen.FromControl(FrmMain.Default).Bounds.Height;
+                    _rdpClient.DesktopWidth = Screen.FromControl(_frmMain).Bounds.Width;
+                    _rdpClient.DesktopHeight = Screen.FromControl(_frmMain).Bounds.Height;
 				}
 				else
 				{
@@ -696,23 +695,23 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		private void RDPEvent_OnLeaveFullscreenMode()
 		{
 			Fullscreen = false;
-            LeaveFullscreenEvent?.Invoke(this, new EventArgs());
+            _leaveFullscreenEvent?.Invoke(this, new EventArgs());
         }
         #endregion
 		
         #region Public Events & Handlers
 		public delegate void LeaveFullscreenEventHandler(object sender, EventArgs e);
-		private LeaveFullscreenEventHandler LeaveFullscreenEvent;
+		private LeaveFullscreenEventHandler _leaveFullscreenEvent;
 				
 		public event LeaveFullscreenEventHandler LeaveFullscreen
 		{
 			add
 			{
-				LeaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Combine(LeaveFullscreenEvent, value);
+				_leaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Combine(_leaveFullscreenEvent, value);
 			}
 			remove
 			{
-				LeaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Remove(LeaveFullscreenEvent, value);
+				_leaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Remove(_leaveFullscreenEvent, value);
 			}
 		}
         #endregion

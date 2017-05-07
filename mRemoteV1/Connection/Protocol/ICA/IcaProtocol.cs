@@ -188,22 +188,22 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 						
-				if (InterfaceControl.Info.Resolution == ProtocolRDP.RDPResolutions.FitToWindow)
+				if (InterfaceControl.Info.Resolution == RdpProtocol.RDPResolutions.FitToWindow)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
 				}
-				else if (InterfaceControl.Info.Resolution == ProtocolRDP.RDPResolutions.SmartSize)
+				else if (InterfaceControl.Info.Resolution == RdpProtocol.RDPResolutions.SmartSize)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
 				}
-				else if (InterfaceControl.Info.Resolution == ProtocolRDP.RDPResolutions.Fullscreen)
+				else if (InterfaceControl.Info.Resolution == RdpProtocol.RDPResolutions.Fullscreen)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(_frmMain).Bounds.Width, Screen.FromControl(_frmMain).Bounds.Height, 0);
 					_icaClient.FullScreenWindow();
 				}
 				else
 				{
-					var resolution = ProtocolRDP.GetResolutionRectangle(_info.Resolution);
+					var resolution = RdpProtocol.GetResolutionRectangle(_info.Resolution);
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width, resolution.Height, 0);
 				}
 			}
@@ -218,13 +218,13 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		    // ReSharper disable once SwitchStatementMissingSomeCases
 			switch (_info.Colors)
 			{
-				case ProtocolRDP.RDPColors.Colors256:
+				case RdpProtocol.RDPColors.Colors256:
 					_icaClient.SetProp("DesiredColor", "2");
 					break;
-				case ProtocolRDP.RDPColors.Colors15Bit:
+				case RdpProtocol.RDPColors.Colors15Bit:
 					_icaClient.SetProp("DesiredColor", "4");
 					break;
-				case ProtocolRDP.RDPColors.Colors16Bit:
+				case RdpProtocol.RDPColors.Colors16Bit:
 					_icaClient.SetProp("DesiredColor", "4");
 					break;
 				default:

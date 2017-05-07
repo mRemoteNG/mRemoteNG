@@ -160,7 +160,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDPAuthenticationLevel = ProtocolRDP.AuthenticationLevel.AuthRequired;
+            _testAbstractConnectionInfoData.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.AuthRequired;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -196,7 +196,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayUsageMethod = ProtocolRDP.RDGatewayUsageMethod.Always;
+            _testAbstractConnectionInfoData.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Always;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -214,7 +214,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayUseConnectionCredentials = ProtocolRDP.RDGatewayUseConnectionCredentials.SmartCard;
+            _testAbstractConnectionInfoData.RDGatewayUseConnectionCredentials = RdpProtocol.RDGatewayUseConnectionCredentials.SmartCard;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -250,7 +250,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Resolution = ProtocolRDP.RDPResolutions.Res1366x768;
+            _testAbstractConnectionInfoData.Resolution = RdpProtocol.RDPResolutions.Res1366x768;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -268,7 +268,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Colors = ProtocolRDP.RDPColors.Colors16Bit;
+            _testAbstractConnectionInfoData.Colors = RdpProtocol.RDPColors.Colors16Bit;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -367,7 +367,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RedirectSound = ProtocolRDP.RDPSounds.DoNotPlay;
+            _testAbstractConnectionInfoData.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
             Assert.That(wasCalled, Is.True);
         }
 

@@ -470,10 +470,10 @@ namespace mRemoteNG.UI.Window
                         System.Windows.Forms.Application.DoEvents();
                     }
 
-                    if (!(new Version(rdpClient.Version) >= ProtocolRDP.Versions.RDC80))
+                    if (!(new Version(rdpClient.Version) >= RdpProtocol.Versions.RDC80))
                     {
                         throw new Exception(
-                            $"Found RDC Client version {rdpClient.Version} but version {ProtocolRDP.Versions.RDC80} or higher is required.");
+                            $"Found RDC Client version {rdpClient.Version} but version {RdpProtocol.Versions.RDC80} or higher is required.");
                     }
 
                     pbCheck1.Image = Resources.Good_Symbol;
