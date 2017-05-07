@@ -193,8 +193,8 @@
     <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIds.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\ExternalAppsSaver.cs" />
-    <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
-    <Compile Include="Config\Settings\LayoutSettingsSaver.cs" />
+    <Compile Include="Config\Settings\DockPanelLayoutLoader.cs" />
+    <Compile Include="Config\Settings\DockPanelLayoutSaver.cs" />
     <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
     <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
     <Compile Include="Config\Settings\SettingsLoader.cs" />

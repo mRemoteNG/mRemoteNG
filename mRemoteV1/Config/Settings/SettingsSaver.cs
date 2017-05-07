@@ -58,7 +58,7 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
                 mRemoteNG.Settings.Default.Save();
 
-                new LayoutSettingsSaver().Save();
+                new DockPanelLayoutSaver().Save();
                 new ExternalAppsSaver().Save(Runtime.ExternalTools);
             }
             catch (Exception ex)

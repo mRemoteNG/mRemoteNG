@@ -6,7 +6,7 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Settings
 {
-    public class LayoutSettingsSaver
+    public class DockPanelLayoutSaver
     {
         public void Save()
         {

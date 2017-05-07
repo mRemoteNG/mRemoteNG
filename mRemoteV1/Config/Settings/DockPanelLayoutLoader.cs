@@ -9,12 +9,12 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
 {
-    public class LayoutSettingsLoader
+    public class DockPanelLayoutLoader
     {
         private readonly FrmMain _mainForm;
         private readonly MessageCollector _messageCollector;
 
-        public LayoutSettingsLoader(FrmMain mainForm, MessageCollector messageCollector)
+        public DockPanelLayoutLoader(FrmMain mainForm, MessageCollector messageCollector)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));

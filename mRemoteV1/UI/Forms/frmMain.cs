@@ -136,7 +136,7 @@ namespace mRemoteNG.UI.Forms
             var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip);
             settingsLoader.LoadSettings();
 
-            var uiLoader = new LayoutSettingsLoader(this, messageCollector);
+            var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
 			ThemeManager.ThemeChanged += ApplyThemes;
