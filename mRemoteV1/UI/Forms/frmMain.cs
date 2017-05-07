@@ -297,7 +297,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
-            Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip);
+            Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, this);
 									
 			IsClosing = true;
 

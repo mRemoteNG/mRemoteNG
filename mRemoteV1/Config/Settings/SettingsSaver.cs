@@ -11,11 +11,10 @@ namespace mRemoteNG.Config.Settings
 {
     public static class SettingsSaver
     {
-        public static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
+        public static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, FrmMain frmMain)
         {
             try
             {
-                var frmMain = FrmMain.Default;
                 var windowPlacement = new WindowPlacement(FrmMain.Default);
                 if (frmMain.WindowState == FormWindowState.Minimized & windowPlacement.RestoreToMaximized)
                 {

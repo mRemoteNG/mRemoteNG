@@ -25,14 +25,14 @@ namespace mRemoteNG.App
             ProgramRoot.CloseSingletonInstanceMutex();
         }
 
-        public static void Cleanup(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
+        public static void Cleanup(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, FrmMain frmMain)
         {
             try
             {
                 StopPuttySessionWatcher();
                 DisposeNotificationAreaIcon();
                 SaveConnections();
-                SaveSettings(quickConnectToolStrip, externalToolsToolStrip);
+                SaveSettings(quickConnectToolStrip, externalToolsToolStrip, frmMain);
                 UnregisterBrowsers();
             }
             catch (Exception ex)
@@ -58,9 +58,9 @@ namespace mRemoteNG.App
                 Runtime.SaveConnections();
         }
 
-        private static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
+        private static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, FrmMain frmMain)
         {
-            Config.Settings.SettingsSaver.SaveSettings(quickConnectToolStrip, externalToolsToolStrip);
+            Config.Settings.SettingsSaver.SaveSettings(quickConnectToolStrip, externalToolsToolStrip, frmMain);
         }
 
         private static void UnregisterBrowsers()
