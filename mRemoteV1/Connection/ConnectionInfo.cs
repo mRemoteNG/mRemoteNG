@@ -216,7 +216,7 @@ namespace mRemoteNG.Connection
                     case ProtocolType.Rlogin:
                         return (int)ProtocolRlogin.Defaults.Port;
                     case ProtocolType.RAW:
-                        return (int)ProtocolRAW.Defaults.Port;
+                        return (int)RawProtocol.Defaults.Port;
                     case ProtocolType.HTTP:
                         return (int)ProtocolHTTP.Defaults.Port;
                     case ProtocolType.HTTPS:

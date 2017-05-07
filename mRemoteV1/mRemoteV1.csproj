@@ -558,7 +558,7 @@
     <Compile Include="Connection\Protocol\ProtocolList.cs" />
     <Compile Include="Connection\Protocol\ProtocolType.cs" />
     <Compile Include="Connection\Protocol\PuttyBase.cs" />
-    <Compile Include="Connection\Protocol\RAW\Connection.Protocol.RAW.cs" />
+    <Compile Include="Connection\Protocol\RAW\RawProtocol.cs" />
     <Compile Include="Connection\Protocol\RDP\Connection.Protocol.RDP.cs" />
     <Compile Include="Connection\Protocol\Rlogin\Connection.Protocol.Rlogin.cs" />
     <Compile Include="Connection\Protocol\Serial\Connection.Protocol.Serial.cs" />

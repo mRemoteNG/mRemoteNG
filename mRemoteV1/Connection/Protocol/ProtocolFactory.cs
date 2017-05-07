@@ -37,7 +37,7 @@ namespace mRemoteNG.Connection.Protocol
 					newProtocol = new ProtocolRlogin();
 					break;
 				case ProtocolType.RAW:
-					newProtocol = new ProtocolRAW();
+					newProtocol = new RawProtocol();
 					break;
 				case ProtocolType.HTTP:
 					newProtocol = new ProtocolHTTP(connectionInfo.RenderingEngine);
