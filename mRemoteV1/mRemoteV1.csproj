@@ -358,6 +358,9 @@
     </Compile>
     <Compile Include="UI\Controls\FilteredPropertyGrid\ObjectWrapper.cs" />
     <Compile Include="UI\Controls\ConnectionTree\IConnectionTree.cs" />
+    <Compile Include="UI\Controls\HeadlessTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\ISelectionTarget.cs" />
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
