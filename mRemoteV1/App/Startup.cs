@@ -21,6 +21,7 @@ namespace mRemoteNG.App
     {
         private AppUpdater _appUpdate;
         private readonly ConnectionIconLoader _connectionIconLoader;
+        private readonly FrmMain _frmMain = FrmMain.Default;
 
         public static Startup Instance { get; } = new Startup();
 
@@ -56,7 +57,7 @@ namespace mRemoteNG.App
         public void CreateConnectionsProvider(MessageCollector messageCollector)
         {
             messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
-            FrmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
+            _frmMain.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
 
             if (!Settings.Default.UseSQLServer) return;
             messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
@@ -87,9 +88,9 @@ namespace mRemoteNG.App
 
         private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            if (FrmMain.Default.InvokeRequired)
+            if (_frmMain.InvokeRequired)
             {
-                FrmMain.Default.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), sender, e);
+                _frmMain.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), sender, e);
                 return;
             }
 
