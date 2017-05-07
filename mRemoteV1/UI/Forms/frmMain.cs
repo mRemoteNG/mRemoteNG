@@ -43,14 +43,15 @@ namespace mRemoteNG.UI.Forms
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
         private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
-        internal FullscreenHandler _fullscreen { get; set; }
-        internal readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+
+        internal FullscreenHandler Fullscreen { get; set; }
 
         private FrmMain()
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
-            _fullscreen = new FullscreenHandler(this);
+            Fullscreen = new FullscreenHandler(this);
             pnlDock.Theme = new VS2012LightTheme();
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
         }
@@ -170,12 +171,14 @@ namespace mRemoteNG.UI.Forms
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;
-            viewMenu1.FullscreenHandler = _fullscreen;
+            viewMenu1.FullscreenHandler = Fullscreen;
             viewMenu1.MainForm = this;
 
             toolsMenu1.MainForm = this;
             toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
             toolsMenu1.UnlockerFormFactory = _credRepoUnlockerFormFactory;
+
+            _quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
         }
 
         private void ApplyThemes()

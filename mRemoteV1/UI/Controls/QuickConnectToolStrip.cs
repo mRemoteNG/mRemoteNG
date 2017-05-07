@@ -8,7 +8,6 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
-using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -21,7 +20,18 @@ namespace mRemoteNG.UI.Controls
         private ContextMenuStrip _mnuQuickConnectProtocol;
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
+        private IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
 
+        public IConnectionInitiator ConnectionInitiator
+        {
+            get { return _connectionInitiator; }
+            set
+            {
+                if (value == null)
+                    return;
+                _connectionInitiator = value;
+            }
+        }
 
         public QuickConnectToolStrip()
         {
@@ -165,7 +175,7 @@ namespace mRemoteNG.UI.Controls
                     return;
                 }
                 _cmbQuickConnect.Add(connectionInfo);
-                FrmMain.Default._connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {
@@ -215,7 +225,7 @@ namespace mRemoteNG.UI.Controls
             var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
             if (tag != null)
             {
-                FrmMain.Default._connectionInitiator.OpenConnection(tag);
+                ConnectionInitiator.OpenConnection(tag);
             }
         }
         #endregion

@@ -144,7 +144,7 @@ namespace mRemoteNG.Config.Settings
         private void SetKioskMode()
         {
             if (!mRemoteNG.Settings.Default.MainFormKiosk) return;
-            MainForm._fullscreen.Value = true;
+            MainForm.Fullscreen.Value = true;
         }
 
         private static void SetShowSystemTrayIcon()
