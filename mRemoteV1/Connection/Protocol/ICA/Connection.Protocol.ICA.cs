@@ -4,8 +4,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using System.Threading;
+using System.Timers;
 using mRemoteNG.Tools;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
@@ -15,35 +17,11 @@ namespace mRemoteNG.Connection.Protocol.ICA
 {
 	public class ProtocolICA : ProtocolBase
 	{
-        #region Default Instance
-		private static ProtocolICA defaultInstance;
-				
-		/// <summary>
-		/// Added by the VB.Net to C# Converter to support default instance behavour in C#
-		/// </summary>
-        public static ProtocolICA Default
-		{
-			get { return defaultInstance ?? (defaultInstance = new ProtocolICA()); }
-			set
-			{
-				defaultInstance = value;
-			}
-		}
-
-#if false
-        private static void defaultInstance_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			defaultInstance = null;
-		}
-#endif
-#endregion
-
-#region Private Properties
-		private AxICAClient _ICAClient;
-		private ConnectionInfo _Info;
-#endregion
+		private AxICAClient _icaClient;
+		private ConnectionInfo _info;
+        private readonly FrmMain _frmMain = FrmMain.Default;
 		
-#region Public Methods
+        #region Public Methods
 		public ProtocolICA()
 		{
 			try
@@ -52,7 +30,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaControlFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strIcaControlFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -62,53 +40,53 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					
 			try
 			{
-				_ICAClient = (AxICAClient)Control;
-				_Info = InterfaceControl.Info;
-				_ICAClient.CreateControl();
+				_icaClient = (AxICAClient)Control;
+				_info = InterfaceControl.Info;
+				_icaClient.CreateControl();
 						
-				while (!_ICAClient.Created)
+				while (!_icaClient.Created)
 				{
 					Thread.Sleep(10);
 					Application.DoEvents();
 				}
 
-				_ICAClient.Address = _Info.Hostname;
+				_icaClient.Address = _info.Hostname;
 				SetCredentials();
 				SetResolution();
 				SetColors();
 				SetSecurity();
 						
 				//Disable hotkeys for international users
-				_ICAClient.Hotkey1Shift = null;
-				_ICAClient.Hotkey1Char = null;
-				_ICAClient.Hotkey2Shift = null;
-				_ICAClient.Hotkey2Char = null;
-				_ICAClient.Hotkey3Shift = null;
-				_ICAClient.Hotkey3Char = null;
-				_ICAClient.Hotkey4Shift = null;
-				_ICAClient.Hotkey4Char = null;
-				_ICAClient.Hotkey5Shift = null;
-				_ICAClient.Hotkey5Char = null;
-				_ICAClient.Hotkey6Shift = null;
-				_ICAClient.Hotkey6Char = null;
-				_ICAClient.Hotkey7Shift = null;
-				_ICAClient.Hotkey7Char = null;
-				_ICAClient.Hotkey8Shift = null;
-				_ICAClient.Hotkey8Char = null;
-				_ICAClient.Hotkey9Shift = null;
-				_ICAClient.Hotkey9Char = null;
-				_ICAClient.Hotkey10Shift = null;
-				_ICAClient.Hotkey10Char = null;
-				_ICAClient.Hotkey11Shift = null;
-				_ICAClient.Hotkey11Char = null;
+				_icaClient.Hotkey1Shift = null;
+				_icaClient.Hotkey1Char = null;
+				_icaClient.Hotkey2Shift = null;
+				_icaClient.Hotkey2Char = null;
+				_icaClient.Hotkey3Shift = null;
+				_icaClient.Hotkey3Char = null;
+				_icaClient.Hotkey4Shift = null;
+				_icaClient.Hotkey4Char = null;
+				_icaClient.Hotkey5Shift = null;
+				_icaClient.Hotkey5Char = null;
+				_icaClient.Hotkey6Shift = null;
+				_icaClient.Hotkey6Char = null;
+				_icaClient.Hotkey7Shift = null;
+				_icaClient.Hotkey7Char = null;
+				_icaClient.Hotkey8Shift = null;
+				_icaClient.Hotkey8Char = null;
+				_icaClient.Hotkey9Shift = null;
+				_icaClient.Hotkey9Char = null;
+				_icaClient.Hotkey10Shift = null;
+				_icaClient.Hotkey10Char = null;
+				_icaClient.Hotkey11Shift = null;
+				_icaClient.Hotkey11Char = null;
 						
-				_ICAClient.PersistentCacheEnabled = _Info.CacheBitmaps;
-				_ICAClient.Title = _Info.Name;
+				_icaClient.PersistentCacheEnabled = _info.CacheBitmaps;
+				_icaClient.Title = _info.Name;
 				return true;
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaSetPropsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strIcaSetPropsFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -119,19 +97,19 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					
 			try
 			{
-				_ICAClient.Connect();
+				_icaClient.Connect();
 				base.Connect();
 				return true;
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaConnectionFailed + Environment.NewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strIcaConnectionFailed + Environment.NewLine + ex.Message);
 				return false;
 			}
 		}
-#endregion
+        #endregion
 		
-#region Private Methods
+        #region Private Methods
 		private void SetCredentials()
 		{
 			try
@@ -141,61 +119,61 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 				
-				var _user = _Info.CredentialRecord?.Username ?? "";
-                var _pass = _Info.CredentialRecord?.Password ?? "".ConvertToSecureString();
-                var _dom = _Info.CredentialRecord?.Domain ?? "";
+				var user = _info.CredentialRecord?.Username ?? "";
+                var pass = _info.CredentialRecord?.Password ?? "".ConvertToSecureString();
+                var dom = _info.CredentialRecord?.Domain ?? "";
 						
-				if (string.IsNullOrEmpty(_user))
+				if (string.IsNullOrEmpty(user))
 				{
 					if (Settings.Default.EmptyCredentials == "windows")
 					{
-						_ICAClient.Username = Environment.UserName;
+						_icaClient.Username = Environment.UserName;
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_ICAClient.Username = Settings.Default.DefaultUsername;
+						_icaClient.Username = Settings.Default.DefaultUsername;
 					}
 				}
 				else
 				{
-					_ICAClient.Username = _user;
+					_icaClient.Username = user;
 				}
 						
-				if (string.IsNullOrEmpty(_pass.ConvertToUnsecureString()))
+				if (string.IsNullOrEmpty(pass.ConvertToUnsecureString()))
 				{
 					if (Settings.Default.EmptyCredentials == "custom")
 					{
 						if (Settings.Default.DefaultPassword != "")
 						{
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _ICAClient.SetProp("ClearPassword", cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey));
+                            _icaClient.SetProp("ClearPassword", cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey));
 						}
 					}
 				}
 				else
 				{
-					_ICAClient.SetProp("ClearPassword", _pass.ConvertToUnsecureString());
+					_icaClient.SetProp("ClearPassword", pass.ConvertToUnsecureString());
 				}
 						
-				if (string.IsNullOrEmpty(_dom))
+				if (string.IsNullOrEmpty(dom))
 				{
 					if (Settings.Default.EmptyCredentials == "windows")
 					{
-						_ICAClient.Domain = Environment.UserDomainName;
+						_icaClient.Domain = Environment.UserDomainName;
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_ICAClient.Domain = Settings.Default.DefaultDomain;
+						_icaClient.Domain = Settings.Default.DefaultDomain;
 					}
 				}
 				else
 				{
-					_ICAClient.Domain = _dom;
+					_icaClient.Domain = dom;
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaSetCredentialsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strIcaSetCredentialsFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -205,75 +183,77 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			{
 				if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
 				{
-                    _ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(FrmMain.Default).Bounds.Width, Screen.FromControl(FrmMain.Default).Bounds.Height, 0);
-					_ICAClient.FullScreenWindow();
+                    _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(_frmMain).Bounds.Width, Screen.FromControl(_frmMain).Bounds.Height, 0);
+					_icaClient.FullScreenWindow();
 							
 					return;
 				}
 						
 				if (InterfaceControl.Info.Resolution == ProtocolRDP.RDPResolutions.FitToWindow)
 				{
-					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
+					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
 				}
 				else if (InterfaceControl.Info.Resolution == ProtocolRDP.RDPResolutions.SmartSize)
 				{
-					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
+					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
 				}
 				else if (InterfaceControl.Info.Resolution == ProtocolRDP.RDPResolutions.Fullscreen)
 				{
-					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(FrmMain.Default).Bounds.Width, Screen.FromControl(FrmMain.Default).Bounds.Height, 0);
-					_ICAClient.FullScreenWindow();
+					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(_frmMain).Bounds.Width, Screen.FromControl(_frmMain).Bounds.Height, 0);
+					_icaClient.FullScreenWindow();
 				}
 				else
 				{
-					Rectangle resolution = ProtocolRDP.GetResolutionRectangle(_Info.Resolution);
-					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width, resolution.Height, 0);
+					var resolution = ProtocolRDP.GetResolutionRectangle(_info.Resolution);
+					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width, resolution.Height, 0);
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaSetResolutionFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strIcaSetResolutionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
 		private void SetColors()
 		{
-			switch (_Info.Colors)
+		    // ReSharper disable once SwitchStatementMissingSomeCases
+			switch (_info.Colors)
 			{
 				case ProtocolRDP.RDPColors.Colors256:
-					_ICAClient.SetProp("DesiredColor", "2");
+					_icaClient.SetProp("DesiredColor", "2");
 					break;
 				case ProtocolRDP.RDPColors.Colors15Bit:
-					_ICAClient.SetProp("DesiredColor", "4");
+					_icaClient.SetProp("DesiredColor", "4");
 					break;
 				case ProtocolRDP.RDPColors.Colors16Bit:
-					_ICAClient.SetProp("DesiredColor", "4");
+					_icaClient.SetProp("DesiredColor", "4");
 					break;
 				default:
-					_ICAClient.SetProp("DesiredColor", "8");
+					_icaClient.SetProp("DesiredColor", "8");
 					break;
 			}
 		}
 				
 		private void SetSecurity()
 		{
-			switch (_Info.ICAEncryptionStrength)
+		    // ReSharper disable once SwitchStatementMissingSomeCases
+			switch (_info.ICAEncryptionStrength)
 			{
 				case EncryptionStrength.Encr128BitLogonOnly:
-					_ICAClient.Encrypt = true;
-					_ICAClient.EncryptionLevelSession = "EncRC5-0";
+					_icaClient.Encrypt = true;
+					_icaClient.EncryptionLevelSession = "EncRC5-0";
 					break;
 				case EncryptionStrength.Encr40Bit:
-					_ICAClient.Encrypt = true;
-					_ICAClient.EncryptionLevelSession = "EncRC5-40";
+					_icaClient.Encrypt = true;
+					_icaClient.EncryptionLevelSession = "EncRC5-40";
 					break;
 				case EncryptionStrength.Encr56Bit:
-					_ICAClient.Encrypt = true;
-					_ICAClient.EncryptionLevelSession = "EncRC5-56";
+					_icaClient.Encrypt = true;
+					_icaClient.EncryptionLevelSession = "EncRC5-56";
 					break;
 				case EncryptionStrength.Encr128Bit:
-					_ICAClient.Encrypt = true;
-					_ICAClient.EncryptionLevelSession = "EncRC5-128";
+					_icaClient.Encrypt = true;
+					_icaClient.EncryptionLevelSession = "EncRC5-128";
 					break;
 			}
 		}
@@ -282,19 +262,19 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		{
 			try
 			{
-				_ICAClient.OnConnecting += new EventHandler(ICAEvent_OnConnecting);
-				_ICAClient.OnConnect += new EventHandler(ICAEvent_OnConnected);
-				_ICAClient.OnConnectFailed += new EventHandler(ICAEvent_OnConnectFailed);
-				_ICAClient.OnDisconnect += new EventHandler(ICAEvent_OnDisconnect);
+				_icaClient.OnConnecting += ICAEvent_OnConnecting;
+				_icaClient.OnConnect += ICAEvent_OnConnected;
+				_icaClient.OnConnectFailed += ICAEvent_OnConnectFailed;
+				_icaClient.OnDisconnect += ICAEvent_OnDisconnect;
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaSetEventHandlersFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strIcaSetEventHandlersFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-#endregion
+        #endregion
 		
-#region Private Events & Handlers
+        #region Private Events & Handlers
 		private void ICAEvent_OnConnecting(object sender, EventArgs e)
 		{
 			Event_Connecting(this);
@@ -329,25 +309,23 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				Close();
 			}
 		}
-#endregion
+        #endregion
 		
-#region Reconnect Stuff
-		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        #region Reconnect Stuff
+		public void tmrReconnect_Elapsed(object sender, ElapsedEventArgs e)
 		{
-			bool srvReady = PortScanner.IsPortOpen(_Info.Hostname, Convert.ToString(_Info.Port));
+			var srvReady = PortScanner.IsPortOpen(_info.Hostname, Convert.ToString(_info.Port));
 					
 			ReconnectGroup.ServerReady = srvReady;
-					
-			if (ReconnectGroup.ReconnectWhenReady && srvReady)
-			{
-				tmrReconnect.Enabled = false;
-				ReconnectGroup.DisposeReconnectGroup();
-				_ICAClient.Connect();
-			}
+
+		    if (!ReconnectGroup.ReconnectWhenReady || !srvReady) return;
+		    tmrReconnect.Enabled = false;
+		    ReconnectGroup.DisposeReconnectGroup();
+		    _icaClient.Connect();
 		}
-#endregion
+        #endregion
 		
-#region Enums
+        #region Enums
 		public enum Defaults
 		{
 			Port = 1494,
@@ -367,6 +345,6 @@ namespace mRemoteNG.Connection.Protocol.ICA
             [LocalizedAttributes.LocalizedDescription("strEnc128Bit")]
             Encr128Bit = 128
 		}
-#endregion
+        #endregion
 	}
 }
