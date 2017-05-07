@@ -190,7 +190,6 @@ namespace mRemoteNG.UI.Window
             {
                 _contextMenu.EnableShortcutKeys();
                 ConnectionTree.ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-                Windows.ConfigForm.SelectedTreeNode = SelectedNode;
                 Runtime.SaveConnectionsAsync();
             }
             catch (Exception ex)
