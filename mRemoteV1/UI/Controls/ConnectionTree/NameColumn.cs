@@ -1,7 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 
-
 namespace mRemoteNG.UI.Controls
 {
     public class NameColumn : OLVColumn
@@ -9,8 +8,6 @@ namespace mRemoteNG.UI.Controls
         public NameColumn(ImageGetterDelegate imageGetterDelegate)
         {
             AspectName = "Name";
-            FillsFreeSpace = true;
-            IsButton = true;
             AspectGetter = item => ((ConnectionInfo) item).Name;
             ImageGetter = imageGetterDelegate;
         }

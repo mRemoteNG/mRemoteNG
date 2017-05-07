@@ -114,6 +114,7 @@ namespace mRemoteNG.UI.Controls
         {
             UnregisterModelUpdateHandlers();
             SetObjects(ConnectionTreeModel.RootNodes);
+            ResizeColumns();
             RegisterModelUpdateHandlers();
             NodeSearcher = new NodeSearcher(ConnectionTreeModel);
             ExecutePostSetupActions();
@@ -136,6 +137,7 @@ namespace mRemoteNG.UI.Controls
         private void OnPuttySessionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             RefreshObjects(GetRootPuttyNodes().ToList());
+            ResizeColumns();
         }
 
         private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -146,6 +148,7 @@ namespace mRemoteNG.UI.Controls
             var senderAsConnectionInfo = sender as ConnectionInfo;
             if (senderAsConnectionInfo != null)
                 RefreshObject(senderAsConnectionInfo);
+            ResizeColumns();
         }
 
         private void ExecutePostSetupActions()
@@ -240,6 +243,7 @@ namespace mRemoteNG.UI.Controls
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             RefreshObject(sender);
+            ResizeColumns();
         }
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)
@@ -285,6 +289,12 @@ namespace mRemoteNG.UI.Controls
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed", ex);
             }
+        }
+
+        private void ResizeColumns()
+        {
+            foreach (OLVColumn column in Columns)
+                column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
         #endregion
     }
