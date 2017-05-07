@@ -253,7 +253,6 @@ namespace mRemoteNG.App
         public static void LoadConnectionsAsync()
         {
             _withDialog = false;
-            _loadUpdate = true;
 
             var t = new Thread(LoadConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
@@ -261,13 +260,12 @@ namespace mRemoteNG.App
         }
 
         private static bool _withDialog;
-        private static bool _loadUpdate;
         private static void LoadConnectionsBGd()
         {
-            LoadConnections(_withDialog, _loadUpdate);
+            LoadConnections(_withDialog);
         }
 
-        public static void LoadConnections(bool withDialog = false, bool update = false)
+        public static void LoadConnections(bool withDialog = false)
         {
             var connectionsLoader = new ConnectionsLoader();
             try
@@ -325,11 +323,11 @@ namespace mRemoteNG.App
                     switch (CTaskDialog.CommandButtonResult)
                     {
                         case 0:
-                            LoadConnections(withDialog, update);
+                            LoadConnections(withDialog);
                             return;
                         case 1:
                             Settings.Default.UseSQLServer = false;
-                            LoadConnections(true, update);
+                            LoadConnections(true);
                             return;
                         default:
                             Application.Exit();
@@ -346,7 +344,7 @@ namespace mRemoteNG.App
                 MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
                 if (connectionsLoader.ConnectionFileName != GetStartupConnectionFileName())
                 {
-                    LoadConnections(withDialog, update);
+                    LoadConnections(withDialog);
                 }
                 else
                 {
