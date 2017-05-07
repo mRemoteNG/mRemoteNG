@@ -1,8 +1,6 @@
 using System;
-using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.App.Info;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
@@ -60,29 +58,12 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
                 mRemoteNG.Settings.Default.Save();
 
-                SavePanelsToXml();
+                new LayoutSettingsSaver().Save();
                 new ExternalAppsSaver().Save(Runtime.ExternalTools);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("Saving settings failed", ex);
-            }
-        }
-
-        private static void SavePanelsToXml()
-        {
-            try
-            {
-                if (Directory.Exists(SettingsFileInfo.SettingsPath) == false)
-                {
-                    Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
-                }
-
-                FrmMain.Default.pnlDock.SaveAsXml(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("SavePanelsToXML failed", ex);
             }
         }
     }
