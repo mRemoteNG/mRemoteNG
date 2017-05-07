@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.App;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -11,31 +10,55 @@ using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
-    public class XmlCredentialManagerUpgrader
+    public class XmlCredentialManagerUpgrader : IDeserializer<string, ConnectionTreeModel>
     {
         private readonly CredentialServiceFacade _credentialsService;
         private readonly string _credentialFilePath;
+        private readonly IDeserializer<string, ConnectionTreeModel> _decoratedDeserializer;
 
-        public XmlCredentialManagerUpgrader(CredentialServiceFacade credentialsService, string credentialFilePath)
+        public XmlCredentialManagerUpgrader(CredentialServiceFacade credentialsService, string credentialFilePath, IDeserializer<string, ConnectionTreeModel> decoratedDeserializer)
         {
             if (credentialsService == null)
                 throw new ArgumentNullException(nameof(credentialsService));
+            if (decoratedDeserializer == null)
+                throw new ArgumentNullException(nameof(decoratedDeserializer));
 
             _credentialsService = credentialsService;
             _credentialFilePath = credentialFilePath;
+            _decoratedDeserializer = decoratedDeserializer;
         }
 
-        public Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager()
+        public ConnectionTreeModel Deserialize(string serializedData)
         {
-            var connectionFileProvider = new FileDataProvider(Runtime.GetStartupConnectionFileName());
-            var xdoc = XDocument.Parse(connectionFileProvider.Load());
+            var serializedDataAsXDoc = EnsureConnectionXmlElementsHaveIds(serializedData);
+            var upgradeMap = UpgradeUserFilesForCredentialManager(serializedDataAsXDoc);
+            var serializedDataWithIds = $"{serializedDataAsXDoc.Declaration}{serializedDataAsXDoc}";
 
-            if (double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value ?? "0") >= 2.7) return null;
-            EnsureConnectionXmlElementsHaveIds(xdoc);
-            connectionFileProvider.Save($"{xdoc.Declaration}\n {xdoc}");
+            var connectionTreeModel = _decoratedDeserializer.Deserialize(serializedDataWithIds);
+
+            if (upgradeMap != null)
+                ApplyCredentialMapping(upgradeMap, connectionTreeModel.GetRecursiveChildList());
+
+            return connectionTreeModel;
+        }
+
+        private XDocument EnsureConnectionXmlElementsHaveIds(string serializedData)
+        {
+            var xdoc = XDocument.Parse(serializedData);
+            xdoc.Declaration = new XDeclaration("1.0", "utf-8", null);
+            var adapter = new ConfConsEnsureConnectionsHaveIds();
+            adapter.EnsureElementsHaveIds(xdoc);
+            return xdoc;
+        }
+
+        public Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager(XDocument xdoc)
+        {
+            if (double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value ?? "0") >= 2.7)
+                return null;
 
             var cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
             var encryptedValue = xdoc.Root?.Attribute("Protected")?.Value;
@@ -86,12 +109,6 @@ namespace mRemoteNG.Config.Serializers.Versioning
         {
             foreach (var credential in harvestedCredentials)
                 repo.CredentialRecords.Add(credential);
-        }
-
-        private void EnsureConnectionXmlElementsHaveIds(XDocument xdoc)
-        {
-            var adapter = new ConfConsEnsureConnectionsHaveIds();
-            adapter.EnsureElementsHaveIds(xdoc);
         }
 
         public void ApplyCredentialMapping(IDictionary<Guid, ICredentialRecord> map, IEnumerable<AbstractConnectionRecord> connectionRecords)

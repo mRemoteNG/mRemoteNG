@@ -13,7 +13,6 @@ using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Putty;
-using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -45,10 +44,7 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
         internal FullscreenHandler _fullscreen { get; set; }
-        
         internal readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
-
 
         private FrmMain()
 		{
@@ -150,8 +146,7 @@ namespace mRemoteNG.UI.Forms
             Runtime.WindowList = new WindowList();
 
             var credentialsService = new CredentialServiceFactory().Build();
-            var credManagerUpgrader = new XmlCredentialManagerUpgrader(credentialsService, _credentialFilePath);
-            var credsAndConsSetup = new CredsAndConsSetup(credentialsService, credManagerUpgrader);
+            var credsAndConsSetup = new CredsAndConsSetup(credentialsService);
             credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
