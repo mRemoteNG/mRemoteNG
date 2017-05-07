@@ -14,6 +14,7 @@ namespace mRemoteNG.Tools
         private readonly ContextMenuStrip _cMen;
         private readonly ToolStripMenuItem _cMenCons;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private static readonly FrmMain FrmMain = FrmMain.Default;
 
         public bool Disposed { get; private set; }
 
@@ -89,7 +90,7 @@ namespace mRemoteNG.Tools
 
         private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (FrmMain.Default.Visible)
+            if (FrmMain.Visible)
                 HideForm();
             else
                 ShowForm();
@@ -97,8 +98,8 @@ namespace mRemoteNG.Tools
 
         private static void ShowForm()
         {
-            FrmMain.Default.Show();
-            FrmMain.Default.WindowState = FrmMain.Default.PreviousWindowState;
+            FrmMain.Show();
+            FrmMain.WindowState = FrmMain.PreviousWindowState;
 
             if (Settings.Default.ShowSystemTrayIcon) return;
             Runtime.NotificationAreaIcon.Dispose();
@@ -107,15 +108,15 @@ namespace mRemoteNG.Tools
 
         private static void HideForm()
         {
-            FrmMain.Default.Hide();
-            FrmMain.Default.PreviousWindowState = FrmMain.Default.WindowState;
+            FrmMain.Hide();
+            FrmMain.PreviousWindowState = FrmMain.WindowState;
         }
 
         private void ConMenItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
             if (!(((ToolStripMenuItem) sender).Tag is ConnectionInfo)) return;
-            if (FrmMain.Default.Visible == false)
+            if (FrmMain.Visible == false)
                 ShowForm();
             _connectionInitiator.OpenConnection((ConnectionInfo) ((ToolStripMenuItem) sender).Tag);
         }
