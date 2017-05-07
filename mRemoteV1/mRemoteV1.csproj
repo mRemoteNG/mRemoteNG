@@ -192,6 +192,7 @@
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializer.cs" />
     <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIds.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
+    <Compile Include="Config\Settings\ExternalAppsSaver.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
     <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />

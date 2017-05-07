@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Config.Settings;
 using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Forms;
@@ -11,20 +12,18 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class ExternalToolsWindow
 	{
-        #region Constructors
-		public ExternalToolsWindow()
+        private readonly ExternalAppsSaver _externalAppsSaver;
+        private ExternalTool _selectedTool;
+
+        public ExternalToolsWindow()
 		{
 			InitializeComponent();
 					
 			WindowType = WindowType.ExternalApps;
 			DockPnl = new DockContent();
+            _externalAppsSaver = new ExternalAppsSaver();
 		}
-        #endregion
-				
-        #region Private Fields
-		private ExternalTool _selectedTool;
-        #endregion
-				
+		
         #region Private Methods
         #region Event Handlers
 		private void ExternalTools_Load(object sender, EventArgs e)
@@ -33,9 +32,9 @@ namespace mRemoteNG.UI.Window
 			UpdateToolsListView();
 		}
 
-        private static void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
+        private void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
 		{
-            Config.Settings.SettingsSaver.SaveExternalAppsToXML();
+            _externalAppsSaver.Save(Runtime.ExternalTools);
 		}
 
         private void NewTool_Click(object sender, EventArgs e)

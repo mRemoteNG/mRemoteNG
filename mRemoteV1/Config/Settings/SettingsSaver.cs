@@ -1,13 +1,11 @@
 using System;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
-using System.Xml;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
-using static mRemoteNG.App.Runtime;
 
 namespace mRemoteNG.Config.Settings
 {
@@ -62,16 +60,16 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
                 mRemoteNG.Settings.Default.Save();
 
-                SavePanelsToXML();
-                SaveExternalAppsToXML();
+                SavePanelsToXml();
+                new ExternalAppsSaver().Save(Runtime.ExternalTools);
             }
             catch (Exception ex)
             {
-                MessageCollector.AddExceptionStackTrace("Saving settings failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("Saving settings failed", ex);
             }
         }
 
-        private static void SavePanelsToXML()
+        private static void SavePanelsToXml()
         {
             try
             {
@@ -84,49 +82,7 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                MessageCollector.AddExceptionStackTrace("SavePanelsToXML failed", ex);
-            }
-        }
-
-        public static void SaveExternalAppsToXML()
-        {
-            try
-            {
-                if (Directory.Exists(SettingsFileInfo.SettingsPath) == false)
-                {
-                    Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
-                }
-
-                var xmlTextWriter =
-                    new XmlTextWriter(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.ExtAppsFilesName,
-                        Encoding.UTF8)
-                    {
-                        Formatting = Formatting.Indented,
-                        Indentation = 4
-                    };
-
-                xmlTextWriter.WriteStartDocument();
-                xmlTextWriter.WriteStartElement("Apps");
-
-                foreach (ExternalTool extA in ExternalTools)
-                {
-                    xmlTextWriter.WriteStartElement("App");
-                    xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName);
-                    xmlTextWriter.WriteAttributeString("FileName", "", extA.FileName);
-                    xmlTextWriter.WriteAttributeString("Arguments", "", extA.Arguments);
-                    xmlTextWriter.WriteAttributeString("WaitForExit", "", Convert.ToString(extA.WaitForExit));
-                    xmlTextWriter.WriteAttributeString("TryToIntegrate", "", Convert.ToString(extA.TryIntegrate));
-                    xmlTextWriter.WriteEndElement();
-                }
-
-                xmlTextWriter.WriteEndElement();
-                xmlTextWriter.WriteEndDocument();
-
-                xmlTextWriter.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddExceptionStackTrace("SaveExternalAppsToXML failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("SavePanelsToXML failed", ex);
             }
         }
     }
