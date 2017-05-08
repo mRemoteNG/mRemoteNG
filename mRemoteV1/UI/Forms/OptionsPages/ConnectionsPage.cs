@@ -5,6 +5,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public partial class ConnectionsPage
     {
+        private FrmMain _frmMain = FrmMain.Default;
+
         public ConnectionsPage()
         {
             InitializeComponent();
@@ -82,12 +84,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.AutoSaveEveryMinutes = (int) numAutoSave.Value;
             if (Settings.Default.AutoSaveEveryMinutes > 0)
             {
-                FrmMain.Default.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes*60000;
-                FrmMain.Default.tmrAutoSave.Enabled = true;
+                _frmMain.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes*60000;
+                _frmMain.tmrAutoSave.Enabled = true;
             }
             else
             {
-                FrmMain.Default.tmrAutoSave.Enabled = false;
+                _frmMain.tmrAutoSave.Enabled = false;
             }
 
             if (radCloseWarnAll.Checked)

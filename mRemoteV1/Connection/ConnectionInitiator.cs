@@ -14,6 +14,8 @@ namespace mRemoteNG.Connection
 {
     public class ConnectionInitiator : IConnectionInitiator
     {
+        private FrmMain _frmMain = FrmMain.Default;
+
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
             OpenConnection(containerInfo, force, null);
@@ -50,7 +52,7 @@ namespace mRemoteNG.Connection
             var connectionWindow = (ConnectionWindow)interfaceControl.FindForm();
             connectionWindow?.Focus();
             var findForm = (ConnectionWindow)interfaceControl.FindForm();
-            findForm?.Show(FrmMain.Default.pnlDock);
+            findForm?.Show(_frmMain.pnlDock);
             var tabPage = (TabPage)interfaceControl.Parent;
             tabPage.Selected = true;
             return true;
@@ -114,7 +116,7 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfo.OpenConnections.Add(newProtocol);
-                FrmMain.Default.SelectedConnection = connectionInfo;
+                _frmMain.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
             {
@@ -168,14 +170,14 @@ namespace mRemoteNG.Connection
             return connectionPanel;
         }
 
-        private static Form SetConnectionForm(Form conForm, string connectionPanel)
+        private Form SetConnectionForm(Form conForm, string connectionPanel)
         {
             var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel);
 
             if (connectionForm == null)
                 connectionForm = Runtime.AddPanel(connectionPanel);
             else
-                ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
+                ((ConnectionWindow)connectionForm).Show(_frmMain.pnlDock);
 
             connectionForm.Focus();
             return connectionForm;
