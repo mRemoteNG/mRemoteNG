@@ -17,8 +17,10 @@ namespace mRemoteNG.Config.Serializers.Versioning
     public class XmlCredentialManagerUpgrader : IDeserializer<string, ConnectionTreeModel>
     {
         private readonly CredentialServiceFacade _credentialsService;
-        private readonly string _credentialFilePath;
         private readonly IDeserializer<string, ConnectionTreeModel> _decoratedDeserializer;
+
+        public string CredentialFilePath { get; set; }
+        
 
         public XmlCredentialManagerUpgrader(CredentialServiceFacade credentialsService, string credentialFilePath, IDeserializer<string, ConnectionTreeModel> decoratedDeserializer)
         {
@@ -28,7 +30,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                 throw new ArgumentNullException(nameof(decoratedDeserializer));
 
             _credentialsService = credentialsService;
-            _credentialFilePath = credentialFilePath;
+            CredentialFilePath = credentialFilePath;
             _decoratedDeserializer = decoratedDeserializer;
         }
 
@@ -95,7 +97,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             var newRepo = xmlRepoFactory.Build(
                 new CredentialRepositoryConfig
                 {
-                    Source = _credentialFilePath,
+                    Source = CredentialFilePath,
                     Title = "Converted Credentials",
                     TypeName = "Xml",
                     Key = newCredRepoKey
