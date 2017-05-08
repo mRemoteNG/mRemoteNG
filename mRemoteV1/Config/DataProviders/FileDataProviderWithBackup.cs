@@ -23,8 +23,7 @@ namespace mRemoteNG.Config.DataProviders
             var backupFileName = FilePath + BackupFileSuffix;
             try
             {
-                // The file that we are attempting to backup doesn't exist... No need to throw in that scenario...
-                if (!File.Exists(FilePath))
+                if (WeDontNeedToBackup())
                     return;
 
                 File.Copy(FilePath, backupFileName, true);
@@ -34,6 +33,11 @@ namespace mRemoteNG.Config.DataProviders
                 Runtime.MessageCollector.AddExceptionStackTrace($"Failed to create backup of file {FilePath}", ex);
                 throw;
             }
+        }
+
+        private bool WeDontNeedToBackup()
+        {
+            return !File.Exists(FilePath);
         }
     }
 }

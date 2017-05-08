@@ -22,7 +22,7 @@ namespace mRemoteNG.Config.DataProviders
             var normalBackupWithoutSuffix = normalBackup.FilePath.Replace(BackupFileSuffix, "");
             try
             {
-                normalBackup.MoveTo(normalBackupWithoutSuffix + timeStamp + BackupFileSuffix);
+                normalBackup.MoveTo(normalBackupWithoutSuffix + "." + timeStamp + BackupFileSuffix);
             }
             catch (Exception ex)
             {

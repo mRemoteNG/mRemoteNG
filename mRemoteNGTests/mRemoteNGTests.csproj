@@ -112,6 +112,9 @@
     <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgsTests.cs" />
+    <Compile Include="Config\DataProviders\FileDataProviderTests.cs" />
+    <Compile Include="Config\DataProviders\FileDataProviderWithBackupTests.cs" />
+    <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackupTests.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializerTests.cs" />
     <Compile Include="Config\CredentialHarvesterTests.cs" />
     <Compile Include="Config\CredentialRecordLoaderTests.cs" />
@@ -166,6 +169,7 @@
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="TestHelpers\ConnectionTreeModelBuilder.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
+    <Compile Include="TestHelpers\FileTestHelpers.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
