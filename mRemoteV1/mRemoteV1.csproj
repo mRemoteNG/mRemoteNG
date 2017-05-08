@@ -457,6 +457,12 @@
     <Compile Include="UI\Forms\CredentialManagerPages\CredentialEditorPage.Designer.cs">
       <DependentUpon>CredentialEditorPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\CredentialManagerUpgradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerUpgradeForm.Designer.cs">
+      <DependentUpon>CredentialManagerUpgradeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\frmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -769,6 +775,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialEditorPage.resx">
       <DependentUpon>CredentialEditorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerUpgradeForm.resx">
+      <DependentUpon>CredentialManagerUpgradeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
