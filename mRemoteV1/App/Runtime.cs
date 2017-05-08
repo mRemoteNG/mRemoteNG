@@ -223,21 +223,14 @@ namespace mRemoteNG.App
                 if(dirname != null)
                     Directory.CreateDirectory(dirname);
 
-                // Use File.Open with FileMode.CreateNew so that we don't overwrite an existing file
-                var fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                using (var xmlTextWriter = new XmlTextWriter(fileStream, System.Text.Encoding.UTF8))
+                var newConnectionsModel = new ConnectionTreeModel();
+                newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
+                var connectionSaver = new ConnectionsSaver
                 {
-                    xmlTextWriter.Formatting = Formatting.Indented;
-                    xmlTextWriter.Indentation = 4;
-                    xmlTextWriter.WriteStartDocument();
-                    xmlTextWriter.WriteStartElement("Connections"); // Do not localize
-                    xmlTextWriter.WriteAttributeString("Name", Language.strConnections);
-                    xmlTextWriter.WriteAttributeString("Export", "", "False");
-                    xmlTextWriter.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY");
-                    xmlTextWriter.WriteAttributeString("ConfVersion", "", "2.5");
-                    xmlTextWriter.WriteEndElement();
-                    xmlTextWriter.WriteEndDocument();
-                }
+                    ConnectionTreeModel = newConnectionsModel,
+                    ConnectionFileName = filename
+                };
+                connectionSaver.SaveConnections();
 
                 // Load config
                 connectionsLoader.ConnectionFileName = filename;
