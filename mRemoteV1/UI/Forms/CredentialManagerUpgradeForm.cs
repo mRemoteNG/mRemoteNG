@@ -29,7 +29,7 @@ namespace mRemoteNG.UI.Forms
             // tab 2
             labelConfConsPathHeaderOnTab2.Text = "Connection file path:";
             labelWhereToSaveCredFile.Text = "Where should we save the new credential file?";
-            labelSetPassword.Text = "Set password";
+            labelSetPassword.Text = "Set password for the credential repository";
             buttonNewRepoPathBrowse.Text = Language.strButtonBrowse;
             buttonBack.Text = "Back";
             buttonExecuteUpgrade.Text = "Upgrade";
@@ -39,6 +39,7 @@ namespace mRemoteNG.UI.Forms
         {
             textBoxConfConPathTab1.Text = ConnectionFilePath;
             textBoxConfConPathTab2.Text = ConnectionFilePath;
+            textBoxCredRepoPath.Text = NewCredentialRepoPath;
         }
 
         private void buttonPerformUpgrade_Click(object sender, EventArgs e)
@@ -46,9 +47,20 @@ namespace mRemoteNG.UI.Forms
             tabControl.SelectedTab = tabPageUpgradeOptions;
         }
 
-        private void buttonBack_Click(object sender, EventArgs e)
+        private void buttonOpenFile_Click(object sender, EventArgs e)
         {
-            tabControl.SelectedTab = tabPageWelcome;
+            var dialogResult = openDifferentFileDialog.ShowDialog(this);
+            if (dialogResult == DialogResult.OK)
+                ConnectionFilePath = openDifferentFileDialog.FileName;
+            SetValues();
+        }
+
+        private void buttonNewFile_Click(object sender, EventArgs e)
+        {
+            var dialogResult = newConnectionsFileDialog.ShowDialog(this);
+            if (dialogResult != DialogResult.OK) return;
+            Runtime.NewConnections(newConnectionsFileDialog.FileName);
+            Close();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -61,7 +73,12 @@ namespace mRemoteNG.UI.Forms
             var dialogResult = newCredRepoPathDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
                 NewCredentialRepoPath = newCredRepoPathDialog.FileName;
-            textBoxCredRepoPath.Text = NewCredentialRepoPath;
+            SetValues();
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabPageWelcome;
         }
     }
 }

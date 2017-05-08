@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialManagerUpgradeForm));
             this.newCredRepoPathDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openDifferentFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tabControl = new mRemoteNG.UI.Controls.HeadlessTabControl();
             this.tabPageWelcome = new System.Windows.Forms.TabPage();
             this.textBoxConfConPathTab1 = new System.Windows.Forms.TextBox();
@@ -40,6 +41,7 @@
             this.buttonNewFile = new System.Windows.Forms.Button();
             this.buttonOpenFile = new System.Windows.Forms.Button();
             this.tabPageUpgradeOptions = new System.Windows.Forms.TabPage();
+            this.textBoxConfConPathTab2 = new System.Windows.Forms.TextBox();
             this.buttonNewRepoPathBrowse = new System.Windows.Forms.Button();
             this.labelWhereToSaveCredFile = new System.Windows.Forms.Label();
             this.textBoxCredRepoPath = new System.Windows.Forms.TextBox();
@@ -48,7 +50,7 @@
             this.newPasswordWithVerification1 = new mRemoteNG.UI.Controls.NewPasswordWithVerification();
             this.labelConfConsPathHeaderOnTab2 = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
-            this.textBoxConfConPathTab2 = new System.Windows.Forms.TextBox();
+            this.newConnectionsFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControl.SuspendLayout();
             this.tabPageWelcome.SuspendLayout();
             this.tabPageUpgradeOptions.SuspendLayout();
@@ -57,6 +59,12 @@
             // newCredRepoPathDialog
             // 
             this.newCredRepoPathDialog.Filter = "Xml|*.xml|All files|*.*";
+            this.newCredRepoPathDialog.Title = "New credential repository path";
+            // 
+            // openDifferentFileDialog
+            // 
+            this.openDifferentFileDialog.Filter = "Xml|*.xml|All files|*.*";
+            this.openDifferentFileDialog.Title = "Choose a connections file";
             // 
             // tabControl
             // 
@@ -67,7 +75,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(420, 364);
+            this.tabControl.Size = new System.Drawing.Size(420, 402);
             this.tabControl.TabIndex = 5;
             // 
             // tabPageWelcome
@@ -83,23 +91,23 @@
             this.tabPageWelcome.Location = new System.Drawing.Point(4, 24);
             this.tabPageWelcome.Name = "tabPageWelcome";
             this.tabPageWelcome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWelcome.Size = new System.Drawing.Size(412, 336);
+            this.tabPageWelcome.Size = new System.Drawing.Size(412, 374);
             this.tabPageWelcome.TabIndex = 0;
             this.tabPageWelcome.Text = "welcomePage";
             // 
             // textBoxConfConPathTab1
             // 
-            this.textBoxConfConPathTab1.Location = new System.Drawing.Point(28, 156);
+            this.textBoxConfConPathTab1.Location = new System.Drawing.Point(30, 177);
             this.textBoxConfConPathTab1.Multiline = true;
             this.textBoxConfConPathTab1.Name = "textBoxConfConPathTab1";
             this.textBoxConfConPathTab1.ReadOnly = true;
-            this.textBoxConfConPathTab1.Size = new System.Drawing.Size(376, 44);
+            this.textBoxConfConPathTab1.Size = new System.Drawing.Size(376, 55);
             this.textBoxConfConPathTab1.TabIndex = 6;
             // 
             // labelConfConsPathHeaderOnTab1
             // 
             this.labelConfConsPathHeaderOnTab1.AutoSize = true;
-            this.labelConfConsPathHeaderOnTab1.Location = new System.Drawing.Point(8, 140);
+            this.labelConfConsPathHeaderOnTab1.Location = new System.Drawing.Point(10, 161);
             this.labelConfConsPathHeaderOnTab1.Name = "labelConfConsPathHeaderOnTab1";
             this.labelConfConsPathHeaderOnTab1.Size = new System.Drawing.Size(104, 13);
             this.labelConfConsPathHeaderOnTab1.TabIndex = 5;
@@ -108,7 +116,7 @@
             // buttonExit
             // 
             this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonExit.Location = new System.Drawing.Point(142, 305);
+            this.buttonExit.Location = new System.Drawing.Point(142, 343);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(139, 23);
             this.buttonExit.TabIndex = 4;
@@ -122,14 +130,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDescriptionOfUpgrade.Location = new System.Drawing.Point(6, 20);
             this.labelDescriptionOfUpgrade.Name = "labelDescriptionOfUpgrade";
-            this.labelDescriptionOfUpgrade.Size = new System.Drawing.Size(400, 120);
+            this.labelDescriptionOfUpgrade.Size = new System.Drawing.Size(400, 141);
             this.labelDescriptionOfUpgrade.TabIndex = 0;
             this.labelDescriptionOfUpgrade.Text = resources.GetString("labelDescriptionOfUpgrade.Text");
             // 
             // buttonPerformUpgrade
             // 
             this.buttonPerformUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonPerformUpgrade.Location = new System.Drawing.Point(142, 218);
+            this.buttonPerformUpgrade.Location = new System.Drawing.Point(142, 256);
             this.buttonPerformUpgrade.Name = "buttonPerformUpgrade";
             this.buttonPerformUpgrade.Size = new System.Drawing.Size(139, 23);
             this.buttonPerformUpgrade.TabIndex = 1;
@@ -140,22 +148,24 @@
             // buttonNewFile
             // 
             this.buttonNewFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonNewFile.Location = new System.Drawing.Point(142, 276);
+            this.buttonNewFile.Location = new System.Drawing.Point(142, 314);
             this.buttonNewFile.Name = "buttonNewFile";
             this.buttonNewFile.Size = new System.Drawing.Size(139, 23);
             this.buttonNewFile.TabIndex = 3;
             this.buttonNewFile.Text = "Create and open new file";
             this.buttonNewFile.UseVisualStyleBackColor = true;
+            this.buttonNewFile.Click += new System.EventHandler(this.buttonNewFile_Click);
             // 
             // buttonOpenFile
             // 
             this.buttonOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonOpenFile.Location = new System.Drawing.Point(142, 247);
+            this.buttonOpenFile.Location = new System.Drawing.Point(142, 285);
             this.buttonOpenFile.Name = "buttonOpenFile";
             this.buttonOpenFile.Size = new System.Drawing.Size(139, 23);
             this.buttonOpenFile.TabIndex = 2;
             this.buttonOpenFile.Text = "Open a different file";
             this.buttonOpenFile.UseVisualStyleBackColor = true;
+            this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
             // 
             // tabPageUpgradeOptions
             // 
@@ -172,9 +182,18 @@
             this.tabPageUpgradeOptions.Location = new System.Drawing.Point(4, 24);
             this.tabPageUpgradeOptions.Name = "tabPageUpgradeOptions";
             this.tabPageUpgradeOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUpgradeOptions.Size = new System.Drawing.Size(412, 336);
+            this.tabPageUpgradeOptions.Size = new System.Drawing.Size(412, 374);
             this.tabPageUpgradeOptions.TabIndex = 1;
             this.tabPageUpgradeOptions.Text = "upgradePage";
+            // 
+            // textBoxConfConPathTab2
+            // 
+            this.textBoxConfConPathTab2.Location = new System.Drawing.Point(27, 32);
+            this.textBoxConfConPathTab2.Multiline = true;
+            this.textBoxConfConPathTab2.Name = "textBoxConfConPathTab2";
+            this.textBoxConfConPathTab2.ReadOnly = true;
+            this.textBoxConfConPathTab2.Size = new System.Drawing.Size(377, 41);
+            this.textBoxConfConPathTab2.TabIndex = 9;
             // 
             // buttonNewRepoPathBrowse
             // 
@@ -197,15 +216,15 @@
             // 
             // textBoxCredRepoPath
             // 
-            this.textBoxCredRepoPath.Location = new System.Drawing.Point(14, 117);
+            this.textBoxCredRepoPath.Location = new System.Drawing.Point(27, 117);
             this.textBoxCredRepoPath.Name = "textBoxCredRepoPath";
-            this.textBoxCredRepoPath.Size = new System.Drawing.Size(390, 20);
+            this.textBoxCredRepoPath.Size = new System.Drawing.Size(377, 20);
             this.textBoxCredRepoPath.TabIndex = 6;
             // 
             // buttonExecuteUpgrade
             // 
             this.buttonExecuteUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonExecuteUpgrade.Location = new System.Drawing.Point(329, 305);
+            this.buttonExecuteUpgrade.Location = new System.Drawing.Point(329, 343);
             this.buttonExecuteUpgrade.Name = "buttonExecuteUpgrade";
             this.buttonExecuteUpgrade.Size = new System.Drawing.Size(75, 23);
             this.buttonExecuteUpgrade.TabIndex = 5;
@@ -215,19 +234,19 @@
             // labelSetPassword
             // 
             this.labelSetPassword.AutoSize = true;
-            this.labelSetPassword.Location = new System.Drawing.Point(13, 160);
+            this.labelSetPassword.Location = new System.Drawing.Point(13, 194);
             this.labelSetPassword.Name = "labelSetPassword";
-            this.labelSetPassword.Size = new System.Drawing.Size(80, 13);
+            this.labelSetPassword.Size = new System.Drawing.Size(201, 13);
             this.labelSetPassword.TabIndex = 4;
-            this.labelSetPassword.Text = "Set a password";
+            this.labelSetPassword.Text = "Set password for the credential repository";
             // 
             // newPasswordWithVerification1
             // 
-            this.newPasswordWithVerification1.Location = new System.Drawing.Point(27, 186);
+            this.newPasswordWithVerification1.Location = new System.Drawing.Point(27, 220);
             this.newPasswordWithVerification1.MinimumSize = new System.Drawing.Size(0, 100);
             this.newPasswordWithVerification1.Name = "newPasswordWithVerification1";
             this.newPasswordWithVerification1.PasswordChar = '\0';
-            this.newPasswordWithVerification1.Size = new System.Drawing.Size(272, 100);
+            this.newPasswordWithVerification1.Size = new System.Drawing.Size(377, 100);
             this.newPasswordWithVerification1.TabIndex = 3;
             this.newPasswordWithVerification1.UseSystemPasswordChar = false;
             // 
@@ -243,7 +262,7 @@
             // buttonBack
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Location = new System.Drawing.Point(248, 305);
+            this.buttonBack.Location = new System.Drawing.Point(248, 343);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 0;
@@ -251,20 +270,16 @@
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
-            // textBoxConfConPathTab2
+            // newConnectionsFileDialog
             // 
-            this.textBoxConfConPathTab2.Location = new System.Drawing.Point(27, 32);
-            this.textBoxConfConPathTab2.Multiline = true;
-            this.textBoxConfConPathTab2.Name = "textBoxConfConPathTab2";
-            this.textBoxConfConPathTab2.ReadOnly = true;
-            this.textBoxConfConPathTab2.Size = new System.Drawing.Size(377, 41);
-            this.textBoxConfConPathTab2.TabIndex = 9;
+            this.newConnectionsFileDialog.Filter = "Xml|*.xml|All files|*.*";
+            this.newConnectionsFileDialog.Title = "Create new connection file";
             // 
             // CredentialManagerUpgradeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 364);
+            this.ClientSize = new System.Drawing.Size(420, 402);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -302,5 +317,7 @@
         private System.Windows.Forms.Label labelConfConsPathHeaderOnTab1;
         private System.Windows.Forms.TextBox textBoxConfConPathTab1;
         private System.Windows.Forms.TextBox textBoxConfConPathTab2;
+        private System.Windows.Forms.OpenFileDialog openDifferentFileDialog;
+        private System.Windows.Forms.SaveFileDialog newConnectionsFileDialog;
     }
 }
