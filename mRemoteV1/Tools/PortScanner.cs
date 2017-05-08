@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Threading;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
@@ -12,29 +13,27 @@ namespace mRemoteNG.Tools
 {
 	public class PortScanner
 	{
-        #region Private Members
-		private List<IPAddress> _ipAddresses = new List<IPAddress>();
-		private List<int> _ports = new List<int>();
+		private readonly List<IPAddress> _ipAddresses = new List<IPAddress>();
+		private readonly List<int> _ports = new List<int>();
 		private Thread _scanThread;
-		private List<ScanHost> _scannedHosts = new List<ScanHost>();
-        #endregion
+		private readonly List<ScanHost> _scannedHosts = new List<ScanHost>();
 				
         #region Public Methods
 	
 		public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2)
 		{
-            IPAddress ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
-            IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
+            var ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
+            var ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
 
-            int portStart = Math.Min(port1, port2);
-			int portEnd = Math.Max(port1, port2);
+            var portStart = Math.Min(port1, port2);
+			var portEnd = Math.Max(port1, port2);
 					
 			_ports.Clear();
-			for (int port = portStart; port <= portEnd; port++)
+			for (var port = portStart; port <= portEnd; port++)
 			{
 				_ports.Add(port);
 			}
-            _ports.AddRange(new[] { ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, ScanHost.VNCPort });
+            _ports.AddRange(new[] { ScanHost.SshPort, ScanHost.TelnetPort, ScanHost.HttpPort, ScanHost.HttpsPort, ScanHost.RloginPort, ScanHost.RdpPort, ScanHost.VncPort });
 
             _ipAddresses.Clear();
             _ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
@@ -59,7 +58,7 @@ namespace mRemoteNG.Tools
 		{
 			try
 			{
-				System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(hostname, Convert.ToInt32(port));
+				var tcpClient = new TcpClient(hostname, Convert.ToInt32(port));
                 tcpClient.Close(); 
 				return true;
 			}
@@ -72,18 +71,18 @@ namespace mRemoteNG.Tools
 
         #region Private Methods
 
-        private int hostCount;
+        private int _hostCount;
         private void ScanAsync()
 		{
 			try
 			{
-			    hostCount = 0;
+			    _hostCount = 0;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...", true);
-                foreach (IPAddress ipAddress in _ipAddresses)
+                foreach (var ipAddress in _ipAddresses)
 				{
-                    BeginHostScanEvent?.Invoke(ipAddress.ToString());
+                    _beginHostScanEvent?.Invoke(ipAddress.ToString());
 
-                    Ping pingSender = new Ping();
+                    var pingSender = new Ping();
 
                     try
                     {
@@ -109,10 +108,10 @@ namespace mRemoteNG.Tools
         {
             // UserState is the IP Address
             var ip = e.UserState.ToString();
-            ScanHost scanHost = new ScanHost(ip);
-            hostCount++;
+            var scanHost = new ScanHost(ip);
+            _hostCount++;
 
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scanning {hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scanning {_hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}", true);
 
             if (e.Error != null)
             {
@@ -139,12 +138,12 @@ namespace mRemoteNG.Tools
                     scanHost.HostName = scanHost.HostIp;
                 }
 
-                foreach (int port in _ports)
+                foreach (var port in _ports)
                 {
                     bool isPortOpen;
                     try
                     {
-                        System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(ip, port);
+                        var tcpClient = new TcpClient(ip, port);
                         isPortOpen = true;
                         scanHost.OpenPorts.Add(port);
                         tcpClient.Close();
@@ -155,33 +154,33 @@ namespace mRemoteNG.Tools
                         scanHost.ClosedPorts.Add(port);
                     }
 
-                    if (port == ScanHost.SSHPort)
+                    if (port == ScanHost.SshPort)
                     {
-                        scanHost.SSH = isPortOpen;
+                        scanHost.Ssh = isPortOpen;
                     }
                     else if (port == ScanHost.TelnetPort)
                     {
                         scanHost.Telnet = isPortOpen;
                     }
-                    else if (port == ScanHost.HTTPPort)
+                    else if (port == ScanHost.HttpPort)
                     {
-                        scanHost.HTTP = isPortOpen;
+                        scanHost.Http = isPortOpen;
                     }
-                    else if (port == ScanHost.HTTPSPort)
+                    else if (port == ScanHost.HttpsPort)
                     {
-                        scanHost.HTTPS = isPortOpen;
+                        scanHost.Https = isPortOpen;
                     }
                     else if (port == ScanHost.RloginPort)
                     {
                         scanHost.Rlogin = isPortOpen;
                     }
-                    else if (port == ScanHost.RDPPort)
+                    else if (port == ScanHost.RdpPort)
                     {
-                        scanHost.RDP = isPortOpen;
+                        scanHost.Rdp = isPortOpen;
                     }
-                    else if (port == ScanHost.VNCPort)
+                    else if (port == ScanHost.VncPort)
                     {
-                        scanHost.VNC = isPortOpen;
+                        scanHost.Vnc = isPortOpen;
                     }
                 }
             }
@@ -201,24 +200,24 @@ namespace mRemoteNG.Tools
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scan of {scanHost.HostIp} ({h}) complete.", true);
 
             _scannedHosts.Add(scanHost);
-            HostScannedEvent?.Invoke(scanHost, hostCount, _ipAddresses.Count);
+            _hostScannedEvent?.Invoke(scanHost, _hostCount, _ipAddresses.Count);
 
             if (_scannedHosts.Count == _ipAddresses.Count)
-                ScanCompleteEvent?.Invoke(_scannedHosts);
+                _scanCompleteEvent?.Invoke(_scannedHosts);
         }
         
-		private static IPAddress[] IpAddressArrayFromRange(IPAddress ipAddress1, IPAddress ipAddress2)
+		private static IEnumerable<IPAddress> IpAddressArrayFromRange(IPAddress ipAddress1, IPAddress ipAddress2)
 		{
-			IPAddress startIpAddress = IpAddressMin(ipAddress1, ipAddress2);
-			IPAddress endIpAddress = IpAddressMax(ipAddress1, ipAddress2);
+			var startIpAddress = IpAddressMin(ipAddress1, ipAddress2);
+			var endIpAddress = IpAddressMax(ipAddress1, ipAddress2);
 					
-			int startAddress = IpAddressToInt32(startIpAddress);
-			int endAddress = IpAddressToInt32(endIpAddress);
-			int addressCount = endAddress - startAddress;
+			var startAddress = IpAddressToInt32(startIpAddress);
+			var endAddress = IpAddressToInt32(endIpAddress);
+			var addressCount = endAddress - startAddress;
 					
-			IPAddress[] addressArray = new IPAddress[addressCount + 1];
-			int index = 0;
-			for (int address = startAddress; address <= endAddress; address++)
+			var addressArray = new IPAddress[addressCount + 1];
+			var index = 0;
+			for (var address = startAddress; address <= endAddress; address++)
 			{
 				addressArray[index] = IpAddressFromInt32(address);
 				index++;
@@ -229,41 +228,27 @@ namespace mRemoteNG.Tools
 				
 		private static IPAddress IpAddressMin(IPAddress ipAddress1, IPAddress ipAddress2)
 		{
-			if (IpAddressCompare(ipAddress1, ipAddress2) < 0) // ipAddress1 < ipAddress2
-			{
-				return ipAddress1;
-			}
-			else
-			{
-				return ipAddress2;
-			}
+		    return IpAddressCompare(ipAddress1, ipAddress2) < 0 ? ipAddress1 : ipAddress2;
 		}
-				
-		private static IPAddress IpAddressMax(IPAddress ipAddress1, IPAddress ipAddress2)
-		{
-			if (IpAddressCompare(ipAddress1, ipAddress2) > 0) // ipAddress1 > ipAddress2
-			{
-				return ipAddress1;
-			}
-			else
-			{
-				return ipAddress2;
-			}
-		}
-				
-		private static int IpAddressCompare(IPAddress ipAddress1, IPAddress ipAddress2)
+
+	    private static IPAddress IpAddressMax(IPAddress ipAddress1, IPAddress ipAddress2)
+	    {
+	        return IpAddressCompare(ipAddress1, ipAddress2) > 0 ? ipAddress1 : ipAddress2;
+	    }
+
+	    private static int IpAddressCompare(IPAddress ipAddress1, IPAddress ipAddress2)
 		{
 			return IpAddressToInt32(ipAddress1) - IpAddressToInt32(ipAddress2);
 		}
 				
 		private static int IpAddressToInt32(IPAddress ipAddress)
 		{
-			if (ipAddress.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork)
+			if (ipAddress.AddressFamily != AddressFamily.InterNetwork)
 			{
 				throw (new ArgumentException("ipAddress"));
 			}
 					
-			byte[] addressBytes = ipAddress.GetAddressBytes(); // in network order (big-endian)
+			var addressBytes = ipAddress.GetAddressBytes(); // in network order (big-endian)
 			if (BitConverter.IsLittleEndian)
 			{
 				Array.Reverse(addressBytes); // to host order (little-endian)
@@ -275,7 +260,7 @@ namespace mRemoteNG.Tools
 				
 		private static IPAddress IpAddressFromInt32(int ipAddress)
 		{
-			byte[] addressBytes = BitConverter.GetBytes(ipAddress); // in host order
+			var addressBytes = BitConverter.GetBytes(ipAddress); // in host order
 			if (BitConverter.IsLittleEndian)
 			{
 				Array.Reverse(addressBytes); // to network order (big-endian)
@@ -288,47 +273,47 @@ namespace mRemoteNG.Tools
 				
         #region Events
 		public delegate void BeginHostScanEventHandler(string host);
-		private BeginHostScanEventHandler BeginHostScanEvent;
+		private BeginHostScanEventHandler _beginHostScanEvent;
 				
 		public event BeginHostScanEventHandler BeginHostScan
 		{
 			add
 			{
-				BeginHostScanEvent = (BeginHostScanEventHandler) Delegate.Combine(BeginHostScanEvent, value);
+				_beginHostScanEvent = (BeginHostScanEventHandler) Delegate.Combine(_beginHostScanEvent, value);
 			}
 			remove
 			{
-				BeginHostScanEvent = (BeginHostScanEventHandler) Delegate.Remove(BeginHostScanEvent, value);
+				_beginHostScanEvent = (BeginHostScanEventHandler) Delegate.Remove(_beginHostScanEvent, value);
 			}
 		}
 				
 		public delegate void HostScannedEventHandler(ScanHost scanHost, int scannedHostCount, int totalHostCount);
-		private HostScannedEventHandler HostScannedEvent;
+		private HostScannedEventHandler _hostScannedEvent;
 				
 		public event HostScannedEventHandler HostScanned
 		{
 			add
 			{
-				HostScannedEvent = (HostScannedEventHandler) Delegate.Combine(HostScannedEvent, value);
+				_hostScannedEvent = (HostScannedEventHandler) Delegate.Combine(_hostScannedEvent, value);
 			}
 			remove
 			{
-				HostScannedEvent = (HostScannedEventHandler) Delegate.Remove(HostScannedEvent, value);
+				_hostScannedEvent = (HostScannedEventHandler) Delegate.Remove(_hostScannedEvent, value);
 			}
 		}
 				
 		public delegate void ScanCompleteEventHandler(List<ScanHost> hosts);
-		private ScanCompleteEventHandler ScanCompleteEvent;
+		private ScanCompleteEventHandler _scanCompleteEvent;
 				
 		public event ScanCompleteEventHandler ScanComplete
 		{
 			add
 			{
-				ScanCompleteEvent = (ScanCompleteEventHandler) Delegate.Combine(ScanCompleteEvent, value);
+				_scanCompleteEvent = (ScanCompleteEventHandler) Delegate.Combine(_scanCompleteEvent, value);
 			}
 			remove
 			{
-				ScanCompleteEvent = (ScanCompleteEventHandler) Delegate.Remove(ScanCompleteEvent, value);
+				_scanCompleteEvent = (ScanCompleteEventHandler) Delegate.Remove(_scanCompleteEvent, value);
 			}
 		}
         #endregion

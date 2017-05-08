@@ -14,7 +14,8 @@ namespace mRemoteNG.Connection.Protocol
     {
         public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
         {
-            ProtocolBase newProtocol = default(ProtocolBase);
+            var newProtocol = default(ProtocolBase);
+            // ReSharper disable once SwitchStatementMissingSomeCases
 			switch (connectionInfo.Protocol)
 			{
 				case ProtocolType.RDP:

@@ -619,7 +619,7 @@
     <Compile Include="Tools\ExternalTool.cs" />
     <Compile Include="Tools\Tools.LocalizedAttributes.cs" />
     <Compile Include="Tools\MiscTools.cs" />
-    <Compile Include="Tools\Tools.PortScan.cs" />
+    <Compile Include="Tools\PortScanner.cs" />
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
     <Compile Include="UI\Forms\TextBox.cs">

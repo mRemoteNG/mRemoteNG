@@ -141,20 +141,19 @@ namespace mRemoteNG.Connection
                 {
                     var ic = t.Controls[0] as InterfaceControl;
                     if (ic == null) continue;
-                    var IC = ic;
-                    if (IC.Info == connectionInfo)
+                    if (ic.Info == connectionInfo)
                     {
-                        return IC;
+                        return ic;
                     }
                 }
             }
             return null;
         }
 
-        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force Force)
+        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
             var connectionPanel = "";
-            if (connectionInfo.Panel == "" || (Force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | Settings.Default.AlwaysShowPanelSelectionDlg)
+            if (connectionInfo.Panel == "" || (force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | Settings.Default.AlwaysShowPanelSelectionDlg)
             {
                 var frmPnl = new frmChoosePanel();
                 if (frmPnl.ShowDialog() == DialogResult.OK)
@@ -230,12 +229,12 @@ namespace mRemoteNG.Connection
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, disconnectedMessage), true);
 
-                var Prot = (ProtocolBase)sender;
-                if (Prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
-                var ReasonCode = disconnectedMessage.Split("\r\n".ToCharArray())[0];
+                var prot = (ProtocolBase)sender;
+                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
+                var reasonCode = disconnectedMessage.Split("\r\n".ToCharArray())[0];
                 var desc = disconnectedMessage.Replace("\r\n", " ");
 
-                if (Convert.ToInt32(ReasonCode) > 3)
+                if (Convert.ToInt32(reasonCode) > 3)
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + desc);
             }
             catch (Exception ex)
@@ -248,22 +247,22 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var Prot = (ProtocolBase)sender;
+                var prot = (ProtocolBase)sender;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent, true);
                 string connDetail;
-                if (Prot.InterfaceControl.Info.Hostname == "" && Prot.InterfaceControl.Info.Protocol == ProtocolType.IntApp)
-                    connDetail = Prot.InterfaceControl.Info.ExtApp;
-                else if (Prot.InterfaceControl.Info.Hostname != "")
-                    connDetail = Prot.InterfaceControl.Info.Hostname;
+                if (prot.InterfaceControl.Info.Hostname == "" && prot.InterfaceControl.Info.Protocol == ProtocolType.IntApp)
+                    connDetail = prot.InterfaceControl.Info.ExtApp;
+                else if (prot.InterfaceControl.Info.Hostname != "")
+                    connDetail = prot.InterfaceControl.Info.Hostname;
                 else
                     connDetail = "UNKNOWN";
 
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, Prot.InterfaceControl.Info.Protocol, Environment.UserName));
-                Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, prot.InterfaceControl.Info.Protocol, Environment.UserName));
+                prot.InterfaceControl.Info.OpenConnections.Remove(prot);
 
-                if (Prot.InterfaceControl.Info.PostExtApp == "") return;
-                var extA = Runtime.GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
-                extA?.Start(Prot.InterfaceControl.Info);
+                if (prot.InterfaceControl.Info.PostExtApp == "") return;
+                var extA = Runtime.GetExtAppByName(prot.InterfaceControl.Info.PostExtApp);
+                extA?.Start(prot.InterfaceControl.Info);
             }
             catch (Exception ex)
             {
@@ -283,9 +282,9 @@ namespace mRemoteNG.Connection
             try
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventErrorOccured, true);
-                var Prot = (ProtocolBase)sender;
+                var prot = (ProtocolBase)sender;
 
-                if (Prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
+                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
                 if (Convert.ToInt32(errorMessage) > -1)
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpProtocol.FatalErrors.GetError(errorMessage)));
             }

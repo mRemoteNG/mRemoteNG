@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Serializers
             switch (_targetProtocolType)
             {
                 case ProtocolType.SSH2:
-                    if (host.SSH)
+                    if (host.Ssh)
                         finalProtocol = ProtocolType.SSH2;
                     break;
                 case ProtocolType.Telnet:
@@ -46,11 +46,11 @@ namespace mRemoteNG.Config.Serializers
                         finalProtocol = ProtocolType.Telnet;
                     break;
                 case ProtocolType.HTTP:
-                    if (host.HTTP)
+                    if (host.Http)
                         finalProtocol = ProtocolType.HTTP;
                     break;
                 case ProtocolType.HTTPS:
-                    if (host.HTTPS)
+                    if (host.Https)
                         finalProtocol = ProtocolType.HTTPS;
                     break;
                 case ProtocolType.Rlogin:
@@ -58,11 +58,11 @@ namespace mRemoteNG.Config.Serializers
                         finalProtocol = ProtocolType.Rlogin;
                     break;
                 case ProtocolType.RDP:
-                    if (host.RDP)
+                    if (host.Rdp)
                         finalProtocol = ProtocolType.RDP;
                     break;
                 case ProtocolType.VNC:
-                    if (host.VNC)
+                    if (host.Vnc)
                         finalProtocol = ProtocolType.VNC;
                     break;
                 default:

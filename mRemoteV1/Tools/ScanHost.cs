@@ -16,22 +16,22 @@ namespace mRemoteNG.Tools
     public class ScanHost
     {
         #region Properties
-        public static int SSHPort { get; set; } = (int)ProtocolSSH1.Defaults.Port;
+        public static int SshPort { get; set; } = (int)ProtocolSSH1.Defaults.Port;
         public static int TelnetPort { get; set; } = (int)ProtocolTelnet.Defaults.Port;
-        public static int HTTPPort { get; set; } = (int)ProtocolHTTP.Defaults.Port;
-        public static int HTTPSPort { get; set; } = (int)ProtocolHTTPS.Defaults.Port;
+        public static int HttpPort { get; set; } = (int)ProtocolHTTP.Defaults.Port;
+        public static int HttpsPort { get; set; } = (int)ProtocolHTTPS.Defaults.Port;
         public static int RloginPort { get; set; } = (int)ProtocolRlogin.Defaults.Port;
-        public static int RDPPort { get; set; } = (int)RdpProtocol.Defaults.Port;
-        public static int VNCPort { get; set; } = (int)ProtocolVNC.Defaults.Port;
+        public static int RdpPort { get; set; } = (int)RdpProtocol.Defaults.Port;
+        public static int VncPort { get; set; } = (int)ProtocolVNC.Defaults.Port;
         public ArrayList OpenPorts { get; set; }
         public ArrayList ClosedPorts { get; set; }
-        public bool RDP { get; set; }
-        public bool VNC { get; set; }
-        public bool SSH { get; set; }
+        public bool Rdp { get; set; }
+        public bool Vnc { get; set; }
+        public bool Ssh { get; set; }
         public bool Telnet { get; set; }
         public bool Rlogin { get; set; }
-        public bool HTTP { get; set; }
-        public bool HTTPS { get; set; }
+        public bool Http { get; set; }
+        public bool Https { get; set; }
         public string HostIp { get; set; }
         public string HostName { get; set; } = "";
         public string HostNameWithoutDomain
@@ -59,7 +59,7 @@ namespace mRemoteNG.Tools
         {
             try
             {
-                return "SSH: " + Convert.ToString(SSH) + " Telnet: " + Convert.ToString(Telnet) + " HTTP: " + Convert.ToString(HTTP) + " HTTPS: " + Convert.ToString(HTTPS) + " Rlogin: " + Convert.ToString(Rlogin) + " RDP: " + Convert.ToString(RDP) + " VNC: " + Convert.ToString(VNC);
+                return "SSH: " + Convert.ToString(Ssh) + " Telnet: " + Convert.ToString(Telnet) + " HTTP: " + Convert.ToString(Http) + " HTTPS: " + Convert.ToString(Https) + " Rlogin: " + Convert.ToString(Rlogin) + " RDP: " + Convert.ToString(Rdp) + " VNC: " + Convert.ToString(Vnc);
             }
             catch (Exception)
             {
@@ -78,13 +78,13 @@ namespace mRemoteNG.Tools
                     Text = !string.IsNullOrEmpty(HostName) ? HostName : HostIp
                 };
 
-                listViewItem.SubItems.Add(BoolToYesNo(SSH));
+                listViewItem.SubItems.Add(BoolToYesNo(Ssh));
                 listViewItem.SubItems.Add(BoolToYesNo(Telnet));
-                listViewItem.SubItems.Add(BoolToYesNo(HTTP));
-                listViewItem.SubItems.Add(BoolToYesNo(HTTPS));
+                listViewItem.SubItems.Add(BoolToYesNo(Http));
+                listViewItem.SubItems.Add(BoolToYesNo(Https));
                 listViewItem.SubItems.Add(BoolToYesNo(Rlogin));
-                listViewItem.SubItems.Add(BoolToYesNo(RDP));
-                listViewItem.SubItems.Add(BoolToYesNo(VNC));
+                listViewItem.SubItems.Add(BoolToYesNo(Rdp));
+                listViewItem.SubItems.Add(BoolToYesNo(Vnc));
 
                 var strOpen = "";
                 var strClosed = "";
@@ -118,13 +118,13 @@ namespace mRemoteNG.Tools
 
         public void SetAllProtocols(bool value)
         {
-            VNC = value;
+            Vnc = value;
             Telnet = value;
-            SSH = value;
+            Ssh = value;
             Rlogin = value;
-            RDP = value;
-            HTTPS = value;
-            HTTP = value;
+            Rdp = value;
+            Https = value;
+            Http = value;
         }
         #endregion
     }

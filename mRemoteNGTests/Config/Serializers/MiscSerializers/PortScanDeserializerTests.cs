@@ -23,7 +23,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             var host = new ScanHost("10.20.30.40")
             {
                 HostName = "server1.domain.com",
-                SSH = true
+                Ssh = true
             };
             _deserializer = new PortScanDeserializer(ProtocolType.SSH2);
             var connectionTreeModel = _deserializer.Deserialize(new[] { host });
