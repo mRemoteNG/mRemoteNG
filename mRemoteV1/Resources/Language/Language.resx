@@ -2547,4 +2547,24 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="Credentials" xml:space="preserve">
     <value>Credentials</value>
   </data>
+  <data name="strUpgrade" xml:space="preserve">
+    <value>Upgrade</value>
+  </data>
+  <data name="strBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="strConnectionFilePath" xml:space="preserve">
+    <value>Connection file path</value>
+  </data>
+  <data name="strCreateAndOpenNewFile" xml:space="preserve">
+    <value>Create and open new file</value>
+  </data>
+  <data name="strOpenADifferentFile" xml:space="preserve">
+    <value>Open a different file</value>
+  </data>
+  <data name="strCredentialManagerUpgradeDescription" xml:space="preserve">
+    <value>In v1.76 we have introduced a credential management system. This feature requires a significant change in how we store and interact with credentials within mRemoteNG. You will be required to perform a one-way upgrade of your mRemoteNG connections file.
+
+This page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade.</value>
+  </data>
 </root>

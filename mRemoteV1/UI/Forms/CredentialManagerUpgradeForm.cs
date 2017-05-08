@@ -19,20 +19,20 @@ namespace mRemoteNG.UI.Forms
         private void ApplyLanguage()
         {
             // tab 1
-            labelDescriptionOfUpgrade.Text = "In v1.76 we have introduced a credential management system. This feature requires a significant change in how we store and interact with credentials within mRemoteNG. You will be required to perform a one-way upgrade of your mRemoteNG connections file.\r\n\r\nThis page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade.";
-            labelConfConsPathHeaderOnTab1.Text = "Connection file path:";
-            buttonPerformUpgrade.Text = "Upgrade";
-            buttonOpenFile.Text = "Open a different file";
-            buttonNewFile.Text = "Create and open new file";
+            labelDescriptionOfUpgrade.Text = Language.strCredentialManagerUpgradeDescription;
+            labelConfConsPathHeaderOnTab1.Text = $"{Language.strConnectionFilePath}:";
+            buttonPerformUpgrade.Text = Language.strUpgrade;
+            buttonOpenFile.Text = Language.strOpenADifferentFile;
+            buttonNewFile.Text = Language.strCreateAndOpenNewFile;
             buttonExit.Text = Language.strMenuExit;
 
             // tab 2
-            labelConfConsPathHeaderOnTab2.Text = "Connection file path:";
+            labelConfConsPathHeaderOnTab2.Text = $"{Language.strConnectionFilePath}:";
             labelWhereToSaveCredFile.Text = "Where should we save the new credential file?";
             labelSetPassword.Text = "Set password for the credential repository";
             buttonNewRepoPathBrowse.Text = Language.strButtonBrowse;
-            buttonBack.Text = "Back";
-            buttonExecuteUpgrade.Text = "Upgrade";
+            buttonBack.Text = Language.strBack;
+            buttonExecuteUpgrade.Text = Language.strUpgrade;
         }
 
         private void SetValues()

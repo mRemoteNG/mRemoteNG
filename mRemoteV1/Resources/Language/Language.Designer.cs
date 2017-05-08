@@ -349,6 +349,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string strBack {
+            get {
+                return ResourceManager.GetString("strBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Browse....
         /// </summary>
         internal static string strButtonBrowse {
@@ -1302,6 +1311,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection file path.
+        /// </summary>
+        internal static string strConnectionFilePath {
+            get {
+                return ResourceManager.GetString("strConnectionFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opening connection failed!.
         /// </summary>
         internal static string strConnectionOpenFailed {
@@ -1485,6 +1503,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create and open new file.
+        /// </summary>
+        internal static string strCreateAndOpenNewFile {
+            get {
+                return ResourceManager.GetString("strCreateAndOpenNewFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credential Editor.
         /// </summary>
         internal static string strCredentialEditor {
@@ -1499,6 +1526,17 @@ namespace mRemoteNG {
         internal static string strCredentialManager {
             get {
                 return ResourceManager.GetString("strCredentialManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In v1.76 we have introduced a credential management system. This feature requires a significant change in how we store and interact with credentials within mRemoteNG. You will be required to perform a one-way upgrade of your mRemoteNG connections file.
+        ///
+        ///This page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade..
+        /// </summary>
+        internal static string strCredentialManagerUpgradeDescription {
+            get {
+                return ResourceManager.GetString("strCredentialManagerUpgradeDescription", resourceCulture);
             }
         }
         
@@ -3826,6 +3864,15 @@ namespace mRemoteNG {
         internal static string strOldConffile {
             get {
                 return ResourceManager.GetString("strOldConffile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open a different file.
+        /// </summary>
+        internal static string strOpenADifferentFile {
+            get {
+                return ResourceManager.GetString("strOpenADifferentFile", resourceCulture);
             }
         }
         
@@ -7052,6 +7099,15 @@ namespace mRemoteNG {
         internal static string strUpdatePortableDownloadComplete {
             get {
                 return ResourceManager.GetString("strUpdatePortableDownloadComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade.
+        /// </summary>
+        internal static string strUpgrade {
+            get {
+                return ResourceManager.GetString("strUpgrade", resourceCulture);
             }
         }
         
