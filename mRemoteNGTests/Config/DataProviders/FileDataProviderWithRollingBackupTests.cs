@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
@@ -32,7 +33,10 @@ namespace mRemoteNGTests.Config.DataProviders
         public void RollingBackupCreatedIfRegularBackupExists()
         {
             for (var i = 0; i < 4; i++)
+            {
                 _dataProvider.Save("");
+                Thread.Sleep(100);
+            }
                 
             var rollingBackupFiles = Directory.GetFiles(_testFileDirectory, _testFileRollingBackup);
             Assert.That(rollingBackupFiles.Length, Is.EqualTo(2));
