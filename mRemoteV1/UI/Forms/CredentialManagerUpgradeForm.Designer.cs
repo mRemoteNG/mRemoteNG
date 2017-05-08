@@ -148,6 +148,7 @@
             // buttonNewFile
             // 
             this.buttonNewFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonNewFile.DialogResult = System.Windows.Forms.DialogResult.Abort;
             this.buttonNewFile.Location = new System.Drawing.Point(142, 314);
             this.buttonNewFile.Name = "buttonNewFile";
             this.buttonNewFile.Size = new System.Drawing.Size(139, 23);
@@ -224,6 +225,7 @@
             // buttonExecuteUpgrade
             // 
             this.buttonExecuteUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonExecuteUpgrade.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonExecuteUpgrade.Location = new System.Drawing.Point(329, 343);
             this.buttonExecuteUpgrade.Name = "buttonExecuteUpgrade";
             this.buttonExecuteUpgrade.Size = new System.Drawing.Size(75, 23);

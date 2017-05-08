@@ -1,19 +1,62 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using mRemoteNG.App;
+using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Versioning;
+using mRemoteNG.Tree;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class CredentialManagerUpgradeForm : Form
+    public partial class CredentialManagerUpgradeForm : Form, IDeserializer<string, ConnectionTreeModel>
     {
-        public string ConnectionFilePath { get; set; } = "C:\\somepath\\confCons.xml";
-        public string NewCredentialRepoPath { get; set; }
+        private string _connectionFilePath;
+        private string _newCredentialRepoPath;
+
+        public XmlCredentialManagerUpgrader DecoratedDeserializer { get; set; }
+
+        public string ConnectionFilePath
+        {
+            get { return _connectionFilePath; }
+            set
+            {
+                _connectionFilePath = value;
+                UpdateUi();
+            }
+        }
+
+        public string NewCredentialRepoPath
+        {
+            get { return _newCredentialRepoPath; }
+            set
+            {
+                _newCredentialRepoPath = value; 
+                UpdateUi();
+            }
+        }
 
         public CredentialManagerUpgradeForm()
         {
             InitializeComponent();
             ApplyLanguage();
-            SetValues();
+            UpdateUi();
+        }
+
+        public ConnectionTreeModel Deserialize(string serializedData)
+        {
+            var xdoc = XDocument.Parse(serializedData);
+            if (!WeCanUpgradeFromThisVersion(xdoc))
+                return DecoratedDeserializer.Deserialize(serializedData);
+
+            var result = ShowDialog();
+            if (result != DialogResult.OK) return new ConnectionTreeModel();
+            DecoratedDeserializer.CredentialFilePath = NewCredentialRepoPath;
+            return DecoratedDeserializer.Deserialize(serializedData);
+        }
+
+        private bool WeCanUpgradeFromThisVersion(XDocument xdoc)
+        {
+            return double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value ?? "999") < 2.8;
         }
 
         private void ApplyLanguage()
@@ -35,7 +78,7 @@ namespace mRemoteNG.UI.Forms
             buttonExecuteUpgrade.Text = Language.strUpgrade;
         }
 
-        private void SetValues()
+        private void UpdateUi()
         {
             textBoxConfConPathTab1.Text = ConnectionFilePath;
             textBoxConfConPathTab2.Text = ConnectionFilePath;
@@ -52,7 +95,6 @@ namespace mRemoteNG.UI.Forms
             var dialogResult = openDifferentFileDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
                 ConnectionFilePath = openDifferentFileDialog.FileName;
-            SetValues();
         }
 
         private void buttonNewFile_Click(object sender, EventArgs e)
@@ -73,7 +115,6 @@ namespace mRemoteNG.UI.Forms
             var dialogResult = newCredRepoPathDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
                 NewCredentialRepoPath = newCredRepoPathDialog.FileName;
-            SetValues();
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
