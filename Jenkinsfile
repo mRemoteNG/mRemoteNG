@@ -15,6 +15,7 @@ node('windows') {
 	
 	stage ('Checkout Branch') {
 		checkout scm
+		bat "del /Q \"${jobDir}\\${testResultFilePrefix}*.xml\""
 	}
 
 	stage ('Restore NuGet Packages') {
@@ -31,15 +32,33 @@ node('windows') {
 	}
 
 	stage ('Run Unit Tests (Normal, w/coverage)') {
-		bat "\"${openCoverPath}\" -register:user -target:\"${nunitConsolePath}\" -targetargs:\"\"${jobDir}\\mRemoteNGTests\\bin\\debug\\mRemoteNGTests.dll\" --result=${testResultFileNormal} --x86\" -output:\"${coverageReport}\""
+		try {
+			bat "\"${openCoverPath}\" -register:user -target:\"${nunitConsolePath}\" -targetargs:\"\"${jobDir}\\mRemoteNGTests\\bin\\debug\\mRemoteNGTests.dll\" --result=${testResultFileNormal} --x86\" -output:\"${coverageReport}\""
+		}
+		catch (ex) {
+			nunit testResultsPattern: "${testResultFilePrefix}*.xml"
+			throw ex
+		}
 	}
 	
 	stage ('Run Unit Tests (Portable)') {
-		bat "\"${nunitConsolePath}\" \"${jobDir}\\mRemoteNGTests\\bin\\debug portable\\mRemoteNGTests.dll\" --result=${testResultFilePortable} --x86"
+		try {
+			bat "\"${nunitConsolePath}\" \"${jobDir}\\mRemoteNGTests\\bin\\debug portable\\mRemoteNGTests.dll\" --result=${testResultFilePortable} --x86"
+		}
+		catch (ex) {
+			nunit testResultsPattern: "${testResultFilePrefix}*.xml"
+			throw ex
+		}
 	}
 	
 	stage ('Run Acceptance Tests') {
-		bat "\"${nunitConsolePath}\" \"${jobDir}\\mRemoteNG.Specs\\bin\\debug\\mRemoteNG.Specs.dll\" --result=${testResultFileAcceptance} --x86"
+		try {
+			bat "\"${nunitConsolePath}\" \"${jobDir}\\mRemoteNG.Specs\\bin\\debug\\mRemoteNG.Specs.dll\" --result=${testResultFileAcceptance} --x86"
+		}
+		catch (ex) {
+			nunit testResultsPattern: "${testResultFilePrefix}*.xml"
+			throw ex
+		}
 	}
 
 	stage ('Upload Reports') {
