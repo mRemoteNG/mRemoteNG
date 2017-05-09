@@ -9,6 +9,7 @@ using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Credential;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -16,8 +17,7 @@ namespace mRemoteNG.Config.Connections
     {
         private readonly string _connectionFilePath;
         private readonly IEnumerable<ICredentialRecord> _credentialRecords;
-        private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath,
-            CredentialsFileInfo.CredentialsFile);
+        private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
 
         public XmlConnectionsLoader(string connectionFilePath, IEnumerable<ICredentialRecord> credentialRecords)
         {
@@ -35,11 +35,16 @@ namespace mRemoteNG.Config.Connections
             var dataProvider = new FileDataProvider(_connectionFilePath);
             var xmlString = dataProvider.Load();
             var credServiceFactory = new CredentialServiceFactory();
-            var deserializer = new XmlCredentialManagerUpgrader(
-                credServiceFactory.Build(),
-                _credentialFilePath,
-                new XmlConnectionsDeserializer(_credentialRecords, PromptForPassword)
-            );
+            var deserializer = new CredentialManagerUpgradeForm
+            {
+                ConnectionFilePath = _connectionFilePath,
+                NewCredentialRepoPath = _credentialFilePath,
+                DecoratedDeserializer = new XmlCredentialManagerUpgrader(
+                    credServiceFactory.Build(),
+                    _credentialFilePath,
+                    new XmlConnectionsDeserializer(_credentialRecords, PromptForPassword)
+                )
+            };
             return deserializer.Deserialize(xmlString);
         }
 
