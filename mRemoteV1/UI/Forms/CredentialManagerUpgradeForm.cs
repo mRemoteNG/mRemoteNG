@@ -63,14 +63,14 @@ namespace mRemoteNG.UI.Forms
         {
             // tab 1
             labelDescriptionOfUpgrade.Text = Language.strCredentialManagerUpgradeDescription;
-            labelConfConsPathHeaderOnTab1.Text = $"{Language.strConnectionFilePath}:";
+            labelConfConsPathHeaderOnTab1.Text = $@"{Language.strConnectionFilePath}:";
             buttonPerformUpgrade.Text = Language.strUpgrade;
             buttonOpenFile.Text = Language.strOpenADifferentFile;
             buttonNewFile.Text = Language.strCreateAndOpenNewFile;
             buttonExit.Text = Language.strMenuExit;
 
             // tab 2
-            labelConfConsPathHeaderOnTab2.Text = $"{Language.strConnectionFilePath}:";
+            labelConfConsPathHeaderOnTab2.Text = $@"{Language.strConnectionFilePath}:";
             labelWhereToSaveCredFile.Text = "Where should we save the new credential file?";
             labelSetPassword.Text = "Set password for the credential repository";
             buttonNewRepoPathBrowse.Text = Language.strButtonBrowse;
