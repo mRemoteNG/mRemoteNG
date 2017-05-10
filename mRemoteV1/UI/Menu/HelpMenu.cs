@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
+using mRemoteNG.Connection;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -139,22 +141,22 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenInfoForum_Click(object sender, EventArgs e)
         {
-            Runtime.GoToForum();
+            WebHelper.GoToUrl(GeneralAppInfo.UrlForum);
         }
 
         private void mMenInfoBugReport_Click(object sender, EventArgs e)
         {
-            Runtime.GoToBugs();
+            WebHelper.GoToUrl(GeneralAppInfo.UrlBugs);
         }
 
         private void mMenInfoWebsite_Click(object sender, EventArgs e)
         {
-            Runtime.GoToWebsite();
+            WebHelper.GoToUrl(GeneralAppInfo.UrlHome);
         }
 
         private void mMenInfoDonate_Click(object sender, EventArgs e)
         {
-            Runtime.GoToDonate();
+            WebHelper.GoToUrl(GeneralAppInfo.UrlDonate);
         }
 
         private void mMenInfoAbout_Click(object sender, EventArgs e)

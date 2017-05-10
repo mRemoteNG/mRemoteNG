@@ -421,40 +421,6 @@ namespace mRemoteNG.App
         #endregion
 
         #region Misc
-        private static void GoToUrl(string url)
-        {
-            var connectionInfo = new ConnectionInfo();
-            connectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
-
-            connectionInfo.Name = "";
-            connectionInfo.Hostname = url;
-            connectionInfo.Protocol = url.StartsWith("https:") ? ProtocolType.HTTPS : ProtocolType.HTTP;
-            connectionInfo.SetDefaultPort();
-            connectionInfo.IsQuickConnect = true;
-            var connectionInitiator = new ConnectionInitiator();
-            connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
-        }
-
-        public static void GoToWebsite()
-        {
-            GoToUrl(GeneralAppInfo.UrlHome);
-        }
-
-        public static void GoToDonate()
-        {
-            GoToUrl(GeneralAppInfo.UrlDonate);
-        }
-
-        public static void GoToForum()
-        {
-            GoToUrl(GeneralAppInfo.UrlForum);
-        }
-
-        public static void GoToBugs()
-        {
-            GoToUrl(GeneralAppInfo.UrlBugs);
-        }
-
         // Override the font of all controls in a container with the default font based on the OS version
         public static void FontOverride(Control ctlParent)
         {
