@@ -333,12 +333,7 @@ namespace mRemoteNG.App
                     saveFileDialog.InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath;
                     saveFileDialog.FileName = ConnectionsFileInfo.DefaultConnectionsFile;
                     saveFileDialog.OverwritePrompt = true;
-
-                    var fileTypes = new List<string>();
-                    fileTypes.AddRange(new[] { Language.strFiltermRemoteXML, "*.xml" });
-                    fileTypes.AddRange(new[] { Language.strFilterAll, "*.*" });
-
-                    saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
+                    saveFileDialog.Filter = $@"{Language.strFiltermRemoteXML}|*.xml|{Language.strFilterAll}|*.*";
 
                     if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
 
