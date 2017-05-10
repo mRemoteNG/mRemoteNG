@@ -561,7 +561,7 @@ namespace mRemoteNG.UI.Controls
             {
                 ResetExternalAppMenu();
 
-                foreach (ExternalTool extA in Runtime.ExternalTools)
+                foreach (ExternalTool extA in Runtime.ExternalToolsService.ExternalTools)
                 {
                     var menuItem = new ToolStripMenuItem
                     {

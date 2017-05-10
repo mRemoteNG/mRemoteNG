@@ -7,7 +7,6 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Security;
 using System.Threading;
@@ -42,7 +41,7 @@ namespace mRemoteNG.App
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static DateTime LastSqlUpdate { get; set; }
-        public static ObservableCollection<ExternalTool> ExternalTools { get; set; } = new ObservableCollection<ExternalTool>();
+        public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
         {
@@ -349,18 +348,6 @@ namespace mRemoteNG.App
                 MessageCollector.AddExceptionMessage(Language.strQuickConnectFailed, ex);
                 return null;
             }
-        }
-        #endregion
-
-        #region External Apps
-        public static ExternalTool GetExtAppByName(string name)
-        {
-            foreach (ExternalTool extA in ExternalTools)
-            {
-                if (extA.DisplayName == name)
-                    return extA;
-            }
-            return null;
         }
         #endregion
     }

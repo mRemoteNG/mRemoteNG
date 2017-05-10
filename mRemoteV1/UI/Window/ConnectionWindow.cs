@@ -597,7 +597,7 @@ namespace mRemoteNG.UI.Window
                 }
 
                 //add ext apps
-                foreach (ExternalTool externalTool in Runtime.ExternalTools)
+                foreach (ExternalTool externalTool in Runtime.ExternalToolsService.ExternalTools)
                 {
                     var nItem = new ToolStripMenuItem
                     {

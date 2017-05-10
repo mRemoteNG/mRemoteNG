@@ -9,12 +9,12 @@ namespace mRemoteNG.Tools
         {
             get
             {
-                List<string> externalToolList = new List<string>();
+                var externalToolList = new List<string>();
 
                 // Add a blank entry to signify that no external tool is selected
                 externalToolList.Add(string.Empty);
 
-                foreach (ExternalTool externalTool in App.Runtime.ExternalTools)
+                foreach (var externalTool in App.Runtime.ExternalToolsService.ExternalTools)
                 {
                     externalToolList.Add(externalTool.DisplayName);
                 }
@@ -23,7 +23,7 @@ namespace mRemoteNG.Tools
             }
         }
 
-        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(System.ComponentModel.ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
             return new StandardValuesCollection(ExternalTools);
         }

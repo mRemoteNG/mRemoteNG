@@ -81,7 +81,7 @@ namespace mRemoteNG.Config.Settings
         private static void SaveExternalApps()
         {
             var externalAppsSaver = new ExternalAppsSaver();
-            externalAppsSaver.Save(Runtime.ExternalTools);
+            externalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
         }
     }
 }

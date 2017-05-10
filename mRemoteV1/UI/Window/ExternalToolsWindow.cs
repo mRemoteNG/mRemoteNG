@@ -34,7 +34,7 @@ namespace mRemoteNG.UI.Window
 
         private void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
 		{
-            _externalAppsSaver.Save(Runtime.ExternalTools);
+            _externalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
 		}
 
         private void NewTool_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				var externalTool = new ExternalTool(Language.strExternalToolDefaultName);
-				Runtime.ExternalTools.Add(externalTool);
+				Runtime.ExternalToolsService.ExternalTools.Add(externalTool);
 				UpdateToolsListView(externalTool);
 				DisplayNameTextBox.Focus();
 			}
@@ -79,7 +79,7 @@ namespace mRemoteNG.UI.Window
 				{
 					var externalTool = listViewItem.Tag as ExternalTool;
 					if (externalTool == null) continue;							
-					Runtime.ExternalTools.Remove(externalTool);
+					Runtime.ExternalToolsService.ExternalTools.Remove(externalTool);
 					listViewItem.Remove();
 				}
 			}
@@ -242,7 +242,7 @@ namespace mRemoteNG.UI.Window
 				ToolsListView.BeginUpdate();
 				ToolsListView.Items.Clear();
 						
-				foreach (var externalTool in Runtime.ExternalTools)
+				foreach (var externalTool in Runtime.ExternalToolsService.ExternalTools)
 				{
 				    var listViewItem = new ListViewItem {Text = externalTool.DisplayName};
 				    listViewItem.SubItems.Add(externalTool.FileName);

@@ -23,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 		    if (InterfaceControl.Info == null) return base.Initialize();
 
-		    _externalTool = Runtime.GetExtAppByName(InterfaceControl.Info.ExtApp);
+		    _externalTool = Runtime.ExternalToolsService.GetExtAppByName(InterfaceControl.Info.ExtApp);
 		    _externalTool.ConnectionInfo = InterfaceControl.Info;
 
 		    return base.Initialize();

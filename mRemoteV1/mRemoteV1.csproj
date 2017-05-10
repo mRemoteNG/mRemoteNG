@@ -297,6 +297,7 @@
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
+    <Compile Include="Tools\ExternalToolsService.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />

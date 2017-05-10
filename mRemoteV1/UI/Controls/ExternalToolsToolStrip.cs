@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Controls
         {
             Initialize();
             ApplyThemes();
-            Runtime.ExternalTools.CollectionChanged += (sender, args) => AddExternalToolsToToolBar();
+            Runtime.ExternalToolsService.ExternalTools.CollectionChanged += (sender, args) => AddExternalToolsToToolBar();
         }
 
         private void Initialize()
@@ -74,7 +74,7 @@ namespace mRemoteNG.UI.Controls
                     Items[index].Dispose();
                 Items.Clear();
 
-                foreach (var tool in Runtime.ExternalTools)
+                foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
                 {
                     var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
                     if (CMenToolbarShowText.Checked)

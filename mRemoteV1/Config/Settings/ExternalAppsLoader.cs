@@ -83,7 +83,7 @@ namespace mRemoteNG.Config.Settings
                 }
 
                 _messageCollector.AddMessage(MessageClass.InformationMsg, $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}", true);
-                Runtime.ExternalTools.Add(extA);
+                Runtime.ExternalToolsService.ExternalTools.Add(extA);
             }
 
             _externalToolsToolStrip.SwitchToolBarText(mRemoteNG.Settings.Default.ExtAppsTBShowText);
