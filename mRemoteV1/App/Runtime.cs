@@ -16,7 +16,6 @@ using System.IO;
 using System.Security;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
@@ -207,21 +206,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                var connectionsLoader = new ConnectionsLoader();
-
-                if (filename == GetDefaultStartupConnectionFileName())
-                {
-                    Settings.Default.LoadConsFromCustomLocation = false;
-                }
-                else
-                {
-                    Settings.Default.LoadConsFromCustomLocation = true;
-                    Settings.Default.CustomConsPath = filename;
-                }
-
-                var dirname = GetDirectoryName(filename);
-                if(dirname != null)
-                    Directory.CreateDirectory(dirname);
+                UpdateCustomConsPathSetting(filename);
 
                 var newConnectionsModel = new ConnectionTreeModel();
                 newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
@@ -233,13 +218,26 @@ namespace mRemoteNG.App
                 connectionSaver.SaveConnections();
 
                 // Load config
-                connectionsLoader.ConnectionFileName = filename;
+                var connectionsLoader = new ConnectionsLoader { ConnectionFileName = filename };
                 ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialProviderCatalog.GetCredentialRecords(), false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
             }
             catch (Exception ex)
             {
                 MessageCollector.AddExceptionMessage(Language.strCouldNotCreateNewConnectionsFile, ex);
+            }
+        }
+
+        private static void UpdateCustomConsPathSetting(string filename)
+        {
+            if (filename == GetDefaultStartupConnectionFileName())
+            {
+                Settings.Default.LoadConsFromCustomLocation = false;
+            }
+            else
+            {
+                Settings.Default.LoadConsFromCustomLocation = true;
+                Settings.Default.CustomConsPath = filename;
             }
         }
 
