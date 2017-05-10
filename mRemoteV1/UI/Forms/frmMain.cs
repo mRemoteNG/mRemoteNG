@@ -17,6 +17,7 @@ using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
+using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Menu;
@@ -44,6 +45,7 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
 
         internal FullscreenHandler Fullscreen { get; set; }
 
@@ -126,8 +128,8 @@ namespace mRemoteNG.UI.Forms
         private void frmMain_Load(object sender, EventArgs e)
         {
             var messageCollector = Runtime.MessageCollector;
-            MessageCollectorSetup.SetupMessageCollector(messageCollector, Runtime.MessageWriters);
-            MessageCollectorSetup.BuildMessageWritersFromSettings(Runtime.MessageWriters);
+            MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
+            MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
 
             Startup.Instance.InitializeProgram(messageCollector);
 

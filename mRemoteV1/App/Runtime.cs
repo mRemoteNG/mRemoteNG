@@ -7,7 +7,6 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Security;
@@ -16,7 +15,6 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
-using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI;
@@ -32,7 +30,6 @@ namespace mRemoteNG.App
         #region Public Properties
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
-        public static IList<IMessageWriter> MessageWriters { get; } = new List<IMessageWriter>();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
