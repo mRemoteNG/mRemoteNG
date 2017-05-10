@@ -33,11 +33,16 @@ namespace mRemoteNG.Config.Connections
             else
                 connectionTreeModel = new ConnectionTreeModel();
 
-		    if (import) return connectionTreeModel;
-		    PuttySessionsManager.Instance.AddSessions();
-            connectionTreeModel.RootNodes.AddRange(PuttySessionsManager.Instance.RootPuttySessionsNodes);
+		    if (!import)
+		        AddPuttySessions(connectionTreeModel);
 
-		    return connectionTreeModel;
+            return connectionTreeModel;
 		}
+
+	    private void AddPuttySessions(ConnectionTreeModel connectionTreeModel)
+	    {
+            PuttySessionsManager.Instance.AddSessions();
+            connectionTreeModel.RootNodes.AddRange(PuttySessionsManager.Instance.RootPuttySessionsNodes);
+        }
     }
 }
