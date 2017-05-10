@@ -22,7 +22,6 @@ using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
 using static System.IO.Path;
 
@@ -48,14 +47,6 @@ namespace mRemoteNG.App
             set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         }
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
-        #endregion
-
-        #region Panels
-        public static Form AddPanel(string title = "", bool noTabber = false)
-        {
-            var panelAdder = new PanelAdder();
-            return panelAdder.AddPanel(title, noTabber);
-        }
         #endregion
 
         #region Connections Loading/Saving

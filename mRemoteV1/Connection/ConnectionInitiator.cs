@@ -6,6 +6,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
@@ -14,7 +15,8 @@ namespace mRemoteNG.Connection
 {
     public class ConnectionInitiator : IConnectionInitiator
     {
-        private FrmMain _frmMain = FrmMain.Default;
+        private readonly FrmMain _frmMain = FrmMain.Default;
+        private readonly PanelAdder _panelAdder = new PanelAdder();
 
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
@@ -175,7 +177,7 @@ namespace mRemoteNG.Connection
             var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel);
 
             if (connectionForm == null)
-                connectionForm = Runtime.AddPanel(connectionPanel);
+                connectionForm = _panelAdder.AddPanel(connectionPanel);
             else
                 ((ConnectionWindow)connectionForm).Show(_frmMain.pnlDock);
 
