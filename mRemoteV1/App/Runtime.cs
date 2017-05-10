@@ -28,6 +28,13 @@ namespace mRemoteNG.App
     public static class Runtime
     {
         #region Public Properties
+
+        #if PORTABLE
+        public static bool IsPortableEdition { get; } = true;
+        #else
+        public static bool IsPortableEdition { get; } = false;
+        #endif
+
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
@@ -80,7 +87,7 @@ namespace mRemoteNG.App
                     }
                     else
                     {
-                        connectionsLoader.ConnectionFileName = GetStartupConnectionFileName();
+                        connectionsLoader.ConnectionFileName = ConnectionsService.GetStartupConnectionFileName();
                     }
 
                     CreateBackupFile(connectionsLoader.ConnectionFileName);
@@ -96,7 +103,7 @@ namespace mRemoteNG.App
                 }
                 else
                 {
-                    if (connectionsLoader.ConnectionFileName == GetDefaultStartupConnectionFileName())
+                    if (connectionsLoader.ConnectionFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
                     {
                         Settings.Default.LoadConsFromCustomLocation = false;
                     }
@@ -139,14 +146,14 @@ namespace mRemoteNG.App
                 }
 
                 MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
-                if (connectionsLoader.ConnectionFileName != GetStartupConnectionFileName())
+                if (connectionsLoader.ConnectionFileName != ConnectionsService.GetStartupConnectionFileName())
                 {
                     LoadConnections(withDialog);
                 }
                 else
                 {
                     MessageBox.Show(FrmMain.Default,
-                        string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)),
+                        string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, ConnectionsService.GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)),
                         @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
                 }
@@ -205,22 +212,6 @@ namespace mRemoteNG.App
             }
         }
 
-        private static string GetDefaultStartupConnectionFileName()
-        {
-            var newPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
-#if !PORTABLE
-			var oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + Application.ProductName + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
-            // ReSharper disable once ConvertIfStatementToReturnStatement
-			if (File.Exists(oldPath)) return oldPath;
-#endif
-            return newPath;
-        }
-
-        public static string GetStartupConnectionFileName()
-        {
-            return Settings.Default.LoadConsFromCustomLocation == false ? GetDefaultStartupConnectionFileName() : Settings.Default.CustomConsPath;
-        }
-
         public static void SaveConnectionsAsync()
         {
             var t = new Thread(SaveConnectionsBGd);
@@ -248,7 +239,7 @@ namespace mRemoteNG.App
                 var connectionsSaver = new ConnectionsSaver();
 
                 if (!Settings.Default.UseSQLServer)
-                    connectionsSaver.ConnectionFileName = GetStartupConnectionFileName();
+                    connectionsSaver.ConnectionFileName = ConnectionsService.GetStartupConnectionFileName();
 
                 connectionsSaver.SaveFilter = new SaveFilter();
                 connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
@@ -303,7 +294,7 @@ namespace mRemoteNG.App
 
                     connectionsSave.SaveConnections();
 
-                    if (saveFileDialog.FileName == GetDefaultStartupConnectionFileName())
+                    if (saveFileDialog.FileName == ConnectionsService.GetDefaultStartupConnectionFileName())
                     {
                         Settings.Default.LoadConsFromCustomLocation = false;
                     }

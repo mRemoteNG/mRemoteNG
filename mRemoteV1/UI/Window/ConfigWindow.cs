@@ -744,7 +744,7 @@ namespace mRemoteNG.UI.Window
                 case "Password":
                     if (rootInfo.Password)
                     {
-                        var passwordName = Settings.Default.UseSQLServer ? Language.strSQLServer.TrimEnd(':') : Path.GetFileName(Runtime.GetStartupConnectionFileName());
+                        var passwordName = Settings.Default.UseSQLServer ? Language.strSQLServer.TrimEnd(':') : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
 
                         var password = MiscTools.PasswordDialog(passwordName);
                         if (password.Length == 0)

@@ -50,16 +50,25 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private static string GetDefaultStartupConnectionFileName()
+        public string GetStartupConnectionFileName()
         {
-            var newPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
-#if !PORTABLE
-            var oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + Application.ProductName + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
-            // ReSharper disable once ConvertIfStatementToReturnStatement
-			if (File.Exists(oldPath)) return oldPath;
-#endif
-            return newPath;
+            return Settings.Default.LoadConsFromCustomLocation == false ? GetDefaultStartupConnectionFileName() : Settings.Default.CustomConsPath;
         }
 
+        public string GetDefaultStartupConnectionFileName()
+        {
+            return Runtime.IsPortableEdition ? GetDefaultStartupConnectionFileNamePortableEdition() : GetDefaultStartupConnectionFileNameNormalEdition();
+        }
+
+        private string GetDefaultStartupConnectionFileNameNormalEdition()
+        {
+            var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + Application.ProductName + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
+            return File.Exists(appDataPath) ? appDataPath : GetDefaultStartupConnectionFileNamePortableEdition();
+        }
+
+        private string GetDefaultStartupConnectionFileNamePortableEdition()
+        {
+            return ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
+        }
     }
 }
