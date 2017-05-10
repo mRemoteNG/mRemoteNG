@@ -31,6 +31,7 @@ namespace mRemoteNG.Config.DataProviders
         {
             try
             {
+                CreateMissingDirectories();
                 File.WriteAllText(FilePath, content);
             }
             catch (Exception ex)
@@ -50,6 +51,13 @@ namespace mRemoteNG.Config.DataProviders
             {
                 Runtime.MessageCollector.AddExceptionStackTrace($"Failed to move file {FilePath} to {newPath}", ex);
             }
+        }
+
+        private void CreateMissingDirectories()
+        {
+            var dirname = Path.GetDirectoryName(FilePath);
+            if (dirname != null)
+                Directory.CreateDirectory(dirname);
         }
     }
 }

@@ -20,11 +20,16 @@ namespace mRemoteNGTests.TestHelpers
 
         public static string NewTempFilePath()
         {
-            var newPath = Path.Combine(Path.GetTempPath(), "mRemoteNGTests", Path.GetRandomFileName());
+            var newPath = Path.Combine(GetAppSpecificTempDirectory(), Path.GetRandomFileName());
             var folderPath = Path.GetDirectoryName(newPath);
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
             return newPath;
+        }
+
+        public static string GetAppSpecificTempDirectory()
+        {
+            return Path.Combine(Path.GetTempPath(), "mRemoteNGTests");
         }
     }
 }

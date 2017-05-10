@@ -22,7 +22,8 @@ namespace mRemoteNGTests.Config.DataProviders
         [TearDown]
         public void Teardown()
         {
-            FileTestHelpers.DeleteTestFile(_testFilePath);
+            var tempFilePath = FileTestHelpers.GetAppSpecificTempDirectory();
+            Directory.Delete(tempFilePath, true);
         }
 
         [Test]
@@ -42,6 +43,17 @@ namespace mRemoteNGTests.Config.DataProviders
             var dataProvider = new FileDataProvider(fileThatShouldntExist);
             var loadedData = dataProvider.Load();
             Assert.That(loadedData, Is.Empty);
+        }
+
+        [Test]
+        public void SaveCreatesDirectoriesThatDontExist()
+        {
+            var folder1 = Guid.NewGuid().ToString();
+            var folder2 = Guid.NewGuid().ToString();
+            var fileThatShouldExist = Path.Combine(FileTestHelpers.GetAppSpecificTempDirectory(), folder1, folder2, Path.GetRandomFileName());
+            _dataProvider.FilePath = fileThatShouldExist;
+            _dataProvider.Save("");
+            Assert.That(File.Exists(fileThatShouldExist), Is.True);
         }
     }
 }
