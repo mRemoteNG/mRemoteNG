@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Window
         public ActiveDirectoryImportWindow()
         {
             InitializeComponent();
-            Runtime.FontOverride(this);
+            FontOverrider.FontOverride(this);
             WindowType = WindowType.ActiveDirectoryImport;
             DockPnl = new DockContent();
             CurrentDomain = Environment.UserDomainName;

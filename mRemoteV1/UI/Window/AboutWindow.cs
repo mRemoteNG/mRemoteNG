@@ -258,7 +258,7 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.About;
 			DockPnl = new DockContent();
 			InitializeComponent();
-			Runtime.FontOverride(this);
+            FontOverrider.FontOverride(this);
 		}
         #endregion
 				

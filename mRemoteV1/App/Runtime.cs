@@ -9,7 +9,6 @@ using mRemoteNG.Tree.Root;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
 using System.Security;
 using System.Threading;
@@ -417,22 +416,6 @@ namespace mRemoteNG.App
                     return extA;
             }
             return null;
-        }
-        #endregion
-
-        #region Misc
-        // Override the font of all controls in a container with the default font based on the OS version
-        public static void FontOverride(Control ctlParent)
-        {
-            foreach (Control tempLoopVarCtlChild in ctlParent.Controls)
-            {
-                var ctlChild = tempLoopVarCtlChild;
-                ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style, ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
-                if (ctlChild.Controls.Count > 0)
-                {
-                    FontOverride(ctlChild);
-                }
-            }
         }
         #endregion
     }

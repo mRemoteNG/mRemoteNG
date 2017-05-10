@@ -1,5 +1,4 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.UI.Forms.OptionsPages;
+﻿using mRemoteNG.UI.Forms.OptionsPages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,7 +28,7 @@ namespace mRemoteNG.UI.Forms
         private void frmOptions_Load(object sender, EventArgs e)
         {
             CompileListOfOptionsPages();
-            Runtime.FontOverride(this);
+            FontOverrider.FontOverride(this);
             SetImageListForListView();
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();

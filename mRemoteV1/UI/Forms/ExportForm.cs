@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -159,7 +158,7 @@ namespace mRemoteNG.UI.Forms
 		public ExportForm()
 		{
 			InitializeComponent();
-			Runtime.FontOverride(this);
+            FontOverrider.FontOverride(this);
 			SelectedFolder = null;
 			SelectedConnection = null;
 			btnOK.Enabled = false;
