@@ -22,7 +22,7 @@ using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Panel;
+using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
 using static System.IO.Path;
 

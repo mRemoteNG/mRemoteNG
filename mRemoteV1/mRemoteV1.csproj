@@ -645,7 +645,7 @@
     <Compile Include="UI\Menu\ViewMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Panel\PanelAdder.cs" />
+    <Compile Include="UI\Panels\PanelAdder.cs" />
     <Compile Include="UI\TaskDialog\CommandButton.cs">
       <SubType>Component</SubType>
     </Compile>

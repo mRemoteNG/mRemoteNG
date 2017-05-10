@@ -8,7 +8,7 @@ using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace mRemoteNG.UI.Panel
+namespace mRemoteNG.UI.Panels
 {
     public class PanelAdder
     {
