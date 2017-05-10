@@ -21,7 +21,7 @@ namespace mRemoteNG.App.Initialization
         public void LoadCredsAndCons()
         {
             if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
-                Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
+                Runtime.ConnectionsService.NewConnections(Runtime.GetStartupConnectionFileName());
 
             LoadCredentialRepositoryList();
             LoadDefaultConnectionCredentials();

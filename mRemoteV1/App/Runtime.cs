@@ -43,48 +43,10 @@ namespace mRemoteNG.App
             set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         }
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
+        public static ConnectionsService ConnectionsService { get; } = new ConnectionsService();
         #endregion
 
         #region Connections Loading/Saving
-        public static void NewConnections(string filename)
-        {
-            try
-            {
-                UpdateCustomConsPathSetting(filename);
-
-                var newConnectionsModel = new ConnectionTreeModel();
-                newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
-                var connectionSaver = new ConnectionsSaver
-                {
-                    ConnectionTreeModel = newConnectionsModel,
-                    ConnectionFileName = filename
-                };
-                connectionSaver.SaveConnections();
-
-                // Load config
-                var connectionsLoader = new ConnectionsLoader { ConnectionFileName = filename };
-                ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialProviderCatalog.GetCredentialRecords(), false);
-                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddExceptionMessage(Language.strCouldNotCreateNewConnectionsFile, ex);
-            }
-        }
-
-        private static void UpdateCustomConsPathSetting(string filename)
-        {
-            if (filename == GetDefaultStartupConnectionFileName())
-            {
-                Settings.Default.LoadConsFromCustomLocation = false;
-            }
-            else
-            {
-                Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath = filename;
-            }
-        }
-
         public static void LoadConnectionsAsync()
         {
             _withDialog = false;
@@ -172,7 +134,7 @@ namespace mRemoteNG.App
                 if (ex is FileNotFoundException && !withDialog)
                 {
                     MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
-                    NewConnections(connectionsLoader.ConnectionFileName);
+                    ConnectionsService.NewConnections(connectionsLoader.ConnectionFileName);
                     return;
                 }
 

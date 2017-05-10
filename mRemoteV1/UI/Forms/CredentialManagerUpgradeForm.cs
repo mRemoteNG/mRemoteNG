@@ -101,7 +101,7 @@ namespace mRemoteNG.UI.Forms
         {
             var dialogResult = newConnectionsFileDialog.ShowDialog(this);
             if (dialogResult != DialogResult.OK) return;
-            Runtime.NewConnections(newConnectionsFileDialog.FileName);
+            Runtime.ConnectionsService.NewConnections(newConnectionsFileDialog.FileName);
             Close();
         }
 

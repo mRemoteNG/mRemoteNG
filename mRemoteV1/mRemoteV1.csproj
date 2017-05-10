@@ -220,6 +220,7 @@
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
     <Compile Include="App\ProgramRoot.cs" />
     <Compile Include="Connection\ConnectionInitiator.cs" />
+    <Compile Include="Connection\ConnectionsService.cs" />
     <Compile Include="Connection\Converter.cs" />
     <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
