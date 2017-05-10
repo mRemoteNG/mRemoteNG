@@ -351,7 +351,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileLoad_Click(object sender, EventArgs e)
         {
-            if (Runtime.IsConnectionsFileLoaded)
+            if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
             {
                 var msgBoxResult = MessageBox.Show(Language.strSaveConnectionsFileBeforeOpeningAnother, Language.strSave, MessageBoxButtons.YesNoCancel);
                 // ReSharper disable once SwitchStatementMissingSomeCases

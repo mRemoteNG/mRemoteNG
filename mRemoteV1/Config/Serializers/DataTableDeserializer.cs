@@ -21,7 +21,7 @@ namespace mRemoteNG.Config.Serializers
         {
             var connectionList = CreateNodesFromTable(table);
             var connectionTreeModel = CreateNodeHierarchy(connectionList, table);
-            Runtime.IsConnectionsFileLoaded = true;
+            Runtime.ConnectionsService.IsConnectionsFileLoaded = true;
             return connectionTreeModel;
         }
 

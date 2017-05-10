@@ -11,6 +11,8 @@ namespace mRemoteNG.Connection
 {
     public class ConnectionsService
     {
+        public bool IsConnectionsFileLoaded { get; set; }
+
         public void NewConnections(string filename)
         {
             try

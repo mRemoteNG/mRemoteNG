@@ -198,7 +198,7 @@ namespace mRemoteNG.Config.Connections
         // .VRE files are for ASG-Remote Desktop (prevously visionapp Remote Desktop)
 		private void SaveToVRE()
 		{
-			if (Runtime.IsConnectionsFileLoaded == false)
+			if (Runtime.ConnectionsService.IsConnectionsFileLoaded == false)
 			{
 				return;
 			}

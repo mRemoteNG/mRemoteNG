@@ -453,7 +453,7 @@ namespace mRemoteNG.UI.Forms
 			var titleBuilder = new StringBuilder(Application.ProductName);
 			const string separator = " - ";
 									
-			if (Runtime.IsConnectionsFileLoaded)
+			if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
 			{
 				if (AreWeUsingSqlServerForSavingConnections)
 				{

@@ -37,7 +37,6 @@ namespace mRemoteNG.App
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
-        public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static DateTime LastSqlUpdate { get; set; }
@@ -229,7 +228,7 @@ namespace mRemoteNG.App
         public static void SaveConnections()
         {
             if (ConnectionTreeModel == null) return;
-            if (!IsConnectionsFileLoaded) return;
+            if (!ConnectionsService.IsConnectionsFileLoaded) return;
 
             try
             {

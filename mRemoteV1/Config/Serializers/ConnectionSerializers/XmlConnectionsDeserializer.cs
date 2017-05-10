@@ -54,7 +54,7 @@ namespace mRemoteNG.Config.Serializers
                 LoadXmlConnectionData(xml);
                 ValidateConnectionFileVersion();
                 if (!import)
-                    Runtime.IsConnectionsFileLoaded = false;
+                    Runtime.ConnectionsService.IsConnectionsFileLoaded = false;
 
                 var rootXmlElement = _xmlDocument.DocumentElement;
                 InitializeRootNode(rootXmlElement);
@@ -86,13 +86,13 @@ namespace mRemoteNG.Config.Serializers
                 AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, _rootNodeInfo);
 
                 if (!import)
-                    Runtime.IsConnectionsFileLoaded = true;
+                    Runtime.ConnectionsService.IsConnectionsFileLoaded = true;
 
                 return connectionTreeModel;
             }
             catch (Exception ex)
             {
-                Runtime.IsConnectionsFileLoaded = false;
+                Runtime.ConnectionsService.IsConnectionsFileLoaded = false;
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strLoadFromXmlFailed, ex);
                 throw;
             }
