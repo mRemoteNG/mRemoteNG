@@ -143,6 +143,8 @@
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
     <Compile Include="Config\CredentialRepositoryListSaver.cs" />
+    <Compile Include="Config\DataProviders\FileBackupCreator.cs" />
+    <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
     <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
     <Compile Include="Config\ILoader.cs" />
     <Compile Include="Config\ISaver.cs" />

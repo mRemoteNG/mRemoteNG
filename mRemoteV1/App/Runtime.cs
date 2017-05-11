@@ -11,6 +11,7 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Security;
@@ -18,8 +19,6 @@ using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
-using static System.IO.Path;
-
 
 namespace mRemoteNG.App
 {
@@ -82,7 +81,11 @@ namespace mRemoteNG.App
                         connectionsLoader.ConnectionFileName = ConnectionsService.GetStartupConnectionFileName();
                     }
 
-                    CreateBackupFile(connectionsLoader.ConnectionFileName);
+                    var backupFileCreator = new FileBackupCreator();
+                    backupFileCreator.CreateBackupFile(connectionsLoader.ConnectionFileName);
+
+                    var backupPruner = new FileBackupPruner();
+                    backupPruner.PruneBackupFiles(connectionsLoader.ConnectionFileName);
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
@@ -160,48 +163,6 @@ namespace mRemoteNG.App
                 InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
                 Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
             };
-        }
-
-        private static void CreateBackupFile(string fileName)
-        {
-            // This intentionally doesn't prune any existing backup files. We just assume the user doesn't want any new ones created.
-            if (Settings.Default.BackupFileKeepCount == 0)
-            {
-                return;
-            }
-
-            try
-            {
-                var backupFileName = string.Format(Settings.Default.BackupFileNameFormat, fileName, DateTime.UtcNow);
-                File.Copy(fileName, backupFileName);
-                PruneBackupFiles(fileName);
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddExceptionMessage(Language.strConnectionsFileBackupFailed, ex, MessageClass.WarningMsg);
-                throw;
-            }
-        }
-
-        private static void PruneBackupFiles(string baseName)
-        {
-            var fileName = GetFileName(baseName);
-            var directoryName = GetDirectoryName(baseName);
-
-            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName)) return;
-
-            var searchPattern = string.Format(Settings.Default.BackupFileNameFormat, fileName, "*");
-            var files = Directory.GetFiles(directoryName, searchPattern);
-
-            if (files.Length <= Settings.Default.BackupFileKeepCount) return;
-
-            Array.Sort(files);
-            Array.Resize(ref files, files.Length - Settings.Default.BackupFileKeepCount);
-
-            foreach (var file in files)
-            {
-                File.Delete(file);
-            }
         }
 
         public static void SaveConnectionsAsync()
