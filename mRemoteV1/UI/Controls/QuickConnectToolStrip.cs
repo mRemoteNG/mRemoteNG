@@ -168,7 +168,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                var connectionInfo = Runtime.CreateQuickConnect(_cmbQuickConnect.Text.Trim(), Converter.StringToProtocol(Settings.Default.QuickConnectProtocol));
+                var connectionInfo = Runtime.ConnectionsService.CreateQuickConnect(_cmbQuickConnect.Text.Trim(), Converter.StringToProtocol(Settings.Default.QuickConnectProtocol));
                 if (connectionInfo == null)
                 {
                     _cmbQuickConnect.Focus();

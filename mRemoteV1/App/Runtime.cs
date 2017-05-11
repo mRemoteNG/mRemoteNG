@@ -1,7 +1,6 @@
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
@@ -266,41 +265,6 @@ namespace mRemoteNG.App
             finally
             {
                 RemoteConnectionsSyncronizer?.Enable();
-            }
-        }
-        #endregion
-
-        #region Opening Connection
-        public static ConnectionInfo CreateQuickConnect(string connectionString, ProtocolType protocol)
-        {
-            try
-            {
-                var uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + connectionString);
-                if (string.IsNullOrEmpty(uri.Host)) return null;
-
-                var newConnectionInfo = new ConnectionInfo();
-                newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
-
-                newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs ? string.Format(Language.strQuick, uri.Host) : uri.Host;
-
-                newConnectionInfo.Protocol = protocol;
-                newConnectionInfo.Hostname = uri.Host;
-                if (uri.Port == -1)
-                {
-                    newConnectionInfo.SetDefaultPort();
-                }
-                else
-                {
-                    newConnectionInfo.Port = uri.Port;
-                }
-                newConnectionInfo.IsQuickConnect = true;
-
-                return newConnectionInfo;
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddExceptionMessage(Language.strQuickConnectFailed, ex);
-                return null;
             }
         }
         #endregion

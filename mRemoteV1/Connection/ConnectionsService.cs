@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -77,6 +78,39 @@ namespace mRemoteNG.Connection
         private string GetDefaultStartupConnectionFileNamePortableEdition()
         {
             return ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
+        }
+
+        public ConnectionInfo CreateQuickConnect(string connectionString, ProtocolType protocol)
+        {
+            try
+            {
+                var uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + connectionString);
+                if (string.IsNullOrEmpty(uri.Host)) return null;
+
+                var newConnectionInfo = new ConnectionInfo();
+                newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
+
+                newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs ? string.Format(Language.strQuick, uri.Host) : uri.Host;
+
+                newConnectionInfo.Protocol = protocol;
+                newConnectionInfo.Hostname = uri.Host;
+                if (uri.Port == -1)
+                {
+                    newConnectionInfo.SetDefaultPort();
+                }
+                else
+                {
+                    newConnectionInfo.Port = uri.Port;
+                }
+                newConnectionInfo.IsQuickConnect = true;
+
+                return newConnectionInfo;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(Language.strQuickConnectFailed, ex);
+                return null;
+            }
         }
     }
 }
