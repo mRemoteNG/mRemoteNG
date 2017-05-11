@@ -44,7 +44,6 @@ namespace mRemoteNG.UI.Forms
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
         private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
 
         internal FullscreenHandler Fullscreen { get; set; }
@@ -168,8 +167,9 @@ namespace mRemoteNG.UI.Forms
 
         private void SetMenuDependencies()
         {
+            var connectionInitiator = new ConnectionInitiator();
             mainFileMenu1.TreeWindow = Windows.TreeForm;
-            mainFileMenu1.ConnectionInitiator = _connectionInitiator;
+            mainFileMenu1.ConnectionInitiator = connectionInitiator;
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;
@@ -180,7 +180,7 @@ namespace mRemoteNG.UI.Forms
             toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
             toolsMenu1.UnlockerFormFactory = _credRepoUnlockerFormFactory;
 
-            _quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
+            _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
 
         private void ApplyThemes()
