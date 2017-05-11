@@ -163,7 +163,6 @@
     <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializer.cs" />
-    <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionNodeSerializer26.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionRetriever.cs" />
     <Compile Include="Config\Serializers\Versioning\IVersionUpgrader.cs" />

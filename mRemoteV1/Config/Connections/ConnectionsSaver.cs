@@ -177,7 +177,7 @@ namespace mRemoteNG.Config.Connections
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
 						
-                var fileDataProvider = new FileDataProviderWithBackup(ConnectionFileName);
+                var fileDataProvider = new FileDataProviderWithRollingBackup(ConnectionFileName);
                 fileDataProvider.Save(xml);
             }
 			catch (Exception ex)
