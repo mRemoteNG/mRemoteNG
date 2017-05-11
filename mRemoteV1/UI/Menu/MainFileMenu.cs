@@ -432,7 +432,7 @@ namespace mRemoteNG.UI.Menu
             var selectedNode = TreeWindow.SelectedNode;
             ContainerInfo importDestination;
             if (selectedNode == null)
-                importDestination = Runtime.ConnectionTreeModel.RootNodes.First();
+                importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
             else
                 importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
             Import.ImportFromFile(importDestination);
@@ -450,7 +450,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileExport_Click(object sender, EventArgs e)
         {
-            Export.ExportToFile(Windows.TreeForm.SelectedNode, Runtime.ConnectionTreeModel);
+            Export.ExportToFile(Windows.TreeForm.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
         }
 
         private void mMenFileExit_Click(object sender, EventArgs e)

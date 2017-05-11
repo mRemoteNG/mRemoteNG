@@ -13,6 +13,12 @@ namespace mRemoteNG.Connection
     {
         public bool IsConnectionsFileLoaded { get; set; }
 
+        public ConnectionTreeModel ConnectionTreeModel
+        {
+            get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
+            set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
+        }
+
         public void NewConnections(string filename)
         {
             try
@@ -30,8 +36,8 @@ namespace mRemoteNG.Connection
 
                 // Load config
                 var connectionsLoader = new ConnectionsLoader { ConnectionFileName = filename };
-                Runtime.ConnectionTreeModel = connectionsLoader.LoadConnections(Runtime.CredentialProviderCatalog.GetCredentialRecords(), false);
-                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = Runtime.ConnectionTreeModel;
+                ConnectionTreeModel = connectionsLoader.LoadConnections(Runtime.CredentialProviderCatalog.GetCredentialRecords(), false);
+                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
             }
             catch (Exception ex)
             {

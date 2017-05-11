@@ -42,11 +42,6 @@ namespace mRemoteNG.App
         private static DateTime LastSqlUpdate { get; set; }
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
-        public static ConnectionTreeModel ConnectionTreeModel
-        {
-            get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
-            set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
-        }
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
         public static ConnectionsService ConnectionsService { get; } = new ConnectionsService();
         #endregion
@@ -92,8 +87,8 @@ namespace mRemoteNG.App
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialProviderCatalog.GetCredentialRecords(), false);
-                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
+                ConnectionsService.ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialProviderCatalog.GetCredentialRecords(), false);
+                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
                 {
@@ -227,7 +222,7 @@ namespace mRemoteNG.App
 
         public static void SaveConnections()
         {
-            if (ConnectionTreeModel == null) return;
+            if (ConnectionsService.ConnectionTreeModel == null) return;
             if (!ConnectionsService.IsConnectionsFileLoaded) return;
 
             try
@@ -240,7 +235,7 @@ namespace mRemoteNG.App
                     connectionsSaver.ConnectionFileName = ConnectionsService.GetStartupConnectionFileName();
 
                 connectionsSaver.SaveFilter = new SaveFilter();
-                connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
+                connectionsSaver.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
                 {
@@ -288,7 +283,7 @@ namespace mRemoteNG.App
                     connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
                     connectionsSave.ConnectionFileName = saveFileDialog.FileName;
                     connectionsSave.SaveFilter = new SaveFilter();
-                    connectionsSave.ConnectionTreeModel = ConnectionTreeModel;
+                    connectionsSave.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
 
                     connectionsSave.SaveConnections();
 

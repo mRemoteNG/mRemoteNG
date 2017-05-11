@@ -719,7 +719,7 @@ namespace mRemoteNG.UI.Controls
         {
             ContainerInfo selectedNodeAsContainer;
             if (_connectionTree.SelectedNode == null)
-                selectedNodeAsContainer = Runtime.ConnectionTreeModel.RootNodes.First();
+                selectedNodeAsContainer = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
             else
                 selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo ?? _connectionTree.SelectedNode.Parent;
             Import.ImportFromFile(selectedNodeAsContainer);
@@ -737,7 +737,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnExportFileClicked(object sender, EventArgs e)
         {
-            Export.ExportToFile(_connectionTree.SelectedNode, Runtime.ConnectionTreeModel);
+            Export.ExportToFile(_connectionTree.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
         }
 
         private void OnAddConnectionClicked(object sender, EventArgs e)

@@ -93,7 +93,7 @@ namespace mRemoteNG.Config.Connections
 				return;
 			}
 
-		    var rootTreeNode = Runtime.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+		    var rootTreeNode = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
 		    UpdateRootNodeTable(rootTreeNode, sqlConnector);
 		    UpdateConnectionsTable(rootTreeNode, sqlConnector);

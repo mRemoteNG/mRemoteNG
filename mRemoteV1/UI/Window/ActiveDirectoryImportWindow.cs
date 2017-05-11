@@ -47,7 +47,7 @@ namespace mRemoteNG.UI.Window
             if (selectedNode != null)
                 importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
             else
-                importDestination = Runtime.ConnectionTreeModel.RootNodes.First();
+                importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
 
             Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
         }
