@@ -25,11 +25,17 @@ namespace mRemoteNG.App
     {
         #region Public Properties
 
-        #if PORTABLE
-        public static bool IsPortableEdition { get; } = true;
-        #else
-        public static bool IsPortableEdition { get; } = false;
-        #endif
+        public static bool IsPortableEdition
+        {
+            get
+            {
+#if PORTABLE
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
 
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
