@@ -18,7 +18,7 @@ namespace mRemoteNGTests.Config.DataProviders
         {
             _testFilePath = FileTestHelpers.NewTempFilePath();
             _testFileDirectory = Path.GetDirectoryName(_testFilePath);
-            _testFileRollingBackup = Path.GetFileName(_testFilePath) + ".*-*-*.backup";
+            _testFileRollingBackup = Path.GetFileName(_testFilePath) + ".*-*.backup";
             _dataProvider = new FileDataProviderWithRollingBackup(_testFilePath);
         }
 
@@ -32,7 +32,7 @@ namespace mRemoteNGTests.Config.DataProviders
         [Test]
         public void RollingBackupCreatedIfRegularBackupExists()
         {
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < 3; i++)
             {
                 _dataProvider.Save("");
                 Thread.Sleep(100);
@@ -43,11 +43,9 @@ namespace mRemoteNGTests.Config.DataProviders
         }
 
         [Test]
-        public void NoRollingBackupCreatedIfRegularBackupDoesntExists()
+        public void NoRollingBackupCreatedIfRegularFileDoesntExists()
         {
-            for (var i = 0; i < 2; i++)
-                _dataProvider.Save("");
-
+            _dataProvider.Save("");
             var rollingBackupFiles = Directory.GetFiles(_testFileDirectory, _testFileRollingBackup);
             Assert.That(rollingBackupFiles.Length, Is.EqualTo(0));
         }
