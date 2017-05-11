@@ -10,6 +10,7 @@ Added more logging/notifications options
 General Changes:
 ----------------
 Improved compatability between environments when building mRemoteNG from source
+#493: Changed backup file name time stamp to use local system time rather than UTC
 
 
 1.75.7006 (2017-xx-xx):
