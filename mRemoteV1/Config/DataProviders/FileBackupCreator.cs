@@ -14,7 +14,7 @@ namespace mRemoteNG.Config.DataProviders
                 if (WeDontNeedToBackup(fileName))
                     return;
 
-                var backupFileName = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, DateTime.UtcNow);
+                var backupFileName = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, DateTime.Now);
                 File.Copy(fileName, backupFileName);
             }
             catch (Exception ex)
