@@ -1,9 +1,7 @@
-﻿using log4net;
+﻿using System;
+using log4net;
 using log4net.Appender;
 using log4net.Config;
-#if !PORTABLE
-using System;
-#endif
 using System.IO;
 using System.Windows.Forms;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -16,10 +14,7 @@ namespace mRemoteNG.App
 
         public ILog Log { get; private set; }
 
-        public static string DefaultLogPath
-        {
-            get { return BuildLogFilePath(); }
-        }
+        public static string DefaultLogPath => BuildLogFilePath();
 
         private Logger()
         {
@@ -52,15 +47,21 @@ namespace mRemoteNG.App
 
         private static string BuildLogFilePath()
         {
-#if !PORTABLE
-			var logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
-#else
-            var logFilePath = Application.StartupPath;
-#endif
+            var logFilePath = Runtime.IsPortableEdition ? GetLogPathPortableEdition() : GetLogPathNormalEdition();
             var logFileName = Path.ChangeExtension(Application.ProductName, ".log");
             if (logFileName == null) return "mRemoteNG.log";
             var logFile = Path.Combine(logFilePath, logFileName);
             return logFile;
+        }
+
+        private static string GetLogPathNormalEdition()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
+        }
+
+        private static string GetLogPathPortableEdition()
+        {
+            return Application.StartupPath;
         }
     }
 }

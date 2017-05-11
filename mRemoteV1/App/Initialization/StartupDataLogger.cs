@@ -90,9 +90,8 @@ namespace mRemoteNG.App.Initialization
         private void LogApplicationData()
         {
             var data = $"{Application.ProductName} {Application.ProductVersion}";
-#if !PORTABLE
-            data += $" {Language.strLabelPortableEdition}";
-#endif
+            if (Runtime.IsPortableEdition)
+                data += $" {Language.strLabelPortableEdition}";
             data += " starting.";
             _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }

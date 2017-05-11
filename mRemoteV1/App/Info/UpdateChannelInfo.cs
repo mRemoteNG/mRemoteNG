@@ -1,4 +1,5 @@
 ﻿using System;
+// ReSharper disable InconsistentNaming
 
 namespace mRemoteNG.App.Info
 {
@@ -26,37 +27,37 @@ namespace mRemoteNG.App.Info
 
         private static string GetChannelFileName(string channel)
         {
-#if PORTABLE
-                /*                                   */
-                /* return PORTABLE update files here */
-                /*                                   */
-                switch (channel)
-                {
-                    case STABLE:
-                        return STABLE_PORTABLE;
-                    case BETA:
-                        return BETA_PORTABLE;
-                    case DEV:
-                        return DEV_PORTABLE;
-                    default:
-                        return STABLE_PORTABLE;
-                }
-#else //NOT portable
-                /*                                    */
-                /* return INSTALLER update files here */
-                /*                                    */
-                switch (channel)
-                {
-                    case STABLE:
-                        return STABLE_MSI;
-                    case BETA:
-                        return BETA_MSI;
-                    case DEV:
-                        return DEV_MSI;
-                    default:
-                        return STABLE_MSI;
-                }
-#endif //endif for PORTABLE
+            return Runtime.IsPortableEdition ? GetChannelFileNamePortableEdition(channel) : GetChannelFileNameNormalEdition(channel);
+        }
+
+        private static string GetChannelFileNameNormalEdition(string channel)
+        {
+            switch (channel)
+            {
+                case STABLE:
+                    return STABLE_MSI;
+                case BETA:
+                    return BETA_MSI;
+                case DEV:
+                    return DEV_MSI;
+                default:
+                    return STABLE_MSI;
+            }
+        }
+
+        private static string GetChannelFileNamePortableEdition(string channel)
+        {
+            switch (channel)
+            {
+                case STABLE:
+                    return STABLE_PORTABLE;
+                case BETA:
+                    return BETA_PORTABLE;
+                case DEV:
+                    return DEV_PORTABLE;
+                default:
+                    return STABLE_PORTABLE;
+            }
         }
 
         private static Uri GetUpdateTxtUri(string channel)
