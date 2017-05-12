@@ -79,8 +79,8 @@ namespace mRemoteNG.Tools
 			    _hostCount = 0;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...", true);
                 foreach (var ipAddress in _ipAddresses)
-				{
-                    _beginHostScanEvent?.Invoke(ipAddress.ToString());
+                {
+                    RaiseBeginHostScanEvent(ipAddress);
 
                     var pingSender = new Ping();
 
@@ -200,10 +200,10 @@ namespace mRemoteNG.Tools
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scan of {scanHost.HostIp} ({h}) complete.", true);
 
             _scannedHosts.Add(scanHost);
-            _hostScannedEvent?.Invoke(scanHost, _hostCount, _ipAddresses.Count);
+            RaiseHostScannedEvent(scanHost, _hostCount, _ipAddresses.Count);
 
             if (_scannedHosts.Count == _ipAddresses.Count)
-                _scanCompleteEvent?.Invoke(_scannedHosts);
+                RaiseScanCompleteEvent(_scannedHosts);
         }
         
 		private static IEnumerable<IPAddress> IpAddressArrayFromRange(IPAddress ipAddress1, IPAddress ipAddress2)
@@ -273,49 +273,25 @@ namespace mRemoteNG.Tools
 				
         #region Events
 		public delegate void BeginHostScanEventHandler(string host);
-		private BeginHostScanEventHandler _beginHostScanEvent;
-				
-		public event BeginHostScanEventHandler BeginHostScan
-		{
-			add
-			{
-				_beginHostScanEvent = (BeginHostScanEventHandler) Delegate.Combine(_beginHostScanEvent, value);
-			}
-			remove
-			{
-				_beginHostScanEvent = (BeginHostScanEventHandler) Delegate.Remove(_beginHostScanEvent, value);
-			}
-		}
-				
-		public delegate void HostScannedEventHandler(ScanHost scanHost, int scannedHostCount, int totalHostCount);
-		private HostScannedEventHandler _hostScannedEvent;
-				
-		public event HostScannedEventHandler HostScanned
-		{
-			add
-			{
-				_hostScannedEvent = (HostScannedEventHandler) Delegate.Combine(_hostScannedEvent, value);
-			}
-			remove
-			{
-				_hostScannedEvent = (HostScannedEventHandler) Delegate.Remove(_hostScannedEvent, value);
-			}
-		}
+	    public event BeginHostScanEventHandler BeginHostScan;
+        private void RaiseBeginHostScanEvent(IPAddress ipAddress)
+        {
+            BeginHostScan?.Invoke(ipAddress.ToString());
+        }
+
+        public delegate void HostScannedEventHandler(ScanHost scanHost, int scannedHostCount, int totalHostCount);
+	    public event HostScannedEventHandler HostScanned;
+	    private void RaiseHostScannedEvent(ScanHost scanHost, int scannedHostCount, int totalHostCount)
+	    {
+            HostScanned?.Invoke(scanHost, scannedHostCount, totalHostCount);
+        }
 				
 		public delegate void ScanCompleteEventHandler(List<ScanHost> hosts);
-		private ScanCompleteEventHandler _scanCompleteEvent;
-				
-		public event ScanCompleteEventHandler ScanComplete
-		{
-			add
-			{
-				_scanCompleteEvent = (ScanCompleteEventHandler) Delegate.Combine(_scanCompleteEvent, value);
-			}
-			remove
-			{
-				_scanCompleteEvent = (ScanCompleteEventHandler) Delegate.Remove(_scanCompleteEvent, value);
-			}
-		}
+	    public event ScanCompleteEventHandler ScanComplete;
+	    private void RaiseScanCompleteEvent(List<ScanHost> hosts)
+	    {
+            ScanComplete?.Invoke(hosts);
+        }
         #endregion
 	}
 }
