@@ -408,6 +408,7 @@
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\DialogFactory.cs" />
     <Compile Include="UI\FontOverrider.cs" />
     <Compile Include="UI\FormExtensions.cs" />
     <Compile Include="UI\Forms\CompositeCredentialRepoUnlockerForm.cs">

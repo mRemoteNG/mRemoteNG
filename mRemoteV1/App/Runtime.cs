@@ -77,7 +77,7 @@ namespace mRemoteNG.App
                 {
                     if (withDialog)
                     {
-                        var loadDialog = ConnectionsLoadDialog();
+                        var loadDialog = DialogFactory.BuildLoadConnectionsDialog();
                         if (loadDialog.ShowDialog() != DialogResult.OK) return;
                         connectionsLoader.ConnectionFileName = loadDialog.FileName;
                     }
@@ -158,16 +158,6 @@ namespace mRemoteNG.App
                     Application.Exit();
                 }
             }
-        }
-
-        private static OpenFileDialog ConnectionsLoadDialog()
-        {
-            return new OpenFileDialog
-            {
-                CheckFileExists = true,
-                InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
-                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
-            };
         }
 
         public static void SaveConnectionsAsync()

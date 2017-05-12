@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialManagerUpgradeForm));
             this.newCredRepoPathDialog = new System.Windows.Forms.SaveFileDialog();
-            this.openDifferentFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tabControl = new mRemoteNG.UI.Controls.HeadlessTabControl();
             this.tabPageWelcome = new System.Windows.Forms.TabPage();
             this.textBoxConfConPathTab1 = new System.Windows.Forms.TextBox();
@@ -60,11 +59,6 @@
             // 
             this.newCredRepoPathDialog.Filter = "Xml|*.xml|All files|*.*";
             this.newCredRepoPathDialog.Title = "New credential repository path";
-            // 
-            // openDifferentFileDialog
-            // 
-            this.openDifferentFileDialog.Filter = "Xml|*.xml|All files|*.*";
-            this.openDifferentFileDialog.Title = "Choose a connections file";
             // 
             // tabControl
             // 
@@ -319,7 +313,6 @@
         private System.Windows.Forms.Label labelConfConsPathHeaderOnTab1;
         private System.Windows.Forms.TextBox textBoxConfConPathTab1;
         private System.Windows.Forms.TextBox textBoxConfConPathTab2;
-        private System.Windows.Forms.OpenFileDialog openDifferentFileDialog;
         private System.Windows.Forms.SaveFileDialog newConnectionsFileDialog;
     }
 }

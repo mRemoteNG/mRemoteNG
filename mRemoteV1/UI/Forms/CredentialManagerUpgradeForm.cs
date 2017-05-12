@@ -92,9 +92,10 @@ namespace mRemoteNG.UI.Forms
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
-            var dialogResult = openDifferentFileDialog.ShowDialog(this);
+            var loadConnectionsDialog = DialogFactory.BuildLoadConnectionsDialog();
+            var dialogResult = loadConnectionsDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
-                ConnectionFilePath = openDifferentFileDialog.FileName;
+                ConnectionFilePath = loadConnectionsDialog.FileName;
         }
 
         private void buttonNewFile_Click(object sender, EventArgs e)
