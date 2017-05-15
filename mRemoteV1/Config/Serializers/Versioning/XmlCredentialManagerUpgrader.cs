@@ -11,6 +11,7 @@ using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using System.Globalization;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
@@ -57,10 +58,20 @@ namespace mRemoteNG.Config.Serializers.Versioning
             return xdoc;
         }
 
+        public static decimal? GetVersionFromConfiguration(XDocument xdoc)
+        {
+            var versionString = xdoc.Root?.Attribute("ConfVersion")?.Value;
+            return versionString != null
+                ? (decimal?)decimal.Parse(versionString, CultureInfo.InvariantCulture)
+                : null;
+        }
+
         public Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager(XDocument xdoc)
         {
-            if (double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value ?? "0") >= 2.7)
+            if ((GetVersionFromConfiguration(xdoc) ?? 0) >= 2.7m)
+            {
                 return null;
+            }
 
             var cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
             var encryptedValue = xdoc.Root?.Attribute("Protected")?.Value;
