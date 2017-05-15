@@ -154,7 +154,13 @@ namespace mRemoteNG.UI.Controls
         {
             //TODO for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
             var property = propertyChangedEventArgs.PropertyName;
-            if (property != "Name" && property != "OpenConnections") return;
+            if (property != nameof(ConnectionInfo.Name)
+                && property != nameof(ConnectionInfo.OpenConnections)
+                && property != nameof(ConnectionInfo.Icon))
+            {
+                return;
+            }
+
             var senderAsConnectionInfo = sender as ConnectionInfo;
             if (senderAsConnectionInfo != null)
                 RefreshObject(senderAsConnectionInfo);
