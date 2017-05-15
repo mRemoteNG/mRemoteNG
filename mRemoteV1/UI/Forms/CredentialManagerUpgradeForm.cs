@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using mRemoteNG.App;
@@ -56,7 +57,8 @@ namespace mRemoteNG.UI.Forms
 
         private bool WeCanUpgradeFromThisVersion(XDocument xdoc)
         {
-            return double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value ?? "999") < 2.8;
+            var versionString = xdoc.Root?.Attribute("ConfVersion")?.Value ?? "999";
+            return double.Parse(versionString, CultureInfo.InvariantCulture) < 2.8;
         }
 
         private void ApplyLanguage()
