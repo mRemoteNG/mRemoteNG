@@ -273,6 +273,16 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ConnectedOverlay {
+            get {
+                object obj = ResourceManager.GetObject("ConnectedOverlay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Connection_Add {
             get {
                 object obj = ResourceManager.GetObject("Connection_Add", resourceCulture);

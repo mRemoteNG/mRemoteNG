@@ -1194,6 +1194,7 @@
     <None Include="Resources\Images\xml.png" />
     <None Include="Resources\Images\keepass_32x32.png" />
     <None Include="Resources\Images\FamFamFam\arrow_left.png" />
+    <None Include="Resources\Images\ConnectedOverlay.png" />
     <Content Include="Resources\Images\FamFamFam\Config.png" />
     <Content Include="Resources\Images\FamFamFam\database.png" />
     <None Include="Resources\Images\FamFamFam\key.png" />
