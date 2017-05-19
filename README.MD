@@ -26,9 +26,9 @@ Currently these protocols are supported:
  * VNC (Virtual Network Computing)
  * ICA (Independent Computing Architecture)
  * SSH (Secure Shell)
- * Telnet (TELecommunication NETwork)
- * HTTP/S (Hypertext Transfer Protocol)
- * Rlogin (Rlogin)
+ * Telnet (Teletype Network)
+ * HTTP/S (Hypertext Transfer Protocol Secure)
+ * Rlogin (Remote Login)
  * RAW
 
 mRemoteNG can be installed on Windows 7 or later.
