@@ -25,7 +25,9 @@ namespace mRemoteNG.Tree
             var nodes = (List<ConnectionInfo>)_connectionTreeModel.GetRecursiveChildList();
             foreach (var node in nodes)
             {
-                if (node.Name.ToLowerInvariant().Contains(searchText.ToLowerInvariant()))
+                if (node.Name.ToLowerInvariant().Contains(searchText.ToLowerInvariant()) ||
+                    node.Description.ToLowerInvariant().Contains(searchText.ToLowerInvariant()) ||
+                    node.Hostname.ToLowerInvariant().Contains(searchText.ToLowerInvariant()))
                     Matches.Add(node);
             }
             if (Matches.Count > 0)
