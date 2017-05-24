@@ -48,7 +48,7 @@ namespace mRemoteNGTests.Tree
         }
 
         [Test]
-        public void SearchByHostnameReturnsAllExpectedMatches()
+        public void SearchByHostname1ReturnsAllExpectedMatches()
         {
             var matches = _nodeSearcher.SearchByName("hostname1");
             Assert.That(matches.ToList(), Is.EquivalentTo(new[] { _folder1 }));
