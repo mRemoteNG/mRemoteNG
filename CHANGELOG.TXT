@@ -6,6 +6,7 @@ Added more logging/notifications options
 #429: Added Czech translation
 #504: Added Korean translation
 #208: Added credential repository feature
+#184: Improve search to include description and hostname fields
 
 General Changes:
 ----------------
