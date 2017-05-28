@@ -56,7 +56,7 @@ namespace mRemoteNG.UI.Forms
 
         private bool WeCanUpgradeFromThisVersion(XDocument xdoc)
         {
-            return double.Parse(xdoc.Root?.Attribute("ConfVersion")?.Value ?? "999") < 2.8;
+            return XmlCredentialManagerUpgrader.GetVersionFromConfiguration(xdoc) < 2.8m;
         }
 
         private void ApplyLanguage()
