@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Container;
 using mRemoteNG.UI.Forms;
 
 
@@ -114,7 +115,7 @@ namespace mRemoteNG.Tools
         private void ConMenItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            if (!(((ToolStripMenuItem) sender).Tag is ConnectionInfo)) return;
+            if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
             if (frmMain.Default.Visible == false)
                 ShowForm();
             _connectionInitiator.OpenConnection((ConnectionInfo) ((ToolStripMenuItem) sender).Tag);
