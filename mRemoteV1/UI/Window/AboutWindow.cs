@@ -253,10 +253,11 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Public Methods
-		public AboutWindow()
+		public AboutWindow(DockContent Panel)
 		{
 			WindowType = WindowType.About;
-			DockPnl = new DockContent();
+		    DockPnl = Panel;
+            DockPnl = new DockContent();
 			InitializeComponent();
 			Runtime.FontOverride(this);
 		}
