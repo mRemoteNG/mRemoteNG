@@ -1,11 +1,13 @@
-1.75.7006 (2017-06-xx):
+1.75.7006 (2017-06-13):
 
 Fixes:
 ------
+#377: Use all space on About page
 #527: Additional protections to avoid problems on update check in heavily firewalled environments
 #530: Fixed issue where using External Tool on existing connection causes creation of 'New Connection' entry
 #531: Update PuTTYNG to 0.69
 #546: Quick Connect from notification area icon displays warning when clicking on a folder (see #334)
+
 
 1.75.7005 (2017-04-27):
 
