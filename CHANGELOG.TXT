@@ -1,3 +1,10 @@
+1.75.7006 (2017-06-14):
+
+Fixes:
+------
+#583: SSH (PuTTYNG) Sessions are not properly integrated into the main mRemoteNG window (Sorry!)
+
+
 1.75.7006 (2017-06-13):
 
 Fixes:
