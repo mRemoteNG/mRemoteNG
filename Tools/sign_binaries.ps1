@@ -1,10 +1,6 @@
 param (
     [string]
     [Parameter(Mandatory=$true)]
-    $SolutionDir,
-
-    [string]
-    [Parameter(Mandatory=$true)]
     $TargetDir,
 
     [string]
