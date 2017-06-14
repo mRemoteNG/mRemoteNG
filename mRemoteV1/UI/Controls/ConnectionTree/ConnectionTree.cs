@@ -20,6 +20,7 @@ namespace mRemoteNG.UI.Controls
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
+        private readonly StatusImageList _statusImageList = new StatusImageList();
 
         public ConnectionInfo SelectedNode
         {
@@ -46,7 +47,6 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-
         public ConnectionTree()
         {
             InitializeComponent();
@@ -54,12 +54,22 @@ namespace mRemoteNG.UI.Controls
             UseOverlays = false;
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                components?.Dispose();
+                _statusImageList?.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+
         #region ConnectionTree Setup
         private void SetupConnectionTreeView()
         {
-            var imageList = new StatusImageList();
-            SmallImageList = imageList.GetImageList();
-            AddColumns(imageList.ImageGetter);
+            SmallImageList = _statusImageList.ImageList;
+            AddColumns(_statusImageList.ImageGetter);
             LinkModelToView();
             SetupDropSink();
             SetEventHandlers();
@@ -144,7 +154,13 @@ namespace mRemoteNG.UI.Controls
         {
             //TODO for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
             var property = propertyChangedEventArgs.PropertyName;
-            if (property != "Name" && property != "OpenConnections") return;
+            if (property != nameof(ConnectionInfo.Name)
+                && property != nameof(ConnectionInfo.OpenConnections)
+                && property != nameof(ConnectionInfo.Icon))
+            {
+                return;
+            }
+
             var senderAsConnectionInfo = sender as ConnectionInfo;
             if (senderAsConnectionInfo != null)
                 RefreshObject(senderAsConnectionInfo);
