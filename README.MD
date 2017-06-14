@@ -10,8 +10,8 @@
 
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
-| Stable | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/master)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/master/) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.74/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.74) |
-| Beta | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/beta_channel)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/beta_channel/) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75Beta3/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75Beta3) |
+| Stable | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/master)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/master/) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75Hotfix7/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75Hotfix7) |
+| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75Hotfix7/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75Hotfix7) |
 | Development | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/develop)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/develop/) | - |
 
 
@@ -26,9 +26,9 @@ Currently these protocols are supported:
  * VNC (Virtual Network Computing)
  * ICA (Independent Computing Architecture)
  * SSH (Secure Shell)
- * Telnet (TELecommunication NETwork)
- * HTTP/S (Hypertext Transfer Protocol)
- * Rlogin (Rlogin)
+ * Telnet (Teletype Network)
+ * HTTP/S (Hypertext Transfer Protocol Secure)
+ * Rlogin (Remote Login)
  * RAW
 
 mRemoteNG can be installed on Windows 7 or later.
