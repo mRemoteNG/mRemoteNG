@@ -27,6 +27,16 @@ function EditBinCertificateIsValid() {
     }
 }
 
+
+function ToolCanBeExecuted {
+    param (
+        [string]
+        $Path
+    )
+    $null = & $Path
+    Write-Output ($LASTEXITCODE -gt 0)
+}
+
 $rootSearchPaths = @(
     [System.IO.Directory]::EnumerateFileSystemEntries("C:\Program Files", "*Visual Studio*", [System.IO.SearchOption]::TopDirectoryOnly),
     [System.IO.Directory]::EnumerateFileSystemEntries("C:\Program Files (x86)", "*Visual Studio*", [System.IO.SearchOption]::TopDirectoryOnly)
@@ -37,7 +47,7 @@ foreach ($searchPath in $rootSearchPaths) {
     foreach ($visualStudioFolder in $searchPath) {
         $matchingExes = [System.IO.Directory]::EnumerateFileSystemEntries($visualStudioFolder, $FileName, [System.IO.SearchOption]::AllDirectories)
         foreach ($matchingExe in $matchingExes) {
-            if (EditBinCertificateIsValid -Path $matchingExe) {
+            if ((EditBinCertificateIsValid -Path $matchingExe) -and (ToolCanBeExecuted -Path $matchingExe)) {
                 return $matchingExe
             }
         }
