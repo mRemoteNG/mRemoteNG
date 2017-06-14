@@ -1,4 +1,4 @@
-Version: 1.75.7006.16707
+Version: 1.00.7006.16707
 dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Hotfix6/mRemoteNG-Installer-1.75.7006.16707.msi
 clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Hotfix6/CHANGELOG.TXT
 CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
