@@ -14,10 +14,18 @@ Improved compatability between environments when building mRemoteNG from source
 #493: Changed backup file name time stamp to use local system time rather than UTC
 
 
-1.75.7006 (2017-06-xx):
+1.75.7007 (2017-06-14):
 
 Fixes:
 ------
+#583: SSH (PuTTYNG) Sessions are not properly integrated into the main mRemoteNG window (Sorry!)
+
+
+1.75.7006 (2017-06-13):
+
+Fixes:
+------
+#377: Use all space on About page
 #527: Additional protections to avoid problems on update check in heavily firewalled environments
 #530: Fixed issue where using External Tool on existing connection causes creation of 'New Connection' entry
 #531: Update PuTTYNG to 0.69
