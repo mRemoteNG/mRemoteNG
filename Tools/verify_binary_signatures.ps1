@@ -5,13 +5,24 @@ param (
 
     [string]
     [Parameter(Mandatory=$true)]
-    $ConfigurationName
+    $ConfigurationName,
+    
+    [string]
+    # The code signing certificate to use when signing the files.
+    $CertificatePath
 )
 
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 
-# Sign MSI if we are building a release version and the certificate is available
+#  validate release versions and if the certificate is available
 if ($ConfigurationName -match "Release") {
+	
+		if ($CertificatePath -eq "" -or !(Test-Path -Path $CertificatePath -PathType Leaf))
+		{
+	    Write-Output "Certificate is not present - files likely not signed - we won't verify file signatures."
+	    return
+		}
+		
     Write-Output "Verifying signature of binaries"
     Write-Output "Getting files from path: $TargetDir"
     $signableFiles = Get-ChildItem -Path $TargetDir -Recurse | ?{$_.Extension -match "dll|exe|msi"}
