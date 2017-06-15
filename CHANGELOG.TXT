@@ -1,3 +1,11 @@
+1.75.7008 (2017-06-15):
+
+Fixes:
+------
+#589: MSI doesn't update with newer PuTTYNG version that fixes #583 (Again, Sorry!)
+Minor updates to the installer build
+
+
 1.75.7007 (2017-06-14):
 
 Fixes:
