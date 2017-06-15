@@ -10,8 +10,8 @@
 
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
-| Stable | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/master)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/master/) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75Hotfix7/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75Hotfix7) |
-| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75Hotfix7/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75Hotfix7) |
+| Stable | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/master)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/master/) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75Hotfix8/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75Hotfix8) |
+| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75Hotfix8/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75Hotfix8) |
 | Development | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/develop)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/develop/) | - |
 
 
