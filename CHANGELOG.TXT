@@ -1,3 +1,11 @@
+NO.RELEASE (2017-06-15):
+
+Fixed in previous releases:
+---------------------------
+#466: Installer still failing on Win7 for updates - v1.75.7005 (Hotifx 5)
+#462: Remove no longer used files from portable version - v1.75.7003 (Hotfix 4)
+
+
 1.75.7008 (2017-06-15):
 
 Fixes:
