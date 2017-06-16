@@ -14,6 +14,13 @@ Improved compatability between environments when building mRemoteNG from source
 #493: Changed backup file name time stamp to use local system time rather than UTC
 
 
+1.75.7009 (2017-07-XX):
+
+Fixes:
+------
+#596: Exception when launching ExtTool without a connection selected
+
+
 NO.RELEASE (2017-06-15):
 
 Fixed in previous releases:
