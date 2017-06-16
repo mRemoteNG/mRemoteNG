@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -96,10 +97,14 @@ namespace mRemoteNG.UI.Controls
             var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
             var selectedTreeNode = Windows.TreeForm.SelectedNode;
-            if (selectedTreeNode != null && (selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection | selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession))
+            if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection |
+                selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
                 extA.Start(selectedTreeNode);
             else
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "No connection was selected, external tool may return errors.", true);
                 extA.Start();
+            }
         }
 
         public void SwitchToolBarText(bool show)
