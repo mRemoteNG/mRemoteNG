@@ -41,6 +41,7 @@ namespace mRemoteNG.UI.Window
         private ToolStripMenuItem _propertyGridContextMenuReset;
         private ToolStripSeparator _toolStripSeparator1;
         private FilteredPropertyGrid _pGrid;
+        private ThemeManager _themeManager;
 
         private AbstractConnectionRecord _selectedTreeNode;
         public AbstractConnectionRecord SelectedTreeNode
@@ -609,17 +610,23 @@ namespace mRemoteNG.UI.Window
 		
 		private void ApplyTheme()
 		{
-			_pGrid.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			_pGrid.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			_pGrid.ViewBackColor = ThemeManager.ActiveTheme.ConfigPanelBackgroundColor;
-			_pGrid.ViewForeColor = ThemeManager.ActiveTheme.ConfigPanelTextColor;
-			_pGrid.LineColor = ThemeManager.ActiveTheme.ConfigPanelGridLineColor;
-			_pGrid.HelpBackColor = ThemeManager.ActiveTheme.ConfigPanelHelpBackgroundColor;
-			_pGrid.HelpForeColor = ThemeManager.ActiveTheme.ConfigPanelHelpTextColor;
-			_pGrid.CategoryForeColor = ThemeManager.ActiveTheme.ConfigPanelCategoryTextColor;
-		}
-		
-		private void AddToolStripItems()
+            _pGrid.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            _pGrid.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
+            _pGrid.ViewForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
+            _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemBorder;
+            _pGrid.HelpBackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            _pGrid.HelpForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListHeader.Foreground;
+            _pGrid.CommandsDisabledLinkColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemDisabled.Foreground;
+            _pGrid.CommandsBackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemDisabled.Background;
+            _pGrid.CommandsForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemDisabled.Foreground;
+
+
+
+        }
+
+        private void AddToolStripItems()
 		{
 			try
 			{
@@ -673,8 +680,10 @@ namespace mRemoteNG.UI.Window
 		private void Config_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
-			ThemeManager.ThemeChanged += ApplyTheme;
-			ApplyTheme();
+            //Theme changer in progress
+            //ThemeManager.ThemeChanged += ApplyTheme;
+            _themeManager = ThemeManager.getInstance();
+            ApplyTheme();
 			AddToolStripItems();
 			_pGrid.HelpVisible = Settings.Default.ShowConfigHelpText;
 		}

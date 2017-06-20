@@ -1,128 +1,154 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-
+using System.Linq;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Themes
 {
-	public static class ThemeManager
+    //Main class to manage the themes 
+    //Singleton 
+    public class ThemeManager
     {
         #region Private Variables
 
-        private static ThemeInfo _activeTheme;
-        private static bool _activeThemeHandlerSet;
+        private  ThemeInfo _activeTheme; 
+        private  Hashtable themes; 
+        private static ThemeManager themeInstance = null;
+        #endregion
+
+
+        #region Constructors
+        private ThemeManager()
+        {
+            LoadThemes();
+            ActiveTheme = DefaultTheme;
+        }
+
         #endregion
 
         #region Public Methods
-        public static ThemeInfo LoadTheme(string themeName, bool setActive = true)
-		{
-			var loadedTheme = DefaultTheme;
-			if (!string.IsNullOrEmpty(themeName))
-			{
-				foreach (var theme in LoadThemes())
-				{
-				    if (theme.Name != themeName) continue;
-				    loadedTheme = theme;
-				    break;
-				}
-			}
-				
-			if (setActive)
-			{
-				ActiveTheme = loadedTheme;
-			}
-			return loadedTheme;
-		}
-			
-		public static List<ThemeInfo> LoadThemes()
-		{
-		    var themes = new List<ThemeInfo> {DefaultTheme};
-		    try
-			{
-				themes.AddRange(ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.SettingsFileInfo.SettingsPath, App.Info.SettingsFileInfo.ThemesFileName)));
-			}
-			catch (FileNotFoundException)
-			{
-			}
-				
-			return themes;
-		}
+        public static ThemeManager getInstance()
+        {
+            if(themeInstance == null)
+            {
+                themeInstance = new ThemeManager();
+            }
+            return themeInstance;
+        }
 
-        private static void SaveThemes(List<ThemeInfo> themes)
-		{
-			themes.Remove(DefaultTheme);
-			ThemeSerializer.SaveToXmlFile(themes, Path.Combine(App.Info.SettingsFileInfo.SettingsPath, App.Info.SettingsFileInfo.ThemesFileName));
-		}
 
-        private static void SaveThemes(ThemeInfo[] themes)
-		{
-			SaveThemes(new List<ThemeInfo>(themes));
-		}
-			
-		public static void SaveThemes(BindingList<ThemeInfo> themes)
-		{
-			var themesArray = new ThemeInfo[themes.Count - 1 + 1];
-			themes.CopyTo(themesArray, 0);
-			SaveThemes(themesArray);
-		}
+        public ThemeInfo LoadTheme(string themeLocation)
+        {
+            return null;
+        }
+
+        //THe manager precharges all the themes at once
+        public  List<ThemeInfo> LoadThemes()
+        {
+            if (themes == null)
+            {
+                themes = new Hashtable();
+
+                //Load the embedded themes
+                ThemeInfo vs2003 = new ThemeInfo("Vs2003", new VS2003Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2003);
+                themes.Add("Vs2003", vs2003);
+                ThemeInfo vs2005 = new ThemeInfo("Vs2005", new VS2005Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2005);
+                themes.Add("Vs2005", vs2005);
+                ThemeInfo vs2012Light = new ThemeInfo("vs2012Light", new VS2012LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012);
+                themes.Add("vs2012Light", vs2012Light);
+                ThemeInfo vs2012Dark = new ThemeInfo("vs2012Dark", new VS2012DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012);
+                themes.Add("vs2012Dark", vs2012Dark);
+                ThemeInfo vs2012Blue = new ThemeInfo("vs2012Blue", new VS2012BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012);
+                themes.Add("vs2012Blue", vs2012Blue);
+                ThemeInfo vs2013Light = new ThemeInfo("vs2013Light", new VS2013LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013);
+                themes.Add("vs2013Light", vs2013Light);
+                ThemeInfo vs2013Dark = new ThemeInfo("vs2013Dark", new VS2013DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013);
+                themes.Add("vs2013Dark", vs2013Dark);
+                ThemeInfo vs2013Blue = new ThemeInfo("vs2013Blue", new VS2013BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013);
+                themes.Add("vs2013Blue", vs2013Blue);
+                ThemeInfo vs2015Light = new ThemeInfo("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015);
+                themes.Add("vs2015Light", vs2015Light);
+                ThemeInfo vs2015Dark = new ThemeInfo("vs2015Dark", new VS2015DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015);
+                themes.Add("vs2015Dark", vs2015Dark);
+                ThemeInfo vs2015Blue = new ThemeInfo("vs2005Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015);
+                themes.Add("vs2005Blue", vs2015Blue);
+
+                //Load the files in theme folder 
+                string[] themeFiles =  Directory.GetFiles(Path.Combine(App.Info.SettingsFileInfo.SettingsPath, "themes"),"*.vstheme");
+
+                foreach (string themeFile in themeFiles)
+                {
+                    ThemeInfo extTheme = ThemeSerializer.LoadFromXmlFile(themeFile);
+                    if (extTheme.Theme != null)
+                    {
+                        themes.Add(extTheme.Name, extTheme);
+                    }
+                }
+
+
+            }
+
+
+
+
+            return themes.Keys.OfType<ThemeInfo>().ToList();
+
+        }
+
+        private void SaveThemes(List<ThemeInfo> themes)
+        {
+
+        }
+
+        private void SaveThemes(ThemeInfo[] themes)
+        {
+        }
+
+        public void SaveThemes(BindingList<ThemeInfo> themes)
+        {
+        }
         #endregion
-			
+
         #region Events
-		public delegate void ThemeChangedEventHandler();
-		private static ThemeChangedEventHandler ThemeChangedEvent;
-			
-		public static event ThemeChangedEventHandler ThemeChanged
-		{
-			add { ThemeChangedEvent = (ThemeChangedEventHandler) System.Delegate.Combine(ThemeChangedEvent, value); }
-			remove { ThemeChangedEvent = (ThemeChangedEventHandler) System.Delegate.Remove(ThemeChangedEvent, value); }
-		}
+        public delegate void ThemeChangedEventHandler();
+        private ThemeChangedEventHandler ThemeChangedEvent;
 
-        private static void NotifyThemeChanged(object sender, PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == "Name")
-			{
-				return;
-			}
-		    ThemeChangedEvent?.Invoke();
-		}
+        public  event ThemeChangedEventHandler ThemeChanged
+        {
+            add { ThemeChangedEvent = (ThemeChangedEventHandler)System.Delegate.Combine(ThemeChangedEvent, value); }
+            remove { ThemeChangedEvent = (ThemeChangedEventHandler)System.Delegate.Remove(ThemeChangedEvent, value); }
+        }
+
+        private  void NotifyThemeChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Name")
+            {
+                return;
+            }
+            ThemeChangedEvent?.Invoke();
+        }
         #endregion
-			
-        #region Properties
-        public static ThemeInfo DefaultTheme { get; } = new ThemeInfo(Language.strDefaultTheme);
 
-        public static ThemeInfo ActiveTheme
+        #region Properties
+        public ThemeInfo DefaultTheme 
+        {
+			get
+			{
+                return (ThemeInfo) themes["vs2015light"];
+			} 
+		}
+
+        public ThemeInfo ActiveTheme
 		{
 			get
 			{
-			    return _activeTheme ?? DefaultTheme;
+                return _activeTheme;
 			}
 			set
 			{
-				// We need to set ActiveTheme to the new theme to make sure it references the right object.
-				// However, if both themes have the same properties, we don't need to raise a notification event.
-				var needNotify = true;
-				if (_activeTheme != null)
-				{
-					if (_activeTheme.Equals(value))
-					{
-						needNotify = false;
-					}
-				}
-					
-				if (_activeThemeHandlerSet)
-				{
-				    if (_activeTheme != null) _activeTheme.PropertyChanged -= NotifyThemeChanged;
-				}
-					
-				_activeTheme = value;
-					
-				_activeTheme.PropertyChanged += NotifyThemeChanged;
-				_activeThemeHandlerSet = true;
-					
-				if (needNotify)
-				{
-					NotifyThemeChanged(_activeTheme, new PropertyChangedEventArgs(""));
-				}
+                _activeTheme = value;
 			}
 		}
         #endregion

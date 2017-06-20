@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Themes;
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Window
@@ -17,7 +18,7 @@ namespace mRemoteNG.UI.Window
 	{
 	    private readonly ConnectionContextMenu _contextMenu;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-
+        private ThemeManager _themeManager;
 
         public ConnectionInfo SelectedNode
         {
@@ -50,7 +51,9 @@ namespace mRemoteNG.UI.Window
         private void Tree_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
-            Themes.ThemeManager.ThemeChanged += ApplyTheme;
+            //work on the theme change
+            _themeManager = ThemeManager.getInstance();
+            //Themes.ThemeManager.ThemeChanged += ApplyTheme;
             ApplyTheme();
 
             txtSearch.Multiline = true;
@@ -76,19 +79,19 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyTheme()
         {
-            msMain.BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-            msMain.ForeColor = Themes.ThemeManager.ActiveTheme.ToolbarTextColor;
-            olvConnections.BackColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelBackgroundColor;
-            olvConnections.ForeColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTextColor;
-            //tvConnections.LineColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTreeLineColor;
-            BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-            txtSearch.BackColor = Themes.ThemeManager.ActiveTheme.SearchBoxBackgroundColor;
-            txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
+            vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            //Treelistview need to be manually themed
+            olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.Background;
+            olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.Foreground;
+            olvConnections.SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.SelectedItemActive.Background;
+            olvConnections.SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.SelectedItemActive.Foreground;
+            olvConnections.UnfocusedSelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.SelectedItemInactive.Background;
+            olvConnections.UnfocusedSelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.SelectedItemInactive.Foreground;
         }
         #endregion
 
         #region ConnectionTree
-	    private void SetConnectionTreeEventHandlers()
+        private void SetConnectionTreeEventHandlers()
 	    {
 	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(MessageBox.Show);
             olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
@@ -188,7 +191,6 @@ namespace mRemoteNG.UI.Window
         #region Search
         private void txtSearch_GotFocus(object sender, EventArgs e)
 		{
-			txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextColor;
 			if (txtSearch.Text == Language.strSearchPrompt)
 				txtSearch.Text = "";
 		}
@@ -196,7 +198,6 @@ namespace mRemoteNG.UI.Window
         private void txtSearch_LostFocus(object sender, EventArgs e)
 		{
             if (txtSearch.Text != "") return;
-            txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
             txtSearch.Text = Language.strSearchPrompt;
 		}
 

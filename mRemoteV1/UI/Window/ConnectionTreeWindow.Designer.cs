@@ -35,6 +35,10 @@ namespace mRemoteNG.UI.Window
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
+            //
+            //Theming support
+            //
+            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             // 
             // olvConnections
             // 
@@ -194,5 +198,6 @@ namespace mRemoteNG.UI.Window
 
         private System.ComponentModel.IContainer components;
         private Controls.ConnectionTree olvConnections;
+        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
     }
 }

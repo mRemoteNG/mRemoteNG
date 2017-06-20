@@ -17,8 +17,7 @@ namespace mRemoteNG.UI.Controls
 
         public ExternalToolsToolStrip()
         {
-            Initialize();
-            ApplyThemes();
+            Initialize(); 
             Runtime.ExternalToolsService.ExternalTools.CollectionChanged += (sender, args) => AddExternalToolsToToolBar();
         }
 
@@ -55,11 +54,8 @@ namespace mRemoteNG.UI.Controls
             CMenToolbarShowText.Click += cMenToolbarShowText_Click;
         }
 
-        private void ApplyThemes()
-        {
-            BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-            ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-        }
+ 
+
 
         #region Ext Apps Toolbar
         private void cMenToolbarShowText_Click(object sender, EventArgs e)

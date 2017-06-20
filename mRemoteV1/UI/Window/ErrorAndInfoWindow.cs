@@ -7,13 +7,14 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
-
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
 	public partial class ErrorAndInfoWindow : BaseWindow
 	{
         private ControlLayout _layout = ControlLayout.Vertical;
+        private ThemeManager _themeManager;
 
         public DockContent PreviousActiveForm { get; set; }
 
@@ -26,6 +27,8 @@ namespace mRemoteNG.UI.Window
             WindowType = WindowType.ErrorsAndInfos;
             DockPnl = panel;
             InitializeComponent();
+            _themeManager = ThemeManager.getInstance();
+            ApplyTheme();
             LayoutVertical();
             FillImageList();
         }
@@ -47,7 +50,15 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Private Methods
-		private void FillImageList()
+        private void ApplyTheme()
+        {
+            lvErrorCollector.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+
+        }
+
+
+        private void FillImageList()
 		{
 		    imgListMC.Images.Add(Resources.brick);
 			imgListMC.Images.Add(Resources.InformationSmall);
@@ -183,14 +194,18 @@ namespace mRemoteNG.UI.Window
 						break;
 					case MessageClass.WarningMsg:
 						pbError.Image = Resources.Warning;
-						pnlErrorMsg.BackColor = Color.Gold;
-						txtMsgText.BackColor = Color.Gold;
-						break;
+						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Foreground;
+                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Background;
+                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Foreground;
+                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Background;
+                        break;
 					case MessageClass.ErrorMsg:
 						pbError.Image = Resources._Error;
-						pnlErrorMsg.BackColor = Color.IndianRed;
-						txtMsgText.BackColor = Color.IndianRed;
-						break;
+						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Foreground;
+                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Background;
+                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Foreground;
+                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Background;
+                        break;
 				}
 						
 				lblMsgDate.Text = eMsg.Date.ToString();

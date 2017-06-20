@@ -86,10 +86,14 @@ namespace mRemoteNG.UI.Window
 			this.ToolStripContainer.SuspendLayout();
 			this.ToolStrip.SuspendLayout();
 			this.SuspendLayout();
-			//
-			//ToolsListView
-			//
-			this.ToolsListView.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            //
+            //Theming support
+            //
+            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+            //
+            //ToolsListView
+            //
+            this.ToolsListView.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right);
 			this.ToolsListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -371,6 +375,7 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.ToolStripButton DeleteToolToolstripButton;
 		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
 		internal System.Windows.Forms.ToolStripButton LaunchToolToolstripButton;
+        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
         #endregion
-	}
+    }
 }

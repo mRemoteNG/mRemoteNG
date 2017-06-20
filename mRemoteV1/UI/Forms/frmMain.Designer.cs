@@ -49,6 +49,10 @@ namespace mRemoteNG.UI.Forms
             this.tsContainer.TopToolStripPanel.SuspendLayout();
             this.tsContainer.SuspendLayout();
             this.SuspendLayout();
+            //
+            //Theming support
+            //
+            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             // 
             // pnlDock
             // 
@@ -231,5 +235,7 @@ namespace mRemoteNG.UI.Forms
         private Menu.HelpMenu helpMenu1;
         internal mRemoteNG.UI.Controls.QuickConnectToolStrip _quickConnectToolStrip;
         internal mRemoteNG.UI.Controls.ExternalToolsToolStrip _externalToolsToolStrip;
+        //theming support
+        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
     }
 }

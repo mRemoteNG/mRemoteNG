@@ -36,7 +36,7 @@ namespace mRemoteNG.UI.Controls
         public QuickConnectToolStrip()
         {
             Initialize();
-            ApplyThemes();
+            //ApplyThemes();
             PopulateQuickConnectProtocolMenu();
         }
 
@@ -123,12 +123,7 @@ namespace mRemoteNG.UI.Controls
 
             ResumeLayout();
         }
-
-        private void ApplyThemes()
-        {
-            BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-            ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-        }
+ 
 
         #region Quick Connect
         private void PopulateQuickConnectProtocolMenu()

@@ -7,9 +7,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public partial class ThemePage
     {
+        private ThemeManager _themeManager;
+
         public ThemePage()
         {
+            _themeManager = ThemeManager.getInstance();
             InitializeComponent();
+
         }
 
         public override string PageName
@@ -30,29 +34,30 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            _themeList = new BindingList<ThemeInfo>(ThemeManager.LoadThemes());
+            //some work in theming here
+            _themeList = new BindingList<ThemeInfo>(_themeManager.LoadThemes());
             cboTheme.DataSource = _themeList;
-            cboTheme.SelectedItem = ThemeManager.ActiveTheme;
+            cboTheme.SelectedItem = _themeManager.ActiveTheme;
             cboTheme_SelectionChangeCommitted(this, new EventArgs());
 
             ThemePropertyGrid.PropertySort = PropertySort.Categorized;
 
-            _originalTheme = ThemeManager.ActiveTheme;
+            _originalTheme = _themeManager.ActiveTheme;
         }
 
         public override void SaveSettings()
         {
             base.SaveSettings();
 
-            ThemeManager.SaveThemes(_themeList);
-            Settings.Default.ThemeName = ThemeManager.ActiveTheme.Name;
+            _themeManager.SaveThemes(_themeList);
+            Settings.Default.ThemeName = _themeManager.ActiveTheme.Name;
 
             Settings.Default.Save();
         }
 
         public override void RevertSettings()
         {
-            ThemeManager.ActiveTheme = _originalTheme;
+            _themeManager.ActiveTheme = _originalTheme;
         }
 
         #region Private Fields
@@ -68,21 +73,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void cboTheme_DropDown(object sender, EventArgs e)
         {
-            if (Equals(ThemeManager.ActiveTheme, ThemeManager.DefaultTheme))
+            if (Equals(_themeManager.ActiveTheme, _themeManager.DefaultTheme))
             {
                 return;
             }
-            ThemeManager.ActiveTheme.Name = cboTheme.Text;
+            _themeManager.ActiveTheme.Name = cboTheme.Text;
         }
 
         private void cboTheme_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (cboTheme.SelectedItem == null)
             {
-                cboTheme.SelectedItem = ThemeManager.DefaultTheme;
+                cboTheme.SelectedItem = _themeManager.DefaultTheme;
             }
 
-            if (Equals(cboTheme.SelectedItem, ThemeManager.DefaultTheme))
+            if (Equals(cboTheme.SelectedItem, _themeManager.DefaultTheme))
             {
                 cboTheme.DropDownStyle = ComboBoxStyle.DropDownList;
                 btnThemeDelete.Enabled = false;
@@ -95,14 +100,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 ThemePropertyGrid.Enabled = true;
             }
 
-            ThemeManager.ActiveTheme = (ThemeInfo) cboTheme.SelectedItem;
-            ThemePropertyGrid.SelectedObject = ThemeManager.ActiveTheme;
+            _themeManager.ActiveTheme = (ThemeInfo) cboTheme.SelectedItem;
+            ThemePropertyGrid.SelectedObject = _themeManager.ActiveTheme;
             ThemePropertyGrid.Refresh();
         }
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            var newTheme = (ThemeInfo) ThemeManager.ActiveTheme.Clone();
+            var newTheme = (ThemeInfo)_themeManager.ActiveTheme.Clone();
             newTheme.Name = Language.strUnnamedTheme;
 
             _themeList.Add(newTheme);
@@ -123,7 +128,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             _themeList.Remove(theme);
 
-            cboTheme.SelectedItem = ThemeManager.DefaultTheme;
+            cboTheme.SelectedItem = _themeManager.DefaultTheme;
             cboTheme_SelectionChangeCommitted(this, new EventArgs());
         }
 

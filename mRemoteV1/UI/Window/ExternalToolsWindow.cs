@@ -6,7 +6,8 @@ using mRemoteNG.Config.Settings;
 using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Forms;
-
+using mRemoteNG.Themes;
+using System.Drawing;
 
 namespace mRemoteNG.UI.Window
 {
@@ -14,6 +15,7 @@ namespace mRemoteNG.UI.Window
 	{
         private readonly ExternalAppsSaver _externalAppsSaver;
         private ExternalTool _selectedTool;
+        private ThemeManager _themeManager;
 
         public ExternalToolsWindow()
 		{
@@ -21,6 +23,8 @@ namespace mRemoteNG.UI.Window
 					
 			WindowType = WindowType.ExternalApps;
 			DockPnl = new DockContent();
+            _themeManager = ThemeManager.getInstance();
+            ApplyTheme();
             _externalAppsSaver = new ExternalAppsSaver();
 		}
 		
@@ -217,8 +221,29 @@ namespace mRemoteNG.UI.Window
 			DeleteToolMenuItem.Text = Language.strMenuDeleteExternalTool;
 			LaunchToolMenuItem.Text = Language.strMenuLaunchExternalTool;
 		}
-				
-		private void UpdateToolsListView(ExternalTool selectTool = null)
+
+        private void ApplyTheme()
+        {
+            vsToolStripExtender.SetStyle(ToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            //Apply the extended palette
+            ToolStripContainer.TopToolStripPanel.BackColor= _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            ToolStripContainer.TopToolStripPanel.ForeColor= _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            DisplayNameTextBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
+            DisplayNameTextBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
+            FilenameTextBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
+            FilenameTextBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
+            ArgumentsCheckBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
+            ArgumentsCheckBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
+            BrowseButton.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ButtonPalette.Background;
+            BrowseButton.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ButtonPalette.Foreground;
+            ToolsListView.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
+            ToolsListView.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
+            
+        }
+
+        private void UpdateToolsListView(ExternalTool selectTool = null)
 		{
 			try
 			{

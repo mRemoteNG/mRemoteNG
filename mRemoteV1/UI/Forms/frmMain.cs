@@ -45,20 +45,30 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
+        private ThemeManager _themeManager;
 
         internal FullscreenHandler Fullscreen { get; set; }
+        
+        //Added theming support
+        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         private FrmMain()
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
             Fullscreen = new FullscreenHandler(this);
-            pnlDock.Theme = new VS2012LightTheme();
+
+            //Theming support
+            _themeManager = ThemeManager.getInstance();
+            vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
+            SetSchema();
+
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
         }
 
         static FrmMain()
         {
+
         }
 
         #region Properties
@@ -140,8 +150,8 @@ namespace mRemoteNG.UI.Forms
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
-			ThemeManager.ThemeChanged += ApplyThemes;
-			ApplyThemes();
+            //Work on theme change
+			//ThemeManager.ThemeChanged += ApplyThemes; 
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
@@ -183,40 +193,23 @@ namespace mRemoteNG.UI.Forms
             _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
 
+
+        //Theming support
+        private void SetSchema()
+        {
+            // Persist settings when rebuilding UI
+            this.pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+            ApplyThemes(); 
+
+        }
         private void ApplyThemes()
 		{
-			pnlDock.DockBackColor = ThemeManager.ActiveTheme.WindowBackgroundColor;
-			tsContainer.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.TopToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.TopToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.BottomToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.BottomToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.LeftToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.LeftToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.RightToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.RightToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.ContentPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.ContentPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			msMain.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			msMain.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			ApplyMenuColors(msMain.Items);
+            vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme); 
 		}
 		
-		private static void ApplyMenuColors(IEnumerable itemCollection)
-		{
-		    foreach (ToolStripItem item in itemCollection)
-			{
-				item.BackColor = ThemeManager.ActiveTheme.MenuBackgroundColor;
-				item.ForeColor = ThemeManager.ActiveTheme.MenuTextColor;
-				
-				var menuItem = item as ToolStripMenuItem;
-				if (menuItem != null)
-				{
-					ApplyMenuColors(menuItem.DropDownItems);
-				}
-			}
-		}
+ 
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
