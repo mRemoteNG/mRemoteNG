@@ -82,7 +82,8 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetTheme()
         {
-            ThemeManager.LoadTheme(mRemoteNG.Settings.Default.ThemeName);
+            //Probably not necesary
+            //ThemeManager.LoadTheme(mRemoteNG.Settings.Default.ThemeName);
         }
 
         private void SetSupportedCulture()

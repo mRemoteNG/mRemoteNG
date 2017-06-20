@@ -980,6 +980,7 @@
     <None Include="app.config" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
+    <None Include="Resources\Themes\darcula.vstheme" />
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
       <SubType>Designer</SubType>
     </None>
