@@ -3,6 +3,7 @@
 Fixes:
 ------
 #596: Exception when launching ExtTool without a connection selected
+Minor error message correction
 
 
 NO.RELEASE (2017-06-15):
