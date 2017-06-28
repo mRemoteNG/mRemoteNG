@@ -52,8 +52,8 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
         private void ApplyTheme()
         {
-            lvErrorCollector.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
-            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Background;
+            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Foreground;
 
         }
 
@@ -194,17 +194,17 @@ namespace mRemoteNG.UI.Window
 						break;
 					case MessageClass.WarningMsg:
 						pbError.Image = Resources.Warning;
-						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Foreground;
-                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Background;
-                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Foreground;
-                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Background;
+						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Background;
+                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Foreground;
+                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Background;
+                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.WarningText.Foreground;
                         break;
 					case MessageClass.ErrorMsg:
 						pbError.Image = Resources._Error;
-						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Foreground;
-                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Background;
-                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Foreground;
-                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Background;
+						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Background;
+                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Foreground;
+                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Background;
+                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ErrorText.Foreground;
                         break;
 				}
 						

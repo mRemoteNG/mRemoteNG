@@ -228,6 +228,7 @@
     <Compile Include="UI\Window\ConnectionTreeWindowTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

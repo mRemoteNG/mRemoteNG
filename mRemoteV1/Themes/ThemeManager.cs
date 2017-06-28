@@ -51,32 +51,8 @@ namespace mRemoteNG.Themes
             {
                 themes = new Hashtable();
 
-                //Load the embedded themes
-                ThemeInfo vs2003 = new ThemeInfo("Vs2003", new VS2003Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2003);
-                themes.Add("Vs2003", vs2003);
-                ThemeInfo vs2005 = new ThemeInfo("Vs2005", new VS2005Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2005);
-                themes.Add("Vs2005", vs2005);
-                ThemeInfo vs2012Light = new ThemeInfo("vs2012Light", new VS2012LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012);
-                themes.Add("vs2012Light", vs2012Light);
-                ThemeInfo vs2012Dark = new ThemeInfo("vs2012Dark", new VS2012DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012);
-                themes.Add("vs2012Dark", vs2012Dark);
-                ThemeInfo vs2012Blue = new ThemeInfo("vs2012Blue", new VS2012BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012);
-                themes.Add("vs2012Blue", vs2012Blue);
-                ThemeInfo vs2013Light = new ThemeInfo("vs2013Light", new VS2013LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013);
-                themes.Add("vs2013Light", vs2013Light);
-                ThemeInfo vs2013Dark = new ThemeInfo("vs2013Dark", new VS2013DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013);
-                themes.Add("vs2013Dark", vs2013Dark);
-                ThemeInfo vs2013Blue = new ThemeInfo("vs2013Blue", new VS2013BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013);
-                themes.Add("vs2013Blue", vs2013Blue);
-                ThemeInfo vs2015Light = new ThemeInfo("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015);
-                themes.Add("vs2015Light", vs2015Light);
-                ThemeInfo vs2015Dark = new ThemeInfo("vs2015Dark", new VS2015DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015);
-                themes.Add("vs2015Dark", vs2015Dark);
-                ThemeInfo vs2015Blue = new ThemeInfo("vs2005Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015);
-                themes.Add("vs2005Blue", vs2015Blue);
-
-                //Load the files in theme folder 
-                string[] themeFiles =  Directory.GetFiles(Path.Combine(App.Info.SettingsFileInfo.SettingsPath, "themes"),"*.vstheme");
+                //Load the files in theme folder first, to incluide vstheme light as default
+                string[] themeFiles = Directory.GetFiles(Path.Combine(App.Info.SettingsFileInfo.SettingsPath, "themes"), "*.vstheme");
 
                 foreach (string themeFile in themeFiles)
                 {
@@ -88,6 +64,23 @@ namespace mRemoteNG.Themes
                 }
 
 
+                //Load the embedded themes, extended palettes are taken from the vs2015 themes
+                ThemeInfo vs2003 = new ThemeInfo("Vs2003", new VS2003Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2003, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
+                themes.Add("Vs2003", vs2003);
+                ThemeInfo vs2005 = new ThemeInfo("Vs2005", new VS2005Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2005, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
+                themes.Add("Vs2005", vs2005);
+                ThemeInfo vs2012Light = new ThemeInfo("vs2012Light", new VS2012LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012,((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
+                themes.Add("vs2012Light", vs2012Light);
+                ThemeInfo vs2012Dark = new ThemeInfo("vs2012Dark", new VS2012DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015dark"]).ExtendedPalette);
+                themes.Add("vs2012Dark", vs2012Dark);
+                ThemeInfo vs2012Blue = new ThemeInfo("vs2012Blue", new VS2012BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015blue"]).ExtendedPalette);
+                themes.Add("vs2012Blue", vs2012Blue);
+                ThemeInfo vs2013Light = new ThemeInfo("vs2013Light", new VS2013LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
+                themes.Add("vs2013Light", vs2013Light);
+                ThemeInfo vs2013Dark = new ThemeInfo("vs2013Dark", new VS2013DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015dark"]).ExtendedPalette);
+                themes.Add("vs2013Dark", vs2013Dark);
+                ThemeInfo vs2013Blue = new ThemeInfo("vs2013Blue", new VS2013BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015blue"]).ExtendedPalette);
+                themes.Add("vs2013Blue", vs2013Blue);  
             }
 
 
@@ -136,7 +129,7 @@ namespace mRemoteNG.Themes
         {
 			get
 			{
-                return (ThemeInfo) themes["darcula"];
+                return (ThemeInfo) themes["vs2015light"];
 			} 
 		}
 

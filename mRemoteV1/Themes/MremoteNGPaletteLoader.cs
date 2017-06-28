@@ -54,6 +54,17 @@ namespace mRemoteNG.Themes
             palette.WarningText.Foreground = ColorTranslatorFromHtml("Text Editor Text Marker Items", "compiler warning", true);
             palette.ErrorText.Background = ColorTranslatorFromHtml("Text Editor Text Marker Items", "compiler error", false);
             palette.ErrorText.Foreground = ColorTranslatorFromHtml("Text Editor Text Marker Items", "compiler error", true);
+            //Text box colors
+            palette.TextBoxPalette.Background = ColorTranslatorFromHtml("CommonControls", "TextBoxBackground", false);
+            palette.TextBoxPalette.Foreground = ColorTranslatorFromHtml("CommonControls", "TextBoxText", false);
+            palette.TextBoxPalette.TextBoxBorder = ColorTranslatorFromHtml("CommonControls", "TextBoxBorder", false);
+            palette.TextBoxPalette.TextBoxBorderDisabled = ColorTranslatorFromHtml("CommonControls", "TextBoxBorderDisabled", false);
+            palette.TextBoxPalette.TextBoxBorderFocused = ColorTranslatorFromHtml("CommonControls", "TextBoxBorderFocused", false);
+            palette.TextBoxPalette.TextBoxDisabled.Background = ColorTranslatorFromHtml("CommonControls", "TextBoxBackgroundDisabled", false);
+            palette.TextBoxPalette.TextBoxDisabled.Foreground = ColorTranslatorFromHtml("CommonControls", "TextBoxTextDisabled", false);
+            palette.TextBoxPalette.TextBoxFocused.Background = ColorTranslatorFromHtml("CommonControls", "TextBoxBackgroundFocused", false);
+            palette.TextBoxPalette.TextBoxFocused.Foreground = ColorTranslatorFromHtml("CommonControls", "TextBoxTextFocused", false);
+
 
             return palette;
         }

@@ -610,13 +610,13 @@ namespace mRemoteNG.UI.Window
 		
 		private void ApplyTheme()
 		{
-            _pGrid.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
-            _pGrid.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Background;
+            _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Foreground;
             _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
             _pGrid.ViewForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
             _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemBorder;
-            _pGrid.HelpBackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
-            _pGrid.HelpForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            _pGrid.HelpBackColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Background;
+            _pGrid.HelpForeColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Foreground;
             _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListHeader.Foreground;
             _pGrid.CommandsDisabledLinkColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemDisabled.Foreground;
             _pGrid.CommandsBackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemDisabled.Background;

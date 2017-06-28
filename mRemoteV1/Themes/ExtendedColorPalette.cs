@@ -37,8 +37,17 @@ namespace mRemoteNG.Themes
         public BasicPalette ButtonHover { get; set; }
         
     }
+    public class TextBoxPalette : BasicPalette
+    {
+        public Color TextBoxBorder { get; set; }
+        public Color TextBoxBorderDisabled { get; set; }
+        public Color TextBoxBorderFocused { get; set; }
+        public BasicPalette TextBoxFocused { get; set; }
+        public BasicPalette TextBoxDisabled { get; set; }
 
-    
+    }
+
+
     public class ExtendedColorPalette
     {
         public TreeViewPalette TreeViewPalette { get; set; } 
@@ -46,6 +55,7 @@ namespace mRemoteNG.Themes
         public ButtonPalette ButtonPalette { get; set; }
         public BasicPalette ErrorText { get; set; }
         public BasicPalette WarningText { get; set; }
+        public TextBoxPalette TextBoxPalette { get; set; }
 
         public ExtendedColorPalette()
         {
@@ -62,6 +72,10 @@ namespace mRemoteNG.Themes
             ButtonPalette.ButtonHover = new BasicPalette();
             ErrorText = new BasicPalette();
             WarningText = new BasicPalette();
+            TextBoxPalette = new TextBoxPalette();
+            TextBoxPalette.TextBoxFocused = new BasicPalette();
+            TextBoxPalette.TextBoxDisabled = new BasicPalette();
+
         }
     }
 
