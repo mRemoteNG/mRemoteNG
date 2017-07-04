@@ -1379,6 +1379,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
     <value>Select whether to use bitmap caching or not.</value>
   </data>
+  <data name="strPropertyDescriptionMultiMonitor" xml:space="preserve">
+    <value>Select whether to use multiple monitors.</value>
+  </data>
   <data name="strPropertyDescriptionColors" xml:space="preserve">
     <value>Select the colour quality to be used.</value>
   </data>
@@ -1537,6 +1540,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameColors" xml:space="preserve">
     <value>Colours</value>
+  </data>
+  <data name="strPropertyNameMultiMonitor" xml:space="preserve">
+    <value>MultiMonitor</value>
   </data>
   <data name="strPropertyNameCompression" xml:space="preserve">
     <value>Compression</value>

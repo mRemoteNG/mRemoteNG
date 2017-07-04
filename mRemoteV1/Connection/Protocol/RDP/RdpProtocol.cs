@@ -115,7 +115,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         Application.DoEvents();
 					}
                     _rdpClient = (MsRdpClient8NotSafeForScripting)((AxMsRdpClient8NotSafeForScripting)Control).GetOcx();
-
 				}
 				catch (System.Runtime.InteropServices.COMException ex)
 				{
@@ -152,6 +151,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				    _rdpClient.AdvancedSettings8.AudioQualityMode = (uint)_connectionInfo.SoundQuality;
 				}
 
+                SetMultiMonitor();
                 SetUseConsoleSession();
                 SetPort();
 				RedirectKeys = _connectionInfo.RedirectKeys;
@@ -176,8 +176,16 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				return false;
 			}
 		}
-				
-		public override bool Connect()
+
+        private void SetMultiMonitor()
+        {
+            if (InterfaceControl.Info.MultiMonitor)
+            {
+                ((IMsRdpClientNonScriptable5)_rdpClient).UseMultimon = true;
+            }
+        }
+
+        public override bool Connect()
 		{
 			_loginComplete = false;
 			SetEventHandlers();

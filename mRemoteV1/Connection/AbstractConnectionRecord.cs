@@ -47,6 +47,7 @@ namespace mRemoteNG.Connection
         private string _rdGatewayDomain = "";
 
         private RdpProtocol.RDPResolutions _resolution;
+        private bool _multiMonitor;
         private bool _automaticResize;
         private RdpProtocol.RDPColors _colors;
         private bool _cacheBitmaps;
@@ -351,6 +352,16 @@ namespace mRemoteNG.Connection
         {
             get { return GetPropertyValue("Resolution", _resolution); }
             set { SetField(ref _resolution, value, "Resolution"); }
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameMultiMonitor"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionMultiMonitor"),
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool MultiMonitor
+        {
+            get { return GetPropertyValue("MultiMonitor", _multiMonitor); }
+            set { SetField(ref _multiMonitor, value, "MultiMonitor"); }
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),

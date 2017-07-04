@@ -4363,6 +4363,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select whether to use multiple monitors..
+        /// </summary>
+        internal static string strPropertyDescriptionMultiMonitor {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionMultiMonitor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This is the name that will be displayed in the connections tree..
         /// </summary>
         internal static string strPropertyDescriptionName {
@@ -4854,6 +4863,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameMACAddress {
             get {
                 return ResourceManager.GetString("strPropertyNameMACAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MultiMonitor.
+        /// </summary>
+        internal static string strPropertyNameMultiMonitor {
+            get {
+                return ResourceManager.GetString("strPropertyNameMultiMonitor", resourceCulture);
             }
         }
         
