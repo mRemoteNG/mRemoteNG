@@ -248,6 +248,11 @@
     <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
     <Compile Include="Credential\CredentialServiceFacade.cs" />
+    <Compile Include="Resources\Themes\ColorMapTheme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ColorMapTheme.resx</DependentUpon>
+    </Compile>
     <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
     <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
     <Compile Include="Security\ICryptoProviderFactory.cs" />
@@ -761,6 +766,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx" />
     <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
+    <EmbeddedResource Include="Resources\Themes\ColorMapTheme.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRecordListView.resx">
       <DependentUpon>CredentialRecordListView.cs</DependentUpon>
     </EmbeddedResource>
@@ -982,7 +992,18 @@
     <None Include="app.config" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
-    <None Include="Resources\Themes\darcula.vstheme" />
+    <None Include="Resources\Themes\darcula.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015blue.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015dark.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015light.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
       <SubType>Designer</SubType>
     </None>

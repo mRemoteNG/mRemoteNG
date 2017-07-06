@@ -610,17 +610,17 @@ namespace mRemoteNG.UI.Window
 		
 		private void ApplyTheme()
 		{
-            _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Background;
-            _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Foreground;
-            _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
-            _pGrid.ViewForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
-            _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemBorder;
-            _pGrid.HelpBackColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Background;
-            _pGrid.HelpForeColor = _themeManager.ActiveTheme.ExtendedPalette.TextBoxPalette.Foreground;
-            _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListHeader.Foreground;
-            _pGrid.CommandsDisabledLinkColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemDisabled.Foreground;
-            _pGrid.CommandsBackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemDisabled.Background;
-            _pGrid.CommandsForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItemDisabled.Foreground;
+            _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
+            _pGrid.ViewForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Border");
+            _pGrid.HelpBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            _pGrid.HelpForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Background"); 
+            _pGrid.CommandsDisabledLinkColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
+            _pGrid.CommandsBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background"); 
+            _pGrid.CommandsForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground"); 
 
 
 

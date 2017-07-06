@@ -81,12 +81,12 @@ namespace mRemoteNG.UI.Window
         {
             vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
             //Treelistview need to be manually themed
-            olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.Background;
-            olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.Foreground;
-            olvConnections.SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.SelectedItemActive.Background;
-            olvConnections.SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.SelectedItemActive.Foreground;
-            olvConnections.UnfocusedSelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.SelectedItemInactive.Background;
-            olvConnections.UnfocusedSelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.TreeViewPalette.SelectedItemInactive.Foreground;
+            olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
+            olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");
+            olvConnections.SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Background");
+            olvConnections.SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Foreground"); 
+            olvConnections.UnfocusedSelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Background"); 
+            olvConnections.UnfocusedSelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Foreground");  
         }
         #endregion
 

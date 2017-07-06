@@ -53,18 +53,23 @@ namespace mRemoteNG.Themes
 
                 //Load the files in theme folder first, to incluide vstheme light as default
                 string[] themeFiles = Directory.GetFiles(Path.Combine(App.Info.SettingsFileInfo.SettingsPath, "themes"), "*.vstheme");
-
+                string defaultThemeURL = Directory.GetFiles(Path.Combine(App.Info.SettingsFileInfo.SettingsPath, "themes"), "vs2015light"+".vstheme")[0];
+                //First we load the default theme, its vs2015light 
+                ThemeInfo defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeURL);
+                themes.Add(defaultTheme.Name, defaultTheme);
+                //Then the rest
                 foreach (string themeFile in themeFiles)
                 {
-                    ThemeInfo extTheme = ThemeSerializer.LoadFromXmlFile(themeFile);
-                    if (extTheme.Theme != null)
+                    //filter default one
+                    ThemeInfo extTheme = ThemeSerializer.LoadFromXmlFile(themeFile, defaultTheme);
+                    if (extTheme.Theme != null && !themes.ContainsKey(extTheme.Name) )
                     {
                         themes.Add(extTheme.Name, extTheme);
                     }
                 }
 
 
-                //Load the embedded themes, extended palettes are taken from the vs2015 themes
+                //Load the embedded themes, extended palettes are taken from the vs2015 themes, trying to match the color theme
                 ThemeInfo vs2003 = new ThemeInfo("Vs2003", new VS2003Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2003, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
                 themes.Add("Vs2003", vs2003);
                 ThemeInfo vs2005 = new ThemeInfo("Vs2005", new VS2005Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2005, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
@@ -129,7 +134,7 @@ namespace mRemoteNG.Themes
         {
 			get
 			{
-                return (ThemeInfo) themes["vs2015light"];
+                return (ThemeInfo) themes["vs2015blue"];
 			} 
 		}
 

@@ -1,9 +1,15 @@
-﻿using System;
+﻿using mRemoteNG.Themes;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
+using System.Xml;
 using System.Xml.Linq; 
 
 namespace mRemoteNG.Themes 
@@ -11,77 +17,43 @@ namespace mRemoteNG.Themes
     //Class to extract the rest of the required theme colors for MremoteNG from the vstheme file
     public class MremoteNGPaletteLoader 
     {
-        private XDocument _xml;
+        private XmlDocument _xml;
+        private ExtendedColorPalette  _defaultPalette;
 
-        public MremoteNGPaletteLoader(byte[] file)
+        
+
+        //warning, defaultpalette should always contain all the values, because when is loaded there is no default palette (parameter is null
+        public MremoteNGPaletteLoader(byte[] file, ExtendedColorPalette defaultPalette = null )
         {
-            _xml = XDocument.Load(new StreamReader(new MemoryStream(file)));
+            _xml = new XmlDocument();
+            _xml.LoadXml(new StreamReader(new MemoryStream(file)).ReadToEnd());   
+            _defaultPalette = defaultPalette ?? new ExtendedColorPalette();
         }
+        
 
+
+        //Load the colors for the mRemoteNG own components as Dockpanel only have a menus and docks palette
         public ExtendedColorPalette getColors()
         {
-            ExtendedColorPalette palette = new ExtendedColorPalette();
-            //List tree colors
-            palette.TreeViewPalette.Background= ColorTranslatorFromHtml("TreeView", "Background",false);
-            palette.TreeViewPalette.Foreground= ColorTranslatorFromHtml("TreeView", "Background",true);
-            palette.TreeViewPalette.SelectedItemActive.Background= ColorTranslatorFromHtml("TreeView", "SelectedItemActive", false);
-            palette.TreeViewPalette.SelectedItemActive.Foreground= ColorTranslatorFromHtml("TreeView", "SelectedItemActive", true);
-            palette.TreeViewPalette.SelectedItemInactive.Background= ColorTranslatorFromHtml("TreeView", "SelectedItemInactive", false);
-            palette.TreeViewPalette.SelectedItemInactive.Foreground= ColorTranslatorFromHtml("TreeView", "SelectedItemInactive", true);
-            //List items colors, used for config and external tools
-            palette.ListPalette.Background= ColorTranslatorFromHtml("Cider", "ListBackground", false);
-            palette.ListPalette.ListItem.Foreground= ColorTranslatorFromHtml("Cider", "ListItem", true);
-            palette.ListPalette.ListItem.Background= ColorTranslatorFromHtml("Cider", "ListItem", false);
-            palette.ListPalette.ListHeader.Foreground= ColorTranslatorFromHtml("Cider", "ListHeader", true);
-            palette.ListPalette.ListHeader.Background= ColorTranslatorFromHtml("Cider", "ListHeader", false);
-            palette.ListPalette.ListItemBorder= ColorTranslatorFromHtml("Cider", "ListItemBorder", false);
-            palette.ListPalette.ListItemSelectedBorder= ColorTranslatorFromHtml("Cider", "ListItemSelectedBorder", false);
-            palette.ListPalette.ListItemSelected.Foreground= ColorTranslatorFromHtml("Cider", "ListItemSelected", true);
-            palette.ListPalette.ListItemSelected.Background= ColorTranslatorFromHtml("Cider", "ListItemSelected", false);
-            palette.ListPalette.ListItemDisabled.Foreground= ColorTranslatorFromHtml("Cider", "ListItemDisabled", true);
-            palette.ListPalette.ListItemDisabled.Background= ColorTranslatorFromHtml("Cider", "ListItemDisabled", false);
-            palette.ListPalette.ListItemDisabledBorder = ColorTranslatorFromHtml("Cider", "ListItemDisabledBorder", false);
-            //Button colors
-            palette.ButtonPalette.Background = ColorTranslatorFromHtml("CommonControls", "Button", false);
-            palette.ButtonPalette.Foreground = ColorTranslatorFromHtml("CommonControls", "Button", true);
-            palette.ButtonPalette.ButtonBorder = ColorTranslatorFromHtml("CommonControls", "ButtonBorder", false);
-            palette.ButtonPalette.ButtonPressed.Background = ColorTranslatorFromHtml("CommonControls", "ButtonPressed", false);
-            palette.ButtonPalette.ButtonPressed.Foreground= ColorTranslatorFromHtml("CommonControls", "ButtonPressed", true);
-            palette.ButtonPalette.ButtonHover.Background = ColorTranslatorFromHtml("CommonControls", "ButtonHover", false);
-            palette.ButtonPalette.ButtonHover.Foreground = ColorTranslatorFromHtml("CommonControls", "ButtonHover", true);
-            //Button colors
-            palette.WarningText.Background = ColorTranslatorFromHtml("Text Editor Text Marker Items", "compiler warning", false);
-            palette.WarningText.Foreground = ColorTranslatorFromHtml("Text Editor Text Marker Items", "compiler warning", true);
-            palette.ErrorText.Background = ColorTranslatorFromHtml("Text Editor Text Marker Items", "compiler error", false);
-            palette.ErrorText.Foreground = ColorTranslatorFromHtml("Text Editor Text Marker Items", "compiler error", true);
-            //Text box colors
-            palette.TextBoxPalette.Background = ColorTranslatorFromHtml("CommonControls", "TextBoxBackground", false);
-            palette.TextBoxPalette.Foreground = ColorTranslatorFromHtml("CommonControls", "TextBoxText", false);
-            palette.TextBoxPalette.TextBoxBorder = ColorTranslatorFromHtml("CommonControls", "TextBoxBorder", false);
-            palette.TextBoxPalette.TextBoxBorderDisabled = ColorTranslatorFromHtml("CommonControls", "TextBoxBorderDisabled", false);
-            palette.TextBoxPalette.TextBoxBorderFocused = ColorTranslatorFromHtml("CommonControls", "TextBoxBorderFocused", false);
-            palette.TextBoxPalette.TextBoxDisabled.Background = ColorTranslatorFromHtml("CommonControls", "TextBoxBackgroundDisabled", false);
-            palette.TextBoxPalette.TextBoxDisabled.Foreground = ColorTranslatorFromHtml("CommonControls", "TextBoxTextDisabled", false);
-            palette.TextBoxPalette.TextBoxFocused.Background = ColorTranslatorFromHtml("CommonControls", "TextBoxBackgroundFocused", false);
-            palette.TextBoxPalette.TextBoxFocused.Foreground = ColorTranslatorFromHtml("CommonControls", "TextBoxTextFocused", false);
-
-
-            return palette;
-        }
-
-        //This code is taken from VS2012PaletteFactory WeifenLuo
-        private Color ColorTranslatorFromHtml(string category,string name, bool foreground = false)
-        {
-            var color = _xml.Root.Element("Theme")
-                .Elements("Category").FirstOrDefault(item => item.Attribute("Name").Value == category)?
-                .Elements("Color").FirstOrDefault(item => item.Attribute("Name").Value == name)?
-                .Element(foreground ? "Foreground" : "Background").Attribute("Source").Value;
-            if (color == null)
+            ExtendedColorPalette newPalette = new ExtendedColorPalette();
+            newPalette.setDefault(_defaultPalette);
+            ResourceSet resourceSet = mRemoteNG.ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            //
+            foreach (DictionaryEntry entry in resourceSet)
             {
-                return Color.Transparent;
-            }
+                string colorName  = entry.Key.ToString();
+                String xmlQueryPath = (String)entry.Value;
+                XmlNodeList colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
+                //XmlNodeList colorNodeList = _xml.SelectNodes("/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemSelectedBorder']/Background/@Source");
+                String color = colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
+                if (color != null )
+                {
+                    newPalette.addColor(colorName , ColorTranslator.FromHtml($"#{color}"));
+                }
+            } 
 
-            return ColorTranslator.FromHtml($"#{color}");
+            return newPalette;
         }
+         
     }
 }

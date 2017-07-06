@@ -18,13 +18,16 @@ namespace mRemoteNG.Themes
 		
 		}
 			
-		public static ThemeInfo LoadFromXmlFile(string filename)
+		public static ThemeInfo LoadFromXmlFile(string filename, ThemeInfo defaultTheme=null)
 		{
             byte[] bytes = File.ReadAllBytes(filename);
+            //Load the dockpanel part
             MremoteNGThemeBase themeBaseLoad= new MremoteNGThemeBase(bytes);
-            MremoteNGPaletteLoader colorFactory = new MremoteNGPaletteLoader(bytes);
-            ExtendedColorPalette extColorPalette = colorFactory.getColors();
-            ThemeInfo loadedTheme = new ThemeInfo(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename, VisualStudioToolStripExtender.VsVersion.Vs2015, extColorPalette);
+            //Load the mremote part
+            MremoteNGPaletteLoader extColorLoader;
+            //Cause we cannot default the theme for the default theme
+            extColorLoader = new MremoteNGPaletteLoader(bytes, defaultTheme ==null ? null:defaultTheme.ExtendedPalette); 
+            ThemeInfo loadedTheme = new ThemeInfo(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename, VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
 
             return loadedTheme;
 		}

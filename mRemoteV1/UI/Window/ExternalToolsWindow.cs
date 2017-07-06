@@ -230,16 +230,16 @@ namespace mRemoteNG.UI.Window
             ToolStripContainer.TopToolStripPanel.ForeColor= _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
             PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
             PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
-            DisplayNameTextBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
-            DisplayNameTextBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
-            FilenameTextBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
-            FilenameTextBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
-            ArgumentsCheckBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
-            ArgumentsCheckBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
-            BrowseButton.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ButtonPalette.Background;
-            BrowseButton.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ButtonPalette.Foreground;
-            ToolsListView.BackColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Background;
-            ToolsListView.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.ListPalette.ListItem.Foreground;
+            DisplayNameTextBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
+            DisplayNameTextBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            FilenameTextBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
+            FilenameTextBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            ArgumentsCheckBox.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
+            ArgumentsCheckBox.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            BrowseButton.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Background");
+            BrowseButton.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Foreground");
+            ToolsListView.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
+            ToolsListView.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground");
             
         }
 

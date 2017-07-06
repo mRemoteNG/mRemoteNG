@@ -6,78 +6,60 @@ using System.Text;
 
 namespace mRemoteNG.Themes
 {
-
-    public class BasicPalette
-    {
-        public Color Background { get; set; }
-        public Color Foreground { get; set; }
-    }
-    public class TreeViewPalette : BasicPalette
-    {
-        public BasicPalette SelectedItemActive { get; set; }
-        public BasicPalette SelectedItemInactive { get; set; }
-    }
-
-    public class ListPalette : BasicPalette
-    {
-        public BasicPalette ListItem { get; set; }
-        public BasicPalette ListHeader { get; set; }
-        public Color ListItemBorder { get; set; }
-        public Color ListItemSelectedBorder { get; set; }
-        public BasicPalette ListItemSelected { get; set; }
-        public BasicPalette ListItemDisabled { get; set; }
-        public Color ListItemDisabledBorder { get; set; }
-
-    }
-
-    public class ButtonPalette : BasicPalette
-    {
-        public Color ButtonBorder { get; set; }
-        public BasicPalette ButtonPressed { get; set; }
-        public BasicPalette ButtonHover { get; set; }
-        
-    }
-    public class TextBoxPalette : BasicPalette
-    {
-        public Color TextBoxBorder { get; set; }
-        public Color TextBoxBorderDisabled { get; set; }
-        public Color TextBoxBorderFocused { get; set; }
-        public BasicPalette TextBoxFocused { get; set; }
-        public BasicPalette TextBoxDisabled { get; set; }
-
-    }
-
-
     public class ExtendedColorPalette
     {
-        public TreeViewPalette TreeViewPalette { get; set; } 
-        public ListPalette ListPalette { get; set; }
-        public ButtonPalette ButtonPalette { get; set; }
-        public BasicPalette ErrorText { get; set; }
-        public BasicPalette WarningText { get; set; }
-        public TextBoxPalette TextBoxPalette { get; set; }
+        #region Private Variables
+        //Collection for color values that are not loaded by dock panels (list, buttons,panel content, etc)
+        private Dictionary<String, Color> _extendedColors;
+        private Dictionary<String, Color> _default;
+        #endregion
 
+        #region Constructors
         public ExtendedColorPalette()
         {
-            TreeViewPalette = new TreeViewPalette();
-            TreeViewPalette.SelectedItemActive = new BasicPalette();
-            TreeViewPalette.SelectedItemInactive = new BasicPalette();
-            ListPalette = new ListPalette();
-            ListPalette.ListItem = new BasicPalette();
-            ListPalette.ListHeader = new BasicPalette();
-            ListPalette.ListItemSelected = new BasicPalette();
-            ListPalette.ListItemDisabled = new BasicPalette();
-            ButtonPalette = new ButtonPalette();
-            ButtonPalette.ButtonPressed = new BasicPalette();
-            ButtonPalette.ButtonHover = new BasicPalette();
-            ErrorText = new BasicPalette();
-            WarningText = new BasicPalette();
-            TextBoxPalette = new TextBoxPalette();
-            TextBoxPalette.TextBoxFocused = new BasicPalette();
-            TextBoxPalette.TextBoxDisabled = new BasicPalette();
+            _extendedColors = new Dictionary<string, Color>();
+            _default = new Dictionary<string, Color>(); // If this is the default palette, it will not have a default-default palette
+             
+        }
+        #endregion
+
+        #region Public Methods
+        // Set the default theme, that theme should contain all color values used by the application
+        public void setDefault(ExtendedColorPalette inPalettte)
+        {
+            _default = inPalettte._extendedColors;
+        }
+        #endregion
+ 
+        public Color getColor(String  colorKey)
+        {
+            Color retColor= Color.Empty;
+
+            retColor = _extendedColors[colorKey];
+            if(retColor == Color.Empty)
+            {
+                if(_default != null)
+                {
+                    retColor = _default[colorKey];
+                }
+                //why are we here?, just avoid a crash
+                if(retColor == Color.Empty)
+                {
+                    //Fail to pink , because why not
+                    retColor = Color.Pink;
+                } 
+                    
+            }
+            return retColor;
 
         }
+        public void  addColor(String colorKey,Color inColor)
+        {
+            _extendedColors.Add(colorKey, inColor);
+        }
+
     }
-
 }
+ 
 
+     
