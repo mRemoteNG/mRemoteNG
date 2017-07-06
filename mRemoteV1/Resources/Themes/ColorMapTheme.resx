@@ -139,10 +139,10 @@
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonPressed']/Foreground/@Source</value>
   </data>
   <data name="ErrorText_Background" xml:space="preserve">
-    <value>/Themes/Theme/Category[@Name='TextEditorTextMarkerItems']/Color[@Name='compilererror']/Background/@Source</value>
+    <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler error']/Background/@Source</value>
   </data>
   <data name="ErrorText_Foreground" xml:space="preserve">
-    <value>/Themes/Theme/Category[@Name='TextEditorTextMarkerItems']/Color[@Name='compilererror']/Foreground/@Source</value>
+    <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler error']/Foreground/@Source</value>
   </data>
   <data name="List_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListBackground']/Background/@Source</value>
@@ -226,9 +226,9 @@
     <value>/Themes/Theme/Category[@Name='TreeView']/Color[@Name='SelectedItemInactive']/Foreground/@Source</value>
   </data>
   <data name="WarningText_Background" xml:space="preserve">
-    <value>/Themes/Theme/Category[@Name='TextEditorTextMarkerItems']/Color[@Name='compilerwarning']/Background/@Source</value>
+    <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler warning']/Background/@Source</value>
   </data>
   <data name="WarningText_Foreground" xml:space="preserve">
-    <value>/Themes/Theme/Category[@Name='TextEditorTextMarkerItem']/Color[@Name='/compilerwarning']/Foreground/@Source</value>
+    <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler warning']/Foreground/@Source</value>
   </data>
 </root>

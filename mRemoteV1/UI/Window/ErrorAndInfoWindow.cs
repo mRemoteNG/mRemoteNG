@@ -53,7 +53,7 @@ namespace mRemoteNG.UI.Window
         private void ApplyTheme()
         {
             lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground");
+            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
 
         }
 

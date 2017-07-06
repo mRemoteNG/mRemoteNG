@@ -124,7 +124,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;TextEditorTextMarkerItems&apos;]/Color[@Name=&apos;compilererror&apos;]/Background/@Source.
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Text Editor Text Marker Items&apos;]/Color[@Name=&apos;compiler error&apos;]/Background/@Source.
         /// </summary>
         internal static string ErrorText_Background {
             get {
@@ -133,7 +133,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;TextEditorTextMarkerItems&apos;]/Color[@Name=&apos;compilererror&apos;]/Foreground/@Source.
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Text Editor Text Marker Items&apos;]/Color[@Name=&apos;compiler error&apos;]/Foreground/@Source.
         /// </summary>
         internal static string ErrorText_Foreground {
             get {
@@ -385,7 +385,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;TextEditorTextMarkerItems&apos;]/Color[@Name=&apos;compilerwarning&apos;]/Background/@Source.
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Text Editor Text Marker Items&apos;]/Color[@Name=&apos;compiler warning&apos;]/Background/@Source.
         /// </summary>
         internal static string WarningText_Background {
             get {
@@ -394,7 +394,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;TextEditorTextMarkerItem&apos;]/Color[@Name=&apos;/compilerwarning&apos;]/Foreground/@Source.
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Text Editor Text Marker Items&apos;]/Color[@Name=&apos;compiler warning&apos;]/Foreground/@Source.
         /// </summary>
         internal static string WarningText_Foreground {
             get {

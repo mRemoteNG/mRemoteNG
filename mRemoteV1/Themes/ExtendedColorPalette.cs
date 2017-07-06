@@ -35,12 +35,13 @@ namespace mRemoteNG.Themes
         {
             Color retColor= Color.Empty;
 
-            retColor = _extendedColors[colorKey];
-            if(retColor == Color.Empty)
+            retColor = _extendedColors.ContainsKey(colorKey) ? _extendedColors[colorKey]:Color.Empty;
+            //Invisible colors are not good, might  indicate missing color from the palette as is represented by 00000000
+            if(retColor == Color.Empty || retColor.A == 0)
             {
                 if(_default != null)
                 {
-                    retColor = _default[colorKey];
+                    retColor = _default.ContainsKey(colorKey) ? _default[colorKey] : Color.Empty;  
                 }
                 //why are we here?, just avoid a crash
                 if(retColor == Color.Empty)
