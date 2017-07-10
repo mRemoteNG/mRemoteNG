@@ -194,17 +194,18 @@ namespace mRemoteNG.UI.Window
 						break;
 					case MessageClass.WarningMsg:
 						pbError.Image = Resources.Warning;
-						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
-                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor ("WarningText_Foreground");
-                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
-                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                        //Inverse colors for dramatic effect
+						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor ("WarningText_Background");
+                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
                         break;
 					case MessageClass.ErrorMsg:
 						pbError.Image = Resources._Error;
-						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
-                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
-                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
                         break;
 				}
 						

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using WeifenLuo.WinFormsUI.Docking;
@@ -85,7 +86,8 @@ namespace mRemoteNG.Themes
                 ThemeInfo vs2013Dark = new ThemeInfo("vs2013Dark", new VS2013DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015dark"]).ExtendedPalette);
                 themes.Add("vs2013Dark", vs2013Dark);
                 ThemeInfo vs2013Blue = new ThemeInfo("vs2013Blue", new VS2013BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015blue"]).ExtendedPalette);
-                themes.Add("vs2013Blue", vs2013Blue);  
+                themes.Add("vs2013Blue", vs2013Blue);
+ 
             }
 
 
@@ -134,10 +136,10 @@ namespace mRemoteNG.Themes
         {
 			get
 			{
-                return (ThemeInfo) themes["vs2015light"];
+                return (ThemeInfo) themes["vs2015dark"];
 			} 
 		}
-
+        
         public ThemeInfo ActiveTheme
 		{
 			get

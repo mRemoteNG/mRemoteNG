@@ -21,7 +21,6 @@ using Message = System.Windows.Forms.Message;
 using TabControl = Crownwood.Magic.Controls.TabControl;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
-
 namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionWindow : BaseWindow

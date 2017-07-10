@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Controls
             _connectionTree = connectionTree;
             _connectionInitiator = new ConnectionInitiator();
             InitializeComponent();
-            ApplyLanguage();
+            ApplyLanguage(); 
             EnableShortcutKeys();
             Opening += (sender, args) =>
             {
