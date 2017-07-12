@@ -226,6 +226,7 @@ namespace mRemoteNG.UI.Window
         {
             vsToolStripExtender.SetStyle(ToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
             //Apply the extended palette
+
             ToolStripContainer.TopToolStripPanel.BackColor= _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
             ToolStripContainer.TopToolStripPanel.ForeColor= _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
             PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
@@ -240,7 +241,11 @@ namespace mRemoteNG.UI.Window
             BrowseButton.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Foreground");
             ToolsListView.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
             ToolsListView.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground");
+
+            //Experimental
+
             
+
         }
 
         private void UpdateToolsListView(ExternalTool selectTool = null)
@@ -311,3 +316,4 @@ namespace mRemoteNG.UI.Window
         #endregion
 	}
 }
+ 

@@ -136,7 +136,7 @@ namespace mRemoteNG.Themes
         {
 			get
 			{
-                return (ThemeInfo) themes["vs2015dark"];
+                return (ThemeInfo) themes["vs2015blue"];
 			} 
 		}
         

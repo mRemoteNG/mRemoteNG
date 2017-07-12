@@ -341,6 +341,9 @@
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandler.cs" />
+    <Compile Include="UI\Controls\Base\NGLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>

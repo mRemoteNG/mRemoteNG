@@ -8,11 +8,11 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.ColumnHeader ArgumentsColumnHeader;
 		internal System.Windows.Forms.GroupBox PropertiesGroupBox;
 		internal System.Windows.Forms.TextBox DisplayNameTextBox;
-		internal System.Windows.Forms.Label DisplayNameLabel;
+		internal Controls.Base.NGLabel DisplayNameLabel;
 		internal System.Windows.Forms.TextBox ArgumentsCheckBox;
 		internal System.Windows.Forms.TextBox FilenameTextBox;
-		internal System.Windows.Forms.Label ArgumentsLabel;
-		internal System.Windows.Forms.Label FilenameLabel;
+		internal Controls.Base.NGLabel ArgumentsLabel;
+		internal Controls.Base.NGLabel FilenameLabel;
 		internal System.Windows.Forms.Button BrowseButton;
 		internal System.Windows.Forms.ColumnHeader DisplayNameColumnHeader;
 		internal System.Windows.Forms.ContextMenuStrip ToolsContextMenuStrip;
@@ -23,7 +23,7 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.ToolStripMenuItem LaunchToolMenuItem;
 		internal System.Windows.Forms.ColumnHeader WaitForExitColumnHeader;
 		internal System.Windows.Forms.CheckBox WaitForExitCheckBox;
-		internal System.Windows.Forms.Label OptionsLabel;
+		internal Controls.Base.NGLabel OptionsLabel;
 		internal System.Windows.Forms.CheckBox TryToIntegrateCheckBox;
 		internal System.Windows.Forms.ColumnHeader TryToIntegrateColumnHeader;
 		internal System.Windows.Forms.ListView ToolsListView;
@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Window
 			this.TryToIntegrateCheckBox = new System.Windows.Forms.CheckBox();
 			this.TryToIntegrateCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
 			this.TryToIntegrateCheckBox.CheckedChanged += new System.EventHandler(this.TryToIntegrateCheckBox_CheckedChanged);
-			this.OptionsLabel = new System.Windows.Forms.Label();
+			this.OptionsLabel = new Controls.Base.NGLabel();
 			this.WaitForExitCheckBox = new System.Windows.Forms.CheckBox();
 			this.WaitForExitCheckBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
 			this.WaitForExitCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
@@ -67,9 +67,9 @@ namespace mRemoteNG.UI.Window
 			this.FilenameTextBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
 			this.DisplayNameTextBox = new System.Windows.Forms.TextBox();
 			this.DisplayNameTextBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
-			this.ArgumentsLabel = new System.Windows.Forms.Label();
-			this.FilenameLabel = new System.Windows.Forms.Label();
-			this.DisplayNameLabel = new System.Windows.Forms.Label();
+			this.ArgumentsLabel = new Controls.Base.NGLabel();
+			this.FilenameLabel = new UI.Controls.Base.NGLabel();
+			this.DisplayNameLabel = new Controls.Base.NGLabel();
 			this.ToolStripContainer = new System.Windows.Forms.ToolStripContainer();
 			this.ToolStrip = new System.Windows.Forms.ToolStrip();
 			this.NewToolToolstripButton = new System.Windows.Forms.ToolStripButton();
