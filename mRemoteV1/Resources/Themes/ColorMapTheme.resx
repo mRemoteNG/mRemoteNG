@@ -120,8 +120,17 @@
   <data name="Button_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='Button']/Background/@Source</value>
   </data>
-  <data name="Button_Button_Border" xml:space="preserve">
+  <data name="Button_Border" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonBorder']/Background/@Source</value>
+  </data>
+  <data name="Button_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonDisabled']/Background/@Source</value>
+  </data>
+  <data name="Button_Disabled_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonBorderDisabled']/Background/@Source</value>
+  </data>
+  <data name="Button_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonDisabled']/Foreground/@Source</value>
   </data>
   <data name="Button_Foreground" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='Button']/Foreground/@Source</value>
@@ -129,11 +138,17 @@
   <data name="Button_Hover_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonHover']/Background/@Source</value>
   </data>
+  <data name="Button_Hover_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonBorderHover']/Background/@Source</value>
+  </data>
   <data name="Button_Hover_Foreground" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonHover']/Foreground/@Source</value>
   </data>
   <data name="Button_Pressed_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonPressed']/Background/@Source</value>
+  </data>
+  <data name="Button_Pressed_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonBorderPressed']/Background/@Source</value>
   </data>
   <data name="Button_Pressed_Foreground" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonPressed']/Foreground/@Source</value>

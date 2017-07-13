@@ -1,23 +1,28 @@
 ﻿using mRemoteNG.Themes;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
     //Themable label to overide the winforms behavior of drawing the forecolor of disabled with a system color
-    class NGLabel : Label
+    [ToolboxBitmap(typeof(Label))]
+    public class NGLabel : Label
     {
+         
+        private ThemeManager _themeManager;
 
-        private bool _Enabled = false;
-        private ThemeManager _themeManager = ThemeManager.getInstance();
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+            if (DesignMode) return;
+            _themeManager = ThemeManager.getInstance();
+        }
 
-
+  
         protected override void OnPaint(PaintEventArgs e)
         {
+            base.OnPaint(e);
+            if (DesignMode) return;
             if (Enabled)
             {
                 TextRenderer.DrawText(e.Graphics, this.Text, Font, ClientRectangle, ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);

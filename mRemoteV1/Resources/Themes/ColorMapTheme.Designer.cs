@@ -72,9 +72,36 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;ButtonBorder&apos;]/Background/@Source.
         /// </summary>
-        internal static string Button_Button_Border {
+        internal static string Button_Border {
             get {
-                return ResourceManager.GetString("Button_Button_Border", resourceCulture);
+                return ResourceManager.GetString("Button_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;ButtonDisabled&apos;]/Background/@Source.
+        /// </summary>
+        internal static string Button_Disabled_Background {
+            get {
+                return ResourceManager.GetString("Button_Disabled_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;ButtonBorderDisabled&apos;]/Background/@Source.
+        /// </summary>
+        internal static string Button_Disabled_Border {
+            get {
+                return ResourceManager.GetString("Button_Disabled_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;ButtonDisabled&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string Button_Disabled_Foreground {
+            get {
+                return ResourceManager.GetString("Button_Disabled_Foreground", resourceCulture);
             }
         }
         
@@ -97,6 +124,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;ButtonBorderHover&apos;]/Background/@Source.
+        /// </summary>
+        internal static string Button_Hover_Border {
+            get {
+                return ResourceManager.GetString("Button_Hover_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;ButtonHover&apos;]/Foreground/@Source.
         /// </summary>
         internal static string Button_Hover_Foreground {
@@ -111,6 +147,15 @@ namespace mRemoteNG {
         internal static string Button_Pressed_Background {
             get {
                 return ResourceManager.GetString("Button_Pressed_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;ButtonBorderPressed&apos;]/Background/@Source.
+        /// </summary>
+        internal static string Button_Pressed_Border {
+            get {
+                return ResourceManager.GetString("Button_Pressed_Border", resourceCulture);
             }
         }
         

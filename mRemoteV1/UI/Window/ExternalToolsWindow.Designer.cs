@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.TextBox FilenameTextBox;
 		internal Controls.Base.NGLabel ArgumentsLabel;
 		internal Controls.Base.NGLabel FilenameLabel;
-		internal System.Windows.Forms.Button BrowseButton;
+		internal Controls.Base.NGButton BrowseButton;
 		internal System.Windows.Forms.ColumnHeader DisplayNameColumnHeader;
 		internal System.Windows.Forms.ContextMenuStrip ToolsContextMenuStrip;
 		private System.ComponentModel.Container components = null;
@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Window
 			this.WaitForExitCheckBox = new System.Windows.Forms.CheckBox();
 			this.WaitForExitCheckBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
 			this.WaitForExitCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
-			this.BrowseButton = new System.Windows.Forms.Button();
+			this.BrowseButton = new Controls.Base.NGButton();
 			this.BrowseButton.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
 			this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
 			this.ArgumentsCheckBox = new System.Windows.Forms.TextBox();
