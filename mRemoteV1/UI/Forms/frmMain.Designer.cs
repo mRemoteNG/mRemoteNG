@@ -61,6 +61,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewErrorsAndInfos = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewScreenshotManager = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenViewMultiPuttyCommand = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mMenViewJumpTo = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewJumpToConnectionsConfig = new System.Windows.Forms.ToolStripMenuItem();
@@ -336,6 +337,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewConfig,
             this.mMenViewErrorsAndInfos,
             this.mMenViewScreenshotManager,
+            this.mMenViewMultiPuttyCommand,
             this.ToolStripSeparator1,
             this.mMenViewJumpTo,
             this.mMenViewResetLayout,
@@ -406,6 +408,13 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
             this.mMenViewScreenshotManager.Text = "Screenshot Manager";
             this.mMenViewScreenshotManager.Click += new System.EventHandler(this.mMenViewScreenshotManager_Click);
+            //
+            // mMenViewMultiPuttyCommand
+            //
+            this.mMenViewMultiPuttyCommand.Name = "mMenViewMultiPuttyCommand";
+            this.mMenViewMultiPuttyCommand.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewMultiPuttyCommand.Text = "Multi Putty Commander";
+            this.mMenViewMultiPuttyCommand.Click += new System.EventHandler(this.mMenViewMultiPuttyCommand_Click);
             // 
             // ToolStripSeparator1
             // 
@@ -842,6 +851,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoDonate;
 		internal System.Windows.Forms.ToolStripSeparator mMenViewSep3;
 		internal ToolStripSplitButton btnQuickConnect;
+        internal System.Windows.Forms.ToolStripMenuItem mMenViewMultiPuttyCommand;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpTo;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToConnectionsConfig;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToErrorsInfos;

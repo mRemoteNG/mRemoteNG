@@ -705,6 +705,7 @@ namespace mRemoteNG.UI.Forms
             mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;
             mMenViewErrorsAndInfos.Checked = !Windows.ErrorsForm.IsHidden;
             mMenViewScreenshotManager.Checked = !Windows.ScreenshotForm.IsHidden;
+            mMenViewMultiPuttyCommand.Checked = !Windows.SSHCommandPanel.IsHidden;
 
             mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible;
             mMenViewQuickConnectToolbar.Checked = tsQuickConnect.Visible;
@@ -782,6 +783,20 @@ namespace mRemoteNG.UI.Forms
                 mMenViewScreenshotManager.Checked = false;
 			}
 		}
+
+        private void mMenViewMultiPuttyCommand_Click(object sender, EventArgs e)
+        {
+            if (mMenViewMultiPuttyCommand.Checked == false)
+            {
+                Windows.SSHCommandPanel.Show(pnlDock);
+                mMenViewMultiPuttyCommand.Checked = true;
+            }
+            else
+            {
+                Windows.SSHCommandPanel.Hide();
+                mMenViewMultiPuttyCommand.Checked = false;
+            }
+        }
 
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
 		{
