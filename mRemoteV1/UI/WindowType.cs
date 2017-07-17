@@ -17,6 +17,5 @@ namespace mRemoteNG.UI
 		PortScan = 14,
 		UltraVNCSC = 16,
 		ComponentsCheck = 17,
-        SSHCommandWindow = 18,
 	}
 }

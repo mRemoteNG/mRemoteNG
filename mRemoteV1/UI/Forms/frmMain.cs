@@ -46,9 +46,6 @@ namespace mRemoteNG.UI.Forms
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
 
-
-
-
         private frmMain()
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
@@ -253,6 +250,7 @@ namespace mRemoteNG.UI.Forms
 			mMenViewResetLayout.Text = Language.strMenuResetLayout;
 			mMenViewQuickConnectToolbar.Text = Language.strMenuQuickConnectToolbar;
 			mMenViewExtAppsToolbar.Text = Language.strMenuExternalToolsToolbar;
+            mMenViewMultiSSHToolbar.Text = "Multi SSH Toolbar"; // TODO: Figure out how to put in language text
 			mMenViewFullscreen.Text = Language.strMenuFullScreen;
 			
 			mMenTools.Text = Language.strMenuTools;
@@ -300,9 +298,12 @@ namespace mRemoteNG.UI.Forms
 			tsExternalTools.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
 			tsQuickConnect.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
 			tsQuickConnect.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-		}
-		
-		private static void ApplyMenuColors(IEnumerable itemCollection)
+            tsMultiSSH.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+            tsMultiSSH.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+
+        }
+
+        private static void ApplyMenuColors(IEnumerable itemCollection)
 		{
 		    foreach (ToolStripItem item in itemCollection)
 			{
@@ -705,10 +706,10 @@ namespace mRemoteNG.UI.Forms
             mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;
             mMenViewErrorsAndInfos.Checked = !Windows.ErrorsForm.IsHidden;
             mMenViewScreenshotManager.Checked = !Windows.ScreenshotForm.IsHidden;
-            mMenViewMultiPuttyCommand.Checked = !Windows.SSHCommandPanel.IsHidden;
 
             mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible;
             mMenViewQuickConnectToolbar.Checked = tsQuickConnect.Visible;
+            mMenViewMultiSSHToolbar.Checked = tsMultiSSH.Visible;
 
             mMenViewConnectionPanels.DropDownItems.Clear();
 
@@ -784,20 +785,6 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 
-        private void mMenViewMultiPuttyCommand_Click(object sender, EventArgs e)
-        {
-            if (mMenViewMultiPuttyCommand.Checked == false)
-            {
-                Windows.SSHCommandPanel.Show(pnlDock);
-                mMenViewMultiPuttyCommand.Checked = true;
-            }
-            else
-            {
-                Windows.SSHCommandPanel.Hide();
-                mMenViewMultiPuttyCommand.Checked = false;
-            }
-        }
-
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
 		{
             if (pnlDock.ActiveContent == Windows.TreePanel)
@@ -857,6 +844,20 @@ namespace mRemoteNG.UI.Forms
 				mMenViewQuickConnectToolbar.Checked = false;
 			}
 		}
+
+        private void mMenViewMultiSSHToolbar_Click(object sender, EventArgs e)
+        {
+            if (mMenViewMultiSSHToolbar.Checked == false)
+            {
+                tsMultiSSH.Visible = true;
+                mMenViewMultiSSHToolbar.Checked = true;
+            }
+            else
+            {
+                tsMultiSSH.Visible = false;
+                mMenViewMultiSSHToolbar.Checked = false;
+            }
+        }
 
         private void mMenViewFullscreen_Click(object sender, EventArgs e)
 		{
@@ -974,6 +975,106 @@ namespace mRemoteNG.UI.Forms
 			    menuItem.Checked = menuItem.Text.Equals(protocol);
 			}
 		}
+        #endregion
+
+        #region Multi SSH
+        private ArrayList processHandlers = new ArrayList();
+        private ArrayList previousCommands = new ArrayList();
+        private int previousCommandIndex = 0;
+
+        private void txtMultiSSH_Enter(object sender, EventArgs e)
+        {
+            var previouslyOpenedConnections = Runtime.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
+
+            processHandlers.Clear();
+            foreach (ConnectionInfo connection in previouslyOpenedConnections)
+            {
+                foreach (ProtocolBase _base in connection.OpenConnections)
+                {
+                    if (_base.GetType().IsSubclassOf(typeof(PuttyBase)))
+                    {
+                        processHandlers.Add((PuttyBase)_base);
+                    }
+                }
+            }
+        }
+
+        private void txtMultiSSH_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (processHandlers.Count == 0)
+            {
+                e.SuppressKeyPress = true;
+                return;
+            }
+
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            {
+                e.SuppressKeyPress = true;
+                if (e.KeyCode == Keys.Up && previousCommandIndex - 1 >= 0)
+                {
+                    previousCommandIndex -= 1;
+                }
+
+                if (e.KeyCode == Keys.Down && previousCommandIndex + 1 < previousCommands.Count)
+                {
+                    previousCommandIndex += 1;
+                }
+
+                txtMultiSSH.Text = previousCommands[previousCommandIndex].ToString();
+                txtMultiSSH.Select(txtMultiSSH.TextLength, 0);
+            }
+
+            if (e.Control == true && e.KeyCode != Keys.V && e.Alt == false)
+            {
+                sendAllKey(NativeMethods.WM_KEYDOWN, e.KeyValue);
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                string strLine = txtMultiSSH.Text;
+                foreach (char chr1 in strLine)
+                {
+                    sendAllKey(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
+                }
+                sendAllKey(NativeMethods.WM_KEYDOWN, 13); // Enter = char13
+            }
+        }
+
+        private void saveLastCommand()
+        {
+            if (txtMultiSSH.Text.Trim() != "")
+            {
+                previousCommands.Add(txtMultiSSH.Text.Trim());
+            }
+            if (previousCommands.Count >= 100)
+            {
+                // Don't keep too many. TODO: make this configurable
+                previousCommands.RemoveAt(0);
+            }
+
+            previousCommandIndex = previousCommands.Count - 1;
+            txtMultiSSH.Clear();
+        }
+
+        private void sendAllKey(int keyType, int keyData)
+        {
+            if (processHandlers.Count == 0)
+            {
+                return;
+            }
+            foreach (PuttyBase proc in processHandlers)
+            {
+                NativeMethods.PostMessage(proc.PuttyHandle, keyType, new IntPtr(keyData), new IntPtr(0));
+            }
+        }
+
+        private void txtMultiSSH_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                saveLastCommand();
+            }
+        }
         #endregion
 
         #region Info

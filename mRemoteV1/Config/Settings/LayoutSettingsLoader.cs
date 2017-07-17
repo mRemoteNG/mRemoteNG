@@ -76,9 +76,6 @@ namespace mRemoteNG.Config.Settings
 
                 if (persistString == typeof(ScreenshotManagerWindow).ToString())
                     return Windows.ScreenshotPanel;
-
-                if (persistString == typeof(SSHCommandWIndow).ToString())
-                    return Windows.SSHCommandPanel;
             }
             catch (Exception ex)
             {
@@ -101,9 +98,6 @@ namespace mRemoteNG.Config.Settings
 
             Windows.ScreenshotForm = new ScreenshotManagerWindow(Windows.ScreenshotPanel);
             Windows.ScreenshotPanel = Windows.ScreenshotForm;
-
-            Windows.SSHCommandForm = new SSHCommandWIndow(Windows.SSHCommandPanel);
-            Windows.SSHCommandPanel = Windows.SSHCommandForm;
 
             Windows.UpdateForm = new UpdateWindow(Windows.UpdatePanel);
             Windows.UpdatePanel = Windows.UpdateForm;

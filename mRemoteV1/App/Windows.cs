@@ -18,7 +18,6 @@ namespace mRemoteNG.App
         private static DockContent _helpPanel = new DockContent();
         private static ExternalToolsWindow _externalappsForm;
         private static DockContent _externalappsPanel = new DockContent();
-        private static SSHCommandWIndow _sshcommandForm;
         private static DockContent _sshcommandPanel = new DockContent();
         private static PortScanWindow _portscanForm;
         private static DockContent _portscanPanel = new DockContent();
@@ -35,8 +34,6 @@ namespace mRemoteNG.App
         public static DockContent ErrorsPanel { get; set; } = new DockContent();
         public static ScreenshotManagerWindow ScreenshotForm { get; set; }
         public static DockContent ScreenshotPanel { get; set; } = new DockContent();
-        public static SSHCommandWIndow SSHCommandForm { get; set; }
-        public static DockContent SSHCommandPanel { get; set; } = new DockContent();
         public static UpdateWindow UpdateForm { get; set; }
         public static DockContent UpdatePanel { get; set; } = new DockContent();
         public static SSHTransferWindow SshtransferForm { get; set; }
@@ -101,15 +98,6 @@ namespace mRemoteNG.App
                     {
                         _externalappsForm = new ExternalToolsWindow(_externalappsPanel);
                         _externalappsPanel = _externalappsForm;
-                    }
-                    _externalappsForm.Show(frmMain.Default.pnlDock);
-                }
-                else if (windowType.Equals(WindowType.SSHCommandWindow))
-                {
-                    if (_sshcommandForm == null || _sshcommandForm.IsDisposed)
-                    {
-                        _sshcommandForm = new SSHCommandWIndow(_sshcommandPanel);
-                        _sshcommandPanel = _sshcommandForm;
                     }
                     _externalappsForm.Show(frmMain.Default.pnlDock);
                 }
