@@ -47,12 +47,6 @@
     <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.MSTSCLib">
-      <HintPath>References\AxInterop.MSTSCLib.dll</HintPath>
-    </Reference>
-    <Reference Include="AxInterop.WFICALib">
-      <HintPath>References\AxInterop.WFICALib.dll</HintPath>
-    </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
@@ -64,10 +58,6 @@
     <Reference Include="Geckofx-Winforms, Version=45.0.22.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
       <HintPath>..\packages\Geckofx45.45.0.22\lib\net40\Geckofx-Winforms.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Interop.WFICALib">
-      <HintPath>References\Interop.WFICALib.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="ADTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -1229,10 +1219,26 @@
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+    <COMReference Include="AxWFICALib">
+      <Guid>{238F6F80-B8B4-11CF-8771-00A024541EE3}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="MSTSCLib">
       <Guid>{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WFICALib">
+      <Guid>{238F6F80-B8B4-11CF-8771-00A024541EE3}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
