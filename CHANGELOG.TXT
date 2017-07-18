@@ -2,8 +2,10 @@
 
 Fixes:
 ------
+#646: Exception after click on import port scan
 #596: Exception when launching ExtTool without a connection selected
 Minor error message correction
+Minor code refactoring
 
 
 NO.RELEASE (2017-06-15):
