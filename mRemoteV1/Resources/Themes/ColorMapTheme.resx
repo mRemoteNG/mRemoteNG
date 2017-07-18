@@ -153,11 +153,56 @@
   <data name="Button_Pressed_Foreground" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonPressed']/Foreground/@Source</value>
   </data>
+  <data name="CheckBox_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBackground']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBorder']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Border_Disabled" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBorderDisabled']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Border_Hover" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBorderHover']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Border_Pressed" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBorderPressed']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Glyph" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxGlyph']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Glyph_Disabled" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxGlyphDisabled']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Text" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxText']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Text_Disabled" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxTextDisabled']/Background/@Source</value>
+  </data>
   <data name="ErrorText_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler error']/Background/@Source</value>
   </data>
   <data name="ErrorText_Foreground" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler error']/Foreground/@Source</value>
+  </data>
+  <data name="GroupBox_Backgorund" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabActiveBackground']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabInactiveBackground']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabInactiveText']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Disabled_Line" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabInactiveBorder']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabActiveText']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Line" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabActiveBorder']/Background/@Source</value>
   </data>
   <data name="List_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListBackground']/Background/@Source</value>

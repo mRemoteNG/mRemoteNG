@@ -1,5 +1,7 @@
 ﻿using mRemoteNG.Themes;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
@@ -21,8 +23,14 @@ namespace mRemoteNG.UI.Controls.Base
   
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
-            if (DesignMode) return;
+            if (DesignMode) 
+            {
+                base.OnPaint(e);
+                return;
+            }
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             if (Enabled)
             {
                 TextRenderer.DrawText(e.Graphics, this.Text, Font, ClientRectangle, ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);

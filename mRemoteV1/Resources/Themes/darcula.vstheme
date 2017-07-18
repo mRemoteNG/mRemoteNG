@@ -614,8 +614,8 @@
         <Foreground Type="CT_RAW" Source="FFFFFFFF" />
       </Color>
       <Color Name="ListHeader">
-        <Background Type="CT_RAW" Source="FF464A4D" />
-        <Foreground Type="CT_RAW" Source="FFBBBBBB" />
+        <Background Type="CT_RAW" Source="FF44475A" />
+        <Foreground Type="CT_RAW" Source="FF7BFA50" />
       </Color>
       <Color Name="Dialog">
         <Background Type="CT_RAW" Source="FF464A4D" />
@@ -661,7 +661,7 @@
         <Background Type="CT_RAW" Source="FF999999" />
       </Color>
       <Color Name="ListBackground">
-        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Background Type="CT_RAW" Source="FF282A36" />
       </Color>
       <Color Name="Toolbar">
         <Background Type="CT_RAW" Source="FF464A4D" />
@@ -2550,7 +2550,7 @@
         <Background Type="CT_RAW" Source="FF4B6EAF" />
       </Color>
       <Color Name="ButtonPressed">
-        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Background Type="CT_RAW" Source="FF6272A4" />
         <Foreground Type="CT_RAW" Source="FFBBBBBB" />
       </Color>
       <Color Name="ButtonBorderPressed">
@@ -2611,10 +2611,10 @@
         <Background Type="CT_RAW" Source="FF999999" />
       </Color>
       <Color Name="CheckBoxBorderHover">
-        <Background Type="CT_RAW" Source="FF4B6EAF" />
+        <Background Type="CT_RAW" Source="FFFF79C6" />
       </Color>
       <Color Name="CheckBoxBorderPressed">
-        <Background Type="CT_RAW" Source="FF4B6EAF" />
+        <Background Type="CT_RAW" Source="FF44475A" />
       </Color>
       <Color Name="CheckBoxBorderDisabled">
         <Background Type="CT_RAW" Source="FF474B4F" />
@@ -2623,7 +2623,7 @@
         <Background Type="CT_RAW" Source="FF4B6EAF" />
       </Color>
       <Color Name="CheckBoxGlyph">
-        <Background Type="CT_RAW" Source="FFBBBBBB" />
+        <Background Type="CT_RAW" Source="FFFF79C6" />
       </Color>
       <Color Name="CheckBoxGlyphHover">
         <Background Type="CT_RAW" Source="FFBBBBBB" />
@@ -2758,10 +2758,10 @@
         <Background Type="CT_RAW" Source="FF3E3E40" />
       </Color>
       <Color Name="InnerTabActiveBorder">
-        <Background Type="CT_RAW" Source="FF3E3E40" />
+        <Background Type="CT_RAW" Source="FFF993BD" />
       </Color>
       <Color Name="InnerTabActiveText">
-        <Background Type="CT_RAW" Source="FFBBBBBB" />
+        <Background Type="CT_RAW" Source="FFF993BD" />
       </Color>
       <Color Name="InnerTabInactiveBackground">
         <Background Type="CT_RAW" Source="FF3C3F41" />
@@ -8049,7 +8049,7 @@
         <Foreground Type="CT_RAW" Source="FF424242" />
       </Color>
       <Color Name="ListItemForeground">
-        <Background Type="CT_RAW" Source="FFF1F1F1" />
+        <Background Type="CT_RAW" Source="FFF993BD" />
       </Color>
       <Color Name="ListItemDisabledForeground">
         <Background Type="CT_RAW" Source="FF666666" />

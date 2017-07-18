@@ -24,7 +24,7 @@
       </Color>
       <Color Name="AIGrayText">
         <Background Type="CT_RAW" Source="FF555555" />
-      </Color>
+      </Color>	
       <Color Name="Success">
         <Background Type="CT_RAW" Source="FF008000" />
       </Color>

@@ -44,7 +44,6 @@ namespace mRemoteNG.Themes
                 string colorName  = entry.Key.ToString();
                 String xmlQueryPath = (String)entry.Value;
                 XmlNodeList colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
-                //XmlNodeList colorNodeList = _xml.SelectNodes("/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemSelectedBorder']/Background/@Source");
                 String color = colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
                 if (color != null )
                 {

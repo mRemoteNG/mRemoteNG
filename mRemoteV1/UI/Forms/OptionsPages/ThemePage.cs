@@ -49,8 +49,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            _themeManager.SaveThemes(_themeList);
-            Settings.Default.ThemeName = _themeManager.ActiveTheme.Name;
+            //_themeManager.SaveThemes(_themeList);
+            //Settings.Default.ThemeName = _themeManager.ActiveTheme.Name;
 
             Settings.Default.Save();
         }

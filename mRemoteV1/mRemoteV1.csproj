@@ -344,7 +344,16 @@
     <Compile Include="UI\Controls\Base\NGButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\Base\NGCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\Base\NGLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">

@@ -1,6 +1,8 @@
 ﻿using mRemoteNG.Themes;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
@@ -54,8 +56,11 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
-            if (DesignMode) return;
+            if (DesignMode)
+            {
+                base.OnPaint(e);
+                return;
+            }
             Color back;
             Color fore;
             Color border;
@@ -89,6 +94,8 @@ namespace mRemoteNG.UI.Controls.Base
             }
             e.Graphics.FillRectangle(new SolidBrush(back), e.ClipRectangle);
             e.Graphics.DrawRectangle(new Pen(border, 1), 0, 0, base.Width - 1, base.Height - 1);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             TextRenderer.DrawText(e.Graphics, this.Text, Font, ClientRectangle, fore, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
     }

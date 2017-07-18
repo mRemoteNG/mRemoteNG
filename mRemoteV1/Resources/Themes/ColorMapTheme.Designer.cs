@@ -169,6 +169,87 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxBackground&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Background {
+            get {
+                return ResourceManager.GetString("CheckBox_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxBorder&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Border {
+            get {
+                return ResourceManager.GetString("CheckBox_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxBorderDisabled&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Border_Disabled {
+            get {
+                return ResourceManager.GetString("CheckBox_Border_Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxBorderHover&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Border_Hover {
+            get {
+                return ResourceManager.GetString("CheckBox_Border_Hover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxBorderPressed&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Border_Pressed {
+            get {
+                return ResourceManager.GetString("CheckBox_Border_Pressed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxGlyph&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Glyph {
+            get {
+                return ResourceManager.GetString("CheckBox_Glyph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxGlyphDisabled&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Glyph_Disabled {
+            get {
+                return ResourceManager.GetString("CheckBox_Glyph_Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxText&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Text {
+            get {
+                return ResourceManager.GetString("CheckBox_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;CheckBoxTextDisabled&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CheckBox_Text_Disabled {
+            get {
+                return ResourceManager.GetString("CheckBox_Text_Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Text Editor Text Marker Items&apos;]/Color[@Name=&apos;compiler error&apos;]/Background/@Source.
         /// </summary>
         internal static string ErrorText_Background {
@@ -183,6 +264,60 @@ namespace mRemoteNG {
         internal static string ErrorText_Foreground {
             get {
                 return ResourceManager.GetString("ErrorText_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;InnerTabActiveBackground&apos;]/Background/@Source.
+        /// </summary>
+        internal static string GroupBox_Backgorund {
+            get {
+                return ResourceManager.GetString("GroupBox_Backgorund", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;InnerTabInactiveBackground&apos;]/Background/@Source.
+        /// </summary>
+        internal static string GroupBox_Disabled_Background {
+            get {
+                return ResourceManager.GetString("GroupBox_Disabled_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;InnerTabInactiveText&apos;]/Background/@Source.
+        /// </summary>
+        internal static string GroupBox_Disabled_Foreground {
+            get {
+                return ResourceManager.GetString("GroupBox_Disabled_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;InnerTabInactiveBorder&apos;]/Background/@Source.
+        /// </summary>
+        internal static string GroupBox_Disabled_Line {
+            get {
+                return ResourceManager.GetString("GroupBox_Disabled_Line", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;InnerTabActiveText&apos;]/Background/@Source.
+        /// </summary>
+        internal static string GroupBox_Foreground {
+            get {
+                return ResourceManager.GetString("GroupBox_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;InnerTabActiveBorder&apos;]/Background/@Source.
+        /// </summary>
+        internal static string GroupBox_Line {
+            get {
+                return ResourceManager.GetString("GroupBox_Line", resourceCulture);
             }
         }
         
