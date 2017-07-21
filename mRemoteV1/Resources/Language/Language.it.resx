@@ -148,7 +148,7 @@
     <value>Connetti sempre, anche se l'autenticazione fallisce</value>
   </data>
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
-    <value>Mostra sempre la finsetra di selezione pannello all'apertura di una connessione</value>
+    <value>Mostra sempre la finestra di selezione pannello all'apertura di una connessione</value>
   </data>
   <data name="strAlwaysShowPanelTabs" xml:space="preserve">
     <value>Mostra sempre le schede dei pannelli</value>
