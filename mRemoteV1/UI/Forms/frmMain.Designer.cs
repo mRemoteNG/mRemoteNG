@@ -808,9 +808,6 @@ namespace mRemoteNG.UI.Forms
             this.txtMultiSSH.Name = "txtMultiSSH";
             this.txtMultiSSH.Size = new System.Drawing.Size(300, 25);
             this.txtMultiSSH.ToolTipText = "Press ENTER to send. Ctrl+C is sent immediately.";
-            this.txtMultiSSH.Enter += new System.EventHandler(this.txtMultiSSH_Enter);
-            this.txtMultiSSH.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMultiSSH_KeyDown);
-            this.txtMultiSSH.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMultiSSH_KeyUp);
             // 
             // tmrAutoSave
             // 

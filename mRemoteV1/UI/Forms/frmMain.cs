@@ -45,6 +45,7 @@ namespace mRemoteNG.UI.Forms
         private SystemMenu _systemMenu;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private MultiSSHController _multiSSHController ;
 
         private frmMain()
 		{
@@ -52,7 +53,8 @@ namespace mRemoteNG.UI.Forms
 			InitializeComponent();
             _fullscreen = new Fullscreen(this);
             pnlDock.Theme = new VS2012LightTheme();
-		}
+            _multiSSHController = new MultiSSHController(txtMultiSSH);
+        }
 
         static frmMain()
         {
@@ -975,106 +977,6 @@ namespace mRemoteNG.UI.Forms
 			    menuItem.Checked = menuItem.Text.Equals(protocol);
 			}
 		}
-        #endregion
-
-        #region Multi SSH
-        private ArrayList processHandlers = new ArrayList();
-        private ArrayList previousCommands = new ArrayList();
-        private int previousCommandIndex = 0;
-
-        private void txtMultiSSH_Enter(object sender, EventArgs e)
-        {
-            var previouslyOpenedConnections = Runtime.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
-
-            processHandlers.Clear();
-            foreach (ConnectionInfo connection in previouslyOpenedConnections)
-            {
-                foreach (ProtocolBase _base in connection.OpenConnections)
-                {
-                    if (_base.GetType().IsSubclassOf(typeof(PuttyBase)))
-                    {
-                        processHandlers.Add((PuttyBase)_base);
-                    }
-                }
-            }
-        }
-
-        private void txtMultiSSH_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (processHandlers.Count == 0)
-            {
-                e.SuppressKeyPress = true;
-                return;
-            }
-
-            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
-            {
-                e.SuppressKeyPress = true;
-                if (e.KeyCode == Keys.Up && previousCommandIndex - 1 >= 0)
-                {
-                    previousCommandIndex -= 1;
-                }
-
-                if (e.KeyCode == Keys.Down && previousCommandIndex + 1 < previousCommands.Count)
-                {
-                    previousCommandIndex += 1;
-                }
-
-                txtMultiSSH.Text = previousCommands[previousCommandIndex].ToString();
-                txtMultiSSH.Select(txtMultiSSH.TextLength, 0);
-            }
-
-            if (e.Control == true && e.KeyCode != Keys.V && e.Alt == false)
-            {
-                sendAllKey(NativeMethods.WM_KEYDOWN, e.KeyValue);
-            }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                string strLine = txtMultiSSH.Text;
-                foreach (char chr1 in strLine)
-                {
-                    sendAllKey(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
-                }
-                sendAllKey(NativeMethods.WM_KEYDOWN, 13); // Enter = char13
-            }
-        }
-
-        private void saveLastCommand()
-        {
-            if (txtMultiSSH.Text.Trim() != "")
-            {
-                previousCommands.Add(txtMultiSSH.Text.Trim());
-            }
-            if (previousCommands.Count >= 100)
-            {
-                // Don't keep too many. TODO: make this configurable
-                previousCommands.RemoveAt(0);
-            }
-
-            previousCommandIndex = previousCommands.Count - 1;
-            txtMultiSSH.Clear();
-        }
-
-        private void sendAllKey(int keyType, int keyData)
-        {
-            if (processHandlers.Count == 0)
-            {
-                return;
-            }
-            foreach (PuttyBase proc in processHandlers)
-            {
-                NativeMethods.PostMessage(proc.PuttyHandle, keyType, new IntPtr(keyData), new IntPtr(0));
-            }
-        }
-
-        private void txtMultiSSH_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                saveLastCommand();
-            }
-        }
         #endregion
 
         #region Info
