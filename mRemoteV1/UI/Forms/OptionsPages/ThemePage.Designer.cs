@@ -31,11 +31,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThemePage));
-			this.btnThemeDelete = new System.Windows.Forms.Button();
+			this.btnThemeDelete = new Controls.Base.NGButton();
 			this.btnThemeDelete.Click += new System.EventHandler(this.btnThemeDelete_Click);
-			this.btnThemeNew = new System.Windows.Forms.Button();
+			this.btnThemeNew = new Controls.Base.NGButton();
 			this.btnThemeNew.Click += new System.EventHandler(this.btnThemeNew_Click);
-			this.cboTheme = new System.Windows.Forms.ComboBox();
+			this.cboTheme = new Controls.Base.NGComboBox();
 			this.cboTheme.DropDown += new System.EventHandler(this.cboTheme_DropDown);
 			this.cboTheme.SelectionChangeCommitted += new System.EventHandler(this.cboTheme_SelectionChangeCommitted);
 			this.ThemePropertyGrid = new System.Windows.Forms.PropertyGrid();
@@ -92,9 +92,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.ResumeLayout(false);
 				
 		}
-		internal System.Windows.Forms.Button btnThemeDelete;
-		internal System.Windows.Forms.Button btnThemeNew;
-		internal System.Windows.Forms.ComboBox cboTheme;
+		internal Controls.Base.NGButton btnThemeDelete;
+		internal Controls.Base.NGButton btnThemeNew;
+		internal Controls.Base.NGComboBox cboTheme;
 		internal System.Windows.Forms.PropertyGrid ThemePropertyGrid;
 			
 	}

@@ -7,6 +7,7 @@ using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.PageSequence;
 using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages;
 using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelectors;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
@@ -28,10 +29,18 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             _providerCatalog = providerCatalog;
             _unlockerFactory = unlockerFactory;
             InitializeComponent();
+            ApplyTheme();
             credentialRepositoryListView.CredentialRepositoryList = providerCatalog;
             credentialRepositoryListView.SelectionChanged += (sender, args) => UpdateUi();
             credentialRepositoryListView.DoubleClickHandler = EditRepository;
         }
+
+        private void ApplyTheme()
+        {
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+        }
+
 
         private void UpdateUi()
         {

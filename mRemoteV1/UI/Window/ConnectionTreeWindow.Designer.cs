@@ -5,7 +5,7 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionTreeWindow : BaseWindow
 	{
         #region  Windows Form Designer generated code
-		internal System.Windows.Forms.TextBox txtSearch;
+		internal Controls.Base.NGTextBox txtSearch;
 		internal System.Windows.Forms.Panel pnlConnections;
 		internal System.Windows.Forms.MenuStrip msMain;
 		internal System.Windows.Forms.ToolStripMenuItem mMenView;
@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Window
             this.olvConnections = new mRemoteNG.UI.Controls.ConnectionTree();
             this.pnlConnections = new System.Windows.Forms.Panel();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.txtSearch = new Controls.Base.NGTextBox();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.mMenAddConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenAddFolder = new System.Windows.Forms.ToolStripMenuItem();

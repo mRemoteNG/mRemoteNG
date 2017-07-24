@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
-    class NGCheckBox : CheckBox
+    public class NGCheckBox : CheckBox
     {
         private ThemeManager _themeManager;
 
@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (DesignMode) return;
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
             _themeManager = ThemeManager.getInstance();
             _mice = MouseState.OUT;
             MouseEnter += (sender, args) =>
@@ -59,7 +59,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (DesignMode)
+            if (Tools.DesignModeTest.IsInDesignMode(this))
             {
                 base.OnPaint(e);
                 return;

@@ -265,15 +265,15 @@
         <Background Type="CT_RAW" Source="FF474B4F" />
       </Color>
       <Color Name="ComboBoxButton">
-        <Background Type="CT_RAW" Source="FF343638" />
-        <Foreground Type="CT_RAW" Source="FFBBBBBB" />
+        <Background Type="CT_RAW" Source="FF424547" />
+        <Foreground Type="CT_RAW" Source="FFDFDFDF" />
       </Color>
       <Color Name="ComboBoxButtonBorder">
         <Background Type="CT_RAW" Source="FF474B4F" />
       </Color>
       <Color Name="ComboBoxButtonMouseOver">
         <Background Type="CT_RAW" Source="FF424547" />
-        <Foreground Type="CT_RAW" Source="FFDFDFDF" />
+        <Foreground Type="CT_RAW" Source="FFBD93F9" />
       </Color>
       <Color Name="ComboBoxButtonPressedBorder">
         <Background Type="CT_RAW" Source="FF505457" />
@@ -283,7 +283,7 @@
       </Color>
       <Color Name="ComboBoxButtonPressed">
         <Background Type="CT_RAW" Source="FF505457" />
-        <Foreground Type="CT_RAW" Source="FFDFDFDF" />
+        <Foreground Type="CT_RAW" Source="FFF993BD" />
       </Color>
       <Color Name="ComboBoxPopUpBorder">
         <Background Type="CT_RAW" Source="FF2D2D2D" />
@@ -615,7 +615,7 @@
       </Color>
       <Color Name="ListHeader">
         <Background Type="CT_RAW" Source="FF44475A" />
-        <Foreground Type="CT_RAW" Source="FF7BFA50" />
+        <Foreground Type="CT_RAW" Source="FFF993BD" />
       </Color>
       <Color Name="Dialog">
         <Background Type="CT_RAW" Source="FF464A4D" />
@@ -2558,7 +2558,7 @@
       </Color>
       <Color Name="ButtonHover">
         <Background Type="CT_RAW" Source="FF343638" />
-        <Foreground Type="CT_RAW" Source="FFBBBBBB" />
+        <Foreground Type="CT_RAW" Source="FF8BE9FD" />
       </Color>
       <Color Name="ButtonBorderHover">
         <Background Type="CT_RAW" Source="FF4B6EAF" />
@@ -2758,10 +2758,10 @@
         <Background Type="CT_RAW" Source="FF3E3E40" />
       </Color>
       <Color Name="InnerTabActiveBorder">
-        <Background Type="CT_RAW" Source="FFF993BD" />
+        <Background Type="CT_RAW" Source="FFBD93F9" />
       </Color>
       <Color Name="InnerTabActiveText">
-        <Background Type="CT_RAW" Source="FFF993BD" />
+        <Background Type="CT_RAW" Source="FFBD93F9" />
       </Color>
       <Color Name="InnerTabInactiveBackground">
         <Background Type="CT_RAW" Source="FF3C3F41" />

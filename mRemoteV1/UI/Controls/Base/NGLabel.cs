@@ -16,14 +16,14 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (DesignMode) return;
-            _themeManager = ThemeManager.getInstance();
+            if (!Tools.DesignModeTest.IsInDesignMode(this))
+                _themeManager = ThemeManager.getInstance();
         }
 
   
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (DesignMode) 
+            if (Tools.DesignModeTest.IsInDesignMode(this))
             {
                 base.OnPaint(e);
                 return;

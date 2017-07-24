@@ -6,6 +6,7 @@ using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls.PageSequence;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
@@ -24,6 +25,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
             _credentialRepositoryList = credentialRepositoryList;
             InitializeComponent();
+            ApplyTheme();
             ApplyLanguage();
             credentialRecordListView.CellClick += HandleCellDoubleClick;
             credentialRecordListView.SelectionChanged += ObjectListView1OnSelectionChanged;
@@ -31,6 +33,12 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             credentialRecordListView.KeyDown += OnAPressed;
             credentialRecordListView.KeyDown += OnDeletePressed;
             credentialRecordListView.CredentialRepositoryList = _credentialRepositoryList;
+        }
+
+        private void ApplyTheme()
+        { 
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyLanguage()

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.UI.Controls.PageSequence;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
@@ -13,10 +14,17 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
                 throw new ArgumentNullException(nameof(credentialRepositoryList));
 
             InitializeComponent();
+            ApplyTheme();
             Dock = DockStyle.Fill;
             credentialRepositoryListView.RepositoryFilter = repository => repository.IsLoaded;
             credentialRepositoryListView.CredentialRepositoryList = credentialRepositoryList;
             credentialRepositoryListView.DoubleClickHandler = DoubleClickHandler;
+        }
+
+        private void ApplyTheme()
+        {
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void Continue(ICredentialRepository credentialRepository)

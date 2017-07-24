@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms.CredentialManagerPages
+﻿using mRemoteNG.Themes;
+
+namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
     partial class CredentialRepositoryTypeSelectionPage
     {
@@ -29,11 +31,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.buttonContinue = new System.Windows.Forms.Button();
-            this.objectListView = new BrightIdeasSoftware.ObjectListView();
+            this.buttonContinue = new Controls.Base.NGButton();
+            this.objectListView = new Controls.Base.NGListView();
             this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.buttonBack = new System.Windows.Forms.Button();
+            this.buttonBack = new Controls.Base.NGButton();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,10 +126,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonContinue;
-        private BrightIdeasSoftware.ObjectListView objectListView;
+       private Controls.Base.NGButton buttonContinue;
+        private Controls.Base.NGListView objectListView;
         private BrightIdeasSoftware.OLVColumn olvColumnName;
         private System.Windows.Forms.ImageList imageListLarge;
-        private System.Windows.Forms.Button buttonBack;
+       private Controls.Base.NGButton buttonBack;
     }
 }

@@ -30,18 +30,18 @@ namespace mRemoteNG.UI.Window
 		private void InitializeComponent()
 		{
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.lblEdition = new System.Windows.Forms.Label();
+            this.lblEdition = new Controls.Base.NGLabel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.verText = new System.Windows.Forms.TextBox();
-            this.lblCredits = new System.Windows.Forms.Label();
-            this.txtCredits = new System.Windows.Forms.TextBox();
-            this.txtChangeLog = new System.Windows.Forms.TextBox();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblVersion = new System.Windows.Forms.Label();
-            this.lblChangeLog = new System.Windows.Forms.Label();
-            this.lblLicense = new System.Windows.Forms.Label();
-            this.lblCopyright = new System.Windows.Forms.Label();
+            this.verText = new Controls.Base.NGTextBox();
+            this.lblCredits = new Controls.Base.NGLabel();
+            this.txtCredits = new Controls.Base.NGTextBox();
+            this.txtChangeLog = new Controls.Base.NGTextBox();
+            this.lblTitle = new Controls.Base.NGLabel();
+            this.lblVersion = new Controls.Base.NGLabel();
+            this.lblChangeLog = new Controls.Base.NGLabel();
+            this.lblLicense = new Controls.Base.NGLabel();
+            this.lblCopyright = new Controls.Base.NGLabel();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlBottom.SuspendLayout();

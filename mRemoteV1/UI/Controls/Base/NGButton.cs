@@ -5,11 +5,11 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 
+
 namespace mRemoteNG.UI.Controls.Base
 {
     [ToolboxBitmap(typeof(Button))]
-    [DefaultEvent("Click")]
-    class NGButton : Button
+    public class NGButton : Button
     {
         private ThemeManager _themeManager ;
 
@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (DesignMode) return;
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
             _themeManager = ThemeManager.getInstance();
             _mice = MouseState.OUT;
             MouseEnter += (sender, args) =>
@@ -56,7 +56,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (DesignMode)
+            if (Tools.DesignModeTest.IsInDesignMode(this))
             {
                 base.OnPaint(e);
                 return;

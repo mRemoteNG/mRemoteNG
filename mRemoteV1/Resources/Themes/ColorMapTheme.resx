@@ -180,6 +180,68 @@
   <data name="CheckBox_Text_Disabled" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxTextDisabled']/Background/@Source</value>
   </data>
+  <data name="ComboBox_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBox']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxBorder']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButton']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonBorder']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButton']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_Button_MouseOver_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonMouseOver']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_MouseOver_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonMouseOverBorder']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_MouseOver_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonMouseOver']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Pressed_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonPressed']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Pressed_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonPressed']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxDisabled']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxDisabled']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBox']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_MouseOver_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxMouseOverBorder']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_PopUp" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxPopUpBorder']/ComboBoxPopUp/@Source</value>
+  </data>
+  <data name="ComboBox_PopUp_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxPopUpBorder']/Background/@Source</value>
+  </data>
+  <data name="CommandBarMenuDefault_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Environment']/Color[@Name='CommandShelfHighlightGradientBegin']/Background/@Source</value>
+    <comment>Taken from themevs2012 in dockpanelsuite to default in NG</comment>
+  </data>
+  <data name="CommandBarMenuDefault_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Environment']/Color[@Name='CommandBarTextActive']/Background/@Source</value>
+    <comment>Taken from themevs2012 in dockpanelsuite to default in</comment>
+  </data>
+  <data name="Dialog_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='Dialog']/Background/@Source</value>
+  </data>
+  <data name="Dialog_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='Dialog']/Foreground/@Source</value>
+  </data>
   <data name="ErrorText_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler error']/Background/@Source</value>
   </data>
@@ -239,6 +301,18 @@
   </data>
   <data name="List_Item_Selected_Foreground" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemSelected']/Foreground/@Source</value>
+  </data>
+  <data name="ProgressBar_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='Background']/Background/@Source</value>
+  </data>
+  <data name="ProgressBar_Fill" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='IndicatorFill']/Background/@Source</value>
+  </data>
+  <data name="ProgressBar_Fill_Critical" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='IndicatorFillCritical']/Background/@Source</value>
+  </data>
+  <data name="ProgressBar_Fill_Warning" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='IndicatorFillWarning']/Background/@Source</value>
   </data>
   <data name="TextBox_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxBackground']/Background/@Source</value>

@@ -235,18 +235,8 @@ namespace mRemoteNG.UI.Window
             ToolStripContainer.TopToolStripPanel.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
             PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
             PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
-            //Toollist coloring
-            ToolsListObjView.BackColor =  _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Background");
-            ToolsListObjView.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
-            ToolsListObjView.SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Background");
-            ToolsListObjView.SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground");
-            ToolsListObjView.HeaderUsesThemes = false;
+            //Toollist grouping
             ToolsListObjView.AlwaysGroupByColumn = this.FilenameColumnHeader;
-            HeaderFormatStyle headerStylo = new HeaderFormatStyle();
-            headerStylo.Normal.BackColor =  _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Background");
-            headerStylo.Normal.ForeColor =  _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground");
-            ToolsListObjView.HeaderFormatStyle = headerStylo; 
-            
 
         }
 

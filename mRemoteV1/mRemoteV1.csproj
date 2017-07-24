@@ -314,6 +314,7 @@
     <Compile Include="Security\Factories\CryptoProviderFactoryFromXml.cs" />
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
+    <Compile Include="Tools\DesignModeTest.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
@@ -347,10 +348,25 @@
     <Compile Include="UI\Controls\Base\NGCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\Base\NGComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\Base\NGGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\Base\NGLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\Base\NGTextBox.cs">

@@ -34,17 +34,17 @@ namespace mRemoteNG.UI.TaskDialog
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTaskDialog));
             this.imgMain = new System.Windows.Forms.PictureBox();
-            this.lbContent = new System.Windows.Forms.Label();
+            this.lbContent = new Controls.Base.NGLabel();
             this.pnlButtons = new System.Windows.Forms.Panel();
-            this.bt1 = new System.Windows.Forms.Button();
-            this.bt2 = new System.Windows.Forms.Button();
-            this.bt3 = new System.Windows.Forms.Button();
-            this.cbVerify = new System.Windows.Forms.CheckBox();
-            this.lbShowHideDetails = new System.Windows.Forms.Label();
+            this.bt1 = new Controls.Base.NGButton();
+            this.bt2 = new Controls.Base.NGButton();
+            this.bt3 = new Controls.Base.NGButton();
+            this.cbVerify = new Controls.Base.NGCheckBox();
+            this.lbShowHideDetails = new Controls.Base.NGLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnlFooter = new System.Windows.Forms.Panel();
-            this.lbFooter = new System.Windows.Forms.Label();
+            this.lbFooter = new Controls.Base.NGLabel();
             this.imgFooter = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -52,7 +52,7 @@ namespace mRemoteNG.UI.TaskDialog
             this.pnlMainInstruction = new System.Windows.Forms.Panel();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlExpandedInfo = new System.Windows.Forms.Panel();
-            this.lbExpandedInfo = new System.Windows.Forms.Label();
+            this.lbExpandedInfo = new Controls.Base.NGLabel();
             this.pnlRadioButtons = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.imgMain)).BeginInit();
             this.pnlButtons.SuspendLayout();
@@ -317,25 +317,25 @@ namespace mRemoteNG.UI.TaskDialog
     #endregion
 
     private System.Windows.Forms.PictureBox imgMain;
-    private System.Windows.Forms.Label lbContent;
+    private Controls.Base.NGLabel lbContent;
     private System.Windows.Forms.Panel pnlButtons;
     private System.Windows.Forms.Panel panel2;
     private System.Windows.Forms.Panel pnlFooter;
     private System.Windows.Forms.Panel panel3;
     private System.Windows.Forms.Panel panel5;
     private System.Windows.Forms.PictureBox imgFooter;
-    private System.Windows.Forms.Label lbFooter;
+    private Controls.Base.NGLabel lbFooter;
     private System.Windows.Forms.ImageList imageList1;
-    private System.Windows.Forms.Label lbShowHideDetails;
+    private Controls.Base.NGLabel lbShowHideDetails;
     private System.Windows.Forms.Panel pnlCommandButtons;
-    private System.Windows.Forms.CheckBox cbVerify;
+    private Controls.Base.NGCheckBox cbVerify;
     private System.Windows.Forms.Panel pnlMainInstruction;
     private System.Windows.Forms.Panel pnlContent;
     private System.Windows.Forms.Panel pnlExpandedInfo;
-    private System.Windows.Forms.Label lbExpandedInfo;
+    private Controls.Base.NGLabel lbExpandedInfo;
     private System.Windows.Forms.Panel pnlRadioButtons;
-    private System.Windows.Forms.Button bt1;
-    private System.Windows.Forms.Button bt2;
-    private System.Windows.Forms.Button bt3;
+    private Controls.Base.NGButton bt1;
+    private Controls.Base.NGButton bt2;
+    private Controls.Base.NGButton bt3;
   }
 }

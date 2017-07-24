@@ -15,7 +15,8 @@ namespace mRemoteNG.Themes
         #region Private Variables
 
         private  ThemeInfo _activeTheme; 
-        private  Hashtable themes; 
+        private  Hashtable themes;
+        private bool _themeActive = false;
         private static ThemeManager themeInstance = null;
         #endregion
 
@@ -132,11 +133,23 @@ namespace mRemoteNG.Themes
         #endregion
 
         #region Properties
+        public  bool ThemingActive
+        {
+            get
+            {
+                return _themeActive;
+            }
+            set
+            {
+               _themeActive = value;
+            }
+        }
+
         public ThemeInfo DefaultTheme 
         {
 			get
 			{
-                return (ThemeInfo) themes["darcula"];
+                return (ThemeInfo) themes["vs2015light"];
 			} 
 		}
         
@@ -144,13 +157,14 @@ namespace mRemoteNG.Themes
 		{
 			get
 			{
-                return _activeTheme;
+                return (ThemeInfo)themes["vs2013Blue"];//_activeTheme;
 			}
 			set
 			{
-                _activeTheme = value;
+                if(value != null)
+                    _activeTheme = value;
 			}
 		}
         #endregion
 	}
-}
+} 

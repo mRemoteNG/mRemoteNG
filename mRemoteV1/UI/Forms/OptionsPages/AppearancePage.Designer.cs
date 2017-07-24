@@ -31,13 +31,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppearancePage));
-			this.lblLanguageRestartRequired = new System.Windows.Forms.Label();
-			this.cboLanguage = new System.Windows.Forms.ComboBox();
-			this.lblLanguage = new System.Windows.Forms.Label();
-			this.chkShowFullConnectionsFilePathInTitle = new System.Windows.Forms.CheckBox();
-			this.chkShowDescriptionTooltipsInTree = new System.Windows.Forms.CheckBox();
-			this.chkShowSystemTrayIcon = new System.Windows.Forms.CheckBox();
-			this.chkMinimizeToSystemTray = new System.Windows.Forms.CheckBox();
+			this.lblLanguageRestartRequired = new Controls.Base.NGLabel();
+			this.cboLanguage = new Controls.Base.NGComboBox();
+			this.lblLanguage = new Controls.Base.NGLabel();
+			this.chkShowFullConnectionsFilePathInTitle = new Controls.Base.NGCheckBox();
+			this.chkShowDescriptionTooltipsInTree = new Controls.Base.NGCheckBox();
+			this.chkShowSystemTrayIcon = new Controls.Base.NGCheckBox();
+			this.chkMinimizeToSystemTray = new Controls.Base.NGCheckBox();
 			this.SuspendLayout();
 			//
 			//lblLanguageRestartRequired
@@ -124,13 +124,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.PerformLayout();
 				
 		}
-		internal System.Windows.Forms.Label lblLanguageRestartRequired;
-		internal System.Windows.Forms.ComboBox cboLanguage;
-		internal System.Windows.Forms.Label lblLanguage;
-		internal System.Windows.Forms.CheckBox chkShowFullConnectionsFilePathInTitle;
-		internal System.Windows.Forms.CheckBox chkShowDescriptionTooltipsInTree;
-		internal System.Windows.Forms.CheckBox chkShowSystemTrayIcon;
-		internal System.Windows.Forms.CheckBox chkMinimizeToSystemTray;
+		internal Controls.Base.NGLabel lblLanguageRestartRequired;
+		internal Controls.Base.NGComboBox cboLanguage;
+		internal Controls.Base.NGLabel lblLanguage;
+		internal Controls.Base.NGCheckBox chkShowFullConnectionsFilePathInTitle;
+		internal Controls.Base.NGCheckBox chkShowDescriptionTooltipsInTree;
+		internal Controls.Base.NGCheckBox chkShowSystemTrayIcon;
+		internal Controls.Base.NGCheckBox chkMinimizeToSystemTray;
 			
 	}
 }

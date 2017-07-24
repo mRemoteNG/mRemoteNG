@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOptions));
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.btnCancel = new Controls.Base.NGButton();
+            this.btnOK = new Controls.Base.NGButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.lstOptionPages = new System.Windows.Forms.ListView();
             this.splitter2 = new System.Windows.Forms.Splitter();
@@ -144,7 +144,7 @@
         private System.Windows.Forms.ListView lstOptionPages;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel pnlMain;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
+        private Controls.Base.NGButton btnOK;
+        private Controls.Base.NGButton btnCancel;
     }
 }

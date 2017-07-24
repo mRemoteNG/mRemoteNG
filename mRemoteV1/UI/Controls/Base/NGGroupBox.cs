@@ -10,7 +10,7 @@ using System.Windows.Forms.VisualStyles;
 namespace mRemoteNG.UI.Controls.Base
 {
     //Groupbox is colored using the innerTab colors as the vstheme doesnt have explicit groupbox palettes (at least completes)
-    class NGGroupBox : GroupBox
+    public class NGGroupBox : GroupBox
     {
         private ThemeManager _themeManager;
 
@@ -49,6 +49,8 @@ namespace mRemoteNG.UI.Controls.Base
             if (this.RightToLeft == RightToLeft.Yes)
                 flags |= TextFormatFlags.RightToLeft | TextFormatFlags.Right;
 
+            //No clear backgorund, this control is transparently 
+            //e.Graphics.FillRectangle(new SolidBrush(backColor), 0, 0, Width, Height);
 
             Rectangle bounds = new Rectangle(0, 0, base.Width, base.Height);
             Rectangle rectangle = bounds;

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Forms
 {
-	public class TextBox : System.Windows.Forms.TextBox
+	public class TextBox : Controls.Base.NGTextBox
 	{
         #region Public Properties
 		[Category("Behavior"),

@@ -1,4 +1,6 @@
+using mRemoteNG.Themes;
 using mRemoteNG.UI.Forms;
+using System.Drawing;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -9,13 +11,14 @@ namespace mRemoteNG.UI.Window
         #region Private Variables
         private WindowType _WindowType;
         private DockContent _DockPnl;
+        private ThemeManager _themeManager;
         #endregion
 
         #region Constructors
         public BaseWindow()
 		{
-			//InitializeComponent();
-		}
+            //InitializeComponent();
+        }
         #endregion
 
         #region Public Properties
@@ -39,11 +42,19 @@ namespace mRemoteNG.UI.Window
 			this.TabText = Text;
 		}
         #endregion
-				
-        #region Private Methods
-		private void Base_Load(System.Object sender, System.EventArgs e)
-		{
-			FrmMain.Default.ShowHidePanelTabs();
+
+        #region Private Methods 
+        public new void ApplyTheme()
+        {
+            if (DesignMode) return;
+            _themeManager = ThemeManager.getInstance();
+            this.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            this.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+        }
+
+        private void Base_Load(System.Object sender, System.EventArgs e)
+		{ 
+            FrmMain.Default.ShowHidePanelTabs();
 		}
 				
 		private void Base_FormClosed(System.Object sender, System.Windows.Forms.FormClosedEventArgs e)

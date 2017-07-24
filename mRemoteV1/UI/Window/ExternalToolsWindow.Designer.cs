@@ -1,4 +1,6 @@
 
+using mRemoteNG.Themes;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class ExternalToolsWindow : BaseWindow
@@ -9,7 +11,7 @@ namespace mRemoteNG.UI.Window
         internal BrightIdeasSoftware.OLVColumn ArgumentsColumnHeader;
         internal BrightIdeasSoftware.OLVColumn WaitForExitColumnHeader;
         internal BrightIdeasSoftware.OLVColumn TryToIntegrateColumnHeader;
-        internal Controls.Base.NGGroupBox PropertiesGroupBox;
+        internal System.Windows.Forms.GroupBox PropertiesGroupBox;
 		internal Controls.Base.NGTextBox DisplayNameTextBox;
 		internal Controls.Base.NGLabel DisplayNameLabel;
 		internal Controls.Base.NGTextBox ArgumentsCheckBox;
@@ -26,13 +28,13 @@ namespace mRemoteNG.UI.Window
 		internal Controls.Base.NGLabel OptionsLabel;
 		internal Controls.Base.NGCheckBox TryToIntegrateCheckBox;
 		
-		internal BrightIdeasSoftware.ObjectListView ToolsListObjView;
+		internal Controls.Base.NGListView ToolsListObjView;
 				
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExternalToolsWindow));
-            this.ToolsListObjView = new BrightIdeasSoftware.ObjectListView();
+            this.ToolsListObjView = new Controls.Base.NGListView(); 
             this.DisplayNameColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.FilenameColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ArgumentsColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -47,7 +49,7 @@ namespace mRemoteNG.UI.Window
             this.TryToIntegrateCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.OptionsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.WaitForExitCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.BrowseButton = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.BrowseButton = new Controls.Base.NGButton();
             this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.FilenameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.DisplayNameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
@@ -231,7 +233,6 @@ namespace mRemoteNG.UI.Window
             // 
             // BrowseButton
             // 
-            this.BrowseButton._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.BrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BrowseButton.Location = new System.Drawing.Point(580, 45);
             this.BrowseButton.Name = "BrowseButton";
@@ -246,6 +247,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.ArgumentsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ArgumentsCheckBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ArgumentsCheckBox.Location = new System.Drawing.Point(110, 76);
             this.ArgumentsCheckBox.Name = "ArgumentsCheckBox";
             this.ArgumentsCheckBox.Size = new System.Drawing.Size(565, 22);
@@ -256,6 +258,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.FilenameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.FilenameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.FilenameTextBox.Location = new System.Drawing.Point(110, 47);
             this.FilenameTextBox.Name = "FilenameTextBox";
             this.FilenameTextBox.Size = new System.Drawing.Size(464, 22);
@@ -266,6 +269,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.DisplayNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DisplayNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DisplayNameTextBox.Location = new System.Drawing.Point(110, 19);
             this.DisplayNameTextBox.Name = "DisplayNameTextBox";
             this.DisplayNameTextBox.Size = new System.Drawing.Size(565, 22);

@@ -8,7 +8,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using static mRemoteNG.Tools.MiscTools;
-
+using System.Drawing;
 
 namespace mRemoteNG.UI.Window
 {
@@ -21,9 +21,15 @@ namespace mRemoteNG.UI.Window
 					
 			WindowType = WindowType.PortScan;
 			DockPnl = new DockContent();
+            ApplyTheme();
 		}
         #endregion
-				
+
+        public new void ApplyTheme()
+        {
+            base.ApplyTheme(); 
+        }
+
         #region Private Properties
         private bool IpsValid
 		{
@@ -82,7 +88,7 @@ namespace mRemoteNG.UI.Window
 
 	        try
 	        {
-	            lvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
+                olvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
 	            ShowImportControls(true);
 	            cbProtocol.SelectedIndex = 0;
 	        }
@@ -152,11 +158,11 @@ namespace mRemoteNG.UI.Window
 			pnlImport.Visible = controlsVisible;
 			if (controlsVisible)
 			{
-				lvHosts.Height = pnlImport.Top - lvHosts.Top;
+				olvHosts.Height = pnlImport.Top - olvHosts.Top;
 			}
 			else
 			{
-				lvHosts.Height = pnlImport.Bottom - lvHosts.Top;
+				olvHosts.Height = pnlImport.Bottom - olvHosts.Top;
 			}
 		}
 				
@@ -166,7 +172,7 @@ namespace mRemoteNG.UI.Window
 			{
 				_scanning = true;
 				SwitchButtonText();
-				lvHosts.Items.Clear();
+				olvHosts.Items.Clear();
 						
 				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
 				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
@@ -215,15 +221,9 @@ namespace mRemoteNG.UI.Window
 			}
 					
 			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Host scanned " + host.HostIp, true);
-					
-			ListViewItem listViewItem = host.ToListViewItem();
-			if (listViewItem != null)
-			{
-				lvHosts.Items.Add(listViewItem);
-				listViewItem.EnsureVisible();
-			}
-					
-			prgBar.Maximum = totalCount;
+
+            olvHosts.AddObject(host);
+            prgBar.Maximum = totalCount;
 			prgBar.Value = scannedCount;
 		}
 				
@@ -246,13 +246,9 @@ namespace mRemoteNG.UI.Window
         private void importSelectedHosts(ProtocolType protocol)
         {
             var hosts = new List<ScanHost>();
-            foreach (ListViewItem item in lvHosts.SelectedItems)
+            foreach (ScanHost host in olvHosts.SelectedObjects)
             {
-                var scanHost = (ScanHost)item.Tag;
-                if (scanHost != null)
-                {
-                    hosts.Add(scanHost);
-                }
+                hosts.Add(host); 
             }
 
             if (hosts.Count < 1)

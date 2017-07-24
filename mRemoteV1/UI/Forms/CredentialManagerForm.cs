@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using mRemoteNG.UI.Forms.CredentialManagerPages;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -16,6 +17,7 @@ namespace mRemoteNG.UI.Forms
 
             _pageControls = pageControls;
             InitializeComponent();
+            ApplyTheme();
             ApplyLanguage();
             SetupListView();
             olvPageList.SelectedIndex = 0;
@@ -40,6 +42,11 @@ namespace mRemoteNG.UI.Forms
         {
             var page = rowObject as ICredentialManagerPage;
             return page?.PageIcon;
+        }
+        private void ApplyTheme()
+        {
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground"); 
         }
 
         private void ApplyLanguage()

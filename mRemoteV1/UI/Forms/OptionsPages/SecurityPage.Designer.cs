@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecurityPage));
-            this.chkEncryptCompleteFile = new System.Windows.Forms.CheckBox();
-            this.comboBoxEncryptionEngine = new System.Windows.Forms.ComboBox();
-            this.labelEncryptionEngine = new System.Windows.Forms.Label();
-            this.labelBlockCipher = new System.Windows.Forms.Label();
-            this.comboBoxBlockCipher = new System.Windows.Forms.ComboBox();
+            this.chkEncryptCompleteFile = new Controls.Base.NGCheckBox();
+            this.comboBoxEncryptionEngine = new Controls.Base.NGComboBox();
+            this.labelEncryptionEngine = new Controls.Base.NGLabel();
+            this.labelBlockCipher = new Controls.Base.NGLabel();
+            this.comboBoxBlockCipher = new Controls.Base.NGComboBox();
             this.groupAdvancedSecurityOptions = new System.Windows.Forms.GroupBox();
-            this.labelKdfIterations = new System.Windows.Forms.Label();
-            this.numberBoxKdfIterations = new System.Windows.Forms.NumericUpDown();
+            this.labelKdfIterations = new Controls.Base.NGLabel();
+            this.numberBoxKdfIterations = new Controls.Base.NGNumericUpDown();
             this.groupAdvancedSecurityOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberBoxKdfIterations)).BeginInit();
             this.SuspendLayout();
@@ -156,13 +156,13 @@
 
         #endregion
 
-        internal System.Windows.Forms.CheckBox chkEncryptCompleteFile;
-        private System.Windows.Forms.ComboBox comboBoxEncryptionEngine;
-        private System.Windows.Forms.Label labelEncryptionEngine;
-        private System.Windows.Forms.Label labelBlockCipher;
-        private System.Windows.Forms.ComboBox comboBoxBlockCipher;
+        internal Controls.Base.NGCheckBox chkEncryptCompleteFile;
+        private Controls.Base.NGComboBox comboBoxEncryptionEngine;
+        private Controls.Base.NGLabel labelEncryptionEngine;
+        private Controls.Base.NGLabel labelBlockCipher;
+        private Controls.Base.NGComboBox comboBoxBlockCipher;
         private System.Windows.Forms.GroupBox groupAdvancedSecurityOptions;
-        private System.Windows.Forms.NumericUpDown numberBoxKdfIterations;
-        private System.Windows.Forms.Label labelKdfIterations;
+        private Controls.Base.NGNumericUpDown numberBoxKdfIterations;
+        private Controls.Base.NGLabel labelKdfIterations;
     }
 }

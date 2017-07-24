@@ -250,6 +250,186 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBox&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_Background {
+            get {
+                return ResourceManager.GetString("ComboBox_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxBorder&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_Border {
+            get {
+                return ResourceManager.GetString("ComboBox_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxButton&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_Button_Background {
+            get {
+                return ResourceManager.GetString("ComboBox_Button_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxButtonBorder&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_Button_Border {
+            get {
+                return ResourceManager.GetString("ComboBox_Button_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxButton&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string ComboBox_Button_Foreground {
+            get {
+                return ResourceManager.GetString("ComboBox_Button_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxButtonMouseOver&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_Button_MouseOver_Background {
+            get {
+                return ResourceManager.GetString("ComboBox_Button_MouseOver_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxButtonMouseOverBorder&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_Button_MouseOver_Border {
+            get {
+                return ResourceManager.GetString("ComboBox_Button_MouseOver_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxButtonMouseOver&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string ComboBox_Button_MouseOver_Foreground {
+            get {
+                return ResourceManager.GetString("ComboBox_Button_MouseOver_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxButtonPressed&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_Button_Pressed_Background {
+            get {
+                return ResourceManager.GetString("ComboBox_Button_Pressed_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxButtonPressed&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string ComboBox_Button_Pressed_Foreground {
+            get {
+                return ResourceManager.GetString("ComboBox_Button_Pressed_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxDisabled&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_Disabled_Background {
+            get {
+                return ResourceManager.GetString("ComboBox_Disabled_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxDisabled&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string ComboBox_Disabled_Foreground {
+            get {
+                return ResourceManager.GetString("ComboBox_Disabled_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBox&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string ComboBox_Foreground {
+            get {
+                return ResourceManager.GetString("ComboBox_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxMouseOverBorder&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_MouseOver_Border {
+            get {
+                return ResourceManager.GetString("ComboBox_MouseOver_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxPopUpBorder&apos;]/ComboBoxPopUp/@Source.
+        /// </summary>
+        internal static string ComboBox_PopUp {
+            get {
+                return ResourceManager.GetString("ComboBox_PopUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;ComboBoxPopUpBorder&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ComboBox_PopUp_Border {
+            get {
+                return ResourceManager.GetString("ComboBox_PopUp_Border", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Environment&apos;]/Color[@Name=&apos;CommandShelfHighlightGradientBegin&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CommandBarMenuDefault_Background {
+            get {
+                return ResourceManager.GetString("CommandBarMenuDefault_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Environment&apos;]/Color[@Name=&apos;CommandBarTextActive&apos;]/Background/@Source.
+        /// </summary>
+        internal static string CommandBarMenuDefault_Foreground {
+            get {
+                return ResourceManager.GetString("CommandBarMenuDefault_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;Dialog&apos;]/Background/@Source.
+        /// </summary>
+        internal static string Dialog_Background {
+            get {
+                return ResourceManager.GetString("Dialog_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;Dialog&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string Dialog_Foreground {
+            get {
+                return ResourceManager.GetString("Dialog_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Text Editor Text Marker Items&apos;]/Color[@Name=&apos;compiler error&apos;]/Background/@Source.
         /// </summary>
         internal static string ErrorText_Background {
@@ -426,6 +606,42 @@ namespace mRemoteNG {
         internal static string List_Item_Selected_Foreground {
             get {
                 return ResourceManager.GetString("List_Item_Selected_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;ProgressBar&apos;]/Color[@Name=&apos;Background&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ProgressBar_Background {
+            get {
+                return ResourceManager.GetString("ProgressBar_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;ProgressBar&apos;]/Color[@Name=&apos;IndicatorFill&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ProgressBar_Fill {
+            get {
+                return ResourceManager.GetString("ProgressBar_Fill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;ProgressBar&apos;]/Color[@Name=&apos;IndicatorFillCritical&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ProgressBar_Fill_Critical {
+            get {
+                return ResourceManager.GetString("ProgressBar_Fill_Critical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;ProgressBar&apos;]/Color[@Name=&apos;IndicatorFillWarning&apos;]/Background/@Source.
+        /// </summary>
+        internal static string ProgressBar_Fill_Warning {
+            get {
+                return ResourceManager.GetString("ProgressBar_Fill_Warning", resourceCulture);
             }
         }
         
