@@ -27,9 +27,9 @@ namespace mRemoteNG.UI.Forms
             this.grpItems = new System.Windows.Forms.GroupBox();
             this.lblSelectedConnection = new Controls.Base.NGLabel();
             this.lblSelectedFolder = new Controls.Base.NGLabel();
-            this.rdoExportSelectedConnection = new System.Windows.Forms.RadioButton();
-            this.rdoExportSelectedFolder = new System.Windows.Forms.RadioButton();
-            this.rdoExportEverything = new System.Windows.Forms.RadioButton();
+            this.rdoExportSelectedConnection = new Controls.Base.NGRadioButton();
+            this.rdoExportSelectedFolder = new Controls.Base.NGRadioButton();
+            this.rdoExportEverything = new Controls.Base.NGRadioButton();
             this.grpProperties.SuspendLayout();
             this.grpFile.SuspendLayout();
             this.grpItems.SuspendLayout();
@@ -315,9 +315,9 @@ namespace mRemoteNG.UI.Forms
 		private System.Windows.Forms.GroupBox grpItems;
 		private Controls.Base.NGLabel lblSelectedConnection;
 		private Controls.Base.NGLabel lblSelectedFolder;
-		private System.Windows.Forms.RadioButton rdoExportSelectedConnection;
-		private System.Windows.Forms.RadioButton rdoExportSelectedFolder;
-		private System.Windows.Forms.RadioButton rdoExportEverything;
+		private Controls.Base.NGRadioButton rdoExportSelectedConnection;
+		private Controls.Base.NGRadioButton rdoExportSelectedFolder;
+		private Controls.Base.NGRadioButton rdoExportEverything;
         #endregion
 
         private Controls.Base.NGCheckBox chkAssignedCredential;

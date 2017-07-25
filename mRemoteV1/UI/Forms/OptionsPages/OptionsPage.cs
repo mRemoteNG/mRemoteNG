@@ -15,10 +15,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[Browsable(false)]public virtual string PageName {get; set;}
 			
 		public virtual Icon PageIcon {get; set;}
+        public virtual Image IconImage{
+            get
+            {
+                if (PageIcon != null)
+                    return PageIcon.ToBitmap();
+                return null;
+            }
+        }
+
         #endregion
-			
+
         #region Public Methods
-		public virtual void ApplyLanguage()
+        public virtual void ApplyLanguage()
 		{
 				
 		}
@@ -47,8 +56,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.Name = "OptionsPage";
             this.Size = new System.Drawing.Size(610, 489);
-            this.ResumeLayout(false);
+            this.ResumeLayout(false); 
+        }
 
+        public virtual void ApplyTheme()
+        {
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
     }
 }

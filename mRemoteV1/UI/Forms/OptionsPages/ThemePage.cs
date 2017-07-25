@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             _themeManager = ThemeManager.getInstance();
             InitializeComponent();
+            base.ApplyTheme();
 
         }
 

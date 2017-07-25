@@ -10,6 +10,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public NotificationsPage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         public override string PageName

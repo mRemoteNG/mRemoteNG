@@ -30,13 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOptions));
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnCancel = new Controls.Base.NGButton();
-            this.btnOK = new Controls.Base.NGButton();
+            this.btnCancel = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.lstOptionPages = new System.Windows.Forms.ListView();
+            this.lstOptionPages = new mRemoteNG.UI.Controls.Base.NGListView();
+            this.PageName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lstOptionPages)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBottom
@@ -51,6 +53,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(697, 31);
             this.btnCancel.Name = "btnCancel";
@@ -61,6 +64,7 @@
             // 
             // btnOK
             // 
+            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Location = new System.Drawing.Point(616, 31);
             this.btnOK.Name = "btnOK";
@@ -82,22 +86,37 @@
             // 
             // lstOptionPages
             // 
+            this.lstOptionPages.AllColumns.Add(this.PageName);
             this.lstOptionPages.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lstOptionPages.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lstOptionPages.CellEditUseWholeCell = false;
+            this.lstOptionPages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.PageName});
+            this.lstOptionPages.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lstOptionPages.DecorateLines = true;
             this.lstOptionPages.Dock = System.Windows.Forms.DockStyle.Left;
             this.lstOptionPages.FullRowSelect = true;
-            this.lstOptionPages.GridLines = true;
             this.lstOptionPages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lstOptionPages.HideSelection = false;
             this.lstOptionPages.LabelWrap = false;
             this.lstOptionPages.Location = new System.Drawing.Point(0, 0);
             this.lstOptionPages.MultiSelect = false;
             this.lstOptionPages.Name = "lstOptionPages";
+            this.lstOptionPages.ShowGroups = false;
+            this.lstOptionPages.ShowImagesOnSubItems = true;
             this.lstOptionPages.Size = new System.Drawing.Size(151, 489);
+            this.lstOptionPages.RowHeight = 25;
             this.lstOptionPages.TabIndex = 2;
+            this.lstOptionPages.TileSize = new System.Drawing.Size(168, 40);
             this.lstOptionPages.UseCompatibleStateImageBehavior = false;
-            this.lstOptionPages.View = System.Windows.Forms.View.List;
-            this.lstOptionPages.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstOptionPages_ItemSelectionChanged);
+            this.lstOptionPages.View = System.Windows.Forms.View.Details;
+            // 
+            // PageName
+            // 
+            this.PageName.AspectName = "PageName";
+            this.PageName.FillsFreeSpace = true;
+            this.PageName.Groupable = false;
+            this.PageName.ImageAspectName = "IconImage";
+            this.PageName.IsEditable = false;
             // 
             // splitter2
             // 
@@ -133,6 +152,7 @@
             this.Text = "mRemoteNG Options";
             this.Load += new System.EventHandler(this.frmOptions_Load);
             this.pnlBottom.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lstOptionPages)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -141,10 +161,11 @@
 
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.ListView lstOptionPages;
+        private Controls.Base.NGListView lstOptionPages;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel pnlMain;
         private Controls.Base.NGButton btnOK;
         private Controls.Base.NGButton btnCancel;
+        private BrightIdeasSoftware.OLVColumn PageName;
     }
 }

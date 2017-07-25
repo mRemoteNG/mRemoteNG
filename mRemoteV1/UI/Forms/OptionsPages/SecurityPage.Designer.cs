@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecurityPage));
-            this.chkEncryptCompleteFile = new Controls.Base.NGCheckBox();
-            this.comboBoxEncryptionEngine = new Controls.Base.NGComboBox();
-            this.labelEncryptionEngine = new Controls.Base.NGLabel();
-            this.labelBlockCipher = new Controls.Base.NGLabel();
-            this.comboBoxBlockCipher = new Controls.Base.NGComboBox();
-            this.groupAdvancedSecurityOptions = new System.Windows.Forms.GroupBox();
-            this.labelKdfIterations = new Controls.Base.NGLabel();
-            this.numberBoxKdfIterations = new Controls.Base.NGNumericUpDown();
+            this.chkEncryptCompleteFile = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.comboBoxEncryptionEngine = new mRemoteNG.UI.Controls.Base.NGComboBox();
+            this.labelEncryptionEngine = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.labelBlockCipher = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.comboBoxBlockCipher = new mRemoteNG.UI.Controls.Base.NGComboBox();
+            this.groupAdvancedSecurityOptions = new mRemoteNG.UI.Controls.Base.NGGroupBox();
+            this.numberBoxKdfIterations = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
+            this.labelKdfIterations = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.groupAdvancedSecurityOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberBoxKdfIterations)).BeginInit();
             this.SuspendLayout();
             // 
             // chkEncryptCompleteFile
             // 
+            this.chkEncryptCompleteFile._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkEncryptCompleteFile.AutoSize = true;
             this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 3);
             this.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile";
@@ -53,10 +54,13 @@
             // 
             // comboBoxEncryptionEngine
             // 
+            this.comboBoxEncryptionEngine._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.comboBoxEncryptionEngine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncryptionEngine.FormattingEnabled = true;
             this.comboBoxEncryptionEngine.Location = new System.Drawing.Point(191, 25);
             this.comboBoxEncryptionEngine.Name = "comboBoxEncryptionEngine";
             this.comboBoxEncryptionEngine.Size = new System.Drawing.Size(123, 21);
+            this.comboBoxEncryptionEngine.Sorted = true;
             this.comboBoxEncryptionEngine.TabIndex = 20;
             // 
             // labelEncryptionEngine
@@ -79,6 +83,8 @@
             // 
             // comboBoxBlockCipher
             // 
+            this.comboBoxBlockCipher._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.comboBoxBlockCipher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBlockCipher.FormattingEnabled = true;
             this.comboBoxBlockCipher.Location = new System.Drawing.Point(191, 57);
             this.comboBoxBlockCipher.Name = "comboBoxBlockCipher";
@@ -99,15 +105,6 @@
             this.groupAdvancedSecurityOptions.TabIndex = 24;
             this.groupAdvancedSecurityOptions.TabStop = false;
             this.groupAdvancedSecurityOptions.Text = "Advanced Security Options";
-            // 
-            // labelKdfIterations
-            // 
-            this.labelKdfIterations.AutoSize = true;
-            this.labelKdfIterations.Location = new System.Drawing.Point(6, 97);
-            this.labelKdfIterations.Name = "labelKdfIterations";
-            this.labelKdfIterations.Size = new System.Drawing.Size(166, 13);
-            this.labelKdfIterations.TabIndex = 24;
-            this.labelKdfIterations.Text = "Key Derivation Function Iterations";
             // 
             // numberBoxKdfIterations
             // 
@@ -137,6 +134,15 @@
             0,
             0});
             // 
+            // labelKdfIterations
+            // 
+            this.labelKdfIterations.AutoSize = true;
+            this.labelKdfIterations.Location = new System.Drawing.Point(6, 97);
+            this.labelKdfIterations.Name = "labelKdfIterations";
+            this.labelKdfIterations.Size = new System.Drawing.Size(166, 13);
+            this.labelKdfIterations.TabIndex = 24;
+            this.labelKdfIterations.Text = "Key Derivation Function Iterations";
+            // 
             // SecurityPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,7 +167,7 @@
         private Controls.Base.NGLabel labelEncryptionEngine;
         private Controls.Base.NGLabel labelBlockCipher;
         private Controls.Base.NGComboBox comboBoxBlockCipher;
-        private System.Windows.Forms.GroupBox groupAdvancedSecurityOptions;
+        private Controls.Base.NGGroupBox groupAdvancedSecurityOptions;
         private Controls.Base.NGNumericUpDown numberBoxKdfIterations;
         private Controls.Base.NGLabel labelKdfIterations;
     }

@@ -28,13 +28,6 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             Dock = DockStyle.Fill;
         }
 
-        private void ApplyTheme()
-        {
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-        }
-
-
         private void ApplyLanguage()
         {
             Text = Language.strCredentialEditor;

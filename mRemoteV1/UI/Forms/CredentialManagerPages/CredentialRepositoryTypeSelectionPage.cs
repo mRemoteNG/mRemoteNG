@@ -28,13 +28,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             SetupListView(selectionTargets);
         }
 
-        private void ApplyTheme()
-        {
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-        }
-
-
+ 
         private void SetupListView(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets)
         {
             olvColumnName.ImageGetter = ImageGetter;

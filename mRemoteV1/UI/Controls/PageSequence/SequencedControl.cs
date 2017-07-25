@@ -14,6 +14,12 @@ namespace mRemoteNG.UI.Controls.PageSequence
             Next?.Invoke(this, EventArgs.Empty);
         }
 
+        public virtual void ApplyTheme()
+        {
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+        }
+
         protected virtual void RaisePreviousPageEvent()
         {
             Previous?.Invoke(this, EventArgs.Empty);

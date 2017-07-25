@@ -9,6 +9,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public CredentialsPage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         public override string PageName {

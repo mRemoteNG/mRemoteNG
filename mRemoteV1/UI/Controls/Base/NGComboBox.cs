@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
+
+    //warning: THe DropDown style rendering is glitchy in this control, only use DropDownList or correct the rendering method
     class NGComboBox : ComboBox
     {
         private ThemeManager _themeManager;
@@ -99,16 +101,15 @@ namespace mRemoteNG.UI.Controls.Base
                 ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Pressed_Foreground");
             }
 
+            
+  
+            e.Graphics.Clear(Back);
+                
             //Border
             using (Pen p = new Pen(Border))
             {
                 Rectangle boxRect = new Rectangle(0, 0, Width - 1, Height - 1);
                 e.Graphics.DrawRectangle(p, boxRect);
-            }
-            //Background
-            using (SolidBrush b = new SolidBrush(Back))
-            {
-                e.Graphics.FillPolygon(b, new Point[] { new Point(Width - 20, (Height / 2) - 2), new Point(Width - 9, (Height / 2) - 2), new Point(Width - 15, (Height / 2) + 4) });
             }
             //Button
             using (SolidBrush b = new SolidBrush(ButtBack))

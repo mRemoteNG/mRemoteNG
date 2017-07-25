@@ -35,11 +35,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             credentialRecordListView.CredentialRepositoryList = _credentialRepositoryList;
         }
 
-        private void ApplyTheme()
-        { 
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-        }
+       
 
         private void ApplyLanguage()
         {

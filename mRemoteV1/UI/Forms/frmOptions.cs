@@ -33,6 +33,14 @@ namespace mRemoteNG.UI.Forms
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();
             ApplyLanguage();
+            ApplyTheme();
+            lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
+            lstOptionPages.SelectedIndex = 0;
+        }
+        private void ApplyTheme()
+        {
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyLanguage()
@@ -74,8 +82,7 @@ namespace mRemoteNG.UI.Forms
             {
                 page.LoadSettings();
                 _pageIconImageList.Images.Add(page.PageName, page.PageIcon);
-                var item = new ListViewItem(page.PageName, page.PageName) {Tag = page.GetType().Name};
-                lstOptionPages.Items.Add(item);
+                lstOptionPages.AddObject(page);
             }
         }
 
@@ -105,13 +112,16 @@ namespace mRemoteNG.UI.Forms
             Settings.Default.Save();
         }
 
-        private void lstOptionPages_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+
+        private void LstOptionPages_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             pnlMain.Controls.Clear();
 
-            var page = _pages[(string) e.Item.Tag];
+            var page = (OptionsPage)lstOptionPages.SelectedObject;
             if (page != null)
                 pnlMain.Controls.Add(page);
         }
+
+         
     }
 }

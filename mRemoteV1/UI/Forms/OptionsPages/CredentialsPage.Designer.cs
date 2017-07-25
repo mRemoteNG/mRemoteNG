@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialsPage));
             this.checkBoxUnlockOnStartup = new Controls.Base.NGCheckBox();
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
-            this.radCredentialsCustom = new System.Windows.Forms.RadioButton();
+            this.radCredentialsCustom = new Controls.Base.NGRadioButton();
             this.lblDefaultCredentials = new Controls.Base.NGLabel();
-            this.radCredentialsNoInfo = new System.Windows.Forms.RadioButton();
-            this.radCredentialsWindows = new System.Windows.Forms.RadioButton();
+            this.radCredentialsNoInfo = new Controls.Base.NGRadioButton();
+            this.radCredentialsWindows = new Controls.Base.NGRadioButton();
             this.txtCredentialsDomain = new Controls.Base.NGTextBox();
             this.lblCredentialsUsername = new Controls.Base.NGLabel();
             this.txtCredentialsPassword = new Controls.Base.NGTextBox();
@@ -191,10 +191,10 @@
 
         private Controls.Base.NGCheckBox checkBoxUnlockOnStartup;
         internal System.Windows.Forms.Panel pnlDefaultCredentials;
-        internal System.Windows.Forms.RadioButton radCredentialsCustom;
+        internal Controls.Base.NGRadioButton radCredentialsCustom;
         internal Controls.Base.NGLabel lblDefaultCredentials;
-        internal System.Windows.Forms.RadioButton radCredentialsNoInfo;
-        internal System.Windows.Forms.RadioButton radCredentialsWindows;
+        internal Controls.Base.NGRadioButton radCredentialsNoInfo;
+        internal Controls.Base.NGRadioButton radCredentialsWindows;
         internal Controls.Base.NGTextBox txtCredentialsDomain;
         internal Controls.Base.NGLabel lblCredentialsUsername;
         internal Controls.Base.NGTextBox txtCredentialsPassword;

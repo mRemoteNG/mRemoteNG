@@ -29,6 +29,7 @@ namespace mRemoteNG.UI.Controls.Base
                 //Selected item
                 SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Background");
                 SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground");
+                
                 //Header style
                 HeaderUsesThemes = false;
                 HeaderFormatStyle headerStylo = new HeaderFormatStyle();

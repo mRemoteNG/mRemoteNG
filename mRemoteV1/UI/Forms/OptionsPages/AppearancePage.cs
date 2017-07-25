@@ -10,6 +10,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public AppearancePage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         public override string PageName
