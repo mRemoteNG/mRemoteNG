@@ -951,6 +951,7 @@ namespace mRemoteNG.UI.Forms
 				}
 				cmbQuickConnect.Add(connectionInfo);
                 _connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                _multiSSHController.ProcessNewQuickConnect(connectionInfo);
 			}
 			catch (Exception ex)
 			{

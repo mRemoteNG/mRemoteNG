@@ -13,6 +13,7 @@ namespace mRemoteNG.Tools
     class MultiSSHController
     {
         private ArrayList processHandlers = new ArrayList();
+        private ArrayList quickConnectConnections = new ArrayList();
         private ArrayList previousCommands = new ArrayList();
         private int previousCommandIndex = 0;
 
@@ -28,11 +29,31 @@ namespace mRemoteNG.Tools
             DecorateTextBox(txtBox.TextBox);
         }
 
+        public void ProcessNewQuickConnect(ConnectionInfo connection)
+        {
+            quickConnectConnections.Add(connection);
+        }
+
         private void DecorateTextBox(TextBox toBeDecorated)
         {
             toBeDecorated.Enter += refreshActiveConnections;
             toBeDecorated.KeyDown += processKeyPress;
             toBeDecorated.KeyUp += processKeyRelease;
+        }
+
+        private ArrayList ProcessOpenConnections(ConnectionInfo connection)
+        {
+            ArrayList handlers = new ArrayList();
+
+            foreach (ProtocolBase _base in connection.OpenConnections)
+            {
+                if (_base.GetType().IsSubclassOf(typeof(PuttyBase)))
+                {
+                    handlers.Add((PuttyBase)_base);
+                }
+            }
+
+            return handlers;
         }
 
         private void SendAllKeystrokes(int keyType, int keyData)
@@ -50,18 +71,17 @@ namespace mRemoteNG.Tools
 #region Event Processors
         private void refreshActiveConnections(object sender, EventArgs e)
         {
-            var previouslyOpenedConnections = Runtime.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
-
             processHandlers.Clear();
-            foreach (ConnectionInfo connection in previouslyOpenedConnections)
+            foreach (ConnectionInfo connection in quickConnectConnections)
             {
-                foreach (ProtocolBase _base in connection.OpenConnections)
-                {
-                    if (_base.GetType().IsSubclassOf(typeof(PuttyBase)))
-                    {
-                        processHandlers.Add((PuttyBase)_base);
-                    }
-                }
+                processHandlers.AddRange(ProcessOpenConnections(connection));
+            }
+
+            var connectionTreeConnections = Runtime.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
+
+            foreach (ConnectionInfo connection in connectionTreeConnections)
+            {
+                processHandlers.AddRange(ProcessOpenConnections(connection));
             }
         }
 
