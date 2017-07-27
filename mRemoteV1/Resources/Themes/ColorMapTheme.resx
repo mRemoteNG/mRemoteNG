@@ -314,6 +314,21 @@
   <data name="ProgressBar_Fill_Warning" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='IndicatorFillWarning']/Background/@Source</value>
   </data>
+  <data name="Tab_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabBackground']/Background/@Source</value>
+  </data>
+  <data name="Tab_Item_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabItem']/Background/@Source</value>
+  </data>
+  <data name="Tab_Item_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabItemDisabled']/Background/@Source</value>
+  </data>
+  <data name="Tab_Item_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabItemDisabled']/Foreground/@Source</value>
+  </data>
+  <data name="Tab_Item_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabItem']/Foreground/@Source</value>
+  </data>
   <data name="TextBox_Background" xml:space="preserve">
     <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxBackground']/Background/@Source</value>
   </data>

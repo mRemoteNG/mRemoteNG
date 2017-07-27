@@ -646,6 +646,51 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;TabBackground&apos;]/Background/@Source.
+        /// </summary>
+        internal static string Tab_Background {
+            get {
+                return ResourceManager.GetString("Tab_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;TabItem&apos;]/Background/@Source.
+        /// </summary>
+        internal static string Tab_Item_Background {
+            get {
+                return ResourceManager.GetString("Tab_Item_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;TabItemDisabled&apos;]/Background/@Source.
+        /// </summary>
+        internal static string Tab_Item_Disabled_Background {
+            get {
+                return ResourceManager.GetString("Tab_Item_Disabled_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;TabItemDisabled&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string Tab_Item_Disabled_Foreground {
+            get {
+                return ResourceManager.GetString("Tab_Item_Disabled_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;Cider&apos;]/Color[@Name=&apos;TabItem&apos;]/Foreground/@Source.
+        /// </summary>
+        internal static string Tab_Item_Foreground {
+            get {
+                return ResourceManager.GetString("Tab_Item_Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Themes/Theme/Category[@Name=&apos;CommonControls&apos;]/Color[@Name=&apos;TextBoxBackground&apos;]/Background/@Source.
         /// </summary>
         internal static string TextBox_Background {

@@ -7,7 +7,7 @@ namespace mRemoteNG.UI.Window
         #region  Windows Form Designer generated code
 		internal Controls.Base.NGLabel lblStatus;
 		internal Controls.Base.NGTextBox txtChangeLog;
-		internal System.Windows.Forms.ProgressBar prgbDownload;
+		internal Controls.Base.NGProgressBar prgbDownload;
 		internal Controls.Base.NGButton btnDownload;
 		internal Controls.Base.NGLabel lblChangeLogLabel;
 		internal System.Windows.Forms.Panel pnlUpdate;
@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Window
             this.pnlUpdate = new System.Windows.Forms.Panel();
             this.lblChangeLogLabel = new Controls.Base.NGLabel();
             this.btnDownload = new Controls.Base.NGButton();
-            this.prgbDownload = new System.Windows.Forms.ProgressBar();
+            this.prgbDownload = new Controls.Base.NGProgressBar();
             this.txtChangeLog = new Controls.Base.NGTextBox();
             this.lblStatus = new Controls.Base.NGLabel();
             this.lblLatestVersionLabel = new Controls.Base.NGLabel();

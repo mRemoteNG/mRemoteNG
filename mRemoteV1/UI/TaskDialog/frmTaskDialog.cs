@@ -1,3 +1,5 @@
+using mRemoteNG.Themes;
+using mRemoteNG.UI.Controls.Base;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,7 +17,7 @@ namespace mRemoteNG.UI.TaskDialog
         private int _mainInstructionHeight;
         private readonly Font _mainInstructionFont = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
-        private readonly List<RadioButton> _radioButtonCtrls = new List<RadioButton>();
+        private readonly List<NGRadioButton> _radioButtonCtrls = new List<NGRadioButton>();
 
         private Control _focusControl;
 
@@ -148,7 +150,7 @@ namespace mRemoteNG.UI.TaskDialog
                 var pnl_height = 12;
                 for (var i = 0; i < arr.Length; i++)
                 {
-                    var rb = new RadioButton();
+                    var rb = new NGRadioButton();
                     rb.Parent = pnlRadioButtons;
                     rb.Location = new Point(60, 4 + (i * rb.Height));
                     rb.Text = arr[i];
@@ -293,6 +295,31 @@ namespace mRemoteNG.UI.TaskDialog
             ClientSize = new Size(ClientSize.Width, form_height);
 
             _formBuilt = true;
+            ApplyTheme();
+        }
+
+        private void ApplyTheme()
+        { 
+            pnlButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            panel2.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            panel2.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlFooter.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlFooter.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            panel5.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            panel5.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            panel3.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            panel3.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCommandButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCommandButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlMainInstruction.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlMainInstruction.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlContent.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlContent.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlExpandedInfo.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlExpandedInfo.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlRadioButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlRadioButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         //--------------------------------------------------------------------------------
@@ -400,7 +427,7 @@ namespace mRemoteNG.UI.TaskDialog
         {
             var szL = GetMainInstructionTextSizeF();
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            e.Graphics.DrawString(_mainInstruction, _mainInstructionFont, new SolidBrush(Color.DarkBlue), new RectangleF(new PointF(MAIN_INSTRUCTION_LEFT_MARGIN, 10), szL));
+            e.Graphics.DrawString(_mainInstruction, _mainInstructionFont, new SolidBrush( ((Panel)sender).ForeColor), new RectangleF(new PointF(MAIN_INSTRUCTION_LEFT_MARGIN, 10), szL));
         }
 
         //--------------------------------------------------------------------------------

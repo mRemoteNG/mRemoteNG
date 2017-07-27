@@ -157,7 +157,7 @@ namespace mRemoteNG.Themes
 		{
 			get
 			{
-                return (ThemeInfo)themes["darcula"];//_activeTheme;
+                return (ThemeInfo)themes["vs2015light"];//_activeTheme;
 			}
 			set
 			{

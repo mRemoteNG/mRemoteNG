@@ -20,6 +20,7 @@ using mRemoteNG.UI.Forms.Input;
 using Message = System.Windows.Forms.Message;
 using TabControl = Crownwood.Magic.Controls.TabControl;
 using TabPage = Crownwood.Magic.Controls.TabPage;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
@@ -28,7 +29,8 @@ namespace mRemoteNG.UI.Window
         public TabControl TabController;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly FrmMain _frmMain = FrmMain.Default;
-
+        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
+        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         #region Public Methods
         public ConnectionWindow(DockContent panel, string formText = "")
@@ -167,7 +169,19 @@ namespace mRemoteNG.UI.Window
         #region Form
         private void Connection_Load(object sender, EventArgs e)
         {
+            ApplyTheme();
             ApplyLanguage();
+        }
+
+        private new void ApplyTheme()
+        {
+            base.ApplyTheme();
+            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+            vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
+            vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+            TabController.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background"); 
+            TabController.TextColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Foreground"); 
+            TabController.TextInactiveColor= ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Disabled_Foreground"); 
         }
 
         private bool _documentHandlersAdded;

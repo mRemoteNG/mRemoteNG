@@ -23,7 +23,7 @@ namespace mRemoteNG.UI.Window
 		internal BrightIdeasSoftware.OLVColumn clmVNC;
 		internal BrightIdeasSoftware.OLVColumn clmOpenPorts;
 		internal BrightIdeasSoftware.OLVColumn clmClosedPorts;
-		internal System.Windows.Forms.ProgressBar prgBar;
+		internal Controls.Base.NGProgressBar prgBar;
 		internal Controls.Base.NGLabel lblOnlyImport;
 		internal Controls.Base.NGComboBox cbProtocol;
 		internal System.Windows.Forms.Panel pnlPorts;

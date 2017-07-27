@@ -83,7 +83,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // pnlButtons
             // 
-            this.pnlButtons.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlButtons.Controls.Add(this.bt1);
             this.pnlButtons.Controls.Add(this.bt2);
             this.pnlButtons.Controls.Add(this.bt3);
@@ -104,7 +103,6 @@ namespace mRemoteNG.UI.TaskDialog
             this.bt1.Size = new System.Drawing.Size(75, 23);
             this.bt1.TabIndex = 0;
             this.bt1.Text = "bt1";
-            this.bt1.UseVisualStyleBackColor = true;
             // 
             // bt2
             // 
@@ -114,7 +112,6 @@ namespace mRemoteNG.UI.TaskDialog
             this.bt2.Size = new System.Drawing.Size(75, 23);
             this.bt2.TabIndex = 1;
             this.bt2.Text = "bt2";
-            this.bt2.UseVisualStyleBackColor = true;
             // 
             // bt3
             // 
@@ -124,7 +121,6 @@ namespace mRemoteNG.UI.TaskDialog
             this.bt3.Size = new System.Drawing.Size(75, 23);
             this.bt3.TabIndex = 2;
             this.bt3.Text = "bt3";
-            this.bt3.UseVisualStyleBackColor = true;
             // 
             // cbVerify
             // 
@@ -134,7 +130,6 @@ namespace mRemoteNG.UI.TaskDialog
             this.cbVerify.Size = new System.Drawing.Size(147, 17);
             this.cbVerify.TabIndex = 4;
             this.cbVerify.Text = "Don\'t ask me this again";
-            this.cbVerify.UseVisualStyleBackColor = true;
             this.cbVerify.Visible = false;
             // 
             // lbShowHideDetails
@@ -157,7 +152,6 @@ namespace mRemoteNG.UI.TaskDialog
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Fuchsia;
             this.imageList1.Images.SetKeyName(0, "arrow_up_bw.bmp");
             this.imageList1.Images.SetKeyName(1, "arrow_up_color.bmp");
             this.imageList1.Images.SetKeyName(2, "arrow_up_color_pressed.bmp");
@@ -168,7 +162,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Gainsboro;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -177,7 +170,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // pnlFooter
             // 
-            this.pnlFooter.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlFooter.Controls.Add(this.lbFooter);
             this.pnlFooter.Controls.Add(this.imgFooter);
             this.pnlFooter.Controls.Add(this.panel5);
@@ -206,7 +198,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 1);
             this.panel5.Name = "panel5";
@@ -215,7 +206,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Gainsboro;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -224,7 +214,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // pnlCommandButtons
             // 
-            this.pnlCommandButtons.BackColor = System.Drawing.SystemColors.Control;
             this.pnlCommandButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCommandButtons.Location = new System.Drawing.Point(0, 202);
             this.pnlCommandButtons.Name = "pnlCommandButtons";
@@ -233,7 +222,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // pnlMainInstruction
             // 
-            this.pnlMainInstruction.BackColor = System.Drawing.SystemColors.Control;
             this.pnlMainInstruction.Controls.Add(this.imgMain);
             this.pnlMainInstruction.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMainInstruction.Location = new System.Drawing.Point(0, 0);
@@ -244,7 +232,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // pnlContent
             // 
-            this.pnlContent.BackColor = System.Drawing.SystemColors.Control;
             this.pnlContent.Controls.Add(this.lbContent);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlContent.Location = new System.Drawing.Point(0, 41);
@@ -254,7 +241,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // pnlExpandedInfo
             // 
-            this.pnlExpandedInfo.BackColor = System.Drawing.SystemColors.Control;
             this.pnlExpandedInfo.Controls.Add(this.lbExpandedInfo);
             this.pnlExpandedInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlExpandedInfo.Location = new System.Drawing.Point(0, 71);
@@ -274,7 +260,6 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // pnlRadioButtons
             // 
-            this.pnlRadioButtons.BackColor = System.Drawing.SystemColors.Control;
             this.pnlRadioButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlRadioButtons.Location = new System.Drawing.Point(0, 101);
             this.pnlRadioButtons.Name = "pnlRadioButtons";

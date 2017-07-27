@@ -55,7 +55,7 @@
             // 
             this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(697, 31);
+            this.btnCancel.Location = new System.Drawing.Point(681, 22);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(616, 31);
+            this.btnOK.Location = new System.Drawing.Point(600, 22);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -101,10 +101,10 @@
             this.lstOptionPages.Location = new System.Drawing.Point(0, 0);
             this.lstOptionPages.MultiSelect = false;
             this.lstOptionPages.Name = "lstOptionPages";
+            this.lstOptionPages.RowHeight = 25;
             this.lstOptionPages.ShowGroups = false;
             this.lstOptionPages.ShowImagesOnSubItems = true;
             this.lstOptionPages.Size = new System.Drawing.Size(151, 489);
-            this.lstOptionPages.RowHeight = 25;
             this.lstOptionPages.TabIndex = 2;
             this.lstOptionPages.TileSize = new System.Drawing.Size(168, 40);
             this.lstOptionPages.UseCompatibleStateImageBehavior = false;
