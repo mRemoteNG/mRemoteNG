@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -13,13 +15,18 @@ namespace mRemoteNG.Config.Serializers
         private string _csv = "";
         private ConnectionInfo _serializationTarget;
         private readonly SaveFilter _saveFilter;
+        private readonly ICredentialRepositoryList _credentialRepositoryList;
 
 
-        public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter)
+        public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter, ICredentialRepositoryList credentialRepositoryList)
         {
             if (saveFilter == null)
                 throw new ArgumentNullException(nameof(saveFilter));
+            if (credentialRepositoryList == null)
+                throw new ArgumentNullException(nameof(credentialRepositoryList));
+
             _saveFilter = saveFilter;
+            _credentialRepositoryList = credentialRepositoryList;
         }
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
@@ -83,14 +90,20 @@ namespace mRemoteNG.Config.Serializers
 
             csvLine += con.Name + ";" + GetNodePath(con) + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
 
-            if (_saveFilter.SaveUsername)
-                csvLine += con.CredentialRecord?.Username + ";";
+            if (con.CredentialRecordId.HasValue)
+            {
+                var credentialRecord =
+                    _credentialRepositoryList.GetCredentialRecord(con.CredentialRecordId.Value);
 
-            if (_saveFilter.SavePassword)
-                csvLine += con.CredentialRecord?.Password.ConvertToUnsecureString() + ";";
+                if (_saveFilter.SaveUsername)
+                    csvLine += credentialRecord?.Username + ";";
 
-            if (_saveFilter.SaveDomain)
-                csvLine += con.CredentialRecord?.Domain + ";";
+                if (_saveFilter.SavePassword)
+                    csvLine += credentialRecord?.Password.ConvertToUnsecureString() + ";";
+
+                if (_saveFilter.SaveDomain)
+                    csvLine += credentialRecord?.Domain + ";";
+            }
 
             csvLine += con.Hostname + ";" + 
                         con.Protocol + ";" + 

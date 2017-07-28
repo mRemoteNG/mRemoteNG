@@ -165,7 +165,11 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				_VNC.ConnectComplete += VNCEvent_Connected;
 				_VNC.ConnectionLost += VNCEvent_Disconnected;
 				FrmMain.ClipboardChanged += VNCEvent_ClipboardChanged;
-                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(Info.CredentialRecord?.Password.ConvertToUnsecureString()))
+                if (!Info.CredentialRecordId.HasValue)
+                    return;
+			    var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(Info.CredentialRecordId.Value);
+                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials 
+                    && credentialRecord?.Password?.Length > 0)
 				{
 					_VNC.GetPassword = VNCEvent_Authenticate;
 				}
@@ -198,9 +202,12 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		private string VNCEvent_Authenticate()
 		{
-			return Info.CredentialRecord?.Password.ConvertToUnsecureString() ?? "";
+		    return Info.CredentialRecordId.HasValue 
+                ? Runtime.CredentialProviderCatalog.GetCredentialRecord(Info.CredentialRecordId.Value).Password.ConvertToUnsecureString() 
+                : "";
 		}
-        #endregion
+
+	    #endregion
 				
         #region Enums
 		public enum Defaults

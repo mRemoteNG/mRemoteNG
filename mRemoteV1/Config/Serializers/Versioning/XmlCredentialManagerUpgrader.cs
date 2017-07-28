@@ -131,7 +131,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                 Guid id;
                 Guid.TryParse(connectionInfo.ConstantID, out id);
                 if (map.ContainsKey(id))
-                    connectionInfo.CredentialRecord = map[id];
+                    connectionInfo.CredentialRecordId = map[id].Id;
             }
         }
     }

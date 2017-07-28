@@ -24,7 +24,7 @@ namespace mRemoteNG.Connection
         private string _panel = "";
 
         private string _hostname = "";
-        private ICredentialRecord _credentialRecord;
+        private Guid? _credentialRecordId;
 
         private ProtocolType _protocol;
         private string _extApp = "";
@@ -137,10 +137,10 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionCredential))]
         [Editor(typeof(CredentialRecordListAdaptor), typeof(UITypeEditor))]
         [TypeConverter(typeof(ExpandableObjectConverter))]
-        public virtual ICredentialRecord CredentialRecord
+        public virtual Guid? CredentialRecordId
         {
-            get { return GetPropertyValue(nameof(CredentialRecord), _credentialRecord); }
-            set { SetField(ref _credentialRecord, value, nameof(CredentialRecord)); }
+            get { return GetPropertyValue(nameof(CredentialRecordId), _credentialRecordId); }
+            set { SetField(ref _credentialRecordId, value, nameof(CredentialRecordId)); }
         }
 
         [Obsolete("Use the CredentialRecord property")]

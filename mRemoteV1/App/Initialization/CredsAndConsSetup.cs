@@ -37,7 +37,7 @@ namespace mRemoteNG.App.Initialization
         {
             var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
             var matchedCredentials = _credentialsService.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
-            DefaultConnectionInfo.Instance.CredentialRecord = matchedCredentials.Any() ? matchedCredentials.First() : null;
+            DefaultConnectionInfo.Instance.CredentialRecordId = matchedCredentials.Any() ? matchedCredentials.First().Id : default(Guid?);
         }
     }
 }

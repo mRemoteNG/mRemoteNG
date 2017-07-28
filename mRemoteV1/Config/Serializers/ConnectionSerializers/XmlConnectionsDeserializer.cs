@@ -508,16 +508,7 @@ namespace mRemoteNG.Config.Serializers
                 if (_confVersion >= 2.7)
                 {
                     connectionInfo.Inheritance.CredentialRecord = bool.Parse(xmlnode.Attributes["InheritCredentialRecord"]?.Value ?? "False");
-
-                    var requestedCredentialId = xmlnode.Attributes["CredentialId"]?.Value;
-                    if (!string.IsNullOrEmpty(requestedCredentialId) && _credentialRecords.Any())
-                    {
-                        var matchingCredential = _credentialRecords.Where(record => record.Id.ToString() == requestedCredentialId).ToArray();
-                        if (matchingCredential.Any())
-                            connectionInfo.CredentialRecord = matchingCredential.First();
-                        else
-                            Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, string.Format(Language.strFindMatchingCredentialFailed, requestedCredentialId, connectionInfo.Name));
-                    }
+                    connectionInfo.CredentialRecordId = Guid.Parse(xmlnode.Attributes["CredentialId"]?.Value ?? "");
                 }
             }
             catch (Exception ex)

@@ -42,7 +42,7 @@ namespace mRemoteNG.Config.Serializers
             element.Add(new XAttribute("Id", connectionInfo.ConstantID));
 
             element.Add(_saveFilter.SaveCredentialId
-                ? new XAttribute("CredentialId", connectionInfo.CredentialRecord?.Id.ToString() ?? "")
+                ? new XAttribute("CredentialId", connectionInfo.CredentialRecordId?.ToString() ?? "")
                 : new XAttribute("CredentialId", ""));
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));

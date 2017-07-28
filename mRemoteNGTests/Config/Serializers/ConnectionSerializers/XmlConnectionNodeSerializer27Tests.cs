@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
@@ -78,7 +79,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
                 Username = "myuser",
                 Domain = "superdomain",
                 Password = "pass",
-                CredentialRecord = Substitute.For<ICredentialRecord>(),
+                CredentialRecordId = Guid.Empty,
                 Hostname = "somehost",
                 ExtApp = "myextapp",
                 PreExtApp = "preext1",

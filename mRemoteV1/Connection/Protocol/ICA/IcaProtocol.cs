@@ -1,4 +1,5 @@
 using System;
+using System.Security;
 using AxWFICALib;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -117,11 +118,19 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				{
 					return;
 				}
-				
-				var user = _info.CredentialRecord?.Username ?? "";
-                var pass = _info.CredentialRecord?.Password ?? "".ConvertToSecureString();
-                var dom = _info.CredentialRecord?.Domain ?? "";
-						
+
+				var user = "";
+                var pass = new SecureString();
+                var dom = "";
+
+			    if (_info.CredentialRecordId.HasValue)
+			    {
+			        var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(_info.CredentialRecordId.Value);
+			        user = credentialRecord?.Username ?? "";
+			        pass = credentialRecord?.Password ?? "".ConvertToSecureString();
+			        dom = credentialRecord?.Domain ?? "";
+			    }
+
 				if (string.IsNullOrEmpty(user))
 				{
 					if (Settings.Default.EmptyCredentials == "windows")
