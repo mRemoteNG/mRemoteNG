@@ -92,10 +92,21 @@ namespace mRemoteNG.UI.Controls.Base
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Foreground");
                 border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Border");
             }
+
+
+
             e.Graphics.FillRectangle(new SolidBrush(back), e.ClipRectangle);
             e.Graphics.DrawRectangle(new Pen(border, 1), 0, 0, base.Width - 1, base.Height - 1);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            //Warning. the app doesnt use many images in buttons so this positions are kinda tailored just for the used by the app
+            //not by general usage of iamges in buttons
+            if (Image != null)
+            {
+                SizeF stringSize = e.Graphics.MeasureString(Text, Font);
+
+                e.Graphics.DrawImageUnscaled(Image, Width / 2 - (int)stringSize.Width / 2  - Image.Width  + 2, Height / 2 - Image.Height/2);
+            }
             TextRenderer.DrawText(e.Graphics, this.Text, Font, ClientRectangle, fore, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
     }

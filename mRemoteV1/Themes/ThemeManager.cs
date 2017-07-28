@@ -157,7 +157,7 @@ namespace mRemoteNG.Themes
 		{
 			get
 			{
-                return (ThemeInfo)themes["vs2015light"];//_activeTheme;
+                return _activeTheme;
 			}
 			set
 			{
