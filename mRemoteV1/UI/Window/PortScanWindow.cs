@@ -126,7 +126,6 @@ namespace mRemoteNG.UI.Window
             var protocol = (ProtocolType)StringToEnum(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
 		    importSelectedHosts(protocol);
             DialogResult = DialogResult.OK;
-			Close();
 		}
         #endregion
 				
@@ -199,7 +198,7 @@ namespace mRemoteNG.UI.Window
 			prgBar.Maximum = 100;
 			prgBar.Value = 0;
 
-            /* If there are still hosts timing out, we might PortScannerHostScannedDelegate after the import which will throw exceptions...
+            /* If there are still hosts timing out, we might call PortScannerHostScannedDelegate after the import which will throw exceptions...
              * Disable the import button until after the scan is complete
              */
 		    btnImport.Enabled = !_scanning;
