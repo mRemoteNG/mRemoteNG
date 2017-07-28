@@ -7,6 +7,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
+using mRemoteNG.Tools;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -79,7 +80,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
                 Username = "myuser",
                 Domain = "superdomain",
                 Password = "pass",
-                CredentialRecordId = Guid.Empty,
+                CredentialRecordId = Guid.Empty.Maybe(),
                 Hostname = "somehost",
                 ExtApp = "myextapp",
                 PreExtApp = "preext1",

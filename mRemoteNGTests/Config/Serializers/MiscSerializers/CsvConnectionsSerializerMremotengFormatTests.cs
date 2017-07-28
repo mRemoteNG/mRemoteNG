@@ -3,6 +3,7 @@ using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using NSubstitute;
 using NUnit.Framework;
@@ -87,7 +88,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             return new ConnectionInfo
             {
                 Name = ConnectionName,
-                CredentialRecordId = Guid.NewGuid(),
+                CredentialRecordId = Guid.NewGuid().Maybe(),
                 Inheritance = {Colors = true}
             };
         }

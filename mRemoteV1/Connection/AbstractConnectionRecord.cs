@@ -7,7 +7,6 @@ using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Credential;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -24,7 +23,7 @@ namespace mRemoteNG.Connection
         private string _panel = "";
 
         private string _hostname = "";
-        private Guid? _credentialRecordId;
+        private Maybe<Guid> _credentialRecordId = new Maybe<Guid>();
 
         private ProtocolType _protocol;
         private string _extApp = "";
@@ -137,7 +136,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionCredential))]
         [Editor(typeof(CredentialRecordListAdaptor), typeof(UITypeEditor))]
         [TypeConverter(typeof(ExpandableObjectConverter))]
-        public virtual Guid? CredentialRecordId
+        public virtual Maybe<Guid> CredentialRecordId
         {
             get { return GetPropertyValue(nameof(CredentialRecordId), _credentialRecordId); }
             set { SetField(ref _credentialRecordId, value, nameof(CredentialRecordId)); }

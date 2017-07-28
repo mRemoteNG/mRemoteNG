@@ -6,6 +6,7 @@ using System.Collections;
 using System.Windows.Forms;
 using System.Threading;
 using System.ComponentModel;
+using System.Linq;
 using System.Security;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
@@ -346,9 +347,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
-						    if (!_connectionInfo.CredentialRecordId.HasValue) return;
+						    if (!_connectionInfo.CredentialRecordId.Any()) return;
 						    var credentialRecord =
-						        Runtime.CredentialProviderCatalog.GetCredentialRecord(_connectionInfo.CredentialRecordId.Value);
+						        Runtime.CredentialProviderCatalog.GetCredentialRecord(_connectionInfo.CredentialRecordId.Single());
 						    _rdpClient.TransportSettings2.GatewayUsername = credentialRecord?.Username;
 						    _rdpClient.TransportSettings2.GatewayPassword = credentialRecord?.Password.ConvertToUnsecureString();
 						    _rdpClient.TransportSettings2.GatewayDomain = credentialRecord?.Domain;
@@ -424,9 +425,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				var password = new SecureString();
 				var domain = "";
 
-			    if (_connectionInfo.CredentialRecordId.HasValue)
+			    if (_connectionInfo.CredentialRecordId.Any())
 			    {
-			        var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(_connectionInfo.CredentialRecordId.Value);
+			        var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(_connectionInfo.CredentialRecordId.Single());
 			        userName = credentialRecord?.Username ?? "";
 			        password = credentialRecord?.Password ?? new SecureString();
 			        domain = credentialRecord?.Domain ?? "";

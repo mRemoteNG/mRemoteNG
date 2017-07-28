@@ -1,0 +1,32 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace mRemoteNG.Tools
+{
+	public class Maybe<T> : IEnumerable<T>
+	{
+		private readonly T[] _maybe;
+
+		public Maybe()
+		{
+			_maybe = new T[0];
+		}
+
+		public Maybe(T value)
+		{
+			_maybe = value != null 
+				? new[] {value} 
+				: new T[0];
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
+		}
+
+		public IEnumerator<T> GetEnumerator()
+		{
+			return ((IEnumerable<T>)_maybe).GetEnumerator();
+		}
+	}
+}

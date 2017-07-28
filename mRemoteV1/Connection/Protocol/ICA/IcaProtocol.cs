@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Security;
 using AxWFICALib;
 using System.Windows.Forms;
@@ -123,9 +124,9 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 var pass = new SecureString();
                 var dom = "";
 
-			    if (_info.CredentialRecordId.HasValue)
+			    if (_info.CredentialRecordId.Any())
 			    {
-			        var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(_info.CredentialRecordId.Value);
+			        var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(_info.CredentialRecordId.Single());
 			        user = credentialRecord?.Username ?? "";
 			        pass = credentialRecord?.Password ?? "".ConvertToSecureString();
 			        dom = credentialRecord?.Domain ?? "";

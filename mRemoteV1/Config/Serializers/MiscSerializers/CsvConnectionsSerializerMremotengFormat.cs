@@ -90,10 +90,10 @@ namespace mRemoteNG.Config.Serializers
 
             csvLine += con.Name + ";" + GetNodePath(con) + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
 
-            if (con.CredentialRecordId.HasValue)
+            if (con.CredentialRecordId.Any())
             {
                 var credentialRecord =
-                    _credentialRepositoryList.GetCredentialRecord(con.CredentialRecordId.Value);
+                    _credentialRepositoryList.GetCredentialRecord(con.CredentialRecordId.Single());
 
                 if (_saveFilter.SaveUsername)
                     csvLine += credentialRecord?.Username + ";";

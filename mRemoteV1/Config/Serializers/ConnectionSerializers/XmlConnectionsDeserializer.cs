@@ -16,6 +16,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
@@ -508,7 +509,7 @@ namespace mRemoteNG.Config.Serializers
                 if (_confVersion >= 2.7)
                 {
                     connectionInfo.Inheritance.CredentialRecord = bool.Parse(xmlnode.Attributes["InheritCredentialRecord"]?.Value ?? "False");
-                    connectionInfo.CredentialRecordId = Guid.Parse(xmlnode.Attributes["CredentialId"]?.Value ?? "");
+                    connectionInfo.CredentialRecordId = Guid.Parse(xmlnode.Attributes["CredentialId"]?.Value ?? "").Maybe();
                 }
             }
             catch (Exception ex)

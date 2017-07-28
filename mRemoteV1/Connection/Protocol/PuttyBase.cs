@@ -4,6 +4,7 @@ using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
@@ -75,9 +76,9 @@ namespace mRemoteNG.Connection.Protocol
 						var password = "";
 					    var credentialRecord = default(ICredentialRecord);
 
-					    if (InterfaceControl.Info.CredentialRecordId.HasValue)
+					    if (InterfaceControl.Info.CredentialRecordId.Any())
 					    {
-					        credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(InterfaceControl.Info.CredentialRecordId.Value);
+					        credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(InterfaceControl.Info.CredentialRecordId.Single());
 					    }
 
 						if (!string.IsNullOrEmpty(credentialRecord?.Username))

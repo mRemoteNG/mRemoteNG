@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.App.Initialization
 {
@@ -37,7 +38,7 @@ namespace mRemoteNG.App.Initialization
         {
             var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
             var matchedCredentials = _credentialsService.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
-            DefaultConnectionInfo.Instance.CredentialRecordId = matchedCredentials.Any() ? matchedCredentials.First().Id : default(Guid?);
+            DefaultConnectionInfo.Instance.CredentialRecordId = matchedCredentials.FirstOrDefault()?.Id.Maybe();
         }
     }
 }
