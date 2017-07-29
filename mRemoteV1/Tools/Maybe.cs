@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace mRemoteNG.Tools
 {
@@ -28,5 +29,10 @@ namespace mRemoteNG.Tools
 		{
 			return ((IEnumerable<T>)_maybe).GetEnumerator();
 		}
+
+	    public override string ToString()
+	    {
+	        return _maybe.Any() ? _maybe.First().ToString() : "";
+	    }
 	}
 }
