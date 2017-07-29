@@ -509,7 +509,7 @@ namespace mRemoteNG.Config.Serializers
                 if (_confVersion >= 2.7)
                 {
                     connectionInfo.Inheritance.CredentialRecord = bool.Parse(xmlnode.Attributes["InheritCredentialRecord"]?.Value ?? "False");
-                    connectionInfo.CredentialRecordId = Guid.Parse(xmlnode.Attributes["CredentialId"]?.Value ?? "").Maybe();
+                    connectionInfo.CredentialRecordId = (xmlnode.Attributes["CredentialId"]?.Value).MaybeParse(Guid.Parse);
                 }
             }
             catch (Exception ex)
