@@ -94,7 +94,7 @@ namespace mRemoteNG.App
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                ConnectionsService.ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialProviderCatalog.GetCredentialRecords(), false);
+                ConnectionsService.ConnectionTreeModel = connectionsLoader.LoadConnections(false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
