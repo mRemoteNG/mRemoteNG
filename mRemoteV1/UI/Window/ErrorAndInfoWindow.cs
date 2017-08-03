@@ -29,6 +29,7 @@ namespace mRemoteNG.UI.Window
             InitializeComponent();
             _themeManager = ThemeManager.getInstance();
             ApplyTheme();
+            _themeManager.ThemeChanged += ApplyTheme;
             LayoutVertical();
             FillImageList();
         }
@@ -50,11 +51,13 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Private Methods
-        private void ApplyTheme()
+        private new void  ApplyTheme()
         {
-            lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-
+            if(_themeManager.ThemingActive)
+            {
+                lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            }
         }
 
 
@@ -184,28 +187,40 @@ namespace mRemoteNG.UI.Window
 				{
                     case MessageClass.DebugMsg:
 				        pbError.Image = Resources.brick;
-                        pnlErrorMsg.BackColor = Color.LightSteelBlue;
-                        txtMsgText.BackColor = Color.LightSteelBlue;
+                        if(_themeManager.ThemingActive)
+                        {
+                            pnlErrorMsg.BackColor = Color.LightSteelBlue;
+                            txtMsgText.BackColor = Color.LightSteelBlue;
+                        }
                         break;
 					case MessageClass.InformationMsg:
 						pbError.Image = Resources.Information;
-						pnlErrorMsg.BackColor = Color.LightSteelBlue;
-						txtMsgText.BackColor = Color.LightSteelBlue;
-						break;
+                        if (_themeManager.ThemingActive)
+                        {
+                            pnlErrorMsg.BackColor = Color.LightSteelBlue;
+						    txtMsgText.BackColor = Color.LightSteelBlue;
+                        }
+                        break;
 					case MessageClass.WarningMsg:
 						pbError.Image = Resources.Warning;
-                        //Inverse colors for dramatic effect
-						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
-                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor ("WarningText_Background");
-                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
-                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                        if (_themeManager.ThemingActive)
+                        {
+                            //Inverse colors for dramatic effect
+                            pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                            pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor ("WarningText_Background");
+                            txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                            txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                        }
                         break;
 					case MessageClass.ErrorMsg:
 						pbError.Image = Resources._Error;
-						pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                        pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
-                        txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                        txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                        if (_themeManager.ThemingActive)
+                        {
+                            pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                            pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                            txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                            txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                        }
                         break;
 				}
 						

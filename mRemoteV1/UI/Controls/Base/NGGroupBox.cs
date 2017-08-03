@@ -14,16 +14,26 @@ namespace mRemoteNG.UI.Controls.Base
     {
         private ThemeManager _themeManager;
 
+        public NGGroupBox() : base()
+        {
+            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+        }
+
+
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (DesignMode) return;
-            _themeManager = ThemeManager.getInstance(); 
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            _themeManager = ThemeManager.getInstance();
+            if (_themeManager.ThemingActive)
+            {
+                Invalidate();
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (DesignMode)
+            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;

@@ -30,72 +30,105 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThemePage));
-			this.btnThemeDelete = new Controls.Base.NGButton();
-			this.btnThemeDelete.Click += new System.EventHandler(this.btnThemeDelete_Click);
-			this.btnThemeNew = new Controls.Base.NGButton();
-			this.btnThemeNew.Click += new System.EventHandler(this.btnThemeNew_Click);
-			this.cboTheme = new Controls.Base.NGComboBox();
-			this.cboTheme.DropDown += new System.EventHandler(this.cboTheme_DropDown);
-			this.cboTheme.SelectionChangeCommitted += new System.EventHandler(this.cboTheme_SelectionChangeCommitted);
-			this.ThemePropertyGrid = new System.Windows.Forms.PropertyGrid();
-			this.SuspendLayout();
-			//
-			//btnThemeDelete
-			//
-			this.btnThemeDelete.Location = new System.Drawing.Point(535, 0);
-			this.btnThemeDelete.Name = "btnThemeDelete";
-			this.btnThemeDelete.Size = new System.Drawing.Size(75, 23);
-			this.btnThemeDelete.TabIndex = 6;
-			this.btnThemeDelete.Text = "&Delete";
-			this.btnThemeDelete.UseVisualStyleBackColor = true;
-			//
-			//btnThemeNew
-			//
-			this.btnThemeNew.Location = new System.Drawing.Point(454, 0);
-			this.btnThemeNew.Name = "btnThemeNew";
-			this.btnThemeNew.Size = new System.Drawing.Size(75, 23);
-			this.btnThemeNew.TabIndex = 5;
-			this.btnThemeNew.Text = "&New";
-			this.btnThemeNew.UseVisualStyleBackColor = true;
-			//
-			//cboTheme
-			//
-			this.cboTheme.FormattingEnabled = true;
-			this.cboTheme.Location = new System.Drawing.Point(3, 1);
-			this.cboTheme.Name = "cboTheme";
-			this.cboTheme.Size = new System.Drawing.Size(445, 21);
-			this.cboTheme.TabIndex = 4;
-			//
-			//ThemePropertyGrid
-			//
-			this.ThemePropertyGrid.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.ThemePropertyGrid.Location = new System.Drawing.Point(3, 29);
-			this.ThemePropertyGrid.Name = "ThemePropertyGrid";
-			this.ThemePropertyGrid.Size = new System.Drawing.Size(607, 460);
-			this.ThemePropertyGrid.TabIndex = 7;
-			this.ThemePropertyGrid.UseCompatibleTextRendering = true;
-			//
-			//ThemePage
-			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF((float) (6.0F), (float) (13.0F));
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.btnThemeDelete);
-			this.Controls.Add(this.btnThemeNew);
-			this.Controls.Add(this.cboTheme);
-			this.Controls.Add(this.ThemePropertyGrid);
-			this.Name = "ThemePage";
-			this.PageIcon = (System.Drawing.Icon) (resources.GetObject("$this.PageIcon"));
-			this.Size = new System.Drawing.Size(610, 489);
-			this.ResumeLayout(false);
-				
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThemePage));
+            this.btnThemeDelete = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.btnThemeNew = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.cboTheme = new mRemoteNG.UI.Controls.Base.NGComboBox();
+            this.themeEnableCombo = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.listPalette = new mRemoteNG.UI.Controls.Base.NGListView();
+            this.labelRestart = new mRemoteNG.UI.Controls.Base.NGLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.listPalette)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // btnThemeDelete
+            // 
+            this.btnThemeDelete._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnThemeDelete.Location = new System.Drawing.Point(535, 0);
+            this.btnThemeDelete.Name = "btnThemeDelete";
+            this.btnThemeDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnThemeDelete.TabIndex = 6;
+            this.btnThemeDelete.Text = "&Delete";
+            this.btnThemeDelete.UseVisualStyleBackColor = true;
+            this.btnThemeDelete.Click += new System.EventHandler(this.btnThemeDelete_Click);
+            // 
+            // btnThemeNew
+            // 
+            this.btnThemeNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnThemeNew.Location = new System.Drawing.Point(454, 0);
+            this.btnThemeNew.Name = "btnThemeNew";
+            this.btnThemeNew.Size = new System.Drawing.Size(75, 23);
+            this.btnThemeNew.TabIndex = 5;
+            this.btnThemeNew.Text = "&New";
+            this.btnThemeNew.UseVisualStyleBackColor = true;
+            this.btnThemeNew.Click += new System.EventHandler(this.btnThemeNew_Click);
+            // 
+            // cboTheme
+            // 
+            this.cboTheme._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.cboTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTheme.FormattingEnabled = true;
+            this.cboTheme.Location = new System.Drawing.Point(3, 1);
+            this.cboTheme.Name = "cboTheme";
+            this.cboTheme.Size = new System.Drawing.Size(445, 21);
+            this.cboTheme.TabIndex = 4;
+            this.cboTheme.SelectionChangeCommitted += new System.EventHandler(this.cboTheme_SelectionChangeCommitted);
+            // 
+            // themeEnableCombo
+            // 
+            this.themeEnableCombo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.themeEnableCombo.AutoSize = true;
+            this.themeEnableCombo.Location = new System.Drawing.Point(487, 456);
+            this.themeEnableCombo.Name = "themeEnableCombo";
+            this.themeEnableCombo.Size = new System.Drawing.Size(100, 17);
+            this.themeEnableCombo.TabIndex = 8;
+            this.themeEnableCombo.Text = "Enable Themes";
+            this.themeEnableCombo.UseVisualStyleBackColor = true;
+            this.themeEnableCombo.CheckedChanged += new System.EventHandler(this.themeEnableCombo_CheckedChanged);
+            // 
+            // listPalette
+            // 
+            this.listPalette.CellEditUseWholeCell = false;
+            this.listPalette.DecorateLines = true;
+            this.listPalette.Location = new System.Drawing.Point(3, 28);
+            this.listPalette.Name = "listPalette";
+            this.listPalette.Size = new System.Drawing.Size(604, 413);
+            this.listPalette.TabIndex = 9;
+            this.listPalette.UseCompatibleStateImageBehavior = false;
+            this.listPalette.View = System.Windows.Forms.View.Details;
+            // 
+            // labelRestart
+            // 
+            this.labelRestart.AutoSize = true;
+            this.labelRestart.Location = new System.Drawing.Point(23, 456);
+            this.labelRestart.Name = "labelRestart";
+            this.labelRestart.Size = new System.Drawing.Size(399, 13);
+            this.labelRestart.TabIndex = 10;
+            this.labelRestart.Text = "Warning: Restart is required to disable the themes or to completely apply a new o" +
+    "ne";
+            // 
+            // ThemePage
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelRestart);
+            this.Controls.Add(this.listPalette);
+            this.Controls.Add(this.themeEnableCombo);
+            this.Controls.Add(this.btnThemeDelete);
+            this.Controls.Add(this.btnThemeNew);
+            this.Controls.Add(this.cboTheme);
+            this.Name = "ThemePage";
+            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
+            this.Size = new System.Drawing.Size(610, 489);
+            ((System.ComponentModel.ISupportInitialize)(this.listPalette)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
 		}
 		internal Controls.Base.NGButton btnThemeDelete;
 		internal Controls.Base.NGButton btnThemeNew;
 		internal Controls.Base.NGComboBox cboTheme;
-		internal System.Windows.Forms.PropertyGrid ThemePropertyGrid;
-			
-	}
+        private Controls.Base.NGCheckBox themeEnableCombo;
+        private Controls.Base.NGListView listPalette;
+        private Controls.Base.NGLabel labelRestart;
+    }
 }

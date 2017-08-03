@@ -259,7 +259,8 @@ namespace mRemoteNG.UI.Window
 			DockPnl = new DockContent();
 			InitializeComponent();
             FontOverrider.FontOverride(this);
-		}
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+        }
         #endregion
 				
         #region Private Methods
@@ -273,12 +274,14 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            base.ApplyTheme(); 
-            pnlBottom.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlBottom.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlTop.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-
+            if (Themes.ThemeManager.getInstance().ThemingActive)
+            {
+                base.ApplyTheme(); 
+                pnlBottom.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                pnlBottom.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                pnlTop.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            }
         }
 
         private void ApplyEditions()

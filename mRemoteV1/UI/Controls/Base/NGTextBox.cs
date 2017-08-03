@@ -15,14 +15,23 @@ namespace mRemoteNG.UI.Controls.Base
     {
         private ThemeManager _themeManager; 
 
+        public  NGTextBox() : base()
+        { 
+            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+        }
+
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
             if (!Tools.DesignModeTest.IsInDesignMode(this))
             {
                 _themeManager = ThemeManager.getInstance();
-                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                if (_themeManager.ThemingActive)
+                {
+                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                    Invalidate();
+                }
             }
            
         }
@@ -34,14 +43,17 @@ namespace mRemoteNG.UI.Controls.Base
             if (!Tools.DesignModeTest.IsInDesignMode(this))
             {
                 _themeManager = ThemeManager.getInstance();
-                if (base.Enabled)
-                {
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                }
-                else
-                {
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
+                if(_themeManager.ThemingActive)
+                { 
+                    if (base.Enabled)
+                    {
+                        ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+                        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                    }
+                    else
+                    {
+                        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
+                    }
                 }
             }                
             base.OnEnabledChanged(e);

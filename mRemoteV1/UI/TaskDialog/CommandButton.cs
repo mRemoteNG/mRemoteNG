@@ -130,6 +130,11 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         protected override void OnPaint(PaintEventArgs e)
         {
+            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
+            {
+                base.OnPaint(e);
+                return;
+            }
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 

@@ -150,8 +150,7 @@ namespace mRemoteNG.UI.Forms
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
-            //Work on theme change
-			//ThemeManager.ThemeChanged += ApplyThemes; 
+    		_themeManager.ThemeChanged += ApplyTheme; 
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
@@ -197,18 +196,22 @@ namespace mRemoteNG.UI.Forms
         //Theming support
         private void SetSchema()
         {
-            // Persist settings when rebuilding UI
-            this.pnlDock.Theme = _themeManager.ActiveTheme.Theme;
-            ApplyThemes(); 
-
+            if (_themeManager.ThemingActive)
+            {
+                // Persist settings when rebuilding UI
+                this.pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+                ApplyTheme();
+            }
         }
-        private void ApplyThemes()
+        private void ApplyTheme()
 		{
- 
-            vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
+            if(_themeManager.ThemingActive)
+            {
+                vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
+            }
         }
 		
  

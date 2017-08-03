@@ -20,6 +20,11 @@ namespace mRemoteNG.UI.Controls.Base
             OUT
         }
 
+        public NGButton() : base()
+        {
+            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+        }
+
         public MouseState _mice { get; set; }
 
         protected override void OnCreateControl()
@@ -27,36 +32,40 @@ namespace mRemoteNG.UI.Controls.Base
             base.OnCreateControl();
             if (Tools.DesignModeTest.IsInDesignMode(this)) return;
             _themeManager = ThemeManager.getInstance();
-            _mice = MouseState.OUT;
-            MouseEnter += (sender, args) =>
-            {
-                _mice = MouseState.HOVER; 
-                Invalidate();
-            };
-            MouseLeave += (sender, args) =>
-            {
-                _mice = MouseState.OUT; 
-                Invalidate();
-            };
-            MouseDown += (sender, args) =>
-            {
-                if (args.Button == MouseButtons.Left)
-                {
-                    _mice = MouseState.DOWN; 
-                    Invalidate();
-                }
-            };
-            MouseUp += (sender, args) =>
+            if (_themeManager.ThemingActive)
             {
                 _mice = MouseState.OUT;
+                MouseEnter += (sender, args) =>
+                {
+                    _mice = MouseState.HOVER;
+                    Invalidate();
+                };
+                MouseLeave += (sender, args) =>
+                {
+                    _mice = MouseState.OUT;
+                    Invalidate();
+                };
+                MouseDown += (sender, args) =>
+                {
+                    if (args.Button == MouseButtons.Left)
+                    {
+                        _mice = MouseState.DOWN;
+                        Invalidate();
+                    }
+                };
+                MouseUp += (sender, args) =>
+                {
+                    _mice = MouseState.OUT;
 
+                    Invalidate();
+                };
                 Invalidate();
-            };
+            } 
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this))
+            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;

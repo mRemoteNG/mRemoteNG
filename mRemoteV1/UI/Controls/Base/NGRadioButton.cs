@@ -15,16 +15,12 @@ namespace mRemoteNG.UI.Controls.Base
         private Rectangle circle;
         private Rectangle circle_small; 
         // Constructor
-        public NGRadioButton()
+        public NGRadioButton() :base()
         {
             // Init
             circle_small = new Rectangle(4, 4, 6, 6 );
             circle = new Rectangle(1, 1, 12, 12 );
- 
-
-            // Allows for Overlaying
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            BackColor = Color.Transparent;
+           ThemeManager.getInstance().ThemeChanged += OnCreateControl; 
         }
 
 
@@ -41,40 +37,49 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (DesignMode) return;
-            _themeManager = ThemeManager.getInstance();
-            _mice = MouseState.OUT;
-            MouseEnter += (sender, args) =>
+            if (!Tools.DesignModeTest.IsInDesignMode(this))
             {
-                _mice = MouseState.HOVER;
-                Invalidate();
-            };
-            MouseLeave += (sender, args) =>
-            {
-                _mice = MouseState.OUT;
-                Invalidate();
-            };
-            MouseDown += (sender, args) =>
-            {
-                if (args.Button == MouseButtons.Left)
+                _themeManager = ThemeManager.getInstance();
+                if (_themeManager.ThemingActive)
                 {
-                    _mice = MouseState.DOWN;
+                    // Allows for Overlaying
+                    SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+                    BackColor = Color.Transparent;
+                    _mice = MouseState.OUT;
+                    MouseEnter += (sender, args) =>
+                    {
+                        _mice = MouseState.HOVER;
+                        Invalidate();
+                    };
+                    MouseLeave += (sender, args) =>
+                    {
+                        _mice = MouseState.OUT;
+                        Invalidate();
+                    };
+                    MouseDown += (sender, args) =>
+                    {
+                        if (args.Button == MouseButtons.Left)
+                        {
+                            _mice = MouseState.DOWN;
+                            Invalidate();
+                        }
+                    };
+                    MouseUp += (sender, args) =>
+                    {
+                        _mice = MouseState.OUT;
+
+                        Invalidate();
+                    };
                     Invalidate();
                 }
-            };
-            MouseUp += (sender, args) =>
-            {
-                _mice = MouseState.OUT;
-
-                Invalidate();
-            };
+            }
         }
 
 
         //This class is painted with the checkbox colors, the glyph color is used for the radio inside
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this))
+            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;

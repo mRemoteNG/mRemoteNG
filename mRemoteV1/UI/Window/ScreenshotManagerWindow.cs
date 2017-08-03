@@ -144,15 +144,19 @@ namespace mRemoteNG.UI.Window
 		private void ScreenshotManager_Load(object sender, EventArgs e)
 		{
             ApplyTheme();
-			ApplyLanguage();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyLanguage();
 		}
 
         private new void ApplyTheme()
-        { 
-            base.ApplyTheme(); 
-            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
-            vsToolStripExtender.SetStyle(cMenScreenshot, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+        {
+            if (ThemeManager.getInstance().ThemingActive)
+            {
+                base.ApplyTheme(); 
+                this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+                vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
+                vsToolStripExtender.SetStyle(cMenScreenshot, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+            }
         }
         private void ApplyLanguage()
 		{

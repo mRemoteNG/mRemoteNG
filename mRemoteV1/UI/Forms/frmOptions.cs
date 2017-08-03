@@ -34,13 +34,17 @@ namespace mRemoteNG.UI.Forms
             SetInitiallyActivatedPage();
             ApplyLanguage();
             ApplyTheme();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
             lstOptionPages.SelectedIndex = 0;
         }
         private void ApplyTheme()
         {
-            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if(Themes.ThemeManager.getInstance().ThemingActive)
+            {
+                BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            }
         }
 
         private void ApplyLanguage()
@@ -122,6 +126,14 @@ namespace mRemoteNG.UI.Forms
                 pnlMain.Controls.Add(page);
         }
 
-         
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            foreach (var page in _pages.Values)
+            {
+                Debug.WriteLine(page.PageName);
+                page.RevertSettings();
+            }
+            Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile); 
+        }
     }
 }

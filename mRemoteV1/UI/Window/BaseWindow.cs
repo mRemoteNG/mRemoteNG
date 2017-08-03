@@ -46,10 +46,16 @@ namespace mRemoteNG.UI.Window
         #region Private Methods 
         public new void ApplyTheme()
         {
-            if (DesignMode) return;
-            _themeManager = ThemeManager.getInstance();
-            this.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            this.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+
+            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            {
+                _themeManager = ThemeManager.getInstance();
+                if (_themeManager.ThemingActive)
+                {
+                    this.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                    this.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                }
+            }
         }
 
         private void Base_Load(System.Object sender, System.EventArgs e)

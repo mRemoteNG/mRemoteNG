@@ -170,18 +170,22 @@ namespace mRemoteNG.UI.Window
         private void Connection_Load(object sender, EventArgs e)
         {
             ApplyTheme();
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
         }
 
         private new void ApplyTheme()
         {
-            base.ApplyTheme();
-            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
-            vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
-            TabController.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background"); 
-            TabController.TextColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Foreground"); 
-            TabController.TextInactiveColor= ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Disabled_Foreground"); 
+            if(ThemeManager.getInstance().ThemingActive)
+            {
+                base.ApplyTheme();
+                this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+                vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
+                vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+                TabController.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
+                TabController.TextColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Foreground");
+                TabController.TextInactiveColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Disabled_Foreground");
+            }
         }
 
         private bool _documentHandlersAdded;

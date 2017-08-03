@@ -25,6 +25,7 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.ExternalApps;
 			DockPnl = new DockContent();
             _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ApplyTheme;
             _externalAppsSaver = new ExternalAppsSaver();
 		}
 
@@ -225,19 +226,21 @@ namespace mRemoteNG.UI.Window
 			LaunchToolMenuItem.Text = Language.strMenuLaunchExternalTool;
 		}
 
-        private void ApplyTheme()
+        private new void ApplyTheme()
         {
-            vsToolStripExtender.SetStyle(ToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(ToolsContextMenuStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            //Apply the extended palette
+            if(_themeManager.ThemingActive)
+            {
+                vsToolStripExtender.SetStyle(ToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(ToolsContextMenuStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                //Apply the extended palette
 
-            ToolStripContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
-            ToolStripContainer.TopToolStripPanel.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
-            PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
-            PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
-            //Toollist grouping
-            ToolsListObjView.AlwaysGroupByColumn = this.FilenameColumnHeader;
-
+                ToolStripContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+                ToolStripContainer.TopToolStripPanel.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+                PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+                PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+                //Toollist grouping
+                ToolsListObjView.AlwaysGroupByColumn = this.FilenameColumnHeader;
+            }
         }
 
         private void UpdateToolsListObjView(ExternalTool selectTool = null)

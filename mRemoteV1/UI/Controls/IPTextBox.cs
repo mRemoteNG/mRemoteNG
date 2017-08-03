@@ -81,11 +81,19 @@ namespace mRemoteNG.UI.Controls
 
         protected override void OnLoad(EventArgs e)
         {
-            if (!DesignMode)
-                this.panel1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             base.OnLoad(e);
+            ApplyTheme();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
 
+        private void ApplyTheme()
+        {
+            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            {
+                if (Themes.ThemeManager.getInstance().ThemingActive)
+                    this.panel1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            }
+        }
         protected override void Dispose( bool disposing )
 		{
 			if( disposing )

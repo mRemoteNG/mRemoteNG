@@ -40,8 +40,9 @@ namespace mRemoteNG.UI.Controls
         {
             Initialize();
             _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ApplyTheme;
             PopulateQuickConnectProtocolMenu();
-            ApplyThemes();
+            ApplyTheme();
         }
 
         private void Initialize()
@@ -131,18 +132,15 @@ namespace mRemoteNG.UI.Controls
             ResumeLayout();
         }
 
-        private void ApplyThemes()
-        { 
-            vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            _cmbQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-
-
-            //_lblQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            _lblQuickConnect.ForeColor = Color.Pink;
-
-
+        private void ApplyTheme()
+        {
+            if (_themeManager.ThemingActive)
+            {
+                vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                _cmbQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            }
         }
 
         #region Quick Connect

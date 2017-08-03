@@ -17,12 +17,25 @@ namespace mRemoteNG.UI.Controls.Base
         private CellBorderDecoration deco;
         //Control if the gridlines are styled, must be set before the OnCreateControl is fired
         public bool DecorateLines { get; set; } = true;
+
+
+        public NGListView() : base()
+        {
+            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+        }
+
+
+
+
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            if (Tools.DesignModeTest.IsInDesignMode(this))
+                return;
+            ThemeManager _themeManager = ThemeManager.getInstance();
+            if (_themeManager.ThemingActive)
             {
-                ThemeManager _themeManager = ThemeManager.getInstance();
+                
                 //List back color
                 BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Background");
                 ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
@@ -47,7 +60,11 @@ namespace mRemoteNG.UI.Controls.Base
                     deco.BoundsPadding = Size.Empty;
                     deco.CornerRounding = 0;
                     FormatCell += NGListView_FormatCell;
-                }  
+                }
+                if (Items != null && Items.Count != 0)
+                    BuildList();
+                Invalidate();
+
             }
 
         }

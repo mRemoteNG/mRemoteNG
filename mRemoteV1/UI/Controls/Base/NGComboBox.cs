@@ -21,10 +21,17 @@ namespace mRemoteNG.UI.Controls.Base
         }
         public MouseState _mice { get; set; }
 
+        public NGComboBox() : base()
+        {
+            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+        }
+
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            _themeManager = ThemeManager.getInstance();
+            if (_themeManager.ThemingActive)
             {
                 _themeManager = ThemeManager.getInstance();
                 BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
@@ -33,8 +40,7 @@ namespace mRemoteNG.UI.Controls.Base
                 SetStyle(ControlStyles.OptimizedDoubleBuffer |
                          ControlStyles.UserPaint, true);
                 DrawItem += NG_DrawItem;
-
-                _mice = MouseState.OUT;
+                _mice = MouseState.OUT; 
                 MouseEnter += (sender, args) =>
                 {
                     _mice = MouseState.HOVER;
@@ -59,6 +65,7 @@ namespace mRemoteNG.UI.Controls.Base
 
                     Invalidate();
                 };
+                Invalidate();
             } 
         }
 
@@ -75,13 +82,26 @@ namespace mRemoteNG.UI.Controls.Base
             else
                 e.Graphics.FillRectangle(new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")), e.Bounds);
 
-            e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
-  
+            if(DisplayMember == null)
+                e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+            else
+            {
+                if (Items[index].GetType().GetProperty(DisplayMember) != null)
+                {
+                    e.Graphics.DrawString(Items[index].GetType().GetProperty(DisplayMember).GetValue(Items[index],null).ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                }
+            }
             e.DrawFocusRectangle();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
+
+            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
+            {
+                base.OnPaint(e);
+                return;
+            }
             //Colors
             Color Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Border");
             Color Back = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");

@@ -13,17 +13,25 @@ namespace mRemoteNG.UI.Controls.Base
          
         private ThemeManager _themeManager;
 
+        public NGLabel() : base()
+        {
+            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+        }
+
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
             if (!Tools.DesignModeTest.IsInDesignMode(this))
+            {
                 _themeManager = ThemeManager.getInstance();
+                Invalidate();
+            }
         }
 
   
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this))
+            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;

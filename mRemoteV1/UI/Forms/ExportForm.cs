@@ -177,6 +177,7 @@ namespace mRemoteNG.UI.Forms
             cboFileFormat.Items.Add(new ExportFormat(ConnectionsSaver.Format.mRCSV));
 			cboFileFormat.SelectedIndex = 0;
             ApplyTheme();
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
 		}
 
@@ -245,8 +246,11 @@ namespace mRemoteNG.UI.Forms
         private void ApplyTheme()
         {
             _themeManager = ThemeManager.getInstance();
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if(_themeManager.ThemingActive)
+            {
+                BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            }
         }
 
 
