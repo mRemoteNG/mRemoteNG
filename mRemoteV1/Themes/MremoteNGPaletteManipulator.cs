@@ -15,7 +15,7 @@ using System.Xml.Linq;
 namespace mRemoteNG.Themes 
 {
     //Class to extract the rest of the required theme colors for MremoteNG from the vstheme file
-    public class MremoteNGPaletteLoader 
+    public class MremoteNGPaletteManipulator 
     {
         private XmlDocument _xml;
         private ExtendedColorPalette  _defaultPalette;
@@ -23,7 +23,7 @@ namespace mRemoteNG.Themes
         
 
         //warning, defaultpalette should always contain all the values, because when is loaded there is no default palette (parameter is null
-        public MremoteNGPaletteLoader(byte[] file, ExtendedColorPalette defaultPalette = null )
+        public MremoteNGPaletteManipulator(byte[] file, ExtendedColorPalette defaultPalette = null )
         {
             _xml = new XmlDocument();
             _xml.LoadXml(new StreamReader(new MemoryStream(file)).ReadToEnd());   
@@ -52,7 +52,31 @@ namespace mRemoteNG.Themes
             } 
 
             return newPalette;
+        }  
+
+
+        public byte[] mergePalette(ExtendedColorPalette colorPalette) 
+        {
+            ResourceSet resourceSet = mRemoteNG.ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            
+            foreach (DictionaryEntry entry in resourceSet)
+            {
+                string colorName = entry.Key.ToString();
+                String xmlQueryPath = (String)entry.Value;
+                XmlNodeList colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
+                if(colorNodeList.Count > 0)
+                {
+                    Color paletteColor = colorPalette.getColor(colorName);
+                    colorNodeList[0].Value = string.Format("FF{0:X2}{1:X2}{2:X2}", paletteColor.R, paletteColor.G, paletteColor.B);
+                }
+              
+            }
+            MemoryStream ms = new MemoryStream();
+            _xml.Save(ms);
+            byte[] bytes = ms.ToArray();
+
+            return bytes;
         }
-         
+
     }
 }

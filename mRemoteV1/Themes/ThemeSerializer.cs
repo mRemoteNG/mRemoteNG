@@ -4,31 +4,61 @@ using System.Drawing;
 using System.IO;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Linq;
 
 namespace mRemoteNG.Themes
 {
 	public class ThemeSerializer
 	{
-		public static void SaveToXmlFile(ThemeInfo themeInfo, string filename)
+        /// <summary>
+        /// Save the theme to file, name property is used as filename
+        /// The baseTheme is used as a template, by copy that file and rewrite the extpalette values
+        /// </summary>
+        /// <param name="themeInfo"></param>
+		public static void SaveToXmlFile(ThemeInfo themeToSave,ThemeInfo baseTheme)
 		{
+            string oldURI = baseTheme.URI; 
+            String directoryName = Path.GetDirectoryName(oldURI); 
+            string toSaveURI = directoryName + Path.DirectorySeparatorChar + themeToSave.Name +  ".vstheme";
+            File.Copy(baseTheme.URI, toSaveURI);
+            themeToSave.URI = toSaveURI;
 		}
-			
-		public static void SaveToXmlFile(List<ThemeInfo> themes, string filename)
-		{
-		
-		}
-			
-		public static ThemeInfo LoadFromXmlFile(string filename, ThemeInfo defaultTheme=null)
+
+        public static void DeleteFile(ThemeInfo themeToDelete)
+        {
+            File.Delete(themeToDelete.URI);
+        }
+
+        public static void UpdateThemeXMLValues(ThemeInfo themeToUpdate)
+        {
+            byte[] bytesIn = File.ReadAllBytes(themeToUpdate.URI);  
+            MremoteNGPaletteManipulator manipulator;
+            manipulator = new MremoteNGPaletteManipulator(bytesIn, themeToUpdate.ExtendedPalette);
+            byte[] bytesOut = manipulator.mergePalette(themeToUpdate.ExtendedPalette);
+            File.WriteAllBytes(themeToUpdate.URI, bytesOut);
+        }
+
+        /// <summary>
+        /// Load a theme form an xml file
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="defaultTheme"></param>
+        /// <returns></returns>
+        public static ThemeInfo LoadFromXmlFile(string filename, ThemeInfo defaultTheme=null)
 		{
             byte[] bytes = File.ReadAllBytes(filename);
             //Load the dockpanel part
             MremoteNGThemeBase themeBaseLoad= new MremoteNGThemeBase(bytes);
             //Load the mremote part
-            MremoteNGPaletteLoader extColorLoader;
+            MremoteNGPaletteManipulator extColorLoader;
             //Cause we cannot default the theme for the default theme
-            extColorLoader = new MremoteNGPaletteLoader(bytes, defaultTheme ==null ? null:defaultTheme.ExtendedPalette); 
+            extColorLoader = new MremoteNGPaletteManipulator(bytes, defaultTheme ==null ? null:defaultTheme.ExtendedPalette); 
             ThemeInfo loadedTheme = new ThemeInfo(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename, VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
-
+            if((new string[] { "darcula", "vs2015blue", "vs2015dark" , "vs2015light" }).Contains(Path.GetFileNameWithoutExtension(filename)))
+            {
+                loadedTheme.IsThemeBase = true;
+            }
+            loadedTheme.IsExtendable = true;
             return loadedTheme;
 		}
 			
@@ -43,5 +73,7 @@ namespace mRemoteNG.Themes
 	        var regex = new System.Text.RegularExpressions.Regex("^[0-9a-fA-F]{8}$");
 	        return regex.Match(name).Success ? Color.FromArgb(Convert.ToInt32(name, 16)) : Color.FromName(name);
 	    }
-	}
+
+
+    }
 }

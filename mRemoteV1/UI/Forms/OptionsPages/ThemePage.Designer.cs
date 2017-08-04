@@ -36,6 +36,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboTheme = new mRemoteNG.UI.Controls.Base.NGComboBox();
             this.themeEnableCombo = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.listPalette = new mRemoteNG.UI.Controls.Base.NGListView();
+            this.keyCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.ColorCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.ColorNameCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.labelRestart = new mRemoteNG.UI.Controls.Base.NGLabel();
             ((System.ComponentModel.ISupportInitialize)(this.listPalette)).BeginInit();
             this.SuspendLayout();
@@ -87,14 +90,44 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // listPalette
             // 
+            this.listPalette.AllColumns.Add(this.keyCol);
+            this.listPalette.AllColumns.Add(this.ColorCol);
+            this.listPalette.AllColumns.Add(this.ColorNameCol);
             this.listPalette.CellEditUseWholeCell = false;
+            this.listPalette.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.keyCol,
+            this.ColorCol,
+            this.ColorNameCol});
+            this.listPalette.Cursor = System.Windows.Forms.Cursors.Default;
             this.listPalette.DecorateLines = true;
             this.listPalette.Location = new System.Drawing.Point(3, 28);
             this.listPalette.Name = "listPalette";
+            this.listPalette.ShowGroups = false;
             this.listPalette.Size = new System.Drawing.Size(604, 413);
             this.listPalette.TabIndex = 9;
+            this.listPalette.UseCellFormatEvents = true;
             this.listPalette.UseCompatibleStateImageBehavior = false;
             this.listPalette.View = System.Windows.Forms.View.Details;
+            // 
+            // keyCol
+            // 
+            this.keyCol.AspectName = "Key";
+            this.keyCol.IsEditable = false;
+            this.keyCol.Text = "Element";
+            this.keyCol.Width = 262;
+            // 
+            // ColorCol
+            // 
+            this.ColorCol.Sortable = false;
+            this.ColorCol.Text = "Color";
+            this.ColorCol.Width = 45;
+            // 
+            // ColorNameCol
+            // 
+            this.ColorNameCol.AspectName = "Value";
+            this.ColorNameCol.Sortable = false;
+            this.ColorNameCol.Text = "Color Name";
+            this.ColorNameCol.Width = 265;
             // 
             // labelRestart
             // 
@@ -130,5 +163,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private Controls.Base.NGCheckBox themeEnableCombo;
         private Controls.Base.NGListView listPalette;
         private Controls.Base.NGLabel labelRestart;
+        private BrightIdeasSoftware.OLVColumn keyCol;
+        private BrightIdeasSoftware.OLVColumn ColorCol;
+        private BrightIdeasSoftware.OLVColumn ColorNameCol;
     }
 }

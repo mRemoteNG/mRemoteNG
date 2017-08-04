@@ -571,7 +571,7 @@
       </Color>
       <Color Name="Dialog">
         <Background Type="CT_RAW" Source="FFD6DBE9" />
-        <Foreground Type="CT_SYSCOLOR" Source="00000008" />
+        <Foreground Type="CT_SYSCOLOR" Source="FF1E1E1E" />
       </Color>
       <Color Name="DialogBorder">
         <Background Type="CT_SYSCOLOR" Source="0000000F" />

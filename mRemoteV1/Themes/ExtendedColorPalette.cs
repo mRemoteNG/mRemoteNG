@@ -6,6 +6,39 @@ using System.Text;
 
 namespace mRemoteNG.Themes
 {
+    public class PseudoKeyColor
+    {
+        private string key;
+        private Color value;
+        public PseudoKeyColor(string _key, Color _value)
+        {
+            key = _key;
+            value = _value;
+        }
+        public String Key
+        {
+            get
+            {
+                return key;
+            }
+            set
+            {
+                key = value;
+            }
+        }
+        public Color Value
+        {
+            get
+            {
+                return value;
+            }
+            set
+            {
+                this.value = value;
+            }
+        }
+    }
+
     public class ExtendedColorPalette
     {
         #region Private Variables
@@ -54,11 +87,40 @@ namespace mRemoteNG.Themes
             return retColor;
 
         }
-        public void  addColor(String colorKey,Color inColor)
+        public void  addColor(string colorKey,Color inColor)
         {
             _extendedColors.Add(colorKey, inColor);
         }
 
+        public void replaceColor(string colorKey, Color inColor)
+        {
+            _extendedColors[colorKey]= inColor;
+        }
+
+        public Dictionary<String, Color> DefaultColorPalette
+        {
+            get
+            {
+                return _default;
+            }
+            set
+            {
+                _default = value;
+            }
+        }
+
+
+        public Dictionary<String, Color> ExtColorPalette
+        {
+            get
+            {
+                return _extendedColors;
+            }
+            set
+            {
+                _extendedColors = value;
+            }
+        }
     }
 }
  

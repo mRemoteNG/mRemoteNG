@@ -258,7 +258,7 @@
     <Compile Include="Security\IKeyProvider.cs" />
     <Compile Include="Security\RandomGenerator.cs" />
     <Compile Include="Themes\ExtendedColorPalette.cs" />
-    <Compile Include="Themes\MremoteNGPaletteLoader.cs" />
+    <Compile Include="Themes\MremoteNGPaletteManipulator.cs" />
     <Compile Include="Themes\MremoteNGThemeBase.cs">
       <SubType>Component</SubType>
     </Compile>

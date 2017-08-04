@@ -9044,7 +9044,7 @@
         <Foreground Type="CT_INVALID" Source="00000000" />
       </Color>
       <Color Name="compiler error">
-        <Background Type="CT_INVALID" Source="00000000" />
+        <Background Type="CT_INVALID" Source="FFFF5555" />
         <Foreground Type="CT_RAW" Source="FFBC3F3C" />
       </Color>
       <Color Name="syntax error">
@@ -9060,7 +9060,7 @@
         <Foreground Type="CT_RAW" Source="FFFFFFFF" />
       </Color>
       <Color Name="compiler warning">
-        <Background Type="CT_INVALID" Source="00000000" />
+        <Background Type="CT_INVALID" Source="FFFFB86C" />
         <Foreground Type="CT_RAW" Source="FF867F27" />
       </Color>
       <Color Name="Code Snippet Field">

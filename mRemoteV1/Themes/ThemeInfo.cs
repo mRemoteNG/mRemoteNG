@@ -2,12 +2,15 @@ using mRemoteNG.Tools;
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using WeifenLuo.WinFormsUI.Docking;
 
 
 namespace mRemoteNG.Themes
 {
-	public class ThemeInfo 
+
+
+	public class ThemeInfo : ICloneable
     {
         #region Private Variables
         private string _name;
@@ -15,6 +18,8 @@ namespace mRemoteNG.Themes
         private String  _URI;
         private VisualStudioToolStripExtender.VsVersion _version;
         private ExtendedColorPalette _extendedPalette;
+        private bool _isThemeBase;
+        private bool _isExtendable;
 
         #endregion
 
@@ -26,6 +31,8 @@ namespace mRemoteNG.Themes
             _URI = inURI;
             _version = inVersion;
             _extendedPalette = inExtendedPalette;
+            _isThemeBase = false;
+            _isExtendable = false;
         }
 
         public ThemeInfo(string themeName, ThemeBase inTheme, String inURI, VisualStudioToolStripExtender.VsVersion inVersion)
@@ -33,14 +40,24 @@ namespace mRemoteNG.Themes
             _name = themeName;
             _theme = inTheme;
             _URI = inURI;
-            _version = inVersion; 
+            _version = inVersion;
+            _isThemeBase = false;
+            _isExtendable = false;
         }
         #endregion
 
         #region Public Methods
         public object Clone()
         {
-            return MemberwiseClone();
+            ThemeInfo clonedObj;
+            ExtendedColorPalette extPalette = new ExtendedColorPalette();
+            extPalette.ExtColorPalette = _extendedPalette.ExtColorPalette.ToDictionary(entry => entry.Key,entry => entry.Value);
+            extPalette.DefaultColorPalette = _extendedPalette.DefaultColorPalette;
+            clonedObj = new ThemeInfo(_name, _theme, _URI, _version, extPalette);
+            clonedObj.IsExtendable = _isExtendable;
+            clonedObj.IsThemeBase = _isThemeBase;
+
+            return clonedObj;
         }
 
         #endregion
@@ -110,6 +127,24 @@ namespace mRemoteNG.Themes
                     return;
                 }
                 _extendedPalette = value;
+            }
+        }
+
+        public bool IsThemeBase
+        {
+            get { return _isThemeBase; }
+            set
+            { 
+                _isThemeBase = value;
+            }
+        }
+
+        public bool IsExtendable
+        {
+            get { return _isExtendable; }
+            set
+            {
+                _isExtendable = value;
             }
         }
         #endregion

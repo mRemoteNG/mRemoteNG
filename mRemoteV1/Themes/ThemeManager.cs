@@ -106,19 +106,56 @@ namespace mRemoteNG.Themes
 
                 }
 
-            }
-
-
-
-
-            return themes.Values.OfType<ThemeInfo>().ToList();
-
+            } 
+            return themes.Values.OfType<ThemeInfo>().ToList(); 
         }
- 
 
-        private void SaveTheme(ThemeInfo theme)
+        public ThemeInfo addTheme(ThemeInfo baseTheme, string newThemeName)
         {
+            if (!themes.Contains(newThemeName))
+            {
+                ThemeInfo modifiedTheme = (ThemeInfo)baseTheme.Clone();
+                modifiedTheme.Name = newThemeName;
+                modifiedTheme.IsExtendable = true;
+                modifiedTheme.IsThemeBase = false;
+                ThemeSerializer.SaveToXmlFile(modifiedTheme,baseTheme);
+                themes.Add(newThemeName,modifiedTheme);
+                return modifiedTheme;
+            }
+            return null;
         }
+
+        public void deleteTheme(ThemeInfo themeToDelete)
+        {
+            if (themes.Contains(themeToDelete.Name))
+            {
+                if(ActiveTheme == themeToDelete)
+                    ActiveTheme = DefaultTheme;
+                themes.Remove(themeToDelete.Name);
+                ThemeSerializer.DeleteFile(themeToDelete);
+            } 
+        }
+
+        public void updateTheme(ThemeInfo themeToUpdate)
+        {
+            ThemeSerializer.UpdateThemeXMLValues(themeToUpdate); 
+        }
+
+        public void refreshUI()
+        {
+            NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
+        }
+
+        public bool isThemeNameOk(string name)
+        {
+            if (themes.Contains(name))
+                return false;
+            char[] badChars = Path.GetInvalidFileNameChars();
+            if (name.IndexOfAny(badChars) != -1)
+                return false; 
+            return true;
+        }
+  
          
         #endregion
 
@@ -153,6 +190,7 @@ namespace mRemoteNG.Themes
             {
                _themeActive = value;
                 Settings.Default.ThemingActive = value;
+                NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
             }
         }
 
