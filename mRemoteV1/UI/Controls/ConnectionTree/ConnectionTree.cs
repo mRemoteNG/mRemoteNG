@@ -20,6 +20,7 @@ namespace mRemoteNG.UI.Controls
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
+        private bool _allowEdit = false;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -105,6 +106,8 @@ namespace mRemoteNG.UI.Controls
             CellToolTipShowing += tvConnections_CellToolTipShowing;
             ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
+
+            BeforeLabelEdit += HandleCheckForValidEdit;
         }
 
         private void PopulateTreeView()
@@ -222,8 +225,24 @@ namespace mRemoteNG.UI.Controls
 
         public void RenameSelectedNode()
         {
+            _allowEdit = true;
             SelectedItem.BeginEdit();
             Runtime.SaveConnectionsAsync();
+        }
+
+        public void HandleCheckForValidEdit(object sender, System.Windows.Forms.LabelEditEventArgs e)
+        {
+            if (sender is ConnectionTree)
+            {
+                if (_allowEdit)
+                {
+                    _allowEdit = false;
+                }
+                else
+                {
+                    e.CancelEdit = true;
+                }
+            }
         }
 
         public void DeleteSelectedNode()
