@@ -45,8 +45,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             btnThemeDelete.Text = Language.strOptionsThemeButtonDelete;
             btnThemeNew.Text = Language.strOptionsThemeButtonNew;
-            //Apply language to active theme checkbox
-            //Apply languate to warning label
+            labelRestart.Text = Language.strOptionsThemeThemeChaangeWarning;
+            themeEnableCombo.Text = Language.strOptionsThemeEnableTheming;
         }
 
         private new void ApplyTheme()
@@ -183,7 +183,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
             String name = _themeManager.ActiveTheme.Name;
-            DialogResult res = Input.input.InputBox("New theme name", "Type the new theme name", ref name);
+            DialogResult res = Input.input.InputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name);
             if (res == DialogResult.OK)
             {
                 if (_themeManager.isThemeNameOk(name))
@@ -192,13 +192,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     _themeManager.ActiveTheme = addedTheme;
                     LoadSettings();
                 }
+                else
+                {
+                    TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
+                }
             }
         }
 
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
 
-            DialogResult res = TaskDialog.CTaskDialog.ShowTaskDialogBox(this, "Confirmation", "Do you really want to delete the theme?", "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.YesNo, TaskDialog.ESysIcons.Question, TaskDialog.ESysIcons.Information, 0);
+            DialogResult res = TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings , Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.YesNo, TaskDialog.ESysIcons.Question, TaskDialog.ESysIcons.Information, 0);
 
             if (res == DialogResult.Yes)
             {

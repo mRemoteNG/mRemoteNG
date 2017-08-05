@@ -9,6 +9,7 @@ using System.Windows.Forms;
 namespace mRemoteNG.UI.Controls.Base
 {
     [ToolboxBitmap(typeof(Button))]
+    //Extended button class, the button onPaint completely repaint the control
     public class NGButton : Button
     {
         private ThemeManager _themeManager ;

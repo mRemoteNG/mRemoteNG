@@ -8,8 +8,10 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Themes
 {
-    //Main class to manage the themes 
-    //Singleton 
+    /// <summary>
+    /// Main class of the theming component. Centralices creation, loading and deletion of themes
+    /// Implmeented as a singleton
+    /// </summary>
     public class ThemeManager
     {
         #region Private Variables
@@ -110,6 +112,12 @@ namespace mRemoteNG.Themes
             return themes.Values.OfType<ThemeInfo>().ToList(); 
         }
 
+        /// <summary>
+        /// Add a new theme based on an existing one by cloning and renaming, the theme is saved to disk
+        /// </summary>
+        /// <param name="baseTheme"></param>
+        /// <param name="newThemeName"></param>
+        /// <returns></returns>
         public ThemeInfo addTheme(ThemeInfo baseTheme, string newThemeName)
         {
             if (!themes.Contains(newThemeName))
@@ -125,6 +133,7 @@ namespace mRemoteNG.Themes
             return null;
         }
 
+        //Delete a theme from memory and disk
         public void deleteTheme(ThemeInfo themeToDelete)
         {
             if (themes.Contains(themeToDelete.Name))
@@ -136,16 +145,19 @@ namespace mRemoteNG.Themes
             } 
         }
 
+        //Sincronize the theme XML values from memory to disk
         public void updateTheme(ThemeInfo themeToUpdate)
         {
             ThemeSerializer.UpdateThemeXMLValues(themeToUpdate); 
         }
 
+        //refresh the ui controls to reflect a theme change
         public void refreshUI()
         {
             NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
         }
 
+        //Verify if theme name is repeated or if the name is a valid file  name
         public bool isThemeNameOk(string name)
         {
             if (themes.Contains(name))

@@ -28,7 +28,11 @@ namespace mRemoteNG.Themes
         {
             File.Delete(themeToDelete.URI);
         }
-
+        
+        /// <summary>
+        /// Takes a theme in memory and update the color values that the user might have changed 
+        /// </summary>
+        /// <param name="themeToUpdate"></param>
         public static void UpdateThemeXMLValues(ThemeInfo themeToUpdate)
         {
             byte[] bytesIn = File.ReadAllBytes(themeToUpdate.URI);  

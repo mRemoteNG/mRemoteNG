@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
+
+    // Repaint of a ProgressBar on a flat style
     class NGProgressBar : ProgressBar
     {
         private ThemeManager _themeManager;

@@ -9,7 +9,9 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace mRemoteNG.Themes
 {
 
-
+    /// <summary>
+    /// Container class for all the color and style elements to define a theme
+    /// </summary>
 	public class ThemeInfo : ICloneable
     {
         #region Private Variables

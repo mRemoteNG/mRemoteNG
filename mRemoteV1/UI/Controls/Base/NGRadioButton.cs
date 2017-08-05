@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
+    // total replace of RadioButton to avoid disabled state inconsistency on the themes
+    // and glyph color inconsistency
     class NGRadioButton : RadioButton
     {
         private ThemeManager _themeManager;

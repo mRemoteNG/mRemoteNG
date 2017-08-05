@@ -10,6 +10,7 @@ using System.Windows.Forms.VisualStyles;
 namespace mRemoteNG.UI.Controls.Base
 {
     //Groupbox is colored using the innerTab colors as the vstheme doesnt have explicit groupbox palettes (at least completes)
+    //This clas completely repaints the control
     public class NGGroupBox : GroupBox
     {
         private ThemeManager _themeManager;

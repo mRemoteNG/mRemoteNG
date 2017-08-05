@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
+    //Extended CheckBox class, the NGCheckBox onPaint completely repaint the control
     public class NGCheckBox : CheckBox
     {
         private ThemeManager _themeManager;

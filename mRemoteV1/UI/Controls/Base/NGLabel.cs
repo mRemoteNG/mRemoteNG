@@ -7,6 +7,7 @@ using System.Windows.Forms;
 namespace mRemoteNG.UI.Controls.Base
 {
     //Themable label to overide the winforms behavior of drawing the forecolor of disabled with a system color
+    //This class repaints the control to avoid Disabled state mismatch of the theme
     [ToolboxBitmap(typeof(Label))]
     public class NGLabel : Label
     {
@@ -49,12 +50,6 @@ namespace mRemoteNG.UI.Controls.Base
                 TextRenderer.DrawText(e.Graphics, this.Text, Font, ClientRectangle, disabledtextLabel, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
             }
                 
-        }
-
- 
- 
-
-         
-
+        } 
     }
 }

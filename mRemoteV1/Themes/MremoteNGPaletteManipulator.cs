@@ -55,6 +55,11 @@ namespace mRemoteNG.Themes
         }  
 
 
+        /// <summary>
+        /// Takes a palette from memory and update the xml elements in disk
+        /// </summary>
+        /// <param name="colorPalette"></param>
+        /// <returns></returns>
         public byte[] mergePalette(ExtendedColorPalette colorPalette) 
         {
             ResourceSet resourceSet = mRemoteNG.ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);

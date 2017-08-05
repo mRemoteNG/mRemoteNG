@@ -6,6 +6,10 @@ using System.Text;
 
 namespace mRemoteNG.Themes
 {
+
+    /// <summary>
+    /// Class used for the UI to display the color tables,as the Dictionary value keys cannot be directly replaced 
+    /// </summary>
     public class PseudoKeyColor
     {
         private string key;
@@ -39,6 +43,10 @@ namespace mRemoteNG.Themes
         }
     }
 
+
+    /// <summary>
+    /// Holds the color of a palette that are not included in the dockpanelsuite definition
+    /// </summary>
     public class ExtendedColorPalette
     {
         #region Private Variables
@@ -64,6 +72,11 @@ namespace mRemoteNG.Themes
         }
         #endregion
  
+        /// <summary>
+        /// Obtains a color from the extended palette, if not present obtains it from the default palette, in the extreme case it uses Pink as a signal that a color is missing
+        /// </summary>
+        /// <param name="colorKey"></param>
+        /// <returns></returns>
         public Color getColor(String  colorKey)
         {
             Color retColor= Color.Empty;
@@ -87,11 +100,23 @@ namespace mRemoteNG.Themes
             return retColor;
 
         }
+
+        /// <summary>
+        /// Add a color to the extended palette
+        /// </summary>
+        /// <param name="colorKey"></param>
+        /// <param name="inColor"></param>
         public void  addColor(string colorKey,Color inColor)
         {
             _extendedColors.Add(colorKey, inColor);
         }
 
+
+        /// <summary>
+        /// Replace the value of a color in the palette
+        /// </summary>
+        /// <param name="colorKey"></param>
+        /// <param name="inColor"></param>
         public void replaceColor(string colorKey, Color inColor)
         {
             _extendedColors[colorKey]= inColor;

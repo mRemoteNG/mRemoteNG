@@ -10,7 +10,8 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
-    //This class is only minimally themed as textboxes onPaint are hard to theme (system controls most of the drawing process
+    //This class is only minimally themed as textboxes onPaint are hard to theme (system wm paint control most of the drawing process
+    //There are some glitches on the initial draw of some controls
     public class NGTextBox : TextBox
     {
         private ThemeManager _themeManager; 

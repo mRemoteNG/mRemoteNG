@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
+    //Repaint of the NumericUpDown, the composite control buttons are replaced because the 
+    //original ones cannot be themed due to protected inheritance 
     class NGNumericUpDown : NumericUpDown
     {
 
