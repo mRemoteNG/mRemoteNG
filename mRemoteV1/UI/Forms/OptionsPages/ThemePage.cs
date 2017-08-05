@@ -120,27 +120,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void cboTheme_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            _themeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
-            listPalette.ClearObjects();
-            if (_themeManager.ActiveTheme.IsExtendable && _themeManager.ThemingActive)
+            btnThemeNew.Enabled = false;
+            btnThemeDelete.Enabled = false;
+            if (_themeManager.ThemingActive) 
             {
-                btnThemeNew.Enabled = true;
+                _themeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
                 listPalette.ClearObjects();
-                listPalette.Enabled = false;
-                ColorMeList();
-                if (!_themeManager.ActiveTheme.IsThemeBase)
+                if (_themeManager.ActiveTheme.IsExtendable && _themeManager.ThemingActive)
                 {
-                    listPalette.Enabled = true;
-                    btnThemeDelete.Enabled = true;
-                    listPalette.CellClick += ListPalette_CellClick;
+                    btnThemeNew.Enabled = true;
+                    listPalette.ClearObjects();
+                    listPalette.Enabled = false;
+                    ColorMeList();
+                    if (!_themeManager.ActiveTheme.IsThemeBase)
+                    {
+                        listPalette.Enabled = true;
+                        btnThemeDelete.Enabled = true;
+                        listPalette.CellClick += ListPalette_CellClick;
 
-                }
+                    }
+                } 
             }
-            else
-            {
-                btnThemeNew.Enabled = false;
-                btnThemeDelete.Enabled = false;
-            }
+          
         }
 
 
@@ -222,8 +223,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (themeEnableCombo.Checked)
             {
                 _themeManager.ThemingActive = true;
-                themeEnableCombo.Checked = true;
-                cboTheme.Enabled = true;
+                if(_themeManager.ThemingActive)
+                {
+                    themeEnableCombo.Checked = true;
+                    cboTheme.Enabled = true;
+                }
+                else
+                {
+                    TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeErrorNoThemes, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
+                    themeEnableCombo.Checked = false;
+                }
             }
             else
             {

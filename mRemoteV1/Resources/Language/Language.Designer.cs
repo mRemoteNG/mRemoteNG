@@ -4048,6 +4048,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder.
+        /// </summary>
+        internal static string strOptionsThemeErrorNoThemes {
+            get {
+                return ResourceManager.GetString("strOptionsThemeErrorNoThemes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New theme name.
         /// </summary>
         internal static string strOptionsThemeNewThemeCaption {
