@@ -5,6 +5,7 @@ Fixes:
 #646: Exception after click on import port scan
 #596: Exception when launching ExtTool without a connection selected
 #176: Unable to enter text in Quick Connect when SSH connection active
+#550: Sometimes double-clicking connection tree node began rename instead of connecting
 Minor error message correction
 Minor code refactoring
 
