@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Linq;
+using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Credential;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Controls.Adapters;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 
@@ -131,15 +136,33 @@ namespace mRemoteNG.Connection
             set { SetField(ref _hostname, value?.Trim(), "Hostname"); }
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 2),
-            LocalizedAttributes.LocalizedDisplayName(nameof(Language.strCategoryCredentials)),
-            LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionCredential))]
-        [Editor(typeof(CredentialRecordListAdaptor), typeof(UITypeEditor))]
-        [TypeConverter(typeof(ExpandableObjectConverter))]
+        [Browsable(false)]
         public virtual Maybe<Guid> CredentialRecordId
         {
             get { return GetPropertyValue(nameof(CredentialRecordId), _credentialRecordId); }
             set { SetField(ref _credentialRecordId, value, nameof(CredentialRecordId)); }
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 2),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strCategoryCredentials)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionCredential))]
+        [Editor(typeof(CredentialRecordListAdaptor), typeof(UITypeEditor))]
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public virtual Maybe<ICredentialRecord> CredentialRecord
+        {
+            get
+            {
+                return CredentialRecordId
+                    .Select(guid => Runtime.CredentialProviderCatalog.GetCredentialRecord(guid))
+                    .FirstOrDefault()
+                    .Maybe();
+            }
+
+            set
+            {
+                foreach (var credentialRecord in value)
+                    CredentialRecordId = credentialRecord.Id.Maybe();
+            }
         }
 
         [Obsolete("Use the CredentialRecord property")]

@@ -5,7 +5,7 @@ using System.Windows.Forms.Design;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
 
-namespace mRemoteNG.UI.Controls
+namespace mRemoteNG.UI.Controls.Adapters
 {
     public class CredentialRecordListAdaptor : UITypeEditor
     {
@@ -37,7 +37,7 @@ namespace mRemoteNG.UI.Controls
                 //return newCred;
             }
 
-            return listBox.SelectedItem.Id.Maybe() ?? value;
+            return listBox.SelectedItem.Maybe();
         }
 
         private void ListBoxOnSelectedValueChanged(object sender, EventArgs eventArgs)

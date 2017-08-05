@@ -19,5 +19,12 @@ namespace mRemoteNGTests.Tools
 			var sut = new Maybe<object>(expected);
 			Assert.That(sut, Has.Member(expected));
 		}
+
+	    [Test]
+	    public void MaybeExtensionOfNullObjectIsntNull()
+	    {
+	        var sut = ((object) null).Maybe();
+            Assert.That(sut, Is.Not.Null);
+	    }
 	}
 }

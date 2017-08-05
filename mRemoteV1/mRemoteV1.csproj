@@ -339,7 +339,7 @@
     <Compile Include="UI\Controls\CredentialRecordComboBox.Designer.cs">
       <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\CredentialRecordListAdaptor.cs" />
+    <Compile Include="UI\Controls\Adapters\CredentialRecordListAdaptor.cs" />
     <Compile Include="UI\Controls\CredentialRecordListBox.cs">
       <SubType>Component</SubType>
     </Compile>
