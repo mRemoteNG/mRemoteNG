@@ -34,5 +34,12 @@ namespace mRemoteNG.Tools
 	    {
 	        return _maybe.Any() ? _maybe.First().ToString() : "";
 	    }
+
+	    public static Maybe<TOut> FromNullable<TOut>(TOut? value) where TOut : struct
+	    {
+	        return value.HasValue
+                ? new Maybe<TOut>(value.Value)
+                : new Maybe<TOut>();
+	    }
 	}
 }

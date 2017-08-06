@@ -11,7 +11,6 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Credential;
 using mRemoteNG.Tools;
-using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.Adapters;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -148,20 +147,19 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionCredential))]
         [Editor(typeof(CredentialRecordListAdaptor), typeof(UITypeEditor))]
         [TypeConverter(typeof(ExpandableObjectConverter))]
-        public virtual Maybe<ICredentialRecord> CredentialRecord
+        public virtual ICredentialRecord CredentialRecord
         {
             get
             {
-                return CredentialRecordId
+                var credential = CredentialRecordId
                     .Select(guid => Runtime.CredentialProviderCatalog.GetCredentialRecord(guid))
-                    .FirstOrDefault()
-                    .Maybe();
+                    .FirstOrDefault();
+                return credential ?? new PlaceholderCredentialRecord(CredentialRecordId);
             }
 
             set
             {
-                foreach (var credentialRecord in value)
-                    CredentialRecordId = credentialRecord.Id.Maybe();
+                CredentialRecordId = Maybe<Guid>.FromNullable(value?.Id);
             }
         }
 

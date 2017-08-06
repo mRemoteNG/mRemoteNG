@@ -2567,4 +2567,8 @@ mRemoteNG will now quit and begin with the installation.</value>
 
 This page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade.</value>
   </data>
+  <data name="CredentialUnavailable" xml:space="preserve">
+    <value>Credential not available</value>
+    <comment>Shown when a credential is not loaded/available for use.</comment>
+  </data>
 </root>

@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms.Design;
 using mRemoteNG.App;
-using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Controls.Adapters
 {
@@ -37,7 +36,7 @@ namespace mRemoteNG.UI.Controls.Adapters
                 //return newCred;
             }
 
-            return listBox.SelectedItem.Maybe();
+            return listBox.SelectedItem ?? value;
         }
 
         private void ListBoxOnSelectedValueChanged(object sender, EventArgs eventArgs)
