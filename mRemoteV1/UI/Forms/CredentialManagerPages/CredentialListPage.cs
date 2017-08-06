@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
@@ -15,7 +16,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         public string PageName { get; } = Language.strCategoryCredentials;
         public Image PageIcon { get; } = Resources.key;
-        public IConfirm<ICredentialRecord> DeletionConfirmer { get; set; } = new AlwaysConfirmYes();
+        public IConfirm<IEnumerable<ICredentialRecord>> DeletionConfirmer { get; set; } = new AlwaysConfirmYes();
 
         public CredentialListPage(ICredentialRepositoryList credentialRepositoryList)
         {
@@ -43,8 +44,17 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void RemoveSelectedCredential()
         {
             var selectedCredential = credentialRecordListView.SelectedObject;
-            if (!DeletionConfirmer.Confirm(selectedCredential.Key)) return;
+            if (!DeletionConfirmer.Confirm(new[] { selectedCredential.Key })) return;
             selectedCredential.Value.CredentialRecords.Remove(selectedCredential.Key);
+            RaiseCredentialsChangedEvent(this);
+        }
+
+        private void RemoveSelectedCredentials()
+        {
+            var selectedCredentials = credentialRecordListView.SelectedObjects.ToArray();
+            if (!DeletionConfirmer.Confirm(selectedCredentials.Select(i => i.Key))) return;
+            foreach(var item in selectedCredentials)
+                item.Value.CredentialRecords.Remove(item.Key);
             RaiseCredentialsChangedEvent(this);
         }
 
@@ -88,7 +98,10 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            RemoveSelectedCredential();
+            if (credentialRecordListView.MultipleObjectsSelected)
+                RemoveSelectedCredentials();
+            else
+                RemoveSelectedCredential();
         }
 
         private void ObjectListView1OnEnterPressed(object sender, KeyEventArgs keyEventArgs)
@@ -110,14 +123,17 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void OnDeletePressed(object sender, KeyEventArgs keyEventArgs)
         {
             if (keyEventArgs.KeyCode != Keys.Delete) return;
-            RemoveSelectedCredential();
+            if (credentialRecordListView.MultipleObjectsSelected)
+                RemoveSelectedCredentials();
+            else
+                RemoveSelectedCredential();
             keyEventArgs.Handled = true;
             keyEventArgs.SuppressKeyPress = true;
         }
 
         private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
         {
-            buttonRemove.Enabled = credentialRecordListView.SelectedObject.Key != null;
+            buttonRemove.Enabled = credentialRecordListView.SelectedObjects.Any();
         }
 
         public event EventHandler CredentialsChanged;

@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Tree;
 
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialDeletionMsgBoxConfirmer : IConfirm<ICredentialRecord>
+    public class CredentialDeletionMsgBoxConfirmer : IConfirm<IEnumerable<ICredentialRecord>>
     {
         private readonly Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> _confirmationFunc;
 
@@ -17,10 +19,19 @@ namespace mRemoteNG.Credential
             _confirmationFunc = confirmationFunc;
         }
 
-        public bool Confirm(ICredentialRecord confirmationTarget)
+        public bool Confirm(IEnumerable<ICredentialRecord> confirmationTargets)
         {
-            var promptText = string.Format(Language.strConfirmDeleteCredentialRecord, confirmationTarget.Title);
-            return PromptUser(promptText);
+            var targetsArray = confirmationTargets.ToArray();
+            if (targetsArray.Length == 0) return false;
+            if (targetsArray.Length > 1)
+                return PromptUser(
+                    string.Format(
+                        "Are you sure you want to delete these {0} selected credentials?",
+                        targetsArray.Length));
+            return PromptUser(
+                string.Format(
+                    Language.strConfirmDeleteCredentialRecord,
+                    targetsArray.First().Title));
         }
 
         private bool PromptUser(string promptMessage)
