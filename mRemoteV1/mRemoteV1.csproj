@@ -232,6 +232,7 @@
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
+    <Compile Include="Credential\PlaceholderCredentialRecord.cs" />
     <Compile Include="Credential\Repositories\CompositeRepositoryUnlocker.cs" />
     <Compile Include="Credential\CredentialChangedEventArgs.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
@@ -295,12 +296,14 @@
     <Compile Include="Security\Factories\CryptoProviderFactoryFromXml.cs" />
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
+    <Compile Include="Tools\Extensions.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsService.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
+    <Compile Include="Tools\Maybe.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\ScanHost.cs" />
@@ -337,7 +340,7 @@
     <Compile Include="UI\Controls\CredentialRecordComboBox.Designer.cs">
       <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\CredentialRecordListAdaptor.cs" />
+    <Compile Include="UI\Controls\Adapters\CredentialRecordListAdaptor.cs" />
     <Compile Include="UI\Controls\CredentialRecordListBox.cs">
       <SubType>Component</SubType>
     </Compile>

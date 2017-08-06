@@ -6,6 +6,7 @@ using System.Collections;
 using System.Windows.Forms;
 using System.Threading;
 using System.ComponentModel;
+using System.Linq;
 using System.Security;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
@@ -346,12 +347,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
-						    if (_connectionInfo.CredentialRecord != null)
-						    {
-                                _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.CredentialRecord.Username;
-                                _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.CredentialRecord.Password.ConvertToUnsecureString();
-                                _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.CredentialRecord.Domain;
-                            }
+						    if (!_connectionInfo.CredentialRecordId.Any()) return;
+						    var credentialRecord =
+						        Runtime.CredentialProviderCatalog.GetCredentialRecord(_connectionInfo.CredentialRecordId.Single());
+						    _rdpClient.TransportSettings2.GatewayUsername = credentialRecord?.Username;
+						    _rdpClient.TransportSettings2.GatewayPassword = credentialRecord?.Password.ConvertToUnsecureString();
+						    _rdpClient.TransportSettings2.GatewayDomain = credentialRecord?.Domain;
 						}
 						else if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
 						{
@@ -420,9 +421,17 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					return;
 				}
 
-                var userName = _connectionInfo.CredentialRecord?.Username ?? "";
-				var password = _connectionInfo.CredentialRecord?.Password ?? new SecureString();
-				var domain = _connectionInfo.CredentialRecord?.Domain ?? "";
+                var userName = "";
+				var password = new SecureString();
+				var domain = "";
+
+			    if (_connectionInfo.CredentialRecordId.Any())
+			    {
+			        var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(_connectionInfo.CredentialRecordId.Single());
+			        userName = credentialRecord?.Username ?? "";
+			        password = credentialRecord?.Password ?? new SecureString();
+			        domain = credentialRecord?.Domain ?? "";
+			    }
 						
 				if (string.IsNullOrEmpty(userName))
 				{

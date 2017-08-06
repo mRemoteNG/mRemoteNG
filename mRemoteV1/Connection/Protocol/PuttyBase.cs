@@ -4,8 +4,10 @@ using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools.Cmdline;
@@ -72,10 +74,16 @@ namespace mRemoteNG.Connection.Protocol
 					{
 						var username = "";
 						var password = "";
-								
-						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Username))
+					    var credentialRecord = default(ICredentialRecord);
+
+					    if (InterfaceControl.Info.CredentialRecordId.Any())
+					    {
+					        credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(InterfaceControl.Info.CredentialRecordId.Single());
+					    }
+
+						if (!string.IsNullOrEmpty(credentialRecord?.Username))
 						{
-							username = InterfaceControl.Info.CredentialRecord?.Username;
+							username = credentialRecord.Username;
 						}
 						else
 						{
@@ -90,10 +98,10 @@ namespace mRemoteNG.Connection.Protocol
 						            break;
 						    }
 						}
-								
-						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString()))
+						
+						if (!string.IsNullOrEmpty(credentialRecord?.Password.ConvertToUnsecureString()))
 						{
-							password = InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString();
+							password = credentialRecord.Password.ConvertToUnsecureString();
 						}
 						else
 						{
@@ -103,7 +111,7 @@ namespace mRemoteNG.Connection.Protocol
                                 password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
 							}
 						}
-								
+						
 						arguments.Add("-" + (int)PuttySSHVersion);
 								
 						if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials)
