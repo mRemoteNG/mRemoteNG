@@ -37,7 +37,8 @@ permalink: /download
 		<h2 class='card-title'>Stable <small>{% if site.github.latest_release.name == nil %}{{ site.github.latest_release.tag_name }}{% else %}{{ site.github.latest_release.name }}{% endif %}</small></h2>
 		<h4>{{ site.github.latest_release.published_at | date: '%a, %b %d, %Y' }}</h4>
 		<div>
-			{% for asset in site.github.latest_release.assets %}
+			{% assign assets = site.github.latest_release.assets | sort: 'content_type' %}
+			{% for asset in assets %}
 			{% if asset.state == 'uploaded' %}
 
 			<a href='{{ asset.browser_download_url }}' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
@@ -51,8 +52,9 @@ permalink: /download
 	<div class='card card-block card-outline-warning'>
 		<h2 class='card-title'>Prerelease <small>{% if preRelease.name == nil %}{{ preRelease.tag_name }}{% else %}{{ preRelease.name }}{% endif %}</small></h2>
 		<h4>{{ preRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
+		{% assign assets = preRelease.assets | sort: 'content_type' %}
 		<div>
-			{% for asset in preRelease.assets %}
+			{% for asset in assets %}
 			{% if asset.state == 'uploaded' %}
 			<a href='{{ asset.browser_download_url }}' class='btn btn-warning' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
 				{% if msi contains asset.content_type %}MSI{% elsif zip contains asset.content_type %}ZIP{% endif %}
