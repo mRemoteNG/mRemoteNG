@@ -50,6 +50,11 @@ node('windows') {
 	stage ('Run Unit Tests (Portable)') {
     	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && VSTest.Console.exe /logger:trx /TestAdapterPath:${nunitTestAdapterPath} \"${jobDir}\\mRemoteNGTests\\bin\\Release Portable\\mRemoteNGTests.dll\""
 	}
+
+    stage ('Generate UpdateCheck Files') {
+        bat "powershell -ExecutionPolicy Bypass -File \"${jobDir}\\Tools\\create_upg_chk_files.ps1\" -TagName \"${env.TagName}\" -UpdateChannel \"${env.UpdateChannel}\""
+        archiveArtifacts artifacts: "Release\\*.txt", caseSensitive: false, onlyIfSuccessful: true
+    }
 	
     stage ('Publish to GitHub') {
         withCredentials([string(credentialsId: '5443a369-dbe8-42d3-b4e8-04d0b4e9039a', variable: 'GH_AUTH_TOKEN')]) {
