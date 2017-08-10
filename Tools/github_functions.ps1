@@ -49,7 +49,7 @@ function Publish-GitHubRelease {
         $AuthToken
     )
 
-    $body = New-GitHubReleaseRequestBody -tag_name $TagName -target_commitish $TargetCommitish -name $ReleaseTitle -body $Description -draft $IsDraft -prerelease $IsPrerelease
+    $body = New-GitHubReleaseRequestBody -TagName $TagName -TargetCommitish $TargetCommitish -ReleaseTitle $ReleaseTitle -Description $Description -IsDraft $IsDraft -IsPrerelease $IsPrerelease
     $req_publishRelease = Invoke-WebRequest -Uri "$githubUrl/repos/$Owner/$Repository/releases" -Method Post -Headers @{"Authorization"="token $AuthToken"} -Body $body -ErrorAction Stop
     $response_publishRelease = ConvertFrom-Json -InputObject $req_publishRelease.Content
 
