@@ -12,17 +12,7 @@ permalink: /download
 </style>
 <script>
 	$(document).ready(function() {
-		$('[data-toggle="tooltip"]').tooltip({
-			'container': 'body'
-		});
-		$('.clickable-row').click(function(e) {
-			if ($(this).data('href')) {
-				window.location = $(this).data('href');
-			}
-		});
-		$('#accordion-01').on('show.bs.collapse hide.bs.collapse', function(e) {
-			$(".chevron").toggleClass('fa-rotate-90');
-		});
+		$('[data-toggle="tooltip"]').tooltip();
 	});
 </script>
 {% assign msi = 'application/x-msdownload|application/x-msi|binary/octet-stream|application/octet-stream' | split: '|' %}
@@ -33,65 +23,69 @@ permalink: /download
 {% endif %}
 {% endfor %}
 <div class='card-deck text-center'>
-	<div class='card card-block card-outline-success'>
-		<h2 class='card-title'>Stable <small>{% if site.github.latest_release.name == nil %}{{ site.github.latest_release.tag_name }}{% else %}{{ site.github.latest_release.name }}{% endif %}</small></h2>
-		<h4>{{ site.github.latest_release.published_at | date: '%a, %b %d, %Y' }}</h4>
-		<div>
-			{% assign assets = site.github.latest_release.assets | sort: 'content_type' %}
-			{% for asset in assets %}
-			{% if asset.state == 'uploaded' %}
+	<div class='card border-success'>
+		<div class='card-body'>
+			<h2 class='card-title'>Stable <small>{% if site.github.latest_release.name == nil %}{{ site.github.latest_release.tag_name }}{% else %}{{ site.github.latest_release.name }}{% endif %}</small></h2>
+			<h4>{{ site.github.latest_release.published_at | date: '%a, %b %d, %Y' }}</h4>
+			<div>
+				{% assign assets = site.github.latest_release.assets | sort: 'content_type' %}
+				{% for asset in assets %}
+				{% if asset.state == 'uploaded' %}
 
-			<a href='{{ asset.browser_download_url }}' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
-				{% if msi contains asset.content_type %}MSI{% elsif zip contains asset.content_type %}ZIP{% endif %}
-			</a>
-			{% endif %}
-			{% endfor %}
+				<a href='{{ asset.browser_download_url }}' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
+					{% if msi contains asset.content_type %}MSI{% elsif zip contains asset.content_type %}ZIP{% endif %}
+				</a>
+				{% endif %}
+				{% endfor %}
+			</div>
+			{% unless site.github.latest_release.html_url == nil %}<a href='{{ site.github.latest_release.html_url }}'>Changelog</a>{% endunless %}
 		</div>
-		{% unless site.github.latest_release.html_url == nil %}<a href='{{ site.github.latest_release.html_url }}'>Changelog</a>{% endunless %}
 	</div>
-	<div class='card card-block card-outline-warning'>
-		<h2 class='card-title'>Prerelease <small>{% if preRelease.name == nil %}{{ preRelease.tag_name }}{% else %}{{ preRelease.name }}{% endif %}</small></h2>
-		<h4>{{ preRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
-		{% assign assets = preRelease.assets | sort: 'content_type' %}
-		<div>
-			{% for asset in assets %}
-			{% if asset.state == 'uploaded' %}
-			<a href='{{ asset.browser_download_url }}' class='btn btn-warning' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
-				{% if msi contains asset.content_type %}MSI{% elsif zip contains asset.content_type %}ZIP{% endif %}
-			</a>
-			{% endif %}
-			{% endfor %}
+	<div class='card border-warning'>
+		<div class='card-body'>
+			<h2 class='card-title'>Prerelease <small>{% if preRelease.name == nil %}{{ preRelease.tag_name }}{% else %}{{ preRelease.name }}{% endif %}</small></h2>
+			<h4>{{ preRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
+			{% assign assets = preRelease.assets | sort: 'content_type' %}
+			<div>
+				{% for asset in assets %}
+				{% if asset.state == 'uploaded' %}
+				<a href='{{ asset.browser_download_url }}' class='btn btn-warning' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
+					{% if msi contains asset.content_type %}MSI{% elsif zip contains asset.content_type %}ZIP{% endif %}
+				</a>
+				{% endif %}
+				{% endfor %}
+			</div>
+			{% unless preRelease.html_url == nil%}<a href='{{ preRelease.html_url }}'>Changelog</a>{% endunless %}
 		</div>
-		{% unless preRelease.html_url == nil%}<a href='{{ preRelease.html_url }}'>Changelog</a>{% endunless %}
 	</div>
 </div>
 {% comment %}<div id='accordion' role='tablist'>
-	<div class='card'>
-		<div class='card-header collapsed' role='tab' id='head-01' data-toggle='collapse' data-parent='#accordion' data-target='#accordion-01' aria-expanded='false' aria-controls='accorion-01'>
-			<h5><i class='chevron fa fa-fw fa-chevron-right'></i>Previous Releases</h5>
-		</div>
-		<div id='accordion-01' class='collapse' role='tabpanel' aria-labelledby='head-01'>
-			<div class='card-block'>
-				<table class='table table-hover table-sm'>
-					<thead>
-						<tr>
-							<th>Version</th>
-							<th>Released</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for release in site.github.releases %}
-						{% if release.draft == false and release.prerelease == false and foorloop.first == false %}
-						{% endif %}
-						<tr class='clickable-row' data-href='{{ release.html_url }}'>
-							<td>{{ release.name }}</td>
-							<td>{{ release.published_at | date: '%a, %b %d, %Y' }}</td>
-						</tr>
-						{% endfor %}
-					</tbody>
-				</table>{% endcomment %}
-				<p>You can view all releases (including pre-releases) by going <a href='{{ site.github.releases_url }}'>here</a></p>
-{% comment %}			</div>
+<div class='card'>
+	<div class='card-header collapsed' role='tab' id='head-01' data-toggle='collapse' data-parent='#accordion' data-target='#accordion-01' aria-expanded='false' aria-controls='accorion-01'>
+		<h5><i class='chevron fa fa-fw fa-chevron-right'></i>Previous Releases</h5>
+	</div>
+	<div id='accordion-01' class='collapse' role='tabpanel' aria-labelledby='head-01'>
+		<div class='card-block'>
+			<table class='table table-hover table-sm'>
+				<thead>
+					<tr>
+						<th>Version</th>
+						<th>Released</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for release in site.github.releases %}
+					{% if release.draft == false and release.prerelease == false and foorloop.first == false %}
+					{% endif %}
+					<tr class='clickable-row' data-href='{{ release.html_url }}'>
+						<td>{{ release.name }}</td>
+						<td>{{ release.published_at | date: '%a, %b %d, %Y' }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>{% endcomment %}
+			<p>You can view all releases (including pre-releases) by going <a href='{{ site.github.releases_url }}'>here</a></p>
+			{% comment %}			</div>
 		</div>
 	</div>
 </div>{% endcomment %}
