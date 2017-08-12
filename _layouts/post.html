@@ -3,7 +3,7 @@
 	{% include navigation.html %}
 	{% include jumbotron.html %}
 	<div class='container'>
-		{% assign author = site.data.authors[page.author] %}
+		{%- assign author = site.data.authors[page.author] -%}
 		<div class='media' style='word-break: break-word'>
 			<img class='d-flex mr-3 media-object' src='{{ author.avatar }}'>
 			<article class='media-body'>
@@ -21,14 +21,14 @@
 		<div class='btn-group float-right' role='group'>
 			{% if page.previous %}
 			<a class='btn btn-secondary' href='{{ site.baseurl }}{{ page.previous.url }}'>Previous</a>
-			{% else %}
+			{%- else -%}
 			<span class='btn btn-secondary disabled'>Previous</span>
-			{% endif %}
+			{%- endif -%}
 			{% if page.next %}
 			<a class='btn btn-secondary' href='{{ site.baseurl }}{{ page.next.url }}'>Next</a>
-			{% else %}
+			{%- else -%}
 			<span class='btn btn-secondary disabled'>Next</span>
-			{% endif %}
+			{%- endif -%}
 		</div>
 	</div>
 	{% include footer.html %}

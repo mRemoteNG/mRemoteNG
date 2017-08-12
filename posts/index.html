@@ -2,7 +2,7 @@
 title: Posts
 ---
 {% for post in paginator.posts %}
-{% assign author = site.data.authors[post.author] %}
+{%- assign author = site.data.authors[post.author] -%}
 <div class='media' style='word-break: break-word'>
 	<img class='d-flex mr-3 media-object' src='{{ author.avatar }}'>
 	<div class='media-body'>
@@ -16,10 +16,10 @@ title: Posts
 		</div>
 	</div>
 </div>
-{% unless forloop.last %}
+{%- unless forloop.last -%}
 <hr>
-{% endunless %}
-{% endfor %}
+{%- endunless -%}
+{%- endfor -%}
 {% if paginator.total_pages > 1 %}
 <nav aria-label='Post navigation'>
 	<ul class='pagination justify-content-end'>
@@ -35,7 +35,7 @@ title: Posts
 				<span aria-hidden='true'>&laquo;</span>
 			</span>
 		</li>
-		{% endif %}
+		{%- endif -%}
 		{% for page in (1..paginator.total_pages) %}
 		{% if page == paginator.page %}
 		<li class='page-item active'><a class='page-link'>{{ page | pnumber }}</a></li>
@@ -43,8 +43,8 @@ title: Posts
 		<li class='page-item'><a class='page-link' href='{{ site.baseurl }}{{ site.paginate_path | remove: ":num/" }}'>{{ page | pnumber }}</a></li>
 		{% else %}
 		<li class='page-item'><a class='page-link' href='{{ site.baseurl }}{{ site.paginate_path | replace: ":num", page }}'>{{ page | pnumber }}</a></li>
-		{% endif %}
-		{% endfor %}
+		{%- endif -%}
+		{%- endfor -%}
 		{% if paginator.next_page %}
 		<li class='page-item'>
 			<a class='page-link' href='{{ site.baseurl }}{{ paginator.next_page_path }}' aria-label='Next'>
@@ -57,7 +57,7 @@ title: Posts
 				<span aria-hidden='true'>&raquo;</span>
 			</span>
 		</li class='page-item'>
-		{% endif %}
+		{%- endif -%}
 	</ul>
 </nav>
-{% endif %}
+{%- endif -%}

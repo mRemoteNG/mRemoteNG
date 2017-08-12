@@ -5,7 +5,9 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
 		<link>{{ site.url }}{{ site.baseurl}}{{ page.url }}</link>
-		{% for release in site.github.releases limit: 5 %}{% if release.draft == false and release.prerelease == page.prerelease %}<item>
+		{% for release in site.github.releases limit: 5 %}
+		{% if release.draft == false and release.prerelease == page.prerelease %}
+		<item>
 			<title>{{ release.name | xml_escape }}</title>
 			<description>
 				<![CDATA[
@@ -13,8 +15,15 @@
 				]]>
 			</description>
 			<pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
-			{% assign msi = 'application/x-msdownload|application/x-msi|binary/octet-stream|application/octet-stream' | split: '|' %}
-			{% for asset in release.assets %}{% if msi contains asset.content_type and asset.state == 'uploaded' %}<enclosure url='{{ asset.browser_download_url }}' sparkle:version='{{ release.tag_name | xml_escape }}' length='{{ asset.size }}' type='{{ asset.content_type }}' />
-		{% break %}{% endif %}{% endfor %}</item>{% endif %}{% endfor %}
+			{%- assign msi = 'application/x-msdownload|application/x-msi|binary/octet-stream|application/octet-stream' | split: '|' -%}
+			{% for asset in release.assets %}
+			{% if msi contains asset.content_type and asset.state == 'uploaded' %}
+			<enclosure url='{{ asset.browser_download_url }}' sparkle:version='{{ release.tag_name | xml_escape }}' length='{{ asset.size }}' type='{{ asset.content_type }}' />
+			{%- break -%}
+			{%- endif -%}
+			{%- endfor -%}
+		</item>
+		{%- endif -%}
+		{%- endfor -%}
 	</channel>
 </rss>
