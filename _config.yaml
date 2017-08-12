@@ -31,7 +31,7 @@ defaults:
     values:
       layout: post
 
-gems:
+plugins:
   - jekyll-avatar
   - jekyll-feed
   - jekyll-github-metadata
