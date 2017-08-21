@@ -13,16 +13,16 @@ namespace mRemoteNG.UI.Window
 	{
         #region Form Init
 		internal MenuStrip msMain;
-		internal ToolStripMenuItem mMenFile;
-		internal ToolStripMenuItem mMenFileSaveAll;
-		internal ToolStripMenuItem mMenFileRemoveAll;
+	    private ToolStripMenuItem mMenFile;
+	    private ToolStripMenuItem mMenFileSaveAll;
+	    private ToolStripMenuItem mMenFileRemoveAll;
 		internal ContextMenuStrip cMenScreenshot;
-		private System.ComponentModel.Container components = null;
-		internal ToolStripMenuItem cMenScreenshotCopy;
-		internal ToolStripMenuItem cMenScreenshotSave;
+		private System.ComponentModel.Container components;
+	    private ToolStripMenuItem cMenScreenshotCopy;
+	    private ToolStripMenuItem cMenScreenshotSave;
 		internal SaveFileDialog dlgSaveSingleImage;
 		internal FolderBrowserDialog dlgSaveAllImages;
-		internal FlowLayoutPanel flpScreenshots;
+	    private FlowLayoutPanel flpScreenshots;
 				
 		private void InitializeComponent()
 		{
@@ -163,7 +163,7 @@ namespace mRemoteNG.UI.Window
 	    {
 	    }
 
-		public ScreenshotManagerWindow(DockContent panel)
+		internal ScreenshotManagerWindow(DockContent panel)
 		{
 			WindowType = WindowType.ScreenshotManager;
 			DockPnl = panel;
@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				PictureBox nPB = new PictureBox();
+				var nPB = new PictureBox();
 				nPB.MouseDown += pbScreenshot_MouseDown;
 						
 				nPB.Parent = flpScreenshots;
@@ -185,7 +185,7 @@ namespace mRemoteNG.UI.Window
 				nPB.Size = new Size(100, 100); //New Size((Screenshot.Width / 100) * 20, (Screenshot.Height / 100) * 20)
 				nPB.Show();
 						
-				Button nBtn = new Button();
+				var nBtn = new Button();
 				nBtn.Click += btnCloseScreenshot_Click;
 						
 				nBtn.Parent = nPB;
@@ -232,27 +232,31 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				Image mImage = sender.Image;
-						
-				Form nForm = new Form();
-				nForm.StartPosition = FormStartPosition.CenterParent;
-				nForm.ShowInTaskbar = false;
-				nForm.ShowIcon = false;
-				nForm.MaximizeBox = false;
-				nForm.MinimizeBox = false;
-				nForm.Width = mImage.Width + 2;
-				nForm.Height = mImage.Height + 2;
-				nForm.FormBorderStyle = FormBorderStyle.None;
-						
-				PictureBox nPB = new PictureBox();
-				nPB.Parent = nForm;
-				nPB.BorderStyle = BorderStyle.FixedSingle;
-				nPB.Location = new Point(0, 0);
-				nPB.SizeMode = PictureBoxSizeMode.AutoSize;
-				nPB.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top;
-				nPB.Image = mImage;
-				nPB.ContextMenuStrip = cMenScreenshot;
-				nPB.Show();
+				var mImage = sender.Image;
+
+			    var nForm = new Form
+			    {
+			        StartPosition = FormStartPosition.CenterParent,
+			        ShowInTaskbar = false,
+			        ShowIcon = false,
+			        MaximizeBox = false,
+			        MinimizeBox = false,
+			        Width = mImage.Width + 2,
+			        Height = mImage.Height + 2,
+			        FormBorderStyle = FormBorderStyle.None
+			    };
+
+			    var nPB = new PictureBox
+			    {
+			        Parent = nForm,
+			        BorderStyle = BorderStyle.FixedSingle,
+			        Location = new Point(0, 0),
+			        SizeMode = PictureBoxSizeMode.AutoSize,
+			        Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top,
+			        Image = mImage,
+			        ContextMenuStrip = cMenScreenshot
+			    };
+			    nPB.Show();
 						
 				nPB.MouseDown += pbScreenshotOpen_MouseDown;
 						
@@ -295,30 +299,26 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				int pCount = 1;
-						
-				if (dlgSaveAllImages.ShowDialog() == DialogResult.OK)
-				{
-					foreach (string fPath in Directory.GetFiles(dlgSaveAllImages.SelectedPath, "Screenshot_*", SearchOption.TopDirectoryOnly))
-					{
-						FileInfo f = new FileInfo(fPath);
+				var pCount = 1;
+
+			    if (dlgSaveAllImages.ShowDialog() != DialogResult.OK) return;
+			    foreach (var fPath in Directory.GetFiles(dlgSaveAllImages.SelectedPath, "Screenshot_*", SearchOption.TopDirectoryOnly))
+			    {
+			        var f = new FileInfo(fPath);
 								
-						string fCount = f.Name;
-						fCount = fCount.Replace(f.Extension, "");
-						fCount = fCount.Replace("Screenshot_", "");
+			        var fCount = f.Name;
+			        fCount = fCount.Replace(f.Extension, "");
+			        fCount = fCount.Replace("Screenshot_", "");
 								
-						pCount = (int) (double.Parse(fCount) + 1);
-					}
+			        pCount = (int) (double.Parse(fCount) + 1);
+			    }
 							
-					foreach (Control ctrl in flpScreenshots.Controls)
-					{
-						if (ctrl is PictureBox)
-						{
-							(ctrl as PictureBox).Image.Save(dlgSaveAllImages.SelectedPath + "\\Screenshot_" + Tools.MiscTools.LeadingZero(Convert.ToString(pCount)) +".png", System.Drawing.Imaging.ImageFormat.Png);
-							pCount++;
-						}
-					}
-				}
+			    foreach (Control ctrl in flpScreenshots.Controls)
+			    {
+			        if (!(ctrl is PictureBox)) continue;
+			        (ctrl as PictureBox).Image.Save(dlgSaveAllImages.SelectedPath + "\\Screenshot_" + Tools.MiscTools.LeadingZero(Convert.ToString(pCount)) +".png", System.Drawing.Imaging.ImageFormat.Png);
+			        pCount++;
+			    }
 			}
 			catch (Exception ex)
 			{
@@ -352,24 +352,23 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				if (dlgSaveSingleImage.ShowDialog() == DialogResult.OK)
-				{
-					switch (dlgSaveSingleImage.FileName.Substring(dlgSaveSingleImage.FileName.LastIndexOf(".", StringComparison.Ordinal) + 1).ToLower())
-					{
-						case "gif":
-							((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Gif);
-							break;
-						case "jpeg":
-							((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-							break;
-						case "jpg":
-							((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-							break;
-						case "png":
-							((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Png);
-							break;
-					}
-				}
+			    if (dlgSaveSingleImage.ShowDialog() != DialogResult.OK) return;
+			    // ReSharper disable once SwitchStatementMissingSomeCases
+			    switch (dlgSaveSingleImage.FileName.Substring(dlgSaveSingleImage.FileName.LastIndexOf(".", StringComparison.Ordinal) + 1).ToLower())
+			    {
+			        case "gif":
+			            ((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Gif);
+			            break;
+			        case "jpeg":
+			            ((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+			            break;
+			        case "jpg":
+			            ((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+			            break;
+			        case "png":
+			            ((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Png);
+			            break;
+			    }
 			}
 			catch (Exception ex)
 			{

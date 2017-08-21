@@ -275,7 +275,8 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.grpFiles);
             this.Controls.Add(this.grpConnection);
             this.Controls.Add(this.pbStatus);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // ReSharper disable once RedundantCast
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)(0));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SSHTransferWindow";
             this.TabText = "SSH File Transfer";
@@ -291,7 +292,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Private Properties
-        private OpenFileDialog oDlg;
+        private readonly OpenFileDialog oDlg;
         #endregion
 
         #region Public Properties
@@ -494,7 +495,7 @@ namespace mRemoteNG.UI.Window
         private int maxVal;
         private int curVal;
 
-        delegate void SetStatusCB();
+        private delegate void SetStatusCB();
         private void SetStatus()
         {
             if (pbStatus.InvokeRequired)
@@ -509,7 +510,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        delegate void EnableButtonsCB();
+        private delegate void EnableButtonsCB();
         private void EnableButtons()
         {
             if (btnTransfer.InvokeRequired)
@@ -523,7 +524,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        delegate void DisableButtonsCB();
+        private delegate void DisableButtonsCB();
         private void DisableButtons()
         {
             if (btnTransfer.InvokeRequired)
@@ -565,12 +566,10 @@ namespace mRemoteNG.UI.Window
         #region Form Stuff
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            if (oDlg.ShowDialog() == DialogResult.OK)
+            if (oDlg.ShowDialog() != DialogResult.OK) return;
+            if (oDlg.FileName != "")
             {
-                if (oDlg.FileName != "")
-                {
-                    txtLocalFile.Text = oDlg.FileName;
-                }
+                txtLocalFile.Text = oDlg.FileName;
             }
         }
 
