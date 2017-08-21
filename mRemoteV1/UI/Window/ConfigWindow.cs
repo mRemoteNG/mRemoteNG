@@ -425,55 +425,58 @@ namespace mRemoteNG.UI.Window
 
                 _btnIcon.Image = null;
 
-                if (propertyGridObject is ConnectionInfo gridObjectAsConnectionInfo) //CONNECTION INFO
-                {
-                    if (propertyGridObject is ContainerInfo gridObjectAsContainerInfo) //CONTAINER
+			    var gridObjectAsConnectionInfo = propertyGridObject as ConnectionInfo;
+			    if (gridObjectAsConnectionInfo != null) //CONNECTION INFO
+				{
+                    var gridObjectAsContainerInfo = propertyGridObject as ContainerInfo;
+				    if (gridObjectAsContainerInfo != null) //CONTAINER
                     {
-                        if (propertyGridObject is RootNodeInfo gridObjectAsRootNodeInfo) // ROOT
-                        {
-                            // ReSharper disable once SwitchStatementMissingSomeCases
+                        var gridObjectAsRootNodeInfo = propertyGridObject as RootNodeInfo;
+                        if (gridObjectAsRootNodeInfo != null) // ROOT
+					    {
+					        // ReSharper disable once SwitchStatementMissingSomeCases
                             switch (gridObjectAsRootNodeInfo.Type)
-                            {
-                                case RootNodeType.Connection:
-                                    PropertiesVisible = true;
-                                    DefaultPropertiesVisible = false;
-                                    _btnShowProperties.Enabled = true;
-                                    _btnShowInheritance.Enabled = false;
-                                    _btnShowDefaultProperties.Enabled = true;
-                                    _btnShowDefaultInheritance.Enabled = true;
-                                    _btnIcon.Enabled = false;
-                                    _btnHostStatus.Enabled = false;
-                                    break;
-                                case RootNodeType.PuttySessions:
-                                    PropertiesVisible = true;
-                                    DefaultPropertiesVisible = false;
-                                    _btnShowProperties.Enabled = true;
-                                    _btnShowInheritance.Enabled = false;
-                                    _btnShowDefaultProperties.Enabled = false;
-                                    _btnShowDefaultInheritance.Enabled = false;
-                                    _btnIcon.Enabled = false;
-                                    _btnHostStatus.Enabled = false;
-                                    break;
-                            }
-
-                            _pGrid.SelectedObject = propertyGridObject;
-                        }
-                        else
+					        {
+					            case RootNodeType.Connection:
+					                PropertiesVisible = true;
+					                DefaultPropertiesVisible = false;
+					                _btnShowProperties.Enabled = true;
+					                _btnShowInheritance.Enabled = false;
+					                _btnShowDefaultProperties.Enabled = true;
+					                _btnShowDefaultInheritance.Enabled = true;
+					                _btnIcon.Enabled = false;
+					                _btnHostStatus.Enabled = false;
+					                break;
+					            case RootNodeType.PuttySessions:
+					                PropertiesVisible = true;
+					                DefaultPropertiesVisible = false;
+					                _btnShowProperties.Enabled = true;
+					                _btnShowInheritance.Enabled = false;
+					                _btnShowDefaultProperties.Enabled = false;
+					                _btnShowDefaultInheritance.Enabled = false;
+					                _btnIcon.Enabled = false;
+					                _btnHostStatus.Enabled = false;
+					                break;
+					        }
+					        
+					        _pGrid.SelectedObject = propertyGridObject;
+					    }
+					    else
                         {
-                            _pGrid.SelectedObject = propertyGridObject;
+					        _pGrid.SelectedObject = propertyGridObject;
 
-                            _btnShowProperties.Enabled = true;
-                            _btnShowInheritance.Enabled = gridObjectAsContainerInfo.Parent != null;
-                            _btnShowDefaultProperties.Enabled = false;
-                            _btnShowDefaultInheritance.Enabled = false;
-                            _btnIcon.Enabled = true;
-                            _btnHostStatus.Enabled = false;
+					        _btnShowProperties.Enabled = true;
+					        _btnShowInheritance.Enabled = gridObjectAsContainerInfo.Parent != null;
+					        _btnShowDefaultProperties.Enabled = false;
+					        _btnShowDefaultInheritance.Enabled = false;
+					        _btnIcon.Enabled = true;
+					        _btnHostStatus.Enabled = false;
 
-                            PropertiesVisible = true;
-                        }
+					        PropertiesVisible = true;
+					    }
                     }
                     else //NO CONTAINER
-                    {
+				    {
                         if (PropertiesVisible) //Properties selected
                         {
                             _pGrid.SelectedObject = propertyGridObject;
@@ -537,17 +540,17 @@ namespace mRemoteNG.UI.Window
                     }
 
                     var conIcon = ConnectionIcon.FromString(Convert.ToString(gridObjectAsConnectionInfo.Icon));
-                    if (conIcon != null)
-                    {
+					if (conIcon != null)
+					{
                         _btnIcon.Image = conIcon.ToBitmap();
-                    }
-                }
-                else if (propertyGridObject is ConnectionInfoInheritance) //INHERITANCE
-                {
+					}
+				}
+				else if (propertyGridObject is ConnectionInfoInheritance) //INHERITANCE
+				{
                     _pGrid.SelectedObject = propertyGridObject;
-
-                    if (InheritanceVisible)
-                    {
+							
+					if (InheritanceVisible)
+					{
                         InheritanceVisible = true;
                         _btnShowProperties.Enabled = true;
                         _btnShowInheritance.Enabled = true;
@@ -557,13 +560,13 @@ namespace mRemoteNG.UI.Window
                         _btnHostStatus.Enabled = !((ConnectionInfo)((ConnectionInfoInheritance)propertyGridObject).Parent).IsContainer;
                         InheritanceVisible = true;
                         var conIcon = ConnectionIcon.FromString(Convert.ToString(((ConnectionInfo)((ConnectionInfoInheritance)propertyGridObject).Parent).Icon));
-                        if (conIcon != null)
-                        {
+						if (conIcon != null)
+						{
                             _btnIcon.Image = conIcon.ToBitmap();
-                        }
-                    }
-                    else if (DefaultInheritanceVisible)
-                    {
+						}
+					}
+					else if (DefaultInheritanceVisible)
+					{
                         _btnShowProperties.Enabled = true;
                         _btnShowInheritance.Enabled = false;
                         _btnShowDefaultProperties.Enabled = true;
@@ -572,9 +575,9 @@ namespace mRemoteNG.UI.Window
                         _btnHostStatus.Enabled = false;
 
                         DefaultInheritanceVisible = true;
-                    }
-
-                }
+					}
+							
+				}
 
                 ShowHideGridItems();
                 SetHostStatus(propertyGridObject);
@@ -772,7 +775,8 @@ namespace mRemoteNG.UI.Window
 			try
 			{
                 var strHide = new List<string>();
-                if (_pGrid.SelectedObject is RootNodeInfo o)
+			    var o = _pGrid.SelectedObject as RootNodeInfo;
+			    if (o != null)
                 {
                     var rootInfo = o;
                     if (rootInfo.Type == RootNodeType.PuttySessions)
@@ -835,528 +839,529 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("SoundQuality");
                     strHide.Add("CredentialRecord");
                 }
-                else if (_pGrid.SelectedObject is ConnectionInfo conI)
-                {
-                    // ReSharper disable once SwitchStatementMissingSomeCases
-                    switch (conI.Protocol)
-                    {
-                        case ProtocolType.RDP:
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("PuttySession");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+                else if (_pGrid.SelectedObject is ConnectionInfo)
+				{
+                    var conI = (ConnectionInfo)_pGrid.SelectedObject;
+				    // ReSharper disable once SwitchStatementMissingSomeCases
+					switch (conI.Protocol)
+					{
+						case ProtocolType.RDP:
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("PuttySession");
+							strHide.Add("RenderingEngine");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             if (conI.RDPMinutesToIdleTimeout <= 0)
                             {
                                 strHide.Add("RDPAlertIdleTimeout");
                             }
-                            if (conI.RDGatewayUsageMethod == RdpProtocol.RDGatewayUsageMethod.Never)
-                            {
-                                strHide.Add("RDGatewayDomain");
-                                strHide.Add("RDGatewayHostname");
-                                strHide.Add("RDGatewayPassword");
-                                strHide.Add("RDGatewayUseConnectionCredentials");
-                                strHide.Add("RDGatewayUsername");
-                            }
+							if (conI.RDGatewayUsageMethod == RdpProtocol.RDGatewayUsageMethod.Never)
+							{
+								strHide.Add("RDGatewayDomain");
+								strHide.Add("RDGatewayHostname");
+								strHide.Add("RDGatewayPassword");
+								strHide.Add("RDGatewayUseConnectionCredentials");
+								strHide.Add("RDGatewayUsername");
+							}
                             else if (conI.RDGatewayUseConnectionCredentials == RdpProtocol.RDGatewayUseConnectionCredentials.Yes)
-                            {
-                                strHide.Add("RDGatewayDomain");
-                                strHide.Add("RDGatewayPassword");
-                                strHide.Add("RDGatewayUsername");
-                            }
-                            if (!(conI.Resolution == RdpProtocol.RDPResolutions.FitToWindow || conI.Resolution == RdpProtocol.RDPResolutions.Fullscreen))
-                            {
-                                strHide.Add("AutomaticResize");
-                            }
-                            if (conI.RedirectSound != RdpProtocol.RDPSounds.BringToThisComputer)
-                            {
+							{
+								strHide.Add("RDGatewayDomain");
+								strHide.Add("RDGatewayPassword");
+								strHide.Add("RDGatewayUsername");
+							}
+							if (!(conI.Resolution == RdpProtocol.RDPResolutions.FitToWindow || conI.Resolution == RdpProtocol.RDPResolutions.Fullscreen))
+							{
+								strHide.Add("AutomaticResize");
+							}
+					        if (conI.RedirectSound != RdpProtocol.RDPSounds.BringToThisComputer)
+					        {
                                 strHide.Add("SoundQuality");
                             }
-                            break;
-                        case ProtocolType.VNC:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("PuttySession");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+							break;
+						case ProtocolType.VNC:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("PuttySession");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            if (conI.VNCAuthMode == ProtocolVNC.AuthMode.AuthVNC)
-                            {
-                                strHide.Add("Username");
-                                strHide.Add("Domain");
-                            }
-                            if (conI.VNCProxyType == ProtocolVNC.ProxyType.ProxyNone)
-                            {
-                                strHide.Add("VNCProxyIP");
-                                strHide.Add("VNCProxyPassword");
-                                strHide.Add("VNCProxyPort");
-                                strHide.Add("VNCProxyUsername");
-                            }
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							if (conI.VNCAuthMode == ProtocolVNC.AuthMode.AuthVNC)
+							{
+								strHide.Add("Username");
+								strHide.Add("Domain");
+							}
+							if (conI.VNCProxyType == ProtocolVNC.ProxyType.ProxyNone)
+							{
+								strHide.Add("VNCProxyIP");
+								strHide.Add("VNCProxyPassword");
+								strHide.Add("VNCProxyPort");
+								strHide.Add("VNCProxyUsername");
+							}
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.SSH1:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("Domain");
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.SSH1:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.SSH2:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("Domain");
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.SSH2:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.Telnet:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("Domain");
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("Password");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.Telnet:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("Password");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("Username");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("Username");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.Rlogin:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("Domain");
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("Password");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.Rlogin:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("Password");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("Username");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("Username");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.RAW:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("Domain");
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("Password");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.RAW:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("Password");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("Username");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("Username");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.HTTP:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("Domain");
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("PuttySession");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.HTTP:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("PuttySession");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.HTTPS:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("Domain");
-                            strHide.Add("ExtApp");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("PuttySession");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.HTTPS:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("PuttySession");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound;Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound;Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.ICA:
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("ExtApp");
-                            strHide.Add("Port");
-                            strHide.Add("PuttySession");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.ICA:
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("ExtApp");
+							strHide.Add("Port");
+							strHide.Add("PuttySession");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                        case ProtocolType.IntApp:
-                            strHide.Add("CacheBitmaps");
-                            strHide.Add("Colors");
-                            strHide.Add("DisplayThemes");
-                            strHide.Add("DisplayWallpaper");
-                            strHide.Add("EnableFontSmoothing");
-                            strHide.Add("EnableDesktopComposition");
-                            strHide.Add("Domain");
-                            strHide.Add("ICAEncryptionStrength");
-                            strHide.Add("PuttySession");
-                            strHide.Add("RDGatewayDomain");
-                            strHide.Add("RDGatewayHostname");
-                            strHide.Add("RDGatewayPassword");
-                            strHide.Add("RDGatewayUsageMethod");
-                            strHide.Add("RDGatewayUseConnectionCredentials");
-                            strHide.Add("RDGatewayUsername");
-                            strHide.Add("RDPAuthenticationLevel");
+						case ProtocolType.IntApp:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("PuttySession");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
                             strHide.Add("RDPMinutesToIdleTimeout");
                             strHide.Add("RDPAlertIdleTimeout");
                             strHide.Add("LoadBalanceInfo");
-                            strHide.Add("RedirectDiskDrives");
-                            strHide.Add("RedirectKeys");
-                            strHide.Add("RedirectPorts");
-                            strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectSmartCards");
-                            strHide.Add("RedirectSound");
-                            strHide.Add("RenderingEngine");
-                            strHide.Add("Resolution");
-                            strHide.Add("AutomaticResize");
-                            strHide.Add("UseConsoleSession");
-                            strHide.Add("UseCredSsp");
-                            strHide.Add("VNCAuthMode");
-                            strHide.Add("VNCColors");
-                            strHide.Add("VNCCompression");
-                            strHide.Add("VNCEncoding");
-                            strHide.Add("VNCProxyIP");
-                            strHide.Add("VNCProxyPassword");
-                            strHide.Add("VNCProxyPort");
-                            strHide.Add("VNCProxyType");
-                            strHide.Add("VNCProxyUsername");
-                            strHide.Add("VNCSmartSizeMode");
-                            strHide.Add("VNCViewOnly");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-                    }
-
-                    if (!(conI is DefaultConnectionInfo))
-                    {
-                        if (conI.Inheritance.CacheBitmaps)
-                            strHide.Add("CacheBitmaps");
-                        if (conI.Inheritance.Colors)
-                            strHide.Add("Colors");
-                        if (conI.Inheritance.Description)
-                            strHide.Add("Description");
-                        if (conI.Inheritance.DisplayThemes)
-                            strHide.Add("DisplayThemes");
-                        if (conI.Inheritance.DisplayWallpaper)
-                            strHide.Add("DisplayWallpaper");
-                        if (conI.Inheritance.EnableFontSmoothing)
-                            strHide.Add("EnableFontSmoothing");
-                        if (conI.Inheritance.EnableDesktopComposition)
-                            strHide.Add("EnableDesktopComposition");
-                        if (conI.Inheritance.Domain)
-                            strHide.Add("Domain");
-                        if (conI.Inheritance.Icon)
-                            strHide.Add("Icon");
-                        if (conI.Inheritance.Password)
-                            strHide.Add("Password");
-                        if (conI.Inheritance.Port)
-                            strHide.Add("Port");
-                        if (conI.Inheritance.Protocol)
-                            strHide.Add("Protocol");
-                        if (conI.Inheritance.PuttySession)
-                            strHide.Add("PuttySession");
-                        if (conI.Inheritance.RedirectDiskDrives)
+					}
+							
+					if (!(conI is DefaultConnectionInfo))
+					{
+						if (conI.Inheritance.CacheBitmaps)
+							strHide.Add("CacheBitmaps");
+						if (conI.Inheritance.Colors)
+							strHide.Add("Colors");
+						if (conI.Inheritance.Description)
+							strHide.Add("Description");
+						if (conI.Inheritance.DisplayThemes)
+							strHide.Add("DisplayThemes");
+						if (conI.Inheritance.DisplayWallpaper)
+							strHide.Add("DisplayWallpaper");
+						if (conI.Inheritance.EnableFontSmoothing)
+							strHide.Add("EnableFontSmoothing");
+						if (conI.Inheritance.EnableDesktopComposition)
+							strHide.Add("EnableDesktopComposition");
+						if (conI.Inheritance.Domain)
+							strHide.Add("Domain");
+						if (conI.Inheritance.Icon)
+							strHide.Add("Icon");
+						if (conI.Inheritance.Password)
+							strHide.Add("Password");
+						if (conI.Inheritance.Port)
+							strHide.Add("Port");
+						if (conI.Inheritance.Protocol)
+							strHide.Add("Protocol");
+						if (conI.Inheritance.PuttySession)
+							strHide.Add("PuttySession");
+						if (conI.Inheritance.RedirectDiskDrives)
                             strHide.Add("RedirectDiskDrives");
                         if (conI.Inheritance.RedirectKeys)
                             strHide.Add("RedirectKeys");
@@ -1440,17 +1445,17 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RDGatewayUseConnectionCredentials");
                         if (conI.Inheritance.RDGatewayHostname)
                             strHide.Add("RDGatewayHostname");
-                        if (conI.Inheritance.SoundQuality)
+                        if(conI.Inheritance.SoundQuality)
                             strHide.Add("SoundQuality");
-                        if (conI.Inheritance.CredentialRecord)
+                        if(conI.Inheritance.CredentialRecord)
                             strHide.Add("CredentialRecord");
                     }
-                    else
-                    {
-                        strHide.Add("Hostname");
-                        strHide.Add("Name");
-                    }
-                }
+					else
+					{
+						strHide.Add("Hostname");
+						strHide.Add("Name");
+					}
+				}
 
                 _pGrid.HiddenProperties = strHide.ToArray();
                 _pGrid.Refresh();
@@ -1463,35 +1468,36 @@ namespace mRemoteNG.UI.Window
 		
 		private void btnShowProperties_Click(object sender, EventArgs e)
 		{
-            if (_pGrid.SelectedObject is ConnectionInfoInheritance o)
-            {
-                if (_pGrid.SelectedObject is DefaultConnectionInheritance)
-                {
+		    var o = _pGrid.SelectedObject as ConnectionInfoInheritance;
+		    if (o != null)
+			{
+				if (_pGrid.SelectedObject is DefaultConnectionInheritance)
+				{
                     PropertiesVisible = true;
                     InheritanceVisible = false;
                     DefaultPropertiesVisible = false;
                     DefaultInheritanceVisible = false;
                     SetPropertyGridObject((RootNodeInfo)_selectedTreeNode);
-                }
-                else
-                {
+				}
+				else
+				{
                     PropertiesVisible = true;
                     InheritanceVisible = false;
                     DefaultPropertiesVisible = false;
                     DefaultInheritanceVisible = false;
                     SetPropertyGridObject(o.Parent);
-                }
-            }
-            else if (_pGrid.SelectedObject is ConnectionInfo)
-            {
-                if (!((ConnectionInfo)_pGrid.SelectedObject).IsDefault) return;
-                PropertiesVisible = true;
-                InheritanceVisible = false;
-                DefaultPropertiesVisible = false;
-                DefaultInheritanceVisible = false;
-                SetPropertyGridObject((RootNodeInfo)_selectedTreeNode);
-            }
-        }
+				}
+			}
+			else if (_pGrid.SelectedObject is ConnectionInfo)
+			{
+			    if (!((ConnectionInfo) _pGrid.SelectedObject).IsDefault) return;
+			    PropertiesVisible = true;
+			    InheritanceVisible = false;
+			    DefaultPropertiesVisible = false;
+			    DefaultInheritanceVisible = false;
+			    SetPropertyGridObject((RootNodeInfo)_selectedTreeNode);
+			}
+		}
 		
 		private void btnShowDefaultProperties_Click(object sender, EventArgs e)
 		{
