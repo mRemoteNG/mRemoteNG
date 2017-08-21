@@ -13,19 +13,19 @@ namespace mRemoteNG.UI.Window
 	public class AboutWindow : BaseWindow
 	{
         #region Form Init
-	    private Label lblCopyright;
-	    private Label lblTitle;
-	    private Label lblVersion;
-	    private Label lblLicense;
-	    private TextBox txtChangeLog;
-	    private Label lblChangeLog;
-	    private Panel pnlBottom;
-	    private PictureBox pbLogo;
-	    private Label lblEdition;
-	    private Label lblCredits;
-	    private TextBox txtCredits;
+		internal Label lblCopyright;
+		internal Label lblTitle;
+		internal Label lblVersion;
+		internal Label lblLicense;
+		internal TextBox txtChangeLog;
+		internal Label lblChangeLog;
+		internal Panel pnlBottom;
+		internal PictureBox pbLogo;
+		internal Label lblEdition;
+        internal Label lblCredits;
+        internal TextBox txtCredits;
         private TextBox verText;
-	    private Panel pnlTop;
+        internal Panel pnlTop;
 				
 		private void InitializeComponent()
 		{
