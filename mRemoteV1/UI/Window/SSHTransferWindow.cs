@@ -7,6 +7,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using TextBox = System.Windows.Forms.TextBox;
+// ReSharper disable RedundantCast
 
 namespace mRemoteNG.UI.Window
 {
@@ -275,8 +276,8 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.grpFiles);
             this.Controls.Add(this.grpConnection);
             this.Controls.Add(this.pbStatus);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+            this.Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             this.Name = "SSHTransferWindow";
             this.TabText = "SSH File Transfer";
             this.Text = "SSH File Transfer";
@@ -297,50 +298,26 @@ namespace mRemoteNG.UI.Window
         #region Public Properties
         public string Hostname
         {
-            get
-            {
-                return txtHost.Text;
-            }
-            set
-            {
-                txtHost.Text = value;
-            }
+            get => txtHost.Text;
+            set => txtHost.Text = value;
         }
 
         public string Port
         {
-            get
-            {
-                return txtPort.Text;
-            }
-            set
-            {
-                txtPort.Text = value;
-            }
+            get => txtPort.Text;
+            set => txtPort.Text = value;
         }
 
         public string Username
         {
-            get
-            {
-                return txtUser.Text;
-            }
-            set
-            {
-                txtUser.Text = value;
-            }
+            get => txtUser.Text;
+            set => txtUser.Text = value;
         }
 
         public string Password
         {
-            get
-            {
-                return txtPassword.Text;
-            }
-            set
-            {
-                txtPassword.Text = value;
-            }
+            get => txtPassword.Text;
+            set => txtPassword.Text = value;
         }
         #endregion
 
@@ -494,7 +471,7 @@ namespace mRemoteNG.UI.Window
         private int maxVal;
         private int curVal;
 
-        delegate void SetStatusCB();
+        private delegate void SetStatusCB();
         private void SetStatus()
         {
             if (pbStatus.InvokeRequired)
@@ -509,7 +486,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        delegate void EnableButtonsCB();
+        private delegate void EnableButtonsCB();
         private void EnableButtons()
         {
             if (btnTransfer.InvokeRequired)
@@ -523,7 +500,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        delegate void DisableButtonsCB();
+        private delegate void DisableButtonsCB();
         private void DisableButtons()
         {
             if (btnTransfer.InvokeRequired)
@@ -565,12 +542,10 @@ namespace mRemoteNG.UI.Window
         #region Form Stuff
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            if (oDlg.ShowDialog() == DialogResult.OK)
+            if (oDlg.ShowDialog() != DialogResult.OK) return;
+            if (oDlg.FileName != "")
             {
-                if (oDlg.FileName != "")
-                {
-                    txtLocalFile.Text = oDlg.FileName;
-                }
+                txtLocalFile.Text = oDlg.FileName;
             }
         }
 
