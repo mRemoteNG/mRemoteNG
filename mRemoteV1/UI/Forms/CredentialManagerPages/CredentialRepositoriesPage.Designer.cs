@@ -3,7 +3,7 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    partial class CredentialRepositoriesPage
+    sealed partial class CredentialRepositoriesPage
     {
         /// <summary> 
         /// Required designer variable.

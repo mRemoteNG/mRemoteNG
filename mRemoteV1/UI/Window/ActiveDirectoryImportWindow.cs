@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Container;
-using System.Drawing;
 
 namespace mRemoteNG.UI.Window
 {
@@ -26,7 +25,7 @@ namespace mRemoteNG.UI.Window
 
         #endregion
 
-        public new void ApplyTheme()
+        private new void ApplyTheme()
         {
             base.ApplyTheme();
         }

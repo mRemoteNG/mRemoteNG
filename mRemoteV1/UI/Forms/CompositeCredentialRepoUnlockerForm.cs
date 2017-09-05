@@ -7,7 +7,7 @@ using mRemoteNG.Credential.Repositories;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class CompositeCredentialRepoUnlockerForm : Form
+    public sealed partial class CompositeCredentialRepoUnlockerForm : Form
     {
         private readonly CompositeRepositoryUnlocker _repositoryUnlocker;
 
@@ -24,13 +24,11 @@ namespace mRemoteNG.UI.Forms
             Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
 
-        public virtual void ApplyTheme()
+        private void ApplyTheme()
         {
-            if (Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            }
+            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void buttonUnlock_Click(object sender, EventArgs e)

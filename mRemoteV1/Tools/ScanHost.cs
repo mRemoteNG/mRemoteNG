@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;

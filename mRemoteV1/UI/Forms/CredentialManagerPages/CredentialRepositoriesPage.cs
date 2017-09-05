@@ -7,11 +7,10 @@ using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.PageSequence;
 using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages;
 using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelectors;
-using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialRepositoriesPage : SequencedControl, ICredentialManagerPage
+    public sealed partial class CredentialRepositoriesPage : SequencedControl, ICredentialManagerPage
     {
         private readonly ICredentialRepositoryList _providerCatalog;
         private readonly UnlockerFormFactory _unlockerFactory;

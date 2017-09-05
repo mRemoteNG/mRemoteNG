@@ -2,11 +2,10 @@
 using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.UI.Controls.PageSequence;
-using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialRepositorySelectionPage : SequencedControl
+    public sealed partial class CredentialRepositorySelectionPage : SequencedControl
     {
         public CredentialRepositorySelectionPage(ICredentialRepositoryList credentialRepositoryList)
         {

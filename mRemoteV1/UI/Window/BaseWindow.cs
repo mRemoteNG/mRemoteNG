@@ -1,6 +1,4 @@
 using mRemoteNG.Themes;
-using mRemoteNG.UI.Forms;
-using System.Drawing;
 using WeifenLuo.WinFormsUI.Docking;
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
@@ -10,16 +8,9 @@ namespace mRemoteNG.UI.Window
 	public class BaseWindow : DockContent
     {
         #region Private Variables
-        private WindowType _WindowType;
-        private DockContent _DockPnl;
+        //private WindowType _WindowType;
+        //private DockContent _DockPnl;
         private ThemeManager _themeManager;
-        #endregion
-
-        #region Constructors
-        public BaseWindow()
-		{
-            //InitializeComponent();
-        }
         #endregion
 
         #region Public Properties
@@ -33,23 +24,18 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		public void SetFormText(string t)
 		{
-			this.Text = t;
-			this.TabText = t;
+			Text = t;
+			TabText = t;
 		}
         #endregion
 
-        public new void ApplyTheme()
+        internal new void ApplyTheme()
         {
-
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
-            {
-                _themeManager = ThemeManager.getInstance();
-                if (_themeManager.ThemingActive)
-                {
-                    this.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                    this.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                }
-            }
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive) return;
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
     

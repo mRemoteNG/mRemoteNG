@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace mRemoteNG.Themes
 {
@@ -19,7 +16,7 @@ namespace mRemoteNG.Themes
             key = _key;
             value = _value;
         }
-        public String Key
+        public string Key
         {
             get
             {
@@ -51,8 +48,8 @@ namespace mRemoteNG.Themes
     {
         #region Private Variables
         //Collection for color values that are not loaded by dock panels (list, buttons,panel content, etc)
-        private Dictionary<String, Color> _extendedColors;
-        private Dictionary<String, Color> _default;
+        private Dictionary<string, Color> _extendedColors;
+        private Dictionary<string, Color> _default;
         #endregion
 
         #region Constructors
@@ -77,25 +74,20 @@ namespace mRemoteNG.Themes
         /// </summary>
         /// <param name="colorKey"></param>
         /// <returns></returns>
-        public Color getColor(String  colorKey)
+        public Color getColor(string  colorKey)
         {
-            Color retColor= Color.Empty;
-
-            retColor = _extendedColors.ContainsKey(colorKey) ? _extendedColors[colorKey]:Color.Empty;
+            var retColor = _extendedColors.ContainsKey(colorKey) ? _extendedColors[colorKey]:Color.Empty;
             //Invisible colors are not good, might  indicate missing color from the palette as is represented by 00000000
-            if(retColor == Color.Empty || retColor.A == 0)
+            if (retColor != Color.Empty && retColor.A != 0) return retColor;
+            if(_default != null)
             {
-                if(_default != null)
-                {
-                    retColor = _default.ContainsKey(colorKey) ? _default[colorKey] : Color.Empty;  
-                }
-                //why are we here?, just avoid a crash
-                if(retColor == Color.Empty)
-                {
-                    //Fail to pink , because why not
-                    retColor = Color.Pink;
-                } 
-                    
+                retColor = _default.ContainsKey(colorKey) ? _default[colorKey] : Color.Empty;  
+            }
+            //why are we here?, just avoid a crash
+            if(retColor == Color.Empty)
+            {
+                //Fail to pink , because why not
+                retColor = Color.Pink;
             }
             return retColor;
 
@@ -122,7 +114,7 @@ namespace mRemoteNG.Themes
             _extendedColors[colorKey]= inColor;
         }
 
-        public Dictionary<String, Color> DefaultColorPalette
+        public Dictionary<string, Color> DefaultColorPalette
         {
             get
             {
@@ -135,7 +127,7 @@ namespace mRemoteNG.Themes
         }
 
 
-        public Dictionary<String, Color> ExtColorPalette
+        public Dictionary<string, Color> ExtColorPalette
         {
             get
             {

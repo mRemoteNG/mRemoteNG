@@ -1,16 +1,8 @@
-﻿using mRemoteNG.Themes;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Resources;
-using System.Text;
 using System.Xml;
-using System.Xml.Linq; 
 
 namespace mRemoteNG.Themes 
 {
@@ -35,16 +27,17 @@ namespace mRemoteNG.Themes
         //Load the colors for the mRemoteNG own components as Dockpanel only have a menus and docks palette
         public ExtendedColorPalette getColors()
         {
-            ExtendedColorPalette newPalette = new ExtendedColorPalette();
+            var newPalette = new ExtendedColorPalette();
             newPalette.setDefault(_defaultPalette);
-            ResourceSet resourceSet = mRemoteNG.ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            var resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             //
             foreach (DictionaryEntry entry in resourceSet)
             {
-                string colorName  = entry.Key.ToString();
-                String xmlQueryPath = (String)entry.Value;
-                XmlNodeList colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
-                String color = colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
+                var colorName  = entry.Key.ToString();
+                var xmlQueryPath = (string)entry.Value;
+                if (_xml.DocumentElement == null) continue;
+                var colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
+                var color = colorNodeList != null && colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
                 if (color != null )
                 {
                     newPalette.addColor(colorName , ColorTranslator.FromHtml($"#{color}"));
@@ -62,23 +55,20 @@ namespace mRemoteNG.Themes
         /// <returns></returns>
         public byte[] mergePalette(ExtendedColorPalette colorPalette) 
         {
-            ResourceSet resourceSet = mRemoteNG.ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            var resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             
             foreach (DictionaryEntry entry in resourceSet)
             {
-                string colorName = entry.Key.ToString();
-                String xmlQueryPath = (String)entry.Value;
-                XmlNodeList colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
-                if(colorNodeList.Count > 0)
-                {
-                    Color paletteColor = colorPalette.getColor(colorName);
-                    colorNodeList[0].Value = string.Format("FF{0:X2}{1:X2}{2:X2}", paletteColor.R, paletteColor.G, paletteColor.B);
-                }
-              
+                var colorName = entry.Key.ToString();
+                var xmlQueryPath = (string)entry.Value;
+                var colorNodeList = _xml.DocumentElement?.FirstChild.SelectNodes(xmlQueryPath);
+                if (colorNodeList == null || colorNodeList.Count <= 0) continue;
+                var paletteColor = colorPalette.getColor(colorName);
+                colorNodeList[0].Value = $"FF{paletteColor.R:X2}{paletteColor.G:X2}{paletteColor.B:X2}";
             }
-            MemoryStream ms = new MemoryStream();
+            var ms = new MemoryStream();
             _xml.Save(ms);
-            byte[] bytes = ms.ToArray();
+            var bytes = ms.ToArray();
 
             return bytes;
         }

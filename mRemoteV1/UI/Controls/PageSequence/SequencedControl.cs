@@ -9,7 +9,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
         public event EventHandler Previous;
         public event SequencedPageReplcementRequestHandler PageReplacementRequested;
 
-        public SequencedControl() : base()
+        public SequencedControl()
         {
             Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
@@ -19,13 +19,11 @@ namespace mRemoteNG.UI.Controls.PageSequence
             Next?.Invoke(this, EventArgs.Empty);
         }
 
-        public virtual void ApplyTheme()
+        protected virtual void ApplyTheme()
         {
-            if (Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            }
+            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         protected virtual void RaisePreviousPageEvent()

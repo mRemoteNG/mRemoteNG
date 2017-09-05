@@ -1,10 +1,6 @@
 ﻿using mRemoteNG.Themes;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
@@ -17,7 +13,7 @@ namespace mRemoteNG.UI.Controls.Base
         private Rectangle circle;
         private Rectangle circle_small; 
         // Constructor
-        public NGRadioButton() :base()
+        public NGRadioButton()
         {
             // Init
             circle_small = new Rectangle(4, 4, 6, 6 );
@@ -26,55 +22,49 @@ namespace mRemoteNG.UI.Controls.Base
         }
 
 
-        public enum MouseState
+        private enum MouseState
         {
             HOVER,
             DOWN,
             OUT
         }
 
-        public MouseState _mice { get; set; }
+        private MouseState _mice { get; set; }
 
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive) return;
+            // Allows for Overlaying
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            _mice = MouseState.OUT;
+            MouseEnter += (sender, args) =>
             {
-                _themeManager = ThemeManager.getInstance();
-                if (_themeManager.ThemingActive)
-                {
-                    // Allows for Overlaying
-                    SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-                    BackColor = Color.Transparent;
-                    _mice = MouseState.OUT;
-                    MouseEnter += (sender, args) =>
-                    {
-                        _mice = MouseState.HOVER;
-                        Invalidate();
-                    };
-                    MouseLeave += (sender, args) =>
-                    {
-                        _mice = MouseState.OUT;
-                        Invalidate();
-                    };
-                    MouseDown += (sender, args) =>
-                    {
-                        if (args.Button == MouseButtons.Left)
-                        {
-                            _mice = MouseState.DOWN;
-                            Invalidate();
-                        }
-                    };
-                    MouseUp += (sender, args) =>
-                    {
-                        _mice = MouseState.OUT;
+                _mice = MouseState.HOVER;
+                Invalidate();
+            };
+            MouseLeave += (sender, args) =>
+            {
+                _mice = MouseState.OUT;
+                Invalidate();
+            };
+            MouseDown += (sender, args) =>
+            {
+                if (args.Button != MouseButtons.Left) return;
+                _mice = MouseState.DOWN;
+                Invalidate();
+            };
+            MouseUp += (sender, args) =>
+            {
+                _mice = MouseState.OUT;
 
-                        Invalidate();
-                    };
-                    Invalidate();
-                }
-            }
+                Invalidate();
+            };
+            Invalidate();
         }
 
 
@@ -87,13 +77,13 @@ namespace mRemoteNG.UI.Controls.Base
                 return;
             }
             // Init 
-            Graphics g = e.Graphics;
+            var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Color fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
-            Color outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
-            Color centerBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
-            Color center = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
+            var fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
+            var outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
+            var centerBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
+            Color center;
 
             // Overlay Graphic
             e.Graphics.Clear(Parent.BackColor);
@@ -120,7 +110,7 @@ namespace mRemoteNG.UI.Controls.Base
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
             }
 
-            Rectangle textRect = new Rectangle(16, Padding.Top, Width - 16, Height);
+            var textRect = new Rectangle(16, Padding.Top, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
  
             g.FillEllipse(new SolidBrush(centerBack), circle);

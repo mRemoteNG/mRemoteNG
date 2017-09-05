@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Reflection;
 
 
 //Taken from https://www.codeproject.com/Tips/447319/Resolve-DesignMode-for-a-user-control
@@ -27,17 +24,14 @@ namespace mRemoteNG.Tools
         /// <returns>True if in design mode, otherwise false</returns>
         private static bool ResolveDesignMode(System.Windows.Forms.Control control)
         {
-            System.Reflection.PropertyInfo designModeProperty;
-            bool designMode;
-
             // Get the protected property
-            designModeProperty = control.GetType().GetProperty(
-                                    "DesignMode",
-                                    System.Reflection.BindingFlags.Instance
-                                    | System.Reflection.BindingFlags.NonPublic);
+            var designModeProperty = control.GetType().GetProperty(
+                "DesignMode",
+                BindingFlags.Instance
+                | BindingFlags.NonPublic);
 
             // Get the controls DesignMode value
-            designMode = (bool)designModeProperty.GetValue(control, null);
+            var designMode = designModeProperty != null && (bool)designModeProperty.GetValue(control, null);
 
             // Test the parent if it exists
             if (control.Parent != null)

@@ -8,7 +8,6 @@ using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using static mRemoteNG.Tools.MiscTools;
-using System.Drawing;
 
 namespace mRemoteNG.UI.Window
 {
@@ -25,7 +24,7 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 
-        public new void ApplyTheme()
+	    private new void ApplyTheme()
         {
             base.ApplyTheme(); 
         }
