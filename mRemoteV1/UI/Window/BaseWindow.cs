@@ -38,7 +38,6 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 
-        #region Private Methods 
         public new void ApplyTheme()
         {
 
