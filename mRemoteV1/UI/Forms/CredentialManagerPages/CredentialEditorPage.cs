@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.UI.Controls.PageSequence;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
@@ -19,6 +20,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
                 throw new ArgumentNullException(nameof(credentialRepository));
 
             InitializeComponent();
+            ApplyTheme();
             ApplyLanguage();
             _credentialRecord = credentialRecord;
             _credentialRepository = credentialRepository;

@@ -32,23 +32,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionsPage));
             this.pnlRdpReconnectionCount = new System.Windows.Forms.Panel();
-            this.numRDPConTimeout = new System.Windows.Forms.NumericUpDown();
-            this.lblRDPConTimeout = new System.Windows.Forms.Label();
-            this.lblRdpReconnectionCount = new System.Windows.Forms.Label();
-            this.numRdpReconnectionCount = new System.Windows.Forms.NumericUpDown();
-            this.chkSingleClickOnConnectionOpensIt = new System.Windows.Forms.CheckBox();
-            this.chkHostnameLikeDisplayName = new System.Windows.Forms.CheckBox();
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt = new System.Windows.Forms.CheckBox();
+            this.numRDPConTimeout = new Controls.Base.NGNumericUpDown();
+            this.lblRDPConTimeout = new Controls.Base.NGLabel();
+            this.lblRdpReconnectionCount = new Controls.Base.NGLabel();
+            this.numRdpReconnectionCount = new Controls.Base.NGNumericUpDown();
+            this.chkSingleClickOnConnectionOpensIt = new Controls.Base.NGCheckBox();
+            this.chkHostnameLikeDisplayName = new Controls.Base.NGCheckBox();
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt = new Controls.Base.NGCheckBox();
             this.pnlAutoSave = new System.Windows.Forms.Panel();
-            this.lblAutoSave1 = new System.Windows.Forms.Label();
-            this.numAutoSave = new System.Windows.Forms.NumericUpDown();
-            this.lblAutoSave2 = new System.Windows.Forms.Label();
+            this.lblAutoSave1 = new Controls.Base.NGLabel();
+            this.numAutoSave = new Controls.Base.NGNumericUpDown();
+            this.lblAutoSave2 = new Controls.Base.NGLabel();
             this.pnlConfirmCloseConnection = new System.Windows.Forms.Panel();
-            this.lblClosingConnections = new System.Windows.Forms.Label();
-            this.radCloseWarnAll = new System.Windows.Forms.RadioButton();
-            this.radCloseWarnMultiple = new System.Windows.Forms.RadioButton();
-            this.radCloseWarnExit = new System.Windows.Forms.RadioButton();
-            this.radCloseWarnNever = new System.Windows.Forms.RadioButton();
+            this.lblClosingConnections = new Controls.Base.NGLabel();
+            this.radCloseWarnAll = new Controls.Base.NGRadioButton();
+            this.radCloseWarnMultiple = new Controls.Base.NGRadioButton();
+            this.radCloseWarnExit = new Controls.Base.NGRadioButton();
+            this.radCloseWarnNever = new Controls.Base.NGRadioButton();
             this.pnlRdpReconnectionCount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRdpReconnectionCount)).BeginInit();
@@ -289,22 +289,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
 		}
 		internal System.Windows.Forms.Panel pnlRdpReconnectionCount;
-		internal System.Windows.Forms.Label lblRdpReconnectionCount;
-		internal System.Windows.Forms.CheckBox chkSingleClickOnConnectionOpensIt;
-		internal System.Windows.Forms.CheckBox chkHostnameLikeDisplayName;
-		internal System.Windows.Forms.CheckBox chkSingleClickOnOpenedConnectionSwitchesToIt;
+		internal Controls.Base.NGLabel lblRdpReconnectionCount;
+		internal Controls.Base.NGCheckBox chkSingleClickOnConnectionOpensIt;
+		internal Controls.Base.NGCheckBox chkHostnameLikeDisplayName;
+		internal Controls.Base.NGCheckBox chkSingleClickOnOpenedConnectionSwitchesToIt;
 		internal System.Windows.Forms.Panel pnlAutoSave;
-		internal System.Windows.Forms.Label lblAutoSave1;
-		internal System.Windows.Forms.NumericUpDown numAutoSave;
-		internal System.Windows.Forms.Label lblAutoSave2;
+		internal Controls.Base.NGLabel lblAutoSave1;
+		internal Controls.Base.NGNumericUpDown numAutoSave;
+		internal Controls.Base.NGLabel lblAutoSave2;
 		internal System.Windows.Forms.Panel pnlConfirmCloseConnection;
-		internal System.Windows.Forms.Label lblClosingConnections;
-		internal System.Windows.Forms.RadioButton radCloseWarnAll;
-		internal System.Windows.Forms.RadioButton radCloseWarnMultiple;
-		internal System.Windows.Forms.RadioButton radCloseWarnExit;
-		internal System.Windows.Forms.RadioButton radCloseWarnNever;
-        internal System.Windows.Forms.NumericUpDown numRDPConTimeout;
-        internal System.Windows.Forms.Label lblRDPConTimeout;
-        internal System.Windows.Forms.NumericUpDown numRdpReconnectionCount;
+		internal Controls.Base.NGLabel lblClosingConnections;
+		internal Controls.Base.NGRadioButton radCloseWarnAll;
+		internal Controls.Base.NGRadioButton radCloseWarnMultiple;
+		internal Controls.Base.NGRadioButton radCloseWarnExit;
+		internal Controls.Base.NGRadioButton radCloseWarnNever;
+        internal Controls.Base.NGNumericUpDown numRDPConTimeout;
+        internal Controls.Base.NGLabel lblRDPConTimeout;
+        internal Controls.Base.NGNumericUpDown numRdpReconnectionCount;
     }
 }

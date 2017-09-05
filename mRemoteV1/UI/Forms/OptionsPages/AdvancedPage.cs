@@ -14,6 +14,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public AdvancedPage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         #region Public Methods

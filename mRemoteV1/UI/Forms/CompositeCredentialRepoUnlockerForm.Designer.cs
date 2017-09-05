@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompositeCredentialRepoUnlockerForm));
-            this.objectListViewRepos = new BrightIdeasSoftware.ObjectListView();
+            this.objectListViewRepos = new Controls.Base.NGListView();
             this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnStatusIcon = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.labelUnlocking = new System.Windows.Forms.Label();
-            this.labelPassword = new System.Windows.Forms.Label();
-            this.buttonUnlock = new System.Windows.Forms.Button();
-            this.buttonClose = new System.Windows.Forms.Button();
-            this.labelRepoTitle = new System.Windows.Forms.Label();
-            this.textBoxType = new System.Windows.Forms.TextBox();
-            this.textBoxTitle = new System.Windows.Forms.TextBox();
-            this.labelRepoType = new System.Windows.Forms.Label();
-            this.textBoxSource = new System.Windows.Forms.TextBox();
-            this.labelRepoSource = new System.Windows.Forms.Label();
-            this.textBoxId = new System.Windows.Forms.TextBox();
-            this.labelId = new System.Windows.Forms.Label();
-            this.labelPasswordError = new System.Windows.Forms.Label();
+            this.labelUnlocking = new Controls.Base.NGLabel();
+            this.labelPassword = new Controls.Base.NGLabel();
+            this.buttonUnlock = new Controls.Base.NGButton();
+            this.buttonClose = new Controls.Base.NGButton();
+            this.labelRepoTitle = new Controls.Base.NGLabel();
+            this.textBoxType = new Controls.Base.NGTextBox();
+            this.textBoxTitle = new Controls.Base.NGTextBox();
+            this.labelRepoType = new Controls.Base.NGLabel();
+            this.textBoxSource = new Controls.Base.NGTextBox();
+            this.labelRepoSource = new Controls.Base.NGLabel();
+            this.textBoxId = new Controls.Base.NGTextBox();
+            this.labelId = new Controls.Base.NGLabel();
+            this.labelPasswordError = new Controls.Base.NGLabel();
             this.imgPasswordError = new System.Windows.Forms.PictureBox();
             this.imgUnlocked = new System.Windows.Forms.PictureBox();
-            this.labelUnlocked = new System.Windows.Forms.Label();
+            this.labelUnlocked = new Controls.Base.NGLabel();
             this.secureTextBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPasswordError)).BeginInit();
@@ -325,25 +325,25 @@
 
         #endregion
 
-        private BrightIdeasSoftware.ObjectListView objectListViewRepos;
-        private System.Windows.Forms.Label labelUnlocking;
-        private System.Windows.Forms.Label labelPassword;
+        private Controls.Base.NGListView objectListViewRepos;
+        private Controls.Base.NGLabel labelUnlocking;
+        private Controls.Base.NGLabel labelPassword;
         private Controls.SecureTextBox secureTextBoxPassword;
-        private System.Windows.Forms.Button buttonUnlock;
-        private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Label labelRepoTitle;
-        private System.Windows.Forms.TextBox textBoxType;
-        private System.Windows.Forms.TextBox textBoxTitle;
-        private System.Windows.Forms.Label labelRepoType;
+        private Controls.Base.NGButton buttonUnlock;
+        private Controls.Base.NGButton buttonClose;
+        private Controls.Base.NGLabel labelRepoTitle;
+        private Controls.Base.NGTextBox textBoxType;
+        private Controls.Base.NGTextBox textBoxTitle;
+        private Controls.Base.NGLabel labelRepoType;
         private BrightIdeasSoftware.OLVColumn olvColumnName;
-        private System.Windows.Forms.TextBox textBoxSource;
-        private System.Windows.Forms.Label labelRepoSource;
-        private System.Windows.Forms.TextBox textBoxId;
-        private System.Windows.Forms.Label labelId;
+        private Controls.Base.NGTextBox textBoxSource;
+        private Controls.Base.NGLabel labelRepoSource;
+        private Controls.Base.NGTextBox textBoxId;
+        private Controls.Base.NGLabel labelId;
         private BrightIdeasSoftware.OLVColumn olvColumnStatusIcon;
-        private System.Windows.Forms.Label labelPasswordError;
+        private Controls.Base.NGLabel labelPasswordError;
         private System.Windows.Forms.PictureBox imgPasswordError;
         private System.Windows.Forms.PictureBox imgUnlocked;
-        private System.Windows.Forms.Label labelUnlocked;
+        private Controls.Base.NGLabel labelUnlocked;
     }
 }

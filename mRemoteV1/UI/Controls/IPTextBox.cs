@@ -2,6 +2,7 @@
  * http://www.codeproject.com/Articles/11576/IP-TextBox
  * Original Author: mawnkay
  */
+using mRemoteNG.Themes;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -17,13 +18,13 @@ namespace mRemoteNG.UI.Controls
 	public class IPTextBox: UserControl
 	{
 		private Panel panel1;
-		public System.Windows.Forms.TextBox Octet1; 
-        public System.Windows.Forms.TextBox Octet2;
-        public System.Windows.Forms.TextBox Octet3;
-        public System.Windows.Forms.TextBox Octet4;
-        private Label label1;
-        private Label label2;
-		private Label label3;
+		public  Base.NGTextBox Octet1; 
+        public  Base.NGTextBox Octet2;
+        public  Base.NGTextBox Octet3;
+        public  Base.NGTextBox Octet4;
+        private Base.NGLabel label1;
+        private Base.NGLabel label2;
+		private Base.NGLabel label3;
 		private ToolTip toolTip1;
 		private System.ComponentModel.IContainer components;
 		
@@ -50,6 +51,7 @@ namespace mRemoteNG.UI.Controls
 			get 
 			{
 				return Octet1.Text + @"." + Octet2.Text + @"." + Octet3.Text + @"." + Octet4.Text;
+                
 			}
 			set
 			{
@@ -74,12 +76,25 @@ namespace mRemoteNG.UI.Controls
 		public IPTextBox()
 		{
 			// This call is required by the Windows.Forms Form Designer.
-			InitializeComponent();
+			InitializeComponent(); 
+        }
 
-			// TODO: Add any initialization after the InitForm call
-		}
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            ApplyTheme();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+        }
 
-		protected override void Dispose( bool disposing )
+        private void ApplyTheme()
+        {
+            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            {
+                if (Themes.ThemeManager.getInstance().ThemingActive)
+                    this.panel1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            }
+        }
+        protected override void Dispose( bool disposing )
 		{
 			if( disposing )
 			{
@@ -98,13 +113,13 @@ namespace mRemoteNG.UI.Controls
 		{
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.Octet4 = new System.Windows.Forms.TextBox();
-            this.Octet3 = new System.Windows.Forms.TextBox();
-            this.Octet2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Octet1 = new System.Windows.Forms.TextBox();
+            this.label3 = new Base.NGLabel();
+            this.label2 = new Base.NGLabel();
+            this.Octet4 = new Base.NGTextBox();
+            this.Octet3 = new Base.NGTextBox();
+            this.Octet2 = new Base.NGTextBox();
+            this.label1 = new Base.NGLabel();
+            this.Octet1 = new Base.NGTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -112,46 +127,44 @@ namespace mRemoteNG.UI.Controls
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.Octet4);
             this.panel1.Controls.Add(this.Octet3);
             this.panel1.Controls.Add(this.Octet2);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Octet1);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(128, 18);
+            this.panel1.Size = new System.Drawing.Size(124, 18);
             this.panel1.TabIndex = 0;
-            this.panel1.EnabledChanged += new System.EventHandler(this.panel1_EnabledChanged);
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(24, 0);
+            this.label3.Location = new System.Drawing.Point(23, 1);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(8, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = ".";
-            this.label3.EnabledChanged += new System.EventHandler(this.label_EnabledChanged);
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(88, 0);
+            this.label2.Location = new System.Drawing.Point(86, 2);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(8, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = ".";
-            this.label2.EnabledChanged += new System.EventHandler(this.label_EnabledChanged);
             // 
             // Octet4
             // 
+            this.Octet4.BackColor = System.Drawing.SystemColors.Menu;
             this.Octet4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Octet4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Octet4.Location = new System.Drawing.Point(100, 0);
+            this.Octet4.Location = new System.Drawing.Point(95, 1);
             this.Octet4.MaxLength = 3;
             this.Octet4.Name = "Octet4";
-            this.Octet4.Size = new System.Drawing.Size(20, 16);
+            this.Octet4.Size = new System.Drawing.Size(24, 16);
             this.Octet4.TabIndex = 4;
             this.Octet4.TabStop = false;
             this.Octet4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -160,12 +173,13 @@ namespace mRemoteNG.UI.Controls
             // 
             // Octet3
             // 
+            this.Octet3.BackColor = System.Drawing.SystemColors.Menu;
             this.Octet3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Octet3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Octet3.Location = new System.Drawing.Point(64, 0);
+            this.Octet3.Location = new System.Drawing.Point(63, 1);
             this.Octet3.MaxLength = 3;
             this.Octet3.Name = "Octet3";
-            this.Octet3.Size = new System.Drawing.Size(20, 16);
+            this.Octet3.Size = new System.Drawing.Size(24, 16);
             this.Octet3.TabIndex = 3;
             this.Octet3.TabStop = false;
             this.Octet3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -174,12 +188,13 @@ namespace mRemoteNG.UI.Controls
             // 
             // Octet2
             // 
+            this.Octet2.BackColor = System.Drawing.SystemColors.Menu;
             this.Octet2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Octet2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Octet2.Location = new System.Drawing.Point(32, 0);
+            this.Octet2.Location = new System.Drawing.Point(32, 1);
             this.Octet2.MaxLength = 3;
             this.Octet2.Name = "Octet2";
-            this.Octet2.Size = new System.Drawing.Size(20, 16);
+            this.Octet2.Size = new System.Drawing.Size(24, 16);
             this.Octet2.TabIndex = 2;
             this.Octet2.TabStop = false;
             this.Octet2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -188,21 +203,21 @@ namespace mRemoteNG.UI.Controls
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(56, 0);
+            this.label1.Location = new System.Drawing.Point(55, 2);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(8, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = ".";
-            this.label1.EnabledChanged += new System.EventHandler(this.label_EnabledChanged);
             // 
             // Octet1
             // 
+            this.Octet1.BackColor = System.Drawing.SystemColors.Menu;
             this.Octet1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Octet1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Octet1.Location = new System.Drawing.Point(4, 0);
+            this.Octet1.Location = new System.Drawing.Point(1, 1);
             this.Octet1.MaxLength = 3;
             this.Octet1.Name = "Octet1";
-            this.Octet1.Size = new System.Drawing.Size(20, 16);
+            this.Octet1.Size = new System.Drawing.Size(24, 16);
             this.Octet1.TabIndex = 1;
             this.Octet1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Octet1.Enter += new System.EventHandler(this.Box_Enter);
@@ -212,7 +227,7 @@ namespace mRemoteNG.UI.Controls
             // 
             this.Controls.Add(this.panel1);
             this.Name = "IPTextBox";
-            this.Size = new System.Drawing.Size(128, 18);
+            this.Size = new System.Drawing.Size(124, 18);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -424,22 +439,5 @@ namespace mRemoteNG.UI.Controls
 			tb.SelectAll();
 		}
 
-		/// \ifnot hide_events
-		/// Ensures a consistent "grayed out" look when the control is disabled
-		/// \endif
-		private void label_EnabledChanged(object sender, EventArgs e)
-		{
-		    var lbl = (Label) sender;
-		    lbl.BackColor = lbl.Enabled ? SystemColors.Window : SystemColors.Control;
-		}
-
-		/// \ifnot hide_events
-		/// Ensures a consistent "grayed out" look when the control is disabled
-		/// \endif
-		private void panel1_EnabledChanged(object sender, EventArgs e)
-		{
-		    var pan = (Panel) sender;
-		    pan.BackColor = pan.Enabled ? SystemColors.Window : SystemColors.Control;
-		}
-	}
+    }
 }

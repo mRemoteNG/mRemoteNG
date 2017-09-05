@@ -51,9 +51,7 @@ namespace mRemoteNG.Config.Settings
 			{
                 EnsureSettingsAreSavedInNewestVersion();
 
-                SetSupportedCulture();
-
-                SetTheme();
+                SetSupportedCulture(); 
                 SetApplicationWindowPositionAndSize();
                 SetKioskMode();
 
@@ -80,10 +78,7 @@ namespace mRemoteNG.Config.Settings
                 FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
-        private static void SetTheme()
-        {
-            ThemeManager.LoadTheme(mRemoteNG.Settings.Default.ThemeName);
-        }
+ 
 
         private void SetSupportedCulture()
         {

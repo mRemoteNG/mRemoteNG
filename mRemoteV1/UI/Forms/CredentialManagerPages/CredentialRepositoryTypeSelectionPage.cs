@@ -7,6 +7,7 @@ using mRemoteNG.Credential.Repositories;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.PageSequence;
 using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
@@ -23,9 +24,11 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
             _repositoryList = repositoryList;
             InitializeComponent();
+            ApplyTheme();
             SetupListView(selectionTargets);
         }
 
+ 
         private void SetupListView(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets)
         {
             olvColumnName.ImageGetter = ImageGetter;

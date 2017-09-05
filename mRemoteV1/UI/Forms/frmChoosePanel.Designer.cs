@@ -29,11 +29,11 @@ namespace mRemoteNG.UI.Forms
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            this.cbPanels = new System.Windows.Forms.ComboBox();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.lblDescription = new System.Windows.Forms.Label();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.cbPanels = new Controls.Base.NGComboBox();
+            this.btnOK = new Controls.Base.NGButton();
+            this.lblDescription = new Controls.Base.NGLabel();
+            this.btnNew = new Controls.Base.NGButton();
+            this.btnCancel = new Controls.Base.NGButton();
             this.SuspendLayout();
             // 
             // cbPanels
@@ -112,10 +112,10 @@ namespace mRemoteNG.UI.Forms
             this.ResumeLayout(false);
 
 		}
-		internal System.Windows.Forms.ComboBox cbPanels;
-		internal System.Windows.Forms.Button btnOK;
-		internal System.Windows.Forms.Label lblDescription;
-		internal System.Windows.Forms.Button btnNew;
-		internal System.Windows.Forms.Button btnCancel;
+		internal Controls.Base.NGComboBox cbPanels;
+		internal Controls.Base.NGButton btnOK;
+		internal Controls.Base.NGLabel lblDescription;
+		internal Controls.Base.NGButton btnNew;
+		internal Controls.Base.NGButton btnCancel;
 	}
 }

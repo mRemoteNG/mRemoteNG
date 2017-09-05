@@ -26,7 +26,7 @@ Currently these protocols are supported:
  * VNC (Virtual Network Computing)
  * ICA (Independent Computing Architecture)
  * SSH (Secure Shell)
- * Telnet (TeletypeÂ Network)
+ * Telnet (Teletype Network)
  * HTTP/S (Hypertext Transfer Protocol Secure)
  * Rlogin (Remote Login)
  * RAW

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Container;
-
+using System.Drawing;
 
 namespace mRemoteNG.UI.Window
 {
@@ -21,11 +21,18 @@ namespace mRemoteNG.UI.Window
             WindowType = WindowType.ActiveDirectoryImport;
             DockPnl = new DockContent();
             CurrentDomain = Environment.UserDomainName;
+            ApplyTheme();
         }
 
         #endregion
 
+        public new void ApplyTheme()
+        {
+            base.ApplyTheme();
+        }
+
         #region Private Methods
+         
 
         #region Event Handlers
 

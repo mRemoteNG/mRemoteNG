@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms
+﻿using mRemoteNG.Themes;
+
+namespace mRemoteNG.UI.Forms
 {
     partial class CredentialManagerForm
     {
@@ -30,10 +32,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialManagerForm));
             this.panelMain = new System.Windows.Forms.Panel();
-            this.olvPageList = new BrightIdeasSoftware.ObjectListView();
+            this.olvPageList = new Controls.Base.NGListView();
             this.olvColumnPage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonClose = new Controls.Base.NGButton();
             ((System.ComponentModel.ISupportInitialize)(this.olvPageList)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
@@ -128,9 +130,9 @@
 
         #endregion
         private System.Windows.Forms.Panel panelMain;
-        private BrightIdeasSoftware.ObjectListView olvPageList;
+        private Controls.Base.NGListView olvPageList;
         private System.Windows.Forms.Panel pnlBottom;
-        private System.Windows.Forms.Button buttonClose;
+        private Controls.Base.NGButton buttonClose;
         private BrightIdeasSoftware.OLVColumn olvColumnPage;
     }
 }

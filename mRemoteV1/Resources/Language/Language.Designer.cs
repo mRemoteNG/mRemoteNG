@@ -4039,6 +4039,69 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete the theme?.
+        /// </summary>
+        internal static string strOptionsThemeDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("strOptionsThemeDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Themes.
+        /// </summary>
+        internal static string strOptionsThemeEnableTheming {
+            get {
+                return ResourceManager.GetString("strOptionsThemeEnableTheming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder.
+        /// </summary>
+        internal static string strOptionsThemeErrorNoThemes {
+            get {
+                return ResourceManager.GetString("strOptionsThemeErrorNoThemes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New theme name.
+        /// </summary>
+        internal static string strOptionsThemeNewThemeCaption {
+            get {
+                return ResourceManager.GetString("strOptionsThemeNewThemeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot create theme, name already present or special characters in the name.
+        /// </summary>
+        internal static string strOptionsThemeNewThemeError {
+            get {
+                return ResourceManager.GetString("strOptionsThemeNewThemeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type the new theme name.
+        /// </summary>
+        internal static string strOptionsThemeNewThemeText {
+            get {
+                return ResourceManager.GetString("strOptionsThemeNewThemeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning: Restart is required to disable the themes or to completely apply a new one.
+        /// </summary>
+        internal static string strOptionsThemeThemeChaangeWarning {
+            get {
+                return ResourceManager.GetString("strOptionsThemeThemeChaangeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Panel Name.
         /// </summary>
         internal static string strPanelName {

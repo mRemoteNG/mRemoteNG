@@ -20,6 +20,17 @@ namespace mRemoteNG.UI.Forms
             InitializeComponent();
             SetupListView();
             ApplyLanguage();
+            ApplyTheme();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+        }
+
+        public virtual void ApplyTheme()
+        {
+            if (Themes.ThemeManager.getInstance().ThemingActive)
+            {
+                BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            }
         }
 
         private void buttonUnlock_Click(object sender, EventArgs e)

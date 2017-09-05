@@ -32,11 +32,11 @@ namespace mRemoteNG.UI.Forms
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.lblVerify = new System.Windows.Forms.Label();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.lblStatus = new System.Windows.Forms.Label();
+            this.lblPassword = new Controls.Base.NGLabel();
+            this.lblVerify = new Controls.Base.NGLabel();
+            this.btnOK = new Controls.Base.NGButton();
+            this.btnCancel = new Controls.Base.NGButton();
+            this.lblStatus = new Controls.Base.NGLabel();
             this.pbLock = new System.Windows.Forms.PictureBox();
             this.txtVerify = new mRemoteNG.UI.Forms.TextBox();
             this.txtPassword = new mRemoteNG.UI.Forms.TextBox();
@@ -164,11 +164,11 @@ namespace mRemoteNG.UI.Forms
 		}
         private TextBox txtPassword;
 		private TextBox txtVerify;
-		private System.Windows.Forms.Label lblPassword;
-		private System.Windows.Forms.Label lblVerify;
-		private System.Windows.Forms.Button btnOK;
-		private System.Windows.Forms.Button btnCancel;
-		private System.Windows.Forms.Label lblStatus;
+		private Controls.Base.NGLabel lblPassword;
+		private Controls.Base.NGLabel lblVerify;
+		private Controls.Base.NGButton btnOK;
+		private Controls.Base.NGButton btnCancel;
+		private Controls.Base.NGLabel lblStatus;
 		private System.Windows.Forms.PictureBox pbLock;
 	}
 }

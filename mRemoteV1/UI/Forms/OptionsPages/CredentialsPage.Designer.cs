@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialsPage));
-            this.checkBoxUnlockOnStartup = new System.Windows.Forms.CheckBox();
+            this.checkBoxUnlockOnStartup = new Controls.Base.NGCheckBox();
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
-            this.radCredentialsCustom = new System.Windows.Forms.RadioButton();
-            this.lblDefaultCredentials = new System.Windows.Forms.Label();
-            this.radCredentialsNoInfo = new System.Windows.Forms.RadioButton();
-            this.radCredentialsWindows = new System.Windows.Forms.RadioButton();
-            this.txtCredentialsDomain = new System.Windows.Forms.TextBox();
-            this.lblCredentialsUsername = new System.Windows.Forms.Label();
-            this.txtCredentialsPassword = new System.Windows.Forms.TextBox();
-            this.lblCredentialsPassword = new System.Windows.Forms.Label();
-            this.txtCredentialsUsername = new System.Windows.Forms.TextBox();
-            this.lblCredentialsDomain = new System.Windows.Forms.Label();
+            this.radCredentialsCustom = new Controls.Base.NGRadioButton();
+            this.lblDefaultCredentials = new Controls.Base.NGLabel();
+            this.radCredentialsNoInfo = new Controls.Base.NGRadioButton();
+            this.radCredentialsWindows = new Controls.Base.NGRadioButton();
+            this.txtCredentialsDomain = new Controls.Base.NGTextBox();
+            this.lblCredentialsUsername = new Controls.Base.NGLabel();
+            this.txtCredentialsPassword = new Controls.Base.NGTextBox();
+            this.lblCredentialsPassword = new Controls.Base.NGLabel();
+            this.txtCredentialsUsername = new Controls.Base.NGTextBox();
+            this.lblCredentialsDomain = new Controls.Base.NGLabel();
             this.pnlDefaultCredentials.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -189,17 +189,17 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox checkBoxUnlockOnStartup;
+        private Controls.Base.NGCheckBox checkBoxUnlockOnStartup;
         internal System.Windows.Forms.Panel pnlDefaultCredentials;
-        internal System.Windows.Forms.RadioButton radCredentialsCustom;
-        internal System.Windows.Forms.Label lblDefaultCredentials;
-        internal System.Windows.Forms.RadioButton radCredentialsNoInfo;
-        internal System.Windows.Forms.RadioButton radCredentialsWindows;
-        internal System.Windows.Forms.TextBox txtCredentialsDomain;
-        internal System.Windows.Forms.Label lblCredentialsUsername;
-        internal System.Windows.Forms.TextBox txtCredentialsPassword;
-        internal System.Windows.Forms.Label lblCredentialsPassword;
-        internal System.Windows.Forms.TextBox txtCredentialsUsername;
-        internal System.Windows.Forms.Label lblCredentialsDomain;
+        internal Controls.Base.NGRadioButton radCredentialsCustom;
+        internal Controls.Base.NGLabel lblDefaultCredentials;
+        internal Controls.Base.NGRadioButton radCredentialsNoInfo;
+        internal Controls.Base.NGRadioButton radCredentialsWindows;
+        internal Controls.Base.NGTextBox txtCredentialsDomain;
+        internal Controls.Base.NGLabel lblCredentialsUsername;
+        internal Controls.Base.NGTextBox txtCredentialsPassword;
+        internal Controls.Base.NGLabel lblCredentialsPassword;
+        internal Controls.Base.NGTextBox txtCredentialsUsername;
+        internal Controls.Base.NGLabel lblCredentialsDomain;
     }
 }

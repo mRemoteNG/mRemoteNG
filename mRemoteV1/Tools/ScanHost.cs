@@ -66,50 +66,50 @@ namespace mRemoteNG.Tools
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", true);
                 return "";
             }
-        }
+        } 
 
-        public ListViewItem ToListViewItem()
+        //Adpating to objectlistview instaed of listview
+        public string HostIPorName
         {
-            try
+            get
             {
-                var listViewItem = new ListViewItem
-                {
-                    Tag = this,
-                    Text = !string.IsNullOrEmpty(HostName) ? HostName : HostIp
-                };
-
-                listViewItem.SubItems.Add(BoolToYesNo(Ssh));
-                listViewItem.SubItems.Add(BoolToYesNo(Telnet));
-                listViewItem.SubItems.Add(BoolToYesNo(Http));
-                listViewItem.SubItems.Add(BoolToYesNo(Https));
-                listViewItem.SubItems.Add(BoolToYesNo(Rlogin));
-                listViewItem.SubItems.Add(BoolToYesNo(Rdp));
-                listViewItem.SubItems.Add(BoolToYesNo(Vnc));
-
+                if (string.IsNullOrEmpty(HostName))
+                    return HostIp;
+                else
+                    return HostName;
+            }
+        }
+        public string RdpName { get { return BoolToYesNo(Rdp); } }
+        public string VncName { get { return BoolToYesNo(Vnc); } }
+        public string SshName { get { return BoolToYesNo(Rdp); } }
+        public string TelnetName { get { return BoolToYesNo(Telnet); } }
+        public string RloginName { get { return BoolToYesNo(Rlogin); } }
+        public string HttpName { get { return BoolToYesNo(Http); } }
+        public string HttpsName { get { return BoolToYesNo(Https); } }
+        public string OpenPortsName {
+            get {
                 var strOpen = "";
-                var strClosed = "";
-
                 foreach (int p in OpenPorts)
                 {
                     strOpen += p + ", ";
                 }
-
+                return strOpen;
+            }
+        }
+        public string ClosedPortsName
+        {
+            get
+            {
+                var strClosed = "";
                 foreach (int p in ClosedPorts)
                 {
                     strClosed += p + ", ";
                 }
-
-                listViewItem.SubItems.Add(strOpen.Substring(0, strOpen.Length > 0 ? strOpen.Length - 2 : strOpen.Length));
-                listViewItem.SubItems.Add(strClosed.Substring(0, strClosed.Length > 0 ? strClosed.Length - 2 : strClosed.Length));
-
-                return listViewItem;
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("Tools.PortScan.ToListViewItem() failed.", ex);
-                return null;
+                return strClosed;
             }
         }
+
+
 
         private static string BoolToYesNo(bool value)
         {

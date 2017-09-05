@@ -5,11 +5,14 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms
 {
     public partial class ExportForm
     {
+        private ThemeManager _themeManager;
+
         #region Public Properties
         public string FileName
 		{
@@ -173,8 +176,9 @@ namespace mRemoteNG.UI.Forms
             cboFileFormat.Items.Add(new ExportFormat(ConnectionsSaver.Format.mRXML));
             cboFileFormat.Items.Add(new ExportFormat(ConnectionsSaver.Format.mRCSV));
 			cboFileFormat.SelectedIndex = 0;
-				
-			ApplyLanguage();
+            ApplyTheme();
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyLanguage();
 		}
 
         private void txtFileName_TextChanged(object sender, EventArgs e)
@@ -239,7 +243,18 @@ namespace mRemoteNG.UI.Forms
         }
         #endregion
 			
-		private void ApplyLanguage()
+        private void ApplyTheme()
+        {
+            _themeManager = ThemeManager.getInstance();
+            if(_themeManager.ThemingActive)
+            {
+                BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            }
+        }
+
+
+        private void ApplyLanguage()
 		{
 			Text = Language.strExport;
 				
