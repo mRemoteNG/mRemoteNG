@@ -1,11 +1,5 @@
 ﻿using mRemoteNG.Themes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
@@ -16,7 +10,7 @@ namespace mRemoteNG.UI.Controls.Base
     {
         private ThemeManager _themeManager; 
 
-        public  NGTextBox() : base()
+        public  NGTextBox()
         { 
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
@@ -24,17 +18,12 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
-            {
-                _themeManager = ThemeManager.getInstance();
-                if (_themeManager.ThemingActive)
-                {
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                    Invalidate();
-                }
-            }
-           
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive) return;
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            Invalidate();
         }
          
 
@@ -46,7 +35,7 @@ namespace mRemoteNG.UI.Controls.Base
                 _themeManager = ThemeManager.getInstance();
                 if(_themeManager.ThemingActive)
                 { 
-                    if (base.Enabled)
+                    if (Enabled)
                     {
                         ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
                         BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");

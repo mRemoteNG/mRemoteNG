@@ -8,7 +8,6 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
-using System.Drawing;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -134,13 +133,11 @@ namespace mRemoteNG.UI.Controls
 
         private void ApplyTheme()
         {
-            if (_themeManager.ThemingActive)
-            {
-                vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                _cmbQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            }
+            if (!_themeManager.ThemingActive) return;
+            vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            _cmbQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
         }
 
         #region Quick Connect
@@ -235,7 +232,6 @@ namespace mRemoteNG.UI.Controls
         private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
             var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
             if (tag != null)
             {

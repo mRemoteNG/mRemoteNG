@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Controls.Base
          
         private ThemeManager _themeManager;
 
-        public NGLabel() : base()
+        public NGLabel()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Controls.Base
             }
             else
             {
-                Color disabledtextLabel = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
+                var disabledtextLabel = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
                 TextRenderer.DrawText(e.Graphics, this.Text, Font, ClientRectangle, disabledtextLabel, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
             }
                 

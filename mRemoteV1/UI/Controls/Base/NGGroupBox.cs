@@ -1,11 +1,6 @@
 ﻿using mRemoteNG.Themes;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace mRemoteNG.UI.Controls.Base
 {
@@ -40,33 +35,33 @@ namespace mRemoteNG.UI.Controls.Base
                 return;
             }
             //Reusing the textbox colors
-            Color titleColor =  _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground"); 
-            Color backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Backgorund");  
-            Color lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Line");
+            var titleColor =  _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground"); 
+            //var backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Backgorund");  
+            var lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Line");
 
             if (!Enabled)
             {
                 titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Foreground");
-                backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Background");
+                //backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Background");
                 lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Line");
             } 
 
 
-            GroupBoxState state = base.Enabled ? GroupBoxState.Normal : GroupBoxState.Disabled;
-            TextFormatFlags flags = TextFormatFlags.PreserveGraphicsTranslateTransform | TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.TextBoxControl |TextFormatFlags.WordBreak;
+            //var state = Enabled ? GroupBoxState.Normal : GroupBoxState.Disabled;
+            var flags = TextFormatFlags.PreserveGraphicsTranslateTransform | TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.TextBoxControl |TextFormatFlags.WordBreak;
             
-            if (!this.ShowKeyboardCues)
+            if (!ShowKeyboardCues)
                 flags |= TextFormatFlags.HidePrefix;
-            if (this.RightToLeft == RightToLeft.Yes)
+            if (RightToLeft == RightToLeft.Yes)
                 flags |= TextFormatFlags.RightToLeft | TextFormatFlags.Right;
 
             //No clear backgorund, this control is transparently 
             //e.Graphics.FillRectangle(new SolidBrush(backColor), 0, 0, Width, Height);
 
-            Rectangle bounds = new Rectangle(0, 0, base.Width, base.Height);
-            Rectangle rectangle = bounds;
+            var bounds = new Rectangle(0, 0, Width, Height);
+            var rectangle = bounds;
             rectangle.Width -= 8;
-            Size size = TextRenderer.MeasureText(e.Graphics, Text, Font, new Size(rectangle.Width, rectangle.Height), flags);
+            var size = TextRenderer.MeasureText(e.Graphics, Text, Font, new Size(rectangle.Width, rectangle.Height), flags);
             rectangle.Width = size.Width;
             rectangle.Height = size.Height;
             if ((flags & TextFormatFlags.Right) == TextFormatFlags.Right)
@@ -79,7 +74,7 @@ namespace mRemoteNG.UI.Controls.Base
                 rectangle.Inflate(2, 0);
             using (var pen = new Pen(lineColor))
             {
-                int num = bounds.Top + (Font.Height / 2);
+                var num = bounds.Top + (Font.Height / 2);
                 //Left line
                 e.Graphics.DrawLine(pen, bounds.Left + Padding.Left , num - Padding.Top, bounds.Left + Padding.Left, bounds.Height - Padding.Bottom);
                 //Bottom line

@@ -7,11 +7,10 @@ using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls.PageSequence;
-using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialListPage : SequencedControl, ICredentialManagerPage
+    public sealed partial class CredentialListPage : SequencedControl, ICredentialManagerPage
     {
         private readonly ICredentialRepositoryList _credentialRepositoryList;
 

@@ -2,7 +2,7 @@
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    partial class CredentialEditorPage
+    sealed partial class CredentialEditorPage
     {
         /// <summary> 
         /// Required designer variable.

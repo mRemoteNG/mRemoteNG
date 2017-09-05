@@ -1,7 +1,5 @@
-using mRemoteNG.Tools;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -51,13 +49,17 @@ namespace mRemoteNG.Themes
         #region Public Methods
         public object Clone()
         {
-            ThemeInfo clonedObj;
-            ExtendedColorPalette extPalette = new ExtendedColorPalette();
-            extPalette.ExtColorPalette = _extendedPalette.ExtColorPalette.ToDictionary(entry => entry.Key,entry => entry.Value);
-            extPalette.DefaultColorPalette = _extendedPalette.DefaultColorPalette;
-            clonedObj = new ThemeInfo(_name, _theme, _URI, _version, extPalette);
-            clonedObj.IsExtendable = _isExtendable;
-            clonedObj.IsThemeBase = _isThemeBase;
+            var extPalette = new ExtendedColorPalette
+            {
+                ExtColorPalette =
+                    _extendedPalette.ExtColorPalette.ToDictionary(entry => entry.Key, entry => entry.Value),
+                DefaultColorPalette = _extendedPalette.DefaultColorPalette
+            };
+            var clonedObj = new ThemeInfo(_name, _theme, _URI, _version, extPalette)
+            {
+                IsExtendable = _isExtendable,
+                IsThemeBase = _isThemeBase
+            };
 
             return clonedObj;
         }
@@ -72,7 +74,7 @@ namespace mRemoteNG.Themes
 			get { return _name; }
 			set
 			{
-				if (_name == value)
+				if (string.Equals(_name, value, StringComparison.InvariantCulture))
 				{
 					return;
 				}
@@ -85,7 +87,7 @@ namespace mRemoteNG.Themes
             get { return _theme; }
             set
             {
-                if (_theme == value)
+                if (value != null && _theme == value)
                 {
                     return;
                 }
@@ -98,7 +100,7 @@ namespace mRemoteNG.Themes
             get { return _URI; }
             set
             {
-                if (_URI == value)
+                if (value != null && _URI == value)
                 {
                     return;
                 }
@@ -111,7 +113,7 @@ namespace mRemoteNG.Themes
             get { return _version; }
             set
             {
-                if (_version == value)
+                if (Equals(_version, value))
                 {
                     return;
                 }
@@ -124,7 +126,7 @@ namespace mRemoteNG.Themes
             get { return _extendedPalette; }
             set
             {
-                if (_extendedPalette == value)
+                if (_extendedPalette != null && _extendedPalette == value)
                 {
                     return;
                 }

@@ -1,11 +1,5 @@
 ﻿using mRemoteNG.Themes;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
@@ -15,7 +9,7 @@ namespace mRemoteNG.UI.Controls.Base
     {
         private ThemeManager _themeManager;
 
-        public NGCheckBox() : base()
+        public NGCheckBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
@@ -35,36 +29,32 @@ namespace mRemoteNG.UI.Controls.Base
             base.OnCreateControl();
             if (Tools.DesignModeTest.IsInDesignMode(this)) return;
             _themeManager = ThemeManager.getInstance();
-            if (_themeManager.ThemingActive)
+            if (!_themeManager.ThemingActive) return;
+            _mice = MouseState.OUT;
+            MouseEnter += (sender, args) =>
+            {
+                _mice = MouseState.HOVER;
+                Invalidate();
+            };
+            MouseLeave += (sender, args) =>
             {
                 _mice = MouseState.OUT;
-                MouseEnter += (sender, args) =>
-                {
-                    _mice = MouseState.HOVER;
-                    Invalidate();
-                };
-                MouseLeave += (sender, args) =>
-                {
-                    _mice = MouseState.OUT;
-                    Invalidate();
-                };
-                MouseDown += (sender, args) =>
-                {
-                    if (args.Button == MouseButtons.Left)
-                    {
-                        _mice = MouseState.DOWN;
-                        Invalidate();
-                    }
-                };
-                MouseUp += (sender, args) =>
-                {
-                    _mice = MouseState.OUT;
-
-                    Invalidate();
-                };
+                Invalidate();
+            };
+            MouseDown += (sender, args) =>
+            {
+                if (args.Button != MouseButtons.Left) return;
+                _mice = MouseState.DOWN;
+                Invalidate();
+            };
+            MouseUp += (sender, args) =>
+            {
+                _mice = MouseState.OUT;
 
                 Invalidate();
-            }
+            };
+
+            Invalidate();
         }
 
 
@@ -76,17 +66,16 @@ namespace mRemoteNG.UI.Controls.Base
                 return;
             }
             //Get the colors
-            Color back;
             Color fore;
             Color glyph;
-            Color checkBack;
             Color checkBorder;
  
-            back = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
+            var back = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
             if (Enabled)
             {
                 glyph = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (_mice)
                 {
                     case MouseState.HOVER:
@@ -110,9 +99,9 @@ namespace mRemoteNG.UI.Controls.Base
 
             e.Graphics.Clear(Parent.BackColor);
 
-            using (Pen p = new Pen(checkBorder))
+            using (var p = new Pen(checkBorder))
             {
-                Rectangle boxRect = new Rectangle(0, Height / 2 - 7, 11, 11);
+                var boxRect = new Rectangle(0, Height / 2 - 7, 11, 11);
                 e.Graphics.FillRectangle(new SolidBrush(back), boxRect);
                 e.Graphics.DrawRectangle(p, boxRect);
             }
@@ -122,7 +111,7 @@ namespace mRemoteNG.UI.Controls.Base
                 e.Graphics.DrawString("ü", new Font("Wingdings", 9f), new SolidBrush(glyph), -1, 1);
             }
 
-            Rectangle textRect = new Rectangle(16, 0, Width - 16, Height);
+            var textRect = new Rectangle(16, 0, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
 
         

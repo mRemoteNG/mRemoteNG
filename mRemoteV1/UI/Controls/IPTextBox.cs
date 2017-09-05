@@ -2,9 +2,7 @@
  * http://www.codeproject.com/Articles/11576/IP-TextBox
  * Original Author: mawnkay
  */
-using mRemoteNG.Themes;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls
@@ -88,11 +86,9 @@ namespace mRemoteNG.UI.Controls
 
         private void ApplyTheme()
         {
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
-            {
-                if (Themes.ThemeManager.getInstance().ThemingActive)
-                    this.panel1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            }
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            if (Themes.ThemeManager.getInstance().ThemingActive)
+                panel1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
         }
         protected override void Dispose( bool disposing )
 		{
@@ -111,126 +107,126 @@ namespace mRemoteNG.UI.Controls
 		/// the contents of this method with the code editor.
 		private void InitializeComponent()
 		{
-            this.components = new System.ComponentModel.Container();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new Base.NGLabel();
-            this.label2 = new Base.NGLabel();
-            this.Octet4 = new Base.NGTextBox();
-            this.Octet3 = new Base.NGTextBox();
-            this.Octet2 = new Base.NGTextBox();
-            this.label1 = new Base.NGLabel();
-            this.Octet1 = new Base.NGTextBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            panel1 = new Panel();
+            label3 = new Base.NGLabel();
+            label2 = new Base.NGLabel();
+            Octet4 = new Base.NGTextBox();
+            Octet3 = new Base.NGTextBox();
+            Octet2 = new Base.NGTextBox();
+            label1 = new Base.NGLabel();
+            Octet1 = new Base.NGTextBox();
+            toolTip1 = new System.Windows.Forms.ToolTip(components);
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.Controls.Add(this.Octet4);
-            this.panel1.Controls.Add(this.Octet3);
-            this.panel1.Controls.Add(this.Octet2);
-            this.panel1.Controls.Add(this.Octet1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(124, 18);
-            this.panel1.TabIndex = 0;
+            panel1.BackColor = System.Drawing.SystemColors.Window;
+            panel1.Controls.Add(Octet4);
+            panel1.Controls.Add(Octet3);
+            panel1.Controls.Add(Octet2);
+            panel1.Controls.Add(Octet1);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(label3);
+            panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(124, 18);
+            panel1.TabIndex = 0;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(23, 1);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(8, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = ".";
+            label3.Location = new System.Drawing.Point(23, 1);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(8, 13);
+            label3.TabIndex = 6;
+            label3.Text = ".";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(86, 2);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(8, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = ".";
+            label2.Location = new System.Drawing.Point(86, 2);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(8, 13);
+            label2.TabIndex = 5;
+            label2.Text = ".";
             // 
             // Octet4
             // 
-            this.Octet4.BackColor = System.Drawing.SystemColors.Menu;
-            this.Octet4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Octet4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Octet4.Location = new System.Drawing.Point(95, 1);
-            this.Octet4.MaxLength = 3;
-            this.Octet4.Name = "Octet4";
-            this.Octet4.Size = new System.Drawing.Size(24, 16);
-            this.Octet4.TabIndex = 4;
-            this.Octet4.TabStop = false;
-            this.Octet4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Octet4.Enter += new System.EventHandler(this.Box_Enter);
-            this.Octet4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Box4_KeyPress);
+            Octet4.BackColor = System.Drawing.SystemColors.Menu;
+            Octet4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            Octet4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            Octet4.Location = new System.Drawing.Point(95, 1);
+            Octet4.MaxLength = 3;
+            Octet4.Name = "Octet4";
+            Octet4.Size = new System.Drawing.Size(24, 16);
+            Octet4.TabIndex = 4;
+            Octet4.TabStop = false;
+            Octet4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            Octet4.Enter += new System.EventHandler(Box_Enter);
+            Octet4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(Box4_KeyPress);
             // 
             // Octet3
             // 
-            this.Octet3.BackColor = System.Drawing.SystemColors.Menu;
-            this.Octet3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Octet3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Octet3.Location = new System.Drawing.Point(63, 1);
-            this.Octet3.MaxLength = 3;
-            this.Octet3.Name = "Octet3";
-            this.Octet3.Size = new System.Drawing.Size(24, 16);
-            this.Octet3.TabIndex = 3;
-            this.Octet3.TabStop = false;
-            this.Octet3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Octet3.Enter += new System.EventHandler(this.Box_Enter);
-            this.Octet3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Box3_KeyPress);
+            Octet3.BackColor = System.Drawing.SystemColors.Menu;
+            Octet3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            Octet3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            Octet3.Location = new System.Drawing.Point(63, 1);
+            Octet3.MaxLength = 3;
+            Octet3.Name = "Octet3";
+            Octet3.Size = new System.Drawing.Size(24, 16);
+            Octet3.TabIndex = 3;
+            Octet3.TabStop = false;
+            Octet3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            Octet3.Enter += new System.EventHandler(Box_Enter);
+            Octet3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(Box3_KeyPress);
             // 
             // Octet2
             // 
-            this.Octet2.BackColor = System.Drawing.SystemColors.Menu;
-            this.Octet2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Octet2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Octet2.Location = new System.Drawing.Point(32, 1);
-            this.Octet2.MaxLength = 3;
-            this.Octet2.Name = "Octet2";
-            this.Octet2.Size = new System.Drawing.Size(24, 16);
-            this.Octet2.TabIndex = 2;
-            this.Octet2.TabStop = false;
-            this.Octet2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Octet2.Enter += new System.EventHandler(this.Box_Enter);
-            this.Octet2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Box2_KeyPress);
+            Octet2.BackColor = System.Drawing.SystemColors.Menu;
+            Octet2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            Octet2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            Octet2.Location = new System.Drawing.Point(32, 1);
+            Octet2.MaxLength = 3;
+            Octet2.Name = "Octet2";
+            Octet2.Size = new System.Drawing.Size(24, 16);
+            Octet2.TabIndex = 2;
+            Octet2.TabStop = false;
+            Octet2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            Octet2.Enter += new System.EventHandler(Box_Enter);
+            Octet2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(Box2_KeyPress);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(55, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(8, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = ".";
+            label1.Location = new System.Drawing.Point(55, 2);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(8, 13);
+            label1.TabIndex = 1;
+            label1.Text = ".";
             // 
             // Octet1
             // 
-            this.Octet1.BackColor = System.Drawing.SystemColors.Menu;
-            this.Octet1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Octet1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Octet1.Location = new System.Drawing.Point(1, 1);
-            this.Octet1.MaxLength = 3;
-            this.Octet1.Name = "Octet1";
-            this.Octet1.Size = new System.Drawing.Size(24, 16);
-            this.Octet1.TabIndex = 1;
-            this.Octet1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Octet1.Enter += new System.EventHandler(this.Box_Enter);
-            this.Octet1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Box1_KeyPress);
+            Octet1.BackColor = System.Drawing.SystemColors.Menu;
+            Octet1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            Octet1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            Octet1.Location = new System.Drawing.Point(1, 1);
+            Octet1.MaxLength = 3;
+            Octet1.Name = "Octet1";
+            Octet1.Size = new System.Drawing.Size(24, 16);
+            Octet1.TabIndex = 1;
+            Octet1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            Octet1.Enter += new System.EventHandler(Box_Enter);
+            Octet1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(Box1_KeyPress);
             // 
             // IPTextBox
             // 
-            this.Controls.Add(this.panel1);
-            this.Name = "IPTextBox";
-            this.Size = new System.Drawing.Size(124, 18);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
+            Controls.Add(panel1);
+            Name = "IPTextBox";
+            Size = new System.Drawing.Size(124, 18);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
 
 		}
 		#endregion
@@ -284,21 +280,19 @@ namespace mRemoteNG.UI.Controls
 			
 				//If we are not overwriting the whole text
 				else if(Octet1.SelectionLength != Octet1.Text.Length)
-				{	
-					//Check that the new Text value will be a valid
+				{
+				    //Check that the new Text value will be a valid
 					// ip octet then move on to next box
-					if(Octet1.Text.Length == 2)
-					{
-						if(!IsValid(Octet1.Text + e.KeyChar))
-						{
-							Octet1.SelectAll();
-							e.Handled = true;
-						}
-						else
-						{
-							Octet2.Focus();
-						}
-					}
+				    if (Octet1.Text.Length != 2) return;
+				    if(!IsValid(Octet1.Text + e.KeyChar))
+				    {
+				        Octet1.SelectAll();
+				        e.Handled = true;
+				    }
+				    else
+				    {
+				        Octet2.Focus();
+				    }
 				}
 			}
 			//Do nothing if the keypress is not numeral, backspace, or '.'
@@ -329,18 +323,16 @@ namespace mRemoteNG.UI.Controls
 				}			
 				else if(Octet2.SelectionLength != Octet2.Text.Length)
 				{
-					if(Octet2.Text.Length == 2)
-					{
-						if(!IsValid(Octet2.Text + e.KeyChar))
-						{
-							Octet2.SelectAll();
-							e.Handled = true;
-						}
-						else
-						{
-							Octet3.Focus();
-						}
-					}
+				    if (Octet2.Text.Length != 2) return;
+				    if(!IsValid(Octet2.Text + e.KeyChar))
+				    {
+				        Octet2.SelectAll();
+				        e.Handled = true;
+				    }
+				    else
+				    {
+				        Octet3.Focus();
+				    }
 				}
 				else if(Octet2.Text.Length == 0 && e.KeyChar == 8)
 				{
@@ -376,18 +368,16 @@ namespace mRemoteNG.UI.Controls
 				}			
 				else if(Octet3.SelectionLength != Octet3.Text.Length)
 				{
-					if(Octet3.Text.Length == 2)
-					{
-						if(!IsValid(Octet3.Text + e.KeyChar))
-						{
-							Octet3.SelectAll();
-							e.Handled = true;
-						}
-						else
-						{
-							Octet4.Focus();
-						}
-					}
+				    if (Octet3.Text.Length != 2) return;
+				    if(!IsValid(Octet3.Text + e.KeyChar))
+				    {
+				        Octet3.SelectAll();
+				        e.Handled = true;
+				    }
+				    else
+				    {
+				        Octet4.Focus();
+				    }
 				}
 				else if(Octet3.Text.Length == 0 && e.KeyChar == 8)
 				{
@@ -411,14 +401,10 @@ namespace mRemoteNG.UI.Controls
 			{
 				if(Octet4.SelectionLength != Octet4.Text.Length)
 				{
-					if(Octet4.Text.Length == 2)
-					{
-						if(!IsValid(Octet4.Text + e.KeyChar))
-						{
-							Octet4.SelectAll();
-							e.Handled = true;
-						}
-					}
+				    if (Octet4.Text.Length != 2) return;
+				    if (IsValid(Octet4.Text + e.KeyChar)) return;
+				    Octet4.SelectAll();
+				    e.Handled = true;
 				}
 				else if(Octet4.Text.Length == 0 && e.KeyChar == 8)
 				{

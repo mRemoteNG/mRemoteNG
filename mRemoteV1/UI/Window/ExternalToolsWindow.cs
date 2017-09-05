@@ -7,9 +7,6 @@ using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
-using System.Drawing;
-using BrightIdeasSoftware;
-using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Window
 {
@@ -228,29 +225,27 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if(_themeManager.ThemingActive)
-            {
-                vsToolStripExtender.SetStyle(ToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(ToolsContextMenuStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                //Apply the extended palette
+            if (!_themeManager.ThemingActive) return;
+            vsToolStripExtender.SetStyle(ToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(ToolsContextMenuStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            //Apply the extended palette
 
-                ToolStripContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
-                ToolStripContainer.TopToolStripPanel.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
-                PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
-                PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
-                //Toollist grouping
-                ToolsListObjView.AlwaysGroupByColumn = this.FilenameColumnHeader;
-            }
+            ToolStripContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            ToolStripContainer.TopToolStripPanel.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            //Toollist grouping
+            ToolsListObjView.AlwaysGroupByColumn = this.FilenameColumnHeader;
         }
 
         private void UpdateToolsListObjView(ExternalTool selectTool = null)
-		{
-			try
+        {
+            var selectedTools = new List<ExternalTool>();
+            try
 			{
-				var selectedTools = new List<ExternalTool>();
-				if (selectTool == null)
+			    if (selectTool == null)
 				{
-					foreach (Object listViewItem in ToolsListObjView.SelectedObjects)
+					foreach (var listViewItem in ToolsListObjView.SelectedObjects)
 					{
 						var externalTool = listViewItem as ExternalTool;
 						if (externalTool != null)
@@ -273,7 +268,7 @@ namespace mRemoteNG.UI.Window
 			{
 				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PopulateToolsListObjView()", ex);
 			}
-		}
+        }
 				
 		private void LaunchTool()
 		{

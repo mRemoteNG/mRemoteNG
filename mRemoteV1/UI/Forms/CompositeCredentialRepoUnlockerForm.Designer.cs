@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms
 {
-    partial class CompositeCredentialRepoUnlockerForm
+    sealed partial class CompositeCredentialRepoUnlockerForm
     {
         /// <summary>
         /// Required designer variable.

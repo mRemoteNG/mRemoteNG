@@ -3,11 +3,10 @@ using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.UI.Controls.PageSequence;
-using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialEditorPage : SequencedControl
+    public sealed partial class CredentialEditorPage : SequencedControl
     {
         private readonly ICredentialRecord _credentialRecord;
         private readonly ICredentialRepository _credentialRepository;

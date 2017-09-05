@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using WeifenLuo.WinFormsUI.Docking;
@@ -18,8 +17,8 @@ namespace mRemoteNG.Themes
 
         private  ThemeInfo _activeTheme; 
         private  Hashtable themes;
-        private bool _themeActive = false;
-        private static ThemeManager themeInstance = null;
+        private bool _themeActive;
+        private static ThemeManager themeInstance;
         #endregion
 
 
@@ -33,8 +32,8 @@ namespace mRemoteNG.Themes
 
         private void SetActive()
         {
-            if (themes[mRemoteNG.Settings.Default.ThemeName] != null)
-                ActiveTheme = (ThemeInfo) themes[mRemoteNG.Settings.Default.ThemeName];
+            if (themes[Settings.Default.ThemeName] != null)
+                ActiveTheme = (ThemeInfo) themes[Settings.Default.ThemeName];
             else
                 ActiveTheme = DefaultTheme;
         }
@@ -211,7 +210,7 @@ namespace mRemoteNG.Themes
             }
         }
 
-        public ThemeInfo DefaultTheme 
+        private ThemeInfo DefaultTheme 
         {
 			get
 			{

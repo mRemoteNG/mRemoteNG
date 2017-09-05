@@ -1,16 +1,13 @@
 ﻿using mRemoteNG.Themes;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
     //Repaint of the NumericUpDown, the composite control buttons are replaced because the 
     //original ones cannot be themed due to protected inheritance 
-    class NGNumericUpDown : NumericUpDown
+    internal class NGNumericUpDown : NumericUpDown
     {
 
         private ThemeManager _themeManager;
@@ -25,33 +22,32 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive) return;
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background"); 
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
+            //Hide those nonthemable butons
+            Controls[0].Hide();
+            //Add new themable buttons
+            Up = new NGButton
             {
-                _themeManager = ThemeManager.getInstance();
-                if (_themeManager.ThemingActive)
-                {
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background"); 
-                    SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
-                    //Hide those nonthemable butons
-                    Controls[0].Hide();
-                    //Add new themable buttons
-                    Up = new NGButton();
-                    Up.Text = "p";
-                    Up.Font = new Font("Wingdings 3", 6f);
-                    Up.SetBounds(Width - 17, 1, 16, Height / 2 - 1);
-                    Up.Click += Up_Click;
-                    Down = new NGButton();
-                    Down.Text = "q";
-                    Down.Font = new Font("Wingdings 3", 6f);
-                    Down.SetBounds(Width - 17, Height/2, 16, Height / 2 - 1);
-                    Down.Click += Down_Click;
-                    Controls.Add(Up);
-                    Controls.Add(Down);
-                    Invalidate();
-                }
-            }
-
+                Text = "p",
+                Font = new Font("Wingdings 3", 6f)
+            };
+            Up.SetBounds(Width - 17, 1, 16, Height / 2 - 1);
+            Up.Click += Up_Click;
+            Down = new NGButton
+            {
+                Text = "q",
+                Font = new Font("Wingdings 3", 6f)
+            };
+            Down.SetBounds(Width - 17, Height/2, 16, Height / 2 - 1);
+            Down.Click += Down_Click;
+            Controls.Add(Up);
+            Controls.Add(Down);
+            Invalidate();
         }
 
         private void Down_Click(object sender, EventArgs e)
@@ -72,7 +68,7 @@ namespace mRemoteNG.UI.Controls.Base
                 _themeManager = ThemeManager.getInstance();
                 if (_themeManager.ThemingActive)
                 {
-                    if (base.Enabled)
+                    if (Enabled)
                     {
                         ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
                         BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
@@ -92,16 +88,11 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnPaint(PaintEventArgs e)
         { 
             base.OnPaint(e);
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
-            {
-                if (_themeManager.ThemingActive)
-                {
-                    //Fix Border
-                    if (BorderStyle != BorderStyle.None)
-                    e.Graphics.DrawRectangle(new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"), 1), 0, 0, base.Width - 1, base.Height - 1);
-                }
-            } 
-
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            if (!_themeManager.ThemingActive) return;
+            //Fix Border
+            if (BorderStyle != BorderStyle.None)
+                e.Graphics.DrawRectangle(new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"), 1), 0, 0, Width - 1, Height - 1);
         }
 
  

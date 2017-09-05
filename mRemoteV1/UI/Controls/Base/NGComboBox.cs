@@ -1,16 +1,12 @@
 ﻿using mRemoteNG.Themes;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
     //Extended ComboBox class, the NGComboBox onPaint completely repaint the control as does the item painting
     //warning: THe DropDown style rendering is glitchy in this control, only use DropDownList or correct the rendering method
-    class NGComboBox : ComboBox
+    internal class NGComboBox : ComboBox
     {
         private ThemeManager _themeManager;
         public enum MouseState
@@ -21,7 +17,7 @@ namespace mRemoteNG.UI.Controls.Base
         }
         public MouseState _mice { get; set; }
 
-        public NGComboBox() : base()
+        public NGComboBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
@@ -31,47 +27,43 @@ namespace mRemoteNG.UI.Controls.Base
             base.OnCreateControl();
             if (Tools.DesignModeTest.IsInDesignMode(this)) return;
             _themeManager = ThemeManager.getInstance();
-            if (_themeManager.ThemingActive)
+            if (!_themeManager.ThemingActive) return;
+            _themeManager = ThemeManager.getInstance();
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
+            DrawMode = DrawMode.OwnerDrawFixed;
+            SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.UserPaint, true);
+            DrawItem += NG_DrawItem;
+            _mice = MouseState.OUT; 
+            MouseEnter += (sender, args) =>
             {
-                _themeManager = ThemeManager.getInstance();
-                BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
-                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
-                DrawMode = DrawMode.OwnerDrawFixed;
-                SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                         ControlStyles.UserPaint, true);
-                DrawItem += NG_DrawItem;
-                _mice = MouseState.OUT; 
-                MouseEnter += (sender, args) =>
-                {
-                    _mice = MouseState.HOVER;
-                    Invalidate();
-                };
-                MouseLeave += (sender, args) =>
-                {
-                    _mice = MouseState.OUT;
-                    Invalidate();
-                };
-                MouseDown += (sender, args) =>
-                {
-                    if (args.Button == MouseButtons.Left)
-                    {
-                        _mice = MouseState.DOWN;
-                        Invalidate();
-                    }
-                };
-                MouseUp += (sender, args) =>
-                {
-                    _mice = MouseState.OUT;
-
-                    Invalidate();
-                };
+                _mice = MouseState.HOVER;
                 Invalidate();
-            } 
+            };
+            MouseLeave += (sender, args) =>
+            {
+                _mice = MouseState.OUT;
+                Invalidate();
+            };
+            MouseDown += (sender, args) =>
+            {
+                if (args.Button != MouseButtons.Left) return;
+                _mice = MouseState.DOWN;
+                Invalidate();
+            };
+            MouseUp += (sender, args) =>
+            {
+                _mice = MouseState.OUT;
+
+                Invalidate();
+            };
+            Invalidate();
         }
 
         private void NG_DrawItem(object sender, DrawItemEventArgs e)
         {
-            int index = e.Index >= 0 ? e.Index : 0;
+            var index = e.Index >= 0 ? e.Index : 0;
             Brush itemBrush= new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground"));
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
@@ -88,7 +80,7 @@ namespace mRemoteNG.UI.Controls.Base
             {
                 if (Items[index].GetType().GetProperty(DisplayMember) != null)
                 {
-                    e.Graphics.DrawString(Items[index].GetType().GetProperty(DisplayMember).GetValue(Items[index],null).ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                    e.Graphics.DrawString(Items[index].GetType().GetProperty(DisplayMember)?.GetValue(Items[index],null).ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
                 }
             }
             e.DrawFocusRectangle();
@@ -103,11 +95,11 @@ namespace mRemoteNG.UI.Controls.Base
                 return;
             }
             //Colors
-            Color Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Border");
-            Color Back = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
-            Color Fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
-            Color ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Background");
-            Color ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Foreground");
+            var Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Border");
+            var Back = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
+            var Fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
+            var ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Background");
+            var ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Foreground");
 
             if (_mice == MouseState.HOVER)
             {
@@ -126,13 +118,13 @@ namespace mRemoteNG.UI.Controls.Base
             e.Graphics.Clear(Back);
                 
             //Border
-            using (Pen p = new Pen(Border))
+            using (var p = new Pen(Border))
             {
-                Rectangle boxRect = new Rectangle(0, 0, Width - 1, Height - 1);
+                var boxRect = new Rectangle(0, 0, Width - 1, Height - 1);
                 e.Graphics.DrawRectangle(p, boxRect);
             }
             //Button
-            using (SolidBrush b = new SolidBrush(ButtBack))
+            using (var b = new SolidBrush(ButtBack))
             {
                 e.Graphics.FillRectangle(b, Width - 18, 2, 16, Height - 4);
             }
@@ -141,7 +133,7 @@ namespace mRemoteNG.UI.Controls.Base
             e.Graphics.DrawString("q", new Font("Wingdings 3", 8f), new SolidBrush(ButtFore), Width-17, Height/2 -5);
  
             //Text
-            Rectangle textRect = new Rectangle(2, 2, Width - 20, Height - 4);
+            var textRect = new Rectangle(2, 2, Width - 20, Height - 4);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
         }
     }

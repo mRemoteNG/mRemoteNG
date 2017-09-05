@@ -5,7 +5,6 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using System.Threading;
 using System.Globalization;
-using mRemoteNG.Themes;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
