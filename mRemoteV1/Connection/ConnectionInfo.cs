@@ -84,7 +84,7 @@ namespace mRemoteNG.Connection
 
 	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
 	    {
-	        var properties = GetType().BaseType?.GetProperties();
+	        var properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
 	        if (properties == null) return;
 	        foreach (var property in properties)
 	        {

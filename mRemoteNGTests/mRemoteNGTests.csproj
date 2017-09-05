@@ -168,6 +168,7 @@
     <Compile Include="TestHelpers\FileTestHelpers.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />
+    <Compile Include="Tools\MaybeTests.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />

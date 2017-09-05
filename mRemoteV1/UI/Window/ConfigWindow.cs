@@ -287,40 +287,36 @@ namespace mRemoteNG.UI.Window
 		{
 		    // Main form handle command key events
             // Adapted from http://kiwigis.blogspot.com/2009/05/adding-tab-key-support-to-propertygrid.html
-            if ((keyData & Keys.KeyCode) == Keys.Tab)
-			{
-				var selectedItem = _pGrid.SelectedGridItem;
-				var gridRoot = selectedItem;
-				while (gridRoot.GridItemType != GridItemType.Root)
-				{
-					gridRoot = gridRoot.Parent;
-				}
+		    if ((keyData & Keys.KeyCode) != Keys.Tab) return base.ProcessCmdKey(ref msg, keyData);
+		    var selectedItem = _pGrid.SelectedGridItem;
+		    var gridRoot = selectedItem;
+		    while (gridRoot.GridItemType != GridItemType.Root)
+		    {
+		        gridRoot = gridRoot.Parent;
+		    }
 						
-				var gridItems = new List<GridItem>();
-				FindChildGridItems(gridRoot, ref gridItems);
+		    var gridItems = new List<GridItem>();
+		    FindChildGridItems(gridRoot, ref gridItems);
 						
-				if (!ContainsGridItemProperty(gridItems))
-					return true;
+		    if (!ContainsGridItemProperty(gridItems))
+		        return true;
 						
-				var newItem = selectedItem;
+		    var newItem = selectedItem;
 						
-			    // ReSharper disable once SwitchStatementMissingSomeCases
-				switch (keyData)
-				{
-				    case (Keys.Tab | Keys.Shift):
-				        newItem = FindPreviousGridItemProperty(gridItems, selectedItem);
-				        break;
-				    case Keys.Tab:
-				        newItem = FindNextGridItemProperty(gridItems, selectedItem);
-				        break;
-				}
+		    // ReSharper disable once SwitchStatementMissingSomeCases
+		    switch (keyData)
+		    {
+		        case (Keys.Tab | Keys.Shift):
+		            newItem = FindPreviousGridItemProperty(gridItems, selectedItem);
+		            break;
+		        case Keys.Tab:
+		            newItem = FindNextGridItemProperty(gridItems, selectedItem);
+		            break;
+		    }
 						
-				_pGrid.SelectedGridItem = newItem;
+		    _pGrid.SelectedGridItem = newItem;
 						
-				return true; // Handled
-			}
-
-		    return base.ProcessCmdKey(ref msg, keyData);
+		    return true; // Handled
 		}
 		
 		private void FindChildGridItems(GridItem item, ref List<GridItem> gridItems)
@@ -416,8 +412,8 @@ namespace mRemoteNG.UI.Window
 			
 			return !nextIndexValid ? null : gridItems[nextIndex];
 		}
-		
-		public void SetPropertyGridObject(object propertyGridObject)
+
+	    private void SetPropertyGridObject(object propertyGridObject)
 		{
 			try
 			{
@@ -1550,24 +1546,22 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				if (_pGrid.SelectedObject is ConnectionInfo && !(_pGrid.SelectedObject is PuttySessionInfo))
-				{
-                    CMenIcons.Items.Clear();
+			    if (!(_pGrid.SelectedObject is ConnectionInfo) || _pGrid.SelectedObject is PuttySessionInfo) return;
+			    CMenIcons.Items.Clear();
 							
-					foreach (var iStr in ConnectionIcon.Icons)
-					{
-					    var tI = new ToolStripMenuItem
-					    {
-					        Text = iStr,
-					        Image = ConnectionIcon.FromString(iStr).ToBitmap()
-					    };
-					    tI.Click += IconMenu_Click;
+			    foreach (var iStr in ConnectionIcon.Icons)
+			    {
+			        var tI = new ToolStripMenuItem
+			        {
+			            Text = iStr,
+			            Image = ConnectionIcon.FromString(iStr).ToBitmap()
+			        };
+			        tI.Click += IconMenu_Click;
 
-                        CMenIcons.Items.Add(tI);
-					}
-					var mPos = new Point(new Size(PointToScreen(new Point(e.Location.X + _pGrid.Width - 100, e.Location.Y))));
-                    CMenIcons.Show(mPos);
-				}
+			        CMenIcons.Items.Add(tI);
+			    }
+			    var mPos = new Point(new Size(PointToScreen(new Point(e.Location.X + _pGrid.Width - 100, e.Location.Y))));
+			    CMenIcons.Show(mPos);
 			}
 			catch (Exception ex)
 			{

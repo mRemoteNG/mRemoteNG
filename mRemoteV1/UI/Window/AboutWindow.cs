@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Window
 	public class AboutWindow : BaseWindow
 	{
         #region Form Init
+
 		internal Controls.Base.NGLabel lblCopyright;
 		internal Controls.Base.NGLabel lblTitle;
 		internal Controls.Base.NGLabel lblVersion;

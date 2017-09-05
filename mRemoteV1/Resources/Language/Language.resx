@@ -2567,6 +2567,10 @@ mRemoteNG will now quit and begin with the installation.</value>
 
 This page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade.</value>
   </data>
+<data name="CredentialUnavailable" xml:space="preserve">
+    <value>Credential not available</value>
+    <comment>Shown when a credential is not loaded/available for use.</comment>
+  </data>
   <data name="strOptionsThemeDeleteConfirmation" xml:space="preserve">
     <value>Do you really want to delete the theme?</value>
   </data>
@@ -2587,5 +2591,4 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
     <value>No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder</value>
-  </data>
 </root>

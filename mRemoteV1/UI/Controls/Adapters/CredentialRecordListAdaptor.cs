@@ -3,10 +3,8 @@ using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms.Design;
 using mRemoteNG.App;
-using mRemoteNG.Credential;
 
-
-namespace mRemoteNG.UI.Controls
+namespace mRemoteNG.UI.Controls.Adapters
 {
     public class CredentialRecordListAdaptor : UITypeEditor
     {

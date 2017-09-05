@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using mRemoteNG.App.Info;
@@ -16,18 +15,14 @@ namespace mRemoteNG.Config.Connections
     public class XmlConnectionsLoader
     {
         private readonly string _connectionFilePath;
-        private readonly IEnumerable<ICredentialRecord> _credentialRecords;
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
 
-        public XmlConnectionsLoader(string connectionFilePath, IEnumerable<ICredentialRecord> credentialRecords)
+        public XmlConnectionsLoader(string connectionFilePath)
         {
             if (string.IsNullOrEmpty(connectionFilePath))
                 throw new ArgumentException($"{nameof(connectionFilePath)} cannot be null or empty");
-            if (credentialRecords == null)
-                throw new ArgumentNullException(nameof(credentialRecords));
 
             _connectionFilePath = connectionFilePath;
-            _credentialRecords = credentialRecords;
         }
 
         public ConnectionTreeModel Load()
@@ -42,7 +37,7 @@ namespace mRemoteNG.Config.Connections
                 DecoratedDeserializer = new XmlCredentialManagerUpgrader(
                     credServiceFactory.Build(),
                     _credentialFilePath,
-                    new XmlConnectionsDeserializer(_credentialRecords, PromptForPassword)
+                    new XmlConnectionsDeserializer(PromptForPassword)
                 )
             };
             return deserializer.Deserialize(xmlString);

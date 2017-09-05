@@ -2,6 +2,7 @@ using mRemoteNG.Themes;
 using mRemoteNG.UI.Forms;
 using System.Drawing;
 using WeifenLuo.WinFormsUI.Docking;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 
 namespace mRemoteNG.UI.Window
@@ -22,24 +23,18 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Properties
-        public WindowType WindowType
-		{
-			get { return this._WindowType; }
-			set { this._WindowType = value; }
-		}
-		
-        public DockContent DockPnl
-		{
-			get { return this._DockPnl; }
-			set { this._DockPnl = value; }
-		}
+
+        protected WindowType WindowType { get; set; }
+
+        protected DockContent DockPnl { get; set; }
+
         #endregion
 				
         #region Public Methods
-		public void SetFormText(string Text)
+		public void SetFormText(string t)
 		{
-			this.Text = Text;
-			this.TabText = Text;
+			this.Text = t;
+			this.TabText = t;
 		}
         #endregion
 
@@ -58,15 +53,21 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void Base_Load(System.Object sender, System.EventArgs e)
-		{ 
-            FrmMain.Default.ShowHidePanelTabs();
+    
+        #region Private Methods
+/*
+		private void Base_Load(object sender, EventArgs e)
+		{
+			FrmMain.Default.ShowHidePanelTabs();
 		}
+*/
 				
-		private void Base_FormClosed(System.Object sender, System.Windows.Forms.FormClosedEventArgs e)
+/*
+		private void Base_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
 		{
 			FrmMain.Default.ShowHidePanelTabs(this);
 		}
+*/
         #endregion
 	}
 }

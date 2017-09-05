@@ -70,6 +70,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credential not available.
+        /// </summary>
+        internal static string CredentialUnavailable {
+            get {
+                return ResourceManager.GetString("CredentialUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect password.
         /// </summary>
         internal static string IncorrectPassword {

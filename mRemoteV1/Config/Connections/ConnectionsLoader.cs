@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using mRemoteNG.Config.Putty;
-using mRemoteNG.Credential;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 
@@ -13,7 +11,7 @@ namespace mRemoteNG.Config.Connections
 	    public string ConnectionFileName { get; set; }
 		
 
-		public ConnectionTreeModel LoadConnections(IEnumerable<ICredentialRecord> credentialRecords, bool import)
+		public ConnectionTreeModel LoadConnections(bool import)
 		{
 		    ConnectionTreeModel connectionTreeModel;
 
@@ -24,7 +22,7 @@ namespace mRemoteNG.Config.Connections
             }
 			else
 			{
-                var xmlLoader = new XmlConnectionsLoader(ConnectionFileName, credentialRecords);
+                var xmlLoader = new XmlConnectionsLoader(ConnectionFileName);
 			    connectionTreeModel = xmlLoader.Load();
             }
 
