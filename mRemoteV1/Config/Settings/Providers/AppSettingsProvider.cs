@@ -1,241 +1,220 @@
-#if false
+using System.Linq;
 using System;
-using System.Collections.Specialized;
+using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Windows.Forms;
+using System.Collections.Specialized;
 using System.Xml;
+using System.IO;
 
-
-namespace mRemoteNG.Config.Settings.Providers
+namespace crdx.Settings
 {
-	public class AppSettingsProvider : SettingsProvider
-	{
-        const string SETTINGSROOT = "Settings"; //XML Root Node
+    public sealed class PortableSettingsProvider : SettingsProvider, IApplicationSettingsProvider
+    {
+        private const string _rootNodeName = "settings";
+        private const string _localSettingsNodeName = "localSettings";
+        private const string _globalSettingsNodeName = "globalSettings";
+        private const string _className = "PortableSettingsProvider";
+        private XmlDocument _xmlDocument;
 
-		public override void Initialize(string name, NameValueCollection col)
-		{
-            if (Application.ProductName.Trim().Length > 0)
+        private string _filePath
+        {
+            get
             {
-                _applicationName = Application.ProductName;
+                return Path.Combine(Path.GetDirectoryName(Application.ExecutablePath),
+                   string.Format("{0}.settings", ApplicationName));
             }
-            else
-            {
-                _applicationName = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
-            }
-
-            base.Initialize(ApplicationName, col);
-
-            /*
-            if (!File.Exists(GetDotSettingsFile()))
-            {
-                // do something smart.
-            }
-            */
         }
 
-	    private string _applicationName;
+        private XmlNode _localSettingsNode
+        {
+            get
+            {
+                XmlNode settingsNode = GetSettingsNode(_localSettingsNodeName);
+                XmlNode machineNode = settingsNode.SelectSingleNode(Environment.MachineName.ToLowerInvariant());
+
+                if (machineNode == null)
+                {
+                    machineNode = _rootDocument.CreateElement(Environment.MachineName.ToLowerInvariant());
+                    settingsNode.AppendChild(machineNode);
+                }
+
+                return machineNode;
+            }
+        }
+
+        private XmlNode _globalSettingsNode
+        {
+            get { return GetSettingsNode(_globalSettingsNodeName); }
+        }
+
+        private XmlNode _rootNode
+        {
+            get { return _rootDocument.SelectSingleNode(_rootNodeName); }
+        }
+
+        private XmlDocument _rootDocument
+        {
+            get
+            {
+                if (_xmlDocument == null)
+                {
+                    try
+                    {
+                        _xmlDocument = new XmlDocument();
+                        _xmlDocument.Load(_filePath);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    if (_xmlDocument.SelectSingleNode(_rootNodeName) != null)
+                        return _xmlDocument;
+
+                    _xmlDocument = GetBlankXmlDocument();
+                }
+
+                return _xmlDocument;
+            }
+        }
+
         public override string ApplicationName
         {
-            get { return _applicationName; }
+            get { return Path.GetFileNameWithoutExtension(Application.ExecutablePath); }
             set { }
         }
 
-        public virtual string GetDotSettingsFile()
+        public override string Name
         {
-            return Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename());
+            get { return _className; }
         }
 
+        public override void Initialize(string name, NameValueCollection config)
+        {
+            base.Initialize(Name, config);
+        }
 
-        public virtual string GetAppSettingsPath()
-		{
-            //Used to determine where to store the settings
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
-		}
-		
-		public virtual string GetAppSettingsFilename()
-		{
-			//Used to determine the filename to store the settings
-			return Application.ProductName + ".settings";
-		}
-		
-		public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection propvals)
-		{
-			//Iterate through the settings to be stored
-			//Only dirty settings are included in propvals, and only ones relevant to this provider
-			foreach (SettingsPropertyValue propval in propvals)
-			{
-				SetValue(propval);
-			}
-						
-			try
-			{
-				SettingsXml.Save(GetDotSettingsFile());
-			}
-			catch (Exception)
-			{
-				//Ignore if cant save, device been ejected
-			}
-		}
-		
-		public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection props)
-		{
-			//Create new collection of values
-			var values = new SettingsPropertyValueCollection();
-						
-			//Iterate through the settings to be retrieved
-			foreach (SettingsProperty setting in props)
-			{
+        public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection collection)
+        {
+            foreach (SettingsPropertyValue propertyValue in collection)
+                SetValue(propertyValue);
 
-			    var value = new SettingsPropertyValue(setting)
-			    {
-			        IsDirty = false,
-			        SerializedValue = GetValue(setting)
-			    };
-			    values.Add(value);
-			}
-			return values;
-		}
-		
-		private XmlDocument _SettingsXml;
-		
-        private XmlDocument SettingsXml
-		{
-			get
-			{
-				//If we dont hold an xml document, try opening one.
-				//If it doesnt exist then create a new one ready.
-				if (_SettingsXml == null)
-				{
-					_SettingsXml = new XmlDocument();
-								
-					try
-					{
-						_SettingsXml.Load(GetDotSettingsFile());
-					}
-					catch (Exception)
-					{
-						//Create new document
-						var dec = _SettingsXml.CreateXmlDeclaration("1.0", "utf-8", string.Empty);
-						_SettingsXml.AppendChild(dec);
+            try
+            {
+                _rootDocument.Save(_filePath);
+            }
+            catch (Exception)
+            {
+                /* 
+                 * If this is a portable application and the device has been 
+                 * removed then this will fail, so don't do anything. It's 
+                 * probably better for the application to stop saving settings 
+                 * rather than just crashing outright. Probably.
+                 */
+            }
+        }
 
-					    var nodeRoot = _SettingsXml.CreateNode(XmlNodeType.Element, SETTINGSROOT, "");
-						_SettingsXml.AppendChild(nodeRoot);
-					}
-				}
-				return _SettingsXml;
-			}
-		}
-		
-		private string GetValue(SettingsProperty setting)
-		{
-			var ret = string.Empty;
-						
-			try
-			{
-				if (IsRoaming(setting))
-				{
-					ret = SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + setting.Name).InnerText;
-				}
-				else
-				{
-					ret = SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + Environment.MachineName + "/" + setting.Name).InnerText;
-				}
-			}
-			catch (Exception)
-			{
-				ret = setting.DefaultValue?.ToString() ?? "";
-			}
-			return ret;
-		}
-		
-		private void SetValue(SettingsPropertyValue propVal)
-		{
-			System.Xml.XmlElement MachineNode = default(System.Xml.XmlElement);
-			System.Xml.XmlElement SettingNode = default(System.Xml.XmlElement);
-						
-			//Determine if the setting is roaming.
-			//If roaming then the value is stored as an element under the root
-			//Otherwise it is stored under a machine name node
-			try
-			{
-				if (IsRoaming(propVal.Property))
-				{
-					SettingNode = (XmlElement) (SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + propVal.Name));
-				}
-				else
-				{
-					SettingNode = (XmlElement) (SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + (new Microsoft.VisualBasic.Devices.Computer()).Name + "/" + propVal.Name));
-				}
-			}
-			catch (Exception)
-			{
-				SettingNode = null;
-			}
-						
-			//Check to see if the node exists, if so then set its new value
-			if (SettingNode != null)
-			{
-				if (propVal.SerializedValue != null)
-				{
-					SettingNode.InnerText = propVal.SerializedValue.ToString();
-				}
-			}
-			else
-			{
-				if (IsRoaming(propVal.Property))
-				{
-					//Store the value as an element of the Settings Root Node
-					SettingNode = SettingsXml.CreateElement(propVal.Name);
-					if (propVal.SerializedValue != null)
-					{
-						SettingNode.InnerText = propVal.SerializedValue.ToString();
-					}
-					SettingsXml.SelectSingleNode(SETTINGSROOT).AppendChild(SettingNode);
-				}
-				else
-				{
-					//Its machine specific, store as an element of the machine name node,
-					//creating a new machine name node if one doesnt exist.
-					try
-					{
-						MachineNode = (XmlElement) (SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + (new Microsoft.VisualBasic.Devices.Computer()).Name));
-					}
-					catch (Exception)
-					{
-						MachineNode = SettingsXml.CreateElement((new Microsoft.VisualBasic.Devices.Computer()).Name);
-						SettingsXml.SelectSingleNode(SETTINGSROOT).AppendChild(MachineNode);
-					}
-								
-					if (MachineNode == null)
-					{
-						MachineNode = SettingsXml.CreateElement((new Microsoft.VisualBasic.Devices.Computer()).Name);
-						SettingsXml.SelectSingleNode(SETTINGSROOT).AppendChild(MachineNode);
-					}
-								
-					SettingNode = SettingsXml.CreateElement(propVal.Name);
-					if (propVal.SerializedValue != null)
-					{
-						SettingNode.InnerText = propVal.SerializedValue.ToString();
-					}
-					MachineNode.AppendChild(SettingNode);
-				}
-			}
-		}
-		
-		private bool IsRoaming(SettingsProperty prop)
-		{
-			//Determine if the setting is marked as Roaming
-			//For Each d As DictionaryEntry In prop.Attributes
-			//    Dim a As Attribute = DirectCast(d.Value, Attribute)
-			//    If TypeOf a Is System.Configuration.SettingsManageabilityAttribute Then
-			//        Return True
-			//    End If
-			//Next
-			//Return False
-						
-			return true;
-		}
-	}
+        public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection collection)
+        {
+            SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
+
+            foreach (SettingsProperty property in collection)
+            {
+                values.Add(new SettingsPropertyValue(property)
+                {
+                    SerializedValue = GetValue(property)
+                });
+            }
+
+            return values;
+        }
+
+        private void SetValue(SettingsPropertyValue propertyValue)
+        {
+            XmlNode targetNode = IsGlobal(propertyValue.Property)
+               ? _globalSettingsNode
+               : _localSettingsNode;
+
+            XmlNode settingNode = targetNode.SelectSingleNode(string.Format("setting[@name='{0}']", propertyValue.Name));
+
+            if (settingNode != null)
+                settingNode.InnerText = propertyValue.SerializedValue.ToString();
+            else
+            {
+                settingNode = _rootDocument.CreateElement("setting");
+
+                XmlAttribute nameAttribute = _rootDocument.CreateAttribute("name");
+                nameAttribute.Value = propertyValue.Name;
+
+                settingNode.Attributes.Append(nameAttribute);
+                settingNode.InnerText = propertyValue.SerializedValue.ToString();
+
+                targetNode.AppendChild(settingNode);
+            }
+        }
+
+        private string GetValue(SettingsProperty property)
+        {
+            XmlNode targetNode = IsGlobal(property) ? _globalSettingsNode : _localSettingsNode;
+            XmlNode settingNode = targetNode.SelectSingleNode(string.Format("setting[@name='{0}']", property.Name));
+
+            if (settingNode == null)
+                return property.DefaultValue != null ? property.DefaultValue.ToString() : string.Empty;
+
+            return settingNode.InnerText;
+        }
+
+        private bool IsGlobal(SettingsProperty property)
+        {
+            foreach (DictionaryEntry attribute in property.Attributes)
+            {
+                if ((Attribute)attribute.Value is SettingsManageabilityAttribute)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private XmlNode GetSettingsNode(string name)
+        {
+            XmlNode settingsNode = _rootNode.SelectSingleNode(name);
+
+            if (settingsNode == null)
+            {
+                settingsNode = _rootDocument.CreateElement(name);
+                _rootNode.AppendChild(settingsNode);
+            }
+
+            return settingsNode;
+        }
+
+        public XmlDocument GetBlankXmlDocument()
+        {
+            XmlDocument blankXmlDocument = new XmlDocument();
+            blankXmlDocument.AppendChild(blankXmlDocument.CreateXmlDeclaration("1.0", "utf-8", string.Empty));
+            blankXmlDocument.AppendChild(blankXmlDocument.CreateElement(_rootNodeName));
+
+            return blankXmlDocument;
+        }
+
+        public void Reset(SettingsContext context)
+        {
+            _localSettingsNode.RemoveAll();
+            _globalSettingsNode.RemoveAll();
+
+            _xmlDocument.Save(_filePath);
+        }
+
+        public SettingsPropertyValue GetPreviousVersion(SettingsContext context, SettingsProperty property)
+        {
+            // do nothing
+            return new SettingsPropertyValue(property);
+        }
+
+        public void Upgrade(SettingsContext context, SettingsPropertyCollection properties)
+        {
+        }
+    }
 }
-#endif
