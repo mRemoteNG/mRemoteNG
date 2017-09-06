@@ -14,34 +14,46 @@
 | Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75Hotfix8/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75Hotfix8) |
 | Development | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/develop)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/develop/) | - |
 
-
-
 mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
 
-It allows you to store all your remote connections in a simple yet powerful interface.
+## Features
 
-Currently these protocols are supported:
+mRemoteNG is a fork of mRemote: an open source, tabbed, multi-protocol, remote connections manager. mRemoteNG adds bug fixes and new features to mRemote.
 
- * RDP (Remote Desktop)
- * VNC (Virtual Network Computing)
- * ICA (Independent Computing Architecture)
- * SSH (Secure Shell)
- * Telnet (Teletype Network)
- * HTTP/S (Hypertext Transfer Protocol Secure)
- * Rlogin (Remote Login)
- * RAW
+It allows you to view all of your remote connections in a simple yet powerful tabbed interface.
 
-mRemoteNG can be installed on Windows 7 or later.
+mRemoteNG supports the following protocols:
 
-Windows 7 systems require RDP version 8:   
-https://support.microsoft.com/en-us/kb/2592687   
-OR   
-https://support.microsoft.com/en-us/kb/2923545   
+* RDP (Remote Desktop/Terminal Server)
+* VNC (Virtual Network Computing)
+* ICA (Citrix Independent Computing Architecture)
+* SSH (Secure Shell)
+* Telnet (TELecommunication NETwork)
+* HTTP/HTTPS (Hypertext Transfer Protocol)
+* rlogin (Remote Login)
+* Raw Socket Connections
 
-Windows 8+ support RDP version 8+ out of the box.
+For a detailed feature list and general usage support, refer to the [User Manual](https://github.com/mRemoteNG/mRemoteNG/wiki/User-Manual).
 
-RDP versions are backwards compatible, so an mRemoteNG client running on Windows 10 can connect successfully to a Windows 2003 host (for example).
+## Installation
 
+Before installing make sure you have all the required [prerequisites](https://github.com/mRemoteNG/mRemoteNG/wiki/Prerequisites).
 
+mRemoteNG is available as a redistributable msi package, and can be downloaded from the following locations:
+* [GitHub](https://github.com/mRemoteNG/mRemoteNG/releases)
+* [Project Website](https://mremoteng.org/download)
+
+mRemoteNG is supported on Windows 7 or later.
+Windows 7 and Windows Server 2008 installations must ensure the [listed required updates](https://github.com/mRemoteNG/mRemoteNG/wiki/Prerequisites#full-list-of-required-windows-updates-for-windows-7--server-2008-clients) are installed and active.
+
+## Contribute
+
+If you find mRemoteNG useful and would like to contribute, it would be greatly appreciated. When you contribute, you make it possible for the team to cover the costs of producing mRemoteNG.
+
+### Submit Code
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/Development) on how to configure your development environment and submit a pull request.
+
+### Translate
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polygot
 
 [![Developed with ReSharper](https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png)](https://www.jetbrains.com/resharper/)
