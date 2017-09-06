@@ -1,6 +1,8 @@
-﻿namespace mRemoteNG.UI.Forms.CredentialManagerPages
+﻿using mRemoteNG.Themes;
+
+namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    partial class CredentialListPage
+    sealed partial class CredentialListPage
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,9 +30,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonRemove = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonAdd = new Controls.Base.NGButton();
+            this.buttonRemove = new Controls.Base.NGButton();
+            this.buttonEdit = new Controls.Base.NGButton();
             this.credentialRecordListView = new mRemoteNG.UI.Controls.CredentialRecordListView();
             this.SuspendLayout();
             // 
@@ -98,9 +100,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonRemove;
-        private System.Windows.Forms.Button buttonEdit;
+       private Controls.Base.NGButton buttonAdd;
+       private Controls.Base.NGButton buttonRemove;
+       private Controls.Base.NGButton buttonEdit;
         private Controls.CredentialRecordListView credentialRecordListView;
     }
 }

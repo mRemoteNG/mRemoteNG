@@ -5,6 +5,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public TabsPanelsPage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         public override string PageName

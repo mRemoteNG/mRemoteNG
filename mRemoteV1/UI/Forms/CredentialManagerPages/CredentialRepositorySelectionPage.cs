@@ -5,7 +5,7 @@ using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialRepositorySelectionPage : SequencedControl
+    public sealed partial class CredentialRepositorySelectionPage : SequencedControl
     {
         public CredentialRepositorySelectionPage(ICredentialRepositoryList credentialRepositoryList)
         {
@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
                 throw new ArgumentNullException(nameof(credentialRepositoryList));
 
             InitializeComponent();
+            ApplyTheme();
             Dock = DockStyle.Fill;
             credentialRepositoryListView.RepositoryFilter = repository => repository.IsLoaded;
             credentialRepositoryListView.CredentialRepositoryList = credentialRepositoryList;

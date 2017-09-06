@@ -5,7 +5,6 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using System.Threading;
 using System.Globalization;
-using mRemoteNG.Themes;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
@@ -51,9 +50,7 @@ namespace mRemoteNG.Config.Settings
 			{
                 EnsureSettingsAreSavedInNewestVersion();
 
-                SetSupportedCulture();
-
-                SetTheme();
+                SetSupportedCulture(); 
                 SetApplicationWindowPositionAndSize();
                 SetKioskMode();
 
@@ -80,10 +77,7 @@ namespace mRemoteNG.Config.Settings
                 FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
-        private static void SetTheme()
-        {
-            ThemeManager.LoadTheme(mRemoteNG.Settings.Default.ThemeName);
-        }
+ 
 
         private void SetSupportedCulture()
         {

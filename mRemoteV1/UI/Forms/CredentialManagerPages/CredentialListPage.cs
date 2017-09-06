@@ -10,7 +10,7 @@ using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialListPage : SequencedControl, ICredentialManagerPage
+    public sealed partial class CredentialListPage : SequencedControl, ICredentialManagerPage
     {
         private readonly ICredentialRepositoryList _credentialRepositoryList;
 
@@ -25,6 +25,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
             _credentialRepositoryList = credentialRepositoryList;
             InitializeComponent();
+            ApplyTheme();
             ApplyLanguage();
             credentialRecordListView.CellClick += HandleCellDoubleClick;
             credentialRecordListView.SelectionChanged += ObjectListView1OnSelectionChanged;
@@ -33,6 +34,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             credentialRecordListView.KeyDown += OnDeletePressed;
             credentialRecordListView.CredentialRepositoryList = _credentialRepositoryList;
         }
+
+       
 
         private void ApplyLanguage()
         {

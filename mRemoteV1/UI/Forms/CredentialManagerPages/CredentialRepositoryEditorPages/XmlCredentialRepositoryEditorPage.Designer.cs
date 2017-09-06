@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
+﻿using mRemoteNG.Themes;
+
+namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
 {
     partial class XmlCredentialRepositoryEditorPage
     {
@@ -28,18 +30,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelPageTitle = new System.Windows.Forms.Label();
-            this.buttonBrowseFiles = new System.Windows.Forms.Button();
-            this.labelFilePath = new System.Windows.Forms.Label();
-            this.textBoxFilePath = new System.Windows.Forms.TextBox();
+            this.labelPageTitle = new Controls.Base.NGLabel();
+            this.buttonBrowseFiles = new Controls.Base.NGButton();
+            this.labelFilePath = new Controls.Base.NGLabel();
+            this.textBoxFilePath = new Controls.Base.NGTextBox();
             this.selectFilePathDialog = new System.Windows.Forms.SaveFileDialog();
-            this.buttonConfirm = new System.Windows.Forms.Button();
-            this.textBoxId = new System.Windows.Forms.TextBox();
-            this.labelId = new System.Windows.Forms.Label();
-            this.buttonBack = new System.Windows.Forms.Button();
+            this.buttonConfirm = new Controls.Base.NGButton();
+            this.textBoxId = new Controls.Base.NGTextBox();
+            this.labelId = new Controls.Base.NGLabel();
+            this.buttonBack = new Controls.Base.NGButton();
             this.newPasswordBoxes = new mRemoteNG.UI.Controls.NewPasswordWithVerification();
-            this.textBoxTitle = new System.Windows.Forms.TextBox();
-            this.labelTitle = new System.Windows.Forms.Label();
+            this.textBoxTitle = new Controls.Base.NGTextBox();
+            this.labelTitle = new Controls.Base.NGLabel();
             this.SuspendLayout();
             // 
             // labelPageTitle
@@ -180,17 +182,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelPageTitle;
-        private System.Windows.Forms.Button buttonBrowseFiles;
-        private System.Windows.Forms.Label labelFilePath;
-        private System.Windows.Forms.TextBox textBoxFilePath;
+        private Controls.Base.NGLabel labelPageTitle;
+        private Controls.Base.NGButton buttonBrowseFiles;
+        private Controls.Base.NGLabel labelFilePath;
+        private Controls.Base.NGTextBox textBoxFilePath;
         private System.Windows.Forms.SaveFileDialog selectFilePathDialog;
-        private System.Windows.Forms.Button buttonConfirm;
-        private System.Windows.Forms.TextBox textBoxId;
-        private System.Windows.Forms.Label labelId;
-        private System.Windows.Forms.Button buttonBack;
+        private Controls.Base.NGButton buttonConfirm;
+        private Controls.Base.NGTextBox textBoxId;
+        private Controls.Base.NGLabel labelId;
+        private Controls.Base.NGButton buttonBack;
         private Controls.NewPasswordWithVerification newPasswordBoxes;
-        private System.Windows.Forms.TextBox textBoxTitle;
-        private System.Windows.Forms.Label labelTitle;
+        private Controls.Base.NGTextBox textBoxTitle;
+        private Controls.Base.NGLabel labelTitle;
     }
 }

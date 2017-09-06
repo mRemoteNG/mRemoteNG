@@ -5,7 +5,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using System.IO;
 using mRemoteNG.UI.Forms;
-
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
@@ -22,9 +22,12 @@ namespace mRemoteNG.UI.Window
 	    private ToolStripMenuItem cMenScreenshotSave;
 		internal SaveFileDialog dlgSaveSingleImage;
 		internal FolderBrowserDialog dlgSaveAllImages;
-	    private FlowLayoutPanel flpScreenshots;
-				
-		private void InitializeComponent()
+
+		internal FlowLayoutPanel flpScreenshots;
+        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
+        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
+
+        private void InitializeComponent()
 		{
 			components = new System.ComponentModel.Container();
 			Load += new EventHandler(ScreenshotManager_Load);
@@ -141,10 +144,22 @@ namespace mRemoteNG.UI.Window
         #region Form Stuff
 		private void ScreenshotManager_Load(object sender, EventArgs e)
 		{
-			ApplyLanguage();
+            ApplyTheme();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyLanguage();
 		}
-				
-		private void ApplyLanguage()
+
+        private new void ApplyTheme()
+        {
+            if (ThemeManager.getInstance().ThemingActive)
+            {
+                base.ApplyTheme(); 
+                this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+                vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
+                vsToolStripExtender.SetStyle(cMenScreenshot, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+            }
+        }
+        private void ApplyLanguage()
 		{
 			mMenFile.Text = Language.strMenuFile;
 			mMenFileSaveAll.Text = Language.strSaveAll;

@@ -7,6 +7,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public StartupExitPage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         public override string PageName

@@ -1,8 +1,9 @@
 ﻿using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    partial class CredentialRepositoriesPage
+    sealed partial class CredentialRepositoriesPage
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,11 +32,11 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void InitializeComponent()
         {
             CredentialRepositoryList credentialRepositoryList1 = new CredentialRepositoryList();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonRemove = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonAdd = new Controls.Base.NGButton();
+            this.buttonRemove = new Controls.Base.NGButton();
+            this.buttonEdit = new Controls.Base.NGButton();
             this.credentialRepositoryListView = new mRemoteNG.UI.Controls.CredentialRepositoryListView();
-            this.buttonToggleLoad = new System.Windows.Forms.Button();
+            this.buttonToggleLoad = new Controls.Base.NGButton();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -121,10 +122,10 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         #endregion
 
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonRemove;
-        private System.Windows.Forms.Button buttonEdit;
+       private Controls.Base.NGButton buttonAdd;
+       private Controls.Base.NGButton buttonRemove;
+       private Controls.Base.NGButton buttonEdit;
         private Controls.CredentialRepositoryListView credentialRepositoryListView;
-        private System.Windows.Forms.Button buttonToggleLoad;
+       private Controls.Base.NGButton buttonToggleLoad;
     }
 }

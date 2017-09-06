@@ -4,10 +4,10 @@ namespace mRemoteNG.UI.Window
 	public partial class ErrorAndInfoWindow
 	{
 		internal System.Windows.Forms.PictureBox pbError;
-		internal System.Windows.Forms.Label lblMsgDate;
+		internal Controls.Base.NGLabel lblMsgDate;
 		internal System.Windows.Forms.ListView lvErrorCollector;
 		internal System.Windows.Forms.ColumnHeader clmMessage;
-		internal System.Windows.Forms.TextBox txtMsgText;
+		internal Controls.Base.NGTextBox txtMsgText;
 		internal System.Windows.Forms.ImageList imgListMC;
 		private System.ComponentModel.Container components = null;
 		internal System.Windows.Forms.ContextMenuStrip cMenMC;
@@ -21,9 +21,9 @@ namespace mRemoteNG.UI.Window
 			this.Load += new System.EventHandler(ErrorsAndInfos_Load);
 			this.Resize += new System.EventHandler(ErrorsAndInfos_Resize);
 			this.pnlErrorMsg = new System.Windows.Forms.Panel();
-			this.txtMsgText = new System.Windows.Forms.TextBox();
+			this.txtMsgText = new Controls.Base.NGTextBox();
 			this.txtMsgText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MC_KeyDown);
-			this.lblMsgDate = new System.Windows.Forms.Label();
+			this.lblMsgDate = new Controls.Base.NGLabel();
 			this.pbError = new System.Windows.Forms.PictureBox();
 			this.lvErrorCollector = new System.Windows.Forms.ListView();
 			this.lvErrorCollector.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MC_KeyDown);

@@ -1,6 +1,8 @@
-﻿namespace mRemoteNG.UI.Forms.CredentialManagerPages
+﻿using mRemoteNG.Themes;
+
+namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    partial class CredentialEditorPage
+    sealed partial class CredentialEditorPage
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,20 +30,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelId = new System.Windows.Forms.Label();
-            this.textBoxId = new System.Windows.Forms.TextBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonAccept = new System.Windows.Forms.Button();
-            this.labelPassword = new System.Windows.Forms.Label();
+            this.labelId = new Controls.Base.NGLabel();
+            this.textBoxId = new Controls.Base.NGTextBox();
+            this.buttonCancel = new Controls.Base.NGButton();
+            this.buttonAccept = new Controls.Base.NGButton();
+            this.labelPassword = new Controls.Base.NGLabel();
             this.textBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
-            this.labelDomain = new System.Windows.Forms.Label();
-            this.textBoxDomain = new System.Windows.Forms.TextBox();
-            this.labelUsername = new System.Windows.Forms.Label();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.textBoxTitle = new System.Windows.Forms.TextBox();
-            this.labelRepositoryName = new System.Windows.Forms.Label();
-            this.textBoxRepositoryName = new System.Windows.Forms.TextBox();
+            this.labelDomain = new Controls.Base.NGLabel();
+            this.textBoxDomain = new Controls.Base.NGTextBox();
+            this.labelUsername = new Controls.Base.NGLabel();
+            this.textBoxUsername = new Controls.Base.NGTextBox();
+            this.labelTitle = new Controls.Base.NGLabel();
+            this.textBoxTitle = new Controls.Base.NGTextBox();
+            this.labelRepositoryName = new Controls.Base.NGLabel();
+            this.textBoxRepositoryName = new Controls.Base.NGTextBox();
             this.SuspendLayout();
             // 
             // labelId
@@ -206,19 +208,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelId;
-        private System.Windows.Forms.TextBox textBoxId;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonAccept;
-        private System.Windows.Forms.Label labelPassword;
+        private Controls.Base.NGLabel labelId;
+        private Controls.Base.NGTextBox textBoxId;
+        private Controls.Base.NGButton buttonCancel;
+        private Controls.Base.NGButton buttonAccept;
+        private Controls.Base.NGLabel labelPassword;
         private Controls.SecureTextBox textBoxPassword;
-        private System.Windows.Forms.Label labelDomain;
-        private System.Windows.Forms.TextBox textBoxDomain;
-        private System.Windows.Forms.Label labelUsername;
-        private System.Windows.Forms.TextBox textBoxUsername;
-        private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.TextBox textBoxTitle;
-        private System.Windows.Forms.Label labelRepositoryName;
-        private System.Windows.Forms.TextBox textBoxRepositoryName;
+        private Controls.Base.NGLabel labelDomain;
+        private Controls.Base.NGTextBox textBoxDomain;
+        private Controls.Base.NGLabel labelUsername;
+        private Controls.Base.NGTextBox textBoxUsername;
+        private Controls.Base.NGLabel labelTitle;
+        private Controls.Base.NGTextBox textBoxTitle;
+        private Controls.Base.NGLabel labelRepositoryName;
+        private Controls.Base.NGTextBox textBoxRepositoryName;
     }
 }

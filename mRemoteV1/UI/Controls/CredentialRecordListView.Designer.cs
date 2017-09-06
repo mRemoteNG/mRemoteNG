@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
+            this.objectListView1 = new Base.NGListView();
             this.olvColumnCredentialId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -116,7 +116,7 @@
 
         #endregion
 
-        private BrightIdeasSoftware.ObjectListView objectListView1;
+        private Base.NGListView objectListView1;
         private BrightIdeasSoftware.OLVColumn olvColumnCredentialId;
         private BrightIdeasSoftware.OLVColumn olvColumnTitle;
         private BrightIdeasSoftware.OLVColumn olvColumnUsername;

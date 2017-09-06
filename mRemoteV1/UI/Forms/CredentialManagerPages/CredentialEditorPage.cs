@@ -6,7 +6,7 @@ using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialEditorPage : SequencedControl
+    public sealed partial class CredentialEditorPage : SequencedControl
     {
         private readonly ICredentialRecord _credentialRecord;
         private readonly ICredentialRepository _credentialRepository;
@@ -19,6 +19,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
                 throw new ArgumentNullException(nameof(credentialRepository));
 
             InitializeComponent();
+            ApplyTheme();
             ApplyLanguage();
             _credentialRecord = credentialRecord;
             _credentialRepository = credentialRepository;

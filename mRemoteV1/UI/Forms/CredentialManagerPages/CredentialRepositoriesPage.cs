@@ -10,7 +10,7 @@ using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelectors;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    public partial class CredentialRepositoriesPage : SequencedControl, ICredentialManagerPage
+    public sealed partial class CredentialRepositoriesPage : SequencedControl, ICredentialManagerPage
     {
         private readonly ICredentialRepositoryList _providerCatalog;
         private readonly UnlockerFormFactory _unlockerFactory;
@@ -28,10 +28,13 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             _providerCatalog = providerCatalog;
             _unlockerFactory = unlockerFactory;
             InitializeComponent();
+            ApplyTheme();
             credentialRepositoryListView.CredentialRepositoryList = providerCatalog;
             credentialRepositoryListView.SelectionChanged += (sender, args) => UpdateUi();
             credentialRepositoryListView.DoubleClickHandler = EditRepository;
         }
+
+
 
         private void UpdateUi()
         {

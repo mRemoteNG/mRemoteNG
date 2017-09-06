@@ -31,18 +31,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlServerPage));
-			this.lblSQLDatabaseName = new System.Windows.Forms.Label();
-			this.txtSQLDatabaseName = new System.Windows.Forms.TextBox();
-			this.lblExperimental = new System.Windows.Forms.Label();
-			this.chkUseSQLServer = new System.Windows.Forms.CheckBox();
+			this.lblSQLDatabaseName = new Controls.Base.NGLabel();
+			this.txtSQLDatabaseName = new Controls.Base.NGTextBox();
+			this.lblExperimental = new Controls.Base.NGLabel();
+			this.chkUseSQLServer = new Controls.Base.NGCheckBox();
 			this.chkUseSQLServer.CheckedChanged += new System.EventHandler(this.chkUseSQLServer_CheckedChanged);
-			this.lblSQLUsername = new System.Windows.Forms.Label();
-			this.txtSQLPassword = new System.Windows.Forms.TextBox();
-			this.lblSQLInfo = new System.Windows.Forms.Label();
-			this.lblSQLServer = new System.Windows.Forms.Label();
-			this.txtSQLUsername = new System.Windows.Forms.TextBox();
-			this.txtSQLServer = new System.Windows.Forms.TextBox();
-			this.lblSQLPassword = new System.Windows.Forms.Label();
+			this.lblSQLUsername = new Controls.Base.NGLabel();
+			this.txtSQLPassword = new Controls.Base.NGTextBox();
+			this.lblSQLInfo = new Controls.Base.NGLabel();
+			this.lblSQLServer = new Controls.Base.NGLabel();
+			this.txtSQLUsername = new Controls.Base.NGTextBox();
+			this.txtSQLServer = new Controls.Base.NGTextBox();
+			this.lblSQLPassword = new Controls.Base.NGLabel();
 			this.SuspendLayout();
 			//
 			//lblSQLDatabaseName
@@ -182,17 +182,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.PerformLayout();
 				
 		}
-		internal System.Windows.Forms.Label lblSQLDatabaseName;
-		internal System.Windows.Forms.TextBox txtSQLDatabaseName;
-		internal System.Windows.Forms.Label lblExperimental;
-		internal System.Windows.Forms.CheckBox chkUseSQLServer;
-		internal System.Windows.Forms.Label lblSQLUsername;
-		internal System.Windows.Forms.TextBox txtSQLPassword;
-		internal System.Windows.Forms.Label lblSQLInfo;
-		internal System.Windows.Forms.Label lblSQLServer;
-		internal System.Windows.Forms.TextBox txtSQLUsername;
-		internal System.Windows.Forms.TextBox txtSQLServer;
-		internal System.Windows.Forms.Label lblSQLPassword;
+		internal Controls.Base.NGLabel lblSQLDatabaseName;
+		internal Controls.Base.NGTextBox txtSQLDatabaseName;
+		internal Controls.Base.NGLabel lblExperimental;
+		internal Controls.Base.NGCheckBox chkUseSQLServer;
+		internal Controls.Base.NGLabel lblSQLUsername;
+		internal Controls.Base.NGTextBox txtSQLPassword;
+		internal Controls.Base.NGLabel lblSQLInfo;
+		internal Controls.Base.NGLabel lblSQLServer;
+		internal Controls.Base.NGTextBox txtSQLUsername;
+		internal Controls.Base.NGTextBox txtSQLServer;
+		internal Controls.Base.NGLabel lblSQLPassword;
 			
 	}
 }

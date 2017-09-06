@@ -95,13 +95,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\VncSharp.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>..\packages\DockPanelSuite.2.10.0\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\packages\DockPanelSuite.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>..\packages\DockPanelSuite.ThemeVS2012Light.2.10.0\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2003, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2003.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2003.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2012, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2012.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2012.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2013.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2013.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2015.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -240,11 +248,21 @@
     <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
     <Compile Include="Credential\CredentialServiceFacade.cs" />
+    <Compile Include="Resources\Themes\ColorMapTheme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ColorMapTheme.resx</DependentUpon>
+    </Compile>
     <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
     <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
     <Compile Include="Security\ICryptoProviderFactory.cs" />
     <Compile Include="Security\IKeyProvider.cs" />
     <Compile Include="Security\RandomGenerator.cs" />
+    <Compile Include="Themes\ExtendedColorPalette.cs" />
+    <Compile Include="Themes\MremoteNGPaletteManipulator.cs" />
+    <Compile Include="Themes\MremoteNGThemeBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
     <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
     <Compile Include="Credential\Repositories\CredentialRepositoryChangedArgs.cs" />
@@ -296,6 +314,7 @@
     <Compile Include="Security\Factories\CryptoProviderFactoryFromXml.cs" />
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
+    <Compile Include="Tools\DesignModeTest.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
@@ -325,6 +344,36 @@
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandler.cs" />
+    <Compile Include="UI\Controls\Base\NGButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -750,6 +799,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx" />
     <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
+    <EmbeddedResource Include="Resources\Themes\ColorMapTheme.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRecordListView.resx">
       <DependentUpon>CredentialRecordListView.cs</DependentUpon>
     </EmbeddedResource>
@@ -971,6 +1025,18 @@
     <None Include="app.config" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
+    <None Include="Resources\Themes\darcula.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015blue.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015dark.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015light.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1197,7 +1263,6 @@
     <None Include="Resources\Images\xml.png" />
     <None Include="Resources\Images\keepass_32x32.png" />
     <None Include="Resources\Images\FamFamFam\arrow_left.png" />
-    <None Include="Resources\Images\ConnectedOverlay.png" />
     <Content Include="Resources\Images\FamFamFam\Config.png" />
     <Content Include="Resources\Images\FamFamFam\database.png" />
     <None Include="Resources\Images\FamFamFam\key.png" />
@@ -1604,7 +1669,7 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug Portable\</OutputPath>
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
-    <NoWarn>1591,660,661</NoWarn>
+    <NoWarn>1591,660,661,618</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>

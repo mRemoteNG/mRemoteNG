@@ -1,3 +1,4 @@
+using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
@@ -7,10 +8,9 @@ namespace mRemoteNG.UI.Window
 	public class BaseWindow : DockContent
     {
         #region Private Variables
-
-        #endregion
-
-        #region Constructors
+        //private WindowType _WindowType;
+        //private DockContent _DockPnl;
+        private ThemeManager _themeManager;
         #endregion
 
         #region Public Properties
@@ -24,11 +24,21 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		public void SetFormText(string t)
 		{
-			this.Text = t;
-			this.TabText = t;
+			Text = t;
+			TabText = t;
 		}
         #endregion
-				
+
+        internal new void ApplyTheme()
+        {
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive) return;
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+        }
+
+    
         #region Private Methods
 /*
 		private void Base_Load(object sender, EventArgs e)

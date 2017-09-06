@@ -1,8 +1,9 @@
 ﻿using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
-    partial class CredentialRepositorySelectionPage
+    sealed partial class CredentialRepositorySelectionPage
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,8 +33,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             CredentialRepositoryList credentialRepositoryList1 = new CredentialRepositoryList();
             this.credentialRepositoryListView = new mRemoteNG.UI.Controls.CredentialRepositoryListView();
-            this.buttonContinue = new System.Windows.Forms.Button();
-            this.buttonBack = new System.Windows.Forms.Button();
+            this.buttonContinue = new Controls.Base.NGButton();
+            this.buttonBack = new Controls.Base.NGButton();
             this.SuspendLayout();
             // 
             // credentialRepositoryListView
@@ -86,7 +87,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         #endregion
 
         private Controls.CredentialRepositoryListView credentialRepositoryListView;
-        private System.Windows.Forms.Button buttonContinue;
-        private System.Windows.Forms.Button buttonBack;
+       private Controls.Base.NGButton buttonContinue;
+       private Controls.Base.NGButton buttonBack;
     }
 }

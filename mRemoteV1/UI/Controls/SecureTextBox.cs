@@ -1,11 +1,10 @@
 ﻿using System.Security;
-using System.Windows.Forms;
 using mRemoteNG.Security;
-
+using mRemoteNG.UI.Controls.Base;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class SecureTextBox : TextBox
+    public partial class SecureTextBox : NGTextBox
     {
         public SecureString SecString { get; private set; } = new SecureString();
 
@@ -19,5 +18,7 @@ namespace mRemoteNG.UI.Controls
         {
             SecString = Text.ConvertToSecureString();
         }
+
+    
     }
 }
