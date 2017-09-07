@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteV1", "mRemoteV1\mRemoteV1.csproj", "{4934A491-40BC-4E5B-9166-EA1169A220F6}"
 EndProject
@@ -65,5 +65,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04} = {4FE795BE-646E-4F1B-BAD0-A68EA26394DD}
 		{F0168B9F-6815-40DF-BA53-46CEE7683B68} = {4FE795BE-646E-4F1B-BAD0-A68EA26394DD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75D761A1-0B65-4EC4-AA1A-3502F6C37596}
 	EndGlobalSection
 EndGlobal

@@ -27,6 +27,9 @@
     <SignManifests>false</SignManifests>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -42,9 +45,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -82,6 +82,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
@@ -161,8 +162,8 @@
     <Compile Include="Config\Serializers\XmlRootNodeSerializer.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
-    <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
     <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
+    <Compile Include="Config\Settings\Settings.cs" />
     <Compile Include="Config\Settings\SettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\PortableSettingsProvider.cs" />
     <Compile Include="Config\Settings\SettingsSaver.cs" />
@@ -1249,18 +1250,18 @@
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
-:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
-
-powershell -noprofile -command "sleep 2"
-set /p buildenv=&lt;buildenv.tmp
-set solutionDir=$(SolutionDir)\
-set targetDir=%25cd%25
-set psScriptsDir=$(SolutionDir)Tools
-set certPath=$(CertPath)
-set certPassword=$(CertPassword)
-
-:: Call the post build powershell script
-powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremotev1.ps1" -SolutionDir "%25solutionDir%25" -TargetDir "%25targetDir%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "%25certPath%25" -CertificatePassword "%25certPassword%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
+ -:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
+ -
+ -powershell -noprofile -command "sleep 2"
+ -set /p buildenv=&amp;lt;buildenv.tmp
+ -set solutionDir=$(SolutionDir)\
+ -set targetDir=%2525cd%2525
+ -set psScriptsDir=$(SolutionDir)Tools
+ -set certPath=$(CertPath)
+ -set certPassword=$(CertPassword)
+ -
+ -:: Call the post build powershell script
+ -powershell.exe -ExecutionPolicy Bypass -File "%2525psScriptsDir%2525\postbuild_mremotev1.ps1" -SolutionDir "%2525solutionDir%2525" -TargetDir "%2525targetDir%2525" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%2525buildenv%2525" -CertificatePath "%2525certPath%2525" -CertificatePassword "%2525certPassword%2525" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -1284,6 +1285,7 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <WarningLevel>1</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
     <DebugSymbols>false</DebugSymbols>
