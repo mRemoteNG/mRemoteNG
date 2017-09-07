@@ -162,7 +162,6 @@
     <Compile Include="Config\Serializers\XmlRootNodeSerializer.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
-    <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
     <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
     <Compile Include="Config\Settings\Settings.cs" />
     <Compile Include="Config\Settings\SettingsLoader.cs" />
@@ -1250,8 +1249,19 @@
     <Reference Include="mscorlib" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
+ -:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
+ -
+ -powershell -noprofile -command "sleep 2"
+ -set /p buildenv=&amp;lt;buildenv.tmp
+ -set solutionDir=$(SolutionDir)\
+ -set targetDir=%2525cd%2525
+ -set psScriptsDir=$(SolutionDir)Tools
+ -set certPath=$(CertPath)
+ -set certPassword=$(CertPassword)
+ -
+ -:: Call the post build powershell script
+ -powershell.exe -ExecutionPolicy Bypass -File "%2525psScriptsDir%2525\postbuild_mremotev1.ps1" -SolutionDir "%2525solutionDir%2525" -TargetDir "%2525targetDir%2525" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%2525buildenv%2525" -CertificatePath "%2525certPath%2525" -CertificatePassword "%2525certPassword%2525" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
