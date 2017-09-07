@@ -74,7 +74,7 @@ namespace mRemoteNG.UI.Controls.Base
             else
                 e.Graphics.FillRectangle(new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")), e.Bounds);
 
-            if(DisplayMember == null)
+            if(DisplayMember == null || DisplayMember == "")
                 e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
             else
             {

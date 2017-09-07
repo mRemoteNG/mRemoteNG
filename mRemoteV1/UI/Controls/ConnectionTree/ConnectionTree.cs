@@ -325,7 +325,11 @@ namespace mRemoteNG.UI.Controls
         private void ResizeColumns()
         {
             foreach (OLVColumn column in Columns)
-                column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            {
+                column.FreeSpaceProportion = 95;
+                column.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            }
+              
         }
         #endregion
     }
