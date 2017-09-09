@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Controls
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-        private bool _allowEdit = false;
+        private bool _allowEdit;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -205,11 +205,11 @@ namespace mRemoteNG.UI.Controls
         private void AddNode(ConnectionInfo newNode)
         {
             // use root node if no node is selected
-            ConnectionInfo parentNode = (SelectedNode == null) ? Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo) : SelectedNode;
+            ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
             DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
             var selectedContainer = parentNode as ContainerInfo;
-            var parent = selectedContainer ?? parentNode?.Parent;
+            var parent = selectedContainer ?? parentNode.Parent;
             newNode.SetParent(parent);
             Expand(parent);
             SelectObject(newNode, true);
@@ -231,18 +231,16 @@ namespace mRemoteNG.UI.Controls
             Runtime.SaveConnectionsAsync();
         }
 
-        public void HandleCheckForValidEdit(object sender, System.Windows.Forms.LabelEditEventArgs e)
+        public void HandleCheckForValidEdit(object sender, LabelEditEventArgs e)
         {
-            if (sender is ConnectionTree)
+            if (!(sender is ConnectionTree)) return;
+            if (_allowEdit)
             {
-                if (_allowEdit)
-                {
-                    _allowEdit = false;
-                }
-                else
-                {
-                    e.CancelEdit = true;
-                }
+                _allowEdit = false;
+            }
+            else
+            {
+                e.CancelEdit = true;
             }
         }
 
