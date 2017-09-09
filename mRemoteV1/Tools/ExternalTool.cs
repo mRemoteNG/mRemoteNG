@@ -17,6 +17,7 @@ namespace mRemoteNG.Tools
 		public string FileName { get; set; }
 		public bool WaitForExit { get; set; }
 		public string Arguments { get; set; }
+        public string WorkingDir { get; set; }
 		public bool TryIntegrate { get; set; }
         public ConnectionInfo ConnectionInfo { get; set; }
 		
@@ -26,11 +27,12 @@ namespace mRemoteNG.Tools
 
 	    #endregion
 		
-		public ExternalTool(string displayName = "", string fileName = "", string arguments = "")
+		public ExternalTool(string displayName = "", string fileName = "", string arguments = "", string workingDir = "")
 		{
 			DisplayName = displayName;
 			FileName = fileName;
 			Arguments = arguments;
+            WorkingDir = workingDir;
 		}
 
         public void Start(ConnectionInfo startConnectionInfo = null)
@@ -74,6 +76,7 @@ namespace mRemoteNG.Tools
             process.StartInfo.UseShellExecute = true;
             process.StartInfo.FileName = argParser.ParseArguments(FileName);
             process.StartInfo.Arguments = argParser.ParseArguments(Arguments);
+            if (WorkingDir != "") process.StartInfo.WorkingDirectory = argParser.ParseArguments(WorkingDir);
         }
 
         private void StartIntegrated()
