@@ -3,7 +3,7 @@ param (
     $Path
 )
 
-$valid_microsoft_cert_thumbprints = @("3BDA323E552DB1FDE5F4FBEE75D6D5B2B187EEDC", "108E2BA23632620C427C570B6D9DB51AC31387FE")
+$valid_microsoft_cert_thumbprints = @("3BDA323E552DB1FDE5F4FBEE75D6D5B2B187EEDC", "108E2BA23632620C427C570B6D9DB51AC31387FE", "98ED99A67886D020C564923B7DF25E9AC019DF26")
 $exe_signature = Get-AuthenticodeSignature -FilePath $Path
 $baseErrorMsg = "Could not validate the certificate of $Path. "
 
