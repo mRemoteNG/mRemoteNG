@@ -44,6 +44,7 @@ namespace mRemoteNG.UI.Window
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LaunchToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.BrowseWorkingDir = new System.Windows.Forms.Button();
             this.WorkingDirLabel = new System.Windows.Forms.Label();
             this.WorkingDirTextBox = new System.Windows.Forms.TextBox();
             this.TryToIntegrateCheckBox = new System.Windows.Forms.CheckBox();
@@ -173,6 +174,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.PropertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PropertiesGroupBox.Controls.Add(this.BrowseWorkingDir);
             this.PropertiesGroupBox.Controls.Add(this.WorkingDirLabel);
             this.PropertiesGroupBox.Controls.Add(this.WorkingDirTextBox);
             this.PropertiesGroupBox.Controls.Add(this.TryToIntegrateCheckBox);
@@ -193,6 +195,17 @@ namespace mRemoteNG.UI.Window
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "External Tool Properties";
             // 
+            // BrowseWorkingDir
+            // 
+            this.BrowseWorkingDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BrowseWorkingDir.Location = new System.Drawing.Point(574, 103);
+            this.BrowseWorkingDir.Name = "BrowseWorkingDir";
+            this.BrowseWorkingDir.Size = new System.Drawing.Size(95, 23);
+            this.BrowseWorkingDir.TabIndex = 12;
+            this.BrowseWorkingDir.Text = "Browse...";
+            this.BrowseWorkingDir.UseVisualStyleBackColor = true;
+            this.BrowseWorkingDir.Click += new System.EventHandler(this.BrowseWorkingDir_Click);
+            // 
             // WorkingDirLabel
             // 
             this.WorkingDirLabel.AutoSize = true;
@@ -209,7 +222,7 @@ namespace mRemoteNG.UI.Window
             | System.Windows.Forms.AnchorStyles.Right)));
             this.WorkingDirTextBox.Location = new System.Drawing.Point(126, 104);
             this.WorkingDirTextBox.Name = "WorkingDirTextBox";
-            this.WorkingDirTextBox.Size = new System.Drawing.Size(543, 22);
+            this.WorkingDirTextBox.Size = new System.Drawing.Size(442, 22);
             this.WorkingDirTextBox.TabIndex = 10;
             this.WorkingDirTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
@@ -420,5 +433,6 @@ namespace mRemoteNG.UI.Window
         internal System.Windows.Forms.ColumnHeader WorkingDirColumnHeader;
         internal System.Windows.Forms.Label WorkingDirLabel;
         internal System.Windows.Forms.TextBox WorkingDirTextBox;
+        internal System.Windows.Forms.Button BrowseWorkingDir;
     }
 }

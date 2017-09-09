@@ -171,15 +171,36 @@ namespace mRemoteNG.UI.Window
 					if (browseDialog.ShowDialog() == DialogResult.OK)
 					{
 						FilenameTextBox.Text = browseDialog.FileName;
-					}
+                        PropertyControl_ChangedOrLostFocus(this, e);
+
+                    }
 				}
-						
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.BrowseButton_Click() failed.", ex: ex, logOnly: true);
 			}
-		}
+        }
+
+        private void BrowseWorkingDir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var browseDialog = new FolderBrowserDialog())
+                {
+                    if (browseDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        WorkingDirTextBox.Text = browseDialog.SelectedPath;
+                        PropertyControl_ChangedOrLostFocus(this, e);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.BrowseButton_Click() failed.", ex: ex, logOnly: true);
+            }
+        }
 
         private void TryToIntegrateCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
