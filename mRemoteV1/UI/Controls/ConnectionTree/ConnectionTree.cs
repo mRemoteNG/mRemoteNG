@@ -204,11 +204,12 @@ namespace mRemoteNG.UI.Controls
 
         private void AddNode(ConnectionInfo newNode)
         {
-            if (SelectedNode == null) return;
+            // use root node if no node is selected
+            ConnectionInfo parentNode = (SelectedNode == null) ? Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo) : SelectedNode;
             DefaultConnectionInfo.Instance.SaveTo(newNode);
             DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
-            var selectedContainer = SelectedNode as ContainerInfo;
-            var parent = selectedContainer ?? SelectedNode?.Parent;
+            var selectedContainer = parentNode as ContainerInfo;
+            var parent = selectedContainer ?? parentNode?.Parent;
             newNode.SetParent(parent);
             Expand(parent);
             SelectObject(newNode, true);
