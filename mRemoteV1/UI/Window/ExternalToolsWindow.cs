@@ -32,10 +32,10 @@ namespace mRemoteNG.UI.Window
 			UpdateToolsListView();
 		}
 
-        private static void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
-		{
+        private void ExternalToolsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
             Config.Settings.SettingsSaver.SaveExternalAppsToXML();
-		}
+        }
 
         private void NewTool_Click(object sender, EventArgs e)
 		{
@@ -290,5 +290,5 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-	}
+    }
 }

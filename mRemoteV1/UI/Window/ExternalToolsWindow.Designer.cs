@@ -35,6 +35,7 @@ namespace mRemoteNG.UI.Window
             this.DisplayNameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FilenameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ArgumentsColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.WorkingDirColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.WaitForExitColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TryToIntegrateColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ToolsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -43,6 +44,8 @@ namespace mRemoteNG.UI.Window
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LaunchToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.WorkingDirLabel = new System.Windows.Forms.Label();
+            this.WorkingDirTextBox = new System.Windows.Forms.TextBox();
             this.TryToIntegrateCheckBox = new System.Windows.Forms.CheckBox();
             this.OptionsLabel = new System.Windows.Forms.Label();
             this.WaitForExitCheckBox = new System.Windows.Forms.CheckBox();
@@ -77,6 +80,7 @@ namespace mRemoteNG.UI.Window
             this.DisplayNameColumnHeader,
             this.FilenameColumnHeader,
             this.ArgumentsColumnHeader,
+            this.WorkingDirColumnHeader,
             this.WaitForExitColumnHeader,
             this.TryToIntegrateColumnHeader});
             this.ToolsListView.ContextMenuStrip = this.ToolsContextMenuStrip;
@@ -86,7 +90,7 @@ namespace mRemoteNG.UI.Window
             this.ToolsListView.HideSelection = false;
             this.ToolsListView.Location = new System.Drawing.Point(0, 0);
             this.ToolsListView.Name = "ToolsListView";
-            this.ToolsListView.Size = new System.Drawing.Size(684, 157);
+            this.ToolsListView.Size = new System.Drawing.Size(684, 126);
             this.ToolsListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ToolsListView.TabIndex = 0;
             this.ToolsListView.UseCompatibleStateImageBehavior = false;
@@ -108,6 +112,11 @@ namespace mRemoteNG.UI.Window
             // 
             this.ArgumentsColumnHeader.Text = "Arguments";
             this.ArgumentsColumnHeader.Width = 160;
+            // 
+            // WorkingDirColumnHeader
+            // 
+            this.WorkingDirColumnHeader.Text = "Working Directory";
+            this.WorkingDirColumnHeader.Width = 160;
             // 
             // WaitForExitColumnHeader
             // 
@@ -164,6 +173,8 @@ namespace mRemoteNG.UI.Window
             // 
             this.PropertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PropertiesGroupBox.Controls.Add(this.WorkingDirLabel);
+            this.PropertiesGroupBox.Controls.Add(this.WorkingDirTextBox);
             this.PropertiesGroupBox.Controls.Add(this.TryToIntegrateCheckBox);
             this.PropertiesGroupBox.Controls.Add(this.OptionsLabel);
             this.PropertiesGroupBox.Controls.Add(this.WaitForExitCheckBox);
@@ -175,17 +186,36 @@ namespace mRemoteNG.UI.Window
             this.PropertiesGroupBox.Controls.Add(this.FilenameLabel);
             this.PropertiesGroupBox.Controls.Add(this.DisplayNameLabel);
             this.PropertiesGroupBox.Enabled = false;
-            this.PropertiesGroupBox.Location = new System.Drawing.Point(3, 163);
+            this.PropertiesGroupBox.Location = new System.Drawing.Point(3, 132);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(678, 132);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(678, 163);
             this.PropertiesGroupBox.TabIndex = 1;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "External Tool Properties";
             // 
+            // WorkingDirLabel
+            // 
+            this.WorkingDirLabel.AutoSize = true;
+            this.WorkingDirLabel.Location = new System.Drawing.Point(16, 107);
+            this.WorkingDirLabel.Name = "WorkingDirLabel";
+            this.WorkingDirLabel.Size = new System.Drawing.Size(104, 13);
+            this.WorkingDirLabel.TabIndex = 11;
+            this.WorkingDirLabel.Text = "Working Directory:";
+            this.WorkingDirLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // WorkingDirTextBox
+            // 
+            this.WorkingDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WorkingDirTextBox.Location = new System.Drawing.Point(126, 104);
+            this.WorkingDirTextBox.Name = "WorkingDirTextBox";
+            this.WorkingDirTextBox.Size = new System.Drawing.Size(543, 22);
+            this.WorkingDirTextBox.TabIndex = 10;
+            // 
             // TryToIntegrateCheckBox
             // 
             this.TryToIntegrateCheckBox.AutoSize = true;
-            this.TryToIntegrateCheckBox.Location = new System.Drawing.Point(221, 107);
+            this.TryToIntegrateCheckBox.Location = new System.Drawing.Point(221, 135);
             this.TryToIntegrateCheckBox.Name = "TryToIntegrateCheckBox";
             this.TryToIntegrateCheckBox.Size = new System.Drawing.Size(103, 17);
             this.TryToIntegrateCheckBox.TabIndex = 9;
@@ -197,7 +227,7 @@ namespace mRemoteNG.UI.Window
             // OptionsLabel
             // 
             this.OptionsLabel.AutoSize = true;
-            this.OptionsLabel.Location = new System.Drawing.Point(68, 108);
+            this.OptionsLabel.Location = new System.Drawing.Point(68, 135);
             this.OptionsLabel.Name = "OptionsLabel";
             this.OptionsLabel.Size = new System.Drawing.Size(52, 13);
             this.OptionsLabel.TabIndex = 7;
@@ -207,7 +237,7 @@ namespace mRemoteNG.UI.Window
             // WaitForExitCheckBox
             // 
             this.WaitForExitCheckBox.AutoSize = true;
-            this.WaitForExitCheckBox.Location = new System.Drawing.Point(126, 107);
+            this.WaitForExitCheckBox.Location = new System.Drawing.Point(126, 134);
             this.WaitForExitCheckBox.Name = "WaitForExitCheckBox";
             this.WaitForExitCheckBox.Size = new System.Drawing.Size(89, 17);
             this.WaitForExitCheckBox.TabIndex = 8;
@@ -362,7 +392,7 @@ namespace mRemoteNG.UI.Window
             this.Name = "ExternalToolsWindow";
             this.TabText = "External Applications";
             this.Text = "External Tools";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ExternalTools_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ExternalToolsWindow_FormClosed);
             this.Load += new System.EventHandler(this.ExternalTools_Load);
             this.ToolsContextMenuStrip.ResumeLayout(false);
             this.PropertiesGroupBox.ResumeLayout(false);
@@ -386,5 +416,8 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         private System.ComponentModel.IContainer components;
+        internal System.Windows.Forms.ColumnHeader WorkingDirColumnHeader;
+        internal System.Windows.Forms.Label WorkingDirLabel;
+        internal System.Windows.Forms.TextBox WorkingDirTextBox;
     }
 }
