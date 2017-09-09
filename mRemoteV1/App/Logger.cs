@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System.Diagnostics;
+using log4net;
 using log4net.Appender;
 using log4net.Config;
 #if !PORTABLE
@@ -54,8 +55,14 @@ namespace mRemoteNG.App
             var logFilePath = Application.StartupPath;
 #endif
             var logFileName = Path.ChangeExtension(Application.ProductName, ".log");
-            var logFile = Path.Combine(logFilePath, logFileName);
-            return logFile;
+            if (logFileName != null)
+            {
+                var logFile = Path.Combine(logFilePath, logFileName);
+                return logFile;
+            }
+
+            Debug.Print("Error: Could not determine log file path.");
+            return "";
         }
     }
 }
