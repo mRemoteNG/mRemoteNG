@@ -34,28 +34,27 @@ namespace mRemoteNG.Messages
 
             var EnableTimer = true; // used to control if we SWITCH to the notifiation panel. Message will still be added regardless.
 
-            if (nMsg.MsgClass == MessageClass.InformationMsg)
+            // ReSharper disable once SwitchStatementMissingSomeCases
+            switch (nMsg.MsgClass)
             {
-                AddInfoMessage(nMsg);
+                case MessageClass.InformationMsg:
+                    AddInfoMessage(nMsg);
 
-                if (!Settings.Default.SwitchToMCOnInformation)
-                    EnableTimer = false;
-            }
+                    if (!Settings.Default.SwitchToMCOnInformation)
+                        EnableTimer = false;
+                    break;
+                case MessageClass.WarningMsg:
+                    AddWarningMessage(nMsg);
 
-            if (nMsg.MsgClass == MessageClass.WarningMsg)
-            {
-                AddWarningMessage(nMsg);
+                    if (!Settings.Default.SwitchToMCOnWarning)
+                        EnableTimer = false;
+                    break;
+                case MessageClass.ErrorMsg:
+                    AddErrorMessage(nMsg);
 
-                if (!Settings.Default.SwitchToMCOnWarning)
-                    EnableTimer = false;
-            }
-
-            if (nMsg.MsgClass == MessageClass.ErrorMsg)
-            {
-                AddErrorMessage(nMsg);
-
-                if (!Settings.Default.SwitchToMCOnError)
-                    EnableTimer = false;
+                    if (!Settings.Default.SwitchToMCOnError)
+                        EnableTimer = false;
+                    break;
             }
 
             if (OnlyLog)
@@ -95,7 +94,8 @@ namespace mRemoteNG.Messages
         private static void AddErrorMessage(Message nMsg)
         {
             Debug.Print("Error: " + nMsg.MsgText);
-            Logger.Instance.Error(nMsg.MsgText);
+            if (Settings.Default.WriteLogFile)
+                Logger.Instance.Error(nMsg.MsgText);
         }
 
         private static void AddReportMessage(Message nMsg)
