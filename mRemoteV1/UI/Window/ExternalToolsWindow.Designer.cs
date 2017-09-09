@@ -211,6 +211,7 @@ namespace mRemoteNG.UI.Window
             this.WorkingDirTextBox.Name = "WorkingDirTextBox";
             this.WorkingDirTextBox.Size = new System.Drawing.Size(543, 22);
             this.WorkingDirTextBox.TabIndex = 10;
+            this.WorkingDirTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
             // TryToIntegrateCheckBox
             // 

@@ -114,6 +114,7 @@ namespace mRemoteNG.UI.Window
 					DisplayNameTextBox.Text = _selectedTool.DisplayName;
 					FilenameTextBox.Text = _selectedTool.FileName;
 					ArgumentsCheckBox.Text = _selectedTool.Arguments;
+                    WorkingDirTextBox.Text = _selectedTool.WorkingDir;
 					WaitForExitCheckBox.Checked = _selectedTool.WaitForExit;
 					TryToIntegrateCheckBox.Checked = _selectedTool.TryIntegrate;
 				}
@@ -148,6 +149,7 @@ namespace mRemoteNG.UI.Window
 				_selectedTool.DisplayName = DisplayNameTextBox.Text;
 				_selectedTool.FileName = FilenameTextBox.Text;
 				_selectedTool.Arguments = ArgumentsCheckBox.Text;
+                _selectedTool.WorkingDir = WorkingDirTextBox.Text;
 				_selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
 				_selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;
 						
@@ -251,7 +253,8 @@ namespace mRemoteNG.UI.Window
 				    var listViewItem = new ListViewItem {Text = externalTool.DisplayName};
 				    listViewItem.SubItems.Add(externalTool.FileName);
 					listViewItem.SubItems.Add(externalTool.Arguments);
-					listViewItem.SubItems.Add(externalTool.WaitForExit.ToString());
+                    listViewItem.SubItems.Add(externalTool.WorkingDir);
+                    listViewItem.SubItems.Add(externalTool.WaitForExit.ToString());
 					listViewItem.SubItems.Add(externalTool.TryIntegrate.ToString());
 					listViewItem.Tag = externalTool;
 							
