@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Controls.Base
             {
                 SizeF stringSize = e.Graphics.MeasureString(Text, Font);
 
-                e.Graphics.DrawImageUnscaled(Image, Width / 2 - (int)stringSize.Width / 2  - Image.Width  + 2, Height / 2 - Image.Height/2);
+                e.Graphics.DrawImageUnscaled(Image, Width / 2 - (int)stringSize.Width / 2  - Image.Width  , Height / 2 - Image.Height/2);
             }
             TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, fore, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
