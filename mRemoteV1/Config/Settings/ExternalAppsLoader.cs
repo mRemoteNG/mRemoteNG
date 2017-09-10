@@ -62,6 +62,8 @@ namespace mRemoteNG.Config.Settings
                 // check before, since old save files won't have this set
                 if (xEl.HasAttribute("WorkingDir"))
                     extA.WorkingDir = xEl.Attributes["WorkingDir"].Value;
+                if (xEl.HasAttribute("RunElevated"))
+                    extA.RunElevated = bool.Parse(xEl.Attributes["RunElevated"].Value);
 
                 if (xEl.HasAttribute("WaitForExit"))
                 {

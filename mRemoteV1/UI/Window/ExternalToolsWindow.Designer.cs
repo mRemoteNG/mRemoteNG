@@ -63,6 +63,8 @@ namespace mRemoteNG.UI.Window
             this.DeleteToolToolstripButton = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.LaunchToolToolstripButton = new System.Windows.Forms.ToolStripButton();
+            this.RunElevatedCheckBox = new System.Windows.Forms.CheckBox();
+            this.RunElevateHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ToolsContextMenuStrip.SuspendLayout();
             this.PropertiesGroupBox.SuspendLayout();
             this.ToolStripContainer.ContentPanel.SuspendLayout();
@@ -83,7 +85,8 @@ namespace mRemoteNG.UI.Window
             this.ArgumentsColumnHeader,
             this.WorkingDirColumnHeader,
             this.WaitForExitColumnHeader,
-            this.TryToIntegrateColumnHeader});
+            this.TryToIntegrateColumnHeader,
+            this.RunElevateHeader});
             this.ToolsListView.ContextMenuStrip = this.ToolsContextMenuStrip;
             this.ToolsListView.FullRowSelect = true;
             this.ToolsListView.GridLines = true;
@@ -174,6 +177,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.PropertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PropertiesGroupBox.Controls.Add(this.RunElevatedCheckBox);
             this.PropertiesGroupBox.Controls.Add(this.BrowseWorkingDir);
             this.PropertiesGroupBox.Controls.Add(this.WorkingDirLabel);
             this.PropertiesGroupBox.Controls.Add(this.WorkingDirTextBox);
@@ -397,6 +401,21 @@ namespace mRemoteNG.UI.Window
             this.LaunchToolToolstripButton.Text = "Launch";
             this.LaunchToolToolstripButton.Click += new System.EventHandler(this.LaunchTool_Click);
             // 
+            // RunElevatedCheckBox
+            // 
+            this.RunElevatedCheckBox.AutoSize = true;
+            this.RunElevatedCheckBox.Location = new System.Drawing.Point(330, 135);
+            this.RunElevatedCheckBox.Name = "RunElevatedCheckBox";
+            this.RunElevatedCheckBox.Size = new System.Drawing.Size(93, 17);
+            this.RunElevatedCheckBox.TabIndex = 13;
+            this.RunElevatedCheckBox.Text = "Run Elevated";
+            this.RunElevatedCheckBox.UseVisualStyleBackColor = true;
+            this.RunElevatedCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // RunElevateHeader
+            // 
+            this.RunElevateHeader.Text = "Run Elevated";
+            // 
             // ExternalToolsWindow
             // 
             this.ClientSize = new System.Drawing.Size(684, 323);
@@ -434,5 +453,7 @@ namespace mRemoteNG.UI.Window
         internal System.Windows.Forms.Label WorkingDirLabel;
         internal System.Windows.Forms.TextBox WorkingDirTextBox;
         internal System.Windows.Forms.Button BrowseWorkingDir;
+        internal System.Windows.Forms.CheckBox RunElevatedCheckBox;
+        private System.Windows.Forms.ColumnHeader RunElevateHeader;
     }
 }

@@ -19,6 +19,7 @@ namespace mRemoteNG.Tools
 		public string Arguments { get; set; }
         public string WorkingDir { get; set; }
 		public bool TryIntegrate { get; set; }
+        public bool RunElevated { get; set; }
         public ConnectionInfo ConnectionInfo { get; set; }
 		
         public Icon Icon => File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Resources.mRemote_Icon;
@@ -27,12 +28,13 @@ namespace mRemoteNG.Tools
 
 	    #endregion
 		
-		public ExternalTool(string displayName = "", string fileName = "", string arguments = "", string workingDir = "")
+		public ExternalTool(string displayName = "", string fileName = "", string arguments = "", string workingDir = "", bool runElevated = false)
 		{
 			DisplayName = displayName;
 			FileName = fileName;
 			Arguments = arguments;
             WorkingDir = workingDir;
+            RunElevated = runElevated;
 		}
 
         public void Start(ConnectionInfo startConnectionInfo = null)
@@ -77,6 +79,7 @@ namespace mRemoteNG.Tools
             process.StartInfo.FileName = argParser.ParseArguments(FileName);
             process.StartInfo.Arguments = argParser.ParseArguments(Arguments);
             if (WorkingDir != "") process.StartInfo.WorkingDirectory = argParser.ParseArguments(WorkingDir);
+            if (RunElevated) process.StartInfo.Verb = "runas";
         }
 
         private void StartIntegrated()

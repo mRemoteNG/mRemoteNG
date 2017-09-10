@@ -122,6 +122,7 @@ namespace mRemoteNG.Config.Settings
                     xmlTextWriter.WriteAttributeString("WorkingDir", "", extA.WorkingDir);
                     xmlTextWriter.WriteAttributeString("WaitForExit", "", Convert.ToString(extA.WaitForExit));
                     xmlTextWriter.WriteAttributeString("TryToIntegrate", "", Convert.ToString(extA.TryIntegrate));
+                    xmlTextWriter.WriteAttributeString("RunElevated", "", Convert.ToString(extA.RunElevated));
                     xmlTextWriter.WriteEndElement();
                 }
 

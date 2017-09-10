@@ -117,6 +117,7 @@ namespace mRemoteNG.UI.Window
                     WorkingDirTextBox.Text = _selectedTool.WorkingDir;
 					WaitForExitCheckBox.Checked = _selectedTool.WaitForExit;
 					TryToIntegrateCheckBox.Checked = _selectedTool.TryIntegrate;
+                    RunElevatedCheckBox.Checked = _selectedTool.RunElevated;
 				}
 				else
 				{
@@ -152,6 +153,7 @@ namespace mRemoteNG.UI.Window
                 _selectedTool.WorkingDir = WorkingDirTextBox.Text;
 				_selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
 				_selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;
+                _selectedTool.RunElevated = RunElevatedCheckBox.Checked;
 						
 				UpdateToolsListView();
 			}
@@ -277,7 +279,8 @@ namespace mRemoteNG.UI.Window
                     listViewItem.SubItems.Add(externalTool.WorkingDir);
                     listViewItem.SubItems.Add(externalTool.WaitForExit.ToString());
 					listViewItem.SubItems.Add(externalTool.TryIntegrate.ToString());
-					listViewItem.Tag = externalTool;
+                    listViewItem.SubItems.Add(externalTool.RunElevated.ToString());
+                    listViewItem.Tag = externalTool;
 							
 					ToolsListView.Items.Add(listViewItem);
 							
