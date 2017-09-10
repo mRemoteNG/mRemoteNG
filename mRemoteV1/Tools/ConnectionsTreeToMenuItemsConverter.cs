@@ -67,7 +67,7 @@ namespace mRemoteNG.Tools
             }
             else if (node.GetTreeNodeType() == TreeNodeType.Connection)
             {
-                menuItem.Image = Resources.Pause;
+                menuItem.Image = (node.OpenConnections.Count > 0) ? Resources.Play : Resources.Pause;
                 menuItem.Tag = node;
             }
             
