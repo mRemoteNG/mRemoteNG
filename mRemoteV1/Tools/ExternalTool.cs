@@ -105,7 +105,7 @@ namespace mRemoteNG.Tools
 	    private void SetConnectionInfoFields(ConnectionInfo newConnectionInfo)
         {
             newConnectionInfo.Protocol = ProtocolType.IntApp;
-            newConnectionInfo.ExtApp = DisplayName;
+            newConnectionInfo.ExtApp = FileName;
             newConnectionInfo.Name = DisplayName;
             newConnectionInfo.Panel = Language.strMenuExternalTools;
         }
