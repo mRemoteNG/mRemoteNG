@@ -11,7 +11,7 @@ param (
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 
 # Find editbin.exe
-$path_editBin =  @((gci -Path "C:\Program*\Microsoft Visual Studio\" -Filter editbin.exe -Recurse).FullName)[0]
+$path_editBin =  @((gci -Path "C:\Program File*\Microsoft Visual Studio\" -Filter editbin.exe -Recurse).FullName)[0]
 
 # Verify editbin certificate
 & "$PSScriptRoot\validate_microsoft_tool.ps1" -Path $path_editBin
