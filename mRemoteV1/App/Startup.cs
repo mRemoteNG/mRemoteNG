@@ -218,6 +218,30 @@ namespace mRemoteNG.App
             }
         }
 
+        /// <summary>
+        /// Returns a path to a file connections XML file for a given absolute or relative path
+        /// </summary>
+        /// <param name="ConsParam">The absolute or relative path to the connection XML file</param>
+        /// <returns>string or null</returns>
+        private static string GetCustomConsPath(string ConsParam)
+        {
+            // early exit condition
+            if (string.IsNullOrEmpty(ConsParam))
+                return null;
+
+            // fallback paths
+            if (File.Exists(ConsParam))
+                return ConsParam;
+
+            if (File.Exists(GeneralAppInfo.HomePath + Path.DirectorySeparatorChar + ConsParam))
+                return GeneralAppInfo.HomePath + Path.DirectorySeparatorChar + ConsParam;
+
+            if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + Path.DirectorySeparatorChar + ConsParam))
+                return ConnectionsFileInfo.DefaultConnectionsPath + Path.DirectorySeparatorChar + ConsParam;
+
+            // default case
+            return null;
+        }
 
         private static void ParseCommandLineArgs()
         {
@@ -282,29 +306,13 @@ namespace mRemoteNG.App
                     NoReconnectParam = "norc";
                 }
 
-                if (!string.IsNullOrEmpty(ConsParam))
+                // Handle custom connection file location
+                Settings.Default.CustomConsPath = GetCustomConsPath(ConsParam);
+                if (Settings.Default.CustomConsPath != null)
                 {
-                    if (File.Exists(cmd[ConsParam]))
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = cmd[ConsParam];
-                        return;
-                    }
-                    else
-                    {
-                        if (File.Exists(GeneralAppInfo.HomePath + "\\" + cmd[ConsParam]))
-                        {
-                            Settings.Default.LoadConsFromCustomLocation = true;
-                            Settings.Default.CustomConsPath = GeneralAppInfo.HomePath + "\\" + cmd[ConsParam];
-                            return;
-                        }
-                        if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
-                        {
-                            Settings.Default.LoadConsFromCustomLocation = true;
-                            Settings.Default.CustomConsPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];
-                            return;
-                        }
-                    }
+                    Settings.Default.LoadConsFromCustomLocation = true;
+                    Settings.Default.Save();
+                    return;
                 }
 
                 if (!string.IsNullOrEmpty(ResetPosParam))
