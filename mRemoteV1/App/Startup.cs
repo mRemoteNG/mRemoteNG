@@ -284,7 +284,13 @@ namespace mRemoteNG.App
 
                 if (!string.IsNullOrEmpty(ConsParam))
                 {
-                    if (File.Exists(cmd[ConsParam]) == false)
+                    if (File.Exists(cmd[ConsParam]))
+                    {
+                        Settings.Default.LoadConsFromCustomLocation = true;
+                        Settings.Default.CustomConsPath = cmd[ConsParam];
+                        return;
+                    }
+                    else
                     {
                         if (File.Exists(GeneralAppInfo.HomePath + "\\" + cmd[ConsParam]))
                         {
@@ -298,12 +304,6 @@ namespace mRemoteNG.App
                             Settings.Default.CustomConsPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];
                             return;
                         }
-                    }
-                    else
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = cmd[ConsParam];
-                        return;
                     }
                 }
 
