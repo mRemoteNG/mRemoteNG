@@ -312,11 +312,7 @@ namespace mRemoteNG.App
                 // Handle custom connection file location
                 Settings.Default.CustomConsPath = GetCustomConsPath(ConsParam);
                 if (Settings.Default.CustomConsPath != null)
-                {
                     Settings.Default.LoadConsFromCustomLocation = true;
-                    Settings.Default.Save();
-                    return;
-                }
 
                 if (!string.IsNullOrEmpty(ResetPosParam))
                 {
@@ -340,6 +336,8 @@ namespace mRemoteNG.App
                 {
                     Settings.Default.ResetToolbars = true;
                 }
+
+                Settings.Default.Save();
             }
             catch (Exception ex)
             {
