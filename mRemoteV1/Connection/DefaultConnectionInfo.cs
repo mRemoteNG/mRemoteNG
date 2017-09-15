@@ -18,11 +18,17 @@ namespace mRemoteNG.Connection
 
         public void LoadFrom<TSource>(TSource sourceInstance, Func<string, string> propertyNameMutator = null)
         {
-            if (propertyNameMutator == null) propertyNameMutator = (a) => a;
+            if (propertyNameMutator == null) propertyNameMutator = a => a;
             var connectionProperties = GetProperties(_excludedProperties);
             foreach (var property in connectionProperties)
             {
                 var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
+                if (propertyFromSource == null)
+                {
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                        $"DefaultConInfo-LoadFrom: Could not load {property.Name}", true);
+                    continue;
+                }
                 var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
                 
                 var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
@@ -36,7 +42,7 @@ namespace mRemoteNG.Connection
 
         public void SaveTo<TDestination>(TDestination destinationInstance, Func<string, string> propertyNameMutator = null)
         {
-            if (propertyNameMutator == null) propertyNameMutator = (a) => a;
+            if (propertyNameMutator == null) propertyNameMutator = a => a;
             var inheritanceProperties = GetProperties(_excludedProperties);
             foreach (var property in inheritanceProperties)
             {
@@ -44,6 +50,12 @@ namespace mRemoteNG.Connection
                 {
                     var propertyFromDestination = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
                     var localValue = property.GetValue(Instance, null);
+                    if (propertyFromDestination == null)
+                    {
+                        Runtime.MessageCollector?.AddMessage(Messages.MessageClass.ErrorMsg,
+                            $"DefaultConInfo-SaveTo: Could not load {property.Name}", true);
+                        continue;
+                    }
                     var convertedValue = Convert.ChangeType(localValue, propertyFromDestination.PropertyType);
                     propertyFromDestination.SetValue(destinationInstance, convertedValue, null);
                 }
