@@ -1,10 +1,10 @@
+using Microsoft.Win32;
+using mRemoteNG.App;
+using mRemoteNG.Messages;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
-using Microsoft.Win32;
-using mRemoteNG.App;
-using mRemoteNG.Messages;
 
 namespace mRemoteNG.Tools
 {
@@ -202,7 +202,7 @@ namespace mRemoteNG.Tools
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Register() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector?.AddExceptionMessage("IeBrowserEmulation.Register() failed.", ex, MessageClass.ErrorMsg, true);
             }
         }
 
@@ -216,7 +216,7 @@ namespace mRemoteNG.Tools
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Unregister() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector?.AddExceptionMessage("IeBrowserEmulation.Unregister() failed.", ex, MessageClass.ErrorMsg, true);
             }
 #endif
         }
