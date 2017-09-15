@@ -214,7 +214,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex);
             }
         }
 
