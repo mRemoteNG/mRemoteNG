@@ -229,14 +229,17 @@ namespace mRemoteNG.App
             if (string.IsNullOrEmpty(ConsParam))
                 return null;
 
+            // trim invalid characters for the Combine method (see: https://msdn.microsoft.com/en-us/library/fyy7a5kt.aspx#Anchor_2)
+            ConsParam = ConsParam.Trim().TrimStart('\\').Trim();
+
             // fallback paths
             if (File.Exists(ConsParam))
                 return ConsParam;
 
-            if (File.Exists(GeneralAppInfo.HomePath + Path.DirectorySeparatorChar + ConsParam))
+            if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, ConsParam)))
                 return GeneralAppInfo.HomePath + Path.DirectorySeparatorChar + ConsParam;
 
-            if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + Path.DirectorySeparatorChar + ConsParam))
+            if (File.Exists(Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, ConsParam)))
                 return ConnectionsFileInfo.DefaultConnectionsPath + Path.DirectorySeparatorChar + ConsParam;
 
             // default case
