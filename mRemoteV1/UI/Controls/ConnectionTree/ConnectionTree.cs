@@ -140,7 +140,8 @@ namespace mRemoteNG.UI.Controls
 
         private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            //TODO for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
+            // for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
+            // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
             var property = propertyChangedEventArgs.PropertyName;
             if (property != "Name" && property != "OpenConnections") return;
             var senderAsConnectionInfo = sender as ConnectionInfo;
