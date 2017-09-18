@@ -187,8 +187,9 @@ namespace mRemoteNG.UI.Forms
             // Create gui config load and save objects
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
-			
-			ApplyLanguage();
+		    LoadDefaultConnectionInfo();
+
+            ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
@@ -219,6 +220,12 @@ namespace mRemoteNG.UI.Forms
             Opacity = 1;
 
             ConnectionTreeWindow = Windows.TreeForm;
+        }
+
+        private void LoadDefaultConnectionInfo()
+        {
+            DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a => "ConDefault" + a);
+            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a => "InhDefault" + a);
         }
 
         private void ApplyLanguage()
