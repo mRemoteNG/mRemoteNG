@@ -74,7 +74,7 @@ namespace mRemoteNG.App
         {
             var osData = GetOperatingSystemData();
             var architecture = GetArchitectureData();
-            Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
+            Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new[] { osData, architecture }, s => !string.IsNullOrEmpty(s))));
         }
 
         private static string GetOperatingSystemData()
