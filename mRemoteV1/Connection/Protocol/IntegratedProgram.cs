@@ -63,8 +63,9 @@ namespace mRemoteNG.Connection.Protocol
 			    _process.Exited += ProcessExited;
 						
 				_process.Start();
-						
-				var startTicks = Environment.TickCount;
+                _process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
+
+                var startTicks = Environment.TickCount;
 				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
 				{
 					_process.Refresh();
