@@ -57,7 +57,15 @@ namespace mRemoteNG.Config.Connections
 
         private bool DatabaseIsMoreUpToDateThanUs()
         {
-            return GetLastUpdateTimeFromDbResponse() > _lastUpdateTime;
+            var lastUpdateInDb = GetLastUpdateTimeFromDbResponse();
+            var IAmTheLastoneUpdated = CheckIfIAmTheLastOneUpdated(lastUpdateInDb);
+            return (lastUpdateInDb > _lastUpdateTime && !IAmTheLastoneUpdated);
+        }
+
+        private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
+        {
+            DateTime LastSqlUpdateWithoutMilliseconds = new DateTime(Runtime.LastSqlUpdate.Ticks - (Runtime.LastSqlUpdate.Ticks % TimeSpan.TicksPerSecond), Runtime.LastSqlUpdate.Kind);
+            return lastUpdateInDb == LastSqlUpdateWithoutMilliseconds;
         }
 
         private DateTime GetLastUpdateTimeFromDbResponse()

@@ -42,7 +42,7 @@ namespace mRemoteNG.App
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private static DateTime LastSqlUpdate { get; set; }
+        public static DateTime LastSqlUpdate { get; set; }
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
