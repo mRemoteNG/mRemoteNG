@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
@@ -10,7 +9,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
+	public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
     {
         private string _csv = "";
         private ConnectionInfo _serializationTarget;
@@ -90,20 +89,14 @@ namespace mRemoteNG.Config.Serializers
 
             csvLine += con.Name + ";" + GetNodePath(con) + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
 
-            if (con.CredentialRecordId.Any())
-            {
-                var credentialRecord =
-                    _credentialRepositoryList.GetCredentialRecord(con.CredentialRecordId.Single());
+            if (_saveFilter.SaveUsername)
+                csvLine += con.Username + ";";
 
-                if (_saveFilter.SaveUsername)
-                    csvLine += credentialRecord?.Username + ";";
+            if (_saveFilter.SavePassword)
+                csvLine += con.Password + ";";
 
-                if (_saveFilter.SavePassword)
-                    csvLine += credentialRecord?.Password.ConvertToUnsecureString() + ";";
-
-                if (_saveFilter.SaveDomain)
-                    csvLine += credentialRecord?.Domain + ";";
-            }
+            if (_saveFilter.SaveDomain)
+                csvLine += con.Domain + ";";
 
             csvLine += con.Hostname + ";" + 
                         con.Protocol + ";" + 

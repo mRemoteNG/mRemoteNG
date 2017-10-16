@@ -1,24 +1,21 @@
 using System;
-using System.Drawing;
-using System.Diagnostics;
-using AxMSTSCLib;
 using System.Collections;
-using System.Windows.Forms;
-using System.Threading;
 using System.ComponentModel;
-using System.Linq;
-using System.Security;
-using mRemoteNG.Messages;
+using System.Diagnostics;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
+using AxMSTSCLib;
 using mRemoteNG.App;
-using mRemoteNG.Security;
+using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
-using MSTSCLib;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+using MSTSCLib;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public class RdpProtocol : ProtocolBase
+	public class RdpProtocol : ProtocolBase
 	{
         /* RDP v8 requires Windows 7 with:
          * https://support.microsoft.com/en-us/kb/2592687 
@@ -347,12 +344,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
-						    if (!_connectionInfo.CredentialRecordId.Any()) return;
-						    var credentialRecord =
-						        Runtime.CredentialProviderCatalog.GetCredentialRecord(_connectionInfo.CredentialRecordId.Single());
-						    _rdpClient.TransportSettings2.GatewayUsername = credentialRecord?.Username;
-						    _rdpClient.TransportSettings2.GatewayPassword = credentialRecord?.Password.ConvertToUnsecureString();
-						    _rdpClient.TransportSettings2.GatewayDomain = credentialRecord?.Domain;
+						    _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username;
+						    _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password;
+						    _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo?.Domain;
 						}
 						else if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
 						{
@@ -421,17 +415,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					return;
 				}
 
-                var userName = "";
-				var password = new SecureString();
-				var domain = "";
-
-			    if (_connectionInfo.CredentialRecordId.Any())
-			    {
-			        var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(_connectionInfo.CredentialRecordId.Single());
-			        userName = credentialRecord?.Username ?? "";
-			        password = credentialRecord?.Password ?? new SecureString();
-			        domain = credentialRecord?.Domain ?? "";
-			    }
+			    var userName = _connectionInfo?.Username ?? "";
+			    var password = _connectionInfo?.Password ?? "";
+			    var domain = _connectionInfo?.Domain ?? "";
 						
 				if (string.IsNullOrEmpty(userName))
 				{
@@ -449,7 +435,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					_rdpClient.UserName = userName;
 				}
 						
-				if (string.IsNullOrEmpty(password.ConvertToUnsecureString()))
+				if (string.IsNullOrEmpty(password))
 				{
 					if (Settings.Default.EmptyCredentials == "custom")
 					{
@@ -462,7 +448,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				}
 				else
 				{
-					_rdpClient.AdvancedSettings2.ClearTextPassword = password.ConvertToUnsecureString();
+					_rdpClient.AdvancedSettings2.ClearTextPassword = password;
 				}
 						
 				if (string.IsNullOrEmpty(domain))

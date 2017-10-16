@@ -1,13 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using mRemoteNG.Connection;
 using mRemoteNG.Credential;
-using mRemoteNG.Tools;
 
 namespace mRemoteNG.App.Initialization
 {
-    public class CredsAndConsSetup
+	public class CredsAndConsSetup
     {
         private readonly CredentialServiceFacade _credentialsService;
 
@@ -25,20 +22,12 @@ namespace mRemoteNG.App.Initialization
                 Runtime.ConnectionsService.NewConnections(Runtime.ConnectionsService.GetStartupConnectionFileName());
 
             LoadCredentialRepositoryList();
-            LoadDefaultConnectionCredentials();
             Runtime.LoadConnections();
         }
 
         private void LoadCredentialRepositoryList()
         {
             _credentialsService.LoadRepositoryList();
-        }
-
-        private void LoadDefaultConnectionCredentials()
-        {
-            var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
-            var matchedCredentials = _credentialsService.GetCredentialRecords().Where(record => record.Id.Equals(defaultCredId)).ToArray();
-            DefaultConnectionInfo.Instance.CredentialRecordId = matchedCredentials.FirstOrDefault()?.Id.Maybe();
         }
     }
 }

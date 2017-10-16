@@ -1,10 +1,3 @@
-using mRemoteNG.App;
-using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
-using mRemoteNG.Tree.Root;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,17 +7,24 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls.FilteredPropertyGrid;
 using WeifenLuo.WinFormsUI.Docking;
 
 
 namespace mRemoteNG.UI.Window
 {
-    public class ConfigWindow : BaseWindow
+	public class ConfigWindow : BaseWindow
 	{
         private bool _originalPropertyGridToolStripItemCountValid;
         private int _originalPropertyGridToolStripItemCount;
@@ -1455,8 +1455,6 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RDGatewayHostname");
                         if(conI.Inheritance.SoundQuality)
                             strHide.Add("SoundQuality");
-                        if(conI.Inheritance.CredentialRecord)
-                            strHide.Add("CredentialRecord");
                     }
 					else
 					{

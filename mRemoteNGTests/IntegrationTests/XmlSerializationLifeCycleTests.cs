@@ -11,7 +11,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.IntegrationTests
 {
-    public class XmlSerializationLifeCycleTests
+	public class XmlSerializationLifeCycleTests
     {
         private XmlConnectionsSerializer _serializer;
         private XmlConnectionsDeserializer _deserializer;
@@ -23,7 +23,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             _originalModel = SetupConnectionTreeModel();
             var cryptoProvider = _cryptoFactory.Build();
-            var nodeSerializer = new XmlConnectionNodeSerializer27(
+            var nodeSerializer = new XmlConnectionNodeSerializer26(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -77,7 +77,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var cryptoProvider = _cryptoFactory.Build();
             cryptoProvider.KeyDerivationIterations = 5000;
-            var nodeSerializer = new XmlConnectionNodeSerializer27(
+            var nodeSerializer = new XmlConnectionNodeSerializer26(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
