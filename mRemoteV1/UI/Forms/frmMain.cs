@@ -15,7 +15,6 @@ using mRemoteNG.Config;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
-using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
@@ -154,8 +153,7 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
-            var credentialsService = new CredentialServiceFactory().Build();
-            var credsAndConsSetup = new CredsAndConsSetup(credentialsService);
+            var credsAndConsSetup = new CredsAndConsSetup();
             credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
