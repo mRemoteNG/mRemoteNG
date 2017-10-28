@@ -125,6 +125,7 @@
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionNodeSerializer27Tests.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManager27DeserializerTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentCompilerTests.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentEncryptorTests.cs" />
