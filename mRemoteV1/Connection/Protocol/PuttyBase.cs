@@ -80,7 +80,7 @@ namespace mRemoteNG.Connection.Protocol
 							}
 							else if (Settings.Default.EmptyCredentials == "custom")
 							{
-								username = Convert.ToString(Settings.Default.DefaultUsername);
+								username = Settings.Default.DefaultUsername;
 							}
 						}
 								
@@ -93,7 +93,7 @@ namespace mRemoteNG.Connection.Protocol
 							if (Settings.Default.EmptyCredentials == "custom")
 							{
                                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                                password = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
+                                password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
 							}
 						}
 								

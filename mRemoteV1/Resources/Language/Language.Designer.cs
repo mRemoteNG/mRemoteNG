@@ -440,7 +440,7 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Looks up a localized string similar to You cannot import a normal connection file.
-        ///Please use File - Load Connections for normal connection files!.
+        ///Please use File - Open Connection File for normal connection files!.
         /// </summary>
         internal static string strCannotImportNormalSessionFile {
             get {

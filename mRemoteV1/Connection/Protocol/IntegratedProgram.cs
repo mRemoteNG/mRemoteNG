@@ -23,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 		    if (InterfaceControl.Info == null) return base.Initialize();
 
-		    _externalTool = Runtime.GetExtAppByName(InterfaceControl.Info.ExtApp);
+		    _externalTool = Runtime.GetExtAppByName(InterfaceControl.Info.Name);
 		    _externalTool.ConnectionInfo = InterfaceControl.Info;
 
 		    return base.Initialize();
@@ -63,9 +63,9 @@ namespace mRemoteNG.Connection.Protocol
 			    _process.Exited += ProcessExited;
 						
 				_process.Start();
-				_process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
-						
-				var startTicks = Environment.TickCount;
+                _process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
+
+                var startTicks = Environment.TickCount;
 				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
 				{
 					_process.Refresh();

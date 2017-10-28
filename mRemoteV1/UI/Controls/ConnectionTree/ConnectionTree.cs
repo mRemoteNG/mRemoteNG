@@ -20,6 +20,8 @@ namespace mRemoteNG.UI.Controls
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
+        private bool _allowEdit;
+        private bool _isUpdatingColumnWidth;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -90,21 +92,40 @@ namespace mRemoteNG.UI.Controls
             Collapsed += (sender, args) =>
             {
                 var container = args.Model as ContainerInfo;
-                if (container != null)
-                    container.IsExpanded = false;
+                if (container == null) return;
+                container.IsExpanded = false;
+                UpdateColumnWidth();
             };
             Expanded += (sender, args) =>
             {
                 var container = args.Model as ContainerInfo;
-                if (container != null)
-                    container.IsExpanded = true;
+                if (container == null) return;
+                container.IsExpanded = true;
+                UpdateColumnWidth();
             };
+            SizeChanged += OnSizeChanged;
             SelectionChanged += tvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
             CellToolTipShowing += tvConnections_CellToolTipShowing;
             ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
+            BeforeLabelEdit += HandleCheckForValidEdit;
+        }
+
+        private void OnSizeChanged(object o, EventArgs eventArgs)
+        {
+            if (_isUpdatingColumnWidth)
+                return;
+            UpdateColumnWidth();
+        }
+
+        private void UpdateColumnWidth()
+        {
+            _isUpdatingColumnWidth = true;
+            AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            Columns[0].Width += SmallImageSize.Width;
+            _isUpdatingColumnWidth = false;
         }
 
         private void PopulateTreeView()
@@ -137,12 +158,16 @@ namespace mRemoteNG.UI.Controls
 
         private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            //TODO for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
+            // for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
+            // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
             var property = propertyChangedEventArgs.PropertyName;
             if (property != "Name" && property != "OpenConnections") return;
             var senderAsConnectionInfo = sender as ConnectionInfo;
-            if (senderAsConnectionInfo != null)
-                RefreshObject(senderAsConnectionInfo);
+            if (senderAsConnectionInfo == null)
+                return;
+
+            RefreshObject(senderAsConnectionInfo);
+            UpdateColumnWidth();
         }
 
         private void ExecutePostSetupActions()
@@ -201,11 +226,12 @@ namespace mRemoteNG.UI.Controls
 
         private void AddNode(ConnectionInfo newNode)
         {
-            if (SelectedNode == null) return;
+            // use root node if no node is selected
+            ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
             DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
-            var selectedContainer = SelectedNode as ContainerInfo;
-            var parent = selectedContainer ?? SelectedNode?.Parent;
+            var selectedContainer = parentNode as ContainerInfo;
+            var parent = selectedContainer ?? parentNode.Parent;
             newNode.SetParent(parent);
             Expand(parent);
             SelectObject(newNode, true);
@@ -222,8 +248,22 @@ namespace mRemoteNG.UI.Controls
 
         public void RenameSelectedNode()
         {
+            _allowEdit = true;
             SelectedItem.BeginEdit();
             Runtime.SaveConnectionsAsync();
+        }
+
+        public void HandleCheckForValidEdit(object sender, LabelEditEventArgs e)
+        {
+            if (!(sender is ConnectionTree)) return;
+            if (_allowEdit)
+            {
+                _allowEdit = false;
+            }
+            else
+            {
+                e.CancelEdit = true;
+            }
         }
 
         public void DeleteSelectedNode()
@@ -237,6 +277,7 @@ namespace mRemoteNG.UI.Controls
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             RefreshObject(sender);
+            UpdateColumnWidth();
         }
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)
