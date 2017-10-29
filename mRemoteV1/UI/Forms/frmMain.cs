@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -14,7 +15,6 @@ using mRemoteNG.Config;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
-using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
@@ -22,14 +22,13 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
-using Microsoft.Win32;
 using WeifenLuo.WinFormsUI.Docking;
 
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class FrmMain
+	public partial class FrmMain
     {
         public static FrmMain Default { get; } = new FrmMain();
 
@@ -42,7 +41,6 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
-        private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private ThemeManager _themeManager;
 
@@ -155,8 +153,7 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
-            var credentialsService = new CredentialServiceFactory().Build();
-            var credsAndConsSetup = new CredsAndConsSetup(credentialsService);
+            var credsAndConsSetup = new CredsAndConsSetup();
             credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
@@ -186,7 +183,6 @@ namespace mRemoteNG.UI.Forms
 
             toolsMenu1.MainForm = this;
             toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
-            toolsMenu1.UnlockerFormFactory = _credRepoUnlockerFormFactory;
 
             _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
@@ -219,7 +215,6 @@ namespace mRemoteNG.UI.Forms
         {
             PromptForUpdatesPreference();
             CheckForUpdates();
-            UnlockRepositories(Runtime.CredentialProviderCatalog, this);
         }
 
         private void PromptForUpdatesPreference()
@@ -260,13 +255,6 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
             Startup.Instance.CheckForUpdate();
-        }
-
-        private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
-        {
-            if (!Settings.Default.PromptUnlockCredReposOnStartup) return;
-            var credentialUnlockerForm = _credRepoUnlockerFormFactory.Build(repositories);
-            credentialUnlockerForm.ShowDialog(parentForm);
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

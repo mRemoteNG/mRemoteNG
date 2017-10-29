@@ -6,7 +6,7 @@ using mRemoteNG.Container;
 
 namespace mRemoteNG.Tree
 {
-    public class SelectedConnectionDeletionConfirmer : IConfirm<ConnectionInfo>
+	public class SelectedConnectionDeletionConfirmer : IConfirm<ConnectionInfo>
     {
         private readonly Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> _confirmationFunc;
 
