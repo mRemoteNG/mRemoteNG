@@ -1,3 +1,10 @@
+1.75.7010 (2017-10-29):
+
+Fixes:
+------
+#756: CustomConsPath always null
+
+
 1.75.7009 (2017-10-28):
 
 Fixes:
