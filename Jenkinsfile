@@ -60,10 +60,4 @@ node('windows') {
 			throw ex
 		}
 	}
-
-	stage ('Upload Reports') {
-    	nunit testResultsPattern: "${testResultFilePrefix}*.xml"
-    	bat "\"${reportGeneratorPath}\" -reports:\"${jobDir}\\${coverageReport}\" -targetdir:\"${jobDir}\\reports\" -reporttypes:Html"
-    	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports', reportFiles: 'index.htm', reportName: 'Code Coverage Report', reportTitles: ''])
-	}
 }
