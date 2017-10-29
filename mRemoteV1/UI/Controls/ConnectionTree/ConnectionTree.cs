@@ -134,6 +134,7 @@ namespace mRemoteNG.UI.Controls
             SetObjects(ConnectionTreeModel.RootNodes);
             RegisterModelUpdateHandlers();
             NodeSearcher = new NodeSearcher(ConnectionTreeModel);
+            UpdateColumnWidth();
             ExecutePostSetupActions();
         }
 
