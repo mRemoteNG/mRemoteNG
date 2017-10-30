@@ -14,6 +14,9 @@ using System;
 using System.Reflection;
 using NUnit.Core;
 using NUnit.Core.Extensibility;
+using NUnit.Framework.Internal;
+using System.Diagnostics.Tracing;
+using NUnit.Framework.Interfaces;
 
 namespace TechTalk.SpecFlow
 {
