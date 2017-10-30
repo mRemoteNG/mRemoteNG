@@ -169,7 +169,7 @@ namespace mRemoteNG.Config.Putty
 		private static string GetPuttyConfPath()
 		{
 		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
-		    return Path.Combine(puttyPath, "putty.conf");
+		    return Path.Combine(Path.GetDirectoryName(puttyPath), "putty.conf");
 		}
 			
 		private static string GetSessionsFolderPath()
