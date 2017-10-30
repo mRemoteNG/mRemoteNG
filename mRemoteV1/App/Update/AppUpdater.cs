@@ -199,10 +199,12 @@ namespace mRemoteNG.App.Update
             var constructor = type.GetConstructor(bindingFlags, null, argumentTypes, null);
             object[] arguments = {result, exception, cancelled, userToken};
 
+            if (constructor == null)
+                return null;
             return (DownloadStringCompletedEventArgs) constructor.Invoke(arguments);
         }
 
-        public DownloadStringCompletedEventArgs DownloadString(Uri address)
+        private DownloadStringCompletedEventArgs DownloadString(Uri address)
         {
             var webClient = CreateWebClient();
             var result = string.Empty;
