@@ -15,13 +15,12 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class ConnectionTree : TreeListView, IConnectionTree
+	public partial class ConnectionTree : TreeListView, IConnectionTree
     {
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
         private bool _allowEdit;
-        private bool _isUpdatingColumnWidth;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -94,16 +93,15 @@ namespace mRemoteNG.UI.Controls
                 var container = args.Model as ContainerInfo;
                 if (container == null) return;
                 container.IsExpanded = false;
-                UpdateColumnWidth();
-            };
+				AutoResizeColumn(Columns[0]);
+			};
             Expanded += (sender, args) =>
             {
                 var container = args.Model as ContainerInfo;
                 if (container == null) return;
                 container.IsExpanded = true;
-                UpdateColumnWidth();
-            };
-            SizeChanged += OnSizeChanged;
+				AutoResizeColumn(Columns[0]);
+			};
             SelectionChanged += tvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
@@ -113,20 +111,28 @@ namespace mRemoteNG.UI.Controls
             BeforeLabelEdit += HandleCheckForValidEdit;
         }
 
-        private void OnSizeChanged(object o, EventArgs eventArgs)
-        {
-            if (_isUpdatingColumnWidth)
-                return;
-            UpdateColumnWidth();
-        }
+		/// <summary>
+		/// Resizes the given column to ensure that all content is shown
+		/// </summary>
+	    private void AutoResizeColumn(ColumnHeader column)
+	    {
+		    var longestIndentationAndTextWidth = int.MinValue;
+		    var horizontalScrollOffset = LowLevelScrollPosition.X;
+		    const int padding = 10;
 
-        private void UpdateColumnWidth()
-        {
-            _isUpdatingColumnWidth = true;
-            AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            Columns[0].Width += SmallImageSize.Width;
-            _isUpdatingColumnWidth = false;
-        }
+		    for (var i = 0; i < Items.Count; i++)
+		    {
+			    var rowIndentation = Items[i].Position.X;
+			    var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
+
+				longestIndentationAndTextWidth = Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
+		    }
+
+		    column.Width = longestIndentationAndTextWidth +
+		                   SmallImageSize.Width +
+		                   horizontalScrollOffset +
+		                   padding;
+		}
 
         private void PopulateTreeView()
         {
@@ -134,9 +140,9 @@ namespace mRemoteNG.UI.Controls
             SetObjects(ConnectionTreeModel.RootNodes);
             RegisterModelUpdateHandlers();
             NodeSearcher = new NodeSearcher(ConnectionTreeModel);
-            UpdateColumnWidth();
             ExecutePostSetupActions();
-        }
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void RegisterModelUpdateHandlers()
         {
@@ -168,8 +174,8 @@ namespace mRemoteNG.UI.Controls
                 return;
 
             RefreshObject(senderAsConnectionInfo);
-            UpdateColumnWidth();
-        }
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void ExecutePostSetupActions()
         {
@@ -278,8 +284,8 @@ namespace mRemoteNG.UI.Controls
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             RefreshObject(sender);
-            UpdateColumnWidth();
-        }
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)
         {
@@ -298,7 +304,7 @@ namespace mRemoteNG.UI.Controls
             if (mouseEventArgs.Clicks < 2) return;
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem.RowObject as ConnectionInfo;
+	        var clickedNode = listItem?.RowObject as ConnectionInfo;
             if (clickedNode == null) return;
             DoubleClickHandler.Execute(clickedNode);
         }
