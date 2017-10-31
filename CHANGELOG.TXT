@@ -1,3 +1,10 @@
+1.75.7011 (2017-xx-xx):
+
+Fixes:
+------
+#761: Connections using external tools do not start (introduced in v1.75.7009)
+
+
 1.75.7010 (2017-10-29):
 
 Fixes:
