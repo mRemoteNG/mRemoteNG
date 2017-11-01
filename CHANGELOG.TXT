@@ -3,6 +3,7 @@
 Fixes:
 ------
 #761: Connections using external tools do not start (introduced in v1.75.7009)
+Minor changes to how the connection tree column widths are calculated
 
 
 1.75.7010 (2017-10-29):
