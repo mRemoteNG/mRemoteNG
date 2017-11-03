@@ -246,7 +246,7 @@
   </data>
   <data name="strCannotImportNormalSessionFile" xml:space="preserve">
     <value>You cannot import a normal connection file.
-Please use File - Load Connections for normal connection files!</value>
+Please use File - Open Connection File for normal connection files!</value>
   </data>
   <data name="strCannotStartPortScan" xml:space="preserve">
     <value>IPアドレスのフォーマットが正しくないのでポートスキャンの開始に失敗しました</value>

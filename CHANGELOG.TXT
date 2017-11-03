@@ -14,11 +14,34 @@ Improved compatability between environments when building mRemoteNG from source
 #493: Changed backup file name time stamp to use local system time rather than UTC
 
 
-1.75.7009 (2017-07-XX):
+1.75.7010 (2017-10-29):
 
 Fixes:
 ------
-#596: Exception when launching ExtTool without a connection selected
+#756: CustomConsPath always null
+
+
+1.75.7009 (2017-10-28):
+
+Fixes:
+------
+#676: Portable version ignores /cons param on first run
+#675: Attempting to add new connection/folder does not work in some situations
+#665: Can not add new connection or new folder in some situations
+#658: Keep Port Scan tab open after import
+#646: Exception after click on import port scan
+#635: Updated PuTTYNG to 0.70
+#610: mRemoteNG cannot start /crashes for some users on Windows server 2012 R2 server
+#600: Missing horizontal scrollbar on Connections Panel
+#596: Exception when launching external tool without a connection selected
+#550: Sometimes double-clicking connection tree node began rename instead of connecting
+#536: Prevented log file creation when writeLogFile option is not set
+#529: Erratic Tree Selection when using SQL Database
+#482: Default connection password not decrypted when loaded
+#335: The Quick Connect Toolbar > Connection view does not show open connections with the play icon
+#176: Unable to enter text in Quick Connect when SSH connection active
+Minor error message correction
+Minor code refactoring
 
 
 NO.RELEASE (2017-06-15):
