@@ -116,6 +116,12 @@ namespace mRemoteNG.UI.Controls
 		/// </summary>
 	    private void AutoResizeColumn(ColumnHeader column)
 	    {
+		    if (InvokeRequired)
+		    {
+			    Invoke((MethodInvoker) (() => AutoResizeColumn(column)));
+			    return;
+		    }
+
 		    var longestIndentationAndTextWidth = int.MinValue;
 		    var horizontalScrollOffset = LowLevelScrollPosition.X;
 		    const int padding = 10;
