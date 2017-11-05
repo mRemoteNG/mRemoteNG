@@ -492,7 +492,9 @@ namespace mRemoteNG.UI.Window
                             _pGrid.SelectedObject = propertyGridObject;
 
                             _btnShowProperties.Enabled = true;
-                            _btnShowInheritance.Enabled = gridObjectAsConnectionInfo.Parent != null;
+                            _btnShowInheritance.Enabled = 
+                                !(gridObjectAsConnectionInfo is PuttySessionInfo) &&
+                                gridObjectAsConnectionInfo.Parent != null;
                             _btnShowDefaultProperties.Enabled = false;
                             _btnShowDefaultInheritance.Enabled = false;
                             _btnIcon.Enabled = true;
