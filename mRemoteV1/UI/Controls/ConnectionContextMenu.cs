@@ -443,7 +443,9 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsSort.Enabled = false;
             _cMenTreeToolsExternalApps.Enabled = false;
             _cMenTreeDuplicate.Enabled = false;
-            _cMenTreeRename.Enabled = true;
+            _cMenTreeImport.Enabled = false;
+            _cMenTreeExportFile.Enabled = false;
+            _cMenTreeRename.Enabled = false;
             _cMenTreeDelete.Enabled = false;
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
@@ -498,6 +500,8 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete.Enabled = false;
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
+            _cMenTreeImport.Enabled = false;
+            _cMenTreeExportFile.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForConnectionNode(ConnectionInfo connectionInfo)
