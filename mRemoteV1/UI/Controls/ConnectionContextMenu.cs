@@ -60,9 +60,13 @@ namespace mRemoteNG.UI.Controls
             Opening += (sender, args) =>
             {
                 AddExternalApps();
+                if (_connectionTree.SelectedNode == null)
+                {
+                    args.Cancel = true;
+                    return;
+                }
                 ShowHideMenuItems();
             };
-            Closing += (sender, args) => EnableMenuItemsRecursive(Items);
         }
 
         private void InitializeComponent()
@@ -397,9 +401,6 @@ namespace mRemoteNG.UI.Controls
 
         internal void ShowHideMenuItems()
         {
-            if (_connectionTree.SelectedNode == null)
-                return;
-
             try
             {
                 Enabled = true;
