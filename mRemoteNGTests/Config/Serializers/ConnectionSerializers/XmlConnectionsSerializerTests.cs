@@ -12,7 +12,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
 {
-    public class XmlConnectionsSerializerTests
+	public class XmlConnectionsSerializerTests
     {
         private XmlConnectionsSerializer _serializer;
         private ConnectionTreeModel _connectionTreeModel;
@@ -24,7 +24,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
         {
             _connectionTreeModel = SetupConnectionTreeModel();
             _cryptographyProvider = new AeadCryptographyProvider();
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
                 _cryptographyProvider, 
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -52,11 +52,13 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
             Assert.That(connectionNode, Is.Not.Null);
         }
 
-        [TestCase("CredentialId", "")]
+        [TestCase("Username", "")]
+        [TestCase("Domain", "")]
+        [TestCase("Password", "")]
         [TestCase("InheritAutomaticResize", "False")]
         public void SerializerRespectsSaveFilterSettings(string attributeName, string expectedValue)
         {
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
                 _cryptographyProvider,
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter(true));

@@ -167,7 +167,7 @@ namespace mRemoteNG.Config.Connections
 			try
 			{
                 var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-			    var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+			    var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
                     cryptographyProvider, 
                     ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                     SaveFilter);

@@ -8,9 +8,8 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers
 {
-    // ReSharper disable once InconsistentNaming
-    [Obsolete("This serializer version is deprecated. Use XmlConnectionNodeSerializer")]
-    public class XmlConnectionNodeSerializer26 : ISerializer<ConnectionInfo,XElement>
+	// ReSharper disable once InconsistentNaming
+	public class XmlConnectionNodeSerializer26 : ISerializer<ConnectionInfo,XElement>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;

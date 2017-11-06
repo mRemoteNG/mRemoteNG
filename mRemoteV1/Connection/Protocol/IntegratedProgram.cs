@@ -1,12 +1,11 @@
-using mRemoteNG.App;
-using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Messages;
-
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -63,9 +62,9 @@ namespace mRemoteNG.Connection.Protocol
 			    _process.Exited += ProcessExited;
 						
 				_process.Start();
-				_process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
-						
-				var startTicks = Environment.TickCount;
+                _process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
+
+                var startTicks = Environment.TickCount;
 				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
 				{
 					_process.Refresh();

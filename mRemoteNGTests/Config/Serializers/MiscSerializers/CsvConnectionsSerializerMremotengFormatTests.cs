@@ -3,14 +3,13 @@ using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
-    public class CsvConnectionsSerializerMremotengFormatTests
+	public class CsvConnectionsSerializerMremotengFormatTests
     {
         private ICredentialRepositoryList _credentialRepositoryList;
         private const string ConnectionName = "myconnection";
@@ -88,7 +87,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             return new ConnectionInfo
             {
                 Name = ConnectionName,
-                CredentialRecordId = Guid.NewGuid().Maybe(),
+				Username = Username,
+				Domain = Domain,
+				Password = Password,
                 Inheritance = {Colors = true}
             };
         }

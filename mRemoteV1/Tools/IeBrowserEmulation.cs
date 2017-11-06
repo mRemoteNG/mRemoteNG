@@ -7,7 +7,7 @@ using mRemoteNG.App;
 
 namespace mRemoteNG.Tools
 {
-    public class IeBrowserEmulation
+	public class IeBrowserEmulation
     {
         // found this here:
         // http://www.neowin.net/forum/topic/1077469-vbnet-webbrowser-control-does-not-load-javascript/#comment-596755046
@@ -205,7 +205,7 @@ namespace mRemoteNG.Tools
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Register() failed.", ex);
+                Runtime.MessageCollector?.AddExceptionMessage("IeBrowserEmulation.Register() failed.", ex);
             }
         }
 
@@ -219,7 +219,7 @@ namespace mRemoteNG.Tools
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("IeBrowserEmulation.Unregister() failed.", ex);
+                Runtime.MessageCollector?.AddExceptionMessage("IeBrowserEmulation.Unregister() failed.", ex);
             }
 #endif
         }

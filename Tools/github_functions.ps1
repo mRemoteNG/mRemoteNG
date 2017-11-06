@@ -1,0 +1,220 @@
+$githubUrl = 'https://api.github.com'
+
+
+function Publish-GitHubRelease {
+    param (
+        [string]
+        [Parameter(Mandatory=$true)]
+        #
+        $Owner,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        #
+        $Repository,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        #
+        $ReleaseTitle,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        #
+        $TagName,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        # Either the SHA of the commit to target or the branch name.
+        $TargetCommitish,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        #
+        $Description,
+
+        [bool]
+        [Parameter(Mandatory=$true)]
+        #
+        $IsDraft,
+
+        [bool]
+        [Parameter(Mandatory=$true)]
+        #
+        $IsPrerelease,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        # The OAuth2 token to use for authentication.
+        $AuthToken
+    )
+
+    $body = New-GitHubReleaseRequestBody -TagName $TagName -TargetCommitish $TargetCommitish -ReleaseTitle $ReleaseTitle -Description $Description -IsDraft $IsDraft -IsPrerelease $IsPrerelease
+    $req_publishRelease = Invoke-WebRequest -Uri "$githubUrl/repos/$Owner/$Repository/releases" -Method Post -Headers @{"Authorization"="token $AuthToken"} -Body $body -ErrorAction Stop
+    $response_publishRelease = ConvertFrom-Json -InputObject $req_publishRelease.Content
+
+    Write-Output $response_publishRelease
+}
+
+
+function Edit-GitHubRelease {
+    param (
+        [string]
+        #[Parameter(Mandatory=$true)]
+        #
+        $Owner,
+
+        [string]
+        #[Parameter(Mandatory=$true)]
+        #
+        $Repository,
+
+        [string]
+        #[Parameter(Mandatory=$true)]
+        #
+        $ReleaseId,
+
+        [string]
+        #
+        $ReleaseTitle,
+
+        [string]
+        #
+        $TagName,
+
+        [string]
+        # Either the SHA of the commit to target or the branch name.
+        $TargetCommitish,
+
+        [string]
+        #
+        $Description,
+
+        [bool]
+        #
+        $IsDraft,
+
+        [bool]
+        #
+        $IsPrerelease,
+
+        [string]
+        #[Parameter(Mandatory=$true)]
+        # The OAuth2 token to use for authentication.
+        $AuthToken
+    )
+
+    $body_params = @{
+        "TagName" = $TagName
+        "TargetCommitish" = $TargetCommitish
+        "ReleaseTitle" = $ReleaseTitle
+        "Description" = $Description
+    }
+    if ($PSBoundParameters.ContainsKey("IsDraft")) { $body_params.Add("IsDraft", $IsDraft) }
+    if ($PSBoundParameters.ContainsKey("IsPrerelease")) { $body_params.Add("IsPrerelease", $IsPrerelease) }
+
+    $body = New-GitHubReleaseRequestBody @body_params
+    $req_editRelease = Invoke-WebRequest -Uri "$githubUrl/repos/$Owner/$Repository/releases/$ReleaseId" -Method Post -Headers @{"Authorization"="token $AuthToken"} -Body $body -ErrorAction Stop
+    $response_editRelease = ConvertFrom-Json -InputObject $req_editRelease.Content
+
+    Write-Output $response_editRelease
+}
+
+
+function Get-GitHubRelease {
+    param (
+        [string]
+        [Parameter(Mandatory=$true)]
+        #
+        $Owner,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        #
+        $Repository,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        #
+        $ReleaseId,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        # The OAuth2 token to use for authentication.
+        $AuthToken
+    )
+
+    $req_getRelease = Invoke-WebRequest -Uri "$githubUrl/repos/$Owner/$Repository/releases/$ReleaseId" -Method Get -Headers @{"Authorization"="token $AuthToken"} -ErrorAction Stop
+    $response_getRelease = ConvertFrom-Json -InputObject $req_getRelease.Content
+
+    Write-Output $response_getRelease
+}
+
+
+function Upload-GitHubReleaseAsset {
+    param (
+        [string]
+        [Parameter(Mandatory=$true)]
+        $UploadUri,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        # Path to the file to upload with the release
+        $FilePath,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        # Content type of the file
+        $ContentType,
+
+        [string]
+        [Parameter(Mandatory=$true)]
+        # The OAuth2 token to use for authentication.
+        $AuthToken
+    )
+
+    $UploadUri = $UploadUri -replace "(\{[\w,\?]*\})$"
+    $file = Get-Item -Path $FilePath
+
+    $req_uploadZipAsset = Invoke-WebRequest -Uri "$($UploadUri)?name=$($file.Name)" -Method Post -Headers @{"Authorization"="token $AuthToken"} -ContentType $ContentType -InFile $file.FullName -ErrorAction Stop
+}
+
+
+function New-GitHubReleaseRequestBody {
+    param (
+        [string]
+        # 
+        $TagName,
+
+        [string]
+        # Either the SHA of the commit to target or the branch name.
+        $TargetCommitish,
+
+        [string]
+        # Title of the release
+        $ReleaseTitle,
+
+        [string]
+        # Description of the release
+        $Description,
+
+        [bool]
+        # Is this a draft?
+        $IsDraft,
+
+        [bool]
+        # Is this a pre-release?
+        $IsPrerelease
+    )
+
+    $body_params = [ordered]@{}
+    if ($TagName -ne "")         { $body_params.Add("tag_name", $TagName) }
+    if ($TargetCommitish -ne "") { $body_params.Add("target_commitish", $TargetCommitish) }
+    if ($ReleaseTitle -ne "")    { $body_params.Add("name", $ReleaseTitle) }
+    if ($Description -ne "")     { $body_params.Add("body", $Description) }
+    if ($PSBoundParameters.ContainsKey("IsDraft"))         { $body_params.Add("draft", $IsDraft) }
+    if ($PSBoundParameters.ContainsKey("IsPrerelease"))    { $body_params.Add("prerelease", $IsPrerelease) }
+
+    $json_body = ConvertTo-Json -InputObject $body_params -Compress
+    Write-Output $json_body
+}

@@ -13,6 +13,10 @@ countchappy (github.com/countchappy)
 Tony Lambert
 Julien Roncaglia (github.com/vbfox)
 github.com/peterchenadded
+Brandon Wulf (github.com/mrwulf)
+Pedro Rodrigues (github.com/pedro2555)
+github.com/dekelMP
+
 
 
 Past Contributors

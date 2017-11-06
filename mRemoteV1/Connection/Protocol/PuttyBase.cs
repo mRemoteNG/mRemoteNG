@@ -1,15 +1,12 @@
-using mRemoteNG.App;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.Credential;
-using mRemoteNG.Security;
+using mRemoteNG.App;
+using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.Tools.Cmdline;
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -74,16 +71,10 @@ namespace mRemoteNG.Connection.Protocol
 					{
 						var username = "";
 						var password = "";
-					    var credentialRecord = default(ICredentialRecord);
 
-					    if (InterfaceControl.Info.CredentialRecordId.Any())
-					    {
-					        credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(InterfaceControl.Info.CredentialRecordId.Single());
-					    }
-
-						if (!string.IsNullOrEmpty(credentialRecord?.Username))
+						if (!string.IsNullOrEmpty(InterfaceControl.Info?.Username))
 						{
-							username = credentialRecord.Username;
+							username = InterfaceControl.Info.Username;
 						}
 						else
 						{
@@ -99,9 +90,9 @@ namespace mRemoteNG.Connection.Protocol
 						    }
 						}
 						
-						if (!string.IsNullOrEmpty(credentialRecord?.Password.ConvertToUnsecureString()))
+						if (!string.IsNullOrEmpty(InterfaceControl.Info?.Password))
 						{
-							password = credentialRecord.Password.ConvertToUnsecureString();
+							password = InterfaceControl.Info.Password;
 						}
 						else
 						{

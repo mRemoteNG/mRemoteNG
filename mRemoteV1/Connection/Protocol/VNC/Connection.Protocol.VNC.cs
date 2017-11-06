@@ -1,8 +1,6 @@
 using System;
-using mRemoteNG.App;
 using System.ComponentModel;
-using System.Linq;
-using mRemoteNG.Security;
+using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -166,11 +164,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				_VNC.ConnectComplete += VNCEvent_Connected;
 				_VNC.ConnectionLost += VNCEvent_Disconnected;
 				FrmMain.ClipboardChanged += VNCEvent_ClipboardChanged;
-                if (!Info.CredentialRecordId.Any())
-                    return;
-			    var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(Info.CredentialRecordId.Single());
                 if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials 
-                    && credentialRecord?.Password?.Length > 0)
+                    && Info?.Password?.Length > 0)
 				{
 					_VNC.GetPassword = VNCEvent_Authenticate;
 				}
@@ -203,9 +198,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		private string VNCEvent_Authenticate()
 		{
-		    return Info.CredentialRecordId.Any()
-                ? Runtime.CredentialProviderCatalog.GetCredentialRecord(Info.CredentialRecordId.Single())?.Password?.ConvertToUnsecureString() 
-                : "";
+		    return Info.Password;
 		}
 
 	    #endregion

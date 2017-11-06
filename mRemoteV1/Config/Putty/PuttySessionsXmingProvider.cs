@@ -135,15 +135,19 @@ namespace mRemoteNG.Config.Putty
 				
 			try
 			{
-			    _eventWatcher = new FileSystemWatcher(GetSessionsFolderPath())
-			    {
-			        NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite
-			    };
-			    _eventWatcher.Changed += OnFileSystemEventArrived;
-				_eventWatcher.Created += OnFileSystemEventArrived;
-				_eventWatcher.Deleted += OnFileSystemEventArrived;
-				_eventWatcher.Renamed += OnFileSystemEventArrived;
-				_eventWatcher.EnableRaisingEvents = true;
+                var sessionsFolderPath = GetSessionsFolderPath();
+                if (Directory.Exists(sessionsFolderPath))
+                {
+                    _eventWatcher = new FileSystemWatcher(sessionsFolderPath)
+                    {
+                        NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite
+                    };
+                    _eventWatcher.Changed += OnFileSystemEventArrived;
+                    _eventWatcher.Created += OnFileSystemEventArrived;
+                    _eventWatcher.Deleted += OnFileSystemEventArrived;
+                    _eventWatcher.Renamed += OnFileSystemEventArrived;
+                    _eventWatcher.EnableRaisingEvents = true;
+                }
 			}
 			catch (Exception ex)
 			{
@@ -169,7 +173,7 @@ namespace mRemoteNG.Config.Putty
 		private static string GetPuttyConfPath()
 		{
 		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
-		    return Path.Combine(puttyPath, "putty.conf");
+		    return Path.Combine(Path.GetDirectoryName(puttyPath), "putty.conf");
 		}
 			
 		private static string GetSessionsFolderPath()
