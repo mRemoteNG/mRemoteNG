@@ -140,7 +140,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.ShowOnToolbarColumnHeader.AspectName = "ShowOnToolbar";
             this.ShowOnToolbarColumnHeader.Text = "Show On Toolbar";
-            this.ShowOnToolbarColumnHeader.Width = 95;
+            this.ShowOnToolbarColumnHeader.Width = 102;
             // 
             // ToolsContextMenuStrip
             // 
@@ -216,6 +216,7 @@ namespace mRemoteNG.UI.Window
             this.ShowOnToolbarCheckBox.TabIndex = 10;
             this.ShowOnToolbarCheckBox.Text = "Show on toolbar";
             this.ShowOnToolbarCheckBox.UseVisualStyleBackColor = true;
+            this.ShowOnToolbarCheckBox.CheckedChanged += new System.EventHandler(this.ShowOnToolbarCheckBox_CheckedChanged);
             this.ShowOnToolbarCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
             // TryToIntegrateCheckBox

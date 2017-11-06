@@ -194,6 +194,17 @@ namespace mRemoteNG.UI.Window
 				WaitForExitCheckBox.Enabled = true;
 			}
 		}
+
+        private void ShowOnToolbarCheckBox_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (_selectedTool != null)
+            {
+                _selectedTool.ShowOnToolbar = ShowOnToolbarCheckBox.Checked;
+                // Force the collection to be updated.. which triggers the CollectionChanged Event.. which updates the toolbar immediately                 
+                int loc = Runtime.ExternalToolsService.ExternalTools.IndexOf(_selectedTool);
+                Runtime.ExternalToolsService.ExternalTools[loc] = _selectedTool;
+            }
+        }
         #endregion
 				
 		private void ApplyLanguage()
