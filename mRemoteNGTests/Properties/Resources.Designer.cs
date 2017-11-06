@@ -19,7 +19,7 @@ namespace mRemoteNGTests.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -65,7 +65,8 @@ namespace mRemoteNGTests.Properties {
         ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Installer-1.75.6179.28160.msi
         ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
         ///CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
-        ///Checksum: A1E50ACAC4CB8023527E1E7A0E682459.
+        ///Checksum: A1E50ACAC4CB8023527E1E7A0E682459
+        ///.
         /// </summary>
         internal static string beta_update {
             get {
@@ -77,7 +78,6 @@ namespace mRemoteNGTests.Properties {
         ///   Looks up a localized string similar to Version: 1.75.6170.27478
         ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Portable-1.75.6179.28241.zip
         ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
-        ///CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
         ///Checksum: 1C35EA199F58001BC4EBB164D8B3D11C.
         /// </summary>
         internal static string beta_update_portable {
@@ -173,7 +173,8 @@ namespace mRemoteNGTests.Properties {
         ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Installer-1.75.6179.28160.msi
         ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
         ///CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
-        ///Checksum: A1E50ACAC4CB8023527E1E7A0E682459.
+        ///Checksum: A1E50ACAC4CB8023527E1E7A0E682459
+        ///.
         /// </summary>
         internal static string dev_update {
             get {
@@ -185,7 +186,6 @@ namespace mRemoteNGTests.Properties {
         ///   Looks up a localized string similar to Version: 1.75.6170.27478
         ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Portable-1.75.6179.28241.zip
         ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
-        ///CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
         ///Checksum: 1C35EA199F58001BC4EBB164D8B3D11C.
         /// </summary>
         internal static string dev_update_portable {
@@ -330,11 +330,11 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version: 1.75.6164.27544
-        ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Installer-1.75.6179.28160.msi
-        ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
-        ///CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
-        ///Checksum: A1E50ACAC4CB8023527E1E7A0E682459.
+        ///   Looks up a localized string similar to Version: 1.72.5065.32737
+        ///dURL: http://downloads.mremoteng.org/mRemoteNG-Installer-1.72.exe
+        ///clURL: http://update.mremoteng.org/changes-1.72.txt
+        ///CertificateThumbprint: 1cbd910dbd6e77f26506e7f600736972f700673f
+        ///.
         /// </summary>
         internal static string update {
             get {
@@ -346,7 +346,6 @@ namespace mRemoteNGTests.Properties {
         ///   Looks up a localized string similar to Version: 1.75.6170.27478
         ///dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/v1.75Beta3/mRemoteNG-Portable-1.75.6179.28241.zip
         ///clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v1.75Beta3/CHANGELOG.TXT
-        ///CertificateThumbprint: 0CEA828E5C787EA8AA89268D83816C1EA03375BA
         ///Checksum: 1C35EA199F58001BC4EBB164D8B3D11C.
         /// </summary>
         internal static string update_portable {
