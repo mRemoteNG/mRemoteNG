@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Window
         internal BrightIdeasSoftware.OLVColumn TryToIntegrateColumnHeader;
         internal System.Windows.Forms.GroupBox PropertiesGroupBox;
 		internal Controls.Base.NGTextBox DisplayNameTextBox;
+        internal BrightIdeasSoftware.OLVColumn ShowOnToolbarColumnHeader;
 		internal Controls.Base.NGLabel DisplayNameLabel;
 		internal Controls.Base.NGTextBox ArgumentsCheckBox;
 		internal Controls.Base.NGTextBox FilenameTextBox;
@@ -27,8 +28,8 @@ namespace mRemoteNG.UI.Window
 		internal Controls.Base.NGCheckBox WaitForExitCheckBox;
 		internal Controls.Base.NGLabel OptionsLabel;
 		internal Controls.Base.NGCheckBox TryToIntegrateCheckBox;
-		
-		internal Controls.Base.NGListView ToolsListObjView;
+        internal Controls.Base.NGCheckBox ShowOnToolbarCheckBox;
+        internal Controls.Base.NGListView ToolsListObjView;
 				
 		private void InitializeComponent()
 		{
@@ -45,7 +46,9 @@ namespace mRemoteNG.UI.Window
             this.DeleteToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LaunchToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowOnToolbarColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.PropertiesGroupBox = new mRemoteNG.UI.Controls.Base.NGGroupBox();
+            this.ShowOnToolbarCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.TryToIntegrateCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.OptionsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.WaitForExitCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -84,7 +87,8 @@ namespace mRemoteNG.UI.Window
             this.FilenameColumnHeader,
             this.ArgumentsColumnHeader,
             this.WaitForExitColumnHeader,
-            this.TryToIntegrateColumnHeader});
+            this.TryToIntegrateColumnHeader,
+            this.ShowOnToolbarColumnHeader});
             this.ToolsListObjView.ContextMenuStrip = this.ToolsContextMenuStrip;
             this.ToolsListObjView.Cursor = System.Windows.Forms.Cursors.Default;
             this.ToolsListObjView.FullRowSelect = true;
@@ -132,6 +136,12 @@ namespace mRemoteNG.UI.Window
             this.TryToIntegrateColumnHeader.Text = "Try To Integrate";
             this.TryToIntegrateColumnHeader.Width = 95;
             // 
+            // TryToIntegrateColumnHeader
+            // 
+            this.TryToIntegrateColumnHeader.AspectName = "ShowToolbar";
+            this.TryToIntegrateColumnHeader.Text = "Show On Toolbar";
+            this.TryToIntegrateColumnHeader.Width = 95;
+            // 
             // ToolsContextMenuStrip
             // 
             this.ToolsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -177,6 +187,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.PropertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PropertiesGroupBox.Controls.Add(this.ShowOnToolbarCheckBox);
             this.PropertiesGroupBox.Controls.Add(this.TryToIntegrateCheckBox);
             this.PropertiesGroupBox.Controls.Add(this.OptionsLabel);
             this.PropertiesGroupBox.Controls.Add(this.WaitForExitCheckBox);
@@ -194,6 +205,18 @@ namespace mRemoteNG.UI.Window
             this.PropertiesGroupBox.TabIndex = 1;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "External Tool Properties";
+            // 
+            // ShowOnToolbarCheckBox
+            // 
+            this.ShowOnToolbarCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.ShowOnToolbarCheckBox.AutoSize = true;
+            this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(442, 106);
+            this.ShowOnToolbarCheckBox.Name = "ShowOnToolbarCheckBox";
+            this.ShowOnToolbarCheckBox.Size = new System.Drawing.Size(113, 17);
+            this.ShowOnToolbarCheckBox.TabIndex = 10;
+            this.ShowOnToolbarCheckBox.Text = "Show on toolbar";
+            this.ShowOnToolbarCheckBox.UseVisualStyleBackColor = true;
+            this.ShowOnToolbarCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
             // TryToIntegrateCheckBox
             // 

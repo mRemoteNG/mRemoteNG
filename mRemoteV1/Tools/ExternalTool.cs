@@ -19,6 +19,7 @@ namespace mRemoteNG.Tools
 		public bool WaitForExit { get; set; }
 		public string Arguments { get; set; }
 		public bool TryIntegrate { get; set; }
+        public bool ShowOnToolbar { get; set; }
         public ConnectionInfo ConnectionInfo { get; set; }
 		
         public Icon Icon

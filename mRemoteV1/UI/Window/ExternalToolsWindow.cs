@@ -117,6 +117,7 @@ namespace mRemoteNG.UI.Window
 					ArgumentsCheckBox.Text = _selectedTool.Arguments;
 					WaitForExitCheckBox.Checked = _selectedTool.WaitForExit;
 					TryToIntegrateCheckBox.Checked = _selectedTool.TryIntegrate;
+                    ShowOnToolbarCheckBox.Checked = _selectedTool.ShowOnToolbar;
 				}
 				else
 				{
@@ -151,6 +152,7 @@ namespace mRemoteNG.UI.Window
 				_selectedTool.Arguments = ArgumentsCheckBox.Text;
 				_selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
 				_selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;
+                _selectedTool.ShowOnToolbar = ShowOnToolbarCheckBox.Checked;
 						
 				UpdateToolsListObjView();
 			}
@@ -208,6 +210,7 @@ namespace mRemoteNG.UI.Window
 			ArgumentsColumnHeader.Text = Language.strColumnArguments;
 			WaitForExitColumnHeader.Text = Language.strColumnWaitForExit;
 			TryToIntegrateCheckBox.Text = Language.strTryIntegrate;
+            ShowOnToolbarCheckBox.Text = Language.strShowOnToolbar;
 					
 			PropertiesGroupBox.Text = Language.strGroupboxExternalToolProperties;
 					
