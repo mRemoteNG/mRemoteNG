@@ -138,9 +138,9 @@ namespace mRemoteNG.UI.Window
             // 
             // TryToIntegrateColumnHeader
             // 
-            this.TryToIntegrateColumnHeader.AspectName = "ShowToolbar";
-            this.TryToIntegrateColumnHeader.Text = "Show On Toolbar";
-            this.TryToIntegrateColumnHeader.Width = 95;
+            this.ShowOnToolbarColumnHeader.AspectName = "ShowOnToolbar";
+            this.ShowOnToolbarColumnHeader.Text = "Show On Toolbar";
+            this.ShowOnToolbarColumnHeader.Width = 95;
             // 
             // ToolsContextMenuStrip
             // 
