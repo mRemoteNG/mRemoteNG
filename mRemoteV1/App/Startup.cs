@@ -253,11 +253,11 @@ namespace mRemoteNG.App
                 var ConsParam = "";
                 if (cmd["cons"] != null)
                 {
-                    ConsParam = "cons";
+                    ConsParam = cmd["cons"];
                 }
                 if (cmd["c"] != null)
                 {
-                    ConsParam = "c";
+                    ConsParam = cmd["c"];
                 }
 
                 var ResetPosParam = "";
