@@ -204,6 +204,9 @@ namespace mRemoteNG.UI.Forms
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
 			}
 
+            if (Settings.Default.ResetPanels)
+                SetDefaultLayout();
+
             Runtime.LoadConnections();
 
             Windows.TreePanel.Focus();
