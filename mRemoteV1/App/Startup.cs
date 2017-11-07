@@ -318,8 +318,12 @@ namespace mRemoteNG.App
                 if (!string.IsNullOrEmpty(ResetPosParam))
                 {
                     Settings.Default.MainFormKiosk = false;
-                    Settings.Default.MainFormLocation = new Point(999, 999);
-                    Settings.Default.MainFormSize = new Size(900, 600);
+	                var newWidth = 900;
+	                var newHeight = 600;
+	                var newX = Screen.PrimaryScreen.WorkingArea.Width/2 - newWidth/2;
+	                var newY = Screen.PrimaryScreen.WorkingArea.Height/2 - newHeight/2;
+                    Settings.Default.MainFormLocation = new Point(newX, newY);
+                    Settings.Default.MainFormSize = new Size(newWidth, newHeight);
                     Settings.Default.MainFormState = FormWindowState.Normal;
                 }
 
