@@ -2433,4 +2433,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
     <value>Alert on Idle Disconnect</value>
   </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>Could not find external tool with name "{0}"</value>
+  </data>
 </root>

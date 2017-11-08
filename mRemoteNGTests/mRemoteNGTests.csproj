@@ -123,6 +123,7 @@
     <Compile Include="Config\Serializers\XmlRootNodeSerializerTests.cs" />
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
+    <Compile Include="Connection\Protocol\IntegratedProgramTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
     <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
     <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />

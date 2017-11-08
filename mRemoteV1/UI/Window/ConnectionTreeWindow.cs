@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -15,9 +16,7 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class ConnectionTreeWindow
 	{
-	    private readonly ConnectionContextMenu _contextMenu;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-
 
         public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
@@ -32,8 +31,6 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.Tree;
 			DockPnl = panel;
 			InitializeComponent();
-            _contextMenu = new ConnectionContextMenu(olvConnections);
-            olvConnections.ContextMenuStrip = _contextMenu;
             SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
@@ -84,8 +81,6 @@ namespace mRemoteNG.UI.Window
 	    private void SetConnectionTreeEventHandlers()
 	    {
 	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(olvConnections, MessageBox.Show);
-            olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
-            olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
             olvConnections.KeyDown += tvConnections_KeyDown;
             olvConnections.KeyPress += tvConnections_KeyPress;
             SetTreePostSetupActions();
@@ -170,26 +165,6 @@ namespace mRemoteNG.UI.Window
                 SelectedNode.Parent.SortRecursive(sortDirection);
 
             Runtime.SaveConnectionsAsync();
-        }
-
-        private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            _contextMenu.DisableShortcutKeys();
-        }
-
-        private void tvConnections_AfterLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            try
-            {
-                _contextMenu.EnableShortcutKeys();
-                ConnectionTree.ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-                Windows.ConfigForm.SelectedTreeNode = SelectedNode;
-                Runtime.SaveConnectionsAsync();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
         }
         #endregion
 

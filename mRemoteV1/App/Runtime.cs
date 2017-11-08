@@ -469,7 +469,7 @@ namespace mRemoteNG.App
                     connectionsSaver.SQLDatabaseName = Settings.Default.SQLDatabaseName;
                     connectionsSaver.SQLUsername = Settings.Default.SQLUser;
                     var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Settings.Default.SQLUser, EncryptionKey);
+                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Settings.Default.SQLPass, EncryptionKey);
                 }
 
                 connectionsSaver.SaveConnections();
