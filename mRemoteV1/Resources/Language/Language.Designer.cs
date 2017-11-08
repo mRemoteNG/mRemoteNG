@@ -61,6 +61,15 @@ namespace mRemoteNG
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not find external tool with name &quot;{0}&quot;.
+        /// </summary>
+        internal static string CouldNotFindExternalTool {
+            get {
+                return ResourceManager.GetString("CouldNotFindExternalTool", resourceCulture);
+            }
+        }
+		
+		/// <summary>
         ///   Looks up a localized string similar to Credentials.
         /// </summary>
         internal static string Credentials {

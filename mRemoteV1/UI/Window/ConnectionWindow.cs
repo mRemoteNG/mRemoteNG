@@ -4,32 +4,31 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using mRemoteNG.Connection;
 using mRemoteNG.App;
-using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.Config;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Connection.Protocol;
-using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Themes;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
+using mRemoteNG.UI.TaskDialog;
+using WeifenLuo.WinFormsUI.Docking;
 using Message = System.Windows.Forms.Message;
 using TabControl = Crownwood.Magic.Controls.TabControl;
 using TabPage = Crownwood.Magic.Controls.TabPage;
-using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
-    public partial class ConnectionWindow : BaseWindow
+	public partial class ConnectionWindow : BaseWindow
     {
         public TabControl TabController;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private readonly FrmMain _frmMain = FrmMain.Default;
-        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
+        private VisualStudioToolStripExtender vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         #region Public Methods
@@ -156,12 +155,12 @@ namespace mRemoteNG.UI.Window
         {
             if (TabController.SelectedTab == null)
             {
-                _frmMain.SelectedConnection = null;
+	            FrmMain.Default.SelectedConnection = null;
             }
             else
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                _frmMain.SelectedConnection = interfaceControl?.Info;
+	            FrmMain.Default.SelectedConnection = interfaceControl?.Info;
             }
         }
         #endregion
@@ -196,8 +195,8 @@ namespace mRemoteNG.UI.Window
             {
                 if (_documentHandlersAdded)
                 {
-                    _frmMain.ResizeBegin -= Connection_ResizeBegin;
-                    _frmMain.ResizeEnd -= Connection_ResizeEnd;
+	                FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
+	                FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
                     _documentHandlersAdded = false;
                 }
                 DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
@@ -212,8 +211,8 @@ namespace mRemoteNG.UI.Window
                     DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
                     _floatHandlersAdded = false;
                 }
-                _frmMain.ResizeBegin += Connection_ResizeBegin;
-                _frmMain.ResizeEnd += Connection_ResizeEnd;
+	            FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
+	            FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
                 _documentHandlersAdded = true;
             }
         }
@@ -240,7 +239,7 @@ namespace mRemoteNG.UI.Window
 
         private void Connection_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!_frmMain.IsClosing &&
+            if (!FrmMain.Default.IsClosing &&
                 (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & TabController.TabPages.Count > 0 ||
                 Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & TabController.TabPages.Count > 1))
             {
@@ -783,7 +782,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                if (!(NativeMethods.GetForegroundWindow() == _frmMain.Handle) && !_ignoreChangeSelectedTabClick)
+                if (!(NativeMethods.GetForegroundWindow() == FrmMain.Default.Handle) && !_ignoreChangeSelectedTabClick)
                 {
                     var clickedTab = TabController.TabPageFromPoint(e.Location);
                     if (clickedTab != null && TabController.SelectedTab != clickedTab)

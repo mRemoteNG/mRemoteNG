@@ -1,14 +1,14 @@
-using mRemoteNG.App;
-using mRemoteNG.Connection;
-using mRemoteNG.Tree;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Themes;
+using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.Themes;
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Window
@@ -17,12 +17,9 @@ namespace mRemoteNG.UI.Window
 	{
 	    private readonly ConnectionContextMenu _contextMenu;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private ThemeManager _themeManager;
+		private ThemeManager _themeManager;
 
-        public ConnectionInfo SelectedNode
-        {
-            get { return olvConnections.SelectedNode; }
-        }
+		public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
 	    public ConnectionTree ConnectionTree
 	    {
@@ -39,8 +36,6 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.Tree;
 			DockPnl = panel;
 			InitializeComponent();
-            _contextMenu = new ConnectionContextMenu(olvConnections);
-            olvConnections.ContextMenuStrip = _contextMenu;
             SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
@@ -95,7 +90,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region ConnectionTree
-        private void SetConnectionTreeEventHandlers()
+	    private void SetConnectionTreeEventHandlers()
 	    {
 	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(MessageBox.Show);
             olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;

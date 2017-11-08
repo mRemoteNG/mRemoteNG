@@ -153,6 +153,9 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
+            if (Settings.Default.ResetPanels)
+                SetDefaultLayout();
+
             var credsAndConsSetup = new CredsAndConsSetup();
             credsAndConsSetup.LoadCredsAndCons();
 

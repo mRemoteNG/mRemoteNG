@@ -15,15 +15,15 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class ConnectionTree : TreeListView, IConnectionTree
+	public partial class ConnectionTree : TreeListView, IConnectionTree
     {
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-        private readonly StatusImageList _statusImageList = new StatusImageList();
-
+	    private readonly StatusImageList _statusImageList = new StatusImageList();
+		private bool _nodeInEditMode;
         private bool _allowEdit;
-        private bool _isUpdatingColumnWidth;
+        private ConnectionContextMenu _contextMenu;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -71,6 +71,8 @@ namespace mRemoteNG.UI.Controls
             SmallImageList = _statusImageList.ImageList;
             AddColumns(_statusImageList.ImageGetter);
             LinkModelToView();
+            _contextMenu = new ConnectionContextMenu(this);
+            ContextMenuStrip = _contextMenu;
             SetupDropSink();
             SetEventHandlers();
         }
@@ -105,39 +107,53 @@ namespace mRemoteNG.UI.Controls
                 var container = args.Model as ContainerInfo;
                 if (container == null) return;
                 container.IsExpanded = false;
-                UpdateColumnWidth();
-            };
+				AutoResizeColumn(Columns[0]);
+			};
             Expanded += (sender, args) =>
             {
                 var container = args.Model as ContainerInfo;
                 if (container == null) return;
                 container.IsExpanded = true;
-                UpdateColumnWidth();
-            };
-            SizeChanged += OnSizeChanged;
+				AutoResizeColumn(Columns[0]);
+			};
             SelectionChanged += tvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
             CellToolTipShowing += tvConnections_CellToolTipShowing;
             ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
-            BeforeLabelEdit += HandleCheckForValidEdit;
+            BeforeLabelEdit += OnBeforeLabelEdit;
+            AfterLabelEdit += OnAfterLabelEdit;
         }
 
-        private void OnSizeChanged(object o, EventArgs eventArgs)
-        {
-            if (_isUpdatingColumnWidth)
-                return;
-            UpdateColumnWidth();
-        }
+		/// <summary>
+		/// Resizes the given column to ensure that all content is shown
+		/// </summary>
+	    private void AutoResizeColumn(ColumnHeader column)
+	    {
+		    if (InvokeRequired)
+		    {
+			    Invoke((MethodInvoker) (() => AutoResizeColumn(column)));
+			    return;
+		    }
 
-        private void UpdateColumnWidth()
-        {
-            _isUpdatingColumnWidth = true;
-            AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            Columns[0].Width += SmallImageSize.Width;
-            _isUpdatingColumnWidth = false;
-        }
+		    var longestIndentationAndTextWidth = int.MinValue;
+		    var horizontalScrollOffset = LowLevelScrollPosition.X;
+		    const int padding = 10;
+
+		    for (var i = 0; i < Items.Count; i++)
+		    {
+			    var rowIndentation = Items[i].Position.X;
+			    var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
+
+				longestIndentationAndTextWidth = Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
+		    }
+
+		    column.Width = longestIndentationAndTextWidth +
+		                   SmallImageSize.Width +
+		                   horizontalScrollOffset +
+		                   padding;
+		}
 
         private void PopulateTreeView()
         {
@@ -145,9 +161,9 @@ namespace mRemoteNG.UI.Controls
             SetObjects(ConnectionTreeModel.RootNodes);
             RegisterModelUpdateHandlers();
             NodeSearcher = new NodeSearcher(ConnectionTreeModel);
-            UpdateColumnWidth();
             ExecutePostSetupActions();
-        }
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void RegisterModelUpdateHandlers()
         {
@@ -185,8 +201,8 @@ namespace mRemoteNG.UI.Controls
                 return;
 
             RefreshObject(senderAsConnectionInfo);
-            UpdateColumnWidth();
-        }
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void ExecutePostSetupActions()
         {
@@ -269,20 +285,6 @@ namespace mRemoteNG.UI.Controls
         {
             _allowEdit = true;
             SelectedItem.BeginEdit();
-            Runtime.SaveConnectionsAsync();
-        }
-
-        public void HandleCheckForValidEdit(object sender, LabelEditEventArgs e)
-        {
-            if (!(sender is ConnectionTree)) return;
-            if (_allowEdit)
-            {
-                _allowEdit = false;
-            }
-            else
-            {
-                e.CancelEdit = true;
-            }
         }
 
         public void DeleteSelectedNode()
@@ -310,7 +312,8 @@ namespace mRemoteNG.UI.Controls
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             RefreshObject(sender);
-        }
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)
         {
@@ -329,7 +332,7 @@ namespace mRemoteNG.UI.Controls
             if (mouseEventArgs.Clicks < 2) return;
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem.RowObject as ConnectionInfo;
+	        var clickedNode = listItem?.RowObject as ConnectionInfo;
             if (clickedNode == null) return;
             DoubleClickHandler.Execute(clickedNode);
         }
@@ -354,6 +357,41 @@ namespace mRemoteNG.UI.Controls
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
+        }
+
+        private void OnBeforeLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            if (_nodeInEditMode || !(sender is ConnectionTree))
+                return;
+
+            if (!_allowEdit || SelectedNode is PuttySessionInfo || SelectedNode is RootPuttySessionsNodeInfo)
+            {
+                e.CancelEdit = true;
+                return;
+            }
+
+            _nodeInEditMode = true;
+            _contextMenu.DisableShortcutKeys();
+        }
+
+        private void OnAfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            if (!_nodeInEditMode)
+                return;
+
+            try
+            {
+                _contextMenu.EnableShortcutKeys();
+                ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
+                _nodeInEditMode = false;
+                _allowEdit = false;
+                Windows.ConfigForm.SelectedTreeNode = SelectedNode;
+                Runtime.SaveConnectionsAsync();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
         #endregion

@@ -2592,4 +2592,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
     <value>No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder</value>
   </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>Could not find external tool with name "{0}"</value>
+  </data>
 </root>

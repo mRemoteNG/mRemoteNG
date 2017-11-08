@@ -11,6 +11,7 @@ namespace mRemoteNG.UI.Controls
             FillsFreeSpace = false;
             AspectGetter = item => ((ConnectionInfo) item).Name;
             ImageGetter = imageGetterDelegate;
+            AutoCompleteEditor = false;
         }
     }
 }
