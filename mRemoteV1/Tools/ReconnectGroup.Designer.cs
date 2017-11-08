@@ -29,11 +29,11 @@ namespace mRemoteNG.Tools
 		{
 			this.components = new System.ComponentModel.Container();
 			this.grpAutomaticReconnect = new System.Windows.Forms.GroupBox();
-			this.lblAnimation = new System.Windows.Forms.Label();
-			this.btnClose = new System.Windows.Forms.Button();
+			this.lblAnimation = new UI.Controls.Base.NGLabel();
+			this.btnClose = new UI.Controls.Base.NGButton();
 			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-			this.lblServerStatus = new System.Windows.Forms.Label();
-			this.chkReconnectWhenReady = new System.Windows.Forms.CheckBox();
+			this.lblServerStatus = new UI.Controls.Base.NGLabel();
+			this.chkReconnectWhenReady = new UI.Controls.Base.NGCheckBox();
 			this.chkReconnectWhenReady.CheckedChanged += new System.EventHandler(this.chkReconnectWhenReady_CheckedChanged);
 			this.pbServerStatus = new System.Windows.Forms.PictureBox();
 			this.tmrAnimation = new System.Windows.Forms.Timer(this.components);
@@ -124,11 +124,11 @@ namespace mRemoteNG.Tools
 			this.ResumeLayout(false);
 		}
 		internal System.Windows.Forms.GroupBox grpAutomaticReconnect;
-		internal System.Windows.Forms.Button btnClose;
-		internal System.Windows.Forms.Label lblServerStatus;
-		internal System.Windows.Forms.CheckBox chkReconnectWhenReady;
+		internal UI.Controls.Base.NGButton btnClose;
+		internal UI.Controls.Base.NGLabel lblServerStatus;
+		internal UI.Controls.Base.NGCheckBox chkReconnectWhenReady;
 		internal System.Windows.Forms.PictureBox pbServerStatus;
 		internal System.Windows.Forms.Timer tmrAnimation;
-		internal System.Windows.Forms.Label lblAnimation;
+		internal UI.Controls.Base.NGLabel lblAnimation;
 	}
 }

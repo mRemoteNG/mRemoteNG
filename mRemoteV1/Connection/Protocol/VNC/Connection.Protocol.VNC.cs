@@ -1,7 +1,6 @@
 using System;
-using mRemoteNG.App;
 using System.ComponentModel;
-using mRemoteNG.Security;
+using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -165,7 +164,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				_VNC.ConnectComplete += VNCEvent_Connected;
 				_VNC.ConnectionLost += VNCEvent_Disconnected;
 				FrmMain.ClipboardChanged += VNCEvent_ClipboardChanged;
-                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(Info.CredentialRecord?.Password.ConvertToUnsecureString()))
+                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials 
+                    && Info?.Password?.Length > 0)
 				{
 					_VNC.GetPassword = VNCEvent_Authenticate;
 				}
@@ -198,9 +198,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		private string VNCEvent_Authenticate()
 		{
-			return Info.CredentialRecord?.Password.ConvertToUnsecureString() ?? "";
+		    return Info.Password;
 		}
-        #endregion
+
+	    #endregion
 				
         #region Enums
 		public enum Defaults

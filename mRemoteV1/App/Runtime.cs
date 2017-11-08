@@ -1,30 +1,28 @@
-using mRemoteNG.App.Info;
-using mRemoteNG.Config.Connections;
-using mRemoteNG.Connection;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
-using mRemoteNG.Tree.Root;
 using System;
 using System.IO;
 using System.Security;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.App
 {
-    public static class Runtime
+	public static class Runtime
     {
-        #region Public Properties
-
         public static bool IsPortableEdition
         {
             get
@@ -42,12 +40,11 @@ namespace mRemoteNG.App
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private static DateTime LastSqlUpdate { get; set; }
+        public static DateTime LastSqlUpdate { get; set; }
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
         public static ConnectionsService ConnectionsService { get; } = new ConnectionsService();
-        #endregion
 
         #region Connections Loading/Saving
         public static void LoadConnectionsAsync()
@@ -94,7 +91,7 @@ namespace mRemoteNG.App
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                ConnectionsService.ConnectionTreeModel = connectionsLoader.LoadConnections(CredentialProviderCatalog.GetCredentialRecords(), false);
+                ConnectionsService.ConnectionTreeModel = connectionsLoader.LoadConnections(false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)

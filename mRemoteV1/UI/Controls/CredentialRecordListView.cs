@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
@@ -28,6 +29,13 @@ namespace mRemoteNG.UI.Controls
         }
 
         public KeyValuePair<ICredentialRecord, ICredentialRepository> SelectedObject => CastRowObject(objectListView1.SelectedObject);
+
+        public IEnumerable<KeyValuePair<ICredentialRecord, ICredentialRepository>> SelectedObjects => 
+            from object item
+            in objectListView1.SelectedObjects
+            select CastRowObject(item);
+
+        public bool MultipleObjectsSelected => objectListView1.SelectedObjects.Count > 1;
 
         public CredentialRecordListView()
         {

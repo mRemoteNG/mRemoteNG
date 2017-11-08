@@ -11,6 +11,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public SqlServerPage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         public override string PageName

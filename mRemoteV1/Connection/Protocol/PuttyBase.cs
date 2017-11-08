@@ -1,13 +1,12 @@
-using mRemoteNG.App;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.Security;
+using mRemoteNG.App;
+using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.Tools.Cmdline;
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -72,10 +71,10 @@ namespace mRemoteNG.Connection.Protocol
 					{
 						var username = "";
 						var password = "";
-								
-						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Username))
+
+						if (!string.IsNullOrEmpty(InterfaceControl.Info?.Username))
 						{
-							username = InterfaceControl.Info.CredentialRecord?.Username;
+							username = InterfaceControl.Info.Username;
 						}
 						else
 						{
@@ -90,10 +89,10 @@ namespace mRemoteNG.Connection.Protocol
 						            break;
 						    }
 						}
-								
-						if (!string.IsNullOrEmpty(InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString()))
+						
+						if (!string.IsNullOrEmpty(InterfaceControl.Info?.Password))
 						{
-							password = InterfaceControl.Info.CredentialRecord?.Password.ConvertToUnsecureString();
+							password = InterfaceControl.Info.Password;
 						}
 						else
 						{
@@ -103,7 +102,7 @@ namespace mRemoteNG.Connection.Protocol
                                 password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
 							}
 						}
-								
+						
 						arguments.Add("-" + (int)PuttySSHVersion);
 								
 						if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials)

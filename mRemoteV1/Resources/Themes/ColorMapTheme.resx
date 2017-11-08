@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Button_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='Button']/Background/@Source</value>
+  </data>
+  <data name="Button_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonBorder']/Background/@Source</value>
+  </data>
+  <data name="Button_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonDisabled']/Background/@Source</value>
+  </data>
+  <data name="Button_Disabled_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonBorderDisabled']/Background/@Source</value>
+  </data>
+  <data name="Button_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonDisabled']/Foreground/@Source</value>
+  </data>
+  <data name="Button_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='Button']/Foreground/@Source</value>
+  </data>
+  <data name="Button_Hover_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonHover']/Background/@Source</value>
+  </data>
+  <data name="Button_Hover_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonBorderHover']/Background/@Source</value>
+  </data>
+  <data name="Button_Hover_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonHover']/Foreground/@Source</value>
+  </data>
+  <data name="Button_Pressed_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonPressed']/Background/@Source</value>
+  </data>
+  <data name="Button_Pressed_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonBorderPressed']/Background/@Source</value>
+  </data>
+  <data name="Button_Pressed_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='ButtonPressed']/Foreground/@Source</value>
+  </data>
+  <data name="CheckBox_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBackground']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBorder']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Border_Disabled" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBorderDisabled']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Border_Hover" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBorderHover']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Border_Pressed" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxBorderPressed']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Glyph" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxGlyph']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Glyph_Disabled" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxGlyphDisabled']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Text" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxText']/Background/@Source</value>
+  </data>
+  <data name="CheckBox_Text_Disabled" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='CheckBoxTextDisabled']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBox']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxBorder']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButton']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonBorder']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButton']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_Button_MouseOver_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonMouseOver']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_MouseOver_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonMouseOverBorder']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_MouseOver_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonMouseOver']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Pressed_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonPressed']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Button_Pressed_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxButtonPressed']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxDisabled']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxDisabled']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBox']/Foreground/@Source</value>
+  </data>
+  <data name="ComboBox_MouseOver_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxMouseOverBorder']/Background/@Source</value>
+  </data>
+  <data name="ComboBox_PopUp" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxPopUpBorder']/ComboBoxPopUp/@Source</value>
+  </data>
+  <data name="ComboBox_PopUp_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ComboBoxPopUpBorder']/Background/@Source</value>
+  </data>
+  <data name="CommandBarMenuDefault_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Environment']/Color[@Name='CommandShelfHighlightGradientBegin']/Background/@Source</value>
+    <comment>Taken from themevs2012 in dockpanelsuite to default in NG</comment>
+  </data>
+  <data name="CommandBarMenuDefault_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Environment']/Color[@Name='CommandBarTextActive']/Background/@Source</value>
+    <comment>Taken from themevs2012 in dockpanelsuite to default in</comment>
+  </data>
+  <data name="Dialog_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='Dialog']/Background/@Source</value>
+  </data>
+  <data name="Dialog_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='Dialog']/Foreground/@Source</value>
+  </data>
+  <data name="ErrorText_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler error']/Background/@Source</value>
+  </data>
+  <data name="ErrorText_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler error']/Foreground/@Source</value>
+  </data>
+  <data name="GroupBox_Backgorund" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabActiveBackground']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabInactiveBackground']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabInactiveText']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Disabled_Line" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabInactiveBorder']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabActiveText']/Background/@Source</value>
+  </data>
+  <data name="GroupBox_Line" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='InnerTabActiveBorder']/Background/@Source</value>
+  </data>
+  <data name="List_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListBackground']/Background/@Source</value>
+  </data>
+  <data name="List_Header_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListHeader']/Background/@Source</value>
+  </data>
+  <data name="List_Header_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListHeader']/Foreground/@Source</value>
+  </data>
+  <data name="List_Item_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItem']/Background/@Source</value>
+  </data>
+  <data name="List_Item_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemBorder']/Background/@Source</value>
+  </data>
+  <data name="List_Item_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemDisabled']/Background/@Source</value>
+  </data>
+  <data name="List_Item_Disabled_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemDisabledBorder']/Background/@Source</value>
+  </data>
+  <data name="List_Item_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemDisabled']/Foreground/@Source</value>
+  </data>
+  <data name="List_Item_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItem']/Foreground/@Source</value>
+  </data>
+  <data name="List_Item_Selected_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemSelected']/Background/@Source</value>
+  </data>
+  <data name="List_Item_Selected_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemSelectedBorder']/Background/@Source</value>
+  </data>
+  <data name="List_Item_Selected_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='ListItemSelected']/Foreground/@Source</value>
+  </data>
+  <data name="ProgressBar_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='Background']/Background/@Source</value>
+  </data>
+  <data name="ProgressBar_Fill" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='IndicatorFill']/Background/@Source</value>
+  </data>
+  <data name="ProgressBar_Fill_Critical" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='IndicatorFillCritical']/Background/@Source</value>
+  </data>
+  <data name="ProgressBar_Fill_Warning" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='ProgressBar']/Color[@Name='IndicatorFillWarning']/Background/@Source</value>
+  </data>
+  <data name="Tab_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabBackground']/Background/@Source</value>
+  </data>
+  <data name="Tab_Item_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabItem']/Background/@Source</value>
+  </data>
+  <data name="Tab_Item_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabItemDisabled']/Background/@Source</value>
+  </data>
+  <data name="Tab_Item_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabItemDisabled']/Foreground/@Source</value>
+  </data>
+  <data name="Tab_Item_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Cider']/Color[@Name='TabItem']/Foreground/@Source</value>
+  </data>
+  <data name="TextBox_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxBackground']/Background/@Source</value>
+  </data>
+  <data name="TextBox_Border" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxBorder']/Background/@Source</value>
+  </data>
+  <data name="TextBox_Border_Disabled" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxBorderDisabled']/Background/@Source</value>
+  </data>
+  <data name="TextBox_Border_Focused" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxBorderFocused']/Background/@Source</value>
+  </data>
+  <data name="TextBox_Disabled_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxBackgroundDisabled']/Background/@Source</value>
+  </data>
+  <data name="TextBox_Disabled_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxTextDisabled']/Background/@Source</value>
+  </data>
+  <data name="TextBox_Focused_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxBackgroundFocused']/Background/@Source</value>
+  </data>
+  <data name="TextBox_Focused_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxTextFocused']/Background/@Source</value>
+  </data>
+  <data name="TextBox_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='CommonControls']/Color[@Name='TextBoxText']/Background/@Source</value>
+  </data>
+  <data name="TreeView_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='TreeView']/Color[@Name='Background']/Background/@Source</value>
+  </data>
+  <data name="TreeView_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='TreeView']/Color[@Name='Background']/Foreground/@Source</value>
+  </data>
+  <data name="Treeview_SelectedItem_Active_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='TreeView']/Color[@Name='SelectedItemActive']/Background/@Source</value>
+  </data>
+  <data name="Treeview_SelectedItem_Active_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='TreeView']/Color[@Name='SelectedItemActive']/Foreground/@Source</value>
+  </data>
+  <data name="Treeview_SelectedItem_Inactive_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='TreeView']/Color[@Name='SelectedItemInactive']/Background/@Source</value>
+  </data>
+  <data name="Treeview_SelectedItem_Inactive_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='TreeView']/Color[@Name='SelectedItemInactive']/Foreground/@Source</value>
+  </data>
+  <data name="WarningText_Background" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler warning']/Background/@Source</value>
+  </data>
+  <data name="WarningText_Foreground" xml:space="preserve">
+    <value>/Themes/Theme/Category[@Name='Text Editor Text Marker Items']/Color[@Name='compiler warning']/Foreground/@Source</value>
+  </data>
+</root>

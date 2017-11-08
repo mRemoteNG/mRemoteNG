@@ -11,6 +11,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
+            base.ApplyTheme();
         }
 
         [Browsable(false)]

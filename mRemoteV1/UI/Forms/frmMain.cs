@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -8,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -15,7 +15,6 @@ using mRemoteNG.Config;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
-using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
@@ -23,14 +22,13 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
-using Microsoft.Win32;
 using WeifenLuo.WinFormsUI.Docking;
 
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class FrmMain
+	public partial class FrmMain
     {
         public static FrmMain Default { get; } = new FrmMain();
 
@@ -43,22 +41,31 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
-        private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
+        private ThemeManager _themeManager;
 
         internal FullscreenHandler Fullscreen { get; set; }
+        
+        //Added theming support
+        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         private FrmMain()
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
             Fullscreen = new FullscreenHandler(this);
-            pnlDock.Theme = new VS2012LightTheme();
+
+            //Theming support
+            _themeManager = ThemeManager.getInstance();
+            vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
+            SetSchema();
+
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
         }
 
         static FrmMain()
         {
+
         }
 
         #region Properties
@@ -140,15 +147,16 @@ namespace mRemoteNG.UI.Forms
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
-			ThemeManager.ThemeChanged += ApplyThemes;
-			ApplyThemes();
+    		_themeManager.ThemeChanged += ApplyTheme; 
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
             Runtime.WindowList = new WindowList();
 
-            var credentialsService = new CredentialServiceFactory().Build();
-            var credsAndConsSetup = new CredsAndConsSetup(credentialsService);
+            if (Settings.Default.ResetPanels)
+                SetDefaultLayout();
+
+            var credsAndConsSetup = new CredsAndConsSetup();
             credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
@@ -178,51 +186,38 @@ namespace mRemoteNG.UI.Forms
 
             toolsMenu1.MainForm = this;
             toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
-            toolsMenu1.UnlockerFormFactory = _credRepoUnlockerFormFactory;
 
             _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
 
-        private void ApplyThemes()
+
+        //Theming support
+        private void SetSchema()
+        {
+            if (_themeManager.ThemingActive)
+            {
+                // Persist settings when rebuilding UI
+                this.pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+                ApplyTheme();
+            }
+        }
+        private void ApplyTheme()
 		{
-			pnlDock.DockBackColor = ThemeManager.ActiveTheme.WindowBackgroundColor;
-			tsContainer.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.TopToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.TopToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.BottomToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.BottomToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.LeftToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.LeftToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.RightToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.RightToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			tsContainer.ContentPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			tsContainer.ContentPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			msMain.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			msMain.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-			ApplyMenuColors(msMain.Items);
-		}
+            if(_themeManager.ThemingActive)
+            {
+                vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
+            }
+        }
 		
-		private static void ApplyMenuColors(IEnumerable itemCollection)
-		{
-		    foreach (ToolStripItem item in itemCollection)
-			{
-				item.BackColor = ThemeManager.ActiveTheme.MenuBackgroundColor;
-				item.ForeColor = ThemeManager.ActiveTheme.MenuTextColor;
-				
-				var menuItem = item as ToolStripMenuItem;
-				if (menuItem != null)
-				{
-					ApplyMenuColors(menuItem.DropDownItems);
-				}
-			}
-		}
+ 
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
             PromptForUpdatesPreference();
             CheckForUpdates();
-            UnlockRepositories(Runtime.CredentialProviderCatalog, this);
         }
 
         private void PromptForUpdatesPreference()
@@ -263,13 +258,6 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
             Startup.Instance.CheckForUpdate();
-        }
-
-        private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
-        {
-            if (!Settings.Default.PromptUnlockCredReposOnStartup) return;
-            var credentialUnlockerForm = _credRepoUnlockerFormFactory.Build(repositories);
-            credentialUnlockerForm.ShowDialog(parentForm);
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

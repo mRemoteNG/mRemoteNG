@@ -1,14 +1,14 @@
-﻿using System;
+using System;
+using System.IO;
+using System.Windows.Forms;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
-using System.IO;
-using System.Windows.Forms;
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
-    public class Logger
+	public class Logger
     {
         public static readonly Logger Instance = new Logger();
 

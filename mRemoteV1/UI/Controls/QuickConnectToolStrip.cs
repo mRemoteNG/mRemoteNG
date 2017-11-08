@@ -21,6 +21,8 @@ namespace mRemoteNG.UI.Controls
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
         private IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private ThemeManager _themeManager;
+        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
 
         public IConnectionInitiator ConnectionInitiator
         {
@@ -36,8 +38,10 @@ namespace mRemoteNG.UI.Controls
         public QuickConnectToolStrip()
         {
             Initialize();
-            ApplyThemes();
+            _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ApplyTheme;
             PopulateQuickConnectProtocolMenu();
+            ApplyTheme();
         }
 
         private void Initialize()
@@ -50,7 +54,10 @@ namespace mRemoteNG.UI.Controls
             _btnConnections = new ToolStripDropDownButton();
             _mnuConnections = new ContextMenuStrip(components);
             SuspendLayout();
-
+            //
+            //Theming support
+            //
+            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             // 
             // lblQuickConnect
             // 
@@ -124,10 +131,13 @@ namespace mRemoteNG.UI.Controls
             ResumeLayout();
         }
 
-        private void ApplyThemes()
+        private void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-            ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+            if (!_themeManager.ThemingActive) return;
+            vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            _cmbQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
         }
 
         #region Quick Connect
@@ -216,12 +226,12 @@ namespace mRemoteNG.UI.Controls
             // ReSharper disable once CoVariantArrayConversion
             ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionsService.ConnectionTreeModel).ToArray();
             _btnConnections.DropDownItems.AddRange(rootMenuItems);
+
         }
 
         private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
             var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
             if (tag != null)
             {

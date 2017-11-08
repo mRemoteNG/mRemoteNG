@@ -2,24 +2,30 @@
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
+	public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
     {
         private string _csv = "";
         private ConnectionInfo _serializationTarget;
         private readonly SaveFilter _saveFilter;
+        private readonly ICredentialRepositoryList _credentialRepositoryList;
 
 
-        public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter)
+        public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter, ICredentialRepositoryList credentialRepositoryList)
         {
             if (saveFilter == null)
                 throw new ArgumentNullException(nameof(saveFilter));
+            if (credentialRepositoryList == null)
+                throw new ArgumentNullException(nameof(credentialRepositoryList));
+
             _saveFilter = saveFilter;
+            _credentialRepositoryList = credentialRepositoryList;
         }
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
@@ -84,13 +90,13 @@ namespace mRemoteNG.Config.Serializers
             csvLine += con.Name + ";" + GetNodePath(con) + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
 
             if (_saveFilter.SaveUsername)
-                csvLine += con.CredentialRecord?.Username + ";";
+                csvLine += con.Username + ";";
 
             if (_saveFilter.SavePassword)
-                csvLine += con.CredentialRecord?.Password.ConvertToUnsecureString() + ";";
+                csvLine += con.Password + ";";
 
             if (_saveFilter.SaveDomain)
-                csvLine += con.CredentialRecord?.Domain + ";";
+                csvLine += con.Domain + ";";
 
             csvLine += con.Hostname + ";" + 
                         con.Protocol + ";" + 

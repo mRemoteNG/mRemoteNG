@@ -39,11 +39,23 @@ namespace mRemoteNG.UI.Window
 
 	    private void Update_Load(object sender, EventArgs e)
 		{
-			ApplyLanguage();
+            ApplyTheme();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyLanguage();
 			CheckForUpdate();
 		}
-				
-		private void ApplyLanguage()
+
+        private new void ApplyTheme()
+        {
+            if (Themes.ThemeManager.getInstance().ThemingActive)
+            {
+                base.ApplyTheme();
+                pnlUpdate.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                pnlUpdate.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            }
+        }
+
+        private void ApplyLanguage()
 		{
 			Text = Language.strMenuCheckForUpdates;
 			TabText = Language.strMenuCheckForUpdates;

@@ -31,18 +31,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedPage));
-            this.chkAutomaticallyGetSessionInfo = new System.Windows.Forms.CheckBox();
-            this.lblMaximumPuttyWaitTime = new System.Windows.Forms.Label();
-            this.chkAutomaticReconnect = new System.Windows.Forms.CheckBox();
-            this.numPuttyWaitTime = new System.Windows.Forms.NumericUpDown();
-            this.chkUseCustomPuttyPath = new System.Windows.Forms.CheckBox();
-            this.lblConfigurePuttySessions = new System.Windows.Forms.Label();
-            this.numUVNCSCPort = new System.Windows.Forms.NumericUpDown();
-            this.txtCustomPuttyPath = new System.Windows.Forms.TextBox();
-            this.btnLaunchPutty = new System.Windows.Forms.Button();
-            this.lblUVNCSCPort = new System.Windows.Forms.Label();
-            this.lblSeconds = new System.Windows.Forms.Label();
-            this.btnBrowseCustomPuttyPath = new System.Windows.Forms.Button();
+            this.chkAutomaticallyGetSessionInfo = new Controls.Base.NGCheckBox();
+            this.lblMaximumPuttyWaitTime = new Controls.Base.NGLabel();
+            this.chkAutomaticReconnect = new Controls.Base.NGCheckBox();
+            this.numPuttyWaitTime = new Controls.Base.NGNumericUpDown();
+            this.chkUseCustomPuttyPath = new Controls.Base.NGCheckBox();
+            this.lblConfigurePuttySessions = new Controls.Base.NGLabel();
+            this.numUVNCSCPort = new Controls.Base.NGNumericUpDown();
+            this.txtCustomPuttyPath = new Controls.Base.NGTextBox();
+            this.btnLaunchPutty = new Controls.Base.NGButton();
+            this.lblUVNCSCPort = new Controls.Base.NGLabel();
+            this.lblSeconds = new Controls.Base.NGLabel();
+            this.btnBrowseCustomPuttyPath = new Controls.Base.NGButton();
             ((System.ComponentModel.ISupportInitialize)(this.numPuttyWaitTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUVNCSCPort)).BeginInit();
             this.SuspendLayout();
@@ -211,18 +211,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.PerformLayout();
 
 		}
-		internal System.Windows.Forms.CheckBox chkAutomaticallyGetSessionInfo;
-		internal System.Windows.Forms.Label lblMaximumPuttyWaitTime;
-		internal System.Windows.Forms.CheckBox chkAutomaticReconnect;
-		internal System.Windows.Forms.NumericUpDown numPuttyWaitTime;
-		internal System.Windows.Forms.CheckBox chkUseCustomPuttyPath;
-		internal System.Windows.Forms.Label lblConfigurePuttySessions;
-		internal System.Windows.Forms.NumericUpDown numUVNCSCPort;
-		internal System.Windows.Forms.TextBox txtCustomPuttyPath;
-		internal System.Windows.Forms.Button btnLaunchPutty;
-		internal System.Windows.Forms.Label lblUVNCSCPort;
-		internal System.Windows.Forms.Label lblSeconds;
-		internal System.Windows.Forms.Button btnBrowseCustomPuttyPath;
+		internal Controls.Base.NGCheckBox chkAutomaticallyGetSessionInfo;
+		internal Controls.Base.NGLabel lblMaximumPuttyWaitTime;
+		internal Controls.Base.NGCheckBox chkAutomaticReconnect;
+		internal Controls.Base.NGNumericUpDown numPuttyWaitTime;
+		internal Controls.Base.NGCheckBox chkUseCustomPuttyPath;
+		internal Controls.Base.NGLabel lblConfigurePuttySessions;
+		internal Controls.Base.NGNumericUpDown numUVNCSCPort;
+		internal Controls.Base.NGTextBox txtCustomPuttyPath;
+		internal Controls.Base.NGButton btnLaunchPutty;
+		internal Controls.Base.NGLabel lblUVNCSCPort;
+		internal Controls.Base.NGLabel lblSeconds;
+		internal Controls.Base.NGButton btnBrowseCustomPuttyPath;
 			
 	}
 }

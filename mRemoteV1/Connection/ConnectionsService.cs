@@ -37,7 +37,7 @@ namespace mRemoteNG.Connection
 
                 // Load config
                 var connectionsLoader = new ConnectionsLoader { ConnectionFileName = filename };
-                ConnectionTreeModel = connectionsLoader.LoadConnections(Runtime.CredentialProviderCatalog.GetCredentialRecords(), false);
+                ConnectionTreeModel = connectionsLoader.LoadConnections(false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
             }
             catch (Exception ex)

@@ -2,7 +2,6 @@
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
@@ -12,7 +11,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.IntegrationTests
 {
-    public class XmlSerializationLifeCycleTests
+	public class XmlSerializationLifeCycleTests
     {
         private XmlConnectionsSerializer _serializer;
         private XmlConnectionsDeserializer _deserializer;
@@ -24,7 +23,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             _originalModel = SetupConnectionTreeModel();
             var cryptoProvider = _cryptoFactory.Build();
-            var nodeSerializer = new XmlConnectionNodeSerializer27(
+            var nodeSerializer = new XmlConnectionNodeSerializer26(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -66,7 +65,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var originalConnectionInfo = new ConnectionInfo {Name = "con1", Description = "£°úg¶┬ä" };
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
-            _deserializer = new XmlConnectionsDeserializer(new ICredentialRecord[0]);
+            _deserializer = new XmlConnectionsDeserializer();
             var deserializedModel = _deserializer.Deserialize(serializedContent);
             var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(deserializedConnectionInfo.Description, Is.EqualTo(originalConnectionInfo.Description));
@@ -78,7 +77,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var cryptoProvider = _cryptoFactory.Build();
             cryptoProvider.KeyDerivationIterations = 5000;
-            var nodeSerializer = new XmlConnectionNodeSerializer27(
+            var nodeSerializer = new XmlConnectionNodeSerializer26(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());

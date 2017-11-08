@@ -15,17 +15,17 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class ConnectionTree : TreeListView, IConnectionTree
+	public partial class ConnectionTree : TreeListView, IConnectionTree
     {
         private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-        private readonly StatusImageList _statusImageList = new StatusImageList();
+	    private readonly StatusImageList _statusImageList = new StatusImageList();
+		private bool _nodeInEditMode;
+        private bool _allowEdit;
+        private ConnectionContextMenu _contextMenu;
 
-        public ConnectionInfo SelectedNode
-        {
-            get { return (ConnectionInfo) SelectedObject; }
-        }
+        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
         public NodeSearcher NodeSearcher { get; private set; }
 
@@ -71,6 +71,8 @@ namespace mRemoteNG.UI.Controls
             SmallImageList = _statusImageList.ImageList;
             AddColumns(_statusImageList.ImageGetter);
             LinkModelToView();
+            _contextMenu = new ConnectionContextMenu(this);
+            ContextMenuStrip = _contextMenu;
             SetupDropSink();
             SetEventHandlers();
         }
@@ -103,32 +105,65 @@ namespace mRemoteNG.UI.Controls
             Collapsed += (sender, args) =>
             {
                 var container = args.Model as ContainerInfo;
-                if (container != null)
-                    container.IsExpanded = false;
-            };
+                if (container == null) return;
+                container.IsExpanded = false;
+				AutoResizeColumn(Columns[0]);
+			};
             Expanded += (sender, args) =>
             {
                 var container = args.Model as ContainerInfo;
-                if (container != null)
-                    container.IsExpanded = true;
-            };
+                if (container == null) return;
+                container.IsExpanded = true;
+				AutoResizeColumn(Columns[0]);
+			};
             SelectionChanged += tvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
             CellToolTipShowing += tvConnections_CellToolTipShowing;
             ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
+            BeforeLabelEdit += OnBeforeLabelEdit;
+            AfterLabelEdit += OnAfterLabelEdit;
         }
+
+		/// <summary>
+		/// Resizes the given column to ensure that all content is shown
+		/// </summary>
+	    private void AutoResizeColumn(ColumnHeader column)
+	    {
+		    if (InvokeRequired)
+		    {
+			    Invoke((MethodInvoker) (() => AutoResizeColumn(column)));
+			    return;
+		    }
+
+		    var longestIndentationAndTextWidth = int.MinValue;
+		    var horizontalScrollOffset = LowLevelScrollPosition.X;
+		    const int padding = 10;
+
+		    for (var i = 0; i < Items.Count; i++)
+		    {
+			    var rowIndentation = Items[i].Position.X;
+			    var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
+
+				longestIndentationAndTextWidth = Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
+		    }
+
+		    column.Width = longestIndentationAndTextWidth +
+		                   SmallImageSize.Width +
+		                   horizontalScrollOffset +
+		                   padding;
+		}
 
         private void PopulateTreeView()
         {
             UnregisterModelUpdateHandlers();
             SetObjects(ConnectionTreeModel.RootNodes);
-            ResizeColumns();
             RegisterModelUpdateHandlers();
             NodeSearcher = new NodeSearcher(ConnectionTreeModel);
             ExecutePostSetupActions();
-        }
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void RegisterModelUpdateHandlers()
         {
@@ -147,12 +182,12 @@ namespace mRemoteNG.UI.Controls
         private void OnPuttySessionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             RefreshObjects(GetRootPuttyNodes().ToList());
-            ResizeColumns();
         }
 
         private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            //TODO for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
+            // for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
+            // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
             var property = propertyChangedEventArgs.PropertyName;
             if (property != nameof(ConnectionInfo.Name)
                 && property != nameof(ConnectionInfo.OpenConnections)
@@ -162,10 +197,12 @@ namespace mRemoteNG.UI.Controls
             }
 
             var senderAsConnectionInfo = sender as ConnectionInfo;
-            if (senderAsConnectionInfo != null)
-                RefreshObject(senderAsConnectionInfo);
-            ResizeColumns();
-        }
+            if (senderAsConnectionInfo == null)
+                return;
+
+            RefreshObject(senderAsConnectionInfo);
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void ExecutePostSetupActions()
         {
@@ -223,11 +260,12 @@ namespace mRemoteNG.UI.Controls
 
         private void AddNode(ConnectionInfo newNode)
         {
-            if (SelectedNode == null) return;
+            // use root node if no node is selected
+            ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
             DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
-            var selectedContainer = SelectedNode as ContainerInfo;
-            var parent = selectedContainer ?? SelectedNode?.Parent;
+            var selectedContainer = parentNode as ContainerInfo;
+            var parent = selectedContainer ?? parentNode?.Parent;
             newNode.SetParent(parent);
             Expand(parent);
             SelectObject(newNode, true);
@@ -245,8 +283,8 @@ namespace mRemoteNG.UI.Controls
 
         public void RenameSelectedNode()
         {
+            _allowEdit = true;
             SelectedItem.BeginEdit();
-            Runtime.SaveConnectionsAsync();
         }
 
         public void DeleteSelectedNode()
@@ -274,8 +312,8 @@ namespace mRemoteNG.UI.Controls
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             RefreshObject(sender);
-            ResizeColumns();
-        }
+			AutoResizeColumn(Columns[0]);
+		}
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)
         {
@@ -294,7 +332,7 @@ namespace mRemoteNG.UI.Controls
             if (mouseEventArgs.Clicks < 2) return;
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem.RowObject as ConnectionInfo;
+	        var clickedNode = listItem?.RowObject as ConnectionInfo;
             if (clickedNode == null) return;
             DoubleClickHandler.Execute(clickedNode);
         }
@@ -322,10 +360,39 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        private void ResizeColumns()
+        private void OnBeforeLabelEdit(object sender, LabelEditEventArgs e)
         {
-            foreach (OLVColumn column in Columns)
-                column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            if (_nodeInEditMode || !(sender is ConnectionTree))
+                return;
+
+            if (!_allowEdit || SelectedNode is PuttySessionInfo || SelectedNode is RootPuttySessionsNodeInfo)
+            {
+                e.CancelEdit = true;
+                return;
+            }
+
+            _nodeInEditMode = true;
+            _contextMenu.DisableShortcutKeys();
+        }
+
+        private void OnAfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            if (!_nodeInEditMode)
+                return;
+
+            try
+            {
+                _contextMenu.EnableShortcutKeys();
+                ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
+                _nodeInEditMode = false;
+                _allowEdit = false;
+                Windows.ConfigForm.SelectedTreeNode = SelectedNode;
+                Runtime.SaveConnectionsAsync();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
         }
         #endregion
     }

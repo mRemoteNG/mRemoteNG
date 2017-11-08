@@ -1,50 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing.Design;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Credential;
 using mRemoteNG.Tools;
-using mRemoteNG.UI.Controls;
-// ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.Connection
 {
+	[Obsolete("Valid for mRemoteNG v1.75 (confCons v2.6) or earlier")]
     public abstract class AbstractConnectionRecord : INotifyPropertyChanged
     {
         #region Fields
-        private string _name = "";
-        private string _description = "";
-        private string _icon = "";
-        private string _panel = "";
+        private string _name;
+        private string _description;
+        private string _icon;
+        private string _panel;
 
-        private string _hostname = "";
-        private ICredentialRecord _credentialRecord;
+        private string _hostname;
+        private string _username = "";
+        private string _password = "";
+        private string _domain = "";
 
         private ProtocolType _protocol;
-        private string _extApp = "";
+        private string _extApp;
         private int _port;
-        private string _puttySession = "";
+        private string _puttySession;
         private IcaProtocol.EncryptionStrength _icaEncryption;
         private bool _useConsoleSession;
         private RdpProtocol.AuthenticationLevel _rdpAuthenticationLevel;
         private int _rdpMinutesToIdleTimeout;
         private bool _rdpAlertIdleTimeout;
-        private string _loadBalanceInfo = "";
+        private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
 
         private RdpProtocol.RDGatewayUsageMethod _rdGatewayUsageMethod;
-        private string _rdGatewayHostname = "";
+        private string _rdGatewayHostname;
         private RdpProtocol.RDGatewayUseConnectionCredentials _rdGatewayUseConnectionCredentials;
-        private string _rdGatewayUsername = "";
-        private string _rdGatewayPassword = "";
-        private string _rdGatewayDomain = "";
+        private string _rdGatewayUsername;
+        private string _rdGatewayPassword;
+        private string _rdGatewayDomain;
 
         private RdpProtocol.RDPResolutions _resolution;
         private bool _multiMonitor;
@@ -64,19 +63,19 @@ namespace mRemoteNG.Connection
         private RdpProtocol.RDPSounds _redirectSound;
         private RdpProtocol.RDPSoundQuality _soundQuality;
 
-        private string _preExtApp = "";
-        private string _postExtApp = "";
-        private string _macAddress = "";
-        private string _userField = "";
+        private string _preExtApp;
+        private string _postExtApp;
+        private string _macAddress;
+        private string _userField;
 
         private ProtocolVNC.Compression _vncCompression;
         private ProtocolVNC.Encoding _vncEncoding;
         private ProtocolVNC.AuthMode _vncAuthMode;
         private ProtocolVNC.ProxyType _vncProxyType;
-        private string _vncProxyIp = "";
+        private string _vncProxyIp;
         private int _vncProxyPort;
-        private string _vncProxyUsername = "";
-        private string _vncProxyPassword = "";
+        private string _vncProxyUsername;
+        private string _vncProxyPassword;
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
@@ -120,7 +119,6 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("Panel", _panel); }
             set { SetField(ref _panel, value, "Panel"); }
         }
-
         #endregion
 
         #region Connection
@@ -133,28 +131,33 @@ namespace mRemoteNG.Connection
             set { SetField(ref _hostname, value?.Trim(), "Hostname"); }
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 2),
-            LocalizedAttributes.LocalizedDisplayName(nameof(Language.strCategoryCredentials)),
-            LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionCredential))]
-        [Editor(typeof(CredentialRecordListAdaptor), typeof(UITypeEditor))]
-        [TypeConverter(typeof(ExpandableObjectConverter))]
-        public virtual ICredentialRecord CredentialRecord
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername")]
+        public virtual string Username
         {
-            get { return GetPropertyValue(nameof(CredentialRecord), _credentialRecord); }
-            set { SetField(ref _credentialRecord, value, nameof(CredentialRecord)); }
+            get { return GetPropertyValue("Username", _username); }
+            set { SetField(ref _username, value?.Trim(), "Username"); }
         }
 
-        [Obsolete("Use the CredentialRecord property")]
-        [Browsable(false)]
-        public virtual string Username { get; set; } = "";
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNamePassword"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPassword"),
+            PasswordPropertyText(true)]
+        public virtual string Password
+        {
+            get { return GetPropertyValue("Password", _password); }
+            set { SetField(ref _password, value, "Password"); }
+        }
 
-        [Obsolete("Use the CredentialRecord property")]
-        [Browsable(false)]
-        public virtual string Domain { get; set; } = "";
-
-        [Obsolete("Use the CredentialRecord property")]
-        [Browsable(false)]
-        public virtual string Password { get; set; } = "";
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
+        public string Domain
+        {
+            get { return GetPropertyValue("Domain", _domain).Trim(); }
+            set { SetField(ref _domain, value?.Trim(), "Domain"); }
+        }
         #endregion
 
         #region Protocol
@@ -233,11 +236,10 @@ namespace mRemoteNG.Connection
         public virtual int RDPMinutesToIdleTimeout
         {
             get { return GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout); }
-            set
-            {
-                if (value < 0)
+            set {
+                if(value < 0)
                     value = 0;
-                else if (value > 240)
+                else if(value > 240)
                     value = 240;
                 SetField(ref _rdpMinutesToIdleTimeout, value, "RDPMinutesToIdleTimeout");
             }
@@ -280,7 +282,6 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("UseCredSsp", _useCredSsp); }
             set { SetField(ref _useCredSsp, value, "UseCredSsp"); }
         }
-
         #endregion
 
         #region RD Gateway
@@ -340,7 +341,6 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim(); }
             set { SetField(ref _rdGatewayDomain, value?.Trim(), "RDGatewayDomain"); }
         }
-
         #endregion
 
         #region Appearance
@@ -433,7 +433,6 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("EnableDesktopComposition", _enableDesktopComposition); }
             set { SetField(ref _enableDesktopComposition, value, "EnableDesktopComposition"); }
         }
-
         #endregion
 
         #region Redirect
@@ -506,7 +505,6 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("SoundQuality", _soundQuality); }
             set { SetField(ref _soundQuality, value, "SoundQuality"); }
         }
-
         #endregion
 
         #region Misc
@@ -550,7 +548,6 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("UserField", _userField); }
             set { SetField(ref _userField, value, "UserField"); }
         }
-
         #endregion
 
         #region VNC
@@ -669,30 +666,26 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("VNCViewOnly", _vncViewOnly); }
             set { SetField(ref _vncViewOnly, value, "VNCViewOnly"); }
         }
-
         #endregion
         #endregion
 
         protected virtual TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {
-            var propertyInfo = GetType().GetProperty(propertyName);
-            if (propertyInfo != null)
-                return (TPropertyType) propertyInfo.GetValue(this, null);
-
-            return default(TPropertyType);
+            return (TPropertyType)GetType().GetProperty(propertyName).GetValue(this, null);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
+        protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
         {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(args.PropertyName));
         }
 
-        private void SetField<T>(ref T field, T value, string propertyName = null)
+        protected bool SetField<T>(ref T field, T value, string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
             field = value;
             RaisePropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
+            return true;
         }
     }
 }

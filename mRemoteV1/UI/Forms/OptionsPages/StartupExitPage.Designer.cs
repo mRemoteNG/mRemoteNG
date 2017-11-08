@@ -31,11 +31,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupExitPage));
-			this.chkReconnectOnStart = new System.Windows.Forms.CheckBox();
+			this.chkReconnectOnStart = new Controls.Base.NGCheckBox();
 			base.Load += new System.EventHandler(StartupExitPage_Load);
-			this.chkSaveConsOnExit = new System.Windows.Forms.CheckBox();
-			this.chkSingleInstance = new System.Windows.Forms.CheckBox();
-			this.chkProperInstallationOfComponentsAtStartup = new System.Windows.Forms.CheckBox();
+			this.chkSaveConsOnExit = new Controls.Base.NGCheckBox();
+			this.chkSingleInstance = new Controls.Base.NGCheckBox();
+			this.chkProperInstallationOfComponentsAtStartup = new Controls.Base.NGCheckBox();
 			this.SuspendLayout();
 			//
 			//chkReconnectOnStart
@@ -93,10 +93,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.PerformLayout();
 				
 		}
-		internal System.Windows.Forms.CheckBox chkReconnectOnStart;
-		internal System.Windows.Forms.CheckBox chkSaveConsOnExit;
-		internal System.Windows.Forms.CheckBox chkSingleInstance;
-		internal System.Windows.Forms.CheckBox chkProperInstallationOfComponentsAtStartup;
+		internal Controls.Base.NGCheckBox chkReconnectOnStart;
+		internal Controls.Base.NGCheckBox chkSaveConsOnExit;
+		internal Controls.Base.NGCheckBox chkSingleInstance;
+		internal Controls.Base.NGCheckBox chkProperInstallationOfComponentsAtStartup;
 			
 	}
 }

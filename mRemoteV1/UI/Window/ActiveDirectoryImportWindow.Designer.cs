@@ -1,5 +1,7 @@
 
 
+using mRemoteNG.Themes;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class ActiveDirectoryImportWindow : BaseWindow
@@ -7,13 +9,13 @@ namespace mRemoteNG.UI.Window
         #region  Windows Form Designer generated code
 		private void InitializeComponent()
 		{
-            this.btnImport = new System.Windows.Forms.Button();
-            this.txtDomain = new System.Windows.Forms.TextBox();
-            this.lblDomain = new System.Windows.Forms.Label();
-            this.btnChangeDomain = new System.Windows.Forms.Button();
+            this.btnImport = new Controls.Base.NGButton();
+            this.txtDomain = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.lblDomain = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.btnChangeDomain = new Controls.Base.NGButton();
             this.ActiveDirectoryTree = new ADTree.ADtree();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.chkSubOU = new System.Windows.Forms.CheckBox();
+            this.btnClose = new Controls.Base.NGButton();
+            this.chkSubOU = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.SuspendLayout();
             // 
             // btnImport
@@ -97,6 +99,7 @@ namespace mRemoteNG.UI.Window
             // ActiveDirectoryImportWindow
             // 
             this.AcceptButton = this.btnImport;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(530, 373);
             this.Controls.Add(this.chkSubOU);
             this.Controls.Add(this.btnClose);
@@ -115,14 +118,14 @@ namespace mRemoteNG.UI.Window
             this.PerformLayout();
 
 		}
-		private System.Windows.Forms.Button btnImport;
-		private System.Windows.Forms.TextBox txtDomain;
-		private System.Windows.Forms.Label lblDomain;
-		private System.Windows.Forms.Button btnChangeDomain;
-		private ADTree.ADtree ActiveDirectoryTree;
+		private Controls.Base.NGButton btnImport;
+		private Controls.Base.NGTextBox txtDomain;
+		private Controls.Base.NGLabel lblDomain;
+		private Controls.Base.NGButton btnChangeDomain;
+		private ADTree.ADtree ActiveDirectoryTree; 
         #endregion
 
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.CheckBox chkSubOU;
+       private Controls.Base.NGButton btnClose;
+       private Controls.Base.NGCheckBox chkSubOU;
     }
 }

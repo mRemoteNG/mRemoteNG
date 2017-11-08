@@ -167,7 +167,7 @@ namespace mRemoteNG.Config.Connections
 			try
 			{
                 var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-			    var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+			    var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
                     cryptographyProvider, 
                     ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                     SaveFilter);
@@ -188,7 +188,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private void SaveToMremotengFormattedCsv()
 		{
-            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat(SaveFilter);
+            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat(SaveFilter, Runtime.CredentialProviderCatalog);
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
             var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);

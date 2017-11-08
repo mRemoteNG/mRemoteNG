@@ -5,7 +5,6 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Container;
 
-
 namespace mRemoteNG.UI.Window
 {
     public partial class ActiveDirectoryImportWindow
@@ -21,11 +20,18 @@ namespace mRemoteNG.UI.Window
             WindowType = WindowType.ActiveDirectoryImport;
             DockPnl = new DockContent();
             CurrentDomain = Environment.UserDomainName;
+            ApplyTheme();
         }
 
         #endregion
 
+        private new void ApplyTheme()
+        {
+            base.ApplyTheme();
+        }
+
         #region Private Methods
+         
 
         #region Event Handlers
 

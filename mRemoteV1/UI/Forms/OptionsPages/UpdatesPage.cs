@@ -21,6 +21,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public UpdatesPage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         #region Public Methods

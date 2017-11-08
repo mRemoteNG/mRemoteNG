@@ -1,3 +1,4 @@
+
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Forms
@@ -8,27 +9,27 @@ namespace mRemoteNG.UI.Forms
 			
 		private void InitializeComponent()
 		{
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.lblUncheckProperties = new System.Windows.Forms.Label();
-            this.chkUsername = new System.Windows.Forms.CheckBox();
-            this.chkPassword = new System.Windows.Forms.CheckBox();
-            this.chkDomain = new System.Windows.Forms.CheckBox();
-            this.chkInheritance = new System.Windows.Forms.CheckBox();
-            this.txtFileName = new System.Windows.Forms.TextBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnCancel =  new Controls.Base.NGButton();
+            this.btnOK = new Controls.Base.NGButton();
+            this.lblUncheckProperties = new Controls.Base.NGLabel();
+            this.chkUsername = new Controls.Base.NGCheckBox();
+            this.chkPassword = new Controls.Base.NGCheckBox();
+            this.chkDomain = new Controls.Base.NGCheckBox();
+            this.chkInheritance = new Controls.Base.NGCheckBox();
+            this.txtFileName = new Controls.Base.NGTextBox();
+            this.btnBrowse = new Controls.Base.NGButton();
             this.grpProperties = new System.Windows.Forms.GroupBox();
-            this.chkAssignedCredential = new System.Windows.Forms.CheckBox();
+            this.chkAssignedCredential = new Controls.Base.NGCheckBox();
             this.grpFile = new System.Windows.Forms.GroupBox();
-            this.lblFileFormat = new System.Windows.Forms.Label();
-            this.lblFileName = new System.Windows.Forms.Label();
-            this.cboFileFormat = new System.Windows.Forms.ComboBox();
+            this.lblFileFormat = new Controls.Base.NGLabel();
+            this.lblFileName = new Controls.Base.NGLabel();
+            this.cboFileFormat = new Controls.Base.NGComboBox();
             this.grpItems = new System.Windows.Forms.GroupBox();
-            this.lblSelectedConnection = new System.Windows.Forms.Label();
-            this.lblSelectedFolder = new System.Windows.Forms.Label();
-            this.rdoExportSelectedConnection = new System.Windows.Forms.RadioButton();
-            this.rdoExportSelectedFolder = new System.Windows.Forms.RadioButton();
-            this.rdoExportEverything = new System.Windows.Forms.RadioButton();
+            this.lblSelectedConnection = new Controls.Base.NGLabel();
+            this.lblSelectedFolder = new Controls.Base.NGLabel();
+            this.rdoExportSelectedConnection = new Controls.Base.NGRadioButton();
+            this.rdoExportSelectedFolder = new Controls.Base.NGRadioButton();
+            this.rdoExportEverything = new Controls.Base.NGRadioButton();
             this.grpProperties.SuspendLayout();
             this.grpFile.SuspendLayout();
             this.grpItems.SuspendLayout();
@@ -114,9 +115,10 @@ namespace mRemoteNG.UI.Forms
             // 
             // txtFileName
             // 
-            this.txtFileName.Location = new System.Drawing.Point(15, 48);
+            this.txtFileName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFileName.Location = new System.Drawing.Point(15, 51);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(396, 20);
+            this.txtFileName.Size = new System.Drawing.Size(396, 13);
             this.txtFileName.TabIndex = 1;
             this.txtFileName.TextChanged += new System.EventHandler(this.txtFileName_TextChanged);
             // 
@@ -191,7 +193,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // cboFileFormat
             // 
-            this.cboFileFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFileFormat.DropDownStyle = ComboBoxStyle.DropDownList;
             this.cboFileFormat.FormattingEnabled = true;
             this.cboFileFormat.Location = new System.Drawing.Point(15, 100);
             this.cboFileFormat.Name = "cboFileFormat";
@@ -234,6 +236,7 @@ namespace mRemoteNG.UI.Forms
             // rdoExportSelectedConnection
             // 
             this.rdoExportSelectedConnection.AutoSize = true;
+            this.rdoExportSelectedConnection.BackColor = System.Drawing.Color.Transparent;
             this.rdoExportSelectedConnection.Location = new System.Drawing.Point(15, 91);
             this.rdoExportSelectedConnection.Name = "rdoExportSelectedConnection";
             this.rdoExportSelectedConnection.Size = new System.Drawing.Size(215, 17);
@@ -245,6 +248,7 @@ namespace mRemoteNG.UI.Forms
             // rdoExportSelectedFolder
             // 
             this.rdoExportSelectedFolder.AutoSize = true;
+            this.rdoExportSelectedFolder.BackColor = System.Drawing.Color.Transparent;
             this.rdoExportSelectedFolder.Location = new System.Drawing.Point(15, 55);
             this.rdoExportSelectedFolder.Name = "rdoExportSelectedFolder";
             this.rdoExportSelectedFolder.Size = new System.Drawing.Size(188, 17);
@@ -256,6 +260,7 @@ namespace mRemoteNG.UI.Forms
             // rdoExportEverything
             // 
             this.rdoExportEverything.AutoSize = true;
+            this.rdoExportEverything.BackColor = System.Drawing.Color.Transparent;
             this.rdoExportEverything.Checked = true;
             this.rdoExportEverything.Location = new System.Drawing.Point(15, 32);
             this.rdoExportEverything.Name = "rdoExportEverything";
@@ -293,28 +298,28 @@ namespace mRemoteNG.UI.Forms
             this.ResumeLayout(false);
 
 		}
-		private System.Windows.Forms.Button btnCancel;
-		private System.Windows.Forms.Button btnOK;
-		private System.Windows.Forms.Label lblUncheckProperties;
-		private System.Windows.Forms.CheckBox chkUsername;
-		private System.Windows.Forms.CheckBox chkPassword;
-		private System.Windows.Forms.CheckBox chkDomain;
-		private System.Windows.Forms.CheckBox chkInheritance;
-		private System.Windows.Forms.TextBox txtFileName;
-		private System.Windows.Forms.Button btnBrowse;
+		private Controls.Base.NGButton btnCancel;
+		private Controls.Base.NGButton btnOK;
+		private Controls.Base.NGLabel lblUncheckProperties;
+		private Controls.Base.NGCheckBox chkUsername;
+		private Controls.Base.NGCheckBox chkPassword;
+		private Controls.Base.NGCheckBox chkDomain;
+		private Controls.Base.NGCheckBox chkInheritance;
+		private Controls.Base.NGTextBox txtFileName;
+		private Controls.Base.NGButton btnBrowse;
 		private System.Windows.Forms.GroupBox grpProperties;
 		private System.Windows.Forms.GroupBox grpFile;
-		private System.Windows.Forms.Label lblFileFormat;
-		private System.Windows.Forms.Label lblFileName;
-		private System.Windows.Forms.ComboBox cboFileFormat;
+		private Controls.Base.NGLabel lblFileFormat;
+		private Controls.Base.NGLabel lblFileName;
+		private Controls.Base.NGComboBox cboFileFormat;
 		private System.Windows.Forms.GroupBox grpItems;
-		private System.Windows.Forms.Label lblSelectedConnection;
-		private System.Windows.Forms.Label lblSelectedFolder;
-		private System.Windows.Forms.RadioButton rdoExportSelectedConnection;
-		private System.Windows.Forms.RadioButton rdoExportSelectedFolder;
-		private System.Windows.Forms.RadioButton rdoExportEverything;
+		private Controls.Base.NGLabel lblSelectedConnection;
+		private Controls.Base.NGLabel lblSelectedFolder;
+		private Controls.Base.NGRadioButton rdoExportSelectedConnection;
+		private Controls.Base.NGRadioButton rdoExportSelectedFolder;
+		private Controls.Base.NGRadioButton rdoExportEverything;
         #endregion
 
-        private CheckBox chkAssignedCredential;
+        private Controls.Base.NGCheckBox chkAssignedCredential;
     }
 }

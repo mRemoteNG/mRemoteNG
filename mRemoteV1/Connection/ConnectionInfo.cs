@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using mRemoteNG.Tools;
 using mRemoteNG.App;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Connection.Protocol.SSH;
-using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.RAW;
-using mRemoteNG.Connection.Protocol.ICA;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Connection.Protocol.Telnet;
-using mRemoteNG.Connection.Protocol.Rlogin;
-using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.Http;
+using mRemoteNG.Connection.Protocol.ICA;
+using mRemoteNG.Connection.Protocol.RAW;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Rlogin;
+using mRemoteNG.Connection.Protocol.SSH;
+using mRemoteNG.Connection.Protocol.Telnet;
+using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Container;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 
 
@@ -84,7 +84,7 @@ namespace mRemoteNG.Connection
 
 	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
 	    {
-	        var properties = GetType().BaseType?.GetProperties();
+	        var properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
 	        if (properties == null) return;
 	        foreach (var property in properties)
 	        {

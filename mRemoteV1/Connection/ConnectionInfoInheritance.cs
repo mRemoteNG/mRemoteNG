@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using mRemoteNG.Tools;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection
 {
-    public class ConnectionInfoInheritance
+	public class ConnectionInfoInheritance
 	{
         private ConnectionInfoInheritance _tempInheritanceStorage;
 
@@ -39,12 +39,6 @@ namespace mRemoteNG.Connection
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool Panel {get; set;}
         #endregion
         #region Connection
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 3),
-        LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strCategoryCredentials)),
-        LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionCredential)),
-        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
-        public bool CredentialRecord { get; set; }
-
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUsername"),
         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUsername"),

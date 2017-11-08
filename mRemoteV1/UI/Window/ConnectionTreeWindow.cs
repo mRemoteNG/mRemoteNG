@@ -1,12 +1,12 @@
-using mRemoteNG.App;
-using mRemoteNG.Connection;
-using mRemoteNG.Container;
-using mRemoteNG.Tree;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Themes;
+using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -17,12 +17,9 @@ namespace mRemoteNG.UI.Window
 	{
 	    private readonly ConnectionContextMenu _contextMenu;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+		private ThemeManager _themeManager;
 
-
-        public ConnectionInfo SelectedNode
-        {
-            get { return olvConnections.SelectedNode; }
-        }
+		public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
 	    public ConnectionTree ConnectionTree
 	    {
@@ -39,8 +36,6 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.Tree;
 			DockPnl = panel;
 			InitializeComponent();
-            _contextMenu = new ConnectionContextMenu(olvConnections);
-            olvConnections.ContextMenuStrip = _contextMenu;
             SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
@@ -50,7 +45,9 @@ namespace mRemoteNG.UI.Window
         private void Tree_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
-            Themes.ThemeManager.ThemeChanged += ApplyTheme;
+            //work on the theme change
+            _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ApplyTheme;
             ApplyTheme();
 
             txtSearch.Multiline = true;
@@ -74,16 +71,21 @@ namespace mRemoteNG.UI.Window
             txtSearch.Text = Language.strSearchPrompt;
         }
 
-        private void ApplyTheme()
+        private new void ApplyTheme()
         {
-            msMain.BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-            msMain.ForeColor = Themes.ThemeManager.ActiveTheme.ToolbarTextColor;
-            olvConnections.BackColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelBackgroundColor;
-            olvConnections.ForeColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTextColor;
-            //tvConnections.LineColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTreeLineColor;
-            BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-            txtSearch.BackColor = Themes.ThemeManager.ActiveTheme.SearchBoxBackgroundColor;
-            txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
+            if (!_themeManager.ThemingActive) return;
+            vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(_contextMenu, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            //Treelistview need to be manually themed
+            olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
+            olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");
+            olvConnections.SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Background");
+            olvConnections.SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Foreground"); 
+            olvConnections.UnfocusedSelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Background"); 
+            olvConnections.UnfocusedSelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
+            //There is a border around txtSearch that dont theme well
+            txtSearch.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            txtSearch.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
         }
         #endregion
 
@@ -188,7 +190,6 @@ namespace mRemoteNG.UI.Window
         #region Search
         private void txtSearch_GotFocus(object sender, EventArgs e)
 		{
-			txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextColor;
 			if (txtSearch.Text == Language.strSearchPrompt)
 				txtSearch.Text = "";
 		}
@@ -196,7 +197,6 @@ namespace mRemoteNG.UI.Window
         private void txtSearch_LostFocus(object sender, EventArgs e)
 		{
             if (txtSearch.Text != "") return;
-            txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
             txtSearch.Text = Language.strSearchPrompt;
 		}
 

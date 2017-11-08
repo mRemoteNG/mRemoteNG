@@ -245,7 +245,7 @@
   </data>
   <data name="strCannotImportNormalSessionFile" xml:space="preserve">
     <value>You cannot import a normal connection file.
-Please use File - Load Connections for normal connection files!</value>
+Please use File - Open Connection File for normal connection files!</value>
   </data>
   <data name="strCannotStartPortScan" xml:space="preserve">
     <value>Cannot start Port Scan, incorrect IP format!</value>
@@ -2572,5 +2572,33 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>In v1.76 we have introduced a credential management system. This feature requires a significant change in how we store and interact with credentials within mRemoteNG. You will be required to perform a one-way upgrade of your mRemoteNG connections file.
 
 This page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade.</value>
+  </data>
+<data name="CredentialUnavailable" xml:space="preserve">
+    <value>Credential not available</value>
+    <comment>Shown when a credential is not loaded/available for use.</comment>
+  </data>
+  <data name="strOptionsThemeDeleteConfirmation" xml:space="preserve">
+    <value>Do you really want to delete the theme?</value>
+  </data>
+  <data name="strOptionsThemeEnableTheming" xml:space="preserve">
+    <value>Enable Themes</value>
+  </data>
+  <data name="strOptionsThemeNewThemeCaption" xml:space="preserve">
+    <value>New theme name</value>
+  </data>
+  <data name="strOptionsThemeNewThemeError" xml:space="preserve">
+    <value>Cannot create theme, name already present or special characters in the name</value>
+  </data>
+  <data name="strOptionsThemeNewThemeText" xml:space="preserve">
+    <value>Type the new theme name</value>
+  </data>
+  <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
+    <value>Warning: Restart is required to disable the themes or to completely apply a new one</value>
+  </data>
+  <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
+    <value>No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder</value>
+  </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>Could not find external tool with name "{0}"</value>
   </data>
 </root>

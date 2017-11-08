@@ -11,7 +11,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
 {
-    public class XmlConnectionsDocumentCompilerTests
+	public class XmlConnectionsDocumentCompilerTests
     {
         private XmlConnectionsDocumentCompiler _documentCompiler;
         private ConnectionTreeModel _connectionTreeModel;
@@ -30,7 +30,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
         {
             _connectionTreeModel = SetupConnectionTreeModel();
             _cryptographyProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
                 _cryptographyProvider, 
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());

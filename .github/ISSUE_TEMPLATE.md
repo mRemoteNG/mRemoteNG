@@ -6,10 +6,10 @@ Please provide as much detail as possible for us to fix your issue.
 -->
 
 <!-- Bug -->
-|||
+|Detail|Value|
 |--:|---|
-|Operating system | Windows 7 x64 |
-|mRemoteNG version| 1.75 aplha 3  |
+|Operating system | Windows 10 x64 |
+|mRemoteNG version| 1.75.7008  |
 
 
 <!-- Feature Request -->

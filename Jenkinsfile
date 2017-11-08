@@ -3,9 +3,9 @@ node('windows') {
 	def solutionFilePath = "\"${jobDir}\\mRemoteV1.sln\""
 	def vsToolsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools"
 	def vsExtensionsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
-	def nunitConsolePath = "${jobDir}\\packages\\NUnit.ConsoleRunner.3.6.1\\tools\\nunit3-console.exe"
+	def nunitConsolePath = "${jobDir}\\packages\\NUnit.ConsoleRunner.3.7.0\\tools\\nunit3-console.exe"
 	def openCoverPath = "${jobDir}\\packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe"
-	def reportGeneratorPath = "${jobDir}\\packages\\ReportGenerator.2.5.7\\tools\\ReportGenerator.exe"
+	def reportGeneratorPath = "${jobDir}\\packages\\ReportGenerator.3.0.2\\tools\\ReportGenerator.exe"
 	def testResultFilePrefix = "TestResult"
 	def testResultFileNormal = "${testResultFilePrefix}_UnitTests_normal.xml"
 	def testResultFilePortable = "${testResultFilePrefix}_UnitTests_portable.xml"
@@ -59,11 +59,5 @@ node('windows') {
 			nunit testResultsPattern: "${testResultFilePrefix}*.xml"
 			throw ex
 		}
-	}
-
-	stage ('Upload Reports') {
-    	nunit testResultsPattern: "${testResultFilePrefix}*.xml"
-    	bat "\"${reportGeneratorPath}\" -reports:\"${jobDir}\\${coverageReport}\" -targetdir:\"${jobDir}\\reports\" -reporttypes:Html"
-    	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports', reportFiles: 'index.htm', reportName: 'Code Coverage Report', reportTitles: ''])
 	}
 }

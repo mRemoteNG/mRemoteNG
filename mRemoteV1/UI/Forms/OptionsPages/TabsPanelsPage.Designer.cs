@@ -31,13 +31,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabsPanelsPage));
-            this.chkAlwaysShowPanelTabs = new System.Windows.Forms.CheckBox();
-            this.chkIdentifyQuickConnectTabs = new System.Windows.Forms.CheckBox();
-            this.chkOpenNewTabRightOfSelected = new System.Windows.Forms.CheckBox();
-            this.chkAlwaysShowPanelSelectionDlg = new System.Windows.Forms.CheckBox();
-            this.chkShowLogonInfoOnTabs = new System.Windows.Forms.CheckBox();
-            this.chkDoubleClickClosesTab = new System.Windows.Forms.CheckBox();
-            this.chkShowProtocolOnTabs = new System.Windows.Forms.CheckBox();
+            this.chkAlwaysShowPanelTabs = new Controls.Base.NGCheckBox();
+            this.chkIdentifyQuickConnectTabs = new Controls.Base.NGCheckBox();
+            this.chkOpenNewTabRightOfSelected = new Controls.Base.NGCheckBox();
+            this.chkAlwaysShowPanelSelectionDlg = new Controls.Base.NGCheckBox();
+            this.chkShowLogonInfoOnTabs = new Controls.Base.NGCheckBox();
+            this.chkDoubleClickClosesTab = new Controls.Base.NGCheckBox();
+            this.chkShowProtocolOnTabs = new Controls.Base.NGCheckBox();
             this.SuspendLayout();
             // 
             // chkAlwaysShowPanelTabs
@@ -128,13 +128,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.PerformLayout();
 
 		}
-		internal System.Windows.Forms.CheckBox chkAlwaysShowPanelTabs;
-		internal System.Windows.Forms.CheckBox chkIdentifyQuickConnectTabs;
-		internal System.Windows.Forms.CheckBox chkOpenNewTabRightOfSelected;
-		internal System.Windows.Forms.CheckBox chkAlwaysShowPanelSelectionDlg;
-		internal System.Windows.Forms.CheckBox chkShowLogonInfoOnTabs;
-		internal System.Windows.Forms.CheckBox chkDoubleClickClosesTab;
-		internal System.Windows.Forms.CheckBox chkShowProtocolOnTabs;
+		internal Controls.Base.NGCheckBox chkAlwaysShowPanelTabs;
+		internal Controls.Base.NGCheckBox chkIdentifyQuickConnectTabs;
+		internal Controls.Base.NGCheckBox chkOpenNewTabRightOfSelected;
+		internal Controls.Base.NGCheckBox chkAlwaysShowPanelSelectionDlg;
+		internal Controls.Base.NGCheckBox chkShowLogonInfoOnTabs;
+		internal Controls.Base.NGCheckBox chkDoubleClickClosesTab;
+		internal Controls.Base.NGCheckBox chkShowProtocolOnTabs;
 			
 	}
 }

@@ -77,14 +77,14 @@ namespace mRemoteNG.App
 			        case ConnectionsSaver.Format.mRXML:
                         var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
 			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
-                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                        var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
                             cryptographyProvider, 
                             rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString(),
                             saveFilter);
 			            serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
 			            break;
 			        case ConnectionsSaver.Format.mRCSV:
-			            serializer = new CsvConnectionsSerializerMremotengFormat(saveFilter);
+			            serializer = new CsvConnectionsSerializerMremotengFormat(saveFilter, Runtime.CredentialProviderCatalog);
                         break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

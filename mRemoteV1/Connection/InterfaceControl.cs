@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.Connection
 {
-	public partial class InterfaceControl
+	public sealed partial class InterfaceControl
     {
         public ProtocolBase Protocol { get; set; }
 	    public ConnectionInfo Info { get; set; }
