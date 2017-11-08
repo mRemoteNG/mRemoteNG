@@ -1,10 +1,13 @@
-1.75.7011 (2017-11-04):
+1.75.7011 (2017-11-07):
 
 Fixes:
 ------
+#778: Custom connection file path command line argument (/c) not working
 #763: Sometimes minimizing folder causes connection tree to disappear
 #761: Connections using external tools do not start (introduced in v1.75.7009)
 #758: "Decryption failed" message when loading from SQL server
+Fixed issues with /resetpanels and /resetpos command line arguments
+Resolved bug where connection tree hotkeys would sometimes be disabled
 
 
 1.75.7010 (2017-10-29):
