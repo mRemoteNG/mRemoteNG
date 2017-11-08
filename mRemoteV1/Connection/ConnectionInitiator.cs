@@ -13,9 +13,8 @@ using TabPage = Crownwood.Magic.Controls.TabPage;
 
 namespace mRemoteNG.Connection
 {
-    public class ConnectionInitiator : IConnectionInitiator
+	public class ConnectionInitiator : IConnectionInitiator
     {
-        private readonly FrmMain _frmMain = FrmMain.Default;
         private readonly PanelAdder _panelAdder = new PanelAdder();
 
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
@@ -54,7 +53,7 @@ namespace mRemoteNG.Connection
             var connectionWindow = (ConnectionWindow)interfaceControl.FindForm();
             connectionWindow?.Focus();
             var findForm = (ConnectionWindow)interfaceControl.FindForm();
-            findForm?.Show(_frmMain.pnlDock);
+            findForm?.Show(FrmMain.Default.pnlDock);
             var tabPage = (TabPage)interfaceControl.Parent;
             tabPage.Selected = true;
             return true;
@@ -118,7 +117,7 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfo.OpenConnections.Add(newProtocol);
-                _frmMain.SelectedConnection = connectionInfo;
+                FrmMain.Default.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
             {
@@ -179,7 +178,7 @@ namespace mRemoteNG.Connection
             if (connectionForm == null)
                 connectionForm = _panelAdder.AddPanel(connectionPanel);
             else
-                ((ConnectionWindow)connectionForm).Show(_frmMain.pnlDock);
+                ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
 
             connectionForm.Focus();
             return connectionForm;
