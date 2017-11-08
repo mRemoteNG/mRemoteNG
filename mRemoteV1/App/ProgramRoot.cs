@@ -56,6 +56,7 @@ namespace mRemoteNG.App
             if (singletonInstanceWindowHandle == IntPtr.Zero) return;
             if (NativeMethods.IsIconic(singletonInstanceWindowHandle) != 0)
                 NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int)NativeMethods.SW_RESTORE);
+            NativeMethods.SetForegroundWindow(singletonInstanceWindowHandle);
         }
 
         private static IntPtr GetRunningSingletonInstanceWindowHandle()
