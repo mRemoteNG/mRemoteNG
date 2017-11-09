@@ -36,7 +36,9 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.Tree;
 			DockPnl = panel;
 			InitializeComponent();
-            SetMenuEventHandlers();
+			_contextMenu = new ConnectionContextMenu(olvConnections);
+			olvConnections.ContextMenuStrip = _contextMenu;
+			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
 		}
