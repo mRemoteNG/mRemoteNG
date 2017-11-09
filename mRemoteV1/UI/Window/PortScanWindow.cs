@@ -1,29 +1,34 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using WeifenLuo.WinFormsUI.Docking;
 using static mRemoteNG.Tools.MiscTools;
-
 
 namespace mRemoteNG.UI.Window
 {
 	public partial class PortScanWindow
 	{
         #region Constructors
-		public PortScanWindow(DockContent panel)
+		public PortScanWindow()
 		{
 			InitializeComponent();
 					
 			WindowType = WindowType.PortScan;
-			DockPnl = panel;
+			DockPnl = new DockContent();
+            ApplyTheme();
 		}
         #endregion
-				
+
+	    private new void ApplyTheme()
+        {
+            base.ApplyTheme(); 
+        }
+
         #region Private Properties
         private bool IpsValid
 		{
@@ -82,7 +87,7 @@ namespace mRemoteNG.UI.Window
 
 	        try
 	        {
-	            lvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
+                olvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
 	            ShowImportControls(true);
 	            cbProtocol.SelectedIndex = 0;
 	        }
@@ -123,9 +128,10 @@ namespace mRemoteNG.UI.Window
 
 	    private void btnImport_Click(object sender, EventArgs e)
 		{
-            var protocol = (ProtocolType)StringToEnum(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
+            ProtocolType protocol = (ProtocolType)StringToEnum(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
 		    importSelectedHosts(protocol);
             DialogResult = DialogResult.OK;
+			Close();
 		}
         #endregion
 				
@@ -151,11 +157,11 @@ namespace mRemoteNG.UI.Window
 			pnlImport.Visible = controlsVisible;
 			if (controlsVisible)
 			{
-				lvHosts.Height = pnlImport.Top - lvHosts.Top;
+				olvHosts.Height = pnlImport.Top - olvHosts.Top;
 			}
 			else
 			{
-				lvHosts.Height = pnlImport.Bottom - lvHosts.Top;
+				olvHosts.Height = pnlImport.Bottom - olvHosts.Top;
 			}
 		}
 				
@@ -165,10 +171,10 @@ namespace mRemoteNG.UI.Window
 			{
 				_scanning = true;
 				SwitchButtonText();
-				lvHosts.Items.Clear();
+				olvHosts.Items.Clear();
 						
-				var ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
-				var ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
+				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
+				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
 				
 				_portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
 						
@@ -197,14 +203,9 @@ namespace mRemoteNG.UI.Window
 					
 			prgBar.Maximum = 100;
 			prgBar.Value = 0;
-
-            /* If there are still hosts timing out, we might call PortScannerHostScannedDelegate after the import which will throw exceptions...
-             * Disable the import button until after the scan is complete
-             */
-		    btnImport.Enabled = !_scanning;
 		}
-
-        private static void PortScanner_BeginHostScan(string host)
+				
+		private static void PortScanner_BeginHostScan(string host)
 		{
 			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Scanning " + host, true);
 		}
@@ -214,20 +215,14 @@ namespace mRemoteNG.UI.Window
 		{
 			if (InvokeRequired)
 			{
-				Invoke(new PortScannerHostScannedDelegate(PortScanner_HostScanned), host, scannedCount, totalCount);
+				Invoke(new PortScannerHostScannedDelegate(PortScanner_HostScanned), new object[] {host, scannedCount, totalCount});
 				return;
 			}
 					
 			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Host scanned " + host.HostIp, true);
-					
-			var listViewItem = host.ToListViewItem();
-			if (listViewItem != null)
-			{
-				lvHosts.Items.Add(listViewItem);
-				listViewItem.EnsureVisible();
-			}
-					
-			prgBar.Maximum = totalCount;
+
+            olvHosts.AddObject(host);
+            prgBar.Maximum = totalCount;
 			prgBar.Value = scannedCount;
 		}
 				
@@ -236,7 +231,7 @@ namespace mRemoteNG.UI.Window
 		{
 			if (InvokeRequired)
 			{
-				Invoke(new PortScannerScanComplete(PortScanner_ScanComplete), hosts);
+				Invoke(new PortScannerScanComplete(PortScanner_ScanComplete), new object[] {hosts});
 				return;
 			}
 					
@@ -249,40 +244,19 @@ namespace mRemoteNG.UI.Window
 
         private void importSelectedHosts(ProtocolType protocol)
         {
-
-            if (lvHosts.SelectedItems.Count < 1)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "importSelectedHosts: Could not import host(s) from port scan context menu. No hosts selected.");
-                return;
-            }
-
             var hosts = new List<ScanHost>();
-            foreach (ListViewItem item in lvHosts.SelectedItems)
+            foreach (ScanHost host in olvHosts.SelectedObjects)
             {
-                var scanHost = (ScanHost)item.Tag;
-                if (scanHost != null)
-                {
-                    hosts.Add(scanHost);
-                }
+                hosts.Add(host); 
             }
 
             if (hosts.Count < 1)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "importSelectedHosts: Could not import host(s) from port scan context menu", true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Could not import host(s) from port scan context menu");
                 return;
             }
 
-            ContainerInfo selectedTreeNodeAsContainer;
-            if (Windows.TreeForm.SelectedNode == null)
-            {
-                selectedTreeNodeAsContainer = Windows.TreeForm.ConnectionTree.GetRootConnectionNode();
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "importSelectedHosts: No node selected. Using Root Node.", true);
-            }
-            else
-            {
-                selectedTreeNodeAsContainer = Windows.TreeForm.SelectedNode as ContainerInfo ?? Windows.TreeForm.SelectedNode.Parent;
-            }
-
+            var selectedTreeNodeAsContainer = Windows.TreeForm.SelectedNode as ContainerInfo ?? Windows.TreeForm.SelectedNode.Parent;
             Import.ImportFromPortScan(hosts, protocol, selectedTreeNodeAsContainer);
         }
 

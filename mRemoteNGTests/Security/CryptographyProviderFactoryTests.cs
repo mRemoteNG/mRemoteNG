@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Security.Factories;
 using NUnit.Framework;
 
 
@@ -10,39 +10,18 @@ namespace mRemoteNGTests.Security
     [TestFixture]
     public class CryptographyProviderFactoryTests
     {
-        private CryptographyProviderFactory _cryptographyProviderFactory;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _cryptographyProviderFactory = new CryptographyProviderFactory();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _cryptographyProviderFactory = null;
-        }
-
         [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
         public void CanCreateAeadProvidersWithCorrectEngine(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
+            var cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
             Assert.That(cryptoProvider.CipherEngine, Is.EqualTo(engine));
         }
 
         [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
         public void CanCreateAeadProvidersWithCorrectMode(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
+            var cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
             Assert.That(cryptoProvider.CipherMode, Is.EqualTo(mode));
-        }
-
-        [Test]
-        public void CanCreateLegacyRijndael()
-        {
-            var cryptoProvider = _cryptographyProviderFactory.CreateLegacyRijndaelCryptographyProvider();
-            Assert.That(cryptoProvider, Is.TypeOf<LegacyRijndaelCryptographyProvider>());
         }
 
         private class TestCaseSources

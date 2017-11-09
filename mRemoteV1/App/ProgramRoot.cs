@@ -26,8 +26,7 @@ namespace mRemoteNG.App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Startup.Instance.InitializeProgram();
-            Application.Run(frmMain.Default);
+            Application.Run(FrmMain.Default);
         }
 
         public static void CloseSingletonInstanceMutex()
@@ -56,6 +55,7 @@ namespace mRemoteNG.App
             if (singletonInstanceWindowHandle == IntPtr.Zero) return;
             if (NativeMethods.IsIconic(singletonInstanceWindowHandle) != 0)
                 NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int)NativeMethods.SW_RESTORE);
+            NativeMethods.SetForegroundWindow(singletonInstanceWindowHandle);
         }
 
         private static IntPtr GetRunningSingletonInstanceWindowHandle()

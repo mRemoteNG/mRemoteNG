@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -20,10 +20,13 @@ namespace mRemoteNG.Connection.Protocol
 			}
 		}
 				
-        public new int Count => List.Count;
+        public new int Count
+        {
+            get { return List.Count; }
+        }
 
-				
-		public void Add(ProtocolBase cProt)
+
+	    public void Add(ProtocolBase cProt)
 		{
 			List.Add(cProt);
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cProt));

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools.Cmdline;
 
 namespace mRemoteNG.Tools
 {
-    public class ExternalToolArgumentParser
+	public class ExternalToolArgumentParser
     {
         private readonly ConnectionInfo _connectionInfo;
 
@@ -169,12 +172,26 @@ namespace mRemoteNG.Tools
                     break;
                 case "username":
                     replacement = _connectionInfo.Username;
+                    if (string.IsNullOrEmpty(replacement))
+                        if (Settings.Default.EmptyCredentials == "windows")
+                            replacement = Environment.UserName;
+                        else if (Settings.Default.EmptyCredentials == "custom")
+                            replacement = Settings.Default.DefaultUsername;
                     break;
                 case "password":
                     replacement = _connectionInfo.Password;
+                    if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
+                        replacement = new LegacyRijndaelCryptographyProvider()
+                                        .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
+                                                                    Runtime.EncryptionKey);
                     break;
                 case "domain":
                     replacement = _connectionInfo.Domain;
+                    if (string.IsNullOrEmpty(replacement))
+                        if (Settings.Default.EmptyCredentials == "windows")
+                            replacement = Environment.UserDomainName;
+                        else if (Settings.Default.EmptyCredentials == "custom")
+                            replacement = Settings.Default.DefaultDomain;
                     break;
                 case "description":
                     replacement = _connectionInfo.Description;

@@ -27,7 +27,6 @@ Guidelines for bug reports:
 1. Do not open bug reports for questions.
 1. Use the GitHub Issue search to make sure your bug hasn't already been reported.
 1. Include as much detailed information as possible. We've included a default template when opening an issue to make this easier.
-1. Please tag your your bug report with the [`Bug`](https://github.com/mRemoteNG/mRemoteNG/issues?q=is%3Aissue+is%3Aopen+label%3ABug) label.
 
 ### Feature requests
 Feature requests are great! Take some time to compose a well thought out proposal. It's up to you to convince the project maintainers that your feature is a good idea. To ensure your request receives the consideration that it deserves, include as much detail as possible. For example:
@@ -35,7 +34,6 @@ Feature requests are great! Take some time to compose a well thought out proposa
 - What situation led you to want this feature?
 - How does the application perform now and how would the new feature change this?
 - If applicable, consider including visual mock-ups to show us what you mean.
-- Please tag your feature request with the [`Feature Request`](https://github.com/mRemoteNG/mRemoteNG/issues?q=is%3Aissue+is%3Aopen+label%3A%22Feature+Request%22) label.
 
 # Pull requests
 Good pull requests are a huge help! If you haven't already, please consider reading [GitHub's guide to contributing to open source](https://guides.github.com/activities/contributing-to-open-source/)

@@ -13,6 +13,7 @@ using mRemoteNG.Tools;
 #else 
 using System.Windows.Forms;
 #endif
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App.Update
 {
@@ -28,11 +29,20 @@ namespace mRemoteNG.App.Update
 
         public string ChangeLog { get; private set; }
 
-        public bool IsGetUpdateInfoRunning => _getUpdateInfoThread != null && _getUpdateInfoThread.IsAlive;
+        public bool IsGetUpdateInfoRunning
+        {
+            get { return _getUpdateInfoThread != null && _getUpdateInfoThread.IsAlive; }
+        }
 
-        private bool IsGetChangeLogRunning => _getChangeLogThread != null && _getChangeLogThread.IsAlive;
+        private bool IsGetChangeLogRunning
+        {
+            get { return _getChangeLogThread != null && _getChangeLogThread.IsAlive; }
+        }
 
-        public bool IsDownloadUpdateRunning => _downloadUpdateWebClient != null;
+        public bool IsDownloadUpdateRunning
+        {
+            get { return _downloadUpdateWebClient != null; }
+        }
 
         #endregion
 
@@ -189,10 +199,12 @@ namespace mRemoteNG.App.Update
             var constructor = type.GetConstructor(bindingFlags, null, argumentTypes, null);
             object[] arguments = {result, exception, cancelled, userToken};
 
+            if (constructor == null)
+                return null;
             return (DownloadStringCompletedEventArgs) constructor.Invoke(arguments);
         }
 
-        public DownloadStringCompletedEventArgs DownloadString(Uri address)
+        private DownloadStringCompletedEventArgs DownloadString(Uri address)
         {
             var webClient = CreateWebClient();
             var result = string.Empty;
@@ -272,7 +284,7 @@ namespace mRemoteNG.App.Update
                             throw updateAuthenticode.Exception;
                         }
 
-                        throw new Exception(updateAuthenticode.StatusMessage);
+                        throw new Exception(updateAuthenticode.GetStatusMessage());
                     }
 #endif
 

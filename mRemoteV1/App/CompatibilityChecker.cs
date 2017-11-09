@@ -5,22 +5,26 @@ using mRemoteNG.UI.TaskDialog;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.App
 {
     public static class CompatibilityChecker
     {
-        public static void CheckCompatibility()
+        public static void CheckCompatibility(MessageCollector messageCollector)
         {
-            CheckFipsPolicy();
-            CheckLenovoAutoScrollUtility();
+            CheckFipsPolicy(messageCollector);
+            CheckLenovoAutoScrollUtility(messageCollector);
         }
 
-        private static void CheckFipsPolicy()
+        private static void CheckFipsPolicy(MessageCollector messageCollector)
         {
-            Logger.Instance.InfoFormat("Checking FIPS Policy...");
+            messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS Policy...", true);
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
-            MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName, GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error));
+            var errorText = string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName,
+                GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
+            MessageBox.Show(FrmMain.Default, errorText);
             Environment.Exit(1);
         }
 
@@ -42,9 +46,9 @@ namespace mRemoteNG.App
             return (int)fipsPolicy != 0;
         }
 
-        private static void CheckLenovoAutoScrollUtility()
+        private static void CheckLenovoAutoScrollUtility(MessageCollector messageCollector)
         {
-            Logger.Instance.InfoFormat("Checking Lenovo AutoScroll Utility...");
+            messageCollector.AddMessage(MessageClass.InformationMsg, "Checking Lenovo AutoScroll Utility...", true);
 
             if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
                 return;
@@ -56,7 +60,7 @@ namespace mRemoteNG.App
             }
             catch (InvalidOperationException ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
+                messageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
             }
 
             if (proccesses.Length <= 0) return;

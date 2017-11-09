@@ -4,7 +4,7 @@ using mRemoteNG.Connection;
 
 namespace mRemoteNG.Tree
 {
-    public class OpenConnectionClickHandler : ITreeNodeClickHandler
+    public class OpenConnectionClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {
         private readonly IConnectionInitiator _connectionInitiator;
 

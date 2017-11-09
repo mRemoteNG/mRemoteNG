@@ -11,6 +11,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public SqlServerPage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         public override string PageName
@@ -63,7 +64,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private static void ReinitializeSqlUpdater()
         {
             Runtime.RemoteConnectionsSyncronizer?.Dispose();
-            frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
+            FrmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
 
             if (Settings.Default.UseSQLServer)
             {

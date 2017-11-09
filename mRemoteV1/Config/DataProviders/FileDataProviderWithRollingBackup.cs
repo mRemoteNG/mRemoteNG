@@ -1,34 +1,18 @@
-﻿using System;
-using mRemoteNG.App;
-
-namespace mRemoteNG.Config.DataProviders
+﻿namespace mRemoteNG.Config.DataProviders
 {
-    public class FileDataProviderWithRollingBackup : FileDataProviderWithBackup
+    public class FileDataProviderWithRollingBackup : FileDataProvider
     {
+        private readonly FileBackupCreator _fileBackupCreator;
+
         public FileDataProviderWithRollingBackup(string filePath) : base(filePath)
         {
+            _fileBackupCreator = new FileBackupCreator();
         }
 
-        protected override void CreateBackup()
+        public override void Save(string content)
         {
-            CreateRollingBackup();
-            base.CreateBackup();
-        }
-
-        protected virtual void CreateRollingBackup()
-        {
-            var timeStamp = $"{DateTime.Now:yyyyMMdd-HHmmss-ffff}";
-            var normalBackup = new FileDataProviderWithBackup(FilePath + BackupFileSuffix);
-            var normalBackupWithoutSuffix = normalBackup.FilePath.Replace(BackupFileSuffix, "");
-            try
-            {
-                normalBackup.MoveTo(normalBackupWithoutSuffix + timeStamp + BackupFileSuffix);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace($"Failed to create rolling backup of file {FilePath}", ex);
-                throw;
-            }
+            _fileBackupCreator.CreateBackupFile(FilePath);
+            base.Save(content);
         }
     }
 }

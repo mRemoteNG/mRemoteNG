@@ -1,14 +1,18 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.UI.Forms.Input;
+using mRemoteNG.UI.Panels;
 
 namespace mRemoteNG.UI.Forms
 {
 	public partial class frmChoosePanel
 	{
+	    private readonly PanelAdder _panelAdder;
+
 		public frmChoosePanel()
 		{
 			InitializeComponent();
+            _panelAdder = new PanelAdder();
 		}
         public string Panel
 		{
@@ -62,11 +66,11 @@ namespace mRemoteNG.UI.Forms
 
 	    private void btnNew_Click(object sender, System.EventArgs e)
 		{
-		    string pnlName = Language.strNewPanel;
+		    var pnlName = Language.strNewPanel;
 			
 			if (input.InputBox(Language.strNewPanel, Language.strPanelName + ":", ref pnlName) == DialogResult.OK && !string.IsNullOrEmpty(pnlName))
 			{
-                Runtime.AddPanel(pnlName);
+                _panelAdder.AddPanel(pnlName);
 				AddAvailablePanels();
 				cbPanels.SelectedItem = pnlName;
 				cbPanels.Focus();

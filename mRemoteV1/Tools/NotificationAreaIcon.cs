@@ -15,6 +15,7 @@ namespace mRemoteNG.Tools
         private readonly ContextMenuStrip _cMen;
         private readonly ToolStripMenuItem _cMenCons;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private static readonly FrmMain FrmMain = FrmMain.Default;
 
         public bool Disposed { get; private set; }
 
@@ -84,13 +85,13 @@ namespace mRemoteNG.Tools
             };
 
             // ReSharper disable once CoVariantArrayConversion
-            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionTreeModel).ToArray();
+            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionsService.ConnectionTreeModel).ToArray();
             _cMenCons.DropDownItems.AddRange(rootMenuItems);
         }
 
         private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (frmMain.Default.Visible)
+            if (FrmMain.Visible)
                 HideForm();
             else
                 ShowForm();
@@ -98,8 +99,8 @@ namespace mRemoteNG.Tools
 
         private static void ShowForm()
         {
-            frmMain.Default.Show();
-            frmMain.Default.WindowState = frmMain.Default.PreviousWindowState;
+            FrmMain.Show();
+            FrmMain.WindowState = FrmMain.PreviousWindowState;
 
             if (Settings.Default.ShowSystemTrayIcon) return;
             Runtime.NotificationAreaIcon.Dispose();
@@ -108,15 +109,15 @@ namespace mRemoteNG.Tools
 
         private static void HideForm()
         {
-            frmMain.Default.Hide();
-            frmMain.Default.PreviousWindowState = frmMain.Default.WindowState;
+            FrmMain.Hide();
+            FrmMain.PreviousWindowState = FrmMain.WindowState;
         }
 
         private void ConMenItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
             if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
-            if (frmMain.Default.Visible == false)
+            if (FrmMain.Visible == false)
                 ShowForm();
             _connectionInitiator.OpenConnection((ConnectionInfo) ((ToolStripMenuItem) sender).Tag);
         }

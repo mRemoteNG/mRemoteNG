@@ -10,6 +10,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public AppearancePage()
         {
             InitializeComponent();
+            base.ApplyTheme();
         }
 
         public override string PageName
@@ -73,7 +74,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.ShowDescriptionTooltipsInTree = chkShowDescriptionTooltipsInTree.Checked;
             Settings.Default.ShowCompleteConsPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
-            frmMain.Default.ShowFullPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
+            FrmMain.Default.ShowFullPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
 
             Settings.Default.ShowSystemTrayIcon = chkShowSystemTrayIcon.Checked;
             if (Settings.Default.ShowSystemTrayIcon)

@@ -23,10 +23,9 @@ namespace mRemoteNG.Config.Import
 		{
             var dataProvider = new FileDataProvider(fileName);
             var content = dataProvider.Load();
-            var lines = content.Split(Environment.NewLine.ToCharArray());
 
-            var deserializer = new RemoteDesktopConnectionDeserializer(lines);
-            var connectionTreeModel = deserializer.Deserialize();
+            var deserializer = new RemoteDesktopConnectionDeserializer();
+            var connectionTreeModel = deserializer.Deserialize(content);
 
             var importedConnection = connectionTreeModel.RootNodes.First().Children.First();
 			

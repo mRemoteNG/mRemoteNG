@@ -5,7 +5,6 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Container;
 
-
 namespace mRemoteNG.UI.Window
 {
     public partial class ActiveDirectoryImportWindow
@@ -14,18 +13,25 @@ namespace mRemoteNG.UI.Window
 
         #region Constructors
 
-        public ActiveDirectoryImportWindow(DockContent panel)
+        public ActiveDirectoryImportWindow()
         {
             InitializeComponent();
-            Runtime.FontOverride(this);
+            FontOverrider.FontOverride(this);
             WindowType = WindowType.ActiveDirectoryImport;
-            DockPnl = panel;
+            DockPnl = new DockContent();
             CurrentDomain = Environment.UserDomainName;
+            ApplyTheme();
         }
 
         #endregion
 
+        private new void ApplyTheme()
+        {
+            base.ApplyTheme();
+        }
+
         #region Private Methods
+         
 
         #region Event Handlers
 
@@ -47,7 +53,7 @@ namespace mRemoteNG.UI.Window
             if (selectedNode != null)
                 importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
             else
-                importDestination = Runtime.ConnectionTreeModel.RootNodes.First();
+                importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
 
             Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
         }

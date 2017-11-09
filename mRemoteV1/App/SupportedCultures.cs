@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
@@ -11,7 +11,10 @@ namespace mRemoteNG.App
 	{
         private static SupportedCultures _Instance;
 
-        private static SupportedCultures SingletonInstance => _Instance ?? (_Instance = new SupportedCultures());
+        private static SupportedCultures SingletonInstance
+        {
+            get { return _Instance ?? (_Instance = new SupportedCultures()); }
+        }
 
 
 	    private SupportedCultures()

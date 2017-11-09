@@ -11,12 +11,14 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -50,7 +52,6 @@ namespace mRemoteNG.Config.Connections
 		
 		public string ConnectionFileName {get; set;}
 		public TreeNode RootTreeNode {get; set;}
-		public bool Export {get; set;}
 		public Format SaveFormat {get; set;}
 		public SaveFilter SaveFilter {get; set;}
         public ConnectionTreeModel ConnectionTreeModel { get; set; }
@@ -72,11 +73,10 @@ namespace mRemoteNG.Config.Connections
 					break;
 				default:
 					SaveToXml();
-					if (!Export)
-						frmMain.Default.ConnectionsFileName = ConnectionFileName;
+					FrmMain.Default.ConnectionsFileName = ConnectionFileName;
 					break;
 			}
-			frmMain.Default.AreWeUsingSqlServerForSavingConnections = SaveFormat == Format.SQL;
+			FrmMain.Default.AreWeUsingSqlServerForSavingConnections = SaveFormat == Format.SQL;
 		}
         #endregion
 				
@@ -93,7 +93,7 @@ namespace mRemoteNG.Config.Connections
 				return;
 			}
 
-		    var rootTreeNode = Runtime.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+		    var rootTreeNode = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
 		    UpdateRootNodeTable(rootTreeNode, sqlConnector);
 		    UpdateConnectionsTable(rootTreeNode, sqlConnector);
@@ -111,7 +111,7 @@ namespace mRemoteNG.Config.Connections
             {
                 if (rootTreeNode.Password)
                 {
-                    _password = Convert.ToString(rootTreeNode.PasswordString).ConvertToSecureString();
+                    _password = rootTreeNode.PasswordString.ConvertToSecureString();
                     strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
                 }
                 else
@@ -166,18 +166,18 @@ namespace mRemoteNG.Config.Connections
 		{
 			try
 			{
-                var factory = new CryptographyProviderFactory();
-                var cryptographyProvider = factory.CreateAeadCryptographyProvider(mRemoteNG.Settings.Default.EncryptionEngine, mRemoteNG.Settings.Default.EncryptionBlockCipherMode);
-                cryptographyProvider.KeyDerivationIterations = mRemoteNG.Settings.Default.EncryptionKeyDerivationIterations;
-                var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider)
+                var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
+			    var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
+                    cryptographyProvider, 
+                    ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                    SaveFilter);
+                var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
 				{
-                    Export = Export,
-                    SaveFilter = SaveFilter,
                     UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
 						
-                var fileDataProvider = new FileDataProviderWithBackup(ConnectionFileName);
+                var fileDataProvider = new FileDataProviderWithRollingBackup(ConnectionFileName);
                 fileDataProvider.Save(xml);
             }
 			catch (Exception ex)
@@ -188,7 +188,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private void SaveToMremotengFormattedCsv()
 		{
-            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveFilter = SaveFilter };
+            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat(SaveFilter, Runtime.CredentialProviderCatalog);
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
             var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);
@@ -198,7 +198,7 @@ namespace mRemoteNG.Config.Connections
         // .VRE files are for ASG-Remote Desktop (prevously visionapp Remote Desktop)
 		private void SaveToVRE()
 		{
-			if (Runtime.IsConnectionsFileLoaded == false)
+			if (Runtime.ConnectionsService.IsConnectionsFileLoaded == false)
 			{
 				return;
 			}
@@ -319,7 +319,7 @@ namespace mRemoteNG.Config.Connections
 					
 			//Smart Size
 			_xmlTextWriter.WriteStartElement("AutoSize");
-			_xmlTextWriter.WriteValue(con.Resolution == ProtocolRDP.RDPResolutions.SmartSize);
+			_xmlTextWriter.WriteValue(con.Resolution == RdpProtocol.RDPResolutions.SmartSize);
 			_xmlTextWriter.WriteEndElement();
 					
 			//SeparateResolutionX
@@ -332,7 +332,7 @@ namespace mRemoteNG.Config.Connections
 			_xmlTextWriter.WriteValue("768");
 			_xmlTextWriter.WriteEndElement();
 					
-			var resolution = ProtocolRDP.GetResolutionRectangle(con.Resolution);
+			var resolution = RdpProtocol.GetResolutionRectangle(con.Resolution);
 			if (resolution.Width == 0)
 			{
 				resolution.Width = 1024;

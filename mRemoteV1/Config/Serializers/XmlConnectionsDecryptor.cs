@@ -2,6 +2,7 @@
 using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree.Root;
 
@@ -29,7 +30,7 @@ namespace mRemoteNG.Config.Serializers
 
         public XmlConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode, RootNodeInfo rootNodeInfo)
         {
-            _cryptographyProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(blockCipherEngine, blockCipherMode);
+            _cryptographyProvider = new CryptoProviderFactory(blockCipherEngine, blockCipherMode).Build();
             _rootNodeInfo = rootNodeInfo;
         }
 

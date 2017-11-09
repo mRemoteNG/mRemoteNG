@@ -1,5 +1,4 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.UI.Forms.OptionsPages;
+﻿using mRemoteNG.UI.Forms.OptionsPages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,28 +11,40 @@ namespace mRemoteNG.UI.Forms
     {
         private Dictionary<string, OptionsPage> _pages;
         private ImageList _pageIconImageList;
-        private readonly string pageName;
+        private readonly string _pageName;
 
         public frmOptions()
         {
             InitializeComponent();
-            pageName = Language.strStartupExit;
+            _pageName = Language.strStartupExit;
         }
 
         public frmOptions(string pn)
         {
             InitializeComponent();
-            pageName = pn;
+            _pageName = pn;
         }
 
         private void frmOptions_Load(object sender, EventArgs e)
         {
             CompileListOfOptionsPages();
-            Runtime.FontOverride(this);
+            FontOverrider.FontOverride(this);
             SetImageListForListView();
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();
             ApplyLanguage();
+            ApplyTheme();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
+            lstOptionPages.SelectedIndex = 0;
+        }
+        private void ApplyTheme()
+        {
+            if(Themes.ThemeManager.getInstance().ThemingActive)
+            {
+                BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            }
         }
 
         private void ApplyLanguage()
@@ -51,7 +62,9 @@ namespace mRemoteNG.UI.Forms
                 {typeof(StartupExitPage).Name, new StartupExitPage()},
                 {typeof(AppearancePage).Name, new AppearancePage()},
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
+                {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},
+                {typeof(CredentialsPage).Name, new CredentialsPage()},
                 {typeof(SqlServerPage).Name, new SqlServerPage()},
                 {typeof(UpdatesPage).Name, new UpdatesPage()},
                 {typeof(ThemePage).Name, new ThemePage()},
@@ -73,8 +86,7 @@ namespace mRemoteNG.UI.Forms
             {
                 page.LoadSettings();
                 _pageIconImageList.Images.Add(page.PageName, page.PageIcon);
-                var item = new ListViewItem(page.PageName, page.PageName) {Tag = page.GetType().Name};
-                lstOptionPages.Items.Add(item);
+                lstOptionPages.AddObject(page);
             }
         }
 
@@ -83,7 +95,7 @@ namespace mRemoteNG.UI.Forms
             bool isSet = false;
             for (int i = 0; i < lstOptionPages.Items.Count; i++)
             {
-                if (!lstOptionPages.Items[i].Text.Equals(pageName)) continue;
+                if (!lstOptionPages.Items[i].Text.Equals(_pageName)) continue;
                 lstOptionPages.Items[i].Selected = true;
                 isSet = true;
                 break;
@@ -104,13 +116,24 @@ namespace mRemoteNG.UI.Forms
             Settings.Default.Save();
         }
 
-        private void lstOptionPages_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+
+        private void LstOptionPages_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             pnlMain.Controls.Clear();
 
-            var page = _pages[(string) e.Item.Tag];
+            var page = (OptionsPage)lstOptionPages.SelectedObject;
             if (page != null)
                 pnlMain.Controls.Add(page);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            foreach (var page in _pages.Values)
+            {
+                Debug.WriteLine(page.PageName);
+                page.RevertSettings();
+            }
+            Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile); 
         }
     }
 }

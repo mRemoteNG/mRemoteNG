@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Security;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
@@ -45,7 +46,7 @@ namespace mRemoteNGTests.Security
         [TestCaseSource(nameof(GetAllBlockCipherEngineAndModeCombinations))]
         public void DecryptedTextIsEqualToOriginalPlainText(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+            var cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
             var cipherText = cryptoProvider.Encrypt(_plainText, _encryptionKey);
             var decryptedCipherText = cryptoProvider.Decrypt(cipherText, _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(_plainText));
@@ -85,14 +86,14 @@ namespace mRemoteNGTests.Security
         [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
         public void GetCipherEngine(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+            var cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
             Assert.That(cryptoProvider.CipherEngine, Is.EqualTo(engine));
         }
 
         [TestCaseSource(typeof(TestCaseSources), nameof(TestCaseSources.AllEngineAndModeCombos))]
         public void GetCipherMode(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var cryptoProvider = new CryptographyProviderFactory().CreateAeadCryptographyProvider(engine, mode);
+            var cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
             Assert.That(cryptoProvider.CipherMode, Is.EqualTo(mode));
         }
 

@@ -15,33 +15,20 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class DataTableDeserializer : IDeserializer
+    public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
     {
-        private readonly DataTable _dataTable;
-
-        public DataTableDeserializer(DataTable dataTable)
+        public ConnectionTreeModel Deserialize(DataTable table)
         {
-            _dataTable = dataTable;
-        }
-
-        public DataTableDeserializer(IDataReader sqlDataReader)
-        {
-            _dataTable = new DataTable();
-            _dataTable.Load(sqlDataReader);
-        }
-
-        public ConnectionTreeModel Deserialize()
-        {
-            var connectionList = CreateNodesFromTable();
-            var connectionTreeModel = CreateNodeHierarchy(connectionList);
-            Runtime.IsConnectionsFileLoaded = true;
+            var connectionList = CreateNodesFromTable(table);
+            var connectionTreeModel = CreateNodeHierarchy(connectionList, table);
+            Runtime.ConnectionsService.IsConnectionsFileLoaded = true;
             return connectionTreeModel;
         }
 
-        private List<ConnectionInfo> CreateNodesFromTable()
+        private List<ConnectionInfo> CreateNodesFromTable(DataTable table)
         {
             var nodeList = new List<ConnectionInfo>();
-            foreach (DataRow row in _dataTable.Rows)
+            foreach (DataRow row in table.Rows)
             {
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch ((string)row["Type"])
@@ -97,13 +84,13 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.UseConsoleSession = (bool)dataRow["ConnectToConsole"];
             connectionInfo.UseCredSsp = (bool)dataRow["UseCredSsp"];
             connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), (string)dataRow["RenderingEngine"]);
-            connectionInfo.ICAEncryptionStrength = (ProtocolICA.EncryptionStrength)Enum.Parse(typeof(ProtocolICA.EncryptionStrength), (string)dataRow["ICAEncryptionStrength"]);
-            connectionInfo.RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel)Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), (string)dataRow["RDPAuthenticationLevel"]);
+            connectionInfo.ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength), (string)dataRow["ICAEncryptionStrength"]);
+            connectionInfo.RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel)Enum.Parse(typeof(RdpProtocol.AuthenticationLevel), (string)dataRow["RDPAuthenticationLevel"]);
             connectionInfo.RDPMinutesToIdleTimeout = (int)dataRow["RDPMinutesToIdleTimeout"];
             connectionInfo.RDPAlertIdleTimeout = (bool)dataRow["RDPAlertIdleTimeout"];
             connectionInfo.LoadBalanceInfo = (string)dataRow["LoadBalanceInfo"];
-            connectionInfo.Colors = (ProtocolRDP.RDPColors)Enum.Parse(typeof(ProtocolRDP.RDPColors) ,(string)dataRow["Colors"]);
-            connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Enum.Parse(typeof(ProtocolRDP.RDPResolutions), (string)dataRow["Resolution"]);
+            connectionInfo.Colors = (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors) ,(string)dataRow["Colors"]);
+            connectionInfo.Resolution = (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions), (string)dataRow["Resolution"]);
             connectionInfo.AutomaticResize = (bool)dataRow["AutomaticResize"];
             connectionInfo.DisplayWallpaper = (bool)dataRow["DisplayWallpaper"];
             connectionInfo.DisplayThemes = (bool)dataRow["DisplayThemes"];
@@ -114,8 +101,8 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.RedirectPorts = (bool)dataRow["RedirectPorts"];
             connectionInfo.RedirectPrinters = (bool)dataRow["RedirectPrinters"];
             connectionInfo.RedirectSmartCards = (bool)dataRow["RedirectSmartCards"];
-            connectionInfo.RedirectSound = (ProtocolRDP.RDPSounds)Enum.Parse(typeof(ProtocolRDP.RDPSounds), (string)dataRow["RedirectSound"]);
-            connectionInfo.SoundQuality = (ProtocolRDP.RDPSoundQuality)Enum.Parse(typeof(ProtocolRDP.RDPSoundQuality), (string)dataRow["SoundQuality"]);
+            connectionInfo.RedirectSound = (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), (string)dataRow["RedirectSound"]);
+            connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), (string)dataRow["SoundQuality"]);
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
             connectionInfo.PleaseConnect = (bool)dataRow["Connected"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
@@ -134,9 +121,9 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.VNCColors = (ProtocolVNC.Colors)Enum.Parse(typeof(ProtocolVNC.Colors), (string)dataRow["VNCColors"]);
             connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), (string)dataRow["VNCSmartSizeMode"]);
             connectionInfo.VNCViewOnly = (bool)dataRow["VNCViewOnly"];
-            connectionInfo.RDGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod)Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), (string)dataRow["RDGatewayUsageMethod"]);
+            connectionInfo.RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod)Enum.Parse(typeof(RdpProtocol.RDGatewayUsageMethod), (string)dataRow["RDGatewayUsageMethod"]);
             connectionInfo.RDGatewayHostname = (string)dataRow["RDGatewayHostname"];
-            connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), (string)dataRow["RDGatewayUseConnectionCredentials"]);
+            connectionInfo.RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RdpProtocol.RDGatewayUseConnectionCredentials), (string)dataRow["RDGatewayUseConnectionCredentials"]);
             connectionInfo.RDGatewayUsername = (string)dataRow["RDGatewayUsername"];
             connectionInfo.RDGatewayPassword = (string)dataRow["RDGatewayPassword"];
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
@@ -197,13 +184,13 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.RDGatewayDomain = (bool)dataRow["InheritRDGatewayDomain"];
         }
 
-        private ConnectionTreeModel CreateNodeHierarchy(List<ConnectionInfo> connectionList)
+        private ConnectionTreeModel CreateNodeHierarchy(List<ConnectionInfo> connectionList, DataTable dataTable)
         {
             var connectionTreeModel = new ConnectionTreeModel();
             var rootNode = new RootNodeInfo(RootNodeType.Connection) {ConstantID = "0"};
             connectionTreeModel.AddRootNode(rootNode);
 
-            foreach (DataRow row in _dataTable.Rows)
+            foreach (DataRow row in dataTable.Rows)
             {
                 var id = (string) row["ConstantID"];
                 var connectionInfo = connectionList.First(node => node.ConstantID == id);

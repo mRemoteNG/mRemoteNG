@@ -1,62 +1,61 @@
 using mRemoteNG.App;
 using System;
 using System.IO;
-using System.Threading;
-using System.Windows.Forms;
-using mRemoteNG.Tools;
-using mRemoteNG.UI.Forms;
+using System.Threading; 
+using mRemoteNG.Tools; 
 using WeifenLuo.WinFormsUI.Docking;
-using TextBox = System.Windows.Forms.TextBox;
+using System.Windows.Forms;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.UI.Window
 {
     public class SSHTransferWindow : BaseWindow
     {
         #region Form Init
-        private ProgressBar pbStatus;
-        private Button btnTransfer;
-        private TextBox txtUser;
-        private TextBox txtPassword;
-        private TextBox txtHost;
-        private TextBox txtPort;
-        private Label lblHost;
-        private Label lblPort;
-        private Label lblUser;
-        private Label lblPassword;
-        private Label lblProtocol;
-        private RadioButton radProtSCP;
-        private RadioButton radProtSFTP;
-        private GroupBox grpConnection;
-        private Button btnBrowse;
-        private Label lblRemoteFile;
-        private TextBox txtRemoteFile;
-        private TextBox txtLocalFile;
-        private Label lblLocalFile;
-        private GroupBox grpFiles;
+        private Controls.Base.NGProgressBar pbStatus;
+        private Controls.Base.NGButton btnTransfer;
+        private Controls.Base.NGTextBox txtUser;
+        private Controls.Base.NGTextBox txtPassword;
+        private Controls.Base.NGTextBox txtHost;
+        private Controls.Base.NGTextBox txtPort;
+        private Controls.Base.NGLabel lblHost;
+        private Controls.Base.NGLabel lblPort;
+        private Controls.Base.NGLabel lblUser;
+        private Controls.Base.NGLabel lblPassword;
+        private Controls.Base.NGLabel lblProtocol;
+        private Controls.Base.NGRadioButton radProtSCP;
+        private Controls.Base.NGRadioButton radProtSFTP;
+        private Controls.Base.NGGroupBox grpConnection;
+        private Controls.Base.NGButton btnBrowse;
+        private Controls.Base.NGLabel lblRemoteFile;
+        private Controls.Base.NGTextBox txtRemoteFile;
+        private Controls.Base.NGTextBox txtLocalFile;
+        private Controls.Base.NGLabel lblLocalFile;
+        private Controls.Base.NGGroupBox grpFiles;
 
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
-            this.grpFiles = new System.Windows.Forms.GroupBox();
-            this.lblLocalFile = new System.Windows.Forms.Label();
-            this.txtLocalFile = new System.Windows.Forms.TextBox();
-            this.btnTransfer = new System.Windows.Forms.Button();
-            this.txtRemoteFile = new System.Windows.Forms.TextBox();
-            this.lblRemoteFile = new System.Windows.Forms.Label();
-            this.btnBrowse = new System.Windows.Forms.Button();
-            this.grpConnection = new System.Windows.Forms.GroupBox();
-            this.radProtSFTP = new System.Windows.Forms.RadioButton();
-            this.radProtSCP = new System.Windows.Forms.RadioButton();
-            this.lblProtocol = new System.Windows.Forms.Label();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.lblUser = new System.Windows.Forms.Label();
-            this.lblPort = new System.Windows.Forms.Label();
-            this.lblHost = new System.Windows.Forms.Label();
-            this.txtPort = new System.Windows.Forms.TextBox();
-            this.txtHost = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtUser = new System.Windows.Forms.TextBox();
-            this.pbStatus = new System.Windows.Forms.ProgressBar();
+            this.grpFiles = new mRemoteNG.UI.Controls.Base.NGGroupBox();
+            this.lblLocalFile = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtLocalFile = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.btnTransfer = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.txtRemoteFile = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.lblRemoteFile = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.btnBrowse = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.grpConnection = new mRemoteNG.UI.Controls.Base.NGGroupBox();
+            this.radProtSFTP = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.radProtSCP = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.lblProtocol = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblUser = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblPort = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblHost = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtPort = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.txtHost = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.txtPassword = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.txtUser = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.pbStatus = new mRemoteNG.UI.Controls.Base.NGProgressBar();
             this.grpFiles.SuspendLayout();
             this.grpConnection.SuspendLayout();
             this.SuspendLayout();
@@ -96,12 +95,13 @@ namespace mRemoteNG.UI.Window
             // 
             // btnTransfer
             // 
+            this.btnTransfer._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransfer.Image = global::mRemoteNG.Resources.SSHTransfer;
             this.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTransfer.Location = new System.Drawing.Point(579, 140);
+            this.btnTransfer.Location = new System.Drawing.Point(566, 140);
             this.btnTransfer.Name = "btnTransfer";
-            this.btnTransfer.Size = new System.Drawing.Size(83, 29);
+            this.btnTransfer.Size = new System.Drawing.Size(96, 29);
             this.btnTransfer.TabIndex = 10000;
             this.btnTransfer.Text = "Transfer";
             this.btnTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -127,6 +127,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnBrowse
             // 
+            this.btnBrowse._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Location = new System.Drawing.Point(566, 28);
             this.btnBrowse.Name = "btnBrowse";
@@ -291,7 +292,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Private Properties
-        private OpenFileDialog oDlg;
+        private readonly OpenFileDialog oDlg;
         #endregion
 
         #region Public Properties
@@ -347,6 +348,7 @@ namespace mRemoteNG.UI.Window
         #region Form Stuff
         private void SSHTransfer_Load(object sender, EventArgs e)
         {
+            ApplyTheme(); 
             ApplyLanguage();
         }
 
@@ -471,7 +473,7 @@ namespace mRemoteNG.UI.Window
             {
                 if (txtPassword.Text == "")
                 {
-                    if (MessageBox.Show(frmMain.Default, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    if (MessageBox.Show(FrmMain.Default, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     {
                         return false;
                     }
@@ -494,7 +496,7 @@ namespace mRemoteNG.UI.Window
         private int maxVal;
         private int curVal;
 
-        delegate void SetStatusCB();
+        private delegate void SetStatusCB();
         private void SetStatus()
         {
             if (pbStatus.InvokeRequired)
@@ -509,7 +511,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        delegate void EnableButtonsCB();
+        private delegate void EnableButtonsCB();
         private void EnableButtons()
         {
             if (btnTransfer.InvokeRequired)
@@ -523,7 +525,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        delegate void DisableButtonsCB();
+        private delegate void DisableButtonsCB();
         private void DisableButtons()
         {
             if (btnTransfer.InvokeRequired)
@@ -548,10 +550,10 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Methods
-        public SSHTransferWindow(DockContent Panel)
+        public SSHTransferWindow()
         {
             WindowType = WindowType.SSHTransfer;
-            DockPnl = Panel;
+            DockPnl = new DockContent();
             InitializeComponent();
 
             oDlg = new OpenFileDialog
@@ -565,12 +567,10 @@ namespace mRemoteNG.UI.Window
         #region Form Stuff
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            if (oDlg.ShowDialog() == DialogResult.OK)
+            if (oDlg.ShowDialog() != DialogResult.OK) return;
+            if (oDlg.FileName != "")
             {
-                if (oDlg.FileName != "")
-                {
-                    txtLocalFile.Text = oDlg.FileName;
-                }
+                txtLocalFile.Text = oDlg.FileName;
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace mRemoteNGTests
 {
@@ -13,41 +14,42 @@ namespace mRemoteNGTests
             Assert.That(IsLargeAware(exePath), Is.True);
         }
 
-        static string GetTargetPath([System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "")
+        public string GetTargetPath([CallerFilePath] string sourceFilePath = "")
         {
-            string debugOrRelease = "";
-            string normalOrPortable = "";
+            const string debugOrRelease =
 #if DEBUG
-            debugOrRelease = "Debug";
+				"Debug";
 #else
-            debugOrRelease = "Release";
+				"Release";
 #endif
+
+            const string normalOrPortable =
 #if PORTABLE
-            normalOrPortable = " Portable";
+            " Portable";
 #else
-            normalOrPortable = "";
+            "";
 #endif
             var path = Path.GetDirectoryName(sourceFilePath);
-            string FilePath = $"{path}\\..\\mRemoteV1\\bin\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
-            return FilePath;
+            var filePath = $"{path}\\..\\mRemoteV1\\bin\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
+            return filePath;
         }
 
-        static bool IsLargeAware(string file)
+        private bool IsLargeAware(string file)
         {
             using (var fs = File.OpenRead(file))
             {
                 return IsLargeAware(fs);
             }
         }
+
         /// <summary>
         /// Checks if the stream is a MZ header and if it is large address aware
         /// </summary>
         /// <param name="stream">Stream to check, make sure its at the start of the MZ header</param>
-        /// <exception cref=""></exception>
         /// <returns></returns>
-        static bool IsLargeAware(Stream stream)
+        private bool IsLargeAware(Stream stream)
         {
-            const int IMAGE_FILE_LARGE_ADDRESS_AWARE = 0x20;
+            const int imageFileLargeAddressAware = 0x20;
 
             var br = new BinaryReader(stream);
 
@@ -55,14 +57,14 @@ namespace mRemoteNGTests
                 return false;
 
             br.BaseStream.Position = 0x3C;
-            var peloc = br.ReadInt32();         //Get the PE header location.
+            var peHeaderLocation = br.ReadInt32();         //Get the PE header location.
 
-            br.BaseStream.Position = peloc;
+            br.BaseStream.Position = peHeaderLocation;
             if (br.ReadInt32() != 0x4550)       //No PE header
                 return false;
 
             br.BaseStream.Position += 0x12;
-            return (br.ReadInt16() & IMAGE_FILE_LARGE_ADDRESS_AWARE) == IMAGE_FILE_LARGE_ADDRESS_AWARE;
+            return (br.ReadInt16() & imageFileLargeAddressAware) == imageFileLargeAddressAware;
         }
     }
 }

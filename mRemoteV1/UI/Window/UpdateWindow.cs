@@ -18,25 +18,44 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class UpdateWindow : BaseWindow
 	{
-#region Public Methods
+        private AppUpdater _appUpdate;
+        private bool _isUpdateDownloadHandlerDeclared;
+
+        #region Public Methods
+        public UpdateWindow() : this(new DockContent())
+	    {
+	    }
+
 		public UpdateWindow(DockContent panel)
 		{
 			WindowType = WindowType.Update;
 			DockPnl = panel;
 			InitializeComponent();
-			Runtime.FontOverride(this);
+            FontOverrider.FontOverride(this);
 		}
-#endregion
+        #endregion
 		
-#region Form Stuff
+        #region Form Stuff
 
 	    private void Update_Load(object sender, EventArgs e)
 		{
-			ApplyLanguage();
+            ApplyTheme();
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyLanguage();
 			CheckForUpdate();
 		}
-				
-		private void ApplyLanguage()
+
+        private new void ApplyTheme()
+        {
+            if (Themes.ThemeManager.getInstance().ThemingActive)
+            {
+                base.ApplyTheme();
+                pnlUpdate.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                pnlUpdate.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            }
+        }
+
+        private void ApplyLanguage()
 		{
 			Text = Language.strMenuCheckForUpdates;
 			TabText = Language.strMenuCheckForUpdates;
@@ -72,14 +91,9 @@ namespace mRemoteNG.UI.Window
 			}
 			Process.Start(linkUri.ToString());
 		}
-#endregion
+        #endregion
 		
-#region Private Fields
-		private AppUpdater _appUpdate;
-		private bool _isUpdateDownloadHandlerDeclared;
-#endregion
-		
-#region Private Methods
+        #region Private Methods
 		private void CheckForUpdate()
 		{
 			if (_appUpdate == null)
@@ -230,9 +244,9 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateDownloadFailed, ex);
 			}
 		}
-#endregion
+        #endregion
 		
-#region Events
+        #region Events
 		private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
 			prgbDownload.Value = e.ProgressPercentage;
@@ -268,6 +282,6 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message);
             }
 		}
-#endregion
+        #endregion
 	}
 }

@@ -1,6 +1,6 @@
 namespace mRemoteNG.Connection
 {
-    public partial class InterfaceControl : System.Windows.Forms.Panel
+    public sealed partial class InterfaceControl : System.Windows.Forms.Panel
 	{
 		//UserControl overrides dispose to clean up the component list.
 		[System.Diagnostics.DebuggerNonUserCode()]

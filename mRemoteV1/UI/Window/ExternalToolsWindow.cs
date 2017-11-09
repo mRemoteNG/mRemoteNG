@@ -2,53 +2,58 @@ using System.Collections.Generic;
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Config.Settings;
+using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Forms;
-
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
 	public partial class ExternalToolsWindow
 	{
-        #region Constructors
-		public ExternalToolsWindow(DockContent panel)
+        private readonly ExternalAppsSaver _externalAppsSaver;
+        private ExternalTool _selectedTool;
+        private ThemeManager _themeManager;
+
+        public ExternalToolsWindow()
 		{
-			InitializeComponent();
-					
+			InitializeComponent(); 
 			WindowType = WindowType.ExternalApps;
-			DockPnl = panel;
-		}
-        #endregion
-				
-        #region Private Fields
-		private Tools.ExternalTool _selectedTool;
-        #endregion
-				
-        #region Private Methods
-        #region Event Handlers
-		private void ExternalTools_Load(object sender, EventArgs e)
-		{
-			ApplyLanguage();
-			UpdateToolsListView();
+			DockPnl = new DockContent();
+            _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ApplyTheme;
+            _externalAppsSaver = new ExternalAppsSaver();
 		}
 
-        private static void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
+        
+
+        #region Private Methods
+        #region Event Handlers
+        private void ExternalTools_Load(object sender, EventArgs e)
 		{
-            Config.Settings.SettingsSaver.SaveExternalAppsToXML();
+			ApplyLanguage();
+            ApplyTheme();
+            UpdateToolsListObjView();
+		}
+
+        private void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
+		{
+            _externalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
 		}
 
         private void NewTool_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				var externalTool = new Tools.ExternalTool(Language.strExternalToolDefaultName);
-				Runtime.ExternalTools.Add(externalTool);
-				UpdateToolsListView(externalTool);
+				var externalTool = new ExternalTool(Language.strExternalToolDefaultName);
+				Runtime.ExternalToolsService.ExternalTools.Add(externalTool);
+				UpdateToolsListObjView(externalTool);
 				DisplayNameTextBox.Focus();
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.NewTool_Click() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.NewTool_Click() failed.", ex);
 			}
 		}
 
@@ -57,39 +62,35 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				string message;
-				if (ToolsListView.SelectedItems.Count == 1)
+				if (ToolsListObjView.SelectedItems.Count == 1)
 				{
-					message = string.Format(Language.strConfirmDeleteExternalTool, ToolsListView.SelectedItems[0].Text);
+					message = string.Format(Language.strConfirmDeleteExternalTool, ToolsListObjView.SelectedItems[0].Text);
 				}
-				else if (ToolsListView.SelectedItems.Count > 1)
+				else if (ToolsListObjView.SelectedItems.Count > 1)
 				{
-					message = string.Format(Language.strConfirmDeleteExternalToolMultiple, ToolsListView.SelectedItems.Count);
+					message = string.Format(Language.strConfirmDeleteExternalToolMultiple, ToolsListObjView.SelectedItems.Count);
 				}
 				else
 				{
 					return;
 				}
 				
-				if (MessageBox.Show(frmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+				if (MessageBox.Show(FrmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
 				{
 					return;
 				}
 						
-				foreach (ListViewItem listViewItem in ToolsListView.SelectedItems)
+				foreach (Object toDeleteObj in ToolsListObjView.SelectedObjects)
 				{
-					var externalTool = listViewItem.Tag as Tools.ExternalTool;
-					if (externalTool == null)
-					{
-						continue;
-					}
-							
-					Runtime.ExternalTools.Remove(listViewItem.Tag);
-					listViewItem.Remove();
+					var externalTool = toDeleteObj as ExternalTool;
+					if (externalTool == null) continue;							
+					Runtime.ExternalToolsService.ExternalTools.Remove(externalTool);
 				}
-			}
+                UpdateToolsListObjView();
+            }
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.DeleteTool_Click() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.DeleteTool_Click() failed.", ex);
 			}
 		}
 
@@ -98,14 +99,14 @@ namespace mRemoteNG.UI.Window
 			LaunchTool();
 		}
 
-        private void ToolsListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void ToolsListObjView_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			try
 			{
-				if (ToolsListView.SelectedItems.Count == 1)
+				if (ToolsListObjView.SelectedItems.Count == 1)
 				{
 					PropertiesGroupBox.Enabled = true;
-					_selectedTool = ToolsListView.SelectedItems[0].Tag as Tools.ExternalTool;
+                    _selectedTool = ToolsListObjView.SelectedObjects[0] as ExternalTool;
 					if (_selectedTool == null)
 					{
 						return;
@@ -124,13 +125,13 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.ToolsListView_SelectedIndexChanged() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.ToolsListObjView_SelectedIndexChanged() failed.", ex);
 			}
 		}
 
-        private void ToolsListView_DoubleClick(object sender, EventArgs e)
+        private void ToolsListObjView_DoubleClick(object sender, EventArgs e)
 		{
-			if (ToolsListView.SelectedItems.Count > 0)
+			if (ToolsListObjView.SelectedItems.Count > 0)
 			{
 				LaunchTool();
 			}
@@ -151,11 +152,11 @@ namespace mRemoteNG.UI.Window
 				_selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
 				_selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;
 						
-				UpdateToolsListView();
+				UpdateToolsListObjView();
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.", ex);
 			}
 		}
 
@@ -175,7 +176,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.BrowseButton_Click() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.", ex);
 			}
 		}
 
@@ -221,17 +222,32 @@ namespace mRemoteNG.UI.Window
 			DeleteToolMenuItem.Text = Language.strMenuDeleteExternalTool;
 			LaunchToolMenuItem.Text = Language.strMenuLaunchExternalTool;
 		}
-				
-		private void UpdateToolsListView(Tools.ExternalTool selectTool = null)
-		{
-			try
+
+        private new void ApplyTheme()
+        {
+            if (!_themeManager.ThemingActive) return;
+            vsToolStripExtender.SetStyle(ToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(ToolsContextMenuStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            //Apply the extended palette
+
+            ToolStripContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            ToolStripContainer.TopToolStripPanel.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
+            PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
+            //Toollist grouping
+            ToolsListObjView.AlwaysGroupByColumn = this.FilenameColumnHeader;
+        }
+
+        private void UpdateToolsListObjView(ExternalTool selectTool = null)
+        {
+            var selectedTools = new List<ExternalTool>();
+            try
 			{
-				var selectedTools = new List<Tools.ExternalTool>();
-				if (selectTool == null)
+			    if (selectTool == null)
 				{
-					foreach (ListViewItem listViewItem in ToolsListView.SelectedItems)
+					foreach (var listViewItem in ToolsListObjView.SelectedObjects)
 					{
-						var externalTool = listViewItem.Tag as Tools.ExternalTool;
+						var externalTool = listViewItem as ExternalTool;
 						if (externalTool != null)
 						{
 							selectedTools.Add(externalTool);
@@ -243,52 +259,35 @@ namespace mRemoteNG.UI.Window
 					selectedTools.Add(selectTool);
 				}
 						
-				ToolsListView.BeginUpdate();
-				ToolsListView.Items.Clear();
-						
-				foreach (Tools.ExternalTool externalTool in Runtime.ExternalTools)
-				{
-				    var listViewItem = new ListViewItem {Text = externalTool.DisplayName};
-				    listViewItem.SubItems.Add(externalTool.FileName);
-					listViewItem.SubItems.Add(externalTool.Arguments);
-					listViewItem.SubItems.Add(externalTool.WaitForExit.ToString());
-					listViewItem.SubItems.Add(externalTool.TryIntegrate.ToString());
-					listViewItem.Tag = externalTool;
-							
-					ToolsListView.Items.Add(listViewItem);
-							
-					if (selectedTools.Contains(externalTool))
-					{
-						listViewItem.Selected = true;
-					}
-				}
-						
-				ToolsListView.EndUpdate();
-						
-				frmMain.Default.AddExternalToolsToToolBar();
+				ToolsListObjView.BeginUpdate();
+				ToolsListObjView.Items.Clear(); 
+                ToolsListObjView.SetObjects(Runtime.ExternalToolsService.ExternalTools);
+                ToolsListObjView.EndUpdate();
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.PopulateToolsListView()", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.PopulateToolsListObjView()", ex);
 			}
-		}
+        }
 				
 		private void LaunchTool()
 		{
-			try
-			{
-				foreach (ListViewItem listViewItem in ToolsListView.SelectedItems)
+            try
+            {
+                foreach (Object listViewObject in ToolsListObjView.SelectedObjects)
 				{
-					var externalTool = listViewItem.Tag as Tools.ExternalTool;
-
-				    externalTool?.Start();
+					
+                    ((ExternalTool)listViewObject).Start();
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.LaunchTool() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.LaunchTool() failed.", ex);
 			}
 		}
         #endregion
 	}
 }
+ 
+ 
+ 

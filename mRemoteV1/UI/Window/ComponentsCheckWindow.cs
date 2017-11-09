@@ -18,26 +18,26 @@ namespace mRemoteNG.UI.Window
     {
         #region Form Stuff
         private System.Windows.Forms.PictureBox pbCheck1;
-        private System.Windows.Forms.Label lblCheck1;
+        private Controls.Base.NGLabel lblCheck1;
         private System.Windows.Forms.Panel pnlCheck2;
-        private System.Windows.Forms.Label lblCheck2;
+        private Controls.Base.NGLabel lblCheck2;
         private System.Windows.Forms.PictureBox pbCheck2;
         private System.Windows.Forms.Panel pnlCheck3;
-        private System.Windows.Forms.Label lblCheck3;
+        private Controls.Base.NGLabel lblCheck3;
         private System.Windows.Forms.PictureBox pbCheck3;
         private System.Windows.Forms.Panel pnlCheck4;
-        private System.Windows.Forms.Label lblCheck4;
+        private Controls.Base.NGLabel lblCheck4;
         private System.Windows.Forms.PictureBox pbCheck4;
         private System.Windows.Forms.Panel pnlCheck5;
-        private System.Windows.Forms.Label lblCheck5;
+        private Controls.Base.NGLabel lblCheck5;
         private System.Windows.Forms.PictureBox pbCheck5;
-        private System.Windows.Forms.Button btnCheckAgain;
-        private System.Windows.Forms.TextBox txtCheck1;
-        private System.Windows.Forms.TextBox txtCheck2;
-        private System.Windows.Forms.TextBox txtCheck3;
-        private System.Windows.Forms.TextBox txtCheck4;
-        private System.Windows.Forms.TextBox txtCheck5;
-        private System.Windows.Forms.CheckBox chkAlwaysShow;
+        private Controls.Base.NGButton btnCheckAgain;
+        private Controls.Base.NGTextBox txtCheck1;
+        private Controls.Base.NGTextBox txtCheck2;
+        private Controls.Base.NGTextBox txtCheck3;
+        private Controls.Base.NGTextBox txtCheck4;
+        private Controls.Base.NGTextBox txtCheck5;
+        private Controls.Base.NGCheckBox chkAlwaysShow;
         private System.Windows.Forms.Panel pnlChecks;
         private System.Windows.Forms.Panel pnlCheck1;
 
@@ -45,28 +45,28 @@ namespace mRemoteNG.UI.Window
         {
             pnlCheck1 = new System.Windows.Forms.Panel();
             Load += new EventHandler(ComponentsCheck_Load);
-            txtCheck1 = new System.Windows.Forms.TextBox();
-            lblCheck1 = new System.Windows.Forms.Label();
+            txtCheck1 = new Controls.Base.NGTextBox();
+            lblCheck1 = new Controls.Base.NGLabel();
             pbCheck1 = new System.Windows.Forms.PictureBox();
             pnlCheck2 = new System.Windows.Forms.Panel();
-            txtCheck2 = new System.Windows.Forms.TextBox();
-            lblCheck2 = new System.Windows.Forms.Label();
+            txtCheck2 = new Controls.Base.NGTextBox();
+            lblCheck2 = new Controls.Base.NGLabel();
             pbCheck2 = new System.Windows.Forms.PictureBox();
             pnlCheck3 = new System.Windows.Forms.Panel();
-            txtCheck3 = new System.Windows.Forms.TextBox();
-            lblCheck3 = new System.Windows.Forms.Label();
+            txtCheck3 = new Controls.Base.NGTextBox();
+            lblCheck3 = new Controls.Base.NGLabel();
             pbCheck3 = new System.Windows.Forms.PictureBox();
             pnlCheck4 = new System.Windows.Forms.Panel();
-            txtCheck4 = new System.Windows.Forms.TextBox();
-            lblCheck4 = new System.Windows.Forms.Label();
+            txtCheck4 = new Controls.Base.NGTextBox();
+            lblCheck4 = new Controls.Base.NGLabel();
             pbCheck4 = new System.Windows.Forms.PictureBox();
             pnlCheck5 = new System.Windows.Forms.Panel();
-            txtCheck5 = new System.Windows.Forms.TextBox();
-            lblCheck5 = new System.Windows.Forms.Label();
+            txtCheck5 = new Controls.Base.NGTextBox();
+            lblCheck5 = new Controls.Base.NGLabel();
             pbCheck5 = new System.Windows.Forms.PictureBox();
-            btnCheckAgain = new System.Windows.Forms.Button();
+            btnCheckAgain = new Controls.Base.NGButton();
             btnCheckAgain.Click += new EventHandler(btnCheckAgain_Click);
-            chkAlwaysShow = new System.Windows.Forms.CheckBox();
+            chkAlwaysShow = new Controls.Base.NGCheckBox();
             chkAlwaysShow.CheckedChanged += new EventHandler(chkAlwaysShow_CheckedChanged);
             pnlChecks = new System.Windows.Forms.Panel();
             pnlCheck1.SuspendLayout();
@@ -394,10 +394,10 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Methods
-        public ComponentsCheckWindow(DockContent Panel)
+        public ComponentsCheckWindow()
         {
             WindowType = WindowType.ComponentsCheck;
-            DockPnl = Panel;
+            DockPnl = new DockContent();
             InitializeComponent();
         }
         #endregion
@@ -406,7 +406,7 @@ namespace mRemoteNG.UI.Window
         private void ComponentsCheck_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
-            chkAlwaysShow.Checked = Convert.ToBoolean(Settings.Default.StartupComponentsCheck);
+            chkAlwaysShow.Checked = Settings.Default.StartupComponentsCheck;
             CheckComponents();
         }
 
@@ -438,7 +438,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Failed to properly show the ComponentsWindow", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("Failed to properly show the ComponentsWindow", ex);
             }
         }
         #endregion
@@ -470,10 +470,10 @@ namespace mRemoteNG.UI.Window
                         System.Windows.Forms.Application.DoEvents();
                     }
 
-                    if (!(new Version(Convert.ToString(rdpClient.Version)) >= ProtocolRDP.Versions.RDC80))
+                    if (!(new Version(rdpClient.Version) >= RdpProtocol.Versions.RDC80))
                     {
                         throw new Exception(
-                            $"Found RDC Client version {rdpClient.Version} but version {ProtocolRDP.Versions.RDC80} or higher is required.");
+                            $"Found RDC Client version {rdpClient.Version} but version {RdpProtocol.Versions.RDC80} or higher is required.");
                     }
 
                     pbCheck1.Image = Resources.Good_Symbol;
@@ -541,7 +541,7 @@ namespace mRemoteNG.UI.Window
             }
             else
             {
-                pPath = Convert.ToString(Settings.Default.CustomPuttyPath);
+                pPath = Settings.Default.CustomPuttyPath;
             }
 
             if (File.Exists(pPath))

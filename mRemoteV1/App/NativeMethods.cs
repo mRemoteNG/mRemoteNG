@@ -481,7 +481,13 @@ namespace mRemoteNG.App
         public const int LB_ERR = -1;
         public const int LB_SELECTSTRING = 0x18C;
         #endregion
-        
+
+        #region TCM
+
+        internal const int TCM_ADJUSTRECT = 0x1328;
+
+        #endregion
+
         #endregion
     }
 }

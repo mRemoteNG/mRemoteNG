@@ -1,5 +1,6 @@
-using mRemoteNG.UI.Forms;
+using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 
 namespace mRemoteNG.UI.Window
@@ -7,49 +8,51 @@ namespace mRemoteNG.UI.Window
 	public class BaseWindow : DockContent
     {
         #region Private Variables
-        private WindowType _WindowType;
-        private DockContent _DockPnl;
-        #endregion
-
-        #region Constructors
-        public BaseWindow()
-		{
-			//InitializeComponent();
-		}
+        //private WindowType _WindowType;
+        //private DockContent _DockPnl;
+        private ThemeManager _themeManager;
         #endregion
 
         #region Public Properties
-        public WindowType WindowType
-		{
-			get { return this._WindowType; }
-			set { this._WindowType = value; }
-		}
-		
-        public DockContent DockPnl
-		{
-			get { return this._DockPnl; }
-			set { this._DockPnl = value; }
-		}
+
+        protected WindowType WindowType { get; set; }
+
+        protected DockContent DockPnl { get; set; }
+
         #endregion
 				
         #region Public Methods
-		public void SetFormText(string Text)
+		public void SetFormText(string t)
 		{
-			this.Text = Text;
-			this.TabText = Text;
+			Text = t;
+			TabText = t;
 		}
         #endregion
-				
+
+        internal new void ApplyTheme()
+        {
+            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive) return;
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+        }
+
+    
         #region Private Methods
-		private void Base_Load(System.Object sender, System.EventArgs e)
+/*
+		private void Base_Load(object sender, EventArgs e)
 		{
-			frmMain.Default.ShowHidePanelTabs();
+			FrmMain.Default.ShowHidePanelTabs();
 		}
+*/
 				
-		private void Base_FormClosed(System.Object sender, System.Windows.Forms.FormClosedEventArgs e)
+/*
+		private void Base_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
 		{
-			frmMain.Default.ShowHidePanelTabs(this);
+			FrmMain.Default.ShowHidePanelTabs(this);
 		}
+*/
         #endregion
 	}
 }

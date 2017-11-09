@@ -2301,9 +2301,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Use a different username and password</value>
   </data>
-  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
-    <value>Use only Notifications panel (no messagebox popups)</value>
-  </data>
   <data name="strUser" xml:space="preserve">
     <value>User</value>
   </data>
@@ -2360,9 +2357,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strWeifenLuoAttributionURL" xml:space="preserve">
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
-  <data name="strWriteLogFile" xml:space="preserve">
-    <value>Write log file (mRemoteNG.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner path:</value>
@@ -2427,10 +2421,178 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Minutes to Idle</value>
   </data>
+  <data name="strAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="strAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="strCredentialEditor" xml:space="preserve">
+    <value>Credential Editor</value>
+  </data>
+  <data name="strCredentialManager" xml:space="preserve">
+    <value>Credential Manager</value>
+  </data>
+  <data name="strID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="strRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="strTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="strPropertyDescriptionCredential" xml:space="preserve">
+    <value>Select which credential to use for this connection.</value>
+  </data>
+  <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>Are you sure you want to delete the credential record, {0}?</value>
+  </data>
+  <data name="strFindMatchingCredentialFailed" xml:space="preserve">
+    <value>Could not find a credential record with ID matching "{0}" for the connection record named "{1}".</value>
+  </data>
   <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Select whether to receive an alert after the RDP session disconnects due to inactivity</value>
   </data>
   <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
     <value>Alert on Idle Disconnect</value>
+  </data>
+  <data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+    <value>Password must contain at least {0} of the following characters: {1}</value>
+  </data>
+  <data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+    <value>Password must contain at least {0} lower case character(s)</value>
+  </data>
+  <data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>Password must contain at least {0} number(s)</value>
+  </data>
+  <data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>Password must contain at least {0} upper case character(s)</value>
+  </data>
+  <data name="strPasswordLengthConstraintHint" xml:space="preserve">
+    <value>Password length must be between {0} and {1}</value>
+  </data>
+  <data name="strChooseLogPath" xml:space="preserve">
+    <value>Choose a path for the mRemoteNG log file</value>
+  </data>
+  <data name="strDebug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
+    <value>Show these message types</value>
+  </data>
+  <data name="strLogFilePath" xml:space="preserve">
+    <value>Log file path</value>
+  </data>
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
+    <value>Log these message types</value>
+  </data>
+  <data name="strChoosePath" xml:space="preserve">
+    <value>Choose Path</value>
+  </data>
+  <data name="strOpenFile" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="strUseDefault" xml:space="preserve">
+    <value>Use Default</value>
+  </data>
+  <data name="strLogging" xml:space="preserve">
+    <value>Logging</value>
+  </data>
+  <data name="strPopups" xml:space="preserve">
+    <value>Popups</value>
+  </data>
+  <data name="strLogToAppDir" xml:space="preserve">
+    <value>Log to application directory</value>
+  </data>
+  <data name="strAssignedCredential" xml:space="preserve">
+    <value>Assigned Credential</value>
+  </data>
+  <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
+    <value>Allow Always</value>
+  </data>
+  <data name="strHttpsInsecureAllowOnce" xml:space="preserve">
+    <value>Allow Once</value>
+  </data>
+  <data name="strHttpsInsecureDontAllow" xml:space="preserve">
+    <value>Don't Allow</value>
+  </data>
+  <data name="strHttpsInsecurePrompt" xml:space="preserve">
+    <value>Allow Insecure Certificate for URL: {0}?</value>
+  </data>
+  <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
+    <value>Allow Insecure Certificate?</value>
+  </data>
+  <data name="RepositoryIsUnlocked" xml:space="preserve">
+    <value>The selected repository is unlocked</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Incorrect password</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="Unlocking" xml:space="preserve">
+    <value>Unlocking</value>
+  </data>
+  <data name="UnlockCredentialRepository" xml:space="preserve">
+    <value>Unlock Credential Repository</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
+    <value>Prompt to unlock credential repositories on startup</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
+  <data name="strUpgrade" xml:space="preserve">
+    <value>Upgrade</value>
+  </data>
+  <data name="strBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="strConnectionFilePath" xml:space="preserve">
+    <value>Connection file path</value>
+  </data>
+  <data name="strCreateAndOpenNewFile" xml:space="preserve">
+    <value>Create and open new file</value>
+  </data>
+  <data name="strOpenADifferentFile" xml:space="preserve">
+    <value>Open a different file</value>
+  </data>
+  <data name="strCredentialManagerUpgradeDescription" xml:space="preserve">
+    <value>In v1.76 we have introduced a credential management system. This feature requires a significant change in how we store and interact with credentials within mRemoteNG. You will be required to perform a one-way upgrade of your mRemoteNG connections file.
+
+This page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade.</value>
+  </data>
+<data name="CredentialUnavailable" xml:space="preserve">
+    <value>Credential not available</value>
+    <comment>Shown when a credential is not loaded/available for use.</comment>
+  </data>
+  <data name="strOptionsThemeDeleteConfirmation" xml:space="preserve">
+    <value>Do you really want to delete the theme?</value>
+  </data>
+  <data name="strOptionsThemeEnableTheming" xml:space="preserve">
+    <value>Enable Themes</value>
+  </data>
+  <data name="strOptionsThemeNewThemeCaption" xml:space="preserve">
+    <value>New theme name</value>
+  </data>
+  <data name="strOptionsThemeNewThemeError" xml:space="preserve">
+    <value>Cannot create theme, name already present or special characters in the name</value>
+  </data>
+  <data name="strOptionsThemeNewThemeText" xml:space="preserve">
+    <value>Type the new theme name</value>
+  </data>
+  <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
+    <value>Warning: Restart is required to disable the themes or to completely apply a new one</value>
+  </data>
+  <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
+    <value>No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder</value>
+  </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>Could not find external tool with name "{0}"</value>
   </data>
 </root>

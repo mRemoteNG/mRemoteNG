@@ -1,9 +1,9 @@
 ﻿
 namespace mRemoteNG.Tree
 {
-    public class AlwaysConfirmYes : IConfirm
+    public class AlwaysConfirmYes : IConfirm<object>
     {
-        public bool Confirm()
+        public bool Confirm(object target)
         {
             return true;
         }

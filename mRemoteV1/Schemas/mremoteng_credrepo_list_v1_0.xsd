@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="mremoteng_credrepo_list_v1_0"
+    targetNamespace="http://mremoteng.org"
+    elementFormDefault="qualified"
+    xmlns="http://mremoteng.org"
+    xmlns:mrng="http://mremoteng.org"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    version="1.0"
+>
+
+  <xs:element name="CredentialRepositories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Node" type="mrng:CredentialRepository" />
+      </xs:sequence>
+      <xs:attribute name="SchemaVersion" type="xs:float" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="CredentialRepository">
+    <xs:attribute name="Id" type="xs:string" use="required" />
+    <xs:attribute name="TypeName" type="xs:string" use="required" />
+    <xs:attribute name="Title" type="xs:string" use="optional" />
+    <xs:attribute name="Source" type="xs:string" use="required" />
+  </xs:complexType>
+</xs:schema>

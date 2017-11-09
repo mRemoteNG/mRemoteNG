@@ -18,13 +18,13 @@ namespace mRemoteNG.Config.Import
                 Import(fileNameAsString, destinationContainer);
         }
 
-        public void Import(string filePath, ContainerInfo destinationContainer)
+	    private static void Import(string filePath, ContainerInfo destinationContainer)
 		{
             var dataProvider = new FileDataProvider(filePath);
             var fileContent = dataProvider.Load();
 
-            var deserializer = new RemoteDesktopConnectionManagerDeserializer(fileContent);
-            var connectionTreeModel = deserializer.Deserialize();
+            var deserializer = new RemoteDesktopConnectionManagerDeserializer();
+            var connectionTreeModel = deserializer.Deserialize(fileContent);
 
             var importedRootNode = connectionTreeModel.RootNodes.First();
             if (importedRootNode == null) return;

@@ -11,7 +11,11 @@ Bennett Blodinger (github.com/benwa)
 Joe Cefoli (github.com/jcefoli)
 countchappy (github.com/countchappy)
 Tony Lambert
+Julien Roncaglia (github.com/vbfox)
+github.com/peterchenadded
 Brandon Wulf (github.com/mrwulf)
+Pedro Rodrigues (github.com/pedro2555)
+github.com/dekelMP
 
 
 
@@ -45,6 +49,8 @@ Robert Siwiec
 Hayato Iriumi
 Sebastien Thieury (github.com/SebThieu)
 Riza Emet
+Lukas Plachy
+Gyuha Shin
 
 
 Included Source Code
@@ -119,7 +125,12 @@ Copyright © 2016
 MIT License
 https://github.com/sshnet/SSH.NET
 
-VncSharp 1.1
+VncSharp 1.2
 Copyright © 2004-2009 David Humphrey
 GNU General Public License (GPL) Version 2
 https://github.com/humphd/VncSharp
+
+ObjectListView 2.9.1
+Copyright © 2006-2016 Phillip Piper
+GNU General Public License (GPL) Version 3
+https://sourceforge.net/projects/objectlistview/

@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using mRemoteNG.Tools;
 using mRemoteNG.App;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Connection.Protocol.SSH;
-using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.RAW;
-using mRemoteNG.Connection.Protocol.ICA;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Connection.Protocol.Telnet;
-using mRemoteNG.Connection.Protocol.Rlogin;
-using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.Http;
+using mRemoteNG.Connection.Protocol.ICA;
+using mRemoteNG.Connection.Protocol.RAW;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Rlogin;
+using mRemoteNG.Connection.Protocol.SSH;
+using mRemoteNG.Connection.Protocol.Telnet;
+using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Container;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 
 
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : AbstractConnectionInfoData, IHasParent, IInheritable
+    public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
     {        
         #region Public Properties
         [Browsable(false)]
@@ -84,9 +84,11 @@ namespace mRemoteNG.Connection
 
 	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
 	    {
-	        var properties = typeof(AbstractConnectionInfoData).GetProperties();
+	        var properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
+	        if (properties == null) return;
 	        foreach (var property in properties)
 	        {
+	            if (property.Name == nameof(Parent)) continue;
 	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
                 property.SetValue(this, remotePropertyValue, null);
 	        }
@@ -135,6 +137,12 @@ namespace mRemoteNG.Connection
         {
             Parent?.RemoveChild(this);
         }
+
+	    public ConnectionInfo GetRootParent()
+	    {
+	        return Parent != null ? Parent.GetRootParent() : this;
+	    }
+
 	    #endregion
 
         #region Public Enumerations
@@ -196,7 +204,7 @@ namespace mRemoteNG.Connection
                 switch (protocol)
                 {
                     case ProtocolType.RDP:
-                        return (int)ProtocolRDP.Defaults.Port;
+                        return (int)RdpProtocol.Defaults.Port;
                     case ProtocolType.VNC:
                         return (int)ProtocolVNC.Defaults.Port;
                     case ProtocolType.SSH1:
@@ -208,13 +216,13 @@ namespace mRemoteNG.Connection
                     case ProtocolType.Rlogin:
                         return (int)ProtocolRlogin.Defaults.Port;
                     case ProtocolType.RAW:
-                        return (int)ProtocolRAW.Defaults.Port;
+                        return (int)RawProtocol.Defaults.Port;
                     case ProtocolType.HTTP:
                         return (int)ProtocolHTTP.Defaults.Port;
                     case ProtocolType.HTTPS:
                         return (int)ProtocolHTTPS.Defaults.Port;
                     case ProtocolType.ICA:
-                        return (int)ProtocolICA.Defaults.Port;
+                        return (int)IcaProtocol.Defaults.Port;
                     case ProtocolType.IntApp:
                         return (int)IntegratedProgram.Defaults.Port;
                 }
@@ -238,9 +246,6 @@ namespace mRemoteNG.Connection
         private void SetConnectionDefaults()
         {
             Hostname = string.Empty;
-            Username = Settings.Default.ConDefaultUsername;
-            Password = Settings.Default.ConDefaultPassword;
-            Domain = Settings.Default.ConDefaultDomain;
         }
 
         private void SetProtocolDefaults()
@@ -249,9 +254,9 @@ namespace mRemoteNG.Connection
             ExtApp = Settings.Default.ConDefaultExtApp;
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
-            ICAEncryptionStrength = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
+            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength) Enum.Parse(typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
-            RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
+            RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel) Enum.Parse(typeof(RdpProtocol.AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
@@ -261,9 +266,9 @@ namespace mRemoteNG.Connection
 
         private void SetRdGatewayDefaults()
         {
-            RDGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod) Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
+            RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod) Enum.Parse(typeof(RdpProtocol.RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
             RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
+            RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(RdpProtocol.RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
@@ -271,9 +276,9 @@ namespace mRemoteNG.Connection
 
         private void SetAppearanceDefaults() 
         {
-            Resolution = (ProtocolRDP.RDPResolutions) Enum.Parse(typeof(ProtocolRDP.RDPResolutions), Settings.Default.ConDefaultResolution);
+            Resolution = (RdpProtocol.RDPResolutions) Enum.Parse(typeof(RdpProtocol.RDPResolutions), Settings.Default.ConDefaultResolution);
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
-            Colors = (ProtocolRDP.RDPColors) Enum.Parse(typeof(ProtocolRDP.RDPColors), Settings.Default.ConDefaultColors);
+            Colors = (RdpProtocol.RDPColors) Enum.Parse(typeof(RdpProtocol.RDPColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
             DisplayWallpaper = Settings.Default.ConDefaultDisplayWallpaper;
             DisplayThemes = Settings.Default.ConDefaultDisplayThemes;
@@ -288,8 +293,8 @@ namespace mRemoteNG.Connection
             RedirectPrinters = Settings.Default.ConDefaultRedirectPrinters;
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
-            RedirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), Settings.Default.ConDefaultRedirectSound);
-            SoundQuality = (ProtocolRDP.RDPSoundQuality)Enum.Parse(typeof(ProtocolRDP.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
+            RedirectSound = (RdpProtocol.RDPSounds) Enum.Parse(typeof(RdpProtocol.RDPSounds), Settings.Default.ConDefaultRedirectSound);
+            SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()

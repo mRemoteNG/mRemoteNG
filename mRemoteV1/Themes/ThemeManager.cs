@@ -1,130 +1,240 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-
+using System.Linq;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Themes
 {
-	public static class ThemeManager
+    /// <summary>
+    /// Main class of the theming component. Centralices creation, loading and deletion of themes
+    /// Implmeented as a singleton
+    /// </summary>
+    public class ThemeManager
     {
         #region Private Variables
 
-        private static ThemeInfo _activeTheme;
-        private static bool _activeThemeHandlerSet;
+        private  ThemeInfo _activeTheme; 
+        private  Hashtable themes;
+        private bool _themeActive;
+        private static ThemeManager themeInstance;
+        #endregion
+
+
+        #region Constructors
+        private ThemeManager()
+        {
+            LoadThemes();
+            SetActive();
+            _themeActive = Settings.Default.ThemingActive;
+        }
+
+        private void SetActive()
+        {
+            if (themes[Settings.Default.ThemeName] != null)
+                ActiveTheme = (ThemeInfo) themes[Settings.Default.ThemeName];
+            else
+                ActiveTheme = DefaultTheme;
+        }
+
         #endregion
 
         #region Public Methods
-        public static ThemeInfo LoadTheme(string themeName, bool setActive = true)
-		{
-			var loadedTheme = DefaultTheme;
-			if (!string.IsNullOrEmpty(themeName))
-			{
-				foreach (var theme in LoadThemes())
-				{
-				    if (theme.Name != themeName) continue;
-				    loadedTheme = theme;
-				    break;
-				}
-			}
-				
-			if (setActive)
-			{
-				ActiveTheme = loadedTheme;
-			}
-			return loadedTheme;
-		}
-			
-		public static List<ThemeInfo> LoadThemes()
-		{
-		    var themes = new List<ThemeInfo> {DefaultTheme};
-		    try
-			{
-				themes.AddRange(ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.SettingsFileInfo.SettingsPath, App.Info.SettingsFileInfo.ThemesFileName)));
-			}
-			catch (FileNotFoundException)
-			{
-			}
-				
-			return themes;
-		}
+        public static ThemeManager getInstance()
+        {
+            if(themeInstance == null)
+            {
+                themeInstance = new ThemeManager();
+            }
+            return themeInstance;
+        }
 
-        private static void SaveThemes(List<ThemeInfo> themes)
-		{
-			themes.Remove(DefaultTheme);
-			ThemeSerializer.SaveToXmlFile(themes, Path.Combine(App.Info.SettingsFileInfo.SettingsPath, App.Info.SettingsFileInfo.ThemesFileName));
-		}
 
-        private static void SaveThemes(ThemeInfo[] themes)
-		{
-			SaveThemes(new List<ThemeInfo>(themes));
-		}
-			
-		public static void SaveThemes(BindingList<ThemeInfo> themes)
-		{
-			var themesArray = new ThemeInfo[themes.Count - 1 + 1];
-			themes.CopyTo(themesArray, 0);
-			SaveThemes(themesArray);
-		}
+        public ThemeInfo getTheme(string themeName)
+        {
+            if(themes[themeName] != null)
+                return (ThemeInfo)themes[themeName];
+            return null;
+        }
+
+        //THe manager precharges all the themes at once
+        public  List<ThemeInfo> LoadThemes()
+        {
+            if (themes == null)
+            {
+                themes = new Hashtable();
+
+                //Load the files in theme folder first, to incluide vstheme light as default 
+                string execPath = App.Info.SettingsFileInfo.SettingsPath;
+                if(execPath != null)
+                {
+                    //Check that theme folder exist before trying to load themes
+                    if(Directory.Exists(Path.Combine(execPath, "themes")))
+                    {
+                        string[] themeFiles = Directory.GetFiles(Path.Combine(execPath, "themes"), "*.vstheme");
+                        string defaultThemeURL = Directory.GetFiles(Path.Combine(execPath, "themes"), "vs2015light" + ".vstheme")[0];
+                        //First we load the default theme, its vs2015light 
+                        ThemeInfo defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeURL);
+                        themes.Add(defaultTheme.Name, defaultTheme);
+                        //Then the rest
+                        foreach (string themeFile in themeFiles)
+                        {
+                            //filter default one
+                            ThemeInfo extTheme = ThemeSerializer.LoadFromXmlFile(themeFile, defaultTheme);
+                            if (extTheme.Theme != null && !themes.ContainsKey(extTheme.Name))
+                            {
+                                themes.Add(extTheme.Name, extTheme);
+                            }
+                        }
+
+
+                        //Load the embedded themes, extended palettes are taken from the vs2015 themes, trying to match the color theme
+                        ThemeInfo vs2003 = new ThemeInfo("Vs2003", new VS2003Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2003, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
+                        themes.Add(vs2003.Name, vs2003);
+                        ThemeInfo vs2005 = new ThemeInfo("Vs2005", new VS2005Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2005, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
+                        themes.Add(vs2005.Name, vs2005);
+                        ThemeInfo vs2012Light = new ThemeInfo("vs2012Light", new VS2012LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
+                        themes.Add(vs2012Light.Name, vs2012Light);
+                        ThemeInfo vs2012Dark = new ThemeInfo("vs2012Dark", new VS2012DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015dark"]).ExtendedPalette);
+                        themes.Add(vs2012Dark.Name, vs2012Dark);
+                        ThemeInfo vs2012Blue = new ThemeInfo("vs2012Blue", new VS2012BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015blue"]).ExtendedPalette);
+                        themes.Add(vs2012Blue.Name, vs2012Blue);
+                        ThemeInfo vs2013Light = new ThemeInfo("vs2013Light", new VS2013LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
+                        themes.Add(vs2013Light.Name, vs2013Light);
+                        ThemeInfo vs2013Dark = new ThemeInfo("vs2013Dark", new VS2013DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015dark"]).ExtendedPalette);
+                        themes.Add(vs2013Dark.Name, vs2013Dark);
+                        ThemeInfo vs2013Blue = new ThemeInfo("vs2013Blue", new VS2013BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015blue"]).ExtendedPalette);
+                        themes.Add(vs2013Blue.Name, vs2013Blue);
+                    } 
+                }
+
+            } 
+            return themes.Values.OfType<ThemeInfo>().ToList(); 
+        }
+
+        /// <summary>
+        /// Add a new theme based on an existing one by cloning and renaming, the theme is saved to disk
+        /// </summary>
+        /// <param name="baseTheme"></param>
+        /// <param name="newThemeName"></param>
+        /// <returns></returns>
+        public ThemeInfo addTheme(ThemeInfo baseTheme, string newThemeName)
+        {
+            if (!themes.Contains(newThemeName))
+            {
+                ThemeInfo modifiedTheme = (ThemeInfo)baseTheme.Clone();
+                modifiedTheme.Name = newThemeName;
+                modifiedTheme.IsExtendable = true;
+                modifiedTheme.IsThemeBase = false;
+                ThemeSerializer.SaveToXmlFile(modifiedTheme,baseTheme);
+                themes.Add(newThemeName,modifiedTheme);
+                return modifiedTheme;
+            }
+            return null;
+        }
+
+        //Delete a theme from memory and disk
+        public void deleteTheme(ThemeInfo themeToDelete)
+        {
+            if (themes.Contains(themeToDelete.Name))
+            {
+                if(ActiveTheme == themeToDelete)
+                    ActiveTheme = DefaultTheme;
+                themes.Remove(themeToDelete.Name);
+                ThemeSerializer.DeleteFile(themeToDelete);
+            } 
+        }
+
+        //Sincronize the theme XML values from memory to disk
+        public void updateTheme(ThemeInfo themeToUpdate)
+        {
+            ThemeSerializer.UpdateThemeXMLValues(themeToUpdate); 
+        }
+
+        //refresh the ui controls to reflect a theme change
+        public void refreshUI()
+        {
+            NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
+        }
+
+        //Verify if theme name is repeated or if the name is a valid file  name
+        public bool isThemeNameOk(string name)
+        {
+            if (themes.Contains(name))
+                return false;
+            char[] badChars = Path.GetInvalidFileNameChars();
+            if (name.IndexOfAny(badChars) != -1)
+                return false; 
+            return true;
+        }
+  
+         
         #endregion
-			
+
         #region Events
-		public delegate void ThemeChangedEventHandler();
-		private static ThemeChangedEventHandler ThemeChangedEvent;
-			
-		public static event ThemeChangedEventHandler ThemeChanged
-		{
-			add { ThemeChangedEvent = (ThemeChangedEventHandler) System.Delegate.Combine(ThemeChangedEvent, value); }
-			remove { ThemeChangedEvent = (ThemeChangedEventHandler) System.Delegate.Remove(ThemeChangedEvent, value); }
-		}
+        public delegate void ThemeChangedEventHandler();
+        private ThemeChangedEventHandler ThemeChangedEvent;
 
-        private static void NotifyThemeChanged(object sender, PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == "Name")
-			{
-				return;
-			}
-		    ThemeChangedEvent?.Invoke();
-		}
+        public  event ThemeChangedEventHandler ThemeChanged
+        {
+            add { ThemeChangedEvent = (ThemeChangedEventHandler)System.Delegate.Combine(ThemeChangedEvent, value); }
+            remove { ThemeChangedEvent = (ThemeChangedEventHandler)System.Delegate.Remove(ThemeChangedEvent, value); }
+        }
+
+        private  void NotifyThemeChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Name")
+            {
+                return;
+            }
+            ThemeChangedEvent?.Invoke();
+        }
         #endregion
-			
-        #region Properties
-        public static ThemeInfo DefaultTheme { get; } = new ThemeInfo(Language.strDefaultTheme);
 
-        public static ThemeInfo ActiveTheme
+        #region Properties
+        public  bool ThemingActive
+        {
+            get
+            {
+                return _themeActive;
+            }
+            set
+            {
+                if(themes.Count != 0)
+                {
+                    _themeActive = value;
+                    Settings.Default.ThemingActive = value;
+                    NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
+                }
+            }
+        }
+
+        private ThemeInfo DefaultTheme 
+        {
+			get
+			{
+                return (ThemeInfo) themes["vs2015light"];
+			} 
+		}
+        
+        public ThemeInfo ActiveTheme
 		{
 			get
 			{
-			    return _activeTheme ?? DefaultTheme;
+                return _activeTheme;
 			}
 			set
 			{
-				// We need to set ActiveTheme to the new theme to make sure it references the right object.
-				// However, if both themes have the same properties, we don't need to raise a notification event.
-				var needNotify = true;
-				if (_activeTheme != null)
-				{
-					if (_activeTheme.Equals(value))
-					{
-						needNotify = false;
-					}
-				}
-					
-				if (_activeThemeHandlerSet)
-				{
-				    if (_activeTheme != null) _activeTheme.PropertyChanged -= NotifyThemeChanged;
-				}
-					
-				_activeTheme = value;
-					
-				_activeTheme.PropertyChanged += NotifyThemeChanged;
-				_activeThemeHandlerSet = true;
-					
-				if (needNotify)
-				{
-					NotifyThemeChanged(_activeTheme, new PropertyChangedEventArgs(""));
-				}
+                //You can only enable theming if there are themes laoded
+                if(value != null)
+                {
+                    _activeTheme = value;
+                    Settings.Default.ThemeName = value.Name;
+                    NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
+                }
 			}
 		}
         #endregion
 	}
-}
+} 

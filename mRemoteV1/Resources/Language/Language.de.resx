@@ -814,7 +814,7 @@ Starte mit neuer Datei.</value>
     <value>Veränderungsprotokoll:</value>
   </data>
   <data name="strLabelClosingConnections" xml:space="preserve">
-    <value>Beim Schliessen der Verbindungen:</value>
+    <value>Beim Schließen der Verbindungen:</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Direkt Verbinden:</value>
