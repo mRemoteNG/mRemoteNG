@@ -99,9 +99,9 @@
             this.groupAdvancedSecurityOptions.Controls.Add(this.comboBoxBlockCipher);
             this.groupAdvancedSecurityOptions.Controls.Add(this.labelBlockCipher);
             this.groupAdvancedSecurityOptions.Controls.Add(this.labelEncryptionEngine);
-            this.groupAdvancedSecurityOptions.Location = new System.Drawing.Point(3, 96);
+            this.groupAdvancedSecurityOptions.Location = new System.Drawing.Point(3, 30);
             this.groupAdvancedSecurityOptions.Name = "groupAdvancedSecurityOptions";
-            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(358, 148);
+            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(604, 128);
             this.groupAdvancedSecurityOptions.TabIndex = 24;
             this.groupAdvancedSecurityOptions.TabStop = false;
             this.groupAdvancedSecurityOptions.Text = "Advanced Security Options";
@@ -113,7 +113,7 @@
             0,
             0,
             0});
-            this.numberBoxKdfIterations.Location = new System.Drawing.Point(191, 95);
+            this.numberBoxKdfIterations.Location = new System.Drawing.Point(191, 88);
             this.numberBoxKdfIterations.Maximum = new decimal(new int[] {
             50000,
             0,
@@ -137,7 +137,7 @@
             // labelKdfIterations
             // 
             this.labelKdfIterations.AutoSize = true;
-            this.labelKdfIterations.Location = new System.Drawing.Point(6, 97);
+            this.labelKdfIterations.Location = new System.Drawing.Point(9, 90);
             this.labelKdfIterations.Name = "labelKdfIterations";
             this.labelKdfIterations.Size = new System.Drawing.Size(166, 13);
             this.labelKdfIterations.TabIndex = 24;

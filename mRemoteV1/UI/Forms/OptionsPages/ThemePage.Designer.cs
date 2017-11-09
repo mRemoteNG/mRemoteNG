@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // btnThemeDelete
             // 
             this.btnThemeDelete._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnThemeDelete.Location = new System.Drawing.Point(535, 0);
+            this.btnThemeDelete.Location = new System.Drawing.Point(535, 1);
             this.btnThemeDelete.Name = "btnThemeDelete";
             this.btnThemeDelete.Size = new System.Drawing.Size(75, 23);
             this.btnThemeDelete.TabIndex = 6;
@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // btnThemeNew
             // 
             this.btnThemeNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnThemeNew.Location = new System.Drawing.Point(454, 0);
+            this.btnThemeNew.Location = new System.Drawing.Point(454, 1);
             this.btnThemeNew.Name = "btnThemeNew";
             this.btnThemeNew.Size = new System.Drawing.Size(75, 23);
             this.btnThemeNew.TabIndex = 5;
@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboTheme._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
             this.cboTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTheme.FormattingEnabled = true;
-            this.cboTheme.Location = new System.Drawing.Point(3, 1);
+            this.cboTheme.Location = new System.Drawing.Point(3, 2);
             this.cboTheme.Name = "cboTheme";
             this.cboTheme.Size = new System.Drawing.Size(445, 21);
             this.cboTheme.TabIndex = 4;
@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.themeEnableCombo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.themeEnableCombo.AutoSize = true;
-            this.themeEnableCombo.Location = new System.Drawing.Point(487, 456);
+            this.themeEnableCombo.Location = new System.Drawing.Point(487, 457);
             this.themeEnableCombo.Name = "themeEnableCombo";
             this.themeEnableCombo.Size = new System.Drawing.Size(100, 17);
             this.themeEnableCombo.TabIndex = 8;
@@ -100,7 +100,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.ColorNameCol});
             this.listPalette.Cursor = System.Windows.Forms.Cursors.Default;
             this.listPalette.DecorateLines = true;
-            this.listPalette.Location = new System.Drawing.Point(3, 28);
+            this.listPalette.Location = new System.Drawing.Point(3, 29);
             this.listPalette.Name = "listPalette";
             this.listPalette.ShowGroups = false;
             this.listPalette.Size = new System.Drawing.Size(604, 413);
@@ -132,7 +132,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelRestart
             // 
             this.labelRestart.AutoSize = true;
-            this.labelRestart.Location = new System.Drawing.Point(23, 456);
+            this.labelRestart.Location = new System.Drawing.Point(23, 457);
             this.labelRestart.Name = "labelRestart";
             this.labelRestart.Size = new System.Drawing.Size(399, 13);
             this.labelRestart.TabIndex = 10;
