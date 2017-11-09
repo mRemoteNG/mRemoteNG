@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkAlwaysShowPanelTabs
             // 
             this.chkAlwaysShowPanelTabs.AutoSize = true;
-            this.chkAlwaysShowPanelTabs.Location = new System.Drawing.Point(3, 0);
+            this.chkAlwaysShowPanelTabs.Location = new System.Drawing.Point(3, 5);
             this.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs";
             this.chkAlwaysShowPanelTabs.Size = new System.Drawing.Size(139, 17);
             this.chkAlwaysShowPanelTabs.TabIndex = 12;
@@ -53,7 +53,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkIdentifyQuickConnectTabs
             // 
             this.chkIdentifyQuickConnectTabs.AutoSize = true;
-            this.chkIdentifyQuickConnectTabs.Location = new System.Drawing.Point(3, 92);
+            this.chkIdentifyQuickConnectTabs.Location = new System.Drawing.Point(3, 97);
             this.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs";
             this.chkIdentifyQuickConnectTabs.Size = new System.Drawing.Size(293, 17);
             this.chkIdentifyQuickConnectTabs.TabIndex = 16;
@@ -63,7 +63,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkOpenNewTabRightOfSelected
             // 
             this.chkOpenNewTabRightOfSelected.AutoSize = true;
-            this.chkOpenNewTabRightOfSelected.Location = new System.Drawing.Point(3, 23);
+            this.chkOpenNewTabRightOfSelected.Location = new System.Drawing.Point(3, 28);
             this.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected";
             this.chkOpenNewTabRightOfSelected.Size = new System.Drawing.Size(280, 17);
             this.chkOpenNewTabRightOfSelected.TabIndex = 13;
@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkAlwaysShowPanelSelectionDlg
             // 
             this.chkAlwaysShowPanelSelectionDlg.AutoSize = true;
-            this.chkAlwaysShowPanelSelectionDlg.Location = new System.Drawing.Point(3, 138);
+            this.chkAlwaysShowPanelSelectionDlg.Location = new System.Drawing.Point(3, 143);
             this.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg";
             this.chkAlwaysShowPanelSelectionDlg.Size = new System.Drawing.Size(317, 17);
             this.chkAlwaysShowPanelSelectionDlg.TabIndex = 18;
@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkShowLogonInfoOnTabs
             // 
             this.chkShowLogonInfoOnTabs.AutoSize = true;
-            this.chkShowLogonInfoOnTabs.Location = new System.Drawing.Point(3, 46);
+            this.chkShowLogonInfoOnTabs.Location = new System.Drawing.Point(3, 51);
             this.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs";
             this.chkShowLogonInfoOnTabs.Size = new System.Drawing.Size(203, 17);
             this.chkShowLogonInfoOnTabs.TabIndex = 14;
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkDoubleClickClosesTab
             // 
             this.chkDoubleClickClosesTab.AutoSize = true;
-            this.chkDoubleClickClosesTab.Location = new System.Drawing.Point(3, 115);
+            this.chkDoubleClickClosesTab.Location = new System.Drawing.Point(3, 120);
             this.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab";
             this.chkDoubleClickClosesTab.Size = new System.Drawing.Size(159, 17);
             this.chkDoubleClickClosesTab.TabIndex = 17;
@@ -103,7 +103,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkShowProtocolOnTabs
             // 
             this.chkShowProtocolOnTabs.AutoSize = true;
-            this.chkShowProtocolOnTabs.Location = new System.Drawing.Point(3, 69);
+            this.chkShowProtocolOnTabs.Location = new System.Drawing.Point(3, 74);
             this.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs";
             this.chkShowProtocolOnTabs.Size = new System.Drawing.Size(166, 17);
             this.chkShowProtocolOnTabs.TabIndex = 15;

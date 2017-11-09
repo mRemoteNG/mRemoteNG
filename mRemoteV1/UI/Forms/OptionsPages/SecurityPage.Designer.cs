@@ -35,8 +35,8 @@
             this.labelBlockCipher = new System.Windows.Forms.Label();
             this.comboBoxBlockCipher = new System.Windows.Forms.ComboBox();
             this.groupAdvancedSecurityOptions = new System.Windows.Forms.GroupBox();
-            this.labelKdfIterations = new System.Windows.Forms.Label();
             this.numberBoxKdfIterations = new System.Windows.Forms.NumericUpDown();
+            this.labelKdfIterations = new System.Windows.Forms.Label();
             this.groupAdvancedSecurityOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberBoxKdfIterations)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +44,7 @@
             // chkEncryptCompleteFile
             // 
             this.chkEncryptCompleteFile.AutoSize = true;
-            this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 3);
+            this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 5);
             this.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile";
             this.chkEncryptCompleteFile.Size = new System.Drawing.Size(180, 17);
             this.chkEncryptCompleteFile.TabIndex = 19;
@@ -93,21 +93,12 @@
             this.groupAdvancedSecurityOptions.Controls.Add(this.comboBoxBlockCipher);
             this.groupAdvancedSecurityOptions.Controls.Add(this.labelBlockCipher);
             this.groupAdvancedSecurityOptions.Controls.Add(this.labelEncryptionEngine);
-            this.groupAdvancedSecurityOptions.Location = new System.Drawing.Point(3, 96);
+            this.groupAdvancedSecurityOptions.Location = new System.Drawing.Point(3, 35);
             this.groupAdvancedSecurityOptions.Name = "groupAdvancedSecurityOptions";
-            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(358, 148);
+            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(604, 148);
             this.groupAdvancedSecurityOptions.TabIndex = 24;
             this.groupAdvancedSecurityOptions.TabStop = false;
             this.groupAdvancedSecurityOptions.Text = "Advanced Security Options";
-            // 
-            // labelKdfIterations
-            // 
-            this.labelKdfIterations.AutoSize = true;
-            this.labelKdfIterations.Location = new System.Drawing.Point(6, 97);
-            this.labelKdfIterations.Name = "labelKdfIterations";
-            this.labelKdfIterations.Size = new System.Drawing.Size(166, 13);
-            this.labelKdfIterations.TabIndex = 24;
-            this.labelKdfIterations.Text = "Key Derivation Function Iterations";
             // 
             // numberBoxKdfIterations
             // 
@@ -116,7 +107,7 @@
             0,
             0,
             0});
-            this.numberBoxKdfIterations.Location = new System.Drawing.Point(191, 95);
+            this.numberBoxKdfIterations.Location = new System.Drawing.Point(191, 90);
             this.numberBoxKdfIterations.Maximum = new decimal(new int[] {
             50000,
             0,
@@ -136,6 +127,15 @@
             0,
             0,
             0});
+            // 
+            // labelKdfIterations
+            // 
+            this.labelKdfIterations.AutoSize = true;
+            this.labelKdfIterations.Location = new System.Drawing.Point(9, 92);
+            this.labelKdfIterations.Name = "labelKdfIterations";
+            this.labelKdfIterations.Size = new System.Drawing.Size(166, 13);
+            this.labelKdfIterations.TabIndex = 24;
+            this.labelKdfIterations.Text = "Key Derivation Function Iterations";
             // 
             // SecurityPage
             // 

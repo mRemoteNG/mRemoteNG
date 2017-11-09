@@ -31,7 +31,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
 
             lblAutoSave1.Text = Language.strAutoSaveEvery;
-            lblAutoSave2.Text = Language.strAutoSaveMins;
 
             lblDefaultCredentials.Text = Language.strEmptyUsernamePasswordDomainFields;
             radCredentialsNoInfo.Text = Language.strNoInformation;

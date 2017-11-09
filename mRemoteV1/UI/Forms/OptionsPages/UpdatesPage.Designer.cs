@@ -32,9 +32,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdatesPage));
             this.lblUpdatesExplanation = new System.Windows.Forms.Label();
             this.pnlUpdateCheck = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.lblReleaseChannel = new System.Windows.Forms.Label();
-            this.cboReleaseChannel = new System.Windows.Forms.ComboBox();
             this.btnUpdateCheckNow = new System.Windows.Forms.Button();
             this.chkCheckForUpdatesOnStartup = new System.Windows.Forms.CheckBox();
             this.cboUpdateCheckFrequency = new System.Windows.Forms.ComboBox();
@@ -52,70 +49,40 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblProxyPassword = new System.Windows.Forms.Label();
             this.txtProxyPassword = new System.Windows.Forms.TextBox();
             this.btnTestProxy = new System.Windows.Forms.Button();
+            this.pnlReleaseChannel = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblReleaseChannel = new System.Windows.Forms.Label();
+            this.cboReleaseChannel = new System.Windows.Forms.ComboBox();
             this.pnlUpdateCheck.SuspendLayout();
             this.pnlProxy.SuspendLayout();
             this.pnlProxyBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numProxyPort)).BeginInit();
             this.pnlProxyAuthentication.SuspendLayout();
+            this.pnlReleaseChannel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUpdatesExplanation
             // 
-            this.lblUpdatesExplanation.Location = new System.Drawing.Point(3, 0);
+            this.lblUpdatesExplanation.Location = new System.Drawing.Point(3, 4);
             this.lblUpdatesExplanation.Name = "lblUpdatesExplanation";
-            this.lblUpdatesExplanation.Size = new System.Drawing.Size(536, 40);
+            this.lblUpdatesExplanation.Size = new System.Drawing.Size(536, 17);
             this.lblUpdatesExplanation.TabIndex = 3;
             this.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates." +
     "";
             // 
             // pnlUpdateCheck
             // 
-            this.pnlUpdateCheck.Controls.Add(this.textBox1);
-            this.pnlUpdateCheck.Controls.Add(this.lblReleaseChannel);
-            this.pnlUpdateCheck.Controls.Add(this.cboReleaseChannel);
             this.pnlUpdateCheck.Controls.Add(this.btnUpdateCheckNow);
             this.pnlUpdateCheck.Controls.Add(this.chkCheckForUpdatesOnStartup);
             this.pnlUpdateCheck.Controls.Add(this.cboUpdateCheckFrequency);
-            this.pnlUpdateCheck.Location = new System.Drawing.Point(0, 48);
+            this.pnlUpdateCheck.Location = new System.Drawing.Point(3, 25);
             this.pnlUpdateCheck.Name = "pnlUpdateCheck";
-            this.pnlUpdateCheck.Size = new System.Drawing.Size(610, 120);
+            this.pnlUpdateCheck.Size = new System.Drawing.Size(604, 96);
             this.pnlUpdateCheck.TabIndex = 4;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(226, 68);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(366, 44);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "Stable channel includes final releases only.\r\nBeta channel includes Betas & Relea" +
-    "se Candidates.\r\nDevelopment Channel includes Alphas, Betas & Release Candidates." +
-    "";
-            // 
-            // lblReleaseChannel
-            // 
-            this.lblReleaseChannel.AutoSize = true;
-            this.lblReleaseChannel.Location = new System.Drawing.Point(223, 12);
-            this.lblReleaseChannel.Name = "lblReleaseChannel";
-            this.lblReleaseChannel.Size = new System.Drawing.Size(91, 13);
-            this.lblReleaseChannel.TabIndex = 4;
-            this.lblReleaseChannel.Text = "Release Channel:";
-            // 
-            // cboReleaseChannel
-            // 
-            this.cboReleaseChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboReleaseChannel.FormattingEnabled = true;
-            this.cboReleaseChannel.Location = new System.Drawing.Point(226, 41);
-            this.cboReleaseChannel.Name = "cboReleaseChannel";
-            this.cboReleaseChannel.Size = new System.Drawing.Size(121, 21);
-            this.cboReleaseChannel.TabIndex = 3;
             // 
             // btnUpdateCheckNow
             // 
-            this.btnUpdateCheckNow.Location = new System.Drawing.Point(3, 80);
+            this.btnUpdateCheckNow.Location = new System.Drawing.Point(0, 53);
             this.btnUpdateCheckNow.Name = "btnUpdateCheckNow";
             this.btnUpdateCheckNow.Size = new System.Drawing.Size(120, 32);
             this.btnUpdateCheckNow.TabIndex = 2;
@@ -126,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkCheckForUpdatesOnStartup
             // 
             this.chkCheckForUpdatesOnStartup.AutoSize = true;
-            this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(3, 8);
+            this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(3, 3);
             this.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup";
             this.chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(113, 17);
             this.chkCheckForUpdatesOnStartup.TabIndex = 0;
@@ -138,7 +105,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUpdateCheckFrequency.FormattingEnabled = true;
-            this.cboUpdateCheckFrequency.Location = new System.Drawing.Point(3, 41);
+            this.cboUpdateCheckFrequency.Location = new System.Drawing.Point(2, 26);
             this.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency";
             this.cboUpdateCheckFrequency.Size = new System.Drawing.Size(128, 21);
             this.cboUpdateCheckFrequency.TabIndex = 1;
@@ -150,9 +117,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlProxy.Controls.Add(this.chkUseProxyAuthentication);
             this.pnlProxy.Controls.Add(this.pnlProxyAuthentication);
             this.pnlProxy.Controls.Add(this.btnTestProxy);
-            this.pnlProxy.Location = new System.Drawing.Point(0, 200);
+            this.pnlProxy.Location = new System.Drawing.Point(0, 237);
             this.pnlProxy.Name = "pnlProxy";
-            this.pnlProxy.Size = new System.Drawing.Size(610, 224);
+            this.pnlProxy.Size = new System.Drawing.Size(610, 212);
             this.pnlProxy.TabIndex = 5;
             // 
             // pnlProxyBasic
@@ -162,14 +129,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlProxyBasic.Controls.Add(this.lblProxyPort);
             this.pnlProxyBasic.Controls.Add(this.numProxyPort);
             this.pnlProxyBasic.Enabled = false;
-            this.pnlProxyBasic.Location = new System.Drawing.Point(3, 32);
+            this.pnlProxyBasic.Location = new System.Drawing.Point(3, 26);
             this.pnlProxyBasic.Name = "pnlProxyBasic";
-            this.pnlProxyBasic.Size = new System.Drawing.Size(604, 40);
+            this.pnlProxyBasic.Size = new System.Drawing.Size(601, 40);
             this.pnlProxyBasic.TabIndex = 1;
             // 
             // lblProxyAddress
             // 
-            this.lblProxyAddress.Location = new System.Drawing.Point(8, 4);
+            this.lblProxyAddress.Location = new System.Drawing.Point(8, 9);
             this.lblProxyAddress.Name = "lblProxyAddress";
             this.lblProxyAddress.Size = new System.Drawing.Size(96, 24);
             this.lblProxyAddress.TabIndex = 0;
@@ -179,14 +146,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // txtProxyAddress
             // 
             this.txtProxyAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtProxyAddress.Location = new System.Drawing.Point(104, 8);
+            this.txtProxyAddress.Location = new System.Drawing.Point(104, 13);
             this.txtProxyAddress.Name = "txtProxyAddress";
             this.txtProxyAddress.Size = new System.Drawing.Size(240, 20);
             this.txtProxyAddress.TabIndex = 1;
             // 
             // lblProxyPort
             // 
-            this.lblProxyPort.Location = new System.Drawing.Point(350, 5);
+            this.lblProxyPort.Location = new System.Drawing.Point(350, 10);
             this.lblProxyPort.Name = "lblProxyPort";
             this.lblProxyPort.Size = new System.Drawing.Size(64, 23);
             this.lblProxyPort.TabIndex = 2;
@@ -196,7 +163,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numProxyPort
             // 
             this.numProxyPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numProxyPort.Location = new System.Drawing.Point(420, 8);
+            this.numProxyPort.Location = new System.Drawing.Point(420, 13);
             this.numProxyPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -219,7 +186,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkUseProxyForAutomaticUpdates
             // 
             this.chkUseProxyForAutomaticUpdates.AutoSize = true;
-            this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(3, 8);
+            this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(3, 3);
             this.chkUseProxyForAutomaticUpdates.Name = "chkUseProxyForAutomaticUpdates";
             this.chkUseProxyForAutomaticUpdates.Size = new System.Drawing.Size(168, 17);
             this.chkUseProxyForAutomaticUpdates.TabIndex = 0;
@@ -231,7 +198,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkUseProxyAuthentication.AutoSize = true;
             this.chkUseProxyAuthentication.Enabled = false;
-            this.chkUseProxyAuthentication.Location = new System.Drawing.Point(27, 80);
+            this.chkUseProxyAuthentication.Location = new System.Drawing.Point(14, 72);
             this.chkUseProxyAuthentication.Name = "chkUseProxyAuthentication";
             this.chkUseProxyAuthentication.Size = new System.Drawing.Size(216, 17);
             this.chkUseProxyAuthentication.TabIndex = 2;
@@ -246,14 +213,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlProxyAuthentication.Controls.Add(this.lblProxyPassword);
             this.pnlProxyAuthentication.Controls.Add(this.txtProxyPassword);
             this.pnlProxyAuthentication.Enabled = false;
-            this.pnlProxyAuthentication.Location = new System.Drawing.Point(3, 104);
+            this.pnlProxyAuthentication.Location = new System.Drawing.Point(3, 95);
             this.pnlProxyAuthentication.Name = "pnlProxyAuthentication";
-            this.pnlProxyAuthentication.Size = new System.Drawing.Size(604, 72);
+            this.pnlProxyAuthentication.Size = new System.Drawing.Size(601, 72);
             this.pnlProxyAuthentication.TabIndex = 3;
             // 
             // lblProxyUsername
             // 
-            this.lblProxyUsername.Location = new System.Drawing.Point(8, 4);
+            this.lblProxyUsername.Location = new System.Drawing.Point(8, 9);
             this.lblProxyUsername.Name = "lblProxyUsername";
             this.lblProxyUsername.Size = new System.Drawing.Size(96, 24);
             this.lblProxyUsername.TabIndex = 0;
@@ -263,14 +230,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // txtProxyUsername
             // 
             this.txtProxyUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtProxyUsername.Location = new System.Drawing.Point(104, 8);
+            this.txtProxyUsername.Location = new System.Drawing.Point(104, 13);
             this.txtProxyUsername.Name = "txtProxyUsername";
             this.txtProxyUsername.Size = new System.Drawing.Size(240, 20);
             this.txtProxyUsername.TabIndex = 1;
             // 
             // lblProxyPassword
             // 
-            this.lblProxyPassword.Location = new System.Drawing.Point(8, 36);
+            this.lblProxyPassword.Location = new System.Drawing.Point(8, 41);
             this.lblProxyPassword.Name = "lblProxyPassword";
             this.lblProxyPassword.Size = new System.Drawing.Size(96, 24);
             this.lblProxyPassword.TabIndex = 2;
@@ -280,7 +247,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // txtProxyPassword
             // 
             this.txtProxyPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtProxyPassword.Location = new System.Drawing.Point(104, 40);
+            this.txtProxyPassword.Location = new System.Drawing.Point(104, 45);
             this.txtProxyPassword.Name = "txtProxyPassword";
             this.txtProxyPassword.Size = new System.Drawing.Size(240, 20);
             this.txtProxyPassword.TabIndex = 3;
@@ -288,7 +255,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnTestProxy
             // 
-            this.btnTestProxy.Location = new System.Drawing.Point(3, 184);
+            this.btnTestProxy.Location = new System.Drawing.Point(3, 173);
             this.btnTestProxy.Name = "btnTestProxy";
             this.btnTestProxy.Size = new System.Drawing.Size(120, 32);
             this.btnTestProxy.TabIndex = 4;
@@ -296,10 +263,53 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.btnTestProxy.UseVisualStyleBackColor = true;
             this.btnTestProxy.Click += new System.EventHandler(this.btnTestProxy_Click);
             // 
+            // pnlReleaseChannel
+            // 
+            this.pnlReleaseChannel.Controls.Add(this.textBox1);
+            this.pnlReleaseChannel.Controls.Add(this.lblReleaseChannel);
+            this.pnlReleaseChannel.Controls.Add(this.cboReleaseChannel);
+            this.pnlReleaseChannel.Location = new System.Drawing.Point(0, 127);
+            this.pnlReleaseChannel.Name = "pnlReleaseChannel";
+            this.pnlReleaseChannel.Size = new System.Drawing.Size(607, 95);
+            this.pnlReleaseChannel.TabIndex = 6;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(3, 49);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(366, 44);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.Text = "Stable channel includes final releases only.\r\nBeta channel includes Betas & Relea" +
+    "se Candidates.\r\nDevelopment Channel includes Alphas, Betas & Release Candidates." +
+    "";
+            // 
+            // lblReleaseChannel
+            // 
+            this.lblReleaseChannel.AutoSize = true;
+            this.lblReleaseChannel.Location = new System.Drawing.Point(2, 6);
+            this.lblReleaseChannel.Name = "lblReleaseChannel";
+            this.lblReleaseChannel.Size = new System.Drawing.Size(91, 13);
+            this.lblReleaseChannel.TabIndex = 7;
+            this.lblReleaseChannel.Text = "Release Channel:";
+            // 
+            // cboReleaseChannel
+            // 
+            this.cboReleaseChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboReleaseChannel.FormattingEnabled = true;
+            this.cboReleaseChannel.Location = new System.Drawing.Point(5, 22);
+            this.cboReleaseChannel.Name = "cboReleaseChannel";
+            this.cboReleaseChannel.Size = new System.Drawing.Size(129, 21);
+            this.cboReleaseChannel.TabIndex = 6;
+            // 
             // UpdatesPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnlReleaseChannel);
             this.Controls.Add(this.lblUpdatesExplanation);
             this.Controls.Add(this.pnlUpdateCheck);
             this.Controls.Add(this.pnlProxy);
@@ -315,6 +325,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ((System.ComponentModel.ISupportInitialize)(this.numProxyPort)).EndInit();
             this.pnlProxyAuthentication.ResumeLayout(false);
             this.pnlProxyAuthentication.PerformLayout();
+            this.pnlReleaseChannel.ResumeLayout(false);
+            this.pnlReleaseChannel.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -337,8 +349,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		internal System.Windows.Forms.Label lblProxyPassword;
 		internal System.Windows.Forms.TextBox txtProxyPassword;
 		internal System.Windows.Forms.Button btnTestProxy;
+        private System.Windows.Forms.Panel pnlReleaseChannel;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lblReleaseChannel;
         private System.Windows.Forms.ComboBox cboReleaseChannel;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }

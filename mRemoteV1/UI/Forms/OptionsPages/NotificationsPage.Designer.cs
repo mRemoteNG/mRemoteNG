@@ -42,33 +42,37 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowInfoInMC = new System.Windows.Forms.CheckBox();
             this.chkShowDebugInMC = new System.Windows.Forms.CheckBox();
             this.groupBoxLogging = new System.Windows.Forms.GroupBox();
+            this.tblLogging = new System.Windows.Forms.TableLayoutPanel();
+            this.chkLogErrorMsgs = new System.Windows.Forms.CheckBox();
+            this.chkLogWarningMsgs = new System.Windows.Forms.CheckBox();
+            this.chkLogInfoMsgs = new System.Windows.Forms.CheckBox();
+            this.chkLogDebugMsgs = new System.Windows.Forms.CheckBox();
             this.chkLogToCurrentDir = new System.Windows.Forms.CheckBox();
             this.buttonRestoreDefaultLogPath = new System.Windows.Forms.Button();
             this.buttonOpenLogFile = new System.Windows.Forms.Button();
             this.buttonSelectLogPath = new System.Windows.Forms.Button();
             this.labelLogTheseMsgTypes = new System.Windows.Forms.Label();
-            this.chkLogErrorMsgs = new System.Windows.Forms.CheckBox();
             this.labelLogFilePath = new System.Windows.Forms.Label();
-            this.chkLogWarningMsgs = new System.Windows.Forms.CheckBox();
             this.textBoxLogPath = new System.Windows.Forms.TextBox();
-            this.chkLogInfoMsgs = new System.Windows.Forms.CheckBox();
-            this.chkLogDebugMsgs = new System.Windows.Forms.CheckBox();
             this.saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxPopups = new System.Windows.Forms.GroupBox();
+            this.tblPopups = new System.Windows.Forms.TableLayoutPanel();
             this.chkPopupError = new System.Windows.Forms.CheckBox();
-            this.labelPopupShowTypes = new System.Windows.Forms.Label();
             this.chkPopupWarning = new System.Windows.Forms.CheckBox();
             this.chkPopupDebug = new System.Windows.Forms.CheckBox();
             this.chkPopupInfo = new System.Windows.Forms.CheckBox();
+            this.labelPopupShowTypes = new System.Windows.Forms.Label();
             this.groupBoxNotifications.SuspendLayout();
             this.groupBoxLogging.SuspendLayout();
+            this.tblLogging.SuspendLayout();
             this.groupBoxPopups.SuspendLayout();
+            this.tblPopups.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelSwitchToErrorsAndInfos
             // 
             this.labelSwitchToErrorsAndInfos.AutoSize = true;
-            this.labelSwitchToErrorsAndInfos.Location = new System.Drawing.Point(177, 26);
+            this.labelSwitchToErrorsAndInfos.Location = new System.Drawing.Point(220, 16);
             this.labelSwitchToErrorsAndInfos.Name = "labelSwitchToErrorsAndInfos";
             this.labelSwitchToErrorsAndInfos.Size = new System.Drawing.Size(159, 13);
             this.labelSwitchToErrorsAndInfos.TabIndex = 24;
@@ -77,7 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkSwitchToMCInformation
             // 
             this.chkSwitchToMCInformation.AutoSize = true;
-            this.chkSwitchToMCInformation.Location = new System.Drawing.Point(195, 68);
+            this.chkSwitchToMCInformation.Location = new System.Drawing.Point(238, 58);
             this.chkSwitchToMCInformation.Name = "chkSwitchToMCInformation";
             this.chkSwitchToMCInformation.Size = new System.Drawing.Size(78, 17);
             this.chkSwitchToMCInformation.TabIndex = 25;
@@ -87,7 +91,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkSwitchToMCErrors
             // 
             this.chkSwitchToMCErrors.AutoSize = true;
-            this.chkSwitchToMCErrors.Location = new System.Drawing.Point(195, 114);
+            this.chkSwitchToMCErrors.Location = new System.Drawing.Point(238, 104);
             this.chkSwitchToMCErrors.Name = "chkSwitchToMCErrors";
             this.chkSwitchToMCErrors.Size = new System.Drawing.Size(48, 17);
             this.chkSwitchToMCErrors.TabIndex = 27;
@@ -97,7 +101,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkSwitchToMCWarnings
             // 
             this.chkSwitchToMCWarnings.AutoSize = true;
-            this.chkSwitchToMCWarnings.Location = new System.Drawing.Point(195, 91);
+            this.chkSwitchToMCWarnings.Location = new System.Drawing.Point(238, 81);
             this.chkSwitchToMCWarnings.Name = "chkSwitchToMCWarnings";
             this.chkSwitchToMCWarnings.Size = new System.Drawing.Size(66, 17);
             this.chkSwitchToMCWarnings.TabIndex = 26;
@@ -115,9 +119,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxNotifications.Controls.Add(this.chkSwitchToMCWarnings);
             this.groupBoxNotifications.Controls.Add(this.chkShowInfoInMC);
             this.groupBoxNotifications.Controls.Add(this.chkShowDebugInMC);
-            this.groupBoxNotifications.Location = new System.Drawing.Point(6, 3);
+            this.groupBoxNotifications.Location = new System.Drawing.Point(6, 5);
             this.groupBoxNotifications.Name = "groupBoxNotifications";
-            this.groupBoxNotifications.Size = new System.Drawing.Size(601, 141);
+            this.groupBoxNotifications.Size = new System.Drawing.Size(601, 128);
             this.groupBoxNotifications.TabIndex = 28;
             this.groupBoxNotifications.TabStop = false;
             this.groupBoxNotifications.Text = "Notifications Panel";
@@ -125,7 +129,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelNotificationsShowTypes
             // 
             this.labelNotificationsShowTypes.AutoSize = true;
-            this.labelNotificationsShowTypes.Location = new System.Drawing.Point(6, 26);
+            this.labelNotificationsShowTypes.Location = new System.Drawing.Point(6, 16);
             this.labelNotificationsShowTypes.Name = "labelNotificationsShowTypes";
             this.labelNotificationsShowTypes.Size = new System.Drawing.Size(139, 13);
             this.labelNotificationsShowTypes.TabIndex = 29;
@@ -134,7 +138,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkShowErrorInMC
             // 
             this.chkShowErrorInMC.AutoSize = true;
-            this.chkShowErrorInMC.Location = new System.Drawing.Point(20, 114);
+            this.chkShowErrorInMC.Location = new System.Drawing.Point(20, 104);
             this.chkShowErrorInMC.Name = "chkShowErrorInMC";
             this.chkShowErrorInMC.Size = new System.Drawing.Size(48, 17);
             this.chkShowErrorInMC.TabIndex = 32;
@@ -144,7 +148,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkShowWarningInMC
             // 
             this.chkShowWarningInMC.AutoSize = true;
-            this.chkShowWarningInMC.Location = new System.Drawing.Point(20, 91);
+            this.chkShowWarningInMC.Location = new System.Drawing.Point(20, 81);
             this.chkShowWarningInMC.Name = "chkShowWarningInMC";
             this.chkShowWarningInMC.Size = new System.Drawing.Size(66, 17);
             this.chkShowWarningInMC.TabIndex = 31;
@@ -154,7 +158,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkShowInfoInMC
             // 
             this.chkShowInfoInMC.AutoSize = true;
-            this.chkShowInfoInMC.Location = new System.Drawing.Point(20, 68);
+            this.chkShowInfoInMC.Location = new System.Drawing.Point(20, 58);
             this.chkShowInfoInMC.Name = "chkShowInfoInMC";
             this.chkShowInfoInMC.Size = new System.Drawing.Size(78, 17);
             this.chkShowInfoInMC.TabIndex = 30;
@@ -164,7 +168,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkShowDebugInMC
             // 
             this.chkShowDebugInMC.AutoSize = true;
-            this.chkShowDebugInMC.Location = new System.Drawing.Point(20, 45);
+            this.chkShowDebugInMC.Location = new System.Drawing.Point(20, 35);
             this.chkShowDebugInMC.Name = "chkShowDebugInMC";
             this.chkShowDebugInMC.Size = new System.Drawing.Size(58, 17);
             this.chkShowDebugInMC.TabIndex = 29;
@@ -173,29 +177,84 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // groupBoxLogging
             // 
+            this.groupBoxLogging.Controls.Add(this.tblLogging);
             this.groupBoxLogging.Controls.Add(this.chkLogToCurrentDir);
             this.groupBoxLogging.Controls.Add(this.buttonRestoreDefaultLogPath);
             this.groupBoxLogging.Controls.Add(this.buttonOpenLogFile);
             this.groupBoxLogging.Controls.Add(this.buttonSelectLogPath);
             this.groupBoxLogging.Controls.Add(this.labelLogTheseMsgTypes);
-            this.groupBoxLogging.Controls.Add(this.chkLogErrorMsgs);
             this.groupBoxLogging.Controls.Add(this.labelLogFilePath);
-            this.groupBoxLogging.Controls.Add(this.chkLogWarningMsgs);
             this.groupBoxLogging.Controls.Add(this.textBoxLogPath);
-            this.groupBoxLogging.Controls.Add(this.chkLogInfoMsgs);
-            this.groupBoxLogging.Controls.Add(this.chkLogDebugMsgs);
-            this.groupBoxLogging.Location = new System.Drawing.Point(6, 150);
+            this.groupBoxLogging.Location = new System.Drawing.Point(6, 139);
             this.groupBoxLogging.Name = "groupBoxLogging";
-            this.groupBoxLogging.Size = new System.Drawing.Size(601, 140);
+            this.groupBoxLogging.Size = new System.Drawing.Size(601, 156);
             this.groupBoxLogging.TabIndex = 29;
             this.groupBoxLogging.TabStop = false;
             this.groupBoxLogging.Text = "Logging";
             // 
+            // tblLogging
+            // 
+            this.tblLogging.ColumnCount = 4;
+            this.tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblLogging.Controls.Add(this.chkLogErrorMsgs, 3, 0);
+            this.tblLogging.Controls.Add(this.chkLogWarningMsgs, 2, 0);
+            this.tblLogging.Controls.Add(this.chkLogInfoMsgs, 1, 0);
+            this.tblLogging.Controls.Add(this.chkLogDebugMsgs, 0, 0);
+            this.tblLogging.Location = new System.Drawing.Point(9, 126);
+            this.tblLogging.Name = "tblLogging";
+            this.tblLogging.RowCount = 1;
+            this.tblLogging.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblLogging.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tblLogging.Size = new System.Drawing.Size(485, 22);
+            this.tblLogging.TabIndex = 41;
+            // 
+            // chkLogErrorMsgs
+            // 
+            this.chkLogErrorMsgs.AutoSize = true;
+            this.chkLogErrorMsgs.Location = new System.Drawing.Point(366, 3);
+            this.chkLogErrorMsgs.Name = "chkLogErrorMsgs";
+            this.chkLogErrorMsgs.Size = new System.Drawing.Size(48, 17);
+            this.chkLogErrorMsgs.TabIndex = 38;
+            this.chkLogErrorMsgs.Text = "Error";
+            this.chkLogErrorMsgs.UseVisualStyleBackColor = true;
+            // 
+            // chkLogWarningMsgs
+            // 
+            this.chkLogWarningMsgs.AutoSize = true;
+            this.chkLogWarningMsgs.Location = new System.Drawing.Point(245, 3);
+            this.chkLogWarningMsgs.Name = "chkLogWarningMsgs";
+            this.chkLogWarningMsgs.Size = new System.Drawing.Size(66, 17);
+            this.chkLogWarningMsgs.TabIndex = 37;
+            this.chkLogWarningMsgs.Text = "Warning";
+            this.chkLogWarningMsgs.UseVisualStyleBackColor = true;
+            // 
+            // chkLogInfoMsgs
+            // 
+            this.chkLogInfoMsgs.AutoSize = true;
+            this.chkLogInfoMsgs.Location = new System.Drawing.Point(124, 3);
+            this.chkLogInfoMsgs.Name = "chkLogInfoMsgs";
+            this.chkLogInfoMsgs.Size = new System.Drawing.Size(78, 17);
+            this.chkLogInfoMsgs.TabIndex = 36;
+            this.chkLogInfoMsgs.Text = "Information";
+            this.chkLogInfoMsgs.UseVisualStyleBackColor = true;
+            // 
+            // chkLogDebugMsgs
+            // 
+            this.chkLogDebugMsgs.AutoSize = true;
+            this.chkLogDebugMsgs.Location = new System.Drawing.Point(3, 3);
+            this.chkLogDebugMsgs.Name = "chkLogDebugMsgs";
+            this.chkLogDebugMsgs.Size = new System.Drawing.Size(58, 17);
+            this.chkLogDebugMsgs.TabIndex = 35;
+            this.chkLogDebugMsgs.Text = "Debug";
+            this.chkLogDebugMsgs.UseVisualStyleBackColor = true;
+            // 
             // chkLogToCurrentDir
             // 
-            this.chkLogToCurrentDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkLogToCurrentDir.AutoSize = true;
-            this.chkLogToCurrentDir.Location = new System.Drawing.Point(441, 20);
+            this.chkLogToCurrentDir.Location = new System.Drawing.Point(9, 19);
             this.chkLogToCurrentDir.Name = "chkLogToCurrentDir";
             this.chkLogToCurrentDir.Size = new System.Drawing.Size(153, 17);
             this.chkLogToCurrentDir.TabIndex = 40;
@@ -205,7 +264,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonRestoreDefaultLogPath
             // 
-            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(495, 69);
+            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(496, 83);
             this.buttonRestoreDefaultLogPath.Name = "buttonRestoreDefaultLogPath";
             this.buttonRestoreDefaultLogPath.Size = new System.Drawing.Size(99, 23);
             this.buttonRestoreDefaultLogPath.TabIndex = 39;
@@ -215,7 +274,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonOpenLogFile
             // 
-            this.buttonOpenLogFile.Location = new System.Drawing.Point(273, 68);
+            this.buttonOpenLogFile.Location = new System.Drawing.Point(274, 82);
             this.buttonOpenLogFile.Name = "buttonOpenLogFile";
             this.buttonOpenLogFile.Size = new System.Drawing.Size(105, 23);
             this.buttonOpenLogFile.TabIndex = 30;
@@ -225,7 +284,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonSelectLogPath
             // 
-            this.buttonSelectLogPath.Location = new System.Drawing.Point(384, 68);
+            this.buttonSelectLogPath.Location = new System.Drawing.Point(385, 82);
             this.buttonSelectLogPath.Name = "buttonSelectLogPath";
             this.buttonSelectLogPath.Size = new System.Drawing.Size(105, 23);
             this.buttonSelectLogPath.TabIndex = 30;
@@ -236,107 +295,73 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelLogTheseMsgTypes
             // 
             this.labelLogTheseMsgTypes.AutoSize = true;
-            this.labelLogTheseMsgTypes.Location = new System.Drawing.Point(6, 26);
+            this.labelLogTheseMsgTypes.Location = new System.Drawing.Point(6, 110);
             this.labelLogTheseMsgTypes.Name = "labelLogTheseMsgTypes";
             this.labelLogTheseMsgTypes.Size = new System.Drawing.Size(130, 13);
             this.labelLogTheseMsgTypes.TabIndex = 34;
             this.labelLogTheseMsgTypes.Text = "Log these message types:";
             // 
-            // chkLogErrorMsgs
-            // 
-            this.chkLogErrorMsgs.AutoSize = true;
-            this.chkLogErrorMsgs.Location = new System.Drawing.Point(20, 114);
-            this.chkLogErrorMsgs.Name = "chkLogErrorMsgs";
-            this.chkLogErrorMsgs.Size = new System.Drawing.Size(48, 17);
-            this.chkLogErrorMsgs.TabIndex = 38;
-            this.chkLogErrorMsgs.Text = "Error";
-            this.chkLogErrorMsgs.UseVisualStyleBackColor = true;
-            // 
             // labelLogFilePath
             // 
             this.labelLogFilePath.AutoSize = true;
-            this.labelLogFilePath.Location = new System.Drawing.Point(192, 26);
+            this.labelLogFilePath.Location = new System.Drawing.Point(6, 41);
             this.labelLogFilePath.Name = "labelLogFilePath";
             this.labelLogFilePath.Size = new System.Drawing.Size(68, 13);
             this.labelLogFilePath.TabIndex = 30;
             this.labelLogFilePath.Text = "Log file path:";
             // 
-            // chkLogWarningMsgs
-            // 
-            this.chkLogWarningMsgs.AutoSize = true;
-            this.chkLogWarningMsgs.Location = new System.Drawing.Point(20, 91);
-            this.chkLogWarningMsgs.Name = "chkLogWarningMsgs";
-            this.chkLogWarningMsgs.Size = new System.Drawing.Size(66, 17);
-            this.chkLogWarningMsgs.TabIndex = 37;
-            this.chkLogWarningMsgs.Text = "Warning";
-            this.chkLogWarningMsgs.UseVisualStyleBackColor = true;
-            // 
             // textBoxLogPath
             // 
             this.textBoxLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxLogPath.Location = new System.Drawing.Point(195, 43);
+            this.textBoxLogPath.Location = new System.Drawing.Point(9, 57);
             this.textBoxLogPath.Name = "textBoxLogPath";
             this.textBoxLogPath.ReadOnly = true;
-            this.textBoxLogPath.Size = new System.Drawing.Size(399, 20);
+            this.textBoxLogPath.Size = new System.Drawing.Size(585, 20);
             this.textBoxLogPath.TabIndex = 0;
-            // 
-            // chkLogInfoMsgs
-            // 
-            this.chkLogInfoMsgs.AutoSize = true;
-            this.chkLogInfoMsgs.Location = new System.Drawing.Point(20, 68);
-            this.chkLogInfoMsgs.Name = "chkLogInfoMsgs";
-            this.chkLogInfoMsgs.Size = new System.Drawing.Size(78, 17);
-            this.chkLogInfoMsgs.TabIndex = 36;
-            this.chkLogInfoMsgs.Text = "Information";
-            this.chkLogInfoMsgs.UseVisualStyleBackColor = true;
-            // 
-            // chkLogDebugMsgs
-            // 
-            this.chkLogDebugMsgs.AutoSize = true;
-            this.chkLogDebugMsgs.Location = new System.Drawing.Point(20, 45);
-            this.chkLogDebugMsgs.Name = "chkLogDebugMsgs";
-            this.chkLogDebugMsgs.Size = new System.Drawing.Size(58, 17);
-            this.chkLogDebugMsgs.TabIndex = 35;
-            this.chkLogDebugMsgs.Text = "Debug";
-            this.chkLogDebugMsgs.UseVisualStyleBackColor = true;
             // 
             // groupBoxPopups
             // 
-            this.groupBoxPopups.Controls.Add(this.chkPopupError);
+            this.groupBoxPopups.Controls.Add(this.tblPopups);
             this.groupBoxPopups.Controls.Add(this.labelPopupShowTypes);
-            this.groupBoxPopups.Controls.Add(this.chkPopupWarning);
-            this.groupBoxPopups.Controls.Add(this.chkPopupDebug);
-            this.groupBoxPopups.Controls.Add(this.chkPopupInfo);
-            this.groupBoxPopups.Location = new System.Drawing.Point(4, 297);
+            this.groupBoxPopups.Location = new System.Drawing.Point(4, 301);
             this.groupBoxPopups.Name = "groupBoxPopups";
-            this.groupBoxPopups.Size = new System.Drawing.Size(603, 135);
+            this.groupBoxPopups.Size = new System.Drawing.Size(603, 75);
             this.groupBoxPopups.TabIndex = 30;
             this.groupBoxPopups.TabStop = false;
             this.groupBoxPopups.Text = "Pop-ups";
             // 
+            // tblPopups
+            // 
+            this.tblPopups.ColumnCount = 4;
+            this.tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblPopups.Controls.Add(this.chkPopupError, 3, 0);
+            this.tblPopups.Controls.Add(this.chkPopupWarning, 2, 0);
+            this.tblPopups.Controls.Add(this.chkPopupDebug, 0, 0);
+            this.tblPopups.Controls.Add(this.chkPopupInfo, 1, 0);
+            this.tblPopups.Location = new System.Drawing.Point(9, 42);
+            this.tblPopups.Name = "tblPopups";
+            this.tblPopups.RowCount = 1;
+            this.tblPopups.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblPopups.Size = new System.Drawing.Size(485, 22);
+            this.tblPopups.TabIndex = 0;
+            // 
             // chkPopupError
             // 
             this.chkPopupError.AutoSize = true;
-            this.chkPopupError.Location = new System.Drawing.Point(22, 110);
+            this.chkPopupError.Location = new System.Drawing.Point(366, 3);
             this.chkPopupError.Name = "chkPopupError";
             this.chkPopupError.Size = new System.Drawing.Size(48, 17);
             this.chkPopupError.TabIndex = 43;
             this.chkPopupError.Text = "Error";
             this.chkPopupError.UseVisualStyleBackColor = true;
             // 
-            // labelPopupShowTypes
-            // 
-            this.labelPopupShowTypes.AutoSize = true;
-            this.labelPopupShowTypes.Location = new System.Drawing.Point(8, 25);
-            this.labelPopupShowTypes.Name = "labelPopupShowTypes";
-            this.labelPopupShowTypes.Size = new System.Drawing.Size(139, 13);
-            this.labelPopupShowTypes.TabIndex = 33;
-            this.labelPopupShowTypes.Text = "Show these message types:";
-            // 
             // chkPopupWarning
             // 
             this.chkPopupWarning.AutoSize = true;
-            this.chkPopupWarning.Location = new System.Drawing.Point(22, 87);
+            this.chkPopupWarning.Location = new System.Drawing.Point(245, 3);
             this.chkPopupWarning.Name = "chkPopupWarning";
             this.chkPopupWarning.Size = new System.Drawing.Size(66, 17);
             this.chkPopupWarning.TabIndex = 42;
@@ -346,7 +371,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkPopupDebug
             // 
             this.chkPopupDebug.AutoSize = true;
-            this.chkPopupDebug.Location = new System.Drawing.Point(22, 41);
+            this.chkPopupDebug.Location = new System.Drawing.Point(3, 3);
             this.chkPopupDebug.Name = "chkPopupDebug";
             this.chkPopupDebug.Size = new System.Drawing.Size(58, 17);
             this.chkPopupDebug.TabIndex = 40;
@@ -356,12 +381,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // chkPopupInfo
             // 
             this.chkPopupInfo.AutoSize = true;
-            this.chkPopupInfo.Location = new System.Drawing.Point(22, 64);
+            this.chkPopupInfo.Location = new System.Drawing.Point(124, 3);
             this.chkPopupInfo.Name = "chkPopupInfo";
             this.chkPopupInfo.Size = new System.Drawing.Size(78, 17);
             this.chkPopupInfo.TabIndex = 41;
             this.chkPopupInfo.Text = "Information";
             this.chkPopupInfo.UseVisualStyleBackColor = true;
+            // 
+            // labelPopupShowTypes
+            // 
+            this.labelPopupShowTypes.AutoSize = true;
+            this.labelPopupShowTypes.Location = new System.Drawing.Point(6, 26);
+            this.labelPopupShowTypes.Name = "labelPopupShowTypes";
+            this.labelPopupShowTypes.Size = new System.Drawing.Size(139, 13);
+            this.labelPopupShowTypes.TabIndex = 33;
+            this.labelPopupShowTypes.Text = "Show these message types:";
             // 
             // NotificationsPage
             // 
@@ -377,8 +411,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxNotifications.PerformLayout();
             this.groupBoxLogging.ResumeLayout(false);
             this.groupBoxLogging.PerformLayout();
+            this.tblLogging.ResumeLayout(false);
+            this.tblLogging.PerformLayout();
             this.groupBoxPopups.ResumeLayout(false);
             this.groupBoxPopups.PerformLayout();
+            this.tblPopups.ResumeLayout(false);
+            this.tblPopups.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -412,5 +450,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.CheckBox chkPopupDebug;
         private System.Windows.Forms.CheckBox chkPopupInfo;
         private System.Windows.Forms.CheckBox chkLogToCurrentDir;
+        private System.Windows.Forms.TableLayoutPanel tblLogging;
+        private System.Windows.Forms.TableLayoutPanel tblPopups;
     }
 }

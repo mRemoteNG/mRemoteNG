@@ -257,5 +257,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         }
 
         #endregion
+
+        private void lblReleaseChannel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
