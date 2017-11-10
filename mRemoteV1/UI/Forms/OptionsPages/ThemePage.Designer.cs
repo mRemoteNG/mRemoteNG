@@ -49,7 +49,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.btnThemeDelete.Location = new System.Drawing.Point(535, 1);
             this.btnThemeDelete.Name = "btnThemeDelete";
             this.btnThemeDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnThemeDelete.TabIndex = 6;
+            this.btnThemeDelete.TabIndex = 2;
             this.btnThemeDelete.Text = "&Delete";
             this.btnThemeDelete.UseVisualStyleBackColor = true;
             this.btnThemeDelete.Click += new System.EventHandler(this.btnThemeDelete_Click);
@@ -60,7 +60,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.btnThemeNew.Location = new System.Drawing.Point(454, 1);
             this.btnThemeNew.Name = "btnThemeNew";
             this.btnThemeNew.Size = new System.Drawing.Size(75, 23);
-            this.btnThemeNew.TabIndex = 5;
+            this.btnThemeNew.TabIndex = 1;
             this.btnThemeNew.Text = "&New";
             this.btnThemeNew.UseVisualStyleBackColor = true;
             this.btnThemeNew.Click += new System.EventHandler(this.btnThemeNew_Click);
@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboTheme.Location = new System.Drawing.Point(3, 2);
             this.cboTheme.Name = "cboTheme";
             this.cboTheme.Size = new System.Drawing.Size(445, 21);
-            this.cboTheme.TabIndex = 4;
+            this.cboTheme.TabIndex = 0;
             this.cboTheme.SelectionChangeCommitted += new System.EventHandler(this.cboTheme_SelectionChangeCommitted);
             // 
             // themeEnableCombo
@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.themeEnableCombo.Location = new System.Drawing.Point(487, 457);
             this.themeEnableCombo.Name = "themeEnableCombo";
             this.themeEnableCombo.Size = new System.Drawing.Size(100, 17);
-            this.themeEnableCombo.TabIndex = 8;
+            this.themeEnableCombo.TabIndex = 5;
             this.themeEnableCombo.Text = "Enable Themes";
             this.themeEnableCombo.UseVisualStyleBackColor = true;
             this.themeEnableCombo.CheckedChanged += new System.EventHandler(this.themeEnableCombo_CheckedChanged);
@@ -104,7 +104,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.listPalette.Name = "listPalette";
             this.listPalette.ShowGroups = false;
             this.listPalette.Size = new System.Drawing.Size(604, 413);
-            this.listPalette.TabIndex = 9;
+            this.listPalette.TabIndex = 3;
             this.listPalette.UseCellFormatEvents = true;
             this.listPalette.UseCompatibleStateImageBehavior = false;
             this.listPalette.View = System.Windows.Forms.View.Details;
@@ -135,7 +135,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.labelRestart.Location = new System.Drawing.Point(23, 457);
             this.labelRestart.Name = "labelRestart";
             this.labelRestart.Size = new System.Drawing.Size(399, 13);
-            this.labelRestart.TabIndex = 10;
+            this.labelRestart.TabIndex = 4;
             this.labelRestart.Text = "Warning: Restart is required to disable the themes or to completely apply a new o" +
     "ne";
             // 

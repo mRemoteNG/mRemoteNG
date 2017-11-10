@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblUpdatesExplanation.Location = new System.Drawing.Point(3, 2);
             this.lblUpdatesExplanation.Name = "lblUpdatesExplanation";
             this.lblUpdatesExplanation.Size = new System.Drawing.Size(536, 32);
-            this.lblUpdatesExplanation.TabIndex = 3;
+            this.lblUpdatesExplanation.TabIndex = 0;
             this.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates." +
     "";
             // 
@@ -77,15 +77,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlUpdateCheck.Controls.Add(this.cboUpdateCheckFrequency);
             this.pnlUpdateCheck.Location = new System.Drawing.Point(3, 38);
             this.pnlUpdateCheck.Name = "pnlUpdateCheck";
-            this.pnlUpdateCheck.Size = new System.Drawing.Size(604, 96);
-            this.pnlUpdateCheck.TabIndex = 4;
+            this.pnlUpdateCheck.Size = new System.Drawing.Size(604, 79);
+            this.pnlUpdateCheck.TabIndex = 1;
             // 
             // btnUpdateCheckNow
             // 
             this.btnUpdateCheckNow._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnUpdateCheckNow.Location = new System.Drawing.Point(3, 48);
+            this.btnUpdateCheckNow.Location = new System.Drawing.Point(3, 49);
             this.btnUpdateCheckNow.Name = "btnUpdateCheckNow";
-            this.btnUpdateCheckNow.Size = new System.Drawing.Size(120, 32);
+            this.btnUpdateCheckNow.Size = new System.Drawing.Size(120, 23);
             this.btnUpdateCheckNow.TabIndex = 2;
             this.btnUpdateCheckNow.Text = "Check Now";
             this.btnUpdateCheckNow.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkCheckForUpdatesOnStartup._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkCheckForUpdatesOnStartup.AutoSize = true;
-            this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(3, 3);
+            this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(3, 4);
             this.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup";
             this.chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(113, 17);
             this.chkCheckForUpdatesOnStartup.TabIndex = 0;
@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboUpdateCheckFrequency._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
             this.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUpdateCheckFrequency.FormattingEnabled = true;
-            this.cboUpdateCheckFrequency.Location = new System.Drawing.Point(3, 21);
+            this.cboUpdateCheckFrequency.Location = new System.Drawing.Point(3, 22);
             this.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency";
             this.cboUpdateCheckFrequency.Size = new System.Drawing.Size(120, 21);
             this.cboUpdateCheckFrequency.TabIndex = 1;
@@ -117,12 +117,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.Control;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(3, 42);
+            this.textBox1.Location = new System.Drawing.Point(3, 47);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(366, 44);
-            this.textBox1.TabIndex = 5;
+            this.textBox1.TabIndex = 2;
             this.textBox1.Text = "Stable channel includes final releases only.\r\nBeta channel includes Betas & Relea" +
     "se Candidates.\r\nDevelopment Channel includes Alphas, Betas & Release Candidates." +
     "";
@@ -130,10 +130,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblReleaseChannel
             // 
             this.lblReleaseChannel.AutoSize = true;
-            this.lblReleaseChannel.Location = new System.Drawing.Point(0, -1);
+            this.lblReleaseChannel.Location = new System.Drawing.Point(0, 3);
+            this.lblReleaseChannel.Margin = new System.Windows.Forms.Padding(3);
             this.lblReleaseChannel.Name = "lblReleaseChannel";
             this.lblReleaseChannel.Size = new System.Drawing.Size(91, 13);
-            this.lblReleaseChannel.TabIndex = 4;
+            this.lblReleaseChannel.TabIndex = 0;
             this.lblReleaseChannel.Text = "Release Channel:";
             // 
             // cboReleaseChannel
@@ -141,10 +142,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboReleaseChannel._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
             this.cboReleaseChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboReleaseChannel.FormattingEnabled = true;
-            this.cboReleaseChannel.Location = new System.Drawing.Point(3, 15);
+            this.cboReleaseChannel.Location = new System.Drawing.Point(3, 20);
             this.cboReleaseChannel.Name = "cboReleaseChannel";
             this.cboReleaseChannel.Size = new System.Drawing.Size(120, 21);
-            this.cboReleaseChannel.TabIndex = 3;
+            this.cboReleaseChannel.TabIndex = 1;
             // 
             // pnlProxy
             // 
@@ -153,10 +154,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlProxy.Controls.Add(this.chkUseProxyAuthentication);
             this.pnlProxy.Controls.Add(this.pnlProxyAuthentication);
             this.pnlProxy.Controls.Add(this.btnTestProxy);
-            this.pnlProxy.Location = new System.Drawing.Point(0, 243);
+            this.pnlProxy.Location = new System.Drawing.Point(0, 226);
             this.pnlProxy.Name = "pnlProxy";
-            this.pnlProxy.Size = new System.Drawing.Size(610, 219);
-            this.pnlProxy.TabIndex = 5;
+            this.pnlProxy.Size = new System.Drawing.Size(610, 203);
+            this.pnlProxy.TabIndex = 3;
             // 
             // pnlProxyBasic
             // 
@@ -223,7 +224,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkUseProxyForAutomaticUpdates._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkUseProxyForAutomaticUpdates.AutoSize = true;
-            this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(3, 0);
+            this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(6, 0);
             this.chkUseProxyForAutomaticUpdates.Name = "chkUseProxyForAutomaticUpdates";
             this.chkUseProxyForAutomaticUpdates.Size = new System.Drawing.Size(168, 17);
             this.chkUseProxyForAutomaticUpdates.TabIndex = 0;
@@ -296,7 +297,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.btnTestProxy._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnTestProxy.Location = new System.Drawing.Point(6, 172);
             this.btnTestProxy.Name = "btnTestProxy";
-            this.btnTestProxy.Size = new System.Drawing.Size(120, 32);
+            this.btnTestProxy.Size = new System.Drawing.Size(120, 23);
             this.btnTestProxy.TabIndex = 4;
             this.btnTestProxy.Text = "Test Proxy";
             this.btnTestProxy.UseVisualStyleBackColor = true;
@@ -307,10 +308,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlReleaseChannel.Controls.Add(this.textBox1);
             this.pnlReleaseChannel.Controls.Add(this.lblReleaseChannel);
             this.pnlReleaseChannel.Controls.Add(this.cboReleaseChannel);
-            this.pnlReleaseChannel.Location = new System.Drawing.Point(3, 140);
+            this.pnlReleaseChannel.Location = new System.Drawing.Point(3, 123);
             this.pnlReleaseChannel.Name = "pnlReleaseChannel";
             this.pnlReleaseChannel.Size = new System.Drawing.Size(604, 97);
-            this.pnlReleaseChannel.TabIndex = 6;
+            this.pnlReleaseChannel.TabIndex = 2;
             // 
             // UpdatesPage
             // 

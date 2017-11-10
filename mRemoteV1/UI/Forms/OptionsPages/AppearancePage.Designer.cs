@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblLanguageRestartRequired.Location = new System.Drawing.Point(3, 56);
             this.lblLanguageRestartRequired.Name = "lblLanguageRestartRequired";
             this.lblLanguageRestartRequired.Size = new System.Drawing.Size(380, 13);
-            this.lblLanguageRestartRequired.TabIndex = 9;
+            this.lblLanguageRestartRequired.TabIndex = 2;
             this.lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect.";
             // 
             // cboLanguage
@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboLanguage.Name = "cboLanguage";
             this.cboLanguage.Size = new System.Drawing.Size(304, 21);
             this.cboLanguage.Sorted = true;
-            this.cboLanguage.TabIndex = 8;
+            this.cboLanguage.TabIndex = 1;
             // 
             // lblLanguage
             // 
@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblLanguage.Location = new System.Drawing.Point(3, 3);
             this.lblLanguage.Name = "lblLanguage";
             this.lblLanguage.Size = new System.Drawing.Size(55, 13);
-            this.lblLanguage.TabIndex = 7;
+            this.lblLanguage.TabIndex = 0;
             this.lblLanguage.Text = "Language";
             // 
             // chkShowFullConnectionsFilePathInTitle
@@ -76,7 +76,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 127);
             this.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle";
             this.chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(239, 17);
-            this.chkShowFullConnectionsFilePathInTitle.TabIndex = 11;
+            this.chkShowFullConnectionsFilePathInTitle.TabIndex = 4;
             this.chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title";
             this.chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = true;
             // 
@@ -87,7 +87,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(3, 104);
             this.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree";
             this.chkShowDescriptionTooltipsInTree.Size = new System.Drawing.Size(231, 17);
-            this.chkShowDescriptionTooltipsInTree.TabIndex = 10;
+            this.chkShowDescriptionTooltipsInTree.TabIndex = 3;
             this.chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree";
             this.chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = true;
             // 
@@ -98,7 +98,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 173);
             this.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon";
             this.chkShowSystemTrayIcon.Size = new System.Drawing.Size(172, 17);
-            this.chkShowSystemTrayIcon.TabIndex = 12;
+            this.chkShowSystemTrayIcon.TabIndex = 5;
             this.chkShowSystemTrayIcon.Text = "Always show System Tray Icon";
             this.chkShowSystemTrayIcon.UseVisualStyleBackColor = true;
             // 
@@ -109,7 +109,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 196);
             this.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray";
             this.chkMinimizeToSystemTray.Size = new System.Drawing.Size(139, 17);
-            this.chkMinimizeToSystemTray.TabIndex = 13;
+            this.chkMinimizeToSystemTray.TabIndex = 6;
             this.chkMinimizeToSystemTray.Text = "Minimize to System Tray";
             this.chkMinimizeToSystemTray.UseVisualStyleBackColor = true;
             // 
