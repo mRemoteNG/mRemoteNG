@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkReconnectOnStart.Location = new System.Drawing.Point(3, 26);
             this.chkReconnectOnStart.Name = "chkReconnectOnStart";
             this.chkReconnectOnStart.Size = new System.Drawing.Size(273, 17);
-            this.chkReconnectOnStart.TabIndex = 7;
+            this.chkReconnectOnStart.TabIndex = 1;
             this.chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup";
             this.chkReconnectOnStart.UseVisualStyleBackColor = true;
             // 
@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSaveConsOnExit.Location = new System.Drawing.Point(3, 2);
             this.chkSaveConsOnExit.Name = "chkSaveConsOnExit";
             this.chkSaveConsOnExit.Size = new System.Drawing.Size(146, 17);
-            this.chkSaveConsOnExit.TabIndex = 6;
+            this.chkSaveConsOnExit.TabIndex = 0;
             this.chkSaveConsOnExit.Text = "Save connections on exit";
             this.chkSaveConsOnExit.UseVisualStyleBackColor = true;
             // 
@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSingleInstance.Location = new System.Drawing.Point(3, 50);
             this.chkSingleInstance.Name = "chkSingleInstance";
             this.chkSingleInstance.Size = new System.Drawing.Size(366, 17);
-            this.chkSingleInstance.TabIndex = 8;
+            this.chkSingleInstance.TabIndex = 2;
             this.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)";
             this.chkSingleInstance.UseVisualStyleBackColor = true;
             // 
@@ -77,7 +77,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkProperInstallationOfComponentsAtStartup.Location = new System.Drawing.Point(3, 74);
             this.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup";
             this.chkProperInstallationOfComponentsAtStartup.Size = new System.Drawing.Size(262, 17);
-            this.chkProperInstallationOfComponentsAtStartup.TabIndex = 9;
+            this.chkProperInstallationOfComponentsAtStartup.TabIndex = 3;
             this.chkProperInstallationOfComponentsAtStartup.Text = "Check proper installation of components at startup";
             this.chkProperInstallationOfComponentsAtStartup.UseVisualStyleBackColor = true;
             // 

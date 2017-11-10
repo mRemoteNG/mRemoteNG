@@ -47,7 +47,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkAlwaysShowPanelTabs.Location = new System.Drawing.Point(3, 3);
             this.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs";
             this.chkAlwaysShowPanelTabs.Size = new System.Drawing.Size(139, 17);
-            this.chkAlwaysShowPanelTabs.TabIndex = 12;
+            this.chkAlwaysShowPanelTabs.TabIndex = 0;
             this.chkAlwaysShowPanelTabs.Text = "Always show panel tabs";
             this.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = true;
             // 
@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkIdentifyQuickConnectTabs.Location = new System.Drawing.Point(3, 95);
             this.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs";
             this.chkIdentifyQuickConnectTabs.Size = new System.Drawing.Size(293, 17);
-            this.chkIdentifyQuickConnectTabs.TabIndex = 16;
+            this.chkIdentifyQuickConnectTabs.TabIndex = 4;
             this.chkIdentifyQuickConnectTabs.Text = global::mRemoteNG.Language.strIdentifyQuickConnectTabs;
             this.chkIdentifyQuickConnectTabs.UseVisualStyleBackColor = true;
             // 
@@ -69,7 +69,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkOpenNewTabRightOfSelected.Location = new System.Drawing.Point(3, 26);
             this.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected";
             this.chkOpenNewTabRightOfSelected.Size = new System.Drawing.Size(280, 17);
-            this.chkOpenNewTabRightOfSelected.TabIndex = 13;
+            this.chkOpenNewTabRightOfSelected.TabIndex = 1;
             this.chkOpenNewTabRightOfSelected.Text = "Open new tab to the right of the currently selected tab";
             this.chkOpenNewTabRightOfSelected.UseVisualStyleBackColor = true;
             // 
@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkAlwaysShowPanelSelectionDlg.Location = new System.Drawing.Point(3, 141);
             this.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg";
             this.chkAlwaysShowPanelSelectionDlg.Size = new System.Drawing.Size(317, 17);
-            this.chkAlwaysShowPanelSelectionDlg.TabIndex = 18;
+            this.chkAlwaysShowPanelSelectionDlg.TabIndex = 6;
             this.chkAlwaysShowPanelSelectionDlg.Text = "Always show panel selection dialog when opening connectins";
             this.chkAlwaysShowPanelSelectionDlg.UseVisualStyleBackColor = true;
             // 
@@ -91,7 +91,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowLogonInfoOnTabs.Location = new System.Drawing.Point(3, 49);
             this.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs";
             this.chkShowLogonInfoOnTabs.Size = new System.Drawing.Size(203, 17);
-            this.chkShowLogonInfoOnTabs.TabIndex = 14;
+            this.chkShowLogonInfoOnTabs.TabIndex = 2;
             this.chkShowLogonInfoOnTabs.Text = "Show logon information on tab names";
             this.chkShowLogonInfoOnTabs.UseVisualStyleBackColor = true;
             // 
@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkDoubleClickClosesTab.Location = new System.Drawing.Point(3, 118);
             this.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab";
             this.chkDoubleClickClosesTab.Size = new System.Drawing.Size(159, 17);
-            this.chkDoubleClickClosesTab.TabIndex = 17;
+            this.chkDoubleClickClosesTab.TabIndex = 5;
             this.chkDoubleClickClosesTab.Text = "Double click on tab closes it";
             this.chkDoubleClickClosesTab.UseVisualStyleBackColor = true;
             // 
@@ -113,7 +113,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowProtocolOnTabs.Location = new System.Drawing.Point(3, 72);
             this.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs";
             this.chkShowProtocolOnTabs.Size = new System.Drawing.Size(166, 17);
-            this.chkShowProtocolOnTabs.TabIndex = 15;
+            this.chkShowProtocolOnTabs.TabIndex = 3;
             this.chkShowProtocolOnTabs.Text = "Show protocols on tab names";
             this.chkShowProtocolOnTabs.UseVisualStyleBackColor = true;
             // 

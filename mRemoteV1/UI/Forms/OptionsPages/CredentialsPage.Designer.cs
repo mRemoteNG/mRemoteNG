@@ -58,7 +58,7 @@
             this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 3);
             this.pnlDefaultCredentials.Name = "pnlDefaultCredentials";
             this.pnlDefaultCredentials.Size = new System.Drawing.Size(596, 175);
-            this.pnlDefaultCredentials.TabIndex = 13;
+            this.pnlDefaultCredentials.TabIndex = 0;
             // 
             // radCredentialsCustom
             // 
