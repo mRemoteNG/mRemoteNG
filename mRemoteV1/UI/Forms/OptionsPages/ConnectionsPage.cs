@@ -32,7 +32,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
 
             lblAutoSave1.Text = Language.strAutoSaveEvery;
-            lblAutoSave2.Text = Language.strAutoSaveMins;
 
             lblClosingConnections.Text = Language.strLabelClosingConnections;
             radCloseWarnAll.Text = Language.strRadioCloseWarnAll;

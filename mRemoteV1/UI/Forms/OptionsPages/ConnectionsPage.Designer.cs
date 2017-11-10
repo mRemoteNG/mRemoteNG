@@ -31,47 +31,37 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionsPage));
-            this.pnlRdpReconnectionCount = new System.Windows.Forms.Panel();
-            this.numRDPConTimeout = new Controls.Base.NGNumericUpDown();
-            this.lblRDPConTimeout = new Controls.Base.NGLabel();
-            this.lblRdpReconnectionCount = new Controls.Base.NGLabel();
-            this.numRdpReconnectionCount = new Controls.Base.NGNumericUpDown();
-            this.chkSingleClickOnConnectionOpensIt = new Controls.Base.NGCheckBox();
-            this.chkHostnameLikeDisplayName = new Controls.Base.NGCheckBox();
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt = new Controls.Base.NGCheckBox();
-            this.pnlAutoSave = new System.Windows.Forms.Panel();
-            this.lblAutoSave1 = new Controls.Base.NGLabel();
-            this.numAutoSave = new Controls.Base.NGNumericUpDown();
-            this.lblAutoSave2 = new Controls.Base.NGLabel();
+            this.numRDPConTimeout = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
+            this.lblRDPConTimeout = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblRdpReconnectionCount = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.numRdpReconnectionCount = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
+            this.chkSingleClickOnConnectionOpensIt = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkHostnameLikeDisplayName = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.lblAutoSave1 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.numAutoSave = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
             this.pnlConfirmCloseConnection = new System.Windows.Forms.Panel();
-            this.lblClosingConnections = new Controls.Base.NGLabel();
-            this.radCloseWarnAll = new Controls.Base.NGRadioButton();
-            this.radCloseWarnMultiple = new Controls.Base.NGRadioButton();
-            this.radCloseWarnExit = new Controls.Base.NGRadioButton();
-            this.radCloseWarnNever = new Controls.Base.NGRadioButton();
-            this.pnlRdpReconnectionCount.SuspendLayout();
+            this.lblClosingConnections = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.radCloseWarnAll = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.radCloseWarnMultiple = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.radCloseWarnExit = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.radCloseWarnNever = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.pnlRdpReconnectionCount = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlRdpConnectionTimeout = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRdpReconnectionCount)).BeginInit();
-            this.pnlAutoSave.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).BeginInit();
             this.pnlConfirmCloseConnection.SuspendLayout();
+            this.pnlRdpReconnectionCount.SuspendLayout();
+            this.pnlRdpConnectionTimeout.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlRdpReconnectionCount
-            // 
-            this.pnlRdpReconnectionCount.Controls.Add(this.numRDPConTimeout);
-            this.pnlRdpReconnectionCount.Controls.Add(this.lblRDPConTimeout);
-            this.pnlRdpReconnectionCount.Controls.Add(this.lblRdpReconnectionCount);
-            this.pnlRdpReconnectionCount.Controls.Add(this.numRdpReconnectionCount);
-            this.pnlRdpReconnectionCount.Location = new System.Drawing.Point(3, 69);
-            this.pnlRdpReconnectionCount.Name = "pnlRdpReconnectionCount";
-            this.pnlRdpReconnectionCount.Size = new System.Drawing.Size(596, 29);
-            this.pnlRdpReconnectionCount.TabIndex = 10;
             // 
             // numRDPConTimeout
             // 
             this.numRDPConTimeout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numRDPConTimeout.Location = new System.Drawing.Point(369, 7);
+            this.numRDPConTimeout.Location = new System.Drawing.Point(270, 3);
             this.numRDPConTimeout.Maximum = new decimal(new int[] {
             600,
             0,
@@ -93,26 +83,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblRDPConTimeout
             // 
-            this.lblRDPConTimeout.Location = new System.Drawing.Point(226, 9);
+            this.lblRDPConTimeout.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblRDPConTimeout.Location = new System.Drawing.Point(3, 6);
             this.lblRDPConTimeout.Name = "lblRDPConTimeout";
             this.lblRDPConTimeout.Size = new System.Drawing.Size(137, 13);
             this.lblRDPConTimeout.TabIndex = 2;
             this.lblRDPConTimeout.Text = "RDP Connection Timeout";
-            this.lblRDPConTimeout.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblRDPConTimeout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblRdpReconnectionCount
             // 
-            this.lblRdpReconnectionCount.Location = new System.Drawing.Point(3, 9);
+            this.lblRdpReconnectionCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblRdpReconnectionCount.Location = new System.Drawing.Point(3, 6);
             this.lblRdpReconnectionCount.Name = "lblRdpReconnectionCount";
             this.lblRdpReconnectionCount.Size = new System.Drawing.Size(139, 13);
             this.lblRdpReconnectionCount.TabIndex = 0;
             this.lblRdpReconnectionCount.Text = "RDP Reconnection Count";
-            this.lblRdpReconnectionCount.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblRdpReconnectionCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // numRdpReconnectionCount
             // 
             this.numRdpReconnectionCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numRdpReconnectionCount.Location = new System.Drawing.Point(145, 6);
+            this.numRdpReconnectionCount.Location = new System.Drawing.Point(270, 3);
             this.numRdpReconnectionCount.Maximum = new decimal(new int[] {
             20,
             0,
@@ -129,8 +121,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSingleClickOnConnectionOpensIt
             // 
+            this.chkSingleClickOnConnectionOpensIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSingleClickOnConnectionOpensIt.AutoSize = true;
-            this.chkSingleClickOnConnectionOpensIt.Location = new System.Drawing.Point(3, 0);
+            this.chkSingleClickOnConnectionOpensIt.Location = new System.Drawing.Point(3, 3);
             this.chkSingleClickOnConnectionOpensIt.Name = "chkSingleClickOnConnectionOpensIt";
             this.chkSingleClickOnConnectionOpensIt.Size = new System.Drawing.Size(191, 17);
             this.chkSingleClickOnConnectionOpensIt.TabIndex = 7;
@@ -139,8 +132,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkHostnameLikeDisplayName
             // 
+            this.chkHostnameLikeDisplayName._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkHostnameLikeDisplayName.AutoSize = true;
-            this.chkHostnameLikeDisplayName.Location = new System.Drawing.Point(3, 46);
+            this.chkHostnameLikeDisplayName.Location = new System.Drawing.Point(3, 49);
             this.chkHostnameLikeDisplayName.Name = "chkHostnameLikeDisplayName";
             this.chkHostnameLikeDisplayName.Size = new System.Drawing.Size(328, 17);
             this.chkHostnameLikeDisplayName.TabIndex = 9;
@@ -149,37 +143,29 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSingleClickOnOpenedConnectionSwitchesToIt
             // 
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.AutoSize = true;
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = new System.Drawing.Point(3, 23);
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = new System.Drawing.Point(3, 26);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt";
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(457, 17);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 8;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = global::mRemoteNG.Language.strSingleClickOnOpenConnectionSwitchesToIt;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = true;
             // 
-            // pnlAutoSave
-            // 
-            this.pnlAutoSave.Controls.Add(this.lblAutoSave1);
-            this.pnlAutoSave.Controls.Add(this.numAutoSave);
-            this.pnlAutoSave.Controls.Add(this.lblAutoSave2);
-            this.pnlAutoSave.Location = new System.Drawing.Point(3, 104);
-            this.pnlAutoSave.Name = "pnlAutoSave";
-            this.pnlAutoSave.Size = new System.Drawing.Size(596, 29);
-            this.pnlAutoSave.TabIndex = 11;
-            // 
             // lblAutoSave1
             // 
-            this.lblAutoSave1.Location = new System.Drawing.Point(6, 9);
+            this.lblAutoSave1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblAutoSave1.Location = new System.Drawing.Point(3, 6);
             this.lblAutoSave1.Name = "lblAutoSave1";
-            this.lblAutoSave1.Size = new System.Drawing.Size(288, 13);
+            this.lblAutoSave1.Size = new System.Drawing.Size(261, 13);
             this.lblAutoSave1.TabIndex = 0;
-            this.lblAutoSave1.Text = "Auto Save every:";
-            this.lblAutoSave1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblAutoSave1.Text = "Auto Save  in Minutes (0 means disabled)";
+            this.lblAutoSave1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // numAutoSave
             // 
             this.numAutoSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numAutoSave.Location = new System.Drawing.Point(300, 7);
+            this.numAutoSave.Location = new System.Drawing.Point(270, 3);
             this.numAutoSave.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -189,15 +175,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.numAutoSave.Size = new System.Drawing.Size(53, 20);
             this.numAutoSave.TabIndex = 1;
             // 
-            // lblAutoSave2
-            // 
-            this.lblAutoSave2.AutoSize = true;
-            this.lblAutoSave2.Location = new System.Drawing.Point(359, 9);
-            this.lblAutoSave2.Name = "lblAutoSave2";
-            this.lblAutoSave2.Size = new System.Drawing.Size(135, 13);
-            this.lblAutoSave2.TabIndex = 2;
-            this.lblAutoSave2.Text = "Minutes (0 means disabled)";
-            // 
             // pnlConfirmCloseConnection
             // 
             this.pnlConfirmCloseConnection.Controls.Add(this.lblClosingConnections);
@@ -205,15 +182,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnMultiple);
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnExit);
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnNever);
-            this.pnlConfirmCloseConnection.Location = new System.Drawing.Point(3, 139);
+            this.pnlConfirmCloseConnection.Location = new System.Drawing.Point(3, 171);
             this.pnlConfirmCloseConnection.Name = "pnlConfirmCloseConnection";
-            this.pnlConfirmCloseConnection.Size = new System.Drawing.Size(596, 137);
+            this.pnlConfirmCloseConnection.Size = new System.Drawing.Size(595, 137);
             this.pnlConfirmCloseConnection.TabIndex = 13;
             // 
             // lblClosingConnections
             // 
             this.lblClosingConnections.AutoSize = true;
-            this.lblClosingConnections.Location = new System.Drawing.Point(3, 9);
+            this.lblClosingConnections.Location = new System.Drawing.Point(3, 12);
             this.lblClosingConnections.Name = "lblClosingConnections";
             this.lblClosingConnections.Size = new System.Drawing.Size(136, 13);
             this.lblClosingConnections.TabIndex = 0;
@@ -222,7 +199,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // radCloseWarnAll
             // 
             this.radCloseWarnAll.AutoSize = true;
-            this.radCloseWarnAll.Location = new System.Drawing.Point(16, 31);
+            this.radCloseWarnAll.Location = new System.Drawing.Point(16, 34);
             this.radCloseWarnAll.Name = "radCloseWarnAll";
             this.radCloseWarnAll.Size = new System.Drawing.Size(194, 17);
             this.radCloseWarnAll.TabIndex = 1;
@@ -233,7 +210,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // radCloseWarnMultiple
             // 
             this.radCloseWarnMultiple.AutoSize = true;
-            this.radCloseWarnMultiple.Location = new System.Drawing.Point(16, 54);
+            this.radCloseWarnMultiple.Location = new System.Drawing.Point(16, 57);
             this.radCloseWarnMultiple.Name = "radCloseWarnMultiple";
             this.radCloseWarnMultiple.Size = new System.Drawing.Size(254, 17);
             this.radCloseWarnMultiple.TabIndex = 2;
@@ -244,7 +221,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // radCloseWarnExit
             // 
             this.radCloseWarnExit.AutoSize = true;
-            this.radCloseWarnExit.Location = new System.Drawing.Point(16, 77);
+            this.radCloseWarnExit.Location = new System.Drawing.Point(16, 80);
             this.radCloseWarnExit.Name = "radCloseWarnExit";
             this.radCloseWarnExit.Size = new System.Drawing.Size(216, 17);
             this.radCloseWarnExit.TabIndex = 3;
@@ -255,7 +232,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // radCloseWarnNever
             // 
             this.radCloseWarnNever.AutoSize = true;
-            this.radCloseWarnNever.Location = new System.Drawing.Point(16, 100);
+            this.radCloseWarnNever.Location = new System.Drawing.Point(16, 103);
             this.radCloseWarnNever.Name = "radCloseWarnNever";
             this.radCloseWarnNever.Size = new System.Drawing.Size(226, 17);
             this.radCloseWarnNever.TabIndex = 4;
@@ -263,40 +240,83 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.radCloseWarnNever.Text = "Do not warn me when closing connections";
             this.radCloseWarnNever.UseVisualStyleBackColor = true;
             // 
+            // pnlRdpReconnectionCount
+            // 
+            this.pnlRdpReconnectionCount.ColumnCount = 2;
+            this.pnlRdpReconnectionCount.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.pnlRdpReconnectionCount.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.pnlRdpReconnectionCount.Controls.Add(this.lblRdpReconnectionCount, 0, 0);
+            this.pnlRdpReconnectionCount.Controls.Add(this.numRdpReconnectionCount, 1, 0);
+            this.pnlRdpReconnectionCount.Location = new System.Drawing.Point(4, 75);
+            this.pnlRdpReconnectionCount.Name = "pnlRdpReconnectionCount";
+            this.pnlRdpReconnectionCount.RowCount = 1;
+            this.pnlRdpReconnectionCount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlRdpReconnectionCount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.pnlRdpReconnectionCount.Size = new System.Drawing.Size(595, 26);
+            this.pnlRdpReconnectionCount.TabIndex = 14;
+            // 
+            // pnlRdpConnectionTimeout
+            // 
+            this.pnlRdpConnectionTimeout.ColumnCount = 2;
+            this.pnlRdpConnectionTimeout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.pnlRdpConnectionTimeout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.pnlRdpConnectionTimeout.Controls.Add(this.numRDPConTimeout, 1, 0);
+            this.pnlRdpConnectionTimeout.Controls.Add(this.lblRDPConTimeout, 0, 0);
+            this.pnlRdpConnectionTimeout.Location = new System.Drawing.Point(4, 107);
+            this.pnlRdpConnectionTimeout.Name = "pnlRdpConnectionTimeout";
+            this.pnlRdpConnectionTimeout.RowCount = 1;
+            this.pnlRdpConnectionTimeout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlRdpConnectionTimeout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.pnlRdpConnectionTimeout.Size = new System.Drawing.Size(595, 26);
+            this.pnlRdpConnectionTimeout.TabIndex = 15;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tableLayoutPanel1.Controls.Add(this.numAutoSave, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblAutoSave1, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 139);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(595, 26);
+            this.tableLayoutPanel1.TabIndex = 16;
+            // 
             // ConnectionsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.pnlRdpConnectionTimeout);
             this.Controls.Add(this.pnlRdpReconnectionCount);
             this.Controls.Add(this.chkSingleClickOnConnectionOpensIt);
             this.Controls.Add(this.chkHostnameLikeDisplayName);
             this.Controls.Add(this.chkSingleClickOnOpenedConnectionSwitchesToIt);
-            this.Controls.Add(this.pnlAutoSave);
             this.Controls.Add(this.pnlConfirmCloseConnection);
             this.Name = "ConnectionsPage";
             this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
-            this.pnlRdpReconnectionCount.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRdpReconnectionCount)).EndInit();
-            this.pnlAutoSave.ResumeLayout(false);
-            this.pnlAutoSave.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).EndInit();
             this.pnlConfirmCloseConnection.ResumeLayout(false);
             this.pnlConfirmCloseConnection.PerformLayout();
+            this.pnlRdpReconnectionCount.ResumeLayout(false);
+            this.pnlRdpConnectionTimeout.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
 		}
-		internal System.Windows.Forms.Panel pnlRdpReconnectionCount;
 		internal Controls.Base.NGLabel lblRdpReconnectionCount;
 		internal Controls.Base.NGCheckBox chkSingleClickOnConnectionOpensIt;
 		internal Controls.Base.NGCheckBox chkHostnameLikeDisplayName;
 		internal Controls.Base.NGCheckBox chkSingleClickOnOpenedConnectionSwitchesToIt;
-		internal System.Windows.Forms.Panel pnlAutoSave;
 		internal Controls.Base.NGLabel lblAutoSave1;
 		internal Controls.Base.NGNumericUpDown numAutoSave;
-		internal Controls.Base.NGLabel lblAutoSave2;
 		internal System.Windows.Forms.Panel pnlConfirmCloseConnection;
 		internal Controls.Base.NGLabel lblClosingConnections;
 		internal Controls.Base.NGRadioButton radCloseWarnAll;
@@ -306,5 +326,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal Controls.Base.NGNumericUpDown numRDPConTimeout;
         internal Controls.Base.NGLabel lblRDPConTimeout;
         internal Controls.Base.NGNumericUpDown numRdpReconnectionCount;
+        private System.Windows.Forms.TableLayoutPanel pnlRdpReconnectionCount;
+        private System.Windows.Forms.TableLayoutPanel pnlRdpConnectionTimeout;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

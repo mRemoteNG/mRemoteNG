@@ -31,19 +31,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabsPanelsPage));
-            this.chkAlwaysShowPanelTabs = new Controls.Base.NGCheckBox();
-            this.chkIdentifyQuickConnectTabs = new Controls.Base.NGCheckBox();
-            this.chkOpenNewTabRightOfSelected = new Controls.Base.NGCheckBox();
-            this.chkAlwaysShowPanelSelectionDlg = new Controls.Base.NGCheckBox();
-            this.chkShowLogonInfoOnTabs = new Controls.Base.NGCheckBox();
-            this.chkDoubleClickClosesTab = new Controls.Base.NGCheckBox();
-            this.chkShowProtocolOnTabs = new Controls.Base.NGCheckBox();
+            this.chkAlwaysShowPanelTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkIdentifyQuickConnectTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkOpenNewTabRightOfSelected = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkAlwaysShowPanelSelectionDlg = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkShowLogonInfoOnTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkDoubleClickClosesTab = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkShowProtocolOnTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.SuspendLayout();
             // 
             // chkAlwaysShowPanelTabs
             // 
+            this.chkAlwaysShowPanelTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkAlwaysShowPanelTabs.AutoSize = true;
-            this.chkAlwaysShowPanelTabs.Location = new System.Drawing.Point(3, 0);
+            this.chkAlwaysShowPanelTabs.Location = new System.Drawing.Point(3, 3);
             this.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs";
             this.chkAlwaysShowPanelTabs.Size = new System.Drawing.Size(139, 17);
             this.chkAlwaysShowPanelTabs.TabIndex = 12;
@@ -52,8 +53,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkIdentifyQuickConnectTabs
             // 
+            this.chkIdentifyQuickConnectTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkIdentifyQuickConnectTabs.AutoSize = true;
-            this.chkIdentifyQuickConnectTabs.Location = new System.Drawing.Point(3, 92);
+            this.chkIdentifyQuickConnectTabs.Location = new System.Drawing.Point(3, 95);
             this.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs";
             this.chkIdentifyQuickConnectTabs.Size = new System.Drawing.Size(293, 17);
             this.chkIdentifyQuickConnectTabs.TabIndex = 16;
@@ -62,8 +64,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkOpenNewTabRightOfSelected
             // 
+            this.chkOpenNewTabRightOfSelected._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkOpenNewTabRightOfSelected.AutoSize = true;
-            this.chkOpenNewTabRightOfSelected.Location = new System.Drawing.Point(3, 23);
+            this.chkOpenNewTabRightOfSelected.Location = new System.Drawing.Point(3, 26);
             this.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected";
             this.chkOpenNewTabRightOfSelected.Size = new System.Drawing.Size(280, 17);
             this.chkOpenNewTabRightOfSelected.TabIndex = 13;
@@ -72,8 +75,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkAlwaysShowPanelSelectionDlg
             // 
+            this.chkAlwaysShowPanelSelectionDlg._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkAlwaysShowPanelSelectionDlg.AutoSize = true;
-            this.chkAlwaysShowPanelSelectionDlg.Location = new System.Drawing.Point(3, 138);
+            this.chkAlwaysShowPanelSelectionDlg.Location = new System.Drawing.Point(3, 141);
             this.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg";
             this.chkAlwaysShowPanelSelectionDlg.Size = new System.Drawing.Size(317, 17);
             this.chkAlwaysShowPanelSelectionDlg.TabIndex = 18;
@@ -82,8 +86,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowLogonInfoOnTabs
             // 
+            this.chkShowLogonInfoOnTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowLogonInfoOnTabs.AutoSize = true;
-            this.chkShowLogonInfoOnTabs.Location = new System.Drawing.Point(3, 46);
+            this.chkShowLogonInfoOnTabs.Location = new System.Drawing.Point(3, 49);
             this.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs";
             this.chkShowLogonInfoOnTabs.Size = new System.Drawing.Size(203, 17);
             this.chkShowLogonInfoOnTabs.TabIndex = 14;
@@ -92,8 +97,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkDoubleClickClosesTab
             // 
+            this.chkDoubleClickClosesTab._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkDoubleClickClosesTab.AutoSize = true;
-            this.chkDoubleClickClosesTab.Location = new System.Drawing.Point(3, 115);
+            this.chkDoubleClickClosesTab.Location = new System.Drawing.Point(3, 118);
             this.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab";
             this.chkDoubleClickClosesTab.Size = new System.Drawing.Size(159, 17);
             this.chkDoubleClickClosesTab.TabIndex = 17;
@@ -102,8 +108,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowProtocolOnTabs
             // 
+            this.chkShowProtocolOnTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowProtocolOnTabs.AutoSize = true;
-            this.chkShowProtocolOnTabs.Location = new System.Drawing.Point(3, 69);
+            this.chkShowProtocolOnTabs.Location = new System.Drawing.Point(3, 72);
             this.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs";
             this.chkShowProtocolOnTabs.Size = new System.Drawing.Size(166, 17);
             this.chkShowProtocolOnTabs.TabIndex = 15;
