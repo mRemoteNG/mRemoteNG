@@ -23,7 +23,8 @@ namespace mRemoteNGTests.Config.DataProviders
         public void Teardown()
         {
             var tempFilePath = FileTestHelpers.GetAppSpecificTempDirectory();
-            Directory.Delete(tempFilePath, true);
+            if (Directory.Exists(tempFilePath))
+                Directory.Delete(tempFilePath, true);
         }
 
         [Test]
