@@ -77,6 +77,10 @@ IP TextBox
 Copyright © 2005 mawnkay
 http://www.codeproject.com/Articles/11576/IP-TextBox
 
+PortableSettingsProvider	
+Copyright © 2014 crdx
+https://github.com/crdx/PortableSettingsProvider
+
 
 Included Components
 ===================
