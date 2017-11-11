@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.DataProviders
 {
-    public class FileDataProviderWithRollingBackupTests
+	public class FileDataProviderWithRollingBackupTests
     {
         private FileDataProviderWithRollingBackup _dataProvider;
         private string _testFilePath;
@@ -25,9 +25,9 @@ namespace mRemoteNGTests.Config.DataProviders
         [TearDown]
         public void Teardown()
         {
-            var allTestFileMatcher = Path.GetFileName(_testFilePath) + "*";
-            FileTestHelpers.DeleteFilesInDirectory(_testFileDirectory, allTestFileMatcher);
-        }
+			if (Directory.Exists(_testFileDirectory))
+				Directory.Delete(_testFileDirectory, true);
+		}
 
         [Test]
         public void RollingBackupCreatedIfRegularBackupExists()

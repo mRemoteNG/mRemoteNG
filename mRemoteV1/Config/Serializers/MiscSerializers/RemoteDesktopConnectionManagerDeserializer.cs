@@ -15,6 +15,9 @@ namespace mRemoteNG.Config.Serializers
 {
     public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
+        private static int _schemaVersion; /* 1 = RDCMan v2.2
+                                       3 = RDCMan v2.7  */
+
         public ConnectionTreeModel Deserialize(string rdcmConnectionsXml)
         {
             var connectionTreeModel = new ConnectionTreeModel();
@@ -37,34 +40,45 @@ namespace mRemoteNG.Config.Serializers
 
         private static void VerifySchemaVersion(XmlNode rdcManNode)
         {
-            var schemaVersion = Convert.ToInt32(rdcManNode?.Attributes?["schemaVersion"].Value);
-            if (schemaVersion != 1)
+            _schemaVersion = Convert.ToInt32(rdcManNode?.Attributes?["schemaVersion"].Value);
+            if (_schemaVersion != 1 && _schemaVersion != 3)
             {
-                throw new FileFormatException($"Unsupported schema version ({schemaVersion}).");
+                throw (new FileFormatException($"Unsupported schema version ({_schemaVersion})."));
             }
         }
 
         private static void VerifyFileVersion(XmlNode rdcManNode)
         {
-            var versionNode = rdcManNode.SelectSingleNode("./version")?.InnerText;
-            if (versionNode != null)
+            var versionAttribute = rdcManNode?.Attributes?["programVersion"]?.Value;
+            if (versionAttribute != null)
             {
-                var version = new Version(versionNode);
-                if (!(version == new Version(2, 2)))
+                var version = new Version(versionAttribute);
+                if (!(version == new Version(2, 7)))
                 {
                     throw new FileFormatException($"Unsupported file version ({version}).");
                 }
             }
             else
             {
-                throw new FileFormatException("Unknown file version");
+                var versionNode = rdcManNode.SelectSingleNode("./version")?.InnerText;
+                if (versionNode != null)
+                {
+                    var version = new Version(versionNode);
+                    if (!(version == new Version(2, 2)))
+                    {
+                        throw new FileFormatException($"Unsupported file version ({version}).");
+                    }
+                }
+                else
+                {
+                    throw new FileFormatException("Unknown file version");
+                }
             }
         }
 
         private static void ImportFileOrGroup(XmlNode xmlNode, ContainerInfo parentContainer)
         {
-            var propertiesNode = xmlNode.SelectSingleNode("./properties");
-            var newContainer = ImportContainer(propertiesNode, parentContainer);
+            var newContainer = ImportContainer(xmlNode, parentContainer);
 
             var childNodes = xmlNode.SelectNodes("./group|./server");
             if (childNodes == null) return;
@@ -85,9 +99,19 @@ namespace mRemoteNG.Config.Serializers
 
         private static ContainerInfo ImportContainer(XmlNode containerPropertiesNode, ContainerInfo parentContainer)
         {
+            if (_schemaVersion == 1)
+            {
+                // Program Verison 2.2 wraps all setting inside the Properties tags 
+                containerPropertiesNode = containerPropertiesNode.SelectSingleNode("./properties");
+            }
             var newContainer = new ContainerInfo();
             var connectionInfo = ConnectionInfoFromXml(containerPropertiesNode);
             newContainer.CopyFrom(connectionInfo);
+            if (_schemaVersion == 3)
+            {
+                // Program Verison 2.7 wraps these properties
+                containerPropertiesNode = containerPropertiesNode.SelectSingleNode("./properties");
+            }
             newContainer.Name = containerPropertiesNode?.SelectSingleNode("./name")?.InnerText ?? Language.strNewFolder;
             newContainer.IsExpanded = bool.Parse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText ?? "false");
             parentContainer.AddChild(newContainer);
@@ -104,13 +128,12 @@ namespace mRemoteNG.Config.Serializers
         {
             var connectionInfo = new ConnectionInfo {Protocol = ProtocolType.RDP};
 
-            var hostname = xmlNode.SelectSingleNode("./name")?.InnerText;
 
-            var displayName = xmlNode.SelectSingleNode("./displayName")?.InnerText ?? Language.strNewConnection;
-
-            connectionInfo.Name = displayName;
-            connectionInfo.Description = xmlNode.SelectSingleNode("./comment")?.InnerText;
-            connectionInfo.Hostname = hostname;
+            var propertiesNode = xmlNode.SelectSingleNode("./properties");
+            if (_schemaVersion == 1) propertiesNode = xmlNode;  // Version 2.2 defines the container name at the root instead         
+            connectionInfo.Hostname = propertiesNode.SelectSingleNode("./name")?.InnerText;
+            connectionInfo.Name = propertiesNode.SelectSingleNode("./displayName")?.InnerText ?? connectionInfo.Hostname;
+            connectionInfo.Description = propertiesNode.SelectSingleNode("./comment")?.InnerText ?? String.Empty;
 
             var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
             if (logonCredentialsNode?.Attributes?["inherit"].Value == "None")
@@ -118,7 +141,14 @@ namespace mRemoteNG.Config.Serializers
                 connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText;
 
                 var passwordNode = logonCredentialsNode.SelectSingleNode("./password");
-                connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
+                if (_schemaVersion == 1) // Version 2.2 allows clear text passwords
+                {
+                    connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
+                }
+                else
+                {
+                    connectionInfo.Password = DecryptRdcManPassword(passwordNode?.InnerText);
+                }
 
                 connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText;
             }
@@ -151,7 +181,7 @@ namespace mRemoteNG.Config.Serializers
                 connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText;
 
                 var passwordNode = gatewaySettingsNode.SelectSingleNode("./password");
-                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
+                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
 
                 connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText;
                 // ./logonMethod
@@ -207,12 +237,15 @@ namespace mRemoteNG.Config.Serializers
                 switch (localResourcesNode.SelectSingleNode("./audioRedirection")?.InnerText)
                 {
                     case "0": // Bring to this computer
+                    case "Client":
                         connectionInfo.RedirectSound = RdpProtocol.RDPSounds.BringToThisComputer;
                         break;
                     case "1": // Leave at remote computer
+                    case "Remote":
                         connectionInfo.RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer;
                         break;
                     case "2": // Do not play
+                    case "NoSound":
                         connectionInfo.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
                         break;
                 }
@@ -224,12 +257,15 @@ namespace mRemoteNG.Config.Serializers
                 switch (localResourcesNode.SelectSingleNode("./keyboardHook")?.InnerText)
                 {
                     case "0": // On the local computer
+                    case "Client":
                         connectionInfo.RedirectKeys = false;
                         break;
                     case "1": // On the remote computer
+                    case "Remote":
                         connectionInfo.RedirectKeys = true;
                         break;
                     case "2": // In full screen mode only
+                    case "FullScreenClient":
                         connectionInfo.RedirectKeys = false;
                         break;
                 }
@@ -257,12 +293,15 @@ namespace mRemoteNG.Config.Serializers
                 switch (securitySettingsNode.SelectSingleNode("./authentication")?.InnerText)
                 {
                     case "0": // No authentication
+                    case "None":
                         connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.NoAuth;
                         break;
                     case "1": // Do not connect if authentication fails
+                    case "Required":
                         connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.AuthRequired;
                         break;
                     case "2": // Warn if authentication fails
+                    case "Warn":
                         connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth;
                         break;
                 }

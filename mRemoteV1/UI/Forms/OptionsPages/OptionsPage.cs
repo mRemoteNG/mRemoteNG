@@ -59,7 +59,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.Name = "OptionsPage";
             this.Size = new System.Drawing.Size(610, 489);
-            this.ResumeLayout(false); 
+            this.ResumeLayout(false);
+
         }
 
         public virtual void ApplyTheme()

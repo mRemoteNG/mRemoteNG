@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
@@ -319,4 +320,327 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1453B37F-8621-499E-B0B2-6091F76DC0BB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mRemoteNGTests</RootNamespace>
+    <AssemblyName>mRemoteNGTests</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Portable|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug Portable\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PORTABLE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
+    <OutputPath>bin\Release Portable\</OutputPath>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NUnitForms">
+      <HintPath>nUnitForms\bin\NUnitForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="App\UpdaterTests.cs" />
+    <Compile Include="BinaryFileTests.cs" />
+    <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgsTests.cs" />
+    <Compile Include="Config\DataProviders\FileBackupCreatorTests.cs" />
+    <Compile Include="Config\DataProviders\FileDataProviderTests.cs" />
+    <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackupTests.cs" />
+    <Compile Include="Config\Serializers\DataTableDeserializerTests.cs" />
+    <Compile Include="Config\CredentialHarvesterTests.cs" />
+    <Compile Include="Config\CredentialRecordLoaderTests.cs" />
+    <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIdsTests.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializerTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialPasswordDecryptorDecoratorTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialPasswordEncryptorDecoratorTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormatTests.cs" />
+    <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManager27DeserializerTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentCompilerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentEncryptorTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsSerializerTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialRecordDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialSerializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializerTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion22To23UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion23To24UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion24To25UpgraderTests.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion25To26UpgraderTests.cs" />
+    <Compile Include="Config\Settings\DockPanelSerializerTests.cs" />
+    <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
+    <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
+    <Compile Include="Connection\Protocol\IntegratedProgramTests.cs" />
+    <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
+    <Compile Include="Credential\CompositeRepositoryUnlockerTests.cs" />
+    <Compile Include="Credential\CredentialChangedEventArgsTests.cs" />
+    <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />
+    <Compile Include="Credential\CredentialDomainUserComparerTests.cs" />
+    <Compile Include="Credential\CredentialRecordTypeConverterTests.cs" />
+    <Compile Include="Credential\CredentialRepositoryListTests.cs" />
+    <Compile Include="Credential\CredentialRecordTests.cs" />
+    <Compile Include="Credential\CredentialServiceFacadeTests.cs" />
+    <Compile Include="IntegrationTests\XmlCredentialSerializerLifeCycleTests.cs" />
+    <Compile Include="IntegrationTests\XmlSerializationLifeCycleTests.cs" />
+    <Compile Include="Messages\MessageCollectorTests.cs" />
+    <Compile Include="Messages\MessageWriters\MessageTypeFilterDecoratorTests.cs" />
+    <Compile Include="Messages\MessageWriters\OnlyLogMessageFilterTests.cs" />
+    <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
+    <Compile Include="Security\Authentication\PasswordAuthenticatorTests.cs" />
+    <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGeneratorTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesSpecialCharactersConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesUpperCaseConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraintTests.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
+    <Compile Include="Security\RandomGeneratorTests.cs" />
+    <Compile Include="Security\SecureStringExtensionsTests.cs" />
+    <Compile Include="TestHelpers\ConnectionTreeModelBuilder.cs" />
+    <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
+    <Compile Include="TestHelpers\FileTestHelpers.cs" />
+    <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
+    <Compile Include="Tools\FullyObservableCollectionTests.cs" />
+    <Compile Include="Tools\MaybeTests.cs" />
+    <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
+    <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
+    <Compile Include="Tree\ConnectionTreeModelTests.cs" />
+    <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
+    <Compile Include="Connection\ConnectionInfoTests.cs" />
+    <Compile Include="Connection\DefaultConnectionInfoTests.cs" />
+    <Compile Include="Connection\DefaultConnectionInheritanceTests.cs" />
+    <Compile Include="Container\ContainerInfoTests.cs" />
+    <Compile Include="IntegrationTests\ConnectionInheritanceIntegrationTests.cs" />
+    <Compile Include="ListViewTester.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\AeadCryptographyProviderTests.cs" />
+    <Compile Include="Security\CryptographyProviderFactoryTests.cs" />
+    <Compile Include="Security\EncryptedSecureStringTests.cs" />
+    <Compile Include="Security\LegacyRijndaelCryptographyProviderTests.cs" />
+    <Compile Include="Tree\ConnectionTreeTests.cs" />
+    <Compile Include="Tree\ClickHandlers\ExpandNodeClickHandlerTests.cs" />
+    <Compile Include="Tree\NodeSearcherTests.cs" />
+    <Compile Include="Tree\ClickHandlers\OpenConnectionClickHandlerTests.cs" />
+    <Compile Include="Tree\PreviouslyOpenedFolderExpanderTests.cs" />
+    <Compile Include="Tree\PreviousSessionOpenerTests.cs" />
+    <Compile Include="Tree\RootNodeInfoTests.cs" />
+    <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
+    <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
+    <Compile Include="UI\Controls\PageSequenceTests.cs" />
+    <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBoxTestForm.designer.cs">
+      <DependentUpon>SecureTextBoxTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBoxTests.cs" />
+    <Compile Include="UI\Controls\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTestForm.designer.cs">
+      <DependentUpon>TextBoxExtensionsTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTests.cs" />
+    <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
+    <Compile Include="UI\Forms\PasswordFormTests.cs" />
+    <Compile Include="UI\WindowListTests.cs" />
+    <Compile Include="UI\Window\ConnectionTreeWindowTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\SecureTextBoxTestForm.resx">
+      <DependentUpon>SecureTextBoxTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\TextBoxExtensionsTestForm.resx">
+      <DependentUpon>TextBoxExtensionsTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\confCons_v2_5.xml" />
+    <None Include="Resources\test_puttyConnectionManager_database.dat" />
+    <None Include="Resources\test_rdcman_badVersionNumber.rdg" />
+    <None Include="Resources\test_rdcman_noversion.rdg" />
+    <None Include="Resources\test_rdcman_v2_2_badschemaversion.rdg" />
+    <None Include="Resources\test_rdcman_v2_2_schema1.rdg" />
+    <None Include="Resources\test_RDCMan_v2_7_schema3.rdg" />
+    <None Include="Resources\test_remotedesktopconnection.rdp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_6.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_6_fullencryption.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_6_passwordis_Password.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_6_passwordis_Password_fullencryption.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_6_5k-iterations.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_5_fullencryption.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confCons_v2_5_passwordis_Password_fullencryption.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\beta-update-portable.txt" />
+    <Content Include="Resources\beta-update.txt" />
+    <Content Include="Resources\dev-update-portable.txt" />
+    <Content Include="Resources\dev-update.txt" />
+    <Content Include="Resources\update-portable.txt" />
+    <Content Include="Resources\update.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mRemoteV1\mRemoteV1.csproj">
+      <Project>{4934a491-40bc-4e5b-9166-ea1169a220f6}</Project>
+      <Name>mRemoteV1</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+>>>>>>> develop
 </Project>
