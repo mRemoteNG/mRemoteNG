@@ -53,9 +53,6 @@ namespace mRemoteNG.UI.Controls
             CMenToolbarShowText.Click += cMenToolbarShowText_Click;
         }
 
- 
-
-
         #region Ext Apps Toolbar
         private void cMenToolbarShowText_Click(object sender, EventArgs e)
         {
@@ -66,6 +63,8 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
+                SuspendLayout();
+
                 for (var index = Items.Count - 1; index >= 0; index--)
                     Items[index].Dispose();
                 Items.Clear();
@@ -87,6 +86,10 @@ namespace mRemoteNG.UI.Controls
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddExternalToolsToToolBarFailed, ex);
+            }
+            finally
+            {
+                ResumeLayout(true);
             }
         }
 
