@@ -83,7 +83,7 @@ namespace mRemoteNG.Config.Connections
         #region SQL
 		private void SaveToSql()
 		{
-            var sqlConnector = new SqlDatabaseConnector();
+            var sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
             sqlConnector.Connect();
             var databaseVersionVerifier = new SqlDatabaseVersionVerifier(sqlConnector);
 

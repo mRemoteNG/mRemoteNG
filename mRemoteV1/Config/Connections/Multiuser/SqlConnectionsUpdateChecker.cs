@@ -19,7 +19,7 @@ namespace mRemoteNG.Config.Connections
 
         public SqlConnectionsUpdateChecker()
         {
-            _sqlConnector = new SqlDatabaseConnector();
+            _sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
             _sqlQuery = new SqlCommand("SELECT * FROM tblUpdate", _sqlConnector.SqlConnection);
             _lastUpdateTime = default(DateTime);
             _lastDatabaseUpdateTime = default(DateTime);
