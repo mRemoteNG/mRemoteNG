@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Window
 	{
         private readonly ExternalAppsSaver _externalAppsSaver;
         private ExternalTool _selectedTool;
-        private ThemeManager _themeManager;
+        private readonly ThemeManager _themeManager;
 
         public ExternalToolsWindow()
 		{
@@ -25,8 +25,6 @@ namespace mRemoteNG.UI.Window
             _themeManager.ThemeChanged += ApplyTheme;
             _externalAppsSaver = new ExternalAppsSaver();
 		}
-
-        
 
         #region Private Methods
         #region Event Handlers
@@ -115,9 +113,11 @@ namespace mRemoteNG.UI.Window
 					DisplayNameTextBox.Text = _selectedTool.DisplayName;
 					FilenameTextBox.Text = _selectedTool.FileName;
 					ArgumentsCheckBox.Text = _selectedTool.Arguments;
+                    WorkingDirTextBox.Text = _selectedTool.WorkingDir;
 					WaitForExitCheckBox.Checked = _selectedTool.WaitForExit;
 					TryToIntegrateCheckBox.Checked = _selectedTool.TryIntegrate;
                     ShowOnToolbarCheckBox.Checked = _selectedTool.ShowOnToolbar;
+                    RunElevatedCheckBox.Checked = _selectedTool.RunElevated;
 				}
 				else
 				{
@@ -150,9 +150,11 @@ namespace mRemoteNG.UI.Window
 				_selectedTool.DisplayName = DisplayNameTextBox.Text;
 				_selectedTool.FileName = FilenameTextBox.Text;
 				_selectedTool.Arguments = ArgumentsCheckBox.Text;
+                _selectedTool.WorkingDir = WorkingDirTextBox.Text;
 				_selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
 				_selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;
                 _selectedTool.ShowOnToolbar = ShowOnToolbarCheckBox.Checked;
+                _selectedTool.RunElevated = RunElevatedCheckBox.Checked;
 						
 				UpdateToolsListObjView();
 			}
@@ -172,15 +174,36 @@ namespace mRemoteNG.UI.Window
 					if (browseDialog.ShowDialog() == DialogResult.OK)
 					{
 						FilenameTextBox.Text = browseDialog.FileName;
-					}
+                        PropertyControl_ChangedOrLostFocus(this, e);
+
+                    }
 				}
-						
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.", ex);
 			}
-		}
+        }
+
+        private void BrowseWorkingDir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var browseDialog = new FolderBrowserDialog())
+                {
+                    if (browseDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        WorkingDirTextBox.Text = browseDialog.SelectedPath;
+                        PropertyControl_ChangedOrLostFocus(this, e);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.BrowseButton_Click() failed.", ex: ex, logOnly: true);
+            }
+        }
 
         private void TryToIntegrateCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
@@ -249,7 +272,7 @@ namespace mRemoteNG.UI.Window
             PropertiesGroupBox.BackColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Background;
             PropertiesGroupBox.ForeColor = _themeManager.ActiveTheme.Theme.ColorPalette.CommandBarMenuDefault.Text;
             //Toollist grouping
-            ToolsListObjView.AlwaysGroupByColumn = this.FilenameColumnHeader;
+            //ToolsListObjView.AlwaysGroupByColumn = FilenameColumnHeader;
         }
 
         private void UpdateToolsListObjView(ExternalTool selectTool = null)
@@ -272,10 +295,11 @@ namespace mRemoteNG.UI.Window
 				{
 					selectedTools.Add(selectTool);
 				}
-						
+				
 				ToolsListObjView.BeginUpdate();
 				ToolsListObjView.Items.Clear(); 
                 ToolsListObjView.SetObjects(Runtime.ExternalToolsService.ExternalTools);
+			    ToolsListObjView.AutoResizeColumns();
                 ToolsListObjView.EndUpdate();
 			}
 			catch (Exception ex)
@@ -288,7 +312,7 @@ namespace mRemoteNG.UI.Window
 		{
             try
             {
-                foreach (Object listViewObject in ToolsListObjView.SelectedObjects)
+                foreach (var listViewObject in ToolsListObjView.SelectedObjects)
 				{
 					
                     ((ExternalTool)listViewObject).Start();
@@ -300,7 +324,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-	}
+    }
 }
  
  
