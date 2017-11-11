@@ -32,10 +32,10 @@ namespace mRemoteNG.UI.Window
 			UpdateToolsListView();
 		}
 
-        private static void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
-		{
+        private void ExternalToolsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
             Config.Settings.SettingsSaver.SaveExternalAppsToXML();
-		}
+        }
 
         private void NewTool_Click(object sender, EventArgs e)
 		{
@@ -114,8 +114,10 @@ namespace mRemoteNG.UI.Window
 					DisplayNameTextBox.Text = _selectedTool.DisplayName;
 					FilenameTextBox.Text = _selectedTool.FileName;
 					ArgumentsCheckBox.Text = _selectedTool.Arguments;
+                    WorkingDirTextBox.Text = _selectedTool.WorkingDir;
 					WaitForExitCheckBox.Checked = _selectedTool.WaitForExit;
 					TryToIntegrateCheckBox.Checked = _selectedTool.TryIntegrate;
+                    RunElevatedCheckBox.Checked = _selectedTool.RunElevated;
 				}
 				else
 				{
@@ -148,8 +150,10 @@ namespace mRemoteNG.UI.Window
 				_selectedTool.DisplayName = DisplayNameTextBox.Text;
 				_selectedTool.FileName = FilenameTextBox.Text;
 				_selectedTool.Arguments = ArgumentsCheckBox.Text;
+                _selectedTool.WorkingDir = WorkingDirTextBox.Text;
 				_selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
 				_selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;
+                _selectedTool.RunElevated = RunElevatedCheckBox.Checked;
 						
 				UpdateToolsListView();
 			}
@@ -169,15 +173,36 @@ namespace mRemoteNG.UI.Window
 					if (browseDialog.ShowDialog() == DialogResult.OK)
 					{
 						FilenameTextBox.Text = browseDialog.FileName;
-					}
+                        PropertyControl_ChangedOrLostFocus(this, e);
+
+                    }
 				}
-						
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.BrowseButton_Click() failed.", ex: ex, logOnly: true);
 			}
-		}
+        }
+
+        private void BrowseWorkingDir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var browseDialog = new FolderBrowserDialog())
+                {
+                    if (browseDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        WorkingDirTextBox.Text = browseDialog.SelectedPath;
+                        PropertyControl_ChangedOrLostFocus(this, e);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(message: "UI.Window.ExternalTools.BrowseButton_Click() failed.", ex: ex, logOnly: true);
+            }
+        }
 
         private void TryToIntegrateCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
@@ -251,9 +276,11 @@ namespace mRemoteNG.UI.Window
 				    var listViewItem = new ListViewItem {Text = externalTool.DisplayName};
 				    listViewItem.SubItems.Add(externalTool.FileName);
 					listViewItem.SubItems.Add(externalTool.Arguments);
-					listViewItem.SubItems.Add(externalTool.WaitForExit.ToString());
+                    listViewItem.SubItems.Add(externalTool.WorkingDir);
+                    listViewItem.SubItems.Add(externalTool.WaitForExit.ToString());
 					listViewItem.SubItems.Add(externalTool.TryIntegrate.ToString());
-					listViewItem.Tag = externalTool;
+                    listViewItem.SubItems.Add(externalTool.RunElevated.ToString());
+                    listViewItem.Tag = externalTool;
 							
 					ToolsListView.Items.Add(listViewItem);
 							
@@ -290,5 +317,5 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-	}
+    }
 }
