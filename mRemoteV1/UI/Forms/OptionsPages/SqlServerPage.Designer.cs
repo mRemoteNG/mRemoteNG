@@ -22,9 +22,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			}
 		}
 			
-		//Required by the Windows Form Designer
-		private System.ComponentModel.Container components = null;
-			
 		//NOTE: The following procedure is required by the Windows Form Designer
 		//It can be modified using the Windows Form Designer.
 		//Do not modify it using the code editor.
@@ -42,6 +39,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtSQLUsername = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.txtSQLServer = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblSQLPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.btnTestConnection = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.imgConnectionStatus = new System.Windows.Forms.PictureBox();
+            this.lblTestConnectionResults = new mRemoteNG.UI.Controls.Base.NGLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSQLDatabaseName
@@ -161,10 +162,43 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblSQLPassword.Text = "Password:";
             this.lblSQLPassword.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // btnTestConnection
+            // 
+            this.btnTestConnection._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnTestConnection.Enabled = false;
+            this.btnTestConnection.Location = new System.Drawing.Point(140, 208);
+            this.btnTestConnection.Name = "btnTestConnection";
+            this.btnTestConnection.Size = new System.Drawing.Size(153, 23);
+            this.btnTestConnection.TabIndex = 11;
+            this.btnTestConnection.Text = "Test Connection";
+            this.btnTestConnection.UseVisualStyleBackColor = true;
+            this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
+            // 
+            // imgConnectionStatus
+            // 
+            this.imgConnectionStatus.Image = global::mRemoteNG.Resources.Help;
+            this.imgConnectionStatus.Location = new System.Drawing.Point(299, 212);
+            this.imgConnectionStatus.Name = "imgConnectionStatus";
+            this.imgConnectionStatus.Size = new System.Drawing.Size(16, 16);
+            this.imgConnectionStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.imgConnectionStatus.TabIndex = 12;
+            this.imgConnectionStatus.TabStop = false;
+            // 
+            // lblTestConnectionResults
+            // 
+            this.lblTestConnectionResults.AutoSize = true;
+            this.lblTestConnectionResults.Location = new System.Drawing.Point(140, 238);
+            this.lblTestConnectionResults.Name = "lblTestConnectionResults";
+            this.lblTestConnectionResults.Size = new System.Drawing.Size(0, 13);
+            this.lblTestConnectionResults.TabIndex = 13;
+            // 
             // SqlServerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblTestConnectionResults);
+            this.Controls.Add(this.imgConnectionStatus);
+            this.Controls.Add(this.btnTestConnection);
             this.Controls.Add(this.lblSQLDatabaseName);
             this.Controls.Add(this.txtSQLDatabaseName);
             this.Controls.Add(this.lblExperimental);
@@ -179,6 +213,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Name = "SqlServerPage";
             this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
+            ((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,6 +229,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		internal Controls.Base.NGTextBox txtSQLUsername;
 		internal Controls.Base.NGTextBox txtSQLServer;
 		internal Controls.Base.NGLabel lblSQLPassword;
-			
-	}
+        private Controls.Base.NGButton btnTestConnection;
+        private System.Windows.Forms.PictureBox imgConnectionStatus;
+        private System.ComponentModel.IContainer components;
+        private Controls.Base.NGLabel lblTestConnectionResults;
+    }
 }

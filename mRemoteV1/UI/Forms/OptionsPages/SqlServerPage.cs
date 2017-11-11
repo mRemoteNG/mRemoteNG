@@ -2,16 +2,20 @@ using System;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public partial class SqlServerPage
     {
+        private SqlDatabaseConnectionTester _databaseConnectionTester;
+
         public SqlServerPage()
         {
             InitializeComponent();
             base.ApplyTheme();
+            _databaseConnectionTester = new SqlDatabaseConnectionTester();
         }
 
         public override string PageName
@@ -32,6 +36,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSQLDatabaseName.Text = Language.strLabelSQLServerDatabaseName;
             lblSQLUsername.Text = Language.strLabelUsername;
             lblSQLPassword.Text = Language.strLabelPassword;
+            btnTestConnection.Text = "Test Connection";
         }
 
         public override void LoadSettings()
@@ -88,6 +93,65 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLDatabaseName.Enabled = chkUseSQLServer.Checked;
             txtSQLUsername.Enabled = chkUseSQLServer.Checked;
             txtSQLPassword.Enabled = chkUseSQLServer.Checked;
+            btnTestConnection.Enabled = chkUseSQLServer.Checked;
+        }
+
+        private async void btnTestConnection_Click(object sender, EventArgs e)
+        {
+            var server = txtSQLServer.Text;
+            var database = txtSQLDatabaseName.Text;
+            var username = txtSQLUsername.Text;
+            var password = txtSQLPassword.Text;
+
+            lblTestConnectionResults.Text = Language.TestingConnection;
+            imgConnectionStatus.Image = Resources.loading_spinner;
+            btnTestConnection.Enabled = false;
+
+            var connectionTestResult = await _databaseConnectionTester.TestConnectivity(server, database, username, password);
+
+            btnTestConnection.Enabled = true;
+
+            switch (connectionTestResult)
+            {
+                case ConnectionTestResult.ConnectionSucceded:
+                    UpdateConnectionImage(true);
+                    lblTestConnectionResults.Text = Language.ConnectionSuccessful;
+                    break;
+                case ConnectionTestResult.ServerNotAccessible:
+                    UpdateConnectionImage(false);
+                    lblTestConnectionResults.Text = BuildTestFailedMessage(string.Format(Language.ServerNotAccessible, server));
+                    break;
+                case ConnectionTestResult.CredentialsRejected:
+                    UpdateConnectionImage(false);
+                    lblTestConnectionResults.Text = BuildTestFailedMessage(string.Format(Language.LoginFailedForUser, username));
+                    break;
+                case ConnectionTestResult.UnknownDatabase:
+                    UpdateConnectionImage(false);
+                    lblTestConnectionResults.Text = BuildTestFailedMessage(string.Format(Language.DatabaseNotAvailable, database));
+                    break;
+                case ConnectionTestResult.UnknownError:
+                    UpdateConnectionImage(false);
+                    lblTestConnectionResults.Text = BuildTestFailedMessage(Language.strRdpErrorUnknown);
+                    break;
+                default:
+                    UpdateConnectionImage(false);
+                    lblTestConnectionResults.Text = BuildTestFailedMessage(Language.strRdpErrorUnknown);
+                    break;
+            }
+        }
+
+        private void UpdateConnectionImage(bool connectionSuccess)
+        {
+            imgConnectionStatus.Image = connectionSuccess
+                ? Resources.tick
+                : Resources.exclamation;
+        }
+
+        private string BuildTestFailedMessage(string specificMessage)
+        {
+            return Language.strConnectionOpenFailed +
+                   Environment.NewLine +
+                   specificMessage;
         }
     }
 }

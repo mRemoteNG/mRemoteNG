@@ -2595,4 +2595,19 @@ This page will walk you through the process of upgrading your connections file o
   <data name="CouldNotFindExternalTool" xml:space="preserve">
     <value>Could not find external tool with name "{0}"</value>
   </data>
+  <data name="TestingConnection" xml:space="preserve">
+    <value>Testing connection</value>
+  </data>
+  <data name="ServerNotAccessible" xml:space="preserve">
+    <value>Server '{0}' was not accessible.</value>
+  </data>
+  <data name="ConnectionSuccessful" xml:space="preserve">
+    <value>Connection successful</value>
+  </data>
+  <data name="LoginFailedForUser" xml:space="preserve">
+    <value>Login failed for user '{0}'.</value>
+  </data>
+  <data name="DatabaseNotAvailable" xml:space="preserve">
+    <value>Database '{0}' not available.</value>
+  </data>
 </root>
