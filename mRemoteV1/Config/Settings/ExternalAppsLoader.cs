@@ -82,6 +82,11 @@ namespace mRemoteNG.Config.Settings
                     extA.TryIntegrate = bool.Parse(xEl.Attributes["TryToIntegrate"].Value);
                 }
 
+                if (xEl.HasAttribute("ShowOnToolbar"))
+                {
+                    extA.ShowOnToolbar = bool.Parse(xEl.Attributes["ShowOnToolbar"].Value);
+                }
+
                 _messageCollector.AddMessage(MessageClass.InformationMsg, $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}", true);
                 Runtime.ExternalToolsService.ExternalTools.Add(extA);
             }

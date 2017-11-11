@@ -72,13 +72,16 @@ namespace mRemoteNG.UI.Controls
 
                 foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
                 {
-                    var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
-                    if (CMenToolbarShowText.Checked)
-                        button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-                    else
-                        button.DisplayStyle = button.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
+                    if (tool.ShowOnToolbar)
+                    {
+                        var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
+                        if (CMenToolbarShowText.Checked)
+                            button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+                        else
+                            button.DisplayStyle = button.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
 
-                    button.Tag = tool;
+                        button.Tag = tool;
+                    }
                 }
             }
             catch (Exception ex)

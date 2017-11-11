@@ -7001,7 +7001,16 @@ namespace mRemoteNG
                 return ResourceManager.GetString("strTryIntegrate", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Try to integrate.
+        /// </summary>
+        internal static string strShowOnToolbar {
+            get {
+                return ResourceManager.GetString("strShowOnToolbar", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>

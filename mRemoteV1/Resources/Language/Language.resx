@@ -2240,6 +2240,9 @@ Message:
   <data name="strTryIntegrate" xml:space="preserve">
     <value>Try to integrate</value>
   </data>
+  <data name="strShowOnToolbar" xml:space="preserve">
+    <value>Show On Toolbar</value>
+  </data>
   <data name="strType" xml:space="preserve">
     <value>Type</value>
   </data>
