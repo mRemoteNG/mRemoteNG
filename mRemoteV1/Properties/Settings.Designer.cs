@@ -2602,5 +2602,17 @@ namespace mRemoteNG {
                 this["ConDefaultPanel"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SaveConnectionsAfterEveryEdit {
+            get {
+                return ((bool)(this["SaveConnectionsAfterEveryEdit"]));
+            }
+            set {
+                this["SaveConnectionsAfterEveryEdit"] = value;
+            }
+        }
     }
 }

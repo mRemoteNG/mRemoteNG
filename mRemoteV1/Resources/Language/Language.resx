@@ -2625,4 +2625,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="DatabaseNotAvailable" xml:space="preserve">
     <value>Database '{0}' not available.</value>
   </data>
+  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+    <value>Save connections after every edit</value>
+  </data>
 </root>
