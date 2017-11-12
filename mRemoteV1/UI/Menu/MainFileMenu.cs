@@ -331,13 +331,11 @@ namespace mRemoteNG.UI.Menu
         private void mMenFileNewConnection_Click(object sender, EventArgs e)
         {
             TreeWindow.ConnectionTree.AddConnection();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void mMenFileNewFolder_Click(object sender, EventArgs e)
         {
             TreeWindow.ConnectionTree.AddFolder();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void mMenFileNew_Click(object sender, EventArgs e)
@@ -372,7 +370,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileSave_Click(object sender, EventArgs e)
         {
-            Runtime.SaveConnectionsAsync();
+            Runtime.ConnectionsService.SaveConnectionsAsync();
         }
 
         private void mMenFileSaveAs_Click(object sender, EventArgs e)
@@ -405,19 +403,16 @@ namespace mRemoteNG.UI.Menu
         private void mMenFileDelete_Click(object sender, EventArgs e)
         {
             TreeWindow.ConnectionTree.DeleteSelectedNode();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void mMenFileRename_Click(object sender, EventArgs e)
         {
             TreeWindow.ConnectionTree.RenameSelectedNode();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void mMenFileDuplicate_Click(object sender, EventArgs e)
         {
             TreeWindow.ConnectionTree.DuplicateSelectedNode();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void mMenReconnectAll_Click(object sender, EventArgs e)

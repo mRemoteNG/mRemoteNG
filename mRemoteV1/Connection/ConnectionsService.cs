@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -16,6 +17,7 @@ namespace mRemoteNG.Connection
 {
     public class ConnectionsService
     {
+        private static readonly object SaveLock = new object();
         private readonly PuttySessionsManager _puttySessionsManager;
 
         public bool IsConnectionsFileLoaded { get; set; }
@@ -168,6 +170,20 @@ namespace mRemoteNG.Connection
             {
                 RemoteConnectionsSyncronizer?.Enable();
             }
+        }
+
+        public void SaveConnectionsAsync()
+        {
+            var t = new Thread(SaveConnectionsBGd);
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+        }
+
+        private void SaveConnectionsBGd()
+        {
+            Monitor.Enter(SaveLock);
+            SaveConnections();
+            Monitor.Exit(SaveLock);
         }
 
         public string GetStartupConnectionFileName()

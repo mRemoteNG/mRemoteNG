@@ -192,21 +192,6 @@ namespace mRemoteNG.App
                 }
             }
         }
-
-        public static void SaveConnectionsAsync()
-        {
-            var t = new Thread(SaveConnectionsBGd);
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
-        }
-
-        private static readonly object SaveLock = new object();
-        private static void SaveConnectionsBGd()
-        {
-            Monitor.Enter(SaveLock);
-            ConnectionsService.SaveConnections();
-            Monitor.Exit(SaveLock);
-        }
         #endregion
     }
 }

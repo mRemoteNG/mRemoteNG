@@ -701,7 +701,7 @@ namespace mRemoteNG.UI.Window
                 UpdateRootInfoNode(e);
                 UpdateInheritanceNode();
                 ShowHideGridItems();
-                Runtime.SaveConnectionsAsync();
+                Runtime.ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
 			{
@@ -1592,7 +1592,7 @@ namespace mRemoteNG.UI.Window
 				connectionInfo.Icon = iconName;
 				_pGrid.Refresh();
 						
-				Runtime.SaveConnectionsAsync();
+				Runtime.ConnectionsService.SaveConnectionsAsync();
 			}
 			catch (Exception ex)
 			{

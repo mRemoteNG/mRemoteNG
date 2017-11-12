@@ -160,13 +160,11 @@ namespace mRemoteNG.UI.Window
         private void cMenTreeAddConnection_Click(object sender, EventArgs e)
 		{
 			olvConnections.AddConnection();
-            Runtime.SaveConnectionsAsync();
 		}
 
         private void cMenTreeAddFolder_Click(object sender, EventArgs e)
 		{
             olvConnections.AddFolder();
-            Runtime.SaveConnectionsAsync();
 		}
 
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
@@ -180,7 +178,6 @@ namespace mRemoteNG.UI.Window
             {
                 _contextMenu.EnableShortcutKeys();
                 ConnectionTree.ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-                Runtime.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {

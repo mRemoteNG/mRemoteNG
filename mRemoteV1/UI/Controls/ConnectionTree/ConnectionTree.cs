@@ -280,7 +280,6 @@ namespace mRemoteNG.UI.Controls
             var newNode = SelectedNode.Clone();
             SelectedNode.Parent.AddChildBelow(newNode, SelectedNode);
             newNode.Parent.SetChildBelow(newNode, SelectedNode);
-            Runtime.SaveConnectionsAsync();
         }
 
         public void RenameSelectedNode()
@@ -294,7 +293,6 @@ namespace mRemoteNG.UI.Controls
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
             if (!NodeDeletionConfirmer.Confirm(SelectedNode)) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
-            Runtime.SaveConnectionsAsync();
         }
 
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
@@ -307,8 +305,6 @@ namespace mRemoteNG.UI.Controls
                 sortTargetAsContainer.SortRecursive(sortDirection);
             else
                 SelectedNode.Parent.SortRecursive(sortDirection);
-
-            Runtime.SaveConnectionsAsync();
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
@@ -389,7 +385,6 @@ namespace mRemoteNG.UI.Controls
                 _nodeInEditMode = false;
                 _allowEdit = false;
                 Windows.ConfigForm.SelectedTreeNode = SelectedNode;
-                Runtime.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {

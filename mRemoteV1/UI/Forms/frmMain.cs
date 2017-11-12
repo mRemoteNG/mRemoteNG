@@ -315,7 +315,7 @@ namespace mRemoteNG.UI.Forms
 		private void tmrAutoSave_Tick(object sender, EventArgs e)
 		{
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Doing AutoSave");
-			Runtime.SaveConnectionsAsync();
+			Runtime.ConnectionsService.SaveConnectionsAsync();
 		}
         #endregion
 		
