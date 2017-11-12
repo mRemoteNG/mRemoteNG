@@ -100,6 +100,7 @@ namespace mRemoteNG.UI.Window
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ToolsListObjView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ToolsListObjView.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.F2Only;
             this.ToolsListObjView.CellEditUseWholeCell = false;
             this.ToolsListObjView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.DisplayNameColumnHeader,
@@ -118,11 +119,16 @@ namespace mRemoteNG.UI.Window
             this.ToolsListObjView.HideSelection = false;
             this.ToolsListObjView.Location = new System.Drawing.Point(0, 0);
             this.ToolsListObjView.Name = "ToolsListObjView";
+            this.ToolsListObjView.RenderNonEditableCheckboxesAsDisabled = true;
+            this.ToolsListObjView.ShowCommandMenuOnRightClick = true;
+            this.ToolsListObjView.ShowGroups = false;
             this.ToolsListObjView.Size = new System.Drawing.Size(827, 186);
             this.ToolsListObjView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ToolsListObjView.TabIndex = 0;
             this.ToolsListObjView.UseCompatibleStateImageBehavior = false;
+            this.ToolsListObjView.UseNotifyPropertyChanged = true;
             this.ToolsListObjView.View = System.Windows.Forms.View.Details;
+            this.ToolsListObjView.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.ToolsListObjView_CellToolTipShowing);
             this.ToolsListObjView.SelectedIndexChanged += new System.EventHandler(this.ToolsListObjView_SelectedIndexChanged);
             this.ToolsListObjView.DoubleClick += new System.EventHandler(this.ToolsListObjView_DoubleClick);
             // 
@@ -151,7 +157,7 @@ namespace mRemoteNG.UI.Window
             this.ArgumentsColumnHeader.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None;
             this.ArgumentsColumnHeader.Groupable = false;
             this.ArgumentsColumnHeader.Text = "Arguments";
-            this.ArgumentsColumnHeader.Width = 160;
+            this.ArgumentsColumnHeader.Width = 100;
             // 
             // WorkingDirColumnHeader
             // 
@@ -160,11 +166,12 @@ namespace mRemoteNG.UI.Window
             this.WorkingDirColumnHeader.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None;
             this.WorkingDirColumnHeader.Groupable = false;
             this.WorkingDirColumnHeader.Text = "Working Directory";
-            this.WorkingDirColumnHeader.Width = 160;
+            this.WorkingDirColumnHeader.Width = 120;
             // 
             // WaitForExitColumnHeader
             // 
             this.WaitForExitColumnHeader.AspectName = "WaitForExit";
+            this.WaitForExitColumnHeader.CheckBoxes = true;
             this.WaitForExitColumnHeader.Groupable = false;
             this.WaitForExitColumnHeader.Text = "Wait for exit";
             this.WaitForExitColumnHeader.Width = 75;
@@ -172,6 +179,7 @@ namespace mRemoteNG.UI.Window
             // TryToIntegrateColumnHeader
             // 
             this.TryToIntegrateColumnHeader.AspectName = "TryIntegrate";
+            this.TryToIntegrateColumnHeader.CheckBoxes = true;
             this.TryToIntegrateColumnHeader.Groupable = false;
             this.TryToIntegrateColumnHeader.Text = "Try To Integrate";
             this.TryToIntegrateColumnHeader.Width = 95;
@@ -179,6 +187,7 @@ namespace mRemoteNG.UI.Window
             // RunElevateHeader
             // 
             this.RunElevateHeader.AspectName = "RunElevated";
+            this.RunElevateHeader.CheckBoxes = true;
             this.RunElevateHeader.Groupable = false;
             this.RunElevateHeader.Text = "Run Elevated";
             this.RunElevateHeader.Width = 95;
@@ -186,9 +195,10 @@ namespace mRemoteNG.UI.Window
             // ShowOnToolbarColumnHeader
             // 
             this.ShowOnToolbarColumnHeader.AspectName = "ShowOnToolbar";
+            this.ShowOnToolbarColumnHeader.CheckBoxes = true;
             this.ShowOnToolbarColumnHeader.Groupable = false;
             this.ShowOnToolbarColumnHeader.Text = "Show On Toolbar";
-            this.ShowOnToolbarColumnHeader.Width = 100;
+            this.ShowOnToolbarColumnHeader.Width = 120;
             // 
             // ToolsContextMenuStrip
             // 
@@ -211,6 +221,7 @@ namespace mRemoteNG.UI.Window
             // 
             // DeleteToolMenuItem
             // 
+            this.DeleteToolMenuItem.Enabled = false;
             this.DeleteToolMenuItem.Image = global::mRemoteNG.Resources.ExtApp_Delete;
             this.DeleteToolMenuItem.Name = "DeleteToolMenuItem";
             this.DeleteToolMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
@@ -225,6 +236,7 @@ namespace mRemoteNG.UI.Window
             // 
             // LaunchToolMenuItem
             // 
+            this.LaunchToolMenuItem.Enabled = false;
             this.LaunchToolMenuItem.Image = global::mRemoteNG.Resources.ExtApp_Start;
             this.LaunchToolMenuItem.Name = "LaunchToolMenuItem";
             this.LaunchToolMenuItem.Size = new System.Drawing.Size(219, 22);
@@ -268,7 +280,6 @@ namespace mRemoteNG.UI.Window
             this.ShowOnToolbarCheckBox.TabIndex = 10;
             this.ShowOnToolbarCheckBox.Text = "Show on toolbar";
             this.ShowOnToolbarCheckBox.UseVisualStyleBackColor = true;
-            this.ShowOnToolbarCheckBox.CheckedChanged += new System.EventHandler(this.ShowOnToolbarCheckBox_CheckedChanged);
             this.ShowOnToolbarCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
             // RunElevatedCheckBox
@@ -325,7 +336,6 @@ namespace mRemoteNG.UI.Window
             this.TryToIntegrateCheckBox.TabIndex = 8;
             this.TryToIntegrateCheckBox.Text = "Try to integrate";
             this.TryToIntegrateCheckBox.UseVisualStyleBackColor = true;
-            this.TryToIntegrateCheckBox.CheckedChanged += new System.EventHandler(this.TryToIntegrateCheckBox_CheckedChanged);
             this.TryToIntegrateCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
             // OptionsLabel
@@ -472,6 +482,7 @@ namespace mRemoteNG.UI.Window
             // 
             // DeleteToolToolstripButton
             // 
+            this.DeleteToolToolstripButton.Enabled = false;
             this.DeleteToolToolstripButton.Image = global::mRemoteNG.Resources.ExtApp_Delete;
             this.DeleteToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DeleteToolToolstripButton.Name = "DeleteToolToolstripButton";
@@ -486,6 +497,7 @@ namespace mRemoteNG.UI.Window
             // 
             // LaunchToolToolstripButton
             // 
+            this.LaunchToolToolstripButton.Enabled = false;
             this.LaunchToolToolstripButton.Image = global::mRemoteNG.Resources.ExtApp_Start;
             this.LaunchToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.LaunchToolToolstripButton.Name = "LaunchToolToolstripButton";

@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Controls
         public ExternalToolsToolStrip()
         {
             Initialize(); 
-            Runtime.ExternalToolsService.ExternalTools.CollectionChanged += (sender, args) => AddExternalToolsToToolBar();
+            Runtime.ExternalToolsService.ExternalTools.CollectionUpdated += (sender, args) => AddExternalToolsToToolBar();
         }
 
         private void Initialize()
