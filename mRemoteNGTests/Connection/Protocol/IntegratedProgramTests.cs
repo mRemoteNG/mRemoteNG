@@ -3,6 +3,7 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;
+using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Window;
 using NUnit.Framework;
 using WeifenLuo.WinFormsUI.Docking;
@@ -44,7 +45,7 @@ namespace mRemoteNGTests.Connection.Protocol
 
 		private void SetExternalToolList(ExternalTool externalTool)
 		{
-			Runtime.ExternalToolsService.ExternalTools = new ObservableCollection<ExternalTool> {externalTool};
+			Runtime.ExternalToolsService.ExternalTools = new FullyObservableCollection<ExternalTool> {externalTool};
 		}
 
 		private InterfaceControl BuildInterfaceControl(string extAppName, ProtocolBase sut)

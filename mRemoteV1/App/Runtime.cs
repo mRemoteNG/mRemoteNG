@@ -138,7 +138,49 @@ namespace mRemoteNG.App
                 if (ex is FileNotFoundException && !withDialog)
                 {
                     MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
-                    ConnectionsService.NewConnections(connectionsLoader.ConnectionFileName);
+
+                    string[] commandButtons =
+                    {
+                        Language.ConfigurationCreateNew,
+                        Language.ConfigurationCustomPath,
+                        Language.ConfigurationImportFile,
+                        Language.strMenuExit
+                    };
+
+                    bool answered = false;
+                    while (!answered)
+                    {
+                        try
+                        {
+                            CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName, Language.ConfigurationFileNotFound, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+
+                            switch (CTaskDialog.CommandButtonResult)
+                            {
+                                case 0:
+                                    ConnectionsService.NewConnections(connectionsLoader.ConnectionFileName);
+                                    answered = true;
+                                    break;
+                                case 1:
+                                    LoadConnections(true);
+                                    answered = true;
+                                    break;
+                                case 2:
+                                    ConnectionsService.NewConnections(connectionsLoader.ConnectionFileName);
+                                    Import.ImportFromFile(ConnectionsService.ConnectionTreeModel.RootNodes[0]);
+                                    answered = true;
+                                    break;
+                                case 3:
+                                    Application.Exit();
+                                    answered = true;
+                                    break;
+                            }                               
+                        }
+                        catch (Exception exc)
+                        {
+                            MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), exc, MessageClass.InformationMsg);
+                        }
+
+                    }
                     return;
                 }
 

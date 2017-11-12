@@ -2240,6 +2240,9 @@ Message:
   <data name="strTryIntegrate" xml:space="preserve">
     <value>Try to integrate</value>
   </data>
+  <data name="strShowOnToolbar" xml:space="preserve">
+    <value>Show On Toolbar</value>
+  </data>
   <data name="strType" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -2594,6 +2597,18 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="CouldNotFindExternalTool" xml:space="preserve">
     <value>Could not find external tool with name "{0}"</value>
+  </data>
+  <data name="ConfigurationCreateNew" xml:space="preserve">
+    <value>Create a New Configuration File</value>
+  </data>
+  <data name="ConfigurationFileNotFound" xml:space="preserve">
+    <value>The Configuration File is Missing.</value>
+  </data>
+  <data name="ConfigurationImportFile" xml:space="preserve">
+    <value>Import an Existing File</value>
+  </data>
+  <data name="ConfigurationCustomPath" xml:space="preserve">
+    <value>Use a Custom File Path</value>
   </data>
   <data name="TestingConnection" xml:space="preserve">
     <value>Testing connection</value>

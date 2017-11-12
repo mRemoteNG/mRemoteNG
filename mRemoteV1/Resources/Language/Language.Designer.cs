@@ -61,6 +61,42 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a New Configuration File.
+        /// </summary>
+        internal static string ConfigurationCreateNew {
+            get {
+                return ResourceManager.GetString("ConfigurationCreateNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use a Custom File Path.
+        /// </summary>
+        internal static string ConfigurationCustomPath {
+            get {
+                return ResourceManager.GetString("ConfigurationCustomPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Configuration File is Missing..
+        /// </summary>
+        internal static string ConfigurationFileNotFound {
+            get {
+                return ResourceManager.GetString("ConfigurationFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import an Existing File.
+        /// </summary>
+        internal static string ConfigurationImportFile {
+            get {
+                return ResourceManager.GetString("ConfigurationImportFile", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Connection successful.
         /// </summary>
         internal static string ConnectionSuccessful {
@@ -7037,7 +7073,16 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strTryIntegrate", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Try to integrate.
+        /// </summary>
+        internal static string strShowOnToolbar {
+            get {
+                return ResourceManager.GetString("strShowOnToolbar", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
