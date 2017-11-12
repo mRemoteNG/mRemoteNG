@@ -143,6 +143,9 @@
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
     <Compile Include="Config\CredentialRepositoryListSaver.cs" />
+    <Compile Include="Config\DatabaseConnectors\ConnectionTestResult.cs" />
+    <Compile Include="Config\DatabaseConnectors\DatabaseConnectorFactory.cs" />
+    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnectionTester.cs" />
     <Compile Include="Config\DataProviders\FileBackupCreator.cs" />
     <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
     <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
@@ -1151,6 +1154,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
+    <None Include="Resources\Images\loading_spinner.gif" />
     <None Include="Resources\Images\FamFamFam\tick.png" />
     <None Include="Resources\Icons\FamFamFam\shield.ico" />
     <None Include="Resources\Icons\FamFamFam\key.ico" />
