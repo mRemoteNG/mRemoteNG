@@ -7,6 +7,7 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Connection
 {
@@ -40,6 +41,9 @@ namespace mRemoteNG.Connection
                 var connectionsLoader = new ConnectionsLoader { ConnectionFileName = filename };
                 ConnectionTreeModel = connectionsLoader.LoadConnections(false);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionTreeModel;
+                IsConnectionsFileLoaded = true;
+                // TODO - the connection service should not know about the ui. UI should update via events from service
+                FrmMain.Default.UpdateWindowTitle();
             }
             catch (Exception ex)
             {

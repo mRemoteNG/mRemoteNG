@@ -430,7 +430,7 @@ namespace mRemoteNG.UI.Forms
 		    connectionWindow?.UpdateSelectedConnection();
 		}
 		
-		private void UpdateWindowTitle()
+		internal void UpdateWindowTitle()
 		{
 			if (InvokeRequired)
 			{
