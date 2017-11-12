@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Themes;
 using mRemoteNG.Tree;
@@ -41,7 +42,9 @@ namespace mRemoteNG.UI.Window
 			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
-		}
+        }
+
+	    
 
         #region Form Stuff
         private void Tree_Load(object sender, EventArgs e)
@@ -102,7 +105,8 @@ namespace mRemoteNG.UI.Window
             SetTreePostSetupActions();
             SetConnectionTreeDoubleClickHandlers();
 	        SetConnectionTreeSingleClickHandlers();
-	    }
+	        Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
+        }
 
 	    private void SetTreePostSetupActions()
 	    {
@@ -141,6 +145,11 @@ namespace mRemoteNG.UI.Window
             var singleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = handlers};
             olvConnections.SingleClickHandler = singleClickHandler;
         }
+
+	    private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+	    {
+	        olvConnections.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
+	    }
         #endregion
 
         #region Top Menu

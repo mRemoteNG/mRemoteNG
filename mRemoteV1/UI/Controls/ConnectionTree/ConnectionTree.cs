@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.App;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -24,6 +23,7 @@ namespace mRemoteNG.UI.Controls
 		private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
+        private ConnectionTreeModel _connectionTreeModel;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -37,7 +37,15 @@ namespace mRemoteNG.UI.Controls
 
         public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
-        public ConnectionTreeModel ConnectionTreeModel { get; set; }
+        public ConnectionTreeModel ConnectionTreeModel
+        {
+            get { return _connectionTreeModel; }
+            set
+            {
+                _connectionTreeModel = value;
+                PopulateTreeView();
+            }
+        }
 
         public ConnectionTree()
         {
@@ -54,7 +62,6 @@ namespace mRemoteNG.UI.Controls
             {
                 components?.Dispose();
                 _statusImageList?.Dispose();
-                Runtime.ConnectionsService.ConnectionsLoaded -= ConnectionsServiceOnConnectionsLoaded;
             }
             base.Dispose(disposing);
         }
@@ -119,7 +126,6 @@ namespace mRemoteNG.UI.Controls
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
             BeforeLabelEdit += OnBeforeLabelEdit;
             AfterLabelEdit += OnAfterLabelEdit;
-            Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
         }
 
 		/// <summary>
@@ -207,18 +213,12 @@ namespace mRemoteNG.UI.Controls
                 action.Execute(this);
             }
         }
-
-        private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
-        {
-            ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
-            PopulateTreeView();
-        }
         #endregion
 
         #region ConnectionTree Behavior
         public RootNodeInfo GetRootConnectionNode()
         {
-            return (RootNodeInfo)Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
+            return (RootNodeInfo)ConnectionTreeModel.RootNodes.First(item => item is RootNodeInfo);
         }
 
         public void InvokeExpand(object model)
