@@ -75,6 +75,7 @@
       <HintPath>..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
@@ -107,7 +108,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Credential\Records\" />
-    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
@@ -195,7 +195,6 @@
     <Compile Include="Config\Settings\ExternalAppsSaver.cs" />
     <Compile Include="Config\Settings\DockPanelLayoutLoader.cs" />
     <Compile Include="Config\Settings\DockPanelLayoutSaver.cs" />
-    <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
     <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
     <Compile Include="Config\Settings\SettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\PortableSettingsProvider.cs" />
@@ -304,6 +303,7 @@
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Tools\DesignModeTest.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />

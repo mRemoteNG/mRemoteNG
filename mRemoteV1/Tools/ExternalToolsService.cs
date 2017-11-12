@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
+using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.Tools
 {
     public class ExternalToolsService
     {
-        public ObservableCollection<ExternalTool> ExternalTools { get; set; } = new ObservableCollection<ExternalTool>();
+        public FullyObservableCollection<ExternalTool> ExternalTools { get; set; } = new FullyObservableCollection<ExternalTool>();
 
         public ExternalTool GetExtAppByName(string name)
         {

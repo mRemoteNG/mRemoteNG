@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Controls
         public ExternalToolsToolStrip()
         {
             Initialize(); 
-            Runtime.ExternalToolsService.ExternalTools.CollectionChanged += (sender, args) => AddExternalToolsToToolBar();
+            Runtime.ExternalToolsService.ExternalTools.CollectionUpdated += (sender, args) => AddExternalToolsToToolBar();
         }
 
         private void Initialize()
@@ -53,9 +53,6 @@ namespace mRemoteNG.UI.Controls
             CMenToolbarShowText.Click += cMenToolbarShowText_Click;
         }
 
- 
-
-
         #region Ext Apps Toolbar
         private void cMenToolbarShowText_Click(object sender, EventArgs e)
         {
@@ -66,24 +63,33 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
+                SuspendLayout();
+
                 for (var index = Items.Count - 1; index >= 0; index--)
                     Items[index].Dispose();
                 Items.Clear();
 
                 foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
                 {
-                    var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
-                    if (CMenToolbarShowText.Checked)
-                        button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-                    else
-                        button.DisplayStyle = button.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
+                    if (tool.ShowOnToolbar)
+                    {
+                        var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
+                        if (CMenToolbarShowText.Checked)
+                            button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+                        else
+                            button.DisplayStyle = button.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
 
-                    button.Tag = tool;
+                        button.Tag = tool;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddExternalToolsToToolBarFailed, ex);
+            }
+            finally
+            {
+                ResumeLayout(true);
             }
         }
 
