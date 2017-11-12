@@ -33,6 +33,7 @@ namespace mRemoteNG.Connection
                     ConnectionTreeModel = newConnectionsModel,
                     ConnectionFileName = filename
                 };
+                connectionSaver.SaveFilter = new Security.SaveFilter();
                 connectionSaver.SaveConnections();
 
                 // Load config
