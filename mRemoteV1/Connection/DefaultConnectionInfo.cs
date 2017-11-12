@@ -8,7 +8,7 @@ namespace mRemoteNG.Connection
     public class DefaultConnectionInfo : ConnectionInfo
     {
         public static DefaultConnectionInfo Instance { get; } = new DefaultConnectionInfo();
-        private readonly string[] _excludedProperties = { "Parent", "Name", "Panel", "Hostname", "Port", "Inheritance",
+        private readonly string[] _excludedProperties = { "Parent", "Name", "Hostname", "Port", "Inheritance",
             "OpenConnections", "IsContainer", "IsDefault", "PositionID", "ConstantID", "TreeNode", "IsQuickConnect", "PleaseConnect" };
 
         private DefaultConnectionInfo()

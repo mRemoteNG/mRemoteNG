@@ -2590,5 +2590,17 @@ namespace mRemoteNG {
                 this["ConDefaultDomain"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultPanel {
+            get {
+                return ((string)(this["ConDefaultPanel"]));
+            }
+            set {
+                this["ConDefaultPanel"] = value;
+            }
+        }
     }
 }
