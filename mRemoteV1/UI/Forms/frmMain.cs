@@ -12,6 +12,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
@@ -42,7 +43,7 @@ namespace mRemoteNG.UI.Forms
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
-        private ThemeManager _themeManager;
+        private readonly ThemeManager _themeManager;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -65,7 +66,6 @@ namespace mRemoteNG.UI.Forms
 
         static FrmMain()
         {
-
         }
 
         #region Properties
@@ -156,6 +156,7 @@ namespace mRemoteNG.UI.Forms
             if (Settings.Default.ResetPanels)
                 SetDefaultLayout();
 
+            Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
             var credsAndConsSetup = new CredsAndConsSetup();
             credsAndConsSetup.LoadCredsAndCons();
 
@@ -171,6 +172,11 @@ namespace mRemoteNG.UI.Forms
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
 
             Opacity = 1;
+        }
+
+        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        {
+            UpdateWindowTitle();
         }
 
         private void SetMenuDependencies()
@@ -450,12 +456,12 @@ namespace mRemoteNG.UI.Forms
 				}
 				else
 				{
-					if (!string.IsNullOrEmpty(ConnectionsFileName))
+					if (!string.IsNullOrEmpty(Runtime.ConnectionsService.ConnectionFileName))
 					{
 					    titleBuilder.Append(separator);
 					    titleBuilder.Append(Settings.Default.ShowCompleteConsPathInTitle
-					        ? ConnectionsFileName
-					        : Path.GetFileName(ConnectionsFileName));
+					        ? Runtime.ConnectionsService.ConnectionFileName
+                            : Path.GetFileName(Runtime.ConnectionsService.ConnectionFileName));
 					}
 				}
 			}

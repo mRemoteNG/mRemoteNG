@@ -7,6 +7,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
@@ -44,7 +45,7 @@ namespace mRemoteNG.App
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
-        public static ConnectionsService ConnectionsService { get; } = new ConnectionsService();
+        public static ConnectionsService ConnectionsService { get; } = new ConnectionsService(PuttySessionsManager.Instance);
 
         #region Connections Loading/Saving
         public static void LoadConnectionsAsync()
@@ -64,7 +65,8 @@ namespace mRemoteNG.App
 
         public static void LoadConnections(bool withDialog = false)
         {
-            var connectionsLoader = new ConnectionsLoader();
+            var connectionFileName = "";
+
             try
             {
                 // disable sql update checking while we are loading updates
@@ -76,22 +78,21 @@ namespace mRemoteNG.App
                     {
                         var loadDialog = DialogFactory.BuildLoadConnectionsDialog();
                         if (loadDialog.ShowDialog() != DialogResult.OK) return;
-                        connectionsLoader.ConnectionFileName = loadDialog.FileName;
+                        connectionFileName = loadDialog.FileName;
                     }
                     else
                     {
-                        connectionsLoader.ConnectionFileName = ConnectionsService.GetStartupConnectionFileName();
+                        connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                     }
 
                     var backupFileCreator = new FileBackupCreator();
-                    backupFileCreator.CreateBackupFile(connectionsLoader.ConnectionFileName);
+                    backupFileCreator.CreateBackupFile(connectionFileName);
 
                     var backupPruner = new FileBackupPruner();
-                    backupPruner.PruneBackupFiles(connectionsLoader.ConnectionFileName);
+                    backupPruner.PruneBackupFiles(connectionFileName);
                 }
 
-                connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                ConnectionsService.ConnectionTreeModel = connectionsLoader.LoadConnections(false);
+                ConnectionsService.ConnectionTreeModel = ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
                 Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
@@ -100,14 +101,14 @@ namespace mRemoteNG.App
                 }
                 else
                 {
-                    if (connectionsLoader.ConnectionFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
+                    if (connectionFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
                     {
                         Settings.Default.LoadConsFromCustomLocation = false;
                     }
                     else
                     {
                         Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = connectionsLoader.ConnectionFileName;
+                        Settings.Default.CustomConsPath = connectionFileName;
                     }
                 }
 
@@ -137,7 +138,7 @@ namespace mRemoteNG.App
                 }
                 if (ex is FileNotFoundException && !withDialog)
                 {
-                    MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
+                    MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionFileName), ex, MessageClass.InformationMsg);
 
                     string[] commandButtons =
                     {
@@ -147,7 +148,7 @@ namespace mRemoteNG.App
                         Language.strMenuExit
                     };
 
-                    bool answered = false;
+                    var answered = false;
                     while (!answered)
                     {
                         try
@@ -157,7 +158,7 @@ namespace mRemoteNG.App
                             switch (CTaskDialog.CommandButtonResult)
                             {
                                 case 0:
-                                    ConnectionsService.NewConnections(connectionsLoader.ConnectionFileName);
+                                    ConnectionsService.NewConnectionsFile(connectionFileName);
                                     answered = true;
                                     break;
                                 case 1:
@@ -165,7 +166,7 @@ namespace mRemoteNG.App
                                     answered = true;
                                     break;
                                 case 2:
-                                    ConnectionsService.NewConnections(connectionsLoader.ConnectionFileName);
+                                    ConnectionsService.NewConnectionsFile(connectionFileName);
                                     Import.ImportFromFile(ConnectionsService.ConnectionTreeModel.RootNodes[0]);
                                     answered = true;
                                     break;
@@ -177,15 +178,14 @@ namespace mRemoteNG.App
                         }
                         catch (Exception exc)
                         {
-                            MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), exc, MessageClass.InformationMsg);
+                            MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionFileName), exc, MessageClass.InformationMsg);
                         }
-
                     }
                     return;
                 }
 
-                MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
-                if (connectionsLoader.ConnectionFileName != ConnectionsService.GetStartupConnectionFileName())
+                MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionFileName), ex);
+                if (connectionFileName != ConnectionsService.GetStartupConnectionFileName())
                 {
                     LoadConnections(withDialog);
                 }

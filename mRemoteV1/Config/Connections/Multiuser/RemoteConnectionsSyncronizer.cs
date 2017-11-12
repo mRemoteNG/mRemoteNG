@@ -9,7 +9,6 @@ namespace mRemoteNG.Config.Connections.Multiuser
     {
         private readonly Timer _updateTimer;
         private readonly IConnectionsUpdateChecker _updateChecker;
-        private readonly ConnectionsLoader _connectionsLoader;
         private readonly ConnectionsSaver _connectionsSaver;
 
         public double TimerIntervalInMilliseconds
@@ -21,7 +20,6 @@ namespace mRemoteNG.Config.Connections.Multiuser
         {
             _updateChecker = updateChecker;
             _updateTimer = new Timer(3000);
-            _connectionsLoader = new ConnectionsLoader { UseDatabase = mRemoteNG.Settings.Default.UseSQLServer };
             _connectionsSaver = new ConnectionsSaver { SaveFormat = ConnectionsSaver.Format.SQL };
             SetEventListeners();
         }
@@ -37,7 +35,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         public void Load()
         {
-            Runtime.ConnectionsService.ConnectionTreeModel = _connectionsLoader.LoadConnections(false);
+            Runtime.ConnectionsService.ConnectionTreeModel = Runtime.ConnectionsService.LoadConnections(mRemoteNG.Settings.Default.UseSQLServer, false, "");
         }
 
         private void Load(object sender, ConnectionsUpdateAvailableEventArgs args)

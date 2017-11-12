@@ -346,7 +346,7 @@ namespace mRemoteNG.UI.Menu
                 return;
             }
 
-            Runtime.ConnectionsService.NewConnections(saveFileDialog.FileName);
+            Runtime.ConnectionsService.NewConnectionsFile(saveFileDialog.FileName);
         }
 
         private void mMenFileLoad_Click(object sender, EventArgs e)
