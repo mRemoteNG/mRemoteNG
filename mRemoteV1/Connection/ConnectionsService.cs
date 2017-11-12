@@ -8,6 +8,7 @@ using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -23,11 +24,12 @@ namespace mRemoteNG.Connection
         public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
 
-        public ConnectionTreeModel ConnectionTreeModel
-        {
-            get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
-            set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
-        }
+        public ConnectionTreeModel ConnectionTreeModel { get; private set; }
+        //public ConnectionTreeModel ConnectionTreeModel
+        //{
+        //    get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
+        //    set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
+        //}
 
         public ConnectionsService(PuttySessionsManager puttySessionsManager)
         {
@@ -209,7 +211,7 @@ namespace mRemoteNG.Connection
         public event EventHandler<ConnectionsLoadedEventArgs> ConnectionsLoaded;
         public event EventHandler<ConnectionsSavedEventArgs> ConnectionsSaved;
 
-        private void RaiseConnectionsLoadedEvent(ConnectionTreeModel previousTreeModel, ConnectionTreeModel newTreeModel,
+        private void RaiseConnectionsLoadedEvent(Maybe<ConnectionTreeModel> previousTreeModel, ConnectionTreeModel newTreeModel,
             bool previousSourceWasDatabase, bool newSourceIsDatabase,
             string newSourcePath)
         {

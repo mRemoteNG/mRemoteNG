@@ -87,8 +87,7 @@ namespace mRemoteNG.App
                     backupPruner.PruneBackupFiles(connectionFileName);
                 }
 
-                ConnectionsService.ConnectionTreeModel = ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
-                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
+                ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
 
                 if (Settings.Default.UseSQLServer)
                 {
@@ -179,7 +178,7 @@ namespace mRemoteNG.App
                     return;
                 }
 
-                MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionFileName), ex);
+                MessageCollector.AddExceptionStackTrace(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionFileName), ex);
                 if (connectionFileName != ConnectionsService.GetStartupConnectionFileName())
                 {
                     LoadConnections(withDialog);

@@ -33,7 +33,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         private void Load(object sender, ConnectionsUpdateAvailableEventArgs args)
         {
-            Runtime.ConnectionsService.ConnectionTreeModel = Runtime.ConnectionsService.LoadConnections(true, false, "");
+            Runtime.ConnectionsService.LoadConnections(true, false, "");
             args.Handled = true;
         }
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.App;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -17,7 +18,6 @@ namespace mRemoteNG.UI.Controls
 {
 	public partial class ConnectionTree : TreeListView, IConnectionTree
     {
-        private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
 	    private readonly StatusImageList _statusImageList = new StatusImageList();
@@ -37,15 +37,7 @@ namespace mRemoteNG.UI.Controls
 
         public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
-        public ConnectionTreeModel ConnectionTreeModel
-        {
-            get { return _connectionTreeModel; }
-            set
-            {
-                _connectionTreeModel = value;
-                PopulateTreeView();
-            }
-        }
+        public ConnectionTreeModel ConnectionTreeModel { get; set; }
 
         public ConnectionTree()
         {
@@ -54,12 +46,15 @@ namespace mRemoteNG.UI.Controls
             UseOverlays = false;
         }
 
+        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 components?.Dispose();
                 _statusImageList?.Dispose();
+                Runtime.ConnectionsService.ConnectionsLoaded -= ConnectionsServiceOnConnectionsLoaded;
             }
             base.Dispose(disposing);
         }
@@ -124,6 +119,7 @@ namespace mRemoteNG.UI.Controls
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
             BeforeLabelEdit += OnBeforeLabelEdit;
             AfterLabelEdit += OnAfterLabelEdit;
+            Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
         }
 
 		/// <summary>
@@ -210,6 +206,12 @@ namespace mRemoteNG.UI.Controls
             {
                 action.Execute(this);
             }
+        }
+
+        private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        {
+            ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
+            PopulateTreeView();
         }
         #endregion
 
