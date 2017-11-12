@@ -69,7 +69,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private static void ReinitializeSqlUpdater()
         {
             Runtime.RemoteConnectionsSyncronizer?.Dispose();
-            FrmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
 
             if (Settings.Default.UseSQLServer)
             {
@@ -80,6 +79,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 Runtime.RemoteConnectionsSyncronizer?.Dispose();
                 Runtime.RemoteConnectionsSyncronizer = null;
+                Runtime.LoadConnections(true);
             }
         }
 

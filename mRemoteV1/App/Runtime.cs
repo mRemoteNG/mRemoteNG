@@ -4,7 +4,6 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
@@ -13,7 +12,6 @@ using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
@@ -40,8 +38,6 @@ namespace mRemoteNG.App
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        public static DateTime LastSqlUpdate { get; set; }
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
@@ -97,7 +93,7 @@ namespace mRemoteNG.App
 
                 if (Settings.Default.UseSQLServer)
                 {
-                    LastSqlUpdate = DateTime.Now;
+                    ConnectionsService.LastSqlUpdate = DateTime.Now;
                 }
                 else
                 {
@@ -210,97 +206,8 @@ namespace mRemoteNG.App
         private static void SaveConnectionsBGd()
         {
             Monitor.Enter(SaveLock);
-            SaveConnections();
+            ConnectionsService.SaveConnections();
             Monitor.Exit(SaveLock);
-        }
-
-        public static void SaveConnections()
-        {
-            if (ConnectionsService.ConnectionTreeModel == null) return;
-            if (!ConnectionsService.IsConnectionsFileLoaded) return;
-
-            try
-            {
-                RemoteConnectionsSyncronizer?.Disable();
-
-                var connectionsSaver = new ConnectionsSaver();
-
-                if (!Settings.Default.UseSQLServer)
-                    connectionsSaver.ConnectionFileName = ConnectionsService.GetStartupConnectionFileName();
-
-                connectionsSaver.SaveFilter = new SaveFilter();
-                connectionsSaver.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
-
-                if (Settings.Default.UseSQLServer)
-                {
-                    connectionsSaver.SaveFormat = ConnectionsSaver.Format.SQL;
-                    connectionsSaver.SQLHost = Settings.Default.SQLHost;
-                    connectionsSaver.SQLDatabaseName = Settings.Default.SQLDatabaseName;
-                    connectionsSaver.SQLUsername = Settings.Default.SQLUser;
-                    var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Settings.Default.SQLPass, EncryptionKey);
-                }
-
-                connectionsSaver.SaveConnections();
-
-                if (Settings.Default.UseSQLServer)
-                    LastSqlUpdate = DateTime.Now;
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionsFileCouldNotBeSaved + Environment.NewLine + ex.Message);
-            }
-            finally
-            {
-                RemoteConnectionsSyncronizer?.Enable();
-            }
-        }
-
-        public static void SaveConnectionsAs()
-        {
-            var connectionsSave = new ConnectionsSaver();
-
-            try
-            {
-                RemoteConnectionsSyncronizer?.Disable();
-
-                using (var saveFileDialog = new SaveFileDialog())
-                {
-                    saveFileDialog.CheckPathExists = true;
-                    saveFileDialog.InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath;
-                    saveFileDialog.FileName = ConnectionsFileInfo.DefaultConnectionsFile;
-                    saveFileDialog.OverwritePrompt = true;
-                    saveFileDialog.Filter = $@"{Language.strFiltermRemoteXML}|*.xml|{Language.strFilterAll}|*.*";
-
-                    if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
-
-                    connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
-                    connectionsSave.ConnectionFileName = saveFileDialog.FileName;
-                    connectionsSave.SaveFilter = new SaveFilter();
-                    connectionsSave.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
-
-                    connectionsSave.SaveConnections();
-
-                    if (saveFileDialog.FileName == ConnectionsService.GetDefaultStartupConnectionFileName())
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = false;
-                    }
-                    else
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = saveFileDialog.FileName;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex);
-            }
-            finally
-            {
-                RemoteConnectionsSyncronizer?.Enable();
-            }
         }
         #endregion
     }

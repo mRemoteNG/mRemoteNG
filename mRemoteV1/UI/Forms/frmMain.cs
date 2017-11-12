@@ -449,7 +449,7 @@ namespace mRemoteNG.UI.Forms
 									
 			if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
 			{
-				if (AreWeUsingSqlServerForSavingConnections)
+				if (Runtime.ConnectionsService.UsingDatabase)
 				{
 					titleBuilder.Append(separator);
 					titleBuilder.Append(Language.strSQLServer.TrimEnd(':'));

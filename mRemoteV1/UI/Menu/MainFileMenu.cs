@@ -6,7 +6,9 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Tree;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
@@ -358,7 +360,7 @@ namespace mRemoteNG.UI.Menu
                 switch (msgBoxResult)
                 {
                     case DialogResult.Yes:
-                        Runtime.SaveConnections();
+                        Runtime.ConnectionsService.SaveConnections();
                         break;
                     case DialogResult.Cancel:
                         return;
@@ -375,7 +377,29 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileSaveAs_Click(object sender, EventArgs e)
         {
-            Runtime.SaveConnectionsAs();
+            using (var saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.CheckPathExists = true;
+                saveFileDialog.InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath;
+                saveFileDialog.FileName = ConnectionsFileInfo.DefaultConnectionsFile;
+                saveFileDialog.OverwritePrompt = true;
+                saveFileDialog.Filter = $@"{Language.strFiltermRemoteXML}|*.xml|{Language.strFilterAll}|*.*";
+
+                if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
+                var newFileName = saveFileDialog.FileName;
+
+                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
+
+                if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
+                {
+                    Settings.Default.LoadConsFromCustomLocation = false;
+                }
+                else
+                {
+                    Settings.Default.LoadConsFromCustomLocation = true;
+                    Settings.Default.CustomConsPath = newFileName;
+                }
+            }
         }
 
         private void mMenFileDelete_Click(object sender, EventArgs e)
