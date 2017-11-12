@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Security;
@@ -19,6 +20,7 @@ namespace mRemoteNG.Connection
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
         public string ConnectionFileName { get; private set; }
+        public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
 
         public ConnectionTreeModel ConnectionTreeModel
@@ -141,7 +143,7 @@ namespace mRemoteNG.Connection
 
             try
             {
-                Runtime.RemoteConnectionsSyncronizer?.Disable();
+                RemoteConnectionsSyncronizer?.Disable();
 
                 var previouslyUsingDatabase = UsingDatabase;
                 if (useDatabase)
@@ -162,7 +164,7 @@ namespace mRemoteNG.Connection
             }
             finally
             {
-                Runtime.RemoteConnectionsSyncronizer?.Enable();
+                RemoteConnectionsSyncronizer?.Enable();
             }
         }
 

@@ -37,7 +37,6 @@ namespace mRemoteNG.App
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
-        public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
@@ -66,7 +65,7 @@ namespace mRemoteNG.App
             try
             {
                 // disable sql update checking while we are loading updates
-                RemoteConnectionsSyncronizer?.Disable();
+                ConnectionsService.RemoteConnectionsSyncronizer?.Disable();
 
                 if (!Settings.Default.UseSQLServer)
                 {
@@ -109,7 +108,7 @@ namespace mRemoteNG.App
                 }
 
                 // re-enable sql update checking after updates are loaded
-                RemoteConnectionsSyncronizer?.Enable();
+                ConnectionsService.RemoteConnectionsSyncronizer?.Enable();
             }
             catch (Exception ex)
             {
