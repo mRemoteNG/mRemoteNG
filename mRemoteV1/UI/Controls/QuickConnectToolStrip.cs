@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 
@@ -57,7 +56,7 @@ namespace mRemoteNG.UI.Controls
             //
             //Theming support
             //
-            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+            vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(components);
             // 
             // lblQuickConnect
             // 
@@ -201,6 +200,7 @@ namespace mRemoteNG.UI.Controls
         private void btnQuickConnect_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             SetQuickConnectProtocol(e.ClickedItem.Text);
+            btnQuickConnect_ButtonClick(this, e);
         }
 
         private void SetQuickConnectProtocol(string protocol)
