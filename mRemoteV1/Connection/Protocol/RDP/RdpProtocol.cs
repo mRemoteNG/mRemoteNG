@@ -188,7 +188,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpConnectionOpenFailed, ex);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
 			}
 					
 			return false;

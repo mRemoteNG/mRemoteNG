@@ -1581,9 +1581,6 @@ Descrição do erro: {1}</value>
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Falha no fecho de ligação RDP!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Falha a abrir ligação!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Impossível criar controlo RDP, por favor verifique os requisitos mRemoteNG.</value>
   </data>
@@ -1661,9 +1658,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>GetSessions falhou!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Falha a abrir ligação RDP!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>Contador de re-ligação RDP:</value>
@@ -2078,9 +2072,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Falhou a desconexão VNC!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Falha a abrir ligação!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>Falha de atualização de ecrã VNC!</value>

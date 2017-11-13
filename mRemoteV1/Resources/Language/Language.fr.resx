@@ -1601,9 +1601,6 @@ Message:
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Fermeture de la connexion RDP échouée !</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Échec de l'ouverture de la connexion !</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Impossible de lancer une connexion RDP, vérifiez les prérequis mRemoteNG.</value>
   </data>
@@ -1681,9 +1678,6 @@ Message:
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>Erreur de session !</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Ouverture de la connexion RDP échouée !</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>Nombre de reconnexions RDP :</value>
@@ -2125,9 +2119,6 @@ Message:
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>VNC déconnexion échouée !</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>L'ouverture de connexion a échouée !</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>Le rafraîchissement de l'écran VNC a échoué !</value>

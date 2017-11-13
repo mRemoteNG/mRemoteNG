@@ -1796,9 +1796,6 @@ Zpráva:
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Metoda Close RDP Connection selhala!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Navázání spojení selhalo!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Nebylo možné aktivovat ovládací prvek okna RDP, prosím zkontrolujte požadavky mRemoteNG na prerekvizity.</value>
   </data>
@@ -1876,9 +1873,6 @@ Zpráva:
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>Metoda GetSessions selhala!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Otevření spojení RDP selhalo!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>Počet pokusů o znovunavázání spojení RDP:</value>
@@ -2321,9 +2315,6 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Odpojení VNC selhalo!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Navázání spojení VNC selhalo!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>Obnovení obrazovky VNC selhalo!</value>

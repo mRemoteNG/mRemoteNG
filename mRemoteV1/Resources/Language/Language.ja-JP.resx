@@ -1818,9 +1818,6 @@ Message:
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Close RDP Connection failed!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Opening connection failed!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
   </data>
@@ -1898,9 +1895,6 @@ Message:
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>GetSessions failed!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Open RDP Connection failed!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>RDP reconnection count:</value>
@@ -2357,9 +2351,6 @@ mRemoteNGを終了してインストールを開始します</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>VNCの切断に失敗しました</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>接続に失敗しました</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>VNCのスクリーンの更新に失敗しました</value>
