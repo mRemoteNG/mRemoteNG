@@ -16,7 +16,9 @@ github.com/peterchenadded
 Brandon Wulf (github.com/mrwulf)
 Pedro Rodrigues (github.com/pedro2555)
 github.com/dekelMP
-
+github.com/farosch
+Bruce (github.com/brucetp)
+Camilo Alvarez (github.com/jotatsu)
 
 
 Past Contributors
@@ -51,12 +53,14 @@ Sebastien Thieury (github.com/SebThieu)
 Riza Emet
 Lukas Plachy
 Gyuha Shin
+Stefan (github.com/polluks)
+github.com/emazv72
 
 
 Included Source Code
 ====================
 
-Command Line Arguments Parser 1.0
+Command Line Arguments Parser
 Copyright © 2002 Richard Lopes
 MIT License
 http://www.codeproject.com/KB/recipes/command_line.aspx
@@ -85,32 +89,32 @@ https://github.com/crdx/PortableSettingsProvider
 Included Components
 ===================
 
-ADTree 1.0
+ADTree
 Copyright © 2004 Marc Merritt
 Copyright © 2008 Felix Deimel
 http://www.codeproject.com/KB/selection/ADPickerCtrl.aspx
 
-DockPanel Suite 2.10.0
+DockPanel Suite
 Copyright © 2016 @roken and @lextm (formerly Weifen Luo)
 MIT License
 https://github.com/dockpanelsuite/dockpanelsuite
 
-GeckoFX 45
+GeckoFX 
 Copyright © 2016 Tom Hindle
 Mozilla Public License
 https://bitbucket.org/geckofx/
 
-log4net 1.2.15.0
+log4net
 Copyright © 2001-2015 The Apache Software Foundation
 Apache License Version 2.0
 http://logging.apache.org/log4net/
 
-Magic Library 1.7.4
+Magic Library
 Copyright © 2002-2003 Crownwood Consulting, Ltd.
 Freely redistributable with attribution
 http://www.dotnetmagic.com/magic_download.html
 
-PuTTY 0.68
+PuTTY
 Copyright © 1997-2017 Simon Tatham
 MIT License
 http://www.chiark.greenend.org.uk/~sgtatham/putty/
@@ -120,17 +124,17 @@ Copyright © 2005-2008 FAMFAMFAM
 Creative Commons Attribution 2.5 License
 http://www.famfamfam.com/
 
-SSH.NET v2016.0.0
+SSH.NET
 Copyright © 2016
 MIT License
 https://github.com/sshnet/SSH.NET
 
-VncSharp 1.2
+VncSharp
 Copyright © 2004-2009 David Humphrey
 GNU General Public License (GPL) Version 2
 https://github.com/humphd/VncSharp
 
-ObjectListView 2.9.1
+ObjectListView
 Copyright © 2006-2016 Phillip Piper
 GNU General Public License (GPL) Version 3
 https://sourceforge.net/projects/objectlistview/
