@@ -1601,9 +1601,6 @@ Messaggio:
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Operazione Close RDP Connection fallita!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Operazione Opening Connection fallita!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Impossibile creare il controllo RDP, per favore controlla i requisiti di mRemoteNG.</value>
   </data>
@@ -1681,9 +1678,6 @@ Messaggio:
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>Operazione GetSessions fallita!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Operazione Open RDP Connection fallita!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>Contatore riconnessioni RDP:</value>
@@ -2123,9 +2117,6 @@ mRemoteNG verrà chiuso e l'installazione avrà inizio.</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Disconnessione VNC fallita!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Apertura della connessione fallita!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>Aggiornamento dello schermo VNC fallito!</value>

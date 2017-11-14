@@ -1404,9 +1404,6 @@ Załadowano nowy plik połączeń.</value>
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Nie udało się zamknąć połączenia RDP!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Nie udało się nawiązać połączenia!</value>
-  </data>
   <data name="strRDPDisableCursorblinking" xml:space="preserve">
     <value>Wyłącz miganie kursora</value>
   </data>
@@ -1460,9 +1457,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>Wykonanie GetSessions nie powiodło się!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Nawiązanie połączenia RDP nie powiodło się!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>Liczba ponownych połączeń RDP:</value>
@@ -1872,9 +1866,6 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Odłączenie VNC nie powiodło się!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Otwarcie połączenia nie powiodło się!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>Odświeżenie ekranu VNC nie powiodło się!</value>

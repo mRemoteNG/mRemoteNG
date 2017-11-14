@@ -1619,9 +1619,6 @@ Melding:
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Lukk RDP-tilkobling mislyktes!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Åpning av tilkobling mislyktes!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Kunne ikke opprette RDP-kontroll, vennligst kontroller mRemoteNGs systemkrav.</value>
   </data>
@@ -1699,9 +1696,6 @@ Melding:
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>GetSessions mislyktes!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Åpne RDP-tilkobling mislyktes!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>Antall RDP gjentilkoblingsforsøk:</value>
@@ -2144,9 +2138,6 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>VNC-frakobling mislyktes!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Åpne tilkobling mislyktes!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>Oppfrisking av skjermen i VNC mislyktes!</value>

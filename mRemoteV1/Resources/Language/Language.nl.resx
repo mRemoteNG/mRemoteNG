@@ -1620,9 +1620,6 @@ Bericht:
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Sluiten RDP verbinding is mislukt!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Openen van verbinding mislukt!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Kan geen RDP controle aanmaken, controleer mRemoteNG systeemeisen.</value>
   </data>
@@ -1700,9 +1697,6 @@ Bericht:
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>Instellen sessies mislukt!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Openen RDP verbinding mislukt!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>RDP aantal malen opnieuw proberen te verbinden:</value>
@@ -2145,9 +2139,6 @@ mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>VNC Sluiten connectie mislukt!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Openen van verbinding mislukt!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>VNC Vernieuwen scherm mislukt!</value>

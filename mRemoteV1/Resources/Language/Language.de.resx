@@ -1620,9 +1620,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Schließen der RDP-Verbindung fehlgeschlagen!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Öffnen der Verbindung fehlgeschlagen!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Konte das RDP-Plugin nicht einbinden, bitte prüfen Sie die mRemoteNG-Voraussetzungen.</value>
   </data>
@@ -1700,9 +1697,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>Auslesen der RDP-Sitzungen fehlgeschlagen!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Öffen der RDP-Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>RDP-Verbindungsversuche:</value>
@@ -2145,9 +2139,6 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Trennen der VNC-Verbindung fehlgeschlagen!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Öffnen der VNC-Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>VNC atualisieren des Bildschirminhalts ist fehlgeschlagen!</value>

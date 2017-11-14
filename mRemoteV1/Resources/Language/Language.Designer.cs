@@ -5671,15 +5671,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opening connection failed!.
-        /// </summary>
-        internal static string strRdpConnectionOpenFailed {
-            get {
-                return ResourceManager.GetString("strRdpConnectionOpenFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create RDP control, please check mRemoteNG requirements..
         /// </summary>
         internal static string strRdpControlCreationFailed {
@@ -5910,15 +5901,6 @@ namespace mRemoteNG {
         internal static string strRdpGetSessionsFailed {
             get {
                 return ResourceManager.GetString("strRdpGetSessionsFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open RDP Connection failed!.
-        /// </summary>
-        internal static string strRdpOpenConnectionFailed {
-            get {
-                return ResourceManager.GetString("strRdpOpenConnectionFailed", resourceCulture);
             }
         }
         
@@ -7354,14 +7336,6 @@ namespace mRemoteNG {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Opening connection failed!.
-        /// </summary>
-        internal static string strVncConnectionOpenFailed {
-            get {
-                return ResourceManager.GetString("strVncConnectionOpenFailed", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to VNC Refresh Screen Failed!.

@@ -1551,9 +1551,6 @@ VncSharp Control Version {0}</value>
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Закрити з'єднання RDP не вдалося!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Відкриття з'єднання не вдалася!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Не вдається створити RDP з'єднання, будь ласка, перевірте налаштування mRemoteNG.</value>
   </data>
@@ -1628,9 +1625,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>Помилка сесії!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Відкрити з'єднання RDP не вдалося!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>К-сть перепідключень RDP:</value>
@@ -1953,9 +1947,6 @@ mRemoteNG зараз припинить роботу і почне процес 
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Не вдалося вимкнути VNC!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Не вдалося відкрити з'єднання!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>Не вдалося оновити екран VNC!</value>

@@ -67,7 +67,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strVncConnectionOpenFailed + Environment.NewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 				return false;
 			}
 					
