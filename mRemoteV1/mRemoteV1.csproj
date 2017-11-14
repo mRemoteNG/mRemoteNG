@@ -982,6 +982,9 @@
     <Content Include="Firefox\sandboxbroker.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
+    <Content Include="mRemoteNG.VisualElementsManifest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Help\CMDSwitches.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1154,6 +1157,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
+    <Content Include="Resources\VisualElementsManifest\mRemote_150.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\VisualElementsManifest\mRemote_70.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Images\loading_spinner.gif" />
     <None Include="Resources\Images\FamFamFam\tick.png" />
     <None Include="Resources\Icons\FamFamFam\shield.ico" />
