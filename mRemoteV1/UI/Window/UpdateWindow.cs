@@ -2,17 +2,13 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
 using mRemoteNG.Messages;
 using WeifenLuo.WinFormsUI.Docking;
-
-#if !PORTABLE
-using System.IO;
-#endif
-
 
 namespace mRemoteNG.UI.Window
 {
@@ -47,12 +43,12 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                base.ApplyTheme();
-                pnlUpdate.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlUpdate.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            }
+	        if (!Themes.ThemeManager.getInstance().ThemingActive)
+				return;
+
+	        base.ApplyTheme();
+	        pnlUpdate.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+	        pnlUpdate.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyLanguage()
@@ -60,11 +56,7 @@ namespace mRemoteNG.UI.Window
 			Text = Language.strMenuCheckForUpdates;
 			TabText = Language.strMenuCheckForUpdates;
 			btnCheckForUpdate.Text = Language.strCheckForUpdate;
-#if !PORTABLE
-            btnDownload.Text = Language.strDownloadAndInstall;
-#else
-		    btnDownload.Text = Language.strDownloadPortable;
-#endif
+			btnDownload.Text = Runtime.IsPortableEdition ? Language.strDownloadPortable : Language.strDownloadAndInstall;
             lblChangeLogLabel.Text = Language.strLabelChangeLog;
 			lblInstalledVersion.Text = Language.strVersion;
 			lblInstalledVersionLabel.Text = $"{Language.strCurrentVersion}:";
@@ -192,7 +184,7 @@ namespace mRemoteNG.UI.Window
 				lblStatus.Text = Language.strUpdateCheckFailedLabel;
 				lblStatus.ForeColor = Color.OrangeRed;
 						
-				Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateCheckCompleteFailed, ex);
+				Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateCheckCompleteFailed, ex);
 			}
 		}
 				
@@ -218,7 +210,7 @@ namespace mRemoteNG.UI.Window
             }
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateGetChangeLogFailed, ex);
+				Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateGetChangeLogFailed, ex);
 			}
 		}
 				
@@ -241,7 +233,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateDownloadFailed, ex);
+				Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateDownloadFailed, ex);
 			}
 		}
         #endregion
@@ -263,23 +255,25 @@ namespace mRemoteNG.UI.Window
                     return;
 				if (e.Error != null)
 				    throw e.Error;
-#if !PORTABLE
-                if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+
+				if (Runtime.IsPortableEdition)
+					MessageBox.Show(Language.strUpdatePortableDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				else
 				{
-					Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
+					if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+					{
+						Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
+					}
+					else
+					{
+						File.Delete(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
+					}
 				}
-                else
-				{
-					File.Delete(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
-				}
-#else
-			    MessageBox.Show(Language.strUpdatePortableDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OK, MessageBoxIcon.Information);
-#endif
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strUpdateDownloadCompleteFailed, ex);
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message);
+                Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateDownloadCompleteFailed, ex);
+                Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg, ex.Message);
             }
 		}
         #endregion
