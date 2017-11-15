@@ -23,14 +23,14 @@ namespace mRemoteNG.Tools
 	
 		public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2)
 		{
-            IPAddress ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
-            IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
+            var ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
+            var ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
 
-            int portStart = Math.Min(port1, port2);
-			int portEnd = Math.Max(port1, port2);
+            var portStart = Math.Min(port1, port2);
+            var portEnd = Math.Max(port1, port2);
 					
 			_ports.Clear();
-			for (int port = portStart; port <= portEnd; port++)
+			for (var port = portStart; port <= portEnd; port++)
 			{
 				_ports.Add(port);
 			}
@@ -59,8 +59,8 @@ namespace mRemoteNG.Tools
 		{
 			try
 			{
-				System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(hostname, Convert.ToInt32(port));
-                tcpClient.Close(); 
+			    var tcpClient = new System.Net.Sockets.TcpClient(hostname, Convert.ToInt32(port));
+			    tcpClient.Close(); 
 				return true;
 			}
 			catch (Exception)
@@ -79,16 +79,21 @@ namespace mRemoteNG.Tools
 			{
 			    hostCount = 0;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...", true);
-                foreach (IPAddress ipAddress in _ipAddresses)
+                foreach (var ipAddress in _ipAddresses)
 				{
                     BeginHostScanEvent?.Invoke(ipAddress.ToString());
 
-                    Ping pingSender = new Ping();
+                    var pingSender = new Ping();
 
                     try
                     {
                         pingSender.PingCompleted += PingSender_PingCompleted;
-                        pingSender.SendAsync(ipAddress, ipAddress);
+
+                        /* https://msdn.microsoft.com/en-us/library/0e6kc029(v=vs.110).aspx
+                         * Default timeout is 5 seconds... That's a bit long... 
+                         */
+                         //TODO Make timeout configurable...
+                        pingSender.SendAsync(ipAddress, /*userToken:*/ ipAddress);
                     }
                     catch (Exception ex)
                     {
@@ -109,7 +114,7 @@ namespace mRemoteNG.Tools
         {
             // UserState is the IP Address
             var ip = e.UserState.ToString();
-            ScanHost scanHost = new ScanHost(ip);
+            var scanHost = new ScanHost(ip);
             hostCount++;
 
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scanning {hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}", true);
@@ -129,9 +134,7 @@ namespace mRemoteNG.Tools
                 }
                 catch (Exception dnsex)
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                        $"Tools.PortScan: Could not resolve {scanHost.HostIp} {Environment.NewLine} {dnsex.Message}",
-                        true);
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Could not resolve {scanHost.HostIp} {Environment.NewLine} {dnsex.Message}", true);
                 }
 
                 if (string.IsNullOrEmpty(scanHost.HostName))
@@ -139,12 +142,12 @@ namespace mRemoteNG.Tools
                     scanHost.HostName = scanHost.HostIp;
                 }
 
-                foreach (int port in _ports)
+                foreach (var port in _ports)
                 {
                     bool isPortOpen;
                     try
                     {
-                        System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(ip, port);
+                        var tcpClient = new System.Net.Sockets.TcpClient(ip, port);
                         isPortOpen = true;
                         scanHost.OpenPorts.Add(port);
                         tcpClient.Close();
@@ -209,16 +212,16 @@ namespace mRemoteNG.Tools
         
 		private static IPAddress[] IpAddressArrayFromRange(IPAddress ipAddress1, IPAddress ipAddress2)
 		{
-			IPAddress startIpAddress = IpAddressMin(ipAddress1, ipAddress2);
-			IPAddress endIpAddress = IpAddressMax(ipAddress1, ipAddress2);
+			var startIpAddress = IpAddressMin(ipAddress1, ipAddress2);
+			var endIpAddress = IpAddressMax(ipAddress1, ipAddress2);
 					
-			int startAddress = IpAddressToInt32(startIpAddress);
-			int endAddress = IpAddressToInt32(endIpAddress);
-			int addressCount = endAddress - startAddress;
+			var startAddress = IpAddressToInt32(startIpAddress);
+			var endAddress = IpAddressToInt32(endIpAddress);
+			var addressCount = endAddress - startAddress;
 					
-			IPAddress[] addressArray = new IPAddress[addressCount + 1];
-			int index = 0;
-			for (int address = startAddress; address <= endAddress; address++)
+			var addressArray = new IPAddress[addressCount + 1];
+			var index = 0;
+			for (var address = startAddress; address <= endAddress; address++)
 			{
 				addressArray[index] = IpAddressFromInt32(address);
 				index++;
@@ -229,26 +232,14 @@ namespace mRemoteNG.Tools
 				
 		private static IPAddress IpAddressMin(IPAddress ipAddress1, IPAddress ipAddress2)
 		{
-			if (IpAddressCompare(ipAddress1, ipAddress2) < 0) // ipAddress1 < ipAddress2
-			{
-				return ipAddress1;
-			}
-			else
-			{
-				return ipAddress2;
-			}
+		    // ipAddress1 < ipAddress2
+		    return IpAddressCompare(ipAddress1, ipAddress2) < 0 ? ipAddress1 : ipAddress2;
 		}
 				
 		private static IPAddress IpAddressMax(IPAddress ipAddress1, IPAddress ipAddress2)
 		{
-			if (IpAddressCompare(ipAddress1, ipAddress2) > 0) // ipAddress1 > ipAddress2
-			{
-				return ipAddress1;
-			}
-			else
-			{
-				return ipAddress2;
-			}
+		    // ipAddress1 > ipAddress2
+		    return IpAddressCompare(ipAddress1, ipAddress2) > 0 ? ipAddress1 : ipAddress2;
 		}
 				
 		private static int IpAddressCompare(IPAddress ipAddress1, IPAddress ipAddress2)
@@ -260,10 +251,10 @@ namespace mRemoteNG.Tools
 		{
 			if (ipAddress.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork)
 			{
-				throw (new ArgumentException("ipAddress"));
+				throw new ArgumentException("ipAddress");
 			}
 					
-			byte[] addressBytes = ipAddress.GetAddressBytes(); // in network order (big-endian)
+			var addressBytes = ipAddress.GetAddressBytes(); // in network order (big-endian)
 			if (BitConverter.IsLittleEndian)
 			{
 				Array.Reverse(addressBytes); // to host order (little-endian)
@@ -275,7 +266,7 @@ namespace mRemoteNG.Tools
 				
 		private static IPAddress IpAddressFromInt32(int ipAddress)
 		{
-			byte[] addressBytes = BitConverter.GetBytes(ipAddress); // in host order
+			var addressBytes = BitConverter.GetBytes(ipAddress); // in host order
 			if (BitConverter.IsLittleEndian)
 			{
 				Array.Reverse(addressBytes); // to network order (big-endian)

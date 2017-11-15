@@ -37,7 +37,7 @@ namespace mRemoteNG.App
         public static bool IsConnectionsFileLoaded { get; set; }
         public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        private static DateTime LastSqlUpdate { get; set; }
+        public static DateTime LastSqlUpdate { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ConnectionTreeModel ConnectionTreeModel
@@ -283,7 +283,7 @@ namespace mRemoteNG.App
                         connectionsLoader.ConnectionFileName = GetStartupConnectionFileName();
                     }
 
-                    CreateBackupFile(Convert.ToString(connectionsLoader.ConnectionFileName));
+                    CreateBackupFile(connectionsLoader.ConnectionFileName);
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
@@ -334,7 +334,7 @@ namespace mRemoteNG.App
                 if (ex is FileNotFoundException && !withDialog)
                 {
                     MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
-                    NewConnections(Convert.ToString(connectionsLoader.ConnectionFileName));
+                    NewConnections(connectionsLoader.ConnectionFileName);
                     return;
                 }
 
@@ -465,11 +465,11 @@ namespace mRemoteNG.App
                 if (Settings.Default.UseSQLServer)
                 {
                     connectionsSaver.SaveFormat = ConnectionsSaver.Format.SQL;
-                    connectionsSaver.SQLHost = Convert.ToString(Settings.Default.SQLHost);
-                    connectionsSaver.SQLDatabaseName = Convert.ToString(Settings.Default.SQLDatabaseName);
-                    connectionsSaver.SQLUsername = Convert.ToString(Settings.Default.SQLUser);
+                    connectionsSaver.SQLHost = Settings.Default.SQLHost;
+                    connectionsSaver.SQLDatabaseName = Settings.Default.SQLDatabaseName;
+                    connectionsSaver.SQLUsername = Settings.Default.SQLUser;
                     var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), EncryptionKey);
+                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Settings.Default.SQLPass, EncryptionKey);
                 }
 
                 connectionsSaver.SaveConnections();

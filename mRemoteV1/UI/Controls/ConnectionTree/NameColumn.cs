@@ -9,10 +9,10 @@ namespace mRemoteNG.UI.Controls
         public NameColumn(ImageGetterDelegate imageGetterDelegate)
         {
             AspectName = "Name";
-            FillsFreeSpace = true;
-            IsButton = true;
+            FillsFreeSpace = false;
             AspectGetter = item => ((ConnectionInfo) item).Name;
             ImageGetter = imageGetterDelegate;
+            AutoCompleteEditor = false;
         }
     }
 }

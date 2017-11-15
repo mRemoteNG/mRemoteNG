@@ -1,6 +1,6 @@
 using System;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
 
@@ -153,7 +153,7 @@ namespace mRemoteNG.Connection.Protocol
 					}
 					catch (Exception ex)
 					{
-						Runtime.MessageCollector.AddExceptionStackTrace("Couldn't dispose control, probably form is already closed (Connection.Protocol.Base)", ex);
+						Runtime.MessageCollector?.AddExceptionStackTrace("Couldn't dispose control, probably form is already closed (Connection.Protocol.Base)", ex);
 					}
 				}
 
@@ -172,12 +172,12 @@ namespace mRemoteNG.Connection.Protocol
 			    }
 			    catch (Exception ex)
 			    {
-                    Runtime.MessageCollector.AddExceptionStackTrace("Couldn't set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)", ex);
+                    Runtime.MessageCollector?.AddExceptionStackTrace("Couldn't set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)", ex);
 			    }
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionStackTrace("Couldn't Close InterfaceControl BG (Connection.Protocol.Base)", ex);
+                Runtime.MessageCollector?.AddExceptionStackTrace("Couldn't Close InterfaceControl BG (Connection.Protocol.Base)", ex);
 			}
 		}
 				

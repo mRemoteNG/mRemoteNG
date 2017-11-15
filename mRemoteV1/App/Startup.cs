@@ -42,8 +42,6 @@ namespace mRemoteNG.App
             ParseCommandLineArgs();
             IeBrowserEmulation.Register();
             GetConnectionIcons();
-            DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a=>"ConDefault"+a);
-            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a=>"InhDefault"+a);
         }
 
         private static void GetConnectionIcons()
@@ -76,7 +74,7 @@ namespace mRemoteNG.App
         {
             var osData = GetOperatingSystemData();
             var architecture = GetArchitectureData();
-            Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
+            Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new[] { osData, architecture }, s => !string.IsNullOrEmpty(s))));
         }
 
         private static string GetOperatingSystemData()
@@ -214,10 +212,37 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex);
             }
         }
 
+        /// <summary>
+        /// Returns a path to a file connections XML file for a given absolute or relative path
+        /// </summary>
+        /// <param name="ConsParam">The absolute or relative path to the connection XML file</param>
+        /// <returns>string or null</returns>
+        private static string GetCustomConsPath(string ConsParam)
+        {
+            // early exit condition
+            if (string.IsNullOrEmpty(ConsParam))
+                return null;
+
+            // trim invalid characters for the Combine method (see: https://msdn.microsoft.com/en-us/library/fyy7a5kt.aspx#Anchor_2)
+            ConsParam = ConsParam.Trim().TrimStart('\\').Trim();
+
+            // fallback paths
+            if (File.Exists(ConsParam))
+                return ConsParam;
+
+            if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, ConsParam)))
+                return GeneralAppInfo.HomePath + Path.DirectorySeparatorChar + ConsParam;
+
+            if (File.Exists(Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, ConsParam)))
+                return ConnectionsFileInfo.DefaultConnectionsPath + Path.DirectorySeparatorChar + ConsParam;
+
+            // default case
+            return null;
+        }
 
         private static void ParseCommandLineArgs()
         {
@@ -228,11 +253,11 @@ namespace mRemoteNG.App
                 var ConsParam = "";
                 if (cmd["cons"] != null)
                 {
-                    ConsParam = "cons";
+                    ConsParam = cmd["cons"];
                 }
                 if (cmd["c"] != null)
                 {
-                    ConsParam = "c";
+                    ConsParam = cmd["c"];
                 }
 
                 var ResetPosParam = "";
@@ -282,36 +307,23 @@ namespace mRemoteNG.App
                     NoReconnectParam = "norc";
                 }
 
-                if (!string.IsNullOrEmpty(ConsParam))
+                // Handle custom connection file location
+                var consPathFromParam = GetCustomConsPath(ConsParam);
+                if (consPathFromParam != null)
                 {
-                    if (File.Exists(cmd[ConsParam]) == false)
-                    {
-                        if (File.Exists(GeneralAppInfo.HomePath + "\\" + cmd[ConsParam]))
-                        {
-                            Settings.Default.LoadConsFromCustomLocation = true;
-                            Settings.Default.CustomConsPath = GeneralAppInfo.HomePath + "\\" + cmd[ConsParam];
-                            return;
-                        }
-                        if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
-                        {
-                            Settings.Default.LoadConsFromCustomLocation = true;
-                            Settings.Default.CustomConsPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = cmd[ConsParam];
-                        return;
-                    }
+                    Settings.Default.CustomConsPath = consPathFromParam;
+                    Settings.Default.LoadConsFromCustomLocation = true;
                 }
 
                 if (!string.IsNullOrEmpty(ResetPosParam))
                 {
                     Settings.Default.MainFormKiosk = false;
-                    Settings.Default.MainFormLocation = new Point(999, 999);
-                    Settings.Default.MainFormSize = new Size(900, 600);
+	                var newWidth = 900;
+	                var newHeight = 600;
+	                var newX = Screen.PrimaryScreen.WorkingArea.Width/2 - newWidth/2;
+	                var newY = Screen.PrimaryScreen.WorkingArea.Height/2 - newHeight/2;
+                    Settings.Default.MainFormLocation = new Point(newX, newY);
+                    Settings.Default.MainFormSize = new Size(newWidth, newHeight);
                     Settings.Default.MainFormState = FormWindowState.Normal;
                 }
 
@@ -329,6 +341,8 @@ namespace mRemoteNG.App
                 {
                     Settings.Default.ResetToolbars = true;
                 }
+
+                Settings.Default.Save();
             }
             catch (Exception ex)
             {

@@ -78,10 +78,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 radCredentialsCustom.Checked = true;
             }
 
-            txtCredentialsUsername.Text = Convert.ToString(Settings.Default.DefaultUsername);
+            txtCredentialsUsername.Text = Settings.Default.DefaultUsername;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), Runtime.EncryptionKey);
-            txtCredentialsDomain.Text = Convert.ToString(Settings.Default.DefaultDomain);
+            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+            txtCredentialsDomain.Text = Settings.Default.DefaultDomain;
 
             if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Never)
             {

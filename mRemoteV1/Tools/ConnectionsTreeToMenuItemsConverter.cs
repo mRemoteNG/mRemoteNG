@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Messages;
 using mRemoteNG.Tree;
 
 
@@ -31,7 +30,7 @@ namespace mRemoteNG.Tools
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex);
             }
             return dropDownList;
         }
@@ -67,7 +66,7 @@ namespace mRemoteNG.Tools
             }
             else if (node.GetTreeNodeType() == TreeNodeType.Connection)
             {
-                menuItem.Image = Resources.Pause;
+                menuItem.Image = node.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause;
                 menuItem.Tag = node;
             }
             

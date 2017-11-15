@@ -61,6 +61,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not find external tool with name &quot;{0}&quot;.
+        /// </summary>
+        internal static string CouldNotFindExternalTool {
+            get {
+                return ResourceManager.GetString("CouldNotFindExternalTool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         internal static string strAbout {
@@ -440,7 +449,7 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Looks up a localized string similar to You cannot import a normal connection file.
-        ///Please use File - Load Connections for normal connection files!.
+        ///Please use File - Open Connection File for normal connection files!.
         /// </summary>
         internal static string strCannotImportNormalSessionFile {
             get {

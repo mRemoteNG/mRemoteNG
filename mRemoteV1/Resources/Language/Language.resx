@@ -245,7 +245,7 @@
   </data>
   <data name="strCannotImportNormalSessionFile" xml:space="preserve">
     <value>You cannot import a normal connection file.
-Please use File - Load Connections for normal connection files!</value>
+Please use File - Open Connection File for normal connection files!</value>
   </data>
   <data name="strCannotStartPortScan" xml:space="preserve">
     <value>Cannot start Port Scan, incorrect IP format!</value>
@@ -2432,5 +2432,8 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
     <value>Alert on Idle Disconnect</value>
+  </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>Could not find external tool with name "{0}"</value>
   </data>
 </root>

@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // <Assembly: AssemblyVersion("1.0.*")>
 
-[assembly: AssemblyVersion("1.75.7008.*")]
+[assembly: AssemblyVersion("1.75.7011.*")]
 
 [assembly:NeutralResourcesLanguageAttribute("en")]
 
