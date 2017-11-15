@@ -1307,7 +1307,6 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
 							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RDGatewayDomain");
