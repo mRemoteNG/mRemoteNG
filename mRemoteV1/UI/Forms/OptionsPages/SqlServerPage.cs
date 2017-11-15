@@ -68,18 +68,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private static void ReinitializeSqlUpdater()
         {
-            Runtime.RemoteConnectionsSyncronizer?.Dispose();
-            FrmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
+            Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Dispose();
 
             if (Settings.Default.UseSQLServer)
             {
-                Runtime.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
-                Runtime.RemoteConnectionsSyncronizer.Enable();
+                Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+                Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
             }
             else
             {
-                Runtime.RemoteConnectionsSyncronizer?.Dispose();
-                Runtime.RemoteConnectionsSyncronizer = null;
+                Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Dispose();
+                Runtime.ConnectionsService.RemoteConnectionsSyncronizer = null;
+                Runtime.LoadConnections(true);
             }
         }
 

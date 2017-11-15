@@ -55,7 +55,7 @@ namespace mRemoteNG.App
         private static void SaveConnections()
         {
             if (Settings.Default.SaveConsOnExit)
-                Runtime.SaveConnections();
+                Runtime.ConnectionsService.SaveConnections();
         }
 
         private static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, FrmMain frmMain)

@@ -26,11 +26,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSingleClickOnConnectionOpensIt.Text = Language.strSingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
             chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
+            chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
 
             lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
-
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
-
             lblAutoSave1.Text = Language.strAutoSaveEvery;
 
             lblClosingConnections.Text = Language.strLabelClosingConnections;
@@ -47,11 +46,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSingleClickOnConnectionOpensIt.Checked = Settings.Default.SingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
             chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
+            chkSaveConnectionsAfterEveryEdit.Checked = Settings.Default.SaveConnectionsAfterEveryEdit;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
-
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
-
             numAutoSave.Value = Convert.ToDecimal(Settings.Default.AutoSaveEveryMinutes);
 
             switch (Settings.Default.ConfirmCloseConnection)
@@ -76,11 +74,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SingleClickOnConnectionOpensIt = chkSingleClickOnConnectionOpensIt.Checked;
             Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
             Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
+            Settings.Default.SaveConnectionsAfterEveryEdit = chkSaveConnectionsAfterEveryEdit.Checked;
 
             Settings.Default.RdpReconnectionCount = (int) numRdpReconnectionCount.Value;
-
             Settings.Default.ConRDPOverallConnectionTimeout = (int) numRDPConTimeout.Value;
-
             Settings.Default.AutoSaveEveryMinutes = (int) numAutoSave.Value;
             if (Settings.Default.AutoSaveEveryMinutes > 0)
             {
@@ -111,7 +108,5 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.Save();
         }
-
-        
     }
 }

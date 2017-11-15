@@ -748,13 +748,11 @@ namespace mRemoteNG.UI.Controls
         private void OnAddConnectionClicked(object sender, EventArgs e)
         {
             _connectionTree.AddConnection();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void OnAddFolderClicked(object sender, EventArgs e)
         {
             _connectionTree.AddFolder();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void OnSortAscendingClicked(object sender, EventArgs e)
@@ -770,13 +768,11 @@ namespace mRemoteNG.UI.Controls
         private void OnMoveUpClicked(object sender, EventArgs e)
         {
             _connectionTree.SelectedNode.Parent.PromoteChild(_connectionTree.SelectedNode);
-            Runtime.SaveConnectionsAsync();
         }
 
         private void OnMoveDownClicked(object sender, EventArgs e)
         {
             _connectionTree.SelectedNode.Parent.DemoteChild(_connectionTree.SelectedNode);
-            Runtime.SaveConnectionsAsync();
         }
 
         private void OnExternalToolClicked(object sender, EventArgs e)

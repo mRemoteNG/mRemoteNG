@@ -95,7 +95,7 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("ConfigurationImportFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection successful.
         /// </summary>
@@ -174,6 +174,15 @@ namespace mRemoteNG {
         internal static string RepositoryIsUnlocked {
             get {
                 return ResourceManager.GetString("RepositoryIsUnlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save connections after every edit.
+        /// </summary>
+        internal static string SaveConnectionsAfterEveryEdit {
+            get {
+                return ResourceManager.GetString("SaveConnectionsAfterEveryEdit", resourceCulture);
             }
         }
         
@@ -6337,6 +6346,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show On Toolbar.
+        /// </summary>
+        internal static string strShowOnToolbar {
+            get {
+                return ResourceManager.GetString("strShowOnToolbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show protocols on tab names.
         /// </summary>
         internal static string strShowProtocolOnTabs {
@@ -7055,16 +7073,7 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strTryIntegrate", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Try to integrate.
-        /// </summary>
-        internal static string strShowOnToolbar {
-            get {
-                return ResourceManager.GetString("strShowOnToolbar", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>

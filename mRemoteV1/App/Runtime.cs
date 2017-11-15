@@ -4,15 +4,14 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
@@ -38,13 +37,10 @@ namespace mRemoteNG.App
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
-        public static RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        public static DateTime LastSqlUpdate { get; set; }
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
-        public static ConnectionsService ConnectionsService { get; } = new ConnectionsService();
+        public static ConnectionsService ConnectionsService { get; } = new ConnectionsService(PuttySessionsManager.Instance);
 
         #region Connections Loading/Saving
         public static void LoadConnectionsAsync()
@@ -64,11 +60,12 @@ namespace mRemoteNG.App
 
         public static void LoadConnections(bool withDialog = false)
         {
-            var connectionsLoader = new ConnectionsLoader();
+            var connectionFileName = "";
+
             try
             {
                 // disable sql update checking while we are loading updates
-                RemoteConnectionsSyncronizer?.Disable();
+                ConnectionsService.RemoteConnectionsSyncronizer?.Disable();
 
                 if (!Settings.Default.UseSQLServer)
                 {
@@ -76,43 +73,41 @@ namespace mRemoteNG.App
                     {
                         var loadDialog = DialogFactory.BuildLoadConnectionsDialog();
                         if (loadDialog.ShowDialog() != DialogResult.OK) return;
-                        connectionsLoader.ConnectionFileName = loadDialog.FileName;
+                        connectionFileName = loadDialog.FileName;
                     }
                     else
                     {
-                        connectionsLoader.ConnectionFileName = ConnectionsService.GetStartupConnectionFileName();
+                        connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                     }
 
                     var backupFileCreator = new FileBackupCreator();
-                    backupFileCreator.CreateBackupFile(connectionsLoader.ConnectionFileName);
+                    backupFileCreator.CreateBackupFile(connectionFileName);
 
                     var backupPruner = new FileBackupPruner();
-                    backupPruner.PruneBackupFiles(connectionsLoader.ConnectionFileName);
+                    backupPruner.PruneBackupFiles(connectionFileName);
                 }
 
-                connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                ConnectionsService.ConnectionTreeModel = connectionsLoader.LoadConnections(false);
-                Windows.TreeForm.ConnectionTree.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
+                ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
 
                 if (Settings.Default.UseSQLServer)
                 {
-                    LastSqlUpdate = DateTime.Now;
+                    ConnectionsService.LastSqlUpdate = DateTime.Now;
                 }
                 else
                 {
-                    if (connectionsLoader.ConnectionFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
+                    if (connectionFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
                     {
                         Settings.Default.LoadConsFromCustomLocation = false;
                     }
                     else
                     {
                         Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = connectionsLoader.ConnectionFileName;
+                        Settings.Default.CustomConsPath = connectionFileName;
                     }
                 }
 
                 // re-enable sql update checking after updates are loaded
-                RemoteConnectionsSyncronizer?.Enable();
+                ConnectionsService.RemoteConnectionsSyncronizer?.Enable();
             }
             catch (Exception ex)
             {
@@ -137,7 +132,7 @@ namespace mRemoteNG.App
                 }
                 if (ex is FileNotFoundException && !withDialog)
                 {
-                    MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
+                    MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionFileName), ex, MessageClass.InformationMsg);
 
                     string[] commandButtons =
                     {
@@ -147,7 +142,7 @@ namespace mRemoteNG.App
                         Language.strMenuExit
                     };
 
-                    bool answered = false;
+                    var answered = false;
                     while (!answered)
                     {
                         try
@@ -157,7 +152,7 @@ namespace mRemoteNG.App
                             switch (CTaskDialog.CommandButtonResult)
                             {
                                 case 0:
-                                    ConnectionsService.NewConnections(connectionsLoader.ConnectionFileName);
+                                    ConnectionsService.NewConnectionsFile(connectionFileName);
                                     answered = true;
                                     break;
                                 case 1:
@@ -165,7 +160,7 @@ namespace mRemoteNG.App
                                     answered = true;
                                     break;
                                 case 2:
-                                    ConnectionsService.NewConnections(connectionsLoader.ConnectionFileName);
+                                    ConnectionsService.NewConnectionsFile(connectionFileName);
                                     Import.ImportFromFile(ConnectionsService.ConnectionTreeModel.RootNodes[0]);
                                     answered = true;
                                     break;
@@ -177,15 +172,14 @@ namespace mRemoteNG.App
                         }
                         catch (Exception exc)
                         {
-                            MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), exc, MessageClass.InformationMsg);
+                            MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionFileName), exc, MessageClass.InformationMsg);
                         }
-
                     }
                     return;
                 }
 
-                MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
-                if (connectionsLoader.ConnectionFileName != ConnectionsService.GetStartupConnectionFileName())
+                MessageCollector.AddExceptionStackTrace(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionFileName), ex);
+                if (connectionFileName != ConnectionsService.GetStartupConnectionFileName())
                 {
                     LoadConnections(withDialog);
                 }
@@ -196,110 +190,6 @@ namespace mRemoteNG.App
                         @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
                 }
-            }
-        }
-
-        public static void SaveConnectionsAsync()
-        {
-            var t = new Thread(SaveConnectionsBGd);
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
-        }
-
-        private static readonly object SaveLock = new object();
-        private static void SaveConnectionsBGd()
-        {
-            Monitor.Enter(SaveLock);
-            SaveConnections();
-            Monitor.Exit(SaveLock);
-        }
-
-        public static void SaveConnections()
-        {
-            if (ConnectionsService.ConnectionTreeModel == null) return;
-            if (!ConnectionsService.IsConnectionsFileLoaded) return;
-
-            try
-            {
-                RemoteConnectionsSyncronizer?.Disable();
-
-                var connectionsSaver = new ConnectionsSaver();
-
-                if (!Settings.Default.UseSQLServer)
-                    connectionsSaver.ConnectionFileName = ConnectionsService.GetStartupConnectionFileName();
-
-                connectionsSaver.SaveFilter = new SaveFilter();
-                connectionsSaver.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
-
-                if (Settings.Default.UseSQLServer)
-                {
-                    connectionsSaver.SaveFormat = ConnectionsSaver.Format.SQL;
-                    connectionsSaver.SQLHost = Settings.Default.SQLHost;
-                    connectionsSaver.SQLDatabaseName = Settings.Default.SQLDatabaseName;
-                    connectionsSaver.SQLUsername = Settings.Default.SQLUser;
-                    var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Settings.Default.SQLPass, EncryptionKey);
-                }
-
-                connectionsSaver.SaveConnections();
-
-                if (Settings.Default.UseSQLServer)
-                    LastSqlUpdate = DateTime.Now;
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionsFileCouldNotBeSaved + Environment.NewLine + ex.Message);
-            }
-            finally
-            {
-                RemoteConnectionsSyncronizer?.Enable();
-            }
-        }
-
-        public static void SaveConnectionsAs()
-        {
-            var connectionsSave = new ConnectionsSaver();
-
-            try
-            {
-                RemoteConnectionsSyncronizer?.Disable();
-
-                using (var saveFileDialog = new SaveFileDialog())
-                {
-                    saveFileDialog.CheckPathExists = true;
-                    saveFileDialog.InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath;
-                    saveFileDialog.FileName = ConnectionsFileInfo.DefaultConnectionsFile;
-                    saveFileDialog.OverwritePrompt = true;
-                    saveFileDialog.Filter = $@"{Language.strFiltermRemoteXML}|*.xml|{Language.strFilterAll}|*.*";
-
-                    if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
-
-                    connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
-                    connectionsSave.ConnectionFileName = saveFileDialog.FileName;
-                    connectionsSave.SaveFilter = new SaveFilter();
-                    connectionsSave.ConnectionTreeModel = ConnectionsService.ConnectionTreeModel;
-
-                    connectionsSave.SaveConnections();
-
-                    if (saveFileDialog.FileName == ConnectionsService.GetDefaultStartupConnectionFileName())
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = false;
-                    }
-                    else
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = saveFileDialog.FileName;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex);
-            }
-            finally
-            {
-                RemoteConnectionsSyncronizer?.Enable();
             }
         }
         #endregion

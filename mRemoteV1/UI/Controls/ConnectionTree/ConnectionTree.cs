@@ -17,13 +17,13 @@ namespace mRemoteNG.UI.Controls
 {
 	public partial class ConnectionTree : TreeListView, IConnectionTree
     {
-        private ConnectionTreeModel _connectionTreeModel;
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
 	    private readonly StatusImageList _statusImageList = new StatusImageList();
 		private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
+        private ConnectionTreeModel _connectionTreeModel;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -53,6 +53,8 @@ namespace mRemoteNG.UI.Controls
             SetupConnectionTreeView();
             UseOverlays = false;
         }
+
+        
 
         protected override void Dispose(bool disposing)
         {
@@ -216,7 +218,7 @@ namespace mRemoteNG.UI.Controls
         #region ConnectionTree Behavior
         public RootNodeInfo GetRootConnectionNode()
         {
-            return (RootNodeInfo)Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
+            return (RootNodeInfo)ConnectionTreeModel.RootNodes.First(item => item is RootNodeInfo);
         }
 
         public void InvokeExpand(object model)
@@ -278,7 +280,6 @@ namespace mRemoteNG.UI.Controls
             var newNode = SelectedNode.Clone();
             SelectedNode.Parent.AddChildBelow(newNode, SelectedNode);
             newNode.Parent.SetChildBelow(newNode, SelectedNode);
-            Runtime.SaveConnectionsAsync();
         }
 
         public void RenameSelectedNode()
@@ -292,7 +293,6 @@ namespace mRemoteNG.UI.Controls
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
             if (!NodeDeletionConfirmer.Confirm(SelectedNode)) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
-            Runtime.SaveConnectionsAsync();
         }
 
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
@@ -305,8 +305,6 @@ namespace mRemoteNG.UI.Controls
                 sortTargetAsContainer.SortRecursive(sortDirection);
             else
                 SelectedNode.Parent.SortRecursive(sortDirection);
-
-            Runtime.SaveConnectionsAsync();
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
@@ -387,7 +385,6 @@ namespace mRemoteNG.UI.Controls
                 _nodeInEditMode = false;
                 _allowEdit = false;
                 Windows.ConfigForm.SelectedTreeNode = SelectedNode;
-                Runtime.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {
