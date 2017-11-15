@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -847,7 +847,7 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Looks up a localized string similar to For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 8.0 installed. You can download it here: http://support.microsoft.com/kb/925876
-        ///If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at http://forum.mremoteng.org/..
+        ///If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at {0}..
         /// </summary>
         internal static string strCcRDPFailed {
             get {
@@ -868,7 +868,7 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
         ///Please make sure that you have the VncSharp.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
-        ///If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/.
+        ///If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at {0}..
         /// </summary>
         internal static string strCcVNCFailed {
             get {
@@ -1392,7 +1392,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Conenction failed!.
+        ///   Looks up a localized string similar to Connection failed!.
         /// </summary>
         internal static string strConnectionEventConnectionFailed {
             get {
@@ -7344,7 +7344,6 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strVncConnectionDisconnectFailed", resourceCulture);
             }
         }
-        
         
         /// <summary>
         ///   Looks up a localized string similar to VNC Refresh Screen Failed!.
