@@ -315,6 +315,7 @@
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
     <Compile Include="Tools\Maybe.cs" />
+    <Compile Include="Tools\MultiSSHController.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\ScanHost.cs" />
@@ -420,6 +421,9 @@
     </Compile>
     <Compile Include="UI\Controls\ConnectionTree\IConnectionTreeDelegate.cs" />
     <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\MultiSshToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\PageSequence\ISequenceChangingNotifier.cs" />

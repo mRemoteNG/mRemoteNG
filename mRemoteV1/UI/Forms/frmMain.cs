@@ -181,6 +181,7 @@ namespace mRemoteNG.UI.Forms
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;
+	        viewMenu1.TsMultiSsh = _multiSshToolStrip;
             viewMenu1.FullscreenHandler = Fullscreen;
             viewMenu1.MainForm = this;
 
@@ -189,7 +190,6 @@ namespace mRemoteNG.UI.Forms
 
             _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
-
 
         //Theming support
         private void SetSchema()
@@ -208,11 +208,10 @@ namespace mRemoteNG.UI.Forms
                 vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
                 tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
             }
         }
-		
- 
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
