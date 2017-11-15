@@ -22,7 +22,7 @@ namespace mRemoteNG.Connection.Protocol
 
         protected Putty_SSHVersion PuttySSHVersion { private get; set; }
 
-	    private IntPtr PuttyHandle { get; set; }
+	    public IntPtr PuttyHandle { get; set; }
 
 	    private Process PuttyProcess { get; set; }
 

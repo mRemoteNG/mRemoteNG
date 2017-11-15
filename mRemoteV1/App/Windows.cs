@@ -18,6 +18,7 @@ namespace mRemoteNG.App
         private static DockContent _helpPanel = new DockContent();
         private static ExternalToolsWindow _externalappsForm;
         private static DockContent _externalappsPanel = new DockContent();
+        private static DockContent _sshcommandPanel = new DockContent();
         private static PortScanWindow _portscanForm;
         private static DockContent _portscanPanel = new DockContent();
         private static UltraVNCWindow _ultravncscForm;

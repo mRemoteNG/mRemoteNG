@@ -45,6 +45,8 @@ namespace mRemoteNG.UI.Forms
         private SystemMenu _systemMenu;
         private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private MultiSSHController _multiSSHController ;
+
 
         private frmMain()
 		{
@@ -52,7 +54,8 @@ namespace mRemoteNG.UI.Forms
 			InitializeComponent();
             _fullscreen = new Fullscreen(this);
             pnlDock.Theme = new VS2012LightTheme();
-		}
+            _multiSSHController = new MultiSSHController(txtMultiSSH);
+        }
 
         static frmMain()
         {
@@ -260,6 +263,7 @@ namespace mRemoteNG.UI.Forms
 			mMenViewResetLayout.Text = Language.strMenuResetLayout;
 			mMenViewQuickConnectToolbar.Text = Language.strMenuQuickConnectToolbar;
 			mMenViewExtAppsToolbar.Text = Language.strMenuExternalToolsToolbar;
+            mMenViewMultiSSHToolbar.Text = "Multi SSH Toolbar"; // TODO: Figure out how to put in language text
 			mMenViewFullscreen.Text = Language.strMenuFullScreen;
 			
 			mMenTools.Text = Language.strMenuTools;
@@ -307,9 +311,12 @@ namespace mRemoteNG.UI.Forms
 			tsExternalTools.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
 			tsQuickConnect.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
 			tsQuickConnect.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
-		}
-		
-		private static void ApplyMenuColors(IEnumerable itemCollection)
+            tsMultiSSH.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+            tsMultiSSH.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+
+        }
+
+        private static void ApplyMenuColors(IEnumerable itemCollection)
 		{
 		    foreach (ToolStripItem item in itemCollection)
 			{
@@ -716,6 +723,7 @@ namespace mRemoteNG.UI.Forms
 
             mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible;
             mMenViewQuickConnectToolbar.Checked = tsQuickConnect.Visible;
+            mMenViewMultiSSHToolbar.Checked = tsMultiSSH.Visible;
 
             mMenViewConnectionPanels.DropDownItems.Clear();
 
@@ -851,6 +859,20 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 
+        private void mMenViewMultiSSHToolbar_Click(object sender, EventArgs e)
+        {
+            if (mMenViewMultiSSHToolbar.Checked == false)
+            {
+                tsMultiSSH.Visible = true;
+                mMenViewMultiSSHToolbar.Checked = true;
+            }
+            else
+            {
+                tsMultiSSH.Visible = false;
+                mMenViewMultiSSHToolbar.Checked = false;
+            }
+        }
+
         private void mMenViewFullscreen_Click(object sender, EventArgs e)
 		{
 			_fullscreen.Value = !_fullscreen.Value;
@@ -941,6 +963,7 @@ namespace mRemoteNG.UI.Forms
 				}
 				cmbQuickConnect.Add(connectionInfo);
                 _connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                _multiSSHController.ProcessNewQuickConnect(connectionInfo);
 			}
 			catch (Exception ex)
 			{

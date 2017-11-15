@@ -69,6 +69,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.mMenViewQuickConnectToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewExtAppsToolbar = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenViewMultiSSHToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.mMenViewFullscreen = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenTools = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +103,9 @@ namespace mRemoteNG.UI.Forms
             this.tsExternalTools = new System.Windows.Forms.ToolStrip();
             this.cMenExtAppsToolbar = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMenToolbarShowText = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsMultiSSH = new System.Windows.Forms.ToolStrip();
+            this.lblMultiSSH = new System.Windows.Forms.ToolStripLabel();
+            this.txtMultiSSH = new System.Windows.Forms.ToolStripTextBox();
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.msMain.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
@@ -109,6 +113,7 @@ namespace mRemoteNG.UI.Forms
             this.tsContainer.SuspendLayout();
             this.tsQuickConnect.SuspendLayout();
             this.cMenExtAppsToolbar.SuspendLayout();
+            this.tsMultiSSH.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDock
@@ -120,7 +125,7 @@ namespace mRemoteNG.UI.Forms
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
             this.pnlDock.Name = "pnlDock";
-            this.pnlDock.Size = new System.Drawing.Size(966, 498);
+            this.pnlDock.Size = new System.Drawing.Size(1288, 541);
             this.pnlDock.TabIndex = 13;
             this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
             // 
@@ -128,15 +133,16 @@ namespace mRemoteNG.UI.Forms
             // 
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
+            this.msMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mMenFile,
             this.mMenView,
             this.mMenTools,
             this.mMenInfo});
-            this.msMain.Location = new System.Drawing.Point(3, 0);
+            this.msMain.Location = new System.Drawing.Point(3, 75);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.msMain.Size = new System.Drawing.Size(177, 24);
+            this.msMain.Size = new System.Drawing.Size(210, 28);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 16;
             this.msMain.Text = "Main Toolbar";
@@ -163,7 +169,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenFileSep5,
             this.mMenFileExit});
             this.mMenFile.Name = "mMenFile";
-            this.mMenFile.Size = new System.Drawing.Size(37, 20);
+            this.mMenFile.Size = new System.Drawing.Size(44, 24);
             this.mMenFile.Text = "&File";
             this.mMenFile.DropDownOpening += new System.EventHandler(this.mMenFile_DropDownOpening);
             // 
@@ -172,7 +178,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenFileNewConnection.Image = global::mRemoteNG.Resources.Connection_Add;
             this.mMenFileNewConnection.Name = "mMenFileNewConnection";
             this.mMenFileNewConnection.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.mMenFileNewConnection.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileNewConnection.Size = new System.Drawing.Size(340, 26);
             this.mMenFileNewConnection.Text = "New Connection";
             this.mMenFileNewConnection.Click += new System.EventHandler(this.mMenFileNewConnection_Click);
             // 
@@ -182,20 +188,20 @@ namespace mRemoteNG.UI.Forms
             this.mMenFileNewFolder.Name = "mMenFileNewFolder";
             this.mMenFileNewFolder.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
-            this.mMenFileNewFolder.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileNewFolder.Size = new System.Drawing.Size(340, 26);
             this.mMenFileNewFolder.Text = "New Folder";
             this.mMenFileNewFolder.Click += new System.EventHandler(this.mMenFileNewFolder_Click);
             // 
             // mMenFileSep1
             // 
             this.mMenFileSep1.Name = "mMenFileSep1";
-            this.mMenFileSep1.Size = new System.Drawing.Size(278, 6);
+            this.mMenFileSep1.Size = new System.Drawing.Size(337, 6);
             // 
             // mMenFileNew
             // 
             this.mMenFileNew.Image = global::mRemoteNG.Resources.Connections_New;
             this.mMenFileNew.Name = "mMenFileNew";
-            this.mMenFileNew.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileNew.Size = new System.Drawing.Size(340, 26);
             this.mMenFileNew.Text = "New Connection File";
             this.mMenFileNew.Click += new System.EventHandler(this.mMenFileNew_Click);
             // 
@@ -204,7 +210,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenFileLoad.Image = global::mRemoteNG.Resources.Connections_Load;
             this.mMenFileLoad.Name = "mMenFileLoad";
             this.mMenFileLoad.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mMenFileLoad.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileLoad.Size = new System.Drawing.Size(340, 26);
             this.mMenFileLoad.Text = "Open Connection File...";
             this.mMenFileLoad.Click += new System.EventHandler(this.mMenFileLoad_Click);
             // 
@@ -213,7 +219,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenFileSave.Image = global::mRemoteNG.Resources.Connections_Save;
             this.mMenFileSave.Name = "mMenFileSave";
             this.mMenFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mMenFileSave.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileSave.Size = new System.Drawing.Size(340, 26);
             this.mMenFileSave.Text = "Save Connection File";
             this.mMenFileSave.Click += new System.EventHandler(this.mMenFileSave_Click);
             // 
@@ -223,20 +229,20 @@ namespace mRemoteNG.UI.Forms
             this.mMenFileSaveAs.Name = "mMenFileSaveAs";
             this.mMenFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.mMenFileSaveAs.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileSaveAs.Size = new System.Drawing.Size(340, 26);
             this.mMenFileSaveAs.Text = "Save Connection File As...";
             this.mMenFileSaveAs.Click += new System.EventHandler(this.mMenFileSaveAs_Click);
             // 
             // mMenFileSep2
             // 
             this.mMenFileSep2.Name = "mMenFileSep2";
-            this.mMenFileSep2.Size = new System.Drawing.Size(278, 6);
+            this.mMenFileSep2.Size = new System.Drawing.Size(337, 6);
             // 
             // mMenFileDelete
             // 
             this.mMenFileDelete.Image = global::mRemoteNG.Resources.Delete;
             this.mMenFileDelete.Name = "mMenFileDelete";
-            this.mMenFileDelete.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileDelete.Size = new System.Drawing.Size(340, 26);
             this.mMenFileDelete.Text = "Delete...";
             this.mMenFileDelete.Click += new System.EventHandler(this.mMenFileDelete_Click);
             // 
@@ -244,7 +250,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenFileRename.Image = global::mRemoteNG.Resources.Rename;
             this.mMenFileRename.Name = "mMenFileRename";
-            this.mMenFileRename.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileRename.Size = new System.Drawing.Size(340, 26);
             this.mMenFileRename.Text = "Rename";
             this.mMenFileRename.Click += new System.EventHandler(this.mMenFileRename_Click);
             // 
@@ -252,27 +258,27 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenFileDuplicate.Image = global::mRemoteNG.Resources.page_copy;
             this.mMenFileDuplicate.Name = "mMenFileDuplicate";
-            this.mMenFileDuplicate.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileDuplicate.Size = new System.Drawing.Size(340, 26);
             this.mMenFileDuplicate.Text = "Duplicate";
             this.mMenFileDuplicate.Click += new System.EventHandler(this.mMenFileDuplicate_Click);
             // 
             // mMenFileSep4
             // 
             this.mMenFileSep4.Name = "mMenFileSep4";
-            this.mMenFileSep4.Size = new System.Drawing.Size(278, 6);
+            this.mMenFileSep4.Size = new System.Drawing.Size(337, 6);
             // 
             // mMenReconnectAll
             // 
             this.mMenReconnectAll.Image = global::mRemoteNG.Resources.Refresh;
             this.mMenReconnectAll.Name = "mMenReconnectAll";
-            this.mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
+            this.mMenReconnectAll.Size = new System.Drawing.Size(340, 26);
             this.mMenReconnectAll.Text = "Reconnect All Connections";
             this.mMenReconnectAll.Click += new System.EventHandler(this.mMenReconnectAll_Click);
             // 
             // mMenFileSep3
             // 
             this.mMenFileSep3.Name = "mMenFileSep3";
-            this.mMenFileSep3.Size = new System.Drawing.Size(278, 6);
+            this.mMenFileSep3.Size = new System.Drawing.Size(337, 6);
             // 
             // mMenFileImport
             // 
@@ -281,48 +287,48 @@ namespace mRemoteNG.UI.Forms
             this.mMenFileImportFromActiveDirectory,
             this.mMenFileImportFromPortScan});
             this.mMenFileImport.Name = "mMenFileImport";
-            this.mMenFileImport.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileImport.Size = new System.Drawing.Size(340, 26);
             this.mMenFileImport.Text = "&Import";
             // 
             // mMenFileImportFromFile
             // 
             this.mMenFileImportFromFile.Name = "mMenFileImportFromFile";
-            this.mMenFileImportFromFile.Size = new System.Drawing.Size(235, 22);
+            this.mMenFileImportFromFile.Size = new System.Drawing.Size(284, 26);
             this.mMenFileImportFromFile.Text = "Import from &File...";
             this.mMenFileImportFromFile.Click += new System.EventHandler(this.mMenFileImportFromFile_Click);
             // 
             // mMenFileImportFromActiveDirectory
             // 
             this.mMenFileImportFromActiveDirectory.Name = "mMenFileImportFromActiveDirectory";
-            this.mMenFileImportFromActiveDirectory.Size = new System.Drawing.Size(235, 22);
+            this.mMenFileImportFromActiveDirectory.Size = new System.Drawing.Size(284, 26);
             this.mMenFileImportFromActiveDirectory.Text = "Import from &Active Directory...";
             this.mMenFileImportFromActiveDirectory.Click += new System.EventHandler(this.mMenFileImportFromActiveDirectory_Click);
             // 
             // mMenFileImportFromPortScan
             // 
             this.mMenFileImportFromPortScan.Name = "mMenFileImportFromPortScan";
-            this.mMenFileImportFromPortScan.Size = new System.Drawing.Size(235, 22);
+            this.mMenFileImportFromPortScan.Size = new System.Drawing.Size(284, 26);
             this.mMenFileImportFromPortScan.Text = "Import from &Port Scan...";
             this.mMenFileImportFromPortScan.Click += new System.EventHandler(this.mMenFileImportFromPortScan_Click);
             // 
             // mMenFileExport
             // 
             this.mMenFileExport.Name = "mMenFileExport";
-            this.mMenFileExport.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileExport.Size = new System.Drawing.Size(340, 26);
             this.mMenFileExport.Text = "&Export to File...";
             this.mMenFileExport.Click += new System.EventHandler(this.mMenFileExport_Click);
             // 
             // mMenFileSep5
             // 
             this.mMenFileSep5.Name = "mMenFileSep5";
-            this.mMenFileSep5.Size = new System.Drawing.Size(278, 6);
+            this.mMenFileSep5.Size = new System.Drawing.Size(337, 6);
             // 
             // mMenFileExit
             // 
             this.mMenFileExit.Image = global::mRemoteNG.Resources.Quit;
             this.mMenFileExit.Name = "mMenFileExit";
             this.mMenFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.mMenFileExit.Size = new System.Drawing.Size(281, 22);
+            this.mMenFileExit.Size = new System.Drawing.Size(340, 26);
             this.mMenFileExit.Text = "Exit";
             this.mMenFileExit.Click += new System.EventHandler(this.mMenFileExit_Click);
             // 
@@ -342,10 +348,11 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewSep2,
             this.mMenViewQuickConnectToolbar,
             this.mMenViewExtAppsToolbar,
+            this.mMenViewMultiSSHToolbar,
             this.mMenViewSep3,
             this.mMenViewFullscreen});
             this.mMenView.Name = "mMenView";
-            this.mMenView.Size = new System.Drawing.Size(44, 20);
+            this.mMenView.Size = new System.Drawing.Size(53, 24);
             this.mMenView.Text = "&View";
             this.mMenView.DropDownOpening += new System.EventHandler(this.mMenView_DropDownOpening);
             // 
@@ -353,7 +360,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenViewAddConnectionPanel.Image = global::mRemoteNG.Resources.Panel_Add;
             this.mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel";
-            this.mMenViewAddConnectionPanel.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewAddConnectionPanel.Size = new System.Drawing.Size(279, 26);
             this.mMenViewAddConnectionPanel.Text = "Add Connection Panel";
             this.mMenViewAddConnectionPanel.Click += new System.EventHandler(this.mMenViewAddConnectionPanel_Click);
             // 
@@ -361,13 +368,13 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenViewConnectionPanels.Image = global::mRemoteNG.Resources.Panels;
             this.mMenViewConnectionPanels.Name = "mMenViewConnectionPanels";
-            this.mMenViewConnectionPanels.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewConnectionPanels.Size = new System.Drawing.Size(279, 26);
             this.mMenViewConnectionPanels.Text = "Connection Panels";
             // 
             // mMenViewSep1
             // 
             this.mMenViewSep1.Name = "mMenViewSep1";
-            this.mMenViewSep1.Size = new System.Drawing.Size(225, 6);
+            this.mMenViewSep1.Size = new System.Drawing.Size(276, 6);
             // 
             // mMenViewConnections
             // 
@@ -375,7 +382,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewConnections.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mMenViewConnections.Image = global::mRemoteNG.Resources.Root;
             this.mMenViewConnections.Name = "mMenViewConnections";
-            this.mMenViewConnections.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewConnections.Size = new System.Drawing.Size(279, 26);
             this.mMenViewConnections.Text = "Connections";
             this.mMenViewConnections.Click += new System.EventHandler(this.mMenViewConnections_Click);
             // 
@@ -385,7 +392,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewConfig.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mMenViewConfig.Image = global::mRemoteNG.Resources.cog;
             this.mMenViewConfig.Name = "mMenViewConfig";
-            this.mMenViewConfig.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewConfig.Size = new System.Drawing.Size(279, 26);
             this.mMenViewConfig.Text = "Config";
             this.mMenViewConfig.Click += new System.EventHandler(this.mMenViewConfig_Click);
             // 
@@ -395,22 +402,22 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewErrorsAndInfos.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mMenViewErrorsAndInfos.Image = global::mRemoteNG.Resources.ErrorsAndInfos;
             this.mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos";
-            this.mMenViewErrorsAndInfos.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewErrorsAndInfos.Size = new System.Drawing.Size(279, 26);
             this.mMenViewErrorsAndInfos.Text = "Errors and Infos";
             this.mMenViewErrorsAndInfos.Click += new System.EventHandler(this.mMenViewErrorsAndInfos_Click);
             // 
             // mMenViewScreenshotManager
             // 
-		    this.mMenViewScreenshotManager.Image = global::mRemoteNG.Resources.Screenshot;
+            this.mMenViewScreenshotManager.Image = global::mRemoteNG.Resources.Screenshot;
             this.mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
-            this.mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewScreenshotManager.Size = new System.Drawing.Size(279, 26);
             this.mMenViewScreenshotManager.Text = "Screenshot Manager";
             this.mMenViewScreenshotManager.Click += new System.EventHandler(this.mMenViewScreenshotManager_Click);
             // 
             // ToolStripSeparator1
             // 
             this.ToolStripSeparator1.Name = "ToolStripSeparator1";
-            this.ToolStripSeparator1.Size = new System.Drawing.Size(225, 6);
+            this.ToolStripSeparator1.Size = new System.Drawing.Size(276, 6);
             // 
             // mMenViewJumpTo
             // 
@@ -419,7 +426,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewJumpToErrorsInfos});
             this.mMenViewJumpTo.Image = global::mRemoteNG.Resources.JumpTo;
             this.mMenViewJumpTo.Name = "mMenViewJumpTo";
-            this.mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewJumpTo.Size = new System.Drawing.Size(279, 26);
             this.mMenViewJumpTo.Text = "Jump To";
             // 
             // mMenViewJumpToConnectionsConfig
@@ -428,7 +435,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
             this.mMenViewJumpToConnectionsConfig.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.C)));
-            this.mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(258, 22);
+            this.mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(309, 26);
             this.mMenViewJumpToConnectionsConfig.Text = "Connections && Config";
             this.mMenViewJumpToConnectionsConfig.Click += new System.EventHandler(this.mMenViewJumpToConnectionsConfig_Click);
             // 
@@ -438,7 +445,7 @@ namespace mRemoteNG.UI.Forms
             this.mMenViewJumpToErrorsInfos.Name = "mMenViewJumpToErrorsInfos";
             this.mMenViewJumpToErrorsInfos.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.E)));
-            this.mMenViewJumpToErrorsInfos.Size = new System.Drawing.Size(258, 22);
+            this.mMenViewJumpToErrorsInfos.Size = new System.Drawing.Size(309, 26);
             this.mMenViewJumpToErrorsInfos.Text = "Errors && Infos";
             this.mMenViewJumpToErrorsInfos.Click += new System.EventHandler(this.mMenViewJumpToErrorsInfos_Click);
             // 
@@ -446,20 +453,20 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenViewResetLayout.Image = global::mRemoteNG.Resources.application_side_tree;
             this.mMenViewResetLayout.Name = "mMenViewResetLayout";
-            this.mMenViewResetLayout.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewResetLayout.Size = new System.Drawing.Size(279, 26);
             this.mMenViewResetLayout.Text = "Reset Layout";
             this.mMenViewResetLayout.Click += new System.EventHandler(this.mMenViewResetLayout_Click);
             // 
             // mMenViewSep2
             // 
             this.mMenViewSep2.Name = "mMenViewSep2";
-            this.mMenViewSep2.Size = new System.Drawing.Size(225, 6);
+            this.mMenViewSep2.Size = new System.Drawing.Size(276, 6);
             // 
             // mMenViewQuickConnectToolbar
             // 
             this.mMenViewQuickConnectToolbar.Image = global::mRemoteNG.Resources.Play_Quick;
             this.mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar";
-            this.mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(279, 26);
             this.mMenViewQuickConnectToolbar.Text = "Quick Connect Toolbar";
             this.mMenViewQuickConnectToolbar.Click += new System.EventHandler(this.mMenViewQuickConnectToolbar_Click);
             // 
@@ -467,21 +474,29 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenViewExtAppsToolbar.Image = global::mRemoteNG.Resources.ExtApp;
             this.mMenViewExtAppsToolbar.Name = "mMenViewExtAppsToolbar";
-            this.mMenViewExtAppsToolbar.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewExtAppsToolbar.Size = new System.Drawing.Size(279, 26);
             this.mMenViewExtAppsToolbar.Text = "External Applications Toolbar";
             this.mMenViewExtAppsToolbar.Click += new System.EventHandler(this.mMenViewExtAppsToolbar_Click);
+            // 
+            // mMenViewMultiSSHToolbar
+            // 
+            this.mMenViewMultiSSHToolbar.Image = global::mRemoteNG.Resources.Panels;
+            this.mMenViewMultiSSHToolbar.Name = "mMenViewMultiSSHToolbar";
+            this.mMenViewMultiSSHToolbar.Size = new System.Drawing.Size(279, 26);
+            this.mMenViewMultiSSHToolbar.Text = "Multi SSH Toolbar";
+            this.mMenViewMultiSSHToolbar.Click += new System.EventHandler(this.mMenViewMultiSSHToolbar_Click);
             // 
             // mMenViewSep3
             // 
             this.mMenViewSep3.Name = "mMenViewSep3";
-            this.mMenViewSep3.Size = new System.Drawing.Size(225, 6);
+            this.mMenViewSep3.Size = new System.Drawing.Size(276, 6);
             // 
             // mMenViewFullscreen
             // 
             this.mMenViewFullscreen.Image = global::mRemoteNG.Resources.arrow_out;
             this.mMenViewFullscreen.Name = "mMenViewFullscreen";
             this.mMenViewFullscreen.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);
+            this.mMenViewFullscreen.Size = new System.Drawing.Size(279, 26);
             this.mMenViewFullscreen.Text = "Full Screen";
             this.mMenViewFullscreen.Click += new System.EventHandler(this.mMenViewFullscreen_Click);
             // 
@@ -496,14 +511,14 @@ namespace mRemoteNG.UI.Forms
             this.mMenToolsComponentsCheck,
             this.mMenToolsOptions});
             this.mMenTools.Name = "mMenTools";
-            this.mMenTools.Size = new System.Drawing.Size(48, 20);
+            this.mMenTools.Size = new System.Drawing.Size(56, 24);
             this.mMenTools.Text = "&Tools";
             // 
             // mMenToolsSSHTransfer
             // 
             this.mMenToolsSSHTransfer.Image = global::mRemoteNG.Resources.SSHTransfer;
             this.mMenToolsSSHTransfer.Name = "mMenToolsSSHTransfer";
-            this.mMenToolsSSHTransfer.Size = new System.Drawing.Size(184, 22);
+            this.mMenToolsSSHTransfer.Size = new System.Drawing.Size(224, 26);
             this.mMenToolsSSHTransfer.Text = "SSH File Transfer";
             this.mMenToolsSSHTransfer.Click += new System.EventHandler(this.mMenToolsSSHTransfer_Click);
             // 
@@ -511,7 +526,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenToolsUVNCSC.Image = global::mRemoteNG.Resources.UVNC_SC;
             this.mMenToolsUVNCSC.Name = "mMenToolsUVNCSC";
-            this.mMenToolsUVNCSC.Size = new System.Drawing.Size(184, 22);
+            this.mMenToolsUVNCSC.Size = new System.Drawing.Size(224, 26);
             this.mMenToolsUVNCSC.Text = "UltraVNC SingleClick";
             this.mMenToolsUVNCSC.Visible = false;
             this.mMenToolsUVNCSC.Click += new System.EventHandler(this.mMenToolsUVNCSC_Click);
@@ -520,7 +535,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenToolsExternalApps.Image = global::mRemoteNG.Resources.ExtApp;
             this.mMenToolsExternalApps.Name = "mMenToolsExternalApps";
-            this.mMenToolsExternalApps.Size = new System.Drawing.Size(184, 22);
+            this.mMenToolsExternalApps.Size = new System.Drawing.Size(224, 26);
             this.mMenToolsExternalApps.Text = "External Applications";
             this.mMenToolsExternalApps.Click += new System.EventHandler(this.mMenToolsExternalApps_Click);
             // 
@@ -528,20 +543,20 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenToolsPortScan.Image = global::mRemoteNG.Resources.PortScan;
             this.mMenToolsPortScan.Name = "mMenToolsPortScan";
-            this.mMenToolsPortScan.Size = new System.Drawing.Size(184, 22);
+            this.mMenToolsPortScan.Size = new System.Drawing.Size(224, 26);
             this.mMenToolsPortScan.Text = "Port Scan";
             this.mMenToolsPortScan.Click += new System.EventHandler(this.mMenToolsPortScan_Click);
             // 
             // mMenToolsSep1
             // 
             this.mMenToolsSep1.Name = "mMenToolsSep1";
-            this.mMenToolsSep1.Size = new System.Drawing.Size(181, 6);
+            this.mMenToolsSep1.Size = new System.Drawing.Size(221, 6);
             // 
             // mMenToolsComponentsCheck
             // 
             this.mMenToolsComponentsCheck.Image = global::mRemoteNG.Resources.cog_error;
             this.mMenToolsComponentsCheck.Name = "mMenToolsComponentsCheck";
-            this.mMenToolsComponentsCheck.Size = new System.Drawing.Size(184, 22);
+            this.mMenToolsComponentsCheck.Size = new System.Drawing.Size(224, 26);
             this.mMenToolsComponentsCheck.Text = "Components Check";
             this.mMenToolsComponentsCheck.Click += new System.EventHandler(this.mMenToolsComponentsCheck_Click);
             // 
@@ -549,7 +564,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenToolsOptions.Image = global::mRemoteNG.Resources.Options;
             this.mMenToolsOptions.Name = "mMenToolsOptions";
-            this.mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
+            this.mMenToolsOptions.Size = new System.Drawing.Size(224, 26);
             this.mMenToolsOptions.Text = "Options";
             this.mMenToolsOptions.Click += new System.EventHandler(this.mMenToolsOptions_Click);
             // 
@@ -567,29 +582,29 @@ namespace mRemoteNG.UI.Forms
             this.mMenInfoSep2,
             this.mMenInfoAbout});
             this.mMenInfo.Name = "mMenInfo";
-            this.mMenInfo.Size = new System.Drawing.Size(44, 20);
+            this.mMenInfo.Size = new System.Drawing.Size(53, 24);
             this.mMenInfo.Text = "&Help";
             this.mMenInfo.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
             // mMenInfoHelp
             // 
-		    this.mMenInfoHelp.Image = global::mRemoteNG.Resources.Help;
+            this.mMenInfoHelp.Image = global::mRemoteNG.Resources.Help;
             this.mMenInfoHelp.Name = "mMenInfoHelp";
             this.mMenInfoHelp.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.mMenInfoHelp.Size = new System.Drawing.Size(190, 22);
+            this.mMenInfoHelp.Size = new System.Drawing.Size(230, 26);
             this.mMenInfoHelp.Text = "mRemoteNG Help";
             this.mMenInfoHelp.Click += new System.EventHandler(this.mMenInfoHelp_Click);
             // 
             // mMenInfoSep1
             // 
             this.mMenInfoSep1.Name = "mMenInfoSep1";
-            this.mMenInfoSep1.Size = new System.Drawing.Size(187, 6);
+            this.mMenInfoSep1.Size = new System.Drawing.Size(227, 6);
             // 
             // mMenInfoWebsite
             // 
-		    this.mMenInfoWebsite.Image = global::mRemoteNG.Resources.Website;
+            this.mMenInfoWebsite.Image = global::mRemoteNG.Resources.Website;
             this.mMenInfoWebsite.Name = "mMenInfoWebsite";
-            this.mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
+            this.mMenInfoWebsite.Size = new System.Drawing.Size(230, 26);
             this.mMenInfoWebsite.Text = "Website";
             this.mMenInfoWebsite.Click += new System.EventHandler(this.mMenInfoWebsite_Click);
             // 
@@ -597,7 +612,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenInfoDonate.Image = global::mRemoteNG.Resources.Donate;
             this.mMenInfoDonate.Name = "mMenInfoDonate";
-            this.mMenInfoDonate.Size = new System.Drawing.Size(190, 22);
+            this.mMenInfoDonate.Size = new System.Drawing.Size(230, 26);
             this.mMenInfoDonate.Text = "Donate";
             this.mMenInfoDonate.Click += new System.EventHandler(this.mMenInfoDonate_Click);
             // 
@@ -605,7 +620,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenInfoForum.Image = global::mRemoteNG.Resources.user_comment;
             this.mMenInfoForum.Name = "mMenInfoForum";
-            this.mMenInfoForum.Size = new System.Drawing.Size(190, 22);
+            this.mMenInfoForum.Size = new System.Drawing.Size(230, 26);
             this.mMenInfoForum.Text = "Support Forum";
             this.mMenInfoForum.Click += new System.EventHandler(this.mMenInfoForum_Click);
             // 
@@ -613,33 +628,33 @@ namespace mRemoteNG.UI.Forms
             // 
             this.mMenInfoBugReport.Image = global::mRemoteNG.Resources.Bug;
             this.mMenInfoBugReport.Name = "mMenInfoBugReport";
-            this.mMenInfoBugReport.Size = new System.Drawing.Size(190, 22);
+            this.mMenInfoBugReport.Size = new System.Drawing.Size(230, 26);
             this.mMenInfoBugReport.Text = "Report a Bug";
             this.mMenInfoBugReport.Click += new System.EventHandler(this.mMenInfoBugReport_Click);
             // 
             // ToolStripSeparator2
             // 
             this.ToolStripSeparator2.Name = "ToolStripSeparator2";
-            this.ToolStripSeparator2.Size = new System.Drawing.Size(187, 6);
+            this.ToolStripSeparator2.Size = new System.Drawing.Size(227, 6);
             // 
             // mMenToolsUpdate
             // 
             this.mMenToolsUpdate.Image = global::mRemoteNG.Resources.Update;
             this.mMenToolsUpdate.Name = "mMenToolsUpdate";
-            this.mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
+            this.mMenToolsUpdate.Size = new System.Drawing.Size(230, 26);
             this.mMenToolsUpdate.Text = "Check for Updates";
             this.mMenToolsUpdate.Click += new System.EventHandler(this.mMenToolsUpdate_Click);
             // 
             // mMenInfoSep2
             // 
             this.mMenInfoSep2.Name = "mMenInfoSep2";
-            this.mMenInfoSep2.Size = new System.Drawing.Size(187, 6);
+            this.mMenInfoSep2.Size = new System.Drawing.Size(227, 6);
             // 
             // mMenInfoAbout
             // 
             this.mMenInfoAbout.Image = global::mRemoteNG.Resources.mRemote;
             this.mMenInfoAbout.Name = "mMenInfoAbout";
-            this.mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
+            this.mMenInfoAbout.Size = new System.Drawing.Size(230, 26);
             this.mMenInfoAbout.Text = "About mRemoteNG";
             this.mMenInfoAbout.Click += new System.EventHandler(this.mMenInfoAbout_Click);
             // 
@@ -651,7 +666,7 @@ namespace mRemoteNG.UI.Forms
             // lblQuickConnect
             // 
             this.lblQuickConnect.Name = "lblQuickConnect";
-            this.lblQuickConnect.Size = new System.Drawing.Size(55, 22);
+            this.lblQuickConnect.Size = new System.Drawing.Size(66, 22);
             this.lblQuickConnect.Text = "&Connect:";
             this.lblQuickConnect.Click += new System.EventHandler(this.lblQuickConnect_Click);
             // 
@@ -671,23 +686,25 @@ namespace mRemoteNG.UI.Forms
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(966, 498);
+            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1288, 541);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
             this.tsContainer.Name = "tsContainer";
-            this.tsContainer.Size = new System.Drawing.Size(966, 523);
+            this.tsContainer.Size = new System.Drawing.Size(1288, 644);
             this.tsContainer.TabIndex = 17;
             this.tsContainer.Text = "ToolStripContainer1";
             // 
             // tsContainer.TopToolStripPanel
             // 
-            this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsQuickConnect);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsExternalTools);
+            this.tsContainer.TopToolStripPanel.Controls.Add(this.tsMultiSSH);
+            this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             // 
             // tsQuickConnect
             // 
             this.tsQuickConnect.Dock = System.Windows.Forms.DockStyle.None;
+            this.tsQuickConnect.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tsQuickConnect.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblQuickConnect,
             this.cmbQuickConnect,
@@ -696,7 +713,7 @@ namespace mRemoteNG.UI.Forms
             this.tsQuickConnect.Location = new System.Drawing.Point(msMain.Location.X + msMain.Width + 1, 0);
             this.tsQuickConnect.MaximumSize = new System.Drawing.Size(0, 25);
             this.tsQuickConnect.Name = "tsQuickConnect";
-            this.tsQuickConnect.Size = new System.Drawing.Size(387, 25);
+            this.tsQuickConnect.Size = new System.Drawing.Size(417, 25);
             this.tsQuickConnect.TabIndex = 18;
             // 
             // btnQuickConnect
@@ -706,13 +723,14 @@ namespace mRemoteNG.UI.Forms
             this.btnQuickConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnQuickConnect.Margin = new System.Windows.Forms.Padding(0, 1, 3, 2);
             this.btnQuickConnect.Name = "btnQuickConnect";
-            this.btnQuickConnect.Size = new System.Drawing.Size(84, 22);
+            this.btnQuickConnect.Size = new System.Drawing.Size(102, 22);
             this.btnQuickConnect.Text = "Connect";
             this.btnQuickConnect.ButtonClick += new System.EventHandler(this.btnQuickConnect_ButtonClick);
             this.btnQuickConnect.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.btnQuickConnect_DropDownItemClicked);
             // 
             // mnuQuickConnectProtocol
             // 
+            this.mnuQuickConnectProtocol.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mnuQuickConnectProtocol.Name = "mnuQuickConnectProtocol";
             this.mnuQuickConnectProtocol.OwnerItem = this.btnQuickConnect;
             this.mnuQuickConnectProtocol.ShowCheckMargin = true;
@@ -727,12 +745,13 @@ namespace mRemoteNG.UI.Forms
             this.btnConnections.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConnections.Name = "btnConnections";
-            this.btnConnections.Size = new System.Drawing.Size(29, 22);
+            this.btnConnections.Size = new System.Drawing.Size(30, 22);
             this.btnConnections.Text = "Connections";
             this.btnConnections.DropDownOpening += new System.EventHandler(this.btnConnections_DropDownOpening);
             // 
             // mnuConnections
             // 
+            this.mnuConnections.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mnuConnections.Name = "mnuConnections";
             this.mnuConnections.OwnerItem = this.btnConnections;
             this.mnuConnections.Size = new System.Drawing.Size(61, 4);
@@ -741,6 +760,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.tsExternalTools.ContextMenuStrip = this.cMenExtAppsToolbar;
             this.tsExternalTools.Dock = System.Windows.Forms.DockStyle.None;
+            this.tsExternalTools.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tsExternalTools.Location = new System.Drawing.Point(tsQuickConnect.Location.X + tsQuickConnect.Width + 1, 0);
             this.tsExternalTools.MaximumSize = new System.Drawing.Size(0, 25);
             this.tsExternalTools.Name = "tsExternalTools";
@@ -749,19 +769,45 @@ namespace mRemoteNG.UI.Forms
             // 
             // cMenExtAppsToolbar
             // 
+            this.cMenExtAppsToolbar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cMenExtAppsToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMenToolbarShowText});
             this.cMenExtAppsToolbar.Name = "cMenToolbar";
-            this.cMenExtAppsToolbar.Size = new System.Drawing.Size(129, 26);
+            this.cMenExtAppsToolbar.Size = new System.Drawing.Size(146, 30);
             // 
             // cMenToolbarShowText
             // 
             this.cMenToolbarShowText.Checked = true;
             this.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cMenToolbarShowText.Name = "cMenToolbarShowText";
-            this.cMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
+            this.cMenToolbarShowText.Size = new System.Drawing.Size(145, 26);
             this.cMenToolbarShowText.Text = "Show Text";
             this.cMenToolbarShowText.Click += new System.EventHandler(this.cMenToolbarShowText_Click);
+            // 
+            // tsMultiSSH
+            // 
+            this.tsMultiSSH.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.tsMultiSSH.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblMultiSSH,
+            this.txtMultiSSH});
+            this.tsMultiSSH.Location = new System.Drawing.Point(tsQuickConnect.Location.X + tsQuickConnect.Width + 1, 0);
+            this.tsMultiSSH.MinimumSize = new System.Drawing.Size(300, 0);
+            this.tsMultiSSH.Name = "tsMultiSSH";
+            this.tsMultiSSH.Size = new System.Drawing.Size(430, 25);
+            this.tsMultiSSH.TabIndex = 0;
+            this.tsMultiSSH.Dock = System.Windows.Forms.DockStyle.Right;
+            // 
+            // lblMultiSSH
+            // 
+            this.lblMultiSSH.Name = "lblMultiSSH";
+            this.lblMultiSSH.Size = new System.Drawing.Size(77, 22);
+            this.lblMultiSSH.Text = "Multi SSH:";
+            // 
+            // txtMultiSSH
+            // 
+            this.txtMultiSSH.Name = "txtMultiSSH";
+            this.txtMultiSSH.Size = new System.Drawing.Size(300, 25);
+            this.txtMultiSSH.ToolTipText = "Press ENTER to send. Ctrl+C is sent immediately.";
             // 
             // tmrAutoSave
             // 
@@ -770,9 +816,9 @@ namespace mRemoteNG.UI.Forms
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(966, 523);
+            this.ClientSize = new System.Drawing.Size(1288, 644);
             this.Controls.Add(this.tsContainer);
             this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
             this.MainMenuStrip = this.msMain;
@@ -795,6 +841,8 @@ namespace mRemoteNG.UI.Forms
             this.tsQuickConnect.ResumeLayout(false);
             this.tsQuickConnect.PerformLayout();
             this.cMenExtAppsToolbar.ResumeLayout(false);
+            this.tsMultiSSH.ResumeLayout(false);
+            this.tsMultiSSH.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -838,7 +886,9 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsPortScan;
 		internal System.Windows.Forms.ToolStrip tsQuickConnect;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewQuickConnectToolbar;
-		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
+        internal System.Windows.Forms.ToolStrip tsMultiSSH;
+        internal System.Windows.Forms.ToolStripMenuItem mMenViewMultiSSHToolbar;
+        internal System.Windows.Forms.ToolStripSeparator mMenSep3;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoDonate;
 		internal System.Windows.Forms.ToolStripSeparator mMenViewSep3;
 		internal ToolStripSplitButton btnQuickConnect;
@@ -873,5 +923,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenFileImportFromPortScan;
 		internal System.Windows.Forms.ToolStripMenuItem mMenFileImport;
         private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.ToolStripLabel lblMultiSSH;
+        private System.Windows.Forms.ToolStripTextBox txtMultiSSH;
     }
 }
