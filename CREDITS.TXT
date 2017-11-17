@@ -19,6 +19,8 @@ github.com/dekelMP
 github.com/farosch
 Bruce (github.com/brucetp)
 Camilo Alvarez (github.com/jotatsu)
+github.com/DamianBis
+github.com/pfjason
 
 
 Past Contributors
@@ -51,7 +53,7 @@ Robert Siwiec
 Hayato Iriumi
 Sebastien Thieury (github.com/SebThieu)
 Riza Emet
-Lukas Plachy
+Lukas Plachy (github.com/rheingold)
 Gyuha Shin
 Stefan (github.com/polluks)
 github.com/emazv72
