@@ -27,6 +27,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
             chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
+            chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
 
             lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
@@ -47,6 +48,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
             chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Checked = Settings.Default.SaveConnectionsAfterEveryEdit;
+            chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
@@ -75,6 +77,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
             Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
             Settings.Default.SaveConnectionsAfterEveryEdit = chkSaveConnectionsAfterEveryEdit.Checked;
+            Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
 
             Settings.Default.RdpReconnectionCount = (int) numRdpReconnectionCount.Value;
             Settings.Default.ConRDPOverallConnectionTimeout = (int) numRDPConTimeout.Value;
