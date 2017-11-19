@@ -2622,4 +2622,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
     <value>Filter search matches in connection tree</value>
   </data>
+  <data name="TestConnection" xml:space="preserve">
+    <value>Test Connection</value>
+  </data>
 </root>
