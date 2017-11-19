@@ -2619,4 +2619,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
     <value>Save connections after every edit</value>
   </data>
+  <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+    <value>Filter search matches in connection tree</value>
+  </data>
 </root>

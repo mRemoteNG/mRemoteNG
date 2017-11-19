@@ -381,6 +381,7 @@
     <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.Designer.cs">
       <DependentUpon>ConnectionTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTreeSearchTextFilter.cs" />
     <Compile Include="UI\Controls\CredentialRecordComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

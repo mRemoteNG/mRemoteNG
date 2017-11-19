@@ -14,6 +14,7 @@ Features/Enhancements:
 #468: Default connection info Panel property is now saved
 #429: Added Czech translation
 #421: When a connection file cannot be loaded, we will now prompt for how to proceed rather than always exiting.
+#338: Added option to filter connection tree when searching
 #357: Updated GeckoFX to v45.45.0.32
 #225: Added support for importing Remote Desktop Connection Manager v2.7 RDG files
 #207: Can now specify a working directory for external tools
