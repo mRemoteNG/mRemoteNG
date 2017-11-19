@@ -36,7 +36,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSQLDatabaseName.Text = Language.strLabelSQLServerDatabaseName;
             lblSQLUsername.Text = Language.strLabelUsername;
             lblSQLPassword.Text = Language.strLabelPassword;
-            btnTestConnection.Text = "Test Connection";
+            btnTestConnection.Text = Language.TestConnection;
         }
 
         public override void LoadSettings()
