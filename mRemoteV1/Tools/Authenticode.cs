@@ -50,8 +50,7 @@ namespace mRemoteNG.Tools
 						return Status;
 					}
 						
-					var certificate = X509Certificate.CreateFromSignedFile(FilePath);
-					var certificate2 = new X509Certificate2(certificate);
+					var certificate2 = new X509Certificate2(X509Certificate.CreateFromSignedFile(FilePath));
 					_thumbprint = certificate2.Thumbprint;
 					if (_thumbprint != ThumbprintToMatch)
 					{
