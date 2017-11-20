@@ -99,28 +99,28 @@ namespace mRemoteNG.Tools
 				Status = StatusValue.Verified;
 				return Status;
 			}
-			catch (CryptographicException ex)
-			{
-				var hResultProperty = ex.GetType().GetProperty("HResult", BindingFlags.NonPublic | BindingFlags.Instance);
-				var hResult = Convert.ToInt32(hResultProperty.GetValue(ex, null));
-				if (hResult == NativeMethods.CRYPT_E_NO_MATCH)
-				{
-					Status = StatusValue.NoSignature;
-					return Status;
-				}
-				else
-				{
-					Status = StatusValue.UnhandledException;
-					Exception = ex;
-					return Status;
-				}
-			}
 			catch (Exception ex)
 			{
-				Status = StatusValue.UnhandledException;
-				Exception = ex;
-				return Status;
-			}
+
+			    if (ex is CryptographicException)
+			    {
+			        var hResultProperty = ex.GetType().GetProperty("HResult", BindingFlags.NonPublic | BindingFlags.Instance);
+			        if (hResultProperty != null)
+			        {
+			            var hResult = Convert.ToInt32(hResultProperty.GetValue(ex, null));
+			            if (hResult == NativeMethods.CRYPT_E_NO_MATCH)
+			            {
+			                Status = StatusValue.NoSignature;
+			                return Status;
+			            }
+			        }
+			    }
+
+			    // other exception, or hResultProperty is null or is not CRYPT_E_NO_MATCH
+                Status = StatusValue.UnhandledException;
+			    Exception = ex;
+			    return Status;
+            }
 			finally
 			{
 				if (trustDataPointer != IntPtr.Zero)
