@@ -2,16 +2,43 @@
 
 Features/Enhancements:
 ----------------------
-Added more logging/notifications options
-#429: Added Czech translation
+#799: Added option to save connections on every edit
+#798: Added button to test SQL database connections on SQL options page
+#784: Rearranged some settings in the Options pages to prevent overlap with some translations
+#704: Portable version now saves settings in application directory
+#671: Revamped UI theme system
+#611: Added multi-ssh toolbar for sending commands to many SSH clients at once
+#558: Connection tree now shows customizable icons instead of play/pause icon
 #504: Added Korean translation
-#208: Added credential repository feature
+#485: The Domain field is now visible/editable for connection with the IntApp protocol
+#468: Default connection info Panel property is now saved
+#429: Added Czech translation
+#421: When a connection file cannot be loaded, we will now prompt for how to proceed rather than always exiting.
+#338: Added option to filter connection tree when searching
+#357: Updated GeckoFX to v45.45.0.32
+#225: Added support for importing Remote Desktop Connection Manager v2.7 RDG files
+#207: Can now specify a working directory for external tools
+#197: Selecting a quick connect protocol will start a connection with that host
 #184: Improve search to include description and hostname fields
+#152: Added option "Show on Toolbar" to external tools
+Added more logging/notifications options
+
+Fixes:
+------
+#747: Fixed unnecessary "PuttySessions.Watcher.StartWatching" error message
+#650: Fixed German translation typo
+#639: Fixed Italian translation typo
+#479: New connection tree nodes not starting in edit mode
+#233: Fixed crash that can occur when disconnecting from VNC server
+#195: Access to https with self-signed certificates not working
+
 
 General Changes:
 ----------------
-Improved compatability between environments when building mRemoteNG from source
+#797: Removed duplicate translation strings
+#608: The Help -> Support Forum menu item now directs users to our Reddit community
 #493: Changed backup file name time stamp to use local system time rather than UTC
+Improved compatability between environments when building mRemoteNG from source
 
 
 1.75.7011 (2017-11-07):

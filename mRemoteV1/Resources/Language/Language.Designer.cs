@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -138,6 +138,15 @@ namespace mRemoteNG {
         internal static string DatabaseNotAvailable {
             get {
                 return ResourceManager.GetString("DatabaseNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter search matches in connection tree.
+        /// </summary>
+        internal static string FilterSearchMatchesInConnectionTree {
+            get {
+                return ResourceManager.GetString("FilterSearchMatchesInConnectionTree", resourceCulture);
             }
         }
         
@@ -7459,6 +7468,15 @@ namespace mRemoteNG {
         internal static string strYes {
             get {
                 return ResourceManager.GetString("strYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Connection.
+        /// </summary>
+        internal static string TestConnection {
+            get {
+                return ResourceManager.GetString("TestConnection", resourceCulture);
             }
         }
         
