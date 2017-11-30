@@ -1,13 +1,16 @@
-﻿using mRemoteNG.Connection;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Container;
+using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
 
 namespace mRemoteNGTests.Connection
 {
-    public class ConnectionInfoTests
+	public class ConnectionInfoTests
     {
         private ConnectionInfo _connectionInfo;
         private const string TestDomain = "somedomain";
@@ -91,7 +94,29 @@ namespace mRemoteNGTests.Connection
             Assert.That(nameOfModifiedProperty, Is.EqualTo("OpenConnections"));
         }
 
-        [TestCase(ProtocolType.HTTP, ExpectedResult = 80)]
+	    [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
+	    public void MovingAConnectionUnderRootNodeDisablesInheritance(PropertyInfo property)
+	    {
+		    var rootNode = new RootNodeInfo(RootNodeType.Connection);
+		    _connectionInfo.Inheritance.EverythingInherited = true;
+			_connectionInfo.SetParent(rootNode);
+			var propertyValue = property.GetValue(_connectionInfo.Inheritance);
+			Assert.That(propertyValue, Is.False);
+	    }
+
+	    [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
+	    public void MovingAConnectionFromUnderRootNodeToUnderADifferentNodeEnablesInheritance(PropertyInfo property)
+	    {
+		    var rootNode = new RootNodeInfo(RootNodeType.Connection);
+			var otherContainer = new ContainerInfo();
+		    _connectionInfo.Inheritance.EverythingInherited = true;
+		    _connectionInfo.SetParent(rootNode);
+			_connectionInfo.SetParent(otherContainer);
+		    var propertyValue = property.GetValue(_connectionInfo.Inheritance);
+		    Assert.That(propertyValue, Is.True);
+	    }
+
+		[TestCase(ProtocolType.HTTP, ExpectedResult = 80)]
         [TestCase(ProtocolType.HTTPS, ExpectedResult = 443)]
         [TestCase(ProtocolType.ICA, ExpectedResult = 1494)]
         [TestCase(ProtocolType.IntApp, ExpectedResult = 0)]
@@ -107,5 +132,13 @@ namespace mRemoteNGTests.Connection
             _connectionInfo.Protocol = protocolType;
             return _connectionInfo.GetDefaultPort();
         }
+
+	    private class InheritancePropertyProvider
+	    {
+		    public static IEnumerable<PropertyInfo> GetProperties()
+		    {
+			    return new ConnectionInfoInheritance(new object()).GetProperties();
+		    }
+	    }
     }
 }
