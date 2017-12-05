@@ -121,6 +121,7 @@
     <Compile Include="Config\Serializers\CredentialProviderSerializerTests.cs" />
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialPasswordDecryptorDecoratorTests.cs" />
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialPasswordEncryptorDecoratorTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsDeserializerMremotengFormatTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormatTests.cs" />
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializerTests.cs" />
