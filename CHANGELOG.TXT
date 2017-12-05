@@ -41,6 +41,15 @@ General Changes:
 Improved compatability between environments when building mRemoteNG from source
 
 
+1.75.7012 (2017-12-01):
+
+Fixes:
+------
+#814: Fixed bug that prevented reordering connections by dragging
+#810: Official mRemoteNG builds will now be signed with a DigiCert certificate
+#803: File path command line argument not working with network path
+
+
 1.75.7011 (2017-11-07):
 
 Fixes:
