@@ -1,4 +1,4 @@
-1.76.XXXX (2017-XX-XX):
+1.76.0 Alpha 1 (2017-12-08):
 
 Features/Enhancements:
 ----------------------
