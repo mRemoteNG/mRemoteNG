@@ -6,15 +6,14 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
-using mRemoteNG.UI.Controls;
 
 
 namespace mRemoteNG.Tools
 {
-    public class ConnectionsTreeToMenuItemsConverter
+	public class ConnectionsTreeToMenuItemsConverter
     {
-        private readonly StatusImageList _statusImageList = new StatusImageList();
         public MouseEventHandler MouseUpEventHandler { get; set; }
+
 
         public IEnumerable<ToolStripDropDownItem> CreateToolStripDropDownItems(ConnectionTreeModel connectionTreeModel)
         {
@@ -50,14 +49,25 @@ namespace mRemoteNG.Tools
             var menuItem = new ToolStripMenuItem
             {
                 Text = node.Name,
-                Tag = node,
-                Image = _statusImageList.GetImage(node)
+                Tag = node
             };
 
             var nodeAsContainer = node as ContainerInfo;
             if (nodeAsContainer != null)
             {
+                menuItem.Image = Resources.Folder;
+                menuItem.Tag = nodeAsContainer;
                 AddSubMenuNodes(nodeAsContainer.Children, menuItem);
+            }
+            else if (node.GetTreeNodeType() == TreeNodeType.PuttySession)
+            {
+                menuItem.Image = Resources.PuttySessions;
+                menuItem.Tag = node;
+            }
+            else if (node.GetTreeNodeType() == TreeNodeType.Connection)
+            {
+                menuItem.Image = node.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause;
+                menuItem.Tag = node;
             }
             
             menuItem.MouseUp += MouseUpEventHandler;

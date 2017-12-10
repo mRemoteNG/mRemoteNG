@@ -1,12 +1,12 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using WeifenLuo.WinFormsUI.Docking;
 using static mRemoteNG.Tools.MiscTools;
 
 namespace mRemoteNG.UI.Window

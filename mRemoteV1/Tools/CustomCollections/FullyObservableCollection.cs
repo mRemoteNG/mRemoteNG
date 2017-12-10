@@ -10,6 +10,7 @@ namespace mRemoteNG.Tools.CustomCollections
         where T : INotifyPropertyChanged
 	{
 	    private readonly IList<T> _list = new List<T>();
+	    private bool _eventsAllowed;
 
         public int Count => _list.Count;
 	    public bool IsReadOnly => _list.IsReadOnly;
@@ -26,30 +27,48 @@ namespace mRemoteNG.Tools.CustomCollections
 
 	    public FullyObservableCollection(IEnumerable<T> items)
 	    {
-            foreach (var item in items)
-                Add(item);
+            AddRange(items);
         }
 
 	    public void Add(T item)
 	    {
 	        _list.Add(item);
 	        SubscribeToChildEvents(item);
-            RaiseCredentialChangedEvent(ActionType.Added, new[] {item});
+            if (_eventsAllowed)
+                RaiseCollectionChangedEvent(ActionType.Added, new[] {item});
+	    }
+
+        /// <summary>
+        /// Adds a range of items to the collection.
+        /// Only raises a single <see cref="CollectionUpdated"/> event
+        /// after all new items are added.
+        /// </summary>
+        /// <param name="items"></param>
+	    public void AddRange(IEnumerable<T> items)
+        {
+            var itemsAsList = items.ToList();
+	        _eventsAllowed = false;
+
+            foreach (var item in itemsAsList)
+                Add(item);
+
+	        _eventsAllowed = true;
+            RaiseCollectionChangedEvent(ActionType.Added, itemsAsList);
 	    }
 
         public void Insert(int index, T item)
         {
             _list.Insert(index, item);
             SubscribeToChildEvents(item);
-            RaiseCredentialChangedEvent(ActionType.Added, new[] { item });
+            RaiseCollectionChangedEvent(ActionType.Added, new[] { item });
         }
 
 	    public bool Remove(T item)
 	    {
 	        var worked = _list.Remove(item);
 	        if (!worked) return worked;
-	        RaiseCredentialChangedEvent(ActionType.Removed, new[] {item});
 	        UnsubscribeFromChildEvents(item);
+            RaiseCollectionChangedEvent(ActionType.Removed, new[] {item});
 	        return worked;
 	    }
 
@@ -58,7 +77,7 @@ namespace mRemoteNG.Tools.CustomCollections
 	        var item = _list[index];
 	        _list.RemoveAt(index);
 	        UnsubscribeFromChildEvents(item);
-            RaiseCredentialChangedEvent(ActionType.Removed, new[] { item });
+            RaiseCollectionChangedEvent(ActionType.Removed, new[] { item });
 	    }
 
         public void Clear()
@@ -67,7 +86,7 @@ namespace mRemoteNG.Tools.CustomCollections
             _list.Clear();
             foreach (var item in oldItems)
                 UnsubscribeFromChildEvents(item);
-            RaiseCredentialChangedEvent(ActionType.Removed, oldItems);
+            RaiseCollectionChangedEvent(ActionType.Removed, oldItems);
         }
 
         private void SubscribeToChildEvents(INotifyPropertyChanged item)
@@ -83,12 +102,12 @@ namespace mRemoteNG.Tools.CustomCollections
         private void ItemOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
 	    {
             if (sender is T)
-	            RaiseCredentialChangedEvent(ActionType.Updated, new []{ (T)sender });
+	            RaiseCollectionChangedEvent(ActionType.Updated, new []{ (T)sender });
 	    }
 
 	    public event EventHandler<CollectionUpdatedEventArgs<T>> CollectionUpdated;
 
-        private void RaiseCredentialChangedEvent(ActionType action, IEnumerable<T> changedItems)
+        private void RaiseCollectionChangedEvent(ActionType action, IEnumerable<T> changedItems)
         {
             CollectionUpdated?.Invoke(this, new CollectionUpdatedEventArgs<T>(action, changedItems));
         }

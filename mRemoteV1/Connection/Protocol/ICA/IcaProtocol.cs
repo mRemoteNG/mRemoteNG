@@ -1,16 +1,13 @@
 using System;
-using System.Linq;
-using System.Security;
-using AxWFICALib;
-using System.Windows.Forms;
-using mRemoteNG.App;
 using System.Threading;
 using System.Timers;
-using mRemoteNG.Tools;
+using System.Windows.Forms;
+using AxWFICALib;
+using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Messages;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 
 
@@ -120,17 +117,9 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 
-				var user = "";
-                var pass = new SecureString();
-                var dom = "";
-
-			    if (_info.CredentialRecordId.Any())
-			    {
-			        var credentialRecord = Runtime.CredentialProviderCatalog.GetCredentialRecord(_info.CredentialRecordId.Single());
-			        user = credentialRecord?.Username ?? "";
-			        pass = credentialRecord?.Password ?? "".ConvertToSecureString();
-			        dom = credentialRecord?.Domain ?? "";
-			    }
+			    var user = _info?.Username ?? "";
+			    var pass = _info?.Password ?? "";
+			    var dom = _info?.Domain ?? "";
 
 				if (string.IsNullOrEmpty(user))
 				{
@@ -148,7 +137,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					_icaClient.Username = user;
 				}
 						
-				if (string.IsNullOrEmpty(pass.ConvertToUnsecureString()))
+				if (string.IsNullOrEmpty(pass))
 				{
 					if (Settings.Default.EmptyCredentials == "custom")
 					{
@@ -161,7 +150,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				}
 				else
 				{
-					_icaClient.SetProp("ClearPassword", pass.ConvertToUnsecureString());
+					_icaClient.SetProp("ClearPassword", pass);
 				}
 						
 				if (string.IsNullOrEmpty(dom))

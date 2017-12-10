@@ -29,30 +29,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialsPage));
-            this.checkBoxUnlockOnStartup = new Controls.Base.NGCheckBox();
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
-            this.radCredentialsCustom = new Controls.Base.NGRadioButton();
-            this.lblDefaultCredentials = new Controls.Base.NGLabel();
-            this.radCredentialsNoInfo = new Controls.Base.NGRadioButton();
-            this.radCredentialsWindows = new Controls.Base.NGRadioButton();
-            this.txtCredentialsDomain = new Controls.Base.NGTextBox();
-            this.lblCredentialsUsername = new Controls.Base.NGLabel();
-            this.txtCredentialsPassword = new Controls.Base.NGTextBox();
-            this.lblCredentialsPassword = new Controls.Base.NGLabel();
-            this.txtCredentialsUsername = new Controls.Base.NGTextBox();
-            this.lblCredentialsDomain = new Controls.Base.NGLabel();
+            this.radCredentialsCustom = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.lblDefaultCredentials = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.radCredentialsNoInfo = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.radCredentialsWindows = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.txtCredentialsDomain = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.lblCredentialsUsername = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtCredentialsPassword = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.lblCredentialsPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtCredentialsUsername = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.lblCredentialsDomain = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlDefaultCredentials.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // checkBoxUnlockOnStartup
-            // 
-            this.checkBoxUnlockOnStartup.AutoSize = true;
-            this.checkBoxUnlockOnStartup.Location = new System.Drawing.Point(3, 0);
-            this.checkBoxUnlockOnStartup.Name = "checkBoxUnlockOnStartup";
-            this.checkBoxUnlockOnStartup.Size = new System.Drawing.Size(261, 17);
-            this.checkBoxUnlockOnStartup.TabIndex = 0;
-            this.checkBoxUnlockOnStartup.Text = "Prompt to unlock credential repositories on startup";
-            this.checkBoxUnlockOnStartup.UseVisualStyleBackColor = true;
             // 
             // pnlDefaultCredentials
             // 
@@ -66,10 +55,10 @@
             this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsPassword);
             this.pnlDefaultCredentials.Controls.Add(this.txtCredentialsUsername);
             this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsDomain);
-            this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 38);
+            this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 3);
             this.pnlDefaultCredentials.Name = "pnlDefaultCredentials";
             this.pnlDefaultCredentials.Size = new System.Drawing.Size(596, 175);
-            this.pnlDefaultCredentials.TabIndex = 13;
+            this.pnlDefaultCredentials.TabIndex = 0;
             // 
             // radCredentialsCustom
             // 
@@ -176,20 +165,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlDefaultCredentials);
-            this.Controls.Add(this.checkBoxUnlockOnStartup);
             this.Name = "CredentialsPage";
             this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.pnlDefaultCredentials.ResumeLayout(false);
             this.pnlDefaultCredentials.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private Controls.Base.NGCheckBox checkBoxUnlockOnStartup;
         internal System.Windows.Forms.Panel pnlDefaultCredentials;
         internal Controls.Base.NGRadioButton radCredentialsCustom;
         internal Controls.Base.NGLabel lblDefaultCredentials;

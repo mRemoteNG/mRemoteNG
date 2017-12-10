@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -61,6 +61,60 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a New Configuration File.
+        /// </summary>
+        internal static string ConfigurationCreateNew {
+            get {
+                return ResourceManager.GetString("ConfigurationCreateNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use a Custom File Path.
+        /// </summary>
+        internal static string ConfigurationCustomPath {
+            get {
+                return ResourceManager.GetString("ConfigurationCustomPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Configuration File is Missing..
+        /// </summary>
+        internal static string ConfigurationFileNotFound {
+            get {
+                return ResourceManager.GetString("ConfigurationFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import an Existing File.
+        /// </summary>
+        internal static string ConfigurationImportFile {
+            get {
+                return ResourceManager.GetString("ConfigurationImportFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection successful.
+        /// </summary>
+        internal static string ConnectionSuccessful {
+            get {
+                return ResourceManager.GetString("ConnectionSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find external tool with name &quot;{0}&quot;.
+        /// </summary>
+        internal static string CouldNotFindExternalTool {
+            get {
+                return ResourceManager.GetString("CouldNotFindExternalTool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credentials.
         /// </summary>
         internal static string Credentials {
@@ -79,11 +133,38 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database &apos;{0}&apos; not available..
+        /// </summary>
+        internal static string DatabaseNotAvailable {
+            get {
+                return ResourceManager.GetString("DatabaseNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter search matches in connection tree.
+        /// </summary>
+        internal static string FilterSearchMatchesInConnectionTree {
+            get {
+                return ResourceManager.GetString("FilterSearchMatchesInConnectionTree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect password.
         /// </summary>
         internal static string IncorrectPassword {
             get {
                 return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login failed for user &apos;{0}&apos;..
+        /// </summary>
+        internal static string LoginFailedForUser {
+            get {
+                return ResourceManager.GetString("LoginFailedForUser", resourceCulture);
             }
         }
         
@@ -102,6 +183,24 @@ namespace mRemoteNG {
         internal static string RepositoryIsUnlocked {
             get {
                 return ResourceManager.GetString("RepositoryIsUnlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save connections after every edit.
+        /// </summary>
+        internal static string SaveConnectionsAfterEveryEdit {
+            get {
+                return ResourceManager.GetString("SaveConnectionsAfterEveryEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; was not accessible..
+        /// </summary>
+        internal static string ServerNotAccessible {
+            get {
+                return ResourceManager.GetString("ServerNotAccessible", resourceCulture);
             }
         }
         
@@ -530,7 +629,7 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Looks up a localized string similar to You cannot import a normal connection file.
-        ///Please use File - Load Connections for normal connection files!.
+        ///Please use File - Open Connection File for normal connection files!.
         /// </summary>
         internal static string strCannotImportNormalSessionFile {
             get {
@@ -757,7 +856,7 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Looks up a localized string similar to For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 8.0 installed. You can download it here: http://support.microsoft.com/kb/925876
-        ///If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at http://forum.mremoteng.org/..
+        ///If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at {0}..
         /// </summary>
         internal static string strCcRDPFailed {
             get {
@@ -778,7 +877,7 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
         ///Please make sure that you have the VncSharp.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
-        ///If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/.
+        ///If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at {0}..
         /// </summary>
         internal static string strCcVNCFailed {
             get {
@@ -1302,7 +1401,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Conenction failed!.
+        ///   Looks up a localized string similar to Connection failed!.
         /// </summary>
         internal static string strConnectionEventConnectionFailed {
             get {
@@ -5590,15 +5689,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opening connection failed!.
-        /// </summary>
-        internal static string strRdpConnectionOpenFailed {
-            get {
-                return ResourceManager.GetString("strRdpConnectionOpenFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create RDP control, please check mRemoteNG requirements..
         /// </summary>
         internal static string strRdpControlCreationFailed {
@@ -5829,15 +5919,6 @@ namespace mRemoteNG {
         internal static string strRdpGetSessionsFailed {
             get {
                 return ResourceManager.GetString("strRdpGetSessionsFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open RDP Connection failed!.
-        /// </summary>
-        internal static string strRdpOpenConnectionFailed {
-            get {
-                return ResourceManager.GetString("strRdpOpenConnectionFailed", resourceCulture);
             }
         }
         
@@ -6270,6 +6351,15 @@ namespace mRemoteNG {
         internal static string strShowLogonInfoOnTabs {
             get {
                 return ResourceManager.GetString("strShowLogonInfoOnTabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show On Toolbar.
+        /// </summary>
+        internal static string strShowOnToolbar {
+            get {
+                return ResourceManager.GetString("strShowOnToolbar", resourceCulture);
             }
         }
         
@@ -7265,15 +7355,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opening connection failed!.
-        /// </summary>
-        internal static string strVncConnectionOpenFailed {
-            get {
-                return ResourceManager.GetString("strVncConnectionOpenFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to VNC Refresh Screen Failed!.
         /// </summary>
         internal static string strVncRefreshFailed {
@@ -7387,6 +7468,24 @@ namespace mRemoteNG {
         internal static string strYes {
             get {
                 return ResourceManager.GetString("strYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Connection.
+        /// </summary>
+        internal static string TestConnection {
+            get {
+                return ResourceManager.GetString("TestConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Testing connection.
+        /// </summary>
+        internal static string TestingConnection {
+            get {
+                return ResourceManager.GetString("TestingConnection", resourceCulture);
             }
         }
         

@@ -1561,9 +1561,6 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
 	<data name="strVncConnectionDisconnectFailed" xml:space="preserve">
 		<value>VNC bağlantı kesme başarısız!</value>
 	</data>
-	<data name="strVncConnectionOpenFailed" xml:space="preserve">
-		<value>Bağlantıyı açma başarısız!</value>
-	</data>
 	<data name="strVncRefreshFailed" xml:space="preserve">
 		<value>VNC ekrar yenileme başarısız!</value>
 	</data>
@@ -1936,9 +1933,6 @@ Mesaj:
 	<data name="strRdpCloseConnectionFailed" xml:space="preserve">
 		<value>RDP Bağğlantısı kapatma başarısız!</value>
 	</data>
-	<data name="strRdpConnectionOpenFailed" xml:space="preserve">
-		<value>Bağlantı açma başarısız!</value>
-	</data>
 	<data name="strRdpControlCreationFailed" xml:space="preserve">
 		<value>RDP kontrolü oluşturulamadı, lütfen mRemoteNG gereksinimlerini kontrol edin.</value>
 	</data>
@@ -2016,9 +2010,6 @@ Mesaj:
 	</data>
 	<data name="strRdpGetSessionsFailed" xml:space="preserve">
 		<value>Oturumları çağırma başarısız!</value>
-	</data>
-	<data name="strRdpOpenConnectionFailed" xml:space="preserve">
-		<value>RDP Bağlantısını açma işlemi başarısız oldu!</value>
 	</data>
 	<data name="strRdpReconnectCount" xml:space="preserve">
 		<value>RDP yeniden bağlanma sayısı:</value>

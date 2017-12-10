@@ -96,10 +96,22 @@
       </Feature>
     </Feature>
 
+    <UI>
+      <UIRef Id="WixUI_FeatureTree"/>
+      <UIRef Id="WixUI_ErrorProgressText" />
+      <Publish Dialog="ExitDialog"
+        Control="Finish"
+        Event="DoAction"
+        Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
     
-    <UIRef Id="WixUI_FeatureTree"/>
     <WixVariable Id="WixUILicenseRtf" Value="Resources\License.rtf" />
     <WixVariable Id="WixUIDialogBmp" Value="Resources\welcome.bmp" />
     <WixVariable Id="WixUIBannerBmp" Value="Resources\header.bmp" />
+    
+    <!-- Provide option to run app after install -->
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.FinishPage_LaunchMremoteNow)" />
+    <Property Id="WixShellExecTarget" Value="[#MainExeFile]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
   </Product>
 </Wix>

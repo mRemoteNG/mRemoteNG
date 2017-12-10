@@ -1626,9 +1626,6 @@
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Закрыть подключение RDP не удалось!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>Открытие подключения не удалась!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Не удается создать RDP подключение, пожалуйста, проверьте настройки mRemoteNG.</value>
   </data>
@@ -1706,9 +1703,6 @@
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>Ошибка сессии!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Открыть подключение RDP  не удалось!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>К-ство переподключений RDP:</value>
@@ -2151,9 +2145,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Не удалось отключить VNC!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Не удалось открыть подключение!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>Не удалось обновить экран VNC!</value>

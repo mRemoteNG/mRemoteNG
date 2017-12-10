@@ -37,8 +37,11 @@ namespace mRemoteNG.Config.Settings
                     xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName);
                     xmlTextWriter.WriteAttributeString("FileName", "", extA.FileName);
                     xmlTextWriter.WriteAttributeString("Arguments", "", extA.Arguments);
+                    xmlTextWriter.WriteAttributeString("WorkingDir", "", extA.WorkingDir);
                     xmlTextWriter.WriteAttributeString("WaitForExit", "", Convert.ToString(extA.WaitForExit));
                     xmlTextWriter.WriteAttributeString("TryToIntegrate", "", Convert.ToString(extA.TryIntegrate));
+                    xmlTextWriter.WriteAttributeString("RunElevated", "", Convert.ToString(extA.RunElevated));
+                    xmlTextWriter.WriteAttributeString("ShowOnToolbar", "", Convert.ToString(extA.ShowOnToolbar));
                     xmlTextWriter.WriteEndElement();
                 }
 

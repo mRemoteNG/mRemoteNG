@@ -21,7 +21,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
+	public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
@@ -498,12 +498,6 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Inheritance.RDPMinutesToIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPMinutesToIdleTimeout"]?.Value ?? "False");
                     connectionInfo.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["RDPAlertIdleTimeout"]?.Value ?? "False");
                     connectionInfo.Inheritance.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
-                }
-
-                if (_confVersion >= 2.7)
-                {
-                    connectionInfo.Inheritance.CredentialRecord = bool.Parse(xmlnode.Attributes["InheritCredentialRecord"]?.Value ?? "False");
-                    connectionInfo.CredentialRecordId = (xmlnode.Attributes["CredentialId"]?.Value).MaybeParse(Guid.Parse);
                 }
             }
             catch (Exception ex)

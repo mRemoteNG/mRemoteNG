@@ -60,9 +60,13 @@ namespace mRemoteNG.UI.Controls
             Opening += (sender, args) =>
             {
                 AddExternalApps();
+                if (_connectionTree.SelectedNode == null)
+                {
+                    args.Cancel = true;
+                    return;
+                }
                 ShowHideMenuItems();
             };
-            Closing += (sender, args) => EnableMenuItemsRecursive(Items);
         }
 
         private void InitializeComponent()
@@ -397,9 +401,6 @@ namespace mRemoteNG.UI.Controls
 
         internal void ShowHideMenuItems()
         {
-            if (_connectionTree.SelectedNode == null)
-                return;
-
             try
             {
                 Enabled = true;
@@ -443,7 +444,9 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsSort.Enabled = false;
             _cMenTreeToolsExternalApps.Enabled = false;
             _cMenTreeDuplicate.Enabled = false;
-            _cMenTreeRename.Enabled = true;
+            _cMenTreeImport.Enabled = false;
+            _cMenTreeExportFile.Enabled = false;
+            _cMenTreeRename.Enabled = false;
             _cMenTreeDelete.Enabled = false;
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
@@ -498,6 +501,8 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete.Enabled = false;
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
+            _cMenTreeImport.Enabled = false;
+            _cMenTreeExportFile.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForConnectionNode(ConnectionInfo connectionInfo)
@@ -743,13 +748,11 @@ namespace mRemoteNG.UI.Controls
         private void OnAddConnectionClicked(object sender, EventArgs e)
         {
             _connectionTree.AddConnection();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void OnAddFolderClicked(object sender, EventArgs e)
         {
             _connectionTree.AddFolder();
-            Runtime.SaveConnectionsAsync();
         }
 
         private void OnSortAscendingClicked(object sender, EventArgs e)
@@ -765,13 +768,11 @@ namespace mRemoteNG.UI.Controls
         private void OnMoveUpClicked(object sender, EventArgs e)
         {
             _connectionTree.SelectedNode.Parent.PromoteChild(_connectionTree.SelectedNode);
-            Runtime.SaveConnectionsAsync();
         }
 
         private void OnMoveDownClicked(object sender, EventArgs e)
         {
             _connectionTree.SelectedNode.Parent.DemoteChild(_connectionTree.SelectedNode);
-            Runtime.SaveConnectionsAsync();
         }
 
         private void OnExternalToolClicked(object sender, EventArgs e)

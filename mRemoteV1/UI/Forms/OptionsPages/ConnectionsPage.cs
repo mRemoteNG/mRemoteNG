@@ -26,13 +26,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSingleClickOnConnectionOpensIt.Text = Language.strSingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
             chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
+            chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
+            chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
 
             lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
-
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
-
             lblAutoSave1.Text = Language.strAutoSaveEvery;
-            lblAutoSave2.Text = Language.strAutoSaveMins;
 
             lblClosingConnections.Text = Language.strLabelClosingConnections;
             radCloseWarnAll.Text = Language.strRadioCloseWarnAll;
@@ -48,11 +47,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSingleClickOnConnectionOpensIt.Checked = Settings.Default.SingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
             chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
+            chkSaveConnectionsAfterEveryEdit.Checked = Settings.Default.SaveConnectionsAfterEveryEdit;
+            chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
-
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
-
             numAutoSave.Value = Convert.ToDecimal(Settings.Default.AutoSaveEveryMinutes);
 
             switch (Settings.Default.ConfirmCloseConnection)
@@ -77,11 +76,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SingleClickOnConnectionOpensIt = chkSingleClickOnConnectionOpensIt.Checked;
             Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
             Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
+            Settings.Default.SaveConnectionsAfterEveryEdit = chkSaveConnectionsAfterEveryEdit.Checked;
+            Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
 
             Settings.Default.RdpReconnectionCount = (int) numRdpReconnectionCount.Value;
-
             Settings.Default.ConRDPOverallConnectionTimeout = (int) numRDPConTimeout.Value;
-
             Settings.Default.AutoSaveEveryMinutes = (int) numAutoSave.Value;
             if (Settings.Default.AutoSaveEveryMinutes > 0)
             {
@@ -112,7 +111,5 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.Save();
         }
-
-        
     }
 }

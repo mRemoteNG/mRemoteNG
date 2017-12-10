@@ -79,7 +79,7 @@ namespace mRemoteNG.App
                         }
                     }
 
-                    Runtime.SaveConnectionsAsync();
+                    Runtime.ConnectionsService.SaveConnectionsAsync();
                 }
             }
             catch (Exception ex)
@@ -93,7 +93,7 @@ namespace mRemoteNG.App
             try
             {
                 ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOU);
-                Runtime.SaveConnectionsAsync();
+                Runtime.ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {
@@ -107,7 +107,7 @@ namespace mRemoteNG.App
             {
                 var importer = new PortScanImporter(protocol);
                 importer.Import(hosts, importDestinationContainer);
-                Runtime.SaveConnectionsAsync();
+                Runtime.ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {

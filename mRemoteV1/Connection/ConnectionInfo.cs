@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using mRemoteNG.Tools;
 using mRemoteNG.App;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Connection.Protocol.SSH;
-using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.RAW;
-using mRemoteNG.Connection.Protocol.ICA;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Connection.Protocol.Telnet;
-using mRemoteNG.Connection.Protocol.Rlogin;
-using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.Http;
+using mRemoteNG.Connection.Protocol.ICA;
+using mRemoteNG.Connection.Protocol.RAW;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Rlogin;
+using mRemoteNG.Connection.Protocol.SSH;
+using mRemoteNG.Connection.Protocol.Telnet;
+using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Container;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.Connection
@@ -127,14 +128,19 @@ namespace mRemoteNG.Connection
             return filteredProperties;
         }
 
-	    public virtual void SetParent(ContainerInfo parent)
+	    public virtual void SetParent(ContainerInfo newParent)
 	    {
             RemoveParent();
-            parent?.AddChild(this);
+		    newParent?.AddChild(this);
+			if (newParent is RootNodeInfo)
+				Inheritance.DisableInheritance();
 	    }
 
         public void RemoveParent()
         {
+			if (Parent is RootNodeInfo)
+				Inheritance.EnableInheritance();
+
             Parent?.RemoveChild(this);
         }
 

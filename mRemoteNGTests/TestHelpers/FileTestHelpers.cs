@@ -2,7 +2,7 @@
 
 namespace mRemoteNGTests.TestHelpers
 {
-    public class FileTestHelpers
+	public class FileTestHelpers
     {
         public static void DeleteTestFile(string path)
         {
@@ -20,16 +20,20 @@ namespace mRemoteNGTests.TestHelpers
 
         public static string NewTempFilePath()
         {
-            var newPath = Path.Combine(GetAppSpecificTempDirectory(), Path.GetRandomFileName());
+            var newPath = Path.Combine(GetTestSpecificTempDirectory(), Path.GetRandomFileName());
             var folderPath = Path.GetDirectoryName(newPath);
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
             return newPath;
         }
 
-        public static string GetAppSpecificTempDirectory()
+		/// <summary>
+		/// Gets a testing directory that should be unique for a
+		/// particular mRemoteNG test.
+		/// </summary>
+        public static string GetTestSpecificTempDirectory()
         {
-            return Path.Combine(Path.GetTempPath(), "mRemoteNGTests");
+            return Path.Combine(Path.GetTempPath(), "mRemoteNGTests", Path.GetRandomFileName());
         }
     }
 }

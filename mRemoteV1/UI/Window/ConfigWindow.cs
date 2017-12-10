@@ -1,10 +1,3 @@
-using mRemoteNG.App;
-using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
-using mRemoteNG.Tree.Root;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,17 +7,24 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls.FilteredPropertyGrid;
 using WeifenLuo.WinFormsUI.Docking;
 
 
 namespace mRemoteNG.UI.Window
 {
-    public class ConfigWindow : BaseWindow
+	public class ConfigWindow : BaseWindow
 	{
         private bool _originalPropertyGridToolStripItemCountValid;
         private int _originalPropertyGridToolStripItemCount;
@@ -467,7 +467,9 @@ namespace mRemoteNG.UI.Window
 					        _pGrid.SelectedObject = propertyGridObject;
 
 					        _btnShowProperties.Enabled = true;
-					        _btnShowInheritance.Enabled = gridObjectAsContainerInfo.Parent != null;
+					        _btnShowInheritance.Enabled = 
+                                gridObjectAsContainerInfo.Parent != null &&
+                                !(gridObjectAsContainerInfo.Parent is RootNodeInfo);
 					        _btnShowDefaultProperties.Enabled = false;
 					        _btnShowDefaultInheritance.Enabled = false;
 					        _btnIcon.Enabled = true;
@@ -483,7 +485,10 @@ namespace mRemoteNG.UI.Window
                             _pGrid.SelectedObject = propertyGridObject;
 
                             _btnShowProperties.Enabled = true;
-                            _btnShowInheritance.Enabled = gridObjectAsConnectionInfo.Parent != null;
+                            _btnShowInheritance.Enabled = 
+                                !(gridObjectAsConnectionInfo is PuttySessionInfo) &&
+                                gridObjectAsConnectionInfo.Parent != null &&
+                                !(gridObjectAsConnectionInfo.Parent is RootNodeInfo);
                             _btnShowDefaultProperties.Enabled = false;
                             _btnShowDefaultInheritance.Enabled = false;
                             _btnIcon.Enabled = true;
@@ -696,7 +701,7 @@ namespace mRemoteNG.UI.Window
                 UpdateRootInfoNode(e);
                 UpdateInheritanceNode();
                 ShowHideGridItems();
-                Runtime.SaveConnectionsAsync();
+                Runtime.ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
 			{
@@ -1302,7 +1307,6 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
 							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RDGatewayDomain");
@@ -1455,8 +1459,6 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RDGatewayHostname");
                         if(conI.Inheritance.SoundQuality)
                             strHide.Add("SoundQuality");
-                        if(conI.Inheritance.CredentialRecord)
-                            strHide.Add("CredentialRecord");
                     }
 					else
 					{
@@ -1589,7 +1591,7 @@ namespace mRemoteNG.UI.Window
 				connectionInfo.Icon = iconName;
 				_pGrid.Refresh();
 						
-				Runtime.SaveConnectionsAsync();
+				Runtime.ConnectionsService.SaveConnectionsAsync();
 			}
 			catch (Exception ex)
 			{

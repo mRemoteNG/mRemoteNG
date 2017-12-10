@@ -7,14 +7,15 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
-using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
@@ -22,14 +23,13 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
-using Microsoft.Win32;
 using WeifenLuo.WinFormsUI.Docking;
 
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class FrmMain
+	public partial class FrmMain
     {
         public static FrmMain Default { get; } = new FrmMain();
 
@@ -42,9 +42,8 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private readonly ScreenSelectionSystemMenu _screenSystemMenu;
         private ConnectionInfo _selectedConnection;
-        private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
-        private ThemeManager _themeManager;
+        private readonly ThemeManager _themeManager;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -67,7 +66,6 @@ namespace mRemoteNG.UI.Forms
 
         static FrmMain()
         {
-
         }
 
         #region Properties
@@ -155,8 +153,11 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.WindowList = new WindowList();
 
-            var credentialsService = new CredentialServiceFactory().Build();
-            var credsAndConsSetup = new CredsAndConsSetup(credentialsService);
+            if (Settings.Default.ResetPanels)
+                SetDefaultLayout();
+
+            Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
+            var credsAndConsSetup = new CredsAndConsSetup();
             credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
@@ -173,6 +174,11 @@ namespace mRemoteNG.UI.Forms
             Opacity = 1;
         }
 
+        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        {
+            UpdateWindowTitle();
+        }
+
         private void SetMenuDependencies()
         {
             var connectionInitiator = new ConnectionInitiator();
@@ -181,16 +187,15 @@ namespace mRemoteNG.UI.Forms
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;
+	        viewMenu1.TsMultiSsh = _multiSshToolStrip;
             viewMenu1.FullscreenHandler = Fullscreen;
             viewMenu1.MainForm = this;
 
             toolsMenu1.MainForm = this;
             toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
-            toolsMenu1.UnlockerFormFactory = _credRepoUnlockerFormFactory;
 
             _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
-
 
         //Theming support
         private void SetSchema()
@@ -209,17 +214,15 @@ namespace mRemoteNG.UI.Forms
                 vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
                 tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
             }
         }
-		
- 
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
             PromptForUpdatesPreference();
             CheckForUpdates();
-            UnlockRepositories(Runtime.CredentialProviderCatalog, this);
         }
 
         private void PromptForUpdatesPreference()
@@ -260,13 +263,6 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
             Startup.Instance.CheckForUpdate();
-        }
-
-        private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
-        {
-            if (!Settings.Default.PromptUnlockCredReposOnStartup) return;
-            var credentialUnlockerForm = _credRepoUnlockerFormFactory.Build(repositories);
-            credentialUnlockerForm.ShowDialog(parentForm);
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -318,7 +314,7 @@ namespace mRemoteNG.UI.Forms
 		private void tmrAutoSave_Tick(object sender, EventArgs e)
 		{
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Doing AutoSave");
-			Runtime.SaveConnectionsAsync();
+			Runtime.ConnectionsService.SaveConnectionsAsync();
 		}
         #endregion
 		
@@ -439,7 +435,7 @@ namespace mRemoteNG.UI.Forms
 		    connectionWindow?.UpdateSelectedConnection();
 		}
 		
-		private void UpdateWindowTitle()
+		internal void UpdateWindowTitle()
 		{
 			if (InvokeRequired)
 			{
@@ -452,19 +448,19 @@ namespace mRemoteNG.UI.Forms
 									
 			if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
 			{
-				if (AreWeUsingSqlServerForSavingConnections)
+				if (Runtime.ConnectionsService.UsingDatabase)
 				{
 					titleBuilder.Append(separator);
 					titleBuilder.Append(Language.strSQLServer.TrimEnd(':'));
 				}
 				else
 				{
-					if (!string.IsNullOrEmpty(ConnectionsFileName))
+					if (!string.IsNullOrEmpty(Runtime.ConnectionsService.ConnectionFileName))
 					{
 					    titleBuilder.Append(separator);
 					    titleBuilder.Append(Settings.Default.ShowCompleteConsPathInTitle
-					        ? ConnectionsFileName
-					        : Path.GetFileName(ConnectionsFileName));
+					        ? Runtime.ConnectionsService.ConnectionFileName
+                            : Path.GetFileName(Runtime.ConnectionsService.ConnectionFileName));
 					}
 				}
 			}

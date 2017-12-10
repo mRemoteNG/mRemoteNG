@@ -67,23 +67,23 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, SaveFilter saveFilter, ConnectionInfo exportTarget)
+		private static void SaveExportFile(string fileName, SaveFormat saveFormat, SaveFilter saveFilter, ConnectionInfo exportTarget)
 		{
 			try
 			{
 			    ISerializer<ConnectionInfo, string> serializer;
 			    switch (saveFormat)
 			    {
-			        case ConnectionsSaver.Format.mRXML:
+			        case SaveFormat.mRXML:
                         var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
 			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
-                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                        var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
                             cryptographyProvider, 
                             rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString(),
                             saveFilter);
 			            serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
 			            break;
-			        case ConnectionsSaver.Format.mRCSV:
+			        case SaveFormat.mRCSV:
 			            serializer = new CsvConnectionsSerializerMremotengFormat(saveFilter, Runtime.CredentialProviderCatalog);
                         break;
 			        default:
@@ -99,7 +99,7 @@ namespace mRemoteNG.App
 			}
 			finally
 			{
-			    Runtime.RemoteConnectionsSyncronizer?.Enable();
+			    Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Enable();
 			}
 		}
 	}

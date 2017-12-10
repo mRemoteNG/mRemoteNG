@@ -10,7 +10,7 @@ namespace mRemoteNG.Config.Connections
     {
         public ConnectionTreeModel Load()
         {
-            var connector = new SqlDatabaseConnector();
+            var connector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
             var dataProvider = new SqlDataProvider(connector);
             var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
             databaseVersionVerifier.VerifyDatabaseVersion();

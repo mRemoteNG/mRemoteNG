@@ -1,5 +1,8 @@
 
 
+using mRemoteNG.Connection;
+using mRemoteNG.Tree;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class ConnectionTreeWindow : BaseWindow
@@ -19,6 +22,9 @@ namespace mRemoteNG.UI.Window
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
+            mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler1 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
+            mRemoteNG.Tree.AlwaysConfirmYes alwaysConfirmYes1 = new mRemoteNG.Tree.AlwaysConfirmYes();
+            mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler2 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
             this.olvConnections = new mRemoteNG.UI.Controls.ConnectionTree();
             this.pnlConnections = new System.Windows.Forms.Panel();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
@@ -48,7 +54,10 @@ namespace mRemoteNG.UI.Window
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvConnections.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.olvConnections.CellEditUseWholeCell = false;
+            this.olvConnections.ConnectionTreeModel = new ConnectionTreeModel();
             this.olvConnections.Cursor = System.Windows.Forms.Cursors.Default;
+            treeNodeCompositeClickHandler1.ClickHandlers = new ITreeNodeClickHandler<ConnectionInfo>[0];
+            this.olvConnections.DoubleClickHandler = treeNodeCompositeClickHandler1;
             this.olvConnections.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.olvConnections.HideSelection = false;
             this.olvConnections.IsSimpleDragSource = true;
@@ -56,14 +65,19 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.Location = new System.Drawing.Point(0, 0);
             this.olvConnections.MultiSelect = false;
             this.olvConnections.Name = "olvConnections";
+            this.olvConnections.NodeDeletionConfirmer = alwaysConfirmYes1;
+            this.olvConnections.PostSetupActions = new mRemoteNG.UI.Controls.IConnectionTreeDelegate[0];
             this.olvConnections.SelectedBackColor = System.Drawing.SystemColors.Highlight;
             this.olvConnections.SelectedForeColor = System.Drawing.SystemColors.HighlightText;
             this.olvConnections.ShowGroups = false;
+            treeNodeCompositeClickHandler2.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<ConnectionInfo>[0];
+            this.olvConnections.SingleClickHandler = treeNodeCompositeClickHandler2;
             this.olvConnections.Size = new System.Drawing.Size(192, 410);
             this.olvConnections.TabIndex = 20;
             this.olvConnections.UnfocusedSelectedBackColor = System.Drawing.SystemColors.Highlight;
             this.olvConnections.UnfocusedSelectedForeColor = System.Drawing.SystemColors.HighlightText;
             this.olvConnections.UseCompatibleStateImageBehavior = false;
+            this.olvConnections.UseOverlays = false;
             this.olvConnections.View = System.Windows.Forms.View.Details;
             this.olvConnections.VirtualMode = true;
             // 

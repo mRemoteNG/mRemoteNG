@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using mRemoteNG.App;
-using mRemoteNG.Security.SymmetricEncryption;
+using System.Threading.Tasks;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.DatabaseConnectors
@@ -10,18 +10,22 @@ namespace mRemoteNG.Config.DatabaseConnectors
     {
         public  SqlConnection SqlConnection { get; private set; } = default(SqlConnection);
         private string _sqlConnectionString = "";
-        private string _sqlHost;
-        private string _sqlCatalog;
-        private string _sqlUsername;
-        private string _sqlPassword;
+        private readonly string _sqlHost;
+        private readonly string _sqlCatalog;
+        private readonly string _sqlUsername;
+        private readonly string _sqlPassword;
 
         public bool IsConnected
         {
             get { return (SqlConnection.State == ConnectionState.Open); }
         }
 
-        public SqlDatabaseConnector()
+        public SqlDatabaseConnector(string sqlServer, string catalog, string username, string password)
         {
+            _sqlHost = sqlServer;
+            _sqlCatalog = catalog;
+            _sqlUsername = username;
+            _sqlPassword = password;
             Initialize();
         }
 
@@ -33,9 +37,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildSqlConnectionString()
         {
-            GetSqlConnectionDataFromSettings();
-
-            if (mRemoteNG.Settings.Default.SQLUser != "")
+            if (_sqlUsername != "")
                 BuildSqlConnectionStringWithCustomCredentials();
             else
                 BuildSqlConnectionStringWithDefaultCredentials();
@@ -51,18 +53,14 @@ namespace mRemoteNG.Config.DatabaseConnectors
             _sqlConnectionString = $"Data Source={_sqlHost};Initial Catalog={_sqlCatalog};Integrated Security=True";
         }
 
-        private void GetSqlConnectionDataFromSettings()
-        {
-            _sqlHost = mRemoteNG.Settings.Default.SQLHost;
-            _sqlCatalog = mRemoteNG.Settings.Default.SQLDatabaseName;
-            _sqlUsername = mRemoteNG.Settings.Default.SQLUser;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            _sqlPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, Runtime.EncryptionKey);
-        }
-
         public void Connect()
         {
             SqlConnection.Open();
+        }
+
+        public async Task ConnectAsync()
+        {
+            await SqlConnection.OpenAsync();
         }
 
         public void Disconnect()

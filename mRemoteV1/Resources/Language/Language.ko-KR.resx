@@ -1931,9 +1931,6 @@ VncSharp 제어 버전 {0}</value>
 	<data name="strRdpCloseConnectionFailed" xml:space="preserve">
 		<value>RDP 연결을 닫지 못했습니다!</value>
 	</data>
-	<data name="strRdpConnectionOpenFailed" xml:space="preserve">
-		<value>연결을 열지 못했습니다!</value>
-	</data>
 	<data name="strRdpControlCreationFailed" xml:space="preserve">
 		<value>RDP 컨트롤을 만들 수 없습니다. mRemoteNG 요구 사항을 확인하십시오.</value>
 	</data>
@@ -2011,9 +2008,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
 	<data name="strRdpGetSessionsFailed" xml:space="preserve">
 		<value>GetSessions 실패!</value>
-	</data>
-	<data name="strRdpOpenConnectionFailed" xml:space="preserve">
-		<value>열기 RDP 연결에 실패했습니다!</value>
 	</data>
 	<data name="strRdpReconnectCount" xml:space="preserve">
 		<value>RDP 재 연결 수 :</value>
@@ -2456,9 +2450,6 @@ mRemoteNG는 이제 종료되고 설치로 시작됩니다.</value>
 	</data>
 	<data name="strVncConnectionDisconnectFailed" xml:space="preserve">
 		<value>VNC 연결 끊기 실패!</value>
-	</data>
-	<data name="strVncConnectionOpenFailed" xml:space="preserve">
-		<value>연결 열기 실패!</value>
 	</data>
 	<data name="strVncRefreshFailed" xml:space="preserve">
 		<value>VNC 화면 새로 고침 실패!</value>
