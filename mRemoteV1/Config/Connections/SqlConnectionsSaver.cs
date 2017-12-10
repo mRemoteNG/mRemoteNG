@@ -33,6 +33,13 @@ namespace mRemoteNG.Config.Connections
 
         public void Save(ConnectionTreeModel connectionTreeModel)
         {
+            if (SqlUserIsReadOnly())
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to update but the SQL read only checkbox is checked, aborting!");
+                return;
+            }
+                
+
             using (var sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings())
             {
                 sqlConnector.Connect();
@@ -108,6 +115,12 @@ namespace mRemoteNG.Config.Connections
             sqlQuery.ExecuteNonQuery();
             sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')", sqlDatabaseConnector.SqlConnection);
             sqlQuery.ExecuteNonQuery();
+        }
+
+        private bool SqlUserIsReadOnly()
+        {
+            return mRemoteNG.Settings.Default.SQLReadOnly;
+
         }
     }
 }

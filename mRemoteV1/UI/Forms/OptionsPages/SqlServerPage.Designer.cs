@@ -42,6 +42,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.btnTestConnection = new mRemoteNG.UI.Controls.Base.NGButton();
             this.imgConnectionStatus = new System.Windows.Forms.PictureBox();
             this.lblTestConnectionResults = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.chkSQLReadOnly = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.lblSQLReadOnly = new mRemoteNG.UI.Controls.Base.NGLabel();
             ((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).BeginInit();
             this.SuspendLayout();
             // 
@@ -166,7 +168,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.btnTestConnection._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnTestConnection.Enabled = false;
-            this.btnTestConnection.Location = new System.Drawing.Point(140, 208);
+            this.btnTestConnection.Location = new System.Drawing.Point(140, 228);
             this.btnTestConnection.Name = "btnTestConnection";
             this.btnTestConnection.Size = new System.Drawing.Size(153, 23);
             this.btnTestConnection.TabIndex = 11;
@@ -177,7 +179,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // imgConnectionStatus
             // 
             this.imgConnectionStatus.Image = global::mRemoteNG.Resources.Help;
-            this.imgConnectionStatus.Location = new System.Drawing.Point(299, 212);
+            this.imgConnectionStatus.Location = new System.Drawing.Point(299, 232);
             this.imgConnectionStatus.Name = "imgConnectionStatus";
             this.imgConnectionStatus.Size = new System.Drawing.Size(16, 16);
             this.imgConnectionStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -192,10 +194,32 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblTestConnectionResults.Size = new System.Drawing.Size(0, 13);
             this.lblTestConnectionResults.TabIndex = 13;
             // 
+            // chkSQLReadOnly
+            // 
+            this.chkSQLReadOnly._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSQLReadOnly.AutoSize = true;
+            this.chkSQLReadOnly.Location = new System.Drawing.Point(140, 205);
+            this.chkSQLReadOnly.Name = "chkSQLReadOnly";
+            this.chkSQLReadOnly.Size = new System.Drawing.Size(15, 14);
+            this.chkSQLReadOnly.TabIndex = 14;
+            this.chkSQLReadOnly.UseVisualStyleBackColor = true;
+            // 
+            // lblSQLReadOnly
+            // 
+            this.lblSQLReadOnly.Enabled = false;
+            this.lblSQLReadOnly.Location = new System.Drawing.Point(23, 205);
+            this.lblSQLReadOnly.Name = "lblSQLReadOnly";
+            this.lblSQLReadOnly.Size = new System.Drawing.Size(111, 13);
+            this.lblSQLReadOnly.TabIndex = 15;
+            this.lblSQLReadOnly.Text = "Read Only:";
+            this.lblSQLReadOnly.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // SqlServerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblSQLReadOnly);
+            this.Controls.Add(this.chkSQLReadOnly);
             this.Controls.Add(this.lblTestConnectionResults);
             this.Controls.Add(this.imgConnectionStatus);
             this.Controls.Add(this.btnTestConnection);
@@ -233,5 +257,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.PictureBox imgConnectionStatus;
         private System.ComponentModel.IContainer components;
         private Controls.Base.NGLabel lblTestConnectionResults;
+        private Controls.Base.NGCheckBox chkSQLReadOnly;
+        internal Controls.Base.NGLabel lblSQLReadOnly;
     }
 }
