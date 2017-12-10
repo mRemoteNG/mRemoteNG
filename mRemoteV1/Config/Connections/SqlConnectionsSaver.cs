@@ -35,7 +35,7 @@ namespace mRemoteNG.Config.Connections
         {
             if (SqlUserIsReadOnly())
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to update but the SQL read only checkbox is checked, aborting!");
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to save connection tree but the SQL read only checkbox is checked, aborting!");
                 return;
             }
                 
