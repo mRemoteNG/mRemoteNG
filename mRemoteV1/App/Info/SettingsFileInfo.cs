@@ -13,5 +13,7 @@ namespace mRemoteNG.App.Info
         public static string LayoutFileName { get; } = "pnlLayout.xml";
         public static string ExtAppsFilesName { get; } = "extApps.xml";
         public static string ThemesFileName { get; } = "Themes.xml";
+        public static string ThemeFolder { get; } =   Path.Combine(SettingsPath, "Themes");
+        public static string InstalledThemeFolder { get; } = Path.Combine(ExePath, "Themes");
     }
 }
