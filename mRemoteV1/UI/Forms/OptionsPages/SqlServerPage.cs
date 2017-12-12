@@ -7,9 +7,9 @@ using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class SqlServerPage
+	public partial class SqlServerPage
     {
-        private SqlDatabaseConnectionTester _databaseConnectionTester;
+        private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
 
         public SqlServerPage()
         {
@@ -51,6 +51,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             txtSQLPassword.Text = cryptographyProvider.Decrypt(Settings.Default.SQLPass, Runtime.EncryptionKey);
             chkSQLReadOnly.Checked = Settings.Default.SQLReadOnly;
+	        lblTestConnectionResults.Text = "";
         }
 
         public override void SaveSettings()
