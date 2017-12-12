@@ -2630,6 +2630,17 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SQLReadOnly {
+            get {
+                return ((bool)(this["SQLReadOnly"]));
+            }
+            set {
+                this["SQLReadOnly"] = value;
+            }
+            
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LockToolbars {
             get {
                 return ((bool)(this["LockToolbars"]));
