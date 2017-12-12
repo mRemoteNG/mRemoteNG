@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -147,6 +148,9 @@ namespace mRemoteNG.UI.Forms
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
+	        LockToolbarPositions(Settings.Default.LockToolbars);
+			Settings.Default.PropertyChanged += OnApplicationSettingChanged;
+
     		_themeManager.ThemeChanged += ApplyTheme; 
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
@@ -174,7 +178,26 @@ namespace mRemoteNG.UI.Forms
             Opacity = 1;
         }
 
-        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+	    private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+	    {
+		    if (propertyChangedEventArgs.PropertyName != nameof(Settings.LockToolbars))
+				return;
+
+		    LockToolbarPositions(Settings.Default.LockToolbars);
+	    }
+
+	    private void LockToolbarPositions(bool shouldBeLocked)
+	    {
+		    var toolbars = new ToolStrip[] { _quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip };
+			foreach (var toolbar in toolbars)
+			{
+				toolbar.GripStyle = shouldBeLocked
+					? ToolStripGripStyle.Hidden
+					: ToolStripGripStyle.Visible;
+			}
+		}
+
+	    private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             UpdateWindowTitle();
         }
