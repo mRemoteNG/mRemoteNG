@@ -130,7 +130,7 @@ namespace mRemoteNG.UI.Controls.Base
             }
 
             //Arrow
-            e.Graphics.DrawString("q", new Font("Wingdings 3", 8f), new SolidBrush(ButtFore), Width-17, Height/2 -5);
+            e.Graphics.DrawString("\u25BC", this.Font, new SolidBrush(ButtFore), Width-17, Height/2 -5);
  
             //Text
             var textRect = new Rectangle(2, 2, Width - 20, Height - 4);

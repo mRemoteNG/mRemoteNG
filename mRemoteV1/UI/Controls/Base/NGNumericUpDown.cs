@@ -33,15 +33,15 @@ namespace mRemoteNG.UI.Controls.Base
             //Add new themable buttons
             Up = new NGButton
             {
-                Text = "p",
-                Font = new Font("Wingdings 3", 6f)
+                Text = "\u25B2",
+                Font = new Font(Font.FontFamily, 6f)
             };
             Up.SetBounds(Width - 17, 1, 16, Height / 2 - 1);
             Up.Click += Up_Click;
             Down = new NGButton
             {
-                Text = "q",
-                Font = new Font("Wingdings 3", 6f)
+                Text = "\u25BC",
+                Font = new Font(Font.FontFamily, 6f)
             };
             Down.SetBounds(Width - 17, Height/2, 16, Height / 2 - 1);
             Down.Click += Down_Click;

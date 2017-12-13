@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Controls.Base
 
             if (Checked)
             {
-                e.Graphics.DrawString("ü", new Font("Wingdings", 9f), new SolidBrush(glyph), -1, 1);
+                e.Graphics.DrawString("\u2714", new Font(Font.FontFamily, 9f), new SolidBrush(glyph), -1, 1);
             }
 
             var textRect = new Rectangle(16, 0, Width - 16, Height);
