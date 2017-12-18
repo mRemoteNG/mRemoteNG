@@ -21,6 +21,7 @@ Bruce (github.com/brucetp)
 Camilo Alvarez (github.com/jotatsu)
 github.com/DamianBis
 github.com/pfjason
+github.com/sirLoaf
 
 
 Past Contributors

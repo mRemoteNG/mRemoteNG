@@ -3,6 +3,7 @@
 Features/Enhancements:
 ----------------------
 #838: Added an option to lock toolbars
+#829: Add option that fixes connecting to Azure instances with LoadBalanceInfo
 
 Fixes:
 ------
