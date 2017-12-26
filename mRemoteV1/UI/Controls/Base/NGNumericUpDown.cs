@@ -16,14 +16,13 @@ namespace mRemoteNG.UI.Controls.Base
 
         public NGNumericUpDown() : base()
         {
+            _themeManager = ThemeManager.getInstance();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
-            _themeManager = ThemeManager.getInstance();
+            base.OnCreateControl(); 
             if (!_themeManager.ThemingActive) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background"); 
@@ -63,22 +62,18 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnEnabledChanged(EventArgs e)
         {
             
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            if (_themeManager.ThemingActive)
             {
-                _themeManager = ThemeManager.getInstance();
-                if (_themeManager.ThemingActive)
+                if (Enabled)
                 {
-                    if (Enabled)
-                    {
-                        ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                    }
-                    else
-                    {
-                        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
-                    }
+                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
                 }
-            }
+                else
+                {
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
+                }
+            } 
             base.OnEnabledChanged(e);
             Invalidate();
         }
@@ -88,7 +83,6 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnPaint(PaintEventArgs e)
         { 
             base.OnPaint(e);
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
             if (!_themeManager.ThemingActive) return;
             //Fix Border
             if (BorderStyle != BorderStyle.None)

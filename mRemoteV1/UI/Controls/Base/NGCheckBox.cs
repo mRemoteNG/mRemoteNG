@@ -26,8 +26,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            base.OnCreateControl(); 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             _mice = MouseState.OUT;
@@ -60,7 +59,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
+            if ( !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;
@@ -108,7 +107,7 @@ namespace mRemoteNG.UI.Controls.Base
 
             if (Checked)
             {
-                e.Graphics.DrawString("\u2714", new Font(Font.FontFamily, 9f), new SolidBrush(glyph), -1, 1);
+                e.Graphics.DrawString("\u2714", new Font(Font.FontFamily, 7f), new SolidBrush(glyph), -1, 1);
             }
 
             var textRect = new Rectangle(16, 0, Width - 16, Height);

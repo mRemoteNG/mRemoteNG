@@ -24,8 +24,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            base.OnCreateControl(); 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             _themeManager = ThemeManager.getInstance();
@@ -89,7 +88,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnPaint(PaintEventArgs e)
         {
 
-            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
+            if ( !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;
