@@ -1,3 +1,15 @@
+1.76.0 Alpha 2 (201x-xx-xx):
+
+Features/Enhancements:
+----------------------
+#838: Added an option to lock toolbars
+#829: Add option that fixes connecting to Azure instances with LoadBalanceInfo
+
+Fixes:
+------
+
+
+
 1.76.0 Alpha 1 (2017-12-08):
 
 Features/Enhancements:

@@ -7,9 +7,9 @@ using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class SqlServerPage
+	public partial class SqlServerPage
     {
-        private SqlDatabaseConnectionTester _databaseConnectionTester;
+        private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
 
         public SqlServerPage()
         {
@@ -36,6 +36,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSQLDatabaseName.Text = Language.strLabelSQLServerDatabaseName;
             lblSQLUsername.Text = Language.strLabelUsername;
             lblSQLPassword.Text = Language.strLabelPassword;
+            lblSQLReadOnly.Text = Language.strLabelReadOnly;
             btnTestConnection.Text = Language.TestConnection;
         }
 
@@ -49,6 +50,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLUsername.Text = Settings.Default.SQLUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             txtSQLPassword.Text = cryptographyProvider.Decrypt(Settings.Default.SQLPass, Runtime.EncryptionKey);
+            chkSQLReadOnly.Checked = Settings.Default.SQLReadOnly;
+	        lblTestConnectionResults.Text = "";
         }
 
         public override void SaveSettings()
@@ -62,6 +65,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SQLUser = txtSQLUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             Settings.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
+            Settings.Default.SQLReadOnly = chkSQLReadOnly.Checked;
 
             if (Settings.Default.UseSQLServer)
                 ReinitializeSqlUpdater();
@@ -87,15 +91,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void chkUseSQLServer_CheckedChanged(object sender, EventArgs e)
         {
-            lblSQLServer.Enabled = chkUseSQLServer.Checked;
-            lblSQLDatabaseName.Enabled = chkUseSQLServer.Checked;
-            lblSQLUsername.Enabled = chkUseSQLServer.Checked;
-            lblSQLPassword.Enabled = chkUseSQLServer.Checked;
-            txtSQLServer.Enabled = chkUseSQLServer.Checked;
-            txtSQLDatabaseName.Enabled = chkUseSQLServer.Checked;
-            txtSQLUsername.Enabled = chkUseSQLServer.Checked;
-            txtSQLPassword.Enabled = chkUseSQLServer.Checked;
-            btnTestConnection.Enabled = chkUseSQLServer.Checked;
+            toggleSQLPageControls(chkUseSQLServer.Checked);
+        }
+
+        private void toggleSQLPageControls(bool useSQLServer)
+        {
+            lblSQLServer.Enabled = useSQLServer;
+            lblSQLDatabaseName.Enabled = useSQLServer;
+            lblSQLUsername.Enabled = useSQLServer;
+            lblSQLPassword.Enabled = useSQLServer;
+            lblSQLReadOnly.Enabled = useSQLServer;
+            txtSQLServer.Enabled = useSQLServer;
+            txtSQLDatabaseName.Enabled = useSQLServer;
+            txtSQLUsername.Enabled = useSQLServer;
+            txtSQLPassword.Enabled = useSQLServer;
+            chkSQLReadOnly.Enabled = useSQLServer;
+            btnTestConnection.Enabled = useSQLServer;
         }
 
         private async void btnTestConnection_Click(object sender, EventArgs e)

@@ -2625,4 +2625,10 @@ This page will walk you through the process of upgrading your connections file o
   <data name="TestConnection" xml:space="preserve">
     <value>Test Connection</value>
   </data>
+  <data name="strLabelReadOnly" xml:space="preserve">
+    <value>Read Only:</value>
+  </data>
+  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
+  </data>
 </root>

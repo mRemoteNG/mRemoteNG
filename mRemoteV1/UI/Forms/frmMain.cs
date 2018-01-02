@@ -151,6 +151,7 @@ namespace mRemoteNG.UI.Forms
 
 	        LockToolbarPositions(Settings.Default.LockToolbars);
 			Settings.Default.PropertyChanged += OnApplicationSettingChanged;
+
     		_themeManager.ThemeChanged += ApplyTheme; 
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);

@@ -32,6 +32,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSeconds.Text = Language.strLabelSeconds;
             lblMaximumPuttyWaitTime.Text = Language.strLabelPuttyTimeout;
             chkAutomaticReconnect.Text = Language.strCheckboxAutomaticReconnect;
+            chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
             lblConfigurePuttySessions.Text = Language.strLabelPuttySessionsConfig;
             btnLaunchPutty.Text = Language.strButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language.strButtonBrowse;
@@ -46,6 +47,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
             chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
+            chkLoadBalanceInfoUseUtf8.Checked = Settings.Default.RdpLoadBalanceInfoUseUtf8;
             numPuttyWaitTime.Value = Settings.Default.MaxPuttyWaitTime;
 
             chkUseCustomPuttyPath.Checked = Settings.Default.UseCustomPuttyPath;
@@ -59,6 +61,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
             Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
+            Settings.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
 
             var puttyPathChanged = false;
             if (Settings.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
