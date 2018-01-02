@@ -1,0 +1,18 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+image: Visual Studio 2017
+configuration: Release
+platform: x86
+clone_depth: 1
+install:
+- ps: C:\projects\mremoteng\mRemoteV1\Resources\CitrixReceiver.exe DONOTSTARTCC=1 ENABLE_SSON="No" /silent | out-null
+before_build:
+- cmd: nuget restore
+build:
+  project: mRemoteV1.sln
+  verbosity: normal
+test:
+  assemblies:
+    only:
+    - mRemoteNGTests\bin\$(configuration)\mRemoteNGTests.dll
