@@ -72,10 +72,6 @@ FilteredPropertyGrid
 Copyright © 2006 Azuria
 http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
 
-Hotkey Selection Control for .NET
-Copyright © 2006 Thomas Backman
-http://www.codeproject.com/Articles/15085/A-simple-hotkey-selection-control-for-NET
-
 InputBox
 Copyright © 2016 Jan Slama
 http://www.csharp-examples.net/inputbox/
