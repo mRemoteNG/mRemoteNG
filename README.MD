@@ -12,7 +12,7 @@
 | ---------------|--------------|-----------|
 | Stable | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/master)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/master/) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75.7011/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75.7011) |
 | Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75.7011/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75.7011) |
-| Development | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/develop)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/develop/) | - |
+| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | - |
 
 mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
 
