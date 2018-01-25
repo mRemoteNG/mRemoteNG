@@ -10,7 +10,7 @@
 
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
-| Stable | [![Build Status](https://jenkins.mremoteng.org/buildStatus/icon?job=mRemoteNG/mRemoteNG/master)](https://jenkins.mremoteng.org/job/mRemoteNG/job/mRemoteNG/job/master/) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75.7011/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75.7011) |
+| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75.7011/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75.7011) |
 | Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.75.7011/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.75.7011) |
 | Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | - |
 
