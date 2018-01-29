@@ -143,6 +143,7 @@ namespace mRemoteNG.UI.Forms
             SetMenuDependencies();
 
             var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip);
+            msMain.Location = Point.Empty;
             settingsLoader.LoadSettings();
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
