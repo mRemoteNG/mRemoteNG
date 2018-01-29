@@ -11,7 +11,11 @@ namespace mRemoteNG.Config.Settings
 {
     public static class SettingsSaver
     {
-        public static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, FrmMain frmMain)
+        public static void SaveSettings(
+            Control quickConnectToolStrip, 
+            ExternalToolsToolStrip externalToolsToolStrip,
+            MultiSshToolStrip multiSshToolStrip,
+            FrmMain frmMain)
         {
             try
             {
@@ -43,20 +47,10 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.ResetToolbars = false;
                 mRemoteNG.Settings.Default.NoReconnect = false;
 
-                mRemoteNG.Settings.Default.ExtAppsTBLocation = externalToolsToolStrip.Location;
-                if (externalToolsToolStrip.Parent != null)
-                {
-                    mRemoteNG.Settings.Default.ExtAppsTBParentDock = externalToolsToolStrip.Parent.Dock.ToString();
-                }
-                mRemoteNG.Settings.Default.ExtAppsTBVisible = externalToolsToolStrip.Visible;
-                mRemoteNG.Settings.Default.ExtAppsTBShowText = externalToolsToolStrip.CMenToolbarShowText.Checked;
-
-                mRemoteNG.Settings.Default.QuickyTBLocation = quickConnectToolStrip.Location;
-                if (quickConnectToolStrip.Parent != null)
-                {
-                    mRemoteNG.Settings.Default.QuickyTBParentDock = quickConnectToolStrip.Parent.Dock.ToString();
-                }
-                mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
+                SaveExternalAppsToolbarLocation(externalToolsToolStrip);
+                SaveQuickConnectToolbarLocation(quickConnectToolStrip);
+                SaveMultiSshToolbarLocation(multiSshToolStrip);
+                
                 mRemoteNG.Settings.Default.Save();
 
                 SaveDockPanelLayout();
@@ -65,6 +59,40 @@ namespace mRemoteNG.Config.Settings
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("Saving settings failed", ex);
+            }
+        }
+
+        private static void SaveExternalAppsToolbarLocation(ExternalToolsToolStrip externalToolsToolStrip)
+        {
+            mRemoteNG.Settings.Default.ExtAppsTBLocation = externalToolsToolStrip.Location;
+            mRemoteNG.Settings.Default.ExtAppsTBVisible = externalToolsToolStrip.Visible;
+            mRemoteNG.Settings.Default.ExtAppsTBShowText = externalToolsToolStrip.CMenToolbarShowText.Checked;
+
+            if (externalToolsToolStrip.Parent != null)
+            {
+                mRemoteNG.Settings.Default.ExtAppsTBParentDock = externalToolsToolStrip.Parent.Dock.ToString();
+            }
+        }
+
+        private static void SaveQuickConnectToolbarLocation(Control quickConnectToolStrip)
+        {
+            mRemoteNG.Settings.Default.QuickyTBLocation = quickConnectToolStrip.Location;
+            mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
+
+            if (quickConnectToolStrip.Parent != null)
+            {
+                mRemoteNG.Settings.Default.QuickyTBParentDock = quickConnectToolStrip.Parent.Dock.ToString();
+            }
+        }
+
+        private static void SaveMultiSshToolbarLocation(MultiSshToolStrip multiSshToolStrip)
+        {
+            mRemoteNG.Settings.Default.MultiSshToolbarLocation = multiSshToolStrip.Location;
+            mRemoteNG.Settings.Default.MultiSshToolbarVisible = multiSshToolStrip.Visible;
+
+            if (multiSshToolStrip.Parent != null)
+            {
+                mRemoteNG.Settings.Default.MultiSshToolbarParentDock = multiSshToolStrip.Parent.Dock.ToString();
             }
         }
 

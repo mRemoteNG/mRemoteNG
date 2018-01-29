@@ -142,8 +142,8 @@ namespace mRemoteNG.UI.Forms
 
             SetMenuDependencies();
 
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip);
             msMain.Location = Point.Empty;
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip);
             settingsLoader.LoadSettings();
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
@@ -316,7 +316,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
-            Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, this);
+            Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 									
 			IsClosing = true;
 
