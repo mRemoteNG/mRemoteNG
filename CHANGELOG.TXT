@@ -1,13 +1,16 @@
-1.76.0 Alpha 2 (201x-xx-xx):
+1.76.0 Alpha 2 (2018-02-01):
 
 Features/Enhancements:
 ----------------------
 #838: Added an option to lock toolbars
+#836: Added a Read Only option for SQL connections
 #829: Add option that fixes connecting to Azure instances with LoadBalanceInfo
 
 Fixes:
 ------
-
+#840: Fix theme loading issue in installer version
+#800: Fixed issue with PuTTY sessions not showing some extended characters
+Fixed a few toolbar layout issues
 
 
 1.76.0 Alpha 1 (2017-12-08):
