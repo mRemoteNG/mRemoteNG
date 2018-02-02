@@ -9,8 +9,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 	    protected OptionsPage()
 		{
             //InitializeComponent();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
-                Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+             Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
 
         }
 			

@@ -85,8 +85,7 @@ namespace mRemoteNG.UI.Controls
         }
 
         private void ApplyTheme()
-        {
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+        { 
             if (Themes.ThemeManager.getInstance().ThemingActive)
                 panel1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
         }

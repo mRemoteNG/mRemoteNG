@@ -30,8 +30,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         internal new void ApplyTheme()
-        {
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+        { 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");

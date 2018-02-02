@@ -22,6 +22,7 @@ using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Menu;
+using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
@@ -177,6 +178,8 @@ namespace mRemoteNG.UI.Forms
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
 
             Opacity = 1;
+            //Fix missing general panel at the first run
+            new PanelAdder().AddPanel();
         }
 
 	    private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -198,7 +201,7 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 
-	    private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             UpdateWindowTitle();
         }
@@ -568,10 +571,8 @@ namespace mRemoteNG.UI.Forms
             Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
             Windows.ConfigForm.Show(pnlDock);
             Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
-            Windows.ErrorsForm.Show(pnlDock, DockState.Document);
-
-            Windows.ErrorsForm.Hide();
-            Windows.ScreenshotForm.Hide();
+            Windows.ErrorsForm.Show( pnlDock, DockState.DockBottomAutoHide );  
+            Windows.ScreenshotForm.Hide(); 
 
             pnlDock.Visible = true;
         }

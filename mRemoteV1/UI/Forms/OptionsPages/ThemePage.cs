@@ -24,7 +24,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
 
             InitializeComponent();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            _themeManager = ThemeManager.getInstance();
+            if (_themeManager.ThemingActive)
             {
                 _themeManager = ThemeManager.getInstance();
                 _themeManager.ThemeChanged += ApplyTheme;
@@ -51,12 +52,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private new void ApplyTheme()
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this))
+            if (!_themeManager.ThemingActive)
                 return;
-            if (Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                base.ApplyTheme();
-            }
+            base.ApplyTheme(); 
         }
 
         public override void LoadSettings()
