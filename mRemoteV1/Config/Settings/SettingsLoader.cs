@@ -200,17 +200,6 @@ namespace mRemoteNG.Config.Settings
             AddExternalAppsPanel();
 		    AddQuickConnectPanel();
 		    AddMultiSshPanel();
-
-            //         if (mRemoteNG.Settings.Default.QuickyTBLocation.X > mRemoteNG.Settings.Default.ExtAppsTBLocation.X)
-            //{
-            //	AddExternalAppsPanel();
-            //	AddQuickConnectPanel();
-            //}
-            //else
-            //{
-            //	AddQuickConnectPanel();
-            //	AddExternalAppsPanel();
-            //}
         }
 
         /// <summary>
