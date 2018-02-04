@@ -19,7 +19,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
         {
             var root = new RootNodeInfo(RootNodeType.Connection);
 
-            var lines = serializedData.Split('\n');
+            var lines = serializedData.Split(new []{"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
             var csvHeaders = new List<string>();
 
             for (var lineNumber = 0; lineNumber < lines.Length; lineNumber++)
@@ -660,6 +660,27 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayDomain")], out value))
                     connectionRecord.Inheritance.RDGatewayDomain = value;
+            }
+
+            if (headers.Contains("InheritRDPAlertIdleTimeout"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDPAlertIdleTimeout")], out value))
+                    connectionRecord.Inheritance.RDPAlertIdleTimeout = value;
+            }
+
+            if (headers.Contains("InheritRDPMinutesToIdleTimeout"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDPMinutesToIdleTimeout")], out value))
+                    connectionRecord.Inheritance.RDPMinutesToIdleTimeout = value;
+            }
+
+            if (headers.Contains("InheritSoundQuality"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSoundQuality")], out value))
+                    connectionRecord.Inheritance.SoundQuality = value;
             }
             #endregion
 
