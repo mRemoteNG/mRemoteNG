@@ -1,3 +1,14 @@
+1.76.0 Alpha 3 (2018-xx-xx):
+
+Features/Enhancements:
+----------------------
+#625: Added ability to import mRemoteNG formatted CSV files
+
+Fixes:
+------
+
+
+
 1.76.0 Alpha 2 (2018-02-01):
 
 Features/Enhancements:
@@ -24,6 +35,7 @@ Features/Enhancements:
 #671: Revamped UI theme system
 #611: Added multi-ssh toolbar for sending commands to many SSH clients at once
 #558: Connection tree now shows customizable icons instead of play/pause icon
+#519: You can now import normal mRemoteNG files - they do not have to be exports
 #504: Added Korean translation
 #485: The Domain field is now visible/editable for connection with the IntApp protocol
 #468: Default connection info Panel property is now saved

@@ -20,6 +20,10 @@ namespace mRemoteNG.Config.DataProviders
             {
                 fileContents = File.ReadAllText(FilePath);
             }
+            catch (FileNotFoundException ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace($"Could not load file. File does not exist '{FilePath}'", ex);
+            }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace($"Failed to load file {FilePath}", ex);

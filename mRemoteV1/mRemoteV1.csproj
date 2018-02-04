@@ -157,6 +157,7 @@
     <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
     <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
     <Compile Include="Config\ILoader.cs" />
+    <Compile Include="Config\Import\MRemoteNGCsvImporter.cs" />
     <Compile Include="Config\ISaver.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Config\Serializers\ISecureSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsDeserializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
     <Compile Include="Config\Serializers\DataTableSerializer.cs" />
@@ -209,7 +211,7 @@
     <Compile Include="Config\Settings\SettingsSaver.cs" />
     <Compile Include="Config\ConfirmCloseEnum.cs" />
     <Compile Include="Config\Import\ActiveDirectoryImporter.cs" />
-    <Compile Include="Config\Import\mRemoteNGImporter.cs" />
+    <Compile Include="Config\Import\MRemoteNGXmlImporter.cs" />
     <Compile Include="Config\Import\PortScanImporter.cs" />
     <Compile Include="Config\Import\PuttyConnectionManagerImporter.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionImporter.cs" />

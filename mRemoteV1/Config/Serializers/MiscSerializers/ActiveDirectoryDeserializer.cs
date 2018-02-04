@@ -5,6 +5,7 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Import;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -14,12 +15,12 @@ namespace mRemoteNG.Config.Serializers
     public class ActiveDirectoryDeserializer
     {
         private readonly string _ldapPath;
-        private readonly bool _importSubOU;
+        private readonly bool _importSubOu;
 
-        public ActiveDirectoryDeserializer(string ldapPath, bool importSubOU)
+        public ActiveDirectoryDeserializer(string ldapPath, bool importSubOu)
         {
-            _ldapPath = ldapPath;
-            _importSubOU = importSubOU;
+            _ldapPath = ldapPath.ThrowIfNullOrEmpty(nameof(ldapPath));
+            _importSubOu = importSubOu;
         }
 
         public ConnectionTreeModel Deserialize()
@@ -64,9 +65,10 @@ namespace mRemoteNG.Config.Serializers
                             if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
                             {
                                 // check/continue here so we don't create empty connection objects
-                                if(!_importSubOU) continue;
+                                if(!_importSubOu) continue;
 
-                                ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer, _importSubOU);
+                                // TODO - this is a circular call. A deserializer should not call an importer
+                                ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer, _importSubOu);
                                 continue;
                             }
 
