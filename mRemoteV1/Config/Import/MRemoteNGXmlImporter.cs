@@ -10,7 +10,7 @@ using mRemoteNG.Messages;
 namespace mRemoteNG.Config.Import
 {
 	// ReSharper disable once InconsistentNaming
-	public class mRemoteNGImporter : IConnectionImporter
+	public class MRemoteNGXmlImporter : IConnectionImporter
 	{
 	    public void Import(object filePath, ContainerInfo destinationContainer)
 	    {

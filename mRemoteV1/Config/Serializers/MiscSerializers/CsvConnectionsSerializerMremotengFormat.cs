@@ -210,12 +210,13 @@ namespace mRemoteNG.Config.Serializers
         private string GetNodePath(ConnectionInfo connectionInfo)
         {
             var nodePath = "";
-            var container = connectionInfo.Parent;
-            if (container == null) return nodePath;
-            while (container != _serializationTarget)
+            var currentItem = connectionInfo;
+            while (currentItem != _serializationTarget)
             {
-                container = container.Parent;
-                nodePath += $@"{container.Name}\";
+                currentItem = currentItem.Parent;
+                if (currentItem == null)
+                    break;
+                nodePath += $@"{currentItem.Name}\";
             }
             nodePath = nodePath.TrimEnd('\\');
             return nodePath;
