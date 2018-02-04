@@ -87,63 +87,67 @@ namespace mRemoteNG.Config.Serializers
         {
             var csvLine = Environment.NewLine;
 
-            csvLine += con.Name + ";" + GetNodePath(con) + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
+            csvLine += CleanStringForCsv(con.Name) + ";" +
+                        CleanStringForCsv(GetNodePath(con)) + ";" +
+                        CleanStringForCsv(con.Description) + ";" +
+                        CleanStringForCsv(con.Icon) + ";" +
+                        CleanStringForCsv(con.Panel) + ";";
 
             if (_saveFilter.SaveUsername)
-                csvLine += con.Username + ";";
+                csvLine += CleanStringForCsv(con.Username) + ";";
 
             if (_saveFilter.SavePassword)
-                csvLine += con.Password + ";";
+                csvLine += CleanStringForCsv(con.Password) + ";";
 
             if (_saveFilter.SaveDomain)
-                csvLine += con.Domain + ";";
+                csvLine += CleanStringForCsv(con.Domain) + ";";
 
-            csvLine += con.Hostname + ";" + 
-                        con.Protocol + ";" + 
-                        con.PuttySession + ";" + 
-                        Convert.ToString(con.Port) + ";" + 
-                        Convert.ToString(con.UseConsoleSession) + ";" + 
-                        Convert.ToString(con.UseCredSsp) + ";" + 
-                        con.RenderingEngine + ";" + 
-                        con.ICAEncryptionStrength + ";" + 
-                        con.RDPAuthenticationLevel + ";" + 
-                        con.LoadBalanceInfo + ";" + 
-                        con.Colors + ";" + 
-                        con.Resolution + ";" + 
-                        Convert.ToString(con.AutomaticResize) + ";" + 
-                        Convert.ToString(con.DisplayWallpaper) + ";" + 
-                        Convert.ToString(con.DisplayThemes) + ";" + 
-                        Convert.ToString(con.EnableFontSmoothing) + ";" + 
-                        Convert.ToString(con.EnableDesktopComposition) + ";" + 
-                        Convert.ToString(con.CacheBitmaps) + ";" + 
-                        Convert.ToString(con.RedirectDiskDrives) + ";" + 
-                        Convert.ToString(con.RedirectPorts) + ";" + 
-                        Convert.ToString(con.RedirectPrinters) + ";" + 
-                        Convert.ToString(con.RedirectSmartCards) + ";" + 
-                        con.RedirectSound + ";" + 
-                        Convert.ToString(con.RedirectKeys) + ";" + 
-                        con.PreExtApp + ";" + 
-                        con.PostExtApp + ";" + 
-                        con.MacAddress + ";" + 
-                        con.UserField + ";" + 
-                        con.ExtApp + ";" + 
-                        con.VNCCompression + ";" + 
-                        con.VNCEncoding + ";" + 
-                        con.VNCAuthMode + ";" + 
-                        con.VNCProxyType + ";" + 
-                        con.VNCProxyIP + ";" + 
-                        Convert.ToString(con.VNCProxyPort) + ";" + 
-                        con.VNCProxyUsername + ";" + 
-                        con.VNCProxyPassword + ";" + 
-                        con.VNCColors + ";" + 
-                        con.VNCSmartSizeMode + ";" + 
-                        Convert.ToString(con.VNCViewOnly) + ";" +
-                        con.RDGatewayUsageMethod + ";" +
-                        con.RDGatewayHostname + ";" +
-                        con.RDGatewayUseConnectionCredentials + ";" +
-                        con.RDGatewayUsername + ";" +
-                        con.RDGatewayPassword + ";" +
-                        con.RDGatewayDomain + ";";
+            csvLine += CleanStringForCsv(con.Hostname) + ";" +
+                       CleanStringForCsv(con.Protocol) + ";" +
+                       CleanStringForCsv(con.PuttySession) + ";" +
+                       CleanStringForCsv(con.Port) + ";" +
+                       CleanStringForCsv(con.UseConsoleSession) + ";" +
+                       CleanStringForCsv(con.UseCredSsp) + ";" +
+                       CleanStringForCsv(con.RenderingEngine) + ";" +
+                       CleanStringForCsv(con.ICAEncryptionStrength) + ";" +
+                       CleanStringForCsv(con.RDPAuthenticationLevel) + ";" +
+                       CleanStringForCsv(con.LoadBalanceInfo) + ";" +
+                       CleanStringForCsv(con.Colors) + ";" +
+                       CleanStringForCsv(con.Resolution) + ";" +
+                       CleanStringForCsv(con.AutomaticResize) + ";" +
+                       CleanStringForCsv(con.DisplayWallpaper) + ";" +
+                       CleanStringForCsv(con.DisplayThemes) + ";" +
+                       CleanStringForCsv(con.EnableFontSmoothing) + ";" +
+                       CleanStringForCsv(con.EnableDesktopComposition) + ";" +
+                       CleanStringForCsv(con.CacheBitmaps) + ";" +
+                       CleanStringForCsv(con.RedirectDiskDrives) + ";" +
+                       CleanStringForCsv(con.RedirectPorts) + ";" +
+                       CleanStringForCsv(con.RedirectPrinters) + ";" +
+                       CleanStringForCsv(con.RedirectSmartCards) + ";" +
+                       CleanStringForCsv(con.RedirectSound) + ";" +
+                       CleanStringForCsv(con.RedirectKeys) + ";" +
+                       CleanStringForCsv(con.PreExtApp) + ";" +
+                       CleanStringForCsv(con.PostExtApp) + ";" +
+                       CleanStringForCsv(con.MacAddress) + ";" +
+                       CleanStringForCsv(con.UserField) + ";" +
+                       CleanStringForCsv(con.ExtApp) + ";" +
+                       CleanStringForCsv(con.VNCCompression) + ";" +
+                       CleanStringForCsv(con.VNCEncoding) + ";" +
+                       CleanStringForCsv(con.VNCAuthMode) + ";" +
+                       CleanStringForCsv(con.VNCProxyType) + ";" +
+                       CleanStringForCsv(con.VNCProxyIP) + ";" +
+                       CleanStringForCsv(con.VNCProxyPort) + ";" +
+                       CleanStringForCsv(con.VNCProxyUsername) + ";" +
+                       CleanStringForCsv(con.VNCProxyPassword) + ";" +
+                       CleanStringForCsv(con.VNCColors) + ";" +
+                       CleanStringForCsv(con.VNCSmartSizeMode) + ";" +
+                       CleanStringForCsv(con.VNCViewOnly) + ";" +
+                       CleanStringForCsv(con.RDGatewayUsageMethod) + ";" +
+                       CleanStringForCsv(con.RDGatewayHostname) + ";" +
+                       CleanStringForCsv(con.RDGatewayUseConnectionCredentials) + ";" +
+                       CleanStringForCsv(con.RDGatewayUsername) + ";" +
+                       CleanStringForCsv(con.RDGatewayPassword) + ";" +
+                       CleanStringForCsv(con.RDGatewayDomain) + ";";
 
 
             if (_saveFilter.SaveInheritance)
@@ -205,6 +209,15 @@ namespace mRemoteNG.Config.Serializers
             }
 
             _csv += csvLine;
+        }
+
+        /// <summary>
+        /// Remove text that is unsafe for use in CSV files
+        /// </summary>
+        /// <param name="text"></param>
+        private string CleanStringForCsv(object text)
+        {
+            return text.ToString().Replace(";", "");
         }
 
         private string GetNodePath(ConnectionInfo connectionInfo)
