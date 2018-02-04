@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using mRemoteNG.Config.DataProviders;
@@ -8,17 +7,8 @@ using mRemoteNG.Container;
 
 namespace mRemoteNG.Config.Import
 {
-	public class RemoteDesktopConnectionImporter : IConnectionImporter
+	public class RemoteDesktopConnectionImporter : IConnectionImporter<string>
 	{
-        public void Import(object fileName, ContainerInfo destinationContainer)
-        {
-            var fileNameAsString = fileName as string;
-            if(fileNameAsString == null)
-                return;
-            if (File.Exists(fileNameAsString))
-                Import(fileNameAsString, destinationContainer);
-        }
-
         public void Import(string fileName, ContainerInfo destinationContainer)
 		{
             var dataProvider = new FileDataProvider(fileName);

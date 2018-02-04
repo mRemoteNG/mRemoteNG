@@ -3,24 +3,23 @@ using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Container;
-
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Import
 {
-	public class ActiveDirectoryImporter : IConnectionImporter
+	public class ActiveDirectoryImporter : IConnectionImporter<string>
 	{
-        public void Import(object ldapPath, ContainerInfo destinationContainer)
+        public void Import(string ldapPath, ContainerInfo destinationContainer)
         {
-            var ldapPathAsString = ldapPath as string;
-            if (ldapPathAsString == null) return;
-            Import(ldapPathAsString, destinationContainer);
+            Import(ldapPath, destinationContainer, false);
         }
 
-	    public static void Import(string ldapPath, ContainerInfo destinationContainer, bool importSubOU = false)
+	    public static void Import(string ldapPath, ContainerInfo destinationContainer, bool importSubOu)
 		{
 			try
 			{
-				var deserializer = new ActiveDirectoryDeserializer(ldapPath, importSubOU);
+			    ldapPath.ThrowIfNullOrEmpty(nameof(ldapPath));
+				var deserializer = new ActiveDirectoryDeserializer(ldapPath, importSubOu);
 			    var connectionTreeModel = deserializer.Deserialize();
                 var importedRootNode = connectionTreeModel.RootNodes.First();
                 if (importedRootNode == null) return;
