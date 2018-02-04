@@ -16,6 +16,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.Connection
@@ -127,14 +128,19 @@ namespace mRemoteNG.Connection
             return filteredProperties;
         }
 
-	    public virtual void SetParent(ContainerInfo parent)
+	    public virtual void SetParent(ContainerInfo newParent)
 	    {
             RemoveParent();
-            parent?.AddChild(this);
+		    newParent?.AddChild(this);
+			if (newParent is RootNodeInfo)
+				Inheritance.DisableInheritance();
 	    }
 
         public void RemoveParent()
         {
+			if (Parent is RootNodeInfo)
+				Inheritance.EnableInheritance();
+
             Parent?.RemoveChild(this);
         }
 

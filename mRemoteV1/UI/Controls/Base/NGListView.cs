@@ -24,9 +24,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            if (Tools.DesignModeTest.IsInDesignMode(this))
-                return;
+            base.OnCreateControl(); 
             var _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             //List back color

@@ -21,11 +21,17 @@ namespace mRemoteNG.Config.Settings
         private readonly MessageCollector _messageCollector;
         private readonly QuickConnectToolStrip _quickConnectToolStrip;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
+	    private readonly MultiSshToolStrip _multiSshToolStrip;
 
         private FrmMain MainForm { get; }
 
 
-	    public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector, QuickConnectToolStrip quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip)
+	    public SettingsLoader(
+            FrmMain mainForm, 
+            MessageCollector messageCollector, 
+            QuickConnectToolStrip quickConnectToolStrip, 
+            ExternalToolsToolStrip externalToolsToolStrip,
+            MultiSshToolStrip multiSshToolStrip)
 		{
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -35,11 +41,14 @@ namespace mRemoteNG.Config.Settings
                 throw new ArgumentNullException(nameof(quickConnectToolStrip));
             if (externalToolsToolStrip == null)
                 throw new ArgumentNullException(nameof(externalToolsToolStrip));
+            if (multiSshToolStrip == null)
+                throw new ArgumentNullException(nameof(multiSshToolStrip));
 
             MainForm = mainForm;
 	        _messageCollector = messageCollector;
 	        _quickConnectToolStrip = quickConnectToolStrip;
 	        _externalToolsToolStrip = externalToolsToolStrip;
+		    _multiSshToolStrip = multiSshToolStrip;
             _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip);
         }
         
@@ -187,18 +196,25 @@ namespace mRemoteNG.Config.Settings
 
 	    private void LoadToolbarsFromSettings()
 		{
-			if (mRemoteNG.Settings.Default.QuickyTBLocation.X > mRemoteNG.Settings.Default.ExtAppsTBLocation.X)
-			{
-				AddExternalAppsPanel();
-				AddQuickConnectPanel();
-			}
-			else
-			{
-				AddQuickConnectPanel();
-				AddExternalAppsPanel();
-			}
-		}
-		
+            ResetAllToolbarLocations();
+            AddExternalAppsPanel();
+		    AddQuickConnectPanel();
+		    AddMultiSshPanel();
+        }
+
+        /// <summary>
+        /// This prevents odd positioning issues due to toolbar load order.
+        /// Since all toolbars start in this temp panel, no toolbar load
+        /// can be blocked by pre-existing toolbars.
+        /// </summary>
+	    private void ResetAllToolbarLocations()
+	    {
+	        var tempToolStrip = new ToolStripPanel();
+	        tempToolStrip.Join(_quickConnectToolStrip);
+	        tempToolStrip.Join(_externalToolsToolStrip);
+	        tempToolStrip.Join(_multiSshToolStrip);
+        }
+
 		private void AddQuickConnectPanel()
 		{
             var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock);
@@ -212,6 +228,13 @@ namespace mRemoteNG.Config.Settings
             toolStripPanel.Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
             _externalToolsToolStrip.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
 		}
+
+	    private void AddMultiSshPanel()
+	    {
+	        var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock);
+            toolStripPanel.Join(_multiSshToolStrip, mRemoteNG.Settings.Default.MultiSshToolbarLocation);
+	        _multiSshToolStrip.Visible = mRemoteNG.Settings.Default.MultiSshToolbarVisible;
+	    }
 		
 		private ToolStripPanel ToolStripPanelFromString(string panel)
 		{

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -21,6 +22,7 @@ using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Menu;
+using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
@@ -141,11 +143,15 @@ namespace mRemoteNG.UI.Forms
 
             SetMenuDependencies();
 
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip);
+            msMain.Location = Point.Empty;
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip);
             settingsLoader.LoadSettings();
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
+
+	        LockToolbarPositions(Settings.Default.LockToolbars);
+			Settings.Default.PropertyChanged += OnApplicationSettingChanged;
 
     		_themeManager.ThemeChanged += ApplyTheme; 
 
@@ -172,7 +178,28 @@ namespace mRemoteNG.UI.Forms
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
 
             Opacity = 1;
+            //Fix missing general panel at the first run
+            new PanelAdder().AddPanel();
         }
+
+	    private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+	    {
+		    if (propertyChangedEventArgs.PropertyName != nameof(Settings.LockToolbars))
+				return;
+
+		    LockToolbarPositions(Settings.Default.LockToolbars);
+	    }
+
+	    private void LockToolbarPositions(bool shouldBeLocked)
+	    {
+		    var toolbars = new ToolStrip[] { _quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip };
+			foreach (var toolbar in toolbars)
+			{
+				toolbar.GripStyle = shouldBeLocked
+					? ToolStripGripStyle.Hidden
+					: ToolStripGripStyle.Visible;
+			}
+		}
 
         private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
@@ -292,7 +319,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
-            Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, this);
+            Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 									
 			IsClosing = true;
 
@@ -544,10 +571,8 @@ namespace mRemoteNG.UI.Forms
             Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
             Windows.ConfigForm.Show(pnlDock);
             Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
-            Windows.ErrorsForm.Show(pnlDock, DockState.Document);
-
-            Windows.ErrorsForm.Hide();
-            Windows.ScreenshotForm.Hide();
+            Windows.ErrorsForm.Show( pnlDock, DockState.DockBottomAutoHide );  
+            Windows.ScreenshotForm.Hide(); 
 
             pnlDock.Visible = true;
         }

@@ -24,8 +24,8 @@ namespace mRemoteNG.Config.Serializers
                     continue;
                 }
 
-                var key = parts[0];
-                var value = parts[2];
+                var key = parts[0].Trim();
+                var value = parts[2].Trim();
 
                 SetConnectionInfoParameter(connectionInfo, key, value);
             }

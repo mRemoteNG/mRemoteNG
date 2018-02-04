@@ -2626,5 +2626,77 @@ namespace mRemoteNG {
                 this["UseFilterSearch"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SQLReadOnly {
+            get {
+                return ((bool)(this["SQLReadOnly"]));
+            }
+            set {
+                this["SQLReadOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LockToolbars {
+            get {
+                return ((bool)(this["LockToolbars"]));
+            }
+            set {
+                this["LockToolbars"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RdpLoadBalanceInfoUseUtf8 {
+            get {
+                return ((bool)(this["RdpLoadBalanceInfoUseUtf8"]));
+            }
+            set {
+                this["RdpLoadBalanceInfoUseUtf8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point MultiSshToolbarLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["MultiSshToolbarLocation"]));
+            }
+            set {
+                this["MultiSshToolbarLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MultiSshToolbarParentDock {
+            get {
+                return ((string)(this["MultiSshToolbarParentDock"]));
+            }
+            set {
+                this["MultiSshToolbarParentDock"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MultiSshToolbarVisible {
+            get {
+                return ((bool)(this["MultiSshToolbarVisible"]));
+            }
+            set {
+                this["MultiSshToolbarVisible"] = value;
+            }
+        }
     }
 }

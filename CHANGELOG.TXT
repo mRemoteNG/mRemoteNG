@@ -1,4 +1,19 @@
-1.76.XXXX (2017-XX-XX):
+1.76.0 Alpha 2 (2018-02-01):
+
+Features/Enhancements:
+----------------------
+#838: Added an option to lock toolbars
+#836: Added a Read Only option for SQL connections
+#829: Add option that fixes connecting to Azure instances with LoadBalanceInfo
+
+Fixes:
+------
+#840: Fix theme loading issue in installer version
+#800: Fixed issue with PuTTY sessions not showing some extended characters
+Fixed a few toolbar layout issues
+
+
+1.76.0 Alpha 1 (2017-12-08):
 
 Features/Enhancements:
 ----------------------
@@ -39,6 +54,15 @@ General Changes:
 #608: The Help -> Support Forum menu item now directs users to our Reddit community
 #493: Changed backup file name time stamp to use local system time rather than UTC
 Improved compatability between environments when building mRemoteNG from source
+
+
+1.75.7012 (2017-12-01):
+
+Fixes:
+------
+#814: Fixed bug that prevented reordering connections by dragging
+#810: Official mRemoteNG builds will now be signed with a DigiCert certificate
+#803: File path command line argument not working with network path
 
 
 1.75.7011 (2017-11-07):

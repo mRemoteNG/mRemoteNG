@@ -160,6 +160,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use UTF8 encoding for RDP &quot;Load Balance Info&quot; property.
+        /// </summary>
+        internal static string LoadBalanceInfoUseUtf8 {
+            get {
+                return ResourceManager.GetString("LoadBalanceInfoUseUtf8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login failed for user &apos;{0}&apos;..
         /// </summary>
         internal static string LoginFailedForUser {
@@ -2891,6 +2900,15 @@ namespace mRemoteNG {
         internal static string strLabelPuttyTimeout {
             get {
                 return ResourceManager.GetString("strLabelPuttyTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Only:.
+        /// </summary>
+        internal static string strLabelReadOnly {
+            get {
+                return ResourceManager.GetString("strLabelReadOnly", resourceCulture);
             }
         }
         
