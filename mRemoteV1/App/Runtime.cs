@@ -147,7 +147,14 @@ namespace mRemoteNG.App
                     {
                         try
                         {
-                            CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName, Language.ConfigurationFileNotFound, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+                            CTaskDialog.ShowTaskDialogBox(
+                                GeneralAppInfo.ProductName, 
+                                Language.ConnectionFileNotFound, 
+                                "", "", "", "", "", 
+                                string.Join(" | ", commandButtons), 
+                                ETaskDialogButtons.None, 
+                                ESysIcons.Question, 
+                                ESysIcons.Question);
 
                             switch (CTaskDialog.CommandButtonResult)
                             {
