@@ -168,7 +168,13 @@ namespace mRemoteNG.Connection
         #region Private Methods
         protected override TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {
-            return ShouldThisPropertyBeInherited(propertyName) ? GetInheritedPropertyValue<TPropertyType>(propertyName) : value;
+            if (!ShouldThisPropertyBeInherited(propertyName))
+                return value;
+
+            var inheritedValue = GetInheritedPropertyValue<TPropertyType>(propertyName);
+            if (inheritedValue.Equals(default(TPropertyType)))
+                return value;
+            return inheritedValue;
         }
 
 	    private bool ShouldThisPropertyBeInherited(string propertyName)
@@ -191,15 +197,21 @@ namespace mRemoteNG.Connection
 
         private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName)
         {
-            var connectionInfoType = Parent.GetType();
-            var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
-            if (parentPropertyInfo == null)
-                return default(TPropertyType); // shouldn't get here...
-            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
+            try
+            {
+                var connectionInfoType = Parent.GetType();
+                var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
+                if (parentPropertyInfo == null)
+                    return default(TPropertyType); // shouldn't get here...
+                var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
 
-            return parentPropertyValue;
-
-            
+                return parentPropertyValue;
+            }
+            catch (Exception e)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace($"Error retrieving inherited property '{propertyName}'", e);
+                return default(TPropertyType);
+            }
         }
 
 		private static int GetDefaultPort(ProtocolType protocol)
