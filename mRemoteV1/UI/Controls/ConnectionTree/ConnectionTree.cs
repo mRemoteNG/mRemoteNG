@@ -272,6 +272,7 @@ namespace mRemoteNG.UI.Controls
             Expand(parent);
             SelectObject(newNode, true);
             EnsureModelVisible(newNode);
+            _allowEdit = true;
             SelectedItem.BeginEdit();
         }
 
