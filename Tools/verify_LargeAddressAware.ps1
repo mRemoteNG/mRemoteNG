@@ -1,3 +1,5 @@
+[CmdletBinding()]
+
 param (
     [string]
     [Parameter(Mandatory=$true)]
@@ -10,9 +12,7 @@ param (
 
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 
-# Find editbin.exe
-$path_dumpBin = & "$PSScriptRoot\find_vstool.ps1" -FileName "dumpbin.exe"
-
+$path_dumpBin = Join-Path -Path $PSScriptRoot -ChildPath "exes\dumpbin.exe"
 $path_outputExe = Join-Path -Path $TargetDir -ChildPath $TargetFileName
 
 # Dump exe header
@@ -26,7 +26,5 @@ else
 {
     Write-Output $output.ToString().TrimStart(" ")
 }
-
-
 
 Write-Output ""

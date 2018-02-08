@@ -1,3 +1,5 @@
+[CmdletBinding()]
+
 param (
     [string]
     # Name of the file to find
@@ -46,6 +48,7 @@ $rootSearchPaths = @(
 # Returns the first full path to the $FileName that our search can find
 foreach ($searchPath in $rootSearchPaths) {
     foreach ($visualStudioFolder in $searchPath) {
+        Write-Verbose "Searching in folder '$visualStudioFolder'"
         $matchingExes = [System.IO.Directory]::EnumerateFileSystemEntries($visualStudioFolder, $FileName, [System.IO.SearchOption]::AllDirectories)
         foreach ($matchingExe in $matchingExes) {
             if ((EditBinCertificateIsValid -Path $matchingExe) -and (ToolCanBeExecuted -Path $matchingExe)) {

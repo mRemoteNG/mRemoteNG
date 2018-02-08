@@ -17,11 +17,11 @@ Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 #  validate release versions and if the certificate is available
 if ($ConfigurationName -match "Release") {
 	
-		if ($CertificatePath -eq "" -or !(Test-Path -Path $CertificatePath -PathType Leaf))
-		{
+	if ($CertificatePath -eq "" -or !(Test-Path -Path $CertificatePath -PathType Leaf))
+	{
 	    Write-Output "Certificate is not present - files likely not signed - we won't verify file signatures."
 	    return
-		}
+	}
 		
     Write-Output "Verifying signature of binaries"
     Write-Output "Getting files from path: $TargetDir"
