@@ -13,7 +13,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
-    public class CsvConnectionsDeserializerMremotengFormat : IDeserializer<string, ConnectionTreeModel>
+	public class CsvConnectionsDeserializerMremotengFormat : IDeserializer<string, ConnectionTreeModel>
     {
         public ConnectionTreeModel Deserialize(string serializedData)
         {
@@ -138,14 +138,14 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
             if (headers.Contains("Colors"))
             {
-                RdpProtocol.RDPColors value;
+                RdpProtocol.RdpColors value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Colors")], out value))
                     connectionRecord.Colors = value;
             }
 
             if (headers.Contains("Resolution"))
             {
-                RdpProtocol.RDPResolutions value;
+                RdpProtocol.RdpResolutions value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Resolution")], out value))
                     connectionRecord.Resolution = value;
             }
@@ -222,7 +222,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
             if (headers.Contains("RedirectSound"))
             {
-                RdpProtocol.RDPSounds value;
+                RdpProtocol.RdpSounds value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RedirectSound")], out value))
                     connectionRecord.RedirectSound = value;
             }

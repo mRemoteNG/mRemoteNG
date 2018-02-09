@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
-    public class CsvConnectionsDeserializerMremotengFormatTests
+	public class CsvConnectionsDeserializerMremotengFormatTests
     {
         private CsvConnectionsDeserializerMremotengFormat _deserializer;
         private ICredentialRepositoryList _credentialRepositoryList;
@@ -83,8 +83,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
                 RenderingEngine = HTTPBase.RenderingEngine.Gecko,
                 ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
                 RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth,
-                Colors = RdpProtocol.RDPColors.Colors16Bit,
-                Resolution = RdpProtocol.RDPResolutions.Res1366x768,
+                Colors = RdpProtocol.RdpColors.Colors16Bit,
+                Resolution = RdpProtocol.RdpResolutions.Res1366x768,
                 AutomaticResize = true,
                 DisplayWallpaper = true,
                 DisplayThemes = true,
@@ -95,7 +95,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
                 RedirectPorts = true,
                 RedirectPrinters = true,
                 RedirectSmartCards = true,
-                RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer,
+                RedirectSound = RdpProtocol.RdpSounds.LeaveAtRemoteComputer,
                 RedirectKeys = true,
                 VNCCompression = ProtocolVNC.Compression.Comp4,
                 VNCEncoding = ProtocolVNC.Encoding.EncRRE,

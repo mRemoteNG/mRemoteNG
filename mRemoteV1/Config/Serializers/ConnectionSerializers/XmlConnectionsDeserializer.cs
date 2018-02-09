@@ -219,7 +219,7 @@ namespace mRemoteNG.Config.Serializers
 
                     if (_confVersion < 1.1) //1.0 - 0.1
                     {
-                        connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) ? RdpProtocol.RDPResolutions.Fullscreen : RdpProtocol.RDPResolutions.FitToWindow;
+                        connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) ? RdpProtocol.RdpResolutions.Fullscreen : RdpProtocol.RdpResolutions.FitToWindow;
                     }
 
                     if (_confVersion <= 2.6) // 0.2 - 2.6
@@ -307,34 +307,34 @@ namespace mRemoteNG.Config.Serializers
 
                 if (_confVersion >= 1.3)
                 {
-                    connectionInfo.Colors = (RdpProtocol.RDPColors)MiscTools.StringToEnum(typeof(RdpProtocol.RDPColors), xmlnode.Attributes["Colors"].Value);
-                    connectionInfo.Resolution = (RdpProtocol.RDPResolutions)MiscTools.StringToEnum(typeof(RdpProtocol.RDPResolutions), Convert.ToString(xmlnode.Attributes["Resolution"].Value));
-                    connectionInfo.RedirectSound = (RdpProtocol.RDPSounds)MiscTools.StringToEnum(typeof(RdpProtocol.RDPSounds), Convert.ToString(xmlnode.Attributes["RedirectSound"].Value));
+                    connectionInfo.Colors = (RdpProtocol.RdpColors)MiscTools.StringToEnum(typeof(RdpProtocol.RdpColors), xmlnode.Attributes["Colors"].Value);
+                    connectionInfo.Resolution = (RdpProtocol.RdpResolutions)MiscTools.StringToEnum(typeof(RdpProtocol.RdpResolutions), Convert.ToString(xmlnode.Attributes["Resolution"].Value));
+                    connectionInfo.RedirectSound = (RdpProtocol.RdpSounds)MiscTools.StringToEnum(typeof(RdpProtocol.RdpSounds), Convert.ToString(xmlnode.Attributes["RedirectSound"].Value));
                 }
                 else
                 {
                     switch (Convert.ToInt32(xmlnode.Attributes["Colors"].Value))
                     {
                         case 0:
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors256;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors256;
                             break;
                         case 1:
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors16Bit;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors16Bit;
                             break;
                         case 2:
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors24Bit;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors24Bit;
                             break;
                         case 3:
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors32Bit;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors32Bit;
                             break;
                         // ReSharper disable once RedundantCaseLabel
                         case 4:
                         default:
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors15Bit;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors15Bit;
                             break;
                     }
 
-                    connectionInfo.RedirectSound = (RdpProtocol.RDPSounds)Convert.ToInt32(xmlnode.Attributes["RedirectSound"].Value);
+                    connectionInfo.RedirectSound = (RdpProtocol.RdpSounds)Convert.ToInt32(xmlnode.Attributes["RedirectSound"].Value);
                 }
 
                 if (_confVersion >= 1.3)
@@ -492,7 +492,7 @@ namespace mRemoteNG.Config.Serializers
                 if (_confVersion >= 2.6)
                 {
                     connectionInfo.ConstantID = xmlnode.Attributes["Id"]?.Value ?? connectionInfo.ConstantID;
-                    connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)MiscTools.StringToEnum(typeof(RdpProtocol.RDPSoundQuality), Convert.ToString(xmlnode.Attributes["SoundQuality"].Value));
+                    connectionInfo.SoundQuality = (RdpProtocol.RdpSoundQuality)MiscTools.StringToEnum(typeof(RdpProtocol.RdpSoundQuality), Convert.ToString(xmlnode.Attributes["SoundQuality"].Value));
                     connectionInfo.Inheritance.SoundQuality = bool.Parse(xmlnode.Attributes["InheritSoundQuality"].Value);
                     connectionInfo.RDPMinutesToIdleTimeout = Convert.ToInt32(xmlnode.Attributes["RDPMinutesToIdleTimeout"]?.Value ?? "0");
                     connectionInfo.Inheritance.RDPMinutesToIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPMinutesToIdleTimeout"]?.Value ?? "False");

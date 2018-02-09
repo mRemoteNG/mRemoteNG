@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
-    public class RemoteDesktopConnectionDeserializerTests
+	public class RemoteDesktopConnectionDeserializerTests
     {
         // .rdp file schema: https://technet.microsoft.com/en-us/library/ff393699(v=ws.10).aspx
         private RemoteDesktopConnectionDeserializer _deserializer;
@@ -18,9 +18,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedDomain = "myspecialdomain";
         private const string ExpectedGatewayHostname = "gatewayhostname.domain.com";
         private const int ExpectedPort = 9933;
-        private const RdpProtocol.RDPColors ExpectedColors = RdpProtocol.RDPColors.Colors24Bit;
+        private const RdpProtocol.RdpColors ExpectedColors = RdpProtocol.RdpColors.Colors24Bit;
         private const bool ExpectedBitmapCaching = false;
-        private const RdpProtocol.RDPResolutions ExpectedResolutionMode = RdpProtocol.RDPResolutions.FitToWindow;
+        private const RdpProtocol.RdpResolutions ExpectedResolutionMode = RdpProtocol.RdpResolutions.FitToWindow;
         private const bool ExpectedWallpaperDisplay = true;
         private const bool ExpectedThemesDisplay = true;
         private const bool ExpectedFontSmoothing = true;
@@ -29,7 +29,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedDriveRedirection = true;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
-        private const RdpProtocol.RDPSounds ExpectedSoundRedirection = RdpProtocol.RDPSounds.BringToThisComputer;
+        private const RdpProtocol.RdpSounds ExpectedSoundRedirection = RdpProtocol.RdpSounds.BringToThisComputer;
 
 
         [OneTimeSetUp]

@@ -15,7 +15,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
+	public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
     {
         public ConnectionTreeModel Deserialize(DataTable table)
         {
@@ -89,8 +89,8 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.RDPMinutesToIdleTimeout = (int)dataRow["RDPMinutesToIdleTimeout"];
             connectionInfo.RDPAlertIdleTimeout = (bool)dataRow["RDPAlertIdleTimeout"];
             connectionInfo.LoadBalanceInfo = (string)dataRow["LoadBalanceInfo"];
-            connectionInfo.Colors = (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors) ,(string)dataRow["Colors"]);
-            connectionInfo.Resolution = (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions), (string)dataRow["Resolution"]);
+            connectionInfo.Colors = (RdpProtocol.RdpColors)Enum.Parse(typeof(RdpProtocol.RdpColors) ,(string)dataRow["Colors"]);
+            connectionInfo.Resolution = (RdpProtocol.RdpResolutions)Enum.Parse(typeof(RdpProtocol.RdpResolutions), (string)dataRow["Resolution"]);
             connectionInfo.AutomaticResize = (bool)dataRow["AutomaticResize"];
             connectionInfo.DisplayWallpaper = (bool)dataRow["DisplayWallpaper"];
             connectionInfo.DisplayThemes = (bool)dataRow["DisplayThemes"];
@@ -101,8 +101,8 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.RedirectPorts = (bool)dataRow["RedirectPorts"];
             connectionInfo.RedirectPrinters = (bool)dataRow["RedirectPrinters"];
             connectionInfo.RedirectSmartCards = (bool)dataRow["RedirectSmartCards"];
-            connectionInfo.RedirectSound = (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), (string)dataRow["RedirectSound"]);
-            connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), (string)dataRow["SoundQuality"]);
+            connectionInfo.RedirectSound = (RdpProtocol.RdpSounds)Enum.Parse(typeof(RdpProtocol.RdpSounds), (string)dataRow["RedirectSound"]);
+            connectionInfo.SoundQuality = (RdpProtocol.RdpSoundQuality)Enum.Parse(typeof(RdpProtocol.RdpSoundQuality), (string)dataRow["SoundQuality"]);
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
             connectionInfo.PleaseConnect = (bool)dataRow["Connected"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];

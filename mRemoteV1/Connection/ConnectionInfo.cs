@@ -294,9 +294,9 @@ namespace mRemoteNG.Connection
 
         private void SetAppearanceDefaults() 
         {
-            Resolution = (RdpProtocol.RDPResolutions) Enum.Parse(typeof(RdpProtocol.RDPResolutions), Settings.Default.ConDefaultResolution);
+            Resolution = (RdpProtocol.RdpResolutions) Enum.Parse(typeof(RdpProtocol.RdpResolutions), Settings.Default.ConDefaultResolution);
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
-            Colors = (RdpProtocol.RDPColors) Enum.Parse(typeof(RdpProtocol.RDPColors), Settings.Default.ConDefaultColors);
+            Colors = (RdpProtocol.RdpColors) Enum.Parse(typeof(RdpProtocol.RdpColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
             DisplayWallpaper = Settings.Default.ConDefaultDisplayWallpaper;
             DisplayThemes = Settings.Default.ConDefaultDisplayThemes;
@@ -311,8 +311,8 @@ namespace mRemoteNG.Connection
             RedirectPrinters = Settings.Default.ConDefaultRedirectPrinters;
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
-            RedirectSound = (RdpProtocol.RDPSounds) Enum.Parse(typeof(RdpProtocol.RDPSounds), Settings.Default.ConDefaultRedirectSound);
-            SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
+            RedirectSound = (RdpProtocol.RdpSounds) Enum.Parse(typeof(RdpProtocol.RdpSounds), Settings.Default.ConDefaultRedirectSound);
+            SoundQuality = (RdpProtocol.RdpSoundQuality)Enum.Parse(typeof(RdpProtocol.RdpSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()

@@ -45,9 +45,9 @@ namespace mRemoteNG.Connection
         private string _rdGatewayPassword;
         private string _rdGatewayDomain;
 
-        private RdpProtocol.RDPResolutions _resolution;
+        private RdpProtocol.RdpResolutions _resolution;
         private bool _automaticResize;
-        private RdpProtocol.RDPColors _colors;
+        private RdpProtocol.RdpColors _colors;
         private bool _cacheBitmaps;
         private bool _displayWallpaper;
         private bool _displayThemes;
@@ -59,8 +59,8 @@ namespace mRemoteNG.Connection
         private bool _redirectPrinters;
         private bool _redirectPorts;
         private bool _redirectSmartCards;
-        private RdpProtocol.RDPSounds _redirectSound;
-        private RdpProtocol.RDPSoundQuality _soundQuality;
+        private RdpProtocol.RdpSounds _redirectSound;
+        private RdpProtocol.RdpSoundQuality _soundQuality;
 
         private string _preExtApp;
         private string _postExtApp;
@@ -347,7 +347,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameResolution"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionResolution"),
             TypeConverter(typeof(MiscTools.EnumTypeConverter))]
-        public RdpProtocol.RDPResolutions Resolution
+        public RdpProtocol.RdpResolutions Resolution
         {
             get { return GetPropertyValue("Resolution", _resolution); }
             set { SetField(ref _resolution, value, "Resolution"); }
@@ -367,7 +367,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameColors"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionColors"),
             TypeConverter(typeof(MiscTools.EnumTypeConverter))]
-        public RdpProtocol.RDPColors Colors
+        public RdpProtocol.RdpColors Colors
         {
             get { return GetPropertyValue("Colors", _colors); }
             set { SetField(ref _colors, value, "Colors"); }
@@ -479,7 +479,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectSounds"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectSounds"),
             TypeConverter(typeof(MiscTools.EnumTypeConverter))]
-        public RdpProtocol.RDPSounds RedirectSound
+        public RdpProtocol.RdpSounds RedirectSound
         {
             get { return GetPropertyValue("RedirectSound", _redirectSound); }
             set { SetField(ref _redirectSound, value, "RedirectSound"); }
@@ -489,7 +489,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameSoundQuality"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSoundQuality"),
             TypeConverter(typeof(MiscTools.EnumTypeConverter))]
-        public RdpProtocol.RDPSoundQuality SoundQuality
+        public RdpProtocol.RdpSoundQuality SoundQuality
         {
             get { return GetPropertyValue("SoundQuality", _soundQuality); }
             set { SetField(ref _soundQuality, value, "SoundQuality"); }

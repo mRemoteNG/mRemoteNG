@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Connection
 {
-    public class AbstractConnectionInfoDataTests
+	public class AbstractConnectionInfoDataTests
     {
 #pragma warning disable 618
         private class TestAbstractConnectionInfoData : AbstractConnectionRecord {}
@@ -250,7 +250,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Resolution = RdpProtocol.RDPResolutions.Res1366x768;
+            _testAbstractConnectionInfoData.Resolution = RdpProtocol.RdpResolutions.Res1366x768;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -268,7 +268,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Colors = RdpProtocol.RDPColors.Colors16Bit;
+            _testAbstractConnectionInfoData.Colors = RdpProtocol.RdpColors.Colors16Bit;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -367,7 +367,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
+            _testAbstractConnectionInfoData.RedirectSound = RdpProtocol.RdpSounds.DoNotPlay;
             Assert.That(wasCalled, Is.True);
         }
 

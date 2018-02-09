@@ -892,11 +892,11 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("RDGatewayPassword");
 								strHide.Add("RDGatewayUsername");
 							}
-							if (!(conI.Resolution == RdpProtocol.RDPResolutions.FitToWindow || conI.Resolution == RdpProtocol.RDPResolutions.Fullscreen))
+							if (!(conI.Resolution == RdpProtocol.RdpResolutions.FitToWindow || conI.Resolution == RdpProtocol.RdpResolutions.Fullscreen))
 							{
 								strHide.Add("AutomaticResize");
 							}
-					        if (conI.RedirectSound != RdpProtocol.RDPSounds.BringToThisComputer)
+					        if (conI.RedirectSound != RdpProtocol.RdpSounds.BringToThisComputer)
 					        {
                                 strHide.Add("SoundQuality");
                             }

@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
-    public class RemoteDesktopConnectionManager27DeserializerTests
+	public class RemoteDesktopConnectionManager27DeserializerTests
     {
         private string _connectionFileContents;
         private RemoteDesktopConnectionManagerDeserializer _deserializer;
@@ -28,9 +28,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedGatewayUsername = "gatewayusername";
         private const string ExpectedGatewayDomain = "innerdomain";
         private const string ExpectedGatewayPassword = "gatewayPassword123";
-        private const RdpProtocol.RDPResolutions ExpectedRdpResolution = RdpProtocol.RDPResolutions.FitToWindow;
-        private const RdpProtocol.RDPColors ExpectedRdpColorDepth = RdpProtocol.RDPColors.Colors24Bit;
-        private const RdpProtocol.RDPSounds ExpectedAudioRedirection = RdpProtocol.RDPSounds.DoNotPlay;
+        private const RdpProtocol.RdpResolutions ExpectedRdpResolution = RdpProtocol.RdpResolutions.FitToWindow;
+        private const RdpProtocol.RdpColors ExpectedRdpColorDepth = RdpProtocol.RdpColors.Colors24Bit;
+        private const RdpProtocol.RdpSounds ExpectedAudioRedirection = RdpProtocol.RdpSounds.DoNotPlay;
         private const bool ExpectedKeyRedirection = true;
         private const bool ExpectedSmartcardRedirection = true;
         private const bool ExpectedDriveRedirection = true;

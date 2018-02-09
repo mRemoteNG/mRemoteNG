@@ -6,7 +6,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class RemoteDesktopConnectionDeserializer : IDeserializer<string, ConnectionTreeModel>
+	public class RemoteDesktopConnectionDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
         // .rdp file schema: https://technet.microsoft.com/en-us/library/ff393699(v=ws.10).aspx
 
@@ -59,19 +59,19 @@ namespace mRemoteNG.Config.Serializers
                     switch (value)
                     {
                         case "8":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors256;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors256;
                             break;
                         case "15":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors15Bit;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors15Bit;
                             break;
                         case "16":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors16Bit;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors16Bit;
                             break;
                         case "24":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors24Bit;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors24Bit;
                             break;
                         case "32":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors32Bit;
+                            connectionInfo.Colors = RdpProtocol.RdpColors.Colors32Bit;
                             break;
                     }
                     break;
@@ -79,7 +79,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.CacheBitmaps = value == "1";
                     break;
                 case "screen mode id":
-                    connectionInfo.Resolution = value == "2" ? RdpProtocol.RDPResolutions.Fullscreen : RdpProtocol.RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = value == "2" ? RdpProtocol.RdpResolutions.Fullscreen : RdpProtocol.RdpResolutions.FitToWindow;
                     break;
                 case "connect to console":
                     connectionInfo.UseConsoleSession = value == "1";
@@ -112,13 +112,13 @@ namespace mRemoteNG.Config.Serializers
                     switch (value)
                     {
                         case "0":
-                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.BringToThisComputer;
+                            connectionInfo.RedirectSound = RdpProtocol.RdpSounds.BringToThisComputer;
                             break;
                         case "1":
-                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer;
+                            connectionInfo.RedirectSound = RdpProtocol.RdpSounds.LeaveAtRemoteComputer;
                             break;
                         case "2":
-                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
+                            connectionInfo.RedirectSound = RdpProtocol.RdpSounds.DoNotPlay;
                             break;
                     }
                     break;

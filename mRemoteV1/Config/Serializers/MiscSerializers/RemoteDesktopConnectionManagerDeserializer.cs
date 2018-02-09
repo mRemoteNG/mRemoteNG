@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using System.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -7,13 +9,11 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-using System.Security.Cryptography;
-using System.Text;
 
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
+	public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
         private static int _schemaVersion; /* 1 = RDCMan v2.2
                                        3 = RDCMan v2.7  */
@@ -203,26 +203,26 @@ namespace mRemoteNG.Config.Serializers
                 var resolutionString = remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", "");
                 try
                 {
-                    connectionInfo.Resolution = (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions), "Res" + resolutionString);
+                    connectionInfo.Resolution = (RdpProtocol.RdpResolutions)Enum.Parse(typeof(RdpProtocol.RdpResolutions), "Res" + resolutionString);
                 }
                 catch (ArgumentException)
                 {
-                    connectionInfo.Resolution = RdpProtocol.RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = RdpProtocol.RdpResolutions.FitToWindow;
                 }
 
                 if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea")?.InnerText == "True")
                 {
-                    connectionInfo.Resolution = RdpProtocol.RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = RdpProtocol.RdpResolutions.FitToWindow;
                 }
 
                 if (remoteDesktopNode.SelectSingleNode("./fullScreen")?.InnerText == "True")
                 {
-                    connectionInfo.Resolution = RdpProtocol.RDPResolutions.Fullscreen;
+                    connectionInfo.Resolution = RdpProtocol.RdpResolutions.Fullscreen;
                 }
 
                 var colorDepth = remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText;
                 if (colorDepth != null)
-                    connectionInfo.Colors = (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors), colorDepth);
+                    connectionInfo.Colors = (RdpProtocol.RdpColors)Enum.Parse(typeof(RdpProtocol.RdpColors), colorDepth);
             }
             else
             {
@@ -238,15 +238,15 @@ namespace mRemoteNG.Config.Serializers
                 {
                     case "0": // Bring to this computer
                     case "Client":
-                        connectionInfo.RedirectSound = RdpProtocol.RDPSounds.BringToThisComputer;
+                        connectionInfo.RedirectSound = RdpProtocol.RdpSounds.BringToThisComputer;
                         break;
                     case "1": // Leave at remote computer
                     case "Remote":
-                        connectionInfo.RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer;
+                        connectionInfo.RedirectSound = RdpProtocol.RdpSounds.LeaveAtRemoteComputer;
                         break;
                     case "2": // Do not play
                     case "NoSound":
-                        connectionInfo.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
+                        connectionInfo.RedirectSound = RdpProtocol.RdpSounds.DoNotPlay;
                         break;
                 }
 
