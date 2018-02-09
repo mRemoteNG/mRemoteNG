@@ -2631,4 +2631,10 @@ This page will walk you through the process of upgrading your connections file o
   <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
+  <data name="strPropertyDescriptionRdpProtocolVersion" xml:space="preserve">
+    <value>Sets the version of the RDP protocol to use when opening connections.</value>
+  </data>
+  <data name="strPropertyNameRdpProtocolVersion" xml:space="preserve">
+    <value>RDP Protocol Version</value>
+  </data>
 </root>

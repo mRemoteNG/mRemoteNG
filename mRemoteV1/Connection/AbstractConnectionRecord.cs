@@ -26,6 +26,7 @@ namespace mRemoteNG.Connection
         private string _domain = "";
 
         private ProtocolType _protocol;
+	    private RdpVersionEnum _rdpProtocolVersion;
         private string _extApp;
         private int _port;
         private string _puttySession;
@@ -169,6 +170,16 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("Protocol", _protocol); }
             set { SetField(ref _protocol, value, "Protocol"); }
         }
+
+	    [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+	     LocalizedAttributes.LocalizedDisplayName("strPropertyNameRdpProtocolVersion"),
+	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRdpProtocolVersion"),
+	     TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+		public virtual RdpVersionEnum RdpProtocolVersion
+	    {
+		    get { return GetPropertyValue(nameof(RdpProtocolVersion), _rdpProtocolVersion); }
+		    set { SetField(ref _rdpProtocolVersion, value, nameof(RdpProtocolVersion)); }
+		}
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalTool"),

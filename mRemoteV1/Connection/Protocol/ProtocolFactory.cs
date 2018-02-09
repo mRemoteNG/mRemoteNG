@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Connection.Protocol.Http;
+﻿using System;
+using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RAW;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -6,11 +7,10 @@ using mRemoteNG.Connection.Protocol.Rlogin;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
-using System;
 
 namespace mRemoteNG.Connection.Protocol
 {
-    public class ProtocolFactory
+	public class ProtocolFactory
     {
         public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
         {
@@ -19,11 +19,7 @@ namespace mRemoteNG.Connection.Protocol
 			switch (connectionInfo.Protocol)
 			{
 				case ProtocolType.RDP:
-					newProtocol = new RdpProtocol
-					{
-					    LoadBalanceInfoUseUtf8 = Settings.Default.RdpLoadBalanceInfoUseUtf8
-                    };
-					((RdpProtocol) newProtocol).tmrReconnect.Elapsed += ((RdpProtocol) newProtocol).tmrReconnect_Elapsed;
+					newProtocol = new RdpProtocolFactory().CreateProtocol(connectionInfo);
 					break;
 				case ProtocolType.VNC:
 					newProtocol = new ProtocolVNC();

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol.RDP
@@ -46,4 +48,21 @@ namespace mRemoteNG.Connection.Protocol.RDP
         [Description("3840x2160")]
         Res3840x2160
     }
+
+	public static class RdpResolutionExtensions
+	{
+		public static Rectangle GetResolutionRectangle(this RdpResolutions resolution)
+		{
+			string[] resolutionParts = null;
+			if (resolution != RdpResolutions.FitToWindow & resolution != RdpResolutions.Fullscreen & resolution != RdpResolutions.SmartSize)
+			{
+				resolutionParts = resolution.ToString().Replace("Res", "").Split('x');
+			}
+			if (resolutionParts == null || resolutionParts.Length != 2)
+			{
+				return new Rectangle(0, 0, 0, 0);
+			}
+			return new Rectangle(0, 0, Convert.ToInt32(resolutionParts[0]), Convert.ToInt32(resolutionParts[1]));
+		}
+	}
 }

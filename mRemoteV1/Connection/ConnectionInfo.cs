@@ -222,7 +222,7 @@ namespace mRemoteNG.Connection
                 switch (protocol)
                 {
                     case ProtocolType.RDP:
-                        return (int)RdpProtocol.Defaults.Port;
+                        return (int)RdpProtocol6.Defaults.Port;
                     case ProtocolType.VNC:
                         return (int)ProtocolVNC.Defaults.Port;
                     case ProtocolType.SSH1:
@@ -269,7 +269,8 @@ namespace mRemoteNG.Connection
         private void SetProtocolDefaults()
         {
             Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Settings.Default.ConDefaultProtocol);
-            ExtApp = Settings.Default.ConDefaultExtApp;
+	        RdpProtocolVersion = RdpVersionEnum.Rdc8;
+			ExtApp = Settings.Default.ConDefaultExtApp;
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
             ICAEncryptionStrength = (IcaProtocol.EncryptionStrength) Enum.Parse(typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);

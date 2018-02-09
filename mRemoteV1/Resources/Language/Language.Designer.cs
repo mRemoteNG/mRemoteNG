@@ -4669,6 +4669,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sets the version of the RDP protocol to use when opening connections..
+        /// </summary>
+        internal static string strPropertyDescriptionRdpProtocolVersion {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRdpProtocolVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
         /// </summary>
         internal static string strPropertyDescriptionRedirectDrives {
@@ -5169,6 +5178,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameRDPMinutesToIdleTimeout {
             get {
                 return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RDP Protocol Version.
+        /// </summary>
+        internal static string strPropertyNameRdpProtocolVersion {
+            get {
+                return ResourceManager.GetString("strPropertyNameRdpProtocolVersion", resourceCulture);
             }
         }
         

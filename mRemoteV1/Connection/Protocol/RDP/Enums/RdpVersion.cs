@@ -10,4 +10,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		public static readonly Version RDC80 = new Version(6, 2, 9200);
 		public static readonly Version RDC81 = new Version(6, 3, 9600);
 	}
+
+	public enum RdpVersionEnum
+	{
+		Rdc6,
+		Rdc8
+	}
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using AxMSTSCLib;
@@ -13,49 +12,40 @@ using MSTSCLib;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-	public partial class RdpProtocol : ProtocolBase
+	public class RdpProtocol6 : ProtocolBase
 	{
-        /* RDP v8 requires Windows 7 with:
-         * https://support.microsoft.com/en-us/kb/2592687 
-         * OR
-         * https://support.microsoft.com/en-us/kb/2923545
-         * 
-         * Windows 8+ support RDP v8 out of the box.
-         */
-        private MsRdpClient8NotSafeForScripting _rdpClient;
+		private MsRdpClient6NotSafeForScripting _rdpClient;
         private Version _rdpVersion;
-        private ConnectionInfo _connectionInfo;
-        private bool _loginComplete;
         private bool _redirectKeys;
         private bool _alertOnIdleDisconnect;
         private readonly FrmMain _frmMain = FrmMain.Default;
+        protected bool LoginComplete;
+        protected ConnectionInfo ConnectionInfo;
 
         #region Properties
-        public bool SmartSize
+        public virtual bool SmartSize
 		{
 			get
 			{
 				return _rdpClient.AdvancedSettings2.SmartSizing;
 			}
-            private set
+            protected set
 			{
 				_rdpClient.AdvancedSettings2.SmartSizing = value;
-				ReconnectForResize();
 			}
 		}
 		
-        public bool Fullscreen
+        public virtual bool Fullscreen
 		{
-			get
-			{
+	        get
+	        {
 				return _rdpClient.FullScreen;
-			}
-            private set
-			{
+	        }
+	        protected set
+	        {
 				_rdpClient.FullScreen = value;
-				ReconnectForResize();
-			}
-		}
+	        }
+        }
 
 	    private bool RedirectKeys
 		{
@@ -90,11 +80,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 
         #region Constructors
-        public RdpProtocol()
+        public RdpProtocol6()
         {
-            Control = new AxMsRdpClient8NotSafeForScripting();
+            Control = new AxMsRdpClient6NotSafeForScripting();
+	        Connecting += OnConnectingDebugMessage;
         }
-        #endregion
+
+		private void OnConnectingDebugMessage(object sender)
+		{
+			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Using RDP version: {ConnectionInfo.RdpProtocolVersion}");
+		}
+
+		#endregion
 
         #region Public Methods
 		public override bool Initialize()
@@ -103,7 +100,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			try
 			{
 				Control.CreateControl();
-				_connectionInfo = InterfaceControl.Info;
+				ConnectionInfo = InterfaceControl.Info;
 				
 				try
 				{
@@ -112,8 +109,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						Thread.Sleep(0);
                         Application.DoEvents();
 					}
-                    _rdpClient = (MsRdpClient8NotSafeForScripting)((AxMsRdpClient8NotSafeForScripting)Control).GetOcx();
-
+                    _rdpClient = (MsRdpClient6NotSafeForScripting)CreateRdpClientControl();
 				}
 				catch (System.Runtime.InteropServices.COMException ex)
 				{
@@ -124,14 +120,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						
 				_rdpVersion = new Version(_rdpClient.Version);
 						
-				_rdpClient.Server = _connectionInfo.Hostname;
+				_rdpClient.Server = ConnectionInfo.Hostname;
 
                 SetCredentials();
                 SetResolution();
-                _rdpClient.FullScreenTitle = _connectionInfo.Name;
+                _rdpClient.FullScreenTitle = ConnectionInfo.Name;
 
-                _alertOnIdleDisconnect = _connectionInfo.RDPAlertIdleTimeout;
-                _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = _connectionInfo.RDPMinutesToIdleTimeout;
+                _alertOnIdleDisconnect = ConnectionInfo.RDPAlertIdleTimeout;
+                _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = ConnectionInfo.RDPMinutesToIdleTimeout;
 
                 //not user changeable
                 _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
@@ -143,29 +139,29 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						
 				_rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
 						
-				_rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(_connectionInfo.CacheBitmaps);
+				_rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(ConnectionInfo.CacheBitmaps);
 				if (_rdpVersion >= RdpVersion.RDC61)
 				{
-					_rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp;
-				    _rdpClient.AdvancedSettings8.AudioQualityMode = (uint)_connectionInfo.SoundQuality;
+					_rdpClient.AdvancedSettings7.EnableCredSspSupport = ConnectionInfo.UseCredSsp;
 				}
 
                 SetUseConsoleSession();
                 SetPort();
-				RedirectKeys = _connectionInfo.RedirectKeys;
+				RedirectKeys = ConnectionInfo.RedirectKeys;
                 SetRedirection();
                 SetAuthenticationLevel();
 				SetLoadBalanceInfo();
                 SetRdGateway();
 						
-				_rdpClient.ColorDepth = (int)_connectionInfo.Colors;
+				_rdpClient.ColorDepth = (int)ConnectionInfo.Colors;
 
                 SetPerformanceFlags();
 						
 				_rdpClient.ConnectingText = Language.strConnecting;
 						
 				Control.Anchor = AnchorStyles.None;
-						
+				tmrReconnect.Elapsed += tmrReconnect_Elapsed;
+
 				return true;
 			}
 			catch (Exception ex)
@@ -177,7 +173,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				
 		public override bool Connect()
 		{
-			_loginComplete = false;
+			LoginComplete = false;
 			SetEventHandlers();
 
             try
@@ -245,81 +241,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpFocusFailed, ex);
 			}
 		}
-				
-		private Size _controlBeginningSize;
-		public override void ResizeBegin(object sender, EventArgs e)
-		{
-			_controlBeginningSize = Control.Size;
-		}
-				
-		public override void Resize(object sender, EventArgs e)
-		{
-			if (DoResize() && _controlBeginningSize.IsEmpty)
-			{
-				ReconnectForResize();
-			}
-			base.Resize(sender, e);
-		}
-				
-		public override void ResizeEnd(object sender, EventArgs e)
-		{
-			DoResize();
-			if (!(Control.Size == _controlBeginningSize))
-			{
-				ReconnectForResize();
-			}
-			_controlBeginningSize = Size.Empty;
-		}
-        #endregion
-		
-        #region Private Methods
-		private bool DoResize()
-		{
-			Control.Location = InterfaceControl.Location;
-			if (!(Control.Size == InterfaceControl.Size) && !(InterfaceControl.Size == Size.Empty)) // kmscode - this doesn't look right to me. But I'm not aware of any functionality issues with this currently...
-			{
-				Control.Size = InterfaceControl.Size;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-				
-		private void ReconnectForResize()
-		{
-			if (_rdpVersion < RdpVersion.RDC80)
-			{
-				return;
-			}
-					
-			if (!_loginComplete)
-			{
-				return;
-			}
-					
-			if (!InterfaceControl.Info.AutomaticResize)
-			{
-				return;
-			}
-					
-			if (!(InterfaceControl.Info.Resolution == RdpResolutions.FitToWindow | InterfaceControl.Info.Resolution == RdpResolutions.Fullscreen))
-			{
-				return;
-			}
-					
-			if (SmartSize)
-			{
-				return;
-			}
+		#endregion
 
-		    var size = !Fullscreen ? Control.Size : Screen.FromControl(Control).Bounds.Size;
-
-            IMsRdpClient8 msRdpClient8 = _rdpClient;
-			msRdpClient8.Reconnect((uint)size.Width, (uint)size.Height);
+		#region Private Methods
+		protected virtual object CreateRdpClientControl()
+		{
+			return ((AxMsRdpClient6NotSafeForScripting)Control).GetOcx();
 		}
-				
+
 		private void SetRdGateway()
 		{
 			try
@@ -331,32 +260,32 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				}
 			    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strRdpGatewayIsSupported, true);
 
-			    if (_connectionInfo.RDGatewayUsageMethod != RDGatewayUsageMethod.Never)
+			    if (ConnectionInfo.RDGatewayUsageMethod != RDGatewayUsageMethod.Never)
 				{
-					_rdpClient.TransportSettings.GatewayUsageMethod = (uint)_connectionInfo.RDGatewayUsageMethod;
-					_rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostname;
+					_rdpClient.TransportSettings.GatewayUsageMethod = (uint)ConnectionInfo.RDGatewayUsageMethod;
+					_rdpClient.TransportSettings.GatewayHostname = ConnectionInfo.RDGatewayHostname;
 					_rdpClient.TransportSettings.GatewayProfileUsageMethod = 1; // TSC_PROXY_PROFILE_MODE_EXPLICIT
-					if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
+					if (ConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
 					{
 						_rdpClient.TransportSettings.GatewayCredsSource = 1; // TSC_PROXY_CREDS_MODE_SMARTCARD
 					}
 					if (_rdpVersion >= RdpVersion.RDC61 && (Force & ConnectionInfo.Force.NoCredentials) != ConnectionInfo.Force.NoCredentials)
 					{
-						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
+						if (ConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
-						    _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username;
-						    _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password;
-						    _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo?.Domain;
+						    _rdpClient.TransportSettings2.GatewayUsername = ConnectionInfo.Username;
+						    _rdpClient.TransportSettings2.GatewayPassword = ConnectionInfo.Password;
+						    _rdpClient.TransportSettings2.GatewayDomain = ConnectionInfo?.Domain;
 						}
-						else if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
+						else if (ConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
 						{
 							_rdpClient.TransportSettings2.GatewayCredSharing = 0;
 						}
 						else
 						{
-                            _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUsername;
-                            _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.RDGatewayPassword;
-                            _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.RDGatewayDomain;
+                            _rdpClient.TransportSettings2.GatewayUsername = ConnectionInfo.RDGatewayUsername;
+                            _rdpClient.TransportSettings2.GatewayPassword = ConnectionInfo.RDGatewayPassword;
+                            _rdpClient.TransportSettings2.GatewayDomain = ConnectionInfo.RDGatewayDomain;
                             _rdpClient.TransportSettings2.GatewayCredSharing = 0;
                         }
 					}
@@ -384,7 +313,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				}
 				else
 				{
-					value = _connectionInfo.UseConsoleSession;
+					value = ConnectionInfo.UseConsoleSession;
 				}
 						
 				if (_rdpVersion >= RdpVersion.RDC61)
@@ -415,9 +344,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					return;
 				}
 
-			    var userName = _connectionInfo?.Username ?? "";
-			    var password = _connectionInfo?.Password ?? "";
-			    var domain = _connectionInfo?.Domain ?? "";
+			    var userName = ConnectionInfo?.Username ?? "";
+			    var password = ConnectionInfo?.Password ?? "";
+			    var domain = ConnectionInfo?.Domain ?? "";
 						
 				if (string.IsNullOrEmpty(userName))
 				{
@@ -506,7 +435,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				}
 				else
 				{
-					var resolution = GetResolutionRectangle(_connectionInfo.Resolution);
+					var resolution = ConnectionInfo.Resolution.GetResolutionRectangle();
 					_rdpClient.DesktopWidth = resolution.Width;
 					_rdpClient.DesktopHeight = resolution.Height;
 				}
@@ -521,9 +450,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			try
 			{
-				if (_connectionInfo.Port != (int)Defaults.Port)
+				if (ConnectionInfo.Port != (int)Defaults.Port)
 				{
-					_rdpClient.AdvancedSettings2.RDPPort = _connectionInfo.Port;
+					_rdpClient.AdvancedSettings2.RDPPort = ConnectionInfo.Port;
 				}
 			}
 			catch (Exception ex)
@@ -536,11 +465,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			try
 			{
-				_rdpClient.AdvancedSettings2.RedirectDrives = _connectionInfo.RedirectDiskDrives;
-				_rdpClient.AdvancedSettings2.RedirectPorts = _connectionInfo.RedirectPorts;
-				_rdpClient.AdvancedSettings2.RedirectPrinters = _connectionInfo.RedirectPrinters;
-				_rdpClient.AdvancedSettings2.RedirectSmartCards = _connectionInfo.RedirectSmartCards;
-				_rdpClient.SecuredSettings2.AudioRedirectionMode = (int)_connectionInfo.RedirectSound;
+				_rdpClient.AdvancedSettings2.RedirectDrives = ConnectionInfo.RedirectDiskDrives;
+				_rdpClient.AdvancedSettings2.RedirectPorts = ConnectionInfo.RedirectPorts;
+				_rdpClient.AdvancedSettings2.RedirectPrinters = ConnectionInfo.RedirectPrinters;
+				_rdpClient.AdvancedSettings2.RedirectSmartCards = ConnectionInfo.RedirectSmartCards;
+				_rdpClient.SecuredSettings2.AudioRedirectionMode = (int)ConnectionInfo.RedirectSound;
 			}
 			catch (Exception ex)
 			{
@@ -553,22 +482,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			try
 			{
 				var pFlags = 0;
-				if (_connectionInfo.DisplayThemes == false)
+				if (ConnectionInfo.DisplayThemes == false)
 				{
 					pFlags += Convert.ToInt32(RdpPerformanceFlags.DisableThemes);
 				}
 						
-				if (_connectionInfo.DisplayWallpaper == false)
+				if (ConnectionInfo.DisplayWallpaper == false)
 				{
 					pFlags += Convert.ToInt32(RdpPerformanceFlags.DisableWallpaper);
 				}
 						
-				if (_connectionInfo.EnableFontSmoothing)
+				if (ConnectionInfo.EnableFontSmoothing)
 				{
 					pFlags += Convert.ToInt32(RdpPerformanceFlags.EnableFontSmoothing);
 				}
 						
-				if (_connectionInfo.EnableDesktopComposition)
+				if (ConnectionInfo.EnableDesktopComposition)
 				{
 					pFlags += Convert.ToInt32(RdpPerformanceFlags.EnableDesktopComposition);
 				}
@@ -585,7 +514,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			try
 			{
-				_rdpClient.AdvancedSettings5.AuthenticationLevel = (uint)_connectionInfo.RDPAuthenticationLevel;
+				_rdpClient.AdvancedSettings5.AuthenticationLevel = (uint)ConnectionInfo.RDPAuthenticationLevel;
 			}
 			catch (Exception ex)
 			{
@@ -595,15 +524,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				
 		private void SetLoadBalanceInfo()
 		{
-			if (string.IsNullOrEmpty(_connectionInfo.LoadBalanceInfo))
+			if (string.IsNullOrEmpty(ConnectionInfo.LoadBalanceInfo))
 			{
 				return;
 			}
 			try
 			{
 			    _rdpClient.AdvancedSettings2.LoadBalanceInfo = LoadBalanceInfoUseUtf8
-                    ? new AzureLoadBalanceInfoEncoder().Encode(_connectionInfo.LoadBalanceInfo) 
-                    : _connectionInfo.LoadBalanceInfo;
+                    ? new AzureLoadBalanceInfoEncoder().Encode(ConnectionInfo.LoadBalanceInfo) 
+                    : ConnectionInfo.LoadBalanceInfo;
 			}
 			catch (Exception ex)
 			{
@@ -637,7 +566,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             if (_alertOnIdleDisconnect)
             {
-                string message = "The " + _connectionInfo.Name + " session was disconnected due to inactivity";
+                string message = "The " + ConnectionInfo.Name + " session was disconnected due to inactivity";
                 const string caption = "Session Disconnected";
                 MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -685,7 +614,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				
 		private void RDPEvent_OnLoginComplete()
 		{
-			_loginComplete = true;
+			LoginComplete = true;
 		}
 				
 		private void RDPEvent_OnLeaveFullscreenMode()
@@ -706,26 +635,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			Port = 3389
 		}
 		
-        #region Resolution
-		public static Rectangle GetResolutionRectangle(RdpResolutions resolution)
-		{
-			string[] resolutionParts = null;
-			if (resolution != RdpResolutions.FitToWindow & resolution != RdpResolutions.Fullscreen & resolution != RdpResolutions.SmartSize)
-			{
-				resolutionParts = resolution.ToString().Replace("Res", "").Split('x');
-			}
-			if (resolutionParts == null || resolutionParts.Length != 2)
-			{
-				return new Rectangle(0, 0, 0, 0);
-			}
-            return new Rectangle(0, 0, Convert.ToInt32(resolutionParts[0]), Convert.ToInt32(resolutionParts[1]));
-		}
-		#endregion
-		
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			var srvReady = PortScanner.IsPortOpen(_connectionInfo.Hostname, Convert.ToString(_connectionInfo.Port));
+			var srvReady = PortScanner.IsPortOpen(ConnectionInfo.Hostname, Convert.ToString(ConnectionInfo.Port));
 					
 			ReconnectGroup.ServerReady = srvReady;
 					
