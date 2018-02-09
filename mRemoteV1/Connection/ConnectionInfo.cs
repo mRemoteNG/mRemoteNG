@@ -274,7 +274,7 @@ namespace mRemoteNG.Connection
             PuttySession = Settings.Default.ConDefaultPuttySession;
             ICAEncryptionStrength = (IcaProtocol.EncryptionStrength) Enum.Parse(typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
-            RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel) Enum.Parse(typeof(RdpProtocol.AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
+            RDPAuthenticationLevel = (RdpAuthenticationLevel) Enum.Parse(typeof(RdpAuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
@@ -284,9 +284,9 @@ namespace mRemoteNG.Connection
 
         private void SetRdGatewayDefaults()
         {
-            RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod) Enum.Parse(typeof(RdpProtocol.RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
+            RDGatewayUsageMethod = (RDGatewayUsageMethod) Enum.Parse(typeof(RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
             RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(RdpProtocol.RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
+            RDGatewayUseConnectionCredentials = (RDGatewayUseConnectionCredentials) Enum.Parse(typeof(RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
@@ -294,9 +294,9 @@ namespace mRemoteNG.Connection
 
         private void SetAppearanceDefaults() 
         {
-            Resolution = (RdpProtocol.RdpResolutions) Enum.Parse(typeof(RdpProtocol.RdpResolutions), Settings.Default.ConDefaultResolution);
+            Resolution = (RdpResolutions) Enum.Parse(typeof(RdpResolutions), Settings.Default.ConDefaultResolution);
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
-            Colors = (RdpProtocol.RdpColors) Enum.Parse(typeof(RdpProtocol.RdpColors), Settings.Default.ConDefaultColors);
+            Colors = (RdpColors) Enum.Parse(typeof(RdpColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
             DisplayWallpaper = Settings.Default.ConDefaultDisplayWallpaper;
             DisplayThemes = Settings.Default.ConDefaultDisplayThemes;
@@ -311,8 +311,8 @@ namespace mRemoteNG.Connection
             RedirectPrinters = Settings.Default.ConDefaultRedirectPrinters;
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
-            RedirectSound = (RdpProtocol.RdpSounds) Enum.Parse(typeof(RdpProtocol.RdpSounds), Settings.Default.ConDefaultRedirectSound);
-            SoundQuality = (RdpProtocol.RdpSoundQuality)Enum.Parse(typeof(RdpProtocol.RdpSoundQuality), Settings.Default.ConDefaultSoundQuality);
+            RedirectSound = (RdpSounds) Enum.Parse(typeof(RdpSounds), Settings.Default.ConDefaultRedirectSound);
+            SoundQuality = (RdpSoundQuality)Enum.Parse(typeof(RdpSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()

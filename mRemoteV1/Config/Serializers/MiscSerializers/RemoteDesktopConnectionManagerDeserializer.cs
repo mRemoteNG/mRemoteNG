@@ -176,7 +176,7 @@ namespace mRemoteNG.Config.Serializers
             var gatewaySettingsNode = xmlNode.SelectSingleNode("./gatewaySettings");
             if (gatewaySettingsNode?.Attributes?["inherit"].Value == "None")
             {
-                connectionInfo.RDGatewayUsageMethod = gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText == "True" ? RdpProtocol.RDGatewayUsageMethod.Always : RdpProtocol.RDGatewayUsageMethod.Never;
+                connectionInfo.RDGatewayUsageMethod = gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText == "True" ? RDGatewayUsageMethod.Always : RDGatewayUsageMethod.Never;
                 connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText;
                 connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText;
 
@@ -203,26 +203,26 @@ namespace mRemoteNG.Config.Serializers
                 var resolutionString = remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", "");
                 try
                 {
-                    connectionInfo.Resolution = (RdpProtocol.RdpResolutions)Enum.Parse(typeof(RdpProtocol.RdpResolutions), "Res" + resolutionString);
+                    connectionInfo.Resolution = (RdpResolutions)Enum.Parse(typeof(RdpResolutions), "Res" + resolutionString);
                 }
                 catch (ArgumentException)
                 {
-                    connectionInfo.Resolution = RdpProtocol.RdpResolutions.FitToWindow;
+                    connectionInfo.Resolution = RdpResolutions.FitToWindow;
                 }
 
                 if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea")?.InnerText == "True")
                 {
-                    connectionInfo.Resolution = RdpProtocol.RdpResolutions.FitToWindow;
+                    connectionInfo.Resolution = RdpResolutions.FitToWindow;
                 }
 
                 if (remoteDesktopNode.SelectSingleNode("./fullScreen")?.InnerText == "True")
                 {
-                    connectionInfo.Resolution = RdpProtocol.RdpResolutions.Fullscreen;
+                    connectionInfo.Resolution = RdpResolutions.Fullscreen;
                 }
 
                 var colorDepth = remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText;
                 if (colorDepth != null)
-                    connectionInfo.Colors = (RdpProtocol.RdpColors)Enum.Parse(typeof(RdpProtocol.RdpColors), colorDepth);
+                    connectionInfo.Colors = (RdpColors)Enum.Parse(typeof(RdpColors), colorDepth);
             }
             else
             {
@@ -238,15 +238,15 @@ namespace mRemoteNG.Config.Serializers
                 {
                     case "0": // Bring to this computer
                     case "Client":
-                        connectionInfo.RedirectSound = RdpProtocol.RdpSounds.BringToThisComputer;
+                        connectionInfo.RedirectSound = RdpSounds.BringToThisComputer;
                         break;
                     case "1": // Leave at remote computer
                     case "Remote":
-                        connectionInfo.RedirectSound = RdpProtocol.RdpSounds.LeaveAtRemoteComputer;
+                        connectionInfo.RedirectSound = RdpSounds.LeaveAtRemoteComputer;
                         break;
                     case "2": // Do not play
                     case "NoSound":
-                        connectionInfo.RedirectSound = RdpProtocol.RdpSounds.DoNotPlay;
+                        connectionInfo.RedirectSound = RdpSounds.DoNotPlay;
                         break;
                 }
 
@@ -294,15 +294,15 @@ namespace mRemoteNG.Config.Serializers
                 {
                     case "0": // No authentication
                     case "None":
-                        connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.NoAuth;
+                        connectionInfo.RDPAuthenticationLevel = RdpAuthenticationLevel.NoAuth;
                         break;
                     case "1": // Do not connect if authentication fails
                     case "Required":
-                        connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.AuthRequired;
+                        connectionInfo.RDPAuthenticationLevel = RdpAuthenticationLevel.AuthRequired;
                         break;
                     case "2": // Warn if authentication fails
                     case "Warn":
-                        connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth;
+                        connectionInfo.RDPAuthenticationLevel = RdpAuthenticationLevel.WarnOnFailedAuth;
                         break;
                 }
             }

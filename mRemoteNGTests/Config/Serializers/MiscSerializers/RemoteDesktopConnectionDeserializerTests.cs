@@ -18,9 +18,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedDomain = "myspecialdomain";
         private const string ExpectedGatewayHostname = "gatewayhostname.domain.com";
         private const int ExpectedPort = 9933;
-        private const RdpProtocol.RdpColors ExpectedColors = RdpProtocol.RdpColors.Colors24Bit;
+        private const RdpColors ExpectedColors = RdpColors.Colors24Bit;
         private const bool ExpectedBitmapCaching = false;
-        private const RdpProtocol.RdpResolutions ExpectedResolutionMode = RdpProtocol.RdpResolutions.FitToWindow;
+        private const RdpResolutions ExpectedResolutionMode = RdpResolutions.FitToWindow;
         private const bool ExpectedWallpaperDisplay = true;
         private const bool ExpectedThemesDisplay = true;
         private const bool ExpectedFontSmoothing = true;
@@ -29,7 +29,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedDriveRedirection = true;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
-        private const RdpProtocol.RdpSounds ExpectedSoundRedirection = RdpProtocol.RdpSounds.BringToThisComputer;
+        private const RdpSounds ExpectedSoundRedirection = RdpSounds.BringToThisComputer;
 
 
         [OneTimeSetUp]

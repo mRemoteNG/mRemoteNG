@@ -82,9 +82,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
                 UseCredSsp = true,
                 RenderingEngine = HTTPBase.RenderingEngine.Gecko,
                 ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
-                RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth,
-                Colors = RdpProtocol.RdpColors.Colors16Bit,
-                Resolution = RdpProtocol.RdpResolutions.Res1366x768,
+                RDPAuthenticationLevel = RdpAuthenticationLevel.WarnOnFailedAuth,
+                Colors = RdpColors.Colors16Bit,
+                Resolution = RdpResolutions.Res1366x768,
                 AutomaticResize = true,
                 DisplayWallpaper = true,
                 DisplayThemes = true,
@@ -95,7 +95,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
                 RedirectPorts = true,
                 RedirectPrinters = true,
                 RedirectSmartCards = true,
-                RedirectSound = RdpProtocol.RdpSounds.LeaveAtRemoteComputer,
+                RedirectSound = RdpSounds.LeaveAtRemoteComputer,
                 RedirectKeys = true,
                 VNCCompression = ProtocolVNC.Compression.Comp4,
                 VNCEncoding = ProtocolVNC.Encoding.EncRRE,
@@ -105,8 +105,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
                 VNCColors = ProtocolVNC.Colors.Col8Bit,
                 VNCSmartSizeMode = ProtocolVNC.SmartSizeMode.SmartSAspect,
                 VNCViewOnly = true,
-                RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Detect,
-                RDGatewayUseConnectionCredentials = RdpProtocol.RDGatewayUseConnectionCredentials.SmartCard
+                RDGatewayUsageMethod = RDGatewayUsageMethod.Detect,
+                RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard
             };
         }
 

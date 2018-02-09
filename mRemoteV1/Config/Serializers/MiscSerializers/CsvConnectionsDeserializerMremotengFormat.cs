@@ -131,21 +131,21 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
             if (headers.Contains("RDPAuthenticationLevel"))
             {
-                RdpProtocol.AuthenticationLevel value;
+                RdpAuthenticationLevel value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RDPAuthenticationLevel")], out value))
                     connectionRecord.RDPAuthenticationLevel = value;
             }
 
             if (headers.Contains("Colors"))
             {
-                RdpProtocol.RdpColors value;
+                RdpColors value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Colors")], out value))
                     connectionRecord.Colors = value;
             }
 
             if (headers.Contains("Resolution"))
             {
-                RdpProtocol.RdpResolutions value;
+                RdpResolutions value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Resolution")], out value))
                     connectionRecord.Resolution = value;
             }
@@ -222,7 +222,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
             if (headers.Contains("RedirectSound"))
             {
-                RdpProtocol.RdpSounds value;
+                RdpSounds value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RedirectSound")], out value))
                     connectionRecord.RedirectSound = value;
             }
@@ -292,14 +292,14 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
             if (headers.Contains("RDGatewayUsageMethod"))
             {
-                RdpProtocol.RDGatewayUsageMethod value;
+                RDGatewayUsageMethod value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayUsageMethod")], out value))
                     connectionRecord.RDGatewayUsageMethod = value;
             }
 
             if (headers.Contains("RDGatewayUseConnectionCredentials"))
             {
-                RdpProtocol.RDGatewayUseConnectionCredentials value;
+                RDGatewayUseConnectionCredentials value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayUseConnectionCredentials")], out value))
                     connectionRecord.RDGatewayUseConnectionCredentials = value;
             }

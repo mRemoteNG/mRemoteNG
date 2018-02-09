@@ -187,15 +187,15 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 						
-				if (InterfaceControl.Info.Resolution == RdpProtocol.RdpResolutions.FitToWindow)
+				if (InterfaceControl.Info.Resolution == RdpResolutions.FitToWindow)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
 				}
-				else if (InterfaceControl.Info.Resolution == RdpProtocol.RdpResolutions.SmartSize)
+				else if (InterfaceControl.Info.Resolution == RdpResolutions.SmartSize)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
 				}
-				else if (InterfaceControl.Info.Resolution == RdpProtocol.RdpResolutions.Fullscreen)
+				else if (InterfaceControl.Info.Resolution == RdpResolutions.Fullscreen)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(_frmMain).Bounds.Width, Screen.FromControl(_frmMain).Bounds.Height, 0);
 					_icaClient.FullScreenWindow();
@@ -217,13 +217,13 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		    // ReSharper disable once SwitchStatementMissingSomeCases
 			switch (_info.Colors)
 			{
-				case RdpProtocol.RdpColors.Colors256:
+				case RdpColors.Colors256:
 					_icaClient.SetProp("DesiredColor", "2");
 					break;
-				case RdpProtocol.RdpColors.Colors15Bit:
+				case RdpColors.Colors15Bit:
 					_icaClient.SetProp("DesiredColor", "4");
 					break;
-				case RdpProtocol.RdpColors.Colors16Bit:
+				case RdpColors.Colors16Bit:
 					_icaClient.SetProp("DesiredColor", "4");
 					break;
 				default:
