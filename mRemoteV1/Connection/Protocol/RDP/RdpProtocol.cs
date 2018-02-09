@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
@@ -145,7 +144,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				_rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
 						
 				_rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(_connectionInfo.CacheBitmaps);
-				if (_rdpVersion >= Versions.RDC61)
+				if (_rdpVersion >= RdpVersion.RDC61)
 				{
 					_rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp;
 				    _rdpClient.AdvancedSettings8.AudioQualityMode = (uint)_connectionInfo.SoundQuality;
@@ -290,7 +289,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				
 		private void ReconnectForResize()
 		{
-			if (_rdpVersion < Versions.RDC80)
+			if (_rdpVersion < RdpVersion.RDC80)
 			{
 				return;
 			}
@@ -341,7 +340,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						_rdpClient.TransportSettings.GatewayCredsSource = 1; // TSC_PROXY_CREDS_MODE_SMARTCARD
 					}
-					if (_rdpVersion >= Versions.RDC61 && (Force & ConnectionInfo.Force.NoCredentials) != ConnectionInfo.Force.NoCredentials)
+					if (_rdpVersion >= RdpVersion.RDC61 && (Force & ConnectionInfo.Force.NoCredentials) != ConnectionInfo.Force.NoCredentials)
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
@@ -388,7 +387,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					value = _connectionInfo.UseConsoleSession;
 				}
 						
-				if (_rdpVersion >= Versions.RDC61)
+				if (_rdpVersion >= RdpVersion.RDC61)
 				{
 					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strRdpSetConsoleSwitch, _rdpVersion), true);
 					_rdpClient.AdvancedSettings7.ConnectToAdministerServer = value;
@@ -644,7 +643,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
         }
 
-
         private void RDPEvent_OnFatalError(int errorCode)
 		{
 			Event_ErrorOccured(this, Convert.ToString(errorCode));
@@ -693,28 +691,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		private void RDPEvent_OnLeaveFullscreenMode()
 		{
 			Fullscreen = false;
-            _leaveFullscreenEvent?.Invoke(this, new EventArgs());
+			LeaveFullscreen?.Invoke(this, new EventArgs());
         }
         #endregion
 		
-        #region Public Events & Handlers
 		public delegate void LeaveFullscreenEventHandler(object sender, EventArgs e);
-		private LeaveFullscreenEventHandler _leaveFullscreenEvent;
-				
-		public event LeaveFullscreenEventHandler LeaveFullscreen
-		{
-			add
-			{
-				_leaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Combine(_leaveFullscreenEvent, value);
-			}
-			remove
-			{
-				_leaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Remove(_leaveFullscreenEvent, value);
-			}
-		}
-        #endregion
+		public event LeaveFullscreenEventHandler LeaveFullscreen;
 		
-        #region Enums
 		public enum Defaults
 		{
 			Colors = RdpColors.Colors16Bit,
@@ -722,7 +705,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			Resolution = RdpResolutions.FitToWindow,
 			Port = 3389
 		}
-        #endregion
 		
         #region Resolution
 		public static Rectangle GetResolutionRectangle(RdpResolutions resolution)
@@ -736,60 +718,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			{
 				return new Rectangle(0, 0, 0, 0);
 			}
-			else
-			{
-                return new Rectangle(0, 0, Convert.ToInt32(resolutionParts[0]), Convert.ToInt32(resolutionParts[1]));
-			}
+            return new Rectangle(0, 0, Convert.ToInt32(resolutionParts[0]), Convert.ToInt32(resolutionParts[1]));
 		}
-        #endregion
-
-        public static class Versions
-		{
-			public static readonly Version RDC60 = new Version(6, 0, 6000);
-			public static readonly Version RDC61 = new Version(6, 0, 6001);
-			public static readonly Version RDC70 = new Version(6, 1, 7600);
-			public static readonly Version RDC80 = new Version(6, 2, 9200);
-            public static readonly Version RDC81 = new Version(6, 3, 9600);
-		}
-		
-        #region Fatal Errors
-		public static class FatalErrors
-		{
-		    private static Hashtable _description;
-
-		    private static void InitDescription()
-            {
-                _description = new Hashtable
-                {
-                    {"0", "Language.strRdpErrorUnknown"},
-                    {"1", "Language.strRdpErrorCode1"},
-                    {"2", "Language.strRdpErrorOutOfMemory"},
-                    {"3", "Language.strRdpErrorWindowCreation"},
-                    {"4", "Language.strRdpErrorCode2"},
-                    {"5", "Language.strRdpErrorCode3"},
-                    {"6", "Language.strRdpErrorCode4"},
-                    {"7", "Language.strRdpErrorConnection"},
-                    {"100", "Language.strRdpErrorWinsock"}
-                };
-            }
-					
-			public static string GetError(string id)
-			{
-				try
-				{
-				    if (_description == null)
-                        InitDescription();
-
-				    return (string)_description?[id];
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpErrorGetFailure, ex);
-					return string.Format(Language.strRdpErrorUnknown, id);
-				}
-			}
-		}
-        #endregion
+		#endregion
 		
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

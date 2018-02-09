@@ -288,8 +288,10 @@ namespace mRemoteNG.Connection
                 var prot = (ProtocolBase)sender;
 
                 if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
-                if (Convert.ToInt32(errorMessage) > -1)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpProtocol.FatalErrors.GetError(errorMessage)));
+	            var errorMessageAsInt = Convert.ToInt32(errorMessage);
+
+				if (errorMessageAsInt > -1)
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpErrorTranslator.Translate(errorMessageAsInt)));
             }
             catch (Exception ex)
             {
