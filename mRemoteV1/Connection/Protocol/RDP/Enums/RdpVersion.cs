@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -22,4 +23,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
         Rdc9,
         Rdc10
 	}
+
+    public static class RdpVersionEnumExtensions
+    {
+        public static IEnumerable<RdpVersionEnum> GetAll(this RdpVersionEnum versionEnum)
+        {
+            return new[]
+            {
+                RdpVersionEnum.Rdc6,
+                RdpVersionEnum.Rdc7,
+                RdpVersionEnum.Rdc8,
+                RdpVersionEnum.Rdc9,
+                RdpVersionEnum.Rdc10
+            };
+        }
+    }
 }

@@ -42,7 +42,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		public RdpProtocol8()
 		{
 			Control = new AxMsRdpClient8NotSafeForScripting();
-		}
+		    RdpVersionEnum = RdpVersionEnum.Rdc8;
+        }
 
 		public override bool Initialize()
 		{

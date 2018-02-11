@@ -2,12 +2,17 @@
 {
 	public class RdpProtocolFactory
 	{
-		public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
+	    public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
+	    {
+	        return CreateProtocol(connectionInfo.RdpProtocolVersion);
+	    }
+
+        public ProtocolBase CreateProtocol(RdpVersionEnum version)
 		{
 			RdpProtocol6 newProtocol = null;
 
 			// ReSharper disable once SwitchStatementMissingSomeCases
-			switch (connectionInfo.RdpProtocolVersion)
+			switch (version)
 			{
 				case RdpVersionEnum.Rdc6:
 					newProtocol = new RdpProtocol6();

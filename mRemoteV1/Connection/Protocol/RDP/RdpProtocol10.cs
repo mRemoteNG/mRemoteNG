@@ -8,6 +8,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public RdpProtocol10()
         {
             Control = new AxMsRdpClient10NotSafeForScripting();
+            RdpVersionEnum = RdpVersionEnum.Rdc10;
         }
 
         protected override MsRdpClient6NotSafeForScripting CreateRdpClientControl()

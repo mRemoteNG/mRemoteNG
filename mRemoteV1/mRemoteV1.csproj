@@ -252,6 +252,7 @@
     <Compile Include="Connection\Protocol\RDP\RdpProtocol8.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpProtocol9.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpProtocolFactory.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpSupportTester.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
     <Compile Include="Credential\PlaceholderCredentialRecord.cs" />

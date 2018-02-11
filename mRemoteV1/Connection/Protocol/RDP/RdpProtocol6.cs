@@ -77,15 +77,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		}
 
         public bool LoadBalanceInfoUseUtf8 { get; set; }
-        #endregion
+
+	    public RdpVersionEnum RdpVersionEnum { get; protected set; }
+
+	    #endregion
 
         public RdpProtocol6()
         {
             Control = new AxMsRdpClient6NotSafeForScripting();
 	        Connecting += OnConnectingDebugMessage;
+            RdpVersionEnum = RdpVersionEnum.Rdc6;
         }
 
-		
 
         #region Public Methods
 		public override bool Initialize()
@@ -554,7 +557,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
 	    private void OnConnectingDebugMessage(object sender, EventArgs args)
 	    {
-	        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Using RDP version: {ConnectionInfo.RdpProtocolVersion}");
+	        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                $"Connection requested RDP version: '{ConnectionInfo.RdpProtocolVersion}'. Using RDP provider: '{sender.GetType().Name}'");
 	    }
         #endregion
 
