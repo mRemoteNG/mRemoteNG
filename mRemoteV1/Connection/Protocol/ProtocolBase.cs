@@ -3,29 +3,21 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Window;
 
 
 namespace mRemoteNG.Connection.Protocol
 {
 	public abstract class ProtocolBase
     {
-        #region Private Variables
-
-	    private UI.Window.ConnectionWindow _connectionWindow;
+	    private ConnectionWindow _connectionWindow;
         private InterfaceControl _interfaceControl;
-	    private ConnectingEventHandler ConnectingEvent;
-        private ConnectedEventHandler ConnectedEvent;
-        private DisconnectedEventHandler DisconnectedEvent;
-        private ErrorOccuredEventHandler ErrorOccuredEvent;
-        private ClosingEventHandler ClosingEvent;
-        private ClosedEventHandler ClosedEvent;
-        #endregion
 
         #region Public Properties
         #region Control
         private string Name { get; }
 
-	    protected UI.Window.ConnectionWindow ConnectionWindow
+	    protected ConnectionWindow ConnectionWindow
 		{
 			get { return _connectionWindow; }
 	        private set
@@ -43,7 +35,7 @@ namespace mRemoteNG.Connection.Protocol
 			set
 			{
 				_interfaceControl = value;
-				ConnectionWindow = _interfaceControl.GetContainerControl() as UI.Window.ConnectionWindow;
+				ConnectionWindow = _interfaceControl.GetContainerControl() as ConnectionWindow;
 			}
 		}
 
@@ -55,6 +47,7 @@ namespace mRemoteNG.Connection.Protocol
 
 	    public readonly System.Timers.Timer tmrReconnect = new System.Timers.Timer(2000);
         protected ReconnectGroup ReconnectGroup;
+        #endregion
 
         protected ProtocolBase(string name)
         {
@@ -65,11 +58,7 @@ namespace mRemoteNG.Connection.Protocol
         {
         }
 
-        #endregion
-
         #region Methods
-        //public abstract int GetDefaultPort();
-
         public virtual void Focus()
 		{
 			try
@@ -120,8 +109,7 @@ namespace mRemoteNG.Connection.Protocol
 		public virtual bool Connect()
 		{
 		    if (InterfaceControl.Info.Protocol == ProtocolType.RDP) return false;
-		    if (ConnectedEvent == null) return false;
-		    ConnectedEvent(this);
+		    Event_Connected(this);
 		    return true;
 		}
 				
@@ -140,7 +128,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		private void CloseBG()
 		{
-		    ClosedEvent?.Invoke(this);
+		    Event_Closed(this);
 		    try
 			{
 				tmrReconnect.Enabled = false;
@@ -225,83 +213,46 @@ namespace mRemoteNG.Connection.Protocol
         #endregion
 		
         #region Events
-		public delegate void ConnectingEventHandler(object sender);
-		public event ConnectingEventHandler Connecting
-		{
-			add { ConnectingEvent = (ConnectingEventHandler) Delegate.Combine(ConnectingEvent, value); }
-			remove { ConnectingEvent = (ConnectingEventHandler) Delegate.Remove(ConnectingEvent, value); }
-		}
+        public event EventHandler Connecting;
+        public event EventHandler Connected;
+        public event EventHandler Closing;
+        public event EventHandler Closed;
+		
+		public delegate void DisconnectedEventHandler(object sender, string disconnectedMessage);
+        public event DisconnectedEventHandler Disconnected;
+		
+		public delegate void ErrorOccuredEventHandler(object sender, string errorMessage);
+        public event ErrorOccuredEventHandler ErrorOccured;
 				
-		public delegate void ConnectedEventHandler(object sender);
-		public event ConnectedEventHandler Connected
+        protected void Event_Closing(object sender)
 		{
-			add { ConnectedEvent = (ConnectedEventHandler) Delegate.Combine(ConnectedEvent, value); }
-			remove { ConnectedEvent = (ConnectedEventHandler) Delegate.Remove(ConnectedEvent, value); }
-		}
-				
-		public delegate void DisconnectedEventHandler(object sender, string DisconnectedMessage);
-		public event DisconnectedEventHandler Disconnected
-		{
-			add { DisconnectedEvent = (DisconnectedEventHandler) Delegate.Combine(DisconnectedEvent, value); }
-			remove { DisconnectedEvent = (DisconnectedEventHandler) Delegate.Remove(DisconnectedEvent, value); }
-		}
-				
-		public delegate void ErrorOccuredEventHandler(object sender, string ErrorMessage);
-		public event ErrorOccuredEventHandler ErrorOccured
-		{
-			add { ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Combine(ErrorOccuredEvent, value); }
-			remove { ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Remove(ErrorOccuredEvent, value); }
-		}
-				
-		public delegate void ClosingEventHandler(object sender);
-		public event ClosingEventHandler Closing
-		{
-			add { ClosingEvent = (ClosingEventHandler) Delegate.Combine(ClosingEvent, value); }
-			remove { ClosingEvent = (ClosingEventHandler) Delegate.Remove(ClosingEvent, value); }
-		}
-				
-		public delegate void ClosedEventHandler(object sender);
-		public event ClosedEventHandler Closed
-		{
-			add { ClosedEvent = (ClosedEventHandler) Delegate.Combine(ClosedEvent, value); }
-			remove { ClosedEvent = (ClosedEventHandler) Delegate.Remove(ClosedEvent, value); }
-		}
-				
-				
-		public void Event_Closing(object sender)
-		{
-		    ClosingEvent?.Invoke(sender);
+		    Closing?.Invoke(sender, EventArgs.Empty);
 		}
 
 	    protected void Event_Closed(object sender)
 	    {
-	        ClosedEvent?.Invoke(sender);
+	        Closed?.Invoke(sender, EventArgs.Empty);
 	    }
 
 	    protected void Event_Connecting(object sender)
 	    {
-	        ConnectingEvent?.Invoke(sender);
+	        Connecting?.Invoke(sender, EventArgs.Empty);
 	    }
 
 	    protected void Event_Connected(object sender)
 	    {
-	        ConnectedEvent?.Invoke(sender);
+	        Connected?.Invoke(sender, EventArgs.Empty);
 	    }
 
-	    protected void Event_Disconnected(object sender, string DisconnectedMessage)
+	    protected void Event_Disconnected(object sender, string disconnectedMessage)
 	    {
-	        DisconnectedEvent?.Invoke(sender, DisconnectedMessage);
+	        Disconnected?.Invoke(sender, disconnectedMessage);
 	    }
 
-	    protected void Event_ErrorOccured(object sender, string ErrorMsg)
+	    protected void Event_ErrorOccured(object sender, string errorMsg)
 	    {
-	        ErrorOccuredEvent?.Invoke(sender, ErrorMsg);
+	        ErrorOccured?.Invoke(sender, errorMsg);
 	    }
-
-	    protected void Event_ReconnectGroupCloseClicked()
-		{
-			Close();
-		}
         #endregion
 	}
 }

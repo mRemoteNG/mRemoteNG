@@ -714,7 +714,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Protocols
-        public void Prot_Event_Closed(object sender)
+        public void Prot_Event_Closed(object sender, EventArgs args)
         {
             var protocolBase = sender as ProtocolBase;
             var tabPage = protocolBase?.InterfaceControl.Parent as TabPage;

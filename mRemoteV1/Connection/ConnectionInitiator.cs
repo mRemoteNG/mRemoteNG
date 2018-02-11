@@ -246,7 +246,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private static void Prot_Event_Closed(object sender)
+        private static void Prot_Event_Closed(object sender, EventArgs args)
         {
             try
             {
@@ -273,7 +273,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private static void Prot_Event_Connected(object sender)
+        private static void Prot_Event_Connected(object sender, EventArgs args)
         {
             var prot = (ProtocolBase)sender;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
