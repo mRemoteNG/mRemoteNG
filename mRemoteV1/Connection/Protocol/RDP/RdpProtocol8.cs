@@ -14,9 +14,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		* 
 		* Windows 8+ support RDP v8 out of the box.
 		*/
-	public class RdpProtocol8 : RdpProtocol6
+	public class RdpProtocol8 : RdpProtocol7
 	{
-		private MsRdpClient8NotSafeForScripting _rdpClient;
+		private MsRdpClient8NotSafeForScripting _rdpClient => (MsRdpClient8NotSafeForScripting)RdpClient;
 		private Size _controlBeginningSize;
 
 		public override bool SmartSize
@@ -59,8 +59,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
 			return true;
 		}
-		
-		public override void ResizeBegin(object sender, EventArgs e)
+
+	    protected override MsRdpClient6NotSafeForScripting CreateRdpClientControl()
+	    {
+            return (MsRdpClient6NotSafeForScripting)((AxMsRdpClient8NotSafeForScripting)Control).GetOcx();
+	    }
+
+        public override void ResizeBegin(object sender, EventArgs e)
 		{
 			_controlBeginningSize = Control.Size;
 		}
@@ -82,12 +87,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				ReconnectForResize();
 			}
 			_controlBeginningSize = Size.Empty;
-		}
-
-		protected override object CreateRdpClientControl()
-		{
-			_rdpClient = (MsRdpClient8NotSafeForScripting)((AxMsRdpClient8NotSafeForScripting) Control).GetOcx();
-			return _rdpClient;
 		}
 
 		private void ReconnectForResize()
@@ -118,10 +117,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				Control.Size = InterfaceControl.Size;
 				return true;
 			}
-			else
-			{
-				return false;
-			}
+		    return false;
 		}
 	}
 }

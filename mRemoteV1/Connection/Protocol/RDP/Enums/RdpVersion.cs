@@ -11,9 +11,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		public static readonly Version RDC81 = new Version(6, 3, 9600);
 	}
 
+    /// <summary>
+    /// Represents a version of the RDP Client
+    /// </summary>
 	public enum RdpVersionEnum
 	{
 		Rdc6,
-		Rdc8
+        Rdc7,
+		Rdc8,
+        Rdc9,
+        Rdc10
 	}
 }
