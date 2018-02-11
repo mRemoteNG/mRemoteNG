@@ -109,7 +109,7 @@ namespace mRemoteNG.Connection.Protocol
 		public virtual bool Connect()
 		{
 		    if (InterfaceControl.Info.Protocol == ProtocolType.RDP) return false;
-		    Event_Connected(this);
+		    RaiseConnectionConnectedEvent(this);
 		    return true;
 		}
 				
@@ -128,7 +128,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		private void CloseBG()
 		{
-		    Event_Closed(this);
+		    RaiseConnectionClosedEvent(this);
 		    try
 			{
 				tmrReconnect.Enabled = false;
@@ -224,32 +224,32 @@ namespace mRemoteNG.Connection.Protocol
 		public delegate void ErrorOccuredEventHandler(object sender, string errorMessage);
         public event ErrorOccuredEventHandler ErrorOccured;
 				
-        protected void Event_Closing(object sender)
+        protected void RaiseConnectionClosingEvent(object sender)
 		{
 		    Closing?.Invoke(sender, EventArgs.Empty);
 		}
 
-	    protected void Event_Closed(object sender)
+	    protected void RaiseConnectionClosedEvent(object sender)
 	    {
 	        Closed?.Invoke(sender, EventArgs.Empty);
 	    }
 
-	    protected void Event_Connecting(object sender)
+	    protected void RaiseConnectionConnectingEvent(object sender)
 	    {
 	        Connecting?.Invoke(sender, EventArgs.Empty);
 	    }
 
-	    protected void Event_Connected(object sender)
+	    protected void RaiseConnectionConnectedEvent(object sender)
 	    {
 	        Connected?.Invoke(sender, EventArgs.Empty);
 	    }
 
-	    protected void Event_Disconnected(object sender, string disconnectedMessage)
+	    protected void RaiseConnectionDisconnectedEvent(object sender, string disconnectedMessage)
 	    {
 	        Disconnected?.Invoke(sender, disconnectedMessage);
 	    }
 
-	    protected void Event_ErrorOccured(object sender, string errorMsg)
+	    protected void RaiseErrorOccuredEvent(object sender, string errorMsg)
 	    {
 	        ErrorOccured?.Invoke(sender, errorMsg);
 	    }

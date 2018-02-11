@@ -39,7 +39,7 @@ namespace mRemoteNG.Connection.Protocol
 	    #region Private Events & Handlers
 		private void ProcessExited(object sender, EventArgs e)
 		{
-            Event_Closed(this);
+            RaiseConnectionClosedEvent(this);
 		}
         #endregion
 				

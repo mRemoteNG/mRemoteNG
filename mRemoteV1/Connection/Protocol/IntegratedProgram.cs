@@ -169,7 +169,7 @@ namespace mRemoteNG.Connection.Protocol
         #region Private Methods
 		private void ProcessExited(object sender, EventArgs e)
 		{
-			Event_Closed(this);
+			RaiseConnectionClosedEvent(this);
 		}
         #endregion
 		

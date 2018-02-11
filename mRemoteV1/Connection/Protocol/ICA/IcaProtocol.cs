@@ -275,22 +275,22 @@ namespace mRemoteNG.Connection.Protocol.ICA
         #region Private Events & Handlers
 		private void ICAEvent_OnConnecting(object sender, EventArgs e)
 		{
-			Event_Connecting(this);
+			RaiseConnectionConnectingEvent(this);
 		}
 				
 		private void ICAEvent_OnConnected(object sender, EventArgs e)
 		{
-			Event_Connected(this);
+			RaiseConnectionConnectedEvent(this);
 		}
 				
 		private void ICAEvent_OnConnectFailed(object sender, EventArgs e)
 		{
-			Event_ErrorOccured(this, e.ToString());
+			RaiseErrorOccuredEvent(this, e.ToString());
 		}
 				
 		private void ICAEvent_OnDisconnect(object sender, EventArgs e)
 		{
-			Event_Disconnected(this, e.ToString());
+			RaiseConnectionDisconnectedEvent(this, e.ToString());
 					
 			if (Settings.Default.ReconnectOnDisconnect)
 			{

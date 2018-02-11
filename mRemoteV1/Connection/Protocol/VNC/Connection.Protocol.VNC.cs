@@ -180,14 +180,14 @@ namespace mRemoteNG.Connection.Protocol.VNC
         #region Private Events & Handlers
 		private void VNCEvent_Connected(object sender, EventArgs e)
 		{
-			Event_Connected(this);
+			RaiseConnectionConnectedEvent(this);
 			_VNC.AutoScroll = Info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
 		}
 				
 		private void VNCEvent_Disconnected(object sender, EventArgs e)
 		{
 		    FrmMain.ClipboardChanged -= VNCEvent_ClipboardChanged;
-            Event_Disconnected(sender, e.ToString());
+            RaiseConnectionDisconnectedEvent(sender, e.ToString());
 			Close();
 		}
 				
