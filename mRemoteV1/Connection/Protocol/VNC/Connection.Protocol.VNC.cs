@@ -10,7 +10,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
 {
 	public class ProtocolVNC : ProtocolBase
 	{
-        #region Properties
+		private VncSharp.RemoteDesktop _VNC;
+        
         public bool SmartSize
         {
             get { return _VNC.Scaled; }
@@ -22,16 +23,11 @@ namespace mRemoteNG.Connection.Protocol.VNC
 	        get { return _VNC.ViewOnly; }
 	        set { _VNC.ViewOnly = value; }
 	    }
-
-	    #endregion
 				
-        #region Private Declarations
-		private VncSharp.RemoteDesktop _VNC;
-		private ConnectionInfo Info;
-        #endregion
 				
         #region Public Methods
-		public ProtocolVNC()
+		public ProtocolVNC(ConnectionInfo connectionInfo)
+            : base(connectionInfo)
 		{
 			Control = new VncSharp.RemoteDesktop();
 		}
@@ -44,7 +40,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 			{
                 _VNC = (VncSharp.RemoteDesktop)Control;
 				
-				Info = InterfaceControl.Info;
+				Info = InterfaceControl.Protocol.Info;
 					
 				_VNC.VncPort = Info.Port;
 

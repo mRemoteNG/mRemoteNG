@@ -10,15 +10,12 @@ namespace mRemoteNG.Connection
 	public sealed partial class InterfaceControl
     {
         public ProtocolBase Protocol { get; set; }
-	    public ConnectionInfo Info { get; set; }
 
-
-		public InterfaceControl(Control parent, ProtocolBase protocol, ConnectionInfo info)
+		public InterfaceControl(Control parent, ProtocolBase protocol)
 		{
 			try
 			{
 				Protocol = protocol;
-				Info = info;
                 Parent = parent;
                 Location = new Point(0, 0);
                 Size = Parent.Size;

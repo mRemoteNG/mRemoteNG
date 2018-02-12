@@ -41,6 +41,7 @@ namespace mRemoteNG.Connection.Protocol
 
         protected Control Control { get; set; }
 
+        public ConnectionInfo Info { get; set; }
 	    #endregion
 
         public ConnectionInfo.Force Force { get; set; }
@@ -49,12 +50,19 @@ namespace mRemoteNG.Connection.Protocol
         protected ReconnectGroup ReconnectGroup;
         #endregion
 
-        protected ProtocolBase(string name)
+        protected ProtocolBase(ConnectionInfo connectionInfo, string name)
         {
+            if (connectionInfo == null)
+                throw new ArgumentNullException(nameof(connectionInfo));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+
+            Info = connectionInfo;
             Name = name;
         }
 
-        protected ProtocolBase()
+        protected ProtocolBase(ConnectionInfo connectionInfo)
+            : this(connectionInfo, "")
         {
         }
 
@@ -108,7 +116,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		public virtual bool Connect()
 		{
-		    if (InterfaceControl.Info.Protocol == ProtocolType.RDP) return false;
+		    if (Info.Protocol == ProtocolType.RDP) return false;
 		    RaiseConnectionConnectedEvent(this);
 		    return true;
 		}

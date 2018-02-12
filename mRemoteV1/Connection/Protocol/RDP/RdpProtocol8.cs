@@ -39,8 +39,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			}
 		}
 
-		public RdpProtocol8()
-		{
+		public RdpProtocol8(ConnectionInfo connectionInfo)
+		    : base(connectionInfo)
+        {
 			Control = new AxMsRdpClient8NotSafeForScripting();
 		    RdpVersionEnum = RdpVersionEnum.Rdc8;
         }
@@ -50,7 +51,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			base.Initialize();
 			try
 			{
-				_rdpClient.AdvancedSettings8.AudioQualityMode = (uint)ConnectionInfo.SoundQuality;
+				_rdpClient.AdvancedSettings8.AudioQualityMode = (uint)Info.SoundQuality;
 			}
 			catch (Exception ex)
 			{
@@ -95,10 +96,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			if (!LoginComplete)
 				return;
 
-			if (!InterfaceControl.Info.AutomaticResize)
+			if (!Info.AutomaticResize)
 				return;
 
-			if (!(InterfaceControl.Info.Resolution == RdpResolutions.FitToWindow | InterfaceControl.Info.Resolution == RdpResolutions.Fullscreen))
+			if (!(Info.Resolution == RdpResolutions.FitToWindow | Info.Resolution == RdpResolutions.Fullscreen))
 				return;
 
 			if (SmartSize)

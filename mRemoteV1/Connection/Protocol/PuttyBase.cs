@@ -36,6 +36,11 @@ namespace mRemoteNG.Connection.Protocol
 
 	    #endregion
 
+	    public PuttyBase(ConnectionInfo connectionInfo)
+	        : base(connectionInfo)
+        {
+	    }
+
 	    #region Private Events & Handlers
 		private void ProcessExited(object sender, EventArgs e)
 		{
@@ -61,9 +66,9 @@ namespace mRemoteNG.Connection.Protocol
 
 			    var arguments = new CommandLineArguments {EscapeForShell = false};
 
-			    arguments.Add("-load", InterfaceControl.Info.PuttySession);
+			    arguments.Add("-load", Info.PuttySession);
 						
-				if (!(InterfaceControl.Info is PuttySessionInfo))
+				if (!(Info is PuttySessionInfo))
 				{
 					arguments.Add("-" + PuttyProtocol);
 							
@@ -72,9 +77,9 @@ namespace mRemoteNG.Connection.Protocol
 						var username = "";
 						var password = "";
 
-						if (!string.IsNullOrEmpty(InterfaceControl.Info?.Username))
+						if (!string.IsNullOrEmpty(Info?.Username))
 						{
-							username = InterfaceControl.Info.Username;
+							username = Info.Username;
 						}
 						else
 						{
@@ -90,9 +95,9 @@ namespace mRemoteNG.Connection.Protocol
 						    }
 						}
 						
-						if (!string.IsNullOrEmpty(InterfaceControl.Info?.Password))
+						if (!string.IsNullOrEmpty(Info?.Password))
 						{
-							password = InterfaceControl.Info.Password;
+							password = Info.Password;
 						}
 						else
 						{
@@ -118,8 +123,8 @@ namespace mRemoteNG.Connection.Protocol
 						}
 					}
 							
-					arguments.Add("-P", InterfaceControl.Info.Port.ToString());
-					arguments.Add(InterfaceControl.Info.Hostname);
+					arguments.Add("-P", Info.Port.ToString());
+					arguments.Add(Info.Hostname);
 				}
 						
 				if (_isPuttyNg)

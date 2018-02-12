@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Specialized;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
@@ -21,9 +22,9 @@ namespace mRemoteNGTests.Connection.Protocol
         public void Setup()
         {
             _protocolList = new ProtocolList();
-            _protocol1 = new ProtocolTelnet();
-            _protocol2 = new ProtocolSSH2();
-            _protocol3 = new ProtocolVNC();
+            _protocol1 = new ProtocolTelnet(new ConnectionInfo());
+            _protocol2 = new ProtocolSSH2(new ConnectionInfo());
+            _protocol3 = new ProtocolVNC(new ConnectionInfo());
         }
 
         [TearDown]

@@ -22,35 +22,35 @@ namespace mRemoteNG.Connection.Protocol
 					newProtocol = new RdpProtocolFactory().CreateProtocol(connectionInfo);
 					break;
 				case ProtocolType.VNC:
-					newProtocol = new ProtocolVNC();
+					newProtocol = new ProtocolVNC(connectionInfo);
 					break;
 				case ProtocolType.SSH1:
-					newProtocol = new ProtocolSSH1();
+					newProtocol = new ProtocolSSH1(connectionInfo);
 					break;
 				case ProtocolType.SSH2:
-					newProtocol = new ProtocolSSH2();
+					newProtocol = new ProtocolSSH2(connectionInfo);
 					break;
 				case ProtocolType.Telnet:
-					newProtocol = new ProtocolTelnet();
+					newProtocol = new ProtocolTelnet(connectionInfo);
 					break;
 				case ProtocolType.Rlogin:
-					newProtocol = new ProtocolRlogin();
+					newProtocol = new ProtocolRlogin(connectionInfo);
 					break;
 				case ProtocolType.RAW:
-					newProtocol = new RawProtocol();
+					newProtocol = new RawProtocol(connectionInfo);
 					break;
 				case ProtocolType.HTTP:
-					newProtocol = new ProtocolHTTP(connectionInfo.RenderingEngine);
+					newProtocol = new ProtocolHTTP(connectionInfo, connectionInfo.RenderingEngine);
 					break;
 				case ProtocolType.HTTPS:
-					newProtocol = new ProtocolHTTPS(connectionInfo.RenderingEngine);
+					newProtocol = new ProtocolHTTPS(connectionInfo, connectionInfo.RenderingEngine);
 					break;
 				case ProtocolType.ICA:
-					newProtocol = new IcaProtocol();
+					newProtocol = new IcaProtocol(connectionInfo);
 					((IcaProtocol) newProtocol).tmrReconnect.Elapsed += ((IcaProtocol) newProtocol).tmrReconnect_Elapsed;
 					break;
 				case ProtocolType.IntApp:
-					newProtocol = new IntegratedProgram();
+					newProtocol = new IntegratedProgram(connectionInfo);
 					if (connectionInfo.ExtApp == "")
 					{
 						throw (new Exception(Language.strNoExtAppDefined));

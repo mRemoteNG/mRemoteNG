@@ -81,7 +81,7 @@ namespace mRemoteNGTests.Connection
         {
             var eventWasCalled = false;
             _connectionInfo.PropertyChanged += (sender, args) => eventWasCalled = true;
-            _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
+            _connectionInfo.OpenConnections.Add(new ProtocolSSH2(_connectionInfo));
             Assert.That(eventWasCalled);
         }
 
@@ -90,7 +90,7 @@ namespace mRemoteNGTests.Connection
         {
             var nameOfModifiedProperty = "";
             _connectionInfo.PropertyChanged += (sender, args) => nameOfModifiedProperty = args.PropertyName;
-            _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
+            _connectionInfo.OpenConnections.Add(new ProtocolSSH2(_connectionInfo));
             Assert.That(nameOfModifiedProperty, Is.EqualTo("OpenConnections"));
         }
 

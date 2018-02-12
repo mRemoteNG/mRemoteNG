@@ -437,7 +437,7 @@ namespace mRemoteNG.UI.Menu
                 foreach (var i in icList)
                 {
                     i.Protocol.Close();
-                    ConnectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
+                    ConnectionInitiator.OpenConnection(i.Protocol.Info, ConnectionInfo.Force.DoNotJump);
                 }
 
                 // throw it on the garbage collector

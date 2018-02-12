@@ -5,7 +5,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 {
     public class RdpProtocol7 : RdpProtocol6
     {
-        public RdpProtocol7()
+        public RdpProtocol7(ConnectionInfo connectionInfo)
+            : base(connectionInfo)
         {
             Control = new AxMsRdpClient7NotSafeForScripting();
             RdpVersionEnum = RdpVersionEnum.Rdc7;

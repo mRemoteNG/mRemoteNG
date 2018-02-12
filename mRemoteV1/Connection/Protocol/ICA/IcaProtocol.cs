@@ -16,11 +16,11 @@ namespace mRemoteNG.Connection.Protocol.ICA
 	public class IcaProtocol : ProtocolBase
 	{
 		private AxICAClient _icaClient;
-		private ConnectionInfo _info;
         private readonly FrmMain _frmMain = FrmMain.Default;
 		
         #region Public Methods
-		public IcaProtocol()
+		public IcaProtocol(ConnectionInfo connectionInfo)
+            : base(connectionInfo)
 		{
 			try
 			{
@@ -39,7 +39,6 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			try
 			{
 				_icaClient = (AxICAClient)Control;
-				_info = InterfaceControl.Info;
 				_icaClient.CreateControl();
 						
 				while (!_icaClient.Created)
@@ -48,7 +47,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					Application.DoEvents();
 				}
 
-				_icaClient.Address = _info.Hostname;
+				_icaClient.Address = Info.Hostname;
 				SetCredentials();
 				SetResolution();
 				SetColors();
@@ -78,8 +77,8 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				_icaClient.Hotkey11Shift = null;
 				_icaClient.Hotkey11Char = null;
 						
-				_icaClient.PersistentCacheEnabled = _info.CacheBitmaps;
-				_icaClient.Title = _info.Name;
+				_icaClient.PersistentCacheEnabled = Info.CacheBitmaps;
+				_icaClient.Title = Info.Name;
 				return true;
 			}
 			catch (Exception ex)
@@ -117,9 +116,9 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 
-			    var user = _info?.Username ?? "";
-			    var pass = _info?.Password ?? "";
-			    var dom = _info?.Domain ?? "";
+			    var user = Info?.Username ?? "";
+			    var pass = Info?.Password ?? "";
+			    var dom = Info?.Domain ?? "";
 
 				if (string.IsNullOrEmpty(user))
 				{
@@ -187,22 +186,22 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 						
-				if (InterfaceControl.Info.Resolution == RdpResolutions.FitToWindow)
+				if (Info.Resolution == RdpResolutions.FitToWindow)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
 				}
-				else if (InterfaceControl.Info.Resolution == RdpResolutions.SmartSize)
+				else if (Info.Resolution == RdpResolutions.SmartSize)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width, InterfaceControl.Size.Height, 0);
 				}
-				else if (InterfaceControl.Info.Resolution == RdpResolutions.Fullscreen)
+				else if (Info.Resolution == RdpResolutions.Fullscreen)
 				{
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(_frmMain).Bounds.Width, Screen.FromControl(_frmMain).Bounds.Height, 0);
 					_icaClient.FullScreenWindow();
 				}
 				else
 				{
-					var resolution = _info.Resolution.GetResolutionRectangle();
+					var resolution = Info.Resolution.GetResolutionRectangle();
 					_icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width, resolution.Height, 0);
 				}
 			}
@@ -215,7 +214,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		private void SetColors()
 		{
 		    // ReSharper disable once SwitchStatementMissingSomeCases
-			switch (_info.Colors)
+			switch (Info.Colors)
 			{
 				case RdpColors.Colors256:
 					_icaClient.SetProp("DesiredColor", "2");
@@ -235,7 +234,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		private void SetSecurity()
 		{
 		    // ReSharper disable once SwitchStatementMissingSomeCases
-			switch (_info.ICAEncryptionStrength)
+			switch (Info.ICAEncryptionStrength)
 			{
 				case EncryptionStrength.Encr128BitLogonOnly:
 					_icaClient.Encrypt = true;
@@ -312,7 +311,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, ElapsedEventArgs e)
 		{
-			var srvReady = PortScanner.IsPortOpen(_info.Hostname, Convert.ToString(_info.Port));
+			var srvReady = PortScanner.IsPortOpen(Info.Hostname, Convert.ToString(Info.Port));
 					
 			ReconnectGroup.ServerReady = srvReady;
 

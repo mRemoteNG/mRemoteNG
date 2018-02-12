@@ -160,7 +160,7 @@ namespace mRemoteNG.UI.Window
             else
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-	            FrmMain.Default.SelectedConnection = interfaceControl?.Info;
+	            FrmMain.Default.SelectedConnection = interfaceControl?.Protocol.Info;
             }
         }
         #endregion
@@ -178,7 +178,7 @@ namespace mRemoteNG.UI.Window
             if(ThemeManager.getInstance().ThemingActive)
             {
                 base.ApplyTheme();
-                this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+                vsToolStripExtender = new VisualStudioToolStripExtender(components);
                 vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
                 vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
                 TabController.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
@@ -377,7 +377,7 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = (InterfaceControl)TabController.SelectedTab?.Tag;
                 if (interfaceControl == null) return;
 
-                if (interfaceControl.Info.Protocol == ProtocolType.RDP)
+                if (interfaceControl.Protocol.Info.Protocol == ProtocolType.RDP)
                 {
                     var rdp = (RdpProtocol6)interfaceControl.Protocol;
                     cmenTabFullscreen.Visible = true;
@@ -391,7 +391,7 @@ namespace mRemoteNG.UI.Window
                     cmenTabSmartSize.Visible = false;
                 }
 
-                if (interfaceControl.Info.Protocol == ProtocolType.VNC)
+                if (interfaceControl.Protocol.Info.Protocol == ProtocolType.VNC)
                 {
                     var vnc = (ProtocolVNC)interfaceControl.Protocol;
                     cmenTabSendSpecialKeys.Visible = true;
@@ -412,7 +412,7 @@ namespace mRemoteNG.UI.Window
                     cmenTabTransferFile.Visible = false;
                 }
 
-                if (interfaceControl.Info.Protocol == ProtocolType.SSH1 | interfaceControl.Info.Protocol == ProtocolType.SSH2)
+                if (interfaceControl.Protocol.Info.Protocol == ProtocolType.SSH1 | interfaceControl.Protocol.Info.Protocol == ProtocolType.SSH2)
                 {
                     cmenTabTransferFile.Visible = true;
                 }
@@ -468,9 +468,9 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
 
-                if (interfaceControl.Info.Protocol == ProtocolType.SSH1 | interfaceControl.Info.Protocol == ProtocolType.SSH2)
+                if (interfaceControl.Protocol.Info.Protocol == ProtocolType.SSH1 | interfaceControl.Protocol.Info.Protocol == ProtocolType.SSH2)
                     SshTransferFile();
-                else if (interfaceControl.Info.Protocol == ProtocolType.VNC)
+                else if (interfaceControl.Protocol.Info.Protocol == ProtocolType.VNC)
                     VncTransferFile();
             }
             catch (Exception ex)
@@ -487,7 +487,7 @@ namespace mRemoteNG.UI.Window
                 if (interfaceControl == null) return;
 
                 Windows.Show(WindowType.SSHTransfer);
-                var connectionInfo = interfaceControl.Info;
+                var connectionInfo = interfaceControl.Protocol.Info;
 
                 Windows.SshtransferForm.Hostname = connectionInfo.Hostname;
                 Windows.SshtransferForm.Username = connectionInfo.Username;
@@ -640,7 +640,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                externalTool.Start(interfaceControl?.Info);
+                externalTool.Start(interfaceControl?.Protocol.Info);
             }
             catch (Exception ex)
             {
@@ -667,7 +667,7 @@ namespace mRemoteNG.UI.Window
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
-                _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(interfaceControl.Protocol.Info, ConnectionInfo.Force.DoNotJump);
                 _ignoreChangeSelectedTabClick = false;
             }
             catch (Exception ex)
@@ -683,7 +683,7 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
                 interfaceControl.Protocol.Close();
-                _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                _connectionInitiator.OpenConnection(interfaceControl.Protocol.Info, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {
@@ -844,7 +844,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                if (interfaceControl?.Info.Protocol == ProtocolType.VNC)
+                if (interfaceControl?.Protocol.Info.Protocol == ProtocolType.VNC)
                     ((ProtocolVNC)interfaceControl.Protocol).RefreshScreen();
             }
             catch (Exception ex)
@@ -868,7 +868,7 @@ namespace mRemoteNG.UI.Window
                         if (tabClientRectangle.Contains(MousePosition))
                         {
                             var interfaceControl = selectedTab.Tag as InterfaceControl;
-                            if (interfaceControl?.Info?.Protocol == ProtocolType.RDP)
+                            if (interfaceControl?.Protocol.Info?.Protocol == ProtocolType.RDP)
                             {
                                 interfaceControl.Protocol.Focus();
                                 return; // Do not pass to base class

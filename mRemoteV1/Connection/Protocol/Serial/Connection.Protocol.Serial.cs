@@ -2,10 +2,10 @@ namespace mRemoteNG.Connection.Protocol.Serial
 {
 	public class ProtocolSerial : PuttyBase
 	{
-				
-		public ProtocolSerial()
-		{
-			this.PuttyProtocol = Putty_Protocol.serial;
+		public ProtocolSerial(ConnectionInfo connectionInfo)
+		    : base(connectionInfo)
+        {
+			PuttyProtocol = Putty_Protocol.serial;
 		}
 				
 		public enum Defaults

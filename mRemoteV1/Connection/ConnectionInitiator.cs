@@ -100,7 +100,7 @@ namespace mRemoteNG.Connection
                 var connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);
                 SetConnectionEventHandlers(newProtocol);
-                BuildConnectionInterfaceController(connectionInfo, newProtocol, connectionContainer);
+                BuildConnectionInterfaceController(newProtocol, connectionContainer);
 
                 newProtocol.Force = force;
 
@@ -144,7 +144,7 @@ namespace mRemoteNG.Connection
                 {
                     var ic = t.Controls[0] as InterfaceControl;
                     if (ic == null) continue;
-                    if (ic.Info == connectionInfo)
+                    if (ic.Protocol.Info == connectionInfo)
                     {
                         return ic;
                     }
@@ -213,9 +213,9 @@ namespace mRemoteNG.Connection
             newProtocol.ErrorOccured += Prot_Event_ErrorOccured;
         }
 
-        private static void BuildConnectionInterfaceController(ConnectionInfo connectionInfo, ProtocolBase newProtocol, Control connectionContainer)
+        private static void BuildConnectionInterfaceController(ProtocolBase newProtocol, Control connectionContainer)
         {
-            newProtocol.InterfaceControl = new InterfaceControl(connectionContainer, newProtocol, connectionInfo);
+            newProtocol.InterfaceControl = new InterfaceControl(connectionContainer, newProtocol);
         }
         #endregion
 
@@ -233,7 +233,7 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, disconnectedMessage), true);
 
                 var prot = (ProtocolBase)sender;
-                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
+                if (prot.Info.Protocol != ProtocolType.RDP) return;
                 var reasonCode = disconnectedMessage.Split("\r\n".ToCharArray())[0];
                 var desc = disconnectedMessage.Replace("\r\n", " ");
 
@@ -253,19 +253,20 @@ namespace mRemoteNG.Connection
                 var prot = (ProtocolBase)sender;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent, true);
                 string connDetail;
-                if (prot.InterfaceControl.Info.Hostname == "" && prot.InterfaceControl.Info.Protocol == ProtocolType.IntApp)
-                    connDetail = prot.InterfaceControl.Info.ExtApp;
-                else if (prot.InterfaceControl.Info.Hostname != "")
-                    connDetail = prot.InterfaceControl.Info.Hostname;
+                if (prot.Info.Hostname == "" && prot.Info.Protocol == ProtocolType.IntApp)
+                    connDetail = prot.Info.ExtApp;
+                else if (prot.Info.Hostname != "")
+                    connDetail = prot.Info.Hostname;
                 else
                     connDetail = "UNKNOWN";
 
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, prot.InterfaceControl.Info.Protocol, Environment.UserName));
-                prot.InterfaceControl.Info.OpenConnections.Remove(prot);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, 
+                    string.Format(Language.strConnenctionClosedByUser, connDetail, prot.Info.Protocol, Environment.UserName));
+                prot.Info.OpenConnections.Remove(prot);
 
-                if (prot.InterfaceControl.Info.PostExtApp == "") return;
-                var extA = Runtime.ExternalToolsService.GetExtAppByName(prot.InterfaceControl.Info.PostExtApp);
-                extA?.Start(prot.InterfaceControl.Info);
+                if (prot.Info.PostExtApp == "") return;
+                var extA = Runtime.ExternalToolsService.GetExtAppByName(prot.Info.PostExtApp);
+                extA?.Start(prot.Info);
             }
             catch (Exception ex)
             {
@@ -277,7 +278,8 @@ namespace mRemoteNG.Connection
         {
             var prot = (ProtocolBase)sender;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol, Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, 
+                string.Format(Language.strConnectionEventConnectedDetail, prot.Info.Hostname, prot.Info.Protocol, Environment.UserName, prot.Info.Description, prot.Info.UserField));
         }
 
         private static void Prot_Event_ErrorOccured(object sender, string errorMessage)
@@ -287,11 +289,12 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventErrorOccured, true);
                 var prot = (ProtocolBase)sender;
 
-                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
+                if (prot.Info.Protocol != ProtocolType.RDP) return;
 	            var errorMessageAsInt = Convert.ToInt32(errorMessage);
 
 				if (errorMessageAsInt > -1)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpErrorTranslator.Translate(errorMessageAsInt)));
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, 
+                        string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpErrorTranslator.Translate(errorMessageAsInt)));
             }
             catch (Exception ex)
             {

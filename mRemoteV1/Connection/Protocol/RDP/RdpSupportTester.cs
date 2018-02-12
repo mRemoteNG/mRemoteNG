@@ -13,11 +13,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public List<RdpVersionEnum> GetSupportedRdpVersions()
         {
             var supportedVersions = new List<RdpVersionEnum>();
+            var connectionInfo = new ConnectionInfo();
             var rdpFactory = new RdpProtocolFactory();
 
             foreach (var version in RdpVersionEnum.Rdc6.GetAll())
             {
-                var protocol = rdpFactory.CreateProtocol(version);
+                var protocol = rdpFactory.CreateProtocol(version, connectionInfo);
                 if (RdpClientIsSupported(protocol))
                     supportedVersions.Add(version);
             }
@@ -29,7 +30,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             try
             {
-                rdpProtocol.Initialize();
+                return rdpProtocol.Initialize();
             }
             catch (Exception)
             {
@@ -39,8 +40,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 rdpProtocol.Close();
             }
-
-            return true;
         }
     }
 }

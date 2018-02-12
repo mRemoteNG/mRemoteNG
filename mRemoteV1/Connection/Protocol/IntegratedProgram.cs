@@ -11,27 +11,30 @@ namespace mRemoteNG.Connection.Protocol
 {
 	public class IntegratedProgram : ProtocolBase
 	{
-        #region Private Fields
         private ExternalTool _externalTool;
         private IntPtr _handle;
         private Process _process;
-        #endregion
+
+	    public IntegratedProgram(ConnectionInfo connectionInfo)
+            : base(connectionInfo)
+	    {
+	    }
 
         #region Public Methods
 		public override bool Initialize()
 		{
-		    if (InterfaceControl.Info == null)
+		    if (Info == null)
 				return base.Initialize();
 
-		    _externalTool = Runtime.ExternalToolsService.GetExtAppByName(InterfaceControl.Info.ExtApp);
+		    _externalTool = Runtime.ExternalToolsService.GetExtAppByName(Info.ExtApp);
 
 			if (_externalTool == null)
 			{
-				Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg, string.Format(Language.CouldNotFindExternalTool, InterfaceControl.Info.ExtApp));
+				Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg, string.Format(Language.CouldNotFindExternalTool, Info.ExtApp));
 				return false;
 			}
 
-			_externalTool.ConnectionInfo = InterfaceControl.Info;
+			_externalTool.ConnectionInfo = Info;
 
 		    return base.Initialize();
 		}
@@ -44,7 +47,7 @@ namespace mRemoteNG.Connection.Protocol
 
                 if (_externalTool.TryIntegrate == false)
 				{
-					_externalTool.Start(InterfaceControl.Info);
+					_externalTool.Start(Info);
                     /* Don't call close here... There's nothing for the override to do in this case since 
                      * _process is not created in this scenario. When returning false, ProtocolBase.Close()
                      * will be called - which is just going to call IntegratedProgram.Close() again anyway...

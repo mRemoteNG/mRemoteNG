@@ -9,20 +9,19 @@ namespace mRemoteNG.Connection.Protocol.Http
 {
 	public class HTTPBase : ProtocolBase
 	{
-        #region Private Properties
 		private Control wBrowser;
+		private string tabTitle;
 	    protected string httpOrS;
 	    protected int defaultPort;
-		private string tabTitle;
-        #endregion
 				
         #region Public Methods
 
-	    protected HTTPBase(RenderingEngine RenderingEngine)
-		{
+	    protected HTTPBase(ConnectionInfo connectionInfo, RenderingEngine renderingEngine) 
+            : base(connectionInfo)
+	    {
 			try
 			{
-				if (RenderingEngine == RenderingEngine.Gecko)
+				if (renderingEngine == RenderingEngine.Gecko)
 				{
                     if(!Xpcom.IsInitialized)
                         Xpcom.Initialize("Firefox");
@@ -58,7 +57,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			{
                 wBrowser = Control;
 						
-				if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+				if (Info.RenderingEngine == RenderingEngine.Gecko)
 				{
 				    var GeckoBrowser = (GeckoWebBrowser) wBrowser;
                     if (GeckoBrowser != null)
@@ -96,7 +95,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 		{
 			try
 			{
-				var strHost = InterfaceControl.Info.Hostname;
+				var strHost = Info.Hostname;
                 /* 
                  * Commenting out since this codes doesn't actually do anything at this time...
                  * Possibly related to MR-221 and/or MR-533 ????
@@ -108,7 +107,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(InterfaceControl.Info.Username + ":" + InterfaceControl.Info.Password)) + Environment.NewLine;
 				}
 				*/	
-				if (InterfaceControl.Info.Port != defaultPort)
+				if (Info.Port != defaultPort)
 				{
 					if (strHost.EndsWith("/"))
 					{
@@ -120,13 +119,13 @@ namespace mRemoteNG.Connection.Protocol.Http
 						strHost = httpOrS + "://" + strHost;
 					}
 							
-					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+					if (Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-                        ((GeckoWebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
+                        ((GeckoWebBrowser)wBrowser).Navigate(strHost + ":" + Info.Port);
 					}
 					else
 					{
-                        ((WebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
+                        ((WebBrowser)wBrowser).Navigate(strHost + ":" + Info.Port);
 					}
 				}
 				else
@@ -136,7 +135,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 						strHost = httpOrS + "://" + strHost;
 					}
 							
-					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+					if (Info.RenderingEngine == RenderingEngine.Gecko)
 					{
 						((GeckoWebBrowser)wBrowser).Navigate(strHost);
 					}
@@ -181,7 +180,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			    if (tabP == null) return;
 			    string shortTitle;
 							
-			    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+			    if (Info.RenderingEngine == RenderingEngine.Gecko)
 			    {
 			        if (((GeckoWebBrowser) wBrowser).DocumentTitle.Length >= 15)
 			        {
@@ -229,7 +228,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 if (tabP == null) return;
                 string shortTitle;
 
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                if (Info.RenderingEngine == RenderingEngine.Gecko)
                 {
                     if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
                     {
