@@ -204,7 +204,9 @@ namespace mRemoteNG.Config.Serializers
         private ConnectionInfo GetConnectionInfoFromXml(XmlNode xmlnode)
         {
             if (xmlnode.Attributes == null) return null;
-            var connectionInfo = new ConnectionInfo();
+
+			var connectionId = xmlnode.Attributes["Id"]?.Value ?? Guid.NewGuid().ToString();
+			var connectionInfo = new ConnectionInfo(connectionId);
 
             try
             {
@@ -491,7 +493,6 @@ namespace mRemoteNG.Config.Serializers
 
                 if (_confVersion >= 2.6)
                 {
-                    connectionInfo.ConstantID = xmlnode.Attributes["Id"]?.Value ?? connectionInfo.ConstantID;
                     connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)MiscTools.StringToEnum(typeof(RdpProtocol.RDPSoundQuality), Convert.ToString(xmlnode.Attributes["SoundQuality"].Value));
                     connectionInfo.Inheritance.SoundQuality = bool.Parse(xmlnode.Attributes["InheritSoundQuality"].Value);
                     connectionInfo.RDPMinutesToIdleTimeout = Convert.ToInt32(xmlnode.Attributes["RDPMinutesToIdleTimeout"]?.Value ?? "0");

@@ -15,7 +15,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
+	public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
     {
         public ConnectionTreeModel Deserialize(DataTable table)
         {
@@ -46,14 +46,16 @@ namespace mRemoteNG.Config.Serializers
 
         private ConnectionInfo DeserializeConnectionInfo(DataRow row)
         {
-            var connectionInfo = new ConnectionInfo();
+	        var connectionId = row["ConstantID"] as string ?? Guid.NewGuid().ToString();
+			var connectionInfo = new ConnectionInfo(connectionId);
             PopulateConnectionInfoFromDatarow(row, connectionInfo);
             return connectionInfo;
         }
 
         private ContainerInfo DeserializeContainerInfo(DataRow row)
         {
-            var containerInfo = new ContainerInfo();
+	        var containerId = row["ConstantID"] as string ?? Guid.NewGuid().ToString();
+            var containerInfo = new ContainerInfo(containerId);
             PopulateConnectionInfoFromDatarow(row, containerInfo);
             return containerInfo;
         }
@@ -61,7 +63,6 @@ namespace mRemoteNG.Config.Serializers
         private void PopulateConnectionInfoFromDatarow(DataRow dataRow, ConnectionInfo connectionInfo)
         {
             connectionInfo.Name = (string)dataRow["Name"];
-            connectionInfo.ConstantID = (string)dataRow["ConstantID"];
 
             // This throws a NPE - Parent is a connectionInfo object which will be null at this point.
             // The Parent object is linked properly later in CreateNodeHierarchy()
@@ -187,7 +188,7 @@ namespace mRemoteNG.Config.Serializers
         private ConnectionTreeModel CreateNodeHierarchy(List<ConnectionInfo> connectionList, DataTable dataTable)
         {
             var connectionTreeModel = new ConnectionTreeModel();
-            var rootNode = new RootNodeInfo(RootNodeType.Connection) {ConstantID = "0"};
+            var rootNode = new RootNodeInfo(RootNodeType.Connection, "0");
             connectionTreeModel.AddRootNode(rootNode);
 
             foreach (DataRow row in dataTable.Rows)

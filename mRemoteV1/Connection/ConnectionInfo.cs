@@ -14,7 +14,6 @@ using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -52,7 +51,14 @@ namespace mRemoteNG.Connection
 	    #endregion
 
         #region Constructors
-        public ConnectionInfo()
+
+	    public ConnectionInfo()
+			: this(Guid.NewGuid().ToString())
+	    {
+	    }
+
+        public ConnectionInfo(string uniqueId)
+			: base(uniqueId)
 		{
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
@@ -65,12 +71,6 @@ namespace mRemoteNG.Connection
             SetNonBrowsablePropertiesDefaults();
             SetDefaults();
 		}
-			
-		public ConnectionInfo(ContainerInfo parent) : this()
-		{
-			IsContainer = true;
-			parent.AddChild(this);
-		}
         #endregion
 			
         #region Public Methods
@@ -78,7 +78,6 @@ namespace mRemoteNG.Connection
 		{
 		    var newConnectionInfo = new ConnectionInfo();
             newConnectionInfo.CopyFrom(this);
-			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
 		    newConnectionInfo.Inheritance = Inheritance.Clone();
 			return newConnectionInfo;
 		}
@@ -317,7 +316,6 @@ namespace mRemoteNG.Connection
 
         private void SetMiscDefaults()
         {
-            ConstantID = MiscTools.CreateConstantID();
             PreExtApp = Settings.Default.ConDefaultPreExtApp;
             PostExtApp = Settings.Default.ConDefaultPostExtApp;
             MacAddress = Settings.Default.ConDefaultMacAddress;

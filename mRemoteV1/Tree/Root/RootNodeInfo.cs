@@ -1,8 +1,7 @@
-using mRemoteNG.Tools;
+using System;
 using System.ComponentModel;
-using System.Security;
 using mRemoteNG.Container;
-using mRemoteNG.Security;
+using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.Tree.Root
@@ -13,10 +12,16 @@ namespace mRemoteNG.Tree.Root
 	    private string _name;
 	    private string _customPassword = "";
 
-	    public RootNodeInfo(RootNodeType rootType)
+	    public RootNodeInfo(RootNodeType rootType, string uniqueId)
+			: base(uniqueId)
 		{
             _name = Language.strConnections;
 			Type = rootType;
+		}
+
+		public RootNodeInfo(RootNodeType rootType)
+			: this(rootType, Guid.NewGuid().ToString())
+		{
 		}
 		
         #region Public Properties

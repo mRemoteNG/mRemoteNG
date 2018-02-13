@@ -498,7 +498,7 @@ namespace mRemoteNG.Connection
 
         #region Misc
         [Browsable(false)]
-        public string ConstantID { get; set; }
+        public string ConstantID { get; /*set;*/ }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolBefore"),
@@ -657,6 +657,11 @@ namespace mRemoteNG.Connection
         }
         #endregion
         #endregion
+
+	    protected AbstractConnectionRecord(string uniqueId)
+	    {
+		    ConstantID = uniqueId.ThrowIfNullOrEmpty(nameof(uniqueId));
+	    }
 
         protected virtual TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {

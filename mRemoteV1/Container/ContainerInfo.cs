@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using mRemoteNG.Connection;
 using System.ComponentModel;
 using System.Linq;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 
 namespace mRemoteNG.Container
 {
-    [DefaultProperty("Name")]
+	[DefaultProperty("Name")]
     public class ContainerInfo : ConnectionInfo, INotifyCollectionChanged
 	{
         [Browsable(false)]
@@ -20,11 +19,17 @@ namespace mRemoteNG.Container
         public bool IsExpanded { get; set; }
 
 
-        public ContainerInfo()
+        public ContainerInfo(string uniqueId)
+			: base(uniqueId)
         {
             SetDefaults();
             IsContainer = true;
         }
+
+		public ContainerInfo()
+			: this(Guid.NewGuid().ToString())
+		{
+		}
 
         public override TreeNodeType GetTreeNodeType()
         {
@@ -178,7 +183,6 @@ namespace mRemoteNG.Container
 		{
             var newContainer = new ContainerInfo();
             newContainer.CopyFrom(this);
-            newContainer.ConstantID = MiscTools.CreateConstantID();
             newContainer.OpenConnections = new ProtocolList();
             newContainer.Inheritance = Inheritance.Clone();
             foreach (var child in Children.ToArray())

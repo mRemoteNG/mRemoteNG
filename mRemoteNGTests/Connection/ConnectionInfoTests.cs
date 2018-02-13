@@ -28,22 +28,6 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
-        public void CreatingConnectionInfoWithParentSetsTheParentProperty()
-        {
-            var container = new ContainerInfo();
-            var connectionInfo = new ConnectionInfo(container);
-            Assert.That(connectionInfo.Parent, Is.EqualTo(container));
-        }
-
-        [Test]
-        public void CreatingConnectionInfoWithParentAddsToTheParentsChildList()
-        {
-            var container = new ContainerInfo();
-            var connectionInfo = new ConnectionInfo(container);
-            Assert.That(container.Children, Does.Contain(connectionInfo));
-        }
-
-        [Test]
         public void CopyCreatesMemberwiseCopy()
         {
             _connectionInfo.Domain = TestDomain;
