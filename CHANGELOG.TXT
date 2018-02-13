@@ -3,6 +3,7 @@
 Features/Enhancements:
 ----------------------
 #625: Added ability to import mRemoteNG formatted CSV files
+#648: The port scan ping timeout is now configurable
 
 Fixes:
 ------
