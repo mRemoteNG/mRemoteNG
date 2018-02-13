@@ -7508,6 +7508,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Timeout (seconds).
+        /// </summary>
+        internal static string TimeoutInSeconds {
+            get {
+                return ResourceManager.GetString("TimeoutInSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unlock.
         /// </summary>
         internal static string Unlock {

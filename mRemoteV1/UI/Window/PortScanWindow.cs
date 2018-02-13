@@ -90,6 +90,7 @@ namespace mRemoteNG.UI.Window
                 olvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
 	            ShowImportControls(true);
 	            cbProtocol.SelectedIndex = 0;
+		        numericSelectorTimeout.Value = 5;
 	        }
 	        catch (Exception ex)
 	        {
@@ -147,6 +148,7 @@ namespace mRemoteNG.UI.Window
 			clmClosedPorts.Text = Language.strClosedPorts;
 			Label2.Text = $"{Language.strEndPort}:";
 			Label1.Text = $"{Language.strStartPort}:";
+			lblTimeout.Text = $"{Language.TimeoutInSeconds}";
 			TabText = Language.strMenuPortScan;
 			Text = Language.strMenuPortScan;
 		}
@@ -176,7 +178,7 @@ namespace mRemoteNG.UI.Window
 				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
 				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
 				
-				_portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
+				_portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value, ((int)numericSelectorTimeout.Value)*1000);
 						
 				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
 				_portScanner.HostScanned += PortScanner_HostScanned;

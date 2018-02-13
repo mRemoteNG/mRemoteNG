@@ -2631,4 +2631,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
+  <data name="TimeoutInSeconds" xml:space="preserve">
+    <value>Timeout (seconds)</value>
+  </data>
 </root>
