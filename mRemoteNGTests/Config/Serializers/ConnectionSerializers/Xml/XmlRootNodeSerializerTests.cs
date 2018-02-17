@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
+namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
     public class XmlRootNodeSerializerTests
     {

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -9,7 +10,7 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
+namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
 	public class XmlConnectionsDocumentEncryptorTests
     {

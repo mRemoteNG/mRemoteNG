@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -9,7 +10,7 @@ using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers
+namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
     public class XmlConnectionsDeserializerTests
     {

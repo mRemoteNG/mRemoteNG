@@ -1,13 +1,15 @@
 ﻿using System;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
+using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Config.Serializers.MiscSerializers
+namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 {
 	public class CsvConnectionsSerializerMremotengFormatTests
     {
@@ -82,6 +84,18 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             Assert.Throws<ArgumentNullException>(() => serializer.Serialize((ConnectionTreeModel)null));
         }
 
+        [Test]
+        public void FoldersAreSerialized()
+        {
+            var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
+            var container = BuildContainer();
+            var csv = serializer.Serialize(container);
+            Assert.That(csv, Does.Match(container.Name));
+            Assert.That(csv, Does.Match(container.Username));
+            Assert.That(csv, Does.Match(container.Domain));
+            Assert.That(csv, Does.Match(container.Password));
+        }
+
         private ConnectionInfo BuildConnectionInfo()
         {
             return new ConnectionInfo
@@ -91,6 +105,17 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 				Domain = Domain,
 				Password = Password,
                 Inheritance = {Colors = true}
+            };
+        }
+
+        private ContainerInfo BuildContainer()
+        {
+            return new ContainerInfo
+            {
+                Name = "ThisIsAContainer",
+                Username = "BlahBlah1",
+                Domain = "aklkskkksh8",
+                Password = "qwerasl;kdjf87"
             };
         }
     }

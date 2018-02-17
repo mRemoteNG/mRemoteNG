@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.MiscSerializers;
+using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -14,7 +14,7 @@ using mRemoteNG.Security;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Config.Serializers.MiscSerializers
+namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 {
     public class CsvConnectionsDeserializerMremotengFormatTests
     {

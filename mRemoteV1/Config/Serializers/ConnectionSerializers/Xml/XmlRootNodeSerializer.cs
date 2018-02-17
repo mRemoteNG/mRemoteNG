@@ -2,8 +2,7 @@
 using mRemoteNG.Security;
 using mRemoteNG.Tree.Root;
 
-
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.Xml
 {
     public class XmlRootNodeSerializer
     {

@@ -5,6 +5,7 @@ using mRemoteNG.Config.Serializers;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using System.IO;
+using mRemoteNG.Config.Serializers.Xml;
 
 namespace mRemoteNG.Config.Connections
 {

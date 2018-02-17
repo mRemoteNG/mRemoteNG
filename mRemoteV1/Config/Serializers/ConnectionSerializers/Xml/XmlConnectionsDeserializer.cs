@@ -19,7 +19,7 @@ using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.Xml
 {
 	public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
     {

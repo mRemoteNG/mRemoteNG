@@ -11,7 +11,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-namespace mRemoteNG.Config.Serializers.MiscSerializers
+namespace mRemoteNG.Config.Serializers.Csv
 {
     public class CsvConnectionsDeserializerMremotengFormat : IDeserializer<string, ConnectionTreeModel>
     {

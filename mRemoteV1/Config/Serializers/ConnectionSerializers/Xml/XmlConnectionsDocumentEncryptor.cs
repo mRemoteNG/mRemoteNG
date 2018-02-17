@@ -2,8 +2,7 @@
 using System.Xml.Linq;
 using mRemoteNG.Security;
 
-
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.Xml
 {
     public class XmlConnectionsDocumentEncryptor
     {

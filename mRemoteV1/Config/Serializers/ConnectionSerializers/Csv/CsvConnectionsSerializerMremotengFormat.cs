@@ -7,7 +7,7 @@ using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.Csv
 {
 	public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
     {
