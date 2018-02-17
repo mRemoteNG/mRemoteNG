@@ -4,16 +4,16 @@ using System.Linq;
 
 namespace mRemoteNG.Tools
 {
-	public class Maybe<T> : IEnumerable<T>
+	public class Optional<T> : IEnumerable<T>
 	{
 		private readonly T[] _maybe;
 
-		public Maybe()
+		public Optional()
 		{
 			_maybe = new T[0];
 		}
 
-		public Maybe(T value)
+		public Optional(T value)
 		{
 			_maybe = value != null 
 				? new[] {value} 
@@ -35,16 +35,16 @@ namespace mRemoteNG.Tools
 	        return _maybe.Any() ? _maybe.First().ToString() : "";
 	    }
 
-	    public static implicit operator Maybe<T>(T value)
+	    public static implicit operator Optional<T>(T value)
 	    {
-	        return new Maybe<T>(value);
+	        return new Optional<T>(value);
 	    }
 
-        public static Maybe<TOut> FromNullable<TOut>(TOut? value) where TOut : struct
+        public static Optional<TOut> FromNullable<TOut>(TOut? value) where TOut : struct
 	    {
 	        return value.HasValue
-                ? new Maybe<TOut>(value.Value)
-                : new Maybe<TOut>();
+                ? new Optional<TOut>(value.Value)
+                : new Optional<TOut>();
 	    }
 	}
 }

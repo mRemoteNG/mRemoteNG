@@ -227,7 +227,7 @@ namespace mRemoteNG.Connection
         public event EventHandler<ConnectionsLoadedEventArgs> ConnectionsLoaded;
         public event EventHandler<ConnectionsSavedEventArgs> ConnectionsSaved;
 
-        private void RaiseConnectionsLoadedEvent(Maybe<ConnectionTreeModel> previousTreeModel, ConnectionTreeModel newTreeModel,
+        private void RaiseConnectionsLoadedEvent(Optional<ConnectionTreeModel> previousTreeModel, ConnectionTreeModel newTreeModel,
             bool previousSourceWasDatabase, bool newSourceIsDatabase,
             string newSourcePath)
         {

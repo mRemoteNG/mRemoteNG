@@ -3,12 +3,12 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Tools
 {
-	public class MaybeTests
+	public class OptionalTests
 	{
 		[Test]
 		public void MaybeReturnsEmptyListWhenGivenNullValue()
 		{
-			var sut = new Maybe<object>(null);
+			var sut = new Optional<object>(null);
 			Assert.That(sut, Is.Empty);
 		}
 
@@ -16,7 +16,7 @@ namespace mRemoteNGTests.Tools
 		public void MaybeReturnsValueIfNotNull()
 		{
 			var expected = new object();
-			var sut = new Maybe<object>(expected);
+			var sut = new Optional<object>(expected);
 			Assert.That(sut, Has.Member(expected));
 		}
 

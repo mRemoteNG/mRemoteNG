@@ -5,20 +5,20 @@ namespace mRemoteNG.Tools
 {
 	public static class Extensions
 	{
-		public static Maybe<T> Maybe<T>(this T value)
+		public static Optional<T> Maybe<T>(this T value)
 		{
-			return new Maybe<T>(value);
+			return new Optional<T>(value);
 		}
 
-	    public static Maybe<U> MaybeParse<T, U>(this T value, Func<T, U> parseFunc)
+	    public static Optional<U> MaybeParse<T, U>(this T value, Func<T, U> parseFunc)
 	    {
 	        try
 	        {
-	            return new Maybe<U>(parseFunc(value));
+	            return new Optional<U>(parseFunc(value));
 	        }
 	        catch
 	        {
-	            return new Maybe<U>();
+	            return new Optional<U>();
 	        }
 	    }
 
