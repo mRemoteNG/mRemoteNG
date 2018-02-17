@@ -4,6 +4,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -19,10 +20,8 @@ namespace mRemoteNG.Config.Serializers.Csv
 
         public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter, ICredentialRepositoryList credentialRepositoryList)
         {
-            if (saveFilter == null)
-                throw new ArgumentNullException(nameof(saveFilter));
-            if (credentialRepositoryList == null)
-                throw new ArgumentNullException(nameof(credentialRepositoryList));
+            saveFilter.ThrowIfNull(nameof(saveFilter));
+            credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
 
             _saveFilter = saveFilter;
             _credentialRepositoryList = credentialRepositoryList;
@@ -30,8 +29,7 @@ namespace mRemoteNG.Config.Serializers.Csv
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            if (connectionTreeModel == null)
-                throw new ArgumentNullException(nameof(connectionTreeModel));
+            connectionTreeModel.ThrowIfNull(nameof(connectionTreeModel));
 
             var rootNode = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return Serialize(rootNode);
@@ -39,8 +37,7 @@ namespace mRemoteNG.Config.Serializers.Csv
 
         public string Serialize(ConnectionInfo serializationTarget)
         {
-            if (serializationTarget == null)
-                throw new ArgumentNullException(nameof(serializationTarget));
+            serializationTarget.ThrowIfNull(nameof(serializationTarget));
 
             _csv = "";
             _serializationTarget = serializationTarget;
