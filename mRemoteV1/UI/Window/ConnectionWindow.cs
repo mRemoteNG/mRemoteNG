@@ -727,6 +727,9 @@ namespace mRemoteNG.UI.Window
         private delegate void CloseTabDelegate(TabPage tabToBeClosed);
         private void CloseTab(TabPage tabToBeClosed)
         {
+            if (tabToBeClosed.Disposing || tabToBeClosed.IsDisposed)
+                return;
+
             if (TabController.InvokeRequired)
             {
                 CloseTabDelegate s = CloseTab;
