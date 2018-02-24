@@ -69,26 +69,6 @@ namespace mRemoteNG.Config.Serializers.Csv
             return root;
         }
 
-        private ContainerInfo ParseConnectionFolder(string folderString, ContainerInfo rootContainer)
-        {
-            var containerNames = folderString.Split('\\');
-            var parentContainer = rootContainer;
-
-            for (var i = containerNames.Length - 2; i >= 0; i--)
-            {
-                var containerName = containerNames[i];
-                var container = parentContainer.Children.OfType<ContainerInfo>().FirstOrDefault(info => info.Name == containerName);
-                if (container == null)
-                {
-                    container = new ContainerInfo {Name = containerName};
-                    parentContainer.AddChild(container);
-                }
-                parentContainer = container;
-            }
-
-            return parentContainer;
-        }
-
         private ConnectionInfo ParseConnectionInfo(IList<string> headers, string[] connectionCsv)
         {
             var nodeType = headers.Contains("NodeType")

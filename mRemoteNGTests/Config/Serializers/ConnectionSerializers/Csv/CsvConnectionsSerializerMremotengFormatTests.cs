@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
@@ -114,6 +115,19 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             Assert.That(csv, Does.Match(container.Domain));
             Assert.That(csv, Does.Match(container.Password));
             Assert.That(csv, Does.Contain(TreeNodeType.Container.ToString()));
+        }
+
+        [Test]
+        public void SerializationIncludesRawInheritedValuesIfObjectInheritsFromParentOutsideOfSerializationScope()
+        {
+            var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
+            var treeModel = new ConnectionTreeModelBuilder().Build();
+            var serializationTarget = treeModel.GetRecursiveChildList().First(info => info.Name == "folder3");
+            var csv = serializer.Serialize(serializationTarget);
+            var lineWithFolder3 = csv.Split(new[] {Environment.NewLine}, StringSplitOptions.None).First(s => s.Contains(serializationTarget.Name));
+            Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Username));
+            Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Domain));
+            Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Password));
         }
 
         private ConnectionInfo BuildConnectionInfo()

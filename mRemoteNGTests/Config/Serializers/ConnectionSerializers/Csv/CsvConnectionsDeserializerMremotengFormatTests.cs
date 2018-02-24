@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
