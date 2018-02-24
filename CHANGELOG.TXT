@@ -1,13 +1,9 @@
-1.76.0 Alpha 3 (2018-xx-xx):
+1.76.1 Alpha 3 (2018-02-24):
 
 Features/Enhancements:
 ----------------------
 #625: Added ability to import mRemoteNG formatted CSV files
 #648: The port scan ping timeout is now configurable
-
-Fixes:
-------
-
 
 
 1.76.0 Alpha 2 (2018-02-01):
