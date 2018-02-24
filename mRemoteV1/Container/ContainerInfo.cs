@@ -18,12 +18,13 @@ namespace mRemoteNG.Container
         [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
         public bool IsExpanded { get; set; }
 
+        [Browsable(false)]
+	    public override bool IsContainer { get { return true; } set {} }
 
-        public ContainerInfo(string uniqueId)
+	    public ContainerInfo(string uniqueId)
 			: base(uniqueId)
         {
             SetDefaults();
-            IsContainer = true;
         }
 
 		public ContainerInfo()

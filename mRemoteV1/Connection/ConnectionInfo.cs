@@ -31,7 +31,7 @@ namespace mRemoteNG.Connection
 	    public ProtocolList OpenConnections { get; protected set; }
 
 	    [Browsable(false)]
-        public bool IsContainer { get; set; }
+        public virtual bool IsContainer { get; set; }
 
 	    [Browsable(false)]
         public bool IsDefault { get; set; }
