@@ -6,6 +6,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
+using mRemoteNGTests.TestHelpers;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -28,6 +29,24 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             credRecord.Password.Returns(Password.ConvertToSecureString());
             _credentialRepositoryList = Substitute.For<ICredentialRepositoryList>();
             _credentialRepositoryList.GetCredentialRecord(new Guid()).ReturnsForAnyArgs(credRecord);
+        }
+
+        [Test]
+        public void SerializesNodeId()
+        {
+            var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
+            var connectionInfo = BuildConnectionInfo();
+            var csv = serializer.Serialize(connectionInfo);
+            Assert.That(csv, Does.Match(connectionInfo.ConstantID));
+        }
+
+        [Test]
+        public void DoesntSerializeTheRootNode()
+        {
+            var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
+            var treeModel = new ConnectionTreeModelBuilder().Build();
+            var csv = serializer.Serialize(treeModel);
+            Assert.That(csv, Does.Not.Match($"{treeModel.RootNodes[0].ConstantID};.*;{TreeNodeType.Root}"));
         }
 
         [TestCase(Username)]
@@ -94,6 +113,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             Assert.That(csv, Does.Match(container.Username));
             Assert.That(csv, Does.Match(container.Domain));
             Assert.That(csv, Does.Match(container.Password));
+            Assert.That(csv, Does.Contain(TreeNodeType.Container.ToString()));
         }
 
         private ConnectionInfo BuildConnectionInfo()
@@ -112,10 +132,10 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         {
             return new ContainerInfo
             {
-                Name = "ThisIsAContainer",
+                Name = "MyFolder",
                 Username = "BlahBlah1",
                 Domain = "aklkskkksh8",
-                Password = "qwerasl;kdjf87"
+                Password = "qweraslkdjf87"
             };
         }
     }

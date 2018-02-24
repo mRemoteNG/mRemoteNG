@@ -17,10 +17,10 @@ namespace mRemoteNG.Config.Serializers.Csv
     {
         public ConnectionTreeModel Deserialize(string serializedData)
         {
-            var root = new RootNodeInfo(RootNodeType.Connection);
-
             var lines = serializedData.Split(new []{"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
             var csvHeaders = new List<string>();
+            // used to map a connectioninfo to it's parent's GUID
+            var parentMapping = new Dictionary<ConnectionInfo, string>();
 
             for (var lineNumber = 0; lineNumber < lines.Length; lineNumber++)
             {
@@ -30,14 +30,43 @@ namespace mRemoteNG.Config.Serializers.Csv
                 else
                 {
                     var connectionInfo = ParseConnectionInfo(csvHeaders, line);
-                    var folder = ParseConnectionFolder(line[csvHeaders.IndexOf("Folder")], root);
-                    folder.AddChild(connectionInfo);
+                    parentMapping.Add(connectionInfo, line[csvHeaders.IndexOf("Parent")]);
                 }
             }
 
+            var root = CreateTreeStructure(parentMapping);
             var connectionTreeModel = new ConnectionTreeModel();
             connectionTreeModel.AddRootNode(root);
             return connectionTreeModel;
+        }
+
+        private RootNodeInfo CreateTreeStructure(Dictionary<ConnectionInfo, string> parentMapping)
+        {
+            var root = new RootNodeInfo(RootNodeType.Connection);
+
+            foreach (var node in parentMapping)
+            {
+                // no parent mapped, add to root
+                if (string.IsNullOrEmpty(node.Value))
+                    root.AddChild(node.Key);
+
+                // search for parent in the list by GUID
+                var parent = parentMapping
+                    .Keys
+                    .OfType<ContainerInfo>()
+                    .FirstOrDefault(info => info.ConstantID == node.Value);
+
+                if (parent != null)
+                {
+                    parent.AddChild(node.Key);
+                }
+                else
+                {
+                    root.AddChild(node.Key);
+                }
+            }
+
+            return root;
         }
 
         private ContainerInfo ParseConnectionFolder(string folderString, ContainerInfo rootContainer)
@@ -62,7 +91,17 @@ namespace mRemoteNG.Config.Serializers.Csv
 
         private ConnectionInfo ParseConnectionInfo(IList<string> headers, string[] connectionCsv)
         {
-            var connectionRecord = new ConnectionInfo();
+            var nodeType = headers.Contains("NodeType")
+                ? (TreeNodeType)Enum.Parse(typeof(TreeNodeType), connectionCsv[headers.IndexOf("NodeType")], true) 
+                : TreeNodeType.Connection;
+
+            var nodeId = headers.Contains("Id")
+                ? connectionCsv[headers.IndexOf("Id")]
+                : Guid.NewGuid().ToString();
+
+            var connectionRecord = nodeType == TreeNodeType.Connection
+                ? new ConnectionInfo(nodeId)
+                : new ContainerInfo(nodeId);
 
             connectionRecord.Name = headers.Contains("Name") ? connectionCsv[headers.IndexOf("Name")] : "";
             connectionRecord.Description = headers.Contains("Description") ? connectionCsv[headers.IndexOf("Description")] : "";

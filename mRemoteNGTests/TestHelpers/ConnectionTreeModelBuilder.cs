@@ -7,6 +7,14 @@ namespace mRemoteNGTests.TestHelpers
 {
     public class ConnectionTreeModelBuilder
     {
+        /// <summary>
+        /// Builds a tree which looks like:
+        /// Root
+        /// |- folder1
+        /// |   |- con1
+        /// |- con2
+        /// </summary>
+        /// <returns></returns>
         public ConnectionTreeModel Build()
         {
             var model = new ConnectionTreeModel();

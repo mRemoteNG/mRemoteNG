@@ -11,6 +11,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNGTests.TestHelpers;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -48,6 +49,22 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             var connection = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
             var propertyValue = typeof(ConnectionInfoInheritance).GetProperty(propertyToCheck)?.GetValue(connection?.Inheritance);
             return propertyValue;
+        }
+
+        [Test]
+        public void TreeStructureDeserializedCorrectly()
+        {
+            //Root
+            // |- folder1
+            // |   |- Con1
+            // |- Con2
+            var treeModel = new ConnectionTreeModelBuilder().Build();
+            var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
+            var csv = serializer.Serialize(treeModel);
+            var deserializedConnections = _deserializer.Deserialize(csv);
+            var con1 = deserializedConnections.GetRecursiveChildList().First(info => info.Name == "Con1");
+            var folder1 = deserializedConnections.GetRecursiveChildList().First(info => info.Name == "folder1");
+            Assert.That(con1.Parent, Is.EqualTo(folder1));
         }
 
         internal static ConnectionInfo GetTestConnection()
