@@ -5,6 +5,10 @@ Features/Enhancements:
 #625: Added ability to import mRemoteNG formatted CSV files
 #648: The port scan ping timeout is now configurable
 
+Fixes:
+------
+Fixed a few Xml serialization bugs that would occur if boolean values weren't capitalized
+
 
 1.76.0 Alpha 2 (2018-02-01):
 
