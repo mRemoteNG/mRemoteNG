@@ -187,7 +187,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                             if (_confVersion >= 0.9)
                                 containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
                             if (_confVersion >= 0.8)
-                                containerInfo.IsExpanded = xmlNode.Attributes?["Expanded"].Value == "True";
+                            {
+                                var expandedValue = xmlNode.Attributes?["Expanded"].Value ?? "";
+                                containerInfo.IsExpanded = bool.Parse(expandedValue);
+                            }
 
                             parentContainer.AddChild(containerInfo);
                             AddNodesFromXmlRecursive(xmlNode, containerInfo);
@@ -222,7 +225,9 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                     if (_confVersion < 1.1) //1.0 - 0.1
                     {
-                        connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) ? RdpProtocol.RDPResolutions.Fullscreen : RdpProtocol.RDPResolutions.FitToWindow;
+                        connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value)
+                            ? RdpProtocol.RDPResolutions.Fullscreen
+                            : RdpProtocol.RDPResolutions.FitToWindow;
                     }
 
                     if (_confVersion <= 2.6) // 0.2 - 2.6
@@ -260,7 +265,9 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     if (_confVersion < 0.7)
                     {
-                        connectionInfo.Port = Convert.ToInt32(Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) ? xmlnode.Attributes["VNCPort"].Value : xmlnode.Attributes["RDPPort"].Value);
+                        connectionInfo.Port = Convert.ToInt32(Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) 
+                            ? xmlnode.Attributes["VNCPort"].Value 
+                            : xmlnode.Attributes["RDPPort"].Value);
                     }
 
                     connectionInfo.UseConsoleSession = bool.Parse(xmlnode.Attributes["ConnectToConsole"].Value);

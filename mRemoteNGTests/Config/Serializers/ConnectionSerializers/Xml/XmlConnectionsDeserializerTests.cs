@@ -105,6 +105,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(folder22.Inheritance.Username, Is.True);
         }
 
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        public void ExpandedPropertyGetsDeserialized(Datagram testData)
+        {
+            Setup(testData.ConfCons, testData.Password);
+            var folder1 = GetFolderNamed("Folder1", _connectionTreeModel.GetRecursiveChildList());
+            Assert.That(folder1.IsExpanded, Is.True);
+        }
+
         private bool ContainsNodeNamed(string name, IEnumerable<ConnectionInfo> list)
         {
             return list.Any(node => node.Name == name);
