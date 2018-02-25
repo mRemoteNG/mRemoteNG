@@ -8,6 +8,7 @@ param (
     $ConfigurationName,
     
     [string]
+    [Parameter(Mandatory=$true)]
     # The code signing certificate to use when signing the files.
     $CertificatePath
 )
