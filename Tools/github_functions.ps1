@@ -1,5 +1,6 @@
 $githubUrl = 'https://api.github.com'
-
+# GitHub doesn't support the default powershell protocol (TLS 1.0)
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 function Publish-GitHubRelease {
     param (
