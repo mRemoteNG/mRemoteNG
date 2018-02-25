@@ -114,6 +114,7 @@
     <Compile Include="Config\DataProviders\FileBackupCreatorTests.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderTests.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackupTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\ValidateXmlSchemas.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializerTests.cs" />
     <Compile Include="Config\CredentialHarvesterTests.cs" />
     <Compile Include="Config\CredentialRecordLoaderTests.cs" />

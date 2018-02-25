@@ -71,7 +71,8 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 2.6)
                 {
-                    if (rootXmlElement?.Attributes["FullFileEncryption"].Value == "True")
+                    var fullFileEncryptionValue = rootXmlElement?.Attributes["FullFileEncryption"].Value ?? "";
+                    if (bool.Parse(fullFileEncryptionValue))
                     {
                         var decryptedContent = _decryptor.Decrypt(rootXmlElement.InnerText);
                         rootXmlElement.InnerXml = decryptedContent;

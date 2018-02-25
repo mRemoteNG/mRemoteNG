@@ -8,12 +8,14 @@ namespace mRemoteNG.Config.Serializers.Xml
     {
         public XElement SerializeRootNodeInfo(RootNodeInfo rootNodeInfo, ICryptographyProvider cryptographyProvider, bool fullFileEncryption = false)
         {
-            var element = new XElement("Connections");
+            XNamespace xmlNamespace = "http://mremoteng.org";
+            var element = new XElement(xmlNamespace + "Connections");
+            element.Add(new XAttribute(XNamespace.Xmlns+"mrng", xmlNamespace));
             element.Add(new XAttribute(XName.Get("Name"), rootNodeInfo.Name));
             element.Add(new XAttribute(XName.Get("EncryptionEngine"), cryptographyProvider.CipherEngine));
             element.Add(new XAttribute(XName.Get("BlockCipherMode"), cryptographyProvider.CipherMode));
             element.Add(new XAttribute(XName.Get("KdfIterations"), cryptographyProvider.KeyDerivationIterations));
-            element.Add(new XAttribute(XName.Get("FullFileEncryption"), fullFileEncryption.ToString()));
+            element.Add(new XAttribute(XName.Get("FullFileEncryption"), fullFileEncryption.ToString().ToLowerInvariant()));
             element.Add(CreateProtectedAttribute(rootNodeInfo, cryptographyProvider));
             element.Add(new XAttribute(XName.Get("ConfVersion"), "2.6"));
             return element;

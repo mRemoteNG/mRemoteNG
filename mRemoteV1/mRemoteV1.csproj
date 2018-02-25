@@ -964,9 +964,10 @@
     <None Include="Schemas\mremoteng_confcons_v2_7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\mremoteng_confcons_v2_6.xsd">
+    <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Schemas\mremoteng_credrepo_list_v1_0.xsd">
       <SubType>Designer</SubType>
     </None>

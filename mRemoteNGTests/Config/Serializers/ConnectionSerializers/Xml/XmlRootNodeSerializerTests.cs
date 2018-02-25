@@ -76,7 +76,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         {
             var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, fullFileEncryption);
             var attributeValue = element.Attribute(XName.Get("FullFileEncryption"))?.Value;
-            Assert.That(attributeValue, Is.EqualTo(fullFileEncryption.ToString()));
+            Assert.That(bool.Parse(attributeValue), Is.EqualTo(fullFileEncryption));
         }
 
         [TestCase("", "ThisIsNotProtected")]

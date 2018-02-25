@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema id="mremoteng_confcons_v2_6"
     targetNamespace="http://mremoteng.org"
-    elementFormDefault="qualified"
     xmlns="http://mremoteng.org"
     xmlns:mrng="http://mremoteng.org"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="unqualified"
 >
 
   
   <xs:element name="Connections">
     <xs:complexType>
-      <xs:sequence>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
         <xs:element name="Node" type="mrng:connectioninfo" />
       </xs:sequence>
       <xs:attribute name="Name" type="xs:string" use="required" />
-      <xs:attribute name="Export" type="xs:boolean" use="required" />
       <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
       <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
       <xs:attribute name="KdfIterations" type="xs:int" use="optional" />
@@ -31,6 +30,7 @@
     </xs:sequence>
     <xs:attribute name="Name" type="xs:string" use="required" />
     <xs:attribute name="Type" type="xs:string" use="required" />
+    <xs:attribute name="Expanded" type="xs:boolean" use="optional" />
     <xs:attribute name="Descr" type="xs:string" use="required" />
     <xs:attribute name="Icon" type="xs:string" use="required" />
     <xs:attribute name="Panel" type="xs:string" use="required" />
