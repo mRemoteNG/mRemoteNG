@@ -4,7 +4,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-    public class XmlRootNodeSerializer
+	public class XmlRootNodeSerializer
     {
         public XElement SerializeRootNodeInfo(RootNodeInfo rootNodeInfo, ICryptographyProvider cryptographyProvider, bool fullFileEncryption = false)
         {
@@ -12,7 +12,8 @@ namespace mRemoteNG.Config.Serializers.Xml
             var element = new XElement(xmlNamespace + "Connections");
             element.Add(new XAttribute(XNamespace.Xmlns+"mrng", xmlNamespace));
             element.Add(new XAttribute(XName.Get("Name"), rootNodeInfo.Name));
-            element.Add(new XAttribute(XName.Get("EncryptionEngine"), cryptographyProvider.CipherEngine));
+			element.Add(new XAttribute(XName.Get("Export"), "false"));
+			element.Add(new XAttribute(XName.Get("EncryptionEngine"), cryptographyProvider.CipherEngine));
             element.Add(new XAttribute(XName.Get("BlockCipherMode"), cryptographyProvider.CipherMode));
             element.Add(new XAttribute(XName.Get("KdfIterations"), cryptographyProvider.KeyDerivationIterations));
             element.Add(new XAttribute(XName.Get("FullFileEncryption"), fullFileEncryption.ToString().ToLowerInvariant()));
