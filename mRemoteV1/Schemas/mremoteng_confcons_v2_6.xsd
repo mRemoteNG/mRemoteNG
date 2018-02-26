@@ -14,6 +14,7 @@
         <xs:element name="Node" type="mrng:connectioninfo" />
       </xs:sequence>
       <xs:attribute name="Name" type="xs:string" use="required" />
+      <xs:attribute name="Export" type="xs:boolean" use="required" />
       <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
       <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
       <xs:attribute name="KdfIterations" type="xs:int" use="optional" />
