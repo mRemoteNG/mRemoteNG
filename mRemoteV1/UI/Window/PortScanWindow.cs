@@ -7,7 +7,6 @@ using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
-using static mRemoteNG.Tools.MiscTools;
 
 namespace mRemoteNG.UI.Window
 {
@@ -129,7 +128,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void btnImport_Click(object sender, EventArgs e)
 		{
-            ProtocolType protocol = (ProtocolType)StringToEnum(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
+            ProtocolType protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
 		    importSelectedHosts(protocol);
             DialogResult = DialogResult.OK;
 			Close();

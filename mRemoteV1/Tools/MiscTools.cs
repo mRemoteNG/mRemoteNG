@@ -12,7 +12,7 @@ using static System.String;
 
 namespace mRemoteNG.Tools
 {
-    public static class MiscTools
+	public static class MiscTools
 	{
 		public static Icon GetIconFromFile(string FileName)
 		{
@@ -68,13 +68,6 @@ namespace mRemoteNG.Tools
 		{
 			return Text.Replace("\'", "\'\'");
 		}
-		
-
-		public static object StringToEnum(Type t, string value)
-		{
-			return Enum.Parse(t, value);
-		}
-
 
         public static string GetExceptionMessageRecursive(Exception ex)
         {
