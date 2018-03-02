@@ -7,6 +7,7 @@ using System.Threading;
 using System.Globalization;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
@@ -22,6 +23,7 @@ namespace mRemoteNG.Config.Settings
         private readonly QuickConnectToolStrip _quickConnectToolStrip;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 	    private readonly MultiSshToolStrip _multiSshToolStrip;
+	    private readonly IConnectionInitiator _connectionInitiator;
 
         private FrmMain MainForm { get; }
 
@@ -31,26 +33,17 @@ namespace mRemoteNG.Config.Settings
             MessageCollector messageCollector, 
             QuickConnectToolStrip quickConnectToolStrip, 
             ExternalToolsToolStrip externalToolsToolStrip,
-            MultiSshToolStrip multiSshToolStrip)
+            MultiSshToolStrip multiSshToolStrip,
+            IConnectionInitiator connectionInitiator)
 		{
-            if (mainForm == null)
-                throw new ArgumentNullException(nameof(mainForm));
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-            if (quickConnectToolStrip == null)
-                throw new ArgumentNullException(nameof(quickConnectToolStrip));
-            if (externalToolsToolStrip == null)
-                throw new ArgumentNullException(nameof(externalToolsToolStrip));
-            if (multiSshToolStrip == null)
-                throw new ArgumentNullException(nameof(multiSshToolStrip));
-
-            MainForm = mainForm;
-	        _messageCollector = messageCollector;
-	        _quickConnectToolStrip = quickConnectToolStrip;
-	        _externalToolsToolStrip = externalToolsToolStrip;
-		    _multiSshToolStrip = multiSshToolStrip;
-            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip);
-        }
+            MainForm = mainForm.ThrowIfNull(nameof(mainForm));
+	        _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
+	        _quickConnectToolStrip = quickConnectToolStrip.ThrowIfNull(nameof(quickConnectToolStrip));
+	        _externalToolsToolStrip = externalToolsToolStrip.ThrowIfNull(nameof(externalToolsToolStrip));
+		    _multiSshToolStrip = multiSshToolStrip.ThrowIfNull(nameof(multiSshToolStrip));
+		    _externalAppsLoader = new ExternalAppsLoader(messageCollector, _externalToolsToolStrip, connectionInitiator.ThrowIfNull(nameof(connectionInitiator)));
+		    _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+		}
         
         #region Public Methods
         public void LoadSettings()
@@ -150,13 +143,13 @@ namespace mRemoteNG.Config.Settings
             MainForm.Fullscreen.Value = true;
         }
 
-        private static void SetShowSystemTrayIcon()
+        private void SetShowSystemTrayIcon()
         {
             if (mRemoteNG.Settings.Default.ShowSystemTrayIcon)
-                Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+                Runtime.NotificationAreaIcon = new NotificationAreaIcon(MainForm, _connectionInitiator);
         }
 
-        private static void SetPuttyPath()
+        private void SetPuttyPath()
         {
             PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
         }

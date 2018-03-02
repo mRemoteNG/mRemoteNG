@@ -9,8 +9,11 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Window;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Controls
@@ -22,8 +25,9 @@ namespace mRemoteNG.UI.Controls
 	    private readonly StatusImageList _statusImageList = new StatusImageList();
 		private bool _nodeInEditMode;
         private bool _allowEdit;
-        private ConnectionContextMenu _contextMenu;
         private ConnectionTreeModel _connectionTreeModel;
+        private ConfigWindow _configWindow;
+        private readonly IConnectionInitiator _connectionInitiator;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -37,6 +41,7 @@ namespace mRemoteNG.UI.Controls
 
         public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
+        public ConnectionContextMenu ConnectionContextMenu { get; set; }
         public ConnectionTreeModel ConnectionTreeModel
         {
             get { return _connectionTreeModel; }
@@ -47,13 +52,19 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        public ConnectionTree()
+        [Obsolete("This constructor is here to make the designer work. Dont use this constructor.")]
+        public ConnectionTree() : this(new ConnectionInitiator(new WindowList(), new Runtime()), new ConfigWindow())
         {
+        }
+
+        public ConnectionTree(IConnectionInitiator connectionInitiator, ConfigWindow configWindow)
+        {
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+            _configWindow = configWindow.ThrowIfNull(nameof(configWindow));
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
         }
-
         
 
         protected override void Dispose(bool disposing)
@@ -73,8 +84,7 @@ namespace mRemoteNG.UI.Controls
             SmallImageList = _statusImageList.ImageList;
             AddColumns(_statusImageList.ImageGetter);
             LinkModelToView();
-            _contextMenu = new ConnectionContextMenu(this);
-            ContextMenuStrip = _contextMenu;
+            ContextMenuStrip = ConnectionContextMenu;
             SetupDropSink();
             SetEventHandlers();
         }
@@ -318,7 +328,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                Windows.ConfigForm.SelectedTreeNode = SelectedNode;
+                _configWindow.SelectedTreeNode = SelectedNode;
             }
             catch (Exception ex)
             {
@@ -371,7 +381,7 @@ namespace mRemoteNG.UI.Controls
             }
 
             _nodeInEditMode = true;
-            _contextMenu.DisableShortcutKeys();
+            ConnectionContextMenu.DisableShortcutKeys();
         }
 
         private void OnAfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -381,11 +391,11 @@ namespace mRemoteNG.UI.Controls
 
             try
             {
-                _contextMenu.EnableShortcutKeys();
+                ConnectionContextMenu.EnableShortcutKeys();
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
                 _nodeInEditMode = false;
                 _allowEdit = false;
-                Windows.ConfigForm.SelectedTreeNode = SelectedNode;
+                _configWindow.SelectedTreeNode = SelectedNode;
             }
             catch (Exception ex)
             {

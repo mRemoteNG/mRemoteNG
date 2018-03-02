@@ -3,16 +3,19 @@ using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
 
 namespace mRemoteNG.UI.Window
 {
     public partial class ActiveDirectoryImportWindow
     {
+        private readonly Func<ConnectionInfo> _getSelectedNodeFunc;
         private string _currentDomain;
 
-        public ActiveDirectoryImportWindow()
+        public ActiveDirectoryImportWindow(Func<ConnectionInfo> getSelectedNodeFunc)
         {
+            _getSelectedNodeFunc = getSelectedNodeFunc;
             InitializeComponent();
             FontOverrider.FontOverride(this);
             WindowType = WindowType.ActiveDirectoryImport;
@@ -44,7 +47,7 @@ namespace mRemoteNG.UI.Window
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            var selectedNode = Windows.TreeForm.SelectedNode;
+            var selectedNode = _getSelectedNodeFunc();
             ContainerInfo importDestination;
             if (selectedNode != null)
                 importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;

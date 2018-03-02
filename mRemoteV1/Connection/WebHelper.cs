@@ -1,10 +1,18 @@
 ﻿using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection
 {
     public class WebHelper
     {
-        public static void GoToUrl(string url)
+        private readonly IConnectionInitiator _connectionInitiator;
+
+        public WebHelper(IConnectionInitiator connectionInitiator)
+        {
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+        }
+
+        public void GoToUrl(string url)
         {
             var connectionInfo = new ConnectionInfo();
             connectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
@@ -14,8 +22,7 @@ namespace mRemoteNG.Connection
             connectionInfo.Protocol = url.StartsWith("https:") ? ProtocolType.HTTPS : ProtocolType.HTTP;
             connectionInfo.SetDefaultPort();
             connectionInfo.IsQuickConnect = true;
-            var connectionInitiator = new ConnectionInitiator();
-            connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+            _connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
         }
     }
 }

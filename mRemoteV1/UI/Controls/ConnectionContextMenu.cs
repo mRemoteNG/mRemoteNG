@@ -48,12 +48,13 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeImportPortScan;
         private readonly ConnectionTree _connectionTree;
         private readonly IConnectionInitiator _connectionInitiator;
+        private readonly Windows _windows;
 
-
-        public ConnectionContextMenu(ConnectionTree connectionTree)
+        public ConnectionContextMenu(ConnectionTree connectionTree, IConnectionInitiator connectionInitiator, Windows windows)
         {
             _connectionTree = connectionTree;
-            _connectionInitiator = new ConnectionInitiator();
+            _windows = windows.ThrowIfNull(nameof(windows));
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             InitializeComponent();
             ApplyLanguage(); 
             EnableShortcutKeys();
@@ -693,11 +694,11 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                Windows.Show(WindowType.SSHTransfer);
-                Windows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
-                Windows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
-                Windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;
-                Windows.SshtransferForm.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
+                _windows.Show(WindowType.SSHTransfer);
+                _windows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
+                _windows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
+                _windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;
+                _windows.SshtransferForm.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
             }
             catch (Exception ex)
             {
@@ -732,12 +733,12 @@ namespace mRemoteNG.UI.Controls
 
         private void OnImportActiveDirectoryClicked(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.ActiveDirectoryImport);
+            _windows.Show(WindowType.ActiveDirectoryImport);
         }
 
         private void OnImportPortScanClicked(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.PortScan);
+            _windows.Show(WindowType.PortScan);
         }
 
         private void OnExportFileClicked(object sender, EventArgs e)

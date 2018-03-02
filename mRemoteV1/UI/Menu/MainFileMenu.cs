@@ -7,6 +7,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
@@ -36,12 +37,16 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenFileImportFromPortScan;
         private ToolStripMenuItem _mMenFileImport;
         private ToolStripMenuItem _mMenReconnectAll;
+        private readonly WindowList _windowList;
+        private readonly Windows _windows;
 
         public ConnectionTreeWindow TreeWindow { get; set; }
         public IConnectionInitiator ConnectionInitiator { get; set; }
 
-        public MainFileMenu()
+        public MainFileMenu(WindowList windowList, Windows windows)
         {
+            _windows = windows.ThrowIfNull(nameof(windows));
+            _windowList = windowList.ThrowIfNull(nameof(windowList));
             Initialize();
         }
 
@@ -417,8 +422,9 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenReconnectAll_Click(object sender, EventArgs e)
         {
-            if (Runtime.WindowList == null || Runtime.WindowList.Count == 0) return;
-            foreach (BaseWindow window in Runtime.WindowList)
+            if (_windowList.Count == 0)
+                return;
+            foreach (BaseWindow window in _windowList)
             {
                 var connectionWindow = window as ConnectionWindow;
                 if (connectionWindow == null)
@@ -459,17 +465,17 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileImportFromActiveDirectory_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.ActiveDirectoryImport);
+            _windows.Show(WindowType.ActiveDirectoryImport);
         }
 
         private void mMenFileImportFromPortScan_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.PortScan);
+            _windows.Show(WindowType.PortScan);
         }
 
         private void mMenFileExport_Click(object sender, EventArgs e)
         {
-            Export.ExportToFile(Windows.TreeForm.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
+            Export.ExportToFile(_windows.TreeForm.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
         }
 
         private void mMenFileExit_Click(object sender, EventArgs e)

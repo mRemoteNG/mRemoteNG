@@ -14,16 +14,18 @@ namespace mRemoteNG.UI.Window
 	public partial class ErrorAndInfoWindow : BaseWindow
 	{
         private ControlLayout _layout = ControlLayout.Vertical;
-        private ThemeManager _themeManager;
+        private readonly ThemeManager _themeManager;
+	    private readonly ConnectionTreeWindow _connectionTreeWindow;
 
         public DockContent PreviousActiveForm { get; set; }
 
-	    public ErrorAndInfoWindow() : this(new DockContent())
+	    public ErrorAndInfoWindow() : this(new DockContent(), new ConnectionTreeWindow())
 	    {
 	    }
 
-        public ErrorAndInfoWindow(DockContent panel)
+        public ErrorAndInfoWindow(DockContent panel, ConnectionTreeWindow connectionTreeWindow)
         {
+            _connectionTreeWindow = connectionTreeWindow;
             WindowType = WindowType.ErrorsAndInfos;
             DockPnl = panel;
             InitializeComponent();
@@ -158,7 +160,7 @@ namespace mRemoteNG.UI.Window
 			        if (PreviousActiveForm != null)
 			            PreviousActiveForm.Show(FrmMain.Default.pnlDock);
 			        else
-			            Windows.TreeForm.Show(FrmMain.Default.pnlDock);
+			            _connectionTreeWindow.Show(FrmMain.Default.pnlDock);
 			    }
 			    catch (Exception)
 			    {

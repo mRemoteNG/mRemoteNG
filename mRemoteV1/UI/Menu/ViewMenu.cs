@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
@@ -29,6 +30,8 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewLockToolbars;
         private ToolStripSeparator _toolStripSeparator1;
         private readonly PanelAdder _panelAdder;
+        private readonly WindowList _windowList;
+        private readonly Windows _windows;
 	    
 
 		public ToolStrip TsExternalTools { get; set; }
@@ -38,11 +41,13 @@ namespace mRemoteNG.UI.Menu
         public FrmMain MainForm { get; set; }
 
 
-        public ViewMenu()
+        public ViewMenu(PanelAdder panelAdder, WindowList windowList, Windows windows)
         {
+            _windowList = windowList.ThrowIfNull(nameof(windowList));
+            _windows = windows.ThrowIfNull(nameof(windows));
+            _panelAdder = panelAdder.ThrowIfNull(nameof(panelAdder));
             Initialize();
             ApplyLanguage();
-            _panelAdder = new PanelAdder();
 		}
 
         private void Initialize()
@@ -269,10 +274,10 @@ namespace mRemoteNG.UI.Menu
         #region View
         internal void mMenView_DropDownOpening(object sender, EventArgs e)
         {
-            _mMenViewConnections.Checked = !Windows.TreeForm.IsHidden;
-            _mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;
-            _mMenViewErrorsAndInfos.Checked = !Windows.ErrorsForm.IsHidden;
-            _mMenViewScreenshotManager.Checked = !Windows.ScreenshotForm.IsHidden;
+            _mMenViewConnections.Checked = !_windows.TreeForm.IsHidden;
+            _mMenViewConfig.Checked = !_windows.ConfigForm.IsHidden;
+            _mMenViewErrorsAndInfos.Checked = !_windows.ErrorsForm.IsHidden;
+            _mMenViewScreenshotManager.Checked = !_windows.ScreenshotForm.IsHidden;
 	        _mMenViewLockToolbars.Checked = Settings.Default.LockToolbars;
 
             _mMenViewExtAppsToolbar.Checked = TsExternalTools.Visible;
@@ -281,11 +286,11 @@ namespace mRemoteNG.UI.Menu
 
 			_mMenViewConnectionPanels.DropDownItems.Clear();
 
-            for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
+            for (var i = 0; i <= _windowList.Count - 1; i++)
             {
-                var tItem = new ToolStripMenuItem(Runtime.WindowList[i].Text,
-                    Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
-                { Tag = Runtime.WindowList[i] };
+                var tItem = new ToolStripMenuItem(_windowList[i].Text,
+                        _windowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
+                { Tag = _windowList[i] };
                 _mMenViewConnectionPanels.DropDownItems.Add(tItem);
             }
 
@@ -302,12 +307,12 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewConnections.Checked == false)
             {
-                Windows.TreeForm.Show(MainForm.pnlDock);
+                _windows.TreeForm.Show(MainForm.pnlDock);
                 _mMenViewConnections.Checked = true;
             }
             else
             {
-                Windows.TreeForm.Hide();
+                _windows.TreeForm.Hide();
                 _mMenViewConnections.Checked = false;
             }
         }
@@ -316,12 +321,12 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewConfig.Checked == false)
             {
-                Windows.ConfigForm.Show(MainForm.pnlDock);
+                _windows.ConfigForm.Show(MainForm.pnlDock);
                 _mMenViewConfig.Checked = true;
             }
             else
             {
-                Windows.ConfigForm.Hide();
+                _windows.ConfigForm.Hide();
                 _mMenViewConfig.Checked = false;
             }
         }
@@ -330,12 +335,12 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewErrorsAndInfos.Checked == false)
             {
-                Windows.ErrorsForm.Show(MainForm.pnlDock);
+                _windows.ErrorsForm.Show(MainForm.pnlDock);
                 _mMenViewErrorsAndInfos.Checked = true;
             }
             else
             {
-                Windows.ErrorsForm.Hide();
+                _windows.ErrorsForm.Hide();
                 _mMenViewErrorsAndInfos.Checked = false;
             }
         }
@@ -344,31 +349,31 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewScreenshotManager.Checked == false)
             {
-                Windows.ScreenshotForm.Show(MainForm.pnlDock);
+                _windows.ScreenshotForm.Show(MainForm.pnlDock);
                 _mMenViewScreenshotManager.Checked = true;
             }
             else
             {
-                Windows.ScreenshotForm.Hide();
+                _windows.ScreenshotForm.Hide();
                 _mMenViewScreenshotManager.Checked = false;
             }
         }
 
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
         {
-            if (MainForm.pnlDock.ActiveContent == Windows.TreeForm)
+            if (MainForm.pnlDock.ActiveContent == _windows.TreeForm)
             {
-                Windows.ConfigForm.Activate();
+                _windows.ConfigForm.Activate();
             }
             else
             {
-                Windows.TreeForm.Activate();
+                _windows.TreeForm.Activate();
             }
         }
 
         private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
         {
-            Windows.ErrorsForm.Activate();
+            _windows.ErrorsForm.Activate();
         }
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -12,10 +13,12 @@ namespace mRemoteNG.UI.Controls
     {
         private IContainer components;
         private ContextMenuStrip _cMenExtAppsToolbar;
+        private readonly Func<ConnectionInfo> _getSelectedConnectionFunc;
         internal ToolStripMenuItem CMenToolbarShowText;
 
-        public ExternalToolsToolStrip()
+        public ExternalToolsToolStrip(Func<ConnectionInfo> getSelectedConnectionFunc)
         {
+            _getSelectedConnectionFunc = getSelectedConnectionFunc;
             Initialize(); 
             Runtime.ExternalToolsService.ExternalTools.CollectionUpdated += (sender, args) => AddExternalToolsToToolBar();
         }
@@ -93,11 +96,11 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        private static void tsExtAppEntry_Click(object sender, EventArgs e)
+        private void tsExtAppEntry_Click(object sender, EventArgs e)
         {
             var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
-            var selectedTreeNode = Windows.TreeForm.SelectedNode;
+            var selectedTreeNode = _getSelectedConnectionFunc();
             if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection |
                 selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
                 extA.Start(selectedTreeNode);

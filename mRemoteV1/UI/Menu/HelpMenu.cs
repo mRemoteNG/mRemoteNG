@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -18,9 +19,13 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenInfoBugReport;
         private ToolStripSeparator _toolStripSeparator2;
         private ToolStripMenuItem _mMenInfoForum;
+        private readonly Windows _windows;
+        private readonly WebHelper _webHelper;
 
-        public HelpMenu()
+        public HelpMenu(WebHelper webHelper, Windows windows)
         {
+            _windows = windows.ThrowIfNull(nameof(windows));
+            _webHelper = webHelper.ThrowIfNull(nameof(webHelper));
             Initialize();
         }
 
@@ -132,36 +137,36 @@ namespace mRemoteNG.UI.Menu
         #region Info
         private void mMenToolsUpdate_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.Update);
+            _windows.Show(WindowType.Update);
         }
         private void mMenInfoHelp_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.Help);
+            _windows.Show(WindowType.Help);
         }
 
         private void mMenInfoForum_Click(object sender, EventArgs e)
         {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlForum);
+            _webHelper.GoToUrl(GeneralAppInfo.UrlForum);
         }
 
         private void mMenInfoBugReport_Click(object sender, EventArgs e)
         {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlBugs);
+            _webHelper.GoToUrl(GeneralAppInfo.UrlBugs);
         }
 
         private void mMenInfoWebsite_Click(object sender, EventArgs e)
         {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlHome);
+            _webHelper.GoToUrl(GeneralAppInfo.UrlHome);
         }
 
         private void mMenInfoDonate_Click(object sender, EventArgs e)
         {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlDonate);
+            _webHelper.GoToUrl(GeneralAppInfo.UrlDonate);
         }
 
         private void mMenInfoAbout_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.About);
+            _windows.Show(WindowType.About);
         }
         #endregion
     }

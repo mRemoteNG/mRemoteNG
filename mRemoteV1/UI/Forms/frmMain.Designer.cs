@@ -27,7 +27,6 @@ namespace mRemoteNG.UI.Forms
         private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            mRemoteNG.Connection.ConnectionInitiator connectionInitiator1 = new mRemoteNG.Connection.ConnectionInitiator();
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.mMenFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,12 +38,12 @@ namespace mRemoteNG.UI.Forms
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this._multiSshToolStrip = new mRemoteNG.UI.Controls.MultiSshToolStrip();
-            this._externalToolsToolStrip = new mRemoteNG.UI.Controls.ExternalToolsToolStrip();
-            this._quickConnectToolStrip = new mRemoteNG.UI.Controls.QuickConnectToolStrip();
-            this.mainFileMenu1 = new mRemoteNG.UI.Menu.MainFileMenu();
-            this.viewMenu1 = new mRemoteNG.UI.Menu.ViewMenu();
+            this._externalToolsToolStrip = new mRemoteNG.UI.Controls.ExternalToolsToolStrip(() => SelectedConnection);
+            this._quickConnectToolStrip = new mRemoteNG.UI.Controls.QuickConnectToolStrip(_connectionInitiator);
+            this.mainFileMenu1 = new mRemoteNG.UI.Menu.MainFileMenu(_windowList, _windows);
+            this.viewMenu1 = new mRemoteNG.UI.Menu.ViewMenu(_panelAdder, _windowList, _windows);
             this.toolsMenu1 = new mRemoteNG.UI.Menu.ToolsMenu();
-            this.helpMenu1 = new mRemoteNG.UI.Menu.HelpMenu();
+            this.helpMenu1 = new mRemoteNG.UI.Menu.HelpMenu(_webHelper, _windows);
             this.msMain.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();
@@ -161,7 +160,6 @@ namespace mRemoteNG.UI.Forms
             // _quickConnectToolStrip
             // 
             this._quickConnectToolStrip.BackColor = System.Drawing.SystemColors.Control;
-            this._quickConnectToolStrip.ConnectionInitiator = connectionInitiator1;
             this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
             this._quickConnectToolStrip.Location = new System.Drawing.Point(179, 0);

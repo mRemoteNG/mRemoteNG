@@ -5,6 +5,8 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Tools;
+using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
@@ -14,8 +16,21 @@ using TabPage = Crownwood.Magic.Controls.TabPage;
 namespace mRemoteNG.Connection
 {
 	public class ConnectionInitiator : IConnectionInitiator
-    {
-        private readonly PanelAdder _panelAdder = new PanelAdder();
+	{
+	    private readonly WindowList _windowList;
+	    private readonly Runtime _runtime;
+
+        /// <summary>
+        /// This is a property because we have a circular dependency.
+        /// </summary>
+	    public PanelAdder Adder { get; set; }
+
+
+        public ConnectionInitiator(WindowList windowList, Runtime runtime)
+        {
+            _windowList = windowList.ThrowIfNull(nameof(windowList));
+            _runtime = runtime.ThrowIfNull(nameof(runtime));
+        }
 
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
@@ -125,19 +140,19 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private static void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
+        private void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.PreExtApp == "") return;
             var extA = Runtime.ExternalToolsService.GetExtAppByName(connectionInfo.PreExtApp);
             extA?.Start(connectionInfo);
         }
 
-        private static InterfaceControl FindConnectionContainer(ConnectionInfo connectionInfo)
+        private InterfaceControl FindConnectionContainer(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.OpenConnections.Count <= 0) return null;
-            for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
+            for (var i = 0; i <= _windowList.Count - 1; i++)
             {
-                var window = Runtime.WindowList[i] as ConnectionWindow;
+                var window = _windowList[i] as ConnectionWindow;
                 var connectionWindow = window;
                 if (connectionWindow?.TabController == null) continue;
                 foreach (TabPage t in connectionWindow.TabController.TabPages)
@@ -153,12 +168,12 @@ namespace mRemoteNG.Connection
             return null;
         }
 
-        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
+        private string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
             var connectionPanel = "";
             if (connectionInfo.Panel == "" || (force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | Settings.Default.AlwaysShowPanelSelectionDlg)
             {
-                var frmPnl = new frmChoosePanel();
+                var frmPnl = new frmChoosePanel(_runtime, Adder);
                 if (frmPnl.ShowDialog() == DialogResult.OK)
                 {
                     connectionPanel = frmPnl.Panel;
@@ -173,10 +188,10 @@ namespace mRemoteNG.Connection
 
         private Form SetConnectionForm(Form conForm, string connectionPanel)
         {
-            var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel);
+            var connectionForm = conForm ?? _windowList.FromString(connectionPanel);
 
             if (connectionForm == null)
-                connectionForm = _panelAdder.AddPanel(connectionPanel);
+                connectionForm = Adder.AddPanel(connectionPanel);
             else
                 ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
 

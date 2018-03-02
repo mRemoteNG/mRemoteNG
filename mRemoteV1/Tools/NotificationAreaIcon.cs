@@ -14,13 +14,15 @@ namespace mRemoteNG.Tools
         private readonly NotifyIcon _nI;
         private readonly ContextMenuStrip _cMen;
         private readonly ToolStripMenuItem _cMenCons;
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private static readonly FrmMain FrmMain = FrmMain.Default;
+        private readonly IConnectionInitiator _connectionInitiator;
+        private readonly FrmMain _frmMain;
 
         public bool Disposed { get; private set; }
 
-        public NotificationAreaIcon()
+        public NotificationAreaIcon(FrmMain frmMain, IConnectionInitiator connectionInitiator)
         {
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             try
             {
                 _cMenCons = new ToolStripMenuItem
@@ -89,35 +91,35 @@ namespace mRemoteNG.Tools
             _cMenCons.DropDownItems.AddRange(rootMenuItems);
         }
 
-        private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void nI_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (FrmMain.Visible)
+            if (_frmMain.Visible)
                 HideForm();
             else
                 ShowForm();
         }
 
-        private static void ShowForm()
+        private void ShowForm()
         {
-            FrmMain.Show();
-            FrmMain.WindowState = FrmMain.PreviousWindowState;
+            _frmMain.Show();
+            _frmMain.WindowState = _frmMain.PreviousWindowState;
 
             if (Settings.Default.ShowSystemTrayIcon) return;
             Runtime.NotificationAreaIcon.Dispose();
             Runtime.NotificationAreaIcon = null;
         }
 
-        private static void HideForm()
+        private void HideForm()
         {
-            FrmMain.Hide();
-            FrmMain.PreviousWindowState = FrmMain.WindowState;
+            _frmMain.Hide();
+            _frmMain.PreviousWindowState = _frmMain.WindowState;
         }
 
         private void ConMenItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
             if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
-            if (FrmMain.Visible == false)
+            if (_frmMain.Visible == false)
                 ShowForm();
             _connectionInitiator.OpenConnection((ConnectionInfo) ((ToolStripMenuItem) sender).Tag);
         }

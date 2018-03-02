@@ -1,27 +1,34 @@
-﻿using System.Collections.ObjectModel;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Window;
+using NSubstitute;
 using NUnit.Framework;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNGTests.Connection.Protocol
 {
-	public class IntegratedProgramTests
-	{
-		private readonly ExternalTool _extTool = new ExternalTool
-		{
-			DisplayName = "notepad",
-			FileName = @"%windir%\system32\notepad.exe",
-			Arguments = "",
-			TryIntegrate = true
-		};
+    public class IntegratedProgramTests
+    {
+        private ExternalTool _extTool;
+        private IConnectionInitiator _connectionInitiator;
 
-		
-		[Test]
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            _connectionInitiator = Substitute.For<IConnectionInitiator>();
+            _extTool = new ExternalTool(_connectionInitiator)
+            {
+                DisplayName = "notepad",
+                FileName = @"%windir%\system32\notepad.exe",
+                Arguments = "",
+                TryIntegrate = true
+            };
+        }
+
+        [Test]
 		public void CanStartExternalApp()
 		{
 			SetExternalToolList(_extTool);
@@ -50,7 +57,7 @@ namespace mRemoteNGTests.Connection.Protocol
 
 		private InterfaceControl BuildInterfaceControl(string extAppName, ProtocolBase sut)
 		{
-			var connectionWindow = new ConnectionWindow(new DockContent());
+			var connectionWindow = new ConnectionWindow(new DockContent(), _connectionInitiator);
 			var connectionInfo = new ConnectionInfo {ExtApp = extAppName};
 			return new InterfaceControl(connectionWindow, sut, connectionInfo);
 		}

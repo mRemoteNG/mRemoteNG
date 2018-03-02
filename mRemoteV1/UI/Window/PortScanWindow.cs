@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
@@ -12,10 +13,13 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class PortScanWindow
 	{
+	    private readonly Func<ConnectionInfo> _getSelectedConnectionFunc;
+
         #region Constructors
-		public PortScanWindow()
+		public PortScanWindow(Func<ConnectionInfo> getSelectedConnectionFunc)
 		{
-			InitializeComponent();
+		    _getSelectedConnectionFunc = getSelectedConnectionFunc;
+		    InitializeComponent();
 					
 			WindowType = WindowType.PortScan;
 			DockPnl = new DockContent();
@@ -257,7 +261,8 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            var selectedTreeNodeAsContainer = Windows.TreeForm.SelectedNode as ContainerInfo ?? Windows.TreeForm.SelectedNode.Parent;
+            var selectedNode = _getSelectedConnectionFunc();
+            var selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
             Import.ImportFromPortScan(hosts, protocol, selectedTreeNodeAsContainer);
         }
 

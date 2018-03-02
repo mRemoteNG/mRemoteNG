@@ -4,7 +4,6 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
-using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
@@ -20,7 +19,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.App
 {
-	public static class Runtime
+	public class Runtime
     {
         public static bool IsPortableEdition
         {
@@ -34,7 +33,7 @@ namespace mRemoteNG.App
             }
         }
 
-        public static WindowList WindowList { get; set; }
+        public WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();

@@ -7,6 +7,7 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
@@ -17,7 +18,7 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionTreeWindow
 	{
 	    private readonly ConnectionContextMenu _contextMenu;
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+	    private readonly IConnectionInitiator _connectionInitiator;
 		private ThemeManager _themeManager;
 	    private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
 
@@ -29,16 +30,13 @@ namespace mRemoteNG.UI.Window
             set { olvConnections = value; }
 	    }
 
-	    public ConnectionTreeWindow() : this(new DockContent())
-	    {
-	    }
-
-		public ConnectionTreeWindow(DockContent panel)
+		public ConnectionTreeWindow(DockContent panel, IConnectionInitiator connectionInitiator, ConnectionContextMenu contextMenu)
 		{
 			WindowType = WindowType.Tree;
-			DockPnl = panel;
+			DockPnl = panel.ThrowIfNull(nameof(panel));
+		    _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+            _contextMenu = contextMenu.ThrowIfNull(nameof(contextMenu));
 			InitializeComponent();
-			_contextMenu = new ConnectionContextMenu(olvConnections);
 			olvConnections.ContextMenuStrip = _contextMenu;
 			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();

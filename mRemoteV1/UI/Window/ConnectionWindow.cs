@@ -27,12 +27,12 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionWindow : BaseWindow
     {
         public TabControl TabController;
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator;
         private VisualStudioToolStripExtender vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         #region Public Methods
-        public ConnectionWindow(DockContent panel, string formText = "")
+        public ConnectionWindow(DockContent panel, IConnectionInitiator connectionInitiator, string formText = "")
         {
             if (formText == "")
             {
@@ -40,7 +40,8 @@ namespace mRemoteNG.UI.Window
             }
 
             WindowType = WindowType.Connection;
-            DockPnl = panel;
+            DockPnl = panel.ThrowIfNull(nameof(panel));
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             InitializeComponent();
             SetEventHandlers();
             // ReSharper disable once VirtualMemberCallInConstructor

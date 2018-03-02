@@ -5,6 +5,7 @@ using mRemoteNG.UI.Window;
 using System;
 using System.IO;
 using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
@@ -13,16 +14,13 @@ namespace mRemoteNG.Config.Settings
     {
         private readonly FrmMain _mainForm;
         private readonly MessageCollector _messageCollector;
+        private readonly Windows _windows;
 
-        public DockPanelLayoutLoader(FrmMain mainForm, MessageCollector messageCollector)
+        public DockPanelLayoutLoader(FrmMain mainForm, MessageCollector messageCollector, Windows windows)
         {
-            if (mainForm == null)
-                throw new ArgumentNullException(nameof(mainForm));
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-
-            _mainForm = mainForm;
-            _messageCollector = messageCollector;
+            _mainForm = mainForm.ThrowIfNull(nameof(mainForm));
+            _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
+            _windows = windows.ThrowIfNull(nameof(windows));
         }
 
         public void LoadPanelsFromXml()
@@ -69,16 +67,16 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 if (persistString == typeof(ConfigWindow).ToString())
-                    return Windows.ConfigForm;
+                    return _windows.ConfigForm;
 
                 if (persistString == typeof(ConnectionTreeWindow).ToString())
-                    return Windows.TreeForm;
+                    return _windows.TreeForm;
 
                 if (persistString == typeof(ErrorAndInfoWindow).ToString())
-                    return Windows.ErrorsForm;
+                    return _windows.ErrorsForm;
 
                 if (persistString == typeof(ScreenshotManagerWindow).ToString())
-                    return Windows.ScreenshotForm;
+                    return _windows.ScreenshotForm;
             }
             catch (Exception ex)
             {

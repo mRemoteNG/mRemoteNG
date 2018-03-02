@@ -4,6 +4,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
 using System.IO;
 using System.Xml;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
@@ -12,22 +13,15 @@ namespace mRemoteNG.Config.Settings
 {
     public class ExternalAppsLoader
     {
-        private readonly FrmMain _mainForm;
         private readonly MessageCollector _messageCollector;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
+        private readonly IConnectionInitiator _connectionInitiator;
 
-        public ExternalAppsLoader(FrmMain mainForm, MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip)
+        public ExternalAppsLoader(MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip, IConnectionInitiator connectionInitiator)
         {
-            if (mainForm == null)
-                throw new ArgumentNullException(nameof(mainForm));
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-            if (externalToolsToolStrip == null)
-                throw new ArgumentNullException(nameof(externalToolsToolStrip));
-
-            _mainForm = mainForm;
-            _messageCollector = messageCollector;
-            _externalToolsToolStrip = externalToolsToolStrip;
+            _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
+            _externalToolsToolStrip = externalToolsToolStrip.ThrowIfNull(nameof(externalToolsToolStrip));
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
         }
 
 
@@ -48,7 +42,6 @@ namespace mRemoteNG.Config.Settings
 			{
                 _messageCollector.AddMessage(MessageClass.InformationMsg, $"Loading External Apps from: {oldPath}", true);
                 xDom.Load(oldPath);
-
 			}
 #endif
             else
@@ -65,7 +58,7 @@ namespace mRemoteNG.Config.Settings
 
             foreach (XmlElement xEl in xDom.DocumentElement.ChildNodes)
             {
-                var extA = new ExternalTool
+                var extA = new ExternalTool(_connectionInitiator)
                 {
                     DisplayName = xEl.Attributes["DisplayName"].Value,
                     FileName = xEl.Attributes["FileName"].Value,

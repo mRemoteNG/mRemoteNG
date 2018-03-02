@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.Connection;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -12,17 +14,18 @@ namespace mRemoteNG.UI.Forms
         private Dictionary<string, OptionsPage> _pages;
         private ImageList _pageIconImageList;
         private readonly string _pageName;
+        private readonly IConnectionInitiator _connectionInitiator;
 
-        public frmOptions()
+        public frmOptions(IConnectionInitiator connectionInitiator) 
+            : this(connectionInitiator, Language.strStartupExit)
         {
-            InitializeComponent();
-            _pageName = Language.strStartupExit;
         }
 
-        public frmOptions(string pn)
+        public frmOptions(IConnectionInitiator connectionInitiator, string pn)
         {
-            InitializeComponent();
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             _pageName = pn;
+            InitializeComponent();
         }
 
         private void frmOptions_Load(object sender, EventArgs e)
@@ -60,7 +63,7 @@ namespace mRemoteNG.UI.Forms
             _pages = new Dictionary<string, OptionsPage>
             {
                 {typeof(StartupExitPage).Name, new StartupExitPage()},
-                {typeof(AppearancePage).Name, new AppearancePage()},
+                {typeof(AppearancePage).Name, new AppearancePage(_connectionInitiator)},
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
                 {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},

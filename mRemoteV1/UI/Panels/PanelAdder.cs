@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.Window;
@@ -12,11 +14,20 @@ namespace mRemoteNG.UI.Panels
 {
     public class PanelAdder
     {
+        private readonly WindowList _windowList;
+        private readonly IConnectionInitiator _connectionInitiator;
+
+        public PanelAdder(WindowList windowList, IConnectionInitiator connectionInitiator)
+        {
+            _windowList = windowList.ThrowIfNull(nameof(windowList));
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+        }
+
         public Form AddPanel(string title = "", bool noTabber = false)
         {
             try
             {
-                var connectionForm = new ConnectionWindow(new DockContent());
+                var connectionForm = new ConnectionWindow(new DockContent(), _connectionInitiator);
                 BuildConnectionWindowContextMenu(connectionForm);
                 SetConnectionWindowTitle(title, connectionForm);
                 ShowConnectionWindow(connectionForm);
@@ -35,12 +46,12 @@ namespace mRemoteNG.UI.Panels
             connectionForm.Show(FrmMain.Default.pnlDock, DockState.Document);
         }
 
-        private static void PrepareTabControllerSupport(bool noTabber, ConnectionWindow connectionForm)
+        private void PrepareTabControllerSupport(bool noTabber, ConnectionWindow connectionForm)
         {
             if (noTabber)
                 connectionForm.TabController.Dispose();
             else
-                Runtime.WindowList.Add(connectionForm);
+                _windowList.Add(connectionForm);
         }
 
         private static void SetConnectionWindowTitle(string title, ConnectionWindow connectionForm)

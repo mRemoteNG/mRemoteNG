@@ -46,6 +46,12 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
+        private readonly Runtime _runtime;
+        private readonly ConnectionInitiator _connectionInitiator;
+        private readonly PanelAdder _panelAdder;
+        private readonly WebHelper _webHelper;
+        private readonly WindowList _windowList;
+        private readonly Windows _windows;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -54,8 +60,21 @@ namespace mRemoteNG.UI.Forms
 
         private FrmMain()
 		{
-			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
-			InitializeComponent();
+		    _runtime = new Runtime();
+		    _connectionInitiator = new ConnectionInitiator(_runtime.WindowList, _runtime);
+            _windowList = new WindowList();
+		    _webHelper = new WebHelper(_connectionInitiator);
+		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
+		    var configWindow = new ConfigWindow(new DockContent());
+		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
+		    var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
+		    var sshTransferWindow = new SSHTransferWindow();
+            _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow);
+            _panelAdder = new PanelAdder(_windowList, _connectionInitiator);
+            _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
+		    _connectionInitiator.Adder = _panelAdder;
+
+            InitializeComponent();
             Fullscreen = new FullscreenHandler(this);
 
             //Theming support
@@ -144,10 +163,10 @@ namespace mRemoteNG.UI.Forms
             SetMenuDependencies();
 
             msMain.Location = Point.Empty;
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip);
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, _connectionInitiator);
             settingsLoader.LoadSettings();
 
-            var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
+            var uiLoader = new DockPanelLayoutLoader(this, messageCollector, _windows);
             uiLoader.LoadPanelsFromXml();
 
 	        LockToolbarPositions(Settings.Default.LockToolbars);
@@ -157,7 +176,7 @@ namespace mRemoteNG.UI.Forms
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
-            Runtime.WindowList = new WindowList();
+            _runtime.WindowList = new WindowList();
 
             if (Settings.Default.ResetPanels)
                 SetDefaultLayout();
@@ -166,11 +185,11 @@ namespace mRemoteNG.UI.Forms
             var credsAndConsSetup = new CredsAndConsSetup();
             credsAndConsSetup.LoadCredsAndCons();
 
-            Windows.TreeForm.Focus();
+            _windows.TreeForm.Focus();
 
             PuttySessionsManager.Instance.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
-                Windows.Show(WindowType.ComponentsCheck);
+			    _windows.Show(WindowType.ComponentsCheck);
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
 
@@ -179,7 +198,7 @@ namespace mRemoteNG.UI.Forms
 
             Opacity = 1;
             //Fix missing general panel at the first run
-            new PanelAdder().AddPanel();
+            _panelAdder.AddPanel();
         }
 
 	    private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -208,9 +227,8 @@ namespace mRemoteNG.UI.Forms
 
         private void SetMenuDependencies()
         {
-            var connectionInitiator = new ConnectionInitiator();
-            mainFileMenu1.TreeWindow = Windows.TreeForm;
-            mainFileMenu1.ConnectionInitiator = connectionInitiator;
+            mainFileMenu1.TreeWindow = _windows.TreeForm;
+            mainFileMenu1.ConnectionInitiator = _connectionInitiator;
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;
@@ -220,8 +238,6 @@ namespace mRemoteNG.UI.Forms
 
             toolsMenu1.MainForm = this;
             toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
-
-            _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
 
         //Theming support
@@ -272,7 +288,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new frmOptions(Language.strTabUpdates))
+            using (var optionsForm = new frmOptions(_connectionInitiator, Language.strTabUpdates))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -294,10 +310,10 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
-            if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
+            if (!(_runtime.WindowList == null || _runtime.WindowList.Count == 0))
 			{
 			    var openConnections = 0;
-                foreach (BaseWindow window in Runtime.WindowList)
+                foreach (BaseWindow window in _runtime.WindowList)
                 {
                     var connectionWindow = window as ConnectionWindow;
                     if (connectionWindow != null)
@@ -323,9 +339,9 @@ namespace mRemoteNG.UI.Forms
 									
 			IsClosing = true;
 
-            if (Runtime.WindowList != null)
+            if (_runtime.WindowList != null)
 			{
-                foreach (BaseWindow window in Runtime.WindowList)
+                foreach (BaseWindow window in _runtime.WindowList)
 				{
 					window.Close();
 				}
@@ -358,7 +374,7 @@ namespace mRemoteNG.UI.Forms
 			    if (!Settings.Default.MinimizeToTray) return;
 			    if (Runtime.NotificationAreaIcon == null)
 			    {
-			        Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+			        Runtime.NotificationAreaIcon = new NotificationAreaIcon(this, _connectionInitiator);
 			    }
 			    Hide();
 			}
@@ -589,11 +605,11 @@ namespace mRemoteNG.UI.Forms
             pnlDock.DockTopPortion = pnlDock.Height * 0.25;
             pnlDock.DockBottomPortion = pnlDock.Height * 0.25;
 
-            Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
-            Windows.ConfigForm.Show(pnlDock);
-            Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
-            Windows.ErrorsForm.Show( pnlDock, DockState.DockBottomAutoHide );  
-            Windows.ScreenshotForm.Hide(); 
+            _windows.TreeForm.Show(pnlDock, DockState.DockLeft);
+            _windows.ConfigForm.Show(pnlDock);
+            _windows.ConfigForm.DockTo(_windows.TreeForm.Pane, DockStyle.Bottom, -1);
+            _windows.ErrorsForm.Show( pnlDock, DockState.DockBottomAutoHide );
+            _windows.ScreenshotForm.Hide(); 
 
             pnlDock.Visible = true;
         }

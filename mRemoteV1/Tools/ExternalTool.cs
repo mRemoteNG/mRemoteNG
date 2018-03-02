@@ -14,12 +14,12 @@ namespace mRemoteNG.Tools
 {
 	public class ExternalTool : INotifyPropertyChanged
 	{
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-	    private string _displayName;
-	    private string _fileName;
+        private readonly IConnectionInitiator _connectionInitiator;
+	    private string _displayName = "";
+	    private string _fileName = "";
 	    private bool _waitForExit;
-	    private string _arguments;
-	    private string _workingDir;
+	    private string _arguments = "";
+	    private string _workingDir = "";
 	    private bool _tryIntegrate;
 	    private bool _showOnToolbar = true;
 	    private bool _runElevated;
@@ -100,13 +100,9 @@ namespace mRemoteNG.Tools
 
 	    #endregion
 		
-		public ExternalTool(string displayName = "", string fileName = "", string arguments = "", string workingDir = "", bool runElevated = false)
+		public ExternalTool(IConnectionInitiator connectionInitiator)
 		{
-			DisplayName = displayName;
-			FileName = fileName;
-			Arguments = arguments;
-            WorkingDir = workingDir;
-            RunElevated = runElevated;
+		    _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 		}
 
         public void Start(ConnectionInfo startConnectionInfo = null)
