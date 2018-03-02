@@ -10,7 +10,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Controls
 {
-    public class QuickConnectToolStrip : ToolStrip
+	public class QuickConnectToolStrip : ToolStrip
     {
         private IContainer components;
         private ToolStripLabel _lblQuickConnect;
@@ -19,13 +19,13 @@ namespace mRemoteNG.UI.Controls
         private ContextMenuStrip _mnuQuickConnectProtocol;
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
-        private IConnectionInitiator _connectionInitiator;
-        private readonly ThemeManager _themeManager;
+	    private readonly ThemeManager _themeManager;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
 
-        public QuickConnectToolStrip(IConnectionInitiator connectionInitiator)
+	    public IConnectionInitiator ConnectionInitiator { get; set; }
+
+        public QuickConnectToolStrip()
         {
-            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             Initialize();
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Controls
                     return;
                 }
                 _cmbQuickConnect.Add(connectionInfo);
-                _connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {
@@ -225,7 +225,7 @@ namespace mRemoteNG.UI.Controls
             var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
             if (tag != null)
             {
-                _connectionInitiator.OpenConnection(tag);
+                ConnectionInitiator.OpenConnection(tag);
             }
         }
         #endregion

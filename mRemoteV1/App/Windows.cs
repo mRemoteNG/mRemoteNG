@@ -1,14 +1,14 @@
-﻿using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Window;
-using System;
+﻿using System;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI;
+using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.App
 {
-    public class Windows
+	public class Windows
     {
         private readonly IConnectionInitiator _connectionInitiator;
         private AboutWindow _aboutForm;
@@ -62,7 +62,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions(_connectionInitiator))
+                        using (var optionsForm = new frmOptions(_connectionInitiator, Show))
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }
@@ -93,7 +93,7 @@ namespace mRemoteNG.App
                         break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
-                            _ultravncscForm = new UltraVNCWindow();
+                            _ultravncscForm = new UltraVNCWindow(Show);
                         _ultravncscForm.Show(dockPanel);
                         break;
                     case WindowType.ComponentsCheck:

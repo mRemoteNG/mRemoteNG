@@ -9,10 +9,8 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-using mRemoteNG.UI.Window;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -26,10 +24,8 @@ namespace mRemoteNG.UI.Controls
 		private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionTreeModel _connectionTreeModel;
-        private ConfigWindow _configWindow;
-        private readonly IConnectionInitiator _connectionInitiator;
 
-        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
+	    public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
         public NodeSearcher NodeSearcher { get; private set; }
 
@@ -52,15 +48,8 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        [Obsolete("This constructor is here to make the designer work. Dont use this constructor.")]
-        public ConnectionTree() : this(new ConnectionInitiator(new WindowList(), new Runtime()), new ConfigWindow())
+        public ConnectionTree()
         {
-        }
-
-        public ConnectionTree(IConnectionInitiator connectionInitiator, ConfigWindow configWindow)
-        {
-            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
-            _configWindow = configWindow.ThrowIfNull(nameof(configWindow));
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
@@ -128,8 +117,9 @@ namespace mRemoteNG.UI.Controls
                 container.IsExpanded = true;
 				AutoResizeColumn(Columns[0]);
 			};
-            SelectionChanged += tvConnections_AfterSelect;
-            MouseDoubleClick += OnMouse_DoubleClick;
+
+			SelectionChanged += OnSelectionChanged;
+	        MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
             CellToolTipShowing += tvConnections_CellToolTipShowing;
             ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
@@ -138,7 +128,7 @@ namespace mRemoteNG.UI.Controls
             AfterLabelEdit += OnAfterLabelEdit;
         }
 
-		/// <summary>
+	    /// <summary>
 		/// Resizes the given column to ensure that all content is shown
 		/// </summary>
 	    private void AutoResizeColumn(ColumnHeader column)
@@ -324,18 +314,6 @@ namespace mRemoteNG.UI.Controls
 			AutoResizeColumn(Columns[0]);
 		}
 
-        private void tvConnections_AfterSelect(object sender, EventArgs e)
-        {
-            try
-            {
-                _configWindow.SelectedTreeNode = SelectedNode;
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
-        }
-
         private void OnMouse_DoubleClick(object sender, MouseEventArgs mouseEventArgs)
         {
             if (mouseEventArgs.Clicks < 2) return;
@@ -395,13 +373,25 @@ namespace mRemoteNG.UI.Controls
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
                 _nodeInEditMode = false;
                 _allowEdit = false;
-                _configWindow.SelectedTreeNode = SelectedNode;
+                RaiseSelectedNodeChangedEvent(SelectedNode);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
-        #endregion
+
+	    private void OnSelectionChanged(object o, EventArgs eventArgs)
+	    {
+		    RaiseSelectedNodeChangedEvent(SelectedNode);
+	    }
+		#endregion
+
+		public event EventHandler<ConnectionInfo> SelectedNodeChanged;
+
+	    private void RaiseSelectedNodeChangedEvent(ConnectionInfo selectedNode)
+	    {
+			SelectedNodeChanged?.Invoke(this, selectedNode);
+	    }
     }
 }

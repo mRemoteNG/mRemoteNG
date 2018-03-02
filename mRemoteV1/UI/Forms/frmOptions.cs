@@ -1,31 +1,34 @@
-﻿using mRemoteNG.UI.Forms.OptionsPages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms.OptionsPages;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class frmOptions : Form
+	public partial class frmOptions : Form
     {
         private Dictionary<string, OptionsPage> _pages;
         private ImageList _pageIconImageList;
         private readonly string _pageName;
         private readonly IConnectionInitiator _connectionInitiator;
+	    private readonly Action<WindowType> _showWindowAction;
 
-        public frmOptions(IConnectionInitiator connectionInitiator) 
-            : this(connectionInitiator, Language.strStartupExit)
+
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction) 
+            : this(connectionInitiator, showWindowAction, Language.strStartupExit)
         {
         }
 
-        public frmOptions(IConnectionInitiator connectionInitiator, string pn)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, string pageName)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
-            _pageName = pn;
-            InitializeComponent();
+            _pageName = pageName.ThrowIfNull(nameof(pageName));
+	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
+	        InitializeComponent();
         }
 
         private void frmOptions_Load(object sender, EventArgs e)
@@ -41,6 +44,7 @@ namespace mRemoteNG.UI.Forms
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
             lstOptionPages.SelectedIndex = 0;
         }
+
         private void ApplyTheme()
         {
             if(Themes.ThemeManager.getInstance().ThemingActive)
@@ -69,7 +73,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},
                 {typeof(CredentialsPage).Name, new CredentialsPage()},
                 {typeof(SqlServerPage).Name, new SqlServerPage()},
-                {typeof(UpdatesPage).Name, new UpdatesPage()},
+                {typeof(UpdatesPage).Name, new UpdatesPage(_showWindowAction)},
                 {typeof(ThemePage).Name, new ThemePage()},
                 {typeof(SecurityPage).Name, new SecurityPage()},
                 {typeof(AdvancedPage).Name, new AdvancedPage()}

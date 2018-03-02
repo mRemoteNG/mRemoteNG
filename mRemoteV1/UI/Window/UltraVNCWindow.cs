@@ -1,5 +1,6 @@
 using System;
 using mRemoteNG.App;
+using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -7,6 +8,8 @@ namespace mRemoteNG.UI.Window
 {
 	public class UltraVNCWindow : BaseWindow
 	{
+		private readonly Action<WindowType> _showWindowAction;
+
         #region Form Init
 		internal System.Windows.Forms.ToolStrip tsMain;
 		internal System.Windows.Forms.Panel pnlContainer;
@@ -69,18 +72,13 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 		
-        #region Declarations
-		//Private WithEvents vnc As AxCSC_ViewerXControl
-        #endregion
-		
-        #region Public Methods
-		public UltraVNCWindow()
+		public UltraVNCWindow(Action<WindowType> showWindowAction)
 		{
-			this.WindowType = WindowType.UltraVNCSC;
-			this.DockPnl = new DockContent();
-			this.InitializeComponent();
+			_showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
+			WindowType = WindowType.UltraVNCSC;
+			DockPnl = new DockContent();
+			InitializeComponent();
 		}
-        #endregion
 		
         #region Private Methods
 		private void UltraVNCSC_Load(object sender, System.EventArgs e)
@@ -151,7 +149,7 @@ namespace mRemoteNG.UI.Window
 		{
 			//vnc.Dispose()
 			Dispose();
-			Windows.Show(WindowType.UltraVNCSC);
+			_showWindowAction(WindowType.UltraVNCSC);
 		}
 #endregion
 	}

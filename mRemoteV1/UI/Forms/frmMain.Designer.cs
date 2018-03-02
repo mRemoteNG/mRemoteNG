@@ -38,12 +38,12 @@ namespace mRemoteNG.UI.Forms
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this._multiSshToolStrip = new mRemoteNG.UI.Controls.MultiSshToolStrip();
-            this._externalToolsToolStrip = new mRemoteNG.UI.Controls.ExternalToolsToolStrip(() => SelectedConnection);
-            this._quickConnectToolStrip = new mRemoteNG.UI.Controls.QuickConnectToolStrip(_connectionInitiator);
-            this.mainFileMenu1 = new mRemoteNG.UI.Menu.MainFileMenu(_windowList, _windows);
-            this.viewMenu1 = new mRemoteNG.UI.Menu.ViewMenu(_panelAdder, _windowList, _windows);
+            this._externalToolsToolStrip = new mRemoteNG.UI.Controls.ExternalToolsToolStrip();
+            this._quickConnectToolStrip = new mRemoteNG.UI.Controls.QuickConnectToolStrip();
+            this.mainFileMenu1 = new mRemoteNG.UI.Menu.MainFileMenu();
+            this.viewMenu1 = new mRemoteNG.UI.Menu.ViewMenu();
             this.toolsMenu1 = new mRemoteNG.UI.Menu.ToolsMenu();
-            this.helpMenu1 = new mRemoteNG.UI.Menu.HelpMenu(_webHelper, _windows);
+            this.helpMenu1 = new mRemoteNG.UI.Menu.HelpMenu();
             this.msMain.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();

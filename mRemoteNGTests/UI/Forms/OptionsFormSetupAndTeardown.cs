@@ -1,9 +1,11 @@
-﻿using NUnit.Framework;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.UI.Forms;
+using NSubstitute;
+using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Forms
 {
-    public class OptionsFormSetupAndTeardown
+	public class OptionsFormSetupAndTeardown
     {
         protected frmOptions _optionsForm;
 
@@ -15,7 +17,8 @@ namespace mRemoteNGTests.UI.Forms
         [SetUp]
         public void Setup()
         {
-            _optionsForm = new frmOptions();
+	        var connectionInitiator = Substitute.For<IConnectionInitiator>();
+			_optionsForm = new frmOptions(connectionInitiator, type => {});
             _optionsForm.Show();
         }
 

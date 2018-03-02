@@ -30,11 +30,13 @@ namespace mRemoteNG.UI.Window
         private readonly IConnectionInitiator _connectionInitiator;
         private VisualStudioToolStripExtender vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
+	    private readonly Windows _windows;
 
         #region Public Methods
-        public ConnectionWindow(DockContent panel, IConnectionInitiator connectionInitiator, string formText = "")
+        public ConnectionWindow(DockContent panel, IConnectionInitiator connectionInitiator, Windows windows, string formText = "")
         {
-            if (formText == "")
+	        _windows = windows.ThrowIfNull(nameof(windows));
+	        if (formText == "")
             {
                 formText = Language.strNewPanel;
             }
@@ -487,13 +489,13 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 if (interfaceControl == null) return;
 
-                Windows.Show(WindowType.SSHTransfer);
+	            _windows.Show(WindowType.SSHTransfer);
                 var connectionInfo = interfaceControl.Info;
 
-                Windows.SshtransferForm.Hostname = connectionInfo.Hostname;
-                Windows.SshtransferForm.Username = connectionInfo.Username;
-                Windows.SshtransferForm.Password = connectionInfo.Password;
-                Windows.SshtransferForm.Port = Convert.ToString(connectionInfo.Port);
+	            _windows.SshtransferForm.Hostname = connectionInfo.Hostname;
+	            _windows.SshtransferForm.Username = connectionInfo.Username;
+	            _windows.SshtransferForm.Password = connectionInfo.Password;
+	            _windows.SshtransferForm.Port = Convert.ToString(connectionInfo.Port);
             }
             catch (Exception ex)
             {
@@ -710,7 +712,7 @@ namespace mRemoteNG.UI.Window
         {
             cmenTab.Close();
             Application.DoEvents();
-            Windows.ScreenshotForm.AddScreenshot(MiscTools.TakeScreenshot(this));
+	        _windows.ScreenshotForm.AddScreenshot(MiscTools.TakeScreenshot(this));
         }
         #endregion
 

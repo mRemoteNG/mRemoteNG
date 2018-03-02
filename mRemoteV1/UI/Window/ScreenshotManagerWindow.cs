@@ -1,11 +1,11 @@
 using System;
 using System.Drawing;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.App;
 using System.IO;
-using mRemoteNG.UI.Forms;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Themes;
+using mRemoteNG.UI.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
@@ -178,7 +178,7 @@ namespace mRemoteNG.UI.Window
 	    {
 	    }
 
-		internal ScreenshotManagerWindow(DockContent panel)
+		public ScreenshotManagerWindow(DockContent panel)
 		{
 			WindowType = WindowType.ScreenshotManager;
 			DockPnl = panel;

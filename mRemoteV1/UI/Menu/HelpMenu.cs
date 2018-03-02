@@ -3,11 +3,10 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
-using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Menu
 {
-    public class HelpMenu : ToolStripMenuItem
+	public class HelpMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenInfoHelp;
         private ToolStripMenuItem _mMenInfoWebsite;
@@ -19,13 +18,12 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenInfoBugReport;
         private ToolStripSeparator _toolStripSeparator2;
         private ToolStripMenuItem _mMenInfoForum;
-        private readonly Windows _windows;
-        private readonly WebHelper _webHelper;
 
-        public HelpMenu(WebHelper webHelper, Windows windows)
+	    public Windows Windows { get; set; }
+	    public WebHelper WebHelper { get; set; }
+
+	    public HelpMenu()
         {
-            _windows = windows.ThrowIfNull(nameof(windows));
-            _webHelper = webHelper.ThrowIfNull(nameof(webHelper));
             Initialize();
         }
 
@@ -137,36 +135,36 @@ namespace mRemoteNG.UI.Menu
         #region Info
         private void mMenToolsUpdate_Click(object sender, EventArgs e)
         {
-            _windows.Show(WindowType.Update);
+            Windows.Show(WindowType.Update);
         }
         private void mMenInfoHelp_Click(object sender, EventArgs e)
         {
-            _windows.Show(WindowType.Help);
+            Windows.Show(WindowType.Help);
         }
 
         private void mMenInfoForum_Click(object sender, EventArgs e)
         {
-            _webHelper.GoToUrl(GeneralAppInfo.UrlForum);
+            WebHelper.GoToUrl(GeneralAppInfo.UrlForum);
         }
 
         private void mMenInfoBugReport_Click(object sender, EventArgs e)
         {
-            _webHelper.GoToUrl(GeneralAppInfo.UrlBugs);
+            WebHelper.GoToUrl(GeneralAppInfo.UrlBugs);
         }
 
         private void mMenInfoWebsite_Click(object sender, EventArgs e)
         {
-            _webHelper.GoToUrl(GeneralAppInfo.UrlHome);
+            WebHelper.GoToUrl(GeneralAppInfo.UrlHome);
         }
 
         private void mMenInfoDonate_Click(object sender, EventArgs e)
         {
-            _webHelper.GoToUrl(GeneralAppInfo.UrlDonate);
+            WebHelper.GoToUrl(GeneralAppInfo.UrlDonate);
         }
 
         private void mMenInfoAbout_Click(object sender, EventArgs e)
         {
-            _windows.Show(WindowType.About);
+            Windows.Show(WindowType.About);
         }
         #endregion
     }

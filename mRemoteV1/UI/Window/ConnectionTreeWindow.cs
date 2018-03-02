@@ -17,11 +17,15 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class ConnectionTreeWindow
 	{
-	    private readonly ConnectionContextMenu _contextMenu;
-	    private readonly IConnectionInitiator _connectionInitiator;
+		private readonly IConnectionInitiator _connectionInitiator;
 		private ThemeManager _themeManager;
 	    private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
 
+		public ConnectionContextMenu ConnectionTreeContextMenu
+		{
+			get { return olvConnections.ContextMenuStrip as ConnectionContextMenu;}
+			set { olvConnections.ContextMenuStrip = value; }
+		}
 		public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
 	    public ConnectionTree ConnectionTree
@@ -30,21 +34,17 @@ namespace mRemoteNG.UI.Window
             set { olvConnections = value; }
 	    }
 
-		public ConnectionTreeWindow(DockContent panel, IConnectionInitiator connectionInitiator, ConnectionContextMenu contextMenu)
+		public ConnectionTreeWindow(DockContent panel, IConnectionInitiator connectionInitiator)
 		{
 			WindowType = WindowType.Tree;
 			DockPnl = panel.ThrowIfNull(nameof(panel));
 		    _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
-            _contextMenu = contextMenu.ThrowIfNull(nameof(contextMenu));
 			InitializeComponent();
-			olvConnections.ContextMenuStrip = _contextMenu;
 			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
             olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
         }
-
-	    
 
         #region Form Stuff
         private void Tree_Load(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Window
         {
             if (!_themeManager.ThemingActive) return;
             vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(_contextMenu, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(ConnectionTreeContextMenu, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
             //Treelistview need to be manually themed
             olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
             olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");
@@ -178,14 +178,14 @@ namespace mRemoteNG.UI.Window
 
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
         {
-            _contextMenu.DisableShortcutKeys();
+            ConnectionTreeContextMenu.DisableShortcutKeys();
         }
 
         private void tvConnections_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
             try
             {
-                _contextMenu.EnableShortcutKeys();
+                ConnectionTreeContextMenu.EnableShortcutKeys();
                 ConnectionTree.ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
             }
             catch (Exception ex)

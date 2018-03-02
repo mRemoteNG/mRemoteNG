@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
@@ -29,23 +28,19 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewResetLayout;
         private ToolStripMenuItem _mMenViewLockToolbars;
         private ToolStripSeparator _toolStripSeparator1;
-        private readonly PanelAdder _panelAdder;
-        private readonly WindowList _windowList;
-        private readonly Windows _windows;
-	    
 
-		public ToolStrip TsExternalTools { get; set; }
+	    public PanelAdder Adder { get; set; }
+	    public WindowList WindowList { get; set; }
+	    public Windows Windows { get; set; }
+	    public ToolStrip TsExternalTools { get; set; }
         public ToolStrip TsQuickConnect { get; set; }
 		public ToolStrip TsMultiSsh { get; set; }
         public FullscreenHandler FullscreenHandler { get; set; }
         public FrmMain MainForm { get; set; }
 
 
-        public ViewMenu(PanelAdder panelAdder, WindowList windowList, Windows windows)
+        public ViewMenu()
         {
-            _windowList = windowList.ThrowIfNull(nameof(windowList));
-            _windows = windows.ThrowIfNull(nameof(windows));
-            _panelAdder = panelAdder.ThrowIfNull(nameof(panelAdder));
             Initialize();
             ApplyLanguage();
 		}
@@ -274,10 +269,10 @@ namespace mRemoteNG.UI.Menu
         #region View
         internal void mMenView_DropDownOpening(object sender, EventArgs e)
         {
-            _mMenViewConnections.Checked = !_windows.TreeForm.IsHidden;
-            _mMenViewConfig.Checked = !_windows.ConfigForm.IsHidden;
-            _mMenViewErrorsAndInfos.Checked = !_windows.ErrorsForm.IsHidden;
-            _mMenViewScreenshotManager.Checked = !_windows.ScreenshotForm.IsHidden;
+            _mMenViewConnections.Checked = !Windows.TreeForm.IsHidden;
+            _mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;
+            _mMenViewErrorsAndInfos.Checked = !Windows.ErrorsForm.IsHidden;
+            _mMenViewScreenshotManager.Checked = !Windows.ScreenshotForm.IsHidden;
 	        _mMenViewLockToolbars.Checked = Settings.Default.LockToolbars;
 
             _mMenViewExtAppsToolbar.Checked = TsExternalTools.Visible;
@@ -286,11 +281,11 @@ namespace mRemoteNG.UI.Menu
 
 			_mMenViewConnectionPanels.DropDownItems.Clear();
 
-            for (var i = 0; i <= _windowList.Count - 1; i++)
+            for (var i = 0; i <= WindowList.Count - 1; i++)
             {
-                var tItem = new ToolStripMenuItem(_windowList[i].Text,
-                        _windowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
-                { Tag = _windowList[i] };
+                var tItem = new ToolStripMenuItem(WindowList[i].Text,
+                        WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
+                { Tag = WindowList[i] };
                 _mMenViewConnectionPanels.DropDownItems.Add(tItem);
             }
 
@@ -307,12 +302,12 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewConnections.Checked == false)
             {
-                _windows.TreeForm.Show(MainForm.pnlDock);
+                Windows.TreeForm.Show(MainForm.pnlDock);
                 _mMenViewConnections.Checked = true;
             }
             else
             {
-                _windows.TreeForm.Hide();
+                Windows.TreeForm.Hide();
                 _mMenViewConnections.Checked = false;
             }
         }
@@ -321,12 +316,12 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewConfig.Checked == false)
             {
-                _windows.ConfigForm.Show(MainForm.pnlDock);
+                Windows.ConfigForm.Show(MainForm.pnlDock);
                 _mMenViewConfig.Checked = true;
             }
             else
             {
-                _windows.ConfigForm.Hide();
+                Windows.ConfigForm.Hide();
                 _mMenViewConfig.Checked = false;
             }
         }
@@ -335,12 +330,12 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewErrorsAndInfos.Checked == false)
             {
-                _windows.ErrorsForm.Show(MainForm.pnlDock);
+                Windows.ErrorsForm.Show(MainForm.pnlDock);
                 _mMenViewErrorsAndInfos.Checked = true;
             }
             else
             {
-                _windows.ErrorsForm.Hide();
+                Windows.ErrorsForm.Hide();
                 _mMenViewErrorsAndInfos.Checked = false;
             }
         }
@@ -349,31 +344,31 @@ namespace mRemoteNG.UI.Menu
         {
             if (_mMenViewScreenshotManager.Checked == false)
             {
-                _windows.ScreenshotForm.Show(MainForm.pnlDock);
+                Windows.ScreenshotForm.Show(MainForm.pnlDock);
                 _mMenViewScreenshotManager.Checked = true;
             }
             else
             {
-                _windows.ScreenshotForm.Hide();
+                Windows.ScreenshotForm.Hide();
                 _mMenViewScreenshotManager.Checked = false;
             }
         }
 
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
         {
-            if (MainForm.pnlDock.ActiveContent == _windows.TreeForm)
+            if (MainForm.pnlDock.ActiveContent == Windows.TreeForm)
             {
-                _windows.ConfigForm.Activate();
+                Windows.ConfigForm.Activate();
             }
             else
             {
-                _windows.TreeForm.Activate();
+                Windows.TreeForm.Activate();
             }
         }
 
         private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
         {
-            _windows.ErrorsForm.Activate();
+            Windows.ErrorsForm.Activate();
         }
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
@@ -402,7 +397,7 @@ namespace mRemoteNG.UI.Menu
 
 		private void mMenViewAddConnectionPanel_Click(object sender, EventArgs e)
         {
-            _panelAdder.AddPanel();
+            Adder.AddPanel();
         }
 
         private void mMenViewExtAppsToolbar_Click(object sender, EventArgs e)

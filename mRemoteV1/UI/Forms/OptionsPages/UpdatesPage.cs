@@ -10,17 +10,15 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class UpdatesPage
+	public partial class UpdatesPage
     {
-        #region Private Fields
-
         private AppUpdater _appUpdate;
+	    private readonly Action<WindowType> _showWindowAction;
 
-        #endregion
-
-        public UpdatesPage()
+        public UpdatesPage(Action<WindowType> showWindowAction)
         {
-            InitializeComponent();
+	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
+	        InitializeComponent();
             base.ApplyTheme();
         }
 
@@ -164,7 +162,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnUpdateCheckNow_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.Update);
+	        _showWindowAction(WindowType.Update);
         }
 
         private void chkUseProxyForAutomaticUpdates_CheckedChanged(object sender, EventArgs e)

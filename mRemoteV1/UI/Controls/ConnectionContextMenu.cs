@@ -9,12 +9,14 @@ using mRemoteNG.Container;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Window;
+
 // ReSharper disable UnusedParameter.Local
 
 
 namespace mRemoteNG.UI.Controls
 {
-    public sealed class ConnectionContextMenu : ContextMenuStrip
+	public sealed class ConnectionContextMenu : ContextMenuStrip
     {
         private ToolStripMenuItem _cMenTreeAddConnection;
         private ToolStripMenuItem _cMenTreeAddFolder;
@@ -48,15 +50,19 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeImportPortScan;
         private readonly ConnectionTree _connectionTree;
         private readonly IConnectionInitiator _connectionInitiator;
-        private readonly Windows _windows;
+	    private readonly SSHTransferWindow _sshTransferWindow;
 
-        public ConnectionContextMenu(ConnectionTree connectionTree, IConnectionInitiator connectionInitiator, Windows windows)
+		// TODO - this is only a property to break up a circular dependency
+	    public Action<WindowType> ShowWindowAction { get; set; } = type => { };
+
+
+		public ConnectionContextMenu(ConnectionTree connectionTree, IConnectionInitiator connectionInitiator, SSHTransferWindow sshTransferWindow)
         {
-            _connectionTree = connectionTree;
-            _windows = windows.ThrowIfNull(nameof(windows));
+            _connectionTree = connectionTree.ThrowIfNull(nameof(connectionTree));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+	        _sshTransferWindow = sshTransferWindow.ThrowIfNull(nameof(sshTransferWindow));
             InitializeComponent();
-            ApplyLanguage(); 
+            ApplyLanguage();
             EnableShortcutKeys();
             Opening += (sender, args) =>
             {
@@ -694,11 +700,11 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                _windows.Show(WindowType.SSHTransfer);
-                _windows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
-                _windows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
-                _windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;
-                _windows.SshtransferForm.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
+	            ShowWindowAction(WindowType.SSHTransfer);
+                _sshTransferWindow.Hostname = _connectionTree.SelectedNode.Hostname;
+	            _sshTransferWindow.Username = _connectionTree.SelectedNode.Username;
+	            _sshTransferWindow.Password = _connectionTree.SelectedNode.Password;
+	            _sshTransferWindow.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
             }
             catch (Exception ex)
             {
@@ -733,12 +739,12 @@ namespace mRemoteNG.UI.Controls
 
         private void OnImportActiveDirectoryClicked(object sender, EventArgs e)
         {
-            _windows.Show(WindowType.ActiveDirectoryImport);
+	        ShowWindowAction(WindowType.ActiveDirectoryImport);
         }
 
         private void OnImportPortScanClicked(object sender, EventArgs e)
         {
-            _windows.Show(WindowType.PortScan);
+	        ShowWindowAction(WindowType.PortScan);
         }
 
         private void OnExportFileClicked(object sender, EventArgs e)

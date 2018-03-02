@@ -9,16 +9,15 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.UI.Controls
 {
-    public class ExternalToolsToolStrip : ToolStrip
+	public class ExternalToolsToolStrip : ToolStrip
     {
         private IContainer components;
         private ContextMenuStrip _cMenExtAppsToolbar;
-        private readonly Func<ConnectionInfo> _getSelectedConnectionFunc;
-        internal ToolStripMenuItem CMenToolbarShowText;
+	    public Func<ConnectionInfo> GetSelectedConnectionFunc { get; set; }
+	    internal ToolStripMenuItem CMenToolbarShowText;
 
-        public ExternalToolsToolStrip(Func<ConnectionInfo> getSelectedConnectionFunc)
+        public ExternalToolsToolStrip()
         {
-            _getSelectedConnectionFunc = getSelectedConnectionFunc;
             Initialize(); 
             Runtime.ExternalToolsService.ExternalTools.CollectionUpdated += (sender, args) => AddExternalToolsToToolBar();
         }
@@ -100,7 +99,7 @@ namespace mRemoteNG.UI.Controls
         {
             var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
-            var selectedTreeNode = _getSelectedConnectionFunc();
+            var selectedTreeNode = GetSelectedConnectionFunc();
             if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection |
                 selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
                 extA.Start(selectedTreeNode);

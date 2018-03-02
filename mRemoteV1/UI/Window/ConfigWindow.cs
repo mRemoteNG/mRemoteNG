@@ -267,19 +267,12 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 
-        #region Constructors
-
-        public ConfigWindow() : this(new DockContent())
-        {
-        }
-
         public ConfigWindow(DockContent panel)
         {
             WindowType = WindowType.Config;
             DockPnl = panel;
             InitializeComponent();
         }
-        #endregion
 
         #region Public Methods
 		
@@ -1670,10 +1663,22 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridSetHostStatusFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-        #endregion
+		#endregion
 
-        #region Event Handlers
-        private void propertyGridContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+		#region Event Handlers
+		public void HandleConnectionTreeSelectionChanged(object sender, ConnectionInfo selectedNode)
+		{
+			try
+			{
+				SelectedTreeNode = selectedNode;
+			}
+			catch (Exception ex)
+			{
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed", ex);
+			}
+		}
+
+		private void propertyGridContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			try
 			{

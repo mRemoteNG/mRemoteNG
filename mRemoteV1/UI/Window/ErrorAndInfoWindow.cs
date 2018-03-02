@@ -1,13 +1,13 @@
 using System;
-using System.Drawing;
 using System.Collections;
-using System.Windows.Forms;
+using System.Drawing;
 using System.Text;
-using WeifenLuo.WinFormsUI.Docking;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
-using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
+using mRemoteNG.UI.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
@@ -18,10 +18,6 @@ namespace mRemoteNG.UI.Window
 	    private readonly ConnectionTreeWindow _connectionTreeWindow;
 
         public DockContent PreviousActiveForm { get; set; }
-
-	    public ErrorAndInfoWindow() : this(new DockContent(), new ConnectionTreeWindow())
-	    {
-	    }
 
         public ErrorAndInfoWindow(DockContent panel, ConnectionTreeWindow connectionTreeWindow)
         {

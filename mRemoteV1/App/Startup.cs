@@ -17,22 +17,19 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
-    public class Startup
+	public class Startup
     {
         private AppUpdater _appUpdate;
         private readonly ConnectionIconLoader _connectionIconLoader;
-        private readonly FrmMain _frmMain = FrmMain.Default;
+        private readonly FrmMain _frmMain;
+	    private readonly Windows _windows;
 
-        public static Startup Instance { get; } = new Startup();
-
-        private Startup()
+        public Startup(FrmMain frmMain, Windows windows)
         {
-            _appUpdate = new AppUpdater();
+	        _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
+			_windows = windows.ThrowIfNull(nameof(windows));
+	        _appUpdate = new AppUpdater();
             _connectionIconLoader = new ConnectionIconLoader(GeneralAppInfo.HomePath + "\\Icons\\");
-        }
-
-        static Startup()
-        {
         }
 
         public void InitializeProgram(MessageCollector messageCollector)
@@ -107,7 +104,7 @@ namespace mRemoteNG.App
 
                 if (_appUpdate.IsUpdateAvailable())
                 {
-                    Windows.Show(WindowType.Update);
+                    _windows.Show(WindowType.Update);
                 }
             }
             catch (Exception ex)

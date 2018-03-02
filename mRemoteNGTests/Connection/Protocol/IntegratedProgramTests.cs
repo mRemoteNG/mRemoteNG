@@ -1,8 +1,10 @@
-﻿using mRemoteNG.App;
+﻿using System.Threading;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.CustomCollections;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Window;
 using NSubstitute;
 using NUnit.Framework;
@@ -10,7 +12,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNGTests.Connection.Protocol
 {
-    public class IntegratedProgramTests
+	public class IntegratedProgramTests
     {
         private ExternalTool _extTool;
         private IConnectionInitiator _connectionInitiator;
@@ -29,6 +31,7 @@ namespace mRemoteNGTests.Connection.Protocol
         }
 
         [Test]
+		[Apartment(ApartmentState.STA)]
 		public void CanStartExternalApp()
 		{
 			SetExternalToolList(_extTool);
@@ -41,6 +44,7 @@ namespace mRemoteNGTests.Connection.Protocol
 		}
 
 		[Test]
+		[Apartment(ApartmentState.STA)]
 		public void ConnectingToExternalAppThatDoesntExistDoesNothing()
 		{
 			SetExternalToolList(_extTool);
@@ -57,7 +61,16 @@ namespace mRemoteNGTests.Connection.Protocol
 
 		private InterfaceControl BuildInterfaceControl(string extAppName, ProtocolBase sut)
 		{
-			var connectionWindow = new ConnectionWindow(new DockContent(), _connectionInitiator);
+			var configWindow = new ConfigWindow(new DockContent());
+			var sshTransferWindow = new SSHTransferWindow();
+			var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
+			var connectionTree = connectionTreeWindow.ConnectionTree;
+			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow);
+			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
+			var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
+			var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
+			var windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow);
+			var connectionWindow = new ConnectionWindow(new DockContent(), _connectionInitiator, windows);
 			var connectionInfo = new ConnectionInfo {ExtApp = extAppName};
 			return new InterfaceControl(connectionWindow, sut, connectionInfo);
 		}

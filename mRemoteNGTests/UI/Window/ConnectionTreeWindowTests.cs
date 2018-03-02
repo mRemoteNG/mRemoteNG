@@ -1,19 +1,25 @@
 ﻿using System.Threading;
+using mRemoteNG.Connection;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Window;
+using NSubstitute;
 using NUnit.Framework;
 using WeifenLuo.WinFormsUI.Docking;
 
-
 namespace mRemoteNGTests.UI.Window
 {
-    public class ConnectionTreeWindowTests
+	public class ConnectionTreeWindowTests
     {
         private ConnectionTreeWindow _connectionTreeWindow;
 
         [SetUp]
         public void Setup()
         {
-            _connectionTreeWindow = new ConnectionTreeWindow(new DockContent());
+	        var connectionInitiator = Substitute.For<IConnectionInitiator>();
+	        var connectionTree = new ConnectionTree();
+			var sshTransferWindow = new SSHTransferWindow();
+	        var connectionContextMenu = new ConnectionContextMenu(connectionTree, connectionInitiator, sshTransferWindow);
+            _connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), connectionInitiator) {ConnectionTreeContextMenu = connectionContextMenu};
         }
 
         [TearDown]

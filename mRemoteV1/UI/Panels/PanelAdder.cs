@@ -12,22 +12,24 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Panels
 {
-    public class PanelAdder
+	public class PanelAdder
     {
         private readonly WindowList _windowList;
         private readonly IConnectionInitiator _connectionInitiator;
+	    private readonly Windows _windows;
 
-        public PanelAdder(WindowList windowList, IConnectionInitiator connectionInitiator)
+        public PanelAdder(WindowList windowList, IConnectionInitiator connectionInitiator, Windows windows)
         {
-            _windowList = windowList.ThrowIfNull(nameof(windowList));
+	        _windowList = windowList.ThrowIfNull(nameof(windowList));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+	        _windows = windows.ThrowIfNull(nameof(windows));
         }
 
         public Form AddPanel(string title = "", bool noTabber = false)
         {
             try
             {
-                var connectionForm = new ConnectionWindow(new DockContent(), _connectionInitiator);
+                var connectionForm = new ConnectionWindow(new DockContent(), _connectionInitiator, _windows);
                 BuildConnectionWindowContextMenu(connectionForm);
                 SetConnectionWindowTitle(title, connectionForm);
                 ShowConnectionWindow(connectionForm);

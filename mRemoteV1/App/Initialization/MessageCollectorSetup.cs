@@ -3,10 +3,12 @@ using System.Linq;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Messages.WriterDecorators;
+using mRemoteNG.Tools;
+using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.App.Initialization
 {
-    public class MessageCollectorSetup
+	public class MessageCollectorSetup
     {
         public static void SetupMessageCollector(MessageCollector messageCollector, IList<IMessageWriter> messageWriterList)
         {
@@ -19,13 +21,13 @@ namespace mRemoteNG.App.Initialization
             };
         }
 
-        public static void BuildMessageWritersFromSettings(IList<IMessageWriter> messageWriterList)
+        public static void BuildMessageWritersFromSettings(IList<IMessageWriter> messageWriterList, ErrorAndInfoWindow errorAndInfoWindow)
         {
 #if DEBUG
             messageWriterList.Add(BuildDebugConsoleWriter());
 #endif
             messageWriterList.Add(BuildTextLogMessageWriter());
-            messageWriterList.Add(BuildNotificationPanelMessageWriter());
+            messageWriterList.Add(BuildNotificationPanelMessageWriter(errorAndInfoWindow));
             messageWriterList.Add(BuildPopupMessageWriter());
         }
 
@@ -42,16 +44,16 @@ namespace mRemoteNG.App.Initialization
             );
         }
 
-        private static IMessageWriter BuildNotificationPanelMessageWriter()
+        private static IMessageWriter BuildNotificationPanelMessageWriter(ErrorAndInfoWindow errorAndInfoWindow)
         {
-            
-            return new OnlyLogMessageFilter(
+	        errorAndInfoWindow.ThrowIfNull(nameof(errorAndInfoWindow));
+			return new OnlyLogMessageFilter(
                 new MessageTypeFilterDecorator(
                     new NotificationPanelMessageFilteringOptions(),
                     new MessageFocusDecorator(
-                        Windows.ErrorsForm,
+	                    errorAndInfoWindow,
                         new NotificationPanelSwitchOnMessageFilteringOptions(),
-                        new NotificationPanelMessageWriter(Windows.ErrorsForm)
+                        new NotificationPanelMessageWriter(errorAndInfoWindow)
                     )
                 )
             );

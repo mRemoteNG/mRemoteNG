@@ -21,6 +21,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
@@ -52,6 +53,7 @@ namespace mRemoteNG.UI.Forms
         private readonly WebHelper _webHelper;
         private readonly WindowList _windowList;
         private readonly Windows _windows;
+	    private readonly Startup _startup;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -61,21 +63,32 @@ namespace mRemoteNG.UI.Forms
         private FrmMain()
 		{
 		    _runtime = new Runtime();
-		    _connectionInitiator = new ConnectionInitiator(_runtime.WindowList, _runtime);
             _windowList = new WindowList();
+		    _connectionInitiator = new ConnectionInitiator(_windowList, _runtime);
 		    _webHelper = new WebHelper(_connectionInitiator);
-		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
 		    var configWindow = new ConfigWindow(new DockContent());
-		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
-		    var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
 		    var sshTransferWindow = new SSHTransferWindow();
+		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
+			var connectionTree = connectionTreeWindow.ConnectionTree;
+			connectionTree.SelectedNodeChanged += configWindow.HandleConnectionTreeSelectionChanged;
+			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow);
+			connectionTree.ConnectionContextMenu = connectionTreeContextMenu;
+			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
+		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
+		    var screenshotManagerWindow = new ScreenshotManagerWindow();
             _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow);
-            _panelAdder = new PanelAdder(_windowList, _connectionInitiator);
+            _panelAdder = new PanelAdder(_windowList, _connectionInitiator, _windows);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 		    _connectionInitiator.Adder = _panelAdder;
+			_startup = new Startup(this, _windows);
+			connectionTreeContextMenu.ShowWindowAction = _windows.Show;
 
-            InitializeComponent();
-            Fullscreen = new FullscreenHandler(this);
+			InitializeComponent();
+
+			_externalToolsToolStrip.GetSelectedConnectionFunc = () => SelectedConnection;
+			_quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
+
+			Fullscreen = new FullscreenHandler(this);
 
             //Theming support
             _themeManager = ThemeManager.getInstance();
@@ -156,9 +169,9 @@ namespace mRemoteNG.UI.Forms
         {
             var messageCollector = Runtime.MessageCollector;
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
-            MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
+            MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters, _windows.ErrorsForm);
 
-            Startup.Instance.InitializeProgram(messageCollector);
+	        _startup.InitializeProgram(messageCollector);
 
             SetMenuDependencies();
 
@@ -191,7 +204,7 @@ namespace mRemoteNG.UI.Forms
 			if (Settings.Default.StartupComponentsCheck)
 			    _windows.Show(WindowType.ComponentsCheck);
 
-            Startup.Instance.CreateConnectionsProvider(messageCollector);
+	        _startup.CreateConnectionsProvider(messageCollector);
 
             _screenSystemMenu.BuildScreenList();
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
@@ -229,15 +242,24 @@ namespace mRemoteNG.UI.Forms
         {
             mainFileMenu1.TreeWindow = _windows.TreeForm;
             mainFileMenu1.ConnectionInitiator = _connectionInitiator;
+	        mainFileMenu1.WindowList = _windowList;
+	        mainFileMenu1.Windows = _windows;
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;
 	        viewMenu1.TsMultiSsh = _multiSshToolStrip;
             viewMenu1.FullscreenHandler = Fullscreen;
-            viewMenu1.MainForm = this;
+	        viewMenu1.Adder = _panelAdder;
+	        viewMenu1.WindowList = _windowList;
+	        viewMenu1.Windows = _windows;
+			viewMenu1.MainForm = this;
 
             toolsMenu1.MainForm = this;
             toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
+	        toolsMenu1.Windows = _windows;
+
+	        helpMenu1.WebHelper = _webHelper;
+	        helpMenu1.Windows = _windows;
         }
 
         //Theming support
@@ -246,10 +268,11 @@ namespace mRemoteNG.UI.Forms
             if (_themeManager.ThemingActive)
             {
                 // Persist settings when rebuilding UI
-                this.pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+                pnlDock.Theme = _themeManager.ActiveTheme.Theme;
                 ApplyTheme();
             }
         }
+
         private void ApplyTheme()
 		{
             if(_themeManager.ThemingActive)
@@ -288,7 +311,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new frmOptions(_connectionInitiator, Language.strTabUpdates))
+            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, Language.strTabUpdates))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -305,7 +328,7 @@ namespace mRemoteNG.UI.Forms
             if (!Settings.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
-            Startup.Instance.CheckForUpdate();
+	        _startup.CheckForUpdate();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

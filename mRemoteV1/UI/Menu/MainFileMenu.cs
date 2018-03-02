@@ -7,14 +7,13 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
 {
-    public class MainFileMenu : ToolStripMenuItem
+	public class MainFileMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenFileNew;
         private ToolStripMenuItem _mMenFileLoad;
@@ -37,16 +36,14 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenFileImportFromPortScan;
         private ToolStripMenuItem _mMenFileImport;
         private ToolStripMenuItem _mMenReconnectAll;
-        private readonly WindowList _windowList;
-        private readonly Windows _windows;
 
-        public ConnectionTreeWindow TreeWindow { get; set; }
+	    public WindowList WindowList { get; set; }
+	    public Windows Windows { get; set; }
+	    public ConnectionTreeWindow TreeWindow { get; set; }
         public IConnectionInitiator ConnectionInitiator { get; set; }
 
-        public MainFileMenu(WindowList windowList, Windows windows)
+        public MainFileMenu()
         {
-            _windows = windows.ThrowIfNull(nameof(windows));
-            _windowList = windowList.ThrowIfNull(nameof(windowList));
             Initialize();
         }
 
@@ -422,9 +419,9 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenReconnectAll_Click(object sender, EventArgs e)
         {
-            if (_windowList.Count == 0)
+            if (WindowList.Count == 0)
                 return;
-            foreach (BaseWindow window in _windowList)
+            foreach (BaseWindow window in WindowList)
             {
                 var connectionWindow = window as ConnectionWindow;
                 if (connectionWindow == null)
@@ -465,17 +462,17 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileImportFromActiveDirectory_Click(object sender, EventArgs e)
         {
-            _windows.Show(WindowType.ActiveDirectoryImport);
+            Windows.Show(WindowType.ActiveDirectoryImport);
         }
 
         private void mMenFileImportFromPortScan_Click(object sender, EventArgs e)
         {
-            _windows.Show(WindowType.PortScan);
+            Windows.Show(WindowType.PortScan);
         }
 
         private void mMenFileExport_Click(object sender, EventArgs e)
         {
-            Export.ExportToFile(_windows.TreeForm.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
+            Export.ExportToFile(Windows.TreeForm.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
         }
 
         private void mMenFileExit_Click(object sender, EventArgs e)

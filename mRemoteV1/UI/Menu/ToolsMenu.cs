@@ -15,12 +15,13 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsUvncsc;
         private ToolStripMenuItem _mMenToolsComponentsCheck;
 
-        public Form MainForm { get; set; }
+	    public Windows Windows { get; set; }
+	    public Form MainForm { get; set; }
         public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
 
         public ToolsMenu()
         {
-            Initialize();
+	        Initialize();
         }
 
         private void Initialize()
@@ -106,32 +107,32 @@ namespace mRemoteNG.UI.Menu
         #region Tools
         private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.SSHTransfer);
+	        Windows.Show(WindowType.SSHTransfer);
         }
 
         private void mMenToolsUVNCSC_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.UltraVNCSC);
+	        Windows.Show(WindowType.UltraVNCSC);
         }
 
         private void mMenToolsExternalApps_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.ExternalApps);
+	        Windows.Show(WindowType.ExternalApps);
         }
 
         private void mMenToolsPortScan_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.PortScan);
+	        Windows.Show(WindowType.PortScan);
         }
 
         private void mMenToolsComponentsCheck_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.ComponentsCheck);
+	        Windows.Show(WindowType.ComponentsCheck);
         }
 
         private void mMenToolsOptions_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.Options);
+	        Windows.Show(WindowType.Options);
         }
         #endregion
     }
