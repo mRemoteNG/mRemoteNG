@@ -25,7 +25,8 @@ namespace mRemoteNG.UI.Controls
             set
             {
                 value.ThrowIfNull("value");
-                _externalToolsService.ExternalTools.CollectionUpdated -= ExternalToolsOnCollectionUpdated;
+                if (_externalToolsService != null)
+                    _externalToolsService.ExternalTools.CollectionUpdated -= ExternalToolsOnCollectionUpdated;
                 _externalToolsService = value;
                 _externalToolsService.ExternalTools.CollectionUpdated += ExternalToolsOnCollectionUpdated;
             }

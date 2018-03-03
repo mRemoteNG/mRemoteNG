@@ -204,6 +204,7 @@
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
+    <Compile Include="UI\Controls\ExternalToolsToolStripTests.cs" />
     <Compile Include="UI\Controls\PageSequenceTests.cs" />
     <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
       <SubType>Form</SubType>
@@ -225,6 +226,7 @@
       <DependentUpon>TextBoxExtensionsTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\TextBoxExtensionsTests.cs" />
+    <Compile Include="UI\Forms\FrmMainTests.cs" />
     <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
     <Compile Include="UI\Forms\PasswordFormTests.cs" />
     <Compile Include="UI\WindowListTests.cs" />

@@ -101,12 +101,12 @@ namespace mRemoteNG.UI.Forms
 		    _connectionInitiator.Adder = _panelAdder;
 			_startup = new Startup(this, _windows);
             connectionTreeContextMenu.ShowWindowAction = _windows.Show;
-		    _externalToolsToolStrip.ExternalToolsService = externalToolsService;
 
 			InitializeComponent();
 
             var externalAppsLoader = new ExternalAppsLoader(Runtime.MessageCollector, _externalToolsToolStrip, _connectionInitiator, externalToolsService);
 		    _settingsLoader = new SettingsLoader(this, Runtime.MessageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, externalAppsLoader, _notificationAreaIconBuilder);
+		    _externalToolsToolStrip.ExternalToolsService = externalToolsService;
 			_externalToolsToolStrip.GetSelectedConnectionFunc = () => SelectedConnection;
 			_quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
 		    CredentialRecordTypeConverter.CredentialRepositoryList = _credentialRepositoryList;
