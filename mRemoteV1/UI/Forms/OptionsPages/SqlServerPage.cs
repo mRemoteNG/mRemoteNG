@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Dispose();
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer = null;
-            Runtime.LoadConnections(true);
+            Runtime.ConnectionsService.LoadConnections(true);
         }
 
         private void chkUseSQLServer_CheckedChanged(object sender, EventArgs e)

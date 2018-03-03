@@ -7,18 +7,24 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI;
+using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Connection
 {
     public class ConnectionsService
     {
         private static readonly object SaveLock = new object();
+        private bool _showDialogWhenLoadingConnections;
         private readonly PuttySessionsManager _puttySessionsManager;
 
         public bool IsConnectionsFileLoaded { get; set; }
@@ -186,6 +192,163 @@ namespace mRemoteNG.Connection
             Monitor.Enter(SaveLock);
             SaveConnections();
             Monitor.Exit(SaveLock);
+        }
+
+        public void LoadConnectionsAsync()
+        {
+            _showDialogWhenLoadingConnections = false;
+
+            var t = new Thread(LoadConnectionsBGd);
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+        }
+
+        
+        private void LoadConnectionsBGd()
+        {
+            LoadConnections(_showDialogWhenLoadingConnections);
+        }
+
+        public void LoadConnections(bool withDialog = false)
+        {
+            var connectionFileName = "";
+
+            try
+            {
+                // disable sql update checking while we are loading updates
+                RemoteConnectionsSyncronizer?.Disable();
+
+                if (!Settings.Default.UseSQLServer)
+                {
+                    if (withDialog)
+                    {
+                        var loadDialog = DialogFactory.BuildLoadConnectionsDialog();
+                        if (loadDialog.ShowDialog() != DialogResult.OK) return;
+                        connectionFileName = loadDialog.FileName;
+                    }
+                    else
+                    {
+                        connectionFileName = GetStartupConnectionFileName();
+                    }
+
+                    var backupFileCreator = new FileBackupCreator();
+                    backupFileCreator.CreateBackupFile(connectionFileName);
+
+                    var backupPruner = new FileBackupPruner();
+                    backupPruner.PruneBackupFiles(connectionFileName);
+                }
+
+                LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
+
+                if (Settings.Default.UseSQLServer)
+                {
+                    LastSqlUpdate = DateTime.Now;
+                }
+                else
+                {
+                    if (connectionFileName == GetDefaultStartupConnectionFileName())
+                    {
+                        Settings.Default.LoadConsFromCustomLocation = false;
+                    }
+                    else
+                    {
+                        Settings.Default.LoadConsFromCustomLocation = true;
+                        Settings.Default.CustomConsPath = connectionFileName;
+                    }
+                }
+
+                // re-enable sql update checking after updates are loaded
+                RemoteConnectionsSyncronizer?.Enable();
+            }
+            catch (Exception ex)
+            {
+                if (Settings.Default.UseSQLServer)
+                {
+                    Runtime.MessageCollector.AddExceptionMessage(Language.strLoadFromSqlFailed, ex);
+                    var commandButtons = string.Join("|", Language.strCommandTryAgain, Language.strCommandOpenConnectionFile, string.Format(Language.strCommandExitProgram, Application.ProductName));
+                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.strLoadFromSqlFailed, Language.strLoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, ESysIcons.Error, ESysIcons.Error);
+                    switch (CTaskDialog.CommandButtonResult)
+                    {
+                        case 0:
+                            LoadConnections(withDialog);
+                            return;
+                        case 1:
+                            Settings.Default.UseSQLServer = false;
+                            LoadConnections(true);
+                            return;
+                        default:
+                            Application.Exit();
+                            return;
+                    }
+                }
+                if (ex is FileNotFoundException && !withDialog)
+                {
+                    Runtime.MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionFileName), ex, MessageClass.InformationMsg);
+
+                    string[] commandButtons =
+                    {
+                        Language.ConfigurationCreateNew,
+                        Language.ConfigurationCustomPath,
+                        Language.ConfigurationImportFile,
+                        Language.strMenuExit
+                    };
+
+                    var answered = false;
+                    while (!answered)
+                    {
+                        try
+                        {
+                            CTaskDialog.ShowTaskDialogBox(
+                                GeneralAppInfo.ProductName,
+                                Language.ConnectionFileNotFound,
+                                "", "", "", "", "",
+                                string.Join(" | ", commandButtons),
+                                ETaskDialogButtons.None,
+                                ESysIcons.Question,
+                                ESysIcons.Question);
+
+                            switch (CTaskDialog.CommandButtonResult)
+                            {
+                                case 0:
+                                    NewConnectionsFile(connectionFileName);
+                                    answered = true;
+                                    break;
+                                case 1:
+                                    LoadConnections(true);
+                                    answered = true;
+                                    break;
+                                case 2:
+                                    NewConnectionsFile(connectionFileName);
+                                    Import.ImportFromFile(ConnectionTreeModel.RootNodes[0]);
+                                    answered = true;
+                                    break;
+                                case 3:
+                                    Application.Exit();
+                                    answered = true;
+                                    break;
+                            }
+                        }
+                        catch (Exception exc)
+                        {
+                            Runtime.MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionFileName), exc, MessageClass.InformationMsg);
+                        }
+                    }
+                    return;
+                }
+
+                Runtime.MessageCollector.AddExceptionStackTrace(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionFileName), ex);
+                if (connectionFileName != GetStartupConnectionFileName())
+                {
+                    LoadConnections(withDialog);
+                }
+                else
+                {
+                    MessageBox.Show(FrmMain.Default,
+                        string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)),
+                        @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+            }
         }
 
         public string GetStartupConnectionFileName()

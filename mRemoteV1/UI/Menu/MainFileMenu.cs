@@ -369,7 +369,7 @@ namespace mRemoteNG.UI.Menu
                 }
             }
 
-            Runtime.LoadConnections(true);
+            Runtime.ConnectionsService.LoadConnections(true);
         }
 
         private void mMenFileSave_Click(object sender, EventArgs e)
