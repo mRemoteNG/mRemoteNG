@@ -99,7 +99,7 @@ namespace mRemoteNG.Connection.Protocol
 							if (Settings.Default.EmptyCredentials == "custom")
 							{
                                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                                password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+                                password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.ConnectionsService.EncryptionKey);
 							}
 						}
 						

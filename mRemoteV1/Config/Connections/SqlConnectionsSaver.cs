@@ -21,7 +21,7 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
     {
-        private SecureString _password = Runtime.EncryptionKey;
+        private SecureString _password = Runtime.ConnectionsService.EncryptionKey;
         private readonly SaveFilter _saveFilter;
 
         public SqlConnectionsSaver(SaveFilter saveFilter)

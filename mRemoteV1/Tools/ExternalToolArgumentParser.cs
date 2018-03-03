@@ -183,7 +183,7 @@ namespace mRemoteNG.Tools
                     if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
                         replacement = new LegacyRijndaelCryptographyProvider()
                                         .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
-                                                                    Runtime.EncryptionKey);
+                                                                    Runtime.ConnectionsService.EncryptionKey);
                     break;
                 case "domain":
                     replacement = _connectionInfo.Domain;

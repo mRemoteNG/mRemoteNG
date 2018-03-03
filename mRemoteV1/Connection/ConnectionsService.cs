@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -25,6 +26,7 @@ namespace mRemoteNG.Connection
         public string ConnectionFileName { get; private set; }
         public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
+        public SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
 
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
         //public ConnectionTreeModel ConnectionTreeModel

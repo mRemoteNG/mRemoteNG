@@ -11,7 +11,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
             var sqlCatalog = mRemoteNG.Settings.Default.SQLDatabaseName;
             var sqlUsername = mRemoteNG.Settings.Default.SQLUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var sqlPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, Runtime.EncryptionKey);
+            var sqlPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, Runtime.ConnectionsService.EncryptionKey);
             return new SqlDatabaseConnector(sqlHost, sqlCatalog, sqlUsername, sqlPassword);
         }
     }

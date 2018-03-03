@@ -61,7 +61,7 @@ namespace mRemoteNG.App.Update
             var useAuthentication = Settings.Default.UpdateProxyUseAuthentication;
             var username = Settings.Default.UpdateProxyAuthUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var password = cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
+            var password = cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, Runtime.ConnectionsService.EncryptionKey);
 
             SetProxySettings(shouldWeUseProxy, proxyAddress, port, useAuthentication, username, password);
         }

@@ -49,7 +49,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLDatabaseName.Text = Settings.Default.SQLDatabaseName;
             txtSQLUsername.Text = Settings.Default.SQLUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtSQLPassword.Text = cryptographyProvider.Decrypt(Settings.Default.SQLPass, Runtime.EncryptionKey);
+            txtSQLPassword.Text = cryptographyProvider.Decrypt(Settings.Default.SQLPass, Runtime.ConnectionsService.EncryptionKey);
             chkSQLReadOnly.Checked = Settings.Default.SQLReadOnly;
 	        lblTestConnectionResults.Text = "";
         }
@@ -64,7 +64,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
             Settings.Default.SQLUser = txtSQLUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
+            Settings.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.ConnectionsService.EncryptionKey);
             Settings.Default.SQLReadOnly = chkSQLReadOnly.Checked;
 
             if (Settings.Default.UseSQLServer)
