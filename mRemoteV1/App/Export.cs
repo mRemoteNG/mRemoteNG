@@ -17,9 +17,14 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
-	public static class Export
+	public class Export
 	{
-		public static void ExportToFile(ConnectionInfo selectedNode, ConnectionTreeModel connectionTreeModel)
+	    public Export()
+	    {
+	        
+	    }
+
+		public void ExportToFile(ConnectionInfo selectedNode, ConnectionTreeModel connectionTreeModel)
 		{
 			try
 			{
@@ -69,7 +74,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static void SaveExportFile(string fileName, SaveFormat saveFormat, SaveFilter saveFilter, ConnectionInfo exportTarget)
+		private void SaveExportFile(string fileName, SaveFormat saveFormat, SaveFilter saveFilter, ConnectionInfo exportTarget)
 		{
 			try
 			{

@@ -65,7 +65,7 @@ namespace mRemoteNGTests.Connection.Protocol
 			var sshTransferWindow = new SSHTransferWindow();
 			var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
 			var connectionTree = connectionTreeWindow.ConnectionTree;
-			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow);
+			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, new Export());
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 			var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 			var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());

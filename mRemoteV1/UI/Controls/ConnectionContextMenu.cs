@@ -51,16 +51,18 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTree _connectionTree;
         private readonly IConnectionInitiator _connectionInitiator;
 	    private readonly SSHTransferWindow _sshTransferWindow;
+        private readonly Export _export;
 
 		// TODO - this is only a property to break up a circular dependency
 	    public Action<WindowType> ShowWindowAction { get; set; } = type => { };
 
 
-		public ConnectionContextMenu(ConnectionTree connectionTree, IConnectionInitiator connectionInitiator, SSHTransferWindow sshTransferWindow)
+		public ConnectionContextMenu(ConnectionTree connectionTree, IConnectionInitiator connectionInitiator, SSHTransferWindow sshTransferWindow, Export export)
         {
             _connectionTree = connectionTree.ThrowIfNull(nameof(connectionTree));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _sshTransferWindow = sshTransferWindow.ThrowIfNull(nameof(sshTransferWindow));
+            _export = export.ThrowIfNull(nameof(export));
             InitializeComponent();
             ApplyLanguage();
             EnableShortcutKeys();
@@ -749,7 +751,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnExportFileClicked(object sender, EventArgs e)
         {
-            Export.ExportToFile(_connectionTree.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
+            _export.ExportToFile(_connectionTree.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
         }
 
         private void OnAddConnectionClicked(object sender, EventArgs e)

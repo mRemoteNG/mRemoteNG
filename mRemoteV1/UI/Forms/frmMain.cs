@@ -54,6 +54,7 @@ namespace mRemoteNG.UI.Forms
         private readonly WindowList _windowList;
         private readonly Windows _windows;
 	    private readonly Startup _startup;
+        private readonly Export _export;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -64,6 +65,7 @@ namespace mRemoteNG.UI.Forms
 		{
 		    _runtime = new Runtime();
             _windowList = new WindowList();
+		    _export = new Export();
             _connectionInitiator = new ConnectionInitiator(_windowList);
 		    _webHelper = new WebHelper(_connectionInitiator);
 		    var configWindow = new ConfigWindow(new DockContent());
@@ -71,7 +73,7 @@ namespace mRemoteNG.UI.Forms
 		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
 			var connectionTree = connectionTreeWindow.ConnectionTree;
 			connectionTree.SelectedNodeChanged += configWindow.HandleConnectionTreeSelectionChanged;
-			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow);
+			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, _export);
 			connectionTree.ConnectionContextMenu = connectionTreeContextMenu;
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
@@ -242,6 +244,7 @@ namespace mRemoteNG.UI.Forms
             mainFileMenu1.ConnectionInitiator = _connectionInitiator;
 	        mainFileMenu1.WindowList = _windowList;
 	        mainFileMenu1.Windows = _windows;
+            mainFileMenu1.Export = _export;
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;
