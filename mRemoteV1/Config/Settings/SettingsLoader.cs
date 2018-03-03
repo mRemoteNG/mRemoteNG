@@ -23,7 +23,7 @@ namespace mRemoteNG.Config.Settings
         private readonly QuickConnectToolStrip _quickConnectToolStrip;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 	    private readonly MultiSshToolStrip _multiSshToolStrip;
-	    private readonly IConnectionInitiator _connectionInitiator;
+	    private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
 
         private FrmMain MainForm { get; }
 
@@ -34,15 +34,16 @@ namespace mRemoteNG.Config.Settings
             QuickConnectToolStrip quickConnectToolStrip, 
             ExternalToolsToolStrip externalToolsToolStrip,
             MultiSshToolStrip multiSshToolStrip,
-            IConnectionInitiator connectionInitiator)
+	        ExternalAppsLoader externalAppsLoader,
+	        Func<NotificationAreaIcon> notificationAreaIconBuilder)
 		{
-            MainForm = mainForm.ThrowIfNull(nameof(mainForm));
+		    MainForm = mainForm.ThrowIfNull(nameof(mainForm));
 	        _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
 	        _quickConnectToolStrip = quickConnectToolStrip.ThrowIfNull(nameof(quickConnectToolStrip));
 	        _externalToolsToolStrip = externalToolsToolStrip.ThrowIfNull(nameof(externalToolsToolStrip));
 		    _multiSshToolStrip = multiSshToolStrip.ThrowIfNull(nameof(multiSshToolStrip));
-		    _externalAppsLoader = new ExternalAppsLoader(messageCollector, _externalToolsToolStrip, connectionInitiator.ThrowIfNull(nameof(connectionInitiator)));
-		    _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+		    _externalAppsLoader = externalAppsLoader.ThrowIfNull(nameof(externalAppsLoader));
+		    _notificationAreaIconBuilder = notificationAreaIconBuilder;
 		}
         
         #region Public Methods
@@ -146,7 +147,7 @@ namespace mRemoteNG.Config.Settings
         private void SetShowSystemTrayIcon()
         {
             if (mRemoteNG.Settings.Default.ShowSystemTrayIcon)
-                Runtime.NotificationAreaIcon = new NotificationAreaIcon(MainForm, _connectionInitiator);
+                Runtime.NotificationAreaIcon = _notificationAreaIconBuilder();
         }
 
         private void SetPuttyPath()

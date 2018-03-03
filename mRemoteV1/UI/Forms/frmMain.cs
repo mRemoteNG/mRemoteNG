@@ -58,7 +58,11 @@ namespace mRemoteNG.UI.Forms
         private readonly Windows _windows;
 	    private readonly Startup _startup;
         private readonly Export _export;
+        private readonly SettingsLoader _settingsLoader;
+        private readonly SettingsSaver _settingsSaver;
+        private readonly Shutdown _shutdown;
         private readonly ICredentialRepositoryList _credentialRepositoryList;
+        private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -83,15 +87,22 @@ namespace mRemoteNG.UI.Forms
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 		    var screenshotManagerWindow = new ScreenshotManagerWindow();
-            _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow);
+            var externalToolsService = new ExternalToolsService();
+		    _settingsSaver = new SettingsSaver(externalToolsService);
+            _shutdown = new Shutdown(_settingsSaver);
+		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown);
+		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
+            _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder);
             _panelAdder = new PanelAdder(_windowList, _connectionInitiator, _windows);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 		    _connectionInitiator.Adder = _panelAdder;
 			_startup = new Startup(this, _windows);
-			connectionTreeContextMenu.ShowWindowAction = _windows.Show;
+            connectionTreeContextMenu.ShowWindowAction = _windows.Show;
 
 			InitializeComponent();
 
+            var externalAppsLoader = new ExternalAppsLoader(Runtime.MessageCollector, _externalToolsToolStrip, _connectionInitiator, externalToolsService);
+		    _settingsLoader = new SettingsLoader(this, Runtime.MessageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, externalAppsLoader, _notificationAreaIconBuilder);
 			_externalToolsToolStrip.GetSelectedConnectionFunc = () => SelectedConnection;
 			_quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
 		    CredentialRecordTypeConverter.CredentialRepositoryList = _credentialRepositoryList;
@@ -185,8 +196,7 @@ namespace mRemoteNG.UI.Forms
             SetMenuDependencies();
 
             msMain.Location = Point.Empty;
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, _connectionInitiator);
-            settingsLoader.LoadSettings();
+            _settingsLoader.LoadSettings();
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector, _windows);
             uiLoader.LoadPanelsFromXml();
@@ -252,6 +262,7 @@ namespace mRemoteNG.UI.Forms
 	        mainFileMenu1.WindowList = _windowList;
 	        mainFileMenu1.Windows = _windows;
             mainFileMenu1.Export = _export;
+            mainFileMenu1.Shutdown = _shutdown;
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;
@@ -319,7 +330,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, Language.strTabUpdates))
+            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, Language.strTabUpdates))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -366,7 +377,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
-            Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
+		    _shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 									
 			IsClosing = true;
 
@@ -378,7 +389,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
-            Shutdown.StartUpdate();
+		    _shutdown.StartUpdate();
 									
 			Debug.Print("[END] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
 		}
@@ -405,7 +416,7 @@ namespace mRemoteNG.UI.Forms
 			    if (!Settings.Default.MinimizeToTray) return;
 			    if (Runtime.NotificationAreaIcon == null)
 			    {
-			        Runtime.NotificationAreaIcon = new NotificationAreaIcon(this, _connectionInitiator);
+			        Runtime.NotificationAreaIcon = new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
 			    }
 			    Hide();
 			}

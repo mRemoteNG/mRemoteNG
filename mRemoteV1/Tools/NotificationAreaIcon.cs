@@ -16,13 +16,16 @@ namespace mRemoteNG.Tools
         private readonly ToolStripMenuItem _cMenCons;
         private readonly IConnectionInitiator _connectionInitiator;
         private readonly FrmMain _frmMain;
+        private readonly Shutdown _shutdown;
 
         public bool Disposed { get; private set; }
 
-        public NotificationAreaIcon(FrmMain frmMain, IConnectionInitiator connectionInitiator)
+        public NotificationAreaIcon(FrmMain frmMain, IConnectionInitiator connectionInitiator, Shutdown shutdown)
         {
             _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+            _shutdown = shutdown.ThrowIfNull(nameof(shutdown));
+
             try
             {
                 _cMenCons = new ToolStripMenuItem
@@ -124,9 +127,9 @@ namespace mRemoteNG.Tools
             _connectionInitiator.OpenConnection((ConnectionInfo) ((ToolStripMenuItem) sender).Tag);
         }
 
-        private static void cMenExit_Click(object sender, EventArgs e)
+        private void cMenExit_Click(object sender, EventArgs e)
         {
-            Shutdown.Quit();
+            _shutdown.Quit();
         }
     }
 }

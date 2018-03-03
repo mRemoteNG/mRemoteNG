@@ -1,11 +1,14 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using mRemoteNG.App;
+using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using NSubstitute;
 using NUnit.Framework;
@@ -70,7 +73,10 @@ namespace mRemoteNGTests.Connection.Protocol
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 			var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 			var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
-			var windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow);
+		    var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()));
+		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), shutdown);
+            Func<NotificationAreaIcon> notificationAreaIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, _connectionInitiator, shutdown);
+            var windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow, updateWindowBuilder, notificationAreaIconBuilder);
 			var connectionWindow = new ConnectionWindow(new DockContent(), _connectionInitiator, windows);
 			var connectionInfo = new ConnectionInfo {ExtApp = extAppName};
 			return new InterfaceControl(connectionWindow, sut, connectionInfo);

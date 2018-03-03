@@ -16,18 +16,19 @@ namespace mRemoteNG.UI.Forms
         private readonly string _pageName;
         private readonly IConnectionInitiator _connectionInitiator;
 	    private readonly Action<WindowType> _showWindowAction;
+        private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
 
-
-        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction) 
-            : this(connectionInitiator, showWindowAction, Language.strStartupExit)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder) 
+            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, Language.strStartupExit)
         {
         }
 
-        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, string pageName)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, string pageName)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
-            _pageName = pageName.ThrowIfNull(nameof(pageName));
 	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
+            _notificationAreaIconBuilder = notificationAreaIconBuilder;
+            _pageName = pageName.ThrowIfNull(nameof(pageName));
 	        InitializeComponent();
         }
 
@@ -67,7 +68,7 @@ namespace mRemoteNG.UI.Forms
             _pages = new Dictionary<string, OptionsPage>
             {
                 {typeof(StartupExitPage).Name, new StartupExitPage()},
-                {typeof(AppearancePage).Name, new AppearancePage(_connectionInitiator)},
+                {typeof(AppearancePage).Name, new AppearancePage(_connectionInitiator, _notificationAreaIconBuilder)},
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
                 {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},

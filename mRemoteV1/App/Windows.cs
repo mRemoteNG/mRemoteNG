@@ -5,6 +5,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
 {
@@ -19,6 +20,8 @@ namespace mRemoteNG.App
         private UltraVNCWindow _ultravncscForm;
         private ComponentsCheckWindow _componentscheckForm;
         private UpdateWindow _updateForm;
+        private readonly Func<UpdateWindow> _updateWindowBuilder;
+        private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
 
         internal ConnectionTreeWindow TreeForm { get; }
         internal ConfigWindow ConfigForm { get; }
@@ -32,7 +35,9 @@ namespace mRemoteNG.App
             ConfigWindow configForm,
             ErrorAndInfoWindow errorAndInfoWindow,
             ScreenshotManagerWindow screenshotForm,
-            SSHTransferWindow sshtransferForm)
+            SSHTransferWindow sshtransferForm,
+            Func<UpdateWindow> updateWindowBuilder,
+            Func<NotificationAreaIcon> notificationAreaIconBuilder)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             TreeForm = treeForm.ThrowIfNull(nameof(treeForm));
@@ -40,7 +45,8 @@ namespace mRemoteNG.App
             ErrorsForm = errorAndInfoWindow.ThrowIfNull(nameof(errorAndInfoWindow));
             ScreenshotForm = screenshotForm.ThrowIfNull(nameof(screenshotForm));
             SshtransferForm = sshtransferForm.ThrowIfNull(nameof(sshtransferForm));
-            _updateForm = new UpdateWindow();
+            _updateWindowBuilder = updateWindowBuilder;
+            _notificationAreaIconBuilder = notificationAreaIconBuilder;
         }
 
         public void Show(WindowType windowType)
@@ -62,7 +68,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions(_connectionInitiator, Show))
+                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder))
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }
@@ -74,7 +80,7 @@ namespace mRemoteNG.App
                         break;
                     case WindowType.Update:
                         if (_updateForm == null || _updateForm.IsDisposed)
-                            _updateForm = new UpdateWindow();
+                            _updateForm = _updateWindowBuilder();
                         _updateForm.Show(dockPanel);
                         break;
                     case WindowType.Help:

@@ -9,10 +9,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     public partial class AppearancePage
     {
         private readonly IConnectionInitiator _connectionInitiator;
+        private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
 
-        public AppearancePage(IConnectionInitiator connectionInitiator)
+        public AppearancePage(IConnectionInitiator connectionInitiator, Func<NotificationAreaIcon> notificationAreaIconBuilder)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+            _notificationAreaIconBuilder = notificationAreaIconBuilder;
             InitializeComponent();
             base.ApplyTheme();
         }
@@ -85,7 +87,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 if (Runtime.NotificationAreaIcon == null)
                 {
-                    Runtime.NotificationAreaIcon = new NotificationAreaIcon(FrmMain.Default, _connectionInitiator);
+                    Runtime.NotificationAreaIcon = _notificationAreaIconBuilder();
                 }
             }
             else

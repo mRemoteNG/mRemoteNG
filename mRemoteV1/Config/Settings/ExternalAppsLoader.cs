@@ -16,12 +16,15 @@ namespace mRemoteNG.Config.Settings
         private readonly MessageCollector _messageCollector;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
         private readonly IConnectionInitiator _connectionInitiator;
+        private readonly ExternalToolsService _externalToolsService;
 
-        public ExternalAppsLoader(MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip, IConnectionInitiator connectionInitiator)
+        public ExternalAppsLoader(MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip, 
+            IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService)
         {
             _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
             _externalToolsToolStrip = externalToolsToolStrip.ThrowIfNull(nameof(externalToolsToolStrip));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+            _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
         }
 
 
@@ -87,7 +90,7 @@ namespace mRemoteNG.Config.Settings
                 }
 
                 _messageCollector.AddMessage(MessageClass.InformationMsg, $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}", true);
-                Runtime.ExternalToolsService.ExternalTools.Add(extA);
+                _externalToolsService.ExternalTools.Add(extA);
             }
 
             _externalToolsToolStrip.SwitchToolBarText(mRemoteNG.Settings.Default.ExtAppsTBShowText);

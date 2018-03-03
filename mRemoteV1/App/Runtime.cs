@@ -7,8 +7,6 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
-using mRemoteNG.Credential;
-using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;

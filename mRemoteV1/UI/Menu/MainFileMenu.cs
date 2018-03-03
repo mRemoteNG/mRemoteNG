@@ -42,6 +42,7 @@ namespace mRemoteNG.UI.Menu
 	    public ConnectionTreeWindow TreeWindow { get; set; }
         public IConnectionInitiator ConnectionInitiator { get; set; }
         public Export Export { get; set; }
+        public Shutdown Shutdown { get; set; }
 
         public MainFileMenu()
         {

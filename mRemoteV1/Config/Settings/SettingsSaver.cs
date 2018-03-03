@@ -9,9 +9,16 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Settings
 {
-    public static class SettingsSaver
+    public class SettingsSaver
     {
-        public static void SaveSettings(
+        private readonly ExternalToolsService _externalToolsService;
+
+        public SettingsSaver(ExternalToolsService externalToolsService)
+        {
+            _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+        }
+
+        public void SaveSettings(
             Control quickConnectToolStrip, 
             ExternalToolsToolStrip externalToolsToolStrip,
             MultiSshToolStrip multiSshToolStrip,
@@ -62,7 +69,7 @@ namespace mRemoteNG.Config.Settings
             }
         }
 
-        private static void SaveExternalAppsToolbarLocation(ExternalToolsToolStrip externalToolsToolStrip)
+        private void SaveExternalAppsToolbarLocation(ExternalToolsToolStrip externalToolsToolStrip)
         {
             mRemoteNG.Settings.Default.ExtAppsTBLocation = externalToolsToolStrip.Location;
             mRemoteNG.Settings.Default.ExtAppsTBVisible = externalToolsToolStrip.Visible;
@@ -74,7 +81,7 @@ namespace mRemoteNG.Config.Settings
             }
         }
 
-        private static void SaveQuickConnectToolbarLocation(Control quickConnectToolStrip)
+        private void SaveQuickConnectToolbarLocation(Control quickConnectToolStrip)
         {
             mRemoteNG.Settings.Default.QuickyTBLocation = quickConnectToolStrip.Location;
             mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
@@ -85,7 +92,7 @@ namespace mRemoteNG.Config.Settings
             }
         }
 
-        private static void SaveMultiSshToolbarLocation(MultiSshToolStrip multiSshToolStrip)
+        private void SaveMultiSshToolbarLocation(MultiSshToolStrip multiSshToolStrip)
         {
             mRemoteNG.Settings.Default.MultiSshToolbarLocation = multiSshToolStrip.Location;
             mRemoteNG.Settings.Default.MultiSshToolbarVisible = multiSshToolStrip.Visible;
@@ -96,7 +103,7 @@ namespace mRemoteNG.Config.Settings
             }
         }
 
-        private static void SaveDockPanelLayout()
+        private void SaveDockPanelLayout()
         {
             var panelLayoutXmlFilePath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
             var panelLayoutSaver = new DockPanelLayoutSaver(
@@ -106,10 +113,10 @@ namespace mRemoteNG.Config.Settings
             panelLayoutSaver.Save();
         }
 
-        private static void SaveExternalApps()
+        private void SaveExternalApps()
         {
             var externalAppsSaver = new ExternalAppsSaver();
-            externalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
+            externalAppsSaver.Save(_externalToolsService.ExternalTools);
         }
     }
 }

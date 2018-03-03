@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
 using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
@@ -15,21 +16,17 @@ namespace mRemoteNG.UI.Window
 	public partial class UpdateWindow : BaseWindow
 	{
         private AppUpdater _appUpdate;
+	    private Shutdown _shutdown;
         private bool _isUpdateDownloadHandlerDeclared;
 
-        #region Public Methods
-        public UpdateWindow() : this(new DockContent())
-	    {
-	    }
-
-		public UpdateWindow(DockContent panel)
+		public UpdateWindow(DockContent panel, Shutdown shutdown)
 		{
-			WindowType = WindowType.Update;
+		    WindowType = WindowType.Update;
 			DockPnl = panel;
+		    _shutdown = shutdown.ThrowIfNull(nameof(shutdown));
 			InitializeComponent();
             FontOverrider.FontOverride(this);
 		}
-        #endregion
 		
         #region Form Stuff
 
@@ -262,7 +259,7 @@ namespace mRemoteNG.UI.Window
 				{
 					if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
 					{
-						Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
+					    _shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
 					}
 					else
 					{
