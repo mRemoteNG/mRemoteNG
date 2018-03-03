@@ -18,7 +18,6 @@ namespace mRemoteNG.Connection
 	public class ConnectionInitiator : IConnectionInitiator
 	{
 	    private readonly WindowList _windowList;
-	    private readonly Runtime _runtime;
 
         /// <summary>
         /// This is a property because we have a circular dependency.
@@ -26,10 +25,9 @@ namespace mRemoteNG.Connection
 	    public PanelAdder Adder { get; set; }
 
 
-        public ConnectionInitiator(WindowList windowList, Runtime runtime)
+        public ConnectionInitiator(WindowList windowList)
         {
             _windowList = windowList.ThrowIfNull(nameof(windowList));
-            _runtime = runtime.ThrowIfNull(nameof(runtime));
         }
 
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
@@ -173,7 +171,7 @@ namespace mRemoteNG.Connection
             var connectionPanel = "";
             if (connectionInfo.Panel == "" || (force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | Settings.Default.AlwaysShowPanelSelectionDlg)
             {
-                var frmPnl = new frmChoosePanel(_runtime, Adder);
+                var frmPnl = new frmChoosePanel(Adder, _windowList);
                 if (frmPnl.ShowDialog() == DialogResult.OK)
                 {
                     connectionPanel = frmPnl.Panel;

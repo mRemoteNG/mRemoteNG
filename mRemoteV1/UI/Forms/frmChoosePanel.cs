@@ -1,5 +1,4 @@
 using System.Windows.Forms;
-using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.Panels;
@@ -9,12 +8,12 @@ namespace mRemoteNG.UI.Forms
 	public partial class frmChoosePanel
 	{
 	    private readonly PanelAdder _panelAdder;
-	    private readonly Runtime _runtime;
+	    private readonly WindowList _windowList;
 
-		public frmChoosePanel(Runtime runtime, PanelAdder panelAdder)
+		public frmChoosePanel(PanelAdder panelAdder, WindowList windowList)
 		{
-		    _runtime = runtime.ThrowIfNull(nameof(runtime));
             _panelAdder = panelAdder.ThrowIfNull(nameof(panelAdder));
+		    _windowList = windowList.ThrowIfNull(nameof(windowList));
 		    InitializeComponent();
 		}
         public string Panel
@@ -49,9 +48,9 @@ namespace mRemoteNG.UI.Forms
 		{
 			cbPanels.Items.Clear();
 			
-			for (int i = 0; i <= _runtime.WindowList.Count - 1; i++)
+			for (int i = 0; i <= _windowList.Count - 1; i++)
 			{
-                cbPanels.Items.Add(_runtime.WindowList[i].Text.Replace("&&", "&"));
+                cbPanels.Items.Add(_windowList[i].Text.Replace("&&", "&"));
 			}
 			
 			if (cbPanels.Items.Count > 0)

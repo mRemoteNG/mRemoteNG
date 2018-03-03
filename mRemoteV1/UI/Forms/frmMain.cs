@@ -64,7 +64,7 @@ namespace mRemoteNG.UI.Forms
 		{
 		    _runtime = new Runtime();
             _windowList = new WindowList();
-		    _connectionInitiator = new ConnectionInitiator(_windowList, _runtime);
+            _connectionInitiator = new ConnectionInitiator(_windowList);
 		    _webHelper = new WebHelper(_connectionInitiator);
 		    var configWindow = new ConfigWindow(new DockContent());
 		    var sshTransferWindow = new SSHTransferWindow();
@@ -188,8 +188,6 @@ namespace mRemoteNG.UI.Forms
     		_themeManager.ThemeChanged += ApplyTheme; 
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
-
-            _runtime.WindowList = new WindowList();
 
             if (Settings.Default.ResetPanels)
                 SetDefaultLayout();
@@ -333,10 +331,10 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
-            if (!(_runtime.WindowList == null || _runtime.WindowList.Count == 0))
+            if (!(_windowList == null || _windowList.Count == 0))
 			{
 			    var openConnections = 0;
-                foreach (BaseWindow window in _runtime.WindowList)
+                foreach (BaseWindow window in _windowList)
                 {
                     var connectionWindow = window as ConnectionWindow;
                     if (connectionWindow != null)
@@ -362,9 +360,9 @@ namespace mRemoteNG.UI.Forms
 									
 			IsClosing = true;
 
-            if (_runtime.WindowList != null)
+            if (_windowList != null)
 			{
-                foreach (BaseWindow window in _runtime.WindowList)
+                foreach (BaseWindow window in _windowList)
 				{
 					window.Close();
 				}
