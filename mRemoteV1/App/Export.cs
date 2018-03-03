@@ -8,8 +8,10 @@ using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
@@ -19,9 +21,11 @@ namespace mRemoteNG.App
 {
 	public class Export
 	{
-	    public Export()
+	    private readonly ICredentialRepositoryList _credentialRepositoryList;
+
+	    public Export(ICredentialRepositoryList credentialRepositoryList)
 	    {
-	        
+	        _credentialRepositoryList = credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
 	    }
 
 		public void ExportToFile(ConnectionInfo selectedNode, ConnectionTreeModel connectionTreeModel)
@@ -91,7 +95,7 @@ namespace mRemoteNG.App
 			            serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
 			            break;
 			        case SaveFormat.mRCSV:
-			            serializer = new CsvConnectionsSerializerMremotengFormat(saveFilter, Runtime.CredentialProviderCatalog);
+			            serializer = new CsvConnectionsSerializerMremotengFormat(saveFilter, _credentialRepositoryList);
                         break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

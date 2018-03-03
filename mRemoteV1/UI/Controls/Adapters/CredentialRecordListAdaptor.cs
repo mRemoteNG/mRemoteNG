@@ -2,13 +2,15 @@
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms.Design;
-using mRemoteNG.App;
+using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Controls.Adapters
 {
     public class CredentialRecordListAdaptor : UITypeEditor
     {
         private IWindowsFormsEditorService _editorService;
+
+        public static ICredentialRepositoryList CredentialRepositoryList { get; set; }
 
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
@@ -21,9 +23,7 @@ namespace mRemoteNG.UI.Controls.Adapters
             _editorService = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
             if (_editorService == null) return value;
 
-            var credentialManager = Runtime.CredentialProviderCatalog;
-
-            var listBox = new CredentialRecordListBox(credentialManager.GetCredentialRecords());
+            var listBox = new CredentialRecordListBox(CredentialRepositoryList.GetCredentialRecords());
             listBox.SelectedValueChanged += ListBoxOnSelectedValueChanged;
 
             _editorService.DropDownControl(listBox);

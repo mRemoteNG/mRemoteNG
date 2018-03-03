@@ -17,11 +17,14 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
+using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Controls.Adapters;
 using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
@@ -55,6 +58,7 @@ namespace mRemoteNG.UI.Forms
         private readonly Windows _windows;
 	    private readonly Startup _startup;
         private readonly Export _export;
+        private readonly ICredentialRepositoryList _credentialRepositoryList;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -65,7 +69,8 @@ namespace mRemoteNG.UI.Forms
 		{
 		    _runtime = new Runtime();
             _windowList = new WindowList();
-		    _export = new Export();
+            _credentialRepositoryList = new CredentialRepositoryList();
+		    _export = new Export(_credentialRepositoryList);
             _connectionInitiator = new ConnectionInitiator(_windowList);
 		    _webHelper = new WebHelper(_connectionInitiator);
 		    var configWindow = new ConfigWindow(new DockContent());
@@ -89,8 +94,10 @@ namespace mRemoteNG.UI.Forms
 
 			_externalToolsToolStrip.GetSelectedConnectionFunc = () => SelectedConnection;
 			_quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
+		    CredentialRecordTypeConverter.CredentialRepositoryList = _credentialRepositoryList;
+		    CredentialRecordListAdaptor.CredentialRepositoryList = _credentialRepositoryList;
 
-			Fullscreen = new FullscreenHandler(this);
+            Fullscreen = new FullscreenHandler(this);
 
             //Theming support
             _themeManager = ThemeManager.getInstance();
@@ -256,7 +263,7 @@ namespace mRemoteNG.UI.Forms
 			viewMenu1.MainForm = this;
 
             toolsMenu1.MainForm = this;
-            toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
+            toolsMenu1.CredentialProviderCatalog = _credentialRepositoryList;
 	        toolsMenu1.Windows = _windows;
 
 	        helpMenu1.WebHelper = _webHelper;

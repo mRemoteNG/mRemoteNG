@@ -6,11 +6,19 @@ using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.CredentialProviderSerializer;
 using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Security.Factories;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Credential
 {
     public class CredentialServiceFactory
     {
+        private ICredentialRepositoryList _credentialRepositoryList;
+
+        public CredentialServiceFactory(ICredentialRepositoryList credentialRepositoryList)
+        {
+            _credentialRepositoryList = credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
+        }
+
         // When we get a true CompositionRoot we can move this to that class. We should only require 1 instance of this service at a time
         public CredentialServiceFacade Build()
         {
@@ -27,7 +35,7 @@ namespace mRemoteNG.Credential
                 new CredentialRepositoryListDeserializer(credRepoSerializer, credRepoDeserializer));
             var repoListSaver = new CredentialRepositoryListSaver(repoListDataProvider);
 
-            return new CredentialServiceFacade(Runtime.CredentialProviderCatalog, repoListLoader, repoListSaver);
+            return new CredentialServiceFacade(_credentialRepositoryList, repoListLoader, repoListSaver);
         }
     }
 }

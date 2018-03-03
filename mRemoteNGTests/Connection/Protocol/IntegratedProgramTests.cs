@@ -2,6 +2,7 @@
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Controls;
@@ -65,7 +66,7 @@ namespace mRemoteNGTests.Connection.Protocol
 			var sshTransferWindow = new SSHTransferWindow();
 			var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
 			var connectionTree = connectionTreeWindow.ConnectionTree;
-			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, new Export());
+			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, new Export(new CredentialRepositoryList()));
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 			var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 			var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());

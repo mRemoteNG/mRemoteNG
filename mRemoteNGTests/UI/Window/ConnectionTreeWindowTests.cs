@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Window;
 using NSubstitute;
@@ -19,7 +20,7 @@ namespace mRemoteNGTests.UI.Window
 	        var connectionInitiator = Substitute.For<IConnectionInitiator>();
 	        var connectionTree = new ConnectionTree();
 			var sshTransferWindow = new SSHTransferWindow();
-	        var connectionContextMenu = new ConnectionContextMenu(connectionTree, connectionInitiator, sshTransferWindow, new Export());
+	        var connectionContextMenu = new ConnectionContextMenu(connectionTree, connectionInitiator, sshTransferWindow, new Export(new CredentialRepositoryList()));
             _connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), connectionInitiator) {ConnectionTreeContextMenu = connectionContextMenu};
         }
 
