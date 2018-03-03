@@ -22,7 +22,8 @@ namespace mRemoteNGTests.UI.Window
 	        var connectionTree = new ConnectionTree();
 			var sshTransferWindow = new SSHTransferWindow();
             var externalToolsService = new ExternalToolsService();
-	        var connectionContextMenu = new ConnectionContextMenu(connectionTree, connectionInitiator, sshTransferWindow, new Export(new CredentialRepositoryList()), externalToolsService);
+            var import = new Import();
+	        var connectionContextMenu = new ConnectionContextMenu(connectionTree, connectionInitiator, sshTransferWindow, new Export(new CredentialRepositoryList()), externalToolsService, import);
             _connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), connectionInitiator) {ConnectionTreeContextMenu = connectionContextMenu};
         }
 

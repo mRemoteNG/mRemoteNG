@@ -63,6 +63,7 @@ namespace mRemoteNG.UI.Forms
         private readonly ICredentialRepositoryList _credentialRepositoryList;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
         private readonly ConnectionsService _connectionsService;
+        private readonly Import _import;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -74,7 +75,8 @@ namespace mRemoteNG.UI.Forms
             _windowList = new WindowList();
             _credentialRepositoryList = new CredentialRepositoryList();
             var externalToolsService = new ExternalToolsService();
-		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance);
+		    _import = new Import();
+		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance, _import);
 
             ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
             _export = new Export(_credentialRepositoryList);
@@ -85,7 +87,7 @@ namespace mRemoteNG.UI.Forms
 		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
 			var connectionTree = connectionTreeWindow.ConnectionTree;
 			connectionTree.SelectedNodeChanged += configWindow.HandleConnectionTreeSelectionChanged;
-			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, _export, externalToolsService);
+			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, _export, externalToolsService, _import);
 			connectionTree.ConnectionContextMenu = connectionTreeContextMenu;
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
@@ -95,7 +97,10 @@ namespace mRemoteNG.UI.Forms
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown);
 		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
             Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService);
-            _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService);
+		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, _import);
+		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import);
+            _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
+                sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, portScanWindowBuilder, activeDirectoryImportWindowBuilder);
             Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService);
             _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
@@ -268,6 +273,7 @@ namespace mRemoteNG.UI.Forms
 	        mainFileMenu1.Windows = _windows;
             mainFileMenu1.Export = _export;
             mainFileMenu1.Shutdown = _shutdown;
+            mainFileMenu1.Import = _import;
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;

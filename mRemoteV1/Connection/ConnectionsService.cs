@@ -26,6 +26,7 @@ namespace mRemoteNG.Connection
         private static readonly object SaveLock = new object();
         private bool _showDialogWhenLoadingConnections;
         private readonly PuttySessionsManager _puttySessionsManager;
+        private readonly Import _import;
 
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
@@ -41,12 +42,10 @@ namespace mRemoteNG.Connection
         //    set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         //}
 
-        public ConnectionsService(PuttySessionsManager puttySessionsManager)
+        public ConnectionsService(PuttySessionsManager puttySessionsManager, Import import)
         {
-            if (puttySessionsManager == null)
-                throw new ArgumentNullException(nameof(puttySessionsManager));
-
-            _puttySessionsManager = puttySessionsManager;
+            _puttySessionsManager = puttySessionsManager.ThrowIfNull(nameof(puttySessionsManager));
+            _import = import.ThrowIfNull(nameof(import));
         }
 
         public void NewConnectionsFile(string filename)
@@ -319,7 +318,7 @@ namespace mRemoteNG.Connection
                                     break;
                                 case 2:
                                     NewConnectionsFile(connectionFileName);
-                                    Import.ImportFromFile(ConnectionTreeModel.RootNodes[0]);
+                                    _import.ImportFromFile(ConnectionTreeModel.RootNodes[0]);
                                     answered = true;
                                     break;
                                 case 3:

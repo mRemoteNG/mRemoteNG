@@ -53,6 +53,7 @@ namespace mRemoteNG.UI.Controls
 	    private readonly SSHTransferWindow _sshTransferWindow;
         private readonly Export _export;
         private readonly ExternalToolsService _externalToolsService;
+        private readonly Import _import;
 
         // TODO - this is only a property to break up a circular dependency
         public Action<WindowType> ShowWindowAction { get; set; } = type => { };
@@ -63,13 +64,16 @@ namespace mRemoteNG.UI.Controls
 		    IConnectionInitiator connectionInitiator, 
 		    SSHTransferWindow sshTransferWindow, 
 		    Export export, 
-		    ExternalToolsService externalToolsService)
+		    ExternalToolsService externalToolsService, 
+		    Import import)
         {
             _connectionTree = connectionTree.ThrowIfNull(nameof(connectionTree));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _sshTransferWindow = sshTransferWindow.ThrowIfNull(nameof(sshTransferWindow));
             _export = export.ThrowIfNull(nameof(export));
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+            _import = import.ThrowIfNull(nameof(import));
+
             InitializeComponent();
             ApplyLanguage();
             EnableShortcutKeys();
@@ -743,7 +747,7 @@ namespace mRemoteNG.UI.Controls
                 selectedNodeAsContainer = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
             else
                 selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo ?? _connectionTree.SelectedNode.Parent;
-            Import.ImportFromFile(selectedNodeAsContainer);
+            _import.ImportFromFile(selectedNodeAsContainer);
         }
 
         private void OnImportActiveDirectoryClicked(object sender, EventArgs e)

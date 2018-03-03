@@ -5,17 +5,20 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Window
 {
     public partial class ActiveDirectoryImportWindow
     {
         private readonly Func<ConnectionInfo> _getSelectedNodeFunc;
+        private readonly Import _import;
         private string _currentDomain;
 
-        public ActiveDirectoryImportWindow(Func<ConnectionInfo> getSelectedNodeFunc)
+        public ActiveDirectoryImportWindow(Func<ConnectionInfo> getSelectedNodeFunc, Import import)
         {
             _getSelectedNodeFunc = getSelectedNodeFunc;
+            _import = import.ThrowIfNull(nameof(import));
             InitializeComponent();
             FontOverrider.FontOverride(this);
             WindowType = WindowType.ActiveDirectoryImport;
@@ -54,7 +57,7 @@ namespace mRemoteNG.UI.Window
             else
                 importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
 
-            Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
+            _import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
         }
 
         /*

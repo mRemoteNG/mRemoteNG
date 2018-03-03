@@ -5,7 +5,6 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
 {
@@ -23,6 +22,8 @@ namespace mRemoteNG.App
         private readonly Func<UpdateWindow> _updateWindowBuilder;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
         private readonly Func<ExternalToolsWindow> _externalToolsWindowBuilder;
+        private readonly Func<PortScanWindow> _portScanWindowBuilder;
+        private readonly Func<ActiveDirectoryImportWindow> _activeDirectoryImportWindowBuilder;
         private readonly ConnectionsService _connectionsService;
 
         internal ConnectionTreeWindow TreeForm { get; }
@@ -41,7 +42,9 @@ namespace mRemoteNG.App
             Func<UpdateWindow> updateWindowBuilder,
             Func<NotificationAreaIcon> notificationAreaIconBuilder,
             Func<ExternalToolsWindow> externalToolsWindowBuilder, 
-            ConnectionsService connectionsService)
+            ConnectionsService connectionsService, 
+            Func<PortScanWindow> portScanWindowBuilder, 
+            Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             TreeForm = treeForm.ThrowIfNull(nameof(treeForm));
@@ -52,6 +55,8 @@ namespace mRemoteNG.App
             _updateWindowBuilder = updateWindowBuilder;
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
             _externalToolsWindowBuilder = externalToolsWindowBuilder;
+            _portScanWindowBuilder = portScanWindowBuilder;
+            _activeDirectoryImportWindowBuilder = activeDirectoryImportWindowBuilder;
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
@@ -70,7 +75,7 @@ namespace mRemoteNG.App
                         break;
                     case WindowType.ActiveDirectoryImport:
                         if (_adimportForm == null || _adimportForm.IsDisposed)
-                            _adimportForm = new ActiveDirectoryImportWindow(() => TreeForm.SelectedNode);
+                            _adimportForm = _activeDirectoryImportWindowBuilder();
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
@@ -100,7 +105,7 @@ namespace mRemoteNG.App
                         _externalappsForm.Show(dockPanel);
                         break;
                     case WindowType.PortScan:
-                        _portscanForm = new PortScanWindow(() => TreeForm.SelectedNode);
+                        _portscanForm = _portScanWindowBuilder();
                         _portscanForm.Show(dockPanel);
                         break;
                     case WindowType.UltraVNCSC:

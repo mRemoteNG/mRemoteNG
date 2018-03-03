@@ -14,11 +14,13 @@ namespace mRemoteNG.UI.Window
 	public partial class PortScanWindow
 	{
 	    private readonly Func<ConnectionInfo> _getSelectedConnectionFunc;
+	    private readonly Import _import;
 
         #region Constructors
-		public PortScanWindow(Func<ConnectionInfo> getSelectedConnectionFunc)
+		public PortScanWindow(Func<ConnectionInfo> getSelectedConnectionFunc, Import import)
 		{
 		    _getSelectedConnectionFunc = getSelectedConnectionFunc;
+		    _import = import.ThrowIfNull(nameof(import));
 		    InitializeComponent();
 					
 			WindowType = WindowType.PortScan;
@@ -263,7 +265,7 @@ namespace mRemoteNG.UI.Window
 
             var selectedNode = _getSelectedConnectionFunc();
             var selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
-            Import.ImportFromPortScan(hosts, protocol, selectedTreeNodeAsContainer);
+            _import.ImportFromPortScan(hosts, protocol, selectedTreeNodeAsContainer);
         }
 
         private void importVNCToolStripMenuItem_Click(object sender, EventArgs e)

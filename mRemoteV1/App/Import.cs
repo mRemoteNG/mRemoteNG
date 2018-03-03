@@ -9,9 +9,9 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.App
 {
-    public static class Import
+    public class Import
     {
-        public static void ImportFromFile(ContainerInfo importDestinationContainer)
+        public void ImportFromFile(ContainerInfo importDestinationContainer)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer, bool importSubOu)
+        public void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer, bool importSubOu)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void ImportFromPortScan(IEnumerable<ScanHost> hosts, ProtocolType protocol, ContainerInfo importDestinationContainer)
+        public void ImportFromPortScan(IEnumerable<ScanHost> hosts, ProtocolType protocol, ContainerInfo importDestinationContainer)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace mRemoteNG.App
             }
         }
 
-        private static IConnectionImporter<string> BuildConnectionImporterFromFileExtension(string fileName)
+        private IConnectionImporter<string> BuildConnectionImporterFromFileExtension(string fileName)
         {
             // TODO: Use the file contents to determine the file type instead of trusting the extension
             var extension = Path.GetExtension(fileName) ?? "";

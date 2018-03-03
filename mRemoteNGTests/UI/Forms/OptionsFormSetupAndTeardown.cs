@@ -23,7 +23,8 @@ namespace mRemoteNGTests.UI.Forms
         public void Setup()
         {
 	        var connectionInitiator = Substitute.For<IConnectionInitiator>();
-            var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance));
+            var import = new Import();
+            var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import));
             Func<NotificationAreaIcon> notificationIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, connectionInitiator, shutdown);
             _optionsForm = new frmOptions(connectionInitiator, type => {}, notificationIconBuilder, Runtime.ConnectionsService);
             _optionsForm.Show();
