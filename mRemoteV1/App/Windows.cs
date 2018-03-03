@@ -23,6 +23,7 @@ namespace mRemoteNG.App
         private readonly Func<UpdateWindow> _updateWindowBuilder;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
         private readonly Func<ExternalToolsWindow> _externalToolsWindowBuilder;
+        private readonly ConnectionsService _connectionsService;
 
         internal ConnectionTreeWindow TreeForm { get; }
         internal ConfigWindow ConfigForm { get; }
@@ -39,7 +40,8 @@ namespace mRemoteNG.App
             SSHTransferWindow sshtransferForm,
             Func<UpdateWindow> updateWindowBuilder,
             Func<NotificationAreaIcon> notificationAreaIconBuilder,
-            Func<ExternalToolsWindow> externalToolsWindowBuilder)
+            Func<ExternalToolsWindow> externalToolsWindowBuilder, 
+            ConnectionsService connectionsService)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             TreeForm = treeForm.ThrowIfNull(nameof(treeForm));
@@ -50,6 +52,7 @@ namespace mRemoteNG.App
             _updateWindowBuilder = updateWindowBuilder;
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
             _externalToolsWindowBuilder = externalToolsWindowBuilder;
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
         public void Show(WindowType windowType)
@@ -71,7 +74,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder))
+                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService))
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }

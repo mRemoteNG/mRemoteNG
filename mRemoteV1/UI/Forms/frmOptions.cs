@@ -17,17 +17,19 @@ namespace mRemoteNG.UI.Forms
         private readonly IConnectionInitiator _connectionInitiator;
 	    private readonly Action<WindowType> _showWindowAction;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
+        private readonly ConnectionsService _connectionsService;
 
-        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder) 
-            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, Language.strStartupExit)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, ConnectionsService connectionsService) 
+            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, connectionsService, Language.strStartupExit)
         {
         }
 
-        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, string pageName)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, ConnectionsService connectionsService, string pageName)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _pageName = pageName.ThrowIfNull(nameof(pageName));
 	        InitializeComponent();
         }
@@ -73,7 +75,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},
                 {typeof(CredentialsPage).Name, new CredentialsPage()},
-                {typeof(SqlServerPage).Name, new SqlServerPage()},
+                {typeof(SqlServerPage).Name, new SqlServerPage(_connectionsService)},
                 {typeof(UpdatesPage).Name, new UpdatesPage(_showWindowAction)},
                 {typeof(ThemePage).Name, new ThemePage()},
                 {typeof(SecurityPage).Name, new SecurityPage()},

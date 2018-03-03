@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
+using mRemoteNG.Connection;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -13,11 +14,13 @@ namespace mRemoteNG.App
     public class Shutdown
     {
         private readonly SettingsSaver _settingsSaver;
+        private readonly ConnectionsService _connectionsService;
         private static string _updateFilePath;
 
-        public Shutdown(SettingsSaver settingsSaver)
+        public Shutdown(SettingsSaver settingsSaver, ConnectionsService connectionsService)
         {
             _settingsSaver = settingsSaver.ThrowIfNull(nameof(settingsSaver));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
         private static bool UpdatePending
@@ -62,7 +65,7 @@ namespace mRemoteNG.App
         private void SaveConnections()
         {
             if (Settings.Default.SaveConsOnExit)
-                Runtime.ConnectionsService.SaveConnections();
+                _connectionsService.SaveConnections();
         }
 
         private void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, FrmMain frmMain)

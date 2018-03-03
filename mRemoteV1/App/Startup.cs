@@ -23,11 +23,13 @@ namespace mRemoteNG.App
         private readonly ConnectionIconLoader _connectionIconLoader;
         private readonly FrmMain _frmMain;
 	    private readonly Windows _windows;
+        private readonly ConnectionsService _connectionsService;
 
-        public Startup(FrmMain frmMain, Windows windows)
+        public Startup(FrmMain frmMain, Windows windows, ConnectionsService connectionsService)
         {
-	        _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
 			_windows = windows.ThrowIfNull(nameof(windows));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	        _appUpdate = new AppUpdater();
             _connectionIconLoader = new ConnectionIconLoader(GeneralAppInfo.HomePath + "\\Icons\\");
         }
@@ -56,8 +58,8 @@ namespace mRemoteNG.App
             messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
             if (!Settings.Default.UseSQLServer) return;
             messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
+            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            _connectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 
         public void CheckForUpdate()

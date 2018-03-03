@@ -1,4 +1,6 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using mRemoteNG.App;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Tools;
@@ -21,8 +23,9 @@ namespace mRemoteNGTests.UI.Forms
         public void Setup()
         {
 	        var connectionInitiator = Substitute.For<IConnectionInitiator>();
-            var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()));
-            _optionsForm = new frmOptions(connectionInitiator, type => {}, () => new NotificationAreaIcon(FrmMain.Default, connectionInitiator, shutdown));
+            var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance));
+            Func<NotificationAreaIcon> notificationIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, connectionInitiator, shutdown);
+            _optionsForm = new frmOptions(connectionInitiator, type => {}, notificationIconBuilder, Runtime.ConnectionsService);
             _optionsForm.Show();
         }
 

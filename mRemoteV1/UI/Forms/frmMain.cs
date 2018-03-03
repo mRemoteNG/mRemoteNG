@@ -50,7 +50,6 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
-        private readonly Runtime _runtime;
         private readonly ConnectionInitiator _connectionInitiator;
         private readonly PanelAdder _panelAdder;
         private readonly WebHelper _webHelper;
@@ -63,6 +62,7 @@ namespace mRemoteNG.UI.Forms
         private readonly Shutdown _shutdown;
         private readonly ICredentialRepositoryList _credentialRepositoryList;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
+        private readonly ConnectionsService _connectionsService;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -71,11 +71,12 @@ namespace mRemoteNG.UI.Forms
 
         private FrmMain()
 		{
-		    _runtime = new Runtime();
             _windowList = new WindowList();
             _credentialRepositoryList = new CredentialRepositoryList();
             var externalToolsService = new ExternalToolsService();
-		    ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
+		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance);
+
+            ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
             _export = new Export(_credentialRepositoryList);
             _connectionInitiator = new ConnectionInitiator(_windowList, externalToolsService);
 		    _webHelper = new WebHelper(_connectionInitiator);
@@ -90,16 +91,16 @@ namespace mRemoteNG.UI.Forms
 		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 		    var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
 		    _settingsSaver = new SettingsSaver(externalToolsService);
-            _shutdown = new Shutdown(_settingsSaver);
+            _shutdown = new Shutdown(_settingsSaver, _connectionsService);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown);
 		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
             Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService);
-            _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder);
+            _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService);
             Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService);
             _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 		    _connectionInitiator.Adder = _panelAdder;
-			_startup = new Startup(this, _windows);
+			_startup = new Startup(this, _windows, _connectionsService);
             connectionTreeContextMenu.ShowWindowAction = _windows.Show;
 
 			InitializeComponent();
@@ -215,8 +216,8 @@ namespace mRemoteNG.UI.Forms
             if (Settings.Default.ResetPanels)
                 SetDefaultLayout();
 
-            Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
-            var credsAndConsSetup = new CredsAndConsSetup();
+            _connectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
+            var credsAndConsSetup = new CredsAndConsSetup(_connectionsService);
             credsAndConsSetup.LoadCredsAndCons();
 
             _windows.TreeForm.Focus();
@@ -334,7 +335,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, Language.strTabUpdates))
+            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, _connectionsService, Language.strTabUpdates))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -403,7 +404,7 @@ namespace mRemoteNG.UI.Forms
 		private void tmrAutoSave_Tick(object sender, EventArgs e)
 		{
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Doing AutoSave");
-			Runtime.ConnectionsService.SaveConnectionsAsync();
+		    _connectionsService.SaveConnectionsAsync();
 		}
         #endregion
 		
@@ -556,21 +557,21 @@ namespace mRemoteNG.UI.Forms
 			var titleBuilder = new StringBuilder(Application.ProductName);
 			const string separator = " - ";
 									
-			if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
+			if (_connectionsService.IsConnectionsFileLoaded)
 			{
-				if (Runtime.ConnectionsService.UsingDatabase)
+				if (_connectionsService.UsingDatabase)
 				{
 					titleBuilder.Append(separator);
 					titleBuilder.Append(Language.strSQLServer.TrimEnd(':'));
 				}
 				else
 				{
-					if (!string.IsNullOrEmpty(Runtime.ConnectionsService.ConnectionFileName))
+					if (!string.IsNullOrEmpty(_connectionsService.ConnectionFileName))
 					{
 					    titleBuilder.Append(separator);
 					    titleBuilder.Append(Settings.Default.ShowCompleteConsPathInTitle
-					        ? Runtime.ConnectionsService.ConnectionFileName
-                            : Path.GetFileName(Runtime.ConnectionsService.ConnectionFileName));
+					        ? _connectionsService.ConnectionFileName
+                            : Path.GetFileName(_connectionsService.ConnectionFileName));
 					}
 				}
 			}

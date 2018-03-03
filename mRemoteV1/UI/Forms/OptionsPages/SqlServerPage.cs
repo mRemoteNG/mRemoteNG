@@ -3,16 +3,20 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DatabaseConnectors;
+using mRemoteNG.Connection;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	public partial class SqlServerPage
     {
         private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
+        private readonly ConnectionsService _connectionsService;
 
-        public SqlServerPage()
+        public SqlServerPage(ConnectionsService connectionsService)
         {
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             InitializeComponent();
             base.ApplyTheme();
             _databaseConnectionTester = new SqlDatabaseConnectionTester();
@@ -75,18 +79,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.Save();
         }
 
-        private static void ReinitializeSqlUpdater()
+        private void ReinitializeSqlUpdater()
         {
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Dispose();
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
+            _connectionsService.RemoteConnectionsSyncronizer?.Dispose();
+            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            _connectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 
         private void DisableSql()
         {
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Dispose();
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = null;
-            Runtime.ConnectionsService.LoadConnections(true);
+            _connectionsService.RemoteConnectionsSyncronizer?.Dispose();
+            _connectionsService.RemoteConnectionsSyncronizer = null;
+            _connectionsService.LoadConnections(true);
         }
 
         private void chkUseSQLServer_CheckedChanged(object sender, EventArgs e)
