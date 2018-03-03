@@ -7,11 +7,19 @@ using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using System;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol
 {
     public class ProtocolFactory
     {
+        private readonly ExternalToolsService _externalToolsService;
+
+        public ProtocolFactory(ExternalToolsService externalToolsService)
+        {
+            _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+        }
+
         public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
         {
             var newProtocol = default(ProtocolBase);
@@ -54,7 +62,7 @@ namespace mRemoteNG.Connection.Protocol
 					((IcaProtocol) newProtocol).tmrReconnect.Elapsed += ((IcaProtocol) newProtocol).tmrReconnect_Elapsed;
 					break;
 				case ProtocolType.IntApp:
-					newProtocol = new IntegratedProgram();
+					newProtocol = new IntegratedProgram(_externalToolsService);
 					if (connectionInfo.ExtApp == "")
 					{
 						throw (new Exception(Language.strNoExtAppDefined));

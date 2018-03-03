@@ -11,19 +11,23 @@ namespace mRemoteNG.Connection.Protocol
 {
 	public class IntegratedProgram : ProtocolBase
 	{
-        #region Private Fields
+	    private readonly ExternalToolsService _externalToolsService;
         private ExternalTool _externalTool;
         private IntPtr _handle;
         private Process _process;
-        #endregion
 
-        #region Public Methods
+	    public IntegratedProgram(ExternalToolsService externalToolsService)
+	    {
+	        _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+	    }
+
+	    #region Public Methods
 		public override bool Initialize()
 		{
 		    if (InterfaceControl.Info == null)
 				return base.Initialize();
 
-		    _externalTool = Runtime.ExternalToolsService.GetExtAppByName(InterfaceControl.Info.ExtApp);
+		    _externalTool = _externalToolsService.GetExtAppByName(InterfaceControl.Info.ExtApp);
 
 			if (_externalTool == null)
 			{

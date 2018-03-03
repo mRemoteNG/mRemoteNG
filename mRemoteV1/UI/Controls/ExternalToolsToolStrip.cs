@@ -5,6 +5,7 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.Tree;
 
 namespace mRemoteNG.UI.Controls
@@ -13,13 +14,26 @@ namespace mRemoteNG.UI.Controls
     {
         private IContainer components;
         private ContextMenuStrip _cMenExtAppsToolbar;
-	    public Func<ConnectionInfo> GetSelectedConnectionFunc { get; set; }
+        private ExternalToolsService _externalToolsService;
 	    internal ToolStripMenuItem CMenToolbarShowText;
+
+	    public Func<ConnectionInfo> GetSelectedConnectionFunc { get; set; }
+
+        public ExternalToolsService ExternalToolsService
+        {
+            get { return _externalToolsService; }
+            set
+            {
+                value.ThrowIfNull("value");
+                _externalToolsService.ExternalTools.CollectionUpdated -= ExternalToolsOnCollectionUpdated;
+                _externalToolsService = value;
+                _externalToolsService.ExternalTools.CollectionUpdated += ExternalToolsOnCollectionUpdated;
+            }
+        }
 
         public ExternalToolsToolStrip()
         {
-            Initialize(); 
-            Runtime.ExternalToolsService.ExternalTools.CollectionUpdated += (sender, args) => AddExternalToolsToToolBar();
+            Initialize();
         }
 
         private void Initialize()
@@ -71,7 +85,7 @@ namespace mRemoteNG.UI.Controls
                     Items[index].Dispose();
                 Items.Clear();
 
-                foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
+                foreach (var tool in ExternalToolsService.ExternalTools)
                 {
                     if (tool.ShowOnToolbar)
                     {
@@ -121,6 +135,11 @@ namespace mRemoteNG.UI.Controls
             }
 
             CMenToolbarShowText.Checked = show;
+        }
+
+        private void ExternalToolsOnCollectionUpdated(object o, CollectionUpdatedEventArgs<ExternalTool> collectionUpdatedEventArgs)
+        {
+            AddExternalToolsToToolBar();
         }
         #endregion
 

@@ -31,19 +31,20 @@ namespace mRemoteNG.UI.Window
         private VisualStudioToolStripExtender vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 	    private readonly Windows _windows;
+        private readonly ExternalToolsService _externalToolsService;
 
-        #region Public Methods
-        public ConnectionWindow(DockContent panel, IConnectionInitiator connectionInitiator, Windows windows, string formText = "")
+        public ConnectionWindow(DockContent panel, IConnectionInitiator connectionInitiator, Windows windows, ExternalToolsService externalToolsService, string formText = "")
         {
-	        _windows = windows.ThrowIfNull(nameof(windows));
+            DockPnl = panel.ThrowIfNull(nameof(panel));
+            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+            _windows = windows.ThrowIfNull(nameof(windows));
+            _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+
 	        if (formText == "")
             {
                 formText = Language.strNewPanel;
             }
-
             WindowType = WindowType.Connection;
-            DockPnl = panel.ThrowIfNull(nameof(panel));
-            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             InitializeComponent();
             SetEventHandlers();
             // ReSharper disable once VirtualMemberCallInConstructor
@@ -51,6 +52,7 @@ namespace mRemoteNG.UI.Window
             TabText = formText;
         }
 
+        #region Public Methods
         private void SetEventHandlers()
         {
             SetFormEventHandlers();
@@ -616,7 +618,7 @@ namespace mRemoteNG.UI.Window
                 }
 
                 //add ext apps
-                foreach (ExternalTool externalTool in Runtime.ExternalToolsService.ExternalTools)
+                foreach (var externalTool in _externalToolsService.ExternalTools)
                 {
                     var nItem = new ToolStripMenuItem
                     {

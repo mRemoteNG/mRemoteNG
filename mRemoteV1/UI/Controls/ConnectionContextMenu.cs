@@ -52,17 +52,24 @@ namespace mRemoteNG.UI.Controls
         private readonly IConnectionInitiator _connectionInitiator;
 	    private readonly SSHTransferWindow _sshTransferWindow;
         private readonly Export _export;
+        private readonly ExternalToolsService _externalToolsService;
 
-		// TODO - this is only a property to break up a circular dependency
-	    public Action<WindowType> ShowWindowAction { get; set; } = type => { };
+        // TODO - this is only a property to break up a circular dependency
+        public Action<WindowType> ShowWindowAction { get; set; } = type => { };
 
 
-		public ConnectionContextMenu(ConnectionTree connectionTree, IConnectionInitiator connectionInitiator, SSHTransferWindow sshTransferWindow, Export export)
+		public ConnectionContextMenu(
+		    ConnectionTree connectionTree, 
+		    IConnectionInitiator connectionInitiator, 
+		    SSHTransferWindow sshTransferWindow, 
+		    Export export, 
+		    ExternalToolsService externalToolsService)
         {
             _connectionTree = connectionTree.ThrowIfNull(nameof(connectionTree));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _sshTransferWindow = sshTransferWindow.ThrowIfNull(nameof(sshTransferWindow));
             _export = export.ThrowIfNull(nameof(export));
+            _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
             InitializeComponent();
             ApplyLanguage();
             EnableShortcutKeys();
@@ -575,13 +582,13 @@ namespace mRemoteNG.UI.Controls
             {
                 ResetExternalAppMenu();
 
-                foreach (ExternalTool extA in Runtime.ExternalToolsService.ExternalTools)
+                foreach (var externalTool in _externalToolsService.ExternalTools)
                 {
                     var menuItem = new ToolStripMenuItem
                     {
-                        Text = extA.DisplayName,
-                        Tag = extA,
-                        Image = extA.Image
+                        Text = externalTool.DisplayName,
+                        Tag = externalTool,
+                        Image = externalTool.Image
                     };
 
                     menuItem.Click += OnExternalToolClicked;

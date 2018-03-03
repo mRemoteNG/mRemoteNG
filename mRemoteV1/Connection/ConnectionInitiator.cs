@@ -18,6 +18,7 @@ namespace mRemoteNG.Connection
 	public class ConnectionInitiator : IConnectionInitiator
 	{
 	    private readonly WindowList _windowList;
+	    private readonly ExternalToolsService _externalToolsService;
 
         /// <summary>
         /// This is a property because we have a circular dependency.
@@ -25,9 +26,10 @@ namespace mRemoteNG.Connection
 	    public PanelAdder Adder { get; set; }
 
 
-        public ConnectionInitiator(WindowList windowList)
+        public ConnectionInitiator(WindowList windowList, ExternalToolsService externalToolsService)
         {
             _windowList = windowList.ThrowIfNull(nameof(windowList));
+            _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
         }
 
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
@@ -105,7 +107,7 @@ namespace mRemoteNG.Connection
                         return;
                 }
 
-                var protocolFactory = new ProtocolFactory();
+                var protocolFactory = new ProtocolFactory(_externalToolsService);
                 var newProtocol = protocolFactory.CreateProtocol(connectionInfo);
 
                 var connectionPanel = SetConnectionPanel(connectionInfo, force);
@@ -141,7 +143,7 @@ namespace mRemoteNG.Connection
         private void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.PreExtApp == "") return;
-            var extA = Runtime.ExternalToolsService.GetExtAppByName(connectionInfo.PreExtApp);
+            var extA = _externalToolsService.GetExtAppByName(connectionInfo.PreExtApp);
             extA?.Start(connectionInfo);
         }
 
@@ -197,13 +199,13 @@ namespace mRemoteNG.Connection
             return connectionForm;
         }
 
-        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, Form connectionForm)
+        private Control SetConnectionContainer(ConnectionInfo connectionInfo, Form connectionForm)
         {
             Control connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(connectionInfo);
 
             if (connectionInfo.Protocol != ProtocolType.IntApp) return connectionContainer;
 
-            var extT = Runtime.ExternalToolsService.GetExtAppByName(connectionInfo.ExtApp);
+            var extT = _externalToolsService.GetExtAppByName(connectionInfo.ExtApp);
 
             if(extT == null) return connectionContainer;
 
@@ -218,7 +220,7 @@ namespace mRemoteNG.Connection
             newProtocol.Closed += ((ConnectionWindow)connectionForm).Prot_Event_Closed;
         }
 
-        private static void SetConnectionEventHandlers(ProtocolBase newProtocol)
+        private void SetConnectionEventHandlers(ProtocolBase newProtocol)
         {
             newProtocol.Disconnected += Prot_Event_Disconnected;
             newProtocol.Connected += Prot_Event_Connected;
@@ -259,7 +261,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private static void Prot_Event_Closed(object sender)
+        private void Prot_Event_Closed(object sender)
         {
             try
             {
@@ -277,7 +279,7 @@ namespace mRemoteNG.Connection
                 prot.InterfaceControl.Info.OpenConnections.Remove(prot);
 
                 if (prot.InterfaceControl.Info.PostExtApp == "") return;
-                var extA = Runtime.ExternalToolsService.GetExtAppByName(prot.InterfaceControl.Info.PostExtApp);
+                var extA = _externalToolsService.GetExtAppByName(prot.InterfaceControl.Info.PostExtApp);
                 extA?.Start(prot.InterfaceControl.Info);
             }
             catch (Exception ex)

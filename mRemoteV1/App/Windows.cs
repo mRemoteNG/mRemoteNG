@@ -22,6 +22,7 @@ namespace mRemoteNG.App
         private UpdateWindow _updateForm;
         private readonly Func<UpdateWindow> _updateWindowBuilder;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
+        private readonly Func<ExternalToolsWindow> _externalToolsWindowBuilder;
 
         internal ConnectionTreeWindow TreeForm { get; }
         internal ConfigWindow ConfigForm { get; }
@@ -37,7 +38,8 @@ namespace mRemoteNG.App
             ScreenshotManagerWindow screenshotForm,
             SSHTransferWindow sshtransferForm,
             Func<UpdateWindow> updateWindowBuilder,
-            Func<NotificationAreaIcon> notificationAreaIconBuilder)
+            Func<NotificationAreaIcon> notificationAreaIconBuilder,
+            Func<ExternalToolsWindow> externalToolsWindowBuilder)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             TreeForm = treeForm.ThrowIfNull(nameof(treeForm));
@@ -47,6 +49,7 @@ namespace mRemoteNG.App
             SshtransferForm = sshtransferForm.ThrowIfNull(nameof(sshtransferForm));
             _updateWindowBuilder = updateWindowBuilder;
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
+            _externalToolsWindowBuilder = externalToolsWindowBuilder;
         }
 
         public void Show(WindowType windowType)
@@ -90,7 +93,7 @@ namespace mRemoteNG.App
                         break;
                     case WindowType.ExternalApps:
                         if (_externalappsForm == null || _externalappsForm.IsDisposed)
-                            _externalappsForm = new ExternalToolsWindow(_connectionInitiator);
+                            _externalappsForm = _externalToolsWindowBuilder();
                         _externalappsForm.Show(dockPanel);
                         break;
                     case WindowType.PortScan:

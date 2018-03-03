@@ -19,10 +19,12 @@ namespace mRemoteNG.UI.Window
         private readonly ThemeManager _themeManager;
 	    private readonly FullyObservableCollection<ExternalTool> _currentlySelectedExternalTools;
 	    private readonly IConnectionInitiator _connectionInitiator;
+	    private readonly ExternalToolsService _externalToolsService;
 
-        public ExternalToolsWindow(IConnectionInitiator connectionInitiator)
+        public ExternalToolsWindow(IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+            _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
             InitializeComponent();
 			WindowType = WindowType.ExternalApps;
 			DockPnl = new DockContent();
@@ -90,7 +92,7 @@ namespace mRemoteNG.UI.Window
 	        try
 	        {
 	            ToolsListObjView.BeginUpdate();
-	            ToolsListObjView.SetObjects(Runtime.ExternalToolsService.ExternalTools, true);
+	            ToolsListObjView.SetObjects(_externalToolsService.ExternalTools, true);
 	            ToolsListObjView.AutoResizeColumns();
 	            ToolsListObjView.EndUpdate();
 	        }
@@ -139,7 +141,7 @@ namespace mRemoteNG.UI.Window
 
         private void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
 		{
-            _externalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
+            _externalAppsSaver.Save(_externalToolsService.ExternalTools);
 		    _themeManager.ThemeChanged -= ApplyTheme;
 		    _currentlySelectedExternalTools.CollectionUpdated -= CurrentlySelectedExternalToolsOnCollectionUpdated;
         }
@@ -149,7 +151,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				var externalTool = new ExternalTool(_connectionInitiator) { DisplayName = Language.strExternalToolDefaultName };
-				Runtime.ExternalToolsService.ExternalTools.Add(externalTool);
+			    _externalToolsService.ExternalTools.Add(externalTool);
 				UpdateToolsListObjView();
 			    ToolsListObjView.SelectedObject = externalTool;
 				DisplayNameTextBox.Focus();
@@ -177,7 +179,7 @@ namespace mRemoteNG.UI.Window
 						
 				foreach (var externalTool in _currentlySelectedExternalTools)
 				{
-					Runtime.ExternalToolsService.ExternalTools.Remove(externalTool);
+				    _externalToolsService.ExternalTools.Remove(externalTool);
 				}
 			    var firstDeletedNode = _currentlySelectedExternalTools.FirstOrDefault();
 			    var oldSelectedIndex = ToolsListObjView.IndexOf(firstDeletedNode);

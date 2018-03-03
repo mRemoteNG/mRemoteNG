@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -15,21 +14,19 @@ namespace mRemoteNG.UI.Panels
 	public class PanelAdder
     {
         private readonly WindowList _windowList;
-        private readonly IConnectionInitiator _connectionInitiator;
-	    private readonly Windows _windows;
+        private readonly Func<ConnectionWindow> _connectionWindowBuilder;
 
-        public PanelAdder(WindowList windowList, IConnectionInitiator connectionInitiator, Windows windows)
+        public PanelAdder(WindowList windowList, Func<ConnectionWindow> connectionWindowBuilder)
         {
-	        _windowList = windowList.ThrowIfNull(nameof(windowList));
-            _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
-	        _windows = windows.ThrowIfNull(nameof(windows));
+            _connectionWindowBuilder = connectionWindowBuilder;
+            _windowList = windowList.ThrowIfNull(nameof(windowList));
         }
 
         public Form AddPanel(string title = "", bool noTabber = false)
         {
             try
             {
-                var connectionForm = new ConnectionWindow(new DockContent(), _connectionInitiator, _windows);
+                var connectionForm = _connectionWindowBuilder();
                 BuildConnectionWindowContextMenu(connectionForm);
                 SetConnectionWindowTitle(title, connectionForm);
                 ShowConnectionWindow(connectionForm);
