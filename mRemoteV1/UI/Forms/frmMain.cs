@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
@@ -15,6 +16,7 @@ using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
@@ -66,6 +68,7 @@ namespace mRemoteNG.UI.Forms
         private readonly ConnectionsService _connectionsService;
         private readonly Import _import;
         private readonly AppUpdater _appUpdater;
+        private readonly DatabaseConnectorFactory _databaseConnectorFactory;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -81,7 +84,8 @@ namespace mRemoteNG.UI.Forms
 		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance, _import);
 		    Runtime.ConnectionsService = _connectionsService;
 		    _import.ConnectionsService = _connectionsService;
-		    _appUpdater = new AppUpdater(() => _connectionsService.EncryptionKey);
+		    Func<SecureString> encryptionKeySelectionFunc = () => _connectionsService.EncryptionKey;
+            _appUpdater = new AppUpdater(encryptionKeySelectionFunc);
             ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
             _export = new Export(_credentialRepositoryList, _connectionsService);
             _connectionInitiator = new ConnectionInitiator(_windowList, externalToolsService);
@@ -103,13 +107,16 @@ namespace mRemoteNG.UI.Forms
             Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService);
 		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, _import);
 		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import);
+		    _databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
             _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
-                sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, portScanWindowBuilder, activeDirectoryImportWindowBuilder, _appUpdater);
+                sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, 
+                portScanWindowBuilder, activeDirectoryImportWindowBuilder, _appUpdater, _databaseConnectorFactory);
             Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService);
             _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 		    _connectionInitiator.Adder = _panelAdder;
-            _startup = new Startup(this, _windows, _connectionsService, _appUpdater);
+		    _connectionsService.DatabaseConnectorFactory = _databaseConnectorFactory;
+            _startup = new Startup(this, _windows, _connectionsService, _appUpdater, _databaseConnectorFactory);
             connectionTreeContextMenu.ShowWindowAction = _windows.Show;
 
 			InitializeComponent();
@@ -347,7 +354,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, Language.strTabUpdates))
+            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory, Language.strTabUpdates))
             {
                 optionsForm.ShowDialog(this);
             }

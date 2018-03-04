@@ -7,6 +7,7 @@ using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
@@ -24,13 +25,15 @@ namespace mRemoteNG.App
         private readonly FrmMain _frmMain;
 	    private readonly Windows _windows;
         private readonly ConnectionsService _connectionsService;
+        private readonly DatabaseConnectorFactory _databaseConnectorFactory;
 
-        public Startup(FrmMain frmMain, Windows windows, ConnectionsService connectionsService, AppUpdater appUpdate)
+        public Startup(FrmMain frmMain, Windows windows, ConnectionsService connectionsService, AppUpdater appUpdate, DatabaseConnectorFactory databaseConnectorFactory)
         {
             _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
 			_windows = windows.ThrowIfNull(nameof(windows));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	        _appUpdate = appUpdate.ThrowIfNull(nameof(appUpdate));
+            _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             _connectionIconLoader = new ConnectionIconLoader(GeneralAppInfo.HomePath + "\\Icons\\");
         }
 
@@ -58,7 +61,8 @@ namespace mRemoteNG.App
             messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
             if (!Settings.Default.UseSQLServer) return;
             messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
-            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker(_connectionsService), _connectionsService);
+            var sqlConnectionsUpdateChecker = new SqlConnectionsUpdateChecker(_connectionsService, _databaseConnectorFactory);
+            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(sqlConnectionsUpdateChecker, _connectionsService);
             _connectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 

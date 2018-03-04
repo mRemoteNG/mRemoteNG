@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App.Update;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms.OptionsPages;
@@ -20,17 +21,21 @@ namespace mRemoteNG.UI.Forms
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
         private readonly ConnectionsService _connectionsService;
         private readonly AppUpdater _appUpdater;
+        private readonly DatabaseConnectorFactory _databaseConnectorFactory;
 
-        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, ConnectionsService connectionsService, AppUpdater appUpdater) 
-            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, connectionsService, appUpdater, Language.strStartupExit)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, 
+            ConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory) 
+            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, connectionsService, appUpdater, databaseConnectorFactory, Language.strStartupExit)
         {
         }
 
-        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, ConnectionsService connectionsService, AppUpdater appUpdater, string pageName)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, 
+            ConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory, string pageName)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
+            _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _appUpdater = appUpdater.ThrowIfNull(nameof(appUpdater));
             _pageName = pageName.ThrowIfNull(nameof(pageName));
@@ -78,7 +83,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},
                 {typeof(CredentialsPage).Name, new CredentialsPage()},
-                {typeof(SqlServerPage).Name, new SqlServerPage(_connectionsService)},
+                {typeof(SqlServerPage).Name, new SqlServerPage(_connectionsService, _databaseConnectorFactory)},
                 {typeof(UpdatesPage).Name, new UpdatesPage(_appUpdater, _showWindowAction)},
                 {typeof(ThemePage).Name, new ThemePage()},
                 {typeof(SecurityPage).Name, new SecurityPage()},

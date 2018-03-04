@@ -23,12 +23,12 @@ namespace mRemoteNG.Config.Connections
     {
         private readonly ConnectionsService _connectionsService;
         private readonly SaveFilter _saveFilter;
+        private readonly DatabaseConnectorFactory _databaseConnectorFactory;
 
-        public SqlConnectionsSaver(SaveFilter saveFilter, ConnectionsService connectionsService)
+        public SqlConnectionsSaver(SaveFilter saveFilter, ConnectionsService connectionsService, DatabaseConnectorFactory databaseConnectorFactory)
         {
-            if (saveFilter == null)
-                throw new ArgumentNullException(nameof(saveFilter));
-            _saveFilter = saveFilter;
+            _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
+            _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
@@ -41,7 +41,7 @@ namespace mRemoteNG.Config.Connections
             }
                 
 
-            using (var sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings())
+            using (var sqlConnector = _databaseConnectorFactory.SqlDatabaseConnectorFromSettings())
             {
                 sqlConnector.Connect();
                 var databaseVersionVerifier = new SqlDatabaseVersionVerifier(sqlConnector);

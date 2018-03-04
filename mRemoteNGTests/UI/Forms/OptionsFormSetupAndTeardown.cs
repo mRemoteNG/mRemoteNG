@@ -2,6 +2,7 @@
 using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
@@ -29,8 +30,10 @@ namespace mRemoteNGTests.UI.Forms
             var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import));
             Func<NotificationAreaIcon> notificationIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, connectionInitiator, shutdown);
             var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import);
-            var appUpdater = new AppUpdater(() => connectionsService.EncryptionKey);
-            _optionsForm = new frmOptions(connectionInitiator, type => {}, notificationIconBuilder, connectionsService, appUpdater);
+            Func<SecureString> encryptionKeySelectionFunc = () => connectionsService.EncryptionKey;
+            var databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
+            var appUpdater = new AppUpdater(encryptionKeySelectionFunc);
+            _optionsForm = new frmOptions(connectionInitiator, type => {}, notificationIconBuilder, connectionsService, appUpdater, databaseConnectorFactory);
             _optionsForm.Show();
         }
 

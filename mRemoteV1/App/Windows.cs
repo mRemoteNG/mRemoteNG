@@ -1,5 +1,6 @@
 ﻿using System;
 using mRemoteNG.App.Update;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
@@ -27,6 +28,7 @@ namespace mRemoteNG.App
         private readonly Func<ActiveDirectoryImportWindow> _activeDirectoryImportWindowBuilder;
         private readonly ConnectionsService _connectionsService;
         private readonly AppUpdater _appUpdater;
+        private readonly DatabaseConnectorFactory _databaseConnectorFactory;
 
         internal ConnectionTreeWindow TreeForm { get; }
         internal ConfigWindow ConfigForm { get; }
@@ -47,7 +49,8 @@ namespace mRemoteNG.App
             ConnectionsService connectionsService, 
             Func<PortScanWindow> portScanWindowBuilder, 
             Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder, 
-            AppUpdater appUpdater)
+            AppUpdater appUpdater, 
+            DatabaseConnectorFactory databaseConnectorFactory)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             TreeForm = treeForm.ThrowIfNull(nameof(treeForm));
@@ -60,6 +63,7 @@ namespace mRemoteNG.App
             _externalToolsWindowBuilder = externalToolsWindowBuilder;
             _portScanWindowBuilder = portScanWindowBuilder;
             _activeDirectoryImportWindowBuilder = activeDirectoryImportWindowBuilder;
+            _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             _appUpdater = appUpdater.ThrowIfNull(nameof(appUpdater));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
@@ -83,7 +87,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater))
+                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory))
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }

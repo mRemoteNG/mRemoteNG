@@ -3,6 +3,7 @@ using System.Security;
 using System.Threading;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
@@ -67,22 +68,24 @@ namespace mRemoteNGTests.Connection.Protocol
 			var configWindow = new ConfigWindow(new DockContent());
 			var sshTransferWindow = new SSHTransferWindow();
 			var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator, connectionsService);
-			var connectionTree = connectionTreeWindow.ConnectionTree;
+		    Func<SecureString> encryptionKeySelectionFunc = () => connectionsService.EncryptionKey;
+            var connectionTree = connectionTreeWindow.ConnectionTree;
             var export = new Export(new CredentialRepositoryList(), connectionsService);
 			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, export, _externalToolsService, import);
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 			var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 			var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
 		    var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import));
-		    var appUpdater = new AppUpdater(() => connectionsService.EncryptionKey);
+		    var appUpdater = new AppUpdater(encryptionKeySelectionFunc);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), shutdown, appUpdater);
             Func<NotificationAreaIcon> notificationAreaIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, _connectionInitiator, shutdown);
 		    Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, _externalToolsService);
 		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, import);
 		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, import);
+		    var databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
             var windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
                 sshTransferWindow, updateWindowBuilder, notificationAreaIconBuilder, externalToolsWindowBuilder, 
-                connectionsService, portScanWindowBuilder, activeDirectoryImportWindowBuilder, appUpdater);
+                connectionsService, portScanWindowBuilder, activeDirectoryImportWindowBuilder, appUpdater, databaseConnectorFactory);
 			var connectionWindow = new ConnectionWindow(new DockContent(), _connectionInitiator, windows, _externalToolsService);
 			var connectionInfo = new ConnectionInfo {ExtApp = extAppName};
 			return new InterfaceControl(connectionWindow, sut, connectionInfo);

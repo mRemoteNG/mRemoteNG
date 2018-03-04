@@ -13,10 +13,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
         private readonly ConnectionsService _connectionsService;
+        private readonly DatabaseConnectorFactory _databaseConnectorFactory;
 
-        public SqlServerPage(ConnectionsService connectionsService)
+        public SqlServerPage(ConnectionsService connectionsService, DatabaseConnectorFactory databaseConnectorFactory)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+            _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             InitializeComponent();
             base.ApplyTheme();
             _databaseConnectionTester = new SqlDatabaseConnectionTester();
@@ -82,7 +84,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void ReinitializeSqlUpdater()
         {
             _connectionsService.RemoteConnectionsSyncronizer?.Dispose();
-            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker(_connectionsService), _connectionsService);
+            var sqlConnectionsUpdateChecker = new SqlConnectionsUpdateChecker(_connectionsService, _databaseConnectorFactory);
+            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(sqlConnectionsUpdateChecker, _connectionsService);
             _connectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 

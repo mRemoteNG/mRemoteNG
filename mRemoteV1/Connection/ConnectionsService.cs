@@ -7,6 +7,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
@@ -34,7 +35,8 @@ namespace mRemoteNG.Connection
         public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
         public SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
-
+        // TODO - this is only a property to break up a circular dependency. move to ctor when able
+        public DatabaseConnectorFactory DatabaseConnectorFactory { get; set; }
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
         //public ConnectionTreeModel ConnectionTreeModel
         //{
@@ -111,7 +113,7 @@ namespace mRemoteNG.Connection
 
             var newConnectionTreeModel =
                 (useDatabase
-                    ? new SqlConnectionsLoader().Load()
+                    ? new SqlConnectionsLoader(DatabaseConnectorFactory).Load()
                     : new XmlConnectionsLoader(connectionFileName, this).Load())
                 ?? new ConnectionTreeModel();
 
@@ -158,7 +160,7 @@ namespace mRemoteNG.Connection
 
                 var previouslyUsingDatabase = UsingDatabase;
                 if (useDatabase)
-                    new SqlConnectionsSaver(saveFilter, this).Save(connectionTreeModel);
+                    new SqlConnectionsSaver(saveFilter, this, DatabaseConnectorFactory).Save(connectionTreeModel);
                 else
                     new XmlConnectionsSaver(connectionFileName, saveFilter).Save(connectionTreeModel);
 
