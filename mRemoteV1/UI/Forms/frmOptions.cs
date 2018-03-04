@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.App.Update;
 using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms.OptionsPages;
@@ -18,18 +19,20 @@ namespace mRemoteNG.UI.Forms
 	    private readonly Action<WindowType> _showWindowAction;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
         private readonly ConnectionsService _connectionsService;
+        private readonly AppUpdater _appUpdater;
 
-        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, ConnectionsService connectionsService) 
-            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, connectionsService, Language.strStartupExit)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, ConnectionsService connectionsService, AppUpdater appUpdater) 
+            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, connectionsService, appUpdater, Language.strStartupExit)
         {
         }
 
-        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, ConnectionsService connectionsService, string pageName)
+        public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, ConnectionsService connectionsService, AppUpdater appUpdater, string pageName)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+            _appUpdater = appUpdater.ThrowIfNull(nameof(appUpdater));
             _pageName = pageName.ThrowIfNull(nameof(pageName));
 	        InitializeComponent();
         }
@@ -76,7 +79,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(ConnectionsPage).Name, new ConnectionsPage()},
                 {typeof(CredentialsPage).Name, new CredentialsPage()},
                 {typeof(SqlServerPage).Name, new SqlServerPage(_connectionsService)},
-                {typeof(UpdatesPage).Name, new UpdatesPage(_showWindowAction)},
+                {typeof(UpdatesPage).Name, new UpdatesPage(_appUpdater, _showWindowAction)},
                 {typeof(ThemePage).Name, new ThemePage()},
                 {typeof(SecurityPage).Name, new SecurityPage()},
                 {typeof(AdvancedPage).Name, new AdvancedPage()}

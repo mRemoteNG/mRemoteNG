@@ -4,6 +4,7 @@ using System.Net;
 using System.ComponentModel;
 using System.Threading;
 using System.Reflection;
+using System.Security;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 using System.Security.Cryptography;
@@ -22,6 +23,7 @@ namespace mRemoteNG.App.Update
         private WebProxy _webProxy;
         private Thread _getUpdateInfoThread;
         private Thread _getChangeLogThread;
+        private readonly Func<SecureString> _encryptionKeyRetrievalFunc;
 
         #region Public Properties
 
@@ -48,8 +50,9 @@ namespace mRemoteNG.App.Update
 
         #region Public Methods
 
-        public AppUpdater()
+        public AppUpdater(Func<SecureString> encryptionKeyRetrievalFunc)
         {
+            _encryptionKeyRetrievalFunc = encryptionKeyRetrievalFunc;
             SetProxySettings();
         }
 
@@ -61,7 +64,7 @@ namespace mRemoteNG.App.Update
             var useAuthentication = Settings.Default.UpdateProxyUseAuthentication;
             var username = Settings.Default.UpdateProxyAuthUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var password = cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, Runtime.ConnectionsService.EncryptionKey);
+            var password = cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, _encryptionKeyRetrievalFunc());
 
             SetProxySettings(shouldWeUseProxy, proxyAddress, port, useAuthentication, username, password);
         }

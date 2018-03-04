@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Security;
 using mRemoteNG.App;
+using mRemoteNG.App.Update;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
@@ -26,7 +28,9 @@ namespace mRemoteNGTests.UI.Forms
             var import = new Import();
             var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import));
             Func<NotificationAreaIcon> notificationIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, connectionInitiator, shutdown);
-            _optionsForm = new frmOptions(connectionInitiator, type => {}, notificationIconBuilder, Runtime.ConnectionsService);
+            var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import);
+            var appUpdater = new AppUpdater(() => connectionsService.EncryptionKey);
+            _optionsForm = new frmOptions(connectionInitiator, type => {}, notificationIconBuilder, connectionsService, appUpdater);
             _optionsForm.Show();
         }
 

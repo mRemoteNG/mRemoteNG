@@ -12,11 +12,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	public partial class UpdatesPage
     {
-        private AppUpdater _appUpdate;
+        private readonly AppUpdater _appUpdate;
 	    private readonly Action<WindowType> _showWindowAction;
 
-        public UpdatesPage(Action<WindowType> showWindowAction)
+        public UpdatesPage(AppUpdater appUpdate, Action<WindowType> showWindowAction)
         {
+            _appUpdate = appUpdate;
 	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
 	        InitializeComponent();
             base.ApplyTheme();
@@ -188,15 +189,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnTestProxy_Click(object sender, EventArgs e)
         {
-            if (_appUpdate != null)
+            if (_appUpdate.IsGetUpdateInfoRunning)
             {
-                if (_appUpdate.IsGetUpdateInfoRunning)
-                {
-                    return;
-                }
+                return;
             }
 
-            _appUpdate = new AppUpdater();
             //_appUpdate.Load += _appUpdate.Update_Load;
             _appUpdate.SetProxySettings(chkUseProxyForAutomaticUpdates.Checked, txtProxyAddress.Text,
                 (int) numProxyPort.Value, chkUseProxyAuthentication.Checked, txtProxyUsername.Text,

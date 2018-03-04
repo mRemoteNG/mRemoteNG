@@ -21,11 +21,13 @@ namespace mRemoteNG.App
 {
 	public class Export
 	{
+	    private readonly ConnectionsService _connectionsService;
 	    private readonly ICredentialRepositoryList _credentialRepositoryList;
 
-	    public Export(ICredentialRepositoryList credentialRepositoryList)
+	    public Export(ICredentialRepositoryList credentialRepositoryList, ConnectionsService connectionsService)
 	    {
 	        _credentialRepositoryList = credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
+	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	    }
 
 		public void ExportToFile(ConnectionInfo selectedNode, ConnectionTreeModel connectionTreeModel)
@@ -110,7 +112,7 @@ namespace mRemoteNG.App
 			}
 			finally
 			{
-			    Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Enable();
+			    _connectionsService.RemoteConnectionsSyncronizer?.Enable();
 			}
 		}
 	}

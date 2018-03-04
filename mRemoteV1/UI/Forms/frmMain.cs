@@ -12,6 +12,7 @@ using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
+using mRemoteNG.App.Update;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Putty;
@@ -64,6 +65,7 @@ namespace mRemoteNG.UI.Forms
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
         private readonly ConnectionsService _connectionsService;
         private readonly Import _import;
+        private readonly AppUpdater _appUpdater;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -77,9 +79,9 @@ namespace mRemoteNG.UI.Forms
             var externalToolsService = new ExternalToolsService();
 		    _import = new Import();
 		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance, _import);
-
+		    _appUpdater = new AppUpdater(() => _connectionsService.EncryptionKey);
             ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
-            _export = new Export(_credentialRepositoryList);
+            _export = new Export(_credentialRepositoryList, _connectionsService);
             _connectionInitiator = new ConnectionInitiator(_windowList, externalToolsService);
 		    _webHelper = new WebHelper(_connectionInitiator);
 		    var configWindow = new ConfigWindow(new DockContent());
@@ -94,18 +96,18 @@ namespace mRemoteNG.UI.Forms
 		    var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
 		    _settingsSaver = new SettingsSaver(externalToolsService);
             _shutdown = new Shutdown(_settingsSaver, _connectionsService);
-		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown);
+		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown, _appUpdater);
 		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
             Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService);
 		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, _import);
 		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import);
             _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
-                sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, portScanWindowBuilder, activeDirectoryImportWindowBuilder);
+                sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, portScanWindowBuilder, activeDirectoryImportWindowBuilder, _appUpdater);
             Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService);
             _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 		    _connectionInitiator.Adder = _panelAdder;
-			_startup = new Startup(this, _windows, _connectionsService);
+            _startup = new Startup(this, _windows, _connectionsService, _appUpdater);
             connectionTreeContextMenu.ShowWindowAction = _windows.Show;
 
 			InitializeComponent();
@@ -341,7 +343,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, _connectionsService, Language.strTabUpdates))
+            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, Language.strTabUpdates))
             {
                 optionsForm.ShowDialog(this);
             }

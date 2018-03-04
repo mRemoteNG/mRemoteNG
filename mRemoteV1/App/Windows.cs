@@ -1,4 +1,5 @@
 ﻿using System;
+using mRemoteNG.App.Update;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
@@ -25,6 +26,7 @@ namespace mRemoteNG.App
         private readonly Func<PortScanWindow> _portScanWindowBuilder;
         private readonly Func<ActiveDirectoryImportWindow> _activeDirectoryImportWindowBuilder;
         private readonly ConnectionsService _connectionsService;
+        private readonly AppUpdater _appUpdater;
 
         internal ConnectionTreeWindow TreeForm { get; }
         internal ConfigWindow ConfigForm { get; }
@@ -44,7 +46,8 @@ namespace mRemoteNG.App
             Func<ExternalToolsWindow> externalToolsWindowBuilder, 
             ConnectionsService connectionsService, 
             Func<PortScanWindow> portScanWindowBuilder, 
-            Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder)
+            Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder, 
+            AppUpdater appUpdater)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             TreeForm = treeForm.ThrowIfNull(nameof(treeForm));
@@ -57,6 +60,7 @@ namespace mRemoteNG.App
             _externalToolsWindowBuilder = externalToolsWindowBuilder;
             _portScanWindowBuilder = portScanWindowBuilder;
             _activeDirectoryImportWindowBuilder = activeDirectoryImportWindowBuilder;
+            _appUpdater = appUpdater.ThrowIfNull(nameof(appUpdater));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
@@ -79,7 +83,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService))
+                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater))
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }

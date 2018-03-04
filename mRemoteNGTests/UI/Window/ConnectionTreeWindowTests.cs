@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using mRemoteNG.App;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Tools;
@@ -23,7 +24,9 @@ namespace mRemoteNGTests.UI.Window
 			var sshTransferWindow = new SSHTransferWindow();
             var externalToolsService = new ExternalToolsService();
             var import = new Import();
-	        var connectionContextMenu = new ConnectionContextMenu(connectionTree, connectionInitiator, sshTransferWindow, new Export(new CredentialRepositoryList()), externalToolsService, import);
+            var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import);
+            var export = new Export(new CredentialRepositoryList(), connectionsService);
+            var connectionContextMenu = new ConnectionContextMenu(connectionTree, connectionInitiator, sshTransferWindow, export, externalToolsService, import);
             _connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), connectionInitiator) {ConnectionTreeContextMenu = connectionContextMenu};
         }
 

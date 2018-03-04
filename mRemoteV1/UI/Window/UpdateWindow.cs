@@ -15,15 +15,16 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class UpdateWindow : BaseWindow
 	{
-        private AppUpdater _appUpdate;
-	    private Shutdown _shutdown;
+        private readonly AppUpdater _appUpdate;
+	    private readonly Shutdown _shutdown;
         private bool _isUpdateDownloadHandlerDeclared;
 
-		public UpdateWindow(DockContent panel, Shutdown shutdown)
+		public UpdateWindow(DockContent panel, Shutdown shutdown, AppUpdater appUpdate)
 		{
 		    WindowType = WindowType.Update;
 			DockPnl = panel;
 		    _shutdown = shutdown.ThrowIfNull(nameof(shutdown));
+		    _appUpdate = appUpdate.ThrowIfNull(nameof(appUpdate));
 			InitializeComponent();
             FontOverrider.FontOverride(this);
 		}
@@ -85,12 +86,7 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
 		private void CheckForUpdate()
 		{
-			if (_appUpdate == null)
-			{
-				_appUpdate = new AppUpdater();
-				//_appUpdate.Load += _appUpdate.Update_Load;
-			}
-			else if (_appUpdate.IsGetUpdateInfoRunning)
+			if (_appUpdate.IsGetUpdateInfoRunning)
 			{
 				return;
 			}

@@ -19,18 +19,18 @@ namespace mRemoteNG.App
 {
 	public class Startup
     {
-        private AppUpdater _appUpdate;
+        private readonly AppUpdater _appUpdate;
         private readonly ConnectionIconLoader _connectionIconLoader;
         private readonly FrmMain _frmMain;
 	    private readonly Windows _windows;
         private readonly ConnectionsService _connectionsService;
 
-        public Startup(FrmMain frmMain, Windows windows, ConnectionsService connectionsService)
+        public Startup(FrmMain frmMain, Windows windows, ConnectionsService connectionsService, AppUpdater appUpdate)
         {
             _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
 			_windows = windows.ThrowIfNull(nameof(windows));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
-	        _appUpdate = new AppUpdater();
+	        _appUpdate = appUpdate.ThrowIfNull(nameof(appUpdate));
             _connectionIconLoader = new ConnectionIconLoader(GeneralAppInfo.HomePath + "\\Icons\\");
         }
 
@@ -64,11 +64,7 @@ namespace mRemoteNG.App
 
         public void CheckForUpdate()
         {
-            if (_appUpdate == null)
-            {
-                _appUpdate = new AppUpdater();
-            }
-            else if (_appUpdate.IsGetUpdateInfoRunning)
+            if (_appUpdate.IsGetUpdateInfoRunning)
             {
                 return;
             }
