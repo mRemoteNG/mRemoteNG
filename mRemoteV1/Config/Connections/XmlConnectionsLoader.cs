@@ -1,34 +1,28 @@
-﻿using System;
-using System.Security;
+﻿using System.Security;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
-using System.IO;
 using mRemoteNG.Config.Serializers.Xml;
+using mRemoteNG.Connection;
 
 namespace mRemoteNG.Config.Connections
 {
 	public class XmlConnectionsLoader
-    {
+	{
+	    private readonly ConnectionsService _connectionsService;
         private readonly string _connectionFilePath;
 
-        public XmlConnectionsLoader(string connectionFilePath)
+        public XmlConnectionsLoader(string connectionFilePath, ConnectionsService connectionsService)
         {
-            if (string.IsNullOrEmpty(connectionFilePath))
-                throw new ArgumentException($"{nameof(connectionFilePath)} cannot be null or empty");
-
-            if (!File.Exists(connectionFilePath))
-                throw new FileNotFoundException($"{connectionFilePath} does not exist");
-
-            _connectionFilePath = connectionFilePath;
+            _connectionFilePath = connectionFilePath.ThrowIfNullOrEmpty(nameof(connectionFilePath));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
         public ConnectionTreeModel Load()
         {
             var dataProvider = new FileDataProvider(_connectionFilePath);
             var xmlString = dataProvider.Load();
-            var deserializer = new XmlConnectionsDeserializer(PromptForPassword);
+            var deserializer = new XmlConnectionsDeserializer(_connectionsService, PromptForPassword);
             return deserializer.Deserialize(xmlString);
         }
 

@@ -82,7 +82,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void ReinitializeSqlUpdater()
         {
             _connectionsService.RemoteConnectionsSyncronizer?.Dispose();
-            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker(_connectionsService), _connectionsService);
             _connectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 

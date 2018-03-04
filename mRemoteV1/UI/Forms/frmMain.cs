@@ -79,6 +79,7 @@ namespace mRemoteNG.UI.Forms
             var externalToolsService = new ExternalToolsService();
 		    _import = new Import();
 		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance, _import);
+		    _import.ConnectionsService = _connectionsService;
 		    _appUpdater = new AppUpdater(() => _connectionsService.EncryptionKey);
             ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
             _export = new Export(_credentialRepositoryList, _connectionsService);

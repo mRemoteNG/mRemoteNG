@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using mRemoteNG.Config.Serializers;
+using mRemoteNG.App;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -19,7 +20,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 
         public void Setup(string confCons, string password)
         {
-            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(password.ConvertToSecureString);
+            var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, new Import());
+            _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(connectionsService, password.ConvertToSecureString);
             _connectionTreeModel = _xmlConnectionsDeserializer.Deserialize(confCons);
         }
 

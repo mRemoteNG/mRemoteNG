@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Timers;
-using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Tools;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.Connections.Multiuser
@@ -9,15 +11,17 @@ namespace mRemoteNG.Config.Connections.Multiuser
     {
         private readonly Timer _updateTimer;
         private readonly IConnectionsUpdateChecker _updateChecker;
+        private readonly ConnectionsService _connectionsService;
 
         public double TimerIntervalInMilliseconds
         {
             get { return _updateTimer.Interval; }
         }
 
-        public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker)
+        public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker, ConnectionsService connectionsService)
         {
-            _updateChecker = updateChecker;
+            _updateChecker = updateChecker.ThrowIfNull(nameof(updateChecker));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _updateTimer = new Timer(3000);
             SetEventListeners();
         }
@@ -33,7 +37,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         private void Load(object sender, ConnectionsUpdateAvailableEventArgs args)
         {
-            Runtime.ConnectionsService.LoadConnections(true, false, "");
+            _connectionsService.LoadConnections(true, false, "");
             args.Handled = true;
         }
 

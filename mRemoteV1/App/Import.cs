@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.Config.Import;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
@@ -11,6 +12,9 @@ namespace mRemoteNG.App
 {
     public class Import
     {
+        // TODO - this is only a property to break up a circular dependency. move this to ctor when able
+        public ConnectionsService ConnectionsService { get; set; }
+
         public void ImportFromFile(ContainerInfo importDestinationContainer)
         {
             try
@@ -50,7 +54,7 @@ namespace mRemoteNG.App
                         }
                     }
 
-                    Runtime.ConnectionsService.SaveConnectionsAsync();
+                    ConnectionsService.SaveConnectionsAsync();
                 }
             }
             catch (Exception ex)
@@ -64,7 +68,7 @@ namespace mRemoteNG.App
             try
             {
                 ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOu);
-                Runtime.ConnectionsService.SaveConnectionsAsync();
+                ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {
@@ -78,7 +82,7 @@ namespace mRemoteNG.App
             {
                 var importer = new PortScanImporter(protocol);
                 importer.Import(hosts, importDestinationContainer);
-                Runtime.ConnectionsService.SaveConnectionsAsync();
+                ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {
@@ -93,7 +97,7 @@ namespace mRemoteNG.App
             switch (extension.ToLowerInvariant())
             {
                 case ".xml":
-                    return new MRemoteNGXmlImporter();
+                    return new MRemoteNGXmlImporter(ConnectionsService);
                 case ".csv":
                     return new MRemoteNGCsvImporter();
                 case ".rdp":

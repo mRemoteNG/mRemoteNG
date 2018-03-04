@@ -58,7 +58,7 @@ namespace mRemoteNG.App
             messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
             if (!Settings.Default.UseSQLServer) return;
             messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
-            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            _connectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker(_connectionsService), _connectionsService);
             _connectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 

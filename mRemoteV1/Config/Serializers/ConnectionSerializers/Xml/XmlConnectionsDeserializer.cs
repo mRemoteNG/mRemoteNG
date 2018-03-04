@@ -13,6 +13,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
@@ -21,7 +22,8 @@ using mRemoteNG.UI.TaskDialog;
 namespace mRemoteNG.Config.Serializers.Xml
 {
 	public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
-    {
+	{
+	    private readonly ConnectionsService _connectionsService;
         private XmlDocument _xmlDocument;
         private double _confVersion;
         private XmlConnectionsDecryptor _decryptor;
@@ -31,8 +33,9 @@ namespace mRemoteNG.Config.Serializers.Xml
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(Func<SecureString> authenticationRequestor = null)
+        public XmlConnectionsDeserializer(ConnectionsService connectionsService, Func<SecureString> authenticationRequestor = null)
         {
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             AuthenticationRequestor = authenticationRequestor;
         }
 
@@ -48,7 +51,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 LoadXmlConnectionData(xml);
                 ValidateConnectionFileVersion();
                 if (!import)
-                    Runtime.ConnectionsService.IsConnectionsFileLoaded = false;
+                    _connectionsService.IsConnectionsFileLoaded = false;
 
                 var rootXmlElement = _xmlDocument.DocumentElement;
                 InitializeRootNode(rootXmlElement);
@@ -81,13 +84,13 @@ namespace mRemoteNG.Config.Serializers.Xml
                 AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, _rootNodeInfo);
 
                 if (!import)
-                    Runtime.ConnectionsService.IsConnectionsFileLoaded = true;
+                    _connectionsService.IsConnectionsFileLoaded = true;
 
                 return connectionTreeModel;
             }
             catch (Exception ex)
             {
-                Runtime.ConnectionsService.IsConnectionsFileLoaded = false;
+                _connectionsService.IsConnectionsFileLoaded = false;
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strLoadFromXmlFailed, ex);
                 throw;
             }

@@ -112,7 +112,7 @@ namespace mRemoteNG.Connection
             var newConnectionTreeModel =
                 (useDatabase
                     ? new SqlConnectionsLoader().Load()
-                    : new XmlConnectionsLoader(connectionFileName).Load())
+                    : new XmlConnectionsLoader(connectionFileName, this).Load())
                 ?? new ConnectionTreeModel();
 
             if (!import)

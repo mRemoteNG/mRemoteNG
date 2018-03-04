@@ -6,6 +6,8 @@ using System.Data.SqlClient;
 using System.Threading;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DatabaseConnectors;
+using mRemoteNG.Connection;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -13,12 +15,13 @@ namespace mRemoteNG.Config.Connections
     {
         private readonly SqlDatabaseConnector _sqlConnector;
         private readonly SqlCommand _sqlQuery;
+        private readonly ConnectionsService _connectionsService;
         private DateTime _lastUpdateTime;
         private DateTime _lastDatabaseUpdateTime;
 
-
-        public SqlConnectionsUpdateChecker()
+        public SqlConnectionsUpdateChecker(ConnectionsService connectionsService)
         {
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
             _sqlQuery = new SqlCommand("SELECT * FROM tblUpdate", _sqlConnector.SqlConnection);
             _lastUpdateTime = default(DateTime);
@@ -64,7 +67,7 @@ namespace mRemoteNG.Config.Connections
 
         private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
-            DateTime LastSqlUpdateWithoutMilliseconds = new DateTime(Runtime.ConnectionsService.LastSqlUpdate.Ticks - (Runtime.ConnectionsService.LastSqlUpdate.Ticks % TimeSpan.TicksPerSecond), Runtime.ConnectionsService.LastSqlUpdate.Kind);
+            DateTime LastSqlUpdateWithoutMilliseconds = new DateTime(_connectionsService.LastSqlUpdate.Ticks - (_connectionsService.LastSqlUpdate.Ticks % TimeSpan.TicksPerSecond), _connectionsService.LastSqlUpdate.Kind);
             return lastUpdateInDb == LastSqlUpdateWithoutMilliseconds;
         }
 
