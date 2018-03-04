@@ -27,7 +27,7 @@ namespace mRemoteNGTests.UI.Window
             var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import);
             var export = new Export(new CredentialRepositoryList(), connectionsService);
             var connectionContextMenu = new ConnectionContextMenu(connectionTree, connectionInitiator, sshTransferWindow, export, externalToolsService, import);
-            _connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), connectionInitiator) {ConnectionTreeContextMenu = connectionContextMenu};
+            _connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), connectionInitiator, connectionsService) {ConnectionTreeContextMenu = connectionContextMenu};
         }
 
         [TearDown]

@@ -23,6 +23,7 @@ namespace mRemoteNG.UI.Controls
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
 
 	    public IConnectionInitiator ConnectionInitiator { get; set; }
+        public ConnectionsService ConnectionsService { get; set; }
 
         public QuickConnectToolStrip()
         {
@@ -167,7 +168,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                var connectionInfo = Runtime.ConnectionsService.CreateQuickConnect(_cmbQuickConnect.Text.Trim(), Converter.StringToProtocol(Settings.Default.QuickConnectProtocol));
+                var connectionInfo = ConnectionsService.CreateQuickConnect(_cmbQuickConnect.Text.Trim(), Converter.StringToProtocol(Settings.Default.QuickConnectProtocol));
                 if (connectionInfo == null)
                 {
                     _cmbQuickConnect.Focus();
@@ -214,7 +215,7 @@ namespace mRemoteNG.UI.Controls
             };
 
             // ReSharper disable once CoVariantArrayConversion
-            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionsService.ConnectionTreeModel).ToArray();
+            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(ConnectionsService.ConnectionTreeModel).ToArray();
             _btnConnections.DropDownItems.AddRange(rootMenuItems);
 
         }

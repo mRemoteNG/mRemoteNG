@@ -158,7 +158,7 @@ namespace mRemoteNG.Connection
 
                 var previouslyUsingDatabase = UsingDatabase;
                 if (useDatabase)
-                    new SqlConnectionsSaver(saveFilter).Save(connectionTreeModel);
+                    new SqlConnectionsSaver(saveFilter, this).Save(connectionTreeModel);
                 else
                     new XmlConnectionsSaver(connectionFileName, saveFilter).Save(connectionTreeModel);
 

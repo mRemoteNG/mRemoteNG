@@ -66,7 +66,7 @@ namespace mRemoteNGTests.Connection.Protocol
             var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import);
 			var configWindow = new ConfigWindow(new DockContent());
 			var sshTransferWindow = new SSHTransferWindow();
-			var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
+			var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator, connectionsService);
 			var connectionTree = connectionTreeWindow.ConnectionTree;
             var export = new Export(new CredentialRepositoryList(), connectionsService);
 			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, export, _externalToolsService, import);

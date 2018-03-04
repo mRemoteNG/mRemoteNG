@@ -44,6 +44,7 @@ namespace mRemoteNG.UI.Menu
         public Export Export { get; set; }
         public Shutdown Shutdown { get; set; }
         public Import Import { get; set; }
+        public ConnectionsService ConnectionsService { get; set; }
 
         public MainFileMenu()
         {
@@ -351,31 +352,31 @@ namespace mRemoteNG.UI.Menu
                 return;
             }
 
-            Runtime.ConnectionsService.NewConnectionsFile(saveFileDialog.FileName);
+            ConnectionsService.NewConnectionsFile(saveFileDialog.FileName);
         }
 
         private void mMenFileLoad_Click(object sender, EventArgs e)
         {
-            if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
+            if (ConnectionsService.IsConnectionsFileLoaded)
             {
                 var msgBoxResult = MessageBox.Show(Language.strSaveConnectionsFileBeforeOpeningAnother, Language.strSave, MessageBoxButtons.YesNoCancel);
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (msgBoxResult)
                 {
                     case DialogResult.Yes:
-                        Runtime.ConnectionsService.SaveConnections();
+                        ConnectionsService.SaveConnections();
                         break;
                     case DialogResult.Cancel:
                         return;
                 }
             }
 
-            Runtime.ConnectionsService.LoadConnections(true);
+            ConnectionsService.LoadConnections(true);
         }
 
         private void mMenFileSave_Click(object sender, EventArgs e)
         {
-            Runtime.ConnectionsService.SaveConnectionsAsync();
+            ConnectionsService.SaveConnectionsAsync();
         }
 
         private void mMenFileSaveAs_Click(object sender, EventArgs e)
@@ -391,9 +392,9 @@ namespace mRemoteNG.UI.Menu
                 if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
                 var newFileName = saveFileDialog.FileName;
 
-                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
+                ConnectionsService.SaveConnections(ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
 
-                if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
+                if (newFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
                 {
                     Settings.Default.LoadConsFromCustomLocation = false;
                 }
@@ -457,7 +458,7 @@ namespace mRemoteNG.UI.Menu
             var selectedNode = TreeWindow.SelectedNode;
             ContainerInfo importDestination;
             if (selectedNode == null)
-                importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
+                importDestination = ConnectionsService.ConnectionTreeModel.RootNodes.First();
             else
                 importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
             Import.ImportFromFile(importDestination);
@@ -475,7 +476,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileExport_Click(object sender, EventArgs e)
         {
-            Export.ExportToFile(Windows.TreeForm.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
+            Export.ExportToFile(Windows.TreeForm.SelectedNode, ConnectionsService.ConnectionTreeModel);
         }
 
         private void mMenFileExit_Click(object sender, EventArgs e)

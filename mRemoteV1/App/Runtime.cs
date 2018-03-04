@@ -1,4 +1,3 @@
-using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
@@ -21,6 +20,6 @@ namespace mRemoteNG.App
 
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
-        public static ConnectionsService ConnectionsService { get; set; } = new ConnectionsService(PuttySessionsManager.Instance, new Import());
+        public static ConnectionsService ConnectionsService { get; set; }
     }
 }

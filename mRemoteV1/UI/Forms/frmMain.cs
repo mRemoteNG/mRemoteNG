@@ -79,6 +79,7 @@ namespace mRemoteNG.UI.Forms
             var externalToolsService = new ExternalToolsService();
 		    _import = new Import();
 		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance, _import);
+		    Runtime.ConnectionsService = _connectionsService;
 		    _import.ConnectionsService = _connectionsService;
 		    _appUpdater = new AppUpdater(() => _connectionsService.EncryptionKey);
             ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
@@ -87,7 +88,7 @@ namespace mRemoteNG.UI.Forms
 		    _webHelper = new WebHelper(_connectionInitiator);
 		    var configWindow = new ConfigWindow(new DockContent());
 		    var sshTransferWindow = new SSHTransferWindow();
-		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator);
+		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator, _connectionsService);
 			var connectionTree = connectionTreeWindow.ConnectionTree;
 			connectionTree.SelectedNodeChanged += configWindow.HandleConnectionTreeSelectionChanged;
 			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, _export, externalToolsService, _import);
@@ -118,6 +119,7 @@ namespace mRemoteNG.UI.Forms
 		    _externalToolsToolStrip.ExternalToolsService = externalToolsService;
 			_externalToolsToolStrip.GetSelectedConnectionFunc = () => SelectedConnection;
 			_quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
+		    _quickConnectToolStrip.ConnectionsService = _connectionsService;
 		    CredentialRecordTypeConverter.CredentialRepositoryList = _credentialRepositoryList;
 		    CredentialRecordListAdaptor.CredentialRepositoryList = _credentialRepositoryList;
 
@@ -277,6 +279,7 @@ namespace mRemoteNG.UI.Forms
             mainFileMenu1.Export = _export;
             mainFileMenu1.Shutdown = _shutdown;
             mainFileMenu1.Import = _import;
+            mainFileMenu1.ConnectionsService = _connectionsService;
 
             viewMenu1.TsExternalTools = _externalToolsToolStrip;
             viewMenu1.TsQuickConnect = _quickConnectToolStrip;

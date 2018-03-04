@@ -2,13 +2,13 @@
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
-using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.Versioning;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
@@ -21,14 +21,15 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
     {
-        private SecureString _password = Runtime.ConnectionsService.EncryptionKey;
+        private readonly ConnectionsService _connectionsService;
         private readonly SaveFilter _saveFilter;
 
-        public SqlConnectionsSaver(SaveFilter saveFilter)
+        public SqlConnectionsSaver(SaveFilter saveFilter, ConnectionsService connectionsService)
         {
             if (saveFilter == null)
                 throw new ArgumentNullException(nameof(saveFilter));
             _saveFilter = saveFilter;
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
         public void Save(ConnectionTreeModel connectionTreeModel)
@@ -67,17 +68,17 @@ namespace mRemoteNG.Config.Connections
             {
                 if (rootTreeNode.Password)
                 {
-                    _password = rootTreeNode.PasswordString.ConvertToSecureString();
-                    strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
+                    _connectionsService.EncryptionKey = rootTreeNode.PasswordString.ConvertToSecureString();
+                    strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _connectionsService.EncryptionKey);
                 }
                 else
                 {
-                    strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
+                    strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _connectionsService.EncryptionKey);
                 }
             }
             else
             {
-                strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
+                strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _connectionsService.EncryptionKey);
             }
 
             var sqlQuery = new SqlCommand("DELETE FROM tblRoot", sqlDatabaseConnector.SqlConnection);
