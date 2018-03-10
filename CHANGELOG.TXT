@@ -1,3 +1,11 @@
+1.76.3 Alpha 5 (2018-xx-xx):
+
+Fixes:
+------
+#911: Csv exports sometimes do not include all fields
+#807: Inheritance is sometimes turned on for nodes under root Connections node
+
+
 1.76.2 Alpha 4 (2018-03-03):
 
 Fixes:
