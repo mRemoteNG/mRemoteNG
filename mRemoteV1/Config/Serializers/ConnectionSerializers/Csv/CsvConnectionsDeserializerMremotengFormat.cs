@@ -48,7 +48,10 @@ namespace mRemoteNG.Config.Serializers.Csv
             {
                 // no parent mapped, add to root
                 if (string.IsNullOrEmpty(node.Value))
+                {
                     root.AddChild(node.Key);
+                    continue;
+                }
 
                 // search for parent in the list by GUID
                 var parent = parentMapping

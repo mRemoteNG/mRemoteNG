@@ -131,15 +131,10 @@ namespace mRemoteNG.Connection
 	    {
             RemoveParent();
 		    newParent?.AddChild(this);
-			if (newParent is RootNodeInfo)
-				Inheritance.DisableInheritance();
 	    }
 
         public void RemoveParent()
         {
-			if (Parent is RootNodeInfo)
-				Inheritance.EnableInheritance();
-
             Parent?.RemoveChild(this);
         }
 

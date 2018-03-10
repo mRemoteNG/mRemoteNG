@@ -146,6 +146,7 @@
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\IntegratedProgramTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
+    <Compile Include="Container\RootNodeInfoTests.cs" />
     <Compile Include="Credential\CompositeRepositoryUnlockerTests.cs" />
     <Compile Include="Credential\CredentialChangedEventArgsTests.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />

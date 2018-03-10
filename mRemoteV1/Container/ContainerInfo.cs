@@ -63,7 +63,7 @@ namespace mRemoteNG.Container
             AddChildAt(newChildItem, newChildIndex);
         }
 
-        public void AddChildAt(ConnectionInfo newChildItem, int index)
+        public virtual void AddChildAt(ConnectionInfo newChildItem, int index)
         {
             if (Children.Contains(newChildItem)) return;
             newChildItem.Parent?.RemoveChild(newChildItem);
@@ -81,7 +81,7 @@ namespace mRemoteNG.Container
             }
         }
 
-        public void RemoveChild(ConnectionInfo removalTarget)
+        public virtual void RemoveChild(ConnectionInfo removalTarget)
         {
             if (!Children.Contains(removalTarget)) return;
             removalTarget.Parent = null;

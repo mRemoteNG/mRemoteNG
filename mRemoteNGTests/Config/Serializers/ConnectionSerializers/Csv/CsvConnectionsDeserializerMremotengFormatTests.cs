@@ -19,20 +19,20 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
     public class CsvConnectionsDeserializerMremotengFormatTests
     {
         private CsvConnectionsDeserializerMremotengFormat _deserializer;
-        private ICredentialRepositoryList _credentialRepositoryList;
+        private CsvConnectionsSerializerMremotengFormat _serializer;
 
         [SetUp]
         public void Setup()
         {
             _deserializer = new CsvConnectionsDeserializerMremotengFormat();
-            _credentialRepositoryList = Substitute.For<ICredentialRepositoryList>();
+            var credentialRepositoryList = Substitute.For<ICredentialRepositoryList>();
+            _serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), credentialRepositoryList);
         }
 
         [TestCaseSource(typeof(DeserializationTestSource), nameof(DeserializationTestSource.ConnectionPropertyTestCases))]
         public object ConnectionPropertiesDeserializedCorrectly(string propertyToCheck)
         {
-            var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
-            var csv = serializer.Serialize(GetTestConnection());
+            var csv = _serializer.Serialize(GetTestConnection());
             var deserializedConnections = _deserializer.Deserialize(csv);
             var connection = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
             var propertyValue = typeof(ConnectionInfo).GetProperty(propertyToCheck)?.GetValue(connection);
@@ -42,10 +42,10 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         [TestCaseSource(typeof(DeserializationTestSource), nameof(DeserializationTestSource.InheritanceTestCases))]
         public object InheritancePropertiesDeserializedCorrectly(string propertyToCheck)
         {
-            var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
-            var csv = serializer.Serialize(GetTestConnectionWithAllInherited());
+            var csv = _serializer.Serialize(GetTestConnectionWithAllInherited());
             var deserializedConnections = _deserializer.Deserialize(csv);
             var connection = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
+            connection?.RemoveParent();
             var propertyValue = typeof(ConnectionInfoInheritance).GetProperty(propertyToCheck)?.GetValue(connection?.Inheritance);
             return propertyValue;
         }
@@ -58,8 +58,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             // |   |- Con1
             // |- Con2
             var treeModel = new ConnectionTreeModelBuilder().Build();
-            var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
-            var csv = serializer.Serialize(treeModel);
+            var csv = _serializer.Serialize(treeModel);
             var deserializedConnections = _deserializer.Deserialize(csv);
             var con1 = deserializedConnections.GetRecursiveChildList().First(info => info.Name == "Con1");
             var folder1 = deserializedConnections.GetRecursiveChildList().First(info => info.Name == "folder1");
