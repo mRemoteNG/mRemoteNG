@@ -211,7 +211,7 @@ namespace mRemoteNG.UI.Forms
         {
             var messageCollector = Runtime.MessageCollector;
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
-            MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters, _windows.ErrorsForm);
+            MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters, this, _windows.ErrorsForm);
 
 	        _startup.InitializeProgram(messageCollector);
 

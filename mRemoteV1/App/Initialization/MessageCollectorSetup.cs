@@ -4,6 +4,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Messages.WriterDecorators;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.App.Initialization
@@ -21,13 +22,13 @@ namespace mRemoteNG.App.Initialization
             };
         }
 
-        public static void BuildMessageWritersFromSettings(IList<IMessageWriter> messageWriterList, ErrorAndInfoWindow errorAndInfoWindow)
+        public static void BuildMessageWritersFromSettings(IList<IMessageWriter> messageWriterList, FrmMain frmMain, ErrorAndInfoWindow errorAndInfoWindow)
         {
 #if DEBUG
             messageWriterList.Add(BuildDebugConsoleWriter());
 #endif
             messageWriterList.Add(BuildTextLogMessageWriter());
-            messageWriterList.Add(BuildNotificationPanelMessageWriter(errorAndInfoWindow));
+            messageWriterList.Add(BuildNotificationPanelMessageWriter(frmMain, errorAndInfoWindow));
             messageWriterList.Add(BuildPopupMessageWriter());
         }
 
@@ -44,14 +45,15 @@ namespace mRemoteNG.App.Initialization
             );
         }
 
-        private static IMessageWriter BuildNotificationPanelMessageWriter(ErrorAndInfoWindow errorAndInfoWindow)
+        private static IMessageWriter BuildNotificationPanelMessageWriter(FrmMain frmMain, ErrorAndInfoWindow errorAndInfoWindow)
         {
 	        errorAndInfoWindow.ThrowIfNull(nameof(errorAndInfoWindow));
 			return new OnlyLogMessageFilter(
                 new MessageTypeFilterDecorator(
                     new NotificationPanelMessageFilteringOptions(),
                     new MessageFocusDecorator(
-	                    errorAndInfoWindow,
+                        frmMain,
+                        errorAndInfoWindow,
                         new NotificationPanelSwitchOnMessageFilteringOptions(),
                         new NotificationPanelMessageWriter(errorAndInfoWindow)
                     )

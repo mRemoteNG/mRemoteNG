@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.Messages.MessageWriters;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
@@ -13,20 +14,14 @@ namespace mRemoteNG.Messages.WriterDecorators
         private readonly IMessageWriter _decoratedWriter;
         private readonly ErrorAndInfoWindow _messageWindow;
         private Timer _ecTimer;
-        private readonly FrmMain _frmMain = FrmMain.Default;
+        private readonly FrmMain _frmMain;
 
-        public MessageFocusDecorator(ErrorAndInfoWindow messageWindow, IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
+        public MessageFocusDecorator(FrmMain frmMain, ErrorAndInfoWindow messageWindow, IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
         {
-            if (filter == null)
-                throw new ArgumentNullException(nameof(filter));
-            if (messageWindow == null)
-                throw new ArgumentNullException(nameof(messageWindow));
-            if (decoratedWriter == null)
-                throw new ArgumentNullException(nameof(decoratedWriter));
-
-            _filter = filter;
-            _messageWindow = messageWindow;
-            _decoratedWriter = decoratedWriter;
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
+            _filter = filter.ThrowIfNull(nameof(filter));
+            _messageWindow = messageWindow.ThrowIfNull(nameof(messageWindow));
+            _decoratedWriter = decoratedWriter.ThrowIfNull(nameof(decoratedWriter));
             CreateTimer();
         }
 
