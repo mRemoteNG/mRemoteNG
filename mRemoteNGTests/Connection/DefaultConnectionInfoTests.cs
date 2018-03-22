@@ -1,35 +1,41 @@
-﻿using mRemoteNG.Connection;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 
 
 namespace mRemoteNGTests.Connection
 {
-    public class DefaultConnectionInfoTests
+	public class DefaultConnectionInfoTests
     {
-        private string _testDomain = "somedomain";
-
         [SetUp]
         public void Setup()
         {
             DefaultConnectionInfo.Instance.Domain = "";
         }
 
-        [Test]
-        public void LoadingDefaultInfoUpdatesAllProperties()
+        [TestCaseSource(nameof(GetConnectionInfoProperties))]
+        public void LoadingDefaultInfoUpdatesAllProperties(PropertyInfo property)
         {
-            var connectionInfoSource = new ConnectionInfo { Domain = _testDomain };
+            var connectionInfoSource = ConnectionInfoHelpers.GetRandomizedConnectionInfo();
             DefaultConnectionInfo.Instance.LoadFrom(connectionInfoSource);
-            Assert.That(DefaultConnectionInfo.Instance.Domain, Is.EqualTo(_testDomain));
+	        var valueInDestination = property.GetValue(DefaultConnectionInfo.Instance);
+	        var valueInSource = property.GetValue(connectionInfoSource);
+            Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 
-        [Test]
-        public void SavingDefaultConnectionInfoExportsAllProperties()
+		[TestCaseSource(nameof(GetConnectionInfoProperties))]
+		public void SavingDefaultConnectionInfoExportsAllProperties(PropertyInfo property)
         {
             var saveTarget = new ConnectionInfo();
-            DefaultConnectionInfo.Instance.Domain = _testDomain;
+	        var randomizedValue = property.GetValue(ConnectionInfoHelpers.GetRandomizedConnectionInfo());
+			property.SetValue(DefaultConnectionInfo.Instance, randomizedValue);
             DefaultConnectionInfo.Instance.SaveTo(saveTarget);
-            Assert.That(saveTarget.Domain, Is.EqualTo(_testDomain));
+	        var valueInDestination = property.GetValue(saveTarget);
+	        var valueInSource = property.GetValue(DefaultConnectionInfo.Instance);
+			Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 
         [Test]
@@ -69,5 +75,10 @@ namespace mRemoteNGTests.Connection
             public string Protocol { get; set; }
             public string RDPMinutesToIdleTimeout { get; set; }
         }
+
+	    private static IEnumerable<PropertyInfo> GetConnectionInfoProperties()
+	    {
+			return new ConnectionInfo().GetSerializableProperties();
+	    }
     }
 }
