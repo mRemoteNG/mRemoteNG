@@ -1284,11 +1284,29 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to close other connection except the &quot;{0}&quot;?.
+        /// </summary>
+        internal static string strConfirmCloseConnectionOthersInstruction {
+            get {
+                return ResourceManager.GetString("strConfirmCloseConnectionOthersInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to close the panel, &quot;{0}&quot;? Any connections that it contains will also be closed..
         /// </summary>
         internal static string strConfirmCloseConnectionPanelMainInstruction {
             get {
                 return ResourceManager.GetString("strConfirmCloseConnectionPanelMainInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to close connections right to the &quot;{0}&quot;?.
+        /// </summary>
+        internal static string strConfirmCloseConnectionRightInstruction {
+            get {
+                return ResourceManager.GetString("strConfirmCloseConnectionRightInstruction", resourceCulture);
             }
         }
         
@@ -3278,6 +3296,24 @@ namespace mRemoteNG {
         internal static string strMenuDisconnect {
             get {
                 return ResourceManager.GetString("strMenuDisconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect Other Tabs.
+        /// </summary>
+        internal static string strMenuDisconnectOthers {
+            get {
+                return ResourceManager.GetString("strMenuDisconnectOthers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect Tabs To The Right.
+        /// </summary>
+        internal static string strMenuDisconnectOthersRight {
+            get {
+                return ResourceManager.GetString("strMenuDisconnectOthersRight", resourceCulture);
             }
         }
         

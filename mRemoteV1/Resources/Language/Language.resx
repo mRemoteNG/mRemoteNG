@@ -2634,4 +2634,16 @@ This page will walk you through the process of upgrading your connections file o
   <data name="TimeoutInSeconds" xml:space="preserve">
     <value>Timeout (seconds)</value>
   </data>
+  <data name="strMenuDisconnectOthersRight" xml:space="preserve">
+    <value>Disconnect Tabs To The Right</value>
+  </data>
+  <data name="strMenuDisconnectOthers" xml:space="preserve">
+    <value>Disconnect Other Tabs</value>
+  </data>
+  <data name="strConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>Do you want to close other connection except the "{0}"?</value>
+  </data>
+  <data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
+    <value>Do you want to close connections right to the "{0}"?</value>
+  </data>
 </root>
