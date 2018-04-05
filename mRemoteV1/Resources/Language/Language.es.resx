@@ -1154,7 +1154,7 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
     <value>Sin SmartSize</value>
   </data>
   <data name="strNoUpdateAvailable" xml:space="preserve">
-    <value>Sin actualizaciones dosponibles</value>
+    <value>Sin actualizaciones disponibles</value>
   </data>
   <data name="strOldConffile" xml:space="preserve">
     <value>Está intentando cargar un archivo de conexión que ha sido creado con una versión muy antigua de mRemote, ésto puede causar un error en tiempo de ejecución.
