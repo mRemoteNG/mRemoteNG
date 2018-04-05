@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol;
 using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 
@@ -9,28 +8,42 @@ using NUnit.Framework;
 namespace mRemoteNGTests.Connection
 {
 	public class DefaultConnectionInfoTests
-    {
+	{
+		private ConnectionInfo _randomizedConnectionInfo;
+
         [SetUp]
         public void Setup()
         {
-            DefaultConnectionInfo.Instance.Domain = "";
+	        _randomizedConnectionInfo = ConnectionInfoHelpers.GetRandomizedConnectionInfo();
         }
 
         [TestCaseSource(nameof(GetConnectionInfoProperties))]
         public void LoadingDefaultInfoUpdatesAllProperties(PropertyInfo property)
         {
-            var connectionInfoSource = ConnectionInfoHelpers.GetRandomizedConnectionInfo();
-            DefaultConnectionInfo.Instance.LoadFrom(connectionInfoSource);
+            DefaultConnectionInfo.Instance.LoadFrom(_randomizedConnectionInfo);
 	        var valueInDestination = property.GetValue(DefaultConnectionInfo.Instance);
-	        var valueInSource = property.GetValue(connectionInfoSource);
+	        var valueInSource = property.GetValue(_randomizedConnectionInfo);
             Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
+
+		//TODO - finish test
+		//[TestCaseSource(nameof(GetInheritanceProperties))]
+		public void LoadingDefaultInfoUpdatesAllInheritanceProperties(PropertyInfo property)
+		{
+			DefaultConnectionInfo.Instance.Inheritance.TurnOffInheritanceCompletely();
+			_randomizedConnectionInfo.Inheritance.TurnOnInheritanceCompletely();
+
+			DefaultConnectionInfo.Instance.LoadFrom(_randomizedConnectionInfo);
+			var valueInDestination = property.GetValue(DefaultConnectionInfo.Instance.Inheritance);
+			var valueInSource = property.GetValue(_randomizedConnectionInfo.Inheritance);
+			Assert.That(valueInDestination, Is.EqualTo(valueInSource));
+		}
 
 		[TestCaseSource(nameof(GetConnectionInfoProperties))]
 		public void SavingDefaultConnectionInfoExportsAllProperties(PropertyInfo property)
         {
             var saveTarget = new ConnectionInfo();
-	        var randomizedValue = property.GetValue(ConnectionInfoHelpers.GetRandomizedConnectionInfo());
+	        var randomizedValue = property.GetValue(_randomizedConnectionInfo);
 			property.SetValue(DefaultConnectionInfo.Instance, randomizedValue);
             DefaultConnectionInfo.Instance.SaveTo(saveTarget);
 	        var valueInDestination = property.GetValue(saveTarget);
@@ -38,47 +51,30 @@ namespace mRemoteNGTests.Connection
 			Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 
-        [Test]
-        public void CanSaveEnumValuesToString()
-        {
-            const ProtocolType targetProtocol = ProtocolType.RAW;
-            var saveTarget = new AllStringPropertySaveTarget();
-            DefaultConnectionInfo.Instance.Protocol = targetProtocol;
+		[TestCaseSource(nameof(GetConnectionInfoProperties))]
+		public void CanSaveDefaultConnectionToModelWithAllStringProperties(PropertyInfo property)
+		{
+            var saveTarget = new SerializableConnectionInfoAllPropertiesOfType<string>();
+
+			// randomize default connnection values to ensure we dont get false passing tests
+			var randomizedValue = property.GetValue(_randomizedConnectionInfo);
+			property.SetValue(DefaultConnectionInfo.Instance, randomizedValue);
+
             DefaultConnectionInfo.Instance.SaveTo(saveTarget);
-            Assert.That(saveTarget.Protocol, Is.EqualTo(targetProtocol.ToString()));
-        }
 
-        [Test]
-        public void CanSaveIntegerValuesToString()
-        {
-            const int targetValue = 123;
-            var saveTarget = new AllStringPropertySaveTarget();
-            DefaultConnectionInfo.Instance.RDPMinutesToIdleTimeout = targetValue;
-            DefaultConnectionInfo.Instance.SaveTo(saveTarget);
-            Assert.That(saveTarget.RDPMinutesToIdleTimeout, Is.EqualTo(targetValue.ToString()));
-        }
-
-        [Test]
-        public void CanSaveStringValuesToString()
-        {
-            const string targetName = "hello";
-            var saveTarget = new AllStringPropertySaveTarget();
-            DefaultConnectionInfo.Instance.Username = targetName;
-            DefaultConnectionInfo.Instance.SaveTo(saveTarget);
-            Assert.That(saveTarget.Username, Is.EqualTo(targetName));
-        }
-
-
-        private class AllStringPropertySaveTarget
-        {
-            public string Username { get; set; }
-            public string Protocol { get; set; }
-            public string RDPMinutesToIdleTimeout { get; set; }
+			var valueInSource = property.GetValue(DefaultConnectionInfo.Instance).ToString();
+			var valueInDestination = saveTarget.GetType().GetProperty(property.Name).GetValue(saveTarget).ToString();
+            Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 
 	    private static IEnumerable<PropertyInfo> GetConnectionInfoProperties()
 	    {
 			return new ConnectionInfo().GetSerializableProperties();
 	    }
+
+		private static IEnumerable<PropertyInfo> GetInheritanceProperties()
+		{
+			return new ConnectionInfoInheritance(new object(), true).GetProperties();
+		}
     }
 }
