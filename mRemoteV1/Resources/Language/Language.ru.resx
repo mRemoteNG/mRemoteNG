@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -187,7 +187,7 @@
     <value>Текущая версия</value>
   </data>
   <data name="strButtonBrowse" xml:space="preserve">
-    <value>&amp;Обзор ...</value>
+    <value>&amp;Обзор...</value>
   </data>
   <data name="strButtonCancel" xml:space="preserve">
     <value>&amp;Отменить</value>
@@ -302,8 +302,8 @@
     <value>GeckoFx был найден и установлен правильно.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA требуется установленный XenDesktop Online Plugin и зарегистрированная библиотека wfica.ocx. Вы можете скачать клиент здесь: http://www.citrix.com/download/ 
- Если у вас есть установленный XenDesktop Online Plugin и ничего не работает, попробуйте зарегистрировать wfica.ocx вручную. 
+    <value>ICA требуется установленный XenDesktop Online Plugin и зарегистрированная библиотека wfica.ocx. Вы можете скачать клиент здесь: http://www.citrix.com/download/
+ Если у вас есть установленный XenDesktop Online Plugin и ничего не работает, попробуйте зарегистрировать wfica.ocx вручную.
  Для этого откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Program Files\Citrix\ICA Client\wfica.ocx" (где C:\Program Files\Citrix \ICA Client\ это путь к XenDesktop Online Plugin).
  Если у вас все же не работает ICA в mRemoteNG обратитесь на форум mRemoteNG http://forum.mremoteng.org/ "</value>
   </data>
@@ -319,7 +319,7 @@
  Убедитесь, что  putty.exe есть в папке с mRemoteNG (по умолчанию: C:\Program Files\mRemoteNG\), или что вы указали правильный путь к исполняемому файлу PuTTY в Инструменты - Опции - Дополнительно - Путь к PuTTY)</value>
   </data>
   <data name="strCcPuttyOK" xml:space="preserve">
-    <value>Испольняемый файл PuTTY найден и готов к использованию.</value>
+    <value>Исполняемый файл PuTTY найден и готов к использованию.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
     <value>Для правильной работы RDP необходимо иметь установленный Remote Desktop Connection (Terminal Services Client) 8.0. Вы можете получить его здесь: https://support.microsoft.com/kb/2592687
@@ -418,7 +418,7 @@
     <value>Невозможно разобрать аргументы командной строки!</value>
   </data>
   <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
-    <value>{0} обнаружено что на этой системе работает утилита Lenovo Auto Scroll. Известно, что эта утилита вызвает проблемы с {0}. Рекомендуется отключить или удалить ее.</value>
+    <value>{0} обнаружено что на этой системе работает утилита Lenovo Auto Scroll. Известно, что эта утилита вызывает проблемы с {0}. Рекомендуется отключить или удалить ее.</value>
   </data>
   <data name="strCompatibilityProblemDetected" xml:space="preserve">
     <value>Обнаружена проблема совместимости</value>
@@ -569,7 +569,7 @@
     <value>Не подключать без проверки</value>
   </data>
   <data name="strDoubleClickTabClosesIt" xml:space="preserve">
-    <value>Двойной щелчок для закрытия  вкладки</value>
+    <value>Двойной щелчок для закрытия вкладки</value>
   </data>
   <data name="strDownloadAndInstall" xml:space="preserve">
     <value>Загрузка и установка</value>
@@ -605,7 +605,7 @@
     <value>Конечный IP</value>
   </data>
   <data name="strEndPort" xml:space="preserve">
-    <value>Конечн. порт</value>
+    <value>Конечный порт</value>
   </data>
   <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
     <value>Ошибка добавления внешнего приложения на Панель (frmMain). {0}</value>
@@ -711,7 +711,7 @@
     <value>Соединение</value>
   </data>
   <data name="strGroupboxExternalToolProperties" xml:space="preserve">
-    <value>Свройства внешнего инструмента</value>
+    <value>Свойства внешнего инструмента</value>
   </data>
   <data name="strGroupboxFiles" xml:space="preserve">
     <value>Файлы</value>
@@ -897,7 +897,7 @@
     <value>Загрузить из XML не удалось!</value>
   </data>
   <data name="strLocalFile" xml:space="preserve">
-    <value>Локал. файл</value>
+    <value>Локальный файл</value>
   </data>
   <data name="strLocalFileDoesNotExist" xml:space="preserve">
     <value>Локальный файл не существует!</value>
@@ -951,10 +951,10 @@
     <value>Удалить...</value>
   </data>
   <data name="strMenuDeleteConnection" xml:space="preserve">
-    <value>Удалить подключение ...</value>
+    <value>Удалить подключение...</value>
   </data>
   <data name="strMenuDeleteExternalTool" xml:space="preserve">
-    <value>Удалить Внешний инструмент...</value>
+    <value>Удалить внешний инструмент...</value>
   </data>
   <data name="strMenuDeleteFolder" xml:space="preserve">
     <value>Удалить папку...</value>
@@ -1270,7 +1270,7 @@
     <value>Это имя, которое будет отображаться в дереве подключений.</value>
   </data>
   <data name="strPropertyDescriptionPanel" xml:space="preserve">
-    <value>Устанавить панель, в которой  будет открыто подключение.</value>
+    <value>Установить панель, в которой  будет открыто подключение.</value>
   </data>
   <data name="strPropertyDescriptionPassword" xml:space="preserve">
     <value>Введите пароль.</value>
@@ -1579,7 +1579,7 @@
     <value>Ошибка добавления Быстрого подключения!</value>
   </data>
   <data name="strQuickConnectFailed" xml:space="preserve">
-    <value>Созданить быстрое подключение не удалось</value>
+    <value>Создать быстрое подключение не удалось</value>
   </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>Предупреждать при закрытии подключений</value>
@@ -1705,7 +1705,7 @@
     <value>Ошибка сессии!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
-    <value>К-ство переподключений RDP:</value>
+    <value>Количество переподключений RDP:</value>
   </data>
   <data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
     <value>RDP: Установить уровень проверки подлинности не удалась!</value>
@@ -1768,7 +1768,7 @@
     <value>Обновление</value>
   </data>
   <data name="strRemoteFile" xml:space="preserve">
-    <value>Удаленн. файл</value>
+    <value>Удалить файл</value>
   </data>
   <data name="strRemoveAll" xml:space="preserve">
     <value>Удалить все</value>
@@ -1885,7 +1885,7 @@
     <value>Фоновая передача по SSH - не удалась!</value>
   </data>
   <data name="strSSHTranferSuccessful" xml:space="preserve">
-    <value>Передано успешо!</value>
+    <value>Передано успешно!</value>
   </data>
   <data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>Передача по SSH завершена с ошибкой (UI.Window.SSHTransfer)!</value>
@@ -1897,7 +1897,7 @@
     <value>Начальный IP</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
-    <value>Начальн. порт</value>
+    <value>Начальный порт</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
     <value>Запуск / Выход</value>
@@ -2080,7 +2080,7 @@
     <value>Требуется обновление mRemoteNG</value>
   </data>
   <data name="strUpdateCheck" xml:space="preserve">
-    <value>mRemoteNG может периодически подключаться к сайту mRemoteNG для  проверки наличия обновлений.</value>
+    <value>mRemoteNG может периодически подключаться к сайту mRemoteNG для проверки наличия обновлений.</value>
   </data>
   <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
     <value>Не удалось завершить проверку обновлений!</value>
