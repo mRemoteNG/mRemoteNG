@@ -1,3 +1,9 @@
+1.76.4 Alpha 6 (2018-xx-xx):
+Fixes:
+------
+#916: Default properties were not being saved
+
+
 1.76.3 Alpha 5 (2018-03-14):
 
 Fixes:

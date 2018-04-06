@@ -170,9 +170,11 @@
     <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
     <Compile Include="Security\RandomGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
+    <Compile Include="TestHelpers\ConnectionInfoHelpers.cs" />
     <Compile Include="TestHelpers\ConnectionTreeModelBuilder.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="TestHelpers\FileTestHelpers.cs" />
+    <Compile Include="TestHelpers\SerializableConnectionInfoAllPropertiesOfType.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />
     <Compile Include="Tools\OptionalTests.cs" />

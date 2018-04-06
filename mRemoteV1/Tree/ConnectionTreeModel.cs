@@ -8,7 +8,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Tree
 {
-    public sealed class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
+	public sealed class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
     {
         public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
 
@@ -30,7 +30,7 @@ namespace mRemoteNG.Tree
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, rootNode));
         }
 
-        public IEnumerable<ConnectionInfo> GetRecursiveChildList()
+        public IReadOnlyList<ConnectionInfo> GetRecursiveChildList()
         {
             var list = new List<ConnectionInfo>();
             foreach (var rootNode in RootNodes)
