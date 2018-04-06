@@ -26,19 +26,6 @@ namespace mRemoteNGTests.Connection
             Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 
-		//TODO - finish test
-		//[TestCaseSource(nameof(GetInheritanceProperties))]
-		public void LoadingDefaultInfoUpdatesAllInheritanceProperties(PropertyInfo property)
-		{
-			DefaultConnectionInfo.Instance.Inheritance.TurnOffInheritanceCompletely();
-			_randomizedConnectionInfo.Inheritance.TurnOnInheritanceCompletely();
-
-			DefaultConnectionInfo.Instance.LoadFrom(_randomizedConnectionInfo);
-			var valueInDestination = property.GetValue(DefaultConnectionInfo.Instance.Inheritance);
-			var valueInSource = property.GetValue(_randomizedConnectionInfo.Inheritance);
-			Assert.That(valueInDestination, Is.EqualTo(valueInSource));
-		}
-
 		[TestCaseSource(nameof(GetConnectionInfoProperties))]
 		public void SavingDefaultConnectionInfoExportsAllProperties(PropertyInfo property)
         {
@@ -67,14 +54,9 @@ namespace mRemoteNGTests.Connection
             Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 
-	    private static IEnumerable<PropertyInfo> GetConnectionInfoProperties()
+		private static IEnumerable<PropertyInfo> GetConnectionInfoProperties()
 	    {
 			return new ConnectionInfo().GetSerializableProperties();
 	    }
-
-		private static IEnumerable<PropertyInfo> GetInheritanceProperties()
-		{
-			return new ConnectionInfoInheritance(new object(), true).GetProperties();
-		}
     }
 }

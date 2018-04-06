@@ -12,6 +12,7 @@ namespace mRemoteNG.Connection
         private DefaultConnectionInfo()
         {
             IsDefault = true;
+	        Inheritance = DefaultConnectionInheritance.Instance;
         }
 
         public void LoadFrom<TSource>(TSource sourceInstance, Func<string, string> propertyNameMutator = null)
