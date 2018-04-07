@@ -122,7 +122,7 @@ namespace mRemoteNG.UI.Window
 				else
 				{
 					Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strCannotStartPortScan);
-				}
+                }
 			}
 		}
 
@@ -154,7 +154,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void ShowImportControls(bool controlsVisible)
 		{
-			pnlPorts.Visible = controlsVisible;
+			pnlScan.Visible = controlsVisible;
 			pnlImport.Visible = controlsVisible;
 			if (controlsVisible)
 			{
