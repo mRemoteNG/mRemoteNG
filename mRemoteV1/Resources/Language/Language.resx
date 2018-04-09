@@ -402,7 +402,7 @@ VncSharp Control Version {0}</value>
     <value>Arguments</value>
   </data>
   <data name="strColumnDisplayName" xml:space="preserve">
-    <value>Display Name</value>
+    <value>Display name</value>
   </data>
   <data name="strColumnFilename" xml:space="preserve">
     <value>Filename</value>
@@ -417,7 +417,7 @@ VncSharp Control Version {0}</value>
     <value>Username</value>
   </data>
   <data name="strColumnWaitForExit" xml:space="preserve">
-    <value>Wait For Exit</value>
+    <value>Wait for exit</value>
   </data>
   <data name="strCommandExitProgram" xml:space="preserve">
     <value>E&amp;xit {0}</value>
@@ -923,7 +923,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>&amp;Connect:</value>
   </data>
   <data name="strLabelDisplayName" xml:space="preserve">
-    <value>Display Name</value>
+    <value>Display name:</value>
   </data>
   <data name="strLabelDomain" xml:space="preserve">
     <value>Domain:</value>
@@ -2235,7 +2235,7 @@ Message:
     <value>Try to integrate</value>
   </data>
   <data name="strShowOnToolbar" xml:space="preserve">
-    <value>Show On Toolbar</value>
+    <value>Show on toolbar</value>
   </data>
   <data name="strType" xml:space="preserve">
     <value>Type</value>
@@ -2633,5 +2633,23 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="TimeoutInSeconds" xml:space="preserve">
     <value>Timeout (seconds)</value>
+  </data>
+  <data name="srtWorkingDirectory" xml:space="preserve">
+    <value>Working directory:</value>
+  </data>
+  <data name="strRunElevated" xml:space="preserve">
+    <value>Run elevated</value>
+  </data>
+  <data name="strRunElevateHeader" xml:space="preserve">
+    <value>Run elevate</value>
+  </data>
+  <data name="strShowOnToolbarColumnHeader" xml:space="preserve">
+    <value>Show on toolbar column</value>
+  </data>
+  <data name="strTryToIntegrateColumnHeader" xml:space="preserve">
+    <value>Try to integrate</value>
+  </data>
+  <data name="strWorkingDirColumnHeader" xml:space="preserve">
+    <value>Working directory</value>
   </data>
 </root>
