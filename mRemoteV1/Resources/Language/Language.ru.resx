@@ -193,7 +193,7 @@
     <value>&amp;Отменить</value>
   </data>
   <data name="strButtonChange" xml:space="preserve">
-    <value>Измененить</value>
+    <value>Изменить</value>
   </data>
   <data name="strButtonClose" xml:space="preserve">
     <value>&amp;Закрыть</value>
@@ -855,7 +855,7 @@
     <value>Нажмите на эту кнопку для настройки сессий PuTTY:</value>
   </data>
   <data name="strLabelPuttyTimeout" xml:space="preserve">
-    <value>Max. PuTTY &amp;&amp; Integrated Ext. Apps wait time:</value>
+    <value>Максимальное время ожидание PuTTY и внешнего приложения:</value>
   </data>
   <data name="strLabelReleasedUnderGPL" xml:space="preserve">
     <value>Выпущено под лицензией GNU General Public License (GPL)</value>
@@ -2214,5 +2214,53 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="strWorkingDirColumnHeader" xml:space="preserve">
     <value>Рабочий каталог</value>
+  </data>
+  <data name="strExportToFileMenuItem" xml:space="preserve">
+    <value>Экспорт в файл...</value>
+  </data>
+  <data name="strImportFromFileMenuItem" xml:space="preserve">
+    <value>Импорт из файла...</value>
+  </data>
+  <data name="strImportMenuItem" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
+  <data name="strLockToolbars" xml:space="preserve">
+    <value>Закрепить позицию панели инструментов</value>
+  </data>
+  <data name="strMultiSshToolbar" xml:space="preserve">
+    <value>Панель инструментов SSH</value>
+  </data>
+  <data name="strAssignedCredential" xml:space="preserve">
+    <value>Назначенные учетные данные</value>
+  </data>
+  <data name="strExportEverything" xml:space="preserve">
+    <value>Экспортировать все</value>
+  </data>
+  <data name="strExportFile" xml:space="preserve">
+    <value>Файл экспорта</value>
+  </data>
+  <data name="strExportItems" xml:space="preserve">
+    <value>Пункт импорта</value>
+  </data>
+  <data name="strExportProperties" xml:space="preserve">
+    <value>Экспорт свойств</value>
+  </data>
+  <data name="strExportSelectedConnection" xml:space="preserve">
+    <value>Экспорт выбранного соединения</value>
+  </data>
+  <data name="strExportSelectedFolder" xml:space="preserve">
+    <value>Экспорт выбранной папки</value>
+  </data>
+  <data name="strFileFormatLabel" xml:space="preserve">
+    <value>Формат файла:</value>
+  </data>
+  <data name="strImportSubOUs" xml:space="preserve">
+    <value>Импорт подразделений</value>
+  </data>
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Используйте кодировку UTF8 для свойства RDP "Load Balance Info"</value>
+  </data>
+  <data name="strTimeoutInSeconds" xml:space="preserve">
+    <value>Время ожидания в секундах:</value>
   </data>
 </root>

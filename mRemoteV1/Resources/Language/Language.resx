@@ -2500,7 +2500,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Log to application directory</value>
   </data>
   <data name="strAssignedCredential" xml:space="preserve">
-    <value>Assigned Credential</value>
+    <value>Assigned сredential</value>
   </data>
   <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
     <value>Allow Always</value>
@@ -2628,10 +2628,10 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strLabelReadOnly" xml:space="preserve">
     <value>Read Only:</value>
   </data>
-  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
-  <data name="TimeoutInSeconds" xml:space="preserve">
+  <data name="strTimeoutInSeconds" xml:space="preserve">
     <value>Timeout (seconds)</value>
   </data>
   <data name="srtWorkingDirectory" xml:space="preserve">
@@ -2651,5 +2651,14 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strWorkingDirColumnHeader" xml:space="preserve">
     <value>Working directory</value>
+  </data>
+  <data name="strLockToolbars" xml:space="preserve">
+    <value>Lock toolbar positions</value>
+  </data>
+  <data name="strMultiSshToolbar" xml:space="preserve">
+    <value>Multi SSH toolbar</value>
+  </data>
+  <data name="strImportSubOUs" xml:space="preserve">
+    <value>Import sub OUs</value>
   </data>
 </root>
