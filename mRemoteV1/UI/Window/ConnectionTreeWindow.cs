@@ -253,6 +253,7 @@ namespace mRemoteNG.UI.Window
                     return;
 		        }
 		        olvConnections.UseFiltering = true;
+                olvConnections.ExpandAll();
 		        _connectionTreeSearchTextFilter.FilterText = txtSearch.Text;
 		        olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
 		    }
