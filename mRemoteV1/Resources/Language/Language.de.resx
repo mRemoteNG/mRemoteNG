@@ -1003,7 +1003,7 @@ Starte mit neuer Datei.</value>
     <value>Starten</value>
   </data>
 	<data name="strMenuNewConnectionFile" xml:space="preserve">
-    <value>Neue Konfigurationsdatei</value>
+    <value>Neue Verbindungsdatei</value>
   </data>
 	<data name="strMenuNotifications" xml:space="preserve">
     <value>Meldungen</value>
@@ -1018,7 +1018,7 @@ Starte mit neuer Datei.</value>
     <value>Alle Löschen</value>
   </data>
 	<data name="strMenuOpenConnectionFile" xml:space="preserve">
-    <value>Konfigurationsdatei öffnen...</value>
+    <value>Verbindungsdatei öffnen...</value>
   </data>
 	<data name="strMenuOptions" xml:space="preserve">
     <value>Optionen</value>
@@ -1057,10 +1057,10 @@ Starte mit neuer Datei.</value>
     <value>Layout zurücksetzen</value>
   </data>
 	<data name="strMenuSaveConnectionFile" xml:space="preserve">
-    <value>Konfigurationsdatei speichern</value>
+    <value>Verbindungsdatei speichern</value>
   </data>
 	<data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Konfigurationsdatei speichern unter...</value>
+    <value>Verbindungsdatei speichern unter...</value>
   </data>
 	<data name="strMenuScreenshot" xml:space="preserve">
     <value>Bildschirmschnappschuss</value>
@@ -2451,5 +2451,123 @@ Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremote
 	</data>
 	<data name="strOptionsPageTitle" xml:space="preserve">
 		<value>mRemoteNG Optionen</value>
+	</data>
+	<data name="strImportLocationCommandButtons" xml:space="preserve">
+		<value>Unter dem Stamm {0} {1} | Unter dem ausgewählten Ordner {0} {2}</value>
+	</data>
+	<data name="strMenuNewExternalTool" xml:space="preserve">
+		<value>Neues externes Tool</value>
+	</data>
+	<data name="strMenuSessionRetrieve" xml:space="preserve">
+		<value>Abrufen</value>
+	</data>
+	<data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+		<value>Das Change-Log konnte nicht herunter geladen werden.</value>
+	</data>
+	<data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
+		<value>Wählen Sie die vom Protokoll bereitgestellte Klangqualität: Dynamisch, Mittel, Hoch</value>
+	</data>
+	<data name="strPropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+		<value>Die Anzahl der Minuten, die die RDP-Sitzung im Leerlauf verbleibt, bevor sie automatisch getrennt wird (0 bedeutet kein Limit)</value>
+	</data>
+	<data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+		<value>Minuten zum Leerlauf</value>
+	</data>
+	<data name="strAdd" xml:space="preserve">
+		<value>Hinzufügen</value>
+	</data>
+	<data name="strPropertyDescriptionCredential" xml:space="preserve">
+		<value>Auswählen welche Anmeldeinformationen für diese Verbindung verwendet werden sollen.</value>
+	</data>
+	<data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+		<value>Möchten Sie die Anmeldeinformationen {0} wirklich löschen?</value>
+	</data>
+	<data name="strFindMatchingCredentialFailed" xml:space="preserve">
+		<value>
+Es konnte kein Anmeldedatensatz mit der ID "{0}" für den Verbindungsdatensatz mit dem Namen "{1}" gefunden werden.</value>
+	</data>
+	<data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+		<value>Wählen Sie, ob eine Benachrichtigung empfangen werden soll, nachdem die RDP-Sitzung aufgrund von Inaktivität getrennt wurde</value>
+	</data>
+	<data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+		<value>Benachrichtigung bei Leerlauftrennung</value>
+	</data>
+	<data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+		<value>Das Passwort muss mindestens {0} der folgenden Zeichen enthalten: {1}</value>
+	</data>
+	<data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+		<value>Das Passwort muss mindestens {0} Kleinbuchstaben enthalten</value>
+	</data>
+	<data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+		<value>Passwort muss mindestens {0} Nummer (n) enthalten</value>
+	</data>
+	<data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+		<value>Passwort muss mindestens {0} Großbuchstaben enthalten</value>
+	</data>
+	<data name="strPasswordLengthConstraintHint" xml:space="preserve">
+		<value>
+Die Passwortlänge muss zwischen {0} und {1} liegen</value>
+	</data>
+	<data name="strChooseLogPath" xml:space="preserve">
+		<value>
+Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
+	</data>
+	<data name="strLogFilePath" xml:space="preserve">
+		<value>Protokollierungspfad</value>
+	</data>
+	<data name="strChoosePath" xml:space="preserve">
+		<value>Pfad wählen</value>
+	</data>
+	<data name="strUseDefault" xml:space="preserve">
+		<value>Standard verwenden</value>
+	</data>
+	<data name="strLogging" xml:space="preserve">
+		<value>Protokollierung</value>
+	</data>
+	<data name="strLogToAppDir" xml:space="preserve">
+		<value>
+In das Anwendungsverzeichnis protokollieren</value>
+	</data>
+	<data name="strHttpsInsecurePrompt" xml:space="preserve">
+		<value>Unsicheres Zertifikat für URL zulassen: {0}?</value>
+	</data>
+	<data name="RepositoryIsUnlocked" xml:space="preserve">
+		<value>Das ausgewählte Repository ist entsperrt</value>
+	</data>
+	<data name="Unlocking" xml:space="preserve">
+		<value>Entsperren</value>
+	</data>
+	<data name="UnlockCredentialRepository" xml:space="preserve">
+		<value>Entsperre Credential Repository</value>
+	</data>
+	<data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
+		<value>Auffordern das Credential Repository beim Start zu entsperren</value>
+	</data>
+	<data name="strConnectionFilePath" xml:space="preserve">
+		<value>Verbindungsdateipfad</value>
+	</data>
+	<data name="CredentialUnavailable" xml:space="preserve">
+		<value>Anmeldeinformationen nicht verfügbar</value>
+	</data>
+	<data name="strOptionsThemeDeleteConfirmation" xml:space="preserve">
+		<value>Soll das Theme wirklich gelöscht werden?</value>
+	</data>
+	<data name="strOptionsThemeNewThemeError" xml:space="preserve">
+		<value>Das Theme kann nicht erstellt werden, Name bereits vorhanden oder Sonderzeichen im Namen</value>
+	</data>
+	<data name="strOptionsThemeNewThemeText" xml:space="preserve">
+		<value>Namen des neuen Theme angeben</value>
+	</data>
+	<data name="CouldNotFindExternalTool" xml:space="preserve">
+		<value>Externes Tool mit Namen "{0}" konnte nicht gefunden werden</value>
+	</data>
+	<data name="ConfigurationCustomPath" xml:space="preserve">
+		<value>Eigenen Pfad verwenden</value>
+	</data>
+	<data name="ServerNotAccessible" xml:space="preserve">
+		<value>Server '{0}' nicht erreichbar</value>
+	</data>
+	<data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+		<value>Verwenden Sie die UTF8-Codierung für die RDP-Eigenschaft "Load Balance Info"</value>
 	</data>
 </root>
