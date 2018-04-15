@@ -40,7 +40,8 @@
 		public TType RedirectKeys { get; set; }
 		public TType RedirectDiskDrives { get; set; }
 		public TType RedirectPrinters { get; set; }
-		public TType RedirectPorts { get; set; }
+        public TType RedirectClipboard { get; set; }
+        public TType RedirectPorts { get; set; }
 		public TType RedirectSmartCards { get; set; }
 		public TType RedirectSound { get; set; }
 		public TType SoundQuality { get; set; }

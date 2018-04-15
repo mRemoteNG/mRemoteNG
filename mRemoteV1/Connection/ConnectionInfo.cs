@@ -310,9 +310,10 @@ namespace mRemoteNG.Connection
             RedirectKeys = Settings.Default.ConDefaultRedirectKeys;
             RedirectDiskDrives = Settings.Default.ConDefaultRedirectDiskDrives;
             RedirectPrinters = Settings.Default.ConDefaultRedirectPrinters;
+            RedirectClipboard = Settings.Default.ConDefaultRedirectClipboard;
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
-            RedirectSound = (RdpProtocol.RDPSounds) Enum.Parse(typeof(RdpProtocol.RDPSounds), Settings.Default.ConDefaultRedirectSound);
+            RedirectSound = (RdpProtocol.RDPSounds) Enum.Parse(typeof(RdpProtocol.RDPSounds), Settings.Default.ConDefaultRedirectSound);            
             SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 

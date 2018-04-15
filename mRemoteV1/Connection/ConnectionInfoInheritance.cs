@@ -216,11 +216,10 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectPrinters"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RedirectPrinters {get; set;}
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryClipboard", 7),
+        [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7),
         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectClipboard"),
         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectClipboard"),
-        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
-        public bool RedirectClipboard { get; set; }
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool RedirectClipboard { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectPorts"), 
