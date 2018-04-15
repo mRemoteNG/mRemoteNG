@@ -287,6 +287,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     connectionInfo.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["RedirectDiskDrives"].Value);
                     connectionInfo.RedirectPrinters = bool.Parse(xmlnode.Attributes["RedirectPrinters"].Value);
+                    connectionInfo.RedirectClipboard = bool.Parse(xmlnode.Attributes["RedirectClipboard"].Value);
                     connectionInfo.RedirectPorts = bool.Parse(xmlnode.Attributes["RedirectPorts"].Value);
                     connectionInfo.RedirectSmartCards = bool.Parse(xmlnode.Attributes["RedirectSmartCards"].Value);
                 }
@@ -294,6 +295,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     connectionInfo.RedirectDiskDrives = false;
                     connectionInfo.RedirectPrinters = false;
+                    connectionInfo.RedirectClipboard = false;
                     connectionInfo.RedirectPorts = false;
                     connectionInfo.RedirectSmartCards = false;
                 }
