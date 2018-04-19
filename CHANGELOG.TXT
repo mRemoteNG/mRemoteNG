@@ -1,4 +1,9 @@
 1.76.4 Alpha 6 (2018-xx-xx):
+
+Features/Enhancements:
+----------------------
+#942: Improved Russian translation of several items
+
 Fixes:
 ------
 #916: Default properties were not being saved

@@ -23,6 +23,7 @@ github.com/DamianBis
 github.com/pfjason
 github.com/sirLoaf
 github.com/Fyers
+Vladimir Semenov (github.com/sli-pro)
 
 
 Past Contributors
