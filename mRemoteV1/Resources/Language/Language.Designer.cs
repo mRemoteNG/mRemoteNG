@@ -160,15 +160,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use UTF8 encoding for RDP &quot;Load Balance Info&quot; property.
-        /// </summary>
-        internal static string LoadBalanceInfoUseUtf8 {
-            get {
-                return ResourceManager.GetString("LoadBalanceInfoUseUtf8", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Login failed for user &apos;{0}&apos;..
         /// </summary>
         internal static string LoginFailedForUser {
@@ -219,6 +210,15 @@ namespace mRemoteNG {
         internal static string Source {
             get {
                 return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Working directory:.
+        /// </summary>
+        internal static string srtWorkingDirectory {
+            get {
+                return ResourceManager.GetString("srtWorkingDirectory", resourceCulture);
             }
         }
         
@@ -421,7 +421,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assigned Credential.
+        ///   Looks up a localized string similar to Assigned сredential.
         /// </summary>
         internal static string strAssignedCredential {
             get {
@@ -1094,7 +1094,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display Name.
+        ///   Looks up a localized string similar to Display name.
         /// </summary>
         internal static string strColumnDisplayName {
             get {
@@ -1139,7 +1139,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wait For Exit.
+        ///   Looks up a localized string similar to Wait for exit.
         /// </summary>
         internal static string strColumnWaitForExit {
             get {
@@ -2634,6 +2634,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import sub OUs.
+        /// </summary>
+        internal static string strImportSubOUs {
+            get {
+                return ResourceManager.GetString("strImportSubOUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inactive.
         /// </summary>
         internal static string strInactive {
@@ -2805,7 +2814,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display Name.
+        ///   Looks up a localized string similar to Display name:.
         /// </summary>
         internal static string strLabelDisplayName {
             get {
@@ -3012,6 +3021,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use UTF8 encoding for RDP &quot;Load Balance Info&quot; property.
+        /// </summary>
+        internal static string strLoadBalanceInfoUseUtf8 {
+            get {
+                return ResourceManager.GetString("strLoadBalanceInfoUseUtf8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load from SQL failed.
         /// </summary>
         internal static string strLoadFromSqlFailed {
@@ -3053,6 +3071,15 @@ namespace mRemoteNG {
         internal static string strLocalFileDoesNotExist {
             get {
                 return ResourceManager.GetString("strLocalFileDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lock toolbar positions.
+        /// </summary>
+        internal static string strLockToolbars {
+            get {
+                return ResourceManager.GetString("strLockToolbars", resourceCulture);
             }
         }
         
@@ -3809,6 +3836,15 @@ namespace mRemoteNG {
         internal static string strMremoteNgXml {
             get {
                 return ResourceManager.GetString("strMremoteNgXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multi SSH toolbar.
+        /// </summary>
+        internal static string strMultiSshToolbar {
+            get {
+                return ResourceManager.GetString("strMultiSshToolbar", resourceCulture);
             }
         }
         
@@ -6211,6 +6247,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Run elevated.
+        /// </summary>
+        internal static string strRunElevated {
+            get {
+                return ResourceManager.GetString("strRunElevated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run elevate.
+        /// </summary>
+        internal static string strRunElevateHeader {
+            get {
+                return ResourceManager.GetString("strRunElevateHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string strSave {
@@ -6373,11 +6427,20 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show On Toolbar.
+        ///   Looks up a localized string similar to Show on toolbar.
         /// </summary>
         internal static string strShowOnToolbar {
             get {
                 return ResourceManager.GetString("strShowOnToolbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show on toolbar column.
+        /// </summary>
+        internal static string strShowOnToolbarColumnHeader {
+            get {
+                return ResourceManager.GetString("strShowOnToolbarColumnHeader", resourceCulture);
             }
         }
         
@@ -7012,6 +7075,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Timeout (seconds).
+        /// </summary>
+        internal static string strTimeoutInSeconds {
+            get {
+                return ResourceManager.GetString("strTimeoutInSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         internal static string strTitle {
@@ -7098,6 +7170,15 @@ namespace mRemoteNG {
         internal static string strTryIntegrate {
             get {
                 return ResourceManager.GetString("strTryIntegrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try to integrate.
+        /// </summary>
+        internal static string strTryToIntegrateColumnHeader {
+            get {
+                return ResourceManager.GetString("strTryToIntegrateColumnHeader", resourceCulture);
             }
         }
         
@@ -7472,6 +7553,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Working directory.
+        /// </summary>
+        internal static string strWorkingDirColumnHeader {
+            get {
+                return ResourceManager.GetString("strWorkingDirColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to XULrunner path:.
         /// </summary>
         internal static string strXULrunnerPath {
@@ -7504,15 +7594,6 @@ namespace mRemoteNG {
         internal static string TestingConnection {
             get {
                 return ResourceManager.GetString("TestingConnection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Timeout (seconds).
-        /// </summary>
-        internal static string TimeoutInSeconds {
-            get {
-                return ResourceManager.GetString("TimeoutInSeconds", resourceCulture);
             }
         }
         

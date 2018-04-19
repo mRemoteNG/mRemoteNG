@@ -45,26 +45,34 @@ namespace mRemoteNG.UI.Window
 	        TabText = Language.strMenuExternalTools;
 
 	        NewToolToolstripButton.Text = Language.strButtonNew;
-	        DeleteToolToolstripButton.Text = Language.strOptionsKeyboardButtonDelete;
+	        DeleteToolToolstripButton.Text = Language.strOptionsThemeButtonDelete;
 	        LaunchToolToolstripButton.Text = Language.strButtonLaunch;
 
 	        DisplayNameColumnHeader.Text = Language.strColumnDisplayName;
 	        FilenameColumnHeader.Text = Language.strColumnFilename;
 	        ArgumentsColumnHeader.Text = Language.strColumnArguments;
-	        WaitForExitColumnHeader.Text = Language.strColumnWaitForExit;
-	        TryToIntegrateCheckBox.Text = Language.strTryIntegrate;
+            WorkingDirColumnHeader.Text = Language.strWorkingDirColumnHeader;
+            WaitForExitColumnHeader.Text = Language.strColumnWaitForExit;
+            TryToIntegrateColumnHeader.Text = Language.strTryToIntegrateColumnHeader;
+            RunElevateHeader.Text = Language.strRunElevateHeader;
+            ShowOnToolbarColumnHeader.Text = Language.strShowOnToolbarColumnHeader;
+            
+            TryToIntegrateCheckBox.Text = Language.strTryIntegrate;
 	        ShowOnToolbarCheckBox.Text = Language.strShowOnToolbar;
+            RunElevatedCheckBox.Text = Language.strRunElevated;
 
-	        PropertiesGroupBox.Text = Language.strGroupboxExternalToolProperties;
+            PropertiesGroupBox.Text = Language.strGroupboxExternalToolProperties;
 
 	        DisplayNameLabel.Text = Language.strLabelDisplayName;
 	        FilenameLabel.Text = Language.strLabelFilename;
 	        ArgumentsLabel.Text = Language.strLabelArguments;
-	        OptionsLabel.Text = Language.strLabelOptions;
+            WorkingDirLabel.Text = Language.srtWorkingDirectory;
+            OptionsLabel.Text = Language.strLabelOptions;
+            
 	        WaitForExitCheckBox.Text = Language.strCheckboxWaitForExit;
 	        BrowseButton.Text = Language.strButtonBrowse;
-
-	        NewToolMenuItem.Text = Language.strMenuNewExternalTool;
+            BrowseWorkingDir.Text = Language.strButtonBrowse;
+            NewToolMenuItem.Text = Language.strMenuNewExternalTool;
 	        DeleteToolMenuItem.Text = Language.strMenuDeleteExternalTool;
 	        LaunchToolMenuItem.Text = Language.strMenuLaunchExternalTool;
 	    }

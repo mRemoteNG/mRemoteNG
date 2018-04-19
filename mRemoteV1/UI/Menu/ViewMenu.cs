@@ -261,8 +261,10 @@ namespace mRemoteNG.UI.Menu
             _mMenViewJumpToConnectionsConfig.Text = Language.strMenuConnectionsAndConfig;
             _mMenViewJumpToErrorsInfos.Text = Language.strMenuNotifications;
             _mMenViewResetLayout.Text = Language.strMenuResetLayout;
+            _mMenViewLockToolbars.Text = Language.strLockToolbars;
             _mMenViewQuickConnectToolbar.Text = Language.strMenuQuickConnectToolbar;
             _mMenViewExtAppsToolbar.Text = Language.strMenuExternalToolsToolbar;
+            _mMenViewMultiSshToolbar.Text = Language.strMultiSshToolbar;
             _mMenViewFullscreen.Text = Language.strMenuFullScreen;
         }
 

@@ -274,7 +274,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.ShowOnToolbarCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.ShowOnToolbarCheckBox.AutoSize = true;
-            this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(306, 158);
+            this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(369, 158);
             this.ShowOnToolbarCheckBox.Name = "ShowOnToolbarCheckBox";
             this.ShowOnToolbarCheckBox.Size = new System.Drawing.Size(113, 17);
             this.ShowOnToolbarCheckBox.TabIndex = 10;
@@ -330,7 +330,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.TryToIntegrateCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.TryToIntegrateCheckBox.AutoSize = true;
-            this.TryToIntegrateCheckBox.Location = new System.Drawing.Point(306, 135);
+            this.TryToIntegrateCheckBox.Location = new System.Drawing.Point(369, 135);
             this.TryToIntegrateCheckBox.Name = "TryToIntegrateCheckBox";
             this.TryToIntegrateCheckBox.Size = new System.Drawing.Size(103, 17);
             this.TryToIntegrateCheckBox.TabIndex = 8;

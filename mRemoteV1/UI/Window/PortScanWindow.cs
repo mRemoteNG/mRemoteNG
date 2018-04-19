@@ -147,7 +147,7 @@ namespace mRemoteNG.UI.Window
 			clmClosedPorts.Text = Language.strClosedPorts;
 			Label2.Text = $"{Language.strEndPort}:";
 			Label1.Text = $"{Language.strStartPort}:";
-			lblTimeout.Text = $"{Language.TimeoutInSeconds}";
+			lblTimeout.Text = $"{Language.strTimeoutInSeconds}";
 			TabText = Language.strMenuPortScan;
 			Text = Language.strMenuPortScan;
 		}
