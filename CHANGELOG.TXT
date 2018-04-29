@@ -6,6 +6,7 @@ Features/Enhancements:
 
 Fixes:
 ------
+#938: Minor layout improvements on the Port Scan screen
 #916: Default properties were not being saved
 
 
