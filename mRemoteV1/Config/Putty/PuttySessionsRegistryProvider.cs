@@ -50,10 +50,10 @@ namespace mRemoteNG.Config.Putty
 		    {
 		        PuttySession = sessionName,
 		        Name = sessionName,
-		        Hostname = Convert.ToString(sessionKey.GetValue("HostName")),
-		        Username = Convert.ToString(sessionKey.GetValue("UserName"))
+		        Hostname = sessionKey.GetValue("HostName").ToString(),
+		        Username = sessionKey.GetValue("UserName").ToString()
 		    };
-            var protocol = Convert.ToString(sessionKey.GetValue("Protocol")) ?? "ssh";
+		    var protocol = string.IsNullOrEmpty(sessionKey.GetValue("Protocol").ToString()) ? sessionKey.GetValue("Protocol").ToString() : "ssh";
 		    switch (protocol.ToLowerInvariant())
 			{
 				case "raw":
@@ -65,16 +65,15 @@ namespace mRemoteNG.Config.Putty
 				case "serial":
 					return null;
 				case "ssh":
-                    var sshVersionObject = sessionKey.GetValue("SshProt");
-					if (sshVersionObject != null)
-					{
-					    var sshVersion = Convert.ToInt32(sshVersionObject);
-					    sessionInfo.Protocol = sshVersion >= 2 ? ProtocolType.SSH2 : ProtocolType.SSH1;
-					}
-					else
-					{
-						sessionInfo.Protocol = ProtocolType.SSH2;
-					}
+				    int.TryParse(sessionKey.GetValue("SshProt").ToString(), out var sshVersion);
+                    /* Per PUTTY.H in PuTTYNG & PuTTYNG Upstream (PuTTY proper currently)
+                     * expect 0 for SSH1, 3 for SSH2 ONLY
+                     * 1 for SSH1 with a 2 fallback
+                     * 2 for SSH2 with a 1 fallback
+                     *
+                     * default to SSH2 if any other value is received
+                     */
+                    sessionInfo.Protocol = sshVersion == 1 || sshVersion == 0 ? ProtocolType.SSH1 : ProtocolType.SSH2;
 					break;
 				case "telnet":
 					sessionInfo.Protocol = ProtocolType.Telnet;
