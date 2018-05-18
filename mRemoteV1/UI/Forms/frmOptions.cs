@@ -49,6 +49,7 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyLanguage()
         {
+            this.Text = Language.strOptionsPageTitle;
             foreach (var optionPage in _pages.Values)
             {
                 optionPage.ApplyLanguage();

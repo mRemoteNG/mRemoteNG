@@ -68,13 +68,26 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("ConfigurationCreateNew", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Use a Custom File Path.
         /// </summary>
-        internal static string ConfigurationCustomPath {
-            get {
+        internal static string ConfigurationCustomPath
+        {
+            get
+            {
                 return ResourceManager.GetString("ConfigurationCustomPath", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Use a Custom File Path.
+        /// </summary>
+        internal static string strAdvancedSecurityOptions
+        {
+            get
+            {
+                return ResourceManager.GetString("strAdvancedSecurityOptions", resourceCulture);
             }
         }
         
@@ -437,16 +450,29 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strAutomaticallyGetSessionInfo", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Auto save every:.
         /// </summary>
-        internal static string strAutoSaveEvery {
-            get {
+        internal static string strAutoSaveEvery
+        {
+            get
+            {
                 return ResourceManager.GetString("strAutoSaveEvery", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Auto save every:.
+        /// </summary>
+        internal static string strOptionsPageTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("strOptionsPageTitle", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Minutes (0 means disabled).
         /// </summary>
@@ -3343,16 +3369,29 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strMenuExternalTools", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to External Tools Toolbar.
         /// </summary>
-        internal static string strMenuExternalToolsToolbar {
-            get {
+        internal static string strMenuExternalToolsToolbar
+        {
+            get
+            {
                 return ResourceManager.GetString("strMenuExternalToolsToolbar", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to External Tools Toolbar.
+        /// </summary>
+        internal static string strMenuMultiSshToolbar
+        {
+            get
+            {
+                return ResourceManager.GetString("strMenuMultiSshToolbar", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to &amp;File.
         /// </summary>
@@ -3586,16 +3625,29 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strMenuReportBug", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Reset layout.
         /// </summary>
-        internal static string strMenuResetLayout {
-            get {
+        internal static string strMenuResetLayout
+        {
+            get
+            {
                 return ResourceManager.GetString("strMenuResetLayout", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Reset layout.
+        /// </summary>
+        internal static string strMenuLockToolbars
+        {
+            get
+            {
+                return ResourceManager.GetString("strMenuLockToolbars", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Save Connection File.
         /// </summary>
