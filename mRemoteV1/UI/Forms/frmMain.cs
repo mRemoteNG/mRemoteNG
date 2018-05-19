@@ -138,7 +138,6 @@ namespace mRemoteNG.UI.Forms
             Startup.Instance.InitializeProgram(messageCollector);
 
             SetMenuDependencies();
-            ApplyLanguage();
 
             msMain.Location = Point.Empty;
             var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip);
@@ -173,6 +172,7 @@ namespace mRemoteNG.UI.Forms
 
             _screenSystemMenu.BuildScreenList();
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
+            ApplyLanguage();
 
             Opacity = 1;
             //Fix missing general panel at the first run
@@ -181,10 +181,10 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyLanguage()
         {
-            fleMenu.Text = Language.strMenuFile;
-            viewMenu.Text = Language.strMenuView;
-            toolsMenu.Text = Language.strMenuTools;
-            helpMenu.Text = Language.strMenuHelp;
+            fleMenu.ApplyLanguage();
+            viewMenu.ApplyLanguage();
+            toolsMenu.ApplyLanguage();
+            helpMenu.ApplyLanguage();
         }
 
         private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

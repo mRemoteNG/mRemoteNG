@@ -41,7 +41,6 @@ namespace mRemoteNG.UI.Menu
         public ViewMenu()
         {
             Initialize();
-            ApplyLanguage();
             _panelAdder = new PanelAdder();
 		}
 
@@ -249,8 +248,9 @@ namespace mRemoteNG.UI.Menu
 
 	    
 
-	    private void ApplyLanguage()
+	    public void ApplyLanguage()
         {
+            Text = Language.strMenuView;
             _mMenViewAddConnectionPanel.Text = Language.strMenuAddConnectionPanel;
             _mMenViewConnectionPanels.Text = Language.strMenuConnectionPanels;
             _mMenViewConnections.Text = Language.strMenuConnections;

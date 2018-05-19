@@ -103,6 +103,16 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsOptions.Click += mMenToolsOptions_Click;
         }
 
+        public void ApplyLanguage()
+        {
+            Text = Language.strMenuTools;
+            _mMenToolsSshTransfer.Text = Language.strMenuSSHFileTransfer;
+            _mMenToolsExternalApps.Text = Language.strMenuExternalTools;
+            _mMenToolsPortScan.Text = Language.strMenuPortScan;
+            _mMenToolsComponentsCheck.Text = Language.strComponentsCheck;
+            _mMenToolsOptions.Text = Language.strMenuOptions;
+        }
+
         #region Tools
         private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
         {
