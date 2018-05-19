@@ -85,20 +85,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblRDPConTimeout
             // 
-            this.lblRDPConTimeout.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblRDPConTimeout.Location = new System.Drawing.Point(3, 6);
+            this.lblRDPConTimeout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRDPConTimeout.Location = new System.Drawing.Point(3, 0);
             this.lblRDPConTimeout.Name = "lblRDPConTimeout";
-            this.lblRDPConTimeout.Size = new System.Drawing.Size(137, 13);
+            this.lblRDPConTimeout.Size = new System.Drawing.Size(261, 26);
             this.lblRDPConTimeout.TabIndex = 0;
             this.lblRDPConTimeout.Text = "RDP Connection Timeout";
             this.lblRDPConTimeout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblRdpReconnectionCount
             // 
-            this.lblRdpReconnectionCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblRdpReconnectionCount.Location = new System.Drawing.Point(3, 6);
+            this.lblRdpReconnectionCount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRdpReconnectionCount.Location = new System.Drawing.Point(3, 0);
             this.lblRdpReconnectionCount.Name = "lblRdpReconnectionCount";
-            this.lblRdpReconnectionCount.Size = new System.Drawing.Size(139, 13);
+            this.lblRdpReconnectionCount.Size = new System.Drawing.Size(261, 26);
             this.lblRdpReconnectionCount.TabIndex = 0;
             this.lblRdpReconnectionCount.Text = "RDP Reconnection Count";
             this.lblRdpReconnectionCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,10 +156,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblAutoSave1
             // 
-            this.lblAutoSave1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblAutoSave1.Location = new System.Drawing.Point(3, 6);
+            this.lblAutoSave1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAutoSave1.Location = new System.Drawing.Point(3, 0);
             this.lblAutoSave1.Name = "lblAutoSave1";
-            this.lblAutoSave1.Size = new System.Drawing.Size(261, 13);
+            this.lblAutoSave1.Size = new System.Drawing.Size(261, 26);
             this.lblAutoSave1.TabIndex = 0;
             this.lblAutoSave1.Text = "Auto Save  in Minutes (0 means disabled)";
             this.lblAutoSave1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

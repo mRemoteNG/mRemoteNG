@@ -66,10 +66,6 @@ namespace mRemoteNG.UI.Forms
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
         }
 
-        static FrmMain()
-        {
-        }
-
         #region Properties
         public FormWindowState PreviousWindowState { get; set; }
 
@@ -142,6 +138,7 @@ namespace mRemoteNG.UI.Forms
             Startup.Instance.InitializeProgram(messageCollector);
 
             SetMenuDependencies();
+            ApplyLanguage();
 
             msMain.Location = Point.Empty;
             var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip);
@@ -182,7 +179,15 @@ namespace mRemoteNG.UI.Forms
             new PanelAdder().AddPanel();
         }
 
-	    private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void ApplyLanguage()
+        {
+            fleMenu.Text = Language.strMenuFile;
+            viewMenu.Text = Language.strMenuView;
+            toolsMenu.Text = Language.strMenuTools;
+            helpMenu.Text = Language.strMenuHelp;
+        }
+
+        private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
 	    {
 		    if (propertyChangedEventArgs.PropertyName != nameof(Settings.LockToolbars))
 				return;
@@ -209,17 +214,17 @@ namespace mRemoteNG.UI.Forms
         private void SetMenuDependencies()
         {
             var connectionInitiator = new ConnectionInitiator();
-            mainFileMenu1.TreeWindow = Windows.TreeForm;
-            mainFileMenu1.ConnectionInitiator = connectionInitiator;
+            fleMenu.TreeWindow = Windows.TreeForm;
+            fleMenu.ConnectionInitiator = connectionInitiator;
 
-            viewMenu1.TsExternalTools = _externalToolsToolStrip;
-            viewMenu1.TsQuickConnect = _quickConnectToolStrip;
-	        viewMenu1.TsMultiSsh = _multiSshToolStrip;
-            viewMenu1.FullscreenHandler = Fullscreen;
-            viewMenu1.MainForm = this;
+            viewMenu.TsExternalTools = _externalToolsToolStrip;
+            viewMenu.TsQuickConnect = _quickConnectToolStrip;
+	        viewMenu.TsMultiSsh = _multiSshToolStrip;
+            viewMenu.FullscreenHandler = Fullscreen;
+            viewMenu.MainForm = this;
 
-            toolsMenu1.MainForm = this;
-            toolsMenu1.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
+            toolsMenu.MainForm = this;
+            toolsMenu.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
 
             _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
@@ -616,12 +621,12 @@ namespace mRemoteNG.UI.Forms
 
         private void ViewMenu_Opening(object sender, EventArgs e)
         {
-            viewMenu1.mMenView_DropDownOpening(sender, e);
+            viewMenu.mMenView_DropDownOpening(sender, e);
         }
 
         private void mainFileMenu1_DropDownOpening(object sender, EventArgs e)
         {
-            mainFileMenu1.mMenFile_DropDownOpening(sender, e);
+            fleMenu.mMenFile_DropDownOpening(sender, e);
         }
     }
 }
