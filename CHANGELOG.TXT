@@ -2,8 +2,9 @@
 
 Features/Enhancements:
 ----------------------
-#942: Improved Russian translation of several items
 #948: Fixed issue where many menu item translations were not being used
+#942: Improved Russian translation of several items
+#902: Menu bar can once again be moved. View -> "Lock toolbar positions" now also locks the menu position
 
 Fixes:
 ------

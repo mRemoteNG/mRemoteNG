@@ -197,7 +197,7 @@ namespace mRemoteNG.UI.Forms
 
 	    private void LockToolbarPositions(bool shouldBeLocked)
 	    {
-		    var toolbars = new ToolStrip[] { _quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip };
+		    var toolbars = new ToolStrip[] { _quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip, msMain };
 			foreach (var toolbar in toolbars)
 			{
 				toolbar.GripStyle = shouldBeLocked

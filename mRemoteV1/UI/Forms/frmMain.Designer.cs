@@ -65,6 +65,7 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
+            this.msMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.viewMenu,
@@ -78,7 +79,7 @@ namespace mRemoteNG.UI.Forms
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
             // 
-            // mainFileMenu1
+            // fileMenu
             // 
             this.fileMenu.ConnectionInitiator = null;
             this.fileMenu.Name = "mMenFile";
@@ -87,7 +88,7 @@ namespace mRemoteNG.UI.Forms
             this.fileMenu.TreeWindow = null;
             this.fileMenu.DropDownOpening += new System.EventHandler(this.mainFileMenu1_DropDownOpening);
             // 
-            // viewMenu1
+            // viewMenu
             // 
             this.viewMenu.FullscreenHandler = null;
             this.viewMenu.MainForm = null;
@@ -99,7 +100,7 @@ namespace mRemoteNG.UI.Forms
             this.viewMenu.TsQuickConnect = null;
             this.viewMenu.DropDownOpening += new System.EventHandler(this.ViewMenu_Opening);
             // 
-            // toolsMenu1
+            // toolsMenu
             // 
             this.toolsMenu.CredentialProviderCatalog = null;
             this.toolsMenu.MainForm = null;
@@ -107,7 +108,7 @@ namespace mRemoteNG.UI.Forms
             this.toolsMenu.Size = new System.Drawing.Size(47, 20);
             this.toolsMenu.Text = "&Tools";
             // 
-            // helpMenu1
+            // helpMenu
             // 
             this.helpMenu.Name = "mMenInfo";
             this.helpMenu.Size = new System.Drawing.Size(44, 20);
