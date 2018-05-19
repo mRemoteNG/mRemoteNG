@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Forms
             mRemoteNG.Connection.ConnectionInitiator connectionInitiator1 = new mRemoteNG.Connection.ConnectionInitiator();
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
-            this.fleMenu = new mRemoteNG.UI.Menu.MainFileMenu();
+            this.fileMenu = new mRemoteNG.UI.Menu.MainFileMenu();
             this.viewMenu = new mRemoteNG.UI.Menu.ViewMenu();
             this.toolsMenu = new mRemoteNG.UI.Menu.ToolsMenu();
             this.helpMenu = new mRemoteNG.UI.Menu.HelpMenu();
@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fleMenu,
+            this.fileMenu,
             this.viewMenu,
             this.toolsMenu,
             this.helpMenu});
@@ -80,12 +80,12 @@ namespace mRemoteNG.UI.Forms
             // 
             // mainFileMenu1
             // 
-            this.fleMenu.ConnectionInitiator = null;
-            this.fleMenu.Name = "mMenFile";
-            this.fleMenu.Size = new System.Drawing.Size(37, 20);
-            this.fleMenu.Text = "&File";
-            this.fleMenu.TreeWindow = null;
-            this.fleMenu.DropDownOpening += new System.EventHandler(this.mainFileMenu1_DropDownOpening);
+            this.fileMenu.ConnectionInitiator = null;
+            this.fileMenu.Name = "mMenFile";
+            this.fileMenu.Size = new System.Drawing.Size(37, 20);
+            this.fileMenu.Text = "&File";
+            this.fileMenu.TreeWindow = null;
+            this.fileMenu.DropDownOpening += new System.EventHandler(this.mainFileMenu1_DropDownOpening);
             // 
             // viewMenu1
             // 
@@ -216,7 +216,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.Timer tmrAutoSave;
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
         private System.ComponentModel.IContainer components;
-        private Menu.MainFileMenu fleMenu;
+        private Menu.MainFileMenu fileMenu;
         private Menu.ViewMenu viewMenu;
         private Menu.ToolsMenu toolsMenu;
         private Menu.HelpMenu helpMenu;

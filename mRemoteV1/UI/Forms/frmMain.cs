@@ -181,7 +181,7 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyLanguage()
         {
-            fleMenu.ApplyLanguage();
+            fileMenu.ApplyLanguage();
             viewMenu.ApplyLanguage();
             toolsMenu.ApplyLanguage();
             helpMenu.ApplyLanguage();
@@ -214,8 +214,8 @@ namespace mRemoteNG.UI.Forms
         private void SetMenuDependencies()
         {
             var connectionInitiator = new ConnectionInitiator();
-            fleMenu.TreeWindow = Windows.TreeForm;
-            fleMenu.ConnectionInitiator = connectionInitiator;
+            fileMenu.TreeWindow = Windows.TreeForm;
+            fileMenu.ConnectionInitiator = connectionInitiator;
 
             viewMenu.TsExternalTools = _externalToolsToolStrip;
             viewMenu.TsQuickConnect = _quickConnectToolStrip;
@@ -626,7 +626,7 @@ namespace mRemoteNG.UI.Forms
 
         private void mainFileMenu1_DropDownOpening(object sender, EventArgs e)
         {
-            fleMenu.mMenFile_DropDownOpening(sender, e);
+            fileMenu.mMenFile_DropDownOpening(sender, e);
         }
     }
 }
