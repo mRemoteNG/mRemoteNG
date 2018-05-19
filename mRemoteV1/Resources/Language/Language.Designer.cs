@@ -68,26 +68,13 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("ConfigurationCreateNew", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use a Custom File Path.
         /// </summary>
-        internal static string ConfigurationCustomPath
-        {
-            get
-            {
+        internal static string ConfigurationCustomPath {
+            get {
                 return ResourceManager.GetString("ConfigurationCustomPath", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Use a Custom File Path.
-        /// </summary>
-        internal static string strAdvancedSecurityOptions
-        {
-            get
-            {
-                return ResourceManager.GetString("strAdvancedSecurityOptions", resourceCulture);
             }
         }
         
@@ -169,6 +156,15 @@ namespace mRemoteNG {
         internal static string IncorrectPassword {
             get {
                 return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use UTF8 encoding for RDP &quot;Load Balance Info&quot; property.
+        /// </summary>
+        internal static string LoadBalanceInfoUseUtf8 {
+            get {
+                return ResourceManager.GetString("LoadBalanceInfoUseUtf8", resourceCulture);
             }
         }
         
@@ -326,6 +322,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AdvancedSecurityOptions.
+        /// </summary>
+        internal static string strAdvancedSecurityOptions {
+            get {
+                return ResourceManager.GetString("strAdvancedSecurityOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow only a single instance of the application (mRemoteNG restart required).
         /// </summary>
         internal static string strAllowOnlySingleInstance {
@@ -434,7 +439,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assigned сredential.
+        ///   Looks up a localized string similar to Assigned Credential.
         /// </summary>
         internal static string strAssignedCredential {
             get {
@@ -450,29 +455,16 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strAutomaticallyGetSessionInfo", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Auto save every:.
+        ///   Looks up a localized string similar to Auto save time in minutes (0 means disabled):.
         /// </summary>
-        internal static string strAutoSaveEvery
-        {
-            get
-            {
+        internal static string strAutoSaveEvery {
+            get {
                 return ResourceManager.GetString("strAutoSaveEvery", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Auto save every:.
-        /// </summary>
-        internal static string strOptionsPageTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("strOptionsPageTitle", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Minutes (0 means disabled).
         /// </summary>
@@ -1120,7 +1112,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display name.
+        ///   Looks up a localized string similar to Display Name.
         /// </summary>
         internal static string strColumnDisplayName {
             get {
@@ -1165,7 +1157,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wait for exit.
+        ///   Looks up a localized string similar to Wait For Exit.
         /// </summary>
         internal static string strColumnWaitForExit {
             get {
@@ -2570,7 +2562,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred while importing the file, &quot;{0}&quot;..
+        ///   Looks up a localized string similar to An error occurred while importing the file &quot;{0}&quot;..
         /// </summary>
         internal static string strImportFileFailedContent {
             get {
@@ -2840,7 +2832,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display name:.
+        ///   Looks up a localized string similar to Display Name.
         /// </summary>
         internal static string strLabelDisplayName {
             get {
@@ -3396,29 +3388,16 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strMenuExternalTools", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to External Tools Toolbar.
         /// </summary>
-        internal static string strMenuExternalToolsToolbar
-        {
-            get
-            {
+        internal static string strMenuExternalToolsToolbar {
+            get {
                 return ResourceManager.GetString("strMenuExternalToolsToolbar", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to External Tools Toolbar.
-        /// </summary>
-        internal static string strMenuMultiSshToolbar
-        {
-            get
-            {
-                return ResourceManager.GetString("strMenuMultiSshToolbar", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;File.
         /// </summary>
@@ -3479,6 +3458,24 @@ namespace mRemoteNG {
         internal static string strMenuLaunchExternalTool {
             get {
                 return ResourceManager.GetString("strMenuLaunchExternalTool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lock Toolbar Positions.
+        /// </summary>
+        internal static string strMenuLockToolbars {
+            get {
+                return ResourceManager.GetString("strMenuLockToolbars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multi SSH Toolbar.
+        /// </summary>
+        internal static string strMenuMultiSshToolbar {
+            get {
+                return ResourceManager.GetString("strMenuMultiSshToolbar", resourceCulture);
             }
         }
         
@@ -3652,29 +3649,16 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strMenuReportBug", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reset layout.
         /// </summary>
-        internal static string strMenuResetLayout
-        {
-            get
-            {
+        internal static string strMenuResetLayout {
+            get {
                 return ResourceManager.GetString("strMenuResetLayout", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Reset layout.
-        /// </summary>
-        internal static string strMenuLockToolbars
-        {
-            get
-            {
-                return ResourceManager.GetString("strMenuLockToolbars", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Save Connection File.
         /// </summary>
@@ -4199,6 +4183,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mRemoteNG Options.
+        /// </summary>
+        internal static string strOptionsPageTitle {
+            get {
+                return ResourceManager.GetString("strOptionsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Testing....
         /// </summary>
         internal static string strOptionsProxyTesting {
@@ -4262,7 +4255,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder.
+        ///   Looks up a localized string similar to No themes are loaded, check that the default mremoteNG themes exist in the &apos;themes&apos; folder.
         /// </summary>
         internal static string strOptionsThemeErrorNoThemes {
             get {
@@ -6479,7 +6472,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show on toolbar.
+        ///   Looks up a localized string similar to Show On Toolbar.
         /// </summary>
         internal static string strShowOnToolbar {
             get {
