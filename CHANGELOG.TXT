@@ -3,6 +3,7 @@
 Features/Enhancements:
 ----------------------
 #942: Improved Russian translation of several items
+#948: Fixed issue where many menu item translations were not being used
 
 Fixes:
 ------
