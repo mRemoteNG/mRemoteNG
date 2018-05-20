@@ -181,7 +181,7 @@
     <value>Automatically get session information</value>
   </data>
   <data name="strAutoSaveEvery" xml:space="preserve">
-    <value>Auto save every:</value>
+    <value>Auto save time in minutes (0 means disabled):</value>
   </data>
   <data name="strAutoSaveMins" xml:space="preserve">
     <value>Minutes (0 means disabled)</value>
@@ -402,7 +402,7 @@ VncSharp Control Version {0}</value>
     <value>Arguments</value>
   </data>
   <data name="strColumnDisplayName" xml:space="preserve">
-    <value>Display name</value>
+    <value>Display Name</value>
   </data>
   <data name="strColumnFilename" xml:space="preserve">
     <value>Filename</value>
@@ -417,7 +417,7 @@ VncSharp Control Version {0}</value>
     <value>Username</value>
   </data>
   <data name="strColumnWaitForExit" xml:space="preserve">
-    <value>Wait for exit</value>
+    <value>Wait For Exit</value>
   </data>
   <data name="strCommandExitProgram" xml:space="preserve">
     <value>E&amp;xit {0}</value>
@@ -836,7 +836,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Import/Export</value>
   </data>
   <data name="strImportFileFailedContent" xml:space="preserve">
-    <value>An error occurred while importing the file, "{0}".</value>
+    <value>An error occurred while importing the file "{0}".</value>
   </data>
   <data name="strImportFileFailedMainInstruction" xml:space="preserve">
     <value>Import failed</value>
@@ -923,7 +923,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>&amp;Connect:</value>
   </data>
   <data name="strLabelDisplayName" xml:space="preserve">
-    <value>Display name:</value>
+    <value>Display Name</value>
   </data>
   <data name="strLabelDomain" xml:space="preserve">
     <value>Domain:</value>
@@ -2235,7 +2235,7 @@ Message:
     <value>Try to integrate</value>
   </data>
   <data name="strShowOnToolbar" xml:space="preserve">
-    <value>Show on toolbar</value>
+    <value>Show On Toolbar</value>
   </data>
   <data name="strType" xml:space="preserve">
     <value>Type</value>
@@ -2500,7 +2500,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Log to application directory</value>
   </data>
   <data name="strAssignedCredential" xml:space="preserve">
-    <value>Assigned сredential</value>
+    <value>Assigned Credential</value>
   </data>
   <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
     <value>Allow Always</value>
@@ -2584,7 +2584,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Warning: Restart is required to disable the themes or to completely apply a new one</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder</value>
+    <value>No themes are loaded, check that the default mremoteNG themes exist in the 'themes' folder</value>
   </data>
   <data name="CouldNotFindExternalTool" xml:space="preserve">
     <value>Could not find external tool with name "{0}"</value>
@@ -2628,7 +2628,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strLabelReadOnly" xml:space="preserve">
     <value>Read Only:</value>
   </data>
-  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
   <data name="strTimeoutInSeconds" xml:space="preserve">
@@ -2660,5 +2660,20 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strImportSubOUs" xml:space="preserve">
     <value>Import sub OUs</value>
+  </data>
+  <data name="strMenuLockToolbars" xml:space="preserve">
+    <value>Lock Toolbar Positions</value>
+  </data>
+  <data name="strMenuMultiSshToolbar" xml:space="preserve">
+    <value>Multi SSH Toolbar</value>
+  </data>
+  <data name="strAdvancedSecurityOptions" xml:space="preserve">
+    <value>AdvancedSecurityOptions</value>
+  </data>
+  <data name="strOptionsPageTitle" xml:space="preserve">
+    <value>mRemoteNG Options</value>
+  </data>
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
 </root>

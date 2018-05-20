@@ -28,6 +28,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             labelBlockCipher.Text = Language.strEncryptionBlockCipherMode;
             labelEncryptionEngine.Text = Language.strEncryptionEngine;
             labelKdfIterations.Text = Language.strEncryptionKeyDerivationIterations;
+            groupAdvancedSecurityOptions.Text = Language.strAdvancedSecurityOptions;
         }
 
         public override void LoadSettings()
