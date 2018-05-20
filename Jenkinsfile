@@ -1,8 +1,8 @@
+#!groovy​
 node('windows') {
 	def jobDir = pwd()
 	def solutionFilePath = "\"${jobDir}\\mRemoteV1.sln\""
-	def vsToolsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools"
-	def vsExtensionsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
+	def msBuild = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\msbuild.exe"
 	def nunitConsolePath = "${jobDir}\\packages\\NUnit.ConsoleRunner.3.7.0\\tools\\nunit3-console.exe"
 	def openCoverPath = "${jobDir}\\packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe"
 	def reportGeneratorPath = "${jobDir}\\packages\\ReportGenerator.3.0.2\\tools\\ReportGenerator.exe"
@@ -24,11 +24,11 @@ node('windows') {
 	}
 
 	stage ('Build mRemoteNG (Normal)') {
-		bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo /p:Platform=x86 \"${jobDir}\\mRemoteV1.sln\""
+		bat "\"${msBuild}\" /nologo /p:Platform=x86 \"${jobDir}\\mRemoteV1.sln\""
 	}
 
 	stage ('Build mRemoteNG (Portable)') {
-		bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo /p:Configuration=\"Debug Portable\";Platform=x86 \"${jobDir}\\mRemoteV1.sln\""
+		bat "\"${msBuild}\" /nologo /p:Configuration=\"Debug Portable\";Platform=x86 \"${jobDir}\\mRemoteV1.sln\""
 	}
 
 	stage ('Run Unit Tests (Normal, w/coverage)') {
