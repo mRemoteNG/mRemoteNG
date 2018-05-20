@@ -79,7 +79,7 @@ namespace mRemoteNGTests.Connection.Protocol
 		    var appUpdater = new AppUpdater(encryptionKeySelectionFunc);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), shutdown, appUpdater);
             Func<NotificationAreaIcon> notificationAreaIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, _connectionInitiator, shutdown);
-		    Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, _externalToolsService);
+		    Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, _externalToolsService, () => connectionTree.SelectedNode);
 		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, import);
 		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, import);
 		    var databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
