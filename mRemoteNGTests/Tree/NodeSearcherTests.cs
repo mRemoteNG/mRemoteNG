@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Tree
 {
-    public class NodeSearcherTests
+	public class NodeSearcherTests
     {
         private NodeSearcher _nodeSearcher;
         private ContainerInfo _folder1;
@@ -103,6 +103,14 @@ namespace mRemoteNGTests.Tree
             _con3 = new ConnectionInfo { Name = "con3", Description="description5", Hostname="hostname5" };
             _con4 = new ConnectionInfo { Name = "con4", Description="description6", Hostname="hostname6" };
             _con5 = new ConnectionInfo { Name = "con5", Description="description7", Hostname="hostname7" };
+
+			_folder1.Inheritance.TurnOffInheritanceCompletely();
+			_con1.Inheritance.TurnOffInheritanceCompletely();
+			_con2.Inheritance.TurnOffInheritanceCompletely();
+			_folder2.Inheritance.TurnOffInheritanceCompletely();
+			_con3.Inheritance.TurnOffInheritanceCompletely();
+			_con4.Inheritance.TurnOffInheritanceCompletely();
+			_con5.Inheritance.TurnOffInheritanceCompletely();
 
             connectionTreeModel.AddRootNode(root);
             root.AddChildRange(new [] { _folder1, _folder2, _con5 });

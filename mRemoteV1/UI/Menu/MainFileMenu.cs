@@ -263,6 +263,23 @@ namespace mRemoteNG.UI.Menu
             _mMenFileExit.Click += mMenFileExit_Click;
         }
 
+        public void ApplyLanguage()
+        {
+            Text = Language.strMenuFile;
+            _mMenFileNewConnection.Text = Language.strNewConnection;
+            _mMenFileNewFolder.Text = Language.strNewFolder;
+            _mMenFileNew.Text = Language.strMenuNewConnectionFile;
+            _mMenFileLoad.Text = Language.strMenuOpenConnectionFile;
+            _mMenFileSave.Text = Language.strMenuSaveConnectionFile;
+            _mMenFileSaveAs.Text = Language.strMenuSaveConnectionFileAs;
+            _mMenFileImport.Text = Language.strImportMenuItem;
+            _mMenFileImportFromFile.Text = Language.strImportFromFileMenuItem;
+            _mMenFileImportFromActiveDirectory.Text = Language.strImportAD;
+            _mMenFileImportFromPortScan.Text = Language.strImportPortScan;
+            _mMenFileExport.Text = Language.strExportToFileMenuItem;
+            _mMenFileExit.Text = Language.strMenuExit;
+        }
+
         #region File
         internal void mMenFile_DropDownOpening(object sender, EventArgs e)
         {

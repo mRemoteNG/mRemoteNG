@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 
@@ -223,10 +224,19 @@ namespace mRemoteNG.UI.Controls
         private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
-            if (tag != null)
+            var menuItem = (ToolStripMenuItem) sender;
+
+            // While we can connect to a whole folder at once, it is
+            // probably not the expected behavior when navigating through
+            // a nested menu. Just return
+            var containerInfo = menuItem.Tag as ContainerInfo;
+            if (containerInfo != null)
+                return;
+
+            var connectionInfo = menuItem.Tag as ConnectionInfo;
+            if (connectionInfo != null)
             {
-                ConnectionInitiator.OpenConnection(tag);
+                ConnectionInitiator.OpenConnection(connectionInfo);
             }
         }
         #endregion

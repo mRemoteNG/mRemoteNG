@@ -15,7 +15,6 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.Connection
@@ -127,19 +126,22 @@ namespace mRemoteNG.Connection
             return filteredProperties;
         }
 
+	    public virtual IEnumerable<PropertyInfo> GetSerializableProperties()
+	    {
+			var excludedProperties = new[] { "Parent", "Name", "Hostname", "Port", "Inheritance", "OpenConnections",
+				"IsContainer", "IsDefault", "PositionID", "ConstantID", "TreeNode", "IsQuickConnect", "PleaseConnect" };
+
+		    return GetProperties(excludedProperties);
+	    }
+
 	    public virtual void SetParent(ContainerInfo newParent)
 	    {
             RemoveParent();
 		    newParent?.AddChild(this);
-			if (newParent is RootNodeInfo)
-				Inheritance.DisableInheritance();
 	    }
 
         public void RemoveParent()
         {
-			if (Parent is RootNodeInfo)
-				Inheritance.EnableInheritance();
-
             Parent?.RemoveChild(this);
         }
 

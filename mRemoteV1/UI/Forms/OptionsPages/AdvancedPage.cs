@@ -32,7 +32,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSeconds.Text = Language.strLabelSeconds;
             lblMaximumPuttyWaitTime.Text = Language.strLabelPuttyTimeout;
             chkAutomaticReconnect.Text = Language.strCheckboxAutomaticReconnect;
-            chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
+            chkLoadBalanceInfoUseUtf8.Text = Language.strLoadBalanceInfoUseUtf8;
             lblConfigurePuttySessions.Text = Language.strLabelPuttySessionsConfig;
             btnLaunchPutty.Text = Language.strButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language.strButtonBrowse;

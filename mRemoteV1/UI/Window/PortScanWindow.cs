@@ -128,7 +128,7 @@ namespace mRemoteNG.UI.Window
 				else
 				{
 					Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strCannotStartPortScan);
-				}
+                }
 			}
 		}
 
@@ -153,14 +153,14 @@ namespace mRemoteNG.UI.Window
 			clmClosedPorts.Text = Language.strClosedPorts;
 			Label2.Text = $"{Language.strEndPort}:";
 			Label1.Text = $"{Language.strStartPort}:";
-			lblTimeout.Text = $"{Language.TimeoutInSeconds}";
+			lblTimeout.Text = $"{Language.strTimeoutInSeconds}";
 			TabText = Language.strMenuPortScan;
 			Text = Language.strMenuPortScan;
 		}
 				
 		private void ShowImportControls(bool controlsVisible)
 		{
-			pnlPorts.Visible = controlsVisible;
+			pnlScan.Visible = controlsVisible;
 			pnlImport.Visible = controlsVisible;
 			if (controlsVisible)
 			{

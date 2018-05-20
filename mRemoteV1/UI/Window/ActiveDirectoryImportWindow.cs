@@ -91,7 +91,9 @@ namespace mRemoteNG.UI.Window
         {
             btnImport.Text = Language.strButtonImport;
             lblDomain.Text = Language.strLabelDomain;
+            chkSubOU.Text = Language.strImportSubOUs;
             btnChangeDomain.Text = Language.strButtonChange;
+            btnClose.Text = Language.strButtonClose;
         }
 
         private void ChangeDomain()

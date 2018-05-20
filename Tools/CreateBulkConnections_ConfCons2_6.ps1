@@ -1,5 +1,15 @@
-﻿$EncryptionKey = (Get-Credential -Message "Enter the encryption key you would like to use. This must match the encryption key used by the rest of the confCons file." -UserName "DontNeedUsername").Password
-$PathToMrngFolder = "C:\Users\SparerD\Downloads\mRemoteNG-Portable-1.75.7012.16846"
+﻿#####################################
+# Author: David Sparer
+# Summary: 
+#   This is intended to be a template for creating connections in bulk. This uses the serializers directly from the mRemoteNG binaries.
+#   You will still need to create the connection info objects, but the library will handle serialization. It is expected that you
+#   are familiar with PowerShell. If this is not the case, reach out to the mRemoteNG community for help.
+# Usage:
+#   Replace or modify the examples that are shown toward the end of the script to create your own connection info objects. 
+#####################################
+
+$EncryptionKey = (Get-Credential -Message "Enter the encryption key you would like to use. This must match the encryption key used by the rest of the confCons file." -UserName "DontNeedUsername").Password
+$PathToMrngFolder = ""
 
 if ($PathToMrngFolder -eq "") {
     Write-Error -Message 'You must set the $PathToMrngFolder variable in this script to the folder which contains mRemoteNG.exe'
@@ -25,8 +35,7 @@ function New-mRemoteNGXmlSerializer {
 
 function New-mRemoteNGConnectionInfo {
     [CmdletBinding()]
-    param (
-    )
+    param ()
 
     PROCESS {
         $connectionInfo = New-Object -TypeName mRemoteNG.Connection.ConnectionInfo
@@ -36,8 +45,7 @@ function New-mRemoteNGConnectionInfo {
 
 function New-mRemoteNGContainerInfo {
     [CmdletBinding()]
-    param (
-    )
+    param ()
 
     PROCESS {
         $connectionInfo = New-Object -TypeName mRemoteNG.Container.ContainerInfo
@@ -51,7 +59,7 @@ $xmlSerializer = New-mRemoteNGXmlSerializer -EncryptionKey $EncryptionKey
 
 
 #----------------------------------------------------------------
-# Example 1: serialize many connections
+# Example 1: serialize many connections, no containers
 # Here you can define the number of connection info objects to create
 # You can also provide a list of desired hostnames and iterate over those
 $xml = ""
@@ -102,5 +110,5 @@ foreach($i in 1..3)
     $serializedContainer.Add($serializedConnection)
 }
 
-# get the raw xml text
+# Call ToString() on the top-level container to get the XML of it and all its children
 Write-Output $serializedContainer.ToString()

@@ -140,10 +140,6 @@ namespace mRemoteNG.UI.Forms
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
         }
 
-        static FrmMain()
-        {
-        }
-
         #region Properties
         public FormWindowState PreviousWindowState { get; set; }
 
@@ -247,13 +243,22 @@ namespace mRemoteNG.UI.Forms
 
             _screenSystemMenu.BuildScreenList();
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
+            ApplyLanguage();
 
             Opacity = 1;
             //Fix missing general panel at the first run
             _panelAdder.AddPanel();
         }
 
-	    private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void ApplyLanguage()
+        {
+            fileMenu.ApplyLanguage();
+            viewMenu.ApplyLanguage();
+            toolsMenu.ApplyLanguage();
+            helpMenu.ApplyLanguage();
+        }
+
+        private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
 	    {
 		    if (propertyChangedEventArgs.PropertyName != nameof(Settings.LockToolbars))
 				return;
@@ -263,7 +268,7 @@ namespace mRemoteNG.UI.Forms
 
 	    private void LockToolbarPositions(bool shouldBeLocked)
 	    {
-		    var toolbars = new ToolStrip[] { _quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip };
+		    var toolbars = new ToolStrip[] { _quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip, msMain };
 			foreach (var toolbar in toolbars)
 			{
 				toolbar.GripStyle = shouldBeLocked
@@ -279,30 +284,30 @@ namespace mRemoteNG.UI.Forms
 
         private void SetMenuDependencies()
         {
-            mainFileMenu1.TreeWindow = _windows.TreeForm;
-            mainFileMenu1.ConnectionInitiator = _connectionInitiator;
-	        mainFileMenu1.WindowList = _windowList;
-	        mainFileMenu1.Windows = _windows;
-            mainFileMenu1.Export = _export;
-            mainFileMenu1.Shutdown = _shutdown;
-            mainFileMenu1.Import = _import;
-            mainFileMenu1.ConnectionsService = _connectionsService;
+            fileMenu.TreeWindow = _windows.TreeForm;
+            fileMenu.ConnectionInitiator = _connectionInitiator;
+            fileMenu.WindowList = _windowList;
+            fileMenu.Windows = _windows;
+            fileMenu.Export = _export;
+            fileMenu.Shutdown = _shutdown;
+            fileMenu.Import = _import;
+            fileMenu.ConnectionsService = _connectionsService;
 
-            viewMenu1.TsExternalTools = _externalToolsToolStrip;
-            viewMenu1.TsQuickConnect = _quickConnectToolStrip;
-	        viewMenu1.TsMultiSsh = _multiSshToolStrip;
-            viewMenu1.FullscreenHandler = Fullscreen;
-	        viewMenu1.Adder = _panelAdder;
-	        viewMenu1.WindowList = _windowList;
-	        viewMenu1.Windows = _windows;
-			viewMenu1.MainForm = this;
+            viewMenu.TsExternalTools = _externalToolsToolStrip;
+            viewMenu.TsQuickConnect = _quickConnectToolStrip;
+            viewMenu.TsMultiSsh = _multiSshToolStrip;
+            viewMenu.FullscreenHandler = Fullscreen;
+            viewMenu.Adder = _panelAdder;
+            viewMenu.WindowList = _windowList;
+            viewMenu.Windows = _windows;
+            viewMenu.MainForm = this;
 
-            toolsMenu1.MainForm = this;
-            toolsMenu1.CredentialProviderCatalog = _credentialRepositoryList;
-	        toolsMenu1.Windows = _windows;
+            toolsMenu.MainForm = this;
+            toolsMenu.CredentialProviderCatalog = _credentialRepositoryList;
+            toolsMenu.Windows = _windows;
 
-	        helpMenu1.WebHelper = _webHelper;
-	        helpMenu1.Windows = _windows;
+	        helpMenu.WebHelper = _webHelper;
+	        helpMenu.Windows = _windows;
         }
 
         //Theming support
@@ -698,12 +703,12 @@ namespace mRemoteNG.UI.Forms
 
         private void ViewMenu_Opening(object sender, EventArgs e)
         {
-            viewMenu1.mMenView_DropDownOpening(sender, e);
+            viewMenu.mMenView_DropDownOpening(sender, e);
         }
 
         private void mainFileMenu1_DropDownOpening(object sender, EventArgs e)
         {
-            mainFileMenu1.mMenFile_DropDownOpening(sender, e);
+            fileMenu.mMenFile_DropDownOpening(sender, e);
         }
     }
 }

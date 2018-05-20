@@ -23,6 +23,7 @@ github.com/DamianBis
 github.com/pfjason
 github.com/sirLoaf
 github.com/Fyers
+Vladimir Semenov (github.com/sli-pro)
 
 
 Past Contributors
@@ -59,6 +60,8 @@ Lukas Plachy (github.com/rheingold)
 Gyuha Shin
 Stefan (github.com/polluks)
 github.com/emazv72
+Vladimir Semenov (github.com/sli-pro)
+Marco Sousa (github.com/marcomsousa)
 
 
 Included Source Code

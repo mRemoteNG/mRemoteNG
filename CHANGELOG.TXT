@@ -1,3 +1,33 @@
+1.76.4 Alpha 6 (2018-xx-xx):
+
+Features/Enhancements:
+----------------------
+#948: Fixed issue where many menu item translations were not being used
+#942: Improved Russian translation of several items
+#924: Notification for "No Host Specified" when clicking folders in quick-connect menu
+#902: Menu bar can once again be moved. View -> "Lock toolbar positions" now also locks the menu position
+
+Fixes:
+------
+#938: Minor layout improvements on the Port Scan screen
+#916: Default properties were not being saved
+
+
+1.76.3 Alpha 5 (2018-03-14):
+
+Fixes:
+------
+#911: Csv exports sometimes do not include all fields
+#807: Inheritance is sometimes turned on for nodes under root Connections node
+
+
+1.76.2 Alpha 4 (2018-03-03):
+
+Fixes:
+------
+#899: DoNotPlay is Case Sensitive in XML Serialization
+
+
 1.76.1 Alpha 3 (2018-02-24):
 
 Features/Enhancements:

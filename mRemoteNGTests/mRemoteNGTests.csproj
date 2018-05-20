@@ -146,6 +146,7 @@
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\IntegratedProgramTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
+    <Compile Include="Container\RootNodeInfoTests.cs" />
     <Compile Include="Credential\CompositeRepositoryUnlockerTests.cs" />
     <Compile Include="Credential\CredentialChangedEventArgsTests.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />
@@ -169,9 +170,11 @@
     <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
     <Compile Include="Security\RandomGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
+    <Compile Include="TestHelpers\ConnectionInfoHelpers.cs" />
     <Compile Include="TestHelpers\ConnectionTreeModelBuilder.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="TestHelpers\FileTestHelpers.cs" />
+    <Compile Include="TestHelpers\SerializableConnectionInfoAllPropertiesOfType.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />
     <Compile Include="Tools\OptionalTests.cs" />
