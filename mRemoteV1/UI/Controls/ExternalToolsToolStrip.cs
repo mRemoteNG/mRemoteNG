@@ -121,7 +121,7 @@ namespace mRemoteNG.UI.Controls
             else
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "No connection was selected, external tool may return errors.", true);
-                extA.Start();
+                extA.Start(null);
             }
         }
 

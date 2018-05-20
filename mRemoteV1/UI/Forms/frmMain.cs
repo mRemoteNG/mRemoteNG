@@ -104,7 +104,7 @@ namespace mRemoteNG.UI.Forms
             _shutdown = new Shutdown(_settingsSaver, _connectionsService);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown, _appUpdater);
 		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
-            Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService);
+            Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService, () => connectionTree.SelectedNode);
 		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, _import);
 		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import);
 		    _databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);

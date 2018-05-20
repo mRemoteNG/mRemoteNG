@@ -20,11 +20,13 @@ namespace mRemoteNG.UI.Window
 	    private readonly FullyObservableCollection<ExternalTool> _currentlySelectedExternalTools;
 	    private readonly IConnectionInitiator _connectionInitiator;
 	    private readonly ExternalToolsService _externalToolsService;
+	    private readonly Func<Optional<ConnectionInfo>> _getCurrentlySelectedConnection;
 
-        public ExternalToolsWindow(IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService)
+        public ExternalToolsWindow(IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService, Func<Optional<ConnectionInfo>> getCurrentlySelectedConnection)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+            _getCurrentlySelectedConnection = getCurrentlySelectedConnection.ThrowIfNull(nameof(getCurrentlySelectedConnection));
             InitializeComponent();
 			WindowType = WindowType.ExternalApps;
 			DockPnl = new DockContent();
@@ -114,9 +116,11 @@ namespace mRemoteNG.UI.Window
 	    {
 	        try
 	        {
-	            foreach (var externalTool in _currentlySelectedExternalTools)
+	            var selectedConnection = _getCurrentlySelectedConnection();
+
+                foreach (var externalTool in _currentlySelectedExternalTools)
 	            {
-	                externalTool.Start();
+	                externalTool.Start(selectedConnection);
 	            }
 	        }
 	        catch (Exception ex)

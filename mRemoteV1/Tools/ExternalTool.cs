@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -105,7 +106,7 @@ namespace mRemoteNG.Tools
 		    _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 		}
 
-        public void Start(ConnectionInfo startConnectionInfo = null)
+        public void Start(Optional<ConnectionInfo> startConnectionInfo)
 		{
 			try
 			{
@@ -115,7 +116,7 @@ namespace mRemoteNG.Tools
 			        return;
 			    }
 				
-				ConnectionInfo = startConnectionInfo;
+				ConnectionInfo = startConnectionInfo.FirstOrDefault();
 				
 				if (TryIntegrate)
 					StartIntegrated();
