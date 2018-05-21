@@ -10,7 +10,7 @@ namespace mRemoteNGTests.UI.Forms
         [Apartment(ApartmentState.STA)]
         public void CanCreateFrmMain()
         {
-            var frmMain = FrmMain.Default;
+            var frmMain = new FrmMain();
         }
     }
 }

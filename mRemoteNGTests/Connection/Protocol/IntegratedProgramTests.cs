@@ -63,6 +63,7 @@ namespace mRemoteNGTests.Connection.Protocol
 
 		private InterfaceControl BuildInterfaceControl(string extAppName, ProtocolBase sut)
 		{
+            var frmMain = new FrmMain();
             var import = new Import();
             var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import);
 			var configWindow = new ConfigWindow(new DockContent());
@@ -75,10 +76,10 @@ namespace mRemoteNGTests.Connection.Protocol
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 			var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 			var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
-		    var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import), FrmMain.Default);
+		    var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import), frmMain);
 		    var appUpdater = new AppUpdater(encryptionKeySelectionFunc);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), shutdown, appUpdater);
-            Func<NotificationAreaIcon> notificationAreaIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, _connectionInitiator, shutdown);
+            Func<NotificationAreaIcon> notificationAreaIconBuilder = () => new NotificationAreaIcon(frmMain, _connectionInitiator, shutdown);
 		    Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, _externalToolsService, () => connectionTree.SelectedNode);
 		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, import);
 		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, import);
@@ -86,7 +87,7 @@ namespace mRemoteNGTests.Connection.Protocol
             var windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
                 sshTransferWindow, updateWindowBuilder, notificationAreaIconBuilder, externalToolsWindowBuilder, 
                 connectionsService, portScanWindowBuilder, activeDirectoryImportWindowBuilder, appUpdater, databaseConnectorFactory);
-			var connectionWindow = new ConnectionWindow(new DockContent(), _connectionInitiator, windows, _externalToolsService);
+			var connectionWindow = new ConnectionWindow(new DockContent(), _connectionInitiator, windows, _externalToolsService, frmMain);
 			var connectionInfo = new ConnectionInfo {ExtApp = extAppName};
 			return new InterfaceControl(connectionWindow, sut, connectionInfo);
 		}

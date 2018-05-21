@@ -25,15 +25,16 @@ namespace mRemoteNGTests.UI.Forms
         [SetUp]
         public void Setup()
         {
+            var frmMain = new FrmMain();
 	        var connectionInitiator = Substitute.For<IConnectionInitiator>();
             var import = new Import();
-            var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import), FrmMain.Default);
-            Func<NotificationAreaIcon> notificationIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, connectionInitiator, shutdown);
+            var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import), frmMain);
+            Func<NotificationAreaIcon> notificationIconBuilder = () => new NotificationAreaIcon(frmMain, connectionInitiator, shutdown);
             var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import);
             Func<SecureString> encryptionKeySelectionFunc = () => connectionsService.EncryptionKey;
             var databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
             var appUpdater = new AppUpdater(encryptionKeySelectionFunc);
-            _optionsForm = new frmOptions(connectionInitiator, type => {}, notificationIconBuilder, connectionsService, appUpdater, databaseConnectorFactory, FrmMain.Default);
+            _optionsForm = new frmOptions(connectionInitiator, type => {}, notificationIconBuilder, connectionsService, appUpdater, databaseConnectorFactory, frmMain);
             _optionsForm.Show();
         }
 

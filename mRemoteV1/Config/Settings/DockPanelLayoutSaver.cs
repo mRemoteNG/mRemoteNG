@@ -25,7 +25,7 @@ namespace mRemoteNG.Config.Settings
             _dataProvider = dataProvider;
         }
 
-        public void Save()
+        public void Save(DockPanel dockPanel)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace mRemoteNG.Config.Settings
                     Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
                 }
 
-                var serializedLayout = _dockPanelSerializer.Serialize(FrmMain.Default.pnlDock);
+                var serializedLayout = _dockPanelSerializer.Serialize(dockPanel);
                 _dataProvider.Save(serializedLayout);
             }
             catch (Exception ex)

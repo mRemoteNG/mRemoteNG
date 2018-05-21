@@ -77,7 +77,7 @@ namespace mRemoteNG.UI.Forms
         //Added theming support
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
-        private FrmMain()
+        public FrmMain()
 		{
 		    InitializeComponent();
 
@@ -116,7 +116,7 @@ namespace mRemoteNG.UI.Forms
             _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
                 sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, 
                 portScanWindowBuilder, activeDirectoryImportWindowBuilder, _appUpdater, _databaseConnectorFactory);
-            Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService);
+            Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService, this);
             _screens = new Screens(this);
             _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder, _screens);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;

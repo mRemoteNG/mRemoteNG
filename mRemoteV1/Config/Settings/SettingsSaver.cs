@@ -6,6 +6,7 @@ using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
 {
@@ -60,7 +61,7 @@ namespace mRemoteNG.Config.Settings
                 
                 mRemoteNG.Settings.Default.Save();
 
-                SaveDockPanelLayout();
+                SaveDockPanelLayout(frmMain.pnlDock);
                 SaveExternalApps();
             }
             catch (Exception ex)
@@ -103,14 +104,14 @@ namespace mRemoteNG.Config.Settings
             }
         }
 
-        private void SaveDockPanelLayout()
+        private void SaveDockPanelLayout(DockPanel dockPanel)
         {
             var panelLayoutXmlFilePath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
             var panelLayoutSaver = new DockPanelLayoutSaver(
                 new DockPanelLayoutSerializer(),
                 new FileDataProvider(panelLayoutXmlFilePath)
             );
-            panelLayoutSaver.Save();
+            panelLayoutSaver.Save(dockPanel);
         }
 
         private void SaveExternalApps()
