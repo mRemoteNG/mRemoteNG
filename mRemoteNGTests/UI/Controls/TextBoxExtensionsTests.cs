@@ -30,7 +30,8 @@ namespace mRemoteNGTests.UI.Controls
         {
             const string text = "Type Here";
             var textBox = new TextBoxTester(_textBoxExtensionsTestForm.textBox1.Name);
-            Assert.That(textBox.Properties.SetCueBannerText(text), Is.True);
+            var textWasSet = textBox.Properties.SetCueBannerText(text);
+            Assert.That(textWasSet, Is.True);
         }
 
         [Test]

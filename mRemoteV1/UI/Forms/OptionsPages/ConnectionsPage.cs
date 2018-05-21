@@ -1,16 +1,18 @@
 using System;
 using mRemoteNG.Config;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public partial class ConnectionsPage
     {
-        private FrmMain _frmMain = FrmMain.Default;
+        private readonly FrmMain _frmMain;
 
-        public ConnectionsPage()
+        public ConnectionsPage(FrmMain frmMain)
         {
             InitializeComponent();
             base.ApplyTheme();
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
         }
 
         public override string PageName

@@ -14,11 +14,13 @@ namespace mRemoteNG.UI.Panels
 	public class PanelAdder
     {
         private readonly WindowList _windowList;
+        private readonly Screens _screens;
         private readonly Func<ConnectionWindow> _connectionWindowBuilder;
 
-        public PanelAdder(WindowList windowList, Func<ConnectionWindow> connectionWindowBuilder)
+        public PanelAdder(WindowList windowList, Func<ConnectionWindow> connectionWindowBuilder, Screens screens)
         {
             _connectionWindowBuilder = connectionWindowBuilder;
+            _screens = screens;
             _windowList = windowList.ThrowIfNull(nameof(windowList));
         }
 
@@ -60,7 +62,7 @@ namespace mRemoteNG.UI.Panels
             connectionForm.SetFormText(title.Replace("&", "&&"));
         }
 
-        private static void BuildConnectionWindowContextMenu(DockContent pnlcForm)
+        private void BuildConnectionWindowContextMenu(DockContent pnlcForm)
         {
             var cMen = new ContextMenuStrip();
             var cMenRen = CreateRenameMenuItem(pnlcForm);
@@ -69,7 +71,7 @@ namespace mRemoteNG.UI.Panels
             pnlcForm.TabPageContextMenuStrip = cMen;
         }
 
-        private static ToolStripMenuItem CreateScreensMenuItem(DockContent pnlcForm)
+        private ToolStripMenuItem CreateScreensMenuItem(DockContent pnlcForm)
         {
             var cMenScreens = new ToolStripMenuItem
             {
@@ -114,7 +116,7 @@ namespace mRemoteNG.UI.Panels
             }
         }
 
-        private static void cMenConnectionPanelScreens_DropDownOpening(object sender, EventArgs e)
+        private void cMenConnectionPanelScreens_DropDownOpening(object sender, EventArgs e)
         {
             try
             {
@@ -140,7 +142,7 @@ namespace mRemoteNG.UI.Panels
             }
         }
 
-        private static void cMenConnectionPanelScreen_Click(object sender, EventArgs e)
+        private void cMenConnectionPanelScreen_Click(object sender, EventArgs e)
         {
             Screen screen = null;
             DockContent panel = null;
@@ -160,7 +162,7 @@ namespace mRemoteNG.UI.Panels
                         panel = (DockContent)obj;
                     }
                 }
-                Screens.SendPanelToScreen(panel, screen);
+                _screens.SendPanelToScreen(panel, screen);
             }
             catch (Exception ex)
             {

@@ -87,7 +87,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory))
+                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory, FrmMain.Default))
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }

@@ -69,6 +69,7 @@ namespace mRemoteNG.UI.Forms
         private readonly Import _import;
         private readonly AppUpdater _appUpdater;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
+        private readonly Screens _screens;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -77,6 +78,8 @@ namespace mRemoteNG.UI.Forms
 
         private FrmMain()
 		{
+		    InitializeComponent();
+
             _windowList = new WindowList();
             _credentialRepositoryList = new CredentialRepositoryList();
             var externalToolsService = new ExternalToolsService();
@@ -101,7 +104,7 @@ namespace mRemoteNG.UI.Forms
 		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 		    var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
 		    _settingsSaver = new SettingsSaver(externalToolsService);
-            _shutdown = new Shutdown(_settingsSaver, _connectionsService);
+            _shutdown = new Shutdown(_settingsSaver, _connectionsService, this);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown, _appUpdater);
 		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
             Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService, () => connectionTree.SelectedNode);
@@ -112,14 +115,13 @@ namespace mRemoteNG.UI.Forms
                 sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, 
                 portScanWindowBuilder, activeDirectoryImportWindowBuilder, _appUpdater, _databaseConnectorFactory);
             Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService);
-            _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder);
+            _screens = new Screens(this);
+            _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder, _screens);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 		    _connectionInitiator.Adder = _panelAdder;
 		    _connectionsService.DatabaseConnectorFactory = _databaseConnectorFactory;
             _startup = new Startup(this, _windows, _connectionsService, _appUpdater, _databaseConnectorFactory);
             connectionTreeContextMenu.ShowWindowAction = _windows.Show;
-
-			InitializeComponent();
 
             var externalAppsLoader = new ExternalAppsLoader(Runtime.MessageCollector, _externalToolsToolStrip, _connectionInitiator, externalToolsService);
 		    _settingsLoader = new SettingsLoader(this, Runtime.MessageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, externalAppsLoader, _notificationAreaIconBuilder);
@@ -359,7 +361,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory, Language.strTabUpdates))
+            using (var optionsForm = new frmOptions(_connectionInitiator, _windows.Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory, Language.strTabUpdates, this))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -519,7 +521,7 @@ namespace mRemoteNG.UI.Forms
 				    case NativeMethods.WM_SYSCOMMAND:
 				        var screen = _screenSystemMenu.GetScreenById(m.WParam.ToInt32());
                         if (screen != null)
-                            Screens.SendFormToScreen(screen);
+                            _screens.SendFormToScreen(screen);
 				        break;
 				    case NativeMethods.WM_DRAWCLIPBOARD:
 				        NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);

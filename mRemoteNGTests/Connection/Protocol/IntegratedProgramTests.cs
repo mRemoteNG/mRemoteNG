@@ -75,7 +75,7 @@ namespace mRemoteNGTests.Connection.Protocol
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 			var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
 			var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
-		    var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import));
+		    var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import), FrmMain.Default);
 		    var appUpdater = new AppUpdater(encryptionKeySelectionFunc);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), shutdown, appUpdater);
             Func<NotificationAreaIcon> notificationAreaIconBuilder = () => new NotificationAreaIcon(FrmMain.Default, _connectionInitiator, shutdown);

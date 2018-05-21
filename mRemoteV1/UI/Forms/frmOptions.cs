@@ -22,19 +22,21 @@ namespace mRemoteNG.UI.Forms
         private readonly ConnectionsService _connectionsService;
         private readonly AppUpdater _appUpdater;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
+        private readonly FrmMain _frmMain;
 
         public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, 
-            ConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory) 
-            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, connectionsService, appUpdater, databaseConnectorFactory, Language.strStartupExit)
+            ConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory, FrmMain frmMain) 
+            : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, connectionsService, appUpdater, databaseConnectorFactory, Language.strStartupExit, frmMain)
         {
         }
 
         public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, 
-            ConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory, string pageName)
+            ConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory, string pageName, FrmMain frmMain)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
             _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _appUpdater = appUpdater.ThrowIfNull(nameof(appUpdater));
@@ -82,7 +84,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(AppearancePage).Name, new AppearancePage(_connectionInitiator, _notificationAreaIconBuilder)},
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
                 {typeof(NotificationsPage).Name, new NotificationsPage()},
-                {typeof(ConnectionsPage).Name, new ConnectionsPage()},
+                {typeof(ConnectionsPage).Name, new ConnectionsPage(_frmMain)},
                 {typeof(CredentialsPage).Name, new CredentialsPage()},
                 {typeof(SqlServerPage).Name, new SqlServerPage(_connectionsService, _databaseConnectorFactory)},
                 {typeof(UpdatesPage).Name, new UpdatesPage(_appUpdater, _showWindowAction)},

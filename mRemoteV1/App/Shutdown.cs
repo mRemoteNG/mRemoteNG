@@ -15,12 +15,14 @@ namespace mRemoteNG.App
     {
         private readonly SettingsSaver _settingsSaver;
         private readonly ConnectionsService _connectionsService;
+        private readonly FrmMain _frmMain;
         private static string _updateFilePath;
 
-        public Shutdown(SettingsSaver settingsSaver, ConnectionsService connectionsService)
+        public Shutdown(SettingsSaver settingsSaver, ConnectionsService connectionsService, FrmMain frmMain)
         {
             _settingsSaver = settingsSaver.ThrowIfNull(nameof(settingsSaver));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
         }
 
         private static bool UpdatePending
@@ -31,7 +33,7 @@ namespace mRemoteNG.App
         public void Quit(string updateFilePath = null)
         {
             _updateFilePath = updateFilePath;
-            FrmMain.Default.Close();
+            _frmMain.Close();
             ProgramRoot.CloseSingletonInstanceMutex();
         }
 
