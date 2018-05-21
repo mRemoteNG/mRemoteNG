@@ -19,6 +19,7 @@ namespace mRemoteNG.Connection
 	{
 	    private readonly WindowList _windowList;
 	    private readonly ExternalToolsService _externalToolsService;
+	    private readonly ProtocolFactory _protocolFactory;
 
         /// <summary>
         /// This is a property because we have a circular dependency.
@@ -26,10 +27,11 @@ namespace mRemoteNG.Connection
 	    public PanelAdder Adder { get; set; }
 
 
-        public ConnectionInitiator(WindowList windowList, ExternalToolsService externalToolsService)
+        public ConnectionInitiator(WindowList windowList, ExternalToolsService externalToolsService, ProtocolFactory protocolFactory)
         {
             _windowList = windowList.ThrowIfNull(nameof(windowList));
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+            _protocolFactory = protocolFactory.ThrowIfNull(nameof(protocolFactory));
         }
 
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
@@ -107,8 +109,7 @@ namespace mRemoteNG.Connection
                         return;
                 }
 
-                var protocolFactory = new ProtocolFactory(_externalToolsService);
-                var newProtocol = protocolFactory.CreateProtocol(connectionInfo);
+                var newProtocol = _protocolFactory.CreateProtocol(connectionInfo);
 
                 var connectionPanel = SetConnectionPanel(connectionInfo, force);
                 var connectionForm = SetConnectionForm(conForm, connectionPanel);

@@ -20,6 +20,7 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Messages;
@@ -91,7 +92,8 @@ namespace mRemoteNG.UI.Forms
             _appUpdater = new AppUpdater(encryptionKeySelectionFunc);
             ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
             _export = new Export(_credentialRepositoryList, _connectionsService);
-            _connectionInitiator = new ConnectionInitiator(_windowList, externalToolsService);
+		    var protocolFactory = new ProtocolFactory(externalToolsService, this);
+            _connectionInitiator = new ConnectionInitiator(_windowList, externalToolsService, protocolFactory);
 		    _webHelper = new WebHelper(_connectionInitiator);
 		    var configWindow = new ConfigWindow(new DockContent());
 		    var sshTransferWindow = new SSHTransferWindow();

@@ -8,16 +8,19 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using System;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Connection.Protocol
 {
     public class ProtocolFactory
     {
         private readonly ExternalToolsService _externalToolsService;
+        private readonly FrmMain _frmMain;
 
-        public ProtocolFactory(ExternalToolsService externalToolsService)
+        public ProtocolFactory(ExternalToolsService externalToolsService, FrmMain frmMain)
         {
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
         }
 
         public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
@@ -27,7 +30,7 @@ namespace mRemoteNG.Connection.Protocol
 			switch (connectionInfo.Protocol)
 			{
 				case ProtocolType.RDP:
-					newProtocol = new RdpProtocol
+					newProtocol = new RdpProtocol(_frmMain)
 					{
 					    LoadBalanceInfoUseUtf8 = Settings.Default.RdpLoadBalanceInfoUseUtf8
                     };

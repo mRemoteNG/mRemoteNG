@@ -30,7 +30,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private bool _loginComplete;
         private bool _redirectKeys;
         private bool _alertOnIdleDisconnect;
-        private readonly FrmMain _frmMain = FrmMain.Default;
+        private readonly FrmMain _frmMain;
 
         #region Properties
         public bool SmartSize
@@ -92,8 +92,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 
         #region Constructors
-        public RdpProtocol()
+        public RdpProtocol(FrmMain frmMain)
         {
+            _frmMain = frmMain;
             Control = new AxMsRdpClient8NotSafeForScripting();
         }
         #endregion
