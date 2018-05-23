@@ -1,4 +1,5 @@
 ﻿using System.Security;
+using System.Windows.Forms;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -11,9 +12,11 @@ namespace mRemoteNG.Config.Connections
 	{
 	    private readonly ConnectionsService _connectionsService;
         private readonly string _connectionFilePath;
+	    private readonly IWin32Window _dialogWindowParent;
 
-        public XmlConnectionsLoader(string connectionFilePath, ConnectionsService connectionsService)
+        public XmlConnectionsLoader(string connectionFilePath, ConnectionsService connectionsService, IWin32Window dialogWindowParent)
         {
+            _dialogWindowParent = dialogWindowParent;
             _connectionFilePath = connectionFilePath.ThrowIfNullOrEmpty(nameof(connectionFilePath));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
@@ -22,14 +25,13 @@ namespace mRemoteNG.Config.Connections
         {
             var dataProvider = new FileDataProvider(_connectionFilePath);
             var xmlString = dataProvider.Load();
-            var deserializer = new XmlConnectionsDeserializer(_connectionsService, PromptForPassword);
+            var deserializer = new XmlConnectionsDeserializer(_connectionsService, _dialogWindowParent, PromptForPassword);
             return deserializer.Deserialize(xmlString);
         }
 
         private SecureString PromptForPassword()
         {
-            var password = MiscTools.PasswordDialog("", false);
-            return password;
+            return MiscTools.PasswordDialog("", false);
         }
     }
 }

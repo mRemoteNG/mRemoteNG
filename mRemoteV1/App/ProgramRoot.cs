@@ -26,7 +26,8 @@ namespace mRemoteNG.App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(FrmMain.Default);
+            var frmMain = new FrmMain();
+            Application.Run(frmMain);
         }
 
         public static void CloseSingletonInstanceMutex()

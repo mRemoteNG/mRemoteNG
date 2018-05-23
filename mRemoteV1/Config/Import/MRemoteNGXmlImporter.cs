@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.Xml;
@@ -15,10 +16,12 @@ namespace mRemoteNG.Config.Import
 	public class MRemoteNGXmlImporter : IConnectionImporter<string>
 	{
 	    private readonly ConnectionsService _connectionsService;
+	    private readonly IWin32Window _dialogWindowParent;
 
-	    public MRemoteNGXmlImporter(ConnectionsService connectionsService)
+	    public MRemoteNGXmlImporter(ConnectionsService connectionsService, IWin32Window dialogWindowParent)
 	    {
 	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+	        _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));
 	    }
 
 	    public void Import(string fileName, ContainerInfo destinationContainer)
@@ -34,7 +37,7 @@ namespace mRemoteNG.Config.Import
 
 	        var dataProvider = new FileDataProvider(fileName);
 	        var xmlString = dataProvider.Load();
-	        var xmlConnectionsDeserializer = new XmlConnectionsDeserializer(_connectionsService);
+	        var xmlConnectionsDeserializer = new XmlConnectionsDeserializer(_connectionsService, _dialogWindowParent);
 	        var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(xmlString, true);
 
 	        var rootImportContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(fileName) };

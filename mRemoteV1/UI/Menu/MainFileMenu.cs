@@ -45,6 +45,7 @@ namespace mRemoteNG.UI.Menu
         public Shutdown Shutdown { get; set; }
         public Import Import { get; set; }
         public ConnectionsService ConnectionsService { get; set; }
+        public IWin32Window DialogWindowParent { get; set; }
 
         public MainFileMenu()
         {
@@ -406,7 +407,7 @@ namespace mRemoteNG.UI.Menu
                 saveFileDialog.OverwritePrompt = true;
                 saveFileDialog.Filter = $@"{Language.strFiltermRemoteXML}|*.xml|{Language.strFilterAll}|*.*";
 
-                if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
+                if (saveFileDialog.ShowDialog(DialogWindowParent) != DialogResult.OK) return;
                 var newFileName = saveFileDialog.FileName;
 
                 ConnectionsService.SaveConnections(ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);

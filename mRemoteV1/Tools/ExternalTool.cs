@@ -24,6 +24,7 @@ namespace mRemoteNG.Tools
 	    private bool _tryIntegrate;
 	    private bool _showOnToolbar = true;
 	    private bool _runElevated;
+	    private readonly ConnectionsService _connectionsService;
 
 	    #region Public Properties
 
@@ -101,9 +102,10 @@ namespace mRemoteNG.Tools
 
 	    #endregion
 		
-		public ExternalTool(IConnectionInitiator connectionInitiator)
+		public ExternalTool(IConnectionInitiator connectionInitiator, ConnectionsService connectionsService)
 		{
 		    _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
+		    _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 		}
 
         public void Start(Optional<ConnectionInfo> startConnectionInfo)
@@ -143,7 +145,7 @@ namespace mRemoteNG.Tools
 
         private void SetProcessProperties(Process process, ConnectionInfo startConnectionInfo)
         {
-            var argParser = new ExternalToolArgumentParser(startConnectionInfo);
+            var argParser = new ExternalToolArgumentParser(startConnectionInfo, _connectionsService);
             process.StartInfo.UseShellExecute = true;
             process.StartInfo.FileName = argParser.ParseArguments(FileName);
             process.StartInfo.Arguments = argParser.ParseArguments(Arguments);

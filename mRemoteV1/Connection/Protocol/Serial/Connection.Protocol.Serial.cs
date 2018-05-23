@@ -3,7 +3,7 @@ namespace mRemoteNG.Connection.Protocol.Serial
 	public class ProtocolSerial : PuttyBase
 	{
 				
-		public ProtocolSerial()
+		public ProtocolSerial(ConnectionsService connectionsService) : base(connectionsService)
 		{
 			this.PuttyProtocol = Putty_Protocol.serial;
 		}

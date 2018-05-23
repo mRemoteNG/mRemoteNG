@@ -2,6 +2,7 @@
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.Versioning;
+using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 
@@ -10,10 +11,12 @@ namespace mRemoteNG.Config.Connections
     public class SqlConnectionsLoader
     {
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
+        private readonly ConnectionsService _connectionsService;
 
-        public SqlConnectionsLoader(DatabaseConnectorFactory databaseConnectorFactory)
+        public SqlConnectionsLoader(DatabaseConnectorFactory databaseConnectorFactory, ConnectionsService connectionsService)
         {
             _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
         public ConnectionTreeModel Load()
@@ -23,7 +26,7 @@ namespace mRemoteNG.Config.Connections
             var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
             databaseVersionVerifier.VerifyDatabaseVersion();
             var dataTable = dataProvider.Load();
-            var deserializer = new DataTableDeserializer();
+            var deserializer = new DataTableDeserializer(_connectionsService);
             return deserializer.Deserialize(dataTable);
         }
     }

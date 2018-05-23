@@ -5,6 +5,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
+using NSubstitute;
 using NUnit.Framework;
 
 
@@ -13,11 +14,13 @@ namespace mRemoteNGTests.Connection
 	public class ConnectionInfoTests
     {
         private ConnectionInfo _connectionInfo;
+        private ConnectionsService _connectionsService;
         private const string TestDomain = "somedomain";
 
         [SetUp]
         public void Setup()
         {
+            _connectionsService = Substitute.For<ConnectionsService>();
             _connectionInfo = new ConnectionInfo();
         }
 
@@ -65,7 +68,7 @@ namespace mRemoteNGTests.Connection
         {
             var eventWasCalled = false;
             _connectionInfo.PropertyChanged += (sender, args) => eventWasCalled = true;
-            _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
+            _connectionInfo.OpenConnections.Add(new ProtocolSSH2(_connectionsService));
             Assert.That(eventWasCalled);
         }
 
@@ -74,7 +77,7 @@ namespace mRemoteNGTests.Connection
         {
             var nameOfModifiedProperty = "";
             _connectionInfo.PropertyChanged += (sender, args) => nameOfModifiedProperty = args.PropertyName;
-            _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
+            _connectionInfo.OpenConnections.Add(new ProtocolSSH2(_connectionsService));
             Assert.That(nameOfModifiedProperty, Is.EqualTo("OpenConnections"));
         }
 

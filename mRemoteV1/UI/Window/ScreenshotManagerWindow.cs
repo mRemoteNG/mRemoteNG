@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -174,15 +175,19 @@ namespace mRemoteNG.UI.Window
 				
         #region Public Methods
 
-	    public ScreenshotManagerWindow() : this(new DockContent())
+	    private readonly DockPanel _dockPanel;
+
+	    public ScreenshotManagerWindow()
+	        : this(new DockContent(), new DockPanel())
 	    {
 	    }
 
-		public ScreenshotManagerWindow(DockContent panel)
+		public ScreenshotManagerWindow(DockContent dockContent, DockPanel dockPanel)
 		{
 			WindowType = WindowType.ScreenshotManager;
-			DockPnl = panel;
-			InitializeComponent();
+			DockPnl = dockContent;
+		    _dockPanel = dockPanel.ThrowIfNull(nameof(dockPanel));
+            InitializeComponent();
 		}
 				
 		public void AddScreenshot(Image Screenshot)
@@ -209,8 +214,8 @@ namespace mRemoteNG.UI.Window
 				nBtn.Size = new Size(22, 22);
 				nBtn.Location = new Point(nPB.Width - nBtn.Width, -1);
 				nBtn.Show();
-						
-				Show(FrmMain.Default.pnlDock);
+				
+				Show(_dockPanel);
 			}
 			catch (Exception ex)
 			{

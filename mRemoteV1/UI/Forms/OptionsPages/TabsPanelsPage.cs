@@ -1,10 +1,15 @@
+using mRemoteNG.Tools;
+
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public partial class TabsPanelsPage
     {
-        public TabsPanelsPage()
+        private readonly FrmMain _frmMain;
+
+        public TabsPanelsPage(FrmMain frmMain)
         {
             InitializeComponent();
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
             base.ApplyTheme();
         }
 
@@ -45,7 +50,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.SaveSettings();
 
             Settings.Default.AlwaysShowPanelTabs = chkAlwaysShowPanelTabs.Checked;
-            FrmMain.Default.ShowHidePanelTabs();
+            _frmMain.ShowHidePanelTabs();
 
             Settings.Default.OpenTabsRightOfSelected = chkOpenNewTabRightOfSelected.Checked;
             Settings.Default.ShowLogonInfoOnTabs = chkShowLogonInfoOnTabs.Checked;

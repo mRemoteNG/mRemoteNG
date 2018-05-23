@@ -20,6 +20,7 @@ namespace mRemoteNG.Connection
 	    private readonly WindowList _windowList;
 	    private readonly ExternalToolsService _externalToolsService;
 	    private readonly ProtocolFactory _protocolFactory;
+	    private readonly FrmMain _frmMain;
 
         /// <summary>
         /// This is a property because we have a circular dependency.
@@ -27,8 +28,9 @@ namespace mRemoteNG.Connection
 	    public PanelAdder Adder { get; set; }
 
 
-        public ConnectionInitiator(WindowList windowList, ExternalToolsService externalToolsService, ProtocolFactory protocolFactory)
+        public ConnectionInitiator(WindowList windowList, ExternalToolsService externalToolsService, ProtocolFactory protocolFactory, FrmMain frmMain)
         {
+            _frmMain = frmMain;
             _windowList = windowList.ThrowIfNull(nameof(windowList));
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
             _protocolFactory = protocolFactory.ThrowIfNull(nameof(protocolFactory));
@@ -70,7 +72,7 @@ namespace mRemoteNG.Connection
             var connectionWindow = (ConnectionWindow)interfaceControl.FindForm();
             connectionWindow?.Focus();
             var findForm = (ConnectionWindow)interfaceControl.FindForm();
-            findForm?.Show(FrmMain.Default.pnlDock);
+            findForm?.Show(_frmMain.pnlDock);
             var tabPage = (TabPage)interfaceControl.Parent;
             tabPage.Selected = true;
             return true;
@@ -133,7 +135,7 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfo.OpenConnections.Add(newProtocol);
-                FrmMain.Default.SelectedConnection = connectionInfo;
+                _frmMain.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
             {
@@ -194,7 +196,7 @@ namespace mRemoteNG.Connection
             if (connectionForm == null)
                 connectionForm = Adder.AddPanel(connectionPanel);
             else
-                ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
+                ((ConnectionWindow)connectionForm).Show(_frmMain.pnlDock);
 
             connectionForm.Focus();
             return connectionForm;

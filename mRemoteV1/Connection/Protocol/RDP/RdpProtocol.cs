@@ -31,6 +31,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private bool _redirectKeys;
         private bool _alertOnIdleDisconnect;
         private readonly FrmMain _frmMain;
+	    private readonly ConnectionsService _connectionsService;
 
         #region Properties
         public bool SmartSize
@@ -92,9 +93,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 
         #region Constructors
-        public RdpProtocol(FrmMain frmMain)
+        public RdpProtocol(FrmMain frmMain, ConnectionsService connectionsService)
         {
             _frmMain = frmMain;
+            _connectionsService = connectionsService;
             Control = new AxMsRdpClient8NotSafeForScripting();
         }
         #endregion
@@ -445,7 +447,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						if (Settings.Default.DefaultPassword != "")
 						{
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.ConnectionsService.EncryptionKey);
+                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, _connectionsService.EncryptionKey);
 						}
 					}
 				}

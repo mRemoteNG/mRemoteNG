@@ -2,6 +2,7 @@
 using System.Collections;
 using mRemoteNG.Connection;
 using mRemoteNG.Tools;
+using NSubstitute;
 using NUnit.Framework;
 
 
@@ -34,7 +35,7 @@ namespace mRemoteNGTests.Tools
                 MacAddress = TestString,
                 UserField = TestString
             };
-            _argumentParser = new ExternalToolArgumentParser(connectionInfo);
+            _argumentParser = new ExternalToolArgumentParser(connectionInfo, Substitute.For<ConnectionsService>());
         }
 
         [OneTimeTearDown]
@@ -52,7 +53,7 @@ namespace mRemoteNGTests.Tools
         [Test]
         public void NullConnectionInfoResultsInEmptyVariables()
         {
-            var parser = new ExternalToolArgumentParser(null);
+            var parser = new ExternalToolArgumentParser(null, Substitute.For<ConnectionsService>());
             var parsedText = parser.ParseArguments("test %USERNAME% test");
             Assert.That(parsedText, Is.EqualTo("test  test"));
         }

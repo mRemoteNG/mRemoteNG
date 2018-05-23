@@ -2,7 +2,8 @@ namespace mRemoteNG.Connection.Protocol.RAW
 {
 	public class RawProtocol : PuttyBase
 	{
-		public RawProtocol()
+		public RawProtocol(ConnectionsService connectionsService) 
+		    : base(connectionsService)
 		{
 			PuttyProtocol = Putty_Protocol.raw;
 		}

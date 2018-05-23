@@ -27,7 +27,7 @@ namespace mRemoteNG.Config.Settings
         {
             try
             {
-                var windowPlacement = new WindowPlacement(FrmMain.Default);
+                var windowPlacement = new WindowPlacement(frmMain);
                 if (frmMain.WindowState == FormWindowState.Minimized & windowPlacement.RestoreToMaximized)
                 {
                     frmMain.Opacity = 0;

@@ -28,6 +28,7 @@ namespace mRemoteNG.Connection
         private bool _showDialogWhenLoadingConnections;
         private readonly PuttySessionsManager _puttySessionsManager;
         private readonly Import _import;
+        private readonly IWin32Window _dialogWindowParent;
 
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
@@ -44,10 +45,11 @@ namespace mRemoteNG.Connection
         //    set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
         //}
 
-        public ConnectionsService(PuttySessionsManager puttySessionsManager, Import import)
+        public ConnectionsService(PuttySessionsManager puttySessionsManager, Import import, IWin32Window dialogWindowParent)
         {
             _puttySessionsManager = puttySessionsManager.ThrowIfNull(nameof(puttySessionsManager));
             _import = import.ThrowIfNull(nameof(import));
+            _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));
         }
 
         public void NewConnectionsFile(string filename)
@@ -113,8 +115,8 @@ namespace mRemoteNG.Connection
 
             var newConnectionTreeModel =
                 (useDatabase
-                    ? new SqlConnectionsLoader(DatabaseConnectorFactory).Load()
-                    : new XmlConnectionsLoader(connectionFileName, this).Load())
+                    ? new SqlConnectionsLoader(DatabaseConnectorFactory, this).Load()
+                    : new XmlConnectionsLoader(connectionFileName, this, _dialogWindowParent).Load())
                 ?? new ConnectionTreeModel();
 
             if (!import)
@@ -344,7 +346,7 @@ namespace mRemoteNG.Connection
                 }
                 else
                 {
-                    MessageBox.Show(FrmMain.Default,
+                    MessageBox.Show(_dialogWindowParent,
                         string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)),
                         @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();

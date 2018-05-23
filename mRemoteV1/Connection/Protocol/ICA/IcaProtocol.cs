@@ -17,12 +17,15 @@ namespace mRemoteNG.Connection.Protocol.ICA
 	{
 		private AxICAClient _icaClient;
 		private ConnectionInfo _info;
-        private readonly FrmMain _frmMain = FrmMain.Default;
+        private readonly FrmMain _frmMain;
+	    private readonly ConnectionsService _connectionsService;
 		
         #region Public Methods
-		public IcaProtocol()
+		public IcaProtocol(FrmMain frmMain, ConnectionsService connectionsService)
 		{
-			try
+		    _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
+		    _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+		    try
 			{
 				Control = new AxICAClient();
 			}
@@ -144,7 +147,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 						if (Settings.Default.DefaultPassword != "")
 						{
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _icaClient.SetProp("ClearPassword", cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.ConnectionsService.EncryptionKey));
+                            _icaClient.SetProp("ClearPassword", cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, _connectionsService.EncryptionKey));
 						}
 					}
 				}

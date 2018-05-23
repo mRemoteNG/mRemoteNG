@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Specialized;
+using mRemoteNG.Config.Putty;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
+using NSubstitute;
 using NUnit.Framework;
 
 
@@ -20,9 +23,10 @@ namespace mRemoteNGTests.Connection.Protocol
         [SetUp]
         public void Setup()
         {
+            var connectionService = Substitute.For<ConnectionsService>();
             _protocolList = new ProtocolList();
-            _protocol1 = new ProtocolTelnet();
-            _protocol2 = new ProtocolSSH2();
+            _protocol1 = new ProtocolTelnet(connectionService);
+            _protocol2 = new ProtocolSSH2(connectionService);
             _protocol3 = new ProtocolVNC();
         }
 

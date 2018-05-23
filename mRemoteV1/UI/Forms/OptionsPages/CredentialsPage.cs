@@ -1,13 +1,17 @@
 ﻿using System;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	public partial class CredentialsPage : OptionsPage
-    {
-        public CredentialsPage()
+	{
+	    private readonly ConnectionsService _connectionsService;
+
+        public CredentialsPage(ConnectionsService connectionsService)
         {
+            _connectionsService = connectionsService;
             InitializeComponent();
             base.ApplyTheme();
         }
@@ -49,7 +53,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             txtCredentialsUsername.Text = Settings.Default.DefaultUsername;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.ConnectionsService.EncryptionKey);
+            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, _connectionsService.EncryptionKey);
             txtCredentialsDomain.Text = Settings.Default.DefaultDomain;
         }
 
@@ -70,7 +74,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.ConnectionsService.EncryptionKey);
+            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, _connectionsService.EncryptionKey);
             Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
 
             Settings.Default.Save();

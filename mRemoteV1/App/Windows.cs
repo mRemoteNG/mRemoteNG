@@ -7,6 +7,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
 {
@@ -29,6 +30,7 @@ namespace mRemoteNG.App
         private readonly ConnectionsService _connectionsService;
         private readonly AppUpdater _appUpdater;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
+        private readonly FrmMain _frmMain;
 
         internal ConnectionTreeWindow TreeForm { get; }
         internal ConfigWindow ConfigForm { get; }
@@ -50,7 +52,8 @@ namespace mRemoteNG.App
             Func<PortScanWindow> portScanWindowBuilder, 
             Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder, 
             AppUpdater appUpdater, 
-            DatabaseConnectorFactory databaseConnectorFactory)
+            DatabaseConnectorFactory databaseConnectorFactory,
+            FrmMain frmMain)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             TreeForm = treeForm.ThrowIfNull(nameof(treeForm));
@@ -63,6 +66,7 @@ namespace mRemoteNG.App
             _externalToolsWindowBuilder = externalToolsWindowBuilder;
             _portScanWindowBuilder = portScanWindowBuilder;
             _activeDirectoryImportWindowBuilder = activeDirectoryImportWindowBuilder;
+            _frmMain = frmMain;
             _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             _appUpdater = appUpdater.ThrowIfNull(nameof(appUpdater));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
@@ -72,60 +76,59 @@ namespace mRemoteNG.App
         {
             try
             {
-                var dockPanel = FrmMain.Default.pnlDock;
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (windowType)
                 {
                     case WindowType.About:
                         if (_aboutForm == null || _aboutForm.IsDisposed)
                             _aboutForm = new AboutWindow();
-                        _aboutForm.Show(dockPanel);
+                        _aboutForm.Show(_frmMain);
                         break;
                     case WindowType.ActiveDirectoryImport:
                         if (_adimportForm == null || _adimportForm.IsDisposed)
                             _adimportForm = _activeDirectoryImportWindowBuilder();
-                        _adimportForm.Show(dockPanel);
+                        _adimportForm.Show(_frmMain);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory, FrmMain.Default))
+                        using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory, _frmMain))
                         {
-                            optionsForm.ShowDialog(dockPanel);
+                            optionsForm.ShowDialog(_frmMain);
                         }
                         break;
                     case WindowType.SSHTransfer:
                         if (SshtransferForm == null || SshtransferForm.IsDisposed)
-                            SshtransferForm = new SSHTransferWindow();
-                        SshtransferForm.Show(dockPanel);
+                            SshtransferForm = new SSHTransferWindow(_frmMain);
+                        SshtransferForm.Show(_frmMain);
                         break;
                     case WindowType.Update:
                         if (_updateForm == null || _updateForm.IsDisposed)
                             _updateForm = _updateWindowBuilder();
-                        _updateForm.Show(dockPanel);
+                        _updateForm.Show(_frmMain);
                         break;
                     case WindowType.Help:
                         if (_helpForm == null || _helpForm.IsDisposed)
                             _helpForm = new HelpWindow();
-                        _helpForm.Show(dockPanel);
+                        _helpForm.Show(_frmMain);
                         break;
                     case WindowType.ExternalApps:
                         if (_externalappsForm == null || _externalappsForm.IsDisposed)
                             _externalappsForm = _externalToolsWindowBuilder();
-                        _externalappsForm.Show(dockPanel);
+                        _externalappsForm.Show(_frmMain);
                         break;
                     case WindowType.PortScan:
                         _portscanForm = _portScanWindowBuilder();
-                        _portscanForm.Show(dockPanel);
+                        _portscanForm.Show(_frmMain);
                         break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
                             _ultravncscForm = new UltraVNCWindow(Show);
-                        _ultravncscForm.Show(dockPanel);
+                        _ultravncscForm.Show(_frmMain);
                         break;
                     case WindowType.ComponentsCheck:
                         Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Showing ComponentsCheck window", true);
                         if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
                             _componentscheckForm = new ComponentsCheckWindow();
-                        _componentscheckForm.Show(dockPanel);
+                        _componentscheckForm.Show(_frmMain);
                         break;
                 }
             }

@@ -14,16 +14,19 @@ namespace mRemoteNG.Tools
         private ArrayList quickConnectConnections = new ArrayList();
         private ArrayList previousCommands = new ArrayList();
         private int previousCommandIndex = 0;
+        private readonly ConnectionsService _connectionsService;
 
         public int CommandHistoryLength { get; set; } = 100;
 
-        public MultiSSHController(TextBox txtBox)
+        public MultiSSHController(TextBox txtBox, ConnectionsService connectionsService)
         {
             DecorateTextBox(txtBox);
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
-        public MultiSSHController(ToolStripTextBox txtBox)
+        public MultiSSHController(ToolStripTextBox txtBox, ConnectionsService connectionsService)
         {
+            _connectionsService = connectionsService;
             DecorateTextBox(txtBox.TextBox);
         }
 
@@ -75,7 +78,7 @@ namespace mRemoteNG.Tools
                 processHandlers.AddRange(ProcessOpenConnections(connection));
             }
 
-            var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
+            var connectionTreeConnections = _connectionsService.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
 
             foreach (ConnectionInfo connection in connectionTreeConnections)
             {

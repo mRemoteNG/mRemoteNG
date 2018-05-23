@@ -23,11 +23,13 @@ namespace mRemoteNG.App
 	{
 	    private readonly ConnectionsService _connectionsService;
 	    private readonly ICredentialRepositoryList _credentialRepositoryList;
+	    private readonly IWin32Window _dialogWindowParent;
 
-	    public Export(ICredentialRepositoryList credentialRepositoryList, ConnectionsService connectionsService)
+	    public Export(ICredentialRepositoryList credentialRepositoryList, ConnectionsService connectionsService, IWin32Window dialogWindowParent)
 	    {
 	        _credentialRepositoryList = credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
 	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+	        _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));
 	    }
 
 		public void ExportToFile(ConnectionInfo selectedNode, ConnectionTreeModel connectionTreeModel)
@@ -47,7 +49,7 @@ namespace mRemoteNG.App
 						exportForm.SelectedConnection = selectedNode;
 					}
 						
-					if (exportForm.ShowDialog(FrmMain.Default) != DialogResult.OK)
+					if (exportForm.ShowDialog(_dialogWindowParent) != DialogResult.OK)
 						return;
 
 				    ConnectionInfo exportTarget;

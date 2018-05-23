@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
+using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Controls
@@ -11,11 +12,14 @@ namespace mRemoteNG.UI.Controls
 		private ToolStripTextBox _txtMultiSsh;
 		private MultiSSHController _multiSshController;
 
+	    public MultiSshToolStrip() : this(null)
+	    {
+	    }
 
-		public MultiSshToolStrip()
+		public MultiSshToolStrip(ConnectionsService connectionsService)
 		{
 			InitializeComponent();
-			_multiSshController = new MultiSSHController(_txtMultiSsh);
+			_multiSshController = new MultiSSHController(_txtMultiSsh, connectionsService);
 		}
 
 		private void InitializeComponent()

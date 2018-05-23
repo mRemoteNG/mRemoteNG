@@ -293,6 +293,7 @@ namespace mRemoteNG.UI.Window
 
         #region Private Properties
         private readonly OpenFileDialog oDlg;
+        private readonly IWin32Window _dialogParentWindow;
         #endregion
 
         #region Public Properties
@@ -473,7 +474,7 @@ namespace mRemoteNG.UI.Window
             {
                 if (txtPassword.Text == "")
                 {
-                    if (MessageBox.Show(FrmMain.Default, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    if (MessageBox.Show(_dialogParentWindow, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     {
                         return false;
                     }
@@ -550,8 +551,15 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Methods
+
         public SSHTransferWindow()
+            : this(null)
         {
+        }
+
+        public SSHTransferWindow(IWin32Window dialogParentWindow)
+        {
+            _dialogParentWindow = dialogParentWindow;
             WindowType = WindowType.SSHTransfer;
             DockPnl = new DockContent();
             InitializeComponent();

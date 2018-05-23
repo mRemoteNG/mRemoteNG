@@ -43,7 +43,7 @@ namespace mRemoteNGTests.UI.Controls
 
         private ExternalTool BuildExternalTool()
         {
-            return new ExternalTool(Substitute.For<IConnectionInitiator>());
+            return new ExternalTool(Substitute.For<IConnectionInitiator>(), Substitute.For<ConnectionsService>());
         }
     }
 }

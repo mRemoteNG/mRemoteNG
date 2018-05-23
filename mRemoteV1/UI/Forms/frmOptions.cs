@@ -81,13 +81,13 @@ namespace mRemoteNG.UI.Forms
             _pages = new Dictionary<string, OptionsPage>
             {
                 {typeof(StartupExitPage).Name, new StartupExitPage()},
-                {typeof(AppearancePage).Name, new AppearancePage(_connectionInitiator, _notificationAreaIconBuilder)},
-                {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
+                {typeof(AppearancePage).Name, new AppearancePage(_connectionInitiator, _notificationAreaIconBuilder, _frmMain)},
+                {typeof(TabsPanelsPage).Name, new TabsPanelsPage(_frmMain)},
                 {typeof(NotificationsPage).Name, new NotificationsPage()},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage(_frmMain)},
-                {typeof(CredentialsPage).Name, new CredentialsPage()},
+                {typeof(CredentialsPage).Name, new CredentialsPage(_connectionsService)},
                 {typeof(SqlServerPage).Name, new SqlServerPage(_connectionsService, _databaseConnectorFactory)},
-                {typeof(UpdatesPage).Name, new UpdatesPage(_appUpdater, _showWindowAction)},
+                {typeof(UpdatesPage).Name, new UpdatesPage(_appUpdater, _showWindowAction, _connectionsService)},
                 {typeof(ThemePage).Name, new ThemePage()},
                 {typeof(SecurityPage).Name, new SecurityPage()},
                 {typeof(AdvancedPage).Name, new AdvancedPage()}

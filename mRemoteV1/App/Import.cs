@@ -12,6 +12,13 @@ namespace mRemoteNG.App
 {
     public class Import
     {
+        private readonly IWin32Window _dialogWindowParent;
+
+        public Import(IWin32Window dialogWindowParent)
+        {
+            _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));
+        }
+
         // TODO - this is only a property to break up a circular dependency. move this to ctor when able
         public ConnectionsService ConnectionsService { get; set; }
 
@@ -97,7 +104,7 @@ namespace mRemoteNG.App
             switch (extension.ToLowerInvariant())
             {
                 case ".xml":
-                    return new MRemoteNGXmlImporter(ConnectionsService);
+                    return new MRemoteNGXmlImporter(ConnectionsService, _dialogWindowParent);
                 case ".csv":
                     return new MRemoteNGCsvImporter();
                 case ".rdp":

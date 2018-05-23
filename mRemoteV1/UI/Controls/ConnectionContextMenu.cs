@@ -54,6 +54,7 @@ namespace mRemoteNG.UI.Controls
         private readonly Export _export;
         private readonly ExternalToolsService _externalToolsService;
         private readonly Import _import;
+        private readonly ConnectionsService _connectionsService;
 
         // TODO - this is only a property to break up a circular dependency
         public Action<WindowType> ShowWindowAction { get; set; } = type => { };
@@ -65,8 +66,10 @@ namespace mRemoteNG.UI.Controls
 		    SSHTransferWindow sshTransferWindow, 
 		    Export export, 
 		    ExternalToolsService externalToolsService, 
-		    Import import)
+		    Import import,
+		    ConnectionsService connectionsService)
         {
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _connectionTree = connectionTree.ThrowIfNull(nameof(connectionTree));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _sshTransferWindow = sshTransferWindow.ThrowIfNull(nameof(sshTransferWindow));
@@ -744,7 +747,7 @@ namespace mRemoteNG.UI.Controls
         {
             ContainerInfo selectedNodeAsContainer;
             if (_connectionTree.SelectedNode == null)
-                selectedNodeAsContainer = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
+                selectedNodeAsContainer = _connectionsService.ConnectionTreeModel.RootNodes.First();
             else
                 selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo ?? _connectionTree.SelectedNode.Parent;
             _import.ImportFromFile(selectedNodeAsContainer);
@@ -762,7 +765,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnExportFileClicked(object sender, EventArgs e)
         {
-            _export.ExportToFile(_connectionTree.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
+            _export.ExportToFile(_connectionTree.SelectedNode, _connectionsService.ConnectionTreeModel);
         }
 
         private void OnAddConnectionClicked(object sender, EventArgs e)

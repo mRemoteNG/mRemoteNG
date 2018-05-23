@@ -17,14 +17,16 @@ namespace mRemoteNG.Config.Settings
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
         private readonly IConnectionInitiator _connectionInitiator;
         private readonly ExternalToolsService _externalToolsService;
+        private readonly ConnectionsService _connectionsService;
 
         public ExternalAppsLoader(MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip, 
-            IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService)
+            IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService, ConnectionsService connectionsService)
         {
             _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
             _externalToolsToolStrip = externalToolsToolStrip.ThrowIfNull(nameof(externalToolsToolStrip));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
 
@@ -61,7 +63,7 @@ namespace mRemoteNG.Config.Settings
 
             foreach (XmlElement xEl in xDom.DocumentElement.ChildNodes)
             {
-                var extA = new ExternalTool(_connectionInitiator)
+                var extA = new ExternalTool(_connectionInitiator, _connectionsService)
                 {
                     DisplayName = xEl.Attributes["DisplayName"].Value,
                     FileName = xEl.Attributes["FileName"].Value,

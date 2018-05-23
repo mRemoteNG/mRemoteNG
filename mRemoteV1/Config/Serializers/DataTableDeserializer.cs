@@ -10,18 +10,26 @@ using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
 	public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
-    {
-        public ConnectionTreeModel Deserialize(DataTable table)
+	{
+	    private readonly ConnectionsService _connectionsService;
+
+	    public DataTableDeserializer(ConnectionsService connectionsService)
+	    {
+	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+	    }
+
+	    public ConnectionTreeModel Deserialize(DataTable table)
         {
             var connectionList = CreateNodesFromTable(table);
             var connectionTreeModel = CreateNodeHierarchy(connectionList, table);
-            Runtime.ConnectionsService.IsConnectionsFileLoaded = true;
+            _connectionsService.IsConnectionsFileLoaded = true;
             return connectionTreeModel;
         }
 

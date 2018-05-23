@@ -30,12 +30,14 @@ namespace mRemoteNG.Config.Serializers.Xml
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.8;
         private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
+	    private readonly IWin32Window _dialogWindowParent;
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(ConnectionsService connectionsService, Func<SecureString> authenticationRequestor = null)
+        public XmlConnectionsDeserializer(ConnectionsService connectionsService, IWin32Window dialogWindowParent, Func<SecureString> authenticationRequestor = null)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+            _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));
             AuthenticationRequestor = authenticationRequestor;
         }
 
@@ -120,7 +122,7 @@ namespace mRemoteNG.Config.Serializers.Xml
         private void ShowIncompatibleVersionDialogBox()
         {
             CTaskDialog.ShowTaskDialogBox(
-                FrmMain.Default,
+                _dialogWindowParent,
                 Application.ProductName,
                 "Incompatible connection file format",
                 $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",

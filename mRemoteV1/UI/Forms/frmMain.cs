@@ -18,6 +18,7 @@ using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -71,6 +72,7 @@ namespace mRemoteNG.UI.Forms
         private readonly AppUpdater _appUpdater;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
         private readonly Screens _screens;
+        private readonly MessageCollector _messageCollector = Runtime.MessageCollector;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -84,48 +86,48 @@ namespace mRemoteNG.UI.Forms
             _windowList = new WindowList();
             _credentialRepositoryList = new CredentialRepositoryList();
             var externalToolsService = new ExternalToolsService();
-		    _import = new Import();
-		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance, _import);
-		    Runtime.ConnectionsService = _connectionsService;
+		    _import = new Import(this);
+		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance, _import, this);
 		    _import.ConnectionsService = _connectionsService;
 		    Func<SecureString> encryptionKeySelectionFunc = () => _connectionsService.EncryptionKey;
             _appUpdater = new AppUpdater(encryptionKeySelectionFunc);
             ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
-            _export = new Export(_credentialRepositoryList, _connectionsService);
-		    var protocolFactory = new ProtocolFactory(externalToolsService, this);
-            _connectionInitiator = new ConnectionInitiator(_windowList, externalToolsService, protocolFactory);
+            _export = new Export(_credentialRepositoryList, _connectionsService, this);
+		    var protocolFactory = new ProtocolFactory(externalToolsService, this, _connectionsService);
+            _connectionInitiator = new ConnectionInitiator(_windowList, externalToolsService, protocolFactory, this);
 		    _webHelper = new WebHelper(_connectionInitiator);
-		    var configWindow = new ConfigWindow(new DockContent());
-		    var sshTransferWindow = new SSHTransferWindow();
+		    var configWindow = new ConfigWindow(new DockContent(), _connectionsService);
+		    var sshTransferWindow = new SSHTransferWindow(pnlDock);
 		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator, _connectionsService);
 			var connectionTree = connectionTreeWindow.ConnectionTree;
 			connectionTree.SelectedNodeChanged += configWindow.HandleConnectionTreeSelectionChanged;
-			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, _export, externalToolsService, _import);
+			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, _export, externalToolsService, _import, _connectionsService);
 			connectionTree.ConnectionContextMenu = connectionTreeContextMenu;
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
-		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), connectionTreeWindow);
-		    var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent());
+		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), pnlDock, connectionTreeWindow);
+		    var screenshotManagerWindow = new ScreenshotManagerWindow(new DockContent(), pnlDock);
 		    _settingsSaver = new SettingsSaver(externalToolsService);
             _shutdown = new Shutdown(_settingsSaver, _connectionsService, this);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown, _appUpdater);
-		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
-            Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService, () => connectionTree.SelectedNode);
+		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown, _connectionsService);
+            Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService, () => connectionTree.SelectedNode, this, _connectionsService);
 		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, _import);
-		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import);
+		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import, _connectionsService);
 		    _databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
             _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
                 sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, 
-                portScanWindowBuilder, activeDirectoryImportWindowBuilder, _appUpdater, _databaseConnectorFactory);
+                portScanWindowBuilder, activeDirectoryImportWindowBuilder, _appUpdater, _databaseConnectorFactory, this);
             Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService, this);
             _screens = new Screens(this);
-            _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder, _screens);
+            _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder, _screens, pnlDock);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 		    _connectionInitiator.Adder = _panelAdder;
 		    _connectionsService.DatabaseConnectorFactory = _databaseConnectorFactory;
-            _startup = new Startup(this, _windows, _connectionsService, _appUpdater, _databaseConnectorFactory);
+            var compatibilityChecker = new CompatibilityChecker(_messageCollector, this);
+            _startup = new Startup(this, _windows, _connectionsService, _appUpdater, _databaseConnectorFactory, compatibilityChecker);
             connectionTreeContextMenu.ShowWindowAction = _windows.Show;
 
-            var externalAppsLoader = new ExternalAppsLoader(Runtime.MessageCollector, _externalToolsToolStrip, _connectionInitiator, externalToolsService);
+            var externalAppsLoader = new ExternalAppsLoader(Runtime.MessageCollector, _externalToolsToolStrip, _connectionInitiator, externalToolsService, _connectionsService);
 		    _settingsLoader = new SettingsLoader(this, Runtime.MessageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, externalAppsLoader, _notificationAreaIconBuilder);
 		    _externalToolsToolStrip.ExternalToolsService = externalToolsService;
 			_externalToolsToolStrip.GetSelectedConnectionFunc = () => SelectedConnection;
@@ -209,18 +211,17 @@ namespace mRemoteNG.UI.Forms
         #region Startup & Shutdown
         private void frmMain_Load(object sender, EventArgs e)
         {
-            var messageCollector = Runtime.MessageCollector;
-            MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
+            MessageCollectorSetup.SetupMessageCollector(_messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters, this, _windows.ErrorsForm);
 
-	        _startup.InitializeProgram(messageCollector);
+	        _startup.InitializeProgram(_messageCollector);
 
             SetMenuDependencies();
 
             msMain.Location = Point.Empty;
             _settingsLoader.LoadSettings();
 
-            var uiLoader = new DockPanelLayoutLoader(this, messageCollector, _windows);
+            var uiLoader = new DockPanelLayoutLoader(this, _messageCollector, _windows);
             uiLoader.LoadPanelsFromXml();
 
 	        LockToolbarPositions(Settings.Default.LockToolbars);
@@ -243,7 +244,7 @@ namespace mRemoteNG.UI.Forms
 			if (Settings.Default.StartupComponentsCheck)
 			    _windows.Show(WindowType.ComponentsCheck);
 
-	        _startup.CreateConnectionsProvider(messageCollector);
+	        _startup.CreateConnectionsProvider(_messageCollector);
 
             _screenSystemMenu.BuildScreenList();
 			SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
@@ -296,6 +297,7 @@ namespace mRemoteNG.UI.Forms
             fileMenu.Shutdown = _shutdown;
             fileMenu.Import = _import;
             fileMenu.ConnectionsService = _connectionsService;
+            fileMenu.DialogWindowParent = this;
 
             viewMenu.TsExternalTools = _externalToolsToolStrip;
             viewMenu.TsQuickConnect = _quickConnectToolStrip;
@@ -449,7 +451,7 @@ namespace mRemoteNG.UI.Forms
 			    if (!Settings.Default.MinimizeToTray) return;
 			    if (Runtime.NotificationAreaIcon == null)
 			    {
-			        Runtime.NotificationAreaIcon = new NotificationAreaIcon(this, _connectionInitiator, _shutdown);
+			        Runtime.NotificationAreaIcon = new NotificationAreaIcon(this, _connectionInitiator, _shutdown, _connectionsService);
 			    }
 			    Hide();
 			}

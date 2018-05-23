@@ -10,11 +10,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         private readonly IConnectionInitiator _connectionInitiator;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
+        private readonly FrmMain _frmMain;
 
-        public AppearancePage(IConnectionInitiator connectionInitiator, Func<NotificationAreaIcon> notificationAreaIconBuilder)
+        public AppearancePage(IConnectionInitiator connectionInitiator, Func<NotificationAreaIcon> notificationAreaIconBuilder, FrmMain frmMain)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
+            _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
             InitializeComponent();
             base.ApplyTheme();
         }
@@ -80,7 +82,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.ShowDescriptionTooltipsInTree = chkShowDescriptionTooltipsInTree.Checked;
             Settings.Default.ShowCompleteConsPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
-            FrmMain.Default.ShowFullPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
+            _frmMain.ShowFullPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
 
             Settings.Default.ShowSystemTrayIcon = chkShowSystemTrayIcon.Checked;
             if (Settings.Default.ShowSystemTrayIcon)

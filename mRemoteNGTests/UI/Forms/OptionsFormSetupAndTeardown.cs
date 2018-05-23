@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Security;
+using System.Windows.Forms;
+using System.Xml.Linq;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using NSubstitute;
@@ -27,10 +32,10 @@ namespace mRemoteNGTests.UI.Forms
         {
             var frmMain = new FrmMain();
 	        var connectionInitiator = Substitute.For<IConnectionInitiator>();
-            var import = new Import();
-            var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import), frmMain);
-            Func<NotificationAreaIcon> notificationIconBuilder = () => new NotificationAreaIcon(frmMain, connectionInitiator, shutdown);
-            var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import);
+            var import = new Import(Substitute.For<IWin32Window>());
+            var shutdown = new Shutdown(new SettingsSaver(new ExternalToolsService()), new ConnectionsService(PuttySessionsManager.Instance, import, frmMain), frmMain);
+            var connectionsService = new ConnectionsService(PuttySessionsManager.Instance, import, frmMain);
+            Func<NotificationAreaIcon> notificationIconBuilder = () => new NotificationAreaIcon(frmMain, connectionInitiator, shutdown, connectionsService);
             Func<SecureString> encryptionKeySelectionFunc = () => connectionsService.EncryptionKey;
             var databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
             var appUpdater = new AppUpdater(encryptionKeySelectionFunc);

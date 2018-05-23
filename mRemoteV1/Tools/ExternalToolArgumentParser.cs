@@ -10,10 +10,12 @@ namespace mRemoteNG.Tools
 	public class ExternalToolArgumentParser
     {
         private readonly ConnectionInfo _connectionInfo;
+        private readonly ConnectionsService _connectionsService;
 
-        public ExternalToolArgumentParser(ConnectionInfo connectionInfo)
+        public ExternalToolArgumentParser(ConnectionInfo connectionInfo, ConnectionsService connectionsService)
         {
             _connectionInfo = connectionInfo;
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
         public string ParseArguments(string input)
@@ -183,7 +185,7 @@ namespace mRemoteNG.Tools
                     if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
                         replacement = new LegacyRijndaelCryptographyProvider()
                                         .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
-                                                                    Runtime.ConnectionsService.EncryptionKey);
+                                _connectionsService.EncryptionKey);
                     break;
                 case "domain":
                     replacement = _connectionInfo.Domain;

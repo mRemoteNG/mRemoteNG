@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -16,14 +17,16 @@ namespace mRemoteNG.UI.Window
         private ControlLayout _layout = ControlLayout.Vertical;
         private readonly ThemeManager _themeManager;
 	    private readonly ConnectionTreeWindow _connectionTreeWindow;
+	    private DockPanel _dockPanel;
 
         public DockContent PreviousActiveForm { get; set; }
 
-        public ErrorAndInfoWindow(DockContent panel, ConnectionTreeWindow connectionTreeWindow)
+        public ErrorAndInfoWindow(DockContent dockContent, DockPanel dockPanel, ConnectionTreeWindow connectionTreeWindow)
         {
             _connectionTreeWindow = connectionTreeWindow;
             WindowType = WindowType.ErrorsAndInfos;
-            DockPnl = panel;
+            DockPnl = dockContent;
+            _dockPanel = dockPanel.ThrowIfNull(nameof(dockPanel));
             InitializeComponent();
             _themeManager = ThemeManager.getInstance();
             ApplyTheme();
@@ -154,9 +157,9 @@ namespace mRemoteNG.UI.Window
 			    try
 			    {
 			        if (PreviousActiveForm != null)
-			            PreviousActiveForm.Show(FrmMain.Default.pnlDock);
+			            PreviousActiveForm.Show(_dockPanel);
 			        else
-			            _connectionTreeWindow.Show(FrmMain.Default.pnlDock);
+			            _connectionTreeWindow.Show(_dockPanel);
 			    }
 			    catch (Exception)
 			    {

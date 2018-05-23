@@ -16,12 +16,14 @@ namespace mRemoteNG.UI.Panels
         private readonly WindowList _windowList;
         private readonly Screens _screens;
         private readonly Func<ConnectionWindow> _connectionWindowBuilder;
+        private readonly DockPanel _dockPanel;
 
-        public PanelAdder(WindowList windowList, Func<ConnectionWindow> connectionWindowBuilder, Screens screens)
+        public PanelAdder(WindowList windowList, Func<ConnectionWindow> connectionWindowBuilder, Screens screens, DockPanel dockPanel)
         {
             _connectionWindowBuilder = connectionWindowBuilder;
-            _screens = screens;
+            _screens = screens.ThrowIfNull(nameof(screens));
             _windowList = windowList.ThrowIfNull(nameof(windowList));
+            _dockPanel = dockPanel.ThrowIfNull(nameof(dockPanel));
         }
 
         public Form AddPanel(string title = "", bool noTabber = false)
@@ -42,9 +44,9 @@ namespace mRemoteNG.UI.Panels
             }
         }
 
-        private static void ShowConnectionWindow(ConnectionWindow connectionForm)
+        private void ShowConnectionWindow(ConnectionWindow connectionForm)
         {
-            connectionForm.Show(FrmMain.Default.pnlDock, DockState.Document);
+            connectionForm.Show(_dockPanel, DockState.Document);
         }
 
         private void PrepareTabControllerSupport(bool noTabber, ConnectionWindow connectionForm)

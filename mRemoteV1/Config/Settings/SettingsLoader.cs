@@ -24,8 +24,7 @@ namespace mRemoteNG.Config.Settings
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 	    private readonly MultiSshToolStrip _multiSshToolStrip;
 	    private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
-
-        private FrmMain MainForm { get; }
+	    private readonly FrmMain _frmMain;
 
 
 	    public SettingsLoader(
@@ -37,7 +36,7 @@ namespace mRemoteNG.Config.Settings
 	        ExternalAppsLoader externalAppsLoader,
 	        Func<NotificationAreaIcon> notificationAreaIconBuilder)
 		{
-		    MainForm = mainForm.ThrowIfNull(nameof(mainForm));
+		    _frmMain = mainForm.ThrowIfNull(nameof(mainForm));
 	        _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
 	        _quickConnectToolStrip = quickConnectToolStrip.ThrowIfNull(nameof(quickConnectToolStrip));
 	        _externalToolsToolStrip = externalToolsToolStrip.ThrowIfNull(nameof(externalToolsToolStrip));
@@ -74,10 +73,10 @@ namespace mRemoteNG.Config.Settings
 			}
 		}
 
-        private static void SetAlwaysShowPanelTabs()
+        private void SetAlwaysShowPanelTabs()
         {
             if (mRemoteNG.Settings.Default.AlwaysShowPanelTabs)
-                FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
+                _frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
  
@@ -92,32 +91,32 @@ namespace mRemoteNG.Config.Settings
 
         private void SetApplicationWindowPositionAndSize()
         {
-            MainForm.WindowState = FormWindowState.Normal;
+            _frmMain.WindowState = FormWindowState.Normal;
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Normal)
             {
                 if (!mRemoteNG.Settings.Default.MainFormLocation.IsEmpty)
-                    MainForm.Location = mRemoteNG.Settings.Default.MainFormLocation;
+                    _frmMain.Location = mRemoteNG.Settings.Default.MainFormLocation;
                 if (!mRemoteNG.Settings.Default.MainFormSize.IsEmpty)
-                    MainForm.Size = mRemoteNG.Settings.Default.MainFormSize;
+                    _frmMain.Size = mRemoteNG.Settings.Default.MainFormSize;
             }
             else
             {
                 if (!mRemoteNG.Settings.Default.MainFormRestoreLocation.IsEmpty)
-                    MainForm.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
+                    _frmMain.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
                 if (!mRemoteNG.Settings.Default.MainFormRestoreSize.IsEmpty)
-                    MainForm.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
+                    _frmMain.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
             }
 
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Maximized)
             {
-                MainForm.WindowState = FormWindowState.Maximized;
+                _frmMain.WindowState = FormWindowState.Maximized;
             }
 
             // Make sure the form is visible on the screen
             const int minHorizontal = 300;
             const int minVertical = 150;
-            var screenBounds = Screen.FromHandle(MainForm.Handle).Bounds;
-            var newBounds = MainForm.Bounds;
+            var screenBounds = Screen.FromHandle(_frmMain.Handle).Bounds;
+            var newBounds = _frmMain.Bounds;
 
             if (newBounds.Right < screenBounds.Left + minHorizontal)
                 newBounds.X = screenBounds.Left + minHorizontal - newBounds.Width;
@@ -128,20 +127,20 @@ namespace mRemoteNG.Config.Settings
             if (newBounds.Top > screenBounds.Bottom - minVertical)
                 newBounds.Y = screenBounds.Bottom - minVertical;
 
-            MainForm.Location = newBounds.Location;
+            _frmMain.Location = newBounds.Location;
         }
 
         private void SetAutoSave()
         {
             if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes <= 0) return;
-            MainForm.tmrAutoSave.Interval = mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000;
-            MainForm.tmrAutoSave.Enabled = true;
+            _frmMain.tmrAutoSave.Interval = mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000;
+            _frmMain.tmrAutoSave.Enabled = true;
         }
 
         private void SetKioskMode()
         {
             if (!mRemoteNG.Settings.Default.MainFormKiosk) return;
-            MainForm.Fullscreen.Value = true;
+            _frmMain.Fullscreen.Value = true;
         }
 
         private void SetShowSystemTrayIcon()
@@ -235,15 +234,15 @@ namespace mRemoteNG.Config.Settings
 			switch (panel.ToLower())
 			{
 				case "top":
-					return MainForm.tsContainer.TopToolStripPanel;
+					return _frmMain.tsContainer.TopToolStripPanel;
 				case "bottom":
-					return MainForm.tsContainer.BottomToolStripPanel;
+					return _frmMain.tsContainer.BottomToolStripPanel;
 				case "left":
-					return MainForm.tsContainer.LeftToolStripPanel;
+					return _frmMain.tsContainer.LeftToolStripPanel;
 				case "right":
-					return MainForm.tsContainer.RightToolStripPanel;
+					return _frmMain.tsContainer.RightToolStripPanel;
 				default:
-					return MainForm.tsContainer.TopToolStripPanel;
+					return _frmMain.tsContainer.TopToolStripPanel;
 			}
 		}
 

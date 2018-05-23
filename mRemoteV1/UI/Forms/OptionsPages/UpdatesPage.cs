@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Update;
+using mRemoteNG.Connection;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.TaskDialog;
@@ -14,11 +15,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         private readonly AppUpdater _appUpdate;
 	    private readonly Action<WindowType> _showWindowAction;
+        private readonly ConnectionsService _connectionsService;
 
-        public UpdatesPage(AppUpdater appUpdate, Action<WindowType> showWindowAction)
+        public UpdatesPage(AppUpdater appUpdate, Action<WindowType> showWindowAction, ConnectionsService connectionsService)
         {
             _appUpdate = appUpdate;
-	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
+            _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	        InitializeComponent();
             base.ApplyTheme();
         }
@@ -113,7 +116,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlProxyAuthentication.Enabled = Settings.Default.UpdateProxyUseAuthentication;
             txtProxyUsername.Text = Settings.Default.UpdateProxyAuthUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtProxyPassword.Text = cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, Runtime.ConnectionsService.EncryptionKey);
+            txtProxyPassword.Text = cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, _connectionsService.EncryptionKey);
 
             btnTestProxy.Enabled = Settings.Default.UpdateUseProxy;
         }
@@ -145,7 +148,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
             Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.ConnectionsService.EncryptionKey);
+            Settings.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, _connectionsService.EncryptionKey);
 
             Settings.Default.Save();
         }

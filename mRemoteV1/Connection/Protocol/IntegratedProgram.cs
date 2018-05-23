@@ -15,10 +15,12 @@ namespace mRemoteNG.Connection.Protocol
         private ExternalTool _externalTool;
         private IntPtr _handle;
         private Process _process;
+	    private readonly ConnectionsService _connectionsService;
 
-	    public IntegratedProgram(ExternalToolsService externalToolsService)
+	    public IntegratedProgram(ExternalToolsService externalToolsService, ConnectionsService connectionsService)
 	    {
 	        _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
+	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	    }
 
 	    #region Public Methods
@@ -58,7 +60,7 @@ namespace mRemoteNG.Connection.Protocol
                     return false;
 				}
 
-                var argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo);
+                var argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo, _connectionsService);
 			    _process = new Process
 			    {
 			        StartInfo =

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers.Xml;
@@ -8,6 +9,7 @@ using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using NSubstitute;
 using NUnit.Framework;
 
 
@@ -30,7 +32,8 @@ namespace mRemoteNGTests.IntegrationTests
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
             _serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
-            _deserializer = new XmlConnectionsDeserializer(new ConnectionsService(PuttySessionsManager.Instance, new Import()));
+            var mockWindow = Substitute.For<IWin32Window>();
+            _deserializer = new XmlConnectionsDeserializer(new ConnectionsService(PuttySessionsManager.Instance, new Import(mockWindow), mockWindow), mockWindow);
         }
 
         [TearDown]

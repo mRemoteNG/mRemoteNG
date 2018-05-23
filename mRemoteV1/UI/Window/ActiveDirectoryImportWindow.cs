@@ -13,11 +13,13 @@ namespace mRemoteNG.UI.Window
     {
         private readonly Func<ConnectionInfo> _getSelectedNodeFunc;
         private readonly Import _import;
+        private readonly ConnectionsService _connectionsService;
         private string _currentDomain;
 
-        public ActiveDirectoryImportWindow(Func<ConnectionInfo> getSelectedNodeFunc, Import import)
+        public ActiveDirectoryImportWindow(Func<ConnectionInfo> getSelectedNodeFunc, Import import, ConnectionsService connectionsService)
         {
             _getSelectedNodeFunc = getSelectedNodeFunc;
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _import = import.ThrowIfNull(nameof(import));
             InitializeComponent();
             FontOverrider.FontOverride(this);
@@ -55,7 +57,7 @@ namespace mRemoteNG.UI.Window
             if (selectedNode != null)
                 importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
             else
-                importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
+                importDestination = _connectionsService.ConnectionTreeModel.RootNodes.First();
 
             _import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
         }

@@ -42,6 +42,7 @@ namespace mRemoteNG.UI.Window
         private ToolStripSeparator _toolStripSeparator1;
         private FilteredPropertyGrid _pGrid;
         private ThemeManager _themeManager;
+	    private readonly ConnectionsService _connectionsService;
 
         private AbstractConnectionRecord _selectedTreeNode;
         public AbstractConnectionRecord SelectedTreeNode
@@ -267,8 +268,9 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 
-        public ConfigWindow(DockContent panel)
+        public ConfigWindow(DockContent panel, ConnectionsService connectionsService)
         {
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             WindowType = WindowType.Config;
             DockPnl = panel;
             InitializeComponent();
@@ -694,7 +696,7 @@ namespace mRemoteNG.UI.Window
                 UpdateRootInfoNode(e);
                 UpdateInheritanceNode();
                 ShowHideGridItems();
-                Runtime.ConnectionsService.SaveConnectionsAsync();
+                _connectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
 			{
@@ -746,7 +748,7 @@ namespace mRemoteNG.UI.Window
                 case "Password":
                     if (rootInfo.Password)
                     {
-                        var passwordName = Settings.Default.UseSQLServer ? Language.strSQLServer.TrimEnd(':') : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
+                        var passwordName = Settings.Default.UseSQLServer ? Language.strSQLServer.TrimEnd(':') : Path.GetFileName(_connectionsService.GetStartupConnectionFileName());
 
                         var password = MiscTools.PasswordDialog(passwordName);
                         if (password.Length == 0)
@@ -1583,8 +1585,8 @@ namespace mRemoteNG.UI.Window
 						
 				connectionInfo.Icon = iconName;
 				_pGrid.Refresh();
-						
-				Runtime.ConnectionsService.SaveConnectionsAsync();
+
+			    _connectionsService.SaveConnectionsAsync();
 			}
 			catch (Exception ex)
 			{

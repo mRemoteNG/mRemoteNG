@@ -26,14 +26,17 @@ namespace mRemoteNG.App
 	    private readonly Windows _windows;
         private readonly ConnectionsService _connectionsService;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
+        private readonly CompatibilityChecker _compatibilityChecker;
 
-        public Startup(FrmMain frmMain, Windows windows, ConnectionsService connectionsService, AppUpdater appUpdate, DatabaseConnectorFactory databaseConnectorFactory)
+        public Startup(FrmMain frmMain, Windows windows, ConnectionsService connectionsService,
+            AppUpdater appUpdate, DatabaseConnectorFactory databaseConnectorFactory, CompatibilityChecker compatibilityChecker)
         {
             _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
 			_windows = windows.ThrowIfNull(nameof(windows));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	        _appUpdate = appUpdate.ThrowIfNull(nameof(appUpdate));
             _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
+            _compatibilityChecker = compatibilityChecker.ThrowIfNull(nameof(compatibilityChecker));
             _connectionIconLoader = new ConnectionIconLoader(GeneralAppInfo.HomePath + "\\Icons\\");
         }
 
@@ -42,7 +45,7 @@ namespace mRemoteNG.App
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
             var startupLogger = new StartupDataLogger(messageCollector);
             startupLogger.LogStartupData();
-            CompatibilityChecker.CheckCompatibility(messageCollector);
+            _compatibilityChecker.CheckCompatibility();
             ParseCommandLineArgs(messageCollector);
             IeBrowserEmulation.Register();
             _connectionIconLoader.GetConnectionIcons();

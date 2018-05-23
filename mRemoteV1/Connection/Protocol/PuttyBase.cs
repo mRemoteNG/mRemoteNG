@@ -16,6 +16,12 @@ namespace mRemoteNG.Connection.Protocol
 	{	
 		private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
 	    private bool _isPuttyNg;
+	    private readonly ConnectionsService _connectionsService;
+
+	    public PuttyBase(ConnectionsService connectionsService)
+	    {
+	        _connectionsService = connectionsService;
+	    }
 
 	    #region Public Properties
 
@@ -99,7 +105,7 @@ namespace mRemoteNG.Connection.Protocol
 							if (Settings.Default.EmptyCredentials == "custom")
 							{
                                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                                password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.ConnectionsService.EncryptionKey);
+                                password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, _connectionsService.EncryptionKey);
 							}
 						}
 						

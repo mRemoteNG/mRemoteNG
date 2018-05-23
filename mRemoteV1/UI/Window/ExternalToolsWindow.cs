@@ -21,12 +21,17 @@ namespace mRemoteNG.UI.Window
 	    private readonly IConnectionInitiator _connectionInitiator;
 	    private readonly ExternalToolsService _externalToolsService;
 	    private readonly Func<Optional<ConnectionInfo>> _getCurrentlySelectedConnection;
+	    private readonly IWin32Window _dialogWindowParent;
+	    private readonly ConnectionsService _connectionsService;
 
-        public ExternalToolsWindow(IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService, Func<Optional<ConnectionInfo>> getCurrentlySelectedConnection)
+        public ExternalToolsWindow(IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService,
+            Func<Optional<ConnectionInfo>> getCurrentlySelectedConnection, IWin32Window dialogWindowParent, ConnectionsService connectionsService)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
             _getCurrentlySelectedConnection = getCurrentlySelectedConnection.ThrowIfNull(nameof(getCurrentlySelectedConnection));
+            _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             InitializeComponent();
 			WindowType = WindowType.ExternalApps;
 			DockPnl = new DockContent();
@@ -162,7 +167,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				var externalTool = new ExternalTool(_connectionInitiator) { DisplayName = Language.strExternalToolDefaultName };
+				var externalTool = new ExternalTool(_connectionInitiator, _connectionsService) { DisplayName = Language.strExternalToolDefaultName };
 			    _externalToolsService.ExternalTools.Add(externalTool);
 				UpdateToolsListObjView();
 			    ToolsListObjView.SelectedObject = externalTool;
@@ -186,7 +191,7 @@ namespace mRemoteNG.UI.Window
 				else
 					return;
 				
-				if (MessageBox.Show(FrmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+				if (MessageBox.Show(_dialogWindowParent, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
 					return;
 						
 				foreach (var externalTool in _currentlySelectedExternalTools)

@@ -17,14 +17,16 @@ namespace mRemoteNG.Tools
         private readonly IConnectionInitiator _connectionInitiator;
         private readonly FrmMain _frmMain;
         private readonly Shutdown _shutdown;
+        private readonly ConnectionsService _connectionsService;
 
         public bool Disposed { get; private set; }
 
-        public NotificationAreaIcon(FrmMain frmMain, IConnectionInitiator connectionInitiator, Shutdown shutdown)
+        public NotificationAreaIcon(FrmMain frmMain, IConnectionInitiator connectionInitiator, Shutdown shutdown, ConnectionsService connectionsService)
         {
             _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             _shutdown = shutdown.ThrowIfNull(nameof(shutdown));
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 
             try
             {
@@ -90,7 +92,7 @@ namespace mRemoteNG.Tools
             };
 
             // ReSharper disable once CoVariantArrayConversion
-            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionsService.ConnectionTreeModel).ToArray();
+            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(_connectionsService.ConnectionTreeModel).ToArray();
             _cMenCons.DropDownItems.AddRange(rootMenuItems);
         }
 

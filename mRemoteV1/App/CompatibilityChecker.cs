@@ -6,25 +6,35 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.App
 {
-    public static class CompatibilityChecker
+    public class CompatibilityChecker
     {
-        public static void CheckCompatibility(MessageCollector messageCollector)
+        private readonly MessageCollector _messageCollector;
+        private readonly IWin32Window _dialogWindowParent;
+
+        public CompatibilityChecker(MessageCollector messageCollector, IWin32Window dialogWindowParent)
         {
-            CheckFipsPolicy(messageCollector);
-            CheckLenovoAutoScrollUtility(messageCollector);
+            _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
+            _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));
         }
 
-        private static void CheckFipsPolicy(MessageCollector messageCollector)
+        public void CheckCompatibility()
         {
-            messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS Policy...", true);
+            CheckFipsPolicy();
+            CheckLenovoAutoScrollUtility();
+        }
+
+        private void CheckFipsPolicy()
+        {
+            _messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS Policy...", true);
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
             var errorText = string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName,
                 GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
-            MessageBox.Show(FrmMain.Default, errorText);
+            _messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
+            MessageBox.Show(_dialogWindowParent, errorText);
             Environment.Exit(1);
         }
 
@@ -46,9 +56,9 @@ namespace mRemoteNG.App
             return (int)fipsPolicy != 0;
         }
 
-        private static void CheckLenovoAutoScrollUtility(MessageCollector messageCollector)
+        private void CheckLenovoAutoScrollUtility()
         {
-            messageCollector.AddMessage(MessageClass.InformationMsg, "Checking Lenovo AutoScroll Utility...", true);
+            _messageCollector.AddMessage(MessageClass.InformationMsg, "Checking Lenovo AutoScroll Utility...", true);
 
             if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
                 return;
@@ -60,7 +70,7 @@ namespace mRemoteNG.App
             }
             catch (InvalidOperationException ex)
             {
-                messageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
+                _messageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
             }
 
             if (proccesses.Length <= 0) return;
