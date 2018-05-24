@@ -6,7 +6,6 @@ namespace mRemoteNGTests.UI.Controls
     {
         public TextBoxExtensionsTestForm()
         {
-            Application.EnableVisualStyles();
             InitializeComponent();
         }
     }
