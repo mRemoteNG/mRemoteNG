@@ -42,8 +42,6 @@ namespace mRemoteNG.UI.Forms
 {
 	public partial class FrmMain
     {
-        public static FrmMain Default { get; } = new FrmMain();
-
         private static ClipboardchangeEventHandler _clipboardChangedEvent;
         private bool _inSizeMove;
         private bool _inMouseActivate;
