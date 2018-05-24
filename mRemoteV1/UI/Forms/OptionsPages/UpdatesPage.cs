@@ -15,9 +15,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         private readonly AppUpdater _appUpdate;
 	    private readonly Action<WindowType> _showWindowAction;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
-        public UpdatesPage(AppUpdater appUpdate, Action<WindowType> showWindowAction, ConnectionsService connectionsService)
+        public UpdatesPage(AppUpdater appUpdate, Action<WindowType> showWindowAction, IConnectionsService connectionsService)
         {
             _appUpdate = appUpdate;
             _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));

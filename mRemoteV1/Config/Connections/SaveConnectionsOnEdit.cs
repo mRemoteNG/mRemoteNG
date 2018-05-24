@@ -7,9 +7,9 @@ namespace mRemoteNG.Config.Connections
 {
     public class SaveConnectionsOnEdit
     {
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
-        public SaveConnectionsOnEdit(ConnectionsService connectionsService)
+        public SaveConnectionsOnEdit(IConnectionsService connectionsService)
         {
             if (connectionsService == null)
                 throw new ArgumentNullException(nameof(connectionsService));

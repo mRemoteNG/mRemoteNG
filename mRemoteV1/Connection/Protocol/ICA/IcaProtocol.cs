@@ -18,10 +18,10 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		private AxICAClient _icaClient;
 		private ConnectionInfo _info;
         private readonly FrmMain _frmMain;
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 		
         #region Public Methods
-		public IcaProtocol(FrmMain frmMain, ConnectionsService connectionsService)
+		public IcaProtocol(FrmMain frmMain, IConnectionsService connectionsService)
 		{
 		    _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
 		    _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

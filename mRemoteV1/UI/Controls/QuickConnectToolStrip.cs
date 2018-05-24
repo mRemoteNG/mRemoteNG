@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Controls
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
 
 	    public IConnectionInitiator ConnectionInitiator { get; set; }
-        public ConnectionsService ConnectionsService { get; set; }
+        public IConnectionsService ConnectionsService { get; set; }
 
         public QuickConnectToolStrip()
         {

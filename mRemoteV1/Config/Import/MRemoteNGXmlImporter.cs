@@ -15,10 +15,10 @@ namespace mRemoteNG.Config.Import
 	// ReSharper disable once InconsistentNaming
 	public class MRemoteNGXmlImporter : IConnectionImporter<string>
 	{
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 	    private readonly IWin32Window _dialogWindowParent;
 
-	    public MRemoteNGXmlImporter(ConnectionsService connectionsService, IWin32Window dialogWindowParent)
+	    public MRemoteNGXmlImporter(IConnectionsService connectionsService, IWin32Window dialogWindowParent)
 	    {
 	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	        _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));

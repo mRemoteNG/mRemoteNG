@@ -15,9 +15,9 @@ namespace mRemoteNG.Connection.Protocol
         private ExternalTool _externalTool;
         private IntPtr _handle;
         private Process _process;
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
-	    public IntegratedProgram(ExternalToolsService externalToolsService, ConnectionsService connectionsService)
+	    public IntegratedProgram(ExternalToolsService externalToolsService, IConnectionsService connectionsService)
 	    {
 	        _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
 	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

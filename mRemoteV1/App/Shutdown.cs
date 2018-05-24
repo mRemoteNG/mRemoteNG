@@ -14,11 +14,11 @@ namespace mRemoteNG.App
     public class Shutdown
     {
         private readonly SettingsSaver _settingsSaver;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private readonly FrmMain _frmMain;
         private static string _updateFilePath;
 
-        public Shutdown(SettingsSaver settingsSaver, ConnectionsService connectionsService, FrmMain frmMain)
+        public Shutdown(SettingsSaver settingsSaver, IConnectionsService connectionsService, FrmMain frmMain)
         {
             _settingsSaver = settingsSaver.ThrowIfNull(nameof(settingsSaver));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

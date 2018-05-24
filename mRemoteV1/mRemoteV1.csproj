@@ -233,6 +233,7 @@
     <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
     <Compile Include="Connection\IConnectionInitiator.cs" />
+    <Compile Include="Connection\IConnectionsService.cs" />
     <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />

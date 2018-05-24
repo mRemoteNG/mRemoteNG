@@ -33,7 +33,7 @@ namespace mRemoteNGTests.Connection.Protocol
         public void OneTimeSetUp()
         {
             _connectionInitiator = Substitute.For<IConnectionInitiator>();
-            var extTool = new ExternalTool(_connectionInitiator, Substitute.For<ConnectionsService>())
+            var extTool = new ExternalTool(_connectionInitiator, Substitute.For<IConnectionsService>())
             {
                 DisplayName = "notepad",
                 FileName = @"%windir%\system32\notepad.exe",
@@ -48,7 +48,7 @@ namespace mRemoteNGTests.Connection.Protocol
 		[Apartment(ApartmentState.STA)]
 		public void CanStartExternalApp()
 		{
-			var sut = new IntegratedProgram(_externalToolsService, Substitute.For<ConnectionsService>());
+			var sut = new IntegratedProgram(_externalToolsService, Substitute.For<IConnectionsService>());
 			sut.InterfaceControl = BuildInterfaceControl("notepad", sut);
 			sut.Initialize();
 			var appStarted = sut.Connect();
@@ -60,7 +60,7 @@ namespace mRemoteNGTests.Connection.Protocol
 		[Apartment(ApartmentState.STA)]
 		public void ConnectingToExternalAppThatDoesntExistDoesNothing()
 		{
-			var sut = new IntegratedProgram(_externalToolsService, Substitute.For<ConnectionsService>());
+			var sut = new IntegratedProgram(_externalToolsService, Substitute.For<IConnectionsService>());
 			sut.InterfaceControl = BuildInterfaceControl("doesntExist", sut);
 			var appInitialized = sut.Initialize();
 			Assert.That(appInitialized, Is.False);

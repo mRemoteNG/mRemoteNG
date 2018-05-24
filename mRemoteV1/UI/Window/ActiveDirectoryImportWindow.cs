@@ -13,10 +13,10 @@ namespace mRemoteNG.UI.Window
     {
         private readonly Func<ConnectionInfo> _getSelectedNodeFunc;
         private readonly Import _import;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private string _currentDomain;
 
-        public ActiveDirectoryImportWindow(Func<ConnectionInfo> getSelectedNodeFunc, Import import, ConnectionsService connectionsService)
+        public ActiveDirectoryImportWindow(Func<ConnectionInfo> getSelectedNodeFunc, Import import, IConnectionsService connectionsService)
         {
             _getSelectedNodeFunc = getSelectedNodeFunc;
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

@@ -17,10 +17,10 @@ namespace mRemoteNG.Config.Settings
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
         private readonly IConnectionInitiator _connectionInitiator;
         private readonly ExternalToolsService _externalToolsService;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
         public ExternalAppsLoader(MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip, 
-            IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService, ConnectionsService connectionsService)
+            IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService, IConnectionsService connectionsService)
         {
             _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
             _externalToolsToolStrip = externalToolsToolStrip.ThrowIfNull(nameof(externalToolsToolStrip));

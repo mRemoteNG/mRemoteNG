@@ -42,7 +42,7 @@ namespace mRemoteNG.UI.Window
         private ToolStripSeparator _toolStripSeparator1;
         private FilteredPropertyGrid _pGrid;
         private ThemeManager _themeManager;
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
         private AbstractConnectionRecord _selectedTreeNode;
         public AbstractConnectionRecord SelectedTreeNode
@@ -268,7 +268,7 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 
-        public ConfigWindow(DockContent panel, ConnectionsService connectionsService)
+        public ConfigWindow(DockContent panel, IConnectionsService connectionsService)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             WindowType = WindowType.Config;

@@ -16,9 +16,9 @@ namespace mRemoteNG.Connection.Protocol
     {
         private readonly ExternalToolsService _externalToolsService;
         private readonly FrmMain _frmMain;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
-        public ProtocolFactory(ExternalToolsService externalToolsService, FrmMain frmMain, ConnectionsService connectionsService)
+        public ProtocolFactory(ExternalToolsService externalToolsService, FrmMain frmMain, IConnectionsService connectionsService)
         {
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));
             _frmMain = frmMain.ThrowIfNull(nameof(frmMain));

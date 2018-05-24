@@ -20,7 +20,7 @@ namespace mRemoteNG.App
         }
 
         // TODO - this is only a property to break up a circular dependency. move this to ctor when able
-        public ConnectionsService ConnectionsService { get; set; }
+        public IConnectionsService ConnectionsService { get; set; }
 
         public void ImportFromFile(ContainerInfo importDestinationContainer)
         {

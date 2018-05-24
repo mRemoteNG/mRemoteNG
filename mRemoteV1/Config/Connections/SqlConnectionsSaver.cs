@@ -21,11 +21,11 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
     {
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private readonly SaveFilter _saveFilter;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
 
-        public SqlConnectionsSaver(SaveFilter saveFilter, ConnectionsService connectionsService, DatabaseConnectorFactory databaseConnectorFactory)
+        public SqlConnectionsSaver(SaveFilter saveFilter, IConnectionsService connectionsService, DatabaseConnectorFactory databaseConnectorFactory)
         {
             _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
             _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));

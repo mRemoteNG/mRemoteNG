@@ -24,11 +24,11 @@ namespace mRemoteNG.App
         private readonly ConnectionIconLoader _connectionIconLoader;
         private readonly FrmMain _frmMain;
 	    private readonly Windows _windows;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
         private readonly CompatibilityChecker _compatibilityChecker;
 
-        public Startup(FrmMain frmMain, Windows windows, ConnectionsService connectionsService,
+        public Startup(FrmMain frmMain, Windows windows, IConnectionsService connectionsService,
             AppUpdater appUpdate, DatabaseConnectorFactory databaseConnectorFactory, CompatibilityChecker compatibilityChecker)
         {
             _frmMain = frmMain.ThrowIfNull(nameof(frmMain));

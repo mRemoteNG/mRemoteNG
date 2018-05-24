@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Controls
 	    {
 	    }
 
-		public MultiSshToolStrip(ConnectionsService connectionsService)
+		public MultiSshToolStrip(IConnectionsService connectionsService)
 		{
 			InitializeComponent();
 			_multiSshController = new MultiSSHController(_txtMultiSsh, connectionsService);

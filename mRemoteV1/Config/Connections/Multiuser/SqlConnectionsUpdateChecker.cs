@@ -15,11 +15,11 @@ namespace mRemoteNG.Config.Connections
     {
         private readonly SqlDatabaseConnector _sqlConnector;
         private readonly SqlCommand _sqlQuery;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private DateTime _lastUpdateTime;
         private DateTime _lastDatabaseUpdateTime;
 
-        public SqlConnectionsUpdateChecker(ConnectionsService connectionsService, DatabaseConnectorFactory databaseConnectorFactory)
+        public SqlConnectionsUpdateChecker(IConnectionsService connectionsService, DatabaseConnectorFactory databaseConnectorFactory)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));

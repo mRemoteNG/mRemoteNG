@@ -23,7 +23,7 @@ namespace mRemoteNG.Config.Serializers.Xml
 {
 	public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
 	{
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
         private XmlDocument _xmlDocument;
         private double _confVersion;
         private XmlConnectionsDecryptor _decryptor;
@@ -34,7 +34,7 @@ namespace mRemoteNG.Config.Serializers.Xml
 
         public Func<SecureString> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(ConnectionsService connectionsService, IWin32Window dialogWindowParent, Func<SecureString> authenticationRequestor = null)
+        public XmlConnectionsDeserializer(IConnectionsService connectionsService, IWin32Window dialogWindowParent, Func<SecureString> authenticationRequestor = null)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));

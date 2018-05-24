@@ -11,14 +11,14 @@ namespace mRemoteNG.Config.Connections.Multiuser
     {
         private readonly Timer _updateTimer;
         private readonly IConnectionsUpdateChecker _updateChecker;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
         public double TimerIntervalInMilliseconds
         {
             get { return _updateTimer.Interval; }
         }
 
-        public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker, ConnectionsService connectionsService)
+        public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker, IConnectionsService connectionsService)
         {
             _updateChecker = updateChecker.ThrowIfNull(nameof(updateChecker));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

@@ -19,19 +19,19 @@ namespace mRemoteNG.UI.Forms
         private readonly IConnectionInitiator _connectionInitiator;
 	    private readonly Action<WindowType> _showWindowAction;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private readonly AppUpdater _appUpdater;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
         private readonly FrmMain _frmMain;
 
         public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, 
-            ConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory, FrmMain frmMain) 
+            IConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory, FrmMain frmMain) 
             : this(connectionInitiator, showWindowAction, notificationAreaIconBuilder, connectionsService, appUpdater, databaseConnectorFactory, Language.strStartupExit, frmMain)
         {
         }
 
         public frmOptions(IConnectionInitiator connectionInitiator, Action<WindowType> showWindowAction, Func<NotificationAreaIcon> notificationAreaIconBuilder, 
-            ConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory, string pageName, FrmMain frmMain)
+            IConnectionsService connectionsService, AppUpdater appUpdater, DatabaseConnectorFactory databaseConnectorFactory, string pageName, FrmMain frmMain)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 	        _showWindowAction = showWindowAction.ThrowIfNull(nameof(showWindowAction));

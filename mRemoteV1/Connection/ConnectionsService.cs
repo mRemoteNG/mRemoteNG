@@ -22,7 +22,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Connection
 {
-    public class ConnectionsService
+    public class ConnectionsService : IConnectionsService
     {
         private static readonly object SaveLock = new object();
         private bool _showDialogWhenLoadingConnections;

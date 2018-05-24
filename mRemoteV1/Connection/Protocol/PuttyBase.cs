@@ -16,9 +16,9 @@ namespace mRemoteNG.Connection.Protocol
 	{	
 		private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
 	    private bool _isPuttyNg;
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
-	    public PuttyBase(ConnectionsService connectionsService)
+	    public PuttyBase(IConnectionsService connectionsService)
 	    {
 	        _connectionsService = connectionsService;
 	    }

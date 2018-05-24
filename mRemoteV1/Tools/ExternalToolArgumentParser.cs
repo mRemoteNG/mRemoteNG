@@ -10,9 +10,9 @@ namespace mRemoteNG.Tools
 	public class ExternalToolArgumentParser
     {
         private readonly ConnectionInfo _connectionInfo;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
-        public ExternalToolArgumentParser(ConnectionInfo connectionInfo, ConnectionsService connectionsService)
+        public ExternalToolArgumentParser(ConnectionInfo connectionInfo, IConnectionsService connectionsService)
         {
             _connectionInfo = connectionInfo;
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

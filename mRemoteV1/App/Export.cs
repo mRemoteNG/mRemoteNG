@@ -21,11 +21,11 @@ namespace mRemoteNG.App
 {
 	public class Export
 	{
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 	    private readonly ICredentialRepositoryList _credentialRepositoryList;
 	    private readonly IWin32Window _dialogWindowParent;
 
-	    public Export(ICredentialRepositoryList credentialRepositoryList, ConnectionsService connectionsService, IWin32Window dialogWindowParent)
+	    public Export(ICredentialRepositoryList credentialRepositoryList, IConnectionsService connectionsService, IWin32Window dialogWindowParent)
 	    {
 	        _credentialRepositoryList = credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
 	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

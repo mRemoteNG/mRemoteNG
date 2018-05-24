@@ -23,7 +23,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [SetUp]
         public void Setup()
         {
-            var connectionService = Substitute.For<ConnectionsService>();
+            var connectionService = Substitute.For<IConnectionsService>();
             _protocolList = new ProtocolList();
             _protocol1 = new ProtocolTelnet(connectionService);
             _protocol2 = new ProtocolSSH2(connectionService);

@@ -3,7 +3,7 @@ namespace mRemoteNG.Connection.Protocol.Rlogin
 	public class ProtocolRlogin : PuttyBase
 	{
 				
-		public ProtocolRlogin(ConnectionsService connectionsService)
+		public ProtocolRlogin(IConnectionsService connectionsService)
             : base(connectionsService)
 		{
 			this.PuttyProtocol = Putty_Protocol.rlogin;

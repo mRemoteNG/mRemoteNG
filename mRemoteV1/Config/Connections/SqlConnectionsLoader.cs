@@ -11,9 +11,9 @@ namespace mRemoteNG.Config.Connections
     public class SqlConnectionsLoader
     {
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
-        public SqlConnectionsLoader(DatabaseConnectorFactory databaseConnectorFactory, ConnectionsService connectionsService)
+        public SqlConnectionsLoader(DatabaseConnectorFactory databaseConnectorFactory, IConnectionsService connectionsService)
         {
             _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

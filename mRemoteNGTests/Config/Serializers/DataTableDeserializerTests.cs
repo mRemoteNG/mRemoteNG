@@ -19,7 +19,7 @@ namespace mRemoteNGTests.Config.Serializers
         {
             var model = CreateConnectionTreeModel();
             var dataTable = CreateDataTable(model.RootNodes[0]);
-            _deserializer = new DataTableDeserializer(Substitute.For<ConnectionsService>());
+            _deserializer = new DataTableDeserializer(Substitute.For<IConnectionsService>());
             var output = _deserializer.Deserialize(dataTable);
             Assert.That(output.GetRecursiveChildList().Count(), Is.EqualTo(model.GetRecursiveChildList().Count()));
         }
@@ -28,7 +28,7 @@ namespace mRemoteNGTests.Config.Serializers
         public void WeCanDeserializeASingleEntry()
         {
             var dataTable = CreateDataTable(new ConnectionInfo());
-            _deserializer = new DataTableDeserializer(Substitute.For<ConnectionsService>());
+            _deserializer = new DataTableDeserializer(Substitute.For<IConnectionsService>());
             var output = _deserializer.Deserialize(dataTable);
             Assert.That(output.GetRecursiveChildList().Count(), Is.EqualTo(1));
         }

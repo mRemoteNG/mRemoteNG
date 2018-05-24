@@ -10,11 +10,11 @@ namespace mRemoteNG.Config.Connections
 {
 	public class XmlConnectionsLoader
 	{
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
         private readonly string _connectionFilePath;
 	    private readonly IWin32Window _dialogWindowParent;
 
-        public XmlConnectionsLoader(string connectionFilePath, ConnectionsService connectionsService, IWin32Window dialogWindowParent)
+        public XmlConnectionsLoader(string connectionFilePath, IConnectionsService connectionsService, IWin32Window dialogWindowParent)
         {
             _dialogWindowParent = dialogWindowParent;
             _connectionFilePath = connectionFilePath.ThrowIfNullOrEmpty(nameof(connectionFilePath));

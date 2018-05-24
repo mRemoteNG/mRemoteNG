@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Controls
         private readonly Export _export;
         private readonly ExternalToolsService _externalToolsService;
         private readonly Import _import;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
         // TODO - this is only a property to break up a circular dependency
         public Action<WindowType> ShowWindowAction { get; set; } = type => { };
@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Controls
 		    Export export, 
 		    ExternalToolsService externalToolsService, 
 		    Import import,
-		    ConnectionsService connectionsService)
+		    IConnectionsService connectionsService)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _connectionTree = connectionTree.ThrowIfNull(nameof(connectionTree));

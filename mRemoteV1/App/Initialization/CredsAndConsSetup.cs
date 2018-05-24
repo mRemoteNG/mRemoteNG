@@ -7,9 +7,9 @@ namespace mRemoteNG.App.Initialization
 {
 	public class CredsAndConsSetup
 	{
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
-	    public CredsAndConsSetup(ConnectionsService connectionsService)
+	    public CredsAndConsSetup(IConnectionsService connectionsService)
 	    {
 	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	    }

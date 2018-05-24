@@ -22,10 +22,10 @@ namespace mRemoteNG.UI.Window
 	    private readonly ExternalToolsService _externalToolsService;
 	    private readonly Func<Optional<ConnectionInfo>> _getCurrentlySelectedConnection;
 	    private readonly IWin32Window _dialogWindowParent;
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
         public ExternalToolsWindow(IConnectionInitiator connectionInitiator, ExternalToolsService externalToolsService,
-            Func<Optional<ConnectionInfo>> getCurrentlySelectedConnection, IWin32Window dialogWindowParent, ConnectionsService connectionsService)
+            Func<Optional<ConnectionInfo>> getCurrentlySelectedConnection, IWin32Window dialogWindowParent, IConnectionsService connectionsService)
         {
             _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
             _externalToolsService = externalToolsService.ThrowIfNull(nameof(externalToolsService));

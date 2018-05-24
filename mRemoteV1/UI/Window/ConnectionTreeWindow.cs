@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionTreeWindow
 	{
 		private readonly IConnectionInitiator _connectionInitiator;
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 		private ThemeManager _themeManager;
 	    private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
 
@@ -35,7 +35,7 @@ namespace mRemoteNG.UI.Window
             set { olvConnections = value; }
 	    }
 
-		public ConnectionTreeWindow(DockContent panel, IConnectionInitiator connectionInitiator, ConnectionsService connectionsService)
+		public ConnectionTreeWindow(DockContent panel, IConnectionInitiator connectionInitiator, IConnectionsService connectionsService)
 		{
 		    _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 		    WindowType = WindowType.Tree;

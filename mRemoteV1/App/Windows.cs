@@ -27,7 +27,7 @@ namespace mRemoteNG.App
         private readonly Func<ExternalToolsWindow> _externalToolsWindowBuilder;
         private readonly Func<PortScanWindow> _portScanWindowBuilder;
         private readonly Func<ActiveDirectoryImportWindow> _activeDirectoryImportWindowBuilder;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private readonly AppUpdater _appUpdater;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
         private readonly FrmMain _frmMain;
@@ -48,7 +48,7 @@ namespace mRemoteNG.App
             Func<UpdateWindow> updateWindowBuilder,
             Func<NotificationAreaIcon> notificationAreaIconBuilder,
             Func<ExternalToolsWindow> externalToolsWindowBuilder, 
-            ConnectionsService connectionsService, 
+            IConnectionsService connectionsService, 
             Func<PortScanWindow> portScanWindowBuilder, 
             Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder, 
             AppUpdater appUpdater, 

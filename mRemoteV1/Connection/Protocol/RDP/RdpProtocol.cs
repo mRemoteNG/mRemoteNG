@@ -31,7 +31,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private bool _redirectKeys;
         private bool _alertOnIdleDisconnect;
         private readonly FrmMain _frmMain;
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
         #region Properties
         public bool SmartSize
@@ -93,7 +93,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 
         #region Constructors
-        public RdpProtocol(FrmMain frmMain, ConnectionsService connectionsService)
+        public RdpProtocol(FrmMain frmMain, IConnectionsService connectionsService)
         {
             _frmMain = frmMain;
             _connectionsService = connectionsService;

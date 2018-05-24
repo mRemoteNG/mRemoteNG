@@ -3,7 +3,7 @@ namespace mRemoteNG.Connection.Protocol.Telnet
 	public class ProtocolTelnet : PuttyBase
 	{
 				
-		public ProtocolTelnet(ConnectionsService connectionsService) : base(connectionsService)
+		public ProtocolTelnet(IConnectionsService connectionsService) : base(connectionsService)
 		{
 			this.PuttyProtocol = Putty_Protocol.telnet;
 		}

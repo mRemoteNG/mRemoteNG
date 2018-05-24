@@ -24,7 +24,7 @@ namespace mRemoteNG.Tools
 	    private bool _tryIntegrate;
 	    private bool _showOnToolbar = true;
 	    private bool _runElevated;
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
 	    #region Public Properties
 
@@ -102,7 +102,7 @@ namespace mRemoteNG.Tools
 
 	    #endregion
 		
-		public ExternalTool(IConnectionInitiator connectionInitiator, ConnectionsService connectionsService)
+		public ExternalTool(IConnectionInitiator connectionInitiator, IConnectionsService connectionsService)
 		{
 		    _connectionInitiator = connectionInitiator.ThrowIfNull(nameof(connectionInitiator));
 		    _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));

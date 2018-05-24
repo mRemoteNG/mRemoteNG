@@ -35,7 +35,7 @@ namespace mRemoteNGTests.Tools
                 MacAddress = TestString,
                 UserField = TestString
             };
-            _argumentParser = new ExternalToolArgumentParser(connectionInfo, Substitute.For<ConnectionsService>());
+            _argumentParser = new ExternalToolArgumentParser(connectionInfo, Substitute.For<IConnectionsService>());
         }
 
         [OneTimeTearDown]
@@ -53,7 +53,7 @@ namespace mRemoteNGTests.Tools
         [Test]
         public void NullConnectionInfoResultsInEmptyVariables()
         {
-            var parser = new ExternalToolArgumentParser(null, Substitute.For<ConnectionsService>());
+            var parser = new ExternalToolArgumentParser(null, Substitute.For<IConnectionsService>());
             var parsedText = parser.ParseArguments("test %USERNAME% test");
             Assert.That(parsedText, Is.EqualTo("test  test"));
         }

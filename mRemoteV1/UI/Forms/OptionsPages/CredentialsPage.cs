@@ -7,9 +7,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	public partial class CredentialsPage : OptionsPage
 	{
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
-        public CredentialsPage(ConnectionsService connectionsService)
+        public CredentialsPage(IConnectionsService connectionsService)
         {
             _connectionsService = connectionsService;
             InitializeComponent();

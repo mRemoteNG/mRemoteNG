@@ -14,17 +14,17 @@ namespace mRemoteNG.Tools
         private ArrayList quickConnectConnections = new ArrayList();
         private ArrayList previousCommands = new ArrayList();
         private int previousCommandIndex = 0;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
 
         public int CommandHistoryLength { get; set; } = 100;
 
-        public MultiSSHController(TextBox txtBox, ConnectionsService connectionsService)
+        public MultiSSHController(TextBox txtBox, IConnectionsService connectionsService)
         {
             DecorateTextBox(txtBox);
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
-        public MultiSSHController(ToolStripTextBox txtBox, ConnectionsService connectionsService)
+        public MultiSSHController(ToolStripTextBox txtBox, IConnectionsService connectionsService)
         {
             _connectionsService = connectionsService;
             DecorateTextBox(txtBox.TextBox);

@@ -14,13 +14,13 @@ namespace mRemoteNGTests.Connection
 	public class ConnectionInfoTests
     {
         private ConnectionInfo _connectionInfo;
-        private ConnectionsService _connectionsService;
+        private IConnectionsService _connectionsService;
         private const string TestDomain = "somedomain";
 
         [SetUp]
         public void Setup()
         {
-            _connectionsService = Substitute.For<ConnectionsService>();
+            _connectionsService = Substitute.For<IConnectionsService>();
             _connectionInfo = new ConnectionInfo();
         }
 

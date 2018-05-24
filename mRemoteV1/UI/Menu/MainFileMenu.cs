@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Menu
         public Export Export { get; set; }
         public Shutdown Shutdown { get; set; }
         public Import Import { get; set; }
-        public ConnectionsService ConnectionsService { get; set; }
+        public IConnectionsService ConnectionsService { get; set; }
         public IWin32Window DialogWindowParent { get; set; }
 
         public MainFileMenu()

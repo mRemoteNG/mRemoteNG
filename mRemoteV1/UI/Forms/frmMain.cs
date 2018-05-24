@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Forms
         private readonly Shutdown _shutdown;
         private readonly ICredentialRepositoryList _credentialRepositoryList;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private readonly Import _import;
         private readonly AppUpdater _appUpdater;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;

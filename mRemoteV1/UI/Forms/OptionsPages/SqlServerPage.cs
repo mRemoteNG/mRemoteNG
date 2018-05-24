@@ -12,10 +12,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 	public partial class SqlServerPage
     {
         private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
-        private readonly ConnectionsService _connectionsService;
+        private readonly IConnectionsService _connectionsService;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
 
-        public SqlServerPage(ConnectionsService connectionsService, DatabaseConnectorFactory databaseConnectorFactory)
+        public SqlServerPage(IConnectionsService connectionsService, DatabaseConnectorFactory databaseConnectorFactory)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));

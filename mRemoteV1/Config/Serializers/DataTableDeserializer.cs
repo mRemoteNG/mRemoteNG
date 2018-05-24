@@ -18,9 +18,9 @@ namespace mRemoteNG.Config.Serializers
 {
 	public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
 	{
-	    private readonly ConnectionsService _connectionsService;
+	    private readonly IConnectionsService _connectionsService;
 
-	    public DataTableDeserializer(ConnectionsService connectionsService)
+	    public DataTableDeserializer(IConnectionsService connectionsService)
 	    {
 	        _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
 	    }
