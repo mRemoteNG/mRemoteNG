@@ -671,5 +671,11 @@
     <Setting Name="MultiSshToolbarVisible" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="CreateEmptyPanelOnStartUp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="StartUpPanelName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">General</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

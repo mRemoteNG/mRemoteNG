@@ -176,7 +176,13 @@ namespace mRemoteNG.UI.Forms
 
             Opacity = 1;
             //Fix missing general panel at the first run
-            new PanelAdder().AddPanel();
+            if (Settings.Default.CreateEmptyPanelOnStartUp)
+            {
+                var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
+                    ? Settings.Default.StartUpPanelName
+                    : Language.strNewPanel;
+                new PanelAdder().AddPanel(panelName);
+            }
         }
 
         private void ApplyLanguage()
