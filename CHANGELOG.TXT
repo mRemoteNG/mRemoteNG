@@ -1,4 +1,4 @@
-1.76.4 Alpha 6 (2018-xx-xx):
+1.76.4 Alpha 6 (2018-06-03):
 
 Features/Enhancements:
 ----------------------
@@ -6,6 +6,7 @@ Features/Enhancements:
 #942: Improved Russian translation of several items
 #924: Notification for "No Host Specified" when clicking folders in quick-connect menu
 #902: Menu bar can once again be moved. View -> "Lock toolbar positions" now also locks the menu position
+Added option for creating an empty panel on startup
 
 Fixes:
 ------
