@@ -310,8 +310,24 @@ namespace mRemoteNG.UI.Controls
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            RefreshObject(sender);
+			// disable filtering if necessary. prevents RefreshObjects from
+			// throwing an exception
+			var filteringEnabled = IsFiltering;
+			var filter = ModelFilter;
+			if (filteringEnabled)
+			{
+				ResetColumnFiltering();
+			}
+
+			RefreshObject(sender);
 			AutoResizeColumn(Columns[0]);
+
+			// turn filtering back on
+			if (filteringEnabled)
+			{
+				ModelFilter = filter;
+				UpdateFiltering();
+			}
 		}
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)

@@ -1,3 +1,10 @@
+1.76.5 (2018-xx-xx):
+
+Fixes:
+------
+#991: Error when deleting host in filtered view
+
+
 1.76.4 Alpha 6 (2018-06-03):
 
 Features/Enhancements:
