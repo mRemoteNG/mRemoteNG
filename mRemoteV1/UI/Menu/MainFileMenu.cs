@@ -96,6 +96,7 @@ namespace mRemoteNG.UI.Menu
             Size = new System.Drawing.Size(37, 20);
             Text = Language.strMenuFile;
             //DropDownOpening += mMenFile_DropDownOpening;
+            DropDownClosed += OnDropDownClosed;
             // 
             // mMenFileNewConnection
             // 
@@ -343,6 +344,16 @@ namespace mRemoteNG.UI.Menu
                     _mMenReconnectAll.Text = Language.strMenuReconnectAll;
                     break;
             }
+        }
+
+        private void OnDropDownClosed(object sender, EventArgs eventArgs)
+        {
+            _mMenFileNewConnection.Enabled = true;
+            _mMenFileNewFolder.Enabled = true;
+            _mMenFileDelete.Enabled = true;
+            _mMenFileRename.Enabled = true;
+            _mMenFileDuplicate.Enabled = true;
+            _mMenReconnectAll.Enabled = true;
         }
 
         private void mMenFileNewConnection_Click(object sender, EventArgs e)
