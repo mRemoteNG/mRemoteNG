@@ -262,6 +262,9 @@ namespace mRemoteNG.UI.Controls
 
         private void AddNode(ConnectionInfo newNode)
         {
+            if (SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttyRoot || SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
+                return;
+
             // use root node if no node is selected
             ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);

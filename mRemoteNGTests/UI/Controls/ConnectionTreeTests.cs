@@ -60,5 +60,41 @@ namespace mRemoteNGTests.UI.Controls
 			Assert.That(_connectionTree.FilteredObjects, Does.Not.Contain(conDontShow));
 			Assert.That(_connectionTree.FilteredObjects, Does.Contain(con2));
 		}
-	}
+
+	    [Test]
+	    [Apartment(ApartmentState.STA)]
+	    public void CannotAddConnectionToPuttySessionNode()
+	    {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+            var puttyRoot = new RootNodeInfo(RootNodeType.PuttySessions);
+	        connectionTreeModel.AddRootNode(root);
+	        connectionTreeModel.AddRootNode(puttyRoot);
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+
+	        _connectionTree.SelectedObject = puttyRoot;
+	        _connectionTree.AddConnection();
+
+	        Assert.That(puttyRoot.Children, Is.Empty);
+	    }
+
+	    [Test]
+	    [Apartment(ApartmentState.STA)]
+	    public void CannotAddFolderToPuttySessionNode()
+	    {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+	        var puttyRoot = new RootNodeInfo(RootNodeType.PuttySessions);
+	        connectionTreeModel.AddRootNode(root);
+	        connectionTreeModel.AddRootNode(puttyRoot);
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+
+	        _connectionTree.SelectedObject = puttyRoot;
+	        _connectionTree.AddFolder();
+
+	        Assert.That(puttyRoot.Children, Is.Empty);
+	    }
+    }
 }
