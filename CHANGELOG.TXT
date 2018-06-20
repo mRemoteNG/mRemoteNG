@@ -33,6 +33,8 @@ Fixes:
 
 Fixes:
 ------
+#999: Some hotkeys stop working if File menu was called when PuTTy Saved Sessions was selected
+#998: Can sometimes add connection under PuTTY Sessions node
 #899: DoNotPlay is Case Sensitive in XML Serialization
 
 
