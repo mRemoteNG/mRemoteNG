@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1004: Duplicating root or PuTTy node through hotkey causes unhandled exception
 #1002: Disabling filtering without clearing keyword leaves filtered state
 #1001: Connection tree context menu hotkeys stop working and disappear in some cases
 #999: Some hotkeys stop working if File menu was called when PuTTy Saved Sessions was selected
