@@ -42,13 +42,23 @@ namespace mRemoteNG.UI.Window
 			olvConnections.ContextMenuStrip = _contextMenu;
 			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
-		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
+		    Settings.Default.PropertyChanged += OnAppSettingsChanged;
             olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
         }
 
-	    
+	    private void OnAppSettingsChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
+	    {
+	        if (propertyChangedEventArgs.PropertyName == nameof(Settings.UseFilterSearch))
+	        {
+	            ConnectionTree.UseFiltering = Settings.Default.UseFilterSearch;
+	            ApplyFiltering();
+            }
 
-        #region Form Stuff
+	        SetConnectionTreeEventHandlers();
+	    }
+
+
+	    #region Form Stuff
         private void Tree_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
@@ -223,25 +233,30 @@ namespace mRemoteNG.UI.Window
 		}
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
-		{
-		    if (Settings.Default.UseFilterSearch)
-		    {
-		        if (txtSearch.Text == "" || txtSearch.Text == Language.strSearchPrompt)
-		        {
-		            olvConnections.UseFiltering = false;
-		            olvConnections.ResetColumnFiltering();
-                    return;
-		        }
-		        olvConnections.UseFiltering = true;
-		        _connectionTreeSearchTextFilter.FilterText = txtSearch.Text;
-		        olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
-		    }
-		    else
-		    {
-                if (txtSearch.Text == "") return;
-                olvConnections.NodeSearcher?.SearchByName(txtSearch.Text);
-                JumpToNode(olvConnections.NodeSearcher?.CurrentMatch);
-		    }
+        {
+            ApplyFiltering();
+        }
+
+	    private void ApplyFiltering()
+	    {
+	        if (Settings.Default.UseFilterSearch)
+	        {
+	            if (txtSearch.Text == "" || txtSearch.Text == Language.strSearchPrompt)
+	            {
+	                olvConnections.UseFiltering = false;
+	                olvConnections.ResetColumnFiltering();
+	                return;
+	            }
+	            olvConnections.UseFiltering = true;
+	            _connectionTreeSearchTextFilter.FilterText = txtSearch.Text;
+	            olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
+	        }
+	        else
+	        {
+	            if (txtSearch.Text == "") return;
+	            olvConnections.NodeSearcher?.SearchByName(txtSearch.Text);
+	            JumpToNode(olvConnections.NodeSearcher?.CurrentMatch);
+	        }
         }
 
 	    private void JumpToNode(ConnectionInfo connectionInfo)
