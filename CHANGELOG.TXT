@@ -4,6 +4,8 @@ Fixes:
 ------
 #1002: Disabling filtering without clearing keyword leaves filtered state
 #1001: Connection tree context menu hotkeys stop working and disappear in some cases
+#999: Some hotkeys stop working if File menu was called when PuTTy Saved Sessions was selected
+#998: Can sometimes add connection under PuTTY Sessions node
 #991: Error when deleting host in filtered view
 
 
@@ -35,8 +37,6 @@ Fixes:
 
 Fixes:
 ------
-#999: Some hotkeys stop working if File menu was called when PuTTy Saved Sessions was selected
-#998: Can sometimes add connection under PuTTY Sessions node
 #899: DoNotPlay is Case Sensitive in XML Serialization
 
 
