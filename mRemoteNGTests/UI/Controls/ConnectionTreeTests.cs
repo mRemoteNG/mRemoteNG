@@ -96,5 +96,68 @@ namespace mRemoteNGTests.UI.Controls
 
 	        Assert.That(puttyRoot.Children, Is.Empty);
 	    }
+
+	    [Test]
+	    [Apartment(ApartmentState.STA)]
+	    public void CannotDuplicateRootConnectionNode()
+	    {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+	        connectionTreeModel.AddRootNode(root);
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+
+	        _connectionTree.SelectedObject = root;
+            _connectionTree.DuplicateSelectedNode();
+
+	        Assert.That(connectionTreeModel.RootNodes, Has.One.Items);
+	    }
+
+	    [Test]
+	    [Apartment(ApartmentState.STA)]
+	    public void CannotDuplicateRootPuttyNode()
+	    {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var puttyRoot = new RootNodeInfo(RootNodeType.PuttySessions);
+	        connectionTreeModel.AddRootNode(puttyRoot);
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+
+	        _connectionTree.SelectedObject = puttyRoot;
+	        _connectionTree.DuplicateSelectedNode();
+
+	        Assert.That(connectionTreeModel.RootNodes, Has.One.Items);
+	    }
+
+	    [Test]
+	    [Apartment(ApartmentState.STA)]
+	    public void CannotDuplicatePuttyConnectionNode()
+	    {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var puttyRoot = new RootNodeInfo(RootNodeType.PuttySessions);
+            var puttyConnection = new PuttySessionInfo();
+            puttyRoot.AddChild(puttyConnection);
+	        connectionTreeModel.AddRootNode(puttyRoot);
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
+
+            _connectionTree.SelectedObject = puttyConnection;
+	        _connectionTree.DuplicateSelectedNode();
+
+	        Assert.That(puttyRoot.Children, Has.One.Items);
+	    }
+
+	    [Test]
+	    [Apartment(ApartmentState.STA)]
+	    public void DuplicatingWithNoNodeSelectedDoesNothing()
+	    {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var puttyRoot = new RootNodeInfo(RootNodeType.PuttySessions);
+	        connectionTreeModel.AddRootNode(puttyRoot);
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+
+            _connectionTree.SelectedObject = null;
+	        _connectionTree.DuplicateSelectedNode();
+
+	        Assert.That(connectionTreeModel.GetRecursiveChildList(), Has.One.Items);
+	    }
     }
 }

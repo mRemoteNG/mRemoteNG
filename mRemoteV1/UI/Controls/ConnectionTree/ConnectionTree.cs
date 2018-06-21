@@ -281,6 +281,9 @@ namespace mRemoteNG.UI.Controls
 
         public void DuplicateSelectedNode()
         {
+            if (SelectedNode == null)
+                return;
+
             var selectedNodeType = SelectedNode.GetTreeNodeType();
             if (selectedNodeType != TreeNodeType.Connection && selectedNodeType != TreeNodeType.Container)
                 return;
