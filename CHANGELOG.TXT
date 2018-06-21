@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1001: Connection tree context menu hotkeys stop working and disappear in some cases
 #991: Error when deleting host in filtered view
 
 
