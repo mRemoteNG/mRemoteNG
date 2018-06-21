@@ -14,7 +14,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-	public partial class ConnectionTreeWindow
+    public partial class ConnectionTreeWindow
 	{
 	    private readonly ConnectionContextMenu _contextMenu;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
@@ -100,8 +100,6 @@ namespace mRemoteNG.UI.Window
 	    private void SetConnectionTreeEventHandlers()
 	    {
 	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(MessageBox.Show);
-            olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
-            olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
             olvConnections.KeyDown += tvConnections_KeyDown;
             olvConnections.KeyPress += tvConnections_KeyPress;
             SetTreePostSetupActions();
@@ -177,24 +175,6 @@ namespace mRemoteNG.UI.Window
 		{
             olvConnections.AddFolder();
 		}
-
-        private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            _contextMenu.DisableShortcutKeys();
-        }
-
-        private void tvConnections_AfterLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            try
-            {
-                _contextMenu.EnableShortcutKeys();
-                ConnectionTree.ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
-        }
         #endregion
 
         #region Search
