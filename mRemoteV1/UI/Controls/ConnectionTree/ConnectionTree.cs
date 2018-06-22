@@ -328,6 +328,12 @@ namespace mRemoteNG.UI.Controls
             AutoResizeColumn(Columns[0]);
         }
 
+        protected override void UpdateFiltering()
+        {
+            base.UpdateFiltering();
+            AutoResizeColumn(Columns[0]);
+        }
+
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
 			// disable filtering if necessary. prevents RefreshObjects from
