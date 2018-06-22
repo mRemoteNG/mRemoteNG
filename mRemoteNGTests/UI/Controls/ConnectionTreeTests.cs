@@ -157,7 +157,7 @@ namespace mRemoteNGTests.UI.Controls
             _connectionTree.SelectedObject = null;
 	        _connectionTree.DuplicateSelectedNode();
 
-	        Assert.That(connectionTreeModel.GetRecursiveChildList(), Has.One.Items);
+	        Assert.That(connectionTreeModel.RootNodes, Has.One.Items);
 	    }
     }
 }
