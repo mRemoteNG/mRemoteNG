@@ -15,7 +15,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.UI.Controls
 {
-	public partial class ConnectionTree : TreeListView, IConnectionTree
+    public partial class ConnectionTree : TreeListView, IConnectionTree
     {
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
@@ -316,6 +316,16 @@ namespace mRemoteNG.UI.Controls
                 sortTargetAsContainer.SortRecursive(sortDirection);
             else
                 SelectedNode.Parent.SortRecursive(sortDirection);
+        }
+
+        /// <summary>
+        /// Expands all tree objects and recalculates the
+        /// column widths.
+        /// </summary>
+        public override void ExpandAll()
+        {
+            base.ExpandAll();
+            AutoResizeColumn(Columns[0]);
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)

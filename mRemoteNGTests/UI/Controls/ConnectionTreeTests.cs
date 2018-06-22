@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
@@ -8,7 +9,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Controls
 {
-	public class ConnectionTreeTests
+    public class ConnectionTreeTests
 	{
 		private ConnectionTreeSearchTextFilter _filter;
 		private ConnectionTree _connectionTree;
@@ -158,6 +159,30 @@ namespace mRemoteNGTests.UI.Controls
 	        _connectionTree.DuplicateSelectedNode();
 
 	        Assert.That(connectionTreeModel.RootNodes, Has.One.Items);
+	    }
+
+	    [Test]
+	    [Apartment(ApartmentState.STA)]
+	    public void ExpandingAllItemsUpdatesColumnWidthAppropriately()
+	    {
+            var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+            connectionTreeModel.AddRootNode(root);
+	        ContainerInfo parent = root;
+	        foreach (var i in Enumerable.Repeat("", 8))
+	        {
+                var newContainer = new ContainerInfo {IsExpanded = false};
+                parent.AddChild(newContainer);
+	            parent = newContainer;
+	        }
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+
+	        var widthBefore = _connectionTree.Columns[0].Width;
+	        _connectionTree.ExpandAll();
+            var widthAfter = _connectionTree.Columns[0].Width;
+
+            Assert.That(widthAfter, Is.GreaterThan(widthBefore));
 	    }
     }
 }
