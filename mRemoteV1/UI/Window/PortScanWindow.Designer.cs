@@ -88,7 +88,7 @@ namespace mRemoteNG.UI.Window
             this.ipStart.Location = new System.Drawing.Point(5, 19);
             this.ipStart.Name = "ipStart";
             this.ipStart.Size = new System.Drawing.Size(130, 20);
-            this.ipStart.TabIndex = 10;
+            this.ipStart.TabIndex = 1;
             this.ipStart.ToolTipText = "";
             // 
             // ipEnd
@@ -96,7 +96,7 @@ namespace mRemoteNG.UI.Window
             this.ipEnd.Location = new System.Drawing.Point(155, 19);
             this.ipEnd.Name = "ipEnd";
             this.ipEnd.Size = new System.Drawing.Size(130, 20);
-            this.ipEnd.TabIndex = 15;
+            this.ipEnd.TabIndex = 2;
             this.ipEnd.ToolTipText = "";
             // 
             // lblStartIP
@@ -126,7 +126,7 @@ namespace mRemoteNG.UI.Window
             this.btnScan.Location = new System.Drawing.Point(769, 5);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(110, 55);
-            this.btnScan.TabIndex = 20;
+            this.btnScan.TabIndex = 6;
             this.btnScan.Text = "&Scan";
             this.btnScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnScan.UseVisualStyleBackColor = true;
@@ -222,7 +222,7 @@ namespace mRemoteNG.UI.Window
             this.btnImport.Location = new System.Drawing.Point(800, 5);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(80, 40);
-            this.btnImport.TabIndex = 101;
+            this.btnImport.TabIndex = 8;
             this.btnImport.Text = "&Import";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
@@ -244,7 +244,7 @@ namespace mRemoteNG.UI.Window
             this.cbProtocol.Location = new System.Drawing.Point(5, 25);
             this.cbProtocol.Name = "cbProtocol";
             this.cbProtocol.Size = new System.Drawing.Size(122, 21);
-            this.cbProtocol.TabIndex = 28;
+            this.cbProtocol.TabIndex = 7;
             // 
             // lblOnlyImport
             // 
@@ -360,7 +360,7 @@ namespace mRemoteNG.UI.Window
             0});
             this.numericSelectorTimeout.Name = "numericSelectorTimeout";
             this.numericSelectorTimeout.Size = new System.Drawing.Size(67, 22);
-            this.numericSelectorTimeout.TabIndex = 17;
+            this.numericSelectorTimeout.TabIndex = 5;
             // 
             // lblTimeout
             // 
@@ -381,7 +381,7 @@ namespace mRemoteNG.UI.Window
             0});
             this.portEnd.Name = "portEnd";
             this.portEnd.Size = new System.Drawing.Size(67, 22);
-            this.portEnd.TabIndex = 15;
+            this.portEnd.TabIndex = 4;
             this.portEnd.Enter += new System.EventHandler(this.portEnd_Enter);
             // 
             // portStart
@@ -394,7 +394,7 @@ namespace mRemoteNG.UI.Window
             0});
             this.portStart.Name = "portStart";
             this.portStart.Size = new System.Drawing.Size(67, 22);
-            this.portStart.TabIndex = 5;
+            this.portStart.TabIndex = 3;
             this.portStart.Enter += new System.EventHandler(this.portStart_Enter);
             // 
             // Label2
