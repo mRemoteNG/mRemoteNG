@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -46,6 +48,8 @@ namespace mRemoteNG.Config.Connections
             if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
                 return;
             _connectionsService.SaveConnections();
+
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Auto saved connections");
         }
     }
 }
