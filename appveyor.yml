@@ -19,8 +19,8 @@ test:
     only:
     - mRemoteNGTests\bin\$(configuration)\mRemoteNGTests.dll
 artifacts:
-	- path: 'C:\projects\mremoteng\mRemoteV1\Release\*.msi'
+	- path: C:\projects\mremoteng\mRemoteV1\Release\*.msi
 	  name: mRemoteNG-installer.msi
 		  
-	- path: 'C:\projects\mremoteng\mRemoteV1\Release\*.zip'
+	- path: C:\projects\mremoteng\mRemoteV1\Release\*.zip
 	  name: mRemoteNG-portable.zip
