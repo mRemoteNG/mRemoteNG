@@ -5,6 +5,7 @@ image: Visual Studio 2017
 configuration:
 - Release
 - Release Portable
+- Release Installer
 platform: x86
 clone_depth: 1
 install:
