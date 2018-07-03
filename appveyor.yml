@@ -15,6 +15,22 @@ before_build:
 build:
   project: mRemoteV1.sln
   verbosity: normal
+after_build:
+- ps: >-
+    if(Test-Path Env:APPVEYOR_BUILD_FOLDER -eq False) {
+        Write-Output "NOT running via Appveyor - Exiting"
+        Exit
+    }
+
+
+    $appvDir = Env:APPVEYOR_BUILD_FOLDER
+
+
+    Write-Output "Appveyor Build Dir: '$($appvDir)'"
+
+    $ConfigurationName = $configuration.Trim()
+
+    Write-Output "Config Name (tirmmed): '$($ConfigurationName)'"
 test:
   assemblies:
     only:
