@@ -17,18 +17,18 @@ build:
   verbosity: normal
 after_build:
 - ps: >-
-    if(Test-Path Env:APPVEYOR_BUILD_FOLDER -eq False) {
+    if([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) {
         Write-Output "NOT running via Appveyor - Exiting"
         Exit
     }
 
 
-    $appvDir = Env:APPVEYOR_BUILD_FOLDER
+    $appvDir = $Env:APPVEYOR_BUILD_FOLDER
 
 
     Write-Output "Appveyor Build Dir: '$($appvDir)'"
 
-    $ConfigurationName = $configuration.Trim()
+    $ConfigurationName = $Env:CONFIGURATION.Trim()
 
     Write-Output "Config Name (tirmmed): '$($ConfigurationName)'"
 test:
