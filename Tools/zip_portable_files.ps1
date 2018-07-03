@@ -14,7 +14,7 @@ param (
 
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 
-if(Test-Path Env:APPVEYOR_BUILD_FOLDER) {
+if(-not [string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) {
     Write-Output "Too early to run via Appveyor - artifacts don't get generated properly. Exiting"
     Exit
 }
