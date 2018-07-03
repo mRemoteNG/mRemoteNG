@@ -14,9 +14,11 @@ param (
 
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 
-Write-Output "Solution Dir: $($SolutionDir)"
-Write-Output "Target Dir: $($TargetDir)"
-Write-Output "Config Name: $($ConfigurationName)"
+Write-Output "Solution Dir: '$($SolutionDir)'"
+Write-Output "Target Dir: '$($TargetDir)'"
+$ConfigurationName = $ConfigurationName.Trim()
+Write-Output "Config Name (tirmmed): '$($ConfigurationName)'"
+
 
 # Windows Sysinternals Sigcheck from http://technet.microsoft.com/en-us/sysinternals/bb897441
 $SIGCHECK="$($SolutionDir)Tools\exes\sigcheck.exe"
@@ -26,7 +28,7 @@ $SEVENZIP="$($SolutionDir)Tools\7zip\7za.exe"
 if ($ConfigurationName -eq "Release Portable") {
     Write-Output "Packaging Release Portable ZIP"
    
-    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteV1\bin\$ConfigurationName\mRemoteNG.exe"
+    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteV1\bin\$($ConfigurationName)\mRemoteNG.exe"
 
     Write-Output "Version is $($version)"
 
