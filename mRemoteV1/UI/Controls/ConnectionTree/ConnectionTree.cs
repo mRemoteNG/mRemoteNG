@@ -311,11 +311,15 @@ namespace mRemoteNG.UI.Controls
             if (sortTarget == null)
                 sortTarget = GetRootConnectionNode();
 
+            Runtime.ConnectionsService.BeginBatchingSaves();
+
             var sortTargetAsContainer = sortTarget as ContainerInfo;
             if (sortTargetAsContainer != null)
                 sortTargetAsContainer.SortRecursive(sortDirection);
             else
                 SelectedNode.Parent.SortRecursive(sortDirection);
+
+            Runtime.ConnectionsService.EndBatchingSaves();
         }
 
         /// <summary>
