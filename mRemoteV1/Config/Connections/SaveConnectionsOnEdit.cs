@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using mRemoteNG.App;
 using mRemoteNG.Connection;
-using mRemoteNG.Messages;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -22,10 +20,9 @@ namespace mRemoteNG.Config.Connections
 
         private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
-            
-
             connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged += ConnectionTreeModelOnCollectionChanged;
             connectionsLoadedEventArgs.NewConnectionTreeModel.PropertyChanged += ConnectionTreeModelOnPropertyChanged;
+
             foreach (var oldTree in connectionsLoadedEventArgs.PreviousConnectionTreeModel)
             {
                 oldTree.CollectionChanged -= ConnectionTreeModelOnCollectionChanged;
@@ -47,9 +44,8 @@ namespace mRemoteNG.Config.Connections
         {
             if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
                 return;
-            _connectionsService.SaveConnections();
 
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Auto saved connections");
+            _connectionsService.SaveConnectionsAsync();
         }
     }
 }

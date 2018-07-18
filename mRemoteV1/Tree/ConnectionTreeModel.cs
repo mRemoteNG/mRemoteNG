@@ -11,8 +11,6 @@ namespace mRemoteNG.Tree
     public sealed class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
     {
         public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
-        public bool SuspendingCollectionChangedEvents { get; set; }
-        public bool SuspendingPropertyChangedEvents { get; set; }
 
         public void AddRootNode(ContainerInfo rootNode)
         {
@@ -68,9 +66,6 @@ namespace mRemoteNG.Tree
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
-            if (SuspendingCollectionChangedEvents)
-                return;
-
             CollectionChanged?.Invoke(sender, args);
         }
 
@@ -78,9 +73,6 @@ namespace mRemoteNG.Tree
 
         private void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
         {
-            if (SuspendingPropertyChangedEvents)
-                return;
-
             PropertyChanged?.Invoke(sender, args);
         }
     }
