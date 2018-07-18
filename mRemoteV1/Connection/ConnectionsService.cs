@@ -8,6 +8,7 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -19,6 +20,9 @@ namespace mRemoteNG.Connection
     {
         private static readonly object SaveLock = new object();
         private readonly PuttySessionsManager _puttySessionsManager;
+        private bool _batchingSaves = false;
+        private bool _saveRequested = false;
+        private bool _saveAsyncRequested = false;
 
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
@@ -122,14 +126,27 @@ namespace mRemoteNG.Connection
             return newConnectionTreeModel;
         }
 
+        public void BeginBatchingSaves()
+        {
+            _batchingSaves = true;
+        }
+
+        public void EndBatchingSaves()
+        {
+            _batchingSaves = false;
+
+            if (_saveAsyncRequested)
+                SaveConnectionsAsync();
+            else if(_saveRequested)
+                SaveConnections();
+        }
+
         /// <summary>
         /// Saves the currently loaded <see cref="ConnectionTreeModel"/> with
         /// no <see cref="SaveFilter"/>.
         /// </summary>
         public void SaveConnections()
         {
-            if (!IsConnectionsFileLoaded)
-                return;
             SaveConnections(ConnectionTreeModel, UsingDatabase, new SaveFilter(), ConnectionFileName);
         }
 
@@ -143,10 +160,21 @@ namespace mRemoteNG.Connection
         /// <param name="connectionFileName"></param>
         public void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName)
         {
-            if (connectionTreeModel == null) return;
+            if (connectionTreeModel == null)
+                return;
+
+            if (!IsConnectionsFileLoaded)
+                return;
+
+            if (_batchingSaves)
+            {
+                _saveRequested = true;
+                return;
+            }
 
             try
             {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Saving connections...");
                 RemoteConnectionsSyncronizer?.Disable();
 
                 var previouslyUsingDatabase = UsingDatabase;
@@ -161,6 +189,7 @@ namespace mRemoteNG.Connection
                 UsingDatabase = useDatabase;
                 ConnectionFileName = connectionFileName;
                 RaiseConnectionsSavedEvent(connectionTreeModel, previouslyUsingDatabase, UsingDatabase, connectionFileName);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Successfully saved connections");
             }
             catch (Exception ex)
             {
@@ -174,6 +203,12 @@ namespace mRemoteNG.Connection
 
         public void SaveConnectionsAsync()
         {
+            if (_batchingSaves)
+            {
+                _saveAsyncRequested = true;
+                return;
+            }
+
             var t = new Thread(SaveConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
