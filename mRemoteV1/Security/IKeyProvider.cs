@@ -1,9 +1,10 @@
 ﻿using System.Security;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Security
 {
     public interface IKeyProvider
     {
-        SecureString GetKey();
+        Optional<SecureString> GetKey();
     }
 }

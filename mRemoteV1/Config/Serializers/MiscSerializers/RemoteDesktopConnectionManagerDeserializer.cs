@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using System.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -7,8 +9,6 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-using System.Security.Cryptography;
-using System.Text;
 
 
 namespace mRemoteNG.Config.Serializers
@@ -60,7 +60,7 @@ namespace mRemoteNG.Config.Serializers
             }
             else
             {
-                var versionNode = rdcManNode.SelectSingleNode("./version")?.InnerText;
+                var versionNode = rdcManNode?.SelectSingleNode("./version")?.InnerText;
                 if (versionNode != null)
                 {
                     var version = new Version(versionNode);
@@ -101,15 +101,16 @@ namespace mRemoteNG.Config.Serializers
         {
             if (_schemaVersion == 1)
             {
-                // Program Verison 2.2 wraps all setting inside the Properties tags 
+                // Program Version 2.2 wraps all setting inside the Properties tags 
                 containerPropertiesNode = containerPropertiesNode.SelectSingleNode("./properties");
             }
             var newContainer = new ContainerInfo();
             var connectionInfo = ConnectionInfoFromXml(containerPropertiesNode);
             newContainer.CopyFrom(connectionInfo);
+
             if (_schemaVersion == 3)
             {
-                // Program Verison 2.7 wraps these properties
+                // Program Version 2.7 wraps these properties
                 containerPropertiesNode = containerPropertiesNode.SelectSingleNode("./properties");
             }
             newContainer.Name = containerPropertiesNode?.SelectSingleNode("./name")?.InnerText ?? Language.strNewFolder;
@@ -130,20 +131,22 @@ namespace mRemoteNG.Config.Serializers
 
 
             var propertiesNode = xmlNode.SelectSingleNode("./properties");
-            if (_schemaVersion == 1) propertiesNode = xmlNode;  // Version 2.2 defines the container name at the root instead         
-            connectionInfo.Hostname = propertiesNode.SelectSingleNode("./name")?.InnerText;
-            connectionInfo.Name = propertiesNode.SelectSingleNode("./displayName")?.InnerText ?? connectionInfo.Hostname;
-            connectionInfo.Description = propertiesNode.SelectSingleNode("./comment")?.InnerText ?? String.Empty;
+            if (_schemaVersion == 1) propertiesNode = xmlNode;  // Version 2.2 defines the container name at the root instead
+            connectionInfo.Hostname = propertiesNode?.SelectSingleNode("./name")?.InnerText ?? "";
+            connectionInfo.Name = propertiesNode?.SelectSingleNode("./displayName")?.InnerText ?? connectionInfo.Hostname;
+            connectionInfo.Description = propertiesNode?.SelectSingleNode("./comment")?.InnerText ?? string.Empty;
 
             var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
-            if (logonCredentialsNode?.Attributes?["inherit"].Value == "None")
+            if (logonCredentialsNode?.Attributes?["inherit"]?.Value == "None")
             {
                 connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText;
 
                 var passwordNode = logonCredentialsNode.SelectSingleNode("./password");
                 if (_schemaVersion == 1) // Version 2.2 allows clear text passwords
                 {
-                    connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
+                    connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True" 
+                        ? passwordNode.InnerText 
+                        : DecryptRdcManPassword(passwordNode?.InnerText);
                 }
                 else
                 {
@@ -160,7 +163,7 @@ namespace mRemoteNG.Config.Serializers
             }
 
             var connectionSettingsNode = xmlNode.SelectSingleNode("./connectionSettings");
-            if (connectionSettingsNode?.Attributes?["inherit"].Value == "None")
+            if (connectionSettingsNode?.Attributes?["inherit"]?.Value == "None")
             {
                 connectionInfo.UseConsoleSession = bool.Parse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText ?? "false");
                 // ./startProgram
@@ -174,7 +177,7 @@ namespace mRemoteNG.Config.Serializers
             }
 
             var gatewaySettingsNode = xmlNode.SelectSingleNode("./gatewaySettings");
-            if (gatewaySettingsNode?.Attributes?["inherit"].Value == "None")
+            if (gatewaySettingsNode?.Attributes?["inherit"]?.Value == "None")
             {
                 connectionInfo.RDGatewayUsageMethod = gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText == "True" ? RdpProtocol.RDGatewayUsageMethod.Always : RdpProtocol.RDGatewayUsageMethod.Never;
                 connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText;
@@ -198,7 +201,7 @@ namespace mRemoteNG.Config.Serializers
             }
 
             var remoteDesktopNode = xmlNode.SelectSingleNode("./remoteDesktop");
-            if (remoteDesktopNode?.Attributes?["inherit"].Value == "None")
+            if (remoteDesktopNode?.Attributes?["inherit"]?.Value == "None")
             {
                 var resolutionString = remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", "");
                 try
@@ -231,7 +234,7 @@ namespace mRemoteNG.Config.Serializers
             }
 
             var localResourcesNode = xmlNode.SelectSingleNode("./localResources");
-            if (localResourcesNode?.Attributes?["inherit"].Value == "None")
+            if (localResourcesNode?.Attributes?["inherit"]?.Value == "None")
             {
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (localResourcesNode.SelectSingleNode("./audioRedirection")?.InnerText)
@@ -271,10 +274,10 @@ namespace mRemoteNG.Config.Serializers
                 }
 
                 // ./redirectClipboard
-                connectionInfo.RedirectDiskDrives = bool.Parse(localResourcesNode.SelectSingleNode("./redirectDrives")?.InnerText ?? "false");
-                connectionInfo.RedirectPorts = bool.Parse(localResourcesNode.SelectSingleNode("./redirectPorts")?.InnerText ?? "false");
-                connectionInfo.RedirectPrinters = bool.Parse(localResourcesNode.SelectSingleNode("./redirectPrinters")?.InnerText ?? "false");
-                connectionInfo.RedirectSmartCards = bool.Parse(localResourcesNode.SelectSingleNode("./redirectSmartCards")?.InnerText ?? "false");
+                connectionInfo.RedirectDiskDrives = bool.Parse(localResourcesNode?.SelectSingleNode("./redirectDrives")?.InnerText ?? "false");
+                connectionInfo.RedirectPorts = bool.Parse(localResourcesNode?.SelectSingleNode("./redirectPorts")?.InnerText ?? "false");
+                connectionInfo.RedirectPrinters = bool.Parse(localResourcesNode?.SelectSingleNode("./redirectPrinters")?.InnerText ?? "false");
+                connectionInfo.RedirectSmartCards = bool.Parse(localResourcesNode?.SelectSingleNode("./redirectSmartCards")?.InnerText ?? "false");
             }
             else
             {
@@ -287,7 +290,7 @@ namespace mRemoteNG.Config.Serializers
             }
 
             var securitySettingsNode = xmlNode.SelectSingleNode("./securitySettings");
-            if (securitySettingsNode?.Attributes?["inherit"].Value == "None")
+            if (securitySettingsNode?.Attributes?["inherit"]?.Value == "None")
             {
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (securitySettingsNode.SelectSingleNode("./authentication")?.InnerText)
@@ -321,7 +324,7 @@ namespace mRemoteNG.Config.Serializers
         private static string DecryptRdcManPassword(string ciphertext)
         {
             if (string.IsNullOrEmpty(ciphertext))
-                return null;
+                return string.Empty;
 
             try
             {
@@ -332,7 +335,7 @@ namespace mRemoteNG.Config.Serializers
             catch (Exception /*ex*/)
             {
                 //Runtime.MessageCollector.AddExceptionMessage("RemoteDesktopConnectionManager.DecryptPassword() failed.", ex, logOnly: true);
-                return null;
+                return string.Empty;
             }
         }
     }

@@ -15,7 +15,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.UI.Controls
 {
-	public partial class ConnectionTree : TreeListView, IConnectionTree
+    public partial class ConnectionTree : TreeListView, IConnectionTree
     {
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
@@ -262,6 +262,9 @@ namespace mRemoteNG.UI.Controls
 
         private void AddNode(ConnectionInfo newNode)
         {
+            if (SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttyRoot || SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
+                return;
+
             // use root node if no node is selected
             ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
@@ -278,6 +281,13 @@ namespace mRemoteNG.UI.Controls
 
         public void DuplicateSelectedNode()
         {
+            if (SelectedNode == null)
+                return;
+
+            var selectedNodeType = SelectedNode.GetTreeNodeType();
+            if (selectedNodeType != TreeNodeType.Connection && selectedNodeType != TreeNodeType.Container)
+                return;
+
             var newNode = SelectedNode.Clone();
             SelectedNode.Parent.AddChildBelow(newNode, SelectedNode);
             newNode.Parent.SetChildBelow(newNode, SelectedNode);
@@ -301,17 +311,53 @@ namespace mRemoteNG.UI.Controls
             if (sortTarget == null)
                 sortTarget = GetRootConnectionNode();
 
+            Runtime.ConnectionsService.BeginBatchingSaves();
+
             var sortTargetAsContainer = sortTarget as ContainerInfo;
             if (sortTargetAsContainer != null)
                 sortTargetAsContainer.SortRecursive(sortDirection);
             else
                 SelectedNode.Parent.SortRecursive(sortDirection);
+
+            Runtime.ConnectionsService.EndBatchingSaves();
+        }
+
+        /// <summary>
+        /// Expands all tree objects and recalculates the
+        /// column widths.
+        /// </summary>
+        public override void ExpandAll()
+        {
+            base.ExpandAll();
+            AutoResizeColumn(Columns[0]);
+        }
+
+        protected override void UpdateFiltering()
+        {
+            base.UpdateFiltering();
+            AutoResizeColumn(Columns[0]);
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            RefreshObject(sender);
+			// disable filtering if necessary. prevents RefreshObjects from
+			// throwing an exception
+			var filteringEnabled = IsFiltering;
+			var filter = ModelFilter;
+			if (filteringEnabled)
+			{
+				ResetColumnFiltering();
+			}
+
+			RefreshObject(sender);
 			AutoResizeColumn(Columns[0]);
+
+			// turn filtering back on
+			if (filteringEnabled)
+			{
+				ModelFilter = filter;
+				UpdateFiltering();
+			}
 		}
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)

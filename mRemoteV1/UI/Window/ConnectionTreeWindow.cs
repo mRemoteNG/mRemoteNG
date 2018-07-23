@@ -14,7 +14,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-	public partial class ConnectionTreeWindow
+    public partial class ConnectionTreeWindow
 	{
 	    private readonly ConnectionContextMenu _contextMenu;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
@@ -42,13 +42,23 @@ namespace mRemoteNG.UI.Window
 			olvConnections.ContextMenuStrip = _contextMenu;
 			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
-		    Settings.Default.PropertyChanged += (sender, args) => SetConnectionTreeEventHandlers();
+		    Settings.Default.PropertyChanged += OnAppSettingsChanged;
             olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
         }
 
-	    
+	    private void OnAppSettingsChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
+	    {
+	        if (propertyChangedEventArgs.PropertyName == nameof(Settings.UseFilterSearch))
+	        {
+	            ConnectionTree.UseFiltering = Settings.Default.UseFilterSearch;
+	            ApplyFiltering();
+            }
 
-        #region Form Stuff
+	        SetConnectionTreeEventHandlers();
+	    }
+
+
+	    #region Form Stuff
         private void Tree_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
@@ -100,8 +110,6 @@ namespace mRemoteNG.UI.Window
 	    private void SetConnectionTreeEventHandlers()
 	    {
 	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(MessageBox.Show);
-            olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
-            olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
             olvConnections.KeyDown += tvConnections_KeyDown;
             olvConnections.KeyPress += tvConnections_KeyPress;
             SetTreePostSetupActions();
@@ -177,24 +185,6 @@ namespace mRemoteNG.UI.Window
 		{
             olvConnections.AddFolder();
 		}
-
-        private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            _contextMenu.DisableShortcutKeys();
-        }
-
-        private void tvConnections_AfterLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            try
-            {
-                _contextMenu.EnableShortcutKeys();
-                ConnectionTree.ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
-            }
-        }
         #endregion
 
         #region Search
@@ -243,25 +233,30 @@ namespace mRemoteNG.UI.Window
 		}
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
-		{
-		    if (Settings.Default.UseFilterSearch)
-		    {
-		        if (txtSearch.Text == "" || txtSearch.Text == Language.strSearchPrompt)
-		        {
-		            olvConnections.UseFiltering = false;
-		            olvConnections.ResetColumnFiltering();
-                    return;
-		        }
-		        olvConnections.UseFiltering = true;
-		        _connectionTreeSearchTextFilter.FilterText = txtSearch.Text;
-		        olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
-		    }
-		    else
-		    {
-                if (txtSearch.Text == "") return;
-                olvConnections.NodeSearcher?.SearchByName(txtSearch.Text);
-                JumpToNode(olvConnections.NodeSearcher?.CurrentMatch);
-		    }
+        {
+            ApplyFiltering();
+        }
+
+	    private void ApplyFiltering()
+	    {
+	        if (Settings.Default.UseFilterSearch)
+	        {
+	            if (txtSearch.Text == "" || txtSearch.Text == Language.strSearchPrompt)
+	            {
+	                olvConnections.UseFiltering = false;
+	                olvConnections.ResetColumnFiltering();
+	                return;
+	            }
+	            olvConnections.UseFiltering = true;
+	            _connectionTreeSearchTextFilter.FilterText = txtSearch.Text;
+	            olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
+	        }
+	        else
+	        {
+	            if (txtSearch.Text == "") return;
+	            olvConnections.NodeSearcher?.SearchByName(txtSearch.Text);
+	            JumpToNode(olvConnections.NodeSearcher?.CurrentMatch);
+	        }
         }
 
 	    private void JumpToNode(ConnectionInfo connectionInfo)

@@ -14,6 +14,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
@@ -31,7 +32,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
 {
-	public partial class FrmMain
+    public partial class FrmMain
     {
         public static FrmMain Default { get; } = new FrmMain();
 
@@ -46,6 +47,7 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
+        private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -159,6 +161,7 @@ namespace mRemoteNG.UI.Forms
                 SetDefaultLayout();
 
             Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
+            Runtime.ConnectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
             var credsAndConsSetup = new CredsAndConsSetup();
             credsAndConsSetup.LoadCredsAndCons();
 
@@ -176,7 +179,13 @@ namespace mRemoteNG.UI.Forms
 
             Opacity = 1;
             //Fix missing general panel at the first run
-            new PanelAdder().AddPanel();
+            if (Settings.Default.CreateEmptyPanelOnStartUp)
+            {
+                var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
+                    ? Settings.Default.StartUpPanelName
+                    : Language.strNewPanel;
+                new PanelAdder().AddPanel(panelName);
+            }
         }
 
         private void ApplyLanguage()
@@ -209,6 +218,14 @@ namespace mRemoteNG.UI.Forms
         private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             UpdateWindowTitle();
+        }
+
+        private void ConnectionsServiceOnConnectionsSaved(object sender, ConnectionsSavedEventArgs connectionsSavedEventArgs)
+        {
+            if (connectionsSavedEventArgs.UsingDatabase)
+                return;
+
+            _backupPruner.PruneBackupFiles(connectionsSavedEventArgs.ConnectionFileName, Settings.Default.BackupFileKeepCount);
         }
 
         private void SetMenuDependencies()

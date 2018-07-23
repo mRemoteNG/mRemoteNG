@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Linq;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-	public partial class PortScanWindow
+    public partial class PortScanWindow
 	{
         #region Constructors
 		public PortScanWindow()
@@ -130,8 +132,6 @@ namespace mRemoteNG.UI.Window
 		{
             ProtocolType protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
 		    importSelectedHosts(protocol);
-            DialogResult = DialogResult.OK;
-			Close();
 		}
         #endregion
 				
@@ -257,9 +257,28 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            var selectedTreeNodeAsContainer = Windows.TreeForm.SelectedNode as ContainerInfo ?? Windows.TreeForm.SelectedNode.Parent;
-            Import.ImportFromPortScan(hosts, protocol, selectedTreeNodeAsContainer);
+            var destinationContainer = GetDestinationContainerForImportedHosts();
+            Import.ImportFromPortScan(hosts, protocol, destinationContainer);
         }
+
+        /// <summary>
+        /// Determines where the imported hosts will be placed
+        /// in the connection tree.
+        /// </summary>
+	    private ContainerInfo GetDestinationContainerForImportedHosts()
+	    {
+	        var selectedNode = Windows.TreeForm.SelectedNode
+	                           ?? Windows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+
+            // if a putty node is selected, place imported connections in the root connection node
+            if (selectedNode is RootPuttySessionsNodeInfo || selectedNode is PuttySessionInfo)
+                selectedNode = Windows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+
+            // if the selected node is a connection, use its parent container
+            var selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
+
+	        return selectedTreeNodeAsContainer;
+	    }
 
         private void importVNCToolStripMenuItem_Click(object sender, EventArgs e)
         {
