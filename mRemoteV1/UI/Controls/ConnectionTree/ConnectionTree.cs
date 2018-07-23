@@ -27,6 +27,8 @@ namespace mRemoteNG.UI.Controls
 
 	    public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
+        public IConnectionsService ConnectionsService { get; set; }
+
         public NodeSearcher NodeSearcher { get; private set; }
 
         public IConfirm<ConnectionInfo> NodeDeletionConfirmer { get; set; } = new AlwaysConfirmYes();
@@ -311,7 +313,7 @@ namespace mRemoteNG.UI.Controls
             if (sortTarget == null)
                 sortTarget = GetRootConnectionNode();
 
-            Runtime.ConnectionsService.BeginBatchingSaves();
+            ConnectionsService.BeginBatchingSaves();
 
             var sortTargetAsContainer = sortTarget as ContainerInfo;
             if (sortTargetAsContainer != null)
@@ -319,7 +321,7 @@ namespace mRemoteNG.UI.Controls
             else
                 SelectedNode.Parent.SortRecursive(sortDirection);
 
-            Runtime.ConnectionsService.EndBatchingSaves();
+            ConnectionsService.EndBatchingSaves();
         }
 
         /// <summary>

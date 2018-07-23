@@ -2,18 +2,14 @@
 using System.Security;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.Putty;
-using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Credential.Repositories;
-using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
@@ -24,7 +20,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNGTests.Connection.Protocol
 {
-	public class IntegratedProgramTests
+    public class IntegratedProgramTests
     {
         private ExternalToolsService _externalToolsService;
         private IConnectionInitiator _connectionInitiator;
@@ -86,7 +82,7 @@ namespace mRemoteNGTests.Connection.Protocol
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), shutdown, appUpdater);
             Func<NotificationAreaIcon> notificationAreaIconBuilder = () => new NotificationAreaIcon(frmMain, _connectionInitiator, shutdown, connectionsService);
 		    Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, _externalToolsService, () => connectionTree.SelectedNode, frmMain, connectionsService);
-		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, import);
+		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(connectionTreeWindow, import);
 		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, import, connectionsService);
 		    var databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
             var windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 

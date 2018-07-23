@@ -119,7 +119,7 @@ namespace mRemoteNG.Connection
 
             if (newConnectionTreeModel == null)
             {
-                DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed", IsConnectionsFileLoaded);
+                DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed", IsConnectionsFileLoaded, this);
                 return;
             }
 

@@ -33,5 +33,7 @@ namespace mRemoteNG.Connection
         void SaveConnections();
         void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName, bool forceSave = false);
         void SaveConnectionsAsync();
+        void BeginBatchingSaves();
+        void EndBatchingSaves();
     }
 }

@@ -46,7 +46,9 @@ namespace mRemoteNG.UI.Window
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += OnAppSettingsChanged;
             olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
-        }
+		    olvConnections.ConnectionsService = connectionsService;
+		}
+
 	    private void OnAppSettingsChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
 	    {
 	        if (propertyChangedEventArgs.PropertyName == nameof(Settings.UseFilterSearch))

@@ -7,12 +7,11 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
-using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
 {
-	public class MainFileMenu : ToolStripMenuItem
+    public class MainFileMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenFileNew;
         private ToolStripMenuItem _mMenFileLoad;
@@ -413,7 +412,7 @@ namespace mRemoteNG.UI.Menu
         {
             using (var saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
             {
-                if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK)
+                if (saveFileDialog.ShowDialog(DialogWindowParent) != DialogResult.OK)
                     return;
 
                 var newFileName = saveFileDialog.FileName;

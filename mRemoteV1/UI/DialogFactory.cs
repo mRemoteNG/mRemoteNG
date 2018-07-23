@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.TaskDialog;
 
@@ -28,7 +29,8 @@ namespace mRemoteNG.UI
         /// <param name="connectionFileName"></param>
         /// <param name="messageText"></param>
         /// <param name="showCancelButton"></param>
-        public static void ShowLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton)
+        /// <param name="connectionsService"></param>
+        public static void ShowLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton, IConnectionsService connectionsService)
         {
             var commandButtons = new List<string>
             {
@@ -59,11 +61,11 @@ namespace mRemoteNG.UI
                         case 0: // New
                             var saveAsDialog = ConnectionsSaveAsDialog();
                             saveAsDialog.ShowDialog();
-                            Runtime.ConnectionsService.NewConnectionsFile(saveAsDialog.FileName);
+                            connectionsService.NewConnectionsFile(saveAsDialog.FileName);
                             answered = true;
                             break;
                         case 1: // Load
-                            Runtime.LoadConnections(true);
+                            connectionsService.LoadConnections(true);
                             answered = true;
                             break;
                         case 2: // Exit
