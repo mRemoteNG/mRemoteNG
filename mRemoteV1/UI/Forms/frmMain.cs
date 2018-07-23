@@ -17,8 +17,8 @@ using mRemoteNG.App.Update;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DatabaseConnectors;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
-using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -40,7 +40,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
 {
-	public partial class FrmMain
+    public partial class FrmMain
     {
         private static ClipboardchangeEventHandler _clipboardChangedEvent;
         private bool _inSizeMove;
@@ -70,6 +70,7 @@ namespace mRemoteNG.UI.Forms
         private readonly AppUpdater _appUpdater;
         private readonly DatabaseConnectorFactory _databaseConnectorFactory;
         private readonly Screens _screens;
+        private readonly FileBackupPruner _backupPruner;
         private readonly MessageCollector _messageCollector = Runtime.MessageCollector;
 
         internal FullscreenHandler Fullscreen { get; set; }
@@ -86,7 +87,8 @@ namespace mRemoteNG.UI.Forms
             var externalToolsService = new ExternalToolsService();
 		    _import = new Import(this);
 		    _connectionsService = new ConnectionsService(PuttySessionsManager.Instance, _import, this);
-		    _import.ConnectionsService = _connectionsService;
+		    _backupPruner = new FileBackupPruner();
+            _import.ConnectionsService = _connectionsService;
 		    Func<SecureString> encryptionKeySelectionFunc = () => _connectionsService.EncryptionKey;
             _appUpdater = new AppUpdater(encryptionKeySelectionFunc);
             ExternalToolsTypeConverter.ExternalToolsService = externalToolsService;
@@ -109,7 +111,7 @@ namespace mRemoteNG.UI.Forms
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown, _appUpdater);
 		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown, _connectionsService);
             Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService, () => connectionTree.SelectedNode, this, _connectionsService);
-		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(() => connectionTreeWindow.SelectedNode, _import);
+		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(connectionTreeWindow, _import);
 		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import, _connectionsService);
 		    _databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
             _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
@@ -233,6 +235,7 @@ namespace mRemoteNG.UI.Forms
                 SetDefaultLayout();
 
             _connectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
+            _connectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
             var credsAndConsSetup = new CredsAndConsSetup(_connectionsService);
             credsAndConsSetup.LoadCredsAndCons();
 
@@ -250,7 +253,13 @@ namespace mRemoteNG.UI.Forms
 
             Opacity = 1;
             //Fix missing general panel at the first run
-            _panelAdder.AddPanel();
+            if (Settings.Default.CreateEmptyPanelOnStartUp)
+            {
+                var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
+                    ? Settings.Default.StartUpPanelName
+                    : Language.strNewPanel;
+            	_panelAdder.AddPanel(panelName);
+            }
         }
 
         private void ApplyLanguage()
@@ -283,6 +292,14 @@ namespace mRemoteNG.UI.Forms
         private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             UpdateWindowTitle();
+        }
+
+        private void ConnectionsServiceOnConnectionsSaved(object sender, ConnectionsSavedEventArgs connectionsSavedEventArgs)
+        {
+            if (connectionsSavedEventArgs.UsingDatabase)
+                return;
+
+            _backupPruner.PruneBackupFiles(connectionsSavedEventArgs.ConnectionFileName, Settings.Default.BackupFileKeepCount);
         }
 
         private void SetMenuDependencies()

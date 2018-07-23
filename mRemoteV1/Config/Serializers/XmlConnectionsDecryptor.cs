@@ -4,6 +4,7 @@ using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
@@ -13,7 +14,7 @@ namespace mRemoteNG.Config.Serializers
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly RootNodeInfo _rootNodeInfo;
 
-        public Func<SecureString> AuthenticationRequestor { get; set; }
+        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; }
 
         public int KeyDerivationIterations
         {
@@ -91,16 +92,14 @@ namespace mRemoteNG.Config.Serializers
 
         private bool Authenticate(string cipherText, SecureString password)
         {
-            var authenticator = new PasswordAuthenticator(_cryptographyProvider, cipherText)
-            {
-                AuthenticationRequestor = AuthenticationRequestor
-            };
-
+            var authenticator = new PasswordAuthenticator(_cryptographyProvider, cipherText, AuthenticationRequestor);
             var authenticated = authenticator.Authenticate(password);
 
-            if (!authenticated) return authenticated;
+            if (!authenticated)
+                return false;
+
             _rootNodeInfo.PasswordString = authenticator.LastAuthenticatedPassword.ConvertToUnsecureString();
-            return authenticated;
+            return true;
         }
     }
 }

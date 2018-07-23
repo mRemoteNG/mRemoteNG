@@ -226,20 +226,21 @@ namespace mRemoteNG.UI.Forms
 
         private void cboFileformat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SaveFormat == SaveFormat.mRXML)
-            {
-                chkUsername.Enabled = false;
-                chkPassword.Enabled = false;
-                chkDomain.Enabled = false;
-                chkAssignedCredential.Enabled = true;
-            }
-            else
-            {
-                chkUsername.Enabled = true;
-                chkPassword.Enabled = true;
-                chkDomain.Enabled = true;
-                chkAssignedCredential.Enabled = false;
-            }
+            // should only be active if we are using the credential manager feature
+            //if (SaveFormat == SaveFormat.mRXML)
+            //{
+            //    chkUsername.Enabled = false;
+            //    chkPassword.Enabled = false;
+            //    chkDomain.Enabled = false;
+            //    chkAssignedCredential.Enabled = true;
+            //}
+            //else
+            //{
+            //    chkUsername.Enabled = true;
+            //    chkPassword.Enabled = true;
+            //    chkDomain.Enabled = true;
+            //    chkAssignedCredential.Enabled = false;
+            //}
         }
         #endregion
 			

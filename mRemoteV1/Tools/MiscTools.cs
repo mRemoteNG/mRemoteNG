@@ -12,7 +12,7 @@ using static System.String;
 
 namespace mRemoteNG.Tools
 {
-	public static class MiscTools
+    public static class MiscTools
 	{
 		public static Icon GetIconFromFile(string FileName)
 		{
@@ -34,7 +34,7 @@ namespace mRemoteNG.Tools
 			}
 		}
 		
-		public static SecureString PasswordDialog(string passwordName = null, bool verify = true)
+		public static Optional<SecureString> PasswordDialog(string passwordName = null, bool verify = true)
 		{
 			var passwordForm = new PasswordForm(passwordName, verify);
 		    return passwordForm.GetKey();

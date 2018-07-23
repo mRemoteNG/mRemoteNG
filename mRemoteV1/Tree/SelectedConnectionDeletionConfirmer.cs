@@ -17,6 +17,9 @@ namespace mRemoteNG.Tree
 
         public bool Confirm(ConnectionInfo deletionTarget)
         {
+            if (deletionTarget == null)
+                return false;
+
             var deletionTargetAsContainer = deletionTarget as ContainerInfo;
             if (deletionTargetAsContainer != null)
                 return deletionTargetAsContainer.HasChildren()

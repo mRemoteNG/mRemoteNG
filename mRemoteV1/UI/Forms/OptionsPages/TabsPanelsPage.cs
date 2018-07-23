@@ -30,6 +30,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkIdentifyQuickConnectTabs.Text = Language.strIdentifyQuickConnectTabs;
             chkDoubleClickClosesTab.Text = Language.strDoubleClickTabClosesIt;
             chkAlwaysShowPanelSelectionDlg.Text = Language.strAlwaysShowPanelSelection;
+            chkCreateEmptyPanelOnStart.Text = Language.strCreateEmptyPanelOnStartUp;
+            lblPanelName.Text = $"{Language.strPanelName}:";
         }
 
         public override void LoadSettings()
@@ -43,6 +45,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkIdentifyQuickConnectTabs.Checked = Settings.Default.IdentifyQuickConnectTabs;
             chkDoubleClickClosesTab.Checked = Settings.Default.DoubleClickOnTabClosesIt;
             chkAlwaysShowPanelSelectionDlg.Checked = Settings.Default.AlwaysShowPanelSelectionDlg;
+            chkCreateEmptyPanelOnStart.Checked = Settings.Default.CreateEmptyPanelOnStartUp;
+            txtBoxPanelName.Text = Settings.Default.StartUpPanelName;
+            UpdatePanelNameTextBox();
         }
 
         public override void SaveSettings()
@@ -58,8 +63,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.IdentifyQuickConnectTabs = chkIdentifyQuickConnectTabs.Checked;
             Settings.Default.DoubleClickOnTabClosesIt = chkDoubleClickClosesTab.Checked;
             Settings.Default.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked;
+            Settings.Default.CreateEmptyPanelOnStartUp = chkCreateEmptyPanelOnStart.Checked;
+            Settings.Default.StartUpPanelName = txtBoxPanelName.Text;
 
             Settings.Default.Save();
+        }
+
+        private void UpdatePanelNameTextBox()
+        {
+            txtBoxPanelName.Enabled = chkCreateEmptyPanelOnStart.Checked;
+        }
+
+        private void chkCreateEmptyPanelOnStart_CheckedChanged(object sender, System.EventArgs e)
+        {
+            UpdatePanelNameTextBox();
         }
     }
 }

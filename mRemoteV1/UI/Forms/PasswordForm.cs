@@ -2,6 +2,7 @@ using System;
 using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -19,12 +20,12 @@ namespace mRemoteNG.UI.Forms
 			Verify = verify;
 		}
 
-        public SecureString GetKey()
+        public Optional<SecureString> GetKey()
         {
             var dialog = ShowDialog();
             return dialog == DialogResult.OK
                 ? _password
-                : new SecureString();
+                : Optional<SecureString>.Empty;
         }
 
         #region Event Handlers

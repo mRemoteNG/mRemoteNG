@@ -27,11 +27,11 @@ namespace mRemoteNG.Connection
         string GetDefaultStartupConnectionFileName();
         string GetStartupConnectionFileName();
         void LoadConnections(bool withDialog = false);
-        ConnectionTreeModel LoadConnections(bool useDatabase, bool import, string connectionFileName);
+        void LoadConnections(bool useDatabase, bool import, string connectionFileName);
         void LoadConnectionsAsync();
         void NewConnectionsFile(string filename);
         void SaveConnections();
-        void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName);
+        void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName, bool forceSave = false);
         void SaveConnectionsAsync();
     }
 }

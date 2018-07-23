@@ -190,7 +190,7 @@ namespace mRemoteNG.UI.Forms
             this.Controls.Add(this.tsContainer);
             this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
             this.MainMenuStrip = this.msMain;
-            this.MinimumSize = new System.Drawing.Size(1145, 610);
+            this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FrmMain";
             this.Opacity = 0D;
             this.Text = "mRemoteNG";

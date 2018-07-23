@@ -2676,4 +2676,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
+  <data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Create an empty panel when mRemoteNG starts</value>
+  </data>
 </root>

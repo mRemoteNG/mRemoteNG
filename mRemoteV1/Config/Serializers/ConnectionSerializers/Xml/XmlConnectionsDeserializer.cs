@@ -21,7 +21,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-	public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
+    public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
 	{
 	    private readonly IConnectionsService _connectionsService;
         private XmlDocument _xmlDocument;
@@ -32,9 +32,9 @@ namespace mRemoteNG.Config.Serializers.Xml
         private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
 	    private readonly IWin32Window _dialogWindowParent;
 
-        public Func<SecureString> AuthenticationRequestor { get; set; }
+        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(IConnectionsService connectionsService, IWin32Window dialogWindowParent, Func<SecureString> authenticationRequestor = null)
+        public XmlConnectionsDeserializer(IConnectionsService connectionsService, IWin32Window dialogWindowParent, Func<Optional<SecureString>> authenticationRequestor = null)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _dialogWindowParent = dialogWindowParent.ThrowIfNull(nameof(dialogWindowParent));
@@ -52,8 +52,6 @@ namespace mRemoteNG.Config.Serializers.Xml
             {
                 LoadXmlConnectionData(xml);
                 ValidateConnectionFileVersion();
-                if (!import)
-                    _connectionsService.IsConnectionsFileLoaded = false;
 
                 var rootXmlElement = _xmlDocument.DocumentElement;
                 InitializeRootNode(rootXmlElement);
@@ -67,8 +65,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
                     if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
                     {
-                        mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
-                        mRemoteNG.Settings.Default.CustomConsPath = "";
                         return null;
                     }
                 }

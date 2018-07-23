@@ -1647,6 +1647,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create an empty panel when mRemoteNG starts.
+        /// </summary>
+        internal static string strCreateEmptyPanelOnStartUp {
+            get {
+                return ResourceManager.GetString("strCreateEmptyPanelOnStartUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credential Editor.
         /// </summary>
         internal static string strCredentialEditor {

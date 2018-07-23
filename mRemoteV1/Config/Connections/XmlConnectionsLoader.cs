@@ -1,14 +1,14 @@
 ﻿using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Tools;
-using mRemoteNG.Tree;
 using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
+using mRemoteNG.Tools;
+using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Connections
 {
-	public class XmlConnectionsLoader
+    public class XmlConnectionsLoader
 	{
 	    private readonly IConnectionsService _connectionsService;
         private readonly string _connectionFilePath;
@@ -29,7 +29,7 @@ namespace mRemoteNG.Config.Connections
             return deserializer.Deserialize(xmlString);
         }
 
-        private SecureString PromptForPassword()
+        private Optional<SecureString> PromptForPassword()
         {
             return MiscTools.PasswordDialog("", false);
         }

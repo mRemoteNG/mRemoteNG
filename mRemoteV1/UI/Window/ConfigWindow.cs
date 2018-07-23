@@ -24,7 +24,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-	public class ConfigWindow : BaseWindow
+    public class ConfigWindow : BaseWindow
 	{
         private bool _originalPropertyGridToolStripItemCountValid;
         private int _originalPropertyGridToolStripItemCount;
@@ -740,29 +740,32 @@ namespace mRemoteNG.UI.Window
         private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)
         {
             var rootInfo = _pGrid.SelectedObject as RootNodeInfo;
-            if (rootInfo == null) return;
-            if (e.ChangedItem.PropertyDescriptor == null) return;
-            // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (e.ChangedItem.PropertyDescriptor.Name)
-            {
-                case "Password":
-                    if (rootInfo.Password)
-                    {
-                        var passwordName = Settings.Default.UseSQLServer ? Language.strSQLServer.TrimEnd(':') : Path.GetFileName(_connectionsService.GetStartupConnectionFileName());
+            if (rootInfo == null)
+                return;
 
-                        var password = MiscTools.PasswordDialog(passwordName);
-                        if (password.Length == 0)
-                            rootInfo.Password = false;
-                        else
-                            rootInfo.PasswordString = password.ConvertToUnsecureString();
-                    }
-                    else
-                    {
-                        rootInfo.PasswordString = "";
-                    }
-                    break;
-                case "Name":
-                    break;
+            if (e.ChangedItem.PropertyDescriptor?.Name != "Password")
+                return;
+
+            if (rootInfo.Password)
+            {
+                var passwordName = Settings.Default.UseSQLServer 
+                    ? Language.strSQLServer.TrimEnd(':') 
+                    : Path.GetFileName(_connectionsService.GetStartupConnectionFileName());
+
+                var password = MiscTools.PasswordDialog(passwordName);
+
+                // operation cancelled, dont set a password
+                if (!password.Any() || password.First().Length == 0)
+                {
+                    rootInfo.Password = false;
+                    return;
+                }
+
+                rootInfo.PasswordString = password.First().ConvertToUnsecureString();
+            }
+            else
+            {
+                rootInfo.PasswordString = "";
             }
         }
 
