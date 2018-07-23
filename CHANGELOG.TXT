@@ -9,6 +9,7 @@ Fixes:
 #999: Some hotkeys stop working if File menu was called when PuTTy Saved Sessions was selected
 #998: Can sometimes add connection under PuTTY Sessions node
 #991: Error when deleting host in filtered view
+#961: Connections file overwritten if correct decryption password not provided
 
 
 1.76.4 Alpha 6 (2018-06-03):
