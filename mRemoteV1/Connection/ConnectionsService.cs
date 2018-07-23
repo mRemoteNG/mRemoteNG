@@ -13,6 +13,7 @@ using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI;
 
 namespace mRemoteNG.Connection
 {
@@ -51,9 +52,8 @@ namespace mRemoteNG.Connection
             {
                 var newConnectionsModel = new ConnectionTreeModel();
                 newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
-                SaveConnections(newConnectionsModel, false, new SaveFilter(), filename);
+                SaveConnections(newConnectionsModel, false, new SaveFilter(), filename, true);
                 LoadConnections(false, false, filename);
-                UpdateCustomConsPathSetting(filename);
             }
             catch (Exception ex)
             {
@@ -101,16 +101,25 @@ namespace mRemoteNG.Connection
         /// <param name="useDatabase"></param>
         /// <param name="import"></param>
         /// <param name="connectionFileName"></param>
-        public ConnectionTreeModel LoadConnections(bool useDatabase, bool import, string connectionFileName)
+        public void LoadConnections(bool useDatabase, bool import, string connectionFileName)
         {
             var oldConnectionTreeModel = ConnectionTreeModel;
             var oldIsUsingDatabaseValue = UsingDatabase;
 
-            var newConnectionTreeModel =
-                (useDatabase
-                    ? new SqlConnectionsLoader().Load()
-                    : new XmlConnectionsLoader(connectionFileName).Load())
-                ?? new ConnectionTreeModel();
+            var newConnectionTreeModel = useDatabase
+                ? new SqlConnectionsLoader().Load()
+                : new XmlConnectionsLoader(connectionFileName).Load();
+
+            if (newConnectionTreeModel == null)
+            {
+                //IsConnectionsFileLoaded = false;
+                DialogFactory.BuildLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed", IsConnectionsFileLoaded);
+                return;
+            }
+
+            IsConnectionsFileLoaded = true;
+            ConnectionFileName = connectionFileName;
+            UsingDatabase = useDatabase;
 
             if (!import)
             {
@@ -118,12 +127,9 @@ namespace mRemoteNG.Connection
                 newConnectionTreeModel.RootNodes.AddRange(_puttySessionsManager.RootPuttySessionsNodes);
             }
 
-            IsConnectionsFileLoaded = true;
-            ConnectionFileName = connectionFileName;
-            UsingDatabase = useDatabase;
             ConnectionTreeModel = newConnectionTreeModel;
+            UpdateCustomConsPathSetting(connectionFileName);
             RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
-            return newConnectionTreeModel;
         }
 
         public void BeginBatchingSaves()
@@ -158,12 +164,13 @@ namespace mRemoteNG.Connection
         /// <param name="useDatabase"></param>
         /// <param name="saveFilter"></param>
         /// <param name="connectionFileName"></param>
-        public void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName)
+        /// <param name="forceSave">Bypasses safety checks that prevent saving if a connection file isn't loaded.</param>
+        public void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName, bool forceSave = false)
         {
             if (connectionTreeModel == null)
                 return;
 
-            if (!IsConnectionsFileLoaded)
+            if (!forceSave && !IsConnectionsFileLoaded)
                 return;
 
             if (_batchingSaves)
@@ -223,12 +230,16 @@ namespace mRemoteNG.Connection
 
         public string GetStartupConnectionFileName()
         {
-            return Settings.Default.LoadConsFromCustomLocation == false ? GetDefaultStartupConnectionFileName() : Settings.Default.CustomConsPath;
+            return Settings.Default.LoadConsFromCustomLocation == false 
+                ? GetDefaultStartupConnectionFileName() 
+                : Settings.Default.CustomConsPath;
         }
 
         public string GetDefaultStartupConnectionFileName()
         {
-            return Runtime.IsPortableEdition ? GetDefaultStartupConnectionFileNamePortableEdition() : GetDefaultStartupConnectionFileNameNormalEdition();
+            return Runtime.IsPortableEdition 
+                ? GetDefaultStartupConnectionFileNamePortableEdition() 
+                : GetDefaultStartupConnectionFileNameNormalEdition();
         }
 
         private void UpdateCustomConsPathSetting(string filename)

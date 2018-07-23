@@ -1,5 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Messages;
+using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI
 {
@@ -12,6 +17,75 @@ namespace mRemoteNG.UI
                 Title = "",
                 CheckFileExists = true,
                 InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
+                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
+            };
+        }
+
+        public static void BuildLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton)
+        {
+            var commandButtons = new List<string>
+            {
+                Language.ConfigurationCreateNew,
+                Language.strOpenADifferentFile,
+                Language.strMenuExit
+            };
+
+            if (showCancelButton)
+                commandButtons.Add(Language.strButtonCancel);
+
+            var answered = false;
+            while (!answered)
+            {
+                try
+                {
+                    CTaskDialog.ShowTaskDialogBox(
+                        GeneralAppInfo.ProductName,
+                        messageText,
+                        "", "", "", "", "",
+                        string.Join(" | ", commandButtons),
+                        ETaskDialogButtons.None,
+                        ESysIcons.Question,
+                        ESysIcons.Question);
+
+                    switch (CTaskDialog.CommandButtonResult)
+                    {
+                        case 0: // New
+                            var saveAsDialog = ConnectionsSaveAsDialog();
+                            saveAsDialog.ShowDialog();
+                            Runtime.ConnectionsService.NewConnectionsFile(saveAsDialog.FileName);
+                            answered = true;
+                            break;
+                        case 1: // Load
+                            Runtime.LoadConnections(true);
+                            answered = true;
+                            break;
+                        case 2: // Exit
+                            Application.Exit();
+                            answered = true;
+                            break;
+                        case 3: // Cancel
+                            answered = true;
+                            break;
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionFileName), 
+                        exception,
+                        MessageClass.WarningMsg);
+                }
+            }
+        }
+
+        public static SaveFileDialog ConnectionsSaveAsDialog()
+        {
+            return new SaveFileDialog
+            {
+                CheckPathExists = true,
+                InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
+                FileName = ConnectionsFileInfo.DefaultConnectionsFile,
+                OverwritePrompt = true,
                 Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
             };
         }

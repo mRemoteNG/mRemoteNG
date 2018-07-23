@@ -4,7 +4,6 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
-using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
@@ -20,7 +19,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.App
 {
-	public static class Runtime
+    public static class Runtime
     {
         public static bool IsPortableEdition
         {
@@ -92,18 +91,6 @@ namespace mRemoteNG.App
                 if (Settings.Default.UseSQLServer)
                 {
                     ConnectionsService.LastSqlUpdate = DateTime.Now;
-                }
-                else
-                {
-                    if (connectionFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = false;
-                    }
-                    else
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = connectionFileName;
-                    }
                 }
 
                 // re-enable sql update checking after updates are loaded
