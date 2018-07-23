@@ -4,7 +4,6 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -78,12 +77,6 @@ namespace mRemoteNG.App
                     {
                         connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                     }
-
-                    var backupFileCreator = new FileBackupCreator();
-                    backupFileCreator.CreateBackupFile(connectionFileName);
-
-                    var backupPruner = new FileBackupPruner();
-                    backupPruner.PruneBackupFiles(connectionFileName);
                 }
 
                 ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);

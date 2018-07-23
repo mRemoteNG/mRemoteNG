@@ -3,6 +3,7 @@
 Fixes:
 ------
 #1030: Exception thrown if importing from port scan and no tree node is selected
+#1020: BackupFileKeepCount setting not limiting backup file count
 #1004: Duplicating root or PuTTy node through hotkey causes unhandled exception
 #1002: Disabling filtering without clearing keyword leaves filtered state
 #1001: Connection tree context menu hotkeys stop working and disappear in some cases
