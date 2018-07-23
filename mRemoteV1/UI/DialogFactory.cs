@@ -21,6 +21,13 @@ namespace mRemoteNG.UI
             };
         }
 
+        /// <summary>
+        /// Creates and shows a dialog to either create a new connections file, load a different one,
+        /// exit, or optionally cancel the operation.
+        /// </summary>
+        /// <param name="connectionFileName"></param>
+        /// <param name="messageText"></param>
+        /// <param name="showCancelButton"></param>
         public static void BuildLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton)
         {
             var commandButtons = new List<string>
@@ -78,6 +85,11 @@ namespace mRemoteNG.UI
             }
         }
 
+        /// <summary>
+        /// Creates a new dialog that allows the user to select an mRemoteNG
+        /// connections file path. Don't forget to dispose the dialog when you
+        /// are done!
+        /// </summary>
         public static SaveFileDialog ConnectionsSaveAsDialog()
         {
             return new SaveFileDialog
