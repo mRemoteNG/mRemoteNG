@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -368,13 +367,15 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileNew_Click(object sender, EventArgs e)
         {
-            var saveFileDialog = ConnectionsSaveAsDialog();
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            using (var saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
             {
-                return;
-            }
+                if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
 
-            Runtime.ConnectionsService.NewConnectionsFile(saveFileDialog.FileName);
+                Runtime.ConnectionsService.NewConnectionsFile(saveFileDialog.FileName);
+            }
         }
 
         private void mMenFileLoad_Click(object sender, EventArgs e)
@@ -403,15 +404,11 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileSaveAs_Click(object sender, EventArgs e)
         {
-            using (var saveFileDialog = new SaveFileDialog())
+            using (var saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
             {
-                saveFileDialog.CheckPathExists = true;
-                saveFileDialog.InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath;
-                saveFileDialog.FileName = ConnectionsFileInfo.DefaultConnectionsFile;
-                saveFileDialog.OverwritePrompt = true;
-                saveFileDialog.Filter = $@"{Language.strFiltermRemoteXML}|*.xml|{Language.strFilterAll}|*.*";
+                if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK)
+                    return;
 
-                if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
                 var newFileName = saveFileDialog.FileName;
 
                 Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
@@ -503,18 +500,6 @@ namespace mRemoteNG.UI.Menu
         private void mMenFileExit_Click(object sender, EventArgs e)
         {
             Shutdown.Quit();
-        }
-
-        public static SaveFileDialog ConnectionsSaveAsDialog()
-        {
-            return new SaveFileDialog
-            {
-                CheckPathExists = true,
-                InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
-                FileName = ConnectionsFileInfo.DefaultConnectionsFile,
-                OverwritePrompt = true,
-                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
-            };
         }
         #endregion
     }
