@@ -28,7 +28,7 @@ namespace mRemoteNG.UI
         /// <param name="connectionFileName"></param>
         /// <param name="messageText"></param>
         /// <param name="showCancelButton"></param>
-        public static void BuildLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton)
+        public static void ShowLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton)
         {
             var commandButtons = new List<string>
             {
