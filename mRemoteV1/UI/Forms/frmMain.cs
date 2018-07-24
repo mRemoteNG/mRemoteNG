@@ -139,11 +139,11 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            SetMenuDependencies();
-
             msMain.Location = Point.Empty;
             var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip);
             settingsLoader.LoadSettings();
+
+            SetMenuDependencies();
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
