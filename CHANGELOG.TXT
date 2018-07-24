@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1034: Connection context menu not being translated
 #1030: Exception thrown if importing from port scan and no tree node is selected
 #1020: BackupFileKeepCount setting not limiting backup file count
 #1004: Duplicating root or PuTTy node through hotkey causes unhandled exception
