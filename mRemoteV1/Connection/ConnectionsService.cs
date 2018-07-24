@@ -32,11 +32,6 @@ namespace mRemoteNG.Connection
         public DateTime LastSqlUpdate { get; set; }
 
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
-        //public ConnectionTreeModel ConnectionTreeModel
-        //{
-        //    get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
-        //    set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
-        //}
 
         public ConnectionsService(PuttySessionsManager puttySessionsManager)
         {
