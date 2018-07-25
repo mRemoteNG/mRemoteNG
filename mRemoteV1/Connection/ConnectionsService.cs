@@ -78,6 +78,10 @@ namespace mRemoteNG.Connection
                 {
                     newConnectionInfo.Port = uri.Port;
                 }
+
+                if (string.IsNullOrEmpty(newConnectionInfo.Panel))
+                    newConnectionInfo.Panel = Language.strGeneral;
+
                 newConnectionInfo.IsQuickConnect = true;
 
                 return newConnectionInfo;
