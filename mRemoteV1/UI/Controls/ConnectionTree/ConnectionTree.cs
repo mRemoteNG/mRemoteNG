@@ -20,7 +20,8 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
 	    private readonly StatusImageList _statusImageList = new StatusImageList();
-		private bool _nodeInEditMode;
+        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
+        private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
         private ConnectionTreeModel _connectionTreeModel;
@@ -53,8 +54,6 @@ namespace mRemoteNG.UI.Controls
             SetupConnectionTreeView();
             UseOverlays = false;
         }
-
-        
 
         protected override void Dispose(bool disposing)
         {
@@ -265,6 +264,9 @@ namespace mRemoteNG.UI.Controls
             if (SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttyRoot || SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
                 return;
 
+            // the new node will survive filtering if filtering is active
+            _connectionTreeSearchTextFilter.SpecialInclusionList.Add(newNode);
+
             // use root node if no node is selected
             ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
@@ -332,10 +334,24 @@ namespace mRemoteNG.UI.Controls
             AutoResizeColumn(Columns[0]);
         }
 
-        protected override void UpdateFiltering()
+        /// <summary>
+        /// Filters tree items based on the given <see cref="filterText"/>
+        /// </summary>
+        /// <param name="filterText">The text to filter by</param>
+        public void ApplyFilter(string filterText)
         {
-            base.UpdateFiltering();
-            AutoResizeColumn(Columns[0]);
+            UseFiltering = true;
+            _connectionTreeSearchTextFilter.FilterText = filterText;
+            ModelFilter = _connectionTreeSearchTextFilter;
+        }
+
+        /// <summary>
+        /// Removes all item filtering from the connection tree
+        /// </summary>
+        public void RemoveFilter()
+        {
+            UseFiltering = false;
+            ResetColumnFiltering();
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
@@ -359,6 +375,12 @@ namespace mRemoteNG.UI.Controls
 				UpdateFiltering();
 			}
 		}
+
+        protected override void UpdateFiltering()
+        {
+            base.UpdateFiltering();
+            AutoResizeColumn(Columns[0]);
+        }
 
         private void tvConnections_AfterSelect(object sender, EventArgs e)
         {
@@ -431,6 +453,9 @@ namespace mRemoteNG.UI.Controls
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
                 _nodeInEditMode = false;
                 _allowEdit = false;
+                // ensures that if we are filtering and a new item is added that doesn't match the filter, it will be filtered out
+                _connectionTreeSearchTextFilter.SpecialInclusionList.Clear();
+                UpdateFiltering();
                 Windows.ConfigForm.SelectedTreeNode = SelectedNode;
             }
             catch (Exception ex)

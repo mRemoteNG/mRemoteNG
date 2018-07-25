@@ -19,7 +19,6 @@ namespace mRemoteNG.UI.Window
 	    private readonly ConnectionContextMenu _contextMenu;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
 		private ThemeManager _themeManager;
-	    private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
 
 		public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
@@ -43,7 +42,6 @@ namespace mRemoteNG.UI.Window
 			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += OnAppSettingsChanged;
-            olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
         }
 
 	    private void OnAppSettingsChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -243,13 +241,10 @@ namespace mRemoteNG.UI.Window
 	        {
 	            if (txtSearch.Text == "" || txtSearch.Text == Language.strSearchPrompt)
 	            {
-	                olvConnections.UseFiltering = false;
-	                olvConnections.ResetColumnFiltering();
+	                olvConnections.RemoveFilter();
 	                return;
 	            }
-	            olvConnections.UseFiltering = true;
-	            _connectionTreeSearchTextFilter.FilterText = txtSearch.Text;
-	            olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
+	            olvConnections.ApplyFilter(txtSearch.Text);
 	        }
 	        else
 	        {
