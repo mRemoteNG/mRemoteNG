@@ -645,7 +645,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ConDefaultPanel" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">General</Value>
     </Setting>
     <Setting Name="SaveConnectionsAfterEveryEdit" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
