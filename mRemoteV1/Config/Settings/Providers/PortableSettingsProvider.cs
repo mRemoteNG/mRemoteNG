@@ -45,20 +45,7 @@ namespace mRemoteNG.Config.Settings.Providers
 
         private string _filePath => Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? throw new InvalidOperationException(), $"{ApplicationName}.settings");
 
-        private XmlNode _localSettingsNode
-        {
-            get
-            {
-                var settingsNode = GetSettingsNode(_localSettingsNodeName);
-                var machineNode = settingsNode.SelectSingleNode(Environment.MachineName.ToLowerInvariant());
-
-                if (machineNode != null) return machineNode;
-                machineNode = _rootDocument.CreateElement(Environment.MachineName.ToLowerInvariant());
-                settingsNode.AppendChild(machineNode);
-
-                return machineNode;
-            }
-        }
+        private XmlNode _localSettingsNode => GetSettingsNode(_localSettingsNodeName);
 
         private XmlNode _globalSettingsNode => GetSettingsNode(_globalSettingsNodeName);
 
@@ -138,9 +125,7 @@ namespace mRemoteNG.Config.Settings.Providers
 
         private void SetValue(SettingsPropertyValue propertyValue)
         {
-            var targetNode = IsGlobal(propertyValue.Property)
-               ? _globalSettingsNode
-               : _localSettingsNode;
+            var targetNode = IsGlobal(propertyValue.Property) ? _globalSettingsNode : _localSettingsNode;
 
             var settingNode = targetNode.SelectSingleNode($"setting[@name='{propertyValue.Name}']");
 
