@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1045: Config window shows several incorrect properties for HTTPS connections
 #1038: Unable to add connection with active filter
 #1036: Exception when themes are active and options page closed on Connections then reopened
 #1034: Connection context menu not being translated
