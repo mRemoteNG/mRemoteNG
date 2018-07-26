@@ -265,6 +265,11 @@ namespace mRemoteNG.UI.Window
 			    _btnShowInheritance.Checked = false;
 			}
 		}
+
+        /// <summary>
+        /// A list of properties being shown for the current object.
+        /// </summary>
+	    public IEnumerable<string> VisibleObjectProperties => _pGrid.VisibleProperties;
         #endregion
 
         #region Constructors

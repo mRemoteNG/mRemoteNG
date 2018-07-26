@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 
@@ -42,6 +43,11 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 			InitializeComponent();
 			base.SelectedObject = _mWrapper;
 		}
+
+	    /// <summary>
+	    /// A list of all currently properties being shown by the property grid.
+	    /// </summary>
+	    public IEnumerable<string> VisibleProperties => _propertyDescriptors.Select(p => p.Name);
 
         public new AttributeCollection BrowsableAttributes {
 			get { return _browsableAttributes; }
@@ -141,10 +147,13 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 			else
 			{
 				// Fill the collection with all the properties.
-				var originalpropertydescriptors = TypeDescriptor.GetProperties(_mWrapper.SelectedObject);
+				var originalPropertyDescriptors = TypeDescriptor
+				    .GetProperties(_mWrapper.SelectedObject)
+				    .OfType<PropertyDescriptor>()
+			        .Where(PropertyDoesntHaveBrowsableFalseAttribute);
 
-				foreach(PropertyDescriptor propertydescriptor in originalpropertydescriptors)
-				    _propertyDescriptors.Add(propertydescriptor);
+				foreach(PropertyDescriptor propertyDescriptor in originalPropertyDescriptors)
+				    _propertyDescriptors.Add(propertyDescriptor);
 
 				// Remove from the list the attributes that mustn't be displayed.
 				if(_hiddenAttributes != null)
@@ -192,6 +201,17 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 		}
 
         /// <summary>
+        /// Predicate to determine if a property has a Browsable(false) attribute
+        /// attatched to it. If so, it should not be shown.
+        /// </summary>
+        /// <param name="propertyDescriptor"></param>
+        /// <returns></returns>
+	    private bool PropertyDoesntHaveBrowsableFalseAttribute(PropertyDescriptor propertyDescriptor)
+	    {
+	        return !propertyDescriptor.Attributes.Contains(new BrowsableAttribute(false));
+	    }
+
+	    /// <summary>
         /// Allows to hide a set of properties to the parent PropertyGrid.
         /// </summary>
         /// <param name="attribute">A set of attributes that filter the original collection of properties.</param>
@@ -214,7 +234,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
         {
 			var filteredoriginalpropertydescriptors = TypeDescriptor.GetProperties(_mWrapper.SelectedObject,new[] { attribute });
 			if(filteredoriginalpropertydescriptors == null || filteredoriginalpropertydescriptors.Count == 0)
-			    throw new ArgumentException("Attribute not found",attribute.ToString());
+			    throw new ArgumentException("Attribute not found", attribute.ToString());
 
 			foreach(PropertyDescriptor propertydescriptor in filteredoriginalpropertydescriptors)
 			    ShowProperty(propertydescriptor);
