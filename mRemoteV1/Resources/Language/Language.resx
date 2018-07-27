@@ -2679,4 +2679,10 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
     <value>Create an empty panel when mRemoteNG starts</value>
   </data>
+  <data name="strIPRange" xml:space="preserve">
+    <value>Must Be Between 0 and 255</value>
+  </data>
+  <data name="strOutOfRange" xml:space="preserve">
+    <value>Out Of Range</value>
+  </data>
 </root>

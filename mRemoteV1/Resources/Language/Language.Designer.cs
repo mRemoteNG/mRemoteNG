@@ -2778,6 +2778,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must Be Between 0 and 255.
+        /// </summary>
+        internal static string strIPRange {
+            get {
+                return ResourceManager.GetString("strIPRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CTRL-ALT-DEL.
         /// </summary>
         internal static string strKeysCtrlAltDel {
@@ -4305,6 +4314,15 @@ namespace mRemoteNG {
         internal static string strOptionsThemeThemeChaangeWarning {
             get {
                 return ResourceManager.GetString("strOptionsThemeThemeChaangeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out Of Range.
+        /// </summary>
+        internal static string strOutOfRange {
+            get {
+                return ResourceManager.GetString("strOutOfRange", resourceCulture);
             }
         }
         
