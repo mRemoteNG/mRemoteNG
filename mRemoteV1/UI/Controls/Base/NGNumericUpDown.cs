@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
+// ReSharper disable LocalizableElement
 
 namespace mRemoteNG.UI.Controls.Base
 {
@@ -14,7 +15,7 @@ namespace mRemoteNG.UI.Controls.Base
         private NGButton Up;
         private NGButton Down;
 
-        public NGNumericUpDown() : base()
+        public NGNumericUpDown()
         {
             _themeManager = ThemeManager.getInstance();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
