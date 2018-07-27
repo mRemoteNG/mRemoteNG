@@ -7,6 +7,7 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace mRemoteNG.Themes
 {
 
+    /// <inheritdoc />
     /// <summary>
     /// Container class for all the color and style elements to define a theme
     /// </summary>
@@ -15,34 +16,32 @@ namespace mRemoteNG.Themes
         #region Private Variables
         private string _name;
         private ThemeBase _theme;
-        private String  _URI;
+        private string  _URI;
         private VisualStudioToolStripExtender.VsVersion _version;
         private ExtendedColorPalette _extendedPalette;
-        private bool _isThemeBase;
-        private bool _isExtendable;
 
         #endregion
 
         #region Constructors
-        public ThemeInfo(string themeName, ThemeBase inTheme, String inURI, VisualStudioToolStripExtender.VsVersion inVersion, ExtendedColorPalette inExtendedPalette)
+        public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion, ExtendedColorPalette inExtendedPalette)
         {
             _name = themeName;
             _theme = inTheme;
             _URI = inURI;
             _version = inVersion;
             _extendedPalette = inExtendedPalette;
-            _isThemeBase = false;
-            _isExtendable = false;
+            IsThemeBase = false;
+            IsExtendable = false;
         }
 
-        public ThemeInfo(string themeName, ThemeBase inTheme, String inURI, VisualStudioToolStripExtender.VsVersion inVersion)
+        public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion)
         {
             _name = themeName;
             _theme = inTheme;
             _URI = inURI;
             _version = inVersion;
-            _isThemeBase = false;
-            _isExtendable = false;
+            IsThemeBase = false;
+            IsExtendable = false;
         }
         #endregion
 
@@ -57,8 +56,8 @@ namespace mRemoteNG.Themes
             };
             var clonedObj = new ThemeInfo(_name, _theme, _URI, _version, extPalette)
             {
-                IsExtendable = _isExtendable,
-                IsThemeBase = _isThemeBase
+                IsExtendable = IsExtendable,
+                IsThemeBase = IsThemeBase
             };
 
             return clonedObj;
@@ -71,8 +70,8 @@ namespace mRemoteNG.Themes
         [Browsable(false)]
         public string Name
 		{
-			get { return _name; }
-			set
+			get => _name;
+            set
 			{
 				if (string.Equals(_name, value, StringComparison.InvariantCulture))
 				{
@@ -84,7 +83,7 @@ namespace mRemoteNG.Themes
 
         public ThemeBase Theme
         {
-            get { return _theme; }
+            get => _theme;
             set
             {
                 if (value != null && _theme == value)
@@ -97,7 +96,7 @@ namespace mRemoteNG.Themes
 
         public string  URI
         {
-            get { return _URI; }
+            get => _URI;
             set
             {
                 if (value != null && _URI == value)
@@ -110,7 +109,7 @@ namespace mRemoteNG.Themes
 
         public VisualStudioToolStripExtender.VsVersion Version
         {
-            get { return _version; }
+            get => _version;
             set
             {
                 if (Equals(_version, value))
@@ -123,7 +122,7 @@ namespace mRemoteNG.Themes
 
         public ExtendedColorPalette ExtendedPalette
         {
-            get { return _extendedPalette; }
+            get => _extendedPalette;
             set
             {
                 if (_extendedPalette != null && _extendedPalette == value)
@@ -134,23 +133,10 @@ namespace mRemoteNG.Themes
             }
         }
 
-        public bool IsThemeBase
-        {
-            get { return _isThemeBase; }
-            set
-            { 
-                _isThemeBase = value;
-            }
-        }
+        public bool IsThemeBase { get; set; }
 
-        public bool IsExtendable
-        {
-            get { return _isExtendable; }
-            set
-            {
-                _isExtendable = value;
-            }
-        }
+        public bool IsExtendable { get; set; }
+
         #endregion
     }
 }
