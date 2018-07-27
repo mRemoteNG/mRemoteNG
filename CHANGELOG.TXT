@@ -1,9 +1,3 @@
-1.77.0 (2018-xx-xx):
-Fixes:
-------
-#971: Portal Settings now apply to any machine they are used on
-
-
 1.76.5 (2018-xx-xx):
 
 Fixes:
@@ -16,6 +10,7 @@ Fixes:
 #999: Some hotkeys stop working if File menu was called when PuTTy Saved Sessions was selected
 #998: Can sometimes add connection under PuTTY Sessions node
 #991: Error when deleting host in filtered view
+#971: Portal Settings now apply to any machine they are used on
 #961: Connections file overwritten if correct decryption password not provided
 
 
