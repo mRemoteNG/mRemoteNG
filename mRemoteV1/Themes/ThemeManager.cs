@@ -217,11 +217,12 @@ namespace mRemoteNG.Themes
             }
         }
 
-        private ThemeInfo DefaultTheme => (ThemeInfo) themes["vs2015light"];
+        public ThemeInfo DefaultTheme => (ThemeInfo) themes["vs2015light"];
 
         public ThemeInfo ActiveTheme
 		{
-			get => _activeTheme;
+            // default if themes are not enabled
+            get => ThemingActive == false ? DefaultTheme : _activeTheme;
             set
 			{
                 //You can only enable theming if there are themes laoded
