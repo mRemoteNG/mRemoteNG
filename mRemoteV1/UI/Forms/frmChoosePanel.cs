@@ -23,8 +23,8 @@ namespace mRemoteNG.UI.Forms
 	    private void frmChoosePanel_Load(object sender, System.EventArgs e)
 		{
 			ApplyLanguage();
-			
-			AddAvailablePanels();
+		    ApplyTheme();
+		    AddAvailablePanels();
 		}
 		
 		private void ApplyLanguage()
@@ -35,8 +35,17 @@ namespace mRemoteNG.UI.Forms
 			btnCancel.Text = Language.strButtonCancel;
 			Text = Language.strTitleSelectPanel;
 		}
-		
-		private void AddAvailablePanels()
+
+	    private void ApplyTheme()
+	    {
+            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            lblDescription.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            lblDescription.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+        }
+
+        private void AddAvailablePanels()
 		{
 			cbPanels.Items.Clear();
 			
