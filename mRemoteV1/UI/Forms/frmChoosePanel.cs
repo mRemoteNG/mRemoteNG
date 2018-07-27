@@ -16,15 +16,9 @@ namespace mRemoteNG.UI.Forms
 		}
         public string Panel
 		{
-			get
-			{
-				return cbPanels.SelectedItem.ToString();
-			}
-			set
-			{
-				cbPanels.SelectedItem = value;
-			}
-		}
+			get => cbPanels.SelectedItem.ToString();
+            set => cbPanels.SelectedItem = value;
+        }
 
 	    private void frmChoosePanel_Load(object sender, System.EventArgs e)
 		{
@@ -46,7 +40,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			cbPanels.Items.Clear();
 			
-			for (int i = 0; i <= Runtime.WindowList.Count - 1; i++)
+			for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
 			{
                 cbPanels.Items.Add(Runtime.WindowList[i].Text.Replace("&&", "&"));
 			}
@@ -67,14 +61,12 @@ namespace mRemoteNG.UI.Forms
 	    private void btnNew_Click(object sender, System.EventArgs e)
 		{
 		    var pnlName = Language.strNewPanel;
-			
-			if (input.InputBox(Language.strNewPanel, Language.strPanelName + ":", ref pnlName) == DialogResult.OK && !string.IsNullOrEmpty(pnlName))
-			{
-                _panelAdder.AddPanel(pnlName);
-				AddAvailablePanels();
-				cbPanels.SelectedItem = pnlName;
-				cbPanels.Focus();
-			}
+
+		    if (input.InputBox(Language.strNewPanel, Language.strPanelName + ":", ref pnlName) != DialogResult.OK || string.IsNullOrEmpty(pnlName)) return;
+		    _panelAdder.AddPanel(pnlName);
+		    AddAvailablePanels();
+		    cbPanels.SelectedItem = pnlName;
+		    cbPanels.Focus();
 		}
 
 	    private void btnOK_Click(object sender, System.EventArgs e)
