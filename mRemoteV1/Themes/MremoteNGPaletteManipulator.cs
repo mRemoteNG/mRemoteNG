@@ -34,7 +34,7 @@ namespace mRemoteNG.Themes
             foreach (DictionaryEntry entry in resourceSet)
             {
                 var colorName  = entry.Key.ToString();
-                var xmlQueryPath = (string)entry.Value;
+                var xmlQueryPath = entry.Value.ToString();
                 if (_xml.DocumentElement == null) continue;
                 var colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
                 var color = colorNodeList != null && colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
@@ -60,7 +60,7 @@ namespace mRemoteNG.Themes
             foreach (DictionaryEntry entry in resourceSet)
             {
                 var colorName = entry.Key.ToString();
-                var xmlQueryPath = (string)entry.Value;
+                var xmlQueryPath = entry.Value.ToString();
                 var colorNodeList = _xml.DocumentElement?.FirstChild.SelectNodes(xmlQueryPath);
                 if (colorNodeList == null || colorNodeList.Count <= 0) continue;
                 var paletteColor = colorPalette.getColor(colorName);
