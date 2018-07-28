@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1050: Config window retains access to previously selected node after loading new connections file
 #1045: Config window shows several incorrect properties for HTTPS connections
 #1039: Set default theme when themes disabled
 #1038: Unable to add connection with active filter
