@@ -125,9 +125,6 @@ namespace mRemoteNG.Config.Putty
 			
 		public override void StartWatcher()
 		{
-			PuttySessionsRegistryProvider.StartWatcher();
-			PuttySessionsRegistryProvider.PuttySessionChanged += OnRegistrySessionChanged;
-				
 			if (_eventWatcher != null)
 			{
 				return;
@@ -136,18 +133,22 @@ namespace mRemoteNG.Config.Putty
 			try
 			{
                 var sessionsFolderPath = GetSessionsFolderPath();
-                if (Directory.Exists(sessionsFolderPath))
-                {
-                    _eventWatcher = new FileSystemWatcher(sessionsFolderPath)
-                    {
-                        NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite
-                    };
-                    _eventWatcher.Changed += OnFileSystemEventArrived;
-                    _eventWatcher.Created += OnFileSystemEventArrived;
-                    _eventWatcher.Deleted += OnFileSystemEventArrived;
-                    _eventWatcher.Renamed += OnFileSystemEventArrived;
-                    _eventWatcher.EnableRaisingEvents = true;
-                }
+
+			    if (!Directory.Exists(sessionsFolderPath))
+			    {
+			        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"XmingPortablePuttySessions.Watcher.StartWatching() failed: '{sessionsFolderPath}' does not exist.", true);
+			        return;
+			    }
+
+			    _eventWatcher = new FileSystemWatcher(sessionsFolderPath)
+			    {
+			        NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite
+			    };
+			    _eventWatcher.Changed += OnFileSystemEventArrived;
+			    _eventWatcher.Created += OnFileSystemEventArrived;
+			    _eventWatcher.Deleted += OnFileSystemEventArrived;
+			    _eventWatcher.Renamed += OnFileSystemEventArrived;
+			    _eventWatcher.EnableRaisingEvents = true;
 			}
 			catch (Exception ex)
 			{

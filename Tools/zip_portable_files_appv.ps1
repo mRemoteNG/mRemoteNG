@@ -1,35 +1,18 @@
-param (
-    [string]
-    [Parameter(Mandatory=$true)]
-    $SolutionDir,
-
-    [string]
-    [Parameter(Mandatory=$true)]
-    $TargetDir,
-
-    [string]
-    [Parameter(Mandatory=$true)]
-    $ConfigurationName
-)
-
-Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
-
-if(-not [string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) {
-    Write-Output "Too early to run via Appveyor - artifacts don't get generated properly. Exiting"
+if([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) {
+    Write-Output "NOT running via Appveyor - Exiting"
     Exit
 }
 
-Write-Output "Solution Dir: '$($SolutionDir)'"
-Write-Output "Target Dir: '$($TargetDir)'"
-$ConfigurationName = $ConfigurationName.Trim()
+$appvDir = $Env:APPVEYOR_BUILD_FOLDER
+
+Write-Output "Appveyor Build Dir: '$($appvDir)'"
+$ConfigurationName = $Env:CONFIGURATION.Trim()
 Write-Output "Config Name (tirmmed): '$($ConfigurationName)'"
 
 
-# Windows Sysinternals Sigcheck from http://technet.microsoft.com/en-us/sysinternals/bb897441
 $SIGCHECK="$($SolutionDir)Tools\exes\sigcheck.exe"
 $SEVENZIP="$($SolutionDir)Tools\7zip\7za.exe"
 
-# Package Zip
 if ($ConfigurationName -eq "Release Portable") {
     Write-Output "Packaging Release Portable ZIP"
    
@@ -44,18 +27,13 @@ if ($ConfigurationName -eq "Release Portable") {
     
     Copy-Item "$($SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" -Destination "$($SolutionDir)mRemoteV1\bin\package"
 
-    #Write-Output "$($SolutionDir)mRemoteV1\bin\$ConfigurationName" 
-    #Write-Output "$($SolutionDir)mRemoteV1\bin\package"
     Copy-Item "$($SolutionDir)mRemoteV1\bin\$ConfigurationName\*" -Destination "$($SolutionDir)mRemoteV1\bin\package" -Recurse  -Force 
     Copy-Item "$($SolutionDir)*.txt" -Destination "$($SolutionDir)mRemoteV1\bin\package"
 
     Write-Output "Creating portable ZIP file $($PortableZip)"
     Remove-Item -Force  $PortableZip -ErrorAction SilentlyContinue
     & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip "$($SolutionDir)mRemoteV1\bin\package\*.*"
-    #& $SEVENZIP a -bt -mx=9 -tzip -y $PortableZip "$($SolutionDir)*.TXT"
 }
 else {
     Write-Output "We will not zip anything - this isnt a portable release build."
 }
-
-Write-Output ""
