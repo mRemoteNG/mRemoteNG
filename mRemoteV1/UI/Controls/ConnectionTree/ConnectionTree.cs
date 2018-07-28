@@ -418,6 +418,13 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
+                if (!Settings.Default.ShowDescriptionTooltipsInTree)
+                {
+                    // setting text to null prevents the tooltip from being shown
+                    e.Text = null;
+                    return;
+                }
+
                 var nodeProducingTooltip = (ConnectionInfo)e.Model;
                 e.Text = nodeProducingTooltip.Description;
             }
