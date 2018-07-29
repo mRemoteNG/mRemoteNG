@@ -2685,4 +2685,10 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strOutOfRange" xml:space="preserve">
     <value>Out Of Range</value>
   </data>
+  <data name="strDelete" xml:space="preserve">
+    <value>Delete...</value>
+  </data>
+  <data name="strReconnectAllConnections" xml:space="preserve">
+    <value>Reconnect All Connections</value>
+  </data>
 </root>

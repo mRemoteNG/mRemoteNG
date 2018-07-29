@@ -1712,6 +1712,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete....
+        /// </summary>
+        internal static string strDelete {
+            get {
+                return ResourceManager.GetString("strDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detect.
         /// </summary>
         internal static string strDetect {
@@ -6252,6 +6261,15 @@ namespace mRemoteNG {
         internal static string strRdpToggleSmartSizeFailed {
             get {
                 return ResourceManager.GetString("strRdpToggleSmartSizeFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reconnect All Connections.
+        /// </summary>
+        internal static string strReconnectAllConnections {
+            get {
+                return ResourceManager.GetString("strReconnectAllConnections", resourceCulture);
             }
         }
         

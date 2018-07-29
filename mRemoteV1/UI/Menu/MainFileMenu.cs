@@ -167,7 +167,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileDelete.Image = Resources.Delete;
             _mMenFileDelete.Name = "mMenFileDelete";
             _mMenFileDelete.Size = new System.Drawing.Size(281, 22);
-            _mMenFileDelete.Text = "Delete...";
+            _mMenFileDelete.Text = Language.strDelete;
             _mMenFileDelete.Click += mMenFileDelete_Click;
             // 
             // mMenFileRename
@@ -175,7 +175,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileRename.Image = Resources.Rename;
             _mMenFileRename.Name = "mMenFileRename";
             _mMenFileRename.Size = new System.Drawing.Size(281, 22);
-            _mMenFileRename.Text = "Rename";
+            _mMenFileRename.Text = Language.strRename;
             _mMenFileRename.Click += mMenFileRename_Click;
             // 
             // mMenFileDuplicate
@@ -183,7 +183,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileDuplicate.Image = Resources.page_copy;
             _mMenFileDuplicate.Name = "mMenFileDuplicate";
             _mMenFileDuplicate.Size = new System.Drawing.Size(281, 22);
-            _mMenFileDuplicate.Text = "Duplicate";
+            _mMenFileDuplicate.Text = Language.strDuplicate;
             _mMenFileDuplicate.Click += mMenFileDuplicate_Click;
             // 
             // mMenFileSep4
@@ -196,7 +196,7 @@ namespace mRemoteNG.UI.Menu
             _mMenReconnectAll.Image = Resources.Refresh;
             _mMenReconnectAll.Name = "mMenReconnectAll";
             _mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
-            _mMenReconnectAll.Text = "Reconnect All Connections";
+            _mMenReconnectAll.Text = Language.strReconnectAllConnections;
             _mMenReconnectAll.Click += mMenReconnectAll_Click;
             // 
             // mMenFileSep3
