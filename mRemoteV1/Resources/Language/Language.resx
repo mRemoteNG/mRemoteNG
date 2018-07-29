@@ -2691,4 +2691,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strReconnectAllConnections" xml:space="preserve">
     <value>Reconnect All Connections</value>
   </data>
+  <data name="strUltraVNCSingleClick" xml:space="preserve">
+    <value>UltraVNC SingleClick</value>
+  </data>
 </root>

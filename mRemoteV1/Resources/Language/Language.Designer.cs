@@ -7300,6 +7300,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UltraVNC SingleClick.
+        /// </summary>
+        internal static string strUltraVNCSingleClick {
+            get {
+                return ResourceManager.GetString("strUltraVNCSingleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uncheck the properties you want not to be saved!.
         /// </summary>
         internal static string strUncheckProperties {
