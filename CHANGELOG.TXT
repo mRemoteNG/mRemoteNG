@@ -5,6 +5,7 @@ Fixes:
 #1051: Tooltips always displayed regardless of 'Show description tooltips in connection tree' setting
 #1050: Config window retains access to previously selected node after loading new connections file
 #1045: Config window shows several incorrect properties for HTTPS connections
+#1040: Canceling "select panel" form does not cancel
 #1039: Set default theme when themes disabled
 #1038: Unable to add connection with active filter
 #1036: Exception when themes are active and options page closed on Connections then reopened
