@@ -17,16 +17,9 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         public MessageFocusDecorator(ErrorAndInfoWindow messageWindow, IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
         {
-            if (filter == null)
-                throw new ArgumentNullException(nameof(filter));
-            if (messageWindow == null)
-                throw new ArgumentNullException(nameof(messageWindow));
-            if (decoratedWriter == null)
-                throw new ArgumentNullException(nameof(decoratedWriter));
-
-            _filter = filter;
-            _messageWindow = messageWindow;
-            _decoratedWriter = decoratedWriter;
+            _filter = filter ?? throw new ArgumentNullException(nameof(filter));
+            _messageWindow = messageWindow ?? throw new ArgumentNullException(nameof(messageWindow));
+            _decoratedWriter = decoratedWriter ?? throw new ArgumentNullException(nameof(decoratedWriter));
         }
 
         public async void Write(IMessage message)
@@ -72,7 +65,11 @@ namespace mRemoteNG.Messages.WriterDecorators
             }
 
             _messageWindow.PreviousActiveForm = (DockContent)_frmMain.pnlDock.ActiveContent;
-            _messageWindow.Show(_frmMain.pnlDock);
+
+            // Show the notifications panel solution:
+            // https://stackoverflow.com/questions/13843604/calling-up-dockpanel-suites-autohidden-dockcontent-programmatically
+            _frmMain.pnlDock.ActiveAutoHideContent = _messageWindow;
+
             _messageWindow.lvErrorCollector.Focus();
             _messageWindow.lvErrorCollector.SelectedItems.Clear();
             _messageWindow.lvErrorCollector.Items[0].Selected = true;
