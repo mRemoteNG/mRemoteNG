@@ -32,7 +32,6 @@ namespace mRemoteNG.UI.Forms
 			btnOK.Text = Language.strButtonOK;
 			lblDescription.Text = Language.strLabelSelectPanel;
 			btnNew.Text = Language.strButtonNew;
-			btnCancel.Text = Language.strButtonCancel;
 			Text = Language.strTitleSelectPanel;
 		}
 
@@ -81,11 +80,6 @@ namespace mRemoteNG.UI.Forms
 	    private void btnOK_Click(object sender, System.EventArgs e)
 		{
             DialogResult = DialogResult.OK;
-		}
-
-	    private void btnCancel_Click(object sender, System.EventArgs e)
-		{
-            DialogResult = DialogResult.Cancel;
 		}
 	}
 }
