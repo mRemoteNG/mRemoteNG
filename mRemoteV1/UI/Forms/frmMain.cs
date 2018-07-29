@@ -75,8 +75,8 @@ namespace mRemoteNG.UI.Forms
 
         public bool AreWeUsingSqlServerForSavingConnections
 		{
-			get { return _usingSqlServer; }
-			set
+			get => _usingSqlServer;
+            set
 			{
 				if (_usingSqlServer == value)
 				{
@@ -89,8 +89,8 @@ namespace mRemoteNG.UI.Forms
 		
         public string ConnectionsFileName
 		{
-			get { return _connectionsFileName; }
-			set
+			get => _connectionsFileName;
+            set
 			{
 				if (_connectionsFileName == value)
 				{
@@ -103,8 +103,8 @@ namespace mRemoteNG.UI.Forms
 		
         public bool ShowFullPathInTitle
 		{
-			get { return _showFullPathInTitle; }
-			set
+			get => _showFullPathInTitle;
+            set
 			{
 				if (_showFullPathInTitle == value)
 				{
@@ -117,8 +117,8 @@ namespace mRemoteNG.UI.Forms
 		
         public ConnectionInfo SelectedConnection
 		{
-			get { return _selectedConnection; }
-			set
+			get => _selectedConnection;
+            set
 			{
 				if (_selectedConnection == value)
 				{
@@ -249,24 +249,20 @@ namespace mRemoteNG.UI.Forms
         //Theming support
         private void SetSchema()
         {
-            if (_themeManager.ThemingActive)
-            {
-                // Persist settings when rebuilding UI
-                this.pnlDock.Theme = _themeManager.ActiveTheme.Theme;
-                ApplyTheme();
-            }
+            if (!_themeManager.ThemingActive) return;
+            // Persist settings when rebuilding UI
+            pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+            ApplyTheme();
         }
         private void ApplyTheme()
 		{
-            if(_themeManager.ThemingActive)
-            {
-                vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
-            }
-        }
+		    if (!_themeManager.ThemingActive) return;
+		    vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
+		}
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
@@ -625,14 +621,8 @@ namespace mRemoteNG.UI.Forms
         public delegate void ClipboardchangeEventHandler();
         public static event ClipboardchangeEventHandler ClipboardChanged
         {
-            add
-            {
-                _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Combine(_clipboardChangedEvent, value);
-            }
-            remove
-            {
-                _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Remove(_clipboardChangedEvent, value);
-            }
+            add => _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Combine(_clipboardChangedEvent, value);
+            remove => _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Remove(_clipboardChangedEvent, value);
         }
         #endregion
 
