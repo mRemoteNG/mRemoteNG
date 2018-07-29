@@ -4,20 +4,20 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class SecurityPage : OptionsPage
+    public sealed partial class SecurityPage : OptionsPage
     {
         public SecurityPage()
         {
             InitializeComponent();
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         [Browsable(false)]
         public override string PageName
         {
-            get { return Language.strTabSecurity; }
+            get => Language.strTabSecurity;
             set { }
         }
 

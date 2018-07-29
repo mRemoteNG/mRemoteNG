@@ -32,7 +32,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get { return Language.strOptionsTabTheme; }
+            get => Language.strOptionsTabTheme;
             set { }
         }
 
