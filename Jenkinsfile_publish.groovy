@@ -4,6 +4,7 @@ node('windows') {
     def msBuild = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\msbuild.exe"
     def nunitConsolePath = "${jobDir}\\packages\\NUnit.ConsoleRunner.3.7.0\\tools\\nunit3-console.exe"
     def openCoverPath = "${jobDir}\\packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe"
+    def testResultFilePrefix = "TestResult"
     def testResultFileNormal = "${testResultFilePrefix}_UnitTests_normal.xml"
     def testResultFilePortable = "${testResultFilePrefix}_UnitTests_portable.xml"
     def coverageReport = "code_coverage_report.xml"
