@@ -55,12 +55,12 @@ namespace mRemoteNG.UI.Forms
 		}
 
 	    private void btnOK_Click(object sender, EventArgs e)
-		{
-			if (Verify && VerifyPassword())
-				DialogResult = DialogResult.OK;
-			else
-				DialogResult = DialogResult.OK;
-		}
+	    {
+	        if (Verify && VerifyPassword())
+	            DialogResult = DialogResult.OK;
+	        else
+	            DialogResult = DialogResult.None;
+	    }
 
 	    private void txtPassword_TextChanged(object sender, EventArgs e)
 		{
