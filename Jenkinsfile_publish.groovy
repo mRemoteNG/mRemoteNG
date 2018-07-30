@@ -48,11 +48,11 @@ node('windows') {
     }
 	
     stage ('Run Unit Tests (Normal - MSI)') {
-        bat "\"${openCoverPath}\" -register:user -target:\"${nunitConsolePath}\" -targetargs:\"\"${jobDir}\\mRemoteNGTests\\bin\\debug\\mRemoteNGTests.dll\" --result=${testResultFileNormal} --x86\" -output:\"${coverageReport}\""
+        bat "\"${nunitConsolePath}\" \"${jobDir}\\mRemoteNGTests\\bin\\release\\mRemoteNGTests.dll\" --result=${testResultFileNormal} --x86"
     }
     
     stage ('Run Unit Tests (Portable)') {
-        bat "\"${nunitConsolePath}\" \"${jobDir}\\mRemoteNGTests\\bin\\debug portable\\mRemoteNGTests.dll\" --result=${testResultFilePortable} --x86"
+        bat "\"${nunitConsolePath}\" \"${jobDir}\\mRemoteNGTests\\bin\\release portable\\mRemoteNGTests.dll\" --result=${testResultFilePortable} --x86"
     }
 
     stage ('Generate UpdateCheck Files') {
