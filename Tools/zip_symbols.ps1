@@ -37,11 +37,11 @@ if ($ConfigurationName -match "Release") {
 
     Write-Output "Version is $($version)"
 
-    $zipFilePath="$($SolutionDir)Release\mRemoteNG-symbols-$($version).zip"
+    $outputZipPath="$($SolutionDir)Release\mRemoteNG-symbols-$($version).zip"
 
-    Write-Output "Creating debug symbols ZIP file $($zipFilePath)"
-    Remove-Item -Force  $zipFilePath -ErrorAction SilentlyContinue
-    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $zipFilePath "$($SolutionDir)mRemoteV1\bin\*.dbg"
+    Write-Output "Creating debug symbols ZIP file $($outputZipPath)"
+    Remove-Item -Force  $outputZipPath -ErrorAction SilentlyContinue
+    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath (Join-Path -Path $TargetDir -ChildPath "*.pdb")
 }
 else {
     Write-Output "We will not package debug symbols - this isnt a release build."
