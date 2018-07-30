@@ -180,6 +180,7 @@ function Upload-GitHubReleaseAsset {
     # Get-Item could produce an array of files if a wildcard is provided. (C:\*.txt)
     # Upload each matching item individually
     foreach ($file in $files) {
+        Write-Output "Uploading asset to GitHub release: '$($file.FullName)'"
         $req_uploadZipAsset = Invoke-WebRequest -Uri "$($UploadUri)?name=$($file.Name)" -Method Post -Headers @{"Authorization"="token $AuthToken"} -ContentType $ContentType -InFile $file.FullName -ErrorAction Stop
     }
 }
