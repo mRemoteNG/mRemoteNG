@@ -64,16 +64,31 @@ namespace mRemoteNG.Messages.WriterDecorators
                 return;
             }
 
+            // do not attempt to focus the notification panel if it is in an inconsistent state
+            if (_messageWindow.DockState == DockState.Unknown)
+                return;
+
             _messageWindow.PreviousActiveForm = (DockContent)_frmMain.pnlDock.ActiveContent;
 
             // Show the notifications panel solution:
             // https://stackoverflow.com/questions/13843604/calling-up-dockpanel-suites-autohidden-dockcontent-programmatically
-            _frmMain.pnlDock.ActiveAutoHideContent = _messageWindow;
+            if (AutoHideEnabled(_messageWindow))
+                _frmMain.pnlDock.ActiveAutoHideContent = _messageWindow;
+            else
+                _messageWindow.Show(_frmMain.pnlDock);
 
             _messageWindow.lvErrorCollector.Focus();
             _messageWindow.lvErrorCollector.SelectedItems.Clear();
             _messageWindow.lvErrorCollector.Items[0].Selected = true;
             _messageWindow.lvErrorCollector.FocusedItem = _messageWindow.lvErrorCollector.Items[0];
+        }
+
+        private bool AutoHideEnabled(DockContent content)
+        {
+            return content.DockState == DockState.DockBottomAutoHide ||
+                   content.DockState == DockState.DockTopAutoHide ||
+                   content.DockState == DockState.DockLeftAutoHide ||
+                   content.DockState == DockState.DockRightAutoHide;
         }
     }
 }
