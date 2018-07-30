@@ -22,7 +22,7 @@ if(-not [string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) {
 Write-Output "Solution Dir: '$($SolutionDir)'"
 Write-Output "Target Dir: '$($TargetDir)'"
 $ConfigurationName = $ConfigurationName.Trim()
-Write-Output "Config Name (tirmmed): '$($ConfigurationName)'"
+Write-Output "Config Name (trimmed): '$($ConfigurationName)'"
 
 
 # Windows Sysinternals Sigcheck from http://technet.microsoft.com/en-us/sysinternals/bb897441
@@ -37,7 +37,13 @@ if ($ConfigurationName -match "Release") {
 
     Write-Output "Version is $($version)"
 
-    $outputZipPath="$($SolutionDir)Release\mRemoteNG-symbols-$($version).zip"
+    if ($ConfigurationName -match "Portable") {
+        $zipFilePrefix = "mRemoteNG-Portable-symbols"
+    } else {
+        $zipFilePrefix = "mRemoteNG-symbols"
+    }
+
+    $outputZipPath="$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
 
     Write-Output "Creating debug symbols ZIP file $($outputZipPath)"
     Remove-Item -Force  $outputZipPath -ErrorAction SilentlyContinue
