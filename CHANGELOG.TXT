@@ -22,6 +22,7 @@ Fixes:
 #971: Portable Settings now apply to any machine they are used on
 #961: Connections file overwritten if correct decryption password not provided
 #893: Removed unneeded files from build/package
+#762: Increased button size to fit locaized text
 
 
 1.76.4 Alpha 6 (2018-06-03):
