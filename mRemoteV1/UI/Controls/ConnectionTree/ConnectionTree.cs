@@ -297,8 +297,11 @@ namespace mRemoteNG.UI.Controls
 
         public void RenameSelectedNode()
         {
-            _allowEdit = true;
-            SelectedItem.BeginEdit();
+            if (SelectedItem != null)
+            {
+                _allowEdit = true;
+                SelectedItem.BeginEdit();
+            }
         }
 
         public void DeleteSelectedNode()
