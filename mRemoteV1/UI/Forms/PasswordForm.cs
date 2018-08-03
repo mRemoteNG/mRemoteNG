@@ -11,15 +11,34 @@ namespace mRemoteNG.UI.Forms
         private readonly string _passwordName;
         private SecureString _password = new SecureString();
 
-	    private bool Verify { get; }
+        /// <summary>
+        /// Puts the dialog into the New Password mode. An extra
+        /// password box is shown which must match the first password
+        /// to continue.
+        /// </summary>
+	    private bool NewPasswordMode { get; }
 
-		public PasswordForm(string passwordName = null, bool verify = true)
+        /// <summary>
+        /// Creates a new password form for entering or setting a password.
+        /// </summary>
+        /// <param name="passwordName"></param>
+        /// <param name="newPasswordMode">
+        /// Puts the dialog into the New Password mode. An extra
+        /// password box is shown which must match the first password
+        /// to continue.
+        /// </param>
+		public PasswordForm(string passwordName = null, bool newPasswordMode = true)
 		{
 			InitializeComponent();
 			_passwordName = passwordName;
-			Verify = verify;
+			NewPasswordMode = newPasswordMode;
 		}
 
+        /// <summary>
+        /// Dispaly a dialog box requesting that the user 
+        /// enter their password.
+        /// </summary>
+        /// <returns></returns>
         public Optional<SecureString> GetKey()
         {
             var dialog = ShowDialog();
@@ -33,7 +52,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			ApplyLanguage();
 
-		    if (Verify) return;
+		    if (NewPasswordMode) return;
 		    Height = Height - (txtVerify.Top - txtPassword.Top);
 		    lblVerify.Visible = false;
 		    txtVerify.Visible = false;
@@ -44,7 +63,7 @@ namespace mRemoteNG.UI.Forms
             _password = txtPassword.Text.ConvertToSecureString();
             txtPassword.Text = "";
             txtVerify.Text = "";
-            if (Verify) return;
+            if (NewPasswordMode) return;
             Height = Height + (txtVerify.Top - txtPassword.Top);
         }
 
@@ -56,10 +75,10 @@ namespace mRemoteNG.UI.Forms
 
 	    private void btnOK_Click(object sender, EventArgs e)
 	    {
-	        if (Verify && VerifyPassword())
-	            DialogResult = DialogResult.OK;
-	        else
-	            DialogResult = DialogResult.None;
+            if (NewPasswordMode)
+	            VerifyNewPassword();
+
+	        DialogResult = DialogResult.OK;
 	    }
 
 	    private void txtPassword_TextChanged(object sender, EventArgs e)
@@ -79,7 +98,7 @@ namespace mRemoteNG.UI.Forms
 			btnOK.Text = Language.strButtonOK;
 		}
 			
-		private bool VerifyPassword()
+		private bool VerifyNewPassword()
 		{
 			if (txtPassword.Text.Length >= 3)
 			{

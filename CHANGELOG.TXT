@@ -1,3 +1,9 @@
+1.76.6 (2018-08-03):
+
+Fixes:
+------
+#1062: Entering correct password when starting app does not load connections file
+
 1.76.5 (2018-08-02):
 
 Fixes:
