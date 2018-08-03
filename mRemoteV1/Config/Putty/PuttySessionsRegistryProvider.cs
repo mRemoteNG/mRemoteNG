@@ -1,19 +1,19 @@
-using Microsoft.Win32;
-using mRemoteNG.App;
-using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Messages;
 using System;
 using System.Collections.Generic;
 using System.Management;
 using System.Security.Principal;
 using System.Text;
 using System.Web;
+using Microsoft.Win32;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
 
 
 namespace mRemoteNG.Config.Putty
 {
-	public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
+    public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
 	{
         private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
         private static ManagementEventWatcher _eventWatcher;
@@ -39,7 +39,10 @@ namespace mRemoteNG.Config.Putty
 		}
         
         public override PuttySessionInfo GetSession(string sessionName)
-		{
+        {
+            if (string.IsNullOrEmpty(sessionName))
+                return null;
+
             var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
             var sessionKey = sessionsKey?.OpenSubKey(sessionName);
 			if (sessionKey == null)	return null;
@@ -53,7 +56,11 @@ namespace mRemoteNG.Config.Putty
 		        Hostname = sessionKey.GetValue("HostName").ToString(),
 		        Username = sessionKey.GetValue("UserName").ToString()
 		    };
-		    var protocol = string.IsNullOrEmpty(sessionKey.GetValue("Protocol").ToString()) ? sessionKey.GetValue("Protocol").ToString() : "ssh";
+
+		    var protocol = string.IsNullOrEmpty(sessionKey.GetValue("Protocol").ToString())
+		        ? sessionKey.GetValue("Protocol").ToString()
+		        : "ssh";
+
 		    switch (protocol.ToLowerInvariant())
 			{
 				case "raw":
