@@ -130,11 +130,22 @@ namespace mRemoteNG.Connection
             RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
         }
 
+        /// <summary>
+        /// When turned on, calls to <see cref="SaveConnections()"/> or
+        /// <see cref="SaveConnectionsAsync"/> will not immediately execute.
+        /// Instead, they will be deferred until <see cref="EndBatchingSaves"/>
+        /// is called.
+        /// </summary>
         public void BeginBatchingSaves()
         {
             _batchingSaves = true;
         }
 
+        /// <summary>
+        /// Immediately executes a single <see cref="SaveConnections()"/> or
+        /// <see cref="SaveConnectionsAsync"/> if one has been requested
+        /// since calling <see cref="BeginBatchingSaves"/>.
+        /// </summary>
         public void EndBatchingSaves()
         {
             _batchingSaves = false;
@@ -221,9 +232,10 @@ namespace mRemoteNG.Connection
 
         private void SaveConnectionsBGd()
         {
-            Monitor.Enter(SaveLock);
-            SaveConnections();
-            Monitor.Exit(SaveLock);
+            lock (SaveLock)
+            {
+                SaveConnections();
+            }
         }
 
         public string GetStartupConnectionFileName()
