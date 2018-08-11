@@ -140,7 +140,7 @@ namespace mRemoteNG.UI.Forms
             Startup.Instance.InitializeProgram(messageCollector);
 
             msMain.Location = Point.Empty;
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip);
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, msMain);
             settingsLoader.LoadSettings();
 
             SetMenuDependencies();
