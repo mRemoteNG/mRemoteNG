@@ -1,3 +1,10 @@
+1.76.7 (2018-xx-xx):
+
+Fixes:
+------
+#1068: Fixed some toolbar positioning bugs
+
+
 1.76.6 (2018-08-03):
 
 Fixes:
