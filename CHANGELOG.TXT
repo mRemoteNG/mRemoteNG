@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1076: Wrong object selected when duplicating connection then switching between properties and inheritance in config window
 #1068: Fixed some toolbar positioning bugs
 
 
