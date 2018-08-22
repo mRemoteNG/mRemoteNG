@@ -84,7 +84,7 @@ namespace mRemoteNG.UI.Forms
             this.fileMenu.ConnectionInitiator = null;
             this.fileMenu.Name = "mMenFile";
             this.fileMenu.Size = new System.Drawing.Size(37, 20);
-            this.fileMenu.Text = "&File";
+            this.fileMenu.Text = Language.strMenuFile;
             this.fileMenu.TreeWindow = null;
             this.fileMenu.DropDownOpening += new System.EventHandler(this.mainFileMenu1_DropDownOpening);
             // 
@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Forms
             this.viewMenu.MainForm = null;
             this.viewMenu.Name = "mMenView";
             this.viewMenu.Size = new System.Drawing.Size(44, 20);
-            this.viewMenu.Text = "&View";
+            this.viewMenu.Text = Language.strMenuView;
             this.viewMenu.TsExternalTools = null;
             this.viewMenu.TsMultiSsh = null;
             this.viewMenu.TsQuickConnect = null;
@@ -106,13 +106,13 @@ namespace mRemoteNG.UI.Forms
             this.toolsMenu.MainForm = null;
             this.toolsMenu.Name = "mMenTools";
             this.toolsMenu.Size = new System.Drawing.Size(47, 20);
-            this.toolsMenu.Text = "&Tools";
+            this.toolsMenu.Text = Language.strMenuTools;
             // 
             // helpMenu
             // 
             this.helpMenu.Name = "mMenInfo";
             this.helpMenu.Size = new System.Drawing.Size(44, 20);
-            this.helpMenu.Text = "&Help";
+            this.helpMenu.Text = Language.strMenuHelp;
             this.helpMenu.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
             // mMenSep3

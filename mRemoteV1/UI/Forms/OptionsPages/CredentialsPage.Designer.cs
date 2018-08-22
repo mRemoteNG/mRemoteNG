@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    partial class CredentialsPage
+    sealed partial class CredentialsPage
     {
         /// <summary> 
         /// Required designer variable.

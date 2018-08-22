@@ -39,19 +39,22 @@ if ($ConfigurationName -eq "Release Portable") {
 
     $PortableZip="$($SolutionDir)Release\mRemoteNG-Portable-$($version).zip"
 
-    Remove-Item -Recurse "$($SolutionDir)mRemoteV1\bin\package" -ErrorAction SilentlyContinue | Out-Null
-    New-Item "$($SolutionDir)mRemoteV1\bin\package" -ItemType  "directory" | Out-Null
+    $tempFolderPath = Join-Path -Path $SolutionDir -ChildPath "mRemoteV1\bin\package"
+    Remove-Item -Recurse $tempFolderPath -ErrorAction SilentlyContinue | Out-Null
+    New-Item $tempFolderPath -ItemType  "directory" | Out-Null
     
-    Copy-Item "$($SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" -Destination "$($SolutionDir)mRemoteV1\bin\package"
+    Copy-Item "$($SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" -Destination $tempFolderPath
 
     #Write-Output "$($SolutionDir)mRemoteV1\bin\$ConfigurationName" 
     #Write-Output "$($SolutionDir)mRemoteV1\bin\package"
-    Copy-Item "$($SolutionDir)mRemoteV1\bin\$ConfigurationName\*" -Destination "$($SolutionDir)mRemoteV1\bin\package" -Recurse  -Force 
-    Copy-Item "$($SolutionDir)*.txt" -Destination "$($SolutionDir)mRemoteV1\bin\package"
+    Copy-Item "$($SolutionDir)mRemoteV1\bin\$ConfigurationName\*" -Destination $tempFolderPath -Recurse  -Force
+    # Delete any PDB files that accidentally get copied into the temp folder
+    Get-ChildItem -Path $tempFolderPath -Filter "*.pdb" | Remove-Item
+    Copy-Item "$($SolutionDir)*.txt" -Destination $tempFolderPath
 
     Write-Output "Creating portable ZIP file $($PortableZip)"
     Remove-Item -Force  $PortableZip -ErrorAction SilentlyContinue
-    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip "$($SolutionDir)mRemoteV1\bin\package\*.*"
+    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip (Join-Path -Path $tempFolderPath -ChildPath "*.*")
     #& $SEVENZIP a -bt -mx=9 -tzip -y $PortableZip "$($SolutionDir)*.TXT"
 }
 else {

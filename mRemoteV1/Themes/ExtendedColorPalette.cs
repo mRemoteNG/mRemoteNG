@@ -9,35 +9,14 @@ namespace mRemoteNG.Themes
     /// </summary>
     public class PseudoKeyColor
     {
-        private string key;
-        private Color value;
         public PseudoKeyColor(string _key, Color _value)
         {
-            key = _key;
-            value = _value;
+            Key = _key;
+            Value = _value;
         }
-        public string Key
-        {
-            get
-            {
-                return key;
-            }
-            set
-            {
-                key = value;
-            }
-        }
-        public Color Value
-        {
-            get
-            {
-                return value;
-            }
-            set
-            {
-                this.value = value;
-            }
-        }
+        public string Key { get; set; }
+
+        public Color Value { get; set; }
     }
 
 
@@ -48,15 +27,14 @@ namespace mRemoteNG.Themes
     {
         #region Private Variables
         //Collection for color values that are not loaded by dock panels (list, buttons,panel content, etc)
-        private Dictionary<string, Color> _extendedColors;
-        private Dictionary<string, Color> _default;
+
         #endregion
 
         #region Constructors
         public ExtendedColorPalette()
         {
-            _extendedColors = new Dictionary<string, Color>();
-            _default = new Dictionary<string, Color>(); // If this is the default palette, it will not have a default-default palette
+            ExtColorPalette = new Dictionary<string, Color>();
+            DefaultColorPalette = new Dictionary<string, Color>(); // If this is the default palette, it will not have a default-default palette
              
         }
         #endregion
@@ -65,7 +43,7 @@ namespace mRemoteNG.Themes
         // Set the default theme, that theme should contain all color values used by the application
         public void setDefault(ExtendedColorPalette inPalettte)
         {
-            _default = inPalettte._extendedColors;
+            DefaultColorPalette = inPalettte.ExtColorPalette;
         }
         #endregion
  
@@ -76,12 +54,12 @@ namespace mRemoteNG.Themes
         /// <returns></returns>
         public Color getColor(string  colorKey)
         {
-            var retColor = _extendedColors.ContainsKey(colorKey) ? _extendedColors[colorKey]:Color.Empty;
+            var retColor = ExtColorPalette.ContainsKey(colorKey) ? ExtColorPalette[colorKey]:Color.Empty;
             //Invisible colors are not good, might  indicate missing color from the palette as is represented by 00000000
             if (retColor != Color.Empty && retColor.A != 0) return retColor;
-            if(_default != null)
+            if(DefaultColorPalette != null)
             {
-                retColor = _default.ContainsKey(colorKey) ? _default[colorKey] : Color.Empty;  
+                retColor = DefaultColorPalette.ContainsKey(colorKey) ? DefaultColorPalette[colorKey] : Color.Empty;  
             }
             //why are we here?, just avoid a crash
             if(retColor == Color.Empty)
@@ -100,7 +78,7 @@ namespace mRemoteNG.Themes
         /// <param name="inColor"></param>
         public void  addColor(string colorKey,Color inColor)
         {
-            _extendedColors.Add(colorKey, inColor);
+            ExtColorPalette.Add(colorKey, inColor);
         }
 
 
@@ -111,33 +89,13 @@ namespace mRemoteNG.Themes
         /// <param name="inColor"></param>
         public void replaceColor(string colorKey, Color inColor)
         {
-            _extendedColors[colorKey]= inColor;
+            ExtColorPalette[colorKey]= inColor;
         }
 
-        public Dictionary<string, Color> DefaultColorPalette
-        {
-            get
-            {
-                return _default;
-            }
-            set
-            {
-                _default = value;
-            }
-        }
+        public Dictionary<string, Color> DefaultColorPalette { get; set; }
 
 
-        public Dictionary<string, Color> ExtColorPalette
-        {
-            get
-            {
-                return _extendedColors;
-            }
-            set
-            {
-                _extendedColors = value;
-            }
-        }
+        public Dictionary<string, Color> ExtColorPalette { get; set; }
     }
 }
  

@@ -184,5 +184,19 @@ namespace mRemoteNGTests.UI.Controls
 
             Assert.That(widthAfter, Is.GreaterThan(widthBefore));
 	    }
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void RenamingNodeWithNothingSelectedDoesNothing()
+	    {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+	        connectionTreeModel.AddRootNode(root);
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.SelectedObject = null;
+
+	        Assert.DoesNotThrow(() => _connectionTree.RenameSelectedNode());
+        }
     }
 }

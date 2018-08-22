@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.UI.Forms;
@@ -12,29 +13,21 @@ namespace mRemoteNG.Messages.WriterDecorators
         private readonly IMessageTypeFilteringOptions _filter;
         private readonly IMessageWriter _decoratedWriter;
         private readonly ErrorAndInfoWindow _messageWindow;
-        private Timer _ecTimer;
         private readonly FrmMain _frmMain = FrmMain.Default;
 
         public MessageFocusDecorator(ErrorAndInfoWindow messageWindow, IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
         {
-            if (filter == null)
-                throw new ArgumentNullException(nameof(filter));
-            if (messageWindow == null)
-                throw new ArgumentNullException(nameof(messageWindow));
-            if (decoratedWriter == null)
-                throw new ArgumentNullException(nameof(decoratedWriter));
-
-            _filter = filter;
-            _messageWindow = messageWindow;
-            _decoratedWriter = decoratedWriter;
-            CreateTimer();
+            _filter = filter ?? throw new ArgumentNullException(nameof(filter));
+            _messageWindow = messageWindow ?? throw new ArgumentNullException(nameof(messageWindow));
+            _decoratedWriter = decoratedWriter ?? throw new ArgumentNullException(nameof(decoratedWriter));
         }
 
-        public void Write(IMessage message)
+        public async void Write(IMessage message)
         {
-            if (WeShouldFocusNotificationPanel(message))
-                BeginSwitchToPanel();
             _decoratedWriter.Write(message);
+
+            if (WeShouldFocusNotificationPanel(message))
+                await SwitchToMessageAsync();
         }
 
         private bool WeShouldFocusNotificationPanel(IMessage message)
@@ -43,7 +36,8 @@ namespace mRemoteNG.Messages.WriterDecorators
             switch (message.Class)
             {
                 case MessageClass.InformationMsg:
-                    if (_filter.AllowInfoMessages) return true;
+                    if (_filter.AllowInfoMessages)
+                        return true;
                     break;
                 case MessageClass.WarningMsg:
                     if (_filter.AllowWarningMessages) return true;
@@ -55,43 +49,46 @@ namespace mRemoteNG.Messages.WriterDecorators
             return false;
         }
 
-        private void CreateTimer()
+        private async Task SwitchToMessageAsync()
         {
-            _ecTimer = new Timer
-            {
-                Enabled = false,
-                Interval = 300
-            };
-            _ecTimer.Tick += SwitchTimerTick;
-        }
-
-        private void BeginSwitchToPanel()
-        {
-            _ecTimer.Enabled = true;
-        }
-
-        private void SwitchTimerTick(object sender, EventArgs e)
-        {
-            SwitchToMessage();
-            _ecTimer.Enabled = false;
+            await Task
+                .Delay(TimeSpan.FromMilliseconds(300))
+                .ContinueWith(task => SwitchToMessage());
         }
 
         private void SwitchToMessage()
         {
+            if (_messageWindow.InvokeRequired)
+            {
+                _frmMain.Invoke((MethodInvoker)SwitchToMessage);
+                return;
+            }
+
+            // do not attempt to focus the notification panel if it is in an inconsistent state
+            if (_messageWindow.DockState == DockState.Unknown)
+                return;
+
             _messageWindow.PreviousActiveForm = (DockContent)_frmMain.pnlDock.ActiveContent;
-            ShowMcForm();
+
+            // Show the notifications panel solution:
+            // https://stackoverflow.com/questions/13843604/calling-up-dockpanel-suites-autohidden-dockcontent-programmatically
+            if (AutoHideEnabled(_messageWindow))
+                _frmMain.pnlDock.ActiveAutoHideContent = _messageWindow;
+            else
+                _messageWindow.Show(_frmMain.pnlDock);
+
             _messageWindow.lvErrorCollector.Focus();
             _messageWindow.lvErrorCollector.SelectedItems.Clear();
             _messageWindow.lvErrorCollector.Items[0].Selected = true;
             _messageWindow.lvErrorCollector.FocusedItem = _messageWindow.lvErrorCollector.Items[0];
         }
 
-        private void ShowMcForm()
+        private bool AutoHideEnabled(DockContent content)
         {
-            if (_frmMain.pnlDock.InvokeRequired)
-                _frmMain.pnlDock.Invoke((MethodInvoker)ShowMcForm);
-            else
-                _messageWindow.Show(_frmMain.pnlDock);
+            return content.DockState == DockState.DockBottomAutoHide ||
+                   content.DockState == DockState.DockTopAutoHide ||
+                   content.DockState == DockState.DockLeftAutoHide ||
+                   content.DockState == DockState.DockRightAutoHide;
         }
     }
 }

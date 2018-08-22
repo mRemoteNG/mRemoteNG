@@ -33,6 +33,7 @@ namespace mRemoteNG.Config.Putty
 			foreach (var sessionName in Directory.GetFiles(sessionsFolderPath))
 			{
 			    var sessionFileName = Path.GetFileName(sessionName);
+			    // ReSharper disable once ConstantConditionalAccessQualifier
 			    sessionNames.Add(raw ? sessionFileName : System.Web.HttpUtility.UrlDecode(sessionFileName?.Replace("+", "%2B")));
 			}
 
@@ -174,7 +175,8 @@ namespace mRemoteNG.Config.Putty
 		private static string GetPuttyConfPath()
 		{
 		    var puttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
-		    return Path.Combine(Path.GetDirectoryName(puttyPath), "putty.conf");
+		    puttyPath = Path.GetDirectoryName(puttyPath);
+            return string.IsNullOrEmpty(puttyPath) ? null : Path.Combine(puttyPath, "putty.conf");
 		}
 			
 		private static string GetSessionsFolderPath()
@@ -201,6 +203,9 @@ namespace mRemoteNG.Config.Putty
 			
 		private static PuttySessionInfo ModifyRegistrySessionInfo(PuttySessionInfo sessionInfo)
 		{
+		    if (sessionInfo == null)
+		        return null;
+
 			sessionInfo.Name = string.Format(RegistrySessionNameFormat, sessionInfo.Name);
 			sessionInfo.PuttySession = string.Format(RegistrySessionNameFormat, sessionInfo.PuttySession);
 			return sessionInfo;

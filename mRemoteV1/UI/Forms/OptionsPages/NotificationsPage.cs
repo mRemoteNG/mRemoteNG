@@ -5,17 +5,17 @@ using mRemoteNG.App;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class NotificationsPage
+    public sealed partial class NotificationsPage
     {
         public NotificationsPage()
         {
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         public override string PageName
         {
-            get { return Language.strMenuNotifications; }
+            get => Language.strMenuNotifications;
             set { }
         }
 

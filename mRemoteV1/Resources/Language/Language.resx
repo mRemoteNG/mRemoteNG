@@ -2679,4 +2679,19 @@ This page will walk you through the process of upgrading your connections file o
 	<data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
     <value>Create an empty panel when mRemoteNG starts</value>
   </data>
+  <data name="strIPRange" xml:space="preserve">
+    <value>Must Be Between 0 and 255</value>
+  </data>
+  <data name="strOutOfRange" xml:space="preserve">
+    <value>Out Of Range</value>
+  </data>
+  <data name="strDelete" xml:space="preserve">
+    <value>Delete...</value>
+  </data>
+  <data name="strReconnectAllConnections" xml:space="preserve">
+    <value>Reconnect All Connections</value>
+  </data>
+  <data name="strUltraVNCSingleClick" xml:space="preserve">
+    <value>UltraVNC SingleClick</value>
+  </data>
 </root>
