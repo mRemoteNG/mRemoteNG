@@ -314,6 +314,7 @@
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Tools\DisposableOptional.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
@@ -325,6 +326,9 @@
     <Compile Include="Tools\MultiSSHController.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
+    <Compile Include="Tools\WindowsRegistry\IRegistry.cs" />
+    <Compile Include="Tools\WindowsRegistry\RegistryHive.cs" />
+    <Compile Include="Tools\WindowsRegistry\WindowsRegistry.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionVerifier.cs" />
