@@ -45,6 +45,7 @@ namespace mRemoteNG.Connection
         {
             try
             {
+                filename.ThrowIfNullOrEmpty(nameof(filename));
                 var newConnectionsModel = new ConnectionTreeModel();
                 newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
                 SaveConnections(newConnectionsModel, false, new SaveFilter(), filename, true);
