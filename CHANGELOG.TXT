@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1088: Delete and Launch buttons are not disabled when last external tool deleted
 #1087: 'Save connections after every edit' setting not honored
 
 
