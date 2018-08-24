@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
@@ -9,6 +10,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -22,7 +24,8 @@ namespace mRemoteNG.UI.Window
 		private ThemeManager _themeManager;
 	    private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
 
-		public ConnectionContextMenu ConnectionTreeContextMenu
+
+        public ConnectionContextMenu ConnectionTreeContextMenu
 		{
 			get { return olvConnections.ContextMenuStrip as ConnectionContextMenu;}
 			set { olvConnections.ContextMenuStrip = value; }
@@ -162,6 +165,8 @@ namespace mRemoteNG.UI.Window
 	    private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
 	    {
 	        olvConnections.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
+	        olvConnections.SelectedObject = connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes
+	            .OfType<RootNodeInfo>().FirstOrDefault();
 	    }
         #endregion
 
@@ -246,13 +251,10 @@ namespace mRemoteNG.UI.Window
 	        {
 	            if (txtSearch.Text == "" || txtSearch.Text == Language.strSearchPrompt)
 	            {
-	                olvConnections.UseFiltering = false;
-	                olvConnections.ResetColumnFiltering();
+	                olvConnections.RemoveFilter();
 	                return;
 	            }
-	            olvConnections.UseFiltering = true;
-	            _connectionTreeSearchTextFilter.FilterText = txtSearch.Text;
-	            olvConnections.ModelFilter = _connectionTreeSearchTextFilter;
+	            olvConnections.ApplyFilter(txtSearch.Text);
 	        }
 	        else
 	        {

@@ -2,7 +2,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class TabsPanelsPage
+    public sealed partial class TabsPanelsPage
     {
         private readonly FrmMain _frmMain;
 
@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get { return Language.strTabsAndPanels.Replace("&&", "&"); }
+            get => Language.strTabsAndPanels.Replace("&&", "&");
             set { }
         }
 
@@ -31,7 +31,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkDoubleClickClosesTab.Text = Language.strDoubleClickTabClosesIt;
             chkAlwaysShowPanelSelectionDlg.Text = Language.strAlwaysShowPanelSelection;
             chkCreateEmptyPanelOnStart.Text = Language.strCreateEmptyPanelOnStartUp;
-            lblPanelName.Text = $"{Language.strPanelName}:";
+            lblPanelName.Text = $@"{Language.strPanelName}:";
         }
 
         public override void LoadSettings()

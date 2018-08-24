@@ -60,16 +60,14 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyTheme()
         {
-            if(Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            }
+            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyLanguage()
         {
-            this.Text = Language.strOptionsPageTitle;
+            Text = Language.strOptionsPageTitle;
             foreach (var optionPage in _pages.Values)
             {
                 optionPage.ApplyLanguage();
@@ -113,8 +111,8 @@ namespace mRemoteNG.UI.Forms
 
         private void SetInitiallyActivatedPage()
         {
-            bool isSet = false;
-            for (int i = 0; i < lstOptionPages.Items.Count; i++)
+            var isSet = false;
+            for (var i = 0; i < lstOptionPages.Items.Count; i++)
             {
                 if (!lstOptionPages.Items[i].Text.Equals(_pageName)) continue;
                 lstOptionPages.Items[i].Selected = true;
@@ -138,7 +136,7 @@ namespace mRemoteNG.UI.Forms
         }
 
 
-        private void LstOptionPages_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void LstOptionPages_SelectedIndexChanged(object sender, EventArgs e)
         {
             pnlMain.Controls.Clear();
 

@@ -21,7 +21,8 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
 	    private readonly StatusImageList _statusImageList = new StatusImageList();
-		private bool _nodeInEditMode;
+        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
+        private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionTreeModel _connectionTreeModel;
 
@@ -56,7 +57,6 @@ namespace mRemoteNG.UI.Controls
             SetupConnectionTreeView();
             UseOverlays = false;
         }
-        
 
         protected override void Dispose(bool disposing)
         {
@@ -267,6 +267,9 @@ namespace mRemoteNG.UI.Controls
             if (SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttyRoot || SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
                 return;
 
+            // the new node will survive filtering if filtering is active
+            _connectionTreeSearchTextFilter.SpecialInclusionList.Add(newNode);
+
             // use root node if no node is selected
             ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
@@ -297,8 +300,11 @@ namespace mRemoteNG.UI.Controls
 
         public void RenameSelectedNode()
         {
-            _allowEdit = true;
-            SelectedItem.BeginEdit();
+            if (SelectedItem != null)
+            {
+                _allowEdit = true;
+                SelectedItem.BeginEdit();
+            }
         }
 
         public void DeleteSelectedNode()
@@ -334,10 +340,24 @@ namespace mRemoteNG.UI.Controls
             AutoResizeColumn(Columns[0]);
         }
 
-        protected override void UpdateFiltering()
+        /// <summary>
+        /// Filters tree items based on the given <see cref="filterText"/>
+        /// </summary>
+        /// <param name="filterText">The text to filter by</param>
+        public void ApplyFilter(string filterText)
         {
-            base.UpdateFiltering();
-            AutoResizeColumn(Columns[0]);
+            UseFiltering = true;
+            _connectionTreeSearchTextFilter.FilterText = filterText;
+            ModelFilter = _connectionTreeSearchTextFilter;
+        }
+
+        /// <summary>
+        /// Removes all item filtering from the connection tree
+        /// </summary>
+        public void RemoveFilter()
+        {
+            UseFiltering = false;
+            ResetColumnFiltering();
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
@@ -362,11 +382,16 @@ namespace mRemoteNG.UI.Controls
 			}
 		}
 
+        protected override void UpdateFiltering()
+        {
+            base.UpdateFiltering();
+            AutoResizeColumn(Columns[0]);
+        }
+
         private void OnMouse_DoubleClick(object sender, MouseEventArgs mouseEventArgs)
         {
             if (mouseEventArgs.Clicks < 2) return;
-            OLVColumn column;
-            var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
+            var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out _);
 	        var clickedNode = listItem?.RowObject as ConnectionInfo;
             if (clickedNode == null) return;
             DoubleClickHandler.Execute(clickedNode);
@@ -375,8 +400,7 @@ namespace mRemoteNG.UI.Controls
         private void OnMouse_SingleClick(object sender, MouseEventArgs mouseEventArgs)
         {
             if (mouseEventArgs.Clicks > 1) return;
-            OLVColumn column;
-            var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
+            var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out _);
             var clickedNode = listItem?.RowObject as ConnectionInfo;
             if (clickedNode == null) return;
             SingleClickHandler.Execute(clickedNode);
@@ -386,6 +410,13 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
+                if (!Settings.Default.ShowDescriptionTooltipsInTree)
+                {
+                    // setting text to null prevents the tooltip from being shown
+                    e.Text = null;
+                    return;
+                }
+
                 var nodeProducingTooltip = (ConnectionInfo)e.Model;
                 e.Text = nodeProducingTooltip.Description;
             }
@@ -421,6 +452,9 @@ namespace mRemoteNG.UI.Controls
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
                 _nodeInEditMode = false;
                 _allowEdit = false;
+                // ensures that if we are filtering and a new item is added that doesn't match the filter, it will be filtered out
+                _connectionTreeSearchTextFilter.SpecialInclusionList.Clear();
+                UpdateFiltering();
                 RaiseSelectedNodeChangedEvent(SelectedNode);
             }
             catch (Exception ex)

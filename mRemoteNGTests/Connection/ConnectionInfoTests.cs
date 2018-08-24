@@ -47,6 +47,20 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
+        public void CloneAlsoCopiesInheritanceObject()
+        {
+            var clonedConnection = _connectionInfo.Clone();
+            Assert.That(clonedConnection.Inheritance, Is.Not.EqualTo(_connectionInfo.Inheritance));
+        }
+
+        [Test]
+        public void CloneCorrectlySetsParentOfInheritanceObject()
+        {
+            var clonedConnection = _connectionInfo.Clone();
+            Assert.That(clonedConnection.Inheritance.Parent, Is.EqualTo(clonedConnection));
+        }
+
+        [Test]
         public void CopyFromCopiesProperties()
         {
             var secondConnection = new ConnectionInfo {Domain = TestDomain};

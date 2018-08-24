@@ -9,19 +9,19 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class AdvancedPage
+    public sealed partial class AdvancedPage
     {
         public AdvancedPage()
         {
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         #region Public Methods
 
         public override string PageName
         {
-            get { return Language.strTabAdvanced; }
+            get => Language.strTabAdvanced;
             set { }
         }
 
@@ -108,16 +108,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             using (var openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = $"{Language.strFilterApplication}|*.exe|{Language.strFilterAll}|*.*";
+                openFileDialog.Filter = $@"{Language.strFilterApplication}|*.exe|{Language.strFilterAll}|*.*";
                 openFileDialog.FileName = Path.GetFileName(GeneralAppInfo.PuttyPath);
                 openFileDialog.CheckFileExists = true;
                 openFileDialog.Multiselect = false;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    txtCustomPuttyPath.Text = openFileDialog.FileName;
-                    SetPuttyLaunchButtonEnabled();
-                }
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+                txtCustomPuttyPath.Text = openFileDialog.FileName;
+                SetPuttyLaunchButtonEnabled();
             }
         }
 

@@ -11,7 +11,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	public partial class UpdatesPage
+    public sealed partial class UpdatesPage
     {
         private readonly AppUpdater _appUpdate;
 	    private readonly Action<WindowType> _showWindowAction;
@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get { return Language.strTabUpdates; }
+            get => Language.strTabUpdates;
             set { }
         }
 

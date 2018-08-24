@@ -6,7 +6,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class AppearancePage
+    public sealed partial class AppearancePage
     {
         private readonly IConnectionInitiator _connectionInitiator;
         private readonly Func<NotificationAreaIcon> _notificationAreaIconBuilder;
@@ -18,12 +18,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _notificationAreaIconBuilder = notificationAreaIconBuilder;
             _frmMain = frmMain.ThrowIfNull(nameof(frmMain));
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         public override string PageName
         {
-            get { return Language.strTabAppearance; }
+            get => Language.strTabAppearance;
             set { }
         }
 

@@ -1,11 +1,10 @@
 ﻿using System;
-using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	public partial class CredentialsPage : OptionsPage
+	public sealed partial class CredentialsPage : OptionsPage
 	{
 	    private readonly IConnectionsService _connectionsService;
 
@@ -13,11 +12,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             _connectionsService = connectionsService;
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         public override string PageName {
-            get { return Language.Credentials; }
+            get => Language.Credentials;
             set { }
         }
 

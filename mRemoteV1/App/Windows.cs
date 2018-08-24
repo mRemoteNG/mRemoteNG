@@ -82,12 +82,12 @@ namespace mRemoteNG.App
                     case WindowType.About:
                         if (_aboutForm == null || _aboutForm.IsDisposed)
                             _aboutForm = new AboutWindow();
-                        _aboutForm.Show(_frmMain);
+                        _aboutForm.Show(_frmMain.pnlDock);
                         break;
                     case WindowType.ActiveDirectoryImport:
                         if (_adimportForm == null || _adimportForm.IsDisposed)
                             _adimportForm = _activeDirectoryImportWindowBuilder();
-                        _adimportForm.Show(_frmMain);
+                        _adimportForm.Show(_frmMain.pnlDock);
                         break;
                     case WindowType.Options:
                         using (var optionsForm = new frmOptions(_connectionInitiator, Show, _notificationAreaIconBuilder, _connectionsService, _appUpdater, _databaseConnectorFactory, _frmMain))
@@ -98,37 +98,37 @@ namespace mRemoteNG.App
                     case WindowType.SSHTransfer:
                         if (SshtransferForm == null || SshtransferForm.IsDisposed)
                             SshtransferForm = new SSHTransferWindow(_frmMain);
-                        SshtransferForm.Show(_frmMain);
+                        SshtransferForm.Show(_frmMain.pnlDock);
                         break;
                     case WindowType.Update:
                         if (_updateForm == null || _updateForm.IsDisposed)
                             _updateForm = _updateWindowBuilder();
-                        _updateForm.Show(_frmMain);
+                        _updateForm.Show(_frmMain.pnlDock);
                         break;
                     case WindowType.Help:
                         if (_helpForm == null || _helpForm.IsDisposed)
                             _helpForm = new HelpWindow();
-                        _helpForm.Show(_frmMain);
+                        _helpForm.Show(_frmMain.pnlDock);
                         break;
                     case WindowType.ExternalApps:
                         if (_externalappsForm == null || _externalappsForm.IsDisposed)
                             _externalappsForm = _externalToolsWindowBuilder();
-                        _externalappsForm.Show(_frmMain);
+                        _externalappsForm.Show(_frmMain.pnlDock);
                         break;
                     case WindowType.PortScan:
                         _portscanForm = _portScanWindowBuilder();
-                        _portscanForm.Show(_frmMain);
+                        _portscanForm.Show(_frmMain.pnlDock);
                         break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
                             _ultravncscForm = new UltraVNCWindow(Show);
-                        _ultravncscForm.Show(_frmMain);
+                        _ultravncscForm.Show(_frmMain.pnlDock);
                         break;
                     case WindowType.ComponentsCheck:
                         Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Showing ComponentsCheck window", true);
                         if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
                             _componentscheckForm = new ComponentsCheckWindow();
-                        _componentscheckForm.Show(_frmMain);
+                        _componentscheckForm.Show(_frmMain.pnlDock);
                         break;
                 }
             }

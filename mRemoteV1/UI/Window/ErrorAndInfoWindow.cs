@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
-using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Window
         private ControlLayout _layout = ControlLayout.Vertical;
         private readonly ThemeManager _themeManager;
 	    private readonly ConnectionTreeWindow _connectionTreeWindow;
-	    private DockPanel _dockPanel;
+	    private readonly DockPanel _dockPanel;
 
         public DockContent PreviousActiveForm { get; set; }
 
@@ -54,11 +54,9 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
         private new void  ApplyTheme()
         {
-            if(_themeManager.ThemingActive)
-            {
-                lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            }
+            if (!_themeManager.ThemingActive) return;
+            lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
         }
 
 
@@ -225,7 +223,7 @@ namespace mRemoteNG.UI.Window
                         break;
 				}
 						
-				lblMsgDate.Text = eMsg.Date.ToString();
+				lblMsgDate.Text = eMsg.Date.ToString(CultureInfo.InvariantCulture);
 				txtMsgText.Text = eMsg.Text;
 			}
 			catch (Exception ex)
@@ -292,7 +290,7 @@ namespace mRemoteNG.UI.Window
 					}
 							
 					stringBuilder.AppendLine(message.Class.ToString());
-					stringBuilder.AppendLine(message.Date.ToString());
+					stringBuilder.AppendLine(message.Date.ToString(CultureInfo.InvariantCulture));
 					stringBuilder.AppendLine(message.Text);
 					stringBuilder.AppendLine("----------");
 				}
@@ -340,8 +338,8 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-				
-		public enum ControlLayout
+
+	    private enum ControlLayout
 		{
 			Vertical = 0,
 			Horizontal = 1

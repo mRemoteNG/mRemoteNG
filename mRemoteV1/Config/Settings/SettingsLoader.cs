@@ -7,7 +7,6 @@ using System.Threading;
 using System.Globalization;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
-using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
@@ -20,6 +19,7 @@ namespace mRemoteNG.Config.Settings
 	{
         private readonly ExternalAppsLoader _externalAppsLoader;
         private readonly MessageCollector _messageCollector;
+	    private readonly MenuStrip _mainMenu;
         private readonly QuickConnectToolStrip _quickConnectToolStrip;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 	    private readonly MultiSshToolStrip _multiSshToolStrip;
@@ -34,7 +34,8 @@ namespace mRemoteNG.Config.Settings
             ExternalToolsToolStrip externalToolsToolStrip,
             MultiSshToolStrip multiSshToolStrip,
 	        ExternalAppsLoader externalAppsLoader,
-	        Func<NotificationAreaIcon> notificationAreaIconBuilder)
+	        Func<NotificationAreaIcon> notificationAreaIconBuilder,
+            MenuStrip mainMenu)
 		{
 		    _frmMain = mainForm.ThrowIfNull(nameof(mainForm));
 	        _messageCollector = messageCollector.ThrowIfNull(nameof(messageCollector));
@@ -42,7 +43,8 @@ namespace mRemoteNG.Config.Settings
 	        _externalToolsToolStrip = externalToolsToolStrip.ThrowIfNull(nameof(externalToolsToolStrip));
 		    _multiSshToolStrip = multiSshToolStrip.ThrowIfNull(nameof(multiSshToolStrip));
 		    _externalAppsLoader = externalAppsLoader.ThrowIfNull(nameof(externalAppsLoader));
-		    _notificationAreaIconBuilder = notificationAreaIconBuilder;
+		    _notificationAreaIconBuilder = notificationAreaIconBuilder.ThrowIfNull(nameof(notificationAreaIconBuilder));
+		    _mainMenu = mainMenu.ThrowIfNull(nameof(mainMenu));
 		}
         
         #region Public Methods
@@ -190,6 +192,7 @@ namespace mRemoteNG.Config.Settings
 	    private void LoadToolbarsFromSettings()
 		{
             ResetAllToolbarLocations();
+		    AddMainMenuPanel();
             AddExternalAppsPanel();
 		    AddQuickConnectPanel();
 		    AddMultiSshPanel();
@@ -203,31 +206,49 @@ namespace mRemoteNG.Config.Settings
 	    private void ResetAllToolbarLocations()
 	    {
 	        var tempToolStrip = new ToolStripPanel();
+            tempToolStrip.Join(_mainMenu);
 	        tempToolStrip.Join(_quickConnectToolStrip);
 	        tempToolStrip.Join(_externalToolsToolStrip);
 	        tempToolStrip.Join(_multiSshToolStrip);
         }
 
+	    private void AddMainMenuPanel()
+	    {
+	        SetToolstripGripStyle(_mainMenu);
+            var toolStripPanel = ToolStripPanelFromString("top");
+	        toolStripPanel.Join(_mainMenu, new Point(3, 0));
+        }
+
 		private void AddQuickConnectPanel()
 		{
+		    SetToolstripGripStyle(_quickConnectToolStrip);
+            _quickConnectToolStrip.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
             var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock);
             toolStripPanel.Join(_quickConnectToolStrip, mRemoteNG.Settings.Default.QuickyTBLocation);
-            _quickConnectToolStrip.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
 		}
 		
 		private void AddExternalAppsPanel()
 		{
-		    var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock);
-            toolStripPanel.Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
+		    SetToolstripGripStyle(_externalToolsToolStrip);
             _externalToolsToolStrip.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
+            var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock);
+            toolStripPanel.Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
 		}
 
 	    private void AddMultiSshPanel()
 	    {
-	        var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock);
-            toolStripPanel.Join(_multiSshToolStrip, mRemoteNG.Settings.Default.MultiSshToolbarLocation);
+	        SetToolstripGripStyle(_multiSshToolStrip);
 	        _multiSshToolStrip.Visible = mRemoteNG.Settings.Default.MultiSshToolbarVisible;
+            var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.MultiSshToolbarParentDock);
+            toolStripPanel.Join(_multiSshToolStrip, mRemoteNG.Settings.Default.MultiSshToolbarLocation);
 	    }
+
+	    private void SetToolstripGripStyle(ToolStrip toolbar)
+	    {
+	        toolbar.GripStyle = mRemoteNG.Settings.Default.LockToolbars
+	            ? ToolStripGripStyle.Hidden
+	            : ToolStripGripStyle.Visible;
+        }
 		
 		private ToolStripPanel ToolStripPanelFromString(string panel)
 		{

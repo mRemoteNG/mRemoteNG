@@ -40,11 +40,6 @@ namespace mRemoteNG.Connection
         // TODO - this is only a property to break up a circular dependency. move to ctor when able
         public DatabaseConnectorFactory DatabaseConnectorFactory { get; set; }
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
-        //public ConnectionTreeModel ConnectionTreeModel
-        //{
-        //    get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
-        //    set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
-        //}
 
         public ConnectionsService(PuttySessionsManager puttySessionsManager, Import import, IWin32Window dialogWindowParent)
         {
@@ -57,6 +52,7 @@ namespace mRemoteNG.Connection
         {
             try
             {
+                filename.ThrowIfNullOrEmpty(nameof(filename));
                 var newConnectionsModel = new ConnectionTreeModel();
                 newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
                 SaveConnections(newConnectionsModel, false, new SaveFilter(), filename, true);
@@ -90,6 +86,10 @@ namespace mRemoteNG.Connection
                 {
                     newConnectionInfo.Port = uri.Port;
                 }
+
+                if (string.IsNullOrEmpty(newConnectionInfo.Panel))
+                    newConnectionInfo.Panel = Language.strGeneral;
+
                 newConnectionInfo.IsQuickConnect = true;
 
                 return newConnectionInfo;
@@ -138,11 +138,22 @@ namespace mRemoteNG.Connection
             RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
         }
 
+        /// <summary>
+        /// When turned on, calls to <see cref="SaveConnections()"/> or
+        /// <see cref="SaveConnectionsAsync"/> will not immediately execute.
+        /// Instead, they will be deferred until <see cref="EndBatchingSaves"/>
+        /// is called.
+        /// </summary>
         public void BeginBatchingSaves()
         {
             _batchingSaves = true;
         }
 
+        /// <summary>
+        /// Immediately executes a single <see cref="SaveConnections()"/> or
+        /// <see cref="SaveConnectionsAsync"/> if one has been requested
+        /// since calling <see cref="BeginBatchingSaves"/>.
+        /// </summary>
         public void EndBatchingSaves()
         {
             _batchingSaves = false;
@@ -229,9 +240,10 @@ namespace mRemoteNG.Connection
 
         private void SaveConnectionsBGd()
         {
-            Monitor.Enter(SaveLock);
-            SaveConnections();
-            Monitor.Exit(SaveLock);
+            lock (SaveLock)
+            {
+                SaveConnections();
+            }
         }
 
         public void LoadConnectionsAsync()

@@ -9,7 +9,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	public partial class SqlServerPage
+	public sealed partial class SqlServerPage
     {
         private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
         private readonly IConnectionsService _connectionsService;
@@ -20,13 +20,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _databaseConnectorFactory = databaseConnectorFactory.ThrowIfNull(nameof(databaseConnectorFactory));
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
             _databaseConnectionTester = new SqlDatabaseConnectionTester();
         }
 
         public override string PageName
         {
-            get { return Language.strSQLServer.TrimEnd(':'); }
+            get => Language.strSQLServer.TrimEnd(':');
             set { }
         }
 

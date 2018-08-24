@@ -10,7 +10,7 @@ namespace mRemoteNG.UI.Controls.Base
     {
         private ThemeManager _themeManager;
 
-        public NGGroupBox() : base()
+        public NGGroupBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

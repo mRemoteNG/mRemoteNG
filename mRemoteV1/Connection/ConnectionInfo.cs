@@ -78,7 +78,8 @@ namespace mRemoteNG.Connection
 		    var newConnectionInfo = new ConnectionInfo();
             newConnectionInfo.CopyFrom(this);
 		    newConnectionInfo.Inheritance = Inheritance.Clone();
-			return newConnectionInfo;
+            newConnectionInfo.Inheritance.Parent = newConnectionInfo;
+            return newConnectionInfo;
 		}
 
 	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)

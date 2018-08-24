@@ -4,7 +4,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class ConnectionsPage
+    public sealed partial class ConnectionsPage
     {
         private readonly FrmMain _frmMain;
 
@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get { return Language.strConnections; }
+            get => Language.strConnections;
             set { }
         }
 

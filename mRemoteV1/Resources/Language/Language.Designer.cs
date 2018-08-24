@@ -1712,6 +1712,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete....
+        /// </summary>
+        internal static string strDelete {
+            get {
+                return ResourceManager.GetString("strDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detect.
         /// </summary>
         internal static string strDetect {
@@ -2774,6 +2783,15 @@ namespace mRemoteNG {
         internal static string strIntAppTitle {
             get {
                 return ResourceManager.GetString("strIntAppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must Be Between 0 and 255.
+        /// </summary>
+        internal static string strIPRange {
+            get {
+                return ResourceManager.GetString("strIPRange", resourceCulture);
             }
         }
         
@@ -4305,6 +4323,15 @@ namespace mRemoteNG {
         internal static string strOptionsThemeThemeChaangeWarning {
             get {
                 return ResourceManager.GetString("strOptionsThemeThemeChaangeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out Of Range.
+        /// </summary>
+        internal static string strOutOfRange {
+            get {
+                return ResourceManager.GetString("strOutOfRange", resourceCulture);
             }
         }
         
@@ -6238,6 +6265,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reconnect All Connections.
+        /// </summary>
+        internal static string strReconnectAllConnections {
+            get {
+                return ResourceManager.GetString("strReconnectAllConnections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reconnect to previously opened sessions on startup.
         /// </summary>
         internal static string strReconnectAtStartup {
@@ -7260,6 +7296,15 @@ namespace mRemoteNG {
         internal static string strUltraVNCSCListeningPort {
             get {
                 return ResourceManager.GetString("strUltraVNCSCListeningPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UltraVNC SingleClick.
+        /// </summary>
+        internal static string strUltraVNCSingleClick {
+            get {
+                return ResourceManager.GetString("strUltraVNCSingleClick", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
@@ -40,7 +41,6 @@ namespace mRemoteNGTests.IntegrationTests
         public void Teardown()
         {
             _serializer = null;
-            _deserializer = null;
         }
 
         [Test]
@@ -90,6 +90,20 @@ namespace mRemoteNGTests.IntegrationTests
             var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
+        }
+
+        [Test]
+        public void GuidCreatedIfNonExistedInXml()
+        {
+            var originalConnectionInfo = new ConnectionInfo { Name = "con1" };
+            var serializedContent = _serializer.Serialize(originalConnectionInfo);
+
+            // remove GUID from connection xml
+            serializedContent = serializedContent.Replace(originalConnectionInfo.ConstantID, "");
+
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
+            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
+            Assert.That(Guid.TryParse(deserializedConnectionInfo.ConstantID, out var guid));
         }
 
 

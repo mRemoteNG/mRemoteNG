@@ -148,6 +148,19 @@ namespace mRemoteNG.UI.Window
             RunElevatedCheckBox.Checked = selectedTool?.RunElevated ?? false;
 	        WaitForExitCheckBox.Enabled = !TryToIntegrateCheckBox.Checked;
         }
+
+	    private void UpdateToolstipControls()
+	    {
+	        _currentlySelectedExternalTools.Clear();
+	        _currentlySelectedExternalTools.AddRange(ToolsListObjView.SelectedObjects.OfType<ExternalTool>());
+	        PropertiesGroupBox.Enabled = _currentlySelectedExternalTools.Count == 1;
+
+	        var atleastOneToolSelected = _currentlySelectedExternalTools.Count > 0;
+	        DeleteToolMenuItem.Enabled = atleastOneToolSelected;
+	        DeleteToolToolstripButton.Enabled = atleastOneToolSelected;
+	        LaunchToolMenuItem.Enabled = atleastOneToolSelected;
+	        LaunchToolToolstripButton.Enabled = atleastOneToolSelected;
+        }
 	    #endregion
 
         #region Event Handlers
@@ -207,6 +220,8 @@ namespace mRemoteNG.UI.Window
 			    ToolsListObjView.SelectedIndex = oldSelectedIndex <= maxIndex
 			        ? oldSelectedIndex
 			        : maxIndex;
+
+			    UpdateToolstipControls();
             }
 			catch (Exception ex)
 			{
@@ -223,15 +238,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-                _currentlySelectedExternalTools.Clear();
-			    _currentlySelectedExternalTools.AddRange(ToolsListObjView.SelectedObjects.OfType<ExternalTool>());
-                PropertiesGroupBox.Enabled = _currentlySelectedExternalTools.Count == 1;
-
-			    var atleastOneToolSelected = _currentlySelectedExternalTools.Count > 0;
-                DeleteToolMenuItem.Enabled = atleastOneToolSelected;
-			    DeleteToolToolstripButton.Enabled = atleastOneToolSelected;
-			    LaunchToolMenuItem.Enabled = atleastOneToolSelected;
-			    LaunchToolToolstripButton.Enabled = atleastOneToolSelected;
+			    UpdateToolstipControls();
 			}
 			catch (Exception ex)
 			{

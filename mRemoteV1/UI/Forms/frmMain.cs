@@ -101,7 +101,8 @@ namespace mRemoteNG.UI.Forms
 		    var connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), _connectionInitiator, _connectionsService);
 			var connectionTree = connectionTreeWindow.ConnectionTree;
 			connectionTree.SelectedNodeChanged += configWindow.HandleConnectionTreeSelectionChanged;
-			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, sshTransferWindow, _export, externalToolsService, _import, _connectionsService);
+			var connectionTreeContextMenu = new ConnectionContextMenu(connectionTree, _connectionInitiator, 
+			    sshTransferWindow, _export, externalToolsService, _import, _connectionsService);
 			connectionTree.ConnectionContextMenu = connectionTreeContextMenu;
 			connectionTreeWindow.ConnectionTreeContextMenu = connectionTreeContextMenu;
 		    var errorAndInfoWindow = new ErrorAndInfoWindow(new DockContent(), pnlDock, connectionTreeWindow);
@@ -110,14 +111,17 @@ namespace mRemoteNG.UI.Forms
             _shutdown = new Shutdown(_settingsSaver, _connectionsService, this);
 		    Func<UpdateWindow> updateWindowBuilder = () => new UpdateWindow(new DockContent(), _shutdown, _appUpdater);
 		    _notificationAreaIconBuilder = () => new NotificationAreaIcon(this, _connectionInitiator, _shutdown, _connectionsService);
-            Func<ExternalToolsWindow> externalToolsWindowBuilder = () => new ExternalToolsWindow(_connectionInitiator, externalToolsService, () => connectionTree.SelectedNode, this, _connectionsService);
+            Func<ExternalToolsWindow> externalToolsWindowBuilder = () => 
+                new ExternalToolsWindow(_connectionInitiator, externalToolsService, () => connectionTree.SelectedNode, this, _connectionsService);
 		    Func<PortScanWindow> portScanWindowBuilder = () => new PortScanWindow(connectionTreeWindow, _import);
-		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import, _connectionsService);
+		    Func<ActiveDirectoryImportWindow> activeDirectoryImportWindowBuilder = () => 
+		        new ActiveDirectoryImportWindow(() => connectionTreeWindow.SelectedNode, _import, _connectionsService);
 		    _databaseConnectorFactory = new DatabaseConnectorFactory(encryptionKeySelectionFunc);
             _windows = new Windows(_connectionInitiator, connectionTreeWindow, configWindow, errorAndInfoWindow, screenshotManagerWindow, 
                 sshTransferWindow, updateWindowBuilder, _notificationAreaIconBuilder, externalToolsWindowBuilder, _connectionsService, 
                 portScanWindowBuilder, activeDirectoryImportWindowBuilder, _appUpdater, _databaseConnectorFactory, this);
-            Func<ConnectionWindow> connectionWindowBuilder = () => new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService, this);
+            Func<ConnectionWindow> connectionWindowBuilder = () => 
+                new ConnectionWindow(new DockContent(), _connectionInitiator, _windows, externalToolsService, this);
             _screens = new Screens(this);
             _panelAdder = new PanelAdder(_windowList, connectionWindowBuilder, _screens, pnlDock);
             _showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
@@ -127,8 +131,10 @@ namespace mRemoteNG.UI.Forms
             _startup = new Startup(this, _windows, _connectionsService, _appUpdater, _databaseConnectorFactory, compatibilityChecker);
             connectionTreeContextMenu.ShowWindowAction = _windows.Show;
 
-            var externalAppsLoader = new ExternalAppsLoader(Runtime.MessageCollector, _externalToolsToolStrip, _connectionInitiator, externalToolsService, _connectionsService);
-		    _settingsLoader = new SettingsLoader(this, Runtime.MessageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, externalAppsLoader, _notificationAreaIconBuilder);
+            var externalAppsLoader = new ExternalAppsLoader(Runtime.MessageCollector, _externalToolsToolStrip, 
+                _connectionInitiator, externalToolsService, _connectionsService);
+		    _settingsLoader = new SettingsLoader(this, Runtime.MessageCollector, _quickConnectToolStrip, _externalToolsToolStrip, 
+		        _multiSshToolStrip, externalAppsLoader, _notificationAreaIconBuilder, msMain);
 		    _externalToolsToolStrip.ExternalToolsService = externalToolsService;
 			_externalToolsToolStrip.GetSelectedConnectionFunc = () => SelectedConnection;
 			_quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
@@ -153,8 +159,8 @@ namespace mRemoteNG.UI.Forms
 
         public bool AreWeUsingSqlServerForSavingConnections
 		{
-			get { return _usingSqlServer; }
-			set
+			get => _usingSqlServer;
+            set
 			{
 				if (_usingSqlServer == value)
 				{
@@ -167,8 +173,8 @@ namespace mRemoteNG.UI.Forms
 		
         public string ConnectionsFileName
 		{
-			get { return _connectionsFileName; }
-			set
+			get => _connectionsFileName;
+            set
 			{
 				if (_connectionsFileName == value)
 				{
@@ -181,8 +187,8 @@ namespace mRemoteNG.UI.Forms
 		
         public bool ShowFullPathInTitle
 		{
-			get { return _showFullPathInTitle; }
-			set
+			get => _showFullPathInTitle;
+            set
 			{
 				if (_showFullPathInTitle == value)
 				{
@@ -195,8 +201,8 @@ namespace mRemoteNG.UI.Forms
 		
         public ConnectionInfo SelectedConnection
 		{
-			get { return _selectedConnection; }
-			set
+			get => _selectedConnection;
+            set
 			{
 				if (_selectedConnection == value)
 				{
@@ -334,25 +340,20 @@ namespace mRemoteNG.UI.Forms
         //Theming support
         private void SetSchema()
         {
-            if (_themeManager.ThemingActive)
-            {
-                // Persist settings when rebuilding UI
-                pnlDock.Theme = _themeManager.ActiveTheme.Theme;
-                ApplyTheme();
-            }
+            if (!_themeManager.ThemingActive) return;
+            // Persist settings when rebuilding UI
+            pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+            ApplyTheme();
         }
-
         private void ApplyTheme()
 		{
-            if(_themeManager.ThemingActive)
-            {
-                vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-                tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
-            }
-        }
+		    if (!_themeManager.ThemingActive) return;
+		    vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
+		}
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
@@ -711,14 +712,8 @@ namespace mRemoteNG.UI.Forms
         public delegate void ClipboardchangeEventHandler();
         public static event ClipboardchangeEventHandler ClipboardChanged
         {
-            add
-            {
-                _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Combine(_clipboardChangedEvent, value);
-            }
-            remove
-            {
-                _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Remove(_clipboardChangedEvent, value);
-            }
+            add => _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Combine(_clipboardChangedEvent, value);
+            remove => _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Remove(_clipboardChangedEvent, value);
         }
         #endregion
 
