@@ -706,7 +706,6 @@ namespace mRemoteNG.UI.Window
                 UpdateRootInfoNode(e);
                 UpdateInheritanceNode();
                 ShowHideGridItems();
-                Runtime.ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
 			{
