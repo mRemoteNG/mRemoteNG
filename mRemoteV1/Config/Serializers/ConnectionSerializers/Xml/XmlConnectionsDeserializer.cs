@@ -205,7 +205,9 @@ namespace mRemoteNG.Config.Serializers.Xml
         {
             if (xmlnode.Attributes == null) return null;
 
-			var connectionId = xmlnode.Attributes["Id"]?.Value ?? Guid.NewGuid().ToString();
+			var connectionId = xmlnode.Attributes["Id"]?.Value;
+            if (string.IsNullOrWhiteSpace(connectionId))
+                connectionId = Guid.NewGuid().ToString();
 			var connectionInfo = new ConnectionInfo(connectionId);
 
             try

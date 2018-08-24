@@ -1,4 +1,12 @@
-1.76.7 (2018-xx-xx):
+1.76.8 (2018-xx-xx):
+
+Fixes:
+------
+#1088: Delete and Launch buttons are not disabled when last external tool deleted
+#1087: 'Save connections after every edit' setting not honored
+
+
+1.76.7 (2018-08-22):
 
 Fixes:
 ------
