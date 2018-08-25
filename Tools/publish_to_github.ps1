@@ -68,8 +68,8 @@ if ($DescriptionIsBase64Encoded) {
 $releaseFolderItems = Get-ChildItem -Path $ReleaseFolderPath
 $mrngPortablePath = ($releaseFolderItems | ?{$_.Name -match "portable-[\d\.]+\.zip"}).FullName
 $mrngNormalPath = ($releaseFolderItems | ?{$_.Name -match "installer-[\d\.]+\.msi"}).FullName
-$mrngPortableSymbolsPath = ($releaseFolderItems | ?{$_.Name -match "portable-symbols-[\d\.]+\.zip"}).FullName
-$mrngNormalSymbolsPath = ($releaseFolderItems | ?{$_.Name -match "installer-symbols-[\d\.]+\.msi"}).FullName
+$mrngPortableSymbolsPath = ($releaseFolderItems | ?{$_.Name -match "mremoteng-portable-symbols-[\d\.]+\.zip"}).FullName
+$mrngNormalSymbolsPath = ($releaseFolderItems | ?{$_.Name -match "mremoteng-symbols-[\d\.]+\.zip"}).FullName
 
 
 $release = Publish-GitHubRelease -Owner $Owner -Repository $Repository -ReleaseTitle $ReleaseTitle -TagName $TagName -TargetCommitish $TargetCommitish -Description $Description -IsDraft ([bool]::Parse($IsDraft)) -IsPrerelease ([bool]::Parse($IsPrerelease)) -AuthToken $AuthToken
