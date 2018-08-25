@@ -1,3 +1,16 @@
+1.77.0 (2018-xx-xx):
+
+Features/Enhancements:
+----------------------
+#1072: Russian translation improvements
+#1016: Chinese (simplified) translation improvements
+#928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
+
+Fixes:
+------
+
+
+
 1.76.8 (2018-08-25):
 
 Fixes:
