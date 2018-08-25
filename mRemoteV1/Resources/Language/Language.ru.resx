@@ -2679,4 +2679,16 @@ mRemoteNG сейчас прекратит работу и начнет проц�
 	<data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
 		<value>Создайте пустую панель при запуске mRemoteNG</value>
 	</data>
+  <data name="strMenuDisconnectOther" xml:space="preserve">
+    <value>Отключить остальные вкладки</value>
+  </data>
+  <data name="strMenuDisconnectOthersRight" xml:space="preserve">
+    <value>Отключить вкладки справа</value>
+  </data>
+  <data name="strConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>Хотите закрыть все подключения, кроме "{0}"?</value>
+  </data>
+  <data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
+    <value>Хотите закрыть все подключения справа от "{0}"?</value>
+  </data>
 </root>
