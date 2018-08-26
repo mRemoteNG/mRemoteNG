@@ -73,8 +73,8 @@ $mrngNormalSymbolsPath = ($releaseFolderItems | ?{$_.Name -match "mremoteng-symb
 
 
 $release = Publish-GitHubRelease -Owner $Owner -Repository $Repository -ReleaseTitle $ReleaseTitle -TagName $TagName -TargetCommitish $TargetCommitish -Description $Description -IsDraft ([bool]::Parse($IsDraft)) -IsPrerelease ([bool]::Parse($IsPrerelease)) -AuthToken $AuthToken
-$zipUpload = Upload-GitHubReleaseAsset -UploadUri $release.upload_url -FilePath $mrngPortablePath -ContentType "application/zip" -AuthToken $AuthToken -Label "mRemoteNG Portable Edition (zip)"
-$msiUpload = Upload-GitHubReleaseAsset -UploadUri $release.upload_url -FilePath $mrngNormalPath -ContentType "application/octet-stream" -AuthToken $AuthToken -Label "mRemoteNG Normal Edition (msi)"
+$zipUpload = Upload-GitHubReleaseAsset -UploadUri $release.upload_url -FilePath $mrngPortablePath -ContentType "application/zip" -AuthToken $AuthToken -Label "Portable Edition (zip)"
+$msiUpload = Upload-GitHubReleaseAsset -UploadUri $release.upload_url -FilePath $mrngNormalPath -ContentType "application/octet-stream" -AuthToken $AuthToken -Label "Normal Edition (msi)"
 
 $portableEditionSymbols = Upload-GitHubReleaseAsset -UploadUri $release.upload_url -FilePath $mrngPortableSymbolsPath -ContentType "application/zip" -AuthToken $AuthToken -Label "Portable Edition Debug Symbols"
 $normalEditionSymbols = Upload-GitHubReleaseAsset -UploadUri $release.upload_url -FilePath $mrngNormalSymbolsPath -ContentType "application/zip" -AuthToken $AuthToken -Label "Normal Edition Debug Symbols"
