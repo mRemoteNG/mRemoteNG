@@ -3,6 +3,7 @@
 Fixes:
 ------
 #1092: Invalid Cast Exceptions loading default connectioninfo 
+#1091: Minor themeing issues
 
 
 1.76.8 (2018-08-25):

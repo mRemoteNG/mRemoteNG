@@ -399,6 +399,8 @@ namespace mRemoteNG.UI.Window
             WindowType = WindowType.ComponentsCheck;
             DockPnl = new DockContent();
             InitializeComponent();
+            FontOverrider.FontOverride(this);
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
         #endregion
 
@@ -406,6 +408,7 @@ namespace mRemoteNG.UI.Window
         private void ComponentsCheck_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
+            ApplyTheme();
             chkAlwaysShow.Checked = Settings.Default.StartupComponentsCheck;
             CheckComponents();
         }
@@ -416,6 +419,24 @@ namespace mRemoteNG.UI.Window
             Text = Language.strComponentsCheck;
             chkAlwaysShow.Text = Language.strCcAlwaysShowScreen;
             btnCheckAgain.Text = Language.strCcCheckAgain;
+        }
+
+        private new void ApplyTheme()
+        {
+            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            base.ApplyTheme();
+            pnlCheck1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck1.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck2.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck2.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck3.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck3.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck4.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck4.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck5.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck5.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlChecks.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlChecks.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void btnCheckAgain_Click(object sender, EventArgs e)
