@@ -1,3 +1,10 @@
+1.76.9 (2018-xx-xx):
+
+Fixes:
+------
+#1092: Invalid Cast Exceptions loading default connectioninfo 
+
+
 1.76.8 (2018-08-25):
 
 Fixes:
