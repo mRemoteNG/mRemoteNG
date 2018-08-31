@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -42,6 +43,12 @@ namespace mRemoteNG.UI.Controls
             _themeManager.ThemeChanged += ApplyTheme;
             PopulateQuickConnectProtocolMenu();
             ApplyTheme();
+        }
+
+        protected override void ScaleControl(SizeF factor, BoundsSpecified specified)
+        {
+            Height = (int) (Height * factor.Height);
+            base.ScaleControl(factor, specified);
         }
 
         private void Initialize()
@@ -115,7 +122,7 @@ namespace mRemoteNG.UI.Controls
             _btnConnections.DisplayStyle = ToolStripItemDisplayStyle.Image;
             _btnConnections.DropDown = _mnuConnections;
             _btnConnections.Image = Resources.Root;
-            _btnConnections.ImageScaling = ToolStripItemImageScaling.None;
+            _btnConnections.ImageScaling = ToolStripItemImageScaling.SizeToFit;
             _btnConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
             _btnConnections.Name = "btnConnections";
             _btnConnections.Size = new System.Drawing.Size(29, 22);
