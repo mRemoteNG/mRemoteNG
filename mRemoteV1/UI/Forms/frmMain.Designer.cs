@@ -42,6 +42,9 @@ namespace mRemoteNG.UI.Forms
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.msMain.SuspendLayout();
+		    this._quickConnectToolStrip.SuspendLayout();
+		    this._multiSshToolStrip.SuspendLayout();
+		    this._externalToolsToolStrip.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();
             this.tsContainer.SuspendLayout();
@@ -200,8 +203,10 @@ namespace mRemoteNG.UI.Forms
             this.ResizeBegin += new System.EventHandler(this.frmMain_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.frmMain_ResizeEnd);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
-            this.msMain.ResumeLayout(false);
-            this.msMain.PerformLayout();
+            this.msMain.ResumeLayout(true);
+		    this._quickConnectToolStrip.ResumeLayout(true);
+		    this._multiSshToolStrip.ResumeLayout(true);
+		    this._externalToolsToolStrip.ResumeLayout(true);
             this.tsContainer.ContentPanel.ResumeLayout(false);
             this.tsContainer.TopToolStripPanel.ResumeLayout(false);
             this.tsContainer.TopToolStripPanel.PerformLayout();
