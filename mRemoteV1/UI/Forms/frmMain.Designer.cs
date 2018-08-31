@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Forms
         private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            mRemoteNG.Connection.ConnectionInitiator connectionInitiator3 = new mRemoteNG.Connection.ConnectionInitiator();
+            mRemoteNG.Connection.ConnectionInitiator connectionInitiator1 = new mRemoteNG.Connection.ConnectionInitiator();
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new mRemoteNG.UI.Menu.MainFileMenu();
@@ -42,9 +42,6 @@ namespace mRemoteNG.UI.Forms
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.msMain.SuspendLayout();
-		    this._quickConnectToolStrip.SuspendLayout();
-		    this._multiSshToolStrip.SuspendLayout();
-		    this._externalToolsToolStrip.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();
             this.tsContainer.SuspendLayout();
@@ -148,10 +145,11 @@ namespace mRemoteNG.UI.Forms
             // _quickConnectToolStrip
             // 
             this._quickConnectToolStrip.BackColor = System.Drawing.SystemColors.Control;
-            this._quickConnectToolStrip.ConnectionInitiator = connectionInitiator3;
+            this._quickConnectToolStrip.ConnectionInitiator = connectionInitiator1;
             this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
             this._quickConnectToolStrip.Location = new System.Drawing.Point(3, 0);
+            this._quickConnectToolStrip.MaximumSize = new System.Drawing.Size(0, 25);
             this._quickConnectToolStrip.Name = "_quickConnectToolStrip";
             this._quickConnectToolStrip.Size = new System.Drawing.Size(364, 25);
             this._quickConnectToolStrip.TabIndex = 18;
@@ -172,6 +170,7 @@ namespace mRemoteNG.UI.Forms
             this._externalToolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._externalToolsToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
             this._externalToolsToolStrip.Location = new System.Drawing.Point(39, 74);
+            this._externalToolsToolStrip.MaximumSize = new System.Drawing.Size(0, 25);
             this._externalToolsToolStrip.Name = "_externalToolsToolStrip";
             this._externalToolsToolStrip.Size = new System.Drawing.Size(111, 25);
             this._externalToolsToolStrip.TabIndex = 17;
@@ -187,8 +186,8 @@ namespace mRemoteNG.UI.Forms
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1129, 571);
             this.Controls.Add(this.tsContainer);
             this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
@@ -203,10 +202,8 @@ namespace mRemoteNG.UI.Forms
             this.ResizeBegin += new System.EventHandler(this.frmMain_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.frmMain_ResizeEnd);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
-            this.msMain.ResumeLayout(true);
-		    this._quickConnectToolStrip.ResumeLayout(true);
-		    this._multiSshToolStrip.ResumeLayout(true);
-		    this._externalToolsToolStrip.ResumeLayout(true);
+            this.msMain.ResumeLayout(false);
+            this.msMain.PerformLayout();
             this.tsContainer.ContentPanel.ResumeLayout(false);
             this.tsContainer.TopToolStripPanel.ResumeLayout(false);
             this.tsContainer.TopToolStripPanel.PerformLayout();
