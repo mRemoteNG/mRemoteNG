@@ -92,7 +92,6 @@ namespace mRemoteNG.UI.Controls
             _btnQuickConnect,
             _btnConnections});
             Location = new System.Drawing.Point(3, 24);
-            MaximumSize = new System.Drawing.Size(0, 25);
             Name = "tsQuickConnect";
             Size = new System.Drawing.Size(387, 25);
             TabIndex = 18;

@@ -149,7 +149,6 @@ namespace mRemoteNG.UI.Forms
             this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
             this._quickConnectToolStrip.Location = new System.Drawing.Point(3, 0);
-            this._quickConnectToolStrip.MaximumSize = new System.Drawing.Size(0, 0);
             this._quickConnectToolStrip.Name = "_quickConnectToolStrip";
             this._quickConnectToolStrip.Size = new System.Drawing.Size(364, 25);
             this._quickConnectToolStrip.TabIndex = 18;
@@ -170,7 +169,6 @@ namespace mRemoteNG.UI.Forms
             this._externalToolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._externalToolsToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
             this._externalToolsToolStrip.Location = new System.Drawing.Point(39, 74);
-            this._externalToolsToolStrip.MaximumSize = new System.Drawing.Size(0, 0);
             this._externalToolsToolStrip.Name = "_externalToolsToolStrip";
             this._externalToolsToolStrip.Size = new System.Drawing.Size(111, 25);
             this._externalToolsToolStrip.TabIndex = 17;
