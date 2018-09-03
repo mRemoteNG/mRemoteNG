@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI
@@ -9,6 +10,15 @@ namespace mRemoteNG.UI
         private const int BaselineDpi = 96;
 
         public SizeF ResolutionScalingFactor { get; } = GetResolutionScalingFactor();
+
+        /// <summary>
+        /// Scale the given nominal width value by the <see cref="ResolutionScalingFactor"/>
+        /// </summary>
+        /// <param name="width"></param>
+        public int CalculateScaledWidth(int width)
+        {
+            return (int) Math.Round(width * ResolutionScalingFactor.Width);
+        }
 
         private static SizeF GetResolutionScalingFactor()
         {
