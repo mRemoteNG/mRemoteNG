@@ -15,10 +15,14 @@ namespace mRemoteNG.UI.Controls
 
         public StatusImageList()
         {
+            var display = new DisplayProperties();
+
             ImageList = new ImageList
             {
                 ColorDepth = ColorDepth.Depth32Bit,
-                ImageSize = new Size(16, 16),
+                ImageSize = new Size(
+                    (int)Math.Round(16 * display.ResolutionScalingFactor.Width), 
+                    (int)Math.Round(16 * display.ResolutionScalingFactor.Height)),
                 TransparentColor = Color.Transparent
             };
 

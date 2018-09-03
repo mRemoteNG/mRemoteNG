@@ -469,6 +469,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\DialogFactory.cs" />
+    <Compile Include="UI\DisplayProperties.cs" />
     <Compile Include="UI\FontOverrider.cs" />
     <Compile Include="UI\FormExtensions.cs" />
     <Compile Include="UI\Forms\frmOptions.cs">
