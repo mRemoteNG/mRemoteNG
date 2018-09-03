@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -15,6 +16,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
+            var display = new DisplayProperties();
+            var img = display.ScaleImage(Resources.PuttyConfig);
+            btnLaunchPutty.Image = img;
         }
 
         #region Public Methods
