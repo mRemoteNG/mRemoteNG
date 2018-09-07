@@ -18,10 +18,13 @@ namespace mRemoteNG.UI.TaskDialog
         private readonly Font _mainInstructionFont = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
         private readonly List<NGRadioButton> _radioButtonCtrls = new List<NGRadioButton>();
-
+        private readonly DisplayProperties _display = new DisplayProperties();
         private Control _focusControl;
 
         private bool _isVista = false;
+
+        private int _mainInstructionLeftMargin;
+        private int _mainInstructionRightMargin;
         #endregion
 
         //--------------------------------------------------------------------------------
@@ -88,15 +91,25 @@ namespace mRemoteNG.UI.TaskDialog
         private bool _formBuilt;
         public void BuildForm()
         {
-            var form_height = 0;
+            var formHeight = 0;
+            imgMain.Width = _display.ScaleWidth(imgMain.Width);
+            imgMain.Height = _display.ScaleHeight(imgMain.Height);
 
             // Setup Main Instruction
             switch (MainIcon)
             {
-                case ESysIcons.Information: imgMain.Image = SystemIcons.Information.ToBitmap(); break;
-                case ESysIcons.Question: imgMain.Image = SystemIcons.Question.ToBitmap(); break;
-                case ESysIcons.Warning: imgMain.Image = SystemIcons.Warning.ToBitmap(); break;
-                case ESysIcons.Error: imgMain.Image = SystemIcons.Error.ToBitmap(); break;
+                case ESysIcons.Information:
+                    imgMain.Image = SystemIcons.Information.ToBitmap();
+                    break;
+                case ESysIcons.Question:
+                    imgMain.Image = SystemIcons.Question.ToBitmap();
+                    break;
+                case ESysIcons.Warning:
+                    imgMain.Image = SystemIcons.Warning.ToBitmap();
+                    break;
+                case ESysIcons.Error:
+                    imgMain.Image = SystemIcons.Error.ToBitmap();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -105,49 +118,51 @@ namespace mRemoteNG.UI.TaskDialog
             //pnlMainInstruction.Height = Math.Max(41, lbMainInstruction.Height + 16);
             if (_mainInstructionHeight == 0)
                 GetMainInstructionTextSizeF();
-            pnlMainInstruction.Height = Math.Max(41, _mainInstructionHeight + 16);
+            pnlMainInstruction.Height = Math.Max(41, _mainInstructionHeight + _display.ScaleHeight(16));
 
-            form_height += pnlMainInstruction.Height;
+            _mainInstructionLeftMargin = imgMain.Left + imgMain.Width + _display.ScaleWidth(imgMain.Padding.Right);
+            _mainInstructionRightMargin = _display.ScaleWidth(8);
+            formHeight += pnlMainInstruction.Height;
 
             // Setup Content
             pnlContent.Visible = (Content != "");
             if (Content != "")
             {
                 AdjustLabelHeight(lbContent);
-                pnlContent.Height = lbContent.Height + 4;
-                form_height += pnlContent.Height;
+                pnlContent.Height = lbContent.Height + _display.ScaleHeight(4);
+                formHeight += pnlContent.Height;
             }
 
-            var show_verify_checkbox = (cbVerify.Text != "");
-            cbVerify.Visible = show_verify_checkbox;
+            var showVerifyCheckbox = (cbVerify.Text != "");
+            cbVerify.Visible = showVerifyCheckbox;
 
             // Setup Expanded Info and Buttons panels
             if (ExpandedInfo == "")
             {
                 pnlExpandedInfo.Visible = false;
                 lbShowHideDetails.Visible = false;
-                cbVerify.Top = 12;
-                pnlButtons.Height = 40;
+                cbVerify.Top = _display.ScaleHeight(12);
+                pnlButtons.Height = _display.ScaleHeight(40);
             }
             else
             {
                 AdjustLabelHeight(lbExpandedInfo);
-                pnlExpandedInfo.Height = lbExpandedInfo.Height + 4;
+                pnlExpandedInfo.Height = lbExpandedInfo.Height + _display.ScaleHeight(4);
                 pnlExpandedInfo.Visible = Expanded;
                 lbShowHideDetails.Text = (Expanded ? "        Hide details" : "        Show details");
                 lbShowHideDetails.ImageIndex = (Expanded ? 0 : 3);
-                if (!show_verify_checkbox)
-                    pnlButtons.Height = 40;
+                if (!showVerifyCheckbox)
+                    pnlButtons.Height = _display.ScaleHeight(40);
                 if (Expanded)
-                    form_height += pnlExpandedInfo.Height;
+                    formHeight += pnlExpandedInfo.Height;
             }
 
             // Setup RadioButtons
             pnlRadioButtons.Visible = (RadioButtons != "");
             if (RadioButtons != "")
             {
-                var arr = RadioButtons.Split(new char[] { '|' });
-                var pnl_height = 12;
+                var arr = RadioButtons.Split('|');
+                var pnlHeight = 12;
                 for (var i = 0; i < arr.Length; i++)
                 {
                     var rb = new NGRadioButton();
@@ -157,20 +172,20 @@ namespace mRemoteNG.UI.TaskDialog
                     rb.Tag = i;
                     rb.Checked = (DefaultButtonIndex == i);
                     rb.Width = Width - rb.Left - 15;
-                    pnl_height += rb.Height;
+                    pnlHeight += rb.Height;
                     _radioButtonCtrls.Add(rb);
                 }
-                pnlRadioButtons.Height = pnl_height;
-                form_height += pnlRadioButtons.Height;
+                pnlRadioButtons.Height = pnlHeight;
+                formHeight += pnlRadioButtons.Height;
             }
 
             // Setup CommandButtons
             pnlCommandButtons.Visible = (CommandButtons != "");
             if (CommandButtons != "")
             {
-                var arr = CommandButtons.Split(new char[] { '|' });
-                var t = 8;
-                var pnl_height = 16;
+                var arr = CommandButtons.Split('|');
+                var t = _display.ScaleHeight(8);
+                var pnlHeight = _display.ScaleHeight(16);
                 for (var i = 0; i < arr.Length; i++)
                 {
                     var btn = new CommandButton();
@@ -179,16 +194,16 @@ namespace mRemoteNG.UI.TaskDialog
                     if (_isVista)  // <- tweak font if vista
                         btn.Font = new Font(btn.Font, FontStyle.Regular);
                     btn.Text = arr[i];
-                    btn.Size = new Size(Width - btn.Left - 15, btn.GetBestHeight());
+                    btn.Size = new Size(Width - btn.Left - _display.ScaleWidth(15), btn.GetBestHeight());
                     t += btn.Height;
-                    pnl_height += btn.Height;
+                    pnlHeight += btn.Height;
                     btn.Tag = i;
-                    btn.Click += new EventHandler(CommandButton_Click);
+                    btn.Click += CommandButton_Click;
                     if (i == DefaultButtonIndex)
                         _focusControl = btn;
                 }
-                pnlCommandButtons.Height = pnl_height;
-                form_height += pnlCommandButtons.Height;
+                pnlCommandButtons.Height = pnlHeight;
+                formHeight += pnlCommandButtons.Height;
             }
 
             // Setup Buttons
@@ -258,16 +273,16 @@ namespace mRemoteNG.UI.TaskDialog
                                Buttons == ETaskDialogButtons.OkCancel ||
                                Buttons == ETaskDialogButtons.YesNoCancel);
 
-            if (!show_verify_checkbox && ExpandedInfo == "" && Buttons == ETaskDialogButtons.None)
+            if (!showVerifyCheckbox && ExpandedInfo == "" && Buttons == ETaskDialogButtons.None)
                 pnlButtons.Visible = false;
             else
-                form_height += pnlButtons.Height;
+                formHeight += pnlButtons.Height;
 
             pnlFooter.Visible = (Footer != "");
             if (Footer != "")
             {
                 AdjustLabelHeight(lbFooter);
-                pnlFooter.Height = Math.Max(28, lbFooter.Height + 16);
+                pnlFooter.Height = Math.Max(_display.ScaleHeight(28), lbFooter.Height + _display.ScaleHeight(16));
                 switch (FooterIcon)
                 {
                     case ESysIcons.Information:
@@ -289,59 +304,59 @@ namespace mRemoteNG.UI.TaskDialog
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                form_height += pnlFooter.Height;
+                formHeight += pnlFooter.Height;
             }
 
-            ClientSize = new Size(ClientSize.Width, form_height);
+            ClientSize = new Size(ClientSize.Width, formHeight);
 
             _formBuilt = true;
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyTheme();
         }
 
         private void ApplyTheme()
-        { 
-            if(ThemeManager.getInstance().ThemingActive)
-            {
-                pnlButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                panel2.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                panel2.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                pnlFooter.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlFooter.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                panel5.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                panel5.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                panel3.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                panel3.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                pnlCommandButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlCommandButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                pnlMainInstruction.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlMainInstruction.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                pnlContent.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlContent.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                pnlExpandedInfo.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlExpandedInfo.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                pnlRadioButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlRadioButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            }  
+        {
+            if (!ThemeManager.getInstance().ThemingActive)
+                return;
+
+            pnlButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            panel2.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            panel2.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlFooter.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlFooter.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            panel5.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            panel5.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            panel3.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            panel3.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCommandButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCommandButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlMainInstruction.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlMainInstruction.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlContent.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlContent.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlExpandedInfo.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlExpandedInfo.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlRadioButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlRadioButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         //--------------------------------------------------------------------------------
-        private static Image ResizeBitmap(Image SrcImg, int NewWidth, int NewHeight)
+        private Image ResizeBitmap(Image srcImg, int newWidth, int newHeight)
         {
-            var percent_width = (NewWidth / (float)SrcImg.Width);
-            var percent_height = (NewHeight / (float)SrcImg.Height);
+            var percentWidth = _display.ScaleWidth(newWidth) / (float)srcImg.Width;
+            var percentHeight = _display.ScaleHeight(newHeight) / (float)srcImg.Height;
 
-            var resize_percent = (percent_height < percent_width ? percent_height : percent_width);
+            var resizePercent = percentHeight < percentWidth ? percentHeight : percentWidth;
 
-            var w = (int)(SrcImg.Width * resize_percent);
-            var h = (int)(SrcImg.Height * resize_percent);
+            var w = (int)(srcImg.Width * resizePercent);
+            var h = (int)(srcImg.Height * resizePercent);
             var b = new Bitmap(w, h);
 
             using (var g = Graphics.FromImage(b))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g.DrawImage(SrcImg, 0, 0, w, h);
+                g.DrawImage(srcImg, 0, 0, w, h);
             }
             return b;
         }
@@ -415,12 +430,9 @@ namespace mRemoteNG.UI.TaskDialog
         }
 
         //--------------------------------------------------------------------------------
-        private const int MAIN_INSTRUCTION_LEFT_MARGIN = 46;
-        private const int MAIN_INSTRUCTION_RIGHT_MARGIN = 8;
-
         private SizeF GetMainInstructionTextSizeF()
         {
-            var mzSize = new SizeF(pnlMainInstruction.Width - MAIN_INSTRUCTION_LEFT_MARGIN - MAIN_INSTRUCTION_RIGHT_MARGIN, 5000.0F);
+            var mzSize = new SizeF(pnlMainInstruction.Width - _mainInstructionLeftMargin - _mainInstructionRightMargin, 5000.0F);
             var g = Graphics.FromHwnd(Handle);
             var textSize = g.MeasureString(_mainInstruction, _mainInstructionFont, mzSize);
             _mainInstructionHeight = (int)textSize.Height;
@@ -431,7 +443,7 @@ namespace mRemoteNG.UI.TaskDialog
         {
             var szL = GetMainInstructionTextSizeF();
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            e.Graphics.DrawString(_mainInstruction, _mainInstructionFont, new SolidBrush( ((Panel)sender).ForeColor), new RectangleF(new PointF(MAIN_INSTRUCTION_LEFT_MARGIN, 10), szL));
+            e.Graphics.DrawString(_mainInstruction, _mainInstructionFont, new SolidBrush( ((Panel)sender).ForeColor), new RectangleF(new PointF(_mainInstructionLeftMargin, 10), szL));
         }
 
         //--------------------------------------------------------------------------------
