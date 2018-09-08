@@ -479,7 +479,6 @@
       <DependentUpon>frmOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\FullscreenHandler.cs" />
-    <Compile Include="UI\Forms\Input\input.cs" />
     <Compile Include="UI\Forms\Input\InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
