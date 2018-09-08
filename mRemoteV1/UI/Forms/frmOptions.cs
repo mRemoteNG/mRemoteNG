@@ -58,17 +58,17 @@ namespace mRemoteNG.UI.Forms
         {
             _pages = new Dictionary<string, OptionsPage>
             {
-                {typeof(StartupExitPage).Name, new StartupExitPage()},
-                {typeof(AppearancePage).Name, new AppearancePage()},
-                {typeof(TabsPanelsPage).Name, new TabsPanelsPage()},
-                {typeof(NotificationsPage).Name, new NotificationsPage()},
-                {typeof(ConnectionsPage).Name, new ConnectionsPage()},
-                {typeof(CredentialsPage).Name, new CredentialsPage()},
-                {typeof(SqlServerPage).Name, new SqlServerPage()},
-                {typeof(UpdatesPage).Name, new UpdatesPage()},
-                {typeof(ThemePage).Name, new ThemePage()},
-                {typeof(SecurityPage).Name, new SecurityPage()},
-                {typeof(AdvancedPage).Name, new AdvancedPage()}
+                {typeof(StartupExitPage).Name, new StartupExitPage {Dock = DockStyle.Fill}},
+                {typeof(AppearancePage).Name, new AppearancePage {Dock = DockStyle.Fill}},
+                {typeof(TabsPanelsPage).Name, new TabsPanelsPage {Dock = DockStyle.Fill}},
+                {typeof(NotificationsPage).Name, new NotificationsPage {Dock = DockStyle.Fill}},
+                {typeof(ConnectionsPage).Name, new ConnectionsPage {Dock = DockStyle.Fill}},
+                {typeof(CredentialsPage).Name, new CredentialsPage {Dock = DockStyle.Fill}},
+                {typeof(SqlServerPage).Name, new SqlServerPage {Dock = DockStyle.Fill}},
+                {typeof(UpdatesPage).Name, new UpdatesPage {Dock = DockStyle.Fill}},
+                {typeof(ThemePage).Name, new ThemePage {Dock = DockStyle.Fill}},
+                {typeof(SecurityPage).Name, new SecurityPage {Dock = DockStyle.Fill}},
+                {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}}
             };
         }
 

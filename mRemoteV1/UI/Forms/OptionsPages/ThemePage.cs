@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Linq;
 using System.Collections.Generic;
+using System.Drawing;
 using BrightIdeasSoftware;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -35,6 +36,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             get => Language.strOptionsTabTheme;
             set { }
         }
+
+        public override Icon PageIcon { get; protected set; } = Resources.Appearance_Icon;
 
         public override void ApplyLanguage()
         {
