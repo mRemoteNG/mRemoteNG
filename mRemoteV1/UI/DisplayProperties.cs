@@ -17,7 +17,7 @@ namespace mRemoteNG.UI
         /// Scale the given nominal width value by the <see cref="ResolutionScalingFactor"/>
         /// </summary>
         /// <param name="width"></param>
-        public int ScaleWidth(int width)
+        public int ScaleWidth(float width)
         {
             return CalculateScaledValue(width, ResolutionScalingFactor.Width);
         }
@@ -26,7 +26,7 @@ namespace mRemoteNG.UI
         /// Scale the given nominal height value by the <see cref="ResolutionScalingFactor"/>
         /// </summary>
         /// <param name="height"></param>
-        public int ScaleHeight(int height)
+        public int ScaleHeight(float height)
         {
             return CalculateScaledValue(height, ResolutionScalingFactor.Width);
         }
@@ -66,11 +66,16 @@ namespace mRemoteNG.UI
             return destImage;
         }
 
+        public Bitmap ScaleImage(Icon icon)
+        {
+            return ScaleImage(icon.ToBitmap());
+        }
+
         /// <summary>
         /// Scale the given nominal height value by the <see cref="ResolutionScalingFactor"/>
         /// </summary>
         /// <param name="width"></param>
-        private int CalculateScaledValue(int value, float scalingValue)
+        private int CalculateScaledValue(float value, float scalingValue)
         {
             return (int)Math.Round(value * scalingValue);
         }
