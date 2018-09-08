@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Drawing;
 using BrightIdeasSoftware;
+using mRemoteNG.UI.Forms.Input;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -174,7 +175,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
             var name = _themeManager.ActiveTheme.Name;
-            var res = Input.input.InputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name);
+            var res = new InputBox().ShowAsDialog(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name);
             if (res != DialogResult.OK) return;
             if (_themeManager.isThemeNameOk(name))
             {
