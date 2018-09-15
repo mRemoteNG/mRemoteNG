@@ -51,11 +51,17 @@ namespace mRemoteNG.UI.Forms
         private void frmPassword_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
+            var display = new DisplayProperties();
+		    pbLock.Image = display.ScaleImage(pbLock.Image);
+		    Height = tableLayoutPanel1.Height;
 
-		    if (NewPasswordMode) return;
-		    Height = Height - (txtVerify.Top - txtPassword.Top);
-		    lblVerify.Visible = false;
+            if (NewPasswordMode) return;
+            lblVerify.Visible = false;
 		    txtVerify.Visible = false;
+		    tableLayoutPanel1.RowStyles[tableLayoutPanel1.GetRow(lblVerify)].SizeType = SizeType.Absolute;
+		    tableLayoutPanel1.RowStyles[tableLayoutPanel1.GetRow(lblVerify)].Height = 0;
+		    tableLayoutPanel1.RowStyles[tableLayoutPanel1.GetRow(txtVerify)].SizeType = SizeType.Absolute;
+            tableLayoutPanel1.RowStyles[tableLayoutPanel1.GetRow(txtVerify)].Height = 0;
 		}
 
         private void PasswordForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -63,8 +69,6 @@ namespace mRemoteNG.UI.Forms
             _password = txtPassword.Text.ConvertToSecureString();
             txtPassword.Text = "";
             txtVerify.Text = "";
-            if (NewPasswordMode) return;
-            Height = Height + (txtVerify.Top - txtPassword.Top);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
