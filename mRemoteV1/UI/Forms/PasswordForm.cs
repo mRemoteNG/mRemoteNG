@@ -58,10 +58,6 @@ namespace mRemoteNG.UI.Forms
             if (NewPasswordMode) return;
             lblVerify.Visible = false;
 		    txtVerify.Visible = false;
-		    tableLayoutPanel1.RowStyles[tableLayoutPanel1.GetRow(lblVerify)].SizeType = SizeType.Absolute;
-		    tableLayoutPanel1.RowStyles[tableLayoutPanel1.GetRow(lblVerify)].Height = 0;
-		    tableLayoutPanel1.RowStyles[tableLayoutPanel1.GetRow(txtVerify)].SizeType = SizeType.Absolute;
-            tableLayoutPanel1.RowStyles[tableLayoutPanel1.GetRow(txtVerify)].Height = 0;
 		}
 
         private void PasswordForm_FormClosed(object sender, FormClosedEventArgs e)
