@@ -7,10 +7,7 @@ namespace mRemoteNG.UI.Window
         #region  Windows Form Designer generated code
 		internal Controls.Base.NGLabel lblStatus;
 		internal Controls.Base.NGTextBox txtChangeLog;
-		internal Controls.Base.NGProgressBar prgbDownload;
-		internal Controls.Base.NGButton btnDownload;
 		internal Controls.Base.NGLabel lblChangeLogLabel;
-		internal System.Windows.Forms.Panel pnlUpdate;
 		internal Controls.Base.NGLabel lblLatestVersionLabel;
 		internal Controls.Base.NGLabel lblInstalledVersionLabel;
 		internal Controls.Base.NGLabel lblLatestVersion;
@@ -21,10 +18,7 @@ namespace mRemoteNG.UI.Window
 		private void InitializeComponent()
 		{
             this.btnCheckForUpdate = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.pnlUpdate = new System.Windows.Forms.Panel();
             this.lblChangeLogLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.btnDownload = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.prgbDownload = new mRemoteNG.UI.Controls.Base.NGProgressBar();
             this.txtChangeLog = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblStatus = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.lblLatestVersionLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -32,15 +26,18 @@ namespace mRemoteNG.UI.Window
             this.lblLatestVersion = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.lblInstalledVersion = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pbUpdateImage = new System.Windows.Forms.PictureBox();
-            this.pnlUpdate.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.prgbDownload = new mRemoteNG.UI.Controls.Base.NGProgressBar();
+            this.btnDownload = new mRemoteNG.UI.Controls.Base.NGButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbUpdateImage)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCheckForUpdate
             // 
             this.btnCheckForUpdate._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnCheckForUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckForUpdate.Location = new System.Drawing.Point(16, 104);
+            this.btnCheckForUpdate.Location = new System.Drawing.Point(3, 94);
             this.btnCheckForUpdate.Name = "btnCheckForUpdate";
             this.btnCheckForUpdate.Size = new System.Drawing.Size(104, 32);
             this.btnCheckForUpdate.TabIndex = 5;
@@ -48,155 +45,177 @@ namespace mRemoteNG.UI.Window
             this.btnCheckForUpdate.UseVisualStyleBackColor = true;
             this.btnCheckForUpdate.Click += new System.EventHandler(this.btnCheckForUpdate_Click);
             // 
-            // pnlUpdate
-            // 
-            this.pnlUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlUpdate.Controls.Add(this.lblChangeLogLabel);
-            this.pnlUpdate.Controls.Add(this.btnDownload);
-            this.pnlUpdate.Controls.Add(this.prgbDownload);
-            this.pnlUpdate.Controls.Add(this.txtChangeLog);
-            this.pnlUpdate.Location = new System.Drawing.Point(16, 152);
-            this.pnlUpdate.Name = "pnlUpdate";
-            this.pnlUpdate.Size = new System.Drawing.Size(718, 248);
-            this.pnlUpdate.TabIndex = 6;
-            this.pnlUpdate.Visible = false;
-            // 
             // lblChangeLogLabel
             // 
             this.lblChangeLogLabel.AutoSize = true;
             this.lblChangeLogLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChangeLogLabel.Location = new System.Drawing.Point(0, 0);
+            this.lblChangeLogLabel.Location = new System.Drawing.Point(3, 129);
             this.lblChangeLogLabel.Name = "lblChangeLogLabel";
-            this.lblChangeLogLabel.Size = new System.Drawing.Size(73, 13);
+            this.lblChangeLogLabel.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.lblChangeLogLabel.Size = new System.Drawing.Size(73, 23);
             this.lblChangeLogLabel.TabIndex = 0;
             this.lblChangeLogLabel.Text = "Change Log:";
             // 
-            // btnDownload
-            // 
-            this.btnDownload._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDownload.Location = new System.Drawing.Point(0, 216);
-            this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(224, 32);
-            this.btnDownload.TabIndex = 2;
-            this.btnDownload.Text = "Download and Install";
-            this.btnDownload.UseVisualStyleBackColor = true;
-            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
-            // 
-            // prgbDownload
-            // 
-            this.prgbDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prgbDownload.Location = new System.Drawing.Point(230, 224);
-            this.prgbDownload.Name = "prgbDownload";
-            this.prgbDownload.Size = new System.Drawing.Size(472, 23);
-            this.prgbDownload.TabIndex = 3;
-            this.prgbDownload.Visible = false;
-            // 
             // txtChangeLog
             // 
-            this.txtChangeLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtChangeLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tableLayoutPanel1.SetColumnSpan(this.txtChangeLog, 3);
             this.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.txtChangeLog.Location = new System.Drawing.Point(16, 24);
+            this.txtChangeLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtChangeLog.Location = new System.Drawing.Point(3, 155);
             this.txtChangeLog.Multiline = true;
             this.txtChangeLog.Name = "txtChangeLog";
             this.txtChangeLog.ReadOnly = true;
             this.txtChangeLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtChangeLog.Size = new System.Drawing.Size(699, 181);
+            this.txtChangeLog.Size = new System.Drawing.Size(728, 225);
             this.txtChangeLog.TabIndex = 1;
             this.txtChangeLog.TabStop = false;
             // 
             // lblStatus
             // 
+            this.lblStatus.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.lblStatus, 3);
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblStatus.Location = new System.Drawing.Point(12, 16);
+            this.lblStatus.Location = new System.Drawing.Point(3, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(660, 23);
+            this.lblStatus.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.lblStatus.Size = new System.Drawing.Size(57, 31);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Status";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblLatestVersionLabel
             // 
+            this.lblLatestVersionLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblLatestVersionLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLatestVersionLabel.Location = new System.Drawing.Point(16, 72);
+            this.lblLatestVersionLabel.Location = new System.Drawing.Point(3, 61);
             this.lblLatestVersionLabel.Name = "lblLatestVersionLabel";
-            this.lblLatestVersionLabel.Size = new System.Drawing.Size(120, 16);
+            this.lblLatestVersionLabel.Size = new System.Drawing.Size(120, 30);
             this.lblLatestVersionLabel.TabIndex = 3;
             this.lblLatestVersionLabel.Text = "Current version:";
             this.lblLatestVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblInstalledVersionLabel
             // 
+            this.lblInstalledVersionLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblInstalledVersionLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstalledVersionLabel.Location = new System.Drawing.Point(16, 48);
+            this.lblInstalledVersionLabel.Location = new System.Drawing.Point(3, 31);
             this.lblInstalledVersionLabel.Name = "lblInstalledVersionLabel";
-            this.lblInstalledVersionLabel.Size = new System.Drawing.Size(120, 16);
+            this.lblInstalledVersionLabel.Size = new System.Drawing.Size(120, 30);
             this.lblInstalledVersionLabel.TabIndex = 1;
             this.lblInstalledVersionLabel.Text = "Installed version:";
             this.lblInstalledVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblLatestVersion
             // 
-            this.lblLatestVersion.Location = new System.Drawing.Point(136, 72);
+            this.lblLatestVersion.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblLatestVersion.Location = new System.Drawing.Point(129, 61);
             this.lblLatestVersion.Name = "lblLatestVersion";
-            this.lblLatestVersion.Size = new System.Drawing.Size(104, 16);
+            this.lblLatestVersion.Size = new System.Drawing.Size(104, 30);
             this.lblLatestVersion.TabIndex = 4;
             this.lblLatestVersion.Text = "Version";
             this.lblLatestVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblInstalledVersion
             // 
-            this.lblInstalledVersion.Location = new System.Drawing.Point(136, 48);
+            this.lblInstalledVersion.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblInstalledVersion.Location = new System.Drawing.Point(129, 31);
             this.lblInstalledVersion.Name = "lblInstalledVersion";
-            this.lblInstalledVersion.Size = new System.Drawing.Size(104, 16);
+            this.lblInstalledVersion.Size = new System.Drawing.Size(104, 30);
             this.lblInstalledVersion.TabIndex = 2;
             this.lblInstalledVersion.Text = "Version";
             this.lblInstalledVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbUpdateImage
             // 
-            this.pbUpdateImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbUpdateImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbUpdateImage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbUpdateImage.Location = new System.Drawing.Point(246, 48);
+            this.pbUpdateImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbUpdateImage.Location = new System.Drawing.Point(239, 34);
             this.pbUpdateImage.Name = "pbUpdateImage";
-            this.pbUpdateImage.Size = new System.Drawing.Size(468, 60);
+            this.tableLayoutPanel1.SetRowSpan(this.pbUpdateImage, 4);
+            this.pbUpdateImage.Size = new System.Drawing.Size(492, 115);
             this.pbUpdateImage.TabIndex = 45;
             this.pbUpdateImage.TabStop = false;
             this.pbUpdateImage.Visible = false;
             this.pbUpdateImage.Click += new System.EventHandler(this.pbUpdateImage_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.lblChangeLogLabel, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnCheckForUpdate, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblInstalledVersionLabel, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblLatestVersionLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblInstalledVersion, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblLatestVersion, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtChangeLog, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.btnDownload, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.pbUpdateImage, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.prgbDownload, 2, 6);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(734, 418);
+            this.tableLayoutPanel1.TabIndex = 46;
+            // 
+            // prgbDownload
+            // 
+            this.prgbDownload.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.prgbDownload.Location = new System.Drawing.Point(239, 386);
+            this.prgbDownload.Name = "prgbDownload";
+            this.prgbDownload.Size = new System.Drawing.Size(492, 29);
+            this.prgbDownload.TabIndex = 3;
+            this.prgbDownload.Visible = false;
+            // 
+            // btnDownload
+            // 
+            this.btnDownload._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.tableLayoutPanel1.SetColumnSpan(this.btnDownload, 2);
+            this.btnDownload.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownload.Location = new System.Drawing.Point(3, 386);
+            this.btnDownload.Name = "btnDownload";
+            this.btnDownload.Size = new System.Drawing.Size(230, 29);
+            this.btnDownload.TabIndex = 2;
+            this.btnDownload.Text = "Download and Install";
+            this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
+            // 
             // UpdateWindow
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(734, 418);
-            this.Controls.Add(this.pbUpdateImage);
-            this.Controls.Add(this.lblLatestVersionLabel);
-            this.Controls.Add(this.lblInstalledVersionLabel);
-            this.Controls.Add(this.lblLatestVersion);
-            this.Controls.Add(this.btnCheckForUpdate);
-            this.Controls.Add(this.lblInstalledVersion);
-            this.Controls.Add(this.pnlUpdate);
-            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::mRemoteNG.Resources.Update_Icon;
             this.Name = "UpdateWindow";
             this.TabText = "Update";
             this.Text = "Update";
             this.Load += new System.EventHandler(this.Update_Load);
-            this.pnlUpdate.ResumeLayout(false);
-            this.pnlUpdate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUpdateImage)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
 		}
         #endregion
-	}
+
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        internal Controls.Base.NGButton btnDownload;
+        internal Controls.Base.NGProgressBar prgbDownload;
+    }
 }
