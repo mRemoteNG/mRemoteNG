@@ -1,8 +1,9 @@
 ﻿using mRemoteNG.Connection;
+using mRemoteNG.Container;
 using NUnit.Framework;
-using System.Reflection;
 using System.Collections;
 using System.Linq;
+using System.Reflection;
 
 namespace mRemoteNGTests.Connection
 {
@@ -72,6 +73,22 @@ namespace mRemoteNGTests.Connection
         {
             var hasEverythingInheritedProperty = _inheritance.GetProperties().Contains(typeof(ConnectionInfoInheritance).GetProperty("EverythingInherited"));
             Assert.That(hasEverythingInheritedProperty, Is.False);
+        }
+
+        [Test]
+        public void AlwaysReturnInheritedValueIfRequested()
+        {
+            var expectedSetting = false;
+
+            var container = new ContainerInfo { AutomaticResize = expectedSetting };
+            var con1 = new ConnectionInfo
+            {
+                AutomaticResize = true,
+                Inheritance = {AutomaticResize = true}
+            };
+            container.AddChild(con1);
+
+            Assert.That(con1.AutomaticResize, Is.EqualTo(expectedSetting));
         }
 
         private bool AllInheritancePropertiesAreTrue()
