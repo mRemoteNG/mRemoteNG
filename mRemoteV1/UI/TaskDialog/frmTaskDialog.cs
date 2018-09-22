@@ -162,16 +162,16 @@ namespace mRemoteNG.UI.TaskDialog
             if (RadioButtons != "")
             {
                 var arr = RadioButtons.Split('|');
-                var pnlHeight = 12;
+                var pnlHeight = _display.ScaleHeight(12);
                 for (var i = 0; i < arr.Length; i++)
                 {
                     var rb = new NGRadioButton();
                     rb.Parent = pnlRadioButtons;
-                    rb.Location = new Point(60, 4 + (i * rb.Height));
+                    rb.Location = new Point(_display.ScaleWidth(60), _display.ScaleHeight(4) + (i * rb.Height));
                     rb.Text = arr[i];
                     rb.Tag = i;
                     rb.Checked = (DefaultButtonIndex == i);
-                    rb.Width = Width - rb.Left - 15;
+                    rb.Width = Width - rb.Left - _display.ScaleWidth(15);
                     pnlHeight += rb.Height;
                     _radioButtonCtrls.Add(rb);
                 }
@@ -190,7 +190,7 @@ namespace mRemoteNG.UI.TaskDialog
                 {
                     var btn = new CommandButton();
                     btn.Parent = pnlCommandButtons;
-                    btn.Location = new Point(50, t);
+                    btn.Location = new Point(_display.ScaleWidth(50), t);
                     if (_isVista)  // <- tweak font if vista
                         btn.Font = new Font(btn.Font, FontStyle.Regular);
                     btn.Text = arr[i];
