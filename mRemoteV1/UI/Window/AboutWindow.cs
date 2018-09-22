@@ -31,18 +31,18 @@ namespace mRemoteNG.UI.Window
 		private void InitializeComponent()
 		{
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.lblEdition = new Controls.Base.NGLabel();
+            this.lblEdition = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.verText = new Controls.Base.NGTextBox();
-            this.lblCredits = new Controls.Base.NGLabel();
-            this.txtCredits = new Controls.Base.NGTextBox();
-            this.txtChangeLog = new Controls.Base.NGTextBox();
-            this.lblTitle = new Controls.Base.NGLabel();
-            this.lblVersion = new Controls.Base.NGLabel();
-            this.lblChangeLog = new Controls.Base.NGLabel();
-            this.lblLicense = new Controls.Base.NGLabel();
-            this.lblCopyright = new Controls.Base.NGLabel();
+            this.verText = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.lblCredits = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtCredits = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.txtChangeLog = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.lblTitle = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblVersion = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblChangeLog = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblLicense = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblCopyright = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlBottom.SuspendLayout();
@@ -231,6 +231,8 @@ namespace mRemoteNG.UI.Window
             // 
             // AboutWindow
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1117, 705);
             this.Controls.Add(this.pnlTop);
