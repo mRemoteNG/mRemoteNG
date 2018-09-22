@@ -322,6 +322,7 @@ namespace mRemoteNG.UI.Window
             // 
             // WorkingDirTextBox
             // 
+            this.WorkingDirTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableLayoutPanel1.SetColumnSpan(this.WorkingDirTextBox, 3);
             this.WorkingDirTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WorkingDirTextBox.Location = new System.Drawing.Point(110, 80);
