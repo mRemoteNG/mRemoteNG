@@ -24,6 +24,7 @@ namespace mRemoteNG.UI.Controls
         private IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private ThemeManager _themeManager;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
+        private readonly DisplayProperties _display;
 
         public IConnectionInitiator ConnectionInitiator
         {
@@ -38,17 +39,12 @@ namespace mRemoteNG.UI.Controls
 
         public QuickConnectToolStrip()
         {
+            _display = new DisplayProperties();
             Initialize();
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             PopulateQuickConnectProtocolMenu();
             ApplyTheme();
-        }
-
-        protected override void ScaleControl(SizeF factor, BoundsSpecified specified)
-        {
-            Height = (int) (Height * factor.Height);
-            base.ScaleControl(factor, specified);
         }
 
         private void Initialize()
@@ -69,7 +65,7 @@ namespace mRemoteNG.UI.Controls
             // lblQuickConnect
             // 
             _lblQuickConnect.Name = "lblQuickConnect";
-            _lblQuickConnect.Size = new System.Drawing.Size(55, 22);
+            _lblQuickConnect.Size = new Size(55, 22);
             _lblQuickConnect.Text = Language.strLabelConnect;
             _lblQuickConnect.Click += lblQuickConnect_Click;
             // 
@@ -79,7 +75,7 @@ namespace mRemoteNG.UI.Controls
             _cmbQuickConnect.AutoCompleteSource = AutoCompleteSource.ListItems;
             _cmbQuickConnect.Margin = new Padding(1, 0, 3, 0);
             _cmbQuickConnect.Name = "cmbQuickConnect";
-            _cmbQuickConnect.Size = new System.Drawing.Size(200, 25);
+            _cmbQuickConnect.Size = new Size(_display.ScaleWidth(200), 25);
             _cmbQuickConnect.ConnectRequested += cmbQuickConnect_ConnectRequested;
             _cmbQuickConnect.ProtocolChanged += cmbQuickConnect_ProtocolChanged;
             // 
@@ -91,19 +87,19 @@ namespace mRemoteNG.UI.Controls
             _cmbQuickConnect,
             _btnQuickConnect,
             _btnConnections});
-            Location = new System.Drawing.Point(3, 24);
+            Location = new Point(3, 24);
             Name = "tsQuickConnect";
-            Size = new System.Drawing.Size(387, 25);
+            Size = new Size(_display.ScaleWidth(387), 25);
             TabIndex = 18;
             // 
             // btnQuickConnect
             // 
             _btnQuickConnect.DropDown = _mnuQuickConnectProtocol;
             _btnQuickConnect.Image = Resources.Play_Quick;
-            _btnQuickConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            _btnQuickConnect.ImageTransparentColor = Color.Magenta;
             _btnQuickConnect.Margin = new Padding(0, 1, 3, 2);
             _btnQuickConnect.Name = "btnQuickConnect";
-            _btnQuickConnect.Size = new System.Drawing.Size(84, 22);
+            _btnQuickConnect.Size = new Size(84, 22);
             _btnQuickConnect.Text = Language.strMenuConnect;
             _btnQuickConnect.ButtonClick += btnQuickConnect_ButtonClick;
             _btnQuickConnect.DropDownItemClicked += btnQuickConnect_DropDownItemClicked;
@@ -114,7 +110,7 @@ namespace mRemoteNG.UI.Controls
             _mnuQuickConnectProtocol.OwnerItem = _btnQuickConnect;
             _mnuQuickConnectProtocol.ShowCheckMargin = true;
             _mnuQuickConnectProtocol.ShowImageMargin = false;
-            _mnuQuickConnectProtocol.Size = new System.Drawing.Size(61, 4);
+            _mnuQuickConnectProtocol.Size = new Size(61, 4);
             // 
             // btnConnections
             // 
@@ -122,9 +118,9 @@ namespace mRemoteNG.UI.Controls
             _btnConnections.DropDown = _mnuConnections;
             _btnConnections.Image = Resources.Root;
             _btnConnections.ImageScaling = ToolStripItemImageScaling.SizeToFit;
-            _btnConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
+            _btnConnections.ImageTransparentColor = Color.Magenta;
             _btnConnections.Name = "btnConnections";
-            _btnConnections.Size = new System.Drawing.Size(29, 22);
+            _btnConnections.Size = new Size(29, 22);
             _btnConnections.Text = Language.strMenuConnections;
             _btnConnections.DropDownOpening += btnConnections_DropDownOpening;
             // 
@@ -132,7 +128,7 @@ namespace mRemoteNG.UI.Controls
             // 
             _mnuConnections.Name = "mnuConnections";
             _mnuConnections.OwnerItem = _btnConnections;
-            _mnuConnections.Size = new System.Drawing.Size(61, 4);
+            _mnuConnections.Size = new Size(61, 4);
 
             ResumeLayout();
         }
