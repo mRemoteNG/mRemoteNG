@@ -28,6 +28,8 @@ namespace mRemoteNG.UI.Window
             _externalAppsSaver = new ExternalAppsSaver();
             _currentlySelectedExternalTools = new FullyObservableCollection<ExternalTool>();
             _currentlySelectedExternalTools.CollectionUpdated += CurrentlySelectedExternalToolsOnCollectionUpdated;
+		    BrowseButton.Height = FilenameTextBox.Height;
+		    BrowseWorkingDir.Height = WorkingDirTextBox.Height;
 		}
 
 
