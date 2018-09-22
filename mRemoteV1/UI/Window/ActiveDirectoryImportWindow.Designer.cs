@@ -104,6 +104,8 @@ namespace mRemoteNG.UI.Window
             // ActiveDirectoryImportWindow
             // 
             this.AcceptButton = this.btnImport;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(534, 381);
             this.Controls.Add(this.chkSubOU);
