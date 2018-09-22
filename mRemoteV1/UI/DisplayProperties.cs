@@ -32,6 +32,17 @@ namespace mRemoteNG.UI
         }
 
         /// <summary>
+        /// Scales the height and width of the given <see cref="Size"/> struct
+        /// by the <see cref="ResolutionScalingFactor"/>
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public Size ScaleSize(Size size)
+        {
+            return new Size(ScaleWidth(size.Width), ScaleHeight(size.Height));
+        }
+
+        /// <summary>
         /// Scales the given image by <see cref="ResolutionScalingFactor"/>
         /// </summary>
         /// <param name="image">The image to resize.</param>
