@@ -17,8 +17,8 @@ namespace mRemoteNG.UI.Window
 	    private ToolStripMenuItem mMenFileSaveAll;
 	    private ToolStripMenuItem mMenFileRemoveAll;
 		internal ContextMenuStrip cMenScreenshot;
-		private System.ComponentModel.Container components;
-	    private ToolStripMenuItem cMenScreenshotCopy;
+        private System.ComponentModel.IContainer components;
+        private ToolStripMenuItem cMenScreenshotCopy;
 	    private ToolStripMenuItem cMenScreenshotSave;
 		internal SaveFileDialog dlgSaveSingleImage;
 		internal FolderBrowserDialog dlgSaveAllImages;
@@ -29,115 +29,122 @@ namespace mRemoteNG.UI.Window
 
         private void InitializeComponent()
 		{
-			components = new System.ComponentModel.Container();
-			Load += new EventHandler(ScreenshotManager_Load);
-			flpScreenshots = new FlowLayoutPanel();
-			msMain = new MenuStrip();
-			mMenFile = new ToolStripMenuItem();
-			mMenFile.DropDownOpening += new EventHandler(mMenFile_DropDownOpening);
-			mMenFileSaveAll = new ToolStripMenuItem();
-			mMenFileSaveAll.Click += new EventHandler(mMenFileSaveAll_Click);
-			mMenFileRemoveAll = new ToolStripMenuItem();
-			mMenFileRemoveAll.Click += new EventHandler(mMenFileRemoveAll_Click);
-			cMenScreenshot = new ContextMenuStrip(components);
-			cMenScreenshotCopy = new ToolStripMenuItem();
-			cMenScreenshotCopy.Click += new EventHandler(cMenScreenshotCopy_Click);
-			cMenScreenshotSave = new ToolStripMenuItem();
-			cMenScreenshotSave.Click += new EventHandler(cMenScreenshotSave_Click);
-			dlgSaveSingleImage = new SaveFileDialog();
-			dlgSaveAllImages = new FolderBrowserDialog();
-			msMain.SuspendLayout();
-			cMenScreenshot.SuspendLayout();
-			SuspendLayout();
-			//
-			//flpScreenshots
-			//
-			flpScreenshots.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom)
-                | AnchorStyles.Left)
-                | AnchorStyles.Right;
-			flpScreenshots.AutoScroll = true;
-			flpScreenshots.Location = new Point(0, 26);
-			flpScreenshots.Name = "flpScreenshots";
-			flpScreenshots.Size = new Size(542, 296);
-			flpScreenshots.TabIndex = 0;
-			//
-			//msMain
-			//
-			msMain.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
-			msMain.Items.AddRange(new ToolStripItem[] {mMenFile});
-			msMain.Location = new Point(0, 0);
-			msMain.Name = "msMain";
-			msMain.RenderMode = ToolStripRenderMode.Professional;
-			msMain.Size = new Size(542, 24);
-			msMain.TabIndex = 1;
-			msMain.Text = "MenuStrip1";
-			//
-			//mMenFile
-			//
-			mMenFile.DropDownItems.AddRange(new ToolStripItem[] {mMenFileSaveAll, mMenFileRemoveAll});
-			mMenFile.Image = Resources.File;
-			mMenFile.Name = "mMenFile";
-			mMenFile.Size = new Size(51, 20);
-			mMenFile.Text = "&File";
-			//
-			//mMenFileSaveAll
-			//
-			mMenFileSaveAll.Image = Resources.Screenshot_Save;
-			mMenFileSaveAll.Name = "mMenFileSaveAll";
-			mMenFileSaveAll.Size = new Size(128, 22);
-			mMenFileSaveAll.Text = "Save All";
-			//
-			//mMenFileRemoveAll
-			//
-			mMenFileRemoveAll.Image = Resources.Screenshot_Delete;
-			mMenFileRemoveAll.Name = "mMenFileRemoveAll";
-			mMenFileRemoveAll.Size = new Size(128, 22);
-			mMenFileRemoveAll.Text = "Remove All";
-			//
-			//cMenScreenshot
-			//
-			cMenScreenshot.Items.AddRange(new ToolStripItem[] {cMenScreenshotCopy, cMenScreenshotSave});
-			cMenScreenshot.Name = "cMenScreenshot";
-			cMenScreenshot.Size = new Size(100, 48);
-			//
-			//cMenScreenshotCopy
-			//
-			cMenScreenshotCopy.Image = Resources.Screenshot_Copy;
-			cMenScreenshotCopy.Name = "cMenScreenshotCopy";
-			cMenScreenshotCopy.Size = new Size(99, 22);
-			cMenScreenshotCopy.Text = "Copy";
-			//
-			//cMenScreenshotSave
-			//
-			cMenScreenshotSave.Image = Resources.Screenshot_Save;
-			cMenScreenshotSave.Name = "cMenScreenshotSave";
-			cMenScreenshotSave.Size = new Size(99, 22);
-			cMenScreenshotSave.Text = "Save";
-			//
-			//dlgSaveSingleImage
-			//
-			dlgSaveSingleImage.Filter = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group Fi" + 
-				"le (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Ne" + 
-				"twork Graphics File (.png)|*.png";
-			dlgSaveSingleImage.FilterIndex = 4;
-			//
-			//ScreenshotManager
-			//
-			ClientSize = new Size(542, 323);
-			Controls.Add(flpScreenshots);
-			Controls.Add(msMain);
-			HideOnClose = true;
-			Icon = Resources.Screenshot_Icon;
-			MainMenuStrip = msMain;
-			Name = "ScreenshotManager";
-			TabText = "Screenshots";
-			Text = "Screenshots";
-			msMain.ResumeLayout(false);
-			msMain.PerformLayout();
-			cMenScreenshot.ResumeLayout(false);
-			ResumeLayout(false);
-			PerformLayout();
-					
+            this.components = new System.ComponentModel.Container();
+            this.flpScreenshots = new System.Windows.Forms.FlowLayoutPanel();
+            this.msMain = new System.Windows.Forms.MenuStrip();
+            this.mMenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenFileSaveAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenFileRemoveAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMenScreenshot = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMenScreenshotCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMenScreenshotSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.dlgSaveSingleImage = new System.Windows.Forms.SaveFileDialog();
+            this.dlgSaveAllImages = new System.Windows.Forms.FolderBrowserDialog();
+            this.msMain.SuspendLayout();
+            this.cMenScreenshot.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // flpScreenshots
+            // 
+            this.flpScreenshots.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpScreenshots.AutoScroll = true;
+            this.flpScreenshots.Location = new System.Drawing.Point(0, 26);
+            this.flpScreenshots.Name = "flpScreenshots";
+            this.flpScreenshots.Size = new System.Drawing.Size(542, 296);
+            this.flpScreenshots.TabIndex = 0;
+            // 
+            // msMain
+            // 
+            this.msMain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mMenFile});
+            this.msMain.Location = new System.Drawing.Point(0, 0);
+            this.msMain.Name = "msMain";
+            this.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.msMain.Size = new System.Drawing.Size(542, 24);
+            this.msMain.TabIndex = 1;
+            this.msMain.Text = "MenuStrip1";
+            // 
+            // mMenFile
+            // 
+            this.mMenFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mMenFileSaveAll,
+            this.mMenFileRemoveAll});
+            this.mMenFile.Image = global::mRemoteNG.Resources.File;
+            this.mMenFile.Name = "mMenFile";
+            this.mMenFile.Size = new System.Drawing.Size(53, 20);
+            this.mMenFile.Text = "&File";
+            this.mMenFile.DropDownOpening += new System.EventHandler(this.mMenFile_DropDownOpening);
+            // 
+            // mMenFileSaveAll
+            // 
+            this.mMenFileSaveAll.Image = global::mRemoteNG.Resources.Screenshot_Save;
+            this.mMenFileSaveAll.Name = "mMenFileSaveAll";
+            this.mMenFileSaveAll.Size = new System.Drawing.Size(130, 22);
+            this.mMenFileSaveAll.Text = "Save All";
+            this.mMenFileSaveAll.Click += new System.EventHandler(this.mMenFileSaveAll_Click);
+            // 
+            // mMenFileRemoveAll
+            // 
+            this.mMenFileRemoveAll.Image = global::mRemoteNG.Resources.Screenshot_Delete;
+            this.mMenFileRemoveAll.Name = "mMenFileRemoveAll";
+            this.mMenFileRemoveAll.Size = new System.Drawing.Size(130, 22);
+            this.mMenFileRemoveAll.Text = "Remove All";
+            this.mMenFileRemoveAll.Click += new System.EventHandler(this.mMenFileRemoveAll_Click);
+            // 
+            // cMenScreenshot
+            // 
+            this.cMenScreenshot.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMenScreenshotCopy,
+            this.cMenScreenshotSave});
+            this.cMenScreenshot.Name = "cMenScreenshot";
+            this.cMenScreenshot.Size = new System.Drawing.Size(103, 48);
+            // 
+            // cMenScreenshotCopy
+            // 
+            this.cMenScreenshotCopy.Image = global::mRemoteNG.Resources.Screenshot_Copy;
+            this.cMenScreenshotCopy.Name = "cMenScreenshotCopy";
+            this.cMenScreenshotCopy.Size = new System.Drawing.Size(102, 22);
+            this.cMenScreenshotCopy.Text = "Copy";
+            this.cMenScreenshotCopy.Click += new System.EventHandler(this.cMenScreenshotCopy_Click);
+            // 
+            // cMenScreenshotSave
+            // 
+            this.cMenScreenshotSave.Image = global::mRemoteNG.Resources.Screenshot_Save;
+            this.cMenScreenshotSave.Name = "cMenScreenshotSave";
+            this.cMenScreenshotSave.Size = new System.Drawing.Size(102, 22);
+            this.cMenScreenshotSave.Text = "Save";
+            this.cMenScreenshotSave.Click += new System.EventHandler(this.cMenScreenshotSave_Click);
+            // 
+            // dlgSaveSingleImage
+            // 
+            this.dlgSaveSingleImage.Filter = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group Fi" +
+    "le (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Ne" +
+    "twork Graphics File (.png)|*.png";
+            this.dlgSaveSingleImage.FilterIndex = 4;
+            // 
+            // ScreenshotManagerWindow
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(542, 323);
+            this.Controls.Add(this.flpScreenshots);
+            this.Controls.Add(this.msMain);
+            this.HideOnClose = true;
+            this.Icon = global::mRemoteNG.Resources.Screenshot_Icon;
+            this.MainMenuStrip = this.msMain;
+            this.Name = "ScreenshotManagerWindow";
+            this.TabText = "Screenshots";
+            this.Text = "Screenshots";
+            this.Load += new System.EventHandler(this.ScreenshotManager_Load);
+            this.msMain.ResumeLayout(false);
+            this.msMain.PerformLayout();
+            this.cMenScreenshot.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
 		}
         #endregion
 				
