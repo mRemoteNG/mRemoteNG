@@ -8,6 +8,8 @@ using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Cmdline;
+using mRemoteNG.UI;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Connection.Protocol
@@ -16,10 +18,11 @@ namespace mRemoteNG.Connection.Protocol
 	{	
 		private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
 	    private bool _isPuttyNg;
+        private readonly DisplayProperties _display = new DisplayProperties();
 
-	    #region Public Properties
+        #region Public Properties
 
-	    protected Putty_Protocol PuttyProtocol { private get; set; }
+        protected Putty_Protocol PuttyProtocol { private get; set; }
 
         protected Putty_SSHVersion PuttySSHVersion { private get; set; }
 
@@ -199,7 +202,17 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return;
 				}
-                NativeMethods.MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2, InterfaceControl.Height + SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height * 2, true);
+
+			    var scaledFrameBorderHeight = _display.ScaleHeight(SystemInformation.FrameBorderSize.Height);
+			    var scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
+
+                NativeMethods.MoveWindow(
+                    PuttyHandle, 
+                    -scaledFrameBorderWidth, 
+                    -(SystemInformation.CaptionHeight + scaledFrameBorderHeight), 
+                    InterfaceControl.Width + scaledFrameBorderWidth * 2, 
+                    InterfaceControl.Height + SystemInformation.CaptionHeight + scaledFrameBorderHeight * 2, 
+                    true);
 			}
 			catch (Exception ex)
 			{
