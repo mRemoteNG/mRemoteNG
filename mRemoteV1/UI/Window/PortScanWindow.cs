@@ -22,6 +22,8 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.PortScan;
 			DockPnl = new DockContent();
             ApplyTheme();
+            var display = new DisplayProperties();
+		    btnScan.Image = display.ScaleImage(btnScan.Image);
 		}
         #endregion
 
