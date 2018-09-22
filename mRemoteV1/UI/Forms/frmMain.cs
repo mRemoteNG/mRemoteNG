@@ -63,7 +63,7 @@ namespace mRemoteNG.UI.Forms
             //Theming support
             _themeManager = ThemeManager.getInstance();
             vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
-            SetSchema();
+            ApplyTheme();
 
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
         }
@@ -247,22 +247,21 @@ namespace mRemoteNG.UI.Forms
         }
 
         //Theming support
-        private void SetSchema()
-        {
-            if (!_themeManager.ThemingActive) return;
-            // Persist settings when rebuilding UI
-            pnlDock.Theme = _themeManager.ActiveTheme.Theme;
-            ApplyTheme();
-        }
         private void ApplyTheme()
 		{
 		    if (!_themeManager.ThemingActive) return;
-		    vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		    
+            // Persist settings when rebuilding UI
+		    pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+
+            vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 		    vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 		    vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 		    vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 		    tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
-		}
+		    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+		    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+        }
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
