@@ -25,7 +25,6 @@ namespace mRemoteNG.UI.Window
 		internal Controls.Base.NGLabel lblEdition;
         internal Controls.Base.NGLabel lblCredits;
         internal Controls.Base.NGTextBox txtCredits;
-        private  Controls.Base.NGTextBox verText;
         internal Panel pnlTop;
 				
 		private void InitializeComponent()
@@ -34,7 +33,6 @@ namespace mRemoteNG.UI.Window
             this.lblEdition = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.verText = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblCredits = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.txtCredits = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.txtChangeLog = new mRemoteNG.UI.Controls.Base.NGTextBox();
@@ -91,7 +89,6 @@ namespace mRemoteNG.UI.Window
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBottom.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlBottom.Controls.Add(this.verText);
             this.pnlBottom.Controls.Add(this.lblCredits);
             this.pnlBottom.Controls.Add(this.txtCredits);
             this.pnlBottom.Controls.Add(this.txtChangeLog);
@@ -105,18 +102,6 @@ namespace mRemoteNG.UI.Window
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(1121, 559);
             this.pnlBottom.TabIndex = 1;
-            // 
-            // verText
-            // 
-            this.verText.BackColor = System.Drawing.SystemColors.Control;
-            this.verText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.verText.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.verText.Location = new System.Drawing.Point(69, 51);
-            this.verText.Name = "verText";
-            this.verText.Size = new System.Drawing.Size(147, 20);
-            this.verText.TabIndex = 12;
-            this.verText.TabStop = false;
-            this.verText.Text = "w.x.y.z";
             // 
             // lblCredits
             // 
@@ -277,14 +262,16 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                base.ApplyTheme(); 
-                pnlBottom.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlBottom.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                pnlTop.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            }
+            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            base.ApplyTheme();
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlBottom.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlBottom.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlTop.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            lblEdition.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            lblEdition.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyEditions()
@@ -331,8 +318,7 @@ namespace mRemoteNG.UI.Window
 	        {
 	            lblCopyright.Text = GeneralAppInfo.Copyright;
 
-	            lblVersion.Text = @"Version ";
-	            verText.Text = GeneralAppInfo.ApplicationVersion;
+	            lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
 
 	            if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
 	            {

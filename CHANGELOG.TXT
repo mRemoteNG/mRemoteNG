@@ -6,9 +6,14 @@ Features/Enhancements:
 #1016: Chinese (simplified) translation improvements
 #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
 
+
+1.76.9 (2018-xx-xx):
+
 Fixes:
 ------
-
+#1106: Inheritance does not work when parent has C# default type set
+#1092: Invalid Cast Exceptions loading default connectioninfo 
+#1091: Minor themeing issues
 
 
 1.76.8 (2018-08-25):
