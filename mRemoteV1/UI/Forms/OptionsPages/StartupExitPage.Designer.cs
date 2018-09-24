@@ -3,7 +3,7 @@
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	
-    public partial class StartupExitPage : OptionsPage
+    public sealed partial class StartupExitPage : OptionsPage
 	{
 			
 		//UserControl overrides dispose to clean up the component list.

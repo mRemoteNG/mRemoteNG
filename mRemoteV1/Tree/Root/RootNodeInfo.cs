@@ -66,7 +66,9 @@ namespace mRemoteNG.Tree.Root
 
         public override TreeNodeType GetTreeNodeType()
         {
-            return TreeNodeType.Root;
+            return Type == RootNodeType.Connection
+                ? TreeNodeType.Root
+                : TreeNodeType.PuttyRoot;
         }
         #endregion
 

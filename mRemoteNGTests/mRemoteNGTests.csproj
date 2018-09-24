@@ -178,6 +178,7 @@
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />
     <Compile Include="Tools\OptionalTests.cs" />
+    <Compile Include="Tools\Registry\WindowsRegistryTests.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
+    <Compile Include="UI\Controls\ConnectionTreeTests.cs" />
     <Compile Include="UI\Controls\PageSequenceTests.cs" />
     <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
       <SubType>Form</SubType>
@@ -231,6 +233,10 @@
     <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
     <Compile Include="UI\Forms\PasswordFormTests.cs" />
     <Compile Include="UI\WindowListTests.cs" />
+    <Compile Include="UI\Window\ConfigWindowTests\ConfigWindowGeneralTests.cs" />
+    <Compile Include="UI\Window\ConfigWindowTests\ConfigWindowRdpSpecialTests.cs" />
+    <Compile Include="UI\Window\ConfigWindowTests\ConfigWindowSpecialTestsBase.cs" />
+    <Compile Include="UI\Window\ConfigWindowTests\ConfigWindowVncSpecialTests.cs" />
     <Compile Include="UI\Window\ConnectionTreeWindowTests.cs" />
   </ItemGroup>
   <ItemGroup>

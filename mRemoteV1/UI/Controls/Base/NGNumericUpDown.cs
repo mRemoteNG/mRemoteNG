@@ -1,7 +1,8 @@
-﻿using mRemoteNG.Themes;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
+// ReSharper disable LocalizableElement
 
 namespace mRemoteNG.UI.Controls.Base
 {
@@ -14,7 +15,7 @@ namespace mRemoteNG.UI.Controls.Base
         private NGButton Up;
         private NGButton Down;
 
-        public NGNumericUpDown() : base()
+        public NGNumericUpDown()
         {
             _themeManager = ThemeManager.getInstance();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
@@ -28,7 +29,8 @@ namespace mRemoteNG.UI.Controls.Base
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background"); 
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
             //Hide those nonthemable butons
-            Controls[0].Hide();
+            if (Controls.Count > 0)
+                Controls[0].Hide();
             //Add new themable buttons
             Up = new NGButton
             {

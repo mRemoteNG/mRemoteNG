@@ -3,19 +3,19 @@ using mRemoteNG.Config;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class ConnectionsPage
+    public sealed partial class ConnectionsPage
     {
-        private FrmMain _frmMain = FrmMain.Default;
+        private readonly FrmMain _frmMain = FrmMain.Default;
 
         public ConnectionsPage()
         {
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         public override string PageName
         {
-            get { return Language.strConnections; }
+            get => Language.strConnections;
             set { }
         }
 

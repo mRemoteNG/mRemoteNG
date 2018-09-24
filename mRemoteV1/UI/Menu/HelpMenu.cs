@@ -129,6 +129,18 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoAbout.Click += mMenInfoAbout_Click;
         }
 
+        public void ApplyLanguage()
+        {
+            Text = Language.strMenuHelp;
+            _mMenInfoHelp.Text = Language.strMenuHelpContents;
+            _mMenInfoWebsite.Text = Language.strMenuWebsite;
+            _mMenInfoDonate.Text = Language.strMenuDonate;
+            _mMenInfoForum.Text = Language.strMenuSupportForum;
+            _mMenInfoBugReport.Text = Language.strMenuReportBug;
+            _mMenToolsUpdate.Text = Language.strMenuCheckForUpdates;
+            _mMenInfoAbout.Text = Language.strMenuAbout;
+        }
+
         #region Info
         private void mMenToolsUpdate_Click(object sender, EventArgs e)
         {

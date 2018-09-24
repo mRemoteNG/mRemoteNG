@@ -1,6 +1,86 @@
-1.76.4 Alpha 6 (2018-xx-xx):
+1.77.0 (2018-xx-xx):
+
+Features/Enhancements:
+----------------------
+#1072: Russian translation improvements
+#1016: Chinese (simplified) translation improvements
+#928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
+
+
+1.76.9 (2018-xx-xx):
+
 Fixes:
 ------
+#1106: Inheritance does not work when parent has C# default type set
+#1092: Invalid Cast Exceptions loading default connectioninfo 
+#1091: Minor themeing issues
+
+
+1.76.8 (2018-08-25):
+
+Fixes:
+------
+#1088: Delete and Launch buttons are not disabled when last external tool deleted
+#1087: 'Save connections after every edit' setting not honored
+#1082: Connections not given GUID if Id is empty in connection xml
+
+
+1.76.7 (2018-08-22):
+
+Fixes:
+------
+#1076: Wrong object selected when duplicating connection then switching between properties and inheritance in config window
+#1068: Fixed some toolbar positioning bugs
+
+
+1.76.6 (2018-08-03):
+
+Fixes:
+------
+#1062: Entering correct password when starting app does not load connections file
+
+1.76.5 (2018-08-02):
+
+Fixes:
+------
+#1057: Hitting F2 with no connection node selected caused unhandled exception
+#1052: 'Switch to notification panel' feature does not always switch
+#1051: Tooltips always displayed regardless of 'Show description tooltips in connection tree' setting
+#1050: Config window retains access to previously selected node after loading new connections file
+#1045: Config window shows several incorrect properties for HTTPS connections
+#1040: Canceling "select panel" form does not cancel
+#1039: Set default theme when themes disabled
+#1038: Unable to add connection with active filter
+#1036: Exception when themes are active and options page closed on Connections then reopened
+#1034: Connection context menu not being translated
+#1030: Exception thrown if importing from port scan and no tree node is selected
+#1020: BackupFileKeepCount setting not limiting backup file count
+#1004: Duplicating root or PuTTy node through hotkey causes unhandled exception
+#1002: Disabling filtering without clearing keyword leaves filtered state
+#1001: Connection tree context menu hotkeys stop working and disappear in some cases
+#999: Some hotkeys stop working if File menu was called when PuTTy Saved Sessions was selected
+#998: Can sometimes add connection under PuTTY Sessions node
+#991: Error when deleting host in filtered view
+#971: Portable Settings now apply to any machine they are used on
+#961: Connections file overwritten if correct decryption password not provided
+#893: Removed unneeded files from build/package
+#868: if statement returned the same value
+#762: Increased button size to fit locaized text
+
+
+1.76.4 Alpha 6 (2018-06-03):
+
+Features/Enhancements:
+----------------------
+#948: Fixed issue where many menu item translations were not being used
+#942: Improved Russian translation of several items
+#924: Notification for "No Host Specified" when clicking folders in quick-connect menu
+#902: Menu bar can once again be moved. View -> "Lock toolbar positions" now also locks the menu position
+Added option for creating an empty panel on startup
+
+Fixes:
+------
+#938: Minor layout improvements on the Port Scan screen
 #916: Default properties were not being saved
 
 

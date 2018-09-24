@@ -18,6 +18,8 @@ namespace mRemoteNG.UI.Window
         private ToolStripMenuItem cmenTabRenameTab;
         private ToolStripMenuItem cmenTabDuplicateTab;
         private ToolStripMenuItem cmenTabDisconnect;
+        private ToolStripMenuItem cmenTabDisconnectOthers;
+        private ToolStripMenuItem cmenTabDisconnectOthersRight;
         private ToolStripMenuItem cmenTabSmartSize;
         private ToolStripMenuItem cmenTabSendSpecialKeysCtrlAltDel;
         private ToolStripMenuItem cmenTabSendSpecialKeysCtrlEsc;
@@ -53,6 +55,8 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab = new ToolStripMenuItem();
             cmenTabReconnect = new ToolStripMenuItem();
             cmenTabDisconnect = new ToolStripMenuItem();
+            cmenTabDisconnectOthers = new ToolStripMenuItem();
+            cmenTabDisconnectOthersRight = new ToolStripMenuItem();
             cmenTabPuttySettings = new ToolStripMenuItem();
             cmenTab.SuspendLayout();
             SuspendLayout();
@@ -91,7 +95,9 @@ namespace mRemoteNG.UI.Window
                 cmenTabRenameTab,
                 cmenTabDuplicateTab,
                 cmenTabReconnect,
-                cmenTabDisconnect
+                cmenTabDisconnect,
+                cmenTabDisconnectOthers,
+                cmenTabDisconnectOthersRight
             });
             cmenTab.Name = "cmenTab";
             cmenTab.RenderMode = ToolStripRenderMode.Professional;
@@ -213,6 +219,20 @@ namespace mRemoteNG.UI.Window
             cmenTabDisconnect.Name = "cmenTabDisconnect";
             cmenTabDisconnect.Size = new Size(201, 22);
             cmenTabDisconnect.Text = @"Disconnect";
+            //
+            //cmenTabDisconnectOthers
+            //
+            cmenTabDisconnectOthers.Image = Resources.Pause;
+            cmenTabDisconnectOthers.Name = "cmenTabDisconnectOthers";
+            cmenTabDisconnectOthers.Size = new Size(201, 22);
+            cmenTabDisconnectOthers.Text = @"Disconnect Other Tabs";
+            //
+            //cmenTabDisconnectOthersRight
+            //
+            cmenTabDisconnectOthersRight.Image = Resources.Pause;
+            cmenTabDisconnectOthersRight.Name = "cmenTabDisconnectOthersRight";
+            cmenTabDisconnectOthersRight.Size = new Size(201, 22);
+            cmenTabDisconnectOthersRight.Text = @"Disconnect Tabs To The Right";
             //
             //cmenTabPuttySettings
             //

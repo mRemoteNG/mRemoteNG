@@ -24,7 +24,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-	public class ConfigWindow : BaseWindow
+    public class ConfigWindow : BaseWindow
 	{
         private bool _originalPropertyGridToolStripItemCountValid;
         private int _originalPropertyGridToolStripItemCount;
@@ -265,6 +265,11 @@ namespace mRemoteNG.UI.Window
 			    _btnShowInheritance.Checked = false;
 			}
 		}
+
+        /// <summary>
+        /// A list of properties being shown for the current object.
+        /// </summary>
+	    public IEnumerable<string> VisibleObjectProperties => _pGrid.VisibleProperties;
         #endregion
 
         #region Constructors
@@ -701,7 +706,6 @@ namespace mRemoteNG.UI.Window
                 UpdateRootInfoNode(e);
                 UpdateInheritanceNode();
                 ShowHideGridItems();
-                Runtime.ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
 			{
@@ -745,29 +749,32 @@ namespace mRemoteNG.UI.Window
         private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)
         {
             var rootInfo = _pGrid.SelectedObject as RootNodeInfo;
-            if (rootInfo == null) return;
-            if (e.ChangedItem.PropertyDescriptor == null) return;
-            // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (e.ChangedItem.PropertyDescriptor.Name)
-            {
-                case "Password":
-                    if (rootInfo.Password)
-                    {
-                        var passwordName = Settings.Default.UseSQLServer ? Language.strSQLServer.TrimEnd(':') : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
+            if (rootInfo == null)
+                return;
 
-                        var password = MiscTools.PasswordDialog(passwordName);
-                        if (password.Length == 0)
-                            rootInfo.Password = false;
-                        else
-                            rootInfo.PasswordString = password.ConvertToUnsecureString();
-                    }
-                    else
-                    {
-                        rootInfo.PasswordString = "";
-                    }
-                    break;
-                case "Name":
-                    break;
+            if (e.ChangedItem.PropertyDescriptor?.Name != "Password")
+                return;
+
+            if (rootInfo.Password)
+            {
+                var passwordName = Settings.Default.UseSQLServer 
+                    ? Language.strSQLServer.TrimEnd(':') 
+                    : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
+
+                var password = MiscTools.PasswordDialog(passwordName);
+
+                // operation cancelled, dont set a password
+                if (!password.Any() || password.First().Length == 0)
+                {
+                    rootInfo.Password = false;
+                    return;
+                }
+
+                rootInfo.PasswordString = password.First().ConvertToUnsecureString();
+            }
+            else
+            {
+                rootInfo.PasswordString = "";
             }
         }
 
@@ -1180,50 +1187,6 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("SoundQuality");
                             break;
 						case ProtocolType.HTTP:
-							strHide.Add("CacheBitmaps");
-							strHide.Add("Colors");
-							strHide.Add("DisplayThemes");
-							strHide.Add("DisplayWallpaper");
-							strHide.Add("EnableFontSmoothing");
-							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
-							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryptionStrength");
-							strHide.Add("PuttySession");
-							strHide.Add("RDGatewayDomain");
-							strHide.Add("RDGatewayHostname");
-							strHide.Add("RDGatewayPassword");
-							strHide.Add("RDGatewayUsageMethod");
-							strHide.Add("RDGatewayUseConnectionCredentials");
-							strHide.Add("RDGatewayUsername");
-							strHide.Add("RDPAuthenticationLevel");
-                            strHide.Add("RDPMinutesToIdleTimeout");
-                            strHide.Add("RDPAlertIdleTimeout");
-                            strHide.Add("LoadBalanceInfo");
-							strHide.Add("RedirectDiskDrives");
-							strHide.Add("RedirectKeys");
-							strHide.Add("RedirectPorts");
-							strHide.Add("RedirectPrinters");
-                            strHide.Add("RedirectClipboard");
-                            strHide.Add("RedirectSmartCards");
-							strHide.Add("RedirectSound");
-							strHide.Add("Resolution");
-							strHide.Add("AutomaticResize");
-							strHide.Add("UseConsoleSession");
-							strHide.Add("UseCredSsp");
-							strHide.Add("VNCAuthMode");
-							strHide.Add("VNCColors");
-							strHide.Add("VNCCompression");
-							strHide.Add("VNCEncoding");
-							strHide.Add("VNCProxyIP");
-							strHide.Add("VNCProxyPassword");
-							strHide.Add("VNCProxyPort");
-							strHide.Add("VNCProxyType");
-							strHide.Add("VNCProxyUsername");
-							strHide.Add("VNCSmartSizeMode");
-							strHide.Add("VNCViewOnly");
-                            strHide.Add("SoundQuality");
-                            break;
 						case ProtocolType.HTTPS:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
@@ -1251,7 +1214,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectPrinters");
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
-							strHide.Add("RedirectSound;Resolution");
+							strHide.Add("RedirectSound");
+              strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1268,6 +1232,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
+
 						case ProtocolType.ICA:
 							strHide.Add("DisplayThemes");
 							strHide.Add("DisplayWallpaper");

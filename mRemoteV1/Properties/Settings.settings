@@ -651,7 +651,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ConDefaultPanel" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">General</Value>
     </Setting>
     <Setting Name="SaveConnectionsAfterEveryEdit" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -676,6 +676,12 @@
     </Setting>
     <Setting Name="MultiSshToolbarVisible" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CreateEmptyPanelOnStartUp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="StartUpPanelName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">General</Value>
     </Setting>
   </Settings>
 </SettingsFile>

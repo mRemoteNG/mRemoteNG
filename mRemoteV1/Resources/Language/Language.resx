@@ -181,7 +181,7 @@
     <value>Automatically get session information</value>
   </data>
   <data name="strAutoSaveEvery" xml:space="preserve">
-    <value>Auto save every:</value>
+    <value>Auto save time in minutes (0 means disabled):</value>
   </data>
   <data name="strAutoSaveMins" xml:space="preserve">
     <value>Minutes (0 means disabled)</value>
@@ -293,7 +293,7 @@ Please use File - Open Connection File for normal connection files!</value>
     <value>The (RDP) Sessions feature requires that you have a copy of eolwtscom.dll registered on your system.
 mRemoteNG ships with this component but it is not registered automatically if you do not use the mRemoteNG Installer.
 To register it manually, run the following command from an elevated command prompt: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (where C:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
-If this check still fails or you are unable to use the (RDP) Sessions feature, please consult the mRemoteNG Forum at {0}.</value>
+If this check still fails or you are unable to use the (RDP) Sessions feature, please consult the at {0}.</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM was found and seems to be registered properly.</value>
@@ -302,7 +302,7 @@ If this check still fails or you are unable to use the (RDP) Sessions feature, p
     <value>To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
 You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
 When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
-If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the mRemoteNG Forum at {0}.</value>
+If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the at {0}.</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx was found and seems to be installed properly.</value>
@@ -311,7 +311,7 @@ If you are still not able to pass this check or use the Gecko Engine in mRemoteN
     <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
 If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
 To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin installation).
-If you are still not able to pass this check or use ICA in mRemoteNG please consult the mRemoteNG Forum at {0}.</value>
+If you are still not able to pass this check or use ICA in mRemoteNG please consult the at {0}.</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>All ICA components were found and seem to be registered properly.
@@ -329,7 +329,7 @@ Please make sure that either you have the Putty.exe in your mRemoteNG directory 
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
     <value>For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 8.0 installed. You can download it here: http://support.microsoft.com/kb/925876
-If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at {0}.</value>
+If this check still fails or you are unable to use RDP, please consult the at {0}.</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>All RDP components were found and seem to be registered properly.
@@ -338,7 +338,7 @@ Remote Desktop Connection Control Version {0}</value>
   <data name="strCcVNCFailed" xml:space="preserve">
     <value>VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
 Please make sure that you have the VncSharp.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
-If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at {0}.</value>
+If you are still not able to pass this check or use VNC in mRemoteNG please consult the at {0}.</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>All VNC components were found and seem to be registered properly.
@@ -836,7 +836,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Import/Export</value>
   </data>
   <data name="strImportFileFailedContent" xml:space="preserve">
-    <value>An error occurred while importing the file, "{0}".</value>
+    <value>An error occurred while importing the file "{0}".</value>
   </data>
   <data name="strImportFileFailedMainInstruction" xml:space="preserve">
     <value>Import failed</value>
@@ -863,7 +863,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Import from Port Scan</value>
   </data>
   <data name="strImportRDPFiles" xml:space="preserve">
-    <value>Import from .RDP file(s)</value>
+    <value>Import from RDP file(s)</value>
   </data>
   <data name="strInactive" xml:space="preserve">
     <value>Inactive</value>
@@ -959,13 +959,13 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Released under the GNU General Public License (GPL)</value>
   </data>
   <data name="strLabelSeconds" xml:space="preserve">
-    <value>seconds</value>
+    <value>Seconds</value>
   </data>
   <data name="strLabelSelectPanel" xml:space="preserve">
     <value>Select a panel from the list below or click New to add a new one. Click OK to continue.</value>
   </data>
   <data name="strLabelServerStatus" xml:space="preserve">
-    <value>Server Status:</value>
+    <value>Server status:</value>
   </data>
   <data name="strLabelSQLDatabaseName" xml:space="preserve">
     <value>Database:</value>
@@ -1106,7 +1106,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>mRemoteNG Help</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
-    <value>Jump To</value>
+    <value>Jump to</value>
   </data>
   <data name="strMenuLaunchExternalTool" xml:space="preserve">
     <value>Launch External Tool</value>
@@ -1265,10 +1265,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>No</value>
   </data>
   <data name="strNoCompression" xml:space="preserve">
-    <value>No Compression</value>
+    <value>No сompression</value>
   </data>
   <data name="strNoExtAppDefined" xml:space="preserve">
-    <value>No Ext. App specified.</value>
+    <value>No ext. app specified.</value>
   </data>
   <data name="strNoInformation" xml:space="preserve">
     <value>None</value>
@@ -1311,16 +1311,16 @@ If you run into such an error, please create a new connection file!</value>
     <value>Tabs</value>
   </data>
   <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
-    <value>Next Tab</value>
+    <value>Next tab</value>
   </data>
   <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-    <value>Previous Tab</value>
+    <value>Previous tab</value>
   </data>
   <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Modify Shortcut</value>
+    <value>Modify shortcut</value>
   </data>
   <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Keyboard shortcuts</value>
   </data>
   <data name="strOptionsProxyTesting" xml:space="preserve">
     <value>Testing...</value>
@@ -1530,10 +1530,10 @@ If you run into such an error, please create a new connection file!</value>
     <value>Server Authentication</value>
   </data>
   <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
-    <value>Authentication Mode</value>
+    <value>Authentication mode</value>
   </data>
   <data name="strPropertyNameAutomaticResize" xml:space="preserve">
-    <value>Automatic Resize</value>
+    <value>Automatic resize</value>
   </data>
   <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
     <value>Cache Bitmaps</value>
@@ -2407,7 +2407,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Choose the Sound Quality provided by the protocol: Dynamic, Medium, High</value>
   </data>
   <data name="strPropertyNameSoundQuality" xml:space="preserve">
-    <value>Sound Quality</value>
+    <value>Sound quality</value>
   </data>
   <data name="strUpdatePortableDownloadComplete" xml:space="preserve">
     <value>Download Completed!</value>
@@ -2455,7 +2455,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Select whether to receive an alert after the RDP session disconnects due to inactivity</value>
   </data>
   <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
-    <value>Alert on Idle Disconnect</value>
+    <value>Alert on Idle disconnect</value>
   </data>
   <data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
     <value>Password must contain at least {0} of the following characters: {1}</value>
@@ -2488,13 +2488,13 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Log these message types</value>
   </data>
   <data name="strChoosePath" xml:space="preserve">
-    <value>Choose Path</value>
+    <value>Choose path</value>
   </data>
   <data name="strOpenFile" xml:space="preserve">
-    <value>Open File</value>
+    <value>Open file</value>
   </data>
   <data name="strUseDefault" xml:space="preserve">
-    <value>Use Default</value>
+    <value>Use default</value>
   </data>
   <data name="strLogging" xml:space="preserve">
     <value>Logging</value>
@@ -2575,7 +2575,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Do you really want to delete the theme?</value>
   </data>
   <data name="strOptionsThemeEnableTheming" xml:space="preserve">
-    <value>Enable Themes</value>
+    <value>Enable themes</value>
   </data>
   <data name="strOptionsThemeNewThemeCaption" xml:space="preserve">
     <value>New theme name</value>
@@ -2590,7 +2590,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Warning: Restart is required to disable the themes or to completely apply a new one</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>No themes are loaded, check that the default mremoteNG themes exist in the slash themes folder</value>
+    <value>No themes are loaded, check that the default mRemoteNG themes exist in the 'themes' folder</value>
   </data>
   <data name="CouldNotFindExternalTool" xml:space="preserve">
     <value>Could not find external tool with name "{0}"</value>
@@ -2629,15 +2629,87 @@ This page will walk you through the process of upgrading your connections file o
     <value>Filter search matches in connection tree</value>
   </data>
   <data name="TestConnection" xml:space="preserve">
-    <value>Test Connection</value>
+    <value>Test connection</value>
   </data>
   <data name="strLabelReadOnly" xml:space="preserve">
-    <value>Read Only:</value>
+    <value>Read only:</value>
   </data>
   <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
-  <data name="TimeoutInSeconds" xml:space="preserve">
+  <data name="strTimeoutInSeconds" xml:space="preserve">
     <value>Timeout (seconds)</value>
+  </data>
+  <data name="srtWorkingDirectory" xml:space="preserve">
+    <value>Working directory:</value>
+  </data>
+  <data name="strRunElevated" xml:space="preserve">
+    <value>Run elevated</value>
+  </data>
+  <data name="strRunElevateHeader" xml:space="preserve">
+    <value>Run elevate</value>
+  </data>
+  <data name="strShowOnToolbarColumnHeader" xml:space="preserve">
+    <value>Show on toolbar column</value>
+  </data>
+  <data name="strTryToIntegrateColumnHeader" xml:space="preserve">
+    <value>Try to integrate</value>
+  </data>
+  <data name="strWorkingDirColumnHeader" xml:space="preserve">
+    <value>Working directory</value>
+  </data>
+  <data name="strLockToolbars" xml:space="preserve">
+    <value>Lock toolbar positions</value>
+  </data>
+  <data name="strMultiSshToolbar" xml:space="preserve">
+    <value>Multi SSH toolbar</value>
+  </data>
+  <data name="strImportSubOUs" xml:space="preserve">
+    <value>Import sub OUs</value>
+  </data>
+  <data name="strMenuLockToolbars" xml:space="preserve">
+    <value>Lock toolbar positions</value>
+  </data>
+  <data name="strMenuMultiSshToolbar" xml:space="preserve">
+    <value>Multi SSH toolbar</value>
+  </data>
+  <data name="strAdvancedSecurityOptions" xml:space="preserve">
+    <value>Advanced security options</value>
+  </data>
+  <data name="strOptionsPageTitle" xml:space="preserve">
+    <value>mRemoteNG Options</value>
+  </data>
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
+  </data>
+  <data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Create an empty panel when mRemoteNG starts</value>
+  </data>
+  <data name="strIPRange" xml:space="preserve">
+    <value>Must Be Between 0 and 255</value>
+  </data>
+  <data name="strOutOfRange" xml:space="preserve">
+    <value>Out Of Range</value>
+  </data>
+  <data name="strDelete" xml:space="preserve">
+    <value>Delete...</value>
+  </data>
+  <data name="strReconnectAllConnections" xml:space="preserve">
+    <value>Reconnect All Connections</value>
+  </data>
+  <data name="strUltraVNCSingleClick" xml:space="preserve">
+    <value>UltraVNC SingleClick</value>
+  </data>
+  <data name="strMenuDisconnectOthersRight" xml:space="preserve">
+    <value>Disconnect Tabs To The Right</value>
+  </data>
+  <data name="strMenuDisconnectOthers" xml:space="preserve">
+    <value>Disconnect All But This</value>
+  </data>
+  <data name="strConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>Are you sure you want to close all connections except for "{0}"?</value>
+  </data>
+  <data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
+    <value>Are you sure you want to close all connections to the right of "{0}"?</value>
   </data>
 </root>

@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUvncsc.Image = Resources.UVNC_SC;
             _mMenToolsUvncsc.Name = "mMenToolsUVNCSC";
             _mMenToolsUvncsc.Size = new System.Drawing.Size(184, 22);
-            _mMenToolsUvncsc.Text = "UltraVNC SingleClick";
+            _mMenToolsUvncsc.Text = Language.strUltraVNCSingleClick;
             _mMenToolsUvncsc.Visible = false;
             _mMenToolsUvncsc.Click += mMenToolsUVNCSC_Click;
             // 
@@ -101,6 +101,16 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
             _mMenToolsOptions.Text = Language.strMenuOptions;
             _mMenToolsOptions.Click += mMenToolsOptions_Click;
+        }
+
+        public void ApplyLanguage()
+        {
+            Text = Language.strMenuTools;
+            _mMenToolsSshTransfer.Text = Language.strMenuSSHFileTransfer;
+            _mMenToolsExternalApps.Text = Language.strMenuExternalTools;
+            _mMenToolsPortScan.Text = Language.strMenuPortScan;
+            _mMenToolsComponentsCheck.Text = Language.strComponentsCheck;
+            _mMenToolsOptions.Text = Language.strMenuOptions;
         }
 
         #region Tools

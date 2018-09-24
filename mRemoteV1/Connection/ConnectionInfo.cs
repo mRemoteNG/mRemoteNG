@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -15,11 +10,16 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 
 
 namespace mRemoteNG.Connection
 {
-	[DefaultProperty("Name")]
+    [DefaultProperty("Name")]
     public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
     {        
         #region Public Properties
@@ -78,7 +78,8 @@ namespace mRemoteNG.Connection
 		    var newConnectionInfo = new ConnectionInfo();
             newConnectionInfo.CopyFrom(this);
 		    newConnectionInfo.Inheritance = Inheritance.Clone();
-			return newConnectionInfo;
+            newConnectionInfo.Inheritance.Parent = newConnectionInfo;
+            return newConnectionInfo;
 		}
 
 	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
@@ -172,10 +173,11 @@ namespace mRemoteNG.Connection
             if (!ShouldThisPropertyBeInherited(propertyName))
                 return value;
 
-            var inheritedValue = GetInheritedPropertyValue<TPropertyType>(propertyName);
-            if (inheritedValue.Equals(default(TPropertyType)))
-                return value;
-            return inheritedValue;
+            var couldGetInheritedValue = TryGetInheritedPropertyValue<TPropertyType>(propertyName, out var inheritedValue);
+
+            return couldGetInheritedValue
+                ? inheritedValue
+                : value;
         }
 
 	    private bool ShouldThisPropertyBeInherited(string propertyName)
@@ -196,22 +198,23 @@ namespace mRemoteNG.Connection
             return inheritPropertyValue;
         }
 
-        private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName)
+        private bool TryGetInheritedPropertyValue<TPropertyType>(string propertyName, out TPropertyType inheritedValue)
         {
             try
             {
                 var connectionInfoType = Parent.GetType();
                 var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
                 if (parentPropertyInfo == null)
-                    return default(TPropertyType); // shouldn't get here...
-                var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
+                    throw new NullReferenceException($"Could not retrieve property data for property '{propertyName}' on parent node '{Parent?.Name}'");
 
-                return parentPropertyValue;
+                inheritedValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
+                return true;
             }
             catch (Exception e)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace($"Error retrieving inherited property '{propertyName}'", e);
-                return default(TPropertyType);
+                inheritedValue = default(TPropertyType);
+                return false;
             }
         }
 

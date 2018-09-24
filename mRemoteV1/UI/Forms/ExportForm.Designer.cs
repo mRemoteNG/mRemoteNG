@@ -9,27 +9,27 @@ namespace mRemoteNG.UI.Forms
 			
 		private void InitializeComponent()
 		{
-            this.btnCancel =  new Controls.Base.NGButton();
-            this.btnOK = new Controls.Base.NGButton();
-            this.lblUncheckProperties = new Controls.Base.NGLabel();
-            this.chkUsername = new Controls.Base.NGCheckBox();
-            this.chkPassword = new Controls.Base.NGCheckBox();
-            this.chkDomain = new Controls.Base.NGCheckBox();
-            this.chkInheritance = new Controls.Base.NGCheckBox();
-            this.txtFileName = new Controls.Base.NGTextBox();
-            this.btnBrowse = new Controls.Base.NGButton();
+            this.btnCancel = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.lblUncheckProperties = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.chkUsername = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkPassword = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkDomain = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkInheritance = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.txtFileName = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.btnBrowse = new mRemoteNG.UI.Controls.Base.NGButton();
             this.grpProperties = new System.Windows.Forms.GroupBox();
-            this.chkAssignedCredential = new Controls.Base.NGCheckBox();
+            this.chkAssignedCredential = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.grpFile = new System.Windows.Forms.GroupBox();
-            this.lblFileFormat = new Controls.Base.NGLabel();
-            this.lblFileName = new Controls.Base.NGLabel();
-            this.cboFileFormat = new Controls.Base.NGComboBox();
+            this.lblFileFormat = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblFileName = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.cboFileFormat = new mRemoteNG.UI.Controls.Base.NGComboBox();
             this.grpItems = new System.Windows.Forms.GroupBox();
-            this.lblSelectedConnection = new Controls.Base.NGLabel();
-            this.lblSelectedFolder = new Controls.Base.NGLabel();
-            this.rdoExportSelectedConnection = new Controls.Base.NGRadioButton();
-            this.rdoExportSelectedFolder = new Controls.Base.NGRadioButton();
-            this.rdoExportEverything = new Controls.Base.NGRadioButton();
+            this.lblSelectedConnection = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblSelectedFolder = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.rdoExportSelectedConnection = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.rdoExportSelectedFolder = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.rdoExportEverything = new mRemoteNG.UI.Controls.Base.NGRadioButton();
             this.grpProperties.SuspendLayout();
             this.grpFile.SuspendLayout();
             this.grpItems.SuspendLayout();
@@ -37,6 +37,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnCancel
             // 
+            this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(447, 473);
             this.btnCancel.Name = "btnCancel";
@@ -48,6 +49,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnOK
             // 
+            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnOK.Location = new System.Drawing.Point(366, 473);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -67,6 +69,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkUsername
             // 
+            this.chkUsername._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkUsername.AutoSize = true;
             this.chkUsername.Checked = true;
             this.chkUsername.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -79,6 +82,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkPassword
             // 
+            this.chkPassword._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkPassword.AutoSize = true;
             this.chkPassword.Checked = true;
             this.chkPassword.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -91,6 +95,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkDomain
             // 
+            this.chkDomain._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkDomain.AutoSize = true;
             this.chkDomain.Checked = true;
             this.chkDomain.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -103,6 +108,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkInheritance
             // 
+            this.chkInheritance._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkInheritance.AutoSize = true;
             this.chkInheritance.Checked = true;
             this.chkInheritance.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -124,6 +130,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnBrowse
             // 
+            this.btnBrowse._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnBrowse.Location = new System.Drawing.Point(417, 46);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
@@ -149,6 +156,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkAssignedCredential
             // 
+            this.chkAssignedCredential._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkAssignedCredential.AutoSize = true;
             this.chkAssignedCredential.Checked = true;
             this.chkAssignedCredential.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -158,6 +166,7 @@ namespace mRemoteNG.UI.Forms
             this.chkAssignedCredential.TabIndex = 5;
             this.chkAssignedCredential.Text = "Assigned Credential";
             this.chkAssignedCredential.UseVisualStyleBackColor = true;
+            this.chkAssignedCredential.Visible = false;
             // 
             // grpFile
             // 
@@ -193,7 +202,8 @@ namespace mRemoteNG.UI.Forms
             // 
             // cboFileFormat
             // 
-            this.cboFileFormat.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cboFileFormat._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.cboFileFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFileFormat.FormattingEnabled = true;
             this.cboFileFormat.Location = new System.Drawing.Point(15, 100);
             this.cboFileFormat.Name = "cboFileFormat";

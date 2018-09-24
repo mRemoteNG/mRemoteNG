@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Tree.Root;
+﻿using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
 
@@ -45,6 +46,14 @@ namespace mRemoteNGTests.Tree
         {
             _rootNodeInfo.PasswordString = password;
             Assert.That(_rootNodeInfo.PasswordString, Is.EqualTo(password));
+        }
+
+        [TestCase(RootNodeType.Connection, TreeNodeType.Root)]
+        [TestCase(RootNodeType.PuttySessions, TreeNodeType.PuttyRoot)]
+        public void RootNodeHasCorrectTreeNodeType(RootNodeType rootNodeType, TreeNodeType expectedTreeNodeType)
+        {
+            var rootNode = new RootNodeInfo(rootNodeType);
+            Assert.That(rootNode.GetTreeNodeType(), Is.EqualTo(expectedTreeNodeType));
         }
     }
 }

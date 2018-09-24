@@ -3,7 +3,7 @@
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	
-    public partial class AppearancePage : OptionsPage
+    public sealed partial class AppearancePage : OptionsPage
 	{
 			
 		//UserControl overrides dispose to clean up the component list.

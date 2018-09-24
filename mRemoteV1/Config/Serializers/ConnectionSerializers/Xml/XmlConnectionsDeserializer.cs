@@ -13,6 +13,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
@@ -20,7 +21,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-	public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
+    public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
@@ -29,9 +30,9 @@ namespace mRemoteNG.Config.Serializers.Xml
         private const double MaxSupportedConfVersion = 2.8;
         private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
 
-        public Func<SecureString> AuthenticationRequestor { get; set; }
+        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; }
 
-        public XmlConnectionsDeserializer(Func<SecureString> authenticationRequestor = null)
+        public XmlConnectionsDeserializer(Func<Optional<SecureString>> authenticationRequestor = null)
         {
             AuthenticationRequestor = authenticationRequestor;
         }
@@ -47,8 +48,6 @@ namespace mRemoteNG.Config.Serializers.Xml
             {
                 LoadXmlConnectionData(xml);
                 ValidateConnectionFileVersion();
-                if (!import)
-                    Runtime.ConnectionsService.IsConnectionsFileLoaded = false;
 
                 var rootXmlElement = _xmlDocument.DocumentElement;
                 InitializeRootNode(rootXmlElement);
@@ -62,8 +61,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
                     if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
                     {
-                        mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
-                        mRemoteNG.Settings.Default.CustomConsPath = "";
                         return null;
                     }
                 }
@@ -208,7 +205,9 @@ namespace mRemoteNG.Config.Serializers.Xml
         {
             if (xmlnode.Attributes == null) return null;
 
-			var connectionId = xmlnode.Attributes["Id"]?.Value ?? Guid.NewGuid().ToString();
+			var connectionId = xmlnode.Attributes["Id"]?.Value;
+            if (string.IsNullOrWhiteSpace(connectionId))
+                connectionId = Guid.NewGuid().ToString();
 			var connectionInfo = new ConnectionInfo(connectionId);
 
             try

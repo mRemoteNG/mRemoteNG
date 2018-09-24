@@ -8,7 +8,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 
 namespace mRemoteNGTests.TestHelpers
 {
-	internal class ConnectionInfoHelpers
+    internal static class ConnectionInfoHelpers
 	{
 		private static readonly Random _random = new Random();
 
@@ -128,5 +128,5 @@ namespace mRemoteNGTests.TestHelpers
 			var values = Enum.GetValues(typeof(T));
 			return (T)values.GetValue(_random.Next(values.Length));
 		}
-	}
+    }
 }

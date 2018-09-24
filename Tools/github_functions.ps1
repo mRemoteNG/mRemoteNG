@@ -171,13 +171,27 @@ function Upload-GitHubReleaseAsset {
         [string]
         [Parameter(Mandatory=$true)]
         # The OAuth2 token to use for authentication.
-        $AuthToken
+        $AuthToken,
+
+        [string]
+        # A short description label for the asset
+        $Label = ""
     )
 
     $UploadUri = $UploadUri -replace "(\{[\w,\?]*\})$"
-    $file = Get-Item -Path $FilePath
+    $files = Get-Item -Path $FilePath
 
-    $req_uploadZipAsset = Invoke-WebRequest -Uri "$($UploadUri)?name=$($file.Name)" -Method Post -Headers @{"Authorization"="token $AuthToken"} -ContentType $ContentType -InFile $file.FullName -ErrorAction Stop
+    $labelParam = ""
+    if ($Label -ne "") {
+        $labelParam = "&label=$Label"
+    }
+
+    # Get-Item could produce an array of files if a wildcard is provided. (C:\*.txt)
+    # Upload each matching item individually
+    foreach ($file in $files) {
+        Write-Output "Uploading asset to GitHub release: '$($file.FullName)'"
+        $req_uploadZipAsset = Invoke-WebRequest -Uri "$($UploadUri)?name=$($file.Name)$labelParam" -Method Post -Headers @{"Authorization"="token $AuthToken"} -ContentType $ContentType -InFile $file.FullName -ErrorAction Stop
+    }
 }
 
 
