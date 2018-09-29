@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1115: Exception when changing from xml data storage to SQL
 #1106: Inheritance does not work when parent has C# default type set
 #1092: Invalid Cast Exceptions loading default connectioninfo 
 #1091: Minor themeing issues

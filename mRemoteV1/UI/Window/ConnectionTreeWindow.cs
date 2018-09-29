@@ -158,6 +158,12 @@ namespace mRemoteNG.UI.Window
 
 	    private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
 	    {
+	        if (olvConnections.InvokeRequired)
+	        {
+	            olvConnections.Invoke(() => ConnectionsServiceOnConnectionsLoaded(o, connectionsLoadedEventArgs));
+                return;
+	        }
+
 	        olvConnections.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
 	        olvConnections.SelectedObject = connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes
 	            .OfType<RootNodeInfo>().FirstOrDefault();
