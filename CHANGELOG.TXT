@@ -3,9 +3,11 @@
 Fixes:
 ------
 #1115: Exception when changing from xml data storage to SQL
+#1110: Pressing Delete button during connection rename attempts to delete the connection instead of the text
 #1106: Inheritance does not work when parent has C# default type set
 #1092: Invalid Cast Exceptions loading default connectioninfo 
 #1091: Minor themeing issues
+#853: Added some additional safety checks and logging to help address RDP crashes
 
 
 1.76.8 (2018-08-25):
