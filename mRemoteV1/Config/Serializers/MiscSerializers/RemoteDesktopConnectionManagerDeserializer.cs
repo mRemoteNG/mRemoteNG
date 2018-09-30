@@ -278,6 +278,7 @@ namespace mRemoteNG.Config.Serializers
                 connectionInfo.RedirectPorts = bool.Parse(localResourcesNode?.SelectSingleNode("./redirectPorts")?.InnerText ?? "false");
                 connectionInfo.RedirectPrinters = bool.Parse(localResourcesNode?.SelectSingleNode("./redirectPrinters")?.InnerText ?? "false");
                 connectionInfo.RedirectSmartCards = bool.Parse(localResourcesNode?.SelectSingleNode("./redirectSmartCards")?.InnerText ?? "false");
+                connectionInfo.RedirectClipboard = bool.Parse(localResourcesNode?.SelectSingleNode("./redirectClipboard")?.InnerText ?? "false");
             }
             else
             {
@@ -287,6 +288,7 @@ namespace mRemoteNG.Config.Serializers
                 connectionInfo.Inheritance.RedirectPorts = true;
                 connectionInfo.Inheritance.RedirectPrinters = true;
                 connectionInfo.Inheritance.RedirectSmartCards = true;
+                connectionInfo.Inheritance.RedirectClipboard = true;
             }
 
             var securitySettingsNode = xmlNode.SelectSingleNode("./securitySettings");
