@@ -184,7 +184,10 @@ namespace mRemoteNG.UI.Forms
                 var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
                     ? Settings.Default.StartUpPanelName
                     : Language.strNewPanel;
-                new PanelAdder().AddPanel(panelName);
+
+                var panelAdder = new PanelAdder();
+                if (!panelAdder.DoesPanelExist(panelName))
+                    panelAdder.AddPanel(panelName);
             }
         }
 

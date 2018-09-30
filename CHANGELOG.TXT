@@ -2,6 +2,7 @@
 
 Fixes:
 ------
+#1117: Duplicate panel created when "Reconnect on Startup" and "Create Empty Panel" settings enabled
 #1115: Exception when changing from xml data storage to SQL
 #1110: Pressing Delete button during connection rename attempts to delete the connection instead of the text
 #1106: Inheritance does not work when parent has C# default type set
