@@ -2694,4 +2694,10 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strUltraVNCSingleClick" xml:space="preserve">
     <value>UltraVNC SingleClick</value>
   </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>An error occurred while trying to reconnect to RDP host '{0}'</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
+  </data>
 </root>

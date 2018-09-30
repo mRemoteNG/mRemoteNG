@@ -61,6 +61,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while trying to reconnect to RDP host &apos;{0}&apos;.
+        /// </summary>
+        internal static string AutomaticReconnectError {
+            get {
+                return ResourceManager.GetString("AutomaticReconnectError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while trying to change the connection resolution to host &apos;{0}&apos;.
+        /// </summary>
+        internal static string ChangeConnectionResolutionError {
+            get {
+                return ResourceManager.GetString("ChangeConnectionResolutionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a New Connection File.
         /// </summary>
         internal static string ConfigurationCreateNew {
