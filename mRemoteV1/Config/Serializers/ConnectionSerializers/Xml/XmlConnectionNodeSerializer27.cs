@@ -8,13 +8,13 @@ using mRemoteNG.Security;
 namespace mRemoteNG.Config.Serializers.Xml
 {
 	// ReSharper disable once InconsistentNaming
-	public class XmlConnectionNodeSerializer26 : ISerializer<ConnectionInfo,XElement>
+	public class XmlConnectionNodeSerializer27 : ISerializer<ConnectionInfo,XElement>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
         private readonly SaveFilter _saveFilter;
 
-        public XmlConnectionNodeSerializer26(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
+        public XmlConnectionNodeSerializer27(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {
             if (cryptographyProvider == null)
                 throw new ArgumentNullException(nameof(cryptographyProvider));
@@ -84,6 +84,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("RedirectDiskDrives", connectionInfo.RedirectDiskDrives.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectPorts", connectionInfo.RedirectPorts.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectPrinters", connectionInfo.RedirectPrinters.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("RedirectClipboard", connectionInfo.RedirectClipboard.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectSmartCards", connectionInfo.RedirectSmartCards.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectSound", connectionInfo.RedirectSound.ToString()));
             element.Add(new XAttribute("SoundQuality", connectionInfo.SoundQuality.ToString()));
@@ -153,6 +154,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRedirectKeys", connectionInfo.Inheritance.RedirectKeys.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectPorts", connectionInfo.Inheritance.RedirectPorts.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectPrinters", connectionInfo.Inheritance.RedirectPrinters.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritRedirectClipboard", connectionInfo.Inheritance.RedirectClipboard.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectSmartCards", connectionInfo.Inheritance.RedirectSmartCards.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectSound", connectionInfo.Inheritance.RedirectSound.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritSoundQuality", connectionInfo.Inheritance.SoundQuality.ToString().ToLowerInvariant()));
@@ -211,6 +213,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRedirectKeys", falseString));
                 element.Add(new XAttribute("InheritRedirectPorts", falseString));
                 element.Add(new XAttribute("InheritRedirectPrinters", falseString));                
+                element.Add(new XAttribute("InheritRedirectClipboard", falseString));                
                 element.Add(new XAttribute("InheritRedirectSmartCards", falseString));
                 element.Add(new XAttribute("InheritRedirectSound", falseString));
                 element.Add(new XAttribute("InheritSoundQuality", falseString));
