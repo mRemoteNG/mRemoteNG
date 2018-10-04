@@ -1295,6 +1295,9 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
     <value>Seleccione si las impresoras locales deben ser mostradas en el host remoto.</value>
   </data>
+  <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
+    <value>Seleccione si el portapapeles debe compartirse con el host remoto.</value>
+  </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Seleccione si las tarjetas inteligentes deben presentarse a la máquina remota.</value>
   </data>
@@ -1444,6 +1447,9 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   </data>
   <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Impresoras</value>
+  </data>
+  <data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+    <value>Portapapeles</value>
   </data>
   <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
     <value>Tarjetas Inteligentes</value>
