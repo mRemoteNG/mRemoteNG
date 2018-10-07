@@ -253,17 +253,33 @@ namespace mRemoteNG.UI.Forms
         private void ApplyTheme()
 		{
 		    if (!_themeManager.ThemingActive) return;
-		    
-            // Persist settings when rebuilding UI
-		    pnlDock.Theme = _themeManager.ActiveTheme.Theme;
 
-            vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-		    vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-		    vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-		    vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-		    tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
-		    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-		    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+		    try
+		    {
+                // this will always throw when turning themes on from
+                // the options menu.
+		        pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+		    }
+		    catch (Exception)
+		    {
+		        // intentionally ignore exception
+		    }
+            
+		    // Persist settings when rebuilding UI
+		    try
+		    {
+                vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		        vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		        vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		        vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		        tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
+		        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+		        ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+		    }
+		    catch (Exception ex)
+		    {
+                Runtime.MessageCollector.AddExceptionStackTrace("Error applying theme", ex, MessageClass.WarningMsg);
+		    }
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
