@@ -1,3 +1,10 @@
+1.76.10 (2018-10-07):
+
+Fixes:
+------
+#1124: Enabling themes causes an exception
+
+
 1.76.9 (2018-10-07):
 
 Fixes:
