@@ -18,7 +18,6 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionTreeWindow
 	{
-	    private readonly ConnectionContextMenu _contextMenu;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
 		private ThemeManager _themeManager;
 
@@ -90,7 +89,7 @@ namespace mRemoteNG.UI.Window
         {
             if (!_themeManager.ThemingActive) return;
             vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(_contextMenu, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(olvConnections.ContextMenuStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
             //Treelistview need to be manually themed
             olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
             olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");
