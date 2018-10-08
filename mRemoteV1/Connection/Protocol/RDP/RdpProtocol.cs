@@ -316,10 +316,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				return;
 			}
 
-		    var size = !Fullscreen ? Control.Size : Screen.FromControl(Control).Bounds.Size;
+		    try
+		    {
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Resizing RDP connection to host '{_connectionInfo.Hostname}'");
+		        var size = !Fullscreen ? Control.Size : Screen.FromControl(Control).Bounds.Size;
 
-            IMsRdpClient8 msRdpClient8 = _rdpClient;
-			msRdpClient8.Reconnect((uint)size.Width, (uint)size.Height);
+                IMsRdpClient8 msRdpClient8 = _rdpClient;
+			    msRdpClient8.Reconnect((uint)size.Width, (uint)size.Height);
+		    }
+		    catch (Exception ex)
+		    {
+                Runtime.MessageCollector.AddExceptionMessage(string.Format(Language.ChangeConnectionResolutionError, _connectionInfo.Hostname),
+                    ex, MessageClass.WarningMsg, false);
+		    }
 		}
 				
 		private void SetRdGateway()
@@ -917,17 +926,25 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			var srvReady = PortScanner.IsPortOpen(_connectionInfo.Hostname, Convert.ToString(_connectionInfo.Port));
+		    try
+		    {
+			    var srvReady = PortScanner.IsPortOpen(_connectionInfo.Hostname, Convert.ToString(_connectionInfo.Port));
 					
-			ReconnectGroup.ServerReady = srvReady;
+			    ReconnectGroup.ServerReady = srvReady;
 					
-			if (ReconnectGroup.ReconnectWhenReady && srvReady)
-			{
-				tmrReconnect.Enabled = false;
-				ReconnectGroup.DisposeReconnectGroup();
-				//SetProps()
-				_rdpClient.Connect();
-			}
+			    if (ReconnectGroup.ReconnectWhenReady && srvReady)
+			    {
+				    tmrReconnect.Enabled = false;
+				    ReconnectGroup.DisposeReconnectGroup();
+				    //SetProps()
+				    _rdpClient.Connect();
+			    }
+		    }
+		    catch (Exception ex)
+		    {
+                Runtime.MessageCollector.AddExceptionMessage(string.Format(Language.AutomaticReconnectError, _connectionInfo.Hostname),
+                    ex, MessageClass.WarningMsg, false);
+		    }
 		}
         #endregion
 	}

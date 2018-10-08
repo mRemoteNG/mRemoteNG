@@ -2712,4 +2712,10 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
     <value>Are you sure you want to close all connections to the right of "{0}"?</value>
   </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>An error occurred while trying to reconnect to RDP host '{0}'</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
+  </data>
 </root>
