@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Config.Serializers;
+﻿using System.Linq;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -26,7 +27,7 @@ namespace mRemoteNGTests.Config.Serializers
         {
             var model = CreateConnectionTreeModel();
             var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows.Count, Is.EqualTo(3));
+            Assert.That(dataTable.Rows.Count, Is.EqualTo(model.GetRecursiveChildList().Count()));
         }
 
         [Test]

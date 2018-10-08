@@ -17,17 +17,24 @@ namespace mRemoteNG.Tools
 		private readonly List<int> _ports = new List<int>();
 		private Thread _scanThread;
 		private readonly List<ScanHost> _scannedHosts = new List<ScanHost>();
+		private readonly int _timeoutInMilliseconds;
 				
         #region Public Methods
 	
-		public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2)
+		public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2, int timeoutInMilliseconds = 5000)
 		{
             var ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
             var ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
 
             var portStart = Math.Min(port1, port2);
 			var portEnd = Math.Max(port1, port2);
-					
+
+			if (timeoutInMilliseconds < 0)
+				throw new ArgumentOutOfRangeException(nameof(timeoutInMilliseconds));
+
+			_timeoutInMilliseconds = timeoutInMilliseconds;
+
+
 			_ports.Clear();
 			for (var port = portStart; port <= portEnd; port++)
 			{
@@ -87,7 +94,7 @@ namespace mRemoteNG.Tools
                     try
                     {
                         pingSender.PingCompleted += PingSender_PingCompleted;
-                        pingSender.SendAsync(ipAddress, ipAddress);
+                        pingSender.SendAsync(ipAddress, _timeoutInMilliseconds, ipAddress);
                     }
                     catch (Exception ex)
                     {

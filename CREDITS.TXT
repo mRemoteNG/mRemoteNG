@@ -22,6 +22,9 @@ Camilo Alvarez (github.com/jotatsu)
 github.com/DamianBis
 github.com/pfjason
 github.com/sirLoaf
+github.com/Fyers
+Vladimir Semenov (github.com/sli-pro)
+Aleksey Reytsman (github.com/areytsman)
 
 
 Past Contributors
@@ -58,6 +61,9 @@ Lukas Plachy (github.com/rheingold)
 Gyuha Shin
 Stefan (github.com/polluks)
 github.com/emazv72
+Vladimir Semenov (github.com/sli-pro)
+Marco Sousa (github.com/marcomsousa)
+github.com/wwj402
 
 
 Included Source Code
@@ -71,10 +77,6 @@ http://www.codeproject.com/KB/recipes/command_line.aspx
 FilteredPropertyGrid
 Copyright © 2006 Azuria
 http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
-
-Hotkey Selection Control for .NET
-Copyright © 2006 Thomas Backman
-http://www.codeproject.com/Articles/15085/A-simple-hotkey-selection-control-for-NET
 
 InputBox
 Copyright © 2016 Jan Slama

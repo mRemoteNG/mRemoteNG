@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -105,17 +105,17 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
   </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>Acerca de</value>
@@ -1154,7 +1154,7 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
     <value>Sin SmartSize</value>
   </data>
   <data name="strNoUpdateAvailable" xml:space="preserve">
-    <value>Sin actualizaciones dosponibles</value>
+    <value>Sin actualizaciones disponibles</value>
   </data>
   <data name="strOldConffile" xml:space="preserve">
     <value>Está intentando cargar un archivo de conexión que ha sido creado con una versión muy antigua de mRemote, ésto puede causar un error en tiempo de ejecución.
@@ -1224,7 +1224,7 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
     <value>Introduzca su dominio.</value>
   </data>
   <data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
-    <value>Seleccione si emplear composición de escrotorio o no.</value>
+    <value>Seleccione si emplear composición de escritorio o no.</value>
   </data>
   <data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
     <value>Seleccione si emplear suavizado de fuentes o no.</value>
@@ -1294,6 +1294,9 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   </data>
   <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
     <value>Seleccione si las impresoras locales deben ser mostradas en el host remoto.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
+    <value>Seleccione si el portapapeles debe compartirse con el host remoto.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Seleccione si las tarjetas inteligentes deben presentarse a la máquina remota.</value>
@@ -1444,6 +1447,9 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   </data>
   <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Impresoras</value>
+  </data>
+  <data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+    <value>Portapapeles</value>
   </data>
   <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
     <value>Tarjetas Inteligentes</value>

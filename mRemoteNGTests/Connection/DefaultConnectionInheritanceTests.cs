@@ -1,34 +1,40 @@
-﻿using mRemoteNG.Connection;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using mRemoteNG.Connection;
 using NUnit.Framework;
 
 
 namespace mRemoteNGTests.Connection
 {
-    public class DefaultConnectionInheritanceTests
+	public class DefaultConnectionInheritanceTests
     {
-        [SetUp]
-        public void Setup()
+	    [TestCaseSource(nameof(GetInheritanceProperties))]
+		public void LoadingDefaultInheritanceUpdatesAllProperties(PropertyInfo property)
         {
-            DefaultConnectionInheritance.Instance.TurnOffInheritanceCompletely();
-        }
-
-        [Test]
-        public void LoadingDefaultInheritanceUpdatesAllProperties()
-        {
-            var inheritanceSource = new ConnectionInfoInheritance(new object(), true);
+			var inheritanceSource = new ConnectionInfoInheritance(new object(), true);
             inheritanceSource.TurnOnInheritanceCompletely();
-            DefaultConnectionInheritance.Instance.LoadFrom(inheritanceSource);
-            Assert.That(DefaultConnectionInheritance.Instance.EverythingInherited, Is.True);
-        }
+	        DefaultConnectionInheritance.Instance.TurnOffInheritanceCompletely();
 
-        [Test]
-        public void SavingDefaultInheritanceExportsAllProperties()
+            DefaultConnectionInheritance.Instance.LoadFrom(inheritanceSource);
+
+	        var valueInDestination = property.GetValue(DefaultConnectionInheritance.Instance);
+	        var valueInSource = property.GetValue(inheritanceSource);
+	        Assert.That(valueInDestination, Is.EqualTo(valueInSource));
+		}
+
+		[TestCaseSource(nameof(GetInheritanceProperties))]
+		public void SavingDefaultInheritanceExportsAllProperties(PropertyInfo property)
         {
-            var inheritanceDestination = new ConnectionInfoInheritance(new object(), true);
-            DefaultConnectionInheritance.Instance.AutomaticResize = true;
-            DefaultConnectionInheritance.Instance.SaveTo(inheritanceDestination);
-            Assert.That(inheritanceDestination.AutomaticResize, Is.True);
-        }
+			var saveTarget = new ConnectionInfoInheritance(new object(), true);
+	        saveTarget.TurnOffInheritanceCompletely();
+	        DefaultConnectionInheritance.Instance.TurnOnInheritanceCompletely();
+
+	        DefaultConnectionInheritance.Instance.SaveTo(saveTarget);
+
+	        var valueInDestination = property.GetValue(saveTarget);
+	        var valueInSource = property.GetValue(DefaultConnectionInheritance.Instance);
+	        Assert.That(valueInDestination, Is.EqualTo(valueInSource));
+		}
 
         [Test]
         public void NewInheritanceInstancesCreatedWithDefaultInheritanceValues()
@@ -38,12 +44,20 @@ namespace mRemoteNGTests.Connection
             Assert.That(inheritanceInstance.Domain, Is.True);
         }
 
-        [Test]
-        public void NewInheritanceInstancesCreatedWithAllDefaultInheritanceValues()
+		[TestCaseSource(nameof(GetInheritanceProperties))]
+		public void NewInheritanceInstancesCreatedWithAllDefaultInheritanceValues(PropertyInfo property)
         {
             DefaultConnectionInheritance.Instance.TurnOnInheritanceCompletely();
             var inheritanceInstance = new ConnectionInfoInheritance(new object());
-            Assert.That(inheritanceInstance.EverythingInherited, Is.True);
-        }
-    }
+
+			var valueInDestination = property.GetValue(inheritanceInstance);
+	        var valueInSource = property.GetValue(DefaultConnectionInheritance.Instance);
+	        Assert.That(valueInDestination, Is.EqualTo(valueInSource));
+		}
+
+	    private static IEnumerable<PropertyInfo> GetInheritanceProperties()
+	    {
+		    return new ConnectionInfoInheritance(new object(), true).GetProperties();
+	    }
+	}
 }

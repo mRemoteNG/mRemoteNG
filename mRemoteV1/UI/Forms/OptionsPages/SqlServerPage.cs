@@ -7,20 +7,20 @@ using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	public partial class SqlServerPage
+	public sealed partial class SqlServerPage
     {
         private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
 
         public SqlServerPage()
         {
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
             _databaseConnectionTester = new SqlDatabaseConnectionTester();
         }
 
         public override string PageName
         {
-            get { return Language.strSQLServer.TrimEnd(':'); }
+            get => Language.strSQLServer.TrimEnd(':');
             set { }
         }
 

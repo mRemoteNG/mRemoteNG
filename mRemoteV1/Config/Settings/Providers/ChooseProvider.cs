@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿#if !PORTABLE
+using System.Configuration;
+#endif
 
 namespace mRemoteNG.Config.Settings.Providers
 {

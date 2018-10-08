@@ -96,6 +96,7 @@ namespace mRemoteNG.Connection
                 var newProtocol = protocolFactory.CreateProtocol(connectionInfo);
 
                 var connectionPanel = SetConnectionPanel(connectionInfo, force);
+                if (string.IsNullOrEmpty(connectionPanel)) return;
                 var connectionForm = SetConnectionForm(conForm, connectionPanel);
                 var connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);
@@ -162,6 +163,10 @@ namespace mRemoteNG.Connection
                 if (frmPnl.ShowDialog() == DialogResult.OK)
                 {
                     connectionPanel = frmPnl.Panel;
+                }
+                else
+                {
+                    return null;
                 }
             }
             else

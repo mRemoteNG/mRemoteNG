@@ -10,7 +10,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class UpdatesPage
+    public sealed partial class UpdatesPage
     {
         #region Private Fields
 
@@ -21,14 +21,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public UpdatesPage()
         {
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         #region Public Methods
 
         public override string PageName
         {
-            get { return Language.strTabUpdates; }
+            get => Language.strTabUpdates;
             set { }
         }
 

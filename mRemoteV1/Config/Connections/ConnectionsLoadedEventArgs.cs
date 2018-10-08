@@ -10,7 +10,7 @@ namespace mRemoteNG.Config.Connections
         /// The previous <see cref="ConnectionTreeModel"/> that is being
         /// unloaded.
         /// </summary>
-        public Maybe<ConnectionTreeModel> PreviousConnectionTreeModel { get; }
+        public Optional<ConnectionTreeModel> PreviousConnectionTreeModel { get; }
 
         /// <summary>
         /// True if the previous <see cref="ConnectionTreeModel"/> was loaded from
@@ -37,7 +37,7 @@ namespace mRemoteNG.Config.Connections
         public string NewSourcePath { get; }
 
         public ConnectionsLoadedEventArgs(
-            Maybe<ConnectionTreeModel> previousTreeModelModel, ConnectionTreeModel newTreeModelModel,
+            Optional<ConnectionTreeModel> previousTreeModelModel, ConnectionTreeModel newTreeModelModel,
             bool previousSourceWasDatabase, bool newSourceIsDatabase,
             string newSourcePath)
         {

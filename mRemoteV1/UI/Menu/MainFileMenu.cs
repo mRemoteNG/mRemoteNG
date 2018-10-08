@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -96,6 +95,7 @@ namespace mRemoteNG.UI.Menu
             Size = new System.Drawing.Size(37, 20);
             Text = Language.strMenuFile;
             //DropDownOpening += mMenFile_DropDownOpening;
+            DropDownClosed += OnDropDownClosed;
             // 
             // mMenFileNewConnection
             // 
@@ -167,7 +167,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileDelete.Image = Resources.Delete;
             _mMenFileDelete.Name = "mMenFileDelete";
             _mMenFileDelete.Size = new System.Drawing.Size(281, 22);
-            _mMenFileDelete.Text = "Delete...";
+            _mMenFileDelete.Text = Language.strDelete;
             _mMenFileDelete.Click += mMenFileDelete_Click;
             // 
             // mMenFileRename
@@ -175,7 +175,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileRename.Image = Resources.Rename;
             _mMenFileRename.Name = "mMenFileRename";
             _mMenFileRename.Size = new System.Drawing.Size(281, 22);
-            _mMenFileRename.Text = "Rename";
+            _mMenFileRename.Text = Language.strRename;
             _mMenFileRename.Click += mMenFileRename_Click;
             // 
             // mMenFileDuplicate
@@ -183,7 +183,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileDuplicate.Image = Resources.page_copy;
             _mMenFileDuplicate.Name = "mMenFileDuplicate";
             _mMenFileDuplicate.Size = new System.Drawing.Size(281, 22);
-            _mMenFileDuplicate.Text = "Duplicate";
+            _mMenFileDuplicate.Text = Language.strDuplicate;
             _mMenFileDuplicate.Click += mMenFileDuplicate_Click;
             // 
             // mMenFileSep4
@@ -196,7 +196,7 @@ namespace mRemoteNG.UI.Menu
             _mMenReconnectAll.Image = Resources.Refresh;
             _mMenReconnectAll.Name = "mMenReconnectAll";
             _mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
-            _mMenReconnectAll.Text = "Reconnect All Connections";
+            _mMenReconnectAll.Text = Language.strReconnectAllConnections;
             _mMenReconnectAll.Click += mMenReconnectAll_Click;
             // 
             // mMenFileSep3
@@ -255,6 +255,23 @@ namespace mRemoteNG.UI.Menu
             _mMenFileExit.Size = new System.Drawing.Size(281, 22);
             _mMenFileExit.Text = Language.strMenuExit;
             _mMenFileExit.Click += mMenFileExit_Click;
+        }
+
+        public void ApplyLanguage()
+        {
+            Text = Language.strMenuFile;
+            _mMenFileNewConnection.Text = Language.strNewConnection;
+            _mMenFileNewFolder.Text = Language.strNewFolder;
+            _mMenFileNew.Text = Language.strMenuNewConnectionFile;
+            _mMenFileLoad.Text = Language.strMenuOpenConnectionFile;
+            _mMenFileSave.Text = Language.strMenuSaveConnectionFile;
+            _mMenFileSaveAs.Text = Language.strMenuSaveConnectionFileAs;
+            _mMenFileImport.Text = Language.strImportMenuItem;
+            _mMenFileImportFromFile.Text = Language.strImportFromFileMenuItem;
+            _mMenFileImportFromActiveDirectory.Text = Language.strImportAD;
+            _mMenFileImportFromPortScan.Text = Language.strImportPortScan;
+            _mMenFileExport.Text = Language.strExportToFileMenuItem;
+            _mMenFileExit.Text = Language.strMenuExit;
         }
 
         #region File
@@ -328,6 +345,16 @@ namespace mRemoteNG.UI.Menu
             }
         }
 
+        private void OnDropDownClosed(object sender, EventArgs eventArgs)
+        {
+            _mMenFileNewConnection.Enabled = true;
+            _mMenFileNewFolder.Enabled = true;
+            _mMenFileDelete.Enabled = true;
+            _mMenFileRename.Enabled = true;
+            _mMenFileDuplicate.Enabled = true;
+            _mMenReconnectAll.Enabled = true;
+        }
+
         private void mMenFileNewConnection_Click(object sender, EventArgs e)
         {
             TreeWindow.ConnectionTree.AddConnection();
@@ -340,13 +367,15 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileNew_Click(object sender, EventArgs e)
         {
-            var saveFileDialog = ConnectionsSaveAsDialog();
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            using (var saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
             {
-                return;
-            }
+                if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
 
-            Runtime.ConnectionsService.NewConnectionsFile(saveFileDialog.FileName);
+                Runtime.ConnectionsService.NewConnectionsFile(saveFileDialog.FileName);
+            }
         }
 
         private void mMenFileLoad_Click(object sender, EventArgs e)
@@ -375,15 +404,11 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileSaveAs_Click(object sender, EventArgs e)
         {
-            using (var saveFileDialog = new SaveFileDialog())
+            using (var saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
             {
-                saveFileDialog.CheckPathExists = true;
-                saveFileDialog.InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath;
-                saveFileDialog.FileName = ConnectionsFileInfo.DefaultConnectionsFile;
-                saveFileDialog.OverwritePrompt = true;
-                saveFileDialog.Filter = $@"{Language.strFiltermRemoteXML}|*.xml|{Language.strFilterAll}|*.*";
+                if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK)
+                    return;
 
-                if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK) return;
                 var newFileName = saveFileDialog.FileName;
 
                 Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
@@ -475,18 +500,6 @@ namespace mRemoteNG.UI.Menu
         private void mMenFileExit_Click(object sender, EventArgs e)
         {
             Shutdown.Quit();
-        }
-
-        public static SaveFileDialog ConnectionsSaveAsDialog()
-        {
-            return new SaveFileDialog
-            {
-                CheckPathExists = true,
-                InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
-                FileName = ConnectionsFileInfo.DefaultConnectionsFile,
-                OverwritePrompt = true,
-                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
-            };
         }
         #endregion
     }

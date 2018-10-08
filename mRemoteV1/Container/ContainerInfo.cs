@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using mRemoteNG.Connection;
 using System.ComponentModel;
 using System.Linq;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 
 namespace mRemoteNG.Container
 {
-    [DefaultProperty("Name")]
+	[DefaultProperty("Name")]
     public class ContainerInfo : ConnectionInfo, INotifyCollectionChanged
 	{
         [Browsable(false)]
@@ -19,12 +18,19 @@ namespace mRemoteNG.Container
         [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
         public bool IsExpanded { get; set; }
 
+        [Browsable(false)]
+	    public override bool IsContainer { get { return true; } set {} }
 
-        public ContainerInfo()
+	    public ContainerInfo(string uniqueId)
+			: base(uniqueId)
         {
             SetDefaults();
-            IsContainer = true;
         }
+
+		public ContainerInfo()
+			: this(Guid.NewGuid().ToString())
+		{
+		}
 
         public override TreeNodeType GetTreeNodeType()
         {
@@ -57,7 +63,7 @@ namespace mRemoteNG.Container
             AddChildAt(newChildItem, newChildIndex);
         }
 
-        public void AddChildAt(ConnectionInfo newChildItem, int index)
+        public virtual void AddChildAt(ConnectionInfo newChildItem, int index)
         {
             if (Children.Contains(newChildItem)) return;
             newChildItem.Parent?.RemoveChild(newChildItem);
@@ -75,7 +81,7 @@ namespace mRemoteNG.Container
             }
         }
 
-        public void RemoveChild(ConnectionInfo removalTarget)
+        public virtual void RemoveChild(ConnectionInfo removalTarget)
         {
             if (!Children.Contains(removalTarget)) return;
             removalTarget.Parent = null;
@@ -178,7 +184,6 @@ namespace mRemoteNG.Container
 		{
             var newContainer = new ContainerInfo();
             newContainer.CopyFrom(this);
-            newContainer.ConstantID = MiscTools.CreateConstantID();
             newContainer.OpenConnections = new ProtocolList();
             newContainer.Inheritance = Inheritance.Clone();
             foreach (var child in Children.ToArray())

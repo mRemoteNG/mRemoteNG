@@ -5,7 +5,7 @@ setlocal enabledelayedexpansion
 set SOLUTIONDIR=%~dp0..
 
 rem Windows Sysinternals Sigcheck from http://technet.microsoft.com/en-us/sysinternals/bb897441
-set SIGCHECK="%SOLUTIONDIR%\Tools\sigcheck.exe"
+set SIGCHECK="%SOLUTIONDIR%\Tools\exes\sigcheck.exe"
 set SEVENZIP="%SOLUTIONDIR%\Tools\7zip\7za.exe"
 
 set VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"

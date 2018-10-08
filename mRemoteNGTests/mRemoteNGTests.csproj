@@ -68,8 +68,8 @@
     <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="NUnitForms">
       <HintPath>nUnitForms\bin\NUnitForms.dll</HintPath>
@@ -114,6 +114,7 @@
     <Compile Include="Config\DataProviders\FileBackupCreatorTests.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderTests.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackupTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\ValidateXmlSchemas.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializerTests.cs" />
     <Compile Include="Config\CredentialHarvesterTests.cs" />
     <Compile Include="Config\CredentialRecordLoaderTests.cs" />
@@ -121,20 +122,21 @@
     <Compile Include="Config\Serializers\CredentialProviderSerializerTests.cs" />
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialPasswordDecryptorDecoratorTests.cs" />
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialPasswordEncryptorDecoratorTests.cs" />
-    <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormatTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsDeserializerMremotengFormatTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsSerializerMremotengFormatTests.cs" />
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializerTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializerTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManager27DeserializerTests.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentCompilerTests.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentEncryptorTests.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsSerializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDocumentCompilerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDocumentEncryptorTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsSerializerTests.cs" />
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialRecordDeserializerTests.cs" />
     <Compile Include="Config\Serializers\CredentialSerializers\XmlCredentialSerializerTests.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializerTests.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlRootNodeSerializerTests.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion22To23UpgraderTests.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion23To24UpgraderTests.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion24To25UpgraderTests.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Connection\ConnectionInfoComparerTests.cs" />
     <Compile Include="Connection\Protocol\IntegratedProgramTests.cs" />
     <Compile Include="Connection\Protocol\ProtocolListTests.cs" />
+    <Compile Include="Container\RootNodeInfoTests.cs" />
     <Compile Include="Credential\CompositeRepositoryUnlockerTests.cs" />
     <Compile Include="Credential\CredentialChangedEventArgsTests.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmerTests.cs" />
@@ -167,12 +170,15 @@
     <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
     <Compile Include="Security\RandomGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
+    <Compile Include="TestHelpers\ConnectionInfoHelpers.cs" />
     <Compile Include="TestHelpers\ConnectionTreeModelBuilder.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="TestHelpers\FileTestHelpers.cs" />
+    <Compile Include="TestHelpers\SerializableConnectionInfoAllPropertiesOfType.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />
-    <Compile Include="Tools\MaybeTests.cs" />
+    <Compile Include="Tools\OptionalTests.cs" />
+    <Compile Include="Tools\Registry\WindowsRegistryTests.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
@@ -202,6 +208,7 @@
     <Compile Include="Tree\RootNodeInfoTests.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
+    <Compile Include="UI\Controls\ConnectionTreeTests.cs" />
     <Compile Include="UI\Controls\PageSequenceTests.cs" />
     <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
       <SubType>Form</SubType>
@@ -226,6 +233,10 @@
     <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
     <Compile Include="UI\Forms\PasswordFormTests.cs" />
     <Compile Include="UI\WindowListTests.cs" />
+    <Compile Include="UI\Window\ConfigWindowTests\ConfigWindowGeneralTests.cs" />
+    <Compile Include="UI\Window\ConfigWindowTests\ConfigWindowRdpSpecialTests.cs" />
+    <Compile Include="UI\Window\ConfigWindowTests\ConfigWindowSpecialTestsBase.cs" />
+    <Compile Include="UI\Window\ConfigWindowTests\ConfigWindowVncSpecialTests.cs" />
     <Compile Include="UI\Window\ConnectionTreeWindowTests.cs" />
   </ItemGroup>
   <ItemGroup>

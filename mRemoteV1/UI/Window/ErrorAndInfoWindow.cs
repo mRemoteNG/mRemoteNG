@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Collections;
+using System.Globalization;
 using System.Windows.Forms;
 using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
@@ -14,7 +15,7 @@ namespace mRemoteNG.UI.Window
 	public partial class ErrorAndInfoWindow : BaseWindow
 	{
         private ControlLayout _layout = ControlLayout.Vertical;
-        private ThemeManager _themeManager;
+        private readonly ThemeManager _themeManager;
 
         public DockContent PreviousActiveForm { get; set; }
 
@@ -53,11 +54,9 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
         private new void  ApplyTheme()
         {
-            if(_themeManager.ThemingActive)
-            {
-                lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            }
+            if (!_themeManager.ThemingActive) return;
+            lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
         }
 
 
@@ -224,7 +223,7 @@ namespace mRemoteNG.UI.Window
                         break;
 				}
 						
-				lblMsgDate.Text = eMsg.Date.ToString();
+				lblMsgDate.Text = eMsg.Date.ToString(CultureInfo.InvariantCulture);
 				txtMsgText.Text = eMsg.Text;
 			}
 			catch (Exception ex)
@@ -291,7 +290,7 @@ namespace mRemoteNG.UI.Window
 					}
 							
 					stringBuilder.AppendLine(message.Class.ToString());
-					stringBuilder.AppendLine(message.Date.ToString());
+					stringBuilder.AppendLine(message.Date.ToString(CultureInfo.InvariantCulture));
 					stringBuilder.AppendLine(message.Text);
 					stringBuilder.AppendLine("----------");
 				}
@@ -339,8 +338,8 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-				
-		public enum ControlLayout
+
+	    private enum ControlLayout
 		{
 			Vertical = 0,
 			Horizontal = 1

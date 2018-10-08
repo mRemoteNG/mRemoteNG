@@ -28,13 +28,13 @@ namespace mRemoteNG.UI.Forms.Input
             textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
             textBox.SetBounds(12, 36, 372, 20);
 
-            buttonOk.Text = "OK";
+            buttonOk.Text = Language.strButtonOK;
             buttonOk.DialogResult = DialogResult.OK;
             buttonOk.FlatStyle = FlatStyle.Flat;
             buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonOk.SetBounds(228, 72, 75, 23);
 
-            buttonCancel.Text = "Cancel";
+            buttonCancel.Text = Language.strButtonCancel;
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.FlatStyle = FlatStyle.Flat;
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;

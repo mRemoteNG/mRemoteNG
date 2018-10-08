@@ -4,8 +4,6 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
-using mRemoteNG.Config.Connections.Multiuser;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -20,7 +18,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.App
 {
-	public static class Runtime
+    public static class Runtime
     {
         public static bool IsPortableEdition
         {
@@ -79,12 +77,6 @@ namespace mRemoteNG.App
                     {
                         connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                     }
-
-                    var backupFileCreator = new FileBackupCreator();
-                    backupFileCreator.CreateBackupFile(connectionFileName);
-
-                    var backupPruner = new FileBackupPruner();
-                    backupPruner.PruneBackupFiles(connectionFileName);
                 }
 
                 ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
@@ -92,18 +84,6 @@ namespace mRemoteNG.App
                 if (Settings.Default.UseSQLServer)
                 {
                     ConnectionsService.LastSqlUpdate = DateTime.Now;
-                }
-                else
-                {
-                    if (connectionFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = false;
-                    }
-                    else
-                    {
-                        Settings.Default.LoadConsFromCustomLocation = true;
-                        Settings.Default.CustomConsPath = connectionFileName;
-                    }
                 }
 
                 // re-enable sql update checking after updates are loaded
@@ -147,7 +127,14 @@ namespace mRemoteNG.App
                     {
                         try
                         {
-                            CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName, Language.ConfigurationFileNotFound, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+                            CTaskDialog.ShowTaskDialogBox(
+                                GeneralAppInfo.ProductName, 
+                                Language.ConnectionFileNotFound, 
+                                "", "", "", "", "", 
+                                string.Join(" | ", commandButtons), 
+                                ETaskDialogButtons.None, 
+                                ESysIcons.Question, 
+                                ESysIcons.Question);
 
                             switch (CTaskDialog.CommandButtonResult)
                             {

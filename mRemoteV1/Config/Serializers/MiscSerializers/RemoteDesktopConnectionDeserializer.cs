@@ -24,8 +24,8 @@ namespace mRemoteNG.Config.Serializers
                     continue;
                 }
 
-                var key = parts[0];
-                var value = parts[2];
+                var key = parts[0].Trim();
+                var value = parts[2].Trim();
 
                 SetConnectionInfoParameter(connectionInfo, key, value);
             }
@@ -107,6 +107,9 @@ namespace mRemoteNG.Config.Serializers
                     break;
                 case "redirectprinters":
                     connectionInfo.RedirectPrinters = value == "1";
+                    break;
+                case "redirectclipboard":
+                    connectionInfo.RedirectClipboard = value == "1";
                     break;
                 case "audiomode":
                     switch (value)

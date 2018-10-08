@@ -3,6 +3,7 @@ using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
@@ -31,7 +32,7 @@ namespace mRemoteNG.Config.Connections
             try
             {
                 var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-                var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
+                var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                     cryptographyProvider,
                     connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                     _saveFilter);

@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
@@ -9,10 +10,14 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Connection
 {
-    public class AbstractConnectionInfoDataTests
+	public class AbstractConnectionInfoDataTests
     {
 #pragma warning disable 618
-        private class TestAbstractConnectionInfoData : AbstractConnectionRecord {}
+        private class TestAbstractConnectionInfoData : AbstractConnectionRecord {
+	        public TestAbstractConnectionInfoData() : base(Guid.NewGuid().ToString())
+	        {
+	        }
+        }
 #pragma warning restore 618
         private TestAbstractConnectionInfoData _testAbstractConnectionInfoData;
 

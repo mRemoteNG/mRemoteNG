@@ -9,7 +9,7 @@ Write-Host $SolutionDir
 Write-Host $renameTarget
 
 $targetVersionedFile = "$SolutionDir\mRemoteV1\bin\Release\mRemoteNG.exe"
-$version = &"$SolutionDir\Tools\sigcheck.exe" /accepteula -q -n $targetVersionedFile
+$version = &"$SolutionDir\Tools\exes\sigcheck.exe" /accepteula -q -n $targetVersionedFile
 
 
 $renameTargetFileObject = Get-Item -Path $renameTarget -ErrorAction SilentlyContinue
