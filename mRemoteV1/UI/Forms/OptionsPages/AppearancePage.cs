@@ -5,17 +5,17 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class AppearancePage
+    public sealed partial class AppearancePage
     {
         public AppearancePage()
         {
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         public override string PageName
         {
-            get { return Language.strTabAppearance; }
+            get => Language.strTabAppearance;
             set { }
         }
 

@@ -34,7 +34,7 @@ namespace mRemoteNG.Tools
 			}
 		}
 		
-		public static SecureString PasswordDialog(string passwordName = null, bool verify = true)
+		public static Optional<SecureString> PasswordDialog(string passwordName = null, bool verify = true)
 		{
 			var passwordForm = new PasswordForm(passwordName, verify);
 		    return passwordForm.GetKey();
@@ -68,13 +68,6 @@ namespace mRemoteNG.Tools
 		{
 			return Text.Replace("\'", "\'\'");
 		}
-		
-
-		public static object StringToEnum(Type t, string value)
-		{
-			return Enum.Parse(t, value);
-		}
-
 
         public static string GetExceptionMessageRecursive(Exception ex)
         {

@@ -13,6 +13,9 @@ namespace mRemoteNG.UI.Controls.Base
     {
         private ThemeManager _themeManager ;
 
+        /// <summary>
+        /// Store the mouse state, required for coloring the component according to the mouse state
+        /// </summary>
         public enum MouseState
         {
             HOVER,
@@ -27,10 +30,12 @@ namespace mRemoteNG.UI.Controls.Base
 
         public MouseState _mice { get; set; }
 
+        /// <summary>
+        /// Rewrite the function to allow for coloring the component depending on the mouse state
+        /// </summary>
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            base.OnCreateControl(); 
             _themeManager = ThemeManager.getInstance();
             if (_themeManager.ThemingActive)
             {
@@ -63,9 +68,14 @@ namespace mRemoteNG.UI.Controls.Base
             } 
         }
 
+
+        /// <summary>
+        /// Repaint the componente, the elements considered are the clipping rectangle, text and an icon
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
+            if (!_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;

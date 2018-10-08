@@ -29,25 +29,26 @@ namespace mRemoteNG.UI.Forms
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            this.cbPanels = new Controls.Base.NGComboBox();
-            this.btnOK = new Controls.Base.NGButton();
-            this.lblDescription = new Controls.Base.NGLabel();
-            this.btnNew = new Controls.Base.NGButton();
-            this.btnCancel = new Controls.Base.NGButton();
+            this.cbPanels = new mRemoteNG.UI.Controls.Base.NGComboBox();
+            this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.lblDescription = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.btnNew = new mRemoteNG.UI.Controls.Base.NGButton();
             this.SuspendLayout();
             // 
             // cbPanels
             // 
+            this.cbPanels._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
             this.cbPanels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPanels.FormattingEnabled = true;
-            this.cbPanels.Location = new System.Drawing.Point(79, 42);
+            this.cbPanels.Location = new System.Drawing.Point(12, 42);
             this.cbPanels.Name = "cbPanels";
-            this.cbPanels.Size = new System.Drawing.Size(157, 21);
+            this.cbPanels.Size = new System.Drawing.Size(224, 21);
             this.cbPanels.TabIndex = 10;
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(92, 73);
+            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnOK.Location = new System.Drawing.Point(167, 72);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(69, 23);
             this.btnOK.TabIndex = 20;
@@ -66,9 +67,10 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnNew
             // 
+            this.btnNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnNew.Image = global::mRemoteNG.Resources.Panel_Add;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(10, 38);
+            this.btnNew.Location = new System.Drawing.Point(101, 70);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(60, 27);
             this.btnNew.TabIndex = 40;
@@ -77,27 +79,14 @@ namespace mRemoteNG.UI.Forms
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(167, 73);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(69, 23);
-            this.btnCancel.TabIndex = 30;
-            this.btnCancel.Text = global::mRemoteNG.Language.strButtonCancel;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // frmChoosePanel
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(245, 107);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.btnNew);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.cbPanels);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -116,6 +105,5 @@ namespace mRemoteNG.UI.Forms
 		internal Controls.Base.NGButton btnOK;
 		internal Controls.Base.NGLabel lblDescription;
 		internal Controls.Base.NGButton btnNew;
-		internal Controls.Base.NGButton btnCancel;
 	}
 }

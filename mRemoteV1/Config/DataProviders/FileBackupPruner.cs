@@ -1,26 +1,29 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Linq;
 
 namespace mRemoteNG.Config.DataProviders
 {
     public class FileBackupPruner
     {
-        public void PruneBackupFiles(string baseName)
+        public void PruneBackupFiles(string filePath, int maxBackupsToKeep)
         {
-            var fileName = Path.GetFileName(baseName);
-            var directoryName = Path.GetDirectoryName(baseName);
+            var fileName = Path.GetFileName(filePath);
+            var directoryName = Path.GetDirectoryName(filePath);
 
-            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName)) return;
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName))
+                return;
 
             var searchPattern = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, "*");
             var files = Directory.GetFiles(directoryName, searchPattern);
 
-            if (files.Length <= mRemoteNG.Settings.Default.BackupFileKeepCount) return;
+            if (files.Length <= maxBackupsToKeep)
+                return;
 
-            Array.Sort(files);
-            Array.Resize(ref files, files.Length - mRemoteNG.Settings.Default.BackupFileKeepCount);
+            var filesToDelete = files
+                .OrderByDescending(s => s)
+                .Skip(maxBackupsToKeep);
 
-            foreach (var file in files)
+            foreach (var file in filesToDelete)
             {
                 File.Delete(file);
             }

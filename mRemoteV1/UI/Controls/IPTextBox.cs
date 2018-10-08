@@ -29,9 +29,8 @@ namespace mRemoteNG.UI.Controls
 		/** Sets and Gets the tooltiptext on toolTip1 */
 		public string ToolTipText
 		{
-			get
-			{	return toolTip1.GetToolTip(Octet1); }
-			set
+			get => toolTip1.GetToolTip(Octet1);
+		    set
 			{
 				toolTip1.SetToolTip(Octet1,value);
 				toolTip1.SetToolTip(Octet2,value);
@@ -46,12 +45,8 @@ namespace mRemoteNG.UI.Controls
 		/** Set or Get the string that represents the value in the box */
 		public override string Text
 		{
-			get 
-			{
-				return Octet1.Text + @"." + Octet2.Text + @"." + Octet3.Text + @"." + Octet4.Text;
-                
-			}
-			set
+			get => Octet1.Text + @"." + Octet2.Text + @"." + Octet3.Text + @"." + Octet4.Text;
+		    set
 			{
 				if (!string.IsNullOrEmpty(value))
 				{
@@ -85,8 +80,7 @@ namespace mRemoteNG.UI.Controls
         }
 
         private void ApplyTheme()
-        {
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+        { 
             if (Themes.ThemeManager.getInstance().ThemingActive)
                 panel1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
         }
@@ -246,7 +240,7 @@ namespace mRemoteNG.UI.Controls
 				if(theValue >=0 && theValue <= 255)
 					return true;
 
-                MessageBox.Show("Must Be Between 0 and 255","Out Of Range");
+                MessageBox.Show(Language.strIPRange,Language.strOutOfRange);
 				return false;
 			}
 			catch

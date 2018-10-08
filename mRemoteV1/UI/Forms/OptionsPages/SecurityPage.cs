@@ -4,20 +4,20 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class SecurityPage : OptionsPage
+    public sealed partial class SecurityPage : OptionsPage
     {
         public SecurityPage()
         {
             InitializeComponent();
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         [Browsable(false)]
         public override string PageName
         {
-            get { return Language.strTabSecurity; }
+            get => Language.strTabSecurity;
             set { }
         }
 
@@ -28,6 +28,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             labelBlockCipher.Text = Language.strEncryptionBlockCipherMode;
             labelEncryptionEngine.Text = Language.strEncryptionEngine;
             labelKdfIterations.Text = Language.strEncryptionKeyDerivationIterations;
+            groupAdvancedSecurityOptions.Text = Language.strAdvancedSecurityOptions;
         }
 
         public override void LoadSettings()

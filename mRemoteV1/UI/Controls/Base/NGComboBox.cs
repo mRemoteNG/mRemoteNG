@@ -24,8 +24,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            base.OnCreateControl(); 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             _themeManager = ThemeManager.getInstance();
@@ -74,7 +73,7 @@ namespace mRemoteNG.UI.Controls.Base
             else
                 e.Graphics.FillRectangle(new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")), e.Bounds);
 
-            if(DisplayMember == null || DisplayMember == "")
+            if(string.IsNullOrEmpty(DisplayMember))
                 e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
             else
             {
@@ -89,7 +88,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnPaint(PaintEventArgs e)
         {
 
-            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
+            if ( !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;
@@ -130,7 +129,7 @@ namespace mRemoteNG.UI.Controls.Base
             }
 
             //Arrow
-            e.Graphics.DrawString("q", new Font("Wingdings 3", 8f), new SolidBrush(ButtFore), Width-17, Height/2 -5);
+            e.Graphics.DrawString("\u25BC", Font, new SolidBrush(ButtFore), Width-17, Height/2 -5);
  
             //Text
             var textRect = new Rectangle(2, 2, Width - 20, Height - 4);

@@ -8,10 +8,12 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI;
 
 namespace mRemoteNG.Connection
 {
@@ -19,6 +21,9 @@ namespace mRemoteNG.Connection
     {
         private static readonly object SaveLock = new object();
         private readonly PuttySessionsManager _puttySessionsManager;
+        private bool _batchingSaves = false;
+        private bool _saveRequested = false;
+        private bool _saveAsyncRequested = false;
 
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
@@ -27,11 +32,6 @@ namespace mRemoteNG.Connection
         public DateTime LastSqlUpdate { get; set; }
 
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
-        //public ConnectionTreeModel ConnectionTreeModel
-        //{
-        //    get { return Windows.TreeForm.ConnectionTree.ConnectionTreeModel; }
-        //    set { Windows.TreeForm.ConnectionTree.ConnectionTreeModel = value; }
-        //}
 
         public ConnectionsService(PuttySessionsManager puttySessionsManager)
         {
@@ -45,11 +45,11 @@ namespace mRemoteNG.Connection
         {
             try
             {
+                filename.ThrowIfNullOrEmpty(nameof(filename));
                 var newConnectionsModel = new ConnectionTreeModel();
                 newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
-                SaveConnections(newConnectionsModel, false, new SaveFilter(), filename);
+                SaveConnections(newConnectionsModel, false, new SaveFilter(), filename, true);
                 LoadConnections(false, false, filename);
-                UpdateCustomConsPathSetting(filename);
             }
             catch (Exception ex)
             {
@@ -79,6 +79,10 @@ namespace mRemoteNG.Connection
                 {
                     newConnectionInfo.Port = uri.Port;
                 }
+
+                if (string.IsNullOrEmpty(newConnectionInfo.Panel))
+                    newConnectionInfo.Panel = Language.strGeneral;
+
                 newConnectionInfo.IsQuickConnect = true;
 
                 return newConnectionInfo;
@@ -97,16 +101,24 @@ namespace mRemoteNG.Connection
         /// <param name="useDatabase"></param>
         /// <param name="import"></param>
         /// <param name="connectionFileName"></param>
-        public ConnectionTreeModel LoadConnections(bool useDatabase, bool import, string connectionFileName)
+        public void LoadConnections(bool useDatabase, bool import, string connectionFileName)
         {
             var oldConnectionTreeModel = ConnectionTreeModel;
             var oldIsUsingDatabaseValue = UsingDatabase;
 
-            var newConnectionTreeModel =
-                (useDatabase
-                    ? new SqlConnectionsLoader().Load()
-                    : new XmlConnectionsLoader(connectionFileName).Load())
-                ?? new ConnectionTreeModel();
+            var newConnectionTreeModel = useDatabase
+                ? new SqlConnectionsLoader().Load()
+                : new XmlConnectionsLoader(connectionFileName).Load();
+
+            if (newConnectionTreeModel == null)
+            {
+                DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed", IsConnectionsFileLoaded);
+                return;
+            }
+
+            IsConnectionsFileLoaded = true;
+            ConnectionFileName = connectionFileName;
+            UsingDatabase = useDatabase;
 
             if (!import)
             {
@@ -114,12 +126,35 @@ namespace mRemoteNG.Connection
                 newConnectionTreeModel.RootNodes.AddRange(_puttySessionsManager.RootPuttySessionsNodes);
             }
 
-            IsConnectionsFileLoaded = true;
-            ConnectionFileName = connectionFileName;
-            UsingDatabase = useDatabase;
             ConnectionTreeModel = newConnectionTreeModel;
+            UpdateCustomConsPathSetting(connectionFileName);
             RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
-            return newConnectionTreeModel;
+        }
+
+        /// <summary>
+        /// When turned on, calls to <see cref="SaveConnections()"/> or
+        /// <see cref="SaveConnectionsAsync"/> will not immediately execute.
+        /// Instead, they will be deferred until <see cref="EndBatchingSaves"/>
+        /// is called.
+        /// </summary>
+        public void BeginBatchingSaves()
+        {
+            _batchingSaves = true;
+        }
+
+        /// <summary>
+        /// Immediately executes a single <see cref="SaveConnections()"/> or
+        /// <see cref="SaveConnectionsAsync"/> if one has been requested
+        /// since calling <see cref="BeginBatchingSaves"/>.
+        /// </summary>
+        public void EndBatchingSaves()
+        {
+            _batchingSaves = false;
+
+            if (_saveAsyncRequested)
+                SaveConnectionsAsync();
+            else if(_saveRequested)
+                SaveConnections();
         }
 
         /// <summary>
@@ -128,8 +163,6 @@ namespace mRemoteNG.Connection
         /// </summary>
         public void SaveConnections()
         {
-            if (!IsConnectionsFileLoaded)
-                return;
             SaveConnections(ConnectionTreeModel, UsingDatabase, new SaveFilter(), ConnectionFileName);
         }
 
@@ -141,12 +174,24 @@ namespace mRemoteNG.Connection
         /// <param name="useDatabase"></param>
         /// <param name="saveFilter"></param>
         /// <param name="connectionFileName"></param>
-        public void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName)
+        /// <param name="forceSave">Bypasses safety checks that prevent saving if a connection file isn't loaded.</param>
+        public void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName, bool forceSave = false)
         {
-            if (connectionTreeModel == null) return;
+            if (connectionTreeModel == null)
+                return;
+
+            if (!forceSave && !IsConnectionsFileLoaded)
+                return;
+
+            if (_batchingSaves)
+            {
+                _saveRequested = true;
+                return;
+            }
 
             try
             {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Saving connections...");
                 RemoteConnectionsSyncronizer?.Disable();
 
                 var previouslyUsingDatabase = UsingDatabase;
@@ -161,6 +206,7 @@ namespace mRemoteNG.Connection
                 UsingDatabase = useDatabase;
                 ConnectionFileName = connectionFileName;
                 RaiseConnectionsSavedEvent(connectionTreeModel, previouslyUsingDatabase, UsingDatabase, connectionFileName);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Successfully saved connections");
             }
             catch (Exception ex)
             {
@@ -174,6 +220,12 @@ namespace mRemoteNG.Connection
 
         public void SaveConnectionsAsync()
         {
+            if (_batchingSaves)
+            {
+                _saveAsyncRequested = true;
+                return;
+            }
+
             var t = new Thread(SaveConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
@@ -181,19 +233,24 @@ namespace mRemoteNG.Connection
 
         private void SaveConnectionsBGd()
         {
-            Monitor.Enter(SaveLock);
-            SaveConnections();
-            Monitor.Exit(SaveLock);
+            lock (SaveLock)
+            {
+                SaveConnections();
+            }
         }
 
         public string GetStartupConnectionFileName()
         {
-            return Settings.Default.LoadConsFromCustomLocation == false ? GetDefaultStartupConnectionFileName() : Settings.Default.CustomConsPath;
+            return Settings.Default.LoadConsFromCustomLocation == false 
+                ? GetDefaultStartupConnectionFileName() 
+                : Settings.Default.CustomConsPath;
         }
 
         public string GetDefaultStartupConnectionFileName()
         {
-            return Runtime.IsPortableEdition ? GetDefaultStartupConnectionFileNamePortableEdition() : GetDefaultStartupConnectionFileNameNormalEdition();
+            return Runtime.IsPortableEdition 
+                ? GetDefaultStartupConnectionFileNamePortableEdition() 
+                : GetDefaultStartupConnectionFileNameNormalEdition();
         }
 
         private void UpdateCustomConsPathSetting(string filename)
@@ -227,7 +284,7 @@ namespace mRemoteNG.Connection
         public event EventHandler<ConnectionsLoadedEventArgs> ConnectionsLoaded;
         public event EventHandler<ConnectionsSavedEventArgs> ConnectionsSaved;
 
-        private void RaiseConnectionsLoadedEvent(Maybe<ConnectionTreeModel> previousTreeModel, ConnectionTreeModel newTreeModel,
+        private void RaiseConnectionsLoadedEvent(Optional<ConnectionTreeModel> previousTreeModel, ConnectionTreeModel newTreeModel,
             bool previousSourceWasDatabase, bool newSourceIsDatabase,
             string newSourcePath)
         {

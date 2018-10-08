@@ -28,22 +28,6 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
-        public void CreatingConnectionInfoWithParentSetsTheParentProperty()
-        {
-            var container = new ContainerInfo();
-            var connectionInfo = new ConnectionInfo(container);
-            Assert.That(connectionInfo.Parent, Is.EqualTo(container));
-        }
-
-        [Test]
-        public void CreatingConnectionInfoWithParentAddsToTheParentsChildList()
-        {
-            var container = new ContainerInfo();
-            var connectionInfo = new ConnectionInfo(container);
-            Assert.That(container.Children, Does.Contain(connectionInfo));
-        }
-
-        [Test]
         public void CopyCreatesMemberwiseCopy()
         {
             _connectionInfo.Domain = TestDomain;
@@ -57,6 +41,20 @@ namespace mRemoteNGTests.Connection
             _connectionInfo.SetParent(new ContainerInfo());
             var clonedConnection = _connectionInfo.Clone();
             Assert.That(clonedConnection.Parent, Is.Null);
+        }
+
+        [Test]
+        public void CloneAlsoCopiesInheritanceObject()
+        {
+            var clonedConnection = _connectionInfo.Clone();
+            Assert.That(clonedConnection.Inheritance, Is.Not.EqualTo(_connectionInfo.Inheritance));
+        }
+
+        [Test]
+        public void CloneCorrectlySetsParentOfInheritanceObject()
+        {
+            var clonedConnection = _connectionInfo.Clone();
+            Assert.That(clonedConnection.Inheritance.Parent, Is.EqualTo(clonedConnection));
         }
 
         [Test]

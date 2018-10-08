@@ -3,7 +3,7 @@
       License for use and distribution
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      Copyright (C) 1999-2016 Igor Pavlov.
+      Copyright (C) 1999-2018 Igor Pavlov.
 
       7-Zip Extra files are under the GNU LGPL license.
 

@@ -91,6 +91,7 @@ namespace mRemoteNG.Config.Serializers
             dataTable.Columns.Add("RedirectDiskDrives", typeof(bool));
             dataTable.Columns.Add("RedirectPorts", typeof(bool));
             dataTable.Columns.Add("RedirectPrinters", typeof(bool));
+            dataTable.Columns.Add("RedirectClipboard", typeof(bool));
             dataTable.Columns.Add("RedirectSmartCards", typeof(bool));
             dataTable.Columns.Add("RedirectSound", typeof(string));
             dataTable.Columns.Add("RedirectKeys", typeof(bool));
@@ -135,6 +136,7 @@ namespace mRemoteNG.Config.Serializers
             dataTable.Columns.Add("InheritRedirectKeys", typeof(bool));
             dataTable.Columns.Add("InheritRedirectPorts", typeof(bool));
             dataTable.Columns.Add("InheritRedirectPrinters", typeof(bool));
+            dataTable.Columns.Add("InheritRedirectClipboard", typeof(bool));
             dataTable.Columns.Add("InheritRedirectSmartCards", typeof(bool));
             dataTable.Columns.Add("InheritRedirectSound", typeof(bool));
             dataTable.Columns.Add("InheritResolution", typeof(bool));
@@ -235,6 +237,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RedirectDiskDrives"] = connectionInfo.RedirectDiskDrives;
             dataRow["RedirectPorts"] = connectionInfo.RedirectPorts;
             dataRow["RedirectPrinters"] = connectionInfo.RedirectPrinters;
+            dataRow["RedirectClipboard"] = connectionInfo.RedirectClipboard;
             dataRow["RedirectSmartCards"] = connectionInfo.RedirectSmartCards;
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
@@ -282,6 +285,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritRedirectKeys"] = connectionInfo.Inheritance.RedirectKeys;
                 dataRow["InheritRedirectPorts"] = connectionInfo.Inheritance.RedirectPorts;
                 dataRow["InheritRedirectPrinters"] = connectionInfo.Inheritance.RedirectPrinters;
+                dataRow["InheritRedirectClipboard"] = connectionInfo.Inheritance.RedirectClipboard;
                 dataRow["InheritRedirectSmartCards"] = connectionInfo.Inheritance.RedirectSmartCards;
                 dataRow["InheritRedirectSound"] = connectionInfo.Inheritance.RedirectSound;
                 dataRow["InheritSoundQuality"] = connectionInfo.Inheritance.SoundQuality;
@@ -339,6 +343,7 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritRedirectKeys"] = false;
                 dataRow["InheritRedirectPorts"] = false;
                 dataRow["InheritRedirectPrinters"] = false;
+                dataRow["InheritRedirectClipboard"] = false;
                 dataRow["InheritRedirectSmartCards"] = false;
                 dataRow["InheritRedirectSound"] = false;
                 dataRow["InheritSoundQuality"] = false;

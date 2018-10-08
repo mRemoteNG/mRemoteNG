@@ -1,9 +1,7 @@
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Linq;
-using System.Drawing;
 using System.Collections.Generic;
 using BrightIdeasSoftware;
 
@@ -24,18 +22,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
 
             InitializeComponent();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
-            {
-                _themeManager = ThemeManager.getInstance();
-                _themeManager.ThemeChanged += ApplyTheme;
-                _oriTheme = _themeManager.ActiveTheme;
-                _oriActiveTheming = _themeManager.ThemingActive;
-            }
+            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive) return;
+            _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ApplyTheme;
+            _oriTheme = _themeManager.ActiveTheme;
+            _oriActiveTheming = _themeManager.ThemingActive;
         }
 
         public override string PageName
         {
-            get { return Language.strOptionsTabTheme; }
+            get => Language.strOptionsTabTheme;
             set { }
         }
 
@@ -51,12 +48,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private new void ApplyTheme()
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this))
+            if (!_themeManager.ThemingActive)
                 return;
-            if (Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                base.ApplyTheme();
-            }
+            base.ApplyTheme(); 
         }
 
         public override void LoadSettings()
@@ -67,6 +61,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnThemeDelete.Enabled = false;
             //Load the list of themes
             cboTheme.Items.Clear();
+            // ReSharper disable once CoVariantArrayConversion
             cboTheme.Items.AddRange(_themeManager.LoadThemes().OrderBy(x => x.Name).ToArray());
             cboTheme.SelectedItem = _themeManager.ActiveTheme;
             cboTheme_SelectionChangeCommitted(this, new EventArgs());
@@ -82,23 +77,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 themeEnableCombo.Checked = false;
                 cboTheme.Enabled = false;
+                // reset to the default theme when disabling theme support
+                _themeManager.ActiveTheme = _themeManager.DefaultTheme;
             }
         }
 
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
         {
-            if (e.ColumnIndex == this.ColorCol.Index)
-            {
-                PseudoKeyColor colorElem = (PseudoKeyColor)e.Model;
-                e.SubItem.BackColor = colorElem.Value;
-            }
+            if (e.ColumnIndex != ColorCol.Index) return;
+            var colorElem = (PseudoKeyColor)e.Model;
+            e.SubItem.BackColor = colorElem.Value;
         }
 
 
         public override void SaveSettings()
         {
             base.SaveSettings();
-            foreach(ThemeInfo updatedTheme in modifiedThemes)
+            foreach(var updatedTheme in modifiedThemes)
             {
                 _themeManager.updateTheme(updatedTheme);
             }
@@ -122,26 +117,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             btnThemeNew.Enabled = false;
             btnThemeDelete.Enabled = false;
-            if (_themeManager.ThemingActive) 
-            {
-                _themeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
-                listPalette.ClearObjects();
-                if (_themeManager.ActiveTheme.IsExtendable && _themeManager.ThemingActive)
-                {
-                    btnThemeNew.Enabled = true;
-                    listPalette.ClearObjects();
-                    listPalette.Enabled = false;
-                    ColorMeList();
-                    if (!_themeManager.ActiveTheme.IsThemeBase)
-                    {
-                        listPalette.Enabled = true;
-                        btnThemeDelete.Enabled = true;
-                        listPalette.CellClick += ListPalette_CellClick;
-
-                    }
-                } 
-            }
-          
+            if (!_themeManager.ThemingActive) return;
+            _themeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
+            listPalette.ClearObjects();
+            if (!_themeManager.ActiveTheme.IsExtendable || !_themeManager.ThemingActive) return;
+            btnThemeNew.Enabled = true;
+            listPalette.ClearObjects();
+            listPalette.Enabled = false;
+            ColorMeList();
+            if (_themeManager.ActiveTheme.IsThemeBase) return;
+            listPalette.Enabled = true;
+            btnThemeDelete.Enabled = true;
+            listPalette.CellClick += ListPalette_CellClick;
         }
 
 
@@ -155,63 +142,59 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void ListPalette_CellClick(object sender, CellClickEventArgs e)
         {
 
-            PseudoKeyColor colorElem = (PseudoKeyColor)e.Model;
+            var colorElem = (PseudoKeyColor)e.Model;
 
-            ColorDialog colorDlg = new ColorDialog();
-            colorDlg.AllowFullOpen = true;
-            colorDlg.FullOpen = true;
-            colorDlg.AnyColor = true;
-            colorDlg.SolidColorOnly = false;
-            colorDlg.Color = colorElem.Value;
-
-            if (colorDlg.ShowDialog() == DialogResult.OK)
+            var colorDlg = new ColorDialog
             {
-                modifiedThemes.Add(_themeManager.ActiveTheme);
-                _themeManager.ActiveTheme.ExtendedPalette.replaceColor(colorElem.Key, colorDlg.Color);
-                colorElem.Value = colorDlg.Color;
-                listPalette.RefreshObject(e.Model);
-                _themeManager.refreshUI();
-            }
+                AllowFullOpen = true,
+                FullOpen = true,
+                AnyColor = true,
+                SolidColorOnly = false,
+                Color = colorElem.Value
+            };
+
+            if (colorDlg.ShowDialog() != DialogResult.OK) return;
+            modifiedThemes.Add(_themeManager.ActiveTheme);
+            _themeManager.ActiveTheme.ExtendedPalette.replaceColor(colorElem.Key, colorDlg.Color);
+            colorElem.Value = colorDlg.Color;
+            listPalette.RefreshObject(e.Model);
+            _themeManager.refreshUI();
 
         }
 
         private void ColorMeList()
         {
-            foreach (KeyValuePair<string, Color> colorElem in _themeManager.ActiveTheme.ExtendedPalette.ExtColorPalette)
+            foreach (var colorElem in _themeManager.ActiveTheme.ExtendedPalette.ExtColorPalette)
                 listPalette.AddObject(new PseudoKeyColor(colorElem.Key, colorElem.Value));
         }
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            String name = _themeManager.ActiveTheme.Name;
-            DialogResult res = Input.input.InputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name);
-            if (res == DialogResult.OK)
+            var name = _themeManager.ActiveTheme.Name;
+            var res = Input.input.InputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name);
+            if (res != DialogResult.OK) return;
+            if (_themeManager.isThemeNameOk(name))
             {
-                if (_themeManager.isThemeNameOk(name))
-                {
-                    ThemeInfo addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, name);
-                    _themeManager.ActiveTheme = addedTheme;
-                    LoadSettings();
-                }
-                else
-                {
-                    TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
-                }
+                var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, name);
+                _themeManager.ActiveTheme = addedTheme;
+                LoadSettings();
+            }
+            else
+            {
+                TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
             }
         }
 
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
 
-            DialogResult res = TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings , Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.YesNo, TaskDialog.ESysIcons.Question, TaskDialog.ESysIcons.Information, 0);
+            var res = TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings , Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.YesNo, TaskDialog.ESysIcons.Question, TaskDialog.ESysIcons.Information, 0);
 
-            if (res == DialogResult.Yes)
-            {
-                if (modifiedThemes.Contains(_themeManager.ActiveTheme))
-                    modifiedThemes.Remove(_themeManager.ActiveTheme);
-                _themeManager.deleteTheme(_themeManager.ActiveTheme);
-                LoadSettings();
-            }
+            if (res != DialogResult.Yes) return;
+            if (modifiedThemes.Contains(_themeManager.ActiveTheme))
+                modifiedThemes.Remove(_themeManager.ActiveTheme);
+            _themeManager.deleteTheme(_themeManager.ActiveTheme);
+            LoadSettings();
         }
 
         #endregion

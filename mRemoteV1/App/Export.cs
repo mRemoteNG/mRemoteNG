@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.Csv;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -77,7 +79,7 @@ namespace mRemoteNG.App
 			        case SaveFormat.mRXML:
                         var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
 			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
-                        var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
+                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                             cryptographyProvider, 
                             rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString(),
                             saveFilter);

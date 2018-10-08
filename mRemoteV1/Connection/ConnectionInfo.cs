@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -14,14 +9,17 @@ using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 
 
 namespace mRemoteNG.Connection
 {
-	[DefaultProperty("Name")]
+    [DefaultProperty("Name")]
     public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
     {        
         #region Public Properties
@@ -32,7 +30,7 @@ namespace mRemoteNG.Connection
 	    public ProtocolList OpenConnections { get; protected set; }
 
 	    [Browsable(false)]
-        public bool IsContainer { get; set; }
+        public virtual bool IsContainer { get; set; }
 
 	    [Browsable(false)]
         public bool IsDefault { get; set; }
@@ -52,7 +50,14 @@ namespace mRemoteNG.Connection
 	    #endregion
 
         #region Constructors
-        public ConnectionInfo()
+
+	    public ConnectionInfo()
+			: this(Guid.NewGuid().ToString())
+	    {
+	    }
+
+        public ConnectionInfo(string uniqueId)
+			: base(uniqueId)
 		{
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
@@ -65,12 +70,6 @@ namespace mRemoteNG.Connection
             SetNonBrowsablePropertiesDefaults();
             SetDefaults();
 		}
-			
-		public ConnectionInfo(ContainerInfo parent) : this()
-		{
-			IsContainer = true;
-			parent.AddChild(this);
-		}
         #endregion
 			
         #region Public Methods
@@ -78,9 +77,9 @@ namespace mRemoteNG.Connection
 		{
 		    var newConnectionInfo = new ConnectionInfo();
             newConnectionInfo.CopyFrom(this);
-			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
 		    newConnectionInfo.Inheritance = Inheritance.Clone();
-			return newConnectionInfo;
+            newConnectionInfo.Inheritance.Parent = newConnectionInfo;
+            return newConnectionInfo;
 		}
 
 	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
@@ -128,19 +127,22 @@ namespace mRemoteNG.Connection
             return filteredProperties;
         }
 
+	    public virtual IEnumerable<PropertyInfo> GetSerializableProperties()
+	    {
+			var excludedProperties = new[] { "Parent", "Name", "Hostname", "Port", "Inheritance", "OpenConnections",
+				"IsContainer", "IsDefault", "PositionID", "ConstantID", "TreeNode", "IsQuickConnect", "PleaseConnect" };
+
+		    return GetProperties(excludedProperties);
+	    }
+
 	    public virtual void SetParent(ContainerInfo newParent)
 	    {
             RemoveParent();
 		    newParent?.AddChild(this);
-			if (newParent is RootNodeInfo)
-				Inheritance.DisableInheritance();
 	    }
 
         public void RemoveParent()
         {
-			if (Parent is RootNodeInfo)
-				Inheritance.EnableInheritance();
-
             Parent?.RemoveChild(this);
         }
 
@@ -168,7 +170,14 @@ namespace mRemoteNG.Connection
         #region Private Methods
         protected override TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {
-            return ShouldThisPropertyBeInherited(propertyName) ? GetInheritedPropertyValue<TPropertyType>(propertyName) : value;
+            if (!ShouldThisPropertyBeInherited(propertyName))
+                return value;
+
+            var couldGetInheritedValue = TryGetInheritedPropertyValue<TPropertyType>(propertyName, out var inheritedValue);
+
+            return couldGetInheritedValue
+                ? inheritedValue
+                : value;
         }
 
 	    private bool ShouldThisPropertyBeInherited(string propertyName)
@@ -189,17 +198,24 @@ namespace mRemoteNG.Connection
             return inheritPropertyValue;
         }
 
-        private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName)
+        private bool TryGetInheritedPropertyValue<TPropertyType>(string propertyName, out TPropertyType inheritedValue)
         {
-            var connectionInfoType = Parent.GetType();
-            var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
-            if (parentPropertyInfo == null)
-                return default(TPropertyType); // shouldn't get here...
-            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
+            try
+            {
+                var connectionInfoType = Parent.GetType();
+                var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
+                if (parentPropertyInfo == null)
+                    throw new NullReferenceException($"Could not retrieve property data for property '{propertyName}' on parent node '{Parent?.Name}'");
 
-            return parentPropertyValue;
-
-            
+                inheritedValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace($"Error retrieving inherited property '{propertyName}'", e);
+                inheritedValue = default(TPropertyType);
+                return false;
+            }
         }
 
 		private static int GetDefaultPort(ProtocolType protocol)
@@ -297,15 +313,15 @@ namespace mRemoteNG.Connection
             RedirectKeys = Settings.Default.ConDefaultRedirectKeys;
             RedirectDiskDrives = Settings.Default.ConDefaultRedirectDiskDrives;
             RedirectPrinters = Settings.Default.ConDefaultRedirectPrinters;
+            RedirectClipboard = Settings.Default.ConDefaultRedirectClipboard;
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
-            RedirectSound = (RdpProtocol.RDPSounds) Enum.Parse(typeof(RdpProtocol.RDPSounds), Settings.Default.ConDefaultRedirectSound);
+            RedirectSound = (RdpProtocol.RDPSounds) Enum.Parse(typeof(RdpProtocol.RDPSounds), Settings.Default.ConDefaultRedirectSound);            
             SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()
         {
-            ConstantID = MiscTools.CreateConstantID();
             PreExtApp = Settings.Default.ConDefaultPreExtApp;
             PostExtApp = Settings.Default.ConDefaultPostExtApp;
             MacAddress = Settings.Default.ConDefaultMacAddress;

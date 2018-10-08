@@ -20,10 +20,9 @@ namespace mRemoteNG.Config.Connections
 
         private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
-            
-
             connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged += ConnectionTreeModelOnCollectionChanged;
             connectionsLoadedEventArgs.NewConnectionTreeModel.PropertyChanged += ConnectionTreeModelOnPropertyChanged;
+
             foreach (var oldTree in connectionsLoadedEventArgs.PreviousConnectionTreeModel)
             {
                 oldTree.CollectionChanged -= ConnectionTreeModelOnCollectionChanged;
@@ -45,7 +44,8 @@ namespace mRemoteNG.Config.Connections
         {
             if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
                 return;
-            _connectionsService.SaveConnections();
+
+            _connectionsService.SaveConnectionsAsync();
         }
     }
 }
