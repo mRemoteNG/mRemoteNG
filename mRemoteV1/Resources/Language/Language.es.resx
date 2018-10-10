@@ -372,7 +372,7 @@ Versión de Control {0} de VncSharp</value>
     <value>Esperar a Salir</value>
   </data>
   <data name="strCheckForUpdate" xml:space="preserve">
-    <value>Comporbar de nuevo</value>
+    <value>Comprobar de nuevo</value>
   </data>
   <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
     <value>Comprobar actualizaciones y novedades en el arranque</value>
@@ -444,11 +444,11 @@ Versión de Control {0} de VncSharp</value>
     <value>Error al Cargar la Interfaz de Configuración de Usuario</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Desea cerrar la conexión:
+    <value>¿Desea cerrar la conexión:
 "{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Está seguro de querer cerrar el panel, "{0}"? Cualquier conexión que contenga será también cerrada.</value>
+    <value>¿Está seguro de querer cerrar el panel, "{0}"? Cualquier conexión que contenga el panel también será cerrada.</value>
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
     <value>¿Está seguro de querer borrar la herramienta externa, "{0}"?</value>
@@ -507,7 +507,7 @@ Descripción del Error: {1}</value>
     <value>Conexiones</value>
   </data>
   <data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
-    <value>No se pudo definir el puerto por defecto!</value>
+    <value>¡No se pudo definir el puerto por defecto!</value>
   </data>
   <data name="strConnectionsFileBackupFailed" xml:space="preserve">
     <value>¡No pudo crearse copia de seguridad del archivo de conexiones!</value>
@@ -1658,7 +1658,7 @@ Mensaje:
     <value>Ajustar al panel</value>
   </data>
   <data name="strRdpFocusFailed" xml:space="preserve">
-    <value>!RDP Focus fallido!</value>
+    <value>¡RDP Focus fallido!</value>
   </data>
   <data name="strRdpGatewayIsSupported" xml:space="preserve">
     <value>RD Gateway soportado.</value>
@@ -1700,10 +1700,10 @@ Mensaje:
     <value>¡RDP Asignación de Propiedades fallida!</value>
   </data>
   <data name="strRdpSetRedirectionFailed" xml:space="preserve">
-    <value>¡Rdp Asignación de Redirección fallida!</value>
+    <value>¡RDP Asignación de Redirección fallida!</value>
   </data>
   <data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
-    <value>¡Rdp Asignación de Claves de Redirección fallida!</value>
+    <value>¡RDP Asignación de Claves de Redirección fallida!</value>
   </data>
   <data name="strRdpSetResolutionFailed" xml:space="preserve">
     <value>¡RDP Asignación de Resolución fallida!</value>
@@ -1844,7 +1844,7 @@ Mensaje:
     <value>SSH versión 2</value>
   </data>
   <data name="strSSHStartTransferBG" xml:space="preserve">
-    <value>¡Tranferencia SSH en background fallida!</value>
+    <value>¡Tranferencia SSH en segundo plano fallida!</value>
   </data>
   <data name="strSSHTranferSuccessful" xml:space="preserve">
     <value>¡Transferencia Correcta!</value>
