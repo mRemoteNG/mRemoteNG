@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using mRemoteNG.Connection;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -43,6 +44,8 @@ namespace mRemoteNG.Config.Connections
         private void SaveConnectionOnEdit()
         {
             if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
+                return;
+            if (FrmMain.Default.IsClosing)
                 return;
 
             _connectionsService.SaveConnectionsAsync();
