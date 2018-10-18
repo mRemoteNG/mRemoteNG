@@ -24,6 +24,7 @@ github.com/pfjason
 github.com/sirLoaf
 github.com/Fyers
 Vladimir Semenov (github.com/sli-pro)
+Stephan (github.com/st-schuler)
 
 
 Past Contributors

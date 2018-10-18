@@ -1,3 +1,11 @@
+1.76.11 (2018-10-18):
+
+Fixes:
+------
+#1139: Feature "Reconnect to previously opened sessions" not working
+#1136: Putty window not maximized
+
+
 1.76.10 (2018-10-07):
 
 Fixes:
