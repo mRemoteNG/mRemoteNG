@@ -1472,6 +1472,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
+  <data name="strPropertyDescriptionRedirecClipboard" xml:space="preserve">
+    <value>Select whether clipboard should be shared.</value>
+  </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
@@ -1630,6 +1633,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Printers</value>
+  </data>
+  <data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+    <value>Clipboard</value>
   </data>
   <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
     <value>Smart Cards</value>
@@ -2705,5 +2711,11 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
     <value>Are you sure you want to close all connections to the right of "{0}"?</value>
+  </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>An error occurred while trying to reconnect to RDP host '{0}'</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
   </data>
 </root>
