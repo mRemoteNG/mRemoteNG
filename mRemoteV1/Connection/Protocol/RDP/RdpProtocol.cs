@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using AxMSTSCLib;
@@ -10,6 +12,7 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
+using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using MSTSCLib;
 
@@ -159,8 +162,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetAuthenticationLevel();
 				SetLoadBalanceInfo();
                 SetRdGateway();
-						
-				_rdpClient.ColorDepth = (int)_connectionInfo.Colors;
+
+                // TODO: find out how to set desktop scaling
+                //var propName = "DesktopScaleFactor";
+                //Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"{propName}: {GetExtendedProperty(propName)}");
+                //SetExtendedProperty(propName, new System.Windows.Size());
+
+                _rdpClient.ColorDepth = (int)_connectionInfo.Colors;
 
                 SetPerformanceFlags();
 						
@@ -176,7 +184,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				return false;
 			}
 		}
-				
+
 		public override bool Connect()
 		{
 			_loginComplete = false;
@@ -416,7 +424,36 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpSetConsoleSessionFailed, ex);
 			}
 		}
-				
+
+	    private object GetExtendedProperty(string property)
+	    {
+	        try
+	        {
+	            // ReSharper disable once UseIndexedProperty
+	            return ((IMsRdpExtendedSettings)_rdpClient).get_Property(property);
+	        }
+	        catch (Exception e)
+	        {
+	            Runtime.MessageCollector.AddExceptionMessage($"Error getting extended RDP property '{property}'",
+	                e, MessageClass.WarningMsg, false);
+	            return null;
+	        }
+	    }
+
+        private void SetExtendedProperty(string property, object value)
+	    {
+	        try
+	        {
+	            // ReSharper disable once UseIndexedProperty
+	            ((IMsRdpExtendedSettings)_rdpClient).set_Property(property, ref value);
+	        }
+	        catch (Exception e)
+	        {
+	            Runtime.MessageCollector.AddExceptionMessage($"Error setting extended RDP property '{property}'",
+	                e, MessageClass.WarningMsg, false);
+	        }
+	    }
+
 		private void SetCredentials()
 		{
 			try
@@ -506,8 +543,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				    {
                         _rdpClient.AdvancedSettings2.SmartSizing = true;
                     }
-
-                    
 				}
 				else if (InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen)
 				{
