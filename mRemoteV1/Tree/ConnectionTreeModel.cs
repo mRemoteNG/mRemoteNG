@@ -30,7 +30,7 @@ namespace mRemoteNG.Tree
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, rootNode));
         }
 
-        public IEnumerable<ConnectionInfo> GetRecursiveChildList()
+        public IReadOnlyList<ConnectionInfo> GetRecursiveChildList()
         {
             var list = new List<ConnectionInfo>();
             foreach (var rootNode in RootNodes)

@@ -23,7 +23,7 @@
     <OptionStrict>Off</OptionStrict>
     <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetFrameworkProfile />
@@ -41,7 +41,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.64.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.64.0.1</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -75,6 +75,7 @@
       <HintPath>..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
@@ -107,7 +108,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Credential\Records\" />
-    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
@@ -133,21 +133,33 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\ConnectionsLoadedEventArgs.cs" />
+    <Compile Include="Config\Connections\ConnectionsSavedEventArgs.cs" />
+    <Compile Include="Config\Connections\CsvConnectionsSaver.cs" />
+    <Compile Include="Config\Connections\SaveConnectionsOnEdit.cs" />
+    <Compile Include="Config\Connections\SaveFormat.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateCheckFinishedEventArgs.cs" />
     <Compile Include="Config\Connections\Multiuser\IConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
     <Compile Include="Config\Connections\Multiuser\RemoteConnectionsSyncronizer.cs" />
     <Compile Include="Config\Connections\SqlConnectionsLoader.cs" />
+    <Compile Include="Config\Connections\SqlConnectionsSaver.cs" />
     <Compile Include="Config\Connections\XmlConnectionsLoader.cs" />
+    <Compile Include="Config\Connections\XmlConnectionsSaver.cs" />
     <Compile Include="Config\CredentialHarvester.cs" />
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
     <Compile Include="Config\CredentialRepositoryListSaver.cs" />
+    <Compile Include="Config\DatabaseConnectors\ConnectionTestResult.cs" />
+    <Compile Include="Config\DatabaseConnectors\DatabaseConnectorFactory.cs" />
+    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnectionTester.cs" />
     <Compile Include="Config\DataProviders\FileBackupCreator.cs" />
     <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
     <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
     <Compile Include="Config\ILoader.cs" />
+    <Compile Include="Config\Import\MRemoteNGCsvImporter.cs" />
     <Compile Include="Config\ISaver.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer27.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
@@ -156,14 +168,15 @@
     <Compile Include="Config\Serializers\ISecureSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
-    <Compile Include="Config\Serializers\MiscSerializers\CsvConnectionsSerializerMremotengFormat.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsDeserializerMremotengFormat.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
     <Compile Include="Config\Serializers\DataTableSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializer.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionNodeSerializer26.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer26.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionRetriever.cs" />
     <Compile Include="Config\Serializers\Versioning\IVersionUpgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion22To23Upgrader.cs" />
@@ -171,38 +184,35 @@
     <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
-    <Compile Include="Config\Connections\ConnectionsLoader.cs" />
-    <Compile Include="Config\Connections\ConnectionsSaver.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />
     <Compile Include="Config\DataProviders\SqlDataProvider.cs" />
     <Compile Include="Config\Serializers\IDeserializer.cs" />
     <Compile Include="Config\Import\IConnectionImporter.cs" />
     <Compile Include="Config\Serializers\ISerializer.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentCompiler.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDocumentEncryptor.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDocumentCompiler.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDocumentEncryptor.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsSerializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProvider.cs" />
     <Compile Include="Config\DataProviders\IDataProvider.cs" />
     <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlConnectionsDeserializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDeserializer.cs" />
     <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialRecordDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialRecordSerializer.cs" />
-    <Compile Include="Config\Serializers\ConnectionSerializers\XmlRootNodeSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlRootNodeSerializer.cs" />
     <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIds.cs" />
     <Compile Include="Config\Settings\DockPanelLayoutSerializer.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\ExternalAppsSaver.cs" />
     <Compile Include="Config\Settings\DockPanelLayoutLoader.cs" />
     <Compile Include="Config\Settings\DockPanelLayoutSaver.cs" />
-    <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
     <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
     <Compile Include="Config\Settings\SettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\PortableSettingsProvider.cs" />
     <Compile Include="Config\Settings\SettingsSaver.cs" />
     <Compile Include="Config\ConfirmCloseEnum.cs" />
     <Compile Include="Config\Import\ActiveDirectoryImporter.cs" />
-    <Compile Include="Config\Import\mRemoteNGImporter.cs" />
+    <Compile Include="Config\Import\MRemoteNGXmlImporter.cs" />
     <Compile Include="Config\Import\PortScanImporter.cs" />
     <Compile Include="Config\Import\PuttyConnectionManagerImporter.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionImporter.cs" />
@@ -227,6 +237,7 @@
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
+    <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
     <Compile Include="Credential\PlaceholderCredentialRecord.cs" />
@@ -303,7 +314,8 @@
     <Compile Include="Security\Factories\CryptoProviderFactoryFromXml.cs" />
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
-    <Compile Include="Tools\DesignModeTest.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Tools\DisposableOptional.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
@@ -311,9 +323,13 @@
     <Compile Include="Tools\ExternalToolsService.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
-    <Compile Include="Tools\Maybe.cs" />
+    <Compile Include="Tools\Optional.cs" />
+    <Compile Include="Tools\MultiSSHController.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
+    <Compile Include="Tools\WindowsRegistry\IRegistry.cs" />
+    <Compile Include="Tools\WindowsRegistry\RegistryHive.cs" />
+    <Compile Include="Tools\WindowsRegistry\WindowsRegistry.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionVerifier.cs" />
@@ -372,6 +388,7 @@
     <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.Designer.cs">
       <DependentUpon>ConnectionTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTreeSearchTextFilter.cs" />
     <Compile Include="UI\Controls\CredentialRecordComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -417,6 +434,9 @@
     </Compile>
     <Compile Include="UI\Controls\ConnectionTree\IConnectionTreeDelegate.cs" />
     <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\MultiSshToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\PageSequence\ISequenceChangingNotifier.cs" />
@@ -949,9 +969,10 @@
     <None Include="Schemas\mremoteng_confcons_v2_7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\mremoteng_confcons_v2_6.xsd">
+    <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Schemas\mremoteng_credrepo_list_v1_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1151,6 +1172,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
+    <None Include="Resources\Images\loading_spinner.gif" />
     <None Include="Resources\Images\FamFamFam\tick.png" />
     <None Include="Resources\Icons\FamFamFam\shield.ico" />
     <None Include="Resources\Icons\FamFamFam\key.ico" />
@@ -1540,24 +1562,26 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <DebugSymbols>false</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Release\</OutputPath>
     <NoWarn>1591,660,661</NoWarn>
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <WarningLevel>1</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
-    <DebugSymbols>false</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Release Portable\</OutputPath>
     <DefineConstants>PORTABLE</DefineConstants>
     <NoWarn>1591,660,661</NoWarn>
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -1575,6 +1599,9 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

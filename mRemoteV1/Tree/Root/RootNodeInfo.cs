@@ -1,8 +1,8 @@
-using mRemoteNG.Tools;
+using System;
 using System.ComponentModel;
-using System.Security;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Security;
+using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.Tree.Root
@@ -13,10 +13,16 @@ namespace mRemoteNG.Tree.Root
 	    private string _name;
 	    private string _customPassword = "";
 
-	    public RootNodeInfo(RootNodeType rootType)
+	    public RootNodeInfo(RootNodeType rootType, string uniqueId)
+			: base(uniqueId)
 		{
             _name = Language.strConnections;
 			Type = rootType;
+		}
+
+		public RootNodeInfo(RootNodeType rootType)
+			: this(rootType, Guid.NewGuid().ToString())
+		{
 		}
 		
         #region Public Properties
@@ -60,8 +66,22 @@ namespace mRemoteNG.Tree.Root
 
         public override TreeNodeType GetTreeNodeType()
         {
-            return TreeNodeType.Root;
+            return Type == RootNodeType.Connection
+                ? TreeNodeType.Root
+                : TreeNodeType.PuttyRoot;
         }
         #endregion
-    }
+
+	    public override void AddChildAt(ConnectionInfo newChildItem, int index)
+	    {
+            newChildItem.Inheritance.DisableInheritance();
+	        base.AddChildAt(newChildItem, index);
+	    }
+
+	    public override void RemoveChild(ConnectionInfo removalTarget)
+	    {
+            removalTarget.Inheritance.EnableInheritance();
+	        base.RemoveChild(removalTarget);
+	    }
+	}
 }

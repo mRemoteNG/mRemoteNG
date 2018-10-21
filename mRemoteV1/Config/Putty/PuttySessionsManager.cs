@@ -1,13 +1,13 @@
-using mRemoteNG.Tools;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.Putty
 {
-	public class PuttySessionsManager
+    public class PuttySessionsManager
 	{
         public static PuttySessionsManager Instance { get; } = new PuttySessionsManager();
 
@@ -35,10 +35,12 @@ namespace mRemoteNG.Config.Putty
 			}
 		}
 
-	    private void AddSessionsFromProvider(AbstractPuttySessionsProvider provider)
+	    private void AddSessionsFromProvider(AbstractPuttySessionsProvider puttySessionProvider)
 	    {
-            var rootTreeNode = provider.RootInfo;
-	        provider.GetSessions();
+	        puttySessionProvider.ThrowIfNull(nameof(puttySessionProvider));
+
+            var rootTreeNode = puttySessionProvider.RootInfo;
+	        puttySessionProvider.GetSessions();
 
             if (!RootPuttySessionsNodes.Contains(rootTreeNode) && rootTreeNode.HasChildren())
                 RootPuttySessionsNodes.Add(rootTreeNode);

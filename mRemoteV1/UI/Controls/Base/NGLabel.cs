@@ -22,32 +22,35 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
-            {
-                _themeManager = ThemeManager.getInstance();
-                Invalidate();
-            }
+            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive) return;
+            // Use the Dialog_* colors since Labels generally have the same colors as panels/dialogs/windows/etc...
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            FontOverrider.FontOverride(this);
+            Invalidate();
         }
 
   
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
+            if (!_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;
             }
 
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            // let's use the defaults - this looks terrible in my testing....
+            //e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            //e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             if (Enabled)
             {
-                TextRenderer.DrawText(e.Graphics, this.Text, Font, ClientRectangle, ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
             }
             else
             {
                 var disabledtextLabel = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
-                TextRenderer.DrawText(e.Graphics, this.Text, Font, ClientRectangle, disabledtextLabel, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, disabledtextLabel, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
             }
                 
         } 

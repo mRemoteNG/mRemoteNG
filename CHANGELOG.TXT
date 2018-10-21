@@ -1,17 +1,201 @@
-1.76.XXXX (2017-XX-XX):
+1.77.0 (2018-xx-xx):
 
 Features/Enhancements:
 ----------------------
-Added more logging/notifications options
-#429: Added Czech translation
+#1072: Russian translation improvements
+#1016: Chinese (simplified) translation improvements
+#928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
+
+
+1.76.11 (2018-10-18):
+
+Fixes:
+------
+#1139: Feature "Reconnect to previously opened sessions" not working
+#1136: Putty window not maximized
+
+
+1.76.10 (2018-10-07):
+
+Fixes:
+------
+#1124: Enabling themes causes an exception
+
+
+1.76.9 (2018-10-07):
+
+Fixes:
+------
+#1117: Duplicate panel created when "Reconnect on Startup" and "Create Empty Panel" settings enabled
+#1115: Exception when changing from xml data storage to SQL
+#1110: Pressing Delete button during connection rename attempts to delete the connection instead of the text
+#1106: Inheritance does not work when parent has C# default type set
+#1092: Invalid Cast Exceptions loading default connectioninfo 
+#1091: Minor themeing issues
+#853: Added some additional safety checks and logging to help address RDP crashes
+
+
+1.76.8 (2018-08-25):
+
+Fixes:
+------
+#1088: Delete and Launch buttons are not disabled when last external tool deleted
+#1087: 'Save connections after every edit' setting not honored
+#1082: Connections not given GUID if Id is empty in connection xml
+
+
+1.76.7 (2018-08-22):
+
+Fixes:
+------
+#1076: Wrong object selected when duplicating connection then switching between properties and inheritance in config window
+#1068: Fixed some toolbar positioning bugs
+
+
+1.76.6 (2018-08-03):
+
+Fixes:
+------
+#1062: Entering correct password when starting app does not load connections file
+
+1.76.5 (2018-08-02):
+
+Fixes:
+------
+#1057: Hitting F2 with no connection node selected caused unhandled exception
+#1052: 'Switch to notification panel' feature does not always switch
+#1051: Tooltips always displayed regardless of 'Show description tooltips in connection tree' setting
+#1050: Config window retains access to previously selected node after loading new connections file
+#1045: Config window shows several incorrect properties for HTTPS connections
+#1040: Canceling "select panel" form does not cancel
+#1039: Set default theme when themes disabled
+#1038: Unable to add connection with active filter
+#1036: Exception when themes are active and options page closed on Connections then reopened
+#1034: Connection context menu not being translated
+#1030: Exception thrown if importing from port scan and no tree node is selected
+#1020: BackupFileKeepCount setting not limiting backup file count
+#1004: Duplicating root or PuTTy node through hotkey causes unhandled exception
+#1002: Disabling filtering without clearing keyword leaves filtered state
+#1001: Connection tree context menu hotkeys stop working and disappear in some cases
+#999: Some hotkeys stop working if File menu was called when PuTTy Saved Sessions was selected
+#998: Can sometimes add connection under PuTTY Sessions node
+#991: Error when deleting host in filtered view
+#971: Portable Settings now apply to any machine they are used on
+#961: Connections file overwritten if correct decryption password not provided
+#893: Removed unneeded files from build/package
+#868: if statement returned the same value
+#762: Increased button size to fit locaized text
+
+
+1.76.4 Alpha 6 (2018-06-03):
+
+Features/Enhancements:
+----------------------
+#948: Fixed issue where many menu item translations were not being used
+#942: Improved Russian translation of several items
+#924: Notification for "No Host Specified" when clicking folders in quick-connect menu
+#902: Menu bar can once again be moved. View -> "Lock toolbar positions" now also locks the menu position
+Added option for creating an empty panel on startup
+
+Fixes:
+------
+#938: Minor layout improvements on the Port Scan screen
+#916: Default properties were not being saved
+
+
+1.76.3 Alpha 5 (2018-03-14):
+
+Fixes:
+------
+#911: Csv exports sometimes do not include all fields
+#807: Inheritance is sometimes turned on for nodes under root Connections node
+
+
+1.76.2 Alpha 4 (2018-03-03):
+
+Fixes:
+------
+#899: DoNotPlay is Case Sensitive in XML Serialization
+
+
+1.76.1 Alpha 3 (2018-02-24):
+
+Features/Enhancements:
+----------------------
+#625: Added ability to import mRemoteNG formatted CSV files
+#648: The port scan ping timeout is now configurable
+
+Fixes:
+------
+Fixed a few Xml serialization bugs that would occur if boolean values weren't capitalized
+
+
+1.76.0 Alpha 2 (2018-02-01):
+
+Features/Enhancements:
+----------------------
+#838: Added an option to lock toolbars
+#836: Added a Read Only option for SQL connections
+#829: Add option that fixes connecting to Azure instances with LoadBalanceInfo
+
+Fixes:
+------
+#840: Fix theme loading issue in installer version
+#800: Fixed issue with PuTTY sessions not showing some extended characters
+Fixed a few toolbar layout issues
+
+
+1.76.0 Alpha 1 (2017-12-08):
+
+Features/Enhancements:
+----------------------
+#799: Added option to save connections on every edit
+#798: Added button to test SQL database connections on SQL options page
+#784: Rearranged some settings in the Options pages to prevent overlap with some translations
+#704: Portable version now saves settings in application directory
+#671: Revamped UI theme system
+#611: Added multi-ssh toolbar for sending commands to many SSH clients at once
+#558: Connection tree now shows customizable icons instead of play/pause icon
+#519: You can now import normal mRemoteNG files - they do not have to be exports
 #504: Added Korean translation
-#208: Added credential repository feature
+#485: The Domain field is now visible/editable for connection with the IntApp protocol
+#468: Default connection info Panel property is now saved
+#429: Added Czech translation
+#421: When a connection file cannot be loaded, we will now prompt for how to proceed rather than always exiting.
+#338: Added option to filter connection tree when searching
+#357: Updated GeckoFX to v45.45.0.32
+#225: Added support for importing Remote Desktop Connection Manager v2.7 RDG files
+#207: Can now specify a working directory for external tools
+#197: Selecting a quick connect protocol will start a connection with that host
 #184: Improve search to include description and hostname fields
+#152: Added option "Show on Toolbar" to external tools
+Added more logging/notifications options
+
+Fixes:
+------
+#747: Fixed unnecessary "PuttySessions.Watcher.StartWatching" error message
+#650: Fixed German translation typo
+#639: Fixed Italian translation typo
+#479: New connection tree nodes not starting in edit mode
+#233: Fixed crash that can occur when disconnecting from VNC server
+#195: Access to https with self-signed certificates not working
+
 
 General Changes:
 ----------------
-Improved compatability between environments when building mRemoteNG from source
+#797: Removed duplicate translation strings
+#608: The Help -> Support Forum menu item now directs users to our Reddit community
 #493: Changed backup file name time stamp to use local system time rather than UTC
+Improved compatability between environments when building mRemoteNG from source
+
+
+1.75.7012 (2017-12-01):
+
+Fixes:
+------
+#814: Fixed bug that prevented reordering connections by dragging
+#810: Official mRemoteNG builds will now be signed with a DigiCert certificate
+#803: File path command line argument not working with network path
 
 
 1.75.7011 (2017-11-07):

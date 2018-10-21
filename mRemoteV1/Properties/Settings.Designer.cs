@@ -12,7 +12,11 @@ namespace mRemoteNG {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
+
+
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -566,6 +570,18 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultRedirectClipboard {
+            get {
+                return ((bool)(this["ConDefaultRedirectClipboard"]));
+            }
+            set {
+                this["ConDefaultRedirectClipboard"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultRedirectPorts {
             get {
                 return ((bool)(this["ConDefaultRedirectPorts"]));
@@ -980,6 +996,18 @@ namespace mRemoteNG {
             }
             set {
                 this["InhDefaultRedirectPrinters"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRedirectClipboard {
+            get {
+                return ((bool)(this["InhDefaultRedirectClipboard"]));
+            }
+            set {
+                this["InhDefaultRedirectClipboard"] = value;
             }
         }
         
@@ -2552,6 +2580,174 @@ namespace mRemoteNG {
             }
             set {
                 this["ThemingActive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultUsername {
+            get {
+                return ((string)(this["ConDefaultUsername"]));
+            }
+            set {
+                this["ConDefaultUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultPassword {
+            get {
+                return ((string)(this["ConDefaultPassword"]));
+            }
+            set {
+                this["ConDefaultPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultDomain {
+            get {
+                return ((string)(this["ConDefaultDomain"]));
+            }
+            set {
+                this["ConDefaultDomain"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("General")]
+        public string ConDefaultPanel {
+            get {
+                return ((string)(this["ConDefaultPanel"]));
+            }
+            set {
+                this["ConDefaultPanel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SaveConnectionsAfterEveryEdit {
+            get {
+                return ((bool)(this["SaveConnectionsAfterEveryEdit"]));
+            }
+            set {
+                this["SaveConnectionsAfterEveryEdit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseFilterSearch {
+            get {
+                return ((bool)(this["UseFilterSearch"]));
+            }
+            set {
+                this["UseFilterSearch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SQLReadOnly {
+            get {
+                return ((bool)(this["SQLReadOnly"]));
+            }
+            set {
+                this["SQLReadOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LockToolbars {
+            get {
+                return ((bool)(this["LockToolbars"]));
+            }
+            set {
+                this["LockToolbars"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RdpLoadBalanceInfoUseUtf8 {
+            get {
+                return ((bool)(this["RdpLoadBalanceInfoUseUtf8"]));
+            }
+            set {
+                this["RdpLoadBalanceInfoUseUtf8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point MultiSshToolbarLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["MultiSshToolbarLocation"]));
+            }
+            set {
+                this["MultiSshToolbarLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MultiSshToolbarParentDock {
+            get {
+                return ((string)(this["MultiSshToolbarParentDock"]));
+            }
+            set {
+                this["MultiSshToolbarParentDock"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MultiSshToolbarVisible {
+            get {
+                return ((bool)(this["MultiSshToolbarVisible"]));
+            }
+            set {
+                this["MultiSshToolbarVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CreateEmptyPanelOnStartUp {
+            get {
+                return ((bool)(this["CreateEmptyPanelOnStartUp"]));
+            }
+            set {
+                this["CreateEmptyPanelOnStartUp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("General")]
+        public string StartUpPanelName {
+            get {
+                return ((string)(this["StartUpPanelName"]));
+            }
+            set {
+                this["StartUpPanelName"] = value;
             }
         }
     }

@@ -22,6 +22,6 @@
   <String Id="Feature_StartMenuShortcut">Start menu shortcut</String>
   
   <!-- GUI Page Text -->
-  <String Id="FinishPage_LaunchMremoteNow" Overridable="yes">Launch [ProductName] Now</String>
+  <String Id="FinishPage_LaunchMremoteNow" Overridable="yes">Launch mRemoteNG Now</String>
   
 </WixLocalization>

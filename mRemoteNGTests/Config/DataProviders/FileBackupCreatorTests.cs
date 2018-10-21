@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.DataProviders
 {
-    public class FileBackupCreatorTests
+	public class FileBackupCreatorTests
     {
         private FileBackupCreator _fileBackupCreator;
         private string _testFilePath;
@@ -26,9 +26,9 @@ namespace mRemoteNGTests.Config.DataProviders
         [TearDown]
         public void Teardown()
         {
-            var allTestFileMatcher = Path.GetFileName(_testFilePath) + "*";
-            FileTestHelpers.DeleteFilesInDirectory(_testFileDirectory, allTestFileMatcher);
-        }
+			if (Directory.Exists(_testFileDirectory))
+				Directory.Delete(_testFileDirectory, true);
+		}
 
         [Test]
         public void BackupCreatedWhenFileAlreadyExists()

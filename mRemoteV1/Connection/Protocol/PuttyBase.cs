@@ -23,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol
 
         protected Putty_SSHVersion PuttySSHVersion { private get; set; }
 
-	    private IntPtr PuttyHandle { get; set; }
+	    public IntPtr PuttyHandle { get; set; }
 
 	    private Process PuttyProcess { get; set; }
 
@@ -199,7 +199,14 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return;
 				}
-                NativeMethods.MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2, InterfaceControl.Height + SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height * 2, true);
+
+			    var left = -(SystemInformation.FrameBorderSize.Width + SystemInformation.HorizontalResizeBorderThickness);
+			    var top = -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height + SystemInformation.VerticalResizeBorderThickness);
+			    var width = InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width + SystemInformation.HorizontalResizeBorderThickness) * 2;
+			    var height = InterfaceControl.Height + SystemInformation.CaptionHeight +
+			                 (SystemInformation.FrameBorderSize.Height + SystemInformation.VerticalResizeBorderThickness) * 2;
+
+                NativeMethods.MoveWindow(PuttyHandle, left, top, width, height, true);
 			}
 			catch (Exception ex)
 			{

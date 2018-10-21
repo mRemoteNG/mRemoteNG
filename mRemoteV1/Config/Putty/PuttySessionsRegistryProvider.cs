@@ -1,18 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Management;
+using System.Security.Principal;
+using System.Text;
+using System.Web;
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
-using System;
-using System.Collections.Generic;
-using System.Management;
-using System.Security.Principal;
-using System.Web;
 
 
 namespace mRemoteNG.Config.Putty
 {
-	public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
+    public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
 	{
         private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
         private static ManagementEventWatcher _eventWatcher;
@@ -26,7 +27,7 @@ namespace mRemoteNG.Config.Putty
             var sessionNames = new List<string>();
 			foreach (var sessionName in sessionsKey.GetSubKeyNames())
 			{
-			    sessionNames.Add(raw ? sessionName : HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")));
+			    sessionNames.Add(raw ? sessionName : HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"), Encoding.GetEncoding("iso-8859-1")));
 			}
 				
 			if (raw && !sessionNames.Contains("Default%20Settings"))
@@ -36,23 +37,31 @@ namespace mRemoteNG.Config.Putty
 				
 			return sessionNames.ToArray();
 		}
-			
-		public override PuttySessionInfo GetSession(string sessionName)
-		{
+        
+        public override PuttySessionInfo GetSession(string sessionName)
+        {
+            if (string.IsNullOrEmpty(sessionName))
+                return null;
+
             var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
             var sessionKey = sessionsKey?.OpenSubKey(sessionName);
 			if (sessionKey == null)	return null;
-				
-			sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
 
+            sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"), Encoding.GetEncoding("iso-8859-1"));
+            
 		    var sessionInfo = new PuttySessionInfo
 		    {
 		        PuttySession = sessionName,
 		        Name = sessionName,
-		        Hostname = Convert.ToString(sessionKey.GetValue("HostName")),
-		        Username = Convert.ToString(sessionKey.GetValue("UserName"))
+		        Hostname = sessionKey.GetValue("HostName")?.ToString() ?? "",
+		        Username = sessionKey.GetValue("UserName")?.ToString() ?? ""
 		    };
-            var protocol = Convert.ToString(sessionKey.GetValue("Protocol")) ?? "ssh";
+
+
+		    var protocol = string.IsNullOrEmpty(sessionKey.GetValue("Protocol")?.ToString())
+		        ? "ssh"
+                : sessionKey.GetValue("Protocol").ToString();
+
 		    switch (protocol.ToLowerInvariant())
 			{
 				case "raw":
@@ -64,16 +73,15 @@ namespace mRemoteNG.Config.Putty
 				case "serial":
 					return null;
 				case "ssh":
-                    var sshVersionObject = sessionKey.GetValue("SshProt");
-					if (sshVersionObject != null)
-					{
-					    var sshVersion = Convert.ToInt32(sshVersionObject);
-					    sessionInfo.Protocol = sshVersion >= 2 ? ProtocolType.SSH2 : ProtocolType.SSH1;
-					}
-					else
-					{
-						sessionInfo.Protocol = ProtocolType.SSH2;
-					}
+				    int.TryParse(sessionKey.GetValue("SshProt")?.ToString(), out var sshVersion);
+                    /* Per PUTTY.H in PuTTYNG & PuTTYNG Upstream (PuTTY proper currently)
+                     * expect 0 for SSH1, 3 for SSH2 ONLY
+                     * 1 for SSH1 with a 2 fallback
+                     * 2 for SSH2 with a 1 fallback
+                     *
+                     * default to SSH2 if any other value is received
+                     */
+                    sessionInfo.Protocol = sshVersion == 1 || sshVersion == 0 ? ProtocolType.SSH1 : ProtocolType.SSH2;
 					break;
 				case "telnet":
 					sessionInfo.Protocol = ProtocolType.Telnet;
@@ -81,7 +89,12 @@ namespace mRemoteNG.Config.Putty
 				default:
 					return null;
 			}
-			sessionInfo.Port = Convert.ToInt32(sessionKey.GetValue("PortNumber"));
+
+            int.TryParse(sessionKey.GetValue("PortNumber")?.ToString(), out var portNumber);
+            if (portNumber == default(int))
+                sessionInfo.SetDefaultPort();
+            else
+                sessionInfo.Port = portNumber;
 				
 			return sessionInfo;
 		}
@@ -117,5 +130,5 @@ namespace mRemoteNG.Config.Putty
 		{
 			RaiseSessionChangedEvent(new PuttySessionChangedEventArgs());
 		}
-	}
+    }
 }

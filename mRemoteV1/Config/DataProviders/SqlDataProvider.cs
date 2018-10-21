@@ -1,7 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using mRemoteNG.Config.DatabaseConnectors;
-
+using mRemoteNG.Messages;
+using mRemoteNG.App;
 
 namespace mRemoteNG.Config.DataProviders
 {
@@ -31,6 +32,12 @@ namespace mRemoteNG.Config.DataProviders
 
         public void Save(DataTable dataTable)
         {
+            if (SqlUserIsReadOnly())
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to save connections but the SQL read only checkbox is checked, aborting!");
+                return;
+            }
+
             if (!SqlDatabaseConnector.IsConnected)
                 OpenConnection();
             using (var sqlBulkCopy = new SqlBulkCopy(SqlDatabaseConnector.SqlConnection))
@@ -50,6 +57,12 @@ namespace mRemoteNG.Config.DataProviders
         public void CloseConnection()
         {
             SqlDatabaseConnector.Disconnect();
+        }
+
+        private bool SqlUserIsReadOnly()
+        {
+            return mRemoteNG.Settings.Default.SQLReadOnly;
+
         }
     }
 }

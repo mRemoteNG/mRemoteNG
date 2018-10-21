@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Security.AccessControl;
 using Microsoft.Win32;
 using mRemoteNG.App;
@@ -38,14 +39,16 @@ namespace mRemoteNG.Tools
             {
                 using (var key = Registry.CurrentUser.OpenSubKey(string.Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
                 {
-                    key?.DeleteValue(appName);
+                    if (key?.GetValueNames().Contains(appName) ?? false)
+                        key.DeleteValue(appName);
                 }
             }
 
 
             using (var key = Registry.CurrentUser.CreateSubKey(string.Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
             {
-                key?.DeleteValue(appName);
+                if (key?.GetValueNames().Contains(appName) ?? false)
+                    key.DeleteValue(appName);
             }
         }
 #endif

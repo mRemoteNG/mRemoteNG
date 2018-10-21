@@ -9,19 +9,19 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class AdvancedPage
+    public sealed partial class AdvancedPage
     {
         public AdvancedPage()
         {
             InitializeComponent();
-            base.ApplyTheme();
+            ApplyTheme();
         }
 
         #region Public Methods
 
         public override string PageName
         {
-            get { return Language.strTabAdvanced; }
+            get => Language.strTabAdvanced;
             set { }
         }
 
@@ -32,6 +32,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSeconds.Text = Language.strLabelSeconds;
             lblMaximumPuttyWaitTime.Text = Language.strLabelPuttyTimeout;
             chkAutomaticReconnect.Text = Language.strCheckboxAutomaticReconnect;
+            chkLoadBalanceInfoUseUtf8.Text = Language.strLoadBalanceInfoUseUtf8;
             lblConfigurePuttySessions.Text = Language.strLabelPuttySessionsConfig;
             btnLaunchPutty.Text = Language.strButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language.strButtonBrowse;
@@ -46,6 +47,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
             chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
+            chkLoadBalanceInfoUseUtf8.Checked = Settings.Default.RdpLoadBalanceInfoUseUtf8;
             numPuttyWaitTime.Value = Settings.Default.MaxPuttyWaitTime;
 
             chkUseCustomPuttyPath.Checked = Settings.Default.UseCustomPuttyPath;
@@ -59,6 +61,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
             Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
+            Settings.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
 
             var puttyPathChanged = false;
             if (Settings.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
@@ -105,16 +108,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             using (var openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = $"{Language.strFilterApplication}|*.exe|{Language.strFilterAll}|*.*";
+                openFileDialog.Filter = $@"{Language.strFilterApplication}|*.exe|{Language.strFilterAll}|*.*";
                 openFileDialog.FileName = Path.GetFileName(GeneralAppInfo.PuttyPath);
                 openFileDialog.CheckFileExists = true;
                 openFileDialog.Multiselect = false;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    txtCustomPuttyPath.Text = openFileDialog.FileName;
-                    SetPuttyLaunchButtonEnabled();
-                }
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+                txtCustomPuttyPath.Text = openFileDialog.FileName;
+                SetPuttyLaunchButtonEnabled();
             }
         }
 

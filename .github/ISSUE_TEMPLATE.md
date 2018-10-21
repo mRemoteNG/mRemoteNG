@@ -1,16 +1,30 @@
-<!--
-Only file GitHub issues for bugs and feature requests.  All other topics will be closed.
+<!--- Provide a general summary of the issue in the Title above -->
 
-Before opening an issue, please search for a duplicate or closed issue.
-Please provide as much detail as possible for us to fix your issue.
--->
+## Expected Behavior
+<!--- If you're describing a bug, tell us what should happen -->
+<!--- If you're suggesting a change/improvement, tell us how it should work -->
 
-<!-- Bug -->
-|Detail|Value|
-|--:|---|
-|Operating system | Windows 10 x64 |
-|mRemoteNG version| 1.75.7008  |
+## Current Behavior
+<!--- If describing a bug, tell us what happens instead of the expected behavior -->
+<!--- If suggesting a change/improvement, explain the difference from current behavior -->
 
+## Possible Solution
+<!--- Not obligatory, but suggest a fix/reason for the bug, -->
+<!--- or ideas how to implement the addition or change -->
 
-<!-- Feature Request -->
-<!-- If you file a feature request, please delete the bug section -->
+## Steps to Reproduce (for bugs)
+<!--- Provide an unambiguous set of steps to reproduce -->
+<!--- this bug. Include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+## Context
+<!--- How has this issue affected you? What are you trying to accomplish? -->
+<!--- Providing context helps us come up with a solution that is most useful in the real world -->
+
+## Your Environment
+<!--- Include as many relevant details about the environment you experienced the bug in -->
+* Version used:
+* Operating System and version (e.g. Windows 10 1709 x64):

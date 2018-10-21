@@ -1587,9 +1587,6 @@ VncSharp Control 版本 {0}</value>
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>關閉 RDP 連線失敗!</value>
   </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>開啟連線失敗!</value>
-  </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>無法建立 RDP 控制，請檢查 mRemoteNG 需求。</value>
   </data>
@@ -1667,9 +1664,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>GetSessions 失敗!</value>
-  </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>開啟 RDP 連線失敗!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>RDP 重新連線次數:</value>
@@ -2112,9 +2106,6 @@ mRemoteNG 將立即結束並開始安裝。</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>VNC 中斷連線失敗!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>開啟連線失敗!</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>VNC 重新整理畫面失敗!</value>

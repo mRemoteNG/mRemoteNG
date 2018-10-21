@@ -34,8 +34,9 @@
 
 using System.Collections;
 using System.Windows.Forms;
+using NUnit.Extensions.Forms;
 
-namespace NUnit.Extensions.Forms
+namespace mRemoteNGTests
 {
     /// <summary>
     /// A ControlTester for testing List Views.  

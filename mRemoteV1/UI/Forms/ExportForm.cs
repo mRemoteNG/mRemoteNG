@@ -26,12 +26,12 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 			
-        public ConnectionsSaver.Format SaveFormat
+        public SaveFormat SaveFormat
 		{
 			get
 			{
 			    var exportFormat = cboFileFormat.SelectedItem as ExportFormat;
-			    return exportFormat?.Format ?? ConnectionsSaver.Format.mRXML;
+			    return exportFormat?.Format ?? SaveFormat.mRXML;
 			}
             set
 			{
@@ -173,8 +173,8 @@ namespace mRemoteNG.UI.Forms
         private void ExportForm_Load(object sender, EventArgs e)
 		{
 			cboFileFormat.Items.Clear();
-            cboFileFormat.Items.Add(new ExportFormat(ConnectionsSaver.Format.mRXML));
-            cboFileFormat.Items.Add(new ExportFormat(ConnectionsSaver.Format.mRCSV));
+            cboFileFormat.Items.Add(new ExportFormat(SaveFormat.mRXML));
+            cboFileFormat.Items.Add(new ExportFormat(SaveFormat.mRCSV));
 			cboFileFormat.SelectedIndex = 0;
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
@@ -211,7 +211,7 @@ namespace mRemoteNG.UI.Forms
 
         private void SelectFileTypeBasedOnSaveFormat(FileDialog saveFileDialog)
         {
-            saveFileDialog.FilterIndex = SaveFormat == ConnectionsSaver.Format.mRCSV ? 2 : 1;
+            saveFileDialog.FilterIndex = SaveFormat == SaveFormat.mRCSV ? 2 : 1;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -226,20 +226,21 @@ namespace mRemoteNG.UI.Forms
 
         private void cboFileformat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SaveFormat == ConnectionsSaver.Format.mRXML)
-            {
-                chkUsername.Enabled = false;
-                chkPassword.Enabled = false;
-                chkDomain.Enabled = false;
-                chkAssignedCredential.Enabled = true;
-            }
-            else
-            {
-                chkUsername.Enabled = true;
-                chkPassword.Enabled = true;
-                chkDomain.Enabled = true;
-                chkAssignedCredential.Enabled = false;
-            }
+            // should only be active if we are using the credential manager feature
+            //if (SaveFormat == SaveFormat.mRXML)
+            //{
+            //    chkUsername.Enabled = false;
+            //    chkPassword.Enabled = false;
+            //    chkDomain.Enabled = false;
+            //    chkAssignedCredential.Enabled = true;
+            //}
+            //else
+            //{
+            //    chkUsername.Enabled = true;
+            //    chkPassword.Enabled = true;
+            //    chkDomain.Enabled = true;
+            //    chkAssignedCredential.Enabled = false;
+            //}
         }
         #endregion
 			
@@ -296,12 +297,12 @@ namespace mRemoteNG.UI.Forms
 		{
             #region Public Properties
 
-		    public ConnectionsSaver.Format Format { get; }
+		    public SaveFormat Format { get; }
 
 		    #endregion
 				
             #region Constructors
-			public ExportFormat(ConnectionsSaver.Format format)
+			public ExportFormat(SaveFormat format)
 			{
 				Format = format;
 			}
@@ -312,9 +313,9 @@ namespace mRemoteNG.UI.Forms
 			{
 				switch (Format)
 				{
-					case ConnectionsSaver.Format.mRXML:
+					case SaveFormat.mRXML:
 						return Language.strMremoteNgXml;
-                    case ConnectionsSaver.Format.mRCSV:
+                    case SaveFormat.mRCSV:
 						return Language.strMremoteNgCsv;
 					default:
 						return Format.ToString();

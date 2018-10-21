@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -105,23 +105,26 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
   </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>关于</value>
   </data>
   <data name="strActive" xml:space="preserve">
     <value>活动连接</value>
+  </data>
+  <data name="strActiveDirectory" xml:space="preserve">
+    <value>活动目录</value>
   </data>
   <data name="strActivity" xml:space="preserve">
     <value>活动</value>
@@ -215,6 +218,9 @@
   </data>
   <data name="strButtonInheritance" xml:space="preserve">
     <value>继承</value>
+  </data>
+  <data name="strButtonLaunch" xml:space="preserve">
+    <value>启动(&amp;L)</value>
   </data>
   <data name="strButtonLaunchPutty" xml:space="preserve">
     <value>启动PuTTY</value>
@@ -409,8 +415,17 @@ VncSharp 版本 {0}</value>
   <data name="strColumnWaitForExit" xml:space="preserve">
     <value>等待退出</value>
   </data>
+  <data name="strCommandExitProgram" xml:space="preserve">
+    <value>退出{0}(&amp;X)</value>
+  </data>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>无法解析命令行参数！</value>
+  </data>
+  <data name="strCommandOpenConnectionFile" xml:space="preserve">
+    <value>打开一个连接文件(&amp;O)</value>
+  </data>
+  <data name="strCommandTryAgain" xml:space="preserve">
+    <value>再试一次(&amp;T)</value>
   </data>
   <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
     <value>{0} 检测到联想Auto Scroll程序在本机上运行。该程序程序明确会导致问题 {0} 的出现。建议您禁用或卸载该程序。</value>
@@ -559,6 +574,9 @@ VncSharp 版本 {0}</value>
   <data name="strDetect" xml:space="preserve">
     <value>检测</value>
   </data>
+  <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
+    <value>不要连接到控制台会话</value>
+  </data>
   <data name="strDontConnectWhenAuthFails" xml:space="preserve">
     <value>身份验证失败时取消连接</value>
   </data>
@@ -582,6 +600,12 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strEnc128BitLogonOnly" xml:space="preserve">
     <value>128位(仅用于登录)</value>
+  </data>
+  <data name="strEnc40Bit" xml:space="preserve">
+    <value>40位</value>
+  </data>
+  <data name="strEnc56Bit" xml:space="preserve">
+    <value>56位</value>
   </data>
   <data name="strEncBasic" xml:space="preserve">
     <value>基本</value>
@@ -613,6 +637,9 @@ VncSharp 版本 {0}</value>
   <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
     <value>无法保存连接列表。</value>
   </data>
+  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
+    <value>PuTTY无法启动。</value>
+  </data>
   <data name="strErrorDecryptionFailed" xml:space="preserve">
     <value>解密失败。{0}</value>
   </data>
@@ -642,17 +669,47 @@ VncSharp 版本 {0}</value>
   <data name="strExport" xml:space="preserve">
     <value>导出</value>
   </data>
+  <data name="strExportEverything" xml:space="preserve">
+    <value>导出所有内容</value>
+  </data>
+  <data name="strExportFile" xml:space="preserve">
+    <value>导出文件</value>
+  </data>
+  <data name="strExportItems" xml:space="preserve">
+    <value>导出项目</value>
+  </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
     <value>导出mRemote/mRemoteNG XML</value>
+  </data>
+  <data name="strExportProperties" xml:space="preserve">
+    <value>导出属性</value>
+  </data>
+  <data name="strExportSelectedConnection" xml:space="preserve">
+    <value>导出当前选定的连接</value>
+  </data>
+  <data name="strExportSelectedFolder" xml:space="preserve">
+    <value>导出当前选定的文件夹</value>
+  </data>
+  <data name="strExportToFileMenuItem" xml:space="preserve">
+    <value>导出到文件(&amp;E)...</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>外部应用</value>
   </data>
+  <data name="strExternalToolDefaultName" xml:space="preserve">
+    <value>新建外部工具</value>
+  </data>
   <data name="strFAMFAMFAMAttribution" xml:space="preserve">
     <value>内置图标由[FAMFAMFAM]制作</value>
   </data>
+  <data name="strFileFormatLabel" xml:space="preserve">
+    <value>文件格式(&amp;F):</value>
+  </data>
   <data name="strFilterAll" xml:space="preserve">
     <value>所有文件(*.*)</value>
+  </data>
+  <data name="strFilterAllImportable" xml:space="preserve">
+    <value>所有可导入的文件</value>
   </data>
   <data name="strFilterApplication" xml:space="preserve">
     <value>应用程序(*.exe)</value>
@@ -663,11 +720,17 @@ VncSharp 版本 {0}</value>
   <data name="strFiltermRemoteXML" xml:space="preserve">
     <value>mRemote XML(*.xml)</value>
   </data>
+  <data name="strFilterPuttyConnectionManager" xml:space="preserve">
+    <value>PuTTY连接管理器文件</value>
+  </data>
+  <data name="strFilterRdgFiles" xml:space="preserve">
+    <value>远程桌面连接管理器文件（*.rdg）</value>
+  </data>
   <data name="strFilterRDP" xml:space="preserve">
     <value>RDP文件(*.rdp)</value>
   </data>
   <data name="strFiltervRD2008CSV" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV Files (*.csv)</value>
+    <value>visionapp远程桌面2008 CSV文件（* .csv）</value>
   </data>
   <data name="strFormatInherit" xml:space="preserve">
     <value>继承 {0}</value>
@@ -735,11 +798,35 @@ VncSharp 版本 {0}</value>
   <data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>ICA 分辨率设置失败！</value>
   </data>
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+    <value>通过添加前缀“快速：”来识别快速连接选项卡</value>
+  </data>
   <data name="strImportAD" xml:space="preserve">
     <value>导入 Active Directory</value>
   </data>
   <data name="strImportExport" xml:space="preserve">
     <value>导入/导出</value>
+  </data>
+  <data name="strImportFileFailedContent" xml:space="preserve">
+    <value>导入文件“{0}”时发生错误。</value>
+  </data>
+  <data name="strImportFileFailedMainInstruction" xml:space="preserve">
+    <value>导入失败</value>
+  </data>
+  <data name="strImportFromFileMenuItem" xml:space="preserve">
+    <value>从文件导入(&amp;F)...</value>
+  </data>
+  <data name="strImportLocationCommandButtons" xml:space="preserve">
+    <value>在根目录{0}{1}下|在所选文件夹{0}{2}下</value>
+  </data>
+  <data name="strImportLocationContent" xml:space="preserve">
+    <value>您希望将导入的项目放在哪里？</value>
+  </data>
+  <data name="strImportLocationMainInstruction" xml:space="preserve">
+    <value>导入位置</value>
+  </data>
+  <data name="strImportMenuItem" xml:space="preserve">
+    <value>导入(&amp;I)</value>
   </data>
   <data name="strImportmRemoteXML" xml:space="preserve">
     <value>导入mRemote/mRemoteNG XML</value>
@@ -875,6 +962,9 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strLoadFromSqlFailed" xml:space="preserve">
     <value>从SQL加载配置失败！</value>
+  </data>
+  <data name="strLoadFromSqlFailedContent" xml:space="preserve">
+    <value>连接信息无法从SQL服务器加载。</value>
   </data>
   <data name="strLoadFromXmlFailed" xml:space="preserve">
     <value>从XML加载配置失败！</value>
@@ -1062,6 +1152,9 @@ VncSharp 版本 {0}</value>
   <data name="strMenuSendSpecialKeys" xml:space="preserve">
     <value>发送特殊键(VNC)</value>
   </data>
+  <data name="strMenuSessionRetrieve" xml:space="preserve">
+    <value>取回</value>
+  </data>
   <data name="strMenuSessions" xml:space="preserve">
     <value>会话</value>
   </data>
@@ -1164,6 +1257,39 @@ VncSharp 版本 {0}</value>
   <data name="strOpenPorts" xml:space="preserve">
     <value>打开端口</value>
   </data>
+  <data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
+    <value>删除(&amp;D)</value>
+  </data>
+  <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
+    <value>新建(&amp;N)</value>
+  </data>
+  <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
+    <value>重置为默认值(&amp;R)</value>
+  </data>
+  <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
+    <value>全部重置为默认值(&amp;A)</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
+    <value>标签</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
+    <value>下一个标签</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
+    <value>上一个标签</value>
+  </data>
+  <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
+    <value>修改快捷方式</value>
+  </data>
+  <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
+    <value>键盘快捷键</value>
+  </data>
+  <data name="strOptionsProxyTesting" xml:space="preserve">
+    <value>测试...</value>
+  </data>
+  <data name="strOptionsTabKeyboard" xml:space="preserve">
+    <value>键盘</value>
+  </data>
   <data name="strOptionsTabTheme" xml:space="preserve">
     <value>主题</value>
   </data>
@@ -1179,8 +1305,17 @@ VncSharp 版本 {0}</value>
   <data name="strPasswordProtect" xml:space="preserve">
     <value>密码保护</value>
   </data>
+  <data name="strPasswordStatusMustMatch" xml:space="preserve">
+    <value>两个密码必须匹配。</value>
+  </data>
+  <data name="strPasswordStatusTooShort" xml:space="preserve">
+    <value>密码必须至少有3个字符。</value>
+  </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
     <value>请填写所有字段</value>
+  </data>
+  <data name="strPortScanComplete" xml:space="preserve">
+    <value>端口扫描完成。</value>
   </data>
   <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
     <value>无法载入端口扫描面板！</value>
@@ -1199,6 +1334,9 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
     <value>请选择VNC服务器的身份验证方式。</value>
+  </data>
+  <data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
+    <value>在调整窗口大小时或在切换全屏模式时选择是否自动调整连接大小。需要RDC 8.0或更高版本。</value>
   </data>
   <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
     <value>请选择是否启用位图缓存功能。</value>
@@ -1244,6 +1382,9 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strPropertyDescriptionIcon" xml:space="preserve">
     <value>请选择连接到主机时所要显示的图标。</value>
+  </data>
+  <data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+    <value>指定负载均衡信息，供负载均衡路由器使用以选择最佳服务器。</value>
   </data>
   <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
     <value>请输入远程主机的MAC地址（如果您需要在外部工具中使用此项）。</value>
@@ -1311,6 +1452,9 @@ VncSharp 版本 {0}</value>
   <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>连接到远程主机的控制台会话。</value>
   </data>
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>如果可用，请使用凭证安全支持提供程序（CredSSP）进行身份验证。</value>
+  </data>
   <data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>请在此随意输入任何你所需的信息。</value>
   </data>
@@ -1346,6 +1490,9 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
     <value>身份验证模式</value>
+  </data>
+  <data name="strPropertyNameAutomaticResize" xml:space="preserve">
+    <value>自动调整大小</value>
   </data>
   <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
     <value>位图缓存</value>
@@ -1391,6 +1538,9 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strPropertyNameIcon" xml:space="preserve">
     <value>图标</value>
+  </data>
+  <data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
+    <value>负载均衡信息</value>
   </data>
   <data name="strPropertyNameMACAddress" xml:space="preserve">
     <value>MAC地址</value>
@@ -1533,6 +1683,9 @@ VncSharp 版本 {0}</value>
   <data name="strPuttySavedSessionsRootName" xml:space="preserve">
     <value>PuTTY 会话已保存</value>
   </data>
+  <data name="strPuttySessionSettings" xml:space="preserve">
+    <value>PuTTY会话设置</value>
+  </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>PuTTY 设置</value>
   </data>
@@ -1572,12 +1725,6 @@ VncSharp 版本 {0}</value>
   <data name="strRadioCloseWarnNever" xml:space="preserve">
     <value>关闭连接时不需确认</value>
   </data>
-  <data name="strRAW" xml:space="preserve">
-    <value>RAW</value>
-  </data>
-  <data name="strRDP" xml:space="preserve">
-    <value>RDP</value>
-  </data>
   <data name="strRDP16777216Colors" xml:space="preserve">
     <value>24位色</value>
   </data>
@@ -1604,9 +1751,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>RDP 连接关闭失败！</value>
-  </data>
-  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
-    <value>连接建立失败！</value>
   </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>无法创建 RDP 控制，请检查 mRemoteNG 的安装需求是否满足。</value>
@@ -1686,9 +1830,6 @@ VncSharp 版本 {0}</value>
   <data name="strRdpGetSessionsFailed" xml:space="preserve">
     <value>GetSessions 函数执行失败！</value>
   </data>
-  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>建立RDP连接失败！</value>
-  </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>RDP 重新连接计数器：</value>
   </data>
@@ -1760,9 +1901,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strRename" xml:space="preserve">
     <value>重命名</value>
-  </data>
-  <data name="strRlogin" xml:space="preserve">
-    <value>Rlogin</value>
   </data>
   <data name="strSave" xml:space="preserve">
     <value>保存</value>
@@ -1836,9 +1974,6 @@ VncSharp 版本 {0}</value>
   <data name="strSmartSizeModeNone" xml:space="preserve">
     <value>禁用窗口自适应</value>
   </data>
-  <data name="strSocks5" xml:space="preserve">
-    <value>Socks 5</value>
-  </data>
   <data name="strSort" xml:space="preserve">
     <value>排序</value>
   </data>
@@ -1905,9 +2040,6 @@ VncSharp 版本 {0}</value>
   <data name="strTabUpdates" xml:space="preserve">
     <value>升级</value>
   </data>
-  <data name="strTelnet" xml:space="preserve">
-    <value>Telnet</value>
-  </data>
   <data name="strTheFollowing" xml:space="preserve">
     <value>以下：</value>
   </data>
@@ -1919,6 +2051,57 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strThemeCategoryGeneral" xml:space="preserve">
     <value>常规</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>配置面板的背景颜色。</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>配置面板中类别文本的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>配置面板中网格线的颜色</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>配置面板的帮助区域的背景颜色。</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>配置面板帮助区域中文本的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>配置面板中文本的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>连接面板的背景颜色。</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>连接面板中文本的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>连接面板中树形线的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>菜单的背景颜色。</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>菜单中文本的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>搜索框的背景颜色。</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>搜索框中文本的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>搜索框中提示文本的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>工具栏的背景颜色。</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>工具栏中文本的颜色。</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>主窗口的背景颜色。</value>
   </data>
   <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
     <value>配置面板背景色</value>
@@ -1980,6 +2163,9 @@ VncSharp 版本 {0}</value>
   <data name="strTitlePassword" xml:space="preserve">
     <value>密码</value>
   </data>
+  <data name="strTitlePasswordWithName" xml:space="preserve">
+    <value>{0}的密码</value>
+  </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>选择面板</value>
   </data>
@@ -1995,11 +2181,11 @@ VncSharp 版本 {0}</value>
   <data name="strTryIntegrate" xml:space="preserve">
     <value>尝试进行集成</value>
   </data>
+  <data name="strShowOnToolbar" xml:space="preserve">
+    <value>在工具栏上显示</value>
+  </data>
   <data name="strType" xml:space="preserve">
     <value>类型</value>
-  </data>
-  <data name="strUltraVncRepeater" xml:space="preserve">
-    <value>Ultra VNC Repeater</value>
   </data>
   <data name="strUltraVNCSCListeningPort" xml:space="preserve">
     <value>UltraVNC SingleClick端口：</value>
@@ -2019,14 +2205,14 @@ VncSharp 版本 {0}</value>
   <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
     <value>升级检查未完成！</value>
   </data>
-  <data name="strUpdateCheckFailed" xml:space="preserve">
-    <value>升级检查失败！</value>
+  <data name="strUpdateCheckFailedLabel" xml:space="preserve">
+    <value>检查失败</value>
+  </data>
+  <data name="strUpdateCheckingLabel" xml:space="preserve">
+    <value>检查更新...</value>
   </data>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
     <value>mRemoteNG便携版目前不支持自动更新。</value>
-  </data>
-  <data name="strUpdateDeleteFailed" xml:space="preserve">
-    <value>升级文件删除失败！</value>
   </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>下载完成！
@@ -2050,14 +2236,11 @@ mRemoteNG 将退出并安装更新。</value>
   <data name="strUpdateFrequencyWeekly" xml:space="preserve">
     <value>每周</value>
   </data>
-  <data name="strUpdateStartFailed" xml:space="preserve">
-    <value>升级启动失败！</value>
+  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+    <value>更改日志无法下载。</value>
   </data>
   <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>使用不同的用户名和密码</value>
-  </data>
-  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
-    <value>仅适用通知面板(不弹出消息窗口)</value>
   </data>
   <data name="strUser" xml:space="preserve">
     <value>用户</value>
@@ -2074,14 +2257,8 @@ mRemoteNG 将退出并安装更新。</value>
   <data name="strVersion" xml:space="preserve">
     <value>版本</value>
   </data>
-  <data name="strVnc" xml:space="preserve">
-    <value>VNC</value>
-  </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>VNC 连接断开失败！</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>连接建立失败！</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
     <value>VNC 屏幕刷新失败！</value>
@@ -2113,13 +2290,324 @@ mRemoteNG 将退出并安装更新。</value>
   <data name="strWeifenLuoAttribution" xml:space="preserve">
     <value>使用DockPanel Suite[Weifen Luo]</value>
   </data>
-  <data name="strWriteLogFile" xml:space="preserve">
-    <value>记录日志(mRemoteNG.log)</value>
-  </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner路径：</value>
   </data>
   <data name="strYes" xml:space="preserve">
     <value>确定</value>
+  </data>
+  <data name="strMenuReconnectAll" xml:space="preserve">
+    <value>重新连接所有打开的连接</value>
+  </data>
+  <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
+    <value>RDP连接超时</value>
+  </data>
+  <data name="strNodeAlreadyInFolder" xml:space="preserve">
+    <value>此节点已在此文件夹中。</value>
+  </data>
+  <data name="strNodeCannotDragOnSelf" xml:space="preserve">
+    <value>无法将节点拖到自身上。</value>
+  </data>
+  <data name="strNodeCannotDragParentOnChild" xml:space="preserve">
+    <value>无法将父节点拖放到子节点上。</value>
+  </data>
+  <data name="strNodeNotDraggable" xml:space="preserve">
+    <value>该节点不可拖动。</value>
+  </data>
+  <data name="strEncryptionBlockCipherMode" xml:space="preserve">
+    <value>分组密码模式</value>
+  </data>
+  <data name="strEncryptionEngine" xml:space="preserve">
+    <value>加密引擎</value>
+  </data>
+  <data name="strTabSecurity" xml:space="preserve">
+    <value>安全</value>
+  </data>
+  <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>关键推导函数迭代</value>
+  </data>
+  <data name="strRDPSoundQualityDynamic" xml:space="preserve">
+    <value>动态</value>
+  </data>
+  <data name="strRDPSoundQualityHigh" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="strRDPSoundQualityMedium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
+    <value>选择由协议提供的声音质量：动态，中，高</value>
+  </data>
+  <data name="strPropertyNameSoundQuality" xml:space="preserve">
+    <value>音质</value>
+  </data>
+  <data name="strUpdatePortableDownloadComplete" xml:space="preserve">
+    <value>下载完成！</value>
+  </data>
+  <data name="strDownloadPortable" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="strPropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>RDP会话在自动断开连接之前闲置的分钟数（无限制使用0）</value>
+  </data>
+  <data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>空闲等待分钟数</value>
+  </data>
+  <data name="strAccept" xml:space="preserve">
+    <value>接受</value>
+  </data>
+  <data name="strAdd" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="strCredentialEditor" xml:space="preserve">
+    <value>凭据编辑器</value>
+  </data>
+  <data name="strCredentialManager" xml:space="preserve">
+    <value>凭证管理器</value>
+  </data>
+  <data name="strRemove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="strTitle" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="strPropertyDescriptionCredential" xml:space="preserve">
+    <value>选择用于此连接的凭证。</value>
+  </data>
+  <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>您确定要删除凭据记录{0}吗？</value>
+  </data>
+  <data name="strFindMatchingCredentialFailed" xml:space="preserve">
+    <value>找不到名为“{1}”的连接记录的ID为“{0}”的凭证记录。</value>
+  </data>
+  <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+    <value>选择是否在RDP会话由于不活动而断开连接后收到警报</value>
+  </data>
+  <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+    <value>空闲断开警报</value>
+  </data>
+  <data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+    <value>密码必须至少包含{0}个以下所示字符：{1}</value>
+  </data>
+  <data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+    <value>密码必须至少包含{0}个小写字符</value>
+  </data>
+  <data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>密码必须至少包含{0}个数字</value>
+  </data>
+  <data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>密码必须至少包含{0}大写字符</value>
+  </data>
+  <data name="strPasswordLengthConstraintHint" xml:space="preserve">
+    <value>密码长度必须介于{0}和{1}之间</value>
+  </data>
+  <data name="strChooseLogPath" xml:space="preserve">
+    <value>为mRemoteNG日志文件选择一个路径</value>
+  </data>
+  <data name="strDebug" xml:space="preserve">
+    <value>调试</value>
+  </data>
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
+    <value>显示这些消息类型</value>
+  </data>
+  <data name="strLogFilePath" xml:space="preserve">
+    <value>日志文件路径</value>
+  </data>
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
+    <value>记录这些消息类型</value>
+  </data>
+  <data name="strChoosePath" xml:space="preserve">
+    <value>选择路径</value>
+  </data>
+  <data name="strOpenFile" xml:space="preserve">
+    <value>打开文件</value>
+  </data>
+  <data name="strUseDefault" xml:space="preserve">
+    <value>使用默认</value>
+  </data>
+  <data name="strLogging" xml:space="preserve">
+    <value>记录</value>
+  </data>
+  <data name="strPopups" xml:space="preserve">
+    <value>弹出窗口</value>
+  </data>
+  <data name="strLogToAppDir" xml:space="preserve">
+    <value>登录到应用程序目录</value>
+  </data>
+  <data name="strAssignedCredential" xml:space="preserve">
+    <value>分配凭据</value>
+  </data>
+  <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
+    <value>始终允许</value>
+  </data>
+  <data name="strHttpsInsecureAllowOnce" xml:space="preserve">
+    <value>允许一次</value>
+  </data>
+  <data name="strHttpsInsecureDontAllow" xml:space="preserve">
+    <value>不允许</value>
+  </data>
+  <data name="strHttpsInsecurePrompt" xml:space="preserve">
+    <value>允许网址{0}的不安全证书？</value>
+  </data>
+  <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
+    <value>允许不安全的证书？</value>
+  </data>
+  <data name="RepositoryIsUnlocked" xml:space="preserve">
+    <value>选定的存储库已解锁</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>密码错误</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>资源</value>
+  </data>
+  <data name="Unlocking" xml:space="preserve">
+    <value>解锁</value>
+  </data>
+  <data name="UnlockCredentialRepository" xml:space="preserve">
+    <value>解锁凭据存储库</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>解锁</value>
+  </data>
+  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
+    <value>提示在启动时解锁凭据存储库</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>凭据</value>
+  </data>
+  <data name="strUpgrade" xml:space="preserve">
+    <value>升级</value>
+  </data>
+  <data name="strBack" xml:space="preserve">
+    <value>后退</value>
+  </data>
+  <data name="strConnectionFilePath" xml:space="preserve">
+    <value>连接文件路径</value>
+  </data>
+  <data name="strCreateAndOpenNewFile" xml:space="preserve">
+    <value>创建并打开新文件</value>
+  </data>
+  <data name="strOpenADifferentFile" xml:space="preserve">
+    <value>打开一个不同的文件</value>
+  </data>
+  <data name="strCredentialManagerUpgradeDescription" xml:space="preserve">
+    <value>在v1.76中，我们引入了凭证管理系统。此功能要求我们在mRemoteNG中存储和交互凭据的方式发生重大变化。您将需要执行mRemoteNG连接文件的单向升级。
+
+如果您不想执行升级，此页面将引导您完成升级连接文件的过程，或者让您有机会打开不同的连接文件。</value>
+  </data>
+  <data name="CredentialUnavailable" xml:space="preserve">
+    <value>凭据不可用</value>
+  </data>
+  <data name="strOptionsThemeDeleteConfirmation" xml:space="preserve">
+    <value>你真的想删除主题吗？</value>
+  </data>
+  <data name="strOptionsThemeEnableTheming" xml:space="preserve">
+    <value>启用主题</value>
+  </data>
+  <data name="strOptionsThemeNewThemeCaption" xml:space="preserve">
+    <value>新主题名称</value>
+  </data>
+  <data name="strOptionsThemeNewThemeError" xml:space="preserve">
+    <value>无法创建主题，名称已存在或名称中有特殊字符</value>
+  </data>
+  <data name="strOptionsThemeNewThemeText" xml:space="preserve">
+    <value>输入新的主题名称</value>
+  </data>
+  <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
+    <value>警告：需要重新启动才能禁用主题或完全应用新主题</value>
+  </data>
+  <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
+    <value>未加载任何主题，请检查默认的mremoteNG主题是否存在于“主题”文件夹中</value>
+  </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>无法找到名称为“{0}”的外部工具</value>
+  </data>
+  <data name="ConfigurationCreateNew" xml:space="preserve">
+    <value>创建一个新的连接文件</value>
+  </data>
+  <data name="ConnectionFileNotFound" xml:space="preserve">
+    <value>无法找到连接文件。</value>
+  </data>
+  <data name="ConfigurationImportFile" xml:space="preserve">
+    <value>导入现有文件</value>
+  </data>
+  <data name="ConfigurationCustomPath" xml:space="preserve">
+    <value>使用自定义文件路径</value>
+  </data>
+  <data name="TestingConnection" xml:space="preserve">
+    <value>测试连接</value>
+  </data>
+  <data name="ServerNotAccessible" xml:space="preserve">
+    <value>服务器“{0}”无法访问。</value>
+  </data>
+  <data name="ConnectionSuccessful" xml:space="preserve">
+    <value>连接成功</value>
+  </data>
+  <data name="LoginFailedForUser" xml:space="preserve">
+    <value>用户“{0}”登录失败。</value>
+  </data>
+  <data name="DatabaseNotAvailable" xml:space="preserve">
+    <value>数据库“{0}”不可用。</value>
+  </data>
+  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+    <value>每次编辑后保存连接</value>
+  </data>
+  <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+    <value>在连接树中过滤搜索匹配</value>
+  </data>
+  <data name="TestConnection" xml:space="preserve">
+    <value>测试连接</value>
+  </data>
+  <data name="strLabelReadOnly" xml:space="preserve">
+    <value>只读:</value>
+  </data>
+  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>对RDP“负载均衡信息”属性使用UTF8编码</value>
+  </data>
+  <data name="strTimeoutInSeconds" xml:space="preserve">
+    <value>超时（秒）</value>
+  </data>
+  <data name="srtWorkingDirectory" xml:space="preserve">
+    <value>工作目录:</value>
+  </data>
+  <data name="strRunElevated" xml:space="preserve">
+    <value>运行已提升</value>
+  </data>
+  <data name="strRunElevateHeader" xml:space="preserve">
+    <value>运行提升</value>
+  </data>
+  <data name="strShowOnToolbarColumnHeader" xml:space="preserve">
+    <value>显示在工具栏上</value>
+  </data>
+  <data name="strTryToIntegrateColumnHeader" xml:space="preserve">
+    <value>尝试整合</value>
+  </data>
+  <data name="strWorkingDirColumnHeader" xml:space="preserve">
+    <value>工作目录</value>
+  </data>
+  <data name="strLockToolbars" xml:space="preserve">
+    <value>锁定工具栏位置</value>
+  </data>
+  <data name="strMultiSshToolbar" xml:space="preserve">
+    <value>多SSH工具栏</value>
+  </data>
+  <data name="strImportSubOUs" xml:space="preserve">
+    <value>导入子OU</value>
+  </data>
+  <data name="strMenuLockToolbars" xml:space="preserve">
+    <value>锁定工具栏位置</value>
+  </data>
+  <data name="strMenuMultiSshToolbar" xml:space="preserve">
+    <value>多SSH工具栏</value>
+  </data>
+  <data name="strAdvancedSecurityOptions" xml:space="preserve">
+    <value>高级安全选项</value>
+  </data>
+  <data name="strOptionsPageTitle" xml:space="preserve">
+    <value>mRemoteNG选项</value>
+  </data>
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>对RDP“负载均衡信息”属性使用UTF8编码</value>
   </data>
 </root>

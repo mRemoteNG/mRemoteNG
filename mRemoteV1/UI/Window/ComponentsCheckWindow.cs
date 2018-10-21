@@ -1,20 +1,20 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
-using mRemoteNG.App;
 using System.Threading;
 using AxMSTSCLib;
 using AxWFICALib;
 using Gecko;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Messages;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-    public class ComponentsCheckWindow : BaseWindow
+	public class ComponentsCheckWindow : BaseWindow
     {
         #region Form Stuff
         private System.Windows.Forms.PictureBox pbCheck1;
@@ -399,6 +399,8 @@ namespace mRemoteNG.UI.Window
             WindowType = WindowType.ComponentsCheck;
             DockPnl = new DockContent();
             InitializeComponent();
+            FontOverrider.FontOverride(this);
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
         #endregion
 
@@ -406,6 +408,7 @@ namespace mRemoteNG.UI.Window
         private void ComponentsCheck_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
+            ApplyTheme();
             chkAlwaysShow.Checked = Settings.Default.StartupComponentsCheck;
             CheckComponents();
         }
@@ -416,6 +419,24 @@ namespace mRemoteNG.UI.Window
             Text = Language.strComponentsCheck;
             chkAlwaysShow.Text = Language.strCcAlwaysShowScreen;
             btnCheckAgain.Text = Language.strCcCheckAgain;
+        }
+
+        private new void ApplyTheme()
+        {
+            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            base.ApplyTheme();
+            pnlCheck1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck1.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck2.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck2.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck3.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck3.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck4.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck4.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck5.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck5.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlChecks.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlChecks.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void btnCheckAgain_Click(object sender, EventArgs e)
@@ -488,7 +509,7 @@ namespace mRemoteNG.UI.Window
                 pbCheck1.Image = Resources.Bad_Symbol;
                 lblCheck1.ForeColor = Color.Firebrick;
                 lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckFailed;
-                txtCheck1.Text = Language.strCcRDPFailed;
+                txtCheck1.Text = string.Format(Language.strCcRDPFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                     "RDP " + Language.strCcNotInstalledProperly, true);
@@ -524,7 +545,7 @@ namespace mRemoteNG.UI.Window
                 pbCheck2.Image = Resources.Bad_Symbol;
                 lblCheck2.ForeColor = Color.Firebrick;
                 lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckFailed;
-                txtCheck2.Text = Language.strCcVNCFailed;
+                txtCheck2.Text = string.Format(Language.strCcVNCFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                     "VNC " + Language.strCcNotInstalledProperly, true);
@@ -591,7 +612,7 @@ namespace mRemoteNG.UI.Window
                 pbCheck4.Image = Resources.Bad_Symbol;
                 lblCheck4.ForeColor = Color.Firebrick;
                 lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckFailed;
-                txtCheck4.Text = Language.strCcICAFailed;
+                txtCheck4.Text = string.Format(Language.strCcICAFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "ICA " + Language.strCcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
@@ -634,7 +655,7 @@ namespace mRemoteNG.UI.Window
                 pbCheck5.Image = Resources.Bad_Symbol;
                 lblCheck5.ForeColor = Color.Firebrick;
                 lblCheck5.Text = @"Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckFailed;
-                txtCheck5.Text = Language.strCcGeckoFailed;
+                txtCheck5.Text = string.Format(Language.strCcGeckoFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                     "Gecko " + Language.strCcNotInstalledProperly, true);

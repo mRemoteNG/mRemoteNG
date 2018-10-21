@@ -72,6 +72,12 @@ namespace mRemoteNG.Config.Settings
                     Arguments = xEl.Attributes["Arguments"].Value
                 };
 
+                // check before, since old save files won't have this set
+                if (xEl.HasAttribute("WorkingDir"))
+                    extA.WorkingDir = xEl.Attributes["WorkingDir"].Value;
+                if (xEl.HasAttribute("RunElevated"))
+                    extA.RunElevated = bool.Parse(xEl.Attributes["RunElevated"].Value);
+
                 if (xEl.HasAttribute("WaitForExit"))
                 {
                     extA.WaitForExit = bool.Parse(xEl.Attributes["WaitForExit"].Value);
@@ -80,6 +86,11 @@ namespace mRemoteNG.Config.Settings
                 if (xEl.HasAttribute("TryToIntegrate"))
                 {
                     extA.TryIntegrate = bool.Parse(xEl.Attributes["TryToIntegrate"].Value);
+                }
+
+                if (xEl.HasAttribute("ShowOnToolbar"))
+                {
+                    extA.ShowOnToolbar = bool.Parse(xEl.Attributes["ShowOnToolbar"].Value);
                 }
 
                 _messageCollector.AddMessage(MessageClass.InformationMsg, $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}", true);

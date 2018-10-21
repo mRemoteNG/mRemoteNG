@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Controls
             //
             //Theming support
             //
-            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+            vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(components);
             // 
             // lblQuickConnect
             // 
@@ -201,6 +201,7 @@ namespace mRemoteNG.UI.Controls
         private void btnQuickConnect_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             SetQuickConnectProtocol(e.ClickedItem.Text);
+            btnQuickConnect_ButtonClick(this, e);
         }
 
         private void SetQuickConnectProtocol(string protocol)
@@ -232,10 +233,19 @@ namespace mRemoteNG.UI.Controls
         private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
-            if (tag != null)
+            var menuItem = (ToolStripMenuItem) sender;
+
+            // While we can connect to a whole folder at once, it is
+            // probably not the expected behavior when navigating through
+            // a nested menu. Just return
+            var containerInfo = menuItem.Tag as ContainerInfo;
+            if (containerInfo != null)
+                return;
+
+            var connectionInfo = menuItem.Tag as ConnectionInfo;
+            if (connectionInfo != null)
             {
-                ConnectionInitiator.OpenConnection(tag);
+                ConnectionInitiator.OpenConnection(connectionInfo);
             }
         }
         #endregion

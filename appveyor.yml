@@ -1,0 +1,28 @@
+version: 1.76.{build}
+pull_requests:
+  do_not_increment_build_number: true
+image: Visual Studio 2017
+configuration:
+- Release
+- Release Portable
+- Release Installer
+platform: x86
+clone_depth: 1
+install:
+- ps: C:\projects\mremoteng\mRemoteV1\Resources\CitrixReceiver.exe DONOTSTARTCC=1 ENABLE_SSON="No" /silent | out-null
+before_build:
+- cmd: nuget restore
+build:
+  project: mRemoteV1.sln
+  verbosity: normal
+after_build:
+- ps: "if([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) {\n    Write-Output \"NOT running via Appveyor - Exiting\"\n    Exit\n}\n\n$appvDir = $Env:APPVEYOR_BUILD_FOLDER\n\nWrite-Output \"Appveyor Build Dir: '$($appvDir)'\"\n$ConfigurationName = $Env:CONFIGURATION.Trim()\nWrite-Output \"Config Name (tirmmed): '$($ConfigurationName)'\"\n\n\n$SIGCHECK=\"$($SolutionDir)Tools\\exes\\sigcheck.exe\"\n$SEVENZIP=\"$($SolutionDir)Tools\\7zip\\7za.exe\"\n\nif ($ConfigurationName -eq \"Release Portable\") {\n    Write-Output \"Packaging Release Portable ZIP\"\n   \n    $version = & $SIGCHECK /accepteula -q -n \"$($SolutionDir)mRemoteV1\\bin\\$($ConfigurationName)\\mRemoteNG.exe\"\n\n    Write-Output \"Version is $($version)\"\n\n    $PortableZip=\"$($SolutionDir)Release\\mRemoteNG-Portable-$($version).zip\"\n\n    Remove-Item -Recurse \"$($SolutionDir)mRemoteV1\\bin\\package\" -ErrorAction SilentlyContinue | Out-Null\n    New-Item \"$($SolutionDir)mRemoteV1\\bin\\package\" -ItemType  \"directory\" | Out-Null\n    \n    Copy-Item \"$($SolutionDir)mRemoteV1\\Resources\\PuTTYNG.exe\" -Destination \"$($SolutionDir)mRemoteV1\\bin\\package\"\n\n    Copy-Item \"$($SolutionDir)mRemoteV1\\bin\\$ConfigurationName\\*\" -Destination \"$($SolutionDir)mRemoteV1\\bin\\package\" -Recurse  -Force \n    Copy-Item \"$($SolutionDir)*.txt\" -Destination \"$($SolutionDir)mRemoteV1\\bin\\package\"\n\n    Write-Output \"Creating portable ZIP file $($PortableZip)\"\n    Remove-Item -Force  $PortableZip -ErrorAction SilentlyContinue\n    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip \"$($SolutionDir)mRemoteV1\\bin\\package\\*.*\"\n}\nelse {\n    Write-Output \"We will not zip anything - this isnt a portable release build.\"\n}"
+test:
+  assemblies:
+    only:
+    - mRemoteNGTests\bin\$(configuration)\mRemoteNGTests.dll
+artifacts:
+- path: Release\*.msi
+  name: mRemoteNG-installer.msi
+- path: Release\*.zip
+  name: mRemoteNG-portable.zip

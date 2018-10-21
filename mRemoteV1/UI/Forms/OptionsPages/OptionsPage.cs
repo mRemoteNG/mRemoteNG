@@ -9,25 +9,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 	    protected OptionsPage()
 		{
             //InitializeComponent();
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
-                Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
-
+            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
 			
         #region Public Properties
-		[Browsable(false)]public virtual string PageName {get; set;}
+	    // ReSharper disable once UnusedAutoPropertyAccessor.Global
+	    [Browsable(false)]public virtual string PageName {get; set;}
 			
-		public virtual Icon PageIcon {get; set;}
-        public virtual Image IconImage{
-            get
-            {
-                if (PageIcon != null)
-                    return PageIcon.ToBitmap();
-                return null;
-            }
-        }
+		public virtual Icon PageIcon {get; protected set;}
+        public virtual Image IconImage => PageIcon?.ToBitmap();
 
-        #endregion
+	    #endregion
 
         #region Public Methods
         public virtual void ApplyLanguage()
@@ -51,25 +43,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		}
         #endregion
 
+        /*
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // OptionsPage
             // 
-            this.Name = "OptionsPage";
-            this.Size = new System.Drawing.Size(610, 489);
-            this.ResumeLayout(false); 
-        }
+            Name = "OptionsPage";
+            Size = new Size(610, 489);
+            ResumeLayout(false);
 
-        public virtual void ApplyTheme()
+        }
+        */
+
+	    protected virtual void ApplyTheme()
         {
-             if (Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-                Invalidate();
-            }
+            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            Invalidate();
         }
     }
 }

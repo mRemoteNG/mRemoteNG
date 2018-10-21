@@ -6,24 +6,25 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.DataProviders
 {
-    public class FileDataProviderTests
+	public class FileDataProviderTests
     {
         private FileDataProvider _dataProvider;
         private string _testFilePath;
+	    private string _testFileDirectory;
 
         [SetUp]
         public void Setup()
         {
             _testFilePath = FileTestHelpers.NewTempFilePath();
-            FileTestHelpers.DeleteTestFile(_testFilePath);
+	        _testFileDirectory = Path.GetDirectoryName(_testFilePath);
             _dataProvider = new FileDataProvider(_testFilePath);
         }
 
         [TearDown]
         public void Teardown()
         {
-            var tempFilePath = FileTestHelpers.GetAppSpecificTempDirectory();
-            Directory.Delete(tempFilePath, true);
+            if (Directory.Exists(_testFileDirectory))
+                Directory.Delete(_testFileDirectory, true);
         }
 
         [Test]
@@ -50,7 +51,7 @@ namespace mRemoteNGTests.Config.DataProviders
         {
             var folder1 = Guid.NewGuid().ToString();
             var folder2 = Guid.NewGuid().ToString();
-            var fileThatShouldExist = Path.Combine(FileTestHelpers.GetAppSpecificTempDirectory(), folder1, folder2, Path.GetRandomFileName());
+            var fileThatShouldExist = Path.Combine(_testFileDirectory, folder1, folder2, Path.GetRandomFileName());
             _dataProvider.FilePath = fileThatShouldExist;
             _dataProvider.Save("");
             Assert.That(File.Exists(fileThatShouldExist), Is.True);

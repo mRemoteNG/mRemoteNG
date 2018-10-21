@@ -9,9 +9,7 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ActiveDirectoryImportWindow
     {
-        private string CurrentDomain;
-
-        #region Constructors
+        private string _currentDomain;
 
         public ActiveDirectoryImportWindow()
         {
@@ -19,11 +17,9 @@ namespace mRemoteNG.UI.Window
             FontOverrider.FontOverride(this);
             WindowType = WindowType.ActiveDirectoryImport;
             DockPnl = new DockContent();
-            CurrentDomain = Environment.UserDomainName;
+            _currentDomain = Environment.UserDomainName;
             ApplyTheme();
         }
-
-        #endregion
 
         private new void ApplyTheme()
         {
@@ -38,8 +34,8 @@ namespace mRemoteNG.UI.Window
         private void ADImport_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
-            txtDomain.Text = CurrentDomain;
-            ActiveDirectoryTree.Domain = CurrentDomain;
+            txtDomain.Text = _currentDomain;
+            ActiveDirectoryTree.Domain = _currentDomain;
             EnableDisableImportButton();
             
             // Domain doesn't refresh on load, so it defaults to DOMAIN without this...
@@ -89,13 +85,15 @@ namespace mRemoteNG.UI.Window
         {
             btnImport.Text = Language.strButtonImport;
             lblDomain.Text = Language.strLabelDomain;
+            chkSubOU.Text = Language.strImportSubOUs;
             btnChangeDomain.Text = Language.strButtonChange;
+            btnClose.Text = Language.strButtonClose;
         }
 
         private void ChangeDomain()
         {
-            CurrentDomain = txtDomain.Text;
-            ActiveDirectoryTree.Domain = CurrentDomain;
+            _currentDomain = txtDomain.Text;
+            ActiveDirectoryTree.Domain = _currentDomain;
             ActiveDirectoryTree.Refresh();
         }
 

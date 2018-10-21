@@ -34,8 +34,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            base.OnCreateControl(); 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             // Allows for Overlaying
@@ -71,7 +70,7 @@ namespace mRemoteNG.UI.Controls.Base
         //This class is painted with the checkbox colors, the glyph color is used for the radio inside
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Tools.DesignModeTest.IsInDesignMode(this) || !_themeManager.ThemingActive)
+            if ( !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
                 return;

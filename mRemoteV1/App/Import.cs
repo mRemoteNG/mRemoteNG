@@ -7,22 +7,10 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
 
-
 namespace mRemoteNG.App
 {
     public static class Import
     {
-        private enum FileType
-        {
-            Unknown = 0,
-            // ReSharper disable once InconsistentNaming
-            mRemoteXml,
-            RemoteDesktopConnection,
-            RemoteDesktopConnectionManager,
-            PuttyConnectionManager
-        }
-
-        #region Public Methods
         public static void ImportFromFile(ContainerInfo importDestinationContainer)
         {
             try
@@ -34,8 +22,9 @@ namespace mRemoteNG.App
                     openFileDialog.Multiselect = true;
 
                     var fileTypes = new List<string>();
-                    fileTypes.AddRange(new[] {Language.strFilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat"});
+                    fileTypes.AddRange(new[] {Language.strFilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat;*.csv"});
                     fileTypes.AddRange(new[] {Language.strFiltermRemoteXML, "*.xml"});
+                    fileTypes.AddRange(new[] {Language.strFiltermRemoteCSV, "*.csv"});
                     fileTypes.AddRange(new[] {Language.strFilterRDP, "*.rdp"});
                     fileTypes.AddRange(new[] {Language.strFilterRdgFiles, "*.rdg"});
                     fileTypes.AddRange(new[] {Language.strFilterPuttyConnectionManager, "*.dat"});
@@ -50,50 +39,32 @@ namespace mRemoteNG.App
                     {
                         try
                         {
-                            IConnectionImporter importer;
-                            // ReSharper disable once SwitchStatementMissingSomeCases
-                            switch (DetermineFileType(fileName))
-                            {
-                                case FileType.mRemoteXml:
-                                    importer = new mRemoteNGImporter();
-                                    break;
-                                case FileType.RemoteDesktopConnection:
-                                    importer = new RemoteDesktopConnectionImporter();
-                                    break;
-                                case FileType.RemoteDesktopConnectionManager:
-                                    importer = new RemoteDesktopConnectionManagerImporter();
-                                    break;
-                                case FileType.PuttyConnectionManager:
-                                    importer = new PuttyConnectionManagerImporter();
-                                    break;
-                                default:
-                                    throw new FileFormatException("Unrecognized file format.");
-                            }
+                            var importer = BuildConnectionImporterFromFileExtension(fileName);
                             importer.Import(fileName, importDestinationContainer);
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
                                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                            Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:1", ex);
+                            Runtime.MessageCollector.AddExceptionMessage("Unable to import file.", ex);
                         }
                     }
 
-                    Runtime.SaveConnectionsAsync();
+                    Runtime.ConnectionsService.SaveConnectionsAsync();
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:2", ex);
+                Runtime.MessageCollector.AddExceptionMessage("Unable to import file.", ex);
             }
         }
 
-        public static void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer, bool importSubOU)
+        public static void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer, bool importSubOu)
         {
             try
             {
-                ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOU);
-                Runtime.SaveConnectionsAsync();
+                ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOu);
+                Runtime.ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {
@@ -107,32 +78,32 @@ namespace mRemoteNG.App
             {
                 var importer = new PortScanImporter(protocol);
                 importer.Import(hosts, importDestinationContainer);
-                Runtime.SaveConnectionsAsync();
+                Runtime.ConnectionsService.SaveConnectionsAsync();
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromPortScan() failed.", ex);
             }
         }
-        #endregion
 
-        private static FileType DetermineFileType(string fileName)
+        private static IConnectionImporter<string> BuildConnectionImporterFromFileExtension(string fileName)
         {
             // TODO: Use the file contents to determine the file type instead of trusting the extension
-            var extension = Path.GetExtension(fileName);
-            if (extension == null) return FileType.Unknown;
+            var extension = Path.GetExtension(fileName) ?? "";
             switch (extension.ToLowerInvariant())
             {
                 case ".xml":
-                    return FileType.mRemoteXml;
+                    return new MRemoteNGXmlImporter();
+                case ".csv":
+                    return new MRemoteNGCsvImporter();
                 case ".rdp":
-                    return FileType.RemoteDesktopConnection;
+                    return new RemoteDesktopConnectionImporter();
                 case ".rdg":
-                    return FileType.RemoteDesktopConnectionManager;
+                    return new RemoteDesktopConnectionManagerImporter();
                 case ".dat":
-                    return FileType.PuttyConnectionManager;
+                    return new PuttyConnectionManagerImporter();
                 default:
-                    return FileType.Unknown;
+                    throw new FileFormatException("Unrecognized file format.");
             }
         }
     }

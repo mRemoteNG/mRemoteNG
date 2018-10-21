@@ -17,8 +17,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            if (Tools.DesignModeTest.IsInDesignMode(this)) return;
+            base.OnCreateControl(); 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
@@ -30,7 +29,8 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnEnabledChanged(EventArgs e)
         {
-            if (!Tools.DesignModeTest.IsInDesignMode(this))
+            _themeManager = ThemeManager.getInstance();
+            if (_themeManager.ThemingActive)
             {
                 _themeManager = ThemeManager.getInstance();
                 if(_themeManager.ThemingActive)
