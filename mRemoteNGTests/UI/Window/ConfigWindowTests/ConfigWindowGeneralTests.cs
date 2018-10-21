@@ -140,6 +140,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.UseCredSsp),
                         nameof(ConnectionInfo.RDGatewayUsageMethod),
                         nameof(ConnectionInfo.Resolution),
+                        nameof(ConnectionInfo.MultiMonitor),
                         nameof(ConnectionInfo.Colors),
                         nameof(ConnectionInfo.CacheBitmaps),
                         nameof(ConnectionInfo.DisplayWallpaper),
