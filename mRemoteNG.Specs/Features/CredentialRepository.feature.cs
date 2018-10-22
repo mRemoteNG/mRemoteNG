@@ -70,7 +70,6 @@ namespace mRemoteNG.Specs.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Load credential repository")]
         [NUnit.Framework.CategoryAttribute("credentials")]
-        [Ignore("Cred Repo not implmented currently.")]
         public virtual void LoadCredentialRepository()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Load credential repository", new string[] {
@@ -91,7 +90,6 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add credential record")]
-        [Ignore("Cred Repo not implmented currently.")]
         public virtual void AddCredentialRecord()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add credential record", ((string[])(null)));
@@ -113,7 +111,6 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Unload credential repository")]
-        [Ignore("Cred Repo not implmented currently.")]
         public virtual void UnloadCredentialRepository()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unload credential repository", ((string[])(null)));

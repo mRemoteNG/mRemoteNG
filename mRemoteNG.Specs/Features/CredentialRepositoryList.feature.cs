@@ -22,7 +22,6 @@ namespace mRemoteNG.Specs.Features
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("CredentialRepositoryList")]
-    [Ignore("Cred Repo not implmented currently.")]
     public partial class CredentialRepositoryListFeature
     {
         
@@ -71,7 +70,6 @@ namespace mRemoteNG.Specs.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new credential repository")]
         [NUnit.Framework.CategoryAttribute("credentials")]
-        [Ignore("Cred Repo not implmented currently.")]
         public virtual void AddANewCredentialRepository()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new credential repository", new string[] {
@@ -92,7 +90,6 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Remove a credential repository")]
-        [Ignore("Cred Repo not implmented currently.")]
         public virtual void RemoveACredentialRepository()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove a credential repository", ((string[])(null)));
