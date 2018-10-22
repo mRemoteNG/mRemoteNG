@@ -163,8 +163,14 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameResolution"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionResolution"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool Resolution {get; set;}
-				
-		[LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 6), 
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 6),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameMultiMonitor"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionMultiMonitor"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool MultiMonitor { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 6), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameAutomaticResize"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionAutomaticResize"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool AutomaticResize {get; set;}

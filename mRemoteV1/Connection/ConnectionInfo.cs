@@ -299,6 +299,7 @@ namespace mRemoteNG.Connection
         private void SetAppearanceDefaults() 
         {
             Resolution = (RdpProtocol.RDPResolutions) Enum.Parse(typeof(RdpProtocol.RDPResolutions), Settings.Default.ConDefaultResolution);
+            MultiMonitor = Settings.Default.ConDefaultMultiMonitor;
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
             Colors = (RdpProtocol.RDPColors) Enum.Parse(typeof(RdpProtocol.RDPColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;

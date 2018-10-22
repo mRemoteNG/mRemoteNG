@@ -170,9 +170,15 @@ namespace mRemoteNG.Config.Serializers.Csv
                 RdpProtocol.RDPResolutions value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Resolution")], out value))
                     connectionRecord.Resolution = value;
-            }
+			}
 
-            if (headers.Contains("AutomaticResize"))
+			if (headers.Contains("MultiMonitor"))
+			{
+				if (bool.TryParse(connectionCsv[headers.IndexOf("MultiMonitor")], out var value))
+					connectionRecord.MultiMonitor = value;
+			}
+
+			if (headers.Contains("AutomaticResize"))
             {
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("AutomaticResize")], out value))
@@ -478,16 +484,23 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectSound")], out value))
                     connectionRecord.Inheritance.RedirectSound = value;
-            }
+			}
 
-            if (headers.Contains("InheritResolution"))
-            {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritResolution")], out value))
-                    connectionRecord.Inheritance.Resolution = value;
-            }
+			if (headers.Contains("InheritResolution"))
+			{
+				bool value;
+				if (bool.TryParse(connectionCsv[headers.IndexOf("InheritResolution")], out value))
+					connectionRecord.Inheritance.Resolution = value;
+			}
 
-            if (headers.Contains("InheritAutomaticResize"))
+			if (headers.Contains("InheritMultiMonitor"))
+			{
+				bool value;
+				if (bool.TryParse(connectionCsv[headers.IndexOf("InheritMultiMonitor")], out value))
+					connectionRecord.Inheritance.MultiMonitor = value;
+			}
+
+			if (headers.Contains("InheritAutomaticResize"))
             {
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritAutomaticResize")], out value))

@@ -100,6 +100,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth,
                 Colors = RdpProtocol.RDPColors.Colors16Bit,
                 Resolution = RdpProtocol.RDPResolutions.Res1366x768,
+                MultiMonitor = true,
                 AutomaticResize = true,
                 DisplayWallpaper = true,
                 DisplayThemes = true,

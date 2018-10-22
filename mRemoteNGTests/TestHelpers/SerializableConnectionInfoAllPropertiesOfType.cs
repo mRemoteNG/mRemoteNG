@@ -30,6 +30,7 @@
 		public TType RDGatewayPassword { get; set; }
 		public TType RDGatewayDomain { get; set; }
 		public TType Resolution { get; set; }
+		public TType MultiMonitor { get; set; }
 		public TType AutomaticResize { get; set; }
 		public TType Colors { get; set; }
 		public TType CacheBitmaps { get; set; }
@@ -40,8 +41,8 @@
 		public TType RedirectKeys { get; set; }
 		public TType RedirectDiskDrives { get; set; }
 		public TType RedirectPrinters { get; set; }
-        public TType RedirectClipboard { get; set; }
-        public TType RedirectPorts { get; set; }
+		public TType RedirectClipboard { get; set; }
+		public TType RedirectPorts { get; set; }
 		public TType RedirectSmartCards { get; set; }
 		public TType RedirectSound { get; set; }
 		public TType SoundQuality { get; set; }
