@@ -1,16 +1,19 @@
-﻿using System.ComponentModel;
-using System.Windows.Forms;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
+using mRemoteNG.Themes;
 using mRemoteNG.Tools;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
-	public class MultiSshToolStrip : ToolStrip
+    public class MultiSshToolStrip : ToolStrip
 	{
 		private IContainer components;
 		private ToolStripLabel _lblMultiSsh;
 		private ToolStripTextBox _txtMultiSsh;
 		private MultiSSHController _multiSshController;
+	    private ThemeManager _themeManager;
+
 
 	    public MultiSshToolStrip() : this(null)
 	    {
@@ -20,6 +23,9 @@ namespace mRemoteNG.UI.Controls
 		{
 			InitializeComponent();
 			_multiSshController = new MultiSSHController(_txtMultiSsh, connectionsService);
+		    _themeManager = ThemeManager.getInstance();
+		    _themeManager.ThemeChanged += ApplyTheme;
+		    ApplyTheme();
 		}
 
 		private void InitializeComponent()
@@ -47,7 +53,14 @@ namespace mRemoteNG.UI.Controls
 			ResumeLayout(true);
 		}
 
-		protected override void Dispose(bool disposing)
+	    private void ApplyTheme()
+	    {
+	        if (!_themeManager.ThemingActive) return;
+	        _txtMultiSsh.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+	        _txtMultiSsh.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+	    }
+
+        protected override void Dispose(bool disposing)
 		{
 			if (disposing)
 			{

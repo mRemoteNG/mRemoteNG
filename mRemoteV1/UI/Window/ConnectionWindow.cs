@@ -100,6 +100,8 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab.Click += (sender, args) => DuplicateTab();
             cmenTabReconnect.Click += (sender, args) => Reconnect();
             cmenTabDisconnect.Click += (sender, args) => CloseTabMenu();
+            cmenTabDisconnectOthers.Click += (sender, args) => CloseOtherTabs();
+            cmenTabDisconnectOthersRight.Click += (sender, args) => CloseOtherTabsToTheRight();
             cmenTabPuttySettings.Click += (sender, args) => ShowPuttySettingsDialog();
         }
 
@@ -242,6 +244,8 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab.Text = Language.strMenuDuplicateTab;
             cmenTabReconnect.Text = Language.strMenuReconnect;
             cmenTabDisconnect.Text = Language.strMenuDisconnect;
+            cmenTabDisconnectOthers.Text = Language.strMenuDisconnectOthers;
+            cmenTabDisconnectOthersRight.Text = Language.strMenuDisconnectOthersRight;
             cmenTabPuttySettings.Text = Language.strPuttySettings;
         }
 
@@ -662,6 +666,92 @@ namespace mRemoteNG.UI.Window
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 interfaceControl?.Protocol.Close();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("CloseTabMenu (UI.Window.ConnectionWindow) failed", ex);
+            }
+        }
+
+        private void CloseOtherTabs()
+        {
+            try
+            {
+                if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
+                {
+                    var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionOthersInstruction, TabController.SelectedTab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                    if (CTaskDialog.VerificationChecked)
+                    {
+                        Settings.Default.ConfirmCloseConnection--;
+                    }
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+                foreach (TabPage tab in TabController.TabPages)
+                {
+                    if (TabController.TabPages.IndexOf(tab) != TabController.TabPages.IndexOf(TabController.SelectedTab))
+                    {
+                        if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
+                        {
+                            var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionMainInstruction, tab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                            if (CTaskDialog.VerificationChecked)
+                            {
+                                Settings.Default.ConfirmCloseConnection--;
+                            }
+                            if (result == DialogResult.No)
+                            {
+                                continue;
+                            }
+                        }
+                        var interfaceControl = tab.Tag as InterfaceControl;
+                        interfaceControl?.Protocol.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("CloseTabMenu (UI.Window.ConnectionWindow) failed", ex);
+            }
+        }
+
+        private void CloseOtherTabsToTheRight()
+        {
+            try
+            {
+                if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
+                {
+                    var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionRightInstruction, TabController.SelectedTab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                    if (CTaskDialog.VerificationChecked)
+                    {
+                        Settings.Default.ConfirmCloseConnection--;
+                    }
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+                foreach (TabPage tab in TabController.TabPages)
+                {
+                    if (TabController.TabPages.IndexOf(tab) > TabController.TabPages.IndexOf(TabController.SelectedTab))
+                    {
+                        if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
+                        {
+                            var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionMainInstruction, tab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                            if (CTaskDialog.VerificationChecked)
+                            {
+                                Settings.Default.ConfirmCloseConnection--;
+                            }
+                            if (result == DialogResult.No)
+                            {
+                                continue;
+                            }
+                        }
+                        var interfaceControl = tab.Tag as InterfaceControl;
+                        interfaceControl?.Protocol.Close();
+                    }
+                }
             }
             catch (Exception ex)
             {

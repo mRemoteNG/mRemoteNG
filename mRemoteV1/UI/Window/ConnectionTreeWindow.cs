@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
@@ -12,6 +6,12 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -164,6 +164,12 @@ namespace mRemoteNG.UI.Window
 
 	    private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
 	    {
+	        if (olvConnections.InvokeRequired)
+	        {
+	            olvConnections.Invoke(() => ConnectionsServiceOnConnectionsLoaded(o, connectionsLoadedEventArgs));
+                return;
+	        }
+
 	        olvConnections.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
 	        olvConnections.SelectedObject = connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes
 	            .OfType<RootNodeInfo>().FirstOrDefault();

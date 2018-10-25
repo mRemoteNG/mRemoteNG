@@ -1,14 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Text;
-using System.Windows.Forms;
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -34,6 +23,17 @@ using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -147,7 +147,7 @@ namespace mRemoteNG.UI.Forms
             //Theming support
             _themeManager = ThemeManager.getInstance();
             vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
-            SetSchema();
+            ApplyTheme();
 
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
         }
@@ -264,7 +264,9 @@ namespace mRemoteNG.UI.Forms
                 var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
                     ? Settings.Default.StartUpPanelName
                     : Language.strNewPanel;
-            	_panelAdder.AddPanel(panelName);
+
+                if (!_panelAdder.DoesPanelExist(panelName))
+                    _panelAdder.AddPanel(panelName);
             }
         }
 
@@ -338,22 +340,37 @@ namespace mRemoteNG.UI.Forms
         }
 
         //Theming support
-        private void SetSchema()
-        {
-            if (!_themeManager.ThemingActive) return;
-            // Persist settings when rebuilding UI
-            pnlDock.Theme = _themeManager.ActiveTheme.Theme;
-            ApplyTheme();
-        }
         private void ApplyTheme()
 		{
 		    if (!_themeManager.ThemingActive) return;
-		    vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-		    vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-		    vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-		    vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-		    tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
-		}
+
+		    try
+		    {
+                // this will always throw when turning themes on from
+                // the options menu.
+		        pnlDock.Theme = _themeManager.ActiveTheme.Theme;
+		    }
+		    catch (Exception)
+		    {
+		        // intentionally ignore exception
+		    }
+            
+		    // Persist settings when rebuilding UI
+		    try
+		    {
+                vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		        vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		        vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		        vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+		        tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
+		        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+		        ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+		    }
+		    catch (Exception ex)
+		    {
+                Runtime.MessageCollector.AddExceptionStackTrace("Error applying theme", ex, MessageClass.WarningMsg);
+		    }
+        }
 
         private void frmMain_Shown(object sender, EventArgs e)
         {

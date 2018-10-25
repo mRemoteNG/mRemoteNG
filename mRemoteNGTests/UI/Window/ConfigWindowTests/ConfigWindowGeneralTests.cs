@@ -151,6 +151,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectKeys),
                         nameof(ConnectionInfo.RedirectDiskDrives),
                         nameof(ConnectionInfo.RedirectPrinters),
+                        nameof(ConnectionInfo.RedirectClipboard),
                         nameof(ConnectionInfo.RedirectPorts),
                         nameof(ConnectionInfo.RedirectSmartCards),
                         nameof(ConnectionInfo.RedirectSound),

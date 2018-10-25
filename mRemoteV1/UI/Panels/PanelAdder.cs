@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
@@ -42,6 +43,12 @@ namespace mRemoteNG.UI.Panels
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t add panel" + Environment.NewLine + ex.Message);
                 return null;
             }
+        }
+
+        public bool DoesPanelExist(string panelName)
+        {
+            return Runtime.WindowList?.OfType<ConnectionWindow>().Any(w => w.TabText == panelName)
+                ?? false;
         }
 
         private void ShowConnectionWindow(ConnectionWindow connectionForm)

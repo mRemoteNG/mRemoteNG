@@ -289,14 +289,14 @@ namespace mRemoteNG.Config.Serializers.Xml
                 if (_confVersion >= 0.5)
                 {
                     connectionInfo.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["RedirectDiskDrives"].Value);
-                    connectionInfo.RedirectPrinters = bool.Parse(xmlnode.Attributes["RedirectPrinters"].Value);
+                    connectionInfo.RedirectPrinters = bool.Parse(xmlnode.Attributes["RedirectPrinters"].Value);                    
                     connectionInfo.RedirectPorts = bool.Parse(xmlnode.Attributes["RedirectPorts"].Value);
                     connectionInfo.RedirectSmartCards = bool.Parse(xmlnode.Attributes["RedirectSmartCards"].Value);
                 }
                 else
                 {
                     connectionInfo.RedirectDiskDrives = false;
-                    connectionInfo.RedirectPrinters = false;
+                    connectionInfo.RedirectPrinters = false;                    
                     connectionInfo.RedirectPorts = false;
                     connectionInfo.RedirectSmartCards = false;
                 }
@@ -511,6 +511,11 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Inheritance.RDPMinutesToIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPMinutesToIdleTimeout"]?.Value ?? "False");
                     connectionInfo.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["RDPAlertIdleTimeout"]?.Value ?? "False");
                     connectionInfo.Inheritance.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
+                }
+                if(_confVersion >= 2.7)
+                {
+                    connectionInfo.RedirectClipboard = bool.Parse(xmlnode.Attributes["RedirectClipboard"].Value);
+                    connectionInfo.Inheritance.RedirectClipboard = bool.Parse(xmlnode.Attributes["InheritRedirectClipboard"].Value);
                 }
             }
             catch (Exception ex)

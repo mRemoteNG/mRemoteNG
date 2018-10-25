@@ -137,6 +137,9 @@
     <Setting Name="ConDefaultRedirectPrinters" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultRedirectClipboard" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="ConDefaultRedirectPorts" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -240,6 +243,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultRedirectPrinters" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectClipboard" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultRedirectSmartCards" Type="System.Boolean" Scope="User">

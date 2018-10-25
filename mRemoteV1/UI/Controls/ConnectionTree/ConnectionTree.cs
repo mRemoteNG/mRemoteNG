@@ -223,14 +223,19 @@ namespace mRemoteNG.UI.Controls
             return (RootNodeInfo)ConnectionTreeModel.RootNodes.First(item => item is RootNodeInfo);
         }
 
+        public void Invoke(Action action)
+        {
+            Invoke((Delegate)action);
+        }
+
         public void InvokeExpand(object model)
         {
-            Invoke((MethodInvoker)(() => Expand(model)));
+            Invoke(() => Expand(model));
         }
 
         public void InvokeRebuildAll(bool preserveState)
         {
-            Invoke((MethodInvoker)(() => RebuildAll(preserveState)));
+            Invoke(() => RebuildAll(preserveState));
         }
 
         public IEnumerable<RootPuttySessionsNodeInfo> GetRootPuttyNodes()

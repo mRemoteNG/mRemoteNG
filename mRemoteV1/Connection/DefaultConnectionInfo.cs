@@ -31,9 +31,14 @@ namespace mRemoteNG.Connection
 						throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
 					var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
-	                var value = Convert.ChangeType(valueFromSource, property.PropertyType);
+                    
+                    if (property.PropertyType.IsEnum)
+                    {
+                        property.SetValue(Instance, Enum.Parse(property.PropertyType, valueFromSource.ToString()), null);
+                        continue;
+                    }
 
-                    property.SetValue(Instance, value, null);
+                    property.SetValue(Instance, Convert.ChangeType(valueFromSource, property.PropertyType), null);
                 }
                 catch (Exception ex)
                 {

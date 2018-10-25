@@ -821,6 +821,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("RedirectKeys");
                     strHide.Add("RedirectPorts");
                     strHide.Add("RedirectPrinters");
+                    strHide.Add("RedirectClipboard");
                     strHide.Add("RedirectSmartCards");
                     strHide.Add("RedirectSound");
                     strHide.Add("RenderingEngine");
@@ -927,7 +928,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
@@ -972,7 +974,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
@@ -1016,7 +1019,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
@@ -1061,7 +1065,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
@@ -1107,7 +1112,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
@@ -1153,7 +1159,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
@@ -1176,7 +1183,7 @@ namespace mRemoteNG.UI.Window
                             break;
 						case ProtocolType.HTTP:
 						case ProtocolType.HTTPS:
-                            strHide.Add("CacheBitmaps");
+							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
 							strHide.Add("DisplayWallpaper");
@@ -1200,9 +1207,10 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-							strHide.Add("Resolution");
+              strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
@@ -1219,6 +1227,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
+
 						case ProtocolType.ICA:
 							strHide.Add("DisplayThemes");
 							strHide.Add("DisplayWallpaper");
@@ -1241,7 +1250,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
 							strHide.Add("AutomaticResize");
@@ -1283,7 +1293,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RedirectKeys");
 							strHide.Add("RedirectPorts");
 							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
+                            strHide.Add("RedirectClipboard");
+                            strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
 							strHide.Add("RenderingEngine");
 							strHide.Add("Resolution");
@@ -1341,6 +1352,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectPorts");
                         if (conI.Inheritance.RedirectPrinters)
                             strHide.Add("RedirectPrinters");
+                        if (conI.Inheritance.RedirectClipboard)
+                            strHide.Add("RedirectClipboard");
                         if (conI.Inheritance.RedirectSmartCards)
                             strHide.Add("RedirectSmartCards");
                         if (conI.Inheritance.RedirectSound)
