@@ -1,18 +1,17 @@
-﻿using System;
+﻿using mRemoteNG.App;
+using mRemoteNG.Messages;
+using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms.Input;
+using mRemoteNG.UI.Window;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Windows.Forms;
-using mRemoteNG.App;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
-using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Forms.Input;
-using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Panels
 {
-	public class PanelAdder
+    public class PanelAdder
     {
         private readonly WindowList _windowList;
         private readonly Screens _screens;
@@ -47,8 +46,9 @@ namespace mRemoteNG.UI.Panels
 
         public bool DoesPanelExist(string panelName)
         {
-            return Runtime.WindowList?.OfType<ConnectionWindow>().Any(w => w.TabText == panelName)
-                ?? false;
+            return _windowList
+                .OfType<ConnectionWindow>()
+                .Any(w => w.TabText == panelName);
         }
 
         private void ShowConnectionWindow(ConnectionWindow connectionForm)

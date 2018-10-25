@@ -1,14 +1,15 @@
-﻿using System;
+﻿using mRemoteNG.Connection;
+using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using mRemoteNG.Connection;
-using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Connections
 {
     public class SaveConnectionsOnEdit
     {
         private readonly IConnectionsService _connectionsService;
+
+        public bool Enabled { get; set; } = true;
 
         public SaveConnectionsOnEdit(IConnectionsService connectionsService)
         {
@@ -45,7 +46,8 @@ namespace mRemoteNG.Config.Connections
         {
             if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
                 return;
-            if (FrmMain.Default.IsClosing)
+
+            if (!Enabled)
                 return;
 
             _connectionsService.SaveConnectionsAsync();

@@ -1,11 +1,10 @@
-﻿using System.IO;
-using mRemoteNG.Config.Connections;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Tools;
+using System.IO;
 
 namespace mRemoteNG.App.Initialization
 {
-	public class CredsAndConsSetup
+    public class CredsAndConsSetup
 	{
 	    private readonly IConnectionsService _connectionsService;
 
@@ -16,8 +15,6 @@ namespace mRemoteNG.App.Initialization
 
 	    public void LoadCredsAndCons()
         {
-            new SaveConnectionsOnEdit(_connectionsService);
-
             if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(_connectionsService.GetStartupConnectionFileName()))
                 _connectionsService.NewConnectionsFile(_connectionsService.GetStartupConnectionFileName());
 

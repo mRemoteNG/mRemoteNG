@@ -72,6 +72,7 @@ namespace mRemoteNG.UI.Forms
         private readonly Screens _screens;
         private readonly FileBackupPruner _backupPruner;
         private readonly MessageCollector _messageCollector = Runtime.MessageCollector;
+        private SaveConnectionsOnEdit _saveConnectionsOnEdit;
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -242,6 +243,8 @@ namespace mRemoteNG.UI.Forms
 
             _connectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
             _connectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
+
+            _saveConnectionsOnEdit = new SaveConnectionsOnEdit(_connectionsService);
             var credsAndConsSetup = new CredsAndConsSetup(_connectionsService);
             credsAndConsSetup.LoadCredsAndCons();
 
@@ -448,6 +451,7 @@ namespace mRemoteNG.UI.Forms
 		    _shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 									
 			IsClosing = true;
+		    _saveConnectionsOnEdit.Enabled = false;
 
             if (_windowList != null)
 			{
