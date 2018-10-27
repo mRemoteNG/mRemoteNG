@@ -33,6 +33,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private bool _loginComplete;
         private bool _redirectKeys;
         private bool _alertOnIdleDisconnect;
+	    private readonly DisplayProperties _displayProperties;
         private readonly FrmMain _frmMain = FrmMain.Default;
 
         #region Properties
@@ -98,6 +99,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public RdpProtocol()
         {
             Control = new AxMsRdpClient8NotSafeForScripting();
+            _displayProperties = new DisplayProperties();
         }
         #endregion
 
@@ -162,11 +164,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetAuthenticationLevel();
 				SetLoadBalanceInfo();
                 SetRdGateway();
-
-                // TODO: find out how to set desktop scaling
-                //var propName = "DesktopScaleFactor";
-                //Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"{propName}: {GetExtendedProperty(propName)}");
-                //SetExtendedProperty(propName, new System.Windows.Size());
 
                 _rdpClient.ColorDepth = (int)_connectionInfo.Colors;
 
@@ -525,7 +522,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			try
 			{
-				if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
+			    var scaleFactor = (uint)_displayProperties.ResolutionScalingFactor.Width * 100;
+			    SetExtendedProperty("DesktopScaleFactor", scaleFactor);
+			    SetExtendedProperty("DeviceScaleFactor", (uint)100);
+
+                if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
 				{
 					_rdpClient.FullScreen = true;
                     _rdpClient.DesktopWidth = Screen.FromControl(_frmMain).Bounds.Width;
