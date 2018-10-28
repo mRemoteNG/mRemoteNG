@@ -189,6 +189,8 @@ namespace mRemoteNG.UI.Forms
                 if (!panelAdder.DoesPanelExist(panelName))
                     panelAdder.AddPanel(panelName);
             }
+
+            throw new Exception("hello exception world");
         }
 
         private void ApplyLanguage()
