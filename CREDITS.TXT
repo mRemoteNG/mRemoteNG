@@ -26,6 +26,8 @@ github.com/Fyers
 Vladimir Semenov (github.com/sli-pro)
 Stephan (github.com/st-schuler)
 Aleksey Reytsman (github.com/areytsman)
+Cristian Abelleira (github.com/CrAbelleira)
+github.com/MitchellBot
 
 
 Past Contributors
@@ -65,6 +67,8 @@ github.com/emazv72
 Vladimir Semenov (github.com/sli-pro)
 Marco Sousa (github.com/marcomsousa)
 github.com/wwj402
+github.com/Fyers
+github.com/pablomh
 
 
 Included Source Code
