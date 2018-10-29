@@ -684,7 +684,10 @@
       <Value Profile="(Default)">General</Value>
     </Setting>
     <Setting Name="ConDefaultMultiMonitor" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultMultiMonitor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

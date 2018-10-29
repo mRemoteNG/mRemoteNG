@@ -2749,13 +2749,25 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultMultiMonitor {
             get {
                 return ((bool)(this["ConDefaultMultiMonitor"]));
             }
             set {
                 this["ConDefaultMultiMonitor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultMultiMonitor {
+            get {
+                return ((bool)(this["InhDefaultMultiMonitor"]));
+            }
+            set {
+                this["InhDefaultMultiMonitor"] = value;
             }
         }
     }
