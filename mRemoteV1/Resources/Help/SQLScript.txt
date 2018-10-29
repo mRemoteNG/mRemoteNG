@@ -38,6 +38,7 @@ CREATE TABLE [dbo].[tblCons] (
 	[RDPAlertIdleTimeout] [bit] NOT NULL,
 	[Colors] [varchar] (32) NOT NULL ,
 	[Resolution] [varchar] (32) NOT NULL ,
+	[MultiMonitor] [bit] NOT NULL ,
 	[DisplayWallpaper] [bit] NOT NULL ,
 	[DisplayThemes] [bit] NOT NULL ,
 	[EnableFontSmoothing] [bit] NOT NULL ,

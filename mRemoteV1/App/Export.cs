@@ -79,7 +79,7 @@ namespace mRemoteNG.App
 			        case SaveFormat.mRXML:
                         var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
 			            var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
-                        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+                        var connectionNodeSerializer = new XmlConnectionNodeSerializer28(
                             cryptographyProvider, 
                             rootNode?.PasswordString.ConvertToSecureString() ?? new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString(),
                             saveFilter);

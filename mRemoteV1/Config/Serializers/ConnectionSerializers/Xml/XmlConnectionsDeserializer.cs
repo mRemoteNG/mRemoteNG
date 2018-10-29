@@ -512,8 +512,13 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     connectionInfo.RedirectClipboard = bool.Parse(xmlnode.Attributes["RedirectClipboard"].Value);
                     connectionInfo.Inheritance.RedirectClipboard = bool.Parse(xmlnode.Attributes["InheritRedirectClipboard"].Value);
-                }
-            }
+				}
+				if (_confVersion >= 2.8)
+				{
+					connectionInfo.MultiMonitor = bool.Parse(xmlnode.Attributes["MultiMonitor"].Value);
+					connectionInfo.Inheritance.MultiMonitor = bool.Parse(xmlnode.Attributes["InheritMultiMonitor"].Value);
+				}
+			}
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message));

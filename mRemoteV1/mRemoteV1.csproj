@@ -159,6 +159,7 @@
     <Compile Include="Config\ILoader.cs" />
     <Compile Include="Config\Import\MRemoteNGCsvImporter.cs" />
     <Compile Include="Config\ISaver.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer28.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer27.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Config\Serializers\Versioning\SqlVersion22To23Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion26To27Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />

@@ -58,9 +58,16 @@ namespace mRemoteNG.Config.Serializers.Versioning
                 {
                     sql25To26Upgrader.Upgrade();
                     databaseVersion = new Version(2, 6);
-                }
+				}
 
-                if (databaseVersion.CompareTo(new Version(2, 6)) == 0) // 2.6
+				var sql26To27Upgrader = new SqlVersion26To27Upgrader(_sqlDatabaseConnector);
+				if (sql26To27Upgrader.CanUpgrade(databaseVersion))
+				{
+					sql26To27Upgrader.Upgrade();
+					databaseVersion = new Version(2, 7);
+				}
+
+				if (databaseVersion.CompareTo(new Version(2, 7)) == 0)
                     isVerified = true;
 
                 if (isVerified == false)

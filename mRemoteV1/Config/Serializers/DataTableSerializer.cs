@@ -83,7 +83,8 @@ namespace mRemoteNG.Config.Serializers
             dataTable.Columns.Add("RDPAuthenticationLevel", typeof(string));
             dataTable.Columns.Add("Colors", typeof(string));
             dataTable.Columns.Add("Resolution", typeof(string));
-            dataTable.Columns.Add("DisplayWallpaper", typeof(bool));
+			dataTable.Columns.Add("MultiMonitor", typeof(bool));
+			dataTable.Columns.Add("DisplayWallpaper", typeof(bool));
             dataTable.Columns.Add("DisplayThemes", typeof(bool));
             dataTable.Columns.Add("EnableFontSmoothing", typeof(bool));
             dataTable.Columns.Add("EnableDesktopComposition", typeof(bool));
@@ -139,7 +140,8 @@ namespace mRemoteNG.Config.Serializers
             dataTable.Columns.Add("InheritRedirectClipboard", typeof(bool));
             dataTable.Columns.Add("InheritRedirectSmartCards", typeof(bool));
             dataTable.Columns.Add("InheritRedirectSound", typeof(bool));
-            dataTable.Columns.Add("InheritResolution", typeof(bool));
+			dataTable.Columns.Add("InheritResolution", typeof(bool));
+			dataTable.Columns.Add("InheritMultiMonitor", typeof(bool));
             dataTable.Columns.Add("InheritUseConsoleSession", typeof(bool));
             dataTable.Columns.Add("InheritUseCredSsp", typeof(bool));
             dataTable.Columns.Add("InheritRenderingEngine", typeof(bool));
@@ -228,7 +230,8 @@ namespace mRemoteNG.Config.Serializers
             dataRow["LoadBalanceInfo"] = connectionInfo.LoadBalanceInfo;
             dataRow["Colors"] = connectionInfo.Colors;
             dataRow["Resolution"] = connectionInfo.Resolution;
-            dataRow["AutomaticResize"] = connectionInfo.AutomaticResize;
+			dataRow["MultiMonitor"] = connectionInfo.MultiMonitor;
+			dataRow["AutomaticResize"] = connectionInfo.AutomaticResize;
             dataRow["DisplayWallpaper"] = connectionInfo.DisplayWallpaper;
             dataRow["DisplayThemes"] = connectionInfo.DisplayThemes;
             dataRow["EnableFontSmoothing"] = connectionInfo.EnableFontSmoothing;
@@ -290,7 +293,8 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritRedirectSound"] = connectionInfo.Inheritance.RedirectSound;
                 dataRow["InheritSoundQuality"] = connectionInfo.Inheritance.SoundQuality;
                 dataRow["InheritResolution"] = connectionInfo.Inheritance.Resolution;
-                dataRow["InheritAutomaticResize"] = connectionInfo.Inheritance.AutomaticResize;
+				dataRow["InheritMultiMonitor"] = connectionInfo.Inheritance.MultiMonitor;
+				dataRow["InheritAutomaticResize"] = connectionInfo.Inheritance.AutomaticResize;
                 dataRow["InheritUseConsoleSession"] = connectionInfo.Inheritance.UseConsoleSession;
                 dataRow["InheritUseCredSsp"] = connectionInfo.Inheritance.UseCredSsp;
                 dataRow["InheritRenderingEngine"] = connectionInfo.Inheritance.RenderingEngine;
@@ -348,7 +352,8 @@ namespace mRemoteNG.Config.Serializers
                 dataRow["InheritRedirectSound"] = false;
                 dataRow["InheritSoundQuality"] = false;
                 dataRow["InheritResolution"] = false;
-                dataRow["InheritAutomaticResize"] = false;
+				dataRow["InheritMultiMonitor"] = false;
+				dataRow["InheritAutomaticResize"] = false;
                 dataRow["InheritUseConsoleSession"] = false;
                 dataRow["InheritUseCredSsp"] = false;
                 dataRow["InheritRenderingEngine"] = false;

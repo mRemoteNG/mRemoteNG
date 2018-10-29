@@ -108,10 +108,13 @@ namespace mRemoteNG.Config.Serializers
                 case "redirectprinters":
                     connectionInfo.RedirectPrinters = value == "1";
                     break;
-                case "redirectclipboard":
-                    connectionInfo.RedirectClipboard = value == "1";
-                    break;
-                case "audiomode":
+				case "redirectclipboard":
+					connectionInfo.RedirectClipboard = value == "1";
+					break;
+				case "use multimon":
+					connectionInfo.MultiMonitor = value == "1";
+					break;
+				case "audiomode":
                     switch (value)
                     {
                         case "0":

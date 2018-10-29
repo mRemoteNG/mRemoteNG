@@ -92,7 +92,8 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.LoadBalanceInfo = (string)dataRow["LoadBalanceInfo"];
             connectionInfo.Colors = (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors) ,(string)dataRow["Colors"]);
             connectionInfo.Resolution = (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions), (string)dataRow["Resolution"]);
-            connectionInfo.AutomaticResize = (bool)dataRow["AutomaticResize"];
+			connectionInfo.MultiMonitor = (bool)dataRow["MultiMonitor"];
+			connectionInfo.AutomaticResize = (bool)dataRow["AutomaticResize"];
             connectionInfo.DisplayWallpaper = (bool)dataRow["DisplayWallpaper"];
             connectionInfo.DisplayThemes = (bool)dataRow["DisplayThemes"];
             connectionInfo.EnableFontSmoothing = (bool)dataRow["EnableFontSmoothing"];
@@ -153,7 +154,8 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.RedirectSound = (bool)dataRow["InheritRedirectSound"];
             connectionInfo.Inheritance.SoundQuality = (bool)dataRow["InheritSoundQuality"];
             connectionInfo.Inheritance.Resolution = (bool)dataRow["InheritResolution"];
-            connectionInfo.Inheritance.AutomaticResize = (bool)dataRow["InheritAutomaticResize"];
+			connectionInfo.Inheritance.MultiMonitor = (bool)dataRow["InheritMultiMonitor"];
+			connectionInfo.Inheritance.AutomaticResize = (bool)dataRow["InheritAutomaticResize"];
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];
             connectionInfo.Inheritance.UseCredSsp = (bool)dataRow["InheritUseCredSsp"];
             connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
