@@ -33,6 +33,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripSeparator _cMenTreeSep3;
         private ToolStripMenuItem _cMenTreeRename;
         private ToolStripMenuItem _cMenTreeDelete;
+        private ToolStripMenuItem _cMenTreeCopyHostname;
         private ToolStripSeparator _cMenTreeSep4;
         private ToolStripMenuItem _cMenTreeMoveUp;
         private ToolStripMenuItem _cMenTreeMoveDown;
@@ -86,6 +87,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDuplicate = new ToolStripMenuItem();
             _cMenTreeRename = new ToolStripMenuItem();
             _cMenTreeDelete = new ToolStripMenuItem();
+            _cMenTreeCopyHostname = new ToolStripMenuItem();
             _cMenTreeSep3 = new ToolStripSeparator();
             _cMenTreeImport = new ToolStripMenuItem();
             _cMenTreeImportFile = new ToolStripMenuItem();
@@ -118,6 +120,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeDuplicate,
                 _cMenTreeRename,
                 _cMenTreeDelete,
+                _cMenTreeCopyHostname,
                 _cMenTreeSep3,
                 _cMenTreeImport,
                 _cMenTreeExportFile,
@@ -252,6 +255,13 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete.Text = "Delete";
             _cMenTreeDelete.Click += OnDeleteClicked;
             // 
+            // cMenTreeCopyHostname
+            // 
+            _cMenTreeCopyHostname.Name = "_cMenTreeCopyHostname";
+            _cMenTreeCopyHostname.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeCopyHostname.Text = "Copy Hostname";
+            _cMenTreeCopyHostname.Click += OnCopyHostnameClicked;
+            // 
             // cMenTreeSep3
             // 
             _cMenTreeSep3.Name = "_cMenTreeSep3";
@@ -382,6 +392,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDuplicate.Text = Language.strDuplicate;
             _cMenTreeRename.Text = Language.strRename;
             _cMenTreeDelete.Text = Language.strMenuDelete;
+            _cMenTreeCopyHostname.Text = Language.strMenuCopyHostname;
 
             _cMenTreeImport.Text = Language.strImportMenuItem;
             _cMenTreeImportFile.Text = Language.strImportFromFileMenuItem;
@@ -718,6 +729,11 @@ namespace mRemoteNG.UI.Controls
         private void OnDeleteClicked(object sender, EventArgs e)
         {
             _connectionTree.DeleteSelectedNode();
+        }
+
+        private void OnCopyHostnameClicked(object sender, EventArgs e)
+        {
+            _connectionTree.CopyHostnameSelectedNode();
         }
 
         private void OnImportFileClicked(object sender, EventArgs e)

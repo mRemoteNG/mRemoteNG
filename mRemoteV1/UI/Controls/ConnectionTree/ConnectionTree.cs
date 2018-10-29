@@ -316,6 +316,11 @@ namespace mRemoteNG.UI.Controls
             ConnectionTreeModel.DeleteNode(SelectedNode);
         }
 
+        public void CopyHostnameSelectedNode()
+        {
+            Clipboard.SetText(SelectedNode.Hostname);
+        }
+
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
         {
             if (sortTarget == null)

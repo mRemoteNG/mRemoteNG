@@ -3327,6 +3327,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy Hostname.
+        /// </summary>
+        internal static string strMenuCopyHostname {
+            get {
+                return ResourceManager.GetString("strMenuCopyHostname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ctrl-Alt-Del.
         /// </summary>
         internal static string strMenuCtrlAltDel {
@@ -4840,6 +4849,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select whether clipboard should be shared..
+        /// </summary>
+        internal static string strPropertyDescriptionRedirecClipboard {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRedirecClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
         /// </summary>
         internal static string strPropertyDescriptionRedirectDrives {
@@ -5340,6 +5358,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameRDPMinutesToIdleTimeout {
             get {
                 return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clipboard.
+        /// </summary>
+        internal static string strPropertyNameRedirectClipboard {
+            get {
+                return ResourceManager.GetString("strPropertyNameRedirectClipboard", resourceCulture);
             }
         }
         
