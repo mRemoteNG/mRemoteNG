@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute(XName.Get("KdfIterations"), cryptographyProvider.KeyDerivationIterations));
             element.Add(new XAttribute(XName.Get("FullFileEncryption"), fullFileEncryption.ToString().ToLowerInvariant()));
             element.Add(CreateProtectedAttribute(rootNodeInfo, cryptographyProvider));
-            element.Add(new XAttribute(XName.Get("ConfVersion"), "2.6"));
+            element.Add(new XAttribute(XName.Get("ConfVersion"), "2.7"));
             return element;
         }
 

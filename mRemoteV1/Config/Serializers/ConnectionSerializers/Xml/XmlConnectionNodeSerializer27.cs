@@ -75,7 +75,8 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("LoadBalanceInfo", connectionInfo.LoadBalanceInfo));
             element.Add(new XAttribute("Colors", connectionInfo.Colors));
             element.Add(new XAttribute("Resolution", connectionInfo.Resolution));
-            element.Add(new XAttribute("AutomaticResize", connectionInfo.AutomaticResize.ToString().ToLowerInvariant()));
+			element.Add(new XAttribute("MultiMonitor", connectionInfo.MultiMonitor));
+			element.Add(new XAttribute("AutomaticResize", connectionInfo.AutomaticResize.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("DisplayWallpaper", connectionInfo.DisplayWallpaper.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("DisplayThemes", connectionInfo.DisplayThemes.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("EnableFontSmoothing", connectionInfo.EnableFontSmoothing.ToString().ToLowerInvariant()));
@@ -159,7 +160,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRedirectSound", connectionInfo.Inheritance.RedirectSound.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritSoundQuality", connectionInfo.Inheritance.SoundQuality.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritResolution", connectionInfo.Inheritance.Resolution.ToString().ToLowerInvariant()));
-                element.Add(new XAttribute("InheritAutomaticResize", connectionInfo.Inheritance.AutomaticResize.ToString().ToLowerInvariant()));
+				element.Add(new XAttribute("InheritMultiMonitor", connectionInfo.Inheritance.MultiMonitor.ToString().ToLowerInvariant()));
+				element.Add(new XAttribute("InheritAutomaticResize", connectionInfo.Inheritance.AutomaticResize.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritUseConsoleSession", connectionInfo.Inheritance.UseConsoleSession.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritUseCredSsp", connectionInfo.Inheritance.UseCredSsp.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRenderingEngine", connectionInfo.Inheritance.RenderingEngine.ToString().ToLowerInvariant()));
@@ -212,13 +214,14 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRedirectDiskDrives", falseString));
                 element.Add(new XAttribute("InheritRedirectKeys", falseString));
                 element.Add(new XAttribute("InheritRedirectPorts", falseString));
-                element.Add(new XAttribute("InheritRedirectPrinters", falseString));                
-                element.Add(new XAttribute("InheritRedirectClipboard", falseString));                
+                element.Add(new XAttribute("InheritRedirectPrinters", falseString));
+                element.Add(new XAttribute("InheritRedirectClipboard", falseString));
                 element.Add(new XAttribute("InheritRedirectSmartCards", falseString));
                 element.Add(new XAttribute("InheritRedirectSound", falseString));
                 element.Add(new XAttribute("InheritSoundQuality", falseString));
                 element.Add(new XAttribute("InheritResolution", falseString));
-                element.Add(new XAttribute("InheritAutomaticResize", falseString));
+				element.Add(new XAttribute("InheritMultiMonitor", falseString));
+				element.Add(new XAttribute("InheritAutomaticResize", falseString));
                 element.Add(new XAttribute("InheritUseConsoleSession", falseString));
                 element.Add(new XAttribute("InheritUseCredSsp", falseString));
                 element.Add(new XAttribute("InheritRenderingEngine", falseString));
