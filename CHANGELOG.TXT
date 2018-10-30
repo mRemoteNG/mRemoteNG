@@ -2,8 +2,11 @@
 
 Features/Enhancements:
 ----------------------
+#1141: 'Copy Hostname' option added to connection tree context menu
+#1129: Spanish translation improvements
 #1072: Russian translation improvements
 #1016: Chinese (simplified) translation improvements
+#951: Added property to Enable/Disable Clipboard Sharing for RDP connections
 #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
 
 
