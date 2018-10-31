@@ -3363,6 +3363,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy Hostname.
+        /// </summary>
+        internal static string strMenuCopyHostname {
+            get {
+                return ResourceManager.GetString("strMenuCopyHostname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ctrl-Alt-Del.
         /// </summary>
         internal static string strMenuCtrlAltDel {

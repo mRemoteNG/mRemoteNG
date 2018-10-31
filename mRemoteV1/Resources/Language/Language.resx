@@ -2733,4 +2733,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
     <value>This exception will force mRemoteNG to close</value>
   </data>
+  <data name="strMenuCopyHostname" xml:space="preserve">
+    <value>Copy Hostname</value>
+  </data>
 </root>
