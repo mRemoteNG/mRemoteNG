@@ -2,6 +2,7 @@
 
 Features/Enhancements:
 ----------------------
+#1170: Prevent Options window from showing up in taskbar
 #1141: 'Copy Hostname' option added to connection tree context menu
 #1129: Spanish translation improvements
 #1072: Russian translation improvements
