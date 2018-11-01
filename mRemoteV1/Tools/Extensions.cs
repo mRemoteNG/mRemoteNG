@@ -1,9 +1,11 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace mRemoteNG.Tools
 {
-	public static class Extensions
+    public static class Extensions
 	{
 		public static Optional<T> Maybe<T>(this T value)
 		{
@@ -49,6 +51,24 @@ namespace mRemoteNG.Tools
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException("Value cannot be null or empty", argName);
 	        return value;
+	    }
+
+        /// <summary>
+        /// Perform an action for each item in the given collection. The item
+        /// is the pass along the processing chain.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+	    public static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T> action)
+        {
+            collection = collection.ToList();
+
+            foreach (var item in collection)
+	            action(item);
+
+	        return collection;
 	    }
 	}
 }
