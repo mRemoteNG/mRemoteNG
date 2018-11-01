@@ -1,6 +1,7 @@
 ﻿using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Tree;
 

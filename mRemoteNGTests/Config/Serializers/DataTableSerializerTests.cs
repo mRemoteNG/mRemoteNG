@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;

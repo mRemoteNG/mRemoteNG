@@ -169,8 +169,8 @@
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsDeserializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsSerializerMremotengFormat.cs" />
-    <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
-    <Compile Include="Config\Serializers\DataTableSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\DataTableDeserializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\DataTableSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializer.cs" />

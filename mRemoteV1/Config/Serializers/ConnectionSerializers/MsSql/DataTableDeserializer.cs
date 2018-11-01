@@ -13,7 +13,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.MsSql
 {
 	public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
     {
