@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
@@ -11,6 +5,12 @@ using mRemoteNG.Themes;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -50,8 +50,6 @@ namespace mRemoteNG.UI.Window
 	            ConnectionTree.UseFiltering = Settings.Default.UseFilterSearch;
 	            ApplyFiltering();
             }
-
-	        SetConnectionTreeEventHandlers();
 	    }
 
 

@@ -136,6 +136,7 @@
     <Compile Include="Config\Connections\ConnectionsLoadedEventArgs.cs" />
     <Compile Include="Config\Connections\ConnectionsSavedEventArgs.cs" />
     <Compile Include="Config\Connections\CsvConnectionsSaver.cs" />
+    <Compile Include="Config\Connections\IConnectionsLoader.cs" />
     <Compile Include="Config\Connections\SaveConnectionsOnEdit.cs" />
     <Compile Include="Config\Connections\SaveFormat.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateCheckFinishedEventArgs.cs" />

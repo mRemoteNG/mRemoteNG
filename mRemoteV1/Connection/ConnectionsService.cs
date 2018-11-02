@@ -112,9 +112,11 @@ namespace mRemoteNG.Connection
             var oldConnectionTreeModel = ConnectionTreeModel;
             var oldIsUsingDatabaseValue = UsingDatabase;
 
-            var newConnectionTreeModel = useDatabase
-                ? new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider).Load()
-                : new XmlConnectionsLoader(connectionFileName).Load();
+            var connectionLoader = useDatabase
+                ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
+                : new XmlConnectionsLoader(connectionFileName);
+
+            var newConnectionTreeModel = connectionLoader.Load();
 
             if (useDatabase)
                 LastSqlUpdate = DateTime.Now;
@@ -138,6 +140,7 @@ namespace mRemoteNG.Connection
             ConnectionTreeModel = newConnectionTreeModel;
             UpdateCustomConsPathSetting(connectionFileName);
             RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connections loaded using {connectionLoader.GetType().Name}");
         }
 
         /// <summary>

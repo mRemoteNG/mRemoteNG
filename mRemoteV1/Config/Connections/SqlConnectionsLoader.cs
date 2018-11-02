@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class SqlConnectionsLoader
+    public class SqlConnectionsLoader : IConnectionsLoader
     {
         private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> _localConnectionPropertiesDeserializer;
         private readonly IDataProvider<string> _dataProvider;
