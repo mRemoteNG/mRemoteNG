@@ -106,8 +106,6 @@ namespace mRemoteNG.Config.Connections
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Remote connection update is available");
             var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector, _lastDatabaseUpdateTime);
             ConnectionsUpdateAvailable?.Invoke(this, args);
-            //if(args.Handled)
-            //    LastUpdateTime = _lastDatabaseUpdateTime;
         }
 
         public void Dispose()
