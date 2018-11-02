@@ -67,6 +67,8 @@ namespace mRemoteNG.Config.Connections
                 UpdateConnectionsTable(rootTreeNode, sqlConnector);
                 UpdateUpdatesTable(sqlConnector);
             }
+
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved connections to database");
         }
 
         private void UpdateLocalConnectionProperties(ContainerInfo rootNode)
@@ -74,11 +76,13 @@ namespace mRemoteNG.Config.Connections
             var a = rootNode.GetRecursiveChildList().Select(info => new LocalConnectionPropertiesModel
             {
                 ConnectionId = info.ConstantID,
-                Connected = info.OpenConnections.Count > 0
+                Connected = info.OpenConnections.Count > 0,
+                Expanded = info is ContainerInfo c && c.IsExpanded
             });
 
             var serializedProperties = _localPropertiesSerializer.Serialize(a);
             _dataProvider.Save(serializedProperties);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved local connection properties");
         }
 
         private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)

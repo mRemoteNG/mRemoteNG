@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -12,10 +8,14 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {
-	public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
+    public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
     {
         public ConnectionTreeModel Deserialize(DataTable table)
         {
@@ -34,10 +34,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 switch ((string)row["Type"])
                 {
                     case "Connection":
-                    nodeList.Add(DeserializeConnectionInfo(row));
+                        nodeList.Add(DeserializeConnectionInfo(row));
                         break;
                     case "Container":
-                    nodeList.Add(DeserializeContainerInfo(row));
+                        nodeList.Add(DeserializeContainerInfo(row));
                         break;
                 }
             }
@@ -67,10 +67,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             // This throws a NPE - Parent is a connectionInfo object which will be null at this point.
             // The Parent object is linked properly later in CreateNodeHierarchy()
             //connectionInfo.Parent.ConstantID = (string)dataRow["ParentID"];
-
-            var info = connectionInfo as ContainerInfo;
-            if(info != null)
-                info.IsExpanded = (bool)dataRow["Expanded"];
 
             connectionInfo.Description = (string)dataRow["Description"];
             connectionInfo.Icon = (string)dataRow["Icon"];

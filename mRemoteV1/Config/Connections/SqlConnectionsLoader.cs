@@ -49,8 +49,12 @@ namespace mRemoteNG.Config.Connections
                     con => con.ConstantID, 
                     locals => locals.ConnectionId,
                     (con, locals) => new {Connection = con, LocalProperties = locals})
-                .ForEach(x => 
-                    x.Connection.PleaseConnect = x.LocalProperties.Connected);
+                .ForEach(x =>
+                {
+                    x.Connection.PleaseConnect = x.LocalProperties.Connected;
+                    if (x.Connection is ContainerInfo container)
+                        container.IsExpanded = x.LocalProperties.Expanded;
+                });
         }
     }
 }

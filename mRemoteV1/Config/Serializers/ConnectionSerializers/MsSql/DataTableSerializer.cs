@@ -204,8 +204,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
-            var info = connectionInfo as ContainerInfo;
-            dataRow["Expanded"] = info != null && info.IsExpanded;
+            dataRow["Expanded"] = false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
@@ -239,7 +238,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
-            dataRow["Connected"] = false; // TODO: this column can eventually be removed
+            dataRow["Connected"] = false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["MacAddress"] = connectionInfo.MacAddress;
