@@ -1,9 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
-using System.Globalization;
-using System.Linq;
-using System.Security;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
@@ -17,6 +12,12 @@ using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Globalization;
+using System.Linq;
+using System.Security;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -24,22 +25,32 @@ namespace mRemoteNG.Config.Connections
     {
         private SecureString _password = Runtime.EncryptionKey;
         private readonly SaveFilter _saveFilter;
+        private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer;
+        private readonly IDataProvider<string> _dataProvider;
 
-        public SqlConnectionsSaver(SaveFilter saveFilter)
+        public SqlConnectionsSaver(
+            SaveFilter saveFilter, 
+            ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> localPropertieSerializer,
+            IDataProvider<string> localPropertiesDataProvider)
         {
             if (saveFilter == null)
                 throw new ArgumentNullException(nameof(saveFilter));
             _saveFilter = saveFilter;
+            _localPropertiesSerializer = localPropertieSerializer.ThrowIfNull(nameof(localPropertieSerializer));
+            _dataProvider = localPropertiesDataProvider.ThrowIfNull(nameof(localPropertiesDataProvider));
         }
 
         public void Save(ConnectionTreeModel connectionTreeModel)
         {
+            var rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+
+            UpdateLocalConnectionProperties(rootTreeNode);
+
             if (SqlUserIsReadOnly())
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to save connection tree but the SQL read only checkbox is checked, aborting!");
                 return;
             }
-                
 
             using (var sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings())
             {
@@ -52,12 +63,22 @@ namespace mRemoteNG.Config.Connections
                     return;
                 }
 
-                var rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
-
                 UpdateRootNodeTable(rootTreeNode, sqlConnector);
                 UpdateConnectionsTable(rootTreeNode, sqlConnector);
                 UpdateUpdatesTable(sqlConnector);
             }
+        }
+
+        private void UpdateLocalConnectionProperties(ContainerInfo rootNode)
+        {
+            var a = rootNode.GetRecursiveChildList().Select(info => new LocalConnectionPropertiesModel
+            {
+                ConnectionId = info.ConstantID,
+                Connected = info.OpenConnections.Count > 0
+            });
+
+            var serializedProperties = _localPropertiesSerializer.Serialize(a);
+            _dataProvider.Save(serializedProperties);
         }
 
         private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)

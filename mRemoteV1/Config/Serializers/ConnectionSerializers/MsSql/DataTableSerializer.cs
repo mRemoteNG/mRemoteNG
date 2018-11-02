@@ -1,12 +1,12 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Linq;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Data;
+using System.Data.SqlTypes;
+using System.Linq;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {
@@ -239,7 +239,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
-            dataRow["Connected"] = connectionInfo.OpenConnections.Count > 0;
+            dataRow["Connected"] = false; // TODO: this column can eventually be removed
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["MacAddress"] = connectionInfo.MacAddress;

@@ -1,12 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Windows.Forms;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
@@ -14,6 +12,10 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
+using System;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace mRemoteNG.Connection
 {
@@ -21,6 +23,8 @@ namespace mRemoteNG.Connection
     {
         private static readonly object SaveLock = new object();
         private readonly PuttySessionsManager _puttySessionsManager;
+        private readonly IDataProvider<string> _localConnectionPropertiesDataProvider;
+        private readonly LocalConnectionPropertiesXmlSerializer _localConnectionPropertiesSerializer;
         private bool _batchingSaves = false;
         private bool _saveRequested = false;
         private bool _saveAsyncRequested = false;
@@ -39,6 +43,8 @@ namespace mRemoteNG.Connection
                 throw new ArgumentNullException(nameof(puttySessionsManager));
 
             _puttySessionsManager = puttySessionsManager;
+            _localConnectionPropertiesDataProvider = new FileDataProvider(Path.Combine(SettingsFileInfo.SettingsPath, "LocalConnectionProperties.xml"));
+            _localConnectionPropertiesSerializer = new LocalConnectionPropertiesXmlSerializer();
         }
 
         public void NewConnectionsFile(string filename)
@@ -107,7 +113,7 @@ namespace mRemoteNG.Connection
             var oldIsUsingDatabaseValue = UsingDatabase;
 
             var newConnectionTreeModel = useDatabase
-                ? new SqlConnectionsLoader().Load()
+                ? new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider).Load()
                 : new XmlConnectionsLoader(connectionFileName).Load();
 
             if (newConnectionTreeModel == null)
@@ -196,7 +202,7 @@ namespace mRemoteNG.Connection
 
                 var previouslyUsingDatabase = UsingDatabase;
                 if (useDatabase)
-                    new SqlConnectionsSaver(saveFilter).Save(connectionTreeModel);
+                    new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider).Save(connectionTreeModel);
                 else
                     new XmlConnectionsSaver(connectionFileName, saveFilter).Save(connectionTreeModel);
 
