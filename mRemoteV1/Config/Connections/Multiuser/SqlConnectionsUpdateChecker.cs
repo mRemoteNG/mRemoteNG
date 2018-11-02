@@ -1,11 +1,11 @@
 ﻿using mRemoteNG.App;
+using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
-using mRemoteNG.Config.Connections.Multiuser;
-using mRemoteNG.Config.DatabaseConnectors;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -104,6 +104,7 @@ namespace mRemoteNG.Config.Connections
         public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
         private void RaiseConnectionsUpdateAvailableEvent()
         {
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Remote connection update is available");
             var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector, _lastDatabaseUpdateTime);
             ConnectionsUpdateAvailable?.Invoke(this, args);
             if(args.Handled)

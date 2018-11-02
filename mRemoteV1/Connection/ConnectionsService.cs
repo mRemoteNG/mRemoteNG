@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Windows.Forms;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
@@ -14,6 +10,10 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
+using System;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace mRemoteNG.Connection
 {
@@ -106,9 +106,11 @@ namespace mRemoteNG.Connection
             var oldConnectionTreeModel = ConnectionTreeModel;
             var oldIsUsingDatabaseValue = UsingDatabase;
 
-            var newConnectionTreeModel = useDatabase
-                ? new SqlConnectionsLoader().Load()
-                : new XmlConnectionsLoader(connectionFileName).Load();
+            var connectionLoader = useDatabase
+                ? (IConnectionsLoader)new SqlConnectionsLoader()
+                : new XmlConnectionsLoader(connectionFileName);
+
+            var newConnectionTreeModel = connectionLoader.Load();
 
             if (newConnectionTreeModel == null)
             {
@@ -129,6 +131,7 @@ namespace mRemoteNG.Connection
             ConnectionTreeModel = newConnectionTreeModel;
             UpdateCustomConsPathSetting(connectionFileName);
             RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connections loaded using {connectionLoader.GetType().Name}");
         }
 
         /// <summary>

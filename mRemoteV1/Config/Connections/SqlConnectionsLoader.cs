@@ -6,7 +6,7 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class SqlConnectionsLoader
+    public class SqlConnectionsLoader : IConnectionsLoader
     {
         public ConnectionTreeModel Load()
         {

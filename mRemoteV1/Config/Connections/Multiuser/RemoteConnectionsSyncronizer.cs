@@ -1,6 +1,7 @@
-﻿using System;
+﻿using mRemoteNG.App;
+using System;
 using System.Timers;
-using mRemoteNG.App;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.Connections.Multiuser
