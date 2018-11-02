@@ -116,6 +116,9 @@ namespace mRemoteNG.Connection
                 ? new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider).Load()
                 : new XmlConnectionsLoader(connectionFileName).Load();
 
+            if (useDatabase)
+                LastSqlUpdate = DateTime.Now;
+
             if (newConnectionTreeModel == null)
             {
                 DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed", IsConnectionsFileLoaded);

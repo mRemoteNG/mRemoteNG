@@ -32,7 +32,6 @@ namespace mRemoteNG.App
             }
         }
 
-        private static string SettingsPath { get; } = SettingsFileInfo.SettingsPath;
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
