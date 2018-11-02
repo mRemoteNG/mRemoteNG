@@ -834,6 +834,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("AutomaticResize");
                     strHide.Add("UseConsoleSession");
                     strHide.Add("UseCredSsp");
+                    strHide.Add("EnhancedSession");
                     strHide.Add("VNCAuthMode");
                     strHide.Add("VNCColors");
                     strHide.Add("VNCCompression");
@@ -848,6 +849,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("Icon");
                     strHide.Add("Panel");
                     strHide.Add("Hostname");
+                    strHide.Add("VMId");
                     strHide.Add("Username");
                     strHide.Add("Protocol");
                     strHide.Add("Port");
@@ -866,7 +868,13 @@ namespace mRemoteNG.UI.Window
 				    // ReSharper disable once SwitchStatementMissingSomeCases
 					switch (conI.Protocol)
 					{
-						case ProtocolType.RDP:
+                        case ProtocolType.RDP:
+                        case ProtocolType.RDPonVMBus:
+                            if (conI.Protocol != ProtocolType.RDPonVMBus)
+                            {
+                                strHide.Add("VMId");
+                                strHide.Add("EnhancedSession");
+                            }
 							strHide.Add("ExtApp");
 							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
@@ -940,8 +948,9 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
-							strHide.Add("UseCredSsp");
-							if (conI.VNCAuthMode == ProtocolVNC.AuthMode.AuthVNC)
+                            strHide.Add("UseCredSsp");
+                            strHide.Add("EnhancedSession");
+                            if (conI.VNCAuthMode == ProtocolVNC.AuthMode.AuthVNC)
 							{
 								strHide.Add("Username");
 								strHide.Add("Domain");
@@ -954,6 +963,8 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("VNCProxyUsername");
 							}
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 						case ProtocolType.SSH1:
 							strHide.Add("CacheBitmaps");
@@ -986,8 +997,9 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
-							strHide.Add("UseCredSsp");
-							strHide.Add("VNCAuthMode");
+                            strHide.Add("UseCredSsp");
+                            strHide.Add("EnhancedSession");
+                            strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
 							strHide.Add("VNCEncoding");
@@ -999,6 +1011,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 						case ProtocolType.SSH2:
 							strHide.Add("CacheBitmaps");
@@ -1031,8 +1045,9 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
-							strHide.Add("UseCredSsp");
-							strHide.Add("VNCAuthMode");
+                            strHide.Add("UseCredSsp");
+                            strHide.Add("EnhancedSession");
+                            strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
 							strHide.Add("VNCEncoding");
@@ -1044,6 +1059,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 						case ProtocolType.Telnet:
 							strHide.Add("CacheBitmaps");
@@ -1077,8 +1094,9 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
-							strHide.Add("UseCredSsp");
-							strHide.Add("Username");
+                            strHide.Add("UseCredSsp");
+                            strHide.Add("EnhancedSession");
+                            strHide.Add("Username");
 							strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
@@ -1091,6 +1109,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 						case ProtocolType.Rlogin:
 							strHide.Add("CacheBitmaps");
@@ -1124,8 +1144,9 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
-							strHide.Add("UseCredSsp");
-							strHide.Add("Username");
+                            strHide.Add("UseCredSsp");
+                            strHide.Add("EnhancedSession");
+                            strHide.Add("Username");
 							strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
@@ -1138,6 +1159,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 						case ProtocolType.RAW:
 							strHide.Add("CacheBitmaps");
@@ -1172,7 +1195,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
-							strHide.Add("Username");
+                            strHide.Add("EnhancedSession");
+                            strHide.Add("Username");
 							strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
@@ -1185,6 +1209,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 						case ProtocolType.HTTP:
 						case ProtocolType.HTTPS:
@@ -1215,11 +1241,12 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
 							strHide.Add("RedirectSound");
-              strHide.Add("Resolution");
+                            strHide.Add("Resolution");
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
-							strHide.Add("VNCAuthMode");
+                            strHide.Add("EnhancedSession");
+                            strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
 							strHide.Add("VNCEncoding");
@@ -1231,6 +1258,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 
 						case ProtocolType.ICA:
@@ -1262,7 +1291,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
-							strHide.Add("VNCAuthMode");
+                            strHide.Add("EnhancedSession");
+                            strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
 							strHide.Add("VNCEncoding");
@@ -1274,6 +1304,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 						case ProtocolType.IntApp:
 							strHide.Add("CacheBitmaps");
@@ -1318,6 +1350,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+                            strHide.Add("VMId");
+                            strHide.Add("EnhancedSession");
                             break;
 					}
 							
@@ -1371,6 +1405,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("UseConsoleSession");
                         if (conI.Inheritance.UseCredSsp)
                             strHide.Add("UseCredSsp");
+                        if (conI.Inheritance.EnhancedSession)
+                            strHide.Add("EnhancedSession");
                         if (conI.Inheritance.RenderingEngine)
                             strHide.Add("RenderingEngine");
                         if (conI.Inheritance.ICAEncryptionStrength)
@@ -1389,6 +1425,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("Panel");
                         if (conI.IsContainer)
                             strHide.Add("Hostname");
+                        if (conI.Inheritance.VMId)
+                            strHide.Add("VMId");
                         if (conI.Inheritance.PreExtApp)
                             strHide.Add("PreExtApp");
                         if (conI.Inheritance.PostExtApp)
@@ -1437,6 +1475,10 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RDGatewayHostname");
                         if(conI.Inheritance.SoundQuality)
                             strHide.Add("SoundQuality");
+                        if(conI.Inheritance.VMId)
+                            strHide.Add("VMId");
+                        if(conI.Inheritance.EnhancedSession)
+                            strHide.Add("EnhancedSession");
                     }
 					else
 					{

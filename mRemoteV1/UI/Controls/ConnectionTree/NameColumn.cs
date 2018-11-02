@@ -13,5 +13,9 @@ namespace mRemoteNG.UI.Controls
             ImageGetter = imageGetterDelegate;
             AutoCompleteEditor = false;
         }
+
+        public NameColumn()
+        {
+        }
     }
 }

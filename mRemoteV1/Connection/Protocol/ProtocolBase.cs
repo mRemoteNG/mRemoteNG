@@ -119,7 +119,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		public virtual bool Connect()
 		{
-		    if (InterfaceControl.Info.Protocol == ProtocolType.RDP) return false;
+		    if (InterfaceControl.Info.Protocol == ProtocolType.RDP | InterfaceControl.Info.Protocol == ProtocolType.RDPonVMBus) return false;
 		    if (ConnectedEvent == null) return false;
 		    ConnectedEvent(this);
 		    return true;

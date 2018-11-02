@@ -133,6 +133,7 @@ namespace mRemoteNG.Config.Serializers
             var propertiesNode = xmlNode.SelectSingleNode("./properties");
             if (_schemaVersion == 1) propertiesNode = xmlNode;  // Version 2.2 defines the container name at the root instead
             connectionInfo.Hostname = propertiesNode?.SelectSingleNode("./name")?.InnerText ?? "";
+            connectionInfo.VMId = propertiesNode?.SelectSingleNode("./vmid")?.InnerText ?? "";
             connectionInfo.Name = propertiesNode?.SelectSingleNode("./displayName")?.InnerText ?? connectionInfo.Hostname;
             connectionInfo.Description = propertiesNode?.SelectSingleNode("./comment")?.InnerText ?? string.Empty;
 

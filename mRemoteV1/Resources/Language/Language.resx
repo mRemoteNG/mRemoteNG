@@ -2718,4 +2718,19 @@ This page will walk you through the process of upgrading your connections file o
   <data name="ChangeConnectionResolutionError" xml:space="preserve">
     <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
   </data>
+  <data name="strRDPonVMBus" xml:space="preserve">
+    <value>RDP on VMBus</value>
+  </data>
+  <data name="strPropertyDescriptionEnhancedSession" xml:space="preserve">
+    <value>Allow more features through RDP</value>
+  </data>
+  <data name="strPropertyDescriptionVMId" xml:space="preserve">
+    <value>Virtual Machine Identity (use CmdLet "Get-VM | select VMName, VMId" to retreive it. Use Grant-VMConnectAccess to avoid the need of privilege elevation)  </value>
+  </data>
+  <data name="strPropertyNameEnhancedSession" xml:space="preserve">
+    <value>Enhanced session</value>
+  </data>
+  <data name="strPropertyNameVMId" xml:space="preserve">
+    <value>VM Id</value>
+  </data>
 </root>

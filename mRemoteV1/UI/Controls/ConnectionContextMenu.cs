@@ -513,7 +513,7 @@ namespace mRemoteNG.UI.Controls
             if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
                 _cMenTreeToolsTransferFile.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
+            if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.RDPonVMBus | connectionInfo.Protocol == ProtocolType.ICA))
             {
                 _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
                 _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;

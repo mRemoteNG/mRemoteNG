@@ -227,6 +227,8 @@ namespace mRemoteNG.Connection
                 {
                     case ProtocolType.RDP:
                         return (int)RdpProtocol.Defaults.Port;
+                    case ProtocolType.RDPonVMBus:
+                        return (int)RdpProtocol.Defaults.PortOnVMBus;
                     case ProtocolType.VNC:
                         return (int)ProtocolVNC.Defaults.Port;
                     case ProtocolType.SSH1:
@@ -268,6 +270,7 @@ namespace mRemoteNG.Connection
         private void SetConnectionDefaults()
         {
             Hostname = string.Empty;
+            VMId = string.Empty;
         }
 
         private void SetProtocolDefaults()
@@ -284,6 +287,7 @@ namespace mRemoteNG.Connection
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
             RenderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
+            EnhancedSession = Settings.Default.ConDefaultEnhancedSession;
         }
 
         private void SetRdGatewayDefaults()

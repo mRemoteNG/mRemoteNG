@@ -217,6 +217,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Name = xmlnode.Attributes["Name"].Value;
                     connectionInfo.Description = xmlnode.Attributes["Descr"].Value;
                     connectionInfo.Hostname = xmlnode.Attributes["Hostname"].Value;
+                    connectionInfo.VMId = xmlnode.Attributes["VMId"].Value;
                     connectionInfo.DisplayWallpaper = bool.Parse(xmlnode.Attributes["DisplayWallpaper"].Value);
                     connectionInfo.DisplayThemes = bool.Parse(xmlnode.Attributes["DisplayThemes"].Value);
                     connectionInfo.CacheBitmaps = bool.Parse(xmlnode.Attributes["CacheBitmaps"].Value);
@@ -507,8 +508,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Inheritance.RDPMinutesToIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPMinutesToIdleTimeout"]?.Value ?? "False");
                     connectionInfo.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["RDPAlertIdleTimeout"]?.Value ?? "False");
                     connectionInfo.Inheritance.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
+                    connectionInfo.EnhancedSession = bool.Parse(xmlnode.Attributes["EnhancedSession"].Value);
+                    connectionInfo.Inheritance.EnhancedSession = bool.Parse(xmlnode.Attributes["InheritEnhancedSession"].Value);
                 }
-                if(_confVersion >= 2.7)
+                if (_confVersion >= 2.7)
                 {
                     connectionInfo.RedirectClipboard = bool.Parse(xmlnode.Attributes["RedirectClipboard"].Value);
                     connectionInfo.Inheritance.RedirectClipboard = bool.Parse(xmlnode.Attributes["InheritRedirectClipboard"].Value);

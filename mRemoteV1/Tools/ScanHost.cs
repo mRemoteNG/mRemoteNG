@@ -21,10 +21,12 @@ namespace mRemoteNG.Tools
         public static int HttpsPort { get; set; } = (int)ProtocolHTTPS.Defaults.Port;
         public static int RloginPort { get; set; } = (int)ProtocolRlogin.Defaults.Port;
         public static int RdpPort { get; set; } = (int)RdpProtocol.Defaults.Port;
+        public static int RdpOnVmbusPort { get; set; } = (int)RdpProtocol.Defaults.PortOnVMBus;
         public static int VncPort { get; set; } = (int)ProtocolVNC.Defaults.Port;
         public ArrayList OpenPorts { get; set; }
         public ArrayList ClosedPorts { get; set; }
         public bool Rdp { get; set; }
+        public bool RdpOnVmbus { get; set; }
         public bool Vnc { get; set; }
         public bool Ssh { get; set; }
         public bool Telnet { get; set; }
@@ -44,6 +46,7 @@ namespace mRemoteNG.Tools
                 return HostName.Split('.')[0];
             }
         }
+        public string VMId { get; set; }
         #endregion
 
         #region Methods
@@ -122,6 +125,7 @@ namespace mRemoteNG.Tools
             Ssh = value;
             Rlogin = value;
             Rdp = value;
+            RdpOnVmbus = value;
             Https = value;
             Http = value;
         }

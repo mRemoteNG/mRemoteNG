@@ -79,11 +79,13 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Domain = (string)dataRow["DomainName"];
             connectionInfo.Password = (string)dataRow["Password"];
             connectionInfo.Hostname = (string)dataRow["Hostname"];
+            connectionInfo.VMId = (string)dataRow["VMId"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
             connectionInfo.PuttySession = (string)dataRow["PuttySession"];
             connectionInfo.Port = (int)dataRow["Port"];
             connectionInfo.UseConsoleSession = (bool)dataRow["ConnectToConsole"];
             connectionInfo.UseCredSsp = (bool)dataRow["UseCredSsp"];
+            connectionInfo.EnhancedSession = (bool)dataRow["EnhancedSession"];
             connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), (string)dataRow["RenderingEngine"]);
             connectionInfo.ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength), (string)dataRow["ICAEncryptionStrength"]);
             connectionInfo.RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel)Enum.Parse(typeof(RdpProtocol.AuthenticationLevel), (string)dataRow["RDPAuthenticationLevel"]);
@@ -156,6 +158,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.AutomaticResize = (bool)dataRow["InheritAutomaticResize"];
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];
             connectionInfo.Inheritance.UseCredSsp = (bool)dataRow["InheritUseCredSsp"];
+            connectionInfo.Inheritance.EnhancedSession = (bool)dataRow["InheritEnhancedSession"];
             connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
             connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];

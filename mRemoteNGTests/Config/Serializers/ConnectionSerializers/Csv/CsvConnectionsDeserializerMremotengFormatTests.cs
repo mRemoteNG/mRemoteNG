@@ -77,6 +77,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 Password = "SomePassword",
                 Domain = "SomeDomain",
                 Hostname = "SomeHostname",
+                VMId = "SomeVMId",
                 PuttySession = "SomePuttySession",
                 LoadBalanceInfo = "SomeLoadBalanceInfo",
                 PreExtApp = "SomePreExtApp",

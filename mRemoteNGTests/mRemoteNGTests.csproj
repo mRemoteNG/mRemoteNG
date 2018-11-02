@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>mRemoteNGTests</RootNamespace>
     <AssemblyName>mRemoteNGTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -296,12 +296,6 @@
     <Content Include="Resources\dev-update.txt" />
     <Content Include="Resources\update-portable.txt" />
     <Content Include="Resources\update.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\mRemoteV1\mRemoteV1.csproj">
-      <Project>{4934a491-40bc-4e5b-9166-ea1169a220f6}</Project>
-      <Name>mRemoteV1</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

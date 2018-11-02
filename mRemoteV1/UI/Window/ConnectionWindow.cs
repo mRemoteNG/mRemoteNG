@@ -381,7 +381,7 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = (InterfaceControl)TabController.SelectedTab?.Tag;
                 if (interfaceControl == null) return;
 
-                if (interfaceControl.Info.Protocol == ProtocolType.RDP)
+                if (interfaceControl.Info.Protocol == ProtocolType.RDP | interfaceControl.Info.Protocol == ProtocolType.RDPonVMBus)
                 {
                     var rdp = (RdpProtocol)interfaceControl.Protocol;
                     cmenTabFullscreen.Visible = true;
@@ -961,7 +961,7 @@ namespace mRemoteNG.UI.Window
                         if (tabClientRectangle.Contains(MousePosition))
                         {
                             var interfaceControl = selectedTab.Tag as InterfaceControl;
-                            if (interfaceControl?.Info?.Protocol == ProtocolType.RDP)
+                            if (interfaceControl?.Info?.Protocol == ProtocolType.RDP | interfaceControl?.Info?.Protocol == ProtocolType.RDPonVMBus)
                             {
                                 interfaceControl.Protocol.Focus();
                                 return; // Do not pass to base class

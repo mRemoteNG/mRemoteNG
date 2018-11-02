@@ -61,6 +61,10 @@ namespace mRemoteNG.Config.Serializers
                     if (host.Rdp)
                         finalProtocol = ProtocolType.RDP;
                     break;
+                case ProtocolType.RDPonVMBus:
+                    if (host.RdpOnVmbus)
+                        finalProtocol = ProtocolType.RDPonVMBus;
+                    break;
                 case ProtocolType.VNC:
                     if (host.Vnc)
                         finalProtocol = ProtocolType.VNC;

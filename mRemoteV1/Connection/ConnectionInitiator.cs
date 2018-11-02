@@ -238,7 +238,7 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, disconnectedMessage), true);
 
                 var prot = (ProtocolBase)sender;
-                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
+                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP & prot.InterfaceControl.Info.Protocol != ProtocolType.RDPonVMBus) return;
                 var reasonCode = disconnectedMessage.Split("\r\n".ToCharArray())[0];
                 var desc = disconnectedMessage.Replace("\r\n", " ");
 
@@ -292,7 +292,7 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventErrorOccured, true);
                 var prot = (ProtocolBase)sender;
 
-                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
+                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP & prot.InterfaceControl.Info.Protocol != ProtocolType.RDPonVMBus) return;
                 if (Convert.ToInt32(errorMessage) > -1)
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpProtocol.FatalErrors.GetError(errorMessage)));
             }

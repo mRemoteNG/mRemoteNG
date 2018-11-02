@@ -59,6 +59,14 @@ namespace mRemoteNG.Connection
         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool Domain { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameVMId"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVMId"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(true)]
+        public bool VMId { get; set; }
+
         #endregion
         #region Protocol
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
@@ -120,9 +128,14 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUseCredSsp"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseCredSsp"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool UseCredSsp {get; set;}
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+        LocalizedAttributes.LocalizedDisplayName("strPropertyNameEnhancedSession"),
+        LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEnhancedSession"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool EnhancedSession { get; set; }
         #endregion
         #region RD Gateway
-		[LocalizedAttributes.LocalizedCategory("strCategoryGateway", 5),
+        [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 5),
             LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRDGatewayUsageMethod"),
             LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayUsageMethod"), 
 			TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

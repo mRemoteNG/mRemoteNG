@@ -6,24 +6,26 @@ namespace mRemoteNG.Connection.Protocol
 	{
         [LocalizedAttributes.LocalizedDescription("strRDP")]
         RDP = 0,
+        [LocalizedAttributes.LocalizedDescription("strRDPonVMBus")]
+        RDPonVMBus = 1,
         [LocalizedAttributes.LocalizedDescription("strVnc")]
-        VNC = 1,
+        VNC = 2,
         [LocalizedAttributes.LocalizedDescription("strSsh1")]
-        SSH1 = 2,
+        SSH1 = 3,
         [LocalizedAttributes.LocalizedDescription("strSsh2")]
-        SSH2 = 3,
+        SSH2 = 4,
         [LocalizedAttributes.LocalizedDescription("strTelnet")]
-        Telnet = 4,
+        Telnet = 5,
         [LocalizedAttributes.LocalizedDescription("strRlogin")]
-        Rlogin = 5,
+        Rlogin = 6,
         [LocalizedAttributes.LocalizedDescription("strRAW")]
-        RAW = 6,
+        RAW = 7,
         [LocalizedAttributes.LocalizedDescription("strHttp")]
-        HTTP = 7,
+        HTTP = 8,
         [LocalizedAttributes.LocalizedDescription("strHttps")]
-        HTTPS = 8,
+        HTTPS = 9,
         [LocalizedAttributes.LocalizedDescription("strICA")]
-        ICA = 9,
+        ICA = 10,
         [LocalizedAttributes.LocalizedDescription("strExtApp")]
         IntApp = 20
 	}

@@ -94,6 +94,7 @@ namespace mRemoteNG.Config.Serializers.Csv
             connectionRecord.Password = headers.Contains("Password") ? connectionCsv[headers.IndexOf("Password")] : "";
             connectionRecord.Domain = headers.Contains("Domain") ? connectionCsv[headers.IndexOf("Domain")] : "";
             connectionRecord.Hostname = headers.Contains("Hostname") ? connectionCsv[headers.IndexOf("Hostname")] : "";
+            connectionRecord.VMId = headers.Contains("VMId") ? connectionCsv[headers.IndexOf("VMId")] : "";
             connectionRecord.PuttySession = headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
             connectionRecord.LoadBalanceInfo = headers.Contains("LoadBalanceInfo") ? connectionCsv[headers.IndexOf("LoadBalanceInfo")] : "";
             connectionRecord.PreExtApp = headers.Contains("PreExtApp") ? connectionCsv[headers.IndexOf("PreExtApp")] : "";
@@ -135,6 +136,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("UseCredSsp")], out value))
                     connectionRecord.UseCredSsp = value;
+            }
+
+            if (headers.Contains("EnhancedSession"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("EnhancedSession")], out value))
+                    connectionRecord.EnhancedSession = value;
             }
 
             if (headers.Contains("RenderingEngine"))
@@ -506,6 +514,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseCredSsp")], out value))
                     connectionRecord.Inheritance.UseCredSsp = value;
+            }
+
+            if (headers.Contains("InheritEnhancedSession"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritEnhancedSession")], out value))
+                    connectionRecord.Inheritance.EnhancedSession = value;
             }
 
             if (headers.Contains("InheritRenderingEngine"))

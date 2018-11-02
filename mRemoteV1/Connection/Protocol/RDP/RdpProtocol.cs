@@ -137,35 +137,53 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 //not user changeable
                 _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
-				_rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
-				_rdpClient.AdvancedSettings3.MaxReconnectAttempts = Settings.Default.RdpReconnectionCount;
-				_rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
-				_rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
-				_rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
-						
-				_rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
-						
-				_rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(_connectionInfo.CacheBitmaps);
-				if (_rdpVersion >= Versions.RDC61)
+                _rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
+                _rdpClient.AdvancedSettings3.MaxReconnectAttempts = Settings.Default.RdpReconnectionCount;
+                _rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
+                _rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
+                _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
+
+                _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
+
+                _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(_connectionInfo.CacheBitmaps);
+                if (_rdpVersion >= Versions.RDC61)
 				{
-					_rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp;
-				    _rdpClient.AdvancedSettings8.AudioQualityMode = (uint)_connectionInfo.SoundQuality;
-				}
+                    _rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.Protocol == ProtocolType.RDPonVMBus ? true : _connectionInfo.UseCredSsp;
+                    _rdpClient.AdvancedSettings8.AudioQualityMode = (uint)_connectionInfo.SoundQuality;
+
+                    if (_connectionInfo.Protocol == ProtocolType.RDPonVMBus)
+                    {
+                        MSTSCLib.IMsRdpExtendedSettings _settings = (MSTSCLib.IMsRdpExtendedSettings)((AxMsRdpClient8NotSafeForScripting)Control).GetOcx();
+                        object value = true;
+                        _settings.set_Property("DisableCredentialsDelegation", ref value);
+                        _rdpClient.AdvancedSettings8.NegotiateSecurityLayer = false;
+                        _rdpClient.AdvancedSettings8.AuthenticationServiceClass = "Microsoft Virtual Console Service";
+
+                        if (_connectionInfo.EnhancedSession)
+                        {
+                            _rdpClient.AdvancedSettings7.PCB = string.Format("{0};{1}", _connectionInfo.VMId, "EnhancedMode=1");
+                        }
+                        else
+                        {
+                            _rdpClient.AdvancedSettings7.PCB = _connectionInfo.VMId;
+                        }
+                    }
+                }
 
                 SetUseConsoleSession();
                 SetPort();
-				RedirectKeys = _connectionInfo.RedirectKeys;
+                RedirectKeys = _connectionInfo.RedirectKeys;
                 SetRedirection();
                 SetAuthenticationLevel();
-				SetLoadBalanceInfo();
+                SetLoadBalanceInfo();
                 SetRdGateway();
-						
-				_rdpClient.ColorDepth = (int)_connectionInfo.Colors;
+
+                _rdpClient.ColorDepth = (int)_connectionInfo.Colors;
 
                 SetPerformanceFlags();
-						
-				_rdpClient.ConnectingText = Language.strConnecting;
-						
+
+                _rdpClient.ConnectingText = Language.strConnecting;
+
 				Control.Anchor = AnchorStyles.None;
 						
 				return true;
@@ -532,10 +550,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			try
 			{
-				if (_connectionInfo.Port != (int)Defaults.Port)
-				{
-					_rdpClient.AdvancedSettings2.RDPPort = _connectionInfo.Port;
-				}
+                _rdpClient.AdvancedSettings2.RDPPort = _connectionInfo.Port;
 			}
 			catch (Exception ex)
 			{
@@ -731,8 +746,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			Colors = RDPColors.Colors16Bit,
 			Sounds = RDPSounds.DoNotPlay,
 			Resolution = RDPResolutions.FitToWindow,
-			Port = 3389
-		}
+			Port = 3389,
+            PortOnVMBus = 2179
+        }
 				
 		public enum RDPColors
 		{
