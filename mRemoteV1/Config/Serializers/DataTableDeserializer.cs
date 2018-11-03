@@ -101,7 +101,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.RedirectDiskDrives = (bool)dataRow["RedirectDiskDrives"];
             connectionInfo.RedirectPorts = (bool)dataRow["RedirectPorts"];
             connectionInfo.RedirectPrinters = (bool)dataRow["RedirectPrinters"];
-            connectionInfo.RedirectClipboard = (bool)dataRow["RedirectClipboard"];
+            //connectionInfo.RedirectClipboard = (bool)dataRow["RedirectClipboard"];
             connectionInfo.RedirectSmartCards = (bool)dataRow["RedirectSmartCards"];
             connectionInfo.RedirectSound = (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), (string)dataRow["RedirectSound"]);
             connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), (string)dataRow["SoundQuality"]);
@@ -148,7 +148,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.RedirectKeys = (bool)dataRow["InheritRedirectKeys"];
             connectionInfo.Inheritance.RedirectPorts = (bool)dataRow["InheritRedirectPorts"];
             connectionInfo.Inheritance.RedirectPrinters = (bool)dataRow["InheritRedirectPrinters"];
-            connectionInfo.Inheritance.RedirectClipboard = (bool)dataRow["InheritRedirectClipboard"];
+            //connectionInfo.Inheritance.RedirectClipboard = (bool)dataRow["InheritRedirectClipboard"];
             connectionInfo.Inheritance.RedirectSmartCards = (bool)dataRow["InheritRedirectSmartCards"];
             connectionInfo.Inheritance.RedirectSound = (bool)dataRow["InheritRedirectSound"];
             connectionInfo.Inheritance.SoundQuality = (bool)dataRow["InheritSoundQuality"];
