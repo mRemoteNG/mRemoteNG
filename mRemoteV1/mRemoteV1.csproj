@@ -1440,7 +1440,10 @@
     <Content Include="Resources\Help\Screenshots\Reference\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\SQLScript.txt">
+    <Content Include="Resources\Help\MSSQLScript.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\MySQLScript.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_file_transfer.htm">
