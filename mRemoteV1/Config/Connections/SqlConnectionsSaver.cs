@@ -64,8 +64,10 @@ namespace mRemoteNG.Config.Connections
             {
                 sqlConnector.Connect();
                 var databaseVersionVerifier = new SqlDatabaseVersionVerifier(sqlConnector);
+                var metaDataRetriever = new SqlDatabaseMetaDataRetriever();
+                var metaData = metaDataRetriever.GetDatabaseMetaData(sqlConnector);
 
-                if (!databaseVersionVerifier.VerifyDatabaseVersion())
+                if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
                     return;

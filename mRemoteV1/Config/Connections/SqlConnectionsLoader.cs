@@ -29,10 +29,13 @@ namespace mRemoteNG.Config.Connections
         {
             var connector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
             var dataProvider = new SqlDataProvider(connector);
+            var metaDataRetriever = new SqlDatabaseMetaDataRetriever();
             var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
-            databaseVersionVerifier.VerifyDatabaseVersion();
-            var dataTable = dataProvider.Load();
             var deserializer = new DataTableDeserializer();
+
+            var metaData = metaDataRetriever.GetDatabaseMetaData(connector);
+            databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion);
+            var dataTable = dataProvider.Load();
             var connectionTree = deserializer.Deserialize(dataTable);
             ApplyLocalConnectionProperties(connectionTree.RootNodes.First(i => i is RootNodeInfo));
             return connectionTree;
