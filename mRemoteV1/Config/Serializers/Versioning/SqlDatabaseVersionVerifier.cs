@@ -8,14 +8,14 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlDatabaseVersionVerifier
     {
-        private readonly SqlDatabaseConnector _sqlDatabaseConnector;
+        private readonly IDatabaseConnector _databaseConnector;
 
-        public SqlDatabaseVersionVerifier(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlDatabaseVersionVerifier(IDatabaseConnector DatabaseConnector)
         {
-            if (sqlDatabaseConnector == null)
-                throw new ArgumentNullException(nameof(sqlDatabaseConnector));
+            if (DatabaseConnector == null)
+                throw new ArgumentNullException(nameof(DatabaseConnector));
 
-            _sqlDatabaseConnector = sqlDatabaseConnector;
+            _databaseConnector = DatabaseConnector;
         }
 
         public bool VerifyDatabaseVersion(Version dbVersion)
@@ -32,11 +32,11 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
                 var dbUpgraders = new IVersionUpgrader[]
                 {
-                    new SqlVersion22To23Upgrader(_sqlDatabaseConnector),
-                    new SqlVersion23To24Upgrader(_sqlDatabaseConnector),
-                    new SqlVersion24To25Upgrader(_sqlDatabaseConnector),
-                    new SqlVersion25To26Upgrader(_sqlDatabaseConnector),
-                    new SqlVersion26To27Upgrader(_sqlDatabaseConnector),
+                    new SqlVersion22To23Upgrader(_databaseConnector),
+                    new SqlVersion23To24Upgrader(_databaseConnector),
+                    new SqlVersion24To25Upgrader(_databaseConnector),
+                    new SqlVersion25To26Upgrader(_databaseConnector),
+                    new SqlVersion26To27Upgrader(_databaseConnector),
                 };
 
                 foreach (var upgrader in dbUpgraders)

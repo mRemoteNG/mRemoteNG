@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Connections
 
         public ConnectionTreeModel Load()
         {
-            var connector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
+            var connector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
             var dataProvider = new SqlDataProvider(connector);
             var metaDataRetriever = new SqlDatabaseMetaDataRetriever();
             var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);

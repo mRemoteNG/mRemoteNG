@@ -697,5 +697,8 @@
         <Setting Name="OverrideFIPSCheck" Type="System.Boolean" Scope="User">
             <Value Profile="(Default)">False</Value>
         </Setting>
+        <Setting Name="SQLServerType" Type="System.String" Scope="User">
+          <Value Profile="(Default)">mssql</Value>
+        </Setting>
     </Settings>
 </SettingsFile>

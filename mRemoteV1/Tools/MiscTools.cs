@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.ComponentModel;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -9,6 +10,7 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
+using MySql.Data.Types;
 using static System.String;
 
 namespace mRemoteNG.Tools
@@ -63,13 +65,40 @@ namespace mRemoteNG.Tools
 
 
         public static string DBDate(DateTime Dt)
-        {
-            var strDate = Dt.Year + LeadingZero(Convert.ToString(Dt.Month)) + LeadingZero(Convert.ToString(Dt.Day)) +
-                          " " + LeadingZero(Convert.ToString(Dt.Hour)) + ":" +
-                          LeadingZero(Convert.ToString(Dt.Minute)) + ":" + LeadingZero(Convert.ToString(Dt.Second));
-            return strDate;
-        }
+		{
+			switch (Settings.Default.SQLServerType)
+			{
+				case "mysql":
+					return Dt.ToString("yyyy/MM/dd HH:mm:ss");
+				case "mssql":
+				default:
+					return Dt.ToString("yyyyMMdd HH:mm:ss");
+			}
+		}
 
+		public static Type DBTimeStampType()
+		{
+			switch (Settings.Default.SQLServerType)
+			{
+				case "mysql":
+					return typeof(MySqlDateTime);
+				case "mssql":
+				default:
+					return typeof(SqlDateTime);
+			}
+		}
+
+		public static object DBTimeStampNow()
+		{
+			switch (Settings.Default.SQLServerType)
+			{
+				case "mysql":
+					return new MySqlDateTime(DateTime.Now);
+				case "mssql":
+				default:
+					return (SqlDateTime)DateTime.Now;
+			}
+		}
 
         public static string PrepareValueForDB(string Text)
         {
