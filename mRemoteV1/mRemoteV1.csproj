@@ -180,7 +180,7 @@
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer26.cs" />
-    <Compile Include="Config\Serializers\Versioning\SqlDatabaseMetaDataRetriever.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlDatabaseMetaDataRetriever.cs" />
     <Compile Include="Config\Serializers\Versioning\IVersionUpgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion22To23Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />

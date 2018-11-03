@@ -44,7 +44,8 @@ namespace mRemoteNG.Connection
                 throw new ArgumentNullException(nameof(puttySessionsManager));
 
             _puttySessionsManager = puttySessionsManager;
-            _localConnectionPropertiesDataProvider = new FileDataProvider(Path.Combine(SettingsFileInfo.SettingsPath, "LocalConnectionProperties.xml"));
+            var path = SettingsFileInfo.SettingsPath;
+            _localConnectionPropertiesDataProvider = new FileDataProvider(Path.Combine(path, "LocalConnectionProperties.xml"));
             _localConnectionPropertiesSerializer = new LocalConnectionPropertiesXmlSerializer();
         }
 

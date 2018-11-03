@@ -149,13 +149,15 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
-        private void UpdateConnectionsTable(ContainerInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
+        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
         {
-            var sqlQuery = new SqlCommand("DELETE FROM tblCons", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
-            var serializer = new DataTableSerializer(_saveFilter);
+            var cryptoProvider = new LegacyRijndaelCryptographyProvider();
+            var serializer = new DataTableSerializer(_saveFilter, cryptoProvider, rootTreeNode.PasswordString.ConvertToSecureString());
             var dataTable = serializer.Serialize(rootTreeNode);
             var dataProvider = new SqlDataProvider(sqlDatabaseConnector);
+
+            var sqlQuery = new SqlCommand("DELETE FROM tblCons", sqlDatabaseConnector.SqlConnection);
+            sqlQuery.ExecuteNonQuery();
             dataProvider.Save(dataTable);
         }
 

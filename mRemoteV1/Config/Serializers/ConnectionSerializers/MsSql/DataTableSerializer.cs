@@ -7,19 +7,25 @@ using System;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Security;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {
     public class DataTableSerializer : ISerializer<ConnectionInfo,DataTable>
     {
+        private readonly ICryptographyProvider _cryptographyProvider;
+        private readonly SecureString _encryptionKey;
         private DataTable _dataTable;
         private const string TableName = "tblCons";
         private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
 
-        public DataTableSerializer(SaveFilter saveFilter)
+        public DataTableSerializer(SaveFilter saveFilter, ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
         {
-            _saveFilter = saveFilter;
+            _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
+            _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
+            _encryptionKey = encryptionKey.ThrowIfNull(nameof(encryptionKey));
         }
 
 
@@ -210,7 +216,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["Panel"] = connectionInfo.Panel;
             dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
             dataRow["DomainName"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
-            dataRow["Password"] = _saveFilter.SavePassword ? connectionInfo.Password : "";
+            dataRow["Password"] = _saveFilter.SavePassword 
+                ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) 
+                : "";
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["Protocol"] = connectionInfo.Protocol;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
@@ -251,14 +259,14 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["VNCProxyIP"] = connectionInfo.VNCProxyIP;
             dataRow["VNCProxyPort"] = connectionInfo.VNCProxyPort;
             dataRow["VNCProxyUsername"] = connectionInfo.VNCProxyUsername;
-            dataRow["VNCProxyPassword"] = connectionInfo.VNCProxyPassword;
+            dataRow["VNCProxyPassword"] = _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey);
             dataRow["VNCColors"] = connectionInfo.VNCColors;
             dataRow["VNCSmartSizeMode"] = connectionInfo.VNCSmartSizeMode;
             dataRow["VNCViewOnly"] = connectionInfo.VNCViewOnly;
             dataRow["RDGatewayUsageMethod"] = connectionInfo.RDGatewayUsageMethod;
             dataRow["RDGatewayHostname"] = connectionInfo.RDGatewayHostname;
             dataRow["RDGatewayUseConnectionCredentials"] = connectionInfo.RDGatewayUseConnectionCredentials;
-            dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
+            dataRow["RDGatewayUsername"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayUsername, _encryptionKey);
             dataRow["RDGatewayPassword"] = connectionInfo.RDGatewayPassword;
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             if (_saveFilter.SaveInheritance)

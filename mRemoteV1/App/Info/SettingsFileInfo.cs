@@ -2,12 +2,13 @@
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using mRemoteNG.Connection;
 
 namespace mRemoteNG.App.Info
 {
     public static class SettingsFileInfo
     {
-        private static readonly string ExePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+        private static readonly string ExePath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConnectionInfo))?.Location);
 
         public static string SettingsPath => Runtime.IsPortableEdition ? ExePath : Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + Application.ProductName;
         public static string LayoutFileName { get; } = "pnlLayout.xml";
