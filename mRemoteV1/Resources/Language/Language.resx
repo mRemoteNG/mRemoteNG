@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -2715,9 +2715,6 @@ This page will walk you through the process of upgrading your connections file o
   <data name="AutomaticReconnectError" xml:space="preserve">
     <value>An error occurred while trying to reconnect to RDP host '{0}'</value>
   </data>
-  <data name="ChangeConnectionResolutionError" xml:space="preserve">
-    <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
-  </data>
   <data name="strRDPonVMBus" xml:space="preserve">
     <value>RDP on VMBus</value>
   </data>
@@ -2732,6 +2729,9 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strPropertyNameVMId" xml:space="preserve">
     <value>VM Id</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
   </data>
   <data name="strMenuCopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
