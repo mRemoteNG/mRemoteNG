@@ -16,6 +16,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Config;
 
 namespace mRemoteNG.Connection
 {
@@ -187,7 +188,17 @@ namespace mRemoteNG.Connection
         /// <param name="saveFilter"></param>
         /// <param name="connectionFileName"></param>
         /// <param name="forceSave">Bypasses safety checks that prevent saving if a connection file isn't loaded.</param>
-        public void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName, bool forceSave = false)
+        /// <param name="propertyNameTrigger">
+        /// Optional. The name of the property that triggered
+        /// this save.
+        /// </param>
+        public void SaveConnections(
+            ConnectionTreeModel connectionTreeModel, 
+            bool useDatabase, 
+            SaveFilter saveFilter, 
+            string connectionFileName, 
+            bool forceSave = false,
+            string propertyNameTrigger = "")
         {
             if (connectionTreeModel == null)
                 return;
@@ -207,10 +218,13 @@ namespace mRemoteNG.Connection
                 RemoteConnectionsSyncronizer?.Disable();
 
                 var previouslyUsingDatabase = UsingDatabase;
-                if (useDatabase)
-                    new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider).Save(connectionTreeModel);
-                else
-                    new XmlConnectionsSaver(connectionFileName, saveFilter).Save(connectionTreeModel);
+
+                var saver = useDatabase
+                    ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer,
+                        _localConnectionPropertiesDataProvider)
+                    : new XmlConnectionsSaver(connectionFileName, saveFilter);
+
+                saver.Save(connectionTreeModel, propertyNameTrigger);
 
                 if (UsingDatabase)
                     LastSqlUpdate = DateTime.Now;
@@ -230,7 +244,14 @@ namespace mRemoteNG.Connection
             }
         }
 
-        public void SaveConnectionsAsync()
+        /// <summary>
+        /// Save the currently loaded connections asynchronously
+        /// </summary>
+        /// <param name="propertyNameTrigger">
+        /// Optional. The name of the property that triggered
+        /// this save.
+        /// </param>
+        public void SaveConnectionsAsync(string propertyNameTrigger = "")
         {
             if (_batchingSaves)
             {
@@ -238,17 +259,20 @@ namespace mRemoteNG.Connection
                 return;
             }
 
-            var t = new Thread(SaveConnectionsBGd);
+            var t = new Thread(() =>
+            {
+                lock (SaveLock)
+                {
+                    SaveConnections(
+                        ConnectionTreeModel, 
+                        UsingDatabase, 
+                        new SaveFilter(), 
+                        ConnectionFileName, 
+                        propertyNameTrigger: propertyNameTrigger);
+                }
+            });
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
-        }
-
-        private void SaveConnectionsBGd()
-        {
-            lock (SaveLock)
-            {
-                SaveConnections();
-            }
         }
 
         public string GetStartupConnectionFileName()

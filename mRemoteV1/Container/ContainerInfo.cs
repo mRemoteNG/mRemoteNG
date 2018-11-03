@@ -12,13 +12,19 @@ namespace mRemoteNG.Container
 	[DefaultProperty("Name")]
     public class ContainerInfo : ConnectionInfo, INotifyCollectionChanged
 	{
-        [Browsable(false)]
+	    private bool _isExpanded;
+
+	    [Browsable(false)]
         public List<ConnectionInfo> Children { get; } = new List<ConnectionInfo>();
 
-        [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
-        public bool IsExpanded { get; set; }
+	    [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
+	    public bool IsExpanded
+	    {
+	        get => _isExpanded;
+	        set => SetField(ref _isExpanded, value, "IsExpanded");
+	    }
 
-        [Browsable(false)]
+	    [Browsable(false)]
 	    public override bool IsContainer { get { return true; } set {} }
 
 	    public ContainerInfo(string uniqueId)

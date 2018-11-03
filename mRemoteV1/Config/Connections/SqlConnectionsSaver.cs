@@ -18,6 +18,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Security;
+using mRemoteNG.Connection;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -40,11 +41,18 @@ namespace mRemoteNG.Config.Connections
             _dataProvider = localPropertiesDataProvider.ThrowIfNull(nameof(localPropertiesDataProvider));
         }
 
-        public void Save(ConnectionTreeModel connectionTreeModel)
+        public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
             var rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
             UpdateLocalConnectionProperties(rootTreeNode);
+
+            if (PropertyIsLocalOnly(propertyNameTrigger))
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, 
+                    $"Property {propertyNameTrigger} is local only. Not saving to database.");
+                return;
+            }
 
             if (SqlUserIsReadOnly())
             {
@@ -69,6 +77,20 @@ namespace mRemoteNG.Config.Connections
             }
 
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved connections to database");
+        }
+
+        /// <summary>
+        /// Determines if a given property name should be only saved
+        /// locally.
+        /// </summary>
+        /// <param name="property">
+        /// The name of the property that triggered the save event
+        /// </param>
+        /// <returns></returns>
+        private bool PropertyIsLocalOnly(string property)
+        {
+            return property == nameof(ConnectionInfo.OpenConnections) ||
+                   property == nameof(ContainerInfo.IsExpanded);
         }
 
         private void UpdateLocalConnectionProperties(ContainerInfo rootNode)
