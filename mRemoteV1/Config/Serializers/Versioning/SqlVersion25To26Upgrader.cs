@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 using mRemoteNG.App;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
@@ -8,14 +7,14 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlVersion25To26Upgrader : IVersionUpgrader
     {
-        private readonly SqlDatabaseConnector _sqlDatabaseConnector;
+        private readonly IDatabaseConnector _databaseConnector;
 
-        public SqlVersion25To26Upgrader(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlVersion25To26Upgrader(IDatabaseConnector databaseConnector)
         {
-            if (sqlDatabaseConnector == null)
-                throw new ArgumentNullException(nameof(sqlDatabaseConnector));
+            if (databaseConnector == null)
+                throw new ArgumentNullException(nameof(databaseConnector));
 
-            _sqlDatabaseConnector = sqlDatabaseConnector;
+            _databaseConnector = databaseConnector;
         }
 
         public bool CanUpgrade(Version currentVersion)
@@ -36,8 +35,8 @@ ADD RDPMinutesToIdleTimeout int NOT NULL DEFAULT 0,
 	InheritSoundQuality bit NOT NULL DEFAULT 0;
 UPDATE tblRoot
     SET ConfVersion='2.6'";
-            var sqlCommand = new SqlCommand(sqlText, _sqlDatabaseConnector.SqlConnection);
-            sqlCommand.ExecuteNonQuery();
+            var dbCommand = _databaseConnector.DbCommand(sqlText);
+            dbCommand.ExecuteNonQuery();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Security;
@@ -40,10 +39,10 @@ namespace mRemoteNG.Config.Connections
             }
                 
 
-            using (var sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings())
+            using (var dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings())
             {
-                sqlConnector.Connect();
-                var databaseVersionVerifier = new SqlDatabaseVersionVerifier(sqlConnector);
+                dbConnector.Connect();
+                var databaseVersionVerifier = new SqlDatabaseVersionVerifier(dbConnector);
 
                 if (!databaseVersionVerifier.VerifyDatabaseVersion())
                 {
@@ -53,13 +52,13 @@ namespace mRemoteNG.Config.Connections
 
                 var rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
-                UpdateRootNodeTable(rootTreeNode, sqlConnector);
-                UpdateConnectionsTable(rootTreeNode, sqlConnector);
-                UpdateUpdatesTable(sqlConnector);
+                UpdateRootNodeTable(rootTreeNode, dbConnector);
+                UpdateConnectionsTable(rootTreeNode, dbConnector);
+                UpdateUpdatesTable(dbConnector);
             }
         }
 
-        private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
+        private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             string strProtected;
@@ -80,18 +79,17 @@ namespace mRemoteNG.Config.Connections
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
             }
 
-            var sqlQuery = new SqlCommand("DELETE FROM tblRoot", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
+            var dbQuery = databaseConnector.DbCommand("DELETE FROM tblRoot");
+            dbQuery.ExecuteNonQuery();
 
             if (rootTreeNode != null)
             {
-                sqlQuery =
-                    new SqlCommand(
+                dbQuery =
+                    databaseConnector.DbCommand(
                         "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
                         MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
-                        ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")",
-                        sqlDatabaseConnector.SqlConnection);
-                sqlQuery.ExecuteNonQuery();
+                        ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")");
+                dbQuery.ExecuteNonQuery();
             }
             else
             {
@@ -99,22 +97,22 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
-        private void UpdateConnectionsTable(ContainerInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
+        private void UpdateConnectionsTable(ContainerInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
-            var sqlQuery = new SqlCommand("DELETE FROM tblCons", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
+            var dbQuery = databaseConnector.DbCommand("DELETE FROM tblCons");
+            dbQuery.ExecuteNonQuery();
             var serializer = new DataTableSerializer(_saveFilter);
             var dataTable = serializer.Serialize(rootTreeNode);
-            var dataProvider = new SqlDataProvider(sqlDatabaseConnector);
+            var dataProvider = new SqlDataProvider(databaseConnector);
             dataProvider.Save(dataTable);
         }
 
-        private void UpdateUpdatesTable(SqlDatabaseConnector sqlDatabaseConnector)
+        private void UpdateUpdatesTable(IDatabaseConnector databaseConnector)
         {
-            var sqlQuery = new SqlCommand("DELETE FROM tblUpdate", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
-            sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
+            var dbQuery = databaseConnector.DbCommand("DELETE FROM tblUpdate");
+            dbQuery.ExecuteNonQuery();
+            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')");
+            dbQuery.ExecuteNonQuery();
         }
 
         private bool SqlUserIsReadOnly()

@@ -59,14 +59,21 @@
     <Reference Include="Geckofx-Winforms, Version=45.0.32.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
       <HintPath>..\packages\Geckofx45.45.0.32\lib\net45\Geckofx-Winforms.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="mscorlib" />
     <Reference Include="MagicLibrary, Version=1.7.4.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\MagicLibrary.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
@@ -75,12 +82,17 @@
       <HintPath>..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -153,6 +165,7 @@
     <Compile Include="Config\DatabaseConnectors\ConnectionTestResult.cs" />
     <Compile Include="Config\DatabaseConnectors\DatabaseConnectorFactory.cs" />
     <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnectionTester.cs" />
+    <Compile Include="Config\DatabaseConnectors\MSSqlDatabaseConnector.cs" />
     <Compile Include="Config\DataProviders\FileBackupCreator.cs" />
     <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
     <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
@@ -222,7 +235,7 @@
     <Compile Include="Config\Putty\PuttySessionsManager.cs" />
     <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
     <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
-    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnector.cs" />
+    <Compile Include="Config\DatabaseConnectors\MySqlDatabaseConnector.cs" />
     <Compile Include="Connection\AbstractConnectionRecord.cs" />
     <Compile Include="Connection\ConnectionInfoComparer.cs" />
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
@@ -804,6 +817,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\StartupExitPage.resx">
       <DependentUpon>StartupExitPage.cs</DependentUpon>

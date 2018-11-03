@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 using mRemoteNG.App;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
@@ -8,14 +7,14 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlVersion22To23Upgrader : IVersionUpgrader
     {
-        private readonly SqlDatabaseConnector _sqlDatabaseConnector;
+        private readonly IDatabaseConnector _databaseConnector;
 
-        public SqlVersion22To23Upgrader(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlVersion22To23Upgrader(IDatabaseConnector databaseConnector)
         {
-            if (sqlDatabaseConnector == null)
-                throw new ArgumentNullException(nameof(sqlDatabaseConnector));
+            if (databaseConnector == null)
+                throw new ArgumentNullException(nameof(databaseConnector));
 
-            _sqlDatabaseConnector = sqlDatabaseConnector;
+            _databaseConnector = databaseConnector;
         }
 
         public bool CanUpgrade(Version currentVersion)
@@ -32,8 +31,8 @@ ADD EnableFontSmoothing bit NOT NULL DEFAULT 0,
     EnableDesktopComposition bit NOT NULL DEFAULT 0, 
     InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, 
     InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;";
-            var sqlCommand = new SqlCommand(sqlText, _sqlDatabaseConnector.SqlConnection);
-            sqlCommand.ExecuteNonQuery();
+            var dbCommand = _databaseConnector.DbCommand(sqlText);
+            dbCommand.ExecuteNonQuery();
         }
     }
 }

@@ -8,15 +8,15 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlDatabaseVersionVerifier
     {
-        private readonly SqlDatabaseConnector _sqlDatabaseConnector;
+        private readonly IDatabaseConnector _databaseConnector;
         private readonly SqlDatabaseVersionRetriever _versionRetriever;
 
-        public SqlDatabaseVersionVerifier(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlDatabaseVersionVerifier(IDatabaseConnector DatabaseConnector)
         {
-            if (sqlDatabaseConnector == null)
-                throw new ArgumentNullException(nameof(sqlDatabaseConnector));
+            if (DatabaseConnector == null)
+                throw new ArgumentNullException(nameof(DatabaseConnector));
 
-            _sqlDatabaseConnector = sqlDatabaseConnector;
+            _databaseConnector = DatabaseConnector;
             _versionRetriever = new SqlDatabaseVersionRetriever();
         }
 
@@ -25,35 +25,35 @@ namespace mRemoteNG.Config.Serializers.Versioning
             var isVerified = false;
             try
             {
-                var databaseVersion = _versionRetriever.GetDatabaseVersion(_sqlDatabaseConnector);
+                var databaseVersion = _versionRetriever.GetDatabaseVersion(_databaseConnector);
 
                 if (databaseVersion.Equals(new Version()))
                 {
                     return true;
                 }
 
-                var sql22To23Upgrader = new SqlVersion22To23Upgrader(_sqlDatabaseConnector);
+                var sql22To23Upgrader = new SqlVersion22To23Upgrader(_databaseConnector);
                 if (sql22To23Upgrader.CanUpgrade(databaseVersion))
                 {
                     sql22To23Upgrader.Upgrade();
                     databaseVersion = new Version(2, 3);
                 }
 
-                var sql23To24Upgrader = new SqlVersion23To24Upgrader(_sqlDatabaseConnector);
+                var sql23To24Upgrader = new SqlVersion23To24Upgrader(_databaseConnector);
                 if (sql23To24Upgrader.CanUpgrade(databaseVersion))
                 {
                     sql23To24Upgrader.Upgrade();
                     databaseVersion = new Version(2, 4);
                 }
 
-                var sql24To25Upgrader = new SqlVersion24To25Upgrader(_sqlDatabaseConnector);
+                var sql24To25Upgrader = new SqlVersion24To25Upgrader(_databaseConnector);
                 if (sql24To25Upgrader.CanUpgrade(databaseVersion))
                 {
                     sql24To25Upgrader.Upgrade();
                     databaseVersion = new Version(2, 5);
                 }
 
-                var sql25To26Upgrader = new SqlVersion25To26Upgrader(_sqlDatabaseConnector);
+                var sql25To26Upgrader = new SqlVersion25To26Upgrader(_databaseConnector);
                 if (sql25To26Upgrader.CanUpgrade(databaseVersion))
                 {
                     sql25To26Upgrader.Upgrade();
