@@ -2725,7 +2725,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Allow more features through RDP</value>
   </data>
   <data name="strPropertyDescriptionVMId" xml:space="preserve">
-    <value>Virtual Machine Identity (use CmdLet "Get-VM | select VMName, VMId" to retreive it. Use Grant-VMConnectAccess to avoid the need of privilege elevation)  </value>
+    <value>Virtual Machine Identity (use CmdLet "Get-VM | select VMName, VMId" to retreive it. Use Grant-VMConnectAccess to avoid the need of elevated privileges)  </value>
   </data>
   <data name="strPropertyNameEnhancedSession" xml:space="preserve">
     <value>Enhanced session</value>
