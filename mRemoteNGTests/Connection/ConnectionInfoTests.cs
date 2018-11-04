@@ -120,6 +120,7 @@ namespace mRemoteNGTests.Connection
         [TestCase(ProtocolType.IntApp, ExpectedResult = 0)]
         [TestCase(ProtocolType.RAW, ExpectedResult = 23)]
         [TestCase(ProtocolType.RDP, ExpectedResult = 3389)]
+        [TestCase(ProtocolType.RDPonVMBus, ExpectedResult = 2179)]
         [TestCase(ProtocolType.Rlogin, ExpectedResult = 513)]
         [TestCase(ProtocolType.SSH1, ExpectedResult = 22)]
         [TestCase(ProtocolType.SSH2, ExpectedResult = 22)]

@@ -875,7 +875,11 @@ namespace mRemoteNG.UI.Window
                                 strHide.Add("VMId");
                                 strHide.Add("EnhancedSession");
                             }
-							strHide.Add("ExtApp");
+                            else
+                            {
+                                strHide.Add("UseCredSsp");
+                            }
+                            strHide.Add("ExtApp");
 							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RenderingEngine");

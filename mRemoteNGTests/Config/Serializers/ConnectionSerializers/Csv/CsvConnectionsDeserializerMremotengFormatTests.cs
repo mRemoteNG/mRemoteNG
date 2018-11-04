@@ -96,6 +96,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 Port = 999,
                 UseConsoleSession = true,
                 UseCredSsp = true,
+                EnhancedSession = true,
                 RenderingEngine = HTTPBase.RenderingEngine.Gecko,
                 ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
                 RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth,
