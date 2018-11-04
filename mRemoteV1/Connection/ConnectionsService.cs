@@ -61,23 +61,24 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + connectionString);
-                if (string.IsNullOrEmpty(uri.Host)) return null;
+                var uriBuilder = new UriBuilder();
+                uriBuilder.Scheme = "dummyscheme";
+                uriBuilder.Host = connectionString;
 
                 var newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
-                newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs ? string.Format(Language.strQuick, uri.Host) : uri.Host;
+                newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs ? string.Format(Language.strQuick, uriBuilder.Host) : uriBuilder.Host;
 
                 newConnectionInfo.Protocol = protocol;
-                newConnectionInfo.Hostname = uri.Host;
-                if (uri.Port == -1)
+                newConnectionInfo.Hostname = uriBuilder.Host;
+                if (uriBuilder.Port == -1)
                 {
                     newConnectionInfo.SetDefaultPort();
                 }
                 else
                 {
-                    newConnectionInfo.Port = uri.Port;
+                    newConnectionInfo.Port = uriBuilder.Port;
                 }
 
                 if (string.IsNullOrEmpty(newConnectionInfo.Panel))
