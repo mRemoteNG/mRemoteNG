@@ -98,11 +98,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void toggleSQLPageControls(bool useSQLServer)
         {
+            lblSQLType.Enabled = useSQLServer;
             lblSQLServer.Enabled = useSQLServer;
             lblSQLDatabaseName.Enabled = useSQLServer;
             lblSQLUsername.Enabled = useSQLServer;
             lblSQLPassword.Enabled = useSQLServer;
             lblSQLReadOnly.Enabled = useSQLServer;
+            txtSQLType.Enabled = useSQLServer;
             txtSQLServer.Enabled = useSQLServer;
             txtSQLDatabaseName.Enabled = useSQLServer;
             txtSQLUsername.Enabled = useSQLServer;
