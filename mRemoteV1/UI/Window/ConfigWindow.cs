@@ -1429,8 +1429,6 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("Panel");
                         if (conI.IsContainer)
                             strHide.Add("Hostname");
-                        if (conI.Inheritance.VMId)
-                            strHide.Add("VMId");
                         if (conI.Inheritance.PreExtApp)
                             strHide.Add("PreExtApp");
                         if (conI.Inheritance.PostExtApp)
@@ -1479,8 +1477,6 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RDGatewayHostname");
                         if(conI.Inheritance.SoundQuality)
                             strHide.Add("SoundQuality");
-                        if(conI.Inheritance.VMId)
-                            strHide.Add("VMId");
                         if(conI.Inheritance.EnhancedSession)
                             strHide.Add("EnhancedSession");
                     }

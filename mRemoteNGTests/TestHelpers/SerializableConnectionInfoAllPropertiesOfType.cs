@@ -22,8 +22,9 @@
 		public TType RDPAlertIdleTimeout { get; set; }
 		public TType LoadBalanceInfo { get; set; }
 		public TType RenderingEngine { get; set; }
-		public TType UseCredSsp { get; set; }
-		public TType RDGatewayUsageMethod { get; set; }
+        public TType UseCredSsp { get; set; }
+        public TType EnhancedSession { get; set; }
+        public TType RDGatewayUsageMethod { get; set; }
 		public TType RDGatewayHostname { get; set; }
 		public TType RDGatewayUseConnectionCredentials { get; set; }
 		public TType RDGatewayUsername { get; set; }
@@ -59,6 +60,7 @@
 		public TType VNCProxyPassword { get; set; }
 		public TType VNCColors { get; set; }
 		public TType VNCSmartSizeMode { get; set; }
-		public TType VNCViewOnly { get; set; }
-	}
+        public TType VNCViewOnly { get; set; }
+        public TType VMId { get; set; }
+    }
 }
