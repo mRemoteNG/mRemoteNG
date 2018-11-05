@@ -6,6 +6,7 @@ Features/Enhancements:
 
 Fixes:
 ------
+#1181: Connections sometimes dont immediately load when switching to sql feature
 #1173: Fixed memory leak when loading connections multiple times
 #1134: Fixed issue where opening a connection opens same connection on other clients when using database feature
 #449: Encrypt passwords saved to database
