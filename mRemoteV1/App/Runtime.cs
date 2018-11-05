@@ -43,19 +43,23 @@ namespace mRemoteNG.App
         #region Connections Loading/Saving
         public static void LoadConnectionsAsync()
         {
-            _withDialog = false;
-
             var t = new Thread(LoadConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
 
-        private static bool _withDialog;
         private static void LoadConnectionsBGd()
         {
-            LoadConnections(_withDialog);
+            LoadConnections();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="withDialog">
+        /// Should we show the file selection dialog to allow the user to select
+        /// a connection file
+        /// </param>
         public static void LoadConnections(bool withDialog = false)
         {
             var connectionFileName = "";
@@ -65,18 +69,19 @@ namespace mRemoteNG.App
                 // disable sql update checking while we are loading updates
                 ConnectionsService.RemoteConnectionsSyncronizer?.Disable();
 
-                if (!Settings.Default.UseSQLServer)
+                if (withDialog)
                 {
-                    if (withDialog)
-                    {
-                        var loadDialog = DialogFactory.BuildLoadConnectionsDialog();
-                        if (loadDialog.ShowDialog() != DialogResult.OK) return;
-                        connectionFileName = loadDialog.FileName;
-                    }
-                    else
-                    {
-                        connectionFileName = ConnectionsService.GetStartupConnectionFileName();
-                    }
+                    var loadDialog = DialogFactory.BuildLoadConnectionsDialog();
+                    if (loadDialog.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    connectionFileName = loadDialog.FileName;
+                    Settings.Default.UseSQLServer = false;
+                    Settings.Default.Save();
+                }
+                else if (!Settings.Default.UseSQLServer)
+                {
+                    connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                 }
 
                 ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
