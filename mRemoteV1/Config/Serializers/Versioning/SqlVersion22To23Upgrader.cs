@@ -1,8 +1,8 @@
-﻿using System;
-using System.Data.SqlClient;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
+using System;
+using System.Data.SqlClient;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
@@ -23,7 +23,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             return currentVersion.CompareTo(new Version(2, 2)) == 0;
         }
 
-        public void Upgrade()
+        public Version Upgrade()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.2 to version 2.3.");
             const string sqlText = @"
@@ -34,6 +34,8 @@ ADD EnableFontSmoothing bit NOT NULL DEFAULT 0,
     InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;";
             var sqlCommand = new SqlCommand(sqlText, _sqlDatabaseConnector.SqlConnection);
             sqlCommand.ExecuteNonQuery();
+
+            return new Version(2, 3);
         }
     }
 }

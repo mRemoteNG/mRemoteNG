@@ -6,11 +6,11 @@ using System.Data.SqlClient;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
-    public class SqlVersion23To24Upgrader : IVersionUpgrader
+    public class SqlVersion26To27Upgrader : IVersionUpgrader
     {
         private readonly SqlDatabaseConnector _sqlDatabaseConnector;
 
-        public SqlVersion23To24Upgrader(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlVersion26To27Upgrader(SqlDatabaseConnector sqlDatabaseConnector)
         {
             if (sqlDatabaseConnector == null)
                 throw new ArgumentNullException(nameof(sqlDatabaseConnector));
@@ -20,20 +20,22 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public bool CanUpgrade(Version currentVersion)
         {
-            return currentVersion.CompareTo(new Version(2, 3)) == 0;
+            return currentVersion.CompareTo(new Version(2, 6)) == 0;
         }
 
         public Version Upgrade()
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.3 to version 2.4.");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.6 to version 2.7.");
             const string sqlText = @"
 ALTER TABLE tblCons
-ADD UseCredSsp bit NOT NULL DEFAULT 1,
-    InheritUseCredSsp bit NOT NULL DEFAULT 0;";
+ADD RedirectClipboard bit NOT NULL DEFAULT 0,
+	InheritRedirectClipboard bit NOT NULL DEFAULT 0;
+UPDATE tblRoot
+    SET ConfVersion='2.7'";
             var sqlCommand = new SqlCommand(sqlText, _sqlDatabaseConnector.SqlConnection);
             sqlCommand.ExecuteNonQuery();
 
-            return new Version(2, 4);
+            return new Version(2, 7);
         }
     }
 }

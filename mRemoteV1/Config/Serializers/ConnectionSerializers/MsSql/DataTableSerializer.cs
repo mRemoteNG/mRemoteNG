@@ -1,6 +1,7 @@
 ﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using System;
@@ -8,7 +9,6 @@ using System.Data;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Security;
-using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {

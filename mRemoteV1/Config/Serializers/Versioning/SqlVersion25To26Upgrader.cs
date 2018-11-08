@@ -1,8 +1,8 @@
-﻿using System;
-using System.Data.SqlClient;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
+using System;
+using System.Data.SqlClient;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
@@ -23,7 +23,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             return currentVersion.CompareTo(new Version(2, 5)) == 0;
         }
 
-        public void Upgrade()
+        public Version Upgrade()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.5 to version 2.6.");
             const string sqlText = @"
@@ -38,6 +38,8 @@ UPDATE tblRoot
     SET ConfVersion='2.6'";
             var sqlCommand = new SqlCommand(sqlText, _sqlDatabaseConnector.SqlConnection);
             sqlCommand.ExecuteNonQuery();
+
+            return new Version(2, 6);
         }
     }
 }
