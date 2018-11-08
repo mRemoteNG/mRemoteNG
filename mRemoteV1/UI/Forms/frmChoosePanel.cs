@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Forms
 		{
 		    var pnlName = Language.strNewPanel;
 
-		    if (input.InputBox(Language.strNewPanel, Language.strPanelName + ":", ref pnlName) != DialogResult.OK || string.IsNullOrEmpty(pnlName)) return;
+		    if (new InputBox().ShowAsDialog(Language.strNewPanel, Language.strPanelName + ":", ref pnlName) != DialogResult.OK || string.IsNullOrEmpty(pnlName)) return;
 		    _panelAdder.AddPanel(pnlName);
 		    AddAvailablePanels();
 		    cbPanels.SelectedItem = pnlName;

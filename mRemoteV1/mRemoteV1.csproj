@@ -470,6 +470,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\DialogFactory.cs" />
+    <Compile Include="UI\DisplayProperties.cs" />
     <Compile Include="UI\FontOverrider.cs" />
     <Compile Include="UI\FormExtensions.cs" />
     <Compile Include="UI\Forms\frmOptions.cs">
@@ -479,7 +480,12 @@
       <DependentUpon>frmOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\FullscreenHandler.cs" />
-    <Compile Include="UI\Forms\Input\input.cs" />
+    <Compile Include="UI\Forms\Input\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Input\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
       <DependentUpon>AdvancedPage.cs</DependentUpon>
     </Compile>
@@ -776,6 +782,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Input\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\CredentialsPage.resx">
       <DependentUpon>CredentialsPage.cs</DependentUpon>

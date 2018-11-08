@@ -786,7 +786,8 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var newTitle = TabController.SelectedTab.Title;
-                if (input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK && !string.IsNullOrEmpty(newTitle))
+                if (new InputBox().ShowAsDialog(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK && 
+                    !string.IsNullOrEmpty(newTitle))
                     TabController.SelectedTab.Title = newTitle.Replace("&", "&&");
             }
             catch (Exception ex)

@@ -74,7 +74,7 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Location = new System.Drawing.Point(3, 50);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.msMain.Size = new System.Drawing.Size(176, 24);
+            this.msMain.Size = new System.Drawing.Size(181, 24);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
@@ -84,7 +84,7 @@ namespace mRemoteNG.UI.Forms
             this.fileMenu.ConnectionInitiator = null;
             this.fileMenu.Name = "mMenFile";
             this.fileMenu.Size = new System.Drawing.Size(37, 20);
-            this.fileMenu.Text = Language.strMenuFile;
+            this.fileMenu.Text = "&File";
             this.fileMenu.TreeWindow = null;
             this.fileMenu.DropDownOpening += new System.EventHandler(this.mainFileMenu1_DropDownOpening);
             // 
@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Forms
             this.viewMenu.MainForm = null;
             this.viewMenu.Name = "mMenView";
             this.viewMenu.Size = new System.Drawing.Size(44, 20);
-            this.viewMenu.Text = Language.strMenuView;
+            this.viewMenu.Text = "&View";
             this.viewMenu.TsExternalTools = null;
             this.viewMenu.TsMultiSsh = null;
             this.viewMenu.TsQuickConnect = null;
@@ -106,13 +106,13 @@ namespace mRemoteNG.UI.Forms
             this.toolsMenu.MainForm = null;
             this.toolsMenu.Name = "mMenTools";
             this.toolsMenu.Size = new System.Drawing.Size(47, 20);
-            this.toolsMenu.Text = Language.strMenuTools;
+            this.toolsMenu.Text = "&Tools";
             // 
             // helpMenu
             // 
             this.helpMenu.Name = "mMenInfo";
             this.helpMenu.Size = new System.Drawing.Size(44, 20);
-            this.helpMenu.Text = Language.strMenuHelp;
+            this.helpMenu.Text = "&Help";
             this.helpMenu.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
             // mMenSep3
@@ -140,6 +140,7 @@ namespace mRemoteNG.UI.Forms
             this.tsContainer.TopToolStripPanel.Controls.Add(this._multiSshToolStrip);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             this.tsContainer.TopToolStripPanel.Controls.Add(this._externalToolsToolStrip);
+            this.tsContainer.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
             // _quickConnectToolStrip
             // 
@@ -148,7 +149,6 @@ namespace mRemoteNG.UI.Forms
             this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
             this._quickConnectToolStrip.Location = new System.Drawing.Point(3, 0);
-            this._quickConnectToolStrip.MaximumSize = new System.Drawing.Size(0, 25);
             this._quickConnectToolStrip.Name = "_quickConnectToolStrip";
             this._quickConnectToolStrip.Size = new System.Drawing.Size(364, 25);
             this._quickConnectToolStrip.TabIndex = 18;
@@ -169,7 +169,6 @@ namespace mRemoteNG.UI.Forms
             this._externalToolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._externalToolsToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
             this._externalToolsToolStrip.Location = new System.Drawing.Point(39, 74);
-            this._externalToolsToolStrip.MaximumSize = new System.Drawing.Size(0, 25);
             this._externalToolsToolStrip.Name = "_externalToolsToolStrip";
             this._externalToolsToolStrip.Size = new System.Drawing.Size(111, 25);
             this._externalToolsToolStrip.TabIndex = 17;
@@ -185,8 +184,8 @@ namespace mRemoteNG.UI.Forms
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1129, 571);
             this.Controls.Add(this.tsContainer);
             this.Icon = global::mRemoteNG.Resources.mRemote_Icon;

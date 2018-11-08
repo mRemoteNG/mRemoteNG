@@ -32,7 +32,6 @@ namespace mRemoteNG.UI.Controls
             ContextMenuStrip = _cMenExtAppsToolbar;
             Dock = DockStyle.None;
             Location = new System.Drawing.Point(39, 49);
-            MaximumSize = new System.Drawing.Size(0, 25);
             Name = "tsExternalTools";
             Size = new System.Drawing.Size(111, 25);
             TabIndex = 17;

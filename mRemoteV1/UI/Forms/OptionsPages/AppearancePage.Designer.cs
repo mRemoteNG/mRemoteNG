@@ -30,7 +30,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppearancePage));
             this.lblLanguageRestartRequired = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.cboLanguage = new mRemoteNG.UI.Controls.Base.NGComboBox();
             this.lblLanguage = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -115,6 +114,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // AppearancePage
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lblLanguageRestartRequired);
             this.Controls.Add(this.cboLanguage);
             this.Controls.Add(this.lblLanguage);
@@ -123,7 +124,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkShowSystemTrayIcon);
             this.Controls.Add(this.chkMinimizeToSystemTray);
             this.Name = "AppearancePage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.ResumeLayout(false);
             this.PerformLayout();

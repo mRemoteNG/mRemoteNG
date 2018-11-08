@@ -98,7 +98,7 @@ namespace mRemoteNG.UI.Panels
                 var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
 
                 var nTitle = "";
-                input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle);
+                new InputBox().ShowAsDialog(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle);
 
                 if (!string.IsNullOrEmpty(nTitle))
                 {

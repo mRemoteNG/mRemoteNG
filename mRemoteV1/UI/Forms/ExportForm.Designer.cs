@@ -121,10 +121,10 @@ namespace mRemoteNG.UI.Forms
             // 
             // txtFileName
             // 
-            this.txtFileName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtFileName.Location = new System.Drawing.Point(15, 51);
+            this.txtFileName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFileName.Location = new System.Drawing.Point(15, 47);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(396, 13);
+            this.txtFileName.Size = new System.Drawing.Size(396, 20);
             this.txtFileName.TabIndex = 1;
             this.txtFileName.TextChanged += new System.EventHandler(this.txtFileName_TextChanged);
             // 
@@ -283,6 +283,8 @@ namespace mRemoteNG.UI.Forms
             // ExportForm
             // 
             this.AcceptButton = this.btnOK;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(534, 508);
             this.Controls.Add(this.grpItems);

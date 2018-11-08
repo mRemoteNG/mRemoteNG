@@ -55,21 +55,22 @@ namespace mRemoteNG.UI.Window
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LaunchToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PropertiesGroupBox = new mRemoteNG.UI.Controls.Base.NGGroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.DisplayNameLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.ShowOnToolbarCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.RunElevatedCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.BrowseWorkingDir = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.WorkingDirLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.WorkingDirTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.DisplayNameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.FilenameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.FilenameLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.RunElevatedCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.ArgumentsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.TryToIntegrateCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.WorkingDirLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.OptionsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.WaitForExitCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.BrowseButton = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.FilenameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.DisplayNameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.ArgumentsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.FilenameLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.DisplayNameLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.BrowseWorkingDir = new mRemoteNG.UI.Controls.Base.NGButton();
             this.ToolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.ToolStrip = new System.Windows.Forms.ToolStrip();
             this.NewToolToolstripButton = new System.Windows.Forms.ToolStripButton();
@@ -80,6 +81,7 @@ namespace mRemoteNG.UI.Window
             ((System.ComponentModel.ISupportInitialize)(this.ToolsListObjView)).BeginInit();
             this.ToolsContextMenuStrip.SuspendLayout();
             this.PropertiesGroupBox.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.ToolStripContainer.ContentPanel.SuspendLayout();
             this.ToolStripContainer.TopToolStripPanel.SuspendLayout();
             this.ToolStripContainer.SuspendLayout();
@@ -247,21 +249,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.PropertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PropertiesGroupBox.Controls.Add(this.ShowOnToolbarCheckBox);
-            this.PropertiesGroupBox.Controls.Add(this.RunElevatedCheckBox);
-            this.PropertiesGroupBox.Controls.Add(this.BrowseWorkingDir);
-            this.PropertiesGroupBox.Controls.Add(this.WorkingDirLabel);
-            this.PropertiesGroupBox.Controls.Add(this.WorkingDirTextBox);
-            this.PropertiesGroupBox.Controls.Add(this.TryToIntegrateCheckBox);
-            this.PropertiesGroupBox.Controls.Add(this.OptionsLabel);
-            this.PropertiesGroupBox.Controls.Add(this.WaitForExitCheckBox);
-            this.PropertiesGroupBox.Controls.Add(this.BrowseButton);
-            this.PropertiesGroupBox.Controls.Add(this.ArgumentsCheckBox);
-            this.PropertiesGroupBox.Controls.Add(this.FilenameTextBox);
-            this.PropertiesGroupBox.Controls.Add(this.DisplayNameTextBox);
-            this.PropertiesGroupBox.Controls.Add(this.ArgumentsLabel);
-            this.PropertiesGroupBox.Controls.Add(this.FilenameLabel);
-            this.PropertiesGroupBox.Controls.Add(this.DisplayNameLabel);
+            this.PropertiesGroupBox.Controls.Add(this.tableLayoutPanel1);
             this.PropertiesGroupBox.Enabled = false;
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 192);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
@@ -270,91 +258,197 @@ namespace mRemoteNG.UI.Window
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "External Tool Properties";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.DisplayNameLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ShowOnToolbarCheckBox, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.WorkingDirTextBox, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.DisplayNameTextBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.FilenameTextBox, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ArgumentsCheckBox, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.FilenameLabel, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.RunElevatedCheckBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.ArgumentsLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.TryToIntegrateCheckBox, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.WorkingDirLabel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.OptionsLabel, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.WaitForExitCheckBox, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BrowseWorkingDir, 4, 3);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 18);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(821, 163);
+            this.tableLayoutPanel1.TabIndex = 12;
+            // 
+            // DisplayNameLabel
+            // 
+            this.DisplayNameLabel.AutoSize = true;
+            this.DisplayNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DisplayNameLabel.Location = new System.Drawing.Point(3, 0);
+            this.DisplayNameLabel.Name = "DisplayNameLabel";
+            this.DisplayNameLabel.Size = new System.Drawing.Size(104, 26);
+            this.DisplayNameLabel.TabIndex = 0;
+            this.DisplayNameLabel.Text = "Display Name:";
+            this.DisplayNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // ShowOnToolbarCheckBox
             // 
             this.ShowOnToolbarCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.ShowOnToolbarCheckBox.AutoSize = true;
-            this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(369, 158);
+            this.ShowOnToolbarCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(239, 133);
+            this.ShowOnToolbarCheckBox.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.ShowOnToolbarCheckBox.Name = "ShowOnToolbarCheckBox";
-            this.ShowOnToolbarCheckBox.Size = new System.Drawing.Size(113, 17);
+            this.ShowOnToolbarCheckBox.Size = new System.Drawing.Size(113, 20);
             this.ShowOnToolbarCheckBox.TabIndex = 10;
             this.ShowOnToolbarCheckBox.Text = "Show on toolbar";
             this.ShowOnToolbarCheckBox.UseVisualStyleBackColor = true;
             this.ShowOnToolbarCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
+            // WorkingDirTextBox
+            // 
+            this.WorkingDirTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.WorkingDirTextBox, 3);
+            this.WorkingDirTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WorkingDirTextBox.Location = new System.Drawing.Point(110, 80);
+            this.WorkingDirTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.WorkingDirTextBox.Name = "WorkingDirTextBox";
+            this.WorkingDirTextBox.Size = new System.Drawing.Size(607, 22);
+            this.WorkingDirTextBox.TabIndex = 5;
+            this.WorkingDirTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // DisplayNameTextBox
+            // 
+            this.DisplayNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.DisplayNameTextBox, 3);
+            this.DisplayNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DisplayNameTextBox.Location = new System.Drawing.Point(110, 2);
+            this.DisplayNameTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.DisplayNameTextBox.Name = "DisplayNameTextBox";
+            this.DisplayNameTextBox.Size = new System.Drawing.Size(607, 22);
+            this.DisplayNameTextBox.TabIndex = 1;
+            this.DisplayNameTextBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // FilenameTextBox
+            // 
+            this.FilenameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.FilenameTextBox, 3);
+            this.FilenameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilenameTextBox.Location = new System.Drawing.Point(110, 28);
+            this.FilenameTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.FilenameTextBox.Name = "FilenameTextBox";
+            this.FilenameTextBox.Size = new System.Drawing.Size(607, 22);
+            this.FilenameTextBox.TabIndex = 2;
+            this.FilenameTextBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // ArgumentsCheckBox
+            // 
+            this.ArgumentsCheckBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.ArgumentsCheckBox, 3);
+            this.ArgumentsCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ArgumentsCheckBox.Location = new System.Drawing.Point(110, 54);
+            this.ArgumentsCheckBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.ArgumentsCheckBox.Name = "ArgumentsCheckBox";
+            this.ArgumentsCheckBox.Size = new System.Drawing.Size(607, 22);
+            this.ArgumentsCheckBox.TabIndex = 4;
+            this.ArgumentsCheckBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // FilenameLabel
+            // 
+            this.FilenameLabel.AutoSize = true;
+            this.FilenameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilenameLabel.Location = new System.Drawing.Point(3, 26);
+            this.FilenameLabel.Name = "FilenameLabel";
+            this.FilenameLabel.Size = new System.Drawing.Size(104, 26);
+            this.FilenameLabel.TabIndex = 2;
+            this.FilenameLabel.Text = "Filename:";
+            this.FilenameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // RunElevatedCheckBox
             // 
             this.RunElevatedCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.RunElevatedCheckBox.AutoSize = true;
-            this.RunElevatedCheckBox.Location = new System.Drawing.Point(126, 158);
+            this.RunElevatedCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RunElevatedCheckBox.Location = new System.Drawing.Point(113, 133);
+            this.RunElevatedCheckBox.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.RunElevatedCheckBox.Name = "RunElevatedCheckBox";
-            this.RunElevatedCheckBox.Size = new System.Drawing.Size(93, 17);
+            this.RunElevatedCheckBox.Size = new System.Drawing.Size(93, 20);
             this.RunElevatedCheckBox.TabIndex = 9;
             this.RunElevatedCheckBox.Text = "Run Elevated";
             this.RunElevatedCheckBox.UseVisualStyleBackColor = true;
             this.RunElevatedCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
-            // BrowseWorkingDir
+            // ArgumentsLabel
             // 
-            this.BrowseWorkingDir._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.BrowseWorkingDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BrowseWorkingDir.Location = new System.Drawing.Point(723, 103);
-            this.BrowseWorkingDir.Name = "BrowseWorkingDir";
-            this.BrowseWorkingDir.Size = new System.Drawing.Size(95, 23);
-            this.BrowseWorkingDir.TabIndex = 6;
-            this.BrowseWorkingDir.Text = "Browse...";
-            this.BrowseWorkingDir.UseVisualStyleBackColor = true;
-            this.BrowseWorkingDir.Click += new System.EventHandler(this.BrowseWorkingDir_Click);
-            // 
-            // WorkingDirLabel
-            // 
-            this.WorkingDirLabel.AutoSize = true;
-            this.WorkingDirLabel.Location = new System.Drawing.Point(6, 108);
-            this.WorkingDirLabel.Name = "WorkingDirLabel";
-            this.WorkingDirLabel.Size = new System.Drawing.Size(104, 13);
-            this.WorkingDirLabel.TabIndex = 11;
-            this.WorkingDirLabel.Text = "Working Directory:";
-            this.WorkingDirLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // WorkingDirTextBox
-            // 
-            this.WorkingDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.WorkingDirTextBox.Location = new System.Drawing.Point(126, 104);
-            this.WorkingDirTextBox.Name = "WorkingDirTextBox";
-            this.WorkingDirTextBox.Size = new System.Drawing.Size(591, 22);
-            this.WorkingDirTextBox.TabIndex = 5;
-            this.WorkingDirTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            this.ArgumentsLabel.AutoSize = true;
+            this.ArgumentsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ArgumentsLabel.Location = new System.Drawing.Point(3, 52);
+            this.ArgumentsLabel.Name = "ArgumentsLabel";
+            this.ArgumentsLabel.Size = new System.Drawing.Size(104, 26);
+            this.ArgumentsLabel.TabIndex = 5;
+            this.ArgumentsLabel.Text = "Arguments:";
+            this.ArgumentsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TryToIntegrateCheckBox
             // 
             this.TryToIntegrateCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.TryToIntegrateCheckBox.AutoSize = true;
-            this.TryToIntegrateCheckBox.Location = new System.Drawing.Point(369, 135);
+            this.TryToIntegrateCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TryToIntegrateCheckBox.Location = new System.Drawing.Point(239, 107);
+            this.TryToIntegrateCheckBox.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.TryToIntegrateCheckBox.Name = "TryToIntegrateCheckBox";
-            this.TryToIntegrateCheckBox.Size = new System.Drawing.Size(103, 17);
+            this.TryToIntegrateCheckBox.Size = new System.Drawing.Size(113, 20);
             this.TryToIntegrateCheckBox.TabIndex = 8;
             this.TryToIntegrateCheckBox.Text = "Try to integrate";
             this.TryToIntegrateCheckBox.UseVisualStyleBackColor = true;
             this.TryToIntegrateCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
+            // WorkingDirLabel
+            // 
+            this.WorkingDirLabel.AutoSize = true;
+            this.WorkingDirLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WorkingDirLabel.Location = new System.Drawing.Point(3, 78);
+            this.WorkingDirLabel.Name = "WorkingDirLabel";
+            this.WorkingDirLabel.Size = new System.Drawing.Size(104, 26);
+            this.WorkingDirLabel.TabIndex = 11;
+            this.WorkingDirLabel.Text = "Working Directory:";
+            this.WorkingDirLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // OptionsLabel
             // 
             this.OptionsLabel.AutoSize = true;
-            this.OptionsLabel.Location = new System.Drawing.Point(6, 135);
+            this.OptionsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OptionsLabel.Location = new System.Drawing.Point(3, 104);
             this.OptionsLabel.Name = "OptionsLabel";
-            this.OptionsLabel.Size = new System.Drawing.Size(52, 13);
+            this.OptionsLabel.Size = new System.Drawing.Size(104, 26);
             this.OptionsLabel.TabIndex = 7;
             this.OptionsLabel.Text = "Options:";
-            this.OptionsLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.OptionsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // WaitForExitCheckBox
             // 
             this.WaitForExitCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.WaitForExitCheckBox.AutoSize = true;
-            this.WaitForExitCheckBox.Location = new System.Drawing.Point(126, 135);
+            this.WaitForExitCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WaitForExitCheckBox.Location = new System.Drawing.Point(113, 107);
+            this.WaitForExitCheckBox.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.WaitForExitCheckBox.Name = "WaitForExitCheckBox";
-            this.WaitForExitCheckBox.Size = new System.Drawing.Size(89, 17);
+            this.WaitForExitCheckBox.Size = new System.Drawing.Size(93, 20);
             this.WaitForExitCheckBox.TabIndex = 7;
             this.WaitForExitCheckBox.Text = "Wait for exit";
             this.WaitForExitCheckBox.UseVisualStyleBackColor = true;
@@ -364,78 +458,27 @@ namespace mRemoteNG.UI.Window
             // BrowseButton
             // 
             this.BrowseButton._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.BrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BrowseButton.Location = new System.Drawing.Point(723, 46);
+            this.BrowseButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BrowseButton.Location = new System.Drawing.Point(723, 29);
             this.BrowseButton.Name = "BrowseButton";
-            this.BrowseButton.Size = new System.Drawing.Size(95, 23);
+            this.BrowseButton.Size = new System.Drawing.Size(95, 20);
             this.BrowseButton.TabIndex = 3;
             this.BrowseButton.Text = "Browse...";
             this.BrowseButton.UseVisualStyleBackColor = true;
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             this.BrowseButton.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
-            // ArgumentsCheckBox
+            // BrowseWorkingDir
             // 
-            this.ArgumentsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArgumentsCheckBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ArgumentsCheckBox.Location = new System.Drawing.Point(126, 76);
-            this.ArgumentsCheckBox.Name = "ArgumentsCheckBox";
-            this.ArgumentsCheckBox.Size = new System.Drawing.Size(591, 22);
-            this.ArgumentsCheckBox.TabIndex = 4;
-            this.ArgumentsCheckBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
-            // 
-            // FilenameTextBox
-            // 
-            this.FilenameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FilenameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FilenameTextBox.Location = new System.Drawing.Point(126, 47);
-            this.FilenameTextBox.Name = "FilenameTextBox";
-            this.FilenameTextBox.Size = new System.Drawing.Size(591, 22);
-            this.FilenameTextBox.TabIndex = 2;
-            this.FilenameTextBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
-            // 
-            // DisplayNameTextBox
-            // 
-            this.DisplayNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DisplayNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DisplayNameTextBox.Location = new System.Drawing.Point(126, 19);
-            this.DisplayNameTextBox.Name = "DisplayNameTextBox";
-            this.DisplayNameTextBox.Size = new System.Drawing.Size(591, 22);
-            this.DisplayNameTextBox.TabIndex = 1;
-            this.DisplayNameTextBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
-            // 
-            // ArgumentsLabel
-            // 
-            this.ArgumentsLabel.AutoSize = true;
-            this.ArgumentsLabel.Location = new System.Drawing.Point(6, 78);
-            this.ArgumentsLabel.Name = "ArgumentsLabel";
-            this.ArgumentsLabel.Size = new System.Drawing.Size(66, 13);
-            this.ArgumentsLabel.TabIndex = 5;
-            this.ArgumentsLabel.Text = "Arguments:";
-            this.ArgumentsLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // FilenameLabel
-            // 
-            this.FilenameLabel.AutoSize = true;
-            this.FilenameLabel.Location = new System.Drawing.Point(6, 50);
-            this.FilenameLabel.Name = "FilenameLabel";
-            this.FilenameLabel.Size = new System.Drawing.Size(56, 13);
-            this.FilenameLabel.TabIndex = 2;
-            this.FilenameLabel.Text = "Filename:";
-            this.FilenameLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // DisplayNameLabel
-            // 
-            this.DisplayNameLabel.AutoSize = true;
-            this.DisplayNameLabel.Location = new System.Drawing.Point(6, 21);
-            this.DisplayNameLabel.Name = "DisplayNameLabel";
-            this.DisplayNameLabel.Size = new System.Drawing.Size(79, 13);
-            this.DisplayNameLabel.TabIndex = 0;
-            this.DisplayNameLabel.Text = "Display Name:";
-            this.DisplayNameLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.BrowseWorkingDir._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.BrowseWorkingDir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BrowseWorkingDir.Location = new System.Drawing.Point(723, 81);
+            this.BrowseWorkingDir.Name = "BrowseWorkingDir";
+            this.BrowseWorkingDir.Size = new System.Drawing.Size(95, 20);
+            this.BrowseWorkingDir.TabIndex = 6;
+            this.BrowseWorkingDir.Text = "Browse...";
+            this.BrowseWorkingDir.UseVisualStyleBackColor = true;
+            this.BrowseWorkingDir.Click += new System.EventHandler(this.BrowseWorkingDir_Click);
             // 
             // ToolStripContainer
             // 
@@ -511,6 +554,8 @@ namespace mRemoteNG.UI.Window
             // 
             // ExternalToolsWindow
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(827, 401);
             this.Controls.Add(this.ToolStripContainer);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -523,7 +568,8 @@ namespace mRemoteNG.UI.Window
             ((System.ComponentModel.ISupportInitialize)(this.ToolsListObjView)).EndInit();
             this.ToolsContextMenuStrip.ResumeLayout(false);
             this.PropertiesGroupBox.ResumeLayout(false);
-            this.PropertiesGroupBox.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ToolStripContainer.ContentPanel.ResumeLayout(false);
             this.ToolStripContainer.TopToolStripPanel.ResumeLayout(false);
             this.ToolStripContainer.TopToolStripPanel.PerformLayout();
@@ -545,5 +591,6 @@ namespace mRemoteNG.UI.Window
 
         private System.ComponentModel.IContainer components;
         internal Controls.Base.NGGroupBox PropertiesGroupBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

@@ -30,7 +30,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThemePage));
             this.btnThemeDelete = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnThemeNew = new mRemoteNG.UI.Controls.Base.NGButton();
             this.cboTheme = new mRemoteNG.UI.Controls.Base.NGComboBox();
@@ -40,13 +39,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.ColorCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ColorNameCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.labelRestart = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.listPalette)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnThemeDelete
             // 
             this.btnThemeDelete._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnThemeDelete.Location = new System.Drawing.Point(535, 1);
+            this.btnThemeDelete.Location = new System.Drawing.Point(535, 3);
             this.btnThemeDelete.Name = "btnThemeDelete";
             this.btnThemeDelete.Size = new System.Drawing.Size(75, 23);
             this.btnThemeDelete.TabIndex = 2;
@@ -57,7 +58,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // btnThemeNew
             // 
             this.btnThemeNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnThemeNew.Location = new System.Drawing.Point(454, 1);
+            this.btnThemeNew.Location = new System.Drawing.Point(454, 3);
             this.btnThemeNew.Name = "btnThemeNew";
             this.btnThemeNew.Size = new System.Drawing.Size(75, 23);
             this.btnThemeNew.TabIndex = 1;
@@ -70,7 +71,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboTheme._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
             this.cboTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTheme.FormattingEnabled = true;
-            this.cboTheme.Location = new System.Drawing.Point(3, 2);
+            this.cboTheme.Location = new System.Drawing.Point(3, 3);
             this.cboTheme.Name = "cboTheme";
             this.cboTheme.Size = new System.Drawing.Size(445, 21);
             this.cboTheme.TabIndex = 0;
@@ -80,7 +81,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.themeEnableCombo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.themeEnableCombo.AutoSize = true;
-            this.themeEnableCombo.Location = new System.Drawing.Point(487, 457);
+            this.tableLayoutPanel1.SetColumnSpan(this.themeEnableCombo, 2);
+            this.themeEnableCombo.Location = new System.Drawing.Point(454, 469);
             this.themeEnableCombo.Name = "themeEnableCombo";
             this.themeEnableCombo.Size = new System.Drawing.Size(100, 17);
             this.themeEnableCombo.TabIndex = 5;
@@ -98,12 +100,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.keyCol,
             this.ColorCol,
             this.ColorNameCol});
+            this.tableLayoutPanel1.SetColumnSpan(this.listPalette, 3);
             this.listPalette.Cursor = System.Windows.Forms.Cursors.Default;
             this.listPalette.DecorateLines = true;
-            this.listPalette.Location = new System.Drawing.Point(3, 29);
+            this.listPalette.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listPalette.Location = new System.Drawing.Point(3, 32);
             this.listPalette.Name = "listPalette";
             this.listPalette.ShowGroups = false;
-            this.listPalette.Size = new System.Drawing.Size(604, 413);
+            this.listPalette.Size = new System.Drawing.Size(607, 431);
             this.listPalette.TabIndex = 3;
             this.listPalette.UseCellFormatEvents = true;
             this.listPalette.UseCompatibleStateImageBehavior = false;
@@ -132,29 +136,47 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelRestart
             // 
             this.labelRestart.AutoSize = true;
-            this.labelRestart.Location = new System.Drawing.Point(23, 457);
+            this.labelRestart.Location = new System.Drawing.Point(3, 466);
             this.labelRestart.Name = "labelRestart";
             this.labelRestart.Size = new System.Drawing.Size(399, 13);
             this.labelRestart.TabIndex = 4;
             this.labelRestart.Text = "Warning: Restart is required to disable the themes or to completely apply a new o" +
     "ne";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.cboTheme, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.themeEnableCombo, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelRestart, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnThemeNew, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listPalette, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnThemeDelete, 2, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 489);
+            this.tableLayoutPanel1.TabIndex = 6;
+            // 
             // ThemePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelRestart);
-            this.Controls.Add(this.listPalette);
-            this.Controls.Add(this.themeEnableCombo);
-            this.Controls.Add(this.btnThemeDelete);
-            this.Controls.Add(this.btnThemeNew);
-            this.Controls.Add(this.cboTheme);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ThemePage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             ((System.ComponentModel.ISupportInitialize)(this.listPalette)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
 		}
 		internal Controls.Base.NGButton btnThemeDelete;
@@ -166,5 +188,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private BrightIdeasSoftware.OLVColumn keyCol;
         private BrightIdeasSoftware.OLVColumn ColorCol;
         private BrightIdeasSoftware.OLVColumn ColorNameCol;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

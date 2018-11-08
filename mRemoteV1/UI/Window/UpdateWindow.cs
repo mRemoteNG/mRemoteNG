@@ -47,8 +47,8 @@ namespace mRemoteNG.UI.Window
 				return;
 
 	        base.ApplyTheme();
-	        pnlUpdate.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-	        pnlUpdate.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+	        txtChangeLog.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            txtChangeLog.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyLanguage()
@@ -105,8 +105,9 @@ namespace mRemoteNG.UI.Window
 			lblInstalledVersionLabel.Visible = false;
 			lblLatestVersion.Visible = false;
 			btnCheckForUpdate.Visible = false;
-			pnlUpdate.Visible = false;
-					
+
+		    SetVisibilityOfUpdateControls(false);
+            
 			_appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
 					
 			_appUpdate.GetUpdateInfoAsync();
@@ -143,7 +144,7 @@ namespace mRemoteNG.UI.Window
 				{
 					lblStatus.Text = Language.strUpdateAvailable;
 					lblStatus.ForeColor = Color.OrangeRed;
-					pnlUpdate.Visible = true;
+				    SetVisibilityOfUpdateControls(true);
 							
 					var updateInfo = _appUpdate.CurrentUpdateInfo;
 					lblLatestVersion.Text = updateInfo.Version.ToString();
@@ -187,6 +188,14 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateCheckCompleteFailed, ex);
 			}
 		}
+
+	    private void SetVisibilityOfUpdateControls(bool visible)
+	    {
+	        lblChangeLogLabel.Visible = visible;
+	        txtChangeLog.Visible = visible;
+	        btnDownload.Visible = visible;
+	        prgbDownload.Visible = visible;
+        }
 				
 		private void GetChangeLogCompleted(object sender, AsyncCompletedEventArgs e)
 		{
