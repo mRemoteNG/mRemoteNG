@@ -11,6 +11,21 @@ Features/Enhancements:
 #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
 
 
+1.76.12 (2018-11-08):
+
+Features/Enhancements:
+----------------------
+#1180: Allow saving certain connection properties locally when using database
+
+Fixes:
+------
+#1181: Connections sometimes dont immediately load when switching to sql feature
+#1173: Fixed memory leak when loading connections multiple times
+#1168: Autohide Connection and Config tab won't open when ssh connection active
+#1134: Fixed issue where opening a connection opens same connection on other clients when using database feature
+#449: Encrypt passwords saved to database
+
+
 1.76.11 (2018-10-18):
 
 Fixes:

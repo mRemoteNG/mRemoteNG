@@ -1,11 +1,11 @@
 ﻿using mRemoteNG.App;
+using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
-using mRemoteNG.Config.Connections.Multiuser;
-using mRemoteNG.Config.DatabaseConnectors;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -13,7 +13,7 @@ namespace mRemoteNG.Config.Connections
     {
         private readonly SqlDatabaseConnector _sqlConnector;
         private readonly SqlCommand _sqlQuery;
-        private DateTime _lastUpdateTime;
+        private DateTime LastUpdateTime => Runtime.ConnectionsService.LastSqlUpdate;
         private DateTime _lastDatabaseUpdateTime;
 
 
@@ -21,7 +21,6 @@ namespace mRemoteNG.Config.Connections
         {
             _sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
             _sqlQuery = new SqlCommand("SELECT * FROM tblUpdate", _sqlConnector.SqlConnection);
-            _lastUpdateTime = default(DateTime);
             _lastDatabaseUpdateTime = default(DateTime);
         }
 
@@ -58,14 +57,14 @@ namespace mRemoteNG.Config.Connections
         private bool DatabaseIsMoreUpToDateThanUs()
         {
             var lastUpdateInDb = GetLastUpdateTimeFromDbResponse();
-            var IAmTheLastoneUpdated = CheckIfIAmTheLastOneUpdated(lastUpdateInDb);
-            return (lastUpdateInDb > _lastUpdateTime && !IAmTheLastoneUpdated);
+            var amTheLastoneUpdated = CheckIfIAmTheLastOneUpdated(lastUpdateInDb);
+            return (lastUpdateInDb > LastUpdateTime && !amTheLastoneUpdated);
         }
 
         private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
-            DateTime LastSqlUpdateWithoutMilliseconds = new DateTime(Runtime.ConnectionsService.LastSqlUpdate.Ticks - (Runtime.ConnectionsService.LastSqlUpdate.Ticks % TimeSpan.TicksPerSecond), Runtime.ConnectionsService.LastSqlUpdate.Kind);
-            return lastUpdateInDb == LastSqlUpdateWithoutMilliseconds;
+            DateTime lastSqlUpdateWithoutMilliseconds = new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond), LastUpdateTime.Kind);
+            return lastUpdateInDb == lastSqlUpdateWithoutMilliseconds;
         }
 
         private DateTime GetLastUpdateTimeFromDbResponse()
@@ -104,10 +103,9 @@ namespace mRemoteNG.Config.Connections
         public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
         private void RaiseConnectionsUpdateAvailableEvent()
         {
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Remote connection update is available");
             var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector, _lastDatabaseUpdateTime);
             ConnectionsUpdateAvailable?.Invoke(this, args);
-            if(args.Handled)
-                _lastUpdateTime = _lastDatabaseUpdateTime;
         }
 
         public void Dispose()

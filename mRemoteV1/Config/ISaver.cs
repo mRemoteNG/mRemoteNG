@@ -2,6 +2,6 @@
 {
     public interface ISaver<in T>
     {
-        void Save(T model);
+        void Save(T model, string propertyNameTrigger = "");
     }
 }

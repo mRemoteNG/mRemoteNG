@@ -685,7 +685,7 @@ namespace mRemoteNG.Connection
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(args.PropertyName));
         }
 
-        private void SetField<T>(ref T field, T value, string propertyName = null)
+        protected void SetField<T>(ref T field, T value, string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;

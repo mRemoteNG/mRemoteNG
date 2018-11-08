@@ -9,7 +9,6 @@ namespace mRemoteNG.Config.Serializers.Versioning
     public class SqlDatabaseVersionVerifier
     {
         private readonly SqlDatabaseConnector _sqlDatabaseConnector;
-        private readonly SqlDatabaseVersionRetriever _versionRetriever;
 
         public SqlDatabaseVersionVerifier(SqlDatabaseConnector sqlDatabaseConnector)
         {
@@ -17,15 +16,14 @@ namespace mRemoteNG.Config.Serializers.Versioning
                 throw new ArgumentNullException(nameof(sqlDatabaseConnector));
 
             _sqlDatabaseConnector = sqlDatabaseConnector;
-            _versionRetriever = new SqlDatabaseVersionRetriever();
         }
 
-        public bool VerifyDatabaseVersion()
+        public bool VerifyDatabaseVersion(Version dbVersion)
         {
             var isVerified = false;
             try
             {
-                var databaseVersion = _versionRetriever.GetDatabaseVersion(_sqlDatabaseConnector);
+                var databaseVersion = dbVersion;
 
                 if (databaseVersion.Equals(new Version()))
                 {

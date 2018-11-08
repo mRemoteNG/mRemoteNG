@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
@@ -8,14 +6,23 @@ using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
 
 namespace mRemoteNG.Connection
 {
-	public class ConnectionInitiator : IConnectionInitiator
+    public class ConnectionInitiator : IConnectionInitiator
     {
         private readonly PanelAdder _panelAdder = new PanelAdder();
+        private readonly List<string> _activeConnections = new List<string>();
+
+        /// <summary>
+        /// List of unique IDs of the currently active connections
+        /// </summary>
+        public IEnumerable<string> ActiveConnections => _activeConnections;
 
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
@@ -118,6 +125,7 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfo.OpenConnections.Add(newProtocol);
+                _activeConnections.Add(connectionInfo.ConstantID);
                 FrmMain.Default.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
@@ -210,7 +218,7 @@ namespace mRemoteNG.Connection
             newProtocol.Closed += ((ConnectionWindow)connectionForm).Prot_Event_Closed;
         }
 
-        private static void SetConnectionEventHandlers(ProtocolBase newProtocol)
+        private void SetConnectionEventHandlers(ProtocolBase newProtocol)
         {
             newProtocol.Disconnected += Prot_Event_Disconnected;
             newProtocol.Connected += Prot_Event_Connected;
@@ -251,7 +259,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private static void Prot_Event_Closed(object sender)
+        private void Prot_Event_Closed(object sender)
         {
             try
             {
@@ -267,6 +275,8 @@ namespace mRemoteNG.Connection
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, prot.InterfaceControl.Info.Protocol, Environment.UserName));
                 prot.InterfaceControl.Info.OpenConnections.Remove(prot);
+                if (_activeConnections.Contains(prot.InterfaceControl.Info.ConstantID))
+                    _activeConnections.Remove(prot.InterfaceControl.Info.ConstantID);
 
                 if (prot.InterfaceControl.Info.PostExtApp == "") return;
                 var extA = Runtime.ExternalToolsService.GetExtAppByName(prot.InterfaceControl.Info.PostExtApp);

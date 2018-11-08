@@ -5,13 +5,13 @@ using mRemoteNG.App;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 
-namespace mRemoteNG.Config.Serializers.Versioning
+namespace mRemoteNG.Config.Serializers.MsSql
 {
-    public class SqlDatabaseVersionRetriever
+    public class SqlDatabaseMetaDataRetriever
     {
-        public Version GetDatabaseVersion(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlConnectionListMetaData GetDatabaseMetaData(SqlDatabaseConnector sqlDatabaseConnector)
         {
-            Version databaseVersion;
+            SqlConnectionListMetaData metaData;
             SqlDataReader sqlDataReader = null;
             try
             {
@@ -20,10 +20,17 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     sqlDatabaseConnector.Connect();
                 sqlDataReader = sqlCommand.ExecuteReader();
                 if (!sqlDataReader.HasRows)
-                    return new Version(); // assume new empty database
+                    return null; // assume new empty database
                 else
                     sqlDataReader.Read();
-                databaseVersion = new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture));
+
+                metaData = new SqlConnectionListMetaData
+                {
+                    Name = sqlDataReader["Name"] as string ?? "",
+                    Protected = sqlDataReader["Protected"] as string ?? "",
+                    Export = (bool)sqlDataReader["Export"],
+                    ConfVersion = new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture))
+                };
             }
             catch (Exception ex)
             {
@@ -35,7 +42,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                 if (sqlDataReader != null && !sqlDataReader.IsClosed)
                     sqlDataReader.Close();
             }
-            return databaseVersion;
+            return metaData;
         }
     }
 }

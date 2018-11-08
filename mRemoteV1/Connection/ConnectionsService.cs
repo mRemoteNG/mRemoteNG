@@ -1,12 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Windows.Forms;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
@@ -14,6 +12,11 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
+using System;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
+using mRemoteNG.Config;
 
 namespace mRemoteNG.Connection
 {
@@ -21,6 +24,8 @@ namespace mRemoteNG.Connection
     {
         private static readonly object SaveLock = new object();
         private readonly PuttySessionsManager _puttySessionsManager;
+        private readonly IDataProvider<string> _localConnectionPropertiesDataProvider;
+        private readonly LocalConnectionPropertiesXmlSerializer _localConnectionPropertiesSerializer;
         private bool _batchingSaves = false;
         private bool _saveRequested = false;
         private bool _saveAsyncRequested = false;
@@ -39,6 +44,9 @@ namespace mRemoteNG.Connection
                 throw new ArgumentNullException(nameof(puttySessionsManager));
 
             _puttySessionsManager = puttySessionsManager;
+            var path = SettingsFileInfo.SettingsPath;
+            _localConnectionPropertiesDataProvider = new FileDataProvider(Path.Combine(path, "LocalConnectionProperties.xml"));
+            _localConnectionPropertiesSerializer = new LocalConnectionPropertiesXmlSerializer();
         }
 
         public void NewConnectionsFile(string filename)
@@ -107,9 +115,14 @@ namespace mRemoteNG.Connection
             var oldConnectionTreeModel = ConnectionTreeModel;
             var oldIsUsingDatabaseValue = UsingDatabase;
 
-            var newConnectionTreeModel = useDatabase
-                ? new SqlConnectionsLoader().Load()
-                : new XmlConnectionsLoader(connectionFileName).Load();
+            var connectionLoader = useDatabase
+                ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
+                : new XmlConnectionsLoader(connectionFileName);
+
+            var newConnectionTreeModel = connectionLoader.Load();
+
+            if (useDatabase)
+                LastSqlUpdate = DateTime.Now;
 
             if (newConnectionTreeModel == null)
             {
@@ -130,6 +143,7 @@ namespace mRemoteNG.Connection
             ConnectionTreeModel = newConnectionTreeModel;
             UpdateCustomConsPathSetting(connectionFileName);
             RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connections loaded using {connectionLoader.GetType().Name}");
         }
 
         /// <summary>
@@ -176,7 +190,17 @@ namespace mRemoteNG.Connection
         /// <param name="saveFilter"></param>
         /// <param name="connectionFileName"></param>
         /// <param name="forceSave">Bypasses safety checks that prevent saving if a connection file isn't loaded.</param>
-        public void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName, bool forceSave = false)
+        /// <param name="propertyNameTrigger">
+        /// Optional. The name of the property that triggered
+        /// this save.
+        /// </param>
+        public void SaveConnections(
+            ConnectionTreeModel connectionTreeModel, 
+            bool useDatabase, 
+            SaveFilter saveFilter, 
+            string connectionFileName, 
+            bool forceSave = false,
+            string propertyNameTrigger = "")
         {
             if (connectionTreeModel == null)
                 return;
@@ -196,10 +220,13 @@ namespace mRemoteNG.Connection
                 RemoteConnectionsSyncronizer?.Disable();
 
                 var previouslyUsingDatabase = UsingDatabase;
-                if (useDatabase)
-                    new SqlConnectionsSaver(saveFilter).Save(connectionTreeModel);
-                else
-                    new XmlConnectionsSaver(connectionFileName, saveFilter).Save(connectionTreeModel);
+
+                var saver = useDatabase
+                    ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer,
+                        _localConnectionPropertiesDataProvider)
+                    : new XmlConnectionsSaver(connectionFileName, saveFilter);
+
+                saver.Save(connectionTreeModel, propertyNameTrigger);
 
                 if (UsingDatabase)
                     LastSqlUpdate = DateTime.Now;
@@ -219,7 +246,14 @@ namespace mRemoteNG.Connection
             }
         }
 
-        public void SaveConnectionsAsync()
+        /// <summary>
+        /// Save the currently loaded connections asynchronously
+        /// </summary>
+        /// <param name="propertyNameTrigger">
+        /// Optional. The name of the property that triggered
+        /// this save.
+        /// </param>
+        public void SaveConnectionsAsync(string propertyNameTrigger = "")
         {
             if (_batchingSaves)
             {
@@ -227,17 +261,20 @@ namespace mRemoteNG.Connection
                 return;
             }
 
-            var t = new Thread(SaveConnectionsBGd);
+            var t = new Thread(() =>
+            {
+                lock (SaveLock)
+                {
+                    SaveConnections(
+                        ConnectionTreeModel, 
+                        UsingDatabase, 
+                        new SaveFilter(), 
+                        ConnectionFileName, 
+                        propertyNameTrigger: propertyNameTrigger);
+                }
+            });
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
-        }
-
-        private void SaveConnectionsBGd()
-        {
-            lock (SaveLock)
-            {
-                SaveConnections();
-            }
         }
 
         public string GetStartupConnectionFileName()
