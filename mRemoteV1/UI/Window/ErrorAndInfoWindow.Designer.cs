@@ -23,12 +23,10 @@ namespace mRemoteNG.UI.Window
             this.cMenMCCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.cMenMCDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.imgListMC = new System.Windows.Forms.ImageList(this.components);
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlErrorMsg = new System.Windows.Forms.Panel();
             this.lblMsgDate = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.pnlErrorMsg = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbError)).BeginInit();
             this.cMenMC.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.pnlErrorMsg.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,35 +116,6 @@ namespace mRemoteNG.UI.Window
             this.imgListMC.ImageSize = new System.Drawing.Size(16, 16);
             this.imgListMC.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.pnlErrorMsg, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lvErrorCollector, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(617, 233);
-            this.tableLayoutPanel1.TabIndex = 21;
-            // 
-            // pnlErrorMsg
-            // 
-            this.pnlErrorMsg.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlErrorMsg.Controls.Add(this.txtMsgText);
-            this.pnlErrorMsg.Controls.Add(this.lblMsgDate);
-            this.pnlErrorMsg.Controls.Add(this.pbError);
-            this.pnlErrorMsg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlErrorMsg.Location = new System.Drawing.Point(0, 0);
-            this.pnlErrorMsg.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlErrorMsg.Name = "pnlErrorMsg";
-            this.pnlErrorMsg.Size = new System.Drawing.Size(200, 233);
-            this.pnlErrorMsg.TabIndex = 20;
-            // 
             // lblMsgDate
             // 
             this.lblMsgDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -157,12 +126,25 @@ namespace mRemoteNG.UI.Window
             this.lblMsgDate.Size = new System.Drawing.Size(157, 13);
             this.lblMsgDate.TabIndex = 40;
             // 
+            // pnlErrorMsg
+            // 
+            this.pnlErrorMsg.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlErrorMsg.Controls.Add(this.txtMsgText);
+            this.pnlErrorMsg.Controls.Add(this.lblMsgDate);
+            this.pnlErrorMsg.Controls.Add(this.pbError);
+            this.pnlErrorMsg.Location = new System.Drawing.Point(0, 0);
+            this.pnlErrorMsg.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlErrorMsg.Name = "pnlErrorMsg";
+            this.pnlErrorMsg.Size = new System.Drawing.Size(200, 233);
+            this.pnlErrorMsg.TabIndex = 20;
+            // 
             // ErrorAndInfoWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(617, 233);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.lvErrorCollector);
+            this.Controls.Add(this.pnlErrorMsg);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
             this.Icon = global::mRemoteNG.Resources.Info_Icon;
@@ -173,7 +155,6 @@ namespace mRemoteNG.UI.Window
             this.Resize += new System.EventHandler(this.ErrorsAndInfos_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pbError)).EndInit();
             this.cMenMC.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlErrorMsg.ResumeLayout(false);
             this.pnlErrorMsg.PerformLayout();
             this.ResumeLayout(false);
@@ -181,8 +162,7 @@ namespace mRemoteNG.UI.Window
 		}
 
         private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        internal System.Windows.Forms.Panel pnlErrorMsg;
         internal Controls.Base.NGLabel lblMsgDate;
+        internal System.Windows.Forms.Panel pnlErrorMsg;
     }
 }

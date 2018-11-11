@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Window
             DockPnl = panel;
             _display = new DisplayProperties();
             InitializeComponent();
-            lblMsgDate.Size = _display.ScaleSize(lblMsgDate.Size);
+            lblMsgDate.Width = _display.ScaleWidth(lblMsgDate.Width);
             _themeManager = ThemeManager.getInstance();
             ApplyTheme();
             _themeManager.ThemeChanged += ApplyTheme;
