@@ -62,7 +62,6 @@ namespace mRemoteNG.UI.Window
             lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
         }
 
-
         private void FillImageList()
         {
             imgListMC.ImageSize = _display.ScaleSize(imgListMC.ImageSize);
@@ -140,15 +139,16 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void pnlErrorMsg_ResetDefaultStyle()
+		private void SetStyleWhenNoMessageSelected()
 		{
 			try
 			{
 				pnlErrorMsg.BackColor = Color.FromKnownColor(KnownColor.Control);
 				pbError.Image = null;
-				txtMsgText.Text = "";
 				txtMsgText.BackColor = Color.FromKnownColor(KnownColor.Control);
-				lblMsgDate.Text = "";
+				txtMsgText.Text = "";
+                lblMsgDate.BackColor = Color.FromKnownColor(KnownColor.Control);
+                lblMsgDate.Text = "";
 			}
 			catch (Exception ex)
 			{
@@ -185,7 +185,7 @@ namespace mRemoteNG.UI.Window
 			{
 				if (lvErrorCollector.SelectedItems.Count == 0 | lvErrorCollector.SelectedItems.Count > 1)
 				{
-					pnlErrorMsg_ResetDefaultStyle();
+					SetStyleWhenNoMessageSelected();
 					return;
 				}
 						
@@ -199,6 +199,7 @@ namespace mRemoteNG.UI.Window
                         {
                             pnlErrorMsg.BackColor = Color.LightSteelBlue;
                             txtMsgText.BackColor = Color.LightSteelBlue;
+                            lblMsgDate.BackColor = Color.LightSteelBlue;
                         }
                         break;
 					case MessageClass.InformationMsg:
@@ -207,6 +208,7 @@ namespace mRemoteNG.UI.Window
                         {
                             pnlErrorMsg.BackColor = Color.LightSteelBlue;
 						    txtMsgText.BackColor = Color.LightSteelBlue;
+                            lblMsgDate.BackColor = Color.LightSteelBlue;
                         }
                         break;
 					case MessageClass.WarningMsg:
@@ -218,6 +220,8 @@ namespace mRemoteNG.UI.Window
                             pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor ("WarningText_Background");
                             txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
                             txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                            lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                            lblMsgDate.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
                         }
                         break;
 					case MessageClass.ErrorMsg:
@@ -228,6 +232,8 @@ namespace mRemoteNG.UI.Window
                             pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
                             txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
                             txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                            lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                            lblMsgDate.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
                         }
                         break;
 				}
