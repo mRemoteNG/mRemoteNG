@@ -35,25 +35,26 @@ namespace mRemoteNG.UI.TaskDialog
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTaskDialog));
             this.imgMain = new System.Windows.Forms.PictureBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
-            this.bt1 = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.bt2 = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.bt3 = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.cbVerify = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.lbShowHideDetails = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnlFooter = new System.Windows.Forms.Panel();
-            this.lbFooter = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.imgFooter = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pnlCommandButtons = new System.Windows.Forms.Panel();
             this.pnlMainInstruction = new System.Windows.Forms.Panel();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.lbContent = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlExpandedInfo = new System.Windows.Forms.Panel();
-            this.lbExpandedInfo = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlRadioButtons = new System.Windows.Forms.Panel();
+            this.lbFooter = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.bt1 = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.bt2 = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.bt3 = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.cbVerify = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.lbShowHideDetails = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lbExpandedInfo = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lbContent = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lbMainInstruction = new mRemoteNG.UI.Controls.Base.NGLabel();
             ((System.ComponentModel.ISupportInitialize)(this.imgMain)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.pnlFooter.SuspendLayout();
@@ -84,6 +85,114 @@ namespace mRemoteNG.UI.TaskDialog
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(464, 58);
             this.pnlButtons.TabIndex = 0;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "arrow_up_bw.bmp");
+            this.imageList1.Images.SetKeyName(1, "arrow_up_color.bmp");
+            this.imageList1.Images.SetKeyName(2, "arrow_up_color_pressed.bmp");
+            this.imageList1.Images.SetKeyName(3, "arrow_down_bw.bmp");
+            this.imageList1.Images.SetKeyName(4, "arrow_down_color.bmp");
+            this.imageList1.Images.SetKeyName(5, "arrow_down_color_pressed.bmp");
+            this.imageList1.Images.SetKeyName(6, "green_arrow.bmp");
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(464, 1);
+            this.panel2.TabIndex = 0;
+            // 
+            // pnlFooter
+            // 
+            this.pnlFooter.Controls.Add(this.lbFooter);
+            this.pnlFooter.Controls.Add(this.imgFooter);
+            this.pnlFooter.Controls.Add(this.panel5);
+            this.pnlFooter.Controls.Add(this.panel3);
+            this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFooter.Location = new System.Drawing.Point(0, 359);
+            this.pnlFooter.Name = "pnlFooter";
+            this.pnlFooter.Size = new System.Drawing.Size(464, 36);
+            this.pnlFooter.TabIndex = 2;
+            // 
+            // imgFooter
+            // 
+            this.imgFooter.Location = new System.Drawing.Point(8, 10);
+            this.imgFooter.Name = "imgFooter";
+            this.imgFooter.Size = new System.Drawing.Size(16, 16);
+            this.imgFooter.TabIndex = 4;
+            this.imgFooter.TabStop = false;
+            // 
+            // panel5
+            // 
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 1);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(464, 1);
+            this.panel5.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(464, 1);
+            this.panel3.TabIndex = 1;
+            // 
+            // pnlCommandButtons
+            // 
+            this.pnlCommandButtons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlCommandButtons.Location = new System.Drawing.Point(0, 202);
+            this.pnlCommandButtons.Name = "pnlCommandButtons";
+            this.pnlCommandButtons.Size = new System.Drawing.Size(464, 99);
+            this.pnlCommandButtons.TabIndex = 4;
+            // 
+            // pnlMainInstruction
+            // 
+            this.pnlMainInstruction.Controls.Add(this.lbMainInstruction);
+            this.pnlMainInstruction.Controls.Add(this.imgMain);
+            this.pnlMainInstruction.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMainInstruction.Location = new System.Drawing.Point(0, 0);
+            this.pnlMainInstruction.Name = "pnlMainInstruction";
+            this.pnlMainInstruction.Size = new System.Drawing.Size(464, 41);
+            this.pnlMainInstruction.TabIndex = 1;
+            // 
+            // pnlContent
+            // 
+            this.pnlContent.Controls.Add(this.lbContent);
+            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlContent.Location = new System.Drawing.Point(0, 41);
+            this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Size = new System.Drawing.Size(464, 30);
+            this.pnlContent.TabIndex = 2;
+            // 
+            // pnlExpandedInfo
+            // 
+            this.pnlExpandedInfo.Controls.Add(this.lbExpandedInfo);
+            this.pnlExpandedInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlExpandedInfo.Location = new System.Drawing.Point(0, 71);
+            this.pnlExpandedInfo.Name = "pnlExpandedInfo";
+            this.pnlExpandedInfo.Size = new System.Drawing.Size(464, 30);
+            this.pnlExpandedInfo.TabIndex = 10;
+            // 
+            // pnlRadioButtons
+            // 
+            this.pnlRadioButtons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlRadioButtons.Location = new System.Drawing.Point(0, 101);
+            this.pnlRadioButtons.Name = "pnlRadioButtons";
+            this.pnlRadioButtons.Size = new System.Drawing.Size(464, 101);
+            this.pnlRadioButtons.TabIndex = 3;
+            // 
+            // lbFooter
+            // 
+            this.lbFooter.Location = new System.Drawing.Point(30, 11);
+            this.lbFooter.Name = "lbFooter";
+            this.lbFooter.Size = new System.Drawing.Size(409, 15);
+            this.lbFooter.TabIndex = 4;
+            this.lbFooter.Text = "lbFooter";
             // 
             // bt1
             // 
@@ -143,96 +252,15 @@ namespace mRemoteNG.UI.TaskDialog
             this.lbShowHideDetails.MouseLeave += new System.EventHandler(this.lbDetails_MouseLeave);
             this.lbShowHideDetails.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbDetails_MouseUp);
             // 
-            // imageList1
+            // lbExpandedInfo
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "arrow_up_bw.bmp");
-            this.imageList1.Images.SetKeyName(1, "arrow_up_color.bmp");
-            this.imageList1.Images.SetKeyName(2, "arrow_up_color_pressed.bmp");
-            this.imageList1.Images.SetKeyName(3, "arrow_down_bw.bmp");
-            this.imageList1.Images.SetKeyName(4, "arrow_down_color.bmp");
-            this.imageList1.Images.SetKeyName(5, "arrow_down_color_pressed.bmp");
-            this.imageList1.Images.SetKeyName(6, "green_arrow.bmp");
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(464, 1);
-            this.panel2.TabIndex = 0;
-            // 
-            // pnlFooter
-            // 
-            this.pnlFooter.Controls.Add(this.lbFooter);
-            this.pnlFooter.Controls.Add(this.imgFooter);
-            this.pnlFooter.Controls.Add(this.panel5);
-            this.pnlFooter.Controls.Add(this.panel3);
-            this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFooter.Location = new System.Drawing.Point(0, 359);
-            this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(464, 36);
-            this.pnlFooter.TabIndex = 2;
-            // 
-            // lbFooter
-            // 
-            this.lbFooter.Location = new System.Drawing.Point(30, 11);
-            this.lbFooter.Name = "lbFooter";
-            this.lbFooter.Size = new System.Drawing.Size(409, 15);
-            this.lbFooter.TabIndex = 4;
-            this.lbFooter.Text = "lbFooter";
-            // 
-            // imgFooter
-            // 
-            this.imgFooter.Location = new System.Drawing.Point(8, 10);
-            this.imgFooter.Name = "imgFooter";
-            this.imgFooter.Size = new System.Drawing.Size(16, 16);
-            this.imgFooter.TabIndex = 4;
-            this.imgFooter.TabStop = false;
-            // 
-            // panel5
-            // 
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 1);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(464, 1);
-            this.panel5.TabIndex = 2;
-            // 
-            // panel3
-            // 
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(464, 1);
-            this.panel3.TabIndex = 1;
-            // 
-            // pnlCommandButtons
-            // 
-            this.pnlCommandButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlCommandButtons.Location = new System.Drawing.Point(0, 202);
-            this.pnlCommandButtons.Name = "pnlCommandButtons";
-            this.pnlCommandButtons.Size = new System.Drawing.Size(464, 99);
-            this.pnlCommandButtons.TabIndex = 4;
-            // 
-            // pnlMainInstruction
-            // 
-            this.pnlMainInstruction.Controls.Add(this.imgMain);
-            this.pnlMainInstruction.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMainInstruction.Location = new System.Drawing.Point(0, 0);
-            this.pnlMainInstruction.Name = "pnlMainInstruction";
-            this.pnlMainInstruction.Size = new System.Drawing.Size(464, 41);
-            this.pnlMainInstruction.TabIndex = 1;
-            this.pnlMainInstruction.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainInstruction_Paint);
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.lbContent);
-            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlContent.Location = new System.Drawing.Point(0, 41);
-            this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(464, 30);
-            this.pnlContent.TabIndex = 2;
+            this.lbExpandedInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbExpandedInfo.Location = new System.Drawing.Point(50, 0);
+            this.lbExpandedInfo.Name = "lbExpandedInfo";
+            this.lbExpandedInfo.Size = new System.Drawing.Size(409, 19);
+            this.lbExpandedInfo.TabIndex = 0;
+            this.lbExpandedInfo.Text = "lbExpandedInfo";
             // 
             // lbContent
             // 
@@ -244,32 +272,15 @@ namespace mRemoteNG.UI.TaskDialog
             this.lbContent.TabIndex = 0;
             this.lbContent.Text = "lbContent";
             // 
-            // pnlExpandedInfo
+            // lbMainInstruction
             // 
-            this.pnlExpandedInfo.Controls.Add(this.lbExpandedInfo);
-            this.pnlExpandedInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlExpandedInfo.Location = new System.Drawing.Point(0, 71);
-            this.pnlExpandedInfo.Name = "pnlExpandedInfo";
-            this.pnlExpandedInfo.Size = new System.Drawing.Size(464, 30);
-            this.pnlExpandedInfo.TabIndex = 10;
-            // 
-            // lbExpandedInfo
-            // 
-            this.lbExpandedInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lbMainInstruction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbExpandedInfo.Location = new System.Drawing.Point(50, 0);
-            this.lbExpandedInfo.Name = "lbExpandedInfo";
-            this.lbExpandedInfo.Size = new System.Drawing.Size(409, 19);
-            this.lbExpandedInfo.TabIndex = 0;
-            this.lbExpandedInfo.Text = "lbExpandedInfo";
-            // 
-            // pnlRadioButtons
-            // 
-            this.pnlRadioButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlRadioButtons.Location = new System.Drawing.Point(0, 101);
-            this.pnlRadioButtons.Name = "pnlRadioButtons";
-            this.pnlRadioButtons.Size = new System.Drawing.Size(464, 101);
-            this.pnlRadioButtons.TabIndex = 3;
+            this.lbMainInstruction.Location = new System.Drawing.Point(50, 9);
+            this.lbMainInstruction.Name = "lbMainInstruction";
+            this.lbMainInstruction.Size = new System.Drawing.Size(409, 19);
+            this.lbMainInstruction.TabIndex = 1;
+            this.lbMainInstruction.Text = "lbMainInstruction";
             // 
             // frmTaskDialog
             // 
@@ -327,5 +338,6 @@ namespace mRemoteNG.UI.TaskDialog
     private Controls.Base.NGButton bt1;
     private Controls.Base.NGButton bt2;
     private Controls.Base.NGButton bt3;
-  }
+        private Controls.Base.NGLabel lbMainInstruction;
+    }
 }

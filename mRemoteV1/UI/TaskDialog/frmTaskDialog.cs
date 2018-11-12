@@ -3,6 +3,7 @@ using mRemoteNG.UI.Controls.Base;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.TaskDialog
@@ -14,7 +15,6 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
 
         private string _mainInstruction = "Main Instruction Text";
-        private int _mainInstructionHeight;
         private readonly Font _mainInstructionFont = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
         private readonly List<NGRadioButton> _radioButtonCtrls = new List<NGRadioButton>();
@@ -114,11 +114,10 @@ namespace mRemoteNG.UI.TaskDialog
                     throw new ArgumentOutOfRangeException();
             }
 
-            //AdjustLabelHeight(lbMainInstruction);
-            //pnlMainInstruction.Height = Math.Max(41, lbMainInstruction.Height + 16);
-            if (_mainInstructionHeight == 0)
-                GetMainInstructionTextSizeF();
-            pnlMainInstruction.Height = Math.Max(41, _mainInstructionHeight + _display.ScaleHeight(16));
+            lbMainInstruction.Text = _mainInstruction;
+            lbMainInstruction.Font = _mainInstructionFont;
+            AdjustLabelHeight(lbMainInstruction);
+            pnlMainInstruction.Height = Math.Max(41, lbMainInstruction.Height + _display.ScaleHeight(16));
 
             _mainInstructionLeftMargin = imgMain.Left + imgMain.Width + _display.ScaleWidth(imgMain.Padding.Right);
             _mainInstructionRightMargin = _display.ScaleWidth(8);
@@ -368,10 +367,12 @@ namespace mRemoteNG.UI.TaskDialog
             var text = lb.Text;
             var textFont = lb.Font;
             var layoutSize = new SizeF(lb.ClientSize.Width, 5000.0F);
-            var g = Graphics.FromHwnd(lb.Handle);
-            var stringSize = g.MeasureString(text, textFont, layoutSize);
-            lb.Height = (int)stringSize.Height + 4;
-            g.Dispose();
+
+            using (var g = Graphics.FromHwnd(lb.Handle))
+            {
+                var stringSize = g.MeasureString(text, textFont, layoutSize);
+                lb.Height = (int)stringSize.Height + 4;
+            }
         }
         #endregion
 
@@ -427,23 +428,6 @@ namespace mRemoteNG.UI.TaskDialog
                 Height += pnlExpandedInfo.Height;
             else
                 Height -= pnlExpandedInfo.Height;
-        }
-
-        //--------------------------------------------------------------------------------
-        private SizeF GetMainInstructionTextSizeF()
-        {
-            var mzSize = new SizeF(pnlMainInstruction.Width - _mainInstructionLeftMargin - _mainInstructionRightMargin, 5000.0F);
-            var g = Graphics.FromHwnd(Handle);
-            var textSize = g.MeasureString(_mainInstruction, _mainInstructionFont, mzSize);
-            _mainInstructionHeight = (int)textSize.Height;
-            return textSize;
-        }
-
-        private void pnlMainInstruction_Paint(object sender, PaintEventArgs e)
-        {
-            var szL = GetMainInstructionTextSizeF();
-            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            e.Graphics.DrawString(_mainInstruction, _mainInstructionFont, new SolidBrush( ((Panel)sender).ForeColor), new RectangleF(new PointF(_mainInstructionLeftMargin, 10), szL));
         }
 
         //--------------------------------------------------------------------------------
