@@ -3,7 +3,6 @@ using mRemoteNG.UI.Controls.Base;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.TaskDialog
@@ -210,28 +209,28 @@ namespace mRemoteNG.UI.TaskDialog
             {
                 case ETaskDialogButtons.YesNo:
                     bt1.Visible = false;
-                    bt2.Text = "&Yes";
+                    bt2.Text = Language.strYes;
                     bt2.DialogResult = DialogResult.Yes;
-                    bt3.Text = "&No";
+                    bt3.Text = Language.strNo;
                     bt3.DialogResult = DialogResult.No;
                     AcceptButton = bt2;
                     CancelButton = bt3;
                     break;
                 case ETaskDialogButtons.YesNoCancel:
-                    bt1.Text = "&Yes";
+                    bt1.Text = Language.strYes;
                     bt1.DialogResult = DialogResult.Yes;
-                    bt2.Text = "&No";
+                    bt2.Text = Language.strNo;
                     bt2.DialogResult = DialogResult.No;
-                    bt3.Text = "&Cancel";
+                    bt3.Text = Language.strButtonCancel;
                     bt3.DialogResult = DialogResult.Cancel;
                     AcceptButton = bt1;
                     CancelButton = bt3;
                     break;
                 case ETaskDialogButtons.OkCancel:
                     bt1.Visible = false;
-                    bt2.Text = "&OK";
+                    bt2.Text = Language.strButtonOK;
                     bt2.DialogResult = DialogResult.OK;
-                    bt3.Text = "&Cancel";
+                    bt3.Text = Language.strButtonCancel;
                     bt3.DialogResult = DialogResult.Cancel;
                     AcceptButton = bt2;
                     CancelButton = bt3;
@@ -239,7 +238,7 @@ namespace mRemoteNG.UI.TaskDialog
                 case ETaskDialogButtons.Ok:
                     bt1.Visible = false;
                     bt2.Visible = false;
-                    bt3.Text = "&OK";
+                    bt3.Text = Language.strButtonOK;
                     bt3.DialogResult = DialogResult.OK;
                     AcceptButton = bt3;
                     CancelButton = bt3;
@@ -247,14 +246,14 @@ namespace mRemoteNG.UI.TaskDialog
                 case ETaskDialogButtons.Close:
                     bt1.Visible = false;
                     bt2.Visible = false;
-                    bt3.Text = "&Close";
+                    bt3.Text = Language.strButtonClose;
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
                     break;
                 case ETaskDialogButtons.Cancel:
                     bt1.Visible = false;
                     bt2.Visible = false;
-                    bt3.Text = "&Cancel";
+                    bt3.Text = Language.strButtonCancel;
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
                     break;
@@ -285,19 +284,15 @@ namespace mRemoteNG.UI.TaskDialog
                 switch (FooterIcon)
                 {
                     case ESysIcons.Information:
-                        // SystemIcons.Information.ToBitmap().GetThumbnailImage(16, 16, null, IntPtr.Zero);
                         imgFooter.Image = ResizeBitmap(SystemIcons.Information.ToBitmap(), 16, 16);
                         break;
                     case ESysIcons.Question:
-                        // SystemIcons.Question.ToBitmap().GetThumbnailImage(16, 16, null, IntPtr.Zero);
                         imgFooter.Image = ResizeBitmap(SystemIcons.Question.ToBitmap(), 16, 16);
                         break;
                     case ESysIcons.Warning:
-                        // SystemIcons.Warning.ToBitmap().GetThumbnailImage(16, 16, null, IntPtr.Zero);
                         imgFooter.Image = ResizeBitmap(SystemIcons.Warning.ToBitmap(), 16, 16);
                         break;
                     case ESysIcons.Error:
-                        // SystemIcons.Error.ToBitmap().GetThumbnailImage(16, 16, null, IntPtr.Zero);
                         imgFooter.Image = ResizeBitmap(SystemIcons.Error.ToBitmap(), 16, 16);
                         break;
                     default:
