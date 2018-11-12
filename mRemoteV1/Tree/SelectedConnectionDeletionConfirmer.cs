@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.UI.TaskDialog;
 
 
 namespace mRemoteNG.Tree
@@ -48,7 +49,7 @@ namespace mRemoteNG.Tree
 
         private bool PromptUser(string promptMessage)
         {
-            var msgBoxResponse = _confirmationFunc.Invoke(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var msgBoxResponse = CTaskDialog.MessageBox(Application.ProductName, promptMessage, "", ETaskDialogButtons.YesNo, ESysIcons.Question);
             return msgBoxResponse == DialogResult.Yes;
         }
     }
