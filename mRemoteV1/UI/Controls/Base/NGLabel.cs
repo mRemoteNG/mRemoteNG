@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Themes;
+﻿using System.ComponentModel;
+using mRemoteNG.Themes;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -11,7 +12,6 @@ namespace mRemoteNG.UI.Controls.Base
     [ToolboxBitmap(typeof(Label))]
     public class NGLabel : Label
     {
-         
         private ThemeManager _themeManager;
 
         public NGLabel()
@@ -31,7 +31,6 @@ namespace mRemoteNG.UI.Controls.Base
             Invalidate();
         }
 
-  
         protected override void OnPaint(PaintEventArgs e)
         {
             if (!_themeManager.ThemingActive)
@@ -45,14 +44,15 @@ namespace mRemoteNG.UI.Controls.Base
             //e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             if (Enabled)
             {
-                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, ForeColor,
+                    TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
             }
             else
             {
                 var disabledtextLabel = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
-                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, disabledtextLabel, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, disabledtextLabel,
+                    TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
             }
-                
         } 
     }
 }
