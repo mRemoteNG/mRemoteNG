@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -919,45 +918,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			public static readonly Version RDC80 = new Version(6, 2, 9200);
             public static readonly Version RDC81 = new Version(6, 3, 9600);
 		}
-		
-        #region Fatal Errors
-		public static class FatalErrors
-		{
-		    private static Hashtable _description;
-
-		    private static void InitDescription()
-            {
-                _description = new Hashtable
-                {
-                    {"0", "Language.strRdpErrorUnknown"},
-                    {"1", "Language.strRdpErrorCode1"},
-                    {"2", "Language.strRdpErrorOutOfMemory"},
-                    {"3", "Language.strRdpErrorWindowCreation"},
-                    {"4", "Language.strRdpErrorCode2"},
-                    {"5", "Language.strRdpErrorCode3"},
-                    {"6", "Language.strRdpErrorCode4"},
-                    {"7", "Language.strRdpErrorConnection"},
-                    {"100", "Language.strRdpErrorWinsock"}
-                };
-            }
-					
-			public static string GetError(string id)
-			{
-				try
-				{
-				    if (_description == null)
-                        InitDescription();
-
-				    return (string)_description?[id];
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpErrorGetFailure, ex);
-					return string.Format(Language.strRdpErrorUnknown, id);
-				}
-			}
-		}
-        #endregion
 		
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

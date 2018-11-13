@@ -304,7 +304,7 @@ namespace mRemoteNG.Connection
 
                 if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
                 if (Convert.ToInt32(errorMessage) > -1)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpProtocol.FatalErrors.GetError(errorMessage)));
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpErrorCodes.GetError(errorMessage)));
             }
             catch (Exception ex)
             {
