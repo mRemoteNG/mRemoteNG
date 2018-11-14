@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Windows.Forms;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.Window;
+using System;
+using System.Collections;
+using System.Linq;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Panels
 {
     public class PanelAdder
     {
-        public Form AddPanel(string title = "", bool noTabber = false)
+        public ConnectionWindow AddPanel(string title = "", bool noTabber = false)
         {
             try
             {

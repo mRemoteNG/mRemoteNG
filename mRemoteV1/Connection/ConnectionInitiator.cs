@@ -24,35 +24,6 @@ namespace mRemoteNG.Connection
         /// </summary>
         public IEnumerable<string> ActiveConnections => _activeConnections;
 
-        public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
-        {
-            OpenConnection(containerInfo, force, null);
-        }
-
-        public void OpenConnection(ConnectionInfo connectionInfo)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, ConnectionInfo.Force.None);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
-            }
-        }
-
-        public void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, force, null);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
-            }
-        }
-
         public bool SwitchToOpenConnection(ConnectionInfo connectionInfo)
         {
             var interfaceControl = FindConnectionContainer(connectionInfo);
@@ -66,8 +37,7 @@ namespace mRemoteNG.Connection
             return true;
         }
 
-        #region Private
-        private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
+        public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force)
         {
             var children = containerInfo.Children;
             if (children.Count == 0) return;
@@ -75,13 +45,13 @@ namespace mRemoteNG.Connection
             {
                 var childAsContainer = child as ContainerInfo;
                 if (childAsContainer != null)
-                    OpenConnection(childAsContainer, force, conForm);
+                    OpenConnection(childAsContainer, force);
                 else
-                    OpenConnection(child, force, conForm);
+                    OpenConnection(child, force);
             }
         }
 
-        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+        public void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
             try
             {
@@ -104,7 +74,7 @@ namespace mRemoteNG.Connection
 
                 var connectionPanel = SetConnectionPanel(connectionInfo, force);
                 if (string.IsNullOrEmpty(connectionPanel)) return;
-                var connectionForm = SetConnectionForm(conForm, connectionPanel);
+                var connectionForm = SetConnectionForm(connectionPanel);
                 var connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);
                 SetConnectionEventHandlers(newProtocol);
@@ -134,6 +104,7 @@ namespace mRemoteNG.Connection
             }
         }
 
+        #region Private
         private static void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.PreExtApp == "") return;
@@ -184,22 +155,22 @@ namespace mRemoteNG.Connection
             return connectionPanel;
         }
 
-        private Form SetConnectionForm(Form conForm, string connectionPanel)
+        private ConnectionWindow SetConnectionForm(string connectionPanelName)
         {
-            var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel);
+            var connectionForm = Runtime.WindowList.FromString(connectionPanelName) as ConnectionWindow;
 
             if (connectionForm == null)
-                connectionForm = _panelAdder.AddPanel(connectionPanel);
+                connectionForm = _panelAdder.AddPanel(connectionPanelName);
             else
-                ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
+                connectionForm.Show(FrmMain.Default.pnlDock);
 
             connectionForm.Focus();
             return connectionForm;
         }
 
-        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, Form connectionForm)
+        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, ConnectionWindow connectionForm)
         {
-            Control connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(connectionInfo);
+            Control connectionContainer = connectionForm.AddConnectionTab(connectionInfo);
 
             if (connectionInfo.Protocol != ProtocolType.IntApp) return connectionContainer;
 
@@ -213,9 +184,9 @@ namespace mRemoteNG.Connection
             return connectionContainer;
         }
 
-        private static void SetConnectionFormEventHandlers(ProtocolBase newProtocol, Form connectionForm)
+        private static void SetConnectionFormEventHandlers(ProtocolBase newProtocol, ConnectionWindow connectionForm)
         {
-            newProtocol.Closed += ((ConnectionWindow)connectionForm).Prot_Event_Closed;
+            newProtocol.Closed += connectionForm.Prot_Event_Closed;
         }
 
         private void SetConnectionEventHandlers(ProtocolBase newProtocol)
