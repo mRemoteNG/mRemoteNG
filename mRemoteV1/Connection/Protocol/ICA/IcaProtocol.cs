@@ -1,7 +1,3 @@
-using System;
-using System.Threading;
-using System.Timers;
-using System.Windows.Forms;
 using AxWFICALib;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -9,11 +5,15 @@ using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+using System;
+using System.Threading;
+using System.Timers;
+using System.Windows.Forms;
 
 
 namespace mRemoteNG.Connection.Protocol.ICA
 {
-	public class IcaProtocol : ProtocolBase
+    public class IcaProtocol : ProtocolBase
 	{
 		private AxICAClient _icaClient;
 		private ConnectionInfo _info;
@@ -112,7 +112,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		{
 			try
 			{
-                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) == (int)ConnectionInfo.Force.NoCredentials)
+                if (Force.HasFlag(ConnectionInfo.Force.NoCredentials))
 				{
 					return;
 				}
@@ -179,7 +179,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		{
 			try
 			{
-				if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
+				if (Force.HasFlag(ConnectionInfo.Force.Fullscreen))
 				{
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(_frmMain).Bounds.Width, Screen.FromControl(_frmMain).Bounds.Height, 0);
 					_icaClient.FullScreenWindow();

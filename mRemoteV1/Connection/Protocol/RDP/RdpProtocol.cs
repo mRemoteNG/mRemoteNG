@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Windows.Forms;
 using AxMSTSCLib;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
@@ -14,10 +6,16 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using MSTSCLib;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-	public class RdpProtocol : ProtocolBase
+    public class RdpProtocol : ProtocolBase
 	{
         /* RDP v8 requires Windows 7 with:
          * https://support.microsoft.com/en-us/kb/2592687 
@@ -355,7 +353,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						_rdpClient.TransportSettings.GatewayCredsSource = 1; // TSC_PROXY_CREDS_MODE_SMARTCARD
 					}
-					if (_rdpVersion >= Versions.RDC61 && (Force & ConnectionInfo.Force.NoCredentials) != ConnectionInfo.Force.NoCredentials)
+					if (_rdpVersion >= Versions.RDC61 && !Force.HasFlag(ConnectionInfo.Force.NoCredentials))
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
@@ -389,11 +387,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			{
 				bool value;
 						
-				if ((Force & ConnectionInfo.Force.UseConsoleSession) == ConnectionInfo.Force.UseConsoleSession)
+				if (Force.HasFlag(ConnectionInfo.Force.UseConsoleSession))
 				{
 					value = true;
 				}
-				else if ((Force & ConnectionInfo.Force.DontUseConsoleSession) == ConnectionInfo.Force.DontUseConsoleSession)
+				else if (Force.HasFlag(ConnectionInfo.Force.DontUseConsoleSession))
 				{
 					value = false;
 				}
@@ -454,7 +452,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		{
 			try
 			{
-				if ((Force & ConnectionInfo.Force.NoCredentials) == ConnectionInfo.Force.NoCredentials)
+				if (Force.HasFlag(ConnectionInfo.Force.NoCredentials))
 				{
 					return;
 				}
@@ -525,7 +523,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			    SetExtendedProperty("DesktopScaleFactor", scaleFactor);
 			    SetExtendedProperty("DeviceScaleFactor", (uint)100);
 
-                if ((Force & ConnectionInfo.Force.Fullscreen) == ConnectionInfo.Force.Fullscreen)
+                if (Force.HasFlag(ConnectionInfo.Force.Fullscreen))
 				{
 					_rdpClient.FullScreen = true;
                     _rdpClient.DesktopWidth = Screen.FromControl(_frmMain).Bounds.Width;

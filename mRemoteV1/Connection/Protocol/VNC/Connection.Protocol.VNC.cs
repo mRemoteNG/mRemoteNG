@@ -1,14 +1,14 @@
-using System;
-using System.ComponentModel;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+using System;
+using System.ComponentModel;
 // ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.Connection.Protocol.VNC
 {
-	public class ProtocolVNC : ProtocolBase
+    public class ProtocolVNC : ProtocolBase
 	{
         #region Properties
         public bool SmartSize
@@ -164,8 +164,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				_VNC.ConnectComplete += VNCEvent_Connected;
 				_VNC.ConnectionLost += VNCEvent_Disconnected;
 				FrmMain.ClipboardChanged += VNCEvent_ClipboardChanged;
-                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials 
-                    && Info?.Password?.Length > 0)
+                if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials) && Info?.Password?.Length > 0)
 				{
 					_VNC.GetPassword = VNCEvent_Authenticate;
 				}

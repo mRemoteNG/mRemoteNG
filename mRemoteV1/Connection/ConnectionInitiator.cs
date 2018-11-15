@@ -63,7 +63,7 @@ namespace mRemoteNG.Connection
 
                 StartPreConnectionExternalApp(connectionInfo);
 
-                if ((force & ConnectionInfo.Force.DoNotJump) != ConnectionInfo.Force.DoNotJump)
+                if (!force.HasFlag(ConnectionInfo.Force.DoNotJump))
                 {
                     if (SwitchToOpenConnection(connectionInfo))
                         return;
@@ -136,7 +136,7 @@ namespace mRemoteNG.Connection
         private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
             var connectionPanel = "";
-            if (connectionInfo.Panel == "" || (force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | Settings.Default.AlwaysShowPanelSelectionDlg)
+            if (connectionInfo.Panel == "" || force.HasFlag(ConnectionInfo.Force.OverridePanel) || Settings.Default.AlwaysShowPanelSelectionDlg)
             {
                 var frmPnl = new frmChoosePanel();
                 if (frmPnl.ShowDialog() == DialogResult.OK)
