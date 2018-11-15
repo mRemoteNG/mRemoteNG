@@ -5,6 +5,7 @@ using mRemoteNG.Themes;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.TaskDialog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,7 +105,8 @@ namespace mRemoteNG.UI.Window
         #region ConnectionTree
 	    private void SetConnectionTreeEventHandlers()
 	    {
-	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(MessageBox.Show);
+	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(prompt => 
+	            CTaskDialog.MessageBox(Application.ProductName, prompt, "", ETaskDialogButtons.YesNo, ESysIcons.Question));
             olvConnections.KeyDown += tvConnections_KeyDown;
             olvConnections.KeyPress += tvConnections_KeyPress;
             SetTreePostSetupActions();

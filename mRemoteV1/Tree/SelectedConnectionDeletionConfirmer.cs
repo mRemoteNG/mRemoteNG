@@ -1,17 +1,16 @@
-﻿using System;
-using System.Windows.Forms;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.UI.TaskDialog;
+using System;
+using System.Windows.Forms;
 
 
 namespace mRemoteNG.Tree
 {
-	public class SelectedConnectionDeletionConfirmer : IConfirm<ConnectionInfo>
+    public class SelectedConnectionDeletionConfirmer : IConfirm<ConnectionInfo>
     {
-        private readonly Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> _confirmationFunc;
+        private readonly Func<string, DialogResult> _confirmationFunc;
 
-        public SelectedConnectionDeletionConfirmer(Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> confirmationFunc)
+        public SelectedConnectionDeletionConfirmer(Func<string, DialogResult> confirmationFunc)
         {
             _confirmationFunc = confirmationFunc;
         }
@@ -49,7 +48,7 @@ namespace mRemoteNG.Tree
 
         private bool PromptUser(string promptMessage)
         {
-            var msgBoxResponse = CTaskDialog.MessageBox(Application.ProductName, promptMessage, "", ETaskDialogButtons.YesNo, ESysIcons.Question);
+            var msgBoxResponse = _confirmationFunc(promptMessage);
             return msgBoxResponse == DialogResult.Yes;
         }
     }
