@@ -1,6 +1,5 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
@@ -204,25 +203,27 @@ namespace mRemoteNG.Connection
         #endregion
 
         #region Event handlers
-        private static void Prot_Event_Disconnected(object sender, string disconnectedMessage)
+        private static void Prot_Event_Disconnected(object sender, string disconnectedMessage, int? reasonCode)
         {
             try
             {
-                if (sender is VncSharp.RemoteDesktop)
+                var prot = (ProtocolBase)sender;
+                var msgClass = MessageClass.InformationMsg;
+
+                if (prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, @"VncSharp Disconnected."), true);
-                    return;
+                    if (reasonCode > 3)
+                    {
+                        msgClass = MessageClass.WarningMsg;
+                    }
                 }
 
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, disconnectedMessage), true);
-
-                var prot = (ProtocolBase)sender;
-                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
-                var reasonCode = disconnectedMessage.Split("\r\n".ToCharArray())[0];
-                var desc = disconnectedMessage.Replace("\r\n", " ");
-
-                if (Convert.ToInt32(reasonCode) > 3)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + desc);
+                Runtime.MessageCollector.AddMessage(msgClass, 
+                    string.Format(
+                        Language.strProtocolEventDisconnected, 
+                        disconnectedMessage, 
+                        prot.InterfaceControl.Info.Hostname,
+                        prot.InterfaceControl.Info.Protocol.ToString()));
             }
             catch (Exception ex)
             {
@@ -266,16 +267,18 @@ namespace mRemoteNG.Connection
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol, Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
         }
 
-        private static void Prot_Event_ErrorOccured(object sender, string errorMessage)
+        private static void Prot_Event_ErrorOccured(object sender, string errorMessage, int? errorCode)
         {
             try
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventErrorOccured, true);
-                var prot = (ProtocolBase)sender;
+                var prot = (ProtocolBase) sender;
 
-                if (prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
-                if (Convert.ToInt32(errorMessage) > -1)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, RdpErrorCodes.GetError(errorMessage)));
+                var msg = string.Format(
+                    Language.strConnectionEventErrorOccured,
+                    errorMessage,
+                    prot.InterfaceControl.Info.Hostname,
+                    errorCode?.ToString() ?? "-");
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, msg);
             }
             catch (Exception ex)
             {

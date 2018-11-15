@@ -690,8 +690,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
 
         private void RDPEvent_OnFatalError(int errorCode)
-		{
-			Event_ErrorOccured(this, Convert.ToString(errorCode));
+        {
+            var errorMsg = RdpErrorCodes.GetError(errorCode);
+            Event_ErrorOccured(this, errorMsg, errorCode);
 		}
 				
 		private void RDPEvent_OnDisconnected(int discReason)
@@ -700,7 +701,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			if (discReason != UI_ERR_NORMAL_DISCONNECT)
 			{
 				var reason = _rdpClient.GetErrorDescription((uint)discReason, (uint) _rdpClient.ExtendedDisconnectReason);
-				Event_Disconnected(this, discReason + "\r\n" + reason);
+				Event_Disconnected(this, reason, discReason);
 			}
 					
 			if (Settings.Default.ReconnectOnDisconnect)
