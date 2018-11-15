@@ -1,20 +1,20 @@
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Threading;
-using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Cmdline;
 using mRemoteNG.UI;
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Connection.Protocol
 {
-	public class PuttyBase : ProtocolBase
+    public class PuttyBase : ProtocolBase
 	{	
 		private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
 	    private bool _isPuttyNg;
@@ -108,7 +108,7 @@ namespace mRemoteNG.Connection.Protocol
 						
 						arguments.Add("-" + (int)PuttySSHVersion);
 								
-						if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials)
+						if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials))
 						{
 							if (!string.IsNullOrEmpty(username))
 							{
