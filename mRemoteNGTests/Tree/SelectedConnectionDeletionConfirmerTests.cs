@@ -1,7 +1,7 @@
-﻿using System.Windows.Forms;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Tree;
 using NUnit.Framework;
+using System.Windows.Forms;
 
 
 namespace mRemoteNGTests.Tree
@@ -30,12 +30,12 @@ namespace mRemoteNGTests.Tree
             Assert.That(deletionConfirmer.Confirm(_testConnectionInfo), Is.False);
         }
 
-        private DialogResult MockClickYes(string promptMessage, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+        private DialogResult MockClickYes(string promptMessage)
         {
             return DialogResult.Yes;
         }
 
-        private DialogResult MockClickNo(string promptMessage, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+        private DialogResult MockClickNo(string promptMessage)
         {
             return DialogResult.No;
         }
