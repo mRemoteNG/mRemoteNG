@@ -683,5 +683,8 @@
     <Setting Name="StartUpPanelName" Type="System.String" Scope="User">
       <Value Profile="(Default)">General</Value>
     </Setting>
+    <Setting Name="AlwaysShowConnectionTabs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

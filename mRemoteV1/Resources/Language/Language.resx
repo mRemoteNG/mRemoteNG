@@ -2721,4 +2721,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strMenuCopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
   </data>
+  <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
+    <value>Always show connection tabs</value>
+  </data>
 </root>
