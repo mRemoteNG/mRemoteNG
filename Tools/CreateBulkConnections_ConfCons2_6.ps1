@@ -8,7 +8,7 @@
 #   Replace or modify the examples that are shown toward the end of the script to create your own connection info objects.
 #####################################
 
-foreach ($Path in 'HKLM:\SOFTWARE\WOW6432Node\mRemoteNG', 'HKLM:\SOFTWARE\WOW6432Node\mRemoteNG') {
+foreach ($Path in 'HKLM:\SOFTWARE\WOW6432Node\mRemoteNG', 'HKLM:\SOFTWARE\mRemoteNG') {
     Try {
         $mRNGPath = (Get-ItemProperty -Path $Path -Name InstallDir -ErrorAction Stop).InstallDir
         break
