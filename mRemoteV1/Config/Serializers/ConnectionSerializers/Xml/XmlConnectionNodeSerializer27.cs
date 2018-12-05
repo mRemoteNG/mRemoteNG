@@ -1,18 +1,21 @@
-﻿using System;
-using System.Security;
-using System.Xml.Linq;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
+using System;
+using System.Security;
+using System.Xml.Linq;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-	// ReSharper disable once InconsistentNaming
-	public class XmlConnectionNodeSerializer27 : ISerializer<ConnectionInfo,XElement>
+    // ReSharper disable once InconsistentNaming
+    public class XmlConnectionNodeSerializer27 : ISerializer<ConnectionInfo,XElement>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
         private readonly SaveFilter _saveFilter;
+
+        public Version Version { get; } = new Version(2, 7);
 
         public XmlConnectionNodeSerializer27(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {
@@ -48,18 +51,21 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
             element.Add(new XAttribute("Id", connectionInfo.ConstantID));
 
-            element.Add(_saveFilter.SaveUsername
-                ? new XAttribute("Username", connectionInfo.Username)
-                : new XAttribute("Username", ""));
+            if (!Runtime.UseCredentialManager)
+            {
+                element.Add(_saveFilter.SaveUsername
+                    ? new XAttribute("Username", connectionInfo.Username)
+                    : new XAttribute("Username", ""));
 
-            element.Add(_saveFilter.SaveDomain
-                ? new XAttribute("Domain", connectionInfo.Domain)
-                : new XAttribute("Domain", ""));
+                element.Add(_saveFilter.SaveDomain
+                    ? new XAttribute("Domain", connectionInfo.Domain)
+                    : new XAttribute("Domain", ""));
 
-            if (_saveFilter.SavePassword && !connectionInfo.Inheritance.Password)
-                element.Add(new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey)));
-            else
-                element.Add(new XAttribute("Password", ""));
+                if (_saveFilter.SavePassword && !connectionInfo.Inheritance.Password)
+                    element.Add(new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey)));
+                else
+                    element.Add(new XAttribute("Password", ""));
+            }
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));

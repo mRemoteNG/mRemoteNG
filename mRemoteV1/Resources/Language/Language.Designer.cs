@@ -160,6 +160,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This exception will force mRemoteNG to close.
+        /// </summary>
+        internal static string ExceptionForcesmRemoteNGToClose {
+            get {
+                return ResourceManager.GetString("ExceptionForcesmRemoteNGToClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exception Message.
+        /// </summary>
+        internal static string ExceptionMessage {
+            get {
+                return ResourceManager.GetString("ExceptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter search matches in connection tree.
         /// </summary>
         internal static string FilterSearchMatchesInConnectionTree {
@@ -192,6 +210,15 @@ namespace mRemoteNG {
         internal static string LoginFailedForUser {
             get {
                 return ResourceManager.GetString("LoginFailedForUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mRemoteNG Unhandled Exception.
+        /// </summary>
+        internal static string mRemoteNGUnhandledException {
+            get {
+                return ResourceManager.GetString("mRemoteNGUnhandledException", resourceCulture);
             }
         }
         
@@ -246,6 +273,15 @@ namespace mRemoteNG {
         internal static string srtWorkingDirectory {
             get {
                 return ResourceManager.GetString("srtWorkingDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stack trace.
+        /// </summary>
+        internal static string StackTrace {
+            get {
+                return ResourceManager.GetString("StackTrace", resourceCulture);
             }
         }
         
@@ -7774,6 +7810,15 @@ namespace mRemoteNG {
         internal static string TestingConnection {
             get {
                 return ResourceManager.GetString("TestingConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unhandled exception has occurred.
+        /// </summary>
+        internal static string UnhandledExceptionOccured {
+            get {
+                return ResourceManager.GetString("UnhandledExceptionOccured", resourceCulture);
             }
         }
         

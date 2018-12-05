@@ -1,20 +1,20 @@
-﻿using System;
-using System.Linq;
-using System.Xml.Linq;
-using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.Xml;
+﻿using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Text;
 
 
 namespace mRemoteNGTests.IntegrationTests
 {
-	public class XmlSerializationLifeCycleTests
+    public class XmlSerializationLifeCycleTests
     {
         private XmlConnectionsSerializer _serializer;
         private XmlConnectionsDeserializer _deserializer;
@@ -26,7 +26,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             _originalModel = SetupConnectionTreeModel();
             var cryptoProvider = _cryptoFactory.Build();
-            var nodeSerializer = new XmlConnectionNodeSerializer26(
+            var nodeSerializer = new XmlConnectionNodeSerializer27(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -77,7 +77,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var cryptoProvider = _cryptoFactory.Build();
             cryptoProvider.KeyDerivationIterations = 5000;
-            var nodeSerializer = new XmlConnectionNodeSerializer26(
+            var nodeSerializer = new XmlConnectionNodeSerializer27(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -101,6 +101,60 @@ namespace mRemoteNGTests.IntegrationTests
             var deserializedModel = _deserializer.Deserialize(serializedContent);
             var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(Guid.TryParse(deserializedConnectionInfo.ConstantID, out var guid));
+        }
+
+        [Test]
+        public void AllPropertiesCorrectWhenSerializingThenDeserializing()
+        {
+            var originalConnectionInfo = new ConnectionInfo().RandomizeValues();
+            originalConnectionInfo.Inheritance.TurnOffInheritanceCompletely();
+            var serializedContent = _serializer.Serialize(originalConnectionInfo);
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
+            var deserializedConnectionInfo = deserializedModel
+                .GetRecursiveChildList()
+                .First(info => info.GetTreeNodeType() == TreeNodeType.Connection);
+
+            var sb = new StringBuilder();
+            foreach (var property in originalConnectionInfo.GetSerializableProperties())
+            {
+                var originalValue = property.GetValue(originalConnectionInfo);
+                var deserializedValue = property.GetValue(deserializedConnectionInfo);
+                if (originalValue.Equals(deserializedValue))
+                    continue;
+
+                sb.AppendLine($"Property: {property.Name}");
+            }
+
+            Assert.That(sb.Length, Is.EqualTo(0), "Some properties are not being serialized properly:\n" + sb);
+        }
+
+        [Test]
+        public void AllInheritanceCorrectWhenSerializingThenDeserializing()
+        {
+            var originalConnectionInfo = new ConnectionInfo();
+            originalConnectionInfo.Inheritance.ToggleAllBooleanProperties(excludeProperties: nameof(ConnectionInfoInheritance.EverythingInherited));
+            var container = new ContainerInfo();
+            container.AddChild(originalConnectionInfo);
+
+            var serializedContent = _serializer.Serialize(container);
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
+            var deserializedConnectionInfo = deserializedModel
+                .GetRecursiveChildList()
+                .First(info => info.GetTreeNodeType() == TreeNodeType.Connection);
+
+            var sb = new StringBuilder();
+            foreach (var property in originalConnectionInfo.Inheritance.GetProperties())
+            {
+                var originalValue = property.GetValue(originalConnectionInfo.Inheritance);
+                var deserializedValue = property.GetValue(deserializedConnectionInfo.Inheritance);
+
+                if (originalValue.Equals(deserializedValue))
+                    continue;
+
+                sb.AppendLine($"Property: Inheritance.{property.Name}");
+            }
+
+            Assert.That(sb.Length, Is.EqualTo(0), "Some properties are not being serialized properly:\n" + sb);
         }
 
 

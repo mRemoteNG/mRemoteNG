@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Security;
-using System.Xml.Linq;
-using mRemoteNG.Config;
-using mRemoteNG.Config.Serializers;
+﻿using mRemoteNG.Config;
 using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -11,6 +6,10 @@ using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Security;
+using System.Xml.Linq;
 
 
 namespace mRemoteNGTests.Config
@@ -122,7 +121,7 @@ namespace mRemoteNGTests.Config
         {
             var rootNode = new RootNodeInfo(RootNodeType.Connection) {PasswordString = _key.ConvertToUnsecureString()};
             rootNode.AddChild(connectionInfo);
-            var nodeSerializer = new XmlConnectionNodeSerializer26(_cryptographyProvider, _key, new SaveFilter());
+            var nodeSerializer = new XmlConnectionNodeSerializer27(_cryptographyProvider, _key, new SaveFilter());
             var serializer = new XmlConnectionsSerializer(_cryptographyProvider, nodeSerializer);
             var serializedData = serializer.Serialize(rootNode);
             return XDocument.Parse(serializedData);

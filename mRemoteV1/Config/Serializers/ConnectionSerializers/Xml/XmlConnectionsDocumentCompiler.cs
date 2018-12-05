@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Security;
-using System.Xml.Linq;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Linq;
+using System.Security;
+using System.Xml.Linq;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
@@ -79,7 +79,7 @@ namespace mRemoteNG.Config.Serializers.Xml
         private XElement CompileRootNode(RootNodeInfo rootNodeInfo, bool fullFileEncryption)
         {
             var rootNodeSerializer = new XmlRootNodeSerializer();
-            return rootNodeSerializer.SerializeRootNodeInfo(rootNodeInfo, _cryptographyProvider, fullFileEncryption);
+            return rootNodeSerializer.SerializeRootNodeInfo(rootNodeInfo, _cryptographyProvider, _connectionNodeSerializer.Version, fullFileEncryption);
         }
 
         private XElement CompileConnectionInfoNode(ConnectionInfo connectionInfo)

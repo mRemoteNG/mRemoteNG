@@ -1,18 +1,20 @@
-﻿using System;
-using System.Security;
-using System.Xml.Linq;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
+using System;
+using System.Security;
+using System.Xml.Linq;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-	// ReSharper disable once InconsistentNaming
-	public class XmlConnectionNodeSerializer26 : ISerializer<ConnectionInfo,XElement>
+    // ReSharper disable once InconsistentNaming
+    public class XmlConnectionNodeSerializer26 : ISerializer<ConnectionInfo,XElement>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
         private readonly SaveFilter _saveFilter;
+
+        public Version Version { get; } = new Version(2, 6);
 
         public XmlConnectionNodeSerializer26(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {
@@ -84,6 +86,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("RedirectDiskDrives", connectionInfo.RedirectDiskDrives.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectPorts", connectionInfo.RedirectPorts.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectPrinters", connectionInfo.RedirectPrinters.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("RedirectClipboard", connectionInfo.RedirectClipboard.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectSmartCards", connectionInfo.RedirectSmartCards.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectSound", connectionInfo.RedirectSound.ToString()));
             element.Add(new XAttribute("SoundQuality", connectionInfo.SoundQuality.ToString()));
