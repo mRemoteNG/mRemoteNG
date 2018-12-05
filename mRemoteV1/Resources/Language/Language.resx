@@ -2718,6 +2718,21 @@ This page will walk you through the process of upgrading your connections file o
   <data name="ChangeConnectionResolutionError" xml:space="preserve">
     <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
   </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Stack trace</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Exception Message</value>
+  </data>
+  <data name="mRemoteNGUnhandledException" xml:space="preserve">
+    <value>mRemoteNG Unhandled Exception</value>
+  </data>
+  <data name="UnhandledExceptionOccured" xml:space="preserve">
+    <value>An unhandled exception has occurred</value>
+  </data>
+  <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+    <value>This exception will force mRemoteNG to close</value>
+  </data>
   <data name="strMenuCopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
   </data>
