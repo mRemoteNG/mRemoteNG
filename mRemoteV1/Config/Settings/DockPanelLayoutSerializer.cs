@@ -1,14 +1,16 @@
-﻿using System;
+﻿using mRemoteNG.Config.Serializers;
+using System;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
-using mRemoteNG.Config.Serializers;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
 {
     public class DockPanelLayoutSerializer : ISerializer<DockPanel, string>
     {
+        public Version Version { get; } = new Version(1, 0);
+
         public string Serialize(DockPanel dockPanel)
         {
             if (dockPanel == null)

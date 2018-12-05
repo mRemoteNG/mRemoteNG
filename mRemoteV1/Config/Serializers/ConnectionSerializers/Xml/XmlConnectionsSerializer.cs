@@ -1,14 +1,14 @@
-﻿using System;
+﻿using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Security;
+using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using mRemoteNG.App;
-using mRemoteNG.Connection;
-using mRemoteNG.Security;
-using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
@@ -17,6 +17,7 @@ namespace mRemoteNG.Config.Serializers.Xml
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly ISerializer<ConnectionInfo, XElement> _connectionNodeSerializer;
 
+        public Version Version => _connectionNodeSerializer.Version;
         public bool UseFullEncryption { get; set; }
 
         public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider, ISerializer<ConnectionInfo, XElement> connectionNodeSerializer)

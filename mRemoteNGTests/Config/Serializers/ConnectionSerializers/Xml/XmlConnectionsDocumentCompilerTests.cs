@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Xml.XPath;
-using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.Xml;
+﻿using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -9,10 +6,12 @@ using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
+using System.Linq;
+using System.Xml.XPath;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
-	public class XmlConnectionsDocumentCompilerTests
+    public class XmlConnectionsDocumentCompilerTests
     {
         private XmlConnectionsDocumentCompiler _documentCompiler;
         private ConnectionTreeModel _connectionTreeModel;
@@ -31,7 +30,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         {
             _connectionTreeModel = SetupConnectionTreeModel();
             _cryptographyProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                 _cryptographyProvider, 
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());

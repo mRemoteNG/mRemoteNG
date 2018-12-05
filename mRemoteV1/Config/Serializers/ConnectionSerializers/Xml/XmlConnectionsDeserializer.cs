@@ -1,9 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Security;
-using System.Windows.Forms;
-using System.Xml;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -18,6 +13,11 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
+using System;
+using System.Globalization;
+using System.Security;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
@@ -228,7 +228,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                             : RdpProtocol.RDPResolutions.FitToWindow;
                     }
 
-                    if (_confVersion <= 2.6) // 0.2 - 2.6
+                    if (!Runtime.UseCredentialManager || _confVersion <= 2.6) // 0.2 - 2.6
                     {
 #pragma warning disable 618
                         connectionInfo.Username = xmlnode.Attributes["Username"].Value;
@@ -349,28 +349,26 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 1.3)
                 {
-                    connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo)
-                    {
-                        CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value),
-                        Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value),
-                        Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value),
-                        DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value),
-                        DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value),
-                        Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value),
-                        Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value),
-                        Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value),
-                        Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value),
-                        PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value),
-                        RedirectDiskDrives = bool.Parse(xmlnode.Attributes["InheritRedirectDiskDrives"].Value),
-                        RedirectKeys = bool.Parse(xmlnode.Attributes["InheritRedirectKeys"].Value),
-                        RedirectPorts = bool.Parse(xmlnode.Attributes["InheritRedirectPorts"].Value),
-                        RedirectPrinters = bool.Parse(xmlnode.Attributes["InheritRedirectPrinters"].Value),
-                        RedirectSmartCards = bool.Parse(xmlnode.Attributes["InheritRedirectSmartCards"].Value),
-                        RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value),
-                        Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value),
-                        UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value),
-                    };
-                    if (_confVersion <= 2.6) // 1.3 - 2.6
+                    connectionInfo.Inheritance.CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value);
+                    connectionInfo.Inheritance.Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value);
+                    connectionInfo.Inheritance.Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value);
+                    connectionInfo.Inheritance.DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value);
+                    connectionInfo.Inheritance.DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value);
+                    connectionInfo.Inheritance.Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value);
+                    connectionInfo.Inheritance.Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value);
+                    connectionInfo.Inheritance.Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value);
+                    connectionInfo.Inheritance.Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value);
+                    connectionInfo.Inheritance.PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value);
+                    connectionInfo.Inheritance.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["InheritRedirectDiskDrives"].Value);
+                    connectionInfo.Inheritance.RedirectKeys = bool.Parse(xmlnode.Attributes["InheritRedirectKeys"].Value);
+                    connectionInfo.Inheritance.RedirectPorts = bool.Parse(xmlnode.Attributes["InheritRedirectPorts"].Value);
+                    connectionInfo.Inheritance.RedirectPrinters = bool.Parse(xmlnode.Attributes["InheritRedirectPrinters"].Value);
+                    connectionInfo.Inheritance.RedirectSmartCards = bool.Parse(xmlnode.Attributes["InheritRedirectSmartCards"].Value);
+                    connectionInfo.Inheritance.RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value);
+                    connectionInfo.Inheritance.Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value);
+                    connectionInfo.Inheritance.UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value);
+
+                    if (!Runtime.UseCredentialManager || _confVersion <= 2.6) // 1.3 - 2.6
                     {
                         connectionInfo.Inheritance.Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value);
                         connectionInfo.Inheritance.Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value);
@@ -381,7 +379,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                 }
                 else
                 {
-                    connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
                     if (Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value))
                         connectionInfo.Inheritance.TurnOnInheritanceCompletely();
                     connectionInfo.Icon = Convert.ToString(xmlnode.Attributes["Icon"].Value.Replace(".ico", ""));
@@ -518,6 +515,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message));
             }
+
             return connectionInfo;
         }
     }

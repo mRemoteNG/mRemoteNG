@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema id="mremoteng_confcons_v2_7"
     targetNamespace="http://mremoteng.org"
-    elementFormDefault="qualified"
+    elementFormDefault="unqualified"
     xmlns="http://mremoteng.org"
     xmlns:mrng="http://mremoteng.org"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -10,7 +10,7 @@
   
   <xs:element name="Connections">
     <xs:complexType>
-      <xs:sequence>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
         <xs:element name="Node" type="mrng:connectioninfo" />
       </xs:sequence>
       <xs:attribute name="Name" type="xs:string" use="required" />
@@ -30,11 +30,18 @@
       <xs:element name="Node" type="mrng:connectioninfo" />
     </xs:sequence>
     <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="Id" type="xs:string" use="required" />
     <xs:attribute name="Type" type="xs:string" use="required" />
+    <xs:attribute name="Expanded" type="xs:boolean" use="optional" />
     <xs:attribute name="Descr" type="xs:string" use="required" />
     <xs:attribute name="Icon" type="xs:string" use="required" />
     <xs:attribute name="Panel" type="xs:string" use="required" />
-    <xs:attribute name="CredentialId" type="xs:string" use="required" />
+    
+    <!--<xs:attribute name="CredentialId" type="xs:string" use="required" />-->
+    <xs:attribute name="Username" type="xs:string" use="required" />
+    <xs:attribute name="Domain" type="xs:string" use="required" />
+    <xs:attribute name="Password" type="xs:string" use="required" />
+
     <xs:attribute name="Hostname" type="xs:string" use="required" />
     <xs:attribute name="Protocol" type="xs:string" use="required" />
     <xs:attribute name="PuttySession" type="xs:string" use="required" />
@@ -45,6 +52,7 @@
     <xs:attribute name="ICAEncryptionStrength" type="xs:string" use="required" />
     <xs:attribute name="RDPAuthenticationLevel" type="xs:string" use="required" />
     <xs:attribute name="RDPMinutesToIdleTimeout" type="xs:int" use="required" />
+    <xs:attribute name="RDPAlertIdleTimeout" type="xs:boolean" use="required" />
     <xs:attribute name="LoadBalanceInfo" type="xs:string" use="required" />
     <xs:attribute name="Colors" type="xs:string" use="required" />
     <xs:attribute name="Resolution" type="xs:string" use="required" />
@@ -117,6 +125,7 @@
     <xs:attribute name="InheritICAEncryptionStrength" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRDPAuthenticationLevel" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRDPMinutesToIdleTimeout" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDPAlertIdleTimeout" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritLoadBalanceInfo" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPreExtApp" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPostExtApp" type="xs:boolean" use="optional" />

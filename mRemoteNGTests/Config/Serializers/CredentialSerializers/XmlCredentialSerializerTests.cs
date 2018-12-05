@@ -1,9 +1,10 @@
-﻿using System.Linq;
-using System.Xml.Linq;
-using mRemoteNG.Config.Serializers.CredentialSerializer;
+﻿using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
 {
@@ -41,7 +42,8 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         {
             var serialized = _serializer.Serialize(new[] { _cred1 });
             var xdoc = XDocument.Parse(serialized);
-            Assert.That(xdoc.Root?.Attribute("SchemaVersion")?.Value, Is.EqualTo(_serializer.SchemaVersion));
+            var version = Version.Parse(xdoc.Root?.Attribute("SchemaVersion")?.Value ?? "");
+            Assert.That(version, Is.EqualTo(_serializer.Version));
         }
     }
 }
