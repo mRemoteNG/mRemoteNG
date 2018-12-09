@@ -33,24 +33,25 @@ namespace mRemoteNG.UI.Window
             var TreeNode8 = new TreeNode("Connections");
             var TreeNode9 = new TreeNode("Config");
             var TreeNode10 = new TreeNode("Options");
-            var TreeNode11 = new TreeNode("Notifications");
-            var TreeNode12 = new TreeNode("SQL Configuration");
-            var TreeNode13 = new TreeNode("Screenshot Manager");
-            var TreeNode14 = new TreeNode("SSH File Transfer");
-            var TreeNode15 = new TreeNode("Quick Connect");
-            var TreeNode16 = new TreeNode("Port Scan");
-            var TreeNode17 = new TreeNode("External Tools");
-            var TreeNode18 = new TreeNode("Import/Export");
-            var TreeNode19 = new TreeNode("Keyboard Shortcuts");
-            var TreeNode20 = new TreeNode("User Interface", new[] {
+            var TreeNode11 = new TreeNode("Navigation");
+            var TreeNode12 = new TreeNode("Notifications");
+            var TreeNode13 = new TreeNode("SQL Configuration");
+            var TreeNode14 = new TreeNode("Screenshot Manager");
+            var TreeNode15 = new TreeNode("SSH File Transfer");
+            var TreeNode16 = new TreeNode("Quick Connect");
+            var TreeNode17 = new TreeNode("Port Scan");
+            var TreeNode18 = new TreeNode("External Tools");
+            var TreeNode19 = new TreeNode("Import/Export");
+            var TreeNode20 = new TreeNode("Keyboard Shortcuts");
+            var TreeNode21 = new TreeNode("User Interface", new[] {
                 TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode13, TreeNode14, TreeNode15,
-                TreeNode16, TreeNode17, TreeNode18, TreeNode19
+                TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20
             });
-            var TreeNode21 = new TreeNode("Common Problems (RDP)");
-            var TreeNode22 = new TreeNode("Special Topics", new[] {
-                TreeNode21
+            var TreeNode22 = new TreeNode("Common Problems (RDP)");
+            var TreeNode23 = new TreeNode("Special Topics", new[] {
+                TreeNode22
             });
-            var TreeNode99 = new TreeNode("Help", new[] { TreeNode1, TreeNode6, TreeNode20, TreeNode22 });
+            var TreeNode99 = new TreeNode("Help", new[] { TreeNode1, TreeNode6, TreeNode21, TreeNode23 });
             wbHelp = new WebBrowser();
 			wbHelp.DocumentTitleChanged += wbHelp_DocumentTitleChanged;
 			tvIndex = new TreeView();
@@ -94,16 +95,17 @@ namespace mRemoteNG.UI.Window
 			TreeNode8.Tag = "ui_connections";
 			TreeNode9.Tag = "ui_config";
 			TreeNode10.Tag = "ui_options";
-			TreeNode11.Tag = "ui_notifications";
-            TreeNode12.Tag = "ui_sql_configuration";
-            TreeNode13.Tag = "ui_screenshot_manager";
-            TreeNode14.Tag = "ui_file_transfer";
-            TreeNode15.Tag = "ui_quick_connect";
-            TreeNode16.Tag = "ui_port_scan";
-            TreeNode17.Tag = "ui_external_tools";
-            TreeNode18.Tag = "ui_import_and_export";
-            TreeNode19.Tag = "ui_keyboardshortcuts";
-            TreeNode21.Tag = "st_common_problems_rdp";
+            TreeNode11.Tag = "ui_navigation";
+            TreeNode12.Tag = "ui_notifications";
+            TreeNode13.Tag = "ui_sql_configuration";
+            TreeNode14.Tag = "ui_screenshot_manager";
+            TreeNode15.Tag = "ui_file_transfer";
+            TreeNode16.Tag = "ui_quick_connect";
+            TreeNode17.Tag = "ui_port_scan";
+            TreeNode18.Tag = "ui_external_tools";
+            TreeNode19.Tag = "ui_import_and_export";
+            TreeNode20.Tag = "ui_keyboardshortcuts";
+            TreeNode22.Tag = "st_common_problems_rdp";
             TreeNode99.Tag = "Index";
             tvIndex.Nodes.AddRange(new[] {TreeNode99});
             tvIndex.ShowRootLines = false;
