@@ -17,6 +17,23 @@ foreach ($Path in 'HKLM:\SOFTWARE\WOW6432Node\mRemoteNG', 'HKLM:\SOFTWARE\mRemot
         continue
     }
 }
+if (!$mRNGPath) {
+    Add-Type -AssemblyName System.Windows.Forms
+    $FolderBrowser = [System.Windows.Forms.FolderBrowserDialog]@{
+        Description = 'Please select the folder which contains mRemoteNG.exe'
+        ShowNewFolderButton = $false
+    }
+    
+    $Response = $FolderBrowser.ShowDialog()
+    
+    if ($Response.value__ -eq 1) {
+        $mRNGPath = $FolderBrowser.SelectedPath
+    }
+    elseif ($Response.value__ -eq 2) {
+        Write-Warning 'A folder containing mRemoteNG.exe has not been selected'
+        return
+    }
+}
 $null = [System.Reflection.Assembly]::LoadFile((Join-Path -Path $mRNGPath -ChildPath "mRemoteNG.exe"))
 Add-Type -Path (Join-Path -Path $mRNGPath -ChildPath "BouncyCastle.Crypto.dll")
 
