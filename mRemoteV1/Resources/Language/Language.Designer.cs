@@ -6652,6 +6652,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show parent information on tab names.
+        /// </summary>
+        internal static string strShowParentInfoOnTabs {
+            get {
+                return ResourceManager.GetString("strShowParentInfoOnTabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show protocols on tab names.
         /// </summary>
         internal static string strShowProtocolOnTabs {

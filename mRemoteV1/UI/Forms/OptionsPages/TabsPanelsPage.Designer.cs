@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabsPanelsPage));
+			            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabsPanelsPage));
             this.chkAlwaysShowPanelTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkIdentifyQuickConnectTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkOpenNewTabRightOfSelected = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -41,6 +41,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkCreateEmptyPanelOnStart = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.txtBoxPanelName = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblPanelName = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.chkShowParentInfoOnTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.SuspendLayout();
             // 
             // chkAlwaysShowPanelTabs
@@ -124,7 +125,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkCreateEmptyPanelOnStart._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkCreateEmptyPanelOnStart.AutoSize = true;
-            this.chkCreateEmptyPanelOnStart.Location = new System.Drawing.Point(3, 164);
+            this.chkCreateEmptyPanelOnStart.Location = new System.Drawing.Point(3, 187);
             this.chkCreateEmptyPanelOnStart.Name = "chkCreateEmptyPanelOnStart";
             this.chkCreateEmptyPanelOnStart.Size = new System.Drawing.Size(253, 17);
             this.chkCreateEmptyPanelOnStart.TabIndex = 7;
@@ -134,7 +135,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // txtBoxPanelName
             // 
-            this.txtBoxPanelName.Location = new System.Drawing.Point(43, 200);
+            this.txtBoxPanelName.Location = new System.Drawing.Point(43, 223);
             this.txtBoxPanelName.Name = "txtBoxPanelName";
             this.txtBoxPanelName.Size = new System.Drawing.Size(213, 20);
             this.txtBoxPanelName.TabIndex = 8;
@@ -142,16 +143,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblPanelName
             // 
             this.lblPanelName.AutoSize = true;
-            this.lblPanelName.Location = new System.Drawing.Point(40, 184);
+            this.lblPanelName.Location = new System.Drawing.Point(40, 207);
             this.lblPanelName.Name = "lblPanelName";
             this.lblPanelName.Size = new System.Drawing.Size(66, 13);
             this.lblPanelName.TabIndex = 9;
             this.lblPanelName.Text = "Panel name:";
             // 
+            // chkShowParentInfoOnTabs
+            // 
+            this.chkShowParentInfoOnTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkShowParentInfoOnTabs.AutoSize = true;
+            this.chkShowParentInfoOnTabs.Location = new System.Drawing.Point(3, 164);
+            this.chkShowParentInfoOnTabs.Name = "chkShowParentInfoOnTabs";
+            this.chkShowParentInfoOnTabs.Size = new System.Drawing.Size(207, 17);
+            this.chkShowParentInfoOnTabs.TabIndex = 10;
+            this.chkShowParentInfoOnTabs.Text = "Show parent information on tab names";
+            this.chkShowParentInfoOnTabs.UseVisualStyleBackColor = true;
+            // 
             // TabsPanelsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkShowParentInfoOnTabs);
             this.Controls.Add(this.lblPanelName);
             this.Controls.Add(this.txtBoxPanelName);
             this.Controls.Add(this.chkCreateEmptyPanelOnStart);
@@ -163,7 +176,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkDoubleClickClosesTab);
             this.Controls.Add(this.chkShowProtocolOnTabs);
             this.Name = "TabsPanelsPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
+			            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -179,5 +192,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private Controls.Base.NGCheckBox chkCreateEmptyPanelOnStart;
         private Controls.Base.NGTextBox txtBoxPanelName;
         private Controls.Base.NGLabel lblPanelName;
+        private Controls.Base.NGCheckBox chkShowParentInfoOnTabs;
     }
 }

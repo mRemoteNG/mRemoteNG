@@ -2736,4 +2736,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strMenuCopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
   </data>
+  <data name="strShowParentInfoOnTabs" xml:space="preserve">
+    <value>Show parent information on tab names</value>
+  </data>
 </root>
