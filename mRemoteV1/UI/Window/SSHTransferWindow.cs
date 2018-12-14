@@ -5,6 +5,7 @@ using System.Threading;
 using mRemoteNG.Tools; 
 using WeifenLuo.WinFormsUI.Docking;
 using System.Windows.Forms;
+using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.UI.Window
@@ -300,50 +301,26 @@ namespace mRemoteNG.UI.Window
         #region Public Properties
         public string Hostname
         {
-            get
-            {
-                return txtHost.Text;
-            }
-            set
-            {
-                txtHost.Text = value;
-            }
+            get => txtHost.Text;
+            set => txtHost.Text = value;
         }
 
         public string Port
         {
-            get
-            {
-                return txtPort.Text;
-            }
-            set
-            {
-                txtPort.Text = value;
-            }
+            get => txtPort.Text;
+            set => txtPort.Text = value;
         }
 
         public string Username
         {
-            get
-            {
-                return txtUser.Text;
-            }
-            set
-            {
-                txtUser.Text = value;
-            }
+            get => txtUser.Text;
+            set => txtUser.Text = value;
         }
 
         public string Password
         {
-            get
-            {
-                return txtPassword.Text;
-            }
-            set
-            {
-                txtPassword.Text = value;
-            }
+            get => txtPassword.Text;
+            set => txtPassword.Text = value;
         }
         #endregion
 
@@ -380,13 +357,13 @@ namespace mRemoteNG.UI.Window
         {
             if (AllFieldsSet() == false)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strPleaseFillAllFields);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPleaseFillAllFields);
                 return;
             }
 
             if (File.Exists(txtLocalFile.Text) == false)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strLocalFileDoesNotExist);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strLocalFileDoesNotExist);
                 return;
             }
 
@@ -397,14 +374,14 @@ namespace mRemoteNG.UI.Window
                 // Connect creates the protocol objects and makes the initial connection.
                 st.Connect();
 
-                if (Protocol == SecureTransfer.SSHTransferProtocol.SCP)
+                switch (Protocol)
                 {
-                    st.ScpClt.Uploading += ScpClt_Uploading;
-                }
-
-                if (Protocol == SecureTransfer.SSHTransferProtocol.SFTP)
-                {
-                    st.asyncCallback = AsyncCallback;
+                    case SecureTransfer.SSHTransferProtocol.SCP:
+                        st.ScpClt.Uploading += ScpClt_Uploading;
+                        break;
+                    case SecureTransfer.SSHTransferProtocol.SFTP:
+                        st.asyncCallback = AsyncCallback;
+                        break;
                 }
 
                 var t = new Thread(StartTransferBG);
@@ -422,7 +399,7 @@ namespace mRemoteNG.UI.Window
 
         private void AsyncCallback(IAsyncResult ar)
         {
-            Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"SFTP AsyncCallback completed.", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"SFTP AsyncCallback completed.", true);
         }
 
         private void ScpClt_Uploading(object sender, Renci.SshNet.Common.ScpUploadEventArgs e)
@@ -441,7 +418,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 DisableButtons();
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
                 st.Upload();
 
                 // SftpClient is Asynchronous, so we need to wait here after the upload and handle the status directly since no status events are raised.
@@ -458,14 +435,14 @@ namespace mRemoteNG.UI.Window
                     }
                 }
 
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} completed.", true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} completed.", true);
                 st.Disconnect();
                 st.Dispose();
                 EnableButtons();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSSHStartTransferBG, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSSHStartTransferBG, ex, MessageClass.ErrorMsg, false);
                 st?.Disconnect();
                 st?.Dispose();
             }
