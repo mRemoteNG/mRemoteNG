@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Security;
-using mRemoteNG.Security;
+﻿using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using System;
+using System.Collections;
+using System.Security;
 
 
 namespace mRemoteNGTests.Security
@@ -95,6 +95,12 @@ namespace mRemoteNGTests.Security
         {
             var cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
             Assert.That(cryptoProvider.CipherMode, Is.EqualTo(mode));
+        }
+
+        [Test]
+        public void ProvidingEmptyEncryptionKeyThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => _cryptographyProvider.Encrypt(_plainText, new SecureString()));
         }
 
 
