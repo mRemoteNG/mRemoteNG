@@ -1,13 +1,13 @@
+using mRemoteNG.App;
+using mRemoteNG.Tools;
 using System;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.App;
-using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.Connection.Protocol
 {
-	public abstract class ProtocolBase
+    public abstract class ProtocolBase
     {
         #region Private Variables
 
@@ -239,14 +239,14 @@ namespace mRemoteNG.Connection.Protocol
 			remove { ConnectedEvent = (ConnectedEventHandler) Delegate.Remove(ConnectedEvent, value); }
 		}
 				
-		public delegate void DisconnectedEventHandler(object sender, string DisconnectedMessage);
+		public delegate void DisconnectedEventHandler(object sender, string disconnectedMessage, int? reasonCode);
 		public event DisconnectedEventHandler Disconnected
 		{
 			add { DisconnectedEvent = (DisconnectedEventHandler) Delegate.Combine(DisconnectedEvent, value); }
 			remove { DisconnectedEvent = (DisconnectedEventHandler) Delegate.Remove(DisconnectedEvent, value); }
 		}
 				
-		public delegate void ErrorOccuredEventHandler(object sender, string ErrorMessage);
+		public delegate void ErrorOccuredEventHandler(object sender, string errorMessage, int? errorCode);
 		public event ErrorOccuredEventHandler ErrorOccured
 		{
 			add { ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Combine(ErrorOccuredEvent, value); }
@@ -288,14 +288,14 @@ namespace mRemoteNG.Connection.Protocol
 	        ConnectedEvent?.Invoke(sender);
 	    }
 
-	    protected void Event_Disconnected(object sender, string DisconnectedMessage)
+	    protected void Event_Disconnected(object sender, string disconnectedMessage, int? reasonCode)
 	    {
-	        DisconnectedEvent?.Invoke(sender, DisconnectedMessage);
+	        DisconnectedEvent?.Invoke(sender, disconnectedMessage, reasonCode);
 	    }
 
-	    protected void Event_ErrorOccured(object sender, string ErrorMsg)
+	    protected void Event_ErrorOccured(object sender, string errorMsg, int? errorCode)
 	    {
-	        ErrorOccuredEvent?.Invoke(sender, ErrorMsg);
+	        ErrorOccuredEvent?.Invoke(sender, errorMsg, errorCode);
 	    }
 
 	    protected void Event_ReconnectGroupCloseClicked()
