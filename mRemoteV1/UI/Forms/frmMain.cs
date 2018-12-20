@@ -189,6 +189,9 @@ namespace mRemoteNG.UI.Forms
                 if (!panelAdder.DoesPanelExist(panelName))
                     panelAdder.AddPanel(panelName);
             }
+            
+            FrmSplashScreen frmSplashScreen = FrmSplashScreen.getInstance();
+            frmSplashScreen.Close();
         }
 
         private void ApplyLanguage()
