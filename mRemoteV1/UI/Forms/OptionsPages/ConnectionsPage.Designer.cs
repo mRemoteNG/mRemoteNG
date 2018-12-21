@@ -30,7 +30,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionsPage));
             this.numRDPConTimeout = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
             this.lblRDPConTimeout = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.lblRdpReconnectionCount = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -302,7 +301,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkUseFilterSearch._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkUseFilterSearch.AutoSize = true;
-            this.chkUseFilterSearch.Location = new System.Drawing.Point(4, 95);
+            this.chkUseFilterSearch.Location = new System.Drawing.Point(3, 95);
             this.chkUseFilterSearch.Name = "chkUseFilterSearch";
             this.chkUseFilterSearch.Size = new System.Drawing.Size(214, 17);
             this.chkUseFilterSearch.TabIndex = 8;
@@ -323,7 +322,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkSingleClickOnOpenedConnectionSwitchesToIt);
             this.Controls.Add(this.pnlConfirmCloseConnection);
             this.Name = "ConnectionsPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRdpReconnectionCount)).EndInit();
