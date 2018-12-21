@@ -10,7 +10,6 @@ namespace mRemoteNG.App
     {
         private static AboutWindow _aboutForm;
         private static ActiveDirectoryImportWindow _adimportForm;
-        private static HelpWindow _helpForm;
         private static ExternalToolsWindow _externalappsForm;
         private static PortScanWindow _portscanForm;
         private static UltraVNCWindow _ultravncscForm;
@@ -64,11 +63,6 @@ namespace mRemoteNG.App
                         if (UpdateForm == null || UpdateForm.IsDisposed)
                             UpdateForm = new UpdateWindow();
                         UpdateForm.Show(dockPanel);
-                        break;
-                    case WindowType.Help:
-                        if (_helpForm == null || _helpForm.IsDisposed)
-                            _helpForm = new HelpWindow();
-                        _helpForm.Show(dockPanel);
                         break;
                     case WindowType.ExternalApps:
                         if (_externalappsForm == null || _externalappsForm.IsDisposed)

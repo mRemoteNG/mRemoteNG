@@ -15,7 +15,8 @@ namespace mRemoteNG.App.Info
 	    public const string UrlDonate = "http://donate.mremoteng.org/";
 	    public const string UrlForum = "https://www.reddit.com/r/mRemoteNG/";
 	    public const string UrlBugs = "http://bugs.mremoteng.org/";
-	    public static string ApplicationVersion = Application.ProductVersion;
+        public const string UrlHelp = "https://github.com/mRemoteNG/mRemoteNG/wiki";
+        public static string ApplicationVersion = Application.ProductVersion;
         public static readonly string ProductName = Application.ProductName;
         public static readonly string Copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false)).Copyright;
         public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
@@ -44,7 +45,7 @@ namespace mRemoteNG.App.Info
 			}
 		}
 
-	    public static Version GetApplicationVersion()
+        public static Version GetApplicationVersion()
 	    {
             Version v;
             System.Version.TryParse(ApplicationVersion, out v);

@@ -724,9 +724,6 @@
     <Compile Include="UI\Window\ExternalToolsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Window\HelpWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\WindowList.cs" />
     <Compile Include="UI\Window\PortScanWindow.Designer.cs">
       <DependentUpon>PortScanWindow.cs</DependentUpon>
@@ -933,10 +930,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ExternalToolsWindow.resx">
       <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\HelpWindow.resx">
-      <DependentUpon>HelpWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\PortScanWindow.resx">
