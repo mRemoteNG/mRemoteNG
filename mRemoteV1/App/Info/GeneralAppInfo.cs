@@ -11,10 +11,10 @@ namespace mRemoteNG.App.Info
 {
 	public static class GeneralAppInfo
 	{
-	    public const string UrlHome = "http://www.mremoteng.org/";
-	    public const string UrlDonate = "http://donate.mremoteng.org/";
-	    public const string UrlForum = "https://www.reddit.com/r/mRemoteNG/";
-	    public const string UrlBugs = "http://bugs.mremoteng.org/";
+	    public const string UrlHome = "https://mremoteng.org";
+	    public const string UrlDonate = "https://mremoteng.org/contribute";
+	    public const string UrlForum = "https://reddit.com/r/mRemoteNG";
+	    public const string UrlBugs = "https://github.com/mRemoteNG/mRemoteNG/issues";
         public const string UrlHelp = "https://github.com/mRemoteNG/mRemoteNG/wiki";
         public static string ApplicationVersion = Application.ProductVersion;
         public static readonly string ProductName = Application.ProductName;
