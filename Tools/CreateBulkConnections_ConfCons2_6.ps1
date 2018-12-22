@@ -64,7 +64,7 @@ function ConvertTo-mRNGSerializedXml {
 }
 
 function New-mRNGConnection {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'Credential')]
     Param (
         [Parameter(Mandatory)]
         [string]
@@ -78,7 +78,11 @@ function New-mRNGConnection {
         [mRemoteNG.Connection.Protocol.ProtocolType]
         $Protocol,
 
-        [Parameter()]
+        [Parameter(ParameterSetName = 'Credential')]
+        [pscredential]
+        $Credential,
+
+        [Parameter(ParameterSetName = 'InheritCredential')]
         [switch]
         $InheritCredential,
 
@@ -97,7 +101,13 @@ function New-mRNGConnection {
         Protocol = $Protocol
     }
 
-    if ($PSBoundParameters.ContainsKey('InheritCredential')) {
+    if ($Credential) {
+        $Connection.Username = $Credential.GetNetworkCredential().UserName
+        $Connection.Domain = $Credential.GetNetworkCredential().Domain
+        $Connection.Password = $Credential.GetNetworkCredential().Password
+    }
+
+    if ($InheritCredential) {
         $Connection.Inheritance.Username = $true
         $Connection.Inheritance.Domain = $true
         $Connection.Inheritance.Password = $true
@@ -116,13 +126,17 @@ function New-mRNGConnection {
 }
 
 function New-mRNGContainer {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'Credential')]
     Param (
         [Parameter(Mandatory)]
         [string]
         $Name,
 
-        [Parameter()]
+        [Parameter(ParameterSetName = 'Credential')]
+        [pscredential]
+        $Credential,
+
+        [Parameter(ParameterSetName = 'InheritCredential')]
         [switch]
         $InheritCredential,
 
@@ -135,7 +149,13 @@ function New-mRNGContainer {
         Name = $Name
     }
 
-    if ($PSBoundParameters.ContainsKey('InheritCredential')) {
+    if ($Credential) {
+        $Container.Username = $Credential.GetNetworkCredential().UserName
+        $Container.Domain = $Credential.GetNetworkCredential().Domain
+        $Container.Password = $Credential.GetNetworkCredential().Password
+    }
+
+    if ($InheritCredential) {
         $Container.Inheritance.Username = $true
         $Container.Inheritance.Domain = $true
         $Container.Inheritance.Password = $true
@@ -199,7 +219,8 @@ Export-mRNGXml -Path "$ENV:APPDATA\mRemoteNG\PowerShellGenerated.xml" -Serialize
 # You can also create containers and add connections and containers to them, which will be nested correctly when serialized
 # If you specify the ParentContainer parameter for new connections then there will be no output unless the PassThru parameter is also used
 
-$ProdServers = New-mRNGContainer -Name 'ProdServers'
+$ProdServerCreds = Get-Credential
+$ProdServers = New-mRNGContainer -Name 'ProdServers' -Credential $ProdServerCreds
 
 foreach ($i in 1..3) {
     # Create new connection
@@ -213,7 +234,7 @@ foreach ($i in 1..3) {
     New-mRNGConnection @Splat
 }
 
-$ProdWebServers = New-mRNGContainer -Name 'WebServers' -ParentContainer $ProdServers
+$ProdWebServers = New-mRNGContainer -Name 'WebServers' -ParentContainer $ProdServers -InheritCredential
 
 foreach ($i in 1..3) {
     # Create new connection
