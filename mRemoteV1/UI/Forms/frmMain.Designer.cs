@@ -193,7 +193,7 @@ namespace mRemoteNG.UI.Forms
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FrmMain";
             this.Opacity = 0D;
-            this.Text = "mRemoteNG";
+            this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);

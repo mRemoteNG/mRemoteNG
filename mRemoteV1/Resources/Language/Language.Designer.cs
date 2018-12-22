@@ -223,6 +223,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Place search bar above connection tree.
+        /// </summary>
+        internal static string PlaceSearchBarAboveConnectionTree {
+            get {
+                return ResourceManager.GetString("PlaceSearchBarAboveConnectionTree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prompt to unlock credential repositories on startup.
         /// </summary>
         internal static string PromptUnlockCredReposOnStartup {
