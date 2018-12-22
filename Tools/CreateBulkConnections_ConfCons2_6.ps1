@@ -20,7 +20,7 @@ foreach ($Path in 'HKLM:\SOFTWARE\WOW6432Node\mRemoteNG', 'HKLM:\SOFTWARE\mRemot
 if (!$mRNGPath) {
     Add-Type -AssemblyName System.Windows.Forms
     $FolderBrowser = [System.Windows.Forms.FolderBrowserDialog]@{
-        Description = 'Please select the folder which contains mRemoteNG.exe'
+        Description         = 'Please select the folder which contains mRemoteNG.exe'
         ShowNewFolderButton = $false
     }
     
@@ -44,16 +44,35 @@ function ConvertTo-mRNGSerializedXml {
     Param (
         [Parameter(Mandatory)]
         [mRemoteNG.Connection.ConnectionInfo[]]
-        $Xml,
+        $Xml
+)
 
-        [Parameter()]
-        [pscredential]
-        $Credential = (Get-Credential -Message 'Enter the encryption key you would like to use. This must match the encryption key used by the rest of the confCons file.' -UserName $ENV:USERNAME)
-    )
+    function Get-ChildNodes {
+        Param ($Xml)
 
+        $Xml
+
+        if ($Xml -is [mRemoteNG.Container.ContainerInfo] -and $Xml.HasChildren()) {
+            foreach ($Node in $Xml.Children) {
+                Get-ChildNodes -Xml $Node
+            }
+        }
+    }
+
+    $AllNodes = Get-ChildNodes -Xml $Xml
+    if (
+        $AllNodes.Password -or
+        $AllNodes.RDGatewayPassword -or
+        $AllNodes.VNCProxyPassword
+    ) {
+        $Password = Read-Host -Message 'If you have password protected your ConfCons.xml please enter the password here otherwise just press enter' -AsSecureString
+    }
+    else {
+        $Password = [securestring]::new()
+    }
     $CryptoProvider = [mRemoteNG.Security.SymmetricEncryption.AeadCryptographyProvider]::new()
     $SaveFilter = [mRemoteNG.Security.SaveFilter]::new()
-    $ConnectionNodeSerializer = [mRemoteNG.Config.Serializers.Xml.XmlConnectionNodeSerializer26]::new($CryptoProvider, $Credential.Password, $SaveFilter)
+    $ConnectionNodeSerializer = [mRemoteNG.Config.Serializers.Xml.XmlConnectionNodeSerializer26]::new($CryptoProvider, $Password, $SaveFilter)
     $XmlSerializer = [mRemoteNG.Config.Serializers.Xml.XmlConnectionsSerializer]::new($CryptoProvider, $ConnectionNodeSerializer)
 
     $RootNode = [mRemoteNG.Tree.Root.RootNodeInfo]::new('Connection')
