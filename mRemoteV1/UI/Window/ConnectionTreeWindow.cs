@@ -51,7 +51,18 @@ namespace mRemoteNG.UI.Window
 	            ConnectionTree.UseFiltering = Settings.Default.UseFilterSearch;
 	            ApplyFiltering();
             }
-	    }
+
+            PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
+
+        }
+
+        private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
+        {
+            if (placeSearchBarAboveConnectionTree)
+                tableLayoutPanel1.Dock = DockStyle.Top;
+            else
+                tableLayoutPanel1.Dock = DockStyle.Bottom;
+        }
 
 
 	    #region Form Stuff

@@ -117,29 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.PageIcon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAABMLAAATCwAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAADVYQEFyk4AFcdXAC3JWAA/xVIAScNPAUi+TAA9v0sAK75KABTQTwAEAAAAAAAA
-        AAAAAAAAAAAAAAAAAADGXQAHv1YALMhbAGrAVgCjrUsAxKRHBNOoRgjTqUcEw7RKAKHBUgBmwV4AKM9X
-        AAYAAAAAAAAAAAAAAADCWgABuEcAGLFEAGuCOQHXejoP/KxNJP/hbUH/5H9V/9NrOf+jSxb9o00H2r9X
-        AGrKZAAUAAAAAAAAAAAAAAAAAAAAAKc/BSZPIwHSPScX/4pcRP/Khmb/9ryc//nMt//joHj/sXdd/3lT
-        NP+GRQjdv1sAKAAAAAAAAAAAAAAAAAAAAABvRSSlVDkh/3lkT/+PdmH/rIhr/8KjiP/BpY7/s5iB/5F2
-        YP90W0b/YzwZ/4U+ALEAAAAAAAAAAAAAAACqZztfdVU6/8Oxov+2nIP/pnlM/6h3Sf/DpIf/2Maw/72p
-        i/9/Xz//XDwd/1IuDP9ZMgr/eTYAUwAAAACuXisxYjYYsWc7Fv+qhV//snIw/61PAP+6bCT/6tW///38
-        +v/Wvqb/kF8s/2IwAP9jQB//XDwe/1QsBMVUKAAnYiQAR1YhAexiMAb/mU8G/7hnE//CYwL/yXUj/+a/
-        lP/s1Lb/zZxi/6hsLP+ZbUH/o4xy/39mT/9aNhT3UigCVX0vAV9qLgP9dDsG/65ZBf/AYQX/55ZG/+iy
-        ev/ksXr/0ok5/71mBv+oVAD/uI1d/9TDsv+YhG7/Wz0f/0olBmqWQARafTwH+oNGDP/LcBv/5Ys9//62
-        cv//48L/9LyF/9Z3Kf/FbhL/umMH/693Of+uiF3/lHZd/1w+Iv9CIwVms1oVOZFJEN6OThn/7J5T//6/
-        hf//zKH//9+7//7Cf//ijkn/04Q6/8p5LP+1cCr/l2En/4FeOf9YOx/sPyEESMlsHwypUxSOwG4t//+8
-        f//6zqf/+Nu+///ixv//vob/9Kx1/+zCmv/itYv/uHUz/51kLP+IZED/QSMHpTcZABUAAAAAx1wUGu5v
-        JPHYnnL/59PA//z17v//+Ov//+XC//a5gv/y0rj/7tK2/8KGTv+ndkf/bUYj+jcaACkAAAAAAAAAAAAA
-        AADrZRdXqWI0/8q4qP////////78///24v/7xaD/5LmV/9usff/Djlz/k2Q4/0wkAWoAAAAAAAAAAAAA
-        AAAAAAAAAAAAAOqsdVG0e1Hs0LKV/+zg2f/m1cT/07CU/9Omd//Lj1X/omUt8mUwBGAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAA/u/cF8aBSHqyayrFp2815aBnLeahXhvJpVkKg4A8Ah0AAAAAAAAAAAAA
-        AAAAAAAA4AcAAMADAACAAwAAwAMAAMADAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMAD
-        AADgBwAA8A8AAA==
-</value>
-  </data>
 </root>
