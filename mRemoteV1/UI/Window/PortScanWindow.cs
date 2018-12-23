@@ -156,7 +156,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void ShowImportControls(bool controlsVisible)
 		{
-			pnlScan.Visible = controlsVisible;
+			//pnlScan.Visible = controlsVisible;
 			pnlImport.Visible = controlsVisible;
 			if (controlsVisible)
 			{
