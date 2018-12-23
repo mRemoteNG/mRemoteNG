@@ -5,9 +5,6 @@ using System.IO;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using System.Drawing;
-// ReSharper disable ArrangeRedundantParentheses
-// ReSharper disable RedundantCast
 
 namespace mRemoteNG.UI.Window
 {
@@ -48,20 +45,19 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlTop
             // 
-            this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
             this.pnlTop.Controls.Add(this.pbLogo);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.ForeColor = System.Drawing.Color.White;
-            this.pnlTop.Location = new System.Drawing.Point(-1, -1);
+            this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1121, 145);
+            this.pnlTop.Size = new System.Drawing.Size(1117, 122);
             this.pnlTop.TabIndex = 0;
             // 
             // pbLogo
             // 
             this.pbLogo.Image = global::mRemoteNG.Resources.Header_dark;
-            this.pbLogo.Location = new System.Drawing.Point(8, 8);
+            this.pbLogo.Location = new System.Drawing.Point(0, 0);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(450, 120);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -70,9 +66,6 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlBottom
             // 
-            this.pnlBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBottom.BackColor = System.Drawing.SystemColors.Control;
             this.pnlBottom.Controls.Add(this.lblCredits);
             this.pnlBottom.Controls.Add(this.txtCredits);
@@ -82,10 +75,11 @@ namespace mRemoteNG.UI.Window
             this.pnlBottom.Controls.Add(this.lblChangeLog);
             this.pnlBottom.Controls.Add(this.lblLicense);
             this.pnlBottom.Controls.Add(this.lblCopyright);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBottom.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.pnlBottom.Location = new System.Drawing.Point(-1, 144);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 122);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(1121, 559);
+            this.pnlBottom.Size = new System.Drawing.Size(1117, 583);
             this.pnlBottom.TabIndex = 1;
             // 
             // lblCredits
@@ -93,7 +87,7 @@ namespace mRemoteNG.UI.Window
             this.lblCredits.AutoSize = true;
             this.lblCredits.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblCredits.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblCredits.Location = new System.Drawing.Point(8, 131);
+            this.lblCredits.Location = new System.Drawing.Point(3, 131);
             this.lblCredits.Name = "lblCredits";
             this.lblCredits.Size = new System.Drawing.Size(55, 25);
             this.lblCredits.TabIndex = 11;
@@ -102,8 +96,6 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCredits
             // 
-            this.txtCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtCredits.BackColor = System.Drawing.SystemColors.Control;
             this.txtCredits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCredits.Cursor = System.Windows.Forms.Cursors.Default;
@@ -115,7 +107,7 @@ namespace mRemoteNG.UI.Window
             this.txtCredits.Name = "txtCredits";
             this.txtCredits.ReadOnly = true;
             this.txtCredits.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCredits.Size = new System.Drawing.Size(400, 400);
+            this.txtCredits.Size = new System.Drawing.Size(400, 546);
             this.txtCredits.TabIndex = 7;
             this.txtCredits.TabStop = false;
             // 
@@ -135,7 +127,7 @@ namespace mRemoteNG.UI.Window
             this.txtChangeLog.Name = "txtChangeLog";
             this.txtChangeLog.ReadOnly = true;
             this.txtChangeLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtChangeLog.Size = new System.Drawing.Size(700, 400);
+            this.txtChangeLog.Size = new System.Drawing.Size(696, 424);
             this.txtChangeLog.TabIndex = 10;
             this.txtChangeLog.TabStop = false;
             // 
@@ -144,7 +136,7 @@ namespace mRemoteNG.UI.Window
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblTitle.Location = new System.Drawing.Point(8, 20);
+            this.lblTitle.Location = new System.Drawing.Point(3, 3);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(126, 31);
             this.lblTitle.TabIndex = 0;
@@ -156,7 +148,7 @@ namespace mRemoteNG.UI.Window
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblVersion.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblVersion.Location = new System.Drawing.Point(8, 51);
+            this.lblVersion.Location = new System.Drawing.Point(3, 34);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(55, 25);
             this.lblVersion.TabIndex = 1;
@@ -180,7 +172,7 @@ namespace mRemoteNG.UI.Window
             this.lblLicense.AutoSize = true;
             this.lblLicense.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblLicense.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblLicense.Location = new System.Drawing.Point(8, 101);
+            this.lblLicense.Location = new System.Drawing.Point(3, 84);
             this.lblLicense.Name = "lblLicense";
             this.lblLicense.Size = new System.Drawing.Size(54, 25);
             this.lblLicense.TabIndex = 5;
@@ -192,7 +184,7 @@ namespace mRemoteNG.UI.Window
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblCopyright.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblCopyright.Location = new System.Drawing.Point(8, 76);
+            this.lblCopyright.Location = new System.Drawing.Point(3, 59);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(71, 25);
             this.lblCopyright.TabIndex = 2;
@@ -205,8 +197,8 @@ namespace mRemoteNG.UI.Window
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1117, 705);
-            this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlBottom);
+            this.Controls.Add(this.pnlTop);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

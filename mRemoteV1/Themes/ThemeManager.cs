@@ -233,13 +233,5 @@ namespace mRemoteNG.Themes
 			}
 		}
         #endregion
-
-        #region mRemoteNG default colors
-        public readonly Color mRemoteNG_Dark = ColorTranslator.FromHtml("#343a40");
-        public readonly Color mRemoteNG_Light = ColorTranslator.FromHtml("#e9ecef");
-        public readonly Color mRemoteNG_Blue = ColorTranslator.FromHtml("#4f8aff");
-        public readonly Color mRemoteNG_White = ColorTranslator.FromHtml("#e9ecef");
-        public readonly Color mRemoteNG_Black = ColorTranslator.FromHtml("#212529");
-        #endregion mRemoteNG default colors
     }
 } 
