@@ -106,8 +106,8 @@
     </UI>
     
     <WixVariable Id="WixUILicenseRtf" Value="Resources\License.rtf" />
-    <WixVariable Id="WixUIDialogBmp" Value="Resources\welcome.bmp" />
-    <WixVariable Id="WixUIBannerBmp" Value="Resources\header.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Resources\Installer_Side.png" />
+    <WixVariable Id="WixUIBannerBmp" Value="Resources\Installer_Header.png" />
     
     <!-- Provide option to run app after install -->
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.FinishPage_LaunchMremoteNow)" />

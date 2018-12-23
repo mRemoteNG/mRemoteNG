@@ -19,7 +19,8 @@
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <ApplicationIcon>Resources\Icons\mRemote_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <OptionStrict>Off</OptionStrict>
     <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
@@ -972,6 +973,14 @@
     <None Include="app.config" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
+    <None Include="Resources\Templates\AppIcon.psd" />
+    <None Include="Resources\Fonts\HandelGotD.ttf" />
+    <None Include="Resources\Fonts\HandelGotDBol.ttf" />
+    <None Include="Resources\Fonts\HandelGotDLig.ttf" />
+    <None Include="Resources\Templates\Header_dark.psd" />
+    <None Include="Resources\Templates\Header_light.psd" />
+    <None Include="Resources\Templates\Installer_Header.psd" />
+    <None Include="Resources\Templates\Installer_Side.psd" />
     <None Include="Resources\Themes\darcula.vstheme">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -984,6 +993,10 @@
     <None Include="Resources\Themes\vs2015light.vstheme">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Templates\VisualElements_150_dark.psd" />
+    <None Include="Resources\Templates\VisualElements_150_light.psd" />
+    <None Include="Resources\Templates\VisualElements_70_dark.psd" />
+    <None Include="Resources\Templates\VisualElements_70_light.psd" />
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -999,6 +1012,7 @@
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Icons\AppIcon.ico" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1439,7 +1453,6 @@
     <Content Include="Resources\Images\FamFamFam\cog.png" />
     <Content Include="Resources\Images\database.bmp" />
     <None Include="Resources\Images\Copy.png" />
-    <None Include="Resources\Icons\mRemote_Icon.ico" />
     <None Include="Resources\Icons\Sessions_Icon.ico" />
     <None Include="Resources\Icons\Info_Icon.ico" />
     <None Include="Properties\Settings.settings">

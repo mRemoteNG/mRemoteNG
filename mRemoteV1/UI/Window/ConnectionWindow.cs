@@ -626,7 +626,7 @@ namespace mRemoteNG.UI.Window
                         /* rare failure here. While ExternalTool.Image already tries to default this
                          * try again so it's not null/doesn't crash.
                          */
-                        Image = externalTool.Image ?? Resources.mRemote_Icon.ToBitmap()
+                        Image = externalTool.Image ?? Resources.AppIcon.ToBitmap()
                     };
 
                     nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender).Tag as ExternalTool);

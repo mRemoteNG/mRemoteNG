@@ -188,7 +188,7 @@ namespace mRemoteNG.UI.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1129, 571);
             this.Controls.Add(this.tsContainer);
-            this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
+            this.Icon = global::mRemoteNG.Resources.AppIcon;
             this.MainMenuStrip = this.msMain;
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FrmMain";

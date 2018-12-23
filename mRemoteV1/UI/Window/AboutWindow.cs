@@ -224,7 +224,7 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.pnlBottom);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
+            this.Icon = global::mRemoteNG.Resources.AppIcon;
             this.MaximumSize = new System.Drawing.Size(20000, 10000);
             this.Name = "AboutWindow";
             this.TabText = "About";
