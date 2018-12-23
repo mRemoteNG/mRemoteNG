@@ -16,7 +16,7 @@ github.com/peterchenadded
 Brandon Wulf (github.com/mrwulf)
 Pedro Rodrigues (github.com/pedro2555)
 github.com/dekelMP
-github.com/farosch
+Faryan Rezagholi (github.com/farosch)
 Bruce (github.com/brucetp)
 Camilo Alvarez (github.com/jotatsu)
 github.com/DamianBis
