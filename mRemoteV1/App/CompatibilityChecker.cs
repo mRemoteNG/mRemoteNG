@@ -21,10 +21,14 @@ namespace mRemoteNG.App
         {
             messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS Policy...", true);
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
-            var errorText = string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName,
-                GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            var errorText = string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName, GeneralAppInfo.ProductName);
             messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
-            MessageBox.Show(FrmMain.Default, errorText);
+            MessageBox.Show(FrmMain.Default, errorText, GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            var CrashOverride = MessageBox.Show(FrmMain.Default, "TEST BUILD -- OK to test mRemoteNG with FIPS Enabled.\nCancel to Exit.", GeneralAppInfo.ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (CrashOverride == DialogResult.OK)
+                return;
+
             Environment.Exit(1);
         }
 

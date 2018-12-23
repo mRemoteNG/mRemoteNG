@@ -1,3 +1,10 @@
+1.76.13 (2018-12-22):
+
+Changes:
+--------
+#222: Pre-Release Test build for running on systems with FIPS Enabled
+
+
 1.76.12 (2018-11-08):
 
 Features/Enhancements:
