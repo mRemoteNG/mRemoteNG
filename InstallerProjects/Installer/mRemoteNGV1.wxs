@@ -27,7 +27,7 @@
     <Property Id='LEGACYVERSIONINSTALLED' Value='0' />
     <PropertyRef Id="NETFRAMEWORK40FULL" />
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
-    <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
+    <Icon Id="AppIcon.ico" SourceFile="Resources\AppIcon.ico" />
     <CustomActionRef Id='SaveCmdlineINSTALLDIR' />
 
 
