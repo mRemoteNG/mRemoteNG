@@ -485,6 +485,12 @@
     <Compile Include="UI\Forms\frmOptions.Designer.cs">
       <DependentUpon>frmOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\FrmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmSplashScreen.Designer.cs">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\FullscreenHandler.cs" />
     <Compile Include="UI\Forms\Input\InputBox.cs">
       <SubType>Form</SubType>
@@ -794,6 +800,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmSplashScreen.resx">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Input\InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
