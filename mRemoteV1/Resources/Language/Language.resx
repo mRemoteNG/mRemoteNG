@@ -2737,4 +2737,12 @@ This page will walk you through the process of upgrading your connections file o
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Place search bar above connection tree</value>
   </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Release Channel</value>
+  </data>
+  <data name="strUpdateChannelExplaination" xml:space="preserve">
+    <value>Stable channel includes final releases only.
+Beta channel includes Betas and Release Candidates.
+Development Channel includes Alphas, Betas and Release Candidates.</value>
+  </data>
 </root>

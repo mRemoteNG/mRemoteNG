@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -32,6 +33,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             set { }
         }
 
+        public override Icon PageIcon { get; protected set; } = Resources.Update_Icon;
+
         public override void ApplyLanguage()
         {
             base.ApplyLanguage();
@@ -48,6 +51,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseProxyAuthentication.Text = Language.strCheckboxProxyAuthentication;
             lblProxyUsername.Text = Language.strLabelUsername;
             lblProxyPassword.Text = Language.strLabelPassword;
+
+            lblReleaseChannel.Text = Language.strReleaseChannel;
+            lblUpdateChannelExplaination.Text = Language.strUpdateChannelExplaination;
 
             btnTestProxy.Text = Language.strButtonTestProxy;
         }

@@ -6416,6 +6416,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Release Channel.
+        /// </summary>
+        internal static string strReleaseChannel {
+            get {
+                return ResourceManager.GetString("strReleaseChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remote file.
         /// </summary>
         internal static string strRemoteFile {
@@ -7456,6 +7465,17 @@ namespace mRemoteNG {
         internal static string strUpdateAvailable {
             get {
                 return ResourceManager.GetString("strUpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stable channel includes final releases only.
+        ///Beta channel includes Betas and Release Candidates.
+        ///Development Channel includes Alphas, Betas and Release Candidates..
+        /// </summary>
+        internal static string strUpdateChannelExplaination {
+            get {
+                return ResourceManager.GetString("strUpdateChannelExplaination", resourceCulture);
             }
         }
         

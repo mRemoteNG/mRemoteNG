@@ -29,13 +29,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdatesPage));
             this.lblUpdatesExplanation = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlUpdateCheck = new System.Windows.Forms.Panel();
             this.btnUpdateCheckNow = new mRemoteNG.UI.Controls.Base.NGButton();
             this.chkCheckForUpdatesOnStartup = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.cboUpdateCheckFrequency = new mRemoteNG.UI.Controls.Base.NGComboBox();
-            this.textBox1 = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblReleaseChannel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.cboReleaseChannel = new mRemoteNG.UI.Controls.Base.NGComboBox();
             this.pnlProxy = new System.Windows.Forms.Panel();
@@ -53,6 +51,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtProxyPassword = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.btnTestProxy = new mRemoteNG.UI.Controls.Base.NGButton();
             this.pnlReleaseChannel = new System.Windows.Forms.Panel();
+            this.lblUpdateChannelExplaination = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlUpdateCheck.SuspendLayout();
             this.pnlProxy.SuspendLayout();
             this.pnlProxyBasic.SuspendLayout();
@@ -112,20 +111,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency";
             this.cboUpdateCheckFrequency.Size = new System.Drawing.Size(120, 21);
             this.cboUpdateCheckFrequency.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(3, 47);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(366, 44);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Stable channel includes final releases only.\r\nBeta channel includes Betas & Relea" +
-    "se Candidates.\r\nDevelopment Channel includes Alphas, Betas & Release Candidates." +
-    "";
             // 
             // lblReleaseChannel
             // 
@@ -305,13 +290,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // pnlReleaseChannel
             // 
-            this.pnlReleaseChannel.Controls.Add(this.textBox1);
+            this.pnlReleaseChannel.Controls.Add(this.lblUpdateChannelExplaination);
             this.pnlReleaseChannel.Controls.Add(this.lblReleaseChannel);
             this.pnlReleaseChannel.Controls.Add(this.cboReleaseChannel);
             this.pnlReleaseChannel.Location = new System.Drawing.Point(3, 123);
             this.pnlReleaseChannel.Name = "pnlReleaseChannel";
             this.pnlReleaseChannel.Size = new System.Drawing.Size(604, 97);
             this.pnlReleaseChannel.TabIndex = 2;
+            // 
+            // lblUpdateChannelExplaination
+            // 
+            this.lblUpdateChannelExplaination.Location = new System.Drawing.Point(3, 46);
+            this.lblUpdateChannelExplaination.Name = "lblUpdateChannelExplaination";
+            this.lblUpdateChannelExplaination.Size = new System.Drawing.Size(598, 44);
+            this.lblUpdateChannelExplaination.TabIndex = 0;
+            this.lblUpdateChannelExplaination.Text = "Stable channel includes final releases only.\r\nBeta channel includes Betas & Relea" +
+    "se Candidates.\r\nDevelopment Channel includes Alphas, Betas and Release Candidate" +
+    "s.";
             // 
             // UpdatesPage
             // 
@@ -322,7 +317,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.pnlUpdateCheck);
             this.Controls.Add(this.pnlProxy);
             this.Name = "UpdatesPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.pnlUpdateCheck.ResumeLayout(false);
             this.pnlUpdateCheck.PerformLayout();
@@ -359,7 +353,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		internal Controls.Base.NGButton btnTestProxy;
         private Controls.Base.NGLabel lblReleaseChannel;
         private Controls.Base.NGComboBox cboReleaseChannel;
-        private Controls.Base.NGTextBox textBox1;
         private System.Windows.Forms.Panel pnlReleaseChannel;
+        internal Controls.Base.NGLabel lblUpdateChannelExplaination;
     }
 }

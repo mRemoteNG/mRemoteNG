@@ -2620,4 +2620,12 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Suchleiste über den Verbindungen anzeigen</value>
   </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Update-Kanal</value>
+  </data>
+  <data name="strUpdateChannelExplaination" xml:space="preserve">
+    <value>Der Stable-Kanal enthält nur die endgültigen Versionen.
+Der Beta-Kanal beinhaltet Betas und Freigabekandidaten.
+Der Development-Kanal umfasst Alphas, Betas und Freigabekandidaten.</value>
+  </data>
 </root>
