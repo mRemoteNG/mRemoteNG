@@ -23,7 +23,6 @@ namespace mRemoteNG.UI.Window
 		internal Controls.Base.NGLabel lblChangeLog;
 		internal Panel pnlBottom;
 		internal PictureBox pbLogo;
-		internal Controls.Base.NGLabel lblEdition;
         internal Controls.Base.NGLabel lblCredits;
         internal Controls.Base.NGTextBox txtCredits;
         internal Panel pnlTop;
@@ -32,7 +31,6 @@ namespace mRemoteNG.UI.Window
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutWindow));
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.lblEdition = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.lblCredits = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -52,28 +50,13 @@ namespace mRemoteNG.UI.Window
             // 
             this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTop.Controls.Add(this.lblEdition);
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
             this.pnlTop.Controls.Add(this.pbLogo);
             this.pnlTop.ForeColor = System.Drawing.Color.White;
             this.pnlTop.Location = new System.Drawing.Point(-1, -1);
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(1121, 145);
             this.pnlTop.TabIndex = 0;
-            this.pnlTop.BackColor = Themes.ThemeManager.getInstance().mRemoteNG_Dark;
-            // 
-            // lblEdition
-            // 
-            this.lblEdition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEdition.BackColor = System.Drawing.Color.Black;
-            this.lblEdition.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEdition.ForeColor = System.Drawing.Color.White;
-            this.lblEdition.Location = new System.Drawing.Point(845, 112);
-            this.lblEdition.Name = "lblEdition";
-            this.lblEdition.Size = new System.Drawing.Size(264, 24);
-            this.lblEdition.TabIndex = 0;
-            this.lblEdition.Text = "Edition";
-            this.lblEdition.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.lblEdition.Visible = false;
             // 
             // pbLogo
             // 
@@ -224,17 +207,11 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(1117, 705);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlBottom);
-            this.DockAreas = DockAreas.Float | DockAreas.DockLeft
-            | DockAreas.DockRight
-            | DockAreas.DockTop
-            | DockAreas.DockBottom
-            | DockAreas.Document;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(20000, 10000);
             this.Name = "AboutWindow";
-            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Unknown;
             this.TabText = "About";
             this.Text = "About";
             this.Load += new System.EventHandler(this.About_Load);
@@ -278,41 +255,38 @@ namespace mRemoteNG.UI.Window
             pnlBottom.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            lblEdition.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            lblEdition.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyEditions()
 		{
             #if PORTABLE
-			lblEdition.Text = Language.strLabelPortableEdition;
-			lblEdition.Visible = true;
+			lblTitle.Text += " " + Language.strLabelPortableEdition;
             #endif
 		}
 
-#if false
-        private void FillLinkLabel(LinkLabel llbl, string txt, string URL)
-		{
-			llbl.Links.Clear();
+        #if false
+                private void FillLinkLabel(LinkLabel llbl, string txt, string URL)
+		        {
+			        llbl.Links.Clear();
 					
-			int Open = txt.IndexOf("[");
-			while (Open != -1)
-			{
-				txt = txt.Remove(Open, 1);
-				int Close = txt.IndexOf("]", Open);
-				if (Close == -1)
-				{
-					break;
-				}
-				txt = txt.Remove(Close, 1);
-				llbl.Links.Add(Open, Close - Open, URL);
-				Open = txt.IndexOf("[", Open);
-			}
+			        int Open = txt.IndexOf("[");
+			        while (Open != -1)
+			        {
+				        txt = txt.Remove(Open, 1);
+				        int Close = txt.IndexOf("]", Open);
+				        if (Close == -1)
+				        {
+					        break;
+				        }
+				        txt = txt.Remove(Close, 1);
+				        llbl.Links.Add(Open, Close - Open, URL);
+				        Open = txt.IndexOf("[", Open);
+			        }
 					
-			llbl.Text = txt;
-		}
-#endif
-#endregion
+			        llbl.Text = txt;
+		        }
+        #endif
+        #endregion
 				
 #region Form Stuff
 
