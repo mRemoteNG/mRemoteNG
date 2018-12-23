@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using WeifenLuo.WinFormsUI.Docking;
@@ -23,7 +24,6 @@ namespace mRemoteNG.Themes
         private bool _themeActive;
         private static ThemeManager themeInstance;
         #endregion
-
 
         #region Constructors
         private ThemeManager()
@@ -233,5 +233,13 @@ namespace mRemoteNG.Themes
 			}
 		}
         #endregion
-	}
+
+        #region mRemoteNG default colors
+        public readonly Color mRemoteNG_Dark = ColorTranslator.FromHtml("#343a40");
+        public readonly Color mRemoteNG_Light = ColorTranslator.FromHtml("#e9ecef");
+        public readonly Color mRemoteNG_Blue = ColorTranslator.FromHtml("#4f8aff");
+        public readonly Color mRemoteNG_White = ColorTranslator.FromHtml("#e9ecef");
+        public readonly Color mRemoteNG_Black = ColorTranslator.FromHtml("#212529");
+        #endregion mRemoteNG default colors
+    }
 } 

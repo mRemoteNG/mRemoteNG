@@ -1012,6 +1012,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Icons\AppIcon.ico" />
+    <None Include="Resources\Images\Header_dark.png" />
+    <None Include="Resources\Images\AppIconPng.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1255,7 +1257,6 @@
     <None Include="Resources\Icons\Play_Quick_Icon.ico" />
     <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
     <None Include="Resources\Images\SSHTransfer.png" />
-    <None Include="Resources\Images\mRemote.png" />
     <None Include="Resources\Images\ErrorsAndInfos.png" />
     <None Include="Resources\Images\Screenshot.png" />
     <None Include="Resources\Images\Sessions.png" />
@@ -1488,7 +1489,6 @@
     <None Include="Resources\Images\NewConnection.png" />
     <None Include="Resources\Images\New.png" />
     <None Include="Resources\Images\Minimize.png" />
-    <None Include="Resources\Images\Logo.png" />
     <None Include="Resources\Images\Keyboard.png" />
     <None Include="Resources\Images\InformationSmall.png" />
     <None Include="Resources\Images\Information.png" />

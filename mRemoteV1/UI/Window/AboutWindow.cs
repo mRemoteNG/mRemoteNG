@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using System.Drawing;
 // ReSharper disable ArrangeRedundantParentheses
 // ReSharper disable RedundantCast
 
@@ -26,9 +27,10 @@ namespace mRemoteNG.UI.Window
         internal Controls.Base.NGLabel lblCredits;
         internal Controls.Base.NGTextBox txtCredits;
         internal Panel pnlTop;
-				
-		private void InitializeComponent()
+
+        private void InitializeComponent()
 		{
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutWindow));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblEdition = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
@@ -50,7 +52,6 @@ namespace mRemoteNG.UI.Window
             // 
             this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTop.BackColor = System.Drawing.Color.Black;
             this.pnlTop.Controls.Add(this.lblEdition);
             this.pnlTop.Controls.Add(this.pbLogo);
             this.pnlTop.ForeColor = System.Drawing.Color.White;
@@ -58,6 +59,7 @@ namespace mRemoteNG.UI.Window
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(1121, 145);
             this.pnlTop.TabIndex = 0;
+            this.pnlTop.BackColor = Themes.ThemeManager.getInstance().mRemoteNG_Dark;
             // 
             // lblEdition
             // 
@@ -75,10 +77,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pbLogo
             // 
-            this.pbLogo.Image = global::mRemoteNG.Resources.Logo;
+            this.pbLogo.Image = global::mRemoteNG.Resources.Header_dark;
             this.pbLogo.Location = new System.Drawing.Point(8, 8);
             this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(492, 128);
+            this.pbLogo.Size = new System.Drawing.Size(450, 120);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbLogo.TabIndex = 1;
             this.pbLogo.TabStop = false;
@@ -222,11 +224,17 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(1117, 705);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlBottom);
+            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) 
+            | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight) 
+            | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) 
+            | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom) 
+            | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Icon = global::mRemoteNG.Resources.AppIcon;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(20000, 10000);
             this.Name = "AboutWindow";
+            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Unknown;
             this.TabText = "About";
             this.Text = "About";
             this.Load += new System.EventHandler(this.About_Load);
@@ -268,7 +276,7 @@ namespace mRemoteNG.UI.Window
             ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             pnlBottom.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             pnlBottom.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlTop.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             lblEdition.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             lblEdition.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");

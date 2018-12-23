@@ -123,6 +123,16 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AppIconPng {
+            get {
+                object obj = ResourceManager.GetObject("AppIconPng", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap application_side_tree {
             get {
                 object obj = ResourceManager.GetObject("application_side_tree", resourceCulture);
@@ -573,6 +583,16 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Header_dark {
+            get {
+                object obj = ResourceManager.GetObject("Header_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Help {
             get {
                 object obj = ResourceManager.GetObject("Help", resourceCulture);
@@ -773,16 +793,6 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Logo {
-            get {
-                object obj = ResourceManager.GetObject("Logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Monitor {
             get {
                 object obj = ResourceManager.GetObject("Monitor", resourceCulture);
@@ -816,16 +826,6 @@ namespace mRemoteNG {
         internal static System.Drawing.Bitmap Monitor_GoTo {
             get {
                 object obj = ResourceManager.GetObject("Monitor_GoTo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap mRemote {
-            get {
-                object obj = ResourceManager.GetObject("mRemote", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
