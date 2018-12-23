@@ -261,7 +261,7 @@ namespace mRemoteNG.UI.Window
 	        }
         }
 
-	    private void JumpToNode(ConnectionInfo connectionInfo)
+	    public void JumpToNode(ConnectionInfo connectionInfo)
 	    {
 	        if (connectionInfo == null)
 	        {
