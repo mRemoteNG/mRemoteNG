@@ -430,6 +430,17 @@ namespace mRemoteNG.UI.Window
                     cmenTabPuttySettings.Visible = false;
                 }
 
+                if (TabController.TabPages.Count > 1)
+                    cmenTabDisconnectOthers.Visible = true;
+                else
+                    cmenTabDisconnectOthers.Visible = false;
+
+                if (TabController.TabPages.Count > 1 && TabController.SelectedIndex == 0)
+                    cmenTabDisconnectOthersRight.Visible = true;
+                else
+                    cmenTabDisconnectOthersRight.Visible = false;
+
+
                 AddExternalApps();
             }
             catch (Exception ex)
