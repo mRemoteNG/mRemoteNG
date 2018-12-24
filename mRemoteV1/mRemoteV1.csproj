@@ -1022,7 +1022,6 @@
     </Content>
     <None Include="Resources\Icons\AppIcon.ico" />
     <None Include="Resources\Images\Header_dark.png" />
-    <None Include="Resources\Images\AppIconPng.png" />
     <None Include="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1032,6 +1031,7 @@
     <None Include="Resources\Tiles\VisualElements_150.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Images\AppIcon_pixel.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
