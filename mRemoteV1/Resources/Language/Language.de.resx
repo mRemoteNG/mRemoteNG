@@ -955,7 +955,7 @@ Starte mit neuer Datei.</value>
     <value>Ordner löschen...</value>
   </data>
   <data name="strMenuDisconnect" xml:space="preserve">
-    <value>Trennen</value>
+    <value>Tab schließen</value>
   </data>
   <data name="strMenuDonate" xml:space="preserve">
     <value>Spenden</value>
@@ -2627,5 +2627,11 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
     <value>Der Stable-Kanal enthält nur die endgültigen Versionen.
 Der Beta-Kanal beinhaltet Betas und Freigabekandidaten.
 Der Development-Kanal umfasst Alphas, Betas und Freigabekandidaten.</value>
+  </data>
+  <data name="strMenuDisconnectOthers" xml:space="preserve">
+    <value>Andere Tabs schließen</value>
+  </data>
+  <data name="strMenuDisconnectOthersRight" xml:space="preserve">
+    <value>Tabs rechts schließen</value>
   </data>
 </root>
