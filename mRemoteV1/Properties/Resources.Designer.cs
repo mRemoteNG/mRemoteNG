@@ -123,9 +123,9 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AppIconPng {
+        internal static System.Drawing.Bitmap AppIcon_pixel {
             get {
-                object obj = ResourceManager.GetObject("AppIconPng", resourceCulture);
+                object obj = ResourceManager.GetObject("AppIcon_pixel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -833,11 +833,11 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to &lt;Application xmlns:xsi=&apos;http://www.w3.org/2001/XMLSchema-instance&apos;&gt;
         ///  &lt;VisualElements
-        ///      ShowNameOnSquare150x150Logo=&apos;on&apos;
-        ///      Square150x150Logo=&apos;VisualElements_150.png&apos;
-        ///      Square70x70Logo=&apos;VisualElements_70.png&apos;
-        ///      ForegroundText=&apos;light&apos;
-        ///      BackgroundColor=&apos;#000f40&apos;/&gt;
+        ///    BackgroundColor=&apos;#343A40&apos;
+        ///    ShowNameOnSquare150x150Logo=&apos;on&apos;
+        ///    ForegroundText=&apos;light&apos;
+        ///		Square150x150Logo=&apos;VisualElements_150.png&apos;
+        ///		Square70x70Logo=&apos;VisualElements_70.png&apos;/&gt;
         ///&lt;/Application&gt;
         ///.
         /// </summary>
