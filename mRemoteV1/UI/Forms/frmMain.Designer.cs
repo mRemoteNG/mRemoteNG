@@ -28,6 +28,7 @@ namespace mRemoteNG.UI.Forms
 		{
             this.components = new System.ComponentModel.Container();
             mRemoteNG.Connection.ConnectionInitiator connectionInitiator1 = new mRemoteNG.Connection.ConnectionInitiator();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new mRemoteNG.UI.Menu.MainFileMenu();
@@ -74,7 +75,7 @@ namespace mRemoteNG.UI.Forms
             this.msMain.Location = new System.Drawing.Point(3, 50);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.msMain.Size = new System.Drawing.Size(181, 24);
+            this.msMain.Size = new System.Drawing.Size(301, 24);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
@@ -188,7 +189,7 @@ namespace mRemoteNG.UI.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1129, 571);
             this.Controls.Add(this.tsContainer);
-            this.Icon = global::mRemoteNG.Resources.AppIcon;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMain;
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FrmMain";

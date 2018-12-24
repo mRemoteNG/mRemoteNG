@@ -46,7 +46,7 @@ namespace mRemoteNG.Tools
                 {
                     Text = @"mRemoteNG",
                     BalloonTipText = @"mRemoteNG",
-                    Icon = Resources.AppIcon,
+                    Icon = Resources.PixelAppIcon,
                     ContextMenuStrip = _cMen,
                     Visible = true
                 };

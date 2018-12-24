@@ -1032,6 +1032,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Images\AppIcon_pixel.png" />
+    <None Include="Resources\AppIcon_pixel.ico" />
+    <Content Include="Resources\Templates\AppIcon_pixel.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
