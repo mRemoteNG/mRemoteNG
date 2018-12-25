@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -13,6 +14,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PopulateBlockCipherDropDown();
             ApplyTheme();
         }
+
+        public override Icon PageIcon { get; protected set; } = Resources.Shield_Icon;
 
         [Browsable(false)]
         public override string PageName

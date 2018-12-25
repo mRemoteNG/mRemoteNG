@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialsPage));
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
             this.radCredentialsCustom = new mRemoteNG.UI.Controls.Base.NGRadioButton();
             this.lblDefaultCredentials = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -166,8 +165,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlDefaultCredentials);
             this.Name = "CredentialsPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             this.pnlDefaultCredentials.ResumeLayout(false);
             this.pnlDefaultCredentials.PerformLayout();
             this.ResumeLayout(false);

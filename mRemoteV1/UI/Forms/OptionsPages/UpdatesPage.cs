@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -25,6 +26,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         }
 
         #region Public Methods
+
+        public override Icon PageIcon { get; protected set; } = Resources.Update_Icon;
 
         public override string PageName
         {

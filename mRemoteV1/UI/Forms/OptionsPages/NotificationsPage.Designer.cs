@@ -30,7 +30,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationsPage));
             this.labelSwitchToErrorsAndInfos = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.chkSwitchToMCInformation = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkSwitchToMCErrors = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -425,8 +424,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.groupBoxLogging);
             this.Controls.Add(this.groupBoxNotifications);
             this.Name = "NotificationsPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             this.groupBoxNotifications.ResumeLayout(false);
             this.groupBoxNotifications.PerformLayout();
             this.groupBoxLogging.ResumeLayout(false);

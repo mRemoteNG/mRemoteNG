@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class TabsPanelsPage
@@ -7,6 +9,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             ApplyTheme();
         }
+
+        public override Icon PageIcon { get; protected set; } = Resources.Tab_Icon;
 
         public override string PageName
         {

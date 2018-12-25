@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
@@ -17,6 +18,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ApplyTheme();
             _databaseConnectionTester = new SqlDatabaseConnectionTester();
         }
+
+        public override Icon PageIcon { get; protected set; } = Resources.Database_Icon;
 
         public override string PageName
         {

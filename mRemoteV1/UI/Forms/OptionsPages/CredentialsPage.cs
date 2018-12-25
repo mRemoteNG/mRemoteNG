@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using mRemoteNG.App;
 using mRemoteNG.Security.SymmetricEncryption;
 
@@ -11,6 +12,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             ApplyTheme();
         }
+
+        public override Icon PageIcon { get; protected set; } = Resources.Key_Icon;
 
         public override string PageName {
             get => Language.Credentials;

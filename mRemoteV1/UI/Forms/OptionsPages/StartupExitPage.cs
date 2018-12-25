@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -9,6 +10,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             ApplyTheme();
         }
+
+        public override Icon PageIcon { get; protected set; } = Resources.StartupExit_Icon;
 
         public override string PageName
         {
