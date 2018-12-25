@@ -34,13 +34,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSwitchToMCInformation = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkSwitchToMCErrors = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkSwitchToMCWarnings = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.groupBoxNotifications = new System.Windows.Forms.GroupBox();
+            this.groupBoxNotifications = new mRemoteNG.UI.Controls.Base.NGGroupBox();
             this.labelNotificationsShowTypes = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.chkShowErrorInMC = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkShowWarningInMC = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkShowInfoInMC = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkShowDebugInMC = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.groupBoxLogging = new System.Windows.Forms.GroupBox();
+            this.groupBoxLogging = new mRemoteNG.UI.Controls.Base.NGGroupBox();
             this.tblLogging = new System.Windows.Forms.TableLayoutPanel();
             this.chkLogDebugMsgs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkLogInfoMsgs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.labelLogFilePath = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.textBoxLogPath = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
-            this.groupBoxPopups = new System.Windows.Forms.GroupBox();
+            this.groupBoxPopups = new mRemoteNG.UI.Controls.Base.NGGroupBox();
             this.tblPopups = new System.Windows.Forms.TableLayoutPanel();
             this.chkPopupDebug = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkPopupError = new mRemoteNG.UI.Controls.Base.NGCheckBox();
