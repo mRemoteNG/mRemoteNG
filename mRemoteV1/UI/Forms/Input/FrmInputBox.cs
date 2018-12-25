@@ -3,13 +3,18 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.Input
 {
-    public partial class InputBox : Form
+    public partial class FrmInputBox : Form
     {
         private readonly DisplayProperties _display = new DisplayProperties();
+        internal string returnValue;
 
-        public InputBox()
+        public FrmInputBox(string title, string promptText, ref string value)
         {
             InitializeComponent();
+
+            Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
             ApplyLanguage();
             ApplyTheme();
         }
@@ -27,14 +32,17 @@ namespace mRemoteNG.UI.Forms.Input
             ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
-        public DialogResult ShowAsDialog(string title, string promptText, ref string value)
+        private void buttonOk_Click(object sender, System.EventArgs e)
         {
-            Text = title;
-            label.Text = promptText;
-            textBox.Text = value;
-            var dialogResult = ShowDialog();
-            value = textBox.Text;
-            return dialogResult;
+            DialogResult = DialogResult.OK;
+            returnValue = textBox.Text;
+            Close();
+        }
+
+        private void buttonCancel_Click(object sender, System.EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

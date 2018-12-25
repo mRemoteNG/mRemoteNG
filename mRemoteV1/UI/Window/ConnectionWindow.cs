@@ -785,10 +785,13 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var newTitle = TabController.SelectedTab.Title;
-                if (new InputBox().ShowAsDialog(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK && 
-                    !string.IsNullOrEmpty(newTitle))
-                    TabController.SelectedTab.Title = newTitle.Replace("&", "&&");
+                var title = TabController.SelectedTab.Title;
+                using (FrmInputBox frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref title))
+                {
+                    DialogResult dr = frmInputBox.ShowDialog();
+                    if (dr == DialogResult.OK && !string.IsNullOrEmpty(frmInputBox.returnValue))
+                        TabController.SelectedTab.Title = frmInputBox.returnValue;// newTitle.Replace("&", "&&");
+                }
             }
             catch (Exception ex)
             {

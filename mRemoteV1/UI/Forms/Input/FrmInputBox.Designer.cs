@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms.Input
 {
-    partial class InputBox
+    partial class FrmInputBox
     {
         /// <summary>
         /// Required designer variable.
@@ -50,9 +50,9 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(284, 81);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -66,6 +66,7 @@
             this.buttonOk.TabIndex = 0;
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // buttonCancel
             // 
@@ -78,42 +79,41 @@
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // textBox
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBox, 3);
             this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox.Location = new System.Drawing.Point(10, 26);
-            this.textBox.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.textBox.Location = new System.Drawing.Point(3, 27);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(264, 20);
+            this.textBox.Size = new System.Drawing.Size(278, 20);
             this.textBox.TabIndex = 2;
             // 
             // label
             // 
             this.label.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label, 3);
-            this.label.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label.Location = new System.Drawing.Point(10, 10);
-            this.label.Margin = new System.Windows.Forms.Padding(10, 10, 3, 0);
+            this.label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label.Location = new System.Drawing.Point(3, 0);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(33, 13);
+            this.label.Size = new System.Drawing.Size(278, 24);
             this.label.TabIndex = 3;
             this.label.Text = "Label";
+            this.label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // InputBox
+            // FrmInputBox
             // 
-            this.AcceptButton = this.buttonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(284, 81);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "InputBox";
+            this.Name = "FrmInputBox";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
