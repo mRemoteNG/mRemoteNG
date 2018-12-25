@@ -11,6 +11,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
+            PageIcon = Resources.Root_Icon;
         }
 
         public override string PageName
@@ -28,6 +29,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
+            chkPlaceSearchBarAboveConnectionTree.Text = Language.PlaceSearchBarAboveConnectionTree;
 
             lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
@@ -49,6 +51,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Checked = Settings.Default.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
+            chkPlaceSearchBarAboveConnectionTree.Checked = Settings.Default.PlaceSearchBarAboveConnectionTree;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
@@ -78,6 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
             Settings.Default.SaveConnectionsAfterEveryEdit = chkSaveConnectionsAfterEveryEdit.Checked;
             Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
+            Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
 
             Settings.Default.RdpReconnectionCount = (int) numRdpReconnectionCount.Value;
             Settings.Default.ConRDPOverallConnectionTimeout = (int) numRDPConTimeout.Value;

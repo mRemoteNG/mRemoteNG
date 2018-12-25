@@ -2734,4 +2734,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strMenuCopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
   </data>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Place search bar above connection tree</value>
+  </data>
 </root>
