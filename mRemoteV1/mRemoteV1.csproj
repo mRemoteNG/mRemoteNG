@@ -989,9 +989,6 @@
     <None Include="Resources\Templates\Header_light.psd" />
     <None Include="Resources\Templates\Installer_Header.psd" />
     <None Include="Resources\Templates\Installer_Side.psd" />
-    <None Include="Resources\Themes\mRemoteNG.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Themes\darcula.vstheme">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
