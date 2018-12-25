@@ -943,16 +943,16 @@ Starte mit neuer Datei.</value>
     <value>STRG-ESC</value>
   </data>
   <data name="strMenuDelete" xml:space="preserve">
-    <value>Löschen...</value>
+    <value>Löschen</value>
   </data>
   <data name="strMenuDeleteConnection" xml:space="preserve">
-    <value>Verbindung löschen...</value>
+    <value>Verbindung löschen</value>
   </data>
   <data name="strMenuDeleteExternalTool" xml:space="preserve">
     <value>Entfernen</value>
   </data>
   <data name="strMenuDeleteFolder" xml:space="preserve">
-    <value>Ordner löschen...</value>
+    <value>Ordner löschen</value>
   </data>
   <data name="strMenuDisconnect" xml:space="preserve">
     <value>Tab schließen</value>
@@ -1018,7 +1018,7 @@ Starte mit neuer Datei.</value>
     <value>Alle Löschen</value>
   </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
-    <value>Verbindungsdatei öffnen...</value>
+    <value>Verbindungsdatei öffnen</value>
   </data>
   <data name="strMenuOptions" xml:space="preserve">
     <value>Optionen</value>
@@ -2422,7 +2422,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Verbindung testen</value>
   </data>
   <data name="strExportToFileMenuItem" xml:space="preserve">
-    <value>In Datei &amp;exportieren...</value>
+    <value>In Datei &amp;exportieren</value>
   </data>
   <data name="strImportFileFailedContent" xml:space="preserve">
     <value>Beim Importieren der Datei ist ein Fehler aufgetreten ("{0}").</value>
