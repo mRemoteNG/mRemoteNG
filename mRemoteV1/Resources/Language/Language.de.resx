@@ -2443,8 +2443,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Warnung! Ein Neustart ist notwendig um ein Theme zu deaktivieren oder anzuwenden</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>
-Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
+    <value>Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
   </data>
   <data name="LoginFailedForUser" xml:space="preserve">
     <value>Login fehlgeschlagen für Benutzer '{0}'.</value>
@@ -2504,8 +2503,7 @@ Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremote
     <value>Passwort muss mindestens {0} Großbuchstaben enthalten</value>
   </data>
   <data name="strPasswordLengthConstraintHint" xml:space="preserve">
-    <value>
-Die Passwortlänge muss zwischen {0} und {1} liegen</value>
+    <value>Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="strChooseLogPath" xml:space="preserve">
     <value>
