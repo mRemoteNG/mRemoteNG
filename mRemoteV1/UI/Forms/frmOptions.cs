@@ -8,14 +8,14 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class frmOptions : Form
+    public partial class FrmOptions : Form
     {
         private Dictionary<string, OptionsPage> _pages;
         private ImageList _pageIconImageList;
         private readonly string _pageName;
         private readonly DisplayProperties _display = new DisplayProperties();
 
-        public frmOptions()
+        public FrmOptions()
         {
             Cursor.Current = Cursors.WaitCursor;
             Application.DoEvents();
@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Forms
             Cursor.Current = Cursors.Default;
         }
 
-        public frmOptions(string pn)
+        public FrmOptions(string pn)
         {
             Cursor.Current = Cursors.WaitCursor;
             Application.DoEvents();

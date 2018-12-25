@@ -50,7 +50,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions())
+                        using (var optionsForm = new FrmOptions())
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }

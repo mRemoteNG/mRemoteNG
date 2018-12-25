@@ -484,11 +484,11 @@
     <Compile Include="UI\DisplayProperties.cs" />
     <Compile Include="UI\FontOverrider.cs" />
     <Compile Include="UI\FormExtensions.cs" />
-    <Compile Include="UI\Forms\frmOptions.cs">
+    <Compile Include="UI\Forms\FrmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmOptions.Designer.cs">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmOptions.Designer.cs">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\FrmSplashScreen.cs">
       <SubType>Form</SubType>
@@ -607,10 +607,10 @@
     <Compile Include="Themes\ThemeInfo.cs" />
     <Compile Include="Tools\Cmdline\CommandLineArguments.cs" />
     <Compile Include="Container\ContainerInfo.cs" />
-    <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
-      <DependentUpon>frmChoosePanel.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmChoosePanel.Designer.cs">
+      <DependentUpon>FrmChoosePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmChoosePanel.cs">
+    <Compile Include="UI\Forms\FrmChoosePanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\FrmMain.Designer.cs">
@@ -790,16 +790,16 @@
     <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
-      <DependentUpon>frmChoosePanel.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmChoosePanel.resx">
+      <DependentUpon>FrmChoosePanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmOptions.resx">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmOptions.resx">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FrmSplashScreen.resx">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>

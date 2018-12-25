@@ -5,11 +5,11 @@ using mRemoteNG.UI.Panels;
 
 namespace mRemoteNG.UI.Forms
 {
-	public partial class frmChoosePanel
+	public partial class FrmChoosePanel
 	{
 	    private readonly PanelAdder _panelAdder;
 
-		public frmChoosePanel()
+		public FrmChoosePanel()
 		{
 			InitializeComponent();
             _panelAdder = new PanelAdder();
