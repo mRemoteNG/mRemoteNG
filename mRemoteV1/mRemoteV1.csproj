@@ -19,7 +19,7 @@
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <ApplicationIcon>Resources\Icons\AppIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icons\mRemoteNG_Icon.ico</ApplicationIcon>
     <OptionStrict>Off</OptionStrict>
     <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
@@ -989,6 +989,9 @@
     <None Include="Resources\Templates\Header_light.psd" />
     <None Include="Resources\Templates\Installer_Header.psd" />
     <None Include="Resources\Templates\Installer_Side.psd" />
+    <None Include="Resources\Themes\mRemoteNG.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Themes\darcula.vstheme">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1020,7 +1023,6 @@
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Icons\AppIcon.ico" />
     <None Include="Resources\Images\Header_dark.png" />
     <None Include="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -1032,8 +1034,37 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Images\AppIcon_pixel.png" />
-    <None Include="Resources\AppIcon_pixel.ico" />
+    <None Include="Resources\Icons\Appearance_Icon.ico" />
+    <None Include="Resources\Icons\mRemoteNG_Icon.ico" />
+    <None Include="Resources\Icons\mRemoteNGPixel_Icon.ico" />
+    <None Include="Resources\Icons\Comments_Icon.ico" />
+    <None Include="Resources\Icons\Config_Icon.ico" />
+    <None Include="Resources\Icons\Database_Icon.ico" />
+    <None Include="Resources\Icons\Error_Icon.ico" />
+    <None Include="Resources\Icons\ExtApp_Icon.ico" />
+    <None Include="Resources\Icons\Help_Icon.ico" />
+    <None Include="Resources\Icons\Key_Icon.ico" />
+    <None Include="Resources\Icons\Keyboard_Icon.ico" />
+    <None Include="Resources\Icons\News_Icon.ico" />
+    <None Include="Resources\Icons\Options_Icon.ico" />
+    <None Include="Resources\Icons\EditPage_Icon.ico" />
+    <None Include="Resources\Icons\Panels_Icon.ico" />
+    <None Include="Resources\Icons\PortScan_Icon.ico" />
+    <None Include="Resources\Icons\Save_Icon.ico" />
+    <None Include="Resources\Icons\Screenshot_Icon.ico" />
+    <None Include="Resources\Icons\Sessions_Icon.ico" />
+    <None Include="Resources\Icons\Shield_Icon.ico" />
+    <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
+    <None Include="Resources\Icons\StartupExit_Icon.ico" />
+    <None Include="Resources\Icons\Tab_Icon.ico" />
+    <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
+    <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
+    <None Include="Resources\Icons\Info_Icon.ico" />
+    <None Include="Resources\Icons\Root_Icon.ico" />
+    <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
     <Content Include="Resources\Templates\AppIcon_pixel.png" />
+    <None Include="Resources\Icons\Update_Icon.ico" />
+    <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1238,11 +1269,8 @@
     <Content Include="Resources\Help\Update.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icons\RDCMan_Icon.ico" />
     <None Include="Resources\Images\loading_spinner.gif" />
     <None Include="Resources\Images\FamFamFam\tick.png" />
-    <None Include="Resources\Icons\FamFamFam\shield.ico" />
-    <None Include="Resources\Icons\FamFamFam\key.ico" />
     <None Include="Resources\Images\FamFamFam\bricks.png" />
     <None Include="Resources\Images\FamFamFam\brick.png" />
     <None Include="Resources\Images\FamFamFam\bricks_greyscale.png" />
@@ -1274,8 +1302,6 @@
     <None Include="Resources\Images\PuttySessions.png" />
     <None Include="Resources\Images\PuttyConfig.png" />
     <None Include="Resources\Images\Play_Quick.png" />
-    <None Include="Resources\Icons\Play_Quick_Icon.ico" />
-    <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
     <None Include="Resources\Images\SSHTransfer.png" />
     <None Include="Resources\Images\ErrorsAndInfos.png" />
     <None Include="Resources\Images\Screenshot.png" />
@@ -1284,25 +1310,17 @@
     <None Include="Resources\Images\Connections_Load.png" />
     <None Include="Resources\Images\Connections_SaveAs.png" />
     <None Include="Resources\Images\Connections_Save.png" />
-    <None Include="Resources\Icons\Connections_SaveAs_Icon.ico" />
     <None Include="Resources\Images\Sort_ZA.png" />
     <None Include="Resources\Images\Sort_AZ.png" />
-    <None Include="Resources\Icons\Help_Icon.ico" />
     <None Include="Resources\Images\Lock.png" />
     <None Include="Resources\Images\Refresh.png" />
     <None Include="Resources\Images\RDP.png" />
     <None Include="Resources\Images\PropertiesDefault.png" />
     <None Include="Resources\Images\ExtApp.png" />
-    <None Include="Resources\Icons\ExtApp_Icon.ico" />
     <None Include="Resources\Images\Duplicate.png" />
     <None Include="Resources\Images\PortScan.png" />
-    <None Include="Resources\Icons\PortScan_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Copy.png" />
     <None Include="Resources\Images\FamFamFam\Delete.png" />
-    <None Include="Resources\Icons\FamFamFam\Config_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Options_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Save_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Screenshot_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Donate.png" />
     <None Include="Resources\Images\FamFamFam\Info.png" />
     <None Include="Resources\Images\FamFamFam\Inheritance.png" />
@@ -1323,8 +1341,6 @@
     <None Include="Resources\Images\FamFamFam\Warning_Small.png" />
     <None Include="Resources\Images\FamFamFam\Website.png" />
     <None Include="Resources\Images\FamFamFam\ExtApp.png" />
-    <None Include="Resources\Icons\FamFamFam\ExtApp_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Sessions_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Sessions.png" />
     <None Include="Resources\Images\FamFamFam\Session_LogOff.png" />
     <None Include="Resources\Images\FamFamFam\File.png" />
@@ -1335,12 +1351,10 @@
     <None Include="Resources\Images\FamFamFam\Arrow_Up.png" />
     <None Include="Resources\Images\FamFamFam\Tools.png" />
     <None Include="Resources\Images\FamFamFam\Bug.png" />
-    <None Include="Resources\Icons\FamFamFam\Help_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Help.png" />
     <None Include="Resources\Images\FamFamFam\Page.png" />
     <None Include="Resources\Images\FamFamFam\SmartSize.png" />
     <None Include="Resources\Images\FamFamFam\Update.png" />
-    <None Include="Resources\Icons\FamFamFam\Update_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Folder.png" />
     <None Include="Resources\Images\FamFamFam\Folder_Add.png" />
     <None Include="Resources\Images\FamFamFam\Pause.png" />
@@ -1351,26 +1365,17 @@
     <None Include="Resources\Images\FamFamFam\ExtApp_Delete.png" />
     <None Include="Resources\Images\FamFamFam\ExtApp_Start.png" />
     <None Include="Resources\Images\FamFamFam\SSHTransfer.png" />
-    <None Include="Resources\Icons\FamFamFam\SSHTransfer_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\PortScan.png" />
-    <None Include="Resources\Icons\FamFamFam\PortScan_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Appearance_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Tab_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\StartupExit_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Console.png" />
     <None Include="Resources\Images\FamFamFam\Inheritance_Default.png" />
     <None Include="Resources\Images\FamFamFam\Chat.png" />
-    <None Include="Resources\Icons\FamFamFam\Panels_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\JumpTo.png" />
     <None Include="Resources\Images\FamFamFam\Monitor_GoTo.png" />
     <None Include="Resources\Images\FamFamFam\Monitor.png" />
-    <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <None Include="Resources\Images\UVNC_SC.png" />
     <None Include="Resources\Images\Bad_Symbol.png" />
     <None Include="Resources\Images\Good_Symbol.png" />
     <None Include="Resources\Images\ComponentsCheck.png" />
-    <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\News_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\News.png" />
     <Content Include="Resources\Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1468,13 +1473,9 @@
     <None Include="Resources\Images\FamFamFam\application_side_tree.png" />
     <None Include="Resources\Images\FamFamFam\arrow_out.png" />
     <None Include="Resources\Images\FamFamFam\cog_error.png" />
-    <Content Include="Resources\Icons\FamFamFam\database.ico" />
-    <Content Include="Resources\Icons\FamFamFam\keyboard.ico" />
     <Content Include="Resources\Images\FamFamFam\cog.png" />
     <Content Include="Resources\Images\database.bmp" />
     <None Include="Resources\Images\Copy.png" />
-    <None Include="Resources\Icons\Sessions_Icon.ico" />
-    <None Include="Resources\Icons\Info_Icon.ico" />
     <None Include="Properties\Settings.settings">
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1484,13 +1485,6 @@
     <None Include="Resources\Images\Properties.png" />
     <None Include="Resources\Images\Inheritance.png" />
     <None Include="Properties\app.manifest" />
-    <None Include="Resources\Icons\Update_Icon.ico" />
-    <None Include="Resources\Icons\Screenshot_Icon.ico" />
-    <None Include="Resources\Icons\Save_Icon.ico" />
-    <None Include="Resources\Icons\Root_Icon.ico" />
-    <None Include="Resources\Icons\Options_Icon.ico" />
-    <None Include="Resources\Icons\Config_Icon.ico" />
-    <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
     <None Include="Resources\Images\WarningSmall.png" />
     <None Include="Resources\Images\Warning.png" />
     <None Include="Resources\Images\View.png" />
