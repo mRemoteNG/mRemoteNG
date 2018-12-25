@@ -2483,8 +2483,7 @@ Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremote
     <value>Möchten Sie die Anmeldeinformationen {0} wirklich löschen?</value>
   </data>
   <data name="strFindMatchingCredentialFailed" xml:space="preserve">
-    <value>
-Es konnte kein Anmeldedatensatz mit der ID "{0}" für den Verbindungsdatensatz mit dem Namen "{1}" gefunden werden.</value>
+    <value>Es konnte kein Anmeldedatensatz mit der ID "{0}" für den Verbindungsdatensatz mit dem Namen "{1}" gefunden werden.</value>
   </data>
   <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Wählen Sie, ob eine Benachrichtigung empfangen werden soll, nachdem die RDP-Sitzung aufgrund von Inaktivität getrennt wurde</value>
