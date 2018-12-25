@@ -17,14 +17,20 @@ namespace mRemoteNG.UI.Forms
 
         public frmOptions()
         {
+            Cursor.Current = Cursors.WaitCursor;
+            Application.DoEvents();
             InitializeComponent();
             _pageName = Language.strStartupExit;
+            Cursor.Current = Cursors.Default;
         }
 
         public frmOptions(string pn)
         {
+            Cursor.Current = Cursors.WaitCursor;
+            Application.DoEvents();
             InitializeComponent();
             _pageName = pn;
+            Cursor.Current = Cursors.Default;
         }
 
         private void frmOptions_Load(object sender, EventArgs e)
