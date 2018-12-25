@@ -2649,4 +2649,7 @@ Der Development-Kanal umfasst Alphas, Betas und Freigabekandidaten.</value>
   <data name="strCredentials" xml:space="preserve">
     <value>Anmeldedaten</value>
   </data>
+  <data name="strMenuCopyHostname" xml:space="preserve">
+    <value>Hostnamen kopieren</value>
+  </data>
 </root>
