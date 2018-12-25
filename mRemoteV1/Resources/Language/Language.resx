@@ -2656,9 +2656,6 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strWorkingDirColumnHeader" xml:space="preserve">
     <value>Working directory</value>
   </data>
-  <data name="strLockToolbars" xml:space="preserve">
-    <value>Lock toolbar positions</value>
-  </data>
   <data name="strMultiSshToolbar" xml:space="preserve">
     <value>Multi SSH toolbar</value>
   </data>

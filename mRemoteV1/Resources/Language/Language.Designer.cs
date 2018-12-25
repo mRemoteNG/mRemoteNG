@@ -3219,15 +3219,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lock toolbar positions.
-        /// </summary>
-        internal static string strLockToolbars {
-            get {
-                return ResourceManager.GetString("strLockToolbars", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Log file path.
         /// </summary>
         internal static string strLogFilePath {
