@@ -42,51 +42,51 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Controls.Add(this.labelExceptionCaught, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonClose, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxStackTrace, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.labelStackTraceHeader, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.labelExceptionMessageHeader, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxExceptionMessage, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.buttonCopyAll, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.labelExceptionIsFatalHeader, 1, 1);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.labelExceptionCaught, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonClose, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxStackTrace, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelStackTraceHeader, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelExceptionMessageHeader, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxExceptionMessage, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.buttonCopyAll, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelExceptionIsFatalHeader, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(534, 311);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(534, 334);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // labelExceptionCaught
             // 
             this.labelExceptionCaught.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.labelExceptionCaught, 2);
+            this.labelExceptionCaught.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelExceptionCaught.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelExceptionCaught.Location = new System.Drawing.Point(33, 0);
+            this.labelExceptionCaught.Location = new System.Drawing.Point(3, 0);
             this.labelExceptionCaught.Name = "labelExceptionCaught";
-            this.labelExceptionCaught.Size = new System.Drawing.Size(311, 20);
+            this.labelExceptionCaught.Size = new System.Drawing.Size(528, 30);
             this.labelExceptionCaught.TabIndex = 3;
             this.labelExceptionCaught.Text = "An unhandled exception has occurred";
+            this.labelExceptionCaught.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // buttonClose
             // 
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonClose.Location = new System.Drawing.Point(427, 284);
+            this.buttonClose.Location = new System.Drawing.Point(437, 306);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(74, 24);
+            this.buttonClose.Size = new System.Drawing.Size(94, 25);
             this.buttonClose.TabIndex = 1;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -96,52 +96,54 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxStackTrace, 2);
             this.textBoxStackTrace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxStackTrace.Location = new System.Drawing.Point(33, 128);
+            this.textBoxStackTrace.Location = new System.Drawing.Point(3, 145);
             this.textBoxStackTrace.Multiline = true;
             this.textBoxStackTrace.Name = "textBoxStackTrace";
             this.textBoxStackTrace.ReadOnly = true;
             this.textBoxStackTrace.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxStackTrace.Size = new System.Drawing.Size(468, 150);
+            this.textBoxStackTrace.Size = new System.Drawing.Size(528, 155);
             this.textBoxStackTrace.TabIndex = 0;
             // 
             // labelStackTraceHeader
             // 
             this.labelStackTraceHeader.AutoSize = true;
-            this.labelStackTraceHeader.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelStackTraceHeader.Location = new System.Drawing.Point(33, 112);
+            this.labelStackTraceHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelStackTraceHeader.Location = new System.Drawing.Point(3, 118);
             this.labelStackTraceHeader.Name = "labelStackTraceHeader";
-            this.labelStackTraceHeader.Size = new System.Drawing.Size(388, 13);
+            this.labelStackTraceHeader.Size = new System.Drawing.Size(428, 24);
             this.labelStackTraceHeader.TabIndex = 4;
-            this.labelStackTraceHeader.Text = "Stack trace";
+            this.labelStackTraceHeader.Text = "Stack Trace";
+            this.labelStackTraceHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelExceptionMessageHeader
             // 
             this.labelExceptionMessageHeader.AutoSize = true;
-            this.labelExceptionMessageHeader.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelExceptionMessageHeader.Location = new System.Drawing.Point(33, 53);
+            this.labelExceptionMessageHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelExceptionMessageHeader.Location = new System.Drawing.Point(3, 54);
             this.labelExceptionMessageHeader.Name = "labelExceptionMessageHeader";
-            this.labelExceptionMessageHeader.Size = new System.Drawing.Size(388, 13);
+            this.labelExceptionMessageHeader.Size = new System.Drawing.Size(428, 24);
             this.labelExceptionMessageHeader.TabIndex = 5;
-            this.labelExceptionMessageHeader.Text = "Exception message";
+            this.labelExceptionMessageHeader.Text = "Exception Message";
+            this.labelExceptionMessageHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBoxExceptionMessage
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxExceptionMessage, 2);
             this.textBoxExceptionMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxExceptionMessage.Location = new System.Drawing.Point(33, 69);
+            this.textBoxExceptionMessage.Location = new System.Drawing.Point(3, 81);
             this.textBoxExceptionMessage.Multiline = true;
             this.textBoxExceptionMessage.Name = "textBoxExceptionMessage";
             this.textBoxExceptionMessage.ReadOnly = true;
             this.textBoxExceptionMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxExceptionMessage.Size = new System.Drawing.Size(468, 33);
+            this.textBoxExceptionMessage.Size = new System.Drawing.Size(528, 34);
             this.textBoxExceptionMessage.TabIndex = 6;
             // 
             // buttonCopyAll
             // 
             this.buttonCopyAll.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonCopyAll.Location = new System.Drawing.Point(346, 284);
+            this.buttonCopyAll.Location = new System.Drawing.Point(331, 306);
             this.buttonCopyAll.Name = "buttonCopyAll";
-            this.buttonCopyAll.Size = new System.Drawing.Size(75, 24);
+            this.buttonCopyAll.Size = new System.Drawing.Size(100, 25);
             this.buttonCopyAll.TabIndex = 7;
             this.buttonCopyAll.Text = "Copy All";
             this.buttonCopyAll.UseVisualStyleBackColor = true;
@@ -151,19 +153,21 @@
             // 
             this.labelExceptionIsFatalHeader.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.labelExceptionIsFatalHeader, 2);
+            this.labelExceptionIsFatalHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelExceptionIsFatalHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelExceptionIsFatalHeader.Location = new System.Drawing.Point(33, 30);
+            this.labelExceptionIsFatalHeader.Location = new System.Drawing.Point(3, 30);
             this.labelExceptionIsFatalHeader.Name = "labelExceptionIsFatalHeader";
-            this.labelExceptionIsFatalHeader.Size = new System.Drawing.Size(281, 16);
+            this.labelExceptionIsFatalHeader.Size = new System.Drawing.Size(528, 24);
             this.labelExceptionIsFatalHeader.TabIndex = 8;
             this.labelExceptionIsFatalHeader.Text = "This exception will force mRemoteNG to close";
+            this.labelExceptionIsFatalHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // UnhandledExceptionWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(534, 311);
+            this.ClientSize = new System.Drawing.Size(534, 334);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(550, 350);

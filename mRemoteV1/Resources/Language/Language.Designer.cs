@@ -151,6 +151,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unhandled exception has occurred.
+        /// </summary>
+        internal static string ExceptionCaught {
+            get {
+                return ResourceManager.GetString("ExceptionCaught", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This exception will force mRemoteNG to close.
+        /// </summary>
+        internal static string ExceptionCaughtIsFatal {
+            get {
+                return ResourceManager.GetString("ExceptionCaughtIsFatal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This exception will force mRemoteNG to close.
         /// </summary>
         internal static string ExceptionForcesmRemoteNGToClose {

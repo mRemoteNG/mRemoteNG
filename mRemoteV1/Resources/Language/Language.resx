@@ -2745,4 +2745,10 @@ This page will walk you through the process of upgrading your connections file o
 Beta channel includes Betas and Release Candidates.
 Development Channel includes Alphas, Betas and Release Candidates.</value>
   </data>
+  <data name="ExceptionCaught" xml:space="preserve">
+    <value>An unhandled exception has occurred</value>
+  </data>
+  <data name="ExceptionCaughtIsFatal" xml:space="preserve">
+    <value>This exception will force mRemoteNG to close</value>
+  </data>
 </root>

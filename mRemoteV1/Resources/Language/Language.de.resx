@@ -1009,7 +1009,7 @@ Starte mit neuer Datei.</value>
     <value>Meldungen</value>
   </data>
   <data name="strMenuNotificationsCopyAll" xml:space="preserve">
-    <value>Alle Kopieren</value>
+    <value>Alles kopieren</value>
   </data>
   <data name="strMenuNotificationsDelete" xml:space="preserve">
     <value>Löschen</value>
@@ -2633,6 +2633,18 @@ Der Development-Kanal umfasst Alphas, Betas und Freigabekandidaten.</value>
   </data>
   <data name="strMenuDisconnectOthersRight" xml:space="preserve">
     <value>Tabs rechts schließen</value>
+  </data>
+  <data name="ExceptionCaught" xml:space="preserve">
+    <value>Eine unbehandelte Ausnahme ist aufgetreten</value>
+  </data>
+  <data name="ExceptionCaughtIsFatal" xml:space="preserve">
+    <value>Diese Ausnahme zwingt mRemoteNG zum Schließen</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Exception Message</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Stack trace</value>
   </data>
   <data name="strCredentials" xml:space="preserve">
     <value>Anmeldedaten</value>

@@ -39,6 +39,8 @@ namespace mRemoteNG.UI.Forms
             labelExceptionMessageHeader.Text = Language.ExceptionMessage;
             labelStackTraceHeader.Text = Language.StackTrace;
             buttonCopyAll.Text = Language.strMenuNotificationsCopyAll;
+            labelExceptionCaught.Text = Language.ExceptionCaught;
+            labelExceptionIsFatalHeader.Text = Language.ExceptionCaughtIsFatal;
             buttonClose.Text = _isFatal
                 ? Language.strMenuExit 
                 : Language.strButtonClose;
