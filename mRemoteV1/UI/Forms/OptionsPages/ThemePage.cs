@@ -19,10 +19,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
         #endregion
 
-
         public ThemePage()
         {
-
             InitializeComponent();
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
@@ -32,13 +30,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _oriActiveTheming = _themeManager.ThemingActive;
         }
 
+        public override Icon PageIcon { get; protected set; } = Resources.Appearance_Icon;
+
         public override string PageName
         {
             get => Language.strOptionsTabTheme;
             set { }
         }
-
-        public override Icon PageIcon { get; protected set; } = Resources.Appearance_Icon;
 
         public override void ApplyLanguage()
         {
