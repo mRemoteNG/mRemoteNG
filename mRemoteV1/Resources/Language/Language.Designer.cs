@@ -133,15 +133,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Credentials.
-        /// </summary>
-        internal static string Credentials {
-            get {
-                return ResourceManager.GetString("Credentials", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Credential not available.
         /// </summary>
         internal static string CredentialUnavailable {
@@ -1762,6 +1753,15 @@ namespace mRemoteNG {
         internal static string strCredentialManagerUpgradeDescription {
             get {
                 return ResourceManager.GetString("strCredentialManagerUpgradeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credentials.
+        /// </summary>
+        internal static string strCredentials {
+            get {
+                return ResourceManager.GetString("strCredentials", resourceCulture);
             }
         }
         

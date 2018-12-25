@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         }
 
         public override string PageName {
-            get => Language.Credentials;
+            get => Language.strCredentials;
             set { }
         }
 

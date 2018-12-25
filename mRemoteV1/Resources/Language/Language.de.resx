@@ -223,7 +223,7 @@
     <value>&amp;Neu</value>
   </data>
   <data name="strButtonOK" xml:space="preserve">
-    <value>&amp;Okay</value>
+    <value>&amp;OK</value>
   </data>
   <data name="strButtonProperties" xml:space="preserve">
     <value>Eigenschaften</value>
@@ -1888,7 +1888,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Anfangs Port</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
-    <value>Anfang/Ende</value>
+    <value>Starten/Beenden</value>
   </data>
   <data name="strStatus" xml:space="preserve">
     <value>Status</value>
@@ -2633,5 +2633,8 @@ Der Development-Kanal umfasst Alphas, Betas und Freigabekandidaten.</value>
   </data>
   <data name="strMenuDisconnectOthersRight" xml:space="preserve">
     <value>Tabs rechts schließen</value>
+  </data>
+  <data name="strCredentials" xml:space="preserve">
+    <value>Anmeldedaten</value>
   </data>
 </root>
