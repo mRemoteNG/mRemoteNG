@@ -22,8 +22,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public ThemePage()
         {
-
             InitializeComponent();
+            PageIcon = Resources.Appearance_Icon;
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             _themeManager = ThemeManager.getInstance();
@@ -37,8 +37,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             get => Language.strOptionsTabTheme;
             set { }
         }
-
-        public override Icon PageIcon { get; protected set; } = Resources.Appearance_Icon;
 
         public override void ApplyLanguage()
         {

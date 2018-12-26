@@ -28,9 +28,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//NOTE: The following procedure is required by the Windows Form Designer
 		//It can be modified using the Windows Form Designer.
 		//Do not modify it using the code editor.
-		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
+		[System.Diagnostics.DebuggerStepThrough()]
+        private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupExitPage));
             this.chkReconnectOnStart = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkSaveConsOnExit = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkSingleInstance = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -90,7 +90,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkSingleInstance);
             this.Controls.Add(this.chkProperInstallationOfComponentsAtStartup);
             this.Name = "StartupExitPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.Load += new System.EventHandler(this.StartupExitPage_Load);
             this.ResumeLayout(false);

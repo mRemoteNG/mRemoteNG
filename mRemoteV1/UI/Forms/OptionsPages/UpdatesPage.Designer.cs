@@ -29,7 +29,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdatesPage));
             this.lblUpdatesExplanation = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlUpdateCheck = new System.Windows.Forms.Panel();
             this.btnUpdateCheckNow = new mRemoteNG.UI.Controls.Base.NGButton();
@@ -322,7 +321,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.pnlUpdateCheck);
             this.Controls.Add(this.pnlProxy);
             this.Name = "UpdatesPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.pnlUpdateCheck.ResumeLayout(false);
             this.pnlUpdateCheck.PerformLayout();

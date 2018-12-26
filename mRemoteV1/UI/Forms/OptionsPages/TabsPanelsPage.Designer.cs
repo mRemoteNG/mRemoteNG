@@ -28,9 +28,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//NOTE: The following procedure is required by the Windows Form Designer
 		//It can be modified using the Windows Form Designer.
 		//Do not modify it using the code editor.
-		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
+		[System.Diagnostics.DebuggerStepThrough()]
+        private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabsPanelsPage));
             this.chkAlwaysShowPanelTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkIdentifyQuickConnectTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkOpenNewTabRightOfSelected = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -163,7 +163,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkDoubleClickClosesTab);
             this.Controls.Add(this.chkShowProtocolOnTabs);
             this.Name = "TabsPanelsPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.ResumeLayout(false);
             this.PerformLayout();
