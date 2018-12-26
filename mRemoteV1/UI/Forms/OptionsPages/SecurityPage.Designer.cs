@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecurityPage));
             this.chkEncryptCompleteFile = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.comboBoxEncryptionEngine = new mRemoteNG.UI.Controls.Base.NGComboBox();
             this.labelEncryptionEngine = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -150,7 +149,6 @@
             this.Controls.Add(this.chkEncryptCompleteFile);
             this.Controls.Add(this.groupAdvancedSecurityOptions);
             this.Name = "SecurityPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.groupAdvancedSecurityOptions.ResumeLayout(false);
             this.groupAdvancedSecurityOptions.PerformLayout();
