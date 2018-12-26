@@ -664,6 +664,8 @@
     <Compile Include="UI\Forms\UnhandledExceptionWindow.Designer.cs">
       <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\GraphicsUtilities\GdiPlusGraphicsProvider.cs" />
+    <Compile Include="UI\GraphicsUtilities\IGraphicsProvider.cs" />
     <Compile Include="UI\Menu\HelpMenu.cs">
       <SubType>Component</SubType>
     </Compile>
