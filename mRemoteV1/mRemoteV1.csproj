@@ -1030,10 +1030,8 @@
     <None Include="Resources\Tiles\VisualElements_150.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Images\AppIcon_pixel.png" />
     <None Include="Resources\Icons\Appearance_Icon.ico" />
     <None Include="Resources\Icons\mRemoteNG_Icon.ico" />
-    <None Include="Resources\Icons\mRemoteNGPixel_Icon.ico" />
     <None Include="Resources\Icons\Comments_Icon.ico" />
     <None Include="Resources\Icons\Config_Icon.ico" />
     <None Include="Resources\Icons\Database_Icon.ico" />
@@ -1059,9 +1057,9 @@
     <None Include="Resources\Icons\Info_Icon.ico" />
     <None Include="Resources\Icons\Root_Icon.ico" />
     <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
-    <Content Include="Resources\Templates\AppIcon_pixel.png" />
     <None Include="Resources\Icons\Update_Icon.ico" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
+    <None Include="Resources\mRemoteNG.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

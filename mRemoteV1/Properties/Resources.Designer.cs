@@ -113,16 +113,6 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AppIcon_pixel {
-            get {
-                object obj = ResourceManager.GetObject("AppIcon_pixel", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap application_side_tree {
             get {
                 object obj = ResourceManager.GetObject("application_side_tree", resourceCulture);
@@ -871,6 +861,16 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mRemoteNG {
+            get {
+                object obj = ResourceManager.GetObject("mRemoteNG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon mRemoteNG_Icon {
@@ -894,16 +894,6 @@ namespace mRemoteNG {
         internal static string mRemoteNG_VisualElementsManifest {
             get {
                 return ResourceManager.GetString("mRemoteNG_VisualElementsManifest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon mRemoteNGPixel_Icon {
-            get {
-                object obj = ResourceManager.GetObject("mRemoteNGPixel_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
