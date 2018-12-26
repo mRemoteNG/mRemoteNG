@@ -2513,7 +2513,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Pfad auswählen</value>
   </data>
   <data name="strUseDefault" xml:space="preserve">
-    <value>Standard verwenden</value>
+    <value>Standardpfad</value>
   </data>
   <data name="strLogging" xml:space="preserve">
     <value>Protokollierung</value>
