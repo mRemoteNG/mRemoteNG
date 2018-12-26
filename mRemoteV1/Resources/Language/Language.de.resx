@@ -284,28 +284,28 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungsdateien!<
     <value>Prüfung erfolgreich!</value>
   </data>
   <data name="strCcEOLFailed" xml:space="preserve">
-    <value>Die (RDP-) Sitzungsfunktion benötigt die Datei eolwtscom.dll. Diese muss korrekt registriert sein.
-Alle mRemoteNG-Pakete beinhalten diese Datei, jedoch muss sie, wenn Sie eines der nicht-Setup Pakete verwenden, manuell registriert werden.
-Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\Programme\mRemoteNG\eolwtscom.dll" (Wobei c:\Programme\mRemoteNG\ Ihr mRemoteNG-Installationspfad ist).
-Wenn Sie noch immer Probleme mit der (RDP-) Sitzungsfunktion in mRemoteNG haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
+    <value>Die Funktion (RDP) Sessions setzt voraus, dass Sie eine Kopie von eolwtscom.dll auf Ihrem System registriert haben.
+mRemoteNG wird mit dieser Komponente geliefert, sie wird jedoch nicht automatisch registriert, wenn Sie den mRemoteNG-Installer nicht verwenden.
+Führen Sie den folgenden Befehl an einer erhöhten Eingabeaufforderung aus, um es manuell zu registrieren: regsvr32 "C: \ Programme \ mRemoteNG \ eolwtscom.dll" (wobei C: \ Program Files \ mRemoteNG \ der Pfad zu Ihrer mRemoteNG-Installation ist).
+Wenn diese Prüfung immer noch fehlschlägt oder Sie die (RDP-) Sessions-Funktion nicht verwenden können, wenden Sie sich bitte an den um {0}.</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM wurde gefunden und scheint korrekt registriert zu sein.</value>
   </data>
   <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Um die Gecko Rendering Engine benutzen zu können, benötigen Sie XULrunner 1.8.1.x und einen korrekt eingetragenen Pfad in den Optionen.
-Hier können Sie XULrunner 1.8.1.3 herunterladen: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Wenn der Download abgeschlossen ist, entpacken Sie das Paket (Der Speicherort ist dabei ihnen überlassen). Als nächstes öffnen Sie (in mRemoteNG) Extras - Optionen - Erweitert und geben Sie den korrekten Pfad im XULrunner Feld an.
-Wenn Sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
+    <value>Um die Gecko Rendering Engine verwenden zu können, müssen Sie XULrunner 1.8.1.x und den Pfad zur Installation in den Optionen festgelegt haben.
+Sie können XULrunner 1.8.1.3 hier herunterladen: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
+Wenn Sie mit dem Download fertig sind, extrahieren Sie das Paket in einen Pfad Ihrer Wahl. Gehen Sie dann in mRemoteNG zu Extras - Optionen - Erweitert und geben Sie den korrekten Pfad in das Feld XULrunner-Pfad ein.
+Wenn Sie diese Prüfung immer noch nicht bestehen oder die Gecko Engine in mRemoteNG verwenden können, wenden Sie sich bitte an die Adresse {0}.</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx wurde gefunden und scheint korrekt installiert zu sein.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA benötigt eine funktionierende XenDesktop-Online-Plugin-Installation und dass die Datei wfica.ocx korrekt registriert ist. Hier können Sie das Plugin herunterladen: http://www.citrix.com/download/
-Wenn sie das XenDesktop Online Plugin installiert haben und noch immer Probleme haben, diese Prüfung erfolgreich abzuschließen, versuchen Sie, die Datei wfica.ocx manuell zu registrieren.
-Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\Programme\Citrix\ICA Client\wfica.ocx" (Wobei c:\Programme\Citrix\ICA Client\ ihr XenDesktop-Online-Plugin-Installationspfad ist).
-Wenn Sie noch immer Probleme mit ICA haben, konsultieren sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
+    <value>ICA setzt voraus, dass das XenDesktop Online Plugin installiert ist und die Bibliothek wfica.ocx registriert ist. Sie können den Client hier herunterladen: http://www.citrix.com/download/
+Wenn Sie das XenDesktop Online Plugin installiert haben und die Überprüfung weiterhin fehlschlägt, versuchen Sie, die Datei wfica.ocx manuell zu registrieren.
+Öffnen Sie dazu den Ausführungsdialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c: \ Programme \ Citrix \ ICA Client \ wfica.ocx" (Dabei ist c: \ Programme \ Citrix \ ICA Client \ Pfad zu Ihrer XenDesktop Online Plugin-Installation).
+Wenn Sie diese Prüfung immer noch nicht bestehen oder ICA in mRemoteNG nicht verwenden können, wenden Sie sich bitte an die Adresse {0}.</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>Alle ICA-Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
@@ -322,18 +322,17 @@ Bitte versichern Sie sich, dass sich die Datei PuttyNG.exe in ihrem mRemote Inst
     <value>PuTTY wurde gefunden und scheint betriebsbereit zu sein.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Um RDP korrekt betreiben können, muss mindestens Remote Desktop Connection (Terminal Services Client) 6.0 installiert sein. Hier können Sie die Software herunterladen: http://support.microsoft.com/kb/951616
-Wenn Sie RDP 6.1 bereits installiert haben und die Prüfung noch immer fehlschlägt, versuchen Sie, die Datei mstscax.dll manuell zu registrieren. Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\windows\system32\mstscax.dll" (Wobei c:\ Ihr System-Laufwerk ist).
-Wenn Sie noch immer Probleme mit RDP haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
+    <value>Damit RDP ordnungsgemäß funktioniert, muss mindestens Remote Desktop Connection (Terminal Services) Client 8.0 installiert sein. Sie können es hier herunterladen: http://support.microsoft.com/kb/925876
+Wenn diese Überprüfung immer noch fehlschlägt oder Sie RDP nicht verwenden können, lesen Sie die Informationen unter {0}.</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>Alle RDP-Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
 Remote Desktop Verbindung Control Version {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC benötigt die Datei VncSharp.dll im mRemoteNG-Programmordner.
-Bitte stellen Sie sicher, dass Sie die Datei VncSharp.dll in Ihrem mRemoteNG-Programmordner haben (üblicherweise C:\Programme\mRemoteNG\).
-Wenn Sie noch immer Probleme mit VNC haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
+    <value>VNC erfordert, dass sich VncSharp.dll in Ihrem Anwendungsordner von mRemoteNG befindet.
+Stellen Sie sicher, dass sich die Datei VncSharp.dll in Ihrem Anwendungsordner von mRemoteNG befindet (normalerweise C: \ Program Files \ mRemoteNG \).
+Wenn Sie diese Prüfung immer noch nicht bestehen oder VNC in mRemoteNG verwenden können, konsultieren Sie bitte die Seite {0}.</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Alle VNC-Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
@@ -493,7 +492,7 @@ VncSharp Control Version {0}</value>
     <value>Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
-    <value>Ein Protokoll-Ereignisfehler ist aufgetreten!</value>
+    <value>Ein Verbindungsprotokollfehler ist aufgetreten. Host: "{1}"; Fehlercode: "{2}"; Fehlerbeschreibung: "{0}"</value>
   </data>
   <data name="strConnectionOpenFailed" xml:space="preserve">
     <value>Öffnen der Verbindung ist fehlgeschlagen!</value>
@@ -1502,8 +1501,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Proxy-Benutzername</value>
   </data>
   <data name="strProtocolEventDisconnected" xml:space="preserve">
-    <value>Protokollereignis Verbindung getrennnt.
-{0}</value>
+    <value>Protokollereignis getrennt. Host: "{1}"; Protokoll: "{2}" Nachricht: "{0}"</value>
   </data>
   <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
     <value>Protokollereignis Verbindung trennen fehlgeschlagen.
@@ -1561,10 +1559,10 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Putty Title: {0}</value>
   </data>
   <data name="strQuick" xml:space="preserve">
-    <value>Direkt: {0}</value>
+    <value>Quick: {0}</value>
   </data>
   <data name="strQuickConnectAddFailed" xml:space="preserve">
-    <value>Hinzufügen zur Direktverbindungshistorie fehlgeschlagen!</value>
+    <value>Quick-Connect zur Historie hinzufügen fehlgeschlagen!</value>
   </data>
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Direkte Verbindung fehlgeschlagen!</value>
@@ -2506,8 +2504,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="strChooseLogPath" xml:space="preserve">
-    <value>
-Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
+    <value>Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   </data>
   <data name="strLogFilePath" xml:space="preserve">
     <value>Pfad der Protokolldatei</value>
@@ -2648,5 +2645,98 @@ Der Development-Kanal umfasst Alphas, Betas und Freigabekandidaten.</value>
   </data>
   <data name="strMenuCopyHostname" xml:space="preserve">
     <value>Hostname kopieren</value>
+  </data>
+  <data name="strFileFormatLabel" xml:space="preserve">
+    <value>Datei&amp;format</value>
+  </data>
+  <data name="strFilterPuttyConnectionManager" xml:space="preserve">
+    <value>PuTTY-Connection-Manager-Dateien</value>
+  </data>
+  <data name="strFilterRdgFiles" xml:space="preserve">
+    <value>Remote-Desktop-Connection-Manager-Dateien (*.rdg)</value>
+  </data>
+  <data name="strPropertyDescriptionRedirecClipboard" xml:space="preserve">
+    <value>Wählen Sie, ob die Zwischenablage geteilt werden soll.</value>
+  </data>
+  <data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+    <value>Zwischenablage</value>
+  </data>
+  <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>Iterationen der Schlüsselableitungsfunktion</value>
+  </data>
+  <data name="strUpgrade" xml:space="preserve">
+    <value>Aktualisierung</value>
+  </data>
+  <data name="strLabelReadOnly" xml:space="preserve">
+    <value>Schreibgeschützt:</value>
+  </data>
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Verwenden Sie für die RDP-Eigenschaft "Load Balance Info" die UTF8-Codierung</value>
+  </data>
+  <data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Erstellen Sie einen leeren Tab, wenn mRemoteNG gestartet wird</value>
+  </data>
+  <data name="strIPRange" xml:space="preserve">
+    <value>Muss zwischen 0 und 255 liegen</value>
+  </data>
+  <data name="strOutOfRange" xml:space="preserve">
+    <value>Außerhalb des Bereichs</value>
+  </data>
+  <data name="strDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="strReconnectAllConnections" xml:space="preserve">
+    <value>Alle Verbindungen neu verbinden</value>
+  </data>
+  <data name="strImportSubOUs" xml:space="preserve">
+    <value>Alle untergeordneten OUs importieren</value>
+  </data>
+  <data name="strWorkingDirColumnHeader" xml:space="preserve">
+    <value>Arbeitsverzeichnis</value>
+  </data>
+  <data name="strConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>Möchten Sie wirklich alle Verbindungen mit Ausnahme von "{0}" schließen?</value>
+  </data>
+  <data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
+    <value>Möchten Sie wirklich alle Verbindungen rechts von "{0}" schließen?</value>
+  </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>Beim Versuch, die Verbindung zum RDP-Host '{0}' wiederherzustellen, ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>Beim Versuch, die Verbindungsauflösung in Host '{0}' zu ändern, ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="mRemoteNGUnhandledException" xml:space="preserve">
+    <value>mRemoteNG unbehandelte Ausnahme</value>
+  </data>
+  <data name="UnhandledExceptionOccured" xml:space="preserve">
+    <value>Eine unbehandelte Ausnahme aufgetreten</value>
+  </data>
+  <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+    <value>Diese Ausnahme zwingt mRemoteNG zum Schließen</value>
+  </data>
+  <data name="strMultiSshToolbar" xml:space="preserve">
+    <value>Multi-SSH-Symbolleiste</value>
+  </data>
+  <data name="strTryToIntegrateColumnHeader" xml:space="preserve">
+    <value>Versuchen zu integrieren</value>
+  </data>
+  <data name="strShowOnToolbarColumnHeader" xml:space="preserve">
+    <value>In der Symbolleiste anzeigen</value>
+  </data>
+  <data name="srtWorkingDirectory" xml:space="preserve">
+    <value>Arbeitsverzeichnis:</value>
+  </data>
+  <data name="strRunElevated" xml:space="preserve">
+    <value>Als Administrator ausführen</value>
+  </data>
+  <data name="strRunElevateHeader" xml:space="preserve">
+    <value>Als Administrator ausführen</value>
+  </data>
+  <data name="strUltraVNCSingleClick" xml:space="preserve">
+    <value>UltraVNC-SingleClick</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Anmeldeinformationen</value>
   </data>
 </root>
