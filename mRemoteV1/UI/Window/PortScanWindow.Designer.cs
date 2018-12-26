@@ -70,9 +70,9 @@ namespace mRemoteNG.UI.Window
             this.Label2 = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.Label1 = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlIp = new System.Windows.Forms.TableLayoutPanel();
+            this.btnScan = new mRemoteNG.UI.Controls.Base.NGButton();
             this.pnlImport = new System.Windows.Forms.TableLayoutPanel();
             this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
-            this.btnScan = new mRemoteNG.UI.Controls.Base.NGButton();
             ((System.ComponentModel.ISupportInitialize)(this.olvHosts)).BeginInit();
             this.resultsMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectorTimeout)).BeginInit();
@@ -394,10 +394,7 @@ namespace mRemoteNG.UI.Window
             this.pnlIp.ColumnCount = 3;
             this.pnlIp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
             this.pnlIp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.pnlIp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.pnlIp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.pnlIp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.pnlIp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.pnlIp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlIp.Controls.Add(this.lblStartIP, 0, 0);
             this.pnlIp.Controls.Add(this.ipEnd, 1, 1);
             this.pnlIp.Controls.Add(this.ipStart, 1, 0);
@@ -417,9 +414,23 @@ namespace mRemoteNG.UI.Window
             this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.pnlIp.Size = new System.Drawing.Size(878, 129);
             this.pnlIp.TabIndex = 103;
+            // 
+            // btnScan
+            // 
+            this.btnScan._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnScan.Image = global::mRemoteNG.Resources.Search;
+            this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnScan.Location = new System.Drawing.Point(765, 99);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(110, 24);
+            this.btnScan.TabIndex = 6;
+            this.btnScan.Text = "&Scan";
+            this.btnScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // pnlImport
             // 
@@ -456,21 +467,6 @@ namespace mRemoteNG.UI.Window
             this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.pnlMain.Size = new System.Drawing.Size(884, 461);
             this.pnlMain.TabIndex = 105;
-            // 
-            // btnScan
-            // 
-            this.btnScan._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScan.Image = global::mRemoteNG.Resources.Search;
-            this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnScan.Location = new System.Drawing.Point(765, 99);
-            this.btnScan.Name = "btnScan";
-            this.btnScan.Size = new System.Drawing.Size(110, 24);
-            this.btnScan.TabIndex = 6;
-            this.btnScan.Text = "&Scan";
-            this.btnScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnScan.UseVisualStyleBackColor = true;
-            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // PortScanWindow
             // 
