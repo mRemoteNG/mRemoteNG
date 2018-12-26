@@ -283,6 +283,7 @@ namespace mRemoteNG.UI.Window
             WindowType = WindowType.Config;
             DockPnl = panel;
             InitializeComponent();
+            ApplyLanguage();
         }
         #endregion
 
@@ -685,7 +686,6 @@ namespace mRemoteNG.UI.Window
 		
 		private void Config_Load(object sender, EventArgs e)
 		{
-			ApplyLanguage();
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             ApplyTheme();
