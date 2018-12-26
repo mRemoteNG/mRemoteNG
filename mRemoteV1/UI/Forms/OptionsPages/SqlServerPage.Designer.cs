@@ -25,9 +25,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//NOTE: The following procedure is required by the Windows Form Designer
 		//It can be modified using the Windows Form Designer.
 		//Do not modify it using the code editor.
-		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
+		[System.Diagnostics.DebuggerStepThrough()]
+        private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlServerPage));
 			this.lblSQLDatabaseName = new mRemoteNG.UI.Controls.Base.NGLabel();
 			this.txtSQLDatabaseName = new mRemoteNG.UI.Controls.Base.NGTextBox();
 			this.lblExperimental = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -236,7 +236,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.Controls.Add(this.txtSQLServer);
 			this.Controls.Add(this.lblSQLPassword);
 			this.Name = "SqlServerPage";
-			this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
 			this.Size = new System.Drawing.Size(610, 489);
 			((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).EndInit();
 			this.ResumeLayout(false);

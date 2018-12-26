@@ -12,6 +12,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
             ApplyTheme();
+            PageIcon = Resources.shield;
         }
 
         [Browsable(false)]
