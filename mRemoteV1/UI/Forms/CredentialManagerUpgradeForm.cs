@@ -2,8 +2,11 @@
 using System.Windows.Forms;
 using System.Xml.Linq;
 using mRemoteNG.App;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.Versioning;
+using mRemoteNG.Connection;
+using mRemoteNG.Credential;
 using mRemoteNG.Tree;
 
 namespace mRemoteNG.UI.Forms
@@ -13,11 +16,13 @@ namespace mRemoteNG.UI.Forms
         private string _connectionFilePath;
         private string _newCredentialRepoPath;
 
-        public XmlCredentialManagerUpgrader DecoratedDeserializer { get; set; }
+        public IDeserializer<string, ConnectionTreeModel> ConnectionDeserializer { get; set; }
+        public ConnectionsService ConnectionsService { get; set; }
+        public CredentialServiceFacade CredentialService { get; set; }
 
         public string ConnectionFilePath
         {
-            get { return _connectionFilePath; }
+            get => _connectionFilePath;
             set
             {
                 _connectionFilePath = value;
@@ -27,7 +32,7 @@ namespace mRemoteNG.UI.Forms
 
         public string NewCredentialRepoPath
         {
-            get { return _newCredentialRepoPath; }
+            get => _newCredentialRepoPath;
             set
             {
                 _newCredentialRepoPath = value; 
@@ -45,24 +50,31 @@ namespace mRemoteNG.UI.Forms
         public ConnectionTreeModel Deserialize(string serializedData)
         {
             var xdoc = XDocument.Parse(serializedData);
-            if (!WeCanUpgradeFromThisVersion(xdoc))
-                return DecoratedDeserializer.Deserialize(serializedData);
+            if (!XmlCredentialManagerUpgrader.CredentialManagerUpgradeNeeded(xdoc))
+                return ConnectionDeserializer.Deserialize(serializedData);
 
             // close the splash screen during upgrade
-            var frmSplashScreen = FrmSplashScreen.getInstance();
-            frmSplashScreen.Close();
+            FrmSplashScreen.getInstance().Close();
 
             var result = ShowDialog();
             if (result != DialogResult.OK)
                 return new ConnectionTreeModel();
 
-            DecoratedDeserializer.CredentialFilePath = NewCredentialRepoPath;
-            return DecoratedDeserializer.Deserialize(serializedData);
+            var upgradingDeserializer = new XmlCredentialManagerUpgrader(CredentialService, NewCredentialRepoPath, ConnectionDeserializer);
+            var connectionTreeModel = upgradingDeserializer.Deserialize(serializedData);
+
+            ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
+
+            return connectionTreeModel;
         }
 
-        private bool WeCanUpgradeFromThisVersion(XDocument xdoc)
+        /// <summary>
+        /// Request that the upgraded connection file be saved immediately after the upgrade is complete
+        /// </summary>
+        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
-            return XmlCredentialManagerUpgrader.GetVersionFromConfiguration(xdoc) < 2.8m;
+            ConnectionsService.ConnectionsLoaded -= ConnectionsServiceOnConnectionsLoaded;
+            ConnectionsService.SaveConnectionsAsync();
         }
 
         private void ApplyLanguage()

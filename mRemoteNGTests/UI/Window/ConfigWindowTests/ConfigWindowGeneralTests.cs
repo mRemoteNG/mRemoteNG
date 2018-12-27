@@ -129,9 +129,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.RDP:
                     expectedProperties.AddRange(new []
                     {
-                        nameof(ConnectionInfo.Username),
-                        nameof(ConnectionInfo.Password),
-                        nameof(ConnectionInfo.Domain),
+                        nameof(ConnectionInfo.CredentialRecord),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.UseConsoleSession),
                         nameof(ConnectionInfo.RDPAuthenticationLevel),
@@ -158,7 +156,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.VNC:
                     expectedProperties.AddRange(new []
                     {
-                        nameof(ConnectionInfo.Password),
+                        nameof(ConnectionInfo.CredentialRecord),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.VNCSmartSizeMode),
                         nameof(ConnectionInfo.VNCViewOnly),
@@ -168,8 +166,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.SSH2:
                     expectedProperties.AddRange(new []
                     {
-                        nameof(ConnectionInfo.Username),
-                        nameof(ConnectionInfo.Password),
+                        nameof(ConnectionInfo.CredentialRecord),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.PuttySession)
                     });
@@ -187,8 +184,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.HTTPS:
                     expectedProperties.AddRange(new []
                     {
-                        nameof(ConnectionInfo.Username),
-                        nameof(ConnectionInfo.Password),
+                        nameof(ConnectionInfo.CredentialRecord),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.RenderingEngine),
                     });
@@ -196,9 +192,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.ICA:
                     expectedProperties.AddRange(new []
                     {
-                        nameof(ConnectionInfo.Username),
-                        nameof(ConnectionInfo.Password),
-                        nameof(ConnectionInfo.Domain),
+                        nameof(ConnectionInfo.CredentialRecord),
                         nameof(ConnectionInfo.ICAEncryptionStrength),
                         nameof(ConnectionInfo.Resolution),
                         nameof(ConnectionInfo.Colors),
@@ -208,9 +202,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.IntApp:
                     expectedProperties.AddRange(new[]
                     {
-                        nameof(ConnectionInfo.Username),
-                        nameof(ConnectionInfo.Password),
-                        nameof(ConnectionInfo.Domain),
+                        nameof(ConnectionInfo.CredentialRecord),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.ExtApp),
                     });

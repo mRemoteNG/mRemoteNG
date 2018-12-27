@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
         {
             if (!AllRequiredFieldsFilledOut()) return;
             SaveValuesToConfig();
-            if (!_repositoryList.Contains(_repositoryConfig.Id))
+            if (!_repositoryList.Contains(_repositoryConfig))
             {
                 var newCredentialRepository = BuildXmlRepoFromSettings(_repositoryConfig);
                 _repositoryList.AddProvider(newCredentialRepository);

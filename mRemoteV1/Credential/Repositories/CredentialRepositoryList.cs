@@ -15,7 +15,9 @@ namespace mRemoteNG.Credential.Repositories
 
         public void AddProvider(ICredentialRepository credentialProvider)
         {
-            if (Contains(credentialProvider.Config.Id)) return;
+            if (Contains(credentialProvider.Config))
+                return;
+
             _credentialProviders.Add(credentialProvider);
             credentialProvider.CredentialsUpdated += RaiseCredentialsUpdatedEvent;
             credentialProvider.RepositoryConfigUpdated += OnRepoConfigChanged;
@@ -24,16 +26,20 @@ namespace mRemoteNG.Credential.Repositories
 
         public void RemoveProvider(ICredentialRepository credentialProvider)
         {
-            if (!Contains(credentialProvider.Config.Id)) return;
+            if (!Contains(credentialProvider.Config))
+                return;
+
             credentialProvider.CredentialsUpdated -= RaiseCredentialsUpdatedEvent;
             credentialProvider.RepositoryConfigUpdated -= OnRepoConfigChanged;
             _credentialProviders.Remove(credentialProvider);
             RaiseRepositoriesUpdatedEvent(ActionType.Removed, new[] { credentialProvider });
         }
 
-        public bool Contains(Guid repositoryId)
+        public bool Contains(ICredentialRepositoryConfig repositoryConfig)
         {
-            return _credentialProviders.Any(repo => repo.Config.Id == repositoryId);
+            return _credentialProviders.Any(repo => 
+                repo.Config.Id == repositoryConfig.Id || 
+                string.Equals(repo.Config.Source, repositoryConfig.Source));
         }
 
         public IEnumerable<ICredentialRecord> GetCredentialRecords()

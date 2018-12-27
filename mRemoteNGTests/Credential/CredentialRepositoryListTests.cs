@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using mRemoteNGTests.TestHelpers;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -47,14 +48,37 @@ namespace mRemoteNGTests.Credential
         }
 
         [Test]
+        public void WillNotAddRepositoriesPointingToTheSameSource()
+        {
+            var source = Randomizer.RandomString();
+
+            var provider1 = Substitute.For<ICredentialRepository>();
+            provider1.Config.Id.Returns(Guid.NewGuid());
+            provider1.Config.Source.Returns(source);
+
+            var provider2 = Substitute.For<ICredentialRepository>();
+            provider2.Config.Id.Returns(Guid.NewGuid());
+            provider2.Config.Source.Returns(source);
+
+            _credentialCatalog.AddProvider(provider1);
+            _credentialCatalog.AddProvider(provider2);
+            Assert.That(_credentialCatalog.CredentialProviders.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
         public void RepositoryNotInListAfterBeingRemoved()
         {
             var provider1 = Substitute.For<ICredentialRepository>();
             provider1.Config.Id.Returns(Guid.NewGuid());
+            provider1.Config.Source.Returns(Randomizer.RandomString());
+
             var provider2 = Substitute.For<ICredentialRepository>();
             provider2.Config.Id.Returns(Guid.NewGuid());
+            provider2.Config.Source.Returns(Randomizer.RandomString());
+
             _credentialCatalog.AddProvider(provider1);
             _credentialCatalog.AddProvider(provider2);
+
             _credentialCatalog.RemoveProvider(provider1);
             Assert.That(_credentialCatalog.CredentialProviders, Is.EquivalentTo(new[] {provider2}));
         }

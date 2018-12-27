@@ -121,7 +121,7 @@ namespace mRemoteNGTests.Config
         {
             var rootNode = new RootNodeInfo(RootNodeType.Connection) {PasswordString = _key.ConvertToUnsecureString()};
             rootNode.AddChild(connectionInfo);
-            var nodeSerializer = new XmlConnectionNodeSerializer27(_cryptographyProvider, _key, new SaveFilter());
+            var nodeSerializer = new XmlConnectionNodeSerializer26(_cryptographyProvider, _key, new SaveFilter());
             var serializer = new XmlConnectionsSerializer(_cryptographyProvider, nodeSerializer);
             var serializedData = serializer.Serialize(rootNode);
             return XDocument.Parse(serializedData);

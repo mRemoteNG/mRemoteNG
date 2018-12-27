@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.Credential
@@ -12,7 +13,7 @@ namespace mRemoteNG.Credential
 
         void RemoveProvider(ICredentialRepository credentialProvider);
 
-        bool Contains(Guid repositoryId);
+        bool Contains(ICredentialRepositoryConfig repositoryConfig);
 
         IEnumerable<ICredentialRecord> GetCredentialRecords();
 

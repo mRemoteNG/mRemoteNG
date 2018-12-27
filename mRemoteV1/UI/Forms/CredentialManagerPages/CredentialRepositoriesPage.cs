@@ -88,7 +88,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             var selectedRepository = credentialRepositoryListView.SelectedRepository;
             if (selectedRepository == null) return;
-            if (_providerCatalog.Contains(selectedRepository.Config.Id))
+            if (_providerCatalog.Contains(selectedRepository.Config))
                 _providerCatalog.RemoveProvider(selectedRepository);
         }
 

@@ -140,7 +140,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 {
                     nameof(ConnectionInfo.Inheritance),
                     nameof(ConnectionInfo.ConstantID),
-                    nameof(ConnectionInfo.Parent)
+                    nameof(ConnectionInfo.Parent),
+                    nameof(ConnectionInfo.CredentialRecord)
                 };
                 var properties = typeof(ConnectionInfo)
                     .GetProperties()

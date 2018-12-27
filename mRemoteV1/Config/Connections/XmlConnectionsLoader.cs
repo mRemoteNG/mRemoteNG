@@ -7,6 +7,7 @@ using System.IO;
 using System.Security;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Serializers.Versioning;
+using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.UI.Forms;
 
@@ -16,9 +17,10 @@ namespace mRemoteNG.Config.Connections
     {
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly string _connectionFilePath;
+        private readonly ConnectionsService _connectionsService;
         private readonly CredentialServiceFacade _credentialService;
 
-        public XmlConnectionsLoader(string connectionFilePath, CredentialServiceFacade credentialService)
+        public XmlConnectionsLoader(string connectionFilePath, CredentialServiceFacade credentialService, ConnectionsService connectionsService)
         {
             if (string.IsNullOrEmpty(connectionFilePath))
                 throw new ArgumentException($"{nameof(connectionFilePath)} cannot be null or empty");
@@ -27,6 +29,7 @@ namespace mRemoteNG.Config.Connections
                 throw new FileNotFoundException($"{connectionFilePath} does not exist");
 
             _connectionFilePath = connectionFilePath;
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
             _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
         }
 
@@ -38,11 +41,9 @@ namespace mRemoteNG.Config.Connections
             {
                 ConnectionFilePath = _connectionFilePath,
                 NewCredentialRepoPath = _credentialFilePath,
-                DecoratedDeserializer = new XmlCredentialManagerUpgrader(
-                    _credentialService,
-                    _credentialFilePath,
-                    new XmlConnectionsDeserializer(PromptForPassword)
-                )
+                ConnectionsService = _connectionsService,
+                CredentialService = _credentialService,
+                ConnectionDeserializer = new XmlConnectionsDeserializer(PromptForPassword)
             };
 
             return deserializer.Deserialize(xmlString);

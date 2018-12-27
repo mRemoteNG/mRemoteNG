@@ -27,7 +27,7 @@ namespace mRemoteNG.Config.Serializers.Xml
         private double _confVersion;
         private XmlConnectionsDecryptor _decryptor;
         private string ConnectionFileName = "";
-        private const double MaxSupportedConfVersion = 2.8;
+        private const double MaxSupportedConfVersion = 2.7;
         private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
 
         public Func<Optional<SecureString>> AuthenticationRequestor { get; set; }
@@ -235,6 +235,13 @@ namespace mRemoteNG.Config.Serializers.Xml
                         connectionInfo.Password = _decryptor.Decrypt(xmlnode.Attributes["Password"].Value);
                         connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
 #pragma warning restore 618
+                    }
+
+                    if (Runtime.UseCredentialManager && _confVersion >= 2.7)
+                    {
+                        connectionInfo.CredentialRecordId = Guid.TryParse(xmlnode.Attributes["CredentialId"]?.Value, out var credId) 
+                            ? credId 
+                            : Optional<Guid>.Empty;
                     }
                 }
 

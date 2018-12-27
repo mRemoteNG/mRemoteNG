@@ -28,8 +28,7 @@ namespace mRemoteNG.Config
                 if (!EntryHasSomeCredentialData(element)) continue;
                 var newCredential = BuildCredential(element, cryptoProvider, decryptionKey);
 
-                Guid connectionId;
-                Guid.TryParse(element.Attribute("Id")?.Value, out connectionId);
+                Guid.TryParse(element.Attribute("Id")?.Value, out var connectionId);
                 if (connectionId == Guid.Empty)
                 {
                     //error
@@ -49,11 +48,14 @@ namespace mRemoteNG.Config
 
         private ICredentialRecord BuildCredential(XElement element, ICryptographyProvider cryptographyProvider, SecureString decryptionKey)
         {
+            var user = element.Attribute("Username")?.Value;
+            var domain = element.Attribute("Domain")?.Value;
+
             var credential = new CredentialRecord
             {
-                Title = $"{element.Attribute("Username")?.Value}\\{element.Attribute("Domain")?.Value}",
-                Username = element.Attribute("Username")?.Value,
-                Domain = element.Attribute("Domain")?.Value,
+                Title = $"{domain}{(string.IsNullOrEmpty(domain) ? "" : "\\")}{user}",
+                Username = user,
+                Domain = domain,
                 Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString()
             };
             return credential;

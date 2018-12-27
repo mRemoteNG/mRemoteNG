@@ -11,7 +11,6 @@ using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
-using System.Globalization;
 using System.Linq;
 
 namespace mRemoteNG.Config.Serializers.Versioning
@@ -26,14 +25,9 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public XmlCredentialManagerUpgrader(CredentialServiceFacade credentialsService, string credentialFilePath, IDeserializer<string, ConnectionTreeModel> decoratedDeserializer)
         {
-            if (credentialsService == null)
-                throw new ArgumentNullException(nameof(credentialsService));
-            if (decoratedDeserializer == null)
-                throw new ArgumentNullException(nameof(decoratedDeserializer));
-
-            _credentialsService = credentialsService;
+            _credentialsService = credentialsService.ThrowIfNull(nameof(credentialsService));
             CredentialFilePath = credentialFilePath;
-            _decoratedDeserializer = decoratedDeserializer;
+            _decoratedDeserializer = decoratedDeserializer.ThrowIfNull(nameof(decoratedDeserializer));
         }
 
         public ConnectionTreeModel Deserialize(string serializedData)
@@ -59,17 +53,9 @@ namespace mRemoteNG.Config.Serializers.Versioning
             return xdoc;
         }
 
-        public static decimal? GetVersionFromConfiguration(XDocument xdoc)
-        {
-            var versionString = xdoc.Root?.Attribute("ConfVersion")?.Value;
-            return versionString != null
-                ? (decimal?)decimal.Parse(versionString, CultureInfo.InvariantCulture)
-                : null;
-        }
-
         public Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager(XDocument xdoc)
         {
-            if (!UpgradeNeeded(xdoc))
+            if (!CredentialManagerUpgradeNeeded(xdoc))
             {
                 return null;
             }
@@ -95,13 +81,18 @@ namespace mRemoteNG.Config.Serializers.Versioning
         }
 
         /// <summary>
-        /// If any connections in the xml contain a Username field, we need to upgrade
+        /// If any connections in the xml contain a Username/Domain/Password field, we need to upgrade
+        /// it to be compatible with the credential manager.
         /// </summary>
         /// <param name="xdoc"></param>
-        /// <returns></returns>
-        private bool UpgradeNeeded(XContainer xdoc)
+        public static bool CredentialManagerUpgradeNeeded(XContainer xdoc)
         {
-            return xdoc.Descendants("Node").Any(n => n.Attribute("Username") != null);
+            return xdoc
+                .Descendants("Node")
+                .Any(n => 
+                    n.Attribute("Username") != null ||
+                    n.Attribute("Domain") != null ||
+                    n.Attribute("Password") != null);
         }
 
         private ICredentialRepository BuildXmlCredentialRepo(SecureString newCredRepoKey)
@@ -136,8 +127,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
         {
             foreach (var connectionInfo in connectionRecords)
             {
-                Guid id;
-                Guid.TryParse(connectionInfo.ConstantID, out id);
+                Guid.TryParse(connectionInfo.ConstantID, out var id);
                 if (map.ContainsKey(id))
                     connectionInfo.CredentialRecordId = map[id].Id.Maybe();
             }

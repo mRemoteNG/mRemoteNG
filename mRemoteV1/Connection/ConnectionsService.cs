@@ -42,10 +42,7 @@ namespace mRemoteNG.Connection
 
         public ConnectionsService(PuttySessionsManager puttySessionsManager, CredentialServiceFacade credentialService)
         {
-            if (puttySessionsManager == null)
-                throw new ArgumentNullException(nameof(puttySessionsManager));
-
-            _puttySessionsManager = puttySessionsManager;
+            _puttySessionsManager = puttySessionsManager.ThrowIfNull(nameof(puttySessionsManager));
             _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
             var path = SettingsFileInfo.SettingsPath;
             _localConnectionPropertiesDataProvider = new FileDataProvider(Path.Combine(path, "LocalConnectionProperties.xml"));
@@ -120,7 +117,7 @@ namespace mRemoteNG.Connection
 
             var connectionLoader = useDatabase
                 ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
-                : new XmlConnectionsLoader(connectionFileName, _credentialService);
+                : new XmlConnectionsLoader(connectionFileName, _credentialService, this);
 
             var newConnectionTreeModel = connectionLoader.Load();
 

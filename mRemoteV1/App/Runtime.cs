@@ -35,7 +35,7 @@ namespace mRemoteNG.App
         /// <summary>
         /// Feature flag to enable the credential manager feature
         /// </summary>
-        public static bool UseCredentialManager => false;
+        public static bool UseCredentialManager => true;
 
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();

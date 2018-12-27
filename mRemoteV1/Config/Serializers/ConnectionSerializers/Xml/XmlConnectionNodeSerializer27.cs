@@ -66,6 +66,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                 else
                     element.Add(new XAttribute("Password", ""));
             }
+            else
+            {
+                element.Add(new XAttribute("CredentialId", connectionInfo.CredentialRecordId));
+            }
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
