@@ -188,6 +188,7 @@
     <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion26To27Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\XmlCredentialManagerUpgrader.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />
     <Compile Include="Config\DataProviders\SqlDataProvider.cs" />
@@ -490,6 +491,64 @@
     <Compile Include="UI\DisplayProperties.cs" />
     <Compile Include="UI\FontOverrider.cs" />
     <Compile Include="UI\FormExtensions.cs" />
+    <Compile Include="UI\Forms\CompositeCredentialRepoUnlockerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CompositeCredentialRepoUnlockerForm.Designer.cs">
+      <DependentUpon>CompositeCredentialRepoUnlockerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerForm.Designer.cs">
+      <DependentUpon>CredentialManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialEditorPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialEditorPage.Designer.cs">
+      <DependentUpon>CredentialEditorPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialListPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialListPage.Designer.cs">
+      <DependentUpon>CredentialListPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.Designer.cs">
+      <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\CredentialRepositoryPageEditorFactory.cs" />
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.Designer.cs">
+      <DependentUpon>XmlCredentialRepositoryEditorPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.Designer.cs">
+      <DependentUpon>CredentialRepositorySelectionPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectors\KeePassRepositorySelector.cs" />
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectors\XmlCredentialRepositorySelector.cs" />
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryTypeSelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\CredentialRepositoryTypeSelectionPage.Designer.cs">
+      <DependentUpon>CredentialRepositoryTypeSelectionPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerPages\ICredentialManagerPage.cs" />
+    <Compile Include="UI\Forms\CredentialManagerUpgradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialManagerUpgradeForm.Designer.cs">
+      <DependentUpon>CredentialManagerUpgradeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\FrmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -670,6 +729,7 @@
     <Compile Include="UI\Forms\UnhandledExceptionWindow.Designer.cs">
       <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\UnlockerFormFactory.cs" />
     <Compile Include="UI\GraphicsUtilities\GdiPlusGraphicsProvider.cs" />
     <Compile Include="UI\GraphicsUtilities\IGraphicsProvider.cs" />
     <Compile Include="UI\Menu\HelpMenu.cs">
@@ -797,6 +857,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CompositeCredentialRepoUnlockerForm.resx">
+      <DependentUpon>CompositeCredentialRepoUnlockerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerForm.resx">
+      <DependentUpon>CredentialManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialEditorPage.resx">
+      <DependentUpon>CredentialEditorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialListPage.resx">
+      <DependentUpon>CredentialListPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositoriesPage.resx">
+      <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositoryEditorPages\XmlCredentialRepositoryEditorPage.resx">
+      <DependentUpon>XmlCredentialRepositoryEditorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositorySelectionPage.resx">
+      <DependentUpon>CredentialRepositorySelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerPages\CredentialRepositoryTypeSelectionPage.resx">
+      <DependentUpon>CredentialRepositoryTypeSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialManagerUpgradeForm.resx">
+      <DependentUpon>CredentialManagerUpgradeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FrmChoosePanel.resx">
       <DependentUpon>FrmChoosePanel.cs</DependentUpon>

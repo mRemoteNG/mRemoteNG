@@ -141,7 +141,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername")]
-        [Obsolete("Use the CredentialRecordId property")]
+        [Obsolete("Use the CredentialRecord property")]
         [Browsable(false)]
         public virtual string Username
         {
@@ -153,7 +153,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNamePassword"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPassword"),
             PasswordPropertyText(true)]
-        [Obsolete("Use the CredentialRecordId property")]
+        [Obsolete("Use the CredentialRecord property")]
         [Browsable(false)]
         public virtual string Password
         {
@@ -164,7 +164,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
-        [Obsolete("Use the CredentialRecordId property")]
+        [Obsolete("Use the CredentialRecord property")]
         [Browsable(false)]
         public string Domain
         {
