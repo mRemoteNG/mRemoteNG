@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Design;
+using System.Linq;
+using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Credential;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Controls.Adapters;
 
 
 namespace mRemoteNG.Connection
@@ -21,6 +26,8 @@ namespace mRemoteNG.Connection
         private string _panel;
 
         private string _hostname;
+        private Optional<Guid> _credentialRecordId = new Optional<Guid>();
+
         private string _username = "";
         private string _password = "";
         private string _domain = "";
@@ -134,6 +141,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername")]
+        [Obsolete("Use the CredentialRecordId property")]
+        [Browsable(false)]
         public virtual string Username
         {
             get => GetPropertyValue("Username", _username);
@@ -144,6 +153,8 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNamePassword"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPassword"),
             PasswordPropertyText(true)]
+        [Obsolete("Use the CredentialRecordId property")]
+        [Browsable(false)]
         public virtual string Password
         {
             get => GetPropertyValue("Password", _password);
@@ -153,10 +164,37 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
+        [Obsolete("Use the CredentialRecordId property")]
+        [Browsable(false)]
         public string Domain
         {
             get => GetPropertyValue("Domain", _domain).Trim();
             set => SetField(ref _domain, value?.Trim(), "Domain");
+        }
+
+        [Browsable(false)]
+        public virtual Optional<Guid> CredentialRecordId
+        {
+            get => GetPropertyValue(nameof(CredentialRecordId), _credentialRecordId);
+            set => SetField(ref _credentialRecordId, value, nameof(CredentialRecordId));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 2),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strCategoryCredentials)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionCredential))]
+        [Editor(typeof(CredentialRecordListAdaptor), typeof(UITypeEditor))]
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public virtual ICredentialRecord CredentialRecord
+        {
+            get
+            {
+                var credential = CredentialRecordId
+                    .Select(guid => Runtime.CredentialProviderCatalog.GetCredentialRecord(guid))
+                    .FirstOrDefault();
+                return credential ?? new PlaceholderCredentialRecord(CredentialRecordId);
+            }
+
+            set => CredentialRecordId = Optional<Guid>.FromNullable(value?.Id);
         }
         #endregion
 
