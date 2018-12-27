@@ -43,7 +43,8 @@ namespace mRemoteNG.App
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
-        public static ConnectionsService ConnectionsService { get; } = new ConnectionsService(PuttySessionsManager.Instance);
+        public static CredentialServiceFacade CredentialService { get; } = new CredentialServiceFactory().Build();
+        public static ConnectionsService ConnectionsService { get; } = new ConnectionsService(PuttySessionsManager.Instance, CredentialService);
 
         #region Connections Loading/Saving
         public static void LoadConnectionsAsync()

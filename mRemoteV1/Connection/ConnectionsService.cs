@@ -17,6 +17,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Config;
+using mRemoteNG.Credential;
 
 namespace mRemoteNG.Connection
 {
@@ -29,6 +30,7 @@ namespace mRemoteNG.Connection
         private bool _batchingSaves = false;
         private bool _saveRequested = false;
         private bool _saveAsyncRequested = false;
+        private readonly CredentialServiceFacade _credentialService;
 
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
@@ -38,12 +40,13 @@ namespace mRemoteNG.Connection
 
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
 
-        public ConnectionsService(PuttySessionsManager puttySessionsManager)
+        public ConnectionsService(PuttySessionsManager puttySessionsManager, CredentialServiceFacade credentialService)
         {
             if (puttySessionsManager == null)
                 throw new ArgumentNullException(nameof(puttySessionsManager));
 
             _puttySessionsManager = puttySessionsManager;
+            _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
             var path = SettingsFileInfo.SettingsPath;
             _localConnectionPropertiesDataProvider = new FileDataProvider(Path.Combine(path, "LocalConnectionProperties.xml"));
             _localConnectionPropertiesSerializer = new LocalConnectionPropertiesXmlSerializer();
@@ -117,7 +120,7 @@ namespace mRemoteNG.Connection
 
             var connectionLoader = useDatabase
                 ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
-                : new XmlConnectionsLoader(connectionFileName);
+                : new XmlConnectionsLoader(connectionFileName, _credentialService);
 
             var newConnectionTreeModel = connectionLoader.Load();
 

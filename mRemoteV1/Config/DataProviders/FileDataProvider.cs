@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using mRemoteNG.App;
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.Config.DataProviders
 {
@@ -18,16 +19,19 @@ namespace mRemoteNG.Config.DataProviders
             var fileContents = "";
             try
             {
+                if (!File.Exists(FilePath))
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"Could not load file. File does not exist '{FilePath}'");
+                    return "";
+                }
+
                 fileContents = File.ReadAllText(FilePath);
-            }
-            catch (FileNotFoundException ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace($"Could not load file. File does not exist '{FilePath}'", ex);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace($"Failed to load file {FilePath}", ex);
             }
+
             return fileContents;
         }
 

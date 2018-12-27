@@ -12,6 +12,7 @@ using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using System.Globalization;
+using System.Linq;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
@@ -68,7 +69,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager(XDocument xdoc)
         {
-            if ((GetVersionFromConfiguration(xdoc) ?? 0) >= 2.7m)
+            if (!UpgradeNeeded(xdoc))
             {
                 return null;
             }
@@ -91,6 +92,16 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
             _credentialsService.AddRepository(newCredentialRepository);
             return credentialHarvester.ConnectionToCredentialMap;
+        }
+
+        /// <summary>
+        /// If any connections in the xml contain a Username field, we need to upgrade
+        /// </summary>
+        /// <param name="xdoc"></param>
+        /// <returns></returns>
+        private bool UpgradeNeeded(XContainer xdoc)
+        {
+            return xdoc.Descendants("Node").Any(n => n.Attribute("Username") != null);
         }
 
         private ICredentialRepository BuildXmlCredentialRepo(SecureString newCredRepoKey)

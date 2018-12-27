@@ -48,8 +48,14 @@ namespace mRemoteNG.UI.Forms
             if (!WeCanUpgradeFromThisVersion(xdoc))
                 return DecoratedDeserializer.Deserialize(serializedData);
 
+            // close the splash screen during upgrade
+            var frmSplashScreen = FrmSplashScreen.getInstance();
+            frmSplashScreen.Close();
+
             var result = ShowDialog();
-            if (result != DialogResult.OK) return new ConnectionTreeModel();
+            if (result != DialogResult.OK)
+                return new ConnectionTreeModel();
+
             DecoratedDeserializer.CredentialFilePath = NewCredentialRepoPath;
             return DecoratedDeserializer.Deserialize(serializedData);
         }
