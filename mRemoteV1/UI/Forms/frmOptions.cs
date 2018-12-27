@@ -95,8 +95,8 @@ namespace mRemoteNG.UI.Forms
         private object ImageGetter(object rowobject)
         {
             var page = rowobject as OptionsPage;
-            if (page == null)
-                return Resources.Help;
+            if (page?.PageIcon == null)
+                return _display.ScaleImage(Resources.Help);
 
             return _display.ScaleImage(page.PageIcon);
         }

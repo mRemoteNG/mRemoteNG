@@ -231,6 +231,7 @@
       <DependentUpon>TextBoxExtensionsTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\TextBoxExtensionsTests.cs" />
+    <Compile Include="UI\DisplayPropertiesTests.cs" />
     <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
     <Compile Include="UI\Forms\PasswordFormTests.cs" />
     <Compile Include="UI\WindowListTests.cs" />
@@ -295,6 +296,7 @@
     <Content Include="Resources\beta-update.txt" />
     <Content Include="Resources\dev-update-portable.txt" />
     <Content Include="Resources\dev-update.txt" />
+    <None Include="Resources\TestImage.bmp" />
     <Content Include="Resources\update-portable.txt" />
     <Content Include="Resources\update.txt" />
   </ItemGroup>

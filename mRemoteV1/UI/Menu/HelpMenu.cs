@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -142,39 +143,19 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region Info
-        private void mMenToolsUpdate_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.Update);
-        }
-        private void mMenInfoHelp_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.Help);
-        }
+        private void mMenToolsUpdate_Click(object sender, EventArgs e) => Windows.Show(WindowType.Update);
 
-        private void mMenInfoForum_Click(object sender, EventArgs e)
-        {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlForum);
-        }
+        private void mMenInfoHelp_Click(object sender, EventArgs e) => Windows.Show(WindowType.Help);
 
-        private void mMenInfoBugReport_Click(object sender, EventArgs e)
-        {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlBugs);
-        }
+        private void mMenInfoForum_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlForum);
 
-        private void mMenInfoWebsite_Click(object sender, EventArgs e)
-        {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlHome);
-        }
+        private void mMenInfoBugReport_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlBugs);
 
-        private void mMenInfoDonate_Click(object sender, EventArgs e)
-        {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlDonate);
-        }
+        private void mMenInfoWebsite_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlHome);
 
-        private void mMenInfoAbout_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.About);
-        }
+        private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlDonate);
+
+        private void mMenInfoAbout_Click(object sender, EventArgs e) => Windows.Show(WindowType.About);
         #endregion
     }
 }

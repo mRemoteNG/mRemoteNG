@@ -22,6 +22,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public ThemePage()
         {
             InitializeComponent();
+            PageIcon = Resources.Appearance_Icon;
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             _themeManager = ThemeManager.getInstance();

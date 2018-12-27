@@ -28,7 +28,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//NOTE: The following procedure is required by the Windows Form Designer
 		//It can be modified using the Windows Form Designer.
 		//Do not modify it using the code editor.
-		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
+		[System.Diagnostics.DebuggerStepThrough()]
+        private void InitializeComponent()
 		{
             this.chkReconnectOnStart = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkSaveConsOnExit = new mRemoteNG.UI.Controls.Base.NGCheckBox();

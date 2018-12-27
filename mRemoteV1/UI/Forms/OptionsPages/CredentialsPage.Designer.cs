@@ -56,13 +56,13 @@
             this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsDomain);
             this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 3);
             this.pnlDefaultCredentials.Name = "pnlDefaultCredentials";
-            this.pnlDefaultCredentials.Size = new System.Drawing.Size(596, 175);
+            this.pnlDefaultCredentials.Size = new System.Drawing.Size(604, 175);
             this.pnlDefaultCredentials.TabIndex = 0;
             // 
             // radCredentialsCustom
             // 
             this.radCredentialsCustom.AutoSize = true;
-            this.radCredentialsCustom.Location = new System.Drawing.Point(16, 69);
+            this.radCredentialsCustom.Location = new System.Drawing.Point(3, 62);
             this.radCredentialsCustom.Name = "radCredentialsCustom";
             this.radCredentialsCustom.Size = new System.Drawing.Size(87, 17);
             this.radCredentialsCustom.TabIndex = 3;
@@ -73,7 +73,7 @@
             // lblDefaultCredentials
             // 
             this.lblDefaultCredentials.AutoSize = true;
-            this.lblDefaultCredentials.Location = new System.Drawing.Point(3, 9);
+            this.lblDefaultCredentials.Location = new System.Drawing.Point(0, 0);
             this.lblDefaultCredentials.Name = "lblDefaultCredentials";
             this.lblDefaultCredentials.Size = new System.Drawing.Size(257, 13);
             this.lblDefaultCredentials.TabIndex = 0;
@@ -83,7 +83,7 @@
             // 
             this.radCredentialsNoInfo.AutoSize = true;
             this.radCredentialsNoInfo.Checked = true;
-            this.radCredentialsNoInfo.Location = new System.Drawing.Point(16, 31);
+            this.radCredentialsNoInfo.Location = new System.Drawing.Point(3, 16);
             this.radCredentialsNoInfo.Name = "radCredentialsNoInfo";
             this.radCredentialsNoInfo.Size = new System.Drawing.Size(91, 17);
             this.radCredentialsNoInfo.TabIndex = 1;
@@ -94,7 +94,7 @@
             // radCredentialsWindows
             // 
             this.radCredentialsWindows.AutoSize = true;
-            this.radCredentialsWindows.Location = new System.Drawing.Point(16, 50);
+            this.radCredentialsWindows.Location = new System.Drawing.Point(3, 39);
             this.radCredentialsWindows.Name = "radCredentialsWindows";
             this.radCredentialsWindows.Size = new System.Drawing.Size(227, 17);
             this.radCredentialsWindows.TabIndex = 2;
@@ -105,7 +105,7 @@
             // 
             this.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCredentialsDomain.Enabled = false;
-            this.txtCredentialsDomain.Location = new System.Drawing.Point(140, 147);
+            this.txtCredentialsDomain.Location = new System.Drawing.Point(126, 138);
             this.txtCredentialsDomain.Name = "txtCredentialsDomain";
             this.txtCredentialsDomain.Size = new System.Drawing.Size(150, 20);
             this.txtCredentialsDomain.TabIndex = 9;
@@ -113,9 +113,9 @@
             // lblCredentialsUsername
             // 
             this.lblCredentialsUsername.Enabled = false;
-            this.lblCredentialsUsername.Location = new System.Drawing.Point(37, 95);
+            this.lblCredentialsUsername.Location = new System.Drawing.Point(20, 88);
             this.lblCredentialsUsername.Name = "lblCredentialsUsername";
-            this.lblCredentialsUsername.Size = new System.Drawing.Size(97, 13);
+            this.lblCredentialsUsername.Size = new System.Drawing.Size(100, 13);
             this.lblCredentialsUsername.TabIndex = 4;
             this.lblCredentialsUsername.Text = "Username:";
             this.lblCredentialsUsername.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -124,7 +124,7 @@
             // 
             this.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCredentialsPassword.Enabled = false;
-            this.txtCredentialsPassword.Location = new System.Drawing.Point(140, 120);
+            this.txtCredentialsPassword.Location = new System.Drawing.Point(126, 112);
             this.txtCredentialsPassword.Name = "txtCredentialsPassword";
             this.txtCredentialsPassword.Size = new System.Drawing.Size(150, 20);
             this.txtCredentialsPassword.TabIndex = 7;
@@ -133,7 +133,7 @@
             // lblCredentialsPassword
             // 
             this.lblCredentialsPassword.Enabled = false;
-            this.lblCredentialsPassword.Location = new System.Drawing.Point(34, 123);
+            this.lblCredentialsPassword.Location = new System.Drawing.Point(20, 115);
             this.lblCredentialsPassword.Name = "lblCredentialsPassword";
             this.lblCredentialsPassword.Size = new System.Drawing.Size(100, 13);
             this.lblCredentialsPassword.TabIndex = 6;
@@ -144,7 +144,7 @@
             // 
             this.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCredentialsUsername.Enabled = false;
-            this.txtCredentialsUsername.Location = new System.Drawing.Point(140, 93);
+            this.txtCredentialsUsername.Location = new System.Drawing.Point(126, 86);
             this.txtCredentialsUsername.Name = "txtCredentialsUsername";
             this.txtCredentialsUsername.Size = new System.Drawing.Size(150, 20);
             this.txtCredentialsUsername.TabIndex = 5;
@@ -152,7 +152,7 @@
             // lblCredentialsDomain
             // 
             this.lblCredentialsDomain.Enabled = false;
-            this.lblCredentialsDomain.Location = new System.Drawing.Point(34, 150);
+            this.lblCredentialsDomain.Location = new System.Drawing.Point(20, 142);
             this.lblCredentialsDomain.Name = "lblCredentialsDomain";
             this.lblCredentialsDomain.Size = new System.Drawing.Size(100, 13);
             this.lblCredentialsDomain.TabIndex = 8;
