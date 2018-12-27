@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 
@@ -225,6 +226,7 @@ namespace mRemoteNG.UI.Window
 			InitializeComponent();
             FontOverrider.FontOverride(this);
             Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyLanguage();
         }
         #endregion
 				
@@ -284,7 +286,6 @@ namespace mRemoteNG.UI.Window
 
 	    private void About_Load(object sender, EventArgs e)
 	    {
-	        ApplyLanguage();
             ApplyTheme();
 	        ApplyEditions();
 
@@ -294,17 +295,46 @@ namespace mRemoteNG.UI.Window
 
 	            lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
 
-	            if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
+                // AppVeyor seems to pull text files in UNIX format... This messes up the display on the about screen...
+                //
+                // This would be MUCH faster:
+                //var UnxEndRx = new Regex(@"(?<!\r)\n$"); // Look for UNIX line endings and still Windows line endings.
+                //if (UnxEndRx.IsMatch(txtChangeLog.Text))
+                //        txtChangeLog.Text = txtChangeLog.Text.Replace("\n", Environment.NewLine);
+                //
+                // But for some reason that I couldn't figure out, the RegEx.IsMatch on CREDITS.TXT/txtCredits.Text
+                // did not work at all despite it CLEARLY ending with \n when pulled from AppVeyor...
+                // The Changelog is a bit long anyways... Limit the number of lines to something reasonable.
+
+                if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
 	            {
-	                using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
-	                    txtChangeLog.Text = sR.ReadToEnd();
-	            }
+                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT", Encoding.Default, true))
+                    {
+                        string line;
+                        var i = 0;
+                        while ((line = sR.ReadLine()) != null && i < 128)
+                        {
+                            txtChangeLog.Text += line + Environment.NewLine;
+                            i++;
+                        }
+
+                        if (i == 128)
+                        {
+                            txtChangeLog.Text +=
+                                $"{Environment.NewLine}****************************************{Environment.NewLine}See CHANGELOG.TXT for full History...{Environment.NewLine}****************************************{Environment.NewLine}";
+                        }
+                    }
+                }
 
 	            if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
 	            {
-	                using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT", Encoding.Default, true))
-	                    txtCredits.Text = sR.ReadToEnd();
-	            }
+                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT", Encoding.Default, true))
+                    {
+                        string line;
+                        while ((line = sR.ReadLine()) != null)
+                            txtCredits.Text += line + Environment.NewLine;
+                    }
+                }
 	        }
 	        catch (Exception ex)
 	        {
