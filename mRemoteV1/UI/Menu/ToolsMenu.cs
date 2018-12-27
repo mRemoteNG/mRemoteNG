@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
+using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Forms.CredentialManagerPages;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -15,9 +17,11 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsUvncsc;
         private ToolStripMenuItem _mMenToolsComponentsCheck;
         private ToolStripMenuItem _mMenViewScreenshotManager;
+        private ToolStripMenuItem _credentialManagerToolStripMenuItem;
 
         public Form MainForm { get; set; }
         public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
+        public UnlockerFormFactory UnlockerFormFactory { get; set; }
 
         public ToolsMenu()
         {
@@ -26,6 +30,7 @@ namespace mRemoteNG.UI.Menu
 
         private void Initialize()
         {
+            _credentialManagerToolStripMenuItem = new ToolStripMenuItem();
             _mMenToolsSshTransfer = new ToolStripMenuItem();
             _mMenToolsUvncsc = new ToolStripMenuItem();
             _mMenToolsExternalApps = new ToolStripMenuItem();
@@ -38,17 +43,26 @@ namespace mRemoteNG.UI.Menu
             // mMenTools
             // 
             DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenToolsSshTransfer,
-            _mMenToolsUvncsc,
-            _mMenToolsExternalApps,
-            _mMenToolsPortScan,
-            _mMenViewScreenshotManager,
-            _mMenToolsSep1,
-            _mMenToolsComponentsCheck,
-            _mMenToolsOptions});
+                _credentialManagerToolStripMenuItem,
+                _mMenToolsSshTransfer,
+                _mMenToolsUvncsc,
+                _mMenToolsExternalApps,
+                _mMenToolsPortScan,
+                _mMenViewScreenshotManager,
+                _mMenToolsSep1,
+                _mMenToolsComponentsCheck,
+                _mMenToolsOptions});
             Name = "mMenTools";
             Size = new System.Drawing.Size(48, 20);
             Text = Language.strMenuTools;
+            // 
+            // credentialManagerToolStripMenuItem
+            // 
+            _credentialManagerToolStripMenuItem.Image = Resources.key;
+            _credentialManagerToolStripMenuItem.Name = "credentialManagerToolStripMenuItem";
+            _credentialManagerToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            _credentialManagerToolStripMenuItem.Text = Language.strCredentialManager;
+            _credentialManagerToolStripMenuItem.Click += credentialManagerToolStripMenuItem_Click;
             // 
             // mMenToolsSSHTransfer
             // 
@@ -125,6 +139,22 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region Tools
+        private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var pages = new UserControl[]
+            {
+                new CredentialListPage(CredentialProviderCatalog)
+                {
+                    DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
+                },
+                new CredentialRepositoriesPage(CredentialProviderCatalog, UnlockerFormFactory)
+            };
+
+            var credentialManagerForm = new CredentialManagerForm(pages);
+            credentialManagerForm.CenterOnTarget(MainForm);
+            credentialManagerForm.Show();
+        }
+
         private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
         {
             Windows.Show(WindowType.SSHTransfer);

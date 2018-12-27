@@ -48,6 +48,7 @@ namespace mRemoteNG.UI.Forms
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
+        private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -248,6 +249,7 @@ namespace mRemoteNG.UI.Forms
 
             toolsMenu.MainForm = this;
             toolsMenu.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
+            toolsMenu.UnlockerFormFactory = _credRepoUnlockerFormFactory;
 
             _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
