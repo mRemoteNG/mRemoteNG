@@ -248,6 +248,7 @@ namespace mRemoteNG.UI.Window
 			InitializeComponent();
             FontOverrider.FontOverride(this);
             Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyLanguage();
         }
         #endregion
 				
@@ -310,7 +311,6 @@ namespace mRemoteNG.UI.Window
 
 	    private void About_Load(object sender, EventArgs e)
 	    {
-	        ApplyLanguage();
             ApplyTheme();
 	        ApplyEditions();
 
