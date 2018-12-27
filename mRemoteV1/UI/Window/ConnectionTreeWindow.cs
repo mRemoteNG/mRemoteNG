@@ -42,6 +42,7 @@ namespace mRemoteNG.UI.Window
 			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += OnAppSettingsChanged;
+		    ApplyLanguage();
         }
 
 	    private void OnAppSettingsChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -68,7 +69,6 @@ namespace mRemoteNG.UI.Window
 	    #region Form Stuff
         private void Tree_Load(object sender, EventArgs e)
         {
-            ApplyLanguage();
             //work on the theme change
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;

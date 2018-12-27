@@ -23,6 +23,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
+            PageIcon = Resources.Update_Icon;
         }
 
         #region Public Methods

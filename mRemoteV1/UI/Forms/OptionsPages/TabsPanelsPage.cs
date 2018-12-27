@@ -6,6 +6,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
+            PageIcon = Resources.Tab_Icon;
         }
 
         public override string PageName

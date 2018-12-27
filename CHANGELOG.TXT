@@ -2,6 +2,8 @@
 
 Features/Enhancements:
 ----------------------
+#1238: Connection panel not translated until opened for the first time
+#1223: Open External Links in Default Web Browser
 #1186: Fixed several dialog boxes to use localized button text
 #1170: Prevent Options window from showing up in taskbar
 #1141: 'Copy Hostname' option added to connection tree context menu

@@ -15,6 +15,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
+            PageIcon = Resources.database;
             _databaseConnectionTester = new SqlDatabaseConnectionTester();
         }
 

@@ -485,6 +485,12 @@
     <Compile Include="UI\Forms\frmOptions.Designer.cs">
       <DependentUpon>frmOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\FrmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmSplashScreen.Designer.cs">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\FullscreenHandler.cs" />
     <Compile Include="UI\Forms\Input\InputBox.cs">
       <SubType>Form</SubType>
@@ -658,6 +664,8 @@
     <Compile Include="UI\Forms\UnhandledExceptionWindow.Designer.cs">
       <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\GraphicsUtilities\GdiPlusGraphicsProvider.cs" />
+    <Compile Include="UI\GraphicsUtilities\IGraphicsProvider.cs" />
     <Compile Include="UI\Menu\HelpMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -795,48 +803,15 @@
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmSplashScreen.resx">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Input\InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\CredentialsPage.resx">
-      <DependentUpon>CredentialsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\NotificationsPage.resx">
-      <DependentUpon>NotificationsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\OptionsPage.resx">
-      <DependentUpon>OptionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\SecurityPage.resx">
-      <DependentUpon>SecurityPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
       <DependentUpon>PasswordForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\AdvancedPage.resx">
-      <DependentUpon>AdvancedPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
-      <DependentUpon>AppearancePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
-      <DependentUpon>ConnectionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
-      <DependentUpon>SqlServerPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\StartupExitPage.resx">
-      <DependentUpon>StartupExitPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\TabsPanelsPage.resx">
-      <DependentUpon>TabsPanelsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\ThemePage.resx">
-      <DependentUpon>ThemePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\UpdatesPage.resx">
-      <DependentUpon>UpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.de.resx">
       <SubType>Designer</SubType>
@@ -999,6 +974,7 @@
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Icons\FamFamFam\error.ico" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

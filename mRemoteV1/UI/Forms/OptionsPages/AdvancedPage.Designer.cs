@@ -30,7 +30,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedPage));
             this.chkAutomaticallyGetSessionInfo = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.lblMaximumPuttyWaitTime = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.chkAutomaticReconnect = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -221,7 +220,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.lblSeconds);
             this.Controls.Add(this.btnBrowseCustomPuttyPath);
             this.Name = "AdvancedPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             ((System.ComponentModel.ISupportInitialize)(this.numPuttyWaitTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUVNCSCPort)).EndInit();
