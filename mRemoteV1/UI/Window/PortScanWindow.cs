@@ -139,33 +139,28 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			lblStartIP.Text = $"{Language.strStartIP}:";
-			lblEndIP.Text = $"{Language.strEndIP}:";
+			lblStartIP.Text = Language.strStartIP;
+			lblEndIP.Text = Language.strEndIP;
 			btnScan.Text = Language.strButtonScan;
 			btnImport.Text = Language.strButtonImport;
-			lblOnlyImport.Text = $"{Language.strProtocolToImport}:";
+			lblOnlyImport.Text = Language.strProtocolToImport;
 			clmHost.Text = Language.strColumnHostnameIP;
 			clmOpenPorts.Text = Language.strOpenPorts;
 			clmClosedPorts.Text = Language.strClosedPorts;
-			Label2.Text = $"{Language.strEndPort}:";
-			Label1.Text = $"{Language.strStartPort}:";
-			lblTimeout.Text = $"{Language.strTimeoutInSeconds}";
+            ngCheckFirstPort.Text = Language.strStartPort;
+            ngCheckLastPort.Text = Language.strEndPort;
+			lblTimeout.Text = Language.strTimeoutInSeconds;
 			TabText = Language.strMenuPortScan;
 			Text = Language.strMenuPortScan;
 		}
 				
 		private void ShowImportControls(bool controlsVisible)
 		{
-			//pnlScan.Visible = controlsVisible;
 			pnlImport.Visible = controlsVisible;
 			if (controlsVisible)
-			{
 				olvHosts.Height = pnlImport.Top - olvHosts.Top;
-			}
 			else
-			{
 				olvHosts.Height = pnlImport.Bottom - olvHosts.Top;
-			}
 		}
 				
 		private void StartScan()
@@ -178,8 +173,18 @@ namespace mRemoteNG.UI.Window
 						
 				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
 				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
-				
-				_portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value, ((int)numericSelectorTimeout.Value)*1000);
+
+                int firstPort = 0;
+                int lastPort = 65535;
+                if (ngCheckFirstPort.Checked)
+                    firstPort = (int)portStart.Value;
+                if (ngCheckLastPort.Checked)
+                    lastPort = (int)portEnd.Value;
+
+                if (!ngCheckFirstPort.Checked && !ngCheckLastPort.Checked)
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, firstPort, lastPort, ((int)numericSelectorTimeout.Value) * 1000, true);
+                else
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, firstPort, lastPort, ((int)numericSelectorTimeout.Value)*1000);
 						
 				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
 				_portScanner.HostScanned += PortScanner_HostScanned;
@@ -315,6 +320,22 @@ namespace mRemoteNG.UI.Window
         private void importHTTPToolStripMenuItem_Click(object sender, EventArgs e)
         {
             importSelectedHosts(ProtocolType.HTTP);
+        }
+
+        private void NgCheckFirstPort_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ngCheckFirstPort.Checked)
+                portStart.Enabled = true;
+            else
+                portStart.Enabled = false;
+        }
+
+        private void NgCheckLastPort_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ngCheckLastPort.Checked)
+                portEnd.Enabled = true;
+            else
+                portEnd.Enabled = false;
         }
     }
 }

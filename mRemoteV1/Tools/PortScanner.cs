@@ -18,10 +18,10 @@ namespace mRemoteNG.Tools
 		private Thread _scanThread;
 		private readonly List<ScanHost> _scannedHosts = new List<ScanHost>();
 		private readonly int _timeoutInMilliseconds;
-				
+
         #region Public Methods
-	
-		public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2, int timeoutInMilliseconds = 5000)
+
+        public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2, int timeoutInMilliseconds = 5000, bool checkDefaultPortsOnly = false)
 		{
             var ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
             var ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
@@ -33,14 +33,17 @@ namespace mRemoteNG.Tools
 				throw new ArgumentOutOfRangeException(nameof(timeoutInMilliseconds));
 
 			_timeoutInMilliseconds = timeoutInMilliseconds;
-
-
 			_ports.Clear();
-			for (var port = portStart; port <= portEnd; port++)
-			{
-				_ports.Add(port);
-			}
-            _ports.AddRange(new[] { ScanHost.SshPort, ScanHost.TelnetPort, ScanHost.HttpPort, ScanHost.HttpsPort, ScanHost.RloginPort, ScanHost.RdpPort, ScanHost.VncPort });
+
+            if (checkDefaultPortsOnly)
+                _ports.AddRange(new[] { ScanHost.SshPort, ScanHost.TelnetPort, ScanHost.HttpPort, ScanHost.HttpsPort, ScanHost.RloginPort, ScanHost.RdpPort, ScanHost.VncPort });
+            else
+            {
+                for (var port = portStart; port <= portEnd; port++)
+                {
+                    _ports.Add(port);
+                }
+            }
 
             _ipAddresses.Clear();
             _ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
