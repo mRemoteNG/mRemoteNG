@@ -90,12 +90,12 @@ namespace mRemoteNG.Tools
 		
         public Icon Icon
         {
-            get { return File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Resources.mRemote_Icon; }
+            get { return File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Resources.mRemoteNG_Icon; }
         }
 
 	    public Image Image
 	    {
-	        get { return Icon?.ToBitmap() ?? Resources.mRemote_Icon.ToBitmap(); }
+	        get { return Icon?.ToBitmap() ?? Resources.mRemoteNG_Icon.ToBitmap(); }
 	    }
 
 	    #endregion

@@ -293,7 +293,7 @@ namespace mRemoteNG.UI.Forms
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = global::mRemoteNG.Resources.Connections_SaveAs_Icon;
+            this.Icon = global::mRemoteNG.Resources.ConnectionsSaveAs_Icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ExportForm";

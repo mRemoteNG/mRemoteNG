@@ -24,7 +24,7 @@ namespace mRemoteNG.Tools
 		    {
 		        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
 		            "GetIconFromFile failed (Tools.Misc) - using default icon" + Environment.NewLine + AEx.Message, true);
-                return Resources.mRemote_Icon;
+                return Resources.mRemoteNG_Icon;
 
 		    }
 			catch (Exception ex)

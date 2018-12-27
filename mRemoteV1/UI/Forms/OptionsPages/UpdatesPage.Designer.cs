@@ -321,7 +321,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.pnlUpdateCheck);
             this.Controls.Add(this.pnlProxy);
             this.Name = "UpdatesPage";
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             this.pnlUpdateCheck.ResumeLayout(false);
             this.pnlUpdateCheck.PerformLayout();
             this.pnlProxy.ResumeLayout(false);

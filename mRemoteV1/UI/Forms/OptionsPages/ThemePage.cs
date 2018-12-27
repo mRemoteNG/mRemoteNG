@@ -19,7 +19,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
         #endregion
 
-
         public ThemePage()
         {
             InitializeComponent();
@@ -173,17 +172,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
             var name = _themeManager.ActiveTheme.Name;
-            var res = new InputBox().ShowAsDialog(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name);
-            if (res != DialogResult.OK) return;
-            if (_themeManager.isThemeNameOk(name))
+            using (FrmInputBox frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name))
             {
-                var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, name);
-                _themeManager.ActiveTheme = addedTheme;
-                LoadSettings();
-            }
-            else
-            {
-                TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
+                DialogResult dr = frmInputBox.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
+                    {
+                        var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
+                        _themeManager.ActiveTheme = addedTheme;
+                        LoadSettings();
+                    }
+                    else
+                    {
+                        TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
+                    }
+                }
             }
         }
 
