@@ -27,9 +27,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         }
 
         #region Public Methods
-
-        public override Icon PageIcon { get; protected set; } = Resources.Update_Icon;
-
         public override string PageName
         {
             get => Language.strTabUpdates;

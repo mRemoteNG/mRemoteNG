@@ -12,8 +12,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PageIcon = Resources.StartupExit_Icon;
         }
 
-        public override Icon PageIcon { get; protected set; } = Resources.StartupExit_Icon;
-
         public override string PageName
         {
             get => Language.strStartupExit;

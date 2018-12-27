@@ -31,8 +31,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _oriActiveTheming = _themeManager.ThemingActive;
         }
 
-        public override Icon PageIcon { get; protected set; } = Resources.Appearance_Icon;
-
         public override string PageName
         {
             get => Language.strOptionsTabTheme;

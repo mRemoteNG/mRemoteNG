@@ -16,11 +16,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Resources.database;
+            PageIcon = Resources.Database_Icon;
             _databaseConnectionTester = new SqlDatabaseConnectionTester();
         }
-
-        public override Icon PageIcon { get; protected set; } = Resources.Database_Icon;
 
         public override string PageName
         {

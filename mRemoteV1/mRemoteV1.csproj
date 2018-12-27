@@ -1025,7 +1025,7 @@
     <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
     <None Include="Resources\Icons\Update_Icon.ico" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
-    <None Include="Resources\mRemoteNG.png" />
+    <None Include="Resources\Images\mRemoteNG.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

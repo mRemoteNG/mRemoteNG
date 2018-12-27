@@ -11,11 +11,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Resources.key_Icon;
+            PageIcon = Resources.Key_Icon;
         }
-
-        public override Icon PageIcon { get; protected set; } = Resources.Key_Icon;
-
+        
         public override string PageName {
             get => Language.Credentials;
             set { }

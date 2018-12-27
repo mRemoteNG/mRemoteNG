@@ -13,10 +13,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
             ApplyTheme();
-            PageIcon = Resources.shield;
+            PageIcon = Resources.Shield_Icon;
         }
-
-        public override Icon PageIcon { get; protected set; } = Resources.Shield_Icon;
 
         [Browsable(false)]
         public override string PageName
