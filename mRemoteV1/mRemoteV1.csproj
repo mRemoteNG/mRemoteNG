@@ -381,6 +381,12 @@
     <Compile Include="UI\Controls\Base\NGNumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\Base\NGPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGPictureBox.Designer.cs">
+      <DependentUpon>NGPictureBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Base\NGProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>

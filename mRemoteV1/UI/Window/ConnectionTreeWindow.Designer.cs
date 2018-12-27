@@ -32,15 +32,13 @@ namespace mRemoteNG.UI.Window
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            this.PictureBoxSearch = new System.Windows.Forms.PictureBox();
+            this.PictureBoxSearch = new Controls.Base.NGPictureBox();
             this.txtSearch = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.PictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).BeginInit();
             this.msMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // olvConnections
@@ -191,18 +189,6 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.Size = new System.Drawing.Size(204, 21);
             this.tableLayoutPanel1.TabIndex = 32;
             // 
-            // PictureBox1
-            // 
-            this.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBox1.Image = global::mRemoteNG.Resources.Search;
-            this.PictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.PictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(24, 22);
-            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PictureBox1.TabIndex = 1;
-            this.PictureBox1.TabStop = false;
-            // 
             // ConnectionTreeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -224,7 +210,6 @@ namespace mRemoteNG.UI.Window
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,9 +219,8 @@ namespace mRemoteNG.UI.Window
         private System.ComponentModel.IContainer components;
         private Controls.ConnectionTree olvConnections;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
-        internal System.Windows.Forms.PictureBox PictureBoxSearch;
+        internal Controls.Base.NGPictureBox PictureBoxSearch;
         internal Controls.Base.NGTextBox txtSearch;
-        internal System.Windows.Forms.PictureBox PictureBox1;
         public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
