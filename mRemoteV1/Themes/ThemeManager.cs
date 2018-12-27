@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using WeifenLuo.WinFormsUI.Docking;
@@ -23,7 +24,6 @@ namespace mRemoteNG.Themes
         private bool _themeActive;
         private static ThemeManager themeInstance;
         #endregion
-
 
         #region Constructors
         private ThemeManager()
@@ -233,5 +233,5 @@ namespace mRemoteNG.Themes
 			}
 		}
         #endregion
-	}
+    }
 } 

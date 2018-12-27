@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class TabsPanelsPage

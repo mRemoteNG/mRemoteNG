@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -11,7 +12,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Resources.error;
+            PageIcon = Resources.Error_Icon;
         }
 
         public override string PageName

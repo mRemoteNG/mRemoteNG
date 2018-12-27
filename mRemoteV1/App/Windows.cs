@@ -13,6 +13,7 @@ namespace mRemoteNG.App
         private static HelpWindow _helpForm;
         private static ExternalToolsWindow _externalappsForm;
         private static PortScanWindow _portscanForm;
+        private static ScreenshotManagerWindow _screenshotmanagerForm;
         private static UltraVNCWindow _ultravncscForm;
         private static ComponentsCheckWindow _componentscheckForm;
         private static ConnectionTreeWindow _treeForm;
@@ -50,7 +51,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions())
+                        using (var optionsForm = new FrmOptions())
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }
@@ -78,6 +79,10 @@ namespace mRemoteNG.App
                     case WindowType.PortScan:
                         _portscanForm = new PortScanWindow();
                         _portscanForm.Show(dockPanel);
+                        break;
+                    case WindowType.ScreenshotManager:
+                        _screenshotmanagerForm = new ScreenshotManagerWindow();
+                        _screenshotmanagerForm.Show(dockPanel);
                         break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
