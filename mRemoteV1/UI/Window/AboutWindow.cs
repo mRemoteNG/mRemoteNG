@@ -97,6 +97,8 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCredits
             // 
+            this.txtCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtCredits.BackColor = System.Drawing.SystemColors.Control;
             this.txtCredits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCredits.Cursor = System.Windows.Forms.Cursors.Default;
@@ -108,7 +110,7 @@ namespace mRemoteNG.UI.Window
             this.txtCredits.Name = "txtCredits";
             this.txtCredits.ReadOnly = true;
             this.txtCredits.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCredits.Size = new System.Drawing.Size(400, 546);
+            this.txtCredits.Size = new System.Drawing.Size(400, 424);
             this.txtCredits.TabIndex = 7;
             this.txtCredits.TabStop = false;
             // 
