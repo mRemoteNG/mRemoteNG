@@ -165,7 +165,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlDefaultCredentials);
             this.Name = "CredentialsPage";
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             this.pnlDefaultCredentials.ResumeLayout(false);
             this.pnlDefaultCredentials.PerformLayout();
             this.ResumeLayout(false);

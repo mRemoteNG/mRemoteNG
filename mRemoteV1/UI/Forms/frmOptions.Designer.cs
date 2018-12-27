@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms
 {
-    partial class frmOptions
+    partial class FrmOptions
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOptions));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOptions));
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnCancel = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();

@@ -5,7 +5,7 @@ namespace mRemoteNGTests.UI.Forms
 {
     public class OptionsFormSetupAndTeardown
     {
-        protected frmOptions _optionsForm;
+        protected FrmOptions _optionsForm;
 
         [OneTimeSetUp]
         public void OnetimeSetup()
@@ -15,7 +15,7 @@ namespace mRemoteNGTests.UI.Forms
         [SetUp]
         public void Setup()
         {
-            _optionsForm = new frmOptions();
+            _optionsForm = new FrmOptions();
             _optionsForm.Show();
         }
 

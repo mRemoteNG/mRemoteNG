@@ -149,7 +149,7 @@
             this.Controls.Add(this.chkEncryptCompleteFile);
             this.Controls.Add(this.groupAdvancedSecurityOptions);
             this.Name = "SecurityPage";
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             this.groupAdvancedSecurityOptions.ResumeLayout(false);
             this.groupAdvancedSecurityOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberBoxKdfIterations)).EndInit();

@@ -21,7 +21,9 @@ if ($ConfigurationName -match "Release") {
         "*.log",
         "*vshost*",
         "*.tmp"
-    )
+    ) -Exclude @(
+        "mRemoteNG.VisualElementsManifest.xml"
+	)
     Remove-Item -Path $filesToDelete.FullName
     Write-Output $filesToDelete.FullName
 }

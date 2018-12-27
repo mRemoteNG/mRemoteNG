@@ -123,7 +123,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoAbout
             // 
-            _mMenInfoAbout.Image = Resources.mRemote;
+            _mMenInfoAbout.Image = Resources.mRemoteNG;
             _mMenInfoAbout.Name = "mMenInfoAbout";
             _mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
             _mMenInfoAbout.Text = Language.strMenuAbout;
