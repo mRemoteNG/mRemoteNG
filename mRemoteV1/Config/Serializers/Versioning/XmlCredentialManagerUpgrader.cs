@@ -19,14 +19,20 @@ namespace mRemoteNG.Config.Serializers.Versioning
     {
         private readonly CredentialServiceFacade _credentialsService;
         private readonly IDeserializer<string, ConnectionTreeModel> _decoratedDeserializer;
+        private readonly SecureString _newRepoPassword;
 
         public string CredentialFilePath { get; set; }
         
 
-        public XmlCredentialManagerUpgrader(CredentialServiceFacade credentialsService, string credentialFilePath, IDeserializer<string, ConnectionTreeModel> decoratedDeserializer)
+        public XmlCredentialManagerUpgrader(
+            CredentialServiceFacade credentialsService, 
+            string credentialFilePath, 
+            IDeserializer<string, ConnectionTreeModel> decoratedDeserializer,
+            SecureString newRepoPassword)
         {
             _credentialsService = credentialsService.ThrowIfNull(nameof(credentialsService));
             CredentialFilePath = credentialFilePath;
+            _newRepoPassword = newRepoPassword;
             _decoratedDeserializer = decoratedDeserializer.ThrowIfNull(nameof(decoratedDeserializer));
         }
 
@@ -66,15 +72,15 @@ namespace mRemoteNG.Config.Serializers.Versioning
             if (!auth.Authenticate(Runtime.EncryptionKey))
                 throw new Exception("Could not authenticate");
 
-            var newCredRepoKey = auth.LastAuthenticatedPassword;
+            var keyForOldConnectionFile = auth.LastAuthenticatedPassword;
 
             var credentialHarvester = new CredentialHarvester();
-            var harvestedCredentials = credentialHarvester.Harvest(xdoc, newCredRepoKey);
+            var harvestedCredentials = credentialHarvester.Harvest(xdoc, keyForOldConnectionFile);
 
-            var newCredentialRepository = BuildXmlCredentialRepo(newCredRepoKey);
+            var newCredentialRepository = BuildXmlCredentialRepo(_newRepoPassword);
 
             AddHarvestedCredentialsToRepo(harvestedCredentials, newCredentialRepository);
-            newCredentialRepository.SaveCredentials(newCredRepoKey);
+            newCredentialRepository.SaveCredentials(_newRepoPassword);
 
             _credentialsService.AddRepository(newCredentialRepository);
             return credentialHarvester.ConnectionToCredentialMap;

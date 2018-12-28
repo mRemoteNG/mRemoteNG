@@ -60,7 +60,8 @@ namespace mRemoteNG.UI.Forms
             if (result != DialogResult.OK)
                 return new ConnectionTreeModel();
 
-            var upgradingDeserializer = new XmlCredentialManagerUpgrader(CredentialService, NewCredentialRepoPath, ConnectionDeserializer);
+            var newRepoPassword = newRepositoryPasswordEntry.SecureString;
+            var upgradingDeserializer = new XmlCredentialManagerUpgrader(CredentialService, NewCredentialRepoPath, ConnectionDeserializer, newRepoPassword);
             var connectionTreeModel = upgradingDeserializer.Deserialize(serializedData);
 
             ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;

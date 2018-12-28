@@ -32,23 +32,23 @@
             this.newCredRepoPathDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControl = new mRemoteNG.UI.Controls.HeadlessTabControl();
             this.tabPageWelcome = new System.Windows.Forms.TabPage();
-            this.textBoxConfConPathTab1 = new Controls.Base.NGTextBox();
-            this.labelConfConsPathHeaderOnTab1 = new Controls.Base.NGLabel();
-            this.buttonExit = new Controls.Base.NGButton();
-            this.labelDescriptionOfUpgrade = new Controls.Base.NGLabel();
-            this.buttonPerformUpgrade = new Controls.Base.NGButton();
-            this.buttonNewFile = new Controls.Base.NGButton();
-            this.buttonOpenFile = new Controls.Base.NGButton();
+            this.textBoxConfConPathTab1 = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.labelConfConsPathHeaderOnTab1 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.buttonExit = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.labelDescriptionOfUpgrade = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.buttonPerformUpgrade = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.buttonNewFile = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.buttonOpenFile = new mRemoteNG.UI.Controls.Base.NGButton();
             this.tabPageUpgradeOptions = new System.Windows.Forms.TabPage();
-            this.textBoxConfConPathTab2 = new Controls.Base.NGTextBox();
-            this.buttonNewRepoPathBrowse = new Controls.Base.NGButton();
-            this.labelWhereToSaveCredFile = new Controls.Base.NGLabel();
-            this.textBoxCredRepoPath = new Controls.Base.NGTextBox();
-            this.buttonExecuteUpgrade = new Controls.Base.NGButton();
-            this.labelSetPassword = new Controls.Base.NGLabel();
-            this.newPasswordWithVerification1 = new mRemoteNG.UI.Controls.NewPasswordWithVerification();
-            this.labelConfConsPathHeaderOnTab2 = new Controls.Base.NGLabel();
-            this.buttonBack = new Controls.Base.NGButton();
+            this.textBoxConfConPathTab2 = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.buttonNewRepoPathBrowse = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.labelWhereToSaveCredFile = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.textBoxCredRepoPath = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.buttonExecuteUpgrade = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.labelSetPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.newRepositoryPasswordEntry = new mRemoteNG.UI.Controls.NewPasswordWithVerification();
+            this.labelConfConsPathHeaderOnTab2 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.buttonBack = new mRemoteNG.UI.Controls.Base.NGButton();
             this.newConnectionsFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControl.SuspendLayout();
             this.tabPageWelcome.SuspendLayout();
@@ -109,6 +109,7 @@
             // 
             // buttonExit
             // 
+            this.buttonExit._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonExit.Location = new System.Drawing.Point(142, 343);
             this.buttonExit.Name = "buttonExit";
@@ -130,6 +131,7 @@
             // 
             // buttonPerformUpgrade
             // 
+            this.buttonPerformUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonPerformUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonPerformUpgrade.Location = new System.Drawing.Point(142, 256);
             this.buttonPerformUpgrade.Name = "buttonPerformUpgrade";
@@ -141,6 +143,7 @@
             // 
             // buttonNewFile
             // 
+            this.buttonNewFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonNewFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonNewFile.DialogResult = System.Windows.Forms.DialogResult.Abort;
             this.buttonNewFile.Location = new System.Drawing.Point(142, 314);
@@ -153,6 +156,7 @@
             // 
             // buttonOpenFile
             // 
+            this.buttonOpenFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOpenFile.Location = new System.Drawing.Point(142, 285);
             this.buttonOpenFile.Name = "buttonOpenFile";
@@ -171,7 +175,7 @@
             this.tabPageUpgradeOptions.Controls.Add(this.textBoxCredRepoPath);
             this.tabPageUpgradeOptions.Controls.Add(this.buttonExecuteUpgrade);
             this.tabPageUpgradeOptions.Controls.Add(this.labelSetPassword);
-            this.tabPageUpgradeOptions.Controls.Add(this.newPasswordWithVerification1);
+            this.tabPageUpgradeOptions.Controls.Add(this.newRepositoryPasswordEntry);
             this.tabPageUpgradeOptions.Controls.Add(this.labelConfConsPathHeaderOnTab2);
             this.tabPageUpgradeOptions.Controls.Add(this.buttonBack);
             this.tabPageUpgradeOptions.Location = new System.Drawing.Point(4, 24);
@@ -192,6 +196,7 @@
             // 
             // buttonNewRepoPathBrowse
             // 
+            this.buttonNewRepoPathBrowse._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonNewRepoPathBrowse.Location = new System.Drawing.Point(329, 143);
             this.buttonNewRepoPathBrowse.Name = "buttonNewRepoPathBrowse";
             this.buttonNewRepoPathBrowse.Size = new System.Drawing.Size(75, 23);
@@ -218,6 +223,7 @@
             // 
             // buttonExecuteUpgrade
             // 
+            this.buttonExecuteUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonExecuteUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonExecuteUpgrade.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonExecuteUpgrade.Location = new System.Drawing.Point(329, 343);
@@ -236,15 +242,15 @@
             this.labelSetPassword.TabIndex = 4;
             this.labelSetPassword.Text = "Set password for the credential repository";
             // 
-            // newPasswordWithVerification1
+            // newRepositoryPasswordEntry
             // 
-            this.newPasswordWithVerification1.Location = new System.Drawing.Point(27, 220);
-            this.newPasswordWithVerification1.MinimumSize = new System.Drawing.Size(0, 100);
-            this.newPasswordWithVerification1.Name = "newPasswordWithVerification1";
-            this.newPasswordWithVerification1.PasswordChar = '\0';
-            this.newPasswordWithVerification1.Size = new System.Drawing.Size(377, 100);
-            this.newPasswordWithVerification1.TabIndex = 3;
-            this.newPasswordWithVerification1.UseSystemPasswordChar = false;
+            this.newRepositoryPasswordEntry.Location = new System.Drawing.Point(27, 220);
+            this.newRepositoryPasswordEntry.MinimumSize = new System.Drawing.Size(0, 100);
+            this.newRepositoryPasswordEntry.Name = "newRepositoryPasswordEntry";
+            this.newRepositoryPasswordEntry.PasswordChar = '\0';
+            this.newRepositoryPasswordEntry.Size = new System.Drawing.Size(377, 100);
+            this.newRepositoryPasswordEntry.TabIndex = 3;
+            this.newRepositoryPasswordEntry.UseSystemPasswordChar = false;
             // 
             // labelConfConsPathHeaderOnTab2
             // 
@@ -257,6 +263,7 @@
             // 
             // buttonBack
             // 
+            this.buttonBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonBack.Location = new System.Drawing.Point(248, 343);
             this.buttonBack.Name = "buttonBack";
@@ -305,7 +312,7 @@
         private Controls.Base.NGLabel labelConfConsPathHeaderOnTab2;
         private Controls.Base.NGButton buttonExecuteUpgrade;
         private Controls.Base.NGLabel labelSetPassword;
-        private Controls.NewPasswordWithVerification newPasswordWithVerification1;
+        private Controls.NewPasswordWithVerification newRepositoryPasswordEntry;
         private Controls.Base.NGLabel labelWhereToSaveCredFile;
         private Controls.Base.NGTextBox textBoxCredRepoPath;
         private System.Windows.Forms.SaveFileDialog newCredRepoPathDialog;
