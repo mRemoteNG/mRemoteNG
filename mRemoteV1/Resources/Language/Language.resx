@@ -622,10 +622,10 @@ Starting with new connections file.</value>
     <value>Completely encrypt connection file</value>
   </data>
   <data name="strEndIP" xml:space="preserve">
-    <value>End IP</value>
+    <value>Last IP</value>
   </data>
   <data name="strEndPort" xml:space="preserve">
-    <value>End Port</value>
+    <value>Last Port</value>
   </data>
   <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
     <value>AddExternalToolsToToolBar (frmMain) failed. {0}</value>
@@ -2068,10 +2068,10 @@ If you run into such an error, please create a new connection file!</value>
     <value>SSH transfer failed.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
-    <value>Start IP</value>
+    <value>First IP</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
-    <value>Start Port</value>
+    <value>First Port</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
     <value>Startup/Exit</value>
@@ -2636,7 +2636,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
   <data name="strTimeoutInSeconds" xml:space="preserve">
-    <value>Timeout (seconds)</value>
+    <value>Timeout [seconds]</value>
   </data>
   <data name="srtWorkingDirectory" xml:space="preserve">
     <value>Working directory:</value>
@@ -2736,5 +2736,8 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Place search bar above connection tree</value>
+  </data>
+  <data name="strPortScanSinglePort" xml:space="preserve">
+    <value>To scan a single port, select the "First Port" only.</value>
   </data>
 </root>

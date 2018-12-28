@@ -1882,10 +1882,10 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>SSH-Übertragung fehlgeschlagen.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
-    <value>Anfangs IP</value>
+    <value>Erste IP</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
-    <value>Anfangs Port</value>
+    <value>Erster Port</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
     <value>Anfang/Ende</value>
@@ -2383,7 +2383,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Verbindung testen</value>
   </data>
   <data name="strTimeoutInSeconds" xml:space="preserve">
-    <value>Time-Out (Sekunden)</value>
+    <value>Time-Out [Sekunden]</value>
   </data>
   <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
     <value>&amp;Alles zurücksetzen</value>
