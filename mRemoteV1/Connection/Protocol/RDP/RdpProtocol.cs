@@ -251,12 +251,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		}
 				
 		private Size _controlBeginningSize;
-		public override void ResizeBegin(object sender, EventArgs e)
+
+        protected override void ResizeBegin(object sender, EventArgs e)
 		{
 			_controlBeginningSize = Control.Size;
 		}
-				
-		public override void Resize(object sender, EventArgs e)
+
+        protected override void Resize(object sender, EventArgs e)
 		{
 			if (DoResize() && _controlBeginningSize.IsEmpty)
 			{
@@ -264,8 +265,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			}
 			base.Resize(sender, e);
 		}
-				
-		public override void ResizeEnd(object sender, EventArgs e)
+
+        protected override void ResizeEnd(object sender, EventArgs e)
 		{
 			DoResize();
 			if (!(Control.Size == _controlBeginningSize))

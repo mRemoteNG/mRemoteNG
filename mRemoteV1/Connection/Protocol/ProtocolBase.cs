@@ -27,8 +27,8 @@ namespace mRemoteNG.Connection.Protocol
 
 	    protected UI.Window.ConnectionWindow ConnectionWindow
 		{
-			get { return _connectionWindow; }
-	        private set
+			get => _connectionWindow;
+            private set
 			{
 				_connectionWindow = value;
 				_connectionWindow.ResizeBegin += ResizeBegin;
@@ -39,8 +39,8 @@ namespace mRemoteNG.Connection.Protocol
 
         public InterfaceControl InterfaceControl
 		{
-			get { return _interfaceControl; }
-			set
+			get => _interfaceControl;
+            set
 			{
 				_interfaceControl = value;
 				ConnectionWindow = _interfaceControl.GetContainerControl() as UI.Window.ConnectionWindow;
@@ -82,15 +82,15 @@ namespace mRemoteNG.Connection.Protocol
 			}
 		}
 
-        public virtual void ResizeBegin(object sender, EventArgs e)
+        protected virtual void ResizeBegin(object sender, EventArgs e)
 		{		
 		}
 
-        public virtual void Resize(object sender, EventArgs e)
+        protected virtual void Resize(object sender, EventArgs e)
 		{
 		}
 
-        public virtual void ResizeEnd(object sender, EventArgs e)
+        protected virtual void ResizeEnd(object sender, EventArgs e)
 		{
 		}
 				
@@ -222,50 +222,64 @@ namespace mRemoteNG.Connection.Protocol
 				Control.Dispose();
 			}
 		}
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                tmrReconnect.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
         #endregion
-		
+
         #region Events
-		public delegate void ConnectingEventHandler(object sender);
+        public delegate void ConnectingEventHandler(object sender);
 		public event ConnectingEventHandler Connecting
 		{
-			add { ConnectingEvent = (ConnectingEventHandler) Delegate.Combine(ConnectingEvent, value); }
-			remove { ConnectingEvent = (ConnectingEventHandler) Delegate.Remove(ConnectingEvent, value); }
-		}
+			add => ConnectingEvent = (ConnectingEventHandler) Delegate.Combine(ConnectingEvent, value);
+            remove => ConnectingEvent = (ConnectingEventHandler) Delegate.Remove(ConnectingEvent, value);
+        }
 				
 		public delegate void ConnectedEventHandler(object sender);
 		public event ConnectedEventHandler Connected
 		{
-			add { ConnectedEvent = (ConnectedEventHandler) Delegate.Combine(ConnectedEvent, value); }
-			remove { ConnectedEvent = (ConnectedEventHandler) Delegate.Remove(ConnectedEvent, value); }
-		}
+			add => ConnectedEvent = (ConnectedEventHandler) Delegate.Combine(ConnectedEvent, value);
+            remove => ConnectedEvent = (ConnectedEventHandler) Delegate.Remove(ConnectedEvent, value);
+        }
 				
 		public delegate void DisconnectedEventHandler(object sender, string disconnectedMessage, int? reasonCode);
 		public event DisconnectedEventHandler Disconnected
 		{
-			add { DisconnectedEvent = (DisconnectedEventHandler) Delegate.Combine(DisconnectedEvent, value); }
-			remove { DisconnectedEvent = (DisconnectedEventHandler) Delegate.Remove(DisconnectedEvent, value); }
-		}
+			add => DisconnectedEvent = (DisconnectedEventHandler) Delegate.Combine(DisconnectedEvent, value);
+            remove => DisconnectedEvent = (DisconnectedEventHandler) Delegate.Remove(DisconnectedEvent, value);
+        }
 				
 		public delegate void ErrorOccuredEventHandler(object sender, string errorMessage, int? errorCode);
 		public event ErrorOccuredEventHandler ErrorOccured
 		{
-			add { ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Combine(ErrorOccuredEvent, value); }
-			remove { ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Remove(ErrorOccuredEvent, value); }
-		}
+			add => ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Combine(ErrorOccuredEvent, value);
+            remove => ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Remove(ErrorOccuredEvent, value);
+        }
 				
 		public delegate void ClosingEventHandler(object sender);
 		public event ClosingEventHandler Closing
 		{
-			add { ClosingEvent = (ClosingEventHandler) Delegate.Combine(ClosingEvent, value); }
-			remove { ClosingEvent = (ClosingEventHandler) Delegate.Remove(ClosingEvent, value); }
-		}
+			add => ClosingEvent = (ClosingEventHandler) Delegate.Combine(ClosingEvent, value);
+            remove => ClosingEvent = (ClosingEventHandler) Delegate.Remove(ClosingEvent, value);
+        }
 				
 		public delegate void ClosedEventHandler(object sender);
 		public event ClosedEventHandler Closed
 		{
-			add { ClosedEvent = (ClosedEventHandler) Delegate.Combine(ClosedEvent, value); }
-			remove { ClosedEvent = (ClosedEventHandler) Delegate.Remove(ClosedEvent, value); }
-		}
+			add => ClosedEvent = (ClosedEventHandler) Delegate.Combine(ClosedEvent, value);
+            remove => ClosedEvent = (ClosedEventHandler) Delegate.Remove(ClosedEvent, value);
+        }
 				
 				
 		public void Event_Closing(object sender)
