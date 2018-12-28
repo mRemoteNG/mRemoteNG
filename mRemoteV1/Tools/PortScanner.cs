@@ -61,6 +61,10 @@ namespace mRemoteNG.Tools
 				
 		public void StopScan()
 		{
+            foreach(var p in _pings)
+            {
+                p.SendAsyncCancel();
+            }
 			_scanThread.Abort();
         }
 				
@@ -82,6 +86,7 @@ namespace mRemoteNG.Tools
         #region Private Methods
 
         private int _hostCount;
+        private readonly List<Ping> _pings = new List<Ping>();
         private void ScanAsync()
 		{
 			try
@@ -93,6 +98,7 @@ namespace mRemoteNG.Tools
                     RaiseBeginHostScanEvent(ipAddress);
 
                     var pingSender = new Ping();
+                    _pings.Add(pingSender);
 
                     try
                     {
@@ -116,12 +122,25 @@ namespace mRemoteNG.Tools
          */
         private void PingSender_PingCompleted(object sender, PingCompletedEventArgs e)
         {
+            // used for clean up later...
+            var p = (Ping)sender;
+
             // UserState is the IP Address
             var ip = e.UserState.ToString();
             var scanHost = new ScanHost(ip);
             _hostCount++;
 
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scanning {_hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}", true);
+
+            
+            if (e.Cancelled)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: CANCELLED host: {scanHost.HostIp}", true);
+                // cleanup
+                p.PingCompleted -= PingSender_PingCompleted;
+                p.Dispose();
+                return;
+            }
 
             if (e.Error != null)
             {
@@ -202,7 +221,6 @@ namespace mRemoteNG.Tools
             }
 
             // cleanup
-            var p = (Ping)sender;
             p.PingCompleted -= PingSender_PingCompleted;
             p.Dispose();
 

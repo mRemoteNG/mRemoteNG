@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -90,7 +92,7 @@ namespace mRemoteNG.UI.Window
 
 	        try
 	        {
-                olvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
+                olvHosts.Columns.AddRange(new ColumnHeader[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
 	            ShowImportControls(true);
 	            cbProtocol.SelectedIndex = 0;
 		        numericSelectorTimeout.Value = 5;
@@ -132,7 +134,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void btnImport_Click(object sender, EventArgs e)
 		{
-            ProtocolType protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
+            var protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
 		    importSelectedHosts(protocol);
 		}
         #endregion
@@ -171,11 +173,11 @@ namespace mRemoteNG.UI.Window
 				SwitchButtonText();
 				olvHosts.Items.Clear();
 						
-				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
-				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
+				var ipAddressStart = IPAddress.Parse(ipStart.Text);
+				var ipAddressEnd = IPAddress.Parse(ipEnd.Text);
 
-                int firstPort = 0;
-                int lastPort = 65535;
+                var firstPort = 0;
+                var lastPort = 65535;
                 if (ngCheckFirstPort.Checked)
                     firstPort = (int)portStart.Value;
                 if (ngCheckLastPort.Checked)
@@ -199,8 +201,12 @@ namespace mRemoteNG.UI.Window
 		}
 				
 		private void StopScan()
-		{
-		    _portScanner?.StopScan();
+        {
+            _portScanner.BeginHostScan -= PortScanner_BeginHostScan;
+            _portScanner.HostScanned -= PortScanner_HostScanned;
+            _portScanner.ScanComplete -= PortScanner_ScanComplete;
+
+            _portScanner?.StopScan();
 		    _scanning = false;
 			SwitchButtonText();
 		}
@@ -324,18 +330,12 @@ namespace mRemoteNG.UI.Window
 
         private void NgCheckFirstPort_CheckedChanged(object sender, EventArgs e)
         {
-            if (ngCheckFirstPort.Checked)
-                portStart.Enabled = true;
-            else
-                portStart.Enabled = false;
+            portStart.Enabled = ngCheckFirstPort.Checked;
         }
 
         private void NgCheckLastPort_CheckedChanged(object sender, EventArgs e)
         {
-            if (ngCheckLastPort.Checked)
-                portEnd.Enabled = true;
-            else
-                portEnd.Enabled = false;
+            portEnd.Enabled = ngCheckLastPort.Checked;
         }
     }
 }
