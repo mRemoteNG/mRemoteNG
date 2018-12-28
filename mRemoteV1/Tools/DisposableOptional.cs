@@ -6,11 +6,6 @@ namespace mRemoteNG.Tools
     public class DisposableOptional<T> : Optional<T>, IDisposable
         where T : IDisposable
     {
-        public DisposableOptional()
-            : base()
-        {
-        }
-
         public DisposableOptional(T value)
             : base(value)
         {
@@ -22,7 +17,7 @@ namespace mRemoteNG.Tools
             GC.SuppressFinalize(this);
         }
 
-        public void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (!disposing || !this.Any())
                 return;
