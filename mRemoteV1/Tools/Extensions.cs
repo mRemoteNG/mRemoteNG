@@ -7,7 +7,7 @@ namespace mRemoteNG.Tools
 {
     public static class Extensions
 	{
-		public static Optional<T> Maybe<T>(this T value)
+		public static Optional<T> ToOptional<T>(this T value)
 		{
 			return new Optional<T>(value);
 		}

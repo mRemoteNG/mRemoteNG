@@ -39,9 +39,9 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void NewInheritanceInstancesCreatedWithDefaultInheritanceValues()
         {
-            DefaultConnectionInheritance.Instance.Domain = true;
+            DefaultConnectionInheritance.Instance.Description = true;
             var inheritanceInstance = new ConnectionInfoInheritance(new object());
-            Assert.That(inheritanceInstance.Domain, Is.True);
+            Assert.That(inheritanceInstance.Description, Is.True);
         }
 
 		[TestCaseSource(nameof(GetInheritanceProperties))]

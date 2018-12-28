@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Tools;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -29,7 +30,7 @@ namespace mRemoteNGTests.Credential
         [Test]
         public void TheFirstRepoIsInitiallySelected()
         {
-            Assert.That(_repositoryUnlocker.SelectedRepository, Is.EqualTo(_repos[0]));
+            Assert.That(_repositoryUnlocker.SelectedRepository, Is.EqualTo(_repos[0].ToOptional()));
         }
 
         [Test]
@@ -45,7 +46,7 @@ namespace mRemoteNGTests.Credential
         {
             _repos[1].IsLoaded.Returns(true);
             _repositoryUnlocker.SelectNextLockedRepository();
-            Assert.That(_repositoryUnlocker.SelectedRepository, Is.EqualTo(_repos[2]));
+            Assert.That(_repositoryUnlocker.SelectedRepository, Is.EqualTo(_repos[2].ToOptional()));
         }
 
         [Test]
@@ -54,7 +55,7 @@ namespace mRemoteNGTests.Credential
             var repos = BuildRepos(1);
             var repositoryUnlocker = new CompositeRepositoryUnlocker(repos);
             repositoryUnlocker.SelectNextLockedRepository();
-            Assert.That(repositoryUnlocker.SelectedRepository, Is.EqualTo(repos[0]));
+            Assert.That(repositoryUnlocker.SelectedRepository, Is.EqualTo(repos[0].ToOptional()));
         }
 
         [Test]
@@ -63,7 +64,7 @@ namespace mRemoteNGTests.Credential
             foreach(var repo in _repos)
                 repo.IsLoaded.Returns(true);
             _repositoryUnlocker.SelectNextLockedRepository();
-            Assert.That(_repositoryUnlocker.SelectedRepository, Is.Null);
+            Assert.That(_repositoryUnlocker.SelectedRepository, Is.Empty);
         }
 
         [Test]
@@ -73,7 +74,7 @@ namespace mRemoteNGTests.Credential
                 repo.IsLoaded.Returns(true);
             _repos[0].IsLoaded.Returns(false);
             _repositoryUnlocker.SelectNextLockedRepository();
-            Assert.That(_repositoryUnlocker.SelectedRepository, Is.EqualTo(_repos[0]));
+            Assert.That(_repositoryUnlocker.SelectedRepository, Is.EqualTo(_repos[0].ToOptional()));
         }
 
         [Test]
@@ -81,7 +82,7 @@ namespace mRemoteNGTests.Credential
         {
             var repositoryUnlocker = new CompositeRepositoryUnlocker(new ICredentialRepository[0]);
             repositoryUnlocker.SelectNextLockedRepository();
-            Assert.That(repositoryUnlocker.SelectedRepository, Is.Null);
+            Assert.That(repositoryUnlocker.SelectedRepository, Is.Empty);
         }
 
         [Test]
@@ -91,7 +92,7 @@ namespace mRemoteNGTests.Credential
             repo[0].IsLoaded.Returns(false);
             var repositoryUnlocker = new CompositeRepositoryUnlocker(repo);
             repositoryUnlocker.SelectNextLockedRepository();
-            Assert.That(repositoryUnlocker.SelectedRepository, Is.EqualTo(repo[0]));
+            Assert.That(repositoryUnlocker.SelectedRepository, Is.EqualTo(repo[0].ToOptional()));
         }
 
         private IList<ICredentialRepository> BuildRepos(int count)

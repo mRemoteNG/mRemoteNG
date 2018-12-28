@@ -29,7 +29,7 @@ namespace mRemoteNG.App.Initialization
                 .Where(record => record.Id.Equals(defaultCredId))
                 .ToArray();
 
-            DefaultConnectionInfo.Instance.CredentialRecordId = matchedCredentials.FirstOrDefault()?.Id.Maybe();
+            DefaultConnectionInfo.Instance.CredentialRecordId = matchedCredentials.FirstOrDefault()?.Id.ToOptional();
         }
     }
 }

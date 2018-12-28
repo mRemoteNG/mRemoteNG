@@ -516,6 +516,12 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     connectionInfo.RedirectClipboard = bool.Parse(xmlnode.Attributes["RedirectClipboard"].Value);
                     connectionInfo.Inheritance.RedirectClipboard = bool.Parse(xmlnode.Attributes["InheritRedirectClipboard"].Value);
+
+                    connectionInfo.CredentialRecordId = Guid.TryParse(xmlnode.Attributes["CredentialId"]?.Value, out var credId)
+                            ? credId
+                            : Optional<Guid>.Empty;
+
+                    connectionInfo.Inheritance.CredentialId = bool.TryParse(xmlnode.Attributes["InheritCredentialId"]?.Value, out var inheritCreds) && inheritCreds;
                 }
             }
             catch (Exception ex)

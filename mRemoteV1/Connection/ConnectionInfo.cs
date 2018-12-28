@@ -129,8 +129,13 @@ namespace mRemoteNG.Connection
 
 	    public virtual IEnumerable<PropertyInfo> GetSerializableProperties()
 	    {
-			var excludedProperties = new[] { "Parent", "Name", "Hostname", "Port", "Inheritance", "OpenConnections",
-				"IsContainer", "IsDefault", "PositionID", "ConstantID", "TreeNode", "IsQuickConnect", "PleaseConnect" };
+			var excludedProperties = new[] {
+			    nameof(Parent), nameof(Name), nameof(Hostname), nameof(Port),
+                nameof(Username), nameof(Domain), nameof(Password),
+                nameof(Inheritance), nameof(OpenConnections),
+				nameof(IsContainer), nameof(IsDefault), nameof(ConstantID),
+			    nameof(IsQuickConnect), nameof(PleaseConnect), nameof(CredentialRecord)
+			};
 
 		    return GetProperties(excludedProperties);
 	    }

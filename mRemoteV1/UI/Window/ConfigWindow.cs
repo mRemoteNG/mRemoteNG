@@ -809,7 +809,6 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("DisplayWallpaper");
                     strHide.Add("EnableFontSmoothing");
                     strHide.Add("EnableDesktopComposition");
-                    strHide.Add("Domain");
                     strHide.Add("ExtApp");
                     strHide.Add("ICAEncryptionStrength");
                     strHide.Add("RDGatewayDomain");
@@ -848,7 +847,6 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("Icon");
                     strHide.Add("Panel");
                     strHide.Add("Hostname");
-                    strHide.Add("Username");
                     strHide.Add("Protocol");
                     strHide.Add("Port");
                     strHide.Add("PuttySession");
@@ -858,7 +856,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("UserField");
                     strHide.Add("Description");
                     strHide.Add("SoundQuality");
-                    strHide.Add("CredentialRecord");
+                    strHide.Add(nameof(AbstractConnectionRecord.CredentialRecord));
                 }
                 else if (_pGrid.SelectedObject is ConnectionInfo)
 				{
@@ -962,7 +960,6 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
 							strHide.Add("ExtApp");
 							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("RDGatewayDomain");
@@ -1007,7 +1004,6 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
 							strHide.Add("ExtApp");
 							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("RDGatewayDomain");
@@ -1052,10 +1048,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
 							strHide.Add("ExtApp");
 							strHide.Add("ICAEncryptionStrength");
-							strHide.Add("Password");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
 							strHide.Add("RDGatewayPassword");
@@ -1078,7 +1072,6 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
-							strHide.Add("Username");
 							strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
@@ -1091,6 +1084,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+						    strHide.Add(nameof(AbstractConnectionRecord.CredentialRecord));
                             break;
 						case ProtocolType.Rlogin:
 							strHide.Add("CacheBitmaps");
@@ -1099,10 +1093,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
 							strHide.Add("ExtApp");
 							strHide.Add("ICAEncryptionStrength");
-							strHide.Add("Password");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
 							strHide.Add("RDGatewayPassword");
@@ -1125,7 +1117,6 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
-							strHide.Add("Username");
 							strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
@@ -1138,6 +1129,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+						    strHide.Add(nameof(AbstractConnectionRecord.CredentialRecord));
                             break;
 						case ProtocolType.RAW:
 							strHide.Add("CacheBitmaps");
@@ -1146,10 +1138,8 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
 							strHide.Add("ExtApp");
 							strHide.Add("ICAEncryptionStrength");
-							strHide.Add("Password");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
 							strHide.Add("RDGatewayPassword");
@@ -1172,7 +1162,6 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("AutomaticResize");
 							strHide.Add("UseConsoleSession");
 							strHide.Add("UseCredSsp");
-							strHide.Add("Username");
 							strHide.Add("VNCAuthMode");
 							strHide.Add("VNCColors");
 							strHide.Add("VNCCompression");
@@ -1185,6 +1174,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
+						    strHide.Add(nameof(AbstractConnectionRecord.CredentialRecord));
                             break;
 						case ProtocolType.HTTP:
 						case ProtocolType.HTTPS:

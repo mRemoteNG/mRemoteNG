@@ -133,7 +133,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             {
                 Guid.TryParse(connectionInfo.ConstantID, out var id);
                 if (map.ContainsKey(id))
-                    connectionInfo.CredentialRecordId = map[id].Id.Maybe();
+                    connectionInfo.CredentialRecordId = map[id].Id.ToOptional();
             }
         }
     }

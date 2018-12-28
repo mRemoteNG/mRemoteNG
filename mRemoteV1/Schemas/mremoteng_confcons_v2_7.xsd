@@ -98,10 +98,9 @@
     <xs:attribute name="InheritDisplayWallpaper" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritEnableFontSmoothing" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritEnableDesktopComposition" type="xs:boolean" use="optional" />
-    <xs:attribute name="InheritDomain" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritCredentialId" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritIcon" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPanel" type="xs:boolean" use="optional" />
-    <xs:attribute name="InheritPassword" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPort" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritProtocol" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPuttySession" type="xs:boolean" use="optional" />
@@ -118,7 +117,6 @@
     <xs:attribute name="InheritUseConsoleSession" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUseCredSsp" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRenderingEngine" type="xs:boolean" use="optional" />
-    <xs:attribute name="InheritUsername" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritICAEncryptionStrength" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRDPAuthenticationLevel" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRDPMinutesToIdleTimeout" type="xs:boolean" use="optional" />

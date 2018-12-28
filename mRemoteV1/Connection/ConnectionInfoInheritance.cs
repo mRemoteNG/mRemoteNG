@@ -44,7 +44,7 @@ namespace mRemoteNG.Connection
 	     LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strCategoryCredentials)),
 	     LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionCredential)),
 	     TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
-	    public bool CredentialRecord { get; set; }
+	    public bool CredentialId { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUsername"),
@@ -69,8 +69,6 @@ namespace mRemoteNG.Connection
         [Browsable(false)]
         [Obsolete("Use the ConnectionRecord property")]
         public bool Domain { get; set; }
-
-
         #endregion
         #region Protocol
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
@@ -401,7 +399,11 @@ namespace mRemoteNG.Connection
 
         private bool FilterProperty(PropertyInfo propertyInfo)
         {
-            var exclusions = new[] { "EverythingInherited", "Parent" };
+            var exclusions = new[]
+            {
+                nameof(EverythingInherited), nameof(Parent),
+                nameof(Username), nameof(Domain), nameof(Password)
+            };
             var valueShouldNotBeFiltered = !exclusions.Contains(propertyInfo.Name);
             return valueShouldNotBeFiltered;
         }

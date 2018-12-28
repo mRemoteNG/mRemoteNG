@@ -9,9 +9,7 @@
 		public TType Description { get; set; }
 		public TType Icon { get; set; }
 		public TType Panel { get; set; }
-		public TType Username { get; set; }
-		public TType Password { get; set; }
-		public TType Domain { get; set; }
+		public TType CredentialRecordId { get; set; }
 		public TType Protocol { get; set; }
 		public TType ExtApp { get; set; }
 		public TType PuttySession { get; set; }

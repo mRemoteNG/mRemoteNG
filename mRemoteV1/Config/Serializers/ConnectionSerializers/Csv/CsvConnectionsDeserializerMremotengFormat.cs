@@ -111,611 +111,530 @@ namespace mRemoteNG.Config.Serializers.Csv
 
             if (headers.Contains("Protocol"))
             {
-                ProtocolType protocolType;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("Protocol")], out protocolType))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("Protocol")], out ProtocolType protocolType))
                     connectionRecord.Protocol = protocolType;
             }
 
             if (headers.Contains("Port"))
             {
-                int port;
-                if (int.TryParse(connectionCsv[headers.IndexOf("Port")], out port))
+                if (int.TryParse(connectionCsv[headers.IndexOf("Port")], out int port))
                     connectionRecord.Port = port;
             }
 
             if (headers.Contains("ConnectToConsole"))
             {
-                bool useConsoleSession;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("ConnectToConsole")], out useConsoleSession))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("ConnectToConsole")], out bool useConsoleSession))
                     connectionRecord.UseConsoleSession = useConsoleSession;
             }
 
             if (headers.Contains("UseCredSsp"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("UseCredSsp")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("UseCredSsp")], out bool value))
                     connectionRecord.UseCredSsp = value;
             }
 
             if (headers.Contains("RenderingEngine"))
             {
-                HTTPBase.RenderingEngine value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("RenderingEngine")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RenderingEngine")], out HTTPBase.RenderingEngine value))
                     connectionRecord.RenderingEngine = value;
             }
 
             if (headers.Contains("ICAEncryptionStrength"))
             {
-                IcaProtocol.EncryptionStrength value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("ICAEncryptionStrength")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("ICAEncryptionStrength")], out IcaProtocol.EncryptionStrength value))
                     connectionRecord.ICAEncryptionStrength = value;
             }
 
             if (headers.Contains("RDPAuthenticationLevel"))
             {
-                RdpProtocol.AuthenticationLevel value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("RDPAuthenticationLevel")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RDPAuthenticationLevel")], out RdpProtocol.AuthenticationLevel value))
                     connectionRecord.RDPAuthenticationLevel = value;
             }
 
             if (headers.Contains("Colors"))
             {
-                RdpProtocol.RDPColors value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("Colors")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("Colors")], out RdpProtocol.RDPColors value))
                     connectionRecord.Colors = value;
             }
 
             if (headers.Contains("Resolution"))
             {
-                RdpProtocol.RDPResolutions value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("Resolution")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("Resolution")], out RdpProtocol.RDPResolutions value))
                     connectionRecord.Resolution = value;
             }
 
             if (headers.Contains("AutomaticResize"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("AutomaticResize")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("AutomaticResize")], out bool value))
                     connectionRecord.AutomaticResize = value;
             }
 
             if (headers.Contains("DisplayWallpaper"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("DisplayWallpaper")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("DisplayWallpaper")], out bool value))
                     connectionRecord.DisplayWallpaper = value;
             }
 
             if (headers.Contains("DisplayThemes"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("DisplayThemes")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("DisplayThemes")], out bool value))
                     connectionRecord.DisplayThemes = value;
             }
 
             if (headers.Contains("EnableFontSmoothing"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("EnableFontSmoothing")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("EnableFontSmoothing")], out bool value))
                     connectionRecord.EnableFontSmoothing = value;
             }
 
             if (headers.Contains("EnableDesktopComposition"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("EnableDesktopComposition")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("EnableDesktopComposition")], out bool value))
                     connectionRecord.EnableDesktopComposition = value;
             }
 
             if (headers.Contains("CacheBitmaps"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("CacheBitmaps")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("CacheBitmaps")], out bool value))
                     connectionRecord.CacheBitmaps = value;
             }
 
             if (headers.Contains("RedirectDiskDrives"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectDiskDrives")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectDiskDrives")], out bool value))
                     connectionRecord.RedirectDiskDrives = value;
             }
 
             if (headers.Contains("RedirectPorts"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectPorts")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectPorts")], out bool value))
                     connectionRecord.RedirectPorts = value;
             }
 
             if (headers.Contains("RedirectPrinters"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectPrinters")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectPrinters")], out bool value))
                     connectionRecord.RedirectPrinters = value;
             }
             if (headers.Contains("RedirectClipboard"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectClipboard")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectClipboard")], out bool value))
                     connectionRecord.RedirectClipboard = value;
             }
 
             if (headers.Contains("RedirectSmartCards"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectSmartCards")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectSmartCards")], out bool value))
                     connectionRecord.RedirectSmartCards = value;
             }
 
             if (headers.Contains("RedirectSound"))
             {
-                RdpProtocol.RDPSounds value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("RedirectSound")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RedirectSound")], out RdpProtocol.RDPSounds value))
                     connectionRecord.RedirectSound = value;
             }
 
             if (headers.Contains("RedirectKeys"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectKeys")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectKeys")], out bool value))
                     connectionRecord.RedirectKeys = value;
             }
 
             if (headers.Contains("VNCCompression"))
             {
-                ProtocolVNC.Compression value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCCompression")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCCompression")], out ProtocolVNC.Compression value))
                     connectionRecord.VNCCompression = value;
             }
 
             if (headers.Contains("VNCEncoding"))
             {
-                ProtocolVNC.Encoding value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCEncoding")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCEncoding")], out ProtocolVNC.Encoding value))
                     connectionRecord.VNCEncoding = value;
             }
 
             if (headers.Contains("VNCAuthMode"))
             {
-                ProtocolVNC.AuthMode value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCAuthMode")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCAuthMode")], out ProtocolVNC.AuthMode value))
                     connectionRecord.VNCAuthMode = value;
             }
 
             if (headers.Contains("VNCProxyType"))
             {
-                ProtocolVNC.ProxyType value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCProxyType")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCProxyType")], out ProtocolVNC.ProxyType value))
                     connectionRecord.VNCProxyType = value;
             }
 
             if (headers.Contains("VNCProxyPort"))
             {
-                int value;
-                if (int.TryParse(connectionCsv[headers.IndexOf("VNCProxyPort")], out value))
+                if (int.TryParse(connectionCsv[headers.IndexOf("VNCProxyPort")], out int value))
                     connectionRecord.VNCProxyPort = value;
             }
 
             if (headers.Contains("VNCColors"))
             {
-                ProtocolVNC.Colors value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCColors")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCColors")], out ProtocolVNC.Colors value))
                     connectionRecord.VNCColors = value;
             }
 
             if (headers.Contains("VNCSmartSizeMode"))
             {
-                ProtocolVNC.SmartSizeMode value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCSmartSizeMode")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("VNCSmartSizeMode")], out ProtocolVNC.SmartSizeMode value))
                     connectionRecord.VNCSmartSizeMode = value;
             }
 
             if (headers.Contains("VNCViewOnly"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("VNCViewOnly")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("VNCViewOnly")], out bool value))
                     connectionRecord.VNCViewOnly = value;
             }
 
             if (headers.Contains("RDGatewayUsageMethod"))
             {
-                RdpProtocol.RDGatewayUsageMethod value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayUsageMethod")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayUsageMethod")], out RdpProtocol.RDGatewayUsageMethod value))
                     connectionRecord.RDGatewayUsageMethod = value;
             }
 
             if (headers.Contains("RDGatewayUseConnectionCredentials"))
             {
-                RdpProtocol.RDGatewayUseConnectionCredentials value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayUseConnectionCredentials")], out value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayUseConnectionCredentials")], out RdpProtocol.RDGatewayUseConnectionCredentials value))
                     connectionRecord.RDGatewayUseConnectionCredentials = value;
             }
 
             #region Inheritance
             if (headers.Contains("InheritCacheBitmaps"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritCacheBitmaps")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritCacheBitmaps")], out bool value))
                     connectionRecord.Inheritance.CacheBitmaps = value;
             }
 
             if (headers.Contains("InheritColors"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritColors")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritColors")], out bool value))
                     connectionRecord.Inheritance.Colors = value;
             }
 
             if (headers.Contains("InheritDescription"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDescription")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDescription")], out bool value))
                     connectionRecord.Inheritance.Description = value;
             }
 
             if (headers.Contains("InheritDisplayThemes"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDisplayThemes")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDisplayThemes")], out bool value))
                     connectionRecord.Inheritance.DisplayThemes = value;
             }
 
             if (headers.Contains("InheritDisplayWallpaper"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDisplayWallpaper")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDisplayWallpaper")], out bool value))
                     connectionRecord.Inheritance.DisplayWallpaper = value;
             }
 
             if (headers.Contains("InheritEnableFontSmoothing"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritEnableFontSmoothing")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritEnableFontSmoothing")], out bool value))
                     connectionRecord.Inheritance.EnableFontSmoothing = value;
             }
 
             if (headers.Contains("InheritEnableDesktopComposition"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritEnableDesktopComposition")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritEnableDesktopComposition")], out bool value))
                     connectionRecord.Inheritance.EnableDesktopComposition = value;
             }
 
             if (headers.Contains("InheritDomain"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDomain")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDomain")], out bool value))
                     connectionRecord.Inheritance.Domain = value;
             }
 
             if (headers.Contains("InheritIcon"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritIcon")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritIcon")], out bool value))
                     connectionRecord.Inheritance.Icon = value;
             }
 
             if (headers.Contains("InheritPanel"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPanel")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPanel")], out bool value))
                     connectionRecord.Inheritance.Panel = value;
             }
 
             if (headers.Contains("InheritPassword"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPassword")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPassword")], out bool value))
                     connectionRecord.Inheritance.Password = value;
             }
 
             if (headers.Contains("InheritPort"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPort")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPort")], out bool value))
                     connectionRecord.Inheritance.Port = value;
             }
 
             if (headers.Contains("InheritProtocol"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritProtocol")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritProtocol")], out bool value))
                     connectionRecord.Inheritance.Protocol = value;
             }
 
             if (headers.Contains("InheritPuttySession"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPuttySession")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPuttySession")], out bool value))
                     connectionRecord.Inheritance.PuttySession = value;
             }
 
             if (headers.Contains("InheritRedirectDiskDrives"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectDiskDrives")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectDiskDrives")], out bool value))
                     connectionRecord.Inheritance.RedirectDiskDrives = value;
             }
 
             if (headers.Contains("InheritRedirectKeys"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectKeys")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectKeys")], out bool value))
                     connectionRecord.Inheritance.RedirectKeys = value;
             }
 
             if (headers.Contains("InheritRedirectPorts"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectPorts")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectPorts")], out bool value))
                     connectionRecord.Inheritance.RedirectPorts = value;
             }
 
             if (headers.Contains("InheritRedirectPrinters"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectPrinters")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectPrinters")], out bool value))
                     connectionRecord.Inheritance.RedirectPrinters = value;
             }
 
             if (headers.Contains("InheritRedirectClipboard"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectClipboard")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectClipboard")], out bool value))
                     connectionRecord.Inheritance.RedirectClipboard = value;
             }
 
             if (headers.Contains("InheritRedirectSmartCards"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectSmartCards")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectSmartCards")], out bool value))
                     connectionRecord.Inheritance.RedirectSmartCards = value;
             }
 
             if (headers.Contains("InheritRedirectSound"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectSound")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectSound")], out bool value))
                     connectionRecord.Inheritance.RedirectSound = value;
             }
 
             if (headers.Contains("InheritResolution"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritResolution")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritResolution")], out bool value))
                     connectionRecord.Inheritance.Resolution = value;
             }
 
             if (headers.Contains("InheritAutomaticResize"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritAutomaticResize")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritAutomaticResize")], out bool value))
                     connectionRecord.Inheritance.AutomaticResize = value;
             }
 
             if (headers.Contains("InheritUseConsoleSession"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseConsoleSession")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseConsoleSession")], out bool value))
                     connectionRecord.Inheritance.UseConsoleSession = value;
             }
 
             if (headers.Contains("InheritUseCredSsp"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseCredSsp")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseCredSsp")], out bool value))
                     connectionRecord.Inheritance.UseCredSsp = value;
             }
 
             if (headers.Contains("InheritRenderingEngine"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRenderingEngine")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRenderingEngine")], out bool value))
                     connectionRecord.Inheritance.RenderingEngine = value;
             }
 
             if (headers.Contains("InheritUsername"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUsername")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUsername")], out bool value))
                     connectionRecord.Inheritance.Username = value;
             }
 
             if (headers.Contains("InheritICAEncryptionStrength"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritICAEncryptionStrength")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritICAEncryptionStrength")], out bool value))
                     connectionRecord.Inheritance.ICAEncryptionStrength = value;
             }
 
             if (headers.Contains("InheritRDPAuthenticationLevel"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDPAuthenticationLevel")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDPAuthenticationLevel")], out bool value))
                     connectionRecord.Inheritance.RDPAuthenticationLevel = value;
             }
 
             if (headers.Contains("InheritLoadBalanceInfo"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritLoadBalanceInfo")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritLoadBalanceInfo")], out bool value))
                     connectionRecord.Inheritance.LoadBalanceInfo = value;
             }
 
             if (headers.Contains("InheritPreExtApp"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPreExtApp")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPreExtApp")], out bool value))
                     connectionRecord.Inheritance.PreExtApp = value;
             }
 
             if (headers.Contains("InheritPostExtApp"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPostExtApp")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPostExtApp")], out bool value))
                     connectionRecord.Inheritance.PostExtApp = value;
             }
 
             if (headers.Contains("InheritMacAddress"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritMacAddress")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritMacAddress")], out bool value))
                     connectionRecord.Inheritance.MacAddress = value;
             }
 
             if (headers.Contains("InheritUserField"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUserField")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUserField")], out bool value))
                     connectionRecord.Inheritance.UserField = value;
             }
 
             if (headers.Contains("InheritExtApp"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritExtApp")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritExtApp")], out bool value))
                     connectionRecord.Inheritance.ExtApp = value;
             }
 
             if (headers.Contains("InheritVNCCompression"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCCompression")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCCompression")], out bool value))
                     connectionRecord.Inheritance.VNCCompression = value;
             }
 
             if (headers.Contains("InheritVNCEncoding"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCEncoding")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCEncoding")], out bool value))
                     connectionRecord.Inheritance.VNCEncoding = value;
             }
 
             if (headers.Contains("InheritVNCAuthMode"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCAuthMode")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCAuthMode")], out bool value))
                     connectionRecord.Inheritance.VNCAuthMode = value;
             }
 
             if (headers.Contains("InheritVNCProxyType"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyType")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyType")], out bool value))
                     connectionRecord.Inheritance.VNCProxyType = value;
             }
 
             if (headers.Contains("InheritVNCProxyIP"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyIP")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyIP")], out bool value))
                     connectionRecord.Inheritance.VNCProxyIP = value;
             }
 
             if (headers.Contains("InheritVNCProxyPort"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyPort")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyPort")], out bool value))
                     connectionRecord.Inheritance.VNCProxyPort = value;
             }
 
             if (headers.Contains("InheritVNCProxyUsername"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyUsername")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyUsername")], out bool value))
                     connectionRecord.Inheritance.VNCProxyUsername = value;
             }
 
             if (headers.Contains("InheritVNCProxyPassword"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyPassword")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCProxyPassword")], out bool value))
                     connectionRecord.Inheritance.VNCProxyPassword = value;
             }
 
             if (headers.Contains("InheritVNCColors"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCColors")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCColors")], out bool value))
                     connectionRecord.Inheritance.VNCColors = value;
             }
 
             if (headers.Contains("InheritVNCSmartSizeMode"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCSmartSizeMode")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCSmartSizeMode")], out bool value))
                     connectionRecord.Inheritance.VNCSmartSizeMode = value;
             }
 
             if (headers.Contains("InheritVNCViewOnly"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCViewOnly")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVNCViewOnly")], out bool value))
                     connectionRecord.Inheritance.VNCViewOnly = value;
             }
 
             if (headers.Contains("InheritRDGatewayUsageMethod"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUsageMethod")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUsageMethod")], out bool value))
                     connectionRecord.Inheritance.RDGatewayUsageMethod = value;
             }
 
             if (headers.Contains("InheritRDGatewayHostname"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayHostname")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayHostname")], out bool value))
                     connectionRecord.Inheritance.RDGatewayHostname = value;
             }
 
             if (headers.Contains("InheritRDGatewayUseConnectionCredentials"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUseConnectionCredentials")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUseConnectionCredentials")], out bool value))
                     connectionRecord.Inheritance.RDGatewayUseConnectionCredentials = value;
             }
 
             if (headers.Contains("InheritRDGatewayUsername"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUsername")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUsername")], out bool value))
                     connectionRecord.Inheritance.RDGatewayUsername = value;
             }
 
             if (headers.Contains("InheritRDGatewayPassword"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayPassword")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayPassword")], out bool value))
                     connectionRecord.Inheritance.RDGatewayPassword = value;
             }
 
             if (headers.Contains("InheritRDGatewayDomain"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayDomain")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayDomain")], out bool value))
                     connectionRecord.Inheritance.RDGatewayDomain = value;
             }
 
             if (headers.Contains("InheritRDPAlertIdleTimeout"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDPAlertIdleTimeout")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDPAlertIdleTimeout")], out bool value))
                     connectionRecord.Inheritance.RDPAlertIdleTimeout = value;
             }
 
             if (headers.Contains("InheritRDPMinutesToIdleTimeout"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDPMinutesToIdleTimeout")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDPMinutesToIdleTimeout")], out bool value))
                     connectionRecord.Inheritance.RDPMinutesToIdleTimeout = value;
             }
 
             if (headers.Contains("InheritSoundQuality"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSoundQuality")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSoundQuality")], out bool value))
                     connectionRecord.Inheritance.SoundQuality = value;
+            }
+
+            if (headers.Contains("InheritCredentialRecord"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritCredentialRecord")], out bool value))
+                    connectionRecord.Inheritance.CredentialId = value;
             }
             #endregion
 

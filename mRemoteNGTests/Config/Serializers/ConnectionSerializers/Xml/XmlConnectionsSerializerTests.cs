@@ -52,7 +52,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(connectionNode, Is.Not.Null);
         }
 
-        [TestCase("CredentialRecordId", "")]
+        [TestCase("CredentialId", "")]
         [TestCase("InheritAutomaticResize", "false")]
         public void SerializerRespectsSaveFilterSettings(string attributeName, string expectedValue)
         {

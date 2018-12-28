@@ -23,7 +23,7 @@ namespace mRemoteNGTests.Tools
 	    [Test]
 	    public void MaybeExtensionOfNullObjectIsntNull()
 	    {
-	        var sut = ((object) null).Maybe();
+	        var sut = ((object) null).ToOptional();
             Assert.That(sut, Is.Not.Null);
 	    }
 	}

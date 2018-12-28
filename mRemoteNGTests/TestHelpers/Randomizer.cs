@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using mRemoteNG.Credential;
 using Enum = System.Enum;
 
 namespace mRemoteNGTests.TestHelpers
@@ -86,6 +87,7 @@ namespace mRemoteNGTests.TestHelpers
                 { typeof(string), (p, c) =>  p.SetValue(c, RandomString((string)p.GetValue(c))) },
                 { typeof(DateTime), (p, c) =>  p.SetValue(c, RandomDateTime((DateTime)p.GetValue(c))) },
                 { typeof(Enum), (p, c) =>  p.SetValue(c, RandomEnum(p.PropertyType, p.GetValue(c))) },
+                { typeof(ICredentialRecord), (p, c) => {} },
             };
 
             var settableProperties = con
