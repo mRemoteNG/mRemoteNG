@@ -250,7 +250,7 @@
     <Compile Include="Credential\Repositories\CompositeRepositoryUnlocker.cs" />
     <Compile Include="Credential\CredentialChangedEventArgs.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
-    <Compile Include="Credential\CredentialDomainUserComparer.cs" />
+    <Compile Include="Credential\CredentialDomainUserPasswordComparer.cs" />
     <Compile Include="Credential\Repositories\CredentialRepositoryTypeNotSupportedException.cs" />
     <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
