@@ -18,10 +18,10 @@ namespace mRemoteNG.Tools
 		private Thread _scanThread;
 		private readonly List<ScanHost> _scannedHosts = new List<ScanHost>();
 		private readonly int _timeoutInMilliseconds;
-				
+
         #region Public Methods
-	
-		public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2, int timeoutInMilliseconds = 5000)
+
+        public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2, int timeoutInMilliseconds = 5000, bool checkDefaultPortsOnly = false)
 		{
             var ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
             var ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
@@ -29,18 +29,25 @@ namespace mRemoteNG.Tools
             var portStart = Math.Min(port1, port2);
 			var portEnd = Math.Max(port1, port2);
 
+            // if only one port was specified, just scan the one port...
+            if (portStart == 0)
+                portStart = portEnd;
+
 			if (timeoutInMilliseconds < 0)
 				throw new ArgumentOutOfRangeException(nameof(timeoutInMilliseconds));
 
 			_timeoutInMilliseconds = timeoutInMilliseconds;
-
-
 			_ports.Clear();
-			for (var port = portStart; port <= portEnd; port++)
-			{
-				_ports.Add(port);
-			}
-            _ports.AddRange(new[] { ScanHost.SshPort, ScanHost.TelnetPort, ScanHost.HttpPort, ScanHost.HttpsPort, ScanHost.RloginPort, ScanHost.RdpPort, ScanHost.VncPort });
+
+            if (checkDefaultPortsOnly)
+                _ports.AddRange(new[] { ScanHost.SshPort, ScanHost.TelnetPort, ScanHost.HttpPort, ScanHost.HttpsPort, ScanHost.RloginPort, ScanHost.RdpPort, ScanHost.VncPort });
+            else
+            {
+                for (var port = portStart; port <= portEnd; port++)
+                {
+                    _ports.Add(port);
+                }
+            }
 
             _ipAddresses.Clear();
             _ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
@@ -58,6 +65,10 @@ namespace mRemoteNG.Tools
 				
 		public void StopScan()
 		{
+            foreach(var p in _pings)
+            {
+                p.SendAsyncCancel();
+            }
 			_scanThread.Abort();
         }
 				
@@ -79,6 +90,7 @@ namespace mRemoteNG.Tools
         #region Private Methods
 
         private int _hostCount;
+        private readonly List<Ping> _pings = new List<Ping>();
         private void ScanAsync()
 		{
 			try
@@ -90,6 +102,7 @@ namespace mRemoteNG.Tools
                     RaiseBeginHostScanEvent(ipAddress);
 
                     var pingSender = new Ping();
+                    _pings.Add(pingSender);
 
                     try
                     {
@@ -113,12 +126,25 @@ namespace mRemoteNG.Tools
          */
         private void PingSender_PingCompleted(object sender, PingCompletedEventArgs e)
         {
+            // used for clean up later...
+            var p = (Ping)sender;
+
             // UserState is the IP Address
             var ip = e.UserState.ToString();
             var scanHost = new ScanHost(ip);
             _hostCount++;
 
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scanning {_hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}", true);
+
+            
+            if (e.Cancelled)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: CANCELLED host: {scanHost.HostIp}", true);
+                // cleanup
+                p.PingCompleted -= PingSender_PingCompleted;
+                p.Dispose();
+                return;
+            }
 
             if (e.Error != null)
             {
@@ -199,7 +225,6 @@ namespace mRemoteNG.Tools
             }
 
             // cleanup
-            var p = (Ping)sender;
             p.PingCompleted -= PingSender_PingCompleted;
             p.Dispose();
 

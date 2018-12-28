@@ -41,10 +41,10 @@
   <ItemGroup>
     <Content Include="Filters\Harvest_Filter.xslt" />
     <Content Include="Includes\Config.wxi" />
-    <Content Include="Resources\header.bmp" />
+    <Content Include="Resources\AppIcon.ico" />
+    <Content Include="Resources\Installer_Header.png" />
+    <Content Include="Resources\Installer_Side.png" />
     <Content Include="Resources\License.rtf" />
-    <Content Include="Resources\mRemoteNG.ico" />
-    <Content Include="Resources\welcome.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomActions" />
@@ -57,10 +57,6 @@
     <Folder Include="Resources" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localizations\ru-RU.wxl" />
-    <EmbeddedResource Include="Localizations\ja-JP.wxl" />
-    <EmbeddedResource Include="Localizations\cs-CZ.wxl" />
-    <EmbeddedResource Include="Localizations\de-DE.wxl" />
     <EmbeddedResource Include="Localizations\en-US.wxl" />
   </ItemGroup>
   <ItemGroup>

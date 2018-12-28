@@ -637,7 +637,7 @@ namespace mRemoteNG.UI.Window
                         /* rare failure here. While ExternalTool.Image already tries to default this
                          * try again so it's not null/doesn't crash.
                          */
-                        Image = externalTool.Image ?? Resources.mRemote_Icon.ToBitmap()
+                        Image = externalTool.Image ?? Resources.mRemoteNG_Icon.ToBitmap()
                     };
 
                     nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender).Tag as ExternalTool);
@@ -796,10 +796,13 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var newTitle = TabController.SelectedTab.Title;
-                if (new InputBox().ShowAsDialog(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK && 
-                    !string.IsNullOrEmpty(newTitle))
-                    TabController.SelectedTab.Title = newTitle.Replace("&", "&&");
+                var title = TabController.SelectedTab.Title;
+                using (FrmInputBox frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref title))
+                {
+                    DialogResult dr = frmInputBox.ShowDialog();
+                    if (dr == DialogResult.OK && !string.IsNullOrEmpty(frmInputBox.returnValue))
+                        TabController.SelectedTab.Title = frmInputBox.returnValue;// newTitle.Replace("&", "&&");
+                }
             }
             catch (Exception ex)
             {

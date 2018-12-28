@@ -304,7 +304,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkSingleClickOnOpenedConnectionSwitchesToIt);
             this.Controls.Add(this.pnlConfirmCloseConnection);
             this.Name = "ConnectionsPage";
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRdpReconnectionCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).EndInit();

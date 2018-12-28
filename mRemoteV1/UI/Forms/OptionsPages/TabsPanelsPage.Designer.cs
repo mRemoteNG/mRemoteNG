@@ -163,7 +163,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkDoubleClickClosesTab);
             this.Controls.Add(this.chkShowProtocolOnTabs);
             this.Name = "TabsPanelsPage";
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             this.ResumeLayout(false);
             this.PerformLayout();
 

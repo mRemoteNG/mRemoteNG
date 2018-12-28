@@ -40,6 +40,7 @@ Format-Table -AutoSize -Wrap -InputObject @{
 
 & "$PSScriptRoot\copy_puttyng.ps1" -SolutionDir $SolutionDir -TargetDir $TargetDir
 & "$PSScriptRoot\copy_themes.ps1" -SolutionDir $SolutionDir -TargetDir $TargetDir
+& "$PSScriptRoot\copy_tiles.ps1" -SolutionDir $SolutionDir -TargetDir $TargetDir
 & "$PSScriptRoot\move_help_files.ps1" -TargetDir $TargetDir
 & "$PSScriptRoot\set_LargeAddressAware.ps1" -TargetDir $TargetDir -TargetFileName $TargetFileName
 & "$PSScriptRoot\verify_LargeAddressAware.ps1" -TargetDir $TargetDir -TargetFileName $TargetFileName

@@ -137,7 +137,7 @@ namespace mRemoteNG.Connection
             var connectionPanel = "";
             if (connectionInfo.Panel == "" || force.HasFlag(ConnectionInfo.Force.OverridePanel) || Settings.Default.AlwaysShowPanelSelectionDlg)
             {
-                var frmPnl = new frmChoosePanel();
+                var frmPnl = new FrmChoosePanel();
                 if (frmPnl.ShowDialog() == DialogResult.OK)
                 {
                     connectionPanel = frmPnl.Panel;

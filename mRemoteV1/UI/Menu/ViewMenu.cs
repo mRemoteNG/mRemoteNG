@@ -14,7 +14,6 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewConnections;
         private ToolStripMenuItem _mMenViewConfig;
         private ToolStripMenuItem _mMenViewErrorsAndInfos;
-        private ToolStripMenuItem _mMenViewScreenshotManager;
         private ToolStripMenuItem _mMenViewAddConnectionPanel;
         private ToolStripSeparator _mMenViewSep2;
         private ToolStripMenuItem _mMenViewFullscreen;
@@ -52,7 +51,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnections = new ToolStripMenuItem();
             _mMenViewConfig = new ToolStripMenuItem();
             _mMenViewErrorsAndInfos = new ToolStripMenuItem();
-            _mMenViewScreenshotManager = new ToolStripMenuItem();
             _mMenViewJumpTo = new ToolStripMenuItem();
             _mMenViewJumpToConnectionsConfig = new ToolStripMenuItem();
             _mMenViewJumpToErrorsInfos = new ToolStripMenuItem();
@@ -76,7 +74,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnections,
             _mMenViewConfig,
             _mMenViewErrorsAndInfos,
-            _mMenViewScreenshotManager,
             _toolStripSeparator1,
             _mMenViewJumpTo,
             _mMenViewResetLayout,
@@ -141,14 +138,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewErrorsAndInfos.Size = new System.Drawing.Size(228, 22);
             _mMenViewErrorsAndInfos.Text = Language.strMenuNotifications;
             _mMenViewErrorsAndInfos.Click += mMenViewErrorsAndInfos_Click;
-            // 
-            // mMenViewScreenshotManager
-            // 
-            _mMenViewScreenshotManager.Image = Resources.Screenshot;
-            _mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
-            _mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
-            _mMenViewScreenshotManager.Text = Language.strScreenshots;
-            _mMenViewScreenshotManager.Click += mMenViewScreenshotManager_Click;
             // 
             // ToolStripSeparator1
             // 
@@ -256,7 +245,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnections.Text = Language.strMenuConnections;
             _mMenViewConfig.Text = Language.strMenuConfig;
             _mMenViewErrorsAndInfos.Text = Language.strMenuNotifications;
-            _mMenViewScreenshotManager.Text = Language.strScreenshots;
             _mMenViewJumpTo.Text = Language.strMenuJumpTo;
             _mMenViewJumpToConnectionsConfig.Text = Language.strMenuConnectionsAndConfig;
             _mMenViewJumpToErrorsInfos.Text = Language.strMenuNotifications;
@@ -274,7 +262,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnections.Checked = !Windows.TreeForm.IsHidden;
             _mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;
             _mMenViewErrorsAndInfos.Checked = !Windows.ErrorsForm.IsHidden;
-            _mMenViewScreenshotManager.Checked = !Windows.ScreenshotForm.IsHidden;
 	        _mMenViewLockToolbars.Checked = Settings.Default.LockToolbars;
 
             _mMenViewExtAppsToolbar.Checked = TsExternalTools.Visible;
@@ -339,20 +326,6 @@ namespace mRemoteNG.UI.Menu
             {
                 Windows.ErrorsForm.Hide();
                 _mMenViewErrorsAndInfos.Checked = false;
-            }
-        }
-
-        private void mMenViewScreenshotManager_Click(object sender, EventArgs e)
-        {
-            if (_mMenViewScreenshotManager.Checked == false)
-            {
-                Windows.ScreenshotForm.Show(MainForm.pnlDock);
-                _mMenViewScreenshotManager.Checked = true;
-            }
-            else
-            {
-                Windows.ScreenshotForm.Hide();
-                _mMenViewScreenshotManager.Checked = false;
             }
         }
 

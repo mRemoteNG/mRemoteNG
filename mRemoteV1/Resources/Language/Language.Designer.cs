@@ -1982,7 +1982,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End IP.
+        ///   Looks up a localized string similar to Last IP.
         /// </summary>
         internal static string strEndIP {
             get {
@@ -1991,7 +1991,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End Port.
+        ///   Looks up a localized string similar to Last Port.
         /// </summary>
         internal static string strEndPort {
             get {
@@ -4570,6 +4570,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To scan a single port, select the &quot;First Port&quot; only..
+        /// </summary>
+        internal static string strPortScanSinglePort {
+            get {
+                return ResourceManager.GetString("strPortScanSinglePort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!).
         /// </summary>
         internal static string strPropertiesWillOnlyBeSavedMRemoteXML {
@@ -6866,7 +6875,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start IP.
+        ///   Looks up a localized string similar to First IP.
         /// </summary>
         internal static string strStartIP {
             get {
@@ -6875,7 +6884,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Port.
+        ///   Looks up a localized string similar to First Port.
         /// </summary>
         internal static string strStartPort {
             get {
@@ -7307,7 +7316,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Timeout (seconds).
+        ///   Looks up a localized string similar to Timeout [seconds].
         /// </summary>
         internal static string strTimeoutInSeconds {
             get {

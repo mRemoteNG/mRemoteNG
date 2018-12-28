@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -12,7 +13,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
             ApplyTheme();
-            PageIcon = Resources.shield;
+            PageIcon = Resources.Shield_Icon;
         }
 
         [Browsable(false)]

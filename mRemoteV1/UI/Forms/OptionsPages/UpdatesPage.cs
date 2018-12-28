@@ -27,7 +27,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         }
 
         #region Public Methods
-
         public override string PageName
         {
             get => Language.strTabUpdates;

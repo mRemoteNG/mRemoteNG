@@ -90,7 +90,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkSingleInstance);
             this.Controls.Add(this.chkProperInstallationOfComponentsAtStartup);
             this.Name = "StartupExitPage";
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             this.Load += new System.EventHandler(this.StartupExitPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

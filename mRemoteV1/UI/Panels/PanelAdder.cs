@@ -96,13 +96,12 @@ namespace mRemoteNG.UI.Panels
             try
             {
                 var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
-
                 var nTitle = "";
-                new InputBox().ShowAsDialog(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle);
-
-                if (!string.IsNullOrEmpty(nTitle))
+                using (FrmInputBox frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle))
                 {
-                    conW.SetFormText(nTitle.Replace("&", "&&"));
+                    DialogResult dr = frmInputBox.ShowDialog();
+                    if (dr == DialogResult.OK && string.IsNullOrEmpty(frmInputBox.returnValue))
+                        conW.SetFormText(frmInputBox.returnValue);
                 }
             }
             catch (Exception ex)

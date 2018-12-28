@@ -220,7 +220,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.lblSeconds);
             this.Controls.Add(this.btnBrowseCustomPuttyPath);
             this.Name = "AdvancedPage";
-            this.Size = new System.Drawing.Size(610, 489);
+            this.Size = new System.Drawing.Size(610, 490);
             ((System.ComponentModel.ISupportInitialize)(this.numPuttyWaitTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUVNCSCPort)).EndInit();
             this.ResumeLayout(false);
