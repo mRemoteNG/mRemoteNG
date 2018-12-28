@@ -292,6 +292,7 @@ namespace mRemoteNG.UI.Forms
         {
             PromptForUpdatesPreference();
             CheckForUpdates();
+            UnlockRepositories(Runtime.CredentialProviderCatalog, this);
         }
 
         private void PromptForUpdatesPreference()
@@ -332,6 +333,15 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated) CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
             Startup.Instance.CheckForUpdate();
+        }
+
+        private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
+        {
+            if (!Settings.Default.PromptUnlockCredReposOnStartup)
+                return;
+
+            var credentialUnlockerForm = _credRepoUnlockerFormFactory.Build(repositories);
+            credentialUnlockerForm.ShowDialog(parentForm);
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

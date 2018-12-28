@@ -22,6 +22,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void ApplyLanguage()
         {
             base.ApplyLanguage();
+
+            checkBoxUnlockOnStartup.Text = Language.PromptUnlockCredReposOnStartup;
             lblDefaultCredentials.Text = Language.strEmptyUsernamePasswordDomainFields;
             radCredentialsNoInfo.Text = Language.strNoInformation;
             radCredentialsWindows.Text = Language.strMyCurrentWindowsCreds;
@@ -34,6 +36,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             base.SaveSettings();
+
+            checkBoxUnlockOnStartup.Checked = Settings.Default.PromptUnlockCredReposOnStartup;
 
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (Settings.Default.EmptyCredentials)
@@ -57,6 +61,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void SaveSettings()
         {
+            Settings.Default.PromptUnlockCredReposOnStartup = checkBoxUnlockOnStartup.Checked;
+
             if (radCredentialsNoInfo.Checked)
             {
                 Settings.Default.EmptyCredentials = "noinfo";
