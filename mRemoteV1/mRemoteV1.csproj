@@ -1032,6 +1032,9 @@
     <None Include="Resources\Icons\Update_Icon.ico" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <None Include="Resources\Images\mRemoteNG.png" />
+    <None Include="Resources\Images\tab_add.png" />
+    <None Include="Resources\Images\tab_edit.png" />
+    <None Include="Resources\Images\tab_delete.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
