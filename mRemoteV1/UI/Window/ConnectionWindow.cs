@@ -12,6 +12,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -116,14 +117,14 @@ namespace mRemoteNG.UI.Window
                 if (Settings.Default.ShowLogonInfoOnTabs)
                 {
                     nTab.Title += @" (";
-                    if (connectionInfo.Domain != "")
-                        nTab.Title += connectionInfo.Domain;
+                    if (!string.IsNullOrEmpty(connectionInfo.CredentialRecord.Domain))
+                        nTab.Title += connectionInfo.CredentialRecord.Domain;
 
-                    if (connectionInfo.Username != "")
+                    if (!string.IsNullOrEmpty(connectionInfo.CredentialRecord.Username))
                     {
-                        if (connectionInfo.Domain != "")
+                        if (!string.IsNullOrEmpty(connectionInfo.CredentialRecord.Domain))
                             nTab.Title += @"\";
-                        nTab.Title += connectionInfo.Username;
+                        nTab.Title += connectionInfo.CredentialRecord.Username;
                     }
 
                     nTab.Title += @")";
@@ -487,15 +488,15 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                if (interfaceControl == null) return;
+                if (!(TabController.SelectedTab?.Tag is InterfaceControl interfaceControl))
+                    return;
 
                 Windows.Show(WindowType.SSHTransfer);
                 var connectionInfo = interfaceControl.Info;
 
                 Windows.SshtransferForm.Hostname = connectionInfo.Hostname;
-                Windows.SshtransferForm.Username = connectionInfo.Username;
-                Windows.SshtransferForm.Password = connectionInfo.Password;
+                Windows.SshtransferForm.Username = connectionInfo.CredentialRecord.Username;
+                Windows.SshtransferForm.Password = connectionInfo.CredentialRecord.Password.ConvertToUnsecureString();
                 Windows.SshtransferForm.Port = Convert.ToString(connectionInfo.Port);
             }
             catch (Exception ex)

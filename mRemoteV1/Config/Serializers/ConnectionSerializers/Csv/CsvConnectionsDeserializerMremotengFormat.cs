@@ -109,6 +109,12 @@ namespace mRemoteNG.Config.Serializers.Csv
             connectionRecord.VNCProxyIP = headers.Contains("VNCProxyIP") ? connectionCsv[headers.IndexOf("VNCProxyIP")] : "";
             connectionRecord.RDGatewayHostname = headers.Contains("RDGatewayHostname") ? connectionCsv[headers.IndexOf("RDGatewayHostname")] : "";
 
+            if (headers.Contains("CredentialId"))
+            {
+                if (Guid.TryParse(connectionCsv[headers.IndexOf("CredentialId")], out var credId))
+                    connectionRecord.CredentialRecordId = credId;
+            }
+
             if (headers.Contains("Protocol"))
             {
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Protocol")], out ProtocolType protocolType))

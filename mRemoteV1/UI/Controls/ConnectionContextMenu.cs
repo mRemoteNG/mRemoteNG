@@ -6,6 +6,7 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -706,8 +707,8 @@ namespace mRemoteNG.UI.Controls
             {
                 Windows.Show(WindowType.SSHTransfer);
                 Windows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
-                Windows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
-                Windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;
+                Windows.SshtransferForm.Username = _connectionTree.SelectedNode.CredentialRecord.Username;
+                Windows.SshtransferForm.Password = _connectionTree.SelectedNode.CredentialRecord.Password.ConvertToUnsecureString();
                 Windows.SshtransferForm.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
             }
             catch (Exception ex)

@@ -136,16 +136,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         {
             public static IEnumerable ConnectionPropertyTestCases()
             {
-                var ignoreProperties = new[]
-                {
-                    nameof(ConnectionInfo.Inheritance),
-                    nameof(ConnectionInfo.ConstantID),
-                    nameof(ConnectionInfo.Parent),
-                    nameof(ConnectionInfo.CredentialRecord)
-                };
-                var properties = typeof(ConnectionInfo)
-                    .GetProperties()
-                    .Where(property => !ignoreProperties.Contains(property.Name));
+                var properties = new ConnectionInfo().GetSerializableProperties();
                 var testCases = new List<TestCaseData>();
                 var testConnectionInfo = GetTestConnection();
 
@@ -161,14 +152,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
             public static IEnumerable InheritanceTestCases()
             {
-                var ignoreProperties = new[]
-                {
-                    nameof(ConnectionInfoInheritance.EverythingInherited),
-                    nameof(ConnectionInfoInheritance.Parent)
-                };
-                var properties = typeof(ConnectionInfoInheritance)
-                    .GetProperties()
-                    .Where(property => !ignoreProperties.Contains(property.Name));
+                var properties = new ConnectionInfoInheritance(new object()).GetProperties();
                 var testCases = new List<TestCaseData>();
                 var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
 

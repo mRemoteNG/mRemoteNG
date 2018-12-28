@@ -228,20 +228,13 @@ namespace mRemoteNG.Config.Serializers.Xml
                             : RdpProtocol.RDPResolutions.FitToWindow;
                     }
 
-                    if (!Runtime.UseCredentialManager || _confVersion <= 2.6) // 0.2 - 2.6
+                    if (_confVersion <= 2.6) // 0.2 - 2.6
                     {
 #pragma warning disable 618
                         connectionInfo.Username = xmlnode.Attributes["Username"].Value;
                         connectionInfo.Password = _decryptor.Decrypt(xmlnode.Attributes["Password"].Value);
                         connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
 #pragma warning restore 618
-                    }
-
-                    if (Runtime.UseCredentialManager && _confVersion >= 2.7)
-                    {
-                        connectionInfo.CredentialRecordId = Guid.TryParse(xmlnode.Attributes["CredentialId"]?.Value, out var credId) 
-                            ? credId 
-                            : Optional<Guid>.Empty;
                     }
                 }
 

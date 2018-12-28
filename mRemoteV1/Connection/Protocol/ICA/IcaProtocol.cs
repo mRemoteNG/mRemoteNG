@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
+using mRemoteNG.Security;
 
 
 namespace mRemoteNG.Connection.Protocol.ICA
@@ -117,9 +118,9 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 
-			    var user = _info?.Username ?? "";
-			    var pass = _info?.Password ?? "";
-			    var dom = _info?.Domain ?? "";
+			    var user = _info?.CredentialRecord.Username ?? "";
+			    var pass = _info?.CredentialRecord.Password?.ConvertToUnsecureString() ?? "";
+			    var dom = _info?.CredentialRecord.Domain ?? "";
 
 				if (string.IsNullOrEmpty(user))
 				{

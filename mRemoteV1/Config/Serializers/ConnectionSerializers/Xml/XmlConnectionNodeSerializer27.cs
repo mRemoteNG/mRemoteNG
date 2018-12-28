@@ -44,26 +44,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("Icon", connectionInfo.Icon));
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
             element.Add(new XAttribute("Id", connectionInfo.ConstantID));
-
-            if (!Runtime.UseCredentialManager)
-            {
-                element.Add(_saveFilter.SaveUsername
-                    ? new XAttribute("Username", connectionInfo.Username)
-                    : new XAttribute("Username", ""));
-
-                element.Add(_saveFilter.SaveDomain
-                    ? new XAttribute("Domain", connectionInfo.Domain)
-                    : new XAttribute("Domain", ""));
-
-                if (_saveFilter.SavePassword && !connectionInfo.Inheritance.Password)
-                    element.Add(new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey)));
-                else
-                    element.Add(new XAttribute("Password", ""));
-            }
-            else
-            {
-                element.Add(new XAttribute("CredentialId", connectionInfo.CredentialRecordId));
-            }
+            element.Add(new XAttribute("CredentialId", connectionInfo.CredentialRecordId));
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));

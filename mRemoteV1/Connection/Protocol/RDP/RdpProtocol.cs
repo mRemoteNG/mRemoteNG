@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -352,9 +353,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
-						    _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username;
-						    _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password;
-						    _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo?.Domain;
+						    _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.CredentialRecord.Username;
+						    _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.CredentialRecord.Password.ConvertToUnsecureString();
+						    _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.CredentialRecord.Domain;
 						}
 						else if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
 						{
@@ -452,9 +453,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					return;
 				}
 
-			    var userName = _connectionInfo?.Username ?? "";
-			    var password = _connectionInfo?.Password ?? "";
-			    var domain = _connectionInfo?.Domain ?? "";
+			    var userName = _connectionInfo?.CredentialRecord.Username ?? "";
+			    var password = _connectionInfo?.CredentialRecord.Password?.ConvertToUnsecureString() ?? "";
+			    var domain = _connectionInfo?.CredentialRecord.Domain ?? "";
 						
 				if (string.IsNullOrEmpty(userName))
 				{

@@ -17,6 +17,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
     {
         private ICredentialRepositoryList _credentialRepositoryList;
         private const string ConnectionName = "myconnection";
+        private const string Description = "description here";
         private const string Username = "myuser";
         private const string Domain = "mydomain";
         private const string Password = "mypass123";
@@ -50,9 +51,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             Assert.That(csv, Does.Not.Match($"{treeModel.RootNodes[0].ConstantID};.*;{TreeNodeType.Root}"));
         }
 
-        [TestCase(Username)]
-        [TestCase(Domain)]
-        [TestCase(Password)]
+        [TestCase(Description)]
         [TestCase("InheritColors")]
         public void CreatesCsv(string valueThatShouldExist)
         {
@@ -111,9 +110,6 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             var container = BuildContainer();
             var csv = serializer.Serialize(container);
             Assert.That(csv, Does.Match(container.Name));
-            Assert.That(csv, Does.Match(container.Username));
-            Assert.That(csv, Does.Match(container.Domain));
-            Assert.That(csv, Does.Match(container.Password));
             Assert.That(csv, Does.Contain(TreeNodeType.Container.ToString()));
         }
 
@@ -125,9 +121,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             var serializationTarget = treeModel.GetRecursiveChildList().First(info => info.Name == "folder3");
             var csv = serializer.Serialize(serializationTarget);
             var lineWithFolder3 = csv.Split(new[] {Environment.NewLine}, StringSplitOptions.None).First(s => s.Contains(serializationTarget.Name));
-            Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Username));
-            Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Domain));
-            Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Password));
+            Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Description));
         }
 
         private ConnectionInfo BuildConnectionInfo()
@@ -135,9 +129,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             return new ConnectionInfo
             {
                 Name = ConnectionName,
-				Username = Username,
-				Domain = Domain,
-				Password = Password,
+                Description = Description,
                 Inheritance = {Colors = true}
             };
         }
@@ -147,9 +139,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             return new ContainerInfo
             {
                 Name = "MyFolder",
-                Username = "BlahBlah1",
-                Domain = "aklkskkksh8",
-                Password = "qweraslkdjf87"
+                Description = "blahblah",
             };
         }
     }
