@@ -75,7 +75,7 @@
             this.objectListViewRepos.Name = "objectListViewRepos";
             this.objectListViewRepos.SelectAllOnControlA = false;
             this.objectListViewRepos.ShowGroups = false;
-            this.objectListViewRepos.Size = new System.Drawing.Size(175, 283);
+            this.objectListViewRepos.Size = new System.Drawing.Size(175, 309);
             this.objectListViewRepos.TabIndex = 3;
             this.objectListViewRepos.UseCompatibleStateImageBehavior = false;
             this.objectListViewRepos.UseOverlays = false;
@@ -114,7 +114,7 @@
             // 
             this.labelPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(195, 173);
+            this.labelPassword.Location = new System.Drawing.Point(191, 182);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(53, 13);
             this.labelPassword.TabIndex = 2;
@@ -124,7 +124,7 @@
             // 
             this.buttonUnlock._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonUnlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonUnlock.Location = new System.Drawing.Point(387, 234);
+            this.buttonUnlock.Location = new System.Drawing.Point(383, 243);
             this.buttonUnlock.Name = "buttonUnlock";
             this.buttonUnlock.Size = new System.Drawing.Size(75, 23);
             this.buttonUnlock.TabIndex = 1;
@@ -137,7 +137,7 @@
             this.buttonClose._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(468, 234);
+            this.buttonClose.Location = new System.Drawing.Point(464, 243);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 2;
@@ -194,7 +194,7 @@
             this.textBoxSource.Multiline = true;
             this.textBoxSource.Name = "textBoxSource";
             this.textBoxSource.ReadOnly = true;
-            this.textBoxSource.Size = new System.Drawing.Size(306, 40);
+            this.textBoxSource.Size = new System.Drawing.Size(306, 51);
             this.textBoxSource.TabIndex = 11;
             this.textBoxSource.TabStop = false;
             // 
@@ -234,7 +234,7 @@
             this.labelPasswordError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPasswordError.ForeColor = System.Drawing.Color.DarkRed;
             this.labelPasswordError.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.labelPasswordError.Location = new System.Drawing.Point(196, 212);
+            this.labelPasswordError.Location = new System.Drawing.Point(192, 221);
             this.labelPasswordError.Name = "labelPasswordError";
             this.labelPasswordError.Size = new System.Drawing.Size(115, 13);
             this.labelPasswordError.TabIndex = 14;
@@ -245,7 +245,7 @@
             // 
             this.imgPasswordError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.imgPasswordError.Image = global::mRemoteNG.Resources.exclamation;
-            this.imgPasswordError.Location = new System.Drawing.Point(181, 191);
+            this.imgPasswordError.Location = new System.Drawing.Point(177, 200);
             this.imgPasswordError.Name = "imgPasswordError";
             this.imgPasswordError.Size = new System.Drawing.Size(16, 16);
             this.imgPasswordError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -257,7 +257,7 @@
             // 
             this.imgUnlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.imgUnlocked.Image = global::mRemoteNG.Resources.tick;
-            this.imgUnlocked.Location = new System.Drawing.Point(189, 238);
+            this.imgUnlocked.Location = new System.Drawing.Point(185, 247);
             this.imgUnlocked.Name = "imgUnlocked";
             this.imgUnlocked.Size = new System.Drawing.Size(16, 16);
             this.imgUnlocked.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -269,7 +269,7 @@
             // 
             this.labelUnlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelUnlocked.AutoSize = true;
-            this.labelUnlocked.Location = new System.Drawing.Point(205, 239);
+            this.labelUnlocked.Location = new System.Drawing.Point(201, 248);
             this.labelUnlocked.Name = "labelUnlocked";
             this.labelUnlocked.Size = new System.Drawing.Size(174, 13);
             this.labelUnlocked.TabIndex = 17;
@@ -280,7 +280,7 @@
             // 
             this.secureTextBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.secureTextBoxPassword.Location = new System.Drawing.Point(198, 189);
+            this.secureTextBoxPassword.Location = new System.Drawing.Point(194, 198);
             this.secureTextBoxPassword.Name = "secureTextBoxPassword";
             this.secureTextBoxPassword.Size = new System.Drawing.Size(348, 20);
             this.secureTextBoxPassword.TabIndex = 0;
@@ -291,7 +291,7 @@
             this.chkCloseAfterLastUnlock._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkCloseAfterLastUnlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkCloseAfterLastUnlock.AutoSize = true;
-            this.chkCloseAfterLastUnlock.Location = new System.Drawing.Point(189, 263);
+            this.chkCloseAfterLastUnlock.Location = new System.Drawing.Point(185, 280);
             this.chkCloseAfterLastUnlock.Name = "chkCloseAfterLastUnlock";
             this.chkCloseAfterLastUnlock.Size = new System.Drawing.Size(332, 17);
             this.chkCloseAfterLastUnlock.TabIndex = 18;
@@ -305,7 +305,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(554, 283);
+            this.ClientSize = new System.Drawing.Size(554, 309);
             this.Controls.Add(this.chkCloseAfterLastUnlock);
             this.Controls.Add(this.labelUnlocked);
             this.Controls.Add(this.imgUnlocked);
