@@ -47,6 +47,17 @@ namespace mRemoteNG.UI.Forms
             UpdateUi();
         }
 
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                var createParams = base.CreateParams;
+                createParams.ClassStyle = createParams.ClassStyle | CP_NOCLOSE_BUTTON;
+                return createParams;
+            }
+        }
+
         public ConnectionTreeModel Deserialize(string serializedData)
         {
             var xdoc = XDocument.Parse(serializedData);
@@ -140,6 +151,32 @@ namespace mRemoteNG.UI.Forms
         private void buttonBack_Click(object sender, EventArgs e)
         {
             tabControl.SelectedTab = tabPageWelcome;
+        }
+
+        /// <summary>
+        /// Validate field entries to determine if we have enough information to perform the upgrade
+        /// </summary>
+        private void ValidateFields()
+        {
+            buttonExecuteUpgrade.Enabled = 
+                newRepositoryPasswordEntry.PasswordsMatch && 
+                newRepositoryPasswordEntry.SecureString.Length > 0 &&
+                !string.IsNullOrWhiteSpace(textBoxCredRepoPath.Text);
+        }
+
+        private void textBoxCredRepoPath_TextChanged(object sender, EventArgs e)
+        {
+            ValidateFields();
+        }
+
+        private void newRepositoryPasswordEntry_Verified(object sender, EventArgs e)
+        {
+            ValidateFields();
+        }
+
+        private void newRepositoryPasswordEntry_NotVerified(object sender, EventArgs e)
+        {
+            ValidateFields();
         }
     }
 }

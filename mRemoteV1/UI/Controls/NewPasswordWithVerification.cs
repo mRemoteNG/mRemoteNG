@@ -92,15 +92,27 @@ namespace mRemoteNG.UI.Controls
             {
                 PasswordsMatch = false;
                 SecureString = null;
+                RaiseNotVerifiedEvent();
             }
             TogglePasswordMatchIndicator(PasswordsMatch);
         }
 
+        /// <summary>
+        /// Raised when the two given passwords go from not matching to matching (verified).
+        /// </summary>
         public event EventHandler Verified;
-
         private void RaiseVerifiedEvent()
         {
             Verified?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Raised when the two given passwords go from matching to not matching (not verified).
+        /// </summary>
+        public event EventHandler NotVerified;
+        private void RaiseNotVerifiedEvent()
+        {
+            NotVerified?.Invoke(this, EventArgs.Empty);
         }
     }
 }

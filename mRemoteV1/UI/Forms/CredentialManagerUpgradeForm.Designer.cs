@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialManagerUpgradeForm));
             this.newCredRepoPathDialog = new System.Windows.Forms.SaveFileDialog();
+            this.newConnectionsFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControl = new mRemoteNG.UI.Controls.HeadlessTabControl();
             this.tabPageWelcome = new System.Windows.Forms.TabPage();
             this.textBoxConfConPathTab1 = new mRemoteNG.UI.Controls.Base.NGTextBox();
@@ -49,7 +50,6 @@
             this.newRepositoryPasswordEntry = new mRemoteNG.UI.Controls.NewPasswordWithVerification();
             this.labelConfConsPathHeaderOnTab2 = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.buttonBack = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.newConnectionsFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControl.SuspendLayout();
             this.tabPageWelcome.SuspendLayout();
             this.tabPageUpgradeOptions.SuspendLayout();
@@ -60,6 +60,11 @@
             this.newCredRepoPathDialog.Filter = "Xml|*.xml|All files|*.*";
             this.newCredRepoPathDialog.Title = "New credential repository path";
             // 
+            // newConnectionsFileDialog
+            // 
+            this.newConnectionsFileDialog.Filter = "Xml|*.xml|All files|*.*";
+            this.newConnectionsFileDialog.Title = "Create new connection file";
+            // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPageWelcome);
@@ -69,7 +74,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(420, 402);
+            this.tabControl.Size = new System.Drawing.Size(617, 402);
             this.tabControl.TabIndex = 5;
             // 
             // tabPageWelcome
@@ -85,17 +90,19 @@
             this.tabPageWelcome.Location = new System.Drawing.Point(4, 24);
             this.tabPageWelcome.Name = "tabPageWelcome";
             this.tabPageWelcome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWelcome.Size = new System.Drawing.Size(412, 374);
+            this.tabPageWelcome.Size = new System.Drawing.Size(609, 374);
             this.tabPageWelcome.TabIndex = 0;
             this.tabPageWelcome.Text = "welcomePage";
             // 
             // textBoxConfConPathTab1
             // 
+            this.textBoxConfConPathTab1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxConfConPathTab1.Location = new System.Drawing.Point(30, 177);
             this.textBoxConfConPathTab1.Multiline = true;
             this.textBoxConfConPathTab1.Name = "textBoxConfConPathTab1";
             this.textBoxConfConPathTab1.ReadOnly = true;
-            this.textBoxConfConPathTab1.Size = new System.Drawing.Size(376, 55);
+            this.textBoxConfConPathTab1.Size = new System.Drawing.Size(551, 55);
             this.textBoxConfConPathTab1.TabIndex = 6;
             // 
             // labelConfConsPathHeaderOnTab1
@@ -111,9 +118,9 @@
             // 
             this.buttonExit._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonExit.Location = new System.Drawing.Point(142, 343);
+            this.buttonExit.Location = new System.Drawing.Point(190, 343);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(139, 23);
+            this.buttonExit.Size = new System.Drawing.Size(212, 23);
             this.buttonExit.TabIndex = 4;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
@@ -125,7 +132,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDescriptionOfUpgrade.Location = new System.Drawing.Point(6, 20);
             this.labelDescriptionOfUpgrade.Name = "labelDescriptionOfUpgrade";
-            this.labelDescriptionOfUpgrade.Size = new System.Drawing.Size(400, 141);
+            this.labelDescriptionOfUpgrade.Size = new System.Drawing.Size(597, 141);
             this.labelDescriptionOfUpgrade.TabIndex = 0;
             this.labelDescriptionOfUpgrade.Text = resources.GetString("labelDescriptionOfUpgrade.Text");
             // 
@@ -133,9 +140,9 @@
             // 
             this.buttonPerformUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonPerformUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonPerformUpgrade.Location = new System.Drawing.Point(142, 256);
+            this.buttonPerformUpgrade.Location = new System.Drawing.Point(190, 256);
             this.buttonPerformUpgrade.Name = "buttonPerformUpgrade";
-            this.buttonPerformUpgrade.Size = new System.Drawing.Size(139, 23);
+            this.buttonPerformUpgrade.Size = new System.Drawing.Size(212, 23);
             this.buttonPerformUpgrade.TabIndex = 1;
             this.buttonPerformUpgrade.Text = "Upgrade";
             this.buttonPerformUpgrade.UseVisualStyleBackColor = true;
@@ -146,9 +153,9 @@
             this.buttonNewFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonNewFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonNewFile.DialogResult = System.Windows.Forms.DialogResult.Abort;
-            this.buttonNewFile.Location = new System.Drawing.Point(142, 314);
+            this.buttonNewFile.Location = new System.Drawing.Point(190, 314);
             this.buttonNewFile.Name = "buttonNewFile";
-            this.buttonNewFile.Size = new System.Drawing.Size(139, 23);
+            this.buttonNewFile.Size = new System.Drawing.Size(212, 23);
             this.buttonNewFile.TabIndex = 3;
             this.buttonNewFile.Text = "Create and open new file";
             this.buttonNewFile.UseVisualStyleBackColor = true;
@@ -158,9 +165,9 @@
             // 
             this.buttonOpenFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonOpenFile.Location = new System.Drawing.Point(142, 285);
+            this.buttonOpenFile.Location = new System.Drawing.Point(190, 285);
             this.buttonOpenFile.Name = "buttonOpenFile";
-            this.buttonOpenFile.Size = new System.Drawing.Size(139, 23);
+            this.buttonOpenFile.Size = new System.Drawing.Size(212, 23);
             this.buttonOpenFile.TabIndex = 2;
             this.buttonOpenFile.Text = "Open a different file";
             this.buttonOpenFile.UseVisualStyleBackColor = true;
@@ -181,23 +188,26 @@
             this.tabPageUpgradeOptions.Location = new System.Drawing.Point(4, 24);
             this.tabPageUpgradeOptions.Name = "tabPageUpgradeOptions";
             this.tabPageUpgradeOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUpgradeOptions.Size = new System.Drawing.Size(412, 374);
+            this.tabPageUpgradeOptions.Size = new System.Drawing.Size(609, 374);
             this.tabPageUpgradeOptions.TabIndex = 1;
             this.tabPageUpgradeOptions.Text = "upgradePage";
             // 
             // textBoxConfConPathTab2
             // 
+            this.textBoxConfConPathTab2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxConfConPathTab2.Location = new System.Drawing.Point(27, 32);
             this.textBoxConfConPathTab2.Multiline = true;
             this.textBoxConfConPathTab2.Name = "textBoxConfConPathTab2";
             this.textBoxConfConPathTab2.ReadOnly = true;
-            this.textBoxConfConPathTab2.Size = new System.Drawing.Size(377, 41);
+            this.textBoxConfConPathTab2.Size = new System.Drawing.Size(574, 41);
             this.textBoxConfConPathTab2.TabIndex = 9;
             // 
             // buttonNewRepoPathBrowse
             // 
             this.buttonNewRepoPathBrowse._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonNewRepoPathBrowse.Location = new System.Drawing.Point(329, 143);
+            this.buttonNewRepoPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNewRepoPathBrowse.Location = new System.Drawing.Point(526, 143);
             this.buttonNewRepoPathBrowse.Name = "buttonNewRepoPathBrowse";
             this.buttonNewRepoPathBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonNewRepoPathBrowse.TabIndex = 8;
@@ -216,17 +226,21 @@
             // 
             // textBoxCredRepoPath
             // 
+            this.textBoxCredRepoPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCredRepoPath.Location = new System.Drawing.Point(27, 117);
             this.textBoxCredRepoPath.Name = "textBoxCredRepoPath";
-            this.textBoxCredRepoPath.Size = new System.Drawing.Size(377, 20);
+            this.textBoxCredRepoPath.Size = new System.Drawing.Size(574, 20);
             this.textBoxCredRepoPath.TabIndex = 6;
+            this.textBoxCredRepoPath.TextChanged += new System.EventHandler(this.textBoxCredRepoPath_TextChanged);
             // 
             // buttonExecuteUpgrade
             // 
             this.buttonExecuteUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonExecuteUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonExecuteUpgrade.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonExecuteUpgrade.Location = new System.Drawing.Point(329, 343);
+            this.buttonExecuteUpgrade.Enabled = false;
+            this.buttonExecuteUpgrade.Location = new System.Drawing.Point(526, 343);
             this.buttonExecuteUpgrade.Name = "buttonExecuteUpgrade";
             this.buttonExecuteUpgrade.Size = new System.Drawing.Size(75, 23);
             this.buttonExecuteUpgrade.TabIndex = 5;
@@ -244,13 +258,17 @@
             // 
             // newRepositoryPasswordEntry
             // 
+            this.newRepositoryPasswordEntry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.newRepositoryPasswordEntry.Location = new System.Drawing.Point(27, 220);
             this.newRepositoryPasswordEntry.MinimumSize = new System.Drawing.Size(0, 100);
             this.newRepositoryPasswordEntry.Name = "newRepositoryPasswordEntry";
             this.newRepositoryPasswordEntry.PasswordChar = '\0';
-            this.newRepositoryPasswordEntry.Size = new System.Drawing.Size(377, 100);
+            this.newRepositoryPasswordEntry.Size = new System.Drawing.Size(574, 100);
             this.newRepositoryPasswordEntry.TabIndex = 3;
             this.newRepositoryPasswordEntry.UseSystemPasswordChar = false;
+            this.newRepositoryPasswordEntry.Verified += new System.EventHandler(this.newRepositoryPasswordEntry_Verified);
+            this.newRepositoryPasswordEntry.NotVerified += new System.EventHandler(this.newRepositoryPasswordEntry_NotVerified);
             // 
             // labelConfConsPathHeaderOnTab2
             // 
@@ -265,7 +283,7 @@
             // 
             this.buttonBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Location = new System.Drawing.Point(248, 343);
+            this.buttonBack.Location = new System.Drawing.Point(445, 343);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 0;
@@ -273,21 +291,19 @@
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
-            // newConnectionsFileDialog
-            // 
-            this.newConnectionsFileDialog.Filter = "Xml|*.xml|All files|*.*";
-            this.newConnectionsFileDialog.Title = "Create new connection file";
-            // 
             // CredentialManagerUpgradeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 402);
-            this.ControlBox = false;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(617, 402);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CredentialManagerUpgradeForm";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Credential Manager Upgrade";
             this.tabControl.ResumeLayout(false);
             this.tabPageWelcome.ResumeLayout(false);

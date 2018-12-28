@@ -229,7 +229,8 @@ namespace mRemoteNG.UI.Controls
 
         public void Invoke(Action action)
         {
-            Invoke((Delegate)action);
+            if (Created)
+                Invoke((Delegate)action);
         }
 
         public void InvokeExpand(object model)
