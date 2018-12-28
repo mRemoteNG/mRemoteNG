@@ -10,7 +10,7 @@ namespace mRemoteNG.Tools.CustomCollections
         where T : INotifyPropertyChanged
 	{
 	    private readonly IList<T> _list = new List<T>();
-	    private bool _eventsAllowed;
+	    private bool _eventsAllowed = true;
 
         public int Count => _list.Count;
 	    public bool IsReadOnly => _list.IsReadOnly;
