@@ -105,7 +105,7 @@ Copyright © 2008 Felix Deimel
 http://www.codeproject.com/KB/selection/ADPickerCtrl.aspx
 
 DockPanel Suite
-Copyright © 2016 @roken and @lextm (formerly Weifen Luo)
+Copyright © 2018 @roken and @lextm (formerly Weifen Luo)
 MIT License
 https://github.com/dockpanelsuite/dockpanelsuite
 
