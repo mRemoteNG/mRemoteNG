@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.Connection.Protocol
 {
-    public abstract class ProtocolBase
+    public abstract class ProtocolBase: IDisposable
     {
         #region Private Variables
 
