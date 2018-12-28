@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Forms
 
         public IDeserializer<string, ConnectionTreeModel> ConnectionDeserializer { get; set; }
         public ConnectionsService ConnectionsService { get; set; }
-        public CredentialServiceFacade CredentialService { get; set; }
+        public CredentialService CredentialService { get; set; }
 
         public string ConnectionFilePath
         {

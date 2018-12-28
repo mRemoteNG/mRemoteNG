@@ -9,27 +9,38 @@ namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
 {
     public class CredentialRepositoryListDeserializer
     {
-        private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _serializer;
-        private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
-
-        public CredentialRepositoryListDeserializer(ISecureSerializer<IEnumerable<ICredentialRecord>, string> serializer, ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
+        public IEnumerable<ICredentialRepository> Deserialize(string xml, IEnumerable<ICredentialRepositoryFactory> factories)
         {
-            if (serializer == null)
-                throw new ArgumentNullException(nameof(serializer));
-            if (deserializer == null)
-                throw new ArgumentNullException(nameof(deserializer));
+            if (string.IsNullOrEmpty(xml))
+                return new ICredentialRepository[0];
 
-            _serializer = serializer;
-            _deserializer = deserializer;
-        }
-
-        public IEnumerable<ICredentialRepository> Deserialize(string xml)
-        {
-            if (string.IsNullOrEmpty(xml)) return new ICredentialRepository[0];
             var xdoc = XDocument.Parse(xml);
             var repoEntries = xdoc.Descendants("CredentialRepository");
-            var xmlRepoFactory = new XmlCredentialRepositoryFactory(_serializer, _deserializer);
-            return repoEntries.Select(xmlRepoFactory.Build);
+
+            return repoEntries
+                .Select(ParseConfigEntries)
+                .Select(config => 
+                    factories
+                        .FirstOrDefault(f => string.Equals(f.SupportsConfigType, config.TypeName))?
+                        .Build(config));
+        }
+
+        public ICredentialRepositoryConfig ParseConfigEntries(XElement repositoryXElement)
+        {
+            var stringId = repositoryXElement.Attribute("Id")?.Value;
+            Guid.TryParse(stringId, out var id);
+
+            if (id.Equals(Guid.Empty))
+                id = Guid.NewGuid();
+
+            var config = new CredentialRepositoryConfig(id)
+            {
+                TypeName = repositoryXElement.Attribute("TypeName")?.Value,
+                Title = repositoryXElement.Attribute("Title")?.Value,
+                Source = repositoryXElement.Attribute("Source")?.Value
+            };
+
+            return config;
         }
     }
 }

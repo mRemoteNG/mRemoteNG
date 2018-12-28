@@ -17,7 +17,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class XmlCredentialManagerUpgrader : IDeserializer<string, ConnectionTreeModel>
     {
-        private readonly CredentialServiceFacade _credentialsService;
+        private readonly CredentialService _credentialsService;
         private readonly IDeserializer<string, ConnectionTreeModel> _decoratedDeserializer;
         private readonly SecureString _newRepoPassword;
 
@@ -25,7 +25,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
         
 
         public XmlCredentialManagerUpgrader(
-            CredentialServiceFacade credentialsService, 
+            CredentialService credentialsService, 
             string credentialFilePath, 
             IDeserializer<string, ConnectionTreeModel> decoratedDeserializer,
             SecureString newRepoPassword)
@@ -103,22 +103,20 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         private ICredentialRepository BuildXmlCredentialRepo(SecureString newCredRepoKey)
         {
-            var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
-            var credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
-                cryptoFromSettings.Build(),
-                new XmlCredentialRecordSerializer());
-            var credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
+            var repositoryConfig = new CredentialRepositoryConfig
+            {
+                Source = CredentialFilePath,
+                Title = "Converted Credentials",
+                TypeName = "Xml",
+                Key = newCredRepoKey
+            };
+            
+            var xmlRepoFactory = _credentialsService.GetRepositoryFactoryForConfig(repositoryConfig);
 
-            var xmlRepoFactory = new XmlCredentialRepositoryFactory(credRepoSerializer, credRepoDeserializer);
-            var newRepo = xmlRepoFactory.Build(
-                new CredentialRepositoryConfig
-                {
-                    Source = CredentialFilePath,
-                    Title = "Converted Credentials",
-                    TypeName = "Xml",
-                    Key = newCredRepoKey
-                }
-            );
+            if (!xmlRepoFactory.Any())
+                throw new CredentialRepositoryTypeNotSupportedException(repositoryConfig.TypeName);
+
+            var newRepo = xmlRepoFactory.First().Build(repositoryConfig);
             newRepo.LoadCredentials(newCredRepoKey);
             return newRepo;
         }

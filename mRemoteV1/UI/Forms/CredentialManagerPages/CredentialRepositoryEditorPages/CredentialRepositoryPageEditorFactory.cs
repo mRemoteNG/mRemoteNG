@@ -7,9 +7,13 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 {
     public class CredentialRepositoryPageEditorFactory
     {
-        public static SequencedControl BuildXmlCredentialRepositoryEditorPage<T>(T config, ICredentialRepositoryList repositoryList) where T : ICredentialRepositoryConfig
+        public static SequencedControl BuildXmlCredentialRepositoryEditorPage<T>(T config, ICredentialRepositoryList repositoryList, XmlCredentialRepositoryFactory repositoryFactory)
+            where T : ICredentialRepositoryConfig
         {
-            return new XmlCredentialRepositoryEditorPage(config, repositoryList) {Dock = DockStyle.Fill};
+            return new XmlCredentialRepositoryEditorPage(config, repositoryList, repositoryFactory)
+            {
+                Dock = DockStyle.Fill
+            };
         }
     }
 }

@@ -1,54 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Credential.Repositories
 {
-    public class XmlCredentialRepositoryFactory
+    public class XmlCredentialRepositoryFactory : ICredentialRepositoryFactory
     {
         private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _serializer;
         private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
 
-        public XmlCredentialRepositoryFactory(ISecureSerializer<IEnumerable<ICredentialRecord>, string> serializer, ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
+        public XmlCredentialRepositoryFactory(
+            ISecureSerializer<IEnumerable<ICredentialRecord>, string> serializer, 
+            ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
         {
-            if (serializer == null)
-                throw new ArgumentNullException(nameof(serializer));
-            if (deserializer == null)
-                throw new ArgumentNullException(nameof(deserializer));
-
-            _serializer = serializer;
-            _deserializer = deserializer;
+            _serializer = serializer.ThrowIfNull(nameof(serializer));
+            _deserializer = deserializer.ThrowIfNull(nameof(deserializer));
         }
 
-        public ICredentialRepository Build(ICredentialRepositoryConfig config)
-        {
-            return BuildXmlRepo(config);
-        }
+        public string SupportsConfigType { get; } = "Xml";
 
-        public ICredentialRepository Build(XElement repositoryXElement)
-        {
-            var stringId = repositoryXElement.Attribute("Id")?.Value;
-            Guid id;
-            Guid.TryParse(stringId, out id);
-            if (id.Equals(Guid.Empty)) id = Guid.NewGuid();
-            var config = new CredentialRepositoryConfig(id)
-            {
-                TypeName = repositoryXElement.Attribute("TypeName")?.Value,
-                Title = repositoryXElement.Attribute("Title")?.Value,
-                Source = repositoryXElement.Attribute("Source")?.Value
-            };
-            return BuildXmlRepo(config);
-        }
-
-        private ICredentialRepository BuildXmlRepo(ICredentialRepositoryConfig config)
+        /// <summary>
+        /// Creates a new <see cref="XmlCredentialRepository"/> instance for
+        /// the given <see cref="ICredentialRepositoryConfig"/>.
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="isLoaded">
+        /// Does this instance represent a repository that is already loaded?
+        /// </param>
+        public ICredentialRepository Build(ICredentialRepositoryConfig config, bool isLoaded = false)
         {
             var dataProvider = new FileDataProvider(config.Source);
             var saver = new CredentialRecordSaver(dataProvider, _serializer);
             var loader = new CredentialRecordLoader(dataProvider, _deserializer);
-            return new XmlCredentialRepository(config, saver, loader);
+
+            return new XmlCredentialRepository(config, saver, loader, isLoaded);
         }
     }
 }

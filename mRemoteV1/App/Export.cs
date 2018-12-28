@@ -86,7 +86,7 @@ namespace mRemoteNG.App
 			            serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
 			            break;
 			        case SaveFormat.mRCSV:
-			            serializer = new CsvConnectionsSerializerMremotengFormat(saveFilter, Runtime.CredentialProviderCatalog);
+			            serializer = new CsvConnectionsSerializerMremotengFormat(saveFilter, Runtime.CredentialService.RepositoryList);
                         break;
 			        default:
 			            throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

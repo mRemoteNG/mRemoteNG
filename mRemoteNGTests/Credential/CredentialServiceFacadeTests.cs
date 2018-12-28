@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using mRemoteNG.Config;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using NSubstitute;
 using NUnit.Framework;
 // ReSharper disable ObjectCreationAsStatement
@@ -10,7 +11,7 @@ namespace mRemoteNGTests.Credential
 {
     public class CredentialServiceFacadeTests
     {
-        private CredentialServiceFacade _credentialService;
+        private CredentialService _credentialService;
         private ICredentialRepositoryList _credentialRepositoryList;
         private ILoader<IEnumerable<ICredentialRepository>> _loader;
         private ISaver<IEnumerable<ICredentialRepository>> _saver;
@@ -21,25 +22,31 @@ namespace mRemoteNGTests.Credential
             _credentialRepositoryList = Substitute.For<ICredentialRepositoryList>();
             _loader = Substitute.For<ILoader<IEnumerable<ICredentialRepository>>>();
             _saver = Substitute.For<ISaver<IEnumerable<ICredentialRepository>>>();
-            _credentialService = new CredentialServiceFacade(_credentialRepositoryList, _loader, _saver);
+            _credentialService = new CredentialService(_credentialRepositoryList, new List<ICredentialRepositoryFactory>(), _loader, _saver);
         }
 
         [Test]
         public void CantProvideNullRepoListToCtor()
         {
-            Assert.Throws<ArgumentNullException>(() => new CredentialServiceFacade(null, _loader, _saver));
+            Assert.Throws<ArgumentNullException>(() => new CredentialService(null, new List<ICredentialRepositoryFactory>(),  _loader, _saver));
+        }
+
+        [Test]
+        public void CantProvideNullFactoryListToCtor()
+        {
+            Assert.Throws<ArgumentNullException>(() => new CredentialService(_credentialRepositoryList, null, _loader, _saver));
         }
 
         [Test]
         public void CantProvideNullRepoLoaderToCtor()
         {
-            Assert.Throws<ArgumentNullException>(() => new CredentialServiceFacade(_credentialRepositoryList, null, _saver));
+            Assert.Throws<ArgumentNullException>(() => new CredentialService(_credentialRepositoryList, new List<ICredentialRepositoryFactory>(), null, _saver));
         }
 
         [Test]
         public void CantProvideNullRepoSaverToCtor()
         {
-            Assert.Throws<ArgumentNullException>(() => new CredentialServiceFacade(_credentialRepositoryList, _loader, null));
+            Assert.Throws<ArgumentNullException>(() => new CredentialService(_credentialRepositoryList, new List<ICredentialRepositoryFactory>(), _loader, null));
         }
 
         [Test]

@@ -30,7 +30,7 @@ namespace mRemoteNG.Connection
         private bool _batchingSaves = false;
         private bool _saveRequested = false;
         private bool _saveAsyncRequested = false;
-        private readonly CredentialServiceFacade _credentialService;
+        private readonly CredentialService _credentialService;
 
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
@@ -40,7 +40,7 @@ namespace mRemoteNG.Connection
 
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
 
-        public ConnectionsService(PuttySessionsManager puttySessionsManager, CredentialServiceFacade credentialService)
+        public ConnectionsService(PuttySessionsManager puttySessionsManager, CredentialService credentialService)
         {
             _puttySessionsManager = puttySessionsManager.ThrowIfNull(nameof(puttySessionsManager));
             _credentialService = credentialService.ThrowIfNull(nameof(credentialService));

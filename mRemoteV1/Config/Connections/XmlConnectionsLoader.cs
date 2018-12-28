@@ -18,9 +18,9 @@ namespace mRemoteNG.Config.Connections
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly string _connectionFilePath;
         private readonly ConnectionsService _connectionsService;
-        private readonly CredentialServiceFacade _credentialService;
+        private readonly CredentialService _credentialService;
 
-        public XmlConnectionsLoader(string connectionFilePath, CredentialServiceFacade credentialService, ConnectionsService connectionsService)
+        public XmlConnectionsLoader(string connectionFilePath, CredentialService credentialService, ConnectionsService connectionsService)
         {
             if (string.IsNullOrEmpty(connectionFilePath))
                 throw new ArgumentException($"{nameof(connectionFilePath)} cannot be null or empty");

@@ -17,8 +17,8 @@ namespace mRemoteNG.Tools.CustomCollections
 
         public T this[int index]
         {
-            get { return _list[index]; }
-            set { _list[index] = value; }
+            get => _list[index];
+            set => _list[index] = value;
         }
 
 	    public FullyObservableCollection()

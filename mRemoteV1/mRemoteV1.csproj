@@ -150,7 +150,7 @@
     <Compile Include="Config\CredentialHarvester.cs" />
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
-    <Compile Include="Config\CredentialRepositoryListSaver.cs" />
+    <Compile Include="Config\CredentialRepositoryListPersistor.cs" />
     <Compile Include="Config\DatabaseConnectors\ConnectionTestResult.cs" />
     <Compile Include="Config\DatabaseConnectors\DatabaseConnectorFactory.cs" />
     <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnectionTester.cs" />
@@ -165,7 +165,6 @@
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesXmlSerializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlConnectionListMetaData.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
-    <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordEncryptorDecorator.cs" />
     <Compile Include="Config\Serializers\ISecureDeserializer.cs" />
@@ -252,9 +251,11 @@
     <Compile Include="Credential\CredentialChangedEventArgs.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
     <Compile Include="Credential\CredentialDomainUserComparer.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepositoryTypeNotSupportedException.cs" />
     <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
-    <Compile Include="Credential\CredentialServiceFacade.cs" />
+    <Compile Include="Credential\CredentialService.cs" />
+    <Compile Include="Credential\Repositories\ICredentialRepositoryFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

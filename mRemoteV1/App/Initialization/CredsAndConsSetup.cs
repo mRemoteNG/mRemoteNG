@@ -9,7 +9,7 @@ namespace mRemoteNG.App.Initialization
 {
 	public class CredsAndConsSetup
     {
-        public void LoadCredsAndCons(ConnectionsService connectionsService, CredentialServiceFacade credentialService)
+        public void LoadCredsAndCons(ConnectionsService connectionsService, CredentialService credentialService)
         {
             new SaveConnectionsOnEdit(connectionsService);
 
@@ -21,7 +21,7 @@ namespace mRemoteNG.App.Initialization
             Runtime.LoadConnections();
         }
 
-        private void LoadDefaultConnectionCredentials(CredentialServiceFacade credentialService)
+        private void LoadDefaultConnectionCredentials(CredentialService credentialService)
         {
             var defaultCredId = Settings.Default.ConDefaultCredentialRecord;
             var matchedCredentials = credentialService

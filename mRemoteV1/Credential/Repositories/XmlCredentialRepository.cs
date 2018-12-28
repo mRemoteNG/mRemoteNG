@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Security;
 using mRemoteNG.Config;
+using mRemoteNG.Tools;
 using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.Credential.Repositories
@@ -17,21 +18,33 @@ namespace mRemoteNG.Credential.Repositories
         public IList<ICredentialRecord> CredentialRecords { get; }
         public bool IsLoaded { get; private set; }
 
-        public XmlCredentialRepository(ICredentialRepositoryConfig config, CredentialRecordSaver credentialRecordSaver, CredentialRecordLoader credentialRecordLoader)
+        /// <summary>
+        /// Creates a new <see cref="XmlCredentialRepository"/> instance,
+        /// providing access to load and save credentials stored in an XML
+        /// format.
+        /// </summary>
+        /// <param name="config">
+        /// The config representing this repository
+        /// </param>
+        /// <param name="credentialRecordSaver"></param>
+        /// <param name="credentialRecordLoader"></param>
+        /// <param name="isLoaded">
+        /// Does this instance represent a repository that is already loaded?
+        /// </param>
+        public XmlCredentialRepository(
+            ICredentialRepositoryConfig config, 
+            CredentialRecordSaver credentialRecordSaver, 
+            CredentialRecordLoader credentialRecordLoader,
+            bool isLoaded = false)
         {
-            if (config == null)
-                throw new ArgumentNullException(nameof(config));
-            if (credentialRecordSaver == null)
-                throw new ArgumentNullException(nameof(credentialRecordSaver));
-            if (credentialRecordLoader == null)
-                throw new ArgumentNullException(nameof(credentialRecordLoader));
+            Config = config.ThrowIfNull(nameof(config));
+            _credentialRecordSaver = credentialRecordSaver.ThrowIfNull(nameof(credentialRecordSaver));
+            _credentialRecordLoader = credentialRecordLoader.ThrowIfNull(nameof(credentialRecordLoader));
+            IsLoaded = isLoaded;
 
-            Config = config;
             CredentialRecords = new FullyObservableCollection<ICredentialRecord>();
             ((FullyObservableCollection<ICredentialRecord>) CredentialRecords).CollectionUpdated += RaiseCredentialsUpdatedEvent;
             Config.PropertyChanged += (sender, args) => RaiseRepositoryConfigUpdatedEvent(args);
-            _credentialRecordSaver = credentialRecordSaver;
-            _credentialRecordLoader = credentialRecordLoader;
         }
 
         public void LoadCredentials(SecureString key)
@@ -39,9 +52,12 @@ namespace mRemoteNG.Credential.Repositories
             var credentials = _credentialRecordLoader.Load(key);
             foreach (var newCredential in credentials)
             {
-                if (ThisIsADuplicateCredentialRecord(newCredential)) continue;
+                if (ThisIsADuplicateCredentialRecord(newCredential))
+                    continue;
+
                 CredentialRecords.Add(newCredential);
             }
+
             IsLoaded = true;
             Config.Key = key;
         }
@@ -59,7 +75,9 @@ namespace mRemoteNG.Credential.Repositories
 
         public void SaveCredentials(SecureString key)
         {
-            if (!IsLoaded) return;
+            if (!IsLoaded)
+                return;
+
             _credentialRecordSaver.Save(CredentialRecords, key);
         }
 

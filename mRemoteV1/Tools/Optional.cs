@@ -43,7 +43,8 @@ namespace mRemoteNG.Tools
             return new Optional<T>(value);
         }
 
-        public static Optional<TOut> FromNullable<TOut>(TOut? value) where TOut : struct
+        public static Optional<TOut> FromNullable<TOut>(TOut? value) 
+            where TOut : struct
         {
             return value.HasValue
                 ? new Optional<TOut>(value.Value)

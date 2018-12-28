@@ -16,11 +16,14 @@ using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Menu;
@@ -157,6 +160,8 @@ namespace mRemoteNG.UI.Forms
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
+            InitializeCredRepoFactories();
+
             Runtime.WindowList = new WindowList();
 
             if (Settings.Default.ResetPanels)
@@ -194,6 +199,18 @@ namespace mRemoteNG.UI.Forms
             
             FrmSplashScreen frmSplashScreen = FrmSplashScreen.getInstance();
             frmSplashScreen.Close();
+        }
+
+        private static void InitializeCredRepoFactories()
+        {
+            var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
+            var credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
+                cryptoFromSettings.Build(),
+                new XmlCredentialRecordSerializer());
+            var credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
+            var xmlRepoFactory = new XmlCredentialRepositoryFactory(credRepoSerializer, credRepoDeserializer);
+
+            Runtime.CredentialService.RegisterRepositoryFactory(xmlRepoFactory);
         }
 
         private void ApplyLanguage()
@@ -249,7 +266,7 @@ namespace mRemoteNG.UI.Forms
             viewMenu.MainForm = this;
 
             toolsMenu.MainForm = this;
-            toolsMenu.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
+            toolsMenu.CredentialService = Runtime.CredentialService;
             toolsMenu.UnlockerFormFactory = _credRepoUnlockerFormFactory;
 
             _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
@@ -292,7 +309,7 @@ namespace mRemoteNG.UI.Forms
         {
             PromptForUpdatesPreference();
             CheckForUpdates();
-            UnlockRepositories(Runtime.CredentialProviderCatalog, this);
+            UnlockRepositories(Runtime.CredentialService.RepositoryList, this);
         }
 
         private void PromptForUpdatesPreference()

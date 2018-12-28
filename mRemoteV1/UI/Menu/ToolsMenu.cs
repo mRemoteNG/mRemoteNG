@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _credentialManagerToolStripMenuItem;
 
         public Form MainForm { get; set; }
-        public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
+        public CredentialService CredentialService { get; set; }
         public UnlockerFormFactory UnlockerFormFactory { get; set; }
 
         public ToolsMenu()
@@ -143,11 +143,11 @@ namespace mRemoteNG.UI.Menu
         {
             var pages = new UserControl[]
             {
-                new CredentialListPage(CredentialProviderCatalog)
+                new CredentialListPage(CredentialService.RepositoryList)
                 {
                     DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
                 },
-                new CredentialRepositoriesPage(CredentialProviderCatalog, UnlockerFormFactory)
+                new CredentialRepositoriesPage(CredentialService, UnlockerFormFactory)
             };
 
             var credentialManagerForm = new CredentialManagerForm(pages);

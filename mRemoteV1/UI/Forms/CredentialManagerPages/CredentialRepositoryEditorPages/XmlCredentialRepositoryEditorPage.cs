@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using mRemoteNG.Config;
-using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
-using mRemoteNG.Security.Factories;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
@@ -14,8 +11,12 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
     {
         private readonly ICredentialRepositoryConfig _repositoryConfig;
         private readonly ICredentialRepositoryList _repositoryList;
+        private readonly ICredentialRepositoryFactory _repositoryFactory;
 
-        public XmlCredentialRepositoryEditorPage(ICredentialRepositoryConfig repositoryConfig, ICredentialRepositoryList repositoryList)
+        public XmlCredentialRepositoryEditorPage(
+            ICredentialRepositoryConfig repositoryConfig, 
+            ICredentialRepositoryList repositoryList,
+            ICredentialRepositoryFactory repositoryFactory)
         {
             if (repositoryConfig == null)
                 throw new ArgumentNullException(nameof(repositoryConfig));
@@ -24,6 +25,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 
             _repositoryConfig = repositoryConfig;
             _repositoryList = repositoryList;
+            _repositoryFactory = repositoryFactory.ThrowIfNull(nameof(repositoryFactory));
             InitializeComponent();
             PopulateFields();
         }
@@ -47,6 +49,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
         {
             if (!string.IsNullOrEmpty(_repositoryConfig.Source))
                 selectFilePathDialog.FileName = _repositoryConfig.Source;
+
             var dialogResult = selectFilePathDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
@@ -56,31 +59,24 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPa
 
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
-            if (!AllRequiredFieldsFilledOut()) return;
+            if (!AllRequiredFieldsFilledOut())
+                return;
+
             SaveValuesToConfig();
+
             if (!_repositoryList.Contains(_repositoryConfig))
             {
-                var newCredentialRepository = BuildXmlRepoFromSettings(_repositoryConfig);
-                _repositoryList.AddProvider(newCredentialRepository);
-                newCredentialRepository.SaveCredentials(_repositoryConfig.Key);
+                AddNewRepo();
             }
+
             RaiseNextPageEvent();
         }
 
-        private ICredentialRepository BuildXmlRepoFromSettings(ICredentialRepositoryConfig config)
+        private void AddNewRepo()
         {
-            var cryptoFromSettings = new CryptoProviderFactoryFromSettings();
-            var credRepoDataProvider = new FileDataProvider(config.Source);
-            var credRepoSerializer = new XmlCredentialPasswordEncryptorDecorator(
-                cryptoFromSettings.Build(),
-                new XmlCredentialRecordSerializer());
-            var credRepoDeserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
-
-            return new XmlCredentialRepository(
-                config,
-                new CredentialRecordSaver(credRepoDataProvider, credRepoSerializer),
-                new CredentialRecordLoader(credRepoDataProvider, credRepoDeserializer)
-            );
+            var newCredentialRepository = _repositoryFactory.Build(_repositoryConfig, true);
+            _repositoryList.AddProvider(newCredentialRepository);
+            newCredentialRepository.SaveCredentials(_repositoryConfig.Key);
         }
 
         private bool AllRequiredFieldsFilledOut()

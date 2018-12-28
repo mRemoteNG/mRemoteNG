@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.PageSequence;
-using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
@@ -18,10 +17,8 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             if (selectionTargets == null)
                 throw new ArgumentNullException(nameof(selectionTargets));
-            if (repositoryList == null)
-                throw new ArgumentNullException(nameof(repositoryList));
 
-            _repositoryList = repositoryList;
+            _repositoryList = repositoryList.ThrowIfNull(nameof(repositoryList));
             InitializeComponent();
             ApplyTheme();
             SetupListView(selectionTargets);
@@ -37,8 +34,9 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private object ImageGetter(object rowObject)
         {
-            var selection = rowObject as ISelectionTarget<ICredentialRepositoryConfig>;
-            if (selection == null) return "";
+            if (!(rowObject is ISelectionTarget<ICredentialRepositoryConfig> selection))
+                return "";
+
             var imgHash = selection.Image.GetHashCode().ToString();
             if (!objectListView.LargeImageList.Images.ContainsKey(imgHash))
                 objectListView.LargeImageList.Images.Add(imgHash, selection.Image);
@@ -47,18 +45,21 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void ObjectListViewOnMouseDoubleClick(object sender, MouseEventArgs mouseEventArgs)
         {
-            if (mouseEventArgs.Clicks < 2) return;
-            OLVColumn column;
-            var listItem = objectListView.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem.RowObject as ISelectionTarget<ICredentialRepositoryConfig>;
-            if (clickedNode == null) return;
+            if (mouseEventArgs.Clicks < 2)
+                return;
+
+            var listItem = objectListView.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out var column);
+            if (!(listItem.RowObject is ISelectionTarget<ICredentialRepositoryConfig> clickedNode))
+                return;
+
             NextPage(clickedNode);
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
-            var selection = objectListView.SelectedObject as ISelectionTarget<ICredentialRepositoryConfig>;
-            if (selection == null) return;
+            if (!(objectListView.SelectedObject is ISelectionTarget<ICredentialRepositoryConfig> selection))
+                return;
+
             NextPage(selection);
         }
 
@@ -71,7 +72,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private SequencedControl BuildEditorPage(ISelectionTarget<ICredentialRepositoryConfig> selection)
         {
-            var editorPage = CredentialRepositoryPageEditorFactory.BuildXmlCredentialRepositoryEditorPage(selection.Config, _repositoryList);
+            var editorPage = selection.BuildEditorPage(_repositoryList);
             editorPage.Dock = DockStyle.Fill;
             return editorPage;
         }

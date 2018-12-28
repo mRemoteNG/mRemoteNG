@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using mRemoteNG.Credential;
+using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -7,5 +9,6 @@ namespace mRemoteNG.UI.Controls
         string Text { get; set; }
         Image Image { get; }
         T Config { get; }
+        SequencedControl BuildEditorPage(ICredentialRepositoryList repositoryList);
     }
 }
