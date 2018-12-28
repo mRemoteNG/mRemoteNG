@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -13,14 +14,12 @@ namespace mRemoteNG.UI.Forms
 
         public CompositeCredentialRepoUnlockerForm(CompositeRepositoryUnlocker repositoryUnlocker)
         {
-            if (repositoryUnlocker == null)
-                throw new ArgumentNullException(nameof(repositoryUnlocker));
-
-            _repositoryUnlocker = repositoryUnlocker;
+            _repositoryUnlocker = repositoryUnlocker.ThrowIfNull(nameof(repositoryUnlocker));
             InitializeComponent();
             SetupListView();
             ApplyLanguage();
             ApplyTheme();
+            chkCloseAfterLastUnlock.Checked = Settings.Default.CloseCredentialUnlockerDialogAfterLastUnlock;
             Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
 
@@ -37,6 +36,11 @@ namespace mRemoteNG.UI.Forms
             {
                 _repositoryUnlocker.Unlock(secureTextBoxPassword.SecString);
                 SelectNextLockedRepo();
+
+                if (Settings.Default.CloseCredentialUnlockerDialogAfterLastUnlock && _repositoryUnlocker.Repositories.All(r => r.IsLoaded))
+                {
+                    Close();
+                }
             }
             catch (Exception exception)
             {
@@ -57,14 +61,14 @@ namespace mRemoteNG.UI.Forms
         private void SelectNextLockedRepo()
         {
             _repositoryUnlocker.SelectNextLockedRepository();
-            objectListViewRepos.SelectedObject = _repositoryUnlocker.SelectedRepository;
+            objectListViewRepos.SelectedObject = _repositoryUnlocker.SelectedRepository.FirstOrDefault();
         }
 
         private void objectListViewRepos_SelectionChanged(object sender, EventArgs e)
         {
             objectListViewRepos.RefreshObjects(_repositoryUnlocker.Repositories.ToList());
             var selectedRepo = objectListViewRepos.SelectedObject as ICredentialRepository;
-            _repositoryUnlocker.SelectedRepository = selectedRepo;
+            _repositoryUnlocker.SelectedRepository = new Optional<ICredentialRepository>(selectedRepo);
             ShowRepoDetails(selectedRepo);
             ShowPasswordError(false);
             UnlockRequired(!selectedRepo?.IsLoaded ?? false);
@@ -91,6 +95,12 @@ namespace mRemoteNG.UI.Forms
             labelPasswordError.Visible = shouldErrorBeActive;
             imgPasswordError.Visible = shouldErrorBeActive;
             secureTextBoxPassword.BackColor = shouldErrorBeActive ? Color.MistyRose : SystemColors.Window;
+        }
+
+        private void chkCloseAfterLastUnlock_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.CloseCredentialUnlockerDialogAfterLastUnlock = chkCloseAfterLastUnlock.Checked;
+            Settings.Default.Save();
         }
 
         #region Setup
@@ -144,6 +154,7 @@ namespace mRemoteNG.UI.Forms
             labelUnlocked.Text = Language.RepositoryIsUnlocked;
             buttonUnlock.Text = Language.Unlock;
             buttonClose.Text = Language.strButtonClose;
+            chkCloseAfterLastUnlock.Text = "Automatically close this dialog after the last repository is unlocked";
         }
         #endregion
     }

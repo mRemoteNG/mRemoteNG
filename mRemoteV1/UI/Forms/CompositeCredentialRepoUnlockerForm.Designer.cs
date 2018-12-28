@@ -29,26 +29,27 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompositeCredentialRepoUnlockerForm));
-            this.objectListViewRepos = new Controls.Base.NGListView();
+            this.objectListViewRepos = new mRemoteNG.UI.Controls.Base.NGListView();
             this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnStatusIcon = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.labelUnlocking = new Controls.Base.NGLabel();
-            this.labelPassword = new Controls.Base.NGLabel();
-            this.buttonUnlock = new Controls.Base.NGButton();
-            this.buttonClose = new Controls.Base.NGButton();
-            this.labelRepoTitle = new Controls.Base.NGLabel();
-            this.textBoxType = new Controls.Base.NGTextBox();
-            this.textBoxTitle = new Controls.Base.NGTextBox();
-            this.labelRepoType = new Controls.Base.NGLabel();
-            this.textBoxSource = new Controls.Base.NGTextBox();
-            this.labelRepoSource = new Controls.Base.NGLabel();
-            this.textBoxId = new Controls.Base.NGTextBox();
-            this.labelId = new Controls.Base.NGLabel();
-            this.labelPasswordError = new Controls.Base.NGLabel();
+            this.labelUnlocking = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.labelPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.buttonUnlock = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.buttonClose = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.labelRepoTitle = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.textBoxType = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.textBoxTitle = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.labelRepoType = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.textBoxSource = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.labelRepoSource = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.textBoxId = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.labelId = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.labelPasswordError = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.imgPasswordError = new System.Windows.Forms.PictureBox();
             this.imgUnlocked = new System.Windows.Forms.PictureBox();
-            this.labelUnlocked = new Controls.Base.NGLabel();
+            this.labelUnlocked = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.secureTextBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
+            this.chkCloseAfterLastUnlock = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPasswordError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgUnlocked)).BeginInit();
@@ -63,6 +64,7 @@
             this.olvColumnName,
             this.olvColumnStatusIcon});
             this.objectListViewRepos.Cursor = System.Windows.Forms.Cursors.Default;
+            this.objectListViewRepos.DecorateLines = true;
             this.objectListViewRepos.Dock = System.Windows.Forms.DockStyle.Left;
             this.objectListViewRepos.EmptyListMsg = "No Credential Repositories Found";
             this.objectListViewRepos.HasCollapsibleGroups = false;
@@ -73,7 +75,7 @@
             this.objectListViewRepos.Name = "objectListViewRepos";
             this.objectListViewRepos.SelectAllOnControlA = false;
             this.objectListViewRepos.ShowGroups = false;
-            this.objectListViewRepos.Size = new System.Drawing.Size(175, 272);
+            this.objectListViewRepos.Size = new System.Drawing.Size(175, 283);
             this.objectListViewRepos.TabIndex = 3;
             this.objectListViewRepos.UseCompatibleStateImageBehavior = false;
             this.objectListViewRepos.UseOverlays = false;
@@ -112,7 +114,7 @@
             // 
             this.labelPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(190, 174);
+            this.labelPassword.Location = new System.Drawing.Point(195, 173);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(53, 13);
             this.labelPassword.TabIndex = 2;
@@ -120,8 +122,9 @@
             // 
             // buttonUnlock
             // 
+            this.buttonUnlock._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonUnlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonUnlock.Location = new System.Drawing.Point(386, 237);
+            this.buttonUnlock.Location = new System.Drawing.Point(387, 234);
             this.buttonUnlock.Name = "buttonUnlock";
             this.buttonUnlock.Size = new System.Drawing.Size(75, 23);
             this.buttonUnlock.TabIndex = 1;
@@ -131,9 +134,10 @@
             // 
             // buttonClose
             // 
+            this.buttonClose._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(467, 237);
+            this.buttonClose.Location = new System.Drawing.Point(468, 234);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 2;
@@ -190,7 +194,7 @@
             this.textBoxSource.Multiline = true;
             this.textBoxSource.Name = "textBoxSource";
             this.textBoxSource.ReadOnly = true;
-            this.textBoxSource.Size = new System.Drawing.Size(306, 46);
+            this.textBoxSource.Size = new System.Drawing.Size(306, 40);
             this.textBoxSource.TabIndex = 11;
             this.textBoxSource.TabStop = false;
             // 
@@ -230,7 +234,7 @@
             this.labelPasswordError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPasswordError.ForeColor = System.Drawing.Color.DarkRed;
             this.labelPasswordError.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.labelPasswordError.Location = new System.Drawing.Point(191, 213);
+            this.labelPasswordError.Location = new System.Drawing.Point(196, 212);
             this.labelPasswordError.Name = "labelPasswordError";
             this.labelPasswordError.Size = new System.Drawing.Size(115, 13);
             this.labelPasswordError.TabIndex = 14;
@@ -241,7 +245,7 @@
             // 
             this.imgPasswordError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.imgPasswordError.Image = global::mRemoteNG.Resources.exclamation;
-            this.imgPasswordError.Location = new System.Drawing.Point(176, 192);
+            this.imgPasswordError.Location = new System.Drawing.Point(181, 191);
             this.imgPasswordError.Name = "imgPasswordError";
             this.imgPasswordError.Size = new System.Drawing.Size(16, 16);
             this.imgPasswordError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -253,7 +257,7 @@
             // 
             this.imgUnlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.imgUnlocked.Image = global::mRemoteNG.Resources.tick;
-            this.imgUnlocked.Location = new System.Drawing.Point(188, 241);
+            this.imgUnlocked.Location = new System.Drawing.Point(189, 238);
             this.imgUnlocked.Name = "imgUnlocked";
             this.imgUnlocked.Size = new System.Drawing.Size(16, 16);
             this.imgUnlocked.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -265,7 +269,7 @@
             // 
             this.labelUnlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelUnlocked.AutoSize = true;
-            this.labelUnlocked.Location = new System.Drawing.Point(204, 242);
+            this.labelUnlocked.Location = new System.Drawing.Point(205, 239);
             this.labelUnlocked.Name = "labelUnlocked";
             this.labelUnlocked.Size = new System.Drawing.Size(174, 13);
             this.labelUnlocked.TabIndex = 17;
@@ -276,11 +280,24 @@
             // 
             this.secureTextBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.secureTextBoxPassword.Location = new System.Drawing.Point(193, 190);
+            this.secureTextBoxPassword.Location = new System.Drawing.Point(198, 189);
             this.secureTextBoxPassword.Name = "secureTextBoxPassword";
             this.secureTextBoxPassword.Size = new System.Drawing.Size(348, 20);
             this.secureTextBoxPassword.TabIndex = 0;
             this.secureTextBoxPassword.UseSystemPasswordChar = true;
+            // 
+            // chkCloseAfterLastUnlock
+            // 
+            this.chkCloseAfterLastUnlock._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkCloseAfterLastUnlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkCloseAfterLastUnlock.AutoSize = true;
+            this.chkCloseAfterLastUnlock.Location = new System.Drawing.Point(189, 263);
+            this.chkCloseAfterLastUnlock.Name = "chkCloseAfterLastUnlock";
+            this.chkCloseAfterLastUnlock.Size = new System.Drawing.Size(332, 17);
+            this.chkCloseAfterLastUnlock.TabIndex = 18;
+            this.chkCloseAfterLastUnlock.Text = "Automatically close this dialog after the last repository is unlocked";
+            this.chkCloseAfterLastUnlock.UseVisualStyleBackColor = true;
+            this.chkCloseAfterLastUnlock.CheckedChanged += new System.EventHandler(this.chkCloseAfterLastUnlock_CheckedChanged);
             // 
             // CompositeCredentialRepoUnlockerForm
             // 
@@ -288,7 +305,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(554, 272);
+            this.ClientSize = new System.Drawing.Size(554, 283);
+            this.Controls.Add(this.chkCloseAfterLastUnlock);
             this.Controls.Add(this.labelUnlocked);
             this.Controls.Add(this.imgUnlocked);
             this.Controls.Add(this.imgPasswordError);
@@ -345,5 +363,6 @@
         private System.Windows.Forms.PictureBox imgPasswordError;
         private System.Windows.Forms.PictureBox imgUnlocked;
         private Controls.Base.NGLabel labelUnlocked;
+        private Controls.Base.NGCheckBox chkCloseAfterLastUnlock;
     }
 }

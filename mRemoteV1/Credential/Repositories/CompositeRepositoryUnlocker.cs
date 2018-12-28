@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Credential.Repositories
 {
@@ -10,7 +11,7 @@ namespace mRemoteNG.Credential.Repositories
         private readonly List<ICredentialRepository> _repositories = new List<ICredentialRepository>();
 
         public IEnumerable<ICredentialRepository> Repositories => _repositories;
-        public ICredentialRepository SelectedRepository { get; set; }
+        public Optional<ICredentialRepository> SelectedRepository { get; set; } = Optional<ICredentialRepository>.Empty;
 
         public CompositeRepositoryUnlocker(IEnumerable<ICredentialRepository> repositories)
         {
@@ -23,7 +24,8 @@ namespace mRemoteNG.Credential.Repositories
 
         public void Unlock(SecureString key)
         {
-            SelectedRepository.LoadCredentials(key);
+            if (SelectedRepository.Any())
+                SelectedRepository.First().LoadCredentials(key);
         }
 
         public void SelectNextLockedRepository()
@@ -31,10 +33,10 @@ namespace mRemoteNG.Credential.Repositories
             SelectedRepository = GetNextLockedRepo();
         }
 
-        private ICredentialRepository GetNextLockedRepo()
+        private Optional<ICredentialRepository> GetNextLockedRepo()
         {
             var newOrder = OrderListForNextLockedRepo();
-            return newOrder.Any() ? newOrder.First() : null;
+            return new Optional<ICredentialRepository>(newOrder.FirstOrDefault());
         }
 
         private IList<ICredentialRepository> OrderListForNextLockedRepo()
@@ -67,7 +69,10 @@ namespace mRemoteNG.Credential.Repositories
 
         private int GetNewListStartIndex()
         {
-            var currentItemIndex = _repositories.IndexOf(SelectedRepository);
+            if (!SelectedRepository.Any())
+                return 0;
+
+            var currentItemIndex = _repositories.IndexOf(SelectedRepository.First());
             return currentItemIndex + 1;
         }
     }

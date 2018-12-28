@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
@@ -36,7 +37,7 @@ namespace mRemoteNGTests.Credential
         {
             var key = new SecureString();
             _repositoryUnlocker.Unlock(key);
-            _repositoryUnlocker.SelectedRepository.Received(1).LoadCredentials(key);
+            _repositoryUnlocker.SelectedRepository.First().Received(1).LoadCredentials(key);
         }
 
         [Test]
