@@ -176,17 +176,10 @@ namespace mRemoteNG.UI.Window
 				var ipAddressStart = IPAddress.Parse(ipStart.Text);
 				var ipAddressEnd = IPAddress.Parse(ipEnd.Text);
 
-                var firstPort = 0;
-                var lastPort = 65535;
-                if (ngCheckFirstPort.Checked)
-                    firstPort = (int)portStart.Value;
-                if (ngCheckLastPort.Checked)
-                    lastPort = (int)portEnd.Value;
-
                 if (!ngCheckFirstPort.Checked && !ngCheckLastPort.Checked)
-                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, firstPort, lastPort, ((int)numericSelectorTimeout.Value) * 1000, true);
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int)portStart.Value, (int)portEnd.Value, (int)numericSelectorTimeout.Value * 1000, true);
                 else
-                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, firstPort, lastPort, ((int)numericSelectorTimeout.Value)*1000);
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int)portStart.Value, (int)portEnd.Value, (int)numericSelectorTimeout.Value*1000);
 						
 				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
 				_portScanner.HostScanned += PortScanner_HostScanned;
@@ -336,6 +329,8 @@ namespace mRemoteNG.UI.Window
         private void NgCheckLastPort_CheckedChanged(object sender, EventArgs e)
         {
             portEnd.Enabled = ngCheckLastPort.Checked;
+
+            portEnd.Value = portEnd.Enabled ? 65535 : 0;
         }
     }
 }

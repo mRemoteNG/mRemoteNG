@@ -29,6 +29,10 @@ namespace mRemoteNG.Tools
             var portStart = Math.Min(port1, port2);
 			var portEnd = Math.Max(port1, port2);
 
+            // if only one port was specified, just scan the one port...
+            if (portStart == 0)
+                portStart = portEnd;
+
 			if (timeoutInMilliseconds < 0)
 				throw new ArgumentOutOfRangeException(nameof(timeoutInMilliseconds));
 

@@ -2737,4 +2737,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Place search bar above connection tree</value>
   </data>
+  <data name="strPortScanSinglePort" xml:space="preserve">
+    <value>To scan a single port, select the "First Port" only.</value>
+  </data>
 </root>
