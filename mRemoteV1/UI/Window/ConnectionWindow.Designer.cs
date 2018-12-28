@@ -252,7 +252,5 @@ namespace mRemoteNG.UI.Window
             cmenTab.ResumeLayout(false);
             ResumeLayout(false);
         }
-
-        private System.ComponentModel.IContainer components;
     }
 }
