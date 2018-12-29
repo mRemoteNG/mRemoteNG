@@ -450,14 +450,14 @@ namespace mRemoteNG.UI.Menu
                     return;
 
                 var icList = new List<InterfaceControl>();
-                foreach (Crownwood.Magic.Controls.TabPage tab in connectionWindow.TabController.TabPages)
-                {
-                    var tag = tab.Tag as InterfaceControl;
-                    if (tag != null)
+                /*    foreach (Crownwood.Magic.Controls.TabPage tab in connectionWindow.TabController.TabPages)
                     {
-                        icList.Add(tag);
-                    }
-                }
+                        var tag = tab.Tag as InterfaceControl;
+                        if (tag != null)
+                        {
+                            icList.Add(tag);
+                        }
+                    }*/
 
                 foreach (var i in icList)
                 {

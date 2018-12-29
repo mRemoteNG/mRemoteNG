@@ -85,7 +85,7 @@ namespace mRemoteNG.Tools
 
 		public static Image TakeScreenshot(ConnectionWindow sender)
 		{
-			try
+			/*try
 			{
 				var LeftStart = sender.TabController.SelectedTab.PointToScreen(new Point(sender.TabController.SelectedTab.Left)).X; //Me.Left + Splitter.SplitterDistance + 11
 				var TopStart = sender.TabController.SelectedTab.PointToScreen(new Point(sender.TabController.SelectedTab.Top)).Y; //Me.Top + Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 - 3
@@ -104,7 +104,7 @@ namespace mRemoteNG.Tools
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace("Taking Screenshot failed", ex);
 			}
-				
+				*/
 			return null;
 		}
 		

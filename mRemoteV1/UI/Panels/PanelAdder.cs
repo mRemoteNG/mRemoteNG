@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Panels
 {
     public class PanelAdder
     {
-        public ConnectionWindow AddPanel(string title = "", bool noTabber = false)
+        public Form AddPanel(string title = "", bool noTabber = false)
         {
             try
             {
@@ -44,9 +44,9 @@ namespace mRemoteNG.UI.Panels
 
         private static void PrepareTabControllerSupport(bool noTabber, ConnectionWindow connectionForm)
         {
-            if (noTabber)
+         /*   if (noTabber)
                 connectionForm.TabController.Dispose();
-            else
+            else*/
                 Runtime.WindowList.Add(connectionForm);
         }
 
@@ -96,12 +96,13 @@ namespace mRemoteNG.UI.Panels
             try
             {
                 var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
-                var nTitle = "";
-                using (FrmInputBox frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle))
+
+                var  nTitle = "";
+                new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle);
+
+                if (!string.IsNullOrEmpty(nTitle))
                 {
-                    DialogResult dr = frmInputBox.ShowDialog();
-                    if (dr == DialogResult.OK && string.IsNullOrEmpty(frmInputBox.returnValue))
-                        conW.SetFormText(frmInputBox.returnValue);
+                    conW.SetFormText(nTitle.Replace("&", "&&"));
                 }
             }
             catch (Exception ex)

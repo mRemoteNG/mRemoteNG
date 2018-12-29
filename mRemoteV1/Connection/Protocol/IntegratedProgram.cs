@@ -115,8 +115,8 @@ namespace mRemoteNG.Connection.Protocol
 				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppFocusFailed, ex);
 			}
 		}
-
-        protected override void Resize(object sender, EventArgs e)
+				
+		public override void Resize(object sender, EventArgs e)
 		{
 			try
 			{

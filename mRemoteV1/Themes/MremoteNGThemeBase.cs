@@ -1,6 +1,7 @@
 ﻿namespace mRemoteNG.Themes
 {
-
+    using mRemoteNG.UI.Tabs;
+    using WeifenLuo.WinFormsUI.Docking;
     using WeifenLuo.WinFormsUI.ThemeVS2015;
 
 
@@ -16,6 +17,17 @@
             Measures.AutoHideSplitterSize = 3;
             Measures.DockPadding = 2;
             ShowAutoHideContentOnHover = false;
+
+            Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+        }
+         
+    }
+
+    public  class MremoteDockPaneStripFactory : WeifenLuo.WinFormsUI.Docking.DockPanelExtender.IDockPaneStripFactory
+    {
+        public DockPaneStripBase CreateDockPaneStrip(DockPane pane)
+        {
+            return new DockPaneStripNG(pane);
         }
     }
 }
