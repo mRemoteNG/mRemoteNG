@@ -2,17 +2,22 @@
 
 Features/Enhancements:
 ----------------------
-#1238: Connection panel not translated until opened for the first time
 #1223: Open External Links in Default Web Browser
-#1186: Fixed several dialog boxes to use localized button text
-#1170: Prevent Options window from showing up in taskbar
 #1141: 'Copy Hostname' option added to connection tree context menu
 #1129: Spanish translation improvements
 #1072: Russian translation improvements
-#1064: "Esc" button does does not close some dialogs
 #1016: Chinese (simplified) translation improvements
 #951: Added property to Enable/Disable Clipboard Sharing for RDP connections
 #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
+#765: Port Scan Issues (single port scan option now available)
+
+Fixes:
+------
+#1238: Connection panel not translated until opened for the first time
+#1186: Fixed several dialog boxes to use localized button text
+#1170: Prevent Options window from showing up in taskbar
+#1064: "Esc" button does does not close some dialogs
+#1044: Dragging (grabbing) the program window requires 2 clicks
 
 
 1.76.12 (2018-11-08):
