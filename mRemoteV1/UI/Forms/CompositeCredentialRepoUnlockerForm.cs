@@ -11,6 +11,7 @@ namespace mRemoteNG.UI.Forms
 {
     public sealed partial class CompositeCredentialRepoUnlockerForm : Form
     {
+        private readonly DisplayProperties _display = new DisplayProperties();
         private readonly ThemeManager _themeManager = ThemeManager.getInstance();
         private readonly CompositeRepositoryUnlocker _repositoryUnlocker;
 
@@ -23,6 +24,8 @@ namespace mRemoteNG.UI.Forms
             ApplyTheme();
             chkCloseAfterLastUnlock.Checked = Settings.Default.CloseCredentialUnlockerDialogAfterLastUnlock;
             _themeManager.ThemeChanged += ApplyTheme;
+            imgPasswordError.Image = _display.ScaleImage(imgPasswordError.Image);
+            imgUnlocked.Image = _display.ScaleImage(imgUnlocked.Image);
         }
 
         private void ApplyTheme()
@@ -121,14 +124,14 @@ namespace mRemoteNG.UI.Forms
             var imageList = new ImageList
             {
                 ColorDepth = ColorDepth.Depth32Bit,
-                ImageSize = new Size(16, 16),
+                ImageSize = _display.ScaleSize(new Size(16, 16)),
                 TransparentColor = Color.Transparent
             };
-            imageList.Images.Add(Resources.arrow_left);
+            imageList.Images.Add(_display.ScaleImage(Resources.arrow_left));
             imageList.Images.SetKeyName(0, "unlocking");
-            imageList.Images.Add(Resources.tick);
+            imageList.Images.Add(_display.ScaleImage(Resources.tick));
             imageList.Images.SetKeyName(1, "unlocked");
-            imageList.Images.Add(Resources._lock);
+            imageList.Images.Add(_display.ScaleImage(Resources._lock));
             imageList.Images.SetKeyName(2, "locked");
 
             return imageList;
