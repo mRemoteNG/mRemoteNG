@@ -4,12 +4,14 @@ using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms
 {
     public sealed partial class CompositeCredentialRepoUnlockerForm : Form
     {
+        private readonly ThemeManager _themeManager = ThemeManager.getInstance();
         private readonly CompositeRepositoryUnlocker _repositoryUnlocker;
 
         public CompositeCredentialRepoUnlockerForm(CompositeRepositoryUnlocker repositoryUnlocker)
@@ -20,14 +22,16 @@ namespace mRemoteNG.UI.Forms
             ApplyLanguage();
             ApplyTheme();
             chkCloseAfterLastUnlock.Checked = Settings.Default.CloseCredentialUnlockerDialogAfterLastUnlock;
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            _themeManager.ThemeChanged += ApplyTheme;
         }
 
         private void ApplyTheme()
         {
-            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
-            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!_themeManager.ThemingActive)
+                return;
+
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void buttonUnlock_Click(object sender, EventArgs e)

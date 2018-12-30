@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -355,6 +356,9 @@ namespace mRemoteNG.UI.Forms
         private void UnlockRepositories(IEnumerable<ICredentialRepository> repositories, IWin32Window parentForm)
         {
             if (!Settings.Default.PromptUnlockCredReposOnStartup)
+                return;
+
+            if (Runtime.CredentialService.RepositoryList.All(repo => repo.IsLoaded))
                 return;
 
             var credentialUnlockerForm = _credRepoUnlockerFormFactory.Build(repositories);
