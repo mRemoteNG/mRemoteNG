@@ -36,7 +36,7 @@ namespace mRemoteNGTests.Config
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
             var xdoc = CreateTestData(connection);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
-            Assert.That(credentials.Single().Username, Is.EqualTo(connection.Username));
+            Assert.That(credentials.DistinctCredentialRecords.Single().Username, Is.EqualTo(connection.Username));
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace mRemoteNGTests.Config
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
             var xdoc = CreateTestData(connection);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
-            Assert.That(credentials.Single().Domain, Is.EqualTo(connection.Domain));
+            Assert.That(credentials.DistinctCredentialRecords.Single().Domain, Is.EqualTo(connection.Domain));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace mRemoteNGTests.Config
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
             var xdoc = CreateTestData(connection);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
-            Assert.That(credentials.Single().Password.ConvertToUnsecureString(), Is.EqualTo(connection.Password));
+            Assert.That(credentials.DistinctCredentialRecords.Single().Password.ConvertToUnsecureString(), Is.EqualTo(connection.Password));
         }
 
         [Test]
@@ -96,8 +96,7 @@ namespace mRemoteNGTests.Config
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
             var connectionGuid = Guid.Parse(connection.ConstantID);
             var xdoc = CreateTestData(connection);
-            _credentialHarvester.Harvest(xdoc, _key);
-            var map = _credentialHarvester.ConnectionToCredentialMap;
+            var map = _credentialHarvester.Harvest(xdoc, _key);
             Assert.That(map[connectionGuid].Username, Is.EqualTo(connection.Username));
         }
 
@@ -111,8 +110,7 @@ namespace mRemoteNGTests.Config
             var xdoc = CreateTestData(container);
             var con1Id = Guid.Parse(con1.ConstantID);
             var con2Id = Guid.Parse(con2.ConstantID);
-            _credentialHarvester.Harvest(xdoc, _key);
-            var map = _credentialHarvester.ConnectionToCredentialMap;
+            var map = _credentialHarvester.Harvest(xdoc, _key);
             Assert.That(map[con1Id], Is.EqualTo(map[con2Id]));
         }
 

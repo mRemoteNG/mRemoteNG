@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Xml.Linq;
+using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
@@ -13,16 +14,21 @@ namespace mRemoteNG.Config
     {
         private readonly IEqualityComparer<ICredentialRecord> _credentialComparer = new CredentialDomainUserPasswordComparer();
 
-        // maps a connectioninfo (by its id) to the credential object that was harvested
-        public Dictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } = new Dictionary<Guid, ICredentialRecord>();
-
-        public IEnumerable<ICredentialRecord> Harvest(XDocument xDocument, SecureString decryptionKey)
+        /// <summary>
+        /// Maps a <see cref="ConnectionInfo"/> (by its id) to the <see cref="ICredentialRecord"/>
+        /// object that was harvested
+        /// </summary>
+        /// <param name="xDocument"></param>
+        /// <param name="decryptionKey"></param>
+        /// <returns></returns>
+        public ConnectionToCredentialMap Harvest(XDocument xDocument, SecureString decryptionKey)
         {
             if (xDocument == null)
                 throw new ArgumentNullException(nameof(xDocument));
             
             var cryptoProvider = new CryptoProviderFactoryFromXml(xDocument.Root).Build();
 
+            var credentialMap = new ConnectionToCredentialMap();
             foreach (var element in xDocument.Descendants("Node"))
             {
                 if (!EntryHasSomeCredentialData(element)) continue;
@@ -34,16 +40,16 @@ namespace mRemoteNG.Config
                     //error
                 }
 
-                if (ConnectionToCredentialMap.Values.Contains(newCredential, _credentialComparer))
+                if (credentialMap.Values.Contains(newCredential, _credentialComparer))
                 {
-                    var existingCredential = ConnectionToCredentialMap.Values.First(record => _credentialComparer.Equals(newCredential, record));
-                    ConnectionToCredentialMap.Add(connectionId, existingCredential);
+                    var existingCredential = credentialMap.Values.First(record => _credentialComparer.Equals(newCredential, record));
+                    credentialMap.Add(connectionId, existingCredential);
                 }
                 else
-                    ConnectionToCredentialMap.Add(connectionId, newCredential);
+                    credentialMap.Add(connectionId, newCredential);
             }
 
-            return ConnectionToCredentialMap.Values.Distinct(_credentialComparer);
+            return credentialMap;
         }
 
         private ICredentialRecord BuildCredential(XElement element, ICryptographyProvider cryptographyProvider, SecureString decryptionKey)

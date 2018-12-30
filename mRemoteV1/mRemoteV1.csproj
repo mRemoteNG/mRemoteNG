@@ -151,6 +151,7 @@
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
     <Compile Include="Config\CredentialRepositoryListPersistor.cs" />
+    <Compile Include="Config\ConnectionToCredentialMap.cs" />
     <Compile Include="Config\DatabaseConnectors\ConnectionTestResult.cs" />
     <Compile Include="Config\DatabaseConnectors\DatabaseConnectorFactory.cs" />
     <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnectionTester.cs" />

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
-using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
@@ -14,34 +12,22 @@ using System.Linq;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
-    public class XmlCredentialManagerUpgrader : IDeserializer<string, ConnectionTreeModel>
+    public class XmlCredentialManagerUpgrader
     {
-        private readonly CredentialService _credentialsService;
-        private readonly IDeserializer<string, ConnectionTreeModel> _decoratedDeserializer;
-        private readonly SecureString _newRepoPassword;
+        private readonly IDeserializer<string, ConnectionTreeModel> _deserializer;
 
-        public string CredentialFilePath { get; set; }
-        
 
-        public XmlCredentialManagerUpgrader(
-            CredentialService credentialsService, 
-            string credentialFilePath, 
-            IDeserializer<string, ConnectionTreeModel> decoratedDeserializer,
-            SecureString newRepoPassword)
+        public XmlCredentialManagerUpgrader(IDeserializer<string, ConnectionTreeModel> decoratedDeserializer)
         {
-            _credentialsService = credentialsService.ThrowIfNull(nameof(credentialsService));
-            CredentialFilePath = credentialFilePath;
-            _newRepoPassword = newRepoPassword;
-            _decoratedDeserializer = decoratedDeserializer.ThrowIfNull(nameof(decoratedDeserializer));
+            _deserializer = decoratedDeserializer.ThrowIfNull(nameof(decoratedDeserializer));
         }
 
-        public ConnectionTreeModel Deserialize(string serializedData)
+        public ConnectionTreeModel Deserialize(string serializedData, ConnectionToCredentialMap upgradeMap)
         {
             var serializedDataAsXDoc = EnsureConnectionXmlElementsHaveIds(serializedData);
-            var upgradeMap = UpgradeUserFilesForCredentialManager(serializedDataAsXDoc);
             var serializedDataWithIds = $"{serializedDataAsXDoc.Declaration}{serializedDataAsXDoc}";
 
-            var connectionTreeModel = _decoratedDeserializer.Deserialize(serializedDataWithIds);
+            var connectionTreeModel = _deserializer.Deserialize(serializedDataWithIds);
 
             if (upgradeMap != null)
                 ApplyCredentialMapping(upgradeMap, connectionTreeModel.GetRecursiveChildList());
@@ -58,7 +44,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             return xdoc;
         }
 
-        public Dictionary<Guid, ICredentialRecord> UpgradeUserFilesForCredentialManager(XDocument xdoc)
+        public ConnectionToCredentialMap UpgradeUserFilesForCredentialManager(XDocument xdoc)
         {
             if (!CredentialManagerUpgradeNeeded(xdoc))
             {
@@ -76,13 +62,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             var credentialHarvester = new CredentialHarvester();
             var harvestedCredentials = credentialHarvester.Harvest(xdoc, keyForOldConnectionFile);
 
-            var newCredentialRepository = BuildXmlCredentialRepo(_newRepoPassword);
-
-            AddHarvestedCredentialsToRepo(harvestedCredentials, newCredentialRepository);
-            newCredentialRepository.SaveCredentials(_newRepoPassword);
-
-            _credentialsService.AddRepository(newCredentialRepository);
-            return credentialHarvester.ConnectionToCredentialMap;
+            return harvestedCredentials;
         }
 
         /// <summary>
@@ -100,33 +80,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     n.Attribute("Password") != null);
         }
 
-        private ICredentialRepository BuildXmlCredentialRepo(SecureString newCredRepoKey)
-        {
-            var repositoryConfig = new CredentialRepositoryConfig
-            {
-                Source = CredentialFilePath,
-                Title = "Converted Credentials",
-                TypeName = "Xml",
-                Key = newCredRepoKey
-            };
-            
-            var xmlRepoFactory = _credentialsService.GetRepositoryFactoryForConfig(repositoryConfig);
-
-            if (!xmlRepoFactory.Any())
-                throw new CredentialRepositoryTypeNotSupportedException(repositoryConfig.TypeName);
-
-            var newRepo = xmlRepoFactory.First().Build(repositoryConfig);
-            newRepo.LoadCredentials(newCredRepoKey);
-            return newRepo;
-        }
-
-        private void AddHarvestedCredentialsToRepo(IEnumerable<ICredentialRecord> harvestedCredentials, ICredentialRepository repo)
-        {
-            foreach (var credential in harvestedCredentials)
-                repo.CredentialRecords.Add(credential);
-        }
-
-        public void ApplyCredentialMapping(IDictionary<Guid, ICredentialRecord> map, IEnumerable<AbstractConnectionRecord> connectionRecords)
+        private void ApplyCredentialMapping(IDictionary<Guid, ICredentialRecord> map, IEnumerable<AbstractConnectionRecord> connectionRecords)
         {
             foreach (var connectionInfo in connectionRecords)
             {

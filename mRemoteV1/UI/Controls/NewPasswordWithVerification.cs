@@ -46,6 +46,9 @@ namespace mRemoteNG.UI.Controls
         public NewPasswordWithVerification()
         {
             InitializeComponent();
+            var display = new DisplayProperties();
+            secureTextBox1.Width = display.ScaleWidth(Width);
+            secureTextBox2.Width = display.ScaleWidth(Width);
             secureTextBox1.TextChanged += OnSecureTextBoxTextChanged;
             secureTextBox2.TextChanged += OnSecureTextBoxTextChanged;
         }

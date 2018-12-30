@@ -28,32 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelFirstPasswordBox = new Controls.Base.NGLabel();
-            this.labelSecondPasswordBox = new Controls.Base.NGLabel();
-            this.labelPasswordsDontMatch = new Controls.Base.NGLabel();
             this.imgError = new System.Windows.Forms.PictureBox();
+            this.labelPasswordsDontMatch = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.labelSecondPasswordBox = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.labelFirstPasswordBox = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.secureTextBox2 = new mRemoteNG.UI.Controls.SecureTextBox();
             this.secureTextBox1 = new mRemoteNG.UI.Controls.SecureTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgError)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelFirstPasswordBox
+            // imgError
             // 
-            this.labelFirstPasswordBox.AutoSize = true;
-            this.labelFirstPasswordBox.Location = new System.Drawing.Point(-3, 0);
-            this.labelFirstPasswordBox.Name = "labelFirstPasswordBox";
-            this.labelFirstPasswordBox.Size = new System.Drawing.Size(78, 13);
-            this.labelFirstPasswordBox.TabIndex = 2;
-            this.labelFirstPasswordBox.Text = "New Password";
-            // 
-            // labelSecondPasswordBox
-            // 
-            this.labelSecondPasswordBox.AutoSize = true;
-            this.labelSecondPasswordBox.Location = new System.Drawing.Point(-3, 42);
-            this.labelSecondPasswordBox.Name = "labelSecondPasswordBox";
-            this.labelSecondPasswordBox.Size = new System.Drawing.Size(79, 13);
-            this.labelSecondPasswordBox.TabIndex = 3;
-            this.labelSecondPasswordBox.Text = "VerifyPassword";
+            this.imgError.Image = global::mRemoteNG.Resources.ErrorSmall;
+            this.imgError.Location = new System.Drawing.Point(3, 81);
+            this.imgError.Name = "imgError";
+            this.imgError.Size = new System.Drawing.Size(16, 16);
+            this.imgError.TabIndex = 5;
+            this.imgError.TabStop = false;
+            this.imgError.Visible = false;
             // 
             // labelPasswordsDontMatch
             // 
@@ -65,15 +57,23 @@
             this.labelPasswordsDontMatch.Text = "Passwords do not match";
             this.labelPasswordsDontMatch.Visible = false;
             // 
-            // imgError
+            // labelSecondPasswordBox
             // 
-            this.imgError.Image = global::mRemoteNG.Resources.ErrorSmall;
-            this.imgError.Location = new System.Drawing.Point(3, 81);
-            this.imgError.Name = "imgError";
-            this.imgError.Size = new System.Drawing.Size(16, 16);
-            this.imgError.TabIndex = 5;
-            this.imgError.TabStop = false;
-            this.imgError.Visible = false;
+            this.labelSecondPasswordBox.AutoSize = true;
+            this.labelSecondPasswordBox.Location = new System.Drawing.Point(-3, 42);
+            this.labelSecondPasswordBox.Name = "labelSecondPasswordBox";
+            this.labelSecondPasswordBox.Size = new System.Drawing.Size(79, 13);
+            this.labelSecondPasswordBox.TabIndex = 3;
+            this.labelSecondPasswordBox.Text = "VerifyPassword";
+            // 
+            // labelFirstPasswordBox
+            // 
+            this.labelFirstPasswordBox.AutoSize = true;
+            this.labelFirstPasswordBox.Location = new System.Drawing.Point(-3, 0);
+            this.labelFirstPasswordBox.Name = "labelFirstPasswordBox";
+            this.labelFirstPasswordBox.Size = new System.Drawing.Size(78, 13);
+            this.labelFirstPasswordBox.TabIndex = 2;
+            this.labelFirstPasswordBox.Text = "New Password";
             // 
             // secureTextBox2
             // 
@@ -95,8 +95,9 @@
             // 
             // NewPasswordWithVerification
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.imgError);
             this.Controls.Add(this.labelPasswordsDontMatch);
             this.Controls.Add(this.labelSecondPasswordBox);

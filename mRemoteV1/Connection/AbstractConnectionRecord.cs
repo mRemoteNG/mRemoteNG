@@ -189,7 +189,7 @@ namespace mRemoteNG.Connection
             get
             {
                 var credential = CredentialRecordId
-                    .Select(guid => Runtime.CredentialService.RepositoryList.GetCredentialRecord(guid))
+                    .Select(guid => Runtime.CredentialService.GetCredentialRecord(guid))
                     .FirstOrDefault();
                 return credential ?? new PlaceholderCredentialRecord(CredentialRecordId);
             }
