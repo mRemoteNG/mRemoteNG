@@ -8,10 +8,17 @@ namespace mRemoteNG.UI.Controls.Base
     public class NGCheckBox : CheckBox
     {
         private ThemeManager _themeManager;
+        private readonly Size _checkboxSize;
+        private readonly int _checkboxYCoord;
+        private readonly int _textXCoord;
 
         public NGCheckBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            var display = new DisplayProperties();
+            _checkboxSize = new Size(display.ScaleWidth(11), display.ScaleHeight(11));
+            _checkboxYCoord = Height / 2 - 7;
+            _textXCoord = _checkboxSize.Width + display.ScaleWidth(2);
         }
 
         public enum MouseState
@@ -100,7 +107,7 @@ namespace mRemoteNG.UI.Controls.Base
 
             using (var p = new Pen(checkBorder))
             {
-                var boxRect = new Rectangle(0, Height / 2 - 7, 11, 11);
+                var boxRect = new Rectangle(0, _checkboxYCoord, _checkboxSize.Width, _checkboxSize.Height);
                 e.Graphics.FillRectangle(new SolidBrush(back), boxRect);
                 e.Graphics.DrawRectangle(p, boxRect);
             }
@@ -110,12 +117,9 @@ namespace mRemoteNG.UI.Controls.Base
                 e.Graphics.DrawString("\u2714", new Font(Font.FontFamily, 7f), new SolidBrush(glyph), -1, 1);
             }
 
-            var textRect = new Rectangle(16, 0, Width - 16, Height);
+            var textRect = new Rectangle(_textXCoord, 0, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
-
-        
         }
-
     }
 }
 
