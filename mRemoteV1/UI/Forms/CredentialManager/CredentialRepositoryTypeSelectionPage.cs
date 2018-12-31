@@ -7,7 +7,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.PageSequence;
 
-namespace mRemoteNG.UI.Forms.CredentialManagerPages
+namespace mRemoteNG.UI.Forms.CredentialManager
 {
     public sealed partial class CredentialRepositoryTypeSelectionPage : SequencedControl
     {

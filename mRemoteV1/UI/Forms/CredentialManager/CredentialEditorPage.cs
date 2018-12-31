@@ -6,7 +6,7 @@ using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls.PageSequence;
 
-namespace mRemoteNG.UI.Forms.CredentialManagerPages
+namespace mRemoteNG.UI.Forms.CredentialManager
 {
     public sealed partial class CredentialEditorPage : SequencedControl
     {

@@ -4,7 +4,7 @@ using mRemoteNG.Credential.Repositories;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.PageSequence;
 
-namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelectors
+namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.KeePass
 {
     public class KeePassRepositorySelector : ISelectionTarget<ICredentialRepositoryConfig>
     {

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Forms.CredentialManagerPages;
+using mRemoteNG.UI.Forms.CredentialManager;
 
 namespace mRemoteNG.UI.Menu
 {

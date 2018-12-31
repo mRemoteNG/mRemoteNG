@@ -1,6 +1,4 @@
-﻿using mRemoteNG.Themes;
-
-namespace mRemoteNG.UI.Forms
+﻿namespace mRemoteNG.UI.Forms.CredentialManager
 {
     partial class CredentialManagerForm
     {

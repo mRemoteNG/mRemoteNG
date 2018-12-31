@@ -10,7 +10,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls.PageSequence;
 
-namespace mRemoteNG.UI.Forms.CredentialManagerPages
+namespace mRemoteNG.UI.Forms.CredentialManager
 {
     public sealed partial class CredentialListPage : SequencedControl, ICredentialManagerPage
     {

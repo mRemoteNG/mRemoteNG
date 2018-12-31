@@ -1,6 +1,4 @@
-﻿using mRemoteNG.Themes;
-
-namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages
+﻿namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml
 {
     partial class XmlCredentialRepositoryEditorPage
     {

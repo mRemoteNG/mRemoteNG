@@ -1,6 +1,4 @@
-﻿using mRemoteNG.Themes;
-
-namespace mRemoteNG.UI.Forms.CredentialManagerPages
+﻿namespace mRemoteNG.UI.Forms.CredentialManager
 {
     sealed partial class CredentialEditorPage
     {

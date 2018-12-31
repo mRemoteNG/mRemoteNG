@@ -6,9 +6,8 @@ using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.PageSequence;
-using mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositoryEditorPages;
 
-namespace mRemoteNG.UI.Forms.CredentialManagerPages.CredentialRepositorySelectors
+namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml
 {
     public class XmlCredentialRepositorySelector : ISelectionTarget<ICredentialRepositoryConfig>
     {

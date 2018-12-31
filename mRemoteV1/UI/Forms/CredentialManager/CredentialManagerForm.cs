@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using mRemoteNG.UI.Forms.CredentialManagerPages;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 
-namespace mRemoteNG.UI.Forms
+namespace mRemoteNG.UI.Forms.CredentialManager
 {
     public partial class CredentialManagerForm : Form
     {
         private readonly IEnumerable<UserControl> _pageControls;
+        private readonly ThemeManager _themeManager;
 
         public CredentialManagerForm(IEnumerable<UserControl> pageControls)
         {
-            if (pageControls == null)
-                throw new ArgumentNullException(nameof(pageControls));
-
-            _pageControls = pageControls;
+            _pageControls = pageControls.ThrowIfNull(nameof(pageControls));
             InitializeComponent();
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ApplyTheme;
             ApplyTheme();
             ApplyLanguage();
             SetupListView();
@@ -33,7 +32,9 @@ namespace mRemoteNG.UI.Forms
 
         private void ShowPage(Control page)
         {
-            if (page == null) return;
+            if (page == null)
+                return;
+
             panelMain.Controls.Clear();
             panelMain.Controls.Add(page);
             page.Dock = DockStyle.Fill;
@@ -44,11 +45,14 @@ namespace mRemoteNG.UI.Forms
             var page = rowObject as ICredentialManagerPage;
             return page?.PageIcon;
         }
+
         private void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ThemingActive) return;
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!_themeManager.ThemingActive)
+                return;
+
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyLanguage()

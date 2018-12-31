@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace mRemoteNG.UI.Forms.CredentialManagerPages
+namespace mRemoteNG.UI.Forms.CredentialManager
 {
     public interface ICredentialManagerPage
     {
