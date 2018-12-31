@@ -416,14 +416,7 @@ namespace mRemoteNG.UI.Window
                     cmenTabTransferFile.Visible = true;
                 }
 
-                if (interfaceControl.Protocol is PuttyBase)
-                {
-                    cmenTabPuttySettings.Visible = true;
-                }
-                else
-                {
-                    cmenTabPuttySettings.Visible = false;
-                }
+                cmenTabPuttySettings.Visible = interfaceControl.Protocol is PuttyBase;
 
                 AddExternalApps();
             }
