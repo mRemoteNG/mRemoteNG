@@ -8,7 +8,8 @@ using mRemoteNG.UI.Window;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-
+using mRemoteNG.UI.Tabs;
+using WeifenLuo.WinFormsUI.Docking;
 
 
 namespace mRemoteNG.Connection
@@ -139,25 +140,20 @@ namespace mRemoteNG.Connection
             if (connectionInfo.OpenConnections.Count <= 0) return null;
             for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
             {
-                var window = Runtime.WindowList[i] as ConnectionWindow;
-                var connectionWindow = window;
-               /* if (connectionWindow?.TabController == null) continue;
-                foreach (TabPage t in connectionWindow.TabController.TabPages)
-                {
-                    var ic = t.Controls[0] as InterfaceControl;
-                    if (ic == null) continue;
-                    if (ic.Info == connectionInfo)
-                    {
-                        return ic;
-                    }
-                }*/
+                // the new structure is ConnectionWindow.Controls[0].ActiveDocument.Controls[0]
+                //                                       DockPanel                  InterfaceControl
+                if (!(Runtime.WindowList[i] is ConnectionWindow connectionWindow)) continue;
+                if (!(connectionWindow.Controls[0] is DockPanel cwDp)) continue;
+                if (!(cwDp.ActiveDocument is ConnectionTab ct)) continue;
+                if (ct.Controls[0] is InterfaceControl ic)
+                    return ic;
             }
             return null;
         }
 
         private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
-            var connectionPanel = "";
+            string connectionPanel;
             if (connectionInfo.Panel == "" || force.HasFlag(ConnectionInfo.Force.OverridePanel) || Settings.Default.AlwaysShowPanelSelectionDlg)
             {
                 var frmPnl = new FrmChoosePanel();
