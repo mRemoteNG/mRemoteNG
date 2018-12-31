@@ -15,6 +15,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using ConnectionTab = mRemoteNG.UI.Tabs.ConnectionTab;
@@ -782,18 +783,26 @@ namespace mRemoteNG.UI.Window
         }
 
         private void RenameTab()
-        {/*
+        {
             try
             {
-                var newTitle = TabController.SelectedTab.Title;
-                if (new InputBox().ShowAsDialog(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK && 
-                    !string.IsNullOrEmpty(newTitle))
-                    TabController.SelectedTab.Title = newTitle.Replace("&", "&&");
+                var interfaceControl = GetInterfaceControl();
+                if (interfaceControl == null) return;
+                var newTitle = ((ConnectionTab)interfaceControl.Parent).TabText;
+                using (FrmInputBox frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle, ref newTitle))
+                {
+                    DialogResult dr = frmInputBox.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        if(!string.IsNullOrEmpty(frmInputBox.returnValue))
+                            ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&"); 
+                    }
+                } 
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("RenameTab (UI.Window.ConnectionWindow) failed", ex);
-            }*/
+            }
         }
 
         private void CreateScreenshot()
