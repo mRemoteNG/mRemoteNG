@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Controls.Base
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
             var display = new DisplayProperties();
             _checkboxSize = new Size(display.ScaleWidth(11), display.ScaleHeight(11));
-            _checkboxYCoord = Height / 2 - 7;
+            _checkboxYCoord = (display.ScaleHeight(Height) - _checkboxSize.Height) / 2 - display.ScaleHeight(5);
             _textXCoord = _checkboxSize.Width + display.ScaleWidth(2);
         }
 
