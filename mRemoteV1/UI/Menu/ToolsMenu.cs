@@ -141,16 +141,7 @@ namespace mRemoteNG.UI.Menu
         #region Tools
         private void credentialManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var pages = new UserControl[]
-            {
-                new CredentialListPage(CredentialService.RepositoryList)
-                {
-                    DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
-                },
-                new CredentialRepositoriesPage(CredentialService, UnlockerFormFactory)
-            };
-
-            var credentialManagerForm = new CredentialManagerForm(pages);
+            var credentialManagerForm = new CredentialManagerForm(CredentialService, UnlockerFormFactory);
             credentialManagerForm.CenterOnTarget(MainForm);
             credentialManagerForm.Show();
         }

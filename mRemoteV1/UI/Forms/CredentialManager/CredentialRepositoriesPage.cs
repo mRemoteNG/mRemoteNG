@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,12 +16,17 @@ namespace mRemoteNG.UI.Forms.CredentialManager
     {
         private readonly CredentialService _credentialService;
         private readonly UnlockerFormFactory _unlockerFactory;
+        private readonly IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> _selectionTargets;
 
         public string PageName { get; } = "Sources";
         public Image PageIcon { get; } = Resources.folder_key;
 
-        public CredentialRepositoriesPage(CredentialService credentialService, UnlockerFormFactory unlockerFactory)
+        public CredentialRepositoriesPage(
+            CredentialService credentialService, 
+            UnlockerFormFactory unlockerFactory, 
+            IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets)
         {
+            _selectionTargets = selectionTargets;
             _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
             _unlockerFactory = unlockerFactory.ThrowIfNull(nameof(unlockerFactory));
 
@@ -30,8 +36,6 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             credentialRepositoryListView.SelectionChanged += (sender, args) => UpdateUi();
             credentialRepositoryListView.DoubleClickHandler = EditRepository;
         }
-
-
 
         private void UpdateUi()
         {
@@ -46,15 +50,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         {
             var addRepoSequence = new PageSequence(Parent,
                 this,
-                new CredentialRepositoryTypeSelectionPage(
-                    new ISelectionTarget<ICredentialRepositoryConfig>[]
-                    {
-                        new XmlCredentialRepositorySelector(_credentialService),
-                        //new KeePassRepositorySelector()
-                    },
-                    _credentialService.RepositoryList
-                    )
-                { Dock = DockStyle.Fill },
+                new CredentialRepositoryTypeSelectionPage(_selectionTargets, _credentialService.RepositoryList) { Dock = DockStyle.Fill },
                 new SequencedControl(),
                 this
             );
