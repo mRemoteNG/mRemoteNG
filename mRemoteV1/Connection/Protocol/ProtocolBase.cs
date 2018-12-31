@@ -3,6 +3,7 @@ using mRemoteNG.Tools;
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.UI.Window;
 
 
 namespace mRemoteNG.Connection.Protocol
@@ -43,8 +44,9 @@ namespace mRemoteNG.Connection.Protocol
             set
 			{
 				_interfaceControl = value;
-                //This is ugly
-				ConnectionWindow = _interfaceControl.Parent.Parent.Parent.Parent.Parent as UI.Window.ConnectionWindow;
+
+                if(_interfaceControl.Parent is ConnectionWindow window)
+				    ConnectionWindow = window;
 			}
 		}
 
