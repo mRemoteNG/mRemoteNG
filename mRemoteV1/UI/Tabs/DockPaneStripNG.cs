@@ -1,13 +1,8 @@
 ﻿using mRemoteNG.Themes;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -367,25 +362,9 @@ namespace mRemoteNG.UI.Tabs
 
         private static int ToolWindowTabSeperatorGapBottom => _ToolWindowTabSeperatorGapBottom;
 
-        private static string ToolTipClose
-        {
-            get
-            {
-                if (m_toolTipClose == null)
-                    m_toolTipClose = Language.strRadioCloseWarnExit;
-                return m_toolTipClose;
-            }
-        }
+        private static string ToolTipClose => m_toolTipClose ?? (m_toolTipClose = Language.strRadioCloseWarnExit);
 
-        private static string ToolTipSelect
-        {
-            get
-            {
-                if (m_toolTipSelect == null)
-                    m_toolTipSelect = Language.strTabsAndPanels;
-                return m_toolTipSelect;
-            }
-        }
+        private static string ToolTipSelect => m_toolTipSelect ?? (m_toolTipSelect = Language.strTabsAndPanels);
 
         private TextFormatFlags ToolWindowTextFormat
         {
