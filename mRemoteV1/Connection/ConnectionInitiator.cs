@@ -67,8 +67,7 @@ namespace mRemoteNG.Connection
             if (children.Count == 0) return;
             foreach (var child in children)
             {
-                var childAsContainer = child as ContainerInfo;
-                if (childAsContainer != null)
+                if (child is ContainerInfo childAsContainer)
                     OpenConnection(childAsContainer, force, conForm);
                 else
                     OpenConnection(child, force, conForm);
@@ -196,7 +195,7 @@ namespace mRemoteNG.Connection
             if(extT == null) return connectionContainer;
 
             if(extT.Icon != null)
-                ((ConnectionWindow)connectionContainer).Icon = extT.Icon; 
+                ((ConnectionTab)connectionContainer).Icon = extT.Icon; 
 
             return connectionContainer;
         }
