@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -61,17 +62,19 @@ namespace mRemoteNG.UI.Window
 
         private void SetTabControllerEventHandlers()
         {
+            //Menu handle
+            cmenTab.Opening += new CancelEventHandler(ShowHideMenuButtons);
             //TabController.ClosePressed += TabController_ClosePressed;
             // TabController.DoubleClickTab += TabController_DoubleClickTab;
             // TabController.DragDrop += TabController_DrouagDrop;
             // TabController.DragOver += TabController_DragOver;
             // TabController.SelectionChanged += TabController_SelectionChanged;
-            DockPnl.MouseUp += TabController_MouseUp;
-           // TabController.PageDragEnd += TabController_PageDragStart;
-           // TabController.PageDragStart += TabController_PageDragStart;
-           // TabController.PageDragMove += TabController_PageDragMove;
-           // TabController.PageDragEnd += TabController_PageDragEnd;
-           // TabController.PageDragQuit += TabController_PageDragEnd;
+            //MouseUp += TabController_MouseUp; 
+            // TabController.PageDragEnd += TabController_PageDragStart;
+            // TabController.PageDragStart += TabController_PageDragStart;
+            // TabController.PageDragMove += TabController_PageDragMove;
+            // TabController.PageDragEnd += TabController_PageDragEnd;
+            // TabController.PageDragQuit += TabController_PageDragEnd;
         }
 
         private void SetContextMenuEventHandlers()
@@ -138,7 +141,8 @@ namespace mRemoteNG.UI.Window
                     conTab.Icon = conIcon;
 
                 //Show the tab
-                conTab.Show(connDock, DockState.Document);
+                conTab.DockAreas = DockAreas.Document | DockAreas.Float;
+                conTab.Show(connDock,DockState.Document);
                 conTab.Focus(); 
                 return conTab;
             }
@@ -174,15 +178,23 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ThemingActive) return;
-            base.ApplyTheme();
-            connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
-            vsToolStripExtender = new VisualStudioToolStripExtender(components)
+            if (ThemeManager.getInstance().ThemingActive)
             {
-                DefaultRenderer = _toolStripProfessionalRenderer
-            };
-            vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
-            connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
+                base.ApplyTheme();
+                try
+                {
+                    this.connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
+                }catch(Exception ex)
+                {
+                    //consume the exception
+                }
+                
+
+                this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+                vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
+                vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+                connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
+            }
         }
 
         private bool _documentHandlersAdded;
@@ -369,7 +381,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Tab Menu
-        private void ShowHideMenuButtons()
+        private void ShowHideMenuButtons(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
             {
@@ -866,7 +878,7 @@ namespace mRemoteNG.UI.Window
                         break;
                     case MouseButtons.Right:
                         if (connDock.ActivePane?.Tag == null) return;
-                        ShowHideMenuButtons();
+                       // ShowHideMenuButtons();
                         NativeMethods.SetForegroundWindow(Handle);
                         cmenTab.Show(connDock, e.Location);
                         break;
