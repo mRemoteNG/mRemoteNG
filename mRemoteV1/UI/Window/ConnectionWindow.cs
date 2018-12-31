@@ -183,14 +183,14 @@ namespace mRemoteNG.UI.Window
                 base.ApplyTheme();
                 try
                 {
-                    this.connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
+                    connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
                 }catch(Exception ex)
                 {
                     //consume the exception
                 }
                 
 
-                this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+                vsToolStripExtender = new VisualStudioToolStripExtender(components);
                 vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
                 vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
                 connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
@@ -381,11 +381,11 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Tab Menu
-        private void ShowHideMenuButtons(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ShowHideMenuButtons(object sender, CancelEventArgs e)
         {
             try
             {
-                var interfaceControl = (InterfaceControl)connDock.ActivePane?.Tag;
+                var interfaceControl = InterfaceControl.FindInterfaceControl(connDock);
                 if (interfaceControl == null) return;
 
                 if (interfaceControl.Info.Protocol == ProtocolType.RDP)

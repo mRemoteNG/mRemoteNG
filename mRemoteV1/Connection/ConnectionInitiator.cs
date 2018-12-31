@@ -144,9 +144,8 @@ namespace mRemoteNG.Connection
                 //                                       DockPanel                  InterfaceControl
                 if (!(Runtime.WindowList[i] is ConnectionWindow connectionWindow)) continue;
                 if (!(connectionWindow.Controls[0] is DockPanel cwDp)) continue;
-                if (!(cwDp.ActiveDocument is ConnectionTab ct)) continue;
-                if (ct.Controls[0] is InterfaceControl ic)
-                    return ic;
+
+                return InterfaceControl.FindInterfaceControl(cwDp);
             }
             return null;
         }
