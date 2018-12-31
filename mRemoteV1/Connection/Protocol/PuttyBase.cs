@@ -236,7 +236,8 @@ namespace mRemoteNG.Connection.Protocol
 					
 			try
 			{
-				PuttyProcess.Dispose();
+                Console.WriteLine(@"Skipping Dispose for now!");
+                //PuttyProcess.Dispose();
 			}
 			catch (Exception ex)
 			{

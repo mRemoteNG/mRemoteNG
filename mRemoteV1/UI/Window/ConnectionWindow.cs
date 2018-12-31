@@ -803,57 +803,27 @@ namespace mRemoteNG.UI.Window
         public void Prot_Event_Closed(object sender)
         {
             var protocolBase = sender as ProtocolBase;
-            var tabPage = protocolBase?.InterfaceControl.Parent as TabPage;
-            if (tabPage != null)
+            if (protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)
                 CloseTab(tabPage);
         }
         #endregion
 
         #region Tabs
-        private delegate void CloseTabDelegate(TabPage tabToBeClosed);
-        private void CloseTab(TabPage tabToBeClosed)
-        {/*
+        private delegate void CloseTabDelegate(ConnectionTab tabToBeClosed);
+        private void CloseTab(ConnectionTab tabToBeClosed)
+        {
             if (tabToBeClosed.Disposing || tabToBeClosed.IsDisposed)
                 return;
 
-            if (TabController.InvokeRequired)
+            if (tabToBeClosed.InvokeRequired)
             {
-                CloseTabDelegate s = CloseTab;
-
-                try
-                {
-                    TabController.Invoke(s, tabToBeClosed);
-                }
-                catch (COMException)
-                {
-                    TabController.Invoke(s, tabToBeClosed);
-                }
-                catch (Exception ex)
-                {
-                    Runtime.MessageCollector.AddExceptionMessage("Couldn't close tab", ex);
-                }
+                CloseTabDelegate ctd = CloseTab;
+                tabToBeClosed.Invoke(ctd, tabToBeClosed);
             }
             else
             {
-                try
-                {
-                    TabController.TabPages.Remove(tabToBeClosed);
-                    _ignoreChangeSelectedTabClick = false;
-                }
-                catch (COMException)
-                {
-                    CloseTab(tabToBeClosed);
-                }
-                catch (Exception ex)
-                {
-                    Runtime.MessageCollector.AddExceptionMessage("Couldn't close tab", ex);
-                }
-
-                if (TabController.TabPages.Count == 0)
-                {
-                    Close();
-                }
-            }*/
+                tabToBeClosed.Close();
+            }
         }
 
         private bool _ignoreChangeSelectedTabClick;
