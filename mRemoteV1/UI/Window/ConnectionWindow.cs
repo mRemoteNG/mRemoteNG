@@ -240,7 +240,7 @@ namespace mRemoteNG.UI.Window
         private void Connection_FormClosing(object sender, FormClosingEventArgs e)
         {
            if (!FrmMain.Default.IsClosing &&
-                (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & connDock.Documents.Count() > 0 ||
+                (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & connDock.Documents.Any() ||
                 Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & connDock.Documents.Count() > 1))
             {
                 var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionPanelMainInstruction, Text), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
@@ -343,8 +343,7 @@ namespace mRemoteNG.UI.Window
         #region Drag and Drop
         private void TabController_DragDrop(object sender, DragEventArgs e)
         {
-            var dropDataAsOlvDataObject = e.Data as OLVDataObject;
-            if (dropDataAsOlvDataObject == null) return;
+            if (!(e.Data is OLVDataObject dropDataAsOlvDataObject)) return;
             var modelObjects = dropDataAsOlvDataObject.ModelObjects;
             foreach (var model in modelObjects)
             {
