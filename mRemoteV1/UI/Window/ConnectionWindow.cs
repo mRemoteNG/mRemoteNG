@@ -106,10 +106,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                ConnectionTab conTab = new ConnectionTab();
-
-                //Tag the tab
-                conTab.Tag = connectionInfo;
+                var conTab = new ConnectionTab {Tag = connectionInfo};
 
                 //Set the connection text based on name and preferences
                 string titleText;
@@ -136,14 +133,13 @@ namespace mRemoteNG.UI.Window
                     titleText += @")";
                 }
 
-                conTab.TabText = titleText;
-                conTab.TabPageContextMenuStrip = cmenTab;
                 titleText = titleText.Replace("&", "&&");
 
+                conTab.TabText = titleText;
+                conTab.TabPageContextMenuStrip = cmenTab;
+
                 //Fix MagicRemove, i dont see no icons -.-
-                var conIcon = ConnectionIcon.FromString(connectionInfo.Icon);
-                if (conIcon != null)
-                    conTab.Icon = conIcon;
+                conTab.Icon = ConnectionIcon.FromString(connectionInfo.Icon);
 
                 //Show the tab
                 conTab.DockAreas = DockAreas.Document | DockAreas.Float;
