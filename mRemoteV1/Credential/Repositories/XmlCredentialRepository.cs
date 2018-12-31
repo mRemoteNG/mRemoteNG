@@ -16,6 +16,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public ICredentialRepositoryConfig Config { get; }
         public IList<ICredentialRecord> CredentialRecords { get; }
+        public string Title => Config.Title;
         public bool IsLoaded { get; private set; }
 
         /// <summary>

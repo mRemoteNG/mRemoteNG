@@ -32,10 +32,10 @@ namespace mRemoteNG.UI.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialManagerForm));
             this.panelMain = new System.Windows.Forms.Panel();
-            this.olvPageList = new Controls.Base.NGListView();
+            this.olvPageList = new mRemoteNG.UI.Controls.Base.NGListView();
             this.olvColumnPage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.buttonClose = new Controls.Base.NGButton();
+            this.buttonClose = new mRemoteNG.UI.Controls.Base.NGButton();
             ((System.ComponentModel.ISupportInitialize)(this.olvPageList)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +59,7 @@ namespace mRemoteNG.UI.Forms
             this.olvPageList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnPage});
             this.olvPageList.Cursor = System.Windows.Forms.Cursors.Default;
+            this.olvPageList.DecorateLines = true;
             this.olvPageList.FullRowSelect = true;
             this.olvPageList.HasCollapsibleGroups = false;
             this.olvPageList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
@@ -99,6 +100,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // buttonClose
             // 
+            this.buttonClose._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Location = new System.Drawing.Point(620, 15);

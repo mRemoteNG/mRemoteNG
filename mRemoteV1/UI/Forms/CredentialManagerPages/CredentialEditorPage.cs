@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls.PageSequence;
 
 namespace mRemoteNG.UI.Forms.CredentialManagerPages
@@ -9,20 +11,17 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
     public sealed partial class CredentialEditorPage : SequencedControl
     {
         private readonly ICredentialRecord _credentialRecord;
-        private readonly ICredentialRepository _credentialRepository;
+        private readonly CredentialService _credentialService;
+        private readonly Optional<ICredentialRepository> _credentialRepository;
 
-        public CredentialEditorPage(ICredentialRecord credentialRecord, ICredentialRepository credentialRepository)
+        public CredentialEditorPage(ICredentialRecord credentialRecord, Optional<ICredentialRepository> credentialRepository, CredentialService credentialService)
         {
-            if (credentialRecord == null)
-                throw new ArgumentNullException(nameof(credentialRecord));
-            if (credentialRepository == null)
-                throw new ArgumentNullException(nameof(credentialRepository));
-
             InitializeComponent();
             ApplyTheme();
             ApplyLanguage();
-            _credentialRecord = credentialRecord;
-            _credentialRepository = credentialRepository;
+            _credentialRecord = credentialRecord.ThrowIfNull(nameof(credentialRecord));
+            _credentialRepository = credentialRepository.ThrowIfNull(nameof(credentialRepository));
+            _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
             FillInForm();
             Dock = DockStyle.Fill;
         }
@@ -41,7 +40,11 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void FillInForm()
         {
-            textBoxRepositoryName.Text = _credentialRepository.Config.Title;
+            comboBoxRepository.DisplayMember = "Title";
+            _credentialService.RepositoryList.ForEach(r => comboBoxRepository.Items.Add(r));
+
+            if (_credentialRepository.Any())
+                comboBoxRepository.SelectedItem = _credentialRepository.First();
             textBoxId.Text = _credentialRecord.Id.ToString();
             textBoxTitle.Text = _credentialRecord.Title;
             textBoxUsername.Text = _credentialRecord.Username;
@@ -57,12 +60,13 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             _credentialRecord.Password = textBoxPassword.Text.ConvertToSecureString();
         }
 
-        private void buttonAccept_Click_1(object sender, EventArgs e)
+        private void buttonAccept_Click(object sender, EventArgs e)
         {
             SaveFormToCredential();
 
-            if (!_credentialRepository.CredentialRecords.Contains(_credentialRecord))
-                _credentialRepository.CredentialRecords.Add(_credentialRecord);
+            var repo = comboBoxRepository.GetSelectedItemAs<ICredentialRepository>();
+            if (!repo.CredentialRecords.Contains(_credentialRecord))
+                repo.CredentialRecords.Add(_credentialRecord);
 
             RaiseNextPageEvent();
         }

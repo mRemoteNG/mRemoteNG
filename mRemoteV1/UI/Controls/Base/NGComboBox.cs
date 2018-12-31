@@ -1,4 +1,6 @@
-﻿using mRemoteNG.Themes;
+﻿using System;
+using System.Collections;
+using mRemoteNG.Themes;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -87,7 +89,6 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-
             if ( !_themeManager.ThemingActive)
             {
                 base.OnPaint(e);
@@ -134,6 +135,12 @@ namespace mRemoteNG.UI.Controls.Base
             //Text
             var textRect = new Rectangle(2, 2, Width - 20, Height - 4);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+        }
+
+        public T GetSelectedItemAs<T>()
+            where T : class
+        {
+            return SelectedItem as T;
         }
     }
 }

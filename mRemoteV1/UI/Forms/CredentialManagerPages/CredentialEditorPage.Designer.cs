@@ -30,20 +30,20 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelId = new Controls.Base.NGLabel();
-            this.textBoxId = new Controls.Base.NGTextBox();
-            this.buttonCancel = new Controls.Base.NGButton();
-            this.buttonAccept = new Controls.Base.NGButton();
-            this.labelPassword = new Controls.Base.NGLabel();
+            this.labelId = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.textBoxId = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.buttonCancel = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.buttonAccept = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.labelPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.textBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
-            this.labelDomain = new Controls.Base.NGLabel();
-            this.textBoxDomain = new Controls.Base.NGTextBox();
-            this.labelUsername = new Controls.Base.NGLabel();
-            this.textBoxUsername = new Controls.Base.NGTextBox();
-            this.labelTitle = new Controls.Base.NGLabel();
-            this.textBoxTitle = new Controls.Base.NGTextBox();
-            this.labelRepositoryName = new Controls.Base.NGLabel();
-            this.textBoxRepositoryName = new Controls.Base.NGTextBox();
+            this.labelDomain = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.textBoxDomain = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.labelUsername = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.textBoxUsername = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.labelTitle = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.textBoxTitle = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.labelRepositoryName = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.comboBoxRepository = new mRemoteNG.UI.Controls.Base.NGComboBox();
             this.SuspendLayout();
             // 
             // labelId
@@ -67,6 +67,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             // 
             // buttonCancel
             // 
+            this.buttonCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(222, 174);
@@ -79,6 +80,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             // 
             // buttonAccept
             // 
+            this.buttonAccept._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAccept.Location = new System.Drawing.Point(141, 174);
             this.buttonAccept.Name = "buttonAccept";
@@ -86,7 +88,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             this.buttonAccept.TabIndex = 20;
             this.buttonAccept.Text = "Accept";
             this.buttonAccept.UseVisualStyleBackColor = true;
-            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click_1);
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
             // labelPassword
             // 
@@ -170,21 +172,22 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             this.labelRepositoryName.TabIndex = 24;
             this.labelRepositoryName.Text = "Repository";
             // 
-            // textBoxRepositoryName
+            // comboBoxRepository
             // 
-            this.textBoxRepositoryName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBoxRepository._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.comboBoxRepository.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxRepositoryName.Location = new System.Drawing.Point(89, 9);
-            this.textBoxRepositoryName.Name = "textBoxRepositoryName";
-            this.textBoxRepositoryName.ReadOnly = true;
-            this.textBoxRepositoryName.Size = new System.Drawing.Size(208, 20);
-            this.textBoxRepositoryName.TabIndex = 25;
+            this.comboBoxRepository.FormattingEnabled = true;
+            this.comboBoxRepository.Location = new System.Drawing.Point(89, 6);
+            this.comboBoxRepository.Name = "comboBoxRepository";
+            this.comboBoxRepository.Size = new System.Drawing.Size(208, 21);
+            this.comboBoxRepository.TabIndex = 25;
             // 
             // CredentialEditorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBoxRepositoryName);
+            this.Controls.Add(this.comboBoxRepository);
             this.Controls.Add(this.labelRepositoryName);
             this.Controls.Add(this.labelId);
             this.Controls.Add(this.textBoxId);
@@ -221,6 +224,6 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private Controls.Base.NGLabel labelTitle;
         private Controls.Base.NGTextBox textBoxTitle;
         private Controls.Base.NGLabel labelRepositoryName;
-        private Controls.Base.NGTextBox textBoxRepositoryName;
+        private Controls.Base.NGComboBox comboBoxRepository;
     }
 }

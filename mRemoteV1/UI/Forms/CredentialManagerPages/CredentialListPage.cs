@@ -4,7 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using mRemoteNG.App;
 using mRemoteNG.Credential;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Controls.PageSequence;
 
@@ -12,18 +14,12 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 {
     public sealed partial class CredentialListPage : SequencedControl, ICredentialManagerPage
     {
-        private readonly ICredentialRepositoryList _credentialRepositoryList;
-
         public string PageName { get; } = Language.strCategoryCredentials;
         public Image PageIcon { get; } = Resources.key;
         public IConfirm<IEnumerable<ICredentialRecord>> DeletionConfirmer { get; set; } = new AlwaysConfirmYes();
 
         public CredentialListPage(ICredentialRepositoryList credentialRepositoryList)
         {
-            if (credentialRepositoryList == null)
-                throw new ArgumentNullException(nameof(credentialRepositoryList));
-
-            _credentialRepositoryList = credentialRepositoryList;
             InitializeComponent();
             ApplyTheme();
             ApplyLanguage();
@@ -32,7 +28,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
             credentialRecordListView.KeyDown += ObjectListView1OnEnterPressed;
             credentialRecordListView.KeyDown += OnAPressed;
             credentialRecordListView.KeyDown += OnDeletePressed;
-            credentialRecordListView.CredentialRepositoryList = _credentialRepositoryList;
+            credentialRecordListView.CredentialRepositoryList = credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
         }
 
        
@@ -47,7 +43,9 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void RemoveSelectedCredential()
         {
             var selectedCredential = credentialRecordListView.SelectedObject;
-            if (!DeletionConfirmer.Confirm(new[] { selectedCredential.Key })) return;
+            if (!DeletionConfirmer.Confirm(new[] { selectedCredential.Key }))
+                return;
+
             selectedCredential.Value.CredentialRecords.Remove(selectedCredential.Key);
             RaiseCredentialsChangedEvent(this);
         }
@@ -55,7 +53,9 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         private void RemoveSelectedCredentials()
         {
             var selectedCredentials = credentialRecordListView.SelectedObjects.ToArray();
-            if (!DeletionConfirmer.Confirm(selectedCredentials.Select(i => i.Key))) return;
+            if (!DeletionConfirmer.Confirm(selectedCredentials.Select(i => i.Key)))
+                return;
+
             foreach(var item in selectedCredentials)
                 item.Value.CredentialRecords.Remove(item.Key);
             RaiseCredentialsChangedEvent(this);
@@ -63,7 +63,9 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void HandleCellDoubleClick(object sender, CellClickEventArgs cellClickEventArgs)
         {
-            if (cellClickEventArgs.ClickCount < 2) return;
+            if (cellClickEventArgs.ClickCount < 2)
+                return;
+
             EditCredential(credentialRecordListView.SelectedObject);
         }
 
@@ -71,8 +73,7 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
         {
             var sequence = new PageSequence(Parent,
                 this,
-                new CredentialRepositorySelectionPage(_credentialRepositoryList),
-                new SequencedControl(),
+                new CredentialEditorPage(new CredentialRecord(), Optional<ICredentialRepository>.Empty, Runtime.CredentialService),
                 this
             );
             RaiseNextPageEvent();
@@ -80,10 +81,12 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void EditCredential(KeyValuePair<ICredentialRecord, ICredentialRepository> credentialAndRepository)
         {
-            if (credentialAndRepository.Key == null || credentialAndRepository.Value == null) return;
+            if (credentialAndRepository.Key == null || credentialAndRepository.Value == null)
+                return;
+
             var sequence = new PageSequence(Parent,
                 this,
-                new CredentialEditorPage(credentialAndRepository.Key, credentialAndRepository.Value),
+                new CredentialEditorPage(credentialAndRepository.Key, credentialAndRepository.Value.ToOptional(), Runtime.CredentialService),
                 this
             );
             RaiseNextPageEvent();
@@ -109,7 +112,9 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void ObjectListView1OnEnterPressed(object sender, KeyEventArgs keyEventArgs)
         {
-            if (keyEventArgs.KeyCode != Keys.Enter) return;
+            if (keyEventArgs.KeyCode != Keys.Enter)
+                return;
+
             EditCredential(credentialRecordListView.SelectedObject);
             keyEventArgs.Handled = true;
             keyEventArgs.SuppressKeyPress = true;
@@ -117,7 +122,9 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void OnAPressed(object sender, KeyEventArgs keyEventArgs)
         {
-            if (keyEventArgs.KeyCode != Keys.A) return;
+            if (keyEventArgs.KeyCode != Keys.A)
+                return;
+
             AddCredential();
             keyEventArgs.Handled = true;
             keyEventArgs.SuppressKeyPress = true;
@@ -125,7 +132,9 @@ namespace mRemoteNG.UI.Forms.CredentialManagerPages
 
         private void OnDeletePressed(object sender, KeyEventArgs keyEventArgs)
         {
-            if (keyEventArgs.KeyCode != Keys.Delete) return;
+            if (keyEventArgs.KeyCode != Keys.Delete)
+                return;
+
             if (credentialRecordListView.MultipleObjectsSelected)
                 RemoveSelectedCredentials();
             else
