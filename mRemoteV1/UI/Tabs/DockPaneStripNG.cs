@@ -21,33 +21,13 @@ namespace mRemoteNG.UI.Tabs
             {
             }
 
-            private int m_tabX;
-            public int TabX
-            {
-                get => m_tabX;
-                set => m_tabX = value;
-            }
+            public int TabX { get; set; }
 
-            private int m_tabWidth;
-            public int TabWidth
-            {
-                get => m_tabWidth;
-                set => m_tabWidth = value;
-            }
+            public int TabWidth { get; set; }
 
-            private int m_maxWidth;
-            public int MaxWidth
-            {
-                get => m_maxWidth;
-                set => m_maxWidth = value;
-            }
+            public int MaxWidth { get; set; }
 
-            private bool m_flag;
-            protected internal bool Flag
-            {
-                get => m_flag;
-                set => m_flag = value;
-            }
+            protected internal bool Flag { get; set; }
 
             private Rectangle? _rect;
 
@@ -71,7 +51,7 @@ namespace mRemoteNG.UI.Tabs
                 m_image1 = image1;
             }
 
-            private int m_imageCategory = 0;
+            private int m_imageCategory;
             public int ImageCategory
             {
                 get => m_imageCategory;
@@ -129,24 +109,19 @@ namespace mRemoteNG.UI.Tabs
 
         #region Members
 
-        private ContextMenuStrip m_selectMenu;
         private static Bitmap m_imageButtonClose;
         private InertButton m_buttonClose;
         private static Bitmap m_imageButtonWindowList;
         private static Bitmap m_imageButtonWindowListOverflow;
         private InertButton m_buttonWindowList;
-        private IContainer m_components;
-        private ToolTip m_toolTip;
+        private readonly ToolTip m_toolTip;
         private Font m_font;
         private Font m_boldFont;
-        private int m_startDisplayingTab = 0;
-        private int m_endDisplayingTab = 0;
-        private int m_firstDisplayingTab = 0;
-        private bool m_documentTabsOverflow = false;
+        private int m_startDisplayingTab;
+        private bool m_documentTabsOverflow;
         private static string m_toolTipSelect;
         private static string m_toolTipClose;
-        private bool m_closeButtonVisible = false;
-        private int _selectMenuMargin = 5;
+        private bool m_closeButtonVisible;
 
         #endregion
 
@@ -206,13 +181,9 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        private ContextMenuStrip SelectMenu => m_selectMenu;
+        private ContextMenuStrip SelectMenu { get; }
 
-        public int SelectMenuMargin
-        {
-            get => _selectMenuMargin;
-            set => _selectMenuMargin = value;
-        }
+        public int SelectMenuMargin { get; set; } = 5;
 
         private static Bitmap ImageButtonClose
         {
@@ -270,7 +241,7 @@ namespace mRemoteNG.UI.Tabs
 
         private static GraphicsPath GraphicsPath => MremoteNGAutoHideStrip.GraphicsPath;
 
-        private IContainer Components => m_components;
+        private IContainer Components { get; }
 
         public Font TextFont => DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont;
 
@@ -286,7 +257,7 @@ namespace mRemoteNG.UI.Tabs
                     m_font = TextFont;
                     m_boldFont = new Font(TextFont, FontStyle.Bold);
                 }
-                else if (m_font != TextFont)
+                else if (!Equals(m_font, TextFont))
                 {
                     m_boldFont.Dispose();
                     m_font = TextFont;
@@ -307,17 +278,9 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        private int EndDisplayingTab
-        {
-            get => m_endDisplayingTab;
-            set => m_endDisplayingTab = value;
-        }
+        private int EndDisplayingTab { get; set; }
 
-        private int FirstDisplayingTab
-        {
-            get => m_firstDisplayingTab;
-            set => m_firstDisplayingTab = value;
-        }
+        private int FirstDisplayingTab { get; set; }
 
         private bool DocumentTabsOverflow
         {
@@ -450,10 +413,10 @@ namespace mRemoteNG.UI.Tabs
 
              
 
-            m_components = new System.ComponentModel.Container();
+            Components = new System.ComponentModel.Container();
             m_toolTip = new ToolTip(Components);
-            m_selectMenu = new ContextMenuStrip(Components);
-            pane.DockPanel.Theme.ApplyTo(m_selectMenu); 
+            SelectMenu = new ContextMenuStrip(Components);
+            pane.DockPanel.Theme.ApplyTo(SelectMenu); 
 
             ResumeLayout();
         } 
@@ -636,7 +599,7 @@ namespace mRemoteNG.UI.Tabs
             }
 
             // Set tab whose max width less than average width
-            var anyWidthWithinAverage = true;
+            bool anyWidthWithinAverage;
             var totalWidth = rectTabStrip.Width - ToolWindowStripGapLeft - ToolWindowStripGapRight;
             var totalAllocatedWidth = 0;
             var averageWidth = totalWidth / countTabs;
