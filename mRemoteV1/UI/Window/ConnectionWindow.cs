@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Window
         private void SetTabControllerEventHandlers()
         {
             //Menu handle
-            cmenTab.Opening += new CancelEventHandler(ShowHideMenuButtons);
+            cmenTab.Opening += ShowHideMenuButtons;
             //TabController.ClosePressed += TabController_ClosePressed;
             // TabController.DoubleClickTab += TabController_DoubleClickTab;
             // TabController.DragDrop += TabController_DrouagDrop;
@@ -179,23 +179,24 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (ThemeManager.getInstance().ThemingActive)
+            if (!ThemeManager.getInstance().ThemingActive) return;
+            base.ApplyTheme();
+            try
             {
-                base.ApplyTheme();
-                try
-                {
-                    connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
-                }catch(Exception ex)
-                {
-                    //consume the exception
-                }
-                
-
-                vsToolStripExtender = new VisualStudioToolStripExtender(components);
-                vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
-                vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
-                connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
+                connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
             }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.ConnectionWindow.ApplyTheme() failed", ex);
+            }
+
+
+            vsToolStripExtender = new VisualStudioToolStripExtender(components)
+            {
+                DefaultRenderer = _toolStripProfessionalRenderer
+            };
+            vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+            connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
         }
 
         private bool _documentHandlersAdded;
@@ -270,8 +271,9 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                foreach (ConnectionTab tabP in connDock.Documents)
+                foreach (var dockContent in connDock.Documents)
                 {
+                    var tabP = (ConnectionTab) dockContent;
                     if (tabP.Tag == null) continue;
                     var interfaceControl = (InterfaceControl)tabP.Tag;
                     interfaceControl.Protocol.Close();
