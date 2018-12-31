@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.App;
@@ -15,9 +14,9 @@ using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
+using ConnectionTab = mRemoteNG.UI.Tabs.ConnectionTab;
 using Message = System.Windows.Forms.Message; 
 
 namespace mRemoteNG.UI.Window
@@ -25,7 +24,7 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionWindow : BaseWindow
     {
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
+        private VisualStudioToolStripExtender vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         #region Public Methods

@@ -1,23 +1,15 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.UI.TaskDialog;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-
-namespace mRemoteNG.UI.Forms
+namespace mRemoteNG.UI.Tabs
 {
     public partial class ConnectionTab : DockContent
     {

@@ -1,4 +1,4 @@
-﻿namespace mRemoteNG.UI.Forms
+﻿namespace mRemoteNG.UI.Tabs
 {
     partial class ConnectionTab
     {

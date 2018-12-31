@@ -23,7 +23,7 @@ using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Menu;
-using mRemoteNG.UI.Panels;
+using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
@@ -518,15 +518,14 @@ namespace mRemoteNG.UI.Forms
 		private void ActivateConnection()
 		{
 		    var w = pnlDock.Controls[0] as DockPanel;
-            if (w?.ActiveDocument == null) return;
-            var tab = w.ActiveDocument as ConnectionTab; 
-		    var ifc = (InterfaceControl)tab.ActiveControl;
-		    if (ifc == null) return;
+            if (!(w?.ActiveDocument is ConnectionTab tab)) return;
+            var ifc = (InterfaceControl)tab.ActiveControl;
+            if (ifc == null) return;
 
-		    ifc.Protocol.Focus();
+            ifc.Protocol.Focus();
             var conFormWindow = ifc.FindForm();
             ((ConnectionTab)conFormWindow)?.RefreshInterfaceController();
-		}
+        }
 
         private void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
 		{
