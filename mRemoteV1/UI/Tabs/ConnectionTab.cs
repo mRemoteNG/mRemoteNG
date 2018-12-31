@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Tabs
         public ConnectionTab()
         {
             InitializeComponent(); 
-            this.FormClosing += formClosingEventHandler;
+            FormClosing += formClosingEventHandler;
         }
 
 
@@ -31,7 +31,7 @@ namespace mRemoteNG.UI.Tabs
             {  
                 if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
                 {
-                    var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionMainInstruction, this.TabText), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                    var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionMainInstruction, TabText), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
                     if (CTaskDialog.VerificationChecked)
                     {
                         Settings.Default.ConfirmCloseConnection--;
@@ -41,7 +41,7 @@ namespace mRemoteNG.UI.Tabs
                         return;
                     }
                 } 
-                var interfaceControl = (InterfaceControl)this.Tag;
+                var interfaceControl = (InterfaceControl)Tag;
                 interfaceControl.Protocol.Close();  
             }
             catch (Exception ex)
@@ -84,13 +84,13 @@ namespace mRemoteNG.UI.Tabs
         {
             try
             {
-                var interfaceControl = this.Tag as InterfaceControl;
+                var interfaceControl = Tag as InterfaceControl;
                 if (interfaceControl?.Info.Protocol == ProtocolType.VNC)
                     ((ProtocolVNC)interfaceControl.Protocol).RefreshScreen();
             }
             catch (Exception ex)
             {
-                App.Runtime.MessageCollector.AddExceptionMessage("RefreshIC (UI.Window.Connection) failed", ex);
+                Runtime.MessageCollector.AddExceptionMessage("RefreshIC (UI.Window.Connection) failed", ex);
             }
         }
         #endregion

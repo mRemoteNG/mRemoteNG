@@ -104,7 +104,7 @@ namespace mRemoteNG.UI.Window
                 conTab.Tag = connectionInfo;
 
                 //Set the connection text based on name and preferences
-                string titleText = "";
+                string titleText;
                 if (Settings.Default.ShowProtocolOnTabs)
                     titleText = connectionInfo.Protocol + @": ";
                 else
@@ -174,15 +174,15 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (ThemeManager.getInstance().ThemingActive)
+            if (!ThemeManager.getInstance().ThemingActive) return;
+            base.ApplyTheme();
+            connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
+            vsToolStripExtender = new VisualStudioToolStripExtender(components)
             {
-                base.ApplyTheme();
-                this.connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
-                this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-                vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
-                vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
-                connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
-            }
+                DefaultRenderer = _toolStripProfessionalRenderer
+            };
+            vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+            connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
         }
 
         private bool _documentHandlersAdded;
