@@ -821,6 +821,9 @@
     <EmbeddedResource Include="UI\Forms\Input\FrmInputBox.resx">
       <DependentUpon>FrmInputBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ThemePage.resx">
+      <DependentUpon>ThemePage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
       <DependentUpon>PasswordForm.cs</DependentUpon>
       <SubType>Designer</SubType>

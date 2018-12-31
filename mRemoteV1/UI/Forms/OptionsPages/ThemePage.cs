@@ -3,20 +3,19 @@ using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Linq;
 using System.Collections.Generic;
-using System.Drawing;
 using BrightIdeasSoftware;
 using mRemoteNG.UI.Forms.Input;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class ThemePage
+    public sealed partial class ThemePage
     {
 
         #region Private Fields
-        private ThemeManager _themeManager;
-        private ThemeInfo _oriTheme;
-        private bool _oriActiveTheming;
-        List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
+        private readonly ThemeManager _themeManager;
+        private readonly ThemeInfo _oriTheme;
+        private readonly bool _oriActiveTheming;
+        readonly List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
         #endregion
 
         public ThemePage()
@@ -125,6 +124,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnThemeNew.Enabled = true;
             listPalette.ClearObjects();
             listPalette.Enabled = false;
+            listPalette.CellClick -= ListPalette_CellClick;
             ColorMeList();
             if (_themeManager.ActiveTheme.IsThemeBase) return;
             listPalette.Enabled = true;
