@@ -16,17 +16,15 @@ namespace mRemoteNG.UI.Tabs
          
         public ConnectionTab()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             FormClosing += formClosingEventHandler;
         }
-
 
 
 
         #region TabEvents      
         private void formClosingEventHandler(object sender, FormClosingEventArgs e)
         {
-             
             try
             {  
                 if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
@@ -42,11 +40,11 @@ namespace mRemoteNG.UI.Tabs
                     }
                 } 
                 var interfaceControl = (InterfaceControl)Tag;
-                interfaceControl.Protocol.Close();  
+                interfaceControl.Protocol.Close();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Connection.CloseConnectionTab() failed", ex);
+                Runtime.MessageCollector.AddExceptionMessage("UI.Tab.CloseConnectionTab() failed", ex);
             } 
 
         }
