@@ -341,15 +341,18 @@ namespace mRemoteNG.UI.Forms
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
 			{
 			    var openConnections = 0;
-                foreach (BaseWindow window in Runtime.WindowList)
+                if (pnlDock.Contents.Count > 0)
                 {
-                    var connectionWindow = window as ConnectionWindow;
-					//fix MagicRemove, this is not working as per internal agregation of documents
-                    if (connectionWindow != null)
-						openConnections = pnlDock.DocumentsCount; 
+                    foreach (var dc in pnlDock.Contents)
+                    {
+                        if (!(dc is ConnectionWindow cw)) continue;
+                        if (!(cw.Controls[0] is DockPanel dp)) continue;
+                        if (dp.Contents.Count > 0)
+                            openConnections += dp.Contents.Count;
+                    }
                 }
 
-			    if (openConnections > 0 && (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All | (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & openConnections > 1) || Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
+                if (openConnections > 0 && (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All | (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & openConnections > 1) || Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
 				{
 					var result = CTaskDialog.MessageBox(this, Application.ProductName, Language.strConfirmExitMainInstruction, "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
 					if (CTaskDialog.VerificationChecked)
