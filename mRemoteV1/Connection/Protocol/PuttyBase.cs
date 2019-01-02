@@ -182,10 +182,6 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				/*if (ConnectionWindow.InTabDrag)
-				{
-					return;
-				}*/
 				NativeMethods.SetForegroundWindow(PuttyHandle);
 			}
 			catch (Exception ex)
