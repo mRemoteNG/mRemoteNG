@@ -159,6 +159,7 @@
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesModel.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesXmlSerializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlConnectionListMetaData.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlExtensions.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
@@ -821,6 +822,9 @@
     <EmbeddedResource Include="UI\Forms\Input\FrmInputBox.resx">
       <DependentUpon>FrmInputBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
+      <DependentUpon>ConnectionsPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\ThemePage.resx">
       <DependentUpon>ThemePage.cs</DependentUpon>
     </EmbeddedResource>
@@ -987,10 +991,6 @@
     <None Include="Resources\Templates\VisualElements_70_dark.psd" />
     <None Include="Resources\Templates\VisualElements_70_light.psd" />
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\mremoteng_confcons_v2_8.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

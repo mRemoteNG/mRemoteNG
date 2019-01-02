@@ -36,10 +36,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #region Properties
         public bool SmartSize
 		{
-			get
-			{
-				return _rdpClient.AdvancedSettings2.SmartSizing;
-			}
+			get => _rdpClient.AdvancedSettings2.SmartSizing;
             private set
 			{
 				_rdpClient.AdvancedSettings2.SmartSizing = value;
@@ -49,10 +46,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		
         public bool Fullscreen
 		{
-			get
-			{
-				return _rdpClient.FullScreen;
-			}
+			get => _rdpClient.FullScreen;
             private set
 			{
 				_rdpClient.FullScreen = value;
@@ -680,12 +674,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             Close(); //Simply close the RDP Session if the idle timeout has been triggered.
 
-            if (_alertOnIdleDisconnect)
-            {
-                string message = "The " + _connectionInfo.Name + " session was disconnected due to inactivity";
-                const string caption = "Session Disconnected";
-                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            if (!_alertOnIdleDisconnect) return;
+            MessageBox.Show($"The {_connectionInfo.Name} session was disconnected due to inactivity", "Session Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
@@ -748,15 +738,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				
 		public event LeaveFullscreenEventHandler LeaveFullscreen
 		{
-			add
-			{
-				_leaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Combine(_leaveFullscreenEvent, value);
-			}
-			remove
-			{
-				_leaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Remove(_leaveFullscreenEvent, value);
-			}
-		}
+			add => _leaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Combine(_leaveFullscreenEvent, value);
+            remove => _leaveFullscreenEvent = (LeaveFullscreenEventHandler)Delegate.Remove(_leaveFullscreenEvent, value);
+        }
         #endregion
 		
         #region Enums
@@ -926,15 +910,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			    var srvReady = PortScanner.IsPortOpen(_connectionInfo.Hostname, Convert.ToString(_connectionInfo.Port));
 					
 			    ReconnectGroup.ServerReady = srvReady;
-					
-			    if (ReconnectGroup.ReconnectWhenReady && srvReady)
-			    {
-				    tmrReconnect.Enabled = false;
-				    ReconnectGroup.DisposeReconnectGroup();
-				    //SetProps()
-				    _rdpClient.Connect();
-			    }
-		    }
+
+                if (!ReconnectGroup.ReconnectWhenReady || !srvReady) return;
+                tmrReconnect.Enabled = false;
+                ReconnectGroup.DisposeReconnectGroup();
+                //SetProps()
+                _rdpClient.Connect();
+            }
 		    catch (Exception ex)
 		    {
                 Runtime.MessageCollector.AddExceptionMessage(string.Format(Language.AutomaticReconnectError, _connectionInfo.Hostname),
