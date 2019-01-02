@@ -55,6 +55,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
+            themeEnableCombo.CheckedChanged -= themeEnableCombo_CheckedChanged;
             base.SaveSettings();
             //At first we cannot create or delete themes, depends later on the type of selected theme
             btnThemeNew.Enabled = false;
@@ -80,6 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 // reset to the default theme when disabling theme support
                 _themeManager.ActiveTheme = _themeManager.DefaultTheme;
             }
+            themeEnableCombo.CheckedChanged += themeEnableCombo_CheckedChanged;
         }
 
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
