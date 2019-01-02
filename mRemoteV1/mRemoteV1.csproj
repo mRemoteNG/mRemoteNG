@@ -816,6 +816,9 @@
     <EmbeddedResource Include="UI\Forms\Input\FrmInputBox.resx">
       <DependentUpon>FrmInputBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
+      <DependentUpon>ConnectionsPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\ThemePage.resx">
       <DependentUpon>ThemePage.cs</DependentUpon>
     </EmbeddedResource>

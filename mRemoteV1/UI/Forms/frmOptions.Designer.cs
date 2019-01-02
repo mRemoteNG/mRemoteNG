@@ -135,7 +135,7 @@
             this.PageName.ImageAspectName = "IconImage";
             this.PageName.IsEditable = false;
             // 
-            // frmOptions
+            // FrmOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -150,7 +150,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmOptions";
+            this.Name = "FrmOptions";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mRemoteNG Options";
