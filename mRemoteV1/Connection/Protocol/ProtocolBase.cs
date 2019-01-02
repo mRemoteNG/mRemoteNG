@@ -12,7 +12,7 @@ namespace mRemoteNG.Connection.Protocol
     {
         #region Private Variables
 
-	    private UI.Window.ConnectionWindow _connectionWindow;
+	    private ConnectionWindow _connectionWindow;
         private InterfaceControl _interfaceControl;
 	    private ConnectingEventHandler ConnectingEvent;
         private ConnectedEventHandler ConnectedEvent;
@@ -26,10 +26,10 @@ namespace mRemoteNG.Connection.Protocol
         #region Control
         private string Name { get; }
 
-	    protected UI.Window.ConnectionWindow ConnectionWindow
+        private ConnectionWindow ConnectionWindow
 		{
 			get => _connectionWindow;
-            private set
+            set
 			{
 				_connectionWindow = value;
 				_connectionWindow.ResizeBegin += ResizeBegin;
