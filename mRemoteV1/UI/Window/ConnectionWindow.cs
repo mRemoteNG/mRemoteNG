@@ -75,17 +75,11 @@ namespace mRemoteNG.UI.Window
         {
             //Menu handle
             cmenTab.Opening += ShowHideMenuButtons;
-            //TabController.ClosePressed += TabController_ClosePressed;
             // TabController.DoubleClickTab += TabController_DoubleClickTab;
             // TabController.DragDrop += TabController_DrouagDrop;
             // TabController.DragOver += TabController_DragOver;
             // TabController.SelectionChanged += TabController_SelectionChanged;
-            //MouseUp += TabController_MouseUp; 
-            // TabController.PageDragEnd += TabController_PageDragStart;
-            // TabController.PageDragStart += TabController_PageDragStart;
-            // TabController.PageDragMove += TabController_PageDragMove;
-            // TabController.PageDragEnd += TabController_PageDragEnd;
-            // TabController.PageDragQuit += TabController_PageDragEnd;
+            //MouseUp += TabController_MouseUp;  
         }
 
         private void SetContextMenuEventHandlers()
@@ -888,44 +882,6 @@ namespace mRemoteNG.UI.Window
         }
         #endregion
 
-        #region Tab drag and drop
-        public bool InTabDrag { get; set; }
-
-        private void TabController_PageDragStart(object sender, MouseEventArgs e)
-        {
-            Cursor = Cursors.SizeWE;
-        }
-
-        private void TabController_PageDragMove(object sender, MouseEventArgs e)
-        {/*
-            InTabDrag = true; // For some reason PageDragStart gets raised again after PageDragEnd so set this here instead
-
-            var sourceTab = TabController.SelectedTab;
-            var destinationTab = TabController.TabPageFromPoint(e.Location);
-
-            if (!TabController.TabPages.Contains(destinationTab) || sourceTab == destinationTab)
-                return;
-
-            var targetIndex = TabController.TabPages.IndexOf(destinationTab);
-
-            TabController.TabPages.SuspendEvents();
-            TabController.TabPages.Remove(sourceTab);
-            TabController.TabPages.Insert(targetIndex, sourceTab);
-            TabController.SelectedTab = sourceTab;
-            TabController.TabPages.ResumeEvents();*/
-        }
-
-        private void TabController_PageDragEnd(object sender, MouseEventArgs e)
-        {/*
-            Cursor = Cursors.Default;
-            InTabDrag = false;
-            var interfaceControl = TabController?.SelectedTab?.Tag as InterfaceControl;
-            interfaceControl?.Protocol.Focus();*/
-        }
-        #endregion
-        private void ConnectionWindow_Load(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
