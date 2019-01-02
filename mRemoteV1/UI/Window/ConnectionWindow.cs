@@ -688,47 +688,7 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("CloseTabMenu (UI.Window.ConnectionWindow) failed", ex);
-            }
-            
-                /*   try
-                   {
-                       if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
-                       {
-                           var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionRightInstruction, TabController.SelectedTab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
-                           if (CTaskDialog.VerificationChecked)
-                           {
-                               Settings.Default.ConfirmCloseConnection--;
-                           }
-                           if (result == DialogResult.No)
-                           {
-                               return;
-                           }
-                       }
-                       foreach (TabPage tab in TabController.TabPages)
-                       {
-                           if (TabController.TabPages.IndexOf(tab) > TabController.TabPages.IndexOf(TabController.SelectedTab))
-                           {
-                               if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
-                               {
-                                   var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionMainInstruction, tab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
-                                   if (CTaskDialog.VerificationChecked)
-                                   {
-                                       Settings.Default.ConfirmCloseConnection--;
-                                   }
-                                   if (result == DialogResult.No)
-                                   {
-                                       continue;
-                                   }
-                               }
-                               var interfaceControl = tab.Tag as InterfaceControl;
-                               interfaceControl?.Protocol.Close();
-                           }
-                       }
-                   }
-                   catch (Exception ex)
-                   {
-                       Runtime.MessageCollector.AddExceptionMessage("CloseTabMenu (UI.Window.ConnectionWindow) failed", ex);
-                   }*/
+            } 
             }
 
         private void DuplicateTab()
