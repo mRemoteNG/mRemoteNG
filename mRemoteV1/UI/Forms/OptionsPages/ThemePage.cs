@@ -12,10 +12,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
 
         #region Private Fields
-        private ThemeManager _themeManager;
-        private ThemeInfo _oriTheme;
-        private bool _oriActiveTheming;
-        List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
+        private readonly ThemeManager _themeManager;
+        private readonly ThemeInfo _oriTheme;
+        private readonly bool _oriActiveTheming;
+        private readonly List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
         #endregion
 
         public ThemePage()
@@ -173,21 +173,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
             var name = _themeManager.ActiveTheme.Name;
-            using (FrmInputBox frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name))
+            using (var frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name))
             {
-                DialogResult dr = frmInputBox.ShowDialog();
-                if (dr == DialogResult.OK)
+                var dr = frmInputBox.ShowDialog();
+                if (dr != DialogResult.OK) return;
+                if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
                 {
-                    if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
-                    {
-                        var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
-                        _themeManager.ActiveTheme = addedTheme;
-                        LoadSettings();
-                    }
-                    else
-                    {
-                        TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
-                    }
+                    var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
+                    _themeManager.ActiveTheme = addedTheme;
+                    LoadSettings();
+                }
+                else
+                {
+                    TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
                 }
             }
         }
