@@ -4,6 +4,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Text;
 
+#pragma warning disable 649
 #pragma warning disable 169
 
 namespace mRemoteNG.App
@@ -78,7 +79,7 @@ namespace mRemoteNG.App
         internal static extern IntPtr WindowFromPoint(Point point);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern int GetClassName(IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
+        internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int GetDlgCtrlID(IntPtr hwndCtl);
