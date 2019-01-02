@@ -131,7 +131,7 @@ namespace mRemoteNG.Connection.Protocol
 		public override void Close()
 		{
             /* only attempt this if we have a valid process object
-             * Non-integated tools will still call base.Close() and don't have a valid process object.
+             * Non-integrated tools will still call base.Close() and don't have a valid process object.
              * See Connect() above... This just muddies up the log.
              */
             if (_process != null)
