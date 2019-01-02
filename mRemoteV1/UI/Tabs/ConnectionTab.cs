@@ -13,69 +13,67 @@ namespace mRemoteNG.UI.Tabs
 {
     public partial class ConnectionTab : DockContent
     {
+        public bool silentClose { get; set; } = false;
          
         public ConnectionTab()
         {
             InitializeComponent();
-            FormClosing += formClosingEventHandler;
         }
 
 
-
-        #region TabEvents      
-        private void formClosingEventHandler(object sender, FormClosingEventArgs e)
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            try
-            {  
+            if(!silentClose)
+            { 
                 if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
                 {
-                    var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionMainInstruction, TabText), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                    var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionPanelMainInstruction, TabText), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
                     if (CTaskDialog.VerificationChecked)
                     {
                         Settings.Default.ConfirmCloseConnection--;
                     }
                     if (result == DialogResult.No)
                     {
-                        return;
+                        e.Cancel = true;
                     }
-                } 
-                var interfaceControl = (InterfaceControl)Tag;
-                interfaceControl.Protocol.Close();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("UI.Tab.CloseConnectionTab() failed", ex);
-            } 
-
-        }
-
-
-   /*     [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == (int)mRemoteNG.UI.Tabs.Msgs.WM_LBUTTONDBLCLK)
-            {
-                base.WndProc(ref m);
-
-                int index = HitTest();
-                if (DockPane.DockPanel.AllowEndUserDocking && index != -1)
-                {
-                    IDockContent content = Tabs[index].Content;
-                    if (content.DockHandler.CheckDockState(!content.DockHandler.IsFloat) != DockState.Unknown)
-                        content.DockHandler.IsFloat = !content.DockHandler.IsFloat;
+                    else
+                    {
+                        ((InterfaceControl)Tag).Protocol.Close();
+                    }
                 }
-
-                return;
             }
-
-            base.WndProc(ref m);
-            return;
+            else
+            {
+                ((InterfaceControl)Tag).Protocol.Close();
+            }
+            base.OnFormClosing(e);
         }
-        */
+
+        /*     [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+             protected override void WndProc(ref Message m)
+             {
+                 if (m.Msg == (int)mRemoteNG.UI.Tabs.Msgs.WM_LBUTTONDBLCLK)
+                 {
+                     base.WndProc(ref m);
+
+                     int index = HitTest();
+                     if (DockPane.DockPanel.AllowEndUserDocking && index != -1)
+                     {
+                         IDockContent content = Tabs[index].Content;
+                         if (content.DockHandler.CheckDockState(!content.DockHandler.IsFloat) != DockState.Unknown)
+                             content.DockHandler.IsFloat = !content.DockHandler.IsFloat;
+                     }
+
+                     return;
+                 }
+
+                 base.WndProc(ref m);
+                 return;
+             }
+             */
 
 
 
-        #endregion
 
         #region HelperFunctions  
         public void RefreshInterfaceController()
