@@ -261,7 +261,6 @@ namespace mRemoteNG.UI.Window
             Name = "Connection";
             TabText = @"UI.Window.Connection";
             Text = @"UI.Window.Connection";
-			this.Load += new System.EventHandler(this.ConnectionWindow_Load);
             cmenTab.ResumeLayout(false);
             ResumeLayout(false);
         }
