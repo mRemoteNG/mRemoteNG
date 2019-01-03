@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config;
@@ -12,7 +10,6 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -20,7 +17,6 @@ using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using ConnectionTab = mRemoteNG.UI.Tabs.ConnectionTab;
-using Message = System.Windows.Forms.Message; 
 
 namespace mRemoteNG.UI.Window
 {
@@ -31,7 +27,7 @@ namespace mRemoteNG.UI.Window
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
 
-        private  List<ConnectionTab> tabsReferences = new  List<ConnectionTab>();
+        private readonly List<ConnectionTab> tabsReferences = new  List<ConnectionTab>();
 
 
         #region Public Methods
@@ -75,11 +71,6 @@ namespace mRemoteNG.UI.Window
         {
             //Menu handle
             cmenTab.Opening += ShowHideMenuButtons;
-            // TabController.DoubleClickTab += TabController_DoubleClickTab;
-            // TabController.DragDrop += TabController_DrouagDrop;
-            // TabController.DragOver += TabController_DragOver;
-            // TabController.SelectionChanged += TabController_SelectionChanged;
-            //MouseUp += TabController_MouseUp;  
         }
 
         private void SetContextMenuEventHandlers()
@@ -138,8 +129,6 @@ namespace mRemoteNG.UI.Window
                 conTab.TabText = titleText;
                 conTab.TabPageContextMenuStrip = cmenTab;
 
-                 
-
                 //Fix MagicRemove, i dont see no icons -.-
                 conTab.Icon = ConnectionIcon.FromString(connectionInfo.Icon);
 
@@ -158,19 +147,6 @@ namespace mRemoteNG.UI.Window
             }
 
             return null;
-        }
-
-        public void UpdateSelectedConnection()
-        {
-          /*  if (TabController.SelectedTab == null)
-            {
-	            FrmMain.Default.SelectedConnection = null;
-            }
-            else
-            {
-                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-	            FrmMain.Default.SelectedConnection = interfaceControl?.Info;
-            }*/
         }
         #endregion
 
@@ -194,7 +170,6 @@ namespace mRemoteNG.UI.Window
             {
                 Runtime.MessageCollector.AddExceptionMessage("UI.Window.ConnectionWindow.ApplyTheme() failed", ex);
             }
-
 
             vsToolStripExtender = new VisualStudioToolStripExtender(components)
             {
@@ -301,47 +276,6 @@ namespace mRemoteNG.UI.Window
         {
             ResizeEnd?.Invoke(sender, e);
         }
-        #endregion
-         
-
-        #region TabController
- 
-
-        private void TabController_DoubleClickTab(TabControl sender, TabPage page)
-        {
-            _firstClickTicks = 0;
-            if (Settings.Default.DoubleClickOnTabClosesIt)
-            {
-               // CloseConnectionTab();
-            }
-        }
-
-        #region Drag and Drop
-        private void TabController_DragDrop(object sender, DragEventArgs e)
-        {
-            if (!(e.Data is OLVDataObject dropDataAsOlvDataObject)) return;
-            var modelObjects = dropDataAsOlvDataObject.ModelObjects;
-            foreach (var model in modelObjects)
-            {
-                var modelAsContainer = model as ContainerInfo;
-                var modelAsConnection = model as ConnectionInfo;
-                if (modelAsContainer != null)
-                    _connectionInitiator.OpenConnection(modelAsContainer);
-                else if (modelAsConnection != null)
-                    _connectionInitiator.OpenConnection(modelAsConnection);
-            }
-        }
-
-        private void TabController_DragOver(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.None;
-            var dropDataAsOlvDataObject = e.Data as OLVDataObject;
-            var modelObjects = dropDataAsOlvDataObject?.ModelObjects;
-            if (modelObjects == null) return;
-            if (!modelObjects.OfType<ConnectionInfo>().Any()) return;
-            e.Effect = DragDropEffects.Move;
-        }
-        #endregion
         #endregion
 
         #region Tab Menu
@@ -484,8 +418,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
-                if (vnc == null) return;
+                if (!(interfaceControl?.Protocol is ProtocolVNC vnc)) return;
                 cmenTabViewOnly.Checked = !cmenTabViewOnly.Checked;
                 vnc.ToggleViewOnly();
             }
@@ -693,7 +626,6 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
                 _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
-                _ignoreChangeSelectedTabClick = false;
             }
             catch (Exception ex)
             {
@@ -726,11 +658,9 @@ namespace mRemoteNG.UI.Window
                 using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle, ref newTitle))
                 {
                     var dr = frmInputBox.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        if(!string.IsNullOrEmpty(frmInputBox.returnValue))
-                            ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&"); 
-                    }
+                    if (dr != DialogResult.OK) return;
+                    if(!string.IsNullOrEmpty(frmInputBox.returnValue))
+                        ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&");
                 } 
             }
             catch (Exception ex)
@@ -751,138 +681,12 @@ namespace mRemoteNG.UI.Window
         public void Prot_Event_Closed(object sender)
         {
             var protocolBase = sender as ProtocolBase;
-            if (protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)
-                if(!tabPage.Disposing)
-                {
-                    tabPage.silentClose = true;
-                    Invoke(new Action(() => tabPage.Close()));
-                }
-                    
+            if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
+            if (tabPage.Disposing) return;
+            tabPage.silentClose = true;
+            Invoke(new Action(() => tabPage.Close()));
+
         }
         #endregion
-
-        #region Tabs
-
-        private bool _ignoreChangeSelectedTabClick;
-        private void TabController_SelectionChanged(object sender, EventArgs e)
-        {
-            _ignoreChangeSelectedTabClick = true;
-            UpdateSelectedConnection();
-            FocusInterfaceController();
-            RefreshInterfaceController();
-        }
-
-        private int _firstClickTicks;
-        private Rectangle _doubleClickRectangle;
-        private void TabController_MouseUp(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (!(NativeMethods.GetForegroundWindow() == FrmMain.Default.Handle) && !_ignoreChangeSelectedTabClick)
-                {
-                    var clickedTab = connDock.ActivePane.GetChildAtPoint(e.Location);
-                    if (clickedTab != null && connDock.ActivePane != clickedTab)
-                    {
-                        NativeMethods.SetForegroundWindow(Handle);
-                        //connDock.active = clickedTab; //Fix MagicRemove , this doesnt work this way now
-                    }
-                }
-                _ignoreChangeSelectedTabClick = false;
-
-                switch (e.Button)
-                {
-                    case MouseButtons.Left:
-                        var currentTicks = Environment.TickCount;
-                        var elapsedTicks = currentTicks - _firstClickTicks;
-                        if (elapsedTicks > SystemInformation.DoubleClickTime || !_doubleClickRectangle.Contains(MousePosition))
-                        {
-                            _firstClickTicks = currentTicks;
-                            _doubleClickRectangle = new Rectangle(MousePosition.X - SystemInformation.DoubleClickSize.Width / 2, MousePosition.Y - SystemInformation.DoubleClickSize.Height / 2, SystemInformation.DoubleClickSize.Width, SystemInformation.DoubleClickSize.Height);
-                            FocusInterfaceController();
-                        }
-                       /* else
-                        {
-                            TabController.OnDoubleClickTab(TabController.SelectedTab);
-                        }*/
-                        break;
-                    case MouseButtons.Middle:
-                        var activeTab = (ConnectionTab)GetInterfaceControl()?.Parent;
-                        if (activeTab != null) activeTab.Close();
-                        break;
-                    case MouseButtons.Right:
-                        if (connDock.ActivePane?.Tag == null) return;
-                       // ShowHideMenuButtons();
-                        NativeMethods.SetForegroundWindow(Handle);
-                        cmenTab.Show(connDock, e.Location);
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("TabController_MouseUp (UI.Window.ConnectionWindow) failed", ex);
-            }
-        }
-
-        private void FocusInterfaceController()
-        {/*
-            try
-            {
-                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                interfaceControl?.Protocol?.Focus();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("FocusIC (UI.Window.ConnectionWindow) failed", ex);
-            }*/
-        }
-
-        public void RefreshInterfaceController()
-        {/*
-            try
-            {
-                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                if (interfaceControl?.Info.Protocol == ProtocolType.VNC)
-                    ((ProtocolVNC)interfaceControl.Protocol).RefreshScreen();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("RefreshIC (UI.Window.Connection) failed", ex);
-            }*/
-        }
-        #endregion
-
-        #region Window Overrides
-        protected override void WndProc(ref Message m)
-        {
-            try
-            {
-                if (m.Msg == NativeMethods.WM_MOUSEACTIVATE)
-                {
-                    var selectedTab = connDock.ActivePane;
-                    if (selectedTab == null) return;
-                    {
-                        var tabClientRectangle = selectedTab.RectangleToScreen(selectedTab.ClientRectangle);
-                        if (tabClientRectangle.Contains(MousePosition))
-                        {
-                            var interfaceControl = selectedTab.Tag as InterfaceControl;
-                            if (interfaceControl?.Info?.Protocol == ProtocolType.RDP)
-                            {
-                                interfaceControl.Protocol.Focus();
-                                return; // Do not pass to base class
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Connection.WndProc() failed.", ex);
-            }
-
-            base.WndProc(ref m);
-        }
-        #endregion
-
-       
     }
 }
