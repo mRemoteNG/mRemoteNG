@@ -57,7 +57,7 @@ namespace mRemoteNG.Themes
             return null;
         }
 
-        //THe manager precharges all the themes at once
+        //The manager precharges all the themes at once
         public  List<ThemeInfo> LoadThemes()
         {
             if (themes != null) return themes.Values.OfType<ThemeInfo>().ToList();
@@ -83,8 +83,6 @@ namespace mRemoteNG.Themes
                         file.CopyTo(Path.Combine(themePath, file.Name), true);
                 }
 
-
-
                 //Check that theme folder exist before trying to load themes
                 if (Directory.Exists(themePath))
                 {
@@ -103,7 +101,6 @@ namespace mRemoteNG.Themes
                             themes.Add(extTheme.Name, extTheme);
                         }
                     }
-
 
                     //Load the embedded themes, extended palettes are taken from the vs2015 themes, trying to match the color theme
                     var vs2003 = new ThemeInfo("DPSvs2003", new VS2003Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2003, ((ThemeInfo)themes["vs2015light"]).ExtendedPalette);
@@ -223,7 +220,7 @@ namespace mRemoteNG.Themes
             }
         }
 
-        public ThemeInfo DefaultTheme => (ThemeInfo) themes["vs2015light"];
+        public ThemeInfo DefaultTheme => (ThemeInfo) themes["DPSvs2015Light"];
 
         public ThemeInfo ActiveTheme
 		{
@@ -231,7 +228,7 @@ namespace mRemoteNG.Themes
             get => ThemingActive == false ? DefaultTheme : _activeTheme;
             set
 			{
-                //You can only enable theming if there are themes laoded
+                //You can only enable theming if there are themes loaded
 			    if (value == null) return;
 			    _activeTheme = value;
 			    Settings.Default.ThemeName = value.Name;

@@ -160,7 +160,11 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ThemingActive) return;
+            if (!ThemeManager.getInstance().ThemingActive)
+            {
+                connDock.Theme = ThemeManager.getInstance().DefaultTheme.Theme;
+                return;
+            }
             base.ApplyTheme();
             try
             {

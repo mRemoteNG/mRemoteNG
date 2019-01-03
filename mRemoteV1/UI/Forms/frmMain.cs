@@ -260,7 +260,11 @@ namespace mRemoteNG.UI.Forms
         //Theming support
         private void ApplyTheme()
 		{
-		    if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ThemingActive)
+            {
+                pnlDock.Theme = _themeManager.DefaultTheme.Theme;
+                return;
+            }
 
 		    try
 		    {

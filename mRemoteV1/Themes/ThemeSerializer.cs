@@ -48,7 +48,7 @@ namespace mRemoteNG.Themes
 		{
             var bytes = File.ReadAllBytes(filename);
             //Load the dockpanel part
-            var themeBaseLoad= new MremoteNGThemeBase(bytes);
+            var themeBaseLoad = new MremoteNGThemeBase(bytes);
             //Load the mremote part
 		    //Cause we cannot default the theme for the default theme
             var extColorLoader = new MremoteNGPaletteManipulator(bytes, defaultTheme?.ExtendedPalette); 
