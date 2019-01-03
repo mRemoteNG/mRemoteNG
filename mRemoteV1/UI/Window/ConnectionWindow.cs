@@ -646,7 +646,7 @@ namespace mRemoteNG.UI.Window
                 }
             }
 
-            foreach (ConnectionTab tab in tabsReferences )
+            foreach (var tab in tabsReferences )
             {
                 if (selectedTab != tab)
                 { 
@@ -662,19 +662,20 @@ namespace mRemoteNG.UI.Window
             { 
                 var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
                 if (selectedTab == null) return;
-                var dockPane = (DockPane)selectedTab.Pane;
+                var dockPane = selectedTab.Pane;
 
-                bool pastTabToKeepAlive= false;
-                List<ConnectionTab> connectionsToClose = new List<ConnectionTab>();
-                foreach (ConnectionTab tab in dockPane.Contents )
+                var pastTabToKeepAlive= false;
+                var connectionsToClose = new List<ConnectionTab>();
+                foreach (var dockContent in dockPane.Contents )
                 {
+                    var tab = (ConnectionTab) dockContent;
                     if (pastTabToKeepAlive)
                         connectionsToClose.Add(tab);
 
                     if (selectedTab == tab)
                         pastTabToKeepAlive = true;
                 }
-                foreach (ConnectionTab tab in connectionsToClose)
+                foreach (var tab in connectionsToClose)
                 {
                     tab.Close();
                 }
@@ -722,9 +723,9 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
                 var newTitle = ((ConnectionTab)interfaceControl.Parent).TabText;
-                using (FrmInputBox frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle, ref newTitle))
+                using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle, ref newTitle))
                 {
-                    DialogResult dr = frmInputBox.ShowDialog();
+                    var dr = frmInputBox.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
                         if(!string.IsNullOrEmpty(frmInputBox.returnValue))
