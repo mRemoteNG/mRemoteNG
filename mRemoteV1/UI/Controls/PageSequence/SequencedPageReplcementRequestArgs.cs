@@ -18,9 +18,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
 
         public SequencedPageReplcementRequestArgs(SequencedControl newControl, RelativePagePosition pageToReplace)
         {
-            if (newControl == null)
-                throw new ArgumentNullException(nameof(newControl));
-            NewControl = newControl;
+            NewControl = newControl ?? throw new ArgumentNullException(nameof(newControl));
             PagePosition = pageToReplace;
         }
     }
