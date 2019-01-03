@@ -29,7 +29,7 @@ namespace mRemoteNG.UI.Tabs
 
             protected internal bool Flag { get; set; }
 
-            private Rectangle? _rect;
+            //private Rectangle? _rect;
 
             
         }
@@ -45,7 +45,6 @@ namespace mRemoteNG.UI.Tabs
             private Bitmap m_image0, m_image1;
 
             public InertButton(Bitmap image0, Bitmap image1)
-                : base()
             {
                 m_image0 = image0;
                 m_image1 = image1;
@@ -131,10 +130,7 @@ namespace mRemoteNG.UI.Tabs
         {
             get
             {
-                if (Appearance == DockPane.AppearanceStyle.Document)
-                    return TabStripRectangle_Document;
-                else
-                    return TabStripRectangle_ToolWindow;
+                return Appearance == DockPane.AppearanceStyle.Document ? TabStripRectangle_Document : TabStripRectangle_ToolWindow;
             }
         }
 
@@ -185,16 +181,7 @@ namespace mRemoteNG.UI.Tabs
 
         public int SelectMenuMargin { get; set; } = 5;
 
-        private static Bitmap ImageButtonClose
-        {
-            get
-            {
-                if (m_imageButtonClose == null)
-                    m_imageButtonClose = Resources.TabExit;
-
-                return m_imageButtonClose;
-            }
-        }
+        private static Bitmap ImageButtonClose => m_imageButtonClose ?? (m_imageButtonClose = Resources.TabExit);
 
         private InertButton ButtonClose
         {
@@ -212,28 +199,17 @@ namespace mRemoteNG.UI.Tabs
 
         private static Bitmap ImageButtonWindowList => m_imageButtonWindowList ?? (m_imageButtonWindowList = Resources.TabOption);
 
-        private static Bitmap ImageButtonWindowListOverflow
-        {
-            get
-            {
-                if (m_imageButtonWindowListOverflow == null)
-                    m_imageButtonWindowListOverflow = Resources.TabOverflow;
-
-                return m_imageButtonWindowListOverflow;
-            }
-        }
+        private static Bitmap ImageButtonWindowListOverflow => m_imageButtonWindowListOverflow ?? (m_imageButtonWindowListOverflow = Resources.TabOverflow);
 
         private InertButton ButtonWindowList
         {
             get
             {
-                if (m_buttonWindowList == null)
-                {
-                    m_buttonWindowList = new InertButton(ImageButtonWindowList, ImageButtonWindowListOverflow);
-                    m_toolTip.SetToolTip(m_buttonWindowList, ToolTipSelect);
-                    m_buttonWindowList.Click += WindowList_Click;
-                    Controls.Add(m_buttonWindowList);
-                }
+                if (m_buttonWindowList != null) return m_buttonWindowList;
+                m_buttonWindowList = new InertButton(ImageButtonWindowList, ImageButtonWindowListOverflow);
+                m_toolTip.SetToolTip(m_buttonWindowList, ToolTipSelect);
+                m_buttonWindowList.Click += WindowList_Click;
+                Controls.Add(m_buttonWindowList);
 
                 return m_buttonWindowList;
             }
@@ -243,7 +219,7 @@ namespace mRemoteNG.UI.Tabs
 
         private IContainer Components { get; }
 
-        public Font TextFont => DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont;
+        private Font TextFont => DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont;
 
         private Font BoldFont
         {
@@ -290,10 +266,7 @@ namespace mRemoteNG.UI.Tabs
                     return;
 
                 m_documentTabsOverflow = value;
-                if (value)
-                    ButtonWindowList.ImageCategory = 1;
-                else
-                    ButtonWindowList.ImageCategory = 0;
+                ButtonWindowList.ImageCategory = value ? 1 : 0;
             }
         }
 
@@ -435,12 +408,9 @@ namespace mRemoteNG.UI.Tabs
             base.Dispose(disposing);
         }
 
-        protected  override int MeasureHeight()
+        protected override int MeasureHeight()
         {
-            if (Appearance == DockPane.AppearanceStyle.ToolWindow)
-                return MeasureHeight_ToolWindow();
-            else
-                return MeasureHeight_Document();
+            return Appearance == DockPane.AppearanceStyle.ToolWindow ? MeasureHeight_ToolWindow() : MeasureHeight_Document();
         }
 
         private int MeasureHeight_ToolWindow()
@@ -492,7 +462,7 @@ namespace mRemoteNG.UI.Tabs
             var endColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Background");  
             var gradientMode = gradient.LinearGradientMode;
 
-            DrawingRoutines.SafelyDrawLinearGradient(rect, startColor, endColor, gradientMode, e.Graphics);
+            rect.SafelyDrawLinearGradient(startColor, endColor, gradientMode, e.Graphics);
             base.OnPaint(e);
             CalculateTabs();
             if (Appearance == DockPane.AppearanceStyle.Document && DockPane.ActiveContent != null)
@@ -512,12 +482,7 @@ namespace mRemoteNG.UI.Tabs
 
         public override GraphicsPath GetOutline(int index)
         {
-
-            if (Appearance == DockPane.AppearanceStyle.Document)
-                return GetOutline_Document(index);
-            else
-                return GetOutline_ToolWindow(index);
-
+            return Appearance == DockPane.AppearanceStyle.Document ? GetOutline_Document(index) : GetOutline_ToolWindow(index);
         }
 
         private GraphicsPath GetOutline_Document(int index)
@@ -592,8 +557,9 @@ namespace mRemoteNG.UI.Tabs
 
             // Calculate tab widths
             var countTabs = Tabs.Count;
-            foreach (MremoteNGTab tab in Tabs)
+            foreach (var tab1 in Tabs)
             {
+                var tab = (MremoteNGTab) tab1;
                 tab.MaxWidth = GetMaxTabWidth(Tabs.IndexOf(tab));
                 tab.Flag = false;
             }
@@ -607,8 +573,9 @@ namespace mRemoteNG.UI.Tabs
             for (anyWidthWithinAverage = true; anyWidthWithinAverage && remainedTabs > 0;)
             {
                 anyWidthWithinAverage = false;
-                foreach (MremoteNGTab tab in Tabs)
+                foreach (var tab1 in Tabs)
                 {
+                    var tab = (MremoteNGTab) tab1;
                     if (tab.Flag)
                         continue;
 
@@ -627,8 +594,9 @@ namespace mRemoteNG.UI.Tabs
             if (remainedTabs > 0)
             {
                 var roundUpWidth = totalWidth - totalAllocatedWidth - averageWidth * remainedTabs;
-                foreach (MremoteNGTab tab in Tabs)
+                foreach (var tab1 in Tabs)
                 {
+                    var tab = (MremoteNGTab) tab1;
                     if (tab.Flag)
                         continue;
 
@@ -645,8 +613,9 @@ namespace mRemoteNG.UI.Tabs
 
             // Set the X position of the tabs
             var x = rectTabStrip.X + ToolWindowStripGapLeft;
-            foreach (MremoteNGTab tab in Tabs)
+            foreach (var tab1 in Tabs)
             {
+                var tab = (MremoteNGTab) tab1;
                 tab.TabX = x;
                 x += tab.TabWidth;
             }
@@ -735,8 +704,9 @@ namespace mRemoteNG.UI.Tabs
                 m_startDisplayingTab = 0;
                 FirstDisplayingTab = 0;
                 x = rectTabStrip.X + rectTabStrip.Height / 2;
-                foreach (MremoteNGTab tab in Tabs)
+                foreach (var tab1 in Tabs)
                 {
+                    var tab = (MremoteNGTab) tab1;
                     tab.TabX = x;
                     x += tab.TabWidth;
                 }
@@ -1037,7 +1007,7 @@ namespace mRemoteNG.UI.Tabs
                     // Draws the top horizontal line (short side)
                     GraphicsPath.AddLine(rect.Left + rect.Height / 2 + curveSize / 2, rect.Top, rect.Right - curveSize / 2, rect.Top);
 
-                    // Draws the rounded corner oppposite the angled side
+                    // Draws the rounded corner opposite the angled side
                     GraphicsPath.AddArc(new Rectangle(rect.Right - curveSize, rect.Top, curveSize, curveSize), -90, 90);
                 }
             }
@@ -1193,10 +1163,8 @@ namespace mRemoteNG.UI.Tabs
                 g.DrawPath(PenDocumentTabActiveBorder, path);
 
                 var textColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Foreground");
-                if (DockPane.IsActiveDocumentPane)
-                    TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, BoldFont, rectText, textColor, DocumentTextFormat);
-                else
-                    TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, textColor, DocumentTextFormat);
+                TextRenderer.DrawText(g, tab.Content.DockHandler.TabText,
+                    DockPane.IsActiveDocumentPane ? BoldFont : TextFont, rectText, textColor, DocumentTextFormat);
             }
             else
             {
@@ -1217,8 +1185,9 @@ namespace mRemoteNG.UI.Tabs
         private void WindowList_Click(object sender, EventArgs e)
         {
             SelectMenu.Items.Clear();
-            foreach (MremoteNGTab tab in Tabs)
+            foreach (var tab1 in Tabs)
             {
+                var tab = (MremoteNGTab) tab1;
                 var content = tab.Content;
                 var item = SelectMenu.Items.Add(content.DockHandler.TabText, content.DockHandler.Icon.ToBitmap());
                 item.Tag = tab.Content;
