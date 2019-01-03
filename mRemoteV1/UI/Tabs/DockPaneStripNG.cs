@@ -126,13 +126,7 @@ namespace mRemoteNG.UI.Tabs
 
         #region Properties
 
-        private Rectangle TabStripRectangle
-        {
-            get
-            {
-                return Appearance == DockPane.AppearanceStyle.Document ? TabStripRectangle_Document : TabStripRectangle_ToolWindow;
-            }
-        }
+        private Rectangle TabStripRectangle => Appearance == DockPane.AppearanceStyle.Document ? TabStripRectangle_Document : TabStripRectangle_ToolWindow;
 
         private Rectangle TabStripRectangle_ToolWindow
         {
@@ -306,14 +300,13 @@ namespace mRemoteNG.UI.Tabs
         {
             get
             {
-                var textFormat = TextFormatFlags.EndEllipsis |
-                    TextFormatFlags.HorizontalCenter |
-                    TextFormatFlags.SingleLine |
-                    TextFormatFlags.VerticalCenter;
-                if (RightToLeft == RightToLeft.Yes)
-                    return textFormat | TextFormatFlags.RightToLeft | TextFormatFlags.Right;
-                else
-                    return textFormat;
+                const TextFormatFlags textFormat = TextFormatFlags.EndEllipsis |
+                                                   TextFormatFlags.HorizontalCenter |
+                                                   TextFormatFlags.SingleLine |
+                                                   TextFormatFlags.VerticalCenter;
+                return RightToLeft == RightToLeft.Yes
+                    ? textFormat | TextFormatFlags.RightToLeft | TextFormatFlags.Right
+                    : textFormat;
             }
         }
 
@@ -325,14 +318,11 @@ namespace mRemoteNG.UI.Tabs
         {
             get
             {
-                var textFormat = TextFormatFlags.EndEllipsis |
-                    TextFormatFlags.SingleLine |
-                    TextFormatFlags.VerticalCenter |
-                    TextFormatFlags.HorizontalCenter;
-                if (RightToLeft == RightToLeft.Yes)
-                    return textFormat | TextFormatFlags.RightToLeft;
-                else
-                    return textFormat;
+                const TextFormatFlags textFormat = TextFormatFlags.EndEllipsis |
+                                                   TextFormatFlags.SingleLine |
+                                                   TextFormatFlags.VerticalCenter |
+                                                   TextFormatFlags.HorizontalCenter;
+                return RightToLeft == RightToLeft.Yes ? textFormat | TextFormatFlags.RightToLeft : textFormat;
             }
         }
 
@@ -383,8 +373,6 @@ namespace mRemoteNG.UI.Tabs
                 ControlStyles.OptimizedDoubleBuffer, true);
 
             SuspendLayout();
-
-             
 
             Components = new System.ComponentModel.Container();
             m_toolTip = new ToolTip(Components);
