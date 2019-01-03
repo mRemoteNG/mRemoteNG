@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.Themes
 {
-    using mRemoteNG.UI.Tabs;
+    using UI.Tabs;
     using WeifenLuo.WinFormsUI.Docking;
     using WeifenLuo.WinFormsUI.ThemeVS2015;
 
@@ -23,7 +23,7 @@
          
     }
 
-    public  class MremoteDockPaneStripFactory : WeifenLuo.WinFormsUI.Docking.DockPanelExtender.IDockPaneStripFactory
+    public  class MremoteDockPaneStripFactory : DockPanelExtender.IDockPaneStripFactory
     {
         public DockPaneStripBase CreateDockPaneStrip(DockPane pane)
         {
