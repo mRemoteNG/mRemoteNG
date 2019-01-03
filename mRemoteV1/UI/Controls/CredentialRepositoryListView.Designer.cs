@@ -15,12 +15,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.objectListView1 = new Base.NGListView();
+            this.objectListView1 = new mRemoteNG.UI.Controls.Base.NGListView();
             this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnProvider = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnIsLoaded = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,6 +41,7 @@
             this.objectListView1.CopySelectionOnControlC = false;
             this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
             this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.objectListView1.DecorateLines = true;
             this.objectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.objectListView1.FullRowSelect = true;
             this.objectListView1.HideSelection = false;
@@ -73,10 +74,6 @@
             this.olvColumnIsLoaded.IsEditable = false;
             this.olvColumnIsLoaded.Text = "Loaded";
             // 
-            // olvColumnId
-            // 
-            this.olvColumnId.Text = "ID";
-            // 
             // olvColumnSource
             // 
             this.olvColumnSource.AspectName = "";
@@ -84,11 +81,16 @@
             this.olvColumnSource.Groupable = false;
             this.olvColumnSource.Text = "Source";
             // 
+            // olvColumnId
+            // 
+            this.olvColumnId.Text = "ID";
+            // 
             // CredentialRepositoryListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.objectListView1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CredentialRepositoryListView";
             this.Size = new System.Drawing.Size(308, 171);
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();

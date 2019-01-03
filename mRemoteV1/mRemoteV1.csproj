@@ -787,17 +787,29 @@
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordComboBox.resx">
+      <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordListBox.resx">
+      <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRecordListView.resx">
       <DependentUpon>CredentialRecordListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRepositoryListView.resx">
       <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\HeadlessTabControl.resx">
+      <DependentUpon>HeadlessTabControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\SecureTextBox.resx">
+      <DependentUpon>SecureTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FrmChoosePanel.resx">
       <DependentUpon>FrmChoosePanel.cs</DependentUpon>
