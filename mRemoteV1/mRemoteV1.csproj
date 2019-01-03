@@ -814,6 +814,9 @@
     <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
       <DependentUpon>NGTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\ConnectionTree\ConnectionTree.resx">
+      <DependentUpon>ConnectionTree.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRecordComboBox.resx">
       <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -825,6 +828,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRepositoryListView.resx">
       <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.resx">
+      <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\HeadlessTabControl.resx">
       <DependentUpon>HeadlessTabControl.cs</DependentUpon>
