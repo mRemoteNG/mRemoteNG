@@ -973,6 +973,9 @@
     <EmbeddedResource Include="UI\Forms\UnhandledExceptionWindow.resx">
       <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaskDialog\CommandButton.resx">
+      <DependentUpon>CommandButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\TaskDialog\frmTaskDialog.resx">
       <DependentUpon>frmTaskDialog.cs</DependentUpon>
     </EmbeddedResource>
