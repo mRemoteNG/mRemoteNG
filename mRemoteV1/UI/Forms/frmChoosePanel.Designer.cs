@@ -79,7 +79,7 @@ namespace mRemoteNG.UI.Forms
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // frmChoosePanel
+            // FrmChoosePanel
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -89,11 +89,12 @@ namespace mRemoteNG.UI.Forms
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.cbPanels);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = global::mRemoteNG.Resources.Panels_Icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmChoosePanel";
+            this.Name = "FrmChoosePanel";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Panel";

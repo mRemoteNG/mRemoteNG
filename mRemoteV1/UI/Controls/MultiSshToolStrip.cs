@@ -10,14 +10,13 @@ namespace mRemoteNG.UI.Controls
 		private IContainer components;
 		private ToolStripLabel _lblMultiSsh;
 		private ToolStripTextBox _txtMultiSsh;
-		private MultiSSHController _multiSshController;
-	    private readonly DisplayProperties _display;
-	    private ThemeManager _themeManager;
+        // ReSharper disable once NotAccessedField.Local
+        private MultiSSHController _multiSshController;
+	    private readonly ThemeManager _themeManager;
 
 
         public MultiSshToolStrip()
 		{
-            _display = new DisplayProperties();
 			InitializeComponent();
 		    _themeManager = ThemeManager.getInstance();
 		    _themeManager.ThemeChanged += ApplyTheme;
@@ -41,7 +40,7 @@ namespace mRemoteNG.UI.Controls
 			// txtMultiSSH
 			// 
 			_txtMultiSsh.Name = "_txtMultiSsh";
-			_txtMultiSsh.Size = new System.Drawing.Size(_display.ScaleWidth(300), 25);
+			_txtMultiSsh.Size = new System.Drawing.Size(new DisplayProperties().ScaleWidth(300), 25);
 			_txtMultiSsh.ToolTipText = "Press ENTER to send. Ctrl+C is sent immediately.";
 
 			Items.AddRange(new ToolStripItem[] {

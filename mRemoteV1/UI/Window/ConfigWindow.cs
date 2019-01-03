@@ -423,14 +423,11 @@ namespace mRemoteNG.UI.Window
 
                 _btnIcon.Image = null;
 
-			    var gridObjectAsConnectionInfo = propertyGridObject as ConnectionInfo;
-			    if (gridObjectAsConnectionInfo != null) //CONNECTION INFO
+                if (propertyGridObject is ConnectionInfo gridObjectAsConnectionInfo) //CONNECTION INFO
 				{
-                    var gridObjectAsContainerInfo = propertyGridObject as ContainerInfo;
-				    if (gridObjectAsContainerInfo != null) //CONTAINER
+                    if (propertyGridObject is ContainerInfo gridObjectAsContainerInfo) //CONTAINER
                     {
-                        var gridObjectAsRootNodeInfo = propertyGridObject as RootNodeInfo;
-                        if (gridObjectAsRootNodeInfo != null) // ROOT
+                        if (propertyGridObject is RootNodeInfo gridObjectAsRootNodeInfo) // ROOT
 					    {
 					        // ReSharper disable once SwitchStatementMissingSomeCases
                             switch (gridObjectAsRootNodeInfo.Type)
@@ -705,8 +702,7 @@ namespace mRemoteNG.UI.Window
         private void UpdateConnectionInfoNode(PropertyValueChangedEventArgs e)
         {
             Debug.WriteLine("update config");
-            var selectedGridObject = _pGrid.SelectedObject as ConnectionInfo;
-            if (selectedGridObject == null) return;
+            if (!(_pGrid.SelectedObject is ConnectionInfo selectedGridObject)) return;
             if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
             {
                 selectedGridObject.SetDefaultPort();
@@ -1442,8 +1438,7 @@ namespace mRemoteNG.UI.Window
 		
 		private void btnShowProperties_Click(object sender, EventArgs e)
 		{
-		    var o = _pGrid.SelectedObject as ConnectionInfoInheritance;
-		    if (o != null)
+            if (_pGrid.SelectedObject is ConnectionInfoInheritance o)
 			{
 				if (_pGrid.SelectedObject is DefaultConnectionInheritance)
 				{
@@ -1619,8 +1614,7 @@ namespace mRemoteNG.UI.Window
 			{
                 _btnHostStatus.Image = Resources.HostStatus_Check;
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
-			    var info = connectionInfo as ConnectionInfo;
-                if (info == null) return;
+                if (!(connectionInfo is ConnectionInfo info)) return;
                 if (info.IsContainer) return;
 
                 _btnHostStatus.Tag = "checking";

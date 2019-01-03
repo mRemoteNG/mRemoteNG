@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Connection;
 
 namespace mRemoteNG.UI.Menu
 {

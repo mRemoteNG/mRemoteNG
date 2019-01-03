@@ -66,7 +66,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(534, 311);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(534, 334);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // labelExceptionCaught
@@ -84,9 +84,9 @@
             // 
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonClose.Location = new System.Drawing.Point(427, 284);
+            this.buttonClose.Location = new System.Drawing.Point(427, 306);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(74, 24);
+            this.buttonClose.Size = new System.Drawing.Size(74, 25);
             this.buttonClose.TabIndex = 1;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -96,19 +96,19 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxStackTrace, 2);
             this.textBoxStackTrace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxStackTrace.Location = new System.Drawing.Point(33, 128);
+            this.textBoxStackTrace.Location = new System.Drawing.Point(33, 132);
             this.textBoxStackTrace.Multiline = true;
             this.textBoxStackTrace.Name = "textBoxStackTrace";
             this.textBoxStackTrace.ReadOnly = true;
             this.textBoxStackTrace.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxStackTrace.Size = new System.Drawing.Size(468, 150);
+            this.textBoxStackTrace.Size = new System.Drawing.Size(468, 168);
             this.textBoxStackTrace.TabIndex = 0;
             // 
             // labelStackTraceHeader
             // 
             this.labelStackTraceHeader.AutoSize = true;
             this.labelStackTraceHeader.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelStackTraceHeader.Location = new System.Drawing.Point(33, 112);
+            this.labelStackTraceHeader.Location = new System.Drawing.Point(33, 116);
             this.labelStackTraceHeader.Name = "labelStackTraceHeader";
             this.labelStackTraceHeader.Size = new System.Drawing.Size(388, 13);
             this.labelStackTraceHeader.TabIndex = 4;
@@ -133,15 +133,15 @@
             this.textBoxExceptionMessage.Name = "textBoxExceptionMessage";
             this.textBoxExceptionMessage.ReadOnly = true;
             this.textBoxExceptionMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxExceptionMessage.Size = new System.Drawing.Size(468, 33);
+            this.textBoxExceptionMessage.Size = new System.Drawing.Size(468, 37);
             this.textBoxExceptionMessage.TabIndex = 6;
             // 
             // buttonCopyAll
             // 
             this.buttonCopyAll.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonCopyAll.Location = new System.Drawing.Point(346, 284);
+            this.buttonCopyAll.Location = new System.Drawing.Point(346, 306);
             this.buttonCopyAll.Name = "buttonCopyAll";
-            this.buttonCopyAll.Size = new System.Drawing.Size(75, 24);
+            this.buttonCopyAll.Size = new System.Drawing.Size(75, 25);
             this.buttonCopyAll.TabIndex = 7;
             this.buttonCopyAll.Text = "Copy All";
             this.buttonCopyAll.UseVisualStyleBackColor = true;
@@ -163,9 +163,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(534, 311);
+            this.ClientSize = new System.Drawing.Size(534, 334);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimumSize = new System.Drawing.Size(550, 350);
             this.Name = "UnhandledExceptionWindow";
             this.ShowInTaskbar = false;

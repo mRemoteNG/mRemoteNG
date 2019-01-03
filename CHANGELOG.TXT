@@ -13,6 +13,8 @@ Features/Enhancements:
 
 Fixes:
 ------
+#1245: Options form takes nearly 3 seconds to appear when Theming is active
+#1240: Theming problem with NGNumericUpDown
 #1238: Connection panel not translated until opened for the first time
 #1186: Fixed several dialog boxes to use localized button text
 #1170: Prevent Options window from showing up in taskbar

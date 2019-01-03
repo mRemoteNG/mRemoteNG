@@ -64,7 +64,7 @@
             this.radCredentialsCustom.AutoSize = true;
             this.radCredentialsCustom.Location = new System.Drawing.Point(3, 62);
             this.radCredentialsCustom.Name = "radCredentialsCustom";
-            this.radCredentialsCustom.Size = new System.Drawing.Size(87, 17);
+            this.radCredentialsCustom.Size = new System.Drawing.Size(98, 17);
             this.radCredentialsCustom.TabIndex = 3;
             this.radCredentialsCustom.Text = "the following:";
             this.radCredentialsCustom.UseVisualStyleBackColor = true;
@@ -75,7 +75,7 @@
             this.lblDefaultCredentials.AutoSize = true;
             this.lblDefaultCredentials.Location = new System.Drawing.Point(0, 0);
             this.lblDefaultCredentials.Name = "lblDefaultCredentials";
-            this.lblDefaultCredentials.Size = new System.Drawing.Size(257, 13);
+            this.lblDefaultCredentials.Size = new System.Drawing.Size(279, 13);
             this.lblDefaultCredentials.TabIndex = 0;
             this.lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:";
             // 
@@ -85,7 +85,7 @@
             this.radCredentialsNoInfo.Checked = true;
             this.radCredentialsNoInfo.Location = new System.Drawing.Point(3, 16);
             this.radCredentialsNoInfo.Name = "radCredentialsNoInfo";
-            this.radCredentialsNoInfo.Size = new System.Drawing.Size(91, 17);
+            this.radCredentialsNoInfo.Size = new System.Drawing.Size(103, 17);
             this.radCredentialsNoInfo.TabIndex = 1;
             this.radCredentialsNoInfo.TabStop = true;
             this.radCredentialsNoInfo.Text = "no information";
@@ -96,7 +96,7 @@
             this.radCredentialsWindows.AutoSize = true;
             this.radCredentialsWindows.Location = new System.Drawing.Point(3, 39);
             this.radCredentialsWindows.Name = "radCredentialsWindows";
-            this.radCredentialsWindows.Size = new System.Drawing.Size(227, 17);
+            this.radCredentialsWindows.Size = new System.Drawing.Size(252, 17);
             this.radCredentialsWindows.TabIndex = 2;
             this.radCredentialsWindows.Text = "my current credentials (windows logon info)";
             this.radCredentialsWindows.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             this.txtCredentialsDomain.Enabled = false;
             this.txtCredentialsDomain.Location = new System.Drawing.Point(126, 138);
             this.txtCredentialsDomain.Name = "txtCredentialsDomain";
-            this.txtCredentialsDomain.Size = new System.Drawing.Size(150, 20);
+            this.txtCredentialsDomain.Size = new System.Drawing.Size(150, 22);
             this.txtCredentialsDomain.TabIndex = 9;
             // 
             // lblCredentialsUsername
@@ -126,7 +126,7 @@
             this.txtCredentialsPassword.Enabled = false;
             this.txtCredentialsPassword.Location = new System.Drawing.Point(126, 112);
             this.txtCredentialsPassword.Name = "txtCredentialsPassword";
-            this.txtCredentialsPassword.Size = new System.Drawing.Size(150, 20);
+            this.txtCredentialsPassword.Size = new System.Drawing.Size(150, 22);
             this.txtCredentialsPassword.TabIndex = 7;
             this.txtCredentialsPassword.UseSystemPasswordChar = true;
             // 
@@ -146,7 +146,7 @@
             this.txtCredentialsUsername.Enabled = false;
             this.txtCredentialsUsername.Location = new System.Drawing.Point(126, 86);
             this.txtCredentialsUsername.Name = "txtCredentialsUsername";
-            this.txtCredentialsUsername.Size = new System.Drawing.Size(150, 20);
+            this.txtCredentialsUsername.Size = new System.Drawing.Size(150, 22);
             this.txtCredentialsUsername.TabIndex = 5;
             // 
             // lblCredentialsDomain
@@ -164,6 +164,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlDefaultCredentials);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CredentialsPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.pnlDefaultCredentials.ResumeLayout(false);

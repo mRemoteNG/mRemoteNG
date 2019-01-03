@@ -29,7 +29,7 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 
-        internal new void ApplyTheme()
+        internal void ApplyTheme()
         { 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
@@ -37,21 +37,34 @@ namespace mRemoteNG.UI.Window
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
-    
+
         #region Private Methods
-/*
-		private void Base_Load(object sender, EventArgs e)
-		{
-			FrmMain.Default.ShowHidePanelTabs();
-		}
-*/
-				
-/*
-		private void Base_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
-		{
-			FrmMain.Default.ShowHidePanelTabs(this);
-		}
-*/
+        /*
+                private void Base_Load(object sender, EventArgs e)
+                {
+                    FrmMain.Default.ShowHidePanelTabs();
+                }
+        */
+
+        /*
+                private void Base_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+                {
+                    FrmMain.Default.ShowHidePanelTabs(this);
+                }
+        */
         #endregion
-	}
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BaseWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "BaseWindow";
+            this.ResumeLayout(false);
+
+        }
+    }
 }

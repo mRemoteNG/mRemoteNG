@@ -46,7 +46,7 @@
             this.chkEncryptCompleteFile.AutoSize = true;
             this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 3);
             this.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile";
-            this.chkEncryptCompleteFile.Size = new System.Drawing.Size(180, 17);
+            this.chkEncryptCompleteFile.Size = new System.Drawing.Size(194, 17);
             this.chkEncryptCompleteFile.TabIndex = 0;
             this.chkEncryptCompleteFile.Text = "Encrypt complete connection file";
             this.chkEncryptCompleteFile.UseVisualStyleBackColor = true;
@@ -67,7 +67,7 @@
             this.labelEncryptionEngine.AutoSize = true;
             this.labelEncryptionEngine.Location = new System.Drawing.Point(9, 28);
             this.labelEncryptionEngine.Name = "labelEncryptionEngine";
-            this.labelEncryptionEngine.Size = new System.Drawing.Size(93, 13);
+            this.labelEncryptionEngine.Size = new System.Drawing.Size(101, 13);
             this.labelEncryptionEngine.TabIndex = 0;
             this.labelEncryptionEngine.Text = "Encryption Engine";
             // 
@@ -76,7 +76,7 @@
             this.labelBlockCipher.AutoSize = true;
             this.labelBlockCipher.Location = new System.Drawing.Point(9, 60);
             this.labelBlockCipher.Name = "labelBlockCipher";
-            this.labelBlockCipher.Size = new System.Drawing.Size(97, 13);
+            this.labelBlockCipher.Size = new System.Drawing.Size(105, 13);
             this.labelBlockCipher.TabIndex = 2;
             this.labelBlockCipher.Text = "Block Cipher Mode";
             // 
@@ -124,7 +124,7 @@
             0,
             0});
             this.numberBoxKdfIterations.Name = "numberBoxKdfIterations";
-            this.numberBoxKdfIterations.Size = new System.Drawing.Size(90, 20);
+            this.numberBoxKdfIterations.Size = new System.Drawing.Size(90, 22);
             this.numberBoxKdfIterations.TabIndex = 5;
             this.numberBoxKdfIterations.ThousandsSeparator = true;
             this.numberBoxKdfIterations.Value = new decimal(new int[] {
@@ -138,7 +138,7 @@
             this.labelKdfIterations.AutoSize = true;
             this.labelKdfIterations.Location = new System.Drawing.Point(9, 90);
             this.labelKdfIterations.Name = "labelKdfIterations";
-            this.labelKdfIterations.Size = new System.Drawing.Size(166, 13);
+            this.labelKdfIterations.Size = new System.Drawing.Size(181, 13);
             this.labelKdfIterations.TabIndex = 4;
             this.labelKdfIterations.Text = "Key Derivation Function Iterations";
             // 
@@ -148,6 +148,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.chkEncryptCompleteFile);
             this.Controls.Add(this.groupAdvancedSecurityOptions);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SecurityPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.groupAdvancedSecurityOptions.ResumeLayout(false);

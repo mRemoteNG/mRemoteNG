@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.labelSwitchToErrorsAndInfos.AutoSize = true;
             this.labelSwitchToErrorsAndInfos.Location = new System.Drawing.Point(177, 25);
             this.labelSwitchToErrorsAndInfos.Name = "labelSwitchToErrorsAndInfos";
-            this.labelSwitchToErrorsAndInfos.Size = new System.Drawing.Size(159, 13);
+            this.labelSwitchToErrorsAndInfos.Size = new System.Drawing.Size(176, 13);
             this.labelSwitchToErrorsAndInfos.TabIndex = 5;
             this.labelSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:";
             // 
@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSwitchToMCInformation.AutoSize = true;
             this.chkSwitchToMCInformation.Location = new System.Drawing.Point(195, 67);
             this.chkSwitchToMCInformation.Name = "chkSwitchToMCInformation";
-            this.chkSwitchToMCInformation.Size = new System.Drawing.Size(78, 17);
+            this.chkSwitchToMCInformation.Size = new System.Drawing.Size(87, 17);
             this.chkSwitchToMCInformation.TabIndex = 6;
             this.chkSwitchToMCInformation.Text = "Information";
             this.chkSwitchToMCInformation.UseVisualStyleBackColor = true;
@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSwitchToMCErrors.AutoSize = true;
             this.chkSwitchToMCErrors.Location = new System.Drawing.Point(195, 113);
             this.chkSwitchToMCErrors.Name = "chkSwitchToMCErrors";
-            this.chkSwitchToMCErrors.Size = new System.Drawing.Size(48, 17);
+            this.chkSwitchToMCErrors.Size = new System.Drawing.Size(51, 17);
             this.chkSwitchToMCErrors.TabIndex = 8;
             this.chkSwitchToMCErrors.Text = "Error";
             this.chkSwitchToMCErrors.UseVisualStyleBackColor = true;
@@ -105,7 +105,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSwitchToMCWarnings.AutoSize = true;
             this.chkSwitchToMCWarnings.Location = new System.Drawing.Point(195, 90);
             this.chkSwitchToMCWarnings.Name = "chkSwitchToMCWarnings";
-            this.chkSwitchToMCWarnings.Size = new System.Drawing.Size(66, 17);
+            this.chkSwitchToMCWarnings.Size = new System.Drawing.Size(71, 17);
             this.chkSwitchToMCWarnings.TabIndex = 7;
             this.chkSwitchToMCWarnings.Text = "Warning";
             this.chkSwitchToMCWarnings.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.labelNotificationsShowTypes.AutoSize = true;
             this.labelNotificationsShowTypes.Location = new System.Drawing.Point(6, 25);
             this.labelNotificationsShowTypes.Name = "labelNotificationsShowTypes";
-            this.labelNotificationsShowTypes.Size = new System.Drawing.Size(139, 13);
+            this.labelNotificationsShowTypes.Size = new System.Drawing.Size(147, 13);
             this.labelNotificationsShowTypes.TabIndex = 0;
             this.labelNotificationsShowTypes.Text = "Show these message types:";
             // 
@@ -143,7 +143,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowErrorInMC.AutoSize = true;
             this.chkShowErrorInMC.Location = new System.Drawing.Point(20, 113);
             this.chkShowErrorInMC.Name = "chkShowErrorInMC";
-            this.chkShowErrorInMC.Size = new System.Drawing.Size(48, 17);
+            this.chkShowErrorInMC.Size = new System.Drawing.Size(51, 17);
             this.chkShowErrorInMC.TabIndex = 4;
             this.chkShowErrorInMC.Text = "Error";
             this.chkShowErrorInMC.UseVisualStyleBackColor = true;
@@ -154,7 +154,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowWarningInMC.AutoSize = true;
             this.chkShowWarningInMC.Location = new System.Drawing.Point(20, 90);
             this.chkShowWarningInMC.Name = "chkShowWarningInMC";
-            this.chkShowWarningInMC.Size = new System.Drawing.Size(66, 17);
+            this.chkShowWarningInMC.Size = new System.Drawing.Size(71, 17);
             this.chkShowWarningInMC.TabIndex = 3;
             this.chkShowWarningInMC.Text = "Warning";
             this.chkShowWarningInMC.UseVisualStyleBackColor = true;
@@ -165,7 +165,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowInfoInMC.AutoSize = true;
             this.chkShowInfoInMC.Location = new System.Drawing.Point(20, 67);
             this.chkShowInfoInMC.Name = "chkShowInfoInMC";
-            this.chkShowInfoInMC.Size = new System.Drawing.Size(78, 17);
+            this.chkShowInfoInMC.Size = new System.Drawing.Size(87, 17);
             this.chkShowInfoInMC.TabIndex = 2;
             this.chkShowInfoInMC.Text = "Information";
             this.chkShowInfoInMC.UseVisualStyleBackColor = true;
@@ -176,7 +176,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowDebugInMC.AutoSize = true;
             this.chkShowDebugInMC.Location = new System.Drawing.Point(20, 44);
             this.chkShowDebugInMC.Name = "chkShowDebugInMC";
-            this.chkShowDebugInMC.Size = new System.Drawing.Size(58, 17);
+            this.chkShowDebugInMC.Size = new System.Drawing.Size(61, 17);
             this.chkShowDebugInMC.TabIndex = 1;
             this.chkShowDebugInMC.Text = "Debug";
             this.chkShowDebugInMC.UseVisualStyleBackColor = true;
@@ -223,7 +223,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLogDebugMsgs.AutoSize = true;
             this.chkLogDebugMsgs.Location = new System.Drawing.Point(3, 3);
             this.chkLogDebugMsgs.Name = "chkLogDebugMsgs";
-            this.chkLogDebugMsgs.Size = new System.Drawing.Size(58, 17);
+            this.chkLogDebugMsgs.Size = new System.Drawing.Size(61, 17);
             this.chkLogDebugMsgs.TabIndex = 0;
             this.chkLogDebugMsgs.Text = "Debug";
             this.chkLogDebugMsgs.UseVisualStyleBackColor = true;
@@ -234,7 +234,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLogInfoMsgs.AutoSize = true;
             this.chkLogInfoMsgs.Location = new System.Drawing.Point(149, 3);
             this.chkLogInfoMsgs.Name = "chkLogInfoMsgs";
-            this.chkLogInfoMsgs.Size = new System.Drawing.Size(78, 17);
+            this.chkLogInfoMsgs.Size = new System.Drawing.Size(87, 17);
             this.chkLogInfoMsgs.TabIndex = 1;
             this.chkLogInfoMsgs.Text = "Information";
             this.chkLogInfoMsgs.UseVisualStyleBackColor = true;
@@ -245,7 +245,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLogWarningMsgs.AutoSize = true;
             this.chkLogWarningMsgs.Location = new System.Drawing.Point(295, 3);
             this.chkLogWarningMsgs.Name = "chkLogWarningMsgs";
-            this.chkLogWarningMsgs.Size = new System.Drawing.Size(66, 17);
+            this.chkLogWarningMsgs.Size = new System.Drawing.Size(71, 17);
             this.chkLogWarningMsgs.TabIndex = 2;
             this.chkLogWarningMsgs.Text = "Warning";
             this.chkLogWarningMsgs.UseVisualStyleBackColor = true;
@@ -256,7 +256,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLogErrorMsgs.AutoSize = true;
             this.chkLogErrorMsgs.Location = new System.Drawing.Point(441, 3);
             this.chkLogErrorMsgs.Name = "chkLogErrorMsgs";
-            this.chkLogErrorMsgs.Size = new System.Drawing.Size(48, 17);
+            this.chkLogErrorMsgs.Size = new System.Drawing.Size(51, 17);
             this.chkLogErrorMsgs.TabIndex = 3;
             this.chkLogErrorMsgs.Text = "Error";
             this.chkLogErrorMsgs.UseVisualStyleBackColor = true;
@@ -267,7 +267,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLogToCurrentDir.AutoSize = true;
             this.chkLogToCurrentDir.Location = new System.Drawing.Point(9, 18);
             this.chkLogToCurrentDir.Name = "chkLogToCurrentDir";
-            this.chkLogToCurrentDir.Size = new System.Drawing.Size(153, 17);
+            this.chkLogToCurrentDir.Size = new System.Drawing.Size(168, 17);
             this.chkLogToCurrentDir.TabIndex = 0;
             this.chkLogToCurrentDir.Text = "Log to application directory";
             this.chkLogToCurrentDir.UseVisualStyleBackColor = true;
@@ -311,7 +311,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.labelLogTheseMsgTypes.AutoSize = true;
             this.labelLogTheseMsgTypes.Location = new System.Drawing.Point(6, 108);
             this.labelLogTheseMsgTypes.Name = "labelLogTheseMsgTypes";
-            this.labelLogTheseMsgTypes.Size = new System.Drawing.Size(130, 13);
+            this.labelLogTheseMsgTypes.Size = new System.Drawing.Size(137, 13);
             this.labelLogTheseMsgTypes.TabIndex = 6;
             this.labelLogTheseMsgTypes.Text = "Log these message types:";
             // 
@@ -320,7 +320,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.labelLogFilePath.AutoSize = true;
             this.labelLogFilePath.Location = new System.Drawing.Point(6, 38);
             this.labelLogFilePath.Name = "labelLogFilePath";
-            this.labelLogFilePath.Size = new System.Drawing.Size(68, 13);
+            this.labelLogFilePath.Size = new System.Drawing.Size(75, 13);
             this.labelLogFilePath.TabIndex = 1;
             this.labelLogFilePath.Text = "Log file path:";
             // 
@@ -330,7 +330,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.textBoxLogPath.Location = new System.Drawing.Point(9, 57);
             this.textBoxLogPath.Name = "textBoxLogPath";
             this.textBoxLogPath.ReadOnly = true;
-            this.textBoxLogPath.Size = new System.Drawing.Size(585, 20);
+            this.textBoxLogPath.Size = new System.Drawing.Size(585, 22);
             this.textBoxLogPath.TabIndex = 2;
             // 
             // groupBoxPopups
@@ -369,7 +369,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkPopupDebug.AutoSize = true;
             this.chkPopupDebug.Location = new System.Drawing.Point(3, 3);
             this.chkPopupDebug.Name = "chkPopupDebug";
-            this.chkPopupDebug.Size = new System.Drawing.Size(58, 17);
+            this.chkPopupDebug.Size = new System.Drawing.Size(61, 17);
             this.chkPopupDebug.TabIndex = 0;
             this.chkPopupDebug.Text = "Debug";
             this.chkPopupDebug.UseVisualStyleBackColor = true;
@@ -380,7 +380,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkPopupError.AutoSize = true;
             this.chkPopupError.Location = new System.Drawing.Point(441, 3);
             this.chkPopupError.Name = "chkPopupError";
-            this.chkPopupError.Size = new System.Drawing.Size(48, 17);
+            this.chkPopupError.Size = new System.Drawing.Size(51, 17);
             this.chkPopupError.TabIndex = 3;
             this.chkPopupError.Text = "Error";
             this.chkPopupError.UseVisualStyleBackColor = true;
@@ -391,7 +391,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkPopupInfo.AutoSize = true;
             this.chkPopupInfo.Location = new System.Drawing.Point(149, 3);
             this.chkPopupInfo.Name = "chkPopupInfo";
-            this.chkPopupInfo.Size = new System.Drawing.Size(78, 17);
+            this.chkPopupInfo.Size = new System.Drawing.Size(87, 17);
             this.chkPopupInfo.TabIndex = 1;
             this.chkPopupInfo.Text = "Information";
             this.chkPopupInfo.UseVisualStyleBackColor = true;
@@ -402,7 +402,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkPopupWarning.AutoSize = true;
             this.chkPopupWarning.Location = new System.Drawing.Point(295, 3);
             this.chkPopupWarning.Name = "chkPopupWarning";
-            this.chkPopupWarning.Size = new System.Drawing.Size(66, 17);
+            this.chkPopupWarning.Size = new System.Drawing.Size(71, 17);
             this.chkPopupWarning.TabIndex = 2;
             this.chkPopupWarning.Text = "Warning";
             this.chkPopupWarning.UseVisualStyleBackColor = true;
@@ -412,7 +412,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.labelPopupShowTypes.AutoSize = true;
             this.labelPopupShowTypes.Location = new System.Drawing.Point(8, 24);
             this.labelPopupShowTypes.Name = "labelPopupShowTypes";
-            this.labelPopupShowTypes.Size = new System.Drawing.Size(139, 13);
+            this.labelPopupShowTypes.Size = new System.Drawing.Size(147, 13);
             this.labelPopupShowTypes.TabIndex = 0;
             this.labelPopupShowTypes.Text = "Show these message types:";
             // 
@@ -423,6 +423,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.groupBoxPopups);
             this.Controls.Add(this.groupBoxLogging);
             this.Controls.Add(this.groupBoxNotifications);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "NotificationsPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.groupBoxNotifications.ResumeLayout(false);
@@ -443,13 +444,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal Controls.Base.NGCheckBox chkSwitchToMCInformation;
         internal Controls.Base.NGCheckBox chkSwitchToMCErrors;
         internal Controls.Base.NGCheckBox chkSwitchToMCWarnings;
-        private System.Windows.Forms.GroupBox groupBoxNotifications;
         private Controls.Base.NGLabel labelNotificationsShowTypes;
         private Controls.Base.NGCheckBox chkShowErrorInMC;
         private Controls.Base.NGCheckBox chkShowWarningInMC;
         private Controls.Base.NGCheckBox chkShowInfoInMC;
         private Controls.Base.NGCheckBox chkShowDebugInMC;
-        private System.Windows.Forms.GroupBox groupBoxLogging;
         private System.Windows.Forms.SaveFileDialog saveFileDialogLogging;
         private Controls.Base.NGLabel labelLogFilePath;
         private Controls.Base.NGTextBox textBoxLogPath;
@@ -461,7 +460,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private Controls.Base.NGCheckBox chkLogDebugMsgs;
         private Controls.Base.NGButton buttonOpenLogFile;
         private Controls.Base.NGButton buttonRestoreDefaultLogPath;
-        private System.Windows.Forms.GroupBox groupBoxPopups;
         private Controls.Base.NGCheckBox chkPopupError;
         private Controls.Base.NGLabel labelPopupShowTypes;
         private Controls.Base.NGCheckBox chkPopupWarning;
@@ -470,5 +468,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private Controls.Base.NGCheckBox chkLogToCurrentDir;
         private System.Windows.Forms.TableLayoutPanel tblLogging;
         private System.Windows.Forms.TableLayoutPanel tblPopups;
+        private Controls.Base.NGGroupBox groupBoxNotifications;
+        private Controls.Base.NGGroupBox groupBoxLogging;
+        private Controls.Base.NGGroupBox groupBoxPopups;
     }
 }

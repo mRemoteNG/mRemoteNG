@@ -147,8 +147,7 @@ namespace mRemoteNG.UI.Panels
                 if (tagEnumeration == null) return;
                 foreach (var obj in tagEnumeration)
                 {
-                    var screen1 = obj as Screen;
-                    if (screen1 != null)
+                    if (obj is Screen screen1)
                     {
                         screen = screen1;
                     }
