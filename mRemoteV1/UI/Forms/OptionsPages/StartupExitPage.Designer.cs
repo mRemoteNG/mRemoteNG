@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkReconnectOnStart.AutoSize = true;
             this.chkReconnectOnStart.Location = new System.Drawing.Point(3, 26);
             this.chkReconnectOnStart.Name = "chkReconnectOnStart";
-            this.chkReconnectOnStart.Size = new System.Drawing.Size(273, 17);
+            this.chkReconnectOnStart.Size = new System.Drawing.Size(295, 17);
             this.chkReconnectOnStart.TabIndex = 1;
             this.chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup";
             this.chkReconnectOnStart.UseVisualStyleBackColor = true;
@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSaveConsOnExit.AutoSize = true;
             this.chkSaveConsOnExit.Location = new System.Drawing.Point(3, 2);
             this.chkSaveConsOnExit.Name = "chkSaveConsOnExit";
-            this.chkSaveConsOnExit.Size = new System.Drawing.Size(146, 17);
+            this.chkSaveConsOnExit.Size = new System.Drawing.Size(153, 17);
             this.chkSaveConsOnExit.TabIndex = 0;
             this.chkSaveConsOnExit.Text = "Save connections on exit";
             this.chkSaveConsOnExit.UseVisualStyleBackColor = true;
@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSingleInstance.AutoSize = true;
             this.chkSingleInstance.Location = new System.Drawing.Point(3, 50);
             this.chkSingleInstance.Name = "chkSingleInstance";
-            this.chkSingleInstance.Size = new System.Drawing.Size(366, 17);
+            this.chkSingleInstance.Size = new System.Drawing.Size(404, 17);
             this.chkSingleInstance.TabIndex = 2;
             this.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)";
             this.chkSingleInstance.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkProperInstallationOfComponentsAtStartup.AutoSize = true;
             this.chkProperInstallationOfComponentsAtStartup.Location = new System.Drawing.Point(3, 74);
             this.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup";
-            this.chkProperInstallationOfComponentsAtStartup.Size = new System.Drawing.Size(262, 17);
+            this.chkProperInstallationOfComponentsAtStartup.Size = new System.Drawing.Size(290, 17);
             this.chkProperInstallationOfComponentsAtStartup.TabIndex = 3;
             this.chkProperInstallationOfComponentsAtStartup.Text = "Check proper installation of components at startup";
             this.chkProperInstallationOfComponentsAtStartup.UseVisualStyleBackColor = true;
@@ -89,6 +89,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkSaveConsOnExit);
             this.Controls.Add(this.chkSingleInstance);
             this.Controls.Add(this.chkProperInstallationOfComponentsAtStartup);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "StartupExitPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.Load += new System.EventHandler(this.StartupExitPage_Load);

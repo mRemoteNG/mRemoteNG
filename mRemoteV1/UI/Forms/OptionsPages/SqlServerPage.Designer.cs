@@ -63,7 +63,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtSQLDatabaseName.Enabled = false;
             this.txtSQLDatabaseName.Location = new System.Drawing.Point(140, 130);
             this.txtSQLDatabaseName.Name = "txtSQLDatabaseName";
-            this.txtSQLDatabaseName.Size = new System.Drawing.Size(153, 20);
+            this.txtSQLDatabaseName.Size = new System.Drawing.Size(153, 22);
             this.txtSQLDatabaseName.TabIndex = 6;
             // 
             // lblExperimental
@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkUseSQLServer.AutoSize = true;
             this.chkUseSQLServer.Location = new System.Drawing.Point(3, 76);
             this.chkUseSQLServer.Name = "chkUseSQLServer";
-            this.chkUseSQLServer.Size = new System.Drawing.Size(234, 17);
+            this.chkUseSQLServer.Size = new System.Drawing.Size(244, 17);
             this.chkUseSQLServer.TabIndex = 2;
             this.chkUseSQLServer.Text = "Use SQL Server to load && save connections";
             this.chkUseSQLServer.UseVisualStyleBackColor = true;
@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtSQLPassword.Enabled = false;
             this.txtSQLPassword.Location = new System.Drawing.Point(140, 182);
             this.txtSQLPassword.Name = "txtSQLPassword";
-            this.txtSQLPassword.Size = new System.Drawing.Size(153, 20);
+            this.txtSQLPassword.Size = new System.Drawing.Size(153, 22);
             this.txtSQLPassword.TabIndex = 10;
             this.txtSQLPassword.UseSystemPasswordChar = true;
             // 
@@ -142,7 +142,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtSQLUsername.Enabled = false;
             this.txtSQLUsername.Location = new System.Drawing.Point(140, 156);
             this.txtSQLUsername.Name = "txtSQLUsername";
-            this.txtSQLUsername.Size = new System.Drawing.Size(153, 20);
+            this.txtSQLUsername.Size = new System.Drawing.Size(153, 22);
             this.txtSQLUsername.TabIndex = 8;
             // 
             // txtSQLServer
@@ -151,7 +151,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtSQLServer.Enabled = false;
             this.txtSQLServer.Location = new System.Drawing.Point(140, 103);
             this.txtSQLServer.Name = "txtSQLServer";
-            this.txtSQLServer.Size = new System.Drawing.Size(153, 20);
+            this.txtSQLServer.Size = new System.Drawing.Size(153, 22);
             this.txtSQLServer.TabIndex = 4;
             // 
             // lblSQLPassword
@@ -191,7 +191,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblTestConnectionResults.AutoSize = true;
             this.lblTestConnectionResults.Location = new System.Drawing.Point(137, 254);
             this.lblTestConnectionResults.Name = "lblTestConnectionResults";
-            this.lblTestConnectionResults.Size = new System.Drawing.Size(117, 13);
+            this.lblTestConnectionResults.Size = new System.Drawing.Size(124, 13);
             this.lblTestConnectionResults.TabIndex = 13;
             this.lblTestConnectionResults.Text = "Test connection details";
             // 
@@ -235,6 +235,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.txtSQLUsername);
             this.Controls.Add(this.txtSQLServer);
             this.Controls.Add(this.lblSQLPassword);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SqlServerPage";
             this.Size = new System.Drawing.Size(610, 490);
             ((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).EndInit();

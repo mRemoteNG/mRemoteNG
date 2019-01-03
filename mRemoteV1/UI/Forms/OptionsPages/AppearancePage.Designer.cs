@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblLanguageRestartRequired.AutoSize = true;
             this.lblLanguageRestartRequired.Location = new System.Drawing.Point(3, 56);
             this.lblLanguageRestartRequired.Name = "lblLanguageRestartRequired";
-            this.lblLanguageRestartRequired.Size = new System.Drawing.Size(380, 13);
+            this.lblLanguageRestartRequired.Size = new System.Drawing.Size(414, 13);
             this.lblLanguageRestartRequired.TabIndex = 2;
             this.lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect.";
             // 
@@ -64,7 +64,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblLanguage.AutoSize = true;
             this.lblLanguage.Location = new System.Drawing.Point(3, 3);
             this.lblLanguage.Name = "lblLanguage";
-            this.lblLanguage.Size = new System.Drawing.Size(55, 13);
+            this.lblLanguage.Size = new System.Drawing.Size(58, 13);
             this.lblLanguage.TabIndex = 0;
             this.lblLanguage.Text = "Language";
             // 
@@ -74,7 +74,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowFullConnectionsFilePathInTitle.AutoSize = true;
             this.chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 127);
             this.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle";
-            this.chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(239, 17);
+            this.chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(268, 17);
             this.chkShowFullConnectionsFilePathInTitle.TabIndex = 4;
             this.chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title";
             this.chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowDescriptionTooltipsInTree.AutoSize = true;
             this.chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(3, 104);
             this.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree";
-            this.chkShowDescriptionTooltipsInTree.Size = new System.Drawing.Size(231, 17);
+            this.chkShowDescriptionTooltipsInTree.Size = new System.Drawing.Size(256, 17);
             this.chkShowDescriptionTooltipsInTree.TabIndex = 3;
             this.chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree";
             this.chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowSystemTrayIcon.AutoSize = true;
             this.chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 173);
             this.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon";
-            this.chkShowSystemTrayIcon.Size = new System.Drawing.Size(172, 17);
+            this.chkShowSystemTrayIcon.Size = new System.Drawing.Size(177, 17);
             this.chkShowSystemTrayIcon.TabIndex = 5;
             this.chkShowSystemTrayIcon.Text = "Always show System Tray Icon";
             this.chkShowSystemTrayIcon.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkMinimizeToSystemTray.AutoSize = true;
             this.chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 196);
             this.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray";
-            this.chkMinimizeToSystemTray.Size = new System.Drawing.Size(139, 17);
+            this.chkMinimizeToSystemTray.Size = new System.Drawing.Size(146, 17);
             this.chkMinimizeToSystemTray.TabIndex = 6;
             this.chkMinimizeToSystemTray.Text = "Minimize to System Tray";
             this.chkMinimizeToSystemTray.UseVisualStyleBackColor = true;
@@ -123,6 +123,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkShowDescriptionTooltipsInTree);
             this.Controls.Add(this.chkShowSystemTrayIcon);
             this.Controls.Add(this.chkMinimizeToSystemTray);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AppearancePage";
             this.Size = new System.Drawing.Size(610, 490);
             this.ResumeLayout(false);
