@@ -16,15 +16,9 @@ namespace mRemoteNG.UI.Forms
         #region Public Properties
         public string FileName
 		{
-			get
-			{
-				return txtFileName.Text;
-			}
-			set
-			{
-				txtFileName.Text = value;
-			}
-		}
+			get => txtFileName.Text;
+            set => txtFileName.Text = value;
+        }
 			
         public SaveFormat SaveFormat
 		{
@@ -75,11 +69,8 @@ namespace mRemoteNG.UI.Forms
 		private ContainerInfo _selectedFolder;
         public ContainerInfo SelectedFolder
 		{
-			get
-			{
-				return _selectedFolder;
-			}
-			set
+			get => _selectedFolder;
+            set
 			{
 				_selectedFolder = value;
 				lblSelectedFolder.Text = value?.Name;
@@ -90,11 +81,8 @@ namespace mRemoteNG.UI.Forms
 		private ConnectionInfo _selectedConnection;
         public ConnectionInfo SelectedConnection
 		{
-			get
-			{
-				return _selectedConnection;
-			}
-			set
+			get => _selectedConnection;
+            set
 			{
 				_selectedConnection = value;
 				lblSelectedConnection.Text = value?.Name;
@@ -104,57 +92,33 @@ namespace mRemoteNG.UI.Forms
 			
         public bool IncludeUsername
 		{
-			get
-			{
-				return chkUsername.Checked;
-			}
-			set
-			{
-				chkUsername.Checked = value;
-			}
-		}
+			get => chkUsername.Checked;
+            set => chkUsername.Checked = value;
+        }
 			
         public bool IncludePassword
 		{
-			get
-			{
-				return chkPassword.Checked;
-			}
-			set
-			{
-				chkPassword.Checked = value;
-			}
-		}
+			get => chkPassword.Checked;
+            set => chkPassword.Checked = value;
+        }
 			
         public bool IncludeDomain
 		{
-			get
-			{
-				return chkDomain.Checked;
-			}
-			set
-			{
-				chkDomain.Checked = value;
-			}
-		}
+			get => chkDomain.Checked;
+            set => chkDomain.Checked = value;
+        }
 
         public bool IncludeAssignedCredential
         {
-            get { return chkAssignedCredential.Checked; }
-            set { chkAssignedCredential.Checked = value; }
+            get => chkAssignedCredential.Checked;
+            set => chkAssignedCredential.Checked = value;
         }
 
         public bool IncludeInheritance
 		{
-			get
-			{
-				return chkInheritance.Checked;
-			}
-			set
-			{
-				chkInheritance.Checked = value;
-			}
-		}
+			get => chkInheritance.Checked;
+            set => chkInheritance.Checked = value;
+        }
         #endregion
 			
         #region Constructors
@@ -247,11 +211,9 @@ namespace mRemoteNG.UI.Forms
         private void ApplyTheme()
         {
             _themeManager = ThemeManager.getInstance();
-            if(_themeManager.ThemingActive)
-            {
-                BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            }
+            if (!_themeManager.ThemingActive) return;
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
 

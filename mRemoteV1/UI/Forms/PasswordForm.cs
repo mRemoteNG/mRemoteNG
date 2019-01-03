@@ -98,7 +98,8 @@ namespace mRemoteNG.UI.Forms
 			btnOK.Text = Language.strButtonOK;
 		}
 			
-		private bool VerifyNewPassword()
+        // ReSharper disable once UnusedMethodReturnValue.Local
+        private bool VerifyNewPassword()
 		{
 			if (txtPassword.Text.Length >= 3)
 			{
