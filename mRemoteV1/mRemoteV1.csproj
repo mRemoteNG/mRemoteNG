@@ -787,6 +787,33 @@
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGButton.resx">
+      <DependentUpon>NGButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGCheckBox.resx">
+      <DependentUpon>NGCheckBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGComboBox.resx">
+      <DependentUpon>NGComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGGroupBox.resx">
+      <DependentUpon>NGGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGLabel.resx">
+      <DependentUpon>NGLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGListView.resx">
+      <DependentUpon>NGListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGNumericUpDown.resx">
+      <DependentUpon>NGNumericUpDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGRadioButton.resx">
+      <DependentUpon>NGRadioButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
+      <DependentUpon>NGTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRecordComboBox.resx">
       <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
     </EmbeddedResource>
