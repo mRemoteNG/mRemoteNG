@@ -56,7 +56,6 @@ namespace mRemoteNG.UI.Window
         private void SetEventHandlers()
         {
             SetFormEventHandlers();
-            SetTabControllerEventHandlers();
             SetContextMenuEventHandlers();
         }
 
@@ -67,14 +66,12 @@ namespace mRemoteNG.UI.Window
             FormClosing += Connection_FormClosing;
         }
 
-        private void SetTabControllerEventHandlers()
-        {
-            //Menu handle
-            cmenTab.Opening += ShowHideMenuButtons;
-        }
-
         private void SetContextMenuEventHandlers()
         {
+            // event handler to adjust the items within the context menu
+            cmenTab.Opening += ShowHideMenuButtons;
+
+            // event handlers for all context menu items...
             cmenTabFullscreen.Click += (sender, args) => ToggleFullscreen();
             cmenTabSmartSize.Click += (sender, args) => ToggleSmartSize();
             cmenTabViewOnly.Click += (sender, args) => ToggleViewOnly();
