@@ -3,8 +3,8 @@ using mRemoteNG.Tools;
 using System;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.UI.Window;
-
+using mRemoteNG.UI.Tabs;
+// ReSharper disable UnusedMember.Local
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -12,7 +12,7 @@ namespace mRemoteNG.Connection.Protocol
     {
         #region Private Variables
 
-	    private ConnectionWindow _connectionWindow;
+	    private ConnectionTab _connectionTab;
         private InterfaceControl _interfaceControl;
 	    private ConnectingEventHandler ConnectingEvent;
         private ConnectedEventHandler ConnectedEvent;
@@ -26,15 +26,15 @@ namespace mRemoteNG.Connection.Protocol
         #region Control
         private string Name { get; }
 
-        private ConnectionWindow ConnectionWindow
+        private ConnectionTab ConnectionTab
 		{
-			get => _connectionWindow;
+			get => _connectionTab;
             set
 			{
-				_connectionWindow = value;
-				_connectionWindow.ResizeBegin += ResizeBegin;
-				_connectionWindow.Resize += Resize;
-				_connectionWindow.ResizeEnd += ResizeEnd;
+				_connectionTab = value;
+				_connectionTab.ResizeBegin += ResizeBegin;
+				_connectionTab.Resize += Resize;
+				_connectionTab.ResizeEnd += ResizeEnd;
 			}
 		}
 
@@ -45,8 +45,8 @@ namespace mRemoteNG.Connection.Protocol
 			{
 				_interfaceControl = value;
 
-                if(_interfaceControl.Parent is ConnectionWindow window)
-				    ConnectionWindow = window;
+                if(_interfaceControl.Parent is ConnectionTab ct)
+				    ConnectionTab = ct;
 			}
 		}
 
