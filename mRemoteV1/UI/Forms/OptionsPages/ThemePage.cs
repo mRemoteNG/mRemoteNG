@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnThemeDelete.Text = Language.strOptionsThemeButtonDelete;
             btnThemeNew.Text = Language.strOptionsThemeButtonNew;
             labelRestart.Text = Language.strOptionsThemeThemeChaangeWarning;
-            themeEnableCombo.Text = Language.strOptionsThemeEnableTheming;
+            themeEnableChk.Text = Language.strOptionsThemeEnableTheming;
         }
 
         private new void ApplyTheme()
@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            themeEnableCombo.CheckedChanged -= themeEnableCombo_CheckedChanged;
+            themeEnableChk.CheckedChanged -= ThemeEnableChkCheckedChanged;
             base.SaveSettings();
             //At first we cannot create or delete themes, depends later on the type of selected theme
             btnThemeNew.Enabled = false;
@@ -72,16 +72,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             //Load theming active property and disable controls 
             if (_themeManager.ThemingActive)
             {
-                themeEnableCombo.Checked = true;
+                themeEnableChk.Checked = true;
             }
             else
             {
-                themeEnableCombo.Checked = false;
+                themeEnableChk.Checked = false;
                 cboTheme.Enabled = false;
                 // reset to the default theme when disabling theme support
                 _themeManager.ActiveTheme = _themeManager.DefaultTheme;
             }
-            themeEnableCombo.CheckedChanged += themeEnableCombo_CheckedChanged;
+            themeEnableChk.CheckedChanged += ThemeEnableChkCheckedChanged;
         }
 
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
@@ -207,26 +207,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         #endregion
 
-        private void themeEnableCombo_CheckedChanged(object sender, EventArgs e)
+        private void ThemeEnableChkCheckedChanged(object sender, EventArgs e)
         {
-            if (themeEnableCombo.Checked)
+            if (themeEnableChk.Checked)
             {
-                _themeManager.ThemingActive = true;
-                if(_themeManager.ThemingActive)
+                
+                if(_themeManager.ThemesCount > 0)
                 {
-                    themeEnableCombo.Checked = true;
+                    _themeManager.ThemingActive = true;
                     cboTheme.Enabled = true;
                 }
                 else
                 {
                     TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeErrorNoThemes, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
-                    themeEnableCombo.Checked = false;
+                    themeEnableChk.Checked = false;
+                    _themeManager.ThemingActive = false;
+                    cboTheme.Enabled = false;
                 }
             }
             else
             {
                 _themeManager.ThemingActive = false;
-                themeEnableCombo.Checked = false;
+                themeEnableChk.Checked = false;
                 cboTheme.Enabled = false;
             }
             LoadSettings();
