@@ -7605,6 +7605,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use AdmPwd.E to retrieve the password.
+        /// </summary>
+        internal static string strUseAdmPwd {
+            get {
+                return ResourceManager.GetString("strUseAdmPwd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use default.
         /// </summary>
         internal static string strUseDefault {

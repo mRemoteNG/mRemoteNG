@@ -47,6 +47,9 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdmPwd.PDSWrapper, Version=7.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Greycorbel.AdmPwd-E.PDSWrapper.7.6.0\lib\net45\AdmPwd.PDSWrapper.dll</HintPath>
+    </Reference>
     <Reference Include="ADTree">
       <HintPath>References\ADTree.dll</HintPath>
     </Reference>
@@ -1079,6 +1082,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Docs\PdsWrapper.xml" />
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

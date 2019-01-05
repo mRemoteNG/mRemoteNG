@@ -292,7 +292,7 @@ Prosím použijte Soubor - Otevřít seznam spojení... pro načtení souboru s 
   <data name="strCcEOLFailed" xml:space="preserve">
     <value>Funckionalita pro (RDP) sezení vyžaduje, abyste měli ve  Vašem systému zaregistrovánu knihovnu eolwtscom.dll .
 mRemoteNG je sice s touto komponentou dodáváno, avšak pokud jej nenainstalujete s pomocí Instalátoru, není knihovna automaticky zaregistrována.
-Pro provedení registrace ručně spusťe následující příkaz v konzoli příkazového řádku (Start->Spustit->cmd) v administrátorském režimu(!) : regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (kde  C:\Program Files\mRemoteNG\ is je cesta ke složce Vaší kopie mRemoteNG ).
+Pro provedení registrace ručně spusťe následující příkaz v konzoli příkazového řádku (Start-&gt;Spustit-&gt;cmd) v administrátorském režimu(!) : regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (kde  C:\Program Files\mRemoteNG\ is je cesta ke složce Vaší kopie mRemoteNG ).
 Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu RDP v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
@@ -301,7 +301,7 @@ Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalit
   <data name="strCcGeckoFailed" xml:space="preserve">
     <value>Pro využití Gecko Rendering Engine musíte mít nainstalovaný XULrunner 1.8.1.x a nastavenou cestu k jeho instalační složce v Možnostech Nastavení.
 XULrunner 1.8.1.3 lze stáhnout zde: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Až jej stáhnete, rozbalte balíček do libovolné složky. Pak zvolte v mRemoteNG menu Nástroje -> Možnosti -> Pokročilé a zadejte cestu do políčka "Cesta ke složce XULrunner".
+Až jej stáhnete, rozbalte balíček do libovolné složky. Pak zvolte v mRemoteNG menu Nástroje -&gt; Možnosti -&gt; Pokročilé a zadejte cestu do políčka "Cesta ke složce XULrunner".
 Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu Gecko rendering Engine v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
@@ -310,7 +310,7 @@ Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalit
   <data name="strCcICAFailed" xml:space="preserve">
     <value>Funkcionalita ICA vyžaduje, aby byl nainstalován XenDesktop Online Plugin a knihovna wfica.ocx byla zaregistrována. Klienta můžete stáhnout zde: http://www.citrix.com/download/
 Pokud máte XenDesktop Online Plugin nainstalován a kontrola stále selhává, pokuste se zaregistrovat wfica.ocx ručně.
-K tomu otevřete dialog "Spustit" (Start->Spustit) a zadejte následující text: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (kde  c:\Program Files\Citrix\ICA Client\ je cesta ke složce s Vaší instalací XenDesktop Online Plugin).
+K tomu otevřete dialog "Spustit" (Start-&gt;Spustit) a zadejte následující text: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (kde  c:\Program Files\Citrix\ICA Client\ je cesta ke složce s Vaší instalací XenDesktop Online Plugin).
 Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu ICA v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
@@ -322,7 +322,7 @@ Citrix ICA Client Control verze {0}</value>
   </data>
   <data name="strCcPuttyFailed" xml:space="preserve">
     <value>Protokoly SSH, Telnet, Rlogin and RAW potřebují ke své práci program PuTTY. PuTTY je součástí každého balíčku s mRemoteNG a je k nalezení ve složce, kde je mRemoteNG nainstalován.
-Prosím ujistěte se, že budťo máte soubor Putty.exe ve složce vašeho mRemoteNG (výchozí je: c:\Program Files\mRemoteNG\) nebo že jste zadali správnou cestu ke složce obsahující program PuTTY v Nástrojích (menu Nástroje -> Možnosti -> Pokročilé -> Vlastní cesta k PuTTY)</value>
+Prosím ujistěte se, že budťo máte soubor Putty.exe ve složce vašeho mRemoteNG (výchozí je: c:\Program Files\mRemoteNG\) nebo že jste zadali správnou cestu ke složce obsahující program PuTTY v Nástrojích (menu Nástroje -&gt; Možnosti -&gt; Pokročilé -&gt; Vlastní cesta k PuTTY)</value>
   </data>
   <data name="strCcPuttyOK" xml:space="preserve">
     <value>Program PuTTY byl nalezen a měl by být připraven k použití.</value>
@@ -1562,7 +1562,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="strPropertyNameEncoding" xml:space="preserve">
     <value>Kódování</value>
   </data>
-    <data name="strPropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="strPropertyNameEncryptionStrength" xml:space="preserve">
     <value>Síla šifrování</value>
   </data>
   <data name="strPropertyNameExternalTool" xml:space="preserve">
@@ -1988,7 +1988,7 @@ Zpráva:
   <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
     <value>Při konfiguraci spojení vyplnit DN hostitele podle zadaného názvu spojení</value>
   </data>
-   <data name="strSettingMainFormTextFailed" xml:space="preserve">
+  <data name="strSettingMainFormTextFailed" xml:space="preserve">
     <value>Nastavení textu hlavního formuláře selhalo</value>
   </data>
   <data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
@@ -2497,18 +2497,21 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
     <value>Logovat do adresáře kde je aplikace umístěna.</value>
   </data>
   <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
-+    <value>Zvolte jak bude přesměrováno vstupní zvukové zařízení</value>
-+ </data>
-+ <data name="strPropertyNameRedirectMicrophones" xml:space="preserve">
-+    <value>Vstupní zvuková zařízení</value>
-+ </data>
-+ <data name="strRDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
-+    <value>Ponechat vstup na místním počítači</value>
-+ </data>
-+ <data name="strRDPMicrophonesSendToRemoteComputer" xml:space="preserve">
-+    <value>Vstup zaslat na vzdálený počítač</value>
-+ </data>
+    <value>+</value>
+  </data>
+  <data name="strPropertyNameRedirectMicrophones" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="strRDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="strRDPMicrophonesSendToRemoteComputer" xml:space="preserve">
+    <value>+</value>
+  </data>
   <data name="strAssignedCredential" xml:space="preserve">
-     <value>Přiřazené přihlašovací informace</value>
+    <value>Přiřazené přihlašovací informace</value>
+  </data>
+  <data name="strUseAdmPwd" xml:space="preserve">
+    <value>Získat heslo pomocí AdmPwd.E</value>
   </data>
 </root>
