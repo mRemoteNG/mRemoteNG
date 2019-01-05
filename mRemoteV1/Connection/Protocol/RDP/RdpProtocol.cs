@@ -479,6 +479,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         domain = Settings.Default.DefaultDomain;
                     }
                 }
+
+                _rdpClient.Domain = domain;
+                _rdpClient.UserName = userName;
+
                 if (string.IsNullOrEmpty(password))
                 {
                     if (Settings.Default.EmptyCredentials == "custom")
@@ -498,8 +502,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     }
                 }
 
-                _rdpClient.Domain = domain;
-                _rdpClient.UserName = userName;
                 _rdpClient.AdvancedSettings2.ClearTextPassword = password;
             }
 			catch (Exception ex)

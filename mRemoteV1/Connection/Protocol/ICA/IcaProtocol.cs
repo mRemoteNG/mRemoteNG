@@ -143,6 +143,9 @@ namespace mRemoteNG.Connection.Protocol.ICA
                         dom = Settings.Default.DefaultDomain;
                     }
                 }
+                _icaClient.Username = user;
+                _icaClient.Domain = dom;
+
                 if (string.IsNullOrEmpty(pass))
                 {
                     if (Settings.Default.EmptyCredentials == "custom")
@@ -162,8 +165,6 @@ namespace mRemoteNG.Connection.Protocol.ICA
                     }
                 }
 
-                _icaClient.Username = user;
-                _icaClient.Domain = dom;
                 _icaClient.SetProp("ClearPassword", pass);
 
             }
