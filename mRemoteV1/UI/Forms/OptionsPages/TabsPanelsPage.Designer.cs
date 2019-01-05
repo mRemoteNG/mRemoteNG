@@ -47,6 +47,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkAlwaysShowPanelTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkAlwaysShowPanelTabs.AutoSize = true;
+            this.chkAlwaysShowPanelTabs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAlwaysShowPanelTabs.Location = new System.Drawing.Point(3, 3);
             this.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs";
             this.chkAlwaysShowPanelTabs.Size = new System.Drawing.Size(149, 17);
@@ -58,6 +59,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkIdentifyQuickConnectTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkIdentifyQuickConnectTabs.AutoSize = true;
+            this.chkIdentifyQuickConnectTabs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkIdentifyQuickConnectTabs.Location = new System.Drawing.Point(3, 95);
             this.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs";
             this.chkIdentifyQuickConnectTabs.Size = new System.Drawing.Size(315, 17);
@@ -69,6 +71,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkOpenNewTabRightOfSelected._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkOpenNewTabRightOfSelected.AutoSize = true;
+            this.chkOpenNewTabRightOfSelected.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkOpenNewTabRightOfSelected.Location = new System.Drawing.Point(3, 26);
             this.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected";
             this.chkOpenNewTabRightOfSelected.Size = new System.Drawing.Size(309, 17);
@@ -80,6 +83,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkAlwaysShowPanelSelectionDlg._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkAlwaysShowPanelSelectionDlg.AutoSize = true;
+            this.chkAlwaysShowPanelSelectionDlg.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAlwaysShowPanelSelectionDlg.Location = new System.Drawing.Point(3, 141);
             this.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg";
             this.chkAlwaysShowPanelSelectionDlg.Size = new System.Drawing.Size(347, 17);
@@ -91,6 +95,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowLogonInfoOnTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowLogonInfoOnTabs.AutoSize = true;
+            this.chkShowLogonInfoOnTabs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowLogonInfoOnTabs.Location = new System.Drawing.Point(3, 49);
             this.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs";
             this.chkShowLogonInfoOnTabs.Size = new System.Drawing.Size(226, 17);
@@ -102,6 +107,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkDoubleClickClosesTab._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkDoubleClickClosesTab.AutoSize = true;
+            this.chkDoubleClickClosesTab.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDoubleClickClosesTab.Location = new System.Drawing.Point(3, 118);
             this.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab";
             this.chkDoubleClickClosesTab.Size = new System.Drawing.Size(170, 17);
@@ -113,6 +119,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowProtocolOnTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowProtocolOnTabs.AutoSize = true;
+            this.chkShowProtocolOnTabs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowProtocolOnTabs.Location = new System.Drawing.Point(3, 72);
             this.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs";
             this.chkShowProtocolOnTabs.Size = new System.Drawing.Size(180, 17);
@@ -124,6 +131,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkCreateEmptyPanelOnStart._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkCreateEmptyPanelOnStart.AutoSize = true;
+            this.chkCreateEmptyPanelOnStart.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCreateEmptyPanelOnStart.Location = new System.Drawing.Point(3, 164);
             this.chkCreateEmptyPanelOnStart.Name = "chkCreateEmptyPanelOnStart";
             this.chkCreateEmptyPanelOnStart.Size = new System.Drawing.Size(271, 17);
@@ -150,8 +158,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // TabsPanelsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.lblPanelName);
             this.Controls.Add(this.txtBoxPanelName);
             this.Controls.Add(this.chkCreateEmptyPanelOnStart);

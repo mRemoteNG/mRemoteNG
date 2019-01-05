@@ -92,7 +92,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.themeEnableChk.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.themeEnableChk.Location = new System.Drawing.Point(3, 3);
             this.themeEnableChk.Name = "themeEnableChk";
-            this.themeEnableChk.Size = new System.Drawing.Size(140, 22);
+            this.themeEnableChk.Size = new System.Drawing.Size(141, 22);
             this.themeEnableChk.TabIndex = 5;
             this.themeEnableChk.Text = "Enable Themes";
             this.themeEnableChk.UseVisualStyleBackColor = true;
@@ -144,9 +144,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.labelRestart.AutoSize = true;
             this.labelRestart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelRestart.Location = new System.Drawing.Point(149, 0);
+            this.labelRestart.Location = new System.Drawing.Point(150, 0);
             this.labelRestart.Name = "labelRestart";
-            this.labelRestart.Size = new System.Drawing.Size(452, 28);
+            this.labelRestart.Size = new System.Drawing.Size(451, 28);
             this.labelRestart.TabIndex = 4;
             this.labelRestart.Text = "Warning: Restart is required to disable the themes or to completely apply a new o" +
     "ne";
@@ -203,8 +203,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // ThemePage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tlpMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

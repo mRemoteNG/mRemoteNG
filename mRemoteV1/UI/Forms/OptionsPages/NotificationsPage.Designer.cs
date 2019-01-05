@@ -81,6 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSwitchToMCInformation._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSwitchToMCInformation.AutoSize = true;
+            this.chkSwitchToMCInformation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSwitchToMCInformation.Location = new System.Drawing.Point(195, 67);
             this.chkSwitchToMCInformation.Name = "chkSwitchToMCInformation";
             this.chkSwitchToMCInformation.Size = new System.Drawing.Size(87, 17);
@@ -92,6 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSwitchToMCErrors._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSwitchToMCErrors.AutoSize = true;
+            this.chkSwitchToMCErrors.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSwitchToMCErrors.Location = new System.Drawing.Point(195, 113);
             this.chkSwitchToMCErrors.Name = "chkSwitchToMCErrors";
             this.chkSwitchToMCErrors.Size = new System.Drawing.Size(51, 17);
@@ -103,6 +105,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSwitchToMCWarnings._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSwitchToMCWarnings.AutoSize = true;
+            this.chkSwitchToMCWarnings.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSwitchToMCWarnings.Location = new System.Drawing.Point(195, 90);
             this.chkSwitchToMCWarnings.Name = "chkSwitchToMCWarnings";
             this.chkSwitchToMCWarnings.Size = new System.Drawing.Size(71, 17);
@@ -141,6 +144,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowErrorInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowErrorInMC.AutoSize = true;
+            this.chkShowErrorInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowErrorInMC.Location = new System.Drawing.Point(20, 113);
             this.chkShowErrorInMC.Name = "chkShowErrorInMC";
             this.chkShowErrorInMC.Size = new System.Drawing.Size(51, 17);
@@ -152,6 +156,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowWarningInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowWarningInMC.AutoSize = true;
+            this.chkShowWarningInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowWarningInMC.Location = new System.Drawing.Point(20, 90);
             this.chkShowWarningInMC.Name = "chkShowWarningInMC";
             this.chkShowWarningInMC.Size = new System.Drawing.Size(71, 17);
@@ -163,6 +168,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowInfoInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowInfoInMC.AutoSize = true;
+            this.chkShowInfoInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowInfoInMC.Location = new System.Drawing.Point(20, 67);
             this.chkShowInfoInMC.Name = "chkShowInfoInMC";
             this.chkShowInfoInMC.Size = new System.Drawing.Size(87, 17);
@@ -174,6 +180,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowDebugInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowDebugInMC.AutoSize = true;
+            this.chkShowDebugInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowDebugInMC.Location = new System.Drawing.Point(20, 44);
             this.chkShowDebugInMC.Name = "chkShowDebugInMC";
             this.chkShowDebugInMC.Size = new System.Drawing.Size(61, 17);
@@ -221,6 +228,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkLogDebugMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkLogDebugMsgs.AutoSize = true;
+            this.chkLogDebugMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogDebugMsgs.Location = new System.Drawing.Point(3, 3);
             this.chkLogDebugMsgs.Name = "chkLogDebugMsgs";
             this.chkLogDebugMsgs.Size = new System.Drawing.Size(61, 17);
@@ -232,6 +240,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkLogInfoMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkLogInfoMsgs.AutoSize = true;
+            this.chkLogInfoMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogInfoMsgs.Location = new System.Drawing.Point(149, 3);
             this.chkLogInfoMsgs.Name = "chkLogInfoMsgs";
             this.chkLogInfoMsgs.Size = new System.Drawing.Size(87, 17);
@@ -243,6 +252,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkLogWarningMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkLogWarningMsgs.AutoSize = true;
+            this.chkLogWarningMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogWarningMsgs.Location = new System.Drawing.Point(295, 3);
             this.chkLogWarningMsgs.Name = "chkLogWarningMsgs";
             this.chkLogWarningMsgs.Size = new System.Drawing.Size(71, 17);
@@ -254,6 +264,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkLogErrorMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkLogErrorMsgs.AutoSize = true;
+            this.chkLogErrorMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogErrorMsgs.Location = new System.Drawing.Point(441, 3);
             this.chkLogErrorMsgs.Name = "chkLogErrorMsgs";
             this.chkLogErrorMsgs.Size = new System.Drawing.Size(51, 17);
@@ -265,6 +276,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkLogToCurrentDir._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkLogToCurrentDir.AutoSize = true;
+            this.chkLogToCurrentDir.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogToCurrentDir.Location = new System.Drawing.Point(9, 18);
             this.chkLogToCurrentDir.Name = "chkLogToCurrentDir";
             this.chkLogToCurrentDir.Size = new System.Drawing.Size(168, 17);
@@ -367,6 +379,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkPopupDebug._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkPopupDebug.AutoSize = true;
+            this.chkPopupDebug.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPopupDebug.Location = new System.Drawing.Point(3, 3);
             this.chkPopupDebug.Name = "chkPopupDebug";
             this.chkPopupDebug.Size = new System.Drawing.Size(61, 17);
@@ -378,6 +391,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkPopupError._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkPopupError.AutoSize = true;
+            this.chkPopupError.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPopupError.Location = new System.Drawing.Point(441, 3);
             this.chkPopupError.Name = "chkPopupError";
             this.chkPopupError.Size = new System.Drawing.Size(51, 17);
@@ -389,6 +403,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkPopupInfo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkPopupInfo.AutoSize = true;
+            this.chkPopupInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPopupInfo.Location = new System.Drawing.Point(149, 3);
             this.chkPopupInfo.Name = "chkPopupInfo";
             this.chkPopupInfo.Size = new System.Drawing.Size(87, 17);
@@ -400,6 +415,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkPopupWarning._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkPopupWarning.AutoSize = true;
+            this.chkPopupWarning.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPopupWarning.Location = new System.Drawing.Point(295, 3);
             this.chkPopupWarning.Name = "chkPopupWarning";
             this.chkPopupWarning.Size = new System.Drawing.Size(71, 17);
@@ -418,8 +434,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // NotificationsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.groupBoxPopups);
             this.Controls.Add(this.groupBoxLogging);
             this.Controls.Add(this.groupBoxNotifications);

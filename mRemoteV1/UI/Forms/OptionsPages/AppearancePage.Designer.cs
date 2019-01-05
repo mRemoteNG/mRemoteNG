@@ -72,6 +72,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowFullConnectionsFilePathInTitle._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowFullConnectionsFilePathInTitle.AutoSize = true;
+            this.chkShowFullConnectionsFilePathInTitle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 127);
             this.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle";
             this.chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(268, 17);
@@ -83,6 +84,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowDescriptionTooltipsInTree._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowDescriptionTooltipsInTree.AutoSize = true;
+            this.chkShowDescriptionTooltipsInTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(3, 104);
             this.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree";
             this.chkShowDescriptionTooltipsInTree.Size = new System.Drawing.Size(256, 17);
@@ -94,6 +96,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkShowSystemTrayIcon._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkShowSystemTrayIcon.AutoSize = true;
+            this.chkShowSystemTrayIcon.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 173);
             this.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon";
             this.chkShowSystemTrayIcon.Size = new System.Drawing.Size(177, 17);
@@ -105,6 +108,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkMinimizeToSystemTray._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkMinimizeToSystemTray.AutoSize = true;
+            this.chkMinimizeToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 196);
             this.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray";
             this.chkMinimizeToSystemTray.Size = new System.Drawing.Size(146, 17);
@@ -114,8 +118,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // AppearancePage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.lblLanguageRestartRequired);
             this.Controls.Add(this.cboLanguage);
             this.Controls.Add(this.lblLanguage);

@@ -44,6 +44,7 @@
             // 
             this.chkEncryptCompleteFile._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkEncryptCompleteFile.AutoSize = true;
+            this.chkEncryptCompleteFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 3);
             this.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile";
             this.chkEncryptCompleteFile.Size = new System.Drawing.Size(194, 17);
@@ -144,8 +145,8 @@
             // 
             // SecurityPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.chkEncryptCompleteFile);
             this.Controls.Add(this.groupAdvancedSecurityOptions);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
