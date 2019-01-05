@@ -155,7 +155,10 @@ namespace mRemoteNG.Connection.Protocol.ICA
                     }
                     if (Settings.Default.EmptyCredentials == "admpwd")
                     {
-                        pass = AdmPwd.PDSUtils.PdsWrapper.GetManagedAccountPassword(dom, user, false).Password;
+                        if (dom == ".")
+                            pass = AdmPwd.PDSUtils.PdsWrapper.GetLocalAdminPassword(null, _info.Hostname, false, false).Password;
+                        else
+                            pass = AdmPwd.PDSUtils.PdsWrapper.GetManagedAccountPassword(dom, user, false).Password;
                     }
                 }
 

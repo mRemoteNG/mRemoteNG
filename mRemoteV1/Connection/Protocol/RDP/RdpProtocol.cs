@@ -491,7 +491,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     }
                     if (Settings.Default.EmptyCredentials == "admpwd")
                     {
-                        password = AdmPwd.PDSUtils.PdsWrapper.GetManagedAccountPassword(domain, userName, false).Password;
+                        if (domain == ".")
+                            password = AdmPwd.PDSUtils.PdsWrapper.GetLocalAdminPassword(null, _connectionInfo.Hostname, false, false).Password;
+                        else
+                            password = AdmPwd.PDSUtils.PdsWrapper.GetManagedAccountPassword(domain, userName, false).Password;
                     }
                 }
 
