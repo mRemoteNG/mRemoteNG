@@ -137,6 +137,16 @@ namespace mRemoteNG.UI.Controls.Base
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // NGComboBox
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResumeLayout(false);
+		}
+
         public T GetSelectedItemAs<T>()
             where T : class
         {

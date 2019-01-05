@@ -53,7 +53,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkAutomaticallyGetSessionInfo.AutoSize = true;
             this.chkAutomaticallyGetSessionInfo.Location = new System.Drawing.Point(3, 3);
             this.chkAutomaticallyGetSessionInfo.Name = "chkAutomaticallyGetSessionInfo";
-            this.chkAutomaticallyGetSessionInfo.Size = new System.Drawing.Size(198, 17);
+            this.chkAutomaticallyGetSessionInfo.Size = new System.Drawing.Size(220, 17);
             this.chkAutomaticallyGetSessionInfo.TabIndex = 0;
             this.chkAutomaticallyGetSessionInfo.Text = "Automatically get session information";
             this.chkAutomaticallyGetSessionInfo.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkAutomaticReconnect.AutoSize = true;
             this.chkAutomaticReconnect.Location = new System.Drawing.Point(3, 26);
             this.chkAutomaticReconnect.Name = "chkAutomaticReconnect";
-            this.chkAutomaticReconnect.Size = new System.Drawing.Size(399, 17);
+            this.chkAutomaticReconnect.Size = new System.Drawing.Size(430, 17);
             this.chkAutomaticReconnect.TabIndex = 1;
             this.chkAutomaticReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP && ICA only)";
             this.chkAutomaticReconnect.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             0,
             0});
             this.numPuttyWaitTime.Name = "numPuttyWaitTime";
-            this.numPuttyWaitTime.Size = new System.Drawing.Size(49, 20);
+            this.numPuttyWaitTime.Size = new System.Drawing.Size(49, 22);
             this.numPuttyWaitTime.TabIndex = 7;
             this.numPuttyWaitTime.Value = new decimal(new int[] {
             5,
@@ -127,7 +127,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             0,
             0});
             this.numUVNCSCPort.Name = "numUVNCSCPort";
-            this.numUVNCSCPort.Size = new System.Drawing.Size(72, 20);
+            this.numUVNCSCPort.Size = new System.Drawing.Size(72, 22);
             this.numUVNCSCPort.TabIndex = 8;
             this.numUVNCSCPort.Value = new decimal(new int[] {
             5500,
@@ -142,7 +142,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtCustomPuttyPath.Enabled = false;
             this.txtCustomPuttyPath.Location = new System.Drawing.Point(21, 95);
             this.txtCustomPuttyPath.Name = "txtCustomPuttyPath";
-            this.txtCustomPuttyPath.Size = new System.Drawing.Size(346, 20);
+            this.txtCustomPuttyPath.Size = new System.Drawing.Size(346, 22);
             this.txtCustomPuttyPath.TabIndex = 4;
             this.txtCustomPuttyPath.TextChanged += new System.EventHandler(this.txtCustomPuttyPath_TextChanged);
             // 
@@ -175,7 +175,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblSeconds.AutoSize = true;
             this.lblSeconds.Location = new System.Drawing.Point(428, 175);
             this.lblSeconds.Name = "lblSeconds";
-            this.lblSeconds.Size = new System.Drawing.Size(47, 13);
+            this.lblSeconds.Size = new System.Drawing.Size(49, 13);
             this.lblSeconds.TabIndex = 9;
             this.lblSeconds.Text = "seconds";
             // 
@@ -197,7 +197,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkLoadBalanceInfoUseUtf8.AutoSize = true;
             this.chkLoadBalanceInfoUseUtf8.Location = new System.Drawing.Point(3, 49);
             this.chkLoadBalanceInfoUseUtf8.Name = "chkLoadBalanceInfoUseUtf8";
-            this.chkLoadBalanceInfoUseUtf8.Size = new System.Drawing.Size(304, 17);
+            this.chkLoadBalanceInfoUseUtf8.Size = new System.Drawing.Size(317, 17);
             this.chkLoadBalanceInfoUseUtf8.TabIndex = 2;
             this.chkLoadBalanceInfoUseUtf8.Text = "Use UTF8 encoding for RDP \"Load Balance Info\" property";
             this.chkLoadBalanceInfoUseUtf8.UseVisualStyleBackColor = true;
@@ -219,6 +219,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.lblUVNCSCPort);
             this.Controls.Add(this.lblSeconds);
             this.Controls.Add(this.btnBrowseCustomPuttyPath);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AdvancedPage";
             this.Size = new System.Drawing.Size(610, 490);
             ((System.ComponentModel.ISupportInitialize)(this.numPuttyWaitTime)).EndInit();

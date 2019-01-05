@@ -165,6 +165,7 @@
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesModel.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesXmlSerializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlConnectionListMetaData.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlExtensions.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordEncryptorDecorator.cs" />
@@ -842,17 +843,65 @@
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGButton.resx">
+      <DependentUpon>NGButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGCheckBox.resx">
+      <DependentUpon>NGCheckBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGComboBox.resx">
+      <DependentUpon>NGComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGGroupBox.resx">
+      <DependentUpon>NGGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGLabel.resx">
+      <DependentUpon>NGLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGListView.resx">
+      <DependentUpon>NGListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGNumericUpDown.resx">
+      <DependentUpon>NGNumericUpDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGRadioButton.resx">
+      <DependentUpon>NGRadioButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
+      <DependentUpon>NGTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\ConnectionTree\ConnectionTree.resx">
+      <DependentUpon>ConnectionTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordComboBox.resx">
+      <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordListBox.resx">
+      <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRecordListView.resx">
       <DependentUpon>CredentialRecordListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRepositoryListView.resx">
       <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.resx">
+      <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\HeadlessTabControl.resx">
+      <DependentUpon>HeadlessTabControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\PageSequence\SequencedControl.resx">
+      <DependentUpon>SequencedControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\SecureTextBox.resx">
+      <DependentUpon>SecureTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CompositeCredentialRepoUnlockerForm.resx">
       <DependentUpon>CompositeCredentialRepoUnlockerForm.cs</DependentUpon>
@@ -895,8 +944,41 @@
     <EmbeddedResource Include="UI\Forms\Input\FrmInputBox.resx">
       <DependentUpon>FrmInputBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AdvancedPage.resx">
+      <DependentUpon>AdvancedPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
+      <DependentUpon>AppearancePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
+      <DependentUpon>ConnectionsPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\CredentialsPage.resx">
       <DependentUpon>CredentialsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\NotificationsPage.resx">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\OptionsPage.resx">
+      <DependentUpon>OptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\SecurityPage.resx">
+      <DependentUpon>SecurityPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
+      <DependentUpon>SqlServerPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\StartupExitPage.resx">
+      <DependentUpon>StartupExitPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\TabsPanelsPage.resx">
+      <DependentUpon>TabsPanelsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ThemePage.resx">
+      <DependentUpon>ThemePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\UpdatesPage.resx">
+      <DependentUpon>UpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
       <DependentUpon>PasswordForm.cs</DependentUpon>
@@ -965,8 +1047,14 @@
       <DependentUpon>ReconnectGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\TextBox.resx">
+      <DependentUpon>TextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UnhandledExceptionWindow.resx">
       <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaskDialog\CommandButton.resx">
+      <DependentUpon>CommandButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TaskDialog\frmTaskDialog.resx">
       <DependentUpon>frmTaskDialog.cs</DependentUpon>
@@ -978,6 +1066,9 @@
     <EmbeddedResource Include="UI\Window\ActiveDirectoryImportWindow.resx">
       <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\BaseWindow.resx">
+      <DependentUpon>BaseWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ComponentsCheckWindow.resx">
       <DependentUpon>ComponentsCheckWindow.cs</DependentUpon>
@@ -1061,10 +1152,6 @@
     <None Include="Resources\Templates\VisualElements_70_dark.psd" />
     <None Include="Resources\Templates\VisualElements_70_light.psd" />
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Schemas\mremoteng_confcons_v2_8.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

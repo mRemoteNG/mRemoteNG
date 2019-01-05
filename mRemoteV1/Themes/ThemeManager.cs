@@ -12,8 +12,8 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace mRemoteNG.Themes
 {
     /// <summary>
-    /// Main class of the theming component. Centralices creation, loading and deletion of themes
-    /// Implmeented as a singleton
+    /// Main class of the theming component. Centralizes creation, loading and deletion of themes
+    /// Implemented as a singleton
     /// </summary>
     public class ThemeManager
     {
@@ -232,6 +232,9 @@ namespace mRemoteNG.Themes
 			    NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
 			}
 		}
+
+        public int ThemesCount => themes.Count;
+
         #endregion
     }
 } 

@@ -119,5 +119,16 @@ namespace mRemoteNG.UI.Controls.Base
             g.FillEllipse(new SolidBrush(center), _circleSmall); 
             g.DrawEllipse(new Pen(outline), _circle);
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // NGRadioButton
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResumeLayout(false);
+
+        }
     }
 }

@@ -96,7 +96,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkCheckForUpdatesOnStartup.AutoSize = true;
             this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(3, 4);
             this.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup";
-            this.chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(113, 17);
+            this.chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(120, 17);
             this.chkCheckForUpdatesOnStartup.TabIndex = 0;
             this.chkCheckForUpdatesOnStartup.Text = "Check for updates";
             this.chkCheckForUpdatesOnStartup.UseVisualStyleBackColor = true;
@@ -132,7 +132,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblReleaseChannel.Location = new System.Drawing.Point(0, 3);
             this.lblReleaseChannel.Margin = new System.Windows.Forms.Padding(3);
             this.lblReleaseChannel.Name = "lblReleaseChannel";
-            this.lblReleaseChannel.Size = new System.Drawing.Size(91, 13);
+            this.lblReleaseChannel.Size = new System.Drawing.Size(95, 13);
             this.lblReleaseChannel.TabIndex = 0;
             this.lblReleaseChannel.Text = "Release Channel:";
             // 
@@ -184,7 +184,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtProxyAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProxyAddress.Location = new System.Drawing.Point(110, 4);
             this.txtProxyAddress.Name = "txtProxyAddress";
-            this.txtProxyAddress.Size = new System.Drawing.Size(240, 20);
+            this.txtProxyAddress.Size = new System.Drawing.Size(240, 22);
             this.txtProxyAddress.TabIndex = 1;
             // 
             // lblProxyPort
@@ -211,7 +211,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             0,
             0});
             this.numProxyPort.Name = "numProxyPort";
-            this.numProxyPort.Size = new System.Drawing.Size(64, 20);
+            this.numProxyPort.Size = new System.Drawing.Size(64, 22);
             this.numProxyPort.TabIndex = 3;
             this.numProxyPort.Value = new decimal(new int[] {
             80,
@@ -225,7 +225,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkUseProxyForAutomaticUpdates.AutoSize = true;
             this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(6, 0);
             this.chkUseProxyForAutomaticUpdates.Name = "chkUseProxyForAutomaticUpdates";
-            this.chkUseProxyForAutomaticUpdates.Size = new System.Drawing.Size(168, 17);
+            this.chkUseProxyForAutomaticUpdates.Size = new System.Drawing.Size(176, 17);
             this.chkUseProxyForAutomaticUpdates.TabIndex = 0;
             this.chkUseProxyForAutomaticUpdates.Text = "Use a proxy server to connect";
             this.chkUseProxyForAutomaticUpdates.UseVisualStyleBackColor = true;
@@ -238,7 +238,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkUseProxyAuthentication.Enabled = false;
             this.chkUseProxyAuthentication.Location = new System.Drawing.Point(27, 70);
             this.chkUseProxyAuthentication.Name = "chkUseProxyAuthentication";
-            this.chkUseProxyAuthentication.Size = new System.Drawing.Size(216, 17);
+            this.chkUseProxyAuthentication.Size = new System.Drawing.Size(234, 17);
             this.chkUseProxyAuthentication.TabIndex = 2;
             this.chkUseProxyAuthentication.Text = "This proxy server requires authentication";
             this.chkUseProxyAuthentication.UseVisualStyleBackColor = true;
@@ -270,7 +270,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtProxyUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProxyUsername.Location = new System.Drawing.Point(110, 4);
             this.txtProxyUsername.Name = "txtProxyUsername";
-            this.txtProxyUsername.Size = new System.Drawing.Size(240, 20);
+            this.txtProxyUsername.Size = new System.Drawing.Size(240, 22);
             this.txtProxyUsername.TabIndex = 1;
             // 
             // lblProxyPassword
@@ -287,7 +287,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtProxyPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProxyPassword.Location = new System.Drawing.Point(110, 30);
             this.txtProxyPassword.Name = "txtProxyPassword";
-            this.txtProxyPassword.Size = new System.Drawing.Size(240, 20);
+            this.txtProxyPassword.Size = new System.Drawing.Size(240, 22);
             this.txtProxyPassword.TabIndex = 3;
             this.txtProxyPassword.UseSystemPasswordChar = true;
             // 
@@ -320,6 +320,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.lblUpdatesExplanation);
             this.Controls.Add(this.pnlUpdateCheck);
             this.Controls.Add(this.pnlProxy);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "UpdatesPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.pnlUpdateCheck.ResumeLayout(false);

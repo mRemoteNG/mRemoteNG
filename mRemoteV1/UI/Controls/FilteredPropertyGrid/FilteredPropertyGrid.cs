@@ -50,8 +50,8 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 	    public IEnumerable<string> VisibleProperties => _propertyDescriptors.Select(p => p.Name);
 
         public new AttributeCollection BrowsableAttributes {
-			get { return _browsableAttributes; }
-			set {
+			get => _browsableAttributes;
+            set {
 			    if (_browsableAttributes == value) return;
 			    _hiddenAttributes = null;
 			    _browsableAttributes = value;
@@ -63,8 +63,8 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 		/// Get or set the categories to hide.
 		/// </summary>
 		public AttributeCollection HiddenAttributes {
-			get { return _hiddenAttributes; }
-			set {
+			get => _hiddenAttributes;
+            set {
 			    if (value == _hiddenAttributes) return;
 			    _hiddenAttributes = value;
 			    _browsableAttributes = null;
@@ -77,8 +77,8 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 		/// </summary>
 		/// <exception cref="ArgumentException">if one or several properties don't exist.</exception>
 		public string[] BrowsableProperties {
-			get { return _mBrowsableProperties; }
-			set {
+			get => _mBrowsableProperties;
+            set {
 			    if (value == _mBrowsableProperties) return;
 			    _mBrowsableProperties = value;
 			    RefreshProperties();
@@ -87,8 +87,8 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 
 		/// <summary>Get or set the properties to hide.</summary>
 		public string[] HiddenProperties {
-			get { return _mHiddenProperties; }
-			set {
+			get => _mHiddenProperties;
+            set {
 			    if (value == _mHiddenProperties) return;
 			    _mHiddenProperties = value;
 			    RefreshProperties();
@@ -100,13 +100,11 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 		/// </summary>
 		/// <remarks>The object passed to the base PropertyGrid is the wrapper.</remarks>
 		public new object SelectedObject {
-		    get
-		    {
-		        return _mWrapper != null 
-		            ? ((ObjectWrapper)base.SelectedObject).SelectedObject 
-		            : null;
-		    }
-			set {
+		    get =>
+                _mWrapper != null 
+                    ? ((ObjectWrapper)base.SelectedObject).SelectedObject 
+                    : null;
+            set {
 				// Set the new object to the wrapper and create one if necessary.
 				if(_mWrapper == null)
 				{

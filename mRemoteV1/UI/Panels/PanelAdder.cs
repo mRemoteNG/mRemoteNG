@@ -97,9 +97,9 @@ namespace mRemoteNG.UI.Panels
             {
                 var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
                 var nTitle = "";
-                using (FrmInputBox frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle))
+                using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle))
                 {
-                    DialogResult dr = frmInputBox.ShowDialog();
+                    var dr = frmInputBox.ShowDialog();
                     if (dr == DialogResult.OK && string.IsNullOrEmpty(frmInputBox.returnValue))
                         conW.SetFormText(frmInputBox.returnValue);
                 }
@@ -146,8 +146,7 @@ namespace mRemoteNG.UI.Panels
                 if (tagEnumeration == null) return;
                 foreach (var obj in tagEnumeration)
                 {
-                    var screen1 = obj as Screen;
-                    if (screen1 != null)
+                    if (obj is Screen screen1)
                     {
                         screen = screen1;
                     }

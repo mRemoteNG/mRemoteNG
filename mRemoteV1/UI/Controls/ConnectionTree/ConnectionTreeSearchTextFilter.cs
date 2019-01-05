@@ -17,8 +17,7 @@ namespace mRemoteNG.UI.Controls
 
         public bool Filter(object modelObject)
         {
-            var objectAsConnectionInfo = modelObject as ConnectionInfo;
-            if (objectAsConnectionInfo == null)
+            if (!(modelObject is ConnectionInfo objectAsConnectionInfo))
                 return false;
 
             if (SpecialInclusionList.Contains(objectAsConnectionInfo))
@@ -26,12 +25,9 @@ namespace mRemoteNG.UI.Controls
 
             var filterTextLower = FilterText.ToLowerInvariant();
 
-            if (objectAsConnectionInfo.Name.ToLowerInvariant().Contains(filterTextLower) ||
-                objectAsConnectionInfo.Hostname.ToLowerInvariant().Contains(filterTextLower) ||
-                objectAsConnectionInfo.Description.ToLowerInvariant().Contains(filterTextLower))
-                return true;
-
-            return false;
+            return objectAsConnectionInfo.Name.ToLowerInvariant().Contains(filterTextLower) ||
+                   objectAsConnectionInfo.Hostname.ToLowerInvariant().Contains(filterTextLower) ||
+                   objectAsConnectionInfo.Description.ToLowerInvariant().Contains(filterTextLower);
         }
     }
 }

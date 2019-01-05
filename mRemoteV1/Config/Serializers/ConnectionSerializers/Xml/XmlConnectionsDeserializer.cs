@@ -18,6 +18,7 @@ using System.Globalization;
 using System.Security;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
@@ -67,8 +68,8 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 2.6)
                 {
-                    var fullFileEncryptionValue = rootXmlElement?.Attributes["FullFileEncryption"].Value ?? "";
-                    if (bool.Parse(fullFileEncryptionValue))
+                    var fullFileEncryptionValue = rootXmlElement.GetAttributeAsBool("FullFileEncryption");
+                    if (fullFileEncryptionValue)
                     {
                         var decryptedContent = _decryptor.Decrypt(rootXmlElement.InnerText);
                         rootXmlElement.InnerXml = decryptedContent;
@@ -139,14 +140,9 @@ namespace mRemoteNG.Config.Serializers.Xml
         {
             if (_confVersion >= 2.6)
             {
-                BlockCipherEngines engine;
-                Enum.TryParse(connectionsRootElement?.Attributes["EncryptionEngine"].Value, true, out engine);
-
-                BlockCipherModes mode;
-                Enum.TryParse(connectionsRootElement?.Attributes["BlockCipherMode"].Value, true, out mode);
-
-                int keyDerivationIterations;
-                int.TryParse(connectionsRootElement?.Attributes["KdfIterations"].Value, out keyDerivationIterations);
+                var engine = connectionsRootElement.GetAttributeAsEnum<BlockCipherEngines>("EncryptionEngine");
+                var mode = connectionsRootElement.GetAttributeAsEnum<BlockCipherModes>("BlockCipherMode");
+                var keyDerivationIterations = connectionsRootElement.GetAttributeAsInt("KdfIterations");
 
                 _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
                 {
@@ -167,8 +163,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 if (!parentXmlNode.HasChildNodes) return;
                 foreach (XmlNode xmlNode in parentXmlNode.ChildNodes)
                 {
-                    var treeNodeTypeString = xmlNode.Attributes?["Type"].Value ?? "connection";
-                    var nodeType = (TreeNodeType)Enum.Parse(typeof(TreeNodeType), treeNodeTypeString, true);
+                    var nodeType = xmlNode.GetAttributeAsEnum("Type", TreeNodeType.Connection);
 
                     // ReSharper disable once SwitchStatementMissingSomeCases
                     switch (nodeType)
@@ -184,8 +179,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                                 containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
                             if (_confVersion >= 0.8)
                             {
-                                var expandedValue = xmlNode.Attributes?["Expanded"].Value ?? "";
-                                containerInfo.IsExpanded = bool.Parse(expandedValue);
+                                containerInfo.IsExpanded = xmlNode.GetAttributeAsBool("Expanded");
                             }
 
                             parentContainer.AddChild(containerInfo);
@@ -203,9 +197,10 @@ namespace mRemoteNG.Config.Serializers.Xml
 
         private ConnectionInfo GetConnectionInfoFromXml(XmlNode xmlnode)
         {
-            if (xmlnode.Attributes == null) return null;
+            if (xmlnode?.Attributes == null)
+                return null;
 
-			var connectionId = xmlnode.Attributes["Id"]?.Value;
+			var connectionId = xmlnode.GetAttributeAsString("Id");
             if (string.IsNullOrWhiteSpace(connectionId))
                 connectionId = Guid.NewGuid().ToString();
 			var connectionInfo = new ConnectionInfo(connectionId);
@@ -214,16 +209,16 @@ namespace mRemoteNG.Config.Serializers.Xml
             {
                 if (_confVersion >= 0.2)
                 {
-                    connectionInfo.Name = xmlnode.Attributes["Name"].Value;
-                    connectionInfo.Description = xmlnode.Attributes["Descr"].Value;
-                    connectionInfo.Hostname = xmlnode.Attributes["Hostname"].Value;
-                    connectionInfo.DisplayWallpaper = bool.Parse(xmlnode.Attributes["DisplayWallpaper"].Value);
-                    connectionInfo.DisplayThemes = bool.Parse(xmlnode.Attributes["DisplayThemes"].Value);
-                    connectionInfo.CacheBitmaps = bool.Parse(xmlnode.Attributes["CacheBitmaps"].Value);
+                    connectionInfo.Name = xmlnode.GetAttributeAsString("Name");
+                    connectionInfo.Description = xmlnode.GetAttributeAsString("Descr");
+                    connectionInfo.Hostname = xmlnode.GetAttributeAsString("Hostname");
+                    connectionInfo.DisplayWallpaper = xmlnode.GetAttributeAsBool("DisplayWallpaper");
+                    connectionInfo.DisplayThemes = xmlnode.GetAttributeAsBool("DisplayThemes");
+                    connectionInfo.CacheBitmaps = xmlnode.GetAttributeAsBool("CacheBitmaps");
 
                     if (_confVersion < 1.1) //1.0 - 0.1
                     {
-                        connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value)
+                        connectionInfo.Resolution = xmlnode.GetAttributeAsBool("Fullscreen")
                             ? RdpProtocol.RDPResolutions.Fullscreen
                             : RdpProtocol.RDPResolutions.FitToWindow;
                     }
@@ -231,9 +226,9 @@ namespace mRemoteNG.Config.Serializers.Xml
                     if (_confVersion <= 2.6) // 0.2 - 2.6
                     {
 #pragma warning disable 618
-                        connectionInfo.Username = xmlnode.Attributes["Username"].Value;
-                        connectionInfo.Password = _decryptor.Decrypt(xmlnode.Attributes["Password"].Value);
-                        connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
+                        connectionInfo.Username = xmlnode.GetAttributeAsString("Username");
+                        connectionInfo.Password = _decryptor.Decrypt(xmlnode.GetAttributeAsString("Password"));
+                        connectionInfo.Domain = xmlnode.GetAttributeAsString("Domain");
 #pragma warning restore 618
                     }
                 }
@@ -242,10 +237,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     if (_confVersion < 0.7)
                     {
-                        if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value))
+                        if (xmlnode.GetAttributeAsBool("UseVNC"))
                         {
                             connectionInfo.Protocol = ProtocolType.VNC;
-                            connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
+                            connectionInfo.Port = xmlnode.GetAttributeAsInt("VNCPort");
                         }
                         else
                         {
@@ -263,18 +258,18 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     if (_confVersion < 0.7)
                     {
-                        connectionInfo.Port = Convert.ToInt32(Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) 
-                            ? xmlnode.Attributes["VNCPort"].Value 
-                            : xmlnode.Attributes["RDPPort"].Value);
+                        connectionInfo.Port = xmlnode.GetAttributeAsBool("UseVNC") 
+                            ? xmlnode.GetAttributeAsInt("VNCPort")
+                            : xmlnode.GetAttributeAsInt("RDPPort");
                     }
 
-                    connectionInfo.UseConsoleSession = bool.Parse(xmlnode.Attributes["ConnectToConsole"].Value);
+                    connectionInfo.UseConsoleSession = xmlnode.GetAttributeAsBool("ConnectToConsole");
                 }
                 else
                 {
                     if (_confVersion < 0.7)
                     {
-                        if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value))
+                        if (xmlnode.GetAttributeAsBool("UseVNC"))
                             connectionInfo.Port = (int)ProtocolVNC.Defaults.Port;
                         else
                             connectionInfo.Port = (int)RdpProtocol.Defaults.Port;
@@ -284,10 +279,10 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 0.5)
                 {
-                    connectionInfo.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["RedirectDiskDrives"].Value);
-                    connectionInfo.RedirectPrinters = bool.Parse(xmlnode.Attributes["RedirectPrinters"].Value);                    
-                    connectionInfo.RedirectPorts = bool.Parse(xmlnode.Attributes["RedirectPorts"].Value);
-                    connectionInfo.RedirectSmartCards = bool.Parse(xmlnode.Attributes["RedirectSmartCards"].Value);
+                    connectionInfo.RedirectDiskDrives = xmlnode.GetAttributeAsBool("RedirectDiskDrives");
+                    connectionInfo.RedirectPrinters = xmlnode.GetAttributeAsBool("RedirectPrinters");
+                    connectionInfo.RedirectPorts = xmlnode.GetAttributeAsBool("RedirectPorts");
+                    connectionInfo.RedirectSmartCards = xmlnode.GetAttributeAsBool("RedirectSmartCards");
                 }
                 else
                 {
@@ -299,31 +294,29 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 0.7)
                 {
-	                ProtocolType protocolType;
-	                Enum.TryParse(xmlnode.Attributes["Protocol"].Value, true, out protocolType);
-                    connectionInfo.Protocol = protocolType;
-                    connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["Port"].Value);
+                    connectionInfo.Protocol = xmlnode.GetAttributeAsEnum<ProtocolType>("Protocol");
+                    connectionInfo.Port = xmlnode.GetAttributeAsInt("Port");
                 }
 
                 if (_confVersion >= 1.0)
                 {
-                    connectionInfo.RedirectKeys = bool.Parse(xmlnode.Attributes["RedirectKeys"].Value);
+                    connectionInfo.RedirectKeys = xmlnode.GetAttributeAsBool("RedirectKeys");
                 }
 
                 if (_confVersion >= 1.2)
                 {
-                    connectionInfo.PuttySession = xmlnode.Attributes["PuttySession"].Value;
+                    connectionInfo.PuttySession = xmlnode.GetAttributeAsString("PuttySession");
                 }
 
                 if (_confVersion >= 1.3)
                 {
-                    connectionInfo.Colors = (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors), xmlnode.Attributes["Colors"].Value, true);
-                    connectionInfo.Resolution = (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions), xmlnode.Attributes["Resolution"].Value, true);
-                    connectionInfo.RedirectSound = (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), xmlnode.Attributes["RedirectSound"].Value, true);
+                    connectionInfo.Colors = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPColors>("Colors");
+                    connectionInfo.Resolution = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPResolutions>("Resolution");
+                    connectionInfo.RedirectSound = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPSounds>("RedirectSound");
                 }
                 else
                 {
-                    switch (Convert.ToInt32(xmlnode.Attributes["Colors"].Value))
+                    switch (xmlnode.GetAttributeAsInt("Colors"))
                     {
                         case 0:
                             connectionInfo.Colors = RdpProtocol.RDPColors.Colors256;
@@ -344,177 +337,177 @@ namespace mRemoteNG.Config.Serializers.Xml
                             break;
                     }
 
-                    connectionInfo.RedirectSound = (RdpProtocol.RDPSounds)Convert.ToInt32(xmlnode.Attributes["RedirectSound"].Value);
+                    connectionInfo.RedirectSound = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPSounds>("RedirectSound");
                 }
 
                 if (_confVersion >= 1.3)
                 {
-                    connectionInfo.Inheritance.CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value);
-                    connectionInfo.Inheritance.Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value);
-                    connectionInfo.Inheritance.Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value);
-                    connectionInfo.Inheritance.DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value);
-                    connectionInfo.Inheritance.DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value);
-                    connectionInfo.Inheritance.Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value);
-                    connectionInfo.Inheritance.Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value);
-                    connectionInfo.Inheritance.Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value);
-                    connectionInfo.Inheritance.Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value);
-                    connectionInfo.Inheritance.PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value);
-                    connectionInfo.Inheritance.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["InheritRedirectDiskDrives"].Value);
-                    connectionInfo.Inheritance.RedirectKeys = bool.Parse(xmlnode.Attributes["InheritRedirectKeys"].Value);
-                    connectionInfo.Inheritance.RedirectPorts = bool.Parse(xmlnode.Attributes["InheritRedirectPorts"].Value);
-                    connectionInfo.Inheritance.RedirectPrinters = bool.Parse(xmlnode.Attributes["InheritRedirectPrinters"].Value);
-                    connectionInfo.Inheritance.RedirectSmartCards = bool.Parse(xmlnode.Attributes["InheritRedirectSmartCards"].Value);
-                    connectionInfo.Inheritance.RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value);
-                    connectionInfo.Inheritance.Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value);
-                    connectionInfo.Inheritance.UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value);
+                    connectionInfo.Inheritance.CacheBitmaps = xmlnode.GetAttributeAsBool("InheritCacheBitmaps");
+                    connectionInfo.Inheritance.Colors = xmlnode.GetAttributeAsBool("InheritColors");
+                    connectionInfo.Inheritance.Description = xmlnode.GetAttributeAsBool("InheritDescription");
+                    connectionInfo.Inheritance.DisplayThemes = xmlnode.GetAttributeAsBool("InheritDisplayThemes");
+                    connectionInfo.Inheritance.DisplayWallpaper = xmlnode.GetAttributeAsBool("InheritDisplayWallpaper");
+                    connectionInfo.Inheritance.Icon = xmlnode.GetAttributeAsBool("InheritIcon");
+                    connectionInfo.Inheritance.Panel = xmlnode.GetAttributeAsBool("InheritPanel");
+                    connectionInfo.Inheritance.Port = xmlnode.GetAttributeAsBool("InheritPort");
+                    connectionInfo.Inheritance.Protocol = xmlnode.GetAttributeAsBool("InheritProtocol");
+                    connectionInfo.Inheritance.PuttySession = xmlnode.GetAttributeAsBool("InheritPuttySession");
+                    connectionInfo.Inheritance.RedirectDiskDrives = xmlnode.GetAttributeAsBool("InheritRedirectDiskDrives");
+                    connectionInfo.Inheritance.RedirectKeys = xmlnode.GetAttributeAsBool("InheritRedirectKeys");
+                    connectionInfo.Inheritance.RedirectPorts = xmlnode.GetAttributeAsBool("InheritRedirectPorts");
+                    connectionInfo.Inheritance.RedirectPrinters = xmlnode.GetAttributeAsBool("InheritRedirectPrinters");
+                    connectionInfo.Inheritance.RedirectSmartCards = xmlnode.GetAttributeAsBool("InheritRedirectSmartCards");
+                    connectionInfo.Inheritance.RedirectSound = xmlnode.GetAttributeAsBool("InheritRedirectSound");
+                    connectionInfo.Inheritance.Resolution = xmlnode.GetAttributeAsBool("InheritResolution");
+                    connectionInfo.Inheritance.UseConsoleSession = xmlnode.GetAttributeAsBool("InheritUseConsoleSession");
 
                     if (!Runtime.UseCredentialManager || _confVersion <= 2.6) // 1.3 - 2.6
                     {
-                        connectionInfo.Inheritance.Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value);
-                        connectionInfo.Inheritance.Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value);
-                        connectionInfo.Inheritance.Username = bool.Parse(xmlnode.Attributes["InheritUsername"].Value);
+                        connectionInfo.Inheritance.Domain = xmlnode.GetAttributeAsBool("InheritDomain");
+                        connectionInfo.Inheritance.Password = xmlnode.GetAttributeAsBool("InheritPassword");
+                        connectionInfo.Inheritance.Username = xmlnode.GetAttributeAsBool("InheritUsername");
                     }
-                    connectionInfo.Icon = xmlnode.Attributes["Icon"].Value;
-                    connectionInfo.Panel = xmlnode.Attributes["Panel"].Value;
+                    connectionInfo.Icon = xmlnode.GetAttributeAsString("Icon");
+                    connectionInfo.Panel = xmlnode.GetAttributeAsString("Panel");
                 }
                 else
                 {
-                    if (Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value))
+                    if (xmlnode.GetAttributeAsBool("Inherit"))
                         connectionInfo.Inheritance.TurnOnInheritanceCompletely();
-                    connectionInfo.Icon = Convert.ToString(xmlnode.Attributes["Icon"].Value.Replace(".ico", ""));
+                    connectionInfo.Icon = xmlnode.GetAttributeAsString("Icon").Replace(".ico", "");
                     connectionInfo.Panel = Language.strGeneral;
                 }
 
                 if (_confVersion >= 1.5)
                 {
-                    connectionInfo.PleaseConnect = bool.Parse(xmlnode.Attributes["Connected"].Value);
+                    connectionInfo.PleaseConnect = xmlnode.GetAttributeAsBool("Connected");
                 }
 
                 if (_confVersion >= 1.6)
                 {
-                    connectionInfo.ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength), xmlnode.Attributes["ICAEncryptionStrength"].Value, true);
-                    connectionInfo.Inheritance.ICAEncryptionStrength = bool.Parse(xmlnode.Attributes["InheritICAEncryptionStrength"].Value);
-                    connectionInfo.PreExtApp = xmlnode.Attributes["PreExtApp"].Value;
-                    connectionInfo.PostExtApp = xmlnode.Attributes["PostExtApp"].Value;
-                    connectionInfo.Inheritance.PreExtApp = bool.Parse(xmlnode.Attributes["InheritPreExtApp"].Value);
-                    connectionInfo.Inheritance.PostExtApp = bool.Parse(xmlnode.Attributes["InheritPostExtApp"].Value);
+                    connectionInfo.ICAEncryptionStrength = xmlnode.GetAttributeAsEnum<IcaProtocol.EncryptionStrength>("ICAEncryptionStrength");
+                    connectionInfo.Inheritance.ICAEncryptionStrength = xmlnode.GetAttributeAsBool("InheritICAEncryptionStrength");
+                    connectionInfo.PreExtApp = xmlnode.GetAttributeAsString("PreExtApp");
+                    connectionInfo.PostExtApp = xmlnode.GetAttributeAsString("PostExtApp");
+                    connectionInfo.Inheritance.PreExtApp = xmlnode.GetAttributeAsBool("InheritPreExtApp");
+                    connectionInfo.Inheritance.PostExtApp = xmlnode.GetAttributeAsBool("InheritPostExtApp");
                 }
 
                 if (_confVersion >= 1.7)
                 {
-                    connectionInfo.VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression), xmlnode.Attributes["VNCCompression"].Value, true);
-                    connectionInfo.VNCEncoding = (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), xmlnode.Attributes["VNCEncoding"].Value, true);
-                    connectionInfo.VNCAuthMode = (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), xmlnode.Attributes["VNCAuthMode"].Value, true);
-                    connectionInfo.VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType), xmlnode.Attributes["VNCProxyType"].Value, true);
-                    connectionInfo.VNCProxyIP = xmlnode.Attributes["VNCProxyIP"].Value;
-                    connectionInfo.VNCProxyPort = Convert.ToInt32(xmlnode.Attributes["VNCProxyPort"].Value);
-                    connectionInfo.VNCProxyUsername = xmlnode.Attributes["VNCProxyUsername"].Value;
-                    connectionInfo.VNCProxyPassword = _decryptor.Decrypt(xmlnode.Attributes["VNCProxyPassword"].Value);
-                    connectionInfo.VNCColors = (ProtocolVNC.Colors)Enum.Parse(typeof(ProtocolVNC.Colors), xmlnode.Attributes["VNCColors"].Value, true);
-                    connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), xmlnode.Attributes["VNCSmartSizeMode"].Value, true);
-                    connectionInfo.VNCViewOnly = bool.Parse(xmlnode.Attributes["VNCViewOnly"].Value);
-                    connectionInfo.Inheritance.VNCCompression = bool.Parse(xmlnode.Attributes["InheritVNCCompression"].Value);
-                    connectionInfo.Inheritance.VNCEncoding = bool.Parse(xmlnode.Attributes["InheritVNCEncoding"].Value);
-                    connectionInfo.Inheritance.VNCAuthMode = bool.Parse(xmlnode.Attributes["InheritVNCAuthMode"].Value);
-                    connectionInfo.Inheritance.VNCProxyType = bool.Parse(xmlnode.Attributes["InheritVNCProxyType"].Value);
-                    connectionInfo.Inheritance.VNCProxyIP = bool.Parse(xmlnode.Attributes["InheritVNCProxyIP"].Value);
-                    connectionInfo.Inheritance.VNCProxyPort = bool.Parse(xmlnode.Attributes["InheritVNCProxyPort"].Value);
-                    connectionInfo.Inheritance.VNCProxyUsername = bool.Parse(xmlnode.Attributes["InheritVNCProxyUsername"].Value);
-                    connectionInfo.Inheritance.VNCProxyPassword = bool.Parse(xmlnode.Attributes["InheritVNCProxyPassword"].Value);
-                    connectionInfo.Inheritance.VNCColors = bool.Parse(xmlnode.Attributes["InheritVNCColors"].Value);
-                    connectionInfo.Inheritance.VNCSmartSizeMode = bool.Parse(xmlnode.Attributes["InheritVNCSmartSizeMode"].Value);
-                    connectionInfo.Inheritance.VNCViewOnly = bool.Parse(xmlnode.Attributes["InheritVNCViewOnly"].Value);
+                    connectionInfo.VNCCompression = xmlnode.GetAttributeAsEnum<ProtocolVNC.Compression>("VNCCompression");
+                    connectionInfo.VNCEncoding = xmlnode.GetAttributeAsEnum<ProtocolVNC.Encoding>("VNCEncoding");
+                    connectionInfo.VNCAuthMode = xmlnode.GetAttributeAsEnum<ProtocolVNC.AuthMode>("VNCAuthMode");
+                    connectionInfo.VNCProxyType = xmlnode.GetAttributeAsEnum<ProtocolVNC.ProxyType>("VNCProxyType");
+                    connectionInfo.VNCProxyIP = xmlnode.GetAttributeAsString("VNCProxyIP");
+                    connectionInfo.VNCProxyPort = xmlnode.GetAttributeAsInt("VNCProxyPort");
+                    connectionInfo.VNCProxyUsername = xmlnode.GetAttributeAsString("VNCProxyUsername");
+                    connectionInfo.VNCProxyPassword = _decryptor.Decrypt(xmlnode.GetAttributeAsString("VNCProxyPassword"));
+                    connectionInfo.VNCColors = xmlnode.GetAttributeAsEnum<ProtocolVNC.Colors>("VNCColors");
+                    connectionInfo.VNCSmartSizeMode = xmlnode.GetAttributeAsEnum<ProtocolVNC.SmartSizeMode>("VNCSmartSizeMode");
+                    connectionInfo.VNCViewOnly = xmlnode.GetAttributeAsBool("VNCViewOnly");
+                    connectionInfo.Inheritance.VNCCompression = xmlnode.GetAttributeAsBool("InheritVNCCompression");
+                    connectionInfo.Inheritance.VNCEncoding = xmlnode.GetAttributeAsBool("InheritVNCEncoding");
+                    connectionInfo.Inheritance.VNCAuthMode = xmlnode.GetAttributeAsBool("InheritVNCAuthMode");
+                    connectionInfo.Inheritance.VNCProxyType = xmlnode.GetAttributeAsBool("InheritVNCProxyType");
+                    connectionInfo.Inheritance.VNCProxyIP = xmlnode.GetAttributeAsBool("InheritVNCProxyIP");
+                    connectionInfo.Inheritance.VNCProxyPort = xmlnode.GetAttributeAsBool("InheritVNCProxyPort");
+                    connectionInfo.Inheritance.VNCProxyUsername = xmlnode.GetAttributeAsBool("InheritVNCProxyUsername");
+                    connectionInfo.Inheritance.VNCProxyPassword = xmlnode.GetAttributeAsBool("InheritVNCProxyPassword");
+                    connectionInfo.Inheritance.VNCColors = xmlnode.GetAttributeAsBool("InheritVNCColors");
+                    connectionInfo.Inheritance.VNCSmartSizeMode = xmlnode.GetAttributeAsBool("InheritVNCSmartSizeMode");
+                    connectionInfo.Inheritance.VNCViewOnly = xmlnode.GetAttributeAsBool("InheritVNCViewOnly");
                 }
 
                 if (_confVersion >= 1.8)
                 {
-                    connectionInfo.RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel)Enum.Parse(typeof(RdpProtocol.AuthenticationLevel), xmlnode.Attributes["RDPAuthenticationLevel"].Value, true);
-                    connectionInfo.Inheritance.RDPAuthenticationLevel = bool.Parse(xmlnode.Attributes["InheritRDPAuthenticationLevel"].Value);
+                    connectionInfo.RDPAuthenticationLevel = xmlnode.GetAttributeAsEnum<RdpProtocol.AuthenticationLevel>("RDPAuthenticationLevel");
+                    connectionInfo.Inheritance.RDPAuthenticationLevel = xmlnode.GetAttributeAsBool("InheritRDPAuthenticationLevel");
                 }
 
                 if (_confVersion >= 1.9)
                 {
-                    connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), xmlnode.Attributes["RenderingEngine"].Value, true);
-                    connectionInfo.MacAddress = xmlnode.Attributes["MacAddress"].Value;
-                    connectionInfo.Inheritance.RenderingEngine = bool.Parse(xmlnode.Attributes["InheritRenderingEngine"].Value);
-                    connectionInfo.Inheritance.MacAddress = bool.Parse(xmlnode.Attributes["InheritMacAddress"].Value);
+                    connectionInfo.RenderingEngine = xmlnode.GetAttributeAsEnum<HTTPBase.RenderingEngine>("RenderingEngine");
+                    connectionInfo.MacAddress = xmlnode.GetAttributeAsString("MacAddress");
+                    connectionInfo.Inheritance.RenderingEngine = xmlnode.GetAttributeAsBool("InheritRenderingEngine");
+                    connectionInfo.Inheritance.MacAddress = xmlnode.GetAttributeAsBool("InheritMacAddress");
                 }
 
                 if (_confVersion >= 2.0)
                 {
-                    connectionInfo.UserField = xmlnode.Attributes["UserField"].Value;
-                    connectionInfo.Inheritance.UserField = bool.Parse(xmlnode.Attributes["InheritUserField"].Value);
+                    connectionInfo.UserField = xmlnode.GetAttributeAsString("UserField");
+                    connectionInfo.Inheritance.UserField = xmlnode.GetAttributeAsBool("InheritUserField");
                 }
 
                 if (_confVersion >= 2.1)
                 {
-                    connectionInfo.ExtApp = xmlnode.Attributes["ExtApp"].Value;
-                    connectionInfo.Inheritance.ExtApp = bool.Parse(xmlnode.Attributes["InheritExtApp"].Value);
+                    connectionInfo.ExtApp = xmlnode.GetAttributeAsString("ExtApp");
+                    connectionInfo.Inheritance.ExtApp = xmlnode.GetAttributeAsBool("InheritExtApp");
                 }
 
                 if (_confVersion >= 2.2)
                 {
                     // Get settings
-                    connectionInfo.RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod)Enum.Parse(typeof(RdpProtocol.RDGatewayUsageMethod), xmlnode.Attributes["RDGatewayUsageMethod"].Value, true);
-                    connectionInfo.RDGatewayHostname = xmlnode.Attributes["RDGatewayHostname"].Value;
-                    connectionInfo.RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RdpProtocol.RDGatewayUseConnectionCredentials), xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value, true);
-                    connectionInfo.RDGatewayUsername = xmlnode.Attributes["RDGatewayUsername"].Value;
-                    connectionInfo.RDGatewayPassword = _decryptor.Decrypt(Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value));
-                    connectionInfo.RDGatewayDomain = xmlnode.Attributes["RDGatewayDomain"].Value;
+                    connectionInfo.RDGatewayUsageMethod = xmlnode.GetAttributeAsEnum<RdpProtocol.RDGatewayUsageMethod>("RDGatewayUsageMethod");
+                    connectionInfo.RDGatewayHostname = xmlnode.GetAttributeAsString("RDGatewayHostname");
+                    connectionInfo.RDGatewayUseConnectionCredentials = xmlnode.GetAttributeAsEnum<RdpProtocol.RDGatewayUseConnectionCredentials>("RDGatewayUseConnectionCredentials");
+                    connectionInfo.RDGatewayUsername = xmlnode.GetAttributeAsString("RDGatewayUsername");
+                    connectionInfo.RDGatewayPassword = _decryptor.Decrypt(xmlnode.GetAttributeAsString("RDGatewayPassword"));
+                    connectionInfo.RDGatewayDomain = xmlnode.GetAttributeAsString("RDGatewayDomain");
 
                     // Get inheritance settings
-                    connectionInfo.Inheritance.RDGatewayUsageMethod = bool.Parse(xmlnode.Attributes["InheritRDGatewayUsageMethod"].Value);
-                    connectionInfo.Inheritance.RDGatewayHostname = bool.Parse(xmlnode.Attributes["InheritRDGatewayHostname"].Value);
-                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials = bool.Parse(xmlnode.Attributes["InheritRDGatewayUseConnectionCredentials"].Value);
-                    connectionInfo.Inheritance.RDGatewayUsername = bool.Parse(xmlnode.Attributes["InheritRDGatewayUsername"].Value);
-                    connectionInfo.Inheritance.RDGatewayPassword = bool.Parse(xmlnode.Attributes["InheritRDGatewayPassword"].Value);
-                    connectionInfo.Inheritance.RDGatewayDomain = bool.Parse(xmlnode.Attributes["InheritRDGatewayDomain"].Value);
+                    connectionInfo.Inheritance.RDGatewayUsageMethod = xmlnode.GetAttributeAsBool("InheritRDGatewayUsageMethod");
+                    connectionInfo.Inheritance.RDGatewayHostname = xmlnode.GetAttributeAsBool("InheritRDGatewayHostname");
+                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials = xmlnode.GetAttributeAsBool("InheritRDGatewayUseConnectionCredentials");
+                    connectionInfo.Inheritance.RDGatewayUsername = xmlnode.GetAttributeAsBool("InheritRDGatewayUsername");
+                    connectionInfo.Inheritance.RDGatewayPassword = xmlnode.GetAttributeAsBool("InheritRDGatewayPassword");
+                    connectionInfo.Inheritance.RDGatewayDomain = xmlnode.GetAttributeAsBool("InheritRDGatewayDomain");
                 }
 
                 if (_confVersion >= 2.3)
                 {
                     // Get settings
-                    connectionInfo.EnableFontSmoothing = bool.Parse(xmlnode.Attributes["EnableFontSmoothing"].Value);
-                    connectionInfo.EnableDesktopComposition = bool.Parse(xmlnode.Attributes["EnableDesktopComposition"].Value);
+                    connectionInfo.EnableFontSmoothing = xmlnode.GetAttributeAsBool("EnableFontSmoothing");
+                    connectionInfo.EnableDesktopComposition = xmlnode.GetAttributeAsBool("EnableDesktopComposition");
 
                     // Get inheritance settings
-                    connectionInfo.Inheritance.EnableFontSmoothing = bool.Parse(xmlnode.Attributes["InheritEnableFontSmoothing"].Value);
-                    connectionInfo.Inheritance.EnableDesktopComposition = bool.Parse(xmlnode.Attributes["InheritEnableDesktopComposition"].Value);
+                    connectionInfo.Inheritance.EnableFontSmoothing = xmlnode.GetAttributeAsBool("InheritEnableFontSmoothing");
+                    connectionInfo.Inheritance.EnableDesktopComposition = xmlnode.GetAttributeAsBool("InheritEnableDesktopComposition");
                 }
 
                 if (_confVersion >= 2.4)
                 {
-                    connectionInfo.UseCredSsp = bool.Parse(xmlnode.Attributes["UseCredSsp"].Value);
-                    connectionInfo.Inheritance.UseCredSsp = bool.Parse(xmlnode.Attributes["InheritUseCredSsp"].Value);
+                    connectionInfo.UseCredSsp = xmlnode.GetAttributeAsBool("UseCredSsp");
+                    connectionInfo.Inheritance.UseCredSsp = xmlnode.GetAttributeAsBool("InheritUseCredSsp");
                 }
 
                 if (_confVersion >= 2.5)
                 {
-                    connectionInfo.LoadBalanceInfo = xmlnode.Attributes["LoadBalanceInfo"].Value;
-                    connectionInfo.AutomaticResize = bool.Parse(xmlnode.Attributes["AutomaticResize"].Value);
-                    connectionInfo.Inheritance.LoadBalanceInfo = bool.Parse(xmlnode.Attributes["InheritLoadBalanceInfo"].Value);
-                    connectionInfo.Inheritance.AutomaticResize = bool.Parse(xmlnode.Attributes["InheritAutomaticResize"].Value);
+                    connectionInfo.LoadBalanceInfo = xmlnode.GetAttributeAsString("LoadBalanceInfo");
+                    connectionInfo.AutomaticResize = xmlnode.GetAttributeAsBool("AutomaticResize");
+                    connectionInfo.Inheritance.LoadBalanceInfo = xmlnode.GetAttributeAsBool("InheritLoadBalanceInfo");
+                    connectionInfo.Inheritance.AutomaticResize = xmlnode.GetAttributeAsBool("InheritAutomaticResize");
                 }
 
                 if (_confVersion >= 2.6)
                 {
-                    connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), xmlnode.Attributes["SoundQuality"].Value, true);
-                    connectionInfo.Inheritance.SoundQuality = bool.Parse(xmlnode.Attributes["InheritSoundQuality"].Value);
-                    connectionInfo.RDPMinutesToIdleTimeout = Convert.ToInt32(xmlnode.Attributes["RDPMinutesToIdleTimeout"]?.Value ?? "0");
-                    connectionInfo.Inheritance.RDPMinutesToIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPMinutesToIdleTimeout"]?.Value ?? "False");
-                    connectionInfo.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["RDPAlertIdleTimeout"]?.Value ?? "False");
-                    connectionInfo.Inheritance.RDPAlertIdleTimeout = bool.Parse(xmlnode.Attributes["InheritRDPAlertIdleTimeout"]?.Value ?? "False");
+                    connectionInfo.SoundQuality = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPSoundQuality>("SoundQuality");
+                    connectionInfo.Inheritance.SoundQuality = xmlnode.GetAttributeAsBool("InheritSoundQuality");
+                    connectionInfo.RDPMinutesToIdleTimeout = xmlnode.GetAttributeAsInt("RDPMinutesToIdleTimeout");
+                    connectionInfo.Inheritance.RDPMinutesToIdleTimeout = xmlnode.GetAttributeAsBool("InheritRDPMinutesToIdleTimeout");
+                    connectionInfo.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("RDPAlertIdleTimeout");
+                    connectionInfo.Inheritance.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");
                 }
                 if(_confVersion >= 2.7)
                 {
-                    connectionInfo.RedirectClipboard = bool.Parse(xmlnode.Attributes["RedirectClipboard"].Value);
-                    connectionInfo.Inheritance.RedirectClipboard = bool.Parse(xmlnode.Attributes["InheritRedirectClipboard"].Value);
+                    connectionInfo.RedirectClipboard = xmlnode.GetAttributeAsBool("RedirectClipboard");
+                    connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
 
                     connectionInfo.CredentialRecordId = Guid.TryParse(xmlnode.Attributes["CredentialId"]?.Value, out var credId)
                             ? credId
                             : Optional<Guid>.Empty;
 
-                    connectionInfo.Inheritance.CredentialId = bool.TryParse(xmlnode.Attributes["InheritCredentialId"]?.Value, out var inheritCreds) && inheritCreds;
+                    connectionInfo.Inheritance.CredentialId = xmlnode.GetAttributeAsBool("InheritCredentialId");
                 }
             }
             catch (Exception ex)
