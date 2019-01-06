@@ -84,29 +84,24 @@ namespace mRemoteNG.Tools
 		
 
 		public static Image TakeScreenshot(ConnectionWindow sender)
-		{
-			/*try
-			{
-				var LeftStart = sender.TabController.SelectedTab.PointToScreen(new Point(sender.TabController.SelectedTab.Left)).X; //Me.Left + Splitter.SplitterDistance + 11
-				var TopStart = sender.TabController.SelectedTab.PointToScreen(new Point(sender.TabController.SelectedTab.Top)).Y; //Me.Top + Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 - 3
-				var LeftWidth = sender.TabController.SelectedTab.Width; //Me.Width - (Splitter.SplitterDistance + 16)
-				var TopHeight = sender.TabController.SelectedTab.Height; //Me.Height - (Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 + 2)
-					
-				var currentFormSize = new Size(LeftWidth, TopHeight);
-				var ScreenToBitmap = new Bitmap(LeftWidth, TopHeight);
-                var gGraphics = Graphics.FromImage(ScreenToBitmap);
-					
-				gGraphics.CopyFromScreen(new Point(LeftStart, TopStart), new Point(0, 0), currentFormSize);
-					
-				return ScreenToBitmap;
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionStackTrace("Taking Screenshot failed", ex);
-			}
-				*/
-			return null;
-		}
+        {
+            try
+            {
+                var ac = sender.ActiveControl;
+                if (ac != null)
+                {
+                    var bmp = new Bitmap(ac.Width, ac.Height);
+                    ac.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+                    return bmp;
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("Taking Screenshot failed", ex);
+            }
+
+            return null;
+        }
 		
 		public class EnumTypeConverter : EnumConverter
 		{
