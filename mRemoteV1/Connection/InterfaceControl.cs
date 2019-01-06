@@ -41,5 +41,13 @@ namespace mRemoteNG.Connection
 
             return null;
         }
-	}
+
+        public static InterfaceControl FindInterfaceControl(ConnectionTab tab)
+        {
+            if (tab.Controls[0] is InterfaceControl ic)
+                return ic;
+
+            return null;
+        }
+    }
 }

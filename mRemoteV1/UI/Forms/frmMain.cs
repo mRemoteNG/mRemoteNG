@@ -522,9 +522,11 @@ namespace mRemoteNG.UI.Forms
 
 		private void ActivateConnection()
 		{
-		    var w = pnlDock.Controls[0] as DockPanel;
-            if (!(w?.ActiveDocument is ConnectionTab tab)) return;
-            var ifc = (InterfaceControl)tab.ActiveControl;
+		    var cw = pnlDock.ActiveDocument as ConnectionWindow;
+            var dp = cw?.ActiveControl as DockPane;
+            
+            if (!(dp?.ActiveContent is ConnectionTab tab)) return;
+            var ifc = InterfaceControl.FindInterfaceControl(tab);
             if (ifc == null) return;
 
             ifc.Protocol.Focus();
