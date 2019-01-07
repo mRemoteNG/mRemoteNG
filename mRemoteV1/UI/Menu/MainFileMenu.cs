@@ -448,25 +448,7 @@ namespace mRemoteNG.UI.Menu
                 if (!(window is ConnectionWindow connectionWindow))
                     return;
 
-                var icList = new List<InterfaceControl>();
-                /*    foreach (Crownwood.Magic.Controls.TabPage tab in connectionWindow.TabController.TabPages)
-                    {
-                        var tag = tab.Tag as InterfaceControl;
-                        if (tag != null)
-                        {
-                            icList.Add(tag);
-                        }
-                    }*/
-
-                foreach (var i in icList)
-                {
-                    i.Protocol.Close();
-                    ConnectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
-                }
-
-                // throw it on the garbage collector
-                // ReSharper disable once RedundantAssignment
-                icList = null;
+                connectionWindow.reconnectAll(ConnectionInitiator);
             }
         }
 

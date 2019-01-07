@@ -24,11 +24,7 @@ namespace mRemoteNG.UI.Window
     {
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private VisualStudioToolStripExtender vsToolStripExtender;
-        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
-
-
-        private readonly List<ConnectionTab> tabsReferences = new  List<ConnectionTab>();
-
+        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer(); 
 
         #region Public Methods
         public ConnectionWindow(DockContent panel, string formText = "")
@@ -127,10 +123,7 @@ namespace mRemoteNG.UI.Window
                 conTab.TabPageContextMenuStrip = cmenTab;
 
                 //Fix MagicRemove, i dont see no icons -.-
-                conTab.Icon = ConnectionIcon.FromString(connectionInfo.Icon);
-
-                //Add to the references as is easier to keep track of the tabs than connTab
-                tabsReferences.Add(conTab);
+                conTab.Icon = ConnectionIcon.FromString(connectionInfo.Icon); 
 
                 //Show the tab
                 conTab.DockAreas = DockAreas.Document | DockAreas.Float;
@@ -146,6 +139,30 @@ namespace mRemoteNG.UI.Window
             return null;
         }
         #endregion
+
+        public void reconnectAll(IConnectionInitiator initiator)
+        {
+            List<InterfaceControl> controlList = new List<InterfaceControl>();
+            try
+            { 
+                foreach (ConnectionTab tab in connDock.DocumentsToArray())
+                {
+                    controlList.Add((InterfaceControl)tab.Tag);
+                  
+                } 
+                foreach (InterfaceControl iControl in controlList)
+                {
+                    iControl.Protocol.Close();
+                    initiator.OpenConnection(iControl.Info, ConnectionInfo.Force.DoNotJump);
+                }
+
+            }               
+            catch(Exception ex)
+            {
+
+            }
+            controlList = null;
+        }
 
         #region Form
         private void Connection_Load(object sender, EventArgs e)
@@ -580,7 +597,7 @@ namespace mRemoteNG.UI.Window
                 }
             }
 
-            foreach (var tab in tabsReferences )
+            foreach (ConnectionTab tab in connDock.DocumentsToArray())
             {
                 if (selectedTab != tab)
                 { 
