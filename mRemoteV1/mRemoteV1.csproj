@@ -686,7 +686,9 @@
     <Compile Include="UI\Tabs\ConnectionTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Tabs\ConnectionTab.Designer.cs" />
+    <Compile Include="UI\Tabs\ConnectionTab.Designer.cs">
+      <DependentUpon>ConnectionTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Tabs\DockPaneStripNG.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -978,6 +980,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UnhandledExceptionWindow.resx">
       <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tabs\ConnectionTab.resx">
+      <DependentUpon>ConnectionTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TaskDialog\CommandButton.resx">
       <DependentUpon>CommandButton.cs</DependentUpon>
