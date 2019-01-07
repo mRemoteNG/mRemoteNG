@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 
