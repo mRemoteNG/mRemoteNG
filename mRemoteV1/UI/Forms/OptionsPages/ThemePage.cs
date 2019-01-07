@@ -68,12 +68,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cboTheme.SelectedItem = _themeManager.ActiveTheme;
             cboTheme_SelectionChangeCommitted(this, new EventArgs());
             cboTheme.DisplayMember = "Name";
-            //Color cell formatter 
-            listPalette.FormatCell += ListPalette_FormatCell;
+            
             //Load theming active property and disable controls 
             if (_themeManager.ThemingActive)
             {
                 themeEnableChk.Checked = true;
+                listPalette.FormatCell += ListPalette_FormatCell; //Color cell formatter 
             }
             else
             {
@@ -246,12 +246,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     _themeManager.ThemingActive = false;
                     cboTheme.Enabled = false;
                 }
+
+                listPalette.FormatCell += ListPalette_FormatCell;
             }
             else
             {
                 _themeManager.ThemingActive = false;
                 themeEnableChk.Checked = false;
                 cboTheme.Enabled = false;
+                listPalette.FormatCell -= ListPalette_FormatCell;
             }
             LoadSettings();
         }
