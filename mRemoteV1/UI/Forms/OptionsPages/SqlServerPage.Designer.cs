@@ -84,6 +84,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkUseSQLServer._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkUseSQLServer.AutoSize = true;
+            this.chkUseSQLServer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseSQLServer.Location = new System.Drawing.Point(3, 76);
             this.chkUseSQLServer.Name = "chkUseSQLServer";
             this.chkUseSQLServer.Size = new System.Drawing.Size(244, 17);
@@ -199,6 +200,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSQLReadOnly._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSQLReadOnly.AutoSize = true;
+            this.chkSQLReadOnly.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSQLReadOnly.Location = new System.Drawing.Point(140, 208);
             this.chkSQLReadOnly.Name = "chkSQLReadOnly";
             this.chkSQLReadOnly.Size = new System.Drawing.Size(15, 14);
@@ -217,8 +219,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // SqlServerPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.lblSQLReadOnly);
             this.Controls.Add(this.chkSQLReadOnly);
             this.Controls.Add(this.lblTestConnectionResults);

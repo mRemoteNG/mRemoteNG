@@ -121,6 +121,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSingleClickOnConnectionOpensIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSingleClickOnConnectionOpensIt.AutoSize = true;
+            this.chkSingleClickOnConnectionOpensIt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleClickOnConnectionOpensIt.Location = new System.Drawing.Point(3, 3);
             this.chkSingleClickOnConnectionOpensIt.Name = "chkSingleClickOnConnectionOpensIt";
             this.chkSingleClickOnConnectionOpensIt.Size = new System.Drawing.Size(206, 17);
@@ -132,6 +133,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkHostnameLikeDisplayName._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkHostnameLikeDisplayName.AutoSize = true;
+            this.chkHostnameLikeDisplayName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkHostnameLikeDisplayName.Location = new System.Drawing.Point(3, 49);
             this.chkHostnameLikeDisplayName.Name = "chkHostnameLikeDisplayName";
             this.chkHostnameLikeDisplayName.Size = new System.Drawing.Size(355, 17);
@@ -143,6 +145,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSingleClickOnOpenedConnectionSwitchesToIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.AutoSize = true;
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = new System.Drawing.Point(3, 26);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt";
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(490, 17);
@@ -242,6 +245,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSaveConnectionsAfterEveryEdit._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSaveConnectionsAfterEveryEdit.AutoSize = true;
+            this.chkSaveConnectionsAfterEveryEdit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSaveConnectionsAfterEveryEdit.Location = new System.Drawing.Point(3, 72);
             this.chkSaveConnectionsAfterEveryEdit.Name = "chkSaveConnectionsAfterEveryEdit";
             this.chkSaveConnectionsAfterEveryEdit.Size = new System.Drawing.Size(194, 17);
@@ -253,6 +257,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkUseFilterSearch._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkUseFilterSearch.AutoSize = true;
+            this.chkUseFilterSearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseFilterSearch.Location = new System.Drawing.Point(3, 95);
             this.chkUseFilterSearch.Name = "chkUseFilterSearch";
             this.chkUseFilterSearch.Size = new System.Drawing.Size(230, 17);
@@ -284,6 +289,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkPlaceSearchBarAboveConnectionTree._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkPlaceSearchBarAboveConnectionTree.AutoSize = true;
+            this.chkPlaceSearchBarAboveConnectionTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPlaceSearchBarAboveConnectionTree.Location = new System.Drawing.Point(3, 118);
             this.chkPlaceSearchBarAboveConnectionTree.Name = "chkPlaceSearchBarAboveConnectionTree";
             this.chkPlaceSearchBarAboveConnectionTree.Size = new System.Drawing.Size(226, 17);
@@ -293,8 +299,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // ConnectionsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.chkPlaceSearchBarAboveConnectionTree);
             this.Controls.Add(this.chkUseFilterSearch);

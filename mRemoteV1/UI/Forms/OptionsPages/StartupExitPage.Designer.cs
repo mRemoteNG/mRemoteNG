@@ -41,6 +41,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkReconnectOnStart._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkReconnectOnStart.AutoSize = true;
+            this.chkReconnectOnStart.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkReconnectOnStart.Location = new System.Drawing.Point(3, 26);
             this.chkReconnectOnStart.Name = "chkReconnectOnStart";
             this.chkReconnectOnStart.Size = new System.Drawing.Size(295, 17);
@@ -52,6 +53,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSaveConsOnExit._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSaveConsOnExit.AutoSize = true;
+            this.chkSaveConsOnExit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSaveConsOnExit.Location = new System.Drawing.Point(3, 2);
             this.chkSaveConsOnExit.Name = "chkSaveConsOnExit";
             this.chkSaveConsOnExit.Size = new System.Drawing.Size(153, 17);
@@ -63,6 +65,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkSingleInstance._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSingleInstance.AutoSize = true;
+            this.chkSingleInstance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleInstance.Location = new System.Drawing.Point(3, 50);
             this.chkSingleInstance.Name = "chkSingleInstance";
             this.chkSingleInstance.Size = new System.Drawing.Size(404, 17);
@@ -74,6 +77,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkProperInstallationOfComponentsAtStartup._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkProperInstallationOfComponentsAtStartup.AutoSize = true;
+            this.chkProperInstallationOfComponentsAtStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkProperInstallationOfComponentsAtStartup.Location = new System.Drawing.Point(3, 74);
             this.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup";
             this.chkProperInstallationOfComponentsAtStartup.Size = new System.Drawing.Size(290, 17);
@@ -83,8 +87,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // StartupExitPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.chkReconnectOnStart);
             this.Controls.Add(this.chkSaveConsOnExit);
             this.Controls.Add(this.chkSingleInstance);
