@@ -209,7 +209,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
                 else
                 {
-                    TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
+                    CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error, ESysIcons.Information, 0);
                 }
             }
         }
@@ -217,7 +217,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
 
-            var res = TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings , Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.YesNo, TaskDialog.ESysIcons.Question, TaskDialog.ESysIcons.Information, 0);
+            var res = CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings , Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "", ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Information, 0);
 
             if (res != DialogResult.Yes) return;
             if (modifiedThemes.Contains(_themeManager.ActiveTheme))
@@ -241,7 +241,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
                 else
                 {
-                    TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeErrorNoThemes, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
+                    CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeErrorNoThemes, "", "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error, ESysIcons.Information, 0);
                     themeEnableChk.Checked = false;
                     _themeManager.ThemingActive = false;
                     cboTheme.Enabled = false;
