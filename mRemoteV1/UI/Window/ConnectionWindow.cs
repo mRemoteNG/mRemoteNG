@@ -42,6 +42,7 @@ namespace mRemoteNG.UI.Window
             Text = formText;
             TabText = formText;
             connDock.DocumentStyle = DocumentStyle.DockingWindow;
+            connDock.ShowDocumentIcon = true;
         }
 
         private InterfaceControl GetInterfaceControl()
@@ -90,14 +91,6 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var conTab = new ConnectionTab
-                {
-                    Tag = connectionInfo,
-                    DockAreas = DockAreas.Document | DockAreas.Float,
-                    ShowIcon = true,
-                    Icon = ConnectionIcon.FromString(connectionInfo.Icon)
-                };
-
                 //Set the connection text based on name and preferences
                 string titleText;
                 if (Settings.Default.ShowProtocolOnTabs)
@@ -125,8 +118,14 @@ namespace mRemoteNG.UI.Window
 
                 titleText = titleText.Replace("&", "&&");
 
-                conTab.TabText = titleText;
-                conTab.TabPageContextMenuStrip = cmenTab;
+                var conTab = new ConnectionTab
+                {
+                    Tag = connectionInfo,
+                    DockAreas = DockAreas.Document | DockAreas.Float,
+                    Icon = ConnectionIcon.FromString(connectionInfo.Icon),
+                    TabText = titleText,
+                    TabPageContextMenuStrip = cmenTab
+                };
 
                 //Show the tab
                 conTab.Show(connDock,DockState.Document);
