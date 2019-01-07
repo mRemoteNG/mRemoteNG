@@ -116,7 +116,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void RevertSettings()
         {
             base.RevertSettings();
-            _themeManager.ActiveTheme = _oriTheme;
             _themeManager.ThemingActive = _oriActiveTheming;
         }
 
