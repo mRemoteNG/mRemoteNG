@@ -142,15 +142,16 @@ namespace mRemoteNG.UI.Window
 
         public void reconnectAll(IConnectionInitiator initiator)
         {
-            List<InterfaceControl> controlList = new List<InterfaceControl>();
+            var controlList = new List<InterfaceControl>();
             try
-            { 
-                foreach (ConnectionTab tab in connDock.DocumentsToArray())
+            {
+                foreach (var dockContent in connDock.DocumentsToArray())
                 {
+                    var tab = (ConnectionTab)dockContent;
                     controlList.Add((InterfaceControl)tab.Tag);
-                  
-                } 
-                foreach (InterfaceControl iControl in controlList)
+                }
+
+                foreach (var iControl in controlList)
                 {
                     iControl.Protocol.Close();
                     initiator.OpenConnection(iControl.Info, ConnectionInfo.Force.DoNotJump);
@@ -159,8 +160,10 @@ namespace mRemoteNG.UI.Window
             }               
             catch(Exception ex)
             {
-
+                Runtime.MessageCollector.AddExceptionMessage("reconnectAll (UI.Window.ConnectionWindow) failed", ex);
             }
+
+            // ReSharper disable once RedundantAssignment
             controlList = null;
         }
 
@@ -597,8 +600,9 @@ namespace mRemoteNG.UI.Window
                 }
             }
 
-            foreach (ConnectionTab tab in connDock.DocumentsToArray())
+            foreach (var dockContent in connDock.DocumentsToArray())
             {
+                var tab = (ConnectionTab) dockContent;
                 if (selectedTab != tab)
                 { 
                     tab.Close();
