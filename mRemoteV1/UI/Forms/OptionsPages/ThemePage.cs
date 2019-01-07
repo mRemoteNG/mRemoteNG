@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using BrightIdeasSoftware;
 using mRemoteNG.UI.Forms.Input;
+using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -94,8 +95,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void SaveSettings()
         {
-            // Save the theme on exit so we don't run into unexpected results while modifying...
-            _themeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
+            // Save the theme settings form close so we don't run into unexpected results while modifying...
+            // Prompt the user that a restart is required to apply the new theme...
+            if (!Settings.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
+            {
+                Settings.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
+                Settings.Default.Save();
+
+                CTaskDialog.MessageBox("Theme Changed", "Restart Required.", "Please restart mRemoteNG to apply the selected theme.",
+                    ETaskDialogButtons.Ok, ESysIcons.Information);
+            }
 
             base.SaveSettings();
             foreach(var updatedTheme in modifiedThemes)
