@@ -676,8 +676,7 @@ namespace mRemoteNG.UI.Window
             {
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
-                var newTitle = ((ConnectionTab)interfaceControl.Parent).TabText;
-                using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle, ref newTitle))
+                using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle, ((ConnectionTab)interfaceControl.Parent).TabText))
                 {
                     var dr = frmInputBox.ShowDialog();
                     if (dr != DialogResult.OK) return;

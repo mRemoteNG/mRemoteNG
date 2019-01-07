@@ -173,8 +173,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            var name = _themeManager.ActiveTheme.Name;
-            using (var frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name))
+            using (var frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, _themeManager.ActiveTheme.Name))
             {
                 var dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK) return;

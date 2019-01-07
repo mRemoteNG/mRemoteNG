@@ -3,12 +3,11 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.Input
 {
-    public partial class FrmInputBox : Form
+    public sealed partial class FrmInputBox : Form
     {
-        private readonly DisplayProperties _display = new DisplayProperties();
         internal string returnValue;
 
-        public FrmInputBox(string title, string promptText, ref string value)
+        public FrmInputBox(string title, string promptText, string value)
         {
             InitializeComponent();
 
