@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using mRemoteNG.App;
 using mRemoteNG.Security.SymmetricEncryption;
 

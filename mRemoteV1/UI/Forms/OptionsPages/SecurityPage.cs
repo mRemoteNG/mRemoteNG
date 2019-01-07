@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Drawing;
 using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Forms.OptionsPages

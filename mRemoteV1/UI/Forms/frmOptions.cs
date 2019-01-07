@@ -32,7 +32,10 @@ namespace mRemoteNG.UI.Forms
             FontOverrider.FontOverride(this);
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();
-            ApplyLanguage();
+            // ApplyLanguage();
+            // Handle the main page here and the individual pages in 
+            // AddOptionsPagesToListView()  -- one less foreach loop....
+            Text = Language.strOptionsPageTitle;
             ApplyTheme();
             Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
@@ -46,6 +49,7 @@ namespace mRemoteNG.UI.Forms
             ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
+#if false
         private void ApplyLanguage()
         {
             Text = Language.strOptionsPageTitle;
@@ -54,7 +58,7 @@ namespace mRemoteNG.UI.Forms
                 optionPage.ApplyLanguage();
             }
         }
-
+#endif
         private void CompileListOfOptionsPages()
         {
             _pages = new Dictionary<string, OptionsPage>
@@ -80,6 +84,7 @@ namespace mRemoteNG.UI.Forms
 
             foreach (var page in _pages.Select(keyValuePair => keyValuePair.Value))
             {
+                page.ApplyLanguage();
                 page.LoadSettings();
                 lstOptionPages.AddObject(page);
             }
