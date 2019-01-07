@@ -1076,6 +1076,12 @@
     <Content Include="Resources\Help\Screenshots\Reference\status_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Help\Screenshots\Screenshot Manager\rightclick_screenshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Screenshot Manager\screenshot_manager.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Help\st_common_problems_rdp.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

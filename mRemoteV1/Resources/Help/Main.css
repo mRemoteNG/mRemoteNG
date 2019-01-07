@@ -6,7 +6,7 @@ body
 	margin-top: 10px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	font-family: Verdana, Geneva, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size: 0.75em;
 	color: #333333;
 }
@@ -55,7 +55,6 @@ a:link
 {
 	color: #5d6b70;
 	text-decoration: none;
-	/* font-size: 8pt; */
 }
 
 a:visited
@@ -74,7 +73,6 @@ a:hover
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
-	/* width: 100%; */
 }
 
 td, th {
