@@ -60,21 +60,6 @@ namespace mRemoteNG.UI.Window
             cmenTab.SuspendLayout();
             SuspendLayout();
             //
-            //TabController
-            //
-         /*   TabController.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom)
-                | AnchorStyles.Left)
-                | AnchorStyles.Right;
-            TabController.Appearance = TabControl.VisualAppearance.MultiDocument;
-            TabController.Cursor = Cursors.Hand;
-            TabController.DragFromControl = false;
-            TabController.IDEPixelArea = true;
-            TabController.IDEPixelBorder = false;
-            TabController.Location = new Point(0, -1);
-            TabController.Name = "TabController";
-            TabController.Size = new Size(632, 454);
-            TabController.TabIndex = 0;*/
-            //
             //cmenTab
             //
             cmenTab.Items.AddRange(new ToolStripItem[]
