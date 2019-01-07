@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -8,8 +9,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 	{
 	    protected OptionsPage()
 		{
-            //InitializeComponent();
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            InitializeComponent();
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
 			
         #region Public Properties
@@ -59,23 +60,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
 	    protected virtual void ApplyTheme()
         {
-            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
-            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!ThemeManager.getInstance().ThemingActive) return;
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             Invalidate();
         }
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // OptionsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "OptionsPage";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Name = "OptionsPage";
+            ResumeLayout(false);
 
         }
     }
