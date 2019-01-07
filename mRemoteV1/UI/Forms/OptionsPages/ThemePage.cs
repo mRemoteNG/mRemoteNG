@@ -94,6 +94,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void SaveSettings()
         {
+            // Save the theme on exit so we don't run into unexpected results while modifying...
+            _themeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
+
             base.SaveSettings();
             foreach(var updatedTheme in modifiedThemes)
             {
@@ -119,19 +122,31 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             btnThemeNew.Enabled = false;
             btnThemeDelete.Enabled = false;
-            if (!_themeManager.ThemingActive) return;
-            _themeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
-            listPalette.ClearObjects();
-            if (!_themeManager.ActiveTheme.IsExtendable || !_themeManager.ThemingActive) return;
-            btnThemeNew.Enabled = true;
-            listPalette.ClearObjects();
-            listPalette.Enabled = false;
+
+            // don't display listPalette if it's not an Extendable theme...
             listPalette.CellClick -= ListPalette_CellClick;
-            ColorMeList();
-            if (_themeManager.ActiveTheme.IsThemeBase) return;
-            listPalette.Enabled = true;
+            listPalette.Enabled = false;
+            listPalette.Visible = false;
+
+            if (!_themeManager.ThemingActive) return;
+
+            btnThemeNew.Enabled = true;
+
+            var selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
+            
+            if (selectedTheme.IsExtendable)
+            {
+                // it's Extendable, so now we can do this more expensive operations...
+                listPalette.ClearObjects();
+                ColorMeList(selectedTheme);
+                listPalette.Enabled = true;
+                listPalette.Visible = true;
+                listPalette.CellClick += ListPalette_CellClick;
+            }
+
+            if (selectedTheme.IsThemeBase) return;
+
             btnThemeDelete.Enabled = true;
-            listPalette.CellClick += ListPalette_CellClick;
         }
 
 
@@ -165,9 +180,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         }
 
-        private void ColorMeList()
+        private void ColorMeList(ThemeInfo ti)
         {
-            foreach (var colorElem in _themeManager.ActiveTheme.ExtendedPalette.ExtColorPalette)
+            foreach (var colorElem in ti.ExtendedPalette.ExtColorPalette)
                 listPalette.AddObject(new PseudoKeyColor(colorElem.Key, colorElem.Value));
         }
 
@@ -210,7 +225,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             if (themeEnableChk.Checked)
             {
-                
                 if(_themeManager.ThemesCount > 0)
                 {
                     _themeManager.ThemingActive = true;
