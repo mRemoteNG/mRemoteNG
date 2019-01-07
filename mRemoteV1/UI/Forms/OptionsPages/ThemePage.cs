@@ -14,7 +14,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         #region Private Fields
         private readonly ThemeManager _themeManager;
-        private readonly ThemeInfo _oriTheme;
         private readonly bool _oriActiveTheming;
         private readonly List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
         #endregion
@@ -27,7 +26,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (!_themeManager.ThemingActive) return;
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
-            _oriTheme = _themeManager.ActiveTheme;
             _oriActiveTheming = _themeManager.ThemingActive;
         }
 
@@ -118,14 +116,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.RevertSettings();
             _themeManager.ThemingActive = _oriActiveTheming;
         }
-
-
         #region Private Methods
 
         #region Event Handlers
-
-
-
         private void cboTheme_SelectionChangeCommitted(object sender, EventArgs e)
         {
             btnThemeNew.Enabled = false;
@@ -156,8 +149,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             btnThemeDelete.Enabled = true;
         }
-
-
 
         /// <summary>
         /// Edit an object, since KeyValuePair value cannot be set without creating a new object, a parallel object model exist in the list
@@ -224,11 +215,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _themeManager.deleteTheme(_themeManager.ActiveTheme);
             LoadSettings();
         }
-
         #endregion
 
         #endregion
-
         private void ThemeEnableChkCheckedChanged(object sender, EventArgs e)
         {
             if (themeEnableChk.Checked)
