@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using WeifenLuo.WinFormsUI.Docking;
@@ -63,12 +62,12 @@ namespace mRemoteNG.Themes
             if (themes != null) return themes.Values.OfType<ThemeInfo>().ToList();
             themes = new Hashtable();
 
-            //Load the files in theme folder first, to incluide vstheme light as default 
+            //Load the files in theme folder first, to include vstheme light as default 
             var themePath = App.Info.SettingsFileInfo.ThemeFolder;
             if (themePath == null) return themes.Values.OfType<ThemeInfo>().ToList();
             try
             {
-                //In install mode first time is necesary to copy the themes folder
+                //In install mode first time is necessary to copy the themes folder
                 if (!Directory.Exists(themePath))
                 {
                     Directory.CreateDirectory(themePath);

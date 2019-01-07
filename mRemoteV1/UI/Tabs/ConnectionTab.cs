@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Tabs
 {
     public partial class ConnectionTab : DockContent
     {
-        public bool silentClose { get; set; } = false;
+        public bool silentClose { get; set; }
          
         public ConnectionTab()
         {

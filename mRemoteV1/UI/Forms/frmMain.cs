@@ -195,7 +195,7 @@ namespace mRemoteNG.UI.Forms
                     panelAdder.AddPanel(panelName);
             }*/
             
-            FrmSplashScreen frmSplashScreen = FrmSplashScreen.getInstance();
+            var frmSplashScreen = FrmSplashScreen.getInstance();
             frmSplashScreen.Close();
         }
 

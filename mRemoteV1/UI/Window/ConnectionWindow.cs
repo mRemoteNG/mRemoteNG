@@ -16,7 +16,7 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
-using ConnectionTab = mRemoteNG.UI.Tabs.ConnectionTab;
+using mRemoteNG.UI.Tabs;
 
 namespace mRemoteNG.UI.Window
 {
@@ -90,7 +90,13 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var conTab = new ConnectionTab {Tag = connectionInfo};
+                var conTab = new ConnectionTab
+                {
+                    Tag = connectionInfo,
+                    DockAreas = DockAreas.Document | DockAreas.Float,
+                    ShowIcon = true,
+                    Icon = ConnectionIcon.FromString(connectionInfo.Icon)
+                };
 
                 //Set the connection text based on name and preferences
                 string titleText;
@@ -122,11 +128,7 @@ namespace mRemoteNG.UI.Window
                 conTab.TabText = titleText;
                 conTab.TabPageContextMenuStrip = cmenTab;
 
-                //Fix MagicRemove, i dont see no icons -.-
-                conTab.Icon = ConnectionIcon.FromString(connectionInfo.Icon); 
-
                 //Show the tab
-                conTab.DockAreas = DockAreas.Document | DockAreas.Float;
                 conTab.Show(connDock,DockState.Document);
                 conTab.Focus(); 
                 return conTab;
@@ -204,29 +206,34 @@ namespace mRemoteNG.UI.Window
         private bool _floatHandlersAdded;
         private void Connection_DockStateChanged(object sender, EventArgs e)
         {
-            if (DockState == DockState.Float)
+            switch (DockState)
             {
-                if (_documentHandlersAdded)
+                case DockState.Float:
                 {
-	                FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
-	                FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
-                    _documentHandlersAdded = false;
+                    if (_documentHandlersAdded)
+                    {
+                        FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
+                        FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
+                        _documentHandlersAdded = false;
+                    }
+                    DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
+                    DockHandler.FloatPane.FloatWindow.ResizeEnd += Connection_ResizeEnd;
+                    _floatHandlersAdded = true;
+                    break;
                 }
-                DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
-                DockHandler.FloatPane.FloatWindow.ResizeEnd += Connection_ResizeEnd;
-                _floatHandlersAdded = true;
-            }
-            else if (DockState == DockState.Document)
-            {
-                if (_floatHandlersAdded)
+                case DockState.Document:
                 {
-                    DockHandler.FloatPane.FloatWindow.ResizeBegin -= Connection_ResizeBegin;
-                    DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
-                    _floatHandlersAdded = false;
+                    if (_floatHandlersAdded)
+                    {
+                        DockHandler.FloatPane.FloatWindow.ResizeBegin -= Connection_ResizeBegin;
+                        DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
+                        _floatHandlersAdded = false;
+                    }
+                    FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
+                    FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
+                    _documentHandlersAdded = true;
+                    break;
                 }
-	            FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
-	            FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
-                _documentHandlersAdded = true;
             }
         }
 
