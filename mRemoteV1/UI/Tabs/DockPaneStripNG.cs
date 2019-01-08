@@ -102,15 +102,7 @@ namespace mRemoteNG.UI.Tabs
 
         #region Properties
 
-        private Rectangle TabStripRectangle
-        {
-            get
-            {
-                if (Appearance == DockPane.AppearanceStyle.Document)
-                    return TabStripRectangle_Document;
-                return TabStripRectangle_ToolWindow;
-            }
-        }
+        private Rectangle TabStripRectangle => Appearance == DockPane.AppearanceStyle.Document ? TabStripRectangle_Document : TabStripRectangle_ToolWindow;
 
         private Rectangle TabStripRectangle_ToolWindow
         {
@@ -280,10 +272,10 @@ namespace mRemoteNG.UI.Tabs
         {
             get
             {
-                var textFormat = TextFormatFlags.EndEllipsis |
-                    TextFormatFlags.HorizontalCenter |
-                    TextFormatFlags.SingleLine |
-                    TextFormatFlags.VerticalCenter;
+                const TextFormatFlags textFormat = TextFormatFlags.EndEllipsis |
+                                                   TextFormatFlags.HorizontalCenter |
+                                                   TextFormatFlags.SingleLine |
+                                                   TextFormatFlags.VerticalCenter;
                 if (RightToLeft == RightToLeft.Yes)
                     return textFormat | TextFormatFlags.RightToLeft | TextFormatFlags.Right;
                 return textFormat;
@@ -298,10 +290,10 @@ namespace mRemoteNG.UI.Tabs
         {
             get
             {
-                var textFormat = TextFormatFlags.EndEllipsis |
-                    TextFormatFlags.SingleLine |
-                    TextFormatFlags.VerticalCenter |
-                    TextFormatFlags.HorizontalCenter;
+                const TextFormatFlags textFormat = TextFormatFlags.EndEllipsis |
+                                                   TextFormatFlags.SingleLine |
+                                                   TextFormatFlags.VerticalCenter |
+                                                   TextFormatFlags.HorizontalCenter;
                 if (RightToLeft == RightToLeft.Yes)
                     return textFormat | TextFormatFlags.RightToLeft;
                 return textFormat;
@@ -834,9 +826,7 @@ namespace mRemoteNG.UI.Tabs
 
         private GraphicsPath GetTabOutline(Tab tab, bool rtlTransform, bool toScreen)
         {
-            if (Appearance == DockPane.AppearanceStyle.ToolWindow)
-                return GetTabOutline_ToolWindow(tab, rtlTransform, toScreen);
-            return GetTabOutline_Document(tab, rtlTransform, toScreen, false);
+            return Appearance == DockPane.AppearanceStyle.ToolWindow ? GetTabOutline_ToolWindow(tab, rtlTransform, toScreen) : GetTabOutline_Document(tab, rtlTransform, toScreen, false);
         }
 
         private GraphicsPath GetTabOutline_ToolWindow(Tab tab, bool rtlTransform, bool toScreen)
@@ -1196,12 +1186,9 @@ namespace mRemoteNG.UI.Tabs
 
         private void ContextMenuItem_Click(object sender, EventArgs e)
         {
-            var item = sender as ToolStripMenuItem;
-            if (item != null)
-            {
-                var content = (IDockContent)item.Tag;
-                DockPane.ActiveContent = content;
-            }
+            if (!(sender is ToolStripMenuItem item)) return;
+            var content = (IDockContent)item.Tag;
+            DockPane.ActiveContent = content;
         }
 
         private void SetInertButtons()
