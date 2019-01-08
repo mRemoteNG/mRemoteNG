@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Tabs
     public partial class ConnectionTab : DockContent
     {
         public bool silentClose { get; set; }
-         
+
         public ConnectionTab()
         {
             InitializeComponent();
@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Tabs
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if(!silentClose)
-            { 
+            {
                 if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
                 {
                     var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionPanelMainInstruction, TabText), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
@@ -48,7 +48,7 @@ namespace mRemoteNG.UI.Tabs
             }
             base.OnFormClosing(e);
         }
-          
+
 
         #region HelperFunctions  
         public void RefreshInterfaceController()

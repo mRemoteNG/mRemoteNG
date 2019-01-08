@@ -18,7 +18,7 @@ namespace mRemoteNG.Themes
     {
         #region Private Variables
 
-        private  ThemeInfo _activeTheme; 
+        private  ThemeInfo _activeTheme;
         private  Hashtable themes;
         private bool _themeActive;
         private static ThemeManager themeInstance;
@@ -37,7 +37,7 @@ namespace mRemoteNG.Themes
             if (themes[Settings.Default.ThemeName] != null)
                 ActiveTheme = (ThemeInfo)themes[Settings.Default.ThemeName];
             else
-                ActiveTheme = DefaultTheme; 
+                ActiveTheme = DefaultTheme;
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace mRemoteNG.Themes
             if (themes != null) return themes.Values.OfType<ThemeInfo>().ToList();
             themes = new Hashtable();
 
-            //Load the files in theme folder first, to include vstheme light as default 
+            //Load the files in theme folder first, to include vstheme light as default
             var themePath = App.Info.SettingsFileInfo.ThemeFolder;
             if (themePath == null) return themes.Values.OfType<ThemeInfo>().ToList();
             try
@@ -87,8 +87,8 @@ namespace mRemoteNG.Themes
                 {
                     var themeFiles = Directory.GetFiles(themePath, "*.vstheme");
                     var defaultThemeURL = Directory.GetFiles(themePath, "vs2015light" + ".vstheme")[0];
-                    //First we load the default theme, its vs2015light 
-                    var defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeURL); 
+                    //First we load the default theme, its vs2015light
+                    var defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeURL);
                     themes.Add(defaultTheme.Name, defaultTheme);
                     //Then the rest
                     foreach (var themeFile in themeFiles)
@@ -125,14 +125,14 @@ namespace mRemoteNG.Themes
                     var vs2015Blue = new ThemeInfo("DPSvs2015Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015blue"]).ExtendedPalette);
                     themes.Add(vs2015Blue.Name, vs2015Blue);
 
-                    
+
                 }
             }
             catch(Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Error loading themes" + Environment.NewLine + ex.Message, true);
             }
-            return themes.Values.OfType<ThemeInfo>().ToList(); 
+            return themes.Values.OfType<ThemeInfo>().ToList();
         }
 
         /// <summary>
@@ -163,10 +163,10 @@ namespace mRemoteNG.Themes
             ThemeSerializer.DeleteFile(themeToDelete);
         }
 
-        //Sincronize the theme XML values from memory to disk
+        //Synchronize the theme XML values from memory to disk
         public void updateTheme(ThemeInfo themeToUpdate)
         {
-            ThemeSerializer.UpdateThemeXMLValues(themeToUpdate); 
+            ThemeSerializer.UpdateThemeXMLValues(themeToUpdate);
         }
 
         //refresh the ui controls to reflect a theme change
@@ -183,8 +183,8 @@ namespace mRemoteNG.Themes
             var badChars = Path.GetInvalidFileNameChars();
             return name.IndexOfAny(badChars) == -1;
         }
-  
-         
+
+
         #endregion
 
         #region Events

@@ -18,7 +18,6 @@
             Measures.DockPadding = 2;
             ShowAutoHideContentOnHover = false;
         }
-         
     }
 
     public  class MremoteDockPaneStripFactory : DockPanelExtender.IDockPaneStripFactory
