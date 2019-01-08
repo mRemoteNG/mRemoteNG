@@ -49,13 +49,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             if (!_themeManager.ThemingActive)
                 return;
-            base.ApplyTheme(); 
+            base.ApplyTheme();
         }
 
         public override void LoadSettings()
         {
             themeEnableChk.CheckedChanged -= ThemeEnableChkCheckedChanged;
-            base.SaveSettings();
+            SaveSettings();
             //At first we cannot create or delete themes, depends later on the type of selected theme
             btnThemeNew.Enabled = false;
             btnThemeDelete.Enabled = false;
@@ -66,19 +66,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cboTheme.SelectedItem = _themeManager.ActiveTheme;
             cboTheme_SelectionChangeCommitted(this, new EventArgs());
             cboTheme.DisplayMember = "Name";
-            
-            //Load theming active property and disable controls 
-            if (_themeManager.ThemingActive)
+
+            //Load theming active property and disable controls
+            if (Settings.Default.ThemingActive)
             {
                 themeEnableChk.Checked = true;
-                listPalette.FormatCell += ListPalette_FormatCell; //Color cell formatter 
+                listPalette.FormatCell += ListPalette_FormatCell; //Color cell formatter
             }
             else
             {
                 themeEnableChk.Checked = false;
                 cboTheme.Enabled = false;
                 // reset to the default theme when disabling theme support
-                _themeManager.ActiveTheme = _themeManager.DefaultTheme;
+                //_themeManager.ActiveTheme = _themeManager.DefaultTheme;
             }
             themeEnableChk.CheckedChanged += ThemeEnableChkCheckedChanged;
         }
@@ -95,13 +95,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             // Save the theme settings form close so we don't run into unexpected results while modifying...
             // Prompt the user that a restart is required to apply the new theme...
-            if (!Settings.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
+            if (themeEnableChk != null && cboTheme.SelectedItem != null) // LoadSettings calls SaveSettings, so these might be null the first time around
             {
-                Settings.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
-                Settings.Default.Save();
+                if (Settings.Default.ThemingActive != themeEnableChk.Checked ||
+                    !Settings.Default.ThemeName.Equals(((ThemeInfo) cboTheme.SelectedItem).Name))
+                {
+                    Settings.Default.ThemingActive = themeEnableChk.Checked;
+                    Settings.Default.ThemeName = themeEnableChk.Checked ? ((ThemeInfo) cboTheme.SelectedItem).Name : _themeManager.DefaultTheme.Name;
+                    Settings.Default.Save();
 
-                CTaskDialog.MessageBox("Theme Changed", "Restart Required.", "Please restart mRemoteNG to apply the selected theme.",
-                    ETaskDialogButtons.Ok, ESysIcons.Information);
+                    CTaskDialog.MessageBox("Theme Changed", "Restart Required.","Please restart mRemoteNG to apply the selected theme.",
+                        ETaskDialogButtons.Ok, ESysIcons.Information);
+                }
             }
 
             base.SaveSettings();
@@ -134,7 +139,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnThemeNew.Enabled = true;
 
             var selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
-            
+
             if (selectedTheme.IsExtendable)
             {
                 // it's Extendable, so now we can do this more expensive operations...
@@ -224,14 +229,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 if(_themeManager.ThemesCount > 0)
                 {
-                    _themeManager.ThemingActive = true;
+                    //_themeManager.ThemingActive = true;
                     cboTheme.Enabled = true;
                 }
                 else
                 {
                     CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeErrorNoThemes, "", "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error, ESysIcons.Information, 0);
                     themeEnableChk.Checked = false;
-                    _themeManager.ThemingActive = false;
+                    //_themeManager.ThemingActive = false;
                     cboTheme.Enabled = false;
                 }
 
@@ -239,11 +244,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             else
             {
-                _themeManager.ThemingActive = false;
-                themeEnableChk.Checked = false;
+                //_themeManager.ThemingActive = false;
                 cboTheme.Enabled = false;
                 listPalette.FormatCell -= ListPalette_FormatCell;
             }
+
+            /* LoadSettings calls save settings first... This will save the selected theme options accordingly...
+             * Changes to ThemingActive value above have been commented out in order to require a restart for the
+             * changes to take full effect.
+             */
             LoadSettings();
         }
     }
