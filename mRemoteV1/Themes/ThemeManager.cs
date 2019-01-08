@@ -125,12 +125,6 @@ namespace mRemoteNG.Themes
                     var vs2015Blue = new ThemeInfo("DPSvs2015Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015blue"]).ExtendedPalette);
                     themes.Add(vs2015Blue.Name, vs2015Blue);
 
-                    //Override all the themes pane strip for custom event handling
-                    foreach(ThemeInfo overrideTheme in themes)
-                    {
-                        overrideTheme.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
-                    }
-                     
                     
                 }
             }

@@ -32,6 +32,8 @@ namespace mRemoteNG.Themes
             _extendedPalette = inExtendedPalette;
             IsThemeBase = false;
             IsExtendable = false;
+            //Override the dock pane strip factory
+            _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
         }
 
         public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion)
@@ -42,6 +44,9 @@ namespace mRemoteNG.Themes
             _version = inVersion;
             IsThemeBase = false;
             IsExtendable = false;
+            //Override the dock pane strip factory
+            _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory(); 
+
         }
         #endregion
 
@@ -91,6 +96,8 @@ namespace mRemoteNG.Themes
                     return;
                 }
                 _theme = value;
+                //Override the dock pane strip factory
+                _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
             }
         }
 
