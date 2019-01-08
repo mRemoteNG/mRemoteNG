@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Forms
         private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
 
         internal FullscreenHandler Fullscreen { get; set; }
-        
+
         //Added theming support
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Forms
 				UpdateWindowTitle();
 			}
 		}
-		
+
         public string ConnectionsFileName
 		{
 			get => _connectionsFileName;
@@ -100,7 +100,7 @@ namespace mRemoteNG.UI.Forms
 				UpdateWindowTitle();
 			}
 		}
-		
+
         public bool ShowFullPathInTitle
 		{
 			get => _showFullPathInTitle;
@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Forms
 				UpdateWindowTitle();
 			}
 		}
-		
+
         public ConnectionInfo SelectedConnection
 		{
 			get => _selectedConnection;
@@ -151,7 +151,7 @@ namespace mRemoteNG.UI.Forms
 	        LockToolbarPositions(Settings.Default.LockToolbars);
 			Settings.Default.PropertyChanged += OnApplicationSettingChanged;
 
-    		_themeManager.ThemeChanged += ApplyTheme; 
+    		_themeManager.ThemeChanged += ApplyTheme;
 
 			_fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
@@ -194,7 +194,7 @@ namespace mRemoteNG.UI.Forms
                 if (!panelAdder.DoesPanelExist(panelName))
                     panelAdder.AddPanel(panelName);
             }*/
-            
+
             var frmSplashScreen = FrmSplashScreen.getInstance();
             frmSplashScreen.Close();
         }
@@ -276,7 +276,7 @@ namespace mRemoteNG.UI.Forms
 		    {
 		        // intentionally ignore exception
 		    }
-            
+
 		    // Persist settings when rebuilding UI
 		    try
 		    {
@@ -372,7 +372,7 @@ namespace mRemoteNG.UI.Forms
 			}
 
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
-									
+
 			IsClosing = true;
 
             if (Runtime.WindowList != null)
@@ -384,11 +384,11 @@ namespace mRemoteNG.UI.Forms
 			}
 
             Shutdown.StartUpdate();
-									
+
 			Debug.Print("[END] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
 		}
         #endregion
-								
+
         #region Timer
 		private void tmrAutoSave_Tick(object sender, EventArgs e)
 		{
@@ -396,7 +396,7 @@ namespace mRemoteNG.UI.Forms
 			Runtime.ConnectionsService.SaveConnectionsAsync();
 		}
         #endregion
-		
+
         #region Window Overrides and DockPanel Stuff
         private void frmMain_ResizeBegin(object sender, EventArgs e)
 		{
@@ -422,11 +422,11 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_ResizeEnd(object sender, EventArgs e)
 		{
-			_inSizeMove = false;			
+			_inSizeMove = false;
 			// This handles activations from clicks that started a size/move operation
 			ActivateConnection();
-		}				
-		
+		}
+
 		protected override void WndProc(ref System.Windows.Forms.Message m)
 		{
             // Listen for and handle operating system messages
@@ -506,7 +506,7 @@ namespace mRemoteNG.UI.Forms
 			{
                 Runtime.MessageCollector.AddExceptionStackTrace("frmMain WndProc failed", ex);
             }
-									
+
 			base.WndProc(ref m);
 		}
 
@@ -524,7 +524,7 @@ namespace mRemoteNG.UI.Forms
 		{
 		    var cw = pnlDock.ActiveDocument as ConnectionWindow;
             var dp = cw?.ActiveControl as DockPane;
-            
+
             if (!(dp?.ActiveContent is ConnectionTab tab)) return;
             var ifc = InterfaceControl.FindInterfaceControl(tab);
             if (ifc == null) return;
@@ -538,7 +538,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			ActivateConnection();
 		}
-		
+
 		internal void UpdateWindowTitle()
 		{
 			if (InvokeRequired)
@@ -546,10 +546,10 @@ namespace mRemoteNG.UI.Forms
 				Invoke(new MethodInvoker(UpdateWindowTitle));
 				return;
 			}
-									
+
 			var titleBuilder = new StringBuilder(Application.ProductName);
 			const string separator = " - ";
-									
+
 			if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
 			{
 				if (Runtime.ConnectionsService.UsingDatabase)
@@ -568,7 +568,7 @@ namespace mRemoteNG.UI.Forms
 					}
 				}
 			}
-									
+
 			if (!string.IsNullOrEmpty(SelectedConnection?.Name))
 			{
 				titleBuilder.Append(separator);
@@ -577,11 +577,11 @@ namespace mRemoteNG.UI.Forms
 
             Text = titleBuilder.ToString();
 		}
-		
+
 		public void ShowHidePanelTabs(DockContent closingDocument = null)
 		{
 			DocumentStyle newDocumentStyle;
-									
+
 			if (Settings.Default.AlwaysShowPanelTabs)
 			{
 				newDocumentStyle = DocumentStyle.DockingWindow; // Show the panel tabs
@@ -606,7 +606,7 @@ namespace mRemoteNG.UI.Forms
 		    pnlDock.Size = new Size(1, 1);
 		}
         #endregion
-		
+
         #region Screen Stuff
         public void SetDefaultLayout()
         {
@@ -623,8 +623,8 @@ namespace mRemoteNG.UI.Forms
             Windows.ConfigForm.Show(pnlDock);
             Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
             Windows.ErrorsForm.DockAreas = DockAreas.DockBottom | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.Float;
-            Windows.ErrorsForm.Show( pnlDock, DockState.DockBottomAutoHide );  
-            Windows.ScreenshotForm.Hide(); 
+            Windows.ErrorsForm.Show( pnlDock, DockState.DockBottomAutoHide );
+            Windows.ScreenshotForm.Hide();
 
             pnlDock.Visible = true;
         }
