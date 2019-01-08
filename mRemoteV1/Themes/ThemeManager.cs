@@ -38,8 +38,8 @@ namespace mRemoteNG.Themes
                 ActiveTheme = (ThemeInfo)themes[Settings.Default.ThemeName];
             else
                 ActiveTheme = DefaultTheme;
-
-            ActiveTheme.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+            if(ActiveTheme != null && ActiveTheme.Theme != null)
+               ActiveTheme.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
         }
 
         #endregion
