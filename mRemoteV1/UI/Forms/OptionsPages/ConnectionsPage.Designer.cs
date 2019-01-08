@@ -309,7 +309,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkHostnameLikeDisplayName);
             this.Controls.Add(this.chkSingleClickOnOpenedConnectionSwitchesToIt);
             this.Controls.Add(this.pnlConfirmCloseConnection);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ConnectionsPage";
             this.Size = new System.Drawing.Size(610, 490);
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).EndInit();
