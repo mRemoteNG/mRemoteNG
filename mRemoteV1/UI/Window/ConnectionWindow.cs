@@ -43,6 +43,8 @@ namespace mRemoteNG.UI.Window
             TabText = formText;
             connDock.DocumentStyle = DocumentStyle.DockingWindow;
             connDock.ShowDocumentIcon = true;
+
+            connDock.ActiveContentChanged += ConnDockOnActiveContentChanged;
         }
 
         private InterfaceControl GetInterfaceControl()
@@ -302,6 +304,15 @@ namespace mRemoteNG.UI.Window
         private void Connection_ResizeEnd(object sender, EventArgs e)
         {
             ResizeEnd?.Invoke(sender, e);
+        }
+        #endregion
+
+        #region Events
+        private void ConnDockOnActiveContentChanged(object sender, EventArgs e)
+        {
+            var ic = GetInterfaceControl();
+            if (ic?.Info == null) return;
+            FrmMain.Default.SelectedConnection = ic.Info;
         }
         #endregion
 
