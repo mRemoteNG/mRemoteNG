@@ -35,9 +35,11 @@ namespace mRemoteNG.Themes
         private void SetActive()
         {
             if (themes[Settings.Default.ThemeName] != null)
-                ActiveTheme = (ThemeInfo) themes[Settings.Default.ThemeName];
+                ActiveTheme = (ThemeInfo)themes[Settings.Default.ThemeName];
             else
                 ActiveTheme = DefaultTheme;
+
+            ActiveTheme.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
         }
 
         #endregion

@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Security.Permissions;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -1337,5 +1338,30 @@ namespace mRemoteNG.UI.Tabs
             base.OnRightToLeftChanged(e);
             PerformLayout();
         }
+
+        #region Native Methods
+
+        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == (int)mRemoteNG.UI.Tabs.Msgs.WM_LBUTTONDBLCLK)
+            {
+                if (Settings.Default.DoubleClickOnTabClosesIt)
+                {
+                    DockPane.CloseActiveContent();
+                    if (PatchController.EnableMemoryLeakFix == true)
+                    {
+                        ContentClosed();
+                    }
+                    return;
+                }
+                
+            }
+
+            base.WndProc(ref m);
+            return;
+        }
+
+        #endregion
     }
 }

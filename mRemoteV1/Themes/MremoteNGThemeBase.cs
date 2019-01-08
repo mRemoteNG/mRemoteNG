@@ -17,8 +17,6 @@
             Measures.AutoHideSplitterSize = 3;
             Measures.DockPadding = 2;
             ShowAutoHideContentOnHover = false;
-
-            Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
         }
          
     }

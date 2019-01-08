@@ -48,32 +48,7 @@ namespace mRemoteNG.UI.Tabs
             }
             base.OnFormClosing(e);
         }
-
-        /*     [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-             protected override void WndProc(ref Message m)
-             {
-                 if (m.Msg == (int)mRemoteNG.UI.Tabs.Msgs.WM_LBUTTONDBLCLK)
-                 {
-                     base.WndProc(ref m);
-
-                     int index = HitTest();
-                     if (DockPane.DockPanel.AllowEndUserDocking && index != -1)
-                     {
-                         IDockContent content = Tabs[index].Content;
-                         if (content.DockHandler.CheckDockState(!content.DockHandler.IsFloat) != DockState.Unknown)
-                             content.DockHandler.IsFloat = !content.DockHandler.IsFloat;
-                     }
-
-                     return;
-                 }
-
-                 base.WndProc(ref m);
-                 return;
-             }
-             */
-
-
-
+          
 
         #region HelperFunctions  
         public void RefreshInterfaceController()
