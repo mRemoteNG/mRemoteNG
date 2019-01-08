@@ -44,20 +44,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		}
         #endregion
 
-        /*
-        private void InitializeComponent()
-        {
-            SuspendLayout();
-            // 
-            // OptionsPage
-            // 
-            Name = "OptionsPage";
-            Size = new Size(610, 489);
-            ResumeLayout(false);
-
-        }
-        */
-
 	    protected virtual void ApplyTheme()
         {
             if (!ThemeManager.getInstance().ThemingActive) return;
