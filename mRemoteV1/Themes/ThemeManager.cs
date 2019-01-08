@@ -37,9 +37,7 @@ namespace mRemoteNG.Themes
             if (themes[Settings.Default.ThemeName] != null)
                 ActiveTheme = (ThemeInfo)themes[Settings.Default.ThemeName];
             else
-                ActiveTheme = DefaultTheme;
-      /*      if(ActiveTheme != null && ActiveTheme.Theme != null)
-               ActiveTheme.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();*/
+                ActiveTheme = DefaultTheme; 
         }
 
         #endregion
@@ -90,7 +88,7 @@ namespace mRemoteNG.Themes
                     var themeFiles = Directory.GetFiles(themePath, "*.vstheme");
                     var defaultThemeURL = Directory.GetFiles(themePath, "vs2015light" + ".vstheme")[0];
                     //First we load the default theme, its vs2015light 
-                    var defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeURL);
+                    var defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeURL); 
                     themes.Add(defaultTheme.Name, defaultTheme);
                     //Then the rest
                     foreach (var themeFile in themeFiles)
@@ -126,6 +124,14 @@ namespace mRemoteNG.Themes
                     themes.Add(vs2015Dark.Name, vs2015Dark);
                     var vs2015Blue = new ThemeInfo("DPSvs2015Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015blue"]).ExtendedPalette);
                     themes.Add(vs2015Blue.Name, vs2015Blue);
+
+                    //Override all the themes pane strip for custom event handling
+                    foreach(ThemeInfo overrideTheme in themes)
+                    {
+                        overrideTheme.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+                    }
+                     
+                    
                 }
             }
             catch(Exception ex)
