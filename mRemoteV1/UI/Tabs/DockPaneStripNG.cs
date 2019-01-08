@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using mRemoteNG.Connection;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Tabs
@@ -1250,7 +1251,8 @@ namespace mRemoteNG.UI.Tabs
 
         private void Close_Click(object sender, EventArgs e)
         {
-            DockPane.CloseActiveContent();
+            CloseProtocol();
+
             if (PatchController.EnableMemoryLeakFix == true)
             {
                 ContentClosed();
@@ -1332,8 +1334,14 @@ namespace mRemoteNG.UI.Tabs
             base.OnRightToLeftChanged(e);
             PerformLayout();
         }
-        #region Native Methods
 
+        private void CloseProtocol()
+        {
+            var ic = InterfaceControl.FindInterfaceControl(DockPane.DockPanel);
+            ic?.Protocol.Close();
+        }
+
+        #region Native Methods
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
@@ -1343,7 +1351,9 @@ namespace mRemoteNG.UI.Tabs
                 if (!Settings.Default.DoubleClickOnTabClosesIt) return;
 
                 // Option is set, close the tab, then send to base.
-                DockPane.CloseActiveContent();
+                //DockPane.CloseActiveContent();
+                CloseProtocol();
+
                 if (PatchController.EnableMemoryLeakFix == true)
                 {
                     ContentClosed();
