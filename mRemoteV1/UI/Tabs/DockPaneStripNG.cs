@@ -1298,13 +1298,9 @@ namespace mRemoteNG.UI.Tabs
 
         private bool ActiveCloseHitTest(Point ptMouse)
         {
-            var result = false;
-            if (!ActiveClose.IsEmpty)
-            {
-                var mouseRect = new Rectangle(ptMouse, new Size(1, 1));
-                result = ActiveClose.IntersectsWith(mouseRect);
-            }
-            return result;
+            if (ActiveClose.IsEmpty) return false;
+            var mouseRect = new Rectangle(ptMouse, new Size(1, 1));
+            return ActiveClose.IntersectsWith(mouseRect);
         }
 
         protected override Rectangle GetTabBounds(Tab tab)
