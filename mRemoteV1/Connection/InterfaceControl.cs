@@ -36,6 +36,7 @@ namespace mRemoteNG.Connection
         public static InterfaceControl FindInterfaceControl(DockPanel DockPnl)
         {
             if (!(DockPnl.ActiveDocument is ConnectionTab ct)) return null;
+            if (ct.Controls.Count < 1) return null;
             if (ct.Controls[0] is InterfaceControl ic)
                 return ic;
 
@@ -44,6 +45,7 @@ namespace mRemoteNG.Connection
 
         public static InterfaceControl FindInterfaceControl(ConnectionTab tab)
         {
+            if (tab.Controls.Count < 1) return null;
             if (tab.Controls[0] is InterfaceControl ic)
                 return ic;
 
