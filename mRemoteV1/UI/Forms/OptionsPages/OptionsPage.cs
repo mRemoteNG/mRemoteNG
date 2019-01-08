@@ -12,11 +12,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
-			
+
         #region Public Properties
 	    // ReSharper disable once UnusedAutoPropertyAccessor.Global
 	    [Browsable(false)]public virtual string PageName {get; set;}
-			
+
 		public virtual Icon PageIcon {get; protected set;}
         public virtual Image IconImage => PageIcon?.ToBitmap();
 
@@ -25,22 +25,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         #region Public Methods
         public virtual void ApplyLanguage()
 		{
-				
+
 		}
-			
+
 		public virtual void LoadSettings()
 		{
-				
+
 		}
-			
+
 		public virtual void SaveSettings()
 		{
-				
+
 		}
-			
+
 		public virtual void RevertSettings()
 		{
-				
+
 		}
         #endregion
 
