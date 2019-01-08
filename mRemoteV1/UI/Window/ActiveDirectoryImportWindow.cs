@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Container;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
@@ -24,10 +25,15 @@ namespace mRemoteNG.UI.Window
         private new void ApplyTheme()
         {
             base.ApplyTheme();
+            if (!(ActiveDirectoryTree.Controls[0] is TreeView tv)) return;
+            var tm = ThemeManager.getInstance();
+            if (!tm.ThemingActive) return;
+            tv.BackColor = tm.ActiveTheme.ExtendedPalette.getColor("List_Background");
+            tv.ForeColor = tm.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
         }
 
         #region Private Methods
-         
+
 
         #region Event Handlers
 
@@ -37,7 +43,7 @@ namespace mRemoteNG.UI.Window
             txtDomain.Text = _currentDomain;
             ActiveDirectoryTree.Domain = _currentDomain;
             EnableDisableImportButton();
-            
+
             // Domain doesn't refresh on load, so it defaults to DOMAIN without this...
             ChangeDomain();
         }
