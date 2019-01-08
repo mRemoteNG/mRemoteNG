@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Window
     {
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private VisualStudioToolStripExtender vsToolStripExtender;
-        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer(); 
+        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         #region Public Methods
         public ConnectionWindow(DockContent panel, string formText = "")
@@ -129,7 +129,7 @@ namespace mRemoteNG.UI.Window
 
                 //Show the tab
                 conTab.Show(connDock,DockState.Document);
-                conTab.Focus(); 
+                conTab.Focus();
                 return conTab;
             }
             catch (Exception ex)
@@ -158,7 +158,7 @@ namespace mRemoteNG.UI.Window
                     initiator.OpenConnection(iControl.Info, ConnectionInfo.Force.DoNotJump);
                 }
 
-            }               
+            }
             catch(Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("reconnectAll (UI.Window.ConnectionWindow) failed", ex);
@@ -574,7 +574,7 @@ namespace mRemoteNG.UI.Window
         }
 
 
-        private void CloseTabMenu()    
+        private void CloseTabMenu()
         {
             var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
             if (selectedTab == null) return;
@@ -610,17 +610,17 @@ namespace mRemoteNG.UI.Window
             {
                 var tab = (ConnectionTab) dockContent;
                 if (selectedTab != tab)
-                { 
+                {
                     tab.Close();
                 }
-            } 
+            }
         }
 
         private void CloseOtherTabsToTheRight()
         {
 
             try
-            { 
+            {
                 var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
                 if (selectedTab == null) return;
                 var dockPane = selectedTab.Pane;
@@ -644,7 +644,7 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("CloseTabMenu (UI.Window.ConnectionWindow) failed", ex);
-            } 
+            }
             }
 
         private void DuplicateTab()
@@ -688,7 +688,7 @@ namespace mRemoteNG.UI.Window
                     if (dr != DialogResult.OK) return;
                     if(!string.IsNullOrEmpty(frmInputBox.returnValue))
                         ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&");
-                } 
+                }
             }
             catch (Exception ex)
             {
