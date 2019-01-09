@@ -25,6 +25,7 @@ namespace mRemoteNG.UI.Window
         private new void ApplyTheme()
         {
             base.ApplyTheme();
+            if (ActiveDirectoryTree.Controls.Count < 1) return;
             if (!(ActiveDirectoryTree.Controls[0] is TreeView tv)) return;
             var tm = ThemeManager.getInstance();
             if (!tm.ThemingActive) return;

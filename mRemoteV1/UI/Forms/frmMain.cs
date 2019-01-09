@@ -350,6 +350,7 @@ namespace mRemoteNG.UI.Forms
                     foreach (var dc in pnlDock.Contents)
                     {
                         if (!(dc is ConnectionWindow cw)) continue;
+                        if (cw.Controls.Count < 1) continue;
                         if (!(cw.Controls[0] is DockPanel dp)) continue;
                         if (dp.Contents.Count > 0)
                             openConnections += dp.Contents.Count;

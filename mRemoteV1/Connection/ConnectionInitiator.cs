@@ -56,7 +56,7 @@ namespace mRemoteNG.Connection
             var connectionWindow = (ConnectionWindow)interfaceControl.FindForm();
             connectionWindow?.Focus();
             var findForm = (ConnectionWindow)interfaceControl.FindForm();
-            findForm?.Show(FrmMain.Default.pnlDock); 
+            findForm?.Show(FrmMain.Default.pnlDock);
             return true;
         }
 
@@ -126,7 +126,7 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
             }
         }
-         
+
         private static void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.PreExtApp == "") return;
@@ -142,6 +142,7 @@ namespace mRemoteNG.Connection
                 // the new structure is ConnectionWindow.Controls[0].ActiveDocument.Controls[0]
                 //                                       DockPanel                  InterfaceControl
                 if (!(Runtime.WindowList[i] is ConnectionWindow connectionWindow)) continue;
+                if(connectionWindow.Controls.Count < 1) continue;
                 if (!(connectionWindow.Controls[0] is DockPanel cwDp)) continue;
 
                 return InterfaceControl.FindInterfaceControl(cwDp);
@@ -195,7 +196,7 @@ namespace mRemoteNG.Connection
             if(extT == null) return connectionContainer;
 
             if(extT.Icon != null)
-                ((ConnectionTab)connectionContainer).Icon = extT.Icon; 
+                ((ConnectionTab)connectionContainer).Icon = extT.Icon;
 
             return connectionContainer;
         }
@@ -235,10 +236,10 @@ namespace mRemoteNG.Connection
                     }
                 }
 
-                Runtime.MessageCollector.AddMessage(msgClass, 
+                Runtime.MessageCollector.AddMessage(msgClass,
                     string.Format(
-                        Language.strProtocolEventDisconnected, 
-                        disconnectedMessage, 
+                        Language.strProtocolEventDisconnected,
+                        disconnectedMessage,
                         prot.InterfaceControl.Info.Hostname,
                         prot.InterfaceControl.Info.Protocol.ToString()));
             }
