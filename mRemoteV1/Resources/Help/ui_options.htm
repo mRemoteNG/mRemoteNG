@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Options</title>
+    <link rel="stylesheet" href="Main.css" type="text/css">
+  </head>
+  <body>
+    <div class="isa_info">
+      Complete from nmat updates, please remove this div after review. Need help with missing information here.
+    </div>
+
+    <!-- Introduction - #start -->
+    <h1>Introduction</h1>
+    <hr>
+    <p>
+      Options window which can also be named settings is the window where you can personalize
+      your options for all of mRemoteNG. This includes how to set logging, credentials and so on.
+      Continue reading for the details of the different options here.
+    </p>
+    <h2>Quick Reference</h2>
+    <ul>
+      <li><a href="#startup_exit">Startup/Exit</a> - How mRemoteNG acts on startup and exit</li>
+      <li><a href="#appearance">Appearance</a> - Appearance options</li>
+      <li><a href="#tabs_and_panels">Tabs &amp; Panels</a> - Tabs &amp; Panels options</li>
+      <li><a href="#notifications">Notifications</a> - Notifications options</li>
+      <li><a href="#connections">Connections</a> - Connections options</li>
+      <li><a href="#credentials">Credentials</a> - Credentials options</li>
+      <li><a href="#sqlserver">SQL Server</a> - SQL Server options</li>
+      <li><a href="#updates">Updates</a> - Updates options</li>
+      <li><a href="#theme">Theme</a> - Theme options</li>
+      <li><a href="#security">Security</a> - Security options</li>
+      <li><a href="#advanced">Advanced</a> - Advanced options</li>
+    </ul>
+    <!-- Introduction - #end -->
+
+    <!-- Startup/Exit - #start -->
+    <h1 id="startup_exit">Startup/Exit</h1>
+    <p>
+      Options below are for the various settings for Startup/Exit of mRemoteNG.
+    </p>
+    <table>
+      <tr>
+        <td><b>Option</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+      </tr>
+      <tr>
+        <td>Save connection on exit</td>
+        <td>On</td>
+        <td>Save to connection file/database on exit of mRemoteNG.</td>
+      </tr>
+      <tr>
+        <td>Reconnect to previously opened sessions on startup</td>
+        <td>Off</td>
+        <td>
+          This option will allow you to open the connection from which
+          you where connected to after last exit of application.
+      </td>
+      </tr>
+      <tr>
+        <td>Allow only a single instance of the application (mRemoteNG restart required)</td>
+        <td>Off</td>
+        <td>
+          Enforces and makes sure only a single instance of mRemoteNG is running on the
+          computer.
+        </td>
+      </tr>
+      <tr>
+        <td>Check proper installation of components at startup</td>
+        <td>Off</td>
+        <td>Opens the panel for Components Check on every startup.</td>
+      </tr>
+    </table>
+    <!-- Startup/Exit - #end -->
+
+    <!-- Appearance - #start -->
+    <h1 id="appearance">Appearance</h1>
+    <p>
+      Various options for mRemoteNG appearance.
+    </p>
+    <table>
+      <tr>
+        <td><b>Option</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+      </tr>
+      <tr>
+        <td>Language</td>
+        <td>(Automatically Detect)</td>
+        <td>Which language to use for the interface of mRemoteNG.</td>
+      </tr>
+      <tr>
+        <td>Show description tooltips in connection tree</td>
+        <td>Off</td>
+        <td>
+          Holding mouse over a item in connection tree will show a popout from mouse
+          with information.
+        </td>
+      </tr>
+      <tr>
+        <td>Show full connections file path in window title</td>
+        <td>Off</td>
+        <td>
+          Adds the complete path to the title of mRemoteNG to where the connection file is
+          located.
+        </td>
+      </tr>
+      <tr>
+        <td>Always show notification area icon</td>
+        <td>Off</td>
+        <td>
+          Adds mRemoteNG to the taskbar in the OS.
+        </td>
+      </tr>
+      <tr>
+        <td>Minimize to notification area</td>
+        <td>Off</td>
+        <td>
+          Will place mRemoteNG in taskbar on minimize.
+        </td>
+      </tr>
+    </table>
+    <!-- Appearance - #end -->
+
+    <!-- Tabs & Panels - #start -->
+    <h1 id="tabs_and_panels">Tabs &amp; Panels</h1>
+    <p>
+      Various settings for how tabs &amp; panels should work in mRemoteNG.
+    </p>
+    <table>
+      <tr>
+        <td><b>Option</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+      </tr>
+      <tr>
+        <td>Always show panel tabs</td>
+        <td>Off</td>
+        <td>Will always show the tabs &amp; panels in mRemoteNG</td>
+      </tr>
+      <tr>
+        <td>Open new tab to the right of the currently selected tab</td>
+        <td>On</td>
+        <td>
+          When active then open next tab on the right of the active selection in mRemoteNG. Turn
+          this off and next tab will open the next connection at the end of all tabs.
+        </td>
+      </tr>
+      <tr>
+        <td>Show logon information on tab names</td>
+        <td>Off</td>
+        <td>Show your login in the connection tab.</td>
+      </tr>
+      <tr>
+        <td>Show protocols on tab names</td>
+        <td>Off</td>
+        <td>When active then in the tab show what protocol is used for the connection.</td>
+      </tr>
+      <tr>
+        <td>Identify quick connect tabs by adding the prefix "Quick:"</td>
+        <td>Off</td>
+        <td>
+          When active shows Quick: before the connection name in the tab connection to easier
+          identify what is a quick connection and what is a non quick connection.
+        </td>
+      </tr>
+      <tr>
+        <td>Double click on tab closes it</td>
+        <td>On</td>
+        <td>
+          When double clicking a tab it will close the connection but does not log you
+          out from the server. The connection in this case is active on the destination
+          server.
+        </td>
+      </tr>
+      <tr>
+        <td>Always show panel selection dialog when opening connections</td>
+        <td>Off</td>
+        <td>
+          Option to allow you to always select what panel to place the connection on.
+          If this is off it will create a General panel where the connection is placed
+          or use the connections set panel from the connection options.
+        </td>
+      </tr>
+      <tr>
+        <td>Create a empty panel when mRemoteNG starts</td>
+        <td>Off</td>
+        <td>
+          On startup if this is active mRemoteNG will create a panel mentioned under
+          Panel Name:
+        </td>
+      </tr>
+    </table>
+    <!-- Tabs & Panels - #end -->
+
+    <!-- Notifications - #start -->
+    <h1 id="notifications">Notifications</h1>
+    <!-- TODO: Fix this area -->
+    <!-- Notifications - #end -->
+
+    <!-- Connections - #start -->
+    <h1 id="connections">Connections</h1>
+    <p>
+    </p>
+    <table>
+      <tr>
+        <td><b>Option</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+      </tr>
+      <tr>
+        <td>Single click on connections opens it</td>
+        <td>Off</td>
+        <td>
+          In connection tree when this is active will try to connect on single click. By default
+          this is turned off to use double click to open connection.
+        </td>
+      </tr>
+      <tr>
+        <td>Single click on opened connection in Connection Tree switches to the opened Connection Tab</td>
+        <td>Off</td>
+        <td>
+          Allows you to single click on a active connection in the connection tree to go to that
+          open connection in the tabs faster.
+        </td>
+      </tr>
+      <tr>
+        <td>Set hostname like display name when creating or renaming connections</td>
+        <td>Off</td>
+        <td>
+          Will make mRemoteNG try to use the remote host hostname to set the title of the tab
+          in mRemoteNG.
+        </td>
+      </tr>
+      <tr>
+        <td>Save connections after every exit</td>
+        <td>On</td>
+        <td>
+          When active mRemoteNG will save the connection tree to the active config
+          after every exit. If inactive then you have to save using
+          <b>File > Save Connection File</b> or keyboard shortcut
+          <kbd>Ctrl+S</kbd>
+        </td>
+      </tr>
+      <tr>
+        <td>Filter search matches in connection tree</td>
+        <td>Off</td>
+        <td>
+          Allows you to filter out the connections to which does not match
+          your filter search in the connection tree. If not active the search
+          will only select the filter to which you do search.
+        </td>
+      </tr>
+      <tr>
+        <td>RDP Reconnect count</td>
+        <td>5</td>
+        <td>Value in seconds<br>
+        </td>
+      </tr>
+      <tr>
+        <td>RDP Connection Timeout</td>
+        <td>20</td>
+        <td>Value in seconds<br>
+        </td>
+      </tr>
+      <tr>
+        <td>Auto save time in minutes (0 means disabled)</td>
+        <td>0</td>
+        <td>Value in minutes<br>
+        </td>
+      </tr>
+      <tr>
+        <td>When closing connections</td>
+        <td>Warn me when closing connections</td>
+        <td>
+          Various options of how mRemoteNG should act when you close connections.
+          The different options are listed below:
+          <ul>
+            <li>Warn me when closing connections</li>
+            <li>Warn me only when closing multiple connections</li>
+            <li>Warn me only when exiting mRemoteNG</li>
+            <li>Do not warn me when closing connections</li>
+          </ul>
+          By default a warning will come up on closing a connection. Change this value
+          based on your prefered settings.
+        </td>
+      </tr>
+    </table>
+    <!-- Connections - #end -->
+
+    <!-- Credentials - #start -->
+    <h1 id="credentials">Credentials</h1>
+    <p>
+      Options for credentials in mRemoteNG. The main purpose here
+      is that when you have empty username, password or domain field
+      then use below information.
+    </p>
+    <table>
+        <tr>
+        <td><b>Option</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+      </tr>
+      <tr>
+        <td>None</td>
+        <td>On</td>
+        <td>Use no specific settings on login</td>
+      </tr>
+      <tr>
+        <td>My Current credentials (Windows logon information)</td>
+        <td>Off</td>
+        <td>
+          This option will use the logon information for the OS. This is useful if you
+          are in a domain that uses specific credentials and want to login to servers
+          with those credentials.
+        </td>
+      </tr>
+      <tr>
+        <td>The following:</td>
+        <td>Off</td>
+        <td>
+          Use one or two of the options below for the empty login or all of them.
+          For example if you have a different domain that you login to the servers with.
+        </td>
+      </tr>
+    </table>
+    <!-- Credentials - #end -->
+
+    <!-- SQL Server - #start -->
+    <!-- TODO: This needs more information -->
+    <h1 id="sqlserver">SQL Server</h1>
+    <div class="isa_info">
+      <b>NOTE!</b> To understand more about SQL Server connection please
+      <a href="ui_sql_configuration.htm"><b>See here</b></a>
+    </div>
+    <table>
+      <tr>
+        <td><b>Option</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+      </tr>
+      <tr>
+        <td>Use SQL Server to load &amp; save connections</td>
+        <td>Off</td>
+        <td>Enable to fetch connections from a database.</td>
+      </tr>
+    </table>
+    <!-- SQL Server - #end -->
+
+    <!-- Updates - #start -->
+    <h1 id="updates">Updates</h1>
+    <p>
+      Options for how mRemoteNG should check for updates from the website.
+    </p>
+    <table>
+      <tr>
+        <td><b>Option</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+      </tr>
+      <tr>
+        <td>Check for updates at startup</td>
+        <td>On (Every 14 days)</td>
+        <td>
+          Here you can choose how often mRemoteNG checks for updates.
+          Standard is every 14 days
+        </td>
+      </tr>
+      <tr>
+        <td>Release Channel:</td>
+        <td>Stable</td>
+        <td>
+          The main channel to use for mRemoteNG. Note that the channels are described under
+          the selection. Stable is suggested for normal usage but its always good to get
+          feedback on upcoming releases.
+        </td>
+      </tr>
+      <tr>
+        <td>Use a proxy server to connect</td>
+        <td>Off</td>
+        <td>
+          Proxy to connect through to check for updates. This is not a proxy connection
+          for when you connect to a server but more to check for updates.
+        </td>
+      </tr>
+    </table>
+    <!-- Updates - #end -->
+
+    <!-- Theme - #start -->
+    <!-- TODO: Add theme howto -->
+    <h1 id="theme">Theme</h1>
+    <p>
+      UI themes. This is not enabled by default but can be used
+      inside mRemoteNG. To enable themes you have to first
+      enable it in the checkbox at the bottom of the options.
+      Then restart mRemoteNG in order for it to work.
+    </p>
+    <p>
+      Default theme is: vs2015light
+    </p>
+    <div class="isa_info">
+      <b>NOTE!</b> To know more about themes and how to
+      create your own <a href=""><b>See Here</b></a>
+    </div>
+    <!-- Theme - #end -->
+
+    <!-- Security - #start -->
+    <!-- TODO: this needs better information -->
+    <h1 id="security">Security</h1>
+    <!-- Security - #end -->
+
+    <!-- Advanced - #start -->
+    <!-- TODO: Not sure about half of the items here -->
+    <h1 id="advanced">Advanced</h1>
+    <table>
+      <tr>
+        <td><b>Option</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+      </tr>
+      <tr>
+        <td>Automatically get session information</td>
+        <td>Off</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Automatically try to reconnect when disconnected from server (RDP &amp; ICA only)</td>
+        <td>Off</td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>Use UTF8 encoding for RDP "Load Balance info" property</td>
+        <td>Off</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Use custom PuTTY path:</td>
+        <td>Off</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>To configure PuTTY sessions click this button:</td>
+        <td>Launch PuTTY</td>
+        <td>Will launch the putty agent so you can edit the sessions.</td>
+      </tr>
+      <tr>
+        <td>Maximum PuTTY and integrated external tools wait time:</td>
+        <td>2 seconds</td>
+        <td></td>
+      </tr>
+    </table>
+    <!-- Advanced - #end -->
+  </body>
+</html>

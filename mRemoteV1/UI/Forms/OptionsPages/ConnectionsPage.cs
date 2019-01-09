@@ -1,5 +1,5 @@
-using System;
 using mRemoteNG.Config;
+using System;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -26,6 +26,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkSingleClickOnConnectionOpensIt.Text = Language.strSingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
+            chkConnectionTreeTrackActiveConnection.Text = Language.strTrackActiveConnectionInConnectionTree;
             chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
@@ -48,6 +49,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkSingleClickOnConnectionOpensIt.Checked = Settings.Default.SingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
+            chkConnectionTreeTrackActiveConnection.Checked = Settings.Default.TrackActiveConnectionInConnectionTree;
             chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Checked = Settings.Default.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
@@ -78,6 +80,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             Settings.Default.SingleClickOnConnectionOpensIt = chkSingleClickOnConnectionOpensIt.Checked;
             Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
+            Settings.Default.TrackActiveConnectionInConnectionTree = chkConnectionTreeTrackActiveConnection.Checked;
             Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
             Settings.Default.SaveConnectionsAfterEveryEdit = chkSaveConnectionsAfterEveryEdit.Checked;
             Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
