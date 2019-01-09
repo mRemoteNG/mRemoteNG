@@ -563,6 +563,7 @@ namespace mRemoteNG.UI.Forms
 			{
 				titleBuilder.Append(separator);
 				titleBuilder.Append(SelectedConnection.Name);
+                Windows.TreeForm.JumpToNode(SelectedConnection);
 			}
 
             Text = titleBuilder.ToString();
