@@ -51,6 +51,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkAutomaticallyGetSessionInfo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkAutomaticallyGetSessionInfo.AutoSize = true;
+            this.chkAutomaticallyGetSessionInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAutomaticallyGetSessionInfo.Location = new System.Drawing.Point(3, 3);
             this.chkAutomaticallyGetSessionInfo.Name = "chkAutomaticallyGetSessionInfo";
             this.chkAutomaticallyGetSessionInfo.Size = new System.Drawing.Size(220, 17);
@@ -71,6 +72,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkAutomaticReconnect._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkAutomaticReconnect.AutoSize = true;
+            this.chkAutomaticReconnect.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAutomaticReconnect.Location = new System.Drawing.Point(3, 26);
             this.chkAutomaticReconnect.Name = "chkAutomaticReconnect";
             this.chkAutomaticReconnect.Size = new System.Drawing.Size(430, 17);
@@ -100,6 +102,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkUseCustomPuttyPath._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkUseCustomPuttyPath.AutoSize = true;
+            this.chkUseCustomPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseCustomPuttyPath.Location = new System.Drawing.Point(3, 72);
             this.chkUseCustomPuttyPath.Name = "chkUseCustomPuttyPath";
             this.chkUseCustomPuttyPath.Size = new System.Drawing.Size(146, 17);
@@ -195,6 +198,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkLoadBalanceInfoUseUtf8._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkLoadBalanceInfoUseUtf8.AutoSize = true;
+            this.chkLoadBalanceInfoUseUtf8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLoadBalanceInfoUseUtf8.Location = new System.Drawing.Point(3, 49);
             this.chkLoadBalanceInfoUseUtf8.Name = "chkLoadBalanceInfoUseUtf8";
             this.chkLoadBalanceInfoUseUtf8.Size = new System.Drawing.Size(317, 17);
@@ -204,8 +208,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // AdvancedPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.chkLoadBalanceInfoUseUtf8);
             this.Controls.Add(this.chkAutomaticallyGetSessionInfo);
             this.Controls.Add(this.lblMaximumPuttyWaitTime);

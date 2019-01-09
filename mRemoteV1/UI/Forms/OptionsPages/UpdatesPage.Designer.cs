@@ -94,6 +94,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkCheckForUpdatesOnStartup._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkCheckForUpdatesOnStartup.AutoSize = true;
+            this.chkCheckForUpdatesOnStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(3, 4);
             this.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup";
             this.chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(120, 17);
@@ -223,6 +224,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.chkUseProxyForAutomaticUpdates._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkUseProxyForAutomaticUpdates.AutoSize = true;
+            this.chkUseProxyForAutomaticUpdates.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(6, 0);
             this.chkUseProxyForAutomaticUpdates.Name = "chkUseProxyForAutomaticUpdates";
             this.chkUseProxyForAutomaticUpdates.Size = new System.Drawing.Size(176, 17);
@@ -236,6 +238,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkUseProxyAuthentication._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkUseProxyAuthentication.AutoSize = true;
             this.chkUseProxyAuthentication.Enabled = false;
+            this.chkUseProxyAuthentication.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseProxyAuthentication.Location = new System.Drawing.Point(27, 70);
             this.chkUseProxyAuthentication.Name = "chkUseProxyAuthentication";
             this.chkUseProxyAuthentication.Size = new System.Drawing.Size(234, 17);
@@ -314,8 +317,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // UpdatesPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.pnlReleaseChannel);
             this.Controls.Add(this.lblUpdatesExplanation);
             this.Controls.Add(this.pnlUpdateCheck);

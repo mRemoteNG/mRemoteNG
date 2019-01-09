@@ -39,7 +39,6 @@
             this.lblCredentialsPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.txtCredentialsUsername = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblCredentialsDomain = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.checkBoxUnlockOnStartup = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.pnlDefaultCredentials.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +54,7 @@
             this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsPassword);
             this.pnlDefaultCredentials.Controls.Add(this.txtCredentialsUsername);
             this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsDomain);
-            this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 26);
+            this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 3);
             this.pnlDefaultCredentials.Name = "pnlDefaultCredentials";
             this.pnlDefaultCredentials.Size = new System.Drawing.Size(604, 175);
             this.pnlDefaultCredentials.TabIndex = 0;
@@ -160,22 +159,10 @@
             this.lblCredentialsDomain.Text = "Domain:";
             this.lblCredentialsDomain.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // checkBoxUnlockOnStartup
-            // 
-            this.checkBoxUnlockOnStartup._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
-            this.checkBoxUnlockOnStartup.AutoSize = true;
-            this.checkBoxUnlockOnStartup.Location = new System.Drawing.Point(3, 3);
-            this.checkBoxUnlockOnStartup.Name = "checkBoxUnlockOnStartup";
-            this.checkBoxUnlockOnStartup.Size = new System.Drawing.Size(93, 17);
-            this.checkBoxUnlockOnStartup.TabIndex = 1;
-            this.checkBoxUnlockOnStartup.Text = "ngCheckBox1";
-            this.checkBoxUnlockOnStartup.UseVisualStyleBackColor = true;
-            // 
             // CredentialsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBoxUnlockOnStartup);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.pnlDefaultCredentials);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CredentialsPage";
@@ -183,7 +170,6 @@
             this.pnlDefaultCredentials.ResumeLayout(false);
             this.pnlDefaultCredentials.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -199,6 +185,5 @@
         internal Controls.Base.NGLabel lblCredentialsPassword;
         internal Controls.Base.NGTextBox txtCredentialsUsername;
         internal Controls.Base.NGLabel lblCredentialsDomain;
-        private Controls.Base.NGCheckBox checkBoxUnlockOnStartup;
     }
 }

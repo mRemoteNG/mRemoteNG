@@ -75,15 +75,21 @@ namespace mRemoteNG.UI.Controls.Base
             else
                 e.Graphics.FillRectangle(new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")), e.Bounds);
 
-            if(string.IsNullOrEmpty(DisplayMember))
-                e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
-            else
+            if (Items.Count > 0)
             {
-                if (Items[index].GetType().GetProperty(DisplayMember) != null)
+                if (string.IsNullOrEmpty(DisplayMember))
+                    e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                else
                 {
-                    e.Graphics.DrawString(Items[index].GetType().GetProperty(DisplayMember)?.GetValue(Items[index],null).ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                    if (Items[index].GetType().GetProperty(DisplayMember) != null)
+                    {
+                        e.Graphics.DrawString(
+                            Items[index].GetType().GetProperty(DisplayMember)?.GetValue(Items[index], null).ToString(),
+                            e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                    }
                 }
             }
+
             e.DrawFocusRectangle();
         }
 

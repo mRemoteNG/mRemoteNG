@@ -100,6 +100,8 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
+                FrmSplashScreen.getInstance().Close();
+
                 if (Settings.Default.UseSQLServer)
                 {
                     MessageCollector.AddExceptionMessage(Language.strLoadFromSqlFailed, ex);
