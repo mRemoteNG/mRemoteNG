@@ -151,8 +151,6 @@ namespace mRemoteNG.UI.Window
 
 	        if (Settings.Default.SingleClickSwitchesToOpenConnection)
 	            singleClickHandlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
-            else
-                doubleClickHandlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
 
 	        olvConnections.SingleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = singleClickHandlers };
 	        olvConnections.DoubleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = doubleClickHandlers };
