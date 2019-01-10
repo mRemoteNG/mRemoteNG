@@ -201,9 +201,9 @@ namespace mRemoteNG.UI.Window
             Text = @"Config";
             PropertyGridContextMenu.ResumeLayout(false);
             ResumeLayout(false);
-					
+
 		}
-		
+
         #region Public Properties
         public bool PropertiesVisible
 		{
@@ -217,7 +217,7 @@ namespace mRemoteNG.UI.Window
 			    _btnShowDefaultProperties.Checked = false;
 			}
 		}
-		
+
         public bool InheritanceVisible
 		{
 			get => _btnShowInheritance.Checked;
@@ -230,7 +230,7 @@ namespace mRemoteNG.UI.Window
 			    _btnShowDefaultProperties.Checked = false;
 			}
 		}
-		
+
         public bool DefaultPropertiesVisible
 		{
 			get => _btnShowDefaultProperties.Checked;
@@ -243,7 +243,7 @@ namespace mRemoteNG.UI.Window
 			    _btnShowInheritance.Checked = false;
 			}
 		}
-		
+
         public bool DefaultInheritanceVisible
 		{
 			get => _btnShowDefaultInheritance.Checked;
@@ -279,7 +279,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Methods
-		
+
 		protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
 		{
 		    // Main form handle command key events
@@ -291,15 +291,15 @@ namespace mRemoteNG.UI.Window
 		    {
 		        gridRoot = gridRoot.Parent;
 		    }
-						
+
 		    var gridItems = new List<GridItem>();
 		    FindChildGridItems(gridRoot, ref gridItems);
-						
+
 		    if (!ContainsGridItemProperty(gridItems))
 		        return true;
-						
+
 		    var newItem = selectedItem;
-						
+
 		    // ReSharper disable once SwitchStatementMissingSomeCases
 		    switch (keyData)
 		    {
@@ -310,12 +310,12 @@ namespace mRemoteNG.UI.Window
 		            newItem = FindNextGridItemProperty(gridItems, selectedItem);
 		            break;
 		    }
-						
+
 		    _pGrid.SelectedGridItem = newItem;
-						
+
 		    return true; // Handled
 		}
-		
+
 		private void FindChildGridItems(GridItem item, ref List<GridItem> gridItems)
 		{
 			gridItems.Add(item);
@@ -326,7 +326,7 @@ namespace mRemoteNG.UI.Window
 		        FindChildGridItems(child, ref gridItems);
 		    }
 		}
-		
+
 		private bool ContainsGridItemProperty(IEnumerable<GridItem> gridItems)
 		{
 		    return gridItems.Any(item => item.GridItemType == GridItemType.Property);
@@ -336,7 +336,7 @@ namespace mRemoteNG.UI.Window
 		{
 			if (gridItems.Count == 0 || startItem == null)
 				return null;
-			
+
 			var startIndex = gridItems.IndexOf(startItem);
 			if (startItem.GridItemType == GridItemType.Property)
 			{
@@ -346,7 +346,7 @@ namespace mRemoteNG.UI.Window
 					startIndex = gridItems.Count - 1;
 				}
 			}
-			
+
 			var previousIndex = 0;
 			var previousIndexValid = false;
 			for (var index = startIndex; index >= 0; index--)
@@ -356,10 +356,10 @@ namespace mRemoteNG.UI.Window
 			    previousIndexValid = true;
 			    break;
 			}
-			
+
 			if (previousIndexValid)
 				return gridItems[previousIndex];
-			
+
 			for (var index = gridItems.Count - 1; index >= startIndex + 1; index--)
 			{
 			    if (gridItems[index].GridItemType != GridItemType.Property) continue;
@@ -367,15 +367,15 @@ namespace mRemoteNG.UI.Window
 			    previousIndexValid = true;
 			    break;
 			}
-			
+
 			return !previousIndexValid ? null : gridItems[previousIndex];
 		}
-		
+
 		private GridItem FindNextGridItemProperty(IList<GridItem> gridItems, GridItem startItem)
 		{
 			if (gridItems.Count == 0 || startItem == null)
 				return null;
-					
+
 			var startIndex = gridItems.IndexOf(startItem);
 			if (startItem.GridItemType == GridItemType.Property)
 			{
@@ -385,7 +385,7 @@ namespace mRemoteNG.UI.Window
 					startIndex = 0;
 				}
 			}
-			
+
 			var nextIndex = 0;
 			var nextIndexValid = false;
 			for (var index = startIndex; index <= gridItems.Count - 1; index++)
@@ -395,10 +395,10 @@ namespace mRemoteNG.UI.Window
 			    nextIndexValid = true;
 			    break;
 			}
-			
+
 			if (nextIndexValid)
 				return gridItems[nextIndex];
-					
+
 			for (var index = 0; index <= startIndex - 1; index++)
 			{
 			    if (gridItems[index].GridItemType != GridItemType.Property) continue;
@@ -406,7 +406,7 @@ namespace mRemoteNG.UI.Window
 			    nextIndexValid = true;
 			    break;
 			}
-			
+
 			return !nextIndexValid ? null : gridItems[nextIndex];
 		}
 
@@ -453,7 +453,7 @@ namespace mRemoteNG.UI.Window
 					                _btnHostStatus.Enabled = false;
 					                break;
 					        }
-					        
+
 					        _pGrid.SelectedObject = propertyGridObject;
 					    }
 					    else
@@ -461,7 +461,7 @@ namespace mRemoteNG.UI.Window
 					        _pGrid.SelectedObject = propertyGridObject;
 
 					        _btnShowProperties.Enabled = true;
-					        _btnShowInheritance.Enabled = 
+					        _btnShowInheritance.Enabled =
                                 gridObjectAsContainerInfo.Parent != null &&
                                 !(gridObjectAsContainerInfo.Parent is RootNodeInfo);
 					        _btnShowDefaultProperties.Enabled = false;
@@ -479,7 +479,7 @@ namespace mRemoteNG.UI.Window
                             _pGrid.SelectedObject = propertyGridObject;
 
                             _btnShowProperties.Enabled = true;
-                            _btnShowInheritance.Enabled = 
+                            _btnShowInheritance.Enabled =
                                 !(gridObjectAsConnectionInfo is PuttySessionInfo) &&
                                 gridObjectAsConnectionInfo.Parent != null &&
                                 !(gridObjectAsConnectionInfo.Parent is RootNodeInfo);
@@ -548,7 +548,7 @@ namespace mRemoteNG.UI.Window
 				else if (propertyGridObject is ConnectionInfoInheritance) //INHERITANCE
 				{
                     _pGrid.SelectedObject = propertyGridObject;
-							
+
 					if (InheritanceVisible)
 					{
                         InheritanceVisible = true;
@@ -576,7 +576,7 @@ namespace mRemoteNG.UI.Window
 
                         DefaultInheritanceVisible = true;
 					}
-							
+
 				}
 
                 ShowHideGridItems();
@@ -588,7 +588,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-		
+
         #region Private Methods
 		private void ApplyLanguage()
 		{
@@ -602,7 +602,7 @@ namespace mRemoteNG.UI.Window
 			TabText = Language.strMenuConfig;
 			_propertyGridContextMenuShowHelpText.Text = Language.strMenuShowHelpText;
 		}
-		
+
 		private new void ApplyTheme()
 		{
             if (!ThemeManager.getInstance().ThemingActive) return;
@@ -613,9 +613,9 @@ namespace mRemoteNG.UI.Window
             _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Border");
             _pGrid.HelpBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             _pGrid.HelpForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground"); 
+            _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground");
             _pGrid.CommandsDisabledLinkColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
-            _pGrid.CommandsBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background"); 
+            _pGrid.CommandsBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background");
             _pGrid.CommandsForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
         }
 
@@ -631,9 +631,9 @@ namespace mRemoteNG.UI.Window
 				customToolStrip.Items.Add(_btnHostStatus);
 				customToolStrip.Items.Add(_btnIcon);
 				customToolStrip.Show();
-						
+
 				var propertyGridToolStrip = new ToolStrip();
-						
+
 				ToolStrip toolStrip = null;
 				foreach (Control control in _pGrid.Controls)
 				{
@@ -642,23 +642,23 @@ namespace mRemoteNG.UI.Window
 				    propertyGridToolStrip = toolStrip;
 				    break;
 				}
-						
+
 				if (toolStrip == null)
 				{
 					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strCouldNotFindToolStripInFilteredPropertyGrid, true);
 					return;
 				}
-						
+
 				if (!_originalPropertyGridToolStripItemCountValid)
 				{
 					_originalPropertyGridToolStripItemCount = propertyGridToolStrip.Items.Count;
 					_originalPropertyGridToolStripItemCountValid = true;
 				}
 				Debug.Assert(_originalPropertyGridToolStripItemCount == 5);
-						
+
 				// Hide the "Property Pages" button
 				propertyGridToolStrip.Items[_originalPropertyGridToolStripItemCount - 1].Visible = false;
-						
+
 				var expectedToolStripItemCount = _originalPropertyGridToolStripItemCount + customToolStrip.Items.Count;
 			    if (propertyGridToolStrip.Items.Count == expectedToolStripItemCount) return;
 			    propertyGridToolStrip.AllowMerge = true;
@@ -669,7 +669,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigUiLoadFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-		
+
 		private void Config_Load(object sender, EventArgs e)
 		{
             _themeManager = ThemeManager.getInstance();
@@ -678,12 +678,12 @@ namespace mRemoteNG.UI.Window
 			AddToolStripItems();
 			_pGrid.HelpVisible = Settings.Default.ShowConfigHelpText;
 		}
-		
+
 		private void Config_SystemColorsChanged(object sender, EventArgs e)
 		{
 			AddToolStripItems();
 		}
-		
+
 		private void pGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
 		{
 			try
@@ -741,8 +741,8 @@ namespace mRemoteNG.UI.Window
 
             if (rootInfo.Password)
             {
-                var passwordName = Settings.Default.UseSQLServer 
-                    ? Language.strSQLServer.TrimEnd(':') 
+                var passwordName = Settings.Default.UseSQLServer
+                    ? Language.strSQLServer.TrimEnd(':')
                     : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
 
                 var password = MiscTools.PasswordDialog(passwordName);
@@ -773,7 +773,7 @@ namespace mRemoteNG.UI.Window
 			if (_pGrid.PropertySort == PropertySort.CategorizedAlphabetical)
 				_pGrid.PropertySort = PropertySort.Categorized;
 		}
-		
+
 		private void ShowHideGridItems()
 		{
 			try
@@ -1435,7 +1435,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridHideItemsFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-		
+
 		private void btnShowProperties_Click(object sender, EventArgs e)
 		{
             if (_pGrid.SelectedObject is ConnectionInfoInheritance o)
@@ -1467,7 +1467,7 @@ namespace mRemoteNG.UI.Window
 			    SetPropertyGridObject((RootNodeInfo)_selectedTreeNode);
 			}
 		}
-		
+
 		private void btnShowDefaultProperties_Click(object sender, EventArgs e)
 		{
 		    if (!(_pGrid.SelectedObject is RootNodeInfo) && !(_pGrid.SelectedObject is ConnectionInfoInheritance)) return;
@@ -1477,7 +1477,7 @@ namespace mRemoteNG.UI.Window
 		    DefaultInheritanceVisible = false;
 		    SetPropertyGridObject(DefaultConnectionInfo.Instance);
 		}
-		
+
 		private void btnShowInheritance_Click(object sender, EventArgs e)
 		{
 		    if (!(_pGrid.SelectedObject is ConnectionInfo)) return;
@@ -1487,7 +1487,7 @@ namespace mRemoteNG.UI.Window
 		    DefaultInheritanceVisible = false;
 		    SetPropertyGridObject(((ConnectionInfo)_pGrid.SelectedObject).Inheritance);
 		}
-		
+
 		private void btnShowDefaultInheritance_Click(object sender, EventArgs e)
 		{
 		    if (!(_pGrid.SelectedObject is RootNodeInfo) && !(_pGrid.SelectedObject is ConnectionInfo)) return;
@@ -1497,19 +1497,19 @@ namespace mRemoteNG.UI.Window
 		    DefaultInheritanceVisible = true;
 		    SetPropertyGridObject(DefaultConnectionInheritance.Instance);
 		}
-		
+
 		private void btnHostStatus_Click(object sender, EventArgs e)
 		{
 			SetHostStatus(_pGrid.SelectedObject);
 		}
-		
+
 		private void btnIcon_Click(object sender, MouseEventArgs e)
 		{
 			try
 			{
 			    if (!(_pGrid.SelectedObject is ConnectionInfo) || _pGrid.SelectedObject is PuttySessionInfo) return;
 			    CMenIcons.Items.Clear();
-							
+
 			    foreach (var iStr in ConnectionIcon.Icons)
 			    {
 			        var tI = new ToolStripMenuItem
@@ -1529,27 +1529,27 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridButtonIconClickFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-		
+
 		private void IconMenu_Click(object sender, EventArgs e)
 		{
 			try
 			{
 				var connectionInfo = (ConnectionInfo)_pGrid.SelectedObject;
 				if (connectionInfo == null) return;
-						
+
 				var selectedMenuItem = (ToolStripMenuItem)sender;
 
 			    var iconName = selectedMenuItem?.Text;
 				if (string.IsNullOrEmpty(iconName)) return;
-						
+
 				var connectionIcon = ConnectionIcon.FromString(iconName);
 				if (connectionIcon == null) return;
-						
+
 				_btnIcon.Image = connectionIcon.ToBitmap();
-						
+
 				connectionInfo.Icon = iconName;
 				_pGrid.Refresh();
-						
+
 				Runtime.ConnectionsService.SaveConnectionsAsync();
 			}
 			catch (Exception ex)
@@ -1558,10 +1558,10 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-		
+
         #region Host Status (Ping)
 		private Thread _pThread;
-		
+
 		private void CheckHostAlive(object hostName)
 		{
 		    if (string.IsNullOrEmpty(hostName as string))
@@ -1644,7 +1644,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenu_Opening() failed.", ex);
 			}
 		}
-		
+
 		private void propertyGridContextMenuReset_Click(object sender, EventArgs e)
 		{
 			try
@@ -1660,12 +1660,12 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex);
 			}
 		}
-		
+
 		private void propertyGridContextMenuShowHelpText_Click(object sender, EventArgs e)
 		{
 			_propertyGridContextMenuShowHelpText.Checked = !_propertyGridContextMenuShowHelpText.Checked;
 		}
-		
+
 		private void propertyGridContextMenuShowHelpText_CheckedChanged(object sender, EventArgs e)
 		{
             Settings.Default.ShowConfigHelpText = _propertyGridContextMenuShowHelpText.Checked;
