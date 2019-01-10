@@ -1,5 +1,6 @@
 ﻿namespace mRemoteNG.Themes
 {
+    using System.Drawing;
     using UI.Tabs;
     using WeifenLuo.WinFormsUI.Docking;
     using WeifenLuo.WinFormsUI.ThemeVS2015;
@@ -27,4 +28,17 @@
             return new DockPaneStripNG(pane);
         }
     }
+
+    public class MremoteFloatWindowFactory : DockPanelExtender.IFloatWindowFactory
+    {
+        public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
+        {
+            return new FloatWindowNG(dockPanel, pane, ((ConnectionTab)dockPanel.ActiveDocument).Bounds);
+        }
+
+        public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane)
+        {
+            return new FloatWindowNG(dockPanel, pane);
+        }
+    } 
 }

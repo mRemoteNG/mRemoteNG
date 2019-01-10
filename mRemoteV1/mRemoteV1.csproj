@@ -692,6 +692,9 @@
     <Compile Include="UI\Tabs\DockPaneStripNG.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Tabs\FloatWindowNG.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Tabs\MremoteNGAutoHideStrip.cs">
       <SubType>Component</SubType>
     </Compile>

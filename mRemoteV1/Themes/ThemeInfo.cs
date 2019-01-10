@@ -32,8 +32,9 @@ namespace mRemoteNG.Themes
             _extendedPalette = inExtendedPalette;
             IsThemeBase = false;
             IsExtendable = false;
-            //Override the dock pane strip factory
-            _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+            setCustomExtenders();
+
+
         }
 
         public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion)
@@ -44,8 +45,7 @@ namespace mRemoteNG.Themes
             _version = inVersion;
             IsThemeBase = false;
             IsExtendable = false;
-            //Override the dock pane strip factory
-            _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory(); 
+            setCustomExtenders();
 
         }
         #endregion
@@ -96,8 +96,7 @@ namespace mRemoteNG.Themes
                     return;
                 }
                 _theme = value;
-                //Override the dock pane strip factory
-                _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+                setCustomExtenders();
             }
         }
 
@@ -145,5 +144,13 @@ namespace mRemoteNG.Themes
         public bool IsExtendable { get; set; }
 
         #endregion
+
+        //Custom extenders for mremote customizations in DPS
+        private void setCustomExtenders()
+        {
+           
+            _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+            _theme.Extender.FloatWindowFactory = new MremoteFloatWindowFactory();
+        }
     }
 }
