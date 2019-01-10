@@ -92,6 +92,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void SaveSettings()
         {
+            base.SaveSettings();
+
             // Save the theme settings form close so we don't run into unexpected results while modifying...
             // Prompt the user that a restart is required to apply the new theme...
             if (themeEnableChk != null && cboTheme.SelectedItem != null) // LoadSettings calls SaveSettings, so these might be null the first time around
@@ -107,7 +109,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
             }
 
-            base.SaveSettings();
             foreach(var updatedTheme in modifiedThemes)
             {
                 _themeManager.updateTheme(updatedTheme);
