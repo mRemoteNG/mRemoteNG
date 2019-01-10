@@ -677,7 +677,6 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null)
                 {
