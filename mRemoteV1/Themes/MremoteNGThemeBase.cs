@@ -33,7 +33,9 @@
     {
         public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
         {
-            return new FloatWindowNG(dockPanel, pane, ((ConnectionTab)dockPanel.ActiveDocument).Bounds);
+            var activeDocumentBounds = (dockPanel?.ActiveDocument as ConnectionTab)?.Bounds;
+
+            return new FloatWindowNG(dockPanel, pane, activeDocumentBounds ?? bounds);
         }
 
         public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane)
