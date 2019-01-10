@@ -54,8 +54,8 @@ namespace mRemoteNG.UI.Window
             }
 
             PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
-
-        }
+	        SetConnectionTreeClickHandlers();
+	    }
 
         private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
         {
@@ -118,8 +118,7 @@ namespace mRemoteNG.UI.Window
             olvConnections.KeyDown += tvConnections_KeyDown;
             olvConnections.KeyPress += tvConnections_KeyPress;
             SetTreePostSetupActions();
-            SetConnectionTreeDoubleClickHandlers();
-	        SetConnectionTreeSingleClickHandlers();
+            SetConnectionTreeClickHandlers();
 	        Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
         }
 
@@ -137,28 +136,26 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.PostSetupActions = actions;
 	    }
 
-	    private void SetConnectionTreeDoubleClickHandlers()
+	    private void SetConnectionTreeClickHandlers()
 	    {
-	        var doubleClickHandler = new TreeNodeCompositeClickHandler
+	        var singleClickHandlers = new List<ITreeNodeClickHandler<ConnectionInfo>>();
+	        var doubleClickHandlers = new List<ITreeNodeClickHandler<ConnectionInfo>>
 	        {
-	            ClickHandlers = new ITreeNodeClickHandler<ConnectionInfo>[]
-	            {
-	                new ExpandNodeClickHandler(olvConnections),
-	                new OpenConnectionClickHandler(_connectionInitiator)
-	            }
+	            new ExpandNodeClickHandler(olvConnections)
 	        };
-	        olvConnections.DoubleClickHandler = doubleClickHandler;
-	    }
 
-        private void SetConnectionTreeSingleClickHandlers()
-        {
-            var handlers = new List<ITreeNodeClickHandler<ConnectionInfo>>();
-            if (Settings.Default.SingleClickOnConnectionOpensIt)
-                handlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
-            if (Settings.Default.SingleClickSwitchesToOpenConnection)
-                handlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
-            var singleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = handlers};
-            olvConnections.SingleClickHandler = singleClickHandler;
+	        if (Settings.Default.SingleClickOnConnectionOpensIt)
+	            singleClickHandlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
+	        else
+	            doubleClickHandlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
+
+	        if (Settings.Default.SingleClickSwitchesToOpenConnection)
+	            singleClickHandlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
+            else
+                doubleClickHandlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
+
+	        olvConnections.SingleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = singleClickHandlers };
+	        olvConnections.DoubleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = doubleClickHandlers };
         }
 
 	    private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
