@@ -46,8 +46,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
             chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
             chkLoadBalanceInfoUseUtf8.Checked = Settings.Default.RdpLoadBalanceInfoUseUtf8;
@@ -85,8 +83,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
             Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
-
-            Settings.Default.Save();
         }
 
         #endregion

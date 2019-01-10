@@ -32,8 +32,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkAlwaysShowPanelTabs.Checked = Settings.Default.AlwaysShowPanelTabs;
             chkOpenNewTabRightOfSelected.Checked = Settings.Default.OpenTabsRightOfSelected;
             chkShowLogonInfoOnTabs.Checked = Settings.Default.ShowLogonInfoOnTabs;
@@ -61,8 +59,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked;
             Settings.Default.CreateEmptyPanelOnStartUp = chkCreateEmptyPanelOnStart.Checked;
             Settings.Default.StartUpPanelName = txtBoxPanelName.Text;
-
-            Settings.Default.Save();
         }
 
         private void UpdatePanelNameTextBox()

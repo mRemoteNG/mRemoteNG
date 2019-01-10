@@ -34,8 +34,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             cboLanguage.Items.Clear();
             cboLanguage.Items.Add(Language.strLanguageDefault);
 
@@ -95,8 +93,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             Settings.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
-
-            Settings.Default.Save();
         }
     }
 }

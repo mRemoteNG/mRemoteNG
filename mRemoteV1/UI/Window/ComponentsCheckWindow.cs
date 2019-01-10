@@ -459,7 +459,6 @@ namespace mRemoteNG.UI.Window
         private void chkAlwaysShow_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.StartupComponentsCheck = chkAlwaysShow.Checked;
-            Settings.Default.Save();
         }
 
         public new void Show(DockPanel panel)

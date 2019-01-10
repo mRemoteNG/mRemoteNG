@@ -43,8 +43,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkUseSQLServer.Checked = Settings.Default.UseSQLServer;
             txtSQLServer.Text = Settings.Default.SQLHost;
             txtSQLDatabaseName.Text = Settings.Default.SQLDatabaseName;
@@ -72,8 +70,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 ReinitializeSqlUpdater();
             else if (!Settings.Default.UseSQLServer && sqlServerWasPreviouslyEnabled)
                 DisableSql();
-
-            Settings.Default.Save();
         }
 
         private static void ReinitializeSqlUpdater()

@@ -55,7 +55,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             themeEnableChk.CheckedChanged -= ThemeEnableChkCheckedChanged;
-            SaveSettings();
             //At first we cannot create or delete themes, depends later on the type of selected theme
             btnThemeNew.Enabled = false;
             btnThemeDelete.Enabled = false;
@@ -102,7 +101,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 {
                     Settings.Default.ThemingActive = themeEnableChk.Checked;
                     Settings.Default.ThemeName = themeEnableChk.Checked ? ((ThemeInfo) cboTheme.SelectedItem).Name : _themeManager.DefaultTheme.Name;
-                    Settings.Default.Save();
 
                     CTaskDialog.MessageBox("Theme Changed", "Restart Required.","Please restart mRemoteNG to apply the selected theme.",
                         ETaskDialogButtons.Ok, ESysIcons.Information);

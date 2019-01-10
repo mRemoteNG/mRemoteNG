@@ -60,7 +60,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
             LoadNotificationPanelSettings();
             LoadLoggingSettings();
             LoadPopupSettings();
@@ -71,7 +70,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             SaveNotificationPanelSettings();
             SaveLoggingSettings();
             SavePopupSettings();
-            Settings.Default.Save();
         }
 
         private void LoadNotificationPanelSettings()
