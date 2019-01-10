@@ -280,7 +280,7 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                foreach (var dockContent in connDock.Documents)
+                foreach (var dockContent in connDock.Documents.ToArray())
                 {
                     var tabP = (ConnectionTab) dockContent;
                     if (tabP.Tag == null) continue;
