@@ -33,7 +33,7 @@ namespace mRemoteNG.UI.Forms
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();
             // ApplyLanguage();
-            // Handle the main page here and the individual pages in 
+            // Handle the main page here and the individual pages in
             // AddOptionsPagesToListView()  -- one less foreach loop....
             Text = Language.strOptionsPageTitle;
             ApplyTheme();
@@ -111,6 +111,11 @@ namespace mRemoteNG.UI.Forms
                 lstOptionPages.Items[0].Selected = true;
         }
 
+        /*
+         * This gets called by both OK and Apply buttons.
+         * OK sets DialogResult = OK, Apply does not (None).
+         * Apply will no close the dialog.
+         */
         private void btnOK_Click(object sender, EventArgs e)
         {
             foreach (var page in _pages.Values)
@@ -139,7 +144,7 @@ namespace mRemoteNG.UI.Forms
                 Debug.WriteLine(page.PageName);
                 page.RevertSettings();
             }
-            Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile); 
+            Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
         }
     }
 }

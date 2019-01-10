@@ -37,12 +37,14 @@
             this.pnlMain = new System.Windows.Forms.Panel();
             this.lstOptionPages = new mRemoteNG.UI.Controls.Base.NGListView();
             this.PageName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.btnApply = new mRemoteNG.UI.Controls.Base.NGButton();
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lstOptionPages)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBottom
             // 
+            this.pnlBottom.Controls.Add(this.btnApply);
             this.pnlBottom.Controls.Add(this.btnCancel);
             this.pnlBottom.Controls.Add(this.btnOK);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -55,7 +57,7 @@
             // 
             this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(681, 6);
+            this.btnCancel.Location = new System.Drawing.Point(596, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -67,7 +69,7 @@
             // 
             this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(600, 6);
+            this.btnOK.Location = new System.Drawing.Point(515, 6);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -111,6 +113,7 @@
             this.lstOptionPages.Cursor = System.Windows.Forms.Cursors.Default;
             this.lstOptionPages.DecorateLines = true;
             this.lstOptionPages.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lstOptionPages.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstOptionPages.FullRowSelect = true;
             this.lstOptionPages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lstOptionPages.HideSelection = false;
@@ -134,6 +137,17 @@
             this.PageName.Groupable = false;
             this.PageName.ImageAspectName = "IconImage";
             this.PageName.IsEditable = false;
+            // 
+            // btnApply
+            // 
+            this.btnApply._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnApply.Location = new System.Drawing.Point(677, 5);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(75, 23);
+            this.btnApply.TabIndex = 2;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // FrmOptions
             // 
@@ -172,5 +186,6 @@
         private Controls.Base.NGButton btnOK;
         private Controls.Base.NGButton btnCancel;
         private BrightIdeasSoftware.OLVColumn PageName;
+        private Controls.Base.NGButton btnApply;
     }
 }
