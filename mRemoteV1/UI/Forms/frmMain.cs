@@ -26,6 +26,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -180,23 +181,18 @@ namespace mRemoteNG.UI.Forms
             Opacity = 1;
             //Fix MagicRemove , revision on panel strategy for mdi
 
-            //Fix MagicRemove, this is a setting
             pnlDock.ShowDocumentIcon = true;
 
-            //Fix missing general panel at the first run
-        /*    if (Settings.Default.CreateEmptyPanelOnStartUp)
-            {
-                var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
-                    ? Settings.Default.StartUpPanelName
-                    : Language.strNewPanel;
+            FrmSplashScreen.getInstance().Close();
 
-                var panelAdder = new PanelAdder();
-                if (!panelAdder.DoesPanelExist(panelName))
-                    panelAdder.AddPanel(panelName);
-            }*/
+            if (!Settings.Default.CreateEmptyPanelOnStartUp) return;
+            var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
+                ? Settings.Default.StartUpPanelName
+                : Language.strNewPanel;
 
-            var frmSplashScreen = FrmSplashScreen.getInstance();
-            frmSplashScreen.Close();
+            var panelAdder = new PanelAdder();
+            if (!panelAdder.DoesPanelExist(panelName))
+                panelAdder.AddPanel(panelName);
         }
 
         private void ApplyLanguage()

@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Panels
 {
     public class PanelAdder
     {
-        public Form AddPanel(string title = "")
+        public ConnectionWindow AddPanel(string title = "")
         {
             try
             {
@@ -44,12 +44,12 @@ namespace mRemoteNG.UI.Panels
 
         private static void PrepareTabSupport(ConnectionWindow connectionForm)
         {
-                Runtime.WindowList.Add(connectionForm);
+            Runtime.WindowList.Add(connectionForm);
         }
 
         private static void SetConnectionWindowTitle(string title, ConnectionWindow connectionForm)
         {
-            if (title == "")
+            if (string.IsNullOrEmpty(title))
                 title = Language.strNewPanel;
             connectionForm.SetFormText(title.Replace("&", "&&"));
         }
