@@ -22,13 +22,13 @@ namespace mRemoteNG.UI.Controls
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
         private IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private ThemeManager _themeManager;
+        private readonly ThemeManager _themeManager;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
         private readonly DisplayProperties _display;
 
         public IConnectionInitiator ConnectionInitiator
         {
-            get { return _connectionInitiator; }
+            get => _connectionInitiator;
             set
             {
                 if (value == null)
@@ -237,17 +237,16 @@ namespace mRemoteNG.UI.Controls
             if (e.Button != MouseButtons.Left) return;
             var menuItem = (ToolStripMenuItem) sender;
 
-            // While we can connect to a whole folder at once, it is
-            // probably not the expected behavior when navigating through
-            // a nested menu. Just return
-            var containerInfo = menuItem.Tag as ContainerInfo;
-            if (containerInfo != null)
-                return;
-
-            var connectionInfo = menuItem.Tag as ConnectionInfo;
-            if (connectionInfo != null)
+            switch (menuItem.Tag)
             {
-                ConnectionInitiator.OpenConnection(connectionInfo);
+                // While we can connect to a whole folder at once, it is
+                // probably not the expected behavior when navigating through
+                // a nested menu. Just return
+                case ContainerInfo _:
+                    return;
+                case ConnectionInfo connectionInfo:
+                    ConnectionInitiator.OpenConnection(connectionInfo);
+                    break;
             }
         }
         #endregion
