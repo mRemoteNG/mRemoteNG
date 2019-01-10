@@ -53,10 +53,10 @@ namespace mRemoteNG.Connection
         {
             var interfaceControl = FindConnectionContainer(connectionInfo);
             if (interfaceControl == null) return false;
-            var connectionWindow = (ConnectionWindow)interfaceControl.FindForm();
-            connectionWindow?.Focus();
-            var findForm = (ConnectionWindow)interfaceControl.FindForm();
-            findForm?.Show(FrmMain.Default.pnlDock);
+            var connT = (ConnectionTab)interfaceControl.FindForm();
+            connT?.Focus();
+            var findForm = (ConnectionTab)interfaceControl.FindForm();
+            findForm?.Show(findForm.DockPanel);
             return true;
         }
 
@@ -144,8 +144,14 @@ namespace mRemoteNG.Connection
                 if (!(Runtime.WindowList[i] is ConnectionWindow connectionWindow)) continue;
                 if(connectionWindow.Controls.Count < 1) continue;
                 if (!(connectionWindow.Controls[0] is DockPanel cwDp)) continue;
-
-                return InterfaceControl.FindInterfaceControl(cwDp);
+                foreach (var dockContent in cwDp.Documents)
+                {
+                    var tab = (ConnectionTab) dockContent;
+                    var ic = InterfaceControl.FindInterfaceControl(tab);
+                    if (ic == null) continue;
+                    if (ic.Info == connectionInfo)
+                        return ic;
+                }
             }
             return null;
         }
