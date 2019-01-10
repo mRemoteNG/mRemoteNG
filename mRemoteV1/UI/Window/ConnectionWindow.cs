@@ -10,6 +10,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -676,9 +677,14 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
+                
                 var interfaceControl = GetInterfaceControl();
-                if (interfaceControl == null) return;
-                interfaceControl.Protocol.Close();
+                if (interfaceControl == null)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Reconnect (UI.Window.ConnectionWindow) failed. Could not find InterfaceControl.");
+                    return;
+                }
+                Invoke(new Action(() => Prot_Event_Closed(interfaceControl.Protocol)));
                 _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
