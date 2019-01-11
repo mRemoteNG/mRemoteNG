@@ -1,5 +1,4 @@
 using mRemoteNG.App;
-using mRemoteNG.Messages;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +22,7 @@ namespace mRemoteNG.Themes
         private  Hashtable themes;
         private bool _themeActive;
         private static ThemeManager themeInstance;
+        private readonly string themePath = App.Info.SettingsFileInfo.ThemeFolder;
         #endregion
 
         #region Constructors
@@ -30,7 +30,7 @@ namespace mRemoteNG.Themes
         {
             LoadThemes();
             SetActive();
-            _themeActive = Settings.Default.ThemingActive;
+            _themeActive = true;
         }
 
         private void SetActive()
@@ -66,15 +66,10 @@ namespace mRemoteNG.Themes
             return null;
         }
 
-        //The manager precharges all the themes at once
-        public  List<ThemeInfo> LoadThemes()
+        private bool ThemeDirExists()
         {
-            if (themes != null) return themes.Values.OfType<ThemeInfo>().ToList();
-            themes = new Hashtable();
-
             //Load the files in theme folder first, to include vstheme light as default
-            var themePath = App.Info.SettingsFileInfo.ThemeFolder;
-            if (themePath == null) return themes.Values.OfType<ThemeInfo>().ToList();
+            if (themePath == null) return false;
             try
             {
                 //In install mode first time is necessary to copy the themes folder
@@ -83,6 +78,7 @@ namespace mRemoteNG.Themes
                     Directory.CreateDirectory(themePath);
 
                 }
+
                 var orig = new DirectoryInfo(App.Info.SettingsFileInfo.InstalledThemeFolder);
                 var files = orig.GetFiles();
                 foreach (var file in files)
@@ -92,17 +88,56 @@ namespace mRemoteNG.Themes
                         file.CopyTo(Path.Combine(themePath, file.Name), true);
                 }
 
-                //Check that theme folder exist before trying to load themes
-                if (Directory.Exists(themePath))
+                return Directory.Exists(themePath);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("Error loading theme directory", ex);
+            }
+
+            return false;
+        }
+
+        private ThemeInfo LoadDefaultTheme()
+        {
+            try
+            {
+                if (ThemeDirExists())
                 {
-                    var themeFiles = Directory.GetFiles(themePath, "*.vstheme");
-                    var defaultThemeURL = Directory.GetFiles(themePath, "vs2015light" + ".vstheme")[0];
+                    var defaultThemeURL = Directory.GetFiles(themePath, "vs2015light.vstheme")[0];
 
                     //First we load the default base theme, its vs2015lightNG
                     //the true "default" in DockPanelSuite built-in VS2015LightTheme named "vs2015Light"
                     //hence the *NG suffix for this one...
                     var defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeURL);
                     defaultTheme.Name = $"{defaultTheme.Name}NG";
+                    return defaultTheme;
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("Error loading default theme", ex);
+            }
+
+            return null;
+        }
+
+        //The manager precharges all the themes at once
+        public  List<ThemeInfo> LoadThemes()
+        {
+            if (themes != null) return themes.Values.OfType<ThemeInfo>().ToList();
+            themes = new Hashtable();
+
+            if (themePath == null) return themes.Values.OfType<ThemeInfo>().ToList();
+            try
+            {
+                //Check that theme folder exist before trying to load themes
+                if (ThemeDirExists())
+                {
+                    var themeFiles = Directory.GetFiles(themePath, "*.vstheme");
+
+                    //First we load the default base theme, its vs2015lightNG
+                    var defaultTheme = LoadDefaultTheme();
                     themes.Add(defaultTheme.Name, defaultTheme);
                     //Then the rest
                     foreach (var themeFile in themeFiles)
@@ -159,7 +194,7 @@ namespace mRemoteNG.Themes
             }
             catch(Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Error loading themes" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("Error loading themes", ex);
             }
             return themes.Values.OfType<ThemeInfo>().ToList();
         }
@@ -250,7 +285,7 @@ namespace mRemoteNG.Themes
             }
         }
 
-        public ThemeInfo DefaultTheme => (ThemeInfo) themes["vs2015Light"];
+        public ThemeInfo DefaultTheme => ThemesCount > 0 ? (ThemeInfo)themes["vs2015Light"] : new ThemeInfo("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, LoadDefaultTheme().ExtendedPalette);
 
         public ThemeInfo ActiveTheme
 		{
@@ -258,9 +293,23 @@ namespace mRemoteNG.Themes
             get => ThemingActive == false ? DefaultTheme : _activeTheme;
             set
 			{
-                //You can only enable theming if there are themes loaded
-			    if (value == null) return;
-			    _activeTheme = value;
+                // You can only enable theming if there are themes loaded
+                // Default accordingly...
+                if (value == null)
+                {
+                    var changed = !Settings.Default.ThemeName.Equals(DefaultTheme.Name);
+
+                    Settings.Default.ThemeName = DefaultTheme.Name;
+                    _activeTheme = DefaultTheme;
+
+                    if(changed)
+                        NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
+
+                    Settings.Default.Save();
+                    return;
+                }
+
+                _activeTheme = value;
 			    Settings.Default.ThemeName = value.Name;
 			    NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
 			}

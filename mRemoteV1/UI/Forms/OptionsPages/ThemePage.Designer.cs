@@ -33,7 +33,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.btnThemeDelete = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnThemeNew = new mRemoteNG.UI.Controls.Base.NGButton();
             this.cboTheme = new mRemoteNG.UI.Controls.Base.NGComboBox();
-            this.themeEnableChk = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.listPalette = new mRemoteNG.UI.Controls.Base.NGListView();
             this.keyCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ColorCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -84,20 +83,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboTheme.TabIndex = 0;
             this.cboTheme.SelectionChangeCommitted += new System.EventHandler(this.cboTheme_SelectionChangeCommitted);
             // 
-            // themeEnableChk
-            // 
-            this.themeEnableChk._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
-            this.themeEnableChk.AutoSize = true;
-            this.themeEnableChk.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.themeEnableChk.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.themeEnableChk.Location = new System.Drawing.Point(3, 3);
-            this.themeEnableChk.Name = "themeEnableChk";
-            this.themeEnableChk.Size = new System.Drawing.Size(141, 22);
-            this.themeEnableChk.TabIndex = 5;
-            this.themeEnableChk.Text = "Enable Themes";
-            this.themeEnableChk.UseVisualStyleBackColor = true;
-            this.themeEnableChk.CheckedChanged += new System.EventHandler(this.ThemeEnableChkCheckedChanged);
-            // 
             // listPalette
             // 
             this.listPalette.AllColumns.Add(this.keyCol);
@@ -145,9 +130,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.labelRestart.AutoSize = true;
             this.labelRestart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelRestart.Location = new System.Drawing.Point(150, 0);
+            this.labelRestart.Location = new System.Drawing.Point(3, 0);
             this.labelRestart.Name = "labelRestart";
-            this.labelRestart.Size = new System.Drawing.Size(451, 28);
+            this.labelRestart.Size = new System.Drawing.Size(598, 28);
             this.labelRestart.TabIndex = 4;
             this.labelRestart.Text = "Warning: Restart is required to disable the themes or to completely apply a new o" +
     "ne";
@@ -172,11 +157,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.33775F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.66225F));
-            this.tableLayoutPanel2.Controls.Add(this.labelRestart, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.themeEnableChk, 0, 0);
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.labelRestart, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 459);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -221,7 +205,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		internal Controls.Base.NGButton btnThemeDelete;
 		internal Controls.Base.NGButton btnThemeNew;
 		internal Controls.Base.NGComboBox cboTheme;
-        private Controls.Base.NGCheckBox themeEnableChk;
         private Controls.Base.NGListView listPalette;
         private Controls.Base.NGLabel labelRestart;
         private BrightIdeasSoftware.OLVColumn keyCol;

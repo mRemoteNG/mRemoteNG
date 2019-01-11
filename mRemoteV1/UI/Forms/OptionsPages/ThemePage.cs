@@ -42,7 +42,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnThemeDelete.Text = Language.strOptionsThemeButtonDelete;
             btnThemeNew.Text = Language.strOptionsThemeButtonNew;
             labelRestart.Text = Language.strOptionsThemeThemeChaangeWarning;
-            themeEnableChk.Text = Language.strOptionsThemeEnableTheming;
         }
 
         private new void ApplyTheme()
@@ -54,7 +53,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            themeEnableChk.CheckedChanged -= ThemeEnableChkCheckedChanged;
             //At first we cannot create or delete themes, depends later on the type of selected theme
             btnThemeNew.Enabled = false;
             btnThemeDelete.Enabled = false;
@@ -66,20 +64,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cboTheme_SelectionChangeCommitted(this, new EventArgs());
             cboTheme.DisplayMember = "Name";
 
-            //Load theming active property and disable controls
-            if (Settings.Default.ThemingActive)
-            {
-                themeEnableChk.Checked = true;
-                listPalette.FormatCell += ListPalette_FormatCell; //Color cell formatter
-            }
-            else
-            {
-                themeEnableChk.Checked = false;
-                cboTheme.Enabled = false;
-                // reset to the default theme when disabling theme support
-                //_themeManager.ActiveTheme = _themeManager.DefaultTheme;
-            }
-            themeEnableChk.CheckedChanged += ThemeEnableChkCheckedChanged;
+            listPalette.FormatCell += ListPalette_FormatCell; //Color cell formatter
         }
 
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
@@ -94,15 +79,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
+            Settings.Default.ThemingActive = true;
+
             // Save the theme settings form close so we don't run into unexpected results while modifying...
             // Prompt the user that a restart is required to apply the new theme...
-            if (themeEnableChk != null && cboTheme.SelectedItem != null) // LoadSettings calls SaveSettings, so these might be null the first time around
+            if (cboTheme.SelectedItem != null) // LoadSettings calls SaveSettings, so these might be null the first time around
             {
-                if (Settings.Default.ThemingActive != themeEnableChk.Checked ||
-                    !Settings.Default.ThemeName.Equals(((ThemeInfo) cboTheme.SelectedItem).Name))
+                if (!Settings.Default.ThemeName.Equals(((ThemeInfo) cboTheme.SelectedItem).Name))
                 {
-                    Settings.Default.ThemingActive = themeEnableChk.Checked;
-                    Settings.Default.ThemeName = themeEnableChk.Checked ? ((ThemeInfo) cboTheme.SelectedItem).Name : _themeManager.DefaultTheme.Name;
+                    Settings.Default.ThemeName = ((ThemeInfo) cboTheme.SelectedItem).Name;
 
                     CTaskDialog.MessageBox("Theme Changed", "Restart Required.","Please restart mRemoteNG to apply the selected theme.",
                         ETaskDialogButtons.Ok, ESysIcons.Information);
@@ -139,7 +124,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             var selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
 
-            if (selectedTheme.IsExtendable)
+            if (selectedTheme != null && selectedTheme.IsExtendable)
             {
                 // it's Extendable, so now we can do this more expensive operations...
                 listPalette.ClearObjects();
@@ -149,7 +134,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 listPalette.CellClick += ListPalette_CellClick;
             }
 
-            if (selectedTheme.IsThemeBase) return;
+            if (selectedTheme != null && selectedTheme.IsThemeBase) return;
 
             btnThemeDelete.Enabled = true;
         }
@@ -222,37 +207,5 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         #endregion
 
         #endregion
-        private void ThemeEnableChkCheckedChanged(object sender, EventArgs e)
-        {
-            if (themeEnableChk.Checked)
-            {
-                if(_themeManager.ThemesCount > 0)
-                {
-                    //_themeManager.ThemingActive = true;
-                    cboTheme.Enabled = true;
-                }
-                else
-                {
-                    CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeErrorNoThemes, "", "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error, ESysIcons.Information, 0);
-                    themeEnableChk.Checked = false;
-                    //_themeManager.ThemingActive = false;
-                    cboTheme.Enabled = false;
-                }
-
-                listPalette.FormatCell += ListPalette_FormatCell;
-            }
-            else
-            {
-                //_themeManager.ThemingActive = false;
-                cboTheme.Enabled = false;
-                listPalette.FormatCell -= ListPalette_FormatCell;
-            }
-
-            /* LoadSettings calls save settings first... This will save the selected theme options accordingly...
-             * Changes to ThemingActive value above have been commented out in order to require a restart for the
-             * changes to take full effect.
-             */
-            LoadSettings();
-        }
     }
 }
