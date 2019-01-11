@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using mRemoteNG.Messages;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Themes
@@ -104,7 +105,14 @@ namespace mRemoteNG.Themes
             {
                 if (ThemeDirExists())
                 {
-                    var defaultThemeURL = Directory.GetFiles(themePath, "vs2015light.vstheme")[0];
+                    var defaultThemeURL = $"{themePath}\\vs2015light.vstheme";
+
+                    if (!File.Exists($"{themePath}\\vs2015light.vstheme"))
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Could not find default theme file.", true);
+                        return null;
+
+                    }
 
                     //First we load the default base theme, its vs2015lightNG
                     //the true "default" in DockPanelSuite built-in VS2015LightTheme named "vs2015Light"
@@ -285,7 +293,7 @@ namespace mRemoteNG.Themes
             }
         }
 
-        public ThemeInfo DefaultTheme => ThemesCount > 0 ? (ThemeInfo)themes["vs2015Light"] : new ThemeInfo("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, LoadDefaultTheme().ExtendedPalette);
+        public ThemeInfo DefaultTheme => themes != null && ThemesCount > 0 ? (ThemeInfo)themes["vs2015Light"] : new ThemeInfo("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015);
 
         public ThemeInfo ActiveTheme
 		{
