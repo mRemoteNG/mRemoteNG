@@ -33,6 +33,7 @@ namespace mRemoteNG.UI.Window
         { 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveTheme.IsExtendable) return;
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }

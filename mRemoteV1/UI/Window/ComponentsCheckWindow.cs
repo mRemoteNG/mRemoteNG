@@ -10,6 +10,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Messages;
+using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
@@ -84,7 +85,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck1
             // 
-            this.pnlCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck1.Controls.Add(this.txtCheck1);
             this.pnlCheck1.Controls.Add(this.lblCheck1);
@@ -97,8 +98,8 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck1
             // 
-            this.txtCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck1.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -111,7 +112,7 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck1
             // 
-            this.lblCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCheck1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck1.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -123,7 +124,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck1
             // 
-            this.pbCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pbCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck1.Location = new System.Drawing.Point(3, 3);
             this.pbCheck1.Name = "pbCheck1";
@@ -133,7 +134,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck2
             // 
-            this.pnlCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck2.Controls.Add(this.txtCheck2);
             this.pnlCheck2.Controls.Add(this.lblCheck2);
@@ -146,8 +147,8 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck2
             // 
-            this.txtCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck2.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck2.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -160,7 +161,7 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck2
             // 
-            this.lblCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCheck2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck2.Location = new System.Drawing.Point(112, 3);
@@ -171,7 +172,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck2
             // 
-            this.pbCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pbCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck2.Location = new System.Drawing.Point(3, 3);
             this.pbCheck2.Name = "pbCheck2";
@@ -181,7 +182,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck3
             // 
-            this.pnlCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck3.Controls.Add(this.txtCheck3);
             this.pnlCheck3.Controls.Add(this.lblCheck3);
@@ -194,8 +195,8 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck3
             // 
-            this.txtCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck3.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck3.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -208,7 +209,7 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck3
             // 
-            this.lblCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCheck3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck3.Location = new System.Drawing.Point(112, 3);
@@ -219,7 +220,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck3
             // 
-            this.pbCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pbCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck3.Location = new System.Drawing.Point(3, 3);
             this.pbCheck3.Name = "pbCheck3";
@@ -229,7 +230,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck4
             // 
-            this.pnlCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck4.Controls.Add(this.txtCheck4);
             this.pnlCheck4.Controls.Add(this.lblCheck4);
@@ -242,8 +243,8 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck4
             // 
-            this.txtCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck4.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck4.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -256,7 +257,7 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck4
             // 
-            this.lblCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCheck4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck4.Location = new System.Drawing.Point(112, 3);
@@ -267,7 +268,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck4
             // 
-            this.pbCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pbCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck4.Location = new System.Drawing.Point(3, 3);
             this.pbCheck4.Name = "pbCheck4";
@@ -277,7 +278,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck5
             // 
-            this.pnlCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck5.Controls.Add(this.txtCheck5);
             this.pnlCheck5.Controls.Add(this.lblCheck5);
@@ -290,8 +291,8 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck5
             // 
-            this.txtCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck5.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck5.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -304,7 +305,7 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck5
             // 
-            this.lblCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCheck5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck5.Location = new System.Drawing.Point(112, 3);
@@ -315,7 +316,7 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck5
             // 
-            this.pbCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pbCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck5.Location = new System.Drawing.Point(3, 3);
             this.pbCheck5.Name = "pbCheck5";
@@ -352,8 +353,8 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlChecks
             // 
-            this.pnlChecks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlChecks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChecks.AutoScroll = true;
             this.pnlChecks.Controls.Add(this.pnlCheck1);
@@ -412,7 +413,7 @@ namespace mRemoteNG.UI.Window
             _successImage = display.ScaleImage(Resources.Good_Symbol);
             _failureImage = display.ScaleImage(Resources.Bad_Symbol);
             FontOverrider.FontOverride(this);
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
         #endregion
 
@@ -435,20 +436,22 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            if (!ThemeManager.getInstance().ThemingActive) return;
             base.ApplyTheme();
-            pnlCheck1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlCheck1.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlCheck2.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlCheck2.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlCheck3.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlCheck3.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlCheck4.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlCheck4.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlCheck5.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlCheck5.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlChecks.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlChecks.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+
+            if (!ThemeManager.getInstance().ActiveTheme.IsExtendable) return;
+            pnlCheck1.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck1.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck2.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck2.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck3.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck3.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck4.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck4.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCheck5.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCheck5.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlChecks.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlChecks.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void btnCheckAgain_Click(object sender, EventArgs e)
@@ -489,7 +492,7 @@ namespace mRemoteNG.UI.Window
         private void CheckRdp()
         {
             pnlCheck1.Visible = true;
-            
+
             try
             {
                 using (var rdpClient = new AxMsRdpClient8NotSafeForScripting())
@@ -531,7 +534,7 @@ namespace mRemoteNG.UI.Window
         private void CheckVnc()
         {
             pnlCheck2.Visible = true;
-            
+
             try
             {
                 using (var vnc = new VncSharp.RemoteDesktop())
@@ -604,7 +607,7 @@ namespace mRemoteNG.UI.Window
         private void CheckIca()
         {
             pnlCheck4.Visible = true;
-            
+
             try
             {
                 using (var ica = new AxICAClient())

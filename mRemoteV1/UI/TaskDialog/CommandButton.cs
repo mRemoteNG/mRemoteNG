@@ -12,12 +12,12 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         #region PRIVATE MEMBERS
         //--------------------------------------------------------------------------------
-        Image imgArrow1;
-        Image imgArrow2;
-        private ThemeManager _themeManager;
-        const int LEFT_MARGIN = 10;
-        const int TOP_MARGIN = 10;
-        const int ARROW_WIDTH = 19;
+        private Image imgArrow1;
+        private Image imgArrow2;
+        private readonly ThemeManager _themeManager;
+        private const int LEFT_MARGIN = 10;
+        private const int TOP_MARGIN = 10;
+        private const int ARROW_WIDTH = 19;
 
         enum eButtonState { Normal, MouseOver, Down }
         eButtonState m_State = eButtonState.Normal;
@@ -79,7 +79,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         string GetLargeText()
         {
-            string[] lines = Text.Split('\n');
+            var lines = Text.Split('\n');
             return lines[0];
         }
 
@@ -88,37 +88,37 @@ namespace mRemoteNG.UI.TaskDialog
             if (Text.IndexOf('\n') < 0)
                 return "";
 
-            string s = Text;
-            string[] lines = s.Split('\n');
+            var s = Text;
+            var lines = s.Split('\n');
             s = "";
-            for (int i = 1; i < lines.Length; i++)
+            for (var i = 1; i < lines.Length; i++)
                 s += lines[i] + "\n";
             return s.Trim('\n');
         }
 
         SizeF GetLargeTextSizeF()
         {
-            int x = LEFT_MARGIN + ARROW_WIDTH + 5;
-            SizeF mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F);  // presume RIGHT_MARGIN = LEFT_MARGIN
-            Graphics g = Graphics.FromHwnd(Handle);
-            SizeF textSize = g.MeasureString(GetLargeText(), Font, mzSize);
+            var x = LEFT_MARGIN + ARROW_WIDTH + 5;
+            var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F);  // presume RIGHT_MARGIN = LEFT_MARGIN
+            var g = Graphics.FromHwnd(Handle);
+            var textSize = g.MeasureString(GetLargeText(), Font, mzSize);
             return textSize;
         }
 
         SizeF GetSmallTextSizeF()
         {
-            string s = GetSmallText();
+            var s = GetSmallText();
             if (s == "") return new SizeF(0, 0);
-            int x = LEFT_MARGIN + ARROW_WIDTH + 8; // <- indent small text slightly more
-            SizeF mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F);  // presume RIGHT_MARGIN = LEFT_MARGIN
-            Graphics g = Graphics.FromHwnd(Handle);
-            SizeF textSize = g.MeasureString(s, SmallFont, mzSize);
+            var x = LEFT_MARGIN + ARROW_WIDTH + 8; // <- indent small text slightly more
+            var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F);  // presume RIGHT_MARGIN = LEFT_MARGIN
+            var g = Graphics.FromHwnd(Handle);
+            var textSize = g.MeasureString(s, SmallFont, mzSize);
             return textSize;
         }
         #endregion
 
         //--------------------------------------------------------------------------------
-        #region OVERRIDEs
+        #region OVERRIDES
         //--------------------------------------------------------------------------------
         protected override void OnCreateControl()
         {
@@ -130,7 +130,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         protected override void OnPaint(PaintEventArgs e)
         {
-            if ( !_themeManager.ThemingActive)
+            if ( !_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
             {
                 base.OnPaint(e);
                 return;
@@ -138,12 +138,11 @@ namespace mRemoteNG.UI.TaskDialog
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            LinearGradientBrush brush;
-            LinearGradientMode mode = LinearGradientMode.Vertical;
+            const LinearGradientMode mode = LinearGradientMode.Vertical;
 
-            Rectangle newRect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+            var newRect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
 
-            Image img = imgArrow1;
+            var img = imgArrow1;
 
 
             Color back;
@@ -185,21 +184,21 @@ namespace mRemoteNG.UI.TaskDialog
             }
             else
             {
-                brush = new LinearGradientBrush(newRect, back, back, mode);
+                var brush = new LinearGradientBrush(newRect, back, back, mode);
                 e.Graphics.FillRectangle(brush, newRect);
                 e.Graphics.DrawRectangle(new Pen(border, 1), newRect);
             }
 
-            string largetext = GetLargeText();
-            string smalltext = GetSmallText();
+            var largetext = GetLargeText();
+            var smalltext = GetSmallText();
 
-            SizeF szL = GetLargeTextSizeF();
+            var szL = GetLargeTextSizeF();
             //e.Graphics.DrawString(largetext, base.Font, new SolidBrush(text_color), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN), szL));
             TextRenderer.DrawText(e.Graphics, largetext, Font, new Rectangle(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN, (int)szL.Width, (int)szL.Height), fore, TextFormatFlags.Default);
 
             if (smalltext != "")
             {
-                SizeF szS = GetSmallTextSizeF();
+                var szS = GetSmallTextSizeF();
                 e.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(fore), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height), szS));
             }
 
@@ -243,7 +242,7 @@ namespace mRemoteNG.UI.TaskDialog
         {
             if (m_autoHeight)
             {
-                int h = GetBestHeight();
+                var h = GetBestHeight();
                 if (Height != h)
                 {
                     Height = h;

@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             SetStyle(ControlStyles.UserPaint, true);
@@ -28,7 +28,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if ( !_themeManager.ThemingActive)
+            if ( !_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
             {
                 base.OnPaint(e);
                 return;

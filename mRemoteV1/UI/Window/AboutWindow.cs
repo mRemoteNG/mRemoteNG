@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
@@ -96,7 +97,7 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCredits
             // 
-            this.txtCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.txtCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.txtCredits.BackColor = System.Drawing.SystemColors.Control;
             this.txtCredits.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -115,8 +116,8 @@ namespace mRemoteNG.UI.Window
             // 
             // txtChangeLog
             // 
-            this.txtChangeLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtChangeLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtChangeLog.BackColor = System.Drawing.SystemColors.Control;
             this.txtChangeLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -218,7 +219,7 @@ namespace mRemoteNG.UI.Window
 
 		}
         #endregion
-				
+
         #region Public Methods
 		public AboutWindow()
 		{
@@ -226,11 +227,11 @@ namespace mRemoteNG.UI.Window
 			DockPnl = new DockContent();
 			InitializeComponent();
             FontOverrider.FontOverride(this);
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
         }
         #endregion
-				
+
         #region Private Methods
 		private void ApplyLanguage()
 		{
@@ -242,14 +243,15 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            if (!ThemeManager.getInstance().ThemingActive) return;
             base.ApplyTheme();
-            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlBottom.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlBottom.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!ThemeManager.getInstance().ActiveTheme.IsExtendable) return;
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlBottom.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlBottom.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlTop.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlTop.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyEditions()
@@ -263,7 +265,7 @@ namespace mRemoteNG.UI.Window
                 private void FillLinkLabel(LinkLabel llbl, string txt, string URL)
 		        {
 			        llbl.Links.Clear();
-					
+
 			        int Open = txt.IndexOf("[");
 			        while (Open != -1)
 			        {
@@ -277,12 +279,12 @@ namespace mRemoteNG.UI.Window
 				        llbl.Links.Add(Open, Close - Open, URL);
 				        Open = txt.IndexOf("[", Open);
 			        }
-					
+
 			        llbl.Text = txt;
 		        }
         #endif
         #endregion
-				
+
 #region Form Stuff
 
 	    private void About_Load(object sender, EventArgs e)
@@ -349,12 +351,12 @@ namespace mRemoteNG.UI.Window
 		{
 			Runtime.GoToURL(Language.strFAMFAMFAMAttributionURL);
 		}
-				
+
 		private void llblMagicLibrary_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			Runtime.GoToURL(Language.strMagicLibraryAttributionURL);
 		}
-				
+
 		private void llblWeifenLuo_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			Runtime.GoToURL(Language.strWeifenLuoAttributionURL);

@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Forms
 			get => txtFileName.Text;
             set => txtFileName.Text = value;
         }
-			
+
         public SaveFormat SaveFormat
 		{
 			get
@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 		}
-			
+
         public ExportScope Scope
 		{
 			get
@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 		}
-			
+
 		private ContainerInfo _selectedFolder;
         public ContainerInfo SelectedFolder
 		{
@@ -77,7 +77,7 @@ namespace mRemoteNG.UI.Forms
 				rdoExportSelectedFolder.Enabled = value != null;
 			}
 		}
-			
+
 		private ConnectionInfo _selectedConnection;
         public ConnectionInfo SelectedConnection
 		{
@@ -89,19 +89,19 @@ namespace mRemoteNG.UI.Forms
 				rdoExportSelectedConnection.Enabled = value != null;
 			}
 		}
-			
+
         public bool IncludeUsername
 		{
 			get => chkUsername.Checked;
             set => chkUsername.Checked = value;
         }
-			
+
         public bool IncludePassword
 		{
 			get => chkPassword.Checked;
             set => chkPassword.Checked = value;
         }
-			
+
         public bool IncludeDomain
 		{
 			get => chkDomain.Checked;
@@ -120,7 +120,7 @@ namespace mRemoteNG.UI.Forms
             set => chkInheritance.Checked = value;
         }
         #endregion
-			
+
         #region Constructors
 		public ExportForm()
 		{
@@ -131,7 +131,7 @@ namespace mRemoteNG.UI.Forms
 			btnOK.Enabled = false;
 		}
         #endregion
-			
+
         #region Private Methods
         #region Event Handlers
         private void ExportForm_Load(object sender, EventArgs e)
@@ -157,18 +157,18 @@ namespace mRemoteNG.UI.Forms
 				saveFileDialog.CheckPathExists = true;
 				saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 				saveFileDialog.OverwritePrompt = true;
-				
+
 				var fileTypes = new List<string>();
 				fileTypes.AddRange(new[] {Language.strFiltermRemoteXML, "*.xml"});
 				fileTypes.AddRange(new[] {Language.strFiltermRemoteCSV, "*.csv"});
 				fileTypes.AddRange(new[] {Language.strFilterAll, "*.*"});
-				
+
 				saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 			    SelectFileTypeBasedOnSaveFormat(saveFileDialog);
 
                 if (saveFileDialog.ShowDialog(this) != DialogResult.OK)
 					return;
-				
+
 				txtFileName.Text = saveFileDialog.FileName;
             }
 		}
@@ -207,11 +207,12 @@ namespace mRemoteNG.UI.Forms
             //}
         }
         #endregion
-			
+
         private void ApplyTheme()
         {
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveTheme.IsExtendable) return;
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
@@ -220,17 +221,17 @@ namespace mRemoteNG.UI.Forms
         private void ApplyLanguage()
 		{
 			Text = Language.strExport;
-				
+
 			grpFile.Text = Language.strExportFile;
 			lblFileName.Text = Language.strLabelFilename;
 			btnBrowse.Text = Language.strButtonBrowse;
 			lblFileFormat.Text = Language.strFileFormatLabel;
-				
+
 			grpItems.Text = Language.strExportItems;
 			rdoExportEverything.Text = Language.strExportEverything;
 			rdoExportSelectedFolder.Text = Language.strExportSelectedFolder;
 			rdoExportSelectedConnection.Text = Language.strExportSelectedConnection;
-				
+
 			grpProperties.Text = Language.strExportProperties;
 			chkUsername.Text = Language.strCheckboxUsername;
 			chkPassword.Text = Language.strCheckboxPassword;
@@ -238,12 +239,12 @@ namespace mRemoteNG.UI.Forms
 		    chkAssignedCredential.Text = Language.strAssignedCredential;
 			chkInheritance.Text = Language.strCheckboxInheritance;
 			lblUncheckProperties.Text = Language.strUncheckProperties;
-				
+
 			btnOK.Text = Language.strButtonOK;
 			btnCancel.Text = Language.strButtonCancel;
 		}
         #endregion
-			
+
         #region Public Enumerations
 		public enum ExportScope
 		{
@@ -252,7 +253,7 @@ namespace mRemoteNG.UI.Forms
 			SelectedConnection
 		}
         #endregion
-			
+
         #region Private Classes
 		[ImmutableObject(true)]
         private class ExportFormat
@@ -262,14 +263,14 @@ namespace mRemoteNG.UI.Forms
 		    public SaveFormat Format { get; }
 
 		    #endregion
-				
+
             #region Constructors
 			public ExportFormat(SaveFormat format)
 			{
 				Format = format;
 			}
             #endregion
-				
+
             #region Public Methods
 			public override string ToString()
 			{

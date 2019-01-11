@@ -201,6 +201,8 @@ namespace mRemoteNG.UI.Window
                 DefaultRenderer = _toolStripProfessionalRenderer
             };
             vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+
+            if (!ThemeManager.getInstance().ActiveTheme.IsExtendable) return;
             connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
         }
 

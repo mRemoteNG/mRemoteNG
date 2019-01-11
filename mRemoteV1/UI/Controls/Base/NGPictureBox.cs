@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
@@ -26,6 +25,7 @@ namespace mRemoteNG.UI.Controls.Base
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveTheme.IsExtendable) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             Invalidate();

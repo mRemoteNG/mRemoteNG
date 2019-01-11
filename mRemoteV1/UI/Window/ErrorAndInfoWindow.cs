@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Window
         private void ErrorsAndInfos_Load(object sender, EventArgs e)
 		{
 		}
-				
+
 		private void ApplyLanguage()
 		{
 			clmMessage.Text = Language.strColumnMessage;
@@ -54,11 +54,13 @@ namespace mRemoteNG.UI.Window
 			Text = Language.strMenuNotifications;
 		}
         #endregion
-				
+
         #region Private Methods
         private new void  ApplyTheme()
         {
             if (!_themeManager.ThemingActive) return;
+
+            if (!_themeManager.ActiveTheme.IsExtendable) return;
             lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
 
@@ -78,7 +80,7 @@ namespace mRemoteNG.UI.Window
 			imgListMC.Images.Add(_display.ScaleImage(Resources.WarningSmall));
 			imgListMC.Images.Add(_display.ScaleImage(Resources.ErrorSmall));
 		}
-				
+
 		private void LayoutVertical()
 		{
 			try
@@ -87,12 +89,12 @@ namespace mRemoteNG.UI.Window
 				pnlErrorMsg.Size = new Size(Width, Height - pnlErrorMsg.Top);
 				pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 				txtMsgText.Size = new Size(
-				    pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8), 
+				    pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
 				    pnlErrorMsg.Height - _display.ScaleHeight(20));
 				lvErrorCollector.Location = new Point(0, 0);
 				lvErrorCollector.Size = new Size(Width, Height - pnlErrorMsg.Height - _display.ScaleHeight(5));
 				lvErrorCollector.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-						
+
 				_layout = ControlLayout.Vertical;
 			}
 			catch (Exception ex)
@@ -100,7 +102,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "LayoutVertical (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+
 		private void LayoutHorizontal()
 		{
 			try
@@ -110,12 +112,12 @@ namespace mRemoteNG.UI.Window
 				pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top;
 
                 txtMsgText.Size = new Size(
-				    pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8), 
+				    pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
 				    pnlErrorMsg.Height - _display.ScaleHeight(20));
 				lvErrorCollector.Location = new Point(pnlErrorMsg.Width + _display.ScaleWidth(5), 0);
 				lvErrorCollector.Size = new Size(Width - pnlErrorMsg.Width - _display.ScaleWidth(5), Height);
 				lvErrorCollector.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-						
+
 				_layout = ControlLayout.Horizontal;
 			}
 			catch (Exception ex)
@@ -123,7 +125,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+
 		private void ErrorsAndInfos_Resize(object sender, EventArgs e)
 		{
 			try
@@ -138,7 +140,7 @@ namespace mRemoteNG.UI.Window
 					if (_layout == ControlLayout.Horizontal)
 						LayoutVertical();
 				}
-						
+
 				lvErrorCollector.Columns[0].Width = lvErrorCollector.Width - 20;
 			}
 			catch (Exception ex)
@@ -146,7 +148,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+
 		private void SetStyleWhenNoMessageSelected()
 		{
 			try
@@ -163,7 +165,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+
 		private void MC_KeyDown(object sender, KeyEventArgs e)
 		{
 			try
@@ -186,7 +188,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+
 		private void lvErrorCollector_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			try
@@ -196,9 +198,9 @@ namespace mRemoteNG.UI.Window
 					SetStyleWhenNoMessageSelected();
 					return;
 				}
-						
+
 				var sItem = lvErrorCollector.SelectedItems[0];
-                var eMsg = (Messages.Message)sItem.Tag;
+                var eMsg = (Message)sItem.Tag;
 				switch (eMsg.Class)
 				{
                     case MessageClass.DebugMsg:
@@ -221,7 +223,7 @@ namespace mRemoteNG.UI.Window
                         break;
 					case MessageClass.WarningMsg:
 						pbError.Image = _display.ScaleImage(Resources.Warning);
-                        if (_themeManager.ThemingActive)
+                        if (_themeManager.ThemingActive && _themeManager.ActiveTheme.IsExtendable)
                         {
                             //Inverse colors for dramatic effect
                             pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
@@ -234,7 +236,7 @@ namespace mRemoteNG.UI.Window
                         break;
 					case MessageClass.ErrorMsg:
 						pbError.Image = _display.ScaleImage(Resources._Error);
-                        if (_themeManager.ThemingActive)
+                        if (_themeManager.ThemingActive && _themeManager.ActiveTheme.IsExtendable)
                         {
                             pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
                             pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
@@ -245,7 +247,7 @@ namespace mRemoteNG.UI.Window
                         }
                         break;
 				}
-				
+
 				lblMsgDate.Text = eMsg.Date.ToString(CultureInfo.InvariantCulture);
 				txtMsgText.Text = eMsg.Text;
 			}
@@ -254,7 +256,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+
 		private void cMenMC_Opening(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if (lvErrorCollector.Items.Count > 0)
@@ -267,7 +269,7 @@ namespace mRemoteNG.UI.Window
 				cMenMCCopy.Enabled = false;
 				cMenMCDelete.Enabled = false;
 			}
-					
+
 			if (lvErrorCollector.SelectedItems.Count > 0)
 			{
 				cMenMCCopy.Text = Language.strMenuCopy;
@@ -279,12 +281,12 @@ namespace mRemoteNG.UI.Window
 				cMenMCDelete.Text = Language.strMenuNotificationsDeleteAll;
 			}
 		}
-				
+
 		private void cMenMCCopy_Click(object sender, EventArgs e)
 		{
 			CopyMessagesToClipboard();
 		}
-				
+
 		private void CopyMessagesToClipboard()
 		{
 			try
@@ -298,10 +300,10 @@ namespace mRemoteNG.UI.Window
 				{
 					items = lvErrorCollector.Items;
 				}
-						
+
 				var stringBuilder = new StringBuilder();
 				stringBuilder.AppendLine("----------");
-						
+
 				lvErrorCollector.BeginUpdate();
 
 			    foreach (ListViewItem item in items)
@@ -310,13 +312,13 @@ namespace mRemoteNG.UI.Window
 					{
 						continue;
 					}
-							
+
 					stringBuilder.AppendLine(message.Class.ToString());
 					stringBuilder.AppendLine(message.Date.ToString(CultureInfo.InvariantCulture));
 					stringBuilder.AppendLine(message.Text);
 					stringBuilder.AppendLine("----------");
 				}
-						
+
 				Clipboard.SetText(stringBuilder.ToString());
 			}
 			catch (Exception ex)
@@ -328,18 +330,18 @@ namespace mRemoteNG.UI.Window
 				lvErrorCollector.EndUpdate();
 			}
 		}
-				
+
 		private void cMenMCDelete_Click(object sender, EventArgs e)
 		{
 			DeleteMessages();
 		}
-				
+
 		private void DeleteMessages()
 		{
 			try
 			{
 				lvErrorCollector.BeginUpdate();
-						
+
 				if (lvErrorCollector.SelectedItems.Count > 0)
 				{
 					foreach (ListViewItem item in lvErrorCollector.SelectedItems)

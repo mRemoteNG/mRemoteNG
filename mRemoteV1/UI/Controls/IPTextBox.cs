@@ -4,6 +4,7 @@
  */
 using System;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -16,7 +17,7 @@ namespace mRemoteNG.UI.Controls
 	public class IPTextBox: UserControl
 	{
 		private Panel panel1;
-		public  Base.NGTextBox Octet1; 
+		public  Base.NGTextBox Octet1;
         public  Base.NGTextBox Octet2;
         public  Base.NGTextBox Octet3;
         public  Base.NGTextBox Octet4;
@@ -25,7 +26,7 @@ namespace mRemoteNG.UI.Controls
 		private Base.NGLabel label3;
 		private ToolTip toolTip1;
 		private System.ComponentModel.IContainer components;
-		
+
 		/** Sets and Gets the tooltiptext on toolTip1 */
 		public string ToolTipText
 		{
@@ -40,7 +41,7 @@ namespace mRemoteNG.UI.Controls
 				toolTip1.SetToolTip(label2,value);
 				toolTip1.SetToolTip(label3,value);
 			}
-		}		
+		}
 
 		/** Set or Get the string that represents the value in the box */
 		public override string Text
@@ -69,20 +70,21 @@ namespace mRemoteNG.UI.Controls
 		public IPTextBox()
 		{
 			// This call is required by the Windows.Forms Form Designer.
-			InitializeComponent(); 
+			InitializeComponent();
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             ApplyTheme();
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
 
         private void ApplyTheme()
-        { 
-            if (Themes.ThemeManager.getInstance().ThemingActive)
-                panel1.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+        {
+            if (ThemeManager.getInstance().ThemingActive) return;
+            if (!ThemeManager.getInstance().ActiveTheme.IsExtendable) return;
+            panel1.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
         }
         protected override void Dispose( bool disposing )
 		{
@@ -225,7 +227,7 @@ namespace mRemoteNG.UI.Controls
 
 		}
 		#endregion
-		
+
 		/** 
 		 * \ifnot hide_events
 		 * Checks that a string passed in resolves to an integer value between 0 and 255
@@ -235,7 +237,7 @@ namespace mRemoteNG.UI.Controls
 		 * */
 		private static bool IsValid(string inString)
 		{
-			try 
+			try
 			{
 				var theValue = int.Parse(inString);
 				if(theValue >=0 && theValue <= 255)
@@ -272,7 +274,7 @@ namespace mRemoteNG.UI.Controls
 					}
 					e.Handled = true;
 				}
-			
+
 				//If we are not overwriting the whole text
 				else if(Octet1.SelectionLength != Octet1.Text.Length)
 				{
@@ -315,7 +317,7 @@ namespace mRemoteNG.UI.Controls
 							Octet2.SelectAll();
 					}
 					e.Handled = true;
-				}			
+				}
 				else if(Octet2.SelectionLength != Octet2.Text.Length)
 				{
 				    if (Octet2.Text.Length != 2) return;
@@ -337,7 +339,7 @@ namespace mRemoteNG.UI.Controls
 			}
 			else
 				e.Handled = true;
-		
+
 		}
 
 		/// \ifnot hide_events
@@ -360,7 +362,7 @@ namespace mRemoteNG.UI.Controls
 							Octet3.SelectAll();
 					}
 					e.Handled = true;
-				}			
+				}
 				else if(Octet3.SelectionLength != Octet3.Text.Length)
 				{
 				    if (Octet3.Text.Length != 2) return;

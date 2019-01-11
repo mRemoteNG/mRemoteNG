@@ -195,7 +195,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
-
             var res = CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings , Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "", ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Information, 0);
 
             if (res != DialogResult.Yes) return;

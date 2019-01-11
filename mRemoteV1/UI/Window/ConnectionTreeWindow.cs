@@ -97,6 +97,8 @@ namespace mRemoteNG.UI.Window
             if (!_themeManager.ThemingActive) return;
             vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
             vsToolStripExtender.SetStyle(olvConnections.ContextMenuStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+
+            if (!_themeManager.ActiveTheme.IsExtendable) return;
             //Treelistview need to be manually themed
             olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
             olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");

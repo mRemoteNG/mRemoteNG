@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
 using mRemoteNG.Messages;
+using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
@@ -30,25 +31,25 @@ namespace mRemoteNG.UI.Window
             FontOverrider.FontOverride(this);
 		}
         #endregion
-		
+
         #region Form Stuff
 
 	    private void Update_Load(object sender, EventArgs e)
 		{
             ApplyTheme();
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
 			CheckForUpdate();
 		}
 
         private new void ApplyTheme()
         {
-	        if (!Themes.ThemeManager.getInstance().ThemingActive)
-				return;
+	        if (!ThemeManager.getInstance().ThemingActive) return;
+            if (!ThemeManager.getInstance().ActiveTheme.IsExtendable) return;
 
-	        base.ApplyTheme();
-	        txtChangeLog.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            txtChangeLog.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            base.ApplyTheme();
+	        txtChangeLog.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            txtChangeLog.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyLanguage()
@@ -84,7 +85,7 @@ namespace mRemoteNG.UI.Window
 			Process.Start(linkUri.ToString());
 		}
         #endregion
-		
+
         #region Private Methods
 		private void CheckForUpdate()
 		{
@@ -97,7 +98,7 @@ namespace mRemoteNG.UI.Window
 			{
 				return;
 			}
-					
+
 			lblStatus.Text = Language.strUpdateCheckingLabel;
 			lblStatus.ForeColor = SystemColors.WindowText;
 			lblLatestVersionLabel.Visible = false;
@@ -107,12 +108,12 @@ namespace mRemoteNG.UI.Window
 			btnCheckForUpdate.Visible = false;
 
 		    SetVisibilityOfUpdateControls(false);
-            
+
 			_appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
-					
+
 			_appUpdate.GetUpdateInfoAsync();
 		}
-				
+
 		private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
 		{
 			if (InvokeRequired)
@@ -121,16 +122,16 @@ namespace mRemoteNG.UI.Window
 				Invoke(myDelegate, sender, e);
 				return;
 			}
-					
+
 			try
 			{
 				_appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
-				
+
 				lblInstalledVersion.Text = Application.ProductVersion;
 				lblInstalledVersion.Visible = true;
 				lblInstalledVersionLabel.Visible = true;
 				btnCheckForUpdate.Visible = true;
-						
+
 				if (e.Cancelled)
 				{
 					return;
@@ -139,18 +140,18 @@ namespace mRemoteNG.UI.Window
 				{
 					throw e.Error;
 				}
-						
+
 				if (_appUpdate.IsUpdateAvailable())
 				{
 					lblStatus.Text = Language.strUpdateAvailable;
 					lblStatus.ForeColor = Color.OrangeRed;
 				    SetVisibilityOfUpdateControls(true);
-							
+
 					var updateInfo = _appUpdate.CurrentUpdateInfo;
 					lblLatestVersion.Text = updateInfo.Version.ToString();
 					lblLatestVersionLabel.Visible = true;
 					lblLatestVersion.Visible = true;
-							
+
 					if (updateInfo.ImageAddress == null || string.IsNullOrEmpty(updateInfo.ImageAddress.ToString()))
 					{
 						pbUpdateImage.Visible = false;
@@ -161,10 +162,10 @@ namespace mRemoteNG.UI.Window
 						pbUpdateImage.Tag = updateInfo.ImageLinkAddress;
 						pbUpdateImage.Visible = true;
 					}
-							
+
 					_appUpdate.GetChangeLogCompletedEvent += GetChangeLogCompleted;
 					_appUpdate.GetChangeLogAsync();
-							
+
 					btnDownload.Focus();
 				}
 				else
@@ -184,7 +185,7 @@ namespace mRemoteNG.UI.Window
 			{
 				lblStatus.Text = Language.strUpdateCheckFailedLabel;
 				lblStatus.ForeColor = Color.OrangeRed;
-						
+
 				Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateCheckCompleteFailed, ex);
 			}
 		}
@@ -196,7 +197,7 @@ namespace mRemoteNG.UI.Window
 	        btnDownload.Visible = visible;
 	        prgbDownload.Visible = visible;
         }
-				
+
 		private void GetChangeLogCompleted(object sender, AsyncCompletedEventArgs e)
 		{
 			if (InvokeRequired)
@@ -205,11 +206,11 @@ namespace mRemoteNG.UI.Window
 				Invoke(myDelegate, sender, e);
 				return;
 			}
-					
+
 			try
 			{
 				_appUpdate.GetChangeLogCompletedEvent -= GetChangeLogCompleted;
-						
+
 				if (e.Cancelled)
 					return;
 				if (e.Error != null)
@@ -222,7 +223,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateGetChangeLogFailed, ex);
 			}
 		}
-				
+
 		private void DownloadUpdate()
 		{
 			try
@@ -230,14 +231,14 @@ namespace mRemoteNG.UI.Window
 				btnDownload.Enabled = false;
 				prgbDownload.Visible = true;
 				prgbDownload.Value = 0;
-						
+
 				if (_isUpdateDownloadHandlerDeclared == false)
 				{
 					_appUpdate.DownloadUpdateProgressChangedEvent += DownloadUpdateProgressChanged;
 					_appUpdate.DownloadUpdateCompletedEvent += DownloadUpdateCompleted;
 					_isUpdateDownloadHandlerDeclared = true;
 				}
-						
+
 				_appUpdate.DownloadUpdateAsync();
 			}
 			catch (Exception ex)
@@ -246,20 +247,20 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-		
+
         #region Events
 		private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
 			prgbDownload.Value = e.ProgressPercentage;
 		}
-				
+
 		private void DownloadUpdateCompleted(object sender, AsyncCompletedEventArgs e)
 		{
 			try
 			{
 				btnDownload.Enabled = true;
 				prgbDownload.Visible = false;
-						
+
 				if (e.Cancelled)
                     return;
 				if (e.Error != null)

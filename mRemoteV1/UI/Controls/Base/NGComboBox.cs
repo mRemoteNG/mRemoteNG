@@ -24,17 +24,16 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive) return;
-            _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable) return;
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
             DrawMode = DrawMode.OwnerDrawFixed;
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.UserPaint, true);
             DrawItem += NG_DrawItem;
-            _mice = MouseState.OUT; 
+            _mice = MouseState.OUT;
             MouseEnter += (sender, args) =>
             {
                 _mice = MouseState.HOVER;
@@ -63,7 +62,7 @@ namespace mRemoteNG.UI.Controls.Base
         private void NG_DrawItem(object sender, DrawItemEventArgs e)
         {
             var index = e.Index >= 0 ? e.Index : 0;
-            Brush itemBrush= new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground"));
+            Brush itemBrush = new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground"));
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
@@ -94,7 +93,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnPaint(PaintEventArgs e)
         {
 
-            if ( !_themeManager.ThemingActive)
+            if ( !_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
             {
                 base.OnPaint(e);
                 return;
@@ -118,10 +117,10 @@ namespace mRemoteNG.UI.Controls.Base
                 ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Pressed_Foreground");
             }
 
-            
-  
+
+
             e.Graphics.Clear(Back);
-                
+
             //Border
             using (var p = new Pen(Border))
             {
@@ -136,7 +135,7 @@ namespace mRemoteNG.UI.Controls.Base
 
             //Arrow
             e.Graphics.DrawString("\u25BC", Font, new SolidBrush(ButtFore), Width-17, Height/2 -5);
- 
+
             //Text
             var textRect = new Rectangle(2, 2, Width - 20, Height - 4);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
