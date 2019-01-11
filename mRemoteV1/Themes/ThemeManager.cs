@@ -136,7 +136,6 @@ namespace mRemoteNG.Themes
             if (themes != null) return themes.Values.OfType<ThemeInfo>().ToList();
             themes = new Hashtable();
 
-            return themes.Values.OfType<ThemeInfo>().ToList();
             if (themePath == null) return themes.Values.OfType<ThemeInfo>().ToList();
             try
             {
