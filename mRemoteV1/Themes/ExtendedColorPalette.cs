@@ -5,7 +5,7 @@ namespace mRemoteNG.Themes
 {
 
     /// <summary>
-    /// Class used for the UI to display the color tables,as the Dictionary value keys cannot be directly replaced 
+    /// Class used for the UI to display the color tables,as the Dictionary value keys cannot be directly replaced
     /// </summary>
     public class PseudoKeyColor
     {
@@ -35,7 +35,7 @@ namespace mRemoteNG.Themes
         {
             ExtColorPalette = new Dictionary<string, Color>();
             DefaultColorPalette = new Dictionary<string, Color>(); // If this is the default palette, it will not have a default-default palette
-             
+
         }
         #endregion
 
@@ -46,7 +46,7 @@ namespace mRemoteNG.Themes
             DefaultColorPalette = inPalettte.ExtColorPalette;
         }
         #endregion
- 
+
         /// <summary>
         /// Obtains a color from the extended palette, if not present obtains it from the default palette, in the extreme case it uses Pink as a signal that a color is missing
         /// </summary>
@@ -59,7 +59,7 @@ namespace mRemoteNG.Themes
             if (retColor != Color.Empty && retColor.A != 0) return retColor;
             if(DefaultColorPalette != null)
             {
-                retColor = DefaultColorPalette.ContainsKey(colorKey) ? DefaultColorPalette[colorKey] : Color.Empty;  
+                retColor = DefaultColorPalette.ContainsKey(colorKey) ? DefaultColorPalette[colorKey] : Color.Empty;
             }
             //why are we here?, just avoid a crash
             if(retColor == Color.Empty)
