@@ -24,8 +24,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (!_themeManager.ThemingActive) return;
-            if (!_themeManager.ActiveTheme.IsExtendable) return;
+            if (!_themeManager.ActiveAndExtended) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
@@ -84,7 +83,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnEnabledChanged(EventArgs e)
         {
 
-            if (_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
+            if (_themeManager.ActiveAndExtended)
             {
                 if (Enabled)
                 {
@@ -105,7 +104,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            if (!_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable) return;
+            if (!_themeManager.ActiveAndExtended) return;
             //Fix Border
             if (BorderStyle != BorderStyle.None)
                 e.Graphics.DrawRectangle(new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"), 1), 0, 0, Width - 1, Height - 1);

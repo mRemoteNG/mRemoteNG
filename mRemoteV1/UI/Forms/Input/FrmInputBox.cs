@@ -26,10 +26,10 @@ namespace mRemoteNG.UI.Forms.Input
 
         private void ApplyTheme()
         {
-            var activeTheme = ThemeManager.getInstance().ActiveTheme;
-            if (!activeTheme.IsExtendable) return;
-            BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            var _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ActiveAndExtended) return;
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void buttonOk_Click(object sender, System.EventArgs e)

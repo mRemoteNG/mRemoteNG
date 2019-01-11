@@ -28,8 +28,7 @@ namespace mRemoteNG.UI.Window
             if (ActiveDirectoryTree.Controls.Count < 1) return;
             if (!(ActiveDirectoryTree.Controls[0] is TreeView tv)) return;
             var tm = ThemeManager.getInstance();
-            if (!tm.ThemingActive) return;
-            if (!tm.ActiveTheme.IsExtendable) return;
+            if (!tm.ActiveAndExtended) return;
             tv.BackColor = tm.ActiveTheme.ExtendedPalette.getColor("List_Background");
             tv.ForeColor = tm.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
         }

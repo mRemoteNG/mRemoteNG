@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;

@@ -74,7 +74,7 @@ namespace mRemoteNG.UI.Controls.Base
         //This class is painted with the checkbox colors, the glyph color is used for the radio inside
         protected override void OnPaint(PaintEventArgs e)
         {
-            if ( !_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;

@@ -281,7 +281,7 @@ namespace mRemoteNG.UI.Forms
 		        vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 		        vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 
-                if (!_themeManager.ActiveTheme.IsExtendable) return;
+                if (!_themeManager.ActiveAndExtended) return;
                 tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
 		        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
 		        ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");

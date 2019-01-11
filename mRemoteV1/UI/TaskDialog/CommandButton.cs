@@ -130,7 +130,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         protected override void OnPaint(PaintEventArgs e)
         {
-            if ( !_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;

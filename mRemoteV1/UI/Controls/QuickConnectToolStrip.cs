@@ -139,7 +139,7 @@ namespace mRemoteNG.UI.Controls
             vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
             vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 
-            if (!_themeManager.ActiveTheme.IsExtendable) return;
+            if (!_themeManager.ActiveAndExtended) return;
             _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             _cmbQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
         }

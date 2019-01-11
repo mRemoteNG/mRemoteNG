@@ -605,8 +605,7 @@ namespace mRemoteNG.UI.Window
 
 		private new void ApplyTheme()
 		{
-            if (!ThemeManager.getInstance().ThemingActive) return;
-            if (!ThemeManager.getInstance().ActiveTheme.IsExtendable) return;
+            if (!ThemeManager.getInstance().ActiveAndExtended) return;
             _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
             _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");

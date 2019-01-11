@@ -58,9 +58,7 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
         private new void  ApplyTheme()
         {
-            if (!_themeManager.ThemingActive) return;
-
-            if (!_themeManager.ActiveTheme.IsExtendable) return;
+            if (!_themeManager.ActiveAndExtended) return;
             lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
 
@@ -223,7 +221,7 @@ namespace mRemoteNG.UI.Window
                         break;
 					case MessageClass.WarningMsg:
 						pbError.Image = _display.ScaleImage(Resources.Warning);
-                        if (_themeManager.ThemingActive && _themeManager.ActiveTheme.IsExtendable)
+                        if (_themeManager.ActiveAndExtended)
                         {
                             //Inverse colors for dramatic effect
                             pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
@@ -236,7 +234,7 @@ namespace mRemoteNG.UI.Window
                         break;
 					case MessageClass.ErrorMsg:
 						pbError.Image = _display.ScaleImage(Resources._Error);
-                        if (_themeManager.ThemingActive && _themeManager.ActiveTheme.IsExtendable)
+                        if (_themeManager.ActiveAndExtended)
                         {
                             pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
                             pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");

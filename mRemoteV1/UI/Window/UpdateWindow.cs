@@ -44,8 +44,7 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-	        if (!ThemeManager.getInstance().ThemingActive) return;
-            if (!ThemeManager.getInstance().ActiveTheme.IsExtendable) return;
+	        if (!ThemeManager.getInstance().ActiveAndExtended) return;
 
             base.ApplyTheme();
 	        txtChangeLog.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");

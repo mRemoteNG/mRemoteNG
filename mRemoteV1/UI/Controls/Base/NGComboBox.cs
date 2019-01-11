@@ -26,7 +26,7 @@ namespace mRemoteNG.UI.Controls.Base
         {
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable) return;
+            if (!_themeManager.ActiveAndExtended) return;
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
             DrawMode = DrawMode.OwnerDrawFixed;
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Controls.Base
         protected override void OnPaint(PaintEventArgs e)
         {
 
-            if ( !_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
+            if ( !_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;

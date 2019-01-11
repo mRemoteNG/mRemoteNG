@@ -23,8 +23,7 @@ namespace mRemoteNG.UI.Controls.Base
         {
             base.OnCreateControl();
             var _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive) return;
-            if (!_themeManager.ActiveTheme.IsExtendable) return;
+            if (!_themeManager.ActiveAndExtended) return;
             //List back color
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");

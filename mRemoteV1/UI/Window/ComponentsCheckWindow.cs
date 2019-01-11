@@ -439,7 +439,7 @@ namespace mRemoteNG.UI.Window
             if (!ThemeManager.getInstance().ThemingActive) return;
             base.ApplyTheme();
 
-            if (!ThemeManager.getInstance().ActiveTheme.IsExtendable) return;
+            if (!ThemeManager.getInstance().ActiveAndExtended) return;
             pnlCheck1.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             pnlCheck1.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             pnlCheck2.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");

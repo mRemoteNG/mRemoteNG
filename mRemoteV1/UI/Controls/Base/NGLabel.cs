@@ -25,8 +25,7 @@ namespace mRemoteNG.UI.Controls.Base
         {
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive) return;
-            if (!_themeManager.ActiveTheme.IsExtendable) return;
+            if (!_themeManager.ActiveAndExtended) return;
             // Use the Dialog_* colors since Labels generally have the same colors as panels/dialogs/windows/etc...
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
@@ -79,7 +78,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ThemingActive || !_themeManager.ActiveTheme.IsExtendable)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;

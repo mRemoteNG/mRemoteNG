@@ -323,6 +323,8 @@ namespace mRemoteNG.Themes
 			}
 		}
 
+        public bool ActiveAndExtended => ThemingActive && ActiveTheme.IsExtended;
+
         public int ThemesCount => themes.Count;
 
         #endregion
