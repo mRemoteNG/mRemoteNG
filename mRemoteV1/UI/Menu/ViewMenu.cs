@@ -327,17 +327,7 @@ namespace mRemoteNG.UI.Menu
             }
         }
 
-        private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
-        {
-            if (MainForm.pnlDock.ActiveContent == Windows.TreeForm)
-            {
-                Windows.ConfigForm.Activate();
-            }
-            else
-            {
-                Windows.TreeForm.Activate();
-            }
-        }
+        private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e) => Windows.TreeForm.Show(MainForm.pnlDock);
 
         private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
         {
