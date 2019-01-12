@@ -341,9 +341,23 @@ namespace mRemoteNG.UI.Menu
             }
         }
 
-        private void mMenViewJumpToConnections_Click(object sender, EventArgs e) => Windows.TreeForm.Show(MainForm.pnlDock);
+        private void mMenViewJumpToConnections_Click(object sender, EventArgs e)
+        {
+            var content = Windows.TreeForm;
+            content.Activate();
+            if (content.Pane.IsAutoHide)
+                FrmMain.Default.pnlDock.ActiveAutoHideContent = content;
+            content.Focus();
+        }
 
-        private void mMenViewJumpToConfig_Click(object sender, EventArgs e) => Windows.ConfigForm.Show(MainForm.pnlDock);
+        private void mMenViewJumpToConfig_Click(object sender, EventArgs e)
+        {
+            var content = Windows.ConfigForm;
+            content.Activate();
+            if (content.Pane.IsAutoHide)
+                FrmMain.Default.pnlDock.ActiveAutoHideContent = content;
+            content.Focus();
+        }
 
         private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e) => Windows.ErrorsForm.Activate();
 

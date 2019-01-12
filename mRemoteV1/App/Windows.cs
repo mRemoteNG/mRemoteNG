@@ -16,21 +16,9 @@ namespace mRemoteNG.App
         private static ScreenshotManagerWindow _screenshotmanagerForm;
         private static UltraVNCWindow _ultravncscForm;
         private static ComponentsCheckWindow _componentscheckForm;
-        private static ConnectionTreeWindow _treeForm;
-        private static ConfigWindow _configForm;
 
-        internal static ConnectionTreeWindow TreeForm
-        {
-            get => _treeForm ?? (_treeForm = new ConnectionTreeWindow());
-            set => _treeForm = value;
-        }
-
-        internal static ConfigWindow ConfigForm
-        {
-            get => _configForm ?? (_configForm = new ConfigWindow());
-            set => _configForm = value;
-        }
-
+        internal static ConnectionTreeWindow TreeForm { get; set; } = new ConnectionTreeWindow();
+        internal static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
         internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
         internal static ScreenshotManagerWindow ScreenshotForm { get; set; } = new ScreenshotManagerWindow();
         private static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
