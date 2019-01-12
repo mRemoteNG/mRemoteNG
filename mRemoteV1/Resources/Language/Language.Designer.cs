@@ -3354,15 +3354,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connections and Config.
-        /// </summary>
-        internal static string strMenuConnectionsAndConfig {
-            get {
-                return ResourceManager.GetString("strMenuConnectionsAndConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Copy.
         /// </summary>
         internal static string strMenuCopy {

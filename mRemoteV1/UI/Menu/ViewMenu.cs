@@ -22,7 +22,8 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewMultiSshToolbar;
         private ToolStripSeparator _mMenViewSep3;
         private ToolStripMenuItem _mMenViewJumpTo;
-        private ToolStripMenuItem _mMenViewJumpToConnectionsConfig;
+        private ToolStripMenuItem _mMenViewJumpToConnections;
+        private ToolStripMenuItem _mMenViewJumpToConfig;
         private ToolStripMenuItem _mMenViewJumpToErrorsInfos;
         private ToolStripMenuItem _mMenViewResetLayout;
         private ToolStripMenuItem _mMenViewLockToolbars;
@@ -52,7 +53,8 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConfig = new ToolStripMenuItem();
             _mMenViewErrorsAndInfos = new ToolStripMenuItem();
             _mMenViewJumpTo = new ToolStripMenuItem();
-            _mMenViewJumpToConnectionsConfig = new ToolStripMenuItem();
+            _mMenViewJumpToConnections = new ToolStripMenuItem();
+            _mMenViewJumpToConfig = new ToolStripMenuItem();
             _mMenViewJumpToErrorsInfos = new ToolStripMenuItem();
             _mMenViewResetLayout = new ToolStripMenuItem();
 	        _mMenViewLockToolbars = new ToolStripMenuItem();
@@ -72,6 +74,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnectionPanels,
             _mMenViewSep1,
             _mMenViewConnections,
+            _mMenViewConfig,
             _mMenViewConfig,
             _mMenViewErrorsAndInfos,
             _toolStripSeparator1,
@@ -147,21 +150,31 @@ namespace mRemoteNG.UI.Menu
             // mMenViewJumpTo
             // 
             _mMenViewJumpTo.DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenViewJumpToConnectionsConfig,
+            _mMenViewJumpToConnections,
+            _mMenViewJumpToConfig,
             _mMenViewJumpToErrorsInfos});
             _mMenViewJumpTo.Image = Resources.JumpTo;
             _mMenViewJumpTo.Name = "mMenViewJumpTo";
             _mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
             _mMenViewJumpTo.Text = Language.strMenuJumpTo;
             // 
+            // mMenViewJumpToConnections
+            // 
+            _mMenViewJumpToConnections.Image = Resources.Root;
+            _mMenViewJumpToConnections.Name = "mMenViewJumpToConnections";
+            _mMenViewJumpToConnections.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
+            _mMenViewJumpToConnections.Size = new System.Drawing.Size(258, 22);
+            _mMenViewJumpToConnections.Text = Language.strMenuConnections;
+            _mMenViewJumpToConnections.Click += mMenViewJumpToConnections_Click;
+            // 
             // mMenViewJumpToConnectionsConfig
             // 
-            _mMenViewJumpToConnectionsConfig.Image = Resources.Root;
-            _mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
-            _mMenViewJumpToConnectionsConfig.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
-            _mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(258, 22);
-            _mMenViewJumpToConnectionsConfig.Text = Language.strMenuConnectionsAndConfig;
-            _mMenViewJumpToConnectionsConfig.Click += mMenViewJumpToConnectionsConfig_Click;
+            _mMenViewJumpToConfig.Image = Resources.cog;
+            _mMenViewJumpToConfig.Name = "mMenViewJumpToConfig";
+            _mMenViewJumpToConfig.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
+            _mMenViewJumpToConfig.Size = new System.Drawing.Size(258, 22);
+            _mMenViewJumpToConfig.Text = Language.strMenuConfig;
+            _mMenViewJumpToConfig.Click += mMenViewJumpToConfig_Click;
             // 
             // mMenViewJumpToErrorsInfos
             // 
@@ -244,7 +257,8 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConfig.Text = Language.strMenuConfig;
             _mMenViewErrorsAndInfos.Text = Language.strMenuNotifications;
             _mMenViewJumpTo.Text = Language.strMenuJumpTo;
-            _mMenViewJumpToConnectionsConfig.Text = Language.strMenuConnectionsAndConfig;
+            _mMenViewJumpToConnections.Text = Language.strMenuConnections;
+            _mMenViewJumpToConfig.Text = Language.strMenuConfig;
             _mMenViewJumpToErrorsInfos.Text = Language.strMenuNotifications;
             _mMenViewResetLayout.Text = Language.strMenuResetLayout;
             _mMenViewLockToolbars.Text = Language.strLockToolbars;
@@ -327,7 +341,9 @@ namespace mRemoteNG.UI.Menu
             }
         }
 
-        private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e) => Windows.TreeForm.Show(MainForm.pnlDock);
+        private void mMenViewJumpToConnections_Click(object sender, EventArgs e) => Windows.TreeForm.Show(MainForm.pnlDock);
+
+        private void mMenViewJumpToConfig_Click(object sender, EventArgs e) => throw new NotImplementedException();
 
         private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
         {

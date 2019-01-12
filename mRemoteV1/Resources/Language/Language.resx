@@ -1039,9 +1039,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strMenuConnections" xml:space="preserve">
     <value>Connections</value>
   </data>
-  <data name="strMenuConnectionsAndConfig" xml:space="preserve">
-    <value>Connections and Config</value>
-  </data>
   <data name="strMenuCopy" xml:space="preserve">
     <value>Copy</value>
   </data>
