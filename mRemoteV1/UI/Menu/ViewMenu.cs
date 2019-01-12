@@ -171,7 +171,7 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenViewJumpToConfig.Image = Resources.cog;
             _mMenViewJumpToConfig.Name = "mMenViewJumpToConfig";
-            _mMenViewJumpToConfig.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
+            _mMenViewJumpToConfig.ShortcutKeys = Keys.Control | Keys.Alt | Keys.K;
             _mMenViewJumpToConfig.Size = new System.Drawing.Size(258, 22);
             _mMenViewJumpToConfig.Text = Language.strMenuConfig;
             _mMenViewJumpToConfig.Click += mMenViewJumpToConfig_Click;
@@ -345,10 +345,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenViewJumpToConfig_Click(object sender, EventArgs e) => Windows.ConfigForm.Show(MainForm.pnlDock);
 
-        private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
-        {
-            Windows.ErrorsForm.Activate();
-        }
+        private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e) => Windows.ErrorsForm.Activate();
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
         {
