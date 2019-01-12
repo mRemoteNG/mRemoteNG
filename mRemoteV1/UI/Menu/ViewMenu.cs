@@ -343,7 +343,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenViewJumpToConnections_Click(object sender, EventArgs e) => Windows.TreeForm.Show(MainForm.pnlDock);
 
-        private void mMenViewJumpToConfig_Click(object sender, EventArgs e) => throw new NotImplementedException();
+        private void mMenViewJumpToConfig_Click(object sender, EventArgs e) => Windows.ConfigForm.Show(MainForm.pnlDock);
 
         private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
         {

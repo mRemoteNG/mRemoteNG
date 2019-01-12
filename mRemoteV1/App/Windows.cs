@@ -17,6 +17,7 @@ namespace mRemoteNG.App
         private static UltraVNCWindow _ultravncscForm;
         private static ComponentsCheckWindow _componentscheckForm;
         private static ConnectionTreeWindow _treeForm;
+        private static ConfigWindow _configForm;
 
         internal static ConnectionTreeWindow TreeForm
         {
@@ -24,13 +25,16 @@ namespace mRemoteNG.App
             set => _treeForm = value;
         }
 
-        internal static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
+        internal static ConfigWindow ConfigForm
+        {
+            get => _configForm ?? (_configForm = new ConfigWindow());
+            set => _configForm = value;
+        }
+
         internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
         internal static ScreenshotManagerWindow ScreenshotForm { get; set; } = new ScreenshotManagerWindow();
         private static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
         internal static SSHTransferWindow SshtransferForm { get; private set; } = new SSHTransferWindow();
-
-
 
         public static void Show(WindowType windowType)
         {
