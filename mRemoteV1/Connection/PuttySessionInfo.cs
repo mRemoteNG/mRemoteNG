@@ -10,7 +10,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Connection
 {
-	public class PuttySessionInfo : ConnectionInfo, IComponent
+	public sealed class PuttySessionInfo : ConnectionInfo, IComponent
 	{
         #region Properties
         [Browsable(false)]
@@ -28,14 +28,14 @@ namespace mRemoteNG.Connection
         [ReadOnly(true), Browsable(false)]
         public override string Icon
         {
-            get { return "PuTTY"; }
+            get => "PuTTY";
             set { }
         }
 
         [ReadOnly(true), Browsable(false)]
         public override string Panel
         {
-            get { return Parent?.Panel; }
+            get => Parent?.Panel;
             set { }
         }
 
@@ -99,16 +99,16 @@ namespace mRemoteNG.Connection
         [Browsable(false)]
         public ISite Site
 		{
-			get { return new PropertyGridCommandSite(this); }
-			set { throw (new NotImplementedException()); }
-		}
-				
-		public void Dispose()
-		{
-		    Disposed?.Invoke(this, EventArgs.Empty);
-		}
+			get => new PropertyGridCommandSite(this);
+            set => throw (new NotImplementedException());
+        }
 
-	    public event EventHandler Disposed;
+        public void Dispose()
+		{
+            Disposed?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler Disposed;
         #endregion
 	}
 }

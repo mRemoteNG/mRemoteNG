@@ -2751,4 +2751,7 @@ Development Channel includes Alphas, Betas and Release Candidates.</value>
   <data name="strPortScanSinglePort" xml:space="preserve">
     <value>To scan a single port, select the "First Port" only.</value>
   </data>
+  <data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Track active connection in the connection tree</value>
+  </data>
 </root>

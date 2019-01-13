@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,17 +10,11 @@ namespace mRemoteNG.UI.Forms
     public partial class FrmOptions : Form
     {
         private Dictionary<string, OptionsPage> _pages;
-        private ImageList _pageIconImageList;
         private readonly string _pageName;
         private readonly DisplayProperties _display = new DisplayProperties();
 
-        public FrmOptions()
+        public FrmOptions(): this(Language.strStartupExit)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            Application.DoEvents();
-            InitializeComponent();
-            _pageName = Language.strStartupExit;
-            Cursor.Current = Cursors.Default;
         }
 
         public FrmOptions(string pn)
@@ -97,10 +90,7 @@ namespace mRemoteNG.UI.Forms
         private object ImageGetter(object rowobject)
         {
             var page = rowobject as OptionsPage;
-            if (page?.PageIcon == null)
-                return _display.ScaleImage(Resources.Help);
-
-            return _display.ScaleImage(page.PageIcon);
+            return page?.PageIcon == null ? _display.ScaleImage(Resources.Help) : _display.ScaleImage(page.PageIcon);
         }
 
         private void SetInitiallyActivatedPage()

@@ -69,24 +69,21 @@ namespace mRemoteNG.UI.Controls
 
             var connected = connection.OpenConnections.Count > 0;
             var name = BuildConnectionIconName(connection.Icon, connected);
-            if (!ImageList.Images.ContainsKey(name))
+            if (ImageList.Images.ContainsKey(name)) return name;
+            var image = ConnectionIcon.FromString(connection.Icon);
+            if (image == null)
             {
-                var image = ConnectionIcon.FromString(connection.Icon);
-                if (image == null)
-                {
-                    return DefaultConnectionIcon;
-                }
-
-                ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);
-                ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true), Overlay(image, Resources.ConnectedOverlay));
-
+                return DefaultConnectionIcon;
             }
+
+            ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);
+            ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true), Overlay(image, Resources.ConnectedOverlay));
             return name;
         }
 
         private static Bitmap Overlay(Icon background, Image foreground)
         {
-            var result = background.ToBitmap();
+            var result = new Bitmap(background.ToBitmap(), new Size(16, 16));
             using (var gr = Graphics.FromImage(result))
             {
                 gr.DrawImage(foreground, new Rectangle(0, 0, foreground.Width, foreground.Height));
@@ -110,7 +107,16 @@ namespace mRemoteNG.UI.Controls
 
         public void Dispose()
         {
-            ImageList?.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ImageList?.Dispose();
+            }
         }
     }
 }

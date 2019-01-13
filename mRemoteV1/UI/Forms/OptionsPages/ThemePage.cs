@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Linq;
 using System.Collections.Generic;
-using System.Drawing;
 using BrightIdeasSoftware;
 using mRemoteNG.UI.Forms.Input;
 
@@ -13,10 +12,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
 
         #region Private Fields
-        private ThemeManager _themeManager;
-        private ThemeInfo _oriTheme;
-        private bool _oriActiveTheming;
-        List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
+        private readonly ThemeManager _themeManager;
+        private readonly ThemeInfo _oriTheme;
+        private readonly bool _oriActiveTheming;
+        private readonly List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
         #endregion
 
         public ThemePage()
@@ -44,7 +43,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnThemeDelete.Text = Language.strOptionsThemeButtonDelete;
             btnThemeNew.Text = Language.strOptionsThemeButtonNew;
             labelRestart.Text = Language.strOptionsThemeThemeChaangeWarning;
-            themeEnableCombo.Text = Language.strOptionsThemeEnableTheming;
+            themeEnableChk.Text = Language.strOptionsThemeEnableTheming;
         }
 
         private new void ApplyTheme()
@@ -56,6 +55,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
+            themeEnableChk.CheckedChanged -= ThemeEnableChkCheckedChanged;
             base.SaveSettings();
             //At first we cannot create or delete themes, depends later on the type of selected theme
             btnThemeNew.Enabled = false;
@@ -72,15 +72,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             //Load theming active property and disable controls 
             if (_themeManager.ThemingActive)
             {
-                themeEnableCombo.Checked = true;
+                themeEnableChk.Checked = true;
             }
             else
             {
-                themeEnableCombo.Checked = false;
+                themeEnableChk.Checked = false;
                 cboTheme.Enabled = false;
                 // reset to the default theme when disabling theme support
                 _themeManager.ActiveTheme = _themeManager.DefaultTheme;
             }
+            themeEnableChk.CheckedChanged += ThemeEnableChkCheckedChanged;
         }
 
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
@@ -172,21 +173,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
             var name = _themeManager.ActiveTheme.Name;
-            using (FrmInputBox frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name))
+            using (var frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name))
             {
-                DialogResult dr = frmInputBox.ShowDialog();
-                if (dr == DialogResult.OK)
+                var dr = frmInputBox.ShowDialog();
+                if (dr != DialogResult.OK) return;
+                if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
                 {
-                    if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
-                    {
-                        var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
-                        _themeManager.ActiveTheme = addedTheme;
-                        LoadSettings();
-                    }
-                    else
-                    {
-                        TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
-                    }
+                    var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
+                    _themeManager.ActiveTheme = addedTheme;
+                    LoadSettings();
+                }
+                else
+                {
+                    TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
                 }
             }
         }
@@ -207,26 +206,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         #endregion
 
-        private void themeEnableCombo_CheckedChanged(object sender, EventArgs e)
+        private void ThemeEnableChkCheckedChanged(object sender, EventArgs e)
         {
-            if (themeEnableCombo.Checked)
+            if (themeEnableChk.Checked)
             {
-                _themeManager.ThemingActive = true;
-                if(_themeManager.ThemingActive)
+                
+                if(_themeManager.ThemesCount > 0)
                 {
-                    themeEnableCombo.Checked = true;
+                    _themeManager.ThemingActive = true;
                     cboTheme.Enabled = true;
                 }
                 else
                 {
                     TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeErrorNoThemes, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
-                    themeEnableCombo.Checked = false;
+                    themeEnableChk.Checked = false;
+                    _themeManager.ThemingActive = false;
+                    cboTheme.Enabled = false;
                 }
             }
             else
             {
                 _themeManager.ThemingActive = false;
-                themeEnableCombo.Checked = false;
+                themeEnableChk.Checked = false;
                 cboTheme.Enabled = false;
             }
             LoadSettings();

@@ -5,13 +5,27 @@ using System.Windows.Forms;
 namespace mRemoteNG.UI.Controls.Base
 {
     //Extended CheckBox class, the NGCheckBox onPaint completely repaint the control
+
+    //
+    // If this causes design issues in the future, may want to think about migrating to 
+    // CheckBoxRenderer:
+    // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.checkboxrenderer?view=netframework-4.6
+    //
     public class NGCheckBox : CheckBox
     {
         private ThemeManager _themeManager;
+        private readonly Size _checkboxSize;
+        private readonly int _checkboxYCoord;
+        private readonly int _textXCoord;
 
         public NGCheckBox()
         {
+            InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            var display = new DisplayProperties();
+            _checkboxSize = new Size(display.ScaleWidth(11), display.ScaleHeight(11));
+            _checkboxYCoord = (display.ScaleHeight(Height) - _checkboxSize.Height) / 2 - display.ScaleHeight(5);
+            _textXCoord = _checkboxSize.Width + display.ScaleWidth(2);
         }
 
         public enum MouseState
@@ -100,22 +114,31 @@ namespace mRemoteNG.UI.Controls.Base
 
             using (var p = new Pen(checkBorder))
             {
-                var boxRect = new Rectangle(0, Height / 2 - 7, 11, 11);
+                var boxRect = new Rectangle(0, _checkboxYCoord, _checkboxSize.Width, _checkboxSize.Height);
                 e.Graphics.FillRectangle(new SolidBrush(back), boxRect);
                 e.Graphics.DrawRectangle(p, boxRect);
             }
 
             if (Checked)
             {
-                e.Graphics.DrawString("\u2714", new Font(Font.FontFamily, 7f), new SolidBrush(glyph), -1, 1);
+                // | \uE001 | &#xE001; |  |  is the tick/check mark and it exists in Segoe UI Symbol at least...
+                e.Graphics.DrawString("\uE001", new Font("Segoe UI Symbol", 7.75f), new SolidBrush(glyph), -4, 0);
             }
 
-            var textRect = new Rectangle(16, 0, Width - 16, Height);
+            var textRect = new Rectangle(_textXCoord, 0, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
-
-        
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // NGCheckBox
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResumeLayout(false);
+
+        }
     }
 }
 

@@ -19,12 +19,10 @@ namespace mRemoteNG.UI.Controls.PageSequence
 
         public PageSequence(Control pageContainer, params SequencedControl[] pages)
         {
-            if (pageContainer == null)
-                throw new ArgumentNullException(nameof(pageContainer));
             if (pages == null)
                 throw new ArgumentNullException(nameof(pages));
 
-            _pageContainer = pageContainer;
+            _pageContainer = pageContainer ?? throw new ArgumentNullException(nameof(pageContainer));
             foreach (var page in pages)
             {
                 SubscribeToPageEvents(page);

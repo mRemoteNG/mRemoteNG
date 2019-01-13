@@ -344,7 +344,7 @@ namespace mRemoteNG.UI.Window
             this.chkAlwaysShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAlwaysShow.Location = new System.Drawing.Point(12, 814);
             this.chkAlwaysShow.Name = "chkAlwaysShow";
-            this.chkAlwaysShow.Size = new System.Drawing.Size(185, 17);
+            this.chkAlwaysShow.Size = new System.Drawing.Size(200, 17);
             this.chkAlwaysShow.TabIndex = 51;
             this.chkAlwaysShow.Text = "Always show this screen at startup";
             this.chkAlwaysShow.UseVisualStyleBackColor = true;
@@ -374,6 +374,7 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.pnlChecks);
             this.Controls.Add(this.chkAlwaysShow);
             this.Controls.Add(this.btnCheckAgain);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::mRemoteNG.Resources.ComponentsCheck_Icon;
             this.Name = "ComponentsCheckWindow";
             this.TabText = "Components Check";

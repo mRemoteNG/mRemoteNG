@@ -73,15 +73,21 @@ namespace mRemoteNG.UI.Controls.Base
             else
                 e.Graphics.FillRectangle(new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")), e.Bounds);
 
-            if(string.IsNullOrEmpty(DisplayMember))
-                e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
-            else
+            if (Items.Count > 0)
             {
-                if (Items[index].GetType().GetProperty(DisplayMember) != null)
+                if (string.IsNullOrEmpty(DisplayMember))
+                    e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                else
                 {
-                    e.Graphics.DrawString(Items[index].GetType().GetProperty(DisplayMember)?.GetValue(Items[index],null).ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                    if (Items[index].GetType().GetProperty(DisplayMember) != null)
+                    {
+                        e.Graphics.DrawString(
+                            Items[index].GetType().GetProperty(DisplayMember)?.GetValue(Items[index], null).ToString(),
+                            e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                    }
                 }
             }
+
             e.DrawFocusRectangle();
         }
 
@@ -134,6 +140,17 @@ namespace mRemoteNG.UI.Controls.Base
             //Text
             var textRect = new Rectangle(2, 2, Width - 20, Height - 4);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // NGComboBox
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResumeLayout(false);
+
         }
     }
 }
