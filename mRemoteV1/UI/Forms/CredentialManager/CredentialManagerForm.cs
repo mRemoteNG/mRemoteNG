@@ -77,7 +77,17 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             olvCredRepos.SetObjects(_credentialService.RepositoryList);
             olvCredRepos.SelectedIndex = 0;
             olvCredRepos.SelectionChanged += (sender, args) => UpdateUi();
+            olvCredRepos.CellClick += OlvCredReposOnCellClick;
             _credentialService.RepositoryList.RepositoriesUpdated += RepositoryListOnRepositoriesUpdated;
+        }
+
+        private void OlvCredReposOnCellClick(object sender, CellClickEventArgs e)
+        {
+            if (e.ClickCount < 2)
+                return;
+
+            // edit repo on double click of tree item
+            EditRepository(e.Model as ICredentialRepository);
         }
 
         private object ImageGetter(object rowObject)
@@ -160,28 +170,38 @@ namespace mRemoteNG.UI.Forms.CredentialManager
 
         private void btnToggleUnlock_Click(object sender, EventArgs e)
         {
-            if (!(olvCredRepos.SelectedObject is ICredentialRepository selectedRepository))
-                return;
-
-            if (selectedRepository.IsLoaded)
-                selectedRepository.UnloadCredentials();
-            else
-                _unlockerFactory.Build(new[] { selectedRepository }).ShowDialog(this);
-
-            olvCredRepos.RefreshObject(selectedRepository);
-            UpdateUi();
+            ToggleRepositoryLockStatus(olvCredRepos.SelectedObject as ICredentialRepository);
         }
 
         private void btnEditRepo_Click(object sender, EventArgs e)
         {
-            if (!(olvCredRepos.SelectedObject is ICredentialRepository selectedRepository))
+            EditRepository(olvCredRepos?.SelectedObject as ICredentialRepository);
+        }
+
+        private void ToggleRepositoryLockStatus(ICredentialRepository repository)
+        {
+            if (repository == null)
+                return;
+
+            if (repository.IsLoaded)
+                repository.UnloadCredentials();
+            else
+                _unlockerFactory.Build(new[] { repository }).ShowDialog(this);
+
+            olvCredRepos.RefreshObject(repository);
+            UpdateUi();
+        }
+
+        private void EditRepository(ICredentialRepository repository)
+        {
+            if (repository == null)
                 return;
 
             var pageWorkflowController = new PageWorkflowController(ShowPage, _credentialListPage);
 
             var editorPage = _selectionTargets
-                .FirstOrDefault(t => t.DefaultConfig.TypeName.Equals(selectedRepository.Config.TypeName))?
-                .BuildEditorPage(selectedRepository.Config.ToOptional(), _credentialService.RepositoryList, pageWorkflowController);
+                .FirstOrDefault(t => t.DefaultConfig.TypeName.Equals(repository.Config.TypeName))?
+                .BuildEditorPage(repository.Config.ToOptional(), _credentialService.RepositoryList, pageWorkflowController);
 
             ShowPage(editorPage);
         }
