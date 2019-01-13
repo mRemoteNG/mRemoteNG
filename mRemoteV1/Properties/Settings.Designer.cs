@@ -2759,6 +2759,18 @@ namespace mRemoteNG {
             }
         }
         
+		[global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TrackActiveConnectionInConnectionTree {
+            get {
+                return ((bool)(this["TrackActiveConnectionInConnectionTree"]));
+            }
+            set {
+                this["TrackActiveConnectionInConnectionTree"] = value;
+            }
+        }
+		
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]

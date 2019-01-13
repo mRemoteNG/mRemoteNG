@@ -7370,6 +7370,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Track active connection in the connection tree.
+        /// </summary>
+        internal static string strTrackActiveConnectionInConnectionTree {
+            get {
+                return ResourceManager.GetString("strTrackActiveConnectionInConnectionTree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transfer.
         /// </summary>
         internal static string strTransfer {

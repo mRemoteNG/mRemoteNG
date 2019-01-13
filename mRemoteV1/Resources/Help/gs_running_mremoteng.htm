@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Running mRemoteNG</title>
+    <link rel="stylesheet" href="Main.css" type="text/css">
+  </head>
+  <body>
+    <div class="isa_info">
+      Complete from nmat updates, please remove this div after review.
+    </div>
+
+    <h1>First Run</h1>
+    <hr>
+    <p>
+      Here is a quick reference of the interface:
+    </p>
+    <img src="Screenshots/Reference/01.png">
+    <p>
+      The screenshot above explains the most basic of the interface. To understand it all
+      we are creating a small tutorial here.
+    </p>
+
+    <h1>Creating a connection</h1>
+    <p>
+      Right click on the root item (the little blue globe named &quot;Connections&quot;) in
+      the Connections panel and select &quot;New Connection&quot;. Or use the keybinding
+      <kbd>Ctrl+N</kbd> if the Connections are selected.
+    </p>
+    <img src="Screenshots/Reference/new_connection.png">
+    <p>
+      A new item shows up under the root item. You can give it a name now
+      (or rename it later). Here we just name it &quot;Test&quot;.
+    </p>
+    <img src="Screenshots/Reference/new_connection_test_item.png">
+    <p>
+      Now lets look at the Config panel in the bottom left, just under the
+      Connections panel.
+    </p>
+    <img src="Screenshots/Reference/config_panel_01.png">
+    <p>
+      As you may notice this is where you configure all the properties of connections
+      and folders.<br>
+      There are a lot of values that can be set but for our first connection we will
+      keep things simple.
+    </p>
+    <p>
+      The most important things right now are that we tell the application which host
+      we want to connect to and which protocol we want to use.<br>
+      In this example we will use a Windows 2012 R2 server that has RDP (Remote Desktop
+      Protocol) enabled.<br>
+      As RDP is the default protocol whenever you create a new connection we don&#39;t have
+      to change anything there.
+    </p>
+    <p>
+      The next thing we will do is to fill in the Hostname/IP field with the hostname
+      we want to connect to. Lets also fill in a username and password so that we login
+      automatically to the server.
+    </p>
+    <img src="Screenshots/Reference/config_panel_02.png">
+    <p>
+      Lets now try to connect to the server.
+    </p>
+    <div class="isa_info">
+      <b>TIP!</b> You can see an indicator in the properties window that is glowing green.
+      <img src="Screenshots/Reference/status_icon.png">
+      <br><br>
+      This icon does a ICMP ping on to check response from the server. If it glows green
+      it indicates a connection response can be made using ping to the host.
+      However this is turned off on windows by default. You have to enable ICMP and allow
+      the firewall access for it.
+    </div>
+    <h1>Opening and Closing Connections</h1>
+    <p>
+      There are multiple ways to open a connection in mRemoteNG, but the easiest
+      way is to double click the connection in the Connections panel.
+    </p>
+    <p>
+      If you double click the connection you will notice that the connection is going
+      to try and open in a new panel called &nbsp;General&nbsp; and under a tab
+      called &nbsp;Test&nbsp;.
+    </p>
+    <img src="Screenshots/Reference/open_connection.png">
+    <div class="isa_info">
+      <b>NOTE!</b> If the connection fails you will find out what the problem was
+      in the dialog notifications panel.
+    </div>
+    <p>
+      If all goes well you should see the remote desktop without any problems.
+    </p>
+    <p>
+      To close the connection you can do any of the following:
+      <ul>
+        <li>Log off in the start menu - Closes the connection and logs you out completely from RDP</li>
+        <li>Close the panel with the - Which leaves your session active on server but closes connection in mRemoteNG</li>
+        <li>Close the connection tab with - Also keeps your login active on server but closes RDP connection in mRemoteNG</li>
+        <li>Double click the connection tab - Same as above where the connection is active on server but closes RDP connection in mRemoteNG</li>
+      </ul>
+    </p>
+    <h1>Folders and Inheritance</h1>
+    <p>
+      Folders on mRemoteNG cannot only be used to categorize connections but also to
+      apply properties to the underlying connections.
+    </p>
+    <h2>Example</h2>
+    <p>
+      You have 10 Remote Desktop enabled servers in one domain and 15 in another domain.
+    </p>
+    <p>
+      Normally you would spend a lot of time creating all those connections and setting
+      the individual properties like username, password, etc. In mRemoteNG there is an
+      easier way. You just create two folders, one for domain A and one for domain B
+      and set all properties there.
+    </p>
+    <p>
+      Then create the Connections and let them inherit every property. The only
+      properties left to fill on Connection basis are the Connections name and hostname.
+      Everything else will be inherited from the parent folder.
+    </p>
+    <p>
+      Here is how you do this:
+    </p>
+    <h3>1. Add the folder</h3>
+    <p>
+      This can be done with:
+      <ul>
+        <li>Right click on connections and click on <i>New Folder</i></li>
+        <li><b>File > New Folder</b></li>
+        <li>Or with keybinding: <kbd>Ctrl+Shift+N</kbd></li>
+      </ul>
+    </p>
+    <img src="Screenshots/Reference/add_new_folder.png">
+    <p>
+      Then give it a name and fill all the properties you need (like you did with
+      the test connection)
+    </p>
+    <img src="Screenshots/Reference/example_01.png"><br>
+    <img src="Screenshots/Reference/example_02.png">
+    <p>
+      When you have filled in the settings and values you can either just drag the test
+      Connection inside the folder or create a new one.
+    </p>
+    <img src="Screenshots/Reference/example_03.png">
+    <p>
+      Right now nothing has changed and nothing will be inherited.<br>
+      To enable inheritance switch to the inheritance view by clicking the
+      dedicated button. (Marked with a red arrow below)
+    </p>
+    <img src="Screenshots/Reference/example_04.png">
+    <p>
+      The properties that show up now are almost the same as before, but you
+      only select yes or no to enable or disable a inheritance.
+    </p>
+    <img src="Screenshots/Reference/example_05.png">
+    <p>
+      When no is selected the property will not be inherited, yes indicates
+      an inherited property.
+    </p>
+    <p>
+      For this test set <i>Inherit Everything</i> to Yes.
+    </p>
+    <p>
+      Now if you switch back to the properties view (the button left
+      of the inheritance button) you should see that not much is left of all
+      those properties.
+    </p>
+    <img src="Screenshots/Reference/example_06.png">
+    <p>
+      Only the Name and Hostname/IP properties are left over, everything else will be
+      inherited from the parent folder.
+    </p>
+    <p>
+      Of course you can also only let some of the properties be inherited. Just play
+      around with this a bit and you'll get the hang of it.
+    </p>
+  </body>
+</html>

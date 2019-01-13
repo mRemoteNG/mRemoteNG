@@ -31,6 +31,16 @@ using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -597,6 +607,9 @@ namespace mRemoteNG.UI.Forms
 			{
 				titleBuilder.Append(separator);
 				titleBuilder.Append(SelectedConnection.Name);
+
+                if (Settings.Default.TrackActiveConnectionInConnectionTree)
+                    Windows.TreeForm.JumpToNode(SelectedConnection);
 			}
 
             Text = titleBuilder.ToString();

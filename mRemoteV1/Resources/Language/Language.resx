@@ -2740,4 +2740,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strPortScanSinglePort" xml:space="preserve">
     <value>To scan a single port, select the "First Port" only.</value>
   </data>
+  <data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Track active connection in the connection tree</value>
+  </data>
 </root>

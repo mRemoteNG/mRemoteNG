@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Controls
 
         private static Bitmap Overlay(Icon background, Image foreground)
         {
-            var result = background.ToBitmap();
+            var result = new Bitmap(background.ToBitmap(), new Size(16, 16));
             using (var gr = Graphics.FromImage(result))
             {
                 gr.DrawImage(foreground, new Rectangle(0, 0, foreground.Width, foreground.Height));
