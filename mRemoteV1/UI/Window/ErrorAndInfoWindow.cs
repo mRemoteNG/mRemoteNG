@@ -9,6 +9,7 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
+using Message = mRemoteNG.Messages.Message;
 
 namespace mRemoteNG.UI.Window
 {
@@ -305,8 +306,7 @@ namespace mRemoteNG.UI.Window
 
 			    foreach (ListViewItem item in items)
 				{
-					var message = item.Tag as Messages.Message;
-					if (message == null)
+                    if (!(item.Tag is Message message))
 					{
 						continue;
 					}

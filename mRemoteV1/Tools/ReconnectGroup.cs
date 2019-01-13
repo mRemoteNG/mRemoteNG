@@ -12,11 +12,8 @@ namespace mRemoteNG.Tools
 		private bool _ServerReady;
         public bool ServerReady
 		{
-			get
-			{
-				return _ServerReady;
-			}
-			set
+			get => _ServerReady;
+            set
 			{
 			    SetStatusImage(value ? Resources.HostStatus_On : Resources.HostStatus_Off);
 
@@ -46,11 +43,8 @@ namespace mRemoteNG.Tools
 		private bool _ReconnectWhenReady;
         public bool ReconnectWhenReady
 		{
-			get
-			{
-				return _ReconnectWhenReady;
-			}
-			set
+			get => _ReconnectWhenReady;
+            set
 			{
 				_ReconnectWhenReady = value;
 				SetCheckbox(value);
@@ -76,15 +70,9 @@ namespace mRemoteNG.Tools
 		
 		public event CloseClickedEventHandler CloseClicked
 		{
-			add
-			{
-				CloseClickedEvent = (CloseClickedEventHandler) Delegate.Combine(CloseClickedEvent, value);
-			}
-			remove
-			{
-				CloseClickedEvent = (CloseClickedEventHandler) Delegate.Remove(CloseClickedEvent, value);
-			}
-		}
+			add => CloseClickedEvent = (CloseClickedEventHandler) Delegate.Combine(CloseClickedEvent, value);
+            remove => CloseClickedEvent = (CloseClickedEventHandler) Delegate.Remove(CloseClickedEvent, value);
+        }
 
 
 	    private void btnClose_Click(object sender, EventArgs e)

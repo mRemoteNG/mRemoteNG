@@ -59,6 +59,7 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(446, 362);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.tsMain);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::mRemoteNG.Resources.UVNC_SC_Icon;
             this.Name = "UltraVNCWindow";
             this.TabText = "UltraVNC SC";

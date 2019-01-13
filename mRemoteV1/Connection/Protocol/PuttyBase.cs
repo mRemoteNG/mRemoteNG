@@ -193,8 +193,8 @@ namespace mRemoteNG.Connection.Protocol
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyFocusFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
-		public override void Resize(object sender, EventArgs e)
+
+        protected override void Resize(object sender, EventArgs e)
 		{
 			try
 			{

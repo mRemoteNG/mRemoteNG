@@ -158,8 +158,7 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenViewJumpToConnectionsConfig.Image = Resources.Root;
             _mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
-            _mMenViewJumpToConnectionsConfig.ShortcutKeys = ((Keys)(((Keys.Control | Keys.Alt)
-            | Keys.C)));
+            _mMenViewJumpToConnectionsConfig.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
             _mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(258, 22);
             _mMenViewJumpToConnectionsConfig.Text = Language.strMenuConnectionsAndConfig;
             _mMenViewJumpToConnectionsConfig.Click += mMenViewJumpToConnectionsConfig_Click;
@@ -168,8 +167,7 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenViewJumpToErrorsInfos.Image = Resources.InformationSmall;
             _mMenViewJumpToErrorsInfos.Name = "mMenViewJumpToErrorsInfos";
-            _mMenViewJumpToErrorsInfos.ShortcutKeys = ((Keys)(((Keys.Control | Keys.Alt)
-            | Keys.E)));
+            _mMenViewJumpToErrorsInfos.ShortcutKeys = Keys.Control | Keys.Alt | Keys.E;
             _mMenViewJumpToErrorsInfos.Size = new System.Drawing.Size(258, 22);
             _mMenViewJumpToErrorsInfos.Text = Language.strMenuNotifications;
             _mMenViewJumpToErrorsInfos.Click += mMenViewJumpToErrorsInfos_Click;

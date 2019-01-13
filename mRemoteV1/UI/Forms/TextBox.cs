@@ -13,28 +13,20 @@ namespace mRemoteNG.UI.Forms
 			DefaultValue(false)]private bool _SelectAllOnFocus;
         public bool SelectAllOnFocus
 		{
-			get
-			{
-				return _SelectAllOnFocus;
-			}
-			set
-			{
-				_SelectAllOnFocus = value;
-			}
-		}
+			get => _SelectAllOnFocus;
+            set => _SelectAllOnFocus = value;
+        }
         #endregion
 			
         #region Protected Methods
 		protected override void OnEnter(EventArgs e)
 		{
 			base.OnEnter(e);
-				
-			if (MouseButtons == MouseButtons.None)
-			{
-				SelectAll();
-				_focusHandled = true;
-			}
-		}
+
+            if (MouseButtons != MouseButtons.None) return;
+            SelectAll();
+            _focusHandled = true;
+        }
 			
 		protected override void OnLeave(EventArgs e)
 		{
@@ -46,20 +38,29 @@ namespace mRemoteNG.UI.Forms
 		protected override void OnMouseUp(MouseEventArgs e)
 		{
 			base.OnMouseUp(e);
-				
-			if (!_focusHandled)
-			{
-				if (SelectionLength == 0)
-				{
-					SelectAll();
-				}
-				_focusHandled = true;
-			}
-		}
+
+            if (_focusHandled) return;
+            if (SelectionLength == 0)
+            {
+                SelectAll();
+            }
+            _focusHandled = true;
+        }
         #endregion
 			
         #region Private Fields
 		private bool _focusHandled;
         #endregion
-	}
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // TextBox
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResumeLayout(false);
+
+        }
+    }
 }

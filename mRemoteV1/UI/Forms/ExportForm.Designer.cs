@@ -63,7 +63,7 @@ namespace mRemoteNG.UI.Forms
             this.lblUncheckProperties.AutoSize = true;
             this.lblUncheckProperties.Location = new System.Drawing.Point(12, 134);
             this.lblUncheckProperties.Name = "lblUncheckProperties";
-            this.lblUncheckProperties.Size = new System.Drawing.Size(244, 13);
+            this.lblUncheckProperties.Size = new System.Drawing.Size(264, 13);
             this.lblUncheckProperties.TabIndex = 4;
             this.lblUncheckProperties.Text = "Uncheck the properties you want not to be saved!";
             // 
@@ -75,7 +75,7 @@ namespace mRemoteNG.UI.Forms
             this.chkUsername.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkUsername.Location = new System.Drawing.Point(15, 32);
             this.chkUsername.Name = "chkUsername";
-            this.chkUsername.Size = new System.Drawing.Size(74, 17);
+            this.chkUsername.Size = new System.Drawing.Size(77, 17);
             this.chkUsername.TabIndex = 0;
             this.chkUsername.Text = "Username";
             this.chkUsername.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@ namespace mRemoteNG.UI.Forms
             this.chkPassword.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPassword.Location = new System.Drawing.Point(15, 55);
             this.chkPassword.Name = "chkPassword";
-            this.chkPassword.Size = new System.Drawing.Size(72, 17);
+            this.chkPassword.Size = new System.Drawing.Size(75, 17);
             this.chkPassword.TabIndex = 1;
             this.chkPassword.Text = "Password";
             this.chkPassword.UseVisualStyleBackColor = true;
@@ -101,7 +101,7 @@ namespace mRemoteNG.UI.Forms
             this.chkDomain.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDomain.Location = new System.Drawing.Point(15, 78);
             this.chkDomain.Name = "chkDomain";
-            this.chkDomain.Size = new System.Drawing.Size(62, 17);
+            this.chkDomain.Size = new System.Drawing.Size(66, 17);
             this.chkDomain.TabIndex = 2;
             this.chkDomain.Text = "Domain";
             this.chkDomain.UseVisualStyleBackColor = true;
@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Forms
             this.chkInheritance.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkInheritance.Location = new System.Drawing.Point(15, 101);
             this.chkInheritance.Name = "chkInheritance";
-            this.chkInheritance.Size = new System.Drawing.Size(79, 17);
+            this.chkInheritance.Size = new System.Drawing.Size(84, 17);
             this.chkInheritance.TabIndex = 3;
             this.chkInheritance.Text = "Inheritance";
             this.chkInheritance.UseVisualStyleBackColor = true;
@@ -124,7 +124,7 @@ namespace mRemoteNG.UI.Forms
             this.txtFileName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFileName.Location = new System.Drawing.Point(15, 47);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(396, 20);
+            this.txtFileName.Size = new System.Drawing.Size(396, 22);
             this.txtFileName.TabIndex = 1;
             this.txtFileName.TextChanged += new System.EventHandler(this.txtFileName_TextChanged);
             // 
@@ -162,7 +162,7 @@ namespace mRemoteNG.UI.Forms
             this.chkAssignedCredential.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAssignedCredential.Location = new System.Drawing.Point(143, 32);
             this.chkAssignedCredential.Name = "chkAssignedCredential";
-            this.chkAssignedCredential.Size = new System.Drawing.Size(119, 17);
+            this.chkAssignedCredential.Size = new System.Drawing.Size(129, 17);
             this.chkAssignedCredential.TabIndex = 5;
             this.chkAssignedCredential.Text = "Assigned Credential";
             this.chkAssignedCredential.UseVisualStyleBackColor = true;
@@ -187,7 +187,7 @@ namespace mRemoteNG.UI.Forms
             this.lblFileFormat.AutoSize = true;
             this.lblFileFormat.Location = new System.Drawing.Point(12, 80);
             this.lblFileFormat.Name = "lblFileFormat";
-            this.lblFileFormat.Size = new System.Drawing.Size(61, 13);
+            this.lblFileFormat.Size = new System.Drawing.Size(67, 13);
             this.lblFileFormat.TabIndex = 3;
             this.lblFileFormat.Text = "File &Format:";
             // 
@@ -196,7 +196,7 @@ namespace mRemoteNG.UI.Forms
             this.lblFileName.AutoSize = true;
             this.lblFileName.Location = new System.Drawing.Point(12, 28);
             this.lblFileName.Name = "lblFileName";
-            this.lblFileName.Size = new System.Drawing.Size(52, 13);
+            this.lblFileName.Size = new System.Drawing.Size(56, 13);
             this.lblFileName.TabIndex = 0;
             this.lblFileName.Text = "Filename:";
             // 
@@ -230,7 +230,7 @@ namespace mRemoteNG.UI.Forms
             this.lblSelectedConnection.AutoSize = true;
             this.lblSelectedConnection.Location = new System.Drawing.Point(48, 111);
             this.lblSelectedConnection.Name = "lblSelectedConnection";
-            this.lblSelectedConnection.Size = new System.Drawing.Size(92, 13);
+            this.lblSelectedConnection.Size = new System.Drawing.Size(99, 13);
             this.lblSelectedConnection.TabIndex = 4;
             this.lblSelectedConnection.Text = "Connection Name";
             // 
@@ -239,7 +239,7 @@ namespace mRemoteNG.UI.Forms
             this.lblSelectedFolder.AutoSize = true;
             this.lblSelectedFolder.Location = new System.Drawing.Point(48, 75);
             this.lblSelectedFolder.Name = "lblSelectedFolder";
-            this.lblSelectedFolder.Size = new System.Drawing.Size(67, 13);
+            this.lblSelectedFolder.Size = new System.Drawing.Size(72, 13);
             this.lblSelectedFolder.TabIndex = 3;
             this.lblSelectedFolder.Text = "Folder Name";
             // 
@@ -249,7 +249,7 @@ namespace mRemoteNG.UI.Forms
             this.rdoExportSelectedConnection.BackColor = System.Drawing.Color.Transparent;
             this.rdoExportSelectedConnection.Location = new System.Drawing.Point(15, 91);
             this.rdoExportSelectedConnection.Name = "rdoExportSelectedConnection";
-            this.rdoExportSelectedConnection.Size = new System.Drawing.Size(215, 17);
+            this.rdoExportSelectedConnection.Size = new System.Drawing.Size(232, 17);
             this.rdoExportSelectedConnection.TabIndex = 2;
             this.rdoExportSelectedConnection.TabStop = true;
             this.rdoExportSelectedConnection.Text = "Export the currently selected connection";
@@ -261,7 +261,7 @@ namespace mRemoteNG.UI.Forms
             this.rdoExportSelectedFolder.BackColor = System.Drawing.Color.Transparent;
             this.rdoExportSelectedFolder.Location = new System.Drawing.Point(15, 55);
             this.rdoExportSelectedFolder.Name = "rdoExportSelectedFolder";
-            this.rdoExportSelectedFolder.Size = new System.Drawing.Size(188, 17);
+            this.rdoExportSelectedFolder.Size = new System.Drawing.Size(205, 17);
             this.rdoExportSelectedFolder.TabIndex = 1;
             this.rdoExportSelectedFolder.TabStop = true;
             this.rdoExportSelectedFolder.Text = "Export the currently selected folder";
@@ -274,7 +274,7 @@ namespace mRemoteNG.UI.Forms
             this.rdoExportEverything.Checked = true;
             this.rdoExportEverything.Location = new System.Drawing.Point(15, 32);
             this.rdoExportEverything.Name = "rdoExportEverything";
-            this.rdoExportEverything.Size = new System.Drawing.Size(107, 17);
+            this.rdoExportEverything.Size = new System.Drawing.Size(115, 17);
             this.rdoExportEverything.TabIndex = 0;
             this.rdoExportEverything.TabStop = true;
             this.rdoExportEverything.Text = "Export everything";
@@ -292,6 +292,7 @@ namespace mRemoteNG.UI.Forms
             this.Controls.Add(this.grpProperties);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = global::mRemoteNG.Resources.ConnectionsSaveAs_Icon;
             this.MaximizeBox = false;

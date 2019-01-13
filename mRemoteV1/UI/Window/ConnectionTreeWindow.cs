@@ -59,10 +59,7 @@ namespace mRemoteNG.UI.Window
 
         private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
         {
-            if (placeSearchBarAboveConnectionTree)
-                tableLayoutPanel1.Dock = DockStyle.Top;
-            else
-                tableLayoutPanel1.Dock = DockStyle.Bottom;
+            tableLayoutPanel1.Dock = placeSearchBarAboveConnectionTree ? DockStyle.Top : DockStyle.Bottom;
         }
 
 
@@ -219,29 +216,32 @@ namespace mRemoteNG.UI.Window
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
 		{
 			try
-			{
-				if (e.KeyCode == Keys.Escape)
-				{
-					e.Handled = true;
-				    olvConnections.Focus();
-				}
-				else if (e.KeyCode == Keys.Up)
-				{
-                    var match = olvConnections.NodeSearcher.PreviousMatch();
-                    JumpToNode(match);
-                    e.Handled = true;
-				}
-				else if (e.KeyCode == Keys.Down)
-				{
-				    var match = olvConnections.NodeSearcher.NextMatch();
-				    JumpToNode(match);
-                    e.Handled = true;
-				}
-				else
-				{
-					tvConnections_KeyDown(sender, e);
-				}
-			}
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        e.Handled = true;
+                        olvConnections.Focus();
+                        break;
+                    case Keys.Up:
+                    {
+                        var match = olvConnections.NodeSearcher.PreviousMatch();
+                        JumpToNode(match);
+                        e.Handled = true;
+                        break;
+                    }
+                    case Keys.Down:
+                    {
+                        var match = olvConnections.NodeSearcher.NextMatch();
+                        JumpToNode(match);
+                        e.Handled = true;
+                        break;
+                    }
+                    default:
+                        tvConnections_KeyDown(sender, e);
+                        break;
+                }
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace("txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
@@ -272,7 +272,7 @@ namespace mRemoteNG.UI.Window
 	        }
         }
 
-	    private void JumpToNode(ConnectionInfo connectionInfo)
+	    public void JumpToNode(ConnectionInfo connectionInfo)
 	    {
 	        if (connectionInfo == null)
 	        {

@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.objectListView1 = new Base.NGListView();
-            this.olvColumnCredentialId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.objectListView1 = new mRemoteNG.UI.Controls.Base.NGListView();
             this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnRepositorySource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnCredentialId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnRepositoryTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnRepositorySource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,6 +55,7 @@
             this.objectListView1.CopySelectionOnControlC = false;
             this.objectListView1.CopySelectionOnControlCUsesDragSource = false;
             this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.objectListView1.DecorateLines = true;
             this.objectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.objectListView1.FullRowSelect = true;
             this.objectListView1.HideSelection = false;
@@ -67,14 +68,6 @@
             this.objectListView1.UseCompatibleStateImageBehavior = false;
             this.objectListView1.UseNotifyPropertyChanged = true;
             this.objectListView1.View = System.Windows.Forms.View.Details;
-            // 
-            // olvColumnCredentialId
-            // 
-            this.olvColumnCredentialId.AspectName = "";
-            this.olvColumnCredentialId.DisplayIndex = 0;
-            this.olvColumnCredentialId.IsEditable = false;
-            this.olvColumnCredentialId.IsVisible = false;
-            this.olvColumnCredentialId.Text = "Credential ID";
             // 
             // olvColumnTitle
             // 
@@ -92,21 +85,30 @@
             this.olvColumnDomain.AspectName = "";
             this.olvColumnDomain.Text = "Domain";
             // 
+            // olvColumnCredentialId
+            // 
+            this.olvColumnCredentialId.AspectName = "";
+            this.olvColumnCredentialId.DisplayIndex = 0;
+            this.olvColumnCredentialId.IsEditable = false;
+            this.olvColumnCredentialId.IsVisible = false;
+            this.olvColumnCredentialId.Text = "Credential ID";
+            // 
+            // olvColumnRepositoryTitle
+            // 
+            this.olvColumnRepositoryTitle.Text = "Repository Title";
+            // 
             // olvColumnRepositorySource
             // 
             this.olvColumnRepositorySource.DisplayIndex = 4;
             this.olvColumnRepositorySource.IsVisible = false;
             this.olvColumnRepositorySource.Text = "Source";
             // 
-            // olvColumnRepositoryTitle
-            // 
-            this.olvColumnRepositoryTitle.Text = "Repository Title";
-            // 
             // CredentialRecordListView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.objectListView1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CredentialRecordListView";
             this.Size = new System.Drawing.Size(367, 204);
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();

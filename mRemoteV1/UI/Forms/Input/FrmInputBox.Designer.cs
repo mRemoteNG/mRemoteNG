@@ -87,7 +87,7 @@
             this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox.Location = new System.Drawing.Point(3, 27);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(278, 20);
+            this.textBox.Size = new System.Drawing.Size(278, 22);
             this.textBox.TabIndex = 2;
             // 
             // label
@@ -110,6 +110,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
