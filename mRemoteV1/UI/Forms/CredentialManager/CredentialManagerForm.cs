@@ -47,6 +47,13 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             ShowPage(_credentialListPage);
         }
 
+        private void ApplyLanguage()
+        {
+            Text = Language.strCredentialManager;
+            buttonClose.Text = Language.strButtonClose;
+        }
+
+        #region Cred Repo Listview
         private void SetupListView()
         {
             var display = new DisplayProperties();
@@ -73,16 +80,6 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             _credentialService.RepositoryList.RepositoriesUpdated += RepositoryListOnRepositoriesUpdated;
         }
 
-        private void ShowPage(Control page)
-        {
-            if (page == null)
-                return;
-
-            panelMain.Controls.Clear();
-            panelMain.Controls.Add(page);
-            page.Dock = DockStyle.Fill;
-        }
-
         private object ImageGetter(object rowObject)
         {
             if (!(rowObject is ICredentialRepository repository))
@@ -92,26 +89,6 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             return _repoImageList.Images.ContainsKey(key) 
                 ? _repoImageList.Images[key] 
                 : null;
-        }
-
-        private void ApplyTheme()
-        {
-            if (!_themeManager.ThemingActive)
-                return;
-
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-        }
-
-        private void ApplyLanguage()
-        {
-            Text = Language.strCredentialManager;
-            buttonClose.Text = Language.strButtonClose;
-        }
-
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void olvCredRepos_FormatRow(object sender, FormatRowEventArgs e)
@@ -135,6 +112,31 @@ namespace mRemoteNG.UI.Forms.CredentialManager
 
             var imgDecoration = new ImageDecoration(_buttonImages.Images["Locked"], ContentAlignment.MiddleRight);
             e.Item.Decorations.Add(imgDecoration);
+        }
+        #endregion
+
+        private void ShowPage(Control page)
+        {
+            if (page == null)
+                return;
+
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(page);
+            page.Dock = DockStyle.Fill;
+        }
+
+        private void ApplyTheme()
+        {
+            if (!_themeManager.ThemingActive)
+                return;
+
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void btnAddRepo_Click(object sender, EventArgs e)
@@ -187,18 +189,14 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         private void UpdateUi()
         {
             var selectedRepository = olvCredRepos.SelectedObject as ICredentialRepository;
-            btnRemoveRepo.Enabled = selectedRepository != null;
-            btnEditRepo.Enabled = selectedRepository != null;
-            btnToggleUnlock.Enabled = selectedRepository != null;
-            UpdateLoadToggleButton(selectedRepository);
-        }
+            var repoIsSelected = selectedRepository != null;
 
-        private void UpdateLoadToggleButton(ICredentialRepository selectedRepository)
-        {
-            if (selectedRepository == null)
-                return;
+            btnRemoveRepo.Enabled = repoIsSelected;
+            btnEditRepo.Enabled = repoIsSelected;
+            btnToggleUnlock.Enabled = repoIsSelected;
 
-            btnToggleUnlock.Text = selectedRepository.IsLoaded ? "Lock" : "Unlock";
+            if (repoIsSelected)
+                btnToggleUnlock.Text = selectedRepository.IsLoaded ? "Lock" : "Unlock";
         }
 
         /// <summary>
