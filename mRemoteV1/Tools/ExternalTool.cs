@@ -14,7 +14,7 @@ namespace mRemoteNG.Tools
 {
 	public class ExternalTool : INotifyPropertyChanged
 	{
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator(Runtime.CredentialService);
 	    private string _displayName;
 	    private string _fileName;
 	    private bool _waitForExit;

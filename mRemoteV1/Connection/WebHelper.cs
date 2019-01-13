@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Connection.Protocol;
+﻿using mRemoteNG.App;
+using mRemoteNG.Connection.Protocol;
 
 namespace mRemoteNG.Connection
 {
@@ -16,7 +17,7 @@ namespace mRemoteNG.Connection
             if (string.IsNullOrEmpty(connectionInfo.Panel))
                 connectionInfo.Panel = Language.strGeneral;
             connectionInfo.IsQuickConnect = true;
-            var connectionInitiator = new ConnectionInitiator();
+            var connectionInitiator = new ConnectionInitiator(Runtime.CredentialService);
             connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
         }
     }

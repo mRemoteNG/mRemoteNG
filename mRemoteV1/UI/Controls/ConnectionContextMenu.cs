@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Controls
         public ConnectionContextMenu(ConnectionTree connectionTree)
         {
             _connectionTree = connectionTree;
-            _connectionInitiator = new ConnectionInitiator();
+            _connectionInitiator = new ConnectionInitiator(Runtime.CredentialService);
             InitializeComponent();
             ApplyLanguage(); 
             EnableShortcutKeys();

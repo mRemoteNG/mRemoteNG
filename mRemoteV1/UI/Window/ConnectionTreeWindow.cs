@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionTreeWindow
 	{
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator(Runtime.CredentialService);
 		private ThemeManager _themeManager;
 
 		public ConnectionInfo SelectedNode => olvConnections.SelectedNode;

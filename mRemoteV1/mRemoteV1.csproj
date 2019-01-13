@@ -106,9 +106,7 @@
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Credential\Records\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
@@ -248,7 +246,9 @@
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
-    <Compile Include="Credential\PlaceholderCredentialRecord.cs" />
+    <Compile Include="Credential\Records\NullCredentialRecord.cs" />
+    <Compile Include="Credential\Records\UnavailableCredentialRecord.cs" />
+    <Compile Include="Credential\Records\WindowsDefaultCredentialRecord.cs" />
     <Compile Include="Credential\Repositories\CompositeRepositoryUnlocker.cs" />
     <Compile Include="Credential\CredentialChangedEventArgs.cs" />
     <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
@@ -282,7 +282,7 @@
     <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
     <Compile Include="Credential\Repositories\CredentialRepositoryChangedArgs.cs" />
     <Compile Include="Credential\Repositories\CredentialRepositoryList.cs" />
-    <Compile Include="Credential\CredentialRecord.cs" />
+    <Compile Include="Credential\Records\CredentialRecord.cs" />
     <Compile Include="Credential\CredentialRecordTypeConverter.cs" />
     <Compile Include="Credential\Repositories\CredentialRepositoryConfig.cs" />
     <Compile Include="Credential\ICredentialRecord.cs" />

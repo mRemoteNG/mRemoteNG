@@ -10,6 +10,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Security;
@@ -453,58 +454,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					return;
 				}
 
-			    var userName = _connectionInfo?.CredentialRecord.Username ?? "";
-			    var password = _connectionInfo?.CredentialRecord.Password?.ConvertToUnsecureString() ?? "";
-			    var domain = _connectionInfo?.CredentialRecord.Domain ?? "";
-						
-				if (string.IsNullOrEmpty(userName))
-				{
-					if (Settings.Default.EmptyCredentials == "windows")
-					{
-						_rdpClient.UserName = Environment.UserName;
-					}
-					else if (Settings.Default.EmptyCredentials == "custom")
-					{
-						_rdpClient.UserName = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Username;
-					}
-				}
-				else
-				{
-					_rdpClient.UserName = userName;
-				}
-						
-				if (string.IsNullOrEmpty(password))
-				{
-					if (Settings.Default.EmptyCredentials == "custom")
-					{
-					    var p = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Password;
+			    var cred = Runtime.CredentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId
+			        .FirstOrDefault());
 
-                        if (p.Length > 0)
-						{
-                            _rdpClient.AdvancedSettings2.ClearTextPassword = p.ConvertToUnsecureString();
-						}
-					}
-				}
-				else
-				{
-					_rdpClient.AdvancedSettings2.ClearTextPassword = password;
-				}
-						
-				if (string.IsNullOrEmpty(domain))
-				{
-					if (Settings.Default.EmptyCredentials == "windows")
-					{
-						_rdpClient.Domain = Environment.UserDomainName;
-					}
-					else if (Settings.Default.EmptyCredentials == "custom")
-					{
-						_rdpClient.Domain = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Domain;
-					}
-				}
-				else
-				{
-					_rdpClient.Domain = domain;
-				}
+                _rdpClient.UserName = cred.Username ?? "";
+			    _rdpClient.AdvancedSettings2.ClearTextPassword = cred.Password?.ConvertToUnsecureString() ?? "";
+			    _rdpClient.Domain = cred.Domain ?? "";
 			}
 			catch (Exception ex)
 			{

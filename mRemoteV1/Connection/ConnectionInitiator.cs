@@ -8,6 +8,7 @@ using mRemoteNG.UI.Window;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using mRemoteNG.Credential;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
 
@@ -17,6 +18,12 @@ namespace mRemoteNG.Connection
     {
         private readonly PanelAdder _panelAdder = new PanelAdder();
         private readonly List<string> _activeConnections = new List<string>();
+        private readonly CredentialService _credentialService;
+
+        public ConnectionInitiator(CredentialService credentialService)
+        {
+            _credentialService = credentialService;
+        }
 
         /// <summary>
         /// List of unique IDs of the currently active connections

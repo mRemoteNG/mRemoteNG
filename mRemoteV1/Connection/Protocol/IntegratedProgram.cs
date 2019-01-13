@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 

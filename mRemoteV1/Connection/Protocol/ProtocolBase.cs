@@ -3,6 +3,7 @@ using mRemoteNG.Tools;
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Credential;
 
 
 namespace mRemoteNG.Connection.Protocol

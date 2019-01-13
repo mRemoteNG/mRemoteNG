@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Gecko;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
+using mRemoteNG.Credential;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
 namespace mRemoteNG.Connection.Protocol.Http

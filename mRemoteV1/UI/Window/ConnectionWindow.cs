@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionWindow : BaseWindow
     {
         public TabControl TabController;
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator(Runtime.CredentialService);
         private VisualStudioToolStripExtender vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
@@ -115,15 +115,18 @@ namespace mRemoteNG.UI.Window
 
                 if (Settings.Default.ShowLogonInfoOnTabs)
                 {
-                    nTab.Title += @" (";
-                    if (!string.IsNullOrEmpty(connectionInfo.CredentialRecord.Domain))
-                        nTab.Title += connectionInfo.CredentialRecord.Domain;
+                    var cred = Runtime.CredentialService.GetEffectiveCredentialRecord(connectionInfo.CredentialRecordId
+                        .FirstOrDefault());
 
-                    if (!string.IsNullOrEmpty(connectionInfo.CredentialRecord.Username))
+                    nTab.Title += @" (";
+                    if (!string.IsNullOrEmpty(cred.Domain))
+                        nTab.Title += cred.Domain;
+
+                    if (!string.IsNullOrEmpty(cred.Username))
                     {
-                        if (!string.IsNullOrEmpty(connectionInfo.CredentialRecord.Domain))
+                        if (!string.IsNullOrEmpty(cred.Domain))
                             nTab.Title += @"\";
-                        nTab.Title += connectionInfo.CredentialRecord.Username;
+                        nTab.Title += cred.Username;
                     }
 
                     nTab.Title += @")";

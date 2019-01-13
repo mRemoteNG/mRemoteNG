@@ -7,6 +7,7 @@ using mRemoteNG.UI;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
@@ -74,44 +75,16 @@ namespace mRemoteNG.Connection.Protocol
 							
 					if (PuttyProtocol == Putty_Protocol.ssh)
 					{
-						var username = "";
-						var password = "";
-
-						if (!(InterfaceControl.Info?.CredentialRecord is PlaceholderCredentialRecord))
-						{
-							username = InterfaceControl.Info.CredentialRecord.Username;
-						}
-						else
-						{
-						    // ReSharper disable once SwitchStatementMissingSomeCases
-						    switch (Settings.Default.EmptyCredentials)
-						    {
-						        case "windows":
-						            username = Environment.UserName;
-						            break;
-						        case "custom":
-						            username = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Username;
-						            break;
-						    }
-						}
-						
-						if (!(InterfaceControl.Info?.CredentialRecord is PlaceholderCredentialRecord))
-                        {
-							password = InterfaceControl.Info.Password;
-						}
-						else
-						{
-							if (Settings.Default.EmptyCredentials == "custom")
-							{
-                                password = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Password.ConvertToUnsecureString();
-
-							}
-						}
-						
 						arguments.Add("-" + (int)PuttySSHVersion);
-								
+						
 						if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials))
 						{
+						    var cred = Runtime.CredentialService.GetEffectiveCredentialRecord(InterfaceControl?.Info.CredentialRecordId
+						        .FirstOrDefault());
+
+						    var username = cred.Username;
+							var password = cred.Password.ConvertToUnsecureString();
+
 							if (!string.IsNullOrEmpty(username))
 							{
 								arguments.Add("-l", username);

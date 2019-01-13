@@ -1,34 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Security;
 
 namespace mRemoteNG.Credential
 {
-    public class PlaceholderCredentialRecord : ICredentialRecord
+    public class UnavailableCredentialRecord : ICredentialRecord
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public Guid Id { get; }
 
         [ReadOnly(true)]
         public string Title { get; set; } = Language.CredentialUnavailable;
 
         [ReadOnly(true)]
-        public string Username { get; set; } = Language.CredentialUnavailable;
+        public string Username { get; set; } = string.Empty;
 
         [ReadOnly(true)]
         public SecureString Password { get; set; } = new SecureString();
 
         [ReadOnly(true)]
-        public string Domain { get; set; } = Language.CredentialUnavailable;
+        public string Domain { get; set; } = string.Empty;
 
-        public PlaceholderCredentialRecord(IEnumerable<Guid> id)
+        public UnavailableCredentialRecord(Guid id)
         {
-            Id = id.FirstOrDefault();
+            Id = id;
         }
 
         public override string ToString() => Language.CredentialUnavailable;
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

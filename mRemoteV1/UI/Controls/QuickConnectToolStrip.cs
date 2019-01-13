@@ -21,7 +21,7 @@ namespace mRemoteNG.UI.Controls
         private ContextMenuStrip _mnuQuickConnectProtocol;
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
-        private IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private IConnectionInitiator _connectionInitiator = new ConnectionInitiator(Runtime.CredentialService);
         private ThemeManager _themeManager;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
         private readonly DisplayProperties _display;

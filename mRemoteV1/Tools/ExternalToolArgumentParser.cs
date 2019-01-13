@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Security;
@@ -159,7 +160,9 @@ namespace mRemoteNG.Tools
         private string GetVariableReplacement(string variable, string original)
         {
             var replacement = "";
-            if (_connectionInfo == null) return replacement;
+            if (_connectionInfo == null)
+                return replacement;
+
             switch (variable.ToLowerInvariant())
             {
                 case "name":
@@ -172,25 +175,16 @@ namespace mRemoteNG.Tools
                     replacement = Convert.ToString(_connectionInfo.Port);
                     break;
                 case "username":
-                    replacement = _connectionInfo.Username;
-                    if (string.IsNullOrEmpty(replacement))
-                        if (Settings.Default.EmptyCredentials == "windows")
-                            replacement = Environment.UserName;
-                        else if (Settings.Default.EmptyCredentials == "custom")
-                            replacement = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Username;
+                    replacement = Runtime.CredentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId
+                        .FirstOrDefault()).Username;
                     break;
                 case "password":
-                    replacement = _connectionInfo.Password;
-                    if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
-                        replacement = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Password.ConvertToUnsecureString();
+                    replacement = Runtime.CredentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId
+                        .FirstOrDefault()).Password.ConvertToUnsecureString();
                     break;
                 case "domain":
-                    replacement = _connectionInfo.Domain;
-                    if (string.IsNullOrEmpty(replacement))
-                        if (Settings.Default.EmptyCredentials == "windows")
-                            replacement = Environment.UserDomainName;
-                        else if (Settings.Default.EmptyCredentials == "custom")
-                            replacement = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Domain;
+                    replacement = Runtime.CredentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId
+                        .FirstOrDefault()).Domain;
                     break;
                 case "description":
                     replacement = _connectionInfo.Description;

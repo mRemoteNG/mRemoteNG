@@ -2,6 +2,7 @@
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Credential;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Window;

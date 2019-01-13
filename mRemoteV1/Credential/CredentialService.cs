@@ -67,6 +67,28 @@ namespace mRemoteNG.Credential
             return RepositoryList.GetCredentialRecord(id);
         }
 
+        public ICredentialRecord GetEffectiveCredentialRecord(Optional<Guid> id)
+        {
+            var desiredCredentialRecord = GetCredentialRecord(id.FirstOrDefault());
+            if (desiredCredentialRecord != null)
+                return desiredCredentialRecord;
+
+            if (Settings.Default.EmptyCredentials == "windows")
+                return new WindowsDefaultCredentialRecord();
+
+            if (Settings.Default.EmptyCredentials == "custom")
+            {
+                var cred = GetCredentialRecord(Settings.Default.DefaultCredentialRecord);
+                if (cred != null)
+                    return cred;
+            }
+
+            if (!id.Any() || id.FirstOrDefault() == Guid.Empty)
+                return new NullCredentialRecord();
+
+            return new UnavailableCredentialRecord(id.First());
+        }
+
         /// <summary>
         /// Registers an <see cref="ICredentialRepositoryFactory"/> for
         /// use throughout the application.

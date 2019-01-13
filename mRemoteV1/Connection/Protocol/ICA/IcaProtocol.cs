@@ -6,9 +6,11 @@ using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 
 
@@ -118,9 +120,12 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					return;
 				}
 
-			    var user = _info?.CredentialRecord.Username ?? "";
-			    var pass = _info?.CredentialRecord.Password?.ConvertToUnsecureString() ?? "";
-			    var dom = _info?.CredentialRecord.Domain ?? "";
+			    var cred = Runtime.CredentialService.GetEffectiveCredentialRecord(_info.CredentialRecordId
+			        .FirstOrDefault());
+
+                var user = cred.Username ?? "";
+			    var pass = cred.Password?.ConvertToUnsecureString() ?? "";
+			    var dom = cred.Domain ?? "";
 
 				if (string.IsNullOrEmpty(user))
 				{

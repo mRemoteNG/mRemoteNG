@@ -188,14 +188,18 @@ namespace mRemoteNG.Connection
         {
             get
             {
-                var credential = CredentialRecordId
-                    .Select(guid => Runtime.CredentialService.GetCredentialRecord(guid))
-                    .FirstOrDefault();
-                return credential ?? new PlaceholderCredentialRecord(CredentialRecordId);
-            }
+                if (!CredentialRecordId.Any() || CredentialRecordId.First().Equals(Guid.Empty))
+                    return new NullCredentialRecord();
 
+                var cred = Runtime.CredentialService.GetCredentialRecord(CredentialRecordId.FirstOrDefault());
+                if (cred == null)
+                    return new UnavailableCredentialRecord(CredentialRecordId.FirstOrDefault());
+
+                return cred;
+            }
             set => CredentialRecordId = Optional<Guid>.FromNullable(value?.Id);
         }
+
         #endregion
 
         #region Protocol

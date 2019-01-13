@@ -14,7 +14,7 @@ namespace mRemoteNG.Tools
         private readonly NotifyIcon _nI;
         private readonly ContextMenuStrip _cMen;
         private readonly ToolStripMenuItem _cMenCons;
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator(Runtime.CredentialService);
         private static readonly FrmMain FrmMain = FrmMain.Default;
 
         public bool Disposed { get; private set; }

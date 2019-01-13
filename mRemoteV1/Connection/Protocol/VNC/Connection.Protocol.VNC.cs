@@ -3,6 +3,8 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using System;
 using System.ComponentModel;
+using mRemoteNG.Credential;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 
