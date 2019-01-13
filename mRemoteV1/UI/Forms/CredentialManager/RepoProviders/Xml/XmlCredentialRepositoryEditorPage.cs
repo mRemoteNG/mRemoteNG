@@ -69,7 +69,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml
             }
 
             //RaiseNextPageEvent();
-            _pageWorkflowController.NextPage(_pageWorkflowController.StartPage);
+            _pageWorkflowController.ShowNextPage(_pageWorkflowController.StartPage);
         }
 
         private void AddNewRepo()
@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            _pageWorkflowController.PreviousPage();
+            _pageWorkflowController.ShowPreviousPage();
             //RaisePreviousPageEvent();
         }
     }

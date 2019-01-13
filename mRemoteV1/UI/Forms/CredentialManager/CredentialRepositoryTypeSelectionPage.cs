@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             var editorPage = BuildEditorPage(selection);
             //RaisePageReplacementEvent(editorPage, RelativePagePosition.NextPage);
             //RaiseNextPageEvent();
-            _pageWorkflowController.NextPage(editorPage);
+            _pageWorkflowController.ShowNextPage(editorPage);
         }
 
         private SequencedControl BuildEditorPage(ISelectionTarget<ICredentialRepositoryConfig> selection)
@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         private void buttonBack_Click(object sender, EventArgs e)
         {
             //RaisePreviousPageEvent();
-            _pageWorkflowController.PreviousPage();
+            _pageWorkflowController.ShowPreviousPage();
         }
     }
 }
