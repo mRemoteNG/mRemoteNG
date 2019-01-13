@@ -130,7 +130,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_icaClient.Username = Settings.Default.DefaultUsername;
+						_icaClient.Username = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Username;
 					}
 				}
 				else
@@ -142,10 +142,11 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				{
 					if (Settings.Default.EmptyCredentials == "custom")
 					{
-						if (Settings.Default.DefaultPassword != "")
+					    var p = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Password;
+
+                        if (p.Length > 0)
 						{
-                            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _icaClient.SetProp("ClearPassword", cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey));
+                            _icaClient.SetProp("ClearPassword", p.ConvertToUnsecureString());
 						}
 					}
 				}
@@ -162,7 +163,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_icaClient.Domain = Settings.Default.DefaultDomain;
+						_icaClient.Domain = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Domain;
 					}
 				}
 				else

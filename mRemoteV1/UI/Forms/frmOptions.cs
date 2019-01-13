@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.App;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -64,7 +65,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage {Dock = DockStyle.Fill}},
                 {typeof(NotificationsPage).Name, new NotificationsPage {Dock = DockStyle.Fill}},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage {Dock = DockStyle.Fill}},
-                {typeof(CredentialsPage).Name, new CredentialsPage {Dock = DockStyle.Fill}},
+                {typeof(CredentialsPage).Name, new CredentialsPage(Runtime.CredentialService) {Dock = DockStyle.Fill}},
                 {typeof(SqlServerPage).Name, new SqlServerPage {Dock = DockStyle.Fill}},
                 {typeof(UpdatesPage).Name, new UpdatesPage {Dock = DockStyle.Fill}},
                 {typeof(ThemePage).Name, new ThemePage {Dock = DockStyle.Fill}},

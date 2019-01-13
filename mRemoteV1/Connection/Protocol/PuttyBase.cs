@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -76,7 +77,7 @@ namespace mRemoteNG.Connection.Protocol
 						var username = "";
 						var password = "";
 
-						if (!string.IsNullOrEmpty(InterfaceControl.Info?.CredentialRecord.Username))
+						if (!(InterfaceControl.Info?.CredentialRecord is PlaceholderCredentialRecord))
 						{
 							username = InterfaceControl.Info.CredentialRecord.Username;
 						}
@@ -89,21 +90,21 @@ namespace mRemoteNG.Connection.Protocol
 						            username = Environment.UserName;
 						            break;
 						        case "custom":
-						            username = Settings.Default.DefaultUsername;
+						            username = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Username;
 						            break;
 						    }
 						}
 						
-						if (!string.IsNullOrEmpty(InterfaceControl.Info?.CredentialRecord.Password?.ConvertToUnsecureString()))
-						{
+						if (!(InterfaceControl.Info?.CredentialRecord is PlaceholderCredentialRecord))
+                        {
 							password = InterfaceControl.Info.Password;
 						}
 						else
 						{
 							if (Settings.Default.EmptyCredentials == "custom")
 							{
-                                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                                password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+                                password = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Password.ConvertToUnsecureString();
+
 							}
 						}
 						

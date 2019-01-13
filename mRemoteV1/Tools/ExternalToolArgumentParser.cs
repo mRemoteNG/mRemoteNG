@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools.Cmdline;
 
@@ -176,14 +177,12 @@ namespace mRemoteNG.Tools
                         if (Settings.Default.EmptyCredentials == "windows")
                             replacement = Environment.UserName;
                         else if (Settings.Default.EmptyCredentials == "custom")
-                            replacement = Settings.Default.DefaultUsername;
+                            replacement = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Username;
                     break;
                 case "password":
                     replacement = _connectionInfo.Password;
                     if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
-                        replacement = new LegacyRijndaelCryptographyProvider()
-                                        .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
-                                                                    Runtime.EncryptionKey);
+                        replacement = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Password.ConvertToUnsecureString();
                     break;
                 case "domain":
                     replacement = _connectionInfo.Domain;
@@ -191,7 +190,7 @@ namespace mRemoteNG.Tools
                         if (Settings.Default.EmptyCredentials == "windows")
                             replacement = Environment.UserDomainName;
                         else if (Settings.Default.EmptyCredentials == "custom")
-                            replacement = Settings.Default.DefaultDomain;
+                            replacement = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Domain;
                     break;
                 case "description":
                     replacement = _connectionInfo.Description;

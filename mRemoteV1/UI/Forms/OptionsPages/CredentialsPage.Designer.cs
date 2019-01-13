@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
+            this.credentialRecordComboBox1 = new mRemoteNG.UI.Controls.CredentialRecordComboBox();
             this.radCredentialsCustom = new mRemoteNG.UI.Controls.Base.NGRadioButton();
             this.lblDefaultCredentials = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.radCredentialsNoInfo = new mRemoteNG.UI.Controls.Base.NGRadioButton();
             this.radCredentialsWindows = new mRemoteNG.UI.Controls.Base.NGRadioButton();
-            this.txtCredentialsDomain = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCredentialsUsername = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.txtCredentialsPassword = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCredentialsPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.txtCredentialsUsername = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCredentialsDomain = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.checkBoxUnlockOnStartup = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.pnlDefaultCredentials.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDefaultCredentials
             // 
+            this.pnlDefaultCredentials.Controls.Add(this.credentialRecordComboBox1);
             this.pnlDefaultCredentials.Controls.Add(this.radCredentialsCustom);
             this.pnlDefaultCredentials.Controls.Add(this.lblDefaultCredentials);
             this.pnlDefaultCredentials.Controls.Add(this.radCredentialsNoInfo);
             this.pnlDefaultCredentials.Controls.Add(this.radCredentialsWindows);
-            this.pnlDefaultCredentials.Controls.Add(this.txtCredentialsDomain);
-            this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsUsername);
-            this.pnlDefaultCredentials.Controls.Add(this.txtCredentialsPassword);
-            this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsPassword);
-            this.pnlDefaultCredentials.Controls.Add(this.txtCredentialsUsername);
-            this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsDomain);
             this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 26);
             this.pnlDefaultCredentials.Name = "pnlDefaultCredentials";
-            this.pnlDefaultCredentials.Size = new System.Drawing.Size(604, 175);
+            this.pnlDefaultCredentials.Size = new System.Drawing.Size(604, 96);
             this.pnlDefaultCredentials.TabIndex = 0;
+            // 
+            // credentialRecordComboBox1
+            // 
+            this.credentialRecordComboBox1.CredentialRecords = null;
+            this.credentialRecordComboBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.credentialRecordComboBox1.FormattingEnabled = true;
+            this.credentialRecordComboBox1.Location = new System.Drawing.Point(107, 62);
+            this.credentialRecordComboBox1.Name = "credentialRecordComboBox1";
+            this.credentialRecordComboBox1.Size = new System.Drawing.Size(172, 21);
+            this.credentialRecordComboBox1.TabIndex = 2;
             // 
             // radCredentialsCustom
             // 
@@ -69,7 +69,6 @@
             this.radCredentialsCustom.TabIndex = 3;
             this.radCredentialsCustom.Text = "the following:";
             this.radCredentialsCustom.UseVisualStyleBackColor = true;
-            this.radCredentialsCustom.CheckedChanged += new System.EventHandler(this.radCredentialsCustom_CheckedChanged);
             // 
             // lblDefaultCredentials
             // 
@@ -101,64 +100,6 @@
             this.radCredentialsWindows.TabIndex = 2;
             this.radCredentialsWindows.Text = "my current credentials (windows logon info)";
             this.radCredentialsWindows.UseVisualStyleBackColor = true;
-            // 
-            // txtCredentialsDomain
-            // 
-            this.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCredentialsDomain.Enabled = false;
-            this.txtCredentialsDomain.Location = new System.Drawing.Point(126, 138);
-            this.txtCredentialsDomain.Name = "txtCredentialsDomain";
-            this.txtCredentialsDomain.Size = new System.Drawing.Size(150, 22);
-            this.txtCredentialsDomain.TabIndex = 9;
-            // 
-            // lblCredentialsUsername
-            // 
-            this.lblCredentialsUsername.Enabled = false;
-            this.lblCredentialsUsername.Location = new System.Drawing.Point(20, 88);
-            this.lblCredentialsUsername.Name = "lblCredentialsUsername";
-            this.lblCredentialsUsername.Size = new System.Drawing.Size(100, 13);
-            this.lblCredentialsUsername.TabIndex = 4;
-            this.lblCredentialsUsername.Text = "Username:";
-            this.lblCredentialsUsername.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // txtCredentialsPassword
-            // 
-            this.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCredentialsPassword.Enabled = false;
-            this.txtCredentialsPassword.Location = new System.Drawing.Point(126, 112);
-            this.txtCredentialsPassword.Name = "txtCredentialsPassword";
-            this.txtCredentialsPassword.Size = new System.Drawing.Size(150, 22);
-            this.txtCredentialsPassword.TabIndex = 7;
-            this.txtCredentialsPassword.UseSystemPasswordChar = true;
-            // 
-            // lblCredentialsPassword
-            // 
-            this.lblCredentialsPassword.Enabled = false;
-            this.lblCredentialsPassword.Location = new System.Drawing.Point(20, 115);
-            this.lblCredentialsPassword.Name = "lblCredentialsPassword";
-            this.lblCredentialsPassword.Size = new System.Drawing.Size(100, 13);
-            this.lblCredentialsPassword.TabIndex = 6;
-            this.lblCredentialsPassword.Text = "Password:";
-            this.lblCredentialsPassword.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // txtCredentialsUsername
-            // 
-            this.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCredentialsUsername.Enabled = false;
-            this.txtCredentialsUsername.Location = new System.Drawing.Point(126, 86);
-            this.txtCredentialsUsername.Name = "txtCredentialsUsername";
-            this.txtCredentialsUsername.Size = new System.Drawing.Size(150, 22);
-            this.txtCredentialsUsername.TabIndex = 5;
-            // 
-            // lblCredentialsDomain
-            // 
-            this.lblCredentialsDomain.Enabled = false;
-            this.lblCredentialsDomain.Location = new System.Drawing.Point(20, 142);
-            this.lblCredentialsDomain.Name = "lblCredentialsDomain";
-            this.lblCredentialsDomain.Size = new System.Drawing.Size(100, 13);
-            this.lblCredentialsDomain.TabIndex = 8;
-            this.lblCredentialsDomain.Text = "Domain:";
-            this.lblCredentialsDomain.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // checkBoxUnlockOnStartup
             // 
@@ -194,12 +135,7 @@
         internal Controls.Base.NGLabel lblDefaultCredentials;
         internal Controls.Base.NGRadioButton radCredentialsNoInfo;
         internal Controls.Base.NGRadioButton radCredentialsWindows;
-        internal Controls.Base.NGTextBox txtCredentialsDomain;
-        internal Controls.Base.NGLabel lblCredentialsUsername;
-        internal Controls.Base.NGTextBox txtCredentialsPassword;
-        internal Controls.Base.NGLabel lblCredentialsPassword;
-        internal Controls.Base.NGTextBox txtCredentialsUsername;
-        internal Controls.Base.NGLabel lblCredentialsDomain;
         private Controls.Base.NGCheckBox checkBoxUnlockOnStartup;
+        private Controls.CredentialRecordComboBox credentialRecordComboBox1;
     }
 }

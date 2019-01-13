@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using mRemoteNG.App;
+using mRemoteNG.Credential;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	public sealed partial class CredentialsPage : OptionsPage
-    {
-        public CredentialsPage()
+	{
+	    private readonly CredentialService _credentialService;
+
+        public CredentialsPage(CredentialService credentialService)
         {
+            _credentialService = credentialService;
             InitializeComponent();
             ApplyTheme();
             PageIcon = Resources.Key_Icon;
@@ -28,9 +33,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             radCredentialsNoInfo.Text = Language.strNoInformation;
             radCredentialsWindows.Text = Language.strMyCurrentWindowsCreds;
             radCredentialsCustom.Text = Language.strTheFollowing;
-            lblCredentialsUsername.Text = Language.strLabelUsername;
-            lblCredentialsPassword.Text = Language.strLabelPassword;
-            lblCredentialsDomain.Text = Language.strLabelDomain;
         }
 
         public override void LoadSettings()
@@ -53,10 +55,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
             }
 
-            txtCredentialsUsername.Text = Settings.Default.DefaultUsername;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
-            txtCredentialsDomain.Text = Settings.Default.DefaultDomain;
+            credentialRecordComboBox1.CredentialRecords = _credentialService.GetCredentialRecords();
+            credentialRecordComboBox1.SelectedItem = _credentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord);
         }
 
         public override void SaveSettings()
@@ -76,22 +76,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 Settings.Default.EmptyCredentials = "custom";
             }
 
-            Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
-            Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
+            Settings.Default.DefaultCredentialRecord = (credentialRecordComboBox1.SelectedItem as ICredentialRecord)?.Id ?? Guid.Empty;
 
             Settings.Default.Save();
-        }
-
-        private void radCredentialsCustom_CheckedChanged(object sender, EventArgs e)
-        {
-            lblCredentialsUsername.Enabled = radCredentialsCustom.Checked;
-            lblCredentialsPassword.Enabled = radCredentialsCustom.Checked;
-            lblCredentialsDomain.Enabled = radCredentialsCustom.Checked;
-            txtCredentialsUsername.Enabled = radCredentialsCustom.Checked;
-            txtCredentialsPassword.Enabled = radCredentialsCustom.Checked;
-            txtCredentialsDomain.Enabled = radCredentialsCustom.Checked;
         }
     }
 }

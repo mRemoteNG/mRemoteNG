@@ -465,7 +465,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_rdpClient.UserName = Settings.Default.DefaultUsername;
+						_rdpClient.UserName = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Username;
 					}
 				}
 				else
@@ -477,10 +477,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				{
 					if (Settings.Default.EmptyCredentials == "custom")
 					{
-						if (Settings.Default.DefaultPassword != "")
+					    var p = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Password;
+
+                        if (p.Length > 0)
 						{
-                            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+                            _rdpClient.AdvancedSettings2.ClearTextPassword = p.ConvertToUnsecureString();
 						}
 					}
 				}
@@ -497,7 +498,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					}
 					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_rdpClient.Domain = Settings.Default.DefaultDomain;
+						_rdpClient.Domain = Runtime.CredentialService.GetCredentialRecord(Settings.Default.DefaultCredentialRecord).Domain;
 					}
 				}
 				else

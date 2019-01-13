@@ -62,15 +62,6 @@
     <Setting Name="EmptyCredentials" Type="System.String" Scope="User">
       <Value Profile="(Default)">noinfo</Value>
     </Setting>
-    <Setting Name="DefaultUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DefaultPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DefaultDomain" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="UseCustomPuttyPath" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -691,6 +682,9 @@
     </Setting>
     <Setting Name="PlaceSearchBarAboveConnectionTree" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DefaultCredentialRecord" Type="System.Guid" Scope="User">
+      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

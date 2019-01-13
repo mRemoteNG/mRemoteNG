@@ -6,7 +6,17 @@ namespace mRemoteNG.UI.Controls
 {
     public partial class CredentialRecordComboBox : ComboBox
     {
-        public IEnumerable<ICredentialRecord> CredentialRecords { get; set; }
+        private IEnumerable<ICredentialRecord> _credentialRecords;
+
+        public IEnumerable<ICredentialRecord> CredentialRecords
+        {
+            get => _credentialRecords;
+            set
+            {
+                _credentialRecords = value;
+                PopulateItems(_credentialRecords);
+            }
+        }
 
         public CredentialRecordComboBox()
         {

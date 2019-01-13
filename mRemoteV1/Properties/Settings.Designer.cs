@@ -265,42 +265,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DefaultUsername {
-            get {
-                return ((string)(this["DefaultUsername"]));
-            }
-            set {
-                this["DefaultUsername"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DefaultPassword {
-            get {
-                return ((string)(this["DefaultPassword"]));
-            }
-            set {
-                this["DefaultPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DefaultDomain {
-            get {
-                return ((string)(this["DefaultDomain"]));
-            }
-            set {
-                this["DefaultDomain"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UseCustomPuttyPath {
             get {
@@ -2759,7 +2723,7 @@ namespace mRemoteNG {
             }
         }
         
-		[global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool TrackActiveConnectionInConnectionTree {
@@ -2770,7 +2734,7 @@ namespace mRemoteNG {
                 this["TrackActiveConnectionInConnectionTree"] = value;
             }
         }
-		
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -2780,6 +2744,18 @@ namespace mRemoteNG {
             }
             set {
                 this["PlaceSearchBarAboveConnectionTree"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public global::System.Guid DefaultCredentialRecord {
+            get {
+                return ((global::System.Guid)(this["DefaultCredentialRecord"]));
+            }
+            set {
+                this["DefaultCredentialRecord"] = value;
             }
         }
     }
