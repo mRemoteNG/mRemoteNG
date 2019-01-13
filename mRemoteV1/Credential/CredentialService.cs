@@ -67,6 +67,12 @@ namespace mRemoteNG.Credential
             return RepositoryList.GetCredentialRecord(id);
         }
 
+        /// <summary>
+        /// Returns the <see cref="ICredentialRepository"/> object to use, taking into account
+        /// any default or replacement credentials that may be used.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ICredentialRecord GetEffectiveCredentialRecord(Optional<Guid> id)
         {
             var desiredCredentialRecord = GetCredentialRecord(id.FirstOrDefault());
