@@ -50,7 +50,8 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         {
             var addRepoSequence = new PageSequence(Parent,
                 this,
-                new CredentialRepositoryTypeSelectionPage(_selectionTargets, _credentialService.RepositoryList) { Dock = DockStyle.Fill },
+                new CredentialRepositoryTypeSelectionPage(_selectionTargets, _credentialService.RepositoryList,
+                    null) { Dock = DockStyle.Fill },
                 new SequencedControl(),
                 this
             );
@@ -76,7 +77,9 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             if (!repositoryFactory.Any())
                 throw new CredentialRepositoryTypeNotSupportedException(repository.Config.TypeName);
 
-            var editorPage = new XmlCredentialRepositoryEditorPage(repository.Config, _credentialService.RepositoryList, repositoryFactory.First())
+            var editorPage = new XmlCredentialRepositoryEditorPage(repository.Config, 
+                _credentialService.RepositoryList, 
+                repositoryFactory.First(), null)
             {
                 Dock = DockStyle.Fill
             };

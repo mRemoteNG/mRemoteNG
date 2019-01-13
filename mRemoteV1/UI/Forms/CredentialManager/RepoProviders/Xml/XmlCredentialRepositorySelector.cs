@@ -15,21 +15,27 @@ namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml
 
         public string Text { get; set; } = "XML";
         public Image Image { get; } = Resources.xml;
-        public ICredentialRepositoryConfig Config { get; } = new CredentialRepositoryConfig {TypeName = "Xml"};
+        public ICredentialRepositoryConfig DefaultConfig { get; } = new CredentialRepositoryConfig {TypeName = "Xml"};
 
         public XmlCredentialRepositorySelector(CredentialService credentialService)
         {
             _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
         }
 
-        public SequencedControl BuildEditorPage(ICredentialRepositoryList repositoryList)
+        public SequencedControl BuildEditorPage(
+            Optional<ICredentialRepositoryConfig> config,
+            ICredentialRepositoryList repositoryList, 
+            PageWorkflowController pageWorkflowController)
         {
-            var repositoryFactory = _credentialService.GetRepositoryFactoryForConfig(Config);
+            var repositoryFactory = _credentialService.GetRepositoryFactoryForConfig(DefaultConfig);
 
             if (!repositoryFactory.Any())
-                throw new CredentialRepositoryTypeNotSupportedException(Config.TypeName);
+                throw new CredentialRepositoryTypeNotSupportedException(DefaultConfig.TypeName);
 
-            return new XmlCredentialRepositoryEditorPage(Config, repositoryList, repositoryFactory.First())
+            return new XmlCredentialRepositoryEditorPage(config.FirstOrDefault() ?? DefaultConfig, 
+                repositoryList, 
+                repositoryFactory.First(), 
+                pageWorkflowController)
             {
                 Dock = DockStyle.Fill
             };

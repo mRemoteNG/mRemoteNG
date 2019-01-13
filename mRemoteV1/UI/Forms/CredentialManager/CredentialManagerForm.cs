@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
+using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml;
 
@@ -19,6 +21,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         private ImageList _buttonImages;
         private readonly ISelectionTarget<ICredentialRepositoryConfig>[] _selectionTargets;
         private readonly UnlockerFormFactory _unlockerFactory;
+        private readonly CredentialListPage _credentialListPage;
 
         public CredentialManagerForm(CredentialService credentialService, UnlockerFormFactory unlockerFactory)
         {
@@ -35,13 +38,13 @@ namespace mRemoteNG.UI.Forms.CredentialManager
                 //new KeePassRepositorySelector()
             };
 
-            
-
-            SetupListView();
-            ShowPage(new CredentialListPage(credentialService.RepositoryList)
+            _credentialListPage = new CredentialListPage(credentialService.RepositoryList)
             {
                 DeletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MessageBox.Show)
-            });
+            };
+
+            SetupListView();
+            ShowPage(_credentialListPage);
         }
 
         private void SetupListView()
@@ -51,7 +54,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             {
                 ImageSize = new Size(display.ScaleWidth(16), display.ScaleHeight(16)),
             };
-            _selectionTargets.ForEach(t => _repoImageList.Images.Add(t.Config.TypeName, t.Image));
+            _selectionTargets.ForEach(t => _repoImageList.Images.Add(t.DefaultConfig.TypeName, t.Image));
 
             _buttonImages = new ImageList
             {
@@ -67,6 +70,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             olvCredRepos.SetObjects(_credentialService.RepositoryList);
             olvCredRepos.SelectedIndex = 0;
             olvCredRepos.SelectionChanged += (sender, args) => UpdateUi();
+            _credentialService.RepositoryList.RepositoriesUpdated += RepositoryListOnRepositoriesUpdated;
         }
 
         private void ShowPage(Control page)
@@ -135,16 +139,28 @@ namespace mRemoteNG.UI.Forms.CredentialManager
 
         private void btnAddRepo_Click(object sender, EventArgs e)
         {
+            var pageWorkflowController = new PageWorkflowController(ShowPage, _credentialListPage);
+            var repoTypeSelection = new CredentialRepositoryTypeSelectionPage(
+                _selectionTargets, 
+                _credentialService.RepositoryList,
+                pageWorkflowController);
+            
+            ShowPage(repoTypeSelection);
         }
 
         private void btnRemoveRepo_Click(object sender, EventArgs e)
         {
+            if (!(olvCredRepos.SelectedObject is ICredentialRepository selectedRepository))
+                return;
 
+            _credentialService.RemoveRepository(selectedRepository);
         }
 
         private void btnToggleUnlock_Click(object sender, EventArgs e)
         {
-            var selectedRepository = olvCredRepos.SelectedObject as ICredentialRepository;
+            if (!(olvCredRepos.SelectedObject is ICredentialRepository selectedRepository))
+                return;
+
             if (selectedRepository.IsLoaded)
                 selectedRepository.UnloadCredentials();
             else
@@ -156,7 +172,16 @@ namespace mRemoteNG.UI.Forms.CredentialManager
 
         private void btnEditRepo_Click(object sender, EventArgs e)
         {
-            
+            if (!(olvCredRepos.SelectedObject is ICredentialRepository selectedRepository))
+                return;
+
+            var pageWorkflowController = new PageWorkflowController(ShowPage, _credentialListPage);
+
+            var editorPage = _selectionTargets
+                .FirstOrDefault(t => t.DefaultConfig.TypeName.Equals(selectedRepository.Config.TypeName))?
+                .BuildEditorPage(selectedRepository.Config.ToOptional(), _credentialService.RepositoryList, pageWorkflowController);
+
+            ShowPage(editorPage);
         }
 
         private void UpdateUi()
@@ -174,6 +199,25 @@ namespace mRemoteNG.UI.Forms.CredentialManager
                 return;
 
             btnToggleUnlock.Text = selectedRepository.IsLoaded ? "Lock" : "Unlock";
+        }
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                components?.Dispose();
+                _credentialService.RepositoryList.RepositoriesUpdated -= RepositoryListOnRepositoriesUpdated;
+            }
+            base.Dispose(disposing);
+        }
+
+        private void RepositoryListOnRepositoriesUpdated(object sender, CollectionUpdatedEventArgs<ICredentialRepository> e)
+        {
+            olvCredRepos.SetObjects(_credentialService.RepositoryList, true);
         }
     }
 }

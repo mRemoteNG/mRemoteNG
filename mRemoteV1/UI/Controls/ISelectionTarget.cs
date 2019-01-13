@@ -1,6 +1,9 @@
 ﻿using System.Drawing;
 using mRemoteNG.Credential;
+using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls.PageSequence;
+using mRemoteNG.UI.Forms.CredentialManager;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -8,7 +11,10 @@ namespace mRemoteNG.UI.Controls
     {
         string Text { get; set; }
         Image Image { get; }
-        T Config { get; }
-        SequencedControl BuildEditorPage(ICredentialRepositoryList repositoryList);
+        T DefaultConfig { get; }
+        SequencedControl BuildEditorPage(
+            Optional<ICredentialRepositoryConfig> config,
+            ICredentialRepositoryList repositoryList, 
+            PageWorkflowController pageWorkflowController);
     }
 }

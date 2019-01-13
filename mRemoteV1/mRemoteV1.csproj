@@ -525,6 +525,7 @@
     <Compile Include="UI\Forms\CredentialManager\CredentialRepositoriesPage.Designer.cs">
       <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\CredentialManager\PageWorkflowController.cs" />
     <Compile Include="UI\Forms\CredentialManager\RepoProviders\Xml\XmlCredentialRepositoryEditorPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

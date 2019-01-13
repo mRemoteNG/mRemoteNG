@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.PageSequence;
 
@@ -10,9 +11,12 @@ namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.KeePass
     {
         public string Text { get; set; } = "KeePass";
         public Image Image { get; } = Resources.keepass_32x32;
-        public ICredentialRepositoryConfig Config { get; } = new CredentialRepositoryConfig {TypeName = "KeePass"};
+        public ICredentialRepositoryConfig DefaultConfig { get; } = new CredentialRepositoryConfig {TypeName = "KeePass"};
 
-        public SequencedControl BuildEditorPage(ICredentialRepositoryList repositoryList)
+        public SequencedControl BuildEditorPage(
+            Optional<ICredentialRepositoryConfig> config, 
+            ICredentialRepositoryList repositoryList, 
+            PageWorkflowController pageWorkflowController)
         {
             // TODO
             return new SequencedControl();

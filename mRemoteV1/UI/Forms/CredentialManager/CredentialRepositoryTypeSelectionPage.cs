@@ -12,13 +12,18 @@ namespace mRemoteNG.UI.Forms.CredentialManager
     public sealed partial class CredentialRepositoryTypeSelectionPage : SequencedControl
     {
         private readonly ICredentialRepositoryList _repositoryList;
+        private readonly PageWorkflowController _pageWorkflowController;
 
-        public CredentialRepositoryTypeSelectionPage(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, ICredentialRepositoryList repositoryList)
+        public CredentialRepositoryTypeSelectionPage(
+            IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets, 
+            ICredentialRepositoryList repositoryList,
+            PageWorkflowController pageWorkflowController)
         {
             if (selectionTargets == null)
                 throw new ArgumentNullException(nameof(selectionTargets));
 
             _repositoryList = repositoryList.ThrowIfNull(nameof(repositoryList));
+            _pageWorkflowController = pageWorkflowController.ThrowIfNull(nameof(pageWorkflowController));
             InitializeComponent();
             ApplyTheme();
             SetupListView(selectionTargets);
@@ -66,20 +71,22 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         private void NextPage(ISelectionTarget<ICredentialRepositoryConfig> selection)
         {
             var editorPage = BuildEditorPage(selection);
-            RaisePageReplacementEvent(editorPage, RelativePagePosition.NextPage);
-            RaiseNextPageEvent();
+            //RaisePageReplacementEvent(editorPage, RelativePagePosition.NextPage);
+            //RaiseNextPageEvent();
+            _pageWorkflowController.NextPage(editorPage);
         }
 
         private SequencedControl BuildEditorPage(ISelectionTarget<ICredentialRepositoryConfig> selection)
         {
-            var editorPage = selection.BuildEditorPage(_repositoryList);
+            var editorPage = selection.BuildEditorPage(Optional<ICredentialRepositoryConfig>.Empty, _repositoryList, _pageWorkflowController);
             editorPage.Dock = DockStyle.Fill;
             return editorPage;
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            RaisePreviousPageEvent();
+            //RaisePreviousPageEvent();
+            _pageWorkflowController.PreviousPage();
         }
     }
 }

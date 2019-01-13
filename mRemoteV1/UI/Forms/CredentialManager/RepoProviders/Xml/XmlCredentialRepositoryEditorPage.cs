@@ -12,20 +12,19 @@ namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml
         private readonly ICredentialRepositoryConfig _repositoryConfig;
         private readonly ICredentialRepositoryList _repositoryList;
         private readonly ICredentialRepositoryFactory _repositoryFactory;
+        private readonly PageWorkflowController _pageWorkflowController;
 
         public XmlCredentialRepositoryEditorPage(
             ICredentialRepositoryConfig repositoryConfig, 
             ICredentialRepositoryList repositoryList,
-            ICredentialRepositoryFactory repositoryFactory)
+            ICredentialRepositoryFactory repositoryFactory,
+            PageWorkflowController pageWorkflowController)
         {
-            if (repositoryConfig == null)
-                throw new ArgumentNullException(nameof(repositoryConfig));
-            if (repositoryList == null)
-                throw new ArgumentNullException(nameof(repositoryList));
-
-            _repositoryConfig = repositoryConfig;
-            _repositoryList = repositoryList;
+            _repositoryConfig = repositoryConfig.ThrowIfNull(nameof(repositoryConfig));
+            _repositoryList = repositoryList.ThrowIfNull(nameof(repositoryList));
             _repositoryFactory = repositoryFactory.ThrowIfNull(nameof(repositoryFactory));
+            _pageWorkflowController = pageWorkflowController.ThrowIfNull(nameof(pageWorkflowController));
+
             InitializeComponent();
             PopulateFields();
         }
@@ -69,7 +68,8 @@ namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml
                 AddNewRepo();
             }
 
-            RaiseNextPageEvent();
+            //RaiseNextPageEvent();
+            _pageWorkflowController.NextPage(_pageWorkflowController.StartPage);
         }
 
         private void AddNewRepo()
@@ -86,7 +86,8 @@ namespace mRemoteNG.UI.Forms.CredentialManager.RepoProviders.Xml
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            RaisePreviousPageEvent();
+            _pageWorkflowController.PreviousPage();
+            //RaisePreviousPageEvent();
         }
     }
 }
