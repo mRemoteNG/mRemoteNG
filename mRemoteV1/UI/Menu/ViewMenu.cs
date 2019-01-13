@@ -359,7 +359,14 @@ namespace mRemoteNG.UI.Menu
             content.Focus();
         }
 
-        private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e) => Windows.ErrorsForm.Activate();
+        private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
+        {
+            var content = Windows.ErrorsForm;
+            content.Activate();
+            if (content.Pane.IsAutoHide)
+                FrmMain.Default.pnlDock.ActiveAutoHideContent = content;
+            content.Focus();
+        }
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
         {
