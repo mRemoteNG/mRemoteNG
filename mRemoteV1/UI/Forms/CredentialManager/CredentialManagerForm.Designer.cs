@@ -19,13 +19,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialManagerForm));
             this.panelMain = new System.Windows.Forms.Panel();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.ngLabel1 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.olvCredRepos = new mRemoteNG.UI.Controls.Base.NGListView();
+            this.colCredRepoTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.btnEditRepo = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnToggleUnlock = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnRemoveRepo = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnAddRepo = new mRemoteNG.UI.Controls.Base.NGButton();
             this.buttonClose = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.olvCredRepos = new mRemoteNG.UI.Controls.Base.NGListView();
-            this.colCredRepoTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvCredRepos)).BeginInit();
             this.SuspendLayout();
@@ -52,6 +53,59 @@
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(707, 50);
             this.pnlBottom.TabIndex = 6;
+            // 
+            // ngLabel1
+            // 
+            this.ngLabel1.AutoSize = true;
+            this.ngLabel1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ngLabel1.Location = new System.Drawing.Point(0, 0);
+            this.ngLabel1.Name = "ngLabel1";
+            this.ngLabel1.Size = new System.Drawing.Size(71, 13);
+            this.ngLabel1.TabIndex = 7;
+            this.ngLabel1.Text = "Repositories";
+            // 
+            // olvCredRepos
+            // 
+            this.olvCredRepos.AllColumns.Add(this.colCredRepoTitle);
+            this.olvCredRepos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.olvCredRepos.CellEditUseWholeCell = false;
+            this.olvCredRepos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colCredRepoTitle});
+            this.olvCredRepos.Cursor = System.Windows.Forms.Cursors.Default;
+            this.olvCredRepos.DecorateLines = true;
+            this.olvCredRepos.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.olvCredRepos.FullRowSelect = true;
+            this.olvCredRepos.HasCollapsibleGroups = false;
+            this.olvCredRepos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.olvCredRepos.HideSelection = false;
+            this.olvCredRepos.IsSearchOnSortColumn = false;
+            this.olvCredRepos.Location = new System.Drawing.Point(0, 16);
+            this.olvCredRepos.MultiSelect = false;
+            this.olvCredRepos.Name = "olvCredRepos";
+            this.olvCredRepos.RowHeight = 30;
+            this.olvCredRepos.SelectAllOnControlA = false;
+            this.olvCredRepos.ShowFilterMenuOnRightClick = false;
+            this.olvCredRepos.ShowGroups = false;
+            this.olvCredRepos.ShowHeaderInAllViews = false;
+            this.olvCredRepos.Size = new System.Drawing.Size(152, 352);
+            this.olvCredRepos.TabIndex = 5;
+            this.olvCredRepos.UseCompatibleStateImageBehavior = false;
+            this.olvCredRepos.View = System.Windows.Forms.View.Details;
+            this.olvCredRepos.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvCredRepos_FormatRow);
+            // 
+            // colCredRepoTitle
+            // 
+            this.colCredRepoTitle.AspectName = "";
+            this.colCredRepoTitle.CellVerticalAlignment = System.Drawing.StringAlignment.Center;
+            this.colCredRepoTitle.FillsFreeSpace = true;
+            this.colCredRepoTitle.Groupable = false;
+            this.colCredRepoTitle.Hideable = false;
+            this.colCredRepoTitle.IsEditable = false;
+            this.colCredRepoTitle.Searchable = false;
+            this.colCredRepoTitle.Sortable = false;
+            this.colCredRepoTitle.Text = "Repositories";
+            this.colCredRepoTitle.Width = 120;
             // 
             // btnEditRepo
             // 
@@ -110,53 +164,12 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // olvCredRepos
-            // 
-            this.olvCredRepos.AllColumns.Add(this.colCredRepoTitle);
-            this.olvCredRepos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.olvCredRepos.CellEditUseWholeCell = false;
-            this.olvCredRepos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colCredRepoTitle});
-            this.olvCredRepos.Cursor = System.Windows.Forms.Cursors.Default;
-            this.olvCredRepos.DecorateLines = true;
-            this.olvCredRepos.FullRowSelect = true;
-            this.olvCredRepos.HasCollapsibleGroups = false;
-            this.olvCredRepos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.olvCredRepos.HideSelection = false;
-            this.olvCredRepos.IsSearchOnSortColumn = false;
-            this.olvCredRepos.Location = new System.Drawing.Point(0, 0);
-            this.olvCredRepos.MultiSelect = false;
-            this.olvCredRepos.Name = "olvCredRepos";
-            this.olvCredRepos.RowHeight = 30;
-            this.olvCredRepos.SelectAllOnControlA = false;
-            this.olvCredRepos.ShowFilterMenuOnRightClick = false;
-            this.olvCredRepos.ShowGroups = false;
-            this.olvCredRepos.ShowHeaderInAllViews = false;
-            this.olvCredRepos.Size = new System.Drawing.Size(154, 375);
-            this.olvCredRepos.TabIndex = 5;
-            this.olvCredRepos.UseCompatibleStateImageBehavior = false;
-            this.olvCredRepos.View = System.Windows.Forms.View.Details;
-            this.olvCredRepos.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvCredRepos_FormatRow);
-            // 
-            // colCredRepoTitle
-            // 
-            this.colCredRepoTitle.AspectName = "";
-            this.colCredRepoTitle.CellVerticalAlignment = System.Drawing.StringAlignment.Center;
-            this.colCredRepoTitle.FillsFreeSpace = true;
-            this.colCredRepoTitle.Groupable = false;
-            this.colCredRepoTitle.Hideable = false;
-            this.colCredRepoTitle.IsEditable = false;
-            this.colCredRepoTitle.Searchable = false;
-            this.colCredRepoTitle.Sortable = false;
-            this.colCredRepoTitle.Text = "Repositories";
-            this.colCredRepoTitle.Width = 120;
-            // 
             // CredentialManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 424);
+            this.Controls.Add(this.ngLabel1);
             this.Controls.Add(this.olvCredRepos);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.pnlBottom);
@@ -168,6 +181,7 @@
             this.pnlBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvCredRepos)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -181,5 +195,6 @@
         private Controls.Base.NGButton btnToggleUnlock;
         private Controls.Base.NGButton btnRemoveRepo;
         private Controls.Base.NGButton btnAddRepo;
+        private Controls.Base.NGLabel ngLabel1;
     }
 }
