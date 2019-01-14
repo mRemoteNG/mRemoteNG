@@ -1,12 +1,12 @@
-﻿using System;
+﻿using mRemoteNG.Connection;
+using mRemoteNG.Credential;
+using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Xml.Linq;
-using mRemoteNG.Connection;
-using mRemoteNG.Credential;
-using mRemoteNG.Security;
-using mRemoteNG.Security.Factories;
 
 namespace mRemoteNG.Config
 {
@@ -31,7 +31,9 @@ namespace mRemoteNG.Config
             var credentialMap = new ConnectionToCredentialMap();
             foreach (var element in xDocument.Descendants("Node"))
             {
-                if (!EntryHasSomeCredentialData(element)) continue;
+                if (!EntryHasSomeCredentialData(element))
+                    continue;
+
                 var newCredential = BuildCredential(element, cryptoProvider, decryptionKey);
 
                 Guid.TryParse(element.Attribute("Id")?.Value, out var connectionId);
@@ -40,13 +42,8 @@ namespace mRemoteNG.Config
                     //error
                 }
 
-                if (credentialMap.Values.Contains(newCredential, _credentialComparer))
-                {
-                    var existingCredential = credentialMap.Values.First(record => _credentialComparer.Equals(newCredential, record));
-                    credentialMap.Add(connectionId, existingCredential);
-                }
-                else
-                    credentialMap.Add(connectionId, newCredential);
+                var existingCredential = credentialMap.Values.FirstOrDefault(record => _credentialComparer.Equals(newCredential, record));
+                credentialMap.Add(connectionId, existingCredential ?? newCredential);
             }
 
             return credentialMap;
