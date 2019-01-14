@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using mRemoteNG.Config;
+﻿using mRemoteNG.Config;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.CustomCollections;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace mRemoteNG.Credential
 {
@@ -72,21 +72,28 @@ namespace mRemoteNG.Credential
         /// any default or replacement credentials that may be used.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
-        public ICredentialRecord GetEffectiveCredentialRecord(Optional<Guid> id)
+        /// <param name="allowDefaultFallback">
+        /// If True and the <see cref="ICredentialRecord"/> given by <see cref="id"/> cannot be found,
+        /// we will attempt to use a default credential specified in settings. If False, no default
+        /// fallback value will be used.
+        /// </param>
+        public ICredentialRecord GetEffectiveCredentialRecord(Optional<Guid> id, bool allowDefaultFallback = true)
         {
             var desiredCredentialRecord = GetCredentialRecord(id.FirstOrDefault());
             if (desiredCredentialRecord != null)
                 return desiredCredentialRecord;
 
-            if (Settings.Default.EmptyCredentials == "windows")
-                return new WindowsDefaultCredentialRecord();
-
-            if (Settings.Default.EmptyCredentials == "custom")
+            if (allowDefaultFallback)
             {
-                var cred = GetCredentialRecord(Settings.Default.DefaultCredentialRecord);
-                if (cred != null)
-                    return cred;
+                if (Settings.Default.EmptyCredentials == "windows")
+                    return new WindowsDefaultCredentialRecord();
+
+                if (Settings.Default.EmptyCredentials == "custom")
+                {
+                    var cred = GetCredentialRecord(Settings.Default.DefaultCredentialRecord);
+                    if (cred != null)
+                        return cred;
+                }
             }
 
             if (!id.Any() || id.FirstOrDefault() == Guid.Empty)

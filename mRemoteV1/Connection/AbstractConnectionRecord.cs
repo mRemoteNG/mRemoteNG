@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing.Design;
-using System.Linq;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
@@ -12,11 +7,15 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Credential;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls.Adapters;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing.Design;
 
 
 namespace mRemoteNG.Connection
 {
-	[Obsolete("Valid for mRemoteNG v1.75 (confCons v2.6) or earlier")]
+    [Obsolete("Valid for mRemoteNG v1.75 (confCons v2.6) or earlier")]
     public abstract class AbstractConnectionRecord : INotifyPropertyChanged
     {
         #region Fields
@@ -188,14 +187,15 @@ namespace mRemoteNG.Connection
         {
             get
             {
-                if (!CredentialRecordId.Any() || CredentialRecordId.First().Equals(Guid.Empty))
-                    return new NullCredentialRecord();
+                return Runtime.CredentialService.GetEffectiveCredentialRecord(CredentialRecordId, false);
+                //if (!CredentialRecordId.Any() || CredentialRecordId.First().Equals(Guid.Empty))
+                //    return new NullCredentialRecord();
 
-                var cred = Runtime.CredentialService.GetCredentialRecord(CredentialRecordId.FirstOrDefault());
-                if (cred == null)
-                    return new UnavailableCredentialRecord(CredentialRecordId.FirstOrDefault());
+                //var cred = Runtime.CredentialService.GetCredentialRecord(CredentialRecordId.FirstOrDefault());
+                //if (cred == null)
+                //    return new UnavailableCredentialRecord(CredentialRecordId.FirstOrDefault());
 
-                return cred;
+                //return cred;
             }
             set => CredentialRecordId = Optional<Guid>.FromNullable(value?.Id);
         }
