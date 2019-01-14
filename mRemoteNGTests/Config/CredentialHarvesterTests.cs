@@ -17,7 +17,6 @@ namespace mRemoteNGTests.Config
 #pragma warning disable 618
     public class CredentialHarvesterTests
     {
-
         private CredentialHarvester _credentialHarvester;
         private ICryptographyProvider _cryptographyProvider;
         private SecureString _key;
@@ -63,7 +62,7 @@ namespace mRemoteNGTests.Config
             var connection = new ConnectionInfo();
             var xdoc = CreateTestData(connection);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
-            Assert.That(credentials.Count(), Is.EqualTo(0));
+            Assert.That(credentials.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -75,7 +74,7 @@ namespace mRemoteNGTests.Config
             container.AddChildRange(new [] {con1, con2});
             var xdoc = CreateTestData(container);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
-            Assert.That(credentials.Count(), Is.EqualTo(2));
+            Assert.That(credentials.Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -87,7 +86,7 @@ namespace mRemoteNGTests.Config
             container.AddChildRange(new[] { con1, con2 });
             var xdoc = CreateTestData(container);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
-            Assert.That(credentials.Count(), Is.EqualTo(1));
+            Assert.That(credentials.DistinctCredentialRecords.Count, Is.EqualTo(1));
         }
 
         [Test]
