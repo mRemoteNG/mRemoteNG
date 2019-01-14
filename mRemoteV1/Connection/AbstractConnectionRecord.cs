@@ -185,18 +185,7 @@ namespace mRemoteNG.Connection
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public virtual ICredentialRecord CredentialRecord
         {
-            get
-            {
-                return Runtime.CredentialService.GetEffectiveCredentialRecord(CredentialRecordId, false);
-                //if (!CredentialRecordId.Any() || CredentialRecordId.First().Equals(Guid.Empty))
-                //    return new NullCredentialRecord();
-
-                //var cred = Runtime.CredentialService.GetCredentialRecord(CredentialRecordId.FirstOrDefault());
-                //if (cred == null)
-                //    return new UnavailableCredentialRecord(CredentialRecordId.FirstOrDefault());
-
-                //return cred;
-            }
+            get => Runtime.CredentialService.GetEffectiveCredentialRecord(CredentialRecordId, false);
             set => CredentialRecordId = Optional<Guid>.FromNullable(value?.Id);
         }
 
