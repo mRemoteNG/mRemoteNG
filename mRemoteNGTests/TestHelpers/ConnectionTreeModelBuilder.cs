@@ -1,7 +1,14 @@
-﻿using mRemoteNG.Connection;
+﻿using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
+using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using NSubstitute;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace mRemoteNGTests.TestHelpers
 {
@@ -20,30 +27,36 @@ namespace mRemoteNGTests.TestHelpers
         /// <returns></returns>
         public ConnectionTreeModel Build()
         {
+            var cred1 = new CredentialRecord {Username = "user1", Domain = "domain1", Password = "password1".ConvertToSecureString()};
+            var cred2 = new CredentialRecord {Username = "user2", Domain = "domain2", Password = "password2".ConvertToSecureString()};
+
+            var credRepo = Substitute.For<ICredentialRepository>();
+            credRepo.CredentialRecords.Returns(info => new List<ICredentialRecord> {cred1, cred2});
+
+            Runtime.CredentialService.RepositoryList.ToArray().ForEach(r => Runtime.CredentialService.RemoveRepository(r));
+            Runtime.CredentialService.AddRepository(credRepo);
+
+
             var model = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection);
-            var folder1 = new ContainerInfo { Name = "folder1", Username = "user1", Domain = "domain1", Password = "password1" };
-            var folder2 = new ContainerInfo { Name = "folder2", Username = "user2", Domain = "domain2", Password = "password2" };
+            var folder1 = new ContainerInfo { Name = "folder1", CredentialRecord = cred1 };
+            var folder2 = new ContainerInfo { Name = "folder2", CredentialRecord = cred2 };
             var folder3 = new ContainerInfo
             {
                 Name = "folder3",
                 Inheritance =
                 {
-                    Username = true,
-                    Domain = true,
-                    Password = true
+                    CredentialId = true
                 }
             };
-            var con1 = new ConnectionInfo { Name = "Con1", Username = "user1", Domain = "domain1", Password = "password1" };
-            var con2 = new ConnectionInfo { Name = "Con2", Username = "user2", Domain = "domain2", Password = "password2" };
+            var con1 = new ConnectionInfo { Name = "Con1", CredentialRecord = cred1 };
+            var con2 = new ConnectionInfo { Name = "Con2", CredentialRecord = cred2 };
             var con3 = new ContainerInfo
             {
                 Name = "con3",
                 Inheritance =
                 {
-                    Username = true,
-                    Domain = true,
-                    Password = true
+                    CredentialId = true
                 }
             };
 

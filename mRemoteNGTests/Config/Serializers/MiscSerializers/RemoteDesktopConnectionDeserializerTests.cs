@@ -73,14 +73,14 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         public void UsernameImportedCorrectly()
         {
             var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
-            Assert.That(connectionInfo.Username, Is.EqualTo(ExpectedUserName));
+            Assert.That(connectionInfo.CredentialRecord.Username, Is.EqualTo(ExpectedUserName));
         }
 
         [Test]
         public void DomainImportedCorrectly()
         {
             var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
-            Assert.That(connectionInfo.Domain, Is.EqualTo(ExpectedDomain));
+            Assert.That(connectionInfo.CredentialRecord.Domain, Is.EqualTo(ExpectedDomain));
         }
 
         [Test]

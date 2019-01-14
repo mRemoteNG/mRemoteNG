@@ -218,11 +218,15 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
+
+            // TODO: remove
             dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
             dataRow["DomainName"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
             dataRow["Password"] = _saveFilter.SavePassword 
                 ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) 
                 : "";
+
+
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["Protocol"] = connectionInfo.Protocol;
             dataRow["PuttySession"] = connectionInfo.PuttySession;

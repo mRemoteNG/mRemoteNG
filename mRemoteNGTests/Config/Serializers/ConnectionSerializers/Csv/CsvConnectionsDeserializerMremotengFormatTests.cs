@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using mRemoteNG.App;
 using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -10,9 +8,13 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNGTests.TestHelpers;
 using NSubstitute;
 using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 {
@@ -20,13 +22,24 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
     {
         private CsvConnectionsDeserializerMremotengFormat _deserializer;
         private CsvConnectionsSerializerMremotengFormat _serializer;
+        private static readonly ICredentialRecord CredentialRecord = new CredentialRecord
+        {
+            Username = "myuser",
+            Domain = "somedomain",
+            Password = "helloworld123".ConvertToSecureString()
+        };
 
         [SetUp]
         public void Setup()
         {
+            var credRepo = Substitute.For<ICredentialRepository>();
+            credRepo.CredentialRecords.Returns(info => new List<ICredentialRecord> { CredentialRecord });
+
+            Runtime.CredentialService.RepositoryList.ForEach(r => Runtime.CredentialService.RemoveRepository(r));
+            Runtime.CredentialService.AddRepository(credRepo);
+
             _deserializer = new CsvConnectionsDeserializerMremotengFormat();
-            var credentialRepositoryList = Substitute.For<ICredentialRepositoryList>();
-            _serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), credentialRepositoryList);
+            _serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), Runtime.CredentialService.RepositoryList);
         }
 
         [TestCaseSource(typeof(DeserializationTestSource), nameof(DeserializationTestSource.ConnectionPropertyTestCases))]
@@ -48,6 +61,16 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             connection?.RemoveParent();
             var propertyValue = typeof(ConnectionInfoInheritance).GetProperty(propertyToCheck)?.GetValue(connection?.Inheritance);
             return propertyValue;
+        }
+
+        [Test]
+        public void CredentialsHarvestedWhenDeserialized()
+        {
+            var con = GetTestConnection();
+            var csv = _serializer.Serialize(con);
+            var deserializedConnections = _deserializer.Deserialize(csv);
+            var connection = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
+            
         }
 
         [Test]
@@ -73,9 +96,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 Description = "SomeDescription",
                 Icon = "SomeIcon",
                 Panel = "SomePanel",
-                Username = "SomeUsername",
-                Password = "SomePassword",
-                Domain = "SomeDomain",
+                CredentialRecordId = CredentialRecord.Id,
                 Hostname = "SomeHostname",
                 PuttySession = "SomePuttySession",
                 LoadBalanceInfo = "SomeLoadBalanceInfo",

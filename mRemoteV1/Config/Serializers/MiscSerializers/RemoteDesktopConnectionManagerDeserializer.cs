@@ -1,22 +1,23 @@
-﻿using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using System.Xml;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Xml;
 
 
 namespace mRemoteNG.Config.Serializers
 {
     public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
-        private static int _schemaVersion; /* 1 = RDCMan v2.2
-                                       3 = RDCMan v2.7  */
+        // 1 = RDCMan v2.2
+        // 3 = RDCMan v2.7
+        private static int _schemaVersion; 
 
         public ConnectionTreeModel Deserialize(string rdcmConnectionsXml)
         {
@@ -136,6 +137,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Name = propertiesNode?.SelectSingleNode("./displayName")?.InnerText ?? connectionInfo.Hostname;
             connectionInfo.Description = propertiesNode?.SelectSingleNode("./comment")?.InnerText ?? string.Empty;
 
+            // TODO: harvest
             var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
             if (logonCredentialsNode?.Attributes?["inherit"]?.Value == "None")
             {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.IO;
+using System.Xml;
 
 namespace mRemoteNG.Config.Serializers
 {
@@ -127,6 +127,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Description = connectionInfoNode.SelectSingleNode("./description")?.InnerText;
 
             var loginNode = xmlNode.SelectSingleNode("./login");
+            // TODO: these should create temp putty credentials
             connectionInfo.Username = loginNode?.SelectSingleNode("login")?.InnerText;
             connectionInfo.Password = loginNode?.SelectSingleNode("password")?.InnerText;
             // ./prompt

@@ -1,16 +1,16 @@
 using mRemoteNG.App;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
-using System;
-using System.ComponentModel;
-using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.ComponentModel;
 
 
 namespace mRemoteNG.Connection
 {
-	public sealed class PuttySessionInfo : ConnectionInfo, IComponent
+    public sealed class PuttySessionInfo : ConnectionInfo, IComponent
 	{
         #region Properties
         [Browsable(false)]

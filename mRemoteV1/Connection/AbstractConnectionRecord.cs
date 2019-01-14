@@ -15,7 +15,6 @@ using System.Drawing.Design;
 
 namespace mRemoteNG.Connection
 {
-    [Obsolete("Valid for mRemoteNG v1.75 (confCons v2.6) or earlier")]
     public abstract class AbstractConnectionRecord : INotifyPropertyChanged
     {
         #region Fields
@@ -185,7 +184,7 @@ namespace mRemoteNG.Connection
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public virtual ICredentialRecord CredentialRecord
         {
-            // TODO: this static ref to the cred service makes testing difficult. refactor
+            // TODO: this static ref to the cred service makes testing difficult. refactor it to allow easy mocking
             get => Runtime.CredentialService.GetEffectiveCredentialRecord(CredentialRecordId, false);
             set => CredentialRecordId = Optional<Guid>.FromNullable(value?.Id);
         }

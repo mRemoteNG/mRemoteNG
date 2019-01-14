@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
+using System.Collections.Generic;
+using System.Reflection;
 
 
 namespace mRemoteNGTests.Connection
 {
-	public class ConnectionInfoTests
+    public class ConnectionInfoTests
     {
         private ConnectionInfo _connectionInfo;
-        private const string TestDomain = "somedomain";
 
         [SetUp]
         public void Setup()
@@ -30,9 +30,9 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void CopyCreatesMemberwiseCopy()
         {
-            _connectionInfo.Domain = TestDomain;
+            _connectionInfo.Description = Randomizer.CreateRandomizer().GetString(8);
             var secondConnection = _connectionInfo.Clone();
-            Assert.That(secondConnection.Domain, Is.EqualTo(_connectionInfo.Domain));
+            Assert.That(secondConnection.Description, Is.EqualTo(_connectionInfo.Description));
         }
 
         [Test]
@@ -60,18 +60,18 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void CopyFromCopiesProperties()
         {
-            var secondConnection = new ConnectionInfo {Domain = TestDomain};
+            var secondConnection = new ConnectionInfo {Description = Randomizer.CreateRandomizer().GetString(8) };
             _connectionInfo.CopyFrom(secondConnection);
-            Assert.That(_connectionInfo.Domain, Is.EqualTo(secondConnection.Domain));
+            Assert.That(_connectionInfo.Description, Is.EqualTo(secondConnection.Description));
         }
 
         [Test]
         public void CopyingAConnectionInfoAlsoCopiesItsInheritance()
         {
-            _connectionInfo.Inheritance.Username = true;
-            var secondConnection = new ConnectionInfo {Inheritance = {Username = false}};
+            _connectionInfo.Inheritance.Description = true;
+            var secondConnection = new ConnectionInfo {Inheritance = {Description = false}};
             secondConnection.CopyFrom(_connectionInfo);
-            Assert.That(secondConnection.Inheritance.Username, Is.True);
+            Assert.That(secondConnection.Inheritance.Description, Is.True);
         }
 
         [Test]

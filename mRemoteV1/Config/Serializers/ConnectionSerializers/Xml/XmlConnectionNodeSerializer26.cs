@@ -50,6 +50,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
             element.Add(new XAttribute("Id", connectionInfo.ConstantID));
 
+            // TODO: remove
             element.Add(_saveFilter.SaveUsername
                 ? new XAttribute("Username", connectionInfo.Username)
                 : new XAttribute("Username", ""));

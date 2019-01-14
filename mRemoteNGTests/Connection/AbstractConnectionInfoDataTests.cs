@@ -1,24 +1,23 @@
-﻿using System;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using NUnit.Framework;
+using System;
 
 
 namespace mRemoteNGTests.Connection
 {
-	public class AbstractConnectionInfoDataTests
+    public class AbstractConnectionInfoDataTests
     {
-#pragma warning disable 618
         private class TestAbstractConnectionInfoData : AbstractConnectionRecord {
 	        public TestAbstractConnectionInfoData() : base(Guid.NewGuid().ToString())
 	        {
 	        }
         }
-#pragma warning restore 618
+
         private TestAbstractConnectionInfoData _testAbstractConnectionInfoData;
 
         [SetUp]
@@ -80,29 +79,11 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
-        public void UsernameNotifiesOnValueChange()
+        public void CredentialRecordIdNotifiesOnValueChange()
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Username = "a";
-            Assert.That(wasCalled, Is.True);
-        }
-
-        [Test]
-        public void PasswordNotifiesOnValueChange()
-        {
-            var wasCalled = false;
-            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Password = "a";
-            Assert.That(wasCalled, Is.True);
-        }
-
-        [Test]
-        public void DomainNotifiesOnValueChange()
-        {
-            var wasCalled = false;
-            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Domain = "a";
+            _testAbstractConnectionInfoData.CredentialRecordId = Guid.NewGuid();
             Assert.That(wasCalled, Is.True);
         }
 

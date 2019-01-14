@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.App;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -18,7 +19,6 @@ using System.Globalization;
 using System.Security;
 using System.Windows.Forms;
 using System.Xml;
-using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
@@ -225,11 +225,10 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                     if (_confVersion <= 2.6) // 0.2 - 2.6
                     {
-#pragma warning disable 618
+                        // TODO: harvest
                         connectionInfo.Username = xmlnode.GetAttributeAsString("Username");
                         connectionInfo.Password = _decryptor.Decrypt(xmlnode.GetAttributeAsString("Password"));
                         connectionInfo.Domain = xmlnode.GetAttributeAsString("Domain");
-#pragma warning restore 618
                     }
                 }
 

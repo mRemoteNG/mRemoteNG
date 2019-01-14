@@ -14,8 +14,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             ConnectionInfo.VNCAuthMode = ProtocolVNC.AuthMode.AuthWin;
             ExpectedPropertyList.AddRange(new []
             {
-                nameof(ConnectionInfo.Username),
-                nameof(ConnectionInfo.Domain),
+                nameof(ConnectionInfo.CredentialRecordId),
             });
         }
 

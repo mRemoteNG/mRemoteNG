@@ -2,17 +2,17 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
+using mRemoteNG.Tree.Root;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.Config.Putty
 {
-	public class PuttySessionsXmingProvider : AbstractPuttySessionsProvider
+    public class PuttySessionsXmingProvider : AbstractPuttySessionsProvider
 	{
         public override RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo { Name = "Xming Putty Sessions" };
         private const string RegistrySessionNameFormat = "{0} [registry]";
@@ -88,7 +88,8 @@ namespace mRemoteNG.Config.Putty
 		        PuttySession = sessionName,
 		        Name = sessionName,
 		        Hostname = sessionFileReader.GetValue("HostName"),
-		        Username = sessionFileReader.GetValue("UserName")
+		        // TODO: this should create a temp putty credential
+                Username = sessionFileReader.GetValue("UserName")
 		    };
 		    var protocol = sessionFileReader.GetValue("Protocol") ?? "ssh";
 		    switch (protocol.ToLowerInvariant())

@@ -6,6 +6,8 @@ using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using System;
@@ -13,9 +15,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Security;
-using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
-using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {
@@ -84,9 +83,12 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Description = (string)dataRow["Description"];
             connectionInfo.Icon = (string)dataRow["Icon"];
             connectionInfo.Panel = (string)dataRow["Panel"];
+
+            // TODO: harvest
             connectionInfo.Username = (string)dataRow["Username"];
             connectionInfo.Domain = (string)dataRow["DomainName"];
             connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
+
             connectionInfo.Hostname = (string)dataRow["Hostname"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
             connectionInfo.PuttySession = (string)dataRow["PuttySession"];

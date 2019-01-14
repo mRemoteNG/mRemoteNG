@@ -49,6 +49,7 @@ namespace mRemoteNG.Config.Serializers
                 case "server port":
                     connectionInfo.Port = Convert.ToInt32(value);
                     break;
+                // TODO: harvest
                 case "username":
                     connectionInfo.Username = value;
                     break;

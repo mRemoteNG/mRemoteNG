@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace mRemoteNG.Config.Serializers.Csv
 {
-    public class CsvConnectionsDeserializerMremotengFormat : IDeserializer<string, ConnectionTreeModel>
+    public class CsvConnectionsDeserializerMremotengFormat
     {
         public ConnectionTreeModel Deserialize(string serializedData)
         {
@@ -90,9 +91,17 @@ namespace mRemoteNG.Config.Serializers.Csv
             connectionRecord.Description = headers.Contains("Description") ? connectionCsv[headers.IndexOf("Description")] : "";
             connectionRecord.Icon = headers.Contains("Icon") ? connectionCsv[headers.IndexOf("Icon")] : "";
             connectionRecord.Panel = headers.Contains("Panel") ? connectionCsv[headers.IndexOf("Panel")] : "";
+
+            var hasCredRecordId = Guid.TryParse(
+                headers.Contains("CredentialRecordId") ? connectionCsv[headers.IndexOf("CredentialRecordId")] : "",
+                out var credRecordId);
+            connectionRecord.CredentialRecordId = hasCredRecordId ? credRecordId : Optional<Guid>.Empty;
+
+            // TODO: harvest
             connectionRecord.Username = headers.Contains("Username") ? connectionCsv[headers.IndexOf("Username")] : "";
             connectionRecord.Password = headers.Contains("Password") ? connectionCsv[headers.IndexOf("Password")] : "";
             connectionRecord.Domain = headers.Contains("Domain") ? connectionCsv[headers.IndexOf("Domain")] : "";
+
             connectionRecord.Hostname = headers.Contains("Hostname") ? connectionCsv[headers.IndexOf("Hostname")] : "";
             connectionRecord.PuttySession = headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
             connectionRecord.LoadBalanceInfo = headers.Contains("LoadBalanceInfo") ? connectionCsv[headers.IndexOf("LoadBalanceInfo")] : "";

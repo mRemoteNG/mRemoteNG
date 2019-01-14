@@ -1,12 +1,12 @@
-﻿using System.IO;
-using System.Linq;
-using mRemoteNG.Config.Serializers;
+﻿using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
+using System.IO;
+using System.Linq;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
@@ -107,7 +107,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
             var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
-            Assert.That(connection.Username, Is.EqualTo(ExpectedUsername));
+            Assert.That(connection.CredentialRecord.Username, Is.EqualTo(ExpectedUsername));
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
             var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
-            Assert.That(connection.Domain, Is.EqualTo(ExpectedDomain));
+            Assert.That(connection.CredentialRecord.Domain, Is.EqualTo(ExpectedDomain));
         }
 
         // Since password is encrypted with a machine key, cant test decryption on another machine

@@ -1,10 +1,11 @@
-﻿using System.Linq;
-using mRemoteNG.Config.Serializers;
+﻿using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
+using System.Linq;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
@@ -31,13 +32,6 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             var connectionTreeModel = _deserializer.Deserialize(fileContents);
             var rootNode = connectionTreeModel.RootNodes.First();
             _rootImportedFolder = rootNode.Children.Cast<ContainerInfo>().First();
-        }
-
-        [OneTimeTearDown]
-        public void OnetimeTeardown()
-        {
-            _deserializer = null;
-            _rootImportedFolder = null;
         }
 
         [Test]
@@ -92,14 +86,14 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         public void ConnectionUsernameImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Username, Is.EqualTo(ExpectedConnectionUsername));
+            Assert.That(connection.CredentialRecord.Username, Is.EqualTo(ExpectedConnectionUsername));
         }
 
         [Test]
         public void ConnectionPasswordImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Password, Is.EqualTo(ExpectedConnectionPassword));
+            Assert.That(connection.CredentialRecord.Password.ConvertToUnsecureString(), Is.EqualTo(ExpectedConnectionPassword));
         }
 
         private ConnectionInfo GetSshConnection()

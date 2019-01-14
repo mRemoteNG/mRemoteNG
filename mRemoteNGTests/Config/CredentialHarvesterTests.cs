@@ -14,19 +14,17 @@ using System.Xml.Linq;
 
 namespace mRemoteNGTests.Config
 {
-#pragma warning disable 618
     public class CredentialHarvesterTests
     {
         private CredentialHarvester _credentialHarvester;
         private ICryptographyProvider _cryptographyProvider;
-        private SecureString _key;
+        private SecureString _key = "testKey123".ConvertToSecureString();
 
         [SetUp]
         public void Setup()
         {
             _credentialHarvester = new CredentialHarvester();
             _cryptographyProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
-            _key = "testKey123".ConvertToSecureString();
         }
 
         [Test]
@@ -124,5 +122,4 @@ namespace mRemoteNGTests.Config
             return XDocument.Parse(serializedData);
         }
     }
-#pragma warning restore 618
 }

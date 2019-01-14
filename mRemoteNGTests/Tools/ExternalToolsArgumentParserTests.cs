@@ -8,6 +8,7 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace mRemoteNGTests.Tools
@@ -36,6 +37,7 @@ namespace mRemoteNGTests.Tools
 
             var credRepo = Substitute.For<ICredentialRepository>();
             credRepo.CredentialRecords.Returns(info => new List<ICredentialRecord> {credential});
+            Runtime.CredentialService.RepositoryList.ToArray().ForEach(r => Runtime.CredentialService.RemoveRepository(r));
             Runtime.CredentialService.AddRepository(credRepo);
 
             var connectionInfo = new ConnectionInfo

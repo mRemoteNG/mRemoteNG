@@ -1,14 +1,14 @@
+using Microsoft.Win32;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
 using System;
 using System.Collections.Generic;
 using System.Management;
 using System.Security.Principal;
 using System.Text;
 using System.Web;
-using Microsoft.Win32;
-using mRemoteNG.App;
-using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Messages;
 
 
 namespace mRemoteNG.Config.Putty
@@ -54,6 +54,7 @@ namespace mRemoteNG.Config.Putty
 		        PuttySession = sessionName,
 		        Name = sessionName,
 		        Hostname = sessionKey.GetValue("HostName")?.ToString() ?? "",
+                // TODO: this should create a temp putty credential
 		        Username = sessionKey.GetValue("UserName")?.ToString() ?? ""
 		    };
 

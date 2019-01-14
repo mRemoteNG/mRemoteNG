@@ -1,10 +1,10 @@
-﻿using System;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
+using System;
 
 namespace mRemoteNGTests.TestHelpers
 {
@@ -25,9 +25,6 @@ namespace mRemoteNGTests.TestHelpers
 				Hostname = RandomString(),
 				Description = RandomString(),
                 CredentialRecordId = Guid.NewGuid(),
-				Username = RandomString(),
-				Domain = RandomString(),
-				Password = RandomString(),
 				ExtApp = RandomString(),
 				Icon = RandomString(),
 				LoadBalanceInfo = RandomString(),
