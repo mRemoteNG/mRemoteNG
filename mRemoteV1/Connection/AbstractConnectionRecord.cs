@@ -185,6 +185,7 @@ namespace mRemoteNG.Connection
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public virtual ICredentialRecord CredentialRecord
         {
+            // TODO: this static ref to the cred service makes testing difficult. refactor
             get => Runtime.CredentialService.GetEffectiveCredentialRecord(CredentialRecordId, false);
             set => CredentialRecordId = Optional<Guid>.FromNullable(value?.Id);
         }

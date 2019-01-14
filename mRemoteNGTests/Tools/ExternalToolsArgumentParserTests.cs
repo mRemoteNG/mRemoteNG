@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Credential;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
+using NSubstitute;
 using NUnit.Framework;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 
 namespace mRemoteNGTests.Tools
@@ -22,14 +27,23 @@ namespace mRemoteNGTests.Tools
         [OneTimeSetUp]
         public void Setup()
         {
+            var credential = new CredentialRecord
+            {
+                Username = TestString,
+                Domain = TestString,
+                Password = TestString.ConvertToSecureString()
+            };
+
+            var credRepo = Substitute.For<ICredentialRepository>();
+            credRepo.CredentialRecords.Returns(info => new List<ICredentialRecord> {credential});
+            Runtime.CredentialService.AddRepository(credRepo);
+
             var connectionInfo = new ConnectionInfo
             {
                 Name = TestString,
                 Hostname = TestString,
                 Port = Port,
-                Username = TestString,
-                Password = TestString,
-                Domain = TestString,
+                CredentialRecord = credential,
                 Description = TestString,
                 MacAddress = TestString,
                 UserField = TestString
