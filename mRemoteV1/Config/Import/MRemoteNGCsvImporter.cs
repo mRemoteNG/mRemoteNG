@@ -1,10 +1,9 @@
-﻿using System.IO;
-using System.Linq;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using System.IO;
 
 namespace mRemoteNG.Config.Import
 {
@@ -24,10 +23,10 @@ namespace mRemoteNG.Config.Import
             var dataProvider = new FileDataProvider(filePath);
             var xmlString = dataProvider.Load();
             var xmlConnectionsDeserializer = new CsvConnectionsDeserializerMremotengFormat();
-            var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(xmlString);
+            var serializationResult = xmlConnectionsDeserializer.Deserialize(xmlString);
 
             var rootImportContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(filePath) };
-            rootImportContainer.AddChildRange(connectionTreeModel.RootNodes.First().Children.ToArray());
+            rootImportContainer.AddChildRange(serializationResult.ConnectionRecords);
             destinationContainer.AddChild(rootImportContainer);
         }
     }

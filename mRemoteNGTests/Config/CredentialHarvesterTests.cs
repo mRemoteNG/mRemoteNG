@@ -1,4 +1,4 @@
-﻿using mRemoteNG.Config;
+﻿using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -18,7 +18,7 @@ namespace mRemoteNGTests.Config
     {
         private CredentialHarvester _credentialHarvester;
         private ICryptographyProvider _cryptographyProvider;
-        private SecureString _key = "testKey123".ConvertToSecureString();
+        private readonly SecureString _key = "testKey123".ConvertToSecureString();
 
         [SetUp]
         public void Setup()
@@ -32,7 +32,8 @@ namespace mRemoteNGTests.Config
         {
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
             var xdoc = CreateTestData(connection);
-            var credentials = _credentialHarvester.Harvest(xdoc, _key);
+            var harvestConfig = BuildHarvestConfig(xdoc);
+            var credentials = _credentialHarvester.Harvest(harvestConfig);
             Assert.That(credentials.DistinctCredentialRecords.Single().Username, Is.EqualTo(connection.Username));
         }
 
@@ -41,7 +42,8 @@ namespace mRemoteNGTests.Config
         {
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
             var xdoc = CreateTestData(connection);
-            var credentials = _credentialHarvester.Harvest(xdoc, _key);
+            var harvestConfig = BuildHarvestConfig(xdoc);
+            var credentials = _credentialHarvester.Harvest(harvestConfig);
             Assert.That(credentials.DistinctCredentialRecords.Single().Domain, Is.EqualTo(connection.Domain));
         }
 
@@ -50,7 +52,8 @@ namespace mRemoteNGTests.Config
         {
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
             var xdoc = CreateTestData(connection);
-            var credentials = _credentialHarvester.Harvest(xdoc, _key);
+            var harvestConfig = BuildHarvestConfig(xdoc);
+            var credentials = _credentialHarvester.Harvest(harvestConfig);
             Assert.That(credentials.DistinctCredentialRecords.Single().Password.ConvertToUnsecureString(), Is.EqualTo(connection.Password));
         }
 
@@ -59,7 +62,8 @@ namespace mRemoteNGTests.Config
         {
             var connection = new ConnectionInfo();
             var xdoc = CreateTestData(connection);
-            var credentials = _credentialHarvester.Harvest(xdoc, _key);
+            var harvestConfig = BuildHarvestConfig(xdoc);
+            var credentials = _credentialHarvester.Harvest(harvestConfig);
             Assert.That(credentials.Count, Is.EqualTo(0));
         }
 
@@ -71,7 +75,8 @@ namespace mRemoteNGTests.Config
             var con2 = new ConnectionInfo {Username = "something"};
             container.AddChildRange(new [] {con1, con2});
             var xdoc = CreateTestData(container);
-            var credentials = _credentialHarvester.Harvest(xdoc, _key);
+            var harvestConfig = BuildHarvestConfig(xdoc);
+            var credentials = _credentialHarvester.Harvest(harvestConfig);
             Assert.That(credentials.Count, Is.EqualTo(2));
         }
 
@@ -83,7 +88,8 @@ namespace mRemoteNGTests.Config
             var con2 = new ConnectionInfo { Username = "something" };
             container.AddChildRange(new[] { con1, con2 });
             var xdoc = CreateTestData(container);
-            var credentials = _credentialHarvester.Harvest(xdoc, _key);
+            var harvestConfig = BuildHarvestConfig(xdoc);
+            var credentials = _credentialHarvester.Harvest(harvestConfig);
             Assert.That(credentials.DistinctCredentialRecords.Count, Is.EqualTo(1));
         }
 
@@ -93,7 +99,8 @@ namespace mRemoteNGTests.Config
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
             var connectionGuid = Guid.Parse(connection.ConstantID);
             var xdoc = CreateTestData(connection);
-            var map = _credentialHarvester.Harvest(xdoc, _key);
+            var harvestConfig = BuildHarvestConfig(xdoc);
+            var map = _credentialHarvester.Harvest(harvestConfig);
             Assert.That(map[connectionGuid].Username, Is.EqualTo(connection.Username));
         }
 
@@ -107,7 +114,8 @@ namespace mRemoteNGTests.Config
             var xdoc = CreateTestData(container);
             var con1Id = Guid.Parse(con1.ConstantID);
             var con2Id = Guid.Parse(con2.ConstantID);
-            var map = _credentialHarvester.Harvest(xdoc, _key);
+            var harvestConfig = BuildHarvestConfig(xdoc);
+            var map = _credentialHarvester.Harvest(harvestConfig);
             Assert.That(map[con1Id], Is.EqualTo(map[con2Id]));
         }
 
@@ -120,6 +128,25 @@ namespace mRemoteNGTests.Config
             var serializer = new XmlConnectionsSerializer(_cryptographyProvider, nodeSerializer);
             var serializedData = serializer.Serialize(rootNode);
             return XDocument.Parse(serializedData);
+        }
+
+        private HarvestConfig<XElement> BuildHarvestConfig(XDocument xdoc)
+        {
+            var cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
+
+            return new HarvestConfig<XElement>
+            {
+                ItemEnumerator = () => xdoc.Descendants("Node"),
+                ConnectionGuidSelector = e =>
+                {
+                    Guid.TryParse(e.Attribute("Id")?.Value, out var connectionId);
+                    return connectionId;
+                },
+                UsernameSelector = e => e.Attribute("Username")?.Value,
+                DomainSelector = e => e.Attribute("Domain")?.Value,
+                PasswordSelector = e => cryptoProvider.Decrypt(e.Attribute("Password")?.Value, _key).ConvertToSecureString(),
+                TitleSelector = e => $"{e.Attribute("Domain")?.Value}{(string.IsNullOrEmpty(e.Attribute("Domain")?.Value) ? "" : "\\")}{e.Attribute("Username")?.Value}"
+            };
         }
     }
 }

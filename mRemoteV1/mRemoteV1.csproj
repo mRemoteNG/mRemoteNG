@@ -145,7 +145,7 @@
     <Compile Include="Config\Connections\SqlConnectionsSaver.cs" />
     <Compile Include="Config\Connections\XmlConnectionsLoader.cs" />
     <Compile Include="Config\Connections\XmlConnectionsSaver.cs" />
-    <Compile Include="Config\CredentialHarvester.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\CredentialHarvester.cs" />
     <Compile Include="Config\CredentialRecordLoader.cs" />
     <Compile Include="Config\CredentialRecordSaver.cs" />
     <Compile Include="Config\CredentialRepositoryListPersistor.cs" />
@@ -156,6 +156,7 @@
     <Compile Include="Config\DataProviders\FileBackupCreator.cs" />
     <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
     <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\HarvestConfig.cs" />
     <Compile Include="Config\ILoader.cs" />
     <Compile Include="Config\Import\MRemoteNGCsvImporter.cs" />
     <Compile Include="Config\ISaver.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer26.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlDatabaseMetaDataRetriever.cs" />
+    <Compile Include="Config\Serializers\SerializationResult.cs" />
     <Compile Include="Config\Serializers\Versioning\IVersionUpgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion22To23Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />

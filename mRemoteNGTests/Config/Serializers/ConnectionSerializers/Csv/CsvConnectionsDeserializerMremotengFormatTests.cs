@@ -24,6 +24,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         private CsvConnectionsSerializerMremotengFormat _serializer;
         private static readonly ICredentialRecord CredentialRecord = new CredentialRecord
         {
+            Title = "MyTestCredential",
             Username = "myuser",
             Domain = "somedomain",
             Password = "helloworld123".ConvertToSecureString()
@@ -47,7 +48,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         {
             var csv = _serializer.Serialize(GetTestConnection());
             var deserializedConnections = _deserializer.Deserialize(csv);
-            var connection = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
+
+            var connection = deserializedConnections.ConnectionRecords.FirstOrDefault();
             var propertyValue = typeof(ConnectionInfo).GetProperty(propertyToCheck)?.GetValue(connection);
             return propertyValue;
         }
@@ -57,7 +59,9 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         {
             var csv = _serializer.Serialize(GetTestConnectionWithAllInherited());
             var deserializedConnections = _deserializer.Deserialize(csv);
-            var connection = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
+
+            var connection = deserializedConnections.ConnectionRecords.FirstOrDefault();
+
             connection?.RemoveParent();
             var propertyValue = typeof(ConnectionInfoInheritance).GetProperty(propertyToCheck)?.GetValue(connection?.Inheritance);
             return propertyValue;
@@ -69,8 +73,11 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             var con = GetTestConnection();
             var csv = _serializer.Serialize(con);
             var deserializedConnections = _deserializer.Deserialize(csv);
-            var connection = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
-            
+
+            var harvestedCredential = deserializedConnections.CredentialRecords.FirstOrDefault();
+
+            Assert.That(harvestedCredential, Is.EqualTo(con.CredentialRecord)
+                .Using(new CredentialDomainUserPasswordComparer()));
         }
 
         [Test]
@@ -82,9 +89,11 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             // |- Con2
             var treeModel = new ConnectionTreeModelBuilder().Build();
             var csv = _serializer.Serialize(treeModel);
+
             var deserializedConnections = _deserializer.Deserialize(csv);
-            var con1 = deserializedConnections.GetRecursiveChildList().First(info => info.Name == "Con1");
-            var folder1 = deserializedConnections.GetRecursiveChildList().First(info => info.Name == "folder1");
+
+            var con1 = deserializedConnections.ConnectionRecords.FlattenConnectionTree().First(info => info.Name == "Con1");
+            var folder1 = deserializedConnections.ConnectionRecords.FlattenConnectionTree().First(info => info.Name == "folder1");
             Assert.That(con1.Parent, Is.EqualTo(folder1));
         }
 

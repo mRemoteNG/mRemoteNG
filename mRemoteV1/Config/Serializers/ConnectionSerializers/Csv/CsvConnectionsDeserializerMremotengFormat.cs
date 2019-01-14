@@ -5,9 +5,9 @@ using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace mRemoteNG.Config.Serializers.Csv
 {
     public class CsvConnectionsDeserializerMremotengFormat
     {
-        public ConnectionTreeModel Deserialize(string serializedData)
+        public SerializationResult Deserialize(string serializedData)
         {
             var lines = serializedData.Split(new []{"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
             var csvHeaders = new List<string>();
@@ -36,21 +36,20 @@ namespace mRemoteNG.Config.Serializers.Csv
             }
 
             var root = CreateTreeStructure(parentMapping);
-            var connectionTreeModel = new ConnectionTreeModel();
-            connectionTreeModel.AddRootNode(root);
-            return connectionTreeModel;
+            var result = new SerializationResult(root, new List<ICredentialRecord>(), new ConnectionToCredentialMap());
+            return result;
         }
 
-        private RootNodeInfo CreateTreeStructure(Dictionary<ConnectionInfo, string> parentMapping)
+        private List<ConnectionInfo> CreateTreeStructure(Dictionary<ConnectionInfo, string> parentMapping)
         {
-            var root = new RootNodeInfo(RootNodeType.Connection);
+            var root = new List<ConnectionInfo>();
 
             foreach (var node in parentMapping)
             {
                 // no parent mapped, add to root
                 if (string.IsNullOrEmpty(node.Value))
                 {
-                    root.AddChild(node.Key);
+                    root.Add(node.Key);
                     continue;
                 }
 
@@ -66,7 +65,7 @@ namespace mRemoteNG.Config.Serializers.Csv
                 }
                 else
                 {
-                    root.AddChild(node.Key);
+                    root.Add(node.Key);
                 }
             }
 

@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
+using mRemoteNG.Config.Serializers.CredentialSerializer;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
+using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
@@ -59,8 +61,22 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
             var keyForOldConnectionFile = auth.LastAuthenticatedPassword;
 
+            var preCredManagerXmlHarvestConfig = new HarvestConfig<XElement>
+            {
+                ItemEnumerator = () => xdoc.Descendants("Node"),
+                ConnectionGuidSelector = e =>
+                {
+                    Guid.TryParse(e.Attribute("Id")?.Value, out var connectionId);
+                    return connectionId;
+                },
+                UsernameSelector = e => e.Attribute("Username")?.Value,
+                DomainSelector = e => e.Attribute("Domain")?.Value,
+                PasswordSelector = e => cryptoProvider.Decrypt(e.Attribute("Password")?.Value, keyForOldConnectionFile).ConvertToSecureString(),
+                TitleSelector = e => $"{e.Attribute("Domain")?.Value}{(string.IsNullOrEmpty(e.Attribute("Domain")?.Value) ? "" : "\\")}{e.Attribute("Username")?.Value}"
+            };
+
             var credentialHarvester = new CredentialHarvester();
-            var harvestedCredentials = credentialHarvester.Harvest(xdoc, keyForOldConnectionFile);
+            var harvestedCredentials = credentialHarvester.Harvest(preCredManagerXmlHarvestConfig);
 
             return harvestedCredentials;
         }

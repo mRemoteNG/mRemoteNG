@@ -4,7 +4,9 @@ using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Container;
 using System;
+using System.Collections.Generic;
 
 namespace mRemoteNGTests.TestHelpers
 {
@@ -126,5 +128,19 @@ namespace mRemoteNGTests.TestHelpers
 			var values = Enum.GetValues(typeof(T));
 			return (T)values.GetValue(_random.Next(values.Length));
 		}
+
+	    internal static IEnumerable<ConnectionInfo> FlattenConnectionTree(this IEnumerable<ConnectionInfo> connections)
+	    {
+	        foreach (var item in connections)
+	        {
+	            yield return item;
+
+	            if (!(item is ContainerInfo container))
+	                continue;
+
+	            foreach (var child in FlattenConnectionTree(container.Children))
+	                yield return child;
+	        }
+	    }
     }
 }
