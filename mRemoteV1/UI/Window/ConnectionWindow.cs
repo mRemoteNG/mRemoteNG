@@ -130,7 +130,7 @@ namespace mRemoteNG.UI.Window
                     TabPageContextMenuStrip = cmenTab
                 };
 
-				if (Settings.Default.AlwaysShowConnectionTabs == false)
+				//if (Settings.Default.AlwaysShowConnectionTabs == false)
                     // TODO: See if we can make this work with DPS...
 					//TabController.HideTabsMode = TabControl.HideTabsModes.HideAlways;
 

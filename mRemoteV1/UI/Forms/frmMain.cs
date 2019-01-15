@@ -28,7 +28,6 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
-using TabControl = Crownwood.Magic.Controls.TabControl;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -604,7 +603,9 @@ namespace mRemoteNG.UI.Forms
 			    newDocumentStyle = nonConnectionPanelCount == 0 ? DocumentStyle.DockingSdi : DocumentStyle.DockingWindow;
 			}
 
-			foreach (var dockContent in pnlDock.Documents)
+            // TODO: See if we can get this to work with DPS
+#if false
+            foreach (var dockContent in pnlDock.Documents)
 			{
 				var document = (DockContent)dockContent;
 				if (document is ConnectionWindow)
@@ -620,14 +621,15 @@ namespace mRemoteNG.UI.Forms
 					}
 				}
 			}
+#endif
 
 			if (pnlDock.DocumentStyle == newDocumentStyle) return;
 		    pnlDock.DocumentStyle = newDocumentStyle;
 		    pnlDock.Size = new Size(1, 1);
 		}
-        #endregion
+#endregion
 
-        #region Screen Stuff
+#region Screen Stuff
         public void SetDefaultLayout()
         {
             pnlDock.Visible = false;
@@ -648,16 +650,16 @@ namespace mRemoteNG.UI.Forms
 
             pnlDock.Visible = true;
         }
-        #endregion
+#endregion
 
-        #region Events
+#region Events
         public delegate void ClipboardchangeEventHandler();
         public static event ClipboardchangeEventHandler ClipboardChanged
         {
             add => _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Combine(_clipboardChangedEvent, value);
             remove => _clipboardChangedEvent = (ClipboardchangeEventHandler)Delegate.Remove(_clipboardChangedEvent, value);
         }
-        #endregion
+#endregion
 
         private void ViewMenu_Opening(object sender, EventArgs e)
         {

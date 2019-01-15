@@ -32,8 +32,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void InitializeComponent()
 		{
             this.chkAlwaysShowPanelTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-			this.chkAlwaysShowConnectionTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-			this.chkIdentifyQuickConnectTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkAlwaysShowConnectionTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkIdentifyQuickConnectTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkOpenNewTabRightOfSelected = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkAlwaysShowPanelSelectionDlg = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkShowLogonInfoOnTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -55,22 +55,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkAlwaysShowPanelTabs.TabIndex = 0;
             this.chkAlwaysShowPanelTabs.Text = "Always show panel tabs";
             this.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = true;
-			// 
-			// chkAlwaysShowConnectionTabs
-			// 
-			this.chkAlwaysShowConnectionTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
-			this.chkAlwaysShowConnectionTabs.AutoSize = true;
+            // 
+            // chkAlwaysShowConnectionTabs
+            // 
+            this.chkAlwaysShowConnectionTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkAlwaysShowConnectionTabs.AutoSize = true;
             this.chkAlwaysShowConnectionTabs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.chkAlwaysShowConnectionTabs.Location = new System.Drawing.Point(3, 26);
-			this.chkAlwaysShowConnectionTabs.Name = "chkAlwaysShowConnectionTabs";
-			this.chkAlwaysShowConnectionTabs.Size = new System.Drawing.Size(200, 17);
-			this.chkAlwaysShowConnectionTabs.TabIndex = 0;
-			this.chkAlwaysShowConnectionTabs.Text = "Always show connection tabs";
-			this.chkAlwaysShowConnectionTabs.UseVisualStyleBackColor = true;
-			// 
-			// chkIdentifyQuickConnectTabs
-			// 
-			this.chkIdentifyQuickConnectTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkAlwaysShowConnectionTabs.Location = new System.Drawing.Point(3, 26);
+            this.chkAlwaysShowConnectionTabs.Name = "chkAlwaysShowConnectionTabs";
+            this.chkAlwaysShowConnectionTabs.Size = new System.Drawing.Size(178, 17);
+            this.chkAlwaysShowConnectionTabs.TabIndex = 0;
+            this.chkAlwaysShowConnectionTabs.Text = "Always show connection tabs";
+            this.chkAlwaysShowConnectionTabs.UseVisualStyleBackColor = true;
+            this.chkAlwaysShowConnectionTabs.Visible = false;
+            // 
+            // chkIdentifyQuickConnectTabs
+            // 
+            this.chkIdentifyQuickConnectTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkIdentifyQuickConnectTabs.AutoSize = true;
             this.chkIdentifyQuickConnectTabs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkIdentifyQuickConnectTabs.Location = new System.Drawing.Point(3, 118);
@@ -155,6 +156,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // txtBoxPanelName
             // 
+            this.txtBoxPanelName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxPanelName.Location = new System.Drawing.Point(43, 246);
             this.txtBoxPanelName.Name = "txtBoxPanelName";
             this.txtBoxPanelName.Size = new System.Drawing.Size(213, 22);
@@ -177,14 +179,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.txtBoxPanelName);
             this.Controls.Add(this.chkCreateEmptyPanelOnStart);
             this.Controls.Add(this.chkAlwaysShowPanelTabs);
-			this.Controls.Add(this.chkAlwaysShowConnectionTabs);
-			this.Controls.Add(this.chkIdentifyQuickConnectTabs);
+            this.Controls.Add(this.chkAlwaysShowConnectionTabs);
+            this.Controls.Add(this.chkIdentifyQuickConnectTabs);
             this.Controls.Add(this.chkOpenNewTabRightOfSelected);
             this.Controls.Add(this.chkAlwaysShowPanelSelectionDlg);
             this.Controls.Add(this.chkShowLogonInfoOnTabs);
             this.Controls.Add(this.chkDoubleClickClosesTab);
             this.Controls.Add(this.chkShowProtocolOnTabs);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "TabsPanelsPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.ResumeLayout(false);
