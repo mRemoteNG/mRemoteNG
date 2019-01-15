@@ -27,6 +27,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using TabControl = Crownwood.Magic.Controls.TabControl;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -594,7 +595,24 @@ namespace mRemoteNG.UI.Forms
 			    newDocumentStyle = nonConnectionPanelCount == 0 ? DocumentStyle.DockingSdi : DocumentStyle.DockingWindow;
 			}
 
-		    if (pnlDock.DocumentStyle == newDocumentStyle) return;
+			foreach (var dockContent in pnlDock.Documents)
+			{
+				var document = (DockContent)dockContent;
+				if (document is ConnectionWindow)
+				{
+					var connectionWindow = (ConnectionWindow)document;
+					if (Settings.Default.AlwaysShowConnectionTabs == false)
+					{
+						connectionWindow.TabController.HideTabsMode = TabControl.HideTabsModes.HideAlways;
+					}
+					else
+					{
+						connectionWindow.TabController.HideTabsMode = TabControl.HideTabsModes.ShowAlways;
+					}
+				}
+			}
+
+			if (pnlDock.DocumentStyle == newDocumentStyle) return;
 		    pnlDock.DocumentStyle = newDocumentStyle;
 		    pnlDock.Size = new Size(1, 1);
 		}

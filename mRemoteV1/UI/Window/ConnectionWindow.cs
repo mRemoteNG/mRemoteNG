@@ -139,7 +139,10 @@ namespace mRemoteNG.UI.Window
                 else
                     TabController.TabPages.Add(nTab);
 
-                nTab.Selected = true;
+				if (Settings.Default.AlwaysShowConnectionTabs == false)
+					TabController.HideTabsMode = TabControl.HideTabsModes.HideAlways;
+
+				nTab.Selected = true;
                 _ignoreChangeSelectedTabClick = false;
 
                 return nTab;
