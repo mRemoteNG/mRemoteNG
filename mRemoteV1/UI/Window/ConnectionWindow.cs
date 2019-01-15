@@ -130,6 +130,11 @@ namespace mRemoteNG.UI.Window
                     TabPageContextMenuStrip = cmenTab
                 };
 
+				if (Settings.Default.AlwaysShowConnectionTabs == false)
+                    // TODO: See if we can make this work with DPS...
+					//TabController.HideTabsMode = TabControl.HideTabsModes.HideAlways;
+
+
                 //Show the tab
                 conTab.Show(connDock,DockState.Document);
                 conTab.Focus();

@@ -2770,5 +2770,17 @@ namespace mRemoteNG {
                 this["PlaceSearchBarAboveConnectionTree"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlwaysShowConnectionTabs {
+            get {
+                return ((bool)(this["AlwaysShowConnectionTabs"]));
+            }
+            set {
+                this["AlwaysShowConnectionTabs"] = value;
+            }
+        }
     }
 }
