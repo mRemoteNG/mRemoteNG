@@ -18,7 +18,6 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
-using Message = System.Windows.Forms.Message;
 using TabControl = Crownwood.Magic.Controls.TabControl;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
@@ -180,16 +179,16 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if(ThemeManager.getInstance().ThemingActive)
+            if (!ThemeManager.getInstance().ThemingActive) return;
+            base.ApplyTheme();
+            vsToolStripExtender = new VisualStudioToolStripExtender(components)
             {
-                base.ApplyTheme();
-                this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-                vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
-                vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
-                TabController.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
-                TabController.TextColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Foreground");
-                TabController.TextInactiveColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Disabled_Foreground");
-            }
+                DefaultRenderer = _toolStripProfessionalRenderer
+            };
+            vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
+            TabController.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
+            TabController.TextColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Foreground");
+            TabController.TextInactiveColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Disabled_Foreground");
         }
 
         private bool _documentHandlersAdded;
@@ -424,14 +423,7 @@ namespace mRemoteNG.UI.Window
                     cmenTabTransferFile.Visible = true;
                 }
 
-                if (interfaceControl.Protocol is PuttyBase)
-                {
-                    cmenTabPuttySettings.Visible = true;
-                }
-                else
-                {
-                    cmenTabPuttySettings.Visible = false;
-                }
+                cmenTabPuttySettings.Visible = interfaceControl.Protocol is PuttyBase;
 
                 AddExternalApps();
             }
@@ -450,8 +442,7 @@ namespace mRemoteNG.UI.Window
                 if (!(TabController.SelectedTab?.Tag is InterfaceControl)) return;
                 var interfaceControl = (InterfaceControl)TabController.SelectedTab?.Tag;
 
-                var protocol = interfaceControl.Protocol as RdpProtocol;
-                if (protocol != null)
+                if (interfaceControl.Protocol is RdpProtocol protocol)
                 {
                     var rdp = protocol;
                     rdp.ToggleSmartSize();
@@ -472,8 +463,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                if (interfaceControl == null) return;
+                if (!(TabController.SelectedTab?.Tag is InterfaceControl interfaceControl)) return;
 
                 if (interfaceControl.Info.Protocol == ProtocolType.SSH1 | interfaceControl.Info.Protocol == ProtocolType.SSH2)
                     SshTransferFile();
@@ -526,8 +516,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
-                if (vnc == null) return;
+                if (!(interfaceControl?.Protocol is ProtocolVNC vnc)) return;
                 cmenTabViewOnly.Checked = !cmenTabViewOnly.Checked;
                 vnc.ToggleViewOnly();
             }
@@ -620,7 +609,7 @@ namespace mRemoteNG.UI.Window
                 }
 
                 //add ext apps
-                foreach (ExternalTool externalTool in Runtime.ExternalToolsService.ExternalTools)
+                foreach (var externalTool in Runtime.ExternalToolsService.ExternalTools)
                 {
                     var nItem = new ToolStripMenuItem
                     {
@@ -629,7 +618,7 @@ namespace mRemoteNG.UI.Window
                         /* rare failure here. While ExternalTool.Image already tries to default this
                          * try again so it's not null/doesn't crash.
                          */
-                        Image = externalTool.Image ?? Resources.mRemote_Icon.ToBitmap()
+                        Image = externalTool.Image ?? Resources.mRemoteNG_Icon.ToBitmap()
                     };
 
                     nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender).Tag as ExternalTool);
@@ -758,8 +747,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                if (interfaceControl == null) return;
+                if (!(TabController.SelectedTab?.Tag is InterfaceControl interfaceControl)) return;
                 _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
                 _ignoreChangeSelectedTabClick = false;
             }
@@ -773,8 +761,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-                if (interfaceControl == null) return;
+                if (!(TabController.SelectedTab?.Tag is InterfaceControl interfaceControl)) return;
                 interfaceControl.Protocol.Close();
                 _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
             }
@@ -788,10 +775,13 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var newTitle = TabController.SelectedTab.Title;
-                if (new InputBox().ShowAsDialog(Language.strNewTitle, Language.strNewTitle + ":", ref newTitle) == DialogResult.OK && 
-                    !string.IsNullOrEmpty(newTitle))
-                    TabController.SelectedTab.Title = newTitle.Replace("&", "&&");
+                var title = TabController.SelectedTab.Title;
+                using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref title))
+                {
+                    var dr = frmInputBox.ShowDialog();
+                    if (dr == DialogResult.OK && !string.IsNullOrEmpty(frmInputBox.returnValue))
+                        TabController.SelectedTab.Title = frmInputBox.returnValue;// newTitle.Replace("&", "&&");
+                }
             }
             catch (Exception ex)
             {
@@ -811,8 +801,7 @@ namespace mRemoteNG.UI.Window
         public void Prot_Event_Closed(object sender)
         {
             var protocolBase = sender as ProtocolBase;
-            var tabPage = protocolBase?.InterfaceControl.Parent as TabPage;
-            if (tabPage != null)
+            if (protocolBase?.InterfaceControl.Parent is TabPage tabPage)
                 CloseTab(tabPage);
         }
         #endregion

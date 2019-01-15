@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
         ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string>, 
         IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>>
     {
+        public Version Version { get; } = new Version(1, 0);
+
         public string Serialize(IEnumerable<LocalConnectionPropertiesModel> models)
         {
             var localConnections = models

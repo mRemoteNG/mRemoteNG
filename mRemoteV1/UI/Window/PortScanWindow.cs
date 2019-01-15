@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -90,7 +92,7 @@ namespace mRemoteNG.UI.Window
 
 	        try
 	        {
-                olvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
+                olvHosts.Columns.AddRange(new ColumnHeader[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
 	            ShowImportControls(true);
 	            cbProtocol.SelectedIndex = 0;
 		        numericSelectorTimeout.Value = 5;
@@ -132,40 +134,35 @@ namespace mRemoteNG.UI.Window
 
 	    private void btnImport_Click(object sender, EventArgs e)
 		{
-            ProtocolType protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
+            var protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
 		    importSelectedHosts(protocol);
 		}
         #endregion
 				
 		private void ApplyLanguage()
 		{
-			lblStartIP.Text = $"{Language.strStartIP}:";
-			lblEndIP.Text = $"{Language.strEndIP}:";
+			lblStartIP.Text = Language.strStartIP;
+			lblEndIP.Text = Language.strEndIP;
 			btnScan.Text = Language.strButtonScan;
 			btnImport.Text = Language.strButtonImport;
-			lblOnlyImport.Text = $"{Language.strProtocolToImport}:";
+			lblOnlyImport.Text = Language.strProtocolToImport;
 			clmHost.Text = Language.strColumnHostnameIP;
 			clmOpenPorts.Text = Language.strOpenPorts;
 			clmClosedPorts.Text = Language.strClosedPorts;
-			Label2.Text = $"{Language.strEndPort}:";
-			Label1.Text = $"{Language.strStartPort}:";
-			lblTimeout.Text = $"{Language.strTimeoutInSeconds}";
+            ngCheckFirstPort.Text = Language.strStartPort;
+            ngCheckLastPort.Text = Language.strEndPort;
+			lblTimeout.Text = Language.strTimeoutInSeconds;
 			TabText = Language.strMenuPortScan;
 			Text = Language.strMenuPortScan;
 		}
 				
 		private void ShowImportControls(bool controlsVisible)
 		{
-			pnlScan.Visible = controlsVisible;
 			pnlImport.Visible = controlsVisible;
 			if (controlsVisible)
-			{
 				olvHosts.Height = pnlImport.Top - olvHosts.Top;
-			}
 			else
-			{
 				olvHosts.Height = pnlImport.Bottom - olvHosts.Top;
-			}
 		}
 				
 		private void StartScan()
@@ -176,10 +173,13 @@ namespace mRemoteNG.UI.Window
 				SwitchButtonText();
 				olvHosts.Items.Clear();
 						
-				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
-				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
-				
-				_portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value, ((int)numericSelectorTimeout.Value)*1000);
+				var ipAddressStart = IPAddress.Parse(ipStart.Text);
+				var ipAddressEnd = IPAddress.Parse(ipEnd.Text);
+
+                if (!ngCheckFirstPort.Checked && !ngCheckLastPort.Checked)
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int)portStart.Value, (int)portEnd.Value, (int)numericSelectorTimeout.Value * 1000, true);
+                else
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int)portStart.Value, (int)portEnd.Value, (int)numericSelectorTimeout.Value*1000);
 						
 				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
 				_portScanner.HostScanned += PortScanner_HostScanned;
@@ -194,8 +194,12 @@ namespace mRemoteNG.UI.Window
 		}
 				
 		private void StopScan()
-		{
-		    _portScanner?.StopScan();
+        {
+            _portScanner.BeginHostScan -= PortScanner_BeginHostScan;
+            _portScanner.HostScanned -= PortScanner_HostScanned;
+            _portScanner.ScanComplete -= PortScanner_ScanComplete;
+
+            _portScanner?.StopScan();
 		    _scanning = false;
 			SwitchButtonText();
 		}
@@ -315,6 +319,18 @@ namespace mRemoteNG.UI.Window
         private void importHTTPToolStripMenuItem_Click(object sender, EventArgs e)
         {
             importSelectedHosts(ProtocolType.HTTP);
+        }
+
+        private void NgCheckFirstPort_CheckedChanged(object sender, EventArgs e)
+        {
+            portStart.Enabled = ngCheckFirstPort.Checked;
+        }
+
+        private void NgCheckLastPort_CheckedChanged(object sender, EventArgs e)
+        {
+            portEnd.Enabled = ngCheckLastPort.Checked;
+
+            portEnd.Value = portEnd.Enabled ? 65535 : 0;
         }
     }
 }

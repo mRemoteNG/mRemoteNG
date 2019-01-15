@@ -445,15 +445,13 @@ namespace mRemoteNG.UI.Menu
             if (Runtime.WindowList == null || Runtime.WindowList.Count == 0) return;
             foreach (BaseWindow window in Runtime.WindowList)
             {
-                var connectionWindow = window as ConnectionWindow;
-                if (connectionWindow == null)
+                if (!(window is ConnectionWindow connectionWindow))
                     return;
 
                 var icList = new List<InterfaceControl>();
                 foreach (Crownwood.Magic.Controls.TabPage tab in connectionWindow.TabController.TabPages)
                 {
-                    var tag = tab.Tag as InterfaceControl;
-                    if (tag != null)
+                    if (tab.Tag is InterfaceControl tag)
                     {
                         icList.Add(tag);
                     }

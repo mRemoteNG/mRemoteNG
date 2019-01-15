@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Window
         private AbstractConnectionRecord _selectedTreeNode;
         public AbstractConnectionRecord SelectedTreeNode
         {
-            get { return _selectedTreeNode; }
+            get => _selectedTreeNode;
             set
             {
                 _selectedTreeNode = value;
@@ -207,11 +207,8 @@ namespace mRemoteNG.UI.Window
         #region Public Properties
         public bool PropertiesVisible
 		{
-			get
-			{
-			    return _btnShowProperties.Checked;
-			}
-			set
+			get => _btnShowProperties.Checked;
+            set
 			{
                 _btnShowProperties.Checked = value;
 			    if (!value) return;
@@ -223,11 +220,8 @@ namespace mRemoteNG.UI.Window
 		
         public bool InheritanceVisible
 		{
-			get
-			{
-			    return _btnShowInheritance.Checked;
-			}
-			set
+			get => _btnShowInheritance.Checked;
+            set
 			{
                 _btnShowInheritance.Checked = value;
 			    if (!value) return;
@@ -239,11 +233,8 @@ namespace mRemoteNG.UI.Window
 		
         public bool DefaultPropertiesVisible
 		{
-			get
-			{
-			    return _btnShowDefaultProperties.Checked;
-			}
-			set
+			get => _btnShowDefaultProperties.Checked;
+            set
 			{
                 _btnShowDefaultProperties.Checked = value;
 			    if (!value) return;
@@ -255,8 +246,8 @@ namespace mRemoteNG.UI.Window
 		
         public bool DefaultInheritanceVisible
 		{
-			get { return _btnShowDefaultInheritance.Checked; }
-			set
+			get => _btnShowDefaultInheritance.Checked;
+            set
 			{
                 _btnShowDefaultInheritance.Checked = value;
 			    if (!value) return;
@@ -283,6 +274,7 @@ namespace mRemoteNG.UI.Window
             WindowType = WindowType.Config;
             DockPnl = panel;
             InitializeComponent();
+            ApplyLanguage();
         }
         #endregion
 
@@ -431,14 +423,11 @@ namespace mRemoteNG.UI.Window
 
                 _btnIcon.Image = null;
 
-			    var gridObjectAsConnectionInfo = propertyGridObject as ConnectionInfo;
-			    if (gridObjectAsConnectionInfo != null) //CONNECTION INFO
+                if (propertyGridObject is ConnectionInfo gridObjectAsConnectionInfo) //CONNECTION INFO
 				{
-                    var gridObjectAsContainerInfo = propertyGridObject as ContainerInfo;
-				    if (gridObjectAsContainerInfo != null) //CONTAINER
+                    if (propertyGridObject is ContainerInfo gridObjectAsContainerInfo) //CONTAINER
                     {
-                        var gridObjectAsRootNodeInfo = propertyGridObject as RootNodeInfo;
-                        if (gridObjectAsRootNodeInfo != null) // ROOT
+                        if (propertyGridObject is RootNodeInfo gridObjectAsRootNodeInfo) // ROOT
 					    {
 					        // ReSharper disable once SwitchStatementMissingSomeCases
                             switch (gridObjectAsRootNodeInfo.Type)
@@ -616,20 +605,18 @@ namespace mRemoteNG.UI.Window
 		
 		private new void ApplyTheme()
 		{
-            if (Themes.ThemeManager.getInstance().ThemingActive)
-            {
-                _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
-                _pGrid.ViewForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
-                _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Border");
-                _pGrid.HelpBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                _pGrid.HelpForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground"); 
-                _pGrid.CommandsDisabledLinkColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
-                _pGrid.CommandsBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background"); 
-                _pGrid.CommandsForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
-            }
+            if (!ThemeManager.getInstance().ThemingActive) return;
+            _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
+            _pGrid.ViewForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Border");
+            _pGrid.HelpBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            _pGrid.HelpForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground"); 
+            _pGrid.CommandsDisabledLinkColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
+            _pGrid.CommandsBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background"); 
+            _pGrid.CommandsForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
         }
 
         private void AddToolStripItems()
@@ -685,7 +672,6 @@ namespace mRemoteNG.UI.Window
 		
 		private void Config_Load(object sender, EventArgs e)
 		{
-			ApplyLanguage();
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             ApplyTheme();
@@ -716,8 +702,7 @@ namespace mRemoteNG.UI.Window
         private void UpdateConnectionInfoNode(PropertyValueChangedEventArgs e)
         {
             Debug.WriteLine("update config");
-            var selectedGridObject = _pGrid.SelectedObject as ConnectionInfo;
-            if (selectedGridObject == null) return;
+            if (!(_pGrid.SelectedObject is ConnectionInfo selectedGridObject)) return;
             if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
             {
                 selectedGridObject.SetDefaultPort();
@@ -748,8 +733,7 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)
         {
-            var rootInfo = _pGrid.SelectedObject as RootNodeInfo;
-            if (rootInfo == null)
+            if (!(_pGrid.SelectedObject is RootNodeInfo rootInfo))
                 return;
 
             if (e.ChangedItem.PropertyDescriptor?.Name != "Password")
@@ -795,8 +779,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
                 var strHide = new List<string>();
-			    var o = _pGrid.SelectedObject as RootNodeInfo;
-			    if (o != null)
+                if (_pGrid.SelectedObject is RootNodeInfo o)
                 {
                     var rootInfo = o;
                     if (rootInfo.Type == RootNodeType.PuttySessions)
@@ -1456,8 +1439,7 @@ namespace mRemoteNG.UI.Window
 		
 		private void btnShowProperties_Click(object sender, EventArgs e)
 		{
-		    var o = _pGrid.SelectedObject as ConnectionInfoInheritance;
-		    if (o != null)
+            if (_pGrid.SelectedObject is ConnectionInfoInheritance o)
 			{
 				if (_pGrid.SelectedObject is DefaultConnectionInheritance)
 				{
@@ -1633,8 +1615,7 @@ namespace mRemoteNG.UI.Window
 			{
                 _btnHostStatus.Image = Resources.HostStatus_Check;
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
-			    var info = connectionInfo as ConnectionInfo;
-                if (info == null) return;
+                if (!(connectionInfo is ConnectionInfo info)) return;
                 if (info.IsContainer) return;
 
                 _btnHostStatus.Tag = "checking";

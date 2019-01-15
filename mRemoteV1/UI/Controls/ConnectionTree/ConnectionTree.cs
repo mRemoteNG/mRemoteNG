@@ -109,15 +109,13 @@ namespace mRemoteNG.UI.Controls
         {
             Collapsed += (sender, args) =>
             {
-                var container = args.Model as ContainerInfo;
-                if (container == null) return;
+                if (!(args.Model is ContainerInfo container)) return;
                 container.IsExpanded = false;
 				AutoResizeColumn(Columns[0]);
 			};
             Expanded += (sender, args) =>
             {
-                var container = args.Model as ContainerInfo;
-                if (container == null) return;
+                if (!(args.Model is ContainerInfo container)) return;
                 container.IsExpanded = true;
 				AutoResizeColumn(Columns[0]);
 			};
@@ -204,8 +202,7 @@ namespace mRemoteNG.UI.Controls
                 return;
             }
 
-            var senderAsConnectionInfo = sender as ConnectionInfo;
-            if (senderAsConnectionInfo == null)
+            if (!(sender is ConnectionInfo senderAsConnectionInfo))
                 return;
 
             RefreshObject(senderAsConnectionInfo);
@@ -309,11 +306,9 @@ namespace mRemoteNG.UI.Controls
 
         public void RenameSelectedNode()
         {
-            if (SelectedItem != null)
-            {
-                _allowEdit = true;
-                SelectedItem.BeginEdit();
-            }
+            if (SelectedItem == null) return;
+            _allowEdit = true;
+            SelectedItem.BeginEdit();
         }
 
         public void DeleteSelectedNode()
@@ -335,8 +330,7 @@ namespace mRemoteNG.UI.Controls
 
             Runtime.ConnectionsService.BeginBatchingSaves();
 
-            var sortTargetAsContainer = sortTarget as ContainerInfo;
-            if (sortTargetAsContainer != null)
+            if (sortTarget is ContainerInfo sortTargetAsContainer)
                 sortTargetAsContainer.SortRecursive(sortDirection);
             else
                 SelectedNode.Parent.SortRecursive(sortDirection);
@@ -389,12 +383,10 @@ namespace mRemoteNG.UI.Controls
 			AutoResizeColumn(Columns[0]);
 
 			// turn filtering back on
-			if (filteringEnabled)
-			{
-				ModelFilter = filter;
-				UpdateFiltering();
-			}
-		}
+            if (!filteringEnabled) return;
+            ModelFilter = filter;
+            UpdateFiltering();
+        }
 
         protected override void UpdateFiltering()
         {
@@ -417,20 +409,20 @@ namespace mRemoteNG.UI.Controls
         private void OnMouse_DoubleClick(object sender, MouseEventArgs mouseEventArgs)
         {
             if (mouseEventArgs.Clicks < 2) return;
+            // ReSharper disable once NotAccessedVariable
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-	        var clickedNode = listItem?.RowObject as ConnectionInfo;
-            if (clickedNode == null) return;
+            if (!(listItem?.RowObject is ConnectionInfo clickedNode)) return;
             DoubleClickHandler.Execute(clickedNode);
         }
 
         private void OnMouse_SingleClick(object sender, MouseEventArgs mouseEventArgs)
         {
             if (mouseEventArgs.Clicks > 1) return;
+            // ReSharper disable once NotAccessedVariable
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem?.RowObject as ConnectionInfo;
-            if (clickedNode == null) return;
+            if (!(listItem?.RowObject is ConnectionInfo clickedNode)) return;
             SingleClickHandler.Execute(clickedNode);
         }
 

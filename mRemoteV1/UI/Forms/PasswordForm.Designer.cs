@@ -48,18 +48,18 @@ namespace mRemoteNG.UI.Forms
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(73, 10);
+            this.lblPassword.Location = new System.Drawing.Point(73, 9);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(56, 13);
+            this.lblPassword.Size = new System.Drawing.Size(59, 13);
             this.lblPassword.TabIndex = 1;
             this.lblPassword.Text = "Password:";
             // 
             // lblVerify
             // 
             this.lblVerify.AutoSize = true;
-            this.lblVerify.Location = new System.Drawing.Point(73, 49);
+            this.lblVerify.Location = new System.Drawing.Point(73, 50);
             this.lblVerify.Name = "lblVerify";
-            this.lblVerify.Size = new System.Drawing.Size(36, 13);
+            this.lblVerify.Size = new System.Drawing.Size(38, 13);
             this.lblVerify.TabIndex = 3;
             this.lblVerify.Text = "Verify:";
             // 
@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(219, 128);
+            this.btnOK.Location = new System.Drawing.Point(215, 124);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 7;
@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Forms
             this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(300, 128);
+            this.btnCancel.Location = new System.Drawing.Point(296, 124);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -94,9 +94,9 @@ namespace mRemoteNG.UI.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.lblStatus, 2);
             this.lblStatus.ForeColor = System.Drawing.Color.Red;
-            this.lblStatus.Location = new System.Drawing.Point(73, 88);
+            this.lblStatus.Location = new System.Drawing.Point(73, 91);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(302, 13);
+            this.lblStatus.Size = new System.Drawing.Size(298, 13);
             this.lblStatus.TabIndex = 5;
             this.lblStatus.Text = "Status";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -105,7 +105,7 @@ namespace mRemoteNG.UI.Forms
             // pbLock
             // 
             this.pbLock.Image = global::mRemoteNG.Resources.Lock;
-            this.pbLock.Location = new System.Drawing.Point(3, 13);
+            this.pbLock.Location = new System.Drawing.Point(3, 12);
             this.pbLock.Name = "pbLock";
             this.tableLayoutPanel1.SetRowSpan(this.pbLock, 6);
             this.pbLock.Size = new System.Drawing.Size(64, 64);
@@ -118,10 +118,10 @@ namespace mRemoteNG.UI.Forms
             this.txtVerify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.txtVerify, 2);
-            this.txtVerify.Location = new System.Drawing.Point(73, 65);
+            this.txtVerify.Location = new System.Drawing.Point(73, 66);
             this.txtVerify.Name = "txtVerify";
             this.txtVerify.SelectAllOnFocus = true;
-            this.txtVerify.Size = new System.Drawing.Size(302, 20);
+            this.txtVerify.Size = new System.Drawing.Size(298, 22);
             this.txtVerify.TabIndex = 4;
             this.txtVerify.UseSystemPasswordChar = true;
             this.txtVerify.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
@@ -131,10 +131,10 @@ namespace mRemoteNG.UI.Forms
             this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.txtPassword, 2);
-            this.txtPassword.Location = new System.Drawing.Point(73, 26);
+            this.txtPassword.Location = new System.Drawing.Point(73, 25);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.SelectAllOnFocus = true;
-            this.txtPassword.Size = new System.Drawing.Size(302, 20);
+            this.txtPassword.Size = new System.Drawing.Size(298, 22);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
@@ -164,7 +164,7 @@ namespace mRemoteNG.UI.Forms
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.33334F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(378, 154);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(374, 150);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
             // PasswordForm
@@ -173,9 +173,10 @@ namespace mRemoteNG.UI.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(378, 154);
+            this.ClientSize = new System.Drawing.Size(374, 150);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

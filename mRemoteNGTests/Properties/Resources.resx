@@ -154,6 +154,9 @@
   <data name="dev_update_portable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dev-update-portable.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="TestImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TestImage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="test_puttyConnectionManager_database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test_puttyConnectionManager_database.dat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>

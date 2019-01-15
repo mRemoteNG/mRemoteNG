@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Windows.Forms;
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -26,6 +16,16 @@ using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using TabControl = Crownwood.Magic.Controls.TabControl;
 
@@ -190,6 +190,9 @@ namespace mRemoteNG.UI.Forms
                 if (!panelAdder.DoesPanelExist(panelName))
                     panelAdder.AddPanel(panelName);
             }
+            
+            FrmSplashScreen frmSplashScreen = FrmSplashScreen.getInstance();
+            frmSplashScreen.Close();
         }
 
         private void ApplyLanguage()
@@ -309,7 +312,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new frmOptions(Language.strTabUpdates))
+            using (var optionsForm = new FrmOptions(Language.strTabUpdates))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -436,7 +439,8 @@ namespace mRemoteNG.UI.Forms
 				            {
 				                if (controlThatWasClicked is TreeView ||
 				                    controlThatWasClicked is ComboBox ||
-				                    controlThatWasClicked is TextBox)
+				                    controlThatWasClicked is TextBox ||
+                                    controlThatWasClicked is FrmMain)
 				                {
 				                    controlThatWasClicked.Focus();
 				                }
@@ -560,6 +564,9 @@ namespace mRemoteNG.UI.Forms
 			{
 				titleBuilder.Append(separator);
 				titleBuilder.Append(SelectedConnection.Name);
+
+                if (Settings.Default.TrackActiveConnectionInConnectionTree)
+                    Windows.TreeForm.JumpToNode(SelectedConnection);
 			}
 
             Text = titleBuilder.ToString();

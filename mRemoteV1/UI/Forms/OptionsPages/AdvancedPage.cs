@@ -16,13 +16,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
+            PageIcon = Resources.Config_Icon;
             var display = new DisplayProperties();
             var img = display.ScaleImage(Resources.PuttyConfig);
             btnLaunchPutty.Image = img;
         }
 
         #region Public Methods
-
         public override string PageName
         {
             get => Language.strTabAdvanced;

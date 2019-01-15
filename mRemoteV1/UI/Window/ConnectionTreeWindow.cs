@@ -42,6 +42,7 @@ namespace mRemoteNG.UI.Window
 			SetMenuEventHandlers();
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += OnAppSettingsChanged;
+		    ApplyLanguage();
         }
 
 	    private void OnAppSettingsChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -51,13 +52,20 @@ namespace mRemoteNG.UI.Window
 	            ConnectionTree.UseFiltering = Settings.Default.UseFilterSearch;
 	            ApplyFiltering();
             }
-	    }
+
+            PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
+
+        }
+
+        private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
+        {
+            tableLayoutPanel1.Dock = placeSearchBarAboveConnectionTree ? DockStyle.Top : DockStyle.Bottom;
+        }
 
 
 	    #region Form Stuff
         private void Tree_Load(object sender, EventArgs e)
         {
-            ApplyLanguage();
             //work on the theme change
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
@@ -208,29 +216,32 @@ namespace mRemoteNG.UI.Window
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
 		{
 			try
-			{
-				if (e.KeyCode == Keys.Escape)
-				{
-					e.Handled = true;
-				    olvConnections.Focus();
-				}
-				else if (e.KeyCode == Keys.Up)
-				{
-                    var match = olvConnections.NodeSearcher.PreviousMatch();
-                    JumpToNode(match);
-                    e.Handled = true;
-				}
-				else if (e.KeyCode == Keys.Down)
-				{
-				    var match = olvConnections.NodeSearcher.NextMatch();
-				    JumpToNode(match);
-                    e.Handled = true;
-				}
-				else
-				{
-					tvConnections_KeyDown(sender, e);
-				}
-			}
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        e.Handled = true;
+                        olvConnections.Focus();
+                        break;
+                    case Keys.Up:
+                    {
+                        var match = olvConnections.NodeSearcher.PreviousMatch();
+                        JumpToNode(match);
+                        e.Handled = true;
+                        break;
+                    }
+                    case Keys.Down:
+                    {
+                        var match = olvConnections.NodeSearcher.NextMatch();
+                        JumpToNode(match);
+                        e.Handled = true;
+                        break;
+                    }
+                    default:
+                        tvConnections_KeyDown(sender, e);
+                        break;
+                }
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace("txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
@@ -261,7 +272,7 @@ namespace mRemoteNG.UI.Window
 	        }
         }
 
-	    private void JumpToNode(ConnectionInfo connectionInfo)
+	    public void JumpToNode(ConnectionInfo connectionInfo)
 	    {
 	        if (connectionInfo == null)
 	        {

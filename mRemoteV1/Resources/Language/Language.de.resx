@@ -1882,10 +1882,10 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>SSH-Übertragung fehlgeschlagen.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
-    <value>Anfangs IP</value>
+    <value>Erste IP</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
-    <value>Anfangs Port</value>
+    <value>Erster Port</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
     <value>Anfang/Ende</value>
@@ -2183,31 +2183,31 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Ohne Anmeldedaten verbinden</value>
   </data>
   <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
-    <value>Nicht zu Konsolensitzung verbinden</value>
+    <value>Keine Verbindung zur Konsolensitzung herstellen</value>
   </data>
   <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
-    <value>PuTTY konnte nicht gestartet werden</value>
+    <value>PuTTY konnte nicht gestartet werden.</value>
   </data>
   <data name="strExportEverything" xml:space="preserve">
-    <value>Export alles</value>
+    <value>Alles exportieren</value>
   </data>
   <data name="strExportFile" xml:space="preserve">
-    <value>Export Datei</value>
+    <value>Datei exportieren</value>
   </data>
   <data name="strExportProperties" xml:space="preserve">
-    <value>Export Eigeschaften</value>
+    <value>Eigenschaften exportieren</value>
   </data>
   <data name="strFilterAllImportable" xml:space="preserve">
-    <value>Alle importierbaren Dateien</value>
+    <value>Alle wichtigen Dateien</value>
   </data>
   <data name="strImportFileFailedMainInstruction" xml:space="preserve">
-    <value>Import fehlgeschlagen</value>
+    <value>Import-Vorgang fehlgeschlagen</value>
   </data>
   <data name="strImportFromFileMenuItem" xml:space="preserve">
     <value>Von &amp;Datei importieren</value>
   </data>
   <data name="strImportLocationContent" xml:space="preserve">
-    <value>Wo sollen die importierten Objekte platziert werden?</value>
+    <value>Wo sollen die importierten Elemente abgelegt werden?</value>
   </data>
   <data name="strImportLocationMainInstruction" xml:space="preserve">
     <value>Import Ziel</value>
@@ -2225,19 +2225,19 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Nächster Tab</value>
   </data>
   <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Vorheriger Tab</value>
+    <value>Hotkeys ändern</value>
   </data>
   <data name="strOptionsProxyTesting" xml:space="preserve">
-    <value>Teste...</value>
+    <value>Testen...</value>
   </data>
   <data name="strOptionsTabKeyboard" xml:space="preserve">
     <value>Tastatur</value>
   </data>
   <data name="strUpdateCheckFailedLabel" xml:space="preserve">
-    <value>Überprüfung fehlgeschlagen</value>
+    <value>Prüfung fehlgeschlagen</value>
   </data>
   <data name="strUpdateCheckingLabel" xml:space="preserve">
-    <value>Prüfe auf Updates...</value>
+    <value>Nach Updates suchen...</value>
   </data>
   <data name="strEncryptionEngine" xml:space="preserve">
     <value>Verschlüsselungs-Engine</value>
@@ -2255,7 +2255,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Mittel</value>
   </data>
   <data name="strPropertyNameSoundQuality" xml:space="preserve">
-    <value>Ton Qualität</value>
+    <value>Klangqualität</value>
   </data>
   <data name="strUpdatePortableDownloadComplete" xml:space="preserve">
     <value>Download abgeschlossen!</value>
@@ -2270,19 +2270,19 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Datei öffnen</value>
   </data>
   <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
-    <value>Immer erlauben</value>
+    <value>Immer zulassen</value>
   </data>
   <data name="strHttpsInsecureAllowOnce" xml:space="preserve">
-    <value>Ein Mal erlauben</value>
+    <value>Einmal zulassen</value>
   </data>
   <data name="strHttpsInsecureDontAllow" xml:space="preserve">
-    <value>Nie erlauben</value>
+    <value>Nicht erlauben</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Falsches Passwort</value>
   </data>
   <data name="Source" xml:space="preserve">
-    <value>Qualle</value>
+    <value>Quelle</value>
   </data>
   <data name="strBack" xml:space="preserve">
     <value>Zurück</value>
@@ -2308,7 +2308,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>&amp;Nochmal versuchen</value>
   </data>
   <data name="strExternalToolDefaultName" xml:space="preserve">
-    <value>Neues externes Programm</value>
+    <value>Neues externes Werkzeug</value>
   </data>
   <data name="strLoadFromSqlFailedContent" xml:space="preserve">
     <value>Die Verbindungsinformationen konnten nicht vom SQL-Server geladen werden.</value>
@@ -2317,10 +2317,10 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Vorheriger Tab</value>
   </data>
   <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Tataturkürzel</value>
+    <value>Tastenkombinationen</value>
   </data>
   <data name="strPasswordStatusMustMatch" xml:space="preserve">
-    <value>Beide Passwörter müssen übereinstimmen</value>
+    <value>Die beide Passwörter müssen übereinstimmen.</value>
   </data>
   <data name="strPasswordStatusTooShort" xml:space="preserve">
     <value>Das Passwort muss mindestens 3 Zeichen lang sein.</value>
@@ -2341,19 +2341,19 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Passwort für {0}</value>
   </data>
   <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
-    <value>RDP-Verbindungs-Timeout:</value>
+    <value>RDP-Verbindungs-Timeout</value>
   </data>
   <data name="strNodeAlreadyInFolder" xml:space="preserve">
-    <value>Dieser Knoten ist bereits im Verzeichnis</value>
+    <value>Dieser Knoten befindet sich bereits in diesem Ordner.</value>
   </data>
   <data name="strNodeCannotDragOnSelf" xml:space="preserve">
-    <value>Knoten kann nicht auf sich selbst gezogen werden.</value>
+    <value>Der Knoten kann nicht auf sich selbst gezogen werden.</value>
   </data>
   <data name="strNodeCannotDragParentOnChild" xml:space="preserve">
-    <value>Elternknoten kann nicht auf Kindknoten gezogen werden.</value>
+    <value>Der übergeordnete Knoten kann nicht auf den untergeordneten Knoten gezogen werden.</value>
   </data>
   <data name="strNodeNotDraggable" xml:space="preserve">
-    <value>Dieser Knoten ist nicht ziehbar.</value>
+    <value>Dieser Knoten ist nicht verschiebbar.</value>
   </data>
   <data name="strEncryptionBlockCipherMode" xml:space="preserve">
     <value>Block Cipher-Modus</value>
@@ -2371,46 +2371,46 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Verbindung erfolgreich</value>
   </data>
   <data name="DatabaseNotAvailable" xml:space="preserve">
-    <value>Datenbank '{0}' nicht verfügbar.</value>
+    <value>Datenbank '{0}' ist nicht verfügbar.</value>
   </data>
   <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
-    <value>Verbindungen nach jeder Änderung speichern</value>
+    <value>Verbindungen nach jeder Bearbeitung speichern</value>
   </data>
   <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
     <value>Suchergebnisse in Verbindungen filtern</value>
   </data>
   <data name="TestConnection" xml:space="preserve">
-    <value>Teste Verbindung</value>
+    <value>Verbindung testen</value>
   </data>
   <data name="strTimeoutInSeconds" xml:space="preserve">
-    <value>Time-Out (Sekunden)</value>
+    <value>Time-Out [Sekunden]</value>
   </data>
   <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
     <value>&amp;Alles zurücksetzen</value>
   </data>
   <data name="strPropertyNameAutomaticResize" xml:space="preserve">
-    <value>Automatische Größenanpassung</value>
+    <value>Automatische Größenänderung</value>
   </data>
   <data name="strPuttySessionSettings" xml:space="preserve">
     <value>PuTTY Sitzungseinstellungen</value>
   </data>
   <data name="strShowOnToolbar" xml:space="preserve">
-    <value>Auf der Toolbar anzeigen</value>
+    <value>In der Symbolleiste anzeigen</value>
   </data>
   <data name="strAccept" xml:space="preserve">
     <value>Akzeptieren</value>
   </data>
   <data name="strCredentialEditor" xml:space="preserve">
-    <value>Hinzufügen</value>
+    <value>Anmeldeinformationen Editor</value>
   </data>
   <data name="strAssignedCredential" xml:space="preserve">
     <value>Zugewiesene Anmeldedaten</value>
   </data>
   <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
-    <value>Unsichere Zertifikate erlauben?</value>
+    <value>Unsicheres Zertifikat zulassen?</value>
   </data>
   <data name="Unlock" xml:space="preserve">
-    <value>Entsperren</value>
+    <value>Freischalten</value>
   </data>
   <data name="strOptionsThemeEnableTheming" xml:space="preserve">
     <value>Themes aktivieren</value>
@@ -2419,13 +2419,13 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Neuer Thema Name</value>
   </data>
   <data name="TestingConnection" xml:space="preserve">
-    <value>Teste Verbindung</value>
+    <value>Verbindung testen</value>
   </data>
   <data name="strExportToFileMenuItem" xml:space="preserve">
     <value>In Datei &amp;exportieren...</value>
   </data>
   <data name="strImportFileFailedContent" xml:space="preserve">
-    <value>Ein Fehler ist während des Imports der Datei {0} aufgetreten.</value>
+    <value>Beim Importieren der Datei ist ein Fehler aufgetreten ("{0}").</value>
   </data>
   <data name="strMenuLockToolbars" xml:space="preserve">
     <value>Symbolleisten sperren</value>
@@ -2462,7 +2462,7 @@ Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremote
     <value>Abrufen</value>
   </data>
   <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
-    <value>Das Change-Log konnte nicht herunter geladen werden.</value>
+    <value>Der Changelog konnte nicht heruntergeladen werden.</value>
   </data>
   <data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
     <value>Wählen Sie die vom Protokoll bereitgestellte Klangqualität: Dynamisch, Mittel, Hoch</value>
@@ -2477,7 +2477,7 @@ Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremote
     <value>Hinzufügen</value>
   </data>
   <data name="strPropertyDescriptionCredential" xml:space="preserve">
-    <value>Auswählen welche Anmeldeinformationen für diese Verbindung verwendet werden sollen.</value>
+    <value>Wählen Sie aus, welche Anmeldeinformationen für diese Verbindung verwendet werden sollen.</value>
   </data>
   <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
     <value>Möchten Sie die Anmeldeinformationen {0} wirklich löschen?</value>
@@ -2513,10 +2513,10 @@ Die Passwortlänge muss zwischen {0} und {1} liegen</value>
 Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   </data>
   <data name="strLogFilePath" xml:space="preserve">
-    <value>Protokollierungspfad</value>
+    <value>Pfad der Protokolldatei</value>
   </data>
   <data name="strChoosePath" xml:space="preserve">
-    <value>Pfad wählen</value>
+    <value>Pfad auswählen</value>
   </data>
   <data name="strUseDefault" xml:space="preserve">
     <value>Standard verwenden</value>
@@ -2534,7 +2534,7 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
     <value>Das ausgewählte Repository ist entsperrt</value>
   </data>
   <data name="Unlocking" xml:space="preserve">
-    <value>Entsperren</value>
+    <value>Freischalten</value>
   </data>
   <data name="UnlockCredentialRepository" xml:space="preserve">
     <value>Entsperre Credential Repository</value>
@@ -2569,176 +2569,23 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>Verwenden Sie die UTF8-Codierung für die RDP-Eigenschaft "Load Balance Info"</value>
   </data>
-  <data name="strConnectNoCredentials" xml:space="preserve">
-    <value>Ohne Anmeldedaten verbinden</value>
-  </data>
-  <data name="strExportEverything" xml:space="preserve">
-    <value>Alles exportieren</value>
-  </data>
-  <data name="strExportFile" xml:space="preserve">
-    <value>Datei exportieren</value>
-  </data>
-  <data name="strExportProperties" xml:space="preserve">
-    <value>Eigenschaften exportieren</value>
-  </data>
   <data name="strExportSelectedConnection" xml:space="preserve">
     <value>Die Aktuell gewählte Verbindung exportieren</value>
   </data>
   <data name="strExportSelectedFolder" xml:space="preserve">
     <value>Den Aktuell gewählten Ordner exportieren</value>
   </data>
-  <data name="strFilterAllImportable" xml:space="preserve">
-    <value>Alle wichtigen Dateien</value>
-  </data>
-  <data name="strImportFileFailedMainInstruction" xml:space="preserve">
-    <value>Import-Vorgang fehlgeschlagen</value>
-  </data>
-  <data name="strImportLocationContent" xml:space="preserve">
-    <value>Wo sollen die importierten Elemente abgelegt werden?</value>
-  </data>
-  <data name="strLoadFromSqlFailedContent" xml:space="preserve">
-    <value>Die Verbindungsinformationen konnten nicht vom SQL-Server geladen werden.</value>
-  </data>
-  <data name="strOptionsProxyTesting" xml:space="preserve">
-    <value>Testen...</value>
-  </data>
-  <data name="strOptionsTabKeyboard" xml:space="preserve">
-    <value>Tastatur</value>
-  </data>
-  <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Tastenkombinationen</value>
-  </data>
-  <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Hotkeys ändern</value>
-  </data>
-  <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-    <value>Vorheriger Tab</value>
-  </data>
-  <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
-    <value>Nächster Tab</value>
-  </data>
-  <data name="strUpdateCheckFailedLabel" xml:space="preserve">
-    <value>Prüfung fehlgeschlagen</value>
-  </data>
-  <data name="strUpdateCheckingLabel" xml:space="preserve">
-    <value>Nach Updates suchen...</value>
-  </data>
-  <data name="strPasswordStatusTooShort" xml:space="preserve">
-    <value>Das Passwort muss mindestens 3 Zeichen lang sein.</value>
-  </data>
-  <data name="strPasswordStatusMustMatch" xml:space="preserve">
-    <value>Die beide Passwörter müssen übereinstimmen.</value>
-  </data>
-  <data name="strPortScanComplete" xml:space="preserve">
-    <value>Port-Scan abgeschlossen.</value>
-  </data>
-  <data name="strTitlePasswordWithName" xml:space="preserve">
-    <value>Passwort für {0}</value>
-  </data>
-  <data name="strShowOnToolbar" xml:space="preserve">
-    <value>In der Symbolleiste anzeigen</value>
-  </data>
-  <data name="strTabSecurity" xml:space="preserve">
-    <value>Sicherheit</value>
-  </data>
-  <data name="strBack" xml:space="preserve">
-    <value>Zurück</value>
-  </data>
-  <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
-    <value>Keine Verbindung zur Konsolensitzung herstellen</value>
-  </data>
-  <data name="strPuttySessionSettings" xml:space="preserve">
-    <value>PuTTY Sitzungseinstellungen</value>
-  </data>
-  <data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
-    <value>Lastausgleichsinfo</value>
-  </data>
-  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
-    <value>Der Changelog konnte nicht heruntergeladen werden.</value>
-  </data>
-  <data name="strRDPSoundQualityHigh" xml:space="preserve">
-    <value>Hoch</value>
-  </data>
-  <data name="strRDPSoundQualityMedium" xml:space="preserve">
-    <value>Mittel</value>
-  </data>
-  <data name="strAccept" xml:space="preserve">
-    <value>Akzeptieren</value>
-  </data>
-  <data name="strAdd" xml:space="preserve">
-    <value>Hinzufügen</value>
-  </data>
-  <data name="strCredentialEditor" xml:space="preserve">
-    <value>Anmeldeinformationen Editor</value>
-  </data>
   <data name="strCredentialManager" xml:space="preserve">
     <value>Anmeldeinformationen Manager</value>
   </data>
-  <data name="strRemove" xml:space="preserve">
-    <value>Entfernen</value>
-  </data>
-  <data name="strTitle" xml:space="preserve">
-    <value>Titel</value>
-  </data>
-  <data name="strPropertyDescriptionCredential" xml:space="preserve">
-    <value>Wählen Sie aus, welche Anmeldeinformationen für diese Verbindung verwendet werden sollen.</value>
-  </data>
-  <data name="strLogFilePath" xml:space="preserve">
-    <value>Pfad der Protokolldatei</value>
-  </data>
-  <data name="strChoosePath" xml:space="preserve">
-    <value>Pfad auswählen</value>
-  </data>
-  <data name="strOpenFile" xml:space="preserve">
-    <value>Datei öffnen</value>
-  </data>
-  <data name="strUseDefault" xml:space="preserve">
-    <value>Standard verwenden</value>
-  </data>
-  <data name="strLogging" xml:space="preserve">
-    <value>Protokollierung</value>
-  </data>
   <data name="strPopups" xml:space="preserve">
     <value>Pop-ups</value>
-  </data>
-  <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
-    <value>Immer zulassen</value>
-  </data>
-  <data name="strHttpsInsecureAllowOnce" xml:space="preserve">
-    <value>Einmal zulassen</value>
-  </data>
-  <data name="strHttpsInsecureDontAllow" xml:space="preserve">
-    <value>Nicht erlauben</value>
-  </data>
-  <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
-    <value>Unsicheres Zertifikat zulassen?</value>
-  </data>
-  <data name="TestingConnection" xml:space="preserve">
-    <value>Verbindung testen</value>
-  </data>
-  <data name="IncorrectPassword" xml:space="preserve">
-    <value>Falsches Passwort</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>Quelle</value>
-  </data>
-  <data name="Unlocking" xml:space="preserve">
-    <value>Freischalten</value>
-  </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>Freischalten</value>
   </data>
   <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
     <value>http://www.famfamfam.com/</value>
   </data>
   <data name="strExportItems" xml:space="preserve">
     <value>Element exportieren</value>
-  </data>
-  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
-    <value>PuTTY konnte nicht gestartet werden.</value>
-  </data>
-  <data name="strExternalToolDefaultName" xml:space="preserve">
-    <value>Neues externes Werkzeug</value>
   </data>
   <data name="strHttp" xml:space="preserve">
     <value>HTTP</value>
@@ -2755,35 +2602,11 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   <data name="strICA" xml:space="preserve">
     <value>ICA</value>
   </data>
-  <data name="strImportFileFailedContent" xml:space="preserve">
-    <value>Beim Importieren der Datei ist ein Fehler aufgetreten ("{0}").</value>
-  </data>
   <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
     <value>Tabs</value>
   </data>
-  <data name="strPropertyNameAutomaticResize" xml:space="preserve">
-    <value>Automatische Größenänderung</value>
-  </data>
   <data name="strWeifenLuoAttributionURL" xml:space="preserve">
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
-  <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
-    <value>RDP-Verbindungs-Timeout</value>
-  </data>
-  <data name="strNodeAlreadyInFolder" xml:space="preserve">
-    <value>Dieser Knoten befindet sich bereits in diesem Ordner.</value>
-  </data>
-  <data name="strNodeCannotDragOnSelf" xml:space="preserve">
-    <value>Der Knoten kann nicht auf sich selbst gezogen werden.</value>
-  </data>
-  <data name="strNodeCannotDragParentOnChild" xml:space="preserve">
-    <value>Der übergeordnete Knoten kann nicht auf den untergeordneten Knoten gezogen werden.</value>
-  </data>
-  <data name="strNodeNotDraggable" xml:space="preserve">
-    <value>Dieser Knoten ist nicht verschiebbar.</value>
-  </data>
-  <data name="strUpdatePortableDownloadComplete" xml:space="preserve">
-    <value>Download abgeschlossen!</value>
   </data>
   <data name="strDownloadPortable" xml:space="preserve">
     <value>Download</value>
@@ -2791,19 +2614,10 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   <data name="strID" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="strPropertyNameSoundQuality" xml:space="preserve">
-    <value>Klangqualität</value>
-  </data>
-  <data name="TestConnection" xml:space="preserve">
-    <value>Verbindung testen</value>
-  </data>
   <data name="ConfigurationFileNotFound" xml:space="preserve">
     <value>Die Konfigurationsdatei fehlt.</value>
   </data>
-  <data name="DatabaseNotAvailable" xml:space="preserve">
-    <value>Datenbank '{0}' ist nicht verfügbar.</value>
-  </data>
-  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
-    <value>Verbindungen nach jeder Bearbeitung speichern</value>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Suchleiste über den Verbindungen anzeigen</value>
   </data>
 </root>

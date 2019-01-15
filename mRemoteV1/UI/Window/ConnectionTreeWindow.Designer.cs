@@ -32,13 +32,13 @@ namespace mRemoteNG.UI.Window
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.PictureBoxSearch = new Controls.Base.NGPictureBox();
             this.txtSearch = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).BeginInit();
             this.msMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // olvConnections
@@ -46,7 +46,6 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.AllowDrop = true;
             this.olvConnections.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.olvConnections.CellEditUseWholeCell = false;
-            this.tableLayoutPanel1.SetColumnSpan(this.olvConnections, 2);
             this.olvConnections.ConnectionTreeModel = connectionTreeModel1;
             this.olvConnections.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvConnections.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -57,7 +56,7 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.IsSimpleDragSource = true;
             this.olvConnections.IsSimpleDropSink = true;
             this.olvConnections.LabelEdit = true;
-            this.olvConnections.Location = new System.Drawing.Point(3, 3);
+            this.olvConnections.Location = new System.Drawing.Point(0, 24);
             this.olvConnections.MultiSelect = false;
             this.olvConnections.Name = "olvConnections";
             this.olvConnections.NodeDeletionConfirmer = alwaysConfirmYes1;
@@ -67,7 +66,7 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.ShowGroups = false;
             treeNodeCompositeClickHandler2.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
             this.olvConnections.SingleClickHandler = treeNodeCompositeClickHandler2;
-            this.olvConnections.Size = new System.Drawing.Size(381, 365);
+            this.olvConnections.Size = new System.Drawing.Size(204, 366);
             this.olvConnections.TabIndex = 20;
             this.olvConnections.UnfocusedSelectedBackColor = System.Drawing.SystemColors.Highlight;
             this.olvConnections.UnfocusedSelectedForeColor = System.Drawing.SystemColors.HighlightText;
@@ -86,7 +85,7 @@ namespace mRemoteNG.UI.Window
             this.mMenSortAscending});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
-            this.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.msMain.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.msMain.ShowItemToolTips = true;
             this.msMain.Size = new System.Drawing.Size(204, 24);
             this.msMain.TabIndex = 10;
@@ -97,7 +96,8 @@ namespace mRemoteNG.UI.Window
             this.mMenAddConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.mMenAddConnection.Image = global::mRemoteNG.Resources.Connection_Add;
             this.mMenAddConnection.Name = "mMenAddConnection";
-            this.mMenAddConnection.Size = new System.Drawing.Size(28, 20);
+            this.mMenAddConnection.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.mMenAddConnection.Size = new System.Drawing.Size(24, 20);
             this.mMenAddConnection.Click += new System.EventHandler(this.cMenTreeAddConnection_Click);
             // 
             // mMenAddFolder
@@ -144,33 +144,27 @@ namespace mRemoteNG.UI.Window
             // 
             this.vsToolStripExtender.DefaultRenderer = null;
             // 
-            // tableLayoutPanel1
+            // PictureBoxSearch
             // 
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.olvConnections, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.PictureBox1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtSearch, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(204, 387);
-            this.tableLayoutPanel1.TabIndex = 31;
+            this.PictureBoxSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PictureBoxSearch.Image = global::mRemoteNG.Resources.Search;
+            this.PictureBoxSearch.Location = new System.Drawing.Point(0, 0);
+            this.PictureBoxSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.PictureBoxSearch.Name = "PictureBoxSearch";
+            this.PictureBoxSearch.Size = new System.Drawing.Size(26, 21);
+            this.PictureBoxSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PictureBoxSearch.TabIndex = 1;
+            this.PictureBoxSearch.TabStop = false;
             // 
             // txtSearch
             // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSearch.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.txtSearch.Location = new System.Drawing.Point(16, 371);
+            this.txtSearch.Location = new System.Drawing.Point(26, 3);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(0);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(371, 15);
+            this.txtSearch.Size = new System.Drawing.Size(178, 15);
             this.txtSearch.TabIndex = 30;
             this.txtSearch.TabStop = false;
             this.txtSearch.Text = "Search";
@@ -179,23 +173,28 @@ namespace mRemoteNG.UI.Window
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             this.txtSearch.LostFocus += new System.EventHandler(this.txtSearch_LostFocus);
             // 
-            // PictureBox1
+            // tableLayoutPanel1
             // 
-            this.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBox1.Image = global::mRemoteNG.Resources.Search;
-            this.PictureBox1.Location = new System.Drawing.Point(0, 371);
-            this.PictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(16, 16);
-            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBox1.TabIndex = 1;
-            this.PictureBox1.TabStop = false;
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.PictureBoxSearch, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtSearch);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 390);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(204, 21);
+            this.tableLayoutPanel1.TabIndex = 32;
             // 
             // ConnectionTreeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(204, 411);
+            this.Controls.Add(this.olvConnections);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.msMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -208,9 +207,9 @@ namespace mRemoteNG.UI.Window
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).EndInit();
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,8 +219,8 @@ namespace mRemoteNG.UI.Window
         private System.ComponentModel.IContainer components;
         private Controls.ConnectionTree olvConnections;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        internal System.Windows.Forms.PictureBox PictureBox1;
+        internal Controls.Base.NGPictureBox PictureBoxSearch;
         internal Controls.Base.NGTextBox txtSearch;
+        public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

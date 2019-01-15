@@ -508,7 +508,7 @@ VncSharp Control Version {0}</value>
     <value>Connection failed!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
-    <value>Protocol Event ErrorOccured</value>
+    <value>A connection protocol error occurred. Host: "{1}"; Error code: "{2}"; Error Description: "{0}"</value>
   </data>
   <data name="strConnectionOpenFailed" xml:space="preserve">
     <value>Opening connection failed!</value>
@@ -622,10 +622,10 @@ Starting with new connections file.</value>
     <value>Completely encrypt connection file</value>
   </data>
   <data name="strEndIP" xml:space="preserve">
-    <value>End IP</value>
+    <value>Last IP</value>
   </data>
   <data name="strEndPort" xml:space="preserve">
-    <value>End Port</value>
+    <value>Last Port</value>
   </data>
   <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
     <value>AddExternalToolsToToolBar (frmMain) failed. {0}</value>
@@ -1683,9 +1683,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Proxy Username</value>
   </data>
   <data name="strProtocolEventDisconnected" xml:space="preserve">
-    <value>Protocol Event Disconnected.
-Message:
-{0}</value>
+    <value>Protocol Event Disconnected. Host: "{1}"; Protocol: "{2}" Message: "{0}"</value>
   </data>
   <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
     <value>Protocol Event Disconnected failed.
@@ -2070,10 +2068,10 @@ Message:
     <value>SSH transfer failed.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
-    <value>Start IP</value>
+    <value>First IP</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
-    <value>Start Port</value>
+    <value>First Port</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
     <value>Startup/Exit</value>
@@ -2638,7 +2636,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
   <data name="strTimeoutInSeconds" xml:space="preserve">
-    <value>Timeout (seconds)</value>
+    <value>Timeout [seconds]</value>
   </data>
   <data name="srtWorkingDirectory" xml:space="preserve">
     <value>Working directory:</value>
@@ -2718,8 +2716,32 @@ This page will walk you through the process of upgrading your connections file o
   <data name="ChangeConnectionResolutionError" xml:space="preserve">
     <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
   </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Stack trace</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Exception Message</value>
+  </data>
+  <data name="mRemoteNGUnhandledException" xml:space="preserve">
+    <value>mRemoteNG Unhandled Exception</value>
+  </data>
+  <data name="UnhandledExceptionOccured" xml:space="preserve">
+    <value>An unhandled exception has occurred</value>
+  </data>
+  <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+    <value>This exception will force mRemoteNG to close</value>
+  </data>
   <data name="strMenuCopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
+  </data>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Place search bar above connection tree</value>
+  </data>
+  <data name="strPortScanSinglePort" xml:space="preserve">
+    <value>To scan a single port, select the "First Port" only.</value>
+  </data>
+  <data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Track active connection in the connection tree</value>
   </data>
   <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
     <value>Always show connection tabs</value>

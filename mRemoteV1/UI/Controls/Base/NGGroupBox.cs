@@ -86,6 +86,17 @@ namespace mRemoteNG.UI.Controls.Base
                 e.Graphics.DrawLine(pen, bounds.Width - Padding.Right, num - Padding.Top, bounds.Width - Padding.Right, bounds.Height - Padding.Bottom);
             }
             RaisePaintEvent(this, e);
-        } 
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // NGGroupBox
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResumeLayout(false);
+
+        }
     }
 }

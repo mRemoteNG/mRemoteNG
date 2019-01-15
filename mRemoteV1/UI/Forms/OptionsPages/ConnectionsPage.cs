@@ -1,5 +1,5 @@
-using System;
 using mRemoteNG.Config;
+using System;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -11,6 +11,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
+            PageIcon = Resources.Root_Icon;
         }
 
         public override string PageName
@@ -25,9 +26,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkSingleClickOnConnectionOpensIt.Text = Language.strSingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
+            chkConnectionTreeTrackActiveConnection.Text = Language.strTrackActiveConnectionInConnectionTree;
             chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
+            chkPlaceSearchBarAboveConnectionTree.Text = Language.PlaceSearchBarAboveConnectionTree;
 
             lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
@@ -46,9 +49,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkSingleClickOnConnectionOpensIt.Checked = Settings.Default.SingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
+            chkConnectionTreeTrackActiveConnection.Checked = Settings.Default.TrackActiveConnectionInConnectionTree;
             chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Checked = Settings.Default.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
+            chkPlaceSearchBarAboveConnectionTree.Checked = Settings.Default.PlaceSearchBarAboveConnectionTree;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
@@ -75,9 +80,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             Settings.Default.SingleClickOnConnectionOpensIt = chkSingleClickOnConnectionOpensIt.Checked;
             Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
+            Settings.Default.TrackActiveConnectionInConnectionTree = chkConnectionTreeTrackActiveConnection.Checked;
             Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
             Settings.Default.SaveConnectionsAfterEveryEdit = chkSaveConnectionsAfterEveryEdit.Checked;
             Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
+            Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
 
             Settings.Default.RdpReconnectionCount = (int) numRdpReconnectionCount.Value;
             Settings.Default.ConRDPOverallConnectionTimeout = (int) numRDPConTimeout.Value;

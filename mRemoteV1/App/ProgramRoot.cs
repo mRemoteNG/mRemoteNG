@@ -24,8 +24,11 @@ namespace mRemoteNG.App
 
         private static void StartApplication()
         {
+            CatchAllUnhandledExceptions();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            FrmSplashScreen frmSplashScreen = FrmSplashScreen.getInstance();
+            frmSplashScreen.Show();
             Application.Run(FrmMain.Default);
         }
 
@@ -68,6 +71,25 @@ namespace mRemoteNG.App
                     windowHandle = enumeratedProcess.MainWindowHandle;
             }
             return windowHandle;
+        }
+
+        private static void CatchAllUnhandledExceptions()
+        {
+            Application.ThreadException += ApplicationOnThreadException;
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+        }
+
+        private static void ApplicationOnThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            var window = new UnhandledExceptionWindow(e.Exception, false);
+            window.ShowDialog(FrmMain.Default);
+        }
+
+        private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var window = new UnhandledExceptionWindow(e.ExceptionObject as Exception, e.IsTerminating);
+            window.ShowDialog(FrmMain.Default);
         }
     }
 }

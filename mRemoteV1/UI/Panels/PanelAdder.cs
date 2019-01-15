@@ -96,13 +96,12 @@ namespace mRemoteNG.UI.Panels
             try
             {
                 var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
-
                 var nTitle = "";
-                new InputBox().ShowAsDialog(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle);
-
-                if (!string.IsNullOrEmpty(nTitle))
+                using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle))
                 {
-                    conW.SetFormText(nTitle.Replace("&", "&&"));
+                    var dr = frmInputBox.ShowDialog();
+                    if (dr == DialogResult.OK && string.IsNullOrEmpty(frmInputBox.returnValue))
+                        conW.SetFormText(frmInputBox.returnValue);
                 }
             }
             catch (Exception ex)
@@ -147,8 +146,7 @@ namespace mRemoteNG.UI.Panels
                 if (tagEnumeration == null) return;
                 foreach (var obj in tagEnumeration)
                 {
-                    var screen1 = obj as Screen;
-                    if (screen1 != null)
+                    if (obj is Screen screen1)
                     {
                         screen = screen1;
                     }

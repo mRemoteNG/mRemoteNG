@@ -1,12 +1,17 @@
-﻿using System.Xml.Linq;
-using mRemoteNG.Security;
+﻿using mRemoteNG.Security;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Xml.Linq;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-	public class XmlRootNodeSerializer
+    public class XmlRootNodeSerializer
     {
-        public XElement SerializeRootNodeInfo(RootNodeInfo rootNodeInfo, ICryptographyProvider cryptographyProvider, bool fullFileEncryption = false)
+        public XElement SerializeRootNodeInfo(
+            RootNodeInfo rootNodeInfo, 
+            ICryptographyProvider cryptographyProvider, 
+            Version version, 
+            bool fullFileEncryption = false)
         {
             XNamespace xmlNamespace = "http://mremoteng.org";
             var element = new XElement(xmlNamespace + "Connections");
@@ -18,7 +23,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute(XName.Get("KdfIterations"), cryptographyProvider.KeyDerivationIterations));
             element.Add(new XAttribute(XName.Get("FullFileEncryption"), fullFileEncryption.ToString().ToLowerInvariant()));
             element.Add(CreateProtectedAttribute(rootNodeInfo, cryptographyProvider));
-            element.Add(new XAttribute(XName.Get("ConfVersion"), "2.6"));
+            element.Add(new XAttribute(XName.Get("ConfVersion"), version.ToString(2)));
             return element;
         }
 

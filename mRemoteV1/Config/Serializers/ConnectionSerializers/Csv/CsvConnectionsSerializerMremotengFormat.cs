@@ -1,20 +1,22 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Linq;
+using System.Text;
 
 namespace mRemoteNG.Config.Serializers.Csv
 {
-	public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
+    public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
     {
         private readonly SaveFilter _saveFilter;
         private readonly ICredentialRepositoryList _credentialRepositoryList;
+
+        public Version Version { get; } = new Version(2, 7);
 
         public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter, ICredentialRepositoryList credentialRepositoryList)
         {

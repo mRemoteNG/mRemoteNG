@@ -9,6 +9,7 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
+using Message = mRemoteNG.Messages.Message;
 
 namespace mRemoteNG.UI.Window
 {
@@ -36,12 +37,12 @@ namespace mRemoteNG.UI.Window
             _themeManager.ThemeChanged += ApplyTheme;
             LayoutVertical();
             FillImageList();
+            ApplyLanguage();
         }
 
         #region Form Stuff
         private void ErrorsAndInfos_Load(object sender, EventArgs e)
 		{
-			ApplyLanguage();
 		}
 				
 		private void ApplyLanguage()
@@ -60,6 +61,13 @@ namespace mRemoteNG.UI.Window
             if (!_themeManager.ThemingActive) return;
             lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+
+            pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            lblMsgDate.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void FillImageList()
@@ -143,11 +151,11 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				pnlErrorMsg.BackColor = Color.FromKnownColor(KnownColor.Control);
-				pbError.Image = null;
-				txtMsgText.BackColor = Color.FromKnownColor(KnownColor.Control);
-				txtMsgText.Text = "";
-                lblMsgDate.BackColor = Color.FromKnownColor(KnownColor.Control);
+				pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                pbError.Image = null;
+				txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                txtMsgText.Text = "";
+                lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
                 lblMsgDate.Text = "";
 			}
 			catch (Exception ex)
@@ -298,8 +306,7 @@ namespace mRemoteNG.UI.Window
 
 			    foreach (ListViewItem item in items)
 				{
-					var message = item.Tag as Messages.Message;
-					if (message == null)
+                    if (!(item.Tag is Message message))
 					{
 						continue;
 					}

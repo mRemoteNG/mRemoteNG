@@ -314,11 +314,10 @@ namespace mRemoteNG.UI.Window
             if (e.Column != WaitForExitColumnHeader)
                 return;
 
-            var rowItemAsExternalTool = e.Model as ExternalTool;
-            if (rowItemAsExternalTool == null || !rowItemAsExternalTool.TryIntegrate)
+            if (!(e.Model is ExternalTool rowItemAsExternalTool) || !rowItemAsExternalTool.TryIntegrate)
                 return;
 
-            e.Text = string.Format("'{0}' cannot be enabled if '{1}' is enabled", Language.strCheckboxWaitForExit, Language.strTryIntegrate);
+            e.Text = $"'{Language.strCheckboxWaitForExit}' cannot be enabled if '{Language.strTryIntegrate}' is enabled";
         }
         #endregion
     }

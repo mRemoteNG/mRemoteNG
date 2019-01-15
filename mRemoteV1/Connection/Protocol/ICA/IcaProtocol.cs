@@ -285,12 +285,12 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				
 		private void ICAEvent_OnConnectFailed(object sender, EventArgs e)
 		{
-			Event_ErrorOccured(this, e.ToString());
+			Event_ErrorOccured(this, e.ToString(), null);
 		}
 				
 		private void ICAEvent_OnDisconnect(object sender, EventArgs e)
 		{
-			Event_Disconnected(this, e.ToString());
+			Event_Disconnected(this, e.ToString(), null);
 					
 			if (Settings.Default.ReconnectOnDisconnect)
 			{

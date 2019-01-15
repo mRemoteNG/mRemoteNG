@@ -683,6 +683,12 @@
     <Setting Name="StartUpPanelName" Type="System.String" Scope="User">
       <Value Profile="(Default)">General</Value>
     </Setting>
+    <Setting Name="TrackActiveConnectionInConnectionTree" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PlaceSearchBarAboveConnectionTree" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="AlwaysShowConnectionTabs" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>

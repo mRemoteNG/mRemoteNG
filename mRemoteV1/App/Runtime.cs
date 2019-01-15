@@ -32,6 +32,11 @@ namespace mRemoteNG.App
             }
         }
 
+        /// <summary>
+        /// Feature flag to enable the credential manager feature
+        /// </summary>
+        public static bool UseCredentialManager => false;
+
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
@@ -96,6 +101,8 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
+                FrmSplashScreen.getInstance().Close();
+
                 if (Settings.Default.UseSQLServer)
                 {
                     MessageCollector.AddExceptionMessage(Language.strLoadFromSqlFailed, ex);

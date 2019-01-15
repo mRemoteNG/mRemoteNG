@@ -19,7 +19,7 @@
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <ApplicationIcon>Resources\Icons\mRemote_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icons\mRemoteNG_Icon.ico</ApplicationIcon>
     <OptionStrict>Off</OptionStrict>
     <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
@@ -71,8 +71,8 @@
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
     </Reference>
-    <Reference Include="Renci.SshNet, Version=2016.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
-      <HintPath>..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -89,20 +89,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\VncSharp.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>..\packages\DockPanelSuite.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2003, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>..\packages\DockPanelSuite.ThemeVS2003.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2003.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2003, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2003.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2003.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2012, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>..\packages\DockPanelSuite.ThemeVS2012.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2012.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2012, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2012.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2012.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>..\packages\DockPanelSuite.ThemeVS2013.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2013.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2013.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2013.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015, Version=2.16.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>..\packages\DockPanelSuite.ThemeVS2015.2.16.1\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2015.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -164,6 +164,7 @@
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesModel.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesXmlSerializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlConnectionListMetaData.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlExtensions.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
@@ -254,6 +255,11 @@
     <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
     <Compile Include="Credential\CredentialServiceFacade.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Themes\ColorMapTheme.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -376,6 +382,12 @@
     <Compile Include="UI\Controls\Base\NGNumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\Base\NGPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGPictureBox.Designer.cs">
+      <DependentUpon>NGPictureBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Base\NGProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -479,18 +491,24 @@
     <Compile Include="UI\DisplayProperties.cs" />
     <Compile Include="UI\FontOverrider.cs" />
     <Compile Include="UI\FormExtensions.cs" />
-    <Compile Include="UI\Forms\frmOptions.cs">
+    <Compile Include="UI\Forms\FrmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmOptions.Designer.cs">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmOptions.Designer.cs">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmSplashScreen.Designer.cs">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\FullscreenHandler.cs" />
-    <Compile Include="UI\Forms\Input\InputBox.cs">
+    <Compile Include="UI\Forms\Input\FrmInputBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Input\InputBox.Designer.cs">
-      <DependentUpon>InputBox.cs</DependentUpon>
+    <Compile Include="UI\Forms\Input\FrmInputBox.Designer.cs">
+      <DependentUpon>FrmInputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
       <DependentUpon>AdvancedPage.cs</DependentUpon>
@@ -596,10 +614,10 @@
     <Compile Include="Themes\ThemeInfo.cs" />
     <Compile Include="Tools\Cmdline\CommandLineArguments.cs" />
     <Compile Include="Container\ContainerInfo.cs" />
-    <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
-      <DependentUpon>frmChoosePanel.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmChoosePanel.Designer.cs">
+      <DependentUpon>FrmChoosePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmChoosePanel.cs">
+    <Compile Include="UI\Forms\FrmChoosePanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\FrmMain.Designer.cs">
@@ -621,11 +639,6 @@
     </Compile>
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -652,6 +665,14 @@
     <Compile Include="UI\Forms\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Forms\UnhandledExceptionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UnhandledExceptionWindow.Designer.cs">
+      <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\GraphicsUtilities\GdiPlusGraphicsProvider.cs" />
+    <Compile Include="UI\GraphicsUtilities\IGraphicsProvider.cs" />
     <Compile Include="UI\Menu\HelpMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -766,11 +787,53 @@
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGButton.resx">
+      <DependentUpon>NGButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGCheckBox.resx">
+      <DependentUpon>NGCheckBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGComboBox.resx">
+      <DependentUpon>NGComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGGroupBox.resx">
+      <DependentUpon>NGGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGLabel.resx">
+      <DependentUpon>NGLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGListView.resx">
+      <DependentUpon>NGListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGNumericUpDown.resx">
+      <DependentUpon>NGNumericUpDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGRadioButton.resx">
+      <DependentUpon>NGRadioButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
+      <DependentUpon>NGTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\ConnectionTree\ConnectionTree.resx">
+      <DependentUpon>ConnectionTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordComboBox.resx">
+      <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordListBox.resx">
+      <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRecordListView.resx">
       <DependentUpon>CredentialRecordListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\CredentialRepositoryListView.resx">
       <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.resx">
+      <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\HeadlessTabControl.resx">
+      <DependentUpon>HeadlessTabControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
@@ -778,19 +841,37 @@
     <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
-      <DependentUpon>frmChoosePanel.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\PageSequence\SequencedControl.resx">
+      <DependentUpon>SequencedControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\SecureTextBox.resx">
+      <DependentUpon>SecureTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmChoosePanel.resx">
+      <DependentUpon>FrmChoosePanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmOptions.resx">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmOptions.resx">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Input\InputBox.resx">
-      <DependentUpon>InputBox.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmSplashScreen.resx">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Input\FrmInputBox.resx">
+      <DependentUpon>FrmInputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AdvancedPage.resx">
+      <DependentUpon>AdvancedPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
+      <DependentUpon>AppearancePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
+      <DependentUpon>ConnectionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\CredentialsPage.resx">
       <DependentUpon>CredentialsPage.cs</DependentUpon>
@@ -803,19 +884,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\SecurityPage.resx">
       <DependentUpon>SecurityPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
-      <DependentUpon>PasswordForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\AdvancedPage.resx">
-      <DependentUpon>AdvancedPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
-      <DependentUpon>AppearancePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
-      <DependentUpon>ConnectionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
@@ -831,6 +899,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\UpdatesPage.resx">
       <DependentUpon>UpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.de.resx">
       <SubType>Designer</SubType>
@@ -887,13 +959,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\ReconnectGroup.resx">
       <DependentUpon>ReconnectGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\TextBox.resx">
+      <DependentUpon>TextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UnhandledExceptionWindow.resx">
+      <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaskDialog\CommandButton.resx">
+      <DependentUpon>CommandButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TaskDialog\frmTaskDialog.resx">
       <DependentUpon>frmTaskDialog.cs</DependentUpon>
@@ -905,6 +986,9 @@
     <EmbeddedResource Include="UI\Window\ActiveDirectoryImportWindow.resx">
       <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\BaseWindow.resx">
+      <DependentUpon>BaseWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ComponentsCheckWindow.resx">
       <DependentUpon>ComponentsCheckWindow.cs</DependentUpon>
@@ -963,6 +1047,14 @@
     <None Include="app.config" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
+    <None Include="Resources\Templates\AppIcon.psd" />
+    <None Include="Resources\Fonts\HandelGotD.ttf" />
+    <None Include="Resources\Fonts\HandelGotDBol.ttf" />
+    <None Include="Resources\Fonts\HandelGotDLig.ttf" />
+    <None Include="Resources\Templates\Header_dark.psd" />
+    <None Include="Resources\Templates\Header_light.psd" />
+    <None Include="Resources\Templates\Installer_Header.psd" />
+    <None Include="Resources\Templates\Installer_Side.psd" />
     <None Include="Resources\Themes\darcula.vstheme">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -975,24 +1067,174 @@
     <None Include="Resources\Themes\vs2015light.vstheme">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Templates\VisualElements_150_dark.psd" />
+    <None Include="Resources\Templates\VisualElements_150_light.psd" />
+    <None Include="Resources\Templates\VisualElements_70_dark.psd" />
+    <None Include="Resources\Templates\VisualElements_70_light.psd" />
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Schemas\mremoteng_confcons_v2_8.xsd">
-      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\mremoteng_confcons_v2_7.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Resources\Help\Screenshots\CommonProblemsRDP\credssp-error.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\CommonProblemsRDP\oracle_remediation_setting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Config\main_top_bar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Config\main_window.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Connections\menu_top_bar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\ImportExport\export_dialog.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Main Menu\Main_Menu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Navigation\basic_panels.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Navigation\panel_context_menu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Navigation\rdp_context_menu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Navigation\ssh_context_menu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Navigation\view_menu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Notifications\notification_warning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Notifications\popup_warning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Quickconnect\01.png" />
+    <Content Include="Resources\Help\Screenshots\Quickconnect\02.png" />
+    <Content Include="Resources\Help\Screenshots\Quickconnect\03.png" />
+    <Content Include="Resources\Help\Screenshots\Reference\add_new_folder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\config_panel_01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\config_panel_02.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\example_01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\example_02.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\example_03.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\example_04.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\example_05.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\example_06.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\new_connection.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\new_connection_test_item.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\open_connection.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\status_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Screenshot Manager\rightclick_screenshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Screenshot Manager\screenshot_manager.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\st_common_problems_rdp.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\ui_keyboardshortcuts.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\gs_running_mremoteng.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\ui_navigation.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Apple.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Images\Header_dark.png" />
+    <None Include="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Tiles\VisualElements_70.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Tiles\VisualElements_150.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Appearance_Icon.ico" />
+    <None Include="Resources\Icons\mRemoteNG_Icon.ico" />
+    <None Include="Resources\Icons\Comments_Icon.ico" />
+    <None Include="Resources\Icons\Config_Icon.ico" />
+    <None Include="Resources\Icons\Database_Icon.ico" />
+    <None Include="Resources\Icons\Error_Icon.ico" />
+    <None Include="Resources\Icons\ExtApp_Icon.ico" />
+    <None Include="Resources\Icons\Help_Icon.ico" />
+    <None Include="Resources\Icons\Key_Icon.ico" />
+    <None Include="Resources\Icons\Keyboard_Icon.ico" />
+    <None Include="Resources\Icons\News_Icon.ico" />
+    <None Include="Resources\Icons\Options_Icon.ico" />
+    <None Include="Resources\Icons\EditPage_Icon.ico" />
+    <None Include="Resources\Icons\Panels_Icon.ico" />
+    <None Include="Resources\Icons\PortScan_Icon.ico" />
+    <None Include="Resources\Icons\Save_Icon.ico" />
+    <None Include="Resources\Icons\Screenshot_Icon.ico" />
+    <None Include="Resources\Icons\Sessions_Icon.ico" />
+    <None Include="Resources\Icons\Shield_Icon.ico" />
+    <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
+    <None Include="Resources\Icons\StartupExit_Icon.ico" />
+    <None Include="Resources\Icons\Tab_Icon.ico" />
+    <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
+    <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
+    <None Include="Resources\Icons\Info_Icon.ico" />
+    <None Include="Resources\Icons\Root_Icon.ico" />
+    <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
+    <None Include="Resources\Icons\Update_Icon.ico" />
+    <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
+    <None Include="Resources\Images\mRemoteNG.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Schemas\mremoteng_credrepo_list_v1_0.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\mremoteng_creds_v1_0.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1015,64 +1257,52 @@
     <Content Include="Firefox\sandboxbroker.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
-    <Content Include="Resources\Help\CMDSwitches.htm">
+    <Content Include="Resources\Help\gs_command_line_switches.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Config.htm">
+    <Content Include="Resources\Help\ui_config.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Configuration.htm">
+    <Content Include="Resources\Help\ui_connections.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Connection.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Connections.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ConfigurationSQL.htm">
+    <Content Include="Resources\Help\ui_sql_configuration.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Index.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\PortScan.htm">
+    <Content Include="Resources\Help\ui_port_scan.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\ExternalTools.htm">
+    <Content Include="Resources\Help\ui_external_tools.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\ErrorsAndInfos.htm">
+    <Content Include="Resources\Help\ui_notifications.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\ImportFromAD.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Installation.htm">
+    <Content Include="Resources\Help\gs_installation.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Introduction.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\MainMenu.htm">
+    <Content Include="Resources\Help\ui_menus.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Options.htm">
+    <Content Include="Resources\Help\ui_options.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Prerequisites.htm">
+    <Content Include="Resources\Help\gs_prerequisites.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\QuickConnect.htm">
+    <Content Include="Resources\Help\ui_quick_connect.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\QuickReference.htm">
+    <Content Include="Resources\Help\ui_import_and_export.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\SaveAsExport.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ScreenshotManager.htm">
+    <Content Include="Resources\Help\ui_screenshot_manager.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Screenshots\Quick Connect\01.png">
@@ -1180,17 +1410,11 @@
     <Content Include="Resources\Help\SQLScript.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\SSHFileTransfer.htm">
+    <Content Include="Resources\Help\ui_file_transfer.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Update.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\RDCMan_Icon.ico" />
     <None Include="Resources\Images\loading_spinner.gif" />
     <None Include="Resources\Images\FamFamFam\tick.png" />
-    <None Include="Resources\Icons\FamFamFam\shield.ico" />
-    <None Include="Resources\Icons\FamFamFam\key.ico" />
     <None Include="Resources\Images\FamFamFam\bricks.png" />
     <None Include="Resources\Images\FamFamFam\brick.png" />
     <None Include="Resources\Images\FamFamFam\bricks_greyscale.png" />
@@ -1222,10 +1446,7 @@
     <None Include="Resources\Images\PuttySessions.png" />
     <None Include="Resources\Images\PuttyConfig.png" />
     <None Include="Resources\Images\Play_Quick.png" />
-    <None Include="Resources\Icons\Play_Quick_Icon.ico" />
-    <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
     <None Include="Resources\Images\SSHTransfer.png" />
-    <None Include="Resources\Images\mRemote.png" />
     <None Include="Resources\Images\ErrorsAndInfos.png" />
     <None Include="Resources\Images\Screenshot.png" />
     <None Include="Resources\Images\Sessions.png" />
@@ -1233,25 +1454,17 @@
     <None Include="Resources\Images\Connections_Load.png" />
     <None Include="Resources\Images\Connections_SaveAs.png" />
     <None Include="Resources\Images\Connections_Save.png" />
-    <None Include="Resources\Icons\Connections_SaveAs_Icon.ico" />
     <None Include="Resources\Images\Sort_ZA.png" />
     <None Include="Resources\Images\Sort_AZ.png" />
-    <None Include="Resources\Icons\Help_Icon.ico" />
     <None Include="Resources\Images\Lock.png" />
     <None Include="Resources\Images\Refresh.png" />
     <None Include="Resources\Images\RDP.png" />
     <None Include="Resources\Images\PropertiesDefault.png" />
     <None Include="Resources\Images\ExtApp.png" />
-    <None Include="Resources\Icons\ExtApp_Icon.ico" />
     <None Include="Resources\Images\Duplicate.png" />
     <None Include="Resources\Images\PortScan.png" />
-    <None Include="Resources\Icons\PortScan_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Copy.png" />
     <None Include="Resources\Images\FamFamFam\Delete.png" />
-    <None Include="Resources\Icons\FamFamFam\Config_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Options_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Save_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Screenshot_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Donate.png" />
     <None Include="Resources\Images\FamFamFam\Info.png" />
     <None Include="Resources\Images\FamFamFam\Inheritance.png" />
@@ -1272,8 +1485,6 @@
     <None Include="Resources\Images\FamFamFam\Warning_Small.png" />
     <None Include="Resources\Images\FamFamFam\Website.png" />
     <None Include="Resources\Images\FamFamFam\ExtApp.png" />
-    <None Include="Resources\Icons\FamFamFam\ExtApp_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Sessions_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Sessions.png" />
     <None Include="Resources\Images\FamFamFam\Session_LogOff.png" />
     <None Include="Resources\Images\FamFamFam\File.png" />
@@ -1284,12 +1495,10 @@
     <None Include="Resources\Images\FamFamFam\Arrow_Up.png" />
     <None Include="Resources\Images\FamFamFam\Tools.png" />
     <None Include="Resources\Images\FamFamFam\Bug.png" />
-    <None Include="Resources\Icons\FamFamFam\Help_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Help.png" />
     <None Include="Resources\Images\FamFamFam\Page.png" />
     <None Include="Resources\Images\FamFamFam\SmartSize.png" />
     <None Include="Resources\Images\FamFamFam\Update.png" />
-    <None Include="Resources\Icons\FamFamFam\Update_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Folder.png" />
     <None Include="Resources\Images\FamFamFam\Folder_Add.png" />
     <None Include="Resources\Images\FamFamFam\Pause.png" />
@@ -1300,26 +1509,17 @@
     <None Include="Resources\Images\FamFamFam\ExtApp_Delete.png" />
     <None Include="Resources\Images\FamFamFam\ExtApp_Start.png" />
     <None Include="Resources\Images\FamFamFam\SSHTransfer.png" />
-    <None Include="Resources\Icons\FamFamFam\SSHTransfer_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\PortScan.png" />
-    <None Include="Resources\Icons\FamFamFam\PortScan_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Appearance_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\Tab_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\StartupExit_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\Console.png" />
     <None Include="Resources\Images\FamFamFam\Inheritance_Default.png" />
     <None Include="Resources\Images\FamFamFam\Chat.png" />
-    <None Include="Resources\Icons\FamFamFam\Panels_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\JumpTo.png" />
     <None Include="Resources\Images\FamFamFam\Monitor_GoTo.png" />
     <None Include="Resources\Images\FamFamFam\Monitor.png" />
-    <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <None Include="Resources\Images\UVNC_SC.png" />
     <None Include="Resources\Images\Bad_Symbol.png" />
     <None Include="Resources\Images\Good_Symbol.png" />
     <None Include="Resources\Images\ComponentsCheck.png" />
-    <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
-    <None Include="Resources\Icons\FamFamFam\News_Icon.ico" />
     <None Include="Resources\Images\FamFamFam\News.png" />
     <Content Include="Resources\Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1417,14 +1617,9 @@
     <None Include="Resources\Images\FamFamFam\application_side_tree.png" />
     <None Include="Resources\Images\FamFamFam\arrow_out.png" />
     <None Include="Resources\Images\FamFamFam\cog_error.png" />
-    <Content Include="Resources\Icons\FamFamFam\database.ico" />
-    <Content Include="Resources\Icons\FamFamFam\keyboard.ico" />
     <Content Include="Resources\Images\FamFamFam\cog.png" />
     <Content Include="Resources\Images\database.bmp" />
     <None Include="Resources\Images\Copy.png" />
-    <None Include="Resources\Icons\mRemote_Icon.ico" />
-    <None Include="Resources\Icons\Sessions_Icon.ico" />
-    <None Include="Resources\Icons\Info_Icon.ico" />
     <None Include="Properties\Settings.settings">
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1434,13 +1629,6 @@
     <None Include="Resources\Images\Properties.png" />
     <None Include="Resources\Images\Inheritance.png" />
     <None Include="Properties\app.manifest" />
-    <None Include="Resources\Icons\Update_Icon.ico" />
-    <None Include="Resources\Icons\Screenshot_Icon.ico" />
-    <None Include="Resources\Icons\Save_Icon.ico" />
-    <None Include="Resources\Icons\Root_Icon.ico" />
-    <None Include="Resources\Icons\Options_Icon.ico" />
-    <None Include="Resources\Icons\Config_Icon.ico" />
-    <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
     <None Include="Resources\Images\WarningSmall.png" />
     <None Include="Resources\Images\Warning.png" />
     <None Include="Resources\Images\View.png" />
@@ -1459,7 +1647,6 @@
     <None Include="Resources\Images\NewConnection.png" />
     <None Include="Resources\Images\New.png" />
     <None Include="Resources\Images\Minimize.png" />
-    <None Include="Resources\Images\Logo.png" />
     <None Include="Resources\Images\Keyboard.png" />
     <None Include="Resources\Images\InformationSmall.png" />
     <None Include="Resources\Images\Information.png" />

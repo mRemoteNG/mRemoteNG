@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Menus</title>
+  <link rel="stylesheet" href="Main.css" type="text/css">
+</head>
+<body>
+  <div class="isa_info">
+    Complete from nmat updates, please remove this div after review.
+  </div>
+
+  <!-- Introduction - #start -->
+  <h1>Introduction</h1>
+  <hr>
+  <img src="Screenshots/Main Menu/Main_Menu.png">
+  <p>
+    In this section we are going to explain the menus located in mRemoteNG. The above screenshot shows the main menu with colors. Short color explanation:
+    <p style="margin-left: 40px;">
+      <span style="color: crimson;">Red</span> - Anchor to move menu around the interface<br>
+      <span style="color: forestgreen;">Green</span> - The menu items
+    </p>
+  </p>
+  <h2>Quick Reference</h2>
+  <ul>
+    <li><a href="#file_menu"><b>File Menu</b></a> - Contains standard commands for the application</li>
+    <li><a href="#view_menu"><b>View Menu</b></a> - Menu for additional dialogs for mRemoteNG</li>
+    <li><a href="#tools_menu"><b>Tools Menu</b></a> - Additional tools that can be used and triggered in mRemoteNG</li>
+    <li><a href="#help_menu"><b>Help Menu</b></a> - Get more information for the application</li>
+  </ul>
+  <!-- Introduction - #end -->
+
+  <!-- File menu - #start -->
+  <h1 id="file_menu">File Menu</h1>
+  <hr>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>New Connection</td>
+      <td>Will add a new connection to the Connections dialog after where the cursor is positioned.</td>
+    </tr>
+    <tr>
+      <td>New Folder</td>
+      <td>Add a new folder in the Connections dialog tree where the cursor is positioned.</td>
+    </tr>
+    <tr>
+      <td>New Connection File</td>
+      <td>Create a new connection file. Dialog will come up asking about: filename and where to place the new connection file.</td>
+    </tr>
+    <tr>
+      <td>Open Connection File</td>
+      <td>
+        Open a connection file. Dialog comes up asking about which file to open. For security reasons, this also shows a dialog
+        to ask if you want to save the current file before continuing.
+      </td>
+    </tr>
+    <tr>
+      <td>Save Connection File</td>
+      <td>Saves the currently opened connection file. If you are using a SQL server connection instead it will send a save to the SQL server.</td>
+    </tr>
+    <tr>
+      <td>Save Connection File As...</td>
+      <td>Saves the current connection file to a specific location on disk.</td>
+    </tr>
+    <tr>
+      <td>Delete...</td>
+      <td>Delete currently selected item in connections dialog.</td>
+    </tr>
+    <tr>
+      <td>Rename</td>
+      <td>Rename current selected item in connections dialog.</td>
+    </tr>
+    <tr>
+      <td>Duplicate</td>
+      <td>Duplicate current selected item in connections dialog.</td>
+    </tr>
+    <tr>
+      <td>Reconnect All Open Connections</td>
+      <td>Sends a reconnect to all the open connections in mRemoteNG.</td>
+    </tr>
+    <tr>
+      <td>Exit</td>
+      <td>Exit mRemoteNG application</td>
+    </tr>
+  </table>
+  <!-- File menu - #end -->
+
+  <!-- View menu - #start -->
+  <h1 id="view_menu">View Menu</h1>
+  <hr>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>Add Connection Panel</td>
+      <td>Create a new and empty panel.</td>
+    </tr>
+    <tr>
+      <td>Connection Panels</td>
+      <td>Jump to panel.</td>
+    </tr>
+    <tr>
+      <td>Connections</td>
+      <td>Show connections dialog</td>
+    </tr>
+    <tr>
+      <td>Config</td>
+      <td>Show config dialog</td>
+    </tr>
+    <tr>
+      <td>Notifications</td>
+      <td>Show notifications dialog</td>
+    </tr>
+    <tr>
+      <td>Screenshots</td>
+      <td>Open Screenshots panel (See: <a href="ScreenshotManager.htm">ScreenshotManager</a> for more information)</td>
+    </tr>
+    <tr>
+      <td>Jump To</td>
+      <td>Place focus on "Connections and Config" or "Notifications" panel based on selection.</td>
+    </tr>
+    <tr>
+      <td>Reset layout</td>
+      <td>Resets the layout of panels and dialogs. Warning will come up about the action before continuing.</td>
+    </tr>
+    <tr>
+      <td>Lock toolbar positions</td>
+      <td>Locks the toolbars at the top of the application so you do not move around items by mistake.</td>
+    </tr>
+    <tr>
+      <td>Quick Connect Toolbar</td>
+      <td>Show quick connect toolbar</td>
+    </tr>
+    <tr>
+      <td>External Tools Toolbar</td>
+      <td>Show external tools toolbar</td>
+    </tr>
+    <tr>
+      <td>Multi SSH Toolbar</td>
+      <td>Show multi ssh toolbar</td>
+    </tr>
+    <tr>
+      <td>Fullscreen</td>
+      <td>Fullscreen mRemoteNG (will not fullscreen connection window but only the mRemoteNG application)</td>
+    </tr>
+  </table>
+  <!-- View Menu - #end -->
+
+  <!-- Tools Menu - #start -->
+  <h1 id="tools_menu">Tools Menu</h1>
+  <hr>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>SSH File Transfer</td>
+      <td>Show SSH file transer panel (See: <a href="ui_file_transfer.htm">SSH File Transfer</a> for more details)</td>
+    </tr>
+    <tr>
+      <td>External Tools</td>
+      <td>Show external tools dialog (See: <a href="ui_external_tools.htm">External Tools</a> for more details)</td>
+    </tr>
+    <tr>
+      <td>Port Scan</td>
+      <td>Show port scan dialog (See: <a href="ui_port_scan.htm">Port Scan</a> for more details)</td>
+    </tr>
+    <tr>
+      <td>Components Check</td>
+      <td>Show installed components requirements test</td>
+    </tr>
+    <tr>
+      <td>Options</td>
+      <td>Opens mRemoteNG global settings and options dialog</td>
+    </tr>
+  </table>
+  <!-- Tools Menu - #end -->
+
+  <!-- Help Menu - #start -->
+  <h1 id="help_menu">Help Menu</h1>
+  <hr>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>mRemoteNG Help</td>
+      <td>Show help panel (this panel)</td>
+    </tr>
+    <tr>
+      <td>Website</td>
+      <td>Go to mRemoteNG website</td>
+    </tr>
+    <tr>
+      <td>Donate</td>
+      <td>Go to mRemoteNG donation page. (Please help keep mRemoteNG awesome!)</td>
+    </tr>
+    <tr>
+      <td>Support Forum</td>
+      <td>Go to mRemoteNG suport forum (Best place is still chat for fast answers)</td>
+    </tr>
+    <tr>
+      <td>Report a Bug</td>
+      <td>Go to github page to report a bug found</td>
+    </tr>
+    <tr>
+      <td>Check for Updates</td>
+      <td>Opens dialog to check for any updates of mRemoteNG</td>
+    </tr>
+    <tr>
+      <td>About</td>
+      <td>Open about dialog for mRemoteNG (Shows contributors, changelog and more)</td>
+    </tr>
+  </table>
+  <!-- Help Menu - #end -->
+</body>
+</html>

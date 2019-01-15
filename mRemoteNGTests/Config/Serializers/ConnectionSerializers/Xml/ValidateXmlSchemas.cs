@@ -1,17 +1,16 @@
-﻿using System;
+﻿using mRemoteNG.Config.Serializers.Xml;
+using mRemoteNG.Connection;
+using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
+using NUnit.Framework;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-using mRemoteNG.Config.Serializers.Xml;
-using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
-using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
-using mRemoteNGTests.TestHelpers;
-using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
@@ -25,9 +24,13 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         [SetUp]
         public void Setup()
         {
-            _connectionTreeModel = new ConnectionTreeModelBuilder().Build();
+            _connectionTreeModel = new ConnectionTreeModel();
+            var root = new RootNodeInfo(RootNodeType.Connection);
+            root.AddChild(new ConnectionInfo());
+            _connectionTreeModel.AddRootNode(root);
+
             _cryptographyProvider = new AeadCryptographyProvider();
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                 _cryptographyProvider,
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -47,7 +50,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             var sb = new StringBuilder();
             var xml = _serializer.Serialize(_connectionTreeModel);
 
-            var schemaFile = GetTargetPath("mremoteng_confcons_v2_6.xsd");
+            var schemaFileName = $"mremoteng_confcons_v{_serializer.Version.Major}_{_serializer.Version.Minor}.xsd";
+            var schemaFile = GetTargetPath(schemaFileName);
             _xmlReaderSettings.Schemas.Add("http://mremoteng.org", schemaFile);
             _xmlReaderSettings.ValidationEventHandler += (sender, args) =>
             {

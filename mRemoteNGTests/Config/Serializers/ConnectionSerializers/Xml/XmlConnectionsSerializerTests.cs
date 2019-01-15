@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
-using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.Xml;
+﻿using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -10,10 +6,13 @@ using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
-	public class XmlConnectionsSerializerTests
+    public class XmlConnectionsSerializerTests
     {
         private XmlConnectionsSerializer _serializer;
         private ConnectionTreeModel _connectionTreeModel;
@@ -25,7 +24,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         {
             _connectionTreeModel = SetupConnectionTreeModel();
             _cryptographyProvider = new AeadCryptographyProvider();
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                 _cryptographyProvider, 
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -59,7 +58,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         [TestCase("InheritAutomaticResize", "false")]
         public void SerializerRespectsSaveFilterSettings(string attributeName, string expectedValue)
         {
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer26(
+            var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
                 _cryptographyProvider,
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter(true));

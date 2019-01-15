@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Runtime.Serialization;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
     [Serializable]
-    public class SupportedCultures : Dictionary<string, string>
+    public sealed class SupportedCultures : Dictionary<string, string>
 	{
         private static SupportedCultures _Instance;
 
@@ -32,7 +34,13 @@ namespace mRemoteNG.App
                 }
             }
         }
-			
+
+        // fix CA2229 - https://docs.microsoft.com/en-us/visualstudio/code-quality/ca2229-implement-serialization-constructors?view=vs-2017
+        private SupportedCultures(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
+
 		public static bool IsNameSupported(string CultureName)
 		{
 			return SingletonInstance.ContainsKey(CultureName);
