@@ -8,11 +8,9 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
-	/** \class IPTextBox
-	 * \brief An IP Address Box
-	 * 
+	/* class IPTextBox
+	 * An IP Address Box
 	 * A TextBox that only allows entry of a valid ip address
-	 **
 	 */
 	public class IPTextBox: UserControl
 	{
@@ -27,7 +25,7 @@ namespace mRemoteNG.UI.Controls
 		private ToolTip toolTip1;
 		private System.ComponentModel.IContainer components;
 
-		/** Sets and Gets the tooltiptext on toolTip1 */
+		/* Sets and Gets the tooltiptext on toolTip1 */
 		public string ToolTipText
 		{
 			get => toolTip1.GetToolTip(Octet1);
@@ -43,7 +41,7 @@ namespace mRemoteNG.UI.Controls
 			}
 		}
 
-		/** Set or Get the string that represents the value in the box */
+		/* Set or Get the string that represents the value in the box */
 		public override string Text
 		{
 			get => Octet1.Text + @"." + Octet2.Text + @"." + Octet3.Text + @"." + Octet4.Text;
@@ -82,7 +80,7 @@ namespace mRemoteNG.UI.Controls
 
         private void ApplyTheme()
         {
-            if (ThemeManager.getInstance().ActiveAndExtended) return;
+            if (!ThemeManager.getInstance().ActiveAndExtended) return;
             panel1.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
         }
         protected override void Dispose( bool disposing )
@@ -225,16 +223,15 @@ namespace mRemoteNG.UI.Controls
             this.ResumeLayout(false);
 
 		}
-		#endregion
+        #endregion
 
-		/** 
-		 * \ifnot hide_events
+        /* IsValid(string inString)
 		 * Checks that a string passed in resolves to an integer value between 0 and 255
-		 * \param inString The string passed in for testing
-		 * \return True if the string is between 0 and 255 inclusively, false otherwise
-		 * \endif
-		 * */
-		private static bool IsValid(string inString)
+		 * param inString: The string passed in for testing
+		 * return: True if the string is between 0 and 255 inclusively, false otherwise
+		 * endif
+		 */
+        private static bool IsValid(string inString)
 		{
 			try
 			{
@@ -251,10 +248,9 @@ namespace mRemoteNG.UI.Controls
 			}
 		}
 
-		/// \ifnot hide_events
-		/// Performs KeyPress analysis and handling to ensure a valid ip octet is
-		/// being entered in Box1.
-		/// \endif
+		/* Performs KeyPress analysis and handling to ensure a valid ip octet is
+		 * being entered in Box1.
+         */
 		private void Box1_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			//Only Accept a '.', a numeral, or backspace
@@ -296,14 +292,13 @@ namespace mRemoteNG.UI.Controls
 				e.Handled = true;
 		}
 
-		/// \ifnot hide_events
-		/// Performs KeyPress analysis and handling to ensure a valid ip octet is
-		/// being entered in Box2.
-		/// \endif
+		/* Performs KeyPress analysis and handling to ensure a valid ip octet is
+		 * being entered in Box2.
+		 */
 		private void Box2_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			//Similar to Box1_KeyPress but in special case for backspace moves cursor
-			//to the previouse box (Box1)
+			//to the previous box (Box1)
 			if(e.KeyChar.ToString() == "." || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
 			{
 				if(e.KeyChar.ToString() == ".")
@@ -341,10 +336,9 @@ namespace mRemoteNG.UI.Controls
 
 		}
 
-		/// \ifnot hide_events
-		/// Performs KeyPress analysis and handling to ensure a valid ip octet is
-		/// being entered in Box3.
-		/// \endif
+		/* Performs KeyPress analysis and handling to ensure a valid ip octet is
+		 * being entered in Box3.
+		 */
 		private void Box3_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			//Identical to Box2_KeyPress except that previous box is Box2 and
@@ -385,10 +379,9 @@ namespace mRemoteNG.UI.Controls
 				e.Handled = true;
 		}
 
-		/// \ifnot hide_events
-		/// Performs KeyPress analysis and handling to ensure a valid ip octet is
-		/// being entered in Box4.
-		/// \endif
+		/* Performs KeyPress analysis and handling to ensure a valid ip octet is
+		 * being entered in Box4.
+		 */
 		private void Box4_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			//Similar to Box3 but ignores the '.' character and does not advance
@@ -412,9 +405,7 @@ namespace mRemoteNG.UI.Controls
 				e.Handled = true;
 		}
 
-		/// \ifnot hide_events
-		/// Selects All text in a box for overwriting upon entering the box
-		/// \endif
+		// Selects All text in a box for overwriting upon entering the box
 		private void Box_Enter(object sender, EventArgs e)
 		{
 			var tb = (TextBox) sender;
