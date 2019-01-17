@@ -938,7 +938,7 @@ Pro další informace  navštivte článek podpory fy. Microsoft na http://suppo
     <value>Možnosti:</value>
   </data>
   <data name="strLabelPassword" xml:space="preserve">
-    <value>Heso:</value>
+    <value>Heslo:</value>
   </data>
   <data name="strLabelPort" xml:space="preserve">
     <value>Port:</value>
