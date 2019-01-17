@@ -2585,7 +2585,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Type the new theme name</value>
   </data>
   <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
-    <value>Warning: Restart is required to disable the themes or to completely apply a new one</value>
+    <value>Warning: Restart is required to commit any theme configuration change.</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
     <value>No themes are loaded, check that the default mRemoteNG themes exist in the 'themes' folder</value>

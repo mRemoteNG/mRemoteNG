@@ -134,8 +134,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.labelRestart.Name = "labelRestart";
             this.labelRestart.Size = new System.Drawing.Size(598, 28);
             this.labelRestart.TabIndex = 4;
-            this.labelRestart.Text = "Warning: Restart is required to disable the themes or to completely apply a new o" +
-    "ne";
+            this.labelRestart.Text = "Warning: Restart is required...";
             this.labelRestart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel1
