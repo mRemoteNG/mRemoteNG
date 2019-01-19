@@ -11,6 +11,9 @@ using mRemoteNG.Tree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
+using mRemoteNG.Config.Serializers.CredentialSerializer;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.Csv
 {
@@ -31,12 +34,26 @@ namespace mRemoteNG.Config.Serializers.Csv
                 else
                 {
                     var connectionInfo = ParseConnectionInfo(csvHeaders, line);
-                    parentMapping.Add(connectionInfo, line[csvHeaders.IndexOf("Parent")]);
+
+                    var parentFieldIndex = csvHeaders.IndexOf("Parent");
+                    if (parentFieldIndex > 0)
+                        parentMapping.Add(connectionInfo, line[parentFieldIndex]);
                 }
             }
 
             var root = CreateTreeStructure(parentMapping);
-            var result = new SerializationResult(root, new List<ICredentialRecord>(), new ConnectionToCredentialMap());
+            var harvestedCredentials = new CredentialHarvester()
+                .Harvest(new HarvestConfig<string[]>
+                {
+                    ItemEnumerator = () => lines.Skip(1).Select(s => s.Split(';')),
+                    ConnectionGuidSelector = line => csvHeaders.Contains("Id") ? Guid.Parse(line[csvHeaders.IndexOf("Id")]) : Guid.NewGuid(),
+                    TitleSelector = line => "",
+                    UsernameSelector = line => csvHeaders.Contains("Username") ? line[csvHeaders.IndexOf("Username")] : "",
+                    DomainSelector = line => csvHeaders.Contains("Domain") ? line[csvHeaders.IndexOf("Domain")] : "",
+                    PasswordSelector = line => csvHeaders.Contains("Password") ? line[csvHeaders.IndexOf("Password")].ConvertToSecureString() : new SecureString()
+                });
+
+            var result = new SerializationResult(root, harvestedCredentials.DistinctCredentialRecords.ToList(), harvestedCredentials);
             return result;
         }
 

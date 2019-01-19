@@ -1,4 +1,5 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using mRemoteNG.App;
 using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -70,13 +71,20 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         [Test]
         public void CredentialsHarvestedWhenDeserialized()
         {
-            var con = GetTestConnection();
-            var csv = _serializer.Serialize(con);
-            var deserializedConnections = _deserializer.Deserialize(csv);
+            var cred = new CredentialRecord
+            {
+                Username = Randomizer.RandomString(),
+                Domain = Randomizer.RandomString(),
+                Password = Randomizer.RandomString().ConvertToSecureString()
+            };
 
+            var csv = "Id;Username;Domain;Password\n" +
+                    $"{Guid.NewGuid()};{cred.Username};{cred.Domain};{cred.Password.ConvertToUnsecureString()}";
+            
+            var deserializedConnections = _deserializer.Deserialize(csv);
             var harvestedCredential = deserializedConnections.CredentialRecords.FirstOrDefault();
 
-            Assert.That(harvestedCredential, Is.EqualTo(con.CredentialRecord)
+            Assert.That(harvestedCredential, Is.EqualTo(cred)
                 .Using(new CredentialDomainUserPasswordComparer()));
         }
 
