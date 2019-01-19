@@ -1,59 +1,68 @@
 ﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
-using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Security;
 using System.Xml;
+using mRemoteNG.Credential;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class PuttyConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
+    public class PuttyConnectionManagerDeserializer
     {
-        public ConnectionTreeModel Deserialize(string puttycmConnectionsXml)
+        public SerializationResult Deserialize(string puttycmConnectionsXml)
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
-            connectionTreeModel.AddRootNode(root);
+            var result = new SerializationResult(new List<ConnectionInfo>(), new ConnectionToCredentialMap());
 
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(puttycmConnectionsXml);
 
             var configurationNode = xmlDocument.SelectSingleNode("/configuration");
 
-            var rootNodes = configurationNode?.SelectNodes("./root");
-            if (rootNodes == null) return connectionTreeModel;
-            foreach (XmlNode rootNode in rootNodes)
+            var rootXmlNode = configurationNode?.SelectSingleNode("./root");
+            if (rootXmlNode == null)
+                return result;
+
+            var rootContainer = ReadContainerProperties(rootXmlNode);
+            result.ConnectionRecords.Add(rootContainer);
+
+            foreach (XmlNode node in rootXmlNode.ChildNodes)
             {
-                ImportRootOrContainer(rootNode, root);
+                rootContainer.AddChild(ImportRecursive(node, result.ConnectionToCredentialMap));
             }
-            
-            return connectionTreeModel;
+
+            return result;
         }
 
-        private void ImportRootOrContainer(XmlNode xmlNode, ContainerInfo parentContainer)
+        private ContainerInfo ImportRecursive(XmlNode xmlNode, ConnectionToCredentialMap credentialMap)
         {
             VerifyNodeType(xmlNode);
 
-            var newContainer = ImportContainer(xmlNode, parentContainer);
+            var newContainer = ReadContainerProperties(xmlNode);
 
             var childNodes = xmlNode.SelectNodes("./*");
-            if (childNodes == null) return;
+            if (childNodes == null)
+                return newContainer;
+
             foreach (XmlNode childNode in childNodes)
             {
                 switch (childNode.Name)
                 {
                     case "container":
-                        ImportRootOrContainer(childNode, newContainer);
+                        newContainer.AddChild(ImportRecursive(childNode, credentialMap));
                         break;
                     case "connection":
-                        ImportConnection(childNode, newContainer);
+                        newContainer.AddChild(ImportConnection(childNode, credentialMap));
                         break;
                     default:
-                        throw (new FileFormatException($"Unrecognized child node ({childNode.Name})."));
+                        throw new FileFormatException($"Unrecognized child node ({childNode.Name}).");
                 }
             }
+
+            return newContainer;
         }
 
         private void VerifyNodeType(XmlNode xmlNode)
@@ -79,25 +88,27 @@ namespace mRemoteNG.Config.Serializers
             }
         }
 
-        private ContainerInfo ImportContainer(XmlNode containerNode, ContainerInfo parentContainer)
+        private ContainerInfo ReadContainerProperties(XmlNode containerNode)
         {
             var containerInfo = new ContainerInfo
             {
                 Name = containerNode.Attributes?["name"].Value,
                 IsExpanded = bool.Parse(containerNode.Attributes?["expanded"].InnerText ?? "false")
             };
-            parentContainer.AddChild(containerInfo);
+            
             return containerInfo;
         }
 
-        private void ImportConnection(XmlNode connectionNode, ContainerInfo parentContainer)
+        private ConnectionInfo ImportConnection(XmlNode connectionNode, ConnectionToCredentialMap credentialMap)
         {
             var connectionNodeType = connectionNode.Attributes?["type"].Value;
             if (string.Compare(connectionNodeType, "PuTTY", StringComparison.OrdinalIgnoreCase) != 0)
                 throw (new FileFormatException($"Unrecognized connection node type ({connectionNodeType})."));
 
             var connectionInfo = ConnectionInfoFromXml(connectionNode);
-            parentContainer.AddChild(connectionInfo);
+            var cred = CredentialFromXml(connectionNode);
+            credentialMap.Add(Guid.Parse(connectionInfo.ConstantID), cred);
+            return connectionInfo;
         }
 
         private ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
@@ -126,10 +137,6 @@ namespace mRemoteNG.Config.Serializers
             // ./commandline
             connectionInfo.Description = connectionInfoNode.SelectSingleNode("./description")?.InnerText;
 
-            var loginNode = xmlNode.SelectSingleNode("./login");
-            // TODO: these should create temp putty credentials
-            connectionInfo.Username = loginNode?.SelectSingleNode("login")?.InnerText;
-            connectionInfo.Password = loginNode?.SelectSingleNode("password")?.InnerText;
             // ./prompt
 
             // ./timeout/connectiontimeout
@@ -148,6 +155,20 @@ namespace mRemoteNG.Config.Serializers
             // ./options/endlinechar
 
             return connectionInfo;
+        }
+
+        private ICredentialRecord CredentialFromXml(XmlNode xmlNode)
+        {
+            var loginNode = xmlNode.SelectSingleNode("./login");
+            var username = loginNode?.SelectSingleNode("login")?.InnerText ?? "";
+
+            return new CredentialRecord
+            {
+                Title = username,
+                Username = username,
+                Domain = "",
+                Password = loginNode?.SelectSingleNode("password")?.InnerText.ConvertToSecureString() ?? new SecureString()
+            };
         }
     }
 }

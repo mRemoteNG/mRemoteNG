@@ -1,4 +1,3 @@
-using System.Linq;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Container;
@@ -14,12 +13,9 @@ namespace mRemoteNG.Config.Import
             var xmlContent = dataProvider.Load();
 
             var deserializer = new PuttyConnectionManagerDeserializer();
-            var connectionTreeModel = deserializer.Deserialize(xmlContent);
+            var serializationResult = deserializer.Deserialize(xmlContent);
 
-            var importedRootNode = connectionTreeModel.RootNodes.First();
-            if (importedRootNode == null) return;
-            var childrenToAdd = importedRootNode.Children.ToArray();
-            destinationContainer.AddChildRange(childrenToAdd);
+            destinationContainer.AddChildRange(serializationResult.ConnectionRecords);
         }
 	}
 }

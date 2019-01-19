@@ -53,7 +53,7 @@ namespace mRemoteNG.Config.Serializers.Csv
                     PasswordSelector = line => csvHeaders.Contains("Password") ? line[csvHeaders.IndexOf("Password")].ConvertToSecureString() : new SecureString()
                 });
 
-            var result = new SerializationResult(root, harvestedCredentials.DistinctCredentialRecords.ToList(), harvestedCredentials);
+            var result = new SerializationResult(root, harvestedCredentials);
             return result;
         }
 

@@ -13,6 +13,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
     {
         private PuttyConnectionManagerDeserializer _deserializer;
         private ContainerInfo _rootImportedFolder;
+        private SerializationResult _deserializationResult;
         private const string ExpectedRootFolderName = "test_puttyConnectionManager_database";
         private const string ExpectedConnectionDisplayName = "my ssh connection";
         private const string ExpectedConnectionHostname = "server1.mydomain.com";
@@ -29,9 +30,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
             var fileContents = Resources.test_puttyConnectionManager_database;
             _deserializer = new PuttyConnectionManagerDeserializer();
-            var connectionTreeModel = _deserializer.Deserialize(fileContents);
-            var rootNode = connectionTreeModel.RootNodes.First();
-            _rootImportedFolder = rootNode.Children.Cast<ContainerInfo>().First();
+            _deserializationResult = _deserializer.Deserialize(fileContents);
+            _rootImportedFolder = _deserializationResult.ConnectionRecords.Cast<ContainerInfo>().First();
         }
 
         [Test]
@@ -85,15 +85,15 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionUsernameImported()
         {
-            var connection = GetSshConnection();
-            Assert.That(connection.CredentialRecord.Username, Is.EqualTo(ExpectedConnectionUsername));
+            var credentialMap = _deserializationResult.ConnectionToCredentialMap;
+            Assert.That(credentialMap.DistinctCredentialRecords.First().Username, Is.EqualTo(ExpectedConnectionUsername));
         }
 
         [Test]
         public void ConnectionPasswordImported()
         {
-            var connection = GetSshConnection();
-            Assert.That(connection.CredentialRecord.Password.ConvertToUnsecureString(), Is.EqualTo(ExpectedConnectionPassword));
+            var credentialMap = _deserializationResult.ConnectionToCredentialMap;
+            Assert.That(credentialMap.DistinctCredentialRecords.First().Password.ConvertToUnsecureString(), Is.EqualTo(ExpectedConnectionPassword));
         }
 
         private ConnectionInfo GetSshConnection()

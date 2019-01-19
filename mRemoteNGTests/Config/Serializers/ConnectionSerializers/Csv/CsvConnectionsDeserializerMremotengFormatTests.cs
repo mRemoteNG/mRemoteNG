@@ -82,7 +82,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                     $"{Guid.NewGuid()};{cred.Username};{cred.Domain};{cred.Password.ConvertToUnsecureString()}";
             
             var deserializedConnections = _deserializer.Deserialize(csv);
-            var harvestedCredential = deserializedConnections.CredentialRecords.FirstOrDefault();
+            var harvestedCredential = deserializedConnections.ConnectionToCredentialMap.DistinctCredentialRecords.FirstOrDefault();
 
             Assert.That(harvestedCredential, Is.EqualTo(cred)
                 .Using(new CredentialDomainUserPasswordComparer()));
