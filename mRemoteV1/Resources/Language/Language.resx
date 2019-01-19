@@ -2743,4 +2743,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
     <value>Track active connection in the connection tree</value>
   </data>
+  <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
+    <value>Always show connection tabs</value>
+  </data>
 </root>
