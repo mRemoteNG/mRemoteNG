@@ -183,6 +183,7 @@
     <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion27To28Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion26To27Upgrader.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />
@@ -787,11 +788,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
     <EmbeddedResource Include="Resources\Themes\ColorMapTheme.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1238,6 +1243,7 @@
     <None Include="Resources\Icons\Update_Icon.ico" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <None Include="Resources\Images\mRemoteNG.png" />
+    <None Include="Resources\Images\star.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

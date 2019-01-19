@@ -1496,7 +1496,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
     <value>Use the Credential Security Support Provider (CredSSP) for authentication if it is available.</value>
   </data>
-  <data name="strPropertyDescriptionUser1" xml:space="preserve">
+  <data name="strPropertyDescriptionUser" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
   </data>
   <data name="strPropertyDescriptionUsername" xml:space="preserve">
@@ -1658,7 +1658,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyNameUseCredSsp" xml:space="preserve">
     <value>Use CredSSP</value>
   </data>
-  <data name="strPropertyNameUser1" xml:space="preserve">
+  <data name="strPropertyNameUser" xml:space="preserve">
     <value>User Field</value>
   </data>
   <data name="strPropertyNameUsername" xml:space="preserve">
@@ -2745,5 +2745,14 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
     <value>Always show connection tabs</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="strPropertyDescriptionFavorite" xml:space="preserve">
+    <value>Show this connection in the favorites menu</value>
+  </data>
+  <data name="strPropertyNameFavorite" xml:space="preserve">
+    <value>Favorite</value>
   </data>
 </root>

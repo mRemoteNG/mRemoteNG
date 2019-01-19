@@ -88,6 +88,7 @@ namespace mRemoteNG.UI.Window
             mMenViewExpandAllFolders.Text = Language.strExpandAllFolders;
             mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders;
             mMenSortAscending.ToolTipText = Language.strSortAsc;
+            mMenFavorites.ToolTipText = Language.Favorites;
 
             txtSearch.Text = Language.strSearchPrompt;
         }
@@ -182,6 +183,21 @@ namespace mRemoteNG.UI.Window
                 olvConnections.Expand(olvConnections.GetRootConnectionNode());
             };
             mMenSortAscending.Click += (sender, args) => olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
+            mMenFavorites.Click += (sender, args) =>
+            {
+                mMenFavorites.DropDownItems.AddRange(olvConnections.GetFavorites());
+                //(new ToolStripItem[] {
+                //this.toolStripMenuItem3,
+                //this.toolStripMenuItem4,
+                //this.toolStripMenuItem5});
+                //mMenFavorites.ad
+                //olvConnections.ShowFavorites();
+            };
+        }
+        
+        private void mMenFavorites_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -328,5 +344,5 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-	}
+    }
 }

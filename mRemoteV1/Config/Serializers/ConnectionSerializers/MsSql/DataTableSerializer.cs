@@ -108,6 +108,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("PostExtApp", typeof(string));
             dataTable.Columns.Add("MacAddress", typeof(string));
             dataTable.Columns.Add("UserField", typeof(string));
+            dataTable.Columns.Add("Favorite", typeof(bool));
             dataTable.Columns.Add("ExtApp", typeof(string));
             dataTable.Columns.Add("VNCCompression", typeof(string));
             dataTable.Columns.Add("VNCEncoding", typeof(string));
@@ -158,6 +159,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("InheritPostExtApp", typeof(bool));
             dataTable.Columns.Add("InheritMacAddress", typeof(bool));
             dataTable.Columns.Add("InheritUserField", typeof(bool));
+            dataTable.Columns.Add("InheritFavorite", typeof(bool));
             dataTable.Columns.Add("InheritExtApp", typeof(bool));
             dataTable.Columns.Add("InheritVNCCompression", typeof(bool));
             dataTable.Columns.Add("InheritVNCEncoding", typeof(bool));
@@ -256,6 +258,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["MacAddress"] = connectionInfo.MacAddress;
             dataRow["UserField"] = connectionInfo.UserField;
+            dataRow["Favorite"] = connectionInfo.Favorite;
             dataRow["ExtApp"] = connectionInfo.ExtApp;
             dataRow["VNCCompression"] = connectionInfo.VNCCompression;
             dataRow["VNCEncoding"] = connectionInfo.VNCEncoding;
@@ -313,6 +316,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritPostExtApp"] = connectionInfo.Inheritance.PostExtApp;
                 dataRow["InheritMacAddress"] = connectionInfo.Inheritance.MacAddress;
                 dataRow["InheritUserField"] = connectionInfo.Inheritance.UserField;
+                dataRow["InheritFavorite"] = connectionInfo.Inheritance.Favorite;
                 dataRow["InheritExtApp"] = connectionInfo.Inheritance.ExtApp;
                 dataRow["InheritVNCCompression"] = connectionInfo.Inheritance.VNCCompression;
                 dataRow["InheritVNCEncoding"] = connectionInfo.Inheritance.VNCEncoding;

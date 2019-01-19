@@ -2620,4 +2620,13 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Suchleiste über den Verbindungen anzeigen</value>
   </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favoriten</value>
+  </data>
+  <data name="strPropertyDescriptionFavorite" xml:space="preserve">
+    <value>Zeige diese Verbindung in den Favoriten</value>
+  </data>
+  <data name="strPropertyNameFavorite" xml:space="preserve">
+    <value>Favorit</value>
+  </data>
 </root>

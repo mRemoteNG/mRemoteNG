@@ -839,6 +839,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("PostExtApp");
                     strHide.Add("MacAddress");
                     strHide.Add("UserField");
+                    strHide.Add("Favorite");
                     strHide.Add("Description");
                     strHide.Add("SoundQuality");
                     strHide.Add("CredentialRecord");
@@ -1379,6 +1380,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("MacAddress");
                         if (conI.Inheritance.UserField)
                             strHide.Add("UserField");
+                        if (conI.Inheritance.Favorite)
+                            strHide.Add("Favorite");
                         if (conI.Inheritance.VNCAuthMode)
                             strHide.Add("VNCAuthMode");
                         if (conI.Inheritance.VNCColors)

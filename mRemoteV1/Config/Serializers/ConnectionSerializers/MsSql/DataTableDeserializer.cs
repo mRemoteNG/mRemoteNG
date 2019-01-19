@@ -119,6 +119,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];
             connectionInfo.MacAddress = (string)dataRow["MacAddress"];
             connectionInfo.UserField = (string)dataRow["UserField"];
+            connectionInfo.Favorite = (bool)dataRow["Favorite"];
             connectionInfo.ExtApp = (string)dataRow["ExtApp"];
             connectionInfo.VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression), (string)dataRow["VNCCompression"]);
             connectionInfo.VNCEncoding = (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding) ,(string)dataRow["VNCEncoding"]);
@@ -175,6 +176,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.PostExtApp = (bool)dataRow["InheritPostExtApp"];
             connectionInfo.Inheritance.MacAddress = (bool)dataRow["InheritMacAddress"];
             connectionInfo.Inheritance.UserField = (bool)dataRow["InheritUserField"];
+            connectionInfo.Inheritance.Favorite = (bool)dataRow["InheritFavorite"];
             connectionInfo.Inheritance.ExtApp = (bool)dataRow["InheritExtApp"];
             connectionInfo.Inheritance.VNCCompression = (bool)dataRow["InheritVNCCompression"];
             connectionInfo.Inheritance.VNCEncoding = (bool)dataRow["InheritVNCEncoding"];

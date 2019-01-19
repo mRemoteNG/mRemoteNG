@@ -2782,5 +2782,29 @@ namespace mRemoteNG {
                 this["AlwaysShowConnectionTabs"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultFavorite {
+            get {
+                return ((bool)(this["InhDefaultFavorite"]));
+            }
+            set {
+                this["InhDefaultFavorite"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultFavorite {
+            get {
+                return ((bool)(this["ConDefaultFavorite"]));
+            }
+            set {
+                this["ConDefaultFavorite"] = value;
+            }
+        }
     }
 }

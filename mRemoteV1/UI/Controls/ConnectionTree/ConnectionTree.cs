@@ -69,7 +69,6 @@ namespace mRemoteNG.UI.Controls
             base.Dispose(disposing);
         }
 
-
         #region ConnectionTree Setup
         private void SetupConnectionTreeView()
         {
@@ -336,6 +335,12 @@ namespace mRemoteNG.UI.Controls
                 SelectedNode.Parent.SortRecursive(sortDirection);
 
             Runtime.ConnectionsService.EndBatchingSaves();
+        }
+
+        public ToolStripItem[] GetFavorites()
+        {
+            throw new NotImplementedException(); 
+            return null;
         }
 
         /// <summary>

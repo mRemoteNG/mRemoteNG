@@ -256,15 +256,20 @@ namespace mRemoteNG.Connection
 		[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameMACAddress"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionMACAddress"), 
-		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool MacAddress {get; set;}
-				
-		[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8), 
-		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUser1"), 
-		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUser1"), 
-		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool UserField {get; set;}
+		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool MacAddress {get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUser"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUser1"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool UserField { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameFavorite"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionFavorite"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool Favorite { get; set; }
         #endregion
         #region VNC
-		[LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 9), 
+        [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 9), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameCompression"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionCompression"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCCompression {get; set;}
