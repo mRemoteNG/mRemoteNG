@@ -552,7 +552,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameFavorite"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionFavorite")]
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionFavorite"),
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public virtual bool Favorite
         {
             get => GetPropertyValue("Favorite", _favorite);

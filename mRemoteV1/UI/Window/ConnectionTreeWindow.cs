@@ -1,10 +1,13 @@
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
+using mRemoteNG.Container;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using System;
 using System.Collections.Generic;
@@ -183,21 +186,36 @@ namespace mRemoteNG.UI.Window
                 olvConnections.Expand(olvConnections.GetRootConnectionNode());
             };
             mMenSortAscending.Click += (sender, args) => olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
-            mMenFavorites.Click += (sender, args) =>
+            mMenFavorites.Click += (sender, args) => olvConnections.GetFavorites();
             {
-                mMenFavorites.DropDownItems.AddRange(olvConnections.GetFavorites());
-                //(new ToolStripItem[] {
-                //this.toolStripMenuItem3,
-                //this.toolStripMenuItem4,
-                //this.toolStripMenuItem5});
-                //mMenFavorites.ad
-                //olvConnections.ShowFavorites();
+                mMenFavorites.DropDownItems.Clear();
+                var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
+                List<ToolStripMenuItem> favoritesList = new List<ToolStripMenuItem>();
+
+                foreach (var node in rootNodes)
+                {
+                    foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                    {
+                        var favoriteMenuItem = new ToolStripMenuItem
+                        {
+                            Text = containerInfo.Name,
+                            Tag = containerInfo,
+                            Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
+                        };
+                        favoriteMenuItem.MouseUp += FavoriteMenuItem_MouseUp;
+                        favoritesList.Add(favoriteMenuItem);
+                    }
+                }
+
+                mMenFavorites.DropDownItems.AddRange(favoritesList.ToArray());
             };
         }
-        
-        private void mMenFavorites_Click(object sender, EventArgs e)
-        {
 
+        private void FavoriteMenuItem_MouseUp(object sender, MouseEventArgs e)
+        {
+            //if (e.Button != MouseButtons.Left) return;
+            if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
+            _connectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
         }
         #endregion
 

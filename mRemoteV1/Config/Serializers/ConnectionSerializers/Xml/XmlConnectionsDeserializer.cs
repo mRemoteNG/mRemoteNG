@@ -502,9 +502,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     connectionInfo.RedirectClipboard = xmlnode.GetAttributeAsBool("RedirectClipboard");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
-                }
-                if (_confVersion >= 2.8)
-                {
                     connectionInfo.Favorite = xmlnode.GetAttributeAsBool("Favorite");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
                 }

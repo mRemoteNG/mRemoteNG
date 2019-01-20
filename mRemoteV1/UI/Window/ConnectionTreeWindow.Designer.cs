@@ -147,7 +147,6 @@ namespace mRemoteNG.UI.Window
             this.mMenFavorites.Image = global::mRemoteNG.Resources.star;
             this.mMenFavorites.Name = "mMenFavorites";
             this.mMenFavorites.Size = new System.Drawing.Size(28, 20);
-            this.mMenFavorites.Click += new System.EventHandler(this.mMenFavorites_Click);
             // 
             // vsToolStripExtender
             // 
@@ -232,6 +231,6 @@ namespace mRemoteNG.UI.Window
         internal Controls.Base.NGPictureBox PictureBoxSearch;
         internal Controls.Base.NGTextBox txtSearch;
         public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStripMenuItem mMenFavorites;
+        internal System.Windows.Forms.ToolStripMenuItem mMenFavorites;
     }
 }

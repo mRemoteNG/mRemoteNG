@@ -337,12 +337,6 @@ namespace mRemoteNG.UI.Controls
             Runtime.ConnectionsService.EndBatchingSaves();
         }
 
-        public ToolStripItem[] GetFavorites()
-        {
-            throw new NotImplementedException(); 
-            return null;
-        }
-
         /// <summary>
         /// Expands all tree objects and recalculates the
         /// column widths.

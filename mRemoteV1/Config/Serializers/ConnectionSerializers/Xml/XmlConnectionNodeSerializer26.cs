@@ -234,6 +234,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritPostExtApp", falseString));
                 element.Add(new XAttribute("InheritMacAddress", falseString));
                 element.Add(new XAttribute("InheritUserField", falseString));
+                element.Add(new XAttribute("InheritFavorite", falseString));
                 element.Add(new XAttribute("InheritExtApp", falseString));
                 element.Add(new XAttribute("InheritVNCCompression", falseString));
                 element.Add(new XAttribute("InheritVNCEncoding", falseString));
