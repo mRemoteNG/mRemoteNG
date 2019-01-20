@@ -1,42 +1,44 @@
-﻿using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol;
+﻿using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
-using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
-
+using mRemoteNG.Connection;
+using mRemoteNG.Credential;
+using mRemoteNG.Security;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
+    public class RemoteDesktopConnectionManagerDeserializer
     {
         // 1 = RDCMan v2.2
         // 3 = RDCMan v2.7
         private static int _schemaVersion; 
 
-        public ConnectionTreeModel Deserialize(string rdcmConnectionsXml)
+        public SerializationResult Deserialize(string rdcmConnectionsXml)
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
+            var serializationResult = new SerializationResult(new List<ConnectionInfo>(), new ConnectionToCredentialMap());
 
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(rdcmConnectionsXml);
-
 
             var rdcManNode = xmlDocument.SelectSingleNode("/RDCMan");
             VerifySchemaVersion(rdcManNode);
             VerifyFileVersion(rdcManNode);
 
             var fileNode = rdcManNode?.SelectSingleNode("./file");
-            ImportFileOrGroup(fileNode, root);
+            var importedItem = ImportFileOrGroup(fileNode, serializationResult.ConnectionToCredentialMap);
 
-            connectionTreeModel.AddRootNode(root);
-            return connectionTreeModel;
+            serializationResult.ConnectionRecords.Add(importedItem);
+
+            return serializationResult;
         }
 
         private static void VerifySchemaVersion(XmlNode rdcManNode)
@@ -77,28 +79,46 @@ namespace mRemoteNG.Config.Serializers
             }
         }
 
-        private static void ImportFileOrGroup(XmlNode xmlNode, ContainerInfo parentContainer)
+        private static ContainerInfo ImportFileOrGroup(XmlNode xmlNode, ConnectionToCredentialMap credentialMap)
         {
-            var newContainer = ImportContainer(xmlNode, parentContainer);
+            var newContainer = ImportContainer(xmlNode);
 
             var childNodes = xmlNode.SelectNodes("./group|./server");
-            if (childNodes == null) return;
+            if (childNodes == null)
+                return newContainer;
+
             foreach (XmlNode childNode in childNodes)
             {
+                ConnectionInfo newChild = null;
+
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (childNode.Name)
                 {
                     case "group":
-                        ImportFileOrGroup(childNode, newContainer);
+                        newChild = ImportFileOrGroup(childNode, credentialMap);
                         break;
                     case "server":
-                        ImportServer(childNode, newContainer);
+                        newChild = ConnectionInfoFromXml(childNode);
                         break;
                 }
+
+                if (newChild == null)
+                    return newContainer;
+
+                newContainer.AddChild(newChild);
+
+                var cred = ParseCredentials(childNode);
+                if (!cred.Any())
+                    continue;
+
+                newChild.CredentialRecordId = cred.First().Id;
+                credentialMap.Add(Guid.Parse(newChild.ConstantID), cred.First());
             }
+
+            return newContainer;
         }
 
-        private static ContainerInfo ImportContainer(XmlNode containerPropertiesNode, ContainerInfo parentContainer)
+        private static ContainerInfo ImportContainer(XmlNode containerPropertiesNode)
         {
             if (_schemaVersion == 1)
             {
@@ -116,14 +136,7 @@ namespace mRemoteNG.Config.Serializers
             }
             newContainer.Name = containerPropertiesNode?.SelectSingleNode("./name")?.InnerText ?? Language.strNewFolder;
             newContainer.IsExpanded = bool.Parse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText ?? "false");
-            parentContainer.AddChild(newContainer);
             return newContainer;
-        }
-
-        private static void ImportServer(XmlNode serverNode, ContainerInfo parentContainer)
-        {
-            var newConnectionInfo = ConnectionInfoFromXml(serverNode);
-            parentContainer.AddChild(newConnectionInfo);
         }
 
         private static ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
@@ -137,27 +150,8 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Name = propertiesNode?.SelectSingleNode("./displayName")?.InnerText ?? connectionInfo.Hostname;
             connectionInfo.Description = propertiesNode?.SelectSingleNode("./comment")?.InnerText ?? string.Empty;
 
-            // TODO: harvest
             var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
-            if (logonCredentialsNode?.Attributes?["inherit"]?.Value == "None")
-            {
-                connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText;
-
-                var passwordNode = logonCredentialsNode.SelectSingleNode("./password");
-                if (_schemaVersion == 1) // Version 2.2 allows clear text passwords
-                {
-                    connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True" 
-                        ? passwordNode.InnerText 
-                        : DecryptRdcManPassword(passwordNode?.InnerText);
-                }
-                else
-                {
-                    connectionInfo.Password = DecryptRdcManPassword(passwordNode?.InnerText);
-                }
-
-                connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText;
-            }
-            else
+            if (logonCredentialsNode?.Attributes?["inherit"]?.Value != "None")
             {
                 connectionInfo.Inheritance.Username = true;
                 connectionInfo.Inheritance.Password = true;
@@ -186,7 +180,9 @@ namespace mRemoteNG.Config.Serializers
                 connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText;
 
                 var passwordNode = gatewaySettingsNode.SelectSingleNode("./password");
-                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
+                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True" 
+                    ? passwordNode.InnerText 
+                    : DecryptRdcManPassword(passwordNode?.InnerText).ConvertToUnsecureString();
 
                 connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText;
                 // ./logonMethod
@@ -208,7 +204,9 @@ namespace mRemoteNG.Config.Serializers
                 var resolutionString = remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", "");
                 try
                 {
-                    connectionInfo.Resolution = (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions), "Res" + resolutionString);
+                    connectionInfo.Resolution = Enum.TryParse<RdpProtocol.RDPResolutions>("Res" + resolutionString, true, out var resolution)
+                        ? resolution
+                        : RdpProtocol.RDPResolutions.FitToWindow;
                 }
                 catch (ArgumentException)
                 {
@@ -325,21 +323,44 @@ namespace mRemoteNG.Config.Serializers
             return connectionInfo;
         }
 
-        private static string DecryptRdcManPassword(string ciphertext)
+        private static Optional<ICredentialRecord> ParseCredentials(XmlNode xmlNode)
+        {
+            var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
+
+            if (logonCredentialsNode?.Attributes?["inherit"]?.Value != "None")
+                return Optional<ICredentialRecord>.Empty;
+
+            var username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText ?? "";
+            var domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText ?? "";
+            var passwordNode = logonCredentialsNode.SelectSingleNode("./password");
+
+            var creds = new CredentialRecord
+            {
+                Title = domain.Length > 0 ? $"{domain}\\{username}" : $"{username}",
+                Username = username,
+                Domain = domain,
+                Password = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True"
+                    ? passwordNode.InnerText.ConvertToSecureString()
+                    : DecryptRdcManPassword(passwordNode?.InnerText)
+            };
+
+            return creds;
+        }
+
+        private static SecureString DecryptRdcManPassword(string ciphertext)
         {
             if (string.IsNullOrEmpty(ciphertext))
-                return string.Empty;
+                return new SecureString();
 
             try
             {
                 var plaintextData = ProtectedData.Unprotect(Convert.FromBase64String(ciphertext), new byte[] { }, DataProtectionScope.LocalMachine);
-                var charArray = Encoding.Unicode.GetChars(plaintextData);
-                return new string(charArray);
+                return Encoding.Unicode.GetString(plaintextData).ConvertToSecureString();
             }
             catch (Exception /*ex*/)
             {
                 //Runtime.MessageCollector.AddExceptionMessage("RemoteDesktopConnectionManager.DecryptPassword() failed.", ex, logOnly: true);
-                return string.Empty;
+                return new SecureString();
             }
         }
     }

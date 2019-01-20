@@ -2,7 +2,6 @@
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
-using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 using System.IO;
@@ -14,7 +13,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
     {
         private string _connectionFileContents;
         private RemoteDesktopConnectionManagerDeserializer _deserializer;
-        private ConnectionTreeModel _connectionTreeModel;
+        private SerializationResult _serializationResult;
         private const string ExpectedName = "server1_displayname";
         private const string ExpectedHostname = "server1";
         private const string ExpectedDescription = "Comment text here";
@@ -44,38 +43,20 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
             _connectionFileContents = Resources.test_rdcman_v2_2_schema1;
             _deserializer = new RemoteDesktopConnectionManagerDeserializer();
-            _connectionTreeModel = _deserializer.Deserialize(_connectionFileContents);
-        }
-
-        [Test]
-        public void ConnectionTreeModelHasARootNode()
-        {
-            var numberOfRootNodes = _connectionTreeModel.RootNodes.Count;
-            Assert.That(numberOfRootNodes, Is.GreaterThan(0));
-        }
-
-        [Test]
-        public void RootNodeHasContents()
-        {
-            var rootNodeContents = _connectionTreeModel.RootNodes.First().Children;
-            Assert.That(rootNodeContents, Is.Not.Empty);
+            _serializationResult = _deserializer.Deserialize(_connectionFileContents);
         }
 
         [Test]
         public void AllSubRootFoldersImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var rootNodeContents = importedRdcmanRootNode.Children.Count(node => node.Name == "Group1" || node.Name == "Group2");
+            var rootNodeContents = _serializationResult.ConnectionRecords.Count(node => node.Name == "Group1" || node.Name == "Group2");
             Assert.That(rootNodeContents, Is.EqualTo(2));
         }
 
         [Test]
         public void ConnectionDisplayNameImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.Name, Is.EqualTo(ExpectedName));
         }
@@ -83,9 +64,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionHostnameImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.Hostname, Is.EqualTo(ExpectedHostname));
         }
@@ -93,9 +72,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionDescriptionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.Description, Is.EqualTo(ExpectedDescription));
         }
@@ -103,9 +80,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionUsernameImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.CredentialRecord.Username, Is.EqualTo(ExpectedUsername));
         }
@@ -113,9 +88,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionDomainImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.CredentialRecord.Domain, Is.EqualTo(ExpectedDomain));
         }
@@ -126,7 +99,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         //{
         //    var rootNode = _connectionTreeModel.RootNodes.First();
         //    var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        //    var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
         //    var connection = group1.Children.First();
         //    Assert.That(connection.Password, Is.EqualTo(ExpectedPassword));
         //}
@@ -134,9 +107,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionProtocolSetToRdp()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.Protocol, Is.EqualTo(ProtocolType.RDP));
         }
@@ -144,9 +115,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionUseConsoleSessionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.UseConsoleSession, Is.EqualTo(ExpectedUseConsoleSession));
         }
@@ -154,9 +123,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionPortImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.Port, Is.EqualTo(ExpectedPort));
         }
@@ -164,9 +131,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionGatewayUsageMethodImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RDGatewayUsageMethod, Is.EqualTo(ExpectedGatewayUsageMethod));
         }
@@ -174,9 +139,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionGatewayHostnameImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RDGatewayHostname, Is.EqualTo(ExpectedGatewayHostname));
         }
@@ -184,9 +147,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionGatewayUsernameImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RDGatewayUsername, Is.EqualTo(ExpectedGatewayUsername));
         }
@@ -197,7 +158,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         //{
         //    var rootNode = _connectionTreeModel.RootNodes.First();
         //    var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        //    var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
         //    var connection = group1.Children.First();
         //    Assert.That(connection.RDGatewayPassword, Is.EqualTo(ExpectedGatewayPassword));
         //}
@@ -205,9 +166,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionGatewayDomainImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RDGatewayDomain, Is.EqualTo(ExpectedGatewayDomain));
         }
@@ -215,9 +174,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionResolutionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.Resolution, Is.EqualTo(ExpectedRdpResolution));
         }
@@ -225,9 +182,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionColorDepthImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.Colors, Is.EqualTo(ExpectedRdpColorDepth));
         }
@@ -235,9 +190,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionAudioRedirectionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RedirectSound, Is.EqualTo(ExpectedAudioRedirection));
         }
@@ -245,9 +198,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionKeyRedirectionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RedirectKeys, Is.EqualTo(ExpectedKeyRedirection));
         }
@@ -255,9 +206,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionDriveRedirectionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RedirectDiskDrives, Is.EqualTo(ExpectedDriveRedirection));
         }
@@ -265,9 +214,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionPortRedirectionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RedirectPorts, Is.EqualTo(ExpectedPortRedirection));
         }
@@ -275,9 +222,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionPrinterRedirectionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RedirectPrinters, Is.EqualTo(ExpectedPrinterRedirection));
         }
@@ -285,9 +230,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionSmartcardRedirectionImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RedirectSmartCards, Is.EqualTo(ExpectedSmartcardRedirection));
         }
@@ -295,9 +238,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void ConnectionauthenticationLevelImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var group1 = _serializationResult.ConnectionRecords.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RDPAuthenticationLevel, Is.EqualTo(ExpectedAuthLevel));
         }
