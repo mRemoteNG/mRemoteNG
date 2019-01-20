@@ -107,6 +107,7 @@ namespace mRemoteNG.Config.Serializers
 
             var connectionInfo = ConnectionInfoFromXml(connectionNode);
             var cred = CredentialFromXml(connectionNode);
+            connectionInfo.CredentialRecordId = cred.Id;
             credentialMap.Add(Guid.Parse(connectionInfo.ConstantID), cred);
             return connectionInfo;
         }

@@ -83,6 +83,14 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         }
 
         [Test]
+        public void CredentialIdProperlySet()
+        {
+            var connection = GetSshConnection();
+            var cred = _deserializationResult.ConnectionToCredentialMap.DistinctCredentialRecords.First();
+            Assert.That(connection.CredentialRecordId.FirstOrDefault(), Is.EqualTo(cred.Id));
+        }
+
+        [Test]
         public void ConnectionUsernameImported()
         {
             var credentialMap = _deserializationResult.ConnectionToCredentialMap;
