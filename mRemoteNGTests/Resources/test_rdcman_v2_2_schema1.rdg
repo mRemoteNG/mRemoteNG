@@ -70,7 +70,7 @@
                     <redirectSmartCards>True</redirectSmartCards>
                 </localResources>
                 <securitySettings inherit="None">
-                    <authentication>1</authentication>
+                    <authentication>2</authentication>
                 </securitySettings>
                 <displaySettings inherit="None">
                     <thumbnailScale>1</thumbnailScale>
