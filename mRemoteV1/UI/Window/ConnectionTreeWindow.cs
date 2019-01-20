@@ -186,7 +186,7 @@ namespace mRemoteNG.UI.Window
                 olvConnections.Expand(olvConnections.GetRootConnectionNode());
             };
             mMenSortAscending.Click += (sender, args) => olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
-            mMenFavorites.Click += (sender, args) => olvConnections.GetFavorites();
+            mMenFavorites.Click += (sender, args) =>
             {
                 mMenFavorites.DropDownItems.Clear();
                 var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
@@ -208,6 +208,7 @@ namespace mRemoteNG.UI.Window
                 }
 
                 mMenFavorites.DropDownItems.AddRange(favoritesList.ToArray());
+                mMenFavorites.ShowDropDown();
             };
         }
 
