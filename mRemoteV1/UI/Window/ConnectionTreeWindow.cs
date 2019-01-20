@@ -169,8 +169,8 @@ namespace mRemoteNG.UI.Window
                 return;
 	        }
 
-	        olvConnections.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
-	        olvConnections.SelectedObject = connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes
+            // TODO: might not need this call anymore
+	        olvConnections.SelectedObject = ConnectionTree.ConnectionTreeModel.RootNodes
 	            .OfType<RootNodeInfo>().FirstOrDefault();
 	    }
         #endregion

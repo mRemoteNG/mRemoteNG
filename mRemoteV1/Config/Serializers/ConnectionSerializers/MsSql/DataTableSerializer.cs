@@ -77,9 +77,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("Description", typeof(string));
             dataTable.Columns.Add("Icon", typeof(string));
             dataTable.Columns.Add("Panel", typeof(string));
-            dataTable.Columns.Add("Username", typeof(string));
-            dataTable.Columns.Add("DomainName", typeof(string));
-            dataTable.Columns.Add("Password", typeof(string));
             dataTable.Columns.Add("Hostname", typeof(string));
             dataTable.Columns.Add("Protocol", typeof(string));
             dataTable.Columns.Add("PuttySession", typeof(string));
@@ -214,18 +211,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
-            dataRow["Expanded"] = false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
-
-            // TODO: remove
-            dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
-            dataRow["DomainName"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
-            dataRow["Password"] = _saveFilter.SavePassword 
-                ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) 
-                : "";
-
 
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["Protocol"] = connectionInfo.Protocol;
@@ -255,7 +243,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
-            dataRow["Connected"] = false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["MacAddress"] = connectionInfo.MacAddress;
@@ -287,10 +274,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritDisplayWallpaper"] = connectionInfo.Inheritance.DisplayWallpaper;
                 dataRow["InheritEnableFontSmoothing"] = connectionInfo.Inheritance.EnableFontSmoothing;
                 dataRow["InheritEnableDesktopComposition"] = connectionInfo.Inheritance.EnableDesktopComposition;
-                dataRow["InheritDomain"] = connectionInfo.Inheritance.Domain;
                 dataRow["InheritIcon"] = connectionInfo.Inheritance.Icon;
                 dataRow["InheritPanel"] = connectionInfo.Inheritance.Panel;
-                dataRow["InheritPassword"] = connectionInfo.Inheritance.Password;
                 dataRow["InheritPort"] = connectionInfo.Inheritance.Port;
                 dataRow["InheritProtocol"] = connectionInfo.Inheritance.Protocol;
                 dataRow["InheritPuttySession"] = connectionInfo.Inheritance.PuttySession;
@@ -307,7 +292,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritUseConsoleSession"] = connectionInfo.Inheritance.UseConsoleSession;
                 dataRow["InheritUseCredSsp"] = connectionInfo.Inheritance.UseCredSsp;
                 dataRow["InheritRenderingEngine"] = connectionInfo.Inheritance.RenderingEngine;
-                dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
                 dataRow["InheritICAEncryptionStrength"] = connectionInfo.Inheritance.ICAEncryptionStrength;
                 dataRow["InheritRDPAuthenticationLevel"] = connectionInfo.Inheritance.RDPAuthenticationLevel;
                 dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RDPMinutesToIdleTimeout;
@@ -345,10 +329,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritDisplayWallpaper"] = false;
                 dataRow["InheritEnableFontSmoothing"] = false;
                 dataRow["InheritEnableDesktopComposition"] = false;
-                dataRow["InheritDomain"] = false;
                 dataRow["InheritIcon"] = false;
                 dataRow["InheritPanel"] = false;
-                dataRow["InheritPassword"] = false;
                 dataRow["InheritPort"] = false;
                 dataRow["InheritProtocol"] = false;
                 dataRow["InheritPuttySession"] = false;
@@ -365,7 +347,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritUseConsoleSession"] = false;
                 dataRow["InheritUseCredSsp"] = false;
                 dataRow["InheritRenderingEngine"] = false;
-                dataRow["InheritUsername"] = false;
                 dataRow["InheritICAEncryptionStrength"] = false;
                 dataRow["InheritRDPAuthenticationLevel"] = false;
                 dataRow["InheritRDPMinutesToIdleTimeout"] = false;

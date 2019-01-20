@@ -4,8 +4,10 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using System;
 using System.IO;
+using System.Linq;
 using System.Security;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -33,7 +35,7 @@ namespace mRemoteNG.Config.Connections
             _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
         }
 
-        public ConnectionTreeModel Load()
+        public SerializationResult Load()
         {
             var dataProvider = new FileDataProvider(_connectionFilePath);
             var xmlString = dataProvider.Load();
@@ -46,7 +48,9 @@ namespace mRemoteNG.Config.Connections
                 ConnectionDeserializer = new XmlConnectionsDeserializer(PromptForPassword)
             };
 
-            return deserializer.Deserialize(xmlString);
+            var connectionTreeModel = deserializer.Deserialize(xmlString);
+
+            return new SerializationResult(connectionTreeModel.RootNodes.Cast<ConnectionInfo>().ToList(), new ConnectionToCredentialMap());
         }
 
         private Optional<SecureString> PromptForPassword()

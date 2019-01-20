@@ -29,7 +29,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
             const string sqlText = @"
 ALTER TABLE tblCons
 ADD RedirectClipboard bit NOT NULL DEFAULT 0,
-	InheritRedirectClipboard bit NOT NULL DEFAULT 0;
+	InheritRedirectClipboard bit NOT NULL DEFAULT 0
+DROP COLUMN Username, Domain, Password, InheritUsername, InheritDomain, InheritPassword, Expanded, Connected;
 UPDATE tblRoot
     SET ConfVersion='2.7'";
             var sqlCommand = new SqlCommand(sqlText, _sqlDatabaseConnector.SqlConnection);

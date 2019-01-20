@@ -33,7 +33,7 @@ namespace mRemoteNG.Config.Connections
             _dataProvider = dataProvider.ThrowIfNull(nameof(dataProvider));
         }
 
-        public ConnectionTreeModel Load()
+        public SerializationResult Load()
         {
             var connector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
             var dataProvider = new SqlDataProvider(connector);
@@ -50,9 +50,9 @@ namespace mRemoteNG.Config.Connections
             databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion);
             var dataTable = dataProvider.Load();
             var deserializer = new DataTableDeserializer(cryptoProvider, decryptionKey.First());
-            var connectionTree = deserializer.Deserialize(dataTable);
-            ApplyLocalConnectionProperties(connectionTree.RootNodes.First(i => i is RootNodeInfo));
-            return connectionTree;
+            var serializationResult = deserializer.Deserialize(dataTable);
+            ApplyLocalConnectionProperties(serializationResult.ConnectionRecords.OfType<RootNodeInfo>().First());
+            return serializationResult;
         }
 
         private Optional<SecureString> GetDecryptionKey(SqlConnectionListMetaData metaData)

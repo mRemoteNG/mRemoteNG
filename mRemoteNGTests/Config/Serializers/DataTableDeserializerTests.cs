@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Linq;
 using System.Security;
 using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Connection;
@@ -6,7 +7,6 @@ using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNGTests.TestHelpers;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers
@@ -29,7 +29,7 @@ namespace mRemoteNGTests.Config.Serializers
             var dataTable = CreateDataTable(model.RootNodes[0]);
             _deserializer = new DataTableDeserializer(_cryptographyProvider, new SecureString());
             var output = _deserializer.Deserialize(dataTable);
-            Assert.That(output.GetRecursiveChildList().Count, Is.EqualTo(model.GetRecursiveChildList().Count));
+            Assert.That(output.ConnectionRecords.FlattenConnectionTree().Count(), Is.EqualTo(model.GetRecursiveChildList().Count));
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace mRemoteNGTests.Config.Serializers
             var dataTable = CreateDataTable(new ConnectionInfo());
             _deserializer = new DataTableDeserializer(_cryptographyProvider, new SecureString());
             var output = _deserializer.Deserialize(dataTable);
-            Assert.That(output.GetRecursiveChildList().Count, Is.EqualTo(1));
+            Assert.That(output.ConnectionRecords.FlattenConnectionTree().Count(), Is.EqualTo(1));
         }
 
 

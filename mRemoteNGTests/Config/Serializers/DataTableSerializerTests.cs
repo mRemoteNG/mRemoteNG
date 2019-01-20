@@ -1,15 +1,12 @@
 ﻿using System.Linq;
 using System.Security;
-using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Connection;
-using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 using mRemoteNGTests.TestHelpers;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers
@@ -46,77 +43,23 @@ namespace mRemoteNGTests.Config.Serializers
         }
 
         [Test]
-        public void UsernameSerializedWhenSaveSecurityAllowsIt()
-        {
-            var model = CreateConnectionTreeModel();
-            _saveFilter.SaveUsername = true;
-            var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["Username"], Is.Not.EqualTo(""));
-        }
-
-        [Test]
-        public void DomainSerializedWhenSaveSecurityAllowsIt()
-        {
-            var model = CreateConnectionTreeModel();
-            _saveFilter.SaveDomain = true;
-            var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["DomainName"], Is.Not.EqualTo(""));
-        }
-
-        [Test]
-        public void PasswordSerializedWhenSaveSecurityAllowsIt()
-        {
-            var model = CreateConnectionTreeModel();
-            _saveFilter.SavePassword = true;
-            var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["Password"], Is.Not.EqualTo(""));
-        }
-
-        [Test]
         public void InheritanceSerializedWhenSaveSecurityAllowsIt()
         {
             var model = CreateConnectionTreeModel();
+            model.GetRecursiveChildList().ForEach(c => c.Inheritance.UserField = true);
             _saveFilter.SaveInheritance = true;
             var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["InheritUsername"], Is.Not.EqualTo(""));
-        }
-
-
-
-        [Test]
-        public void UsernameNotSerializedWhenSaveSecurityDisabled()
-        {
-            var model = CreateConnectionTreeModel();
-            _saveFilter.SaveUsername = false;
-            var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["Username"], Is.EqualTo(""));
-        }
-
-        [Test]
-        public void DomainNotSerializedWhenSaveSecurityDisabled()
-        {
-            var model = CreateConnectionTreeModel();
-            _saveFilter.SaveDomain = false;
-            var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["DomainName"], Is.EqualTo(""));
-        }
-
-        [Test]
-        public void PasswordNotSerializedWhenSaveSecurityDisabled()
-        {
-            var model = CreateConnectionTreeModel();
-            _saveFilter.SavePassword = false;
-            var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["Password"], Is.EqualTo(""));
+            Assert.That(dataTable.Rows[0]["InheritUserField"], Is.EqualTo(true));
         }
 
         [Test]
         public void InheritanceNotSerializedWhenSaveSecurityDisabled()
         {
             var model = CreateConnectionTreeModel();
+            model.GetRecursiveChildList().ForEach(c => c.Inheritance.UserField = true);
             _saveFilter.SaveInheritance = false;
             var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["InheritUsername"], Is.False);
+            Assert.That(dataTable.Rows[0]["InheritUserField"], Is.False);
         }
 
         [Test]

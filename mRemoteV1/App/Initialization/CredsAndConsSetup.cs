@@ -11,7 +11,9 @@ namespace mRemoteNG.App.Initialization
     {
         public void LoadCredsAndCons(ConnectionsService connectionsService, CredentialService credentialService)
         {
-            new SaveConnectionsOnEdit(connectionsService);
+            var saveOnEditService = new SaveConnectionsOnEdit(connectionsService);
+            connectionsService.ConnectionTreeModel.CollectionChanged += saveOnEditService.ConnectionTreeModelOnCollectionChanged;
+            connectionsService.ConnectionTreeModel.PropertyChanged += saveOnEditService.ConnectionTreeModelOnPropertyChanged;
 
             if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.ConnectionsService.GetStartupConnectionFileName()))
                 Runtime.ConnectionsService.NewConnectionsFile(Runtime.ConnectionsService.GetStartupConnectionFileName());

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 
@@ -10,7 +12,7 @@ namespace mRemoteNG.Config.Connections
         /// The previous <see cref="ConnectionTreeModel"/> that is being
         /// unloaded.
         /// </summary>
-        public Optional<ConnectionTreeModel> PreviousConnectionTreeModel { get; }
+        public List<ConnectionInfo> RemovedConnections { get; }
 
         /// <summary>
         /// True if the previous <see cref="ConnectionTreeModel"/> was loaded from
@@ -21,7 +23,7 @@ namespace mRemoteNG.Config.Connections
         /// <summary>
         /// The new <see cref="ConnectionTreeModel"/> that is being loaded.
         /// </summary>
-        public ConnectionTreeModel NewConnectionTreeModel { get; }
+        public List<ConnectionInfo> AddedConnections { get; }
 
         /// <summary>
         /// True if the new <see cref="ConnectionTreeModel"/> was loaded from
@@ -37,22 +39,15 @@ namespace mRemoteNG.Config.Connections
         public string NewSourcePath { get; }
 
         public ConnectionsLoadedEventArgs(
-            Optional<ConnectionTreeModel> previousTreeModelModel, ConnectionTreeModel newTreeModelModel,
+            List<ConnectionInfo> removedConnections, List<ConnectionInfo> addedConnections,
             bool previousSourceWasDatabase, bool newSourceIsDatabase,
             string newSourcePath)
         {
-            if (previousTreeModelModel == null)
-                throw new ArgumentNullException(nameof(previousTreeModelModel));
-            if (newTreeModelModel == null)
-                throw new ArgumentNullException(nameof(newTreeModelModel));
-            if (newSourcePath == null)
-                throw new ArgumentNullException(nameof(newSourcePath));
-
-            PreviousConnectionTreeModel = previousTreeModelModel;
+            RemovedConnections = removedConnections.ThrowIfNull(nameof(removedConnections));
             PreviousSourceWasDatabase = previousSourceWasDatabase;
-            NewConnectionTreeModel = newTreeModelModel;
+            AddedConnections = addedConnections.ThrowIfNull(nameof(addedConnections));
             NewSourceIsDatabase = newSourceIsDatabase;
-            NewSourcePath = newSourcePath;
+            NewSourcePath = newSourcePath.ThrowIfNull(nameof(newSourcePath));
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using mRemoteNG.Tree;
+﻿using mRemoteNG.Config.Serializers;
 
 namespace mRemoteNG.Config.Connections
 {
     public interface IConnectionsLoader
     {
-        ConnectionTreeModel Load();
+        SerializationResult Load();
     }
 }

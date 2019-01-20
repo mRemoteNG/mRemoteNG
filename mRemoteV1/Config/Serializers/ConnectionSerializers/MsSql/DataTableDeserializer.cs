@@ -1,5 +1,4 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
@@ -8,8 +7,6 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
-using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,7 +15,7 @@ using System.Security;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {
-    public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
+    public class DataTableDeserializer
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _decryptionKey;
@@ -29,12 +26,13 @@ namespace mRemoteNG.Config.Serializers.MsSql
             _decryptionKey = decryptionKey.ThrowIfNull(nameof(decryptionKey));
         }
 
-        public ConnectionTreeModel Deserialize(DataTable table)
+        public SerializationResult Deserialize(DataTable table)
         {
             var connectionList = CreateNodesFromTable(table);
-            var connectionTreeModel = CreateNodeHierarchy(connectionList, table);
-            Runtime.ConnectionsService.IsConnectionsFileLoaded = true;
-            return connectionTreeModel;
+            var rootNodes = CreateNodeHierarchy(connectionList, table);
+
+            var serializationResult = new SerializationResult(rootNodes, new ConnectionToCredentialMap());
+            return serializationResult;
         }
 
         private List<ConnectionInfo> CreateNodesFromTable(DataTable table)
@@ -60,7 +58,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
         {
 	        var connectionId = row["ConstantID"] as string ?? Guid.NewGuid().ToString();
 			var connectionInfo = new ConnectionInfo(connectionId);
-            PopulateConnectionInfoFromDatarow(row, connectionInfo);
+            PopulateConnectionInfoFromDataRow(row, connectionInfo);
             return connectionInfo;
         }
 
@@ -68,11 +66,11 @@ namespace mRemoteNG.Config.Serializers.MsSql
         {
 	        var containerId = row["ConstantID"] as string ?? Guid.NewGuid().ToString();
             var containerInfo = new ContainerInfo(containerId);
-            PopulateConnectionInfoFromDatarow(row, containerInfo);
+            PopulateConnectionInfoFromDataRow(row, containerInfo);
             return containerInfo;
         }
 
-        private void PopulateConnectionInfoFromDatarow(DataRow dataRow, ConnectionInfo connectionInfo)
+        private void PopulateConnectionInfoFromDataRow(DataRow dataRow, ConnectionInfo connectionInfo)
         {
             connectionInfo.Name = (string)dataRow["Name"];
 
@@ -85,9 +83,12 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Panel = (string)dataRow["Panel"];
 
             // TODO: harvest
-            connectionInfo.Username = (string)dataRow["Username"];
-            connectionInfo.Domain = (string)dataRow["DomainName"];
-            connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
+            if (dataRow.Table.Columns.Contains("Username"))
+                connectionInfo.Username = (string)dataRow["Username"];
+            if (dataRow.Table.Columns.Contains("DomainName"))
+                connectionInfo.Domain = (string)dataRow["DomainName"];
+            if (dataRow.Table.Columns.Contains("Password"))
+                connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
 
             connectionInfo.Hostname = (string)dataRow["Hostname"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
@@ -147,10 +148,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.DisplayWallpaper = (bool)dataRow["InheritDisplayWallpaper"];
             connectionInfo.Inheritance.EnableFontSmoothing = (bool)dataRow["InheritEnableFontSmoothing"];
             connectionInfo.Inheritance.EnableDesktopComposition = (bool)dataRow["InheritEnableDesktopComposition"];
-            connectionInfo.Inheritance.Domain = (bool)dataRow["InheritDomain"];
             connectionInfo.Inheritance.Icon = (bool)dataRow["InheritIcon"];
             connectionInfo.Inheritance.Panel = (bool)dataRow["InheritPanel"];
-            connectionInfo.Inheritance.Password = (bool)dataRow["InheritPassword"];
             connectionInfo.Inheritance.Port = (bool)dataRow["InheritPort"];
             connectionInfo.Inheritance.Protocol = (bool)dataRow["InheritProtocol"];
             connectionInfo.Inheritance.PuttySession = (bool)dataRow["InheritPuttySession"];
@@ -167,7 +166,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];
             connectionInfo.Inheritance.UseCredSsp = (bool)dataRow["InheritUseCredSsp"];
             connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
-            connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
             connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];
             connectionInfo.Inheritance.RDPAuthenticationLevel = (bool)dataRow["InheritRDPAuthenticationLevel"];
             connectionInfo.Inheritance.RDPAlertIdleTimeout = (bool)dataRow["InheritRDPAlertIdleTimeout"];
@@ -210,14 +208,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             }
         }
 
-        private ConnectionTreeModel CreateNodeHierarchy(List<ConnectionInfo> connectionList, DataTable dataTable)
+        private List<ConnectionInfo> CreateNodeHierarchy(IReadOnlyCollection<ConnectionInfo> connectionList, DataTable dataTable)
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var rootNode = new RootNodeInfo(RootNodeType.Connection, "0")
-            {
-                PasswordString = _decryptionKey.ConvertToUnsecureString()
-            };
-            connectionTreeModel.AddRootNode(rootNode);
+            var rootNodes = new List<ConnectionInfo>();
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -225,11 +218,11 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 var connectionInfo = connectionList.First(node => node.ConstantID == id);
                 var parentId = (string) row["ParentID"];
                 if (parentId == "0" || connectionList.All(node => node.ConstantID != parentId))
-                    rootNode.AddChild(connectionInfo);
+                    rootNodes.Add(connectionInfo);
                 else
                     (connectionList.First(node => node.ConstantID == parentId) as ContainerInfo)?.AddChild(connectionInfo);
             }
-            return connectionTreeModel;
+            return rootNodes;
         }
     }
 }

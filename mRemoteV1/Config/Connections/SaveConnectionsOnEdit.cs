@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.ComponentModel;
 using mRemoteNG.Connection;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Connections
@@ -12,31 +12,15 @@ namespace mRemoteNG.Config.Connections
 
         public SaveConnectionsOnEdit(ConnectionsService connectionsService)
         {
-            if (connectionsService == null)
-                throw new ArgumentNullException(nameof(connectionsService));
-
-            _connectionsService = connectionsService;
-            connectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
+            _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
         }
 
-        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
-        {
-            connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged += ConnectionTreeModelOnCollectionChanged;
-            connectionsLoadedEventArgs.NewConnectionTreeModel.PropertyChanged += ConnectionTreeModelOnPropertyChanged;
-
-            foreach (var oldTree in connectionsLoadedEventArgs.PreviousConnectionTreeModel)
-            {
-                oldTree.CollectionChanged -= ConnectionTreeModelOnCollectionChanged;
-                oldTree.PropertyChanged -= ConnectionTreeModelOnPropertyChanged;
-            }
-        }
-
-        private void ConnectionTreeModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        public void ConnectionTreeModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             SaveConnectionOnEdit(propertyChangedEventArgs.PropertyName);
         }
 
-        private void ConnectionTreeModelOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        public void ConnectionTreeModelOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             SaveConnectionOnEdit();
         }

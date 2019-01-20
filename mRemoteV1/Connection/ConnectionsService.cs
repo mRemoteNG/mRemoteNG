@@ -13,7 +13,9 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Config;
@@ -38,7 +40,7 @@ namespace mRemoteNG.Connection
         public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
 
-        public ConnectionTreeModel ConnectionTreeModel { get; private set; }
+        public ConnectionTreeModel ConnectionTreeModel { get; private set; } = new ConnectionTreeModel();
 
         public ConnectionsService(PuttySessionsManager puttySessionsManager, CredentialService credentialService)
         {
@@ -112,19 +114,18 @@ namespace mRemoteNG.Connection
         /// <param name="connectionFileName"></param>
         public void LoadConnections(bool useDatabase, bool import, string connectionFileName)
         {
-            var oldConnectionTreeModel = ConnectionTreeModel;
             var oldIsUsingDatabaseValue = UsingDatabase;
 
             var connectionLoader = useDatabase
                 ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
                 : new XmlConnectionsLoader(connectionFileName, _credentialService, this);
 
-            var newConnectionTreeModel = connectionLoader.Load();
+            var serializationResult = connectionLoader.Load();
 
             if (useDatabase)
                 LastSqlUpdate = DateTime.Now;
 
-            if (newConnectionTreeModel == null)
+            if (serializationResult == null)
             {
                 DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed", IsConnectionsFileLoaded);
                 return;
@@ -134,15 +135,11 @@ namespace mRemoteNG.Connection
             ConnectionFileName = connectionFileName;
             UsingDatabase = useDatabase;
 
-            if (!import)
-            {
-                _puttySessionsManager.AddSessions();
-                newConnectionTreeModel.RootNodes.AddRange(_puttySessionsManager.RootPuttySessionsNodes);
-            }
+            ConnectionTreeModel.RemoveRootNode(ConnectionTreeModel.RootNodes.First());
+            ConnectionTreeModel.AddRootNode(serializationResult.ConnectionRecords.OfType<RootNodeInfo>().First());
 
-            ConnectionTreeModel = newConnectionTreeModel;
             UpdateCustomConsPathSetting(connectionFileName);
-            RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
+            RaiseConnectionsLoadedEvent(new List<ConnectionInfo>(), new List<ConnectionInfo>(), oldIsUsingDatabaseValue, useDatabase, connectionFileName);
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connections loaded using {connectionLoader.GetType().Name}");
         }
 
@@ -322,13 +319,13 @@ namespace mRemoteNG.Connection
         public event EventHandler<ConnectionsLoadedEventArgs> ConnectionsLoaded;
         public event EventHandler<ConnectionsSavedEventArgs> ConnectionsSaved;
 
-        private void RaiseConnectionsLoadedEvent(Optional<ConnectionTreeModel> previousTreeModel, ConnectionTreeModel newTreeModel,
+        private void RaiseConnectionsLoadedEvent(List<ConnectionInfo> removedConnections, List<ConnectionInfo> addedConnections,
             bool previousSourceWasDatabase, bool newSourceIsDatabase,
             string newSourcePath)
         {
             ConnectionsLoaded?.Invoke(this, new ConnectionsLoadedEventArgs(
-                previousTreeModel,
-                newTreeModel,
+                removedConnections,
+                addedConnections,
                 previousSourceWasDatabase,
                 newSourceIsDatabase,
                 newSourcePath));
