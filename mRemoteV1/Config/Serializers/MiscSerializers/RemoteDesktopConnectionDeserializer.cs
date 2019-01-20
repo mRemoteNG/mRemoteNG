@@ -1,21 +1,21 @@
 ﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 using System;
+using System.Collections.Generic;
+using mRemoteNG.Credential;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class RemoteDesktopConnectionDeserializer : IDeserializer<string, ConnectionTreeModel>
+    public class RemoteDesktopConnectionDeserializer
     {
         // .rdp file schema: https://technet.microsoft.com/en-us/library/ff393699(v=ws.10).aspx
 
-        public ConnectionTreeModel Deserialize(string rdcFileContent)
+        public SerializationResult Deserialize(string rdcFileContent)
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
-            connectionTreeModel.AddRootNode(root);
             var connectionInfo = new ConnectionInfo();
+            var username = "";
+            var domain = "";
+
             foreach (var line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
             {
                 var parts = line.Split(new[] { ':' }, 3);
@@ -24,20 +24,42 @@ namespace mRemoteNG.Config.Serializers
                     continue;
                 }
 
-                var key = parts[0].Trim();
+                var propertyName = parts[0].Trim().ToLowerInvariant();
                 var value = parts[2].Trim();
 
-                SetConnectionInfoParameter(connectionInfo, key, value);
-            }
-            root.AddChild(connectionInfo);
+                SetConnectionInfoParameter(connectionInfo, propertyName, value);
 
-            return connectionTreeModel;
+                
+                if (propertyName.Equals("username"))
+                    username = value;
+                if (propertyName.Equals("domain"))
+                    domain = value;
+            }
+
+            var serializationResult = new SerializationResult(new List<ConnectionInfo>(), new ConnectionToCredentialMap());
+            serializationResult.ConnectionRecords.Add(connectionInfo);
+
+            if (username.Length > 0 || domain.Length > 0)
+            {
+                var cred = new CredentialRecord
+                {
+                    Title = domain.Length > 0 ? $"{domain}\\" : "" + username,
+                    Domain = domain,
+                    Username = username
+                };
+
+                serializationResult.ConnectionToCredentialMap.Add(Guid.Parse(connectionInfo.ConstantID), cred);
+                connectionInfo.CredentialRecordId = cred.Id;
+            }
+
+
+            return serializationResult;
         }
 
 
         private void SetConnectionInfoParameter(ConnectionInfo connectionInfo, string key, string value)
         {
-            switch (key.ToLower())
+            switch (key)
             {
                 case "full address":
                     var uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + value);
@@ -48,13 +70,6 @@ namespace mRemoteNG.Config.Serializers
                     break;
                 case "server port":
                     connectionInfo.Port = Convert.ToInt32(value);
-                    break;
-                // TODO: harvest
-                case "username":
-                    connectionInfo.Username = value;
-                    break;
-                case "domain":
-                    connectionInfo.Domain = value;
                     break;
                 case "session bpp":
                     switch (value)

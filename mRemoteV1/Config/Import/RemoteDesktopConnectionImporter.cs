@@ -15,9 +15,9 @@ namespace mRemoteNG.Config.Import
             var content = dataProvider.Load();
 
             var deserializer = new RemoteDesktopConnectionDeserializer();
-            var connectionTreeModel = deserializer.Deserialize(content);
+            var serializationResult = deserializer.Deserialize(content);
 
-            var importedConnection = connectionTreeModel.RootNodes.First().Children.First();
+            var importedConnection = serializationResult.ConnectionRecords.FirstOrDefault();
 			
             if (importedConnection == null) return;
             importedConnection.Name = Path.GetFileNameWithoutExtension(fileName);
