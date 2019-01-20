@@ -15,7 +15,7 @@ namespace mRemoteNG.Tools
         public MouseEventHandler MouseUpEventHandler { get; set; }
 
 
-        public IEnumerable<ToolStripDropDownItem> CreateToolStripDropDownItems(ConnectionTreeModel connectionTreeModel)
+        public IEnumerable<ToolStripDropDownItem> CreateToolStripDropDownItems(IConnectionTreeModel connectionTreeModel)
         {
             var rootNodes = connectionTreeModel.RootNodes;
             return CreateToolStripDropDownItems(rootNodes);

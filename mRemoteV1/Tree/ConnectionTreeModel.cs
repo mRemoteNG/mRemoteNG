@@ -8,7 +8,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Tree
 {
-    public sealed class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
+    public sealed class ConnectionTreeModel : IConnectionTreeModel
     {
         public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
 
@@ -64,6 +64,7 @@ namespace mRemoteNG.Tree
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
+
         private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
             CollectionChanged?.Invoke(sender, args);

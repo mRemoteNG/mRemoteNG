@@ -55,6 +55,7 @@ namespace mRemoteNG.UI.Forms
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
         private readonly UnlockerFormFactory _credRepoUnlockerFormFactory = new UnlockerFormFactory();
+        private readonly SaveConnectionsOnEdit _saveConnectionsOnEdit = new SaveConnectionsOnEdit();
 
         internal FullscreenHandler Fullscreen { get; set; }
         
@@ -172,7 +173,7 @@ namespace mRemoteNG.UI.Forms
             Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
             Runtime.ConnectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
             var credsAndConsSetup = new CredsAndConsSetup();
-            credsAndConsSetup.LoadCredsAndCons(Runtime.ConnectionsService, Runtime.CredentialService);
+            credsAndConsSetup.LoadCredsAndCons(Runtime.ConnectionsService, Runtime.CredentialService, _saveConnectionsOnEdit);
 
             Windows.TreeForm.Focus();
 
@@ -393,6 +394,7 @@ namespace mRemoteNG.UI.Forms
 				}
 			}
 
+            _saveConnectionsOnEdit.Unsubscribe();
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 									
 			IsClosing = true;

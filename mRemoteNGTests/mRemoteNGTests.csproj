@@ -114,6 +114,7 @@
     <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgsTests.cs" />
+    <Compile Include="Config\Connections\SaveConnectionsOnEditTests.cs" />
     <Compile Include="Config\DataProviders\FileBackupCreatorTests.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderTests.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackupTests.cs" />

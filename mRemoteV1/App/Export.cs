@@ -19,7 +19,7 @@ namespace mRemoteNG.App
 {
 	public static class Export
 	{
-		public static void ExportToFile(ConnectionInfo selectedNode, ConnectionTreeModel connectionTreeModel)
+		public static void ExportToFile(ConnectionInfo selectedNode, IConnectionTreeModel connectionTreeModel)
 		{
 			try
 			{

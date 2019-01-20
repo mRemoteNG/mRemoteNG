@@ -23,7 +23,7 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.Connection
 {
-    public class ConnectionsService
+    public class ConnectionsService : IConnectionsService
     {
         private static readonly object SaveLock = new object();
         private readonly PuttySessionsManager _puttySessionsManager;
@@ -40,7 +40,7 @@ namespace mRemoteNG.Connection
         public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
 
-        public ConnectionTreeModel ConnectionTreeModel { get; private set; } = new ConnectionTreeModel();
+        public IConnectionTreeModel ConnectionTreeModel { get; private set; } = new ConnectionTreeModel();
 
         public ConnectionsService(PuttySessionsManager puttySessionsManager, CredentialService credentialService)
         {
@@ -192,7 +192,7 @@ namespace mRemoteNG.Connection
         /// this save.
         /// </param>
         public void SaveConnections(
-            ConnectionTreeModel connectionTreeModel, 
+            IConnectionTreeModel connectionTreeModel, 
             bool useDatabase, 
             SaveFilter saveFilter, 
             string connectionFileName, 
@@ -219,7 +219,7 @@ namespace mRemoteNG.Connection
                 var previouslyUsingDatabase = UsingDatabase;
 
                 var saver = useDatabase
-                    ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer,
+                    ? (ISaver<IConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer,
                         _localConnectionPropertiesDataProvider)
                     : new XmlConnectionsSaver(connectionFileName, saveFilter);
 
@@ -331,7 +331,7 @@ namespace mRemoteNG.Connection
                 newSourcePath));
         }
 
-        private void RaiseConnectionsSavedEvent(ConnectionTreeModel modelThatWasSaved, bool previouslyUsingDatabase, bool usingDatabase, string connectionFileName)
+        private void RaiseConnectionsSavedEvent(IConnectionTreeModel modelThatWasSaved, bool previouslyUsingDatabase, bool usingDatabase, string connectionFileName)
         {
             ConnectionsSaved?.Invoke(this, new ConnectionsSavedEventArgs(modelThatWasSaved, previouslyUsingDatabase, usingDatabase, connectionFileName));
         }

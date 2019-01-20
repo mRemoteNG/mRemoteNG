@@ -22,7 +22,7 @@ using mRemoteNG.Connection;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
+    public class SqlConnectionsSaver : ISaver<IConnectionTreeModel>
     {
         private SecureString _password = Runtime.EncryptionKey;
         private readonly SaveFilter _saveFilter;
@@ -41,7 +41,7 @@ namespace mRemoteNG.Config.Connections
             _dataProvider = localPropertiesDataProvider.ThrowIfNull(nameof(localPropertiesDataProvider));
         }
 
-        public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
+        public void Save(IConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
             var rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 

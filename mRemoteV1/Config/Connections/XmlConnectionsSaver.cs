@@ -11,7 +11,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class XmlConnectionsSaver : ISaver<ConnectionTreeModel>
+    public class XmlConnectionsSaver : ISaver<IConnectionTreeModel>
     {
         private readonly string _connectionFileName;
         private readonly SaveFilter _saveFilter;
@@ -27,7 +27,7 @@ namespace mRemoteNG.Config.Connections
             _saveFilter = saveFilter;
         }
 
-        public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
+        public void Save(IConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
             try
             {

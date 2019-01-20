@@ -2,25 +2,33 @@
 using System.ComponentModel;
 using mRemoteNG.Connection;
 using mRemoteNG.Tools;
-using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Connections
 {
     public class SaveConnectionsOnEdit
     {
-        private readonly ConnectionsService _connectionsService;
+        private IConnectionsService _connectionsService;
 
-        public SaveConnectionsOnEdit(ConnectionsService connectionsService)
+        public void Subscribe(IConnectionsService connectionsService)
         {
             _connectionsService = connectionsService.ThrowIfNull(nameof(connectionsService));
+            connectionsService.ConnectionTreeModel.CollectionChanged += ConnectionTreeModelOnCollectionChanged;
+            connectionsService.ConnectionTreeModel.PropertyChanged += ConnectionTreeModelOnPropertyChanged;
         }
 
-        public void ConnectionTreeModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        public void Unsubscribe()
+        {
+            _connectionsService.ConnectionTreeModel.CollectionChanged -= ConnectionTreeModelOnCollectionChanged;
+            _connectionsService.ConnectionTreeModel.PropertyChanged -= ConnectionTreeModelOnPropertyChanged;
+            _connectionsService = null;
+        }
+
+        private void ConnectionTreeModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             SaveConnectionOnEdit(propertyChangedEventArgs.PropertyName);
         }
 
-        public void ConnectionTreeModelOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void ConnectionTreeModelOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             SaveConnectionOnEdit();
         }
@@ -29,10 +37,8 @@ namespace mRemoteNG.Config.Connections
         {
             if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
                 return;
-            if (FrmMain.Default.IsClosing)
-                return;
 
-            _connectionsService.SaveConnectionsAsync(propertyName);
+            _connectionsService?.SaveConnectionsAsync(propertyName);
         }
     }
 }

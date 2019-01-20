@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-    public class XmlConnectionsSerializer : ISerializer<ConnectionTreeModel,string>, ISerializer<ConnectionInfo, string>
+    public class XmlConnectionsSerializer : ISerializer<IConnectionTreeModel,string>, ISerializer<ConnectionInfo, string>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly ISerializer<ConnectionInfo, XElement> _connectionNodeSerializer;
@@ -26,7 +26,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             _connectionNodeSerializer = connectionNodeSerializer;
         }
 
-        public string Serialize(ConnectionTreeModel connectionTreeModel)
+        public string Serialize(IConnectionTreeModel connectionTreeModel)
         {
             var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return SerializeConnectionsData(rootNode);
