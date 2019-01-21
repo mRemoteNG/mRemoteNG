@@ -48,9 +48,9 @@ namespace mRemoteNG.Config.Connections
                 ConnectionDeserializer = new XmlConnectionsDeserializer(PromptForPassword)
             };
 
-            var connectionTreeModel = deserializer.Deserialize(xmlString);
+            var serializationResult = deserializer.Deserialize(xmlString);
 
-            return new SerializationResult(connectionTreeModel.RootNodes.Cast<ConnectionInfo>().ToList(), new ConnectionToCredentialMap());
+            return serializationResult;
         }
 
         private Optional<SecureString> PromptForPassword()

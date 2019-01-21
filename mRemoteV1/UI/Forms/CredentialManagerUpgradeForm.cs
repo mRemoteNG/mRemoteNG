@@ -10,6 +10,7 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.Versioning;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
@@ -19,7 +20,7 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class CredentialManagerUpgradeForm : Form, IDeserializer<string, ConnectionTreeModel>
+    public partial class CredentialManagerUpgradeForm : Form
     {
         private string _connectionFilePath;
         private string _newCredentialRepoPath;
@@ -28,7 +29,7 @@ namespace mRemoteNG.UI.Forms
         private ConnectionToCredentialMap _credentialMap;
         private readonly ThemeManager _themeManager = ThemeManager.getInstance();
 
-        public IDeserializer<string, ConnectionTreeModel> ConnectionDeserializer { get; set; }
+        public XmlConnectionsDeserializer ConnectionDeserializer { get; set; }
         public ConnectionsService ConnectionsService { get; set; }
         public CredentialService CredentialService { get; set; }
 
@@ -73,7 +74,7 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        public ConnectionTreeModel Deserialize(string serializedData)
+        public SerializationResult Deserialize(string serializedData)
         {
             _xdoc = XDocument.Parse(serializedData);
             if (!XmlCredentialManagerUpgrader.CredentialManagerUpgradeNeeded(_xdoc))
@@ -85,15 +86,15 @@ namespace mRemoteNG.UI.Forms
 
             var result = ShowDialog();
             if (result != DialogResult.OK)
-                return new ConnectionTreeModel();
+                return new SerializationResult(new List<ConnectionInfo>(), new ConnectionToCredentialMap());
 
             var newRepoPassword = newRepositoryPasswordEntry.SecureString;
             SaveCredentialsToNewRepository(_credentialMap.DistinctCredentialRecords, newRepoPassword, _newCredentialRepoPath);
-            var connectionTreeModel = _upgradingDeserializer.Deserialize(serializedData, _credentialMap);
+            var serializationResult = _upgradingDeserializer.Deserialize(serializedData, _credentialMap);
 
             ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
 
-            return connectionTreeModel;
+            return serializationResult;
         }
 
         /// <summary>

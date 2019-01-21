@@ -15,21 +15,23 @@ using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Security;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.Credential;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-    public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
+    public class XmlConnectionsDeserializer
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
         private XmlConnectionsDecryptor _decryptor;
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.7;
-        private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
+        private readonly CredentialDomainUserPasswordComparer _credentialComparer = new CredentialDomainUserPasswordComparer();
 
         public Func<Optional<SecureString>> AuthenticationRequestor { get; set; }
 
@@ -38,12 +40,12 @@ namespace mRemoteNG.Config.Serializers.Xml
             AuthenticationRequestor = authenticationRequestor;
         }
 
-        public ConnectionTreeModel Deserialize(string xml)
+        public SerializationResult Deserialize(string xml)
         {
             return Deserialize(xml, false);
         }
 
-        public ConnectionTreeModel Deserialize(string xml, bool import)
+        public SerializationResult Deserialize(string xml, bool import)
         {
             try
             {
@@ -51,16 +53,13 @@ namespace mRemoteNG.Config.Serializers.Xml
                 ValidateConnectionFileVersion();
 
                 var rootXmlElement = _xmlDocument.DocumentElement;
-                InitializeRootNode(rootXmlElement);
-                CreateDecryptor(_rootNodeInfo, rootXmlElement);
-                var connectionTreeModel = new ConnectionTreeModel();
-                connectionTreeModel.AddRootNode(_rootNodeInfo);
+                var rootNodeInfo = InitializeRootNode(rootXmlElement);
+                _decryptor = CreateDecryptor(rootNodeInfo, rootXmlElement);
 
-                
                 if (_confVersion > 1.3)
                 {
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
-                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
+                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, rootNodeInfo.PasswordString.ConvertToSecureString()))
                     {
                         return null;
                     }
@@ -76,12 +75,11 @@ namespace mRemoteNG.Config.Serializers.Xml
                     }
                 }
 
-                AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, _rootNodeInfo);
+                var credentialMap = new ConnectionToCredentialMap();
+                var rootNodes = AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, credentialMap);
+                var serializationResult = new SerializationResult(rootNodes, credentialMap);
 
-                if (!import)
-                    Runtime.ConnectionsService.IsConnectionsFileLoaded = true;
-
-                return connectionTreeModel;
+                return serializationResult;
             }
             catch (Exception ex)
             {
@@ -93,8 +91,8 @@ namespace mRemoteNG.Config.Serializers.Xml
 
         private void LoadXmlConnectionData(string connections)
         {
-            CreateDecryptor(new RootNodeInfo(RootNodeType.Connection));
-            connections = _decryptor.LegacyFullFileDecrypt(connections);
+            var legacyDecryptor = CreateDecryptor(new RootNodeInfo(RootNodeType.Connection));
+            connections = legacyDecryptor.LegacyFullFileDecrypt(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
                 _xmlDocument.LoadXml(connections);
@@ -130,13 +128,16 @@ namespace mRemoteNG.Config.Serializers.Xml
             );
         }
 
-        private void InitializeRootNode(XmlElement connectionsRootElement)
+        private RootNodeInfo InitializeRootNode(XmlElement connectionsRootElement)
         {
             var rootNodeName = connectionsRootElement?.Attributes["Name"].Value.Trim();
-            _rootNodeInfo.Name = rootNodeName;
+            return new RootNodeInfo(RootNodeType.Connection)
+            {
+                Name = rootNodeName
+            };
         }
 
-        private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement connectionsRootElement = null)
+        private XmlConnectionsDecryptor CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement connectionsRootElement = null)
         {
             if (_confVersion >= 2.6)
             {
@@ -144,23 +145,27 @@ namespace mRemoteNG.Config.Serializers.Xml
                 var mode = connectionsRootElement.GetAttributeAsEnum<BlockCipherModes>("BlockCipherMode");
                 var keyDerivationIterations = connectionsRootElement.GetAttributeAsInt("KdfIterations");
 
-                _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
+                return new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
                 {
                     AuthenticationRequestor = AuthenticationRequestor,
                     KeyDerivationIterations = keyDerivationIterations
                 };
             }
-            else
+
+            return new XmlConnectionsDecryptor(rootNodeInfo)
             {
-                _decryptor = new XmlConnectionsDecryptor(_rootNodeInfo) { AuthenticationRequestor = AuthenticationRequestor };
-            }
+                AuthenticationRequestor = AuthenticationRequestor
+            };
         }
 
-        private void AddNodesFromXmlRecursive(XmlNode parentXmlNode, ContainerInfo parentContainer)
+        private List<ConnectionInfo> AddNodesFromXmlRecursive(XmlNode parentXmlNode, ConnectionToCredentialMap credentialMap)
         {
             try
             {
-                if (!parentXmlNode.HasChildNodes) return;
+                if (!parentXmlNode.HasChildNodes)
+                    return new List<ConnectionInfo>();
+
+                var children = new List<ConnectionInfo>();
                 foreach (XmlNode xmlNode in parentXmlNode.ChildNodes)
                 {
                     var nodeType = xmlNode.GetAttributeAsEnum("Type", TreeNodeType.Connection);
@@ -169,24 +174,27 @@ namespace mRemoteNG.Config.Serializers.Xml
                     switch (nodeType)
                     {
                         case TreeNodeType.Connection:
-                            var connectionInfo = GetConnectionInfoFromXml(xmlNode);
-                            parentContainer.AddChild(connectionInfo);
+                            var connectionInfo = GetConnectionInfoFromXml(xmlNode, credentialMap);
+                            children.Add(connectionInfo);
                             break;
                         case TreeNodeType.Container:
                             var containerInfo = new ContainerInfo();
                             
                             if (_confVersion >= 0.9)
-                                containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
+                                containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode, credentialMap));
                             if (_confVersion >= 0.8)
                             {
                                 containerInfo.IsExpanded = xmlNode.GetAttributeAsBool("Expanded");
                             }
 
-                            parentContainer.AddChild(containerInfo);
-                            AddNodesFromXmlRecursive(xmlNode, containerInfo);
+                            var subChildren = AddNodesFromXmlRecursive(xmlNode, credentialMap);
+                            subChildren.ForEach(info => containerInfo.AddChild(info));
+                            children.Add(containerInfo);
                             break;
                     }
                 }
+
+                return children;
             }
             catch (Exception ex)
             {
@@ -195,7 +203,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             }
         }
 
-        private ConnectionInfo GetConnectionInfoFromXml(XmlNode xmlnode)
+        private ConnectionInfo GetConnectionInfoFromXml(XmlNode xmlnode, ConnectionToCredentialMap credentialMap)
         {
             if (xmlnode?.Attributes == null)
                 return null;
@@ -225,10 +233,19 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                     if (_confVersion <= 2.6) // 0.2 - 2.6
                     {
-                        // TODO: harvest
-                        connectionInfo.Username = xmlnode.GetAttributeAsString("Username");
-                        connectionInfo.Password = _decryptor.Decrypt(xmlnode.GetAttributeAsString("Password"));
-                        connectionInfo.Domain = xmlnode.GetAttributeAsString("Domain");
+                        var username = xmlnode.GetAttributeAsString("Username");
+                        var domain = xmlnode.GetAttributeAsString("Domain");
+
+                        var cred = new CredentialRecord
+                        {
+                            Title = domain.Length > 0 ? $"{domain}\\{username}" : username,
+                            Username = username,
+                            Domain = domain,
+                            Password = _decryptor.Decrypt(xmlnode.GetAttributeAsString("Password")).ConvertToSecureString()
+                        };
+
+                        if (!_credentialComparer.Equals(cred, new NullCredentialRecord()))
+                            connectionInfo.CredentialRecordId = cred.Id;
                     }
                 }
 
@@ -502,7 +519,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.RedirectClipboard = xmlnode.GetAttributeAsBool("RedirectClipboard");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
 
-                    connectionInfo.CredentialRecordId = Guid.TryParse(xmlnode.Attributes["CredentialId"]?.Value, out var credId)
+                    connectionInfo.CredentialRecordId = Guid.TryParse(xmlnode.Attributes?["CredentialId"]?.Value, out var credId)
                             ? credId
                             : Optional<Guid>.Empty;
 

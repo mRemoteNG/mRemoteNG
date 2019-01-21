@@ -88,7 +88,7 @@ namespace mRemoteNG.App
                     connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                 }
 
-                ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
+                ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, connectionFileName);
 
                 if (Settings.Default.UseSQLServer)
                 {

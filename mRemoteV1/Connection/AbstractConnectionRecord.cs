@@ -348,6 +348,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUsername"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsername")]
+        [Obsolete]
         public string RDGatewayUsername
         {
             get => GetPropertyValue("RDGatewayUsername", _rdGatewayUsername).Trim();
@@ -358,6 +359,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayPassword"),
             LocalizedAttributes.LocalizedDescription("strPropertyNameRDGatewayPassword"),
             PasswordPropertyText(true)]
+        [Obsolete]
         public string RDGatewayPassword
         {
             get => GetPropertyValue("RDGatewayPassword", _rdGatewayPassword);
@@ -367,6 +369,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayDomain"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayDomain")]
+        [Obsolete]
         public string RDGatewayDomain
         {
             get => GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim();
@@ -650,6 +653,7 @@ namespace mRemoteNG.Connection
             Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyUsername"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyUsername")]
+        [Obsolete]
         public string VNCProxyUsername
         {
             get => GetPropertyValue("VNCProxyUsername", _vncProxyUsername);
@@ -661,6 +665,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPassword"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPassword"),
             PasswordPropertyText(true)]
+        [Obsolete]
         public string VNCProxyPassword
         {
             get => GetPropertyValue("VNCProxyPassword", _vncProxyPassword);

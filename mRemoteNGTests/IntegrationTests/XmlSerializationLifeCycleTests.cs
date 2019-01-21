@@ -10,6 +10,7 @@ using NUnit.Framework;
 using System;
 using System.Linq;
 using System.Text;
+using mRemoteNG.Tools;
 
 
 namespace mRemoteNGTests.IntegrationTests
@@ -45,7 +46,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var serializedContent = _serializer.Serialize(_originalModel);
             var deserializedModel = _deserializer.Deserialize(serializedContent);
-            var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
+            var nodeNamesFromDeserializedModel = deserializedModel.ConnectionRecords.FlattenConnectionTree().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
         }
@@ -56,7 +57,7 @@ namespace mRemoteNGTests.IntegrationTests
             _serializer.UseFullEncryption = true;
             var serializedContent = _serializer.Serialize(_originalModel);
             var deserializedModel = _deserializer.Deserialize(serializedContent);
-            var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
+            var nodeNamesFromDeserializedModel = deserializedModel.ConnectionRecords.FlattenConnectionTree().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
         }
@@ -67,7 +68,7 @@ namespace mRemoteNGTests.IntegrationTests
             var originalConnectionInfo = new ConnectionInfo {Name = "con1", Description = "£°úg¶┬ä" };
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
             var deserializedModel = _deserializer.Deserialize(serializedContent);
-            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
+            var deserializedConnectionInfo = deserializedModel.ConnectionRecords.FlattenConnectionTree().First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(deserializedConnectionInfo.Description, Is.EqualTo(originalConnectionInfo.Description));
         }
 
@@ -84,7 +85,7 @@ namespace mRemoteNGTests.IntegrationTests
             _serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
             var serializedContent = _serializer.Serialize(_originalModel);
             var deserializedModel = _deserializer.Deserialize(serializedContent);
-            var nodeNamesFromDeserializedModel = deserializedModel.GetRecursiveChildList().Select(node => node.Name);
+            var nodeNamesFromDeserializedModel = deserializedModel.ConnectionRecords.FlattenConnectionTree().Select(node => node.Name);
             var nodeNamesFromOriginalModel = _originalModel.GetRecursiveChildList().Select(node => node.Name);
             Assert.That(nodeNamesFromDeserializedModel, Is.EquivalentTo(nodeNamesFromOriginalModel));
         }
@@ -99,7 +100,7 @@ namespace mRemoteNGTests.IntegrationTests
             serializedContent = serializedContent.Replace(originalConnectionInfo.ConstantID, "");
 
             var deserializedModel = _deserializer.Deserialize(serializedContent);
-            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
+            var deserializedConnectionInfo = deserializedModel.ConnectionRecords.FlattenConnectionTree().First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(Guid.TryParse(deserializedConnectionInfo.ConstantID, out var guid));
         }
 
@@ -111,7 +112,8 @@ namespace mRemoteNGTests.IntegrationTests
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
             var deserializedModel = _deserializer.Deserialize(serializedContent);
             var deserializedConnectionInfo = deserializedModel
-                .GetRecursiveChildList()
+                .ConnectionRecords
+                .FlattenConnectionTree()
                 .First(info => info.GetTreeNodeType() == TreeNodeType.Connection);
 
             var sb = new StringBuilder();
@@ -139,7 +141,8 @@ namespace mRemoteNGTests.IntegrationTests
             var serializedContent = _serializer.Serialize(container);
             var deserializedModel = _deserializer.Deserialize(serializedContent);
             var deserializedConnectionInfo = deserializedModel
-                .GetRecursiveChildList()
+                .ConnectionRecords
+                .FlattenConnectionTree()
                 .First(info => info.GetTreeNodeType() == TreeNodeType.Connection);
 
             var sb = new StringBuilder();

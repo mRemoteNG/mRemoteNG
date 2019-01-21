@@ -5,6 +5,7 @@ using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Connection;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;

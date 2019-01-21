@@ -11,30 +11,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using mRemoteNG.Config.Serializers.Xml;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class XmlCredentialManagerUpgrader
     {
-        private readonly IDeserializer<string, ConnectionTreeModel> _deserializer;
+        private readonly XmlConnectionsDeserializer _deserializer;
 
 
-        public XmlCredentialManagerUpgrader(IDeserializer<string, ConnectionTreeModel> decoratedDeserializer)
+        public XmlCredentialManagerUpgrader(XmlConnectionsDeserializer decoratedDeserializer)
         {
             _deserializer = decoratedDeserializer.ThrowIfNull(nameof(decoratedDeserializer));
         }
 
-        public ConnectionTreeModel Deserialize(string serializedData, ConnectionToCredentialMap upgradeMap)
+        public SerializationResult Deserialize(string serializedData, ConnectionToCredentialMap upgradeMap)
         {
             var serializedDataAsXDoc = EnsureConnectionXmlElementsHaveIds(serializedData);
             var serializedDataWithIds = $"{serializedDataAsXDoc.Declaration}{serializedDataAsXDoc}";
 
-            var connectionTreeModel = _deserializer.Deserialize(serializedDataWithIds);
+            var serializationResult = _deserializer.Deserialize(serializedDataWithIds);
 
             if (upgradeMap != null)
-                ApplyCredentialMapping(upgradeMap, connectionTreeModel.GetRecursiveChildList());
+                ApplyCredentialMapping(upgradeMap, serializationResult.ConnectionRecords.FlattenConnectionTree());
 
-            return connectionTreeModel;
+            return serializationResult;
         }
 
         private XDocument EnsureConnectionXmlElementsHaveIds(string serializedData)

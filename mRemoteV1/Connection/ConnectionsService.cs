@@ -49,6 +49,8 @@ namespace mRemoteNG.Connection
             var path = SettingsFileInfo.SettingsPath;
             _localConnectionPropertiesDataProvider = new FileDataProvider(Path.Combine(path, "LocalConnectionProperties.xml"));
             _localConnectionPropertiesSerializer = new LocalConnectionPropertiesXmlSerializer();
+            
+            _puttySessionsManager.RootPuttySessionsNodes.ForEach(node => ConnectionTreeModel.AddRootNode(node));
         }
 
         public void NewConnectionsFile(string filename)
@@ -56,10 +58,9 @@ namespace mRemoteNG.Connection
             try
             {
                 filename.ThrowIfNullOrEmpty(nameof(filename));
-                var newConnectionsModel = new ConnectionTreeModel();
-                newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
-                SaveConnections(newConnectionsModel, false, new SaveFilter(), filename, true);
-                LoadConnections(false, false, filename);
+                ConnectionTreeModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
+                SaveConnections(ConnectionTreeModel, false, new SaveFilter(), filename, true);
+                LoadConnections(false, filename);
             }
             catch (Exception ex)
             {
@@ -112,7 +113,7 @@ namespace mRemoteNG.Connection
         /// <param name="useDatabase"></param>
         /// <param name="import"></param>
         /// <param name="connectionFileName"></param>
-        public void LoadConnections(bool useDatabase, bool import, string connectionFileName)
+        public void LoadConnections(bool useDatabase, string connectionFileName)
         {
             var oldIsUsingDatabaseValue = UsingDatabase;
 
@@ -135,8 +136,12 @@ namespace mRemoteNG.Connection
             ConnectionFileName = connectionFileName;
             UsingDatabase = useDatabase;
 
-            ConnectionTreeModel.RemoveRootNode(ConnectionTreeModel.RootNodes.First());
-            ConnectionTreeModel.AddRootNode(serializationResult.ConnectionRecords.OfType<RootNodeInfo>().First());
+            if (ConnectionTreeModel.RootNodes.Any())
+                ConnectionTreeModel.RemoveRootNode(ConnectionTreeModel.RootNodes.First());
+
+            var rootNode = new RootNodeInfo(RootNodeType.Connection);
+            rootNode.AddChildRange(serializationResult.ConnectionRecords);
+            ConnectionTreeModel.AddRootNode(rootNode);
 
             UpdateCustomConsPathSetting(connectionFileName);
             RaiseConnectionsLoadedEvent(new List<ConnectionInfo>(), new List<ConnectionInfo>(), oldIsUsingDatabaseValue, useDatabase, connectionFileName);

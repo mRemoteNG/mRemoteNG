@@ -19,7 +19,7 @@ namespace mRemoteNG.Connection
         /// <param name="useDatabase"></param>
         /// <param name="import"></param>
         /// <param name="connectionFileName"></param>
-        void LoadConnections(bool useDatabase, bool import, string connectionFileName);
+        void LoadConnections(bool useDatabase, string connectionFileName);
 
         /// <summary>
         /// When turned on, calls to <see cref="ConnectionsService.SaveConnections()"/> or

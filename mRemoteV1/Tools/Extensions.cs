@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using mRemoteNG.Connection;
+using mRemoteNG.Container;
 
 namespace mRemoteNG.Tools
 {
@@ -70,5 +72,19 @@ namespace mRemoteNG.Tools
 
 	        return collection;
 	    }
-	}
+
+        public static IEnumerable<ConnectionInfo> FlattenConnectionTree(this IEnumerable<ConnectionInfo> connections)
+        {
+            foreach (var item in connections)
+            {
+                yield return item;
+
+                if (!(item is ContainerInfo container))
+                    continue;
+
+                foreach (var child in FlattenConnectionTree(container.Children))
+                    yield return child;
+            }
+        }
+    }
 }
