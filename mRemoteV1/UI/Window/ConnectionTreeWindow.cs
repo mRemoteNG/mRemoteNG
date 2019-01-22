@@ -27,7 +27,6 @@ namespace mRemoteNG.UI.Window
 	    public ConnectionTree ConnectionTree
 	    {
 	        get { return olvConnections; }
-            set { olvConnections = value; }
 	    }
 
 	    public ConnectionTreeWindow() : this(new DockContent())
@@ -43,6 +42,7 @@ namespace mRemoteNG.UI.Window
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += OnAppSettingsChanged;
 		    ApplyLanguage();
+            ConnectionTree.ConnectionTreeModel = Runtime.ConnectionsService.ConnectionTreeModel;
         }
 
 	    private void OnAppSettingsChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -54,7 +54,6 @@ namespace mRemoteNG.UI.Window
             }
 
             PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
-
         }
 
         private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)

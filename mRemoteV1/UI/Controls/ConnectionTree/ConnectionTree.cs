@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Controls
         private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
-        private ConnectionTreeModel _connectionTreeModel;
+        private IConnectionTreeModel _connectionTreeModel;
 
         public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Controls
 
         public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
-        public ConnectionTreeModel ConnectionTreeModel
+        public IConnectionTreeModel ConnectionTreeModel
         {
             get { return _connectionTreeModel; }
             set
@@ -158,7 +158,7 @@ namespace mRemoteNG.UI.Controls
 		                   padding;
 		}
 
-        private void PopulateTreeView(ConnectionTreeModel newModel)
+        private void PopulateTreeView(IConnectionTreeModel newModel)
         {
             SetObjects(newModel.RootNodes);
             RegisterModelUpdateHandlers(newModel);
@@ -167,14 +167,14 @@ namespace mRemoteNG.UI.Controls
 			AutoResizeColumn(Columns[0]);
 		}
 
-        private void RegisterModelUpdateHandlers(ConnectionTreeModel newModel)
+        private void RegisterModelUpdateHandlers(IConnectionTreeModel newModel)
         {
             _puttySessionsManager.PuttySessionsCollectionChanged += OnPuttySessionsCollectionChanged;
             newModel.CollectionChanged += HandleCollectionChanged;
             newModel.PropertyChanged += HandleCollectionPropertyChanged;
         }
 
-        private void UnregisterModelUpdateHandlers(ConnectionTreeModel oldConnectionTreeModel)
+        private void UnregisterModelUpdateHandlers(IConnectionTreeModel oldConnectionTreeModel)
         {
             _puttySessionsManager.PuttySessionsCollectionChanged -= OnPuttySessionsCollectionChanged;
 
@@ -221,7 +221,7 @@ namespace mRemoteNG.UI.Controls
         #region ConnectionTree Behavior
         public RootNodeInfo GetRootConnectionNode()
         {
-            return (RootNodeInfo)ConnectionTreeModel.RootNodes.First(item => item is RootNodeInfo);
+            return (RootNodeInfo)ConnectionTreeModel.RootNodes.FirstOrDefault(item => item is RootNodeInfo);
         }
 
         public void Invoke(Action action)

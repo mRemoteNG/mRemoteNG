@@ -8,7 +8,7 @@ namespace mRemoteNG.UI.Controls
 {
     public interface IConnectionTree
     {
-        ConnectionTreeModel ConnectionTreeModel { get; set; }
+        IConnectionTreeModel ConnectionTreeModel { get; set; }
 
         ConnectionInfo SelectedNode { get; }
 

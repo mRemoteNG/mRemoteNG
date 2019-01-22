@@ -42,7 +42,7 @@ namespace mRemoteNG.Tree
 
         public IEnumerable<ConnectionInfo> GetRecursiveChildList(ContainerInfo container)
         {
-            return container.GetRecursiveChildList();
+            return container?.GetRecursiveChildList() ?? new ConnectionInfo[0];
         }
 
         public void RenameNode(ConnectionInfo connectionInfo, string newName)
