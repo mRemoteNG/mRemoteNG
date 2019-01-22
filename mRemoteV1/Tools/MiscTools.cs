@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Security;
@@ -90,8 +91,9 @@ namespace mRemoteNG.Tools
                 var ac = sender.ActiveControl;
                 if (ac != null)
                 {
-                    var bmp = new Bitmap(ac.Width, ac.Height);
-                    ac.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+                    var bmp = new Bitmap(ac.Width, ac.Height, PixelFormat.Format32bppRgb); 
+                    Graphics g = Graphics.FromImage(bmp);  
+                    g.CopyFromScreen(ac.PointToScreen(Point.Empty), Point.Empty , bmp.Size, CopyPixelOperation.SourceCopy);
                     return bmp;
                 }
             }
