@@ -1,16 +1,16 @@
-﻿using BrightIdeasSoftware;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
+using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Controls
@@ -380,7 +380,11 @@ namespace mRemoteNG.UI.Controls
 				ResetColumnFiltering();
 			}
 
-			RefreshObject(sender);
+            if (sender is IConnectionTree)
+                RebuildAll(true);
+            else
+			    RefreshObject(sender);
+
 			AutoResizeColumn(Columns[0]);
 
 			// turn filtering back on
