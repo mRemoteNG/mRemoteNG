@@ -176,6 +176,7 @@ namespace mRemoteNG.UI.Forms
             credsAndConsSetup.LoadCredsAndCons(Runtime.ConnectionsService, Runtime.CredentialService, _saveConnectionsOnEdit);
 
             Windows.TreeForm.Focus();
+            Windows.TreeForm.ConnectionTree.ConnectionTreeModel = Runtime.ConnectionsService.ConnectionTreeModel;
 
             PuttySessionsManager.Instance.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)

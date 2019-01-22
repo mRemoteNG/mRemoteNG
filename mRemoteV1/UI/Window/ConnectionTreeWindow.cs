@@ -42,7 +42,6 @@ namespace mRemoteNG.UI.Window
 		    SetConnectionTreeEventHandlers();
 		    Settings.Default.PropertyChanged += OnAppSettingsChanged;
 		    ApplyLanguage();
-            ConnectionTree.ConnectionTreeModel = Runtime.ConnectionsService.ConnectionTreeModel;
         }
 
 	    private void OnAppSettingsChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -169,7 +168,7 @@ namespace mRemoteNG.UI.Window
 	        }
 
             // TODO: might not need this call anymore
-	        olvConnections.SelectedObject = ConnectionTree.ConnectionTreeModel.RootNodes
+            olvConnections.SelectedObject = ConnectionTree.ConnectionTreeModel?.RootNodes
 	            .OfType<RootNodeInfo>().FirstOrDefault();
 	    }
         #endregion
