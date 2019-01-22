@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
@@ -7,14 +8,14 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.App.Initialization
 {
-	public class CredsAndConsSetup
+    public class CredsAndConsSetup
     {
         public void LoadCredsAndCons(ConnectionsService connectionsService, CredentialService credentialService, SaveConnectionsOnEdit connectionsOnEdit)
         {
             connectionsOnEdit.Subscribe(connectionsService);
 
-            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.ConnectionsService.GetStartupConnectionFileName()))
-                Runtime.ConnectionsService.NewConnectionsFile(Runtime.ConnectionsService.GetStartupConnectionFileName());
+            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(connectionsService.GetStartupConnectionFileName()))
+                connectionsService.NewConnectionsFile(connectionsService.GetStartupConnectionFileName());
 
             credentialService.LoadRepositoryList();
             LoadDefaultConnectionCredentials(credentialService);
@@ -29,7 +30,7 @@ namespace mRemoteNG.App.Initialization
                 .Where(record => record.Id.Equals(defaultCredId))
                 .ToArray();
 
-            DefaultConnectionInfo.Instance.CredentialRecordId = matchedCredentials.FirstOrDefault()?.Id.ToOptional();
+            DefaultConnectionInfo.Instance.CredentialRecordId = Optional<Guid>.FromNullable(matchedCredentials.FirstOrDefault()?.Id);
         }
     }
 }

@@ -5,7 +5,7 @@ using mRemoteNG.App;
 
 namespace mRemoteNG.Connection
 {
-	public class DefaultConnectionInfo : ConnectionInfo
+    public class DefaultConnectionInfo : ConnectionInfo
     {
         public static DefaultConnectionInfo Instance { get; } = new DefaultConnectionInfo();
 
@@ -65,9 +65,11 @@ namespace mRemoteNG.Connection
 		                throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
 					// ensure value is of correct type
-	                var value = propertyFromDestination.PropertyType == typeof(string)
-	                    ? property.GetValue(Instance, null).ToString()
-	                    : Convert.ChangeType(property.GetValue(Instance, null), propertyFromDestination.PropertyType);
+	                var value = property.PropertyType == propertyFromDestination.PropertyType 
+	                    ? property.GetValue(Instance, null)
+	                    : propertyFromDestination.PropertyType == typeof(string)
+	                        ? property.GetValue(Instance, null).ToString()
+	                        : Convert.ChangeType(property.GetValue(Instance, null), propertyFromDestination.PropertyType);
 
                     propertyFromDestination.SetValue(destinationInstance, value, null);
                 }

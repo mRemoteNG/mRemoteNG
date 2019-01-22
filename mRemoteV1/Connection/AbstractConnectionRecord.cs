@@ -174,7 +174,7 @@ namespace mRemoteNG.Connection
         public virtual Optional<Guid> CredentialRecordId
         {
             get => GetPropertyValue(nameof(CredentialRecordId), _credentialRecordId);
-            set => SetField(ref _credentialRecordId, value, nameof(CredentialRecordId));
+            set => SetField(ref _credentialRecordId, value ?? Optional<Guid>.Empty, nameof(CredentialRecordId));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 2),
