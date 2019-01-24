@@ -213,7 +213,6 @@ namespace mRemoteNG.Connection.Protocol
                         InterfaceControl.Height + SystemInformation.CaptionHeight + scaledFrameBorderHeight * 2,
                         true);
                 }
-                
 			}
 			catch (Exception ex)
 			{
