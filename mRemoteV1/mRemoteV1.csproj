@@ -505,6 +505,12 @@
     <Compile Include="UI\Forms\CompositeCredentialRepoUnlockerForm.Designer.cs">
       <DependentUpon>CompositeCredentialRepoUnlockerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\CredentialImportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\CredentialImportForm.Designer.cs">
+      <DependentUpon>CredentialImportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\CredentialManager\CredentialManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -910,6 +916,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CompositeCredentialRepoUnlockerForm.resx">
       <DependentUpon>CompositeCredentialRepoUnlockerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\CredentialImportForm.resx">
+      <DependentUpon>CredentialImportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialManager\CredentialManagerForm.resx">
       <DependentUpon>CredentialManagerForm.cs</DependentUpon>

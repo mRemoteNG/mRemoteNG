@@ -6,6 +6,7 @@ using mRemoteNG.Config.Import;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
