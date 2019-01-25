@@ -13,7 +13,7 @@ install:
 - ps: >-
     date
 
-    C:\projects\mremoteng\mRemoteV1\Resources\CitrixReceiver.exe ENABLE_SSON="No" /silent /noreboot /EnableCEIP=false /AutoUpdateCheck=disabled /EnableTracing=false | out-null
+    mRemoteV1\Resources\CitrixReceiver.exe ENABLE_SSON="No" /silent /noreboot /EnableCEIP=false /AutoUpdateCheck=disabled /EnableTracing=false | out-null
 
     date
 before_build:
