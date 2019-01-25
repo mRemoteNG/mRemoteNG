@@ -1,6 +1,12 @@
 version: 1.76.{build}
 pull_requests:
   do_not_increment_build_number: true
+environment:
+  cert_path: tools\cert\CodeSigning_Cert_mRemoteNG_DigiCert.p12
+  cert_decrypt_pwd:
+    secure: QK1ldldzIUSVA0u+OtbHixPmsXHAO9ksOKcyByq0FHM=
+  cert_pwd:
+    secure: Fni66m2OgoTxjRzahUNUUNHl5gGwTXLvXIMQYiOMqX8=
 image: Visual Studio 2017
 configuration:
 - Release
@@ -16,6 +22,8 @@ install:
     C:\projects\mremoteng\mRemoteV1\Resources\CitrixReceiver.exe ENABLE_SSON="No" /silent /noreboot /EnableCEIP=false /AutoUpdateCheck=disabled /EnableTracing=false | out-null
 
     date
+- ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
+- cmd: appveyor-tools\secure-file -decrypt %cert_path%.enc -secret %cert_decrypt_pwd%
 before_build:
 - cmd: >-
     echo %TIME%
