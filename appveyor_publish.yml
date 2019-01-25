@@ -19,7 +19,7 @@ install:
 - ps: >-
     date
 
-    C:\projects\mremoteng\mRemoteV1\Resources\CitrixReceiver.exe ENABLE_SSON="No" /silent /noreboot /EnableCEIP=false /AutoUpdateCheck=disabled /EnableTracing=false | out-null
+    mRemoteV1\Resources\CitrixReceiver.exe ENABLE_SSON="No" /silent /noreboot /EnableCEIP=false /AutoUpdateCheck=disabled /EnableTracing=false | out-null
 
     date
 - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
