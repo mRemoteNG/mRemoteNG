@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -162,46 +163,53 @@ namespace mRemoteNG.Tools
 
         private string GetVariableReplacement(string variable, string original)
         {
-            var replacement = "";
             if (_connectionInfo == null)
-                return replacement;
+                return string.Empty;
 
-            switch (variable.ToLowerInvariant())
-            {
-                case "name":
-                    replacement = _connectionInfo.Name;
-                    break;
-                case "hostname":
-                    replacement = _connectionInfo.Hostname;
-                    break;
-                case "port":
-                    replacement = Convert.ToString(_connectionInfo.Port);
-                    break;
-                case "username":
-                    replacement = _credentialService
-                        .GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()).Username;
-                    break;
-                case "password":
-                    replacement = _credentialService
-                        .GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()).Password.ConvertToUnsecureString();
-                    break;
-                case "domain":
-                    replacement = _credentialService
-                        .GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()).Domain;
-                    break;
-                case "description":
-                    replacement = _connectionInfo.Description;
-                    break;
-                case "macaddress":
-                    replacement = _connectionInfo.MacAddress;
-                    break;
-                case "userfield":
-                    replacement = _connectionInfo.UserField;
-                    break;
-                default:
-                    return original;
-            }
-            return replacement;
+            var normalizedVariable = variable.ToLowerInvariant();
+
+            if (normalizedVariable == "name")
+                return _connectionInfo.Name;
+            if (normalizedVariable == "hostname")
+                return _connectionInfo.Hostname;
+            if (normalizedVariable == "port")
+                return _connectionInfo.Port.ToString();
+            if (normalizedVariable == "description")
+                return _connectionInfo.Description;
+            if (normalizedVariable == "macaddress")
+                return _connectionInfo.MacAddress;
+            if (normalizedVariable == "userfield")
+                return _connectionInfo.UserField;
+            if (normalizedVariable.StartsWith("username"))
+                return GetSpecifiedCredential(normalizedVariable)
+                    .Concat(_credentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()))
+                    .FirstOrDefault()?
+                    .Username;
+            if (normalizedVariable.StartsWith("password"))
+                return GetSpecifiedCredential(normalizedVariable)
+                    .Concat(_credentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()))
+                    .FirstOrDefault()?
+                    .Password.ConvertToUnsecureString();
+            if (normalizedVariable.StartsWith("domain"))
+                return GetSpecifiedCredential(normalizedVariable)
+                    .Concat(_credentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()))
+                    .FirstOrDefault()?
+                    .Domain;
+
+            return original;
+        }
+
+        private Optional<ICredentialRecord> GetSpecifiedCredential(string variable)
+        {
+            var match = Regex.Match(variable.Replace("-", string.Empty), @":(?<id>[0-9a-fA-F]{7,32})$");
+            if (!match.Success)
+                return Optional<ICredentialRecord>.Empty;
+
+            var id = match.Groups["id"].Value;
+            return _credentialService
+                .GetCredentialRecords()
+                .FirstOrDefault(r => r.Id.ToString("N").StartsWith(id))
+                .ToOptional();
         }
 
         private string PerformReplacements(string input, List<Replacement> replacements)

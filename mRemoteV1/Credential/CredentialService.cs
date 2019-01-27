@@ -77,11 +77,11 @@ namespace mRemoteNG.Credential
         /// we will attempt to use a default credential specified in settings. If False, no default
         /// fallback value will be used.
         /// </param>
-        public ICredentialRecord GetEffectiveCredentialRecord(Optional<Guid> id, bool allowDefaultFallback = true)
+        public Optional<ICredentialRecord> GetEffectiveCredentialRecord(Optional<Guid> id, bool allowDefaultFallback = true)
         {
             var desiredCredentialRecord = GetCredentialRecord(id.FirstOrDefault());
             if (desiredCredentialRecord != null)
-                return desiredCredentialRecord;
+                return desiredCredentialRecord.ToOptional();
 
             if (allowDefaultFallback)
             {
@@ -92,7 +92,7 @@ namespace mRemoteNG.Credential
                 {
                     var cred = GetCredentialRecord(Settings.Default.DefaultCredentialRecord);
                     if (cred != null)
-                        return cred;
+                        return cred.ToOptional();
                 }
             }
 

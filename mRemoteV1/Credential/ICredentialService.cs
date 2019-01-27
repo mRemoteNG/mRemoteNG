@@ -26,7 +26,7 @@ namespace mRemoteNG.Credential
         /// we will attempt to use a default credential specified in settings. If False, no default
         /// fallback value will be used.
         /// </param>
-        ICredentialRecord GetEffectiveCredentialRecord(Optional<Guid> id, bool allowDefaultFallback = true);
+        Optional<ICredentialRecord> GetEffectiveCredentialRecord(Optional<Guid> id, bool allowDefaultFallback = true);
 
         /// <summary>
         /// Registers an <see cref="ICredentialRepositoryFactory"/> for

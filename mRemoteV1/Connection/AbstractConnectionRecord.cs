@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Linq;
 
 
 namespace mRemoteNG.Connection
@@ -185,7 +186,7 @@ namespace mRemoteNG.Connection
         public virtual ICredentialRecord CredentialRecord
         {
             // TODO: this static ref to the cred service makes testing difficult. refactor it to allow easy mocking
-            get => Runtime.CredentialService.GetEffectiveCredentialRecord(CredentialRecordId, false);
+            get => Runtime.CredentialService.GetEffectiveCredentialRecord(CredentialRecordId, false).FirstOrDefault();
             set => CredentialRecordId = Optional<Guid>.FromNullable(value?.Id);
         }
 

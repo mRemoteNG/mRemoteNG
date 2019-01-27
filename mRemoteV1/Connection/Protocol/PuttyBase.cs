@@ -80,7 +80,7 @@ namespace mRemoteNG.Connection.Protocol
 						if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials))
 						{
 						    var cred = Runtime.CredentialService.GetEffectiveCredentialRecord(InterfaceControl?.Info.CredentialRecordId
-						        .FirstOrDefault());
+						        .FirstOrDefault()).FirstOrDefault();
 
 						    var username = cred.Username;
 							var password = cred.Password.ConvertToUnsecureString();

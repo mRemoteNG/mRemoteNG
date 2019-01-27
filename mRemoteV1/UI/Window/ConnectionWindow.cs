@@ -116,7 +116,7 @@ namespace mRemoteNG.UI.Window
                 if (Settings.Default.ShowLogonInfoOnTabs)
                 {
                     var cred = Runtime.CredentialService.GetEffectiveCredentialRecord(connectionInfo.CredentialRecordId
-                        .FirstOrDefault());
+                        .FirstOrDefault()).FirstOrDefault();
 
                     nTab.Title += @" (";
                     if (!string.IsNullOrEmpty(cred.Domain))

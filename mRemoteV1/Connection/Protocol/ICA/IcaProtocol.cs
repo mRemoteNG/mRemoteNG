@@ -121,7 +121,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				}
 
 			    var cred = Runtime.CredentialService.GetEffectiveCredentialRecord(_info.CredentialRecordId
-			        .FirstOrDefault());
+			        .FirstOrDefault()).FirstOrDefault();
 
                 var user = cred.Username ?? "";
 			    var pass = cred.Password?.ConvertToUnsecureString() ?? "";

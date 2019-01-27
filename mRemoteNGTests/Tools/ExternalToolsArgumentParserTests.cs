@@ -23,7 +23,7 @@ namespace mRemoteNGTests.Tools
         private const string SampleCommandString = @"/k echo ()%!^abc123*<>&|""'\";
         private const string Username = "myuser1";
         private const string Domain = "dom1";
-        private const string Password = "pass123!";
+        private const string Password = "pass123";
         private static readonly Guid CredentialGuid = Guid.Parse("D1C198F4-57D7-4F48-808F-E1724BECB291");
 
 
@@ -126,6 +126,17 @@ namespace mRemoteNGTests.Tools
                     yield return new TestCaseData("%UNSUPPORTEDPARAMETER%") { TestName = "UnsupportedParametersNotParsed" }.Returns("%UNSUPPORTEDPARAMETER%");
                     yield return new TestCaseData(@"\%COMSPEC\%") { TestName = "BackslashEscapedEnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));
                     yield return new TestCaseData(@"^%COMSPEC^%") { TestName = "ChevronEscapedEnvironmentVariablesNotParsed" }.Returns("%COMSPEC%");
+
+                    // specific credential record tests
+                    yield return new TestCaseData(@"%USERNAME:D1C198F4-57D7-4F48-808F-E1724BECB291%").Returns(Username);
+                    yield return new TestCaseData(@"%USERNAME:D1C198F457D74F48808FE1724BECB291%").Returns(Username);
+                    yield return new TestCaseData(@"%USERNAME:D1C198F%").Returns(Username);
+                    yield return new TestCaseData(@"%DOMAIN:D1C198F4-57D7-4F48-808F-E1724BECB291%").Returns(Domain);
+                    yield return new TestCaseData(@"%DOMAIN:D1C198F457D74F48808FE1724BECB291%").Returns(Domain);
+                    yield return new TestCaseData(@"%DOMAIN:D1C198F%").Returns(Domain);
+                    yield return new TestCaseData(@"%PASSWORD:D1C198F4-57D7-4F48-808F-E1724BECB291%").Returns(Password);
+                    yield return new TestCaseData(@"%PASSWORD:D1C198F457D74F48808FE1724BECB291%").Returns(Password);
+                    yield return new TestCaseData(@"%PASSWORD:D1C198F%").Returns(Password);
                 }
             }
         }

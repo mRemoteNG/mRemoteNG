@@ -455,7 +455,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				}
 
 			    var cred = Runtime.CredentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId
-			        .FirstOrDefault());
+			        .FirstOrDefault()).FirstOrDefault();
 
                 _rdpClient.UserName = cred.Username ?? "";
 			    _rdpClient.AdvancedSettings2.ClearTextPassword = cred.Password?.ConvertToUnsecureString() ?? "";
