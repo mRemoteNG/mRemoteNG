@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools.Cmdline;
@@ -12,10 +13,12 @@ namespace mRemoteNG.Tools
 	public class ExternalToolArgumentParser
     {
         private readonly ConnectionInfo _connectionInfo;
+        private readonly ICredentialService _credentialService;
 
-        public ExternalToolArgumentParser(ConnectionInfo connectionInfo)
+        public ExternalToolArgumentParser(ConnectionInfo connectionInfo, ICredentialService credentialService)
         {
             _connectionInfo = connectionInfo;
+            _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
         }
 
         public string ParseArguments(string input)
@@ -175,16 +178,16 @@ namespace mRemoteNG.Tools
                     replacement = Convert.ToString(_connectionInfo.Port);
                     break;
                 case "username":
-                    replacement = Runtime.CredentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId
-                        .FirstOrDefault()).Username;
+                    replacement = _credentialService
+                        .GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()).Username;
                     break;
                 case "password":
-                    replacement = Runtime.CredentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId
-                        .FirstOrDefault()).Password.ConvertToUnsecureString();
+                    replacement = _credentialService
+                        .GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()).Password.ConvertToUnsecureString();
                     break;
                 case "domain":
-                    replacement = Runtime.CredentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId
-                        .FirstOrDefault()).Domain;
+                    replacement = _credentialService
+                        .GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()).Domain;
                     break;
                 case "description":
                     replacement = _connectionInfo.Description;

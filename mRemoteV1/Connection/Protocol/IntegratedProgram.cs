@@ -55,7 +55,7 @@ namespace mRemoteNG.Connection.Protocol
                     return false;
 				}
 
-                var argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo);
+                var argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo, Runtime.CredentialService);
 			    _process = new Process
 			    {
 			        StartInfo =

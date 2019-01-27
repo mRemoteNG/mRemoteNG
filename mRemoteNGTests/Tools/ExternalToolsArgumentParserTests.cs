@@ -1,5 +1,4 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
@@ -7,7 +6,6 @@ using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 
 
@@ -23,34 +21,48 @@ namespace mRemoteNGTests.Tools
         private const int Port = 9933;
         private const string PortAsString = "9933";
         private const string SampleCommandString = @"/k echo ()%!^abc123*<>&|""'\";
+        private const string Username = "myuser1";
+        private const string Domain = "dom1";
+        private const string Password = "pass123!";
+        private static readonly Guid CredentialGuid = Guid.Parse("D1C198F4-57D7-4F48-808F-E1724BECB291");
 
 
         [OneTimeSetUp]
         public void Setup()
         {
-            var credential = new CredentialRecord
+            var creds = new[]
             {
-                Username = TestString,
-                Domain = TestString,
-                Password = TestString.ConvertToSecureString()
+                new CredentialRecord
+                {
+                    Username = TestString,
+                    Domain = TestString,
+                    Password = TestString.ConvertToSecureString()
+                },
+                new CredentialRecord(CredentialGuid)
+                {
+                    Username = Username,
+                    Domain = Domain,
+                    Password = Password.ConvertToSecureString()
+                }
             };
 
-            var credRepo = Substitute.For<ICredentialRepository>();
-            credRepo.CredentialRecords.Returns(info => new List<ICredentialRecord> {credential});
-            Runtime.CredentialService.RepositoryList.ToArray().ForEach(r => Runtime.CredentialService.RemoveRepository(r));
-            Runtime.CredentialService.AddRepository(credRepo);
+            var credentialService = Substitute.For<ICredentialService>();
+            credentialService.GetEffectiveCredentialRecord(null)
+                .ReturnsForAnyArgs(info => creds.FirstOrDefault(r => r.Id == info.Arg<Optional<Guid>>().FirstOrDefault()));
+            credentialService.GetCredentialRecords()
+                .Returns(info => creds);
 
             var connectionInfo = new ConnectionInfo
             {
                 Name = TestString,
                 Hostname = TestString,
                 Port = Port,
-                CredentialRecord = credential,
+                CredentialRecord = creds[0],
                 Description = TestString,
                 MacAddress = TestString,
                 UserField = TestString
             };
-            _argumentParser = new ExternalToolArgumentParser(connectionInfo);
+            _argumentParser = new ExternalToolArgumentParser(connectionInfo, credentialService);
         }
 
         [OneTimeTearDown]
@@ -68,7 +80,7 @@ namespace mRemoteNGTests.Tools
         [Test]
         public void NullConnectionInfoResultsInEmptyVariables()
         {
-            var parser = new ExternalToolArgumentParser(null);
+            var parser = new ExternalToolArgumentParser(null, Substitute.For<ICredentialService>());
             var parsedText = parser.ParseArguments("test %USERNAME% test");
             Assert.That(parsedText, Is.EqualTo("test  test"));
         }
@@ -116,6 +128,6 @@ namespace mRemoteNGTests.Tools
                     yield return new TestCaseData(@"^%COMSPEC^%") { TestName = "ChevronEscapedEnvironmentVariablesNotParsed" }.Returns("%COMSPEC%");
                 }
             }
-    }
+        }
     }
 }

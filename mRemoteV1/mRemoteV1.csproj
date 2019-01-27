@@ -249,6 +249,7 @@
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
+    <Compile Include="Credential\ICredentialService.cs" />
     <Compile Include="Credential\Records\NullCredentialRecord.cs" />
     <Compile Include="Credential\Records\UnavailableCredentialRecord.cs" />
     <Compile Include="Credential\Records\WindowsDefaultCredentialRecord.cs" />

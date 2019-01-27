@@ -146,7 +146,7 @@ namespace mRemoteNG.Tools
 
         private void SetProcessProperties(Process process, ConnectionInfo startConnectionInfo)
         {
-            var argParser = new ExternalToolArgumentParser(startConnectionInfo);
+            var argParser = new ExternalToolArgumentParser(startConnectionInfo, Runtime.CredentialService);
             process.StartInfo.UseShellExecute = true;
             process.StartInfo.FileName = argParser.ParseArguments(FileName);
             process.StartInfo.Arguments = argParser.ParseArguments(Arguments);

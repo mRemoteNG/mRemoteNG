@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace mRemoteNG.Credential
 {
-    public class CredentialService
+    public class CredentialService : ICredentialService
     {
         private readonly List<ICredentialRepositoryFactory> _repositoryFactories;
         private readonly ILoader<IEnumerable<ICredentialRepository>> _loader;
