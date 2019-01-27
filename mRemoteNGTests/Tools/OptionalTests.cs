@@ -6,14 +6,14 @@ namespace mRemoteNGTests.Tools
 	public class OptionalTests
 	{
 		[Test]
-		public void MaybeReturnsEmptyListWhenGivenNullValue()
+		public void OptionalReturnsEmptyListWhenGivenNullValue()
 		{
 			var sut = new Optional<object>(null);
 			Assert.That(sut, Is.Empty);
 		}
 
 		[Test]
-		public void MaybeReturnsValueIfNotNull()
+		public void OptionalReturnsValueIfNotNull()
 		{
 			var expected = new object();
 			var sut = new Optional<object>(expected);
@@ -21,10 +21,10 @@ namespace mRemoteNGTests.Tools
 		}
 
 	    [Test]
-	    public void MaybeExtensionOfNullObjectIsntNull()
+	    public void CallingToOptionalOnNullObjectReturnsEmptyOptional()
 	    {
 	        var sut = ((object) null).ToOptional();
-            Assert.That(sut, Is.Not.Null);
+            Assert.That(sut, Is.Empty);
 	    }
 	}
 }
