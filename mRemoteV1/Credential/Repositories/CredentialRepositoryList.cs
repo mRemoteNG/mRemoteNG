@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using mRemoteNG.Tools;
 using mRemoteNG.Tools.CustomCollections;
 
 namespace mRemoteNG.Credential.Repositories
@@ -33,6 +34,13 @@ namespace mRemoteNG.Credential.Repositories
             credentialProvider.RepositoryConfigUpdated -= OnRepoConfigChanged;
             _credentialProviders.Remove(credentialProvider);
             RaiseRepositoriesUpdatedEvent(ActionType.Removed, new[] { credentialProvider });
+        }
+
+        public Optional<ICredentialRepository> GetProvider(Guid id)
+        {
+            return _credentialProviders
+                .FirstOrDefault(repo => repo.Config.Id.Equals(id))
+                .ToOptional();
         }
 
         public bool Contains(ICredentialRepositoryConfig repositoryConfig)

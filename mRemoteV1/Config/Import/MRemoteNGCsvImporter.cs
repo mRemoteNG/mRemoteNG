@@ -29,7 +29,8 @@ namespace mRemoteNG.Config.Import
 
             var credentialImportForm = new CredentialImportForm
             {
-                CredentialRecords = serializationResult.ConnectionToCredentialMap.DistinctCredentialRecords.ToList()
+                ImportedCredentialRecords = serializationResult.ConnectionToCredentialMap.DistinctCredentialRecords.ToList(),
+                CredentialService = Runtime.CredentialService
             };
             credentialImportForm.ShowDialog();
 

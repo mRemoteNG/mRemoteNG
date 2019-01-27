@@ -506,6 +506,7 @@
     <Compile Include="UI\Forms\CompositeCredentialRepoUnlockerForm.Designer.cs">
       <DependentUpon>CompositeCredentialRepoUnlockerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\CredAndRepoModel.cs" />
     <Compile Include="UI\Forms\CredentialImportForm.cs">
       <SubType>Form</SubType>
     </Compile>
