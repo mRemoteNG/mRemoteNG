@@ -163,40 +163,42 @@ namespace mRemoteNG.Tools
 
         private string GetVariableReplacement(string variable, string original)
         {
-            if (_connectionInfo == null)
-                return string.Empty;
-
             var normalizedVariable = variable.ToLowerInvariant();
 
             if (normalizedVariable == "name")
-                return _connectionInfo.Name;
+                return _connectionInfo?.Name ?? "";
             if (normalizedVariable == "hostname")
-                return _connectionInfo.Hostname;
+                return _connectionInfo?.Hostname ?? "";
             if (normalizedVariable == "port")
-                return _connectionInfo.Port.ToString();
+                return _connectionInfo?.Port.ToString() ?? "";
             if (normalizedVariable == "description")
-                return _connectionInfo.Description;
+                return _connectionInfo?.Description ?? "";
             if (normalizedVariable == "macaddress")
-                return _connectionInfo.MacAddress;
+                return _connectionInfo?.MacAddress ?? "";
             if (normalizedVariable == "userfield")
-                return _connectionInfo.UserField;
+                return _connectionInfo?.UserField ?? "";
             if (normalizedVariable.StartsWith("username"))
-                return GetSpecifiedCredential(normalizedVariable)
-                    .Concat(_credentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()))
+                return GetCredentialToUse(normalizedVariable)
                     .FirstOrDefault()?
                     .Username;
             if (normalizedVariable.StartsWith("password"))
-                return GetSpecifiedCredential(normalizedVariable)
-                    .Concat(_credentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()))
+                return GetCredentialToUse(normalizedVariable)
                     .FirstOrDefault()?
                     .Password.ConvertToUnsecureString();
             if (normalizedVariable.StartsWith("domain"))
-                return GetSpecifiedCredential(normalizedVariable)
-                    .Concat(_credentialService.GetEffectiveCredentialRecord(_connectionInfo.CredentialRecordId.FirstOrDefault()))
+                return GetCredentialToUse(normalizedVariable)
                     .FirstOrDefault()?
                     .Domain;
 
             return original;
+        }
+
+        private Optional<ICredentialRecord> GetCredentialToUse(string variable)
+        {
+            var specifiedCred = GetSpecifiedCredential(variable);
+            return specifiedCred.Any() 
+                ? specifiedCred 
+                : _credentialService.GetEffectiveCredentialRecord(_connectionInfo?.CredentialRecordId ?? Optional<Guid>.Empty);
         }
 
         private Optional<ICredentialRecord> GetSpecifiedCredential(string variable)
