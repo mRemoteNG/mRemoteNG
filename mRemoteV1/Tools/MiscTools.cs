@@ -84,16 +84,15 @@ namespace mRemoteNG.Tools
 		}
 		
 
-		public static Image TakeScreenshot(ConnectionWindow sender)
+		public static Image TakeScreenshot(UI.Tabs.ConnectionTab sender)
         {
             try
-            {
-                var ac = sender.ActiveControl;
-                if (ac != null)
+            { 
+                if (sender != null)
                 {
-                    var bmp = new Bitmap(ac.Width, ac.Height, PixelFormat.Format32bppRgb); 
+                    var bmp = new Bitmap(sender.Width, sender.Height, PixelFormat.Format32bppRgb); 
                     Graphics g = Graphics.FromImage(bmp);  
-                    g.CopyFromScreen(ac.PointToScreen(Point.Empty), Point.Empty , bmp.Size, CopyPixelOperation.SourceCopy);
+                    g.CopyFromScreen(sender.PointToScreen(Point.Empty), Point.Empty , bmp.Size, CopyPixelOperation.SourceCopy);
                     return bmp;
                 }
             }
