@@ -173,7 +173,15 @@ namespace mRemoteNG.Connection
             }
             else
             {
-                connectionPanel = connectionInfo.Panel;
+                //Return the current panel if exist, if not return default panel
+                if(TabHelper.Instance.CurrentPanel != null)
+                {
+                    connectionPanel = TabHelper.Instance.CurrentPanel.TabText;
+                }
+                else
+                {
+                    connectionPanel = connectionInfo.Panel;
+                } 
             }
             return connectionPanel;
         }

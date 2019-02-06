@@ -88,6 +88,12 @@ namespace mRemoteNG.UI.Window
             cmenTabDisconnectOthers.Click += (sender, args) => CloseOtherTabs();
             cmenTabDisconnectOthersRight.Click += (sender, args) => CloseOtherTabsToTheRight();
             cmenTabPuttySettings.Click += (sender, args) => ShowPuttySettingsDialog();
+            GotFocus += ConnectionWindow_GotFocus;
+        }
+
+        private void ConnectionWindow_GotFocus(object sender, EventArgs e)
+        {
+            TabHelper.Instance.CurrentPanel = this;
         }
 
         public ConnectionTab AddConnectionTab(ConnectionInfo connectionInfo)
