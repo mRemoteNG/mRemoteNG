@@ -1,4 +1,6 @@
-﻿using System;
+﻿using mRemoteNG.App;
+using mRemoteNG.UI.Tabs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +13,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public RdpClientWrap()
                : base()
         {
+            GotFocus += RdpClientWrap_GotFocus;
         }
 
-        protected override void WndProc(ref System.Windows.Forms.Message m)
+        private void RdpClientWrap_GotFocus(object sender, EventArgs e)
         {
-            if (m.Msg == 0x0021)
-                this.Parent.Parent.Focus();
-            base.WndProc(ref m);
-        } 
+             ((ConnectionTab)Parent.Parent).Focus();
+        }
     }
 }
