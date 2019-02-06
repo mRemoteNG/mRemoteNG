@@ -23,7 +23,7 @@ namespace mRemoteNG.UI.Tabs
 
         private void ConnectionTab_GotFocus(object sender, EventArgs e)
         {
-            Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,"Tab got focused: " + TabText); 
+            TabHelper.Instance.CurrentTab = this;
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

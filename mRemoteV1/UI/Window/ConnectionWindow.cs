@@ -723,9 +723,9 @@ namespace mRemoteNG.UI.Window
         {
             cmenTab.Close();
             Application.DoEvents();
-            var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
-            if (selectedTab == null) return; 
-            Windows.ScreenshotForm.AddScreenshot(MiscTools.TakeScreenshot(selectedTab));
+            //var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            if (TabHelper.Instance.CurrentTab == null) return; 
+            Windows.ScreenshotForm.AddScreenshot(MiscTools.TakeScreenshot(TabHelper.Instance.CurrentTab));
         }
         #endregion
 
