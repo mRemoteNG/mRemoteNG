@@ -89,7 +89,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #region Constructors
         public RdpProtocol()
         {
-            Control = new AxMsRdpClient8NotSafeForScripting();
+            Control = new RdpClientWrap();
             _displayProperties = new DisplayProperties();
         }
         #endregion
