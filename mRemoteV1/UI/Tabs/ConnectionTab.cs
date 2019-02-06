@@ -43,18 +43,18 @@ namespace mRemoteNG.UI.Tabs
                     }
                     else
                     {
-                        ((InterfaceControl)Tag).Protocol.Close();
+                        ((InterfaceControl)Tag)?.Protocol.Close();
                     }
                 }
                 else
                 {
                     // close without the confirmation prompt...
-                    ((InterfaceControl)Tag).Protocol.Close();
+                    ((InterfaceControl)Tag)?.Protocol.Close();
                 }
             }
             else
             {
-                ((InterfaceControl)Tag).Protocol.Close();
+                ((InterfaceControl)Tag)?.Protocol.Close();
             }
             base.OnFormClosing(e);
         }
