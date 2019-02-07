@@ -1,31 +1,23 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.UI.Window;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Tabs
 {
     class TabHelper
-    { 
+    {
         private static readonly Lazy<TabHelper> lazyHelper= new Lazy<TabHelper>(() => new TabHelper());
 
-        public static TabHelper Instance { get { return lazyHelper.Value; } }
-          
+        public static TabHelper Instance => lazyHelper.Value;
+
         private TabHelper()
         {
-            
+
         }
         private ConnectionTab currentTab;
         public ConnectionTab CurrentTab
         {
-            get
-            {
-                return currentTab;
-            }
+            get => currentTab;
             set
             {
                 currentTab = value;
@@ -40,16 +32,13 @@ namespace mRemoteNG.UI.Tabs
             {
                 currentForm = currentForm.Parent;
             }
-            if (currentForm != null && currentForm is ConnectionWindow)
+            if (currentForm != null)
                 CurrentPanel = (ConnectionWindow)currentForm;
         }
         private ConnectionWindow currentPanel;
         public ConnectionWindow CurrentPanel
         {
-            get
-            {
-                return currentPanel;
-            }
+            get => currentPanel;
             set
             {
                 currentPanel = value;
