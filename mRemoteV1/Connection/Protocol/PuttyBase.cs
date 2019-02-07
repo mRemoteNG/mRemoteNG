@@ -236,11 +236,8 @@ namespace mRemoteNG.Connection.Protocol
 
 			try
 			{
-                Console.WriteLine(@"Skipping Dispose for now!");
-                PuttyProcess.Close();
-                // TODO: Figure out why this hangs...
-                //PuttyProcess.Dispose();
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyDisposeFailed + Environment.NewLine + @"SKIPPING DISPOSE - CAUSES HANG IN THIS BUILD!!!", true);
+                PuttyProcess.Close(); 
+                PuttyProcess.Dispose();
             }
 			catch (Exception ex)
 			{
