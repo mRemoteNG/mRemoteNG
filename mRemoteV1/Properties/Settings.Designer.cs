@@ -2782,5 +2782,17 @@ namespace mRemoteNG {
                 this["AlwaysShowConnectionTabs"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverrideFIPSCheck {
+            get {
+                return ((bool)(this["OverrideFIPSCheck"]));
+            }
+            set {
+                this["OverrideFIPSCheck"] = value;
+            }
+        }
     }
 }
