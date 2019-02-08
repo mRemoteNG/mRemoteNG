@@ -236,7 +236,6 @@ namespace mRemoteNG.Connection.Protocol
 
 			try
 			{
-                PuttyProcess.Close(); 
                 PuttyProcess.Dispose();
             }
 			catch (Exception ex)

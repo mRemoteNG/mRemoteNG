@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Tabs
     public partial class ConnectionTab : DockContent
     {
         /// <summary>
-        ///Silent close ignores the popup asking for confirmation 
+        ///Silent close ignores the popup asking for confirmation
         /// </summary>
         public bool silentClose { get; set; }
         /// <summary>
@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Tabs
 
         public ConnectionTab()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             GotFocus += ConnectionTab_GotFocus;
         }
 
