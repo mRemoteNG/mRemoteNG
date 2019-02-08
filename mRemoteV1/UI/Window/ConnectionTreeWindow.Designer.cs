@@ -9,7 +9,6 @@ namespace mRemoteNG.UI.Window
 	{
         #region  Windows Form Designer generated code
 		internal System.Windows.Forms.MenuStrip msMain;
-		internal System.Windows.Forms.ToolStripMenuItem mMenView;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandAllFolders;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewCollapseAllFolders;
 		internal System.Windows.Forms.ToolStripMenuItem mMenSortAscending;
@@ -19,20 +18,19 @@ namespace mRemoteNG.UI.Window
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            mRemoteNG.Tree.ConnectionTreeModel connectionTreeModel1 = new mRemoteNG.Tree.ConnectionTreeModel();
-            mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler1 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
-            mRemoteNG.Tree.AlwaysConfirmYes alwaysConfirmYes1 = new mRemoteNG.Tree.AlwaysConfirmYes();
-            mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler2 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
+            mRemoteNG.Tree.ConnectionTreeModel connectionTreeModel2 = new mRemoteNG.Tree.ConnectionTreeModel();
+            mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler3 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
+            mRemoteNG.Tree.AlwaysConfirmYes alwaysConfirmYes2 = new mRemoteNG.Tree.AlwaysConfirmYes();
+            mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler4 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
             this.olvConnections = new mRemoteNG.UI.Controls.ConnectionTree();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.mMenAddConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenAddFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewExpandAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            this.PictureBoxSearch = new Controls.Base.NGPictureBox();
+            this.PictureBoxSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
             this.txtSearch = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).BeginInit();
@@ -46,11 +44,12 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.AllowDrop = true;
             this.olvConnections.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.olvConnections.CellEditUseWholeCell = false;
-            this.olvConnections.ConnectionTreeModel = connectionTreeModel1;
+            this.olvConnections.ConnectionTreeModel = connectionTreeModel2;
             this.olvConnections.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvConnections.Dock = System.Windows.Forms.DockStyle.Fill;
-            treeNodeCompositeClickHandler1.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
-            this.olvConnections.DoubleClickHandler = treeNodeCompositeClickHandler1;
+            treeNodeCompositeClickHandler3.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
+            this.olvConnections.DoubleClickHandler = treeNodeCompositeClickHandler3;
+            this.olvConnections.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.olvConnections.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.olvConnections.HideSelection = false;
             this.olvConnections.IsSimpleDragSource = true;
@@ -59,13 +58,13 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.Location = new System.Drawing.Point(0, 24);
             this.olvConnections.MultiSelect = false;
             this.olvConnections.Name = "olvConnections";
-            this.olvConnections.NodeDeletionConfirmer = alwaysConfirmYes1;
+            this.olvConnections.NodeDeletionConfirmer = alwaysConfirmYes2;
             this.olvConnections.PostSetupActions = new mRemoteNG.UI.Controls.IConnectionTreeDelegate[0];
             this.olvConnections.SelectedBackColor = System.Drawing.SystemColors.Highlight;
             this.olvConnections.SelectedForeColor = System.Drawing.SystemColors.HighlightText;
             this.olvConnections.ShowGroups = false;
-            treeNodeCompositeClickHandler2.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
-            this.olvConnections.SingleClickHandler = treeNodeCompositeClickHandler2;
+            treeNodeCompositeClickHandler4.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
+            this.olvConnections.SingleClickHandler = treeNodeCompositeClickHandler4;
             this.olvConnections.Size = new System.Drawing.Size(204, 366);
             this.olvConnections.TabIndex = 20;
             this.olvConnections.UnfocusedSelectedBackColor = System.Drawing.SystemColors.Highlight;
@@ -81,7 +80,8 @@ namespace mRemoteNG.UI.Window
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mMenAddConnection,
             this.mMenAddFolder,
-            this.mMenView,
+            this.mMenViewExpandAllFolders,
+            this.mMenViewCollapseAllFolders,
             this.mMenSortAscending});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
@@ -108,29 +108,20 @@ namespace mRemoteNG.UI.Window
             this.mMenAddFolder.Size = new System.Drawing.Size(28, 20);
             this.mMenAddFolder.Click += new System.EventHandler(this.cMenTreeAddFolder_Click);
             // 
-            // mMenView
-            // 
-            this.mMenView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenViewExpandAllFolders,
-            this.mMenViewCollapseAllFolders});
-            this.mMenView.Image = global::mRemoteNG.Resources.View;
-            this.mMenView.Name = "mMenView";
-            this.mMenView.Size = new System.Drawing.Size(28, 20);
-            this.mMenView.Text = "&View";
-            // 
             // mMenViewExpandAllFolders
             // 
+            this.mMenViewExpandAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.mMenViewExpandAllFolders.Image = global::mRemoteNG.Resources.Expand;
             this.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders";
-            this.mMenViewExpandAllFolders.Size = new System.Drawing.Size(172, 22);
+            this.mMenViewExpandAllFolders.Size = new System.Drawing.Size(28, 20);
             this.mMenViewExpandAllFolders.Text = "Expand all folders";
             // 
             // mMenViewCollapseAllFolders
             // 
+            this.mMenViewCollapseAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.mMenViewCollapseAllFolders.Image = global::mRemoteNG.Resources.Collapse;
             this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
-            this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(172, 22);
+            this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(133, 20);
             this.mMenViewCollapseAllFolders.Text = "Collapse all folders";
             // 
             // mMenSortAscending
@@ -160,6 +151,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.ForeColor = System.Drawing.SystemColors.GrayText;
             this.txtSearch.Location = new System.Drawing.Point(26, 3);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(0);

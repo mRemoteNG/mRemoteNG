@@ -84,7 +84,6 @@ namespace mRemoteNG.UI.Window
 
             mMenAddConnection.ToolTipText = Language.strAddConnection;
             mMenAddFolder.ToolTipText = Language.strAddFolder;
-            mMenView.ToolTipText = Language.strMenuView.Replace("&", "");
             mMenViewExpandAllFolders.Text = Language.strExpandAllFolders;
             mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders;
             mMenSortAscending.ToolTipText = Language.strSortAsc;
