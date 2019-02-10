@@ -45,8 +45,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkSingleClickOnConnectionOpensIt.Checked = Settings.Default.SingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
             chkConnectionTreeTrackActiveConnection.Checked = Settings.Default.TrackActiveConnectionInConnectionTree;
@@ -115,8 +113,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.Never;
             }
-
-            Settings.Default.Save();
         }
     }
 }

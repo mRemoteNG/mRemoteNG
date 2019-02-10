@@ -89,6 +89,7 @@ namespace mRemoteNG.UI.Window
             // txtLocalFile
             // 
             this.txtLocalFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLocalFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLocalFile.Location = new System.Drawing.Point(105, 28);
             this.txtLocalFile.Name = "txtLocalFile";
             this.txtLocalFile.Size = new System.Drawing.Size(455, 22);
@@ -100,18 +101,18 @@ namespace mRemoteNG.UI.Window
             this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransfer.Image = global::mRemoteNG.Resources.SSHTransfer;
             this.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTransfer.Location = new System.Drawing.Point(566, 140);
+            this.btnTransfer.Location = new System.Drawing.Point(562, 145);
             this.btnTransfer.Name = "btnTransfer";
-            this.btnTransfer.Size = new System.Drawing.Size(96, 29);
+            this.btnTransfer.Size = new System.Drawing.Size(100, 24);
             this.btnTransfer.TabIndex = 10000;
             this.btnTransfer.Text = "Transfer";
-            this.btnTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTransfer.UseVisualStyleBackColor = true;
             this.btnTransfer.Click += new System.EventHandler(this.btnTransfer_Click);
             // 
             // txtRemoteFile
             // 
             this.txtRemoteFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRemoteFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRemoteFile.Location = new System.Drawing.Point(105, 60);
             this.txtRemoteFile.Name = "txtRemoteFile";
             this.txtRemoteFile.Size = new System.Drawing.Size(542, 22);
@@ -132,7 +133,7 @@ namespace mRemoteNG.UI.Window
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Location = new System.Drawing.Point(566, 28);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(81, 26);
+            this.btnBrowse.Size = new System.Drawing.Size(81, 22);
             this.btnBrowse.TabIndex = 30;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -231,6 +232,7 @@ namespace mRemoteNG.UI.Window
             // txtPort
             // 
             this.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPort.Location = new System.Drawing.Point(271, 110);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(30, 22);
@@ -241,6 +243,7 @@ namespace mRemoteNG.UI.Window
             // txtHost
             // 
             this.txtHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtHost.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHost.Location = new System.Drawing.Point(105, 19);
             this.txtHost.Name = "txtHost";
             this.txtHost.Size = new System.Drawing.Size(471, 22);
@@ -249,6 +252,7 @@ namespace mRemoteNG.UI.Window
             // txtPassword
             // 
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(105, 81);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(471, 22);
@@ -258,6 +262,7 @@ namespace mRemoteNG.UI.Window
             // txtUser
             // 
             this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUser.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUser.Location = new System.Drawing.Point(105, 51);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(471, 22);

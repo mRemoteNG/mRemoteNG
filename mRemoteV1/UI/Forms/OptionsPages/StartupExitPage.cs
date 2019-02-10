@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -36,8 +35,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
             Settings.Default.SingleInstance = chkSingleInstance.Checked;
             Settings.Default.StartupComponentsCheck = chkProperInstallationOfComponentsAtStartup.Checked;
-
-            Settings.Default.Save();
         }
 
         private void StartupExitPage_Load(object sender, EventArgs e)

@@ -32,6 +32,11 @@ namespace mRemoteNG.Themes
             _extendedPalette = inExtendedPalette;
             IsThemeBase = false;
             IsExtendable = false;
+
+            if(_extendedPalette != null)
+                IsExtended = true;
+
+            setCustomExtenders();
         }
 
         public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion)
@@ -42,6 +47,9 @@ namespace mRemoteNG.Themes
             _version = inVersion;
             IsThemeBase = false;
             IsExtendable = false;
+            IsExtended = false;
+            setCustomExtenders();
+
         }
         #endregion
 
@@ -77,7 +85,7 @@ namespace mRemoteNG.Themes
 				{
 					return;
 				}
-				_name = value; 
+				_name = value;
 			}
 		}
 
@@ -91,6 +99,7 @@ namespace mRemoteNG.Themes
                     return;
                 }
                 _theme = value;
+                setCustomExtenders();
             }
         }
 
@@ -137,6 +146,15 @@ namespace mRemoteNG.Themes
 
         public bool IsExtendable { get; set; }
 
+        public bool IsExtended { get; private set; }
+
         #endregion
+
+        //Custom extenders for mremote customizations in DPS
+        private void setCustomExtenders()
+        {
+            _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+            _theme.Extender.FloatWindowFactory = new MremoteFloatWindowFactory();
+        }
     }
 }

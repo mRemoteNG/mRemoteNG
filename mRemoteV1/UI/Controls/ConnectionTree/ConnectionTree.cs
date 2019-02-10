@@ -320,7 +320,7 @@ namespace mRemoteNG.UI.Controls
 
         public void CopyHostnameSelectedNode()
         {
-            Clipboard.SetText(SelectedNode.Hostname);
+            Clipboard.SetText(SelectedNode.IsContainer ? SelectedNode.Name : SelectedNode.Hostname);
         }
 
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)

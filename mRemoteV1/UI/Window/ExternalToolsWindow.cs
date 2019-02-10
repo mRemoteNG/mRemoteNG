@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Window
 
         public ExternalToolsWindow()
 		{
-			InitializeComponent(); 
+			InitializeComponent();
 			WindowType = WindowType.ExternalApps;
 			DockPnl = new DockContent();
             _themeManager = ThemeManager.getInstance();
@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Window
             TryToIntegrateColumnHeader.Text = Language.strTryToIntegrateColumnHeader;
             RunElevateHeader.Text = Language.strRunElevateHeader;
             ShowOnToolbarColumnHeader.Text = Language.strShowOnToolbarColumnHeader;
-            
+
             TryToIntegrateCheckBox.Text = Language.strTryIntegrate;
 	        ShowOnToolbarCheckBox.Text = Language.strShowOnToolbar;
             RunElevatedCheckBox.Text = Language.strRunElevated;
@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Window
 	        ArgumentsLabel.Text = Language.strLabelArguments;
             WorkingDirLabel.Text = Language.srtWorkingDirectory;
             OptionsLabel.Text = Language.strLabelOptions;
-            
+
 	        WaitForExitCheckBox.Text = Language.strCheckboxWaitForExit;
 	        BrowseButton.Text = Language.strButtonBrowse;
             BrowseWorkingDir.Text = Language.strButtonBrowse;
@@ -191,10 +191,10 @@ namespace mRemoteNG.UI.Window
 					message = string.Format(Language.strConfirmDeleteExternalToolMultiple, _currentlySelectedExternalTools.Count);
 				else
 					return;
-				
+
 				if (MessageBox.Show(FrmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
 					return;
-						
+
 				foreach (var externalTool in _currentlySelectedExternalTools)
 				{
 					Runtime.ExternalToolsService.ExternalTools.Remove(externalTool);
@@ -247,7 +247,7 @@ namespace mRemoteNG.UI.Window
 		    var selectedTool = _currentlySelectedExternalTools.FirstOrDefault();
             if (selectedTool == null)
 				return;
-					
+
 			try
 			{
                 selectedTool.DisplayName = DisplayNameTextBox.Text;

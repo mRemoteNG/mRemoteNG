@@ -107,7 +107,6 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if (ConnectionWindow.InTabDrag) return;
 				NativeMethods.SetForegroundWindow(_handle);
 			}
 			catch (Exception ex)
@@ -115,8 +114,8 @@ namespace mRemoteNG.Connection.Protocol
 				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppFocusFailed, ex);
 			}
 		}
-
-        protected override void Resize(object sender, EventArgs e)
+				
+		public override void Resize(object sender, EventArgs e)
 		{
 			try
 			{
@@ -132,7 +131,7 @@ namespace mRemoteNG.Connection.Protocol
 		public override void Close()
 		{
             /* only attempt this if we have a valid process object
-             * Non-integated tools will still call base.Close() and don't have a valid process object.
+             * Non-integrated tools will still call base.Close() and don't have a valid process object.
              * See Connect() above... This just muddies up the log.
              */
             if (_process != null)

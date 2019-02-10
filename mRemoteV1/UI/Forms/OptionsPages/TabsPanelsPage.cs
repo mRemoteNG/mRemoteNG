@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class TabsPanelsPage
@@ -35,8 +33,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkAlwaysShowPanelTabs.Checked = Settings.Default.AlwaysShowPanelTabs;
 			chkAlwaysShowConnectionTabs.Checked = Settings.Default.AlwaysShowConnectionTabs;
 			chkOpenNewTabRightOfSelected.Checked = Settings.Default.OpenTabsRightOfSelected;
@@ -66,8 +62,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked;
             Settings.Default.CreateEmptyPanelOnStartUp = chkCreateEmptyPanelOnStart.Checked;
             Settings.Default.StartUpPanelName = txtBoxPanelName.Text;
-
-            Settings.Default.Save();
         }
 
         private void UpdatePanelNameTextBox()

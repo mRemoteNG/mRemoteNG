@@ -618,13 +618,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Cifrado fallido. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>La configuración de Seguridad de Windows, "Criptografia del sistema: Usar Algoritmos compatibles FIPS para Encripción, Hashing y Firma", esta habilitada. Esta configuración es incompatible con {0}.
-
-Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/811833 Para más información.
-
-{0} Se Cerrará.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Errores</value>
   </data>

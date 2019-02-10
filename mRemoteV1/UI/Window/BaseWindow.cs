@@ -32,7 +32,7 @@ namespace mRemoteNG.UI.Window
         internal void ApplyTheme()
         { 
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveAndExtended) return;
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }

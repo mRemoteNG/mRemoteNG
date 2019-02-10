@@ -89,7 +89,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #region Constructors
         public RdpProtocol()
         {
-            Control = new AxMsRdpClient8NotSafeForScripting();
+            Control = new RdpClientWrap();
             _displayProperties = new DisplayProperties();
         }
         #endregion
@@ -245,13 +245,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		}
 				
 		private Size _controlBeginningSize;
-
-        protected override void ResizeBegin(object sender, EventArgs e)
+		public override void ResizeBegin(object sender, EventArgs e)
 		{
 			_controlBeginningSize = Control.Size;
 		}
-
-        protected override void Resize(object sender, EventArgs e)
+				
+		public override void Resize(object sender, EventArgs e)
 		{
 			if (DoResize() && _controlBeginningSize.IsEmpty)
 			{
@@ -259,8 +258,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			}
 			base.Resize(sender, e);
 		}
-
-        protected override void ResizeEnd(object sender, EventArgs e)
+				
+		public override void ResizeEnd(object sender, EventArgs e)
 		{
 			DoResize();
 			if (!(Control.Size == _controlBeginningSize))

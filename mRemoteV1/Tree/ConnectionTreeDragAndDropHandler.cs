@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
@@ -21,8 +20,7 @@ namespace mRemoteNG.Tree
 
         public void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
         {
-            var dropTarget = e.TargetModel as ConnectionInfo;
-            if (dropTarget == null) return;
+            if (!(e.TargetModel is ConnectionInfo dropTarget)) return;
             var dropSource = (ConnectionInfo)e.SourceModels[0];
             DropModel(dropSource, dropTarget, e.DropTargetLocation);
             e.Handled = true;
@@ -30,18 +28,23 @@ namespace mRemoteNG.Tree
 
         public void DropModel(ConnectionInfo dropSource, ConnectionInfo dropTarget, DropTargetLocation dropTargetLocation)
         {
-            if (dropTargetLocation == DropTargetLocation.Item)
-                DropModelOntoTarget(dropSource, dropTarget);
-            else if (dropTargetLocation == DropTargetLocation.AboveItem)
-                DropModelAboveTarget(dropSource, dropTarget);
-            else if (dropTargetLocation == DropTargetLocation.BelowItem)
-                DropModelBelowTarget(dropSource, dropTarget);
+            switch (dropTargetLocation)
+            {
+                case DropTargetLocation.Item:
+                    DropModelOntoTarget(dropSource, dropTarget);
+                    break;
+                case DropTargetLocation.AboveItem:
+                    DropModelAboveTarget(dropSource, dropTarget);
+                    break;
+                case DropTargetLocation.BelowItem:
+                    DropModelBelowTarget(dropSource, dropTarget);
+                    break;
+            }
         }
 
         private void DropModelOntoTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
         {
-            var dropTargetAsContainer = dropTarget as ContainerInfo;
-            if (dropTargetAsContainer == null) return;
+            if (!(dropTarget is ContainerInfo dropTargetAsContainer)) return;
             dropSource.SetParent(dropTargetAsContainer);
         }
 
@@ -84,10 +87,16 @@ namespace mRemoteNG.Tree
                 _infoMessage = Language.strNodeNotDraggable;
                 _enableFeedback = false;
             }
-            else if (dropTargetLocation == DropTargetLocation.Item)
-                dragDropEffect = HandleCanDropOnItem(dropSource, dropTarget);
-            else if (dropTargetLocation == DropTargetLocation.AboveItem || dropTargetLocation == DropTargetLocation.BelowItem)
-                dragDropEffect = HandleCanDropBetweenItems(dropSource, dropTarget);
+            else switch (dropTargetLocation)
+            {
+                case DropTargetLocation.Item:
+                    dragDropEffect = HandleCanDropOnItem(dropSource, dropTarget);
+                    break;
+                case DropTargetLocation.AboveItem:
+                case DropTargetLocation.BelowItem:
+                    dragDropEffect = HandleCanDropBetweenItems(dropSource, dropTarget);
+                    break;
+            }
             return dragDropEffect;
         }
 
@@ -148,14 +157,12 @@ namespace mRemoteNG.Tree
 
         private bool AncestorDraggingOntoChild(ConnectionInfo source, ConnectionInfo target)
         {
-            var sourceAsContainer = source as ContainerInfo;
-            return sourceAsContainer != null && sourceAsContainer.GetRecursiveChildList().Contains(target);
+            return source is ContainerInfo sourceAsContainer && sourceAsContainer.GetRecursiveChildList().Contains(target);
         }
 
         private bool DraggingOntoCurrentParent(ConnectionInfo source, ConnectionInfo target)
         {
-            var targetAsContainer = target as ContainerInfo;
-            return targetAsContainer != null && targetAsContainer.Children.Contains(source);
+            return target is ContainerInfo targetAsContainer && targetAsContainer.Children.Contains(source);
         }
     }
 }

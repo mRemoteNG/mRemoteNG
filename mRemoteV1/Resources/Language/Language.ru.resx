@@ -631,13 +631,6 @@ VncSharp Control Version {0}</value>
 	<data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Не удалось зашифровать. {0}</value>
   </data>
-	<data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Настройки системы безопасности Windows: "Использование системной криптографии FIPS-совместимых алгоритмов шифрования, хеширования и подписывания», включено. Эта установка не совместима с {0}.
-
-См. статью Microsoft Support на http://support.microsoft.com/kb/811833 для получения дополнительной информации.
-
-{0} будет закрыто.</value>
-  </data>
 	<data name="strErrors" xml:space="preserve">
     <value>Ошибки</value>
   </data>

@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -55,8 +54,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkCheckForUpdatesOnStartup.Checked = Settings.Default.CheckForUpdatesOnStartup;
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
             cboUpdateCheckFrequency.Items.Clear();
@@ -148,8 +145,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             Settings.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.EncryptionKey);
-
-            Settings.Default.Save();
         }
 
         #endregion

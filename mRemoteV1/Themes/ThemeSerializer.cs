@@ -14,8 +14,8 @@ namespace mRemoteNG.Themes
 	    /// <param name="baseTheme"></param>
 	    public static void SaveToXmlFile(ThemeInfo themeToSave,ThemeInfo baseTheme)
 		{
-            var oldURI = baseTheme.URI; 
-            var directoryName = Path.GetDirectoryName(oldURI); 
+            var oldURI = baseTheme.URI;
+            var directoryName = Path.GetDirectoryName(oldURI);
             var toSaveURI = directoryName + Path.DirectorySeparatorChar + themeToSave.Name +  ".vstheme";
             File.Copy(baseTheme.URI, toSaveURI);
             themeToSave.URI = toSaveURI;
@@ -25,9 +25,9 @@ namespace mRemoteNG.Themes
         {
             File.Delete(themeToDelete.URI);
         }
-        
+
         /// <summary>
-        /// Takes a theme in memory and update the color values that the user might have changed 
+        /// Takes a theme in memory and update the color values that the user might have changed
         /// </summary>
         /// <param name="themeToUpdate"></param>
         public static void UpdateThemeXMLValues(ThemeInfo themeToUpdate)
@@ -48,10 +48,10 @@ namespace mRemoteNG.Themes
 		{
             var bytes = File.ReadAllBytes(filename);
             //Load the dockpanel part
-            var themeBaseLoad= new MremoteNGThemeBase(bytes);
+            var themeBaseLoad = new MremoteNGThemeBase(bytes);
             //Load the mremote part
 		    //Cause we cannot default the theme for the default theme
-            var extColorLoader = new MremoteNGPaletteManipulator(bytes, defaultTheme?.ExtendedPalette); 
+            var extColorLoader = new MremoteNGPaletteManipulator(bytes, defaultTheme?.ExtendedPalette);
             var loadedTheme = new ThemeInfo(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename, VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
             if(new[] { "darcula", "vs2015blue", "vs2015dark" , "vs2015light" }.Contains(Path.GetFileNameWithoutExtension(filename)))
             {

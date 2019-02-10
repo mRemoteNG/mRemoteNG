@@ -600,9 +600,6 @@ Descrição do erro: {1}</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Falha de descriptografia. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>A configuração de segurança do Windows, "criptografia de sistema: usar FIPS compatível com algoritmos para criptografia, hash e assinatura", está habilitado. Essa configuração não é compatível com {0}.  Consulte o artigo do Microsoft Support em http://support.microsoft.com/kb/811833 para obter mais informações.  {0} agora vai ser fechado.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Erros</value>
   </data>

@@ -54,8 +54,8 @@ namespace mRemoteNG.UI.Window
             }
 
             PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
-
-        }
+	        SetConnectionTreeClickHandlers();
+	    }
 
         private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
         {
@@ -84,7 +84,6 @@ namespace mRemoteNG.UI.Window
 
             mMenAddConnection.ToolTipText = Language.strAddConnection;
             mMenAddFolder.ToolTipText = Language.strAddFolder;
-            mMenView.ToolTipText = Language.strMenuView.Replace("&", "");
             mMenViewExpandAllFolders.Text = Language.strExpandAllFolders;
             mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders;
             mMenSortAscending.ToolTipText = Language.strSortAsc;
@@ -97,12 +96,14 @@ namespace mRemoteNG.UI.Window
             if (!_themeManager.ThemingActive) return;
             vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
             vsToolStripExtender.SetStyle(olvConnections.ContextMenuStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+
+            if (!_themeManager.ActiveAndExtended) return;
             //Treelistview need to be manually themed
             olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
             olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");
             olvConnections.SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Background");
-            olvConnections.SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Foreground"); 
-            olvConnections.UnfocusedSelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Background"); 
+            olvConnections.SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Foreground");
+            olvConnections.UnfocusedSelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Background");
             olvConnections.UnfocusedSelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
             //There is a border around txtSearch that dont theme well
             txtSearch.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
@@ -113,13 +114,12 @@ namespace mRemoteNG.UI.Window
         #region ConnectionTree
 	    private void SetConnectionTreeEventHandlers()
 	    {
-	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(prompt => 
+	        olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(prompt =>
 	            CTaskDialog.MessageBox(Application.ProductName, prompt, "", ETaskDialogButtons.YesNo, ESysIcons.Question));
             olvConnections.KeyDown += tvConnections_KeyDown;
             olvConnections.KeyPress += tvConnections_KeyPress;
             SetTreePostSetupActions();
-            SetConnectionTreeDoubleClickHandlers();
-	        SetConnectionTreeSingleClickHandlers();
+            SetConnectionTreeClickHandlers();
 	        Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
         }
 
@@ -137,28 +137,24 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.PostSetupActions = actions;
 	    }
 
-	    private void SetConnectionTreeDoubleClickHandlers()
+	    private void SetConnectionTreeClickHandlers()
 	    {
-	        var doubleClickHandler = new TreeNodeCompositeClickHandler
+	        var singleClickHandlers = new List<ITreeNodeClickHandler<ConnectionInfo>>();
+	        var doubleClickHandlers = new List<ITreeNodeClickHandler<ConnectionInfo>>
 	        {
-	            ClickHandlers = new ITreeNodeClickHandler<ConnectionInfo>[]
-	            {
-	                new ExpandNodeClickHandler(olvConnections),
-	                new OpenConnectionClickHandler(_connectionInitiator)
-	            }
+	            new ExpandNodeClickHandler(olvConnections)
 	        };
-	        olvConnections.DoubleClickHandler = doubleClickHandler;
-	    }
 
-        private void SetConnectionTreeSingleClickHandlers()
-        {
-            var handlers = new List<ITreeNodeClickHandler<ConnectionInfo>>();
-            if (Settings.Default.SingleClickOnConnectionOpensIt)
-                handlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
-            if (Settings.Default.SingleClickSwitchesToOpenConnection)
-                handlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
-            var singleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = handlers};
-            olvConnections.SingleClickHandler = singleClickHandler;
+	        if (Settings.Default.SingleClickOnConnectionOpensIt)
+	            singleClickHandlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
+	        else
+	            doubleClickHandlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
+
+	        if (Settings.Default.SingleClickSwitchesToOpenConnection)
+	            singleClickHandlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
+
+	        olvConnections.SingleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = singleClickHandlers };
+	        olvConnections.DoubleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = doubleClickHandlers };
         }
 
 	    private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
