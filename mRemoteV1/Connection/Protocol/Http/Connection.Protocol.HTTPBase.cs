@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Gecko;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
-using TabPage = Crownwood.Magic.Controls.TabPage;
+
 
 namespace mRemoteNG.Connection.Protocol.Http
 {
@@ -47,7 +47,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			try
 			{
 			    var objTabPage = InterfaceControl.Parent as TabPage;
-			    if (objTabPage != null) tabTitle = objTabPage.Title;
+			  //  if (objTabPage != null) tabTitle = objTabPage.Title;
 			}
 			catch (Exception)
 			{
@@ -204,14 +204,14 @@ namespace mRemoteNG.Connection.Protocol.Http
 			        }
 			    }
 							
-			    if (!string.IsNullOrEmpty(tabTitle))
+			 /*   if (!string.IsNullOrEmpty(tabTitle))
 			    {
 			        tabP.Title = tabTitle + @" - " + shortTitle;
 			    }
 			    else
 			    {
 			        tabP.Title = shortTitle;
-			    }
+			    }*/
 			}
 			catch (Exception ex)
 			{
@@ -252,14 +252,14 @@ namespace mRemoteNG.Connection.Protocol.Http
                     }
                 }
 
-                if (!string.IsNullOrEmpty(tabTitle))
+              /*  if (!string.IsNullOrEmpty(tabTitle))
                 {
                     tabP.Title = tabTitle + @" - " + shortTitle;
                 }
                 else
                 {
                     tabP.Title = shortTitle;
-                }
+                }*/
             }
             catch (Exception ex)
             {

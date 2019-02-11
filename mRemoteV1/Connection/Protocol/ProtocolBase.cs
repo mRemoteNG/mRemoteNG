@@ -3,15 +3,16 @@ using mRemoteNG.Tools;
 using System;
 using System.Threading;
 using System.Windows.Forms;
-
+using mRemoteNG.UI.Tabs;
+// ReSharper disable UnusedMember.Local
 
 namespace mRemoteNG.Connection.Protocol
 {
-    public abstract class ProtocolBase: IDisposable
+    public abstract class ProtocolBase
     {
         #region Private Variables
 
-	    private UI.Window.ConnectionWindow _connectionWindow;
+	    private ConnectionTab _connectionTab;
         private InterfaceControl _interfaceControl;
 	    private ConnectingEventHandler ConnectingEvent;
         private ConnectedEventHandler ConnectedEvent;
@@ -25,15 +26,15 @@ namespace mRemoteNG.Connection.Protocol
         #region Control
         private string Name { get; }
 
-	    protected UI.Window.ConnectionWindow ConnectionWindow
+        private ConnectionTab ConnectionTab
 		{
-			get => _connectionWindow;
-            private set
+			get => _connectionTab;
+            set
 			{
-				_connectionWindow = value;
-				_connectionWindow.ResizeBegin += ResizeBegin;
-				_connectionWindow.Resize += Resize;
-				_connectionWindow.ResizeEnd += ResizeEnd;
+				_connectionTab = value;
+				_connectionTab.ResizeBegin += ResizeBegin;
+				_connectionTab.Resize += Resize;
+				_connectionTab.ResizeEnd += ResizeEnd;
 			}
 		}
 
@@ -43,7 +44,9 @@ namespace mRemoteNG.Connection.Protocol
             set
 			{
 				_interfaceControl = value;
-				ConnectionWindow = _interfaceControl.GetContainerControl() as UI.Window.ConnectionWindow;
+
+                if(_interfaceControl.Parent is ConnectionTab ct)
+				    ConnectionTab = ct;
 			}
 		}
 
@@ -82,18 +85,18 @@ namespace mRemoteNG.Connection.Protocol
 			}
 		}
 
-        protected virtual void ResizeBegin(object sender, EventArgs e)
-		{		
-		}
-
-        protected virtual void Resize(object sender, EventArgs e)
+        public virtual void ResizeBegin(object sender, EventArgs e)
 		{
 		}
 
-        protected virtual void ResizeEnd(object sender, EventArgs e)
+        public virtual void Resize(object sender, EventArgs e)
 		{
 		}
-				
+
+        public virtual void ResizeEnd(object sender, EventArgs e)
+		{
+		}
+
 		public virtual bool Initialize()
 		{
 			try
@@ -116,7 +119,7 @@ namespace mRemoteNG.Connection.Protocol
 				return false;
 			}
 		}
-				
+
 		public virtual bool Connect()
 		{
 		    if (InterfaceControl.Info.Protocol == ProtocolType.RDP) return false;
@@ -124,12 +127,12 @@ namespace mRemoteNG.Connection.Protocol
 		    ConnectedEvent(this);
 		    return true;
 		}
-				
+
 		public virtual void Disconnect()
 		{
 			Close();
 		}
-				
+
 		public virtual void Close()
 		{
 			var t = new Thread(CloseBG);
@@ -137,14 +140,14 @@ namespace mRemoteNG.Connection.Protocol
 			t.IsBackground = true;
 			t.Start();
 		}
-				
+
 		private void CloseBG()
 		{
 		    ClosedEvent?.Invoke(this);
 		    try
 			{
 				tmrReconnect.Enabled = false;
-						
+
 				if (Control != null)
 				{
 					try
@@ -167,7 +170,7 @@ namespace mRemoteNG.Connection.Protocol
 			        {
 			            SetTagToNothing();
 			        }
-									
+
 			        DisposeInterface();
 			    }
 			    catch (Exception ex)
@@ -180,7 +183,7 @@ namespace mRemoteNG.Connection.Protocol
                 Runtime.MessageCollector?.AddExceptionStackTrace("Couldn't Close InterfaceControl BG (Connection.Protocol.Base)", ex);
 			}
 		}
-				
+
 		private delegate void DisposeInterfaceCB();
 		private void DisposeInterface()
 		{
@@ -194,7 +197,7 @@ namespace mRemoteNG.Connection.Protocol
 				_interfaceControl.Dispose();
 			}
 		}
-				
+
 		private delegate void SetTagToNothingCB();
 		private void SetTagToNothing()
 		{
@@ -208,7 +211,7 @@ namespace mRemoteNG.Connection.Protocol
 				_interfaceControl.Parent.Tag = null;
 			}
 		}
-				
+
 		private delegate void DisposeControlCB();
 		private void DisposeControl()
 		{
@@ -222,66 +225,52 @@ namespace mRemoteNG.Connection.Protocol
 				Control.Dispose();
 			}
 		}
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                tmrReconnect.Dispose();
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
         #endregion
 
         #region Events
-        public delegate void ConnectingEventHandler(object sender);
+		public delegate void ConnectingEventHandler(object sender);
 		public event ConnectingEventHandler Connecting
 		{
 			add => ConnectingEvent = (ConnectingEventHandler) Delegate.Combine(ConnectingEvent, value);
             remove => ConnectingEvent = (ConnectingEventHandler) Delegate.Remove(ConnectingEvent, value);
         }
-				
+
 		public delegate void ConnectedEventHandler(object sender);
 		public event ConnectedEventHandler Connected
 		{
 			add => ConnectedEvent = (ConnectedEventHandler) Delegate.Combine(ConnectedEvent, value);
             remove => ConnectedEvent = (ConnectedEventHandler) Delegate.Remove(ConnectedEvent, value);
         }
-				
+
 		public delegate void DisconnectedEventHandler(object sender, string disconnectedMessage, int? reasonCode);
 		public event DisconnectedEventHandler Disconnected
 		{
 			add => DisconnectedEvent = (DisconnectedEventHandler) Delegate.Combine(DisconnectedEvent, value);
             remove => DisconnectedEvent = (DisconnectedEventHandler) Delegate.Remove(DisconnectedEvent, value);
         }
-				
+
 		public delegate void ErrorOccuredEventHandler(object sender, string errorMessage, int? errorCode);
 		public event ErrorOccuredEventHandler ErrorOccured
 		{
 			add => ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Combine(ErrorOccuredEvent, value);
             remove => ErrorOccuredEvent = (ErrorOccuredEventHandler) Delegate.Remove(ErrorOccuredEvent, value);
         }
-				
+
 		public delegate void ClosingEventHandler(object sender);
 		public event ClosingEventHandler Closing
 		{
 			add => ClosingEvent = (ClosingEventHandler) Delegate.Combine(ClosingEvent, value);
             remove => ClosingEvent = (ClosingEventHandler) Delegate.Remove(ClosingEvent, value);
         }
-				
+
 		public delegate void ClosedEventHandler(object sender);
 		public event ClosedEventHandler Closed
 		{
 			add => ClosedEvent = (ClosedEventHandler) Delegate.Combine(ClosedEvent, value);
             remove => ClosedEvent = (ClosedEventHandler) Delegate.Remove(ClosedEvent, value);
         }
-				
-				
+
+
 		public void Event_Closing(object sender)
 		{
 		    ClosingEvent?.Invoke(sender);

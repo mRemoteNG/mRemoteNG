@@ -35,7 +35,7 @@ namespace mRemoteNG.UI.Controls.Base
         /// </summary>
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (_themeManager.ThemingActive)
             {
@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Controls.Base
                     Invalidate();
                 };
                 Invalidate();
-            } 
+            }
         }
 
 
@@ -75,7 +75,7 @@ namespace mRemoteNG.UI.Controls.Base
         /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ThemingActive)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
@@ -103,11 +103,11 @@ namespace mRemoteNG.UI.Controls.Base
                         fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Foreground");
                         border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Border");
                         break;
-                } 
+                }
             }
             else
             {
-                back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Background"); 
+                back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Background");
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Foreground");
                 border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Border");
             }

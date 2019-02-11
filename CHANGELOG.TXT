@@ -10,9 +10,12 @@ Features/Enhancements:
 #951: Added property to Enable/Disable Clipboard Sharing for RDP connections
 #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
 #765: Port Scan Issues (single port scan option now available)
+#155: Replace MagicLibrary with DockPanelSuite
+#154: MR-139: Close Button on Each Tab - new default theme has a close button on each tab
 
 Fixes:
 ------
+#1248: RemoveMagicLib Bugs - various bugs that cropped up as a result of removing magiclib
 #1245: Options form takes nearly 3 seconds to appear when Theming is active
 #1240: Theming problem with NGNumericUpDown
 #1238: Connection panel not translated until opened for the first time

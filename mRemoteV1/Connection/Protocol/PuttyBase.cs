@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace mRemoteNG.Connection.Protocol
 {
     public class PuttyBase : ProtocolBase
-	{	
+	{
 		private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
 	    private bool _isPuttyNg;
         private readonly DisplayProperties _display = new DisplayProperties();
@@ -45,7 +45,7 @@ namespace mRemoteNG.Connection.Protocol
             Event_Closed(this);
 		}
         #endregion
-				
+
         #region Public Methods
 		public override bool Connect()
 		{
@@ -65,11 +65,11 @@ namespace mRemoteNG.Connection.Protocol
 			    var arguments = new CommandLineArguments {EscapeForShell = false};
 
 			    arguments.Add("-load", InterfaceControl.Info.PuttySession);
-						
+
 				if (!(InterfaceControl.Info is PuttySessionInfo))
 				{
 					arguments.Add("-" + PuttyProtocol);
-							
+
 					if (PuttyProtocol == Putty_Protocol.ssh)
 					{
 						var username = "";
@@ -92,7 +92,7 @@ namespace mRemoteNG.Connection.Protocol
 						            break;
 						    }
 						}
-						
+
 						if (!string.IsNullOrEmpty(InterfaceControl.Info?.Password))
 						{
 							password = InterfaceControl.Info.Password;
@@ -105,9 +105,9 @@ namespace mRemoteNG.Connection.Protocol
                                 password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
 							}
 						}
-						
+
 						arguments.Add("-" + (int)PuttySSHVersion);
-								
+
 						if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials))
 						{
 							if (!string.IsNullOrEmpty(username))
@@ -120,24 +120,24 @@ namespace mRemoteNG.Connection.Protocol
 							}
 						}
 					}
-							
+
 					arguments.Add("-P", InterfaceControl.Info.Port.ToString());
 					arguments.Add(InterfaceControl.Info.Hostname);
 				}
-						
+
 				if (_isPuttyNg)
 				{
 					arguments.Add("-hwndparent", InterfaceControl.Handle.ToString());
 				}
-						
+
 				PuttyProcess.StartInfo.Arguments = arguments.ToString();
-						
+
 				PuttyProcess.EnableRaisingEvents = true;
 				PuttyProcess.Exited += ProcessExited;
-						
+
 				PuttyProcess.Start();
 				PuttyProcess.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
-						
+
 				var startTicks = Environment.TickCount;
 				while (PuttyHandle.ToInt32() == 0 & Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
 				{
@@ -156,17 +156,17 @@ namespace mRemoteNG.Connection.Protocol
 						Thread.Sleep(0);
 					}
 				}
-						
+
 				if (!_isPuttyNg)
 				{
 					NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle);
 				}
-						
+
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strPuttyStuff, true);
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strPuttyHandle, PuttyHandle), true);
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strPuttyTitle, PuttyProcess.MainWindowTitle), true);
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strPuttyParentHandle, InterfaceControl.Parent.Handle), true);
-						
+
 				Resize(this, new EventArgs());
 				base.Connect();
 				return true;
@@ -177,15 +177,11 @@ namespace mRemoteNG.Connection.Protocol
 				return false;
 			}
 		}
-				
+
 		public override void Focus()
 		{
 			try
 			{
-				if (ConnectionWindow.InTabDrag)
-				{
-					return;
-				}
 				NativeMethods.SetForegroundWindow(PuttyHandle);
 			}
 			catch (Exception ex)
@@ -194,32 +190,36 @@ namespace mRemoteNG.Connection.Protocol
 			}
 		}
 
-        protected override void Resize(object sender, EventArgs e)
+		public override void Resize(object sender, EventArgs e)
 		{
 			try
 			{
 				if (InterfaceControl.Size == Size.Empty)
-				{
 					return;
-				}
 
-			    var scaledFrameBorderHeight = _display.ScaleHeight(SystemInformation.FrameBorderSize.Height);
-			    var scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
+                if (_isPuttyNg)
+                {
+                    // PuTTYNG 0.70.0.1 and later doesn't have any window borders
+                    NativeMethods.MoveWindow(PuttyHandle, 0, 0, InterfaceControl.Width, InterfaceControl.Height, true);
+                }
+                else
+                {
+                    var scaledFrameBorderHeight = _display.ScaleHeight(SystemInformation.FrameBorderSize.Height);
+                    var scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
 
-                NativeMethods.MoveWindow(
-                    PuttyHandle, 
-                    -scaledFrameBorderWidth, 
-                    -(SystemInformation.CaptionHeight + scaledFrameBorderHeight), 
-                    InterfaceControl.Width + scaledFrameBorderWidth * 2, 
-                    InterfaceControl.Height + SystemInformation.CaptionHeight + scaledFrameBorderHeight * 2, 
-                    true);
+                    NativeMethods.MoveWindow(PuttyHandle, -scaledFrameBorderWidth,
+                        -(SystemInformation.CaptionHeight + scaledFrameBorderHeight),
+                        InterfaceControl.Width + scaledFrameBorderWidth * 2,
+                        InterfaceControl.Height + SystemInformation.CaptionHeight + scaledFrameBorderHeight * 2,
+                        true);
+                }
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyResizeFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+
 		public override void Close()
 		{
 			try
@@ -233,19 +233,19 @@ namespace mRemoteNG.Connection.Protocol
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyKillFailed + Environment.NewLine + ex.Message, true);
 			}
-					
+
 			try
 			{
-				PuttyProcess.Dispose();
-			}
+                PuttyProcess.Dispose();
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyDisposeFailed + Environment.NewLine + ex.Message, true);
 			}
-					
+
 			base.Close();
 		}
-				
+
 		public void ShowSettingsDialog()
 		{
 			try
@@ -259,7 +259,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 		}
         #endregion
-				
+
         #region Enums
 
 	    protected enum Putty_Protocol

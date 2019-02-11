@@ -63,11 +63,6 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="MagicLibrary, Version=1.7.4.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\MagicLibrary.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
     </Reference>
@@ -244,6 +239,9 @@
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpClientWrap.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
@@ -687,6 +685,23 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Panels\PanelAdder.cs" />
+    <Compile Include="UI\Tabs\Enums.cs" />
+    <Compile Include="UI\Tabs\ConnectionTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\ConnectionTab.Designer.cs">
+      <DependentUpon>ConnectionTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Tabs\DockPaneStripNG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\FloatWindowNG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\MremoteNGAutoHideStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\TabHelper.cs" />
     <Compile Include="UI\TaskDialog\CommandButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -972,6 +987,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UnhandledExceptionWindow.resx">
       <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tabs\ConnectionTab.resx">
+      <DependentUpon>ConnectionTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TaskDialog\CommandButton.resx">
       <DependentUpon>CommandButton.cs</DependentUpon>

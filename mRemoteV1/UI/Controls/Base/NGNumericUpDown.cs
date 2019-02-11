@@ -6,8 +6,8 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls.Base
 {
-    //Repaint of the NumericUpDown, the composite control buttons are replaced because the 
-    //original ones cannot be themed due to protected inheritance 
+    //Repaint of the NumericUpDown, the composite control buttons are replaced because the
+    //original ones cannot be themed due to protected inheritance
     internal class NGNumericUpDown : NumericUpDown
     {
 
@@ -23,12 +23,12 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
-            if (!_themeManager.ThemingActive) return;
+            base.OnCreateControl();
+            if (!_themeManager.ActiveAndExtended) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background"); 
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
-            
+
             if (Controls.Count > 0)
             {
                 for (var i = 0; i < Controls.Count; i++)
@@ -82,8 +82,8 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnEnabledChanged(EventArgs e)
         {
-            
-            if (_themeManager.ThemingActive)
+
+            if (_themeManager.ActiveAndExtended)
             {
                 if (Enabled)
                 {
@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Controls.Base
                 {
                     BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
                 }
-            } 
+            }
             base.OnEnabledChanged(e);
             Invalidate();
         }
@@ -102,9 +102,9 @@ namespace mRemoteNG.UI.Controls.Base
 
         //Redrawing border
         protected override void OnPaint(PaintEventArgs e)
-        { 
+        {
             base.OnPaint(e);
-            if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveAndExtended) return;
             //Fix Border
             if (BorderStyle != BorderStyle.None)
                 e.Graphics.DrawRectangle(new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"), 1), 0, 0, Width - 1, Height - 1);

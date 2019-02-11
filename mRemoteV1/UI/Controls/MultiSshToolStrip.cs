@@ -51,8 +51,8 @@ namespace mRemoteNG.UI.Controls
 
 	    private void ApplyTheme()
 	    {
-	        if (!_themeManager.ThemingActive) return;
-	        _txtMultiSsh.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+	        if (!_themeManager.ActiveAndExtended) return;
+            _txtMultiSsh.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
 	        _txtMultiSsh.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
 	    }
 

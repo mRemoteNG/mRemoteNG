@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Controls.Base
             _circleSmall = new Rectangle(display.ScaleWidth(4), display.ScaleHeight(4), display.ScaleWidth(6), display.ScaleHeight(6));
             _circle = new Rectangle(display.ScaleWidth(1), display.ScaleHeight(1), display.ScaleWidth(12), display.ScaleHeight(12));
             _textXCoord = display.ScaleWidth(16);
-           ThemeManager.getInstance().ThemeChanged += OnCreateControl; 
+           ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
 
@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             // Allows for Overlaying
@@ -74,12 +74,12 @@ namespace mRemoteNG.UI.Controls.Base
         //This class is painted with the checkbox colors, the glyph color is used for the radio inside
         protected override void OnPaint(PaintEventArgs e)
         {
-            if ( !_themeManager.ThemingActive)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
             }
-            // Init 
+            // Init
             var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Controls.Base
             if (Enabled)
             {
                 if (Checked)
-                { 
+                {
                     center = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
                 }
                 else
@@ -104,7 +104,7 @@ namespace mRemoteNG.UI.Controls.Base
                         outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Hover");
                     }
                 }
-                
+
             }
             else
             {
@@ -114,9 +114,9 @@ namespace mRemoteNG.UI.Controls.Base
 
             var textRect = new Rectangle(_textXCoord, Padding.Top, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
- 
+
             g.FillEllipse(new SolidBrush(centerBack), _circle);
-            g.FillEllipse(new SolidBrush(center), _circleSmall); 
+            g.FillEllipse(new SolidBrush(center), _circleSmall);
             g.DrawEllipse(new Pen(outline), _circle);
         }
 

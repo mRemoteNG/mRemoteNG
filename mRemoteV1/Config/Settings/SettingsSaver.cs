@@ -12,7 +12,7 @@ namespace mRemoteNG.Config.Settings
     public static class SettingsSaver
     {
         public static void SaveSettings(
-            Control quickConnectToolStrip, 
+            Control quickConnectToolStrip,
             ExternalToolsToolStrip externalToolsToolStrip,
             MultiSshToolStrip multiSshToolStrip,
             FrmMain frmMain)
@@ -50,7 +50,7 @@ namespace mRemoteNG.Config.Settings
                 SaveExternalAppsToolbarLocation(externalToolsToolStrip);
                 SaveQuickConnectToolbarLocation(quickConnectToolStrip);
                 SaveMultiSshToolbarLocation(multiSshToolStrip);
-                
+
                 mRemoteNG.Settings.Default.Save();
 
                 SaveDockPanelLayout();

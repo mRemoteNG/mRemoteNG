@@ -39,15 +39,14 @@ namespace mRemoteNG.App.Info
 				details.Add(Thread.CurrentThread.CurrentUICulture.Name);
 				details.Add($".NET CLR {Environment.Version}");
 				var detailsString = string.Join("; ", details.ToArray());
-						
+
 				return $"Mozilla/5.0 ({detailsString}) {ProductName}/{ApplicationVersion}";
 			}
 		}
 
 	    public static Version GetApplicationVersion()
 	    {
-            Version v;
-            System.Version.TryParse(ApplicationVersion, out v);
+            System.Version.TryParse(ApplicationVersion, out var v);
 	        return v;
 	    }
 	}

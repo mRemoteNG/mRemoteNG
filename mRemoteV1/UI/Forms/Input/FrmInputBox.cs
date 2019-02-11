@@ -3,12 +3,11 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.Input
 {
-    public partial class FrmInputBox : Form
+    public sealed partial class FrmInputBox : Form
     {
-        private readonly DisplayProperties _display = new DisplayProperties();
         internal string returnValue;
 
-        public FrmInputBox(string title, string promptText, ref string value)
+        public FrmInputBox(string title, string promptText, string value)
         {
             InitializeComponent();
 
@@ -27,9 +26,10 @@ namespace mRemoteNG.UI.Forms.Input
 
         private void ApplyTheme()
         {
-            var activeTheme = ThemeManager.getInstance().ActiveTheme;
-            BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            var _themeManager = ThemeManager.getInstance();
+            if (!_themeManager.ActiveAndExtended) return;
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void buttonOk_Click(object sender, System.EventArgs e)

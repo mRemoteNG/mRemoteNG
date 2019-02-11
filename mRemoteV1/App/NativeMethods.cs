@@ -4,6 +4,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Text;
 
+#pragma warning disable 649
 #pragma warning disable 169
 
 namespace mRemoteNG.App
@@ -13,31 +14,31 @@ namespace mRemoteNG.App
         #region Functions
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool AppendMenu(IntPtr hMenu, int uFlags, IntPtr uIDNewItem, string lpNewItem);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr CreatePopupMenu();
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetForegroundWindow();
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool InsertMenu(IntPtr hMenu, int uPosition, int uFlags, IntPtr uIDNewItem, string lpNewItem);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int IsIconic(IntPtr hWnd);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool PostMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam);
 
@@ -61,24 +62,24 @@ namespace mRemoteNG.App
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetMenuItemBitmaps(IntPtr hMenu, int uPosition, int uFlags, IntPtr hBitmapUnchecked, IntPtr hBitmapChecked);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr WindowFromPoint(Point point);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern int GetClassName(IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
+        internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int GetDlgCtrlID(IntPtr hwndCtl);
@@ -137,27 +138,27 @@ namespace mRemoteNG.App
         {
             return wLow | wHigh << 16;
         }
-			
+
         public static int MAKELPARAM(ref int wLow, ref int wHigh)
         {
             return MAKELONG(wLow, wHigh);
         }
-			
+
         public static int LOWORD(int value)
         {
             return value & 0xFFFF;
         }
-			
+
         public static int LOWORD(IntPtr value)
         {
             return LOWORD(value.ToInt32());
         }
-			
+
         public static int HIWORD(int value)
         {
             return value >> 16;
         }
-			
+
         public static int HIWORD(IntPtr value)
         {
             return HIWORD(value.ToInt32());
@@ -269,12 +270,12 @@ namespace mRemoteNG.App
         public const int SWP_NOCLIENTMOVE = 0x1000;
 
         /// <summary>
-        /// Prevents generation of the WM_SYNCPAINT message. 
+        /// Prevents generation of the WM_SYNCPAINT message.
         /// </summary>
         public const int SWP_DEFERERASE = 0x2000;
 
         /// <summary>
-        /// If the calling thread and the thread that owns the window are attached to different input queues, the system posts the request to the thread that owns the window. This prevents the calling thread from blocking its execution while other threads process the request. 
+        /// If the calling thread and the thread that owns the window are attached to different input queues, the system posts the request to the thread that owns the window. This prevents the calling thread from blocking its execution while other threads process the request.
         /// </summary>
         public const int SWP_ASYNCWINDOWPOS = 0x4000;
 
@@ -303,8 +304,8 @@ namespace mRemoteNG.App
 
         /// <summary>
         /// Sent to both the window being activated and the window being deactivated.
-        /// If the windows use the same input queue, the message is sent synchronously, first to the window procedure of the 
-        /// top-level window being deactivated, then to the window procedure of the top-level window being activated. If the 
+        /// If the windows use the same input queue, the message is sent synchronously, first to the window procedure of the
+        /// top-level window being deactivated, then to the window procedure of the top-level window being activated. If the
         /// windows use different input queues, the message is sent asynchronously, so the window is activated immediately.
         /// </summary>
         public const int WA_CLICKACTIVE = 0x2;
@@ -332,7 +333,7 @@ namespace mRemoteNG.App
         public const int WM_SETTEXT = 0xC;
 
         /// <summary>
-        /// Copies the text that corresponds to a window into a buffer provided by the caller. 
+        /// Copies the text that corresponds to a window into a buffer provided by the caller.
         /// </summary>
         public const int WM_GETTEXT = 0xD;
 
@@ -347,7 +348,7 @@ namespace mRemoteNG.App
         public const int WM_ACTIVATEAPP = 0x1C;
 
         /// <summary>
-        /// Sent to a window if the mouse causes the cursor to move within a window and mouse input is not captured. 
+        /// Sent to a window if the mouse causes the cursor to move within a window and mouse input is not captured.
         /// </summary>
         public const int WM_SETCURSOR = 0x20;
 
@@ -372,12 +373,12 @@ namespace mRemoteNG.App
         public const int WM_WINDOWPOSCHANGED = 0x47;
 
         /// <summary>
-        /// Posted to the window with the keyboard focus when a nonsystem key is pressed. A nonsystem key is a key that is pressed when the ALT key is not pressed. 
+        /// Posted to the window with the keyboard focus when a nonsystem key is pressed. A nonsystem key is a key that is pressed when the ALT key is not pressed.
         /// </summary>
         public const int WM_KEYDOWN = 0x100;
 
         /// <summary>
-        /// Posted to the window with the keyboard focus when a nonsystem key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, or a keyboard key that is pressed when a window has the keyboard focus. 
+        /// Posted to the window with the keyboard focus when a nonsystem key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, or a keyboard key that is pressed when a window has the keyboard focus.
         /// </summary>
         public const int WM_KEYUP = 0x101;
 
@@ -432,7 +433,7 @@ namespace mRemoteNG.App
         public const int WM_MBUTTONUP = 0x208;
 
         /// <summary>
-        /// Posted when the user presses the first or second X button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse. 
+        /// Posted when the user presses the first or second X button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
         /// </summary>
         public const int WM_XBUTTONDOWN = 0x20B;
 
@@ -447,22 +448,22 @@ namespace mRemoteNG.App
         public const int WM_PARENTNOTIFY = 0x210;
 
         /// <summary>
-        /// Sent one time to a window after it enters the moving or sizing modal loop. The window enters the moving or sizing modal loop when the user clicks the window's title bar or sizing border, or when the window passes the WM_SYSCOMMAND message to the DefWindowProc function and the wParam parameter of the message specifies the SC_MOVE or SC_SIZE value. The operation is complete when DefWindowProc returns. 
+        /// Sent one time to a window after it enters the moving or sizing modal loop. The window enters the moving or sizing modal loop when the user clicks the window's title bar or sizing border, or when the window passes the WM_SYSCOMMAND message to the DefWindowProc function and the wParam parameter of the message specifies the SC_MOVE or SC_SIZE value. The operation is complete when DefWindowProc returns.
         /// </summary>
         public const int WM_ENTERSIZEMOVE = 0x231;
 
         /// <summary>
-        /// Sent one time to a window, after it has exited the moving or sizing modal loop. The window enters the moving or sizing modal loop when the user clicks the window's title bar or sizing border, or when the window passes the WM_SYSCOMMAND message to the DefWindowProc function and the wParam parameter of the message specifies the SC_MOVE or SC_SIZE value. The operation is complete when DefWindowProc returns. 
+        /// Sent one time to a window, after it has exited the moving or sizing modal loop. The window enters the moving or sizing modal loop when the user clicks the window's title bar or sizing border, or when the window passes the WM_SYSCOMMAND message to the DefWindowProc function and the wParam parameter of the message specifies the SC_MOVE or SC_SIZE value. The operation is complete when DefWindowProc returns.
         /// </summary>
         public const int WM_EXITSIZEMOVE = 0x232;
 
         /// <summary>
-        /// Sent to the first window in the clipboard viewer chain when the content of the clipboard changes. This enables a clipboard viewer window to display the new content of the clipboard. 
+        /// Sent to the first window in the clipboard viewer chain when the content of the clipboard changes. This enables a clipboard viewer window to display the new content of the clipboard.
         /// </summary>
         public const int WM_DRAWCLIPBOARD = 0x308;
 
         /// <summary>
-        /// Sent to the first window in the clipboard viewer chain when a window is being removed from the chain. 
+        /// Sent to the first window in the clipboard viewer chain when a window is being removed from the chain.
         /// </summary>
         public const int WM_CHANGECBCHAIN = 0x30D;
         #endregion

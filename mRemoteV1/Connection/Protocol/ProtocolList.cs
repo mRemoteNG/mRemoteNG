@@ -45,6 +45,9 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
+                if (!List.Contains(cProt))
+                    return;
+
 				List.Remove(cProt);
                 RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, cProt));
             }
@@ -55,7 +58,9 @@ namespace mRemoteNG.Connection.Protocol
 				
 		public new void Clear()
 		{
-            if (Count == 0) return;
+            if (Count == 0)
+                return;
+
 			List.Clear();
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 		}

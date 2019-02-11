@@ -1,6 +1,7 @@
-﻿using BrightIdeasSoftware;
-using mRemoteNG.Themes;
+﻿using System.ComponentModel;
 using System.Drawing;
+using BrightIdeasSoftware;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls.Base
 {
@@ -8,37 +9,38 @@ namespace mRemoteNG.UI.Controls.Base
     //This is subclassed to avoid repeating the code in multiple places
     internal class NGListView : ObjectListView
     {
-
         private CellBorderDecoration deco;
         //Control if the gridlines are styled, must be set before the OnCreateControl is fired
         public bool DecorateLines { get; set; } = true;
 
-
         public NGListView()
         {
+            InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
-
-
-
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             var _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveAndExtended) return;
             //List back color
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
             //Selected item
             SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Background");
             SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground");
-                
+
             //Header style
             HeaderUsesThemes = false;
-            var headerStylo = new HeaderFormatStyle();
-            headerStylo.Normal.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Background");
-            headerStylo.Normal.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground"); 
+            var headerStylo = new HeaderFormatStyle
+            {
+                Normal =
+                {
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Background"),
+                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground")
+                }
+            };
             HeaderFormatStyle = headerStylo;
             //Border style
             if(DecorateLines)
@@ -69,14 +71,14 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void InitializeComponent()
         {
-            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            this.SuspendLayout();
+            ((ISupportInitialize)(this)).BeginInit();
+            SuspendLayout();
             // 
             // NGListView
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-            this.ResumeLayout(false);
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ((ISupportInitialize)(this)).EndInit();
+            ResumeLayout(false);
 
         }
     }

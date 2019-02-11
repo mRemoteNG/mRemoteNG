@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using TabControl = Crownwood.Magic.Controls.TabControl;
 
 
 namespace mRemoteNG.UI.Window
@@ -35,7 +34,7 @@ namespace mRemoteNG.UI.Window
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionWindow));
-            this.TabController = new Crownwood.Magic.Controls.TabControl();
+            this.connDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.cmenTab = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmenTabReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabDisconnect = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,20 +59,18 @@ namespace mRemoteNG.UI.Window
             this.cmenTab.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TabController
+            // connDock
             // 
-            this.TabController.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TabController.Appearance = Crownwood.Magic.Controls.TabControl.VisualAppearance.MultiDocument;
-            this.TabController.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.TabController.DragFromControl = false;
-            this.TabController.IDEPixelArea = true;
-            this.TabController.IDEPixelBorder = false;
-            this.TabController.Location = new System.Drawing.Point(0, -1);
-            this.TabController.Name = "TabController";
-            this.TabController.Size = new System.Drawing.Size(632, 454);
-            this.TabController.TabIndex = 0;
+            this.connDock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.connDock.DockBackColor = System.Drawing.SystemColors.Control;
+            this.connDock.DockLeftPortion = 230D;
+            this.connDock.DockRightPortion = 230D;
+            this.connDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
+            this.connDock.Location = new System.Drawing.Point(0, 0);
+            this.connDock.Margin = new System.Windows.Forms.Padding(4);
+            this.connDock.Name = "connDock";
+            this.connDock.Size = new System.Drawing.Size(632, 453);
+            this.connDock.TabIndex = 13;
             // 
             // cmenTab
             // 
@@ -241,7 +238,7 @@ namespace mRemoteNG.UI.Window
             // ConnectionWindow
             // 
             this.ClientSize = new System.Drawing.Size(632, 453);
-            this.Controls.Add(this.TabController);
+            this.Controls.Add(this.connDock);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::mRemoteNG.Resources.mRemoteNG_Icon;
             this.Name = "ConnectionWindow";
@@ -252,6 +249,7 @@ namespace mRemoteNG.UI.Window
 
         }
 
-        private System.ComponentModel.IContainer components;
+         internal WeifenLuo.WinFormsUI.Docking.DockPanel connDock;
+         private System.ComponentModel.IContainer components;
     }
 }

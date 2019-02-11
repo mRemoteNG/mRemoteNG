@@ -639,7 +639,7 @@
       <Value Profile="(Default)">cs-CZ,de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,ko-KR,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-CN,zh-TW</Value>
     </Setting>
     <Setting Name="ThemingActive" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ConDefaultUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -687,6 +687,12 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="PlaceSearchBarAboveConnectionTree" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AlwaysShowConnectionTabs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OverrideFIPSCheck" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

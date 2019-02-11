@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using mRemoteNG.App;
 using mRemoteNG.Security.SymmetricEncryption;
 
@@ -13,7 +12,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ApplyTheme();
             PageIcon = Resources.Key_Icon;
         }
-        
+
         public override string PageName {
             get => Language.Credentials;
             set { }
@@ -33,8 +32,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (Settings.Default.EmptyCredentials)
             {
@@ -74,8 +71,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
             Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
-
-            Settings.Default.Save();
         }
 
         private void radCredentialsCustom_CheckedChanged(object sender, EventArgs e)

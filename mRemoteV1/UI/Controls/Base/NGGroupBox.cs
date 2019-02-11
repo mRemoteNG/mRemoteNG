@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (_themeManager.ThemingActive)
             {
@@ -28,14 +28,14 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if ( !_themeManager.ThemingActive)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
             }
             //Reusing the textbox colors
-            var titleColor =  _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground"); 
-            //var backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Backgorund");  
+            var titleColor =  _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground");
+            //var backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Backgorund");
             var lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Line");
 
             if (!Enabled)
@@ -43,18 +43,18 @@ namespace mRemoteNG.UI.Controls.Base
                 titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Foreground");
                 //backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Background");
                 lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Line");
-            } 
+            }
 
 
             //var state = Enabled ? GroupBoxState.Normal : GroupBoxState.Disabled;
             var flags = TextFormatFlags.PreserveGraphicsTranslateTransform | TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.TextBoxControl |TextFormatFlags.WordBreak;
-            
+
             if (!ShowKeyboardCues)
                 flags |= TextFormatFlags.HidePrefix;
             if (RightToLeft == RightToLeft.Yes)
                 flags |= TextFormatFlags.RightToLeft | TextFormatFlags.Right;
 
-            //No clear backgorund, this control is transparently 
+            //No clear backgorund, this control is transparently
             //e.Graphics.FillRectangle(new SolidBrush(backColor), 0, 0, Width, Height);
 
             var bounds = new Rectangle(0, 0, Width, Height);
@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Controls.Base
             else
                 rectangle.X += 8;
             TextRenderer.DrawText(e.Graphics, Text, Font, rectangle, titleColor, flags);
-            
+
             if (rectangle.Width > 0)
                 rectangle.Inflate(2, 0);
             using (var pen = new Pen(lineColor))
