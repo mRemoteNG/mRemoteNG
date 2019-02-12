@@ -580,7 +580,7 @@ Starte mit neuer Datei.</value>
     <value>Wollen Sie ohne Passwort fortfahren?</value>
   </data>
   <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
-    <value>Bei leeren Benutzername-, Passwort- oder Domänenfeldern benutze:</value>
+    <value>Bei leeren Feldern für Benutzername, Passwort oder Domäne verwende:</value>
   </data>
   <data name="strEnc128Bit" xml:space="preserve">
     <value>128 Bit</value>
@@ -742,7 +742,7 @@ Starte mit neuer Datei.</value>
     <value>Setzen der Auflösung fehlgschlagen!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
-    <value>Quick connect Registerkarten identifizieren, indem das Präfix "Quick:" benutzt wird</value>
+    <value>QuickConnect-Tabs identifizieren, indem das Präfix "Quick" benutzt wird</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Von Active Directory importieren</value>
@@ -1117,7 +1117,7 @@ Starte mit neuer Datei.</value>
     <value>Nach oben</value>
   </data>
   <data name="strMyCurrentWindowsCreds" xml:space="preserve">
-    <value>meine aktuellen (Windows-Anmeldeinformationen)</value>
+    <value>meine aktuellen Windows-Anmeldeinformationen</value>
   </data>
   <data name="strNever" xml:space="preserve">
     <value>Niemals</value>
@@ -1147,7 +1147,7 @@ Starte mit neuer Datei.</value>
     <value>Kein externes Programm definiert!</value>
   </data>
   <data name="strNoInformation" xml:space="preserve">
-    <value>keine</value>
+    <value>keine Anmeldeinformationen</value>
   </data>
   <data name="strNone" xml:space="preserve">
     <value>Keine Angabe</value>
@@ -1172,7 +1172,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Offene Ports</value>
   </data>
   <data name="strOptionsTabTheme" xml:space="preserve">
-    <value>Aussehen</value>
+    <value>Theme</value>
   </data>
   <data name="strOptionsThemeButtonDelete" xml:space="preserve">
     <value>&amp;Löschen</value>
@@ -1885,7 +1885,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Erster Port</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
-    <value>Anfang/Ende</value>
+    <value>Start/Ende</value>
   </data>
   <data name="strStatus" xml:space="preserve">
     <value>Status</value>
@@ -2353,7 +2353,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Dieser Knoten ist nicht verschiebbar.</value>
   </data>
   <data name="strEncryptionBlockCipherMode" xml:space="preserve">
-    <value>Block Cipher-Modus</value>
+    <value>Block-Cipher-Modus</value>
   </data>
   <data name="strShowTheseMessageTypes" xml:space="preserve">
     <value>Zeige diese Nachrichtentypen</value>
@@ -2616,5 +2616,34 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Suchleiste über den Verbindungen anzeigen</value>
+  </data>
+  <data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Erstelle ein leeres Panel, wenn mRemoteNG gestartet wird</value>
+  </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Update-Kanal</value>
+  </data>
+  <data name="strReleaseChannelExplanation" xml:space="preserve">
+    <value>Stable enthält nur finale Versionen.
+Beta beinhaltet Betas &amp; Release Candidates.
+Development umfasst Alphas, Betas und Release Candidates.</value>
+  </data>
+  <data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Aktive Verbindung im Verbindungsbaum verfolgen</value>
+  </data>
+  <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>Iterationen der Schlüsselableitungsfunktion</value>
+  </data>
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>UTF8-Kodierung für RDP Eigenschaft "Load Balance Info" verwenden</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Anmeldedaten</value>
+  </data>
+  <data name="strButtonApply" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="strOptionsThemeChangeWarning" xml:space="preserve">
+    <value>Warnung: Ein Neustart ist erforderlich, um Änderungen am Theme anzuwenden.</value>
   </data>
 </root>

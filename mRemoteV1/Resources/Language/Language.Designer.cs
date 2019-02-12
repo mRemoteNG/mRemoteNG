@@ -565,6 +565,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        internal static string strButtonApply {
+            get {
+                return ResourceManager.GetString("strButtonApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Browse....
         /// </summary>
         internal static string strButtonBrowse {
@@ -4381,6 +4390,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Warning: Restart is required to commit any theme configuration change..
+        /// </summary>
+        internal static string strOptionsThemeChangeWarning {
+            get {
+                return ResourceManager.GetString("strOptionsThemeChangeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete the theme?.
         /// </summary>
         internal static string strOptionsThemeDeleteConfirmation {
@@ -4431,15 +4449,6 @@ namespace mRemoteNG {
         internal static string strOptionsThemeNewThemeText {
             get {
                 return ResourceManager.GetString("strOptionsThemeNewThemeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Warning: Restart is required to commit any theme configuration change..
-        /// </summary>
-        internal static string strOptionsThemeThemeChaangeWarning {
-            get {
-                return ResourceManager.GetString("strOptionsThemeThemeChaangeWarning", resourceCulture);
             }
         }
         

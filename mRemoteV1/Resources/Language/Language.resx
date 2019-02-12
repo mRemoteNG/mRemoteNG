@@ -2584,7 +2584,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strOptionsThemeNewThemeText" xml:space="preserve">
     <value>Type the new theme name</value>
   </data>
-  <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
+  <data name="strOptionsThemeChangeWarning" xml:space="preserve">
     <value>Warning: Restart is required to commit any theme configuration change.</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
@@ -2753,5 +2753,8 @@ This page will walk you through the process of upgrading your connections file o
     <value>Stable channel includes final releases only.
 Beta channel includes Betas &amp; Release Candidates.
 Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
+  </data>
+  <data name="strButtonApply" xml:space="preserve">
+    <value>Apply</value>
   </data>
 </root>
