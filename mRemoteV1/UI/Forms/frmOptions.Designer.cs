@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOptions));
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.btnApply = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnCancel = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -37,7 +38,6 @@
             this.pnlMain = new System.Windows.Forms.Panel();
             this.lstOptionPages = new mRemoteNG.UI.Controls.Base.NGListView();
             this.PageName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.btnApply = new mRemoteNG.UI.Controls.Base.NGButton();
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lstOptionPages)).BeginInit();
             this.SuspendLayout();
@@ -53,9 +53,20 @@
             this.pnlBottom.Size = new System.Drawing.Size(764, 35);
             this.pnlBottom.TabIndex = 0;
             // 
+            // btnApply
+            // 
+            this.btnApply._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.btnApply.Location = new System.Drawing.Point(677, 5);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(75, 23);
+            this.btnApply.TabIndex = 2;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnOK_Click);
+            // 
             // btnCancel
             // 
-            this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(596, 5);
             this.btnCancel.Name = "btnCancel";
@@ -67,9 +78,9 @@
             // 
             // btnOK
             // 
-            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(515, 6);
+            this.btnOK.Location = new System.Drawing.Point(515, 5);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -137,17 +148,6 @@
             this.PageName.Groupable = false;
             this.PageName.ImageAspectName = "IconImage";
             this.PageName.IsEditable = false;
-            // 
-            // btnApply
-            // 
-            this.btnApply._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnApply.Location = new System.Drawing.Point(677, 5);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(75, 23);
-            this.btnApply.TabIndex = 2;
-            this.btnApply.Text = "Apply";
-            this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // FrmOptions
             // 

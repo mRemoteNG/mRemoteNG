@@ -239,6 +239,9 @@
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpClientWrap.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
@@ -698,6 +701,7 @@
     <Compile Include="UI\Tabs\MremoteNGAutoHideStrip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Tabs\TabHelper.cs" />
     <Compile Include="UI\TaskDialog\CommandButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1242,6 +1246,9 @@
     <None Include="Resources\Icons\Update_Icon.ico" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <None Include="Resources\Images\mRemoteNG.png" />
+    <None Include="Resources\Images\tab_add.png" />
+    <None Include="Resources\Images\tab_edit.png" />
+    <None Include="Resources\Images\tab_delete.png" />
     <None Include="Resources\Images\star.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>

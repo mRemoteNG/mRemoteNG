@@ -205,7 +205,10 @@ namespace mRemoteNG.UI.Controls
         private void btnQuickConnect_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             SetQuickConnectProtocol(e.ClickedItem.Text);
-            btnQuickConnect_ButtonClick(this, e);
+            if (string.IsNullOrEmpty(_cmbQuickConnect.Text))
+                _cmbQuickConnect.Focus();
+            else
+                btnQuickConnect_ButtonClick(this, e);
         }
 
         private void SetQuickConnectProtocol(string protocol)

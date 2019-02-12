@@ -438,6 +438,13 @@ namespace mRemoteNG.UI.Forms
 				        _inMouseActivate = true;
 				        break;
 				    case NativeMethods.WM_ACTIVATEAPP:
+                        var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
+                            ?? GetChildAtPoint(MousePosition);
+
+                        if(candidateTabToFocus is  InterfaceControl)
+                        {
+                            candidateTabToFocus.Parent.Focus();
+                        }
 				        _inMouseActivate = false;
 				        break;
 				    case NativeMethods.WM_ACTIVATE:

@@ -195,20 +195,24 @@ namespace mRemoteNG.Connection.Protocol
 			try
 			{
 				if (InterfaceControl.Size == Size.Empty)
-				{
 					return;
-				}
 
-			    var scaledFrameBorderHeight = _display.ScaleHeight(SystemInformation.FrameBorderSize.Height);
-			    var scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
+                if (_isPuttyNg)
+                {
+                    // PuTTYNG 0.70.0.1 and later doesn't have any window borders
+                    NativeMethods.MoveWindow(PuttyHandle, 0, 0, InterfaceControl.Width, InterfaceControl.Height, true);
+                }
+                else
+                {
+                    var scaledFrameBorderHeight = _display.ScaleHeight(SystemInformation.FrameBorderSize.Height);
+                    var scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
 
-                NativeMethods.MoveWindow(
-                    PuttyHandle,
-                    -scaledFrameBorderWidth,
-                    -(SystemInformation.CaptionHeight + scaledFrameBorderHeight),
-                    InterfaceControl.Width + scaledFrameBorderWidth * 2,
-                    InterfaceControl.Height + SystemInformation.CaptionHeight + scaledFrameBorderHeight * 2,
-                    true);
+                    NativeMethods.MoveWindow(PuttyHandle, -scaledFrameBorderWidth,
+                        -(SystemInformation.CaptionHeight + scaledFrameBorderHeight),
+                        InterfaceControl.Width + scaledFrameBorderWidth * 2,
+                        InterfaceControl.Height + SystemInformation.CaptionHeight + scaledFrameBorderHeight * 2,
+                        true);
+                }
 			}
 			catch (Exception ex)
 			{
@@ -232,11 +236,7 @@ namespace mRemoteNG.Connection.Protocol
 
 			try
 			{
-                Console.WriteLine(@"Skipping Dispose for now!");
-                PuttyProcess.Close();
-                // TODO: Figure out why this hangs...
-                //PuttyProcess.Dispose();
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyDisposeFailed + Environment.NewLine + @"SKIPPING DISPOSE - CAUSES HANG IN THIS BUILD!!!", true);
+                PuttyProcess.Dispose();
             }
 			catch (Exception ex)
 			{

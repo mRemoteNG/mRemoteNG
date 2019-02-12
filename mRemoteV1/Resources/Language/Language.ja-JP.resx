@@ -664,13 +664,6 @@ Starting with new connections file.</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>暗号化に失敗しました：{0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>The Windows security setting, "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing", is enabled. This setting is not compatible with {0}.
-
-See the Microsoft Support article at http://support.microsoft.com/kb/811833 for more information.
-
-{0} will now close.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>エラー</value>
   </data>

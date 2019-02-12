@@ -9,7 +9,6 @@ namespace mRemoteNG.UI.Window
 	{
         #region  Windows Form Designer generated code
 		internal System.Windows.Forms.MenuStrip msMain;
-		internal System.Windows.Forms.ToolStripMenuItem mMenView;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandAllFolders;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewCollapseAllFolders;
 		internal System.Windows.Forms.ToolStripMenuItem mMenSortAscending;
@@ -27,7 +26,6 @@ namespace mRemoteNG.UI.Window
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.mMenAddConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenAddFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewExpandAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +54,6 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.olvConnections.HideSelection = false;
             this.olvConnections.IsSimpleDragSource = true;
-            this.olvConnections.IsSimpleDropSink = true;
             this.olvConnections.LabelEdit = true;
             this.olvConnections.Location = new System.Drawing.Point(0, 24);
             this.olvConnections.MultiSelect = false;
@@ -83,7 +80,8 @@ namespace mRemoteNG.UI.Window
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mMenAddConnection,
             this.mMenAddFolder,
-            this.mMenView,
+            this.mMenViewExpandAllFolders,
+            this.mMenViewCollapseAllFolders,
             this.mMenSortAscending,
             this.mMenFavorites});
             this.msMain.Location = new System.Drawing.Point(0, 0);
@@ -111,18 +109,9 @@ namespace mRemoteNG.UI.Window
             this.mMenAddFolder.Size = new System.Drawing.Size(28, 20);
             this.mMenAddFolder.Click += new System.EventHandler(this.cMenTreeAddFolder_Click);
             // 
-            // mMenView
-            // 
-            this.mMenView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenViewExpandAllFolders,
-            this.mMenViewCollapseAllFolders});
-            this.mMenView.Image = global::mRemoteNG.Resources.View;
-            this.mMenView.Name = "mMenView";
-            this.mMenView.Size = new System.Drawing.Size(28, 20);
-            // 
             // mMenViewExpandAllFolders
             // 
+            this.mMenViewExpandAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.mMenViewExpandAllFolders.Image = global::mRemoteNG.Resources.Expand;
             this.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders";
             this.mMenViewExpandAllFolders.Size = new System.Drawing.Size(180, 22);
@@ -130,6 +119,7 @@ namespace mRemoteNG.UI.Window
             // 
             // mMenViewCollapseAllFolders
             // 
+            this.mMenViewCollapseAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.mMenViewCollapseAllFolders.Image = global::mRemoteNG.Resources.Collapse;
             this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
             this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(180, 22);

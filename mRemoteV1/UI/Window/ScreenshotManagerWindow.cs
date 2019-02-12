@@ -295,7 +295,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				((PictureBox)sender).Parent.Dispose();
+				((PictureBox)((Button)sender).Parent).Dispose();
 			}
 			catch (Exception ex)
 			{

@@ -88,6 +88,12 @@ namespace mRemoteNG.UI.Window
             cmenTabDisconnectOthers.Click += (sender, args) => CloseOtherTabs();
             cmenTabDisconnectOthersRight.Click += (sender, args) => CloseOtherTabsToTheRight();
             cmenTabPuttySettings.Click += (sender, args) => ShowPuttySettingsDialog();
+            GotFocus += ConnectionWindow_GotFocus;
+        }
+
+        private void ConnectionWindow_GotFocus(object sender, EventArgs e)
+        {
+            TabHelper.Instance.CurrentPanel = this;
         }
 
         public ConnectionTab AddConnectionTab(ConnectionInfo connectionInfo)
@@ -723,7 +729,9 @@ namespace mRemoteNG.UI.Window
         {
             cmenTab.Close();
             Application.DoEvents();
-            Windows.ScreenshotForm.AddScreenshot(MiscTools.TakeScreenshot(this));
+            //var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            if (TabHelper.Instance.CurrentTab == null) return;
+            Windows.ScreenshotForm.AddScreenshot(MiscTools.TakeScreenshot(TabHelper.Instance.CurrentTab));
         }
         #endregion
 
@@ -733,7 +741,7 @@ namespace mRemoteNG.UI.Window
             var protocolBase = sender as ProtocolBase;
             if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
             if (tabPage.Disposing) return;
-            tabPage.silentClose = true;
+            tabPage.protocolClose = true;
             Invoke(new Action(() => tabPage.Close()));
 
         }

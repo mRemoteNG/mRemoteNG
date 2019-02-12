@@ -630,9 +630,6 @@ Starte mit neuer Datei.</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Verschlüsselung fehlgeschlagen. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Die Sicherheitseinstellung von Windows "Systemkryptografie: Verwenden sie FIPS-konformen Algorithmus für Verschlüsselung, Hashing und Signatur" ist aktiviert. Diese Einstellung ist nicht kompatibel mit {0}. Weitere Informationen finden sie im Microsoft Support-Artikel unter http://support.microsoft.com/kb/811833. {0} wird jetzt beendet.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Fehler</value>
   </data>

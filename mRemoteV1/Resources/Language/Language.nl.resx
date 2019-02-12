@@ -625,13 +625,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Encryptie is mislukt. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>De beveiligingsinstelling voor Windows, "Systeemcryptografie: gebruik FIPS-compatibele algoritmes voor codering, hashing en ondertekening", is ingeschakeld. Deze instelling is niet compatibel met {0}.
-
-Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor meer informatie.  
-
-{0} wordt nu gesloten.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Foutmeldingen</value>
   </data>

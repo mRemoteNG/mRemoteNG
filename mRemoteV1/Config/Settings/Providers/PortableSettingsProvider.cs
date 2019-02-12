@@ -21,7 +21,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
-// https://raw.githubusercontent.com/crdx/PortableSettingsProvider
+// https://github.com/crdx/PortableSettingsProvider
 //
 
 using System;
@@ -63,7 +63,7 @@ namespace mRemoteNG.Config.Settings.Providers
                 }
                 catch (Exception /*ex*/)
                 {
-                    // This casues hundreds of unit tests to fail for some reason...
+                    // This causes hundreds of unit tests to fail for some reason...
                     //Runtime.MessageCollector.AddExceptionStackTrace("PortableSettingsProvider: Error getting XML", ex);
                 }
 

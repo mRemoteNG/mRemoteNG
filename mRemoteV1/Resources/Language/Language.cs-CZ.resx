@@ -654,13 +654,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Začifrování se nezdařilo. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>V nastavení politik zabezepčení systému Windows je aktivována možnost "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing" (Systémová kryptografie: Pro šifrování, hashe a podpisy využívat algoritmy odpovídají FIPS") Toto nastavení není kompatibilní s {0}.
-
-Pro další informace  navštivte článek podpory fy. Microsoft na http://support.microsoft.com/kb/811833
-
-{0} se nyní ukončí.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Chyby</value>
   </data>
@@ -938,7 +931,7 @@ Pro další informace  navštivte článek podpory fy. Microsoft na http://suppo
     <value>Možnosti:</value>
   </data>
   <data name="strLabelPassword" xml:space="preserve">
-    <value>Heso:</value>
+    <value>Heslo:</value>
   </data>
   <data name="strLabelPort" xml:space="preserve">
     <value>Port:</value>
