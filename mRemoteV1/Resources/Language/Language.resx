@@ -2746,4 +2746,12 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
     <value>Always show connection tabs</value>
   </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Release Channel</value>
+  </data>
+  <data name="strReleaseChannelExplanation" xml:space="preserve">
+    <value>Stable channel includes final releases only.
+Beta channel includes Betas &amp; Release Candidates.
+Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
+  </data>
 </root>

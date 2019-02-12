@@ -6434,6 +6434,26 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Release Channel.
+        /// </summary>
+        internal static string strReleaseChannel {
+            get {
+                return ResourceManager.GetString("strReleaseChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stable channel includes final releases only.
+        ///Beta channel includes Betas &amp; Release Candidates.
+        ///Development Channel includes Alphas, Betas &amp; Release Candidates..
+        /// </summary>
+        internal static string strReleaseChannelExplanation {
+            get {
+                return ResourceManager.GetString("strReleaseChannelExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remote file.
         /// </summary>
         internal static string strRemoteFile {
