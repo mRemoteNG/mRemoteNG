@@ -166,7 +166,7 @@
     <value>Verwende die empfohlenen Einstellungen</value>
   </data>
   <data name="strAskUpdatesContent" xml:space="preserve">
-    <value>{0} kann automatisch nach Updates suchen, die neue Funktionen und Bug Fixes enthalten können. Es wird empfohlen, dass Sie {0} erlauben wöchentlich nach Updates zu suchen.</value>
+    <value>{0} kann automatisch nach Updates suchen, die neue Funktionen und Fehlerbehebungen enthalten können. Es wird empfohlen, dass Sie {0} erlauben wöchentlich nach Updates zu suchen.</value>
   </data>
   <data name="strAskUpdatesMainInstruction" xml:space="preserve">
     <value>Automatische Update-Einstellungen</value>
@@ -451,7 +451,7 @@ VncSharp Control Version {0}</value>
     <value>Möchten Sie die Verbindung "{0}" schließen?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Sind sie sicher, dass Sie das Panel "{0}" schließen möchten?
+    <value>Sind Sie sicher, dass Sie das Panel "{0}" schließen möchten?
 Alle Verbindungen die es enthält werden ebenfalls geschlossen.</value>
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
