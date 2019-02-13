@@ -14,6 +14,7 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.ToolStripMenuItem mMenSortAscending;
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddFolder;
+
 		public System.Windows.Forms.TreeView tvConnections;
 		private void InitializeComponent()
 		{
