@@ -166,7 +166,7 @@
     <value>Verwende die empfohlenen Einstellungen</value>
   </data>
   <data name="strAskUpdatesContent" xml:space="preserve">
-    <value>{0} kann automatisch nach Updates suchen, die neue Funktionen und Bug Fixes enthalten können. Es wird empfohlen, dass Sie {0}, erlauben wöchentlich nach Updates zu suchen.</value>
+    <value>{0} kann automatisch nach Updates suchen, die neue Funktionen und Bug Fixes enthalten können. Es wird empfohlen, dass Sie {0} erlauben wöchentlich nach Updates zu suchen.</value>
   </data>
   <data name="strAskUpdatesMainInstruction" xml:space="preserve">
     <value>Automatische Update-Einstellungen</value>
@@ -451,7 +451,8 @@ VncSharp Control Version {0}</value>
     <value>Möchten Sie die Verbindung "{0}" schließen?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Sind sie sicher, dass Sie das Panel "{0}" schließen möchten? Alle Verbindungen, die es enthält, werden ebenfalls geschlossen.</value>
+    <value>Sind sie sicher, dass Sie das Panel "{0}" schließen möchten?
+Alle Verbindungen die es enthält werden ebenfalls geschlossen.</value>
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
     <value>Sind Sie sicher, dass Sie das extene Programm "{0}" entfernen möchten?</value>
@@ -940,7 +941,7 @@ Starte mit neuer Datei.</value>
     <value>STRG-ESC</value>
   </data>
   <data name="strMenuDelete" xml:space="preserve">
-    <value>Löschen...</value>
+    <value>Löschen</value>
   </data>
   <data name="strMenuDeleteConnection" xml:space="preserve">
     <value>Verbindung löschen...</value>
@@ -1015,7 +1016,7 @@ Starte mit neuer Datei.</value>
     <value>Alle Löschen</value>
   </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
-    <value>Verbindungsdatei öffnen...</value>
+    <value>Verbindungsdatei öffnen</value>
   </data>
   <data name="strMenuOptions" xml:space="preserve">
     <value>Optionen</value>
@@ -1057,7 +1058,7 @@ Starte mit neuer Datei.</value>
     <value>Verbindungsdatei speichern</value>
   </data>
   <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Verbindungsdatei speichern unter...</value>
+    <value>Verbindungsdatei speichern unter</value>
   </data>
   <data name="strMenuScreenshot" xml:space="preserve">
     <value>Bildschirmschnappschuss</value>
@@ -2419,7 +2420,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Verbindung testen</value>
   </data>
   <data name="strExportToFileMenuItem" xml:space="preserve">
-    <value>In Datei &amp;exportieren...</value>
+    <value>In Datei &amp;exportieren</value>
   </data>
   <data name="strImportFileFailedContent" xml:space="preserve">
     <value>Beim Importieren der Datei ist ein Fehler aufgetreten ("{0}").</value>
@@ -2645,5 +2646,11 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="strOptionsThemeChangeWarning" xml:space="preserve">
     <value>Warnung: Ein Neustart ist erforderlich, um Änderungen am Theme anzuwenden.</value>
+  </data>
+  <data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+    <value>Zwischenablage</value>
+  </data>
+  <data name="strPropertyDescriptionRedirecClipboard" xml:space="preserve">
+    <value>Wählen Sie aus, ob die Zwischenablage freigegeben werden soll.</value>
   </data>
 </root>
