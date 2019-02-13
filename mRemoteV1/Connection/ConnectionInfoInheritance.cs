@@ -279,27 +279,27 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionAuthenticationMode"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCAuthMode {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 9), 
+		[LocalizedAttributes.LocalizedCategory("strCategoryProxy", 9), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyType"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyType"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCProxyType {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 9), 
+		[LocalizedAttributes.LocalizedCategory("strCategoryProxy", 9), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyAddress"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyAddress"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCProxyIP {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 9), 
+		[LocalizedAttributes.LocalizedCategory("strCategoryProxy", 9), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyPort"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyPort"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCProxyPort {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 9), 
+		[LocalizedAttributes.LocalizedCategory("strCategoryProxy", 9), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyUsername"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyUsername"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCProxyUsername {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 9), 
+		[LocalizedAttributes.LocalizedCategory("strCategoryProxy", 9), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyPassword"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyPassword"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCProxyPassword {get; set;}

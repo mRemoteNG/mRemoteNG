@@ -2757,4 +2757,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strButtonApply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="strCategoryProxy" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
 </root>

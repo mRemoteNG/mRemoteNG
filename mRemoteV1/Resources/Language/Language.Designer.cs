@@ -827,6 +827,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Proxy.
+        /// </summary>
+        internal static string strCategoryProxy {
+            get {
+                return ResourceManager.GetString("strCategoryProxy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Redirect.
         /// </summary>
         internal static string strCategoryRedirect {
