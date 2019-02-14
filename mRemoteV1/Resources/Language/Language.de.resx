@@ -2651,6 +2651,6 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
     <value>Zwischenablage</value>
   </data>
   <data name="strPropertyDescriptionRedirecClipboard" xml:space="preserve">
-    <value>Wählen Sie aus, ob die Zwischenablage freigegeben werden soll.</value>
+    <value>Umleitung der Zwischenablage erlauben.</value>
   </data>
 </root>
