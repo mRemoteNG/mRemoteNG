@@ -1472,7 +1472,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirecClipboard" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
     <value>Select whether clipboard should be shared.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">

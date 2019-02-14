@@ -2650,7 +2650,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="strPropertyNameRedirectClipboard" xml:space="preserve">
     <value>Zwischenablage</value>
   </data>
-  <data name="strPropertyDescriptionRedirecClipboard" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
     <value>Umleitung der Zwischenablage erlauben.</value>
   </data>
 </root>

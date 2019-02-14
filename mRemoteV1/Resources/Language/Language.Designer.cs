@@ -4932,9 +4932,9 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Select whether clipboard should be shared..
         /// </summary>
-        internal static string strPropertyDescriptionRedirecClipboard {
+        internal static string strPropertyDescriptionRedirectClipboard {
             get {
-                return ResourceManager.GetString("strPropertyDescriptionRedirecClipboard", resourceCulture);
+                return ResourceManager.GetString("strPropertyDescriptionRedirectClipboard", resourceCulture);
             }
         }
         
