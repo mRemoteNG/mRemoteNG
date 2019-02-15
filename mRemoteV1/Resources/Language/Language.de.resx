@@ -163,7 +163,7 @@
     <value>Einstellungen jetzt anpassen</value>
   </data>
   <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
-    <value>Verwende die empfohlenen Einstellungen</value>
+    <value>Empfohlenen Einstellungen verwenden</value>
   </data>
   <data name="strAskUpdatesContent" xml:space="preserve">
     <value>{0} kann automatisch nach Updates suchen, die neue Funktionen und Fehlerbehebungen enthalten können. Es wird empfohlen, dass Sie {0} erlauben wöchentlich nach Updates zu suchen.</value>
@@ -2169,7 +2169,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Ja</value>
   </data>
   <data name="strMenuReconnectAll" xml:space="preserve">
-    <value>Wiederverbinden aller offener Verbindungen</value>
+    <value>Alle offenen Verbindungen neu verbinden</value>
   </data>
   <data name="strButtonLaunch" xml:space="preserve">
     <value>&amp;Starten</value>
@@ -2306,7 +2306,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>&amp;Nochmal versuchen</value>
   </data>
   <data name="strExternalToolDefaultName" xml:space="preserve">
-    <value>Neues externes Werkzeug</value>
+    <value>Neues externes Programm</value>
   </data>
   <data name="strLoadFromSqlFailedContent" xml:space="preserve">
     <value>Die Verbindungsinformationen konnten nicht vom SQL-Server geladen werden.</value>
@@ -2631,7 +2631,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
     <value>Aktive Verbindung im Verbindungsbaum verfolgen</value>
   </data>
   <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
-    <value>Iterationen der Schlüsselableitungsfunktion</value>
+    <value>Iterationen der Ableitungsfunktion</value>
   </data>
   <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>UTF8-Kodierung für RDP Eigenschaft "Load Balance Info" verwenden</value>
@@ -2650,5 +2650,8 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
     <value>Umleitung der Zwischenablage erlauben.</value>
+  </data>
+  <data name="strMultiSshToolbar" xml:space="preserve">
+    <value>Multi-SSH Symbolleiste</value>
   </data>
 </root>
