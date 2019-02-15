@@ -2160,7 +2160,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Benutzt die DockPanel Suite von [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Log File schreiben (mRemoteNG.log)</value>
+    <value>Logfile schreiben (mRemoteNG.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner Pfad:</value>
@@ -2506,11 +2506,10 @@ Es konnte kein Anmeldedatensatz mit der ID "{0}" für den Verbindungsdatensatz m
 Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="strChooseLogPath" xml:space="preserve">
-    <value>
-Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
+    <value>Wählen Sie einen Pfad für die mRemoteNG-Logfile</value>
   </data>
   <data name="strLogFilePath" xml:space="preserve">
-    <value>Pfad der Protokolldatei</value>
+    <value>Pfad der Logfile</value>
   </data>
   <data name="strChoosePath" xml:space="preserve">
     <value>Pfad auswählen</value>
