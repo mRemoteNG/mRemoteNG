@@ -16,25 +16,24 @@ using mRemoteNG.UI.Forms;
 namespace mRemoteNG.Config.Settings
 {
     public class SettingsLoader
-	{
+    {
         private readonly ExternalAppsLoader _externalAppsLoader;
         private readonly MessageCollector _messageCollector;
-	    private readonly MenuStrip _mainMenu;
+        private readonly MenuStrip _mainMenu;
         private readonly QuickConnectToolStrip _quickConnectToolStrip;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
-	    private readonly MultiSshToolStrip _multiSshToolStrip;
+        private readonly MultiSshToolStrip _multiSshToolStrip;
 
         private FrmMain MainForm { get; }
 
 
-	    public SettingsLoader(
-            FrmMain mainForm, 
-            MessageCollector messageCollector, 
-            QuickConnectToolStrip quickConnectToolStrip, 
-            ExternalToolsToolStrip externalToolsToolStrip,
-            MultiSshToolStrip multiSshToolStrip,
-            MenuStrip mainMenu)
-		{
+        public SettingsLoader(FrmMain mainForm,
+                              MessageCollector messageCollector,
+                              QuickConnectToolStrip quickConnectToolStrip,
+                              ExternalToolsToolStrip externalToolsToolStrip,
+                              MultiSshToolStrip multiSshToolStrip,
+                              MenuStrip mainMenu)
+        {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
             if (messageCollector == null)
@@ -45,45 +44,46 @@ namespace mRemoteNG.Config.Settings
                 throw new ArgumentNullException(nameof(externalToolsToolStrip));
             if (multiSshToolStrip == null)
                 throw new ArgumentNullException(nameof(multiSshToolStrip));
-		    if (mainMenu == null)
-		        throw new ArgumentNullException(nameof(mainMenu));
+            if (mainMenu == null)
+                throw new ArgumentNullException(nameof(mainMenu));
 
             MainForm = mainForm;
-	        _messageCollector = messageCollector;
-	        _quickConnectToolStrip = quickConnectToolStrip;
-	        _externalToolsToolStrip = externalToolsToolStrip;
-		    _multiSshToolStrip = multiSshToolStrip;
-		    _mainMenu = mainMenu;
-		    _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip);
+            _messageCollector = messageCollector;
+            _quickConnectToolStrip = quickConnectToolStrip;
+            _externalToolsToolStrip = externalToolsToolStrip;
+            _multiSshToolStrip = multiSshToolStrip;
+            _mainMenu = mainMenu;
+            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip);
         }
-        
+
         #region Public Methods
+
         public void LoadSettings()
-		{
-			try
-			{
+        {
+            try
+            {
                 EnsureSettingsAreSavedInNewestVersion();
 
-                SetSupportedCulture(); 
+                SetSupportedCulture();
                 SetApplicationWindowPositionAndSize();
                 SetKioskMode();
 
                 SetPuttyPath();
                 SetShowSystemTrayIcon();
                 SetAutoSave();
-				LoadExternalAppsFromXml();
+                LoadExternalAppsFromXml();
                 SetAlwaysShowPanelTabs();
-						
-				if (mRemoteNG.Settings.Default.ResetToolbars)
+
+                if (mRemoteNG.Settings.Default.ResetToolbars)
                     SetToolbarsDefault();
-				else
+                else
                     LoadToolbarsFromSettings();
-			}
-			catch (Exception ex)
-			{
+            }
+            catch (Exception ex)
+            {
                 _messageCollector.AddExceptionMessage("Loading settings failed", ex);
-			}
-		}
+            }
+        }
 
         private static void SetAlwaysShowPanelTabs()
         {
@@ -91,14 +91,15 @@ namespace mRemoteNG.Config.Settings
                 FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
- 
 
         private void SetSupportedCulture()
         {
             if (mRemoteNG.Settings.Default.OverrideUICulture == "" ||
                 !SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture)) return;
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(mRemoteNG.Settings.Default.OverrideUICulture);
-            _messageCollector.AddMessage(MessageClass.InformationMsg, $"Override Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}", true);
+            _messageCollector.AddMessage(MessageClass.InformationMsg,
+                                         $"Override Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}",
+                                         true);
         }
 
         private void SetApplicationWindowPositionAndSize()
@@ -163,7 +164,9 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetPuttyPath()
         {
-            PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
+            PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath
+                ? mRemoteNG.Settings.Default.CustomPuttyPath
+                : GeneralAppInfo.PuttyPath;
         }
 
         private void EnsureSettingsAreSavedInNewestVersion()
@@ -183,6 +186,7 @@ namespace mRemoteNG.Config.Settings
             {
                 _messageCollector.AddExceptionMessage("Settings.Upgrade() failed", ex);
             }
+
             mRemoteNG.Settings.Default.DoUpgrade = false;
 
             // Clear pending update flag
@@ -191,21 +195,21 @@ namespace mRemoteNG.Config.Settings
             mRemoteNG.Settings.Default.UpdatePending = false;
         }
 
-	    private void SetToolbarsDefault()
-		{
-			ToolStripPanelFromString("top").Join(_quickConnectToolStrip, new Point(300, 0));
+        private void SetToolbarsDefault()
+        {
+            ToolStripPanelFromString("top").Join(_quickConnectToolStrip, new Point(300, 0));
             _quickConnectToolStrip.Visible = true;
-			ToolStripPanelFromString("bottom").Join(_externalToolsToolStrip, new Point(3, 0));
+            ToolStripPanelFromString("bottom").Join(_externalToolsToolStrip, new Point(3, 0));
             _externalToolsToolStrip.Visible = false;
-		}
+        }
 
-	    private void LoadToolbarsFromSettings()
-		{
+        private void LoadToolbarsFromSettings()
+        {
             ResetAllToolbarLocations();
-		    AddMainMenuPanel();
+            AddMainMenuPanel();
             AddExternalAppsPanel();
-		    AddQuickConnectPanel();
-		    AddMultiSshPanel();
+            AddQuickConnectPanel();
+            AddMultiSshPanel();
         }
 
         /// <summary>
@@ -213,74 +217,75 @@ namespace mRemoteNG.Config.Settings
         /// Since all toolbars start in this temp panel, no toolbar load
         /// can be blocked by pre-existing toolbars.
         /// </summary>
-	    private void ResetAllToolbarLocations()
-	    {
-	        var tempToolStrip = new ToolStripPanel();
+        private void ResetAllToolbarLocations()
+        {
+            var tempToolStrip = new ToolStripPanel();
             tempToolStrip.Join(_mainMenu);
-	        tempToolStrip.Join(_quickConnectToolStrip);
-	        tempToolStrip.Join(_externalToolsToolStrip);
-	        tempToolStrip.Join(_multiSshToolStrip);
+            tempToolStrip.Join(_quickConnectToolStrip);
+            tempToolStrip.Join(_externalToolsToolStrip);
+            tempToolStrip.Join(_multiSshToolStrip);
         }
 
-	    private void AddMainMenuPanel()
-	    {
-	        SetToolstripGripStyle(_mainMenu);
+        private void AddMainMenuPanel()
+        {
+            SetToolstripGripStyle(_mainMenu);
             var toolStripPanel = ToolStripPanelFromString("top");
-	        toolStripPanel.Join(_mainMenu, new Point(3, 0));
+            toolStripPanel.Join(_mainMenu, new Point(3, 0));
         }
 
-		private void AddQuickConnectPanel()
-		{
-		    SetToolstripGripStyle(_quickConnectToolStrip);
+        private void AddQuickConnectPanel()
+        {
+            SetToolstripGripStyle(_quickConnectToolStrip);
             _quickConnectToolStrip.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
             var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock);
             toolStripPanel.Join(_quickConnectToolStrip, mRemoteNG.Settings.Default.QuickyTBLocation);
-		}
-		
-		private void AddExternalAppsPanel()
-		{
-		    SetToolstripGripStyle(_externalToolsToolStrip);
+        }
+
+        private void AddExternalAppsPanel()
+        {
+            SetToolstripGripStyle(_externalToolsToolStrip);
             _externalToolsToolStrip.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
             var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock);
             toolStripPanel.Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
-		}
+        }
 
-	    private void AddMultiSshPanel()
-	    {
-	        SetToolstripGripStyle(_multiSshToolStrip);
-	        _multiSshToolStrip.Visible = mRemoteNG.Settings.Default.MultiSshToolbarVisible;
+        private void AddMultiSshPanel()
+        {
+            SetToolstripGripStyle(_multiSshToolStrip);
+            _multiSshToolStrip.Visible = mRemoteNG.Settings.Default.MultiSshToolbarVisible;
             var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.MultiSshToolbarParentDock);
             toolStripPanel.Join(_multiSshToolStrip, mRemoteNG.Settings.Default.MultiSshToolbarLocation);
-	    }
-
-	    private void SetToolstripGripStyle(ToolStrip toolbar)
-	    {
-	        toolbar.GripStyle = mRemoteNG.Settings.Default.LockToolbars
-	            ? ToolStripGripStyle.Hidden
-	            : ToolStripGripStyle.Visible;
         }
-		
-		private ToolStripPanel ToolStripPanelFromString(string panel)
-		{
-			switch (panel.ToLower())
-			{
-				case "top":
-					return MainForm.tsContainer.TopToolStripPanel;
-				case "bottom":
-					return MainForm.tsContainer.BottomToolStripPanel;
-				case "left":
-					return MainForm.tsContainer.LeftToolStripPanel;
-				case "right":
-					return MainForm.tsContainer.RightToolStripPanel;
-				default:
-					return MainForm.tsContainer.TopToolStripPanel;
-			}
-		}
 
-	    private void LoadExternalAppsFromXml()
-		{
+        private void SetToolstripGripStyle(ToolStrip toolbar)
+        {
+            toolbar.GripStyle = mRemoteNG.Settings.Default.LockToolbars
+                ? ToolStripGripStyle.Hidden
+                : ToolStripGripStyle.Visible;
+        }
+
+        private ToolStripPanel ToolStripPanelFromString(string panel)
+        {
+            switch (panel.ToLower())
+            {
+                case "top":
+                    return MainForm.tsContainer.TopToolStripPanel;
+                case "bottom":
+                    return MainForm.tsContainer.BottomToolStripPanel;
+                case "left":
+                    return MainForm.tsContainer.LeftToolStripPanel;
+                case "right":
+                    return MainForm.tsContainer.RightToolStripPanel;
+                default:
+                    return MainForm.tsContainer.TopToolStripPanel;
+            }
+        }
+
+        private void LoadExternalAppsFromXml()
+        {
             _externalAppsLoader.LoadExternalAppsFromXML();
         }
+
         #endregion
-	}
+    }
 }

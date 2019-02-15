@@ -5,16 +5,18 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-	public class UltraVNCWindow : BaseWindow
-	{
+    public class UltraVNCWindow : BaseWindow
+    {
         #region Form Init
-		internal System.Windows.Forms.ToolStrip tsMain;
-		internal System.Windows.Forms.Panel pnlContainer;
-		internal System.Windows.Forms.ToolStripButton btnDisconnect;
-				
-		private void InitializeComponent()
-		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UltraVNCWindow));
+
+        internal System.Windows.Forms.ToolStrip tsMain;
+        internal System.Windows.Forms.Panel pnlContainer;
+        internal System.Windows.Forms.ToolStripButton btnDisconnect;
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources =
+                new System.ComponentModel.ComponentResourceManager(typeof(UltraVNCWindow));
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.btnDisconnect = new System.Windows.Forms.ToolStripButton();
             this.pnlContainer = new System.Windows.Forms.Panel();
@@ -24,8 +26,10 @@ namespace mRemoteNG.UI.Window
             // tsMain
             // 
             this.tsMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnDisconnect});
+            this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[]
+            {
+                this.btnDisconnect
+            });
             this.tsMain.Location = new System.Drawing.Point(0, 0);
             this.tsMain.Name = "tsMain";
             this.tsMain.Size = new System.Drawing.Size(446, 25);
@@ -44,9 +48,11 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlContainer
             // 
-            this.pnlContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlContainer.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Bottom)
+                                                     | System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlContainer.Location = new System.Drawing.Point(0, 27);
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(446, 335);
@@ -59,7 +65,8 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(446, 362);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.tsMain);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::mRemoteNG.Resources.UVNC_SC_Icon;
             this.Name = "UltraVNCWindow";
             this.TabText = "UltraVNC SC";
@@ -69,63 +76,70 @@ namespace mRemoteNG.UI.Window
             this.tsMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+        }
 
-		}
         #endregion
-		
+
         #region Declarations
-		//Private WithEvents vnc As AxCSC_ViewerXControl
+
+        //Private WithEvents vnc As AxCSC_ViewerXControl
+
         #endregion
-		
+
         #region Public Methods
-		public UltraVNCWindow()
-		{
-			this.WindowType = WindowType.UltraVNCSC;
-			this.DockPnl = new DockContent();
-			this.InitializeComponent();
-		}
+
+        public UltraVNCWindow()
+        {
+            this.WindowType = WindowType.UltraVNCSC;
+            this.DockPnl = new DockContent();
+            this.InitializeComponent();
+        }
+
         #endregion
-		
+
         #region Private Methods
-		private void UltraVNCSC_Load(object sender, System.EventArgs e)
-		{
-			ApplyLanguage();
-					
-			StartListening();
-		}
-				
-		private void ApplyLanguage()
-		{
-			btnDisconnect.Text = Language.strButtonDisconnect;
-		}
-				
-		private void StartListening()
-		{
-			try
-			{
-				//If vnc IsNot Nothing Then
-				//    vnc.Dispose()
-				//    vnc = Nothing
-				//End If
-						
-				//vnc = New AxCSC_ViewerXControl()
-				//SetupLicense()
-						
-				//vnc.Parent = pnlContainer
-				//vnc.Dock = DockStyle.Fill
-				//vnc.Show()
-						
-				//vnc.StretchMode = ViewerX.ScreenStretchMode.SSM_ASPECT
-				//vnc.ListeningText = Language.strInheritListeningForIncomingVNCConnections & " " & Settings.UVNCSCPort
-						
-				//vnc.ListenEx(Settings.UVNCSCPort)
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" + Environment.NewLine + ex.Message);
-				Close();
-			}
-		}
+
+        private void UltraVNCSC_Load(object sender, System.EventArgs e)
+        {
+            ApplyLanguage();
+
+            StartListening();
+        }
+
+        private void ApplyLanguage()
+        {
+            btnDisconnect.Text = Language.strButtonDisconnect;
+        }
+
+        private void StartListening()
+        {
+            try
+            {
+                //If vnc IsNot Nothing Then
+                //    vnc.Dispose()
+                //    vnc = Nothing
+                //End If
+
+                //vnc = New AxCSC_ViewerXControl()
+                //SetupLicense()
+
+                //vnc.Parent = pnlContainer
+                //vnc.Dock = DockStyle.Fill
+                //vnc.Show()
+
+                //vnc.StretchMode = ViewerX.ScreenStretchMode.SSM_ASPECT
+                //vnc.ListeningText = Language.strInheritListeningForIncomingVNCConnections & " " & Settings.UVNCSCPort
+
+                //vnc.ListenEx(Settings.UVNCSCPort)
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                                                    "StartListening (UI.Window.UltraVNCSC) failed" +
+                                                    Environment.NewLine + ex.Message);
+                Close();
+            }
+        }
 
 #if false
         private void SetupLicense()
@@ -142,21 +156,22 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 #endif
-               
-		//Private Sub vnc_ConnectionAccepted(ByVal sender As Object, ByVal e As AxViewerX._ISmartCodeVNCViewerEvents_ConnectionAcceptedEvent) Handles vnc.ConnectionAccepted
-		//    mC.AddMessage(Messages.MessageClass.InformationMsg, e.bstrServerAddress & " is now connected to your UltraVNC SingleClick panel!")
-		//End Sub
-				
-		//Private Sub vnc_Disconnected(ByVal sender As Object, ByVal e As System.EventArgs) Handles vnc.Disconnected
-		//    StartListening()
-		//End Sub
-				
-		private void btnDisconnect_Click(object sender, EventArgs e)
-		{
-			//vnc.Dispose()
-			Dispose();
-			Windows.Show(WindowType.UltraVNCSC);
-		}
-#endregion
-	}
+
+        //Private Sub vnc_ConnectionAccepted(ByVal sender As Object, ByVal e As AxViewerX._ISmartCodeVNCViewerEvents_ConnectionAcceptedEvent) Handles vnc.ConnectionAccepted
+        //    mC.AddMessage(Messages.MessageClass.InformationMsg, e.bstrServerAddress & " is now connected to your UltraVNC SingleClick panel!")
+        //End Sub
+
+        //Private Sub vnc_Disconnected(ByVal sender As Object, ByVal e As System.EventArgs) Handles vnc.Disconnected
+        //    StartListening()
+        //End Sub
+
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            //vnc.Dispose()
+            Dispose();
+            Windows.Show(WindowType.UltraVNCSC);
+        }
+
+        #endregion
+    }
 }

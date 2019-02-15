@@ -6,50 +6,59 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Forms
 {
-	public class TextBox : Controls.Base.NGTextBox
-	{
+    public class TextBox : Controls.Base.NGTextBox
+    {
         #region Public Properties
-		[Category("Behavior"),
-			DefaultValue(false)]private bool _SelectAllOnFocus;
+
+        [Category("Behavior"),
+         DefaultValue(false)]
+        private bool _SelectAllOnFocus;
+
         public bool SelectAllOnFocus
-		{
-			get => _SelectAllOnFocus;
+        {
+            get => _SelectAllOnFocus;
             set => _SelectAllOnFocus = value;
         }
+
         #endregion
-			
+
         #region Protected Methods
-		protected override void OnEnter(EventArgs e)
-		{
-			base.OnEnter(e);
+
+        protected override void OnEnter(EventArgs e)
+        {
+            base.OnEnter(e);
 
             if (MouseButtons != MouseButtons.None) return;
             SelectAll();
             _focusHandled = true;
         }
-			
-		protected override void OnLeave(EventArgs e)
-		{
-			base.OnLeave(e);
-				
-			_focusHandled = false;
-		}
-			
-		protected override void OnMouseUp(MouseEventArgs e)
-		{
-			base.OnMouseUp(e);
+
+        protected override void OnLeave(EventArgs e)
+        {
+            base.OnLeave(e);
+
+            _focusHandled = false;
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
 
             if (_focusHandled) return;
             if (SelectionLength == 0)
             {
                 SelectAll();
             }
+
             _focusHandled = true;
         }
+
         #endregion
-			
+
         #region Private Fields
-		private bool _focusHandled;
+
+        private bool _focusHandled;
+
         #endregion
 
         private void InitializeComponent()
@@ -58,9 +67,9 @@ namespace mRemoteNG.UI.Forms
             // 
             // TextBox
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResumeLayout(false);
-
         }
     }
 }

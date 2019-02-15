@@ -22,6 +22,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         }
 
         #region Public Methods
+
         public override string PageName
         {
             get => Language.strTabAdvanced;
@@ -70,19 +71,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 puttyPathChanged = true;
                 Settings.Default.CustomPuttyPath = txtCustomPuttyPath.Text;
             }
+
             if (Settings.Default.UseCustomPuttyPath != chkUseCustomPuttyPath.Checked)
             {
                 puttyPathChanged = true;
                 Settings.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
             }
+
             if (puttyPathChanged)
             {
-                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath ? Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
+                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath
+                    ? Settings.Default.CustomPuttyPath
+                    : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
             }
 
-            Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
-            Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
+            Settings.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
+            Settings.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
         }
 
         #endregion
@@ -155,7 +160,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
-
         }
 
         #endregion

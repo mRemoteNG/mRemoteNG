@@ -14,7 +14,9 @@ namespace mRemoteNG.Security.Authentication
         public int MaxAttempts { get; set; } = 3;
         public SecureString LastAuthenticatedPassword { get; private set; }
 
-        public PasswordAuthenticator(ICryptographyProvider cryptographyProvider, string cipherText, Func<Optional<SecureString>> authenticationRequestor)
+        public PasswordAuthenticator(ICryptographyProvider cryptographyProvider,
+                                     string cipherText,
+                                     Func<Optional<SecureString>> authenticationRequestor)
         {
             _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
             _cipherText = cipherText.ThrowIfNullOrEmpty(nameof(cipherText));
@@ -42,8 +44,10 @@ namespace mRemoteNG.Security.Authentication
                     password = providedPassword.First();
                     if (password == null || password.Length == 0) break;
                 }
+
                 attempts++;
             }
+
             return authenticated;
         }
     }

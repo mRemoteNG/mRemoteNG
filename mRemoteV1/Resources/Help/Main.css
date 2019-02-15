@@ -1,19 +1,16 @@
 ﻿/* COMMON STUFF */
-body
-{
-	background-color: #FFFFFF;
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	font-size: 0.75em;
-	color: #333333;
+body {
+    background-color: #FFFFFF;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.75em;
+    color: #333333;
 }
 
-img {
-	border: none;
-}
+img { border: none; }
 
 hr {
     display: block;
@@ -25,75 +22,73 @@ hr {
 }
 
 /* HEADINGS */
+
 h1 {
-	font-size: 2.0em;
-	color: #000000;
+    font-size: 2.0em;
+    color: #000000;
 }
 
 h2 {
-	font-size: 1.5em;
-	color: #000000;
+    font-size: 1.5em;
+    color: #000000;
 }
 
 h3 {
-	font-size: 1.17em;
-	color: #000000;
+    font-size: 1.17em;
+    color: #000000;
 }
 
 h4 {
-	font-size: 1em;
-	color: #000000;
+    font-size: 1em;
+    color: #000000;
 }
 
 h5 {
-	font-size: .83em;
-	color: #000000;
+    font-size: .83em;
+    color: #000000;
 }
 
 /* LINKS */
-a:link
-{
-	color: #5d6b70;
-	text-decoration: none;
+
+a:link {
+    color: #5d6b70;
+    text-decoration: none;
 }
 
-a:visited
-{
-	color: #5d6b70;
-	text-decoration: none;
+a:visited {
+    color: #5d6b70;
+    text-decoration: none;
 }
 
-a:hover
-{
-	color: Black;
-	text-decoration: underline;
+a:hover {
+    color: Black;
+    text-decoration: underline;
 }
 
 /* TABLES */
+
 table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
 }
 
 td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
 
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
+tr:nth-child(even) { background-color: #f2f2f2; }
 
 
 /* MISC STYLES */
-.Code
-{
-	padding-right: 5px;
-	padding-left: 5px;
-	color: #000000;
-	font-family: 'Courier New' , Monospace;
-	background-color: #C1C1C1;
+
+.Code {
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #000000;
+    font-family: 'Courier New', Monospace;
+    background-color: #C1C1C1;
 }
 
 .monospace {
@@ -101,27 +96,28 @@ tr:nth-child(even) {
     font-family: 'Courier New', monospace;
 }
 
-.nowrap {
-    white-space: nowrap
-}
+.nowrap { white-space: nowrap }
 
 .isa_info, .isa_success, .isa_warning, .isa_error {
     margin: 10px 0px;
-    padding:12px;
-
+    padding: 12px;
 }
+
 .isa_info {
     color: #00529B;
     background-color: #BDE5F8;
 }
+
 .isa_success {
     color: #4F8A10;
     background-color: #DFF2BF;
 }
+
 .isa_warning {
     color: #9F6000;
     background-color: #FEEFB3;
 }
+
 .isa_error {
     color: #D8000C;
     background-color: #FFD2D2;

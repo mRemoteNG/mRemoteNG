@@ -78,7 +78,8 @@ namespace mRemoteNG.Tools
 
 			    var windowHandle = DisplayParentForm?.Handle ?? IntPtr.Zero;
 					
-				_trustProviderErrorCode = NativeMethods.WinVerifyTrust(windowHandle, NativeMethods.WINTRUST_ACTION_GENERIC_VERIFY_V2, trustDataPointer);
+				_trustProviderErrorCode =
+ NativeMethods.WinVerifyTrust(windowHandle, NativeMethods.WINTRUST_ACTION_GENERIC_VERIFY_V2, trustDataPointer);
 			    // ReSharper disable once SwitchStatementMissingSomeCases
 				switch (_trustProviderErrorCode)
 				{
@@ -103,7 +104,8 @@ namespace mRemoteNG.Tools
 
 			    if (ex is CryptographicException)
 			    {
-			        var hResultProperty = ex.GetType().GetProperty("HResult", BindingFlags.NonPublic | BindingFlags.Instance);
+			        var hResultProperty =
+ ex.GetType().GetProperty("HResult", BindingFlags.NonPublic | BindingFlags.Instance);
 			        if (hResultProperty != null)
 			        {
 			            var hResult = Convert.ToInt32(hResultProperty.GetValue(ex, null));
@@ -270,7 +272,8 @@ namespace mRemoteNG.Tools
 			public const int TRUST_E_SUBJECT_NOT_TRUSTED = unchecked ((int) 0x800B0004);
 			public const int TRUST_E_NOSIGNATURE = unchecked ((int) 0x800B0100);
 				
-			public static readonly Guid WINTRUST_ACTION_GENERIC_VERIFY_V2 = new Guid("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}");
+			public static readonly Guid WINTRUST_ACTION_GENERIC_VERIFY_V2 =
+ new Guid("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}");
 				
 			public const uint WTD_CHOICE_FILE = 1;
 			public const uint WTD_DISABLE_MD2_MD4 = 0x2000;

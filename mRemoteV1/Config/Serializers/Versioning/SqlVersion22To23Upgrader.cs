@@ -25,7 +25,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public Version Upgrade()
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.2 to version 2.3.");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                "Upgrading database from version 2.2 to version 2.3.");
             const string sqlText = @"
 ALTER TABLE tblCons
 ADD EnableFontSmoothing bit NOT NULL DEFAULT 0,

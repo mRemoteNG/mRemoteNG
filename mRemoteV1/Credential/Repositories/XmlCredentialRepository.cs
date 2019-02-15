@@ -17,7 +17,9 @@ namespace mRemoteNG.Credential.Repositories
         public IList<ICredentialRecord> CredentialRecords { get; }
         public bool IsLoaded { get; private set; }
 
-        public XmlCredentialRepository(ICredentialRepositoryConfig config, CredentialRecordSaver credentialRecordSaver, CredentialRecordLoader credentialRecordLoader)
+        public XmlCredentialRepository(ICredentialRepositoryConfig config,
+                                       CredentialRecordSaver credentialRecordSaver,
+                                       CredentialRecordLoader credentialRecordLoader)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
@@ -28,7 +30,8 @@ namespace mRemoteNG.Credential.Repositories
 
             Config = config;
             CredentialRecords = new FullyObservableCollection<ICredentialRecord>();
-            ((FullyObservableCollection<ICredentialRecord>) CredentialRecords).CollectionUpdated += RaiseCredentialsUpdatedEvent;
+            ((FullyObservableCollection<ICredentialRecord>)CredentialRecords).CollectionUpdated +=
+                RaiseCredentialsUpdatedEvent;
             Config.PropertyChanged += (sender, args) => RaiseRepositoryConfigUpdatedEvent(args);
             _credentialRecordSaver = credentialRecordSaver;
             _credentialRecordLoader = credentialRecordLoader;
@@ -42,6 +45,7 @@ namespace mRemoteNG.Credential.Repositories
                 if (ThisIsADuplicateCredentialRecord(newCredential)) continue;
                 CredentialRecords.Add(newCredential);
             }
+
             IsLoaded = true;
             Config.Key = key;
         }
@@ -71,7 +75,8 @@ namespace mRemoteNG.Credential.Repositories
             RepositoryConfigUpdated?.Invoke(this, args);
         }
 
-        protected virtual void RaiseCredentialsUpdatedEvent(object sender, CollectionUpdatedEventArgs<ICredentialRecord> args)
+        protected virtual void RaiseCredentialsUpdatedEvent(object sender,
+                                                            CollectionUpdatedEventArgs<ICredentialRecord> args)
         {
             CredentialsUpdated?.Invoke(this, args);
         }

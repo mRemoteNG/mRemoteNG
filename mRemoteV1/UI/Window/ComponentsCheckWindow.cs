@@ -15,12 +15,13 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-	public class ComponentsCheckWindow : BaseWindow
-	{
-	    private readonly Image _successImage;
-	    private readonly Image _failureImage;
+    public class ComponentsCheckWindow : BaseWindow
+    {
+        private readonly Image _successImage;
+        private readonly Image _failureImage;
 
         #region Form Stuff
+
         private System.Windows.Forms.PictureBox pbCheck1;
         private Controls.Base.NGLabel lblCheck1;
         private System.Windows.Forms.Panel pnlCheck2;
@@ -85,8 +86,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck1
             // 
-            this.pnlCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCheck1.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck1.Controls.Add(this.txtCheck1);
             this.pnlCheck1.Controls.Add(this.lblCheck1);
             this.pnlCheck1.Controls.Add(this.pbCheck1);
@@ -98,9 +101,11 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck1
             // 
-            this.txtCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCheck1.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Bottom)
+                                                     | System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck1.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCheck1.Location = new System.Drawing.Point(129, 29);
@@ -112,9 +117,12 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck1
             // 
-            this.lblCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCheck1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheck1.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheck1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold,
+                                                          System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblCheck1.Location = new System.Drawing.Point(108, 3);
             this.lblCheck1.Name = "lblCheck1";
@@ -124,8 +132,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck1
             // 
-            this.pbCheck1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbCheck1.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Bottom)
+                                                    | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck1.Location = new System.Drawing.Point(3, 3);
             this.pbCheck1.Name = "pbCheck1";
             this.pbCheck1.Size = new System.Drawing.Size(72, 123);
@@ -134,8 +144,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck2
             // 
-            this.pnlCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCheck2.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck2.Controls.Add(this.txtCheck2);
             this.pnlCheck2.Controls.Add(this.lblCheck2);
             this.pnlCheck2.Controls.Add(this.pbCheck2);
@@ -147,9 +159,11 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck2
             // 
-            this.txtCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCheck2.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Bottom)
+                                                     | System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck2.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCheck2.Location = new System.Drawing.Point(129, 29);
@@ -161,9 +175,12 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck2
             // 
-            this.lblCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCheck2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheck2.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheck2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold,
+                                                          System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck2.Location = new System.Drawing.Point(112, 3);
             this.lblCheck2.Name = "lblCheck2";
             this.lblCheck2.Size = new System.Drawing.Size(447, 23);
@@ -172,8 +189,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck2
             // 
-            this.pbCheck2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbCheck2.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Bottom)
+                                                    | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck2.Location = new System.Drawing.Point(3, 3);
             this.pbCheck2.Name = "pbCheck2";
             this.pbCheck2.Size = new System.Drawing.Size(72, 123);
@@ -182,8 +201,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck3
             // 
-            this.pnlCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCheck3.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck3.Controls.Add(this.txtCheck3);
             this.pnlCheck3.Controls.Add(this.lblCheck3);
             this.pnlCheck3.Controls.Add(this.pbCheck3);
@@ -195,9 +216,11 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck3
             // 
-            this.txtCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCheck3.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Bottom)
+                                                     | System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck3.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCheck3.Location = new System.Drawing.Point(129, 29);
@@ -209,9 +232,12 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck3
             // 
-            this.lblCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCheck3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheck3.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheck3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold,
+                                                          System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck3.Location = new System.Drawing.Point(112, 3);
             this.lblCheck3.Name = "lblCheck3";
             this.lblCheck3.Size = new System.Drawing.Size(447, 23);
@@ -220,8 +246,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck3
             // 
-            this.pbCheck3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbCheck3.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Bottom)
+                                                    | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck3.Location = new System.Drawing.Point(3, 3);
             this.pbCheck3.Name = "pbCheck3";
             this.pbCheck3.Size = new System.Drawing.Size(72, 123);
@@ -230,8 +258,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck4
             // 
-            this.pnlCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCheck4.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck4.Controls.Add(this.txtCheck4);
             this.pnlCheck4.Controls.Add(this.lblCheck4);
             this.pnlCheck4.Controls.Add(this.pbCheck4);
@@ -243,9 +273,11 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck4
             // 
-            this.txtCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCheck4.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Bottom)
+                                                     | System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck4.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCheck4.Location = new System.Drawing.Point(129, 30);
@@ -257,9 +289,12 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck4
             // 
-            this.lblCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCheck4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheck4.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheck4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold,
+                                                          System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck4.Location = new System.Drawing.Point(112, 3);
             this.lblCheck4.Name = "lblCheck4";
             this.lblCheck4.Size = new System.Drawing.Size(447, 23);
@@ -268,8 +303,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck4
             // 
-            this.pbCheck4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbCheck4.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Bottom)
+                                                    | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck4.Location = new System.Drawing.Point(3, 3);
             this.pbCheck4.Name = "pbCheck4";
             this.pbCheck4.Size = new System.Drawing.Size(72, 123);
@@ -278,8 +315,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlCheck5
             // 
-            this.pnlCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCheck5.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheck5.Controls.Add(this.txtCheck5);
             this.pnlCheck5.Controls.Add(this.lblCheck5);
             this.pnlCheck5.Controls.Add(this.pbCheck5);
@@ -291,9 +330,11 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCheck5
             // 
-            this.txtCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCheck5.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Bottom)
+                                                     | System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheck5.BackColor = System.Drawing.SystemColors.Control;
             this.txtCheck5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCheck5.Location = new System.Drawing.Point(129, 29);
@@ -305,9 +346,12 @@ namespace mRemoteNG.UI.Window
             // 
             // lblCheck5
             // 
-            this.lblCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCheck5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheck5.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheck5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold,
+                                                          System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheck5.Location = new System.Drawing.Point(112, 3);
             this.lblCheck5.Name = "lblCheck5";
             this.lblCheck5.Size = new System.Drawing.Size(447, 23);
@@ -316,8 +360,10 @@ namespace mRemoteNG.UI.Window
             // 
             // pbCheck5
             // 
-            this.pbCheck5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbCheck5.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Bottom)
+                                                    | System.Windows.Forms.AnchorStyles.Left)));
             this.pbCheck5.Location = new System.Drawing.Point(3, 3);
             this.pbCheck5.Name = "pbCheck5";
             this.pbCheck5.Size = new System.Drawing.Size(72, 123);
@@ -327,7 +373,9 @@ namespace mRemoteNG.UI.Window
             // btnCheckAgain
             // 
             this.btnCheckAgain._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnCheckAgain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheckAgain.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom |
+                                                      System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheckAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckAgain.Location = new System.Drawing.Point(476, 810);
             this.btnCheckAgain.Name = "btnCheckAgain";
@@ -340,7 +388,9 @@ namespace mRemoteNG.UI.Window
             // chkAlwaysShow
             // 
             this.chkAlwaysShow._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
-            this.chkAlwaysShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkAlwaysShow.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom |
+                                                      System.Windows.Forms.AnchorStyles.Left)));
             this.chkAlwaysShow.AutoSize = true;
             this.chkAlwaysShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAlwaysShow.Location = new System.Drawing.Point(12, 814);
@@ -353,9 +403,11 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlChecks
             // 
-            this.pnlChecks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlChecks.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Bottom)
+                                                     | System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChecks.AutoScroll = true;
             this.pnlChecks.Controls.Add(this.pnlCheck1);
             this.pnlChecks.Controls.Add(this.pnlCheck2);
@@ -375,7 +427,8 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.pnlChecks);
             this.Controls.Add(this.chkAlwaysShow);
             this.Controls.Add(this.btnCheckAgain);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::mRemoteNG.Resources.ComponentsCheck_Icon;
             this.Name = "ComponentsCheckWindow";
             this.TabText = "Components Check";
@@ -399,11 +452,12 @@ namespace mRemoteNG.UI.Window
             this.pnlChecks.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
         #endregion
 
         #region Public Methods
+
         public ComponentsCheckWindow()
         {
             WindowType = WindowType.ComponentsCheck;
@@ -415,9 +469,11 @@ namespace mRemoteNG.UI.Window
             FontOverrider.FontOverride(this);
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
+
         #endregion
 
         #region Form Stuff
+
         private void ComponentsCheck_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
@@ -468,7 +524,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to show the components window", true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to show the components window",
+                                                    true);
                 base.Show(panel);
             }
             catch (Exception ex)
@@ -476,6 +533,7 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector.AddExceptionMessage("Failed to properly show the ComponentsWindow", ex);
             }
         }
+
         #endregion
 
         private void CheckComponents()
@@ -508,7 +566,7 @@ namespace mRemoteNG.UI.Window
                     if (!(new Version(rdpClient.Version) >= RdpProtocol.Versions.RDC80))
                     {
                         throw new Exception(
-                            $"Found RDC Client version {rdpClient.Version} but version {RdpProtocol.Versions.RDC80} or higher is required.");
+                                            $"Found RDC Client version {rdpClient.Version} but version {RdpProtocol.Versions.RDC80} or higher is required.");
                     }
 
                     pbCheck1.Image = _successImage;
@@ -526,7 +584,7 @@ namespace mRemoteNG.UI.Window
                 txtCheck1.Text = string.Format(Language.strCcRDPFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                    "RDP " + Language.strCcNotInstalledProperly, true);
+                                                    "RDP " + Language.strCcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
             }
         }
@@ -562,7 +620,7 @@ namespace mRemoteNG.UI.Window
                 txtCheck2.Text = string.Format(Language.strCcVNCFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                    "VNC " + Language.strCcNotInstalledProperly, true);
+                                                    "VNC " + Language.strCcNotInstalledProperly, true);
             }
         }
 
@@ -598,9 +656,9 @@ namespace mRemoteNG.UI.Window
                 txtCheck3.Text = Language.strCcPuttyFailed;
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                    "PuTTY " + Language.strCcNotInstalledProperly, true);
+                                                    "PuTTY " + Language.strCcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "File " + pPath + " does not exist.",
-                    true);
+                                                    true);
             }
         }
 
@@ -628,7 +686,8 @@ namespace mRemoteNG.UI.Window
                 lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckFailed;
                 txtCheck4.Text = string.Format(Language.strCcICAFailed, GeneralAppInfo.UrlForum);
 
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "ICA " + Language.strCcNotInstalledProperly, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "ICA " + Language.strCcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
             }
         }
@@ -672,9 +731,9 @@ namespace mRemoteNG.UI.Window
                 txtCheck5.Text = string.Format(Language.strCcGeckoFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                    "Gecko " + Language.strCcNotInstalledProperly, true);
+                                                    "Gecko " + Language.strCcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                    "GeckoFx was not found in " + geckoFxPath, true);
+                                                    "GeckoFx was not found in " + geckoFxPath, true);
             }
         }
     }

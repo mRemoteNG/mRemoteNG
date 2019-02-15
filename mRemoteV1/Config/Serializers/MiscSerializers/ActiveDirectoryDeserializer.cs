@@ -55,7 +55,7 @@ namespace mRemoteNG.Config.Serializers
                     ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
                     ldapSearcher.Filter = ldapFilter;
                     ldapSearcher.SearchScope = SearchScope.OneLevel;
-                    ldapSearcher.PropertiesToLoad.AddRange(new[] { "securityEquals", "cn", "objectClass" });
+                    ldapSearcher.PropertiesToLoad.AddRange(new[] {"securityEquals", "cn", "objectClass"});
 
                     var ldapResults = ldapSearcher.FindAll();
                     foreach (SearchResult ldapResult in ldapResults)
@@ -65,7 +65,7 @@ namespace mRemoteNG.Config.Serializers
                             if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
                             {
                                 // check/continue here so we don't create empty connection objects
-                                if(!_importSubOu) continue;
+                                if (!_importSubOu) continue;
 
                                 // TODO - this is a circular call. A deserializer should not call an importer
                                 ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer, _importSubOu);
@@ -79,7 +79,8 @@ namespace mRemoteNG.Config.Serializers
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex);
+                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.",
+                                                             ex);
             }
         }
 

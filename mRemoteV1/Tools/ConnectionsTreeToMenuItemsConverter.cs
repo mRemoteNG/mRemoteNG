@@ -10,7 +10,7 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.Tools
 {
-	public class ConnectionsTreeToMenuItemsConverter
+    public class ConnectionsTreeToMenuItemsConverter
     {
         public MouseEventHandler MouseUpEventHandler { get; set; }
 
@@ -32,6 +32,7 @@ namespace mRemoteNG.Tools
             {
                 Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex);
             }
+
             return dropDownList;
         }
 
@@ -69,7 +70,7 @@ namespace mRemoteNG.Tools
                 menuItem.Image = node.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause;
                 menuItem.Tag = node;
             }
-            
+
             menuItem.MouseUp += MouseUpEventHandler;
             return menuItem;
         }

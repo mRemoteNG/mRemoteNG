@@ -9,7 +9,7 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Tools.Cmdline
 {
-	public class StartupArgumentsInterpreter
+    public class StartupArgumentsInterpreter
     {
         private readonly MessageCollector _messageCollector;
 
@@ -46,15 +46,15 @@ namespace mRemoteNG.Tools.Cmdline
         {
             if (args["resetpos"] == null && args["rp"] == null && args["reset"] == null) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg, "Cmdline arg: Resetting window positions.");
-			Settings.Default.MainFormKiosk = false;
-	        var newWidth = 900;
-	        var newHeight = 600;
-	        var newX = Screen.PrimaryScreen.WorkingArea.Width / 2 - newWidth / 2;
-	        var newY = Screen.PrimaryScreen.WorkingArea.Height / 2 - newHeight / 2;
-	        Settings.Default.MainFormLocation = new Point(newX, newY);
-	        Settings.Default.MainFormSize = new Size(newWidth, newHeight);
-	        Settings.Default.MainFormState = FormWindowState.Normal;
-		}
+            Settings.Default.MainFormKiosk = false;
+            var newWidth = 900;
+            var newHeight = 600;
+            var newX = Screen.PrimaryScreen.WorkingArea.Width / 2 - newWidth / 2;
+            var newY = Screen.PrimaryScreen.WorkingArea.Height / 2 - newHeight / 2;
+            Settings.Default.MainFormLocation = new Point(newX, newY);
+            Settings.Default.MainFormSize = new Size(newWidth, newHeight);
+            Settings.Default.MainFormState = FormWindowState.Normal;
+        }
 
         private void ParseResetPanelsArg(CmdArgumentsInterpreter args)
         {
@@ -73,7 +73,8 @@ namespace mRemoteNG.Tools.Cmdline
         private void ParseNoReconnectArg(CmdArgumentsInterpreter args)
         {
             if (args["noreconnect"] == null && args["norc"] == null) return;
-            _messageCollector.AddMessage(MessageClass.DebugMsg, "Cmdline arg: Disabling reconnection to previously connected hosts");
+            _messageCollector.AddMessage(MessageClass.DebugMsg,
+                                         "Cmdline arg: Disabling reconnection to previously connected hosts");
             Settings.Default.NoReconnect = true;
         }
 
@@ -95,9 +96,11 @@ namespace mRemoteNG.Tools.Cmdline
                     Settings.Default.CustomConsPath = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
                     return;
                 }
+
                 if (!File.Exists(Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]))) return;
                 Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath = Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
+                Settings.Default.CustomConsPath =
+                    Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
             }
             else
             {

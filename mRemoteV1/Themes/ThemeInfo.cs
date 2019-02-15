@@ -6,24 +6,29 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Themes
 {
-
     /// <inheritdoc />
     /// <summary>
     /// Container class for all the color and style elements to define a theme
     /// </summary>
-	public class ThemeInfo : ICloneable
+    public class ThemeInfo : ICloneable
     {
         #region Private Variables
+
         private string _name;
         private ThemeBase _theme;
-        private string  _URI;
+        private string _URI;
         private VisualStudioToolStripExtender.VsVersion _version;
         private ExtendedColorPalette _extendedPalette;
 
         #endregion
 
         #region Constructors
-        public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion, ExtendedColorPalette inExtendedPalette)
+
+        public ThemeInfo(string themeName,
+                         ThemeBase inTheme,
+                         string inURI,
+                         VisualStudioToolStripExtender.VsVersion inVersion,
+                         ExtendedColorPalette inExtendedPalette)
         {
             _name = themeName;
             _theme = inTheme;
@@ -33,13 +38,16 @@ namespace mRemoteNG.Themes
             IsThemeBase = false;
             IsExtendable = false;
 
-            if(_extendedPalette != null)
+            if (_extendedPalette != null)
                 IsExtended = true;
 
             setCustomExtenders();
         }
 
-        public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion)
+        public ThemeInfo(string themeName,
+                         ThemeBase inTheme,
+                         string inURI,
+                         VisualStudioToolStripExtender.VsVersion inVersion)
         {
             _name = themeName;
             _theme = inTheme;
@@ -49,11 +57,12 @@ namespace mRemoteNG.Themes
             IsExtendable = false;
             IsExtended = false;
             setCustomExtenders();
-
         }
+
         #endregion
 
         #region Public Methods
+
         public object Clone()
         {
             var extPalette = new ExtendedColorPalette
@@ -75,19 +84,21 @@ namespace mRemoteNG.Themes
 
 
         #region Properties
+
         [Browsable(false)]
         public string Name
-		{
-			get => _name;
+        {
+            get => _name;
             set
-			{
-				if (string.Equals(_name, value, StringComparison.InvariantCulture))
-				{
-					return;
-				}
-				_name = value;
-			}
-		}
+            {
+                if (string.Equals(_name, value, StringComparison.InvariantCulture))
+                {
+                    return;
+                }
+
+                _name = value;
+            }
+        }
 
         public ThemeBase Theme
         {
@@ -98,12 +109,13 @@ namespace mRemoteNG.Themes
                 {
                     return;
                 }
+
                 _theme = value;
                 setCustomExtenders();
             }
         }
 
-        public string  URI
+        public string URI
         {
             get => _URI;
             set
@@ -112,6 +124,7 @@ namespace mRemoteNG.Themes
                 {
                     return;
                 }
+
                 _URI = value;
             }
         }
@@ -125,6 +138,7 @@ namespace mRemoteNG.Themes
                 {
                     return;
                 }
+
                 _version = value;
             }
         }
@@ -138,6 +152,7 @@ namespace mRemoteNG.Themes
                 {
                     return;
                 }
+
                 _extendedPalette = value;
             }
         }

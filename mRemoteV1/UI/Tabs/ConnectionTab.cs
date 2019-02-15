@@ -17,6 +17,7 @@ namespace mRemoteNG.UI.Tabs
         ///Silent close ignores the popup asking for confirmation
         /// </summary>
         public bool silentClose { get; set; }
+
         /// <summary>
         /// Protocol close ignores the interface controller cleanup and the user confirmation dialog
         /// </summary>
@@ -35,17 +36,24 @@ namespace mRemoteNG.UI.Tabs
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if(!protocolClose)
+            if (!protocolClose)
             {
                 if (!silentClose)
                 {
                     if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
                     {
-                        var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName, string.Format(Language.strConfirmCloseConnectionPanelMainInstruction, TabText), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                        var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
+                                                            string
+                                                                .Format(Language.strConfirmCloseConnectionPanelMainInstruction,
+                                                                        TabText), "", "", "",
+                                                            Language.strCheckboxDoNotShowThisMessageAgain,
+                                                            ETaskDialogButtons.YesNo, ESysIcons.Question,
+                                                            ESysIcons.Question);
                         if (CTaskDialog.VerificationChecked)
                         {
                             Settings.Default.ConfirmCloseConnection--;
                         }
+
                         if (result == DialogResult.No)
                         {
                             e.Cancel = true;
@@ -66,11 +74,13 @@ namespace mRemoteNG.UI.Tabs
                     ((InterfaceControl)Tag)?.Protocol.Close();
                 }
             }
+
             base.OnFormClosing(e);
         }
 
 
         #region HelperFunctions  
+
         public void RefreshInterfaceController()
         {
             try
@@ -84,6 +94,7 @@ namespace mRemoteNG.UI.Tabs
                 Runtime.MessageCollector.AddExceptionMessage("RefreshIC (UI.Window.Connection) failed", ex);
             }
         }
+
         #endregion
     }
 }

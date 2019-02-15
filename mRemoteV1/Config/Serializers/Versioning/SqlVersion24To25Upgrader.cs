@@ -25,7 +25,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public Version Upgrade()
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.4 to version 2.5.");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                "Upgrading database from version 2.4 to version 2.5.");
             const string sqlText = @"
 ALTER TABLE tblCons
 ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,

@@ -4,11 +4,12 @@ using System.Windows.Forms;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
-	public class Logger
+    public class Logger
     {
         public static readonly Logger Instance = new Logger();
 
@@ -42,6 +43,7 @@ namespace mRemoteNG.App
                 fileAppender.File = path;
                 fileAppender.ActivateOptions();
             }
+
             Log = LogManager.GetLogger("Logger");
         }
 
@@ -56,7 +58,8 @@ namespace mRemoteNG.App
 
         private static string GetLogPathNormalEdition()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                Application.ProductName);
         }
 
         private static string GetLogPathPortableEdition()

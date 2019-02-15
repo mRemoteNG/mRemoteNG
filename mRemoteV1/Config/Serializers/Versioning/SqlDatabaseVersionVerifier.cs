@@ -36,7 +36,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     new SqlVersion23To24Upgrader(_sqlDatabaseConnector),
                     new SqlVersion24To25Upgrader(_sqlDatabaseConnector),
                     new SqlVersion25To26Upgrader(_sqlDatabaseConnector),
-                    new SqlVersion26To27Upgrader(_sqlDatabaseConnector), 
+                    new SqlVersion26To27Upgrader(_sqlDatabaseConnector),
                 };
 
                 foreach (var upgrader in dbUpgraders)
@@ -52,11 +52,16 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     isVerified = true;
 
                 if (isVerified == false)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProductName));
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                        string.Format(Language.strErrorBadDatabaseVersion,
+                                                                      databaseVersion,
+                                                                      GeneralAppInfo.ProductName));
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorVerifyDatabaseVersionFailed, ex.Message));
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    string.Format(Language.strErrorVerifyDatabaseVersionFailed,
+                                                                  ex.Message));
             }
 
             return isVerified;

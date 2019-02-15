@@ -22,6 +22,7 @@ namespace mRemoteNG.UI.Menu
                 if (_sysMenSubItems[i] != id) continue;
                 return Screen.AllScreens[i];
             }
+
             return null;
         }
 
@@ -43,11 +44,16 @@ namespace mRemoteNG.UI.Menu
             for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
             {
                 _sysMenSubItems[i] = 200 + i;
-                _systemMenu.AppendMenuItem(popMen, SystemMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]), Language.strScreen + " " + Convert.ToString(i + 1));
+                _systemMenu.AppendMenuItem(popMen, SystemMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),
+                                           Language.strScreen + " " + Convert.ToString(i + 1));
             }
 
-            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0, SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
-            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1, SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
+            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0,
+                                       SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen,
+                                       Language.strSendTo);
+            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1,
+                                       SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero,
+                                       null);
         }
     }
 }

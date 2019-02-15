@@ -18,7 +18,5 @@ namespace mRemoteNG.UI.Controls
         {
             SecString = Text.ConvertToSecureString();
         }
-
-    
     }
 }
