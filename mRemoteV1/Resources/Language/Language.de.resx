@@ -944,13 +944,13 @@ Starte mit neuer Datei.</value>
     <value>Löschen</value>
   </data>
   <data name="strMenuDeleteConnection" xml:space="preserve">
-    <value>Verbindung löschen...</value>
+    <value>Verbindung löschen</value>
   </data>
   <data name="strMenuDeleteExternalTool" xml:space="preserve">
     <value>Entfernen</value>
   </data>
   <data name="strMenuDeleteFolder" xml:space="preserve">
-    <value>Ordner löschen...</value>
+    <value>Ordner löschen</value>
   </data>
   <data name="strMenuDisconnect" xml:space="preserve">
     <value>Trennen</value>
