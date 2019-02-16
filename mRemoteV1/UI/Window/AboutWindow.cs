@@ -18,10 +18,8 @@ namespace mRemoteNG.UI.Window
 		internal Controls.Base.NGLabel lblVersion;
 		internal Controls.Base.NGLabel lblLicense;
 		internal Controls.Base.NGTextBox txtChangeLog;
-		internal Controls.Base.NGLabel lblChangeLog;
 		internal Panel pnlBottom;
 		internal PictureBox pbLogo;
-        internal Controls.Base.NGLabel lblCredits;
         internal Controls.Base.NGTextBox txtCredits;
         internal Panel pnlTop;
 
@@ -31,12 +29,10 @@ namespace mRemoteNG.UI.Window
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.lblCredits = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.txtCredits = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.txtChangeLog = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblTitle = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.lblVersion = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblChangeLog = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.lblLicense = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.lblCopyright = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlTop.SuspendLayout();
@@ -68,12 +64,10 @@ namespace mRemoteNG.UI.Window
             // pnlBottom
             // 
             this.pnlBottom.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlBottom.Controls.Add(this.lblCredits);
             this.pnlBottom.Controls.Add(this.txtCredits);
             this.pnlBottom.Controls.Add(this.txtChangeLog);
             this.pnlBottom.Controls.Add(this.lblTitle);
             this.pnlBottom.Controls.Add(this.lblVersion);
-            this.pnlBottom.Controls.Add(this.lblChangeLog);
             this.pnlBottom.Controls.Add(this.lblLicense);
             this.pnlBottom.Controls.Add(this.lblCopyright);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -82,18 +76,6 @@ namespace mRemoteNG.UI.Window
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(1117, 583);
             this.pnlBottom.TabIndex = 1;
-            // 
-            // lblCredits
-            // 
-            this.lblCredits.AutoSize = true;
-            this.lblCredits.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblCredits.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblCredits.Location = new System.Drawing.Point(3, 131);
-            this.lblCredits.Name = "lblCredits";
-            this.lblCredits.Size = new System.Drawing.Size(55, 25);
-            this.lblCredits.TabIndex = 11;
-            this.lblCredits.Text = "Credits:";
-            this.lblCredits.UseCompatibleTextRendering = true;
             // 
             // txtCredits
             // 
@@ -104,13 +86,13 @@ namespace mRemoteNG.UI.Window
             this.txtCredits.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtCredits.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCredits.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtCredits.Location = new System.Drawing.Point(8, 156);
+            this.txtCredits.Location = new System.Drawing.Point(8, 131);
             this.txtCredits.MinimumSize = new System.Drawing.Size(370, 260);
             this.txtCredits.Multiline = true;
             this.txtCredits.Name = "txtCredits";
             this.txtCredits.ReadOnly = true;
             this.txtCredits.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCredits.Size = new System.Drawing.Size(400, 424);
+            this.txtCredits.Size = new System.Drawing.Size(400, 449);
             this.txtCredits.TabIndex = 7;
             this.txtCredits.TabStop = false;
             // 
@@ -124,13 +106,13 @@ namespace mRemoteNG.UI.Window
             this.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtChangeLog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtChangeLog.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtChangeLog.Location = new System.Drawing.Point(414, 156);
+            this.txtChangeLog.Location = new System.Drawing.Point(414, 131);
             this.txtChangeLog.MinimumSize = new System.Drawing.Size(370, 260);
             this.txtChangeLog.Multiline = true;
             this.txtChangeLog.Name = "txtChangeLog";
             this.txtChangeLog.ReadOnly = true;
             this.txtChangeLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtChangeLog.Size = new System.Drawing.Size(696, 424);
+            this.txtChangeLog.Size = new System.Drawing.Size(696, 449);
             this.txtChangeLog.TabIndex = 10;
             this.txtChangeLog.TabStop = false;
             // 
@@ -157,18 +139,6 @@ namespace mRemoteNG.UI.Window
             this.lblVersion.TabIndex = 1;
             this.lblVersion.Text = "Version";
             this.lblVersion.UseCompatibleTextRendering = true;
-            // 
-            // lblChangeLog
-            // 
-            this.lblChangeLog.AutoSize = true;
-            this.lblChangeLog.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblChangeLog.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblChangeLog.Location = new System.Drawing.Point(414, 131);
-            this.lblChangeLog.Name = "lblChangeLog";
-            this.lblChangeLog.Size = new System.Drawing.Size(89, 25);
-            this.lblChangeLog.TabIndex = 6;
-            this.lblChangeLog.Text = "Change Log:";
-            this.lblChangeLog.UseCompatibleTextRendering = true;
             // 
             // lblLicense
             // 
@@ -236,7 +206,6 @@ namespace mRemoteNG.UI.Window
 		private void ApplyLanguage()
 		{
 			lblLicense.Text = Language.strLabelReleasedUnderGPL;
-			lblChangeLog.Text = Language.strLabelChangeLog;
 			TabText = Language.strAbout;
 			Text = Language.strAbout;
 		}
@@ -305,13 +274,13 @@ namespace mRemoteNG.UI.Window
                 //if (UnxEndRx.IsMatch(txtChangeLog.Text))
                 //        txtChangeLog.Text = txtChangeLog.Text.Replace("\n", Environment.NewLine);
                 //
-                // But for some reason that I couldn't figure out, the RegEx.IsMatch on CREDITS.TXT/txtCredits.Text
+                // But for some reason that I couldn't figure out, the RegEx.IsMatch on CREDITS.md/txtCredits.Text
                 // did not work at all despite it CLEARLY ending with \n when pulled from AppVeyor...
                 // The Changelog is a bit long anyways... Limit the number of lines to something reasonable.
 
-                if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
+                if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.md"))
 	            {
-                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT", Encoding.Default, true))
+                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.md", Encoding.UTF8, true))
                     {
                         string line;
                         var i = 0;
@@ -324,14 +293,14 @@ namespace mRemoteNG.UI.Window
                         if (i == 128)
                         {
                             txtChangeLog.Text +=
-                                $"{Environment.NewLine}****************************************{Environment.NewLine}See CHANGELOG.TXT for full History...{Environment.NewLine}****************************************{Environment.NewLine}";
+                                $"{Environment.NewLine}****************************************{Environment.NewLine}See CHANGELOG.md for full History...{Environment.NewLine}****************************************{Environment.NewLine}";
                         }
                     }
                 }
 
-	            if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
+	            if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.md"))
 	            {
-                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT", Encoding.Default, true))
+                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.md", Encoding.UTF8, true))
                     {
                         string line;
                         while ((line = sR.ReadLine()) != null)
