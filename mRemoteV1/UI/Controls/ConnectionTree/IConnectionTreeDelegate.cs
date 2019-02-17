@@ -1,5 +1,4 @@
-﻿
-namespace mRemoteNG.UI.Controls
+﻿namespace mRemoteNG.UI.Controls
 {
     public interface IConnectionTreeDelegate
     {

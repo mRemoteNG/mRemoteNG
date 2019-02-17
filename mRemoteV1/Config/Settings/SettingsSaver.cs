@@ -11,11 +11,10 @@ namespace mRemoteNG.Config.Settings
 {
     public static class SettingsSaver
     {
-        public static void SaveSettings(
-            Control quickConnectToolStrip,
-            ExternalToolsToolStrip externalToolsToolStrip,
-            MultiSshToolStrip multiSshToolStrip,
-            FrmMain frmMain)
+        public static void SaveSettings(Control quickConnectToolStrip,
+                                        ExternalToolsToolStrip externalToolsToolStrip,
+                                        MultiSshToolStrip multiSshToolStrip,
+                                        FrmMain frmMain)
         {
             try
             {
@@ -100,9 +99,9 @@ namespace mRemoteNG.Config.Settings
         {
             var panelLayoutXmlFilePath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
             var panelLayoutSaver = new DockPanelLayoutSaver(
-                new DockPanelLayoutSerializer(),
-                new FileDataProvider(panelLayoutXmlFilePath)
-            );
+                                                            new DockPanelLayoutSerializer(),
+                                                            new FileDataProvider(panelLayoutXmlFilePath)
+                                                           );
             panelLayoutSaver.Save();
         }
 

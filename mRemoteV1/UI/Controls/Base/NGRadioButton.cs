@@ -19,10 +19,12 @@ namespace mRemoteNG.UI.Controls.Base
         {
             var display = new DisplayProperties();
 
-            _circleSmall = new Rectangle(display.ScaleWidth(4), display.ScaleHeight(4), display.ScaleWidth(6), display.ScaleHeight(6));
-            _circle = new Rectangle(display.ScaleWidth(1), display.ScaleHeight(1), display.ScaleWidth(12), display.ScaleHeight(12));
+            _circleSmall = new Rectangle(display.ScaleWidth(4), display.ScaleHeight(4), display.ScaleWidth(6),
+                                         display.ScaleHeight(6));
+            _circle = new Rectangle(display.ScaleWidth(1), display.ScaleHeight(1), display.ScaleWidth(12),
+                                    display.ScaleHeight(12));
             _textXCoord = display.ScaleWidth(16);
-           ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
 
@@ -79,6 +81,7 @@ namespace mRemoteNG.UI.Controls.Base
                 base.OnPaint(e);
                 return;
             }
+
             // Init
             var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -104,7 +107,6 @@ namespace mRemoteNG.UI.Controls.Base
                         outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Hover");
                     }
                 }
-
             }
             else
             {
@@ -113,7 +115,8 @@ namespace mRemoteNG.UI.Controls.Base
             }
 
             var textRect = new Rectangle(_textXCoord, Padding.Top, Width - 16, Height);
-            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
+            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
+                                  TextFormatFlags.PathEllipsis);
 
             g.FillEllipse(new SolidBrush(centerBack), _circle);
             g.FillEllipse(new SolidBrush(center), _circleSmall);
@@ -126,9 +129,9 @@ namespace mRemoteNG.UI.Controls.Base
             // 
             // NGRadioButton
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResumeLayout(false);
-
         }
     }
 }

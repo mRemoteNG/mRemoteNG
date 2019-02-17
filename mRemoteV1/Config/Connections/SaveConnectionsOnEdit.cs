@@ -19,9 +19,11 @@ namespace mRemoteNG.Config.Connections
             connectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
         }
 
-        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        private void ConnectionsServiceOnConnectionsLoaded(object sender,
+                                                           ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
-            connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged += ConnectionTreeModelOnCollectionChanged;
+            connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged +=
+                ConnectionTreeModelOnCollectionChanged;
             connectionsLoadedEventArgs.NewConnectionTreeModel.PropertyChanged += ConnectionTreeModelOnPropertyChanged;
 
             foreach (var oldTree in connectionsLoadedEventArgs.PreviousConnectionTreeModel)
@@ -31,12 +33,15 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
-        private void ConnectionTreeModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void ConnectionTreeModelOnPropertyChanged(object sender,
+                                                          PropertyChangedEventArgs propertyChangedEventArgs)
         {
             SaveConnectionOnEdit(propertyChangedEventArgs.PropertyName);
         }
 
-        private void ConnectionTreeModelOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void ConnectionTreeModelOnCollectionChanged(object sender,
+                                                            NotifyCollectionChangedEventArgs
+                                                                notifyCollectionChangedEventArgs)
         {
             SaveConnectionOnEdit();
         }

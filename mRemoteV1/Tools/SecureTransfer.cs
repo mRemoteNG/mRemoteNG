@@ -24,7 +24,6 @@ namespace mRemoteNG.Tools
 
         public SecureTransfer()
         {
-            
         }
 
         public SecureTransfer(string host, string user, string pass, int port, SSHTransferProtocol protocol)
@@ -36,7 +35,13 @@ namespace mRemoteNG.Tools
             Protocol = protocol;
         }
 
-        public SecureTransfer(string host, string user, string pass, int port, SSHTransferProtocol protocol, string source, string dest)
+        public SecureTransfer(string host,
+                              string user,
+                              string pass,
+                              int port,
+                              SSHTransferProtocol protocol,
+                              string source,
+                              string dest)
         {
             Host = host;
             User = user;
@@ -49,7 +54,7 @@ namespace mRemoteNG.Tools
 
         public void Connect()
         {
-            if(Protocol == SSHTransferProtocol.SCP)
+            if (Protocol == SSHTransferProtocol.SCP)
             {
                 ScpClt = new ScpClient(Host, Port, User, Password);
                 ScpClt.Connect();
@@ -94,7 +99,9 @@ namespace mRemoteNG.Tools
             {
                 if (!ScpClt.IsConnected)
                 {
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + "SCP Not Connected!");
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                                                        Language.strSSHTransferFailed + Environment.NewLine +
+                                                        "SCP Not Connected!");
                     return;
                 }
 
@@ -105,10 +112,15 @@ namespace mRemoteNG.Tools
             {
                 if (!SftpClt.IsConnected)
                 {
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + "SFTP Not Connected!");
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                                                        Language.strSSHTransferFailed + Environment.NewLine +
+                                                        "SFTP Not Connected!");
                     return;
                 }
-                asyncResult = (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}", asyncCallback);
+
+                asyncResult =
+                    (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}",
+                                                                   asyncCallback);
             }
         }
 

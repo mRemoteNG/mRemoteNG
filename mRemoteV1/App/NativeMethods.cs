@@ -12,6 +12,7 @@ namespace mRemoteNG.App
     public static class NativeMethods
     {
         #region Functions
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool AppendMenu(IntPtr hMenu, int uFlags, IntPtr uIDNewItem, string lpNewItem);
 
@@ -19,7 +20,10 @@ namespace mRemoteNG.App
         internal static extern IntPtr CreatePopupMenu();
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
+        internal static extern IntPtr FindWindowEx(IntPtr parentHandle,
+                                                   IntPtr childAfter,
+                                                   string lclassName,
+                                                   string windowTitle);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetForegroundWindow();
@@ -28,7 +32,11 @@ namespace mRemoteNG.App
         internal static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern bool InsertMenu(IntPtr hMenu, int uPosition, int uFlags, IntPtr uIDNewItem, string lpNewItem);
+        internal static extern bool InsertMenu(IntPtr hMenu,
+                                               int uPosition,
+                                               int uFlags,
+                                               IntPtr uIDNewItem,
+                                               string lpNewItem);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int IsIconic(IntPtr hWnd);
@@ -55,7 +63,10 @@ namespace mRemoteNG.App
         internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, string lParam);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        internal static extern IntPtr SendMessage([In] IntPtr hWnd, [In] uint msg, [Out] StringBuilder wParam, [In] IntPtr lParam);
+        internal static extern IntPtr SendMessage([In] IntPtr hWnd,
+                                                  [In] uint msg,
+                                                  [Out] StringBuilder wParam,
+                                                  [In] IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
@@ -64,7 +75,11 @@ namespace mRemoteNG.App
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern bool SetMenuItemBitmaps(IntPtr hMenu, int uPosition, int uFlags, IntPtr hBitmapUnchecked, IntPtr hBitmapChecked);
+        internal static extern bool SetMenuItemBitmaps(IntPtr hMenu,
+                                                       int uPosition,
+                                                       int uFlags,
+                                                       IntPtr hBitmapUnchecked,
+                                                       IntPtr hBitmapChecked);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
@@ -93,9 +108,11 @@ namespace mRemoteNG.App
         [DllImport("kernel32", SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         internal static extern bool CloseHandle(IntPtr handle);
+
         #endregion
 
         #region Structures
+
         [StructLayout(LayoutKind.Sequential)]
         internal struct WINDOWPOS
         {
@@ -131,9 +148,11 @@ namespace mRemoteNG.App
             public long right;
             public long bottom;
         }
+
         #endregion
 
         #region Helpers
+
         public static int MAKELONG(int wLow, int wHigh)
         {
             return wLow | wHigh << 16;
@@ -163,28 +182,37 @@ namespace mRemoteNG.App
         {
             return HIWORD(value.ToInt32());
         }
+
         #endregion
 
         #region Constants
+
         public const int TRUE = 1;
 
         #region GetWindowLong
+
         public const int GWL_STYLE = (-16);
+
         #endregion
 
         #region AppendMenu / ModifyMenu / DeleteMenu / RemoveMenu
+
         public const int MF_BYCOMMAND = 0x0;
         public const int MF_BYPOSITION = 0x400;
         public const int MF_STRING = 0x0;
         public const int MF_POPUP = 0x10;
         public const int MF_SEPARATOR = 0x800;
+
         #endregion
 
         #region WM_LBUTTONDOWN / WM_LBUTTONUP
+
         public const int MK_LBUTTON = 0x1;
+
         #endregion
 
         #region ShowWindow
+
         public const uint SW_HIDE = 0;
         public const uint SW_SHOWNORMAL = 1;
         public const uint SW_SHOWMINIMIZED = 2;
@@ -196,9 +224,11 @@ namespace mRemoteNG.App
         public const uint SW_SHOWMINNOACTIVE = 7;
         public const uint SW_SHOWNA = 8;
         public const uint SW_RESTORE = 9;
+
         #endregion
 
         #region SetWindowPos / WM_WINDOWPOSCHANGING / WM_WINDOWPOSCHANGED
+
         /// <summary>
         /// Retains the current size (ignores the cx and cy parameters).
         /// </summary>
@@ -283,15 +313,19 @@ namespace mRemoteNG.App
         /// 
         /// </summary>
         public const int SWP_STATECHANGED = 0x8000;
+
         #endregion
 
         #region Window Placement Flags (WPF)
+
         public const uint WPF_SETMINPOSITION = 0x1;
         public const uint WPF_RESTORETOMAXIMIZED = 0x2;
         public const uint WPF_ASYNCWINDOWPLACEMENT = 0x4;
+
         #endregion
 
         #region WM_ACTIVATE
+
         /// <summary>
         /// 
         /// </summary>
@@ -309,9 +343,11 @@ namespace mRemoteNG.App
         /// windows use different input queues, the message is sent asynchronously, so the window is activated immediately.
         /// </summary>
         public const int WA_CLICKACTIVE = 0x2;
+
         #endregion
 
         #region Window Messages
+
         /// <summary>
         /// Sent when an application requests that a window be created by calling the CreateWindowEx or CreateWindow function. (The message is sent before the function returns.) The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
         /// </summary>
@@ -466,29 +502,38 @@ namespace mRemoteNG.App
         /// Sent to the first window in the clipboard viewer chain when a window is being removed from the chain.
         /// </summary>
         public const int WM_CHANGECBCHAIN = 0x30D;
+
         #endregion
 
         #region Window Styles
+
         public const int WS_MAXIMIZE = 0x1000000;
         public const int WS_VISIBLE = 0x10000000;
         public const int WS_CHILD = 0x40000000;
         public const int WS_EX_MDICHILD = 0x40;
+
         #endregion
 
         #region Virtual Key Codes
+
         public const int VK_CONTROL = 0x11;
         public const int VK_C = 0x67;
+
         #endregion
 
         #region EM
+
         public const uint ECM_FIRST = 0x1500;
         public const uint EM_SETCUEBANNER = ECM_FIRST + 1;
         public const uint EM_GETCUEBANNER = ECM_FIRST + 2;
+
         #endregion
 
         #region LB
+
         public const int LB_ERR = -1;
         public const int LB_SELECTSTRING = 0x18C;
+
         #endregion
 
         #region TCM

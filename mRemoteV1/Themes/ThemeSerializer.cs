@@ -4,22 +4,22 @@ using System.Linq;
 
 namespace mRemoteNG.Themes
 {
-	public static class ThemeSerializer
-	{
-	    /// <summary>
-	    /// Save the theme to file, name property is used as filename
-	    /// The baseTheme is used as a template, by copy that file and rewrite the extpalette values
-	    /// </summary>
-	    /// <param name="themeToSave"></param>
-	    /// <param name="baseTheme"></param>
-	    public static void SaveToXmlFile(ThemeInfo themeToSave,ThemeInfo baseTheme)
-		{
+    public static class ThemeSerializer
+    {
+        /// <summary>
+        /// Save the theme to file, name property is used as filename
+        /// The baseTheme is used as a template, by copy that file and rewrite the extpalette values
+        /// </summary>
+        /// <param name="themeToSave"></param>
+        /// <param name="baseTheme"></param>
+        public static void SaveToXmlFile(ThemeInfo themeToSave, ThemeInfo baseTheme)
+        {
             var oldURI = baseTheme.URI;
             var directoryName = Path.GetDirectoryName(oldURI);
-            var toSaveURI = directoryName + Path.DirectorySeparatorChar + themeToSave.Name +  ".vstheme";
+            var toSaveURI = directoryName + Path.DirectorySeparatorChar + themeToSave.Name + ".vstheme";
             File.Copy(baseTheme.URI, toSaveURI);
             themeToSave.URI = toSaveURI;
-		}
+        }
 
         public static void DeleteFile(ThemeInfo themeToDelete)
         {
@@ -44,22 +44,27 @@ namespace mRemoteNG.Themes
         /// <param name="filename"></param>
         /// <param name="defaultTheme"></param>
         /// <returns></returns>
-        public static ThemeInfo LoadFromXmlFile(string filename, ThemeInfo defaultTheme=null)
-		{
+        public static ThemeInfo LoadFromXmlFile(string filename, ThemeInfo defaultTheme = null)
+        {
             var bytes = File.ReadAllBytes(filename);
             //Load the dockpanel part
             var themeBaseLoad = new MremoteNGThemeBase(bytes);
             //Load the mremote part
-		    //Cause we cannot default the theme for the default theme
+            //Cause we cannot default the theme for the default theme
             var extColorLoader = new MremoteNGPaletteManipulator(bytes, defaultTheme?.ExtendedPalette);
-            var loadedTheme = new ThemeInfo(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename, VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
-            if(new[] { "darcula", "vs2015blue", "vs2015dark" , "vs2015light" }.Contains(Path.GetFileNameWithoutExtension(filename)))
+            var loadedTheme = new ThemeInfo(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename,
+                                            VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
+            if (new[] {"darcula", "vs2015blue", "vs2015dark", "vs2015light"}.Contains(
+                                                                                      Path
+                                                                                          .GetFileNameWithoutExtension(filename))
+            )
             {
                 loadedTheme.IsThemeBase = true;
             }
+
             loadedTheme.IsExtendable = true;
             return loadedTheme;
-		}
+        }
 
         /*
 		private static string EncodeColorName(Color color)
@@ -74,6 +79,5 @@ namespace mRemoteNG.Themes
 	        return regex.Match(name).Success ? Color.FromArgb(Convert.ToInt32(name, 16)) : Color.FromName(name);
 	    }
         */
-
     }
 }

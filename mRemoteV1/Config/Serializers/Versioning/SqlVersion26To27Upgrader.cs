@@ -25,7 +25,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public Version Upgrade()
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.6 to version 2.7.");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                "Upgrading database from version 2.6 to version 2.7.");
             const string sqlText = @"
 ALTER TABLE tblCons
 ADD RedirectClipboard bit NOT NULL DEFAULT 0,

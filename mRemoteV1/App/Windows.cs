@@ -31,7 +31,6 @@ namespace mRemoteNG.App
         internal static SSHTransferWindow SshtransferForm { get; private set; } = new SSHTransferWindow();
 
 
-
         public static void Show(WindowType windowType)
         {
             try
@@ -55,6 +54,7 @@ namespace mRemoteNG.App
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }
+
                         break;
                     case WindowType.SSHTransfer:
                         if (SshtransferForm == null || SshtransferForm.IsDisposed)
@@ -90,7 +90,8 @@ namespace mRemoteNG.App
                         _ultravncscForm.Show(dockPanel);
                         break;
                     case WindowType.ComponentsCheck:
-                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Showing ComponentsCheck window", true);
+                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                            "Showing ComponentsCheck window", true);
                         if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
                             _componentscheckForm = new ComponentsCheckWindow();
                         _componentscheckForm.Show(dockPanel);

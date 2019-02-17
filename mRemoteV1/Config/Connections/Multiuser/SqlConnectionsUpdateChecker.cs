@@ -48,9 +48,11 @@ namespace mRemoteNG.Config.Connections
             {
                 _sqlConnector.Connect();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Unable to connect to Sql DB to check for updates." + Environment.NewLine + e.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "Unable to connect to Sql DB to check for updates." +
+                                                    Environment.NewLine + e.Message, true);
             }
         }
 
@@ -63,7 +65,9 @@ namespace mRemoteNG.Config.Connections
 
         private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
-            DateTime lastSqlUpdateWithoutMilliseconds = new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond), LastUpdateTime.Kind);
+            DateTime lastSqlUpdateWithoutMilliseconds =
+                new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond),
+                             LastUpdateTime.Kind);
             return lastUpdateInDb == lastSqlUpdateWithoutMilliseconds;
         }
 
@@ -80,20 +84,25 @@ namespace mRemoteNG.Config.Connections
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Error executing Sql query to get updates from the DB." + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "Error executing Sql query to get updates from the DB." +
+                                                    Environment.NewLine + ex.Message, true);
             }
+
             _lastDatabaseUpdateTime = lastUpdateInDb;
             return lastUpdateInDb;
         }
 
 
         public event EventHandler UpdateCheckStarted;
+
         private void RaiseUpdateCheckStartedEvent()
         {
             UpdateCheckStarted?.Invoke(this, EventArgs.Empty);
         }
 
         public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
+
         private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
         {
             var args = new ConnectionsUpdateCheckFinishedEventArgs {UpdateAvailable = updateAvailable};
@@ -101,6 +110,7 @@ namespace mRemoteNG.Config.Connections
         }
 
         public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
+
         private void RaiseConnectionsUpdateAvailableEvent()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Remote connection update is available");

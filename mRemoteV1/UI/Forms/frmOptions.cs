@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Forms
         private readonly string _pageName;
         private readonly DisplayProperties _display = new DisplayProperties();
 
-        public FrmOptions(): this(Language.strStartupExit)
+        public FrmOptions() : this(Language.strStartupExit)
         {
         }
 
@@ -111,7 +111,7 @@ namespace mRemoteNG.UI.Forms
                 break;
             }
 
-            if(!isSet)
+            if (!isSet)
                 lstOptionPages.Items[0].Selected = true;
         }
 
@@ -127,6 +127,7 @@ namespace mRemoteNG.UI.Forms
                 Debug.WriteLine(page.PageName);
                 page.SaveSettings();
             }
+
             Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
             Settings.Default.Save();
         }
@@ -148,6 +149,7 @@ namespace mRemoteNG.UI.Forms
                 Debug.WriteLine(page.PageName);
                 page.RevertSettings();
             }
+
             Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
         }
     }

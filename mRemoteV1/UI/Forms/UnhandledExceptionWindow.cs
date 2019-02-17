@@ -32,27 +32,27 @@ namespace mRemoteNG.UI.Forms
             Text = Language.mRemoteNGUnhandledException;
             labelExceptionCaught.Text = Language.UnhandledExceptionOccured;
 
-            labelExceptionIsFatalHeader.Text = _isFatal 
-                ? Language.ExceptionForcesmRemoteNGToClose 
+            labelExceptionIsFatalHeader.Text = _isFatal
+                ? Language.ExceptionForcesmRemoteNGToClose
                 : string.Empty;
 
             labelExceptionMessageHeader.Text = Language.ExceptionMessage;
             labelStackTraceHeader.Text = Language.StackTrace;
             buttonCopyAll.Text = Language.strMenuNotificationsCopyAll;
             buttonClose.Text = _isFatal
-                ? Language.strMenuExit 
+                ? Language.strMenuExit
                 : Language.strButtonClose;
         }
 
         private void buttonCopyAll_Click(object sender, EventArgs e)
         {
             var text = new StringBuilder()
-                .AppendLine(labelExceptionMessageHeader.Text)
-                .AppendLine("\"" + textBoxExceptionMessage.Text + "\"")
-                .AppendLine()
-                .AppendLine(labelStackTraceHeader.Text)
-                .AppendLine(textBoxStackTrace.Text)
-                .ToString();
+                       .AppendLine(labelExceptionMessageHeader.Text)
+                       .AppendLine("\"" + textBoxExceptionMessage.Text + "\"")
+                       .AppendLine()
+                       .AppendLine(labelStackTraceHeader.Text)
+                       .AppendLine(textBoxStackTrace.Text)
+                       .ToString();
 
             Clipboard.SetText(text);
         }

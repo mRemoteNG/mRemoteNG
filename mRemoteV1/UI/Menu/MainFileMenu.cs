@@ -70,7 +70,8 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFile
             // 
-            DropDownItems.AddRange(new ToolStripItem[] {
+            DropDownItems.AddRange(new ToolStripItem[]
+            {
                 _mMenFileNewConnection,
                 _mMenFileNewFolder,
                 _mMenFileSep1,
@@ -110,7 +111,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileNewFolder.Image = Resources.Folder_Add;
             _mMenFileNewFolder.Name = "mMenFileNewFolder";
             _mMenFileNewFolder.ShortcutKeys = (Keys.Control | Keys.Shift)
-                                              | Keys.N;
+                                            | Keys.N;
             _mMenFileNewFolder.Size = new System.Drawing.Size(281, 22);
             _mMenFileNewFolder.Text = Language.strNewFolder;
             _mMenFileNewFolder.Click += mMenFileNewFolder_Click;
@@ -151,7 +152,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileSaveAs.Image = Resources.Connections_SaveAs;
             _mMenFileSaveAs.Name = "mMenFileSaveAs";
             _mMenFileSaveAs.ShortcutKeys = (Keys.Control | Keys.Shift)
-                                           | Keys.S;
+                                         | Keys.S;
             _mMenFileSaveAs.Size = new System.Drawing.Size(281, 22);
             _mMenFileSaveAs.Text = Language.strMenuSaveConnectionFileAs;
             _mMenFileSaveAs.Click += mMenFileSaveAs_Click;
@@ -205,10 +206,12 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileImport
             // 
-            _mMenFileImport.DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenFileImportFromFile,
-            _mMenFileImportFromActiveDirectory,
-            _mMenFileImportFromPortScan});
+            _mMenFileImport.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                _mMenFileImportFromFile,
+                _mMenFileImportFromActiveDirectory,
+                _mMenFileImportFromPortScan
+            });
             _mMenFileImport.Name = "mMenFileImport";
             _mMenFileImport.Size = new System.Drawing.Size(281, 22);
             _mMenFileImport.Text = Language.strImportMenuItem;
@@ -274,6 +277,7 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region File
+
         internal void mMenFile_DropDownOpening(object sender, EventArgs e)
         {
             var selectedNodeType = TreeWindow.SelectedNode?.GetTreeNodeType();
@@ -381,7 +385,8 @@ namespace mRemoteNG.UI.Menu
         {
             if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
             {
-                var msgBoxResult = MessageBox.Show(Language.strSaveConnectionsFileBeforeOpeningAnother, Language.strSave, MessageBoxButtons.YesNoCancel);
+                var msgBoxResult = MessageBox.Show(Language.strSaveConnectionsFileBeforeOpeningAnother,
+                                                   Language.strSave, MessageBoxButtons.YesNoCancel);
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (msgBoxResult)
                 {
@@ -410,7 +415,8 @@ namespace mRemoteNG.UI.Menu
 
                 var newFileName = saveFileDialog.FileName;
 
-                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
+                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false,
+                                                           new SaveFilter(), newFileName);
 
                 if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
                 {
@@ -481,6 +487,7 @@ namespace mRemoteNG.UI.Menu
         {
             Shutdown.Quit();
         }
+
         #endregion
     }
 }

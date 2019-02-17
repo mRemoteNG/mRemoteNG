@@ -9,12 +9,14 @@ namespace mRemoteNG.UI.Controls.Base
     internal class NGComboBox : ComboBox
     {
         private ThemeManager _themeManager;
+
         public enum MouseState
         {
             HOVER,
             DOWN,
             OUT
         }
+
         public MouseState _mice { get; set; }
 
         public NGComboBox()
@@ -66,23 +68,35 @@ namespace mRemoteNG.UI.Controls.Base
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
-                itemBrush = new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground"));
-                e.Graphics.FillRectangle(new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Background")), e.Bounds);
+                itemBrush = new SolidBrush(
+                                           _themeManager
+                                               .ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground"));
+                e.Graphics.FillRectangle(
+                                         new SolidBrush(_themeManager
+                                                        .ActiveTheme.ExtendedPalette
+                                                        .getColor("List_Item_Selected_Background")),
+                                         e.Bounds);
             }
             else
-                e.Graphics.FillRectangle(new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")), e.Bounds);
+                e.Graphics.FillRectangle(
+                                         new SolidBrush(_themeManager
+                                                        .ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")),
+                                         e.Bounds);
 
             if (Items.Count > 0)
             {
                 if (string.IsNullOrEmpty(DisplayMember))
-                    e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                    e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds,
+                                          StringFormat.GenericDefault);
                 else
                 {
                     if (Items[index].GetType().GetProperty(DisplayMember) != null)
                     {
                         e.Graphics.DrawString(
-                            Items[index].GetType().GetProperty(DisplayMember)?.GetValue(Items[index], null).ToString(),
-                            e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                                              Items[index]
+                                                  .GetType().GetProperty(DisplayMember)?.GetValue(Items[index], null)
+                                                  .ToString(),
+                                              e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
                     }
                 }
             }
@@ -92,12 +106,12 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-
-            if ( !_themeManager.ActiveAndExtended)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
             }
+
             //Colors
             var Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Border");
             var Back = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
@@ -110,13 +124,14 @@ namespace mRemoteNG.UI.Controls.Base
                 Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_MouseOver_Border");
                 ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_MouseOver_Background");
                 ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_MouseOver_Foreground");
-            }if (DroppedDown)
+            }
+
+            if (DroppedDown)
             {
                 Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_MouseOver_Border");
                 ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Pressed_Background");
                 ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Pressed_Foreground");
             }
-
 
 
             e.Graphics.Clear(Back);
@@ -127,6 +142,7 @@ namespace mRemoteNG.UI.Controls.Base
                 var boxRect = new Rectangle(0, 0, Width - 1, Height - 1);
                 e.Graphics.DrawRectangle(p, boxRect);
             }
+
             //Button
             using (var b = new SolidBrush(ButtBack))
             {
@@ -134,11 +150,12 @@ namespace mRemoteNG.UI.Controls.Base
             }
 
             //Arrow
-            e.Graphics.DrawString("\u25BC", Font, new SolidBrush(ButtFore), Width-17, Height/2 -5);
+            e.Graphics.DrawString("\u25BC", Font, new SolidBrush(ButtFore), Width - 17, Height / 2 - 5);
 
             //Text
             var textRect = new Rectangle(2, 2, Width - 20, Height - 4);
-            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back,
+                                  TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
         }
 
         private void InitializeComponent()
@@ -147,9 +164,9 @@ namespace mRemoteNG.UI.Controls.Base
             // 
             // NGComboBox
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResumeLayout(false);
-
         }
     }
 }

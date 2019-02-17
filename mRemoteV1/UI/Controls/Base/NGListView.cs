@@ -10,6 +10,7 @@ namespace mRemoteNG.UI.Controls.Base
     internal class NGListView : ObjectListView
     {
         private CellBorderDecoration deco;
+
         //Control if the gridlines are styled, must be set before the OnCreateControl is fired
         public bool DecorateLines { get; set; } = true;
 
@@ -43,7 +44,7 @@ namespace mRemoteNG.UI.Controls.Base
             };
             HeaderFormatStyle = headerStylo;
             //Border style
-            if(DecorateLines)
+            if (DecorateLines)
             {
                 UseCellFormatEvents = true;
                 GridLines = false;
@@ -56,6 +57,7 @@ namespace mRemoteNG.UI.Controls.Base
                 };
                 FormatCell += NGListView_FormatCell;
             }
+
             if (Items != null && Items.Count != 0)
                 BuildList();
             Invalidate();
@@ -79,7 +81,6 @@ namespace mRemoteNG.UI.Controls.Base
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ((ISupportInitialize)(this)).EndInit();
             ResumeLayout(false);
-
         }
     }
 }

@@ -12,7 +12,8 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
     {
         private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _baseDeserializer;
 
-        public XmlCredentialPasswordDecryptorDecorator(IDeserializer<string, IEnumerable<ICredentialRecord>> baseDeserializer)
+        public XmlCredentialPasswordDecryptorDecorator(
+            IDeserializer<string, IEnumerable<ICredentialRecord>> baseDeserializer)
         {
             if (baseDeserializer == null)
                 throw new ArgumentNullException(nameof(baseDeserializer));
@@ -39,10 +40,13 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                 var decryptedPassword = cryptoProvider.Decrypt(passwordAttribute.Value, key);
                 passwordAttribute.SetValue(decryptedPassword);
             }
+
             return xdoc.ToString();
         }
 
-        private void DecryptAuthHeader(XElement rootElement, ICryptographyProvider cryptographyProvider, SecureString key)
+        private void DecryptAuthHeader(XElement rootElement,
+                                       ICryptographyProvider cryptographyProvider,
+                                       SecureString key)
         {
             var authAttribute = rootElement.Attribute("Auth");
             if (authAttribute == null)

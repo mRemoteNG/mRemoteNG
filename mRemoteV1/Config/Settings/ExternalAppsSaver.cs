@@ -22,7 +22,7 @@ namespace mRemoteNG.Config.Settings
 
                 var xmlTextWriter =
                     new XmlTextWriter(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.ExtAppsFilesName,
-                        Encoding.UTF8)
+                                      Encoding.UTF8)
                     {
                         Formatting = Formatting.Indented,
                         Indentation = 4
