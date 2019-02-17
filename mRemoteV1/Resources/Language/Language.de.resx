@@ -2441,7 +2441,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Warnung! Ein Neustart ist notwendig um ein Theme zu deaktivieren oder anzuwenden</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
+    <value>Es werden keine Themes geladen, vergewissern Sie sich, dass das Standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
   </data>
   <data name="LoginFailedForUser" xml:space="preserve">
     <value>Login fehlgeschlagen für Benutzer '{0}'.</value>
@@ -2506,10 +2506,10 @@ Es konnte kein Anmeldedatensatz mit der ID "{0}" für den Verbindungsdatensatz m
 Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="strChooseLogPath" xml:space="preserve">
-    <value>Wählen Sie einen Pfad für die mRemoteNG-Logfile</value>
+    <value>Wählen Sie einen Pfad für das mRemoteNG-Logfile</value>
   </data>
   <data name="strLogFilePath" xml:space="preserve">
-    <value>Pfad der Logfile</value>
+    <value>Pfad des Logfiles</value>
   </data>
   <data name="strChoosePath" xml:space="preserve">
     <value>Pfad auswählen</value>
