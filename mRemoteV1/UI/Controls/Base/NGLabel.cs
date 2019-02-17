@@ -93,7 +93,8 @@ namespace mRemoteNG.UI.Controls.Base
             }
             else
             {
-                var disabledtextLabel = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
+                var disabledtextLabel =
+                    _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
                 TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, disabledtextLabel, _textFormatFlags);
             }
         }
@@ -104,9 +105,9 @@ namespace mRemoteNG.UI.Controls.Base
             // 
             // NGLabel
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResumeLayout(false);
-
         }
     }
 }

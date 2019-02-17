@@ -10,7 +10,7 @@ namespace mRemoteNG.Security.PasswordCreation
     {
         private readonly int _minimumCount;
 
-        public IEnumerable<char> SpecialCharacters { get; } = new []{'!','@','#','$','%','^','&','*'};
+        public IEnumerable<char> SpecialCharacters { get; } = new[] {'!', '@', '#', '$', '%', '^', '&', '*'};
 
         public string ConstraintHint { get; }
 
@@ -22,14 +22,15 @@ namespace mRemoteNG.Security.PasswordCreation
             _minimumCount = minimumCount;
         }
 
-        public PasswordIncludesSpecialCharactersConstraint(IEnumerable<char> specialCharacters,  int minimumCount = 1)
+        public PasswordIncludesSpecialCharactersConstraint(IEnumerable<char> specialCharacters, int minimumCount = 1)
             : this(minimumCount)
         {
             if (specialCharacters == null)
                 throw new ArgumentNullException(nameof(specialCharacters));
 
             SpecialCharacters = specialCharacters;
-            ConstraintHint = string.Format(Language.strPasswordConstainsSpecialCharactersConstraintHint, _minimumCount, string.Concat(SpecialCharacters));
+            ConstraintHint = string.Format(Language.strPasswordConstainsSpecialCharactersConstraintHint, _minimumCount,
+                                           string.Concat(SpecialCharacters));
         }
 
         public bool Validate(SecureString password)

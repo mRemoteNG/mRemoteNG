@@ -59,13 +59,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             switch (Settings.Default.ConfirmCloseConnection)
             {
-                case (int) ConfirmCloseEnum.Never:
+                case (int)ConfirmCloseEnum.Never:
                     radCloseWarnNever.Checked = true;
                     break;
-                case (int) ConfirmCloseEnum.Exit:
+                case (int)ConfirmCloseEnum.Exit:
                     radCloseWarnExit.Checked = true;
                     break;
-                case (int) ConfirmCloseEnum.Multiple:
+                case (int)ConfirmCloseEnum.Multiple:
                     radCloseWarnMultiple.Checked = true;
                     break;
                 default:
@@ -84,12 +84,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
             Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
 
-            Settings.Default.RdpReconnectionCount = (int) numRdpReconnectionCount.Value;
-            Settings.Default.ConRDPOverallConnectionTimeout = (int) numRDPConTimeout.Value;
-            Settings.Default.AutoSaveEveryMinutes = (int) numAutoSave.Value;
+            Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
+            Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
+            Settings.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
             if (Settings.Default.AutoSaveEveryMinutes > 0)
             {
-                _frmMain.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes*60000;
+                _frmMain.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes * 60000;
                 _frmMain.tmrAutoSave.Enabled = true;
             }
             else
@@ -99,19 +99,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (radCloseWarnAll.Checked)
             {
-                Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.All;
+                Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.All;
             }
+
             if (radCloseWarnMultiple.Checked)
             {
-                Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.Multiple;
+                Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Multiple;
             }
+
             if (radCloseWarnExit.Checked)
             {
-                Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.Exit;
+                Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Exit;
             }
+
             if (radCloseWarnNever.Checked)
             {
-                Settings.Default.ConfirmCloseConnection = (int) ConfirmCloseEnum.Never;
+                Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Never;
             }
         }
     }

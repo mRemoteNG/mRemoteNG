@@ -6,10 +6,10 @@ using mRemoteNG.Container;
 
 namespace mRemoteNG.Config.Import
 {
-	public class PuttyConnectionManagerImporter : IConnectionImporter<string>
-	{
+    public class PuttyConnectionManagerImporter : IConnectionImporter<string>
+    {
         public void Import(string filePath, ContainerInfo destinationContainer)
-		{
+        {
             var dataProvider = new FileDataProvider(filePath);
             var xmlContent = dataProvider.Load();
 
@@ -21,5 +21,5 @@ namespace mRemoteNG.Config.Import
             var childrenToAdd = importedRootNode.Children.ToArray();
             destinationContainer.AddChildRange(childrenToAdd);
         }
-	}
+    }
 }

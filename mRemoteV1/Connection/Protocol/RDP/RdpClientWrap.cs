@@ -11,14 +11,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
     class RdpClientWrap : AxMSTSCLib.AxMsRdpClient8NotSafeForScripting
     {
         public RdpClientWrap()
-               : base()
+            : base()
         {
             GotFocus += RdpClientWrap_GotFocus;
         }
 
         private void RdpClientWrap_GotFocus(object sender, EventArgs e)
         {
-             ((ConnectionTab)Parent.Parent).Focus();
+            ((ConnectionTab)Parent.Parent).Focus();
         }
     }
 }

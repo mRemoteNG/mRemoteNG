@@ -29,7 +29,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                     Name = sqlDataReader["Name"] as string ?? "",
                     Protected = sqlDataReader["Protected"] as string ?? "",
                     Export = (bool)sqlDataReader["Export"],
-                    ConfVersion = new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture))
+                    ConfVersion =
+                        new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture))
                 };
             }
             catch (Exception ex)
@@ -42,6 +43,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 if (sqlDataReader != null && !sqlDataReader.IsClosed)
                     sqlDataReader.Close();
             }
+
             return metaData;
         }
     }

@@ -21,7 +21,7 @@
         }
     }
 
-    public  class MremoteDockPaneStripFactory : DockPanelExtender.IDockPaneStripFactory
+    public class MremoteDockPaneStripFactory : DockPanelExtender.IDockPaneStripFactory
     {
         public DockPaneStripBase CreateDockPaneStrip(DockPane pane)
         {
@@ -42,5 +42,5 @@
         {
             return new FloatWindowNG(dockPanel, pane);
         }
-    } 
+    }
 }

@@ -110,7 +110,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SwitchToMCOnInformation = chkSwitchToMCInformation.Checked;
             Settings.Default.SwitchToMCOnWarning = chkSwitchToMCWarnings.Checked;
             Settings.Default.SwitchToMCOnError = chkSwitchToMCErrors.Checked;
-
         }
 
         private void SaveLoggingSettings()

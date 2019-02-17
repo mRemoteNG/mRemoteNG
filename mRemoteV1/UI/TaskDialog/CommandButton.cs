@@ -10,7 +10,9 @@ namespace mRemoteNG.UI.TaskDialog
     public sealed partial class CommandButton : Button
     {
         //--------------------------------------------------------------------------------
+
         #region PRIVATE MEMBERS
+
         //--------------------------------------------------------------------------------
         private Image imgArrow1;
         private Image imgArrow2;
@@ -19,13 +21,21 @@ namespace mRemoteNG.UI.TaskDialog
         private const int TOP_MARGIN = 10;
         private const int ARROW_WIDTH = 19;
 
-        enum eButtonState { Normal, MouseOver, Down }
+        enum eButtonState
+        {
+            Normal,
+            MouseOver,
+            Down
+        }
+
         eButtonState m_State = eButtonState.Normal;
 
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region PUBLIC PROPERTIES
+
         //--------------------------------------------------------------------------------
         // Override this to make sure the control is invalidated (repainted) when 'Text' is changed
         public override string Text
@@ -45,15 +55,26 @@ namespace mRemoteNG.UI.TaskDialog
 
         // AutoHeight determines whether the button automatically resizes itself to fit the Text
         bool m_autoHeight = true;
+
         [Browsable(true)]
         [Category("Behavior")]
         [DefaultValue(true)]
-        public bool AutoHeight { get { return m_autoHeight; } set { m_autoHeight = value; if (m_autoHeight) Invalidate(); } }
+        public bool AutoHeight
+        {
+            get { return m_autoHeight; }
+            set
+            {
+                m_autoHeight = value;
+                if (m_autoHeight) Invalidate();
+            }
+        }
 
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region CONSTRUCTOR
+
         //--------------------------------------------------------------------------------
         public CommandButton()
         {
@@ -66,16 +87,21 @@ namespace mRemoteNG.UI.TaskDialog
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region PUBLIC ROUTINES
+
         //--------------------------------------------------------------------------------
         public int GetBestHeight()
         {
             return (TOP_MARGIN * 2) + (int)GetSmallTextSizeF().Height + (int)GetLargeTextSizeF().Height;
         }
+
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region PRIVATE ROUTINES
+
         //--------------------------------------------------------------------------------
         string GetLargeText()
         {
@@ -99,7 +125,7 @@ namespace mRemoteNG.UI.TaskDialog
         SizeF GetLargeTextSizeF()
         {
             var x = LEFT_MARGIN + ARROW_WIDTH + 5;
-            var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F);  // presume RIGHT_MARGIN = LEFT_MARGIN
+            var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F); // presume RIGHT_MARGIN = LEFT_MARGIN
             var g = Graphics.FromHwnd(Handle);
             var textSize = g.MeasureString(GetLargeText(), Font, mzSize);
             return textSize;
@@ -110,15 +136,18 @@ namespace mRemoteNG.UI.TaskDialog
             var s = GetSmallText();
             if (s == "") return new SizeF(0, 0);
             var x = LEFT_MARGIN + ARROW_WIDTH + 8; // <- indent small text slightly more
-            var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F);  // presume RIGHT_MARGIN = LEFT_MARGIN
+            var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F); // presume RIGHT_MARGIN = LEFT_MARGIN
             var g = Graphics.FromHwnd(Handle);
             var textSize = g.MeasureString(s, SmallFont, mzSize);
             return textSize;
         }
+
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region OVERRIDES
+
         //--------------------------------------------------------------------------------
         protected override void OnCreateControl()
         {
@@ -135,12 +164,14 @@ namespace mRemoteNG.UI.TaskDialog
                 base.OnPaint(e);
                 return;
             }
+
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
             const LinearGradientMode mode = LinearGradientMode.Vertical;
 
-            var newRect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+            var newRect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1,
+                                        ClientRectangle.Height - 1);
 
             var img = imgArrow1;
 
@@ -150,7 +181,6 @@ namespace mRemoteNG.UI.TaskDialog
             Color border;
             if (Enabled)
             {
-
                 switch (m_State)
                 {
                     case eButtonState.MouseOver:
@@ -194,12 +224,18 @@ namespace mRemoteNG.UI.TaskDialog
 
             var szL = GetLargeTextSizeF();
             //e.Graphics.DrawString(largetext, base.Font, new SolidBrush(text_color), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN), szL));
-            TextRenderer.DrawText(e.Graphics, largetext, Font, new Rectangle(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN, (int)szL.Width, (int)szL.Height), fore, TextFormatFlags.Default);
+            TextRenderer.DrawText(e.Graphics, largetext, Font,
+                                  new Rectangle(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN, (int)szL.Width,
+                                                (int)szL.Height), fore,
+                                  TextFormatFlags.Default);
 
             if (smalltext != "")
             {
                 var szS = GetSmallTextSizeF();
-                e.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(fore), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height), szS));
+                e.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(fore),
+                                      new
+                                          RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height),
+                                                     szS));
             }
 
             e.Graphics.DrawImage(img, new Point(LEFT_MARGIN, TOP_MARGIN + (int)(szL.Height / 2) - img.Height / 2));
@@ -249,8 +285,10 @@ namespace mRemoteNG.UI.TaskDialog
                     return;
                 }
             }
+
             base.OnSizeChanged(e);
         }
+
         #endregion
 
         //--------------------------------------------------------------------------------

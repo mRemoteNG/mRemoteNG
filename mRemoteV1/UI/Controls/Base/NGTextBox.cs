@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Controls.Base
     {
         private ThemeManager _themeManager;
 
-        public  NGTextBox()
+        public NGTextBox()
         {
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
@@ -23,7 +23,9 @@ namespace mRemoteNG.UI.Controls.Base
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ActiveAndExtended) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor(ReadOnly ? "TextBox_Disabled_Background" : "TextBox_Background");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor(ReadOnly
+                                                                               ? "TextBox_Disabled_Background"
+                                                                               : "TextBox_Background");
             Invalidate();
         }
 
@@ -43,6 +45,7 @@ namespace mRemoteNG.UI.Controls.Base
                     BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
                 }
             }
+
             base.OnEnabledChanged(e);
             Invalidate();
         }
@@ -55,7 +58,6 @@ namespace mRemoteNG.UI.Controls.Base
             // 
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ResumeLayout(false);
-
         }
     }
 }

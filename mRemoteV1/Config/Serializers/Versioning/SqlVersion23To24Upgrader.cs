@@ -25,7 +25,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public Version Upgrade()
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.3 to version 2.4.");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                "Upgrading database from version 2.3 to version 2.4.");
             const string sqlText = @"
 ALTER TABLE tblCons
 ADD UseCredSsp bit NOT NULL DEFAULT 1,

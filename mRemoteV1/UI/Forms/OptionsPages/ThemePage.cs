@@ -11,11 +11,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class ThemePage
     {
-
         #region Private Fields
+
         private readonly ThemeManager _themeManager;
         private readonly bool _oriActiveTheming;
         private readonly List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
+
         #endregion
 
         public ThemePage()
@@ -83,18 +84,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             // Save the theme settings form close so we don't run into unexpected results while modifying...
             // Prompt the user that a restart is required to apply the new theme...
-            if (cboTheme.SelectedItem != null) // LoadSettings calls SaveSettings, so these might be null the first time around
+            if (cboTheme.SelectedItem != null
+            ) // LoadSettings calls SaveSettings, so these might be null the first time around
             {
-                if (!Settings.Default.ThemeName.Equals(((ThemeInfo) cboTheme.SelectedItem).Name))
+                if (!Settings.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
                 {
-                    Settings.Default.ThemeName = ((ThemeInfo) cboTheme.SelectedItem).Name;
+                    Settings.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
 
-                    CTaskDialog.MessageBox("Theme Changed", "Restart Required.","Please restart mRemoteNG to apply the selected theme.",
-                        ETaskDialogButtons.Ok, ESysIcons.Information);
+                    CTaskDialog.MessageBox("Theme Changed", "Restart Required.",
+                                           "Please restart mRemoteNG to apply the selected theme.",
+                                           ETaskDialogButtons.Ok, ESysIcons.Information);
                 }
             }
 
-            foreach(var updatedTheme in modifiedThemes)
+            foreach (var updatedTheme in modifiedThemes)
             {
                 _themeManager.updateTheme(updatedTheme);
             }
@@ -105,9 +108,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.RevertSettings();
             _themeManager.ThemingActive = _oriActiveTheming;
         }
+
         #region Private Methods
 
         #region Event Handlers
+
         private void cboTheme_SelectionChangeCommitted(object sender, EventArgs e)
         {
             btnThemeNew.Enabled = false;
@@ -147,7 +152,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// <param name="e"></param>
         private void ListPalette_CellClick(object sender, CellClickEventArgs e)
         {
-
             var colorElem = (PseudoKeyColor)e.Model;
 
             var colorDlg = new ColorDialog
@@ -165,7 +169,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             colorElem.Value = colorDlg.Color;
             listPalette.RefreshObject(e.Model);
             _themeManager.refreshUI();
-
         }
 
         private void ColorMeList(ThemeInfo ti)
@@ -176,7 +179,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            using (var frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, _themeManager.ActiveTheme.Name))
+            using (var frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption,
+                                                     Language.strOptionsThemeNewThemeText,
+                                                     _themeManager.ActiveTheme.Name))
             {
                 var dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK) return;
@@ -188,14 +193,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
                 else
                 {
-                    CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error, ESysIcons.Information, 0);
+                    CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "",
+                                                  "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error,
+                                                  ESysIcons.Information, 0);
                 }
             }
         }
 
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
-            var res = CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings , Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "", ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Information, 0);
+            var res = CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings,
+                                                    Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "",
+                                                    ETaskDialogButtons.YesNo,
+                                                    ESysIcons.Question, ESysIcons.Information, 0);
 
             if (res != DialogResult.Yes) return;
             if (modifiedThemes.Contains(_themeManager.ActiveTheme))
@@ -203,6 +213,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _themeManager.deleteTheme(_themeManager.ActiveTheme);
             LoadSettings();
         }
+
         #endregion
 
         #endregion

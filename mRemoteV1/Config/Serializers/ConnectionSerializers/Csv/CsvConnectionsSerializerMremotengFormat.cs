@@ -11,14 +11,15 @@ using System.Text;
 
 namespace mRemoteNG.Config.Serializers.Csv
 {
-    public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
+    public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo, string>
     {
         private readonly SaveFilter _saveFilter;
         private readonly ICredentialRepositoryList _credentialRepositoryList;
 
         public Version Version { get; } = new Version(2, 7);
 
-        public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter, ICredentialRepositoryList credentialRepositoryList)
+        public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter,
+                                                       ICredentialRepositoryList credentialRepositoryList)
         {
             saveFilter.ThrowIfNull(nameof(saveFilter));
             credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
@@ -54,9 +55,11 @@ namespace mRemoteNG.Config.Serializers.Csv
                 sb.Append("Password;");
             if (_saveFilter.SaveDomain)
                 sb.Append("Domain;");
-            sb.Append("Hostname;Protocol;PuttySession;Port;ConnectToConsole;UseCredSsp;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;");
+            sb.Append(
+                      "Hostname;Protocol;PuttySession;Port;ConnectToConsole;UseCredSsp;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;");
             if (_saveFilter.SaveInheritance)
-                sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;InheritUseConsoleSession;InheritUseCredSsp;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain;InheritRDPAlertIdleTimeout;InheritRDPMinutesToIdleTimeout;InheritSoundQuality");
+                sb.Append(
+                          "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;InheritUseConsoleSession;InheritUseCredSsp;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain;InheritRDPAlertIdleTimeout;InheritRDPMinutesToIdleTimeout;InheritSoundQuality");
         }
 
         private void SerializeNodesRecursive(ConnectionInfo node, StringBuilder sb)
@@ -81,12 +84,12 @@ namespace mRemoteNG.Config.Serializers.Csv
         {
             sb.AppendLine();
             sb.Append(FormatForCsv(con.Name))
-                .Append(FormatForCsv(con.ConstantID))
-                .Append(FormatForCsv(con.Parent?.ConstantID ?? ""))
-                .Append(FormatForCsv(con.GetTreeNodeType()))
-                .Append(FormatForCsv(con.Description))
-                .Append(FormatForCsv(con.Icon))
-                .Append(FormatForCsv(con.Panel));
+              .Append(FormatForCsv(con.ConstantID))
+              .Append(FormatForCsv(con.Parent?.ConstantID ?? ""))
+              .Append(FormatForCsv(con.GetTreeNodeType()))
+              .Append(FormatForCsv(con.Description))
+              .Append(FormatForCsv(con.Icon))
+              .Append(FormatForCsv(con.Panel));
 
             if (_saveFilter.SaveUsername)
                 sb.Append(FormatForCsv(con.Username));

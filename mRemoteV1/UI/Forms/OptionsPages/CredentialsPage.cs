@@ -4,7 +4,7 @@ using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	public sealed partial class CredentialsPage : OptionsPage
+    public sealed partial class CredentialsPage : OptionsPage
     {
         public CredentialsPage()
         {
@@ -13,7 +13,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PageIcon = Resources.Key_Icon;
         }
 
-        public override string PageName {
+        public override string PageName
+        {
             get => Language.Credentials;
             set { }
         }
@@ -48,7 +49,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             txtCredentialsUsername.Text = Settings.Default.DefaultUsername;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+            txtCredentialsPassword.Text =
+                cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
             txtCredentialsDomain.Text = Settings.Default.DefaultDomain;
         }
 
@@ -69,7 +71,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
+            Settings.Default.DefaultPassword =
+                cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
             Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
         }
 

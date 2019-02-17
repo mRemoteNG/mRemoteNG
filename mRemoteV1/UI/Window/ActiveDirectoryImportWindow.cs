@@ -35,7 +35,6 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
 
-
         #region Event Handlers
 
         private void ADImport_Load(object sender, EventArgs e)

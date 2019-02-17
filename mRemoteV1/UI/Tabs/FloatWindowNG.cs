@@ -10,16 +10,14 @@ namespace mRemoteNG.UI.Tabs
 {
     class FloatWindowNG : FloatWindow
     {
-
         public FloatWindowNG(DockPanel dockPanel, DockPane pane)
-        : base(dockPanel, pane)
-        { 
+            : base(dockPanel, pane)
+        {
         }
 
         public FloatWindowNG(DockPanel dockPanel, DockPane pane, Rectangle bounds)
             : base(dockPanel, pane, bounds)
-        { 
-
+        {
         }
     }
-} 
+}

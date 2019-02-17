@@ -1,46 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <xs:schema id="mremoteng_confcons_v2_7"
-    targetNamespace="http://mremoteng.org"
-    elementFormDefault="unqualified"
-    xmlns="http://mremoteng.org"
-    xmlns:mrng="http://mremoteng.org"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
->
-
-  
-  <xs:element name="Connections">
-    <xs:complexType>
-      <xs:sequence minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Node" type="mrng:connectioninfo" />
-      </xs:sequence>
-      <xs:attribute name="Name" type="xs:string" use="required" />
-      <xs:attribute name="Export" type="xs:boolean" use="required" />
-      <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
-      <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
-      <xs:attribute name="KdfIterations" type="xs:int" use="optional" />
-      <xs:attribute name="FullFileEncryption" type="xs:boolean" use="required" />
-      <xs:attribute name="Protected" type="xs:string" use="required" />
-      <xs:attribute name="ConfVersion" type="xs:float" use="required" />
-    </xs:complexType>
-  </xs:element>
+           targetNamespace="http://mremoteng.org"
+           elementFormDefault="unqualified"
+           xmlns="http://mremoteng.org"
+           xmlns:mrng="http://mremoteng.org"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 
-  <xs:complexType name="connectioninfo">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="Node" type="mrng:connectioninfo" />
-    </xs:sequence>
-    <xs:attribute name="Name" type="xs:string" use="required" />
-    <xs:attribute name="Id" type="xs:string" use="required" />
-    <xs:attribute name="Type" type="xs:string" use="required" />
-    <xs:attribute name="Expanded" type="xs:boolean" use="optional" />
-    <xs:attribute name="Descr" type="xs:string" use="required" />
-    <xs:attribute name="Icon" type="xs:string" use="required" />
-    <xs:attribute name="Panel" type="xs:string" use="required" />
-    
-    <!--<xs:attribute name="CredentialId" type="xs:string" use="required" />-->
-    <xs:attribute name="Username" type="xs:string" use="required" />
-    <xs:attribute name="Domain" type="xs:string" use="required" />
-    <xs:attribute name="Password" type="xs:string" use="required" />
+    <xs:element name="Connections">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Node" type="mrng:connectioninfo" />
+            </xs:sequence>
+            <xs:attribute name="Name" type="xs:string" use="required" />
+            <xs:attribute name="Export" type="xs:boolean" use="required" />
+            <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
+            <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
+            <xs:attribute name="KdfIterations" type="xs:int" use="optional" />
+            <xs:attribute name="FullFileEncryption" type="xs:boolean" use="required" />
+            <xs:attribute name="Protected" type="xs:string" use="required" />
+            <xs:attribute name="ConfVersion" type="xs:float" use="required" />
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="connectioninfo">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Node" type="mrng:connectioninfo" />
+        </xs:sequence>
+        <xs:attribute name="Name" type="xs:string" use="required" />
+        <xs:attribute name="Id" type="xs:string" use="required" />
+        <xs:attribute name="Type" type="xs:string" use="required" />
+        <xs:attribute name="Expanded" type="xs:boolean" use="optional" />
+        <xs:attribute name="Descr" type="xs:string" use="required" />
+        <xs:attribute name="Icon" type="xs:string" use="required" />
+        <xs:attribute name="Panel" type="xs:string" use="required" />
+
+        <!--<xs:attribute name="CredentialId" type="xs:string" use="required" />-->
+        <xs:attribute name="Username" type="xs:string" use="required" />
+        <xs:attribute name="Domain" type="xs:string" use="required" />
+        <xs:attribute name="Password" type="xs:string" use="required" />
 
     <xs:attribute name="Hostname" type="xs:string" use="required" />
     <xs:attribute name="Protocol" type="xs:string" use="required" />

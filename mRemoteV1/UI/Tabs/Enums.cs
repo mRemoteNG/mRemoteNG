@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace mRemoteNG.UI.Tabs
 {
-  
     [Flags]
     internal enum FlagsSetWindowPos : uint
     {

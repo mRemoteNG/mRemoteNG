@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.Serializers
             var connectionInfo = new ConnectionInfo();
             foreach (var line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
             {
-                var parts = line.Split(new[] { ':' }, 3);
+                var parts = line.Split(new[] {':'}, 3);
                 if (parts.Length < 3)
                 {
                     continue;
@@ -29,6 +29,7 @@ namespace mRemoteNG.Config.Serializers
 
                 SetConnectionInfoParameter(connectionInfo, key, value);
             }
+
             root.AddChild(connectionInfo);
 
             return connectionTreeModel;
@@ -74,12 +75,15 @@ namespace mRemoteNG.Config.Serializers
                             connectionInfo.Colors = RdpProtocol.RDPColors.Colors32Bit;
                             break;
                     }
+
                     break;
                 case "bitmapcachepersistenable":
                     connectionInfo.CacheBitmaps = value == "1";
                     break;
                 case "screen mode id":
-                    connectionInfo.Resolution = value == "2" ? RdpProtocol.RDPResolutions.Fullscreen : RdpProtocol.RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = value == "2"
+                        ? RdpProtocol.RDPResolutions.Fullscreen
+                        : RdpProtocol.RDPResolutions.FitToWindow;
                     break;
                 case "connect to console":
                     connectionInfo.UseConsoleSession = value == "1";
@@ -124,6 +128,7 @@ namespace mRemoteNG.Config.Serializers
                             connectionInfo.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
                             break;
                     }
+
                     break;
                 case "loadbalanceinfo":
                     connectionInfo.LoadBalanceInfo = value;

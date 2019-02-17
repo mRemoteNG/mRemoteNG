@@ -28,7 +28,7 @@ namespace mRemoteNG.UI.Controls
 
         public Func<ICredentialRepository, bool> RepositoryFilter { get; set; }
         public ICredentialRepository SelectedRepository => GetSelectedRepository();
-        public Func<ICredentialRepository,bool> DoubleClickHandler { get; set; }
+        public Func<ICredentialRepository, bool> DoubleClickHandler { get; set; }
 
         public CredentialRepositoryListView()
         {
@@ -44,11 +44,11 @@ namespace mRemoteNG.UI.Controls
 
         private void SetupObjectListView()
         {
-            olvColumnTitle.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Title;
-            olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.TypeName;
-            olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Source;
-            olvColumnId.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Id;
-            olvColumnIsLoaded.AspectGetter = rowObject => ((ICredentialRepository) rowObject).IsLoaded;
+            olvColumnTitle.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Title;
+            olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.TypeName;
+            olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Source;
+            olvColumnId.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Id;
+            olvColumnIsLoaded.AspectGetter = rowObject => ((ICredentialRepository)rowObject).IsLoaded;
             SetListObjects(CredentialRepositoryList.CredentialProviders);
             objectListView1.SelectionChanged += (sender, args) => RaiseSelectionChangedEvent();
             objectListView1.MouseDoubleClick += ObjectListView1OnMouseDoubleClick;
@@ -61,9 +61,7 @@ namespace mRemoteNG.UI.Controls
 
         private void SetListObjects(IEnumerable<ICredentialRepository> repositories)
         {
-            var filteredRepositories = RepositoryFilter == null ?
-                repositories :
-                repositories.Where(RepositoryFilter);
+            var filteredRepositories = RepositoryFilter == null ? repositories : repositories.Where(RepositoryFilter);
             objectListView1.SetObjects(filteredRepositories);
         }
 
@@ -83,6 +81,7 @@ namespace mRemoteNG.UI.Controls
         }
 
         public event EventHandler SelectionChanged;
+
         private void RaiseSelectionChangedEvent()
         {
             SelectionChanged?.Invoke(this, EventArgs.Empty);
@@ -95,6 +94,7 @@ namespace mRemoteNG.UI.Controls
                 _credentialRepositoryList.RepositoriesUpdated -= OnRepositoriesUpdated;
                 components?.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

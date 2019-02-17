@@ -44,8 +44,10 @@ namespace mRemoteNG.App
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
-                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName),
+                                            Language.strImportFileFailedMainInstruction,
+                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                                            MessageBoxDefaultButton.Button1);
                             Runtime.MessageCollector.AddExceptionMessage("Unable to import file.", ex);
                         }
                     }
@@ -59,7 +61,9 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer, bool importSubOu)
+        public static void ImportFromActiveDirectory(string ldapPath,
+                                                     ContainerInfo importDestinationContainer,
+                                                     bool importSubOu)
         {
             try
             {
@@ -72,7 +76,9 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void ImportFromPortScan(IEnumerable<ScanHost> hosts, ProtocolType protocol, ContainerInfo importDestinationContainer)
+        public static void ImportFromPortScan(IEnumerable<ScanHost> hosts,
+                                              ProtocolType protocol,
+                                              ContainerInfo importDestinationContainer)
         {
             try
             {

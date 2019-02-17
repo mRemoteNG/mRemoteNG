@@ -33,13 +33,17 @@ namespace mRemoteNG.Config.Connections
             {
                 var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
                 var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
-                    cryptographyProvider,
-                    connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
-                    _saveFilter);
-                var xmlConnectionsSerializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
-                {
-                    UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
-                };
+                                                                                 cryptographyProvider,
+                                                                                 connectionTreeModel
+                                                                                     .RootNodes.OfType<RootNodeInfo>()
+                                                                                     .First().PasswordString
+                                                                                     .ConvertToSecureString(),
+                                                                                 _saveFilter);
+                var xmlConnectionsSerializer =
+                    new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
+                    {
+                        UseFullEncryption = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile
+                    };
                 var xml = xmlConnectionsSerializer.Serialize(connectionTreeModel);
 
                 var fileDataProvider = new FileDataProviderWithRollingBackup(_connectionFileName);

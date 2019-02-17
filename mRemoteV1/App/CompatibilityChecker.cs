@@ -21,7 +21,8 @@ namespace mRemoteNG.App
         {
             if (Settings.Default.OverrideFIPSCheck)
             {
-                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check...", true);
+                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check...",
+                                            true);
                 return;
             }
 
@@ -34,7 +35,12 @@ namespace mRemoteNG.App
             //About to pop up a message, let's not block it...
             FrmSplashScreen.getInstance().Close();
 
-            var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected, errorText, "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
+            var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName,
+                                                                Language.strCompatibilityProblemDetected, errorText, "",
+                                                                "",
+                                                                Language.strCheckboxDoNotShowThisMessageAgain,
+                                                                ETaskDialogButtons.OkCancel, ESysIcons.Warning,
+                                                                ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)
             {
                 messageCollector.AddMessage(MessageClass.ErrorMsg, "User requests that FIPS check be overridden", true);
@@ -58,7 +64,8 @@ namespace mRemoteNG.App
 
         private static bool FipsPolicyEnabledForServer2008AndNewer()
         {
-            var regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy");
+            var regKey =
+                Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy");
             var fipsPolicy = regKey?.GetValue("Enabled");
             if (fipsPolicy == null) return false;
             fipsPolicy = Convert.ToInt32(fipsPolicy);
@@ -83,7 +90,12 @@ namespace mRemoteNG.App
             }
 
             if (proccesses.Length <= 0) return;
-            CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected, string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
+            CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected,
+                                   string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected,
+                                                 Application.ProductName), "",
+                                   "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok,
+                                   ESysIcons.Warning,
+                                   ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked)
                 Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
         }

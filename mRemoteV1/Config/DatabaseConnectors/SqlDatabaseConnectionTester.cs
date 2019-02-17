@@ -9,7 +9,10 @@ namespace mRemoteNG.Config.DatabaseConnectors
     /// </summary>
     public class SqlDatabaseConnectionTester
     {
-        public async Task<ConnectionTestResult> TestConnectivity(string server, string database, string username, string password)
+        public async Task<ConnectionTestResult> TestConnectivity(string server,
+                                                                 string database,
+                                                                 string username,
+                                                                 string password)
         {
             using (var sqlConnector = new SqlDatabaseConnector(server, database, username, password))
             {

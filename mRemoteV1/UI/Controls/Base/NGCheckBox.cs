@@ -78,6 +78,7 @@ namespace mRemoteNG.UI.Controls.Base
                 base.OnPaint(e);
                 return;
             }
+
             //Get the colors
             Color fore;
             Color glyph;
@@ -104,7 +105,6 @@ namespace mRemoteNG.UI.Controls.Base
             }
             else
             {
-
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
                 glyph = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph_Disabled");
                 checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Disabled");
@@ -126,7 +126,8 @@ namespace mRemoteNG.UI.Controls.Base
             }
 
             var textRect = new Rectangle(_textXCoord, 0, Width - 16, Height);
-            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
+            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
+                                  TextFormatFlags.PathEllipsis);
         }
 
         private void InitializeComponent()
@@ -137,8 +138,6 @@ namespace mRemoteNG.UI.Controls.Base
             // 
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ResumeLayout(false);
-
         }
     }
 }
-

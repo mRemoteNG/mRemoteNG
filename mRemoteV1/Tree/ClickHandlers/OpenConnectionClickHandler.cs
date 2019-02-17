@@ -19,7 +19,8 @@ namespace mRemoteNG.Tree
         {
             if (clickedNode == null)
                 throw new ArgumentNullException(nameof(clickedNode));
-            if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
+            if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection &&
+                clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
             _connectionInitiator.OpenConnection(clickedNode);
         }
     }

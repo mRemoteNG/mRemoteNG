@@ -26,7 +26,9 @@ namespace mRemoteNG.Tree
             e.Handled = true;
         }
 
-        public void DropModel(ConnectionInfo dropSource, ConnectionInfo dropTarget, DropTargetLocation dropTargetLocation)
+        public void DropModel(ConnectionInfo dropSource,
+                              ConnectionInfo dropTarget,
+                              DropTargetLocation dropTargetLocation)
         {
             switch (dropTargetLocation)
             {
@@ -79,7 +81,9 @@ namespace mRemoteNG.Tree
             e.Handled = true;
         }
 
-        public DragDropEffects CanModelDrop(ConnectionInfo dropSource, ConnectionInfo dropTarget, DropTargetLocation dropTargetLocation)
+        public DragDropEffects CanModelDrop(ConnectionInfo dropSource,
+                                            ConnectionInfo dropTarget,
+                                            DropTargetLocation dropTargetLocation)
         {
             var dragDropEffect = DragDropEffects.None;
             if (!NodeIsDraggable(dropSource))
@@ -87,16 +91,18 @@ namespace mRemoteNG.Tree
                 _infoMessage = Language.strNodeNotDraggable;
                 _enableFeedback = false;
             }
-            else switch (dropTargetLocation)
-            {
-                case DropTargetLocation.Item:
-                    dragDropEffect = HandleCanDropOnItem(dropSource, dropTarget);
-                    break;
-                case DropTargetLocation.AboveItem:
-                case DropTargetLocation.BelowItem:
-                    dragDropEffect = HandleCanDropBetweenItems(dropSource, dropTarget);
-                    break;
-            }
+            else
+                switch (dropTargetLocation)
+                {
+                    case DropTargetLocation.Item:
+                        dragDropEffect = HandleCanDropOnItem(dropSource, dropTarget);
+                        break;
+                    case DropTargetLocation.AboveItem:
+                    case DropTargetLocation.BelowItem:
+                        dragDropEffect = HandleCanDropBetweenItems(dropSource, dropTarget);
+                        break;
+                }
+
             return dragDropEffect;
         }
 
@@ -113,6 +119,7 @@ namespace mRemoteNG.Tree
             {
                 _enableFeedback = false;
             }
+
             return dragDropEffect;
         }
 
@@ -128,6 +135,7 @@ namespace mRemoteNG.Tree
                 dragDropEffect = DragDropEffects.Move;
                 _currentFeedbackColor = DropAllowedFeedbackColor;
             }
+
             return dragDropEffect;
         }
 
@@ -157,7 +165,8 @@ namespace mRemoteNG.Tree
 
         private bool AncestorDraggingOntoChild(ConnectionInfo source, ConnectionInfo target)
         {
-            return source is ContainerInfo sourceAsContainer && sourceAsContainer.GetRecursiveChildList().Contains(target);
+            return source is ContainerInfo sourceAsContainer &&
+                   sourceAsContainer.GetRecursiveChildList().Contains(target);
         }
 
         private bool DraggingOntoCurrentParent(ConnectionInfo source, ConnectionInfo target)

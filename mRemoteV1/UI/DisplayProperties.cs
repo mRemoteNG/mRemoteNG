@@ -17,7 +17,7 @@ namespace mRemoteNG.UI
         /// Creates a new <see cref="DisplayProperties"/> instance with the default
         /// <see cref="IGraphicsProvider"/> of type <see cref="GdiPlusGraphicsProvider"/>
         /// </summary>
-        public DisplayProperties() 
+        public DisplayProperties()
             : this(new GdiPlusGraphicsProvider())
         {
         }

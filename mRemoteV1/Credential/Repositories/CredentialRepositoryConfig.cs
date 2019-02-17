@@ -39,7 +39,7 @@ namespace mRemoteNG.Credential.Repositories
             get { return _source; }
             set
             {
-                _source = value; 
+                _source = value;
                 RaisePropertyChangedEvent(nameof(Source));
             }
         }
@@ -49,7 +49,7 @@ namespace mRemoteNG.Credential.Repositories
             get { return _key; }
             set
             {
-                _key = value; 
+                _key = value;
                 RaisePropertyChangedEvent(nameof(Key));
             }
         }
@@ -74,6 +74,7 @@ namespace mRemoteNG.Credential.Repositories
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected virtual void RaisePropertyChangedEvent(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

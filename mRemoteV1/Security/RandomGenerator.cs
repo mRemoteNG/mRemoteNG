@@ -13,12 +13,14 @@ namespace mRemoteNG.Security
 
             var randomGen = new SecureRandom();
             var stringBuilder = new StringBuilder();
-            const string availableChars = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+|[]{};:',./<>?";
+            const string availableChars =
+                @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+|[]{};:',./<>?";
             for (var x = 0; x < length; x++)
             {
                 var randomIndex = randomGen.Next(availableChars.Length - 1);
                 stringBuilder.Append(availableChars[randomIndex]);
             }
+
             return stringBuilder.ToString();
         }
     }

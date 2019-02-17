@@ -19,17 +19,20 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsLoader : IConnectionsLoader
     {
-        private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> _localConnectionPropertiesDeserializer;
+        private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>>
+            _localConnectionPropertiesDeserializer;
+
         private readonly IDataProvider<string> _dataProvider;
 
         public Func<Optional<SecureString>> AuthenticationRequestor { get; set; } =
             () => MiscTools.PasswordDialog("", false);
 
         public SqlConnectionsLoader(
-            IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> localConnectionPropertiesDeserializer, 
+            IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> localConnectionPropertiesDeserializer,
             IDataProvider<string> dataProvider)
         {
-            _localConnectionPropertiesDeserializer = localConnectionPropertiesDeserializer.ThrowIfNull(nameof(localConnectionPropertiesDeserializer));
+            _localConnectionPropertiesDeserializer =
+                localConnectionPropertiesDeserializer.ThrowIfNull(nameof(localConnectionPropertiesDeserializer));
             _dataProvider = dataProvider.ThrowIfNull(nameof(dataProvider));
         }
 
@@ -60,7 +63,9 @@ namespace mRemoteNG.Config.Connections
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             var cipherText = metaData.Protected;
             var authenticator = new PasswordAuthenticator(cryptographyProvider, cipherText, AuthenticationRequestor);
-            var authenticated = authenticator.Authenticate(new RootNodeInfo(RootNodeType.Connection).DefaultPassword.ConvertToSecureString());
+            var authenticated =
+                authenticator.Authenticate(new RootNodeInfo(RootNodeType.Connection).DefaultPassword
+                                                                                    .ConvertToSecureString());
 
             if (authenticated)
                 return authenticator.LastAuthenticatedPassword;
@@ -74,10 +79,10 @@ namespace mRemoteNG.Config.Connections
 
             rootNode
                 .GetRecursiveChildList()
-                .Join(localConnectionProperties, 
-                    con => con.ConstantID, 
-                    locals => locals.ConnectionId,
-                    (con, locals) => new {Connection = con, LocalProperties = locals})
+                .Join(localConnectionProperties,
+                      con => con.ConstantID,
+                      locals => locals.ConnectionId,
+                      (con, locals) => new {Connection = con, LocalProperties = locals})
                 .ForEach(x =>
                 {
                     x.Connection.PleaseConnect = x.LocalProperties.Connected;
