@@ -2755,4 +2755,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strPropertyNameFavorite" xml:space="preserve">
     <value>Favorite</value>
   </data>
+  <data name="strPropertyNameUser1" xml:space="preserve">
+    <value>User Field</value>
+  </data>
 </root>

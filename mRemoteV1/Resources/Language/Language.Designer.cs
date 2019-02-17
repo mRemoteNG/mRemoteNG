@@ -5578,6 +5578,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Field.
+        /// </summary>
+        internal static string strPropertyNameUser1 {
+            get {
+                return ResourceManager.GetString("strPropertyNameUser1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         internal static string strPropertyNameUsername {

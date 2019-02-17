@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -320,6 +320,12 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUser1"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UserField { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameFavorite"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionFavorite"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool Favorite { get; set; }
 
         #endregion
 
