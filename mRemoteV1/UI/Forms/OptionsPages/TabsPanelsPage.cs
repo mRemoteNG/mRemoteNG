@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class TabsPanelsPage
@@ -22,8 +20,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             chkAlwaysShowPanelTabs.Text = Language.strAlwaysShowPanelTabs;
-			chkAlwaysShowConnectionTabs.Text = Language.strAlwaysShowConnectionTabs;
-			chkOpenNewTabRightOfSelected.Text = Language.strOpenNewTabRight;
+            chkAlwaysShowConnectionTabs.Text = Language.strAlwaysShowConnectionTabs;
+            chkOpenNewTabRightOfSelected.Text = Language.strOpenNewTabRight;
             chkShowLogonInfoOnTabs.Text = Language.strShowLogonInfoOnTabs;
             chkShowProtocolOnTabs.Text = Language.strShowProtocolOnTabs;
             chkIdentifyQuickConnectTabs.Text = Language.strIdentifyQuickConnectTabs;
@@ -35,11 +33,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkAlwaysShowPanelTabs.Checked = Settings.Default.AlwaysShowPanelTabs;
-			chkAlwaysShowConnectionTabs.Checked = Settings.Default.AlwaysShowConnectionTabs;
-			chkOpenNewTabRightOfSelected.Checked = Settings.Default.OpenTabsRightOfSelected;
+            chkAlwaysShowConnectionTabs.Checked = Settings.Default.AlwaysShowConnectionTabs;
+            chkOpenNewTabRightOfSelected.Checked = Settings.Default.OpenTabsRightOfSelected;
             chkShowLogonInfoOnTabs.Checked = Settings.Default.ShowLogonInfoOnTabs;
             chkShowProtocolOnTabs.Checked = Settings.Default.ShowProtocolOnTabs;
             chkIdentifyQuickConnectTabs.Checked = Settings.Default.IdentifyQuickConnectTabs;
@@ -55,8 +51,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.SaveSettings();
 
             Settings.Default.AlwaysShowPanelTabs = chkAlwaysShowPanelTabs.Checked;
-			Settings.Default.AlwaysShowConnectionTabs = chkAlwaysShowConnectionTabs.Checked;
-			FrmMain.Default.ShowHidePanelTabs();
+            Settings.Default.AlwaysShowConnectionTabs = chkAlwaysShowConnectionTabs.Checked;
+            FrmMain.Default.ShowHidePanelTabs();
 
             Settings.Default.OpenTabsRightOfSelected = chkOpenNewTabRightOfSelected.Checked;
             Settings.Default.ShowLogonInfoOnTabs = chkShowLogonInfoOnTabs.Checked;
@@ -66,8 +62,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked;
             Settings.Default.CreateEmptyPanelOnStartUp = chkCreateEmptyPanelOnStart.Checked;
             Settings.Default.StartUpPanelName = txtBoxPanelName.Text;
-
-            Settings.Default.Save();
         }
 
         private void UpdatePanelNameTextBox()

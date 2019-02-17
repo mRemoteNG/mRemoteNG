@@ -23,12 +23,15 @@ namespace mRemoteNG.Config.Connections
             _connectionsService = null;
         }
 
-        private void ConnectionTreeModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void ConnectionTreeModelOnPropertyChanged(object sender,
+                                                          PropertyChangedEventArgs propertyChangedEventArgs)
         {
             SaveConnectionOnEdit(propertyChangedEventArgs.PropertyName);
         }
 
-        private void ConnectionTreeModelOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void ConnectionTreeModelOnCollectionChanged(object sender,
+                                                            NotifyCollectionChangedEventArgs
+                                                                notifyCollectionChangedEventArgs)
         {
             SaveConnectionOnEdit();
         }

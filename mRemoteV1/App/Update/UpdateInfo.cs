@@ -1,4 +1,5 @@
 ﻿using System;
+
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 
 namespace mRemoteNG.App.Update
@@ -43,6 +44,7 @@ namespace mRemoteNG.App.Update
                 newInfo.Checksum = updateFile.GetChecksum();
                 newInfo.IsValid = newInfo.CheckIfValid();
             }
+
             return newInfo;
         }
 
@@ -50,11 +52,11 @@ namespace mRemoteNG.App.Update
         {
             if (string.IsNullOrEmpty(Version.ToString()))
                 return false;
-            if(string.IsNullOrEmpty(DownloadAddress.AbsoluteUri))
+            if (string.IsNullOrEmpty(DownloadAddress.AbsoluteUri))
                 return false;
             if (string.IsNullOrEmpty(ChangeLogAddress.AbsoluteUri))
                 return false;
-#if false            
+#if false
             if (string.IsNullOrEmpty(ImageAddress.AbsoluteUri))
                 return false;
             if (string.IsNullOrEmpty(ImageLinkAddress.AbsoluteUri))

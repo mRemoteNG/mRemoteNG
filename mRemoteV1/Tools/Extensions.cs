@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Connection;
@@ -8,23 +7,23 @@ using mRemoteNG.Container;
 namespace mRemoteNG.Tools
 {
     public static class Extensions
-	{
+    {
 		public static Optional<T> ToOptional<T>(this T value)
-		{
-			return new Optional<T>(value);
-		}
+        {
+            return new Optional<T>(value);
+        }
 
-	    public static Optional<U> MaybeParse<T, U>(this T value, Func<T, U> parseFunc)
-	    {
-	        try
-	        {
-	            return new Optional<U>(parseFunc(value));
-	        }
-	        catch
-	        {
-	            return new Optional<U>();
-	        }
-	    }
+        public static Optional<U> MaybeParse<T, U>(this T value, Func<T, U> parseFunc)
+        {
+            try
+            {
+                return new Optional<U>(parseFunc(value));
+            }
+            catch
+            {
+                return new Optional<U>();
+            }
+        }
 
         /// <summary>
         /// Throws an <see cref="ArgumentNullException"/> if the given value is
@@ -35,12 +34,12 @@ namespace mRemoteNG.Tools
         /// <param name="argName">
         /// The name of the argument
         /// </param>
-	    public static T ThrowIfNull<T>(this T value, string argName)
-	    {
+        public static T ThrowIfNull<T>(this T value, string argName)
+        {
             if (value == null)
                 throw new ArgumentNullException(argName);
-	        return value;
-	    }
+            return value;
+        }
 
         /// <summary>
         /// Throws an <see cref="ArgumentException"/> if the value
@@ -48,12 +47,12 @@ namespace mRemoteNG.Tools
         /// </summary>
         /// <param name="value"></param>
         /// <param name="argName"></param>
-	    public static string ThrowIfNullOrEmpty(this string value, string argName)
-	    {
+        public static string ThrowIfNullOrEmpty(this string value, string argName)
+        {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException("Value cannot be null or empty", argName);
-	        return value;
-	    }
+            return value;
+        }
 
         /// <summary>
         /// Perform an action for each item in the given collection. The item
@@ -63,15 +62,15 @@ namespace mRemoteNG.Tools
         /// <param name="collection"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-	    public static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T> action)
         {
             collection = collection.ToList();
 
             foreach (var item in collection)
-	            action(item);
+                action(item);
 
-	        return collection;
-	    }
+            return collection;
+        }
 
         public static IEnumerable<ConnectionInfo> FlattenConnectionTree(this IEnumerable<ConnectionInfo> connections)
         {
@@ -84,7 +83,7 @@ namespace mRemoteNG.Tools
 
                 foreach (var child in FlattenConnectionTree(container.Children))
                     yield return child;
-            }
+			}
         }
     }
 }

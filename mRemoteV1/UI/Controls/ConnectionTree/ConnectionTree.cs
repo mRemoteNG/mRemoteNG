@@ -19,14 +19,17 @@ namespace mRemoteNG.UI.Controls
     {
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-	    private readonly StatusImageList _statusImageList = new StatusImageList();
-        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
+        private readonly StatusImageList _statusImageList = new StatusImageList();
+
+        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter =
+            new ConnectionTreeSearchTextFilter();
+
         private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
         private IConnectionTreeModel _connectionTreeModel;
 
-        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
+        public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
 
         public NodeSearcher NodeSearcher { get; private set; }
 
@@ -34,9 +37,11 @@ namespace mRemoteNG.UI.Controls
 
         public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = new IConnectionTreeDelegate[0];
 
-        public ITreeNodeClickHandler<ConnectionInfo> DoubleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
+        public ITreeNodeClickHandler<ConnectionInfo> DoubleClickHandler { get; set; } =
+            new TreeNodeCompositeClickHandler();
 
-        public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
+        public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } =
+            new TreeNodeCompositeClickHandler();
 
         public IConnectionTreeModel ConnectionTreeModel
         {
@@ -66,11 +71,13 @@ namespace mRemoteNG.UI.Controls
                 components?.Dispose();
                 _statusImageList?.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
 
         #region ConnectionTree Setup
+
         private void SetupConnectionTreeView()
         {
             SmallImageList = _statusImageList.ImageList;
@@ -111,14 +118,14 @@ namespace mRemoteNG.UI.Controls
             {
                 if (!(args.Model is ContainerInfo container)) return;
                 container.IsExpanded = false;
-				AutoResizeColumn(Columns[0]);
-			};
+                AutoResizeColumn(Columns[0]);
+            };
             Expanded += (sender, args) =>
             {
                 if (!(args.Model is ContainerInfo container)) return;
                 container.IsExpanded = true;
-				AutoResizeColumn(Columns[0]);
-			};
+                AutoResizeColumn(Columns[0]);
+            };
             SelectionChanged += tvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
@@ -129,34 +136,35 @@ namespace mRemoteNG.UI.Controls
             AfterLabelEdit += OnAfterLabelEdit;
         }
 
-		/// <summary>
-		/// Resizes the given column to ensure that all content is shown
-		/// </summary>
-	    private void AutoResizeColumn(ColumnHeader column)
-	    {
-		    if (InvokeRequired)
-		    {
-			    Invoke((MethodInvoker) (() => AutoResizeColumn(column)));
-			    return;
-		    }
+        /// <summary>
+        /// Resizes the given column to ensure that all content is shown
+        /// </summary>
+        private void AutoResizeColumn(ColumnHeader column)
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)(() => AutoResizeColumn(column)));
+                return;
+            }
 
-		    var longestIndentationAndTextWidth = int.MinValue;
-		    var horizontalScrollOffset = LowLevelScrollPosition.X;
-		    const int padding = 10;
+            var longestIndentationAndTextWidth = int.MinValue;
+            var horizontalScrollOffset = LowLevelScrollPosition.X;
+            const int padding = 10;
 
-		    for (var i = 0; i < Items.Count; i++)
-		    {
-			    var rowIndentation = Items[i].Position.X;
-			    var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
+            for (var i = 0; i < Items.Count; i++)
+            {
+                var rowIndentation = Items[i].Position.X;
+                var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
 
-				longestIndentationAndTextWidth = Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
-		    }
+                longestIndentationAndTextWidth =
+                    Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
+            }
 
-		    column.Width = longestIndentationAndTextWidth +
-		                   SmallImageSize.Width +
-		                   horizontalScrollOffset +
-		                   padding;
-		}
+            column.Width = longestIndentationAndTextWidth +
+                           SmallImageSize.Width +
+                           horizontalScrollOffset +
+                           padding;
+        }
 
         private void PopulateTreeView(IConnectionTreeModel newModel)
         {
@@ -164,8 +172,8 @@ namespace mRemoteNG.UI.Controls
             RegisterModelUpdateHandlers(newModel);
             NodeSearcher = new NodeSearcher(newModel);
             ExecutePostSetupActions();
-			AutoResizeColumn(Columns[0]);
-		}
+            AutoResizeColumn(Columns[0]);
+        }
 
         private void RegisterModelUpdateHandlers(IConnectionTreeModel newModel)
         {
@@ -196,8 +204,8 @@ namespace mRemoteNG.UI.Controls
             // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
             var property = propertyChangedEventArgs.PropertyName;
             if (property != nameof(ConnectionInfo.Name)
-                && property != nameof(ConnectionInfo.OpenConnections)
-                && property != nameof(ConnectionInfo.Icon))
+             && property != nameof(ConnectionInfo.OpenConnections)
+             && property != nameof(ConnectionInfo.Icon))
             {
                 return;
             }
@@ -206,8 +214,8 @@ namespace mRemoteNG.UI.Controls
                 return;
 
             RefreshObject(senderAsConnectionInfo);
-			AutoResizeColumn(Columns[0]);
-		}
+            AutoResizeColumn(Columns[0]);
+        }
 
         private void ExecutePostSetupActions()
         {
@@ -216,9 +224,11 @@ namespace mRemoteNG.UI.Controls
                 action.Execute(this);
             }
         }
+
         #endregion
 
         #region ConnectionTree Behavior
+
         public RootNodeInfo GetRootConnectionNode()
         {
             return (RootNodeInfo)ConnectionTreeModel.RootNodes.FirstOrDefault(item => item is RootNodeInfo);
@@ -271,7 +281,8 @@ namespace mRemoteNG.UI.Controls
 
         private void AddNode(ConnectionInfo newNode)
         {
-            if (SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttyRoot || SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
+            if (SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttyRoot ||
+                SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
                 return;
 
             // the new node will survive filtering if filtering is active
@@ -321,7 +332,7 @@ namespace mRemoteNG.UI.Controls
 
         public void CopyHostnameSelectedNode()
         {
-            Clipboard.SetText(SelectedNode.Hostname);
+            Clipboard.SetText(SelectedNode.IsContainer ? SelectedNode.Name : SelectedNode.Hostname);
         }
 
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
@@ -371,23 +382,23 @@ namespace mRemoteNG.UI.Controls
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-			// disable filtering if necessary. prevents RefreshObjects from
-			// throwing an exception
-			var filteringEnabled = IsFiltering;
-			var filter = ModelFilter;
-			if (filteringEnabled)
-			{
-				ResetColumnFiltering();
-			}
+            // disable filtering if necessary. prevents RefreshObjects from
+            // throwing an exception
+            var filteringEnabled = IsFiltering;
+            var filter = ModelFilter;
+            if (filteringEnabled)
+            {
+                ResetColumnFiltering();
+            }
 
             if (sender is IConnectionTree)
                 RebuildAll(true);
             else
-			    RefreshObject(sender);
+				RefreshObject(sender);
 
-			AutoResizeColumn(Columns[0]);
+            AutoResizeColumn(Columns[0]);
 
-			// turn filtering back on
+            // turn filtering back on
             if (!filteringEnabled) return;
             ModelFilter = filter;
             UpdateFiltering();
@@ -407,7 +418,9 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                                                                "tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed",
+                                                                ex);
             }
         }
 
@@ -447,7 +460,9 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                                                                "tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed",
+                                                                ex);
             }
         }
 
@@ -484,9 +499,12 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                                                                "tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed",
+                                                                ex);
             }
         }
+
         #endregion
     }
 }

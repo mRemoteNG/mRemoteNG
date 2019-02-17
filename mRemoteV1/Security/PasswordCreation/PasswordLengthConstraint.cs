@@ -18,7 +18,8 @@ namespace mRemoteNG.Security.PasswordCreation
             if (maxLength <= 0)
                 throw new ArgumentException($"{nameof(maxLength)} must be a positive, non-zero value.");
             if (maxLength < minimumLength)
-                throw new ArgumentException($"{nameof(maxLength)} must be greater than or equal to {nameof(minimumLength)}.");
+                throw new ArgumentException(
+                                            $"{nameof(maxLength)} must be greater than or equal to {nameof(minimumLength)}.");
 
             _minLength = minimumLength;
             _maxLength = maxLength;

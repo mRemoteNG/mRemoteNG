@@ -12,7 +12,7 @@ using System.Security;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {
-    public class DataTableSerializer : ISerializer<ConnectionInfo,DataTable>
+    public class DataTableSerializer : ISerializer<ConnectionInfo, DataTable>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
@@ -23,7 +23,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
 
         public Version Version { get; } = new Version(2, 7);
 
-        public DataTableSerializer(SaveFilter saveFilter, ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
+        public DataTableSerializer(SaveFilter saveFilter,
+                                   ICryptographyProvider cryptographyProvider,
+                                   SecureString encryptionKey)
         {
             _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
             _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
@@ -187,7 +189,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
 
         private void SetPrimaryKey(DataTable dataTable)
         {
-            dataTable.PrimaryKey = new[] { dataTable.Columns["ConstantID"] };
+            dataTable.PrimaryKey = new[] {dataTable.Columns["ConstantID"]};
         }
 
         private void SerializeNodesRecursive(ConnectionInfo connectionInfo)
@@ -255,14 +257,16 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["VNCProxyIP"] = connectionInfo.VNCProxyIP;
             dataRow["VNCProxyPort"] = connectionInfo.VNCProxyPort;
             dataRow["VNCProxyUsername"] = connectionInfo.VNCProxyUsername;
-            dataRow["VNCProxyPassword"] = _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey);
+            dataRow["VNCProxyPassword"] =
+                _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey);
             dataRow["VNCColors"] = connectionInfo.VNCColors;
             dataRow["VNCSmartSizeMode"] = connectionInfo.VNCSmartSizeMode;
             dataRow["VNCViewOnly"] = connectionInfo.VNCViewOnly;
             dataRow["RDGatewayUsageMethod"] = connectionInfo.RDGatewayUsageMethod;
             dataRow["RDGatewayHostname"] = connectionInfo.RDGatewayHostname;
             dataRow["RDGatewayUseConnectionCredentials"] = connectionInfo.RDGatewayUseConnectionCredentials;
-            dataRow["RDGatewayUsername"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayUsername, _encryptionKey);
+            dataRow["RDGatewayUsername"] =
+                _cryptographyProvider.Encrypt(connectionInfo.RDGatewayUsername, _encryptionKey);
             dataRow["RDGatewayPassword"] = connectionInfo.RDGatewayPassword;
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             if (_saveFilter.SaveInheritance)
@@ -315,7 +319,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritVNCViewOnly"] = connectionInfo.Inheritance.VNCViewOnly;
                 dataRow["InheritRDGatewayUsageMethod"] = connectionInfo.Inheritance.RDGatewayUsageMethod;
                 dataRow["InheritRDGatewayHostname"] = connectionInfo.Inheritance.RDGatewayHostname;
-                dataRow["InheritRDGatewayUseConnectionCredentials"] = connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
+                dataRow["InheritRDGatewayUseConnectionCredentials"] =
+                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
                 dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RDGatewayUsername;
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
@@ -375,6 +380,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRDGatewayPassword"] = false;
                 dataRow["InheritRDGatewayDomain"] = false;
             }
+
             _dataTable.Rows.Add(dataRow);
         }
     }

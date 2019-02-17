@@ -625,13 +625,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Kryptering mislyktes. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Innstillingen for Windows-sikkerhet, "Systemkryptografi: Bruk FIPS-kompatible algoritmer til kryptering, nummerering og signering", er aktivert. Denne innstillingen er ikke kompatibel med {0}. 
-
-Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for mer informasjon.
-
-{0} vil bli avsluttet.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Feil</value>
   </data>

@@ -616,13 +616,6 @@ VncSharp Control Version {0}</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Не вдалося зашифрувати. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Налаштування системи безпеки Windows: "Використання системної криптографії FIPS-сумісних алгоритмів шифрування, хешування та підписування», включено. Це налаштування не сумісне з {0}.
-
-Див. статтю Microsoft Support на http://support.microsoft.com/kb/811833 для отримання додаткової інформації.
-
-{0} буде закрито.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Помилки</value>
   </data>

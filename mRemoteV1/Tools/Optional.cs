@@ -12,26 +12,26 @@ namespace mRemoteNG.Tools
     /// <typeparam name="T">The underlying type that may or may not have a value</typeparam>
     public class Optional<T> : IEnumerable<T>, IComparable<Optional<T>>
     {
-		private readonly T[] _optional;
+        private readonly T[] _optional;
 
         /// <summary>
         /// Create a new empty instance of Optional
         /// </summary>
-		public Optional()
-		{
-			_optional = new T[0];
-		}
+        public Optional()
+        {
+            _optional = new T[0];
+        }
 
         /// <summary>
         /// Create a new instance of Optional from the given value.
         /// If the value is null, the Optional will be empty
         /// </summary>
-		public Optional(T value)
-		{
-			_optional = value != null 
-				? new[] {value} 
-				: new T[0];
-		}
+        public Optional(T value)
+        {
+            _optional = value != null
+                ? new[] {value}
+                : new T[0];
+        }
 
         public override string ToString()
         {
@@ -57,18 +57,21 @@ namespace mRemoteNG.Tools
         public static Optional<T> Empty => new Optional<T>();
 
         #region IEnumerable
-        IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
 
-		public IEnumerator<T> GetEnumerator()
-		{
-			return ((IEnumerable<T>)_optional).GetEnumerator();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return ((IEnumerable<T>)_optional).GetEnumerator();
+        }
+
         #endregion
 
         #region IComparable
+
         /// <summary>
         /// Compares this <see cref="Optional{T}"/> to another instance
         /// of the same type. For purposes of comparison, empty Optional
@@ -96,58 +99,61 @@ namespace mRemoteNG.Tools
                 return ((IComparable<T>)_optional[0]).CompareTo(other.First());
 
             throw new ArgumentException(string.Format(
-                "Cannot compare objects. Optional type {0} is not comparable to itself",
-                typeof(T).FullName));
+                                                      "Cannot compare objects. Optional type {0} is not comparable to itself",
+                                                      typeof(T).FullName));
         }
+
         #endregion
 
         #region Override Equals and GetHashCode
 
         public override bool Equals(object obj)
-	    {
-	        if (ReferenceEquals(this, obj))
-	            return true;
+        {
+            if (ReferenceEquals(this, obj))
+                return true;
 
-	        var objAsOptional = obj as Optional<T>;
-	        if (objAsOptional != null)
-	            return Equals(objAsOptional);
+            var objAsOptional = obj as Optional<T>;
+            if (objAsOptional != null)
+                return Equals(objAsOptional);
 
-	        if (obj is T)
-	            Equals((T)obj);
+            if (obj is T)
+                Equals((T)obj);
 
-	        return false;
-	    }
+            return false;
+        }
 
-	    public bool Equals(Optional<T> other)
-	    {
-	        var otherObj = other.FirstOrDefault();
-	        var thisObj = _optional.FirstOrDefault();
-	        if (thisObj == null && otherObj == null)
-	            return true;
-	        if (thisObj == null)
-	            return false;
-	        return thisObj.Equals(otherObj);
-	    }
+        public bool Equals(Optional<T> other)
+        {
+            var otherObj = other.FirstOrDefault();
+            var thisObj = _optional.FirstOrDefault();
+            if (thisObj == null && otherObj == null)
+                return true;
+            if (thisObj == null)
+                return false;
+            return thisObj.Equals(otherObj);
+        }
 
-	    public override int GetHashCode()
-	    {
-	        return _optional != null
-	            ? _optional.GetHashCode()
-	            : 0;
-	    }
-	    #endregion
+        public override int GetHashCode()
+        {
+            return _optional != null
+                ? _optional.GetHashCode()
+                : 0;
+        }
 
-	    #region Operators
+        #endregion
 
-	    public static bool operator ==(Optional<T> left, Optional<T> right)
-	    {
-	        return Equals(left, right);
-	    }
+        #region Operators
 
-	    public static bool operator !=(Optional<T> left, Optional<T> right)
-	    {
-	        return !Equals(left, right);
-	    }
-	    #endregion
-	}
+        public static bool operator ==(Optional<T> left, Optional<T> right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Optional<T> left, Optional<T> right)
+        {
+            return !Equals(left, right);
+        }
+
+        #endregion
+    }
 }

@@ -18,8 +18,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ApplyTheme();
             PageIcon = Resources.Key_Icon;
         }
-        
-        public override string PageName {
+
+        public override string PageName
+        {
             get => Language.Credentials;
             set { }
         }
@@ -37,10 +38,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
 
             checkBoxUnlockOnStartup.Checked = Settings.Default.PromptUnlockCredReposOnStartup;
-
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (Settings.Default.EmptyCredentials)
             {

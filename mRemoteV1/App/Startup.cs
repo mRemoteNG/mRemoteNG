@@ -37,15 +37,16 @@ namespace mRemoteNG.App
 
         public void InitializeProgram(MessageCollector messageCollector)
         {
-            Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
+            Debug.Print("---------------------------" + Environment.NewLine + "[START] - " +
+                        Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
             var startupLogger = new StartupDataLogger(messageCollector);
             startupLogger.LogStartupData();
             CompatibilityChecker.CheckCompatibility(messageCollector);
             ParseCommandLineArgs(messageCollector);
             IeBrowserEmulation.Register();
             _connectionIconLoader.GetConnectionIcons();
-            DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a=>"ConDefault"+a);
-            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a=>"InhDefault"+a);
+            DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a => "ConDefault" + a);
+            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a => "InhDefault" + a);
         }
 
         private static void ParseCommandLineArgs(MessageCollector messageCollector)
@@ -59,7 +60,8 @@ namespace mRemoteNG.App
             messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
             if (!Settings.Default.UseSQLServer) return;
             messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            Runtime.ConnectionsService.RemoteConnectionsSyncronizer =
+                new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 
@@ -74,7 +76,12 @@ namespace mRemoteNG.App
                 return;
             }
 
-            var nextUpdateCheck = Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
+            var nextUpdateCheck =
+                Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(
+                                                                                 TimeSpan
+                                                                                     .FromDays(Convert.ToDouble(Settings
+                                                                                                                .Default
+                                                                                                                .CheckForUpdatesFrequencyDays))));
             if (!Settings.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
             {
                 return;
@@ -100,6 +107,7 @@ namespace mRemoteNG.App
                 {
                     return;
                 }
+
                 if (e.Error != null)
                 {
                     throw e.Error;

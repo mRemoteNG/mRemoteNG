@@ -20,7 +20,8 @@ namespace mRemoteNG.Config.Import
             }
 
             if (!File.Exists(filePath))
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"Unable to import file. File does not exist. Path: {filePath}");
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    $"Unable to import file. File does not exist. Path: {filePath}");
 
             var dataProvider = new FileDataProvider(filePath);
             var xmlString = dataProvider.Load();
@@ -34,7 +35,7 @@ namespace mRemoteNG.Config.Import
             };
             credentialImportForm.ShowDialog();
 
-            var rootImportContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(filePath) };
+            var rootImportContainer = new ContainerInfo {Name = Path.GetFileNameWithoutExtension(filePath)};
             rootImportContainer.AddChildRange(serializationResult.ConnectionRecords);
             destinationContainer.AddChild(rootImportContainer);
         }

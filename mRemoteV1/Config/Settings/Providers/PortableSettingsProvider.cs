@@ -21,7 +21,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
-// https://raw.githubusercontent.com/crdx/PortableSettingsProvider
+// https://github.com/crdx/PortableSettingsProvider
 //
 
 using System;
@@ -31,6 +31,7 @@ using System.Windows.Forms;
 using System.Collections.Specialized;
 using System.Xml;
 using System.IO;
+
 //using mRemoteNG.App;
 
 namespace mRemoteNG.Config.Settings.Providers
@@ -43,7 +44,9 @@ namespace mRemoteNG.Config.Settings.Providers
         private const string _className = "PortableSettingsProvider";
         private XmlDocument _xmlDocument;
 
-        private string _filePath => Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? throw new InvalidOperationException(), $"{ApplicationName}.settings");
+        private string _filePath =>
+            Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? throw new InvalidOperationException(),
+                         $"{ApplicationName}.settings");
 
         private XmlNode _localSettingsNode => GetSettingsNode(_localSettingsNodeName);
 
@@ -63,7 +66,7 @@ namespace mRemoteNG.Config.Settings.Providers
                 }
                 catch (Exception /*ex*/)
                 {
-                    // This casues hundreds of unit tests to fail for some reason...
+                    // This causes hundreds of unit tests to fail for some reason...
                     //Runtime.MessageCollector.AddExceptionStackTrace("PortableSettingsProvider: Error getting XML", ex);
                 }
 
@@ -109,7 +112,8 @@ namespace mRemoteNG.Config.Settings.Providers
             }
         }
 
-        public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection collection)
+        public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context,
+                                                                          SettingsPropertyCollection collection)
         {
             var values = new SettingsPropertyValueCollection();
 

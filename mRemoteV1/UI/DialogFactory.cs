@@ -28,7 +28,9 @@ namespace mRemoteNG.UI
         /// <param name="connectionFileName"></param>
         /// <param name="messageText"></param>
         /// <param name="showCancelButton"></param>
-        public static void ShowLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton)
+        public static void ShowLoadConnectionsFailedDialog(string connectionFileName,
+                                                           string messageText,
+                                                           bool showCancelButton)
         {
             var commandButtons = new List<string>
             {
@@ -46,13 +48,13 @@ namespace mRemoteNG.UI
                 try
                 {
                     CTaskDialog.ShowTaskDialogBox(
-                        GeneralAppInfo.ProductName,
-                        messageText,
-                        "", "", "", "", "",
-                        string.Join(" | ", commandButtons),
-                        ETaskDialogButtons.None,
-                        ESysIcons.Question,
-                        ESysIcons.Question);
+                                                  GeneralAppInfo.ProductName,
+                                                  messageText,
+                                                  "", "", "", "", "",
+                                                  string.Join(" | ", commandButtons),
+                                                  ETaskDialogButtons.None,
+                                                  ESysIcons.Question,
+                                                  ESysIcons.Question);
 
                     switch (CTaskDialog.CommandButtonResult)
                     {
@@ -78,9 +80,11 @@ namespace mRemoteNG.UI
                 catch (Exception exception)
                 {
                     Runtime.MessageCollector.AddExceptionMessage(
-                        string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionFileName), 
-                        exception,
-                        MessageClass.WarningMsg);
+                                                                 string
+                                                                     .Format(Language.strConnectionsFileCouldNotBeLoadedNew,
+                                                                             connectionFileName),
+                                                                 exception,
+                                                                 MessageClass.WarningMsg);
                 }
             }
         }

@@ -40,17 +40,19 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfo
             // 
-            DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenInfoHelp,
-            _mMenInfoSep1,
-            _mMenInfoWebsite,
-            _mMenInfoDonate,
-            _mMenInfoForum,
-            _mMenInfoBugReport,
-            _toolStripSeparator2,
-            _mMenToolsUpdate,
-            _mMenInfoSep2,
-            _mMenInfoAbout});
+            DropDownItems.AddRange(new ToolStripItem[]
+            {
+                _mMenInfoHelp,
+                _mMenInfoSep1,
+                _mMenInfoWebsite,
+                _mMenInfoDonate,
+                _mMenInfoForum,
+                _mMenInfoBugReport,
+                _toolStripSeparator2,
+                _mMenToolsUpdate,
+                _mMenInfoSep2,
+                _mMenInfoAbout
+            });
             Name = "mMenInfo";
             Size = new System.Drawing.Size(44, 20);
             Text = Language.strMenuHelp;
@@ -142,6 +144,7 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region Info
+
         private void mMenToolsUpdate_Click(object sender, EventArgs e) => Windows.Show(WindowType.Update);
 
         private void mMenInfoHelp_Click(object sender, EventArgs e) => Windows.Show(WindowType.Help);
@@ -155,6 +158,7 @@ namespace mRemoteNG.UI.Menu
         private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlDonate);
 
         private void mMenInfoAbout_Click(object sender, EventArgs e) => Windows.Show(WindowType.About);
+
         #endregion
     }
 }

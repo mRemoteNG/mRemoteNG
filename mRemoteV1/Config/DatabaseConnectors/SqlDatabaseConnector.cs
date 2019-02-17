@@ -8,7 +8,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
 {
     public class SqlDatabaseConnector : IDatabaseConnector
     {
-        public  SqlConnection SqlConnection { get; private set; } = default(SqlConnection);
+        public SqlConnection SqlConnection { get; private set; } = default(SqlConnection);
         private string _sqlConnectionString = "";
         private readonly string _sqlHost;
         private readonly string _sqlCatalog;
@@ -45,7 +45,8 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildSqlConnectionStringWithCustomCredentials()
         {
-            _sqlConnectionString = $"Data Source={_sqlHost};Initial Catalog={_sqlCatalog};User Id={_sqlUsername};Password={_sqlPassword}";
+            _sqlConnectionString =
+                $"Data Source={_sqlHost};Initial Catalog={_sqlCatalog};User Id={_sqlUsername};Password={_sqlPassword}";
         }
 
         private void BuildSqlConnectionStringWithDefaultCredentials()
@@ -77,6 +78,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
         {
             Dispose(true);
         }
+
         private void Dispose(bool itIsSafeToFreeManagedObjects)
         {
             if (!itIsSafeToFreeManagedObjects) return;

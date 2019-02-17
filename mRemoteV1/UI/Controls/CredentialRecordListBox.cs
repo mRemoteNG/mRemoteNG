@@ -9,7 +9,7 @@ namespace mRemoteNG.UI.Controls
     {
         public new ICredentialRecord SelectedItem => (ICredentialRecord)base.SelectedItem;
         public ICredentialRecord NoneSelection { get; } = new NullCredentialRecord();
-        public ICredentialRecord AddNewSelection { get; } = new CredentialRecord { Title = $"--{Language.strAdd}--" };
+        public ICredentialRecord AddNewSelection { get; } = new CredentialRecord {Title = $"--{Language.strAdd}--"};
 
         public CredentialRecordListBox(IEnumerable<ICredentialRecord> listOfCredentialRecords)
         {
