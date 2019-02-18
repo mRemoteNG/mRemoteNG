@@ -354,6 +354,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.RDGatewayUseConnectionCredentials = value;
             }
 
+            if (headers.Contains("Favorite"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("Favorite")], out value))
+                    connectionRecord.Favorite = value;
+            }
+
             #region Inheritance
 
             if (headers.Contains("InheritCacheBitmaps"))
@@ -592,6 +599,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUserField")], out value))
                     connectionRecord.Inheritance.UserField = value;
+            }
+
+            if (headers.Contains("InheritFavorite"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritFavorite")], out value))
+                    connectionRecord.Inheritance.Favorite = value;
             }
 
             if (headers.Contains("InheritExtApp"))

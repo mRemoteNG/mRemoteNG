@@ -882,14 +882,13 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;Application xmlns:xsi=&apos;http://www.w3.org/2001/XMLSchema-instance&apos;&gt;
-        ///  &lt;VisualElements
-        ///    BackgroundColor=&apos;#343A40&apos;
-        ///    ShowNameOnSquare150x150Logo=&apos;on&apos;
-        ///    ForegroundText=&apos;light&apos;
-        ///		Square150x150Logo=&apos;VisualElements_150.png&apos;
-        ///		Square70x70Logo=&apos;VisualElements_70.png&apos;/&gt;
-        ///&lt;/Application&gt;
-        ///.
+        ///    &lt;VisualElements
+        ///        BackgroundColor=&apos;#343A40&apos;
+        ///        ShowNameOnSquare150x150Logo=&apos;on&apos;
+        ///        ForegroundText=&apos;light&apos;
+        ///        Square150x150Logo=&apos;VisualElements_150.png&apos;
+        ///        Square70x70Logo=&apos;VisualElements_70.png&apos; /&gt;
+        ///&lt;/Application&gt;.
         /// </summary>
         internal static string mRemoteNG_VisualElementsManifest {
             get {
@@ -1334,6 +1333,16 @@ namespace mRemoteNG {
             get {
                 object obj = ResourceManager.GetObject("SSHTransfer_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap star {
+            get {
+                object obj = ResourceManager.GetObject("star", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

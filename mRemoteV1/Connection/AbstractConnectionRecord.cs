@@ -68,6 +68,7 @@ namespace mRemoteNG.Connection
         private string _postExtApp;
         private string _macAddress;
         private string _userField;
+        private bool _favorite;
 
         private ProtocolVNC.Compression _vncCompression;
         private ProtocolVNC.Encoding _vncEncoding;
@@ -565,6 +566,15 @@ namespace mRemoteNG.Connection
             set => SetField(ref _userField, value, "UserField");
         }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameFavorite"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionFavorite"),
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public virtual bool Favorite
+        {
+            get => GetPropertyValue("Favorite", _favorite);
+            set => SetField(ref _favorite, value, "Favorite");
+        }
         #endregion
 
         #region VNC

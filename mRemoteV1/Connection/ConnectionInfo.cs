@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
@@ -361,6 +361,7 @@ namespace mRemoteNG.Connection
             PostExtApp = Settings.Default.ConDefaultPostExtApp;
             MacAddress = Settings.Default.ConDefaultMacAddress;
             UserField = Settings.Default.ConDefaultUserField;
+            Favorite = Settings.Default.ConDefaultFavorite;
         }
 
         private void SetVncDefaults()

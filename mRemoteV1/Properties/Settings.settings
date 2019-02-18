@@ -1,701 +1,705 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="mRemoteNG" GeneratedClassName="Settings" UseMySettingsClassName="true">
-    <Profiles />
-    <Settings>
-        <Setting Name="MainFormLocation" Type="System.Drawing.Point" Scope="User">
-            <Value Profile="(Default)">0, 0</Value>
-        </Setting>
-        <Setting Name="MainFormSize" Type="System.Drawing.Size" Scope="User">
-            <Value Profile="(Default)">0, 0</Value>
-        </Setting>
-        <Setting Name="MainFormState" Type="System.Windows.Forms.FormWindowState" Scope="User">
-            <Value Profile="(Default)">Normal</Value>
-        </Setting>
-        <Setting Name="MainFormKiosk" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="DoUpgrade" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="CustomPuttyPath" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="SwitchToMCOnInformation" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="SwitchToMCOnWarning" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="SwitchToMCOnError" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="AutomaticallyGetSessionInfo" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="LoadConsFromCustomLocation" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="CustomConsPath" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="SaveConsOnExit" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="CheckForUpdatesOnStartup" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="ShowDescriptionTooltipsInTree" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ShowSystemTrayIcon" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="OpenTabsRightOfSelected" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="ShowLogonInfoOnTabs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="SingleClickOnConnectionOpensIt" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="EmptyCredentials" Type="System.String" Scope="User">
-            <Value Profile="(Default)">noinfo</Value>
-        </Setting>
-        <Setting Name="DefaultUsername" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="DefaultPassword" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="DefaultDomain" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="UseCustomPuttyPath" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="FirstStart" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="ShowProtocolOnTabs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ResetPanels" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="UpdateUseProxy" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="UpdateProxyAddress" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="UpdateProxyPort" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">80</Value>
-        </Setting>
-        <Setting Name="UpdateProxyUseAuthentication" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="UpdateProxyAuthUser" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="UpdateProxyAuthPass" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultDescription" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultProtocol" Type="System.String" Scope="User">
-            <Value Profile="(Default)">RDP</Value>
-        </Setting>
-        <Setting Name="ConDefaultPuttySession" Type="System.String" Scope="User">
-            <Value Profile="(Default)">Default Settings</Value>
-        </Setting>
-        <Setting Name="ConDefaultUseConsoleSession" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultResolution" Type="System.String" Scope="User">
-            <Value Profile="(Default)">FitToWindow</Value>
-        </Setting>
-        <Setting Name="ConDefaultColors" Type="System.String" Scope="User">
-            <Value Profile="(Default)">Colors16Bit</Value>
-        </Setting>
-        <Setting Name="ConDefaultCacheBitmaps" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultDisplayWallpaper" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultDisplayThemes" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRedirectKeys" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRedirectDiskDrives" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRedirectPrinters" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRedirectClipboard" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRedirectPorts" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRedirectSmartCards" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRedirectSound" Type="System.String" Scope="User">
-            <Value Profile="(Default)">DoNotPlay</Value>
-        </Setting>
-        <Setting Name="MaxPuttyWaitTime" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">2</Value>
-        </Setting>
-        <Setting Name="SingleInstance" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="OpenConsFromLastSession" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="NoReconnect" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="AutoSaveEveryMinutes" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">0</Value>
-        </Setting>
-        <Setting Name="ExtAppsTBVisible" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ExtAppsTBShowText" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="ExtAppsTBLocation" Type="System.Drawing.Point" Scope="User">
-            <Value Profile="(Default)">0, 0</Value>
-        </Setting>
-        <Setting Name="ExtAppsTBParentDock" Type="System.String" Scope="User">
-            <Value Profile="(Default)">Bottom</Value>
-        </Setting>
-        <Setting Name="QuickyTBVisible" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="QuickyTBLocation" Type="System.Drawing.Point" Scope="User">
-            <Value Profile="(Default)">3, 24</Value>
-        </Setting>
-        <Setting Name="QuickyTBParentDock" Type="System.String" Scope="User">
-            <Value Profile="(Default)">Top</Value>
-        </Setting>
-        <Setting Name="ResetToolbars" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="UseSQLServer" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="SQLHost" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="SQLUser" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="SQLPass" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="InhDefaultCacheBitmaps" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultColors" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultDescription" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultDisplayThemes" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultDisplayWallpaper" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultDomain" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultIcon" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultPassword" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultPort" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultProtocol" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultPuttySession" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRedirectDiskDrives" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRedirectKeys" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRedirectPorts" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRedirectPrinters" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRedirectClipboard" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRedirectSmartCards" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRedirectSound" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultResolution" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultUseConsoleSession" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultUsername" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultPanel" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultICAEncryptionStrength" Type="System.String" Scope="User">
-            <Value Profile="(Default)">EncrBasic</Value>
-        </Setting>
-        <Setting Name="InhDefaultICAEncryptionStrength" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultPreExtApp" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultPostExtApp" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="InhDefaultPreExtApp" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultPostExtApp" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="SetHostnameLikeDisplayName" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="DoubleClickOnTabClosesIt" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="ReconnectOnDisconnect" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="AlwaysShowPanelSelectionDlg" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCAuthMode" Type="System.String" Scope="User">
-            <Value Profile="(Default)">AuthVNC</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCColors" Type="System.String" Scope="User">
-            <Value Profile="(Default)">ColNormal</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCSmartSizeMode" Type="System.String" Scope="User">
-            <Value Profile="(Default)">SmartSAspect</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCViewOnly" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCCompression" Type="System.String" Scope="User">
-            <Value Profile="(Default)">CompNone</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCEncoding" Type="System.String" Scope="User">
-            <Value Profile="(Default)">EncHextile</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCProxyIP" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultVNCProxyPassword" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultVNCProxyPort" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">0</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCProxyType" Type="System.String" Scope="User">
-            <Value Profile="(Default)">ProxyNone</Value>
-        </Setting>
-        <Setting Name="ConDefaultVNCProxyUsername" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="InhDefaultVNCAuthMode" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCColors" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCSmartSizeMode" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCViewOnly" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCCompression" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCEncoding" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCProxyIP" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCProxyPassword" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCProxyPort" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCProxyType" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultVNCProxyUsername" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="MinimizeToTray" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="SingleClickSwitchesToOpenConnection" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRDPAuthenticationLevel" Type="System.String" Scope="User">
-            <Value Profile="(Default)">NoAuth</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDPAuthenticationLevel" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="UVNCSCPort" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">5500</Value>
-        </Setting>
-        <Setting Name="StartupComponentsCheck" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="XULRunnerPath" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
-            <Value Profile="(Default)">IE</Value>
-        </Setting>
-        <Setting Name="InhDefaultRenderingEngine" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultMacAddress" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="InhDefaultMacAddress" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="EncryptCompleteConnectionsFile" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultUserField" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="InhDefaultUserField" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultExtApp" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="InhDefaultExtApp" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="CheckForUpdatesAsked" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="CheckForUpdatesFrequencyDays" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">14</Value>
-        </Setting>
-        <Setting Name="CheckForUpdatesLastCheck" Type="System.DateTime" Scope="User">
-            <Value Profile="(Default)">1980-01-01</Value>
-        </Setting>
-        <Setting Name="UpdatePending" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRDGatewayUsageMethod" Type="System.String" Scope="User">
-            <Value Profile="(Default)">Never</Value>
-        </Setting>
-        <Setting Name="ConDefaultRDGatewayUseConnectionCredentials" Type="System.String" Scope="User">
-            <Value Profile="(Default)">Yes</Value>
-        </Setting>
-        <Setting Name="ConDefaultIcon" Type="System.String" Scope="User">
-            <Value Profile="(Default)">mRemoteNG</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDGatewayUsageMethod" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDGatewayHostname" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDGatewayUsername" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDGatewayPassword" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDGatewayDomain" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDGatewayUseConnectionCredentials" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="RdpReconnectionCount" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">5</Value>
-        </Setting>
-        <Setting Name="OverrideUICulture" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultRDGatewayHostname" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultRDGatewayUsername" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultRDGatewayPassword" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultRDGatewayDomain" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultEnableFontSmoothing" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultEnableFontSmoothing" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultEnableDesktopComposition" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultEnableDesktopComposition" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConfirmCloseConnection" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">4</Value>
-        </Setting>
-        <Setting Name="MainFormRestoreSize" Type="System.Drawing.Size" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="MainFormRestoreLocation" Type="System.Drawing.Point" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="SQLDatabaseName" Type="System.String" Scope="User">
-            <Value Profile="(Default)">mRemoteNG</Value>
-        </Setting>
-        <Setting Name="BackupFileKeepCount" Roaming="true" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">10</Value>
-        </Setting>
-        <Setting Name="BackupFileNameFormat" Roaming="true" Type="System.String" Scope="User">
-            <Value Profile="(Default)">{0}.{1:yyyyMMdd-HHmmssffff}.backup</Value>
-        </Setting>
-        <Setting Name="InhDefaultUseCredSsp" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultUseCredSsp" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="AlwaysShowPanelTabs" Roaming="true" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="IdentifyQuickConnectTabs" Roaming="true" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="UpdateChannel" Type="System.String" Scope="User">
-            <Value Profile="(Default)">release</Value>
-        </Setting>
-        <Setting Name="ThemeName" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ShowConfigHelpText" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="PuttySavedSessionsName" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="PuttySavedSessionsPanel" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="CompatibilityWarnLenovoAutoScrollUtility" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="UpdateAddress" Type="System.String" Scope="Application">
-            <Value Profile="(Default)">https://mremoteng.org/</Value>
-        </Setting>
-        <Setting Name="ConDefaultLoadBalanceInfo" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultAutomaticResize" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="InhDefaultLoadBalanceInfo" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultAutomaticResize" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="QuickConnectProtocol" Roaming="true" Type="System.String" Scope="User">
-            <Value Profile="(Default)">RDP</Value>
-        </Setting>
-        <Setting Name="KeysPreviousTab" Roaming="true" Type="System.String" Scope="User">
-            <Value Profile="(Default)">9/9, 33/8</Value>
-        </Setting>
-        <Setting Name="KeysNextTab" Roaming="true" Type="System.String" Scope="User">
-            <Value Profile="(Default)">9/8, 34/8</Value>
-        </Setting>
-        <Setting Name="ShowCompleteConsPathInTitle" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConRDPOverallConnectionTimeout" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">20</Value>
-        </Setting>
-        <Setting Name="EncryptionEngine" Type="mRemoteNG.Security.BlockCipherEngines" Scope="User">
-            <Value Profile="(Default)">AES</Value>
-        </Setting>
-        <Setting Name="EncryptionBlockCipherMode" Type="mRemoteNG.Security.BlockCipherModes" Scope="User">
-            <Value Profile="(Default)">GCM</Value>
-        </Setting>
-        <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">1000</Value>
-        </Setting>
-        <Setting Name="ConDefaultSoundQuality" Type="System.String" Scope="User">
-            <Value Profile="(Default)">Dynamic</Value>
-        </Setting>
-        <Setting Name="InhDefaultSoundQuality" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRDPMinutesToIdleTimeout" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">0</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDPMinutesToIdleTimeout" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultRDPAlertIdleTimeout" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultRDPAlertIdleTimeout" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="InhDefaultCredentialRecord" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="ConDefaultCredentialRecord" Type="System.Guid" Scope="User">
-            <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
-        </Setting>
-        <Setting Name="LogFilePath" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="TextLogMessageWriterWriteDebugMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="TextLogMessageWriterWriteInfoMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="TextLogMessageWriterWriteWarningMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="TextLogMessageWriterWriteErrorMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="NotificationPanelWriterWriteDebugMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="NotificationPanelWriterWriteInfoMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="NotificationPanelWriterWriteWarningMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="NotificationPanelWriterWriteErrorMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="PopupMessageWriterWriteDebugMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="PopupMessageWriterWriteInfoMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="PopupMessageWriterWriteWarningMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="PopupMessageWriterWriteErrorMsgs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="LogToApplicationDirectory" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="PromptUnlockCredReposOnStartup" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="SupportedUICultures" Type="System.String" Scope="Application">
-            <Value Profile="(Default)">cs-CZ,de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,ko-KR,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-CN,zh-TW</Value>
-        </Setting>
-        <Setting Name="ThemingActive" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="ConDefaultUsername" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultPassword" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultDomain" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="ConDefaultPanel" Type="System.String" Scope="User">
-            <Value Profile="(Default)">General</Value>
-        </Setting>
-        <Setting Name="SaveConnectionsAfterEveryEdit" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="UseFilterSearch" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="SQLReadOnly" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="LockToolbars" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="RdpLoadBalanceInfoUseUtf8" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="MultiSshToolbarLocation" Type="System.Drawing.Point" Scope="User">
-            <Value Profile="(Default)">0, 0</Value>
-        </Setting>
-        <Setting Name="MultiSshToolbarParentDock" Type="System.String" Scope="User">
-            <Value Profile="(Default)" />
-        </Setting>
-        <Setting Name="MultiSshToolbarVisible" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="CreateEmptyPanelOnStartUp" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="StartUpPanelName" Type="System.String" Scope="User">
-            <Value Profile="(Default)">General</Value>
-        </Setting>
-        <Setting Name="TrackActiveConnectionInConnectionTree" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="PlaceSearchBarAboveConnectionTree" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="AlwaysShowConnectionTabs" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">True</Value>
-        </Setting>
-        <Setting Name="OverrideFIPSCheck" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-    </Settings>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG" GeneratedClassName="Settings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainFormLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="MainFormSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="MainFormState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="MainFormKiosk" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DoUpgrade" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CustomPuttyPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SwitchToMCOnInformation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SwitchToMCOnWarning" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SwitchToMCOnError" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutomaticallyGetSessionInfo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LoadConsFromCustomLocation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomConsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SaveConsOnExit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesOnStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowDescriptionTooltipsInTree" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ShowSystemTrayIcon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OpenTabsRightOfSelected" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowLogonInfoOnTabs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SingleClickOnConnectionOpensIt" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EmptyCredentials" Type="System.String" Scope="User">
+      <Value Profile="(Default)">noinfo</Value>
+    </Setting>
+    <Setting Name="DefaultUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultDomain" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UseCustomPuttyPath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FirstStart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowProtocolOnTabs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ResetPanels" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateUseProxy" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateProxyAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UpdateProxyPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="UpdateProxyUseAuthentication" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateProxyAuthUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UpdateProxyAuthPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultDescription" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultProtocol" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RDP</Value>
+    </Setting>
+    <Setting Name="ConDefaultPuttySession" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default Settings</Value>
+    </Setting>
+    <Setting Name="ConDefaultUseConsoleSession" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultResolution" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FitToWindow</Value>
+    </Setting>
+    <Setting Name="ConDefaultColors" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Colors16Bit</Value>
+    </Setting>
+    <Setting Name="ConDefaultCacheBitmaps" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultDisplayWallpaper" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultDisplayThemes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectKeys" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectDiskDrives" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectPrinters" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectClipboard" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectPorts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectSmartCards" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectSound" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DoNotPlay</Value>
+    </Setting>
+    <Setting Name="MaxPuttyWaitTime" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="SingleInstance" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OpenConsFromLastSession" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NoReconnect" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoSaveEveryMinutes" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ExtAppsTBVisible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ExtAppsTBShowText" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ExtAppsTBLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="ExtAppsTBParentDock" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Bottom</Value>
+    </Setting>
+    <Setting Name="QuickyTBVisible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="QuickyTBLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 24</Value>
+    </Setting>
+    <Setting Name="QuickyTBParentDock" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Top</Value>
+    </Setting>
+    <Setting Name="ResetToolbars" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseSQLServer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SQLHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SQLUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SQLPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultCacheBitmaps" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultColors" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultDescription" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultDisplayThemes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultDisplayWallpaper" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultDomain" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultIcon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPassword" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPort" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultProtocol" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPuttySession" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectDiskDrives" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectKeys" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectPorts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectPrinters" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectClipboard" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectSmartCards" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectSound" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultResolution" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultUseConsoleSession" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultUsername" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPanel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultICAEncryptionStrength" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EncrBasic</Value>
+    </Setting>
+    <Setting Name="InhDefaultICAEncryptionStrength" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultPreExtApp" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultPostExtApp" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultPreExtApp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPostExtApp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SetHostnameLikeDisplayName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DoubleClickOnTabClosesIt" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ReconnectOnDisconnect" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AlwaysShowPanelSelectionDlg" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCAuthMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AuthVNC</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCColors" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ColNormal</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCSmartSizeMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SmartSAspect</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCViewOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCCompression" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CompNone</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCEncoding" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EncHextile</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyIP" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ProxyNone</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultVNCAuthMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCColors" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCSmartSizeMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCViewOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCCompression" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCEncoding" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyIP" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyPassword" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyPort" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyType" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyUsername" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MinimizeToTray" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SingleClickSwitchesToOpenConnection" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDPAuthenticationLevel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NoAuth</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDPAuthenticationLevel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UVNCSCPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5500</Value>
+    </Setting>
+    <Setting Name="StartupComponentsCheck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="XULRunnerPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IE</Value>
+    </Setting>
+    <Setting Name="InhDefaultRenderingEngine" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultMacAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultMacAddress" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EncryptCompleteConnectionsFile" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultUserField" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultUserField" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultExtApp" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultExtApp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesAsked" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesFrequencyDays" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesLastCheck" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">1980-01-01</Value>
+    </Setting>
+    <Setting Name="UpdatePending" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayUsageMethod" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Never</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayUseConnectionCredentials" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Yes</Value>
+    </Setting>
+    <Setting Name="ConDefaultIcon" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mRemoteNG</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUsageMethod" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayHostname" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUsername" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayPassword" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayDomain" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUseConnectionCredentials" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RdpReconnectionCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="OverrideUICulture" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayHostname" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayDomain" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultEnableFontSmoothing" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultEnableFontSmoothing" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultEnableDesktopComposition" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultEnableDesktopComposition" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConfirmCloseConnection" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="MainFormRestoreSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MainFormRestoreLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SQLDatabaseName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mRemoteNG</Value>
+    </Setting>
+    <Setting Name="BackupFileKeepCount" Roaming="true" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="BackupFileNameFormat" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0}.{1:yyyyMMdd-HHmmssffff}.backup</Value>
+    </Setting>
+    <Setting Name="InhDefaultUseCredSsp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultUseCredSsp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AlwaysShowPanelTabs" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IdentifyQuickConnectTabs" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateChannel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">release</Value>
+    </Setting>
+    <Setting Name="ThemeName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShowConfigHelpText" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PuttySavedSessionsName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PuttySavedSessionsPanel" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CompatibilityWarnLenovoAutoScrollUtility" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UpdateAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://mremoteng.org/</Value>
+    </Setting>
+    <Setting Name="ConDefaultLoadBalanceInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultAutomaticResize" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="InhDefaultLoadBalanceInfo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultAutomaticResize" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="QuickConnectProtocol" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RDP</Value>
+    </Setting>
+    <Setting Name="KeysPreviousTab" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9/9, 33/8</Value>
+    </Setting>
+    <Setting Name="KeysNextTab" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9/8, 34/8</Value>
+    </Setting>
+    <Setting Name="ShowCompleteConsPathInTitle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConRDPOverallConnectionTimeout" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="EncryptionEngine" Type="mRemoteNG.Security.BlockCipherEngines" Scope="User">
+      <Value Profile="(Default)">AES</Value>
+    </Setting>
+    <Setting Name="EncryptionBlockCipherMode" Type="mRemoteNG.Security.BlockCipherModes" Scope="User">
+      <Value Profile="(Default)">GCM</Value>
+    </Setting>
+    <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="ConDefaultSoundQuality" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Dynamic</Value>
+    </Setting>
+    <Setting Name="InhDefaultSoundQuality" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDPMinutesToIdleTimeout" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDPMinutesToIdleTimeout" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDPAlertIdleTimeout" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDPAlertIdleTimeout" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultCredentialRecord" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultCredentialRecord" Type="System.Guid" Scope="User">
+      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
+    </Setting>
+    <Setting Name="LogFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TextLogMessageWriterWriteDebugMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TextLogMessageWriterWriteInfoMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TextLogMessageWriterWriteWarningMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TextLogMessageWriterWriteErrorMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="NotificationPanelWriterWriteDebugMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NotificationPanelWriterWriteInfoMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NotificationPanelWriterWriteWarningMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="NotificationPanelWriterWriteErrorMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PopupMessageWriterWriteDebugMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PopupMessageWriterWriteInfoMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PopupMessageWriterWriteWarningMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PopupMessageWriterWriteErrorMsgs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LogToApplicationDirectory" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PromptUnlockCredReposOnStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SupportedUICultures" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">cs-CZ,de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,ko-KR,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-CN,zh-TW</Value>
+    </Setting>
+    <Setting Name="ThemingActive" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ConDefaultUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultDomain" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultPanel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">General</Value>
+    </Setting>
+    <Setting Name="SaveConnectionsAfterEveryEdit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UseFilterSearch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SQLReadOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LockToolbars" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RdpLoadBalanceInfoUseUtf8" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MultiSshToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="MultiSshToolbarParentDock" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MultiSshToolbarVisible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CreateEmptyPanelOnStartUp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="StartUpPanelName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">General</Value>
+    </Setting>
+    <Setting Name="TrackActiveConnectionInConnectionTree" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PlaceSearchBarAboveConnectionTree" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AlwaysShowConnectionTabs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OverrideFIPSCheck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultFavorite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultFavorite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

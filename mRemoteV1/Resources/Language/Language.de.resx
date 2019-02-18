@@ -2654,4 +2654,10 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="strMultiSshToolbar" xml:space="preserve">
     <value>Multi-SSH Symbolleiste</value>
   </data>
+  <data name="strPropertyDescriptionFavorite" xml:space="preserve">
+    <value>Zeige diese Verbindung in den Favoriten</value>
+  </data>
+  <data name="strPropertyNameFavorite" xml:space="preserve">
+    <value>Favorit</value>
+  </data>
 </root>

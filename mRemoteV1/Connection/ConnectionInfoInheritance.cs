@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -321,10 +321,15 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UserField { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8),
+        LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameFavorite"),
+        LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionFavorite"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool Favorite { get; set; }
         #endregion
 
         #region VNC
-		[LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 9), 
+        [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 9), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameCompression"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionCompression"), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCCompression {get; set;}

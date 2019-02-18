@@ -33,6 +33,7 @@ namespace mRemoteNG.UI.Window
             this.PictureBoxSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
             this.txtSearch = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.mMenFavorites = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).BeginInit();
             this.msMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).BeginInit();
@@ -53,6 +54,7 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.olvConnections.HideSelection = false;
             this.olvConnections.IsSimpleDragSource = true;
+            this.olvConnections.IsSimpleDropSink = true;
             this.olvConnections.LabelEdit = true;
             this.olvConnections.Location = new System.Drawing.Point(0, 24);
             this.olvConnections.MultiSelect = false;
@@ -81,7 +83,8 @@ namespace mRemoteNG.UI.Window
             this.mMenAddFolder,
             this.mMenViewExpandAllFolders,
             this.mMenViewCollapseAllFolders,
-            this.mMenSortAscending});
+            this.mMenSortAscending,
+            this.mMenFavorites});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
@@ -120,7 +123,7 @@ namespace mRemoteNG.UI.Window
             this.mMenViewCollapseAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.mMenViewCollapseAllFolders.Image = global::mRemoteNG.Resources.Collapse;
             this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
-            this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(133, 20);
+            this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(28, 20);
             this.mMenViewCollapseAllFolders.Text = "Collapse all folders";
             // 
             // mMenSortAscending
@@ -180,6 +183,14 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.Size = new System.Drawing.Size(204, 21);
             this.tableLayoutPanel1.TabIndex = 32;
             // 
+            // mMenFavorites
+            // 
+            this.mMenFavorites.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mMenFavorites.Image = global::mRemoteNG.Resources.star;
+            this.mMenFavorites.Name = "mMenFavorites";
+            this.mMenFavorites.Size = new System.Drawing.Size(28, 20);
+            this.mMenFavorites.Text = "Favorites";
+            // 
             // ConnectionTreeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -213,5 +224,6 @@ namespace mRemoteNG.UI.Window
         internal Controls.Base.NGPictureBox PictureBoxSearch;
         internal Controls.Base.NGTextBox txtSearch;
         public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        internal System.Windows.Forms.ToolStripMenuItem mMenFavorites;
     }
 }

@@ -1,6 +1,7 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
+using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -199,8 +200,37 @@ namespace mRemoteNG.UI.Window
                 olvConnections.CollapseAll();
                 olvConnections.Expand(olvConnections.GetRootConnectionNode());
             };
-            mMenSortAscending.Click += (sender, args) =>
-                olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
+            mMenSortAscending.Click += (sender, args) => olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
+            mMenFavorites.Click += (sender, args) =>
+            {
+                mMenFavorites.DropDownItems.Clear();
+                var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
+                List<ToolStripMenuItem> favoritesList = new List<ToolStripMenuItem>();
+
+                foreach (var node in rootNodes)
+                {
+                    foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                    {
+                        var favoriteMenuItem = new ToolStripMenuItem
+                        {
+                            Text = containerInfo.Name,
+                            Tag = containerInfo,
+                            Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
+                        };
+                        favoriteMenuItem.MouseUp += FavoriteMenuItem_MouseUp;
+                        favoritesList.Add(favoriteMenuItem);
+                    }
+                }
+
+                mMenFavorites.DropDownItems.AddRange(favoritesList.ToArray());
+                mMenFavorites.ShowDropDown();
+            };
+        }
+
+        private void FavoriteMenuItem_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
+            _connectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
         }
 
         #endregion
