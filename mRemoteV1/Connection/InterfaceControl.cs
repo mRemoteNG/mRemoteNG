@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using System;
 using System.Drawing;
@@ -37,12 +37,8 @@ namespace mRemoteNG.Connection
 
         public static InterfaceControl FindInterfaceControl(DockPanel DockPnl)
         {
-            if (!(DockPnl.ActiveDocument is ConnectionTab ct)) return null;
-            if (ct.Controls.Count < 1) return null;
-            if (ct.Controls[0] is InterfaceControl ic)
-                return ic;
-
-            return null;
+            if (TabHelper.Instance.CurrentTab == null) return null;
+            return FindInterfaceControl(TabHelper.Instance.CurrentTab);
         }
 
         public static InterfaceControl FindInterfaceControl(ConnectionTab tab)
