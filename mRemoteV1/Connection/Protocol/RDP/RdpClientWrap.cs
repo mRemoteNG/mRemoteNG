@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.UI.Tabs;
+using MSTSCLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +14,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public RdpClientWrap()
             : base()
         {
-            GotFocus += RdpClientWrap_GotFocus;
+            GotFocus += RdpClientWrap_GotFocus; 
         }
 
         private void RdpClientWrap_GotFocus(object sender, EventArgs e)
-        {
-            try
-            {
-                ((ConnectionTab)Parent.Parent).Focus();
-            }
-            catch(Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                  "Error focusing RDB tab: " + ex);
-            }
-            
+        { 
+            ((ConnectionTab)Parent?.Parent).Focus();  
         }
     }
 }
