@@ -18,7 +18,16 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         private void RdpClientWrap_GotFocus(object sender, EventArgs e)
         {
-            ((ConnectionTab)Parent.Parent).Focus();
+            try
+            {
+                ((ConnectionTab)Parent.Parent).Focus();
+            }
+            catch(Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                                                  "Error focusing RDB tab: " + ex);
+            }
+            
         }
     }
 }
