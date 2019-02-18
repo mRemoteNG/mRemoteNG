@@ -483,12 +483,15 @@ namespace mRemoteNG.UI.Forms
                         if (candidateTabToFocus is InterfaceControl)
                         {
                             candidateTabToFocus?.Parent.Focus();
+                            TabHelper.Instance.CurrentTab = (ConnectionTab) candidateTabToFocus?.Parent; //Prevent edge cases 
                         }
                         if(candidateTabToFocus is RdpClientWrap)
                         {
                             ((RdpClientWrap)candidateTabToFocus).Parent?.Parent?.Focus();
+                            TabHelper.Instance.CurrentTab = (ConnectionTab)((RdpClientWrap)candidateTabToFocus).Parent?.Parent; //Prevent edge cases 
                         }
-
+                        Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
+                                                    "Something something focus" + candidateTabToFocus);
                         _inMouseActivate = false;
                         break;
                     case NativeMethods.WM_WINDOWPOSCHANGED:
