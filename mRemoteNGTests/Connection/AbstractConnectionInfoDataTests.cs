@@ -408,7 +408,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Favorite = true;
+            _testAbstractConnectionInfoData.UserField = "a";
             Assert.That(wasCalled, Is.True);
         }
 
@@ -417,7 +417,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.UserField = "a";
+            _testAbstractConnectionInfoData.Favorite = true;
             Assert.That(wasCalled, Is.True);
         }
 
