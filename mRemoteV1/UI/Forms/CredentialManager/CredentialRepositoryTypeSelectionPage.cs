@@ -26,10 +26,16 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             _pageWorkflowController = pageWorkflowController.ThrowIfNull(nameof(pageWorkflowController));
             InitializeComponent();
             ApplyTheme();
+            ApplyLanguage();
             SetupListView(selectionTargets);
         }
 
- 
+        private void ApplyLanguage()
+        {
+            buttonBack.Text = Language.strBack;
+            buttonContinue.Text = Language.strContinue;
+        }
+
         private void SetupListView(IEnumerable<ISelectionTarget<ICredentialRepositoryConfig>> selectionTargets)
         {
             olvColumnName.ImageGetter = ImageGetter;

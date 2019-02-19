@@ -36,8 +36,9 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         private void ApplyLanguage()
         {
             Text = Language.strCredentialManager;
-            buttonAdd.Text = Language.strAdd;
-            buttonRemove.Text = Language.strRemove;
+            msAdd.Text = Language.strAddRecord;
+            msRemove.Text = Language.strRemoveRecord;
+            msEdit.Text = Language.strEditRecord;
         }
 
         private void RemoveSelectedCredential()
@@ -92,17 +93,17 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             RaiseNextPageEvent();
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void msAdd_Click(object sender, EventArgs e)
         {
             AddCredential();
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void msEdit_Click(object sender, EventArgs e)
         {
             EditCredential(credentialRecordListView.SelectedObject);
         }
 
-        private void buttonRemove_Click(object sender, EventArgs e)
+        private void msRemove_Click(object sender, EventArgs e)
         {
             if (credentialRecordListView.MultipleObjectsSelected)
                 RemoveSelectedCredentials();
@@ -145,7 +146,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
 
         private void ObjectListView1OnSelectionChanged(object sender, EventArgs eventArgs)
         {
-            buttonRemove.Enabled = credentialRecordListView.SelectedObjects.Any();
+            msRemove.Enabled = credentialRecordListView.SelectedObjects.Any();
         }
 
         public event EventHandler CredentialsChanged;

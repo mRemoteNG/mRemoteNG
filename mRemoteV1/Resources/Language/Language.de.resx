@@ -2180,7 +2180,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Eine Verbindungsdatei öffnen</value>
   </data>
   <data name="strConnectNoCredentials" xml:space="preserve">
-    <value>Ohne Anmeldedaten verbinden</value>
+    <value>Ohne Account verbinden</value>
   </data>
   <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
     <value>Keine Verbindung zur Konsolensitzung herstellen</value>
@@ -2401,16 +2401,16 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Akzeptieren</value>
   </data>
   <data name="strCredentialEditor" xml:space="preserve">
-    <value>Anmeldeinformationen Editor</value>
+    <value>Account Editor</value>
   </data>
   <data name="strAssignedCredential" xml:space="preserve">
-    <value>Zugewiesene Anmeldedaten</value>
+    <value>Zugewiesene Accounts</value>
   </data>
   <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
     <value>Unsicheres Zertifikat zulassen?</value>
   </data>
   <data name="Unlock" xml:space="preserve">
-    <value>Freischalten</value>
+    <value>Entsperren</value>
   </data>
   <data name="strOptionsThemeEnableTheming" xml:space="preserve">
     <value>Themes aktivieren</value>
@@ -2477,14 +2477,13 @@ Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremote
     <value>Hinzufügen</value>
   </data>
   <data name="strPropertyDescriptionCredential" xml:space="preserve">
-    <value>Wählen Sie aus, welche Anmeldeinformationen für diese Verbindung verwendet werden sollen.</value>
+    <value>Wählen Sie aus, welcher Account für diese Verbindung verwendet werden sollen.</value>
   </data>
   <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
-    <value>Möchten Sie die Anmeldeinformationen {0} wirklich löschen?</value>
+    <value>Möchten Sie den Account {0} wirklich löschen?</value>
   </data>
   <data name="strFindMatchingCredentialFailed" xml:space="preserve">
-    <value>
-Es konnte kein Anmeldedatensatz mit der ID "{0}" für den Verbindungsdatensatz mit dem Namen "{1}" gefunden werden.</value>
+    <value>Es konnte kein Account mit der ID "{0}" für den Verbindungsdatensatz mit dem Namen "{1}" gefunden werden.</value>
   </data>
   <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Wählen Sie, ob eine Benachrichtigung empfangen werden soll, nachdem die RDP-Sitzung aufgrund von Inaktivität getrennt wurde</value>
@@ -2534,10 +2533,10 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
     <value>Das ausgewählte Repository ist entsperrt</value>
   </data>
   <data name="Unlocking" xml:space="preserve">
-    <value>Freischalten</value>
+    <value>Entsperren</value>
   </data>
   <data name="UnlockCredentialRepository" xml:space="preserve">
-    <value>Entsperre Credential Repository</value>
+    <value>Entsperre Account Repository</value>
   </data>
   <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
     <value>Auffordern das Credential Repository beim Start zu entsperren</value>
@@ -2576,7 +2575,7 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
     <value>Den Aktuell gewählten Ordner exportieren</value>
   </data>
   <data name="strCredentialManager" xml:space="preserve">
-    <value>Anmeldeinformationen Manager</value>
+    <value>Account Manager</value>
   </data>
   <data name="strPopups" xml:space="preserve">
     <value>Pop-ups</value>
@@ -2619,5 +2618,8 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Suchleiste über den Verbindungen anzeigen</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Sperren</value>
   </data>
 </root>

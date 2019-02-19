@@ -43,6 +43,7 @@
             this.olvCredentials.AllColumns.Add(this.colUsername);
             this.olvCredentials.AllColumns.Add(this.colDomain);
             this.olvCredentials.AllColumns.Add(this.colRepo);
+            this.olvCredentials.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.olvCredentials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.olvCredentials.CellEditUseWholeCell = false;
             this.olvCredentials.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {

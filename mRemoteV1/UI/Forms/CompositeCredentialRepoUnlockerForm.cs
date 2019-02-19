@@ -25,7 +25,6 @@ namespace mRemoteNG.UI.Forms
             chkCloseAfterLastUnlock.Checked = Settings.Default.CloseCredentialUnlockerDialogAfterLastUnlock;
             _themeManager.ThemeChanged += ApplyTheme;
             imgPasswordError.Image = _display.ScaleImage(imgPasswordError.Image);
-            imgUnlocked.Image = _display.ScaleImage(imgUnlocked.Image);
         }
 
         private void ApplyTheme()
@@ -93,8 +92,8 @@ namespace mRemoteNG.UI.Forms
         {
             buttonUnlock.Enabled = isUnlockRequired;
             secureTextBoxPassword.Enabled = isUnlockRequired;
-            imgUnlocked.Visible = objectListViewRepos.SelectedObject != null && !isUnlockRequired;
-            labelUnlocked.Visible = objectListViewRepos.SelectedObject != null && !isUnlockRequired;
+            //imgUnlocked.Visible = objectListViewRepos.SelectedObject != null && !isUnlockRequired;
+            //labelUnlocked.Visible = objectListViewRepos.SelectedObject != null && !isUnlockRequired;
         }
 
         private void ShowPasswordError(bool shouldErrorBeActive)
@@ -158,10 +157,9 @@ namespace mRemoteNG.UI.Forms
             labelRepoSource.Text = Language.Source;
             labelPassword.Text = Language.strTitlePassword;
             labelPasswordError.Text = Language.IncorrectPassword;
-            labelUnlocked.Text = Language.RepositoryIsUnlocked;
             buttonUnlock.Text = Language.Unlock;
             buttonClose.Text = Language.strButtonClose;
-            chkCloseAfterLastUnlock.Text = "Automatically close this dialog after the last repository is unlocked";
+            chkCloseAfterLastUnlock.Text = Language.strAutoCloseDialog;
         }
         #endregion
     }

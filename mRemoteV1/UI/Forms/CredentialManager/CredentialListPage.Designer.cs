@@ -28,79 +28,88 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonAdd = new Controls.Base.NGButton();
-            this.buttonRemove = new Controls.Base.NGButton();
-            this.buttonEdit = new Controls.Base.NGButton();
+            mRemoteNG.Credential.Repositories.CredentialRepositoryList credentialRepositoryList1 = new mRemoteNG.Credential.Repositories.CredentialRepositoryList();
             this.credentialRecordListView = new mRemoteNG.UI.Controls.CredentialRecordListView();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.msAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.msRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.msEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAdd.Image = global::mRemoteNG.Resources.key_add;
-            this.buttonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdd.Location = new System.Drawing.Point(71, 241);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(99, 32);
-            this.buttonAdd.TabIndex = 3;
-            this.buttonAdd.Text = "Add";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
-            // 
-            // buttonRemove
-            // 
-            this.buttonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRemove.Enabled = false;
-            this.buttonRemove.Image = global::mRemoteNG.Resources.key_delete;
-            this.buttonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonRemove.Location = new System.Drawing.Point(281, 241);
-            this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(99, 32);
-            this.buttonRemove.TabIndex = 4;
-            this.buttonRemove.Text = "Remove";
-            this.buttonRemove.UseVisualStyleBackColor = true;
-            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
-            // 
-            // buttonEdit
-            // 
-            this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonEdit.Location = new System.Drawing.Point(176, 241);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(99, 32);
-            this.buttonEdit.TabIndex = 5;
-            this.buttonEdit.Text = "Edit";
-            this.buttonEdit.UseVisualStyleBackColor = true;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // credentialRecordListView
             // 
-            this.credentialRecordListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.credentialRecordListView.Location = new System.Drawing.Point(0, 0);
+            this.credentialRecordListView.CredentialRepositoryList = credentialRepositoryList1;
+            this.credentialRecordListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.credentialRecordListView.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.credentialRecordListView.Location = new System.Drawing.Point(0, 24);
             this.credentialRecordListView.Name = "credentialRecordListView";
-            this.credentialRecordListView.Size = new System.Drawing.Size(383, 235);
+            this.credentialRecordListView.Size = new System.Drawing.Size(383, 252);
             this.credentialRecordListView.TabIndex = 6;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msAdd,
+            this.msRemove,
+            this.msEdit});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.ShowItemToolTips = true;
+            this.menuStrip1.Size = new System.Drawing.Size(383, 24);
+            this.menuStrip1.TabIndex = 12;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // msAdd
+            // 
+            this.msAdd.AutoToolTip = true;
+            this.msAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.msAdd.Image = global::mRemoteNG.Resources.key_add;
+            this.msAdd.Name = "msAdd";
+            this.msAdd.Size = new System.Drawing.Size(28, 20);
+            this.msAdd.Text = "Add Record";
+            this.msAdd.Click += new System.EventHandler(this.msAdd_Click);
+            // 
+            // msRemove
+            // 
+            this.msRemove.AutoToolTip = true;
+            this.msRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.msRemove.Image = global::mRemoteNG.Resources.key_delete;
+            this.msRemove.Name = "msRemove";
+            this.msRemove.Size = new System.Drawing.Size(28, 20);
+            this.msRemove.Text = "Remove Record";
+            this.msRemove.Click += new System.EventHandler(this.msRemove_Click);
+            // 
+            // msEdit
+            // 
+            this.msEdit.AutoToolTip = true;
+            this.msEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.msEdit.Image = global::mRemoteNG.Resources.cog;
+            this.msEdit.Name = "msEdit";
+            this.msEdit.Size = new System.Drawing.Size(28, 20);
+            this.msEdit.Text = "Edit Record";
+            this.msEdit.Click += new System.EventHandler(this.msEdit_Click);
             // 
             // CredentialListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.credentialRecordListView);
-            this.Controls.Add(this.buttonEdit);
-            this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.buttonRemove);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "CredentialListPage";
             this.Size = new System.Drawing.Size(383, 276);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-       private Controls.Base.NGButton buttonAdd;
-       private Controls.Base.NGButton buttonRemove;
-       private Controls.Base.NGButton buttonEdit;
         private Controls.CredentialRecordListView credentialRecordListView;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem msAdd;
+        private System.Windows.Forms.ToolStripMenuItem msEdit;
+        private System.Windows.Forms.ToolStripMenuItem msRemove;
     }
 }

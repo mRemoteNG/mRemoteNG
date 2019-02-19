@@ -46,19 +46,19 @@
             this.labelId = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.labelPasswordError = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.imgPasswordError = new System.Windows.Forms.PictureBox();
-            this.imgUnlocked = new System.Windows.Forms.PictureBox();
-            this.labelUnlocked = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.secureTextBoxPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             this.chkCloseAfterLastUnlock = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPasswordError)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgUnlocked)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // objectListViewRepos
             // 
             this.objectListViewRepos.AllColumns.Add(this.olvColumnName);
             this.objectListViewRepos.AllColumns.Add(this.olvColumnStatusIcon);
+            this.objectListViewRepos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.objectListViewRepos.CellEditUseWholeCell = false;
             this.objectListViewRepos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnName,
@@ -75,7 +75,7 @@
             this.objectListViewRepos.Name = "objectListViewRepos";
             this.objectListViewRepos.SelectAllOnControlA = false;
             this.objectListViewRepos.ShowGroups = false;
-            this.objectListViewRepos.Size = new System.Drawing.Size(175, 309);
+            this.objectListViewRepos.Size = new System.Drawing.Size(175, 271);
             this.objectListViewRepos.TabIndex = 3;
             this.objectListViewRepos.UseCompatibleStateImageBehavior = false;
             this.objectListViewRepos.UseOverlays = false;
@@ -112,9 +112,9 @@
             // 
             // labelPassword
             // 
-            this.labelPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(191, 182);
+            this.labelPassword.Location = new System.Drawing.Point(3, 151);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(53, 13);
             this.labelPassword.TabIndex = 2;
@@ -123,10 +123,9 @@
             // buttonUnlock
             // 
             this.buttonUnlock._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonUnlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonUnlock.Location = new System.Drawing.Point(383, 243);
+            this.buttonUnlock.Location = new System.Drawing.Point(494, 212);
             this.buttonUnlock.Name = "buttonUnlock";
-            this.buttonUnlock.Size = new System.Drawing.Size(75, 23);
+            this.buttonUnlock.Size = new System.Drawing.Size(100, 24);
             this.buttonUnlock.TabIndex = 1;
             this.buttonUnlock.Text = "Unlock";
             this.buttonUnlock.UseVisualStyleBackColor = true;
@@ -135,11 +134,10 @@
             // buttonClose
             // 
             this.buttonClose._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(464, 243);
+            this.buttonClose.Location = new System.Drawing.Point(600, 212);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.Size = new System.Drawing.Size(100, 24);
             this.buttonClose.TabIndex = 2;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -147,8 +145,9 @@
             // 
             // labelRepoTitle
             // 
+            this.labelRepoTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelRepoTitle.AutoSize = true;
-            this.labelRepoTitle.Location = new System.Drawing.Point(190, 64);
+            this.labelRepoTitle.Location = new System.Drawing.Point(3, 35);
             this.labelRepoTitle.Name = "labelRepoTitle";
             this.labelRepoTitle.Size = new System.Drawing.Size(27, 13);
             this.labelRepoTitle.TabIndex = 6;
@@ -158,10 +157,10 @@
             // 
             this.textBoxType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxType.Location = new System.Drawing.Point(237, 90);
+            this.textBoxType.Location = new System.Drawing.Point(123, 59);
             this.textBoxType.Name = "textBoxType";
             this.textBoxType.ReadOnly = true;
-            this.textBoxType.Size = new System.Drawing.Size(306, 20);
+            this.textBoxType.Size = new System.Drawing.Size(393, 20);
             this.textBoxType.TabIndex = 9;
             this.textBoxType.TabStop = false;
             // 
@@ -169,17 +168,18 @@
             // 
             this.textBoxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxTitle.Location = new System.Drawing.Point(237, 64);
+            this.textBoxTitle.Location = new System.Drawing.Point(123, 31);
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.ReadOnly = true;
-            this.textBoxTitle.Size = new System.Drawing.Size(306, 20);
+            this.textBoxTitle.Size = new System.Drawing.Size(393, 20);
             this.textBoxTitle.TabIndex = 8;
             this.textBoxTitle.TabStop = false;
             // 
             // labelRepoType
             // 
+            this.labelRepoType.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelRepoType.AutoSize = true;
-            this.labelRepoType.Location = new System.Drawing.Point(190, 90);
+            this.labelRepoType.Location = new System.Drawing.Point(3, 63);
             this.labelRepoType.Name = "labelRepoType";
             this.labelRepoType.Size = new System.Drawing.Size(31, 13);
             this.labelRepoType.TabIndex = 7;
@@ -187,21 +187,19 @@
             // 
             // textBoxSource
             // 
-            this.textBoxSource.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSource.Location = new System.Drawing.Point(237, 116);
+            this.textBoxSource.Location = new System.Drawing.Point(123, 87);
             this.textBoxSource.Multiline = true;
             this.textBoxSource.Name = "textBoxSource";
             this.textBoxSource.ReadOnly = true;
-            this.textBoxSource.Size = new System.Drawing.Size(306, 51);
+            this.textBoxSource.Size = new System.Drawing.Size(393, 54);
             this.textBoxSource.TabIndex = 11;
             this.textBoxSource.TabStop = false;
             // 
             // labelRepoSource
             // 
+            this.labelRepoSource.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelRepoSource.AutoSize = true;
-            this.labelRepoSource.Location = new System.Drawing.Point(190, 116);
+            this.labelRepoSource.Location = new System.Drawing.Point(3, 107);
             this.labelRepoSource.Name = "labelRepoSource";
             this.labelRepoSource.Size = new System.Drawing.Size(41, 13);
             this.labelRepoSource.TabIndex = 10;
@@ -211,17 +209,18 @@
             // 
             this.textBoxId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxId.Location = new System.Drawing.Point(237, 38);
+            this.textBoxId.Location = new System.Drawing.Point(123, 3);
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.ReadOnly = true;
-            this.textBoxId.Size = new System.Drawing.Size(305, 20);
+            this.textBoxId.Size = new System.Drawing.Size(393, 20);
             this.textBoxId.TabIndex = 13;
             this.textBoxId.TabStop = false;
             // 
             // labelId
             // 
+            this.labelId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(191, 38);
+            this.labelId.Location = new System.Drawing.Point(3, 7);
             this.labelId.Name = "labelId";
             this.labelId.Size = new System.Drawing.Size(18, 13);
             this.labelId.TabIndex = 12;
@@ -229,12 +228,11 @@
             // 
             // labelPasswordError
             // 
-            this.labelPasswordError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPasswordError.AutoSize = true;
             this.labelPasswordError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPasswordError.ForeColor = System.Drawing.Color.DarkRed;
             this.labelPasswordError.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.labelPasswordError.Location = new System.Drawing.Point(192, 221);
+            this.labelPasswordError.Location = new System.Drawing.Point(304, 218);
             this.labelPasswordError.Name = "labelPasswordError";
             this.labelPasswordError.Size = new System.Drawing.Size(115, 13);
             this.labelPasswordError.TabIndex = 14;
@@ -243,61 +241,69 @@
             // 
             // imgPasswordError
             // 
-            this.imgPasswordError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.imgPasswordError.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.imgPasswordError.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.imgPasswordError.Image = global::mRemoteNG.Resources.exclamation;
-            this.imgPasswordError.Location = new System.Drawing.Point(177, 200);
+            this.imgPasswordError.Location = new System.Drawing.Point(103, 150);
             this.imgPasswordError.Name = "imgPasswordError";
-            this.imgPasswordError.Size = new System.Drawing.Size(16, 16);
+            this.imgPasswordError.Size = new System.Drawing.Size(14, 16);
             this.imgPasswordError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.imgPasswordError.TabIndex = 15;
             this.imgPasswordError.TabStop = false;
             this.imgPasswordError.Visible = false;
             // 
-            // imgUnlocked
-            // 
-            this.imgUnlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.imgUnlocked.Image = global::mRemoteNG.Resources.tick;
-            this.imgUnlocked.Location = new System.Drawing.Point(185, 247);
-            this.imgUnlocked.Name = "imgUnlocked";
-            this.imgUnlocked.Size = new System.Drawing.Size(16, 16);
-            this.imgUnlocked.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.imgUnlocked.TabIndex = 16;
-            this.imgUnlocked.TabStop = false;
-            this.imgUnlocked.Visible = false;
-            // 
-            // labelUnlocked
-            // 
-            this.labelUnlocked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelUnlocked.AutoSize = true;
-            this.labelUnlocked.Location = new System.Drawing.Point(201, 248);
-            this.labelUnlocked.Name = "labelUnlocked";
-            this.labelUnlocked.Size = new System.Drawing.Size(174, 13);
-            this.labelUnlocked.TabIndex = 17;
-            this.labelUnlocked.Text = "The selected repository is unlocked";
-            this.labelUnlocked.Visible = false;
-            // 
             // secureTextBoxPassword
             // 
             this.secureTextBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.secureTextBoxPassword.Location = new System.Drawing.Point(194, 198);
+            this.secureTextBoxPassword.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secureTextBoxPassword.Location = new System.Drawing.Point(123, 147);
             this.secureTextBoxPassword.Name = "secureTextBoxPassword";
-            this.secureTextBoxPassword.Size = new System.Drawing.Size(348, 20);
+            this.secureTextBoxPassword.Size = new System.Drawing.Size(393, 22);
             this.secureTextBoxPassword.TabIndex = 0;
             this.secureTextBoxPassword.UseSystemPasswordChar = true;
             // 
             // chkCloseAfterLastUnlock
             // 
             this.chkCloseAfterLastUnlock._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
-            this.chkCloseAfterLastUnlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkCloseAfterLastUnlock.AutoSize = true;
-            this.chkCloseAfterLastUnlock.Location = new System.Drawing.Point(185, 280);
+            this.chkCloseAfterLastUnlock.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkCloseAfterLastUnlock.Location = new System.Drawing.Point(184, 247);
             this.chkCloseAfterLastUnlock.Name = "chkCloseAfterLastUnlock";
-            this.chkCloseAfterLastUnlock.Size = new System.Drawing.Size(332, 17);
+            this.chkCloseAfterLastUnlock.Size = new System.Drawing.Size(367, 17);
             this.chkCloseAfterLastUnlock.TabIndex = 18;
             this.chkCloseAfterLastUnlock.Text = "Automatically close this dialog after the last repository is unlocked";
             this.chkCloseAfterLastUnlock.UseVisualStyleBackColor = true;
             this.chkCloseAfterLastUnlock.CheckedChanged += new System.EventHandler(this.chkCloseAfterLastUnlock_CheckedChanged);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.labelPassword, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelRepoSource, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelRepoType, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelRepoTitle, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.imgPasswordError, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelId, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxId, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.secureTextBoxPassword, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxSource, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxTitle, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxType, 2, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(184, 28);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(519, 178);
+            this.tableLayoutPanel1.TabIndex = 19;
             // 
             // CompositeCredentialRepoUnlockerForm
             // 
@@ -305,26 +311,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(554, 309);
+            this.ClientSize = new System.Drawing.Size(709, 271);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.chkCloseAfterLastUnlock);
-            this.Controls.Add(this.labelUnlocked);
-            this.Controls.Add(this.imgUnlocked);
-            this.Controls.Add(this.imgPasswordError);
             this.Controls.Add(this.labelPasswordError);
-            this.Controls.Add(this.textBoxId);
-            this.Controls.Add(this.labelId);
-            this.Controls.Add(this.textBoxSource);
-            this.Controls.Add(this.labelRepoSource);
-            this.Controls.Add(this.secureTextBoxPassword);
-            this.Controls.Add(this.textBoxType);
             this.Controls.Add(this.buttonUnlock);
-            this.Controls.Add(this.textBoxTitle);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.labelPassword);
-            this.Controls.Add(this.labelRepoType);
             this.Controls.Add(this.objectListViewRepos);
             this.Controls.Add(this.labelUnlocking);
-            this.Controls.Add(this.labelRepoTitle);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -335,7 +330,8 @@
             this.Shown += new System.EventHandler(this.CompositeCredentialRepoUnlockerForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewRepos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPasswordError)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgUnlocked)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -361,8 +357,7 @@
         private BrightIdeasSoftware.OLVColumn olvColumnStatusIcon;
         private Controls.Base.NGLabel labelPasswordError;
         private System.Windows.Forms.PictureBox imgPasswordError;
-        private System.Windows.Forms.PictureBox imgUnlocked;
-        private Controls.Base.NGLabel labelUnlocked;
         private Controls.Base.NGCheckBox chkCloseAfterLastUnlock;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

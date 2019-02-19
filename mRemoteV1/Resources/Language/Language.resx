@@ -2521,9 +2521,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
     <value>Allow Insecure Certificate?</value>
   </data>
-  <data name="RepositoryIsUnlocked" xml:space="preserve">
-    <value>The selected repository is unlocked</value>
-  </data>
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Incorrect password</value>
   </data>
@@ -2745,5 +2742,50 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
     <value>Always show connection tabs</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="strConnectionFilePathPrompt" xml:space="preserve">
+    <value>Where should we save the new credential file?</value>
+  </data>
+  <data name="strConnectionPasswordPrompt" xml:space="preserve">
+    <value>Set password for the credential repository</value>
+  </data>
+  <data name="strCredentialsFound" xml:space="preserve">
+    <value>Credentials found</value>
+  </data>
+  <data name="strAddRecord" xml:space="preserve">
+    <value>Add Record</value>
+  </data>
+  <data name="strAddRepo" xml:space="preserve">
+    <value>Add Repository</value>
+  </data>
+  <data name="strAutoCloseDialog" xml:space="preserve">
+    <value>Automatically close this dialog after the last repository is unlocked</value>
+  </data>
+  <data name="strContinue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="strEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="strEditRecord" xml:space="preserve">
+    <value>Edit Record</value>
+  </data>
+  <data name="strEditRepo" xml:space="preserve">
+    <value>Edit Repository</value>
+  </data>
+  <data name="strLockRepo" xml:space="preserve">
+    <value>Lock Repository</value>
+  </data>
+  <data name="strRemoveRecord" xml:space="preserve">
+    <value>Remove Record</value>
+  </data>
+  <data name="strRemoveRepo" xml:space="preserve">
+    <value>Remove Repository</value>
+  </data>
+  <data name="strUnlockRepo" xml:space="preserve">
+    <value>Unlock Repository</value>
   </data>
 </root>

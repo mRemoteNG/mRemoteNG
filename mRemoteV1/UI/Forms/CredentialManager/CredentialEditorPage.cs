@@ -34,7 +34,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             labelUsername.Text = Language.strPropertyNameUsername;
             labelDomain.Text = Language.strPropertyNameDomain;
             labelPassword.Text = Language.strPropertyNamePassword;
-            buttonAccept.Text = Language.strAccept;
+            buttonSave.Text = Language.strSave;
             buttonCancel.Text = Language.strButtonCancel;
         }
 

@@ -117,7 +117,7 @@ namespace mRemoteNG.UI.Forms
             buttonExit.Text = Language.strMenuExit;
 
             // HarvestedCreds tab
-            lblCredsFound.Text = "Credentials found";
+            lblCredsFound.Text = $@"{Language.strCredentialsFound}:";
             colTitle.Text = Language.strPropertyNameName;
             colUsername.Text = Language.strPropertyNameUsername;
             colDomain.Text = Language.strPropertyNameDomain;
@@ -125,8 +125,8 @@ namespace mRemoteNG.UI.Forms
 
             // SaveRepo tab
             labelConfConsPathHeaderOnTab2.Text = $@"{Language.strConnectionFilePath}:";
-            labelWhereToSaveCredFile.Text = "Where should we save the new credential file?";
-            labelSetPassword.Text = "Set password for the credential repository";
+            gbWhereToSaveCredFile.Text = $@"{Language.strConnectionFilePathPrompt}:";
+            gbSetPassword.Text = $@"{Language.strConnectionPasswordPrompt}:";
             buttonNewRepoPathBrowse.Text = Language.strButtonBrowse;
             buttonSaveRepoBack.Text = Language.strBack;
             buttonExecuteUpgrade.Text = Language.strUpgrade;

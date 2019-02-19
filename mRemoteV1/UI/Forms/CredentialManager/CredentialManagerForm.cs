@@ -51,6 +51,10 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         {
             Text = Language.strCredentialManager;
             buttonClose.Text = Language.strButtonClose;
+            msAddRepo.Text = Language.strAddRepo;
+            msEditRepo.Text = Language.strEditRepo;
+            msRemoveRepo.Text = Language.strRemoveRepo;
+            msToggleUnlock.Text = Language.strLockRepo;
         }
 
         #region Cred Repo Listview
@@ -130,8 +134,8 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             if (page == null)
                 return;
 
-            panelMain.Controls.Clear();
-            panelMain.Controls.Add(page);
+            splitContainer.Panel2.Controls.Clear();
+            splitContainer.Panel2.Controls.Add(page);
             page.Dock = DockStyle.Fill;
         }
 
@@ -149,7 +153,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             Close();
         }
 
-        private void btnAddRepo_Click(object sender, EventArgs e)
+        private void msAddRepo_Click(object sender, EventArgs e)
         {
             var pageWorkflowController = new PageWorkflowController(ShowPage, _credentialListPage);
             var repoTypeSelection = new CredentialRepositoryTypeSelectionPage(
@@ -160,7 +164,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             ShowPage(repoTypeSelection);
         }
 
-        private void btnRemoveRepo_Click(object sender, EventArgs e)
+        private void msRemoveRepo_Click(object sender, EventArgs e)
         {
             if (!(olvCredRepos.SelectedObject is ICredentialRepository selectedRepository))
                 return;
@@ -168,12 +172,12 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             _credentialService.RemoveRepository(selectedRepository);
         }
 
-        private void btnToggleUnlock_Click(object sender, EventArgs e)
+        private void msToggleUnlock_Click(object sender, EventArgs e)
         {
             ToggleRepositoryLockStatus(olvCredRepos.SelectedObject as ICredentialRepository);
         }
 
-        private void btnEditRepo_Click(object sender, EventArgs e)
+        private void msEditRepo_Click(object sender, EventArgs e)
         {
             EditRepository(olvCredRepos?.SelectedObject as ICredentialRepository);
         }
@@ -211,12 +215,13 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             var selectedRepository = olvCredRepos.SelectedObject as ICredentialRepository;
             var repoIsSelected = selectedRepository != null;
 
-            btnRemoveRepo.Enabled = repoIsSelected;
-            btnEditRepo.Enabled = repoIsSelected;
-            btnToggleUnlock.Enabled = repoIsSelected;
+
+            msRemoveRepo.Enabled = repoIsSelected;
+            msEditRepo.Enabled = repoIsSelected;
+            msToggleUnlock.Enabled = repoIsSelected;
 
             if (repoIsSelected)
-                btnToggleUnlock.Text = selectedRepository.IsLoaded ? "Lock" : "Unlock";
+                msToggleUnlock.Text = selectedRepository.IsLoaded ? Language.strLockRepo : Language.strUnlockRepo;
         }
 
         /// <summary>

@@ -46,6 +46,7 @@
             this.objectListView1.AllColumns.Add(this.olvColumnCredentialId);
             this.objectListView1.AllColumns.Add(this.olvColumnRepositoryTitle);
             this.objectListView1.AllColumns.Add(this.olvColumnRepositorySource);
+            this.objectListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.objectListView1.CellEditUseWholeCell = false;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnTitle,
@@ -108,7 +109,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.objectListView1);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CredentialRecordListView";
             this.Size = new System.Drawing.Size(367, 204);
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();

@@ -40,9 +40,9 @@ namespace mRemoteNG.UI.Forms.CredentialManager
         private void UpdateUi()
         {
             var selectedRepository = credentialRepositoryListView.SelectedRepository;
-            buttonRemove.Enabled = selectedRepository != null;
-            buttonEdit.Enabled = selectedRepository != null;
-            buttonToggleLoad.Enabled = selectedRepository != null;
+            msRemove.Enabled = selectedRepository != null;
+            msEdit.Enabled = selectedRepository != null;
+            msToggleLoad.Enabled = selectedRepository != null;
             UpdateLoadToggleButton(selectedRepository);
         }
 
@@ -109,7 +109,7 @@ namespace mRemoteNG.UI.Forms.CredentialManager
             if (selectedRepository == null)
                 return;
 
-            buttonToggleLoad.Text = selectedRepository.IsLoaded ? "Unload" : "Load";
+            msToggleLoad.Text = selectedRepository.IsLoaded ? Language.Unlock : Language.Lock;
         }
 
         private void buttonToggleLoad_Click(object sender, EventArgs e)

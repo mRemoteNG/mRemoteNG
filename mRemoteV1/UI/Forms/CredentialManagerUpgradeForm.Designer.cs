@@ -41,29 +41,35 @@
             this.buttonNewFile = new mRemoteNG.UI.Controls.Base.NGButton();
             this.buttonOpenFile = new mRemoteNG.UI.Controls.Base.NGButton();
             this.tabPageHarvestedCreds = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCredsBack = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.btnCredsContinue = new mRemoteNG.UI.Controls.Base.NGButton();
             this.olvFoundCredentials = new mRemoteNG.UI.Controls.Base.NGListView();
             this.colTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colPassword = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lblCredsFound = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.btnCredsBack = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.btnCredsContinue = new mRemoteNG.UI.Controls.Base.NGButton();
             this.tabPageSaveRepo = new System.Windows.Forms.TabPage();
-            this.textBoxConfConPathTab2 = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.buttonNewRepoPathBrowse = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.labelWhereToSaveCredFile = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.textBoxCredRepoPath = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.buttonExecuteUpgrade = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.labelSetPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.gbSetPassword = new mRemoteNG.UI.Controls.Base.NGGroupBox();
             this.newRepositoryPasswordEntry = new mRemoteNG.UI.Controls.NewPasswordWithVerification();
+            this.gbWhereToSaveCredFile = new mRemoteNG.UI.Controls.Base.NGGroupBox();
+            this.buttonNewRepoPathBrowse = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.textBoxCredRepoPath = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.textBoxConfConPathTab2 = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.buttonExecuteUpgrade = new mRemoteNG.UI.Controls.Base.NGButton();
             this.labelConfConsPathHeaderOnTab2 = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.buttonSaveRepoBack = new mRemoteNG.UI.Controls.Base.NGButton();
             this.tabControl.SuspendLayout();
             this.tabPageWelcome.SuspendLayout();
             this.tabPageHarvestedCreds.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvFoundCredentials)).BeginInit();
             this.tabPageSaveRepo.SuspendLayout();
+            this.gbSetPassword.SuspendLayout();
+            this.gbWhereToSaveCredFile.SuspendLayout();
             this.SuspendLayout();
             // 
             // newCredRepoPathDialog
@@ -86,7 +92,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(617, 402);
+            this.tabControl.Size = new System.Drawing.Size(602, 405);
             this.tabControl.TabIndex = 5;
             // 
             // tabPageWelcome
@@ -102,7 +108,7 @@
             this.tabPageWelcome.Location = new System.Drawing.Point(4, 24);
             this.tabPageWelcome.Name = "tabPageWelcome";
             this.tabPageWelcome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWelcome.Size = new System.Drawing.Size(609, 374);
+            this.tabPageWelcome.Size = new System.Drawing.Size(594, 377);
             this.tabPageWelcome.TabIndex = 0;
             this.tabPageWelcome.Text = "welcomePage";
             // 
@@ -110,17 +116,17 @@
             // 
             this.textBoxConfConPathTab1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxConfConPathTab1.Location = new System.Drawing.Point(30, 177);
+            this.textBoxConfConPathTab1.Location = new System.Drawing.Point(9, 150);
             this.textBoxConfConPathTab1.Multiline = true;
             this.textBoxConfConPathTab1.Name = "textBoxConfConPathTab1";
             this.textBoxConfConPathTab1.ReadOnly = true;
-            this.textBoxConfConPathTab1.Size = new System.Drawing.Size(551, 55);
+            this.textBoxConfConPathTab1.Size = new System.Drawing.Size(577, 55);
             this.textBoxConfConPathTab1.TabIndex = 6;
             // 
             // labelConfConsPathHeaderOnTab1
             // 
             this.labelConfConsPathHeaderOnTab1.AutoSize = true;
-            this.labelConfConsPathHeaderOnTab1.Location = new System.Drawing.Point(10, 161);
+            this.labelConfConsPathHeaderOnTab1.Location = new System.Drawing.Point(6, 134);
             this.labelConfConsPathHeaderOnTab1.Name = "labelConfConsPathHeaderOnTab1";
             this.labelConfConsPathHeaderOnTab1.Size = new System.Drawing.Size(104, 13);
             this.labelConfConsPathHeaderOnTab1.TabIndex = 5;
@@ -130,7 +136,7 @@
             // 
             this.buttonExit._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonExit.Location = new System.Drawing.Point(190, 343);
+            this.buttonExit.Location = new System.Drawing.Point(190, 339);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(212, 23);
             this.buttonExit.TabIndex = 4;
@@ -152,7 +158,7 @@
             // 
             this.buttonBeginUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonBeginUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonBeginUpgrade.Location = new System.Drawing.Point(190, 256);
+            this.buttonBeginUpgrade.Location = new System.Drawing.Point(190, 252);
             this.buttonBeginUpgrade.Name = "buttonBeginUpgrade";
             this.buttonBeginUpgrade.Size = new System.Drawing.Size(212, 23);
             this.buttonBeginUpgrade.TabIndex = 1;
@@ -165,7 +171,7 @@
             this.buttonNewFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonNewFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonNewFile.DialogResult = System.Windows.Forms.DialogResult.Abort;
-            this.buttonNewFile.Location = new System.Drawing.Point(190, 314);
+            this.buttonNewFile.Location = new System.Drawing.Point(190, 310);
             this.buttonNewFile.Name = "buttonNewFile";
             this.buttonNewFile.Size = new System.Drawing.Size(212, 23);
             this.buttonNewFile.TabIndex = 3;
@@ -177,7 +183,7 @@
             // 
             this.buttonOpenFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonOpenFile.Location = new System.Drawing.Point(190, 285);
+            this.buttonOpenFile.Location = new System.Drawing.Point(190, 281);
             this.buttonOpenFile.Name = "buttonOpenFile";
             this.buttonOpenFile.Size = new System.Drawing.Size(212, 23);
             this.buttonOpenFile.TabIndex = 2;
@@ -188,16 +194,64 @@
             // tabPageHarvestedCreds
             // 
             this.tabPageHarvestedCreds.BackColor = System.Drawing.Color.Transparent;
-            this.tabPageHarvestedCreds.Controls.Add(this.olvFoundCredentials);
-            this.tabPageHarvestedCreds.Controls.Add(this.lblCredsFound);
-            this.tabPageHarvestedCreds.Controls.Add(this.btnCredsBack);
-            this.tabPageHarvestedCreds.Controls.Add(this.btnCredsContinue);
+            this.tabPageHarvestedCreds.Controls.Add(this.tableLayoutPanel1);
             this.tabPageHarvestedCreds.Location = new System.Drawing.Point(4, 24);
             this.tabPageHarvestedCreds.Name = "tabPageHarvestedCreds";
             this.tabPageHarvestedCreds.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHarvestedCreds.Size = new System.Drawing.Size(609, 374);
+            this.tabPageHarvestedCreds.Size = new System.Drawing.Size(594, 377);
             this.tabPageHarvestedCreds.TabIndex = 2;
             this.tabPageHarvestedCreds.Text = "harvestedCreds";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.olvFoundCredentials, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblCredsFound, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(588, 371);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnCredsBack);
+            this.panel1.Controls.Add(this.btnCredsContinue);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 339);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(582, 29);
+            this.panel1.TabIndex = 0;
+            // 
+            // btnCredsBack
+            // 
+            this.btnCredsBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnCredsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCredsBack.Location = new System.Drawing.Point(373, 2);
+            this.btnCredsBack.Name = "btnCredsBack";
+            this.btnCredsBack.Size = new System.Drawing.Size(100, 24);
+            this.btnCredsBack.TabIndex = 2;
+            this.btnCredsBack.Text = "Back";
+            this.btnCredsBack.UseVisualStyleBackColor = true;
+            this.btnCredsBack.Click += new System.EventHandler(this.btnCredsBack_Click);
+            // 
+            // btnCredsContinue
+            // 
+            this.btnCredsContinue._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnCredsContinue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCredsContinue.Location = new System.Drawing.Point(479, 2);
+            this.btnCredsContinue.Name = "btnCredsContinue";
+            this.btnCredsContinue.Size = new System.Drawing.Size(100, 24);
+            this.btnCredsContinue.TabIndex = 1;
+            this.btnCredsContinue.Text = "Continue";
+            this.btnCredsContinue.UseVisualStyleBackColor = true;
+            this.btnCredsContinue.Click += new System.EventHandler(this.btnCredsContinue_Click);
             // 
             // olvFoundCredentials
             // 
@@ -205,9 +259,7 @@
             this.olvFoundCredentials.AllColumns.Add(this.colUsername);
             this.olvFoundCredentials.AllColumns.Add(this.colDomain);
             this.olvFoundCredentials.AllColumns.Add(this.colPassword);
-            this.olvFoundCredentials.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.olvFoundCredentials.CellEditUseWholeCell = false;
             this.olvFoundCredentials.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colTitle,
             this.colUsername,
@@ -215,11 +267,12 @@
             this.colPassword});
             this.olvFoundCredentials.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvFoundCredentials.DecorateLines = true;
+            this.olvFoundCredentials.Dock = System.Windows.Forms.DockStyle.Fill;
             this.olvFoundCredentials.HasCollapsibleGroups = false;
-            this.olvFoundCredentials.Location = new System.Drawing.Point(0, 31);
+            this.olvFoundCredentials.Location = new System.Drawing.Point(3, 23);
             this.olvFoundCredentials.Name = "olvFoundCredentials";
             this.olvFoundCredentials.ShowFilterMenuOnRightClick = false;
-            this.olvFoundCredentials.Size = new System.Drawing.Size(609, 308);
+            this.olvFoundCredentials.Size = new System.Drawing.Size(582, 310);
             this.olvFoundCredentials.SortGroupItemsByPrimaryColumn = false;
             this.olvFoundCredentials.TabIndex = 4;
             this.olvFoundCredentials.UseCompatibleStateImageBehavior = false;
@@ -258,97 +311,97 @@
             // 
             // lblCredsFound
             // 
+            this.lblCredsFound.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCredsFound.AutoSize = true;
-            this.lblCredsFound.Location = new System.Drawing.Point(6, 3);
+            this.lblCredsFound.Location = new System.Drawing.Point(3, 3);
             this.lblCredsFound.Name = "lblCredsFound";
-            this.lblCredsFound.Size = new System.Drawing.Size(89, 13);
+            this.lblCredsFound.Size = new System.Drawing.Size(92, 13);
             this.lblCredsFound.TabIndex = 3;
-            this.lblCredsFound.Text = "Credentials found";
-            // 
-            // btnCredsBack
-            // 
-            this.btnCredsBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnCredsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCredsBack.Location = new System.Drawing.Point(445, 345);
-            this.btnCredsBack.Name = "btnCredsBack";
-            this.btnCredsBack.Size = new System.Drawing.Size(75, 23);
-            this.btnCredsBack.TabIndex = 2;
-            this.btnCredsBack.Text = "Back";
-            this.btnCredsBack.UseVisualStyleBackColor = true;
-            this.btnCredsBack.Click += new System.EventHandler(this.btnCredsBack_Click);
-            // 
-            // btnCredsContinue
-            // 
-            this.btnCredsContinue._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnCredsContinue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCredsContinue.Location = new System.Drawing.Point(526, 345);
-            this.btnCredsContinue.Name = "btnCredsContinue";
-            this.btnCredsContinue.Size = new System.Drawing.Size(75, 23);
-            this.btnCredsContinue.TabIndex = 1;
-            this.btnCredsContinue.Text = "Continue";
-            this.btnCredsContinue.UseVisualStyleBackColor = true;
-            this.btnCredsContinue.Click += new System.EventHandler(this.btnCredsContinue_Click);
+            this.lblCredsFound.Text = "Credentials found:";
             // 
             // tabPageSaveRepo
             // 
             this.tabPageSaveRepo.BackColor = System.Drawing.Color.Transparent;
+            this.tabPageSaveRepo.Controls.Add(this.gbSetPassword);
+            this.tabPageSaveRepo.Controls.Add(this.gbWhereToSaveCredFile);
             this.tabPageSaveRepo.Controls.Add(this.textBoxConfConPathTab2);
-            this.tabPageSaveRepo.Controls.Add(this.buttonNewRepoPathBrowse);
-            this.tabPageSaveRepo.Controls.Add(this.labelWhereToSaveCredFile);
-            this.tabPageSaveRepo.Controls.Add(this.textBoxCredRepoPath);
             this.tabPageSaveRepo.Controls.Add(this.buttonExecuteUpgrade);
-            this.tabPageSaveRepo.Controls.Add(this.labelSetPassword);
-            this.tabPageSaveRepo.Controls.Add(this.newRepositoryPasswordEntry);
             this.tabPageSaveRepo.Controls.Add(this.labelConfConsPathHeaderOnTab2);
             this.tabPageSaveRepo.Controls.Add(this.buttonSaveRepoBack);
             this.tabPageSaveRepo.Location = new System.Drawing.Point(4, 24);
             this.tabPageSaveRepo.Name = "tabPageSaveRepo";
             this.tabPageSaveRepo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSaveRepo.Size = new System.Drawing.Size(609, 374);
+            this.tabPageSaveRepo.Size = new System.Drawing.Size(594, 377);
             this.tabPageSaveRepo.TabIndex = 1;
             this.tabPageSaveRepo.Text = "saveRepoPage";
             // 
-            // textBoxConfConPathTab2
+            // gbSetPassword
             // 
-            this.textBoxConfConPathTab2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxConfConPathTab2.Location = new System.Drawing.Point(27, 32);
-            this.textBoxConfConPathTab2.Multiline = true;
-            this.textBoxConfConPathTab2.Name = "textBoxConfConPathTab2";
-            this.textBoxConfConPathTab2.ReadOnly = true;
-            this.textBoxConfConPathTab2.Size = new System.Drawing.Size(574, 41);
-            this.textBoxConfConPathTab2.TabIndex = 9;
+            this.gbSetPassword.Controls.Add(this.newRepositoryPasswordEntry);
+            this.gbSetPassword.Location = new System.Drawing.Point(11, 209);
+            this.gbSetPassword.Name = "gbSetPassword";
+            this.gbSetPassword.Size = new System.Drawing.Size(572, 119);
+            this.gbSetPassword.TabIndex = 11;
+            this.gbSetPassword.TabStop = false;
+            this.gbSetPassword.Text = "Set password for the credential repository";
+            // 
+            // newRepositoryPasswordEntry
+            // 
+            this.newRepositoryPasswordEntry.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.newRepositoryPasswordEntry.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newRepositoryPasswordEntry.Location = new System.Drawing.Point(3, 16);
+            this.newRepositoryPasswordEntry.MinimumSize = new System.Drawing.Size(0, 100);
+            this.newRepositoryPasswordEntry.Name = "newRepositoryPasswordEntry";
+            this.newRepositoryPasswordEntry.PasswordChar = '\0';
+            this.newRepositoryPasswordEntry.Size = new System.Drawing.Size(566, 100);
+            this.newRepositoryPasswordEntry.TabIndex = 3;
+            this.newRepositoryPasswordEntry.UseSystemPasswordChar = true;
+            this.newRepositoryPasswordEntry.Verified += new System.EventHandler(this.newRepositoryPasswordEntry_Verified);
+            this.newRepositoryPasswordEntry.NotVerified += new System.EventHandler(this.newRepositoryPasswordEntry_NotVerified);
+            // 
+            // gbWhereToSaveCredFile
+            // 
+            this.gbWhereToSaveCredFile.Controls.Add(this.buttonNewRepoPathBrowse);
+            this.gbWhereToSaveCredFile.Controls.Add(this.textBoxCredRepoPath);
+            this.gbWhereToSaveCredFile.Location = new System.Drawing.Point(11, 113);
+            this.gbWhereToSaveCredFile.Name = "gbWhereToSaveCredFile";
+            this.gbWhereToSaveCredFile.Size = new System.Drawing.Size(572, 90);
+            this.gbWhereToSaveCredFile.TabIndex = 10;
+            this.gbWhereToSaveCredFile.TabStop = false;
+            this.gbWhereToSaveCredFile.Text = "Where should we save the new credential file?";
             // 
             // buttonNewRepoPathBrowse
             // 
             this.buttonNewRepoPathBrowse._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonNewRepoPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonNewRepoPathBrowse.Location = new System.Drawing.Point(526, 143);
+            this.buttonNewRepoPathBrowse.Location = new System.Drawing.Point(466, 45);
             this.buttonNewRepoPathBrowse.Name = "buttonNewRepoPathBrowse";
-            this.buttonNewRepoPathBrowse.Size = new System.Drawing.Size(75, 23);
+            this.buttonNewRepoPathBrowse.Size = new System.Drawing.Size(100, 24);
             this.buttonNewRepoPathBrowse.TabIndex = 8;
             this.buttonNewRepoPathBrowse.Text = "Browse";
             this.buttonNewRepoPathBrowse.UseVisualStyleBackColor = true;
             this.buttonNewRepoPathBrowse.Click += new System.EventHandler(this.buttonNewRepoPathBrowse_Click);
             // 
-            // labelWhereToSaveCredFile
-            // 
-            this.labelWhereToSaveCredFile.AutoSize = true;
-            this.labelWhereToSaveCredFile.Location = new System.Drawing.Point(14, 98);
-            this.labelWhereToSaveCredFile.Name = "labelWhereToSaveCredFile";
-            this.labelWhereToSaveCredFile.Size = new System.Drawing.Size(228, 13);
-            this.labelWhereToSaveCredFile.TabIndex = 7;
-            this.labelWhereToSaveCredFile.Text = "Where should we save the new credential file?";
-            // 
             // textBoxCredRepoPath
             // 
             this.textBoxCredRepoPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCredRepoPath.Location = new System.Drawing.Point(27, 117);
+            this.textBoxCredRepoPath.Location = new System.Drawing.Point(6, 19);
             this.textBoxCredRepoPath.Name = "textBoxCredRepoPath";
-            this.textBoxCredRepoPath.Size = new System.Drawing.Size(574, 20);
+            this.textBoxCredRepoPath.Size = new System.Drawing.Size(560, 20);
             this.textBoxCredRepoPath.TabIndex = 6;
             this.textBoxCredRepoPath.TextChanged += new System.EventHandler(this.textBoxCredRepoPath_TextChanged);
+            // 
+            // textBoxConfConPathTab2
+            // 
+            this.textBoxConfConPathTab2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxConfConPathTab2.Location = new System.Drawing.Point(9, 32);
+            this.textBoxConfConPathTab2.Multiline = true;
+            this.textBoxConfConPathTab2.Name = "textBoxConfConPathTab2";
+            this.textBoxConfConPathTab2.ReadOnly = true;
+            this.textBoxConfConPathTab2.Size = new System.Drawing.Size(574, 41);
+            this.textBoxConfConPathTab2.TabIndex = 9;
             // 
             // buttonExecuteUpgrade
             // 
@@ -356,35 +409,12 @@
             this.buttonExecuteUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonExecuteUpgrade.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonExecuteUpgrade.Enabled = false;
-            this.buttonExecuteUpgrade.Location = new System.Drawing.Point(526, 343);
+            this.buttonExecuteUpgrade.Location = new System.Drawing.Point(483, 345);
             this.buttonExecuteUpgrade.Name = "buttonExecuteUpgrade";
-            this.buttonExecuteUpgrade.Size = new System.Drawing.Size(75, 23);
+            this.buttonExecuteUpgrade.Size = new System.Drawing.Size(100, 24);
             this.buttonExecuteUpgrade.TabIndex = 5;
             this.buttonExecuteUpgrade.Text = "Upgrade";
             this.buttonExecuteUpgrade.UseVisualStyleBackColor = true;
-            // 
-            // labelSetPassword
-            // 
-            this.labelSetPassword.AutoSize = true;
-            this.labelSetPassword.Location = new System.Drawing.Point(13, 194);
-            this.labelSetPassword.Name = "labelSetPassword";
-            this.labelSetPassword.Size = new System.Drawing.Size(201, 13);
-            this.labelSetPassword.TabIndex = 4;
-            this.labelSetPassword.Text = "Set password for the credential repository";
-            // 
-            // newRepositoryPasswordEntry
-            // 
-            this.newRepositoryPasswordEntry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.newRepositoryPasswordEntry.Location = new System.Drawing.Point(27, 220);
-            this.newRepositoryPasswordEntry.MinimumSize = new System.Drawing.Size(0, 100);
-            this.newRepositoryPasswordEntry.Name = "newRepositoryPasswordEntry";
-            this.newRepositoryPasswordEntry.PasswordChar = '\0';
-            this.newRepositoryPasswordEntry.Size = new System.Drawing.Size(574, 100);
-            this.newRepositoryPasswordEntry.TabIndex = 3;
-            this.newRepositoryPasswordEntry.UseSystemPasswordChar = true;
-            this.newRepositoryPasswordEntry.Verified += new System.EventHandler(this.newRepositoryPasswordEntry_Verified);
-            this.newRepositoryPasswordEntry.NotVerified += new System.EventHandler(this.newRepositoryPasswordEntry_NotVerified);
             // 
             // labelConfConsPathHeaderOnTab2
             // 
@@ -399,9 +429,9 @@
             // 
             this.buttonSaveRepoBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.buttonSaveRepoBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSaveRepoBack.Location = new System.Drawing.Point(445, 343);
+            this.buttonSaveRepoBack.Location = new System.Drawing.Point(377, 345);
             this.buttonSaveRepoBack.Name = "buttonSaveRepoBack";
-            this.buttonSaveRepoBack.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveRepoBack.Size = new System.Drawing.Size(100, 24);
             this.buttonSaveRepoBack.TabIndex = 0;
             this.buttonSaveRepoBack.Text = "Back";
             this.buttonSaveRepoBack.UseVisualStyleBackColor = true;
@@ -411,7 +441,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(617, 402);
+            this.ClientSize = new System.Drawing.Size(602, 405);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -425,10 +455,15 @@
             this.tabPageWelcome.ResumeLayout(false);
             this.tabPageWelcome.PerformLayout();
             this.tabPageHarvestedCreds.ResumeLayout(false);
-            this.tabPageHarvestedCreds.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvFoundCredentials)).EndInit();
             this.tabPageSaveRepo.ResumeLayout(false);
             this.tabPageSaveRepo.PerformLayout();
+            this.gbSetPassword.ResumeLayout(false);
+            this.gbWhereToSaveCredFile.ResumeLayout(false);
+            this.gbWhereToSaveCredFile.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -446,9 +481,7 @@
         private Controls.Base.NGButton buttonSaveRepoBack;
         private Controls.Base.NGLabel labelConfConsPathHeaderOnTab2;
         private Controls.Base.NGButton buttonExecuteUpgrade;
-        private Controls.Base.NGLabel labelSetPassword;
         private Controls.NewPasswordWithVerification newRepositoryPasswordEntry;
-        private Controls.Base.NGLabel labelWhereToSaveCredFile;
         private Controls.Base.NGTextBox textBoxCredRepoPath;
         private System.Windows.Forms.SaveFileDialog newCredRepoPathDialog;
         private Controls.Base.NGButton buttonNewRepoPathBrowse;
@@ -465,5 +498,9 @@
         private BrightIdeasSoftware.OLVColumn colDomain;
         private BrightIdeasSoftware.OLVColumn colPassword;
         private BrightIdeasSoftware.OLVColumn colTitle;
+        private Controls.Base.NGGroupBox gbSetPassword;
+        private Controls.Base.NGGroupBox gbWhereToSaveCredFile;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

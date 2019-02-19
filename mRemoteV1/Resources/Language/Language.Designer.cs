@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -205,6 +205,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lock.
+        /// </summary>
+        internal static string Lock {
+            get {
+                return ResourceManager.GetString("Lock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login failed for user &apos;{0}&apos;..
         /// </summary>
         internal static string LoginFailedForUser {
@@ -237,15 +246,6 @@ namespace mRemoteNG {
         internal static string PromptUnlockCredReposOnStartup {
             get {
                 return ResourceManager.GetString("PromptUnlockCredReposOnStartup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The selected repository is unlocked.
-        /// </summary>
-        internal static string RepositoryIsUnlocked {
-            get {
-                return ResourceManager.GetString("RepositoryIsUnlocked", resourceCulture);
             }
         }
         
@@ -385,6 +385,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Record.
+        /// </summary>
+        internal static string strAddRecord {
+            get {
+                return ResourceManager.GetString("strAddRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Repository.
+        /// </summary>
+        internal static string strAddRepo {
+            get {
+                return ResourceManager.GetString("strAddRepo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Advanced security options.
         /// </summary>
         internal static string strAdvancedSecurityOptions {
@@ -516,6 +534,15 @@ namespace mRemoteNG {
         internal static string strAssignedCredential {
             get {
                 return ResourceManager.GetString("strAssignedCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically close this dialog after the last repository is unlocked.
+        /// </summary>
+        internal static string strAutoCloseDialog {
+            get {
+                return ResourceManager.GetString("strAutoCloseDialog", resourceCulture);
             }
         }
         
@@ -1545,6 +1572,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Where should we save the new credential file?.
+        /// </summary>
+        internal static string strConnectionFilePathPrompt {
+            get {
+                return ResourceManager.GetString("strConnectionFilePathPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opening connection failed!.
         /// </summary>
         internal static string strConnectionOpenFailed {
@@ -1559,6 +1595,15 @@ namespace mRemoteNG {
         internal static string strConnectionOpenFailedNoHostname {
             get {
                 return ResourceManager.GetString("strConnectionOpenFailedNoHostname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set password for the credential repository.
+        /// </summary>
+        internal static string strConnectionPasswordPrompt {
+            get {
+                return ResourceManager.GetString("strConnectionPasswordPrompt", resourceCulture);
             }
         }
         
@@ -1710,6 +1755,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        internal static string strContinue {
+            get {
+                return ResourceManager.GetString("strContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create new connections file!.
         /// </summary>
         internal static string strCouldNotCreateNewConnectionsFile {
@@ -1771,6 +1825,15 @@ namespace mRemoteNG {
         internal static string strCredentialManagerUpgradeDescription {
             get {
                 return ResourceManager.GetString("strCredentialManagerUpgradeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credentials found.
+        /// </summary>
+        internal static string strCredentialsFound {
+            get {
+                return ResourceManager.GetString("strCredentialsFound", resourceCulture);
             }
         }
         
@@ -1870,6 +1933,33 @@ namespace mRemoteNG {
         internal static string strDuplicate {
             get {
                 return ResourceManager.GetString("strDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string strEdit {
+            get {
+                return ResourceManager.GetString("strEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Record.
+        /// </summary>
+        internal static string strEditRecord {
+            get {
+                return ResourceManager.GetString("strEditRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Repository.
+        /// </summary>
+        internal static string strEditRepo {
+            get {
+                return ResourceManager.GetString("strEditRepo", resourceCulture);
             }
         }
         
@@ -3206,6 +3296,15 @@ namespace mRemoteNG {
         internal static string strLocalFileDoesNotExist {
             get {
                 return ResourceManager.GetString("strLocalFileDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lock Repository.
+        /// </summary>
+        internal static string strLockRepo {
+            get {
+                return ResourceManager.GetString("strLockRepo", resourceCulture);
             }
         }
         
@@ -6461,6 +6560,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove Record.
+        /// </summary>
+        internal static string strRemoveRecord {
+            get {
+                return ResourceManager.GetString("strRemoveRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Repository.
+        /// </summary>
+        internal static string strRemoveRepo {
+            get {
+                return ResourceManager.GetString("strRemoveRepo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rename.
         /// </summary>
         internal static string strRename {
@@ -7465,6 +7582,15 @@ namespace mRemoteNG {
         internal static string strUncheckProperties {
             get {
                 return ResourceManager.GetString("strUncheckProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock Repository.
+        /// </summary>
+        internal static string strUnlockRepo {
+            get {
+                return ResourceManager.GetString("strUnlockRepo", resourceCulture);
             }
         }
         

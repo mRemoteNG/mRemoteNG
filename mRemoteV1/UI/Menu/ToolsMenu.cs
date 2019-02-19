@@ -143,7 +143,7 @@ namespace mRemoteNG.UI.Menu
         {
             var credentialManagerForm = new CredentialManagerForm(CredentialService, UnlockerFormFactory);
             credentialManagerForm.CenterOnTarget(MainForm);
-            credentialManagerForm.Show();
+            credentialManagerForm.ShowDialog();
         }
 
         private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
