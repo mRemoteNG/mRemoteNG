@@ -52,6 +52,6 @@ If you find mRemoteNG useful and would like to contribute, it would be greatly a
 Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/Development) on how to configure your development environment and submit a pull request.
 
 ### Translate
-Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polygot
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polyglot
 
 [![Developed with ReSharper](https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png)](https://www.jetbrains.com/resharper/)
