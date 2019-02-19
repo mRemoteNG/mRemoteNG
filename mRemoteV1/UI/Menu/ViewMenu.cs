@@ -7,7 +7,7 @@ using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
 {
-	public class ViewMenu : ToolStripMenuItem
+    public class ViewMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenViewConnectionPanels;
         private ToolStripSeparator _mMenViewSep1;
@@ -28,11 +28,11 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewLockToolbars;
         private ToolStripSeparator _toolStripSeparator1;
         private readonly PanelAdder _panelAdder;
-	    
 
-		public ToolStrip TsExternalTools { get; set; }
+
+        public ToolStrip TsExternalTools { get; set; }
         public ToolStrip TsQuickConnect { get; set; }
-		public ToolStrip TsMultiSsh { get; set; }
+        public ToolStrip TsMultiSsh { get; set; }
         public FullscreenHandler FullscreenHandler { get; set; }
         public FrmMain MainForm { get; set; }
 
@@ -41,7 +41,7 @@ namespace mRemoteNG.UI.Menu
         {
             Initialize();
             _panelAdder = new PanelAdder();
-		}
+        }
 
         private void Initialize()
         {
@@ -55,35 +55,37 @@ namespace mRemoteNG.UI.Menu
             _mMenViewJumpToConnectionsConfig = new ToolStripMenuItem();
             _mMenViewJumpToErrorsInfos = new ToolStripMenuItem();
             _mMenViewResetLayout = new ToolStripMenuItem();
-	        _mMenViewLockToolbars = new ToolStripMenuItem();
+            _mMenViewLockToolbars = new ToolStripMenuItem();
             _mMenViewSep2 = new ToolStripSeparator();
             _mMenViewQuickConnectToolbar = new ToolStripMenuItem();
             _mMenViewExtAppsToolbar = new ToolStripMenuItem();
-	        _mMenViewMultiSshToolbar = new ToolStripMenuItem();
-			_mMenViewSep3 = new ToolStripSeparator();
+            _mMenViewMultiSshToolbar = new ToolStripMenuItem();
+            _mMenViewSep3 = new ToolStripSeparator();
             _mMenViewFullscreen = new ToolStripMenuItem();
             _toolStripSeparator1 = new ToolStripSeparator();
 
             // 
             // mMenView
             // 
-            DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenViewAddConnectionPanel,
-            _mMenViewConnectionPanels,
-            _mMenViewSep1,
-            _mMenViewConnections,
-            _mMenViewConfig,
-            _mMenViewErrorsAndInfos,
-            _toolStripSeparator1,
-            _mMenViewJumpTo,
-            _mMenViewResetLayout,
-	        _mMenViewLockToolbars,
-            _mMenViewSep2,
-            _mMenViewQuickConnectToolbar,
-            _mMenViewExtAppsToolbar,
-			_mMenViewMultiSshToolbar,
-            _mMenViewSep3,
-            _mMenViewFullscreen});
+            DropDownItems.AddRange(new ToolStripItem[]
+            {
+                _mMenViewAddConnectionPanel,
+                _mMenViewConnectionPanels,
+                _mMenViewSep1,
+                _mMenViewConnections,
+                _mMenViewConfig,
+                _mMenViewErrorsAndInfos,
+                _toolStripSeparator1,
+                _mMenViewJumpTo,
+                _mMenViewResetLayout,
+                _mMenViewLockToolbars,
+                _mMenViewSep2,
+                _mMenViewQuickConnectToolbar,
+                _mMenViewExtAppsToolbar,
+                _mMenViewMultiSshToolbar,
+                _mMenViewSep3,
+                _mMenViewFullscreen
+            });
             Name = "mMenView";
             Size = new System.Drawing.Size(44, 20);
             Text = Language.strMenuView;
@@ -146,9 +148,11 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenViewJumpTo
             // 
-            _mMenViewJumpTo.DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenViewJumpToConnectionsConfig,
-            _mMenViewJumpToErrorsInfos});
+            _mMenViewJumpTo.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                _mMenViewJumpToConnectionsConfig,
+                _mMenViewJumpToErrorsInfos
+            });
             _mMenViewJumpTo.Image = Resources.JumpTo;
             _mMenViewJumpTo.Name = "mMenViewJumpTo";
             _mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
@@ -179,18 +183,18 @@ namespace mRemoteNG.UI.Menu
             _mMenViewResetLayout.Size = new System.Drawing.Size(228, 22);
             _mMenViewResetLayout.Text = Language.strMenuResetLayout;
             _mMenViewResetLayout.Click += mMenViewResetLayout_Click;
-			// 
-			// mMenViewLockToolbars
-			// 
-			_mMenViewLockToolbars.Image = Resources.application_side_tree;
-	        _mMenViewLockToolbars.Name = "mMenViewLockToolbars";
-	        _mMenViewLockToolbars.Size = new System.Drawing.Size(228, 22);
-	        _mMenViewLockToolbars.Text = Language.strMenuLockToolbars;
+            // 
+            // mMenViewLockToolbars
+            // 
+            _mMenViewLockToolbars.Image = Resources.application_side_tree;
+            _mMenViewLockToolbars.Name = "mMenViewLockToolbars";
+            _mMenViewLockToolbars.Size = new System.Drawing.Size(228, 22);
+            _mMenViewLockToolbars.Text = Language.strMenuLockToolbars;
             _mMenViewLockToolbars.Click += mMenViewLockToolbars_Click;
-			// 
-			// mMenViewSep2
-			// 
-			_mMenViewSep2.Name = "mMenViewSep2";
+            // 
+            // mMenViewSep2
+            // 
+            _mMenViewSep2.Name = "mMenViewSep2";
             _mMenViewSep2.Size = new System.Drawing.Size(225, 6);
             // 
             // mMenViewQuickConnectToolbar
@@ -208,18 +212,18 @@ namespace mRemoteNG.UI.Menu
             _mMenViewExtAppsToolbar.Size = new System.Drawing.Size(228, 22);
             _mMenViewExtAppsToolbar.Text = Language.strMenuExternalToolsToolbar;
             _mMenViewExtAppsToolbar.Click += mMenViewExtAppsToolbar_Click;
-	        // 
-	        // mMenViewMultiSSHToolbar
-	        // 
-	        _mMenViewMultiSshToolbar.Image = Resources.Panels;
-	        _mMenViewMultiSshToolbar.Name = "mMenViewMultiSSHToolbar";
-	        _mMenViewMultiSshToolbar.Size = new System.Drawing.Size(279, 26);
-	        _mMenViewMultiSshToolbar.Text = Language.strMenuMultiSshToolbar;
+            // 
+            // mMenViewMultiSSHToolbar
+            // 
+            _mMenViewMultiSshToolbar.Image = Resources.Panels;
+            _mMenViewMultiSshToolbar.Name = "mMenViewMultiSSHToolbar";
+            _mMenViewMultiSshToolbar.Size = new System.Drawing.Size(279, 26);
+            _mMenViewMultiSshToolbar.Text = Language.strMenuMultiSshToolbar;
             _mMenViewMultiSshToolbar.Click += mMenViewMultiSSHToolbar_Click;
-			// 
-			// mMenViewSep3
-			// 
-			_mMenViewSep3.Name = "mMenViewSep3";
+            // 
+            // mMenViewSep3
+            // 
+            _mMenViewSep3.Name = "mMenViewSep3";
             _mMenViewSep3.Size = new System.Drawing.Size(225, 6);
             // 
             // mMenViewFullscreen
@@ -233,9 +237,8 @@ namespace mRemoteNG.UI.Menu
             _mMenViewFullscreen.Click += mMenViewFullscreen_Click;
         }
 
-	    
 
-	    public void ApplyLanguage()
+        public void ApplyLanguage()
         {
             Text = Language.strMenuView;
             _mMenViewAddConnectionPanel.Text = Language.strMenuAddConnectionPanel;
@@ -255,24 +258,25 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region View
+
         internal void mMenView_DropDownOpening(object sender, EventArgs e)
         {
             _mMenViewConnections.Checked = !Windows.TreeForm.IsHidden;
             _mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;
             _mMenViewErrorsAndInfos.Checked = !Windows.ErrorsForm.IsHidden;
-	        _mMenViewLockToolbars.Checked = Settings.Default.LockToolbars;
+            _mMenViewLockToolbars.Checked = Settings.Default.LockToolbars;
 
             _mMenViewExtAppsToolbar.Checked = TsExternalTools.Visible;
             _mMenViewQuickConnectToolbar.Checked = TsQuickConnect.Visible;
-	        _mMenViewMultiSshToolbar.Checked = TsMultiSsh.Visible;
+            _mMenViewMultiSshToolbar.Checked = TsMultiSsh.Visible;
 
-			_mMenViewConnectionPanels.DropDownItems.Clear();
+            _mMenViewConnectionPanels.DropDownItems.Clear();
 
             for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
             {
                 var tItem = new ToolStripMenuItem(Runtime.WindowList[i].Text,
-                    Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
-                { Tag = Runtime.WindowList[i] };
+                                                  Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
+                    {Tag = Runtime.WindowList[i]};
                 _mMenViewConnectionPanels.DropDownItems.Add(tItem);
             }
 
@@ -347,28 +351,28 @@ namespace mRemoteNG.UI.Menu
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
         {
             var msgBoxResult = MessageBox.Show(Language.strConfirmResetLayout, string.Empty, MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+                                               MessageBoxIcon.Question);
             if (msgBoxResult == DialogResult.Yes)
             {
                 MainForm.SetDefaultLayout();
             }
         }
 
-	    private void mMenViewLockToolbars_Click(object sender, EventArgs eventArgs)
-	    {
-		    if (Settings.Default.LockToolbars)
-		    {
-			    Settings.Default.LockToolbars = false;
-			    _mMenViewLockToolbars.Checked = false;
-		    }
-		    else
-		    {
-			    Settings.Default.LockToolbars = true;
-			    _mMenViewLockToolbars.Checked = true;
-			}
-	    }
+        private void mMenViewLockToolbars_Click(object sender, EventArgs eventArgs)
+        {
+            if (Settings.Default.LockToolbars)
+            {
+                Settings.Default.LockToolbars = false;
+                _mMenViewLockToolbars.Checked = false;
+            }
+            else
+            {
+                Settings.Default.LockToolbars = true;
+                _mMenViewLockToolbars.Checked = true;
+            }
+        }
 
-		private void mMenViewAddConnectionPanel_Click(object sender, EventArgs e)
+        private void mMenViewAddConnectionPanel_Click(object sender, EventArgs e)
         {
             _panelAdder.AddPanel();
         }
@@ -401,25 +405,26 @@ namespace mRemoteNG.UI.Menu
             }
         }
 
-	    private void mMenViewMultiSSHToolbar_Click(object sender, EventArgs e)
-	    {
-		    if (_mMenViewMultiSshToolbar.Checked == false)
-		    {
-			    TsMultiSsh.Visible = true;
-			    _mMenViewMultiSshToolbar.Checked = true;
-		    }
-		    else
-		    {
-			    TsMultiSsh.Visible = false;
-			    _mMenViewMultiSshToolbar.Checked = false;
-		    }
-	    }
+        private void mMenViewMultiSSHToolbar_Click(object sender, EventArgs e)
+        {
+            if (_mMenViewMultiSshToolbar.Checked == false)
+            {
+                TsMultiSsh.Visible = true;
+                _mMenViewMultiSshToolbar.Checked = true;
+            }
+            else
+            {
+                TsMultiSsh.Visible = false;
+                _mMenViewMultiSshToolbar.Checked = false;
+            }
+        }
 
-		private void mMenViewFullscreen_Click(object sender, EventArgs e)
+        private void mMenViewFullscreen_Click(object sender, EventArgs e)
         {
             FullscreenHandler.Value = !FullscreenHandler.Value;
             _mMenViewFullscreen.Checked = FullscreenHandler.Value;
         }
+
         #endregion
     }
 }

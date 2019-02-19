@@ -1,6 +1,7 @@
 ﻿using System.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using Org.BouncyCastle.Security;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Security
@@ -51,7 +52,7 @@ namespace mRemoteNG.Security
             {
                 machineKeyString += (char)random.Next(33, 126);
             }
-            
+
             return machineKeyString.ConvertToSecureString();
         }
     }

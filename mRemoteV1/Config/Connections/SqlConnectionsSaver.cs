@@ -29,10 +29,10 @@ namespace mRemoteNG.Config.Connections
         private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer;
         private readonly IDataProvider<string> _dataProvider;
 
-        public SqlConnectionsSaver(
-            SaveFilter saveFilter, 
-            ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> localPropertieSerializer,
-            IDataProvider<string> localPropertiesDataProvider)
+        public SqlConnectionsSaver(SaveFilter saveFilter,
+                                   ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string>
+                                       localPropertieSerializer,
+                                   IDataProvider<string> localPropertiesDataProvider)
         {
             if (saveFilter == null)
                 throw new ArgumentNullException(nameof(saveFilter));
@@ -49,14 +49,15 @@ namespace mRemoteNG.Config.Connections
 
             if (PropertyIsLocalOnly(propertyNameTrigger))
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, 
-                    $"Property {propertyNameTrigger} is local only. Not saving to database.");
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                                                    $"Property {propertyNameTrigger} is local only. Not saving to database.");
                 return;
             }
 
             if (SqlUserIsReadOnly())
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to save connection tree but the SQL read only checkbox is checked, aborting!");
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                    "Trying to save connection tree but the SQL read only checkbox is checked, aborting!");
                 return;
             }
 
@@ -69,7 +70,8 @@ namespace mRemoteNG.Config.Connections
 
                 if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.strErrorConnectionListSaveFailed);
                     return;
                 }
 
@@ -137,22 +139,25 @@ namespace mRemoteNG.Config.Connections
             {
                 sqlQuery =
                     new SqlCommand(
-                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
-                        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
-                        ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")",
-                        sqlDatabaseConnector.SqlConnection);
+                                   "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
+                                   MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
+                                   ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) +
+                                   ")",
+                                   sqlDatabaseConnector.SqlConnection);
                 sqlQuery.ExecuteNonQuery();
             }
             else
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
             }
         }
 
         private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
         {
             var cryptoProvider = new LegacyRijndaelCryptographyProvider();
-            var serializer = new DataTableSerializer(_saveFilter, cryptoProvider, rootTreeNode.PasswordString.ConvertToSecureString());
+            var serializer = new DataTableSerializer(_saveFilter, cryptoProvider,
+                                                     rootTreeNode.PasswordString.ConvertToSecureString());
             var dataTable = serializer.Serialize(rootTreeNode);
             var dataProvider = new SqlDataProvider(sqlDatabaseConnector);
 
@@ -165,14 +170,16 @@ namespace mRemoteNG.Config.Connections
         {
             var sqlQuery = new SqlCommand("DELETE FROM tblUpdate", sqlDatabaseConnector.SqlConnection);
             sqlQuery.ExecuteNonQuery();
-            sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')", sqlDatabaseConnector.SqlConnection);
+            sqlQuery = new SqlCommand(
+                                      "INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) +
+                                      "\')",
+                                      sqlDatabaseConnector.SqlConnection);
             sqlQuery.ExecuteNonQuery();
         }
 
         private bool SqlUserIsReadOnly()
         {
             return mRemoteNG.Settings.Default.SQLReadOnly;
-
         }
     }
 }

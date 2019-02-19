@@ -11,14 +11,15 @@ using System.Text;
 
 namespace mRemoteNG.Config.Serializers.Csv
 {
-    public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo,string>
+    public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo, string>
     {
         private readonly SaveFilter _saveFilter;
         private readonly ICredentialRepositoryList _credentialRepositoryList;
 
         public Version Version { get; } = new Version(2, 7);
 
-        public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter, ICredentialRepositoryList credentialRepositoryList)
+        public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter,
+                                                       ICredentialRepositoryList credentialRepositoryList)
         {
             saveFilter.ThrowIfNull(nameof(saveFilter));
             credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
@@ -106,52 +107,52 @@ namespace mRemoteNG.Config.Serializers.Csv
                 .Append(FormatForCsv(con.CredentialRecordId));
 
             sb.Append(FormatForCsv(con.Hostname))
-                .Append(FormatForCsv(con.Protocol))
-                .Append(FormatForCsv(con.PuttySession))
-                .Append(FormatForCsv(con.Port))
-                .Append(FormatForCsv(con.UseConsoleSession))
-                .Append(FormatForCsv(con.UseCredSsp))
-                .Append(FormatForCsv(con.RenderingEngine))
-                .Append(FormatForCsv(con.ICAEncryptionStrength))
-                .Append(FormatForCsv(con.RDPAuthenticationLevel))
-                .Append(FormatForCsv(con.LoadBalanceInfo))
-                .Append(FormatForCsv(con.Colors))
-                .Append(FormatForCsv(con.Resolution))
-                .Append(FormatForCsv(con.AutomaticResize))
-                .Append(FormatForCsv(con.DisplayWallpaper))
-                .Append(FormatForCsv(con.DisplayThemes))
-                .Append(FormatForCsv(con.EnableFontSmoothing))
-                .Append(FormatForCsv(con.EnableDesktopComposition))
-                .Append(FormatForCsv(con.CacheBitmaps))
-                .Append(FormatForCsv(con.RedirectDiskDrives))
-                .Append(FormatForCsv(con.RedirectPorts))
-                .Append(FormatForCsv(con.RedirectPrinters))
-                .Append(FormatForCsv(con.RedirectClipboard))
-                .Append(FormatForCsv(con.RedirectSmartCards))
-                .Append(FormatForCsv(con.RedirectSound))
-                .Append(FormatForCsv(con.RedirectKeys))
-                .Append(FormatForCsv(con.PreExtApp))
-                .Append(FormatForCsv(con.PostExtApp))
-                .Append(FormatForCsv(con.MacAddress))
-                .Append(FormatForCsv(con.UserField))
-                .Append(FormatForCsv(con.ExtApp))
-                .Append(FormatForCsv(con.VNCCompression))
-                .Append(FormatForCsv(con.VNCEncoding))
-                .Append(FormatForCsv(con.VNCAuthMode))
-                .Append(FormatForCsv(con.VNCProxyType))
-                .Append(FormatForCsv(con.VNCProxyIP))
-                .Append(FormatForCsv(con.VNCProxyPort))
-                .Append(FormatForCsv(con.VNCProxyUsername))
-                .Append(FormatForCsv(con.VNCProxyPassword))
-                .Append(FormatForCsv(con.VNCColors))
-                .Append(FormatForCsv(con.VNCSmartSizeMode))
-                .Append(FormatForCsv(con.VNCViewOnly))
-                .Append(FormatForCsv(con.RDGatewayUsageMethod))
-                .Append(FormatForCsv(con.RDGatewayHostname))
-                .Append(FormatForCsv(con.RDGatewayUseConnectionCredentials))
-                .Append(FormatForCsv(con.RDGatewayUsername))
-                .Append(FormatForCsv(con.RDGatewayPassword))
-                .Append(FormatForCsv(con.RDGatewayDomain));
+              .Append(FormatForCsv(con.Protocol))
+              .Append(FormatForCsv(con.PuttySession))
+              .Append(FormatForCsv(con.Port))
+              .Append(FormatForCsv(con.UseConsoleSession))
+              .Append(FormatForCsv(con.UseCredSsp))
+              .Append(FormatForCsv(con.RenderingEngine))
+              .Append(FormatForCsv(con.ICAEncryptionStrength))
+              .Append(FormatForCsv(con.RDPAuthenticationLevel))
+              .Append(FormatForCsv(con.LoadBalanceInfo))
+              .Append(FormatForCsv(con.Colors))
+              .Append(FormatForCsv(con.Resolution))
+              .Append(FormatForCsv(con.AutomaticResize))
+              .Append(FormatForCsv(con.DisplayWallpaper))
+              .Append(FormatForCsv(con.DisplayThemes))
+              .Append(FormatForCsv(con.EnableFontSmoothing))
+              .Append(FormatForCsv(con.EnableDesktopComposition))
+              .Append(FormatForCsv(con.CacheBitmaps))
+              .Append(FormatForCsv(con.RedirectDiskDrives))
+              .Append(FormatForCsv(con.RedirectPorts))
+              .Append(FormatForCsv(con.RedirectPrinters))
+              .Append(FormatForCsv(con.RedirectClipboard))
+              .Append(FormatForCsv(con.RedirectSmartCards))
+              .Append(FormatForCsv(con.RedirectSound))
+              .Append(FormatForCsv(con.RedirectKeys))
+              .Append(FormatForCsv(con.PreExtApp))
+              .Append(FormatForCsv(con.PostExtApp))
+              .Append(FormatForCsv(con.MacAddress))
+              .Append(FormatForCsv(con.UserField))
+              .Append(FormatForCsv(con.ExtApp))
+              .Append(FormatForCsv(con.VNCCompression))
+              .Append(FormatForCsv(con.VNCEncoding))
+              .Append(FormatForCsv(con.VNCAuthMode))
+              .Append(FormatForCsv(con.VNCProxyType))
+              .Append(FormatForCsv(con.VNCProxyIP))
+              .Append(FormatForCsv(con.VNCProxyPort))
+              .Append(FormatForCsv(con.VNCProxyUsername))
+              .Append(FormatForCsv(con.VNCProxyPassword))
+              .Append(FormatForCsv(con.VNCColors))
+              .Append(FormatForCsv(con.VNCSmartSizeMode))
+              .Append(FormatForCsv(con.VNCViewOnly))
+              .Append(FormatForCsv(con.RDGatewayUsageMethod))
+              .Append(FormatForCsv(con.RDGatewayHostname))
+              .Append(FormatForCsv(con.RDGatewayUseConnectionCredentials))
+              .Append(FormatForCsv(con.RDGatewayUsername))
+              .Append(FormatForCsv(con.RDGatewayPassword))
+              .Append(FormatForCsv(con.RDGatewayDomain));
 
 
             if (!_saveFilter.SaveInheritance)

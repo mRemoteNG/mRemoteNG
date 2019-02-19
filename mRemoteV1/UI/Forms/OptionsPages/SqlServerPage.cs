@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
@@ -8,7 +7,7 @@ using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	public sealed partial class SqlServerPage
+    public sealed partial class SqlServerPage
     {
         private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
 
@@ -44,8 +43,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkUseSQLServer.Checked = Settings.Default.UseSQLServer;
             txtSQLServer.Text = Settings.Default.SQLHost;
             txtSQLDatabaseName.Text = Settings.Default.SQLDatabaseName;
@@ -53,7 +50,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             txtSQLPassword.Text = cryptographyProvider.Decrypt(Settings.Default.SQLPass, Runtime.EncryptionKey);
             chkSQLReadOnly.Checked = Settings.Default.SQLReadOnly;
-	        lblTestConnectionResults.Text = "";
+            lblTestConnectionResults.Text = "";
         }
 
         public override void SaveSettings()
@@ -73,14 +70,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 ReinitializeSqlUpdater();
             else if (!Settings.Default.UseSQLServer && sqlServerWasPreviouslyEnabled)
                 DisableSql();
-
-            Settings.Default.Save();
         }
 
         private static void ReinitializeSqlUpdater()
         {
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Dispose();
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            Runtime.ConnectionsService.RemoteConnectionsSyncronizer =
+                new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
             Runtime.ConnectionsService.LoadConnections(true, "");
         }
 
@@ -122,7 +118,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             imgConnectionStatus.Image = Resources.loading_spinner;
             btnTestConnection.Enabled = false;
 
-            var connectionTestResult = await _databaseConnectionTester.TestConnectivity(server, database, username, password);
+            var connectionTestResult =
+                await _databaseConnectionTester.TestConnectivity(server, database, username, password);
 
             btnTestConnection.Enabled = true;
 
@@ -134,15 +131,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
                 case ConnectionTestResult.ServerNotAccessible:
                     UpdateConnectionImage(false);
-                    lblTestConnectionResults.Text = BuildTestFailedMessage(string.Format(Language.ServerNotAccessible, server));
+                    lblTestConnectionResults.Text =
+                        BuildTestFailedMessage(string.Format(Language.ServerNotAccessible, server));
                     break;
                 case ConnectionTestResult.CredentialsRejected:
                     UpdateConnectionImage(false);
-                    lblTestConnectionResults.Text = BuildTestFailedMessage(string.Format(Language.LoginFailedForUser, username));
+                    lblTestConnectionResults.Text =
+                        BuildTestFailedMessage(string.Format(Language.LoginFailedForUser, username));
                     break;
                 case ConnectionTestResult.UnknownDatabase:
                     UpdateConnectionImage(false);
-                    lblTestConnectionResults.Text = BuildTestFailedMessage(string.Format(Language.DatabaseNotAvailable, database));
+                    lblTestConnectionResults.Text =
+                        BuildTestFailedMessage(string.Format(Language.DatabaseNotAvailable, database));
                     break;
                 case ConnectionTestResult.UnknownError:
                     UpdateConnectionImage(false);

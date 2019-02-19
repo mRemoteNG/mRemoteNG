@@ -4,6 +4,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.TaskDialog;
+
 // ReSharper disable RedundantAssignment
 
 namespace mRemoteNG.Connection.Protocol.Http
@@ -26,15 +27,17 @@ namespace mRemoteNG.Connection.Protocol.Http
 
             string[] commandButtons =
             {
-                Language.strHttpsInsecureAllowOnce,     // 0
-                Language.strHttpsInsecureAllowAlways,   // 1
-                Language.strHttpsInsecureDontAllow      // 2
+                Language.strHttpsInsecureAllowOnce, // 0
+                Language.strHttpsInsecureAllowAlways, // 1
+                Language.strHttpsInsecureDontAllow // 2
             };
 
             CTaskDialog.ShowTaskDialogBox(null, GeneralAppInfo.ProductName, Language.strHttpsInsecurePromptTitle,
-                string.Format(Language.strHttpsInsecurePrompt, e.Uri.AbsoluteUri), "", "", "", "",
-                string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
-           
+                                          string.Format(Language.strHttpsInsecurePrompt, e.Uri.AbsoluteUri), "", "", "",
+                                          "",
+                                          string.Join(" | ", commandButtons), ETaskDialogButtons.None,
+                                          ESysIcons.Question, ESysIcons.Question);
+
             var allow = false;
             var temporary = true;
             // ReSharper disable once SwitchStatementMissingSomeCases
@@ -53,10 +56,11 @@ namespace mRemoteNG.Connection.Protocol.Http
                     temporary = true; // just to be safe
                     break;
             }
-           
+
             if (!allow)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"User did not allow navigation to {e.Uri.AbsoluteUri} with an insecure certificate: {e.Message}");
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    $"User did not allow navigation to {e.Uri.AbsoluteUri} with an insecure certificate: {e.Message}");
                 return;
             }
 
@@ -65,7 +69,8 @@ namespace mRemoteNG.Connection.Protocol.Http
             * However, my testing was successful in Gecko 45.0.22
             */
             CertOverrideService.GetService().RememberValidityOverride(e.Uri, e.Certificate,
-                CertOverride.Mismatch | CertOverride.Time | CertOverride.Untrusted, temporary);
+                                                                      CertOverride.Mismatch | CertOverride.Time |
+                                                                      CertOverride.Untrusted, temporary);
 
             e.Handled = true;
             ((GeckoWebBrowser)sender).Navigate(e.Uri.AbsoluteUri);

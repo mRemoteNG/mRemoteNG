@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Controls.Base
         {
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveAndExtended) return;
             // Use the Dialog_* colors since Labels generally have the same colors as panels/dialogs/windows/etc...
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ThemingActive)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
@@ -93,7 +93,8 @@ namespace mRemoteNG.UI.Controls.Base
             }
             else
             {
-                var disabledtextLabel = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
+                var disabledtextLabel =
+                    _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
                 TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, disabledtextLabel, _textFormatFlags);
             }
         }
@@ -104,9 +105,9 @@ namespace mRemoteNG.UI.Controls.Base
             // 
             // NGLabel
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResumeLayout(false);
-
         }
     }
 }

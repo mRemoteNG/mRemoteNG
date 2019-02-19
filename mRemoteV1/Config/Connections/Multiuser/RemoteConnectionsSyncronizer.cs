@@ -27,7 +27,8 @@ namespace mRemoteNG.Config.Connections.Multiuser
         {
             _updateChecker.UpdateCheckStarted += OnUpdateCheckStarted;
             _updateChecker.UpdateCheckFinished += OnUpdateCheckFinished;
-            _updateChecker.ConnectionsUpdateAvailable += (sender, args) => ConnectionsUpdateAvailable?.Invoke(sender, args);
+            _updateChecker.ConnectionsUpdateAvailable +=
+                (sender, args) => ConnectionsUpdateAvailable?.Invoke(sender, args);
             _updateTimer.Elapsed += (sender, args) => _updateChecker.IsUpdateAvailableAsync();
             ConnectionsUpdateAvailable += Load;
         }
@@ -81,6 +82,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         private void Dispose(bool itIsSafeToAlsoFreeManagedObjects)
         {
             if (!itIsSafeToAlsoFreeManagedObjects) return;

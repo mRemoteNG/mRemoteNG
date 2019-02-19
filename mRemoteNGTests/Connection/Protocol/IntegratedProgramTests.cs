@@ -52,8 +52,8 @@ namespace mRemoteNGTests.Connection.Protocol
 		private InterfaceControl BuildInterfaceControl(string extAppName, ProtocolBase sut)
 		{
 			var connectionWindow = new ConnectionWindow(new DockContent());
-			var connectionInfo = new ConnectionInfo {ExtApp = extAppName};
-			return new InterfaceControl(connectionWindow, sut, connectionInfo);
+            var connectionInfo = new ConnectionInfo {ExtApp = extAppName, Protocol = ProtocolType.IntApp};
+            return new InterfaceControl(connectionWindow, sut, connectionInfo);
 		}
 	}
 }

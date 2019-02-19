@@ -90,7 +90,8 @@ namespace mRemoteNG.Credential.Repositories
             RepositoryConfigUpdated?.Invoke(this, args);
         }
 
-        protected virtual void RaiseCredentialsUpdatedEvent(object sender, CollectionUpdatedEventArgs<ICredentialRecord> args)
+        protected virtual void RaiseCredentialsUpdatedEvent(object sender,
+                                                            CollectionUpdatedEventArgs<ICredentialRecord> args)
         {
             CredentialsUpdated?.Invoke(this, args);
         }

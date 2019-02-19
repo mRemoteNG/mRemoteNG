@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Panels
 {
     public class PanelAdder
     {
-        public ConnectionWindow AddPanel(string title = "", bool noTabber = false)
+        public ConnectionWindow AddPanel(string title = "")
         {
             try
             {
@@ -21,12 +21,13 @@ namespace mRemoteNG.UI.Panels
                 BuildConnectionWindowContextMenu(connectionForm);
                 SetConnectionWindowTitle(title, connectionForm);
                 ShowConnectionWindow(connectionForm);
-                PrepareTabControllerSupport(noTabber, connectionForm);
+                PrepareTabSupport(connectionForm);
                 return connectionForm;
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t add panel" + Environment.NewLine + ex.Message);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "Couldn\'t add panel" + Environment.NewLine + ex.Message);
                 return null;
             }
         }
@@ -42,17 +43,14 @@ namespace mRemoteNG.UI.Panels
             connectionForm.Show(FrmMain.Default.pnlDock, DockState.Document);
         }
 
-        private static void PrepareTabControllerSupport(bool noTabber, ConnectionWindow connectionForm)
+        private static void PrepareTabSupport(ConnectionWindow connectionForm)
         {
-            if (noTabber)
-                connectionForm.TabController.Dispose();
-            else
-                Runtime.WindowList.Add(connectionForm);
+            Runtime.WindowList.Add(connectionForm);
         }
 
         private static void SetConnectionWindowTitle(string title, ConnectionWindow connectionForm)
         {
-            if (title == "")
+            if (string.IsNullOrEmpty(title))
                 title = Language.strNewPanel;
             connectionForm.SetFormText(title.Replace("&", "&&"));
         }
@@ -62,7 +60,7 @@ namespace mRemoteNG.UI.Panels
             var cMen = new ContextMenuStrip();
             var cMenRen = CreateRenameMenuItem(pnlcForm);
             var cMenScreens = CreateScreensMenuItem(pnlcForm);
-            cMen.Items.AddRange(new ToolStripItem[] { cMenRen, cMenScreens });
+            cMen.Items.AddRange(new ToolStripItem[] {cMenRen, cMenScreens});
             pnlcForm.TabPageContextMenuStrip = cMen;
         }
 
@@ -96,17 +94,15 @@ namespace mRemoteNG.UI.Panels
             try
             {
                 var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
-                var nTitle = "";
-                using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle))
-                {
-                    var dr = frmInputBox.ShowDialog();
-                    if (dr == DialogResult.OK && string.IsNullOrEmpty(frmInputBox.returnValue))
-                        conW.SetFormText(frmInputBox.returnValue);
-                }
+
+                using (var newTitle = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ""))
+                    if (newTitle.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(newTitle.returnValue))
+                        conW.SetFormText(newTitle.returnValue.Replace("&", "&&"));
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelRename_Click: Caught Exception: ", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelRename_Click: Caught Exception: ",
+                                                                ex);
             }
         }
 
@@ -132,7 +128,9 @@ namespace mRemoteNG.UI.Panels
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelScreens_DropDownOpening: Caught Exception: ", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                                                                "cMenConnectionPanelScreens_DropDownOpening: Caught Exception: ",
+                                                                ex);
             }
         }
 
@@ -155,11 +153,13 @@ namespace mRemoteNG.UI.Panels
                         panel = (DockContent)obj;
                     }
                 }
+
                 Screens.SendPanelToScreen(panel, screen);
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelScreen_Click: Caught Exception: ", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelScreen_Click: Caught Exception: ",
+                                                                ex);
             }
         }
     }

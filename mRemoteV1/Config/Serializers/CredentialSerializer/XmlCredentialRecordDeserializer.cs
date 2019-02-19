@@ -19,13 +19,14 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             ValidateSchemaVersion(rootElement);
 
             var credentials = from element in xdoc.Descendants("Credential")
-                select new CredentialRecord(Guid.Parse(element.Attribute("Id")?.Value ?? Guid.NewGuid().ToString()))
-                {
-                    Title = element.Attribute("Title")?.Value ?? "",
-                    Username = element.Attribute("Username")?.Value ?? "",
-                    Password = element.Attribute("Password")?.Value.ConvertToSecureString(),
-                    Domain = element.Attribute("Domain")?.Value ?? ""
-                };
+                              select new CredentialRecord(Guid.Parse(element.Attribute("Id")?.Value ??
+                                                                     Guid.NewGuid().ToString()))
+                              {
+                                  Title = element.Attribute("Title")?.Value ?? "",
+                                  Username = element.Attribute("Username")?.Value ?? "",
+                                  Password = element.Attribute("Password")?.Value.ConvertToSecureString(),
+                                  Domain = element.Attribute("Domain")?.Value ?? ""
+                              };
             return credentials.ToArray();
         }
 
@@ -33,7 +34,8 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
         {
             var docSchemaVersion = rootElement?.Attribute("SchemaVersion")?.Value;
             if (docSchemaVersion != SchemaVersion)
-                throw new Exception($"The schema version of this document is not supported by this class. Document Version: {docSchemaVersion} Supported Version: {SchemaVersion}");
+                throw new Exception(
+                                    $"The schema version of this document is not supported by this class. Document Version: {docSchemaVersion} Supported Version: {SchemaVersion}");
         }
     }
 }

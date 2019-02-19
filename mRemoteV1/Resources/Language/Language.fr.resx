@@ -608,12 +608,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Échec du chiffrement.{0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Les paramètres de sécurité Windows, "Système de cryptographie: Utilise FIPS, algorithmes compatible pour le cryptage, hachage et signature", est activé. Ce paramètre n'est pas compatible avec {0}.
-Consultez l'article du support de Microsoft pour plus d'informations http://support.microsoft.com/kb/811833
-
-{0} va maintenant se fermer.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Erreurs</value>
   </data>

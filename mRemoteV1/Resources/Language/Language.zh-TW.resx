@@ -592,13 +592,6 @@ VncSharp Control 版本 {0}</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>加密失敗。 {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Windows 安全性設定，「系統加密編譯: 使用 FIPS 相容演算法於加密，雜湊，以及簽章」已啟用。 此設定與 {0} 不相容。
-
-更多資訊請查看 Microsoft Support 文章於 http://support.microsoft.com/kb/811833？
-
-{0} 將關閉。</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>錯誤</value>
   </data>

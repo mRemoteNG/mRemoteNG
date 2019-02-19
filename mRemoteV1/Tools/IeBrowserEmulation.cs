@@ -8,24 +8,31 @@ using mRemoteNG.App;
 
 namespace mRemoteNG.Tools
 {
-	public class IeBrowserEmulation
+    public class IeBrowserEmulation
     {
         // found this here:
         // http://www.neowin.net/forum/topic/1077469-vbnet-webbrowser-control-does-not-load-javascript/#comment-596755046
 
         private static void SetBrowserFeatureControlKey(string feature, string appName, uint value)
         {
-
             if (Environment.Is64BitOperatingSystem)
             {
-                using (var key = Registry.CurrentUser.CreateSubKey(string.Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
+                using (var key = Registry.CurrentUser.CreateSubKey(
+                                                                   string
+                                                                       .Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
+                                                                               feature),
+                                                                   RegistryKeyPermissionCheck.ReadWriteSubTree))
                 {
                     key?.SetValue(appName, value, RegistryValueKind.DWord);
                 }
             }
 
 
-            using (var key = Registry.CurrentUser.CreateSubKey(string.Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
+            using (var key = Registry.CurrentUser.CreateSubKey(
+                                                               string
+                                                                   .Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
+                                                                           feature),
+                                                               RegistryKeyPermissionCheck.ReadWriteSubTree))
             {
                 key?.SetValue(appName, value, RegistryValueKind.DWord);
             }
@@ -34,10 +41,13 @@ namespace mRemoteNG.Tools
 #if PORTABLE
         private static void DeleteBrowserFeatureControlKey(string feature, string appName)
         {
-
             if (Environment.Is64BitOperatingSystem)
             {
-                using (var key = Registry.CurrentUser.OpenSubKey(string.Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
+                using (var key = Registry.CurrentUser.OpenSubKey(
+                                                                 string
+                                                                     .Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
+                                                                             feature),
+                                                                 RegistryKeyPermissionCheck.ReadWriteSubTree))
                 {
                     if (key?.GetValueNames().Contains(appName) ?? false)
                         key.DeleteValue(appName);
@@ -45,7 +55,11 @@ namespace mRemoteNG.Tools
             }
 
 
-            using (var key = Registry.CurrentUser.CreateSubKey(string.Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\", feature), RegistryKeyPermissionCheck.ReadWriteSubTree))
+            using (var key = Registry.CurrentUser.CreateSubKey(
+                                                               string
+                                                                   .Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
+                                                                           feature),
+                                                               RegistryKeyPermissionCheck.ReadWriteSubTree))
             {
                 if (key?.GetValueNames().Contains(appName) ?? false)
                     key.DeleteValue(appName);
@@ -61,7 +75,8 @@ namespace mRemoteNG.Tools
             var fileName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
 
             // make sure the control is not running inside Visual Studio Designer
-            if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 ||
+                string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 return;
             }
@@ -102,7 +117,8 @@ namespace mRemoteNG.Tools
             var fileName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
 
             // make sure the control is not running inside Visual Studio Designer
-            if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 ||
+                string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 return;
             }
@@ -142,7 +158,9 @@ namespace mRemoteNG.Tools
             var browserVersion = 9;
             // default to IE9.
 
-            using (var ieKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Internet Explorer", RegistryKeyPermissionCheck.ReadSubTree, RegistryRights.QueryValues))
+            using (var ieKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Internet Explorer",
+                                                                RegistryKeyPermissionCheck.ReadSubTree,
+                                                                RegistryRights.QueryValues))
             {
                 if (ieKey != null)
                 {
@@ -155,6 +173,7 @@ namespace mRemoteNG.Tools
                             throw new ApplicationException("Microsoft Internet Explorer is required!");
                         }
                     }
+
                     int.TryParse(version.ToString().Split('.')[0], out browserVersion);
                 }
             }

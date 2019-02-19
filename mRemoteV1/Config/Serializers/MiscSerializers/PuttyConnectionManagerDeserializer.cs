@@ -75,16 +75,19 @@ namespace mRemoteNG.Config.Serializers
                     {
                         throw (new FileFormatException($"Unrecognized root node type ({xmlNodeType})."));
                     }
+
                     break;
                 case "container":
                     if (string.Compare(xmlNodeType, "folder", StringComparison.OrdinalIgnoreCase) != 0)
                     {
                         throw (new FileFormatException($"Unrecognized root node type ({xmlNodeType})."));
                     }
+
                     break;
                 default:
                     // ReSharper disable once LocalizableElement
-                    throw (new ArgumentException("Argument must be either a root or a container node.", nameof(xmlNode)));
+                    throw (new ArgumentException("Argument must be either a root or a container node.",
+                                                 nameof(xmlNode)));
             }
         }
 

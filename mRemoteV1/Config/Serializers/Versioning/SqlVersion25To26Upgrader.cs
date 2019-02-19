@@ -25,7 +25,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public Version Upgrade()
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.5 to version 2.6.");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                "Upgrading database from version 2.5 to version 2.6.");
             const string sqlText = @"
 ALTER TABLE tblCons
 ADD RDPMinutesToIdleTimeout int NOT NULL DEFAULT 0,

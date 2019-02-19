@@ -14,12 +14,14 @@ namespace mRemoteNG.Config.DataProviders
                 if (WeDontNeedToBackup(fileName))
                     return;
 
-                var backupFileName = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, DateTime.Now);
+                var backupFileName =
+                    string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, DateTime.Now);
                 File.Copy(fileName, backupFileName);
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(Language.strConnectionsFileBackupFailed, ex, MessageClass.WarningMsg);
+                Runtime.MessageCollector.AddExceptionMessage(Language.strConnectionsFileBackupFailed, ex,
+                                                             MessageClass.WarningMsg);
                 throw;
             }
         }

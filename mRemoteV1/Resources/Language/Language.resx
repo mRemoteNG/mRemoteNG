@@ -655,11 +655,11 @@ Starting with new connections file.</value>
     <value>Encryption failed. {0}</value>
   </data>
   <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>The Windows security setting, "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing", is enabled. This setting is not compatible with {0}.
+    <value>The Windows security setting, "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing", is enabled. 
 
 See the Microsoft Support article at http://support.microsoft.com/kb/811833 for more information.
 
-{0} will now close.</value>
+{0} is not fully FIPS compliant. Click OK to proceed at your own discretion, or Cancel to Exit.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Errors</value>
@@ -2582,7 +2582,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Type the new theme name</value>
   </data>
   <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
-    <value>Warning: Restart is required to disable the themes or to completely apply a new one</value>
+    <value>Warning: Restart is required to commit any theme configuration change.</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
     <value>No themes are loaded, check that the default mRemoteNG themes exist in the 'themes' folder</value>

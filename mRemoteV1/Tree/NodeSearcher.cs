@@ -5,7 +5,7 @@ using mRemoteNG.Connection;
 
 namespace mRemoteNG.Tree
 {
-	public class NodeSearcher
+    public class NodeSearcher
     {
         private readonly IConnectionTreeModel _connectionTreeModel;
 
@@ -31,6 +31,7 @@ namespace mRemoteNG.Tree
                     node.Hostname.ToLowerInvariant().Contains(searchTextLower))
                     Matches.Add(node);
             }
+
             if (Matches.Count > 0)
                 CurrentMatch = Matches.First();
             return Matches;

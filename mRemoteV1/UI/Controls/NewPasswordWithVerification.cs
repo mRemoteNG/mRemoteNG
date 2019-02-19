@@ -13,11 +13,9 @@ namespace mRemoteNG.UI.Controls
         private char _passwordChar;
 
 
-        [Browsable(false)]
-        public SecureString SecureString { get; private set; }
+        [Browsable(false)] public SecureString SecureString { get; private set; }
 
-        [Browsable(false)]
-        public bool PasswordsMatch { get; private set; }
+        [Browsable(false)] public bool PasswordsMatch { get; private set; }
 
         [Browsable(true)]
         public char PasswordChar
@@ -97,6 +95,7 @@ namespace mRemoteNG.UI.Controls
                 SecureString = null;
                 RaiseNotVerifiedEvent();
             }
+
             TogglePasswordMatchIndicator(PasswordsMatch);
         }
 

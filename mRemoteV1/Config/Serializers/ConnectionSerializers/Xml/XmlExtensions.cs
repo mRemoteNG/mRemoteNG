@@ -17,7 +17,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             if (string.IsNullOrWhiteSpace(value))
                 return defaultValue;
 
-            return bool.TryParse(value, out var valueAsBool) 
+            return bool.TryParse(value, out var valueAsBool)
                 ? valueAsBool
                 : defaultValue;
         }
@@ -28,8 +28,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             if (string.IsNullOrWhiteSpace(value))
                 return defaultValue;
 
-            return int.TryParse(value, out var valueAsBool) 
-                ? valueAsBool 
+            return int.TryParse(value, out var valueAsBool)
+                ? valueAsBool
                 : defaultValue;
         }
 

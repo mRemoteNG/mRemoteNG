@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Messages
@@ -26,7 +27,7 @@ namespace mRemoteNG.Messages
 
         public void AddMessage(IMessage message)
         {
-            AddMessages(new [] {message});
+            AddMessages(new[] {message});
         }
 
         public void AddMessages(IEnumerable<IMessage> messages)
@@ -38,18 +39,27 @@ namespace mRemoteNG.Messages
                 _messageList.Add(message);
                 newMessages.Add(message);
             }
+
             if (newMessages.Any())
                 RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, newMessages);
         }
 
-        public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
+        public void AddExceptionMessage(string message,
+                                        Exception ex,
+                                        MessageClass msgClass = MessageClass.ErrorMsg,
+                                        bool logOnly = true)
         {
-            AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex), logOnly);
+            AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex),
+                       logOnly);
         }
 
-        public void AddExceptionStackTrace(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
+        public void AddExceptionStackTrace(string message,
+                                           Exception ex,
+                                           MessageClass msgClass = MessageClass.ErrorMsg,
+                                           bool logOnly = true)
         {
-            AddMessage(msgClass, message + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, logOnly);
+            AddMessage(msgClass, message + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace,
+                       logOnly);
         }
 
         public void ClearMessages()

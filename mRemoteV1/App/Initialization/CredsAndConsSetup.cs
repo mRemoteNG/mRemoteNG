@@ -14,7 +14,8 @@ namespace mRemoteNG.App.Initialization
         {
             connectionsOnEdit.Subscribe(connectionsService);
 
-            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(connectionsService.GetStartupConnectionFileName()))
+            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && 
+				!File.Exists(connectionsService.GetStartupConnectionFileName()))
                 connectionsService.NewConnectionsFile(connectionsService.GetStartupConnectionFileName());
 
             credentialService.LoadRepositoryList();

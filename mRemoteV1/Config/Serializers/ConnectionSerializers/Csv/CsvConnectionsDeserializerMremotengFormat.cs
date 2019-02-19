@@ -21,7 +21,7 @@ namespace mRemoteNG.Config.Serializers.Csv
     {
         public SerializationResult Deserialize(string serializedData)
         {
-            var lines = serializedData.Split(new []{"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
+            var lines = serializedData.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
             var csvHeaders = new List<string>();
             // used to map a connectioninfo to it's parent's GUID
             var parentMapping = new Dictionary<ConnectionInfo, string>();
@@ -72,9 +72,9 @@ namespace mRemoteNG.Config.Serializers.Csv
 
                 // search for parent in the list by GUID
                 var parent = parentMapping
-                    .Keys
-                    .OfType<ContainerInfo>()
-                    .FirstOrDefault(info => info.ConstantID == node.Value);
+                             .Keys
+                             .OfType<ContainerInfo>()
+                             .FirstOrDefault(info => info.ConstantID == node.Value);
 
                 if (parent != null)
                 {
@@ -92,7 +92,7 @@ namespace mRemoteNG.Config.Serializers.Csv
         private ConnectionInfo ParseConnectionInfo(IList<string> headers, string[] connectionCsv)
         {
             var nodeType = headers.Contains("NodeType")
-                ? (TreeNodeType)Enum.Parse(typeof(TreeNodeType), connectionCsv[headers.IndexOf("NodeType")], true) 
+                ? (TreeNodeType)Enum.Parse(typeof(TreeNodeType), connectionCsv[headers.IndexOf("NodeType")], true)
                 : TreeNodeType.Connection;
 
             var nodeId = headers.Contains("Id")
@@ -104,7 +104,8 @@ namespace mRemoteNG.Config.Serializers.Csv
                 : new ContainerInfo(nodeId);
 
             connectionRecord.Name = headers.Contains("Name") ? connectionCsv[headers.IndexOf("Name")] : "";
-            connectionRecord.Description = headers.Contains("Description") ? connectionCsv[headers.IndexOf("Description")] : "";
+            connectionRecord.Description =
+                headers.Contains("Description") ? connectionCsv[headers.IndexOf("Description")] : "";
             connectionRecord.Icon = headers.Contains("Icon") ? connectionCsv[headers.IndexOf("Icon")] : "";
             connectionRecord.Panel = headers.Contains("Panel") ? connectionCsv[headers.IndexOf("Panel")] : "";
 
@@ -119,20 +120,40 @@ namespace mRemoteNG.Config.Serializers.Csv
             connectionRecord.Domain = headers.Contains("Domain") ? connectionCsv[headers.IndexOf("Domain")] : "";
 
             connectionRecord.Hostname = headers.Contains("Hostname") ? connectionCsv[headers.IndexOf("Hostname")] : "";
-            connectionRecord.PuttySession = headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
-            connectionRecord.LoadBalanceInfo = headers.Contains("LoadBalanceInfo") ? connectionCsv[headers.IndexOf("LoadBalanceInfo")] : "";
-            connectionRecord.PreExtApp = headers.Contains("PreExtApp") ? connectionCsv[headers.IndexOf("PreExtApp")] : "";
-            connectionRecord.PostExtApp = headers.Contains("PostExtApp") ? connectionCsv[headers.IndexOf("PostExtApp")] : "";
-            connectionRecord.MacAddress = headers.Contains("MacAddress") ? connectionCsv[headers.IndexOf("MacAddress")] : "";
-            connectionRecord.UserField = headers.Contains("UserField") ? connectionCsv[headers.IndexOf("UserField")] : "";
+            connectionRecord.PuttySession =
+                headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
+            connectionRecord.LoadBalanceInfo = headers.Contains("LoadBalanceInfo")
+                ? connectionCsv[headers.IndexOf("LoadBalanceInfo")]
+                : "";
+            connectionRecord.PreExtApp =
+                headers.Contains("PreExtApp") ? connectionCsv[headers.IndexOf("PreExtApp")] : "";
+            connectionRecord.PostExtApp =
+                headers.Contains("PostExtApp") ? connectionCsv[headers.IndexOf("PostExtApp")] : "";
+            connectionRecord.MacAddress =
+                headers.Contains("MacAddress") ? connectionCsv[headers.IndexOf("MacAddress")] : "";
+            connectionRecord.UserField =
+                headers.Contains("UserField") ? connectionCsv[headers.IndexOf("UserField")] : "";
             connectionRecord.ExtApp = headers.Contains("ExtApp") ? connectionCsv[headers.IndexOf("ExtApp")] : "";
-            connectionRecord.VNCProxyUsername = headers.Contains("VNCProxyUsername") ? connectionCsv[headers.IndexOf("VNCProxyUsername")] : "";
-            connectionRecord.VNCProxyPassword = headers.Contains("VNCProxyPassword") ? connectionCsv[headers.IndexOf("VNCProxyPassword")] : "";
-            connectionRecord.RDGatewayUsername = headers.Contains("RDGatewayUsername") ? connectionCsv[headers.IndexOf("RDGatewayUsername")] : "";
-            connectionRecord.RDGatewayPassword = headers.Contains("RDGatewayPassword") ? connectionCsv[headers.IndexOf("RDGatewayPassword")] : "";
-            connectionRecord.RDGatewayDomain = headers.Contains("RDGatewayDomain") ? connectionCsv[headers.IndexOf("RDGatewayDomain")] : "";
-            connectionRecord.VNCProxyIP = headers.Contains("VNCProxyIP") ? connectionCsv[headers.IndexOf("VNCProxyIP")] : "";
-            connectionRecord.RDGatewayHostname = headers.Contains("RDGatewayHostname") ? connectionCsv[headers.IndexOf("RDGatewayHostname")] : "";
+            connectionRecord.VNCProxyUsername = headers.Contains("VNCProxyUsername")
+                ? connectionCsv[headers.IndexOf("VNCProxyUsername")]
+                : "";
+            connectionRecord.VNCProxyPassword = headers.Contains("VNCProxyPassword")
+                ? connectionCsv[headers.IndexOf("VNCProxyPassword")]
+                : "";
+            connectionRecord.RDGatewayUsername = headers.Contains("RDGatewayUsername")
+                ? connectionCsv[headers.IndexOf("RDGatewayUsername")]
+                : "";
+            connectionRecord.RDGatewayPassword = headers.Contains("RDGatewayPassword")
+                ? connectionCsv[headers.IndexOf("RDGatewayPassword")]
+                : "";
+            connectionRecord.RDGatewayDomain = headers.Contains("RDGatewayDomain")
+                ? connectionCsv[headers.IndexOf("RDGatewayDomain")]
+                : "";
+            connectionRecord.VNCProxyIP =
+                headers.Contains("VNCProxyIP") ? connectionCsv[headers.IndexOf("VNCProxyIP")] : "";
+            connectionRecord.RDGatewayHostname = headers.Contains("RDGatewayHostname")
+                ? connectionCsv[headers.IndexOf("RDGatewayHostname")]
+                : "";
 
             if (headers.Contains("CredentialId"))
             {
@@ -247,6 +268,7 @@ namespace mRemoteNG.Config.Serializers.Csv
                 if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectPrinters")], out bool value))
                     connectionRecord.RedirectPrinters = value;
             }
+
             if (headers.Contains("RedirectClipboard"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectClipboard")], out bool value))
@@ -332,6 +354,7 @@ namespace mRemoteNG.Config.Serializers.Csv
             }
 
             #region Inheritance
+
             if (headers.Contains("InheritCacheBitmaps"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritCacheBitmaps")], out bool value))
@@ -622,7 +645,8 @@ namespace mRemoteNG.Config.Serializers.Csv
 
             if (headers.Contains("InheritRDGatewayUseConnectionCredentials"))
             {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUseConnectionCredentials")], out bool value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUseConnectionCredentials")],
+                                  out var value))
                     connectionRecord.Inheritance.RDGatewayUseConnectionCredentials = value;
             }
 

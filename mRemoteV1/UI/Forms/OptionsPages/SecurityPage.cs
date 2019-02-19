@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Drawing;
 using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -35,24 +34,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
             chkEncryptCompleteFile.Checked = Settings.Default.EncryptCompleteConnectionsFile;
             comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Settings.Default.EncryptionEngine);
-            comboBoxBlockCipher.Text = Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipherMode);
+            comboBoxBlockCipher.Text =
+                Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipherMode);
             numberBoxKdfIterations.Value = Settings.Default.EncryptionKeyDerivationIterations;
         }
 
         public override void SaveSettings()
         {
             Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
-            Settings.Default.EncryptionEngine = (BlockCipherEngines) comboBoxEncryptionEngine.SelectedItem;
-            Settings.Default.EncryptionBlockCipherMode = (BlockCipherModes) comboBoxBlockCipher.SelectedItem;
+            Settings.Default.EncryptionEngine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
+            Settings.Default.EncryptionBlockCipherMode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
             Settings.Default.EncryptionKeyDerivationIterations = (int)numberBoxKdfIterations.Value;
         }
 
         public override void RevertSettings()
         {
-
         }
 
         private void PopulateEncryptionEngineDropDown()

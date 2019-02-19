@@ -613,13 +613,6 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Criptaggio fallito. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>L'impostazione Windows di sicurezza "Crittografia di sistema: utilizza algoritmi FIPS compatibili per crittografia, hash e firma" è abilitata. Tale impostazione non è compatibile con {0}.
-
-Visualizza il supporto Microsoft http://support.microsoft.com/kb/811833/it per ottenere maggiori informazioni.
-
-{0} sarà chiuso.</value>
-  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Errori</value>
   </data>

@@ -1,8 +1,8 @@
 using mRemoteNG.App;
 using System;
 using System.IO;
-using System.Threading; 
-using mRemoteNG.Tools; 
+using System.Threading;
+using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Window
     public class SSHTransferWindow : BaseWindow
     {
         #region Form Init
+
         private Controls.Base.NGProgressBar pbStatus;
         private Controls.Base.NGButton btnTransfer;
         private Controls.Base.NGTextBox txtUser;
@@ -36,7 +37,8 @@ namespace mRemoteNG.UI.Window
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
+            System.ComponentModel.ComponentResourceManager resources =
+                new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
             this.grpFiles = new mRemoteNG.UI.Controls.Base.NGGroupBox();
             this.lblLocalFile = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.txtLocalFile = new mRemoteNG.UI.Controls.Base.NGTextBox();
@@ -89,6 +91,8 @@ namespace mRemoteNG.UI.Window
             // txtLocalFile
             // 
             this.txtLocalFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLocalFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                             System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLocalFile.Location = new System.Drawing.Point(105, 28);
             this.txtLocalFile.Name = "txtLocalFile";
             this.txtLocalFile.Size = new System.Drawing.Size(455, 22);
@@ -100,18 +104,19 @@ namespace mRemoteNG.UI.Window
             this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransfer.Image = global::mRemoteNG.Resources.SSHTransfer;
             this.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTransfer.Location = new System.Drawing.Point(566, 140);
+            this.btnTransfer.Location = new System.Drawing.Point(562, 145);
             this.btnTransfer.Name = "btnTransfer";
-            this.btnTransfer.Size = new System.Drawing.Size(96, 29);
+            this.btnTransfer.Size = new System.Drawing.Size(100, 24);
             this.btnTransfer.TabIndex = 10000;
             this.btnTransfer.Text = "Transfer";
-            this.btnTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTransfer.UseVisualStyleBackColor = true;
             this.btnTransfer.Click += new System.EventHandler(this.btnTransfer_Click);
             // 
             // txtRemoteFile
             // 
             this.txtRemoteFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRemoteFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                              System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRemoteFile.Location = new System.Drawing.Point(105, 60);
             this.txtRemoteFile.Name = "txtRemoteFile";
             this.txtRemoteFile.Size = new System.Drawing.Size(542, 22);
@@ -132,7 +137,7 @@ namespace mRemoteNG.UI.Window
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Location = new System.Drawing.Point(566, 28);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(81, 26);
+            this.btnBrowse.Size = new System.Drawing.Size(81, 22);
             this.btnBrowse.TabIndex = 30;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -231,6 +236,8 @@ namespace mRemoteNG.UI.Window
             // txtPort
             // 
             this.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                        System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPort.Location = new System.Drawing.Point(271, 110);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(30, 22);
@@ -241,6 +248,8 @@ namespace mRemoteNG.UI.Window
             // txtHost
             // 
             this.txtHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtHost.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                        System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHost.Location = new System.Drawing.Point(105, 19);
             this.txtHost.Name = "txtHost";
             this.txtHost.Size = new System.Drawing.Size(471, 22);
@@ -249,6 +258,8 @@ namespace mRemoteNG.UI.Window
             // txtPassword
             // 
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                            System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(105, 81);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(471, 22);
@@ -258,6 +269,8 @@ namespace mRemoteNG.UI.Window
             // txtUser
             // 
             this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUser.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                        System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUser.Location = new System.Drawing.Point(105, 51);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(471, 22);
@@ -279,7 +292,8 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.grpFiles);
             this.Controls.Add(this.grpConnection);
             this.Controls.Add(this.pbStatus);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SSHTransferWindow";
             this.TabText = "SSH File Transfer";
@@ -290,15 +304,18 @@ namespace mRemoteNG.UI.Window
             this.grpConnection.ResumeLayout(false);
             this.grpConnection.PerformLayout();
             this.ResumeLayout(false);
-
         }
+
         #endregion
 
         #region Private Properties
+
         private readonly OpenFileDialog oDlg;
+
         #endregion
 
         #region Public Properties
+
         public string Hostname
         {
             get => txtHost.Text;
@@ -322,12 +339,14 @@ namespace mRemoteNG.UI.Window
             get => txtPassword.Text;
             set => txtPassword.Text = value;
         }
+
         #endregion
 
         #region Form Stuff
+
         private void SSHTransfer_Load(object sender, EventArgs e)
         {
-            ApplyTheme(); 
+            ApplyTheme();
             ApplyLanguage();
             var display = new DisplayProperties();
             btnTransfer.Image = display.ScaleImage(btnTransfer.Image);
@@ -349,10 +368,13 @@ namespace mRemoteNG.UI.Window
             TabText = Language.strMenuSSHFileTransfer;
             Text = Language.strMenuSSHFileTransfer;
         }
+
         #endregion
 
         #region Private Methods
+
         private SecureTransfer st;
+
         private void StartTransfer(SecureTransfer.SSHTransferProtocol Protocol)
         {
             if (AllFieldsSet() == false)
@@ -369,7 +391,8 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                st = new SecureTransfer(txtHost.Text, txtUser.Text, txtPassword.Text, int.Parse(txtPort.Text), Protocol, txtLocalFile.Text, txtRemoteFile.Text);
+                st = new SecureTransfer(txtHost.Text, txtUser.Text, txtPassword.Text, int.Parse(txtPort.Text), Protocol,
+                                        txtLocalFile.Text, txtRemoteFile.Text);
 
                 // Connect creates the protocol objects and makes the initial connection.
                 st.Connect();
@@ -418,7 +441,8 @@ namespace mRemoteNG.UI.Window
             try
             {
                 DisableButtons();
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                    $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
                 st.Upload();
 
                 // SftpClient is Asynchronous, so we need to wait here after the upload and handle the status directly since no status events are raised.
@@ -427,22 +451,28 @@ namespace mRemoteNG.UI.Window
                     var fi = new FileInfo(st.SrcFile);
                     while (!st.asyncResult.IsCompleted)
                     {
-                        var max = fi.Length > int.MaxValue ? Convert.ToInt32(fi.Length / 1024) : Convert.ToInt32(fi.Length);
+                        var max = fi.Length > int.MaxValue
+                            ? Convert.ToInt32(fi.Length / 1024)
+                            : Convert.ToInt32(fi.Length);
 
-                        var cur = fi.Length > int.MaxValue ? Convert.ToInt32(st.asyncResult.UploadedBytes / 1024) : Convert.ToInt32(st.asyncResult.UploadedBytes);
+                        var cur = fi.Length > int.MaxValue
+                            ? Convert.ToInt32(st.asyncResult.UploadedBytes / 1024)
+                            : Convert.ToInt32(st.asyncResult.UploadedBytes);
                         SshTransfer_Progress(cur, max);
                         Thread.Sleep(50);
                     }
                 }
 
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} completed.", true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                    $"Transfer of {Path.GetFileName(st.SrcFile)} completed.", true);
                 st.Disconnect();
                 st.Dispose();
                 EnableButtons();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSSHStartTransferBG, ex, MessageClass.ErrorMsg, false);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSSHStartTransferBG, ex,
+                                                                MessageClass.ErrorMsg, false);
                 st?.Disconnect();
                 st?.Dispose();
             }
@@ -450,11 +480,13 @@ namespace mRemoteNG.UI.Window
 
         private bool AllFieldsSet()
         {
-            if (txtHost.Text != "" && txtPort.Text != "" && txtUser.Text != "" && txtLocalFile.Text != "" && txtRemoteFile.Text != "")
+            if (txtHost.Text != "" && txtPort.Text != "" && txtUser.Text != "" && txtLocalFile.Text != "" &&
+                txtRemoteFile.Text != "")
             {
                 if (txtPassword.Text == "")
                 {
-                    if (MessageBox.Show(FrmMain.Default, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    if (MessageBox.Show(FrmMain.Default, Language.strEmptyPasswordContinue, @"Question?",
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     {
                         return false;
                     }
@@ -462,7 +494,8 @@ namespace mRemoteNG.UI.Window
 
                 if (txtRemoteFile.Text.EndsWith("/") || txtRemoteFile.Text.EndsWith("\\"))
                 {
-                    txtRemoteFile.Text += txtLocalFile.Text.Substring(txtLocalFile.Text.LastIndexOf("\\", StringComparison.Ordinal) + 1);
+                    txtRemoteFile.Text +=
+                        txtLocalFile.Text.Substring(txtLocalFile.Text.LastIndexOf("\\", StringComparison.Ordinal) + 1);
                 }
 
                 return true;
@@ -478,6 +511,7 @@ namespace mRemoteNG.UI.Window
         private int curVal;
 
         private delegate void SetStatusCB();
+
         private void SetStatus()
         {
             if (pbStatus.InvokeRequired)
@@ -493,6 +527,7 @@ namespace mRemoteNG.UI.Window
         }
 
         private delegate void EnableButtonsCB();
+
         private void EnableButtons()
         {
             if (btnTransfer.InvokeRequired)
@@ -507,6 +542,7 @@ namespace mRemoteNG.UI.Window
         }
 
         private delegate void DisableButtonsCB();
+
         private void DisableButtons()
         {
             if (btnTransfer.InvokeRequired)
@@ -531,6 +567,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Public Methods
+
         public SSHTransferWindow()
         {
             WindowType = WindowType.SSHTransfer;
@@ -543,9 +580,11 @@ namespace mRemoteNG.UI.Window
                 CheckFileExists = true
             };
         }
+
         #endregion
 
         #region Form Stuff
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             if (oDlg.ShowDialog() != DialogResult.OK) return;
@@ -566,6 +605,7 @@ namespace mRemoteNG.UI.Window
                 StartTransfer(SecureTransfer.SSHTransferProtocol.SFTP);
             }
         }
+
         #endregion
     }
 }

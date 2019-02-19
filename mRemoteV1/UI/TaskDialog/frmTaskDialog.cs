@@ -10,11 +10,15 @@ namespace mRemoteNG.UI.TaskDialog
     public partial class frmTaskDialog : Form
     {
         //--------------------------------------------------------------------------------
+
         #region PRIVATE members
+
         //--------------------------------------------------------------------------------
 
         private string _mainInstruction = "Main Instruction Text";
-        private readonly Font _mainInstructionFont = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+
+        private readonly Font _mainInstructionFont =
+            new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
         private readonly List<NGRadioButton> _radioButtonCtrls = new List<NGRadioButton>();
         private readonly DisplayProperties _display = new DisplayProperties();
@@ -24,28 +28,51 @@ namespace mRemoteNG.UI.TaskDialog
 
         private int _mainInstructionLeftMargin;
         private int _mainInstructionRightMargin;
+
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region PROPERTIES
+
         //--------------------------------------------------------------------------------
         public ESysIcons MainIcon { get; set; } = ESysIcons.Question;
         public ESysIcons FooterIcon { get; set; } = ESysIcons.Warning;
 
-        public string Title { get => Text;
+        public string Title
+        {
+            get => Text;
             set => Text = value;
         }
-        public string MainInstruction { get => _mainInstruction;
-            set { _mainInstruction = value; Invalidate(); } }
-        public string Content { get => lbContent.Text;
+
+        public string MainInstruction
+        {
+            get => _mainInstruction;
+            set
+            {
+                _mainInstruction = value;
+                Invalidate();
+            }
+        }
+
+        public string Content
+        {
+            get => lbContent.Text;
             set => lbContent.Text = value;
         }
-        public string ExpandedInfo { get => lbExpandedInfo.Text;
+
+        public string ExpandedInfo
+        {
+            get => lbExpandedInfo.Text;
             set => lbExpandedInfo.Text = value;
         }
-        public string Footer { get => lbFooter.Text;
+
+        public string Footer
+        {
+            get => lbFooter.Text;
             set => lbFooter.Text = value;
         }
+
         public int DefaultButtonIndex { get; set; }
 
         public string RadioButtons { get; set; } = "";
@@ -66,10 +93,15 @@ namespace mRemoteNG.UI.TaskDialog
 
         public ETaskDialogButtons Buttons { get; set; } = ETaskDialogButtons.YesNoCancel;
 
-        public string VerificationText { get => cbVerify.Text;
+        public string VerificationText
+        {
+            get => cbVerify.Text;
             set => cbVerify.Text = value;
         }
-        public bool VerificationCheckBoxChecked { get => cbVerify.Checked;
+
+        public bool VerificationCheckBoxChecked
+        {
+            get => cbVerify.Checked;
             set => cbVerify.Checked = value;
         }
 
@@ -78,7 +110,9 @@ namespace mRemoteNG.UI.TaskDialog
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region CONSTRUCTOR
+
         //--------------------------------------------------------------------------------
         public frmTaskDialog()
         {
@@ -94,13 +128,17 @@ namespace mRemoteNG.UI.TaskDialog
             Footer = "";
             VerificationText = "";
         }
+
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region BuildForm
+
         // This is the main routine that should be called before .ShowDialog()
         //--------------------------------------------------------------------------------
         private bool _formBuilt;
+
         public void BuildForm()
         {
             var formHeight = 0;
@@ -185,6 +223,7 @@ namespace mRemoteNG.UI.TaskDialog
                     pnlHeight += rb.Height;
                     _radioButtonCtrls.Add(rb);
                 }
+
                 pnlRadioButtons.Height = pnlHeight;
                 formHeight += pnlRadioButtons.Height;
             }
@@ -202,7 +241,7 @@ namespace mRemoteNG.UI.TaskDialog
                     {
                         Parent = pnlCommandButtons, Location = new Point(_display.ScaleWidth(50), t)
                     };
-                    if (_isVista)  // <- tweak font if vista
+                    if (_isVista) // <- tweak font if vista
                         btn.Font = new Font(btn.Font, FontStyle.Regular);
                     btn.Text = arr[i];
                     btn.Size = new Size(Width - btn.Left - _display.ScaleWidth(15), btn.GetBestHeight());
@@ -213,6 +252,7 @@ namespace mRemoteNG.UI.TaskDialog
                     if (i == DefaultButtonIndex)
                         _focusControl = btn;
                 }
+
                 pnlCommandButtons.Height = pnlHeight;
                 formHeight += pnlCommandButtons.Height;
             }
@@ -311,6 +351,7 @@ namespace mRemoteNG.UI.TaskDialog
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+
                 formHeight += pnlFooter.Height;
             }
 
@@ -323,8 +364,7 @@ namespace mRemoteNG.UI.TaskDialog
 
         private void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ThemingActive)
-                return;
+            if (!ThemeManager.getInstance().ActiveAndExtended) return;
 
             pnlButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             pnlButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
@@ -336,16 +376,24 @@ namespace mRemoteNG.UI.TaskDialog
             panel5.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             panel3.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             panel3.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlCommandButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlCommandButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlMainInstruction.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlMainInstruction.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlCommandButtons.BackColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlCommandButtons.ForeColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlMainInstruction.BackColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlMainInstruction.ForeColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             pnlContent.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             pnlContent.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlExpandedInfo.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlExpandedInfo.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlRadioButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlRadioButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlExpandedInfo.BackColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlExpandedInfo.ForeColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlRadioButtons.BackColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlRadioButtons.ForeColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         //--------------------------------------------------------------------------------
@@ -365,6 +413,7 @@ namespace mRemoteNG.UI.TaskDialog
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 g.DrawImage(srcImg, 0, 0, w, h);
             }
+
             return b;
         }
 
@@ -382,10 +431,13 @@ namespace mRemoteNG.UI.TaskDialog
                 lb.Height = (int)stringSize.Height + 4;
             }
         }
+
         #endregion
 
         //--------------------------------------------------------------------------------
+
         #region EVENTS
+
         //--------------------------------------------------------------------------------
         private void CommandButton_Click(object sender, EventArgs e)
         {
@@ -445,14 +497,23 @@ namespace mRemoteNG.UI.TaskDialog
             {
                 switch (MainIcon)
                 {
-                    case ESysIcons.Error: System.Media.SystemSounds.Hand.Play(); break;
-                    case ESysIcons.Information: System.Media.SystemSounds.Asterisk.Play(); break;
-                    case ESysIcons.Question: System.Media.SystemSounds.Asterisk.Play(); break;
-                    case ESysIcons.Warning: System.Media.SystemSounds.Exclamation.Play(); break;
+                    case ESysIcons.Error:
+                        System.Media.SystemSounds.Hand.Play();
+                        break;
+                    case ESysIcons.Information:
+                        System.Media.SystemSounds.Asterisk.Play();
+                        break;
+                    case ESysIcons.Question:
+                        System.Media.SystemSounds.Asterisk.Play();
+                        break;
+                    case ESysIcons.Warning:
+                        System.Media.SystemSounds.Exclamation.Play();
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
+
             _focusControl?.Focus();
         }
 

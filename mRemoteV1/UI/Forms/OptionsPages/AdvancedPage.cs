@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -23,6 +22,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         }
 
         #region Public Methods
+
         public override string PageName
         {
             get => Language.strTabAdvanced;
@@ -47,8 +47,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
             chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
             chkLoadBalanceInfoUseUtf8.Checked = Settings.Default.RdpLoadBalanceInfoUseUtf8;
@@ -73,21 +71,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 puttyPathChanged = true;
                 Settings.Default.CustomPuttyPath = txtCustomPuttyPath.Text;
             }
+
             if (Settings.Default.UseCustomPuttyPath != chkUseCustomPuttyPath.Checked)
             {
                 puttyPathChanged = true;
                 Settings.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
             }
+
             if (puttyPathChanged)
             {
-                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath ? Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
+                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath
+                    ? Settings.Default.CustomPuttyPath
+                    : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
             }
 
-            Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
-            Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
-
-            Settings.Default.Save();
+            Settings.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
+            Settings.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
         }
 
         #endregion
@@ -160,7 +160,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
-
         }
 
         #endregion
