@@ -23,16 +23,16 @@
             this.msToggleUnlock = new System.Windows.Forms.ToolStripMenuItem();
             this.msEditRepo = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.pnlBottom = new System.Windows.Forms.Panel();
             this.olvCredRepos = new mRemoteNG.UI.Controls.Base.NGListView();
             this.colCredRepoTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.pnlBottom = new System.Windows.Forms.Panel();
             this.buttonClose = new mRemoteNG.UI.Controls.Base.NGButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.olvCredRepos)).BeginInit();
             this.pnlBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.olvCredRepos)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -104,6 +104,15 @@
             this.splitContainer.SplitterDistance = 307;
             this.splitContainer.TabIndex = 8;
             // 
+            // pnlBottom
+            // 
+            this.pnlBottom.Controls.Add(this.buttonClose);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(0, 442);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(925, 35);
+            this.pnlBottom.TabIndex = 9;
+            // 
             // olvCredRepos
             // 
             this.olvCredRepos.AllColumns.Add(this.colCredRepoTitle);
@@ -147,15 +156,6 @@
             this.colCredRepoTitle.Text = "Repositories";
             this.colCredRepoTitle.Width = 120;
             // 
-            // pnlBottom
-            // 
-            this.pnlBottom.Controls.Add(this.buttonClose);
-            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 442);
-            this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(925, 35);
-            this.pnlBottom.TabIndex = 9;
-            // 
             // buttonClose
             // 
             this.buttonClose._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
@@ -179,6 +179,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CredentialManagerForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -189,8 +190,8 @@
             this.splitContainer.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.olvCredRepos)).EndInit();
             this.pnlBottom.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.olvCredRepos)).EndInit();
             this.ResumeLayout(false);
 
         }
