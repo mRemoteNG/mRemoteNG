@@ -44,6 +44,7 @@ namespace mRemoteNG.UI.Controls
         public NewPasswordWithVerification()
         {
             InitializeComponent();
+            ApplyLanguage();
             var display = new DisplayProperties();
             secureTextBox1.Width = display.ScaleWidth(Width);
             secureTextBox2.Width = display.ScaleWidth(Width);
@@ -56,6 +57,13 @@ namespace mRemoteNG.UI.Controls
             var text = password.ConvertToUnsecureString();
             secureTextBox1.Text = text;
             secureTextBox2.Text = text;
+        }
+
+        private void ApplyLanguage()
+        {
+            labelFirstPasswordBox.Text = Language.strNewPassword;
+            labelSecondPasswordBox.Text = Language.strVerifyPassword;
+            labelPasswordsDontMatch.Text = Language.strPasswordsDontMatch;
         }
 
         private bool Verify()

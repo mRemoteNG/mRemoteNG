@@ -2440,8 +2440,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Warnung! Ein Neustart ist notwendig um ein Theme zu deaktivieren oder anzuwenden</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>
-Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
+    <value>Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
   </data>
   <data name="LoginFailedForUser" xml:space="preserve">
     <value>Login fehlgeschlagen für Benutzer '{0}'.</value>
@@ -2618,5 +2617,44 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   </data>
   <data name="Lock" xml:space="preserve">
     <value>Sperren</value>
+  </data>
+  <data name="strEditRecord" xml:space="preserve">
+    <value>Bearbeite Eintrag</value>
+  </data>
+  <data name="strEdit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="strContinue" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="strAutoCloseDialog" xml:space="preserve">
+    <value>Dieses Fenster automatisch schließen, nachdem das letzte Repository entsperrt wurde</value>
+  </data>
+  <data name="strAddRepo" xml:space="preserve">
+    <value>Repository hinzufügen</value>
+  </data>
+  <data name="strAddRecord" xml:space="preserve">
+    <value>Eintrag hinzufügen</value>
+  </data>
+  <data name="strCredentialsFound" xml:space="preserve">
+    <value>Gefundene Anmeldedaten</value>
+  </data>
+  <data name="strRemoveRepo" xml:space="preserve">
+    <value>Repository entfernen</value>
+  </data>
+  <data name="strLockRepo" xml:space="preserve">
+    <value>Repository sperren</value>
+  </data>
+  <data name="strNewPassword" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="strUnlockRepo" xml:space="preserve">
+    <value>Repository entsperren</value>
+  </data>
+  <data name="strRemoveRecord" xml:space="preserve">
+    <value>Eintrag entfernen</value>
+  </data>
+  <data name="strEditRepo" xml:space="preserve">
+    <value>Repository bearbeiten</value>
   </data>
 </root>

@@ -4173,6 +4173,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        internal static string strNewPassword {
+            get {
+                return ResourceManager.GetString("strNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Root.
         /// </summary>
         internal static string strNewRoot {
@@ -4611,6 +4620,15 @@ namespace mRemoteNG {
         internal static string strPasswordProtect {
             get {
                 return ResourceManager.GetString("strPasswordProtect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords don&apos;t macht!.
+        /// </summary>
+        internal static string strPasswordsDontMatch {
+            get {
+                return ResourceManager.GetString("strPasswordsDontMatch", resourceCulture);
             }
         }
         
@@ -7799,6 +7817,15 @@ namespace mRemoteNG {
         internal static string strUseSQLServer {
             get {
                 return ResourceManager.GetString("strUseSQLServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verify Password.
+        /// </summary>
+        internal static string strVerifyPassword {
+            get {
+                return ResourceManager.GetString("strVerifyPassword", resourceCulture);
             }
         }
         

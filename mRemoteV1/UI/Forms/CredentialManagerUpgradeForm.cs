@@ -122,6 +122,8 @@ namespace mRemoteNG.UI.Forms
             colUsername.Text = Language.strPropertyNameUsername;
             colDomain.Text = Language.strPropertyNameDomain;
             colPassword.Text = Language.strPropertyNamePassword;
+            btnCredsBack.Text = Language.strBack;
+            btnCredsContinue.Text = Language.strContinue;
 
             // SaveRepo tab
             labelConfConsPathHeaderOnTab2.Text = $@"{Language.strConnectionFilePath}:";

@@ -2788,4 +2788,13 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strUnlockRepo" xml:space="preserve">
     <value>Unlock Repository</value>
   </data>
+  <data name="strNewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="strPasswordsDontMatch" xml:space="preserve">
+    <value>Passwords don't macht!</value>
+  </data>
+  <data name="strVerifyPassword" xml:space="preserve">
+    <value>Verify Password</value>
+  </data>
 </root>
