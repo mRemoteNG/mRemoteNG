@@ -116,6 +116,7 @@
             // 
             this.textBoxConfConPathTab1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxConfConPathTab1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxConfConPathTab1.Location = new System.Drawing.Point(9, 150);
             this.textBoxConfConPathTab1.Multiline = true;
             this.textBoxConfConPathTab1.Name = "textBoxConfConPathTab1";
@@ -134,7 +135,7 @@
             // 
             // buttonExit
             // 
-            this.buttonExit._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.buttonExit._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonExit.Location = new System.Drawing.Point(190, 339);
             this.buttonExit.Name = "buttonExit";
@@ -148,15 +149,15 @@
             // 
             this.labelDescriptionOfUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelDescriptionOfUpgrade.Location = new System.Drawing.Point(6, 20);
+            this.labelDescriptionOfUpgrade.Location = new System.Drawing.Point(9, 20);
             this.labelDescriptionOfUpgrade.Name = "labelDescriptionOfUpgrade";
-            this.labelDescriptionOfUpgrade.Size = new System.Drawing.Size(597, 141);
+            this.labelDescriptionOfUpgrade.Size = new System.Drawing.Size(577, 114);
             this.labelDescriptionOfUpgrade.TabIndex = 0;
             this.labelDescriptionOfUpgrade.Text = resources.GetString("labelDescriptionOfUpgrade.Text");
             // 
             // buttonBeginUpgrade
             // 
-            this.buttonBeginUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.buttonBeginUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.buttonBeginUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonBeginUpgrade.Location = new System.Drawing.Point(190, 252);
             this.buttonBeginUpgrade.Name = "buttonBeginUpgrade";
@@ -168,7 +169,7 @@
             // 
             // buttonNewFile
             // 
-            this.buttonNewFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.buttonNewFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.buttonNewFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonNewFile.DialogResult = System.Windows.Forms.DialogResult.Abort;
             this.buttonNewFile.Location = new System.Drawing.Point(190, 310);
@@ -181,7 +182,7 @@
             // 
             // buttonOpenFile
             // 
-            this.buttonOpenFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.buttonOpenFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.buttonOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOpenFile.Location = new System.Drawing.Point(190, 281);
             this.buttonOpenFile.Name = "buttonOpenFile";
@@ -231,7 +232,7 @@
             // 
             // btnCredsBack
             // 
-            this.btnCredsBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnCredsBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnCredsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCredsBack.Location = new System.Drawing.Point(373, 2);
             this.btnCredsBack.Name = "btnCredsBack";
@@ -243,7 +244,7 @@
             // 
             // btnCredsContinue
             // 
-            this.btnCredsContinue._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnCredsContinue._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnCredsContinue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCredsContinue.Location = new System.Drawing.Point(479, 2);
             this.btnCredsContinue.Name = "btnCredsContinue";
@@ -268,6 +269,7 @@
             this.olvFoundCredentials.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvFoundCredentials.DecorateLines = true;
             this.olvFoundCredentials.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.olvFoundCredentials.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.olvFoundCredentials.HasCollapsibleGroups = false;
             this.olvFoundCredentials.Location = new System.Drawing.Point(3, 23);
             this.olvFoundCredentials.Name = "olvFoundCredentials";
@@ -372,7 +374,7 @@
             // 
             // buttonNewRepoPathBrowse
             // 
-            this.buttonNewRepoPathBrowse._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.buttonNewRepoPathBrowse._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.buttonNewRepoPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonNewRepoPathBrowse.Location = new System.Drawing.Point(466, 45);
             this.buttonNewRepoPathBrowse.Name = "buttonNewRepoPathBrowse";
@@ -386,9 +388,10 @@
             // 
             this.textBoxCredRepoPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCredRepoPath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCredRepoPath.Location = new System.Drawing.Point(6, 19);
             this.textBoxCredRepoPath.Name = "textBoxCredRepoPath";
-            this.textBoxCredRepoPath.Size = new System.Drawing.Size(560, 20);
+            this.textBoxCredRepoPath.Size = new System.Drawing.Size(560, 22);
             this.textBoxCredRepoPath.TabIndex = 6;
             this.textBoxCredRepoPath.TextChanged += new System.EventHandler(this.textBoxCredRepoPath_TextChanged);
             // 
@@ -396,6 +399,7 @@
             // 
             this.textBoxConfConPathTab2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxConfConPathTab2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxConfConPathTab2.Location = new System.Drawing.Point(9, 32);
             this.textBoxConfConPathTab2.Multiline = true;
             this.textBoxConfConPathTab2.Name = "textBoxConfConPathTab2";
@@ -405,7 +409,7 @@
             // 
             // buttonExecuteUpgrade
             // 
-            this.buttonExecuteUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.buttonExecuteUpgrade._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.buttonExecuteUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonExecuteUpgrade.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonExecuteUpgrade.Enabled = false;
@@ -427,7 +431,7 @@
             // 
             // buttonSaveRepoBack
             // 
-            this.buttonSaveRepoBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.buttonSaveRepoBack._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.buttonSaveRepoBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSaveRepoBack.Location = new System.Drawing.Point(377, 345);
             this.buttonSaveRepoBack.Name = "buttonSaveRepoBack";
