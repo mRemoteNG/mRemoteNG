@@ -529,12 +529,6 @@
     <Compile Include="UI\Forms\CredentialManager\CredentialListPage.Designer.cs">
       <DependentUpon>CredentialListPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\CredentialManager\CredentialRepositoriesPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\CredentialManager\CredentialRepositoriesPage.Designer.cs">
-      <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Forms\CredentialManager\PageWorkflowController.cs" />
     <Compile Include="UI\Forms\CredentialManager\RepoProviders\Xml\XmlCredentialRepositoryEditorPage.cs">
       <SubType>UserControl</SubType>
@@ -945,9 +939,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialManager\CredentialListPage.resx">
       <DependentUpon>CredentialListPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\CredentialManager\CredentialRepositoriesPage.resx">
-      <DependentUpon>CredentialRepositoriesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\CredentialManager\RepoProviders\Xml\XmlCredentialRepositoryEditorPage.resx">
       <DependentUpon>XmlCredentialRepositoryEditorPage.cs</DependentUpon>

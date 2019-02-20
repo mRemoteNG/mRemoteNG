@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Forms
             InitializeComponent();
             ApplyLanguage();
             ApplyTheme();
-            UpdateUi();
+            //UpdateUi();
             colPassword.AspectGetter =
                 rowObject => (rowObject as ICredentialRecord)?.Password.ConvertToUnsecureString();
         }
