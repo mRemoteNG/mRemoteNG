@@ -2760,4 +2760,10 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
 	<data name="strCategoryProxy" xml:space="preserve">
     <value>Proxy</value>
   </data>
+    <data name="strMultiSSH" xml:space="preserve">
+        <value>Multi SSH:</value>
+    </data>
+    <data name="strMultiSSHToolTip" xml:space="preserve">
+        <value>Press ENTER to send. Ctrl+C is sent immediately.</value>
+    </data>
 </root>

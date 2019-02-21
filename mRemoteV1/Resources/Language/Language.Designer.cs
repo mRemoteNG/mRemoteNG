@@ -4038,11 +4038,29 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Multi SSH:.
+        /// </summary>
+        internal static string strMultiSSH {
+            get {
+                return ResourceManager.GetString("strMultiSSH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Multi SSH toolbar.
         /// </summary>
         internal static string strMultiSshToolbar {
             get {
                 return ResourceManager.GetString("strMultiSshToolbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Press ENTER to send. Ctrl+C is sent immediately..
+        /// </summary>
+        internal static string strMultiSSHToolTip {
+            get {
+                return ResourceManager.GetString("strMultiSSHToolTip", resourceCulture);
             }
         }
         
