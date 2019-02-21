@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Diagnostics;
 using System.Text;
@@ -7,7 +7,7 @@ using mRemoteNG.Tools.Cmdline;
 
 namespace mRemoteNG.Tools
 {
-    public class ProcessController
+    public class ProcessController : IDisposable
     {
         #region Public Methods
 
@@ -163,5 +163,20 @@ namespace mRemoteNG.Tools
         }
 
         #endregion
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing) return;
+
+            Process?.Dispose();
+
+            Handle = IntPtr.Zero;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

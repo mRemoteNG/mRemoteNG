@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Tools;
 using System;
 using System.Threading;
@@ -9,7 +9,7 @@ using mRemoteNG.UI.Tabs;
 
 namespace mRemoteNG.Connection.Protocol
 {
-    public abstract class ProtocolBase
+    public abstract class ProtocolBase : IDisposable
     {
         #region Private Variables
 
@@ -330,5 +330,18 @@ namespace mRemoteNG.Connection.Protocol
         }
 
         #endregion
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing) return;
+
+            tmrReconnect?.Dispose();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }
