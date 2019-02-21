@@ -1,4 +1,4 @@
-
+﻿
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -9,17 +9,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//UserControl overrides dispose to clean up the component list.
 		[System.Diagnostics.DebuggerNonUserCode()]protected override void Dispose(bool disposing)
 		{
-			try
-			{
-				if (disposing && components != null)
-				{
-					components.Dispose();
-				}
-			}
-			finally
-			{
 				base.Dispose(disposing);
-			}
 		}
 			
 		//NOTE: The following procedure is required by the Windows Form Designer
@@ -258,7 +248,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		internal Controls.Base.NGLabel lblSQLPassword;
         private Controls.Base.NGButton btnTestConnection;
         private System.Windows.Forms.PictureBox imgConnectionStatus;
-        private System.ComponentModel.IContainer components;
         private Controls.Base.NGLabel lblTestConnectionResults;
         private Controls.Base.NGCheckBox chkSQLReadOnly;
         internal Controls.Base.NGLabel lblSQLReadOnly;
