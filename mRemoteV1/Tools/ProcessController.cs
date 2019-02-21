@@ -168,7 +168,8 @@ namespace mRemoteNG.Tools
         {
             if (!disposing) return;
 
-            Process?.Dispose();
+            if(Process != null)
+                Process.Dispose();
 
             Handle = IntPtr.Zero;
         }

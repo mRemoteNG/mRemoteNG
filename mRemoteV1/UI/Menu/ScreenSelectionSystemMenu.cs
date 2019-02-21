@@ -60,7 +60,8 @@ namespace mRemoteNG.UI.Menu
         {
             if (!disposing) return;
 
-            _systemMenu?.Dispose();
+            if(_systemMenu != null)
+                _systemMenu.Dispose();
         }
 
         public void Dispose()

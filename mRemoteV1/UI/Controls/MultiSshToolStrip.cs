@@ -63,7 +63,8 @@ namespace mRemoteNG.UI.Controls
         {
             if (disposing)
             {
-                components?.Dispose();
+                if(components != null)
+                    components.Dispose();
             }
 
             base.Dispose(disposing);
