@@ -1246,7 +1246,6 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-
                         case ProtocolType.ICA:
                             strHide.Add("DisplayThemes");
                             strHide.Add("DisplayWallpaper");

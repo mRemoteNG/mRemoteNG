@@ -6,8 +6,6 @@
 
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge)](https://bestpractices.coreinfrastructure.org/projects/529)
 
-[![Issues In Progress](https://badge.waffle.io/mRemoteNG/mRemoteNG.png?label=In%20Progress&title=In%20Progress)](https://waffle.io/mRemoteNG/mRemoteNG)
-
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
 | Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.11/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.11) |
@@ -54,6 +52,6 @@ If you find mRemoteNG useful and would like to contribute, it would be greatly a
 Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/Development) on how to configure your development environment and submit a pull request.
 
 ### Translate
-Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polygot
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polyglot
 
 [![Developed with ReSharper](https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png)](https://www.jetbrains.com/resharper/)
