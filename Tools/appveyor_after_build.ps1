@@ -32,7 +32,7 @@ if ($ConfigurationName -eq "Release Portable") {
 
     Write-Output "Creating portable ZIP file $($PortableZip)"
     Remove-Item -Force  $PortableZip -ErrorAction SilentlyContinue
-    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip ".\mRemoteV1\bin\package\*.*"
+    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -xr!*.pdb -r $PortableZip ".\mRemoteV1\bin\package\*.*"
 }
 else {
     Write-Output "We will not zip anything - this isnt a portable release build."
