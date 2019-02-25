@@ -48,3 +48,6 @@ artifacts:
   name: mRemoteNG-Portable-symbols.zip
 - path: Release\mRemoteNG-symbols*.zip
   name: mRemoteNG-symbols.zip
+deploy:
+- provider: Environment
+  name: GitHub Releases
