@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Collections;
 using System.Globalization;
@@ -296,6 +296,7 @@ namespace mRemoteNG.UI.Window
             {
                 cMenMCCopy.Enabled = true;
                 cMenMCDelete.Enabled = true;
+                pbError.Visible = true;
             }
             else
             {
@@ -386,6 +387,12 @@ namespace mRemoteNG.UI.Window
                 else
                 {
                     lvErrorCollector.Items.Clear();
+                }
+
+                if (lvErrorCollector.Items.Count == 0)
+                {
+                    pbError.Visible = false;
+                    txtMsgText.Visible = false;
                 }
             }
             catch (Exception ex)
