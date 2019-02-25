@@ -50,4 +50,4 @@ artifacts:
   name: mRemoteNG-symbols.zip
 deploy:
 - provider: Environment
-  name: GitHub Releases
+  name: GitHubRelease
