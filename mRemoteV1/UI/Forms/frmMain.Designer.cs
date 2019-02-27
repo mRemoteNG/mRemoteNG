@@ -1,4 +1,4 @@
-namespace mRemoteNG.UI.Forms
+﻿namespace mRemoteNG.UI.Forms
 {
 	public partial class FrmMain : System.Windows.Forms.Form
 	{
@@ -9,10 +9,15 @@ namespace mRemoteNG.UI.Forms
 		{
 			try
 			{
-				if (disposing && components != null)
+				if (disposing)
 				{
-					components.Dispose();
-				}
+                    if(components != null)
+                        components.Dispose();
+
+                    if(_screenSystemMenu != null)
+                        _screenSystemMenu.Dispose();
+
+                }
 			}
 			finally
 			{

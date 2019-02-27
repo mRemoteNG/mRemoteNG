@@ -1,24 +1,22 @@
-version: 1.76.{build}
+version: 1.77.{build}
 pull_requests:
   do_not_increment_build_number: true
-environment:
-  cert_path: tools\cert\CodeSigning_Cert_mRemoteNG_DigiCert.p12
-  cert_decrypt_pwd:
-    secure: QK1ldldzIUSVA0u+OtbHixPmsXHAO9ksOKcyByq0FHM=
-  cert_pwd:
-    secure: Fni66m2OgoTxjRzahUNUUNHl5gGwTXLvXIMQYiOMqX8=
+branches:
+  only:
+  - /release.*/
+  - master
+  - develop
+skip_non_tags: true
+skip_branch_with_pr: true
 image: Visual Studio 2017
 configuration:
-- Release Portable
 - Release
+- Release Portable
 - Release Installer
 platform: x86
 shallow_clone: true
-clone_depth: 1
 install:
 - ps: >-
-    iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
-    
     date
 
     mRemoteV1\Resources\CitrixReceiver.exe ENABLE_SSON="No" /silent /noreboot /EnableCEIP=false /AutoUpdateCheck=disabled /EnableTracing=false | out-null
@@ -31,23 +29,10 @@ before_build:
     nuget restore
 
     echo %TIME%
-
-    appveyor-tools\secure-file -decrypt %cert_path%.enc -secret %cert_decrypt_pwd%
-build_script:
-  - cmd: msbuild mRemoteV1.sln /t:Clean,Build /p:Configuration="Release Portable" /p:Platform=x86 /p:CertPath="%APPVEYOR_BUILD_FOLDER%\%cert_path%" /p:CertPassword=%cert_pwd% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-for:
-  -  
-    matrix:
-      only:
-      - configuration: "Release Installer"
-    build_script:
-      - cmd: msbuild mRemoteV1.sln /t:Clean,Build /p:Configuration="Release Installer" /p:Platform=x86 /p:CertPath="%APPVEYOR_BUILD_FOLDER%\%cert_path%" /p:CertPassword=%cert_pwd% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  -  
-    matrix:
-      only:
-      - configuration: Release
-    build_script:
-      - cmd: msbuild mRemoteV1.sln /t:Clean,Build /p:Configuration="Release" /p:Platform=x86 /p:CertPath="%APPVEYOR_BUILD_FOLDER%\%cert_path%" /p:CertPassword=%cert_pwd% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+build:
+  project: mRemoteV1.sln
+  parallel: true
+  verbosity: normal
 after_build:
 - ps: "if([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) {\n    Write-Output \"NOT running via Appveyor - Exiting\"\n    Exit\n}\n\n$appvDir = $Env:APPVEYOR_BUILD_FOLDER\n\nWrite-Output \"Appveyor Build Dir: '$($appvDir)'\"\n$ConfigurationName = $Env:CONFIGURATION.Trim()\nWrite-Output \"Config Name (tirmmed): '$($ConfigurationName)'\"\n\n\n$SIGCHECK=\"Tools\\exes\\sigcheck.exe\"\n$SEVENZIP=\"Tools\\7zip\\7za.exe\"\n\nif ($ConfigurationName -eq \"Release Portable\") {\n    Write-Output \"Packaging Release Portable ZIP\"\n   \n    $version = & $SIGCHECK /accepteula -q -n \"mRemoteV1\\bin\\$($ConfigurationName)\\mRemoteNG.exe\"\n\n    Write-Output \"Version is $($version)\"\n\n    $PortableZip=\"Release\\mRemoteNG-Portable-$($version).zip\"\n\n    Remove-Item -Recurse \"mRemoteV1\\bin\\package\" -ErrorAction SilentlyContinue | Out-Null\n    New-Item \"mRemoteV1\\bin\\package\" -ItemType  \"directory\" | Out-Null\n    \n    Copy-Item \"mRemoteV1\\Resources\\PuTTYNG.exe\" -Destination \"mRemoteV1\\bin\\package\"\n\n    Copy-Item \"mRemoteV1\\bin\\$ConfigurationName\\*\" -Destination \"mRemoteV1\\bin\\package\" -Recurse  -Force \n    Copy-Item \"*.txt\" -Destination \"mRemoteV1\\bin\\package\"\n\n    Write-Output \"Creating portable ZIP file $($PortableZip)\"\n    Remove-Item -Force  $PortableZip -ErrorAction SilentlyContinue\n    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip \".\\mRemoteV1\\bin\\package\\*.*\"\n}\nelse {\n    Write-Output \"We will not zip anything - this isnt a portable release build.\"\n}\n\nWrite-Output \"\"\nWrite-Output \"\"\n\nif ($ConfigurationName -match \"Release\" -And $ConfigurationName -ne \"Release Installer\") {\n    Write-Output \"Packaging debug symbols\"\n   \n    $version = & $SIGCHECK /accepteula -q -n \"mRemoteV1\\bin\\$($ConfigurationName)\\mRemoteNG.exe\"\n\n    Write-Output \"Version is $($version)\"\n\n    if ($ConfigurationName -match \"Portable\") {\n        $zipFilePrefix = \"mRemoteNG-Portable-symbols\"\n    } else {\n        $zipFilePrefix = \"mRemoteNG-symbols\"\n    }\n\n    $outputZipPath=\"Release\\$zipFilePrefix-$($version).zip\"\n\n    Write-Output \"Creating debug symbols ZIP file $($outputZipPath)\"\n    Remove-Item -Force  $outputZipPath -ErrorAction SilentlyContinue\n    $SymPath = (Join-Path -Path mRemoteV1\\bin\\$($ConfigurationName) -ChildPath \"*.pdb\")\n    if(Test-Path \"$SymPath\") {\n    	& $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath \"$SymPath\"\n    } else {\n    	Write-Output \"No Debugging Symbols Found...\"\n    }\n    	\n}\nelse {\n    Write-Output \"We will not package debug symbols for this configuration $($ConfigurationName)\"\n}\n\nWrite-Output \"\""
 test:
@@ -63,3 +48,6 @@ artifacts:
   name: mRemoteNG-Portable-symbols.zip
 - path: Release\mRemoteNG-symbols*.zip
   name: mRemoteNG-symbols.zip
+deploy:
+- provider: Environment
+  name: GitHubRelease
