@@ -9,7 +9,6 @@ using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Window;
 using MySql.Data.Types;
 using static System.String;
 
@@ -42,6 +41,10 @@ namespace mRemoteNG.Tools
 
         public static Optional<SecureString> PasswordDialog(string passwordName = null, bool verify = true)
         {
+            var splash = FrmSplashScreen.getInstance();
+            if (!splash.IsDisposed && splash.Visible)
+                splash.Close();
+
             var passwordForm = new PasswordForm(passwordName, verify);
             return passwordForm.GetKey();
         }

@@ -27,7 +27,7 @@ if ($ConfigurationName -eq "Release Portable") {
     
     Copy-Item "mRemoteV1\Resources\PuTTYNG.exe" -Destination "mRemoteV1\bin\package"
 
-    Copy-Item "mRemoteV1\bin\$ConfigurationName\*" -Destination "mRemoteV1\bin\package" -Recurse  -Force 
+    Copy-Item "mRemoteV1\bin\$ConfigurationName\*" -Destination "mRemoteV1\bin\package" -Recurse -Force -Exclude *.pdb
     Copy-Item "*.txt" -Destination "mRemoteV1\bin\package"
 
     Write-Output "Creating portable ZIP file $($PortableZip)"
