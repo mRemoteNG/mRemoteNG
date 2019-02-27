@@ -1,16 +1,16 @@
-﻿using mRemoteNG.Config.Serializers.Xml;
+﻿using System;
+using System.Collections;
+using System.Xml.Linq;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Xml.Linq;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
-    public class XmlRootNodeSerializerTests
+	public class XmlRootNodeSerializerTests
     {
         private XmlRootNodeSerializer _rootNodeSerializer;
         private ICryptographyProvider _cryptographyProvider;
@@ -34,6 +34,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         }
 
         [Test]
+		[SetUICulture("en-US")]
         public void RootNodeInfoNameSerialized()
         {
             var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
