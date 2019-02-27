@@ -76,6 +76,7 @@
         <xs:attribute name="MacAddress" type="xs:string" use="required" />
         <xs:attribute name="UserField" type="xs:string" use="required" />
         <xs:attribute name="ExtApp" type="xs:string" use="required" />
+        <xs:attribute name="Favorite" type="xs:string" use="required" />
         <xs:attribute name="VNCCompression" type="xs:string" use="required" />
         <xs:attribute name="VNCEncoding" type="xs:string" use="required" />
         <xs:attribute name="VNCAuthMode" type="xs:string" use="required" />
@@ -132,6 +133,7 @@
         <xs:attribute name="InheritMacAddress" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUserField" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritExtApp" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritFavorite" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritVNCCompression" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritVNCEncoding" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritVNCAuthMode" type="xs:boolean" use="optional" />
