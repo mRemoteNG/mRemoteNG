@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -248,6 +249,27 @@ namespace mRemoteNG.UI.Controls
                                             .CreateToolStripDropDownItems(Runtime.ConnectionsService
                                                                                  .ConnectionTreeModel).ToArray();
             _btnConnections.DropDownItems.AddRange(rootMenuItems);
+
+            ToolStripMenuItem favorites = new ToolStripMenuItem(Language.Favorites, Resources.star);
+            var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
+            List<ToolStripMenuItem> favoritesList = new List<ToolStripMenuItem>();
+
+            foreach (var node in rootNodes)
+            {
+                foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                {
+                    var favoriteMenuItem = new ToolStripMenuItem
+                    {
+                        Text = containerInfo.Name,
+                        Tag = containerInfo,
+                        Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
+                    };
+                    favoriteMenuItem.MouseUp += ConnectionsMenuItem_MouseUp;
+                    favoritesList.Add(favoriteMenuItem);
+                }
+            }
+            favorites.DropDownItems.AddRange(favoritesList.ToArray());
+            _btnConnections.DropDownItems.Add(favorites);
         }
 
         private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
