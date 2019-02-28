@@ -87,9 +87,10 @@ namespace mRemoteNG.UI.Window
 
             mMenAddConnection.ToolTipText = Language.strAddConnection;
             mMenAddFolder.ToolTipText = Language.strAddFolder;
-            mMenViewExpandAllFolders.Text = Language.strExpandAllFolders;
-            mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders;
+            mMenViewExpandAllFolders.ToolTipText = Language.strExpandAllFolders;
+            mMenViewCollapseAllFolders.ToolTipText = Language.strCollapseAllFolders;
             mMenSortAscending.ToolTipText = Language.strSortAsc;
+            mMenFavorites.ToolTipText = Language.Favorites;
 
             txtSearch.Text = Language.strSearchPrompt;
         }
