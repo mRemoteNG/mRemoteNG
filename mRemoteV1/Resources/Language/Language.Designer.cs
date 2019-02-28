@@ -178,6 +178,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Favorites.
+        /// </summary>
+        internal static string Favorites {
+            get {
+                return ResourceManager.GetString("Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter search matches in connection tree.
         /// </summary>
         internal static string FilterSearchMatchesInConnectionTree {
@@ -4804,6 +4813,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show this connection in the favorites menu..
+        /// </summary>
+        internal static string strPropertyDescriptionFavorite {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionFavorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose a icon that will be displayed when connected to the host..
         /// </summary>
         internal static string strPropertyDescriptionIcon {
@@ -5304,6 +5322,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameExternalToolBefore {
             get {
                 return ResourceManager.GetString("strPropertyNameExternalToolBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorite.
+        /// </summary>
+        internal static string strPropertyNameFavorite {
+            get {
+                return ResourceManager.GetString("strPropertyNameFavorite", resourceCulture);
             }
         }
         

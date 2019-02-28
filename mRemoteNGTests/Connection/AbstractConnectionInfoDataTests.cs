@@ -413,6 +413,15 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
+        public void FavoriteNotifiesOnValueChange()
+        {
+            var wasCalled = false;
+            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
+            _testAbstractConnectionInfoData.Favorite = true;
+            Assert.That(wasCalled, Is.True);
+        }
+
+        [Test]
         public void VncCompressionNotifiesOnValueChange()
         {
             var wasCalled = false;

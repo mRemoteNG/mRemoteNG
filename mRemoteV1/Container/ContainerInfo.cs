@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -246,6 +246,34 @@ namespace mRemoteNG.Container
                     childList.AddRange(GetRecursiveChildList(childContainer));
             }
 
+            return childList;
+        }
+
+        public IEnumerable<ConnectionInfo> GetRecursiveFavoriteChildList()
+        {
+            var childList = new List<ConnectionInfo>();
+            foreach (var child in Children)
+            {
+                if (child.Favorite && child.GetTreeNodeType() == TreeNodeType.Connection)
+                    childList.Add(child);
+                var childContainer = child as ContainerInfo;
+                if (childContainer != null)
+                    childList.AddRange(GetRecursiveFavoritChildList(childContainer));
+            }
+            return childList;
+        }
+
+        private IEnumerable<ConnectionInfo> GetRecursiveFavoritChildList(ContainerInfo container)
+        {
+            var childList = new List<ConnectionInfo>();
+            foreach (var child in container.Children)
+            {
+                if (child.Favorite && child.GetTreeNodeType() == TreeNodeType.Connection)
+                    childList.Add(child);
+                var childContainer = child as ContainerInfo;
+                if (childContainer != null)
+                    childList.AddRange(GetRecursiveFavoritChildList(childContainer));
+            }
             return childList;
         }
 

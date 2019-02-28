@@ -94,7 +94,8 @@ namespace mRemoteNG.Config.Connections
         private bool PropertyIsLocalOnly(string property)
         {
             return property == nameof(ConnectionInfo.OpenConnections) ||
-                   property == nameof(ContainerInfo.IsExpanded);
+                   property == nameof(ContainerInfo.IsExpanded) ||
+                   property == nameof(ContainerInfo.Favorite);
         }
 
         private void UpdateLocalConnectionProperties(ContainerInfo rootNode)
@@ -103,7 +104,8 @@ namespace mRemoteNG.Config.Connections
             {
                 ConnectionId = info.ConstantID,
                 Connected = info.OpenConnections.Count > 0,
-                Expanded = info is ContainerInfo c && c.IsExpanded
+                Expanded = info is ContainerInfo c && c.IsExpanded,
+                Favorite = info.Favorite,
             });
 
             var serializedProperties = _localPropertiesSerializer.Serialize(a);

@@ -791,12 +791,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx" />
-    <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Themes\ColorMapTheme.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
@@ -928,7 +934,9 @@
     <EmbeddedResource Include="Resources\Language\Language.en-US.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.es-AR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.es-AR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.es.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1265,6 +1273,7 @@
     <None Include="Resources\Images\tab_add.png" />
     <None Include="Resources\Images\tab_edit.png" />
     <None Include="Resources\Images\tab_delete.png" />
+    <None Include="Resources\Images\star.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

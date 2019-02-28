@@ -63,10 +63,11 @@ namespace mRemoteNGTests.TestHelpers
 				RedirectSmartCards = RandomBool(),
 				UseConsoleSession = RandomBool(),
 				UseCredSsp = RandomBool(),
-				VNCViewOnly = RandomBool(),
+                VNCViewOnly = RandomBool(),
+                Favorite = RandomBool(),
 
-				// ints
-				Port = RandomInt(),
+                // ints
+                Port = RandomInt(),
 				RDPMinutesToIdleTimeout = RandomInt(),
 				VNCProxyPort = RandomInt(),
 				
