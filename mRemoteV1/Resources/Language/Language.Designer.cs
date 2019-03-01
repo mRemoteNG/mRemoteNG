@@ -7965,5 +7965,16 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("Unlocking", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show/Hide Main Menu.
+        /// </summary>
+        internal static string strShowHideMainMenu
+        {
+            get
+            {
+                return ResourceManager.GetString("strShowHideMainMenu", resourceCulture);
+            }
+        }
     }
 }
