@@ -14,7 +14,7 @@ param (
     
     [string]
     [Parameter(Mandatory=$true)]
-    $SolutiontDir
+    $SolutionDir
 )
 
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
@@ -23,7 +23,7 @@ Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 if ($ConfigurationName -match "Release") {
 	
 	if(-Not ([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) ) {
-		$CertificatePath = Join-Path -Path $TargetDir -ChildPath $CertificatePath
+		$CertificatePath = Join-Path -Path $SolutionDir -ChildPath $CertificatePath
 	}
 	
 	if ($CertificatePath -eq "" -or !(Test-Path -Path $CertificatePath -PathType Leaf))
