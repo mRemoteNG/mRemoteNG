@@ -1770,18 +1770,14 @@
     <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
 :: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
 
-@echo off
 powershell -noprofile -command "sleep 2"
+
 set /p buildenv=&lt;buildenv.tmp
-set solutionDir=$(SolutionDir)\
-set targetDir=%25cd%25
-set psScriptsDir=$(SolutionDir)Tools
-set certPath=$(CertPath)
-set certPassword=$(CertPassword)
-@echo on
+
+IF "%25APPVEYOR_BUILD_FOLDER"=="" (set cert_pwd=$(CertPassword))
 
 :: Call the post build powershell script
-powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremotev1.ps1" -SolutionDir "%25solutionDir%25" -TargetDir "%25targetDir%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "%25certPath%25" -CertificatePassword "%25certPassword%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
+powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mremotev1.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "%25cert_pwd%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
