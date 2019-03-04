@@ -13,7 +13,7 @@ Write-Output "Appveyor Build Dir: '$($appvDir)'"
 #Write-Output "Config Name (tirmmed): '$($ConfigurationName)'"
 
 Write-Output "Decrypt Cert"
-& appveyor-tools\secure-file -decrypt "$($Env.cert_path).enc" -secret "$Env.cert_decrypt_pwd"
+& appveyor-tools\secure-file -decrypt "$($Env:cert_path).enc" -secret "$Env:cert_decrypt_pwd"
 
 if($LastExitCode -eq $false) {
 		Write-Output "Could not decrypt cert"
@@ -25,7 +25,7 @@ Write-Output "Restoring NuGets"
 
 
 Write-Output "Build Release Installer"
-& msbuild "$($appvDir)\mRemoteV1.sln" /nologo /t:Clean,Build /p:Configuration="Release Installer" /p:Platform=x86 /p:CertPath="$($Env.cert_path)" /p:CertPassword=($Env.cert_decrypt_pwd) /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+& msbuild "$($appvDir)\mRemoteV1.sln" /nologo /t:Clean,Build /p:Configuration="Release Installer" /p:Platform=x86 /p:CertPath="$($Env:cert_path)" /p:CertPassword=($Env:cert_decrypt_pwd) /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 Write-Output "Packaging debug symbols"
    
@@ -49,7 +49,7 @@ if(Test-Path "$SymPath") {
     
 
 Write-Output "Build Release Portable"
-& msbuild "$($appvDir)\mRemoteV1.sln" /nologo /t:Clean,Build /p:Configuration="Release Portable" /p:Platform=x86 /p:CertPath="$($Env.cert_path)" /p:CertPassword=$($Env.cert_decrypt_pwd) /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+& msbuild "$($appvDir)\mRemoteV1.sln" /nologo /t:Clean,Build /p:Configuration="Release Portable" /p:Platform=x86 /p:CertPath="$($Env:cert_path)" /p:CertPassword=$($Env:cert_decrypt_pwd) /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 
 Write-Output "Packaging Release Portable ZIP"
