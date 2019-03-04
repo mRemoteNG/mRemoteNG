@@ -9,7 +9,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.App
 {
-    public static class Import
+	public static class Import
     {
         public static void ImportFromFile(ContainerInfo importDestinationContainer)
         {
@@ -35,22 +35,23 @@ namespace mRemoteNG.App
                     if (openFileDialog.ShowDialog() != DialogResult.OK)
                         return;
 
-                    foreach (var fileName in openFileDialog.FileNames)
+                    using (Runtime.ConnectionsService.BatchedSavingContext())
                     {
-                        try
-                        {
-                            var importer = BuildConnectionImporterFromFileExtension(fileName);
-                            importer.Import(fileName, importDestinationContainer);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
-                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                            Runtime.MessageCollector.AddExceptionMessage("Unable to import file.", ex);
-                        }
+	                    foreach (var fileName in openFileDialog.FileNames)
+	                    {
+	                        try
+	                        {
+	                            var importer = BuildConnectionImporterFromFileExtension(fileName);
+	                            importer.Import(fileName, importDestinationContainer);
+	                        }
+	                        catch (Exception ex)
+	                        {
+	                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
+	                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+	                            Runtime.MessageCollector.AddExceptionMessage("Unable to import file.", ex);
+	                        }
+	                    }
                     }
-
-                    Runtime.ConnectionsService.SaveConnectionsAsync();
                 }
             }
             catch (Exception ex)
