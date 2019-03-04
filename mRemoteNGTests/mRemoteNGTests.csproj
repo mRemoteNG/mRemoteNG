@@ -266,6 +266,7 @@
     <None Include="Resources\test_rdcman_v2_2_badschemaversion.rdg" />
     <None Include="Resources\test_rdcman_v2_2_schema1.rdg" />
     <None Include="Resources\test_RDCMan_v2_7_schema3.rdg" />
+    <None Include="Resources\test_rdcman_v2_7_schema3_null_values.rdg" />
     <None Include="Resources\test_remotedesktopconnection.rdp" />
   </ItemGroup>
   <ItemGroup>
