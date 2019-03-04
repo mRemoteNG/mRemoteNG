@@ -86,6 +86,7 @@ namespace mRemoteNG.Config.Connections
                 .ForEach(x =>
                 {
                     x.Connection.PleaseConnect = x.LocalProperties.Connected;
+                    x.Connection.Favorite = x.LocalProperties.Favorite;
                     if (x.Connection is ContainerInfo container)
                         container.IsExpanded = x.LocalProperties.Expanded;
                 });

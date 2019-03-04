@@ -1,4 +1,4 @@
-using TextBox = mRemoteNG.UI.Forms.TextBox;
+﻿using TextBox = mRemoteNG.UI.Forms.TextBox;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -12,9 +12,13 @@ namespace mRemoteNG.UI.Forms
 		{
 			try
 			{
-				if (disposing && components != null)
+				if (disposing)
 				{
-					components.Dispose();
+                    if(components != null)
+					    components.Dispose();
+
+                    if(_password != null)
+                        _password.Dispose();
 				}
 			}
 			finally

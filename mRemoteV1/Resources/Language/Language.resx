@@ -1472,7 +1472,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirecClipboard" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
     <value>Select whether clipboard should be shared.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
@@ -2584,7 +2584,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strOptionsThemeNewThemeText" xml:space="preserve">
     <value>Type the new theme name</value>
   </data>
-  <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
+  <data name="strOptionsThemeChangeWarning" xml:space="preserve">
     <value>Warning: Restart is required to commit any theme configuration change.</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
@@ -2745,5 +2745,34 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
     <value>Always show connection tabs</value>
+  </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Release Channel</value>
+  </data>
+  <data name="strReleaseChannelExplanation" xml:space="preserve">
+    <value>Stable channel includes final releases only.
+Beta channel includes Betas &amp; Release Candidates.
+Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
+  </data>
+  <data name="strButtonApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="strCategoryProxy" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
+  <data name="strMultiSSH" xml:space="preserve">
+        <value>Multi SSH:</value>
+    </data>
+  <data name="strMultiSSHToolTip" xml:space="preserve">
+        <value>Press ENTER to send. Ctrl+C is sent immediately.</value>
+    </data>
+  <data name="strPropertyDescriptionFavorite" xml:space="preserve">
+    <value>Show this connection in the favorites menu.</value>
+  </data>
+  <data name="strPropertyNameFavorite" xml:space="preserve">
+    <value>Favorite</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
   </data>
 </root>

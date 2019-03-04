@@ -114,6 +114,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("PostExtApp", connectionInfo.PostExtApp));
             element.Add(new XAttribute("MacAddress", connectionInfo.MacAddress));
             element.Add(new XAttribute("UserField", connectionInfo.UserField));
+            element.Add(new XAttribute("Favorite", connectionInfo.Favorite));
             element.Add(new XAttribute("ExtApp", connectionInfo.ExtApp));
             element.Add(new XAttribute("VNCCompression", connectionInfo.VNCCompression));
             element.Add(new XAttribute("VNCEncoding", connectionInfo.VNCEncoding));
@@ -243,6 +244,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.MacAddress.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritUserField",
                                            connectionInfo.Inheritance.UserField.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritFavorite",
+                                           connectionInfo.Inheritance.Favorite.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritExtApp",
                                            connectionInfo.Inheritance.ExtApp.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritVNCCompression",
@@ -323,6 +326,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritPostExtApp", falseString));
                 element.Add(new XAttribute("InheritMacAddress", falseString));
                 element.Add(new XAttribute("InheritUserField", falseString));
+                element.Add(new XAttribute("InheritFavorite", falseString));
                 element.Add(new XAttribute("InheritExtApp", falseString));
                 element.Add(new XAttribute("InheritVNCCompression", falseString));
                 element.Add(new XAttribute("InheritVNCEncoding", falseString));

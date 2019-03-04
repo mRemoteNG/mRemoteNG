@@ -68,6 +68,7 @@ namespace mRemoteNG.Connection
         private string _postExtApp;
         private string _macAddress;
         private string _userField;
+        private bool _favorite;
 
         private ProtocolVNC.Compression _vncCompression;
         private ProtocolVNC.Encoding _vncEncoding;
@@ -565,6 +566,15 @@ namespace mRemoteNG.Connection
             set => SetField(ref _userField, value, "UserField");
         }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameFavorite"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionFavorite"),
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public virtual bool Favorite
+        {
+            get => GetPropertyValue("Favorite", _favorite);
+            set => SetField(ref _favorite, value, "Favorite");
+        }
         #endregion
 
         #region VNC
@@ -602,52 +612,52 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vncAuthMode, value, "VNCAuthMode");
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-         Browsable(false),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyType"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyType"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+        [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
+            Browsable(false),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyType"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyType"),
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolVNC.ProxyType VNCProxyType
         {
             get => GetPropertyValue("VNCProxyType", _vncProxyType);
             set => SetField(ref _vncProxyType, value, "VNCProxyType");
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-         Browsable(false),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyAddress"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyAddress")]
+        [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
+            Browsable(false),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyAddress"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyAddress")]
         public string VNCProxyIP
         {
             get => GetPropertyValue("VNCProxyIP", _vncProxyIp);
             set => SetField(ref _vncProxyIp, value, "VNCProxyIP");
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-         Browsable(false),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPort"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPort")]
+        [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
+            Browsable(false),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPort"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPort")]
         public int VNCProxyPort
         {
             get => GetPropertyValue("VNCProxyPort", _vncProxyPort);
             set => SetField(ref _vncProxyPort, value, "VNCProxyPort");
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-         Browsable(false),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyUsername"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyUsername")]
+        [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
+            Browsable(false),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyUsername"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyUsername")]
         public string VNCProxyUsername
         {
             get => GetPropertyValue("VNCProxyUsername", _vncProxyUsername);
             set => SetField(ref _vncProxyUsername, value, "VNCProxyUsername");
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-         Browsable(false),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPassword"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPassword"),
-         PasswordPropertyText(true)]
+        [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
+            Browsable(false),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPassword"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPassword"),
+            PasswordPropertyText(true)]
         public string VNCProxyPassword
         {
             get => GetPropertyValue("VNCProxyPassword", _vncProxyPassword);

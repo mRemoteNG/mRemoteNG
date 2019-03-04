@@ -5,7 +5,7 @@ using mRemoteNG.Tools;
 namespace mRemoteNG.UI.Menu
 {
     // This class creates new menu items to menu that appears when you right click the top of the app (where the window title is)
-    public class ScreenSelectionSystemMenu
+    public class ScreenSelectionSystemMenu : IDisposable
     {
         private readonly SystemMenu _systemMenu;
         private readonly int[] _sysMenSubItems = new int[51];
@@ -54,6 +54,20 @@ namespace mRemoteNG.UI.Menu
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1,
                                        SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero,
                                        null);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing) return;
+
+            if(_systemMenu != null)
+                _systemMenu.Dispose();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
