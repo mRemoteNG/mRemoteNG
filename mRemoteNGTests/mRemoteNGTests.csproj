@@ -176,6 +176,7 @@
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="TestHelpers\FileTestHelpers.cs" />
     <Compile Include="TestHelpers\SerializableConnectionInfoAllPropertiesOfType.cs" />
+    <Compile Include="Tools\DisposableActionTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />
     <Compile Include="Tools\OptionalTests.cs" />

@@ -9,6 +9,7 @@ namespace mRemoteNG.Tools
 	/// </summary>
 	public class DisposableAction : IDisposable
 	{
+		private bool _isDisposed;
 		private readonly Action _disposeAction;
 
 		/// <summary>
@@ -29,6 +30,15 @@ namespace mRemoteNG.Tools
 
 		public void Dispose()
 		{
+			Dispose(true);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposing || _isDisposed)
+				return;
+
+			_isDisposed = true;
 			_disposeAction();
 		}
 	}
