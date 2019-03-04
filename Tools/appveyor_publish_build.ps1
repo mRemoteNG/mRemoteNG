@@ -9,14 +9,12 @@ $SIGCHECK="Tools\exes\sigcheck.exe"
 $SEVENZIP="Tools\7zip\7za.exe"
 
 Write-Output "Appveyor Build Dir: '$($appvDir)'"
-#$ConfigurationName = $Env:CONFIGURATION.Trim()
-#Write-Output "Config Name (tirmmed): '$($ConfigurationName)'"
 
 Write-Output "Decrypt Cert"
 & appveyor-tools\secure-file -decrypt "$($Env:cert_path).enc" -secret "$Env:cert_decrypt_pwd"
 
-if($LastExitCode -eq $false) {
-		Write-Output "Could not decrypt cert"
+if(-Not (Test-Path $Env:cert_path)) {
+		Write-Output "decrypt cert does not exist..."
 		Throw "Could not decrypt cert"
 }
 
@@ -25,11 +23,11 @@ Write-Output "Restoring NuGets"
 
 
 Write-Output "Build Release Installer"
-& msbuild "$($appvDir)\mRemoteV1.sln" /nologo /t:Clean,Build /p:Configuration="Release Installer" /p:Platform=x86 /p:CertPath="$($Env:cert_path)" /p:CertPassword=($Env:cert_decrypt_pwd) /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+& msbuild "$($appvDir)\mRemoteV1.sln" /nologo /t:Clean,Build /p:Configuration="Release Installer" /p:Platform=x86 /p:CertPath="$($Env:cert_path)" /p:CertPassword="$Env:cert_pwd" /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 Write-Output "Packaging debug symbols"
    
-$version = & $SIGCHECK /accepteula -q -n "mRemoteV1\bin\Release Installer\mRemoteNG.exe"
+$version = & $SIGCHECK /accepteula -q -n "mRemoteV1\bin\Release\mRemoteNG.exe"
 
 Write-Output "Version is $($version)"
 
@@ -49,7 +47,7 @@ if(Test-Path "$SymPath") {
     
 
 Write-Output "Build Release Portable"
-& msbuild "$($appvDir)\mRemoteV1.sln" /nologo /t:Clean,Build /p:Configuration="Release Portable" /p:Platform=x86 /p:CertPath="$($Env:cert_path)" /p:CertPassword=$($Env:cert_decrypt_pwd) /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+& msbuild "$($appvDir)\mRemoteV1.sln" /nologo /t:Clean,Build /p:Configuration="Release Portable" /p:Platform=x86 /p:CertPath="$($Env:cert_path)" /p:CertPassword="$Env:cert_pwd" /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 
 Write-Output "Packaging Release Portable ZIP"
