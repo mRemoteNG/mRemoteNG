@@ -15,7 +15,7 @@ Write-Output "Appveyor Build Dir: '$($appvDir)'"
 Write-Output "Decrypt Cert"
 & appveyor-tools\secure-file -decrypt "$($Env.cert_path).enc" -secret "$Env.cert_decrypt_pwd"
 
-if($LastExitCode == $false) {
+if($LastExitCode -eq $false) {
 		Write-Output "Could not decrypt cert"
 		Throw "Could not decrypt cert"
 }
