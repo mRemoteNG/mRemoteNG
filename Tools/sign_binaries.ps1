@@ -17,7 +17,10 @@ param (
 
     [string]
     # Password to unlock the code signing certificate.
-    $CertificatePassword
+    $CertificatePassword,
+    
+    [string]
+    $SolutiontDir
 )
 
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="

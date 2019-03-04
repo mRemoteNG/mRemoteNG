@@ -10,7 +10,11 @@ param (
     [string]
     [Parameter(Mandatory=$true)]
     # The code signing certificate to use when signing the files.
-    $CertificatePath
+    $CertificatePath,
+    
+    [string]
+    [Parameter(Mandatory=$true)]
+    $SolutiontDir
 )
 
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
