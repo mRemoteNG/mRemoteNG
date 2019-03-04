@@ -31,6 +31,10 @@ if ($ConfigurationName -notmatch "Release") {
     return
 }
 
+if(-Not ([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) ) {
+	$CertificatePath = Join-Path -Path $TargetDir -ChildPath $CertificatePath
+}
+
 if ($CertificatePath -eq "" -or !(Test-Path -Path $CertificatePath -PathType Leaf)) {
     Write-Output "Certificate is not present - we won't sign files."
     return

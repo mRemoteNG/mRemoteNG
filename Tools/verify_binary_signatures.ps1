@@ -18,6 +18,10 @@ Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 #  validate release versions and if the certificate is available
 if ($ConfigurationName -match "Release") {
 	
+	if(-Not ([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) ) {
+		$CertificatePath = Join-Path -Path $TargetDir -ChildPath $CertificatePath
+	}
+	
 	if ($CertificatePath -eq "" -or !(Test-Path -Path $CertificatePath -PathType Leaf))
 	{
 	    Write-Output "Certificate is not present - files likely not signed - we won't verify file signatures."
