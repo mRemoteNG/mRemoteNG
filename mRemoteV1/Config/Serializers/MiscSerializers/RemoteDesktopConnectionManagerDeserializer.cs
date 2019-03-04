@@ -40,11 +40,15 @@ namespace mRemoteNG.Config.Serializers
 
         private static void VerifySchemaVersion(XmlNode rdcManNode)
         {
-            _schemaVersion = Convert.ToInt32(rdcManNode?.Attributes?["schemaVersion"].Value);
-            if (_schemaVersion != 1 && _schemaVersion != 3)
+	        if (!int.TryParse(rdcManNode?.Attributes?["schemaVersion"]?.Value, out var version))
+		        throw new FileFormatException("Could not find schema version attribute.");
+
+            if (version != 1 && version != 3)
             {
-                throw (new FileFormatException($"Unsupported schema version ({_schemaVersion})."));
+                throw new FileFormatException($"Unsupported schema version ({version}).");
             }
+
+            _schemaVersion = version;
         }
 
         private static void VerifyFileVersion(XmlNode rdcManNode)
@@ -114,7 +118,8 @@ namespace mRemoteNG.Config.Serializers
                 containerPropertiesNode = containerPropertiesNode.SelectSingleNode("./properties");
             }
             newContainer.Name = containerPropertiesNode?.SelectSingleNode("./name")?.InnerText ?? Language.strNewFolder;
-            newContainer.IsExpanded = bool.Parse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText ?? "false");
+            if (bool.TryParse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText, out var expanded))
+				newContainer.IsExpanded = expanded;
             parentContainer.AddChild(newContainer);
             return newContainer;
         }
