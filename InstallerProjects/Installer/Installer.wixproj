@@ -130,7 +130,8 @@ powershell -noprofile -command "sleep 2"
 
 set /p buildenv=&lt;buildenv.tmp
 
-IF "%25APPVEYOR_BUILD_FOLDER"=="" (set cert_pwd=$(CertPassword))
+:: Manual builds, set the cert password and uncomment below.
+:: IF "%25APPVEYOR_BUILD_FOLDER"=="" ( set cert_pwd=  )
 
 :: Call the post build powershell script
 powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mremotev1.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "%25cert_pwd%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
