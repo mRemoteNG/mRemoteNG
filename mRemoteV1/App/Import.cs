@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.Config.Import;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
@@ -35,23 +36,12 @@ namespace mRemoteNG.App
                     if (openFileDialog.ShowDialog() != DialogResult.OK)
                         return;
 
-                    using (Runtime.ConnectionsService.BatchedSavingContext())
-                    {
-	                    foreach (var fileName in openFileDialog.FileNames)
-	                    {
-	                        try
-	                        {
-	                            var importer = BuildConnectionImporterFromFileExtension(fileName);
-	                            importer.Import(fileName, importDestinationContainer);
-	                        }
-	                        catch (Exception ex)
-	                        {
-	                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
-	                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-	                            Runtime.MessageCollector.AddExceptionMessage("Unable to import file.", ex);
-	                        }
-	                    }
-                    }
+					HeadlessFileImport(
+						openFileDialog.FileNames, 
+						importDestinationContainer, 
+						Runtime.ConnectionsService,
+						fileName => MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
+							MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1));
                 }
             }
             catch (Exception ex)
@@ -60,12 +50,38 @@ namespace mRemoteNG.App
             }
         }
 
+        public static void HeadlessFileImport(
+	        IEnumerable<string> filePaths, 
+	        ContainerInfo importDestinationContainer, 
+	        ConnectionsService connectionsService,
+	        Action<string> exceptionAction = null)
+        {
+	        using (connectionsService.BatchedSavingContext())
+	        {
+		        foreach (var fileName in filePaths)
+		        {
+			        try
+			        {
+				        var importer = BuildConnectionImporterFromFileExtension(fileName);
+				        importer.Import(fileName, importDestinationContainer);
+			        }
+			        catch (Exception ex)
+			        {
+				        exceptionAction?.Invoke(fileName);
+				        Runtime.MessageCollector.AddExceptionMessage($"Error occurred while importing file '{fileName}'.", ex);
+			        }
+		        }
+	        }
+		}
+
         public static void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer, bool importSubOu)
         {
             try
             {
-                ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOu);
-                Runtime.ConnectionsService.SaveConnectionsAsync();
+	            using (Runtime.ConnectionsService.BatchedSavingContext())
+	            {
+					ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOu);
+	            }
             }
             catch (Exception ex)
             {
@@ -77,9 +93,11 @@ namespace mRemoteNG.App
         {
             try
             {
-                var importer = new PortScanImporter(protocol);
-                importer.Import(hosts, importDestinationContainer);
-                Runtime.ConnectionsService.SaveConnectionsAsync();
+	            using (Runtime.ConnectionsService.BatchedSavingContext())
+	            {
+					var importer = new PortScanImporter(protocol);
+					importer.Import(hosts, importDestinationContainer);
+	            }
             }
             catch (Exception ex)
             {

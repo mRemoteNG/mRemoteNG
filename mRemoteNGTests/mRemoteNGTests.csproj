@@ -108,6 +108,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="App\ImportTests.cs" />
     <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgsTests.cs" />
