@@ -503,7 +503,6 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeDisconnect.Enabled = true;
 
             _cMenTreeToolsTransferFile.Enabled = false;
-            _cMenTreeToolsExternalApps.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForPuttyNode(ConnectionInfo connectionInfo)
@@ -836,7 +835,11 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection |
+                if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Container)
+                    (_connectionTree.SelectedNode as ContainerInfo).Children.ForEach(
+                        child => externalTool.Start(child));
+
+                else if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection |
                     _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession)
                     externalTool.Start(_connectionTree.SelectedNode);
             }
