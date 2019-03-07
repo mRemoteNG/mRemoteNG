@@ -273,6 +273,7 @@
     <Compile Include="Themes\MremoteNGThemeBase.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\Clipboard\WindowsClipboard.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
     <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
     <Compile Include="Credential\Repositories\CredentialRepositoryChangedArgs.cs" />
@@ -344,6 +345,7 @@
     <Compile Include="Tools\SecureTransfer.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionVerifier.cs" />
     <Compile Include="Tree\AlwaysConfirmYes.cs" />
+    <Compile Include="Tools\Clipboard\IClipboard.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmer.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
     <Compile Include="Tree\ConnectionTreeModel.cs" />
