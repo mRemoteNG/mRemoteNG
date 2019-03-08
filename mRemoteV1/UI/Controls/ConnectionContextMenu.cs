@@ -7,6 +7,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
+using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -767,7 +768,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnCopyHostnameClicked(object sender, EventArgs e)
         {
-            _connectionTree.CopyHostnameSelectedNode();
+            _connectionTree.CopyHostnameSelectedNode(new WindowsClipboard());
         }
 
         private void OnImportFileClicked(object sender, EventArgs e)
