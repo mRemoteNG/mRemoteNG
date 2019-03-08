@@ -835,12 +835,9 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Container)
-                    (_connectionTree.SelectedNode as ContainerInfo).Children.ForEach(
-                        child => externalTool.Start(child));
-
-                else if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection |
-                    _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession)
+                if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection |
+                    _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession |
+                    _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Container)
                     externalTool.Start(_connectionTree.SelectedNode);
             }
             catch (Exception ex)
