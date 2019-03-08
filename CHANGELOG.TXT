@@ -1,3 +1,22 @@
+1.76.15 (2019-03-08):
+
+Fixes:
+------
+#1303: Exception on first connection with new SQL server database
+#1304: Resolved several issues with importing multiple RDP Manager v2.7 files
+
+Features/Enhancements:
+----------------------
+Importing multiple files now only causes 1 save event, rather than 1 per file imported.
+
+
+1.76.14 (2019-02-08):
+
+Features/Enhancements:
+----------------------
+#222: Allow FIPS to be enabled
+
+
 1.76.13 (2018-12-22):
 
 Changes:
