@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -7,6 +7,7 @@ using System.IO;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 using mRemoteNG.Messages;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -126,6 +127,11 @@ namespace mRemoteNG.Tools
                 }
 
                 ConnectionInfo = startConnectionInfo;
+                if (ConnectionInfo.IsContainer)
+                {
+                    (ConnectionInfo as ContainerInfo).Children.ForEach(child => Start(child));
+                    return;
+                }
 
                 if (TryIntegrate)
                     StartIntegrated();
