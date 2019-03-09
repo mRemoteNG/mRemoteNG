@@ -8,9 +8,9 @@
 
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
-| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.11/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.11) |
-| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.12/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.12) |
-| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.12/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.12) |
+| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
+| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
+| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
 
 mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
 
