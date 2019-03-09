@@ -127,9 +127,9 @@ namespace mRemoteNG.Tools
                 }
 
                 ConnectionInfo = startConnectionInfo;
-                if (ConnectionInfo.IsContainer)
+                if (startConnectionInfo is ContainerInfo container)
                 {
-                    (ConnectionInfo as ContainerInfo).Children.ForEach(child => Start(child));
+                    container.Children.ForEach(Start);
                     return;
                 }
 
