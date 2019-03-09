@@ -42,6 +42,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCheckForUpdatesOnStartup.Text = Language.strCheckForUpdatesOnStartup;
             btnUpdateCheckNow.Text = Language.strCheckNow;
 
+            groupBoxReleaseChannel.Text = Language.strReleaseChannel;
+            lblReleaseChannelExplanation.Text = Language.strReleaseChannelExplanation;
+
             chkUseProxyForAutomaticUpdates.Text = Language.strCheckboxUpdateUseProxy;
             lblProxyAddress.Text = Language.strLabelAddress;
             lblProxyPort.Text = Language.strLabelPort;

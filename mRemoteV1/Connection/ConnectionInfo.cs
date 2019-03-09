@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
@@ -33,9 +33,6 @@ namespace mRemoteNG.Connection
         [Browsable(false)] public bool IsDefault { get; set; }
 
         [Browsable(false)] public ContainerInfo Parent { get; internal set; }
-
-        //[Browsable(false)]
-        //private int PositionID { get; set; }
 
         [Browsable(false)]
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
@@ -215,15 +212,17 @@ namespace mRemoteNG.Connection
                 var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
                 if (parentPropertyInfo == null)
                     throw new NullReferenceException(
-                                                     $"Could not retrieve property data for property '{propertyName}' on parent node '{Parent?.Name}'");
+                        $"Could not retrieve property data for property '{propertyName}' on parent node '{Parent?.Name}'"
+                    );
 
                 inheritedValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
                 return true;
             }
             catch (Exception e)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace($"Error retrieving inherited property '{propertyName}'",
-                                                                e);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    $"Error retrieving inherited property '{propertyName}'", e
+                );
                 inheritedValue = default(TPropertyType);
                 return false;
             }
@@ -363,6 +362,7 @@ namespace mRemoteNG.Connection
             PostExtApp = Settings.Default.ConDefaultPostExtApp;
             MacAddress = Settings.Default.ConDefaultMacAddress;
             UserField = Settings.Default.ConDefaultUserField;
+            Favorite = Settings.Default.ConDefaultFavorite;
         }
 
         private void SetVncDefaults()

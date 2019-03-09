@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using Org.BouncyCastle.Security;
 
@@ -6,7 +7,7 @@ using Org.BouncyCastle.Security;
 
 namespace mRemoteNG.Security
 {
-    public class EncryptedSecureString
+    public class EncryptedSecureString : IDisposable
     {
         private static SecureString _machineKey;
         private SecureString _secureString;
@@ -54,6 +55,23 @@ namespace mRemoteNG.Security
             }
 
             return machineKeyString.ConvertToSecureString();
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing) return;
+
+            if(_machineKey != null)
+                _machineKey.Dispose();
+
+            if(_secureString != null)
+            _secureString.Dispose();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -861,6 +861,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("PostExtApp");
                     strHide.Add("MacAddress");
                     strHide.Add("UserField");
+                    strHide.Add("Favorite");
                     strHide.Add("Description");
                     strHide.Add("SoundQuality");
                     strHide.Add(nameof(AbstractConnectionRecord.CredentialRecord));
@@ -1236,7 +1237,6 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("VNCViewOnly");
                             strHide.Add("SoundQuality");
                             break;
-
                         case ProtocolType.ICA:
                             strHide.Add("DisplayThemes");
                             strHide.Add("DisplayWallpaper");
@@ -1401,6 +1401,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("MacAddress");
                         if (conI.Inheritance.UserField)
                             strHide.Add("UserField");
+                        if (conI.Inheritance.Favorite)
+                            strHide.Add("Favorite");
                         if (conI.Inheritance.VNCAuthMode)
                             strHide.Add("VNCAuthMode");
                         if (conI.Inheritance.VNCColors)

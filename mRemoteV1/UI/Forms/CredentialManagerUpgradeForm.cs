@@ -31,7 +31,7 @@ namespace mRemoteNG.UI.Forms
 
         public XmlConnectionsDeserializer ConnectionDeserializer { get; set; }
         public ConnectionsService ConnectionsService { get; set; }
-        public CredentialService CredentialService { get; set; }
+        public ICredentialService CredentialService { get; set; }
 
         public string ConnectionFilePath
         {

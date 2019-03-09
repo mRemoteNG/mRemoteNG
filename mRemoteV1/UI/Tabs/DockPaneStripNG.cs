@@ -357,16 +357,21 @@ namespace mRemoteNG.UI.Tabs
             ResumeLayout();
         }
 
+        // This seems like a bogus warning - suppressing since Components is being disposed...
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "<Components>k__BackingField")]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                Components.Dispose();
+                if(Components != null)
+                    Components.Dispose();
+
                 if (m_boldFont != null)
                 {
                     m_boldFont.Dispose();
                     m_boldFont = null;
                 }
+
             }
 
             base.Dispose(disposing);

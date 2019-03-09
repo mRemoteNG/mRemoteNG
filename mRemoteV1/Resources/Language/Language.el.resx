@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,290 +59,290 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="strAbout" xml:space="preserve">
+	<xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="strAbout" xml:space="preserve">
     <value>Σχετικά με</value>
   </data>
-  <data name="strActive" xml:space="preserve">
+	<data name="strActive" xml:space="preserve">
     <value>Ενεργό</value>
   </data>
-  <data name="strActivity" xml:space="preserve">
+	<data name="strActivity" xml:space="preserve">
     <value>Δραστηριότητα</value>
   </data>
-  <data name="strAddConnection" xml:space="preserve">
+	<data name="strAddConnection" xml:space="preserve">
     <value>Νέα σύνδεση</value>
   </data>
-  <data name="strAddFolder" xml:space="preserve">
+	<data name="strAddFolder" xml:space="preserve">
     <value>Νέος φάκελος</value>
   </data>
-  <data name="strAddNodeFromXmlFailed" xml:space="preserve">
+	<data name="strAddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML απέτυχε!</value>
   </data>
-  <data name="strAddNodesFromSqlFailed" xml:space="preserve">
+	<data name="strAddNodesFromSqlFailed" xml:space="preserve">
     <value>AddNodesFromSQL απέτυχε!</value>
   </data>
-  <data name="strAllowOnlySingleInstance" xml:space="preserve">
+	<data name="strAllowOnlySingleInstance" xml:space="preserve">
     <value>Επιτρέπετε μόνο ένα μόνο παράδειγμα της εφαρμογής (απαιτείται επανεκκίνηση του mRemoteNG)</value>
   </data>
-  <data name="strAlways" xml:space="preserve">
+	<data name="strAlways" xml:space="preserve">
     <value>Πάντα</value>
   </data>
-  <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
+	<data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
     <value>Πάντοτε να συνδεθεί, ακόμη και αν ο έλεγχος ταυτότητας αποτυγχάνει</value>
   </data>
-  <data name="strAlwaysShowPanelSelection" xml:space="preserve">
+	<data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Πάντα Εμφάνιση πίνακα διαλόγου επιλογής κατά το άνοιγμα συνδέσεων</value>
   </data>
-  <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
+	<data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Να εμφανίζονται πάντα γνωστοποίησης περιοχων εικόνας</value>
   </data>
-  <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
+	<data name="strAskUpdatesCommandAskLater" xml:space="preserve">
     <value>Ρωτήστε με ξανά αργότερα</value>
   </data>
-  <data name="strAskUpdatesCommandCustom" xml:space="preserve">
+	<data name="strAskUpdatesCommandCustom" xml:space="preserve">
     <value>Προσαρμογή των ρυθμίσεων τώρα</value>
   </data>
-  <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
+	<data name="strAskUpdatesCommandRecommended" xml:space="preserve">
     <value>Χρήση των προτεινόμενων ρυθμίσεων</value>
   </data>
-  <data name="strAskUpdatesContent" xml:space="preserve">
+	<data name="strAskUpdatesContent" xml:space="preserve">
     <value>{0} μπορεί να ελέγχει αυτόματα ενημερώσεις που μπορούν να παρέχουν νέα χαρακτηριστικά και διορθώσεις σφαλμάτων. Συνιστάται να επιτρέψετε {0} να ελέγξει για ενημερώσεις σε εβδομαδιαία βάση.</value>
   </data>
-  <data name="strAskUpdatesMainInstruction" xml:space="preserve">
+	<data name="strAskUpdatesMainInstruction" xml:space="preserve">
     <value>Ρυθμίσεις αυτόματης ενημέρωσης</value>
   </data>
-  <data name="strAspect" xml:space="preserve">
+	<data name="strAspect" xml:space="preserve">
     <value>Πτυχή</value>
   </data>
-  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
+	<data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
     <value>Αυτόματη λήψη πληροφοριών περιόδου</value>
   </data>
-  <data name="strAutoSaveEvery" xml:space="preserve">
+	<data name="strAutoSaveEvery" xml:space="preserve">
     <value>Αυτόματη αποθήκευση κάθε:</value>
   </data>
-  <data name="strAutoSaveMins" xml:space="preserve">
+	<data name="strAutoSaveMins" xml:space="preserve">
     <value>Λεπτά (0 σημαίνει απενεργοποιημένο)</value>
   </data>
-  <data name="strAvailableVersion" xml:space="preserve">
+	<data name="strAvailableVersion" xml:space="preserve">
     <value>Τρέχουσα έκδοση</value>
   </data>
-  <data name="strButtonBrowse" xml:space="preserve">
+	<data name="strButtonBrowse" xml:space="preserve">
     <value>&amp;Αναζήτηση...</value>
   </data>
-  <data name="strButtonCancel" xml:space="preserve">
+	<data name="strButtonCancel" xml:space="preserve">
     <value>&amp;Ακύρωση</value>
   </data>
-  <data name="strButtonChange" xml:space="preserve">
+	<data name="strButtonChange" xml:space="preserve">
     <value>Αλλαγή</value>
   </data>
-  <data name="strButtonClose" xml:space="preserve">
+	<data name="strButtonClose" xml:space="preserve">
     <value>&amp;Κλείσιμο</value>
   </data>
-  <data name="strButtonDefaultInheritance" xml:space="preserve">
+	<data name="strButtonDefaultInheritance" xml:space="preserve">
     <value>Προεπιλογή κληρονομικότητας</value>
   </data>
-  <data name="strButtonDefaultProperties" xml:space="preserve">
+	<data name="strButtonDefaultProperties" xml:space="preserve">
     <value>Προεπιλεγμένες ιδιότητες</value>
   </data>
-  <data name="strButtonDisconnect" xml:space="preserve">
+	<data name="strButtonDisconnect" xml:space="preserve">
     <value>Αποσύνδεση</value>
   </data>
-  <data name="strButtonIcon" xml:space="preserve">
+	<data name="strButtonIcon" xml:space="preserve">
     <value>Εικονίδιο</value>
   </data>
-  <data name="strButtonImport" xml:space="preserve">
+	<data name="strButtonImport" xml:space="preserve">
     <value>&amp;Εισαγωγή</value>
   </data>
-  <data name="strButtonInheritance" xml:space="preserve">
+	<data name="strButtonInheritance" xml:space="preserve">
     <value>Κληρονομιά</value>
   </data>
-  <data name="strButtonLaunchPutty" xml:space="preserve">
+	<data name="strButtonLaunchPutty" xml:space="preserve">
     <value>Εκκίνηση του PuTTY</value>
   </data>
-  <data name="strButtonNew" xml:space="preserve">
+	<data name="strButtonNew" xml:space="preserve">
     <value>&amp; Νέο</value>
   </data>
-  <data name="strButtonOK" xml:space="preserve">
+	<data name="strButtonOK" xml:space="preserve">
     <value>&amp;ΟΚ</value>
   </data>
-  <data name="strButtonProperties" xml:space="preserve">
+	<data name="strButtonProperties" xml:space="preserve">
     <value>Ιδιότητες</value>
   </data>
-  <data name="strButtonScan" xml:space="preserve">
+	<data name="strButtonScan" xml:space="preserve">
     <value>&amp;Σάρωση</value>
   </data>
-  <data name="strButtonStop" xml:space="preserve">
+	<data name="strButtonStop" xml:space="preserve">
     <value>&amp;Διακοπή</value>
   </data>
-  <data name="strButtonTestProxy" xml:space="preserve">
+	<data name="strButtonTestProxy" xml:space="preserve">
     <value>Δοκιμή διακομιστή μεσολάβησης</value>
   </data>
-  <data name="strCannotImportNormalSessionFile" xml:space="preserve">
+	<data name="strCannotImportNormalSessionFile" xml:space="preserve">
     <value>Δεν μπορείτε να εισαγάγετε ένα κανονικό αρχείο σύνδεσης.
 Παρακαλούμε χρησιμοποιήστε Αρχείο - Συνδέσεις φορτίου για τα κανονικά αρχεία σύνδεσης!</value>
   </data>
-  <data name="strCannotStartPortScan" xml:space="preserve">
+	<data name="strCannotStartPortScan" xml:space="preserve">
     <value>Δεν είναι δυνατή η εκκίνηση της σάρωσης υποδοχων, εσφαλμένη μορφή IP!</value>
   </data>
-  <data name="strCategoryAppearance" xml:space="preserve">
+	<data name="strCategoryAppearance" xml:space="preserve">
     <value>Εμφάνιση</value>
   </data>
-  <data name="strCategoryConnection" xml:space="preserve">
+	<data name="strCategoryConnection" xml:space="preserve">
     <value>Σύνδεση</value>
   </data>
-  <data name="strCategoryCredentials" xml:space="preserve">
+	<data name="strCategoryCredentials" xml:space="preserve">
     <value>Πιστοποιήσεις</value>
   </data>
-  <data name="strCategoryDisplay" xml:space="preserve">
+	<data name="strCategoryDisplay" xml:space="preserve">
     <value>Οθόνη</value>
   </data>
-  <data name="strCategoryGateway" xml:space="preserve">
+	<data name="strCategoryGateway" xml:space="preserve">
     <value>Πύλη</value>
   </data>
-  <data name="strCategoryGeneral" xml:space="preserve">
+	<data name="strCategoryGeneral" xml:space="preserve">
     <value>Γενική</value>
   </data>
-  <data name="strCategoryMiscellaneous" xml:space="preserve">
+	<data name="strCategoryMiscellaneous" xml:space="preserve">
     <value>Διάφορα</value>
   </data>
-  <data name="strCategoryProtocol" xml:space="preserve">
+	<data name="strCategoryProtocol" xml:space="preserve">
     <value>Πρωτόκολλο</value>
   </data>
-  <data name="strCategoryRedirect" xml:space="preserve">
+	<data name="strCategoryRedirect" xml:space="preserve">
     <value>Ανακατεύθυνση</value>
   </data>
-  <data name="strCcAlwaysShowScreen" xml:space="preserve">
+	<data name="strCcAlwaysShowScreen" xml:space="preserve">
     <value>Πάντα εμφάνιση αυτής της οθόνης κατά την εκκίνηση</value>
   </data>
-  <data name="strCcCheckAgain" xml:space="preserve">
+	<data name="strCcCheckAgain" xml:space="preserve">
     <value>Ανανέωση</value>
   </data>
-  <data name="strCcCheckFailed" xml:space="preserve">
+	<data name="strCcCheckFailed" xml:space="preserve">
     <value>Ο ελέγχος απέτυχε!</value>
   </data>
-  <data name="strCcCheckSucceeded" xml:space="preserve">
+	<data name="strCcCheckSucceeded" xml:space="preserve">
     <value>Ο ελεγχος πέτυχε!</value>
   </data>
-  <data name="strCcEOLFailed" xml:space="preserve">
+	<data name="strCcEOLFailed" xml:space="preserve">
     <value>Η δυνατότητα (RDP) συνεδρίες προϋποθέτει ότι έχετε μια εγγεγραμμένο αντίγραφο του eolwtscom.dll στο σύστημά σας. mRemoteNG πλοία με αυτό το στοιχείο αλλά θα δεν εγγραφείτε αυτόματα εκτός αν η εκτέλεση του πακέτου εγκατάστασης. Να εγγραφείτε δεν με μη αυτόματο τρόπο αυτό: Ανοίξτε στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (όπου c:\Program Files\mRemoteNG\ είναι η διαδρομή προς την εγκατάσταση mRemoteNG). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε τη δυνατότητα συνεδρίες (RDP) στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/</value>
   </data>
-  <data name="strCcEOLOK" xml:space="preserve">
+	<data name="strCcEOLOK" xml:space="preserve">
     <value>Το EOLWTSCOM βρέθηκε και φαίνεται να έχει καταχωρηθεί σωστά.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
+	<data name="strCcGeckoFailed" xml:space="preserve">
     <value>Για να χρησιμοποιήσετε το μηχανισμό απόδοσης Gecko πρέπει να έχετε XULrunner 1.8.1.x και ο δρόμος για την εγκατάσταση ορίστε στις επιλογές σας. Μπορείτε να κατεβάσετε XULrunner 1.8.1.3 εδώ: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ όταν ολοκληρώσετε τη λήψη κάντε εξαγωγή του πακέτου για την πορεία της επιλογής σας. Στη συνέχεια, στο mRemoteNG πηγαίνετε στο εργαλεία - επιλογές - προηγμένες και πληκτρολογήσει τη σωστή διαδρομή στο πεδίο διαδρομή XULrunner. Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή χρησιμοποιούν την μηχανή Gecko στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/</value>
   </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
+	<data name="strCcGeckoOK" xml:space="preserve">
     <value>Το GeckoFx βρέθηκε και φαίνεται να έχει εγκατασταθεί σωστά.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
+	<data name="strCcICAFailed" xml:space="preserve">
     <value>ICA απαιτεί ότι είναι εγκατεστημένο το XenDesktop Online Plugin και ότι καταχωρείται η βιβλιοθήκη wfica.ocx. Μπορείτε να κατεβάσετε τον πελάτη εδώ: http://www.citrix.com/download/ αν έχετε το XenDesktop Online Plugin εγκατασταθεί και ο έλεγχος συνεχίσει να αποτυγχάνει, προσπαθήστε να εγγραφείτε wfica.ocx με μη αυτόματο τρόπο. Να κάνει αυτό ανοίγω πάνω στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (όπου c:\Program Files\Citrix\ICA Client\ είναι η διαδρομή στην εγκατάσταση XenDesktop Online Plugin). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε ICA στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/"</value>
   </data>
-  <data name="strCcICAOK" xml:space="preserve">
+	<data name="strCcICAOK" xml:space="preserve">
     <value>Όλα τα συστατικά ICA βρέθηκαν και φαίνεται να καταχωρηθηκαν σωστά. Πρόγραμμα-πελάτη Citrix ICA ελέγχου έκδοση {0}</value>
   </data>
-  <data name="strCcNotInstalledProperly" xml:space="preserve">
+	<data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>δεν έχει εγκατασταθεί σωστά</value>
   </data>
-  <data name="strConnectInFullscreen" xml:space="preserve">
+	<data name="strConnectInFullscreen" xml:space="preserve">
     <value>Σύνδεση σε λειτουργία πλήρους οθόνης</value>
   </data>
-  <data name="strConnecting" xml:space="preserve">
+	<data name="strConnecting" xml:space="preserve">
     <value>Σύνδεση...</value>
   </data>
-  <data name="strConnectionEventConnected" xml:space="preserve">
+	<data name="strConnectionEventConnected" xml:space="preserve">
     <value>Πρωτόκολλο γεγονός που συνδέεται</value>
   </data>
-  <data name="strConnectionEventConnectedDetail" xml:space="preserve">
+	<data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Σύνδεση με "{0}" μέσω "{1}" από το χρήστη "{2}" (Περιγραφή: «{3}»? Χρήστη το πεδίο: «{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+	<data name="strConnectionEventConnectionFailed" xml:space="preserve">
     <value>Η συνδεση απέτυχε!</value>
   </data>
-  <data name="strConnectionEventErrorOccured" xml:space="preserve">
+	<data name="strConnectionEventErrorOccured" xml:space="preserve">
     <value>Πρωτόκολλο ErrorOccured εκδήλωση</value>
   </data>
-  <data name="strConnectionOpenFailed" xml:space="preserve">
+	<data name="strConnectionOpenFailed" xml:space="preserve">
     <value>Άνοιγμα σύνδεσης απέτυχε!</value>
   </data>
-  <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+	<data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Δεν μπορεί να ανοίχθει η σύνδεση: Το όνομα του κεντρικού υπολογιστή δεν ειναι καθορισμένο!</value>
   </data>
-  <data name="strConnectionRdpErrorDetail" xml:space="preserve">
+	<data name="strConnectionRdpErrorDetail" xml:space="preserve">
     <value>RDP λάθος! 
 Κωδικός σφάλματος: {0} 
 Περιγραφή σφάλματος: {1}</value>
   </data>
-  <data name="strConnections" xml:space="preserve">
+	<data name="strConnections" xml:space="preserve">
     <value>Συνδέσεις</value>
   </data>
-  <data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+	<data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
     <value>Αδυναμία ορισμού προεπιλεγμένης θύρας!</value>
   </data>
-  <data name="strConnectionsFileBackupFailed" xml:space="preserve">
+	<data name="strConnectionsFileBackupFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η δημιουργία αντιγράφων ασφαλείας των συνδέσεων αρχείου!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+	<data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
     <value>Δεν ήταν δυνατή η εισαγωγή συνδέσεων αρχείου!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+	<data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Το αρχείο συνδέσεων "{0}" δεν μπορεί να φορτωθεί!</value>
   </data>
 </root>

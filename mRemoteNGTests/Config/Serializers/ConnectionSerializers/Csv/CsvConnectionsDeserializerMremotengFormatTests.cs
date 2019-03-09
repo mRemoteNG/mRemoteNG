@@ -121,6 +121,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 PostExtApp = "SomePostExtApp",
                 MacAddress = "SomeMacAddress",
                 UserField = "SomeUserField",
+                Favorite = true,
                 ExtApp = "SomeExtApp",
                 VNCProxyUsername = "SomeVNCProxyUsername",
                 VNCProxyPassword = "SomeVNCProxyPassword",

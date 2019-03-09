@@ -1,25 +1,25 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
-using mRemoteNG.Config;
-using mRemoteNG.Credential;
 
 namespace mRemoteNG.Connection
 {
@@ -32,7 +32,7 @@ namespace mRemoteNG.Connection
         private bool _batchingSaves = false;
         private bool _saveRequested = false;
         private bool _saveAsyncRequested = false;
-        private readonly CredentialService _credentialService;
+        private readonly ICredentialService _credentialService;
 
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
@@ -42,7 +42,7 @@ namespace mRemoteNG.Connection
 
         public IConnectionTreeModel ConnectionTreeModel { get; private set; } = new ConnectionTreeModel();
 
-        public ConnectionsService(PuttySessionsManager puttySessionsManager, CredentialService credentialService)
+        public ConnectionsService(PuttySessionsManager puttySessionsManager, ICredentialService credentialService)
         {
             _puttySessionsManager = puttySessionsManager.ThrowIfNull(nameof(puttySessionsManager));
             _credentialService = credentialService.ThrowIfNull(nameof(credentialService));
@@ -180,6 +180,19 @@ namespace mRemoteNG.Connection
                 SaveConnectionsAsync();
             else if (_saveRequested)
                 SaveConnections();
+        }
+
+		/// <summary>
+		/// All calls to <see cref="SaveConnections()"/> or <see cref="SaveConnectionsAsync"/>
+		/// will be deferred until the returned <see cref="DisposableAction"/> is disposed.
+		/// Once disposed, this will immediately executes a single <see cref="SaveConnections()"/>
+		/// or <see cref="SaveConnectionsAsync"/> if one has been requested.
+		/// Place this call in a 'using' block to represent a batched saving context.
+		/// </summary>
+		/// <returns></returns>
+		public DisposableAction BatchedSavingContext()
+        {
+			return new DisposableAction(BeginBatchingSaves, EndBatchingSaves);
         }
 
         /// <summary>

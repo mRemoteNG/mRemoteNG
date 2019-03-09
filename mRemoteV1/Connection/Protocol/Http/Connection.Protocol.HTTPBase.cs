@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using Gecko;
-using mRemoteNG.Tools;
 using mRemoteNG.App;
-using mRemoteNG.Credential;
+using mRemoteNG.Tools;
+using mRemoteNG.UI.Tabs;
 
 
 namespace mRemoteNG.Connection.Protocol.Http
@@ -49,8 +49,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 
             try
             {
-                var objTabPage = InterfaceControl.Parent as TabPage;
-                //  if (objTabPage != null) tabTitle = objTabPage.Title;
+                if (InterfaceControl.Parent is ConnectionTab objConnectionTab) tabTitle = objConnectionTab.TabText;
             }
             catch (Exception)
             {
@@ -161,16 +160,11 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         #endregion
 
-        #region Private Methods
-
-        #endregion
-
         #region Events
 
         private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            var objWebBrowser = wBrowser as WebBrowser;
-            if (objWebBrowser == null) return;
+            if (!(wBrowser is WebBrowser objWebBrowser)) return;
 
             // This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
             objWebBrowser.AllowWebBrowserDrop = false;
@@ -182,9 +176,7 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
-                var tabP = InterfaceControl.Parent as TabPage;
-
-                if (tabP == null) return;
+                if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
                 string shortTitle;
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
@@ -210,14 +202,14 @@ namespace mRemoteNG.Connection.Protocol.Http
                     }
                 }
 
-                /*   if (!string.IsNullOrEmpty(tabTitle))
+                   if (!string.IsNullOrEmpty(tabTitle))
                    {
-                       tabP.Title = tabTitle + @" - " + shortTitle;
+                       tabP.TabText = tabTitle + @" - " + shortTitle;
                    }
                    else
                    {
-                       tabP.Title = shortTitle;
-                   }*/
+                       tabP.TabText = shortTitle;
+                   }
             }
             catch (Exception ex)
             {
@@ -230,9 +222,7 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
-                var tabP = InterfaceControl.Parent as TabPage;
-
-                if (tabP == null) return;
+                if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
                 string shortTitle;
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
@@ -258,14 +248,14 @@ namespace mRemoteNG.Connection.Protocol.Http
                     }
                 }
 
-                /*  if (!string.IsNullOrEmpty(tabTitle))
+                  if (!string.IsNullOrEmpty(tabTitle))
                   {
-                      tabP.Title = tabTitle + @" - " + shortTitle;
+                      tabP.TabText = tabTitle + @" - " + shortTitle;
                   }
                   else
                   {
-                      tabP.Title = shortTitle;
-                  }*/
+                      tabP.TabText = shortTitle;
+                  }
             }
             catch (Exception ex)
             {

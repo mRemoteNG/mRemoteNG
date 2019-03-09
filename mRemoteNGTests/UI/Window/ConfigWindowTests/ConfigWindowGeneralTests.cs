@@ -114,6 +114,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.PostExtApp),
                 nameof(ConnectionInfo.MacAddress),
                 nameof(ConnectionInfo.UserField),
+                nameof(ConnectionInfo.Favorite),
             };
 
             if (!isContainer)

@@ -1,10 +1,16 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Globalization;
+using System.Linq;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.MsSql;
 using mRemoteNG.Config.Serializers.Versioning;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
@@ -12,19 +18,11 @@ using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Globalization;
-using System.Linq;
-using System.Security;
-using mRemoteNG.Connection;
 
 namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsSaver : ISaver<IConnectionTreeModel>
     {
-        private SecureString _password = Runtime.EncryptionKey;
         private readonly SaveFilter _saveFilter;
         private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer;
         private readonly IDataProvider<string> _dataProvider;
@@ -75,7 +73,7 @@ namespace mRemoteNG.Config.Connections
                     return;
                 }
 
-                UpdateRootNodeTable(rootTreeNode, sqlConnector);
+                metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, sqlConnector);
                 UpdateConnectionsTable(rootTreeNode, sqlConnector);
                 UpdateUpdatesTable(sqlConnector);
             }
@@ -94,7 +92,8 @@ namespace mRemoteNG.Config.Connections
         private bool PropertyIsLocalOnly(string property)
         {
             return property == nameof(ConnectionInfo.OpenConnections) ||
-                   property == nameof(ContainerInfo.IsExpanded);
+                   property == nameof(ContainerInfo.IsExpanded) ||
+                   property == nameof(ContainerInfo.Favorite);
         }
 
         private void UpdateLocalConnectionProperties(ContainerInfo rootNode)
@@ -103,7 +102,8 @@ namespace mRemoteNG.Config.Connections
             {
                 ConnectionId = info.ConstantID,
                 Connected = info.OpenConnections.Count > 0,
-                Expanded = info is ContainerInfo c && c.IsExpanded
+                Expanded = info is ContainerInfo c && c.IsExpanded,
+                Favorite = info.Favorite,
             });
 
             var serializedProperties = _localPropertiesSerializer.Serialize(a);
@@ -119,17 +119,17 @@ namespace mRemoteNG.Config.Connections
             {
                 if (rootTreeNode.Password)
                 {
-                    _password = rootTreeNode.PasswordString.ConvertToSecureString();
-                    strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
+                    var password = rootTreeNode.PasswordString.ConvertToSecureString();
+                    strProtected = cryptographyProvider.Encrypt("ThisIsProtected", password);
                 }
                 else
                 {
-                    strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
+                    strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
                 }
             }
             else
             {
-                strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
+                strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
             var sqlQuery = new SqlCommand("DELETE FROM tblRoot", sqlDatabaseConnector.SqlConnection);

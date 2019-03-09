@@ -15,7 +15,6 @@ namespace mRemoteNG.Tree
         IEnumerable<ConnectionInfo> GetRecursiveChildList(ContainerInfo container);
         void RenameNode(ConnectionInfo connectionInfo, string newName);
         void DeleteNode(ConnectionInfo connectionInfo);
-        event NotifyCollectionChangedEventHandler CollectionChanged;
-        event PropertyChangedEventHandler PropertyChanged;
+        IEnumerable<ConnectionInfo> GetRecursiveFavoriteChildList(ContainerInfo node);
     }
 }

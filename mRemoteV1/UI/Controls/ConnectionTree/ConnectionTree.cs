@@ -9,6 +9,7 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -330,9 +331,22 @@ namespace mRemoteNG.UI.Controls
             ConnectionTreeModel.DeleteNode(SelectedNode);
         }
 
-        public void CopyHostnameSelectedNode()
+        /// <summary>
+        /// Copies the Hostname of the selected connection (or the Name of
+        /// the selected container) to the given <see cref="IClipboard"/>.
+        /// </summary>
+        /// <param name="clipboard"></param>
+        public void CopyHostnameSelectedNode(IClipboard clipboard)
         {
-            Clipboard.SetText(SelectedNode.IsContainer ? SelectedNode.Name : SelectedNode.Hostname);
+            if (SelectedNode == null)
+                return;
+
+            var textToCopy = SelectedNode.IsContainer ? SelectedNode.Name : SelectedNode.Hostname;
+
+            if (string.IsNullOrEmpty(textToCopy))
+                return;
+
+            clipboard.SetText(textToCopy);
         }
 
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)

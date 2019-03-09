@@ -1,16 +1,13 @@
-﻿using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers.Xml;
-using mRemoteNG.Tools;
-using mRemoteNG.Tree;
-using System;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Security;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.Versioning;
+using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Connections
@@ -20,9 +17,9 @@ namespace mRemoteNG.Config.Connections
         private readonly string _credentialFilePath = Path.Combine(CredentialsFileInfo.CredentialsPath, CredentialsFileInfo.CredentialsFile);
         private readonly string _connectionFilePath;
         private readonly ConnectionsService _connectionsService;
-        private readonly CredentialService _credentialService;
+        private readonly ICredentialService _credentialService;
 
-        public XmlConnectionsLoader(string connectionFilePath, CredentialService credentialService, ConnectionsService connectionsService)
+        public XmlConnectionsLoader(string connectionFilePath, ICredentialService credentialService, ConnectionsService connectionsService)
         {
             if (string.IsNullOrEmpty(connectionFilePath))
                 throw new ArgumentException($"{nameof(connectionFilePath)} cannot be null or empty");

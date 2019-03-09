@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
+﻿using mRemoteNG.UI.Forms;
 using NUnit.Extensions.Forms;
-using mRemoteNG.UI.Forms;
+using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Forms
 {
-    [TestFixture]
+	[TestFixture]
     public class PasswordFormTests
     {
         PasswordForm _passwordForm;
@@ -27,6 +27,7 @@ namespace mRemoteNGTests.UI.Forms
         }
 
         [Test]
+		[SetUICulture("en-US")]
         public void PasswordFormText()
         {
             FormTester formTester = new FormTester("PasswordForm");

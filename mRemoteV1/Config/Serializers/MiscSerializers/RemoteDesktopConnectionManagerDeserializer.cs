@@ -43,11 +43,15 @@ namespace mRemoteNG.Config.Serializers
 
         private static void VerifySchemaVersion(XmlNode rdcManNode)
         {
-            _schemaVersion = Convert.ToInt32(rdcManNode?.Attributes?["schemaVersion"].Value);
-            if (_schemaVersion != 1 && _schemaVersion != 3)
+	        if (!int.TryParse(rdcManNode?.Attributes?["schemaVersion"]?.Value, out var version))
+		        throw new FileFormatException("Could not find schema version attribute.");
+
+            if (version != 1 && version != 3)
             {
-                throw (new FileFormatException($"Unsupported schema version ({_schemaVersion})."));
+                throw new FileFormatException($"Unsupported schema version ({version}).");
             }
+
+            _schemaVersion = version;
         }
 
         private static void VerifyFileVersion(XmlNode rdcManNode)
@@ -135,10 +139,9 @@ namespace mRemoteNG.Config.Serializers
                 // Program Version 2.7 wraps these properties
                 containerPropertiesNode = containerPropertiesNode.SelectSingleNode("./properties");
             }
-
             newContainer.Name = containerPropertiesNode?.SelectSingleNode("./name")?.InnerText ?? Language.strNewFolder;
-            newContainer.IsExpanded =
-                bool.Parse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText ?? "false");
+            if (bool.TryParse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText, out var expanded))
+				newContainer.IsExpanded = expanded;
             return newContainer;
         }
 
@@ -146,13 +149,19 @@ namespace mRemoteNG.Config.Serializers
         {
             var connectionInfo = new ConnectionInfo {Protocol = ProtocolType.RDP};
 
-
             var propertiesNode = xmlNode.SelectSingleNode("./properties");
             if (_schemaVersion == 1)
-                propertiesNode = xmlNode; // Version 2.2 defines the container name at the root instead
+	            propertiesNode = xmlNode;  // Version 2.2 defines the container name at the root instead
+
             connectionInfo.Hostname = propertiesNode?.SelectSingleNode("./name")?.InnerText ?? "";
-            connectionInfo.Name =
-                propertiesNode?.SelectSingleNode("./displayName")?.InnerText ?? connectionInfo.Hostname;
+
+            var connectionDisplayName = propertiesNode?.SelectSingleNode("./displayName")?.InnerText;
+			connectionInfo.Name = !string.IsNullOrWhiteSpace(connectionDisplayName)
+                ? connectionDisplayName
+	            : string.IsNullOrWhiteSpace(connectionInfo.Hostname)
+	                ? connectionInfo.Name
+	                : connectionInfo.Hostname;
+
             connectionInfo.Description = propertiesNode?.SelectSingleNode("./comment")?.InnerText ?? string.Empty;
 
             var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
@@ -166,11 +175,12 @@ namespace mRemoteNG.Config.Serializers
             var connectionSettingsNode = xmlNode.SelectSingleNode("./connectionSettings");
             if (connectionSettingsNode?.Attributes?["inherit"]?.Value == "None")
             {
-                connectionInfo.UseConsoleSession =
-                    bool.Parse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText ?? "false");
+				if (bool.TryParse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText, out var useConsole))
+					connectionInfo.UseConsoleSession = useConsole;
                 // ./startProgram
                 // ./workingDir
-                connectionInfo.Port = Convert.ToInt32(connectionSettingsNode.SelectSingleNode("./port")?.InnerText);
+                if (int.TryParse(connectionSettingsNode.SelectSingleNode("./port")?.InnerText, out var port))
+					connectionInfo.Port = port;
             }
             else
             {
@@ -211,16 +221,10 @@ namespace mRemoteNG.Config.Serializers
             if (remoteDesktopNode?.Attributes?["inherit"]?.Value == "None")
             {
                 var resolutionString = remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", "");
-                try
-                {
-                    connectionInfo.Resolution = Enum.TryParse<RdpProtocol.RDPResolutions>("Res" + resolutionString, true, out var resolution)
-                        ? resolution
-                        : RdpProtocol.RDPResolutions.FitToWindow;
-                }
-                catch (ArgumentException)
-                {
-                    connectionInfo.Resolution = RdpProtocol.RDPResolutions.FitToWindow;
-                }
+
+                connectionInfo.Resolution = Enum.TryParse<RdpProtocol.RDPResolutions>("Res" + resolutionString, true, out var resolution)
+                    ? resolution
+                    : RdpProtocol.RDPResolutions.FitToWindow;
 
                 if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea")?.InnerText == "True")
                 {
@@ -232,10 +236,8 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Resolution = RdpProtocol.RDPResolutions.Fullscreen;
                 }
 
-                var colorDepth = remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText;
-                if (colorDepth != null)
-                    connectionInfo.Colors =
-                        (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors), colorDepth);
+                if (Enum.TryParse<RdpProtocol.RDPColors>(remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText, true, out var rdpColors))
+	                connectionInfo.Colors = rdpColors;
             }
             else
             {
@@ -284,16 +286,20 @@ namespace mRemoteNG.Config.Serializers
                 }
 
                 // ./redirectClipboard
-                connectionInfo.RedirectDiskDrives =
-                    bool.Parse(localResourcesNode?.SelectSingleNode("./redirectDrives")?.InnerText ?? "false");
-                connectionInfo.RedirectPorts =
-                    bool.Parse(localResourcesNode?.SelectSingleNode("./redirectPorts")?.InnerText ?? "false");
-                connectionInfo.RedirectPrinters =
-                    bool.Parse(localResourcesNode?.SelectSingleNode("./redirectPrinters")?.InnerText ?? "false");
-                connectionInfo.RedirectSmartCards =
-                    bool.Parse(localResourcesNode?.SelectSingleNode("./redirectSmartCards")?.InnerText ?? "false");
-                connectionInfo.RedirectClipboard =
-                    bool.Parse(localResourcesNode?.SelectSingleNode("./redirectClipboard")?.InnerText ?? "false");
+                if (bool.TryParse(localResourcesNode?.SelectSingleNode("./redirectDrives")?.InnerText, out var redirectDisks))
+	                connectionInfo.RedirectDiskDrives = redirectDisks;
+
+                if (bool.TryParse(localResourcesNode?.SelectSingleNode("./redirectPorts")?.InnerText, out var redirectPorts))
+	                connectionInfo.RedirectPorts = redirectPorts;
+
+                if (bool.TryParse(localResourcesNode?.SelectSingleNode("./redirectPrinters")?.InnerText, out var redirectPrinters))
+	                connectionInfo.RedirectPrinters = redirectPrinters;
+
+                if (bool.TryParse(localResourcesNode?.SelectSingleNode("./redirectSmartCards")?.InnerText, out var redirectSmartCards))
+	                connectionInfo.RedirectSmartCards = redirectSmartCards;
+					
+				if (bool.TryParse(localResourcesNode?.SelectSingleNode("./redirectClipboard")?.InnerText, out var redirectClipboard))
+					connectionInfo.RedirectClipboard = redirectClipboard;
             }
             else
             {

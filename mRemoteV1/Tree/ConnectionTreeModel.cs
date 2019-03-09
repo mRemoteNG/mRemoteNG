@@ -50,6 +50,11 @@ namespace mRemoteNG.Tree
             return container?.GetRecursiveChildList() ?? new ConnectionInfo[0];
         }
 
+        public IEnumerable<ConnectionInfo> GetRecursiveFavoriteChildList(ContainerInfo container)
+        {
+            return container.GetRecursiveFavoriteChildList();
+        }
+
         public void RenameNode(ConnectionInfo connectionInfo, string newName)
         {
             if (newName == null || newName.Length <= 0)
