@@ -114,6 +114,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="App\ImportTests.cs" />
     <Compile Include="App\UpdaterTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgsTests.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="TestHelpers\FileTestHelpers.cs" />
     <Compile Include="TestHelpers\Randomizer.cs" />
     <Compile Include="TestHelpers\SerializableConnectionInfoAllPropertiesOfType.cs" />
+    <Compile Include="Tools\DisposableActionTests.cs" />
     <Compile Include="Tools\ExternalToolsArgumentParserTests.cs" />
     <Compile Include="Tools\FullyObservableCollectionTests.cs" />
     <Compile Include="Tools\OptionalTests.cs" />
@@ -274,6 +276,7 @@
     <None Include="Resources\test_rdcman_v2_2_badschemaversion.rdg" />
     <None Include="Resources\test_rdcman_v2_2_schema1.rdg" />
     <None Include="Resources\test_RDCMan_v2_7_schema3.rdg" />
+    <None Include="Resources\test_rdcman_v2_7_schema3_null_values.rdg" />
     <None Include="Resources\test_remotedesktopconnection.rdp" />
   </ItemGroup>
   <ItemGroup>

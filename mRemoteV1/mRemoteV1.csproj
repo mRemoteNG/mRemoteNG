@@ -326,6 +326,7 @@
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Tools\DisposableAction.cs" />
     <Compile Include="Tools\DisposableOptional.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />

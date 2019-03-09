@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RDCMan programVersion="2.7" schemaVersion="3">
+  <file>
+    <credentialsProfiles />
+    <properties>
+      <expanded>True</expanded>
+      <name>test_RDCMan_connections</name>
+    </properties>
+    <smartGroup>
+      <properties>
+        <expanded>False</expanded>
+        <name>AllServers</name>
+      </properties>
+      <ruleGroup operator="All">
+        <rule>
+          <property>DisplayName</property>
+          <operator>Matches</operator>
+          <value>server</value>
+        </rule>
+      </ruleGroup>
+    </smartGroup>
+    <group>
+      <properties>
+        <expanded>True</expanded>
+        <name>Group1</name>
+      </properties>
+      <server>
+        <properties>
+          <displayName></displayName>
+          <name></name>
+          <comment></comment>
+        </properties>
+        <logonCredentials inherit="None">
+          <profileName scope="Local"></profileName>
+          <userName></userName>
+          <password></password>
+          <domain></domain>
+        </logonCredentials>
+        <connectionSettings inherit="None">
+          <connectToConsole></connectToConsole>
+          <startProgram />
+          <workingDir />
+          <port></port>
+          <loadBalanceInfo />
+        </connectionSettings>
+        <gatewaySettings inherit="None">
+          <enabled></enabled>
+          <hostName></hostName>
+          <logonMethod></logonMethod>
+          <localBypass></localBypass>
+          <credSharing></credSharing>
+          <profileName scope="Local"></profileName>
+          <userName></userName>
+          <password />
+          <domain></domain>
+        </gatewaySettings>
+        <remoteDesktop inherit="None">
+          <sameSizeAsClientArea></sameSizeAsClientArea>
+          <fullScreen></fullScreen>
+          <colorDepth></colorDepth>
+        </remoteDesktop>
+        <localResources inherit="None">
+          <audioRedirection></audioRedirection>
+          <audioRedirectionQuality></audioRedirectionQuality>
+          <audioCaptureRedirection></audioCaptureRedirection>
+          <keyboardHook></keyboardHook>
+          <redirectClipboard></redirectClipboard>
+          <redirectDrives></redirectDrives>
+          <redirectDrivesList>
+            <item></item>
+            <item></item>
+            <item></item>
+            <item></item>
+            <item></item>
+          </redirectDrivesList>
+          <redirectPrinters></redirectPrinters>
+          <redirectPorts></redirectPorts>
+          <redirectSmartCards></redirectSmartCards>
+          <redirectPnpDevices></redirectPnpDevices>
+        </localResources>
+        <displaySettings inherit="None">
+          <thumbnailScale></thumbnailScale>
+          <smartSizeDockedWindows></smartSizeDockedWindows>
+          <smartSizeUndockedWindows></smartSizeUndockedWindows>
+        </displaySettings>
+        <securitySettings inherit="None">
+          <authentication></authentication>
+        </securitySettings>
+      </server>
+    </group>
+  </file>
+  <connected />
+  <favorites />
+  <recentlyUsed />
+</RDCMan>
