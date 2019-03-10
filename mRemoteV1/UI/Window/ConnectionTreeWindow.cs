@@ -103,7 +103,7 @@ namespace mRemoteNG.UI.Window
                                          _themeManager.ActiveTheme.Theme);
 
             if (!_themeManager.ActiveAndExtended) return;
-            //Treelistview need to be manually themed
+            //Treelistview needs to be manually themed
             olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
             olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");
             olvConnections.SelectedBackColor =
@@ -117,6 +117,8 @@ namespace mRemoteNG.UI.Window
             //There is a border around txtSearch that dont theme well
             txtSearch.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             txtSearch.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            //Picturebox needs to be manually themed
+            pbSearch.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
         }
 
         #endregion
