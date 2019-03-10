@@ -254,18 +254,6 @@ namespace mRemoteNG.UI.Window
 
         #region Search
 
-        private void txtSearch_GotFocus(object sender, EventArgs e)
-        {
-            if (txtSearch.Text == Language.strSearchPrompt)
-                txtSearch.Text = "";
-        }
-
-        private void txtSearch_LostFocus(object sender, EventArgs e)
-        {
-            if (txtSearch.Text != "") return;
-            txtSearch.Text = Language.strSearchPrompt;
-        }
-
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -297,9 +285,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 
@@ -362,9 +348,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_KeyPress (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyPress (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 
@@ -386,9 +370,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 

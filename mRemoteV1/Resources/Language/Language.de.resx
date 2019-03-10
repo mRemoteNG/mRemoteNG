@@ -2660,4 +2660,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="Favorites" xml:space="preserve">
     <value>Favoriten</value>
   </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Suchbegriff löschen</value>
+  </data>
 </root>

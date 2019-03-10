@@ -79,6 +79,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear search string.
+        /// </summary>
+        internal static string ClearSearchString {
+            get {
+                return ResourceManager.GetString("ClearSearchString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a New Connection File.
         /// </summary>
         internal static string ConfigurationCreateNew {
