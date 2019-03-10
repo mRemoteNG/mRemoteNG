@@ -1,4 +1,4 @@
-
+﻿
 
 using mRemoteNG.Connection;
 using mRemoteNG.Tree;
@@ -31,7 +31,7 @@ namespace mRemoteNG.UI.Window
             this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.PictureBoxSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
-            this.txtSearch = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.txtSearch = new mRemoteNG.UI.Controls.Base.NGSearchBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mMenFavorites = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).BeginInit();
@@ -222,7 +222,7 @@ namespace mRemoteNG.UI.Window
         private Controls.ConnectionTree olvConnections;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
         internal Controls.Base.NGPictureBox PictureBoxSearch;
-        internal Controls.Base.NGTextBox txtSearch;
+        internal Controls.Base.NGSearchBox txtSearch;
         public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         internal System.Windows.Forms.ToolStripMenuItem mMenFavorites;
     }

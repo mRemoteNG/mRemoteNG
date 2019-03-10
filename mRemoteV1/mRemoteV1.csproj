@@ -395,6 +395,9 @@
     <Compile Include="UI\Controls\Base\NGRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\Base\NGSearchBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\Base\NGTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -834,6 +837,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Base\NGRadioButton.resx">
       <DependentUpon>NGRadioButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGSearchBox.resx">
+      <DependentUpon>NGSearchBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
       <DependentUpon>NGTextBox.cs</DependentUpon>
