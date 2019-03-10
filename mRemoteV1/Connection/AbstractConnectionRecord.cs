@@ -144,7 +144,7 @@ namespace mRemoteNG.Connection
         public virtual string Username
         {
             get => GetPropertyValue("Username", _username);
-            set => SetField(ref _username, value?.Trim(), "Username");
+            set => SetField(ref _username, Settings.Default.DoNotTrimUsername ? value : value?.Trim(), "Username");
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),

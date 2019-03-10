@@ -2660,4 +2660,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="Favorites" xml:space="preserve">
     <value>Favoriten</value>
   </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Leerzeichen nicht aus Benutzernamen entfernen</value>
+  </data>
 </root>
