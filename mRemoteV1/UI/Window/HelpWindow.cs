@@ -1,4 +1,4 @@
-using mRemoteNG.App.Info;
+﻿using mRemoteNG.App.Info;
 using System;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -54,8 +54,8 @@ namespace mRemoteNG.UI.Window
             var TreeNode99 = new TreeNode("Help", new[] {TreeNode5, TreeNode20, TreeNode22});
             wbHelp = new WebBrowser();
             tvIndex = new TreeView();
-            tvIndex.NodeMouseClick += tvIndex_NodeMouseClick;
-            tvIndex.AfterSelect += tvIndex_AfterSelect;
+            tvIndex.NodeMouseClick += TvIndex_NodeMouseClick;
+            tvIndex.AfterSelect += TvIndex_AfterSelect;
             imgListHelp = new ImageList(components);
             pnlSplitter = new SplitContainer();
             lblDocPath = new Label();
@@ -196,12 +196,12 @@ namespace mRemoteNG.UI.Window
             wbHelp.AllowWebBrowserDrop = false;
         }
 
-        private void tvIndex_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void TvIndex_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             tvIndex.SelectedNode = e.Node;
         }
 
-        private void tvIndex_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvIndex_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (!string.IsNullOrEmpty((string)e.Node.Tag))
                 wbHelp.Navigate(GeneralAppInfo.HomePath + "\\Help\\" + Convert.ToString(e.Node.Tag) + ".htm");

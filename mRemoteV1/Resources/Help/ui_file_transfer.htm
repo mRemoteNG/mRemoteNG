@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<!-- Introduction - #start -->
-		<h1>Introduction</h1>
+		<h1>SSH File Transfer</h1>
 		<hr/>
 		<p>SSH File Transfer functionality allows you to securely transfer files to a remote host over an encrypted tunnel using either <b>SFTP</b> or <b>SCP</b>.</p>
 		<!-- Introduction - #end -->
@@ -55,18 +55,18 @@
 		<p>Once all options are populated, select <b>Transfer</b> and the progress bar at the bottom	of the window will show the progress.</p>
 		<h1>Troubleshooting SSH File Transfer</h1>
 		<hr/>
-		<p>To troubleshoot issues with SSH File Transfer, consult the log under %AppData%\mRemoteNG\mRemoteNG.log. This log provides verbose information about successful and failed connections.<br/>
-			<br/>
-			<h2>Common Issues</h2>
-			<br/>
-			<br/>
-			<b>ERROR- Please fill all fields</b>
-			<br/>This issue was likely encountered because you did not provide all information needed to establish the connection.<br/>
-			<br/>
-			<b>System.Net.Sockets.SocketException (0x80004005): No connection could be made because the target machine actively refused it</b>
-			<br/>This issue was likely encountered because the local host could not contact the remote host specified on the remote port specified.<br/>The issue may be caused by improperly configured firewall rules or a SSH service not listening properly on the remote host.<br/>
-			<br/>
-			<b>[14] ERROR- SSH background transfer failed!</b>
-			<br/>This issue was likely encountered due to a permissions issue. Ensure you have appropriate access to write to the specified Remote File.</p>
+		<p>To troubleshoot issues with SSH File Transfer, consult the log under %AppData%\mRemoteNG\mRemoteNG.log. This log provides verbose information about successful and failed connections.</p>
+			<div class=lvl1>
+				<h2>Common Issues</h2>
+				<b>ERROR- Please fill all fields</b>
+				<br/>This issue was likely encountered because you did not provide all information needed to establish the connection.<br/>
+				<br/>
+				<b>System.Net.Sockets.SocketException (0x80004005): No connection could be made because the target machine actively refused it</b>
+				<br/>This issue was likely encountered because the local host could not contact the remote host specified on the remote port specified.<br/>The issue may be caused by improperly configured firewall rules or a SSH service not listening properly on the remote host.<br/>
+				<br/>
+				<b>[14] ERROR- SSH background transfer failed!</b>
+				<br/>This issue was likely encountered due to a permissions issue. Ensure you have appropriate access to write to the specified Remote File.
+			</div>
+		</p>
 	</body>
 </html>

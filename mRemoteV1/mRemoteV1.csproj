@@ -1176,9 +1176,6 @@
     <Content Include="Resources\Help\Screenshots\Reference\config_panel_01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\config_panel_02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\Screenshots\Reference\example_01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

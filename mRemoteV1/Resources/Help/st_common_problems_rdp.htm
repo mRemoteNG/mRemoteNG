@@ -6,25 +6,30 @@
 		<link rel="stylesheet" href="Main.css" type="text/css"/>
 	</head>
 	<body>
-		<h1>Introduction</h1>
+		<h1>Common Problems (RDP)</h1>
+		<hr/>
 		<p>Its hard to make a document on all problems that can occur with connections	but here at least we are trying to list some of the most common problems for RDP	that has been noticed.</p>
 		<!-- Reference - #start -->
-		<h2>Quick Reference</h2>
-		<ul>
-			<li>
-				<a href="#credssp_2018-0886">
-					<b>CredSSP - CVE-2018-0886</b>
-				</a> - Authentication error</li>
-		</ul>
+		<div class=lvl1>
+			<h2>Quick Reference</h2>
+			<ul>
+				<li>
+					<a href="#credssp_2018-0886">
+						<b>CredSSP - CVE-2018-0886</b>
+					</a> - Authentication error</li>
+			</ul>
+		</div>
 		<!-- Reference - #end -->
 		<!-- credssp_2018 - #start -->
 		<h1 id="credssp_2018">CredSSP - CVE-2018-0886 - Authentication error</h1>
+		<hr/>
 		<p>mRemoteNG uses the Microsoft Terminal Services Client (MSTSC) libraries in order	to make Remote Desktop connections. mRemoteNG has no control over the functionality	changes implemented by Microsoft.</p>
-		<p>Relevant line of code that shows our	"RDP Client" connection "object":<a href="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteV1/Connection/Protocol/RDP/RdpProtocol.cs#L27">private MsRdpClient8NotSafeForScripting _rdpClient;</a>
+		<br/>
+		<p>Relevant line of code that shows our	"RDP Client" connection "object": <a href="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteV1/Connection/Protocol/RDP/RdpProtocol.cs#L27">private MsRdpClient8NotSafeForScripting _rdpClient</a>
 		</p>
-		<p>Relevant MS documentation for this .NET class:<a href="https://msdn.microsoft.com/en-us/library/mt787069(v=vs.85).aspx">MsRdpClient8NotSafeForScripting class</a>
+		<p>Relevant MS documentation for this .NET class: <a href="https://msdn.microsoft.com/en-us/library/mt787069(v=vs.85).aspx">MsRdpClient8NotSafeForScripting class</a>
 		</p>
-		<p>Please refer to<a href="https://support.microsoft.com/en-us/help/4093492/credssp-updates-for-cve-2018-0886-march-13-2018">Microsoft's documentation</a>for full details regarding this problem.</p>
+		<p>Please refer to <a href="https://support.microsoft.com/en-us/help/4093492/credssp-updates-for-cve-2018-0886-march-13-2018"> Microsoft's documentation</a>for full details regarding this problem.</p>
 		<p>Patched clients attempting to connect to Unpatched servers will fail with the following error:</p>
 		<img src="Screenshots/CommonProblemsRDP/credssp-error.png"/>
 		<p>The same error will occur with MSTSC directly on a	patched client attempting to connect to an unpatched server.</p>
