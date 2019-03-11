@@ -4,6 +4,8 @@
 [![Join the chat at https://gitter.im/mRemoteNG/PublicChat/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mRemoteNG/PublicChat)
 [![PayPal](https://img.shields.io/badge/%24-PayPal-blue.svg)](https://www.paypal.me/DavidSparer)
 
+[![Github Releases](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/total.svg?style=flat-square)](https://github.com/mRemoteNG/mRemoteNG/releases/)
+
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge)](https://bestpractices.coreinfrastructure.org/projects/529)
 
 | Update Channel | Build Status | Downloads |
