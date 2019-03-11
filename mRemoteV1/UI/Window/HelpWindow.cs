@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Window
         private ImageList imgListHelp;
         private System.ComponentModel.Container components;
         private SplitContainer pnlSplitter;
-        private Label lblDocName;
+        private Label lblDocPath;
         private WebBrowser wbHelp;
 
         private void InitializeComponent()
@@ -54,13 +54,12 @@ namespace mRemoteNG.UI.Window
             });
             var TreeNode99 = new TreeNode("Help", new[] {TreeNode1, TreeNode6, TreeNode21, TreeNode23});
             wbHelp = new WebBrowser();
-            wbHelp.DocumentTitleChanged += wbHelp_DocumentTitleChanged;
             tvIndex = new TreeView();
             tvIndex.NodeMouseClick += tvIndex_NodeMouseClick;
             tvIndex.AfterSelect += tvIndex_AfterSelect;
             imgListHelp = new ImageList(components);
             pnlSplitter = new SplitContainer();
-            lblDocName = new Label();
+            lblDocPath = new Label();
             pnlSplitter.Panel1.SuspendLayout();
             pnlSplitter.Panel2.SuspendLayout();
             pnlSplitter.SuspendLayout();
@@ -134,26 +133,26 @@ namespace mRemoteNG.UI.Window
             //
             //pnlSplitter.Panel2
             //
-            pnlSplitter.Panel2.Controls.Add(lblDocName);
+            pnlSplitter.Panel2.Controls.Add(lblDocPath);
             pnlSplitter.Panel2.Controls.Add(wbHelp);
             pnlSplitter.Size = new System.Drawing.Size(542, 323);
             pnlSplitter.SplitterDistance = 209;
             pnlSplitter.TabIndex = 2;
             //
-            //lblDocName
+            //lblDocPath
             //
-            lblDocName.Anchor = AnchorStyles.Top | AnchorStyles.Left
+            lblDocPath.Anchor = AnchorStyles.Top | AnchorStyles.Left
                                                  | AnchorStyles.Right;
-            lblDocName.BackColor = System.Drawing.Color.DimGray;
-            lblDocName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold,
+            lblDocPath.BackColor = System.Drawing.Color.DimGray;
+            lblDocPath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold,
                                                       System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-            lblDocName.ForeColor = System.Drawing.Color.White;
-            lblDocName.Location = new System.Drawing.Point(1, 1);
-            lblDocName.Name = "lblDocName";
-            lblDocName.Size = new System.Drawing.Size(327, 35);
-            lblDocName.TabIndex = 2;
-            lblDocName.Text = @"Introduction";
-            lblDocName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            lblDocPath.ForeColor = System.Drawing.Color.White;
+            lblDocPath.Location = new System.Drawing.Point(1, 1);
+            lblDocPath.Name = "lblDocPath";
+            lblDocPath.Size = new System.Drawing.Size(327, 35);
+            lblDocPath.TabIndex = 2;
+            lblDocPath.Text = @"Introduction";
+            lblDocPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             //
             //Help
             //
@@ -207,14 +206,16 @@ namespace mRemoteNG.UI.Window
         private void tvIndex_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (!string.IsNullOrEmpty((string)e.Node.Tag))
-            {
                 wbHelp.Navigate(GeneralAppInfo.HomePath + "\\Help\\" + Convert.ToString(e.Node.Tag) + ".htm");
-            }
+            ChangeDocumentPath(e);
         }
 
-        private void wbHelp_DocumentTitleChanged(object sender, EventArgs e)
+        private void ChangeDocumentPath(TreeViewEventArgs e)
         {
-            lblDocName.Text = wbHelp.DocumentTitle;
+            lblDocPath.Text = string.Empty;
+            try { lblDocPath.Text += !string.IsNullOrEmpty(e.Node.Parent.Parent.Text) ? e.Node.Parent.Parent.Text + " > " : ""; } catch { /*ignored*/ }
+                try { lblDocPath.Text += !string.IsNullOrEmpty(e.Node.Parent.Text) ? e.Node.Parent.Text + " > ": ""; } catch { /*ignored*/ }
+            lblDocPath.Text += !string.IsNullOrEmpty(e.Node.Text) ? e.Node.Text : "";
         }
 
         private void FillImageList()
