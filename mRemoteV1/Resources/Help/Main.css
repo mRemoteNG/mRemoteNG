@@ -49,6 +49,7 @@ h5 {
     color: #000000;
 }
 
+
 /* LINKS */
 
 a:link {
@@ -124,3 +125,11 @@ tr:nth-child(even) { background-color: #f2f2f2; }
     color: #D8000C;
     background-color: #FFD2D2;
 }
+
+.lvl1 { padding-left: 20px; }
+
+.lvl2 { padding-left: 40px; }
+
+.lvl3 { padding-left: 60px; }
+
+.lvl4 { padding-left: 80px; }
