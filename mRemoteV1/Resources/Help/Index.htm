@@ -6,75 +6,85 @@
 		<link rel="stylesheet" href="Main.css" type="text/css"/>
 	</head>
 	<body>
-		<h1>Welcome to mRemoteNG</h1>
+		<h1>mRemoteNG Help</h1>
 		<hr/>
-		<p>This documentation is written and based on version 1.76 of mRemoteNG. If you find anything to improve or wrong with the documentation then please report it to github. Also note that documentation can be found on github pages that are updated more frequently then information provided here.</p>
-		<h2>Getting Started</h2>
-		<ul>
-			<li>
-				<a href="gs_prerequisites.htm">Prerequisites</a>
-			</li>
-			<li>
-				<a href="gs_installation.htm">Installation/Update</a>
-			</li>
-			<li>
-				<a href="gs_running_mremoteng.htm">Running mRemoteNG</a>
-			</li>
-			<li>
-				<a href="gs_command_line_switches.htm">Command-Line Switches</a>
-			</li>
-		</ul>
-		<h2>User Interface</h2>
-		<ul>
-			<li>
-				<a href="ui_menus.htm">Menus</a>
-			</li>
-			<li>
-				<a href="ui_connections.htm">Connections</a>
-			</li>
-			<li>
-				<a href="ui_config.htm">Config</a>
-			</li>
-			<li>
-				<a href="ui_options.htm">Options</a>
-			</li>
-			<li>
-				<a href="ui_navigation.htm">Navigation</a>
-			</li>
-			<li>
-				<a href="ui_notifications.htm">Notifications</a>
-			</li>
-			<li>
-				<a href="ui_sql_configuration.htm">SQL Configuration</a>
-			</li>
-			<li>
-				<a href="ui_screenshot_manager.htm">Screenshot Manager</a>
-			</li>
-			<li>
-				<a href="ui_file_transfer.htm">SSH File Transfer</a>
-			</li>
-			<li>
-				<a href="ui_quick_connect.htm">Quick Connect</a>
-			</li>
-			<li>
-				<a href="ui_port_scan.htm">Port Scan</a>
-			</li>
-			<li>
-				<a href="ui_external_tools.htm">External Tools</a>
-			</li>
-			<li>
-				<a href="ui_import_and_export.htm">Import/Export</a>
-			</li>
-			<li>
-				<a href="ui_keyboardshortcuts.htm">Keyboard Shortcuts</a>
-			</li>
-		</ul>
-		<h2>Special Topics</h2>
-		<h3>Connections</h3>
-		<ul>
-			<li>
-				<a href="st_common_problems_rdp.htm">Common problems (RDP)</a>
-			</li>
-		</ul>
+		<p>
+			mRemoteNG is a multi-protocol, multi-remote connections manager that aims at providing you with a clutter-free, unstressful platform to manage all your remote connections in one place.
+			<br/>
+			The application is released under the <a href="../License.txt">GPLv2</a> and is being managed on <a href="https://github.com/mRemoteNG/mRemoteNG">Github</a>.
+			<br/>
+			<br/>
+			As of now mRemoteNG supports the following protocols:
+			<ul>
+				<li>RDP</li>
+				<li>SSH</li>
+				<li>VNC</li>
+				<li>ICA</li>
+				<li>Telnet</li>
+				<li>RAW</li>
+				<li>RLogin</li>
+				<li>HTTP/S</li>
+			</ul>
+		</p>
+		<h1>Table of Contents</h1>
+		<hr/>
+		<div class=lvl1>
+			<h2>Getting Started</h2>
+			<p>
+				<ul>
+					<li><a href="gs_prerequisites.htm">Prerequisites</a></li>
+					<li><a href="gs_installation.htm">Installation/Update</a></li>
+					<li><a href="gs_running_mremoteng.htm">Running mRemoteNG</a></li>
+					<li><a href="gs_command_line_switches.htm">Command-Line Switches</a></li>
+				</ul>
+				<h2>User Interface</h2>
+				<ul>
+					<li><a href="ui_menus.htm">Menus</a></li>
+					<li><a href="ui_connections.htm">Connections</a></li>
+					<li><a href="ui_config.htm">Config</a></li>
+					<li><a href="ui_options.htm">Options</a></li>
+					<li><a href="ui_navigation.htm">Navigation</a></li>
+					<li><a href="ui_notifications.htm">Notifications</a></li>
+					<li><a href="ui_sql_configuration.htm">SQL Configuration</a></li>
+					<li><a href="ui_screenshot_manager.htm">Screenshot Manager</a></li>
+					<li><a href="ui_file_transfer.htm">SSH File Transfer</a></li>
+					<li><a href="ui_quick_connect.htm">Quick Connect</a></li>
+					<li><a href="ui_port_scan.htm">Port Scan</a></li>
+					<li><a href="ui_external_tools.htm">External Tools</a></li>
+					<li><a href="ui_import_and_export.htm">Import/Export</a></li>
+					<li><a href="ui_keyboardshortcuts.htm">Keyboard Shortcuts</a></li>
+				</ul>
+				<h2>Special Topics</h2>
+				<ul>
+					<li><a href="st_common_problems_rdp.htm">Common Problems (RDP)</a></li>
+				</ul>
+			</p>
+		</div>
+		<h1>Features</h1>
+		<hr/>
+		<p>
+			<ul>
+				<li>Free and Open Source, released under the GPL</li>
+				<li>Panels and tabs allow to group certain connections together, dock them to any side of the window or completely undock them and move them to another screen for example</li>
+				<li>Multiple supported protocols (RDP, VNC, ICA, SSH, Telnet, RAW, Rlogin and HTTP/S)</li>
+				<li>Easy to organize and maintain list of connections</li>
+				<li>Inheritance makes it possible to store properties on folder basis and let the underlying connections inherit this info</li>
+				<li>Support for importing connections from Active Directory</li>
+				<li>Allows creating nested containers (folders) to categorize connections</li>
+				<li>&quot;Quick Connect&quot; feature to quickly open a connection without creating an entry</li>
+				<li>&quot;Quick Search&quot; feature to quickly find a connection while typing</li>
+				<li>Support for SCP/SFTP (SSH) file transfers</li>
+				<li>Assign icons to connections to easily identify purpose</li>
+				<li>Screenshot manager allows to collect multiple screenshots and save them all together or copy them to the clipboard</li>
+				<li>View remote session info and log off sessions (RDP)</li>
+				<li>Portable (with the use of command line switches)</li>
+				<li>&quot;Auto-Update&quot; feature</li>
+				<li>Show description tooltips when hoovering over connections</li>
+				<li>System tray icon with connection menu</li>
+				<li>Fullscreen (Kiosk) mode</li>
+				<li>Assign global credentials to use when no information is provided on connection basis</li>
+				<li>Host Up/Down (Ping) feature shows if the selected host answers to a ping</li>
+			</ul>
+		</p>
 	</body>
 </html>
