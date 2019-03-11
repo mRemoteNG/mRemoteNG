@@ -1,4 +1,5 @@
 ﻿/* COMMON STUFF */
+
 body {
     background-color: #FFFFFF;
     margin-left: 10px;
@@ -53,6 +54,7 @@ h5 {
 a:link {
     color: #5d6b70;
     text-decoration: none;
+	text-decoration: underline;
 }
 
 a:visited {
