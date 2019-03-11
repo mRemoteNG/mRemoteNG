@@ -1,54 +1,35 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Port Scan</title>
-    <link rel="stylesheet" href="Main.css" type="text/css">
-</head>
-<body>
-<!-- Introduction - #start -->
-<h1>Introduction</h1>
-<hr>
-<p>
-    The Port Scan feature (under Tools > Port Scan) is similar to a nmap port scan.
-    It will scan a range of IP addresses and to determine if specific mRemoteNG supported
-    protocols are active. Hosts can then be bulk imported into mRemoteNG.
-</p>
-<!-- Introduction - #end -->
-
-<!-- Use case - #start -->
-<h1>Use Case</h1>
-<hr>
-<p>
-    You've just inherited a new network with little to no documentation.
-    Inputting a range of IP addresses and scanning your entire network
-    should give you a good idea of what is currently online.
-    Importing those devices will then give you a quick
-    (relatively, scanning a large subnet will take a while) way to get into those devices.
-</p>
-<!-- Use case - #end -->
-
-<!-- How to use - #start -->
-<h1>How to use</h1>
-<hr>
-<ol>
-    <li>Start the Port Scan feature by clicking Tools > Port Scan in the menu bar.</li>
-    <li>Input your Start IP and End IP of the range you'd like to scan.</li>
-    <li>
-        Enter the Start Port and End Port that mRemoteNG should test for.
-        <div class="isa_info">
-            <b>TIP!</b> If you leave this at the default of 0 & 0,
-            the test will be for the default protocol ports that mRemoteNG supports.
-        </div>
-    </li>
-    <li>Click Scan</li>
-    <li>Wait. Possibly a long time.</li>
-    <li>
-        The table will populate, and eventually you'll get a notification that the scan has completed.
-        Alternatively, you can press Stop to end the scan at any time.
-    </li>
-    <li>Change the dropdown to the protocol you'd like to import and click Import.</li>
-</ol>
-<!-- How to use - #end -->
-</body>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Port Scan</title>
+		<link rel="stylesheet" href="Main.css" type="text/css"/>
+	</head>
+	<body>
+		<!-- Introduction - #start -->
+		<h1>Introduction</h1>
+		<hr/>
+		<p>The Port Scan feature (under Tools > Port Scan) is similar to a nmap port scan.	It will scan a range of IP addresses and to determine if specific mRemoteNG supported	protocols are active. Hosts can then be bulk imported into mRemoteNG.</p>
+		<!-- Introduction - #end -->
+		<!-- Use case - #start -->
+		<h1>Use Case</h1>
+		<hr/>
+		<p>You've just inherited a new network with little to no documentation.	Inputting a range of IP addresses and scanning your entire network	should give you a good idea of what is currently online.	Importing those devices will then give you a quick	(relatively, scanning a large subnet will take a while) way to get into those devices.</p>
+		<!-- Use case - #end -->
+		<!-- How to use - #start -->
+		<h1>How to use</h1>
+		<hr/>
+		<ol>
+			<li>Start the Port Scan feature by clicking Tools > Port Scan in the menu bar.</li>
+			<li>Input your Start IP and End IP of the range you'd like to scan.</li>
+			<li>Enter the Start Port and End Port that mRemoteNG should test for.<div class="isa_info">
+					<b>TIP!</b> If you leave this at the default of 0 & 0,	the test will be for the default protocol ports that mRemoteNG supports.</div>
+			</li>
+			<li>Click Scan</li>
+			<li>Wait. Possibly a long time.</li>
+			<li>The table will populate, and eventually you'll get a notification that the scan has completed.	Alternatively, you can press Stop to end the scan at any time.</li>
+			<li>Change the dropdown to the protocol you'd like to import and click Import.</li>
+		</ol>
+		<!-- How to use - #end -->
+	</body>
 </html>
