@@ -12,11 +12,6 @@
 		<p>SSH File Transfer functionality allows you to securely transfer files to a remote host over an encrypted tunnel using either <b>SFTP</b> or <b>SCP</b>.</p>
 		<!-- Introduction - #end -->
 		<!-- Use Cases - #start -->
-		<h1>Use Cases</h1>
-		<hr/>
-		<p>The primary use case is to upload individual files, such as configuration files, to a remote host.</p>
-		<!-- Use Cases - #end -->
-		<!-- Prerequisites - #start -->
 		<h1>Prerequisites</h1>
 		<hr/>
 		<ul>
@@ -50,23 +45,23 @@
 		<!-- Configuration - #end -->
 		<h1>Using SSH File Transfer</h1>
 		<hr/>
-		<p>To begin, select <b>Tools</b> and then <b>SSH File Transfer</b>.	The tool will fill the window and allow you to input the configuration options.	Each piece of information is needed for a successful transfer.</p>
-		<p>To populate the <b>Local File</b> option, select the <b>Browse</b> button and navigate to	the desired file on the local filesystem. To populate the <b>Remote File</b> option,	manually type desired filesystem path, including the desired file name.</p>
-		<p>Once all options are populated, select <b>Transfer</b> and the progress bar at the bottom	of the window will show the progress.</p>
+		<p>To begin, select <b>Tools</b> and then <b>SSH File Transfer</b>. The tool will fill the window and allow you to input the configuration options. Each piece of information is needed for a successful transfer.</p>
+		<p>To populate the <b>Local File</b> option, select the <b>Browse</b> button and navigate to the desired file on the local filesystem. To populate the <b>Remote File</b> option, manually type desired filesystem path, including the desired file name.</p>
+		<p>Once all options are populated, select <b>Transfer</b> and the progress bar at the bottom of the window will show the progress.</p>
 		<h1>Troubleshooting SSH File Transfer</h1>
 		<hr/>
 		<p>To troubleshoot issues with SSH File Transfer, consult the log under %AppData%\mRemoteNG\mRemoteNG.log. This log provides verbose information about successful and failed connections.</p>
-			<div class=lvl1>
-				<h2>Common Issues</h2>
-				<b>ERROR- Please fill all fields</b>
-				<br/>This issue was likely encountered because you did not provide all information needed to establish the connection.<br/>
-				<br/>
-				<b>System.Net.Sockets.SocketException (0x80004005): No connection could be made because the target machine actively refused it</b>
-				<br/>This issue was likely encountered because the local host could not contact the remote host specified on the remote port specified.<br/>The issue may be caused by improperly configured firewall rules or a SSH service not listening properly on the remote host.<br/>
-				<br/>
-				<b>[14] ERROR- SSH background transfer failed!</b>
-				<br/>This issue was likely encountered due to a permissions issue. Ensure you have appropriate access to write to the specified Remote File.
-			</div>
-		</p>
-	</body>
+		<div class=lvl1>
+			<h2>Common Issues</h2>
+			<b>ERROR- Please fill all fields</b>
+			<br/>This issue was likely encountered because you did not provide all information needed to establish the connection.<br/>
+			<br/>
+			<b>System.Net.Sockets.SocketException (0x80004005): No connection could be made because the target machine actively refused it</b>
+			<br/>This issue was likely encountered because the local host could not contact the remote host specified on the remote port specified.<br/>The issue may be caused by improperly configured firewall rules or a SSH service not listening properly on the remote host.<br/>
+			<br/>
+			<b>[14] ERROR- SSH background transfer failed!</b>
+			<br/>This issue was likely encountered due to a permissions issue. Ensure you have appropriate access to write to the specified Remote File.
+		</div>
+	</p>
+</body>
 </html>
