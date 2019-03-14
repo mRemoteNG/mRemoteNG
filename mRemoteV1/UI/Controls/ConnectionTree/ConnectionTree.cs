@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
-using BrightIdeasSoftware;
+﻿using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Controls
@@ -43,8 +43,12 @@ namespace mRemoteNG.UI.Controls
             get { return _connectionTreeModel; }
             set
             {
+                if (_connectionTreeModel == value)
+                    return;
+
+                UnregisterModelUpdateHandlers(_connectionTreeModel);
                 _connectionTreeModel = value;
-                PopulateTreeView();
+                PopulateTreeView(value);
             }
         }
 
@@ -156,28 +160,31 @@ namespace mRemoteNG.UI.Controls
 		                   padding;
 		}
 
-        private void PopulateTreeView()
+        private void PopulateTreeView(ConnectionTreeModel newModel)
         {
-            UnregisterModelUpdateHandlers();
-            SetObjects(ConnectionTreeModel.RootNodes);
-            RegisterModelUpdateHandlers();
-            NodeSearcher = new NodeSearcher(ConnectionTreeModel);
+            SetObjects(newModel.RootNodes);
+            RegisterModelUpdateHandlers(newModel);
+            NodeSearcher = new NodeSearcher(newModel);
             ExecutePostSetupActions();
 			AutoResizeColumn(Columns[0]);
 		}
 
-        private void RegisterModelUpdateHandlers()
+        private void RegisterModelUpdateHandlers(ConnectionTreeModel newModel)
         {
             _puttySessionsManager.PuttySessionsCollectionChanged += OnPuttySessionsCollectionChanged;
-            ConnectionTreeModel.CollectionChanged += HandleCollectionChanged;
-            ConnectionTreeModel.PropertyChanged += HandleCollectionPropertyChanged;
+            newModel.CollectionChanged += HandleCollectionChanged;
+            newModel.PropertyChanged += HandleCollectionPropertyChanged;
         }
 
-        private void UnregisterModelUpdateHandlers()
+        private void UnregisterModelUpdateHandlers(ConnectionTreeModel oldConnectionTreeModel)
         {
             _puttySessionsManager.PuttySessionsCollectionChanged -= OnPuttySessionsCollectionChanged;
-            ConnectionTreeModel.CollectionChanged -= HandleCollectionChanged;
-            ConnectionTreeModel.PropertyChanged -= HandleCollectionPropertyChanged;
+
+            if (oldConnectionTreeModel == null)
+                return;
+
+            oldConnectionTreeModel.CollectionChanged -= HandleCollectionChanged;
+            oldConnectionTreeModel.PropertyChanged -= HandleCollectionPropertyChanged;
         }
 
         private void OnPuttySessionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)

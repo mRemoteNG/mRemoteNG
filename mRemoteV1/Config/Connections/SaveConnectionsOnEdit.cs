@@ -33,7 +33,7 @@ namespace mRemoteNG.Config.Connections
 
         private void ConnectionTreeModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            SaveConnectionOnEdit();
+            SaveConnectionOnEdit(propertyChangedEventArgs.PropertyName);
         }
 
         private void ConnectionTreeModelOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -41,14 +41,14 @@ namespace mRemoteNG.Config.Connections
             SaveConnectionOnEdit();
         }
 
-        private void SaveConnectionOnEdit()
+        private void SaveConnectionOnEdit(string propertyName = "")
         {
             if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
                 return;
             if (FrmMain.Default.IsClosing)
                 return;
 
-            _connectionsService.SaveConnectionsAsync();
+            _connectionsService.SaveConnectionsAsync(propertyName);
         }
     }
 }

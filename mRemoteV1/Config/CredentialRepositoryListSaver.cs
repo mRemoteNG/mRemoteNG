@@ -18,7 +18,7 @@ namespace mRemoteNG.Config
             _dataProvider = dataProvider;
         }
 
-        public void Save(IEnumerable<ICredentialRepository> repositories)
+        public void Save(IEnumerable<ICredentialRepository> repositories, string propertyNameTrigger = "")
         {
             var serializer = new CredentialRepositoryListSerializer();
             var data = serializer.Serialize(repositories);

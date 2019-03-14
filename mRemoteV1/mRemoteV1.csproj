@@ -136,6 +136,7 @@
     <Compile Include="Config\Connections\ConnectionsLoadedEventArgs.cs" />
     <Compile Include="Config\Connections\ConnectionsSavedEventArgs.cs" />
     <Compile Include="Config\Connections\CsvConnectionsSaver.cs" />
+    <Compile Include="Config\Connections\IConnectionsLoader.cs" />
     <Compile Include="Config\Connections\SaveConnectionsOnEdit.cs" />
     <Compile Include="Config\Connections\SaveFormat.cs" />
     <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateCheckFinishedEventArgs.cs" />
@@ -159,6 +160,9 @@
     <Compile Include="Config\ILoader.cs" />
     <Compile Include="Config\Import\MRemoteNGCsvImporter.cs" />
     <Compile Include="Config\ISaver.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesModel.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesXmlSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlConnectionListMetaData.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
     <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
@@ -169,14 +173,14 @@
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsDeserializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsSerializerMremotengFormat.cs" />
-    <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
-    <Compile Include="Config\Serializers\DataTableSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\DataTableDeserializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\DataTableSerializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer26.cs" />
-    <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionRetriever.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlDatabaseMetaDataRetriever.cs" />
     <Compile Include="Config\Serializers\Versioning\IVersionUpgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion22To23Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />
@@ -314,6 +318,7 @@
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Tools\DisposableAction.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />

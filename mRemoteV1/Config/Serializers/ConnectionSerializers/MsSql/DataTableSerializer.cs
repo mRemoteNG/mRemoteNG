@@ -1,25 +1,31 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Linq;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Data;
+using System.Data.SqlTypes;
+using System.Linq;
+using System.Security;
+using mRemoteNG.Tools;
 
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.MsSql
 {
     public class DataTableSerializer : ISerializer<ConnectionInfo,DataTable>
     {
+        private readonly ICryptographyProvider _cryptographyProvider;
+        private readonly SecureString _encryptionKey;
         private DataTable _dataTable;
         private const string TableName = "tblCons";
         private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
 
-        public DataTableSerializer(SaveFilter saveFilter)
+        public DataTableSerializer(SaveFilter saveFilter, ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
         {
-            _saveFilter = saveFilter;
+            _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
+            _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
+            _encryptionKey = encryptionKey.ThrowIfNull(nameof(encryptionKey));
         }
 
 
@@ -204,14 +210,15 @@ namespace mRemoteNG.Config.Serializers
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
-            var info = connectionInfo as ContainerInfo;
-            dataRow["Expanded"] = info != null && info.IsExpanded;
+            dataRow["Expanded"] = false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
             dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
             dataRow["DomainName"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
-            dataRow["Password"] = _saveFilter.SavePassword ? connectionInfo.Password : "";
+            dataRow["Password"] = _saveFilter.SavePassword 
+                ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) 
+                : "";
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["Protocol"] = connectionInfo.Protocol;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
@@ -239,7 +246,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
-            dataRow["Connected"] = connectionInfo.OpenConnections.Count > 0;
+            dataRow["Connected"] = false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["MacAddress"] = connectionInfo.MacAddress;
@@ -252,7 +259,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["VNCProxyIP"] = connectionInfo.VNCProxyIP;
             dataRow["VNCProxyPort"] = connectionInfo.VNCProxyPort;
             dataRow["VNCProxyUsername"] = connectionInfo.VNCProxyUsername;
-            dataRow["VNCProxyPassword"] = connectionInfo.VNCProxyPassword;
+            dataRow["VNCProxyPassword"] = _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey);
             dataRow["VNCColors"] = connectionInfo.VNCColors;
             dataRow["VNCSmartSizeMode"] = connectionInfo.VNCSmartSizeMode;
             dataRow["VNCViewOnly"] = connectionInfo.VNCViewOnly;
@@ -260,7 +267,7 @@ namespace mRemoteNG.Config.Serializers
             dataRow["RDGatewayHostname"] = connectionInfo.RDGatewayHostname;
             dataRow["RDGatewayUseConnectionCredentials"] = connectionInfo.RDGatewayUseConnectionCredentials;
             dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
-            dataRow["RDGatewayPassword"] = connectionInfo.RDGatewayPassword;
+            dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             if (_saveFilter.SaveInheritance)
             {

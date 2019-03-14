@@ -19,13 +19,29 @@ namespace mRemoteNG.App
 
         private static void CheckFipsPolicy(MessageCollector messageCollector)
         {
+            if (Settings.Default.OverrideFIPSCheck)
+            {
+                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check...", true);
+                return;
+            }
+
             messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS Policy...", true);
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
-            var errorText = string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName,
-                GeneralAppInfo.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            var errorText = string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
             messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
-            MessageBox.Show(FrmMain.Default, errorText);
-            Environment.Exit(1);
+
+            var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected, errorText, "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
+            if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)
+            {
+                messageCollector.AddMessage(MessageClass.ErrorMsg, "User requests that FIPS check be overridden", true);
+                Settings.Default.OverrideFIPSCheck = true;
+                Settings.Default.Save();
+                return;
+            }
+
+            if (ShouldIStayOrShouldIGo == DialogResult.Cancel)
+                Environment.Exit(1);
         }
 
         private static bool FipsPolicyEnabledForServer2003()

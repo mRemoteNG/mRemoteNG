@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -12,11 +8,28 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Security;
+using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Tools;
 
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.MsSql
 {
-	public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
+    public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
     {
+        private readonly ICryptographyProvider _cryptographyProvider;
+        private readonly SecureString _decryptionKey;
+
+        public DataTableDeserializer(ICryptographyProvider cryptographyProvider, SecureString decryptionKey)
+        {
+            _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
+            _decryptionKey = decryptionKey.ThrowIfNull(nameof(decryptionKey));
+        }
+
         public ConnectionTreeModel Deserialize(DataTable table)
         {
             var connectionList = CreateNodesFromTable(table);
@@ -34,10 +47,10 @@ namespace mRemoteNG.Config.Serializers
                 switch ((string)row["Type"])
                 {
                     case "Connection":
-                    nodeList.Add(DeserializeConnectionInfo(row));
+                        nodeList.Add(DeserializeConnectionInfo(row));
                         break;
                     case "Container":
-                    nodeList.Add(DeserializeContainerInfo(row));
+                        nodeList.Add(DeserializeContainerInfo(row));
                         break;
                 }
             }
@@ -68,16 +81,12 @@ namespace mRemoteNG.Config.Serializers
             // The Parent object is linked properly later in CreateNodeHierarchy()
             //connectionInfo.Parent.ConstantID = (string)dataRow["ParentID"];
 
-            var info = connectionInfo as ContainerInfo;
-            if(info != null)
-                info.IsExpanded = (bool)dataRow["Expanded"];
-
             connectionInfo.Description = (string)dataRow["Description"];
             connectionInfo.Icon = (string)dataRow["Icon"];
             connectionInfo.Panel = (string)dataRow["Panel"];
             connectionInfo.Username = (string)dataRow["Username"];
             connectionInfo.Domain = (string)dataRow["DomainName"];
-            connectionInfo.Password = (string)dataRow["Password"];
+            connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
             connectionInfo.Hostname = (string)dataRow["Hostname"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
             connectionInfo.PuttySession = (string)dataRow["PuttySession"];
@@ -105,7 +114,6 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.RedirectSound = (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), (string)dataRow["RedirectSound"]);
             connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), (string)dataRow["SoundQuality"]);
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
-            connectionInfo.PleaseConnect = (bool)dataRow["Connected"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];
             connectionInfo.MacAddress = (string)dataRow["MacAddress"];
@@ -118,7 +126,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.VNCProxyIP = (string)dataRow["VNCProxyIP"];
             connectionInfo.VNCProxyPort = (int)dataRow["VNCProxyPort"];
             connectionInfo.VNCProxyUsername = (string)dataRow["VNCProxyUsername"];
-            connectionInfo.VNCProxyPassword = (string)dataRow["VNCProxyPassword"];
+            connectionInfo.VNCProxyPassword = DecryptValue((string)dataRow["VNCProxyPassword"]);
             connectionInfo.VNCColors = (ProtocolVNC.Colors)Enum.Parse(typeof(ProtocolVNC.Colors), (string)dataRow["VNCColors"]);
             connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), (string)dataRow["VNCSmartSizeMode"]);
             connectionInfo.VNCViewOnly = (bool)dataRow["VNCViewOnly"];
@@ -126,7 +134,7 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.RDGatewayHostname = (string)dataRow["RDGatewayHostname"];
             connectionInfo.RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RdpProtocol.RDGatewayUseConnectionCredentials), (string)dataRow["RDGatewayUseConnectionCredentials"]);
             connectionInfo.RDGatewayUsername = (string)dataRow["RDGatewayUsername"];
-            connectionInfo.RDGatewayPassword = (string)dataRow["RDGatewayPassword"];
+            connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
 
             connectionInfo.Inheritance.CacheBitmaps = (bool)dataRow["InheritCacheBitmaps"];
@@ -185,10 +193,26 @@ namespace mRemoteNG.Config.Serializers
             connectionInfo.Inheritance.RDGatewayDomain = (bool)dataRow["InheritRDGatewayDomain"];
         }
 
+        private string DecryptValue(string cipherText)
+        {
+            try
+            {
+                return _cryptographyProvider.Decrypt(cipherText, _decryptionKey);
+            }
+            catch (EncryptionException)
+            {
+                // value may not be encrypted
+                return cipherText;
+            }
+        }
+
         private ConnectionTreeModel CreateNodeHierarchy(List<ConnectionInfo> connectionList, DataTable dataTable)
         {
             var connectionTreeModel = new ConnectionTreeModel();
-            var rootNode = new RootNodeInfo(RootNodeType.Connection, "0");
+            var rootNode = new RootNodeInfo(RootNodeType.Connection, "0")
+            {
+                PasswordString = _decryptionKey.ConvertToUnsecureString()
+            };
             connectionTreeModel.AddRootNode(rootNode);
 
             foreach (DataRow row in dataTable.Rows)

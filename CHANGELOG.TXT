@@ -1,3 +1,51 @@
+1.76.16 (2019-03-14):
+
+Fixes:
+------
+#1347: Remote Desktop Gateway username field encrypted instead of password
+
+
+1.76.15 (2019-03-09):
+
+Fixes:
+------
+#1303: Exception on first connection with new SQL server database
+#1304: Resolved several issues with importing multiple RDP Manager v2.7 files
+
+Features/Enhancements:
+----------------------
+Importing multiple files now only causes 1 save event, rather than 1 per file imported.
+
+
+1.76.14 (2019-02-08):
+
+Features/Enhancements:
+----------------------
+#222: Allow FIPS to be enabled
+
+
+1.76.13 (2018-12-22):
+
+Changes:
+--------
+#222: Pre-Release Test build for running on systems with FIPS Enabled
+
+
+1.76.12 (2018-11-08):
+
+Features/Enhancements:
+----------------------
+#1180: Allow saving certain connection properties locally when using database
+
+Fixes:
+------
+#1181: Connections sometimes dont immediately load when switching to sql feature
+#1173: Fixed memory leak when loading connections multiple times
+#1168: Autohide Connection and Config tab won't open when ssh connection active
+#1134: Fixed issue where opening a connection opens same connection on other clients when using database feature
+#449: Encrypt passwords saved to database
+
+
 1.76.11 (2018-10-18):
 
 Fixes:
