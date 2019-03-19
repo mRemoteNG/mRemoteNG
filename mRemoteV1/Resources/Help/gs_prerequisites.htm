@@ -1,143 +1,100 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Prerequisites</title>
-    <link rel="stylesheet" href="Main.css" type="text/css">
-</head>
-<body>
-<div class="isa_info">
-    Done from nmat, remove this div after review
-</div>
-
-<h1>Supported Operating Systems:</h1>
-<hr>
-<ul>
-    <li><a href="https://en.wikipedia.org/wiki/Windows_7">Windows&trade; 7</a> (with required updates, <a href="#windows7_server2008_req">See below</a>)</li>
-    <li><a href="https://en.wikipedia.org/wiki/Windows_Server_2008_R2">Windows Server 2008 R2</a> (with required updates, <a href="#windows7_server2008_req">See below</a>)</li>
-    <li>
-        <a href="https://en.wikipedia.org/wiki/Windows_8.1">Windows 8.1</a>
-    </li>
-    <li>
-        <a href="https://en.wikipedia.org/wiki/Windows_Server_2012">Windows Server 2012</a>
-    </li>
-    <li>
-        <a href="https://en.wikipedia.org/wiki/Windows_Server_2012_R2">Windows Server 2012 R2</a>
-    </li>
-    <li>
-        <a href="https://en.wikipedia.org/wiki/Windows_10">Windows 10</a>
-    </li>
-</ul>
-<h1>Prerequisites:</h1>
-<hr>
-<ul>
-    <li>
-        <a href="https://www.microsoft.com/en-us/download/details.aspx?id=17851">Microsoft .NET Framework 4.0</a>
-    </li>
-    <li>
-        Microsoft Terminal Services Client 8.0 or later.
-        <ul>
-            <li>Needed if you use RDP. mstscax.dll and/or msrdp.ocx must be registered.</li>
-            <li>
-                Included with newer Windows versions.
-                <a href="https://support.microsoft.com/en-us/kb/2574819">KB2574819</a> AND either
-                <a href="https://support.microsoft.com/en-us/kb/2592687">KB2592687</a> or
-                <a href="https://support.microsoft.com/en-us/kb/2923545">KB2923545</a>
-                is required for Windows 7/Windows Server 2008 R2
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY</a>
-        <ul>
-            <li>Needed if you use Telnet, SSH, Rlogin or RAW. Included in all packages.</li>
-            <li>An appropriate and integrated version is included with mRemoteNG.</li>
-        </ul>
-    </li>
-    <li>
-        <a href="https://www.citrix.com/downloads/citrix-receiver.html">Citrix ICA Client</a>
-        <ul>
-            <li>Needed if you use ICA. wfica.ocx must be registered.</li>
-        </ul>
-    </li>
-</ul>
-
-<!-- Windows 7/Server 2008 clients - #start -->
-<h1 id="windows7_server2008_req">Windows&trade; 7/Windows Server 2008 R2 clients (requirements)</h1>
-<div class="isa_info">
-    <b>TIP!</b> You can use powershell to fetch if the hotfixes are installed. Try using example:
-    <br><br>
-    <code>Get-HotFix | where {$_.HotFixID -eq "KB2574819" -and $_.HotFixID -eq "KB2592687"}</code>
-</div>
-<p>
-    The following updates <strong>must be</strong> present on any Windows 7 or Server 2008 client that will be
-    running mRemoteNG. (They must have been installed in the order provided below):
-</p>
-<ul>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2574819">
-            KB2574819 - An update is available
-            that adds support for DTLS in Windows 7 SP1 and Windows Server 2008 R2 SP1
-        </a>
-    </li>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2592687">
-            KB2592687 - Remote Desktop Protocol
-            (RDP) 8.0 update for Windows 7 and Windows Server 2008 R2
-        </a>
-    </li>
-</ul>
-<p>The following are suggested (but not required) for Windows 7 / Server 2008 clients:</p>
-<ul>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2857650">
-            KB2857650 - Update that
-            improves the RemoteApp and Desktop Connections features is available for Windows 7
-        </a>
-    </li>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2830477">
-            KB2830477 - Update for
-            RemoteApp and Desktop Connections feature is available for Windows
-        </a>
-    </li>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2913751">
-            KB2913751 - Smart card
-            redirection in remote sessions fails in a Windows 7 SP1-based RDP 8.1 client
-        </a>
-    </li>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2923545">
-            KB2923545 - Update
-            for RDP 8.1 is available for Windows 7 SP1
-        </a>
-    </li>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2965788">
-            KB2965788 - MS14-030: Description
-            of the security update for Remote Desktop Security Release for Windows: June 10, 2014
-        </a>
-    </li>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2985461">
-            KB2985461 - Error 0x800401f0
-            when you update RemoteApp and Desktop Connections feeds in Windows 7 or Windows Server 2008 R2
-        </a>
-    </li>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2984972">
-            KB2984972 - Update for RDC 7.1
-            to support restricted administration logons on Windows 7 and Windows Server 2008 R2
-        </a>
-    </li>
-    <li>
-        <a href="https://support.microsoft.com/en-us/kb/2984976">
-            KB2984976 - RDP 8.0 update
-            for restricted administration on Windows 7 or Windows Server 2008 R2
-        </a>
-    </li>
-</ul>
-<!-- Windows 7/Server 2008 clients - #end -->
-</body>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Prerequisites</title>
+		<link rel="stylesheet" href="Main.css" type="text/css"/>
+	</head>
+	<body>
+		<h1>Prerequisites</h1>
+		<hr/>
+		<ul>
+			<li>
+				<a href="https://www.microsoft.com/en-us/download/details.aspx?id=17851">Microsoft .NET Framework 4.0</a>
+			</li>
+			<li>Microsoft Terminal Services Client 8.0 or later.<ul>
+					<li>Needed if you use RDP. mstscax.dll and/or msrdp.ocx must be registered.</li>
+					<li>Included with newer Windows versions.<a href="https://support.microsoft.com/en-us/kb/2574819">KB2574819</a> AND either<a href="https://support.microsoft.com/en-us/kb/2592687">KB2592687</a> or<a href="https://support.microsoft.com/en-us/kb/2923545">KB2923545</a>is required for Windows 7/Windows Server 2008 R2</li>
+				</ul>
+			</li>
+			<li>
+				<a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY</a>
+				<ul>
+					<li>Needed if you use Telnet, SSH, Rlogin or RAW. Included in all packages.</li>
+					<li>An appropriate and integrated version is included with mRemoteNG.</li>
+				</ul>
+			</li>
+			<li>
+				<a href="https://www.citrix.com/downloads/citrix-receiver.html">Citrix ICA Client</a>
+				<ul>
+					<li>Needed if you use ICA. wfica.ocx must be registered.</li>
+				</ul>
+			</li>
+		</ul>
+		<h1>Supported Operating Systems</h1>
+		<hr/>
+		<ul>
+			<li>
+				<a href="https://en.wikipedia.org/wiki/Windows_7">Windows&trade; 7</a> (with required updates, <a href="#windows7_server2008_req">See below</a>)</li>
+			<li>
+				<a href="https://en.wikipedia.org/wiki/Windows_Server_2008_R2">Windows Server 2008 R2</a> (with required updates, <a href="#windows7_server2008_req">See below</a>)</li>
+			<li>
+				<a href="https://en.wikipedia.org/wiki/Windows_8.1">Windows 8.1</a>
+			</li>
+			<li>
+				<a href="https://en.wikipedia.org/wiki/Windows_Server_2012">Windows Server 2012</a>
+			</li>
+			<li>
+				<a href="https://en.wikipedia.org/wiki/Windows_Server_2012_R2">Windows Server 2012 R2</a>
+			</li>
+			<li>
+				<a href="https://en.wikipedia.org/wiki/Windows_10">Windows 10</a>
+			</li>
+		</ul>
+		<!-- Windows 7/Server 2008 clients - #start -->
+		<h1 id="windows7_server2008_req">Windows&trade; 7/Windows Server 2008 R2 clients (requirements)</h1>
+		<hr/>
+		<div class="isa_info">
+			<b>TIP!</b> You can use powershell to fetch if the hotfixes are installed. Try using example:<br/>
+			<br/>
+			<code>Get-HotFix | where {$_.HotFixID -eq "KB2574819" -and $_.HotFixID -eq "KB2592687"}</code>
+		</div>
+		<p>The following updates <strong>must be</strong> present on any Windows 7 or Server 2008 client that will be running mRemoteNG. (They must have been installed in the order provided below):</p>
+		<ul>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2574819">KB2574819 - An update is available that adds support for DTLS in Windows 7 SP1 and Windows Server 2008 R2 SP1</a>
+			</li>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2592687">KB2592687 - Remote Desktop Protocol (RDP) 8.0 update for Windows 7 and Windows Server 2008 R2</a>
+			</li>
+		</ul>
+		<p>The following are suggested (but not required) for Windows 7 / Server 2008 clients:</p>
+		<ul>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2857650">KB2857650 - Update that improves the RemoteApp and Desktop Connections features is available for Windows 7</a>
+			</li>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2830477">KB2830477 - Update for RemoteApp and Desktop Connections feature is available for Windows</a>
+			</li>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2913751">KB2913751 - Smart card redirection in remote sessions fails in a Windows 7 SP1-based RDP 8.1 client</a>
+			</li>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2923545">KB2923545 - Update for RDP 8.1 is available for Windows 7 SP1</a>
+			</li>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2965788">KB2965788 - MS14-030: Description of the security update for Remote Desktop Security Release for Windows: June 10, 2014</a>
+			</li>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2985461">KB2985461 - Error 0x800401f0 when you update RemoteApp and Desktop Connections feeds in Windows 7 or Windows Server 2008 R2</a>
+			</li>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2984972">KB2984972 - Update for RDC 7.1 to support restricted administration logons on Windows 7 and Windows Server 2008 R2</a>
+			</li>
+			<li>
+				<a href="https://support.microsoft.com/en-us/kb/2984976">KB2984976 - RDP 8.0 update for restricted administration on Windows 7 or Windows Server 2008 R2</a>
+			</li>
+		</ul>
+		<!-- Windows 7/Server 2008 clients - #end -->
+	</body>
 </html>

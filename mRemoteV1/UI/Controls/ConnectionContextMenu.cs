@@ -7,6 +7,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
+using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -503,7 +504,6 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeDisconnect.Enabled = true;
 
             _cMenTreeToolsTransferFile.Enabled = false;
-            _cMenTreeToolsExternalApps.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForPuttyNode(ConnectionInfo connectionInfo)
@@ -768,7 +768,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnCopyHostnameClicked(object sender, EventArgs e)
         {
-            _connectionTree.CopyHostnameSelectedNode();
+            _connectionTree.CopyHostnameSelectedNode(new WindowsClipboard());
         }
 
         private void OnImportFileClicked(object sender, EventArgs e)
@@ -837,7 +837,8 @@ namespace mRemoteNG.UI.Controls
             try
             {
                 if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection |
-                    _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession)
+                    _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession |
+                    _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Container)
                     externalTool.Start(_connectionTree.SelectedNode);
             }
             catch (Exception ex)

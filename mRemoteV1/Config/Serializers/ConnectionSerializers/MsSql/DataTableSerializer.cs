@@ -276,9 +276,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RDGatewayUsageMethod"] = connectionInfo.RDGatewayUsageMethod;
             dataRow["RDGatewayHostname"] = connectionInfo.RDGatewayHostname;
             dataRow["RDGatewayUseConnectionCredentials"] = connectionInfo.RDGatewayUseConnectionCredentials;
-            dataRow["RDGatewayUsername"] =
-                _cryptographyProvider.Encrypt(connectionInfo.RDGatewayUsername, _encryptionKey);
-            dataRow["RDGatewayPassword"] = connectionInfo.RDGatewayPassword;
+            dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
+            dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             if (_saveFilter.SaveInheritance)
             {
