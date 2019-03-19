@@ -277,6 +277,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show/Hide Menu Strip.
+        /// </summary>
+        internal static string ShowHideMenu {
+            get {
+                return ResourceManager.GetString("ShowHideMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source.
         /// </summary>
         internal static string Source {

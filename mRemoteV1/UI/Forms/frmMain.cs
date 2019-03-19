@@ -1,4 +1,4 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -535,9 +535,9 @@ namespace mRemoteNG.UI.Forms
 
                         break;
                     case NativeMethods.WM_SYSCOMMAND:
-                        var screen = _screenSystemMenu.GetScreenById(m.WParam.ToInt32());
-                        if (screen != null)
-                            Screens.SendFormToScreen(screen);
+                        //var screen = _screenSystemMenu.GetScreenById(m.WParam.ToInt32());
+                        //if (screen != null)
+                        //    Screens.SendFormToScreen(screen);
                         break;
                     case NativeMethods.WM_DRAWCLIPBOARD:
                         NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
@@ -707,6 +707,8 @@ namespace mRemoteNG.UI.Forms
 
             pnlDock.Visible = true;
         }
+
+        public void ShowHideMenu() => tsContainer.TopToolStripPanelVisible = !tsContainer.TopToolStripPanelVisible;
 
         #endregion
 

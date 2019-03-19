@@ -49,9 +49,12 @@ namespace mRemoteNG.UI.Menu
             }
 
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0,
-                                       SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen,
-                                       Language.strSendTo);
+                SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen,
+                Language.strSendTo);
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1,
+                SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, new IntPtr(0), 
+                Language.ShowHideMenu);
+            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 2,
                                        SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero,
                                        null);
         }
