@@ -24,6 +24,14 @@ Fixes:
 #1064: "Esc" button does does not close some dialogs
 #1044: Dragging (grabbing) the program window requires 2 clicks
 
+
+1.76.16 (2019-03-14):
+
+Fixes:
+------
+#1347: Remote Desktop Gateway username field encrypted instead of password
+
+
 1.76.15 (2019-03-09):
 
 Fixes:
