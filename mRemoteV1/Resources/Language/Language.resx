@@ -2775,7 +2775,4 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Favorites" xml:space="preserve">
     <value>Favorites</value>
   </data>
-  <data name="strShowHideMainMenu" xml:space="preserve">
-    <value>Show/Hide Main Menu</value>
-  </data>
 </root>
