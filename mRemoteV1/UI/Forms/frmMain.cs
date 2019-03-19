@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Forms
         private bool _usingSqlServer;
         private string _connectionsFileName;
         private bool _showFullPathInTitle;
-        private readonly ScreenSelectionSystemMenu _screenSystemMenu;
+        private readonly AdvancedWindowMenu _advancedWindowMenu;
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Forms
             vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
             ApplyTheme();
 
-            _screenSystemMenu = new ScreenSelectionSystemMenu(this);
+            _advancedWindowMenu = new AdvancedWindowMenu(this);
         }
 
         #region Properties
@@ -182,8 +182,8 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
 
-            _screenSystemMenu.BuildScreenList();
-            SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
+            _advancedWindowMenu.BuildScreenList();
+            SystemEvents.DisplaySettingsChanged += _advancedWindowMenu.OnDisplayChanged;
             ApplyLanguage();
 
             Opacity = 1;
@@ -535,7 +535,7 @@ namespace mRemoteNG.UI.Forms
 
                         break;
                     case NativeMethods.WM_SYSCOMMAND:
-                        //var screen = _screenSystemMenu.GetScreenById(m.WParam.ToInt32());
+                        //var screen = _advancedWindowMenu.GetScreenById(m.WParam.ToInt32());
                         //if (screen != null)
                         //    Screens.SendFormToScreen(screen);
                         break;

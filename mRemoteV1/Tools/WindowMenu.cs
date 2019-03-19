@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using mRemoteNG.App;
 using Microsoft.Win32.SafeHandles;
@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace mRemoteNG.Tools
 {
-    public sealed class SystemMenu : SafeHandleZeroOrMinusOneIsInvalid, IDisposable
+    public sealed class WindowMenu : SafeHandleZeroOrMinusOneIsInvalid, IDisposable
     {
         [Flags]
         public enum Flags
@@ -24,7 +24,7 @@ namespace mRemoteNG.Tools
         internal IntPtr SystemMenuHandle;
         private readonly IntPtr FormHandle;
 
-        public SystemMenu(IntPtr Handle) : base(true)
+        public WindowMenu(IntPtr Handle) : base(true)
         {
             FormHandle = Handle;
             SystemMenuHandle = NativeMethods.GetSystemMenu(FormHandle, false);

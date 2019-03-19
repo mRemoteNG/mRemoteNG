@@ -14,8 +14,8 @@
                     if(components != null)
                         components.Dispose();
 
-                    if(_screenSystemMenu != null)
-                        _screenSystemMenu.Dispose();
+                    if(_advancedWindowMenu != null)
+                        _advancedWindowMenu.Dispose();
 
                 }
 			}

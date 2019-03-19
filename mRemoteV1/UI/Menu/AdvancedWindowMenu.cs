@@ -5,14 +5,14 @@ using mRemoteNG.Tools;
 namespace mRemoteNG.UI.Menu
 {
     // This class creates new menu items to menu that appears when you right click the top of the app (where the window title is)
-    public class ScreenSelectionSystemMenu : IDisposable
+    public class AdvancedWindowMenu : IDisposable
     {
-        private readonly SystemMenu _systemMenu;
+        private readonly WindowMenu _windowMenu;
         private readonly int[] _sysMenSubItems = new int[51];
 
-        public ScreenSelectionSystemMenu(IWin32Window boundControl)
+        public AdvancedWindowMenu(IWin32Window boundControl)
         {
-            _systemMenu = new SystemMenu(boundControl.Handle);
+            _windowMenu = new WindowMenu(boundControl.Handle);
         }
 
         public Screen GetScreenById(int id)
@@ -34,28 +34,28 @@ namespace mRemoteNG.UI.Menu
 
         private void ResetScreenList()
         {
-            _systemMenu.Reset();
+            _windowMenu.Reset();
         }
 
         public void BuildScreenList()
         {
-            var popMen = _systemMenu.CreatePopupMenuItem();
+            var popMen = _windowMenu.CreatePopupMenuItem();
 
             for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
             {
                 _sysMenSubItems[i] = 200 + i;
-                _systemMenu.AppendMenuItem(popMen, SystemMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),
+                _windowMenu.AppendMenuItem(popMen, WindowMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),
                                            Language.strScreen + " " + Convert.ToString(i + 1));
             }
 
-            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0,
-                SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen,
+            _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 0,
+                WindowMenu.Flags.MF_POPUP | WindowMenu.Flags.MF_BYPOSITION, popMen,
                 Language.strSendTo);
-            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1,
-                SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, new IntPtr(0), 
+            _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 1,
+                WindowMenu.Flags.MF_POPUP | WindowMenu.Flags.MF_BYPOSITION, new IntPtr(0), 
                 Language.ShowHideMenu);
-            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 2,
-                                       SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero,
+            _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 2,
+                                       WindowMenu.Flags.MF_BYPOSITION | WindowMenu.Flags.MF_SEPARATOR, IntPtr.Zero,
                                        null);
         }
 
@@ -63,8 +63,8 @@ namespace mRemoteNG.UI.Menu
         {
             if (!disposing) return;
 
-            if(_systemMenu != null)
-                _systemMenu.Dispose();
+            if(_windowMenu != null)
+                _windowMenu.Dispose();
         }
 
         public void Dispose()
