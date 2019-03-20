@@ -29,8 +29,41 @@
 			<li>%USERFIELD%</li>
 		</ul>
 		<p>Variables always refer to the currently selected connection. Variable names are case-insensitive. Variables can be used in both the Filename and Arguments fields.</p>
-		<p>mRemoteNG will also expand environment variables such as %PATH% and %USERPROFILE%. If you need to use an environment variable with the same name as an mRemoteNG variable, use \% instead of %. The most common use of this is for the USERNAME environment variable. %USERNAME% will be expanded to the username set in the currently selected connection. \%USERNAME\% will be expanded to the value set in the USERNAME environment variable.</p>
+		<p>mRemoteNG will also expand environment variables such as %PATH% and %USERPROFILE%. If you need to use an environment variable with the same name as an mRemoteNG variable, use \% instead of %. The most common use of this is for the USERNAME environment variable. %USERNAME% will be expanded to the username of the credential record assigned to the currently selected connection. \%USERNAME\% will be expanded to the value set in the USERNAME environment variable.</p>
 		<p>If you need to send a variable name to a program without mRemoteNG expanding it, use ^% instead of %. mRemoteNG will remove the caret (^) and leave the rest unchanged. For example, ^%USERNAME^% will be sent to the program as %USERNAME% and will not be expanded.</p>
+		
+		<h1>Referencing Credential Variables</h1>
+		<hr/>
+		<div class="isa_info">
+			<b>Note:</b> For a credential variable (username, domain, password) to receive any value, the credential repository which holds the credential must be unlocked.
+		</div>
+		<p>When an external tool is run, the %USERNAME%, %DOMAIN%, and %PASSWORD% variables take their values from the credential record assigned to the currently selected connection. It is also possible to reference a specific credential record in an external tool. This way, the same credential can be used for a tool regardless of which connection is currently selected in the connection tree.</p>
+		<p>To reference a specific credential record, append the credential record ID to the variable like shown below:</p>
+		<ul>
+			<li>%USERNAME:ID%</li>
+			<li>%DOMAIN:ID%</li>
+			<li>%PASSWORD:ID%</li>
+		</ul>
+		<p>Credential record IDs can be found within the credential manager. Once a value has been retrieved for a variable, normal special character escaping applies (see the section on Special Character Escaping for details).</p>
+
+		<ul>
+			<li>At least 7 characters of the ID must be provided, though you can provide as many as you would like up to the maximum 32 characters. Providing more characters reduces the chances of an ID collision.
+				<ul>
+					<li><code>%USERNAME:D1C198F%</code> is equivalent to <code>%USERNAME:D1C198F457D74F48%</code>, which is equivalent to <code>%USERNAME:D1C198F457D74F48808FE1724BECB291%</code></li>
+				</ul>
+			</li>
+			<li>Including dashes (-) is fine as they will be stipped out when performing the lookup.
+				<ul>
+					<li><code>%USERNAME:D1C198F4-57D7-4F48-808F-E1724BECB291%</code> is the same as <code>%USERNAME:D1C198F457D74F48808FE1724BECB291%</code></li>
+				</ul>
+			</li>
+			<li>The ID is case insensitive
+				<ul>
+					<li><code>%USERNAME:D1C198F%</code> is the same as <code>%USERNAME:d1c198f%</code></li>
+				</ul>
+			</li>
+		</ul>
+
 		<h1>Special Character Escaping</h1>
 		<hr/>
 		<p>Expanded variables will be escaped using the rules below. There are two levels of escaping that are done. The first is escaping for standard argument splitting (C/C++ argv, CommandLineToArgvW, etc). The second is escaping shell metacharacters for ShellExecute.</p>
