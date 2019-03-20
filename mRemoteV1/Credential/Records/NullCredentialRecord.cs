@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Security;
 
 namespace mRemoteNG.Credential
@@ -25,6 +26,11 @@ namespace mRemoteNG.Credential
         public override string ToString()
         {
             return Title;
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
