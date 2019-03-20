@@ -59,12 +59,12 @@ namespace mRemoteNG.Config.Connections
                 return;
             }
 
-            using (var sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings())
+            using (var dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings())
             {
-                sqlConnector.Connect();
-                var databaseVersionVerifier = new SqlDatabaseVersionVerifier(sqlConnector);
+                dbConnector.Connect();
+                var databaseVersionVerifier = new SqlDatabaseVersionVerifier(dbConnector);
                 var metaDataRetriever = new SqlDatabaseMetaDataRetriever();
-                var metaData = metaDataRetriever.GetDatabaseMetaData(sqlConnector);
+                var metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
 
                 if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
@@ -73,9 +73,10 @@ namespace mRemoteNG.Config.Connections
                     return;
                 }
 
-                metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, sqlConnector);
-                UpdateConnectionsTable(rootTreeNode, sqlConnector);
-                UpdateUpdatesTable(sqlConnector);
+                metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
+                UpdateConnectionsTable(rootTreeNode, dbConnector);
+                UpdateUpdatesTable(dbConnector);
+
             }
 
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved connections to database");
@@ -111,7 +112,7 @@ namespace mRemoteNG.Config.Connections
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved local connection properties");
         }
 
-        private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
+        private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             string strProtected;
@@ -132,19 +133,17 @@ namespace mRemoteNG.Config.Connections
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            var sqlQuery = new SqlCommand("DELETE FROM tblRoot", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
+            var dbQuery = databaseConnector.DbCommand("DELETE FROM tblRoot");
+            dbQuery.ExecuteNonQuery();
 
             if (rootTreeNode != null)
             {
-                sqlQuery =
-                    new SqlCommand(
-                                   "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
-                                   MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
-                                   ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) +
-                                   ")",
-                                   sqlDatabaseConnector.SqlConnection);
-                sqlQuery.ExecuteNonQuery();
+                dbQuery =
+                    databaseConnector.DbCommand(
+                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
+                        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
+                        ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")");
+                dbQuery.ExecuteNonQuery();
             }
             else
             {
@@ -153,28 +152,26 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
-        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
+        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
             var cryptoProvider = new LegacyRijndaelCryptographyProvider();
             var serializer = new DataTableSerializer(_saveFilter, cryptoProvider,
                                                      rootTreeNode.PasswordString.ConvertToSecureString());
             var dataTable = serializer.Serialize(rootTreeNode);
-            var dataProvider = new SqlDataProvider(sqlDatabaseConnector);
+            var dataProvider = new SqlDataProvider(databaseConnector);
 
-            var sqlQuery = new SqlCommand("DELETE FROM tblCons", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
+            var dbQuery = databaseConnector.DbCommand("DELETE FROM tblCons");
+            dbQuery.ExecuteNonQuery();
+
             dataProvider.Save(dataTable);
         }
 
-        private void UpdateUpdatesTable(SqlDatabaseConnector sqlDatabaseConnector)
+        private void UpdateUpdatesTable(IDatabaseConnector databaseConnector)
         {
-            var sqlQuery = new SqlCommand("DELETE FROM tblUpdate", sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
-            sqlQuery = new SqlCommand(
-                                      "INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) +
-                                      "\')",
-                                      sqlDatabaseConnector.SqlConnection);
-            sqlQuery.ExecuteNonQuery();
+            var dbQuery = databaseConnector.DbCommand("DELETE FROM tblUpdate");
+            dbQuery.ExecuteNonQuery();
+            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')");
+            dbQuery.ExecuteNonQuery();
         }
 
         private bool SqlUserIsReadOnly()

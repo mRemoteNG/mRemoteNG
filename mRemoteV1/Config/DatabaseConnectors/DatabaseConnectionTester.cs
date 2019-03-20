@@ -7,18 +7,19 @@ namespace mRemoteNG.Config.DatabaseConnectors
     /// <summary>
     /// A helper class for testing database connectivity
     /// </summary>
-    public class SqlDatabaseConnectionTester
+    public class DatabaseConnectionTester
     {
-        public async Task<ConnectionTestResult> TestConnectivity(string server,
+        public async Task<ConnectionTestResult> TestConnectivity(string type,
+                                                                 string server,
                                                                  string database,
                                                                  string username,
                                                                  string password)
         {
-            using (var sqlConnector = new SqlDatabaseConnector(server, database, username, password))
+            using (var dbConnector = DatabaseConnectorFactory.DatabaseConnector(type, server, database, username, password))
             {
                 try
                 {
-                    await sqlConnector.ConnectAsync();
+                    await dbConnector.ConnectAsync();
                     return ConnectionTestResult.ConnectionSucceded;
                 }
                 catch (SqlException sqlException)
