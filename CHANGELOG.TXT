@@ -25,6 +25,13 @@ Fixes:
 #1044: Dragging (grabbing) the program window requires 2 clicks
 
 
+1.76.17 (2019-03-20):
+
+Fixes:
+------
+#1362: Updated PuTTYNG to 0.71
+
+
 1.76.16 (2019-03-14):
 
 Fixes:
