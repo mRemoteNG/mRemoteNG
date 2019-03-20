@@ -29,7 +29,7 @@ namespace mRemoteNG.UI.Menu
         public void OnDisplayChanged(object sender, EventArgs e)
         {
             ResetScreenList();
-            BuildScreenList();
+            BuildAdditionalMenuItems();
         }
 
         private void ResetScreenList()
@@ -37,23 +37,24 @@ namespace mRemoteNG.UI.Menu
             _windowMenu.Reset();
         }
 
-        public void BuildScreenList()
+        public void BuildAdditionalMenuItems()
         {
+            // option to send main form to another screen
             var popMen = _windowMenu.CreatePopupMenuItem();
-
             for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
             {
                 _sysMenSubItems[i] = 200 + i;
                 _windowMenu.AppendMenuItem(popMen, WindowMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),
                                            Language.strScreen + " " + Convert.ToString(i + 1));
             }
-
             _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 0,
                 WindowMenu.Flags.MF_POPUP | WindowMenu.Flags.MF_BYPOSITION, popMen,
                 Language.strSendTo);
+            // option to show/hide menu strips
             _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 1,
-                WindowMenu.Flags.MF_POPUP | WindowMenu.Flags.MF_BYPOSITION, new IntPtr(0), 
+                WindowMenu.Flags.MF_BYPOSITION, new IntPtr(0), 
                 Language.ShowHideMenu);
+            // separator
             _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 2,
                                        WindowMenu.Flags.MF_BYPOSITION | WindowMenu.Flags.MF_SEPARATOR, IntPtr.Zero,
                                        null);
@@ -63,8 +64,7 @@ namespace mRemoteNG.UI.Menu
         {
             if (!disposing) return;
 
-            if(_windowMenu != null)
-                _windowMenu.Dispose();
+            _windowMenu?.Dispose();
         }
 
         public void Dispose()

@@ -182,7 +182,7 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
 
-            _advancedWindowMenu.BuildScreenList();
+            _advancedWindowMenu.BuildAdditionalMenuItems();
             SystemEvents.DisplaySettingsChanged += _advancedWindowMenu.OnDisplayChanged;
             ApplyLanguage();
 
@@ -535,9 +535,12 @@ namespace mRemoteNG.UI.Forms
 
                         break;
                     case NativeMethods.WM_SYSCOMMAND:
-                        //var screen = _advancedWindowMenu.GetScreenById(m.WParam.ToInt32());
-                        //if (screen != null)
-                        //    Screens.SendFormToScreen(screen);
+                        if (m.WParam == new IntPtr(0))
+                            ShowHideMenu();
+                        var screen = _advancedWindowMenu.GetScreenById(m.WParam.ToInt32());
+                        if (screen != null)
+                            Screens.SendFormToScreen(screen);
+                        Console.WriteLine(_advancedWindowMenu.GetScreenById(m.WParam.ToInt32()).ToString());
                         break;
                     case NativeMethods.WM_DRAWCLIPBOARD:
                         NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);

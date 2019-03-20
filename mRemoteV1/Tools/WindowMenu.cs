@@ -20,7 +20,7 @@ namespace mRemoteNG.Tools
             WM_SYSCOMMAND = NativeMethods.WM_SYSCOMMAND
         }
 
-        private bool disposed;
+        private bool _disposed;
         internal IntPtr SystemMenuHandle;
         private readonly IntPtr FormHandle;
 
@@ -85,12 +85,12 @@ namespace mRemoteNG.Tools
 
         protected override void Dispose(bool disposing)
         {
-            if (disposed) return;
+            if (_disposed) return;
             if (!disposing) return;
 
             ReleaseHandle();
 
-            disposed = true;
+            _disposed = true;
         }
     }
 }
