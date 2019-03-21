@@ -249,6 +249,7 @@
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />
+    <Compile Include="Connection\Protocol\ISupportsViewOnly.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpClientWrap.cs">
       <SubType>Component</SubType>
     </Compile>

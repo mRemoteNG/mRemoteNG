@@ -1,15 +1,15 @@
+﻿using System;
+using System.ComponentModel;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
-using System;
-using System.ComponentModel;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.Connection.Protocol.VNC
 {
-    public class ProtocolVNC : ProtocolBase
+    public class ProtocolVNC : ProtocolBase, ISupportsViewOnly
     {
         #region Properties
 
