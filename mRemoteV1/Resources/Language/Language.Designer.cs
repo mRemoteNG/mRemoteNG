@@ -115,6 +115,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect in View Only mode.
+        /// </summary>
+        internal static string ConnectInViewOnlyMode {
+            get {
+                return ResourceManager.GetString("ConnectInViewOnlyMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The connection file could not be found..
         /// </summary>
         internal static string ConnectionFileNotFound {
@@ -3993,7 +4002,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Only (VNC).
+        ///   Looks up a localized string similar to View Only.
         /// </summary>
         internal static string strMenuViewOnly {
             get {

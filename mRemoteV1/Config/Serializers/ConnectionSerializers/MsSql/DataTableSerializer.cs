@@ -6,7 +6,6 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using System;
 using System.Data;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Security;
 
@@ -72,7 +71,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("ConstantID", typeof(string));
             dataTable.Columns.Add("PositionID", typeof(int));
             dataTable.Columns.Add("ParentID", typeof(string));
-            dataTable.Columns.Add("LastChange", typeof(SqlDateTime));
+            dataTable.Columns.Add("LastChange", MiscTools.DBTimeStampType());
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("Type", typeof(string));
             dataTable.Columns.Add("Expanded", typeof(bool));
@@ -215,7 +214,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["ConstantID"] = connectionInfo.ConstantID;
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
-            dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
+            dataRow["LastChange"] = MiscTools.DBTimeStampNow();
             dataRow["Expanded"] =
                 false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
@@ -276,9 +275,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RDGatewayUsageMethod"] = connectionInfo.RDGatewayUsageMethod;
             dataRow["RDGatewayHostname"] = connectionInfo.RDGatewayHostname;
             dataRow["RDGatewayUseConnectionCredentials"] = connectionInfo.RDGatewayUseConnectionCredentials;
-            dataRow["RDGatewayUsername"] =
-                _cryptographyProvider.Encrypt(connectionInfo.RDGatewayUsername, _encryptionKey);
-            dataRow["RDGatewayPassword"] = connectionInfo.RDGatewayPassword;
+            dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
+            dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             if (_saveFilter.SaveInheritance)
             {

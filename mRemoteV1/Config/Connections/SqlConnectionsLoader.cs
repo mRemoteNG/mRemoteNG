@@ -17,7 +17,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Connections
 {
-	public class SqlConnectionsLoader : IConnectionsLoader
+    public class SqlConnectionsLoader : IConnectionsLoader
     {
         private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>>
             _localConnectionPropertiesDeserializer;
@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Connections
 
         public ConnectionTreeModel Load()
         {
-            var connector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
+            var connector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
             var dataProvider = new SqlDataProvider(connector);
             var metaDataRetriever = new SqlDatabaseMetaDataRetriever();
             var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
@@ -93,7 +93,7 @@ namespace mRemoteNG.Config.Connections
                 });
         }
 
-        private SqlConnectionListMetaData HandleFirstRun(SqlDatabaseMetaDataRetriever metaDataRetriever, SqlDatabaseConnector connector)
+        private SqlConnectionListMetaData HandleFirstRun(SqlDatabaseMetaDataRetriever metaDataRetriever, IDatabaseConnector connector)
         {
 	        metaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector);
 	        return metaDataRetriever.GetDatabaseMetaData(connector);

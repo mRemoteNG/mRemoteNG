@@ -1,4 +1,9 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
@@ -10,11 +15,6 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
 
 
 namespace mRemoteNG.Connection
@@ -163,7 +163,8 @@ namespace mRemoteNG.Connection
             DoNotJump = 4,
             OverridePanel = 8,
             DontUseConsoleSession = 16,
-            NoCredentials = 32
+            NoCredentials = 32,
+            ViewOnly = 64
         }
 
         #endregion

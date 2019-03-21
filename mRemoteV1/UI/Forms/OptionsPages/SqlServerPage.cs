@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
@@ -9,14 +9,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class SqlServerPage
     {
-        private readonly SqlDatabaseConnectionTester _databaseConnectionTester;
+        private readonly DatabaseConnectionTester _databaseConnectionTester;
 
         public SqlServerPage()
         {
             InitializeComponent();
             ApplyTheme();
             PageIcon = Resources.Database_Icon;
-            _databaseConnectionTester = new SqlDatabaseConnectionTester();
+            _databaseConnectionTester = new DatabaseConnectionTester();
         }
 
         public override string PageName
@@ -44,6 +44,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             chkUseSQLServer.Checked = Settings.Default.UseSQLServer;
+            txtSQLType.Text = Settings.Default.SQLServerType;
             txtSQLServer.Text = Settings.Default.SQLHost;
             txtSQLDatabaseName.Text = Settings.Default.SQLDatabaseName;
             txtSQLUsername.Text = Settings.Default.SQLUser;
@@ -59,6 +60,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var sqlServerWasPreviouslyEnabled = Settings.Default.UseSQLServer;
 
             Settings.Default.UseSQLServer = chkUseSQLServer.Checked;
+            Settings.Default.SQLServerType = txtSQLType.Text;
             Settings.Default.SQLHost = txtSQLServer.Text;
             Settings.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
             Settings.Default.SQLUser = txtSQLUsername.Text;
@@ -94,11 +96,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void toggleSQLPageControls(bool useSQLServer)
         {
+            lblSQLType.Enabled = useSQLServer;
             lblSQLServer.Enabled = useSQLServer;
             lblSQLDatabaseName.Enabled = useSQLServer;
             lblSQLUsername.Enabled = useSQLServer;
             lblSQLPassword.Enabled = useSQLServer;
             lblSQLReadOnly.Enabled = useSQLServer;
+            txtSQLType.Enabled = useSQLServer;
             txtSQLServer.Enabled = useSQLServer;
             txtSQLDatabaseName.Enabled = useSQLServer;
             txtSQLUsername.Enabled = useSQLServer;
@@ -109,6 +113,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private async void btnTestConnection_Click(object sender, EventArgs e)
         {
+            var type = txtSQLType.Text;
             var server = txtSQLServer.Text;
             var database = txtSQLDatabaseName.Text;
             var username = txtSQLUsername.Text;
@@ -119,7 +124,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnTestConnection.Enabled = false;
 
             var connectionTestResult =
-                await _databaseConnectionTester.TestConnectivity(server, database, username, password);
+                await _databaseConnectionTester.TestConnectivity(type, server, database, username, password);
 
             btnTestConnection.Enabled = true;
 

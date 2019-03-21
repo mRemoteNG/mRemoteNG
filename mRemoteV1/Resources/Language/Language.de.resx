@@ -1082,7 +1082,7 @@ Starte mit neuer Datei.</value>
     <value>Text anzeigen</value>
   </data>
   <data name="strMenuSmartSize" xml:space="preserve">
-    <value>SmartSize (RDP/VNC)</value>
+    <value>Smart-Size-Modus (RDP/VNC)</value>
   </data>
   <data name="strMenuSSHFileTransfer" xml:space="preserve">
     <value>SSH-Dateiübertragung</value>
@@ -1103,7 +1103,7 @@ Starte mit neuer Datei.</value>
     <value>&amp;Ansicht</value>
   </data>
   <data name="strMenuViewOnly" xml:space="preserve">
-    <value>Nur Ansicht (VNC)</value>
+    <value>View-Only-Modus</value>
   </data>
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Webseite</value>
@@ -1157,7 +1157,7 @@ Starte mit neuer Datei.</value>
     <value>Normal</value>
   </data>
   <data name="strNoSmartSize" xml:space="preserve">
-    <value>Keine automatische Größenanpassung (SmartSize)</value>
+    <value>Keine automatische Größenanpassung (Smart-Size)</value>
   </data>
   <data name="strNoUpdateAvailable" xml:space="preserve">
     <value>Keine Updates verfügbar</value>
@@ -1467,7 +1467,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Auflösung</value>
   </data>
   <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
-    <value>SmartSize-Modus</value>
+    <value>Smart-Size-Modus</value>
   </data>
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Verwende Konsole</value>
@@ -2662,5 +2662,8 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="ClearSearchString" xml:space="preserve">
     <value>Suchbegriff löschen</value>
+  </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Im View-Only-Modus verbinden</value>
   </data>
 </root>
