@@ -2775,6 +2775,9 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Favorites" xml:space="preserve">
     <value>Favorites</value>
   </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Clear search string</value>
+  </data>
   <data name="ConnectInViewOnlyMode" xml:space="preserve">
     <value>Connect in View Only mode</value>
   </data>
