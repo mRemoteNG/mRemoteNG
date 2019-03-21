@@ -1,15 +1,29 @@
-1.77.0 (2018-xx-xx):
+1.77.0 (2019-xx-xx):
 
 Features/Enhancements:
 ----------------------
+#1336: Added ability to run External tools on folders
+#1320: Added ability to favorite items in the connection tree
+#1318: Added support for saving connections in MySQL
+#1246: Improved connections loading to tolerate missing attributes in the confCons xml file
 #1223: Open External Links in Default Web Browser
+#1220: Added an Apple/Mac connection icon
+#1218: A splashscreen has been added when mRemoteNG starts
+#1216: Connection tree search bar can be placed at the top or bottom of connection tree
+#1201: The help files packaged with mRemoteNG have been rewritten
+#1186: Certain dialogs are not correctly using localized text for buttons
+#1170: The Options window no longer displays in the Windows taskbar when open
+#1159: Added a dialog that will display when unhandled exceptions occur
 #1141: 'Copy Hostname' option added to connection tree context menu
 #1129: Spanish translation improvements
 #1072: Russian translation improvements
 #1016: Chinese (simplified) translation improvements
 #951: Added property to Enable/Disable Clipboard Sharing for RDP connections
+#929: Added the hostname to certain RDP error/disconnect messages where it was missing
 #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
 #765: Port Scan Issues (single port scan option now available)
+#416: Added ability to Enable/Disable Clipboard Sharing for RDP connections
+#321: Added support for displaying on HiDPI screens
 #155: Replace MagicLibrary with DockPanelSuite
 #154: MR-139: Close Button on Each Tab - new default theme has a close button on each tab
 
@@ -21,6 +35,7 @@ Fixes:
 #1238: Connection panel not translated until opened for the first time
 #1186: Fixed several dialog boxes to use localized button text
 #1170: Prevent Options window from showing up in taskbar
+#1132: loadbalanceinfo field now correctly imported from RDP files
 #1064: "Esc" button does does not close some dialogs
 #1044: Dragging (grabbing) the program window requires 2 clicks
 
