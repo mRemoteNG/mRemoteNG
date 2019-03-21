@@ -67,12 +67,14 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("Password", ""));
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
+            element.Add(new XAttribute("VMId", connectionInfo.VMId));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole",
                                        connectionInfo.UseConsoleSession.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("UseCredSsp", connectionInfo.UseCredSsp.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("EnhancedSession", connectionInfo.EnhancedSession.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RenderingEngine", connectionInfo.RenderingEngine));
             element.Add(new XAttribute("ICAEncryptionStrength", connectionInfo.ICAEncryptionStrength));
             element.Add(new XAttribute("RDPAuthenticationLevel", connectionInfo.RDPAuthenticationLevel));
@@ -213,6 +215,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.UseCredSsp.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRenderingEngine",
                                            connectionInfo.Inheritance.RenderingEngine.ToString().ToLowerInvariant()));
+										   
+                element.Add(new XAttribute("InheritEnhancedSession", connectionInfo.Inheritance.EnhancedSession.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritUsername",
                                            connectionInfo.Inheritance.Username.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritICAEncryptionStrength",
@@ -305,6 +309,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritAutomaticResize", falseString));
                 element.Add(new XAttribute("InheritUseConsoleSession", falseString));
                 element.Add(new XAttribute("InheritUseCredSsp", falseString));
+                element.Add(new XAttribute("InheritEnhancedSession", falseString));
                 element.Add(new XAttribute("InheritRenderingEngine", falseString));
                 element.Add(new XAttribute("InheritUsername", falseString));
                 element.Add(new XAttribute("InheritICAEncryptionStrength", falseString));

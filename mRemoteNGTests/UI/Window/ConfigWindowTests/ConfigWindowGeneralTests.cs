@@ -156,6 +156,36 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSound),
                     });
                     break;
+                case ProtocolType.RDPonVMBus:
+                    expectedProperties.AddRange(new[]
+                    {
+                        nameof(ConnectionInfo.VMId),
+                        nameof(ConnectionInfo.Username),
+                        nameof(ConnectionInfo.Password),
+                        nameof(ConnectionInfo.Domain),
+                        nameof(ConnectionInfo.Port),
+                        nameof(ConnectionInfo.UseConsoleSession),
+                        nameof(ConnectionInfo.RDPAuthenticationLevel),
+                        nameof(ConnectionInfo.RDPMinutesToIdleTimeout),
+                        nameof(ConnectionInfo.LoadBalanceInfo),
+                        nameof(ConnectionInfo.EnhancedSession),
+                        nameof(ConnectionInfo.RDGatewayUsageMethod),
+                        nameof(ConnectionInfo.Resolution),
+                        nameof(ConnectionInfo.Colors),
+                        nameof(ConnectionInfo.CacheBitmaps),
+                        nameof(ConnectionInfo.DisplayWallpaper),
+                        nameof(ConnectionInfo.DisplayThemes),
+                        nameof(ConnectionInfo.EnableFontSmoothing),
+                        nameof(ConnectionInfo.EnableDesktopComposition),
+                        nameof(ConnectionInfo.RedirectKeys),
+                        nameof(ConnectionInfo.RedirectDiskDrives),
+                        nameof(ConnectionInfo.RedirectPrinters),
+                        nameof(ConnectionInfo.RedirectClipboard),
+                        nameof(ConnectionInfo.RedirectPorts),
+                        nameof(ConnectionInfo.RedirectSmartCards),
+                        nameof(ConnectionInfo.RedirectSound),
+                    });
+                    break;
                 case ProtocolType.VNC:
                     expectedProperties.AddRange(new []
                     {

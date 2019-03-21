@@ -25,6 +25,7 @@ namespace mRemoteNG.Connection
         private string _username = "";
         private string _password = "";
         private string _domain = "";
+        private string _vmid = "";
 
         private ProtocolType _protocol;
         private string _extApp;
@@ -38,6 +39,7 @@ namespace mRemoteNG.Connection
         private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
+        private bool _enhancedSession;
 
         private RdpProtocol.RDGatewayUsageMethod _rdGatewayUsageMethod;
         private string _rdGatewayHostname;
@@ -136,6 +138,15 @@ namespace mRemoteNG.Connection
         {
             get => _hostname.Trim();
             set => SetField(ref _hostname, value?.Trim(), "Hostname");
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameVMId"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVMId")]
+        public string VMId
+        {
+            get => GetPropertyValue("VMId", _vmid).Trim();
+            set => SetField(ref _vmid, value?.Trim(), "VMId");
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
@@ -293,6 +304,15 @@ namespace mRemoteNG.Connection
             set => SetField(ref _useCredSsp, value, "UseCredSsp");
         }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameEnhancedSession"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEnhancedSession"),
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool EnhancedSession
+        {
+            get => GetPropertyValue("EnhancedSession", _enhancedSession);
+            set => SetField(ref _enhancedSession, value, "EnhancedSession");
+        }
         #endregion
 
         #region RD Gateway

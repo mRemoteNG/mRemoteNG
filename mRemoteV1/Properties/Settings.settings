@@ -374,6 +374,9 @@
     <Setting Name="InhDefaultRDPAuthenticationLevel" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultEnhancedSession" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
     <Setting Name="UVNCSCPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5500</Value>
     </Setting>

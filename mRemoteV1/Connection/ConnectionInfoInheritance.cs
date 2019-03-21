@@ -146,7 +146,12 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseCredSsp"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseCredSsp { get; set; }
-
+		
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameEnhancedSession"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEnhancedSession"),
+        TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+		public bool EnhancedSession { get; set; }
         #endregion
 
         #region RD Gateway

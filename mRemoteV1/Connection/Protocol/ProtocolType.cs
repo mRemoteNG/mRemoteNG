@@ -33,6 +33,9 @@ namespace mRemoteNG.Connection.Protocol
 
         [LocalizedAttributes.LocalizedDescription("strICA")]
         ICA = 9,
+		
+		[LocalizedAttributes.LocalizedDescription("strRDPonVMBus")]
+        RDPonVMBus = 10,
 
         [LocalizedAttributes.LocalizedDescription("strExtApp")]
         IntApp = 20

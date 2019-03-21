@@ -171,6 +171,9 @@ namespace mRemoteNG.Tools
                 case "hostname":
                     replacement = _connectionInfo.Hostname;
                     break;
+                case "vmid":
+                    replacement = _connectionInfo.VMId;
+                    break;
                 case "port":
                     replacement = Convert.ToString(_connectionInfo.Port);
                     break;

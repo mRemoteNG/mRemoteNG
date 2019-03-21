@@ -531,6 +531,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("RDPAlertIdleTimeout");
                     connectionInfo.Inheritance.RDPAlertIdleTimeout =
                         xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");
+					
+                    connectionInfo.VMId = xmlnode.Attributes["VMId"].Value;
+					connectionInfo.EnhancedSession = bool.Parse(xmlnode.Attributes["EnhancedSession"].Value);
+                    connectionInfo.Inheritance.EnhancedSession = bool.Parse(xmlnode.Attributes["InheritEnhancedSession"].Value);
                 }
 
                 if (_confVersion >= 2.7)

@@ -19,6 +19,7 @@ namespace mRemoteNG.Connection.Protocol
             switch (connectionInfo.Protocol)
             {
                 case ProtocolType.RDP:
+                case ProtocolType.RDPonVMBus:
                     newProtocol = new RdpProtocol
                     {
                         LoadBalanceInfoUseUtf8 = Settings.Default.RdpLoadBalanceInfoUseUtf8

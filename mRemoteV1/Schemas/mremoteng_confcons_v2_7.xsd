@@ -44,10 +44,12 @@
 
         <xs:attribute name="Hostname" type="xs:string" use="required" />
         <xs:attribute name="Protocol" type="xs:string" use="required" />
+        <xs:attribute name="VMId" type="xs:string" use="required" />
         <xs:attribute name="PuttySession" type="xs:string" use="required" />
         <xs:attribute name="Port" type="xs:int" use="required" />
         <xs:attribute name="ConnectToConsole" type="xs:boolean" use="required" />
         <xs:attribute name="UseCredSsp" type="xs:boolean" use="required" />
+        <xs:attribute name="EnhancedSession" type="xs:boolean" use="required" />
         <xs:attribute name="RenderingEngine" type="xs:string" use="required" />
         <xs:attribute name="ICAEncryptionStrength" type="xs:string" use="required" />
         <xs:attribute name="RDPAuthenticationLevel" type="xs:string" use="required" />
@@ -121,6 +123,7 @@
         <xs:attribute name="InheritAutomaticResize" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUseConsoleSession" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUseCredSsp" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritEnhancedSession" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritRenderingEngine" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUsername" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritICAEncryptionStrength" type="xs:boolean" use="optional" />

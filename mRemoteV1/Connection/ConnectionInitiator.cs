@@ -252,7 +252,8 @@ namespace mRemoteNG.Connection
                 var prot = (ProtocolBase)sender;
                 var msgClass = MessageClass.InformationMsg;
 
-                if (prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
+                if (prot.InterfaceControl.Info.Protocol == ProtocolType.RDP ||
+					prot.InterfaceControl.Info.Protocol == ProtocolType.RDPonVMBus)
                 {
                     if (reasonCode > 3)
                     {

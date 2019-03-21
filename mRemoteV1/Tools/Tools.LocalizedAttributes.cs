@@ -10,7 +10,7 @@ namespace mRemoteNG.Tools
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
         public class LocalizedCategoryAttribute : CategoryAttribute
         {
-            private const int MaxOrder = 10;
+			private const int MaxOrder = 11;
             private int Order;
 
             public LocalizedCategoryAttribute(string value, int Order = 1) : base(value)

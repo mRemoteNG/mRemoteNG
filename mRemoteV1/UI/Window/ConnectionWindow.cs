@@ -363,7 +363,7 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
 
-                if (interfaceControl.Info.Protocol == ProtocolType.RDP)
+                if (interfaceControl.Info.Protocol == ProtocolType.RDP | interfaceControl.Info.Protocol == ProtocolType.RDPonVMBus)
                 {
                     var rdp = (RdpProtocol)interfaceControl.Protocol;
                     cmenTabFullscreen.Visible = true;
