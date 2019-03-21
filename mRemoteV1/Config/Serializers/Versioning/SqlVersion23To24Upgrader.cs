@@ -2,20 +2,19 @@
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using System;
-using System.Data.SqlClient;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlVersion23To24Upgrader : IVersionUpgrader
     {
-        private readonly SqlDatabaseConnector _sqlDatabaseConnector;
+        private readonly IDatabaseConnector _databaseConnector;
 
-        public SqlVersion23To24Upgrader(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlVersion23To24Upgrader(IDatabaseConnector databaseConnector)
         {
-            if (sqlDatabaseConnector == null)
-                throw new ArgumentNullException(nameof(sqlDatabaseConnector));
+            if (databaseConnector == null)
+                throw new ArgumentNullException(nameof(databaseConnector));
 
-            _sqlDatabaseConnector = sqlDatabaseConnector;
+            _databaseConnector = databaseConnector;
         }
 
         public bool CanUpgrade(Version currentVersion)
@@ -31,8 +30,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
 ALTER TABLE tblCons
 ADD UseCredSsp bit NOT NULL DEFAULT 1,
     InheritUseCredSsp bit NOT NULL DEFAULT 0;";
-            var sqlCommand = new SqlCommand(sqlText, _sqlDatabaseConnector.SqlConnection);
-            sqlCommand.ExecuteNonQuery();
+            var dbCommand = _databaseConnector.DbCommand(sqlText);
+            dbCommand.ExecuteNonQuery();
 
             return new Version(2, 4);
         }
