@@ -286,6 +286,3 @@ InstallerProjects/Installer/Resources/License.rtf
 # gh-pages info
 runlocal.bat
 /_site
-
-# sphinx-docs
-/mRemoteV1/Documentation/_build
