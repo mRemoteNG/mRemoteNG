@@ -14,7 +14,7 @@ RDP - SSH - VNC - ICA - Telnet - RAW - RLogin - HTTP/S
 .. toctree::
    :maxdepth: 2
 
-   features.rst
-   versions.rst
-   release_channels.rst
-   license.rst
+   about/features.rst
+   about/versions.rst
+   about/release_channels.rst
+   about/license.rst

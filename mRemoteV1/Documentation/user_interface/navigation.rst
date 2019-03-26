@@ -1,11 +1,6 @@
 mRemoteNG is using tabs and panels to stay organized but also to create
 a better view of all multitasking that is being done inside the application.
 
-
-Main Window
-===========
-
-
 Panels
 ======
 Panels are used to organize tabbed conections. This might seem a bit confusing

@@ -1093,6 +1093,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="app.config" />
+    <None Include="Documentation\installation\supported_operating_systems.rst" />
     <None Include="Documentation\keyboard_shortcuts.rst" />
     <None Include="Documentation\command_line_switches.rst" />
     <None Include="Firefox\omni.ja" />
@@ -1235,9 +1236,6 @@
     <Content Include="Resources\Help\st_common_problems_rdp.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\ui_keyboardshortcuts.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\gs_running_mremoteng.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1305,9 +1303,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Help\gs_command_line_switches.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\ui_config.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1329,16 +1324,10 @@
     <Content Include="Resources\Help\ui_notifications.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\gs_installation.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\ui_menus.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_options.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\gs_prerequisites.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_quick_connect.htm">
@@ -1505,28 +1494,26 @@
     <None Include="Resources\Images\FamFamFam\News.png" />
     <None Include="Documentation\conf.py" />
     <None Include="Documentation\index.rst" />
-    <None Include="Documentation\contribute.rst" />
     <None Include="Documentation\howtos\markup_guide.rst" />
-    <None Include="Documentation\about\about.rst" />
+    <None Include="Documentation\about.rst" />
     <None Include="Documentation\about\features.rst" />
     <None Include="Documentation\about\license.rst" />
     <None Include="Documentation\about\release_channels.rst" />
     <None Include="Documentation\about\versions.rst" />
     <None Include="Documentation\installation\install.rst" />
-    <None Include="Documentation\installation\installation.rst" />
-    <None Include="Documentation\installation\intro.rst" />
+    <None Include="Documentation\installation.rst" />
+    <None Include="Documentation\installation\minimum_requirements.rst" />
     <None Include="Documentation\installation\uninstall.rst" />
-    <None Include="Documentation\howtos\howtos.rst" />
+    <None Include="Documentation\howtos.rst" />
     <None Include="Documentation\howtos\jumpservers.rst" />
-    <None Include="Documentation\user_interface\user_interface.rst" />
-    <None Include="Documentation\user_interface\window_system\main_window.rst" />
-    <None Include="Documentation\user_interface\window_system\navigation.rst" />
+    <None Include="Documentation\user_interface.rst" />
+    <None Include="Documentation\user_interface\main_window.rst" />
+    <None Include="Documentation\user_interface\navigation.rst" />
     <None Include="Documentation\user_interface\external_tools\external_tools.rst" />
     <None Include="Documentation\user_interface\external_tools\cheat_sheet.rst" />
-    <None Include="Documentation\user_interface\external_tools\examples\traceroute.rst" />
-    <None Include="Documentation\user_interface\external_tools\examples\start_external_application.rst" />
+    <None Include="Documentation\howtos\external_tools.rst" />
     <None Include="Documentation\user_interface\external_tools\variables.rst" />
-    <None Include="Documentation\user_interface\external_tools\introd.rst" />
+    <None Include="Documentation\user_interface\external_tools\introduction.rst" />
     <Content Include="Resources\Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -30,7 +30,3 @@ In this section we will use a Ubuntu 18.04 LTS to jump to another host both RDP 
 Windows Server to target host
 =============================
 In this section we will use a Windows 2016 Server to jump to another host both RDP and SSH.
-
-Other information
-=================
-.. TODO More information on dynamics. Dynamic ports, dynamic url etc

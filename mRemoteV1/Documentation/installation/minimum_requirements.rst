@@ -1,22 +1,12 @@
-************
-Introduction
-************
-
-Supported Operating Systems
-===========================
-These are the supported and tested operating systems that mRemoteNG can run on:
-
-- `Windows 10 <https://en.wikipedia.org/wiki/Windows_10>`_
-- `Windows 8.1 <https://en.wikipedia.org/wiki/Windows_8.1>`_
-- `Windows 7 <https://en.wikipedia.org/wiki/Windows_7>`_ (with required updates, See below)
-- `Windows Server 2016 <https://en.wikipedia.org/wiki/Windows_Server_2016>`_
-- `Windows Server 2012 R2 <https://en.wikipedia.org/wiki/Windows_Server_2012_R2>`_
-- `Windows Server 2012 <https://en.wikipedia.org/wiki/Windows_Server_2012>`_
-- `Windows Server 2008 R2 <https://en.wikipedia.org/wiki/Windows_Server_2008_R2>`_
-
+********************
 Minimum Requirements
-====================
-In recent versions of Windows 10 and Windows Server 2016 the below requirements are already provided by the system.
+********************
+
+.. note::
+
+	In recent versions of Windows 10 and Windows Server 2016 the below requirements are already provided by the system.
+
+
 However they are listed below just in case you need to know what mRemoteNG actually needs for different protocols and
 error searching on troubles with installing.
 
@@ -35,8 +25,10 @@ error searching on troubles with installing.
 - `Citrix ICA Client <https://www.citrix.com/downloads/citrix-receiver.html>`_
    - Needed if you use ICA. wfica.ocx must be registered.
 
-Windows 7/Windows 2008 R2 clients (requirements)
-------------------------------------------------
+.. _requirements:
+
+Windows 7 and Windows 2008 R2 Clients
+-------------------------------------
 .. tip::
 
 	You can use powershell to check if the hotfixes are installed. Example: ``Get-HotFix | where {$_.HotFixID -eq "KB2574819" -and $_.HotFixID -eq "KB2592687"}``

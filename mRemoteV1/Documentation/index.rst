@@ -3,14 +3,12 @@ Welcome to mRemoteNG's documentation!
 =====================================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Contents:
-
    
-   about/about.rst
-   installation/installation.rst
-   user_interface/user_interface.rstv
+   about.rst
+   installation.rst
+   user_interface.rst
    keyboard_shortcuts
    command_line_switches.rst
-   howtos/howtos.rst
-   contribute.rst
+   howtos.rst
