@@ -130,7 +130,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'mRemoteNG.tex', 'mRemoteNG Documentation',
-     'The mrRemoteNG Team', 'manual'),
+     'The mRemoteNG Team', 'manual'),
 ]
 
 
