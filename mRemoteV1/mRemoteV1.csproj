@@ -1506,6 +1506,27 @@
     <None Include="Documentation\howtos\external_tools.rst" />
     <None Include="Documentation\user_interface\external_tools\variables.rst" />
     <None Include="Documentation\user_interface\external_tools\introduction.rst" />
+    <None Include="Documentation\images\credssp-error.png" />
+    <None Include="Documentation\images\example_et_start_application_01.png" />
+    <None Include="Documentation\images\example_et_start_application_02.png" />
+    <None Include="Documentation\images\example_et_traceroute_01.png" />
+    <None Include="Documentation\images\example_et_traceroute_02.png" />
+    <None Include="Documentation\images\example_et_traceroute_03.png" />
+    <None Include="Documentation\images\example_et_traceroute_04.png" />
+    <None Include="Documentation\images\example_et_traceroute_05.png" />
+    <None Include="Documentation\images\external_tools_external_tool_properties_01.png" />
+    <None Include="Documentation\images\external_tools_main_ui_01.png" />
+    <None Include="Documentation\images\external_tools_toolbar_01.png" />
+    <None Include="Documentation\images\external_tools_tools_list_01.png" />
+    <None Include="Documentation\images\mremoteng_favicon_32.png" />
+    <None Include="Documentation\images\mremoteng_logo.png" />
+    <None Include="Documentation\images\mremoteng_main_ui.png" />
+    <None Include="Documentation\images\mremoteng_main_ui_connect_win_server.png" />
+    <None Include="Documentation\images\oracle_remediation_setting.png" />
+    <None Include="Documentation\images\user_interface_overview.png" />
+    <None Include="Documentation\images\user_interface_panels_01.png" />
+    <None Include="Documentation\images\user_interface_panels_02.png" />
+    <None Include="Documentation\images\user_interface_panels_03.png" />
     <Content Include="Resources\Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
