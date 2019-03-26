@@ -5,5 +5,5 @@
 .. toctree::
    :maxdepth: 2
 
-   about/index.rst
-   installing/index.rst
+   about/about.rst
+   installing/installing.rst

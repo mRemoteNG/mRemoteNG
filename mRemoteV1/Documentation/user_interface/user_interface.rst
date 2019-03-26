@@ -26,4 +26,4 @@ Tools
 .. toctree::
    :maxdepth: 1
 
-   external_tools/index.rst
+   external_tools/external_tools.rst

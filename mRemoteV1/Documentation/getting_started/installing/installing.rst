@@ -5,6 +5,6 @@
 .. toctree::
    :maxdepth: 2
 
-   introduction.rst
+   intro.rst
    install.rst
    uninstall.rst

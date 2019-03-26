@@ -5,4 +5,4 @@
 .. toctree::
   :maxdepth: 2
 
-  contribute/index.rst
+  contribute/contribute.rst

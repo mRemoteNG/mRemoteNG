@@ -1501,6 +1501,32 @@
     <None Include="Resources\Images\Good_Symbol.png" />
     <None Include="Resources\Images\ComponentsCheck.png" />
     <None Include="Resources\Images\FamFamFam\News.png" />
+    <None Include="Documentation\conf.py" />
+    <None Include="Documentation\index.rst" />
+    <None Include="Documentation\about_this_manual\about_this_manual.rst" />
+    <None Include="Documentation\about_this_manual\contribute\contribute.rst" />
+    <None Include="Documentation\about_this_manual\contribute\guides\markup_guide.rst" />
+    <None Include="Documentation\getting_started\getting_started.rst" />
+    <None Include="Documentation\getting_started\about\about.rst" />
+    <None Include="Documentation\getting_started\about\introduction.rst" />
+    <None Include="Documentation\getting_started\about\license.rst" />
+    <None Include="Documentation\getting_started\about\release_channels.rst" />
+    <None Include="Documentation\getting_started\about\versions.rst" />
+    <None Include="Documentation\getting_started\installing\install.rst" />
+    <None Include="Documentation\getting_started\installing\installing.rst" />
+    <None Include="Documentation\getting_started\installing\intro.rst" />
+    <None Include="Documentation\getting_started\installing\uninstall.rst" />
+    <None Include="Documentation\howtos\howtos.rst" />
+    <None Include="Documentation\howtos\jumpservers.rst" />
+    <None Include="Documentation\user_interface\user_interface.rst" />
+    <None Include="Documentation\user_interface\window_system\window_system.rst" />
+    <None Include="Documentation\user_interface\window_system\navigation.rst" />
+	<None Include="Documentation\user_interface\external_tools\external_tools.rst" />
+	<None Include="Documentation\user_interface\external_tools\cheat_sheet.rst" />
+	<None Include="Documentation\user_interface\external_tools\examples\traceroute.rst" />
+	<None Include="Documentation\user_interface\external_tools\examples\start_external_application.rst" />
+	<None Include="Documentation\user_interface\external_tools\variables.rst" />
+    <None Include="Documentation\user_interface\external_tools\introd.rst" />
     <Content Include="Resources\Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
