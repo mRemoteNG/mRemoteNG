@@ -2,6 +2,8 @@
 User Interface
 ##############
 
+.. figure:: /images/user_interface_overview.png
+
 .. toctree::
    :maxdepth: 1
 

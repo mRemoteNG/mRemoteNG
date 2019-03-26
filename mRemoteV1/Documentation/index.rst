@@ -1,6 +1,6 @@
-
+*************************************
 Welcome to mRemoteNG's documentation!
-=====================================
+*************************************
 
 .. toctree::
    :maxdepth: 2
@@ -12,3 +12,4 @@ Welcome to mRemoteNG's documentation!
    keyboard_shortcuts
    command_line_switches.rst
    howtos.rst
+   known_issues.rst

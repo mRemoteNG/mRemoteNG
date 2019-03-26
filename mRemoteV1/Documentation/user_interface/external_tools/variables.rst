@@ -1,8 +1,8 @@
 .. External Tools - variables
 
-******************************
+*********
 Variables
-******************************
+*********
 
 Variables and arguments can be used to tell the external tool what to do.
 

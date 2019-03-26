@@ -50,7 +50,3 @@ If you right click on the panel there are a few more options that can be set:
 
 - **Rename** - Rename the panel
 - **Send to...** - Send the whole panel to monitor/screen *[number]*. Note this is not a real window but a detachable panel. If you double click the title then the panel will go back to mRemoteNG window and not fullscreen the window.
-
-Tabs
-====
-

@@ -1093,6 +1093,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="app.config" />
+    <None Include="Documentation\known_issues.rst" />
     <None Include="Documentation\installation\supported_operating_systems.rst" />
     <None Include="Documentation\keyboard_shortcuts.rst" />
     <None Include="Documentation\command_line_switches.rst" />
@@ -1149,12 +1150,6 @@
     <Content Include="Firefox\sandboxbroker.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
-    <Content Include="Resources\Help\Screenshots\CommonProblemsRDP\credssp-error.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\CommonProblemsRDP\oracle_remediation_setting.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\Screenshots\Config\main_top_bar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1370,9 +1365,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Screenshots\External Tools\08.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\MSSQLScript.txt">
