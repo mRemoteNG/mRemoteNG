@@ -1093,6 +1093,8 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="app.config" />
+    <None Include="Documentation\keyboard_shortcuts.rst" />
+    <None Include="Documentation\command_line_switches.rst" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
     <None Include="Resources\Templates\AppIcon.psd" />
@@ -1503,21 +1505,21 @@
     <None Include="Resources\Images\FamFamFam\News.png" />
     <None Include="Documentation\conf.py" />
     <None Include="Documentation\index.rst" />
-    <None Include="Documentation\contribute\contribute.rst" />
-    <None Include="Documentation\contribute\guides\markup_guide.rst" />
+    <None Include="Documentation\contribute.rst" />
+    <None Include="Documentation\howtos\markup_guide.rst" />
     <None Include="Documentation\about\about.rst" />
     <None Include="Documentation\about\features.rst" />
     <None Include="Documentation\about\license.rst" />
     <None Include="Documentation\about\release_channels.rst" />
     <None Include="Documentation\about\versions.rst" />
-    <None Include="Documentation\installing\install.rst" />
-    <None Include="Documentation\installing\installing.rst" />
-    <None Include="Documentation\installing\intro.rst" />
-    <None Include="Documentation\installing\uninstall.rst" />
+    <None Include="Documentation\installation\install.rst" />
+    <None Include="Documentation\installation\installation.rst" />
+    <None Include="Documentation\installation\intro.rst" />
+    <None Include="Documentation\installation\uninstall.rst" />
     <None Include="Documentation\howtos\howtos.rst" />
     <None Include="Documentation\howtos\jumpservers.rst" />
     <None Include="Documentation\user_interface\user_interface.rst" />
-    <None Include="Documentation\user_interface\window_system\window_system.rst" />
+    <None Include="Documentation\user_interface\window_system\main_window.rst" />
     <None Include="Documentation\user_interface\window_system\navigation.rst" />
     <None Include="Documentation\user_interface\external_tools\external_tools.rst" />
     <None Include="Documentation\user_interface\external_tools\cheat_sheet.rst" />

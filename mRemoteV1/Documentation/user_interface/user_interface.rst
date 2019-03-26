@@ -1,6 +1,6 @@
-##################
-  User Interface
-##################
+##############
+User Interface
+##############
 
 Window System
 =============
@@ -8,7 +8,7 @@ Window System
 .. toctree::
    :maxdepth: 1
 
-   window_system/introduction.rst
+   window_system/main_window.rst
 
 
 Navigation

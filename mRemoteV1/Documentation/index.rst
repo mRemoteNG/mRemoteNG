@@ -8,7 +8,9 @@ Welcome to mRemoteNG's documentation!
 
    
    about/about.rst
-   installing/installing.rst
-   user_interface/user_interface.rst
+   installation/installation.rst
+   user_interface/user_interface.rstv
+   keyboard_shortcuts
+   command_line_switches.rst
    howtos/howtos.rst
-   contribute/contribute.rst
+   contribute.rst

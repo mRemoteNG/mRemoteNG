@@ -2,8 +2,9 @@
 Release Channels
 ****************
 
-Introduction
-============
+.. note::
+
+	We currently do not offer a nightly build channel. To get the absolute bleeding-edge updates, you will need to build mRemoteNG from source. Instructions on setting up your development environment can be found here:
 
 
 Stable
@@ -21,7 +22,7 @@ Beta
 ====
 The **Beta** channel includes pre-release versions in addition to what the **Stable** channel offers.
 This includes any version marked as **beta** or **rc** (release candidate). This channel is meant to
-give users and advanced look at features and fixes that are done but not fully tested.
+give users an advanced look at features and fixes that are done but not fully tested, yet.
 
 While these versions are generally stable, there is still a higher chance of encountering bugs.
 **Beta** channel users are highly encouraged to enter bug reports for any issues that arise during their
@@ -43,7 +44,3 @@ provide feedback to how development is progressing.
 
 Use this channel only if you can accept potentially serious bugs and would like to help us test early
 versions of the program.
-
-.. note::
-
-	We currently do not offer a nightly build channel. To get the absolute bleeding-edge updates, you will need to build mRemoteNG from source. Instructions on setting up your development environment can be found here:

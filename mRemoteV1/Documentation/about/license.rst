@@ -1,8 +1,10 @@
-*************************
-mRemoteNG License and GPL
-*************************
+*******
+License
+*******
 
-mRemoteNG is written under the GNU GPL v2 license and is a free software.
+mRemoteNG is written under the GNU GPLv2_ license and is a free software.
+
+.. _GPLv2: http://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
 
 Free software is referred to freedom, not price. The General Public Licenses are designed to make sure
 that you have the freedom to distribute copies of free software (and charge for the service if you wish),

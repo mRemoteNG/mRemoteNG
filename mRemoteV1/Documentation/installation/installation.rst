@@ -1,6 +1,6 @@
-########################
-  Installing mRemoteNG
-########################
+####################
+Installing mRemoteNG
+####################
 
 .. toctree::
    :maxdepth: 2

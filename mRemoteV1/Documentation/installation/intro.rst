@@ -7,17 +7,11 @@ Supported Operating Systems
 These are the supported and tested operating systems that mRemoteNG can run on:
 
 - `Windows 10 <https://en.wikipedia.org/wiki/Windows_10>`_
-
 - `Windows 8.1 <https://en.wikipedia.org/wiki/Windows_8.1>`_
-
 - `Windows 7 <https://en.wikipedia.org/wiki/Windows_7>`_ (with required updates, See below)
-
 - `Windows Server 2016 <https://en.wikipedia.org/wiki/Windows_Server_2016>`_
-
 - `Windows Server 2012 R2 <https://en.wikipedia.org/wiki/Windows_Server_2012_R2>`_
-
 - `Windows Server 2012 <https://en.wikipedia.org/wiki/Windows_Server_2012>`_
-
 - `Windows Server 2008 R2 <https://en.wikipedia.org/wiki/Windows_Server_2008_R2>`_
 
 Minimum Requirements
@@ -51,23 +45,15 @@ The following updates, **must be** present on any Windows 7 or Windows Server 20
 mRemoteNG. (They must have been installed in the order provided below):
 
 - `KB2574819 <https://support.microsoft.com/en-us/kb/2574819>`_ - Adds support for DTLS in Windows 7 SP1 and Windows Server 2008 R2 SP1
-
 - `KB2592687 <https://support.microsoft.com/en-us/kb/2592687>`_ - RDP 8.0 update for Windows 7 and Windows Server 2008 R2
 
 The following are suggested (but not required) for Windows 7 / Windows Server 2008 clients:
 
 - `KB2857650 <https://support.microsoft.com/en-us/kb/2857650>`_ - Update that improves the RemoteApp and Desktop Connections features is available for Windows 7
-
 - `KB2830477 <https://support.microsoft.com/en-us/kb/2830477>`_ - Update for RemoteApp and Desktop Connections feature is available for Windows
-
 - `KB2913751 <https://support.microsoft.com/en-us/kb/2913751>`_ - Smart card redirection in remote sessions fails in a Windows 7 SP1-based RDP 8.1 client
-
 - `KB2923545 <https://support.microsoft.com/en-us/kb/2923545>`_ - Update for RDP 8.1 is available for Windows 7 SP1
-
 - `KB2965788 <https://support.microsoft.com/en-us/kb/2965788>`_ - MS14-030: Description of the security update for Remote Desktop Security Release for Windows: June 10, 2014
-
 - `KB2985461 <https://support.microsoft.com/en-us/kb/2985461>`_ - Error 0x800401f0when you update RemoteApp and Desktop Connections feeds in Windows 7 or Windows Server 2008 R2
-
 - `KB2984972 <https://support.microsoft.com/en-us/kb/2984972>`_ - Update for RDC 7.1to support restricted administration logons on Windows 7 and Windows Server 2008 R2
-
 - `KB2984976 <https://support.microsoft.com/en-us/kb/2984976>`_ - RDP 8.0 update for restricted administration on Windows 7 or Windows Server 2008 R2

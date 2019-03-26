@@ -6,6 +6,6 @@ Guidelines
 ==========
 
 .. toctree::
-  :maxdepth: 1
+  :maxdepth: 2
 
   guides/markup_guide.rst

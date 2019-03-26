@@ -1,6 +1,6 @@
-************
-Introduction
-************
+***********
+Main Window
+***********
 After launching mRemoteNG for the first time you will be see the main interface window looking similar
 to what is being shown below.
 
