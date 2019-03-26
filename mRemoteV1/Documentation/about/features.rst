@@ -1,15 +1,7 @@
 ************
-Introduction
+Key Features
 ************
 
-mRemoteNG is a multi-protocol remote connections manager.
-
-As of version 1.00 it supports the RDP, VNC, ICA, SSH, Telnet, RAW, Rlogin and HTTP/S protocols.
-The main goal is to minimize window clutter and to provide a easy gui for managing and working with
-all your remote connections.
-
-Key Features
-============
 .. link items here to parts of docs
 
 - Free and Open Source, released under the GPL
