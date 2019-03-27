@@ -4,14 +4,14 @@ Welcome to mRemoteNG's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Introduction:
+   :caption: Introduction
    
    about.rst
    installation.rst
 
 .. toctree::
    :maxdepth: 2
-   :caption: Application Handling:
+   :caption: Application Handling
    
    user_interface.rst
    keyboard_shortcuts.rst
@@ -20,7 +20,7 @@ Welcome to mRemoteNG's documentation!
    
 .. toctree::
    :maxdepth: 2
-   :caption: Miscellaneous:
+   :caption: Miscellaneous
    
    howtos.rst
    known_issues.rst
