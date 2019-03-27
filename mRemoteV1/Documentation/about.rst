@@ -6,6 +6,7 @@ mRemoteNG is an open source, multi-protocol, multi-remote connections manager th
 The application is released under the GPLv2_ and is being managed on GitHub_.
 
 .. _GitHub: http://github.com/mRemoteNG/mRemoteNG
+.. _GPLv2: http://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
 
 As of now mRemoteNG supports the following protocols:
 

@@ -3,7 +3,7 @@ Keyboard Shortcuts
 ******************
 
 General
-====
+=======
 
 .. list-table::
    :widths: 30 70

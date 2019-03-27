@@ -27,12 +27,12 @@ New Connection
 Creates a new connection item in the connections dialog after where cursor is present.
  
 New Folder
+----------
 
 .. tip::
 
     Folders can help to make adding connections easier. By setting a folder with some values that can be inheritaded down to the connections.
 
-----------
 Creates a new folder in connections dialog after where cursor is present.
 
 View
@@ -79,7 +79,7 @@ Icon
 The icon indicates the visual identifier for the connection. Clicking the icon will let you set a different icon for the connection.
 
 Status
-----
+------
 
 .. note::
 
