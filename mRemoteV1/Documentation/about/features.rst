@@ -18,5 +18,5 @@ Key Features
 - Minimize to system tray
 - Fullscreen (Kiosk) mode
 - Assign global credentials to use when no information is provided on connection basis
-- Host Indication on each connection to show if host responds ti ping requests
+- Host Indication on each connection to show if host responds to ping requests
 - ...

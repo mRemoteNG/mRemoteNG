@@ -36,7 +36,7 @@ import re
 # Load assembly information
 try:
     file = open("..\\Properties\\AssemblyInfo.cs", "r")
-    
+
     for line in file:
         if re.match(r'(\[assembly: AssemblyTitle.*)', line):
             project = line
@@ -136,6 +136,9 @@ html_static_path = ['_static']
 # defined by theme itself.  Builtin themes are using these templates by
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
+
+# Remove page source editing
+html_show_sourcelink = False
 
 
 # -- Options for HTMLHelp output ---------------------------------------------
