@@ -6,7 +6,6 @@ Minimum Requirements
 
 	In recent versions of Windows 10 and Windows Server 2016 the below requirements are already provided by the system.
 
-
 However they are listed below just in case you need to know what mRemoteNG actually needs for different protocols and
 error searching on troubles with installing.
 

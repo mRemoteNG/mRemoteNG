@@ -16,4 +16,5 @@ User Interface
    user_interface/notifications.rst
    user_interface/import_export.rst
    user_interface/ssh_file_transfer.rst
-   user_interface/external_tools/external_tools.rst
+   user_interface/external_tools.rst
+   user_interface/options.rst

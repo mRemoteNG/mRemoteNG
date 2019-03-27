@@ -1095,6 +1095,7 @@
     <None Include="app.config" />
     <None Include="Documentation\howtos\folders_and_inheritance.rst" />
     <None Include="Documentation\user_interface\create_connection.rst" />
+    <None Include="Documentation\user_interface\options.rst" />
     <None Include="Documentation\user_interface\ssh_file_transfer.rst" />
     <None Include="Documentation\sql_configuration.rst" />
     <None Include="Documentation\known_issues.rst" />
@@ -1305,9 +1306,6 @@
     <Content Include="Resources\Help\ui_menus.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\ui_options.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Documentation\images\quick_connect_01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1466,7 +1464,7 @@
     <None Include="Documentation\user_interface.rst" />
     <None Include="Documentation\user_interface\main_window.rst" />
     <None Include="Documentation\user_interface\navigation.rst" />
-    <None Include="Documentation\user_interface\external_tools\external_tools.rst" />
+    <None Include="Documentation\user_interface\external_tools.rst" />
     <None Include="Documentation\user_interface\external_tools\cheat_sheet.rst" />
     <None Include="Documentation\howtos\external_tools.rst" />
     <None Include="Documentation\user_interface\external_tools\variables.rst" />

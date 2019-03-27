@@ -1,3 +1,5 @@
+.. _sql_configuration:
+
 *****************
 SQL Configuration
 *****************
