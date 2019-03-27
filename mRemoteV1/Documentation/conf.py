@@ -16,55 +16,58 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 
+# -- Project information -----------------------------------------------------
+
+project = 'mRemoteNG'
+copyright = '2019 The mRemoteNG Team'
+author = 'The mRemoteNG Team'
+
+# The short X.Y version
+version = '0.0'
+# The full version, including alpha/beta/rc tags
+release = '0.0.alpha'
+
+
 
 ######################### Begin mRemoteNG Stuff ###############################
 
 import re
 
 # Load assembly information
-file = open("..\\Properties\\AssemblyInfo.cs", "r")
+try:
+    file = open("..\\Properties\\AssemblyInfo.cs", "r")
+    
+    for line in file:
+        if re.match(r'(\[assembly: AssemblyTitle.*)', line):
+            project = line
+        elif re.match(r'(\[assembly: AssemblyCompany.*)', line):
+            author = line
+        elif re.match(r'(\[assembly: AssemblyVersion.*)', line):
+            version = line
+            release = line
+        elif re.match(r'(\[assembly: AssemblyCopyright.*)', line):
+            copyright = line
 
-for line in file:
-    if re.match(r'(\[assembly: AssemblyTitle.*)', line):
-        project = line
-    elif re.match(r'(\[assembly: AssemblyCompany.*)', line):
-        author = line
-    elif re.match(r'(\[assembly: AssemblyVersion.*)', line):
-        version = line
-        release = line
-    elif re.match(r'(\[assembly: AssemblyCopyright.*)', line):
-        copyright = line
+    project = re.search(r'\".*\"', project)
+    project = project.group(0).replace('\"', '')
 
-project = re.search(r'\".*\"', project)
-project = project.group(0).replace('\"', '')
+    author = re.search(r'\".*\"', author)
+    author = author.group(0).replace('\"', '')
 
-author = re.search(r'\".*\"', author)
-author = author.group(0).replace('\"', '')
+    version = re.search(r'\".*\"', version)
+    version = re.search(r'\"[\d].[\d].', version.group(0))
+    version = version.group(0).replace('\"', '')
 
-version = re.search(r'\".*\"', version)
-version = re.search(r'\"[\d].[\d].', version.group(0))
-version = version.group(0).replace('\"', '')
+    release = re.search(r'\".*\"', release)
+    release = release.group(0).replace('\"', '')
 
-release = re.search(r'\".*\"', release)
-release = release.group(0).replace('\"', '')
-
-copyright = re.search(r'\".*\"', copyright)
-copyright = copyright.group(0).replace('\"', '')
+    copyright = re.search(r'\".*\"', copyright)
+    copyright = copyright.group(0).replace('\"', '')
+except:
+    print("Assembly file cannot be found, using default values")
 
 ########################### End mRemoteNG Stuff ###############################
 
-
-
-# -- Project information -----------------------------------------------------
-
-# project = 'mRemoteNG'
-# copyright = '2019 The mRemoteNG Team'
-# author = 'The mRemoteNG Team'
-# 
-# # The short X.Y version
-# version = '0.0'
-# # The full version, including alpha/beta/rc tags
-# release = '0.0.alpha'
 
 
 # -- General configuration ---------------------------------------------------
