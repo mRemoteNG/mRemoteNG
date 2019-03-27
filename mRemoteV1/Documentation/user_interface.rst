@@ -9,6 +9,7 @@ User Interface
 
    user_interface/main_window.rst
    user_interface/navigation.rst
+   user_interface/create_connection.rst
    user_interface/quick_connect.rst
    user_interface/port_scan.rst
    user_interface/screenshot_manager.rst
