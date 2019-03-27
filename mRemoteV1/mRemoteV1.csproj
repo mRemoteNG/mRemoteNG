@@ -1097,6 +1097,7 @@
     <None Include="Documentation\installation\supported_operating_systems.rst" />
     <None Include="Documentation\keyboard_shortcuts.rst" />
     <None Include="Documentation\command_line_switches.rst" />
+    <None Include="Documentation\user_interface\notifications.rst" />
     <None Include="Documentation\user_interface\screenshot_manager.rst" />
     <None Include="Documentation\user_interface\port_scan.rst" />
     <None Include="Documentation\user_interface\quick_connect.rst" />
@@ -1183,10 +1184,10 @@
     <Content Include="Resources\Help\Screenshots\Navigation\view_menu.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Notifications\notification_warning.png">
+    <Content Include="Documentation\images\notifications_panel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Notifications\popup_warning.png">
+    <Content Include="Documentation\images\notifications_popup.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Screenshots\Reference\add_new_folder.png">
@@ -1311,9 +1312,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_external_tools.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_notifications.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_menus.htm">

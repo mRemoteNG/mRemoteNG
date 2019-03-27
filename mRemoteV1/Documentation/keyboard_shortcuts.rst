@@ -2,6 +2,19 @@
 Keyboard Shortcuts
 ******************
 
+General
+====
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Keybinding
+     - Action
+   * - F1
+     - Help
+
+
 File
 ====
 
@@ -60,16 +73,3 @@ Connections
      - Move Up
    * - Ctrl+Down
      - Move Down
-
-
-Help
-====
-
-.. list-table::
-   :widths: 30 70
-   :header-rows: 1
-
-   * - Keybinding
-     - Action
-   * - F1
-     - Help
