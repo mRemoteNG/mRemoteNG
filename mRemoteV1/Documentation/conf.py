@@ -22,7 +22,7 @@
 import re
 
 # Load assembly information
-file = open("mRemoteNGV1/Properties/AssemblyInfo.cs", "r")
+file = open("..\\Properties\\AssemblyInfo.cs", "r")
 
 for line in file:
     if re.match(r'(\[assembly: AssemblyTitle.*)', line):
