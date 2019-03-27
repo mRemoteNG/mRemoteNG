@@ -9,4 +9,5 @@ User Interface
 
    user_interface/main_window.rst
    user_interface/navigation.rst
+   user_interface/quick_connect.rst
    user_interface/external_tools/external_tools.rst

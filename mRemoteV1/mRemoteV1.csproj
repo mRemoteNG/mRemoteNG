@@ -1097,6 +1097,7 @@
     <None Include="Documentation\installation\supported_operating_systems.rst" />
     <None Include="Documentation\keyboard_shortcuts.rst" />
     <None Include="Documentation\command_line_switches.rst" />
+    <None Include="Documentation\user_interface\quick_connect.rst" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
     <None Include="Resources\Templates\AppIcon.psd" />
@@ -1325,22 +1326,19 @@
     <Content Include="Resources\Help\ui_options.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\ui_quick_connect.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\ui_import_and_export.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_screenshot_manager.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Quick Connect\01.png">
+    <Content Include="Documentation\images\quick_connect_01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Quick Connect\02.png">
+    <Content Include="Documentation\images\quick_connect_02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Quick Connect\03.png">
+    <Content Include="Documentation\images\quick_connect_03.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Screenshots\External Tools\01.png">
