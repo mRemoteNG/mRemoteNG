@@ -1,3 +1,5 @@
+.. _screenshot_manager:
+
 ******************
 Screenshot Manager
 ******************

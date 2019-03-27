@@ -1,8 +1,12 @@
+******
+Panels
+******
+
 mRemoteNG is using tabs and panels to stay organized but also to create
 a better view of all multitasking that is being done inside the application.
 
-Panels
-======
+Explaination
+============
 Panels are used to organize tabbed conections. This might seem a bit confusing
 at first glance but is a great way to stay organized. Below is a few examples
 of how to use panels to give you a hands on better view of them:
@@ -25,7 +29,7 @@ a organized view where Domain A is in panel 1 and Domain B is in panel 2.
 The function of a panel works as a sort of workspace.
 
 Creating Panels
----------------
+===============
 .. Add inheritance linking
 
 Usually panels are created using connections and folders to stay organized
@@ -41,7 +45,7 @@ to the new panel, right click on the connection and use :menuselection:`Connect 
 The other option in the menu name **Connection Panels** will list all panels that are available in mRemoteNG window.
 
 More Options
-------------
+============
 If you right click on the panel there are a few more options that can be set:
 
 .. figure:: /images/user_interface_panels_03.png

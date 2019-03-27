@@ -1,3 +1,5 @@
+.. _sss_file_transfer:
+
 #################
 SSH File Transfer
 #################

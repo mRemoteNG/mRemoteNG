@@ -1096,6 +1096,7 @@
     <None Include="Documentation\howtos\folders_and_inheritance.rst" />
     <None Include="Documentation\user_interface\create_connection.rst" />
     <None Include="Documentation\user_interface\options.rst" />
+    <None Include="Documentation\user_interface\menus.rst" />
     <None Include="Documentation\user_interface\ssh_file_transfer.rst" />
     <None Include="Documentation\sql_configuration.rst" />
     <None Include="Documentation\known_issues.rst" />
@@ -1170,22 +1171,7 @@
     <Content Include="Documentation\images\import_export_dialog.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Main Menu\Main_Menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\basic_panels.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\panel_context_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\rdp_context_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\ssh_context_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\view_menu.png">
+    <Content Include="Documentation\images\menus_main_menu.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Documentation\images\notifications_panel.png">
@@ -1228,9 +1214,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Documentation\images\screenshot_manager_overview.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_navigation.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\Apple.ico">
@@ -1300,12 +1283,6 @@
     <Content Include="Resources\Help\ui_connections.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\ui_external_tools.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_menus.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Documentation\images\quick_connect_01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1313,30 +1290,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Documentation\images\quick_connect_03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\04.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\06.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\07.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\08.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Images\loading_spinner.gif" />
@@ -1463,7 +1416,7 @@
     <None Include="Documentation\howtos\jumpservers.rst" />
     <None Include="Documentation\user_interface.rst" />
     <None Include="Documentation\user_interface\main_window.rst" />
-    <None Include="Documentation\user_interface\navigation.rst" />
+    <None Include="Documentation\user_interface\panels.rst" />
     <None Include="Documentation\user_interface\external_tools.rst" />
     <None Include="Documentation\user_interface\external_tools\cheat_sheet.rst" />
     <None Include="Documentation\howtos\external_tools.rst" />
