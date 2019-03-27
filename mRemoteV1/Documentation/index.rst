@@ -9,7 +9,8 @@ Welcome to mRemoteNG's documentation!
    about.rst
    installation.rst
    user_interface.rst
-   keyboard_shortcuts
+   keyboard_shortcuts.rst
+   sql_configuration.rst
    command_line_switches.rst
    howtos.rst
    known_issues.rst

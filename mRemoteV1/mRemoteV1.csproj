@@ -1093,6 +1093,8 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="app.config" />
+    <None Include="Documentation\user_interface\ssh_file_transfer.rst" />
+    <None Include="Documentation\sql_configuration.rst" />
     <None Include="Documentation\known_issues.rst" />
     <None Include="Documentation\installation\supported_operating_systems.rst" />
     <None Include="Documentation\keyboard_shortcuts.rst" />
@@ -1306,12 +1308,6 @@
     <Content Include="Resources\Help\ui_connections.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\ui_sql_configuration.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Index.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\ui_external_tools.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1352,12 +1348,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Screenshots\External Tools\08.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\MSSQLScript.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\MySQLScript.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_file_transfer.htm">
