@@ -5,7 +5,6 @@
 # This file does only contain a selection of the most common options. For a
 # full list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
-
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -17,16 +16,55 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 
+
+######################### Begin mRemoteNG Stuff ###############################
+
+import re
+
+# Load assembly information
+file = open("..\\Properties\\AssemblyInfo.cs", "r")
+
+for line in file:
+    if re.match(r'(\[assembly: AssemblyTitle.*)', line):
+        project = line
+    elif re.match(r'(\[assembly: AssemblyCompany.*)', line):
+        author = line
+    elif re.match(r'(\[assembly: AssemblyVersion.*)', line):
+        version = line
+        release = line
+    elif re.match(r'(\[assembly: AssemblyCopyright.*)', line):
+        copyright = line
+
+project = re.search(r'\".*\"', project)
+project = project.group(0).replace('\"', '')
+
+author = re.search(r'\".*\"', author)
+author = author.group(0).replace('\"', '')
+
+version = re.search(r'\".*\"', version)
+version = re.search(r'\"[\d].[\d].', version.group(0))
+version = version.group(0).replace('\"', '')
+
+release = re.search(r'\".*\"', release)
+release = release.group(0).replace('\"', '')
+
+copyright = re.search(r'\".*\"', copyright)
+copyright = copyright.group(0).replace('\"', '')
+
+########################### End mRemoteNG Stuff ###############################
+
+
+
 # -- Project information -----------------------------------------------------
 
-project = 'mRemoteNG'
-copyright = '2019 The mRemoteNG Team'
-author = 'The mRemoteNG Team'
-
-# The short X.Y version
-version = '0.0'
-# The full version, including alpha/beta/rc tags
-release = '0.0.alpha'
+# project = 'mRemoteNG'
+# copyright = '2019 The mRemoteNG Team'
+# author = 'The mRemoteNG Team'
+# 
+# # The short X.Y version
+# version = '0.0'
+# # The full version, including alpha/beta/rc tags
+# release = '0.0.alpha'
 
 
 # -- General configuration ---------------------------------------------------
@@ -95,8 +133,6 @@ html_static_path = ['_static']
 # defined by theme itself.  Builtin themes are using these templates by
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
-#
-#html_sidebars = ['localtoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html']
 
 
 # -- Options for HTMLHelp output ---------------------------------------------
