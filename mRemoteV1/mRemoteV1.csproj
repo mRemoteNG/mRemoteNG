@@ -1094,7 +1094,7 @@
     <None Include=".editorconfig" />
     <None Include="app.config" />
     <None Include="Documentation\howtos\folders_and_inheritance.rst" />
-    <None Include="Documentation\user_interface\create_connection.rst" />
+    <None Include="Documentation\user_interface\connections.rst" />
     <None Include="Documentation\user_interface\options.rst" />
     <None Include="Documentation\user_interface\menus.rst" />
     <None Include="Documentation\user_interface\ssh_file_transfer.rst" />
@@ -1159,13 +1159,13 @@
     <Content Include="Firefox\sandboxbroker.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
-    <Content Include="Resources\Help\Screenshots\Config\main_top_bar.png">
+    <Content Include="Documentation\images\config_top_bar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Config\main_window.png">
+    <Content Include="Documentation\images\connections_main.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Connections\menu_top_bar.png">
+    <Content Include="Documentation\images\connections_top_bar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Documentation\images\import_export_dialog.png">
@@ -1277,12 +1277,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Help\ui_config.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_connections.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Documentation\images\quick_connect_01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1443,9 +1437,6 @@
     <None Include="Documentation\images\user_interface_panels_01.png" />
     <None Include="Documentation\images\user_interface_panels_02.png" />
     <None Include="Documentation\images\user_interface_panels_03.png" />
-    <Content Include="Resources\Help\Main.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icons\Anti Virus.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
