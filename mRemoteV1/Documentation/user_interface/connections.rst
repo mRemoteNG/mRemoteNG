@@ -130,7 +130,7 @@ If all goes well you should see the remote desktop without any problems.
 
 To close the connection you can do any of the following:
 
-- Log off in the start menu - Closes the connection and logs you out completely from RDP
-- Close the panel with the - Which leaves your session active on server but closes connection in mRemoteNG
-- Close the connection tab with - Also keeps your login active on server but closes RDP connection in mRemoteNG
-- Double click the connection tab - Same as above where the connection is active on server but closes RDP connection in mRemoteNG
+- Log off in the start menu (Closes the connection and logs you out completely from RDP)
+- Close the panel with the (Which leaves your session active on server but closes connection in mRemoteNG)
+- Close the connection tab with (Also keeps your login active on server but closes RDP connection in mRemoteNG)
+- Double click the connection tab (Same as above where the connection is active on server but closes RDP connection in mRemoteNG)
