@@ -25,14 +25,15 @@ Welcome to mRemoteNG's documentation!
    howtos/jumpservers.rst
    howtos/external_tools.rst
    howtos/folders_and_inheritance.rst
-   howtos/markup_guide.rst
-   
+   howtos/bulk_connections.rst
+
 .. toctree::
    :maxdepth: 2
    :caption: Miscellaneous
    
    howtos.rst
    external_tools_cheat_sheet.rst
+   troubleshooting.rst
    migrate.rst
    known_issues.rst
    Contribute <https://github.com/mRemoteNG/mRemoteNG/wiki>
