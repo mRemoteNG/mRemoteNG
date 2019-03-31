@@ -25,7 +25,7 @@ New Connection
     You can also duplicate an already created connection if you want to follow some sort of template of a connection. Just right click on folder or connection to duplicate the item. The information is then carried over for editing. This can save a lot of time when the connection list is large.
 
 Creates a new connection item in the connections dialog after where cursor is present.
- 
+
 New Folder
 ----------
 
@@ -48,8 +48,8 @@ Configuration
 
 .. figure:: /images/connections_main.png
 
-Config dialog to setup the connection specific properties. 
-This includes inheritance from other items before the item and more. 
+Config dialog to setup the connection specific properties.
+This includes inheritance from other items before the item and more.
 Details below is about how to work with this dialog to get the most out of connections and configuration.
 
 Menu Items
@@ -122,13 +122,14 @@ Opening and Closing Connections
 
     If the connecting fails, the notifications panel will pop up and show an error message describing the problem.
 
-There are multiple ways to open a connection in mRemoteNG, but the easiest way is to double click the connection in the Connections panel. 
-If you double click the connection you will notice that the connection is going to try and open in a new panel called "General" and under a tab called "Test". 
+There are multiple ways to open a connection in mRemoteNG, but the easiest way is to double click the connection in the Connections panel.
+If you double click the connection you will notice that the connection is going to try and open in a new panel called "General" and under a tab called "Test".
 If all goes well you should see the remote desktop without any problems.
 
 .. figure:: /images/connections_open.png
 
 To close the connection you can do any of the following:
+
 - Log off in the start menu - Closes the connection and logs you out completely from RDP
 - Close the panel with the - Which leaves your session active on server but closes connection in mRemoteNG
 - Close the connection tab with - Also keeps your login active on server but closes RDP connection in mRemoteNG
