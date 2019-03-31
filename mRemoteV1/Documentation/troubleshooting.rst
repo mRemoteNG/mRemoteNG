@@ -25,8 +25,7 @@ Portable version
 Crash at Startup
 ================
 
-Try deleting your [user.config](https://github.com/mRemoteNG/mRemoteNG/wiki/User-settings-file) file:
-https://support.microsoft.com/en-us/kb/956762
+Try deleting your `user.config <https://github.com/mRemoteNG/mRemoteNG/wiki/User-settings-file>`_ file, see https://support.microsoft.com/en-us/kb/956762
 
 Crash Information
 =================
