@@ -26,13 +26,13 @@ This option can be used to import computers from a specific OU from you Arctive 
 #. Go to: :menuselection:`File --> Import --> Import from Active Directory`
 #. Choose the domain to check for computers available
 
-.. note:: Further down the dialog you will see **Import sub OUs** which can be used also
+.. note:: Check the **Import sub OUs** checkbox if you want to import OUs recursively.
 
 Import from Port Scan
 ---------------------
 This option opens a dialog to import connections from a port scan. Both network and port range can be specified.
 
-.. important:: Port Scan uses nmap to scan the ports. Meaning that you need to be aware of how you scan. Since port scanning can be considered in some cases a brute force attack if you are not allowed to do so.
+.. important:: Port Scan uses nmap to scan the ports. Be carefull on how you scan your network, as this can be considered a brute force attack.
 
 
 .. figure:: /images/import_from_port_scan.png
