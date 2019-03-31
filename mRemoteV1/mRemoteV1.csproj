@@ -1095,6 +1095,7 @@
     <None Include="app.config" />
     <None Include="Documentation\contact_mail.rst" />
     <None Include="Documentation\howtos\folders_and_inheritance.rst" />
+    <None Include="Documentation\migrate.rst" />
     <None Include="Documentation\user_interface\connections.rst" />
     <None Include="Documentation\user_interface\options.rst" />
     <None Include="Documentation\user_interface\menus.rst" />

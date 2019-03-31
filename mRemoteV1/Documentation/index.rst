@@ -33,6 +33,7 @@ Welcome to mRemoteNG's documentation!
    
    howtos.rst
    external_tools_cheat_sheet.rst
+   migrate.rst
    known_issues.rst
    Contribute <https://github.com/mRemoteNG/mRemoteNG/wiki>
 
