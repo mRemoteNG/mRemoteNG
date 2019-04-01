@@ -1104,16 +1104,16 @@
     <None Include="Resources\Templates\Installer_Header.psd" />
     <None Include="Resources\Templates\Installer_Side.psd" />
     <None Include="Resources\Themes\darcula.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Themes\vs2015blue.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Themes\vs2015dark.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Themes\vs2015light.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Templates\VisualElements_150_dark.psd" />
     <None Include="Resources\Templates\VisualElements_150_light.psd" />
@@ -1247,13 +1247,13 @@
     </Content>
     <None Include="Resources\Images\Header_dark.png" />
     <None Include="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Tiles\VisualElements_70.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Tiles\VisualElements_150.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Icons\Appearance_Icon.ico" />
     <None Include="Resources\Icons\mRemoteNG_Icon.ico" />
