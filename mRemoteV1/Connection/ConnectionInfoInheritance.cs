@@ -385,12 +385,12 @@ namespace mRemoteNG.Connection
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCViewOnly {get; set;}
         #endregion
 
-        [Browsable(false)] public object Parent { get; set; }
+        [Browsable(false)] public ConnectionInfo Parent { get; private set; }
 
         #endregion
 
 
-        public ConnectionInfoInheritance(object parent, bool ignoreDefaultInheritance = false)
+        public ConnectionInfoInheritance(ConnectionInfo parent, bool ignoreDefaultInheritance = false)
         {
             Parent = parent;
             if (!ignoreDefaultInheritance)
@@ -398,9 +398,10 @@ namespace mRemoteNG.Connection
         }
 
 
-        public ConnectionInfoInheritance Clone()
+        public ConnectionInfoInheritance Clone(ConnectionInfo parent)
         {
             var newInheritance = (ConnectionInfoInheritance)MemberwiseClone();
+            newInheritance.Parent = parent;
             newInheritance._tempInheritanceStorage = null;
             return newInheritance;
         }
@@ -425,7 +426,7 @@ namespace mRemoteNG.Connection
 
         private void StashInheritanceData()
         {
-            _tempInheritanceStorage = Clone();
+            _tempInheritanceStorage = Clone(Parent);
         }
 
         public void TurnOnInheritanceCompletely()
