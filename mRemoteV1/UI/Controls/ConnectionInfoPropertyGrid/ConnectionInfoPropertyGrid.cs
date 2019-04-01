@@ -22,6 +22,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
     {
         private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache = new Dictionary<Type, IEnumerable<PropertyInfo>>();
         private ConnectionInfo _selectedConnectionInfo;
+        private PropertyMode _propertyMode;
 
         /// <summary>
         /// The <see cref="ConnectionInfo"/> currently being shown by this
@@ -44,17 +45,34 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
         }
 
         /// <summary>
+        /// Determines which set of properties this grid will display.
+        /// </summary>
+        public PropertyMode PropertyMode
+        {
+            get => _propertyMode;
+            set
+            {
+                if (_propertyMode == value)
+                    return;
+                _propertyMode = value;
+                SetGridObject();
+            }
+        }
+
+        /// <summary>
         /// Is the property grid showing the selected connection's
         /// inheritance info? If false, the connection's normal
         /// properties are shown instead.
         /// </summary>
-        public bool IsShowingInheritance { get; private set; }
+        public bool IsShowingInheritance => PropertyMode == PropertyMode.Inheritance ||
+                                            PropertyMode == PropertyMode.DefaultInheritance;
 
         /// <summary>
         /// This indicates whether the current <see cref="SelectedConnectionInfo"/>
         /// is a <see cref="DefaultConnectionInfo"/>.
         /// </summary>
-        public bool IsShowingDefaultProperties { get; private set; }
+        public bool IsShowingDefaultProperties => PropertyMode == PropertyMode.DefaultConnection ||
+                                                  PropertyMode == PropertyMode.DefaultInheritance;
 
         /// <summary>
         /// True when the <see cref="SelectedConnectionInfo"/> is
@@ -68,25 +86,26 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             PropertyValueChanged += pGrid_PropertyValueChanged;
         }
 
-        public void SetDisplayMode(bool showInheritance = false, bool showDefaultProperties = false)
-        {
-            IsShowingInheritance = showInheritance;
-            IsShowingDefaultProperties = showDefaultProperties;
-            SetGridObject();
-        }
-
         private void SetGridObject()
         {
             ClearFilters();
 
-            if (IsShowingDefaultProperties && IsShowingInheritance)
-                SelectedObject = DefaultConnectionInheritance.Instance;
-            else if (IsShowingDefaultProperties)
-                SelectedObject = DefaultConnectionInfo.Instance;
-            else if (IsShowingInheritance)
-                SelectedObject = SelectedConnectionInfo.Inheritance;
-            else
-                SelectedObject = SelectedConnectionInfo;
+            switch (PropertyMode)
+            {
+                case PropertyMode.Connection:
+                default:
+                    SelectedObject = SelectedConnectionInfo;
+                    break;
+                case PropertyMode.Inheritance:
+                    SelectedObject = SelectedConnectionInfo.Inheritance;
+                    break;
+                case PropertyMode.DefaultConnection:
+                    SelectedObject = DefaultConnectionInfo.Instance;
+                    break;
+                case PropertyMode.DefaultInheritance:
+                    SelectedObject = DefaultConnectionInheritance.Instance;
+                    break;
+            }
 
             ShowHideGridItems();
         }
