@@ -17,6 +17,13 @@ Welcome to mRemoteNG's documentation!
    keyboard_shortcuts.rst
    sql_configuration.rst
    command_line_switches.rst
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Support
+
+   troubleshooting.rst
+   known_issues.rst
    
 .. toctree::
    :maxdepth: 2
@@ -33,9 +40,7 @@ Welcome to mRemoteNG's documentation!
    
    howtos.rst
    external_tools_cheat_sheet.rst
-   troubleshooting.rst
    migrate.rst
-   known_issues.rst
    Contribute <https://github.com/mRemoteNG/mRemoteNG/wiki>
 
 .. toctree::
