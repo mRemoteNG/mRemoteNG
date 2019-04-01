@@ -177,7 +177,9 @@
     <Compile Include="Security\PasswordCreation\PasswordLengthConstraintTests.cs" />
     <Compile Include="Security\RandomGeneratorTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
+    <Compile Include="TestHelpers\ConnectionInfoAllConnectionPropertiesEqualityComparer.cs" />
     <Compile Include="TestHelpers\ConnectionInfoHelpers.cs" />
+    <Compile Include="TestHelpers\ConnectionInheritanceAllPropertiesEqualityComparer.cs" />
     <Compile Include="TestHelpers\ConnectionTreeModelBuilder.cs" />
     <Compile Include="Security\XmlCryptoProviderBuilderTests.cs" />
     <Compile Include="TestHelpers\FileTestHelpers.cs" />

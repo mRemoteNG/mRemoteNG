@@ -2,12 +2,13 @@
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 
 
 namespace mRemoteNGTests.Container
 {
-    public class ContainerInfoTests
+	public class ContainerInfoTests
     {
         private ContainerInfo _containerInfo;
         private ConnectionInfo _con1;
@@ -434,5 +435,69 @@ namespace mRemoteNGTests.Container
             var grandchildOrderAfterSort = _containerInfo.Children.ToArray();
             Assert.That(grandchildOrderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.ConstantID)));
         }
-    }
+
+        [Test]
+        public void CanApplyConnectionSettingsToChildren()
+        {
+	        var comparer = new ConnectionInfoAllConnectionPropertiesEqualityComparer();
+			var container = new ContainerInfo();
+	        var con1 = ConnectionInfoHelpers.GetRandomizedConnectionInfo();
+	        var con2 = ConnectionInfoHelpers.GetRandomizedConnectionInfo();
+			container.AddChild(con1);
+			container.AddChild(con2);
+
+			container.ApplyConnectionPropertiesToChildren();
+			
+			Assert.That(con1, Is.EqualTo(container).Using(comparer));
+			Assert.That(con2, Is.EqualTo(container).Using(comparer));
+        }
+
+        [Test]
+        public void ApplyConnectionPropertiesToChildrenWorksRecursively()
+        {
+	        var comparer = new ConnectionInfoAllConnectionPropertiesEqualityComparer();
+	        var container = new ContainerInfo();
+	        var subContainer = ConnectionInfoHelpers.GetRandomizedContainerInfo();
+	        var con1 = ConnectionInfoHelpers.GetRandomizedConnectionInfo();
+	        container.AddChild(subContainer);
+			subContainer.AddChild(con1);
+
+	        container.ApplyConnectionPropertiesToChildren();
+
+	        Assert.That(subContainer, Is.EqualTo(container).Using(comparer));
+	        Assert.That(con1, Is.EqualTo(container).Using(comparer));
+        }
+
+        [Test]
+        public void CanApplyInheritanceSettingsToChildren()
+        {
+	        var comparer = new ConnectionInheritanceAllPropertiesEqualityComparer();
+	        var container = new ContainerInfo();
+	        var con1 = ConnectionInfoHelpers.GetRandomizedConnectionInfo(randomizeInheritance:true);
+	        var con2 = ConnectionInfoHelpers.GetRandomizedConnectionInfo(randomizeInheritance: true);
+	        container.AddChild(con1);
+	        container.AddChild(con2);
+
+	        container.ApplyInheritancePropertiesToChildren();
+
+	        Assert.That(con1.Inheritance, Is.EqualTo(container.Inheritance).Using(comparer));
+	        Assert.That(con2.Inheritance, Is.EqualTo(container.Inheritance).Using(comparer));
+        }
+
+        [Test]
+        public void ApplyInheritancePropertiesToChildrenWorksRecursively()
+        {
+	        var comparer = new ConnectionInheritanceAllPropertiesEqualityComparer();
+	        var container = new ContainerInfo();
+	        var subContainer = ConnectionInfoHelpers.GetRandomizedContainerInfo(randomizeInheritance: true);
+	        var con1 = ConnectionInfoHelpers.GetRandomizedConnectionInfo(randomizeInheritance: true);
+	        container.AddChild(subContainer);
+	        subContainer.AddChild(con1);
+
+	        container.ApplyInheritancePropertiesToChildren();
+
+	        Assert.That(subContainer.Inheritance, Is.EqualTo(container.Inheritance).Using(comparer));
+	        Assert.That(con1.Inheritance, Is.EqualTo(container.Inheritance).Using(comparer));
+        }
+	}
 }
