@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using mRemoteNG.App;
 
 
@@ -6,6 +7,7 @@ namespace mRemoteNG.Connection
 {
     public class DefaultConnectionInheritance : ConnectionInfoInheritance
     {
+        [Browsable(false)]
         public static DefaultConnectionInheritance Instance { get; } = new DefaultConnectionInheritance();
 
         private DefaultConnectionInheritance() : base(null, true)

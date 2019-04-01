@@ -204,7 +204,7 @@ namespace mRemoteNG.Container
             var newContainer = new ContainerInfo();
             newContainer.CopyFrom(this);
             newContainer.OpenConnections = new ProtocolList();
-            newContainer.Inheritance = Inheritance.Clone();
+            newContainer.Inheritance = Inheritance.Clone(newContainer);
             foreach (var child in Children.ToArray())
             {
                 var newChild = child.Clone();

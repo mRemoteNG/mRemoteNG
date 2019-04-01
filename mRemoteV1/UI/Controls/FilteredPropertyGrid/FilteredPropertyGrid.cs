@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using mRemoteNG.App;
 
 namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 {
@@ -139,6 +138,159 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
             }
         }
 
+        public List<GridItem> GetVisibleGridItems()
+        {
+            var gridRoot = SelectedGridItem;
+            while (gridRoot.GridItemType != GridItemType.Root)
+            {
+                gridRoot = gridRoot.Parent;
+            }
+            return GetVisibleGridItemsRecursive(gridRoot, new List<GridItem>());
+        }
+
+        private List<GridItem> GetVisibleGridItemsRecursive(GridItem item, List<GridItem> gridItems)
+        {
+            if (item.GridItemType == GridItemType.Property && !gridItems.Contains(item))
+                gridItems.Add(item);
+
+            if (item.Expandable && !item.Expanded)
+                return gridItems;
+
+            foreach (GridItem child in item.GridItems)
+            {
+                GetVisibleGridItemsRecursive(child, gridItems);
+            }
+
+            return gridItems;
+        }
+
+        public GridItem FindPreviousGridItemProperty(GridItem startItem)
+        {
+            var gridItems = GetVisibleGridItems();
+
+            if (gridItems.Count == 0 || startItem == null)
+                return null;
+
+            var startIndex = gridItems.IndexOf(startItem);
+            if (startItem.GridItemType == GridItemType.Property)
+            {
+                startIndex--;
+                if (startIndex < 0)
+                {
+                    startIndex = gridItems.Count - 1;
+                }
+            }
+
+            var previousIndex = 0;
+            var previousIndexValid = false;
+            for (var index = startIndex; index >= 0; index--)
+            {
+                if (gridItems[index].GridItemType != GridItemType.Property) continue;
+                previousIndex = index;
+                previousIndexValid = true;
+                break;
+            }
+
+            if (previousIndexValid)
+                return gridItems[previousIndex];
+
+            for (var index = gridItems.Count - 1; index >= startIndex + 1; index--)
+            {
+                if (gridItems[index].GridItemType != GridItemType.Property) continue;
+                previousIndex = index;
+                previousIndexValid = true;
+                break;
+            }
+
+            return !previousIndexValid ? null : gridItems[previousIndex];
+        }
+
+        public GridItem FindNextGridItemProperty(GridItem startItem)
+        {
+            var gridItems = GetVisibleGridItems();
+
+            if (gridItems.Count == 0 || startItem == null)
+                return null;
+
+            var startIndex = gridItems.IndexOf(startItem);
+            if (startItem.GridItemType == GridItemType.Property)
+            {
+                startIndex++;
+                if (startIndex >= gridItems.Count)
+                {
+                    startIndex = 0;
+                }
+            }
+
+            var nextIndex = 0;
+            var nextIndexValid = false;
+            for (var index = startIndex; index <= gridItems.Count - 1; index++)
+            {
+                if (gridItems[index].GridItemType != GridItemType.Property) continue;
+                nextIndex = index;
+                nextIndexValid = true;
+                break;
+            }
+
+            if (nextIndexValid)
+                return gridItems[nextIndex];
+
+            for (var index = 0; index <= startIndex - 1; index++)
+            {
+                if (gridItems[index].GridItemType != GridItemType.Property) continue;
+                nextIndex = index;
+                nextIndexValid = true;
+                break;
+            }
+
+            return !nextIndexValid ? null : gridItems[nextIndex];
+        }
+
+        /// <summary>
+        /// Selects the next grid item in the property grid
+        /// using the currently selected grid item as a reference.
+        /// Does nothing if there is no next item.
+        /// </summary>
+        public void SelectNextGridItem()
+        {
+            var nextGridItem = FindNextGridItemProperty(SelectedGridItem);
+            if (nextGridItem != null)
+                SelectedGridItem = nextGridItem;
+        }
+
+        /// <summary>
+        /// Selects the previous grid item in the property grid
+        /// using the currently selected grid item as a reference.
+        /// Does nothing if there is no previous item.
+        /// </summary>
+        public void SelectPreviousGridItem()
+        {
+            var previousGridItem = FindPreviousGridItemProperty(SelectedGridItem);
+            if (previousGridItem != null)
+                SelectedGridItem = previousGridItem;
+        }
+
+        /// <summary>
+        /// Select the grid item whose backing property name
+        /// matches the given <see cref="propertyName"/>.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        public void SelectGridItem(string propertyName)
+        {
+            var item = GetVisibleGridItems()
+                .FirstOrDefault(gridItem => gridItem.PropertyDescriptor?.Name == propertyName);
+
+            if (item != null)
+                SelectedGridItem = item;
+        }
+
+        public void ClearFilters()
+        {
+            _mBrowsableProperties = null;
+            _mHiddenProperties = null;
+            RefreshProperties();
+        }
+
         /// <summary>
         /// Build the list of the properties to be displayed in the PropertyGrid, following the filters defined the Browsable and Hidden properties.
         /// </summary>
@@ -156,7 +308,24 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
                 foreach (Attribute attribute in _browsableAttributes)
                     ShowAttribute(attribute);
             }
-            else
+
+            // Display if necessary, some properties
+            if (_mBrowsableProperties != null && _mBrowsableProperties.Length > 0)
+            {
+                var allproperties = TypeDescriptor.GetProperties(_mWrapper.SelectedObject);
+                foreach (var propertyname in _mBrowsableProperties)
+                {
+                    var property = allproperties[propertyname];
+
+                    if (property == null)
+                        throw new InvalidOperationException($"Property '{propertyname}' not found on object '{_mWrapper.GetClassName()}'");
+
+                    ShowProperty(property);
+                }
+            }
+
+            if ((_browsableAttributes == null || _browsableAttributes.Count == 0) &&
+                (_mBrowsableProperties == null || _mBrowsableProperties.Length == 0))
             {
                 // Fill the collection with all the properties.
                 var originalPropertyDescriptors = TypeDescriptor
@@ -166,15 +335,12 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 
                 foreach (PropertyDescriptor propertyDescriptor in originalPropertyDescriptors)
                     _propertyDescriptors.Add(propertyDescriptor);
-
-                // Remove from the list the attributes that mustn't be displayed.
-                if (_hiddenAttributes != null)
-                    foreach (Attribute attribute in _hiddenAttributes)
-                        HideAttribute(attribute);
             }
 
-            // Get all the properties of the SelectedObject
-            var allproperties = TypeDescriptor.GetProperties(_mWrapper.SelectedObject);
+            // Remove from the list the attributes that mustn't be displayed.
+            if (_hiddenAttributes != null)
+                foreach (Attribute attribute in _hiddenAttributes)
+                    HideAttribute(attribute);
 
             // Hide if necessary, some properties
             if (_mHiddenProperties != null && _mHiddenProperties.Length > 0)
@@ -182,33 +348,10 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
                 // Remove from the list the properties that mustn't be displayed.
                 foreach (var propertyname in _mHiddenProperties)
                 {
-                    try
-                    {
-                        var property = allproperties[propertyname];
-                        // Remove from the list the property
-                        HideProperty(property);
-                    }
-                    catch (Exception ex)
-                    {
-                        Runtime.MessageCollector.AddExceptionMessage("FilteredPropertyGrid: Could not hide Property.",
-                                                                     ex);
-                    }
-                }
-            }
+                    var property = _propertyDescriptors.FirstOrDefault(p => p.Name == propertyname);
 
-            // Display if necessary, some properties
-            if (_mBrowsableProperties != null && _mBrowsableProperties.Length > 0)
-            {
-                foreach (var propertyname in _mBrowsableProperties)
-                {
-                    try
-                    {
-                        ShowProperty(allproperties[propertyname]);
-                    }
-                    catch (Exception ex)
-                    {
-                        Runtime.MessageCollector.AddExceptionMessage("FilteredPropertyGrid: Property not found", ex);
-                    }
+                    // Remove from the list the property
+                    HideProperty(property);
                 }
             }
         }

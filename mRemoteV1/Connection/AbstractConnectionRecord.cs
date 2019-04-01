@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -7,11 +6,11 @@ using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Tools;
+using mRemoteNG.Tools.Attributes;
 
 
 namespace mRemoteNG.Connection
 {
-    [Obsolete("Valid for mRemoteNG v1.75 (confCons v2.6) or earlier")]
     public abstract class AbstractConnectionRecord : INotifyPropertyChanged
     {
         #region Fields
@@ -131,7 +130,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameAddress"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAddress")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAddress"),
+         UsedInAllProtocolsExcept()]
         public virtual string Hostname
         {
             get => _hostname.Trim();
@@ -140,7 +140,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername"),
+         UsedInAllProtocolsExcept(ProtocolType.VNC, ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
         public virtual string Username
         {
             get => GetPropertyValue("Username", _username);
@@ -150,7 +151,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNamePassword"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPassword"),
-         PasswordPropertyText(true)]
+         PasswordPropertyText(true),
+         UsedInAllProtocolsExcept(ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
         public virtual string Password
         {
             get => GetPropertyValue("Password", _password);
@@ -159,7 +161,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain"),
+         UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA, ProtocolType.IntApp)]
         public string Domain
         {
             get => GetPropertyValue("Domain", _domain).Trim();
@@ -183,7 +186,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalTool"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalTool"),
-         TypeConverter(typeof(ExternalToolsTypeConverter))]
+         TypeConverter(typeof(ExternalToolsTypeConverter)),
+         UsedInProtocol(ProtocolType.IntApp)]
         public string ExtApp
         {
             get => GetPropertyValue("ExtApp", _extApp);
@@ -192,7 +196,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNamePort"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPort")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPort"),
+         UsedInAllProtocolsExcept(ProtocolType.ICA)]
         public virtual int Port
         {
             get => GetPropertyValue("Port", _port);
@@ -202,7 +207,9 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNamePuttySession"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPuttySession"),
-         TypeConverter(typeof(Config.Putty.PuttySessionsManager.SessionList))]
+         TypeConverter(typeof(Config.Putty.PuttySessionsManager.SessionList)),
+         UsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.Telnet,
+            ProtocolType.RAW, ProtocolType.Rlogin)]
         public virtual string PuttySession
         {
             get => GetPropertyValue("PuttySession", _puttySession);
@@ -212,7 +219,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameEncryptionStrength"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEncryptionStrength"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.ICA)]
         public IcaProtocol.EncryptionStrength ICAEncryptionStrength
         {
             get => GetPropertyValue("ICAEncryptionStrength", _icaEncryption);
@@ -222,7 +230,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseConsoleSession"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseConsoleSession"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool UseConsoleSession
         {
             get => GetPropertyValue("UseConsoleSession", _useConsoleSession);
@@ -232,7 +241,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameAuthenticationLevel"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAuthenticationLevel"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public RdpProtocol.AuthenticationLevel RDPAuthenticationLevel
         {
             get => GetPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel);
@@ -241,7 +251,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDPMinutesToIdleTimeout"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPMinutesToIdleTimeout")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPMinutesToIdleTimeout"),
+         UsedInProtocol(ProtocolType.RDP)]
         public virtual int RDPMinutesToIdleTimeout
         {
             get => GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout);
@@ -257,7 +268,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDPAlertIdleTimeout"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPAlertIdleTimeout")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDPAlertIdleTimeout"),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool RDPAlertIdleTimeout
         {
             get => GetPropertyValue("RDPAlertIdleTimeout", _rdpAlertIdleTimeout);
@@ -266,7 +278,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameLoadBalanceInfo"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionLoadBalanceInfo")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionLoadBalanceInfo"),
+         UsedInProtocol(ProtocolType.RDP)]
         public string LoadBalanceInfo
         {
             get => GetPropertyValue("LoadBalanceInfo", _loadBalanceInfo).Trim();
@@ -276,7 +289,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRenderingEngine"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRenderingEngine"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.HTTP, ProtocolType.HTTPS)]
         public HTTPBase.RenderingEngine RenderingEngine
         {
             get => GetPropertyValue("RenderingEngine", _renderingEngine);
@@ -286,7 +300,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseCredSsp"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseCredSsp"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool UseCredSsp
         {
             get => GetPropertyValue("UseCredSsp", _useCredSsp);
@@ -300,7 +315,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUsageMethod"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsageMethod"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public RdpProtocol.RDGatewayUsageMethod RDGatewayUsageMethod
         {
             get => GetPropertyValue("RDGatewayUsageMethod", _rdGatewayUsageMethod);
@@ -309,7 +325,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayHostname"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayHostname")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayHostname"),
+         UsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayHostname
         {
             get => GetPropertyValue("RDGatewayHostname", _rdGatewayHostname).Trim();
@@ -319,7 +336,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUseConnectionCredentials"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUseConnectionCredentials"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public RdpProtocol.RDGatewayUseConnectionCredentials RDGatewayUseConnectionCredentials
         {
             get => GetPropertyValue("RDGatewayUseConnectionCredentials", _rdGatewayUseConnectionCredentials);
@@ -328,7 +346,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUsername"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsername")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsername"),
+         UsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayUsername
         {
             get => GetPropertyValue("RDGatewayUsername", _rdGatewayUsername).Trim();
@@ -338,7 +357,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayPassword"),
          LocalizedAttributes.LocalizedDescription("strPropertyNameRDGatewayPassword"),
-         PasswordPropertyText(true)]
+         PasswordPropertyText(true),
+         UsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayPassword
         {
             get => GetPropertyValue("RDGatewayPassword", _rdGatewayPassword);
@@ -347,7 +367,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayDomain"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayDomain")]
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayDomain"),
+         UsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayDomain
         {
             get => GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim();
@@ -361,7 +382,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameResolution"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionResolution"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA)]
         public RdpProtocol.RDPResolutions Resolution
         {
             get => GetPropertyValue("Resolution", _resolution);
@@ -371,7 +393,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameAutomaticResize"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAutomaticResize"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool AutomaticResize
         {
             get => GetPropertyValue("AutomaticResize", _automaticResize);
@@ -381,7 +404,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameColors"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionColors"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA)]
         public RdpProtocol.RDPColors Colors
         {
             get => GetPropertyValue("Colors", _colors);
@@ -391,7 +415,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameCacheBitmaps"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionCacheBitmaps"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA)]
         public bool CacheBitmaps
         {
             get => GetPropertyValue("CacheBitmaps", _cacheBitmaps);
@@ -401,7 +426,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameDisplayWallpaper"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDisplayWallpaper"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool DisplayWallpaper
         {
             get => GetPropertyValue("DisplayWallpaper", _displayWallpaper);
@@ -411,7 +437,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameDisplayThemes"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDisplayThemes"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool DisplayThemes
         {
             get => GetPropertyValue("DisplayThemes", _displayThemes);
@@ -421,7 +448,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameEnableFontSmoothing"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEnableFontSmoothing"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool EnableFontSmoothing
         {
             get => GetPropertyValue("EnableFontSmoothing", _enableFontSmoothing);
@@ -431,7 +459,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameEnableDesktopComposition"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEnableDesktopComposition"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool EnableDesktopComposition
         {
             get => GetPropertyValue("EnableDesktopComposition", _enableDesktopComposition);
@@ -445,7 +474,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectKeys"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectKeys"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool RedirectKeys
         {
             get => GetPropertyValue("RedirectKeys", _redirectKeys);
@@ -455,7 +485,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectDrives"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectDrives"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool RedirectDiskDrives
         {
             get => GetPropertyValue("RedirectDiskDrives", _redirectDiskDrives);
@@ -465,7 +496,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectPrinters"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectPrinters"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool RedirectPrinters
         {
             get => GetPropertyValue("RedirectPrinters", _redirectPrinters);
@@ -475,7 +507,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectClipboard"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectClipboard"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool RedirectClipboard
         {
             get { return GetPropertyValue("RedirectClipboard", _redirectClipboard); }
@@ -485,7 +518,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectPorts"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectPorts"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool RedirectPorts
         {
             get => GetPropertyValue("RedirectPorts", _redirectPorts);
@@ -495,7 +529,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectSmartCards"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectSmartCards"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public bool RedirectSmartCards
         {
             get => GetPropertyValue("RedirectSmartCards", _redirectSmartCards);
@@ -505,7 +540,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectSounds"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectSounds"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public RdpProtocol.RDPSounds RedirectSound
         {
             get => GetPropertyValue("RedirectSound", _redirectSound);
@@ -515,7 +551,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameSoundQuality"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSoundQuality"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
         public RdpProtocol.RDPSoundQuality SoundQuality
         {
             get => GetPropertyValue("SoundQuality", _soundQuality);
@@ -526,7 +563,7 @@ namespace mRemoteNG.Connection
 
         #region Misc
 
-        [Browsable(false)] public string ConstantID { get; /*set;*/ }
+        [Browsable(false)] public string ConstantID { get; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolBefore"),
@@ -580,10 +617,10 @@ namespace mRemoteNG.Connection
         #region VNC
 
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
-         Browsable(false),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameCompression"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionCompression"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.VNC)]
         public ProtocolVNC.Compression VNCCompression
         {
             get => GetPropertyValue("VNCCompression", _vncCompression);
@@ -591,10 +628,10 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
-         Browsable(false),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameEncoding"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEncoding"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.VNC)]
         public ProtocolVNC.Encoding VNCEncoding
         {
             get => GetPropertyValue("VNCEncoding", _vncEncoding);
@@ -602,10 +639,10 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
-         Browsable(false),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameAuthenticationMode"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAuthenticationMode"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.VNC)]
         public ProtocolVNC.AuthMode VNCAuthMode
         {
             get => GetPropertyValue("VNCAuthMode", _vncAuthMode);
@@ -613,10 +650,10 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
-            Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyType"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyType"),
-            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+            UsedInProtocol(ProtocolType.VNC)]
         public ProtocolVNC.ProxyType VNCProxyType
         {
             get => GetPropertyValue("VNCProxyType", _vncProxyType);
@@ -624,9 +661,9 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
-            Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyAddress"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyAddress")]
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyAddress"),
+            UsedInProtocol(ProtocolType.VNC)]
         public string VNCProxyIP
         {
             get => GetPropertyValue("VNCProxyIP", _vncProxyIp);
@@ -634,9 +671,9 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
-            Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPort"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPort")]
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPort"),
+            UsedInProtocol(ProtocolType.VNC)]
         public int VNCProxyPort
         {
             get => GetPropertyValue("VNCProxyPort", _vncProxyPort);
@@ -644,9 +681,9 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
-            Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyUsername"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyUsername")]
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyUsername"),
+            UsedInProtocol(ProtocolType.VNC)]
         public string VNCProxyUsername
         {
             get => GetPropertyValue("VNCProxyUsername", _vncProxyUsername);
@@ -654,10 +691,10 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
-            Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPassword"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPassword"),
-            PasswordPropertyText(true)]
+            PasswordPropertyText(true),
+            UsedInProtocol(ProtocolType.VNC)]
         public string VNCProxyPassword
         {
             get => GetPropertyValue("VNCProxyPassword", _vncProxyPassword);
@@ -665,10 +702,10 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
-         Browsable(false),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameColors"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionColors"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.VNC)]
         public ProtocolVNC.Colors VNCColors
         {
             get => GetPropertyValue("VNCColors", _vncColors);
@@ -678,7 +715,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameSmartSizeMode"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSmartSizeMode"),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter))]
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.VNC)]
         public ProtocolVNC.SmartSizeMode VNCSmartSizeMode
         {
             get => GetPropertyValue("VNCSmartSizeMode", _vncSmartSizeMode);
@@ -688,7 +726,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameViewOnly"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionViewOnly"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.VNC)]
         public bool VNCViewOnly
         {
             get => GetPropertyValue("VNCViewOnly", _vncViewOnly);

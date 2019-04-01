@@ -12,17 +12,14 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 {
-    public class ConfigWindowGeneralTests
+	public class ConfigWindowGeneralTests
     {
         private ConfigWindow _configWindow;
 
         [SetUp]
         public void Setup()
         {
-            _configWindow = new ConfigWindow
-            {
-                PropertiesVisible = true
-            };
+            _configWindow = new ConfigWindow();
         }
 
         [TestCaseSource(nameof(ConnectionInfoGeneralTestCases))]

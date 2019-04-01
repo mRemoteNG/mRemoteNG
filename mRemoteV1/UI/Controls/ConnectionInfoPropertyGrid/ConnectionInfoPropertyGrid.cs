@@ -1,0 +1,325 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Messages;
+using mRemoteNG.Security;
+using mRemoteNG.Tools;
+using mRemoteNG.Tools.Attributes;
+using mRemoteNG.Tree.Root;
+
+namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
+{
+    public partial class ConnectionInfoPropertyGrid : FilteredPropertyGrid.FilteredPropertyGrid
+    {
+        private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache = new Dictionary<Type, IEnumerable<PropertyInfo>>();
+        private ConnectionInfo _selectedConnectionInfo;
+
+        /// <summary>
+        /// The <see cref="ConnectionInfo"/> currently being shown by this
+        /// property grid.
+        /// </summary>
+        public ConnectionInfo SelectedConnectionInfo
+        {
+            get => _selectedConnectionInfo;
+            set
+            {
+                if (value == null)
+                    return;
+                if (_selectedConnectionInfo == value)
+                    return;
+
+                _selectedConnectionInfo = value;
+                RootNodeSelected = SelectedConnectionInfo is RootNodeInfo;
+                SetGridObject();
+            }
+        }
+
+        /// <summary>
+        /// Is the property grid showing the selected connection's
+        /// inheritance info? If false, the connection's normal
+        /// properties are shown instead.
+        /// </summary>
+        public bool IsShowingInheritance { get; private set; }
+
+        /// <summary>
+        /// This indicates whether the current <see cref="SelectedConnectionInfo"/>
+        /// is a <see cref="DefaultConnectionInfo"/>.
+        /// </summary>
+        public bool IsShowingDefaultProperties { get; private set; }
+
+        /// <summary>
+        /// True when the <see cref="SelectedConnectionInfo"/> is
+        /// of type <see cref="RootNodeInfo"/>.
+        /// </summary>
+        public bool RootNodeSelected { get; private set; }
+
+        public ConnectionInfoPropertyGrid()
+        {
+            InitializeComponent();
+            PropertyValueChanged += pGrid_PropertyValueChanged;
+        }
+
+        public void SetDisplayMode(bool showInheritance = false, bool showDefaultProperties = false)
+        {
+            IsShowingInheritance = showInheritance;
+            IsShowingDefaultProperties = showDefaultProperties;
+            SetGridObject();
+        }
+
+        private void SetGridObject()
+        {
+            ClearFilters();
+
+            if (IsShowingDefaultProperties && IsShowingInheritance)
+                SelectedObject = DefaultConnectionInheritance.Instance;
+            else if (IsShowingDefaultProperties)
+                SelectedObject = DefaultConnectionInfo.Instance;
+            else if (IsShowingInheritance)
+                SelectedObject = SelectedConnectionInfo.Inheritance;
+            else
+                SelectedObject = SelectedConnectionInfo;
+
+            ShowHideGridItems();
+        }
+
+        private void ShowHideGridItems()
+        {
+            try
+            {
+                if (RootNodeSelected && !IsShowingDefaultProperties)
+                {
+                    if (SelectedConnectionInfo is RootPuttySessionsNodeInfo)
+                    {
+                        BrowsableProperties = new[]
+                        {
+                            nameof(RootNodeInfo.Name)
+                        };
+                    }
+                    else // root connections node
+                    {
+                        BrowsableProperties = new[]
+                        {
+                            nameof(RootNodeInfo.Name),
+                            nameof(RootNodeInfo.Password)
+                        };
+                    }
+
+                    Refresh();
+                    return;
+                }
+
+                // set all browsable properties valid for this connection's protocol
+                BrowsableProperties =
+                    GetPropertiesForGridObject(SelectedObject)
+                    .Where(property =>
+                        IsValidForProtocol(property, SelectedConnectionInfo.Protocol, IsShowingInheritance))
+                    .Select(property => property.Name)
+                    .ToArray();
+
+                var strHide = new List<string>();
+                // ReSharper disable once SwitchStatementMissingSomeCases
+                switch (SelectedConnectionInfo.Protocol)
+                {
+                    case ProtocolType.RDP:
+                        strHide.AddRange(SpecialRdpExclusions());
+                        break;
+                    case ProtocolType.VNC:
+                        strHide.AddRange(SpecialVncExclusions());
+                        break;
+                }
+
+                if (!IsShowingDefaultProperties)
+                {
+                    // hide any inherited properties
+                    strHide.AddRange(SelectedConnectionInfo.Inheritance.GetEnabledInheritanceProperties());
+
+                    if (SelectedConnectionInfo.IsContainer)
+                        strHide.Add(nameof(AbstractConnectionRecord.Hostname));
+                }
+                else // default connection
+                {
+                    strHide.Add(nameof(AbstractConnectionRecord.Hostname));
+                    strHide.Add(nameof(AbstractConnectionRecord.Name));
+                }
+
+                HiddenProperties = strHide.ToArray();
+                Refresh();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(
+                    MessageClass.ErrorMsg,
+                    Language.strConfigPropertyGridHideItemsFailed +
+                    Environment.NewLine + ex.Message, true);
+            }
+        }
+
+        private IEnumerable<PropertyInfo> GetPropertiesForGridObject(object currentGridObject)
+        {
+            if (_propertyCache.TryGetValue(currentGridObject.GetType(), out var properties))
+                return properties;
+
+            var type = currentGridObject.GetType();
+            var props = type.GetProperties();
+            _propertyCache.Add(type, props);
+
+            return props;
+        }
+
+        private bool IsValidForProtocol(PropertyInfo property, ProtocolType protocol, bool skipProtocolCheck)
+        {
+            return
+                property.GetCustomAttribute<BrowsableAttribute>()?.Browsable != false &&
+                (skipProtocolCheck || property.GetCustomAttribute<UsedInProtocolAttribute>()?
+                    .SupportedProtocolTypes
+                    .Contains(protocol) != false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<string> SpecialRdpExclusions()
+        {
+            var strHide = new List<string>();
+
+            if (SelectedConnectionInfo.RDPMinutesToIdleTimeout <= 0)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.RDPAlertIdleTimeout));
+            }
+
+            if (SelectedConnectionInfo.RDGatewayUsageMethod == RdpProtocol.RDGatewayUsageMethod.Never)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayHostname));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUseConnectionCredentials));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
+            }
+            else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials ==
+                     RdpProtocol.RDGatewayUseConnectionCredentials.Yes)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
+            }
+
+            if (!(SelectedConnectionInfo.Resolution == RdpProtocol.RDPResolutions.FitToWindow ||
+                  SelectedConnectionInfo.Resolution == RdpProtocol.RDPResolutions.Fullscreen))
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.AutomaticResize));
+            }
+
+            if (SelectedConnectionInfo.RedirectSound != RdpProtocol.RDPSounds.BringToThisComputer)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.SoundQuality));
+            }
+
+            return strHide;
+        }
+
+        private List<string> SpecialVncExclusions()
+        {
+            var strHide = new List<string>();
+            if (SelectedConnectionInfo.VNCAuthMode == ProtocolVNC.AuthMode.AuthVNC)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.Username));
+                strHide.Add(nameof(AbstractConnectionRecord.Domain));
+            }
+
+            if (SelectedConnectionInfo.VNCProxyType == ProtocolVNC.ProxyType.ProxyNone)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.VNCProxyIP));
+                strHide.Add(nameof(AbstractConnectionRecord.VNCProxyPassword));
+                strHide.Add(nameof(AbstractConnectionRecord.VNCProxyPort));
+                strHide.Add(nameof(AbstractConnectionRecord.VNCProxyUsername));
+            }
+
+            return strHide;
+        }
+
+        private void UpdateConnectionInfoNode(PropertyValueChangedEventArgs e)
+        {
+            if (IsShowingInheritance)
+                return;
+
+            if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
+            {
+                SelectedConnectionInfo.SetDefaultPort();
+            }
+            else if (e.ChangedItem.Label == Language.strPropertyNameName)
+            {
+                if (Settings.Default.SetHostnameLikeDisplayName)
+                {
+                    if (!string.IsNullOrEmpty(SelectedConnectionInfo.Name))
+                        SelectedConnectionInfo.Hostname = SelectedConnectionInfo.Name;
+                }
+            }
+
+            if (IsShowingDefaultProperties)
+                DefaultConnectionInfo.Instance.SaveTo(Settings.Default, a => "ConDefault" + a);
+        }
+
+        private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)
+        {
+            if (!(SelectedObject is RootNodeInfo rootInfo))
+                return;
+
+            if (e.ChangedItem.PropertyDescriptor?.Name != "Password")
+                return;
+
+            if (rootInfo.Password)
+            {
+                var passwordName = Settings.Default.UseSQLServer
+                    ? Language.strSQLServer.TrimEnd(':')
+                    : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
+
+                var password = MiscTools.PasswordDialog(passwordName);
+
+                // operation cancelled, dont set a password
+                if (!password.Any() || password.First().Length == 0)
+                {
+                    rootInfo.Password = false;
+                    return;
+                }
+
+                rootInfo.PasswordString = password.First().ConvertToUnsecureString();
+            }
+            else
+            {
+                rootInfo.PasswordString = "";
+            }
+        }
+
+        private void UpdateInheritanceNode()
+        {
+            if (IsShowingDefaultProperties && IsShowingInheritance)
+                DefaultConnectionInheritance.Instance.SaveTo(Settings.Default, a => "InhDefault" + a);
+        }
+
+        private void pGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            try
+            {
+                UpdateConnectionInfoNode(e);
+                UpdateRootInfoNode(e);
+                UpdateInheritanceNode();
+                ShowHideGridItems();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    Language.strConfigPropertyGridValueFailed + Environment.NewLine +
+                    ex.Message, true);
+            }
+        }
+    }
+}

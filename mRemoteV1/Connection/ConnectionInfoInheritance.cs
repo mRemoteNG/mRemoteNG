@@ -453,6 +453,19 @@ namespace mRemoteNG.Connection
             return filteredProperties;
         }
 
+        /// <summary>
+        /// Gets the name of all properties where inheritance is turned on
+        /// (set to True).
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetEnabledInheritanceProperties()
+        {
+            return GetProperties()
+                .Where(property => (bool)property.GetValue(this))
+                .Select(property => property.Name)
+                .ToList();
+        }
+
         private bool FilterProperty(PropertyInfo propertyInfo)
         {
             var exclusions = new[] {"EverythingInherited", "Parent"};
