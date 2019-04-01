@@ -145,26 +145,30 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                     .ToArray();
 
                 var strHide = new List<string>();
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (SelectedConnectionInfo.Protocol)
-                {
-                    case ProtocolType.RDP:
-                        strHide.AddRange(SpecialRdpExclusions());
-                        break;
-                    case ProtocolType.VNC:
-                        strHide.AddRange(SpecialVncExclusions());
-                        break;
-                }
 
-                if (!IsShowingDefaultProperties)
+                if (PropertyMode == PropertyMode.Connection)
                 {
                     // hide any inherited properties
                     strHide.AddRange(SelectedConnectionInfo.Inheritance.GetEnabledInheritanceProperties());
 
+                    // ReSharper disable once SwitchStatementMissingSomeCases
+                    switch (SelectedConnectionInfo.Protocol)
+                    {
+                        case ProtocolType.RDP:
+                            strHide.AddRange(SpecialRdpExclusions());
+                            break;
+                        case ProtocolType.VNC:
+                            strHide.AddRange(SpecialVncExclusions());
+                            break;
+                    }
+
                     if (SelectedConnectionInfo.IsContainer)
                         strHide.Add(nameof(AbstractConnectionRecord.Hostname));
+
+                    if (SelectedConnectionInfo is PuttySessionInfo)
+                        strHide.Add(nameof(AbstractConnectionRecord.Favorite));
                 }
-                else // default connection
+                else if (PropertyMode == PropertyMode.DefaultConnection)
                 {
                     strHide.Add(nameof(AbstractConnectionRecord.Hostname));
                     strHide.Add(nameof(AbstractConnectionRecord.Name));
