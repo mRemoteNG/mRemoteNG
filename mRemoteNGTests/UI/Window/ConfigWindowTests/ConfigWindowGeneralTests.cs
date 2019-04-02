@@ -54,7 +54,41 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             Assert.That(_configWindow.VisibleObjectProperties, Is.EquivalentTo(expectedVisibleProperties));
         }
 
-        private static IEnumerable<TestCaseData> ConnectionInfoGeneralTestCases()
+        [Test]
+        public void SwitchFromInheritanceToConnectionPropertiesWhenClickingRootNode()
+        {
+			// connection with a normal parent container
+			var connection = new ConnectionInfo();
+			connection.SetParent(new ContainerInfo());
+
+			_configWindow.SelectedTreeNode = connection;
+			_configWindow.ShowInheritanceProperties();
+
+	        _configWindow.SelectedTreeNode = new RootNodeInfo(RootNodeType.Connection);
+			Assert.That(_configWindow.PropertiesVisible, Is.True, 
+				() => "The property mode should switch from inheritance to connection properties when clicking on the root node.");
+		}
+
+        [Test]
+        public void SwitchFromInheritanceToConnectionPropertiesWhenClickingChildOfRootNode()
+        {
+	        // connection with a normal parent container
+			var root = new RootNodeInfo(RootNodeType.Connection);
+			var containerWhoseParentIsRoot = new ContainerInfo();
+	        var connection = new ConnectionInfo();
+	        root.AddChild(containerWhoseParentIsRoot);
+			containerWhoseParentIsRoot.AddChild(connection);
+
+	        _configWindow.SelectedTreeNode = connection;
+	        _configWindow.ShowInheritanceProperties();
+
+	        _configWindow.SelectedTreeNode = containerWhoseParentIsRoot;
+	        Assert.That(_configWindow.PropertiesVisible, Is.True,
+		        () => "The property mode should switch from inheritance to connection properties " +
+		              "when clicking on a container whose parent is the root node.");
+        }
+
+		private static IEnumerable<TestCaseData> ConnectionInfoGeneralTestCases()
         {
             var protocolTypes = typeof(ProtocolType).GetEnumValues().OfType<ProtocolType>();
             var testCases = new List<TestCaseData>();

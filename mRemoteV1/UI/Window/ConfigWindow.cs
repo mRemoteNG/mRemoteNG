@@ -236,6 +236,30 @@ namespace mRemoteNG.UI.Window
 
         #region Public Methods
 
+        public void ShowConnectionProperties()
+        {
+            _pGrid.PropertyMode = PropertyMode.Connection;
+            UpdateTopRow();
+        }
+
+        public void ShowInheritanceProperties()
+        {
+            _pGrid.PropertyMode = PropertyMode.Inheritance;
+            UpdateTopRow();
+        }
+
+        public void ShowDefaultConnectionProperties()
+        {
+            _pGrid.PropertyMode = PropertyMode.DefaultConnection;
+            UpdateTopRow();
+        }
+
+        public void ShowDefaultInheritanceProperties()
+        {
+            _pGrid.PropertyMode = PropertyMode.DefaultInheritance;
+            UpdateTopRow();
+        }
+
         protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
         {
             // Main form handle command key events
@@ -255,6 +279,40 @@ namespace mRemoteNG.UI.Window
             }
 
             return true; // Handled
+        }
+        #endregion
+
+        #region Private Methods
+        private void ApplyLanguage()
+        {
+            _btnShowInheritance.Text = Language.strButtonInheritance;
+            _btnShowDefaultInheritance.Text = Language.strButtonDefaultInheritance;
+            _btnShowProperties.Text = Language.strButtonProperties;
+            _btnShowDefaultProperties.Text = Language.strButtonDefaultProperties;
+            _btnIcon.Text = Language.strButtonIcon;
+            _btnHostStatus.Text = Language.strStatus;
+            Text = Language.strMenuConfig;
+            TabText = Language.strMenuConfig;
+            _propertyGridContextMenuShowHelpText.Text = Language.strMenuShowHelpText;
+        }
+
+        private new void ApplyTheme()
+        {
+            if (!ThemeManager.getInstance().ActiveAndExtended) return;
+            _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
+            _pGrid.ViewForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Border");
+            _pGrid.HelpBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            _pGrid.HelpForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground");
+            _pGrid.CommandsDisabledLinkColor =
+                _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
+            _pGrid.CommandsBackColor =
+                _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background");
+            _pGrid.CommandsForeColor =
+                _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
         }
 
         private void UpdateTopRow()
@@ -337,42 +395,6 @@ namespace mRemoteNG.UI.Window
                     .FromString(_pGrid.SelectedConnectionInfo.Icon)
                     .ToBitmap()
                 : null;
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void ApplyLanguage()
-        {
-            _btnShowInheritance.Text = Language.strButtonInheritance;
-            _btnShowDefaultInheritance.Text = Language.strButtonDefaultInheritance;
-            _btnShowProperties.Text = Language.strButtonProperties;
-            _btnShowDefaultProperties.Text = Language.strButtonDefaultProperties;
-            _btnIcon.Text = Language.strButtonIcon;
-            _btnHostStatus.Text = Language.strStatus;
-            Text = Language.strMenuConfig;
-            TabText = Language.strMenuConfig;
-            _propertyGridContextMenuShowHelpText.Text = Language.strMenuShowHelpText;
-        }
-
-        private new void ApplyTheme()
-        {
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
-            _pGrid.ViewForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
-            _pGrid.LineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Border");
-            _pGrid.HelpBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            _pGrid.HelpForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            _pGrid.CategoryForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground");
-            _pGrid.CommandsDisabledLinkColor =
-                _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
-            _pGrid.CommandsBackColor =
-                _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background");
-            _pGrid.CommandsForeColor =
-                _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
         }
 
         private void AddToolStripItems()
@@ -478,28 +500,19 @@ namespace mRemoteNG.UI.Window
             ShowConnectionProperties();
         }
 
-        private void ShowConnectionProperties()
+        private void btnShowInheritance_Click(object sender, EventArgs e)
         {
-            _pGrid.PropertyMode = PropertyMode.Connection;
-            UpdateTopRow();
+            ShowInheritanceProperties();
         }
 
         private void btnShowDefaultProperties_Click(object sender, EventArgs e)
         {
-            _pGrid.PropertyMode = PropertyMode.DefaultConnection;
-            UpdateTopRow();
-        }
-
-        private void btnShowInheritance_Click(object sender, EventArgs e)
-        {
-            _pGrid.PropertyMode = PropertyMode.Inheritance;
-            UpdateTopRow();
+            ShowDefaultConnectionProperties();
         }
 
         private void btnShowDefaultInheritance_Click(object sender, EventArgs e)
         {
-            _pGrid.PropertyMode = PropertyMode.DefaultInheritance;
-            UpdateTopRow();
+            ShowDefaultInheritanceProperties();
         }
 
         private void btnHostStatus_Click(object sender, EventArgs e)
