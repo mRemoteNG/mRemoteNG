@@ -33,8 +33,6 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             get => _selectedConnectionInfo;
             set
             {
-                if (value == null)
-                    return;
                 if (_selectedConnectionInfo == value)
                     return;
 
@@ -97,7 +95,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                     SelectedObject = SelectedConnectionInfo;
                     break;
                 case PropertyMode.Inheritance:
-                    SelectedObject = SelectedConnectionInfo.Inheritance;
+                    SelectedObject = SelectedConnectionInfo?.Inheritance;
                     break;
                 case PropertyMode.DefaultConnection:
                     SelectedObject = DefaultConnectionInfo.Instance;
@@ -107,13 +105,17 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                     break;
             }
 
-            ShowHideGridItems();
+            if (SelectedObject != null)
+                ShowHideGridItems();
         }
 
         private void ShowHideGridItems()
         {
             try
             {
+                if (SelectedConnectionInfo == null)
+                    return;
+
                 if (RootNodeSelected && PropertyMode == PropertyMode.Connection)
                 {
                     if (SelectedConnectionInfo is RootPuttySessionsNodeInfo)

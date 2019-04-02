@@ -126,6 +126,19 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 	        Assert.That(_configWindow.CanShowProperties, Is.EqualTo(selectedObjectNotNull));
 		}
 
+		[TestCaseSource(nameof(EveryNodeType))]
+		public void InheritancePropertiesAreVisibleInCertainCases(ConnectionInfo selectedObject)
+		{
+			_configWindow.SelectedTreeNode = selectedObject;
+
+			var shouldBeAvailable = selectedObject != null &&
+									!(selectedObject is RootNodeInfo) &&
+									!(selectedObject is PuttySessionInfo) &&
+									!(selectedObject.Parent is RootNodeInfo);
+
+			Assert.That(_configWindow.CanShowInheritance, Is.EqualTo(shouldBeAvailable));
+		}
+
 		private static IEnumerable<TestCaseData> ConnectionInfoGeneralTestCases()
         {
             var protocolTypes = typeof(ProtocolType).GetEnumValues().OfType<ProtocolType>();

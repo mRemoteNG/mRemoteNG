@@ -125,8 +125,8 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
                 }
                 else if (_mWrapper.SelectedObject != value)
                 {
-                    var needrefresh = value.GetType() != _mWrapper.SelectedObject.GetType();
-                    _mWrapper.SelectedObject = value;
+                    var needrefresh = value?.GetType() != _mWrapper.SelectedObject?.GetType();
+                    _mWrapper.SelectedObject = value ?? new object();
                     if (needrefresh)
                         RefreshProperties();
                 }

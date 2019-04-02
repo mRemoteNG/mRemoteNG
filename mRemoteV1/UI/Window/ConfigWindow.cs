@@ -208,7 +208,8 @@ namespace mRemoteNG.UI.Window
 
         public bool InheritanceVisible => _btnShowInheritance.Checked;
         public bool CanShowInheritance => !_pGrid.RootNodeSelected &&
-                                          _pGrid.SelectedConnectionInfo.Parent != null &&
+                                          SelectedTreeNode != null &&
+                                          _pGrid.SelectedConnectionInfo?.Parent != null &&
                                           !(_pGrid.SelectedConnectionInfo.Parent is RootNodeInfo);
 
         public bool DefaultPropertiesVisible => _btnShowDefaultProperties.Checked;
@@ -389,12 +390,14 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateIconButton()
         {
-            _btnIcon.Enabled = !_pGrid.IsShowingDefaultProperties &&
-                               !_pGrid.RootNodeSelected;
+            _btnIcon.Enabled =
+                _pGrid.SelectedConnectionInfo != null &&
+                !_pGrid.IsShowingDefaultProperties &&
+                !_pGrid.RootNodeSelected;
 
             _btnIcon.Image = _btnIcon.Enabled
                 ? ConnectionIcon
-                    .FromString(_pGrid.SelectedConnectionInfo.Icon)
+                    .FromString(_pGrid.SelectedConnectionInfo?.Icon)?
                     .ToBitmap()
                 : null;
         }
