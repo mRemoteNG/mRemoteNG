@@ -14,6 +14,7 @@ Welcome to mRemoteNG's documentation!
    :caption: Application Handling
    
    user_interface.rst
+   folders_and_inheritance.rst
    keyboard_shortcuts.rst
    sql_configuration.rst
    command_line_switches.rst
@@ -31,7 +32,6 @@ Welcome to mRemoteNG's documentation!
    
    howtos/jumpservers.rst
    howtos/external_tools.rst
-   howtos/folders_and_inheritance.rst
    howtos/bulk_connections.rst
 
 .. toctree::
