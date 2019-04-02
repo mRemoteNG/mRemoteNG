@@ -63,14 +63,13 @@ namespace mRemoteNGTests.UI.Controls
 		}
 
 		[Test]
-		public void ExceptionThrownWhenNonExistantPropertyFoundInHiddenPropertiesList()
+		public void HiddenPropertiesListCanHandleNonExistentProperties()
 		{
 			var grid = new FilteredPropertyGrid();
 			var obj = new { Prop1 = "hello" };
 			grid.SelectedObject = obj;
 
-			Assert.Throws<InvalidOperationException>(() =>
-				grid.HiddenProperties = new[] { "NonExistantProperty" });
+			Assert.DoesNotThrow(() => grid.HiddenProperties = new[] { "NonExistantProperty" });
 		}
 
 		[Test]

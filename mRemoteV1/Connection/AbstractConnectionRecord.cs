@@ -615,12 +615,14 @@ namespace mRemoteNG.Connection
         #endregion
 
         #region VNC
-
+        // TODO: it seems all these VNC properties were added and serialized but
+        // never hooked up to the VNC protocol or shown to the user
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameCompression"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionCompression"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
-         UsedInProtocol(ProtocolType.VNC)]
+         UsedInProtocol(ProtocolType.VNC),
+         Browsable(false)]
         public ProtocolVNC.Compression VNCCompression
         {
             get => GetPropertyValue("VNCCompression", _vncCompression);
@@ -631,7 +633,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameEncoding"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEncoding"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
-         UsedInProtocol(ProtocolType.VNC)]
+         UsedInProtocol(ProtocolType.VNC),
+         Browsable(false)]
         public ProtocolVNC.Encoding VNCEncoding
         {
             get => GetPropertyValue("VNCEncoding", _vncEncoding);
@@ -642,7 +645,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameAuthenticationMode"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAuthenticationMode"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
-         UsedInProtocol(ProtocolType.VNC)]
+         UsedInProtocol(ProtocolType.VNC),
+         Browsable(false)]
         public ProtocolVNC.AuthMode VNCAuthMode
         {
             get => GetPropertyValue("VNCAuthMode", _vncAuthMode);
@@ -653,7 +657,8 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyType"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyType"),
             TypeConverter(typeof(MiscTools.EnumTypeConverter)),
-            UsedInProtocol(ProtocolType.VNC)]
+            UsedInProtocol(ProtocolType.VNC),
+            Browsable(false)]
         public ProtocolVNC.ProxyType VNCProxyType
         {
             get => GetPropertyValue("VNCProxyType", _vncProxyType);
@@ -663,7 +668,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyAddress"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyAddress"),
-            UsedInProtocol(ProtocolType.VNC)]
+            UsedInProtocol(ProtocolType.VNC),
+            Browsable(false)]
         public string VNCProxyIP
         {
             get => GetPropertyValue("VNCProxyIP", _vncProxyIp);
@@ -673,7 +679,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPort"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPort"),
-            UsedInProtocol(ProtocolType.VNC)]
+            UsedInProtocol(ProtocolType.VNC),
+            Browsable(false)]
         public int VNCProxyPort
         {
             get => GetPropertyValue("VNCProxyPort", _vncProxyPort);
@@ -683,7 +690,8 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProxy", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyUsername"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyUsername"),
-            UsedInProtocol(ProtocolType.VNC)]
+            UsedInProtocol(ProtocolType.VNC),
+            Browsable(false)]
         public string VNCProxyUsername
         {
             get => GetPropertyValue("VNCProxyUsername", _vncProxyUsername);
@@ -694,7 +702,8 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyPassword"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPassword"),
             PasswordPropertyText(true),
-            UsedInProtocol(ProtocolType.VNC)]
+            UsedInProtocol(ProtocolType.VNC),
+            Browsable(false)]
         public string VNCProxyPassword
         {
             get => GetPropertyValue("VNCProxyPassword", _vncProxyPassword);
@@ -705,7 +714,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameColors"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionColors"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
-         UsedInProtocol(ProtocolType.VNC)]
+         UsedInProtocol(ProtocolType.VNC),
+         Browsable(false)]
         public ProtocolVNC.Colors VNCColors
         {
             get => GetPropertyValue("VNCColors", _vncColors);
