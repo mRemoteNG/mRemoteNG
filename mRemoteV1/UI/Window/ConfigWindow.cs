@@ -204,12 +204,18 @@ namespace mRemoteNG.UI.Window
         #region Public Properties
 
         public bool PropertiesVisible => _btnShowProperties.Checked;
+        public bool CanShowProperties => SelectedTreeNode != null;
 
         public bool InheritanceVisible => _btnShowInheritance.Checked;
+        public bool CanShowInheritance => !_pGrid.RootNodeSelected &&
+                                          _pGrid.SelectedConnectionInfo.Parent != null &&
+                                          !(_pGrid.SelectedConnectionInfo.Parent is RootNodeInfo);
 
         public bool DefaultPropertiesVisible => _btnShowDefaultProperties.Checked;
+        public bool CanShowDefaultProperties => true;
 
         public bool DefaultInheritanceVisible => _btnShowDefaultInheritance.Checked;
+        public bool CanShowDefaultInheritance => true;
 
         /// <summary>
         /// A list of properties being shown for the current object.
@@ -321,7 +327,7 @@ namespace mRemoteNG.UI.Window
             {
                 // if we are on the show inheritance tab but it isn't a
                 // valid choice, switch to the properties tab
-                if (_pGrid.PropertyMode == PropertyMode.Inheritance && !ConnectionInheritanceCanBeShown())
+                if (_pGrid.PropertyMode == PropertyMode.Inheritance && !CanShowInheritance)
                 {
                     ShowConnectionProperties();
                     return;
@@ -345,32 +351,28 @@ namespace mRemoteNG.UI.Window
 
         private void UpdatePropertiesButton()
         {
+            _btnShowProperties.Enabled = CanShowProperties;
             _btnShowProperties.Checked =
                 _pGrid.PropertyMode == PropertyMode.Connection;
         }
 
         private void UpdateShowInheritanceButton()
         {
-            _btnShowInheritance.Enabled = ConnectionInheritanceCanBeShown();
+            _btnShowInheritance.Enabled = CanShowInheritance;
             _btnShowInheritance.Checked =
                 _pGrid.PropertyMode == PropertyMode.Inheritance;
         }
 
-        private bool ConnectionInheritanceCanBeShown()
-        {
-            return !_pGrid.RootNodeSelected &&
-                   _pGrid.SelectedConnectionInfo.Parent != null &&
-                   !(_pGrid.SelectedConnectionInfo.Parent is RootNodeInfo);
-        }
-
         private void UpdateShowDefaultPropertiesButton()
         {
+            _btnShowDefaultProperties.Enabled = CanShowDefaultProperties;
             _btnShowDefaultProperties.Checked =
                 _pGrid.PropertyMode == PropertyMode.DefaultConnection;
         }
 
         private void UpdateShowDefaultInheritanceButton()
         {
+            _btnShowDefaultInheritance.Enabled = CanShowDefaultInheritance;
             _btnShowDefaultInheritance.Checked =
                 _pGrid.PropertyMode == PropertyMode.DefaultInheritance;
         }

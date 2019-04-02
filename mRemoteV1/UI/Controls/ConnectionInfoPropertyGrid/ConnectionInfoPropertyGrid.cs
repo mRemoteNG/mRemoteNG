@@ -114,16 +114,16 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
         {
             try
             {
-                if (RootNodeSelected && !IsShowingDefaultProperties)
+                if (RootNodeSelected && PropertyMode == PropertyMode.Connection)
                 {
                     if (SelectedConnectionInfo is RootPuttySessionsNodeInfo)
                     {
                         BrowsableProperties = new[]
                         {
-                            nameof(RootNodeInfo.Name)
+                            nameof(RootPuttySessionsNodeInfo.Name)
                         };
                     }
-                    else // root connections node
+                    else if (SelectedConnectionInfo is RootNodeInfo)
                     {
                         BrowsableProperties = new[]
                         {
