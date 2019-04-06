@@ -1,8 +1,8 @@
 .. _ssh_file_transfer:
 
-#################
+*****************
 SSH File Transfer
-#################
+*****************
 
 SSH File Transfer functionality allows you to securely transfer files to a
 remote host over an encrypted tunnel using either **SFTP** or **SCP**.

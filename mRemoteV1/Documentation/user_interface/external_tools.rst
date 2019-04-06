@@ -1,8 +1,8 @@
 .. _external_tools:
 
-##############
+**************
 External Tools
-##############
+**************
 
 External Tools can help you get things done that can't be done in mRemoteNG.
 
