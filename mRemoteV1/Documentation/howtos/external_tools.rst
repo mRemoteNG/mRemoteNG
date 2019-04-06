@@ -6,8 +6,7 @@ Start External Application
 ==========================
 
 This example will create a entry that will launch and login to server using filezilla and sftp.
-Start with opening up external tools from: :menuselection:`Tools --> External Tools`
-And create a *New* entry. See :doc:`/user_interface/external_tools/introduction`
+Start with opening up external tools from: :menuselection:`Tools --> External Tools` And create a *New* entry.
 Change *Display Name* to **FileZilla** and *Filename* to **C:\\Program Files\\FileZilla FTP Client\\filezilla.exe**. See image below:
 
 .. figure:: /images/example_et_start_application_01.png
@@ -37,7 +36,7 @@ Traceroute
 
 This example will create a traceroute which you can call on for a connection to get the traceroute to the
 connection. Start with opening up external tools from: :menuselection:`Tools --> External Tools`
-And create a *New* entry. See :doc:`/user_interface/external_tools/introduction`
+And create a *New* entry. See :doc:`/user_interface/external_tools`
 Change *Display Name* to **Traceroute** and *Filename* to **cmd**.
 
 See image below:

@@ -1,3 +1,5 @@
+.. _requirements:
+
 ********************
 Minimum Requirements
 ********************
@@ -23,8 +25,6 @@ error searching on troubles with installing.
 
 - `Citrix ICA Client <https://www.citrix.com/downloads/citrix-receiver.html>`_
    - Needed if you use ICA. wfica.ocx must be registered.
-
-.. _requirements:
 
 Windows 7 and Windows 2008 R2 Clients
 -------------------------------------

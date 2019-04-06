@@ -90,7 +90,7 @@ Additional tools that can be used and triggered in mRemoteNG.
    * - Item
      - Description
    * - SSH File Transfer
-     - Show SSH file transer panel (See: :ref:`sss_file_transfer`)
+     - Show SSH file transer panel (See: :ref:`ssh_file_transfer`)
    * - External Tools
      - Show external tools dialog (See: :ref:`external_tools`)
    * - Port Scan

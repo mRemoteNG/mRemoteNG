@@ -58,7 +58,7 @@ You may also see a message like "System.Runtime.InteropServices.COMException (0x
 
 If you are running mRemoteNG on Windows 7 or Server 2008:
 
-- You may be missing one or more required windows updates (See: :ref:`prerequisites`.).
+- You may be missing one or more required windows updates (See: :ref:`requirements`.).
 - A common issue is that `KB2574819 <https://support.microsoft.com/en-us/kb/2574819>`_ is either missing or has been installed after `KB2592687 <https://support.microsoft.com/en-us/kb/2592687>`_. They must be installed in the correct order. If you do not have KB2574819, follow these instructions:
   - Uninstall `KB2592687 <https://support.microsoft.com/en-us/kb/2592687>`_
   - Install `KB2574819 <https://support.microsoft.com/en-us/kb/2574819>`_

@@ -1,6 +1,8 @@
-**************
+.. _external_tools:
+
+##############
 External Tools
-**************
+##############
 
 External Tools can help you get things done that can't be done in mRemoteNG.
 
@@ -89,8 +91,6 @@ Arguments
    **For Example:**
 
       :code:`sftp://%USERNAME%:%PASSWORD%@%HOSTNAME%:%PORT%`, :code:`/K tracert %HOSTNAME%`, :code:`-NoExit tracert %HOSTNAME%`
-
-   For more information on variables, See: :doc:`/user_interface/external_tools/variables`
 
 Working directory
    From where should this Tool/Item be ran.
