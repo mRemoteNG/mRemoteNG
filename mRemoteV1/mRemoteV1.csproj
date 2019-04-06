@@ -1144,8 +1144,8 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Documentation\images\connections_status.png" />
-    <Content Include="Documentation\images\putty.png" />
+    <None Include="Documentation\images\connections_status.png" />
+    <None Include="Documentation\images\putty.png" />
     <Content Include="Firefox\AccessibleMarshal.dll" />
     <Content Include="Firefox\breakpadinjector.dll" />
     <Content Include="Firefox\d3dcompiler_47.dll" />
@@ -1165,63 +1165,25 @@
     <Content Include="Firefox\sandboxbroker.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
-    <Content Include="Documentation\images\config_top_bar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\connections_main.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\connections_top_bar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\import_export_dialog.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\menus_main_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\notifications_panel.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\notifications_popup.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\folders_and_inheritance_01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\connections_config.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\folders_and_inheritance_02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\folders_and_inheritance_03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\folders_and_inheritance_04.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\folders_and_inheritance_05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\folders_and_inheritance_06.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\connections_rightclick_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\connections_test_item.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\connections_open.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\screenshot_manager_rightclick_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\screenshot_manager_overview.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Documentation\images\config_top_bar.png" />
+    <None Include="Documentation\images\connections_main.png" />
+    <None Include="Documentation\images\connections_top_bar.png" />
+    <None Include="Documentation\images\import_export_dialog.png" />
+    <None Include="Documentation\images\menus_main_menu.png" />
+    <None Include="Documentation\images\notifications_panel.png" />
+    <None Include="Documentation\images\notifications_popup.png" />
+    <None Include="Documentation\images\folders_and_inheritance_01.png" />
+    <None Include="Documentation\images\connections_config.png" />
+    <None Include="Documentation\images\folders_and_inheritance_02.png" />
+    <None Include="Documentation\images\folders_and_inheritance_03.png" />
+    <None Include="Documentation\images\folders_and_inheritance_04.png" />
+    <None Include="Documentation\images\folders_and_inheritance_05.png" />
+    <None Include="Documentation\images\folders_and_inheritance_06.png" />
+    <None Include="Documentation\images\connections_rightclick_menu.png" />
+    <None Include="Documentation\images\connections_test_item.png" />
+    <None Include="Documentation\images\connections_open.png" />
+    <None Include="Documentation\images\screenshot_manager_rightclick_menu.png" />
+    <None Include="Documentation\images\screenshot_manager_overview.png" />
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1283,15 +1245,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documentation\images\quick_connect_01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\quick_connect_02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentation\images\quick_connect_03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Documentation\images\quick_connect_01.png" />
+    <None Include="Documentation\images\quick_connect_02.png" />
+    <None Include="Documentation\images\quick_connect_03.png" />
     <None Include="Resources\Images\loading_spinner.gif" />
     <None Include="Resources\Images\FamFamFam\tick.png" />
     <None Include="Resources\Images\FamFamFam\bricks.png" />
