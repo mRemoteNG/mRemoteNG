@@ -264,6 +264,7 @@
     <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
     <Compile Include="Credential\CredentialServiceFacade.cs" />
+    <None Include="Documentation\faq.rst" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1144,6 +1145,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Documentation\images\connections_status.png" />
+    <Content Include="Documentation\images\putty.png" />
     <Content Include="Firefox\AccessibleMarshal.dll" />
     <Content Include="Firefox\breakpadinjector.dll" />
     <Content Include="Firefox\d3dcompiler_47.dll" />
@@ -1413,11 +1415,9 @@
     <None Include="Documentation\user_interface.rst" />
     <None Include="Documentation\user_interface\main_window.rst" />
     <None Include="Documentation\user_interface\panels.rst" />
-    <None Include="Documentation\user_interface\external_tools.rst" />
     <None Include="Documentation\external_tools_cheat_sheet.rst" />
     <None Include="Documentation\howtos\external_tools.rst" />
-    <None Include="Documentation\user_interface\external_tools\variables.rst" />
-    <None Include="Documentation\user_interface\external_tools\introduction.rst" />
+    <None Include="Documentation\user_interface\external_tools.rst" />
     <None Include="Documentation\images\credssp-error.png" />
     <None Include="Documentation\images\example_et_start_application_01.png" />
     <None Include="Documentation\images\example_et_start_application_02.png" />
