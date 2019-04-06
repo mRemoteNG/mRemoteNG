@@ -2,7 +2,8 @@
 Common External Tool Configurations
 ***********************************
 
-The list below of various examples is by no means a full list of ways to use **External Tools** but gives you a idea of how it can be used in different ways.
+The list below of various examples is by no means a full list of ways to use
+**External Tools** but gives you a idea of how it can be used in different ways.
 
 Ping
 ====
@@ -24,7 +25,7 @@ Run a traceroute via cmdline.
 ============================================
 WinSCP is a free GUI Secure Copy program.
 
-- Filename: C:\Program Files\WinSCP\WinSCP.exe (example path)
+- Filename: C:\\Program Files\\WinSCP\\WinSCP.exe (example path)
 - Arguments: scp://%Username%:%Password%@%Hostname%/
 - Can integrate: Unknown
 
@@ -32,7 +33,7 @@ WinSCP is a free GUI Secure Copy program.
 ===================================================
 Free and open source FTP client for most platforms.
 
-- Filename: C:\Program Files\FileZilla FTP Client\filezilla.exe (example path)
+- Filename: C:\\Program Files\\FileZilla FTP Client\\filezilla.exe (example path)
 - Arguments (FTP): ftp://%Username%:%Password%@%Hostname%
 - Arguments (SFTP): sftp://%Username%:%Password%@%Hostname%
 - Can integrate: Unknown
@@ -41,7 +42,7 @@ Free and open source FTP client for most platforms.
 =======================================================
 Don't like the built-in browser support? Integrate with the Mozilla Firefox browser directly!
 
-- Filename: C:\Program Files\Mozilla Firefox\firefox.exe (example path)
+- Filename: C:\\Program Files\\Mozilla Firefox\\firefox.exe (example path)
 - Arguments: %Hostname%
 - Can integrate: Unknown
 
@@ -49,7 +50,7 @@ Don't like the built-in browser support? Integrate with the Mozilla Firefox brow
 ===========================================================================
 Google Chrome is a freeware web browser developed by Google.
 
-- Filename: C:\Program Files (x86)\Google\Chrome\Application\chrome.exe (example path)
+- Filename: C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe (example path)
 - Arguments: %Hostname%
 - Can integrate: Unknown
 
@@ -57,7 +58,7 @@ Google Chrome is a freeware web browser developed by Google.
 ==============================================
 Description
 
-- Filename: C:\Program Files\Internet Explorer\iexplore.exe
+- Filename: C:\\Program Files\\Internet Explorer\\iexplore.exe
 - Arguments: %Hostname%
 - Can integrate: Unknown
 
@@ -65,21 +66,21 @@ Description
 =============================================================
 MySQL Workbench provides data modeling, SQL development, and comprehensive administration tools for server configuration, user administration, backup, and much more. You will be prompted for a password when starting the connection.
 
-- Filename: C:\Program Files\MySQL\MySQL Workbench 6.3 CE\MySQLWorkbench.exe (example path)
+- Filename: C:\\Program Files\\MySQL\\MySQL Workbench 6.3 CE\\MySQLWorkbench.exe (example path)
 - Arguments: -query %USERNAME%@%HOSTNAME%
 - Can integrate: Unknown
 
 `VNC Viewer <https://www.realvnc.com/download/viewer/>`_
 =========================================================
 
-- Filename: C:\Program Files\RealVNC\VNC Viewer\vncviewer.exe (example path)
+- Filename: C:\\Program Files\\RealVNC\\VNC Viewer\\vncviewer.exe (example path)
 - Arguments: %HostName%
 - Can integrate: Unknown
 
 Windows Computer Manager
 ========================
 
-- Filename: %WINDIR%\system32\compmgmt.msc
+- Filename: %WINDIR%\\system32\\compmgmt.msc
 - Arguments: /Computer=%HostName%
 - Can integrate: Unknown
 
@@ -87,7 +88,7 @@ Windows Computer Manager
 ========================================
 Zenmap is a GUI front-end for nmap.
 
-- Filename: C:\Program Files\Nmap\zenmap.exe (example path)
+- Filename: C:\\Program Files\\Nmap\\zenmap.exe (example path)
 - Arguments: -p "Quick scan plus" -t %Hostname%
 - Can integrate: Unknown
 
@@ -95,7 +96,7 @@ Zenmap is a GUI front-end for nmap.
 ======================================
 UltraVNC is a free and open source program for connection to remote machines using the VNC protocol.
 
-- Filename: C:\Program Files\UltraVNC\vncviewer.exe (example path)
+- Filename: C:\\Program Files\\UltraVNC\\vncviewer.exe (example path)
 - Arguments: %HostName%:%port% -password %PASSWORD%
 - Can integrate: Unknown
 
@@ -118,7 +119,7 @@ Create a new connection entry with the following information:
 =========================================================================================================================================================================
 Windows PowerShell is a task-based command-line shell and scripting language designed especially for system administration.
 
-- Filename: %WINDIR%\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe
+- Filename: %WINDIR%\\system32\\WindowsPowerShell\\v1.0\\PowerShell_ISE.exe
 - Arguments: args here
 - Can integrate: Yes
 
@@ -126,6 +127,6 @@ PowerShell, Enter-PSSession
 ===========================
 This will allow you to right-click a Windows connection entry and use the hostname and user/password entry to begin a remote PowerShell session.
 
-- Filename: %WINDIR%\system32\WindowsPowerShell\v1.0\PowerShell.exe
-- Arguments: -NoExit -Command "$password = ConvertTo-SecureString '%PASSWORD%' -AsPlainText -Force; $cred = New-Object System.Management.Automation.PSCredential -ArgumentList @('%Domain%\%Username%', $password); Enter-PSSession -ComputerName %Hostname% -Credential $cred"
+- Filename: %WINDIR%\\system32\\WindowsPowerShell\\v1.0\\PowerShell.exe
+- Arguments: -NoExit -Command "$password = ConvertTo-SecureString '%PASSWORD%' -AsPlainText -Force; $cred = New-Object System.Management.Automation.PSCredential -ArgumentList @('%Domain%\\%Username%', $password); Enter-PSSession -ComputerName %Hostname% -Credential $cred"
 - Can integrate: No
