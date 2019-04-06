@@ -25,6 +25,7 @@ Welcome to mRemoteNG's documentation!
 
    troubleshooting.rst
    known_issues.rst
+   faq.rst
    
 .. toctree::
    :maxdepth: 2
@@ -38,7 +39,6 @@ Welcome to mRemoteNG's documentation!
    :maxdepth: 2
    :caption: Miscellaneous
    
-   howtos.rst
    external_tools_cheat_sheet.rst
    migrate.rst
    Contribute <https://github.com/mRemoteNG/mRemoteNG/wiki>

@@ -1,3 +1,5 @@
+.. _bulk_connections:
+
 *************************
 Creating Bulk Connections
 *************************
