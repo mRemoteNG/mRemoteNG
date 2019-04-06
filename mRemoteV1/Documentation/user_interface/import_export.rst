@@ -30,7 +30,8 @@ This option can be used to import computers from a specific OU from you Arctive 
 
 Import from Port Scan
 ---------------------
-This option opens a dialog to import connections from a port scan. Both network and port range can be specified.
+This option opens a dialog to import connections from a port scan.
+Both network and port range can be specified.
 
 .. important:: Port Scan uses nmap to scan the ports. Be carefull on how you scan your network, as this can be considered a brute force attack.
 

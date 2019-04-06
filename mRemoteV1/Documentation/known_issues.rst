@@ -5,18 +5,20 @@ Known Issues
 CredSSP - CVE-2018-0886 - Authentication error
 ==============================================
 
-mRemoteNG uses the Microsoft Terminal Services Client (MSTSC) libraries in order to make Remote Desktop connections.
+mRemoteNG uses the Microsoft Terminal Services Client (MSTSC) libraries
+in order to make Remote Desktop connections.
 
 .. note::
 
-    mRemoteNG has no control over the functionality changes implemented by Microsoft. 
+    mRemoteNG has no control over the functionality changes implemented by Microsoft.
 
 Please refer to `Microsoft's Documentation <https://support.microsoft.com/en-us/help/4093492/credssp-updates-for-cve-2018-0886-march-13-2018>`_ for full details regarding this problem.
 Patched clients attempting to connect to Unpatched servers will fail with the following error:
 
 .. figure:: /images/credssp-error.png
 
-The same error will occur with MSTSC directly on a patched client attempting to connect to an unpatched server.
+The same error will occur with MSTSC directly on a patched
+client attempting to connect to an unpatched server.
 
 Per the MS documentation, the only way around this is to do the following:
 
@@ -29,7 +31,7 @@ Per the MS documentation, the only way around this is to do the following:
 
 I can't open more than X number of RDP sessions. New sessions fail with error code 3334
 =======================================================================================
-The issue here is likely the amount of resources available to the RDP component to open the connection. This was alleviated in `MR-714 <https://mremoteng.atlassian.net/browse/MR-714>`_ and `MR-864 <https://mremoteng.atlassian.net/browse/MR-864>`_ 
+The issue here is likely the amount of resources available to the RDP component to open the connection. This was alleviated in `MR-714 <https://mremoteng.atlassian.net/browse/MR-714>`_ and `MR-864 <https://mremoteng.atlassian.net/browse/MR-864>`_
 
 Other things you can do to help reduce the issue:
 
@@ -46,7 +48,9 @@ Try doing the following:
 
 ATI Tray Tools
 ==============
-mRemoteNG is not compatible with ATI Tray Tools. We are aware of the issue and hope to have it fixed in a future version. We recommend that you disable or uninstall ATI Tray Tools while using mRemoteNG.
+mRemoteNG is not compatible with ATI Tray Tools. We are aware of the issue and
+hope to have it fixed in a future version. We recommend that you disable or
+uninstall ATI Tray Tools while using mRemoteNG.
 
 mRemoteNG crashes with the error "Class not registered" when trying to connect using RDP
 ========================================================================================
@@ -69,11 +73,14 @@ VNC connections fail with the error "The server is using an unsupported version 
 ========================================================================================================================================================================
 RFB version 4.0 and higher is a proprietary version owned by `RealVNC Limited <https://www.realvnc.com/>`_. Building support for newer versions will likely result in licensing fees. Therefore, it is unlikely that mRemoteNG will have support for version 4.0+ anytime soon.
 
-Unfortunately, the only way around this limitation is to use an open source implementation of VNC server such as `TightVNC <http://tightvnc.com/>`_ or `UltraVNC <http://www.uvnc.com/>`_
+Unfortunately, the only way around this limitation is to use an open source
+implementation of VNC server such as `TightVNC <http://tightvnc.com/>`_
+or `UltraVNC <http://www.uvnc.com/>`_
 
 Cannot click some UI elements in an RDP connection window.
 ==========================================================
-It may seem like some elements are not clickable along the top and left sides of your RDP connection window. More information can be found in issue #210
+It may seem like some elements are not clickable along the top
+and left sides of your RDP connection window. More information can be found in issue #210
 
 This is likely due to non-standard (>100%) DPI scaling on your local machine.
 
@@ -91,17 +98,23 @@ On Windows 10
 
 SSH login fails when password contains extended ASCII characters
 ================================================================
-Initial login to SSH (or WinSCP) fails when the password contains extended ASCII characters (such as: €šœ£ÁØë). Typing the password into the SSH session directly works.
+Initial login to SSH (or WinSCP) fails when the password contains
+extended ASCII characters (such as: €šœ£ÁØë).
+Typing the password into the SSH session directly works.
 
-Investigation suggests that there is an issue in character encoding when mRemoteNG passes the value to the cmd line, which then invokes PuTTY. This was investigated in issue `#186 <https://github.com/mRemoteNG/mRemoteNG/issues/186>`_
+Investigation suggests that there is an issue in character encoding
+when mRemoteNG passes the value to the cmd line, which then invokes PuTTY.
+This was investigated in issue `#186 <https://github.com/mRemoteNG/mRemoteNG/issues/186>`_
 
-The only resolution for this issue is to not use extended ASCII characters in passwords that will be sent to PuTTY or similar tools.
+The only resolution for this issue is to not use extended ASCII characters
+in passwords that will be sent to PuTTY or similar tools.
 
 RDP tries to reconnect whenever I resize the window
 ===================================================
 Your RDP connection reconnects after resizing mRemoteNG or the connection panel.
 
-This will occur anytime the connection window changes size and the following connection options are set:
+This will occur anytime the connection window changes size and
+the following connection options are set:
 
 - Resolution: **Fit to Panel**
 - Automatic Resize: **Yes**
@@ -111,13 +124,15 @@ To prevent reconnecting, you can do one of several things:
 - Change the resolution to Smart Size. This will scale the original connection area when the view window size changes. This does not preserve aspect ratio.
 - Turn off Automatic Resize. When the view window size changes, you will see scroll bars or dead space.
 
-There is no way to update the view window size without a reconnect. This is an RDP protocol limitation.
+There is no way to update the view window size without a reconnect.
+This is an RDP protocol limitation.
 
 AltGr key combinations stop working in other apps when connected to RDP
 =======================================================================
 When connected to an RDP session AltGr, keyboard combinations sometimes stop working.
 
-This is a known issue with The Microsoft RDP library that cannot be solved by mRemoteNG. There are three known work arounds for this issue:
+This is a known issue with The Microsoft RDP library that cannot be solved by mRemoteNG.
+There are three known work arounds for this issue:
 
 - Disconnect the RDP session which caused the issue. Since it can be difficult to determine which connection is to blame, you may need to disconnect all RDP sessions. Once you have confirmed AltGr combinations are working again, you may reconnect your RDP session(s).
 - When the issue occurs, hold/press the Ctrl key. This is known to release the AltGr key from the RDP session.

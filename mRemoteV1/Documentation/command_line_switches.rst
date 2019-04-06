@@ -8,10 +8,10 @@ The following commandlline switches are supported by mRemoteNG:
 ``/c: PathToConnectionsFile``
 
  Loads the connections file from the given path. This path can be a:
- - full file path                                                   
- - path relative to the current directory                           
- - path relative to the mRemoteNG application directory             
- - path relative to the mRemoteNG default connection file directory 
+ - full file path
+ - path relative to the current directory
+ - path relative to the mRemoteNG application directory
+ - path relative to the mRemoteNG default connection file directory
 
 ``/reset``
 
@@ -35,5 +35,6 @@ The following commandlline switches are supported by mRemoteNG:
 ``/noreconnect``
 ``/norc``
 
- Temporary disables reconnect to previously opened sessions.                                           
- Use this if you have problems opening mRemoteNG after you enabled the setting and restarted mRemoteNG
+ Temporary disables reconnect to previously opened sessions.
+ Use this if you have problems opening mRemoteNG after you
+ enabled the setting and restarted mRemoteNG

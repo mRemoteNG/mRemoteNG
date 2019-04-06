@@ -1,8 +1,8 @@
 ***********
 Main Window
 ***********
-After launching mRemoteNG for the first time you will be see the main interface window looking similar
-to what is being shown below.
+After launching mRemoteNG for the first time you will be see
+the main interface window looking similar to what is being shown below.
 
 .. figure:: /images/mremoteng_main_ui.png
 
@@ -31,7 +31,9 @@ further on this document.
 
 Customization
 =============
-.. add link for list of shortcuts below
+.. seealso::
+
+   :doc:`/keyboard_shortcuts` - For keybindings in mRemoteNG
 
 mRemoteNG supports themes and keyboard shortcuts.
 
@@ -43,8 +45,9 @@ The mRemoteNG shortcuts will work when the interface is in focus but not so ofte
 
 Themes
 ------
-These can be chosen from the :menuselection:`Tools --> Options`. There are also possibilities to create your own themes
-inside the settings for themes. By default mRemoteNG has turned off the themes but they are easily
+These can be chosen from the :menuselection:`Tools --> Options`.
+There are also possibilities to create your own themes inside the settings for themes.
+By default mRemoteNG has turned off the themes but they are easily
 enabled by choosing another theme rather then the default (vs2015light) one.
 
 .. warning::

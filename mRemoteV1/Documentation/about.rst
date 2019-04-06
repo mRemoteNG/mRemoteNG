@@ -2,7 +2,9 @@
 About mRemoteNG
 ###############
 
-mRemoteNG is an open source, multi-protocol, multi-remote connections manager that aims at providing you with a clutter-free, unstressful platform to manage all your remote connections in one place. 
+mRemoteNG is an open source, multi-protocol, multi-remote connections manager
+that aims at providing you with a clutter-free,
+unstressful platform to manage all your remote connections in one place.
 The application is released under the GPLv2_ and is being managed on GitHub_.
 
 .. _GitHub: http://github.com/mRemoteNG/mRemoteNG

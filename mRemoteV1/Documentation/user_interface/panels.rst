@@ -40,7 +40,8 @@ automatic when making connections. However you can also create panels manually.
    Menu items for panels under **View**
 
 Creating manual panels will make you able to organize tabs manually in mRemoteNG. To then open a connection
-to the new panel, right click on the connection and use :menuselection:`Connect (with options) --> Choose panel before connecting`
+to the new panel, right click on the connection and use
+:menuselection:`Connect (with options) --> Choose panel before connecting`
 
 The other option in the menu name **Connection Panels** will list all panels that are available in mRemoteNG window.
 

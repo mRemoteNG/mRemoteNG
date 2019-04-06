@@ -2,7 +2,8 @@
 Connections
 ***********
 
-The connections dialog is the main collection of all connections that inside mRemoteNG. This document will explain the details of the connections dialog.
+The connections dialog is the main collection of all connections that inside mRemoteNG.
+This document will explain the details of the connections dialog.
 
 Connection Tree
 ===============
@@ -37,11 +38,14 @@ Creates a new folder in connections dialog after where cursor is present.
 
 View
 ----
-Collapses or expands all directories in the connection dialog. Useful when working with a lot of connections sorted in different directories.
+Collapses or expands all directories in the connection dialog.
+Useful when working with a lot of connections sorted in different directories.
 
 Ascending
 ---------
-Works like a sort or a refresh to get connection in ascending order. (Descending order is note supported yet) When you have been moving around in the tree of connections, just click this item to refresh the list and get everything in ascending ordering.
+Works like a sort or a refresh to get connection in ascending order.
+(Descending order is note supported yet) When you have been moving around in the tree of connections,
+just click this item to refresh the list and get everything in ascending ordering.
 
 Configuration
 =============
@@ -76,7 +80,8 @@ Icon
 
     Don't forget that mRemoteNG will save the change on exit auto unless you have unchecked this setting in options.
 
-The icon indicates the visual identifier for the connection. Clicking the icon will let you set a different icon for the connection.
+The icon indicates the visual identifier for the connection.
+Clicking the icon will let you set a different icon for the connection.
 
 Status
 ------
@@ -85,7 +90,8 @@ Status
 
     In order for this to work you have to open up ICMP. On windows servers this is also disabled in windows firewall.
 
-Is a indicator that will glow red or green depending on the status of the host. The status is based on ICMP ping to the host.
+Is a indicator that will glow red or green depending on the status of the host.
+The status is based on ICMP ping to the host.
 
 
 Creating a connection
@@ -100,15 +106,18 @@ Creating a connection
     This icon does a ICMP ping on to check response from the server. If it glows green it indicates a connection response can be made using ping to the host. However this is turned off on windows by default. You have to enable ICMP and allow the firewall access for it.
 
 
-Right click on the root item (the little blue globe named **Connections**) in the Connections panel and select **New Connection**.
+Right click on the root item (the little blue globe named **Connections**)
+in the Connections panel and select **New Connection**.
 
 .. figure:: /images/connections_rightclick_menu.png
 
-A new item shows up under the root item. You can give it a name now (or rename it later). We'll just call this connection "Test" for the moment.
+A new item shows up under the root item. You can give it a name now (or rename it later).
+We'll just call this connection "Test" for the moment.
 
 .. figure:: /images/connections_test_item.png
 
-Now lets look at the config panel in the bottom left, just under the connections panel. As you may notice this is where you configure all the properties of connections and folders.
+Now lets look at the config panel in the bottom left, just under the connections panel.
+As you may notice this is where you configure all the properties of connections and folders.
 
 .. figure:: /images/connections_config.png
 
@@ -122,8 +131,10 @@ Opening and Closing Connections
 
     If the connecting fails, the notifications panel will pop up and show an error message describing the problem.
 
-There are multiple ways to open a connection in mRemoteNG, but the easiest way is to double click the connection in the Connections panel.
-If you double click the connection you will notice that the connection is going to try and open in a new panel called "General" and under a tab called "Test".
+There are multiple ways to open a connection in mRemoteNG,
+but the easiest way is to double click the connection in the Connections panel.
+If you double click the connection you will notice that the connection is going
+to try and open in a new panel called "General" and under a tab called "Test".
 If all goes well you should see the remote desktop without any problems.
 
 .. figure:: /images/connections_open.png

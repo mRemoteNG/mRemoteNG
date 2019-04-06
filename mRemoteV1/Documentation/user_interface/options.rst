@@ -2,8 +2,10 @@
 Options
 *******
 
-Options window which can also be named settings is the window where you can personalize your options for all of mRemoteNG. 
-This includes how to set logging, credentials and so on. Continue reading for the details of the different options here.
+Options window which can also be named settings is the window
+where you can personalize your options for all of mRemoteNG.
+This includes how to set logging, credentials and so on.
+Continue reading for the details of the different options here.
 
 Startup/Exit
 ============
@@ -13,7 +15,7 @@ Options below are for the various settings for Startup/Exit of mRemoteNG.
    :widths: 30 70 70
    :header-rows: 1
 
-   * - Option 
+   * - Option
      - Default
      - Description
    * - Save connection on exit
@@ -37,7 +39,7 @@ Various options for mRemoteNG appearance.
    :widths: 30 70 70
    :header-rows: 1
 
-   * - Option 
+   * - Option
      - Default
      - Description
    * - Language
@@ -64,7 +66,7 @@ Various settings for how tabs & panels should work in mRemoteNG.
    :widths: 30 70 70
    :header-rows: 1
 
-   * - Option 
+   * - Option
      - Default
      - Description
    * - Always show panel tabs
@@ -98,7 +100,7 @@ Connections
    :widths: 30 70 70
    :header-rows: 1
 
-   * - Option 
+   * - Option
      - Default
      - Description
    * - Single click on connections opens it
@@ -143,7 +145,7 @@ Options for credentials in mRemoteNG. The main purpose here is that when you hav
 .. list-table::
    :widths: 30 70 70
    :header-rows: 1
-   
+
    * - Option
      - Default
      - Description
@@ -198,7 +200,9 @@ Options for how mRemoteNG should check for updates from the website.
 
 Theme
 =====
-This is not enabled by default but can be used inside mRemoteNG. To enable themes you have to first enable it in the checkbox at the bottom of the options. Then restart mRemoteNG in order for it to work.
+This is not enabled by default but can be used inside mRemoteNG.
+To enable themes you have to first enable it in the checkbox at the bottom of the options.
+Then restart mRemoteNG in order for it to work.
 
 .. note::
 
@@ -220,19 +224,19 @@ Advanced
      - Description
    * - Automatically get session information
      - Off
-     - 
+     -
    * - Automatically try to reconnect when disconnected from server (RDP & ICA only)
      - Off
-     - 
+     -
    * - Use UTF8 encoding for RDP "Load Balance info" property
      - Off
-     - 
+     -
    * - Use custom PuTTY path
      - Off
-     - 
+     -
    * - To configure PuTTY sessions click this button
      - Launch PuTTY
      - Will launch the putty agent so you can edit the sessions
    * - Maximum PuTTY and integrated external tools wait time
      - 2 seconds
-     - 
+     -

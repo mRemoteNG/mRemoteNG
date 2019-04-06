@@ -2,7 +2,8 @@
 Migrate Settings from mRemote
 *****************************
 
-mRemoteNG does not automatically migrate settings from old (non-NG) versions of mRemote. You will manually need to copy your settings files from mRemote to mRemoteNG.
+mRemoteNG does not automatically migrate settings from old (non-NG) versions of mRemote.
+You will manually need to copy your settings files from mRemote to mRemoteNG.
 
 On Windows XP / Windows Home Server / Windows Server 2003
 =========================================================
@@ -33,4 +34,5 @@ To this folder:
 
    C:\Users\[username]\AppData\Local\mRemoteNG
 
-If you keep both programs installed on your computer, changes within one program will not affect the other.
+If you keep both programs installed on your computer,
+changes within one program will not affect the other.
