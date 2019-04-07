@@ -1755,6 +1755,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy all to clipboard.
+        /// </summary>
+        internal static string strCopyAllToClipboard {
+            get {
+                return ResourceManager.GetString("strCopyAllToClipboard", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create new connections file!.
         /// </summary>
         internal static string strCouldNotCreateNewConnectionsFile {

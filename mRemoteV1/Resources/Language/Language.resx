@@ -2781,4 +2781,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ConnectInViewOnlyMode" xml:space="preserve">
     <value>Connect in View Only mode</value>
   </data>
+  <data name="strCopyAllToClipboard" xml:space="preserve">
+    <value>Copy all to clipboard</value>
+  </data>
 </root>

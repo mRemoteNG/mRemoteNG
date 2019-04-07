@@ -90,6 +90,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDisconnectOthers.Click += (sender, args) => CloseOtherTabs();
             cmenTabDisconnectOthersRight.Click += (sender, args) => CloseOtherTabsToTheRight();
             cmenTabPuttySettings.Click += (sender, args) => ShowPuttySettingsDialog();
+            cmenCopyAllToClipboard.Click += (sender, args) => CopyAllToClipboard();
             GotFocus += ConnectionWindow_GotFocus;
         }
 
@@ -282,6 +283,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDisconnectOthers.Text = Language.strMenuDisconnectOthers;
             cmenTabDisconnectOthersRight.Text = Language.strMenuDisconnectOthersRight;
             cmenTabPuttySettings.Text = Language.strPuttySettings;
+            cmenCopyAllToClipboard.Text = Language.strCopyAllToClipboard;
         }
 
         private void Connection_FormClosing(object sender, FormClosingEventArgs e)
@@ -411,7 +413,7 @@ namespace mRemoteNG.UI.Window
                     cmenTabTransferFile.Visible = true;
                 }
 
-                cmenTabPuttySettings.Visible = interfaceControl.Protocol is PuttyBase;
+                cmenCopyAllToClipboard.Visible = cmenTabPuttySettings.Visible = interfaceControl.Protocol is PuttyBase;
 
                 AddExternalApps();
             }
@@ -589,6 +591,20 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector.AddExceptionMessage(
                                                              "ShowPuttySettingsDialog (UI.Window.ConnectionWindow) failed",
                                                              ex);
+            }
+        }
+
+        private void CopyAllToClipboard()
+        {
+            try
+            {
+                var interfaceControl = GetInterfaceControl();
+                var puttyBase = interfaceControl?.Protocol as PuttyBase;
+                puttyBase?.CopyAllToClipboard();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("CopyAllToClipboard (UI.Window.ConnectionWindow) failed", ex);
             }
         }
 

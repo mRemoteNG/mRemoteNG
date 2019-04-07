@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
@@ -17,6 +17,7 @@ namespace mRemoteNG.Connection.Protocol
     public class PuttyBase : ProtocolBase
     {
         private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
+        private const int IDM_COPYALL = 0x170; // copy all to clipboard Menu ID
         private bool _isPuttyNg;
         private readonly DisplayProperties _display = new DisplayProperties();
 
@@ -284,6 +285,10 @@ namespace mRemoteNG.Connection.Protocol
             }
         }
 
+        public void CopyAllToClipboard()
+        {
+            NativeMethods.PostMessage(PuttyHandle, NativeMethods.WM_SYSCOMMAND, (IntPtr)IDM_COPYALL, (IntPtr)0);
+        }
         #endregion
 
         #region Enums
