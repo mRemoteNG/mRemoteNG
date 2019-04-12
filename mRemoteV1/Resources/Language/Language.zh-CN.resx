@@ -305,7 +305,7 @@
   </data>
 	<data name="strCcICAFailed" xml:space="preserve">
     <value>启用ICA需要提前安装 XenDesktop Online 插件，并正确注册wfica.ocx库文件。您可以在此下载此插件：http://www.citrix.com/download/
-如果您已安装 XenDesktop Online 插件，但人就检测失败，请手动注册 wfica.ocx 。
+如果您已安装 XenDesktop Online 插件，但仍旧检测失败，请手动注册 wfica.ocx 。
 请打开运行对话框（开始菜单/运行），并输入如下内容：“regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" ”（c:\Program Files\Citrix\ICA Client\ 是您安装 XenDesktop Online 插件的路径）。
 如果执行此操作后，依然无法通过ICA的检测，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
