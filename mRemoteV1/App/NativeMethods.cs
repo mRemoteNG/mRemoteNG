@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
@@ -108,6 +108,9 @@ namespace mRemoteNG.App
         [DllImport("kernel32", SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         internal static extern bool CloseHandle(IntPtr handle);
+
+        [DllImport("user32.dll")]
+        internal static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
 
         #endregion
 
@@ -502,6 +505,11 @@ namespace mRemoteNG.App
         /// Sent to the first window in the clipboard viewer chain when a window is being removed from the chain.
         /// </summary>
         public const int WM_CHANGECBCHAIN = 0x30D;
+
+        /// <summary>
+        /// Delivered to the wndProc when a hotkey registered via RegisterHotKey as was pressed
+        /// </summary>
+        public const int WM_HOTKEY = 0x0312; // is this exposed anywhere in an official .net lib?
 
         #endregion
 

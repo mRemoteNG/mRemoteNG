@@ -45,6 +45,8 @@ namespace mRemoteNG.UI.Controls
         public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } =
             new TreeNodeCompositeClickHandler();
 
+        private readonly IConnectionInitiator _connectionInitiator;
+
         public ConnectionTreeModel ConnectionTreeModel
         {
             get { return _connectionTreeModel; }
@@ -64,6 +66,8 @@ namespace mRemoteNG.UI.Controls
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
+
+            _connectionInitiator = new ConnectionInitiator();
         }
 
         protected override void Dispose(bool disposing)
@@ -444,6 +448,13 @@ namespace mRemoteNG.UI.Controls
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
             if (!(listItem?.RowObject is ConnectionInfo clickedNode)) return;
+
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                _connectionInitiator.OpenConnection(clickedNode, ConnectionInfo.Force.DoNotJump);
+                return;
+            }
+
             DoubleClickHandler.Execute(clickedNode);
         }
 

@@ -1,4 +1,4 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -49,6 +49,17 @@ namespace mRemoteNG.UI.Forms
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
+
+        const int HOTKEY_ID_NAV_LEFT    = 1;
+        const int HOTKEY_ID_NAV_RIGHT   = 2;
+        const int HOTKEY_ID_ALT_D       = 3;
+        const int HOTKEY_ID_CTRL_ALT_D  = 4;
+        const int HOTKEY_ID_CTRL_K      = 5;
+        const int HOTKEY_MOD_ALT        = 1;
+        const int HOTKEY_MOD_CTRL       = 2;
+        const int HOTKEY_MOD_SHIFT      = 4;
+        
+        private enum HotKeySource { MRemoteNg, PuttyNg, External };
 
         internal FullscreenHandler Fullscreen { get; set; }
 
@@ -138,9 +149,17 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
         #region Startup & Shutdown
-
         private void frmMain_Load(object sender, EventArgs e)
         {
+            NativeMethods.RegisterHotKey(this.Handle, HOTKEY_ID_NAV_LEFT,   HOTKEY_MOD_CTRL | HOTKEY_MOD_ALT,     (int)Keys.Left);   // CTRL+ALT+Left: navigate left
+            NativeMethods.RegisterHotKey(this.Handle, HOTKEY_ID_NAV_RIGHT,  HOTKEY_MOD_CTRL | HOTKEY_MOD_ALT,     (int)Keys.Right);  // CTRL+ALT+Right: navigate right
+            NativeMethods.RegisterHotKey(this.Handle, HOTKEY_ID_ALT_D,      HOTKEY_MOD_ALT,                       (int)Keys.D);      // ALT+D: duplicate tab
+            NativeMethods.RegisterHotKey(this.Handle, HOTKEY_ID_CTRL_ALT_D, HOTKEY_MOD_CTRL | HOTKEY_MOD_ALT,     (int)Keys.D);      // CTRL+ALT+D: reconnect tab
+                                                                                                                                     // CTRL+D, close session (traditional unix terminal feature)
+
+            NativeMethods.RegisterHotKey(this.Handle, HOTKEY_ID_CTRL_K,     HOTKEY_MOD_CTRL,                      (int)Keys.K);      // CTRL+K: go to the search bar
+
+
             var messageCollector = Runtime.MessageCollector;
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
@@ -464,6 +483,33 @@ namespace mRemoteNG.UI.Forms
             ActivateConnection();
         }
 
+        private HotKeySource GetHotKeySource()
+        {
+            IntPtr currentForegroundWindow = NativeMethods.GetForegroundWindow();
+            if (currentForegroundWindow == this.Handle) return HotKeySource.MRemoteNg;
+
+            // it might still be a putty window
+            StringBuilder classNameHelper = new StringBuilder(256);
+            int nRet = NativeMethods.GetClassName(currentForegroundWindow, classNameHelper, classNameHelper.Capacity);
+            string className = classNameHelper.ToString();
+
+            if (className == "PuTTYNG") return HotKeySource.PuttyNg;
+
+            // But it is not.
+            return HotKeySource.External;
+        }
+
+
+        private ConnectionTreeWindow GetConnectionTreeWindow()
+        {
+            foreach (var dc in pnlDock.Contents)
+            {
+                if (dc is ConnectionTreeWindow cw) return cw;
+            }
+
+            return null;
+        }
+
         protected override void WndProc(ref System.Windows.Forms.Message m)
         {
             // Listen for and handle operating system messages
@@ -472,6 +518,43 @@ namespace mRemoteNG.UI.Forms
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (m.Msg)
                 {
+                    case NativeMethods.WM_HOTKEY:
+                        if (GetHotKeySource() == HotKeySource.External)
+                        {
+                            // Don't mess with other applications.
+                            return;
+                        }
+
+                        int wParamInt = m.WParam.ToInt32();
+                        if ((wParamInt == HOTKEY_ID_NAV_LEFT) || (wParamInt == HOTKEY_ID_NAV_RIGHT))
+                        {
+                            pnlDock.NavigateDocument(wParamInt == HOTKEY_ID_NAV_LEFT ? DockPanelHelper.Direction.Left : DockPanelHelper.Direction.Right);
+                        }
+                        else
+                        if((wParamInt == HOTKEY_ID_ALT_D)||(wParamInt == HOTKEY_ID_CTRL_ALT_D))
+                        {
+                            ConnectionWindow window = TabHelper.Instance.CurrentPanel;
+                            if(wParamInt == HOTKEY_ID_ALT_D)
+                                window?.DuplicateTab();
+                            if (wParamInt == HOTKEY_ID_CTRL_ALT_D)
+                                window?.Reconnect();
+                        }
+                        else
+                        if (wParamInt == HOTKEY_ID_CTRL_K)
+                        {
+                            NativeMethods.SetForegroundWindow(this.Handle); // this call is needed to acquire back the focus from putty
+                            this.BringToFront();
+                            ConnectionTreeWindow ctw = GetConnectionTreeWindow();
+                            ctw?.txtSearch.Focus();
+                        }
+                        else
+                        {
+                            // lets forward the message to the underlying layers
+                            break;
+                        }
+
+                        // done with processing this event, no need to call base.WndProc
+                        return;
                     case NativeMethods.WM_MOUSEACTIVATE:
                         _inMouseActivate = true;
                         break;

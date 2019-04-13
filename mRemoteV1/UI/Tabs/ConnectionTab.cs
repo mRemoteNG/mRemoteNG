@@ -29,6 +29,8 @@ namespace mRemoteNG.UI.Tabs
             GotFocus += ConnectionTab_GotFocus;
         }
 
+        #region Events
+
         private void ConnectionTab_GotFocus(object sender, EventArgs e)
         {
             TabHelper.Instance.CurrentTab = this;
@@ -78,6 +80,15 @@ namespace mRemoteNG.UI.Tabs
             base.OnFormClosing(e);
         }
 
+        private void ConnectionTab_VisibleChanged(object sender, EventArgs e)
+        {
+            if (!this.Visible) return;
+
+            ForceFocus();
+        }
+
+        #endregion
+
 
         #region HelperFunctions  
 
@@ -95,6 +106,21 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
+        /// <summary>
+        /// Helper method that also brings the underlying process to the foreground, if any
+        /// </summary>
+        public void ForceFocus()
+        {
+            // calling the .net level method first
+            Focus();
+
+            InterfaceControl ifC = InterfaceControl.FindInterfaceControl(this);
+            if (!(ifC?.Protocol is PuttyBase pb)) return;
+
+            pb?.Focus();
+        }
+
         #endregion
+
     }
 }
