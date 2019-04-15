@@ -13,7 +13,9 @@ namespace mRemoteNG.Tools
             var clientMousePosition = controlToClick.PointToClient(currentMousePosition);
             var tempWLow = clientMousePosition.X;
             var tempWHigh = clientMousePosition.Y;
-            NativeMethods.SendMessage(controlToClick.Handle, NativeMethods.WM_LBUTTONDOWN, (IntPtr)NativeMethods.MK_LBUTTON, (IntPtr)NativeMethods.MAKELPARAM(ref tempWLow, ref tempWHigh));
+            NativeMethods.SendMessage(controlToClick.Handle, NativeMethods.WM_LBUTTONDOWN,
+                                      (IntPtr)NativeMethods.MK_LBUTTON,
+                                      (IntPtr)NativeMethods.MAKELPARAM(ref tempWLow, ref tempWHigh));
             clientMousePosition.X = tempWLow;
             clientMousePosition.Y = tempWHigh;
             controlToClick.Focus();

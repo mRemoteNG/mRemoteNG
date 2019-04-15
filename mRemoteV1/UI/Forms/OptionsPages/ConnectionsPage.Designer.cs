@@ -120,7 +120,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSingleClickOnConnectionOpensIt
             // 
-            this.chkSingleClickOnConnectionOpensIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSingleClickOnConnectionOpensIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSingleClickOnConnectionOpensIt.AutoSize = true;
             this.chkSingleClickOnConnectionOpensIt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleClickOnConnectionOpensIt.Location = new System.Drawing.Point(3, 3);
@@ -132,7 +132,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkHostnameLikeDisplayName
             // 
-            this.chkHostnameLikeDisplayName._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkHostnameLikeDisplayName._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkHostnameLikeDisplayName.AutoSize = true;
             this.chkHostnameLikeDisplayName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkHostnameLikeDisplayName.Location = new System.Drawing.Point(3, 72);
@@ -144,7 +144,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSingleClickOnOpenedConnectionSwitchesToIt
             // 
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.AutoSize = true;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = new System.Drawing.Point(3, 26);
@@ -201,50 +201,54 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // radCloseWarnAll
             // 
             this.radCloseWarnAll.AutoSize = true;
+            this.radCloseWarnAll.BackColor = System.Drawing.Color.Transparent;
             this.radCloseWarnAll.Location = new System.Drawing.Point(16, 34);
             this.radCloseWarnAll.Name = "radCloseWarnAll";
             this.radCloseWarnAll.Size = new System.Drawing.Size(209, 17);
             this.radCloseWarnAll.TabIndex = 1;
             this.radCloseWarnAll.TabStop = true;
             this.radCloseWarnAll.Text = "Warn me when closing connections";
-            this.radCloseWarnAll.UseVisualStyleBackColor = true;
+            this.radCloseWarnAll.UseVisualStyleBackColor = false;
             // 
             // radCloseWarnMultiple
             // 
             this.radCloseWarnMultiple.AutoSize = true;
+            this.radCloseWarnMultiple.BackColor = System.Drawing.Color.Transparent;
             this.radCloseWarnMultiple.Location = new System.Drawing.Point(16, 57);
             this.radCloseWarnMultiple.Name = "radCloseWarnMultiple";
             this.radCloseWarnMultiple.Size = new System.Drawing.Size(279, 17);
             this.radCloseWarnMultiple.TabIndex = 2;
             this.radCloseWarnMultiple.TabStop = true;
             this.radCloseWarnMultiple.Text = "Warn me only when closing multiple connections";
-            this.radCloseWarnMultiple.UseVisualStyleBackColor = true;
+            this.radCloseWarnMultiple.UseVisualStyleBackColor = false;
             // 
             // radCloseWarnExit
             // 
             this.radCloseWarnExit.AutoSize = true;
+            this.radCloseWarnExit.BackColor = System.Drawing.Color.Transparent;
             this.radCloseWarnExit.Location = new System.Drawing.Point(16, 80);
             this.radCloseWarnExit.Name = "radCloseWarnExit";
             this.radCloseWarnExit.Size = new System.Drawing.Size(233, 17);
             this.radCloseWarnExit.TabIndex = 3;
             this.radCloseWarnExit.TabStop = true;
             this.radCloseWarnExit.Text = "Warn me only when exiting mRemoteNG";
-            this.radCloseWarnExit.UseVisualStyleBackColor = true;
+            this.radCloseWarnExit.UseVisualStyleBackColor = false;
             // 
             // radCloseWarnNever
             // 
             this.radCloseWarnNever.AutoSize = true;
+            this.radCloseWarnNever.BackColor = System.Drawing.Color.Transparent;
             this.radCloseWarnNever.Location = new System.Drawing.Point(16, 103);
             this.radCloseWarnNever.Name = "radCloseWarnNever";
             this.radCloseWarnNever.Size = new System.Drawing.Size(246, 17);
             this.radCloseWarnNever.TabIndex = 4;
             this.radCloseWarnNever.TabStop = true;
             this.radCloseWarnNever.Text = "Do not warn me when closing connections";
-            this.radCloseWarnNever.UseVisualStyleBackColor = true;
+            this.radCloseWarnNever.UseVisualStyleBackColor = false;
             // 
             // chkSaveConnectionsAfterEveryEdit
             // 
-            this.chkSaveConnectionsAfterEveryEdit._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSaveConnectionsAfterEveryEdit._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSaveConnectionsAfterEveryEdit.AutoSize = true;
             this.chkSaveConnectionsAfterEveryEdit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSaveConnectionsAfterEveryEdit.Location = new System.Drawing.Point(3, 95);
@@ -256,7 +260,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseFilterSearch
             // 
-            this.chkUseFilterSearch._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkUseFilterSearch._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkUseFilterSearch.AutoSize = true;
             this.chkUseFilterSearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseFilterSearch.Location = new System.Drawing.Point(3, 118);
@@ -288,7 +292,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkPlaceSearchBarAboveConnectionTree
             // 
-            this.chkPlaceSearchBarAboveConnectionTree._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkPlaceSearchBarAboveConnectionTree._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkPlaceSearchBarAboveConnectionTree.AutoSize = true;
             this.chkPlaceSearchBarAboveConnectionTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPlaceSearchBarAboveConnectionTree.Location = new System.Drawing.Point(3, 141);
@@ -300,7 +304,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkConnectionTreeTrackActiveConnection
             // 
-            this.chkConnectionTreeTrackActiveConnection._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkConnectionTreeTrackActiveConnection._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkConnectionTreeTrackActiveConnection.AutoSize = true;
             this.chkConnectionTreeTrackActiveConnection.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkConnectionTreeTrackActiveConnection.Location = new System.Drawing.Point(3, 49);
@@ -323,7 +327,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkHostnameLikeDisplayName);
             this.Controls.Add(this.chkSingleClickOnOpenedConnectionSwitchesToIt);
             this.Controls.Add(this.pnlConfirmCloseConnection);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ConnectionsPage";
             this.Size = new System.Drawing.Size(610, 490);
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).EndInit();

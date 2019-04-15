@@ -10,7 +10,10 @@ namespace mRemoteNG.Config.Connections
         public bool UsingDatabase { get; }
         public string ConnectionFileName { get; }
 
-        public ConnectionsSavedEventArgs(ConnectionTreeModel modelThatWasSaved, bool previouslyUsingDatabase, bool usingDatabase, string connectionFileName)
+        public ConnectionsSavedEventArgs(ConnectionTreeModel modelThatWasSaved,
+                                         bool previouslyUsingDatabase,
+                                         bool usingDatabase,
+                                         string connectionFileName)
         {
             if (modelThatWasSaved == null)
                 throw new ArgumentNullException(nameof(modelThatWasSaved));

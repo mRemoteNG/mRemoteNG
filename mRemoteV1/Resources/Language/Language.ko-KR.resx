@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
     Microsoft ResX Schema 
@@ -790,11 +790,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
 	<data name="strErrorEncryptionFailed" xml:space="preserve">
 		<value>암호화에 실패. {0}</value>
-	</data>
-	<data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-		<value>Windows 보안 설정 인 "시스템 암호화 : 암호화, 해시 및 서명에 FIPS 호환 알고리즘 사용"이 사용됩니다. 이 설정은 {0}과 호환되지 않습니다.
-
-자세한 내용은 http://support.microsoft.com/kb/811833에서 Microsoft 지원 문서를 참조하십시오.</value>
 	</data>
 	<data name="strErrors" xml:space="preserve">
 		<value>오류</value>

@@ -67,9 +67,12 @@ namespace mRemoteNG.App
             var currentProcess = Process.GetCurrentProcess();
             foreach (var enumeratedProcess in Process.GetProcessesByName(currentProcess.ProcessName))
             {
-                if (enumeratedProcess.Id != currentProcess.Id && enumeratedProcess.MainModule.FileName == currentProcess.MainModule.FileName && enumeratedProcess.MainWindowHandle != IntPtr.Zero)
+                if (enumeratedProcess.Id != currentProcess.Id &&
+                    enumeratedProcess.MainModule.FileName == currentProcess.MainModule.FileName &&
+                    enumeratedProcess.MainWindowHandle != IntPtr.Zero)
                     windowHandle = enumeratedProcess.MainWindowHandle;
             }
+
             return windowHandle;
         }
 

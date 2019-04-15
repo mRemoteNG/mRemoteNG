@@ -3,31 +3,32 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
-	public class AboutWindow : BaseWindow
-	{
+    public class AboutWindow : BaseWindow
+    {
         #region Form Init
 
-		internal Controls.Base.NGLabel lblCopyright;
-		internal Controls.Base.NGLabel lblTitle;
-		internal Controls.Base.NGLabel lblVersion;
-		internal Controls.Base.NGLabel lblLicense;
-		internal Controls.Base.NGTextBox txtChangeLog;
-		internal Controls.Base.NGLabel lblChangeLog;
-		internal Panel pnlBottom;
-		internal PictureBox pbLogo;
+        internal Controls.Base.NGLabel lblCopyright;
+        internal Controls.Base.NGLabel lblTitle;
+        internal Controls.Base.NGLabel lblVersion;
+        internal Controls.Base.NGLabel lblLicense;
+        internal Controls.Base.NGTextBox txtChangeLog;
+        internal Controls.Base.NGLabel lblChangeLog;
+        internal Panel pnlBottom;
+        internal PictureBox pbLogo;
         internal Controls.Base.NGLabel lblCredits;
         internal Controls.Base.NGTextBox txtCredits;
         internal Panel pnlTop;
 
         private void InitializeComponent()
-		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutWindow));
+        {
+            System.ComponentModel.ComponentResourceManager resources =
+                new System.ComponentModel.ComponentResourceManager(typeof(AboutWindow));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
@@ -46,7 +47,8 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlTop
             // 
-            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.pnlTop.BackColor =
+                System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
             this.pnlTop.Controls.Add(this.pbLogo);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.ForeColor = System.Drawing.Color.White;
@@ -97,12 +99,15 @@ namespace mRemoteNG.UI.Window
             // 
             // txtCredits
             // 
-            this.txtCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtCredits.Anchor =
+                ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top |
+                                                       System.Windows.Forms.AnchorStyles.Bottom)
+                                                    | System.Windows.Forms.AnchorStyles.Left)));
             this.txtCredits.BackColor = System.Drawing.SystemColors.Control;
             this.txtCredits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCredits.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtCredits.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCredits.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular,
+                                                           System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCredits.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txtCredits.Location = new System.Drawing.Point(8, 156);
             this.txtCredits.MinimumSize = new System.Drawing.Size(370, 260);
@@ -116,13 +121,16 @@ namespace mRemoteNG.UI.Window
             // 
             // txtChangeLog
             // 
-            this.txtChangeLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtChangeLog.Anchor =
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Bottom)
+                                                     | System.Windows.Forms.AnchorStyles.Left)
+                                                    | System.Windows.Forms.AnchorStyles.Right)));
             this.txtChangeLog.BackColor = System.Drawing.SystemColors.Control;
             this.txtChangeLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtChangeLog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtChangeLog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular,
+                                                             System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtChangeLog.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txtChangeLog.Location = new System.Drawing.Point(414, 156);
             this.txtChangeLog.MinimumSize = new System.Drawing.Size(370, 260);
@@ -137,7 +145,8 @@ namespace mRemoteNG.UI.Window
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold,
+                                                         System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblTitle.Location = new System.Drawing.Point(3, 3);
             this.lblTitle.Name = "lblTitle";
@@ -202,7 +211,8 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(1117, 705);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.pnlTop);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(20000, 10000);
@@ -216,55 +226,59 @@ namespace mRemoteNG.UI.Window
             this.pnlBottom.ResumeLayout(false);
             this.pnlBottom.PerformLayout();
             this.ResumeLayout(false);
+        }
 
-		}
         #endregion
-				
+
         #region Public Methods
-		public AboutWindow()
-		{
-			WindowType = WindowType.About;
-			DockPnl = new DockContent();
-			InitializeComponent();
+
+        public AboutWindow()
+        {
+            WindowType = WindowType.About;
+            DockPnl = new DockContent();
+            InitializeComponent();
             FontOverrider.FontOverride(this);
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
         }
+
         #endregion
-				
+
         #region Private Methods
-		private void ApplyLanguage()
-		{
-			lblLicense.Text = Language.strLabelReleasedUnderGPL;
-			lblChangeLog.Text = Language.strLabelChangeLog;
-			TabText = Language.strAbout;
-			Text = Language.strAbout;
-		}
+
+        private void ApplyLanguage()
+        {
+            lblLicense.Text = Language.strLabelReleasedUnderGPL;
+            lblChangeLog.Text = Language.strLabelChangeLog;
+            TabText = Language.strAbout;
+            Text = Language.strAbout;
+        }
 
         private new void ApplyTheme()
         {
-            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
+            if (!ThemeManager.getInstance().ThemingActive) return;
             base.ApplyTheme();
-            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlBottom.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlBottom.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlTop.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!ThemeManager.getInstance().ActiveAndExtended) return;
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlBottom.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlBottom.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlTop.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlTop.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         private void ApplyEditions()
-		{
-            #if PORTABLE
-			lblTitle.Text += " " + Language.strLabelPortableEdition;
-            #endif
-		}
+        {
+#if PORTABLE
+            lblTitle.Text += " " + Language.strLabelPortableEdition;
+#endif
+        }
 
-        #if false
+#if false
                 private void FillLinkLabel(LinkLabel llbl, string txt, string URL)
 		        {
 			        llbl.Links.Clear();
-					
+
 			        int Open = txt.IndexOf("[");
 			        while (Open != -1)
 			        {
@@ -278,24 +292,25 @@ namespace mRemoteNG.UI.Window
 				        llbl.Links.Add(Open, Close - Open, URL);
 				        Open = txt.IndexOf("[", Open);
 			        }
-					
+
 			        llbl.Text = txt;
 		        }
-        #endif
+#endif
+
         #endregion
-				
-#region Form Stuff
 
-	    private void About_Load(object sender, EventArgs e)
-	    {
+        #region Form Stuff
+
+        private void About_Load(object sender, EventArgs e)
+        {
             ApplyTheme();
-	        ApplyEditions();
+            ApplyEditions();
 
-	        try
-	        {
-	            lblCopyright.Text = GeneralAppInfo.Copyright;
+            try
+            {
+                lblCopyright.Text = GeneralAppInfo.Copyright;
 
-	            lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
+                lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
 
                 // AppVeyor seems to pull text files in UNIX format... This messes up the display on the about screen...
                 //
@@ -309,8 +324,9 @@ namespace mRemoteNG.UI.Window
                 // The Changelog is a bit long anyways... Limit the number of lines to something reasonable.
 
                 if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
-	            {
-                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT", Encoding.Default, true))
+                {
+                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT", Encoding.Default,
+                                                     true))
                     {
                         string line;
                         var i = 0;
@@ -328,8 +344,8 @@ namespace mRemoteNG.UI.Window
                     }
                 }
 
-	            if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
-	            {
+                if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
+                {
                     using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT", Encoding.Default, true))
                     {
                         string line;
@@ -337,30 +353,31 @@ namespace mRemoteNG.UI.Window
                             txtCredits.Text += line + Environment.NewLine;
                     }
                 }
-	        }
-	        catch (Exception ex)
-	        {
-	            Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-	                "Loading About failed" + Environment.NewLine + ex.Message, true);
-	        }
-	    }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                                                    "Loading About failed" + Environment.NewLine + ex.Message, true);
+            }
+        }
 
 #if false
         private void llblFAMFAMFAM_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			Runtime.GoToURL(Language.strFAMFAMFAMAttributionURL);
 		}
-				
+
 		private void llblMagicLibrary_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			Runtime.GoToURL(Language.strMagicLibraryAttributionURL);
 		}
-				
+
 		private void llblWeifenLuo_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			Runtime.GoToURL(Language.strWeifenLuoAttributionURL);
 		}
 #endif
-#endregion
-	}
+
+        #endregion
+    }
 }

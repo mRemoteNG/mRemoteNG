@@ -1,68 +1,95 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace mRemoteNG.Config.DataProviders
 {
     public class SqlDataProvider : IDataProvider<DataTable>
     {
-        public SqlDatabaseConnector SqlDatabaseConnector { get; }
+        public IDatabaseConnector DatabaseConnector { get; }
 
-        public SqlDataProvider(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlDataProvider(IDatabaseConnector databaseConnector)
         {
-            SqlDatabaseConnector = sqlDatabaseConnector;
+            DatabaseConnector = databaseConnector;
         }
 
         public DataTable Load()
         {
             var dataTable = new DataTable();
-            var sqlQuery = new SqlCommand("SELECT * FROM tblCons ORDER BY PositionID ASC");
-            SqlDatabaseConnector.AssociateItemToThisConnector(sqlQuery);
-            if (!SqlDatabaseConnector.IsConnected)
+            var dbQuery = DatabaseConnector.DbCommand("SELECT * FROM tblCons ORDER BY PositionID ASC");
+            DatabaseConnector.AssociateItemToThisConnector(dbQuery);
+            if (!DatabaseConnector.IsConnected)
                 OpenConnection();
-            var sqlDataReader = sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
+            var dbDataReader = dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
 
-            if (sqlDataReader.HasRows)
-                dataTable.Load(sqlDataReader);
-            sqlDataReader.Close();
+            if (dbDataReader.HasRows)
+                dataTable.Load(dbDataReader);
+            dbDataReader.Close();
             return dataTable;
         }
 
         public void Save(DataTable dataTable)
         {
-            if (SqlUserIsReadOnly())
+            if (DbUserIsReadOnly())
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to save connections but the SQL read only checkbox is checked, aborting!");
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                    "Trying to save connections but the SQL read only checkbox is checked, aborting!");
                 return;
             }
 
-            if (!SqlDatabaseConnector.IsConnected)
+            if (!DatabaseConnector.IsConnected)
                 OpenConnection();
-            using (var sqlBulkCopy = new SqlBulkCopy(SqlDatabaseConnector.SqlConnection))
+            if (DatabaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
             {
-                foreach (DataColumn col in dataTable.Columns)
-                    sqlBulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
-                sqlBulkCopy.DestinationTableName = "dbo.tblCons";
-                sqlBulkCopy.WriteToServer(dataTable);
+                using (var sqlBulkCopy = new SqlBulkCopy((SqlConnection)DatabaseConnector.DbConnection()))
+                {
+                    foreach (DataColumn col in dataTable.Columns)
+                        sqlBulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                    sqlBulkCopy.DestinationTableName = "dbo.tblCons";
+                    sqlBulkCopy.WriteToServer(dataTable);
+                }
+
+            }
+            else if (DatabaseConnector.GetType() == typeof(MySqlDatabaseConnector))
+            {
+                var dbConnection = (MySqlConnection) DatabaseConnector.DbConnection();
+                using (MySqlTransaction transaction = dbConnection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+                {
+                    using (MySqlCommand sqlCommand = new MySqlCommand())
+                    {
+                        sqlCommand.Connection = dbConnection;
+                        sqlCommand.Transaction = transaction;
+                        sqlCommand.CommandText = "SELECT * FROM tblCons";
+                        using (MySqlDataAdapter dataAdapter = new MySqlDataAdapter(sqlCommand))
+                        {
+                            dataAdapter.UpdateBatchSize = 1000;
+                            using (MySqlCommandBuilder cb = new MySqlCommandBuilder(dataAdapter))
+                            {
+                                dataAdapter.Update(dataTable);
+                                transaction.Commit();
+                            }
+                        }
+                    }
+                }
             }
         }
 
         public void OpenConnection()
         {
-            SqlDatabaseConnector.Connect();
+            DatabaseConnector.Connect();
         }
 
         public void CloseConnection()
         {
-            SqlDatabaseConnector.Disconnect();
+            DatabaseConnector.Disconnect();
         }
 
-        private bool SqlUserIsReadOnly()
+        private bool DbUserIsReadOnly()
         {
             return mRemoteNG.Settings.Default.SQLReadOnly;
-
         }
     }
 }

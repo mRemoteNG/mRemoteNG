@@ -16,5 +16,10 @@
         /// Indicates whether this container is expanded in the tree
         /// </summary>
         public bool Expanded { get; set; }
+
+        /// <summary>
+        /// Indicates whether this connection is a favorite
+        /// </summary>
+        public bool Favorite { get; set; }
     }
 }

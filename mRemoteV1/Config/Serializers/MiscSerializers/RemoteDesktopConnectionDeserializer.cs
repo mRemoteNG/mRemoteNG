@@ -29,6 +29,7 @@ namespace mRemoteNG.Config.Serializers
 
                 SetConnectionInfoParameter(connectionInfo, key, value);
             }
+
             root.AddChild(connectionInfo);
 
             return connectionTreeModel;
@@ -79,7 +80,9 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.CacheBitmaps = value == "1";
                     break;
                 case "screen mode id":
-                    connectionInfo.Resolution = value == "2" ? RdpProtocol.RDPResolutions.Fullscreen : RdpProtocol.RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = value == "2"
+                        ? RdpProtocol.RDPResolutions.Fullscreen
+                        : RdpProtocol.RDPResolutions.FitToWindow;
                     break;
                 case "connect to console":
                     connectionInfo.UseConsoleSession = value == "1";
@@ -127,6 +130,23 @@ namespace mRemoteNG.Config.Serializers
                     break;
                 case "loadbalanceinfo":
                     connectionInfo.LoadBalanceInfo = value;
+                    break;
+                case "gatewayusagemethod":
+                    switch (value)
+                    {
+                        case "0":
+                            connectionInfo.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Never;
+                            break;
+                        case "1":
+                            connectionInfo.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Always;
+                            break;
+                        case "2":
+                            connectionInfo.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Detect;
+                            break;
+                    }
+                    break;
+                case "gatewayhostname":
+                    connectionInfo.RDGatewayHostname = value;
                     break;
             }
         }

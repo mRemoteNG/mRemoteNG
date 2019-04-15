@@ -16,8 +16,9 @@ namespace mRemoteNG.UI.Controls
 
         public ExternalToolsToolStrip()
         {
-            Initialize(); 
-            Runtime.ExternalToolsService.ExternalTools.CollectionUpdated += (sender, args) => AddExternalToolsToToolBar();
+            Initialize();
+            Runtime.ExternalToolsService.ExternalTools.CollectionUpdated +=
+                (sender, args) => AddExternalToolsToToolBar();
         }
 
         private void Initialize()
@@ -53,6 +54,7 @@ namespace mRemoteNG.UI.Controls
         }
 
         #region Ext Apps Toolbar
+
         private void cMenToolbarShowText_Click(object sender, EventArgs e)
         {
             SwitchToolBarText(!CMenToolbarShowText.Checked);
@@ -70,16 +72,16 @@ namespace mRemoteNG.UI.Controls
 
                 foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
                 {
-                    if (tool.ShowOnToolbar)
-                    {
-                        var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
-                        if (CMenToolbarShowText.Checked)
-                            button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-                        else
-                            button.DisplayStyle = button.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
+                    if (!tool.ShowOnToolbar) continue;
+                    var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
+                    if (CMenToolbarShowText.Checked)
+                        button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+                    else
+                        button.DisplayStyle = button.Image != null
+                            ? ToolStripItemDisplayStyle.Image
+                            : ToolStripItemDisplayStyle.ImageAndText;
 
-                        button.Tag = tool;
-                    }
+                    button.Tag = tool;
                 }
             }
             catch (Exception ex)
@@ -102,7 +104,9 @@ namespace mRemoteNG.UI.Controls
                 extA.Start(selectedTreeNode);
             else
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "No connection was selected, external tool may return errors.", true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                    "No connection was selected, external tool may return errors.",
+                                                    true);
                 extA.Start();
             }
         }
@@ -114,15 +118,19 @@ namespace mRemoteNG.UI.Controls
                 if (show)
                     tItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
                 else
-                    tItem.DisplayStyle = tItem.Image != null ? ToolStripItemDisplayStyle.Image : ToolStripItemDisplayStyle.ImageAndText;
+                    tItem.DisplayStyle = tItem.Image != null
+                        ? ToolStripItemDisplayStyle.Image
+                        : ToolStripItemDisplayStyle.ImageAndText;
             }
 
             CMenToolbarShowText.Checked = show;
         }
+
         #endregion
 
         // CodeAyalysis doesn't like null propagation
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "components")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "components")]
         protected override void Dispose(bool disposing)
         {
             try

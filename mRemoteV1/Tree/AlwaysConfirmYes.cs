@@ -1,5 +1,4 @@
-﻿
-namespace mRemoteNG.Tree
+﻿namespace mRemoteNG.Tree
 {
     public class AlwaysConfirmYes : IConfirm<object>
     {

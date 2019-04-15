@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Controls.Base
     //Extended button class, the button onPaint completely repaint the control
     public class NGButton : Button
     {
-        private ThemeManager _themeManager ;
+        private ThemeManager _themeManager;
 
         /// <summary>
         /// Store the mouse state, required for coloring the component according to the mouse state
@@ -35,7 +35,7 @@ namespace mRemoteNG.UI.Controls.Base
         /// </summary>
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (_themeManager.ThemingActive)
             {
@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Controls.Base
                     Invalidate();
                 };
                 Invalidate();
-            } 
+            }
         }
 
 
@@ -75,20 +75,20 @@ namespace mRemoteNG.UI.Controls.Base
         /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ThemingActive)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
             }
+
             Color back;
             Color fore;
             Color border;
             if (Enabled)
             {
-
                 switch (_mice)
                 {
-                    case  MouseState.HOVER:
+                    case MouseState.HOVER:
                         back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Background");
                         fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Foreground");
                         border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Border");
@@ -103,15 +103,14 @@ namespace mRemoteNG.UI.Controls.Base
                         fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Foreground");
                         border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Border");
                         break;
-                } 
+                }
             }
             else
             {
-                back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Background"); 
+                back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Background");
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Foreground");
                 border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Border");
             }
-
 
 
             e.Graphics.FillRectangle(new SolidBrush(back), e.ClipRectangle);
@@ -124,9 +123,12 @@ namespace mRemoteNG.UI.Controls.Base
             {
                 SizeF stringSize = e.Graphics.MeasureString(Text, Font);
 
-                e.Graphics.DrawImageUnscaled(Image, Width / 2 - (int)stringSize.Width / 2  - Image.Width  , Height / 2 - Image.Height/2);
+                e.Graphics.DrawImageUnscaled(Image, Width / 2 - (int)stringSize.Width / 2 - Image.Width,
+                                             Height / 2 - Image.Height / 2);
             }
-            TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, fore, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+            TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, fore,
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 
         private void InitializeComponent()
@@ -135,9 +137,9 @@ namespace mRemoteNG.UI.Controls.Base
             // 
             // NGButton
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResumeLayout(false);
-
         }
     }
 }

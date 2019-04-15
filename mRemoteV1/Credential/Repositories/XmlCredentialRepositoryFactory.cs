@@ -12,7 +12,8 @@ namespace mRemoteNG.Credential.Repositories
         private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _serializer;
         private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
 
-        public XmlCredentialRepositoryFactory(ISecureSerializer<IEnumerable<ICredentialRecord>, string> serializer, ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
+        public XmlCredentialRepositoryFactory(ISecureSerializer<IEnumerable<ICredentialRecord>, string> serializer,
+                                              ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
         {
             if (serializer == null)
                 throw new ArgumentNullException(nameof(serializer));

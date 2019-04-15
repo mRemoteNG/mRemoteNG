@@ -14,13 +14,14 @@ namespace mRemoteNG.Config
         private readonly IEqualityComparer<ICredentialRecord> _credentialComparer = new CredentialDomainUserComparer();
 
         // maps a connectioninfo (by its id) to the credential object that was harvested
-        public Dictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } = new Dictionary<Guid, ICredentialRecord>();
+        public Dictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } =
+            new Dictionary<Guid, ICredentialRecord>();
 
         public IEnumerable<ICredentialRecord> Harvest(XDocument xDocument, SecureString decryptionKey)
         {
             if (xDocument == null)
                 throw new ArgumentNullException(nameof(xDocument));
-            
+
             var cryptoProvider = new CryptoProviderFactoryFromXml(xDocument.Root).Build();
 
             foreach (var element in xDocument.Descendants("Node"))
@@ -37,7 +38,9 @@ namespace mRemoteNG.Config
 
                 if (ConnectionToCredentialMap.Values.Contains(newCredential, _credentialComparer))
                 {
-                    var existingCredential = ConnectionToCredentialMap.Values.First(record => _credentialComparer.Equals(newCredential, record));
+                    var existingCredential =
+                        ConnectionToCredentialMap.Values.First(record =>
+                                                                   _credentialComparer.Equals(newCredential, record));
                     ConnectionToCredentialMap.Add(connectionId, existingCredential);
                 }
                 else
@@ -47,21 +50,24 @@ namespace mRemoteNG.Config
             return ConnectionToCredentialMap.Values.Distinct(_credentialComparer);
         }
 
-        private ICredentialRecord BuildCredential(XElement element, ICryptographyProvider cryptographyProvider, SecureString decryptionKey)
+        private ICredentialRecord BuildCredential(XElement element,
+                                                  ICryptographyProvider cryptographyProvider,
+                                                  SecureString decryptionKey)
         {
             var credential = new CredentialRecord
             {
                 Title = $"{element.Attribute("Username")?.Value}\\{element.Attribute("Domain")?.Value}",
                 Username = element.Attribute("Username")?.Value,
                 Domain = element.Attribute("Domain")?.Value,
-                Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString()
+                Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey)
+                                               .ConvertToSecureString()
             };
             return credential;
         }
 
         private static bool EntryHasSomeCredentialData(XElement e)
         {
-            return e.Attribute("Username")?.Value != "" || 
+            return e.Attribute("Username")?.Value != "" ||
                    e.Attribute("Domain")?.Value != "" ||
                    e.Attribute("Password")?.Value != "";
         }

@@ -6,13 +6,12 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using System;
 using System.Data;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Security;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {
-    public class DataTableSerializer : ISerializer<ConnectionInfo,DataTable>
+    public class DataTableSerializer : ISerializer<ConnectionInfo, DataTable>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
@@ -23,7 +22,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
 
         public Version Version { get; } = new Version(2, 7);
 
-        public DataTableSerializer(SaveFilter saveFilter, ICryptographyProvider cryptographyProvider, SecureString encryptionKey)
+        public DataTableSerializer(SaveFilter saveFilter,
+                                   ICryptographyProvider cryptographyProvider,
+                                   SecureString encryptionKey)
         {
             _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
             _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
@@ -70,7 +71,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("ConstantID", typeof(string));
             dataTable.Columns.Add("PositionID", typeof(int));
             dataTable.Columns.Add("ParentID", typeof(string));
-            dataTable.Columns.Add("LastChange", typeof(SqlDateTime));
+            dataTable.Columns.Add("LastChange", MiscTools.DBTimeStampType());
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("Type", typeof(string));
             dataTable.Columns.Add("Expanded", typeof(bool));
@@ -190,7 +191,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
 
         private void SetPrimaryKey(DataTable dataTable)
         {
-            dataTable.PrimaryKey = new[] { dataTable.Columns["ConstantID"] };
+            dataTable.PrimaryKey = new[] {dataTable.Columns["ConstantID"]};
         }
 
         private void SerializeNodesRecursive(ConnectionInfo connectionInfo)
@@ -213,15 +214,16 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["ConstantID"] = connectionInfo.ConstantID;
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
-            dataRow["LastChange"] = (SqlDateTime)DateTime.Now;
-            dataRow["Expanded"] = false; // TODO: this column can eventually be removed. we now save this property locally
+            dataRow["LastChange"] = MiscTools.DBTimeStampNow();
+            dataRow["Expanded"] =
+                false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
             dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
             dataRow["DomainName"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
-            dataRow["Password"] = _saveFilter.SavePassword 
-                ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) 
+            dataRow["Password"] = _saveFilter.SavePassword
+                ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey)
                 : "";
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["Protocol"] = connectionInfo.Protocol;
@@ -251,7 +253,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
-            dataRow["Connected"] = false; // TODO: this column can eventually be removed. we now save this property locally
+            dataRow["Connected"] =
+                false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["MacAddress"] = connectionInfo.MacAddress;
@@ -264,15 +267,16 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["VNCProxyIP"] = connectionInfo.VNCProxyIP;
             dataRow["VNCProxyPort"] = connectionInfo.VNCProxyPort;
             dataRow["VNCProxyUsername"] = connectionInfo.VNCProxyUsername;
-            dataRow["VNCProxyPassword"] = _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey);
+            dataRow["VNCProxyPassword"] =
+                _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey);
             dataRow["VNCColors"] = connectionInfo.VNCColors;
             dataRow["VNCSmartSizeMode"] = connectionInfo.VNCSmartSizeMode;
             dataRow["VNCViewOnly"] = connectionInfo.VNCViewOnly;
             dataRow["RDGatewayUsageMethod"] = connectionInfo.RDGatewayUsageMethod;
             dataRow["RDGatewayHostname"] = connectionInfo.RDGatewayHostname;
             dataRow["RDGatewayUseConnectionCredentials"] = connectionInfo.RDGatewayUseConnectionCredentials;
-            dataRow["RDGatewayUsername"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayUsername, _encryptionKey);
-            dataRow["RDGatewayPassword"] = connectionInfo.RDGatewayPassword;
+            dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
+            dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             if (_saveFilter.SaveInheritance)
             {
@@ -327,7 +331,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritVNCViewOnly"] = connectionInfo.Inheritance.VNCViewOnly;
                 dataRow["InheritRDGatewayUsageMethod"] = connectionInfo.Inheritance.RDGatewayUsageMethod;
                 dataRow["InheritRDGatewayHostname"] = connectionInfo.Inheritance.RDGatewayHostname;
-                dataRow["InheritRDGatewayUseConnectionCredentials"] = connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
+                dataRow["InheritRDGatewayUseConnectionCredentials"] =
+                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
                 dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RDGatewayUsername;
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
@@ -390,6 +395,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRDGatewayPassword"] = false;
                 dataRow["InheritRDGatewayDomain"] = false;
             }
+
             _dataTable.Rows.Add(dataRow);
         }
     }

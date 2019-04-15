@@ -1,5 +1,10 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
@@ -12,15 +17,10 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
-using System;
-using System.IO;
-using System.Threading;
-using System.Windows.Forms;
-using mRemoteNG.Config;
 
 namespace mRemoteNG.Connection
 {
-    public class ConnectionsService
+	public class ConnectionsService
     {
         private static readonly object SaveLock = new object();
         private readonly PuttySessionsManager _puttySessionsManager;
@@ -45,7 +45,8 @@ namespace mRemoteNG.Connection
 
             _puttySessionsManager = puttySessionsManager;
             var path = SettingsFileInfo.SettingsPath;
-            _localConnectionPropertiesDataProvider = new FileDataProvider(Path.Combine(path, "LocalConnectionProperties.xml"));
+            _localConnectionPropertiesDataProvider =
+                new FileDataProvider(Path.Combine(path, "LocalConnectionProperties.xml"));
             _localConnectionPropertiesSerializer = new LocalConnectionPropertiesXmlSerializer();
         }
 
@@ -76,7 +77,9 @@ namespace mRemoteNG.Connection
                 var newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
-                newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs ? string.Format(Language.strQuick, uriBuilder.Host) : uriBuilder.Host;
+                newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs
+                    ? string.Format(Language.strQuick, uriBuilder.Host)
+                    : uriBuilder.Host;
 
                 newConnectionInfo.Protocol = protocol;
                 newConnectionInfo.Hostname = uriBuilder.Host;
@@ -116,7 +119,8 @@ namespace mRemoteNG.Connection
             var oldIsUsingDatabaseValue = UsingDatabase;
 
             var connectionLoader = useDatabase
-                ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
+                ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer,
+                                                               _localConnectionPropertiesDataProvider)
                 : new XmlConnectionsLoader(connectionFileName);
 
             var newConnectionTreeModel = connectionLoader.Load();
@@ -126,7 +130,8 @@ namespace mRemoteNG.Connection
 
             if (newConnectionTreeModel == null)
             {
-                DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed", IsConnectionsFileLoaded);
+                DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed",
+                                                              IsConnectionsFileLoaded);
                 return;
             }
 
@@ -142,8 +147,10 @@ namespace mRemoteNG.Connection
 
             ConnectionTreeModel = newConnectionTreeModel;
             UpdateCustomConsPathSetting(connectionFileName);
-            RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connections loaded using {connectionLoader.GetType().Name}");
+            RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue,
+                                        useDatabase, connectionFileName);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                                                $"Connections loaded using {connectionLoader.GetType().Name}");
         }
 
         /// <summary>
@@ -168,8 +175,21 @@ namespace mRemoteNG.Connection
 
             if (_saveAsyncRequested)
                 SaveConnectionsAsync();
-            else if(_saveRequested)
+            else if (_saveRequested)
                 SaveConnections();
+        }
+
+		/// <summary>
+		/// All calls to <see cref="SaveConnections()"/> or <see cref="SaveConnectionsAsync"/>
+		/// will be deferred until the returned <see cref="DisposableAction"/> is disposed.
+		/// Once disposed, this will immediately executes a single <see cref="SaveConnections()"/>
+		/// or <see cref="SaveConnectionsAsync"/> if one has been requested.
+		/// Place this call in a 'using' block to represent a batched saving context.
+		/// </summary>
+		/// <returns></returns>
+		public DisposableAction BatchedSavingContext()
+        {
+			return new DisposableAction(BeginBatchingSaves, EndBatchingSaves);
         }
 
         /// <summary>
@@ -194,13 +214,12 @@ namespace mRemoteNG.Connection
         /// Optional. The name of the property that triggered
         /// this save.
         /// </param>
-        public void SaveConnections(
-            ConnectionTreeModel connectionTreeModel, 
-            bool useDatabase, 
-            SaveFilter saveFilter, 
-            string connectionFileName, 
-            bool forceSave = false,
-            string propertyNameTrigger = "")
+        public void SaveConnections(ConnectionTreeModel connectionTreeModel,
+                                    bool useDatabase,
+                                    SaveFilter saveFilter,
+                                    string connectionFileName,
+                                    bool forceSave = false,
+                                    string propertyNameTrigger = "")
         {
             if (connectionTreeModel == null)
                 return;
@@ -222,8 +241,9 @@ namespace mRemoteNG.Connection
                 var previouslyUsingDatabase = UsingDatabase;
 
                 var saver = useDatabase
-                    ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer,
-                        _localConnectionPropertiesDataProvider)
+                    ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter,
+                                                                           _localConnectionPropertiesSerializer,
+                                                                           _localConnectionPropertiesDataProvider)
                     : new XmlConnectionsSaver(connectionFileName, saveFilter);
 
                 saver.Save(connectionTreeModel, propertyNameTrigger);
@@ -233,12 +253,15 @@ namespace mRemoteNG.Connection
 
                 UsingDatabase = useDatabase;
                 ConnectionFileName = connectionFileName;
-                RaiseConnectionsSavedEvent(connectionTreeModel, previouslyUsingDatabase, UsingDatabase, connectionFileName);
+                RaiseConnectionsSavedEvent(connectionTreeModel, previouslyUsingDatabase, UsingDatabase,
+                                           connectionFileName);
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Successfully saved connections");
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector?.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotSaveAs, connectionFileName), ex, logOnly:false);
+                Runtime.MessageCollector?.AddExceptionMessage(
+                                                              string.Format(Language.strConnectionsFileCouldNotSaveAs,
+                                                                            connectionFileName), ex, logOnly: false);
             }
             finally
             {
@@ -266,11 +289,11 @@ namespace mRemoteNG.Connection
                 lock (SaveLock)
                 {
                     SaveConnections(
-                        ConnectionTreeModel, 
-                        UsingDatabase, 
-                        new SaveFilter(), 
-                        ConnectionFileName, 
-                        propertyNameTrigger: propertyNameTrigger);
+                                    ConnectionTreeModel,
+                                    UsingDatabase,
+                                    new SaveFilter(),
+                                    ConnectionFileName,
+                                    propertyNameTrigger: propertyNameTrigger);
                 }
             });
             t.SetApartmentState(ApartmentState.STA);
@@ -279,15 +302,15 @@ namespace mRemoteNG.Connection
 
         public string GetStartupConnectionFileName()
         {
-            return Settings.Default.LoadConsFromCustomLocation == false 
-                ? GetDefaultStartupConnectionFileName() 
+            return Settings.Default.LoadConsFromCustomLocation == false
+                ? GetDefaultStartupConnectionFileName()
                 : Settings.Default.CustomConsPath;
         }
 
         public string GetDefaultStartupConnectionFileName()
         {
-            return Runtime.IsPortableEdition 
-                ? GetDefaultStartupConnectionFileNamePortableEdition() 
+            return Runtime.IsPortableEdition
+                ? GetDefaultStartupConnectionFileNamePortableEdition()
                 : GetDefaultStartupConnectionFileNameNormalEdition();
         }
 
@@ -307,9 +330,9 @@ namespace mRemoteNG.Connection
         private string GetDefaultStartupConnectionFileNameNormalEdition()
         {
             var appDataPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                Application.ProductName,
-                ConnectionsFileInfo.DefaultConnectionsFile);
+                                           Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                           Application.ProductName,
+                                           ConnectionsFileInfo.DefaultConnectionsFile);
             return File.Exists(appDataPath) ? appDataPath : GetDefaultStartupConnectionFileNamePortableEdition();
         }
 
@@ -319,25 +342,35 @@ namespace mRemoteNG.Connection
         }
 
         #region Events
+
         public event EventHandler<ConnectionsLoadedEventArgs> ConnectionsLoaded;
         public event EventHandler<ConnectionsSavedEventArgs> ConnectionsSaved;
 
-        private void RaiseConnectionsLoadedEvent(Optional<ConnectionTreeModel> previousTreeModel, ConnectionTreeModel newTreeModel,
-            bool previousSourceWasDatabase, bool newSourceIsDatabase,
-            string newSourcePath)
+        private void RaiseConnectionsLoadedEvent(Optional<ConnectionTreeModel> previousTreeModel,
+                                                 ConnectionTreeModel newTreeModel,
+                                                 bool previousSourceWasDatabase,
+                                                 bool newSourceIsDatabase,
+                                                 string newSourcePath)
         {
             ConnectionsLoaded?.Invoke(this, new ConnectionsLoadedEventArgs(
-                previousTreeModel,
-                newTreeModel,
-                previousSourceWasDatabase,
-                newSourceIsDatabase,
-                newSourcePath));
+                                                                           previousTreeModel,
+                                                                           newTreeModel,
+                                                                           previousSourceWasDatabase,
+                                                                           newSourceIsDatabase,
+                                                                           newSourcePath));
         }
 
-        private void RaiseConnectionsSavedEvent(ConnectionTreeModel modelThatWasSaved, bool previouslyUsingDatabase, bool usingDatabase, string connectionFileName)
+        private void RaiseConnectionsSavedEvent(ConnectionTreeModel modelThatWasSaved,
+                                                bool previouslyUsingDatabase,
+                                                bool usingDatabase,
+                                                string connectionFileName)
         {
-            ConnectionsSaved?.Invoke(this, new ConnectionsSavedEventArgs(modelThatWasSaved, previouslyUsingDatabase, usingDatabase, connectionFileName));
+            ConnectionsSaved?.Invoke(this,
+                                     new ConnectionsSavedEventArgs(modelThatWasSaved, previouslyUsingDatabase,
+                                                                   usingDatabase,
+                                                                   connectionFileName));
         }
+
         #endregion
     }
 }

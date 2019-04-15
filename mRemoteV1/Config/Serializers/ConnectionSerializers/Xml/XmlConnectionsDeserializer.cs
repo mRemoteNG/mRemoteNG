@@ -56,11 +56,12 @@ namespace mRemoteNG.Config.Serializers.Xml
                 var connectionTreeModel = new ConnectionTreeModel();
                 connectionTreeModel.AddRootNode(_rootNodeInfo);
 
-                
+
                 if (_confVersion > 1.3)
                 {
                     var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
-                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
+                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString,
+                                                               _rootNodeInfo.PasswordString.ConvertToSecureString()))
                     {
                         return null;
                     }
@@ -103,7 +104,9 @@ namespace mRemoteNG.Config.Serializers.Xml
         private void ValidateConnectionFileVersion()
         {
             if (_xmlDocument.DocumentElement != null && _xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
-                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."), CultureInfo.InvariantCulture);
+                _confVersion =
+                    Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."),
+                                     CultureInfo.InvariantCulture);
             else
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
 
@@ -115,19 +118,22 @@ namespace mRemoteNG.Config.Serializers.Xml
         private void ShowIncompatibleVersionDialogBox()
         {
             CTaskDialog.ShowTaskDialogBox(
-                FrmMain.Default,
-                Application.ProductName,
-                "Incompatible connection file format",
-                $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
-                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, _confVersion, MaxSupportedConfVersion),
-                "",
-                "",
-                "",
-                "",
-                ETaskDialogButtons.Ok,
-                ESysIcons.Error,
-                ESysIcons.Error
-            );
+                                          FrmMain.Default,
+                                          Application.ProductName,
+                                          "Incompatible connection file format",
+                                          $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
+                                          string
+                                              .Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}",
+                                                      Environment.NewLine,
+                                                      ConnectionFileName, _confVersion, MaxSupportedConfVersion),
+                                          "",
+                                          "",
+                                          "",
+                                          "",
+                                          ETaskDialogButtons.Ok,
+                                          ESysIcons.Error,
+                                          ESysIcons.Error
+                                         );
         }
 
         private void InitializeRootNode(XmlElement connectionsRootElement)
@@ -152,7 +158,8 @@ namespace mRemoteNG.Config.Serializers.Xml
             }
             else
             {
-                _decryptor = new XmlConnectionsDecryptor(_rootNodeInfo) { AuthenticationRequestor = AuthenticationRequestor };
+                _decryptor = new XmlConnectionsDecryptor(_rootNodeInfo)
+                    {AuthenticationRequestor = AuthenticationRequestor};
             }
         }
 
@@ -174,7 +181,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                             break;
                         case TreeNodeType.Container:
                             var containerInfo = new ContainerInfo();
-                            
+
                             if (_confVersion >= 0.9)
                                 containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
                             if (_confVersion >= 0.8)
@@ -200,10 +207,10 @@ namespace mRemoteNG.Config.Serializers.Xml
             if (xmlnode?.Attributes == null)
                 return null;
 
-			var connectionId = xmlnode.GetAttributeAsString("Id");
+            var connectionId = xmlnode.GetAttributeAsString("Id");
             if (string.IsNullOrWhiteSpace(connectionId))
                 connectionId = Guid.NewGuid().ToString();
-			var connectionInfo = new ConnectionInfo(connectionId);
+            var connectionInfo = new ConnectionInfo(connectionId);
 
             try
             {
@@ -258,7 +265,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 {
                     if (_confVersion < 0.7)
                     {
-                        connectionInfo.Port = xmlnode.GetAttributeAsBool("UseVNC") 
+                        connectionInfo.Port = xmlnode.GetAttributeAsBool("UseVNC")
                             ? xmlnode.GetAttributeAsInt("VNCPort")
                             : xmlnode.GetAttributeAsInt("RDPPort");
                     }
@@ -274,6 +281,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                         else
                             connectionInfo.Port = (int)RdpProtocol.Defaults.Port;
                     }
+
                     connectionInfo.UseConsoleSession = false;
                 }
 
@@ -287,7 +295,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 else
                 {
                     connectionInfo.RedirectDiskDrives = false;
-                    connectionInfo.RedirectPrinters = false;                    
+                    connectionInfo.RedirectPrinters = false;
                     connectionInfo.RedirectPorts = false;
                     connectionInfo.RedirectSmartCards = false;
                 }
@@ -352,14 +360,17 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Inheritance.Port = xmlnode.GetAttributeAsBool("InheritPort");
                     connectionInfo.Inheritance.Protocol = xmlnode.GetAttributeAsBool("InheritProtocol");
                     connectionInfo.Inheritance.PuttySession = xmlnode.GetAttributeAsBool("InheritPuttySession");
-                    connectionInfo.Inheritance.RedirectDiskDrives = xmlnode.GetAttributeAsBool("InheritRedirectDiskDrives");
+                    connectionInfo.Inheritance.RedirectDiskDrives =
+                        xmlnode.GetAttributeAsBool("InheritRedirectDiskDrives");
                     connectionInfo.Inheritance.RedirectKeys = xmlnode.GetAttributeAsBool("InheritRedirectKeys");
                     connectionInfo.Inheritance.RedirectPorts = xmlnode.GetAttributeAsBool("InheritRedirectPorts");
                     connectionInfo.Inheritance.RedirectPrinters = xmlnode.GetAttributeAsBool("InheritRedirectPrinters");
-                    connectionInfo.Inheritance.RedirectSmartCards = xmlnode.GetAttributeAsBool("InheritRedirectSmartCards");
+                    connectionInfo.Inheritance.RedirectSmartCards =
+                        xmlnode.GetAttributeAsBool("InheritRedirectSmartCards");
                     connectionInfo.Inheritance.RedirectSound = xmlnode.GetAttributeAsBool("InheritRedirectSound");
                     connectionInfo.Inheritance.Resolution = xmlnode.GetAttributeAsBool("InheritResolution");
-                    connectionInfo.Inheritance.UseConsoleSession = xmlnode.GetAttributeAsBool("InheritUseConsoleSession");
+                    connectionInfo.Inheritance.UseConsoleSession =
+                        xmlnode.GetAttributeAsBool("InheritUseConsoleSession");
 
                     if (!Runtime.UseCredentialManager || _confVersion <= 2.6) // 1.3 - 2.6
                     {
@@ -367,6 +378,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                         connectionInfo.Inheritance.Password = xmlnode.GetAttributeAsBool("InheritPassword");
                         connectionInfo.Inheritance.Username = xmlnode.GetAttributeAsBool("InheritUsername");
                     }
+
                     connectionInfo.Icon = xmlnode.GetAttributeAsString("Icon");
                     connectionInfo.Panel = xmlnode.GetAttributeAsString("Panel");
                 }
@@ -385,8 +397,10 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 1.6)
                 {
-                    connectionInfo.ICAEncryptionStrength = xmlnode.GetAttributeAsEnum<IcaProtocol.EncryptionStrength>("ICAEncryptionStrength");
-                    connectionInfo.Inheritance.ICAEncryptionStrength = xmlnode.GetAttributeAsBool("InheritICAEncryptionStrength");
+                    connectionInfo.ICAEncryptionStrength =
+                        xmlnode.GetAttributeAsEnum<IcaProtocol.EncryptionStrength>("ICAEncryptionStrength");
+                    connectionInfo.Inheritance.ICAEncryptionStrength =
+                        xmlnode.GetAttributeAsBool("InheritICAEncryptionStrength");
                     connectionInfo.PreExtApp = xmlnode.GetAttributeAsString("PreExtApp");
                     connectionInfo.PostExtApp = xmlnode.GetAttributeAsString("PostExtApp");
                     connectionInfo.Inheritance.PreExtApp = xmlnode.GetAttributeAsBool("InheritPreExtApp");
@@ -395,16 +409,19 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 1.7)
                 {
-                    connectionInfo.VNCCompression = xmlnode.GetAttributeAsEnum<ProtocolVNC.Compression>("VNCCompression");
+                    connectionInfo.VNCCompression =
+                        xmlnode.GetAttributeAsEnum<ProtocolVNC.Compression>("VNCCompression");
                     connectionInfo.VNCEncoding = xmlnode.GetAttributeAsEnum<ProtocolVNC.Encoding>("VNCEncoding");
                     connectionInfo.VNCAuthMode = xmlnode.GetAttributeAsEnum<ProtocolVNC.AuthMode>("VNCAuthMode");
                     connectionInfo.VNCProxyType = xmlnode.GetAttributeAsEnum<ProtocolVNC.ProxyType>("VNCProxyType");
                     connectionInfo.VNCProxyIP = xmlnode.GetAttributeAsString("VNCProxyIP");
                     connectionInfo.VNCProxyPort = xmlnode.GetAttributeAsInt("VNCProxyPort");
                     connectionInfo.VNCProxyUsername = xmlnode.GetAttributeAsString("VNCProxyUsername");
-                    connectionInfo.VNCProxyPassword = _decryptor.Decrypt(xmlnode.GetAttributeAsString("VNCProxyPassword"));
+                    connectionInfo.VNCProxyPassword =
+                        _decryptor.Decrypt(xmlnode.GetAttributeAsString("VNCProxyPassword"));
                     connectionInfo.VNCColors = xmlnode.GetAttributeAsEnum<ProtocolVNC.Colors>("VNCColors");
-                    connectionInfo.VNCSmartSizeMode = xmlnode.GetAttributeAsEnum<ProtocolVNC.SmartSizeMode>("VNCSmartSizeMode");
+                    connectionInfo.VNCSmartSizeMode =
+                        xmlnode.GetAttributeAsEnum<ProtocolVNC.SmartSizeMode>("VNCSmartSizeMode");
                     connectionInfo.VNCViewOnly = xmlnode.GetAttributeAsBool("VNCViewOnly");
                     connectionInfo.Inheritance.VNCCompression = xmlnode.GetAttributeAsBool("InheritVNCCompression");
                     connectionInfo.Inheritance.VNCEncoding = xmlnode.GetAttributeAsBool("InheritVNCEncoding");
@@ -421,13 +438,16 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 1.8)
                 {
-                    connectionInfo.RDPAuthenticationLevel = xmlnode.GetAttributeAsEnum<RdpProtocol.AuthenticationLevel>("RDPAuthenticationLevel");
-                    connectionInfo.Inheritance.RDPAuthenticationLevel = xmlnode.GetAttributeAsBool("InheritRDPAuthenticationLevel");
+                    connectionInfo.RDPAuthenticationLevel =
+                        xmlnode.GetAttributeAsEnum<RdpProtocol.AuthenticationLevel>("RDPAuthenticationLevel");
+                    connectionInfo.Inheritance.RDPAuthenticationLevel =
+                        xmlnode.GetAttributeAsBool("InheritRDPAuthenticationLevel");
                 }
 
                 if (_confVersion >= 1.9)
                 {
-                    connectionInfo.RenderingEngine = xmlnode.GetAttributeAsEnum<HTTPBase.RenderingEngine>("RenderingEngine");
+                    connectionInfo.RenderingEngine =
+                        xmlnode.GetAttributeAsEnum<HTTPBase.RenderingEngine>("RenderingEngine");
                     connectionInfo.MacAddress = xmlnode.GetAttributeAsString("MacAddress");
                     connectionInfo.Inheritance.RenderingEngine = xmlnode.GetAttributeAsBool("InheritRenderingEngine");
                     connectionInfo.Inheritance.MacAddress = xmlnode.GetAttributeAsBool("InheritMacAddress");
@@ -448,19 +468,28 @@ namespace mRemoteNG.Config.Serializers.Xml
                 if (_confVersion >= 2.2)
                 {
                     // Get settings
-                    connectionInfo.RDGatewayUsageMethod = xmlnode.GetAttributeAsEnum<RdpProtocol.RDGatewayUsageMethod>("RDGatewayUsageMethod");
+                    connectionInfo.RDGatewayUsageMethod =
+                        xmlnode.GetAttributeAsEnum<RdpProtocol.RDGatewayUsageMethod>("RDGatewayUsageMethod");
                     connectionInfo.RDGatewayHostname = xmlnode.GetAttributeAsString("RDGatewayHostname");
-                    connectionInfo.RDGatewayUseConnectionCredentials = xmlnode.GetAttributeAsEnum<RdpProtocol.RDGatewayUseConnectionCredentials>("RDGatewayUseConnectionCredentials");
+                    connectionInfo.RDGatewayUseConnectionCredentials =
+                        xmlnode.GetAttributeAsEnum<RdpProtocol.RDGatewayUseConnectionCredentials>(
+                                                                                                  "RDGatewayUseConnectionCredentials");
                     connectionInfo.RDGatewayUsername = xmlnode.GetAttributeAsString("RDGatewayUsername");
-                    connectionInfo.RDGatewayPassword = _decryptor.Decrypt(xmlnode.GetAttributeAsString("RDGatewayPassword"));
+                    connectionInfo.RDGatewayPassword =
+                        _decryptor.Decrypt(xmlnode.GetAttributeAsString("RDGatewayPassword"));
                     connectionInfo.RDGatewayDomain = xmlnode.GetAttributeAsString("RDGatewayDomain");
 
                     // Get inheritance settings
-                    connectionInfo.Inheritance.RDGatewayUsageMethod = xmlnode.GetAttributeAsBool("InheritRDGatewayUsageMethod");
-                    connectionInfo.Inheritance.RDGatewayHostname = xmlnode.GetAttributeAsBool("InheritRDGatewayHostname");
-                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials = xmlnode.GetAttributeAsBool("InheritRDGatewayUseConnectionCredentials");
-                    connectionInfo.Inheritance.RDGatewayUsername = xmlnode.GetAttributeAsBool("InheritRDGatewayUsername");
-                    connectionInfo.Inheritance.RDGatewayPassword = xmlnode.GetAttributeAsBool("InheritRDGatewayPassword");
+                    connectionInfo.Inheritance.RDGatewayUsageMethod =
+                        xmlnode.GetAttributeAsBool("InheritRDGatewayUsageMethod");
+                    connectionInfo.Inheritance.RDGatewayHostname =
+                        xmlnode.GetAttributeAsBool("InheritRDGatewayHostname");
+                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials =
+                        xmlnode.GetAttributeAsBool("InheritRDGatewayUseConnectionCredentials");
+                    connectionInfo.Inheritance.RDGatewayUsername =
+                        xmlnode.GetAttributeAsBool("InheritRDGatewayUsername");
+                    connectionInfo.Inheritance.RDGatewayPassword =
+                        xmlnode.GetAttributeAsBool("InheritRDGatewayPassword");
                     connectionInfo.Inheritance.RDGatewayDomain = xmlnode.GetAttributeAsBool("InheritRDGatewayDomain");
                 }
 
@@ -471,8 +500,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.EnableDesktopComposition = xmlnode.GetAttributeAsBool("EnableDesktopComposition");
 
                     // Get inheritance settings
-                    connectionInfo.Inheritance.EnableFontSmoothing = xmlnode.GetAttributeAsBool("InheritEnableFontSmoothing");
-                    connectionInfo.Inheritance.EnableDesktopComposition = xmlnode.GetAttributeAsBool("InheritEnableDesktopComposition");
+                    connectionInfo.Inheritance.EnableFontSmoothing =
+                        xmlnode.GetAttributeAsBool("InheritEnableFontSmoothing");
+                    connectionInfo.Inheritance.EnableDesktopComposition =
+                        xmlnode.GetAttributeAsBool("InheritEnableDesktopComposition");
                 }
 
                 if (_confVersion >= 2.4)
@@ -491,22 +522,31 @@ namespace mRemoteNG.Config.Serializers.Xml
 
                 if (_confVersion >= 2.6)
                 {
-                    connectionInfo.SoundQuality = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPSoundQuality>("SoundQuality");
+                    connectionInfo.SoundQuality =
+                        xmlnode.GetAttributeAsEnum<RdpProtocol.RDPSoundQuality>("SoundQuality");
                     connectionInfo.Inheritance.SoundQuality = xmlnode.GetAttributeAsBool("InheritSoundQuality");
                     connectionInfo.RDPMinutesToIdleTimeout = xmlnode.GetAttributeAsInt("RDPMinutesToIdleTimeout");
-                    connectionInfo.Inheritance.RDPMinutesToIdleTimeout = xmlnode.GetAttributeAsBool("InheritRDPMinutesToIdleTimeout");
+                    connectionInfo.Inheritance.RDPMinutesToIdleTimeout =
+                        xmlnode.GetAttributeAsBool("InheritRDPMinutesToIdleTimeout");
                     connectionInfo.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("RDPAlertIdleTimeout");
-                    connectionInfo.Inheritance.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");
+                    connectionInfo.Inheritance.RDPAlertIdleTimeout =
+                        xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");
                 }
-                if(_confVersion >= 2.7)
+
+                if (_confVersion >= 2.7)
                 {
                     connectionInfo.RedirectClipboard = xmlnode.GetAttributeAsBool("RedirectClipboard");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
+                    connectionInfo.Favorite = xmlnode.GetAttributeAsBool("Favorite");
+                    connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message));
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    string.Format(Language.strGetConnectionInfoFromXmlFailed,
+                                                                  connectionInfo.Name, ConnectionFileName,
+                                                                  ex.Message));
             }
 
             return connectionInfo;

@@ -1,13 +1,13 @@
-﻿using mRemoteNG.Themes;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls.Base
 {
     //Extended CheckBox class, the NGCheckBox onPaint completely repaint the control
 
     //
-    // If this causes design issues in the future, may want to think about migrating to 
+    // If this causes design issues in the future, may want to think about migrating to
     // CheckBoxRenderer:
     // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.checkboxrenderer?view=netframework-4.6
     //
@@ -40,7 +40,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             _mice = MouseState.OUT;
@@ -73,16 +73,17 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if ( !_themeManager.ThemingActive)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
             }
+
             //Get the colors
             Color fore;
             Color glyph;
             Color checkBorder;
- 
+
             var back = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
             if (Enabled)
             {
@@ -104,11 +105,10 @@ namespace mRemoteNG.UI.Controls.Base
             }
             else
             {
-                
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
                 glyph = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph_Disabled");
                 checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Disabled");
-            } 
+            }
 
             e.Graphics.Clear(Parent.BackColor);
 
@@ -126,19 +126,18 @@ namespace mRemoteNG.UI.Controls.Base
             }
 
             var textRect = new Rectangle(_textXCoord, 0, Width - 16, Height);
-            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
+            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
+                                  TextFormatFlags.PathEllipsis);
         }
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // NGCheckBox
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResumeLayout(false);
-
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ResumeLayout(false);
         }
     }
 }
-

@@ -2,12 +2,12 @@ using System;
 
 namespace mRemoteNG.Messages
 {
-	public class Message : IMessage
-	{
-	    public MessageClass Class { get; set; }
-	    public string Text { get; set; }
-	    public DateTime Date { get; set; }
-	    public bool OnlyLog { get; set; }
+    public class Message : IMessage
+    {
+        public MessageClass Class { get; set; }
+        public string Text { get; set; }
+        public DateTime Date { get; set; }
+        public bool OnlyLog { get; set; }
 
         public Message(MessageClass messageClass, string messageText, bool onlyLog = false)
         {
@@ -16,5 +16,5 @@ namespace mRemoteNG.Messages
             Date = DateTime.Now;
             OnlyLog = onlyLog;
         }
-	}
+    }
 }

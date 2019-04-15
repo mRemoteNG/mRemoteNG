@@ -7,7 +7,8 @@ namespace mRemoteNG.Tree
 {
     public class TreeNodeCompositeClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {
-        public IEnumerable<ITreeNodeClickHandler<ConnectionInfo>> ClickHandlers { get; set; } = new ITreeNodeClickHandler<ConnectionInfo>[0];
+        public IEnumerable<ITreeNodeClickHandler<ConnectionInfo>> ClickHandlers { get; set; } =
+            new ITreeNodeClickHandler<ConnectionInfo>[0];
 
         public void Execute(ConnectionInfo clickedNode)
         {

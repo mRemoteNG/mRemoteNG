@@ -50,23 +50,22 @@
     <Reference Include="ADTree">
       <HintPath>References\ADTree.dll</HintPath>
     </Reference>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.4\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="Geckofx-Core, Version=45.0.32.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <HintPath>..\packages\Geckofx45.45.0.32\lib\net45\Geckofx-Core.dll</HintPath>
+    <Reference Include="Geckofx-Core, Version=45.0.34.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
+      <HintPath>..\packages\Geckofx45.45.0.34\lib\net45\Geckofx-Core.dll</HintPath>
     </Reference>
-    <Reference Include="Geckofx-Winforms, Version=45.0.32.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <HintPath>..\packages\Geckofx45.45.0.32\lib\net45\Geckofx-Winforms.dll</HintPath>
+    <Reference Include="Geckofx-Winforms, Version=45.0.34.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
+      <HintPath>..\packages\Geckofx45.45.0.34\lib\net45\Geckofx-Winforms.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="mscorlib" />
-    <Reference Include="MagicLibrary, Version=1.7.4.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\MagicLibrary.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
@@ -75,12 +74,17 @@
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -153,7 +157,8 @@
     <Compile Include="Config\CredentialRepositoryListSaver.cs" />
     <Compile Include="Config\DatabaseConnectors\ConnectionTestResult.cs" />
     <Compile Include="Config\DatabaseConnectors\DatabaseConnectorFactory.cs" />
-    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnectionTester.cs" />
+    <Compile Include="Config\DatabaseConnectors\DatabaseConnectionTester.cs" />
+    <Compile Include="Config\DatabaseConnectors\MSSqlDatabaseConnector.cs" />
     <Compile Include="Config\DataProviders\FileBackupCreator.cs" />
     <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
     <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
@@ -228,7 +233,7 @@
     <Compile Include="Config\Putty\PuttySessionsManager.cs" />
     <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
     <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
-    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnector.cs" />
+    <Compile Include="Config\DatabaseConnectors\MySqlDatabaseConnector.cs" />
     <Compile Include="Connection\AbstractConnectionRecord.cs" />
     <Compile Include="Connection\ConnectionInfoComparer.cs" />
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
@@ -244,6 +249,10 @@
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />
+    <Compile Include="Connection\Protocol\ISupportsViewOnly.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpClientWrap.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
@@ -275,6 +284,7 @@
     <Compile Include="Themes\MremoteNGThemeBase.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\Clipboard\WindowsClipboard.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
     <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
     <Compile Include="Credential\Repositories\CredentialRepositoryChangedArgs.cs" />
@@ -327,6 +337,7 @@
     <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
     <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Tools\DisposableAction.cs" />
     <Compile Include="Tools\DisposableOptional.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="Tools\ExternalToolArgumentParser.cs" />
@@ -346,6 +357,7 @@
     <Compile Include="Tools\SecureTransfer.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionVerifier.cs" />
     <Compile Include="Tree\AlwaysConfirmYes.cs" />
+    <Compile Include="Tools\Clipboard\IClipboard.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmer.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
     <Compile Include="Tree\ConnectionTreeModel.cs" />
@@ -392,6 +404,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\Base\NGRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGSearchBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\Base\NGTextBox.cs">
@@ -687,6 +702,23 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Panels\PanelAdder.cs" />
+    <Compile Include="UI\Tabs\Enums.cs" />
+    <Compile Include="UI\Tabs\ConnectionTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\ConnectionTab.Designer.cs">
+      <DependentUpon>ConnectionTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Tabs\DockPaneStripNG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\FloatWindowNG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\MremoteNGAutoHideStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\TabHelper.cs" />
     <Compile Include="UI\TaskDialog\CommandButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -776,12 +808,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx" />
-    <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Themes\ColorMapTheme.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
@@ -810,6 +848,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Base\NGRadioButton.resx">
       <DependentUpon>NGRadioButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGSearchBox.resx">
+      <DependentUpon>NGSearchBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
       <DependentUpon>NGTextBox.cs</DependentUpon>
@@ -887,6 +928,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\StartupExitPage.resx">
       <DependentUpon>StartupExitPage.cs</DependentUpon>
@@ -913,7 +955,9 @@
     <EmbeddedResource Include="Resources\Language\Language.en-US.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.es-AR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.es-AR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.es.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -972,6 +1016,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UnhandledExceptionWindow.resx">
       <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tabs\ConnectionTab.resx">
+      <DependentUpon>ConnectionTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TaskDialog\CommandButton.resx">
       <DependentUpon>CommandButton.cs</DependentUpon>
@@ -1044,6 +1091,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="app.config" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
@@ -1079,6 +1127,25 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Firefox\AccessibleMarshal.dll" />
+    <Content Include="Firefox\breakpadinjector.dll" />
+    <Content Include="Firefox\d3dcompiler_47.dll" />
+    <Content Include="Firefox\freebl3.dll" />
+    <Content Include="Firefox\icudt58.dll" />
+    <Content Include="Firefox\icuin58.dll" />
+    <Content Include="Firefox\icuuc58.dll" />
+    <Content Include="Firefox\lgpllibs.dll" />
+    <Content Include="Firefox\libEGL.dll" />
+    <Content Include="Firefox\libGLESv2.dll" />
+    <Content Include="Firefox\mozglue.dll" />
+    <Content Include="Firefox\nss3.dll" />
+    <Content Include="Firefox\nssckbi.dll" />
+    <Content Include="Firefox\nssdbm3.dll" />
+    <Content Include="Firefox\plugin-container.exe" />
+    <Content Include="Firefox\plugin-hang-ui.exe" />
+    <Content Include="Firefox\sandboxbroker.dll" />
+    <Content Include="Firefox\softokn3.dll" />
+    <Content Include="Firefox\xul.dll" />
     <Content Include="Resources\Help\Screenshots\CommonProblemsRDP\credssp-error.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1121,16 +1188,10 @@
     <Content Include="Resources\Help\Screenshots\Notifications\popup_warning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Quickconnect\01.png" />
-    <Content Include="Resources\Help\Screenshots\Quickconnect\02.png" />
-    <Content Include="Resources\Help\Screenshots\Quickconnect\03.png" />
     <Content Include="Resources\Help\Screenshots\Reference\add_new_folder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Screenshots\Reference\config_panel_01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\config_panel_02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\Screenshots\Reference\example_01.png">
@@ -1224,6 +1285,10 @@
     <None Include="Resources\Icons\Update_Icon.ico" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <None Include="Resources\Images\mRemoteNG.png" />
+    <None Include="Resources\Images\tab_add.png" />
+    <None Include="Resources\Images\tab_edit.png" />
+    <None Include="Resources\Images\tab_delete.png" />
+    <None Include="Resources\Images\star.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1238,25 +1303,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Firefox\AccessibleMarshal.dll" />
-    <Content Include="Firefox\breakpadinjector.dll" />
-    <Content Include="Firefox\d3dcompiler_47.dll" />
-    <Content Include="Firefox\freebl3.dll" />
-    <Content Include="Firefox\icudt56.dll" />
-    <Content Include="Firefox\icuin56.dll" />
-    <Content Include="Firefox\icuuc56.dll" />
-    <Content Include="Firefox\lgpllibs.dll" />
-    <Content Include="Firefox\libEGL.dll" />
-    <Content Include="Firefox\libGLESv2.dll" />
-    <Content Include="Firefox\mozglue.dll" />
-    <Content Include="Firefox\nss3.dll" />
-    <Content Include="Firefox\nssckbi.dll" />
-    <Content Include="Firefox\nssdbm3.dll" />
-    <Content Include="Firefox\plugin-container.exe" />
-    <Content Include="Firefox\plugin-hang-ui.exe" />
-    <Content Include="Firefox\sandboxbroker.dll" />
-    <Content Include="Firefox\softokn3.dll" />
-    <Content Include="Firefox\xul.dll" />
     <Content Include="Resources\Help\gs_command_line_switches.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1282,9 +1328,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\gs_installation.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Introduction.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_menus.htm">
@@ -1314,57 +1357,6 @@
     <Content Include="Resources\Help\Screenshots\Quick Connect\03.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\04.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\06.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\07.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\08.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\09.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\10.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\11.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\12.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\13.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\14.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\15.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\16.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Configuration\17.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\Screenshots\External Tools\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1389,25 +1381,13 @@
     <Content Include="Resources\Help\Screenshots\External Tools\08.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\Screenshots\Main Menu\File.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Main Menu\Info.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Main Menu\QuickConnect.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Main Menu\Tools.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Main Menu\View.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\Screenshots\Reference\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Help\SQLScript.txt">
+    <Content Include="Resources\Help\MSSQLScript.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\MySQLScript.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\ui_file_transfer.htm">
@@ -1740,15 +1720,14 @@
 :: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
 
 powershell -noprofile -command "sleep 2"
+
 set /p buildenv=&lt;buildenv.tmp
-set solutionDir=$(SolutionDir)\
-set targetDir=%25cd%25
-set psScriptsDir=$(SolutionDir)Tools
-set certPath=$(CertPath)
-set certPassword=$(CertPassword)
+
+:: Manual builds, set the cert password and uncomment below.
+:: IF "%25APPVEYOR_BUILD_FOLDER"=="" ( set cert_pwd= )
 
 :: Call the post build powershell script
-powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremotev1.ps1" -SolutionDir "%25solutionDir%25" -TargetDir "%25targetDir%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "%25certPath%25" -CertificatePassword "%25certPassword%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
+powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mremotev1.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "%25cert_pwd%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -1816,11 +1795,11 @@ powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_mremo
   <PropertyGroup>
     <PreBuildEvent>echo $(ConfigurationName) &gt; buildenv.tmp</PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Geckofx45.45.0.32\build\Geckofx45.targets" Condition="Exists('..\packages\Geckofx45.45.0.32\build\Geckofx45.targets')" />
+  <Import Project="..\packages\Geckofx45.45.0.34\build\Geckofx45.targets" Condition="Exists('..\packages\Geckofx45.45.0.34\build\Geckofx45.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Geckofx45.45.0.32\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.32\build\Geckofx45.targets'))" />
+    <Error Condition="!Exists('..\packages\Geckofx45.45.0.34\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.34\build\Geckofx45.targets'))" />
   </Target>
 </Project>

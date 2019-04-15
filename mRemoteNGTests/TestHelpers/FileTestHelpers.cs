@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using mRemoteNG.Tools;
 
 namespace mRemoteNGTests.TestHelpers
 {
@@ -18,9 +19,17 @@ namespace mRemoteNGTests.TestHelpers
                     File.Delete(file);
         }
 
-        public static string NewTempFilePath()
+        public static void DeleteDirectory(string directory)
+        {
+			if (Directory.Exists(directory))
+				Directory.Delete(directory, true);
+        }
+
+        public static string NewTempFilePath(string extension = "")
         {
             var newPath = Path.Combine(GetTestSpecificTempDirectory(), Path.GetRandomFileName());
+            if (!string.IsNullOrWhiteSpace(extension))
+	            newPath = newPath + extension;
             var folderPath = Path.GetDirectoryName(newPath);
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
@@ -35,5 +44,15 @@ namespace mRemoteNGTests.TestHelpers
         {
             return Path.Combine(Path.GetTempPath(), "mRemoteNGTests", Path.GetRandomFileName());
         }
+
+		public static DisposableAction DisposableTempFile(out string filePath, string extension = "")
+		{
+			var file = NewTempFilePath(extension);
+			filePath = file;
+			File.AppendAllText(file, "");
+			return new DisposableAction(
+				() => {}, 
+				() => DeleteDirectory(Path.GetDirectoryName(file)));
+		}
     }
 }
