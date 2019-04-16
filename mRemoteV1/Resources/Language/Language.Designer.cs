@@ -178,6 +178,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do not trim spaces from usernames.
+        /// </summary>
+        internal static string DoNotTrimUsername {
+            get {
+                return ResourceManager.GetString("DoNotTrimUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This exception will force mRemoteNG to close.
         /// </summary>
         internal static string ExceptionForcesmRemoteNGToClose {
