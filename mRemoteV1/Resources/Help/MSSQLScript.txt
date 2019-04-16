@@ -128,7 +128,9 @@ CREATE TABLE [dbo].[tblCons] (
 	[LoadBalanceInfo] [varchar] (1024) NULL ,
 	[AutomaticResize] [bit] NOT NULL DEFAULT 1 ,
 	[InheritLoadBalanceInfo] [bit] NOT NULL DEFAULT 0 ,
-	[InheritAutomaticResize] [bit] NOT NULL DEFAULT 0
+	[InheritAutomaticResize] [bit] NOT NULL DEFAULT 0 ,
+	[RedirectClipboard] [bit] NOT NULL DEFAULT 0 ,
+	[InheritRedirectClipboard] [bit] NOT NULL DEFAULT 0
 ) ON [PRIMARY]
 GO
  

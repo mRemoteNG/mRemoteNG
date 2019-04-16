@@ -1,73 +1,49 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Common Problems (RDP)</title>
-    <link rel="stylesheet" href="Main.css" type="text/css">
-</head>
-<body>
-<div class="isa_info">
-    Complete from nmat updates, please remove this div after review.
-</div>
-
-<h1>Introduction</h1>
-<p>
-    Its hard to make a document on all problems that can occur with connections
-    but here at least we are trying to list some of the most common problems for RDP
-    that has been noticed.
-</p>
-
-<!-- Reference - #start -->
-<h2>Quick Reference</h2>
-<ul>
-    <li>
-        <a href="#credssp_2018-0886">
-            <b>CredSSP - CVE-2018-0886</b>
-        </a> - Authentication error
-    </li>
-</ul>
-<!-- Reference - #end -->
-
-<!-- credssp_2018 - #start -->
-<h1 id="credssp_2018">CredSSP - CVE-2018-0886 - Authentication error</h1>
-<p>
-    mRemoteNG uses the Microsoft Terminal Services Client (MSTSC) libraries in order
-    to make Remote Desktop connections. mRemoteNG has no control over the functionality
-    changes implemented by Microsoft.
-</p>
-<p>
-    Relevant line of code that shows our
-    "RDP Client" connection "object":
-    <a href="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteV1/Connection/Protocol/RDP/RdpProtocol.cs#L27">
-        private MsRdpClient8NotSafeForScripting _rdpClient;
-    </a>
-</p>
-<p>
-    Relevant MS documentation for this .NET class:
-    <a href="https://msdn.microsoft.com/en-us/library/mt787069(v=vs.85).aspx">MsRdpClient8NotSafeForScripting class</a>
-</p>
-<p>
-    Please refer to
-    <a href="https://support.microsoft.com/en-us/help/4093492/credssp-updates-for-cve-2018-0886-march-13-2018">Microsoft's documentation</a>
-    for full details regarding this problem.
-</p>
-<p>
-    Patched clients attempting to connect to Unpatched servers will fail with the following error:
-</p>
-<img src="Screenshots/CommonProblemsRDP/credssp-error.png">
-<p>
-    The same error will occur with MSTSC directly on a
-    patched client attempting to connect to an unpatched server.
-</p>
-<p>Per the MS documentation, the only ways around this are to:</p>
-<ul>
-    <li>Patch the servers</li>
-    <li>
-        set the "Encryption Oracle Remediation" policy to "Vulnerable" - refer to the MS documentation above for details:<br>
-        <img src="Screenshots/CommonProblemsRDP/oracle_remediation_setting.png">
-    </li>
-    <li>Uninstall <a href="https://support.microsoft.com/en-us/help/4103727/windows-10-update-kb4103727">KB4103727</a></li>
-</ul>
-<!-- credssp_2018 - #end -->
-</body>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Common Problems (RDP)</title>
+		<link rel="stylesheet" href="Main.css" type="text/css"/>
+	</head>
+	<body>
+		<h1>Common Problems (RDP)</h1>
+		<hr/>
+		<p>Its hard to make a document on all problems that can occur with connections but here at least we are trying to list some of the most common problems for RDP that has been noticed.</p>
+		<!-- Reference - #start -->
+		<div class=lvl1>
+			<h2>Quick Reference</h2>
+			<ul>
+				<li>
+					<a href="#credssp_2018-0886">
+						<b>CredSSP - CVE-2018-0886</b>
+					</a> - Authentication error</li>
+			</ul>
+		</div>
+		<!-- Reference - #end -->
+		<!-- credssp_2018 - #start -->
+		<h1 id="credssp_2018">CredSSP - CVE-2018-0886 - Authentication error</h1>
+		<hr/>
+		<p>mRemoteNG uses the Microsoft Terminal Services Client (MSTSC) libraries in order to make Remote Desktop connections. mRemoteNG has no control over the functionality changes implemented by Microsoft.
+			<br/>
+			<br/>
+			Relevant line of code that shows our "RDP Client" connection "object": <a href="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteV1/Connection/Protocol/RDP/RdpProtocol.cs#L27">private MsRdpClient8NotSafeForScripting _rdpClient</a>
+			<br/>
+			Relevant MS documentation for this .NET class: <a href="https://msdn.microsoft.com/en-us/library/mt787069(v=vs.85).aspx">MsRdpClient8NotSafeForScripting class</a>
+			<br/>
+			<br/>
+			Please refer to <a href="https://support.microsoft.com/en-us/help/4093492/credssp-updates-for-cve-2018-0886-march-13-2018"> Microsoft's documentation</a>for full details regarding this problem.
+			Patched clients attempting to connect to Unpatched servers will fail with the following error:</p>
+		<img src="Screenshots/CommonProblemsRDP/credssp-error.png"/>
+		<p>The same error will occur with MSTSC directly on a patched client attempting to connect to an unpatched server.</p>
+		<p>Per the MS documentation, the only way around this is to do the following:</p>
+		<ul>
+			<li>Patch the servers</li>
+			<li>set the "Encryption Oracle Remediation" policy to "Vulnerable" - refer to the MS documentation above for details:<br/>
+				<img src="Screenshots/CommonProblemsRDP/oracle_remediation_setting.png"/>
+			</li>
+			<li>Uninstall <a href="https://support.microsoft.com/en-us/help/4103727/windows-10-update-kb4103727">KB4103727</a>
+			</li>
+		</ul>
+		<!-- credssp_2018 - #end -->
+	</body>
 </html>

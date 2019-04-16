@@ -18,6 +18,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
+//            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlServerPage));
             this.lblSQLDatabaseName = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.txtSQLDatabaseName = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblExperimental = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -34,13 +35,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblTestConnectionResults = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.chkSQLReadOnly = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.lblSQLReadOnly = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblSQLType = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtSQLType = new mRemoteNG.UI.Controls.Base.NGComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSQLDatabaseName
             // 
             this.lblSQLDatabaseName.Enabled = false;
-            this.lblSQLDatabaseName.Location = new System.Drawing.Point(23, 132);
+            this.lblSQLDatabaseName.Location = new System.Drawing.Point(23, 156);
             this.lblSQLDatabaseName.Name = "lblSQLDatabaseName";
             this.lblSQLDatabaseName.Size = new System.Drawing.Size(111, 13);
             this.lblSQLDatabaseName.TabIndex = 5;
@@ -51,7 +54,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtSQLDatabaseName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSQLDatabaseName.Enabled = false;
-            this.txtSQLDatabaseName.Location = new System.Drawing.Point(140, 130);
+            this.txtSQLDatabaseName.Location = new System.Drawing.Point(140, 154);
             this.txtSQLDatabaseName.Name = "txtSQLDatabaseName";
             this.txtSQLDatabaseName.Size = new System.Drawing.Size(153, 22);
             this.txtSQLDatabaseName.TabIndex = 6;
@@ -86,7 +89,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblSQLUsername
             // 
             this.lblSQLUsername.Enabled = false;
-            this.lblSQLUsername.Location = new System.Drawing.Point(23, 158);
+            this.lblSQLUsername.Location = new System.Drawing.Point(23, 182);
             this.lblSQLUsername.Name = "lblSQLUsername";
             this.lblSQLUsername.Size = new System.Drawing.Size(111, 13);
             this.lblSQLUsername.TabIndex = 7;
@@ -97,7 +100,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtSQLPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSQLPassword.Enabled = false;
-            this.txtSQLPassword.Location = new System.Drawing.Point(140, 182);
+            this.txtSQLPassword.Location = new System.Drawing.Point(140, 206);
             this.txtSQLPassword.Name = "txtSQLPassword";
             this.txtSQLPassword.Size = new System.Drawing.Size(153, 22);
             this.txtSQLPassword.TabIndex = 10;
@@ -120,7 +123,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblSQLServer
             // 
             this.lblSQLServer.Enabled = false;
-            this.lblSQLServer.Location = new System.Drawing.Point(23, 106);
+            this.lblSQLServer.Location = new System.Drawing.Point(23, 130);
             this.lblSQLServer.Name = "lblSQLServer";
             this.lblSQLServer.Size = new System.Drawing.Size(111, 13);
             this.lblSQLServer.TabIndex = 3;
@@ -131,7 +134,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtSQLUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSQLUsername.Enabled = false;
-            this.txtSQLUsername.Location = new System.Drawing.Point(140, 156);
+            this.txtSQLUsername.Location = new System.Drawing.Point(140, 180);
             this.txtSQLUsername.Name = "txtSQLUsername";
             this.txtSQLUsername.Size = new System.Drawing.Size(153, 22);
             this.txtSQLUsername.TabIndex = 8;
@@ -140,7 +143,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtSQLServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSQLServer.Enabled = false;
-            this.txtSQLServer.Location = new System.Drawing.Point(140, 103);
+            this.txtSQLServer.Location = new System.Drawing.Point(140, 128);
             this.txtSQLServer.Name = "txtSQLServer";
             this.txtSQLServer.Size = new System.Drawing.Size(153, 22);
             this.txtSQLServer.TabIndex = 4;
@@ -148,7 +151,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblSQLPassword
             // 
             this.lblSQLPassword.Enabled = false;
-            this.lblSQLPassword.Location = new System.Drawing.Point(23, 184);
+            this.lblSQLPassword.Location = new System.Drawing.Point(23, 208);
             this.lblSQLPassword.Name = "lblSQLPassword";
             this.lblSQLPassword.Size = new System.Drawing.Size(111, 13);
             this.lblSQLPassword.TabIndex = 9;
@@ -159,7 +162,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.btnTestConnection._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnTestConnection.Enabled = false;
-            this.btnTestConnection.Location = new System.Drawing.Point(140, 228);
+            this.btnTestConnection.Location = new System.Drawing.Point(140, 252);
             this.btnTestConnection.Name = "btnTestConnection";
             this.btnTestConnection.Size = new System.Drawing.Size(153, 23);
             this.btnTestConnection.TabIndex = 11;
@@ -170,7 +173,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // imgConnectionStatus
             // 
             this.imgConnectionStatus.Image = global::mRemoteNG.Resources.Help;
-            this.imgConnectionStatus.Location = new System.Drawing.Point(297, 231);
+            this.imgConnectionStatus.Location = new System.Drawing.Point(297, 255);
             this.imgConnectionStatus.Name = "imgConnectionStatus";
             this.imgConnectionStatus.Size = new System.Drawing.Size(16, 16);
             this.imgConnectionStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -180,7 +183,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblTestConnectionResults
             // 
             this.lblTestConnectionResults.AutoSize = true;
-            this.lblTestConnectionResults.Location = new System.Drawing.Point(137, 254);
+            this.lblTestConnectionResults.Location = new System.Drawing.Point(137, 278);
             this.lblTestConnectionResults.Name = "lblTestConnectionResults";
             this.lblTestConnectionResults.Size = new System.Drawing.Size(124, 13);
             this.lblTestConnectionResults.TabIndex = 13;
@@ -191,7 +194,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSQLReadOnly._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSQLReadOnly.AutoSize = true;
             this.chkSQLReadOnly.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSQLReadOnly.Location = new System.Drawing.Point(140, 208);
+            this.chkSQLReadOnly.Location = new System.Drawing.Point(140, 232);
             this.chkSQLReadOnly.Name = "chkSQLReadOnly";
             this.chkSQLReadOnly.Size = new System.Drawing.Size(15, 14);
             this.chkSQLReadOnly.TabIndex = 14;
@@ -200,17 +203,42 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblSQLReadOnly
             // 
             this.lblSQLReadOnly.Enabled = false;
-            this.lblSQLReadOnly.Location = new System.Drawing.Point(23, 208);
+            this.lblSQLReadOnly.Location = new System.Drawing.Point(23, 232);
             this.lblSQLReadOnly.Name = "lblSQLReadOnly";
             this.lblSQLReadOnly.Size = new System.Drawing.Size(111, 13);
             this.lblSQLReadOnly.TabIndex = 15;
             this.lblSQLReadOnly.Text = "Read Only:";
             this.lblSQLReadOnly.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            //
+            // lblSQLType
+            //
+            this.lblSQLType.Enabled = false;
+            this.lblSQLType.Location = new System.Drawing.Point(23, 106);
+            this.lblSQLType.Name = "lblSQLType";
+            this.lblSQLType.Size = new System.Drawing.Size(111, 13);
+            this.lblSQLType.TabIndex = 20;
+            this.lblSQLType.Text = "SQL Server Type:";
+            this.lblSQLType.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            //
+            // txtSQLType
+            //
+            this.txtSQLType._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.txtSQLType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtSQLType.FormattingEnabled = true;
+            this.txtSQLType.Items.AddRange(new object[] {
+            "mssql",
+            "mysql"});
+            this.txtSQLType.Location = new System.Drawing.Point(140, 102);
+            this.txtSQLType.Name = "txtSQLType";
+            this.txtSQLType.Size = new System.Drawing.Size(153, 21);
+            this.txtSQLType.TabIndex = 21;
             // 
             // SqlServerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.txtSQLType);
+            this.Controls.Add(this.lblSQLType);
             this.Controls.Add(this.lblSQLReadOnly);
             this.Controls.Add(this.chkSQLReadOnly);
             this.Controls.Add(this.lblTestConnectionResults);
@@ -233,7 +261,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
 		}
 		internal Controls.Base.NGLabel lblSQLDatabaseName;
 		internal Controls.Base.NGTextBox txtSQLDatabaseName;
@@ -251,5 +278,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private Controls.Base.NGLabel lblTestConnectionResults;
         private Controls.Base.NGCheckBox chkSQLReadOnly;
         internal Controls.Base.NGLabel lblSQLReadOnly;
+		internal Controls.Base.NGLabel lblSQLType;
+		private Controls.Base.NGComboBox txtSQLType;
     }
 }

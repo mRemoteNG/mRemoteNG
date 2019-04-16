@@ -1,71 +1,57 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Config</title>
-    <link rel="stylesheet" href="Main.css" type="text/css">
-</head>
-<body>
-<div class="isa_info">
-    Complete from nmat updates, please remove this div after review. Need information in properties and inheritance.
-</div>
-
-<!-- Introduction - #start -->
-<h1>Introduction</h1>
-<hr>
-<img src="Screenshots/Config/main_window.png">
-<p>
-    Config dialog to setup the connection specific properties.
-    This includes inheritance from other items before the item and more. Details below is about
-    how to work with this dialog to get the most out of connections and configuration.
-</p>
-<h2>Quick Reference</h2>
-<ul>
-    <li>
-        <a href="#top_bar">
-            <b>Top Bar</b>
-        </a> - Main top bar information.
-    </li>
-</ul>
-<!-- Introduction - #end -->
-
-<!-- Top Bar - #start -->
-<h1 id="top_bar">Top Bar</h1>
-<hr>
-<p>
-    <img src="Screenshots/Config/main_top_bar.png">
-    <p style="margin-left: 40px;">
-        <span style="color: crimson;">Red</span> - Sort values Categories or Alphabetical.<br>
-        <span style="color: forestgreen;">Green</span> - Show Properties, Inheritance values<br>
-        <span style="color: deepskyblue;">Blue</span> - Connection icon<br>
-        <span style="color: goldenrod;">Yellow</span> - Host status (based on ICMP ping)
-    </p>
-</p>
-<h2>Sort Values</h2>
-<p>
-    Sorts the values in properties either by Categories or Alphabetically.
-    <p style="margin-left: 40px">
-        <b>Categories sort</b> - Shows values in categories with expanding options.<br>
-        <b>Alphabetical sort</b> - Expands everything and shows values in alphabetical order instead
-    </p>
-</p>
-<h2>Properties and Inheritance</h2>
-<p>
-    <!-- TODO: Need help to fill this in -->
-</p>
-<h2>Icon</h2>
-<p>
-    The icon indicates the visual identifier for the connection. Clicking the icon will let you set a different icon
-    for the connection.
-</p>
-<div class="isa_info">
-    <b>NOTE!</b> Don't forget that mRemoteNG will save the change on exit auto unless you have unchecked this setting in options.
-</div>
-<h2>Status</h2>
-<p>Is a indicator that will glow red or green depending on the status of the host. The status is based on ICMP ping to the host.</p>
-<div class="isa_info">
-    <b>IMPORTANT!</b> In order for this to work you have to open up ICMP. On windows servers this is also disabled in windows firewall.
-</div>
-<!-- Top Bar - #end -->
-</body>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Config</title>
+		<link rel="stylesheet" href="Main.css" type="text/css"/>
+	</head>
+	<body>
+		<!-- Introduction - #start -->
+		<h1>Config</h1>
+		<hr/>
+		<img src="Screenshots/Config/main_window.png"/>
+		<p>
+			Config dialog to setup the connection specific properties.
+			<br/>
+			This includes inheritance from other items before the item and more.
+			<br/>
+			Details below is about how to work with this dialog to get the most out of connections and configuration.
+		</p>
+		<div class=lvl1>
+			<h2>Quick Reference</h2>
+			<ul>
+				<li>
+					<a href="#top_bar">
+						<b>Top Bar</b>
+					</a> - Main top bar information.</li>
+			</ul>
+		</div>
+		<!-- Introduction - #end -->
+		<!-- Top Bar - #start -->
+		<h1 id="top_bar">Top Bar</h1>
+		<hr/>
+		<div class=lvl1>
+			<p>
+				<img src="Screenshots/Config/main_top_bar.png"/><br/>
+				<span style="color: crimson;">Red</span> - Sort values Categories or Alphabetical<br/>
+				<span style="color: forestgreen;">Green</span> - Show Properties, Inheritance values<br/>
+				<span style="color: deepskyblue;">Blue</span> - Connection icon<br/>
+				<span style="color: goldenrod;">Yellow</span> - Host status (based on ICMP ping)
+			</p>
+			<h2>Sort Values</h2>
+			<p>Sorts the values in properties either by Categories or Alphabetically.<p style="margin-left: 40px">
+					<b>Categories sort</b> - Shows values in categories with expanding options.<br/>
+					<b>Alphabetical sort</b> - Expands everything and shows values in alphabetical order instead</p>
+			</p>
+			<h2>Icon</h2>
+			<p>The icon indicates the visual identifier for the connection. Clicking the icon will let you set a different icon for the connection.</p>
+			<div class="isa_info">
+				<b>NOTE!</b> Don't forget that mRemoteNG will save the change on exit auto unless you have unchecked this setting in options.</div>
+			<h2>Status</h2>
+			<p>Is a indicator that will glow red or green depending on the status of the host. The status is based on ICMP ping to the host.</p>
+			<div class="isa_info">
+				<b>IMPORTANT!</b> In order for this to work you have to open up ICMP. On windows servers this is also disabled in windows firewall.</div>
+		</div>
+		<!-- Top Bar - #end -->
+	</body>
 </html>

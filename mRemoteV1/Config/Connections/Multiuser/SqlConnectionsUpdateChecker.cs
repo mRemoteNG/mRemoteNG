@@ -4,23 +4,23 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using System;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.Common;
 using System.Threading;
 
 namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsUpdateChecker : IConnectionsUpdateChecker
     {
-        private readonly SqlDatabaseConnector _sqlConnector;
-        private readonly SqlCommand _sqlQuery;
+        private readonly IDatabaseConnector _dbConnector;
+        private readonly DbCommand _dbQuery;
         private DateTime LastUpdateTime => Runtime.ConnectionsService.LastSqlUpdate;
         private DateTime _lastDatabaseUpdateTime;
 
 
         public SqlConnectionsUpdateChecker()
         {
-            _sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
-            _sqlQuery = new SqlCommand("SELECT * FROM tblUpdate", _sqlConnector.SqlConnection);
+            _dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
+            _dbQuery = _dbConnector.DbCommand("SELECT * FROM tblUpdate");
             _lastDatabaseUpdateTime = default(DateTime);
         }
 
@@ -46,7 +46,7 @@ namespace mRemoteNG.Config.Connections
         {
             try
             {
-                _sqlConnector.Connect();
+                _dbConnector.Connect();
             }
             catch (Exception e)
             {
@@ -76,7 +76,7 @@ namespace mRemoteNG.Config.Connections
             var lastUpdateInDb = default(DateTime);
             try
             {
-                var sqlReader = _sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
+                var sqlReader = _dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
                 sqlReader.Read();
                 if (sqlReader.HasRows)
                     lastUpdateInDb = Convert.ToDateTime(sqlReader["LastUpdate"]);
@@ -114,7 +114,7 @@ namespace mRemoteNG.Config.Connections
         private void RaiseConnectionsUpdateAvailableEvent()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Remote connection update is available");
-            var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector, _lastDatabaseUpdateTime);
+            var args = new ConnectionsUpdateAvailableEventArgs(_dbConnector, _lastDatabaseUpdateTime);
             ConnectionsUpdateAvailable?.Invoke(this, args);
         }
 
@@ -126,9 +126,9 @@ namespace mRemoteNG.Config.Connections
         private void Dispose(bool itIsSafeToDisposeManagedObjects)
         {
             if (!itIsSafeToDisposeManagedObjects) return;
-            _sqlConnector.Disconnect();
-            _sqlConnector.Dispose();
-            _sqlQuery.Dispose();
+            _dbConnector.Disconnect();
+            _dbConnector.Dispose();
+            _dbQuery.Dispose();
         }
     }
 }
