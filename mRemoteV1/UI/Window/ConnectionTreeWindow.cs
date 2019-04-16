@@ -103,7 +103,7 @@ namespace mRemoteNG.UI.Window
                                          _themeManager.ActiveTheme.Theme);
 
             if (!_themeManager.ActiveAndExtended) return;
-            //Treelistview need to be manually themed
+            //Treelistview needs to be manually themed
             olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
             olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");
             olvConnections.SelectedBackColor =
@@ -117,6 +117,8 @@ namespace mRemoteNG.UI.Window
             //There is a border around txtSearch that dont theme well
             txtSearch.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             txtSearch.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            //Picturebox needs to be manually themed
+            pbSearch.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
         }
 
         #endregion
@@ -252,18 +254,6 @@ namespace mRemoteNG.UI.Window
 
         #region Search
 
-        private void txtSearch_GotFocus(object sender, EventArgs e)
-        {
-            if (txtSearch.Text == Language.strSearchPrompt)
-                txtSearch.Text = "";
-        }
-
-        private void txtSearch_LostFocus(object sender, EventArgs e)
-        {
-            if (txtSearch.Text != "") return;
-            txtSearch.Text = Language.strSearchPrompt;
-        }
-
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -295,9 +285,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 
@@ -360,9 +348,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_KeyPress (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyPress (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 
@@ -384,9 +370,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 

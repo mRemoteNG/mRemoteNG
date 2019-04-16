@@ -28,6 +28,7 @@ Stephan (github.com/st-schuler)
 Aleksey Reytsman (github.com/areytsman)
 Cristian Abelleira (github.com/CrAbelleira)
 github.com/MitchellBot
+github.com/mjbnz
 
 
 Past Contributors

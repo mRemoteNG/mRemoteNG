@@ -1220,7 +1220,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>&amp;View</value>
   </data>
   <data name="strMenuViewOnly" xml:space="preserve">
-    <value>View Only (VNC)</value>
+    <value>View Only</value>
   </data>
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Website</value>
@@ -2761,11 +2761,11 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Proxy</value>
   </data>
   <data name="strMultiSSH" xml:space="preserve">
-        <value>Multi SSH:</value>
-    </data>
+    <value>Multi SSH:</value>
+  </data>
   <data name="strMultiSSHToolTip" xml:space="preserve">
-        <value>Press ENTER to send. Ctrl+C is sent immediately.</value>
-    </data>
+    <value>Press ENTER to send. Ctrl+C is sent immediately.</value>
+  </data>
   <data name="strPropertyDescriptionFavorite" xml:space="preserve">
     <value>Show this connection in the favorites menu.</value>
   </data>
@@ -2774,5 +2774,11 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="Favorites" xml:space="preserve">
     <value>Favorites</value>
+  </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Clear search string</value>
+  </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Connect in View Only mode</value>
   </data>
 </root>

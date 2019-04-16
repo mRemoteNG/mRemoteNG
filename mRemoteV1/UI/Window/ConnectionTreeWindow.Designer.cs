@@ -1,4 +1,4 @@
-
+﻿
 
 using mRemoteNG.Connection;
 using mRemoteNG.Tree;
@@ -29,14 +29,14 @@ namespace mRemoteNG.UI.Window
             this.mMenViewExpandAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
-            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            this.PictureBoxSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
-            this.txtSearch = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mMenFavorites = new System.Windows.Forms.ToolStripMenuItem();
+            this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+            this.pbSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
+            this.txtSearch = new mRemoteNG.UI.Controls.Base.NGSearchBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).BeginInit();
             this.msMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,21 +133,29 @@ namespace mRemoteNG.UI.Window
             this.mMenSortAscending.Name = "mMenSortAscending";
             this.mMenSortAscending.Size = new System.Drawing.Size(28, 20);
             // 
+            // mMenFavorites
+            // 
+            this.mMenFavorites.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mMenFavorites.Image = global::mRemoteNG.Resources.star;
+            this.mMenFavorites.Name = "mMenFavorites";
+            this.mMenFavorites.Size = new System.Drawing.Size(28, 20);
+            this.mMenFavorites.Text = "Favorites";
+            // 
             // vsToolStripExtender
             // 
             this.vsToolStripExtender.DefaultRenderer = null;
             // 
-            // PictureBoxSearch
+            // pbSearch
             // 
-            this.PictureBoxSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBoxSearch.Image = global::mRemoteNG.Resources.Search;
-            this.PictureBoxSearch.Location = new System.Drawing.Point(0, 0);
-            this.PictureBoxSearch.Margin = new System.Windows.Forms.Padding(0);
-            this.PictureBoxSearch.Name = "PictureBoxSearch";
-            this.PictureBoxSearch.Size = new System.Drawing.Size(26, 21);
-            this.PictureBoxSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PictureBoxSearch.TabIndex = 1;
-            this.PictureBoxSearch.TabStop = false;
+            this.pbSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbSearch.Image = global::mRemoteNG.Resources.Search;
+            this.pbSearch.Location = new System.Drawing.Point(0, 0);
+            this.pbSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.pbSearch.Name = "pbSearch";
+            this.pbSearch.Size = new System.Drawing.Size(26, 21);
+            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbSearch.TabIndex = 1;
+            this.pbSearch.TabStop = false;
             // 
             // txtSearch
             // 
@@ -163,9 +171,7 @@ namespace mRemoteNG.UI.Window
             this.txtSearch.TabStop = false;
             this.txtSearch.Text = "Search";
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            this.txtSearch.GotFocus += new System.EventHandler(this.txtSearch_GotFocus);
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
-            this.txtSearch.LostFocus += new System.EventHandler(this.txtSearch_LostFocus);
             // 
             // tableLayoutPanel1
             // 
@@ -173,7 +179,7 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.PictureBoxSearch, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pbSearch, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtSearch);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 390);
@@ -182,14 +188,6 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(204, 21);
             this.tableLayoutPanel1.TabIndex = 32;
-            // 
-            // mMenFavorites
-            // 
-            this.mMenFavorites.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenFavorites.Image = global::mRemoteNG.Resources.star;
-            this.mMenFavorites.Name = "mMenFavorites";
-            this.mMenFavorites.Size = new System.Drawing.Size(28, 20);
-            this.mMenFavorites.Text = "Favorites";
             // 
             // ConnectionTreeWindow
             // 
@@ -209,7 +207,7 @@ namespace mRemoteNG.UI.Window
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).EndInit();
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -221,8 +219,8 @@ namespace mRemoteNG.UI.Window
         private System.ComponentModel.IContainer components;
         private Controls.ConnectionTree olvConnections;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
-        internal Controls.Base.NGPictureBox PictureBoxSearch;
-        internal Controls.Base.NGTextBox txtSearch;
+        internal Controls.Base.NGPictureBox pbSearch;
+        internal Controls.Base.NGSearchBox txtSearch;
         public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         internal System.Windows.Forms.ToolStripMenuItem mMenFavorites;
     }

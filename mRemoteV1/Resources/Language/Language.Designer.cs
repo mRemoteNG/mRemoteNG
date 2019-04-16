@@ -79,6 +79,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear search string.
+        /// </summary>
+        internal static string ClearSearchString {
+            get {
+                return ResourceManager.GetString("ClearSearchString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a New Connection File.
         /// </summary>
         internal static string ConfigurationCreateNew {
@@ -102,6 +111,15 @@ namespace mRemoteNG {
         internal static string ConfigurationImportFile {
             get {
                 return ResourceManager.GetString("ConfigurationImportFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect in View Only mode.
+        /// </summary>
+        internal static string ConnectInViewOnlyMode {
+            get {
+                return ResourceManager.GetString("ConnectInViewOnlyMode", resourceCulture);
             }
         }
         
@@ -3984,7 +4002,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Only (VNC).
+        ///   Looks up a localized string similar to View Only.
         /// </summary>
         internal static string strMenuViewOnly {
             get {
