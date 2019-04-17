@@ -252,6 +252,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RedirectSmartCards"] = connectionInfo.RedirectSmartCards;
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
+            dataRow["RedirectAudioCapture"] = connectionInfo.RedirectAudioCapture;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
             dataRow["Connected"] =
                 false; // TODO: this column can eventually be removed. we now save this property locally

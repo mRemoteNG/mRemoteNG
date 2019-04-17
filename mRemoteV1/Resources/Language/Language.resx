@@ -1480,6 +1480,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
+  </data>  
+    <data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Select how remote sound should be redirected.</value>
   </data>
   <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
@@ -1642,6 +1645,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sounds</value>
+  </data>  
+    <data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
+    <value>Audio Capture</value>
   </data>
   <data name="strPropertyNameRenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>

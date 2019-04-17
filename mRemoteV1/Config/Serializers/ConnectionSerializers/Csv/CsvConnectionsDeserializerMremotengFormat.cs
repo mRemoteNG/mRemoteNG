@@ -277,6 +277,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.RedirectSound = value;
             }
 
+            if (headers.Contains("RedirectAudioCapture"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectAudioCapture")], out value))
+                    connectionRecord.RedirectAudioCapture = value;
+            }
+
             if (headers.Contains("RedirectKeys"))
             {
                 bool value;

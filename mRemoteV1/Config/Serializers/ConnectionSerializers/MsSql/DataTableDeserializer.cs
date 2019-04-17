@@ -125,6 +125,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), (string)dataRow["RedirectSound"]);
             connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality),
                                                                                   (string)dataRow["SoundQuality"]);
+            connectionInfo.RedirectAudioCapture = (bool)dataRow["RedirectAudioCapture"];
+
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];

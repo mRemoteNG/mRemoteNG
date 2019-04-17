@@ -4993,6 +4993,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select how remote sound should be redirected..
+        /// </summary>
+        internal static string strPropertyDescriptionRedirectAudioCapture {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRedirectAudioCapture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether clipboard should be shared..
         /// </summary>
         internal static string strPropertyDescriptionRedirectClipboard {
@@ -5511,6 +5520,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameRDPMinutesToIdleTimeout {
             get {
                 return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audio Capture.
+        /// </summary>
+        internal static string strPropertyNameRedirectAudioCapture {
+            get {
+                return ResourceManager.GetString("strPropertyNameRedirectAudioCapture", resourceCulture);
             }
         }
         
