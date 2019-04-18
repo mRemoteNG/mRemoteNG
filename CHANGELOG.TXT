@@ -40,6 +40,20 @@ Fixes:
 #1044: Dragging (grabbing) the program window requires 2 clicks
 
 
+1.76.20 (2019-04-12):
+
+Fixes:
+------
+#1401: Connections corrupted when importing RDC Manager files that are missing certain fields
+
+
+1.76.19 (2019-04-04):
+
+Fixes:
+------
+#1374: Vertical Scroll Bar missing in PuTTYNG after 0.70.0.1 & 0.71 updates
+
+
 1.76.18 (2019-03-20):
 
 Fixes:
