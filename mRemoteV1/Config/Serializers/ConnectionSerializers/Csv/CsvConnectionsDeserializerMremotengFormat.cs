@@ -763,6 +763,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.Inheritance.SoundQuality = value;
             }
 
+            if (headers.Contains("InheritRedirectAudioCapture"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectAudioCapture")], out value))
+                    connectionRecord.Inheritance.RedirectAudioCapture = value;
+            }
+
             #endregion
 
             return connectionRecord;

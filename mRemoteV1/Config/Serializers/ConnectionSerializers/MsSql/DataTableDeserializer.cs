@@ -187,6 +187,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.RedirectSmartCards = (bool)dataRow["InheritRedirectSmartCards"];
             connectionInfo.Inheritance.RedirectSound = (bool)dataRow["InheritRedirectSound"];
             connectionInfo.Inheritance.SoundQuality = (bool)dataRow["InheritSoundQuality"];
+            connectionInfo.Inheritance.RedirectAudioCapture = (bool)dataRow["InheritRedirectAudioCapture"];
             connectionInfo.Inheritance.Resolution = (bool)dataRow["InheritResolution"];
             connectionInfo.Inheritance.AutomaticResize = (bool)dataRow["InheritAutomaticResize"];
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];

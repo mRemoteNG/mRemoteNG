@@ -112,6 +112,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RedirectPrinters = true,
                 RedirectSmartCards = true,
                 RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer,
+                RedirectAudioCapture = true,
                 RedirectKeys = true,
                 VNCCompression = ProtocolVNC.Compression.Comp4,
                 VNCEncoding = ProtocolVNC.Encoding.EncRRE,
