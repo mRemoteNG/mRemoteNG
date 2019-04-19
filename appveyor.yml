@@ -26,6 +26,7 @@ platform: x86
 shallow_clone: true
 clone_depth: 1
 install:
+- cmmd: set PATH=%PATH%;%PYTHON%/Scripts/
 - ps: >-
     date
 
