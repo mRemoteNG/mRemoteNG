@@ -2781,4 +2781,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ConnectInViewOnlyMode" xml:space="preserve">
     <value>Connect in View Only mode</value>
   </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Do not trim spaces from usernames</value>
+  </data>
 </root>
