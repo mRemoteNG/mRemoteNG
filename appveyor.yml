@@ -1,4 +1,12 @@
 version: 1.76.{build}
+environment:
+  matrix:
+    - PYTHON: "C:\\Python35"
+init:
+  - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
+install:
+  - "%PYTHON%/Scripts/pip.exe install sphinx"
+  - "%PYTHON%/Scripts/pip.exe install sphinx_rtd_theme"
 pull_requests:
   do_not_increment_build_number: true
 skip_tags: true
