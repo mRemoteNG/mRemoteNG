@@ -1,11 +1,9 @@
 version: 1.76.{build}
-
 environment:
   matrix:
     - PYTHON: "C:\\Python37"
       PYTHON_VERSION: "3.7.3"
       PYTHON_ARCH: "32"
-
 init:
   - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
 
@@ -26,8 +24,7 @@ platform: x86
 shallow_clone: true
 clone_depth: 1
 install:
-- cmd: >-
-    set PATH=%PATH%;%PYTHON%/Scripts/
+- cmd: set PATH=%PATH%;%PYTHON%/Scripts/
 - ps: >-
     date
 
@@ -41,6 +38,7 @@ before_build:
     nuget restore
 
     echo %TIME%
+    
     echo %PATH%
 build:
   project: mRemoteV1.sln
