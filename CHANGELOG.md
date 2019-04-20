@@ -8,6 +8,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1141: 'Copy Hostname' option added to connection tree context menu
 - #951: Added property to Enable/Disable Clipboard Sharing for RDP connections
 - #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
+- #1336: Added ability to run External tools on folders
+- #1320: Added ability to favorite items in the connection tree
+- #1318: Added support for saving connections in MySQL
+- #1293: Importing .rdp files now imports gateway settings
+- #1246: Improved connections loading to tolerate missing attributes in the confCons xml file
+- #1230: Added option to track the currently focused connection in the connection tree
+- #1220: Added an Apple/Mac connection icon
+- #1218: A splashscreen has been added when mRemoteNG starts
+- #1216: Connection tree search bar can be placed at the top or bottom of connection tree
+- #1201: The help files packaged with mRemoteNG have been rewritten
+- #1186: Certain dialogs are not correctly using localized text for buttons
+- #1170: The Options window no longer displays in the Windows taskbar when open
+- #1141: 'Copy Hostname' option added to connection tree context menu
+- #1123: Added a dialog that will display when unhandled exceptions occur
+- #1102: Added a button to clear connections searchbox
+- #1042: Added a connection icon for OSX/MacOS
+- #951: Added property to Enable/Disable Clipboard Sharing for RDP connections
+- #929: Added the hostname to certain RDP error/disconnect messages where it was missing
+- #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
+- #907: Added option to disable trimming whitespace from username field
+- #896: Added a "view only" mode for RDP connections
+- #416: Added ability to Enable/Disable Clipboard Sharing for RDP connections
+- #321: Added support for displaying on HiDPI screens
 ### Changed
 - #1223: Open External Links in Default Web Browser
 - #1129: Spanish translation improvements
@@ -19,6 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 <!-- ### Deprecated -->
 <!-- ### Removed -->
 ### Fixed
+- #1383: Fixed issue where default Computer OU was not showing up when importing from Active Directory
 - #1248: RemoveMagicLib Bugs - various bugs that cropped up as a result of removing magiclib
 - #1245: Options form takes nearly 3 seconds to appear when Theming is active
 - #1240: Theming problem with NGNumericUpDown
@@ -28,6 +52,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1064: "Esc" button does does not close some dialogs
 - #1044: Dragging (grabbing) the program window requires 2 clicks
 <!-- ### Security -->
+
+## [1.76.20] - 2019-04-12
+### Fixed
+- #1401: Connections corrupted when importing RDC Manager files that are missing certain fields
+
+## [1.76.19] - 2019-04-04
+### Fixed
+- #1374: Vertical Scroll Bar missing in PuTTYNG after 0.70.0.1 & 0.71 updates
+
+## [1.76.18] - 2019-03-20
+### Fixeed
+- #1365: PuTTY window not centered after 0.71 update
+
+## [1.76.16] - 2019-03-14
+### Fixed
+- #1362: Updated PuTTYNG to 0.71
+
+## [1.76.15] - 2019-03-09
+### Added
+- Importing multiple files now only causes 1 save event, rather than 1 per file imported
+### Fixed
+- #1303: Exception on first connection with new SQL server database
+- #1304: Resolved several issues with importing multiple RDP Manager v2.7 files
+
+## [1.76.14] - 2019-02-08
+### Changed
+- #222: Pre-Release Test build for running on systems with FIPS Enabled
 
 ## [1.76.12] - 2018-11-08
 ### Added
@@ -1441,7 +1492,15 @@ Improved tray icon menu (just like the main connections menu)
 - Changed default color depth to 16bit
 - Some small code improvements
 
-[Unreleased]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.12...HEAD
+[Unreleased]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.20..HEAD
+[1.76.20]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.19..v1.76.20
+[1.76.19]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.18..v1.76.19
+[1.76.18]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.17..v1.76.18
+[1.76.17]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.16..v1.76.17
+[1.76.16]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.15..v1.76.16
+[1.76.15]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.14..v1.76.15
+[1.76.14]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.13..v1.76.14
+[1.76.13]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.12...v1.76.13
 [1.76.12]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.11..v1.76.12
 [1.76.11]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.10..v1.76.11
 [1.76.10]: https://github.com/mRemoteNG/mRemoteNG/compare/v1.76.9..v1.76.10
