@@ -1,4 +1,10 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -7,12 +13,6 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.TaskDialog;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.Window
 
         private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
         {
-            tableLayoutPanel1.Dock = placeSearchBarAboveConnectionTree ? DockStyle.Top : DockStyle.Bottom;
+            searchBoxLayoutPanel.Dock = placeSearchBarAboveConnectionTree ? DockStyle.Top : DockStyle.Bottom;
         }
 
 
@@ -97,28 +97,33 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!_themeManager.ThemingActive) return;
-            vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(olvConnections.ContextMenuStrip, _themeManager.ActiveTheme.Version,
-                                         _themeManager.ActiveTheme.Theme);
+            if (!_themeManager.ThemingActive)
+                return;
 
-            if (!_themeManager.ActiveAndExtended) return;
+            var activeTheme = _themeManager.ActiveTheme;
+            vsToolStripExtender.SetStyle(msMain, activeTheme.Version, activeTheme.Theme);
+            vsToolStripExtender.SetStyle(olvConnections.ContextMenuStrip, activeTheme.Version,
+                activeTheme.Theme);
+
+            if (!_themeManager.ActiveAndExtended)
+                return;
+
             //Treelistview needs to be manually themed
-            olvConnections.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
-            olvConnections.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Foreground");
+            olvConnections.BackColor = activeTheme.ExtendedPalette.getColor("TreeView_Background");
+            olvConnections.ForeColor = activeTheme.ExtendedPalette.getColor("TreeView_Foreground");
             olvConnections.SelectedBackColor =
-                _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Background");
+                activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Background");
             olvConnections.SelectedForeColor =
-                _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Foreground");
+                activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Foreground");
             olvConnections.UnfocusedSelectedBackColor =
-                _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Background");
+                activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Background");
             olvConnections.UnfocusedSelectedForeColor =
-                _themeManager.ActiveTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
+                activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
             //There is a border around txtSearch that dont theme well
-            txtSearch.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            txtSearch.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            txtSearch.BackColor = activeTheme.ExtendedPalette.getColor("TextBox_Background");
+            txtSearch.ForeColor = activeTheme.ExtendedPalette.getColor("TextBox_Foreground");
             //Picturebox needs to be manually themed
-            pbSearch.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TreeView_Background");
+            pbSearch.BackColor = activeTheme.ExtendedPalette.getColor("TreeView_Background");
         }
 
         #endregion
