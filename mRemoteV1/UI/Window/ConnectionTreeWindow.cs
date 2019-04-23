@@ -120,6 +120,8 @@ namespace mRemoteNG.UI.Window
             olvConnections.UnfocusedSelectedForeColor =
                 activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
             //There is a border around txtSearch that dont theme well
+            searchBoxLayoutPanel.BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
+            searchBoxLayoutPanel.ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
             txtSearch.BackColor = activeTheme.ExtendedPalette.getColor("TextBox_Background");
             txtSearch.ForeColor = activeTheme.ExtendedPalette.getColor("TextBox_Foreground");
             //Picturebox needs to be manually themed
