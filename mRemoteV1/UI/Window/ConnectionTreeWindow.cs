@@ -108,18 +108,7 @@ namespace mRemoteNG.UI.Window
             if (!_themeManager.ActiveAndExtended)
                 return;
 
-            //Treelistview needs to be manually themed
-            olvConnections.BackColor = activeTheme.ExtendedPalette.getColor("TreeView_Background");
-            olvConnections.ForeColor = activeTheme.ExtendedPalette.getColor("TreeView_Foreground");
-            olvConnections.SelectedBackColor =
-                activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Background");
-            olvConnections.SelectedForeColor =
-                activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Active_Foreground");
-            olvConnections.UnfocusedSelectedBackColor =
-                activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Background");
-            olvConnections.UnfocusedSelectedForeColor =
-                activeTheme.ExtendedPalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
-            //There is a border around txtSearch that dont theme well
+            // connection search area
             searchBoxLayoutPanel.BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
             searchBoxLayoutPanel.ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
             txtSearch.BackColor = activeTheme.ExtendedPalette.getColor("TextBox_Background");
