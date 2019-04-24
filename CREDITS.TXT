@@ -29,6 +29,7 @@ Aleksey Reytsman (github.com/areytsman)
 Cristian Abelleira (github.com/CrAbelleira)
 github.com/MitchellBot
 github.com/mjbnz
+Bilal Korkmaz (github.com/bllkrkmz)
 
 
 Past Contributors
